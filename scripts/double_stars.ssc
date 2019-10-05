@@ -2,9 +2,11 @@
 // Name: 20 Fun Naked-Eye Double Stars
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.1
+// Version: 1.2
 // Description: This script helps you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/
 //
+
+include("i18n.inc");
 
 function showConstellation(cName, aFOV)
 {
@@ -23,26 +25,26 @@ var aFOV = new Array(40, 50, 20, 60, 25, 32, 20, 50, 40, 40);
 var dblstars = new Array(4, 3, 1, 1, 1, 4, 2, 1, 2, 1);
 
 // RA, DE, FOV, Name, Info, Note
-var doublestar = [["03h46m45.16s", "+24d35m44.5s", 1.0, "Asterope (21 Tauri and 22 Tauri)", "2.5 arcminutes (SE)", "Extremely difficult because of their faintness, separation, and nearby bright stars"],
-		  ["03h50m00.32s", "+24d05m37.1s", 1.0, "Atlas and Pleione (27 Tauri and 28 Tauri)", "5 arcminutes (N)", "Moderately difficult"],
-		  ["04h29m24.00s", "+15d59m36.0s", 1.5, "θ Tauri", "5.6 arcminutes (NNW)", "Showcase naked-eye double!"],
-		  ["04h24m58.00s", "+17d42m01.0s", 2.0, "δ Tauri", "δ1-δ2: 17.6 arcseconds (ESE); δ1-δ3: 43.25 arcseconds (NE)", "Easy naked-eye triple"],
-		  ["05h35m58.08s", "-05d23m07.2s", 0.05, "θ Orionis", "2.24 arcminutes (NW)", "Very difficult because of stars and nebulosity in the area"],
-		  ["05h36m04.96s", "-04d50m01.6s", 0.4, "42 and 45 Orionis", "4.2 arcminutes (ESE)", "Moderately difficult optical double"],
-		  ["05h36m07.43s", "-05d54m19.4s", 0.2, "ι Orionis", "8 arcminutes (SW)", "Moderately difficult optical double"],
-		  ["12h21m20.17s", "-22d17m55.7s", 1.0, "ζ Corvi", "5.85 arcminutes (WNW)", "Moderately difficult"],
-		  ["13h24m31.65s", "54d51m07.9s", 1.5, "Mizar and Alcor", "11.8 arcminutes (ENE)", "Easy naked-eye double"],
-		  ["14h51m31.06s", "-16d03m23.0s", 1.0, "Zubenelgenubi", "3.83 arcminutes (NW)", "Very difficult because of the magnitude difference"],
-		  ["16h07m40.91s", "-20d42m22.5s", 1.8, "ω Scorpii", "14.6 arcminutes (SSE)", "Easy optical double"],
-		  ["17h31m55s", "-37d11m48s", 1.3, "λ and υ Scorpii", "36 arcminutes (WSW)", "Easy double"],
-		  ["16h52m52.96s", "-38d04m06.6s", 0.8, "μ Scorpii", "5.8 arcminutes (ENE)", "Showcase double!"],
-		  ["16h55m03.04s", "-42d22m56.3s", 0.8, "ζ Scorpii", "6.5 arcminutes (W)", "Moderately difficult"],
-		  ["18h44m50.34s", "+39d41m03.9s", 0.5, "ε Lyrae", "3.5 arcminutes (N)", "Showcase naked-eye double!"],
-		  ["18h54m15.09s", "+36d59m20.8s", 0.7, "δ Lyrae", "10.3 arcminutes (WNW)", "Moderately difficult"],
-		  ["18h55m03.45s", "-22d43m23.8s", 2.0, "ν Sagittarii", "13.9 arcminutes (ENE)", "Easy naked-eye double"],
-		  ["20h14m45s", "+47d26m26s", 3.0, "ο1 and ο2 Cygni", "61.3 arcminutes (NNE)", "Easy naked-eye double"],
-		  ["20h14m06s", "+46d46m58s", 1.0, "ο1 Cygni (ο1 Cygni, 30 Cyg and HD 192579)", "5.6 arcminutes (NW)", "Moderately difficult optical triple star"],
-		  ["20h18m51.63s", "-12d29m50.9s", 1.3, "Algedi", "6.3 arcminutes (WNW)", "Showcase naked-eye double!"]
+var doublestar = [["03h46m45.16s", "+24d35m44.5s", 1.0, tr("Asterope (21 Tauri and 22 Tauri)"), tr("2.5 arcminutes (SE)"), tr("Extremely difficult because of their faintness, separation, and nearby bright stars")],
+		  ["03h50m00.32s", "+24d05m37.1s", 1.0, tr("Atlas and Pleione (27 Tauri and 28 Tauri)"), tr("5 arcminutes (N)"), tr("Moderately difficult")],
+		  ["04h29m24.00s", "+15d59m36.0s", 1.5, tr("θ Tauri"), tr("5.6 arcminutes (NNW)"), tr("Showcase naked-eye double!")],
+		  ["04h24m58.00s", "+17d42m01.0s", 2.0, tr("δ Tauri"), tr("δ1-δ2: 17.6 arcseconds (ESE); δ1-δ3: 43.25 arcseconds (NE)"), tr("Easy naked-eye triple")],
+		  ["05h35m58.08s", "-05d23m07.2s", 0.05, tr("θ Orionis"), tr("2.24 arcminutes (NW)"), tr("Very difficult because of stars and nebulosity in the area")],
+		  ["05h36m04.96s", "-04d50m01.6s", 0.4, tr("42 and 45 Orionis"), tr("4.2 arcminutes (ESE)"), tr("Moderately difficult optical double")],
+		  ["05h36m07.43s", "-05d54m19.4s", 0.2, tr("ι Orionis"), tr("8 arcminutes (SW)"), tr("Moderately difficult optical double")],
+		  ["12h21m20.17s", "-22d17m55.7s", 1.0, tr("ζ Corvi"), tr("5.85 arcminutes (WNW)"), tr("Moderately difficult")],
+		  ["13h24m31.65s", "54d51m07.9s", 1.5, tr("Mizar and Alcor"), tr("11.8 arcminutes (ENE)"), tr("Easy naked-eye double")],
+		  ["14h51m31.06s", "-16d03m23.0s", 1.0, tr("Zubenelgenubi"), tr("3.83 arcminutes (NW)"), tr("Very difficult because of the magnitude difference")],
+		  ["16h07m40.91s", "-20d42m22.5s", 1.8, tr("ω Scorpii"), tr("14.6 arcminutes (SSE)"), tr("Easy optical double")],
+		  ["17h31m55s", "-37d11m48s", 1.3, tr("λ and υ Scorpii"), tr("36 arcminutes (WSW)"), tr("Easy double")],
+		  ["16h52m52.96s", "-38d04m06.6s", 0.8, tr("μ Scorpii"), tr("5.8 arcminutes (ENE)"), tr("Showcase double!")],
+		  ["16h55m03.04s", "-42d22m56.3s", 0.8, tr("ζ Scorpii"), tr("6.5 arcminutes (W)"), tr("Moderately difficult")],
+		  ["18h44m50.34s", "+39d41m03.9s", 0.5, tr("ε Lyrae"), tr("3.5 arcminutes (N)"), tr("Showcase naked-eye double!")],
+		  ["18h54m15.09s", "+36d59m20.8s", 0.7, tr("δ Lyrae"), tr("10.3 arcminutes (WNW)"), tr("Moderately difficult")],
+		  ["18h55m03.45s", "-22d43m23.8s", 2.0, tr("ν Sagittarii"), tr("13.9 arcminutes (ENE)"), tr("Easy naked-eye double")],
+		  ["20h14m45s", "+47d26m26s", 3.0, tr("ο1 and ο2 Cygni"), tr("61.3 arcminutes (NNE)"), tr("Easy naked-eye double")],
+		  ["20h14m06s", "+46d46m58s", 1.0, tr("ο1 Cygni (ο1 Cygni, 30 Cyg and HD 192579)"), tr("5.6 arcminutes (NW)"), tr("Moderately difficult optical triple star")],
+		  ["20h18m51.63s", "-12d29m50.9s", 1.3, tr("Algedi"), tr("6.3 arcminutes (WNW)"), tr("Showcase naked-eye double!")]
 		 ];
 
 var color="#00AAFF";
@@ -73,7 +75,7 @@ for (i=0; i<constellation.length; i++)
 		StelMovementMgr.zoomTo(doublestar[j][2], 3);
 		
 		var dsname = LabelMgr.labelScreen("#" + (j+1) + " - " + doublestar[j][3], 20, 20, false, 30, color);
-		var dsinfo = LabelMgr.labelScreen("Separation: " + doublestar[j][4], 20, 60, false, 20, color);
+		var dsinfo = LabelMgr.labelScreen(tr("Separation:") + " " + doublestar[j][4], 20, 60, false, 20, color);
 		var dsnote = LabelMgr.labelScreen(doublestar[j][5], 20, 90, false, 20, color);
 
 		LabelMgr.setLabelShow(dsname, true);

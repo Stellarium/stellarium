@@ -27,6 +27,7 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_exoplanetsDialog.h"
 #include "ExoplanetsDialog.hpp"
 #include "Exoplanets.hpp"
@@ -85,9 +86,13 @@ void ExoplanetsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
@@ -111,11 +116,8 @@ void ExoplanetsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	colorButton(ui->exoplanetMarkerColor,		ep->getMarkerColor(false));
-	colorButton(ui->habitableExoplanetMarkerColor,	ep->getMarkerColor(true));
-
-	connect(ui->exoplanetMarkerColor,		SIGNAL(released()), this, SLOT(askExoplanetsMarkerColor()));
-	connect(ui->habitableExoplanetMarkerColor,	SIGNAL(released()), this, SLOT(askHabitableExoplanetsMarkerColor()));
+	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
+	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -126,6 +128,7 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();
@@ -142,7 +145,6 @@ void ExoplanetsDialog::createDialogContent()
 	setAboutHtml();
 	setInfoHtml();
 	setWebsitesHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
 	{
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
@@ -582,43 +584,6 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisY->setCurrentIndex(indexY);
 	axisX->blockSignals(false);
 	axisY->blockSignals(false);
-}
-
-void ExoplanetsDialog::askExoplanetsMarkerColor()
-{
-	Vec3f vColor = ep->getMarkerColor(false);
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->exoplanetMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		ep->setMarkerColor(vColor, false);
-		ui->exoplanetMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void ExoplanetsDialog::askHabitableExoplanetsMarkerColor()
-{
-	Vec3f vColor = ep->getMarkerColor(true);
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->habitableExoplanetMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		ep->setMarkerColor(vColor, true);
-		ui->habitableExoplanetMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void ExoplanetsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
-{
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
 }
 
 void ExoplanetsDialog::populateTemperatureScales()

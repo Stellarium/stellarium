@@ -164,19 +164,20 @@
 \lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{script}{\lstset{language=HTML,%
-								   basicstyle=\ttfamily\small,%
-                                   backgroundcolor=\color{black!5},%
-                                   frame=leftline,%
-                                   keepspaces=true,%
-                                   rulecolor=\color{blue},%
-                                   showstringspaces=false,
-								   keywordstyle=\bfseries\color{green!40!black},%
-                                   commentstyle=\itshape\color{purple!40!black},%
-                                   identifierstyle=\color{blue},%
-                                   stringstyle=\color{orange},%
-                                   framerule=1pt}%
-                             }{}%
+\lstnewenvironment{script}{\lstset{language=VBScript,%                                    
+                               basicstyle=\fontfamily{pcr}\selectfont,%
+                               backgroundcolor=\color{black!5},%
+                               frame=leftline,%
+                               keepspaces=true,%
+                               rulecolor=\color{blue},%
+                               showstringspaces=false,
+                               keywordstyle=\bfseries\color{green!40!black},%
+                               commentstyle=\itshape\color{purple!40!black},%
+                               identifierstyle=\color{blue},%
+                               stringstyle=\color{orange},%
+                               escapeinside={(*}{*)},%
+                               framerule=1pt}%
+                         }{}%
 \fi
 %% Allow chapter authors where this seems appropriate.
 %% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book

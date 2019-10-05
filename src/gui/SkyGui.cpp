@@ -137,7 +137,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -176,6 +176,9 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		QFont font;
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+		setFont(font);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
@@ -205,7 +208,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
-const QString InfoPanel::getSelectedText(void)
+const QString InfoPanel::getSelectedText(void) const
 {
 	return toPlainText();
 }
@@ -255,14 +258,8 @@ void SkyGui::init(StelGui* astelGui)
 {
 	stelGui = astelGui;
 
-	winBar->setParentItem(this);
-	buttonBar->setParentItem(this);
-	buttonBarPath->setParentItem(this);
-	infoPanel->setParentItem(this);
-	progressBarMgr->setParentItem(this);
-
 	// Create the 2 auto hide buttons in the bottom left corner
-	autoHidebts = new CornerButtons();
+	autoHidebts = new CornerButtons(this);
 	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
@@ -273,7 +270,6 @@ void SkyGui::init(StelGui* astelGui)
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
-	autoHidebts->setParentItem(this);
 
 	infoPanel->setPos(8,8);
 
@@ -385,7 +381,7 @@ void SkyGui::updateBarsPos()
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
 		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)

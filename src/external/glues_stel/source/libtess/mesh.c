@@ -308,7 +308,10 @@ GLUEShalfEdge* __gl_meshMakeEdge(GLUESmesh* mesh)
 
    e=MakeEdge(&mesh->eHead);
    if (e==NULL)
-   {
+   {	// PVS-Studio found a potential memory leak. These 3 lines are to prevent this.
+	  memFree(newVertex1);
+	  memFree(newVertex2);
+	  memFree(newFace);
 	  return NULL;
    }
 

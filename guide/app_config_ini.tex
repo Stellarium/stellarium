@@ -63,6 +63,7 @@ flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to i
                                            but is essential e.g.\ for Jupiter's moons.\\%\midrule
 flag\_object\_trails               & bool   & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\%\midrule
 flag\_isolated\_trails             & bool   & true  & Turns on and off drawing of isolated trails.\\%\midrule
+number\_isolated\_trails           & int    & 1     & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
 flag\_isolated\_orbits             & bool   & true  & Turns on and off drawing of isolated orbits.\\\midrule
 %
 flag\_nebula                       & bool   & true  & Set to \emph{false} to hide the nebulae on start-up. \\%\midrule
@@ -98,15 +99,15 @@ grs\_measurements\_url             & string &       & URL of recent measurements
 %
 meteor\_zhr                        & int    & 10    & ZHR for sporadic meteors.\\\midrule
 %
-de430\_path	  					   & string &       & Path to JPL DE430 ephemerides file.\\%\midrule
-flag\_use\_de430				   & bool   & false & Enables/disables usage JPL DE430 ephemerides (if available).\\%\midrule
-de431\_path	  					   & string &       & Path to JPL DE431 ephemerides file.\\%\midrule
-flag\_use\_de431				   & bool   & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
+de430\_path                        & string &       & Path to JPL DE430 ephemerides file.\\%\midrule
+flag\_use\_de430                   & bool   & false & Enables/disables usage JPL DE430 ephemerides (if available).\\%\midrule
+de431\_path                        & string &       & Path to JPL DE431 ephemerides file.\\%\midrule
+flag\_use\_de431                   & bool   & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
 %
-flag\_toast\_survey				   & bool   & false & Enables/disables usage Digitized Sky Survey in TOAST format.\\%\midrule
-toast\_survey\_host				   & string &       & Host of Digitized Sky Survey storage data.\\%\midrule
-toast\_survey\_directory		   & string & results & Directory name of Digitized Sky Survey storage data.\\%\midrule
-toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
+flag\_toast\_survey                & bool   & false & Enables/disables Digitized Sky Survey in TOAST format.\\%\midrule
+toast\_survey\_host                & string &       & Host of Digitized Sky Survey storage data.\\%\midrule
+toast\_survey\_directory           & string & results & Directory name of Digitized Sky Survey storage data.\\%\midrule
+toast\_survey\_levels              & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
 \end{longtable}
 
 \subsection{\big[astrocalc\big]}
@@ -194,8 +195,10 @@ prime\_vertical\_color   				& \ccbox{0.2,0.5,0.2} &  prime vertical. \\%\midrul
 zenith\_nadir\_color					& \ccbox{0.2,0.6,0.2} &  zenith and nadir. \\%\midrule
 cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrule
 %% A mix of equatorial (blueish) and ecliptical (reddish)...
-colures\_color 			 				& \ccbox{0.5,0.0,0.5} &  colures. \\\midrule
-longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
+colures\_color 			 			& \ccbox{0.5,0.0,0.5} &  colures. \\\midrule
+antisolar\_point\_color 				& \ccbox{0.9,0.3,0.5} &  antisolar point. \\%\midrule
+apex\_points\_color 			 		& \ccbox{0.8,0.2,0.3} &  apex points. \\%\midrule
+oc\_longitude\_color	     				& \ccbox{0.6,0.2,0.4} &  opposition/conjunction longitude. \\\midrule
 %% Asterisms and ray helpers
 asterism\_lines\_color      	 	 	& \ccbox{0.4,0.4,0.8} &  asterism lines. \\%\midrule
 asterism\_names\_color      			& \ccbox{0.4,0.4,0.8} &  asterism names. \\%\midrule
@@ -256,6 +259,8 @@ cubewano\_orbits\_color                 & \ccbox{0.7,0.5,0.5} & cubewano orbits.
 plutino\_orbits\_color                  & \ccbox{0.7,0.5,0.5} & plutino orbits. \\%\midrule
 sdo\_orbits\_color                      & \ccbox{0.7,0.5,0.5} & scattered disk object orbits. \\%\midrule
 oco\_orbits\_color                      & \ccbox{0.7,0.5,0.5} & Oort cloud object orbits. \\%\midrule
+sednoid\_orbits\_color                  & \ccbox{0.7,0.5,0.5} & Sednoid object orbits. \\%\midrule
+interstellar\_orbits\_color             & \ccbox{1.0,0.6,1.0} & Interstellar object ``orbits'' (trajectories). \\%\midrule
 comet\_orbits\_color                    & \ccbox{0.7,0.8,0.8} & comet orbits. \\%\midrule
 mercury\_orbit\_color                   & \ccbox{0.5,0.5,0.5} & orbit of Mercury. \\%\midrule
 venus\_orbit\_color                     & \ccbox{0.9,0.9,0.7} & orbit of Venus. \\%\midrule
@@ -389,29 +394,43 @@ flag\_show\_other                 & bool & true & display other deep-sky objects
 \subsection{\big[gui\big]}
 %\label{sec:config.ini:gui}
 
-This section includes settings for the graphical user interface.
+This section includes settings for the graphical user interface. See sections \ref{sec:gui:configuration:extras}--\ref{sec:gui:configuration:tools} for most of these keys.
 
 \begin{longtable}{p{50mm}|l|l|p{55mm}}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 flag\_show\_gui                 & bool   & true & If \emph{true}, display GUI.\\\midrule
-base\_font\_size & int    & 13 & Sets the font size. Typical value: \emph{15}\\%\midrule
+screen\_font\_size & int  & 13 & Sets the font size for screen texts. Typical value: \emph{13..15}\\%\midrule
+gui\_font\_size  & int    & 13 & Sets the dialog font size. Typical value: \emph{10..20}\\%\midrule
 base\_font\_name & string & Verdana     & Selects the name \\
                  &        & (Windows)            & for base font\\
                  &        & DejaVu Sans & \\
                  &        & (others)            & \\%\midrule
 %safe\_font\_name               & string &      & Selects the name for safe font, e.g. \emph{Verdana}\\\midrule
-base\_font\_file                & string &      & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\\midrule
+base\_font\_file                & string &      & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\
+flag\_font\_selection           & bool  & false & Show GUI elements for font selection.\\\midrule
 %% TODO: Is this required? timeout=0 also keeps cursor visible.
 flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you want to have cursor visible at all times.\\%\midrule
 mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
                                                   non-0 values mean the cursor will be hidden after that many seconds of inactivity\\\midrule
-flag\_show\_flip\_buttons       & bool  & false & Enables/disables display of the image flipping buttons in the main 
-                                                  toolbar (see section \ref{sec:gui:configuration:tools})\\\midrule
-flag\_show\_nebulae\_ \mbox{background\_button} & bool & false & Set to \emph{true} if you want to have access to the 
-                                                         button for enabling/disabling backgrounds for deep-sky objects\\\midrule
-flag\_show\_toast\_survey\_button & bool & false & Set to \emph{true} if you want to have access to the button for 
-                                                   enabling/disabling Digitized Sky Survey for deep-sky objects\\\midrule
+%
+flag\_show\_boundaries\_button         & bool  & false & Show a button to toggle constellation boundaries\\
+flag\_show\_asterism\_lines\_button    & bool  & false & Show a button to toggle asterism lines\\
+flag\_show\_asterism\_labels\_button   & bool  & false & Show a button to toggle asterism labels\\
+flag\_show\_ecliptic\_grid\_button     & bool  & false & Show a button to toggle ecliptic grid\\
+flag\_show\_icrs\_grid\_button         & bool  & false & Show a button to toggle ICRS (equatorial J2000.0) grid\\
+flag\_show\_galactic\_grid\_button     & bool  & false & Show a button to toggle galactic grid\\
+flag\_show\_goto\_selected\_button     & bool  & true  & Show a button to center to selected object\\
+flag\_show\_nightmode\_button          & bool  & true  & Show a button to toggle night mode\\
+flag\_show\_nebulae\_ \mbox{background\_button} & bool & false & Show a button to toggle images for deep-sky objects\\%\midrule
+flag\_show\_flip\_buttons              & bool  & false & Show the image flipping buttons in the main toolbar \\%\midrule
+flag\_show\_dss\_button                & bool  & false & Show a button to toggle Digitized Sky Survey (DSS)\\%\midrule
+flag\_show\_hips\_button               & bool  & false & Show a button to toggle HiPS survey display\\%\midrule
+flag\_show\_bookmark\_button           & bool  & false & Show a button to show and edit bookmarks\\
+flag\_show\_fullscreen\_button         & bool  & true  & Show a button to toggle fullscreen view\\
+flag\_show\_quit\_button               & bool  & true  & Show a button to quit via button press\\
+flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
+%
 selected\_object\_info            & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
                                                     and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
 custom\_marker\_size             & float   & 5.0 & Size of custom marker.\\%\midrule
@@ -424,7 +443,6 @@ custom\_marker\_radius\_limit    & int   & 15 & Limit the click radius for mouse
 auto\_hide\_horizontal\_toolbar & bool   & true  & Set to \emph{true} if you want auto hide the horizontal toolbar.\\%\midrule
 auto\_hide\_vertical\_toolbar   & bool   & true  & Set to \emph{true} if you want auto hide the vertical toolbar.\\%\midrule
 flag\_use\_window\_transparency & bool   & false & If \emph{false}, show menu bars opaque\\%\midrule
-flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under buttons on bottom bar.\\%\midrule
 flag\_show\_datetime            & bool   & true  & display date and time in the bottom bar\\%\midrule
 flag\_time\_jd                  & bool   & false & use JD format for time in the bottom bar\\%\midrule
 flag\_show\_tz                  & bool   & false & show time zone info in the bottom bar\\%\midrule
@@ -503,7 +521,7 @@ app\_locale           & string & Sets language used for Stellarium's user interf
 time\_zone            & string & Sets the time zone. Valid values: \emph{system\_default}, 
                                  or some region/location combination, e.g. \emph{Pacific/Marquesas}\\%\midrule
 time\_display\_format & string & time display format: can be \emph{system\_default}, \emph{24h} or \emph{12h}.\\%\midrule
-date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or \emph{yyyymmdd} (ISO8601).\\\bottomrule
+date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy}, \emph{yyyymmdd} (ISO8601), \emph{wwmmddyyyy}, \emph{wwddmmyyyy}, \emph{wwyyyymmdd}.\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[main\big]}
@@ -513,6 +531,7 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
 invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
+screenshot\_format          & string & File format. One of \texttt{png|jpg|jpeg|tif|tiff| webp|pbm|pgm|ppm|xbm|xpm|ico}\\
 screenshot\_custom\_size    & bool   & \emph{true} if you want to specify particular dimensions next:\\
 screenshot\_custom\_width   & int    & custom width of screenshots. Max.\ available size is hardware dependent!\\
 screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\\midrule

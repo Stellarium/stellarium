@@ -175,18 +175,18 @@ public slots:
 
 	//! returns duration (in milliseconds) of loaded video. This may return valid result only after playVideo() or pauseVideo() have been called.
 	//! Returns -1 if video has not been analyzed yet. (loaded, but not started).
-	qint64 getVideoDuration(const QString& id);
+	qint64 getVideoDuration(const QString& id) const;
 
 	//! returns current position (in milliseconds) of loaded video. This may return valid result only after playVideo() or pauseVideo() have been called.
 	//! Returns -1 if video has not been analyzed yet. (loaded, but not started).
-	qint64 getVideoPosition(const QString& id);
+	qint64 getVideoPosition(const QString& id) const;
 
 	//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video has been fully loaded.
-	QSize getVideoResolution(const QString& id);
+	QSize getVideoResolution(const QString& id) const;
 	//! returns native width (in pixels) of loaded video, or -1 in case of trouble.
-	int getVideoWidth(const QString& id);
+	int getVideoWidth(const QString& id) const;
 	//! returns native height (in pixels) of loaded video, or -1 in case of trouble.
-	int getVideoHeight(const QString& id);
+	int getVideoHeight(const QString& id) const;
 
 	//! set mute state of video player
 	//! @param muteVideo true to silence the video, false to hear audio.
@@ -194,12 +194,12 @@ public slots:
 	//! set volume for video. Valid values are 0..100, values outside this range will be clamped.
 	void setVideoVolume(const QString& id, int newVolume);
 	//! return currently set volume (0..100) of media player, or -1 in case of some error.
-	int getVideoVolume(const QString& id);
+	int getVideoVolume(const QString& id) const;
 
 	//! returns whether video is currently playing.
 	//! @param id name assigned during loadVideo().
 	//! @note If video is not found, also returns false.
-	bool isVideoPlaying(const QString& id);
+	bool isVideoPlaying(const QString& id) const;
 
 #ifdef ENABLE_MEDIA
 private slots:

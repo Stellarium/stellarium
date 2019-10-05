@@ -2,10 +2,10 @@
 ########### install files ###############
 
 # install info.ini
-INSTALL(FILES info.ini DESTINATION share/${PACKAGE}/skycultures/lokono )
+INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/lokono )
 
 # install constellations data, proper names data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/lokono
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/lokono
 	FILES_MATCHING PATTERN "constellation*" 
 	PATTERN "*_names.fab" 
 	PATTERN "*.png" 

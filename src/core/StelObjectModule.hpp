@@ -40,9 +40,9 @@ public:
 	StelObjectModule();
 	~StelObjectModule();
 	
-	//! Search for StelObject in an area around a specifid point.
+	//! Search for StelObject in an area around a specified point.
 	//! The function searches in a disk of diameter limitFov centered on v.
-	//! Only visible objects (i.e curretly displayed on screen) should be returned.
+	//! Only visible objects (i.e. currently displayed on screen) should be returned.
 	//! @param v equatorial position at epoch J2000.
 	//! @param limitFov angular diameter of the searching zone in degree.
 	//! @param core the core instance to use.

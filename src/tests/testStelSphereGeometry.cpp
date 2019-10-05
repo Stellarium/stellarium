@@ -328,8 +328,7 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	QVERIFY(smallSquare.contains(v0));
 	QVERIFY(bigSquareConvex.contains(v0));
 	QVERIFY(bigSquare.contains(v0));
-	// FIXME: '!holySquare.contains(v0)' returned FALSE.
-	//QVERIFY(!holySquare.contains(v0));
+	QVERIFY(!holySquare.contains(v0));
 
 	QVERIFY(!smallSquare.contains(v1));
 	QVERIFY(bigSquare.contains(v1));
@@ -351,7 +350,6 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	bug1 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.99403, -27.683551], [53.047302, -27.683551], [53.047302, -27.729923], [52.99403, -27.729923]]]}");
 	bug2 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.993701, -27.683092], [53.047302, -27.683092], [53.047302, -27.729839], [52.993701, -27.729839]]]}");
 	SphericalRegionP bugIntersect = bug1->getIntersection(bug2);
-
 }
 
 void TestStelSphericalGeometry::testLoading()
@@ -373,8 +371,9 @@ void TestStelSphericalGeometry::testLoading()
 	}
 
 	QVERIFY(reg->getType()==SphericalRegion::Polygon);
-	qDebug() << reg->getArea()*180./M_PI*180/M_PI;
+	qDebug() << reg->getArea()*M_180_PI*M_180_PI;
 
+	// FIXME: WTF?!?
 	//StelVertexArray vertexAr = reg->getOutlineVertexArray();
 	//QVERIFY(vertexAr.primitiveType==StelVertexArray::Lines && vertexAr.vertex.size()%2==0);
 }
@@ -424,10 +423,10 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	OctahedronPolygon splittedSub(contour);
 	QCOMPARE(splittedSub.getArea(), smallSquareConvex.getArea());
 
-	//QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
-	//QCOMPARE(va.size(),16);
-	//va = southPoleSquare.getOutlineVertexArray().vertex;
-	//QCOMPARE(va.size(),16);
+	QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
+	QCOMPARE(va.size(),16);
+	va = southPoleSquare.getOutlineVertexArray().vertex;
+	QCOMPARE(va.size(),16);
 
 	// Copy
 	OctahedronPolygon splittedSubCopy;

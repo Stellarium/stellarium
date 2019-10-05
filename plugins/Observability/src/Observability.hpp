@@ -363,9 +363,6 @@ private:
 	//! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
 
-	//! Just the names of the months.
-	QStringList monthNames;
-
 	//! Using for storage date format [i18n]
 	bool dmyFormat;
 
@@ -405,9 +402,7 @@ private:
         QString msgHeliRise, msgHeliSet, msgNoHeliRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 	//! @}
-
 };
-
 
 #include <QObject>
 #include "StelPluginInterface.hpp"

@@ -34,6 +34,7 @@ class QLineEdit;
 class QDoubleSpinBox;
 class QSlider;
 class StelAction;
+class QToolButton;
 
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -103,7 +104,7 @@ public slots:
 	//! When a subclass needs a size-dependent update, implement such update in the subclass version,
 	//! but call StelDialog::handleDialogSizeChanged() first.
 	virtual void handleDialogSizeChanged(QSizeF size);
-	QString getDialogName(){return dialogName;}
+	QString getDialogName() const {return dialogName;}
 signals:
 	void visibleChanged(bool);
 
@@ -153,10 +154,26 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
+
+	//! Helper function to connect a QComboBox to an QString StelProperty.
+	//! The property is mapped to the selected string of the combobox.
+	//! Make sure the string is available in the Combobox, else the first element may be chosen.
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectStringProperty(QComboBox *comboBox, const QString &propName);
+
 	//! Helper function to connect a checkbox to a bool StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
+
+	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
+	//! @param toolButton the QToolButton which shows the color
+	//! @param propertyName a StelProperty name which must represent a color (coded as Vec3f)
+	//! @param iniName the associated entry for config.ini, in the form group/name. Usually "color/some_feature_name_color".
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	void connectColorButton(QToolButton* button, QString propertyName, QString iniName);
 
 	//! The main dialog
 	QWidget* dialog;
@@ -164,11 +181,20 @@ protected:
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
 
-	//! Kinetic scrolling for lists.
-	void installKineticScrolling(QList<QWidget *> addscroll);
+protected slots:
+	//! To be called by a connected QToolButton with a color background.
+	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
+	void askColor();
+	//! enable kinetic scrolling. This should be connected to StelApp's StelGui signal flagUseKineticScrollingChanged.
+	void enableKineticScrolling(bool b);
+	//! connect from StelApp to handle font and font size changes.
+	void handleFontChanged();
 
-private:
-	bool flagKineticScrolling;
+
+protected:
+	//! A list of widgets where kinetic scrolling can be activated or deactivated
+	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
+	QList<QWidget *> kineticScrollingList;
 
 private slots:
 	void updateNightModeProperty();
@@ -193,7 +219,6 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	signals: void sizeChanged(QSizeF);
 	protected:
-
 		virtual bool event(QEvent* event)
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())

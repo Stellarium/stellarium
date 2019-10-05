@@ -48,24 +48,24 @@ public:
 public slots:
 	//! Set the current date as Julian Day number
 	//! @param JD the Julian Day number
-	void setJDay(double JD);
+	static void setJDay(double JD);
 	//! Get the current date as Julian Day number
 	//! @return the Julian Day number
-	double getJDay() const;
+	static double getJDay();
 
 	//! Set the current date as Modified Julian Day
 	//! @param MJD the Modified Julian Day
-	void setMJDay(double MJD);
+	static void setMJDay(double MJD);
 	//! Get the current date as Modified Julian Day
 	//! @return the Modified Julian Day
-	double getMJDay() const;
+	static double getMJDay();
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dateStr the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
 	//! - "now" (set sim time to real time)
 	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
-	//!   units: seconds, minutes, hours, days, weeks, months, years.
+	//!   units: seconds, minutes, hours, days, sols, weeks, months, years.
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
@@ -75,7 +75,6 @@ public slots:
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal time is not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	// TODO: This calls for implementing "sol" days (planets's solar days)!
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used. Defaults to "utc".
 	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
@@ -86,74 +85,94 @@ public slots:
 	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
 	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
 	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
-	//  GZ JDfix for 0.14: I estimate 99.7% of users will want to set UT-based dates here. We could use an awkward name like dateIsUTbased=true to keep default value true.
-	//void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
-	void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
+	static void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
 	//! @param spec if "utc", the returned string's timezone is UTC,
 	//! else it is local time.
 	//! @return the current simulation time.
-	QString getDate(const QString& spec="utc");
+	static QString getDate(const QString& spec="utc");
 
 	//! get the DeltaT for the simulation date and time as a string
 	//! in HMS format, e.g. "0h1m68.2s"
 	//! @return the DeltaT for current simulation time.
-	QString getDeltaT() const;
+	static QString getDeltaT();
 
 	//! get the DeltaT equation name for the simulation date and time as a string
 	//! @return name of the DeltaT equation
-	QString getDeltaTAlgorithm() const;
+	static QString getDeltaTAlgorithm();
 
 	//! set equation of the DeltaT for the simulation date and time
 	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
-	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
-	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
-	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
-	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
-	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
-	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Henriksson2017, Custom.
-	void setDeltaTAlgorithm(QString algorithmName);
+	//! @note list of possible names of equation for DeltaT:
+	//! - WithoutCorrection
+	//! - Schoch
+	//! - Clemence
+	//! - IAU
+	//! - AstronomicalEphemeris
+	//! - TuckermanGoldstine
+	//! - MullerStephenson
+	//! - Stephenson1978
+	//! - SchmadelZech1979
+	//! - MorrisonStephenson1982
+	//! - StephensonMorrison1984
+	//! - StephensonHoulden
+	//! - Espenak
+	//! - Borkowski
+	//! - SchmadelZech1988
+	//! - ChaprontTouze
+	//! - StephensonMorrison1995
+	//! - Stephenson1997
+	//! - ChaprontMeeus
+	//! - JPLHorizons
+	//! - MeeusSimons
+	//! - MontenbruckPfleger
+	//! - ReingoldDershowitz
+	//! - MorrisonStephenson2004
+	//! - EspenakMeeus
+	//! - Reijs
+	//! - Banjevic
+	//! - IslamSadiqQureshi
+	//! - Henriksson2017
+	//! - Custom
+	static void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
 	//! For example if ts is 1, time will pass at the normal rate.  If ts == 10
 	//! then simulation time will pass at 10 times the normal rate.
 	//! If ts is negative, simulation time will go backwards.
-	void setTimeRate(double ts);
+	static void setTimeRate(double ts);
 	//! Get simulation time rate.
 	//! @return time speed as a multiple of real time.
-	double getTimeRate() const;
+	static double getTimeRate();
 
 	//! Get the simulation time and rate state - is it "real time"
 	//! @return true if the time rate is normal, and the simulation time
 	//! is real time, else return false
-	bool isRealTime();
+	static bool isRealTime();
 
 	//! Set the simulation time to the current system time, and the time rate to 1
-	void setRealTime();
+	static void setRealTime();
 
 	//! Get the type of calculations in the simulation - is it "planetocentric calculations" or not
 	//! @return true if the calculations is planetocentric (geocentric on Earth), else return false
-	bool isPlanetocentricCalculations();
+	static bool isPlanetocentricCalculations();
 
 	//! Set the flag for use planetocentric calculations
-	void setPlanetocentricCalculations(bool f);
+	static void setPlanetocentricCalculations(bool f);
 
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
 	//! If the name is "", any currently selected objects will be
 	//! de-selected.
 	//! @param pointer whether or not to have the selection pointer enabled
-	void selectObjectByName(const QString& name, bool pointer=false);
+	static void selectObjectByName(const QString& name, bool pointer=false);
 
-	//! Fetch a map with data about an object's position, magnitude and so on
-	//! @param name is the English name of the object for which data will be
-	//! returned.
-	//! @return a map of object data, exactly like getObjectInfo().
-	//! @deprecated Use getObjectInfo()
-	QVariantMap getObjectPosition(const QString& name);
+	//! Select a constellation by name
+	//! @param name the name of the constellation to select (english)
+	static void selectConstellationByName(const QString& name);
 
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
@@ -168,6 +187,12 @@ public slots:
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
+	//! - hourAngle-dd : hour angle in decimal degrees
+	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - iauConstellation : 3-letter abbreviation of IAU constellation (string)
+	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
@@ -200,50 +225,66 @@ public slots:
 	//! map=core.getSelectedObjectInfo();
 	//! core.output(core.mapToString(map));
 	//! @endcode
-	QVariantMap getObjectInfo(const QString& name);
+	static QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about the latest selected object's position, magnitude and so on
 	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
-	QVariantMap getSelectedObjectInfo();
+	static QVariantMap getSelectedObjectInfo();
+
+	//! Add some arbitrary string to the object information of the currently selected object.
+	//! if @arg replace==true, replace this extra string, if false, add to it.
+	//! Note that while most objects keep this information after unselection and reselection,
+	//! stars will start with no extra information when they become selected again.
+	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
 	//!   no lines, labels or markers
 	//! - starchart : equatorial mount, constellation lines,
-	//!   no landscape, atmosphere etc.  labels & markers on.
+	//!   no landscape, atmosphere etc.  labels & markers on.	
 	//! - deepspace : like starchart, but no planets, no eq.grid, no markers, no lines.
 	//! - galactic  : like deepspace, but in galactic coordinate system.
+	//! - supergalactic  : like deepspace, but in supergalactic coordinate system.
 	//! @param state the name of a preset state.
-	void clear(const QString& state="natural");
+	static void clear(const QString& state="natural");
 
 	//! Get the current viewing direction altitude angle at center of view.
 	//! @return the altitude angle in decimal degrees.
 	//! 0 is horizon, zenith is 180, nadir = -180.
-	double getViewAltitudeAngle();
+	static double getViewAltitudeAngle();
 
 	//! Get the current viewing direction azimuth angle at center of view.
 	//! @return the azimuth angle in decimal degrees as a compass bearing
 	//! i.e.  0 is North, 90 is East, 180 is South, 270 is West.
-	double getViewAzimuthAngle();
+	static double getViewAzimuthAngle();
 
 	//! Get the current viewing direction Right Ascension at center of view.
 	//! @return the Right Ascension angle in decimal degrees.
 	//! The value returned falls in the range 0 .. 360
-	double getViewRaAngle();
+	static double getViewRaAngle();
 
 	//! Get the current viewing direction Declination angle at center of view.
 	//! @return the Declination angle in decimal degrees.
 	//! The value returned falls in the range -180 .. 180
-	double getViewDecAngle();
+	static double getViewDecAngle();
 
 	//! Get the current viewing direction Right Ascension in J2000 frame at center of view.
 	//! @return the Right Ascension angle in J2000 frame in decimal degrees.
-	double getViewRaJ2000Angle();
+	static double getViewRaJ2000Angle();
 
 	//! Get the current viewing direction Declination angle in J2000 frame at center of view.
 	//! @return the Declination angle in J2000 frame in decimal degrees.
-	double getViewDecJ2000Angle();
+	static double getViewDecJ2000Angle();
+
+	//! Move the current viewing direction to some object.
+	//! @param name is the English name of the object
+	//! @param duration the duration of the movement in seconds
+	static void moveToObject(const QString& name, float duration=1.);
+
+	//! Move the current viewing direction to selected object.
+	//! @param duration the duration of the movement in seconds
+	static void moveToSelectedObject(float duration=1.);
 
 	//! move the current viewing direction to some specified altitude and azimuth.
 	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
@@ -251,7 +292,7 @@ public slots:
 	//! @param alt the altitude angle
 	//! @param azi the azimuth angle
 	//! @param duration the duration of the movement in seconds
-	void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
+	static void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
 
 	//! move the current viewing direction to some specified right ascension and declination.
 	//! The move will run in equatorial coordinates. This will look different from moveToAltAzi() when timelapse is fast.
@@ -259,14 +300,21 @@ public slots:
 	//! @param ra the right ascension angle
 	//! @param dec the declination angle
 	//! @param duration the duration of the movement in seconds
-	void moveToRaDec(const QString& ra, const QString& dec, float duration=1.);
+	static void moveToRaDec(const QString& ra, const QString& dec, float duration=1.);
 
 	//! move the current viewing direction to some specified right ascension and declination in the J2000 frame
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param ra the right ascension angle
 	//! @param dec the declination angle
 	//! @param duration the duration of the movement in seconds
-	void moveToRaDecJ2000(const QString& ra, const QString& dec, float duration=1.);
+	static void moveToRaDecJ2000(const QString& ra, const QString& dec, float duration=1.);
+
+	//! move the current viewing direction to some specified galactic coordinates
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param lon the galactic longitude
+	//! @param dec the galactic latitude
+	//! @param duration the duration of the movement in seconds
+	static void moveToGalLongLat(const QString& lon, const QString& lat, float duration);
 
 	//! Set the observer location
 	//! @param longitude the longitude in degrees. E is +ve.
@@ -285,17 +333,17 @@ public slots:
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
 	//!        planet will not be set.
-	void setObserverLocation(double longitude, double latitude, double altitude, double duration=1., const QString& name="", const QString& planet="");
+	static void setObserverLocation(double longitude, double latitude, double altitude, double duration=1., const QString& name="", const QString& planet="");
 
 	//! Set the location by the name of the location.
 	//! @param id the location ID as it would be found in the database
 	//! of locations - do a search in the Location window to see what
 	//! where is.  e.g. "York, UnitedKingdom".
 	//! @param duration the number of seconds to take to move location.
-	void setObserverLocation(const QString id, float duration=1.);
+	static void setObserverLocation(const QString& id, double duration=1.);
 
 	//! Get the ID of the current observer location.
-	QString getObserverLocation();
+	static QString getObserverLocation();
 
 	//! Get the info of the current observer location.
 	//! @return a map of object data.  Keys:
@@ -309,7 +357,25 @@ public slots:
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	//! - local-sidereal-time : local sidereal time on the planet in hours (since 0.13.3)
 	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
-	QVariantMap getObserverLocationInfo();
+	//! - timezone : IANA timezone or "LMST" (Local Mean Solar Time) or "LTST" (Local True Solar Time) (since 0.18.3)
+	//! - location-timezone : IANA timezone of current location (as stored in location database) (since 0.18.3)
+	static QVariantMap getObserverLocationInfo();
+
+	//! set timezone name. This only changes the currently used timezone (in StelCore).
+	//! Location (database) timezone will not be touched.
+	//! Valid values for tz can be found from the results of getAllTimezoneNames, including:
+	//! "LMST" = Local Mean Solar Time
+	//! "LTST" = Local True Solar Time
+	//! @param markAsCustom set flag/property StelCore.flagUseCTZ. (since 0.19.0)
+	//! Acceptable values: 0: set off; 1: set on. Other values: don't touch.
+	//! This parameter is mostly to reflect the respective setting in the Location dialog.
+	//!  - If tz is the default timezone for a site, markAsCustom should be 0.
+	//!  - For a definitively custom zone, set 1.
+	//!  - If unsure, set to -1.
+	static void setTimezone(QString tz, int markAsCustom=-1);
+
+	//! Return an array of all timezone names valid for setTimezone(tzName)
+	static QStringList getAllTimezoneNames();
 
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
@@ -317,52 +383,53 @@ public slots:
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
 	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
+	//! @param format File format. One of png|bmp|jpg|jpeg|tif|tiff|webm|pbm|pgm|ppm|xbm|xpm|ico. Use current format if left empty or invalid.
+	static void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false, const QString& format="");
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
 	//! @param b if true, show the GUI, if false, hide the GUI.
-	void setGuiVisible(bool b);
+	static void setGuiVisible(bool b);
 
 	//! Set the minimum frames per second.  Usually this minimum will
 	//! be switched to after there are no user events for some seconds
 	//! to save power.  However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m);
+	static void setMinFps(float m);
 
 	//! Get the current minimum frames per second.
 	//! @return The current minimum frames per second setting.
-	float getMinFps();
+	static float getMinFps();
 
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
-	void setMaxFps(float m);
+	static void setMaxFps(float m);
 
 	//! Get the current maximum frames per second.
 	//! @return The current maximum frames per second setting.
-	float getMaxFps();
+	static float getMaxFps();
 
 	//! Get the mount mode as a string
 	//! @return "equatorial" or "azimuthal"
-	QString getMountMode();
+	static QString getMountMode();
 
 	//! Set the mount mode
 	//! @param mode should be "equatorial" or "azimuthal"
-	void setMountMode(const QString& mode);
+	static void setMountMode(const QString& mode);
 
 	//! Get the current status of Night Mode
 	//! @return true if night mode is currently set
-	bool getNightMode();
+	static bool getNightMode();
 
 	//! Set the status of Night Mode
 	//! @param b if true, set Night Mode, else set Normal Mode
-	void setNightMode(bool b);
+	static void setNightMode(bool b);
 
 	//! Get the current projection mode ID string
 	//! @return the string which identifies the current projection mode.
 	//! For a list of possibl results, see setProjectionMode();
-	QString getProjectionMode();
+	static QString getProjectionMode();
 
 	//! Set the current projection mode
 	//! @param id the name of the projection mode to use, e.g. "ProjectionPerspective" and so on.
@@ -381,7 +448,7 @@ public slots:
 
 	//! Get the status of the disk viewport
 	//! @return true if the disk view port is currently enabled
-	bool getDiskViewport();
+	static bool getDiskViewport();
 
 	//! Set the disk viewport
 	//! @param b if true, sets the disk viewport on, else sets it off
@@ -389,29 +456,22 @@ public slots:
 
 	//! Set the viewport distortion effect
 	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
-	void setSphericMirror(bool b);
-
-	//! Set viewport offset
-	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
-	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
-	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
-	//! @deprecated Use StelMovementMgr::moveViewport instead
-	void setViewportOffset(const float x, const float y);
+	static void setSphericMirror(bool b);
 
 	//! Set a lateral width distortion. Use this e.g. in startup.ssc.
 	//! Implemented for 0.15 for a setup with 5 projectors with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
 	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
 	//! @note Currently only the projected content is affected. ScreenImage, ScreenLabel is not stretched.
-	void setViewportStretch(const float stretch);
+	static void setViewportStretch(const float stretch);
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
-	QStringList getAllSkyCultureIDs();
+	static QStringList getAllSkyCultureIDs();
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
 	//! which the curret sky cultures files are found, e.g. "western")
-	QString getSkyCulture();
+	static QString getSkyCulture();
 
 	//! Set the current sky culture
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
@@ -419,19 +479,19 @@ public slots:
 
 	//! Find out the current sky culture and get it English name
 	//! @return the English name of the current sky culture
-	QString getSkyCultureName();
+	static QString getSkyCultureName();
 
 	//! Find out the current sky culture and get it localized name
 	//! @return the translated name of the current sky culture
-	QString getSkyCultureNameI18n();
+	static QString getSkyCultureNameI18n();
 
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
-	bool getFlagGravityLabels();
+	static bool getFlagGravityLabels();
 
 	//! Turn on/off gravity labels
 	//! @param b if true, turn on gravity labels, else turn them off
-	void setFlagGravityLabels(bool b);
+	static void setFlagGravityLabels(bool b);
 
 	//! Load an image into the sky background at the given sky coordinates and be warped with the sky.
 	//! The image is projected like a deep-sky object, with a notion for surface magnitude of the brightest parts.
@@ -489,7 +549,7 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame now.
+	//! @note since 2017-03, you can select Frame.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
@@ -503,51 +563,6 @@ public slots:
 					  const QString& lon, const QString& lat, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
 
-	//! Load an image which will have a sky location given in alt-azimuthal coordinates.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting
-	//! it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param alt0 The altitude angle of the first corner of the image in degrees
-	//! @param azi0 The azimuth angle of the first corner of the image in degrees
-	//! @param alt1 The altitude angle of the second corner of the image in degrees
-	//! @param azi1 The azimuth angle of the second corner of the image in degrees
-	//! @param alt2 The altitude angle of the third corner of the image in degrees
-	//! @param azi2 The azimuth angle of the third corner of the image in degrees
-	//! @param alt3 The altitude angle of the fourth corner of the image in degrees
-	//! @param azi3 The azimuth angle of the fourth corner of the image in degrees
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-02 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
-	void loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double azi0, double alt0,
-					  double azi1, double alt1,
-					  double azi2, double alt2,
-					  double azi3, double alt3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-	//! Convenience function which allows loading of a sky image based on a
-	//! central alt-azimuthal coordinate, angular size and rotation.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param alt The altitude angle of the center of the image in degrees
-	//! @param azi The azimuth angle of the center of the image in degrees
-	//! @param angSize The angular size of the image in arc minutes
-	//! @param rotation The clockwise rotation angle of the image in degrees
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-03. Use loadSkyImage(,,,, "AzAlt") instead!
-	void loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt, double azi, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
 	void removeSkyImage(const QString& id);
@@ -559,7 +574,7 @@ public slots:
 	//! @return a map of object data.  Keys:
 	//! - x : x coordinate on the screen
 	//! - y : y coordinate on the screen
-	QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi);
+	static QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi);
 
 	//! Load a sound from a file.
 	//! @param filename the name of the file to load.
@@ -590,13 +605,12 @@ public slots:
 	//! Get position in a playing sound.
 	//! @param id the identifier used when loadSound was called
 	//! @return position [ms] during play or pause, 0 when stopped, -1 in case of error.
-	qint64 getSoundPosition(const QString& id);
+	static qint64 getSoundPosition(const QString& id);
 
 	//! Get duration of a sound object (if possible).
 	//! @param id the identifier used when loadSound was called
 	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
-	qint64 getSoundDuration(const QString& id);
-
+	static qint64 getSoundDuration(const QString& id);
 
 	//! Load a video from a file.
 	//! @param filename the name of the file to load, relative to the scripts directory.
@@ -670,7 +684,7 @@ public slots:
 	//! @param id the identifier used when loadVideo() was called
 	//! @param w the new width for the widget. (if <1, relative to main view size)
 	//! @param h the new height for the widget. (if <1, relative to main view size)
-        void resizeVideo(const QString& id, float w, float h);
+	void resizeVideo(const QString& id, float w, float h);
 
 	//! Set the visibility state of a video.
 	//! @param id the identifier used when loadVideo() was called
@@ -680,35 +694,35 @@ public slots:
 
 	//! Get the duration of a loaded video, or -1
 	//! @param id the identifier used when loadVideo() was called
-	qint64 getVideoDuration(const QString& id);
+	static qint64 getVideoDuration(const QString& id);
 
 	//! Get the current position of a loaded video, or -1
 	//! @param id the identifier used when loadVideo() was called
-	qint64 getVideoPosition(const QString& id);
+	static qint64 getVideoPosition(const QString& id);
 
 	//! Get the screen width in pixels.
 	//! @return The screen width (actually, width of Stellarium main view) in pixels
-	int getScreenWidth();
+	static int getScreenWidth();
 	//! Get the screen height (actually, height of Stellarium main view) in pixels.
 	//! @return The screen height in pixels
-	int getScreenHeight();
+	static int getScreenHeight();
 
 	//! Get the script execution rate as a multiple of normal execution speed
 	//! @return the current script execution rate.
-	double getScriptRate();
+	static double getScriptRate();
 	//! Set the script execution rate as a multiple of normal execution speed
 	//! @param r the multiple of the normal script execution speed, i.e.
 	//! if 5 is passed the script will execute 5 times faster than it would
 	//! if the script rate was 1.
-	void setScriptRate(double r);
+	static void setScriptRate(double r);
 
 	//! Pause the currently running script. Note that you may need to use 
 	//! a key sequence like 'Ctrl-D,R' or the GUI to resume script execution.
-	void pauseScript();
+	static void pauseScript();
 
 	//! Set the amount of selected object information to display
 	//! @param level can be "AllInfo", "ShortInfo", "None"
-	void setSelectedObjectInfo(const QString& level);
+	static void setSelectedObjectInfo(const QString& level);
 
 	//! Stop the script
 	void exit();
@@ -717,7 +731,7 @@ public slots:
 	void quitStellarium();
 
 	//! Return a QStringlist of all available properties. Useful for script development...
-	QStringList getPropertyList() const;
+	static QStringList getPropertyList();
 
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
@@ -725,95 +739,72 @@ public slots:
 
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
-	void output(const QString& s) const;
+	static void output(const QString& s);
 
 	//! print contents of a QVariantMap as []-delimited list of [ "key" = <value>] lists.
 	//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
 	//! @note string values are surrounded with ", simple numeric types are printed as themselves.
 	//! @note More complicated value types like lists are only indicated by their type name. You must extract those (and their contents) yourself.
-	QString mapToString(const QVariantMap &map) const;
+	static QString mapToString(const QVariantMap &map);
 
 	//! Reset (clear) output file
-	void resetOutput(void) const;
+	static void resetOutput(void);
 
 	//! Save output file to new file (in same directory as output.txt).
 	//! This is required to allow reading with other program on Windows while output.txt is still open.
-	void saveOutputAs(const QString &filename);
+	static void saveOutputAs(const QString &filename);
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getAppLanguage() const;
+	static QString getAppLanguage();
 
 	//! Set the current application language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
-	void setAppLanguage(QString langCode);
+	static void setAppLanguage(QString langCode);
 
 	//! Get the current sky language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getSkyLanguage() const;
+	static QString getSkyLanguage();
 
 	//! Set the current sky language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
-	void setSkyLanguage(QString langCode);
+	static void setSkyLanguage(QString langCode);
+
+	//! Translate the string.
+	static QString translate(QString englishText);
 
 	//! Go to defaults position and direction of view
 	void goHome();
-
-	//! Show or hide the Milky Way.
-	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
-	void setMilkyWayVisible(bool b);
-
-	//! Set Milky Way intensity.
-	//! @param i value of intensity for the Milky Way
-	void setMilkyWayIntensity(double i);
-
-	//! Get Milky Way intensity.
-	//! @return value of Milky Way intensity, e.g. "1.2"
-	double getMilkyWayIntensity() const;
-
-	//! Show or hide the Zodiacal Light.
-	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
-	void setZodiacalLightVisible(bool b);
-
-	//! Set Zodiacal Light intensity.
-	//! @param i value of intensity for the Zodiacal Light
-	void setZodiacalLightIntensity(double i);
-
-	//! Get Zodiacal Light intensity.
-	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	double getZodiacalLightIntensity() const;
 
 	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
 	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	//! @return the Bortle scale index in range [1,9]
-	int getBortleScaleIndex() const;
+	static int getBortleScaleIndex();
 
 	//! Changes the Bortle scale index, which is used to simulate light pollution.
 	//! Wrapper for StelSkyDrawer::setBortleScaleIndex
 	//! Valid values are in the range [1,9]
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	//! @param index the new Bortle scale index, must be in range [1,9]
-	void setBortleScaleIndex(int index);
+	static void setBortleScaleIndex(int index);
 
-	//! Show or hide the DSS (photorealistic sky).
-	//! @param b if true, show the DSS, if false, hide the DSS layer.
-	void setDSSMode(bool b);
-	//! Get the current status of DSS mode.
-	//! @return The current status of DSS mode.
-	bool isDSSModeEnabled() const;
+	//! Apply refraction with current atmospheric parameters to altitude.
+	//! @param altitude: degrees
+	//! @param apparent: true to remove refraction from an apparent (observed) altitude
+	static double refraction(double altitude, bool apparent=false);
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
-	//! @returns Julian day.
-	double jdFromDateString(const QString& dt, const QString& spec);
+	//! @return Julian day.
+	static double jdFromDateString(const QString& dt, const QString& spec);
 
 	// Methods wait() and waitFor() were added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	void wait(double t);
+	static void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -823,12 +814,73 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use, format like "2012-06-06T4:44:00" or "-1428-03-04T22:23:45"
 	//! @param spec "local" or "utc"
-	void waitFor(const QString& dt, const QString& spec="utc");
+	static void waitFor(const QString& dt, const QString& spec="utc");
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
 	//! string contains Unicode characters not representable in the ANSI encoding.
-	QString getEnv(const QString& var);
+	static QString getEnv(const QString& var);
+
+	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
+	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
+	static bool isModuleLoaded(const QString& moduleID);
+
+	//! @return The name of platform where running Stellarium. Keys:
+	//! - FreeBSD
+	//! - OpenBSD
+	//! - NetBSD
+	//! - Linux
+	//! - Windows
+	//! - macOS
+	//! - Unknown
+	static QString getPlatformName(void);
+
+	//! Get the current status of media playback support.
+	//! @return The current status of media playback support.
+	static bool isMediaPlaybackSupported(void);
+
+	//
+	// DEPRECATED METHODS
+	//
+
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setFlagShow(b) instead.
+	static void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setIntensity(i) instead.
+	static void setMilkyWayIntensity(double i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.getIntensity() instead.
+	static double getMilkyWayIntensity();
+
+	//! Show or hide the Zodiacal Light.
+	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setFlagShow(b) instead.
+	static void setZodiacalLightVisible(bool b);
+
+	//! Set Zodiacal Light intensity.
+	//! @param i value of intensity for the Zodiacal Light
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setIntensity(i) instead.
+	static void setZodiacalLightIntensity(double i);
+
+	//! Get Zodiacal Light intensity.
+	//! @return value of Zodiacal Light intensity, e.g. "1.2"
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.getIntensity() instead.
+	static double getZodiacalLightIntensity();
+
+	//! Show or hide the DSS (photorealistic sky).
+	//! @param b if true, show the DSS, if false, hide the DSS layer.
+	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.setFlagShow(b) instead.
+	static void setDSSMode(bool b);
+	//! Get the current status of DSS mode.
+	//! @return The current status of DSS mode.
+	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.getFlagShow() instead.
+	static bool isDSSModeEnabled();
 
 signals:
 
@@ -838,14 +890,6 @@ signals:
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
-	//! @deprecated! USE requestLoadSkyImage() with frameType=AzAlt!
-	//! @todo: Remove with V0.16.0
-	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
-							 double c1, double c2,
-							 double c3, double c4,
-							 double c5, double c6,
-							 double c7, double c8,
-							 double minRes, double maxBright, bool visible);
 
 	void requestRemoveSkyImage(const QString& id);
 
@@ -866,7 +910,6 @@ signals:
 	void requestResizeVideo(const QString& id, float w, float h);
 	void requestShowVideo(const QString& id, bool show);
 	
-	void requestSetNightMode(bool b);
 	void requestSetProjectionMode(QString id);
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);

@@ -148,7 +148,7 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& loca
 }
 
 //! Get available language codes from directory tree
-QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) const
+QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir)
 {
 	QDir dir(localeDir);
 

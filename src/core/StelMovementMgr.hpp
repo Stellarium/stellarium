@@ -33,6 +33,8 @@
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(MountMode)
+	Q_ENUMS(ZoomingMode)
 	Q_PROPERTY(bool equatorialMount
 		   READ getEquatorialMount
 		   WRITE setEquatorialMount
@@ -45,28 +47,24 @@ class StelMovementMgr : public StelModule
 		   READ getFlagIndicationMountMode
 		   WRITE setFlagIndicationMountMode
 		   NOTIFY flagIndicationMountModeChanged)
-
 	//The targets of viewport offset animation
-	Q_PROPERTY(float viewportHorizontalOffsetTarget
+	Q_PROPERTY(double viewportHorizontalOffsetTarget
 		   READ getViewportHorizontalOffsetTarget
 		   WRITE setViewportHorizontalOffsetTarget
 		   NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(float viewportVerticalOffsetTarget
+	Q_PROPERTY(double viewportVerticalOffsetTarget
 		   READ getViewportVerticalOffsetTarget
 		   WRITE setViewportVerticalOffsetTarget
 		   NOTIFY viewportVerticalOffsetTargetChanged)
-
 	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
 		   READ getFlagAutoZoomOutResetsDirection
 		   WRITE setFlagAutoZoomOutResetsDirection
 		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
-
 	Q_PROPERTY(bool flagEnableMouseNavigation
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
 public:
-
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
@@ -119,7 +117,7 @@ public:
 
 	//! Get the zoom speed
 	// TODO: what are the units?
-	double getZoomSpeed() {return keyZoomSpeed;}
+	double getZoomSpeed() const {return static_cast<double>(keyZoomSpeed);}
 
 	//! Return the current up view vector in J2000 coordinates.
 	Vec3d getViewUpVectorJ2000() const;
@@ -135,6 +133,7 @@ public:
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
 public slots:
+	// UNUSED!
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
@@ -166,7 +165,7 @@ public slots:
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
 	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
-	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
+	bool getFlagAutoZoomOutResetsDirection(void) const {return flagAutoZoomOutResetsDirection;}
 
 	//! Get whether keys can control zoom
 	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
@@ -230,10 +229,10 @@ public slots:
 	//! Return the initial default FOV in degree.
 	double getInitFov() const {return initFov;}
 	//! Set the initial Field Of View in degree.
-	void setInitFov(double fov) {initFov=fov;}
+	void setInitFov(double fov);
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() const {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
@@ -289,12 +288,14 @@ public slots:
 	//! Look immediately towards South Celestial pole.
 	void lookTowardsSCP(void);
 
-	//! start animated move of the viewport offset.
-	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param duration animation duration, seconds.
+	//! set or start animated move of the viewport offset.
+	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
+	//! Also helpful in stereographic projection to push the horizon down and see more of the sky.
+	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]. Probably not very useful.
+	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]. This is also available in the GUI.
+	//! @param duration animation duration, seconds. Optional.
 	//! @note Only vertical viewport is really meaningful.
-	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
+	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
@@ -307,12 +308,12 @@ public slots:
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
 
 	//! Returns the targetted value of the viewport offset
-	Vec2f getViewportOffsetTarget() const { return targetViewportOffset; }
-	float getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
-	float getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
+	Vec2d getViewportOffsetTarget() const { return targetViewportOffset; }
+	double getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
+	double getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
 
-	void setViewportHorizontalOffsetTarget(float f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
-	void setViewportVerticalOffsetTarget(float f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
+	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
+	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
 
 signals:
 	//! Emitted when the tracking property changes
@@ -322,8 +323,8 @@ signals:
 
 	void flagAutoZoomOutResetsDirectionChanged(bool b);
 
-	void viewportHorizontalOffsetTargetChanged(float f);
-	void viewportVerticalOffsetTargetChanged(float f);
+	void viewportHorizontalOffsetTargetChanged(double f);
+	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
 
 private slots:
@@ -332,6 +333,17 @@ private slots:
 
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
+
+	void setFOV180Deg();
+	void setFOV90Deg();
+	void setFOV60Deg();
+	void setFOV45Deg();
+	void setFOV20Deg();
+	void setFOV10Deg();
+	void setFOV5Deg();
+	void setFOV2Deg();
+	void setFOV1Deg();
+	void setFOV05Deg();
 
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -370,12 +382,12 @@ private:
 
 	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
 	bool flagEnableMouseNavigation;
-	float mouseZoomSpeed;
+	double mouseZoomSpeed;
 
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
-	float keyMoveSpeed;              // Speed of keys movement
-	float keyZoomSpeed;              // Speed of keys zoom
+	double keyMoveSpeed;              // Speed of keys movement
+	double keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
 
 	// Speed factor for real life time movements, used for fast forward when playing scripts.
@@ -424,7 +436,7 @@ private:
 	};
 	QList<DragHistoryEntry> timeDragHistory; // list of max 3 entries.
 	void addTimeDragPoint(int x, int y);
-	float beforeTimeDragTimeRate;
+	double beforeTimeDragTimeRate;
 
 	// Time mouse control
 	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
@@ -470,8 +482,8 @@ private:
 	// Viewport shifting. This animates a property belonging to StelCore. But the shift itself is likely best placed here.
 	QTimeLine *viewportOffsetTimeline;
 	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
-	Vec2f oldViewportOffset;
-	Vec2f targetViewportOffset;
+	Vec2d oldViewportOffset;
+	Vec2d targetViewportOffset;
 
 	bool flagIndicationMountMode; // state of mount mode
 
@@ -479,7 +491,6 @@ private:
 	//@{
 	int lastMessageID;
 	//@}
-
 };
 
 #endif // STELMOVEMENTMGR_HPP

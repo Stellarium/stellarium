@@ -2,12 +2,14 @@
 // Name: Occultations of bright stars by planets
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 1.1
 // Shortcut: Ctrl+D,M,3
 // Description: This script demonstrates interesting phenomena - occultations bright stars by planets, 2000 to 2040.
 //
 
-// Made on Stellarium 0.18.2
+// Made on Stellarium 0.18.2; Translatable with 0.19.0
+
+include("i18n.inc");
 
 // List of phenomena (date, begin time, end time, star, latitude, longitude)
 var phenomenalist = [["2006-01-12", "06:00", "07:10",     "55 Sgr",    5,   25],
@@ -45,9 +47,9 @@ GridLinesMgr.setFlagGridlines(false);
 NebulaMgr.setFlagHints(false);
 StelMovementMgr.setEquatorialMount(true);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Occultations of bright stars by planets", 20, 20, false, 36, color);
+var id = LabelMgr.labelScreen(tr("Occultations of bright stars by planets"), 20, 20, false, 36, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length + " " + tr("phenomena in all"), 20, 65, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 StelSkyDrawer.setRelativeStarScale(0.5);
@@ -57,8 +59,8 @@ core.setDeltaTAlgorithm("EspenakMeeus");
 for (i=0; i<phenomenalist.length; i++)
 {
 	var d = phenomenalist[i][0];
-	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
-	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
+	var en = LabelMgr.labelScreen(tr("Event #") + (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen(tr("Date:") + " " + d, 20, 155, false, 20, color);
 	LabelMgr.setLabelShow(en, true);
 	LabelMgr.setLabelShow(ed, true);
 

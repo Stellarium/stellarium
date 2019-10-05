@@ -34,6 +34,7 @@
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 3.1f
+#define DEFAULT_CCD_CROP_OVERLAY_SIZE 250
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
@@ -103,6 +104,10 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
+	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
+
+	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay WRITE setFlagShowCcdCropOverlay NOTIFY flagShowCcdCropOverlayChanged)
+	Q_PROPERTY(int ccdCropOverlaySize        READ getCcdCropOverlaySize        WRITE setCcdCropOverlaySize        NOTIFY ccdCropOverlaySizeChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -183,6 +188,8 @@ public slots:
 	
 	void enableGuiPanel(bool enable = true);
 	bool getFlagGuiPanelEnabled(void) const {return flagGuiPanelEnabled;}
+	void setGuiPanelFontSize(int size);
+	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
@@ -211,6 +218,9 @@ public slots:
 	void setFlagShowResolutionCriterions(const bool b);
 	bool getFlagShowResolutionCriterions(void) const;
 
+	void setCcdCropOverlaySize(int size);
+	int getCcdCropOverlaySize()const {return ccdCropOverlaySize;}
+
 	void setArrowButtonScale(const double val);
 	double getArrowButtonScale() const;
 
@@ -224,6 +234,12 @@ public slots:
 	void setFlagShowOcularsButton(bool b);
 	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
 
+	void setFontSize(int s){font.setPixelSize(s);}
+	//! Connect this to StelApp font size.
+	void setFontSizeFromApp(int s){font.setPixelSize(s+1);}
+
+	void setFlagShowCcdCropOverlay(const bool b);
+	bool getFlagShowCcdCropOverlay(void) const;
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -236,6 +252,7 @@ signals:
 	void selectedCCDRotationAngleChanged(double value);
 
 	void flagGuiPanelEnabledChanged(bool value);
+	void guiPanelFontSizeChanged(int value);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
@@ -249,6 +266,8 @@ signals:
 	void flagDMSDegreesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
 	void flagShowOcularsButtonChanged(bool value);
+	void flagShowCcdCropOverlayChanged(bool value);
+	void ccdCropOverlaySizeChanged(int value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -335,20 +354,20 @@ private:
 	bool flagAdaptationMain;	//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStarsMain;        //!< Flag to track limit magnitude for stars
-	float magLimitStarsMain;        //!< Value of limited magnitude for stars
+	double magLimitStarsMain;       //!< Value of limited magnitude for stars
 	bool flagLimitDSOsMain;	        //!< Flag to track limit magnitude for DSOs
-	float magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
+	double magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
 	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-	float magLimitPlanetsMain;      //!< Value of limited magnitude for planets, asteroids, comets etc.
-	float relativeStarScaleMain;    //!< Value to store the usual relative star scale when activating ocular or CCD view
-	float absoluteStarScaleMain;    //!< Value to store the usual absolute star scale when activating ocular or CCD view
-	float relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
-	float absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
-	float relativeStarScaleCCD;     //!< Value to store the relative star scale when switching off CCD view
-	float absoluteStarScaleCCD;     //!< Value to store the absolute star scale when switching off CCD view
+	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
+	double absoluteStarScaleMain;   //!< Value to store the usual absolute star scale when activating ocular or CCD view
+	double relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
+	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
+	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
+	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
-	float milkyWaySaturation;
+	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Read from the ini file, whether an object is required to be selected to zoom in.
@@ -396,6 +415,7 @@ private:
 	StelAction * actionOcularDecrement;
 
 	class OcularsGuiPanel * guiPanel;
+	int guiPanelFontSize;
 
 	//Reticle
 	StelTextureSP reticleTexture;
@@ -408,6 +428,8 @@ private:
 	bool flagShowResolutionCriterions;
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
+	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
+	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
 };
 
 

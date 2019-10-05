@@ -13,19 +13,19 @@ alt = 0
 
 while (alt < 20)
 {
-long = long + 45;
+    long = long + 45;
 
-if (long > 360)
-{
-long = long - 360
-}
+    if (long > 360)
+    {
+	long = long - 360
+    }
 
-core.setObserverLocation(long, -37.50, 17, 0, "", "Deimos");
+    core.setObserverLocation(long, -37.50, 17, 0, "", "Deimos");
 
-core.wait(0.1);
+    core.wait(0.1);
 
-SData = core.getObjectPosition("Sun");
-alt = SData["altitude"];
+    SData = core.getObjectPosition("Sun");
+    alt = SData["altitude"];
 
 }
 

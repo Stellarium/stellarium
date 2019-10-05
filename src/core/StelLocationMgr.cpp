@@ -131,7 +131,7 @@ void LibGPSLookupHelper::query()
 //				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
-			if (newdata->online==0) // no device?
+			if (newdata->online==0.0) // no device?
 			{
 				// This can happen when unplugging the GPS while running Stellarium,
 				// or running gpsd with no GPS receiver.
@@ -163,10 +163,18 @@ void LibGPSLookupHelper::query()
 				qDebug() << " - xdop:" << dop.xdop << "ydop:" << dop.ydop;
 				qDebug() << " - pdop:" << dop.pdop << "hdop:" << dop.hdop;
 				qDebug() << " - vdop:" << dop.vdop << "tdop:" << dop.tdop << "gdop:" << dop.gdop;
-				qDebug() << "Spherical Position Error (epe):" << newdata->epe;
+				// GPSD API 8.0:
+				// * Remove epe from gps_data_t, it duplicates gps_fix_t eph
+				// * Added sep (estimated spherical error, 3D)
+				// Details: https://github.com/Stellarium/stellarium/issues/733
+				// #if GPSD_API_MAJOR_VERSION >= 8
+				// qDebug() << "Spherical Position Error (sep):" << newdata->fix.sep;
+				// #else
+				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
+				// #endif
 			}
-			loc.longitude=newdata->fix.longitude;
-			loc.latitude=newdata->fix.latitude;
+			loc.longitude = static_cast<float> (newdata->fix.longitude);
+			loc.latitude  = static_cast<float> (newdata->fix.latitude);
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
 			if ((verbose) && (fixmode<3))
 			{
@@ -175,7 +183,7 @@ void LibGPSLookupHelper::query()
 			}
 			else
 			{
-				loc.altitude=newdata->fix.altitude;
+				loc.altitude=static_cast<int>(newdata->fix.altitude);
 				if (verbose)
 				{
 					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
@@ -358,7 +366,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.longitude=coord.longitude();
 		loc.latitude=coord.latitude();
 		// 2D fix may have only long/lat, invalid altitude.
-		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : (int) floor(coord.altitude()));
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		if (verbose)
 			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
 		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
@@ -397,6 +405,7 @@ StelLocationMgr::StelLocationMgr()
 	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	// initialize the static QMap first if necessary.
+	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.count()==0)
 	{
 		// reported in SF forum on 2017-03-27
@@ -477,6 +486,7 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 void StelLocationMgr::setLocations(const LocationList &locations)
 {
+	this->locations.clear();
 	for (const auto& loc : locations)
 	{
 		this->locations.insert(loc.getID(), loc);
@@ -533,7 +543,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	QStringList unknownTZlist;
 	for (auto& loc : res)
 	{
-		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
+		if ((loc.ianaTimeZone!="LMST") && (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
 		{
 			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
 			QString fixTZname=sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
@@ -690,9 +700,9 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	QSettings* conf = StelApp::getInstance().getSettings();
 	bool ok;
 	conf->beginGroup("location_run_once");
-	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toFloat(), true), &ok);
+	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toDouble(), true), &ok);
 	if (!ok) ret.role = '!';
-	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toFloat(), true), &ok);
+	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toDouble(), true), &ok);
 	if (!ok) ret.role = '!';
 	ret.altitude = conf->value("altitude", 0).toInt(&ok);
 	ret.planetName = conf->value("home_planet", "Earth").toString();
@@ -917,7 +927,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
 {
 	bool verbose=qApp->property("verbose").toBool();
 
-	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0f, 0.0f);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -988,22 +998,24 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
 
-			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			core->moveObserverTo(loc, 0.0f, 0.0f);
+			// Ensure that ipTimeZone is a valid IANA timezone name!
+			QTimeZone ipTZ(ipTimeZone.toUtf8());
+			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
+			core->moveObserverTo(loc, 0.0, 0.0);
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
-		catch (std::runtime_error)
+		catch (const std::exception& e)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Let's use Paris, France as default location...";
+			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
+					<< "\nLet's use Paris, France as default location...";
 			core->moveObserverTo(getLastResortLocation(), 0.0f, 0.0f); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
 	else
 	{
 		qDebug() << "Failure getting IP-based location: \n\t" << networkReply->errorString();
-		// If there is a problem, this must not change to some other location!
-		//core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
+		// If there is a problem, this must not change to some other location! Just ignore.
 	}
 	networkReply->deleteLater();
 }
@@ -1043,7 +1055,7 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
 // If timezone name starts with "UTC", always return unchanged.
-// This is required to store timezone names exactly as we know them, and not mix ours and corrent-iana spelling flavour.
+// This is required to store timezone names exactly as we know them, and not mix ours and current-iana spelling flavour.
 // In practice, reverse lookup to locationDBToIANAtranslations
 QString StelLocationMgr::sanitizeTimezoneStringForLocationDB(QString tzString)
 {
@@ -1070,4 +1082,39 @@ QString StelLocationMgr::sanitizeTimezoneStringFromLocationDB(QString dbString)
 	if ( res != "---")
 		return QString(res);
 	return dbString;
+}
+
+QStringList StelLocationMgr::getAllTimezoneNames() const
+{
+	QStringList ret;
+
+	QMapIterator<QString, StelLocation> iter(locations);
+	while (iter.hasNext())
+	{
+		iter.next();
+		const StelLocation *loc=&iter.value();
+		QString tz(loc->ianaTimeZone);
+		if (!ret.contains(tz))
+			ret.append(tz);
+	}
+	// 0.19: So far, this includes the existing names, but QTimeZone also has a few other names.
+	// Accept others after testing against sanitized names, and especially all UT+/- names!
+
+	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
+	for (const auto& tz : tzList)
+	{
+		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
+		if (!ret.contains(tzcand))
+		{
+			//qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
+			ret.append(QString(tzcand));
+		}
+	}
+
+	// Special cases!
+	ret.append("LMST");
+	ret.append("LTST");
+	ret.append("system_default");
+	ret.sort();
+	return ret;
 }

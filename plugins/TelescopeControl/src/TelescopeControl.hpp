@@ -156,14 +156,14 @@ public:
 	//! Returns a list of the currently connected clients
 	QHash<int, QString> getConnectedClientsNames();
 	
-	bool getFlagUseServerExecutables() {return useServerExecutables;}
+	bool getFlagUseServerExecutables() const {return useServerExecutables;}
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	void setFlagUseServerExecutables(bool b);
-	const QString& getServerExecutablesDirectoryPath();
+	const QString& getServerExecutablesDirectoryPath() const;
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	bool setServerExecutablesDirectoryPath(const QString& newPath);
 	
-	bool getFlagUseTelescopeServerLogs () {return useTelescopeServerLogs;}
+	bool getFlagUseTelescopeServerLogs () const {return useTelescopeServerLogs;}
 
 public slots:
 	//! Set display flag for telescope reticles
@@ -345,9 +345,9 @@ private:
 	SlewDialog * slewDialog;
 	
 	//! Used internally. Checks if the argument is a valid slot number.
-	bool isValidSlotNumber(int slot);
-	bool isValidPort(uint port);
-	bool isValidDelay(int delay);
+	static bool isValidSlotNumber(int slot);
+	static bool isValidPort(uint port);
+	static bool isValidDelay(int delay);
 	
 	//! Start the telescope server defined for a given slot in a new QProcess
 	//! @param slot the slot number

@@ -28,6 +28,7 @@
 class TuiNodeActivate : public TuiNode
 {
 	Q_OBJECT
+
 public:
 	//! Create a TuiNodeActivate node.
 	//! @param text the text to be displayed for this node
@@ -44,7 +45,6 @@ public:
 
 signals:
 	void activate();
-
 };
 
 #endif /* TUINODEACTIVATE_HPP */
