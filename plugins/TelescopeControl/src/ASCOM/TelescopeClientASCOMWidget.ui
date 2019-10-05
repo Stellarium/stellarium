@@ -64,18 +64,77 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="selectedDeviceLabel">
+       <layout class="QGridLayout" name="selectedDeviceLayout">
+        <property name="leftMargin">
+          <number>0</number>
+        </property>
+        <property name="topMargin">
+          <number>0</number>
+        </property>
+        <property name="rightMargin">
+          <number>0</number>
+        </property>
+        <property name="bottomMargin">
+          <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="selectedDeviceLabel">
+          <property name="text">
+           <string>Selected Device:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="selectedDevice">
+          <property name="text">
+           <string>No device selected</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="eqCoordTypeSourceLabel">
         <property name="text">
-         <string>Selected Device:</string>
+         <string>Source for coordinate system:</string>
         </property>
        </widget>
       </item>
       <item>
-        <widget class="QLabel" name="selectedDevice">
-          <property name="text">
-            <string>No device selected</string>
+       <layout class="QGridLayout" name="eqCoordTypeSourceLayout">
+        <property name="leftMargin">
+          <number>0</number>
+        </property>
+        <property name="topMargin">
+          <number>0</number>
+        </property>
+        <property name="rightMargin">
+          <number>0</number>
+        </property>
+        <property name="bottomMargin">
+          <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="eqCoordTypeSourceASCOMRadio">
+          <property name="toolTip">
+           <string>Let the ASCOM device tell Stellarium what coordinate system to use. Most mounts will handle this correctly, but some might not.</string>
           </property>
-        </widget>
+          <property name="text">
+           <string>Let ASCOM device decide</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="eqCoordTypeSourceStellariumRadio">
+          <property name="toolTip">
+           <string>Use the coordinate system that is configured in the general telescope properties for this telescope.</string>
+          </property>
+          <property name="text">
+           <string>Use Stellarium settings</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

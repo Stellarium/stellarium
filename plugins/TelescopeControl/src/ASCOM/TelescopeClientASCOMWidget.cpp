@@ -19,12 +19,13 @@
 #include "TelescopeClientASCOMWidget.hpp"
 #include "ui_TelescopeClientASCOMWidget.h"
 
-TelescopeClientASCOMWidget::TelescopeClientASCOMWidget(QWidget* parent) : 
-	QWidget(parent), 
-	ui(new Ui::TelescopeClientASCOMWidget), ascom(new ASCOMDevice(parent))
+TelescopeClientASCOMWidget::TelescopeClientASCOMWidget(QWidget* parent)
+	: QWidget(parent), ui(new Ui::TelescopeClientASCOMWidget), ascom(new ASCOMDevice(parent))
 {
 	ui->setupUi(this);
-	QObject::connect(ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
+	ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
+	QObject::connect(
+	  ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
 }
 
 TelescopeClientASCOMWidget::~TelescopeClientASCOMWidget()
@@ -45,4 +46,23 @@ QString TelescopeClientASCOMWidget::selectedDevice() const
 void TelescopeClientASCOMWidget::setSelectedDevice(const QString& device)
 {
 	ui->selectedDevice->setText(device);
+}
+
+bool TelescopeClientASCOMWidget::useDeviceEqCoordType() const 
+{
+	return ui->eqCoordTypeSourceASCOMRadio->isChecked();
+}
+
+void TelescopeClientASCOMWidget::setUseDeviceEqCoordType(const bool& useDevice)
+{
+	if (useDevice)
+	{
+		ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
+		ui->eqCoordTypeSourceStellariumRadio->setChecked(false);
+	}
+	else
+	{
+		ui->eqCoordTypeSourceASCOMRadio->setChecked(false);
+		ui->eqCoordTypeSourceStellariumRadio->setChecked(true);
+	}
 }

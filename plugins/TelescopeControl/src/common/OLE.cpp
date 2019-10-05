@@ -16,23 +16,32 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <ole2.h>
-#include <windows.h>
-#include <QDebug>
-
 #include "OLE.hpp"
+#ifdef Q_OS_WIN
+#include <Ole2.h>
+#include <Windows.h>
+#include <QDebug>
 
 
 static HRESULT OleFindIID(IDispatch* pIDispatch, LPOLESTR* pName, IID* pIID, ITypeInfo** ppTypeInfo)
 {
+	Q_UNUSED(pIDispatch)
+	Q_UNUSED(pName)
+	Q_UNUSED(pIID)
+	Q_UNUSED(ppTypeInfo)
 	ITypeInfo* pTypeInfo;
 	ITypeLib* pTypeLib;
+
+
 
 	return E_FAIL;
 }
 
 HRESULT OleRegisterEventHandler(IDispatch* pIDispatch, LPOLESTR* pOleEvent, EASY_OLE_EVH* Handler)
 {
+	Q_UNUSED(pIDispatch)
+    Q_UNUSED(pOleEvent)
+	Q_UNUSED(Handler)
 	return E_FAIL;
 }
 
@@ -42,10 +51,10 @@ static HRESULT OleInternalDispatch(
 {
 	va_list vMarker;
 	HRESULT hResult;
-	DISPPARAMS dp = {NULL, NULL, 0, 0};
+	DISPPARAMS dp = {Q_NULLPTR, Q_NULLPTR, 0, 0};
 	DISPID dispNamedId = DISPID_PROPERTYPUT;
 	DISPID dispId;
-	VARIANT* pArgs = NULL;
+	VARIANT* pArgs = Q_NULLPTR;
 	EXCEPINFO execpInfo;
 	UINT puArgErr = 0;
 
@@ -167,7 +176,11 @@ VARIANT OleBoolToVariant(BOOL b)
 	return v;
 }
 
-VOID OleReleaseObject(IDispatch* pIDispatch, LPVOID lpObject) {}
+VOID OleReleaseObject(IDispatch* pIDispatch, LPVOID lpObject)
+{
+	Q_UNUSED(pIDispatch)
+	Q_UNUSED(lpObject)
+}
 
 VOID OleReleaseInstance(IDispatch* pIDispatch)
 {
@@ -188,7 +201,7 @@ HRESULT OleCreateInstance(LPCOLESTR lpszProgID, IDispatch** ppIDispatch)
 
 	if (FAILED(hResult)) return hResult;
 
-	*ppIDispatch = (IDispatch*)p;
+	*ppIDispatch = static_cast<IDispatch*>(p);
 
 	return hResult;
 }
@@ -197,7 +210,7 @@ BOOL OleMessageLoopOnce()
 {
 	MSG msg;
 
-	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	if (PeekMessage(&msg, Q_NULLPTR, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -222,7 +235,7 @@ BOOL OleInit(DWORD dwInitType)
 
 	if (!dwInitType) dwInitType = COINIT_MULTITHREADED;
 
-	hResult = CoInitializeEx(0, dwInitType);
+	hResult = CoInitializeEx(Q_NULLPTR, dwInitType);
 	if (FAILED(hResult))
 	{
 		return FALSE;
@@ -230,3 +243,5 @@ BOOL OleInit(DWORD dwInitType)
 
 	return TRUE;
 }
+
+#endif // Q_OS_WIN

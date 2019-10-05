@@ -16,6 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QtGlobal>
+#ifdef Q_OS_WIN
+
 #ifndef OLE_HPP
 #define OLE_HPP
 
@@ -49,4 +52,5 @@ VARIANT OleBoolToVariant(BOOL b);
 VOID OleMessageLoop();
 BOOL OleMessageLoopOnce();
 
-#endif //OLE_HPP
+#endif // OLE_HPP
+#endif // Q_OS_WIN

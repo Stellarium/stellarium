@@ -36,6 +36,8 @@ public:
 	~TelescopeClientASCOMWidget();
 	QString selectedDevice() const;
 	void setSelectedDevice(const QString& device);
+	bool useDeviceEqCoordType() const;
+	void setUseDeviceEqCoordType(const bool& useDevice);
 
 private slots:
 	void onChooseButtonClicked();

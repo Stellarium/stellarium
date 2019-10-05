@@ -144,13 +144,14 @@ public:
 	  QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY,
 	  bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(),
 	  QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
-	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""));
+	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
+	  bool ascomUseDeviceEqCoordType = true);
 	//! Retrieves a telescope description. Returns false if the slot is empty. Returns empty serverName and
 	//! portSerial if the description contains no server.
 	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox,
 	  QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles,
 	  QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username,
-	  QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId);
+	  QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId, bool& ascomUseDeviceEqCoordType);
 	//! Removes info from the tree. Should it include stopTelescopeAtSlot()?
 	bool removeTelescopeAtSlot(int slot);
 
@@ -395,7 +396,8 @@ private:
 	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox,
 	  QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(),
 	  QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
-	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""));
+	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
+	  bool ascomUseDeviceEqCoordType = true);
 
 	//! Returns true if the TelescopeClient at this slot has been stopped successfully or doesn't exist
 	bool stopClientAtSlot(int slot);

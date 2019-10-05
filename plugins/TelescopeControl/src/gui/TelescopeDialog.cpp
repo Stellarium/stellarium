@@ -183,7 +183,9 @@ void TelescopeDialog::createDialogContent()
 		QString rts2Password;
 		int rts2Refresh;
 		QString ascomDeviceId;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
+		bool ascomUseDeviceEqCoordType;
+
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 			continue;
 		
 		//Determine the server type

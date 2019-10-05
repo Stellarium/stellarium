@@ -78,7 +78,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
-	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi";
+	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi, Gion Kunz";
 	info.contact = STELLARIUM_URL;
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
@@ -195,7 +195,7 @@ void TelescopeControl::init()
 
 			// "Abort Slew" commands
 			name = abortSlewActionId.arg(i);
-			shortcut = QString("Ctrl+Alt+%1").arg(i);
+			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
 			StelAction* actionAbortSlew = addAction(name, section, text, abortSlew, "map()", shortcut);
 			abortSlew->setMapping(actionAbortSlew, i);
@@ -819,6 +819,7 @@ void TelescopeControl::loadTelescopes()
 		QString rts2Password("");
 		int rts2Refresh = DEFAULT_RTS2_REFRESH;
 		QString ascomDeviceId("");
+		bool ascomUseDeviceEqCoordType = true;
 
 		if (connectionType == ConnectionInternal)
 		{
@@ -872,6 +873,7 @@ void TelescopeControl::loadTelescopes()
 		if (connectionType == ConnectionASCOM)
 		{
 			ascomDeviceId = telescope.value("ascom_device_id").toString();
+			ascomUseDeviceEqCoordType = telescope.value("ascom_use_device_eq_coord_type").toBool();
 		}
 
 		if (connectionType == ConnectionRTS2)
@@ -981,7 +983,7 @@ void TelescopeControl::loadTelescopes()
 			}
 			else
 			{
-				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
+				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 				{
 					qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 					//Unnecessary due to if-else construction;
@@ -1005,7 +1007,7 @@ void TelescopeControl::loadTelescopes()
 	telescopeDescriptions = result;
 }
 
-bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId)
+bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId, bool ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
@@ -1027,6 +1029,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	if (connectionType == ConnectionASCOM)
 	{
 		telescope.insert("ascom_device_id", ascomDeviceId);
+		telescope.insert("ascom_use_device_eq_coord_type", ascomUseDeviceEqCoordType);
 	}
 
 	if (connectionType == ConnectionRemote || connectionType == ConnectionLocal)
@@ -1092,7 +1095,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	return true;
 }
 
-bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId)
+bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId, bool& ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slot))
@@ -1142,6 +1145,7 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 	if(connectionType == ConnectionASCOM)
 	{
 		ascomDeviceId = telescope.value("ascom_device_id").toString();
+		ascomUseDeviceEqCoordType = telescope.value("ascom_use_device_eq_coord_type").toBool();
 	}
 
 	return true;
@@ -1179,7 +1183,9 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	QString rts2Password;
 	int rts2Refresh;
 	QString ascomDeviceId;
-	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
+	bool ascomUseDeviceEqCoordType;
+
+	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
 		//TODO: Add debug
 		return false;
@@ -1215,7 +1221,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	}
 	else
 	{
-		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
+		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 		{
 			emit clientConnected(slot, name);
 			return true;
@@ -1349,7 +1355,7 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 	return true;
 }
 
-bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId)
+bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId, bool ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slotNumber))
@@ -1390,7 +1396,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 		break;
 
 	case ConnectionASCOM:
-		initString = QString("%1:%2:%3:%4").arg(name, "ASCOM", "J2000", ascomDeviceId);
+		initString = QString("%1:%2:%3:%4:%5").arg(name, "ASCOM", equinox, ascomDeviceId, ascomUseDeviceEqCoordType ? "true" : "false");
 		break;
 
 	case ConnectionRemote:

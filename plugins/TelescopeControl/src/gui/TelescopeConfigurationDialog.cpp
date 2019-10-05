@@ -126,6 +126,10 @@ void TelescopeConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	#ifndef Q_OS_WIN
+	ui->radioButtonTelescopeASCOM->hide();
+	#endif // not Q_OS_WIN
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -250,7 +254,9 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QString rts2Password;
 	int rts2Refresh;
 	QString ascomDeviceId;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
+	bool ascomUseDeviceEqCoordType;
+
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
 		//TODO: Add debug
 		return;
@@ -310,6 +316,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	{
 		ui->radioButtonTelescopeASCOM->setChecked(true);
 		ui->ASCOMProperties->setSelectedDevice(ascomDeviceId);
+		ui->ASCOMProperties->setUseDeviceEqCoordType(ascomUseDeviceEqCoordType);
 	}
 
 	//Equinox
@@ -491,7 +498,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeASCOM->isChecked())
 	{
 		type = ConnectionASCOM;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), QString(), QString(), QString(), -1, ui->ASCOMProperties->selectedDevice());
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), QString(), QString(), QString(), -1, ui->ASCOMProperties->selectedDevice(), ui->ASCOMProperties->useDeviceEqCoordType());
 	}
 	
 	emit changesSaved(name, type);

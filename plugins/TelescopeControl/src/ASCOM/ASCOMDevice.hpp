@@ -41,7 +41,7 @@ public:
 
 	static QString showDeviceChooser();
 
-	ASCOMDevice(QObject* parent = Q_NULLPTR, QString ascomDeviceId = NULL);
+	ASCOMDevice(QObject* parent = Q_NULLPTR, QString ascomDeviceId = Q_NULLPTR);
 
 	bool isDeviceConnected() const;
 	bool isParked() const;
@@ -63,6 +63,17 @@ private:
 	IDispatch* pTelescopeDispatch;
 	ASCOMCoordinates mCoordinates;
 	QString mAscomDeviceId;
+	static const wchar_t* LSlewToCoordinatesAsync;
+	static const wchar_t* LSyncToCoordinates;
+	static const wchar_t* LAbortSlew;
+	static const wchar_t* LConnected;
+	static const wchar_t* LAtPark;
+	static const wchar_t* LEquatorialSystem;
+	static const wchar_t* LDoesRefraction;
+	static const wchar_t* LRightAscension;
+	static const wchar_t* LDeclination;
+	static const wchar_t* Lempty;
+	static const wchar_t* LChoose;
 };
 
 #endif // ASCOMDEVICE_HPP
