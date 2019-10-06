@@ -14,6 +14,8 @@ add_library(TelescopeControl_common STATIC
     SerialPort.cpp
     InterpolatedPosition.hpp
     InterpolatedPosition.cpp
+	ASCOMSupport.hpp
+	ASCOMSupport.cpp
 	OLE.hpp
 	OLE.cpp
     )

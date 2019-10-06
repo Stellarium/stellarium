@@ -29,6 +29,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
+#include "../common/ASCOMSupport.hpp"
 
 #include <QDebug>
 #include <QCompleter>
@@ -126,9 +127,10 @@ void TelescopeConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	#ifndef Q_OS_WIN
-	ui->radioButtonTelescopeASCOM->hide();
-	#endif // not Q_OS_WIN
+	if (!ASCOMSupport::isASCOMSupported())
+	{
+		ui->radioButtonTelescopeASCOM->hide();
+	}
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));

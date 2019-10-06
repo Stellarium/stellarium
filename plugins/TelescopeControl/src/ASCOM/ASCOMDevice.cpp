@@ -27,15 +27,18 @@ ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(paren
 
 	mAscomDeviceId = ascomDeviceId;
 	initResult = OleInit(COINIT_APARTMENTTHREADED);
-	hResult = OleCreateInstance(reinterpret_cast<const wchar_t*>(mAscomDeviceId.utf16()), &pTelescopeDispatch);
+	hResult = OleCreateInstance(reinterpret_cast<const wchar_t*>(mAscomDeviceId.toStdWString().c_str()), &pTelescopeDispatch);
 
 	if (FAILED(hResult)) {
 		qDebug() << "Initialization failed for device: " << mAscomDeviceId;
+		mFailedToInitialize = true;
 	};
 }
 
 bool ASCOMDevice::connect()
 {
+	if (mFailedToInitialize) return false;
+
 	VARIANT v1;
 	HRESULT hResult;
 	
@@ -54,6 +57,8 @@ bool ASCOMDevice::connect()
 
 bool ASCOMDevice::disconnect()
 {
+	if (mFailedToInitialize) return false;
+
 	VARIANT v1;
 	HRESULT hResult;
 
@@ -78,6 +83,8 @@ ASCOMDevice::ASCOMCoordinates ASCOMDevice::position() const
 
 void ASCOMDevice::slewToCoordinates(ASCOMDevice::ASCOMCoordinates coords) 
 {
+	if (mFailedToInitialize) return;
+
 	VARIANT v1, v2;
 	HRESULT hResult;
 
@@ -89,6 +96,8 @@ void ASCOMDevice::slewToCoordinates(ASCOMDevice::ASCOMCoordinates coords)
 
 void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
 {
+	if (mFailedToInitialize) return;
+
 	VARIANT v1, v2;
 	HRESULT hResult;
 
@@ -104,6 +113,8 @@ void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
 
 void ASCOMDevice::abortSlew()
 {
+	if (mFailedToInitialize) return;
+
 	HRESULT hResult;
 	hResult = OleMethodCall(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LAbortSlew));
 	if (FAILED(hResult))
@@ -114,6 +125,8 @@ void ASCOMDevice::abortSlew()
 
 bool ASCOMDevice::isDeviceConnected() const
 {
+	if (mFailedToInitialize) return false;
+
 	VARIANT v1;
 	HRESULT hResult;
 
@@ -130,6 +143,8 @@ bool ASCOMDevice::isDeviceConnected() const
 
 bool ASCOMDevice::isParked() const
 {
+	if (mFailedToInitialize) return true;
+
 	VARIANT v1;
 	HRESULT hResult;
 
@@ -147,6 +162,8 @@ bool ASCOMDevice::isParked() const
 
 ASCOMDevice::ASCOMEquatorialCoordinateType ASCOMDevice::getEquatorialCoordinateType()
 {
+	if (mFailedToInitialize) return ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
+
 	VARIANT v1;
 	HRESULT hResult;
 
@@ -163,6 +180,8 @@ ASCOMDevice::ASCOMEquatorialCoordinateType ASCOMDevice::getEquatorialCoordinateT
 
 bool ASCOMDevice::doesRefraction()
 {
+	if (mFailedToInitialize) return false;
+
 	VARIANT v1;
 	HRESULT hResult;
 
@@ -180,6 +199,10 @@ bool ASCOMDevice::doesRefraction()
 
 ASCOMDevice::ASCOMCoordinates ASCOMDevice::getCoordinates()
 {
+	ASCOMDevice::ASCOMCoordinates coords;
+
+	if (mFailedToInitialize) return coords;
+
 	VARIANT v1, v2;
 	HRESULT hResult;
 
@@ -189,14 +212,13 @@ ASCOMDevice::ASCOMCoordinates ASCOMDevice::getCoordinates()
 	hResult = OlePropertyGet(pTelescopeDispatch, &v2, const_cast<wchar_t*>(LDeclination));
 	if (FAILED(hResult)) qDebug() << "Could not get Declination for device: " << mAscomDeviceId;
 
-	ASCOMDevice::ASCOMCoordinates coords;
 	coords.RA = v1.dblVal;
 	coords.DEC = v2.dblVal;
 
 	return coords;
 }
 
-QString ASCOMDevice::showDeviceChooser()
+QString ASCOMDevice::showDeviceChooser(QString previousDeviceId)
 {
 	VARIANT v1, v2;
 	HRESULT hResult;
@@ -204,16 +226,21 @@ QString ASCOMDevice::showDeviceChooser()
 	BOOL initResult;
 
 	initResult = OleInit(COINIT_APARTMENTTHREADED);
-	// TODO: Better error management?
-	if (!initResult) return "";
+
+	if (!initResult) return previousDeviceId;
 	hResult = OleCreateInstance(L"ASCOM.Utilities.Chooser", &chooserDispatch);
 
-	// TODO: Better error management?
-	if (FAILED(hResult)) return "";
-
-	v1 = OleStringToVariant(const_cast<wchar_t*>(Lempty));
+	if (FAILED(hResult)) return previousDeviceId;
+	
+	v1 = OleStringToVariant(const_cast<wchar_t*>(previousDeviceId.toStdWString().c_str()));
 
 	hResult = OleMethodCall(chooserDispatch, &v2, const_cast<wchar_t*>(LChoose), 1, v1);
+
+	if (FAILED(hResult)) return previousDeviceId;
+
+	QString selectedDevice = QString::fromStdWString(v2.bstrVal);
+
+	if (selectedDevice == "") return previousDeviceId;
 
 	return QString::fromStdWString(v2.bstrVal);
 }
@@ -227,5 +254,4 @@ const wchar_t* ASCOMDevice::LEquatorialSystem = L"EquatorialSystem";
 const wchar_t* ASCOMDevice::LDoesRefraction = L"DoesRefraction";
 const wchar_t* ASCOMDevice::LRightAscension = L"RightAscension";
 const wchar_t* ASCOMDevice::LDeclination = L"Declination";
-const wchar_t* ASCOMDevice::Lempty = L"";
 const wchar_t* ASCOMDevice::LChoose = L"Choose";

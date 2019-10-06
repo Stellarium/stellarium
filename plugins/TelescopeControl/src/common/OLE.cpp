@@ -22,29 +22,6 @@
 #include <Windows.h>
 #include <QDebug>
 
-
-static HRESULT OleFindIID(IDispatch* pIDispatch, LPOLESTR* pName, IID* pIID, ITypeInfo** ppTypeInfo)
-{
-	Q_UNUSED(pIDispatch)
-	Q_UNUSED(pName)
-	Q_UNUSED(pIID)
-	Q_UNUSED(ppTypeInfo)
-	ITypeInfo* pTypeInfo;
-	ITypeLib* pTypeLib;
-
-
-
-	return E_FAIL;
-}
-
-HRESULT OleRegisterEventHandler(IDispatch* pIDispatch, LPOLESTR* pOleEvent, EASY_OLE_EVH* Handler)
-{
-	Q_UNUSED(pIDispatch)
-    Q_UNUSED(pOleEvent)
-	Q_UNUSED(Handler)
-	return E_FAIL;
-}
-
 // Thanks: http://www.codeproject.com/Articles/34998/MS-Office-OLE-Automation-Using-C
 static HRESULT OleInternalDispatch(
   INT nType, VARIANT* pvResult, IDispatch* pIDispatch, LPOLESTR pOleName, INT cArgs...)
@@ -76,8 +53,6 @@ static HRESULT OleInternalDispatch(
 	{
 		pArgs[i] = va_arg(vMarker, VARIANT);
 	}
-
-	qDebug() << "Arg Count: " << cArgs << " Arg0.lVal: " << pArgs[0].lVal;
 
 	dp.cArgs = cArgs;
 	dp.rgvarg = pArgs;
@@ -176,12 +151,6 @@ VARIANT OleBoolToVariant(BOOL b)
 	return v;
 }
 
-VOID OleReleaseObject(IDispatch* pIDispatch, LPVOID lpObject)
-{
-	Q_UNUSED(pIDispatch)
-	Q_UNUSED(lpObject)
-}
-
 VOID OleReleaseInstance(IDispatch* pIDispatch)
 {
 	pIDispatch->Release();
@@ -204,29 +173,6 @@ HRESULT OleCreateInstance(LPCOLESTR lpszProgID, IDispatch** ppIDispatch)
 	*ppIDispatch = static_cast<IDispatch*>(p);
 
 	return hResult;
-}
-
-BOOL OleMessageLoopOnce()
-{
-	MSG msg;
-
-	if (PeekMessage(&msg, Q_NULLPTR, 0, 0, PM_REMOVE))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-VOID OleMessageLoop()
-{
-	MSG msg;
-
-	while (OleMessageLoopOnce())
-		;
 }
 
 BOOL OleInit(DWORD dwInitType)

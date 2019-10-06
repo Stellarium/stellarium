@@ -49,8 +49,5 @@ VARIANT OleIntToVariant(INT i);
 VARIANT OleDoubleToVariant(double d);
 VARIANT OleBoolToVariant(BOOL b);
 
-VOID OleMessageLoop();
-BOOL OleMessageLoopOnce();
-
 #endif // OLE_HPP
 #endif // Q_OS_WIN

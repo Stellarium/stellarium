@@ -39,7 +39,7 @@ public:
 		Other, Topocentric, J2000, J2050, B1950
 	};
 
-	static QString showDeviceChooser();
+	static QString showDeviceChooser(QString previousDeviceId = "");
 
 	ASCOMDevice(QObject* parent = Q_NULLPTR, QString ascomDeviceId = Q_NULLPTR);
 
@@ -63,6 +63,7 @@ private:
 	IDispatch* pTelescopeDispatch;
 	ASCOMCoordinates mCoordinates;
 	QString mAscomDeviceId;
+	bool mFailedToInitialize = false;
 	static const wchar_t* LSlewToCoordinatesAsync;
 	static const wchar_t* LSyncToCoordinates;
 	static const wchar_t* LAbortSlew;
@@ -72,7 +73,6 @@ private:
 	static const wchar_t* LDoesRefraction;
 	static const wchar_t* LRightAscension;
 	static const wchar_t* LDeclination;
-	static const wchar_t* Lempty;
 	static const wchar_t* LChoose;
 };
 

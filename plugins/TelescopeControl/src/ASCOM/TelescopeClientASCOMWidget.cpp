@@ -35,7 +35,8 @@ TelescopeClientASCOMWidget::~TelescopeClientASCOMWidget()
 
 void TelescopeClientASCOMWidget::onChooseButtonClicked()
 {
-	ui->selectedDevice->setText(ASCOMDevice::showDeviceChooser());
+	mSelectedDevice = ASCOMDevice::showDeviceChooser(mSelectedDevice != Q_NULLPTR ? mSelectedDevice : "");
+	setSelectedDevice(mSelectedDevice);
 }
 
 QString TelescopeClientASCOMWidget::selectedDevice() const
@@ -45,6 +46,7 @@ QString TelescopeClientASCOMWidget::selectedDevice() const
 
 void TelescopeClientASCOMWidget::setSelectedDevice(const QString& device)
 {
+	mSelectedDevice = device;
 	ui->selectedDevice->setText(device);
 }
 

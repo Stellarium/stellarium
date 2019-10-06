@@ -16,36 +16,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TELESCOPECLIENTASCOMWIDGET_HPP
-#define TELESCOPECLIENTASCOMWIDGET_HPP
+#ifndef ASCOMSUPPORT_HPP
+#define ASCOMSUPPORT_HPP
 
-#include <QWidget>
-#include "ASCOMDevice.hpp"
+#include "./OLE.hpp"
 
+#include <QObject>
+#include <QStringList>
+#include "../common/OLE.hpp"
 
-namespace Ui {
-class TelescopeClientASCOMWidget;
-}
-
-class TelescopeClientASCOMWidget : public QWidget
+class ASCOMSupport final : public QObject
 {
 	Q_OBJECT
 
 public:
-	explicit TelescopeClientASCOMWidget(QWidget *parent = Q_NULLPTR);
-	~TelescopeClientASCOMWidget();
-	QString selectedDevice() const;
-	void setSelectedDevice(const QString& device);
-	bool useDeviceEqCoordType() const;
-	void setUseDeviceEqCoordType(const bool& useDevice);
+	static bool isASCOMSupported();
 
-private slots:
-	void onChooseButtonClicked();
+	ASCOMSupport(QObject* parent = Q_NULLPTR);
 
-private:
-	Ui::TelescopeClientASCOMWidget *ui;
-	ASCOMDevice *ascom;
-	QString mSelectedDevice = Q_NULLPTR;
+	private:	
+		static const wchar_t* LPlatformVersion;
 };
 
-#endif // TELESCOPECLIENTASCOMUI_HPP
+#endif // ASCOMSUPPORT_HPP
