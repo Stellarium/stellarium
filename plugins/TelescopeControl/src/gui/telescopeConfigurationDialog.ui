@@ -492,7 +492,6 @@
               <number>0</number>
             </property>
           </layout>
-          <!--widget class="TelescopeClientASCOMWidget" name="ASCOMProperties" native="true"/-->
         </item>
        <item>
         <widget class="QGroupBox" name="groupBoxDeviceSettings">
@@ -968,12 +967,6 @@
    <class>TelescopeClientINDIWidget</class>
    <extends>QWidget</extends>
    <header>TelescopeClientINDIWidget.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TelescopeClientASCOMWidget</class>
-   <extends>QWidget</extends>
-   <header>TelescopeClientASCOMWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
