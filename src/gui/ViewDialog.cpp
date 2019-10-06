@@ -204,6 +204,7 @@ void ViewDialog::createDialogContent()
 	ui->planetIsolatedOrbitCheckBox->setEnabled(ssmgr->getFlagOrbits());
 	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetIsolatedOrbitCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
+	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
 	ui->planetOrbitOnlyCheckBox->setEnabled(ssmgr->getFlagPlanetsOrbitsOnly());
 	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetOrbitOnlyCheckBox, SLOT(setEnabled(bool)));	
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
@@ -348,40 +349,42 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showSolsticeJ2000PointsCheckBox,			"actionShow_Solstice_J2000_Points");
 	connectCheckBox(ui->showSolsticePointsCheckBox,				"actionShow_Solstice_Points");
 	connectCheckBox(ui->showAntisolarPointCheckBox,				"actionShow_Antisolar_Point");
+	connectCheckBox(ui->showApexPointsCheckBox,				"actionShow_Apex_Points");
 
-	connectColorButton(ui->colorEclipticGridJ2000,			"GridLinesMgr.eclipticJ2000GridColor",		"color/ecliptical_J2000_color");
-	connectColorButton(ui->colorEclipticGridOfDate,		"GridLinesMgr.eclipticGridColor",			"color/ecliptical_color");
-	connectColorButton(ui->colorEquatorialJ2000Grid,		"GridLinesMgr.equatorJ2000GridColor",		"color/equatorial_J2000_color");
-	connectColorButton(ui->colorEquatorialGrid,			"GridLinesMgr.equatorGridColor",			"color/equatorial_color");
-	connectColorButton(ui->colorGalacticGrid,			"GridLinesMgr.galacticGridColor",			"color/galactic_color");
+	connectColorButton(ui->colorEclipticGridJ2000,		"GridLinesMgr.eclipticJ2000GridColor",		"color/ecliptical_J2000_color");
+	connectColorButton(ui->colorEclipticGridOfDate,		"GridLinesMgr.eclipticGridColor",		"color/ecliptical_color");
+	connectColorButton(ui->colorEquatorialJ2000Grid,	"GridLinesMgr.equatorJ2000GridColor",		"color/equatorial_J2000_color");
+	connectColorButton(ui->colorEquatorialGrid,		"GridLinesMgr.equatorGridColor",		"color/equatorial_color");
+	connectColorButton(ui->colorGalacticGrid,		"GridLinesMgr.galacticGridColor",		"color/galactic_color");
 	connectColorButton(ui->colorSupergalacticGrid,		"GridLinesMgr.supergalacticGridColor",		"color/supergalactic_color");
-	connectColorButton(ui->colorAzimuthalGrid,			"GridLinesMgr.azimuthalGridColor",			"color/azimuthal_color");
-	connectColorButton(ui->colorEclipticLineJ2000,			"GridLinesMgr.eclipticJ2000LineColor",		"color/ecliptic_J2000_color");
-	connectColorButton(ui->colorEclipticLineOfDate,		"GridLinesMgr.eclipticLineColor",			"color/ecliptic_color");
+	connectColorButton(ui->colorAzimuthalGrid,		"GridLinesMgr.azimuthalGridColor",		"color/azimuthal_color");
+	connectColorButton(ui->colorEclipticLineJ2000,		"GridLinesMgr.eclipticJ2000LineColor",		"color/ecliptic_J2000_color");
+	connectColorButton(ui->colorEclipticLineOfDate,		"GridLinesMgr.eclipticLineColor",		"color/ecliptic_color");
 	connectColorButton(ui->colorEquatorJ2000Line,		"GridLinesMgr.equatorJ2000LineColor",		"color/equator_J2000_color");
-	connectColorButton(ui->colorEquatorLine,				"GridLinesMgr.equatorLineColor",			"color/equator_color");
-	connectColorButton(ui->colorGalacticEquatorLine,		"GridLinesMgr.galacticEquatorLineColor",		"color/galactic_equator_color");
+	connectColorButton(ui->colorEquatorLine,		"GridLinesMgr.equatorLineColor",		"color/equator_color");
+	connectColorButton(ui->colorGalacticEquatorLine,	"GridLinesMgr.galacticEquatorLineColor",	"color/galactic_equator_color");
 	connectColorButton(ui->colorSupergalacticEquatorLine,	"GridLinesMgr.supergalacticEquatorLineColor",	"color/supergalactic_equator_color");
-	connectColorButton(ui->colorHorizonLine,				"GridLinesMgr.horizonLineColor",			"color/horizon_color");
-	connectColorButton(ui->colorLongitudeLine,			"GridLinesMgr.longitudeLineColor",			"color/oc_longitude_color");
-	connectColorButton(ui->colorColuresLine,				"GridLinesMgr.colureLinesColor",			"color/colures_color");
+	connectColorButton(ui->colorHorizonLine,		"GridLinesMgr.horizonLineColor",		"color/horizon_color");
+	connectColorButton(ui->colorLongitudeLine,		"GridLinesMgr.longitudeLineColor",		"color/oc_longitude_color");
+	connectColorButton(ui->colorColuresLine,		"GridLinesMgr.colureLinesColor",		"color/colures_color");
 	connectColorButton(ui->colorCircumpolarCircles,		"GridLinesMgr.circumpolarCirclesColor",		"color/circumpolar_circles_color");
-	connectColorButton(ui->colorPrecessionCircles,			"GridLinesMgr.precessionCirclesColor",		"color/precession_circles_color");
-	connectColorButton(ui->colorPrimeVerticalLine,			"GridLinesMgr.primeVerticalLineColor",		"color/prime_vertical_color");
-	connectColorButton(ui->colorMeridianLine,			"GridLinesMgr.meridianLineColor",			"color/meridian_color");
-	connectColorButton(ui->colorCelestialJ2000Poles,		"GridLinesMgr.celestialJ2000PolesColor",		"color/celestial_J2000_poles_color");
-	connectColorButton(ui->colorCelestialPoles,			"GridLinesMgr.celestialPolesColor",			"color/celestial_poles_color");
-	connectColorButton(ui->colorZenithNadir,				"GridLinesMgr.zenithNadirColor",			"color/zenith_nadir_color");
+	connectColorButton(ui->colorPrecessionCircles,		"GridLinesMgr.precessionCirclesColor",		"color/precession_circles_color");
+	connectColorButton(ui->colorPrimeVerticalLine,		"GridLinesMgr.primeVerticalLineColor",		"color/prime_vertical_color");
+	connectColorButton(ui->colorMeridianLine,		"GridLinesMgr.meridianLineColor",		"color/meridian_color");
+	connectColorButton(ui->colorCelestialJ2000Poles,	"GridLinesMgr.celestialJ2000PolesColor",	"color/celestial_J2000_poles_color");
+	connectColorButton(ui->colorCelestialPoles,		"GridLinesMgr.celestialPolesColor",		"color/celestial_poles_color");
+	connectColorButton(ui->colorZenithNadir,		"GridLinesMgr.zenithNadirColor",		"color/zenith_nadir_color");
 	connectColorButton(ui->colorEclipticJ2000Poles,		"GridLinesMgr.eclipticJ2000PolesColor",		"color/ecliptic_J2000_poles_color");
-	connectColorButton(ui->colorEclipticPoles,			"GridLinesMgr.eclipticPolesColor",			"color/ecliptic_poles_color");
-	connectColorButton(ui->colorGalacticPoles,			"GridLinesMgr.galacticPolesColor",			"color/galactic_poles_color");
+	connectColorButton(ui->colorEclipticPoles,		"GridLinesMgr.eclipticPolesColor",		"color/ecliptic_poles_color");
+	connectColorButton(ui->colorGalacticPoles,		"GridLinesMgr.galacticPolesColor",		"color/galactic_poles_color");
 	connectColorButton(ui->colorSupergalacticPoles,		"GridLinesMgr.supergalacticPolesColor",		"color/supergalactic_poles_color");
 	connectColorButton(ui->colorEquinoxJ2000Points,		"GridLinesMgr.equinoxJ2000PointsColor",		"color/equinox_J2000_points_color");
-	connectColorButton(ui->colorEquinoxPoints,			"GridLinesMgr.equinoxPointsColor",			"color/equinox_points_color");
-	connectColorButton(ui->colorSolsticeJ2000Points,		"GridLinesMgr.solsticeJ2000PointsColor",		"color/solstice_J2000_points_color");
-	connectColorButton(ui->colorSolsticePoints,			"GridLinesMgr.solsticePointsColor",			"color/solstice_points_color");
-	connectColorButton(ui->colorAntisolarPoint,			"GridLinesMgr.antisolarPointColor",			"color/antisolar_point_color");
-	connectColorButton(ui->colorCardinalPoints,			"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
+	connectColorButton(ui->colorEquinoxPoints,		"GridLinesMgr.equinoxPointsColor",		"color/equinox_points_color");
+	connectColorButton(ui->colorSolsticeJ2000Points,	"GridLinesMgr.solsticeJ2000PointsColor",	"color/solstice_J2000_points_color");
+	connectColorButton(ui->colorSolsticePoints,		"GridLinesMgr.solsticePointsColor",		"color/solstice_points_color");
+	connectColorButton(ui->colorAntisolarPoint,		"GridLinesMgr.antisolarPointColor",		"color/antisolar_point_color");
+	connectColorButton(ui->colorApexPoints,			"GridLinesMgr.apexPointsColor",			"color/apex_points_color");
+	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
 
 	// Projection
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
@@ -585,7 +588,7 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		int textWidth = fontMetrics.boundingRect(ui->stackListWidget->item(row)->text()).width();
 		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
 		width += 24; // margin - 12px left and 12px right
 	}
@@ -759,12 +762,12 @@ void ViewDialog::populateLightPollution()
 	ui->lightPollutionSpinBox->setValue(bIdx);
 	setBortleScaleToolTip(bIdx);
 }
-// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
-void ViewDialog::setLightPollutionSpinBoxStatus()
-{
-	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	ui->lightPollutionSpinBox->setEnabled(!lmgr->property("flagUseLightPollutionFromDatabase").toBool());
-}
+//// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
+//void ViewDialog::setLightPollutionSpinBoxStatus()
+//{
+//	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
+//	ui->lightPollutionSpinBox->setEnabled(!lmgr->property("flagUseLightPollutionFromDatabase").toBool());
+//}
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
@@ -885,6 +888,11 @@ void ViewDialog::populateLists()
 		}
 	}
 	l->blockSignals(false);	
+	QStringList searchPaths;
+	searchPaths << StelFileMgr::findFile("landscapes/" + lmgr->property("currentLandscapeID").toString());
+
+	ui->landscapeTextBrowser->setSearchPaths(searchPaths);
+
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());
 	updateDefaultLandscape();
@@ -1098,7 +1106,7 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 
 void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 {
-	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = (Planet::ApparentMagnitudeAlgorithm) ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt();
+	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
 	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
 	populatePlanetMagnitudeAlgorithmDescription();
 }

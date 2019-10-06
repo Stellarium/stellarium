@@ -91,7 +91,7 @@ bool Lx200CommandSetSelectedRa::writeCommandToBuffer(char *&p, char *end)
 	p[-5] = '0' + (x %  6); x /=  6;
 	p[-6] = ':';
 	p[-7] = '0' + (x % 10); x /= 10;
-	p[-8] = '0' + x;
+	p[-8] = '0' + static_cast<char>(x);
 	*p++ = '#';
 	has_been_written_to_buffer = true;
 	return true;
@@ -176,7 +176,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	p[-5] = '0' + (x %  6); x /=  6;	
 	p[-6] = '\xDF'; // = 223, degree symbol
 	p[-7] = '0' + (x % 10); x /= 10;
-	p[-8] = '0' + x;
+	p[-8] = '0' + static_cast<char>(x);
 	*p++ = '#';
 	has_been_written_to_buffer = true;
 	return true;
@@ -287,7 +287,7 @@ int Lx200CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 				*log_file << Now()
 				          << "Lx200CommandGotoSelected::readAnswerFromBuffer: "
 				             "slew failed ("
-				          << ((char)first_byte)
+					  << (static_cast<char>(first_byte))
 				          << "), "
 				             "but no complete answer yet"
 				          << endl;
@@ -309,9 +309,9 @@ int Lx200CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 			*log_file << Now()
 			<< "Lx200CommandGotoSelected::readAnswerFromBuffer: "
 			   "slew failed ("
-			<< ((char)first_byte)
+			<< (static_cast<char>(first_byte))
 			<< "): '"
-			<< QByteArray(buff + 1, p - buff - 1)
+			<< QByteArray(buff + 1, static_cast<int>(p - buff - 1))
 			<< '\''
 			<< endl;
 			#endif
@@ -431,7 +431,7 @@ int Lx200CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	
 	buff = p;
 	server.longFormatUsedReceived(long_format);
-	server.raReceived((unsigned int)floor(ra * (4294967296.0/86400.0)));
+	server.raReceived(static_cast<unsigned int>(floor(ra * (4294967296.0/86400.0))));
 	return 1;
 }
 
@@ -492,7 +492,7 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	
 	dec = ((*p++) - '0');
 	dec *= 10; dec += ((*p++) - '0');
-	if (*p++ != ((char)223))
+	if (*p++ != (static_cast<char>(223)))
 	{
 		*log_file << Now()
 		          << "Lx200CommandGetDec::readAnswerFromBuffer: "
@@ -549,7 +549,7 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 		dec = -dec;
 	buff = p;
 	server.longFormatUsedReceived(long_format);
-	server.decReceived(static_cast<int>(floor(dec* (4294967296.0/(360*3600.0)))));
+	server.decReceived(static_cast<unsigned int>(floor(dec* (4294967296.0/(360*3600.0)))));
 	return 1;
 }
 

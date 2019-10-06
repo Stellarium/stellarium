@@ -171,13 +171,13 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		bool doneSomething = false;
 		bool ok = false;
 		float latitude = sLatitude.toFloat(&ok);
-		if(ok && latitude != loc.latitude)
+		if(ok && (latitude - loc.latitude) != 0.0f)
 		{
 			loc.latitude = latitude;
 			doneSomething = true;
 		}
 		float longitude = sLongitude.toFloat(&ok);
-		if(ok && longitude != loc.longitude)
+		if(ok && (longitude - loc.longitude) != 0.0f)
 		{
 			loc.longitude = longitude;
 			doneSomething = true;

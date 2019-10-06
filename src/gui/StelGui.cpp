@@ -244,7 +244,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "", true);
 	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks"), bookmarksDialog, "visible", "Alt+B", "", true);
-	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
+	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+Shift+C", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);

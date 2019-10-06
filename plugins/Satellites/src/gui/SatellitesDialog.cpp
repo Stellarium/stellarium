@@ -159,6 +159,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->fontSizeSpinBox,       SIGNAL(valueChanged(int)), plugin, SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),         this,   SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton,    SIGNAL(clicked()),         this,   SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	// Settings tab / realistic mode group
 	connect(ui->realisticGroup,          SIGNAL(clicked(bool)), this,   SLOT(setFlagRealisticMode(bool)));

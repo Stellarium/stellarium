@@ -122,7 +122,10 @@ public:
 		SDateMMDDYYYY,		//!< e.g. "07-05-1998" for July 5th 1998
 		SDateDDMMYYYY,		//!< e.g. "05-07-1998" for July 5th 1998
 		SDateSystemDefault,	//!< Use the system default date format
-		SDateYYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
+		SDateYYYYMMDD,		//!< e.g. "1998-07-05" for July 5th 1998
+		SDateWWMMDDYYYY,	//!< e.g. "Sun, 07-05-1998" for Sunday, July 5th 1998
+		SDateWWDDMMYYYY,	//!< e.g. "Sun, 05-07-1998" for Sunday, July 5th 1998
+		SDateWWYYYYMMDD		//!< e.g. "Sun, 1998-07-05" for Sunday, July 5th 1998
 	};
 	
 	//! Get a localized, formatted string representation of the date component of a Julian date.

@@ -55,7 +55,7 @@ The most important hardware requirement is a contemporary graphics subsystem.
 \label{sec:GettingStarted:Downloading}
 
 Download the correct package for your operating system directly from the main page, \newline \url{http://stellarium.org}.
-An archive of all available versions is available at \url{https://sourceforge.net/projects/stellarium/files/}.
+An archive of all available versions is available at \url{https://github.com/Stellarium/stellarium/releases}.
 
 \section{Installation}\index{Installation}
 \label{sec:GettingStarted:Installation}
@@ -105,6 +105,8 @@ sudo add-apt-repository ppa:stellarium/stellarium-releases
 sudo apt-get update
 sudo apt-get install stellarium
 \end{commands}
+
+Or download and run our AppImage package for 64-bit linuxes (we do not provide an AppImage for old 32-bit systems): \file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible conflicts due architectural features of AppImage please remove stellarium package, where you installed from repository.
 
 \subsubsection{Raspberry Pi 2/3}
 These tiny ARM-based computers are very popular for small and energy-efficient applications like controlling push-to Dobsonians. 

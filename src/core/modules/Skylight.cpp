@@ -71,7 +71,7 @@ void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 	sunPos[2] = _sunPos[2];
 
 	// Set the two main variables
-	thetas = static_cast<float>(M_PI_2) - asinf(sunPos[2]);
+	thetas = M_PI_2f - asinf(sunPos[2]);
 	T = _turbidity;
 
 	// Precomputation of the distribution coefficients and zenith luminances/color

@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelUtils.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
@@ -131,14 +132,14 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
-		float shift = markerSize + size/1.6f;
+		const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
+		const float shift = markerSize + size/1.6f;
 
-		painter->drawSprite2dMode(pos[0], pos[1], markerSize);
+		painter->drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), markerSize);
 
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter->drawText(pos[0], pos[1], getNameI18n(), 0, shift, shift, false);
+			painter->drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), getNameI18n(), 0, shift, shift, false);
 		}
 	}
 }

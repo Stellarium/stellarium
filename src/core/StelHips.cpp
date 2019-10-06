@@ -40,8 +40,8 @@ class HipsTile
 public:
 	int order;
 	int pix;
-	StelTextureSP texture = StelTextureSP(NULL);
-	StelTextureSP allsky = StelTextureSP(NULL); // allsky low res version of the texture.
+	StelTextureSP texture = StelTextureSP(Q_NULLPTR);
+	StelTextureSP allsky = StelTextureSP(Q_NULLPTR); // allsky low res version of the texture.
 
 	// Used for smooth fade in
 	QTimeLine texFader;
@@ -111,7 +111,7 @@ HipsSurvey::~HipsSurvey()
 
 bool HipsSurvey::isVisible() const
 {
-	return (bool)fader;
+	return static_cast<bool>(fader);
 }
 
 bool HipsSurvey::isPlanetarySurvey() const
@@ -172,7 +172,7 @@ bool HipsSurvey::getAllsky()
 
 		updateProgressBar(0, 100);
 		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
-			updateProgressBar(received, total);
+			updateProgressBar(static_cast<int>(received), static_cast<int>(total));
 		});
 	}
 	if (networkReply->isFinished())
@@ -185,7 +185,7 @@ bool HipsSurvey::getAllsky()
 			noAllsky = true;
 		}
 		networkReply->deleteLater();
-		networkReply = NULL;
+		networkReply = Q_NULLPTR;
 		emit statusChanged();
 	};
 	return !allsky.isNull();
@@ -193,7 +193,7 @@ bool HipsSurvey::getAllsky()
 
 bool HipsSurvey::isLoading(void) const
 {
-	return (bool)networkReply;
+	return (networkReply != Q_NULLPTR);
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
@@ -203,7 +203,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	bool outside = (angle == 2.0 * M_PI);
 	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
-	if (fader.getInterstate() == 0.0) return;
+	if (fader.getInterstate() == 0.0f) return;
 	sPainter->setColor(1, 1, 1, fader.getInterstate());
 
 	// Set the projection.
@@ -219,12 +219,12 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
-	double px = sPainter->getProjector()->getPixelPerRadAtCenter() * angle;
+	double px = static_cast<double>(sPainter->getProjector()->getPixelPerRadAtCenter()) * angle;
 	int tileWidth = getPropertyInt("hips_tile_width");
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	int drawOrder = ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth)));
+	int drawOrder = qRound(ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth))));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
 
@@ -320,7 +320,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 {
 	Vec3d pos;
 	Mat3d mat3;
-	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(0, 1), Vec2f(1, 0), Vec2f(1, 1)};
+	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
@@ -344,7 +344,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	else
 	{
 		double clip_pos[4][4];
-		healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+		healpix_get_mat3(1 << order, pix, reinterpret_cast<double(*)[3]>(mat3.r));
 		auto proj = sPainter->getProjector();
 		for (int i = 0; i < 4; i++)
 		{
@@ -398,7 +398,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 
 	// Actually draw the tile, as a single quad.
-	alpha = color[3] * tile->texFader.currentValue();
+	alpha = color[3] * static_cast<float>(tile->texFader.currentValue());
 	if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
@@ -441,31 +441,31 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;
-	int gridSize = 1 << (splitOrder - drawOrder);
-	int n = gridSize + 1;
-	const int INDICES[2][6][2] = {
+	uint16_t gridSize = static_cast<uint16_t>(1 << (splitOrder - drawOrder));
+	uint16_t n = gridSize + 1;
+	const uint16_t INDICES[2][6][2] = {
 		{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}},
 		{{0, 0}, {1, 0}, {1, 1}, {1, 1}, {0, 1}, {0, 0}},
 	};
 
-	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+	healpix_get_mat3(1 << order, pix, reinterpret_cast<double(*)[3]>(mat3.r));
 
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			texPos = Vec2f((double)i / gridSize, (double)j / gridSize);
-			pos = mat3 * Vec3d(1.0 - (double)j / gridSize, (double)i / gridSize, 1.0);
+			texPos = Vec2f(static_cast<float>(i) / gridSize, static_cast<float>(j) / gridSize);
+			pos = mat3 * Vec3d(1.0 - static_cast<double>(j) / gridSize, static_cast<double>(i) / gridSize, 1.0);
 			healpix_xy2vec(pos.v, pos.v);
 			verts << pos;
 			tex << texPos;
 		}
 	}
-	for (int i = 0; i < gridSize; i++)
+	for (uint16_t i = 0; i < gridSize; i++)
 	{
-		for (int j = 0; j < gridSize; j++)
+		for (uint16_t j = 0; j < gridSize; j++)
 		{
-			for (int k = 0; k < 6; k++)
+			for (uint16_t k = 0; k < 6; k++)
 			{
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
 					        INDICES[outside ? 1 : 0][k][0] + j;

@@ -1382,7 +1382,10 @@ void AstroCalcDialog::generateEphemeris()
 	const PlanetP& cplanet = core->getCurrentPlanet();	
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
-		solarDay = cplanet->getMeanSolarDay();
+		if (cplanet==solarSystem->getEarth())
+			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
+		else
+			solarDay = cplanet->getMeanSolarDay();
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}
@@ -1499,6 +1502,9 @@ void AstroCalcDialog::generateEphemeris()
 		case 37:
 			currentStep = 500. * solarDay;
 			break;
+		case 38:
+			currentStep = StelCore::JD_MINUTE;
+			break;
 		default:
 			currentStep = solarDay;
 			break;
@@ -1563,7 +1569,7 @@ void AstroCalcDialog::generateEphemeris()
 		for (int i = 0; i <= elements; i++)
 		{
 			double JD = firstJD + i * currentStep;
-			core->setJDE(JD);
+			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 			if (horizon)
 			{
@@ -1854,6 +1860,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	QVariant selectedStepId = steps->itemData(index);
 
 	steps->clear();
+	steps->addItem(q_("1 minute"), "38");
 	steps->addItem(q_("10 minutes"), "1");
 	steps->addItem(q_("30 minutes"), "2");
 	steps->addItem(q_("1 hour"), "3");

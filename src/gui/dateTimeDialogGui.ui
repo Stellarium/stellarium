@@ -103,7 +103,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -123,7 +123,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>          
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -143,7 +143,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </disabled>
          </palette>
         </property>
@@ -211,9 +211,6 @@
      <widget class="QWidget" name="dateTimeTab">
       <attribute name="title">
        <string>Date and Time</string>
-      </attribute>
-      <attribute name="toolTip">
-       <string>Date and Time in Gregorian calendar</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">

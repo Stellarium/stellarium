@@ -74,9 +74,9 @@ public:
 			modelViewTransform->forward(v);
 			out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorStereographic::forward(*out);
-			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
-				((*out)[2] - zNear) * oneOverZNearMinusZFar);
+			out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
+				static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+				((*out)[2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar));
 		}
 	}
 
@@ -125,9 +125,9 @@ public:
 			modelViewTransform->forward(v);
 			out[i].set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorHammer::forward(out[i]);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];
-			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
+			out[i][0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * out[i][0];
+			out[i][1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * out[i][1];
+			out[i][2] = (out[i][2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar);
 		}
 	}
 	bool forward(Vec3f &v) const;

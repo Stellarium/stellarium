@@ -27,6 +27,7 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_exoplanetsDialog.h"
 #include "ExoplanetsDialog.hpp"
 #include "Exoplanets.hpp"
@@ -127,6 +128,7 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();

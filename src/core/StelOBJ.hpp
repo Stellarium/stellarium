@@ -222,7 +222,7 @@ public:
 
 	//! Returns the number of faces. We only use triangle faces, so this is
 	//! always the index count divided by 3.
-	inline unsigned int getFaceCount() const { return m_indices.size() / 3; }
+	inline unsigned int getFaceCount() const { return static_cast<unsigned int>(m_indices.size()) / 3; }
 
 	//! Returns an vertex list, suitable for loading into OpenGL arrays
 	inline const VertexList& getVertexList() const { return m_vertices; }

@@ -84,13 +84,13 @@ void MeteorShowers::drawPointer(StelCore* core)
 
 	painter.setBlending(true);
 
-	float size = obj->getAngularSize(core) * M_PI / 180. * painter.getProjector()->getPixelPerRadAtCenter();
-	size += 20.f + 10.f * qSin(2.f * StelApp::getInstance().getTotalRunTime());
+	float size = static_cast<float>(obj->getAngularSize(core)) * M_PI_180f * static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
+	size += 20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()));
 
-	painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10.f, 90);
-	painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10.f, 0);
-	painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10.f, -90);
-	painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
+	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])-size/2, 10.f, 90);
+	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])+size/2, 10.f, 0);
+	painter.drawSprite2dMode(static_cast<float>(screenpos[0])+size/2, static_cast<float>(screenpos[1])+size/2, 10.f, -90);
+	painter.drawSprite2dMode(static_cast<float>(screenpos[0])+size/2, static_cast<float>(screenpos[1])-size/2, 10.f, -180);
 	painter.setColor(1, 1, 1, 0);
 }
 

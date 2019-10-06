@@ -560,7 +560,7 @@ void OcularsGuiPanel::updateOcularControls()
 		posY += fieldOcularFl->boundingRect().height();
 		widgetHeight += fieldOcularFl->boundingRect().height();
 
-		QString apparentFovString = QString::number(ocular->appearentFOV(), 'f', 2);
+		QString apparentFovString = QString::number(ocular->apparentFOV(), 'f', 2);
 		apparentFovString.append(QChar(0x00B0));// Degree sign
 		QString apparentFovLabel = QString(q_("Ocular aFOV: %1"))
 				.arg(apparentFovString);

@@ -179,7 +179,7 @@ void TelescopeClientDirectNexStar::decReceived(unsigned int dec_int)
 	*log_file << Now() << "TelescopeClientDirectNexStar::decReceived: " << dec_int << endl;
 #endif
 	const int nexstar_status = 0;
-	sendPosition(last_ra, dec_int, nexstar_status);
+	sendPosition(last_ra, static_cast<int>(dec_int), nexstar_status);
 	queue_get_position = true;
 }
 
@@ -209,9 +209,9 @@ bool TelescopeClientDirectNexStar::isInitialized(void) const
 void TelescopeClientDirectNexStar::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
 	//Server time is "now", because this class is the server
-	const qint64 server_micros = (qint64) GetNow();
-	const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
-	const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
+	const qint64 server_micros = static_cast<qint64>(GetNow());
+	const double ra  =  ra_int * (M_PI/0x80000000u);
+	const double dec = dec_int * (M_PI/0x80000000u);
 	const double cdec = cos(dec);
 	Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 	Vec3d j2000Position = position;

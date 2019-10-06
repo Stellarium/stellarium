@@ -61,11 +61,27 @@ QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 	return obj;
 }
 
+QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& c)
+{
+	QScriptValue obj = engine->newObject();
+	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
+	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
+	obj.setProperty("b", QScriptValue(engine, static_cast<qsreal>(c[2])));
+	return obj;
+}
+
 void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 {
 	c[0] = static_cast<float>(obj.property("r").toNumber());
 	c[1] = static_cast<float>(obj.property("g").toNumber());
 	c[2] = static_cast<float>(obj.property("b").toNumber());
+}
+
+void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
+{
+	c[0] = static_cast<double>(obj.property("r").toNumber());
+	c[1] = static_cast<double>(obj.property("g").toNumber());
+	c[2] = static_cast<double>(obj.property("b").toNumber());
 }
 
 QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
@@ -75,6 +91,15 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	c[1] = static_cast<float>(context->argument(1).toNumber());
 	c[2] = static_cast<float>(context->argument(2).toNumber());
 	return vec3fToScriptValue(engine, c);
+}
+
+QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
+{
+	Vec3d c;
+	c[0] = static_cast<double>(context->argument(0).toNumber());
+	c[1] = static_cast<double>(context->argument(1).toNumber());
+	c[2] = static_cast<double>(context->argument(2).toNumber());
+	return vec3dToScriptValue(engine, c);
 }
 
 class StelScriptEngineAgent : public QScriptEngineAgent
@@ -101,11 +126,14 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	scriptImages->init();
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
-	// Allow Vec3f managment in scripts
+	// Allow Vec3f and Vec3d management in scripts
 	qScriptRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
 	// Constructor
 	QScriptValue ctor = engine->newFunction(createVec3f);
 	engine->globalObject().setProperty("Vec3f", ctor);
+	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
+	QScriptValue ctorD = engine->newFunction(createVec3d);
+	engine->globalObject().setProperty("Vec3d", ctorD);
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);

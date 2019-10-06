@@ -72,7 +72,7 @@ public:
 	};
 
 	RemoteSync();
-	virtual ~RemoteSync();
+	virtual ~RemoteSync() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -85,8 +85,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 
 	QString getClientServerHost() const { return clientServerHost; }
-	int getClientServerPort() const { return clientServerPort; }
-	int getServerPort() const { return serverPort; }
+	quint16 getClientServerPort() const { return clientServerPort; }
+	quint16 getServerPort() const { return serverPort; }
 	SyncClient::SyncOptions getClientSyncOptions() const { return syncOptions; }
 	QStringList getStelPropFilter() const { return stelPropFilter; }
 	ClientBehavior getConnectionLostBehavior() const { return connectionLostBehavior; }
@@ -166,9 +166,9 @@ private:
 	//The host string/IP addr to connect to
 	QString clientServerHost;
 	//The host port to connect to
-	int clientServerPort;
+	quint16 clientServerPort;
 	//the port used in server mode
-	int serverPort;
+	quint16 serverPort;
 	SyncClient::SyncOptions syncOptions;
 	QStringList stelPropFilter;
 	ClientBehavior connectionLostBehavior;

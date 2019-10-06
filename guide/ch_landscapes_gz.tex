@@ -70,7 +70,7 @@ folder inside the Stellarium program directory, or, for own work, in a
 subdirectory of the \file{landscape} folder inside your Stellarium
 user data directory (see section~\ref{sec:Directories}).
 
-Let us ssume we want to create a landscape for a place called
+Let us assume we want to create a landscape for a place called
 Rosenburg.  The location for the files of our new custom landscape
 \landscape{Rosenburg} depends on the operating system (see
 \ref{sec:Directories}). Create a new subdirectory, and for maximum
@@ -177,7 +177,7 @@ the use of measured horizons. Users of \program{Cartes du
 that the format of the list of measurements is compatible.
 
 This is the technically simplest of the landscapes, but may be used to
-describe accurately measured horizon lines. The file that encodes
+describe accurately measured horizon profiles. The file that encodes
 horizon altitudes can also be used in all other landscape types. If
 present there, it will be used to define object visibility (instead of
 the opacity of the landscape photo textures) and, if
@@ -190,7 +190,7 @@ irritates you, just offset this azimuth minimally (e.g., 180.00001).
 
 The \file{landscape.ini} file for a polygonal type landscape looks
 like this (this example is based on the \landscape{Geneve} landscape
-which was borrowed from Cartes du Ciel and comes with Stellarium):
+which was borrowed from \program{Cartes du Ciel} and comes with Stellarium):
 
 \begin{configfile}
 [landscape]
@@ -244,6 +244,30 @@ Where:
   rare cases like horizon lines for high mountain peaks with many
   negative horizon values this should be set to true. (since v0.15.0)
 \end{description}
+
+\subsubsection{Artificial Polygonal Panoramas}
+The online service
+\program{HeyWhatsThat}\footnote{\url{https://www.heywhatsthat.com/}}
+allows an SRTM-based analysis of the viewshed (the visible topographic
+area) for an observing location which also gives names for the
+mountain peaks visible at a given location.  A data download option
+provides users inclined to do some programming with the necessary data
+to create a polygonal landscape for Stellarium.
+
+In addition, \name{Brian Doyle} has created another online service,
+\program{horiZONE}\footnote{\url{https://briandoylegit.github.io/horiZONE/}},
+which does just this work for you.
+\begin{enumerate}
+\item When your viewshed analysis has been created in
+  \program{HeyWhatsThat}, enter the ``all panoramas'' tab, and on the
+  map click the marker associated with the panorama. Select ``make
+  public''.
+\item Then, take the landscape key given to you by \program{HeyWhatsThat}\footnote{
+in the line \texttt{https://www.heywhatsthat.com/?view=N15ABXY}}, add
+a few lines of description that will become visible in Stellarium, and you
+receive a ZIP file ready for installation in Stellarium (see section
+\ref{sec:gui:view:landscape}).
+\end{enumerate}
 
 
 \subsection{Spherical landscape}

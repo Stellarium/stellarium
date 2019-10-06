@@ -98,7 +98,7 @@ public:
 	//! Does not bind the array first.
 	inline void draw(int offset, int count) const
 	{
-		gl->glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(offset * m_indexBufferTypeSize));
+		gl->glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(static_cast<unsigned long long>(offset) * m_indexBufferTypeSize));
 	}
 
 	//! Returns the buffer used for the vertex data.
