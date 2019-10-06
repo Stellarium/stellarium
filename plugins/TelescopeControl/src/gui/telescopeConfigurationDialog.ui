@@ -478,7 +478,21 @@
         <widget class="TelescopeClientINDIWidget" name="INDIProperties" native="true"/>
        </item>
         <item>
-          <widget class="TelescopeClientASCOMWidget" name="ASCOMProperties" native="true"/>
+          <layout class="QVBoxLayout" name="ASCOMLayout">
+            <property name="leftMargin">
+              <number>0</number>
+            </property>
+            <property name="topMargin">
+              <number>0</number>
+            </property>
+            <property name="rightMargin">
+              <number>0</number>
+            </property>
+            <property name="bottomMargin">
+              <number>0</number>
+            </property>
+          </layout>
+          <!--widget class="TelescopeClientASCOMWidget" name="ASCOMProperties" native="true"/-->
         </item>
        <item>
         <widget class="QGroupBox" name="groupBoxDeviceSettings">
