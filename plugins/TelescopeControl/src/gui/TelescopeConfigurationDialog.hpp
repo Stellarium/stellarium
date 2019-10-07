@@ -86,7 +86,10 @@ private:
 	QRegExpValidator * hostNameValidator;
 	QRegExpValidator * circleListValidator;
 	QRegExpValidator * serialPortValidator;
+
+	#ifdef Q_OS_WIN
 	TelescopeClientASCOMWidget* ascomWidget;
+	#endif
 	
 	int configuredSlot;
 	
