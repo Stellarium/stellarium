@@ -381,7 +381,7 @@
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M76,
+	4.25 Images of M3, M13, M15, M24, M51, M58, M63, M76,
 	     M81, M82, M96, M101, M105, M106, IC405, IC443, IC1727, NGC246, 
 	     NGC457, NGC467, NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, 
 	     NGC1961, NGC2174, NGC2371, NGC2392, NGC2403, NGC2655, NGC2685, 
@@ -452,7 +452,7 @@
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
- 	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
+ 	4.43 Images of M33, NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
 	4.44 Images of M8, M17, M94, M104, IC434, IC2944, NGC2264, NGC6726, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
