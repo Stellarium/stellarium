@@ -280,6 +280,8 @@ void StelActionMgr::saveShortcuts()
 		QString seq = action->keySequence.toString().replace(" ", "");
 		if (action->altKeySequence != action->defaultAltKeySequence)
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
+		if (action->altKeySequence.toString()=="")
+			seq += " \"\"";
 		if (seq.isEmpty()) // Let's allow remove shortcuts
 			seq = "\"\"";
 		conf->setValue(action->objectName(), seq);

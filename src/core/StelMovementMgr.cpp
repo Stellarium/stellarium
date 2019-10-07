@@ -164,7 +164,7 @@ void StelMovementMgr::init()
 		if ((tmp[0]==0.f) && (tmp[1]==0.f))
 			tmp[0]=-1.;
 
-		upVectorMountFrame.set(tmp[0], tmp[1], 0.);
+		upVectorMountFrame.set(static_cast<double>(tmp[0]), static_cast<double>(tmp[1]), 0.);
 		upVectorMountFrame.normalize();
 		initViewUp=upVectorMountFrame;
 		//qDebug() << "InitViewUp: " << initViewUp;
@@ -201,6 +201,25 @@ void StelMovementMgr::init()
 	// Additional hooks
 	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
 	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
+	// Field of view
+	// The feature was moved from FOV plugin
+	// TODO: Switch to use C++/Qt lambda's
+	QString fovGroup = N_("Field of View");
+	QString fovText = q_("Set FOV to");
+	addAction("actionSet_FOV_180deg",	 fovGroup, QString("%1 %2%3").arg(fovText, " 180", QChar(0x00B0)), "setFOV180Deg()", "Ctrl+Alt+1");
+	addAction("actionSet_FOV_90deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  90", QChar(0x00B0)),   "setFOV90Deg()",   "Ctrl+Alt+2");
+	addAction("actionSet_FOV_60deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  60", QChar(0x00B0)),   "setFOV60Deg()",   "Ctrl+Alt+3");
+	addAction("actionSet_FOV_45deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  45", QChar(0x00B0)),   "setFOV45Deg()",   "Ctrl+Alt+4");
+	addAction("actionSet_FOV_20deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  20", QChar(0x00B0)),   "setFOV20Deg()",   "Ctrl+Alt+5");
+	addAction("actionSet_FOV_10deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  10", QChar(0x00B0)),   "setFOV10Deg()",   "Ctrl+Alt+6");
+	addAction("actionSet_FOV_5deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   5", QChar(0x00B0)),     "setFOV5Deg()",     "Ctrl+Alt+7");
+	addAction("actionSet_FOV_2deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   2", QChar(0x00B0)),     "setFOV2Deg()",     "Ctrl+Alt+8");
+	addAction("actionSet_FOV_1deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   1", QChar(0x00B0)),     "setFOV1Deg()",     "Ctrl+Alt+9");
+	addAction("actionSet_FOV_0_5deg", fovGroup, QString("%1 %2%3").arg(fovText, "0.5", QChar(0x00B0)),  "setFOV05Deg()",   "Ctrl+Alt+0");
+	// Remove all FOV settings
+	conf->beginGroup("FOV");
+	conf->remove("");
+	conf->endGroup();
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
@@ -223,8 +242,8 @@ void StelMovementMgr::setEquatorialMount(bool b)
 
 		StelProjector::StelProjectorParams projectorParams = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
 		StelPainter painter(StelApp::getInstance().getCore()->getProjection2d());
-		int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(mode));
-		int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
+		int xPosition = qRound(projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0]) - (painter.getFontMetrics().boundingRect(mode).width()/2);
+		int yPosition = qRound(projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1]) - (painter.getFontMetrics().height()/2);
 		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getScreenFontSize() + 3, "#99FF99", true, 2000);
 	}
 }
@@ -426,7 +445,7 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 			StelUtils::getDateFromJulianDay(jdNow, &year, &month, &day);
 			StelUtils::getTimeFromJulianDay(jdNow, &hour, &min, &sec, &millis);
 			double jdNew;
-			StelUtils::getJDFromDate(&jdNew, year+floor(numSteps), month, day, hour, min, sec);
+			StelUtils::getJDFromDate(&jdNew, year+qRound(numSteps), month, day, hour, min, sec);
 			core->setJD(jdNew);
 			emit core->dateChanged();			
 			emit core->dateChangedByYear();
@@ -434,18 +453,18 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 		else if (event->modifiers() & Qt::AltModifier)
 		{
 			// move time by days
-			core->setJD(core->getJD()+floor(numSteps));
+			core->setJD(core->getJD()+qRound(numSteps));
 			emit core->dateChanged();
 		}
 		else if (event->modifiers() & Qt::ShiftModifier)
 		{
 			// move time by hours
-			core->setJD(core->getJD()+floor(numSteps)/(24.));
+			core->setJD(core->getJD()+qRound(numSteps)/(24.));
 		}
 		else
 		{
 			// move time by minutes
-			core->setJD(core->getJD()+floor(numSteps)/(24.*60.));
+			core->setJD(core->getJD()+qRound(numSteps)/(24.*60.));
 		}
 	}
 	else
@@ -709,7 +728,7 @@ void StelMovementMgr::lookEast(bool zero)
 	if (zero)
 	{
 		alt = 0.0f;
-		cy = static_cast<float>(M_PI_2);
+		cy = M_PI_2f;
 		StelUtils::spheToRect(cy, alt, dir);
 
 		setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
@@ -718,11 +737,11 @@ void StelMovementMgr::lookEast(bool zero)
 	}
 
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
-	cy = static_cast<float>(M_PI_2);
+	cy = M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
-	//qDebug() << "Setting East at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) && (fabsf(alt)>static_cast<float>(M_PI_2)-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
+	//qDebug() << "Setting East at Alt:" << alt*M_180_PIf;
+	if ((mountMode==MountAltAzimuthal) && (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring East to bottom of screen.
 		upVectorMountFrame.set(0., -1.*StelUtils::sign(alt), 0.);
@@ -738,7 +757,7 @@ void StelMovementMgr::lookWest(bool zero)
 	if (zero)
 	{
 		alt = 0.0f;
-		cy = 3.f*static_cast<float>(M_PI_2);
+		cy = 3.f*M_PI_2f;
 		StelUtils::spheToRect(cy, alt, dir);
 
 		setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
@@ -747,11 +766,11 @@ void StelMovementMgr::lookWest(bool zero)
 	}
 
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
-	cy = 3.f*static_cast<float>(M_PI_2);
+	cy = 3.f*M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
-	//qDebug() << "Setting West at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>static_cast<float>(M_PI_2)-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
+	//qDebug() << "Setting West at Alt:" << alt*M_180_PIf;
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring West to bottom of screen.
 		upVectorMountFrame.set(0., StelUtils::sign(alt), 0.);
@@ -767,7 +786,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	if (zero)
 	{
 		alt = 0.0f;
-		cy = static_cast<float>(M_PI);
+		cy = M_PIf;
 		StelUtils::spheToRect(cy, alt, dir);
 
 		setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
@@ -780,8 +799,8 @@ void StelMovementMgr::lookNorth(bool zero)
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
-	//qDebug() << "Setting North at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>static_cast<float>(M_PI_2)-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
+	//qDebug() << "Setting North at Alt:" << alt*M_180_PIf;
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring North to bottom of screen.
 		upVectorMountFrame.set(StelUtils::sign(alt), 0., 0.);
@@ -810,8 +829,8 @@ void StelMovementMgr::lookSouth(bool zero)
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
-	//qDebug() << "Setting South at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>static_cast<float>(M_PI_2)-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
+	//qDebug() << "Setting South at Alt:" << alt*M_180_PIf;
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring South to bottom of screen.
 		upVectorMountFrame.set(-1.*StelUtils::sign(alt), 0., 0.);
@@ -822,7 +841,7 @@ void StelMovementMgr::lookSouth(bool zero)
 void StelMovementMgr::lookZenith(void)
 {
 	Vec3f dir;
-	StelUtils::spheToRect(static_cast<float>(M_PI), static_cast<float>(M_PI_2), dir);
+	StelUtils::spheToRect(M_PIf, M_PI_2f, dir);
 	//qDebug() << "lookZenith: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "lookZenith: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
@@ -836,7 +855,7 @@ void StelMovementMgr::lookZenith(void)
 void StelMovementMgr::lookNadir(void)
 {
 	Vec3f dir;
-	StelUtils::spheToRect(static_cast<float>(M_PI), -static_cast<float>(M_PI_2), dir);
+	StelUtils::spheToRect(M_PIf, -M_PI_2f, dir);
 	//qDebug() << "lookNadir: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "lookNadir: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
@@ -857,6 +876,56 @@ void StelMovementMgr::lookTowardsSCP(void)
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
+void StelMovementMgr::setFOV180Deg()
+{
+	zoomTo(180., 1.f);
+}
+
+void StelMovementMgr::setFOV90Deg()
+{
+	zoomTo(90., 1.f);
+}
+
+void StelMovementMgr::setFOV60Deg()
+{
+	zoomTo(60., 1.f);
+}
+
+void StelMovementMgr::setFOV45Deg()
+{
+	zoomTo(45., 1.f);
+}
+
+void StelMovementMgr::setFOV20Deg()
+{
+	zoomTo(20., 1.f);
+}
+
+void StelMovementMgr::setFOV10Deg()
+{
+	zoomTo(10., 1.f);
+}
+
+void StelMovementMgr::setFOV5Deg()
+{
+	zoomTo(5., 1.f);
+}
+
+void StelMovementMgr::setFOV2Deg()
+{
+	zoomTo(2., 1.f);
+}
+
+void StelMovementMgr::setFOV1Deg()
+{
+	zoomTo(1., 1.f);
+}
+
+void StelMovementMgr::setFOV05Deg()
+{
+	zoomTo(0.5, 1.f);
+}
+
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
 {
@@ -865,7 +934,7 @@ void StelMovementMgr::updateMotion(double deltaTime)
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
-	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->deltaZoom(currentFov*(M_PI/360.0))*(360.0/M_PI);
+	double deplzoom=keyZoomSpeed*deltaTime*1000*static_cast<double>(proj->deltaZoom(static_cast<float>(currentFov)*(M_PIf/360.0f)))*(360.0/M_PI);
 
 	if (flagMoveSlow)
 	{
@@ -902,16 +971,14 @@ void StelMovementMgr::updateMotion(double deltaTime)
 	if (deltaFov<0)
 	{
 		deltaFov=qMax(-0.15*currentFov, -deplzoom*5);
+		changeFov(deltaFov);
 	}
 	else if (deltaFov>0)
 	{
 		deltaFov = qMin(20., deplzoom*5.);
-	}
-
-	if (deltaFov != 0 )
-	{
 		changeFov(deltaFov);
 	}
+
 	panView(deltaAz, deltaAlt);
 	updateAutoZoom(deltaTime);
 }
@@ -954,7 +1021,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 
 			double lat, lon;
 			StelUtils::rectToSphe(&lon, &lat, v);
-			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*currentFov*M_PI/180.0f;
+			double altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*currentFov*M_PI_180;
 			lat+=altOffset;
 			StelUtils::spheToRect(lon, lat, v);
 			move.aim=mountFrameToJ2000(v);
@@ -977,7 +1044,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 				move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 //			}
 		}
-		move.coef+=move.speed*deltaTime*1000;
+		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
 		//qDebug() << "updateVisionVector: setViewUpvectorJ2000 L813";
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.f)
@@ -992,12 +1059,12 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		double c;
 		switch (zoomingMode){
 			case ZoomIn:
-				c=(move.coef>.9f ? 1. : 1. - pow(1.-1.11*move.coef,3.)); break;
+				c=(move.coef>.9f ? 1. : 1. - static_cast<double>(powf(1.f-1.11f*move.coef,3.f))); break;
 			case ZoomOut:
 				// keep in view at first as zoom out
-				c=(move.coef<0.1f ? 0. : pow(1.11*(move.coef-.1),3.)); break;
+				c=(move.coef<0.1f ? 0. : static_cast<double>(powf(1.11f*(move.coef-.1f),3.f))); break;
 			default:
-				c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
+				c = static_cast<double>(std::atan(smooth * 2.f*move.coef-smooth)/std::atan(smooth)/2+0.5f);
 		}
 
 		// 2016-03: In case of azimuthal moves, it is not useful to compute anything from J2000 coordinates.
@@ -1020,7 +1087,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		StelUtils::rectToSphe(&ra_aim, &de_aim, tmpAim);
 
 		// Make sure the position of the object to be aimed at is defined...
-		Q_ASSERT(move.aim[0]==move.aim[0] && move.aim[1]==move.aim[1] && move.aim[2]==move.aim[2]);
+		Q_ASSERT(!qIsNaN(move.aim[0]) && !qIsNaN(move.aim[1]) && !qIsNaN(move.aim[2]));
 		// Trick to choose the good moving direction and never travel on a distance > PI
 		if (ra_aim-ra_start > M_PI)
 		{
@@ -1074,7 +1141,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 
 			double lat, lon; // general: longitudinal, latitudinal
 			StelUtils::rectToSphe(&lon, &lat, v);
-			double latOffset=static_cast<double>(core->getCurrentStelProjectorParams().viewportCenterOffset[1]) * currentFov*M_PI/180.0;
+			double latOffset=static_cast<double>(core->getCurrentStelProjectorParams().viewportCenterOffset[1]) * currentFov*M_PI_180;
 			lat+=latOffset;
 			StelUtils::spheToRect(lon, lat, v);
 
@@ -1342,7 +1409,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 
 	// if we are just looking into the pole, azimuth can hopefully be recovered from the customized up vector!
 	// When programmatically centering on a pole, we should have set a better up vector for |alt|>0.9*M_PI/2.
-	if (fabs(altVision)> 0.95* M_PI/2.)
+	if (fabs(altVision)> 0.95* M_PI_2)
 	{
 		if (upVectorMountFrame.v[2] < 0.9)
 		{
@@ -1352,16 +1419,16 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 				azVision+=M_PI;
 		}
 		// Remove these lines if all is OK.
-		else
-		{
-			 //qDebug() << "panView: UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
-		}
+//		else
+//		{
+//			 qDebug() << "panView: UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
+//		}
 	}
 
 	// if we are moving in the Azimuthal angle (left/right)
-	if (deltaAz)
+	if (fabs(deltaAz)>1e-10)
 		azVision-=deltaAz;
-	if (deltaAlt)
+	if (fabs(deltaAlt)>1e-10)
 	{
 		//if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2)
 			altVision+=deltaAlt;
@@ -1372,15 +1439,15 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	}
 
 	// recalc all the position variables
-	if (deltaAz || deltaAlt)
+	if ((fabs(deltaAz)>1e-10) || (fabs(deltaAlt)>1e-10))
 	{
 		setFlagTracking(false);
 		Vec3d tmp;
 		StelUtils::spheToRect(azVision, altVision, tmp);
 		setViewDirectionJ2000(mountFrameToJ2000(tmp));
-		if (fabs(altVision)>0.95*M_PI/2.)
+		if (fabs(altVision)>0.95*M_PI_2)
 		{ // do something about zenith
-			setViewUpVector(Vec3d(-cos(azVision), -sin(azVision), 0.) * (altVision>0. ? 1. : -1. )); // 2016-12-14: WORKS AGAIN!
+			setViewUpVector(Vec3d(-cos(azVision), -sin(azVision), 0.) * (altVision>0. ? 1. : -1. ));
 		}
 		else
 		{
@@ -1444,7 +1511,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 
 		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;
 
-		zoomMove.coef+=zoomMove.speed*deltaTime*1000;
+		zoomMove.coef+=zoomMove.speed*static_cast<float>(deltaTime)*1000;
 		if (zoomMove.coef>=1.f)
 		{
 			flagAutoZoom = 0;
@@ -1479,13 +1546,13 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 			double lat, lon; // general: longitudinal, latitudinal
 			StelUtils::rectToSphe(&lon, &lat, v); // guaranteed to be normalized.
 			// vUp could usually be (0/0/1) in most cases, unless |lat|==pi/2. We MUST build an adequate Up vector!
-			if (fabs(lat)>0.9*M_PI/2.0)
+			if (fabs(lat)>0.9*M_PI_2)
 			{
 				vUp = Vec3d(-cos(lon), -sin(lon), 0.) * (lat>0. ? 1. : -1. );
 			}
 			else
 				vUp.set(0.,0.,1.);
-			double latOffset=static_cast<double>(core->getCurrentStelProjectorParams().viewportCenterOffset[1])*currentFov*M_PI/180.0;
+			double latOffset=static_cast<double>(core->getCurrentStelProjectorParams().viewportCenterOffset[1])*currentFov*M_PI_180;
 			lat+=latOffset;
 			StelUtils::spheToRect(lon, lat, v);
 
@@ -1500,7 +1567,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 			else
 			{
 				setViewDirectionJ2000(mountFrameToJ2000(v));
-				//qDebug() << "setViewUpVector L1340";
+				//qDebug() << "setViewUpVector L1501";
 				setViewUpVectorJ2000(mountFrameToJ2000(vUp));
 			}
 		}
@@ -1522,7 +1589,7 @@ void StelMovementMgr::zoomTo(double aim_fov, float zoomDuration)
 void StelMovementMgr::changeFov(double deltaFov)
 {
 	// if we are zooming in or out
-	if (deltaFov)
+	if (fabs(deltaFov)>0)
 		setFov(currentFov + deltaFov);
 }
 
@@ -1550,9 +1617,9 @@ void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float d
 	Vec2d oldTargetViewportOffset = targetViewportOffset;
 	targetViewportOffset.set(offsetX, offsetY);
 
-	if(offsetX != oldTargetViewportOffset[0])
+	if(fabs(offsetX - oldTargetViewportOffset[0]) > 1e-10)
 		emit viewportHorizontalOffsetTargetChanged(offsetX);
-	if(offsetY != oldTargetViewportOffset[1])
+	if(fabs(offsetY - oldTargetViewportOffset[1]) > 1e-10)
 		emit viewportVerticalOffsetTargetChanged(offsetY);
 
 	if (duration<=0.0f)

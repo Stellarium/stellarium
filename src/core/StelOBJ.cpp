@@ -386,8 +386,8 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 		else
 		{
 			//vertex unknown, add it to the vertex list and cache
-			unsigned int idx = m_vertices.size();
-			vertCache.insert(v,idx);
+			unsigned int idx = static_cast<unsigned int>(m_vertices.size());
+			vertCache.insert(v,m_vertices.size());
 			m_vertices.append(v);
 			vIdx.append(idx);
 		}
@@ -965,7 +965,7 @@ void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
 		//iterate through the vertices of the group
 		for(int idx = grp.startIndex;idx<(grp.startIndex+grp.indexCount);++idx)
 		{
-			const Vertex& v = vList.at(iList.at(idx));
+			const Vertex& v = vList.at(static_cast<int>(iList.at(idx)));
 			Vec3f pos(v.position);
 			grp.boundingbox.expand(pos);
 			accVertex+=pos.toVec3d();
@@ -1011,9 +1011,9 @@ void StelOBJ::generateNormals()
 	{
 		pTriangle = &m_indices.at(i*3);
 
-		pVertex0 = &m_vertices[pTriangle[0]];
-		pVertex1 = &m_vertices[pTriangle[1]];
-		pVertex2 = &m_vertices[pTriangle[2]];
+		pVertex0 = &m_vertices[static_cast<int>(pTriangle[0])];
+		pVertex1 = &m_vertices[static_cast<int>(pTriangle[1])];
+		pVertex2 = &m_vertices[static_cast<int>(pTriangle[2])];
 
 		// Calculate triangle face normal.
 		edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
@@ -1099,9 +1099,9 @@ void StelOBJ::generateTangents()
 	{
 		pTriangle = &m_indices.at(i*3);
 
-		pVertex0 = &m_vertices[pTriangle[0]];
-		pVertex1 = &m_vertices[pTriangle[1]];
-		pVertex2 = &m_vertices[pTriangle[2]];
+		pVertex0 = &m_vertices[static_cast<int>(pTriangle[0])];
+		pVertex1 = &m_vertices[static_cast<int>(pTriangle[1])];
+		pVertex2 = &m_vertices[static_cast<int>(pTriangle[2])];
 
 		// Calculate the triangle face tangent and bitangent.
 
@@ -1287,7 +1287,7 @@ StelOBJ::ShortIndexList StelOBJ::getShortIndexList() const
 	ret.reserve(m_indices.size());
 	for(int i =0;i<m_indices.size();++i)
 	{
-		ret.append(m_indices.at(i));
+		ret.append(static_cast<unsigned short>(m_indices.at(i)));
 	}
 
 	qCDebug(stelOBJ)<<"Indices converted to short in"<<timer.elapsed()<<"ms";
@@ -1302,9 +1302,9 @@ void StelOBJ::scale(double factor)
 	for(int i = 0;i<m_vertices.size();++i)
 	{
 		GLfloat* dat = m_vertices[i].position;
-		dat[0] *= factor;
-		dat[1] *= factor;
-		dat[2] *= factor;
+		dat[0] *= static_cast<GLfloat>(factor);
+		dat[1] *= static_cast<GLfloat>(factor);
+		dat[2] *= static_cast<GLfloat>(factor);
 	}
 
 	//AABBs must be recalculated

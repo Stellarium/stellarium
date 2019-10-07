@@ -371,7 +371,7 @@ void TestStelSphericalGeometry::testLoading()
 	}
 
 	QVERIFY(reg->getType()==SphericalRegion::Polygon);
-	qDebug() << reg->getArea()*180./M_PI*180/M_PI;
+	qDebug() << reg->getArea()*M_180_PI*M_180_PI;
 
 	// FIXME: WTF?!?
 	//StelVertexArray vertexAr = reg->getOutlineVertexArray();

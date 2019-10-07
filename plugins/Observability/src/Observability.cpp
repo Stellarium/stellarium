@@ -73,11 +73,11 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 
 // TODO: Migrate to static const? --BM ==> GZ during JDfix for 0.14: SURE!
 // Some useful constants:
-const double Observability::Rad2Deg = 180./M_PI;         // Convert degrees into radians
+const double Observability::Rad2Deg = M_180_PI;         // Convert degrees into radians
 const double Observability::Rad2Hr = 12./M_PI;           // Convert hours into radians
 const double Observability::UA =  AU;                    // 1.4958e+8;         // Astronomical Unit in Km. ==> HAS BEEN DEFINED IN StelUtils.hpp!
 const double Observability::TFrac = 0.9972677595628414;  // Convert sidereal time into Solar time
-const double Observability::halfpi = M_PI * 0.5;         //  1.57079632675; // pi/2
+const double Observability::halfpi = M_PI_2;         //  1.57079632675; // pi/2
 const double Observability::MoonT = 29.530588;           // Moon synodic period (used as first estimate of Full Moon). ==> FIND MORE DEC. PLACES!
 const double Observability::RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
 const double Observability::MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU).

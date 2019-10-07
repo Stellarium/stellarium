@@ -76,13 +76,13 @@ private:
 	static Vec4f getColorFromName(QString colorName);
 
 	//! Calculates the train thickness and bolide size.
-	static void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
+	static void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
 
 	//! Draws the meteor bolide.
-	void drawBolide(StelPainter &sPainter, const float &bolideSize);
+	void drawBolide(StelPainter &sPainter, const double &bolideSize);
 
 	//! Draws the meteor train.
-	void drawTrain(StelPainter& sPainter, const float &thickness);
+	void drawTrain(StelPainter& sPainter, const double &thickness);
 
 	//! Calculates the z-component of a meteor as a function of meteor zenith angle
 	static float meteorZ(float zenithAngle, float altitude);
@@ -96,7 +96,7 @@ private:
 	const StelCore* m_core;         //! The associated StelCore instance.
 
 	bool m_alive;                   //! Indicates if the meteor it still visible.
-	float m_speed;                  //! Velocity of meteor in km/s.
+	double m_speed;                  //! Velocity of meteor in km/s.
 	Mat4d m_matAltAzToRadiant;      //! Rotation matrix to convert from horizontal to radiant coordinate system.
 	Vec3d m_position;               //! Meteor position in radiant coordinate system.
 	Vec3d m_posTrain;               //! End of train in radiant coordinate system.

@@ -86,6 +86,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagPlanetsOrbitsOnly
 		   NOTIFY flagPlanetsOrbitsOnlyChanged
 		   )
+	Q_PROPERTY(bool flagPermanentOrbits
+		   READ getFlagPermanentOrbits
+		   WRITE setFlagPermanentOrbits
+		   NOTIFY flagPermanentOrbitsChanged
+		   )
 	Q_PROPERTY(bool flagIsolatedOrbits
 		   READ getFlagIsolatedOrbits
 		   WRITE setFlagIsolatedOrbits
@@ -747,7 +752,7 @@ public slots:
 
 	//! Get type for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
-	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
+	//! @return a type of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
 	QString getPlanetType(QString planetName) const;
 
 	//! Get distance to Solar system bodies for scripts
@@ -856,6 +861,10 @@ public slots:
 	//! @param objType object type
 	QStringList getObjectsList(QString objType="all") const;
 
+	//! Set flag which enables display of orbits for planets even if they are off screen
+	void setFlagPermanentOrbits(bool b);
+	bool getFlagPermanentOrbits() const;
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
@@ -867,6 +876,7 @@ signals:
 	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
+	void flagPermanentOrbitsChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void numberIsolatedTrailsChanged(int n);
@@ -1060,10 +1070,6 @@ private:
 	//! Calculate a color of Solar system bodies
 	//! @param bV value of B-V color index
 	unsigned char BvToColorIndex(float bV);
-
-	//! Set flag which enables display of permanent orbits for objects
-	// TODO: DOCUMENT what this really does, under which circumstances etc.
-	void setFlagPermanentOrbits(bool b);
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;

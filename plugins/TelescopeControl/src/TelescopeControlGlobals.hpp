@@ -44,7 +44,7 @@ namespace TelescopeControlGlobals {
 	
 	const int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds
 	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
-	#define SECONDS_FROM_MICROSECONDS(X) ((double) X / 1000000)
+	#define SECONDS_FROM_MICROSECONDS(X) (static_cast<double>(X) / 1000000)
 	
 	enum ConnectionType {
 		ConnectionNA = 0,

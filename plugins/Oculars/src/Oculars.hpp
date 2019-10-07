@@ -354,20 +354,20 @@ private:
 	bool flagAdaptationMain;	//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStarsMain;        //!< Flag to track limit magnitude for stars
-	float magLimitStarsMain;        //!< Value of limited magnitude for stars
+	double magLimitStarsMain;       //!< Value of limited magnitude for stars
 	bool flagLimitDSOsMain;	        //!< Flag to track limit magnitude for DSOs
-	float magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
+	double magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
 	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-	float magLimitPlanetsMain;      //!< Value of limited magnitude for planets, asteroids, comets etc.
-	float relativeStarScaleMain;    //!< Value to store the usual relative star scale when activating ocular or CCD view
-	float absoluteStarScaleMain;    //!< Value to store the usual absolute star scale when activating ocular or CCD view
-	float relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
-	float absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
-	float relativeStarScaleCCD;     //!< Value to store the relative star scale when switching off CCD view
-	float absoluteStarScaleCCD;     //!< Value to store the absolute star scale when switching off CCD view
+	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
+	double absoluteStarScaleMain;   //!< Value to store the usual absolute star scale when activating ocular or CCD view
+	double relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
+	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
+	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
+	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
-	float milkyWaySaturation;
+	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Read from the ini file, whether an object is required to be selected to zoom in.

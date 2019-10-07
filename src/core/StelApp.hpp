@@ -180,8 +180,8 @@ public:
 
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
-	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
-	void setDevicePixelsPerPixel(float dppp);
+	qreal getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	void setDevicePixelsPerPixel(qreal dppp);
 	
 	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
 	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
@@ -317,7 +317,7 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	bool handleMove(float x, float y, Qt::MouseButtons b);
+	bool handleMove(qreal x, qreal y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
@@ -388,7 +388,7 @@ private:
 	
 	// Store the ratio between real device pixel in "Device Independent Pixel"
 	// Usually this value is 1, but for a mac with retina screen this will be value 2.
-	float devicePixelsPerPixel;
+	qreal devicePixelsPerPixel;
 
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
@@ -412,12 +412,12 @@ private:
 	bool initialized;
 
 	static qint64 startMSecs;
-	static float animationScale;
+	static double animationScale;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
-	int saveProjW;
-	int saveProjH;
+	qreal saveProjW;
+	qreal saveProjH;
 
 	//! Store the number of downloaded files for statistics.
 	int nbDownloadedFiles;

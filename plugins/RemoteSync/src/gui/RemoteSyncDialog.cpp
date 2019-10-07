@@ -23,6 +23,7 @@
 #include "ui_remoteSyncDialog.h"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
@@ -103,6 +104,7 @@ void RemoteSyncDialog::createDialogContent()
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
 
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
 
 	populateExclusionLists();

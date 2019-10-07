@@ -63,11 +63,11 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_pidx = map.value("pidx").toFloat();
 
 	// the catalog (IMO) will give us the drift for a five-day interval from peak
-	m_driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString()) / 5.f;
-	m_driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString()) / 5.f;
+	m_driftAlpha = static_cast<float>(StelUtils::getDecAngle(map.value("driftAlpha").toString())) *0.2f;
+	m_driftDelta = static_cast<float>(StelUtils::getDecAngle(map.value("driftDelta").toString())) *0.2f;
 
-	m_rAlphaPeak = m_radiantAlpha;
-	m_rDeltaPeak = m_radiantDelta;
+	m_rAlphaPeak = static_cast<float>(m_radiantAlpha);
+	m_rDeltaPeak = static_cast<float>(m_radiantDelta);
 
 	const int genericYear = 1000;
 
@@ -256,13 +256,13 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// fix the radiant position (considering drift)
-	m_radiantAlpha = m_rAlphaPeak;
-	m_radiantDelta = m_rDeltaPeak;
+	m_radiantAlpha = static_cast<double>(m_rAlphaPeak);
+	m_radiantDelta = static_cast<double>(m_rDeltaPeak);
 	if (m_status != INACTIVE)
 	{
 		double daysToPeak = currentJD - m_activity.peak.toJulianDay();
-		m_radiantAlpha += m_driftAlpha * daysToPeak;
-		m_radiantDelta += m_driftDelta * daysToPeak;
+		m_radiantAlpha += static_cast<double>(m_driftAlpha) * daysToPeak;
+		m_radiantDelta += static_cast<double>(m_driftDelta) * daysToPeak;
 	}
 
 	// step through and update all active meteors
@@ -291,19 +291,19 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// average meteors per frame
-	float mpf = currentZHR * deltaTime / 3600.f;
+	const float mpf = currentZHR * static_cast<float>(deltaTime) / 3600.f;
 
 	// maximum amount of meteors for the current frame
 	int maxMpf = qRound(mpf);
 	maxMpf = maxMpf < 1 ? 1 : maxMpf;
 
-	float rate = mpf / (float) maxMpf;
+	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-		float prob = (float) qrand() / (float) RAND_MAX;
+		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
 		if (prob < rate)
 		{
-			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
+			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
 						     m_pidx, m_colors, m_mgr->getBolideTexture());
 			if (m->isAlive())
 			{
@@ -338,7 +338,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
-	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;
+	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data
@@ -362,15 +362,15 @@ void MeteorShower::drawRadiant(StelCore *core)
 	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win) && mag<=mlimit)
 	{
 		m_mgr->getRadiantTexture()->bind();
-		painter.drawSprite2dMode(XY[0], XY[1], 45);
+		painter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45);
 
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setFont(m_mgr->getFont());
-			float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			float shift = 8.f + size/1.8f;
+			const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
+			const float shift = 8.f + size/1.8f;
 			if ((mag+1.f)<mlimit)
-				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
 }
@@ -456,24 +456,24 @@ MeteorShower::Activity MeteorShower::hasConfirmedShower(QDate date, bool& found)
 
 int MeteorShower::calculateZHR(const double& currentJD)
 {
-	double startJD = m_activity.start.toJulianDay();
-	double finishJD = m_activity.finish.toJulianDay();
-	double peakJD = m_activity.peak.toJulianDay();
+	const double startJD = m_activity.start.toJulianDay();
+	const double finishJD = m_activity.finish.toJulianDay();
+	const double peakJD = m_activity.peak.toJulianDay();
 
-	float sd; //standard deviation
+	double sd; //standard deviation
 	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
 	{
-		sd = (peakJD - startJD) / 2.f;
+		sd = (peakJD - startJD) *0.5;
 	}
 	else
 	{
-		sd = (finishJD - peakJD) / 2.f;
+		sd = (finishJD - peakJD) *0.5;
 	}
 
-	float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
-	float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
+	const float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
+	const float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
 
-	float gaussian = maxZHR * qExp( - qPow(currentJD - peakJD, 2) / (2 * sd * sd) ) + minZHR;
+	float gaussian = maxZHR * static_cast<float>(qExp( - qPow(currentJD - peakJD, 2) / (2 * sd * sd) )) + minZHR;
 
 	return qRound(gaussian);
 }
@@ -482,10 +482,10 @@ QString MeteorShower::getSolarLongitude(QDate date)
 {
 	//The number of days (positive or negative) since Greenwich noon,
 	//Terrestrial Time, on 1 January 2000 (J2000.0)
-	double n = date.toJulianDay() - 2451545.0;
+	const double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
-	float l = 280.460 + 0.9856474 * n;
+	float l = static_cast<float>(280.460 + 0.9856474 * n);
 
 	// put it in the range 0 to 360 degrees
 	l /= 360.f;
@@ -505,7 +505,7 @@ QString MeteorShower::getDesignation() const
 
 Vec3f MeteorShower::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6f, 0.0f, 0.0f) : Vec3f(1.0f, 1.0f, 1.0f);
 }
 
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -557,12 +557,12 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		QString sDriftRA = StelUtils::radToHmsStr(m_driftAlpha);
-		QString sDriftDE = StelUtils::radToDmsStr(m_driftDelta);
+		QString sDriftRA = StelUtils::radToHmsStr(static_cast<double>(m_driftAlpha));
+		QString sDriftDE = StelUtils::radToDmsStr(static_cast<double>(m_driftDelta));
 		if (withDecimalDegree)
 		{
-			sDriftRA = StelUtils::radToDecDegStr(m_driftAlpha,4,false,true);
-			sDriftDE = StelUtils::radToDecDegStr(m_driftDelta,4,false,true);
+			sDriftRA = StelUtils::radToDecDegStr(static_cast<double>(m_driftAlpha),4,false,true);
+			sDriftDE = StelUtils::radToDecDegStr(static_cast<double>(m_driftDelta),4,false,true);
 		}
 
 		oss << QString("%1: %2/%3")

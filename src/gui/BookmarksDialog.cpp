@@ -103,6 +103,10 @@ void BookmarksDialog::createDialogContent()
 	ui->bookmarksTreeView->header()->setStretchLastSection(true);
 	ui->bookmarksTreeView->hideColumn(ColumnUUID);
 
+	QString style = "QCheckBox { color: rgb(238, 238, 238); }";
+	ui->dateTimeCheckBox->setStyleSheet(style);
+	ui->locationCheckBox->setStyleSheet(style);
+
 	loadBookmarks();
 }
 

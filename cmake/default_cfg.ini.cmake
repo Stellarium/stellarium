@@ -167,7 +167,9 @@ zenith_nadir_color                  = 0.2,0.6,0.2
 cardinal_color                      = 0.8,0.2,0.1
 # A mix of equatorial (blueish) and ecliptical (reddish)...
 colures_color                       = 0.5,0.0,0.5
-oc_longitude_color                  = 0.2,0.4,0.4
+oc_longitude_color                  = 0.6,0.2,0.4
+antisolar_point_color               = 0.9,0.3,0.5
+apex_points_color                   = 0.8,0.2,0.3
 
 # Constellations
 const_lines_color                   = 0.2,0.2,0.6

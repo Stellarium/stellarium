@@ -617,9 +617,9 @@ QVariantList SphericalCap::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
+	l << ra*M_180_PI << dec*M_180_PI;
 	res << QVariant(l);
-	res << std::acos(d)*180./M_PI;
+	res << std::acos(d)*M_180_PI;
 	return res;
 }
 
@@ -658,7 +658,7 @@ QVariantList SphericalPoint::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
+	l << ra*M_180_PI << dec*M_180_PI;
 	res << l;
 	return res;
 }
@@ -719,15 +719,15 @@ struct TriangleSerializer
 		double ra, dec;
 		QVariantList l;
 		StelUtils::rectToSphe(&ra, &dec, *v1);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		l.clear();
 		StelUtils::rectToSphe(&ra, &dec, *v2);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		l.clear();
 		StelUtils::rectToSphe(&ra, &dec, *v3);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		Q_ASSERT(triangle.size()==3);
 		triangleList << QVariant(triangle);
@@ -1026,7 +1026,7 @@ QVariantList SphericalConvexPolygon::toQVariant() const
 	{
 		StelUtils::rectToSphe(&ra, &dec, v);
 		QVariantList vv;
-		vv << ra*180./M_PI << dec*180./M_PI;
+		vv << ra*M_180_PI << dec*M_180_PI;
 		cv.append((QVariant)vv);
 	}
 	res << cv;

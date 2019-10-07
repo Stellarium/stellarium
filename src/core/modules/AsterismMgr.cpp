@@ -190,9 +190,9 @@ Vec3f AsterismMgr::getLabelsColor() const
 
 void AsterismMgr::setFontSize(const float newFontSize)
 {
-	if (asterFont.pixelSize() != newFontSize)
+	if ((static_cast<float>(asterFont.pixelSize()) - newFontSize) != 0.0f)
 	{
-		asterFont.setPixelSize(newFontSize);
+		asterFont.setPixelSize(static_cast<int>(newFontSize));
 		emit fontSizeChanged(newFontSize);
 	}
 }
@@ -408,7 +408,7 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\n");
+	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 
 	// Some more variables to use in the parsing

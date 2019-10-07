@@ -955,7 +955,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
 			// Special case: crossing of the ISS of the Moon or the Sun
-			if (isISS && screenSizeISS>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*180./M_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*180./M_PI <= sun->getSpheroidAngularSize(core)))
+			if (isISS && screenSizeISS>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core)))
 			{
 				Vec3f issColor = Vec3f(0.f,0.f,0.f);
 				painter.setColor(issColor[0], issColor[1], issColor[2], 1.f);

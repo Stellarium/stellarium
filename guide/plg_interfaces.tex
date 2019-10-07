@@ -150,58 +150,6 @@ text\_color                & R,G,B & Font color for the displayed solution of th
 font\_size                 & int   & Font size for the displayed solution of the equation of time \\\bottomrule
 \end{tabularx}
 
-
-
-\newpage
-
-\section{Field of View Plugin}
-\label{sec:plugins:FieldOfView}
-
-\begin{figure}[ht]\centering
-\includegraphics[trim=0 55 0 0,clip,width=.65\textwidth]{FOV-plugin.jpg}
-\caption{Configuration dialog of Field of View plugin}
-\label{fig:plugins:FieldOfView}
-\end{figure}
-
-\noindent By default Stellarium uses smooth zooming via mouse wheel or
-keyboard shortcuts. Some users may want stepwise zooming to fixed
-values for field of view like in the \program{Cartes du
-  Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
-  \url{http://www.ap-i.net/skychart/en/start}} planetarium program,
-and this plugin provides this feature. You can edit values and use the
-keyboard for quick-setting of FOV. All values in degrees.
-
-%\section{Using the Field of View plugin}
-%\label{sec:plugins:FieldOfView:using}
-
-\begin{enumerate}
-\item Enable the tool by configuring it to ``Load at startup''.
-\item Press shortkeys for quick changes of FOV.
-\end{enumerate}
-
-\subsection{Section \big[FOV\big] in config.ini file}
-%\label{sec:plugins:FieldOfView:configuration}
-
-You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}) or edit
-\file{config.ini} file by yourself for changes of the settings for the
-Field of View plugin -- just make it carefully!
-
-\begin{center}
-\begin{tabular}{l|l|r|l}\toprule
-\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\%\midrule
-fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\%\midrule
-fov\_quick\_2  & float & 90 & Value of FOV for the shortcut \key{\ctrl+\Alt+2} \\%\midrule
-fov\_quick\_3  & float & 60 & Value of FOV for the shortcut \key{\ctrl+\Alt+3} \\%\midrule
-fov\_quick\_4  & float & 45 & Value of FOV for the shortcut \key{\ctrl+\Alt+4} \\%\midrule
-fov\_quick\_5  & float & 20 & Value of FOV for the shortcut \key{\ctrl+\Alt+5} \\%\midrule
-fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \\%\midrule
-fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\%\midrule
-fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\%\midrule
-fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \\\bottomrule
-\end{tabular}
-\end{center}
-
 \newpage
 
 \section{Pointer Coordinates Plugin}

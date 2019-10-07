@@ -461,7 +461,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if (host.isEmpty()) // Remove validation of hostname
 		return;
 
-	int delay = MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value());
+	int delay = qRound(MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value()));
 	int portTCP = ui->spinBoxTCPPort->value();
 	bool connectAtStartup = ui->checkBoxConnectAtStartup->isChecked();
 
@@ -519,7 +519,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
 		  connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(),
 		  ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(),
-		  MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value()));
+		  qRound(MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value())));
 	}
 	else if (ui->radioButtonTelescopeINDI->isChecked())
 	{

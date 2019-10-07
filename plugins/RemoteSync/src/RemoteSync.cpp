@@ -219,7 +219,7 @@ void RemoteSync::setClientServerPort(const int port)
 {
 	if(port != this->clientServerPort)
 	{
-		this->clientServerPort = port;
+		this->clientServerPort = static_cast<quint16>(port);
 		emit clientServerPortChanged(port);
 	}
 }
@@ -228,7 +228,7 @@ void RemoteSync::setServerPort(const int port)
 {
 	if(port!= serverPort)
 	{
-		serverPort = port;
+		serverPort = static_cast<quint16>(port);
 		emit serverPortChanged(port);
 	}
 }
@@ -384,8 +384,8 @@ void RemoteSync::loadSettings()
 {
 	conf->beginGroup("RemoteSync");
 	setClientServerHost(conf->value("clientServerHost","127.0.0.1").toString());
-	setClientServerPort(conf->value("clientServerPort",20180).toInt());
-	setServerPort(conf->value("serverPort",20180).toInt());
+	setClientServerPort(static_cast<quint16>(conf->value("clientServerPort",20180).toUInt()));
+	setServerPort(static_cast<quint16>(conf->value("serverPort",20180).toUInt()));
 	setClientSyncOptions(SyncClient::SyncOptions(conf->value("clientSyncOptions", SyncClient::ALL).toInt()));
 	setStelPropFilter(unpackStringList(conf->value("stelPropFilter").toString()));
 	setConnectionLostBehavior(static_cast<ClientBehavior>(conf->value("connectionLostBehavior",1).toInt()));

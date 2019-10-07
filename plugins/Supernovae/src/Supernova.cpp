@@ -58,7 +58,7 @@ Supernova::Supernova(const QVariantMap& map)
 
 	designation  = map.value("designation").toString();
 	sntype = map.value("type").toString();
-	maxMagnitude = map.value("maxMagnitude").toFloat();
+	maxMagnitude = map.value("maxMagnitude").toDouble();
 	peakJD = map.value("peakJD").toDouble();
 	snra = StelUtils::getDecAngle(map.value("alpha").toString());
 	snde = StelUtils::getDecAngle(map.value("delta").toString());
@@ -188,8 +188,8 @@ Vec3f Supernova::getInfoColor(void) const
 float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
-	double currentJD = core->getJDE(); // GZ JDfix for 0.14. I hope the JD in the list is JDE? (Usually difference should be negligible)
-	double deltaJD = qAbs(peakJD-currentJD);
+	const double currentJD = core->getJDE(); // GZ JDfix for 0.14. I hope the JD in the list is JDE? (Usually difference should be negligible)
+	const double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 
@@ -239,7 +239,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	if (vmag<maxMagnitude)
 		vmag = maxMagnitude;
 
-	return vmag;
+	return static_cast<float>(vmag);
 }
 
 double Supernova::getAngularSize(const StelCore*) const
@@ -256,23 +256,21 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-
-	Vec3f color = Vec3f(1.f,1.f,1.f);
-	RCMag rcMag;
-	float size, shift;
-	double mag;
+	const Vec3f color = Vec3f(1.f,1.f,1.f);
+	const float mlimit = sd->getLimitMagnitude();
+	const float mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(snra, snde, XYZ);
-	mag = getVMagnitudeWithExtinction(core);
 	sd->preDrawPointSource(&painter);
-	float mlimit = sd->getLimitMagnitude();
 	
 	if (mag <= mlimit)
 	{
-		sd->computeRCMag(mag, &rcMag);		
-		sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
+		RCMag rcMag;
+		float size, shift;
+		sd->computeRCMag(mag, &rcMag);
+		sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color, false);
 		painter.setColor(color[0], color[1], color[2], 1.f);
-		size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{

@@ -45,8 +45,8 @@ QVariant StelJsonParser::parse(const QByteArray& aar)
 	QJsonParseError error;
 	QJsonDocument doc = QJsonDocument::fromJson(aar, &error);
 	if (error.error != QJsonParseError::NoError)
-	{		
-		throw std::runtime_error(error.errorString().toLatin1().constData());		
+	{
+		throw std::runtime_error((QString("%1 at offset %2").arg(error.errorString()).arg(error.offset)).toLatin1().constData());
 	}
 	return doc.toVariant();
 }

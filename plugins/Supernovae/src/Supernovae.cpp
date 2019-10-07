@@ -140,7 +140,7 @@ void Supernovae::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
+		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
 		if (sneJsonPath.isEmpty())
 			return;
 
@@ -223,7 +223,7 @@ void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
 	}
 }
 
@@ -565,7 +565,7 @@ void Supernovae::saveSettingsToConfig(void)
 int Supernovae::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Supernovae::checkForUpdate(void)
@@ -630,23 +630,23 @@ void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 	if (progressBar == Q_NULLPTR)
 		return;
 
-	int currentValue = 0;
-	int endValue = 0;
+	qint64 currentValue = 0;
+	qint64 endValue = 0;
 
 	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
 	{
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = qRound(std::floor(bytesReceived / 1024.));
+			bytesTotal    = qRound(std::floor(bytesTotal / 1024.));
 		}
 		currentValue = bytesReceived;
 		endValue = bytesTotal;
 	}
 
-	progressBar->setValue(currentValue);
-	progressBar->setRange(0, endValue);
+	progressBar->setValue(static_cast<int>(currentValue));
+	progressBar->setRange(0, static_cast<int>(endValue));
 }
 
 void Supernovae::downloadComplete(QNetworkReply *reply)

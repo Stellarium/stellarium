@@ -304,7 +304,7 @@ void TextUserInterface::init()
 					  constellationMgr,
 					  SLOT(setArtIntensity(float)),
 					  constellationMgr->getArtIntensity(),
-					  0.0, 1.0, 0.05,
+					  0.0, 1.0, 0.05f,
 					  m5, m5_2);
 	TuiNode* m5_4 = new TuiNodeColor(N_("Constellation boundaries"),
 	                                 constellationMgr,
@@ -470,7 +470,7 @@ void TextUserInterface::init()
 					 movementMgr,
 					 SLOT(setAutoMoveDuration(float)),
 					 movementMgr->getAutoMoveDuration(),
-					 0, 20.0, 0.1,
+					 0, 20.0, 0.1f,
 					 m6, m6_4);
 	TuiNode* m6_6 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
@@ -578,8 +578,8 @@ void TextUserInterface::draw(StelCore* core)
 		{
 			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
 			LeftStelBar* sideBar = gui->getWindowsButtonBar();
-			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
-			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+			x = (sideBar) ? qRound(sideBar->boundingRectNoHelpLabel().right()) : 50;
+			y = (bottomBar) ? qRound(bottomBar->boundingRect().height()) : 50;
 		}
 	}
 
@@ -588,10 +588,10 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		fovMaskDisk = true;
 		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
-		xVc = projParams.viewportCenter[0];
-		yVc = projParams.viewportCenter[1];
-		fovOffsetX = projParams.viewportFovDiameter*std::sin(20.f)/2;
-		fovOffsetY = projParams.viewportFovDiameter*std::cos(20.f)/2;
+		xVc = qRound(projParams.viewportCenter[0]);
+		yVc = qRound(projParams.viewportCenter[1]);
+		fovOffsetX = qRound(projParams.viewportFovDiameter*std::sin(20.))/2;
+		fovOffsetY = qRound(projParams.viewportFovDiameter*std::cos(20.))/2;
 	}
 	else 
 	{
@@ -732,7 +732,7 @@ void TextUserInterface::setLatitude(double latitude)
 	if (core->getCurrentLocation().latitude != latitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.latitude = latitude;
+		newLocation.latitude = static_cast<float>(latitude);
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
@@ -743,19 +743,19 @@ void TextUserInterface::setLongitude(double longitude)
 	if (core->getCurrentLocation().longitude != longitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.longitude = longitude;
+		newLocation.longitude = static_cast<float>(longitude);
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 double TextUserInterface::getLatitude(void)
 {
-	return StelApp::getInstance().getCore()->getCurrentLocation().latitude;
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 double TextUserInterface::getLongitude(void)
 {
-	return StelApp::getInstance().getCore()->getCurrentLocation().longitude;
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().longitude);
 }
 
 void TextUserInterface::setStartupDateMode(QString mode)

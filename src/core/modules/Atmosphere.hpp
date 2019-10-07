@@ -85,7 +85,7 @@ private:
 	Vec4i viewport;
 	Skylight sky;
 	Skybright skyb;
-	int skyResolutionY,skyResolutionX;
+	unsigned int skyResolutionY,skyResolutionX;
 
 	Vec2f* posGrid;
 	QOpenGLBuffer posGridBuffer;

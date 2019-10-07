@@ -223,9 +223,15 @@ void DateTimeDialog::pushToWidgets()
 	ui->spinner_jd->setValue(jd);
 	ui->spinner_mjd->setValue(getMjd());
 	if (jd<2299161) // 1582-10-15
+	{
 		ui->dateTimeTab->setToolTip(q_("Date and Time in Julian calendar"));
+		ui->dateTimeTabWidget->setTabToolTip(0, q_("Date and Time in Julian calendar"));
+	}
 	else
+	{
 		ui->dateTimeTab->setToolTip(q_("Date and Time in Gregorian calendar"));
+		ui->dateTimeTabWidget->setTabToolTip(0, q_("Date and Time in Gregorian calendar"));
+	}
 	connectSpinnerEvents();
 }
 

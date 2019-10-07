@@ -91,35 +91,17 @@ QString getOperatingSystemInfo()
 	return OS;
 }
 
-double hmsToRad(const unsigned int h, const unsigned int m, const double s )
-{
-	return hmsToHours(h, m, s)*M_PI/12.;
-}
-
-double hmsToHours(const unsigned int h, const unsigned int m, const double s)
-{
-	return (double)h+(double)m/60.+s/3600.;
-}
-
 double hmsStrToHours(const QString& s)
 {
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
 	if (!reg.exactMatch(s))
 		return 0.;
 	QStringList list = reg.capturedTexts();
-	int hrs = list[1].toInt();
-	int min = list[2].toInt();
+	uint hrs = list[1].toUInt();
+	uint min = list[2].toUInt();
 	int sec = list[3].toInt();
 
 	return hmsToHours(hrs, min, sec);
-}
-
-double dmsToRad(const int d, const unsigned int m, const double s)
-{
-	double rad = (double)M_PI/180.*qAbs(d)+(double)M_PI/10800.*m+s*M_PI/648000.;
-	if (d<0)
-		rad *= -1;
-	return rad;
 }
 
 /*************************************************************************
@@ -132,8 +114,8 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	angle *= 12./M_PI;
 
-	h = (unsigned int)angle;
-	m = (unsigned int)((angle-h)*60);
+	h = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle-h)*60);
 	s = (angle-h)*3600.-60.*m;	
 }
 
@@ -149,10 +131,10 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 		angle *= -1;
 		sign = false;
 	}
-	angle *= 180./M_PI;
+	angle *= M_180_PI;
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle - d)*60);
+	d = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle - d)*60);
 	s = (angle-d)*3600-60*m;
 	// workaround for rounding numbers	
 	if (s>59.9)
@@ -176,7 +158,7 @@ void radToDecDeg(double rad, bool &sign, double &deg)
 		rad *= -1;
 		sign = false;
 	}
-	deg = rad*180./M_PI;
+	deg = rad*M_180_PI;
 }
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
@@ -324,37 +306,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	if (decimal)
 		precission = 1;
 
-	return StelUtils::radToDmsPStr(angle, precission, useD);
-	/*
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
-	bool sign;
-	unsigned int d,m;
-	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	QString str;
-	QTextStream os(&str);
-	os << (sign?'+':'-') << d << degsign;
-
-	os << qSetFieldWidth(2) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\'';
-	int width;
-	if (decimal)
-	{
-		os << qSetRealNumberPrecision(1);
-		width = 4;
-	}
-	else
-	{
-		os << qSetRealNumberPrecision(0);
-		width = 2;
-	}
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-
-	return str;
-	*/
+	return StelUtils::radToDmsPStr(angle, precission, useD);	
 }
 
 /*************************************************************************
@@ -394,8 +346,8 @@ void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, dou
 		angle *= -1;
 	}
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle-d)*60);
+	d = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle-d)*60);
 	s = (angle-d)*3600.-60.*m;
 
 	if (s>59.9)
@@ -429,7 +381,7 @@ double dmsStrToRad(const QString& s)
 	QStringList list = reg.capturedTexts();
 	bool sign = (list[1] == "-");
 	int deg = list[2].toInt();
-	int min = list[3].toInt();
+	uint min = list[3].toUInt();
 	int sec = list[4].toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
@@ -535,58 +487,6 @@ Vec3f htmlColorToVec3f(const QString& c)
 	return v;
 }
 
-void spheToRect(const double lng, const double lat, Vec3d& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-}
-
-void spheToRect(const float lng, const float lat, Vec3f& v)
-{	
-	const double dlng = static_cast<double>(lng), dlat = static_cast<double>(lat), cosLat = cos(dlat);
-	v.set(static_cast<float>(cos(dlng) * cosLat), static_cast<float>(sin(dlng) * cosLat), sinf(lat));
-}
-
-void rectToSphe(double *lng, double *lat, const Vec3d &v)
-{
-	double r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
-}
-
-void rectToSphe(float *lng, float *lat, const Vec3d& v)
-{
-	double r = v.length();
-	*lat = static_cast<float>(asin(v[2]/r));
-	*lng = static_cast<float>(atan2(v[1],v[0]));
-}
-
-void rectToSphe(float *lng, float *lat, const Vec3f& v)
-{
-	float r = v.length();
-	*lat = asinf(v[2]/r);
-	*lng = atan2f(v[1],v[0]);
-}
-
-void rectToSphe(double *lng, double *lat, const Vec3f& v)
-{
-	double r = static_cast<double>(v.length());
-	*lat = asin(static_cast<double>(v[2])/r);
-	*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
-}
-
-void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
-{
-	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
-	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
-}
-
-void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad)
-{
-	*raRad = std::atan2(std::sin(lambdaRad)*std::cos(eclRad)-std::tan(betaRad)*std::sin(eclRad), std::cos(lambdaRad));
-	*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
-}
-
 double getDecAngle(const QString& str)
 {
 	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
@@ -622,23 +522,17 @@ double getDecAngle(const QString& str)
 	}
 	else if (re3.exactMatch(str))
 	{
-		float deg = re3.capturedTexts()[1].toFloat();
-		float min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toFloat();
-		float sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toFloat();
-		float r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0.f)
-			r *= -1.f;
+		double deg = re3.capturedTexts()[1].toDouble();
+		double min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toDouble();
+		double sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toDouble();
+		double r = qAbs(deg) + min / 60 + sec / 3600;
+		if (deg<0.)
+			r *= -1.;
 		return (r * 2 * M_PI / 360.);
 	}
 
 	qDebug() << "getDecAngle failed to parse angle string:" << str;
 	return -0.0;
-}
-
-// Check if a number is a power of 2
-bool isPowerOfTwo(const int value)
-{
-	return (value & -value) == value;
 }
 
 // Return the first power of two bigger than the given value
@@ -650,48 +544,9 @@ int getBiggerPowerOfTwo(int value)
 	return p;
 }
 
-// Return the inverse sinus hyperbolic of z
-double asinh(const double z)
-{
-	double returned;
-	if(z>0)
-	   returned = std::log(z + std::sqrt(z*z+1));
-	else
-	   returned = -std::log(-z + std::sqrt(z*z+1));
-
-	return returned;
-}
-
-// Simple integer modulo where the result is always positive.
-int imod(const int a, const int b)
-{
-	int ret = a % b;
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-double fmodpos(const double a, const double b)
-{
-	double ret = fmod(a, b);
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-float fmodpos(const float a, const float b)
-{
-	float ret = fmodf(a, b);
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-
 /*************************************************************************
  Convert a QT QDateTime class to julian day
 *************************************************************************/
-double qDateTimeToJd(const QDateTime& dateTime)
-{
-	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
-}
 
 QDateTime jdToQDateTime(const double& jd)
 {
@@ -742,6 +597,8 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
+		// FIXME: Modifying this cast to modern style breaks a test.
+		//tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
 		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
@@ -927,9 +784,9 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
-	if (year > 0 && test.isValid() && !test.toString(Qt::LocaleDate).isEmpty())
+	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
-		return test.toString(Qt::LocaleDate);
+		return test.toString(Qt::DefaultLocaleShortDate);
 	}
 	else
 	{
@@ -937,6 +794,12 @@ QString localeDateString(const int year, const int month, const int day, const i
 	}
 }
 
+int getDayOfWeek(int year, int month, int day)
+{
+	double JD;
+	getJDFromDate(&JD, year, month, day, 0, 0, 0);
+	return getDayOfWeek(JD);
+}
 
 //! use QDateTime to get a Julian Date from the system's current time.
 //! this is an acceptable use of QDateTime because the system's current
@@ -946,9 +809,9 @@ double getJDFromSystem()
 	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
 
-double getJDFromBesselianEpoch(const float epoch)
+double getJDFromBesselianEpoch(const double epoch)
 {
-	return 2400000.5 + (15019.81352 + static_cast<double>(epoch - 1900.0f) * 365.242198781);
+	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
 }
 
 double qTimeToJDFraction(const QTime& time)
@@ -1054,13 +917,11 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 		case 10:
 		case 12:
 			return 31;
-			break;
 		case 4:
 		case 6:
 		case 9:
 		case 11:
 			return 30;
-			break;
 		case 2:
 			if ( year > 1582 )
 			{
@@ -1068,14 +929,7 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 				{
 					if ( year % 100 == 0 )
 					{
-						if ( year % 400 == 0 )
-						{
-							return 29;
-						}
-						else
-						{
-							return 28;
-						}
+						return ( year % 400 == 0 ? 29 : 28 );
 					}
 					else
 					{
@@ -1089,22 +943,12 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 			}
 			else
 			{
-				if ( year % 4 == 0 )
-				{
-					return 29;
-				}
-				else
-				{
-					return 28;
-				}
+				return ( year % 4 == 0 ? 29 : 28 );
 			}
-			break;
 		case 0:
 			return numberOfDaysInMonthInYear(12, year-1);
-			break;
 		case 13:
 			return numberOfDaysInMonthInYear(1, year+1);
-			break;
 		default:
 			break;
 	}
@@ -1130,7 +974,6 @@ bool isLeapYear(const int year)
 // Meeus, AA 2nd, 1998, ch.7 p.65
 int dayInYear(const int year, const int month, const int day)
 {
-	// set k to 1 (leap) or 2.
 	int k=(isLeapYear(year) ? 1:2);
 	return static_cast<int>(275*month/9) - k*static_cast<int>((month+9)/12) + day -30;
 }

@@ -182,7 +182,7 @@ void StelLabel::update(double deltaTime)
 
 void StelLabel::setFadeDuration(float duration)
 {
-	labelFader.setDuration(duration);
+	labelFader.setDuration(static_cast<int>(1000.f*duration));
 }
 
 void StelLabel::setFontColor(const Vec3f& color)
@@ -234,12 +234,14 @@ SkyLabel::~SkyLabel()
 
 bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 {
-	if(labelFader.getInterstate() <= 0.0)
+	if(labelFader.getInterstate() <= 0.f)
 		return false;
 
 	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core);
 	Vec3d labelXY;
-	sPainter.getProjector()->project(objectPos,labelXY);
+	// Compute 2D pos and return if outside screen
+	if (!sPainter.getProjector()->project(objectPos,labelXY))
+		return false;
 
 	sPainter.setFont(labelFont);
 			
@@ -342,7 +344,7 @@ HorizonLabel::~HorizonLabel()
 
 bool HorizonLabel::draw(StelCore *core, StelPainter& sPainter)
 {
-	if (labelFader.getInterstate() <= 0.0)
+	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
@@ -372,7 +374,7 @@ ScreenLabel::~ScreenLabel()
 
 bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 {
-	if (labelFader.getInterstate() <= 0.0)
+	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());

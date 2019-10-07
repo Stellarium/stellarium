@@ -131,6 +131,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
 	int x, y;
 	switch (getCurrentCoordinateSystem())
 	{
@@ -292,16 +293,16 @@ void PointerCoordinates::draw(StelCore *core)
 	y = getCoordinatesPlace(coordsText).second;
 	if (getCurrentCoordinatesPlace()!=Custom)
 	{
-		x *= params.devicePixelsPerPixel;
-		y *= params.devicePixelsPerPixel;
+		x *= ppx;
+		y *= ppx;
 	}
 	sPainter.drawText(x, y, coordsText);
 
 	if (flagShowCrossedLines)
 	{
 		QPoint m = StelMainView::getInstance().getMousePos();
-		sPainter.drawLine2d(m.x()*params.devicePixelsPerPixel, 0, m.x()*params.devicePixelsPerPixel, params.viewportXywh[3]*params.devicePixelsPerPixel);
-		sPainter.drawLine2d(0, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel, params.viewportXywh[2]*params.devicePixelsPerPixel, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel);
+		sPainter.drawLine2d(m.x()*ppx, 0, m.x()*ppx, params.viewportXywh[3]*ppx);
+		sPainter.drawLine2d(0, (params.viewportXywh[3]-m.y())*ppx, params.viewportXywh[2]*ppx, (params.viewportXywh[3]-m.y())*ppx);
 	}
 }
 
