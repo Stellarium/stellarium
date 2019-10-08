@@ -349,7 +349,7 @@
 	     from Andrey Kuznetsov, Kepler Observatory
 	     http://kepler-observatorium.ru
 	     License: Creative Commons Attribution 3.0 Unported
-	4.16 Images of NGC891, NGC2903, NGC3185, NGC3187, NGC3189,
+	4.16 Images of NGC2903, NGC3185, NGC3187, NGC3189,
 	     NGC3190, NGC3193, NGC3718, NGC3729, NGC4490, NGC5981, NGC5982,
 	     NGC5985
 	     from Oleg Bryzgalov 
@@ -430,7 +430,7 @@
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M4, M12, M14, M19, M22, M55, M56, M62, M88, M92, M108, 
-	     M109, IC5146, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
+	     M109, IC5146, NGC225, NGC663, NGC891, NGC1931, NGC6823, NGC7814, Sh2-155 
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
