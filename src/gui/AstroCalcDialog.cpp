@@ -3505,6 +3505,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		bool occultation = false;
 		double s1 = object1->getSpheroidAngularSize(core);
 		double s2 = object2->getSpheroidAngularSize(core);
+		double d1 = object1->getJ2000EquatorialPos(core).length();
+		double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
@@ -3516,8 +3518,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
-			double d1 = object1->getJ2000EquatorialPos(core).length();
-			double d2 = object2->getJ2000EquatorialPos(core).length();
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
 			{
 				// The passage of the celestial body in front of another of greater apparent diameter
@@ -3546,8 +3546,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				dp = object1->getHeliocentricEclipticPos().length();
 			if (dp < dcp) // OK, it's inner planet
 			{
-				double d1 = object1->getJ2000EquatorialPos(core).length();
-				double d2 = object2->getJ2000EquatorialPos(core).length();
 				if (object1 == sun)
 				{
 					if (d1<d2)
