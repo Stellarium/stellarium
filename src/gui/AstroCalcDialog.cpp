@@ -3706,6 +3706,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		bool occultation = false;		
 		double s1 = object1->getSpheroidAngularSize(core);
 		double s2 = object2->getAngularSize(core);
+		double d1 = object1->getJ2000EquatorialPos(core).length();
+		double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
@@ -3717,8 +3719,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
-			double d1 = object1->getJ2000EquatorialPos(core).length();
-			double d2 = object2->getJ2000EquatorialPos(core).length();
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
 			{
 				// The passage of the celestial body in front of another of greater apparent diameter
@@ -3737,7 +3737,32 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		{
 			phenomenType = q_("Eclipse");
 		}
-
+		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjuction for inner planet
+		{
+			double dcp = (planet->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+			double dp;
+			if (object1 == sun)
+				dp = (object2->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+			else
+				dp = (object1->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+			if (dp < dcp) // OK, it's inner planet
+			{
+				if (object1 == sun)
+				{
+					if (d1<d2)
+						phenomenType = q_("Superior conjunction");
+					else
+						phenomenType = q_("Inferior conjunction");
+				}
+				else
+				{
+					if (d2<d1)
+						phenomenType = q_("Superior conjunction");
+					else
+						phenomenType = q_("Inferior conjunction");
+				}
+			}
+		}
 
 		QString elongStr = "";
 		if (object1 == sun)
