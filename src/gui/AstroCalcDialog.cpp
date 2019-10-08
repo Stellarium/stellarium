@@ -3536,6 +3536,34 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		{
 			phenomenType = q_("Eclipse");
 		}
+		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjuction for inner planet
+		{
+			double dcp = planet->getHeliocentricEclipticPos().length();
+			double dp;
+			if (object1 == sun)
+				dp = object2->getHeliocentricEclipticPos().length();
+			else
+				dp = object1->getHeliocentricEclipticPos().length();
+			if (dp < dcp) // OK, it's inner planet
+			{
+				double d1 = object1->getJ2000EquatorialPos(core).length();
+				double d2 = object2->getJ2000EquatorialPos(core).length();
+				if (object1 == sun)
+				{
+					if (d1<d2)
+						phenomenType = q_("Superior conjunction");
+					else
+						phenomenType = q_("Inferior conjunction");
+				}
+				else
+				{
+					if (d2<d1)
+						phenomenType = q_("Superior conjunction");
+					else
+						phenomenType = q_("Inferior conjunction");
+				}
+			}
+		}
 
 		QString elongStr = "";
 		if ((object1 == sun || object2 == sun) && !opposition)
