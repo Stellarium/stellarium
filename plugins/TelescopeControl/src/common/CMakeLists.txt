@@ -14,10 +14,6 @@ add_library(TelescopeControl_common STATIC
     SerialPort.cpp
     InterpolatedPosition.hpp
     InterpolatedPosition.cpp
-	ASCOMSupport.hpp
-	ASCOMSupport.cpp
-	OLE.hpp
-	OLE.cpp
     )
 
 target_link_libraries(TelescopeControl_common
@@ -26,5 +22,18 @@ target_link_libraries(TelescopeControl_common
     Qt5::Gui
     Qt5::Widgets
     )
+
+IF(WIN32)
+add_library(TelescopeControl_ASCOM_common STATIC
+    ASCOMSupport.hpp
+    ASCOMSupport.cpp
+    OLE.hpp
+    OLE.cpp
+    )
+
+target_link_libraries(TelescopeControl_common
+    TelescopeControl_ASCOM_common
+    )
+ENDIF(WIN32)
 
 SET_TARGET_PROPERTIES(TelescopeControl_common PROPERTIES FOLDER "plugins/TelescopeControl")

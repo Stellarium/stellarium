@@ -134,14 +134,14 @@ void TelescopeConfigurationDialog::createDialogContent()
 
 	// ASCOM Telescope client widget needs to be dynamically added in order to make use of preprocessors to exclude for non-windows
 	#ifdef Q_OS_WIN
-		ascomWidget = new TelescopeClientASCOMWidget(ui->scrollAreaWidgetContents);
-		ui->ASCOMLayout->addWidget(ascomWidget);
-	#endif
+	ascomWidget = new TelescopeClientASCOMWidget(ui->scrollAreaWidgetContents);
+	ui->ASCOMLayout->addWidget(ascomWidget);
 
 	if (!ASCOMSupport::isASCOMSupported())
 	{
 		ui->radioButtonTelescopeASCOM->hide();
 	}
+	#endif
 
 	// Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -151,12 +151,13 @@ void TelescopeConfigurationDialog::createDialogContent()
 
 	// Connect: sender, signal, receiver, member
 	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
-	connect(
-	  ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
+	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
 	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
+	#ifdef Q_OS_WIN
 	connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
+	#endif
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -442,12 +443,12 @@ void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
 	ui->INDIProperties->setVisible(enabled);
 }
 
+#ifdef Q_OS_WIN
 void TelescopeConfigurationDialog::toggleTypeASCOM(bool enabled)
 {
-	#ifdef Q_OS_WIN
-	ascomWidget->setVisible(enabled);
-	#endif
+	ascomWidget->setVisible(enabled);	
 }
+#endif
 
 void TelescopeConfigurationDialog::buttonSavePressed()
 {
