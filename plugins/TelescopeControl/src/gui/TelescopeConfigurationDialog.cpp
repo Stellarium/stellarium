@@ -19,7 +19,6 @@
  */
 
 #include "TelescopeConfigurationDialog.hpp"
-#include "../common/ASCOMSupport.hpp"
 #include "Dialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -30,6 +29,10 @@
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "ui_telescopeConfigurationDialog.h"
+
+#ifdef Q_OS_WIN
+	#include "../common/ASCOMSupport.hpp"
+#endif
 
 #include <QCompleter>
 #include <QDebug>
@@ -157,6 +160,8 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
 	#ifdef Q_OS_WIN
 	connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
+	#else
+	ui->radioButtonTelescopeASCOM->hide();
 	#endif
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
