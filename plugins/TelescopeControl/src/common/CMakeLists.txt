@@ -31,6 +31,10 @@ add_library(TelescopeControl_ASCOM_common STATIC
     OLE.cpp
     )
 
+target_link_libraries(TelescopeControl_ASCOM_common
+    Qt5::Core
+    )
+
 target_link_libraries(TelescopeControl_common
     TelescopeControl_ASCOM_common
     )
