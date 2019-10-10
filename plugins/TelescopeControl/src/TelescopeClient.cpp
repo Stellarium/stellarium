@@ -43,6 +43,7 @@
 #include <QTextStream>
 
 #ifdef Q_OS_WIN
+	#include "ASCOM/TelescopeClientASCOM.hpp"
 	#include <windows.h> // GetSystemTimeAsFileTime()
 	#include "ASCOM/TelescopeClientASCOM.hpp"
 #else
