@@ -867,8 +867,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegExp cometProvisionalDesignation("[PCDX]/");
-		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QRegExp cometProvisionalDesignation("[PCDXI]/");
+		QRegExp cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
 		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
