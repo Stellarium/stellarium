@@ -2014,6 +2014,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Symbiotic stars"), "18");
 	groups->addItem(q_("Emission-line stars"), "19");
 	groups->addItem(q_("Interstellar objects"), "20");
+	groups->addItem(q_("Planets and Sun"), "21");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -3297,6 +3298,13 @@ void AstroCalcDialog::calculatePhenomena()
 					dso.append(object);
 			}
 			break;
+		case 21: // Planets and Sun
+			for (const auto& object : allObjects)
+			{
+				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar) && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
+					objects.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -3331,7 +3339,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= 0 && obj2Type < 10) || obj2Type == 20)
+		else if ((obj2Type >= 0 && obj2Type < 10) || obj2Type == 20 || obj2Type == 21)
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3379,7 +3387,7 @@ void AstroCalcDialog::calculatePhenomena()
 		if (planet!=sun && planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
 		{
 			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
-			fillPhenomenaTable(findFarestApproach(planet, mObj, startJD, stopJD), planet, sun, 2);
+			fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, 2);
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3958,7 +3966,7 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	return angle;
 }
 
-QMap<double, double> AstroCalcDialog::findFarestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD)
+QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD)
 {
 	double dist, prevDist, step, step0;
 	QMap<double, double> separations;
@@ -3999,7 +4007,7 @@ QMap<double, double> AstroCalcDialog::findFarestApproach(PlanetP& object1, StelO
 				}
 			}
 
-			if (findPreciseFApproach(&extremum, object1, object2, jd, stopJD, step))
+			if (findPreciseGreatestElongation(&extremum, object1, object2, jd, stopJD, step))
 			{
 				separations.insert(extremum.first, extremum.second);
 			}
@@ -4011,7 +4019,7 @@ QMap<double, double> AstroCalcDialog::findFarestApproach(PlanetP& object1, StelO
 	return separations;
 }
 
-bool AstroCalcDialog::findPreciseFApproach(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
+bool AstroCalcDialog::findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
 {
 	double dist, prevDist;
 

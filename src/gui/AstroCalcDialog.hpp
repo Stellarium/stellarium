@@ -328,8 +328,8 @@ private:
 				   QString separation, QString elongation, QString angularDistance,
 				   QString elongTooltip="", QString angDistTooltip="");
 	//! Calculation max. elongations
-	QMap<double, double> findFarestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
-	bool findPreciseFApproach(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
+	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
+	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;
