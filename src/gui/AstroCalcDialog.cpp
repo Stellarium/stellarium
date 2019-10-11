@@ -3300,6 +3300,7 @@ void AstroCalcDialog::calculatePhenomena()
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
+	PlanetP sun = solarSystem->getSun();
 	if (planet)
 	{
 		double currentJD = core->getJD();   // save current JD
@@ -3337,10 +3338,10 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// conjunction
 				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, false), planet, obj, false);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, 0), planet, obj, false);
 				// opposition
 				if (opposition)
-					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, true), planet, obj, true);
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, 1), planet, obj, true);
 			}
 		}
 		else if (obj2Type == 10 || obj2Type == 11 || obj2Type == 12)
@@ -3372,6 +3373,13 @@ void AstroCalcDialog::calculatePhenomena()
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, false), planet, obj);
 				}
 			}
+		}
+
+		// greatest elongations for inner planets
+		if (planet!=sun && planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
+		{
+			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
+			fillPhenomenaTable(findFarestApproach(planet, mObj, startJD, stopJD), planet, sun, 2);
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3486,7 +3494,7 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 }
 
-void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)
+void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode)
 {
 	QMap<double, double>::ConstIterator it;
 	QString dash = QChar(0x2014); // dash
@@ -3507,7 +3515,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		double s2 = object2->getSpheroidAngularSize(core);
 		double d1 = object1->getJ2000EquatorialPos(core).length();
 		double d2 = object2->getJ2000EquatorialPos(core).length();
-		if (opposition)
+		if (mode==1) // opposition
 		{
 			phenomenType = q_("Opposition");
 			// Added a special case - lunar eclipse
@@ -3560,16 +3568,20 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 					else
 						phenomenType = q_("Inferior conjunction");
 				}
+				if (mode==2) // greatest elongations
+				{
+					phenomenType = q_("Greatest elongation");
+				}
 			}
 		}
 
 		QString elongStr = "";
-		if ((object1 == sun || object2 == sun) && !opposition)
+		if ((object1 == sun || object2 == sun) && mode==0)
 			elongStr = dash;
 		else
 		{
 			double elongation = object1->getElongation(core->getObserverHeliocentricEclipticPos());
-			if (opposition) // calculate elongation for the second object in this case!
+			if (mode==1) // calculate elongation for the second object in this case!
 				elongation = object2->getElongation(core->getObserverHeliocentricEclipticPos());
 
 			if (withDecimalDegree)
@@ -3588,7 +3600,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 			{
 				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
-				if (opposition) // calculate elongation for the second object in this case!
+				if (mode==1) // calculate elongation for the second object in this case!
 					angularDistance = object2->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
 
 				if (withDecimalDegree)
@@ -3600,7 +3612,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString elongationInfo = q_("Angular distance from the Sun");
 		QString angularDistanceInfo = q_("Angular distance from the Moon");
-		if (opposition)
+		if (mode==1)
 		{
 			elongationInfo = q_("Angular distance from the Sun for second object");
 			angularDistanceInfo = q_("Angular distance from the Moon for second object");
@@ -3938,6 +3950,94 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	if (opposition)
 		angle = M_PI - angle;
 	return angle;
+}
+
+QMap<double, double> AstroCalcDialog::findFarestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD)
+{
+	double dist, prevDist, step, step0;
+	QMap<double, double> separations;
+	QPair<double, double> extremum;
+
+	QStringList objects;
+	objects.clear();
+	objects.append(object1->getEnglishName());
+	objects.append(object2->getEnglishName());
+	step0 = findInitialStep(startJD, stopJD, objects);
+	step = step0;
+	double jd = startJD;
+	prevDist = findDistance(jd, object1, object2, false);
+	jd += step;
+	while (jd <= stopJD)
+	{
+		dist = findDistance(jd, object1, object2, false);
+		double factor = qAbs((dist - prevDist) / dist);
+		if (factor > 10.)
+			step = step0 * factor / 10.;
+		else
+			step = step0;
+
+		if (dist>prevDist)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				while (jd <= stopJD)
+				{
+					dist = findDistance(jd, object1, object2, false);
+					if (dist<prevDist)
+						break;
+
+					prevDist = dist;
+					jd += step;
+				}
+			}
+
+			if (findPreciseFApproach(&extremum, object1, object2, jd, stopJD, step))
+			{
+				separations.insert(extremum.first, extremum.second);
+			}
+		}
+
+		prevDist = dist;
+		jd += step;
+	}
+	return separations;
+}
+
+bool AstroCalcDialog::findPreciseFApproach(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
+{
+	double dist, prevDist;
+
+	if (out == Q_NULLPTR)
+		return false;
+
+	prevDist = findDistance(JD, object1, object2, false);
+	step = -step / 2.;
+
+	while (true)
+	{
+		JD += step;
+		dist = findDistance(JD, object1, object2, false);
+
+		if (qAbs(step) < 1. / 1440.)
+		{
+			out->first = JD - step / 2.0;
+			out->second = findDistance(JD - step / 2.0, object1, object2, false);
+			if (out->second > findDistance(JD - 5.0, object1, object2, false))
+				return true;
+			else
+				return false;
+		}
+		if (dist<prevDist)
+		{
+			step = -step / 2.0;
+		}
+		prevDist = dist;
+
+		if (JD > stopJD)
+			return false;
+	}
 }
 
 void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* previous)

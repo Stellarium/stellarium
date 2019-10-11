@@ -322,10 +322,14 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
-	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
+	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
 				   QString separation, QString elongation, QString angularDistance,
 				   QString elongTooltip="", QString angDistTooltip="");
+	//! Calculation max. elongations
+	QMap<double, double> findFarestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
+	bool findPreciseFApproach(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;
