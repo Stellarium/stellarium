@@ -3524,6 +3524,16 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 			separation = M_PI - separation;
 		}
+		else if (mode==2) // greatest elongations
+		{
+			if (separation < 0.0) // we use negative value for eastern elongations!
+			{
+				separation *= -1.0;
+				phenomenType = q_("Greatest eastern elongation");
+			}
+			else
+				phenomenType = q_("Greatest western elongation");
+		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
@@ -3567,11 +3577,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 						phenomenType = q_("Superior conjunction");
 					else
 						phenomenType = q_("Inferior conjunction");
-				}
-				if (mode==2) // greatest elongations
-				{
-					phenomenType = q_("Greatest elongation");
-				}
+				}				
 			}
 		}
 
@@ -4025,7 +4031,11 @@ bool AstroCalcDialog::findPreciseFApproach(QPair<double, double>* out, PlanetP o
 			out->first = JD - step / 2.0;
 			out->second = findDistance(JD - step / 2.0, object1, object2, false);
 			if (out->second > findDistance(JD - 5.0, object1, object2, false))
+			{
+				if (object1->getJ2000EquatorialPos(core).longitude()>object2->getJ2000EquatorialPos(core).longitude())
+					out->second *= -1.0; // let's use negative value for eastern elongations
 				return true;
+			}
 			else
 				return false;
 		}
