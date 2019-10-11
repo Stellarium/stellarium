@@ -117,9 +117,9 @@ Stellarium's star catalogues are based on Hipparcos~\citep{1997ESASP1200.....E, 
 \label{sec:Catalogues:stars:sections}
 
 The catalogue files are split into three main sections as described in
-table \emph{File sections}.
+table~\ref{tab:Catalogues:stars:sections}.
 
-\noindent%
+\begin{table}[htb]
 \begin{tabularx}{\textwidth}{l l X}\toprule
 \emph{Section} & \emph{Offset} & \emph{Description}\\\midrule
 File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\%\midrule
@@ -131,6 +131,9 @@ Star Data Records  & 32+4$n$   & This section of the file contains fixed-size st
                                  to fill the number of stars for the zone, as specified in the zones section above. 
                                  The value of $n$ used in the offset description is the number of zones, as described above.\\\bottomrule
 \end{tabularx}
+\caption{File sections}
+\label{tab:Catalogues:stars:sections}
+\end{table}
 
 \subsection{Record Types}%\label{record-types}
 \label{sec:Catalogues:stars:record:types}
@@ -165,22 +168,20 @@ Magnitude Steps   & 28 & int & 4 & number of steps used to describes values in t
 \subsubsection{Zone Records}%\label{zone-records}
 \label{sec:Catalogues:stars:record:zone}
 
-%% TODO: There are still href links from the wiki. 
-
 The \emph{Zone Records} section of the file lists the number of star
 records there are per zone. The number of zones is determined from the
-level value in the File Header Record, as described in section
-\href{Star_Catalogue\#Zones}{Zones}. The Zones section is simply a list
-of integer values which describe the number of stars for each zone. The
-total length of the Zones section depends on the number of zones. See
-table~\ref{tab:Catalogues:stars:record:zones}. % \emph{Zones section}.
+level value in the File Header Record, as described in
+section~\ref{sec:Catalogues:SkyModel:Zones}. The Zones section is
+simply a list of integer values which describe the number of stars for
+each zone. The total length of the Zones section depends on the number
+of zones. See table~\ref{tab:Catalogues:stars:record:zones}.
 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 num stars in zone 0   & 0    & int & 4 &  number of records in this file which are in zone 0\\%\midrule
 num stars in zone 1   & 4    & int & 4 &  number of records is this file which are in zone 1\\
-...                   &      &     &   &\\
+\ldots                &      &     &   &\\
 num stars in zone $n$ & $4n$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
 \end{tabularx}
 \caption{Zones section}
@@ -212,7 +213,8 @@ smaller precision position fields are used, so the actual resolution on
 the sky isn't significantly worse for the type 1 and 2 records in
 practice.
 
-\begin{longtable}{llllp{55mm}}\toprule
+\begin{table}[p]
+\begin{tabular}{llllp{55mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 hip            &  0 & int                & 3 & Hipparcos catalogue number\\%\midrule
 component\_ids &  3 & unsigned char      & 1 & index to an array of catalogue number suffixes. The list is read from the
@@ -230,9 +232,10 @@ sp\_int        & 11 & unsigned short int & 2 & index into an array of spectral t
 dx0            & 13 & int                & 4 & proper motion of the star in axis 1\\%\midrule
 dx1            & 17 & int                & 4 & proper motion of the star in axis 2\\%\midrule
 plx            & 21 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
+\end{tabular}
 \caption{Star Data Record Type 0}
 \label{tab:StarDataRecord0}
-\end{longtable}
+\end{table}
 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
@@ -263,6 +266,7 @@ mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. Thi
 \caption{Star Data Record Type 2}
 \label{tab:StarDataRecord2}
 \end{table}
+\clearpage
 
 \section{Variable Stars}
 \label{sec:StarCatalogues:VariableStars}
@@ -1170,8 +1174,8 @@ database SIMBAD  \citep{2000A&AS..143....9W}.
 \subsection{Double Star Catalog File Format}
 \label{sec:StarCatalogues:DoubleStars:format}
 
-\subsubsection{General Description}
-\label{sec:StarCatalogues:DoubleStars:general}
+%\subsubsection{General Description}
+%\label{sec:StarCatalogues:DoubleStars:general}
 
 Stellarium's Double Stars catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or
@@ -1194,6 +1198,8 @@ Observation		& int	 & Date of last satisfactory observation (in years).\\%\midru
 Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\%\midrule
 Separation 		& float  & Separation at date of last satisfactory observation (in arcsec).\\\bottomrule
 \end{tabularx}
+\caption{Format of \file{wds\_hip\_part.dat}}
+\label{tab:StarCatalogues:DoubleStars:file}
 \end{table}
 
 \section{Cross-Identification Data}
@@ -1209,8 +1215,8 @@ catalogues.
 \subsection{Cross-Identification Catalog File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:format}
 
-\subsubsection{General Description}
-\label{sec:StarCatalogues:CrossIdentificationData:general}
+%\subsubsection{General Description}
+%\label{sec:StarCatalogues:CrossIdentificationData:general}
 
 Stellarium's Cross-Identification catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
@@ -1228,6 +1234,8 @@ SAO	& int & SAO identificator for the star.\\%\midrule
 HD	& int & HD identificator for the star.\\%\midrule
 HR	& int & HR identificator for the star.\\\bottomrule
 \end{tabularx}
+\caption{Format of \file{cross-id.dat}}
+\label{tab:StarCatalogues:CrossIdentificationData:file}
 \end{table}
 
 %%% Local Variables: 

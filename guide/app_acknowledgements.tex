@@ -12,7 +12,7 @@ Matthew Gates  & Primary author of the first User Guide (versions 0.9 to 0.12)\\
 Paul Robinson  &Sky guide; exercise ideas\\
 Andras Mohari  &Celestial sphere diagrams; numerous corrections\\
 Rudy Gobits, Dirk Schwarzhans & Mac platform specifics\\
-Barry Gerdes \textdagger{}  &Windows platform specifics \\
+Barry Gerdes (\textdagger{}2014)  &Windows platform specifics \\
 %              &Large parts of Ch.~\ref{ch:Phenomena} (Astronomical Phenomena)\\ %% Mentioned as Chapter Author
                &Customisation of .fab files\\
 %              &Ch.~\ref{ch:Landscapes} Making a custom landscape (first version) \\ %% Mentioned as Chapter Author, and the old chapter has been superseded.
@@ -20,7 +20,7 @@ Barry Gerdes \textdagger{}  &Windows platform specifics \\
 Sigma          &Japanese translation; many corrections\\ %% FOR FIRST EDITION. 
 Richard Powell & Figure~\ref{fig:colourmag} (colour/magnitude diagram) is a modification of his diagram; 
                  he kindly granted permission for it to be distributed under the FDL\\
-John Twin      & Many spelling corrections \\
+John Twin      & Many spelling corrections \\\midrule
 Georg Zotti    & Lead author of the 0.15+ editions\\
 Alexander Wolf & New layout, many contributions for the 0.15+ editions\\
 The rest of the Stellarium developer team & You know who you are\ldots :-)\tabularnewline
@@ -39,8 +39,11 @@ We especially welcome contributions, but also bug reports, feature requests and 
 usual channels (trackers, forums and so on):
 \begin{description}
 \item[Stellarium on Github] \url{https://github.com/Stellarium/}
-\item[Bug tracker] \url{https://bugs.launchpad.net/stellarium}
-\item[Questions for Stellarium (FAQ)\index{FAQ}] \url{https://answers.launchpad.net/stellarium}
+%\item[Bug tracker] \url{https://bugs.launchpad.net/stellarium}
+%\item[Questions for Stellarium (FAQ)\index{FAQ}] \url{https://answers.launchpad.net/stellarium}
+\item[Questions for Stellarium (FAQ)\index{FAQ}] \url{https://github.com/Stellarium/stellarium/wiki/FAQ}
+\item[Current issues (FAQ)\index{FAQ}] \url{https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version}
+\item[Google Group] \url{https://groups.google.com/group/stellarium}
 \item[Feedback forum] \url{https://sourceforge.net/p/stellarium/discussion/278769/}
 %\item[Blueprints for Stellarium] \url{https://blueprints.launchpad.net/stellarium}
 \end{description}
@@ -137,18 +140,18 @@ Stellarium would not look the same and work without these works from computer gr
     The changes made to the data are:
 	\begin{itemize}
     \item try to compute visual magnitude and color from the b,v,r values
-    \item compute $\mathrm{nr\_of\_measurements} = the number of valid b,v,r values$
+    \item compute $\mathrm{nr\_of\_measurements} = \mathrm{the\ number\ of\ valid\ b,v,r\ values}$
     \item throw away or keep stars (depending on magnitude, nr\_of\_measurements, combination of flags, tycho2 number)
     \item add all stars from Hipparcos (incl.\ component solutions), and tycho2+1st supplement
     \item reorganize the stars in several brigthness levels and triangular zones according to position and magnitude
 	\end{itemize}
     The programs that are used to generate the star files are called
-    "MakeCombinedCatalogue", "ParseHip", "ParseNomad", and can be
+    \program{MakeCombinedCatalogue}, \program{ParseHip}, \program{ParseNomad}, and can be
     found in the util subdirectory in source code. The position,
     magnitudes, and proper motions of the stars coming from NOMAD
     are unchanged, except for a possible loss of precision,
-    especially in magnitude. When there is no v-magnitude, it is
-    estimated from r or b magnitude.  When there is no b- or v-
+    especially in magnitude. When there is no V magnitude, it is
+    estimated from R or B magnitude.  When there is no B or V
     magnitude, the color B-V is estimated from the other magnitudes.
     Also proper motions of faint stars are neglected at all.
 \item Stellarium's Catalog of Variable Stars based on General Catalog of Variable Stars (GCVS) version 2013Apr. \url{http://www.sai.msu.su/gcvs/gcvs/}
@@ -158,27 +161,27 @@ Stellarium would not look the same and work without these works from computer gr
 	\begin{enumerate}
      \item NGC/IC data taken from SIMBAD Astronomical Database \url{http://simbad.u-strasbg.fr}
      \item Distance to NGC/IC data taken from NED                (NASA/IPAC EXTRAGALACTIC DATABASE)  \url{http://ned.ipac.caltech.edu}
-     \item Catalogue of HII Regions                              (Sharpless, 1959)     taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/20}
-     \item H-$\alpha$ emission regions in the Southern Milky Way (Rodgers+, 1960)      taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/216}
-     \item Catalogue of Reflection Nebulae                       (Van den Bergh, 1966) taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/21}
-     \item Lynds' Catalogue of Dark Nebulae (LDN)                (Lynds, 1962)         taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/7A}
-     \item Lynds' Catalogue of Bright Nebulae                    (Lynds, 1965)         taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/9}
-     \item Catalog of bright diffuse Galactic nebulae            (Cederblad, 1946)     taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/231}
-     \item Barnard's Catalogue of 349 Dark Objects in the Sky    (Barnard, 1927)       taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/220A}
-     \item A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915) taken from NASA ADS \url{http://adsabs.harvard.edu/abs/1915MmRAS..60..175M}
-     \item On Structural Properties of Open Galactic Clusters and their Spatial Distribution. Catalog of Open Galactic Clusters (Collinder, 1931). 
-	       Taken from NASA ADS \url{http://adsabs.harvard.edu/abs/1931AnLun...2....1C}
-     \item The Collinder Catalog of Open Star Clusters. An Observer’s Checklist. Edited by Thomas Watson. 
-	       Taken from CloudyNights \url{http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467}
+     \item Catalogue of HII Regions                              (Sharpless, 1959)     (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/20})
+     \item H-$\alpha$ emission regions in the Southern Milky Way (Rodgers+, 1960)      (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/216})
+     \item Catalogue of Reflection Nebulae                       (Van den Bergh, 1966) (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/21})
+     \item Lynds' Catalogue of Dark Nebulae (LDN)                (Lynds, 1962)         (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/7A})
+     \item Lynds' Catalogue of Bright Nebulae                    (Lynds, 1965)         (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/9})
+     \item Catalog of bright diffuse Galactic nebulae            (Cederblad, 1946)     (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/231})
+     \item Barnard's Catalogue of 349 Dark Objects in the Sky    (Barnard, 1927)       (\url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/220A})
+     \item A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915) from NASA ADS (\url{http://adsabs.harvard.edu/abs/1915MmRAS..60..175M})
+     \item On Structural Properties of Open Galactic Clusters and their Spatial Distribution. Catalog of Open Galactic Clusters (Collinder, 1931)
+	       from NASA ADS (\url{http://adsabs.harvard.edu/abs/1931AnLun...2....1C})
+     \item The Collinder Catalog of Open Star Clusters. An Observer’s Checklist. Edited by Thomas Watson 
+	       from CloudyNights (\url{http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467})
 	\end{enumerate}
 \item Cross-identification of objects in consolidated DSO catalog was maked with:
 	\begin{enumerate}
     \item  SIMBAD Astronomical Database \url{http://simbad.u-strasbg.fr}
     \item  Merged catalogue of reflection nebulae (Magakian, 2003) \url{http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A+A/399/141}
-    \item  Messier  Catalogue was taken from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/List_of_Messier_objects}
-    \item  Caldwell Catalogue was taken from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/Caldwell_catalogue}
+    \item  Messier  Catalogue from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/List_of_Messier_objects}
+    \item  Caldwell Catalogue from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/Caldwell_catalogue}
 	\end{enumerate}
-\item Morphological classification and magnitudes (partially) for Melotte catalogue was taken from DeepSkyPedia \url{http://deepskypedia.com/wiki/List:Melotte}
+\item Morphological classification and magnitudes (partially) for Melotte catalogue from DeepSkyPedia \url{http://deepskypedia.com/wiki/List:Melotte}
 
 \end{enumerate}
 

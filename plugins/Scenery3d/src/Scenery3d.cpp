@@ -1121,8 +1121,8 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "
 			      "Movement speed is linked to field of view (i.e. zoom in for fine adjustments). "
 			      "You can even keep moving by releasing Ctrl before cursor key.</p>"
-			      "<p>Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac.at/</p>");
-
+			      "<p>Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: https://astrosim.univie.ac.at/</p>"
+			      "<p>Further development is in parts supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology, Vienna, Austria. More: http://archpro.lbg.ac.at/</p>");
 	return info;
 }
 

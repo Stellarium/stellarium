@@ -169,6 +169,13 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 			   "The directions are computed based on spherical trigonometry on a spherical Earth.") + "</p>";
 	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and declination lines with custom label can be shown.") + "</p>";
 
+	html += "<h3>" + q_("Publications") + "</h3>";
+	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
+	html += "<p><ul>";
+	html += "<li>" + q_("{Georg Zotti: Open Source Virtual Archaeoastronomy}. Mediterranean Archaeology and Archaeometry, Vol. 16, No 4, (2016), pp. 17-24.")
+			.toHtmlEscaped().replace(a_rx, "<a href=\"http://maajournal.com/Issues/2016/Vol16-4/Full3.pdf\">\\1</a>") + "</li>";
+	html += "</ul></p>";
+
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("ArchaeoLines plugin") + "</p>";
 	html += "<p><ul>";
