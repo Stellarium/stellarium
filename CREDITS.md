@@ -389,7 +389,7 @@
 	     NGC3359, NGC3504, NGC3512, NGC3521, NGC3628, NGC3938, NGC4151, 
 	     NGC4535, NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, 
 	     NGC7318, NGC7331, NGC7380, NGC7479, NGC7635, NGC7640, NGC7789, 
-	     PGC1803573, Barnard 22, Barnard 142, Barnard 173, Sh2-101, 
+	     PGC1803573, Barnard 142, Barnard 173, Sh2-101, 
 	     LDN1235, Sadr region (Gamma Cygni), Jones-Emberson 1, Medusa
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
@@ -518,7 +518,7 @@
 	     from Chuck Ayoub
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.60 Images of IC2169, NGC2244, NGC3077, SH2-263, UGC10822, Barnard207
+	4.60 Images of IC2169, NGC2244, NGC3077, SH2-263, UGC10822, Barnard 22, Barnard207
 	     from Keesscherer
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
