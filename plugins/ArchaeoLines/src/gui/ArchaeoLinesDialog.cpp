@@ -172,7 +172,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
 	html += "<p><ul>";
-	html += "<li>" + q_("{Georg Zotti: Open Source Virtual Archaeoastronomy}. Mediterranean Archaeology and Archaeometry, Vol. 16, No 4, (2016), pp. 17-24.")
+	html += "<li>" + QString("{Georg Zotti: Open Source Virtual Archaeoastronomy}. Mediterranean Archaeology and Archaeometry, Vol. 16, No 4 (2016), pp. 17-24.")
 			.toHtmlEscaped().replace(a_rx, "<a href=\"http://maajournal.com/Issues/2016/Vol16-4/Full3.pdf\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 

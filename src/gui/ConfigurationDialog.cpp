@@ -1052,7 +1052,12 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
-			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
+			html += "<p>";
+			if (desc.info.acknowledgements.length()>0)
+			{
+				html += "<strong>" + q_("Acknowledgements") + "</strong>: " + desc.info.acknowledgements + "<br/>";
+			}
+			html += "<strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
 			if (!desc.info.version.isEmpty())
 				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;

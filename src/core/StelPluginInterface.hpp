@@ -38,6 +38,8 @@ struct StelPluginInfo
 	QString	contact;
 	//! The HTML description of the plugin.
 	QString description;	
+	//! Acknowledgements for project sponsors. (optional)
+	QString acknowledgements;
 	//! The version of the plugin, e.g. "1.0.0"
 	QString version;
 	//! The license of the plugin, e.g. "GPLv2 or later"

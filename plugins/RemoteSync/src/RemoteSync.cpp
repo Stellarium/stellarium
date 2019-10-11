@@ -54,6 +54,7 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	info.authors = "Florian Schaukowitsch and Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("Provides state synchronization for multiple Stellarium instances running in a network. See manual for detailed description.");
+	info.acknowledgements += N_("This plugin was created in the 2015/2016 campaigns of the ESA Summer of Code in Space programme.");
 	info.version = REMOTESYNC_PLUGIN_VERSION;
 	info.license = REMOTESYNC_PLUGIN_LICENSE;
 	return info;

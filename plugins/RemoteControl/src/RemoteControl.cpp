@@ -59,8 +59,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 	info.authors = "Florian Schaukowitsch, Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("Provides remote control functionality using a webserver interface. See manual for detailed description.");
-	info.description += "</br>";
-	info.description += N_("This plugin was created in the 2015 campaign of the ESA Summer of Code in Space programme.");
+	info.acknowledgements += N_("This plugin was created in the 2015 campaign of the ESA Summer of Code in Space programme.");
 	info.version = REMOTECONTROL_PLUGIN_VERSION;
 	info.license = REMOTECONTROL_PLUGIN_LICENSE;
 	return info;
