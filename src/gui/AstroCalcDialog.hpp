@@ -327,7 +327,7 @@ private:
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
 				   QString separation, QString elongation, QString angularDistance,
 				   QString elongTooltip="", QString angDistTooltip="");
-	//! Calculation max. elongations
+	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
 

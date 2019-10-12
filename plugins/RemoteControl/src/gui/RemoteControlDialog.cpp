@@ -136,7 +136,7 @@ void RemoteControlDialog::setAboutHtml(void)
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
 	html += "<p><ul>";
-	html += "<li>" + q_("{Georg Zotti, Florian Schaukowitsch, and Michael Wimmer. The Skyscape Planetarium}. In Liz Henty, Bernadette Brady, Darrelyn Gunzburg, Frank Prendergast, and Fabio Silva, editors, The Marriage of Astronomy and Culture: Theory and Method in the Study of Cultural Astronomy (Papers from the 2016 SEAC Conference), volume 21 of Culture and Cosmos, pages 269–281, Lampeter, Ceredigion, Wales, Spring/Summer and Autumn/Winter 2017. Culture and Cosmos & Sophia Centre Press.")
+	html += "<li>" + QString("{Georg Zotti, Florian Schaukowitsch, and Michael Wimmer. The Skyscape Planetarium}. In Liz Henty, Bernadette Brady, Darrelyn Gunzburg, Frank Prendergast, and Fabio Silva, editors, The Marriage of Astronomy and Culture: Theory and Method in the Study of Cultural Astronomy (Papers from the 2016 SEAC Conference), volume 21 of Culture and Cosmos, pages 269–281, Lampeter, Ceredigion, Wales, Spring/Summer and Autumn/Winter 2017. Culture and Cosmos & Sophia Centre Press.")
 			.toHtmlEscaped().replace(a_rx, "<a href=\"http://www.cultureandcosmos.org/pdfs/21/CCv21_17Zotti.pdf\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
