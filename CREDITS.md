@@ -452,7 +452,7 @@
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
- 	4.43 Images of M33, M42, NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
+ 	4.43 Images of M33, M42, NGC253, NGC2170, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
 	4.44 Images of M8, M17, M94, M104, IC434, IC2944, NGC2264, NGC6726, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
