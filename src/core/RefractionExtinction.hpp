@@ -60,13 +60,13 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d& altAzPos, float* mag) const
 	{
-		Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.001);
+		//Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.001);
 		*mag += airmass(static_cast<float>(altAzPos[2]), false) * ext_coeff;
 	}
 	
 	void forward(const Vec3f& altAzPos, float* mag) const
 	{
-		Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
+		//Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
 		*mag += airmass(altAzPos[2], false) * ext_coeff;
 	}
 

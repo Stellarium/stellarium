@@ -27,7 +27,7 @@
 //! Contains information about a Stellarium plugin.
 struct StelPluginInfo
 {
-	StelPluginInfo() : startByDefault(false) {;}
+	StelPluginInfo() : startByDefault(false) { }
 	//! The plugin ID. It MUST match the lib file name (case sensitive), e.g. "HelloStelModule".
 	QString id;
 	//! The displayed name, e.g. "Artificial Satellites".
@@ -35,15 +35,15 @@ struct StelPluginInfo
 	//! The comma separated list of authors, e.g. "Fabien Chereau, Matthew Gates".
 	QString authors;
 	//! The contact email or URL.
-	QString	contact;
+	QString contact;
 	//! The HTML description of the plugin.
-	QString description;	
-	//! Acknowledgements for project sponsors. (optional)
-	QString acknowledgements;
+	QString description;		
 	//! The version of the plugin, e.g. "1.0.0"
 	QString version;
 	//! The license of the plugin, e.g. "GPLv2 or later"
 	QString license;
+	//! Acknowledgements for project sponsors. (optional)
+	QString acknowledgements;
 	//! Logo or preview image to display in the information dialog or an invalid image if not applicable.
 	//! The image size should be x by x pixels.
 	QImage image;

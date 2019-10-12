@@ -56,7 +56,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Angle Measure");
 	info.authors = "Matthew Gates";
 	info.contact = "https://github.com/Stellarium/stellarium";
-	info.description = N_("Provides an angle measurement tool");
+	info.description = N_("Provides an angle measurement tool");	
 	info.version = ANGLEMEASURE_PLUGIN_VERSION;
 	info.license = ANGLEMEASURE_PLUGIN_LICENSE;
 	return info;
