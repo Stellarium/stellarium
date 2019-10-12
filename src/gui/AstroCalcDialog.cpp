@@ -3098,8 +3098,12 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	phenomenaHeader << q_("Phenomenon");
 	phenomenaHeader << q_("Date and Time");
 	phenomenaHeader << q_("Object 1");
+	// TRANSLATORS: Magnitude of object 1
+	phenomenaHeader << q_("Mag. 1");
 	phenomenaHeader << q_("Object 2");
-	phenomenaHeader << q_("Separation");	
+	// TRANSLATORS: Magnitude of object 2
+	phenomenaHeader << q_("Mag. 2");
+	phenomenaHeader << q_("Separation");
 	phenomenaHeader << q_("Solar Elongation");
 	phenomenaHeader << q_("Lunar Elongation");
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
@@ -3475,9 +3479,9 @@ void AstroCalcDialog::savePhenomena()
 	}
 }
 
-void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
-					    QString separation, QString elongation, QString angularDistance,
-					    QString elongTooltip, QString angDistTooltip)
+void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
+					    QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
+					    QString angularDistance, QString elongTooltip, QString angDistTooltip)
 {
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
@@ -3485,7 +3489,19 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
 	treeItem->setText(PhenomenaObject1, firstObjectName);
+	if (firstObjectMagnitude > 98.f)
+		treeItem->setText(PhenomenaMagnitude1, QChar(0x2014));
+	else
+		treeItem->setText(PhenomenaMagnitude1, QString::number(firstObjectMagnitude, 'f', 2));
+	treeItem->setTextAlignment(PhenomenaMagnitude1, Qt::AlignRight);
+	treeItem->setToolTip(PhenomenaMagnitude1, q_("Magnitude of first object"));
 	treeItem->setText(PhenomenaObject2, secondObjectName);
+	if (secondObjectMagnitude > 98.f)
+		treeItem->setText(PhenomenaMagnitude2, QChar(0x2014));
+	else
+		treeItem->setText(PhenomenaMagnitude2, QString::number(secondObjectMagnitude, 'f', 2));
+	treeItem->setTextAlignment(PhenomenaMagnitude2, Qt::AlignRight);
+	treeItem->setToolTip(PhenomenaMagnitude2, q_("Magnitude of second object"));
 	treeItem->setText(PhenomenaSeparation, separation);
 	treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 	treeItem->setText(PhenomenaElongation, elongation);
@@ -3641,7 +3657,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object2->getNameI18n(), separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitudeWithExtinction(core), object2->getNameI18n(), object2->getVMagnitudeWithExtinction(core), separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -3709,7 +3725,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), commonName, separationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitudeWithExtinction(core), commonName, object2->getVMagnitudeWithExtinction(core), separationStr, elongStr, angDistStr);
 	}
 }
 
@@ -3831,7 +3847,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), commonName, separationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitudeWithExtinction(core), commonName, object2->getVMagnitudeWithExtinction(core), separationStr, elongStr, angDistStr);
 	}
 }
 

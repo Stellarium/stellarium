@@ -90,7 +90,9 @@ public:
 		PhenomenaType,			//! type of phenomena
 		PhenomenaDate,			//! date and time of ephemeris
 		PhenomenaObject1,			//! first object
+		PhenomenaMagnitude1,		//! magnitude of first object
 		PhenomenaObject2,			//! second object
+		PhenomenaMagnitude2,		//! magnitude of second object
 		PhenomenaSeparation,		//! angular separation
 		PhenomenaElongation,		//! elongation (from the Sun)
 		PhenomenaAngularDistance,	//! angular distance (from the Moon)
@@ -324,9 +326,9 @@ private:
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
-	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
-				   QString separation, QString elongation, QString angularDistance,
-				   QString elongTooltip="", QString angDistTooltip="");
+	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
+				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
+				   QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
 	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
@@ -461,6 +463,10 @@ private:
 		else if (column == AstroCalcDialog::PhenomenaDate)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else if (column == AstroCalcDialog::PhenomenaMagnitude1 || column == AstroCalcDialog::PhenomenaMagnitude2)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
 		}
 		else
 		{
