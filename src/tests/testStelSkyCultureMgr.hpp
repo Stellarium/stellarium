@@ -21,7 +21,7 @@
 #define TESTSTELSKYCULTUREMGR_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class StelSkyCultureMgr;
 

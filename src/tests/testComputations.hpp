@@ -21,7 +21,7 @@
 #define TESTCOMPUTATIONS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestComputations : public QObject
 {
