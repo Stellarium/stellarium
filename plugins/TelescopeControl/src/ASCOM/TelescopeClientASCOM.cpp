@@ -43,7 +43,7 @@ bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool mAs
 
 bool areSimilar(double a, double b)
 {
-	return fabs(a - b) < 0.001;
+	return std::abs(a - b) < std::numeric_limits<double>::epsilon();
 }
 
 TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, Equinox eq)

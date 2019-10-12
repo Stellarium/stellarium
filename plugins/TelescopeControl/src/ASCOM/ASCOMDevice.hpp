@@ -42,6 +42,7 @@ public:
 	static QString showDeviceChooser(QString previousDeviceId = "");
 
 	ASCOMDevice(QObject* parent = Q_NULLPTR, QString ascomDeviceId = Q_NULLPTR);
+	~ASCOMDevice();
 
 	bool isDeviceConnected() const;
 	bool isParked() const;

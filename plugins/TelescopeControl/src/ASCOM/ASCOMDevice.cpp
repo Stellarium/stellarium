@@ -35,6 +35,11 @@ ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(paren
 	};
 }
 
+ASCOMDevice::~ASCOMDevice()
+{
+	pTelescopeDispatch->Release();
+}
+
 bool ASCOMDevice::connect()
 {
 	if (mFailedToInitialize) return false;

@@ -19,4 +19,85 @@
 
 #include "testTelescopeControl_ASCOM.hpp"
 
+void TestTelescopeControl_ASCOM::useJNowShouldDetermineCorrectly()
+{
+	// Given
+	const ASCOMDevice::ASCOMEquatorialCoordinateType type = ASCOMDevice::ASCOMEquatorialCoordinateType::Topocentric;
+	const bool useDeviceEqCoordType = true;
+	const Equinox stellariumEquinox = Equinox::EquinoxJ2000;
+
+	// When
+	const bool jnow = useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == true);
+}
+
+void TestTelescopeControl_ASCOM::useJNowShouldUseStellariumEquinoxWhenRequested()
+{
+	// Given
+	const ASCOMDevice::ASCOMEquatorialCoordinateType type = ASCOMDevice::ASCOMEquatorialCoordinateType::Topocentric;
+	const bool useDeviceEqCoordType = false;
+	const Equinox stellariumEquinox = Equinox::EquinoxJ2000;
+
+	// When
+	const bool jnow = useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == false);
+}
+
+void TestTelescopeControl_ASCOM::useJNowShouldUseJNowOnUnknownASCOM()
+{
+	// Given
+	const ASCOMDevice::ASCOMEquatorialCoordinateType type = ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
+	const bool useDeviceEqCoordType = true;
+	const Equinox stellariumEquinox = Equinox::EquinoxJ2000;
+
+	// When
+	const bool jnow = useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == true);
+}
+
+void TestTelescopeControl_ASCOM::areSimilarShouldCompareCorrectly()
+{
+	// Give
+	const double a = 0.00000000000001;
+	const double b = 0.00000000000001;
+
+	// When
+	const bool isSimilar = areSimilar(a, b);
+
+	// Then
+	QVERIFY(isSimilar == true);
+}
+
+void TestTelescopeControl_ASCOM::areSimilarShouldShowSlightErrors()
+{
+	// Give
+	const double a = 0.00000000000001;
+	const double b = 0.0000000000001;
+
+	// When
+	const bool isSimilar = areSimilar(a, b);
+
+	// Then
+	QVERIFY(isSimilar == false);
+}
+
+void TestTelescopeControl_ASCOM::ascomDeviceShouldFailToInitializeWithInvalidDevice()
+{
+	// Given
+	ASCOMDevice* device;
+
+	// When
+	device = new ASCOMDevice(Q_NULLPTR, Q_NULLPTR);
+
+	// Then
+	QVERIFY(device->connect() == false);
+	QVERIFY(device->disconnect() == false);
+}
+
 QTEST_MAIN(TestTelescopeControl_ASCOM)

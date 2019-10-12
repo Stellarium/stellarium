@@ -22,6 +22,9 @@
 #include "TelescopeClient.hpp"
 #include "ASCOMDevice.hpp"
 
+bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool mAscomUseDeviceEqCoordType, Equinox mEquinox);
+bool areSimilar(double a, double b);
+
 class TelescopeClientASCOM : public TelescopeClient
 {
 	Q_OBJECT

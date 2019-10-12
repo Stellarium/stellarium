@@ -23,12 +23,19 @@
 #include <QtTest>
 
 #include "TelescopeClientASCOM.hpp"
+#include "ASCOMDevice.hpp"
 
 class TestTelescopeControl_ASCOM : public QObject
 {
     Q_OBJECT
 
 private slots:
+	void useJNowShouldDetermineCorrectly();
+	void useJNowShouldUseStellariumEquinoxWhenRequested();
+	void useJNowShouldUseJNowOnUnknownASCOM();
+	void areSimilarShouldCompareCorrectly();
+	void areSimilarShouldShowSlightErrors();
+	void ascomDeviceShouldFailToInitializeWithInvalidDevice();
 };
 
 #endif // TESTTELESCOPECONTROL_ASCOM_HPP
