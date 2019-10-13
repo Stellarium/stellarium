@@ -1249,7 +1249,6 @@ ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabel()));
 	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(const int)));
-
 }
 
 void ArchaeoLine::updateLabel()

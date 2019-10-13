@@ -1053,9 +1053,10 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
 			html += "<p>";
-			if (!desc.info.acknowledgements.isEmpty())
+			QString thanks = desc.info.acknowledgements;
+			if (!thanks.isEmpty())
 			{
-				html += "<strong>" + q_("Acknowledgements") + "</strong>: " + desc.info.acknowledgements + "<br/>";
+				html += "<strong>" + q_("Acknowledgements") + "</strong>: " + q_(thanks) + "<br/>";
 			}
 			html += "<strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
