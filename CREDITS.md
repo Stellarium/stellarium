@@ -664,10 +664,6 @@
 	     from ESO/S. Guisard
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.97 Images of VdB 152 
-	     from Hubble Space Telescope
-	     https://commons.wikimedia.org/wiki/
-	     License:  Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
