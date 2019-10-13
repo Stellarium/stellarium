@@ -52,7 +52,7 @@ environment:
 
 before_build:
 - cmd: >-
-    mkdir stellarium-bin
+    mkdir stellarium-%qtver%-%qtbin%
     
     set INNSPATH=C:\Program Files (x86)\Inno Setup 5
     
@@ -62,7 +62,7 @@ before_build:
 
     mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
 
-    cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-bin -G "%msvcname%" ..
+    cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
