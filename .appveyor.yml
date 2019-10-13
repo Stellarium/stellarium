@@ -71,7 +71,7 @@ build:
   
 after_build:
 - cmd: >-
-    if %packaging%==true ( 
+    if "%packaging%"=="true" ( 
        cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target install 
        cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target stellarium-installer
     )
