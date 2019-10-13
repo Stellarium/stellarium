@@ -8,43 +8,82 @@ environment:
     platform: x64
     qtver: 5.9
     qtbin: msvc2015_64
-    msvcname: Visual Studio 14 2015 Win64
+    msvcname: Visual Studio 14 2015 Win64 
+    packaging: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: Win32
     qtver: 5.9
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
+    packaging: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: Win32
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
+    packaging: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: x64
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
+    packaging: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: x64
     qtver: 5.13
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
+    packaging: false
+  # workers for releasing packages...
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: Win32
+    configuration: Release
+    qtver: 5.12.5
+    qtbin: msvc2017
+    msvcname: Visual Studio 15 2017
+    packaging: true
+    # Including commits with particular message or from specific user
+    only_commits:
+       message: /build/                # Start a new build if message contains 'build'
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    configuration: Release
+    qtver: 5.12.5
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+    packaging: true
+    only_commits:
+       message: /build/                # Start a new build if message contains 'build'
 
 before_build:
 - cmd: >-
-    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
+    mkdir stellarium-bin
+    
+    set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+    
+    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
 
     cd c:\stellarium
 
     mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
 
-    cmake -DENABLE_TESTING=1 -G "%msvcname%" ..
+    cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-bin -G "%msvcname%" ..
+
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
+  
+after_build:
+- cmd: >-
+    if packaging==true ( 
+       cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target install 
+       cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target stellarium-installer
+    )
+
 test_script:
 - cmd: ctest --output-on-failure
+
 notifications:
 - provider: Email
   to:
