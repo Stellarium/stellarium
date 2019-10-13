@@ -42,9 +42,6 @@ environment:
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: true
-    # Including commits with particular message or from specific user
-    only_commits:
-       message: /build/                # Start a new build if message contains 'build'
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: x64
     configuration: Release
@@ -52,8 +49,6 @@ environment:
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
     packaging: true
-    only_commits:
-       message: /build/                # Start a new build if message contains 'build'
 
 before_build:
 - cmd: >-
