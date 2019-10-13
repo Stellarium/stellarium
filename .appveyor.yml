@@ -69,12 +69,9 @@ build:
   parallel: true
   verbosity: minimal
   
-after_build:
-- cmd: >-
-    if "%packaging%"=="true" ( 
-       cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target install 
-       cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target stellarium-installer
-    )
+#after_build:
+#- cmd: >-
+#    if "%packaging%"=="true" ( cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target install & cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target stellarium-installer )
 
 test_script:
 - cmd: ctest --output-on-failure
