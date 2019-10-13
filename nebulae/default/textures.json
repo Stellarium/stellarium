@@ -2407,20 +2407,28 @@
 		"maxBrightness" : 13.4
 	},
 	{
-		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n6522_32in.shtml"},
-		"imageUrl" : "n6522.png",
-		"worldCoords" : [[[271.04783,-30.2425], [270.8215,-30.046], [271.0479,-29.8497], [271.2746,-30.0459]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.266023154,
-		"maxBrightness" : 14.8
-	},
-	{
 		"imageCredits" : {"short" : "The Pan-STARRS1 Surveys (PS1) and the PS1 public science archive have been made possible through contributions by the Institute for Astronomy, the University of Hawaii, the Pan-STARRS Project Office, the Max-Planck Society and its participating institutes, the Max Planck Institute for Astronomy, Heidelberg and the Max Planck Institute for Extraterrestrial Physics, Garching, The Johns Hopkins University, Durham University, the University of Edinburgh, the Queen's University Belfast, the Harvard-Smithsonian Center for Astrophysics, the Las Cumbres Observatory Global Telescope Network Incorporated, the National Central University of Taiwan, the Space Telescope Science Institute, the National Aeronautics and Space Administration under Grant No. NNX08AR22G issued through the Planetary Science Division of the NASA Science Mission Directorate, the National Science Foundation Grant No. AST-1238877, the University of Maryland, Eotvos Lorand University (ELTE), the Los Alamos National Laboratory, and the Gordon and Betty Moore Foundation.","infoUrl": "https://ps1images.stsci.edu/cgi-bin/ps1cutouts?pos=ngc+6445&filter=color&filter=g&filter=r&filetypes=stack&auxiliary=data&size=960&output_size=0&verbose=0&autoscale=99.500000&catlist="},
 		"imageUrl" : "n6445.png",
 		"worldCoords" : [[[267.3454,-20.0392], [267.2817,-20.04], [267.2811,-19.98021], [267.3445,-19.9797]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 14.5
+	},
+	{
+		"imageCredits" : {"short" : "NASA, ESA, Digitized Sky Survey 2","infoUrl": "https://www.spacetelescope.org/images/heic1513b/"},
+		"imageUrl" : "n6503.png",
+		"worldCoords" : [[[267.6166,70.0549], [267.1064,70.0552], [267.1059,70.2282], [267.6166,70.228]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.6
+	},
+	{
+		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n6522_32in.shtml"},
+		"imageUrl" : "n6522.png",
+		"worldCoords" : [[[271.04783,-30.2425], [270.8215,-30.046], [271.0479,-29.8497], [271.2746,-30.0459]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.8
 	},
 	{
 		"imageCredits" : {"short" : "DSS"},
@@ -2439,6 +2447,14 @@
 		"maxBrightness" : 13.2
 	},
 	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "n6543kepler.png",
+		"worldCoords" : [[[269.8595, 66.547], [269.42, 66.5464], [269.4185, 66.72], [269.8584, 66.7218]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
 		"imageCredits" : {"short" : "Yang Kai"},
 		"imageUrl" : "n6544.png",
 		"worldCoords" : [[[271.978,-25.1332], [271.6967,-25.1342], [271.696,-24.8792], [271.9773,-24.8782]]],
@@ -2453,14 +2469,6 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 14.2
-	},
-	{
-		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
-		"imageUrl" : "n6543kepler.png",
-		"worldCoords" : [[[269.8595, 66.547], [269.42, 66.5464], [269.4185, 66.72], [269.8584, 66.7218]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 2.1216,
-		"maxBrightness" : 13.0
 	},
 	{
 		"imageCredits": {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n6563.shtml"},

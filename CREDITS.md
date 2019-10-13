@@ -608,7 +608,7 @@
 	     from NASA, Holland Ford (JHU), the ACS Science Team and ESA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
-	4.83 Images of Hydra Cluster
+	4.83 Images of NGC6503, Hydra Cluster
 	     from NASA, ESA, Digitized Sky Survey 2
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
