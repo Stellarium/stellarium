@@ -99,6 +99,13 @@ public:
 		PhenomenaCount			//! total number of columns
 	};
 
+	enum PhenomenaTypeIndex {
+		Conjuction		= 0,
+		Opposition		= 1,
+		GreatestElongation	= 2,
+		Quadrature		= 3
+	};
+
 	//! Defines the number and the order of the columns in the WUT tool
 	//! @enum WUTColumns
 	enum WUTColumns {
@@ -318,13 +325,14 @@ private:
 	//! @note Ported from KStars, should be improved, because this feature calculate
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two body) and current solution is not accurate and slow.	
-	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, bool opposition);	
-	double findDistance(double JD, PlanetP object1, StelObjectP object2, bool opposition);	
+	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation, 3 - quadrature
+	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode);
+	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
-	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, bool opposition);
-	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, bool opposition);
+	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
-	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
+	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation, 3 - quadrature
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
 				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
