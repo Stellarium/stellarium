@@ -421,6 +421,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAngularDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateGroupCelestialBodyList()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -2015,6 +2016,8 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Emission-line stars"), "19");
 	groups->addItem(q_("Interstellar objects"), "20");
 	groups->addItem(q_("Planets and Sun"), "21");
+	if (core->getCurrentPlanet()==solarSystem->getEarth())
+		groups->addItem(q_("Sun, planets and Moon"), "22");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -3309,6 +3312,13 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
+		case 22: // Sun, planets and Moon
+			for (const auto& object : allObjects)
+			{
+				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar || object==solarSystem->getMoon()) && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
+					objects.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -3343,7 +3353,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= 0 && obj2Type < 10) || obj2Type == 20 || obj2Type == 21)
+		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 22))
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3395,7 +3405,7 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// greatest elongations for inner planets
 				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
-			}
+			}			
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3561,7 +3571,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 			else
 				phenomenType = q_("Greatest western elongation");
-		}
+		}		
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
@@ -3961,14 +3971,7 @@ bool AstroCalcDialog::findPrecise(QPair<double, double>* out, PlanetP object1, S
 			out->first = JD - step / 2.0;
 			out->second = findDistance(JD - step / 2.0, object1, object2, mode);
 			if (out->second < findDistance(JD - 5.0, object1, object2, mode))
-			{
-				if (mode==PhenomenaTypeIndex::Quadrature)
-				{
-					if (object1->getJ2000EquatorialPos(core).longitude()>object2->getJ2000EquatorialPos(core).longitude())
-						out->second *= -1.0; // let's use negative value for eastern quadratures
-				}
 				return true;
-			}
 			else
 				return false;
 		}
@@ -3989,7 +3992,7 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	core->update(0);
 	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (mode==PhenomenaTypeIndex::Opposition)
-		angle = M_PI - angle;
+		angle = M_PI - angle;	
 	return angle;
 }
 

@@ -182,6 +182,8 @@ private slots:
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 	void savePhenomenaAngularSeparation();
+	//! Populates the drop-down list of groups of celestial bodies.
+	void populateGroupCelestialBodyList();
 
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);
@@ -296,8 +298,6 @@ private:
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of major planets.
 	void populateMajorPlanetList();
-	//! Populates the drop-down list of groups of celestial bodies.
-	void populateGroupCelestialBodyList();	
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
