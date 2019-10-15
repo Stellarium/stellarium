@@ -893,6 +893,8 @@ Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
+In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations 
+for inner planets and quadratures for outer planets in additional to exist phenomena.
 You can export the calculated phenomena into an XLSX or CSV file.
 
 \begin{figure}[htbp]
@@ -901,10 +903,12 @@ You can export the calculated phenomena into an XLSX or CSV file.
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
 
-Two columns in the table \newFeature{v0.18.2/.3} may be helpful for planning observation of phenomena:
+Four columns in the table may be helpful for planning observation of phenomena:
 \begin{description}
-  \item[solar elongation] angular distance from the Sun
-  \item[lunar elongation] angular distance from the Moon
+  \item[solar elongation] angular distance from the Sun\newFeature{v0.18.2/.3}
+  \item[lunar elongation] angular distance from the Moon\newFeature{v0.18.2/.3}
+  \item[mag. 1] magnitude of first object\newFeature{v0.19.3}
+  \item[mag. 2] magnitude of second object\newFeature{v0.19.3}
 \end{description}
 
 
