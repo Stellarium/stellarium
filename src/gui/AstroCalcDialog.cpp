@@ -3695,7 +3695,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 
 		QString elongStr = "";
-		if ((object1 == sun || object2 == sun) && mode==PhenomenaTypeIndex::Conjuction)
+		if ((object1 == sun && mode==PhenomenaTypeIndex::Conjuction) || (object2 == sun && mode==PhenomenaTypeIndex::Opposition))
 			elongStr = dash;
 		else
 		{
