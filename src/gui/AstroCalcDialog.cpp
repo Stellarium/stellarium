@@ -2524,10 +2524,12 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 			value = ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
 			break;
 		case GraphAngularSizeVsTime:
+		{
 			value = ssObj->getAngularSize(core) * 360. / M_PI;
 			if (value < 1.)
 				value *= 60.;
 			break;
+		}
 		case GraphPhaseAngleVsTime:
 			value = ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
 			break;
@@ -2535,6 +2537,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 			value =  ssObj->getHeliocentricEclipticPos().length();
 			break;
 		case GraphTransitAltitudeVsTime:
+		{
 			double az, alt;
 			bool sign;
 			StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
@@ -2542,6 +2545,27 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 			if (!sign)
 				value *= -1;
 			break;
+		}
+		case GraphRightAscensionVsTime:
+		{
+			double dec_equ, ra_equ;
+			StelUtils::rectToSphe(&ra_equ, &dec_equ, ssObj->getEquinoxEquatorialPos(core));
+			ra_equ = 2.*M_PI-ra_equ;
+			value = ra_equ*12./M_PI;
+			if (value>24.)
+				value -= 24.;
+			break;
+		}
+		case GraphDeclinationVsTime:
+		{
+			double dec_equ, ra_equ;
+			bool sign;
+			StelUtils::rectToSphe(&ra_equ, &dec_equ, ssObj->getEquinoxEquatorialPos(core));
+			StelUtils::radToDecDeg(dec_equ, sign, value); // convert to degrees
+			if (!sign)
+				value *= -1;
+			break;
+		}
 	}
 	return value;
 }
@@ -2580,6 +2604,13 @@ void AstroCalcDialog::populateFunctionsList()
 	// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
 	cf.first = q_("Transit altitude vs. Time");
 	cf.second = GraphTransitAltitudeVsTime;
+	functions.append(cf);
+	// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
+	cf.first = q_("Right ascension vs. Time");
+	cf.second = GraphRightAscensionVsTime;
+	functions.append(cf);
+	cf.first = q_("Declination vs. Time");
+	cf.second = GraphDeclinationVsTime;
 	functions.append(cf);
 
 	QComboBox* first = ui->graphsFirstComboBox;
@@ -2683,6 +2714,17 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 90.0;
 			break;
+		case GraphRightAscensionVsTime:
+			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it.
+			yAxis1Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
+			if (minY1 < -1000.) minY1 = 0.0;
+			if (maxY1 > 1000.) maxY1 = 24.0;
+			break;
+		case GraphDeclinationVsTime:
+			yAxis1Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
+			if (minY1 < -1000.) minY1 = -90.0;
+			if (maxY1 > 1000.) maxY1 = 90.0;
+			break;
 	}
 
 	switch (ui->graphsSecondComboBox->currentData().toInt())
@@ -2728,6 +2770,17 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
 			if (minY2 < -1000.) minY2 = 0.0;
+			if (maxY2 > 1000.) maxY2 = 90.0;
+			break;
+		case GraphRightAscensionVsTime:
+			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it.
+			yAxis2Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
+			if (minY2 < -1000.) minY2 = 0.0;
+			if (maxY2 > 1000.) maxY2 = 24.0;
+			break;
+		case GraphDeclinationVsTime:
+			yAxis2Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
+			if (minY2 < -1000.) minY2 = -90.0;
 			if (maxY2 > 1000.) maxY2 = 90.0;
 			break;
 	}

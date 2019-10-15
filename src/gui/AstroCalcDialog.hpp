@@ -128,7 +128,9 @@ public:
 		GraphAngularSizeVsTime		= 5,
 		GraphPhaseAngleVsTime		= 6,
 		GraphHDistanceVsTime		= 7,
-		GraphTransitAltitudeVsTime	= 8
+		GraphTransitAltitudeVsTime	= 8,
+		GraphRightAscensionVsTime	= 9,
+		GraphDeclinationVsTime		= 10
 	};
 
 	AstroCalcDialog(QObject* parent);
