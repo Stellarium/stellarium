@@ -2008,7 +2008,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "11");
 	groups->addItem(q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "12");
 	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "13");
-	groups->addItem(q_("Planetary nebulae"), "14");
+	groups->addItem(q_("Planetary nebulae (<%1 mag)").arg(brLimit), "14");
 	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "15");
 	groups->addItem(q_("Dark nebulae"), "16");
 	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
@@ -3266,7 +3266,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 14: // Planetary nebulae
 			for (const auto& object : allDSO)
 			{
-				if (object->getDSOType() == Nebula::NebPn || object->getDSOType() == Nebula::NebPossPN || object->getDSOType() == Nebula::NebPPN)
+				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebPn || object->getDSOType() == Nebula::NebPossPN || object->getDSOType() == Nebula::NebPPN))
 					dso.append(object);
 			}
 			break;
@@ -3405,7 +3405,7 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// greatest elongations for inner planets
 				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
-			}			
+			}
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3571,7 +3571,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 			else
 				phenomenType = q_("Greatest western elongation");
-		}		
+		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
@@ -3992,7 +3992,7 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	core->update(0);
 	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (mode==PhenomenaTypeIndex::Opposition)
-		angle = M_PI - angle;	
+		angle = M_PI - angle;
 	return angle;
 }
 
