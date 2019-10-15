@@ -2018,6 +2018,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Planets and Sun"), "21");
 	if (core->getCurrentPlanet()==solarSystem->getEarth())
 		groups->addItem(q_("Sun, planets and Moon"), "22");
+	groups->addItem(q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -3225,7 +3226,7 @@ void AstroCalcDialog::calculatePhenomena()
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
 	{
-		case 0: // Solar system
+		case 0: // All Solar system objects
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED)
@@ -3372,6 +3373,13 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
+		case 23: // Bright Solar system objects
+			for (const auto& object : allObjects)
+			{
+				if (object->getVMagnitude(core) < (brightLimit + 2.0f) && object->getPlanetType() != Planet::isUNDEFINED)
+					objects.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -3406,7 +3414,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 22))
+		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 23))
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3561,19 +3569,19 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
 	treeItem->setText(PhenomenaObject1, firstObjectName);
-	if (firstObjectMagnitude > 98.f)
+	if (firstObjectMagnitude > 90.f)
 		treeItem->setText(PhenomenaMagnitude1, QChar(0x2014));
 	else
 		treeItem->setText(PhenomenaMagnitude1, QString::number(firstObjectMagnitude, 'f', 2));
 	treeItem->setTextAlignment(PhenomenaMagnitude1, Qt::AlignRight);
 	treeItem->setToolTip(PhenomenaMagnitude1, q_("Magnitude of first object"));
 	treeItem->setText(PhenomenaObject2, secondObjectName);
-	if (secondObjectMagnitude > 98.f)
+	if (secondObjectMagnitude > 90.f)
 		treeItem->setText(PhenomenaMagnitude2, QChar(0x2014));
 	else
 		treeItem->setText(PhenomenaMagnitude2, QString::number(secondObjectMagnitude, 'f', 2));
-	treeItem->setTextAlignment(PhenomenaMagnitude2, Qt::AlignRight);
 	treeItem->setToolTip(PhenomenaMagnitude2, q_("Magnitude of second object"));
+	treeItem->setTextAlignment(PhenomenaMagnitude2, Qt::AlignRight);	
 	treeItem->setText(PhenomenaSeparation, separation);
 	treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 	treeItem->setText(PhenomenaElongation, elongation);
@@ -3731,15 +3739,18 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 
 		QString separationStr = dash;
+		float magnitude = object2->getVMagnitude(core);
 		if (!occultation)
-		{
+		{			
 			if (withDecimalDegree)
 				separationStr = StelUtils::radToDecDegStr(separation, 5, false, true);
 			else
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
+		else
+			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), object2->getNameI18n(), object2->getVMagnitude(core), separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), object2->getNameI18n(), magnitude, separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -3799,6 +3810,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			commonName = object2->getDSODesignation();
 
 		QString separationStr = dash;
+		float magnitude = object2->getVMagnitude(core);
 		if (!occultation)
 		{
 			if (withDecimalDegree)
@@ -3806,8 +3818,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
+		else
+			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, object2->getVMagnitude(core), separationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elongStr, angDistStr);
 	}
 }
 
@@ -3921,6 +3935,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			commonName = object2->getID();
 
 		QString separationStr = dash;
+		float magnitude = object2->getVMagnitude(core);
 		if (!occultation)
 		{
 			if (withDecimalDegree)
@@ -3928,8 +3943,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
+		else
+			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, object2->getVMagnitude(core), separationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elongStr, angDistStr);
 	}
 }
 
