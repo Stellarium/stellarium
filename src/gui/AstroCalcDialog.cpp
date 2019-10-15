@@ -3458,8 +3458,7 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 		}
 
-
-		if (planet!=sun)
+		if (planet!=sun && planet!=solarSystem->getMoon())
 		{
 			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
 			if (planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
