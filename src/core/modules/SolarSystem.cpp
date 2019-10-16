@@ -1439,7 +1439,6 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 	int size = AstroCalcDialog::EphemerisList.count();
 	if (size>0)
 	{
-
 		StelProjectorP prj;
 		if (getFlagEphemerisHorizontalCoordinates())
 			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
