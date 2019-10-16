@@ -84,6 +84,7 @@ SolarSystem::SolarSystem()
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
+	, ephemerisLineDisplayed(false)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
 	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
@@ -188,11 +189,6 @@ void SolarSystem::init()
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
-	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
-	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
-	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
-	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
-
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
@@ -225,6 +221,12 @@ void SolarSystem::init()
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
+	// Ephemeris stuff
+	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
+	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
+	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
+	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
 	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
 	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
 	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
@@ -1335,7 +1337,11 @@ void SolarSystem::draw(StelCore* core)
 
 	// AstroCalcDialog
 	if (getFlagEphemerisMarkers())
+	{
 		drawEphemerisMarkers(core);
+		if (getFlagEphemerisLine())
+			drawEphemerisLine(core);
+	}
 }
 
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
@@ -1372,7 +1378,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	if (getFlagEphemerisHorizontalCoordinates())
 		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	else
-		prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
+		prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
 	float size, shift;
@@ -1417,6 +1423,32 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 		}
 	}
+}
+
+void SolarSystem::drawEphemerisLine(const StelCore *core)
+{
+	StelProjectorP prj;
+	if (getFlagEphemerisHorizontalCoordinates())
+		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	else
+		prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+
+	int size = AstroCalcDialog::EphemerisList.count();
+	Vec3f color;
+	QVector<Vec3d> vertexArray;
+	QVector<Vec4f> colorArray;
+	vertexArray.resize(size);
+	colorArray.resize(size);
+	for (int i =0; i< size; i++)
+	{
+		color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
+		colorArray[i].set(color[0], color[1], color[2], 1.f);
+		vertexArray[i]=AstroCalcDialog::EphemerisList[i].coord;
+	}
+
+	if (size>0)
+		sPainter.drawPath(vertexArray, colorArray);
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
@@ -1876,6 +1908,21 @@ void SolarSystem::setFlagEphemerisMarkers(bool b)
 bool SolarSystem::getFlagEphemerisMarkers() const
 {
 	return ephemerisMarkersDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisLine(bool b)
+{
+	if (b!=ephemerisLineDisplayed)
+	{
+		ephemerisLineDisplayed=b;
+		conf->setValue("astrocalc/flag_ephemeris_line", b); // Immediate saving of state
+		emit ephemerisLineChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisLine() const
+{
+	return ephemerisLineDisplayed;
 }
 
 void SolarSystem::setFlagEphemerisHorizontalCoordinates(bool b)
