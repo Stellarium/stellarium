@@ -214,7 +214,7 @@ void Scenery3d::update(double deltaTime)
 		}
 	}
 
-	messageFader.update((int)(deltaTime*1000));
+	messageFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Scenery3d::draw(StelCore* core)
@@ -227,14 +227,12 @@ void Scenery3d::draw(StelCore* core)
 	//the message is always drawn
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
 		painter.setFont(font);
 		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
 		painter.drawText(83, 120, currentMessage);
 	}
-
 }
 
 void Scenery3d::init()
@@ -1122,9 +1120,9 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.</p>"
 			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "
 			      "Movement speed is linked to field of view (i.e. zoom in for fine adjustments). "
-			      "You can even keep moving by releasing Ctrl before cursor key.</p>"
-			      "<p>Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac.at/</p>");
-
+			      "You can even keep moving by releasing Ctrl before cursor key.</p>");
+	info.acknowledgements=N_("Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19; https://astrosim.univie.ac.at/). <br/>"
+				 "Further development is in parts supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology, Vienna, Austria (http://archpro.lbg.ac.at/).");
 	return info;
 }
 

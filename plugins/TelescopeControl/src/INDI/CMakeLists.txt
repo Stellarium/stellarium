@@ -10,7 +10,7 @@ SET(TelescopeControl_INDI_UIS
 
 QT5_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
 
-add_library(TelescopeControl_INDI
+add_library(TelescopeControl_INDI STATIC
     INDIConnection.hpp
     INDIConnection.cpp
     TelescopeClientINDI.hpp

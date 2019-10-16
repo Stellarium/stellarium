@@ -93,16 +93,16 @@ void SporadicMeteorMgr::update(double deltaTime)
 	}
 
 	// average meteors per frame
-	float mpf = m_zhr * deltaTime / 3600.f;
+	float mpf = m_zhr * static_cast<float>(deltaTime) / 3600.f;
 
 	// maximum amount of meteors for the current frame
 	int maxMpf = qRound(mpf);
 	maxMpf = maxMpf < 1 ? 1 : maxMpf;
 
-	float rate = mpf / (float) maxMpf;
+	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-		float prob = (float) qrand() / (float) RAND_MAX;
+		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
 		if (prob < rate)
 		{
 			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity, m_bolideTexture);

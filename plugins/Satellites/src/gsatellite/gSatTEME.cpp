@@ -56,7 +56,6 @@
 // Constructors
 gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
-
 	double startmfe, stopmfe, deltamin;
 	double ro[3] = {};
 	double vo[3] = {};
@@ -83,7 +82,6 @@ gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 
 void gSatTEME::setEpoch(gTime ai_time)
 {
-
 	gTime     kepEpoch(satrec.jdsatepoch);
 	gTimeSpan tSince = ai_time - kepEpoch;
 
@@ -104,7 +102,6 @@ void gSatTEME::setEpoch(gTime ai_time)
 
 void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 {
-
 	double ro[3];
 	double vo[3];
 	gTimeSpan tSince( ai_minSinceKepEpoch/KMIN_PER_DAY);
@@ -124,7 +121,6 @@ void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 
 Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 {
-
 	Vec3d resultVector; // (0) Latitude, (1) Longitude, (2) altitude
 	double theta, r, e2, phi, c;
 

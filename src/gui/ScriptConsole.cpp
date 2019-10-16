@@ -41,6 +41,7 @@
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
+	, useUserDir(false)
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -48,6 +49,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 ScriptConsole::~ScriptConsole()
 {
 	delete ui;
+	delete highlighter; highlighter = Q_NULLPTR;
 }
 
 void ScriptConsole::retranslate()
@@ -97,14 +99,40 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
 	ui->tabs->setCurrentIndex(0);
 	ui->scriptEdit->setFocus();
+
+	useUserDir = StelApp::getInstance().getSettings()->value("gui/flag_scripts_user_dir", false).toBool();
+	ui->useUserDirCheckBox->setChecked(useUserDir);
+	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
+}
+
+void ScriptConsole::setFlagUserDir(bool b)
+{
+	if (b!=useUserDir)
+	{
+		useUserDir = b;
+		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_user_dir", b);
+	}
 }
 
 void ScriptConsole::loadScript()
 {
+	QString openDir;
+	if (getFlagUserDir())
+	{
+		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+		if (openDir.isEmpty())
+			openDir = StelFileMgr::getUserDir();
+	}
+	else
+		openDir = StelFileMgr::getInstallationDir() + "/scripts";
+
+	QString filter = q_("Stellarium Script Files");
+	filter.append(" (*.ssc *.inc);;");
+	filter.append(getFileMask());
 	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR,
 							q_("Load Script"),
-	                                                StelFileMgr::getInstallationDir() + "/scripts", 
-							q_("Script Files") + " " + getFileMask());
+							openDir,
+							filter);
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
@@ -121,14 +149,17 @@ void ScriptConsole::saveScript()
 	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
 
+	QString defaultFilter("(*.ssc)");
 	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save Script"),
-	                                                saveDir,
-							q_("Script Files") + " " + getFileMask());
+							saveDir + "/myscript.ssc",
+							getFileMask(),
+							&defaultFilter);
 	QFile file(fileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
+		out.setCodec("UTF-8");
 		out << ui->scriptEdit->toPlainText();
 		file.close();
 	}
@@ -168,7 +199,7 @@ void ScriptConsole::preprocessScript()
 void ScriptConsole::runScript()
 {
 	ui->tabs->setCurrentIndex(1);
-	ui->logBrowser->setHtml("");
+	ui->logBrowser->clear();
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
 	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
@@ -202,28 +233,29 @@ void ScriptConsole::appendLogLine(const QString& s)
 {
 	QString html = ui->logBrowser->toHtml();
 	html.replace(QRegExp("^\\s+"), "");
-	// if (html!="")
-	// 	html += "<br />";
-
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
 
 void ScriptConsole::appendOutputLine(const QString& s)
 {
-	QString html = ui->outputBrowser->toHtml();
-	html.replace(QRegExp("^\\s+"), "");
-	// if (html!="")
-	// 	html += "<br />";
-
-	html += s;
-	ui->outputBrowser->setHtml(html);
+	if (s.isEmpty())
+	{
+		ui->outputBrowser->clear();
+	}
+	else
+	{
+		QString html = ui->outputBrowser->toHtml();
+		html.replace(QRegExp("^\\s+"), "");
+		html += s;
+		ui->outputBrowser->setHtml(html);
+	}
 }
 
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainView::getInstance(), 
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR,
 								   q_("Select Script Include Directory"),
 	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
 }
@@ -263,11 +295,22 @@ void ScriptConsole::quickRun(int idx)
 
 void ScriptConsole::rowColumnChanged()
 {
-	ui->rowColumnLabel->setText(QString("R:%1 C:%2").arg(ui->scriptEdit->textCursor().blockNumber())
-	                                                .arg(ui->scriptEdit->textCursor().columnNumber()));
+	// TRANSLATORS: The first letter of word "Row"
+	QString row = qc_("R", "text cursor");
+	// TRANSLATORS: The first letter of word "Column"
+	QString column = qc_("C", "text cursor");
+	ui->rowColumnLabel->setText(QString("%1:%2 %3:%4")
+				    .arg(row)
+				    .arg(ui->scriptEdit->textCursor().blockNumber())
+				    .arg(column)
+				    .arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
-QString ScriptConsole::getFileMask()
+const QString ScriptConsole::getFileMask()
 {
-	return "(*.ssc *.inc)";
+	QString filter = q_("Stellarium Script");
+	filter.append(" (*.ssc);;");
+	filter.append(q_("Include File"));
+	filter.append(" (*.inc)");
+	return  filter;
 }

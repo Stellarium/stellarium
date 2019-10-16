@@ -74,6 +74,9 @@ public:
 	//! Get a reference to the StelTranslator object currently used for planetary features.
 	const StelTranslator &getPlanetaryFeaturesTranslator() const;
 
+	//! Get a reference to the StelTranslator object currently used for scripts.
+	const StelTranslator &getScriptsTranslator() const;
+
 	//! Get the type (RTL or LTR) of language currently used for sky objects
 	bool isSkyRTL() const;
 	
@@ -119,7 +122,10 @@ public:
 		SDateMMDDYYYY,		//!< e.g. "07-05-1998" for July 5th 1998
 		SDateDDMMYYYY,		//!< e.g. "05-07-1998" for July 5th 1998
 		SDateSystemDefault,	//!< Use the system default date format
-		SDateYYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
+		SDateYYYYMMDD,		//!< e.g. "1998-07-05" for July 5th 1998
+		SDateWWMMDDYYYY,	//!< e.g. "Sun, 07-05-1998" for Sunday, July 5th 1998
+		SDateWWDDMMYYYY,	//!< e.g. "Sun, 05-07-1998" for Sunday, July 5th 1998
+		SDateWWYYYYMMDD		//!< e.g. "Sun, 1998-07-05" for Sunday, July 5th 1998
 	};
 	
 	//! Get a localized, formatted string representation of the date component of a Julian date.
@@ -149,11 +155,27 @@ public:
 
 	//! Return an alphabetically ordered list of all the known country names
 	static QStringList getAllCountryNames();
+
+	//! Returns the short name of the \a weekday
+	static QString shortDayName(int weekday);
+
+	//! Returns the long name of the \a weekday
+	static QString longDayName(int weekday);
+
+	//! Returns the short name of the \a month
+	static QString shortMonthName(int month);
+
+	//! Returns the long name of the \a month
+	static QString longMonthName(int month);
+
+	//! Returns the genitive long name of the \a month
+	static QString longGenitiveMonthName(int month);
 	
 private:
 	// The translator used for astronomical object naming
 	StelTranslator* skyTranslator;
 	StelTranslator* planetaryFeaturesTranslator;
+	StelTranslator* scriptsTranslator;
 	StelCore* core;
 	
 	// Date and time variables

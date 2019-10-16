@@ -2909,8 +2909,8 @@ static const struct Tass17MultiTerm HYPERION_3[1] = {
   {{ 0, 0, 0, 0, 0, 0, 0, 0}, 58,HYPERION_3_0},
 };
 
-const int nr_of_tass17bodies = 8;
-const struct Tass17Body tass17bodies[8] = {
+//static const int nr_of_tass17bodies = 8;
+static const struct Tass17Body tass17bodies[8] = {
   { "MIMAS",
     8.457558957423141e-08,
     6.667061728781588e+00,

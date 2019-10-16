@@ -106,7 +106,6 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 // Return the list of tiles which should be drawn.
 void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
-
 #ifndef NDEBUG
 	// When this method is called, we can assume that:
 	// - the parent tile min resolution was reached
@@ -116,7 +115,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	if (parent!=Q_NULLPTR)
 	{
 		Q_ASSERT(isDeletionScheduled()==false);
-		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
+		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PI;
 		Q_ASSERT(degPerPixel<parent->minResolution);
 
 		Q_ASSERT(parent->isDeletionScheduled()==false);
@@ -208,7 +207,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	// Check if we reach the resolution limit
-	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
+	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PI;
 	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
@@ -329,7 +328,6 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		}
 		sPainter.setColor(extinctedColor[0], extinctedColor[1], extinctedColor[2], extinctedColor[3]);
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
-		
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE

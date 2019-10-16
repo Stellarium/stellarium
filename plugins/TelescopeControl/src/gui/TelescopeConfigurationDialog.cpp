@@ -252,13 +252,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		//TODO: Add debug
 		return;
 	}
-
 	ui->lineEditTelescopeName->setText(name);
 
 	if(connectionType == ConnectionInternal && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
-		
 		ui->lineEditHostName->setText("localhost");//TODO: Remove magic word!
 		
 		//Make the current device model selected in the list
@@ -270,9 +268,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			return;
 		}
 		else
-		{
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
-		}
+
 		//Initialize the serial port value
 		ui->comboSerialPort->activated(serialPortName);
 		ui->comboSerialPort->setEditText(serialPortName);
@@ -302,9 +299,9 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
-	ui->INDIProperties->setHost(host);
-	ui->INDIProperties->setPort(portTCP);
-	ui->INDIProperties->setSelectedDevice(deviceModelName);
+		ui->INDIProperties->setHost(host);
+		ui->INDIProperties->setPort(portTCP);
+		ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
 
 	//Equinox
@@ -416,7 +413,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if(host.isEmpty()) // Remove validation of hostname
 		return;
 	
-	int delay = MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value());
+	int delay = qRound(MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value()));
 	int portTCP = ui->spinBoxTCPPort->value();
 	bool connectAtStartup = ui->checkBoxConnectAtStartup->isChecked();
 	
@@ -471,7 +468,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeRTS2->isChecked())
 	{
 		type = ConnectionRTS2;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(), MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value()));
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(), qRound(MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value())));
 	}
 	else if (ui->radioButtonTelescopeINDI->isChecked())
 	{

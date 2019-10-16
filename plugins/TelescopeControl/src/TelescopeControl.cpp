@@ -79,7 +79,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
 	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
 	info.license = TELESCOPE_CONTROL_PLUGIN_LICENSE;
@@ -110,6 +110,8 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
+	delete slewDialog; slewDialog = Q_NULLPTR;
+	delete telescopeDialog; telescopeDialog = Q_NULLPTR;
 }
 
 
@@ -195,10 +197,10 @@ void TelescopeControl::init()
 		if (gui!=Q_NULLPTR)
 		{
 			toolbarButton =	new StelButton(Q_NULLPTR,
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-										   QPixmap(":/graphicGui/glow32x32.png"),
-										   "actionShow_Slew_Window");
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -257,9 +259,9 @@ void TelescopeControl::deinit()
 
 void TelescopeControl::update(double deltaTime)
 {
-	labelFader.update((int)(deltaTime*1000));
-	reticleFader.update((int)(deltaTime*1000));
-	circleFader.update((int)(deltaTime*1000));
+	labelFader.update(static_cast<int>(deltaTime*1000));
+	reticleFader.update(static_cast<int>(deltaTime*1000));
+	circleFader.update(static_cast<int>(deltaTime*1000));
 	// communicate with the telescopes:
 	communicate();
 }
@@ -347,7 +349,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
@@ -357,7 +359,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 QString TelescopeControl::getStelObjectType() const
@@ -429,6 +431,8 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
+#else
+	Q_UNUSED(prj) Q_UNUSED(core) Q_UNUSED(sPainter)
 #endif //COMPATIBILITY_001002
 }
 
@@ -892,7 +896,6 @@ void TelescopeControl::loadTelescopes()
 				{
 					if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 					{
-
 						if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 						{
 							stopClientAtSlot(slot);
@@ -965,12 +968,17 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("device_model", deviceModelName);
 	}
 
-	if (connectionType == ConnectionRemote)
+	if (connectionType == ConnectionRemote || connectionType == ConnectionLocal)
 	{
 		//TODO: Add more validation!
-		if (host.isEmpty())
-			return false;
-		telescope.insert("host_name", host);
+		if (!host.isEmpty())
+			telescope.insert("host_name", host);
+		if (isValidPort(portTCP))
+			telescope.insert("tcp_port", portTCP);
+		if (deviceModels.contains(deviceModelName))
+			telescope.insert("device_model", deviceModelName);
+		if (!portSerial.isEmpty())
+			telescope.insert("serial_port", portSerial);
 	}
 
 	if(connectionType == ConnectionRTS2)
@@ -981,18 +989,6 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("username", rts2Username);
 		telescope.insert("password", rts2Password);
 		telescope.insert("refresh", rts2Refresh);
-	}
-
-	if(connectionType == ConnectionLocal)
-	{
-		if (!deviceModels.contains(deviceModelName))
-
-			return false;
-		telescope.insert("device_model", deviceModelName);
-
-		if (portSerial.isEmpty())
-			return false;
-		telescope.insert("serial_port", portSerial);
 	}
 
 	if(connectionType == ConnectionInternal)
@@ -1199,7 +1195,7 @@ bool TelescopeControl::stopAllTelescopes()
 
 bool TelescopeControl::isValidSlotNumber(int slot)
 {
-	return ((slot < MIN_SLOT_NUMBER || slot >  MAX_SLOT_NUMBER) ? false : true);
+	return ((slot >= MIN_SLOT_NUMBER) && (slot <= MAX_SLOT_NUMBER));
 }
 
 bool TelescopeControl::isValidPort(uint port)
@@ -1568,7 +1564,7 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	return true;
 }
 
-const QString& TelescopeControl::getServerExecutablesDirectoryPath()
+const QString& TelescopeControl::getServerExecutablesDirectoryPath() const
 {
 	return serverExecutablesDirectoryPath;
 }

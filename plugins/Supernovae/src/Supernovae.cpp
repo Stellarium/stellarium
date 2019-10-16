@@ -70,7 +70,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Supernovae";
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	info.version = SUPERNOVAE_PLUGIN_VERSION;
 	info.license = SUPERNOVAE_PLUGIN_LICENSE;
@@ -93,7 +93,8 @@ Supernovae::Supernovae()
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -139,7 +140,7 @@ void Supernovae::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
+		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
 		if (sneJsonPath.isEmpty())
 			return;
 
@@ -203,7 +204,6 @@ void Supernovae::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
@@ -223,7 +223,7 @@ void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
 	}
 }
 
@@ -415,7 +415,6 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 		SupernovaP sn(new Supernova(sneData));
 		if (sn->initialized)
 			snstar.append(sn);
-
 	}
 }
 
@@ -566,7 +565,7 @@ void Supernovae::saveSettingsToConfig(void)
 int Supernovae::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Supernovae::checkForUpdate(void)
@@ -582,9 +581,6 @@ void Supernovae::updateJSON(void)
 		qWarning() << "[Supernovae] already updating...  will not start again current update is complete.";
 		return;
 	}
-
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
 
 	qDebug() << "[Supernovae] Updating supernovae catalog...";
 	startDownload(updateUrl);
@@ -634,23 +630,23 @@ void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 	if (progressBar == Q_NULLPTR)
 		return;
 
-	int currentValue = 0;
-	int endValue = 0;
+	qint64 currentValue = 0;
+	qint64 endValue = 0;
 
 	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
 	{
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = qRound(std::floor(bytesReceived / 1024.));
+			bytesTotal    = qRound(std::floor(bytesTotal / 1024.));
 		}
 		currentValue = bytesReceived;
 		endValue = bytesTotal;
 	}
 
-	progressBar->setValue(currentValue);
-	progressBar->setRange(0, endValue);
+	progressBar->setValue(static_cast<int>(currentValue));
+	progressBar->setRange(0, static_cast<int>(endValue));
 }
 
 void Supernovae::downloadComplete(QNetworkReply *reply)
@@ -705,6 +701,9 @@ void Supernovae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Supernovae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -728,15 +727,14 @@ void Supernovae::displayMessage(const QString& message, const QString hexColor)
 
 QString Supernovae::getSupernovaeList() const
 {
-	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = snlist.values();
-	qSort(vals);
+	std::sort(vals.begin(), vals.end());
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
-		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(smonth[month-1]);
+		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month));
 	}
 
 	return out.join(", ");

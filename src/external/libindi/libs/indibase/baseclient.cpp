@@ -695,11 +695,11 @@ int INDI::BaseClient::messageCmd(XMLEle *root, char *errmsg)
         else
         {
             char ts[32];
-            struct tm *tp;
+	    struct tm *tp;
             time_t t;
             time(&t);
-            tp = gmtime(&t);
-            strftime(ts, sizeof(ts), "%Y-%m-%dT%H:%M:%S", tp);
+	    tp = gmtime(&t);
+	    strftime(ts, sizeof(ts), "%Y-%m-%dT%H:%M:%S", tp);
             snprintf(msgBuffer, MAXRBUF, "%s: %s", ts, valuXMLAtt(message));
         }
 
@@ -732,7 +732,6 @@ void INDI::BaseClient::sendNewText(ITextVectorProperty *tvp)
         sendString("  </oneText>\n");
     }
     sendString("</newTextVector>\n");
-
 }
 
 void INDI::BaseClient::sendNewText(const char *deviceName, const char *propertyName, const char *elementName,

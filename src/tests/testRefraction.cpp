@@ -20,7 +20,6 @@
 #include <QObject>
 #include <QtDebug>
 #include <QVariantList>
-#include <QtTest>
 
 #include "tests/testRefraction.hpp"
 #include "StelUtils.hpp"
@@ -76,13 +75,30 @@ void TestRefraction::testSaemundssonEquation()
 		refCls.forward(v);
 		double lng, lat;
 		StelUtils::rectToSphe(&lng, &lat, v);
-		double result = qAbs((h-lat)*180./M_PI)*60.;
+		double result = qAbs((h-lat)*M_180_PI)*60.;
 		double actualError = qAbs(ref - result);
 		QVERIFY2(actualError <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
 							.arg(height)
 							.arg(result)
 							.arg(ref)
 							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+
+		float refF = (float)ref;
+		Vec3f vF;
+		float hF = height * M_PI/180.f;
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.forward(vF);
+		float lngF, latF;
+		StelUtils::rectToSphe(&lngF, &latF, vF);
+		float resultF = qAbs((hF-latF)*180.f/M_PI)*60.f;
+		float actualErrorF = qAbs(refF - resultF);
+		QVERIFY2(actualErrorF <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(refF)
+							.arg(actualErrorF)
 							.arg(acceptableError)
 							.toUtf8());
 	}
@@ -129,7 +145,7 @@ void TestRefraction::testBennettEquation()
 		refCls.backward(v);
 		double lng, lat;
 		StelUtils::rectToSphe(&lng, &lat, v);
-		double result = qAbs((h-lat)*180./M_PI)*60.;
+		double result = qAbs((h-lat)*M_180_PI)*60.;
 		double actualError = qAbs(ref - result);
 		QVERIFY2(actualError <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
 							.arg(height)
@@ -138,13 +154,30 @@ void TestRefraction::testBennettEquation()
 							.arg(actualError)
 							.arg(acceptableError)
 							.toUtf8());
+
+		float refF = (float)ref;
+		Vec3f vF;
+		float hF = height * M_PI/180.f;
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.backward(vF);
+		float lngF, latF;
+		StelUtils::rectToSphe(&lngF, &latF, vF);
+		float resultF = qAbs((hF-latF)*180.f/M_PI)*60.f;
+		double actualErrorF = qAbs(refF - resultF);
+		QVERIFY2(actualErrorF <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(refF)
+							.arg(actualErrorF)
+							.arg(acceptableError)
+							.toUtf8());
 	}
 }
 
 void TestRefraction::testComplexRefraction()
 {
 	Refraction refCls;
-	float acceptableError = 0.14;
+	double acceptableError = 0.14;
 
 	// The delta of the theoretical values, what gives Saemundsson and Bennett equations for refraction.
 	// true alt. -> apparent alt. -> true alt.
@@ -185,13 +218,33 @@ void TestRefraction::testComplexRefraction()
 		StelUtils::spheToRect(0.0, h, v);
 		refCls.backward(v);
 		StelUtils::rectToSphe(&lng, &latB, v);
-		double rS = qAbs((h-latS)*180./M_PI)*60.;
-		double rB = qAbs((h-latB)*180./M_PI)*60.;
+		double rS = qAbs((h-latS)*M_180_PI)*60.;
+		double rB = qAbs((h-latB)*M_180_PI)*60.;
 		double result = qAbs(rS-rB);
 		QVERIFY2(qAbs(result - expD) <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" acceptable=%5")
 							.arg(height)
 							.arg(result)
 							.arg(expD)
+							.arg(acceptableError)
+							.toUtf8());
+
+		float expDF = (float)expD;
+		Vec3f vF;
+		float lngF, latSF, latBF;
+		float hF = height * M_PI_180f;
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.forward(vF);
+		StelUtils::rectToSphe(&lngF, &latSF, vF);
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.backward(vF);
+		StelUtils::rectToSphe(&lngF, &latBF, vF);
+		float rSF = qAbs((hF-latSF)*M_180_PIf)*60.f;
+		float rBF = qAbs((hF-latBF)*M_180_PIf)*60.f;
+		float resultF = qAbs(rSF-rBF);
+		QVERIFY2(qAbs(resultF - expDF) <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(expDF)
 							.arg(acceptableError)
 							.toUtf8());
 	}

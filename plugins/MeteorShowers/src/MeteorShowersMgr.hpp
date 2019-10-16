@@ -280,7 +280,7 @@ private slots:
 	void checkForUpdates();
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
-	void locationChanged(StelLocation location);
+	void locationChanged(const StelLocation &location);
 
 private:
 	MeteorShowers* m_meteorShowers;

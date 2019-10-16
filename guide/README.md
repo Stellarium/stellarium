@@ -48,6 +48,12 @@ sudo apt-get install texlive-full biber make
 
 but rather install TeXlive directly. See https://www.tug.org/texlive/quickinstall.html
 
+On Ubuntu 19.04, 
+```
+sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
+texlive-latex-extra texlive-pictures biber make
+```
+
 
 ### Mac OS X
 

@@ -26,8 +26,8 @@
 class DECLSPEC HttpRequestHandler : public QObject {
     Q_OBJECT
     Q_DISABLE_COPY(HttpRequestHandler)
-public:
 
+public:
     /**
      * Constructor.
      * @param parent Parent object.
@@ -44,7 +44,6 @@ public:
       @warning This method must be thread safe
     */
     virtual void service(HttpRequest& request, HttpResponse& response);
-
 };
 
 #endif // HTTPREQUESTHANDLER_H

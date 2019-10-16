@@ -31,14 +31,11 @@ class HipsMgr : public StelModule
 	Q_PROPERTY(QList<HipsSurveyP> surveys
 			MEMBER surveys
 			NOTIFY surveysChanged)
-
 	Q_PROPERTY(bool flagShow READ getFlagShow WRITE setFlagShow NOTIFY showChanged)
-
 	Q_PROPERTY(State state READ getState NOTIFY stateChanged)
 	Q_PROPERTY(bool loaded READ isLoaded NOTIFY stateChanged)
 
 public:
-
 	//! @enum State The loading state of the survey sources.
 	enum State
 	{

@@ -2,24 +2,25 @@
 // Name: Herschel 400 Tour
 // License: Public Domain
 // Author: Alexander Wolf
-// Version: 1.1
+// Version: 1.2
 // Description: A tour around objects from the Herschel 400 Catalogue
 
 include("common_objects.inc");
+include("i18n.inc");
 
 var color="#00AAFF";
 core.clear("deepspace");
 core.setGuiVisible(false);
 StelMovementMgr.setFlagTracking(true);
 
-var id = LabelMgr.labelScreen("The Herschel 400 Catalogue", 20, 20, false, 30, color);
-var info1 = LabelMgr.labelScreen("The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae and Clusters", 20, 60, false, 20, color);
-var info2 = LabelMgr.labelScreen("published in 1864 of 5,000 objects, and hence also of the New General Catalogue.", 20, 85, false, 20, color);
-var stat1 = LabelMgr.labelScreen("Vital statistics:", 20, 120, false, 16, color);
-var stat2 = LabelMgr.labelScreen("* The catalogue contains 400 objects", 20, 140, false, 16, color);
-var stat3 = LabelMgr.labelScreen("* All objects are from the NGC", 20, 160, false, 16, color);
-var stat4 = LabelMgr.labelScreen("* All visible in mid northern latitudes", 20, 180, false, 16, color);
-var stat5 = LabelMgr.labelScreen("* All visible in 150 mm (6\") or larger telescopes", 20, 200, false, 16, color);
+var id = LabelMgr.labelScreen(tr("The Herschel 400 Catalogue"), 20, 20, false, 30, color);
+var info1 = LabelMgr.labelScreen(tr("The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae and Clusters"), 20, 60, false, 20, color);
+var info2 = LabelMgr.labelScreen(tr("published in 1864 of 5,000 objects, and hence also of the New General Catalogue."), 20, 85, false, 20, color);
+var stat1 = LabelMgr.labelScreen(tr("Vital statistics:"), 20, 120, false, 16, color);
+var stat2 = LabelMgr.labelScreen(tr("* The catalogue contains 400 objects"), 20, 140, false, 16, color);
+var stat3 = LabelMgr.labelScreen(tr("* All objects are from the NGC"), 20, 160, false, 16, color);
+var stat4 = LabelMgr.labelScreen(tr("* All visible in mid northern latitudes"), 20, 180, false, 16, color);
+var stat5 = LabelMgr.labelScreen(tr("* All visible in 150 mm (6\") or larger telescopes"), 20, 200, false, 16, color);
 
 LabelMgr.setLabelShow(id, true);
 LabelMgr.setLabelShow(info1, true);

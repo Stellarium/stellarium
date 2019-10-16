@@ -31,7 +31,7 @@
 class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
@@ -41,7 +41,6 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 
 	protected:
-		
 		virtual bool event(QEvent* event)
 		{
 			if (event->type()==QEvent::WindowDeactivate)
@@ -82,7 +81,7 @@ DummyDialog::~DummyDialog()
 void DummyDialog::close()
 {
 	emit visibleChanged(false);
-	StelMainView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 }
 
 void DummyDialog::setVisible(bool v)
@@ -114,7 +113,7 @@ void DummyDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 	}
 }
 

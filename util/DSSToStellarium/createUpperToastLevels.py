@@ -74,8 +74,3 @@ while level>=0:
         resImg.save("%s/%d/%d_%d.jpg" % (outDirectory, level, x, y), quality=90)
 
     level=level-1
-
-
-
-
-
