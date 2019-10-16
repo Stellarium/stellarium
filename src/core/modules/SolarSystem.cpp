@@ -1374,6 +1374,10 @@ Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 
 void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 {
+	int fsize = AstroCalcDialog::EphemerisList.count();
+	if (fsize==0)
+		return;
+
 	StelProjectorP prj;
 	if (getFlagEphemerisHorizontalCoordinates())
 		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -1386,7 +1390,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	bool showMagnitudes = getFlagEphemerisMagnitudes();
 	QString info = "";
 
-	for (int i =0; i< AstroCalcDialog::EphemerisList.count(); i++)
+	for (int i =0; i < fsize; i++)
 	{
 		Vec3d win;
 		// Check visibility of pointer
@@ -1430,16 +1434,17 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 void SolarSystem::drawEphemerisLine(const StelCore *core)
 {
-	StelProjectorP prj;
-	if (getFlagEphemerisHorizontalCoordinates())
-		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	else
-		prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-
 	int size = AstroCalcDialog::EphemerisList.count();
 	if (size>0)
 	{
+
+		StelProjectorP prj;
+		if (getFlagEphemerisHorizontalCoordinates())
+			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		else
+			prj = core->getProjection(StelCore::FrameJ2000);
+		StelPainter sPainter(prj);
+
 		// The array of data is not empty - good news!
 		if (size>=3)
 		{
