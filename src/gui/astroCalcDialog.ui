@@ -428,6 +428,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="ephemerisShowLinesCheckBox">
+              <property name="text">
+               <string>lines</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="ephemerisShowMarkersCheckBox">
               <property name="toolTip">
                <string>Show markers of positions of the current celestial body on the sky</string>

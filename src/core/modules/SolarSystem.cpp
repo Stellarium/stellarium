@@ -1338,9 +1338,11 @@ void SolarSystem::draw(StelCore* core)
 	// AstroCalcDialog
 	if (getFlagEphemerisMarkers())
 	{
-		drawEphemerisMarkers(core);
-		if (getFlagEphemerisLine())
-			drawEphemerisLine(core);
+		drawEphemerisMarkers(core);		
+	}
+	if (getFlagEphemerisLine())
+	{
+		drawEphemerisLine(core);
 	}
 }
 
