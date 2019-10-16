@@ -1402,7 +1402,10 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		else
 		{
 			colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
-			size = 4.f;
+			if (getFlagEphemerisLine())
+				size = 2.f;
+			else
+				size = 4.f;
 		}
 		sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
@@ -1435,20 +1438,45 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 	StelPainter sPainter(prj);
 
 	int size = AstroCalcDialog::EphemerisList.count();
-	Vec3f color;
-	QVector<Vec3d> vertexArray;
-	QVector<Vec4f> colorArray;
-	vertexArray.resize(size);
-	colorArray.resize(size);
-	for (int i =0; i< size; i++)
-	{
-		color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
-		colorArray[i].set(color[0], color[1], color[2], 1.f);
-		vertexArray[i]=AstroCalcDialog::EphemerisList[i].coord;
-	}
-
 	if (size>0)
-		sPainter.drawPath(vertexArray, colorArray);
+	{
+		// The array of data is not empty - good news!
+		if (size>=3)
+		{
+			Vec3f color;
+			QVector<Vec3d> vertexArray;
+			QVector<Vec4f> colorArray;
+			if (AstroCalcDialog::EphemerisList[0].colorIndex!=AstroCalcDialog::EphemerisList[size-1].colorIndex)
+			{
+				// Oops... the color of first 3 items are different - looks like we got 5 planets on sky!
+				int nsize = static_cast<int>(size/5);
+				vertexArray.resize(nsize);
+				colorArray.resize(nsize);
+				for (int j=0; j<5; j++)
+				{
+					for (int i =0; i < nsize; i++)
+					{
+						color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
+						colorArray[i].set(color[0], color[1], color[2], 1.f);
+						vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
+					}
+					sPainter.drawPath(vertexArray, colorArray);
+				}
+			}
+			else
+			{
+				vertexArray.resize(size);
+				colorArray.resize(size);
+				for (int i =0; i < size; i++)
+				{
+					color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
+					colorArray[i].set(color[0], color[1], color[2], 1.f);
+					vertexArray[i]=AstroCalcDialog::EphemerisList[i].coord;
+				}
+				sPainter.drawPath(vertexArray, colorArray);
+			}
+		}
+	}
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
