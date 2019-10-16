@@ -102,8 +102,7 @@ public:
 	enum PhenomenaTypeIndex {
 		Conjuction		= 0,
 		Opposition		= 1,
-		GreatestElongation	= 2,
-		Quadrature		= 3
+		GreatestElongation	= 2
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
@@ -327,14 +326,14 @@ private:
 	//! @note Ported from KStars, should be improved, because this feature calculate
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two body) and current solution is not accurate and slow.	
-	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation, 3 - quadrature
+	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode);
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
-	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation, 3 - quadrature
+	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
 				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
@@ -342,9 +341,6 @@ private:
 	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
-	//! Calculation quadratures
-	QMap<double, double> findQuadratureApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
-	bool findPreciseQuadrature(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;

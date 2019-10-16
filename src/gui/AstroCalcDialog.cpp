@@ -3466,11 +3466,6 @@ void AstroCalcDialog::calculatePhenomena()
 				// greatest elongations for inner planets
 				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
 			}
-			else
-			{
-				// quadratures for outer planets
-				fillPhenomenaTable(findQuadratureApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::Quadrature);
-			}
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3636,17 +3631,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 			else
 				phenomenType = q_("Greatest western elongation");
-		}
-		else if (mode==PhenomenaTypeIndex::Quadrature) // quadratures
-		{
-			if (separation < 0.0) // we use negative value for eastern quadratures!
-			{
-				separation *= -1.0;
-				phenomenType = q_("Eastern quadrature");
-			}
-			else
-				phenomenType = q_("Western quadrature");
-		}
+		}		
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
@@ -4172,93 +4157,6 @@ bool AstroCalcDialog::findPreciseGreatestElongation(QPair<double, double>* out, 
 	}
 }
 
-QMap<double, double> AstroCalcDialog::findQuadratureApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD)
-{
-	double dist, prevDist, step, step0;
-	QMap<double, double> separations;
-	QPair<double, double> extremum;
-
-	QStringList objects;
-	objects.clear();
-	objects.append(object1->getEnglishName());
-	objects.append(object2->getEnglishName());
-	step0 = findInitialStep(startJD, stopJD, objects);
-	step = step0;
-	double jd = startJD;
-	prevDist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
-	jd += step;
-	while (jd <= stopJD)
-	{
-		dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
-		double factor = qAbs((dist - prevDist) / dist);
-		if (factor > 10.)
-			step = step0 * factor / 10.;
-		else
-			step = step0;
-
-		if (dist > M_PI_2)
-		{
-			if (step > step0)
-			{
-				jd -= step;
-				step = step0;
-				while (jd <= stopJD)
-				{
-					dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
-					if (dist>M_PI_2)
-						break;
-
-					prevDist = dist;
-					jd += step;
-				}
-			}
-
-			if (findPreciseQuadrature(&extremum, object1, object2, jd, stopJD, step))
-			{
-				separations.insert(extremum.first, extremum.second);
-			}
-		}
-
-		prevDist = dist;
-		jd += step;
-	}
-	return separations;
-}
-
-bool AstroCalcDialog::findPreciseQuadrature(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
-{
-	double dist;
-
-	if (out == Q_NULLPTR)
-		return false;
-
-	step = -step / 2.;
-	while (true)
-	{
-		JD += step;
-		dist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjuction);
-		if (qAbs(step) < 1. / 1440.)
-		{
-			out->first = JD - step / 2.0;
-			out->second = findDistance(JD - step / 2.0, object1, object2, PhenomenaTypeIndex::Conjuction);
-			if (out->second < M_PI_2)
-			{
-				if (object1->getJ2000EquatorialPos(core).longitude()>object2->getJ2000EquatorialPos(core).longitude())
-					out->second *= -1.0; // let's use negative value for eastern quadratures
-				return true;
-			}
-			else
-				return false;
-		}
-		if (dist<M_PI_2)
-		{
-			step = -step / 2.0;
-		}
-
-		if (JD > stopJD)
-			return false;
-	}
-}
 void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* previous)
 {
 	if (!current)
