@@ -218,6 +218,13 @@ public slots:
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! - velocity: the planet velocity around the parent planet in ecliptical coordinates in AU/d (for Solar system objects only!)
+	//! - velocity-kms: the planet velocity around the parent planet in km/s (for Solar system objects only!)
+	//! - heliocentric-velocity: the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d (for Solar system objects only!)
+	//! - heliocentric-velocity-kms: the planet heliocentric velocity in the solar system in km/s (for Solar system objects only!)
+	//! - scale: scale factor for Solar system bodies (for Solar system objects only!)
+	//! - eclipse-obscuration: value of obscuration for solar eclipse (for Sun only!)
+	//! - eclipse-magnitude: value of magnitude for solar eclipse (for Sun only!)
 	//! Other StelObject derivates, also those defined in plugins, may add more,
 	//! these fields are documented in the respective classes, or simply try what you get:
 	//! You can print a complete set of entries into output with the following commands:

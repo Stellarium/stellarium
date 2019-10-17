@@ -735,8 +735,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));		
 		map.insert("velocity", getEclipticVelocity().toString());
+		map.insert("velocity-kms", QString::number(getEclipticVelocity().length()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
-		map.insert("scale", sphereScale);
+		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().length()* AU/86400., 'f', 5));
+		map.insert("scale", sphereScale);		
 	}
 	else
 	{
