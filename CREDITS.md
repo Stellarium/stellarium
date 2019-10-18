@@ -375,13 +375,13 @@
 	     License: Creative Commons Attribution 4.0 International
 	4.22 Images of SMC (Magellanic Clouds) from Albert Van
 	     Donkelaar
-	4.23 Images of NGC1365, NGC6726, NGC6744, NGC6752, NGC7293
+	4.23 Images of NGC1365, NGC6726, NGC6744, NGC7293
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M3, M13, M15, M24, M51, M58, M63, M76,
+	4.25 Images of M15, M24, M51, M58, M63, M76,
 	     M81, M82, M96, M101, M105, M106, IC405, IC443, IC1727, NGC246, 
 	     NGC457, NGC467, NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, 
 	     NGC1961, NGC2174, NGC2371, NGC2392, NGC2403, NGC2655, NGC2685, 
@@ -448,7 +448,7 @@
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316, NGC1978, 
-	     NGC2207, NGC2736, NGC3532, NGC4945, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
+	     NGC2207, NGC2736, NGC3532, NGC4945, NGC5128, NGC5189, NGC6362, NGC6752, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -480,7 +480,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M5, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
+	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
