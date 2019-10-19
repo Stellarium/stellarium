@@ -103,7 +103,8 @@ public:
 	enum PhenomenaTypeIndex {
 		Conjuction		= 0,
 		Opposition		= 1,
-		GreatestElongation	= 2
+		GreatestElongation	= 2,
+		StationaryPoint		= 3
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
@@ -345,6 +346,10 @@ private:
 	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
+	//! Calculation stationary points
+	QMap<double, double> findStationaryPointApproach(PlanetP& object1, double startJD, double stopJD);
+	bool findPreciseStationaryPoint(QPair<double, double>* out, PlanetP object, double JD, double stopJD, double step, bool retrograde);
+	double findRightAscension(double JD, PlanetP object);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;

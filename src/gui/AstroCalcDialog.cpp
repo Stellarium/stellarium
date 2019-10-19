@@ -3481,6 +3481,8 @@ void AstroCalcDialog::calculatePhenomena()
 				// greatest elongations for inner planets
 				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
 			}
+
+			fillPhenomenaTable(findStationaryPointApproach(planet, startJD, stopJD), planet, sun, PhenomenaTypeIndex::StationaryPoint);
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3646,7 +3648,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 			else
 				phenomenType = q_("Greatest western elongation");
-		}		
+		}
+		else if (mode==PhenomenaTypeIndex::StationaryPoint) // stationary points
+		{
+			if (separation < 0.0) // we use negative value for start retrograde motion!
+				phenomenType = q_("Stationary (begin retrograde)");
+			else
+				phenomenType = q_("Stationary (begin prograde)");
+		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
@@ -3749,7 +3758,15 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), object2->getNameI18n(), magnitude, separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		QString nameObj2 = object2->getNameI18n();
+		if (mode==PhenomenaTypeIndex::StationaryPoint)
+		{
+			nameObj2 = dash;
+			magnitude = 99.f;
+			separationStr = dash;
+		}
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -4170,6 +4187,164 @@ bool AstroCalcDialog::findPreciseGreatestElongation(QPair<double, double>* out, 
 		if (JD > stopJD)
 			return false;
 	}
+}
+
+QMap<double, double> AstroCalcDialog::findStationaryPointApproach(PlanetP &object1, double startJD, double stopJD)
+{
+	double RA, prevRA, step, step0;
+	QMap<double, double> separations;
+	QPair<double, double> extremum;
+
+	QStringList objects;
+	objects.clear();
+	objects.append(object1->getEnglishName());
+	step0 = findInitialStep(startJD, stopJD, objects);
+	step = step0;
+	double jd = startJD;
+	prevRA = findRightAscension(jd, object1);
+	jd += step;
+	while (jd <= stopJD)
+	{
+		RA = findRightAscension(jd, object1);
+		double factor = qAbs((RA - prevRA) / RA);
+		if (factor > 10.)
+			step = step0 * factor / 10.;
+		else
+			step = step0;
+
+		if (RA>prevRA && qAbs(RA - prevRA)<180.)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				while (jd <= stopJD)
+				{
+					RA = findRightAscension(jd, object1);
+					if (RA<prevRA)
+						break;
+
+					prevRA = RA;
+					jd += step;
+				}
+			}
+
+			if (findPreciseStationaryPoint(&extremum, object1, jd, stopJD, step, true))
+			{
+				separations.insert(extremum.first, extremum.second);
+			}
+		}
+		prevRA = RA;
+		jd += step;
+	}
+
+	step0 = findInitialStep(startJD, stopJD, objects);
+	step = step0;
+	jd = startJD;
+	prevRA = findRightAscension(jd, object1);
+	jd += step;
+	while (jd <= stopJD)
+	{
+		RA = findRightAscension(jd, object1);
+		double factor = qAbs((RA - prevRA) / RA);
+		if (factor > 10.)
+			step = step0 * factor / 10.;
+		else
+			step = step0;
+
+		if (RA<prevRA && qAbs(RA - prevRA)<180.)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				while (jd <= stopJD)
+				{
+					RA = findRightAscension(jd, object1);
+					if (RA>prevRA)
+						break;
+
+					prevRA = RA;
+					jd += step;
+				}
+			}
+
+			if (findPreciseStationaryPoint(&extremum, object1, jd, stopJD, step, false))
+			{
+				separations.insert(extremum.first, extremum.second);
+			}
+		}
+		prevRA = RA;
+		jd += step;
+	}
+
+	return separations;
+}
+
+bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, PlanetP object, double JD, double stopJD, double step, bool retrograde)
+{
+	double RA, prevRA;
+
+	if (out == Q_NULLPTR)
+		return false;
+
+	prevRA = findRightAscension(JD, object);
+	step = -step / 2.;
+
+	while (true)
+	{
+		JD += step;
+		RA = findRightAscension(JD, object);
+
+		if (qAbs(step) < 1. / 1440.)
+		{
+			out->first = JD - step / 2.0;
+			out->second = findRightAscension(JD - step / 2.0, object);
+			if (retrograde) // begin retrograde motion
+			{
+				if (out->second > findRightAscension(JD - 5.0, object))
+				{
+					out->second = -1.0;
+					return true;
+				}
+				else
+					return false;
+			}
+			else
+			{
+				if (out->second < findRightAscension(JD - 5.0, object))
+				{
+					out->second = 1.0;
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+		if (retrograde)
+		{
+			if (RA<prevRA)
+				step = -step / 2.0;
+		}
+		else
+		{
+			if (RA>prevRA)
+				step = -step / 2.0;
+		}
+		prevRA = RA;
+
+		if (JD > stopJD)
+			return false;
+	}
+}
+
+double AstroCalcDialog::findRightAscension(double JD, PlanetP object)
+{
+	core->setJD(JD);
+	core->update(0);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, object->getJ2000EquatorialPos(core));
+	return ra*M_180_PI;
 }
 
 void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* previous)
