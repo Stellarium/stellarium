@@ -3481,7 +3481,7 @@ void AstroCalcDialog::calculatePhenomena()
 				// greatest elongations for inner planets
 				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
 			}
-
+			// stationary points
 			fillPhenomenaTable(findStationaryPointApproach(planet, startJD, stopJD), planet, sun, PhenomenaTypeIndex::StationaryPoint);
 		}
 
@@ -3652,9 +3652,15 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else if (mode==PhenomenaTypeIndex::StationaryPoint) // stationary points
 		{
 			if (separation < 0.0) // we use negative value for start retrograde motion!
+			{
+				// TRANSLATORS: The planet are stand still in the equatorial coordinates
 				phenomenType = q_("Stationary (begin retrograde)");
+			}
 			else
+			{
+				// TRANSLATORS: The planet are stand still in the equatorial coordinates
 				phenomenType = q_("Stationary (begin prograde)");
+			}
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
