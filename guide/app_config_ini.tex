@@ -120,11 +120,14 @@ This section includes settings for the Astronomical Calculations feature.
 \toprule
 \emph{ID}                   & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 flag\_ephemeris\_markers       & bool   & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\%\midrule
+flag\_ephemeris\_line          & bool   & false & Set to \emph{true} to show the connecting line between the ephemeris markers.\\%\midrule
 flag\_ephemeris\_dates         & bool   & false & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\%\midrule
 flag\_ephemeris\_magnitudes    & bool   & false & Set to \emph{true} to show the magnitude of Solar system body for the calculated ephemeride.\\%\midrule
 flag\_ephemeris\_horizontal    & bool   & false & Set to \emph{true} to use horizontal coordinates for ephemerides.\\%\midrule
+flag\_ephemeris\_skip\_data    & bool   & false & Set to \emph{true} to skip the showing data near ephemeris markers.\\%\midrule
 ephemeris\_celestial\_body     & string & Moon  & Default celestial body for computation of ephemerides.\\%\midrule
 ephemeris\_time\_step          & int    & 6     & Identificator for time step category.\\%\midrule
+ephemeris\_data\_step          & int    & 0     & Value of skipping step when skipping option is enabled (lable each N steps, where N is step).\\%\midrule
 celestial\_magnitude\_limit    & float  & 6.0   & Value of limiting magnitude for the celestial objects in computation of their positions.\\%\midrule
 celestial\_category            & int    & 200   & Identificator for default category of celestial bodies.\\%\midrule
 flag\_horizontal\_coordinates  & bool   & false & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\%\midrule

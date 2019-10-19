@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-10-16 23:17+0700\n"
+"POT-Creation-Date: 2019-10-19 18:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:425
 #: src/core/modules/MinorPlanet.cpp:202 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:205
-#: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:789
+#: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:790
 #: src/ui_configurationDialog.h:1598 plugins/Satellites/src/Satellite.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:146
@@ -54,7 +54,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:141 src/core/modules/StarMgr.cpp:450
 #: src/core/modules/GridLinesMgr.cpp:1292 src/core/modules/LandscapeMgr.cpp:480
 #: src/core/modules/NomenclatureMgr.cpp:76 src/core/modules/NebulaMgr.cpp:456
-#: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:254
+#: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:260
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:607 src/core/StelCore.cpp:260
@@ -1160,7 +1160,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:233 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/MinorPlanet.cpp:324 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:790
-#: src/gui/AstroCalcDialog.cpp:5076 plugins/Satellites/src/Satellite.cpp:306
+#: src/gui/AstroCalcDialog.cpp:5077 plugins/Satellites/src/Satellite.cpp:306
 #: plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/Satellite.cpp:338
 msgctxt "distance"
@@ -1184,8 +1184,8 @@ msgid "Nomenclature labels"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:169 src/core/modules/Nebula.cpp:183
-#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2676
-#: src/gui/AstroCalcDialog.cpp:2734 plugins/Supernovae/src/Supernova.cpp:125
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2677
+#: src/gui/AstroCalcDialog.cpp:2735 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr ""
 
@@ -1224,17 +1224,17 @@ msgid "after extinction"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:305 src/core/modules/Nebula.cpp:307
-#: src/gui/AstroCalcDialog.cpp:927 src/gui/AstroCalcDialog.cpp:929
+#: src/gui/AstroCalcDialog.cpp:928 src/gui/AstroCalcDialog.cpp:930
 msgctxt "magnitude"
 msgid "mag"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:305 src/gui/AstroCalcDialog.cpp:927
-#: src/gui/AstroCalcDialog.cpp:933 src/gui/AstroCalcDialog.cpp:984
+#: src/core/modules/Nebula.cpp:305 src/gui/AstroCalcDialog.cpp:928
+#: src/gui/AstroCalcDialog.cpp:934 src/gui/AstroCalcDialog.cpp:985
 msgid "arcmin"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:307 src/gui/AstroCalcDialog.cpp:929
+#: src/core/modules/Nebula.cpp:307 src/gui/AstroCalcDialog.cpp:930
 msgid "arcsec"
 msgstr ""
 
@@ -1264,7 +1264,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:371 src/core/modules/Nebula.cpp:406
 #: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:247
-#: src/gui/AstroCalcDialog.cpp:2687 src/gui/AstroCalcDialog.cpp:2745
+#: src/gui/AstroCalcDialog.cpp:2688 src/gui/AstroCalcDialog.cpp:2746
 #: src/ui_configurationDialog.h:1604 plugins/Supernovae/src/Supernova.cpp:161
 #: plugins/Novae/src/Nova.cpp:166 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Distance"
@@ -1699,7 +1699,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1596 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:198 src/gui/AstroCalcDialog.cpp:1056
+#: src/core/modules/StarWrapper.cpp:198 src/gui/AstroCalcDialog.cpp:1057
 #: src/translations.h:54
 msgid "star"
 msgstr ""
@@ -1750,11 +1750,11 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:231
-#: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:774
-#: src/gui/AstroCalcDialog.cpp:982 src/gui/AstroCalcDialog.cpp:1335
-#: src/gui/AstroCalcDialog.cpp:1372 src/gui/AstroCalcDialog.cpp:2655
-#: src/gui/AstroCalcDialog.cpp:5130 src/gui/AstroCalcDialog.cpp:5195
-#: src/gui/AstroCalcDialog.cpp:5358 plugins/Exoplanets/src/Exoplanet.cpp:352
+#: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:775
+#: src/gui/AstroCalcDialog.cpp:983 src/gui/AstroCalcDialog.cpp:1336
+#: src/gui/AstroCalcDialog.cpp:1373 src/gui/AstroCalcDialog.cpp:2656
+#: src/gui/AstroCalcDialog.cpp:5131 src/gui/AstroCalcDialog.cpp:5196
+#: src/gui/AstroCalcDialog.cpp:5359 plugins/Exoplanets/src/Exoplanet.cpp:352
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr ""
@@ -1762,7 +1762,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:482 src/core/modules/Planet.cpp:500
 #: src/core/modules/MinorPlanet.cpp:245 src/core/modules/MinorPlanet.cpp:263
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:5078
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:5079
 msgctxt "distance"
 msgid "M km"
 msgstr ""
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:271
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5148
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5149
 #: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/Satellite.cpp:345
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1813,7 +1813,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:343
-#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:5165
+#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:5166
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -1841,14 +1841,14 @@ msgid "Synodic period"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:648 src/core/modules/MinorPlanet.cpp:373
-#: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:2702
-#: src/gui/AstroCalcDialog.cpp:2760 plugins/Satellites/src/Satellite.cpp:357
+#: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:2703
+#: src/gui/AstroCalcDialog.cpp:2761 plugins/Satellites/src/Satellite.cpp:357
 msgid "Phase angle"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:649 src/core/modules/MinorPlanet.cpp:374
-#: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:2692
-#: src/gui/AstroCalcDialog.cpp:2750
+#: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:2693
+#: src/gui/AstroCalcDialog.cpp:2751
 msgid "Elongation"
 msgstr ""
 
@@ -1954,43 +1954,43 @@ msgid "Core diameter"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:255 src/gui/AstroCalcDialog.cpp:1998
-#: src/gui/AstroCalcDialog.cpp:4345 src/translations.h:82
+#: src/core/modules/SolarSystem.cpp:261 src/gui/AstroCalcDialog.cpp:1999
+#: src/gui/AstroCalcDialog.cpp:4346 src/translations.h:82
 msgid "Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:256
+#: src/core/modules/SolarSystem.cpp:262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:257
+#: src/core/modules/SolarSystem.cpp:263
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet orbits"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:258
+#: src/core/modules/SolarSystem.cpp:264
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Planet trails"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:260
+#: src/core/modules/SolarSystem.cpp:266
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:261
+#: src/core/modules/SolarSystem.cpp:267
 msgid "Planet selection marker"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:262
+#: src/core/modules/SolarSystem.cpp:268
 msgid "Enlarge Moon"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:263
+#: src/core/modules/SolarSystem.cpp:269
 msgid "Enlarge minor bodies"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:264
+#: src/core/modules/SolarSystem.cpp:270
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -2014,11 +2014,11 @@ msgstr ""
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:192 src/gui/AstroCalcDialog.cpp:1070
+#: src/core/modules/StarWrapper.cpp:192 src/gui/AstroCalcDialog.cpp:1071
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:196 src/gui/AstroCalcDialog.cpp:1064
+#: src/core/modules/StarWrapper.cpp:196 src/gui/AstroCalcDialog.cpp:1065
 msgid "double star"
 msgstr ""
 
@@ -2057,7 +2057,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:289 src/core/modules/StarWrapper.cpp:291
-#: src/gui/AstroCalcDialog.cpp:3163
+#: src/gui/AstroCalcDialog.cpp:3164
 msgid "Separation"
 msgstr ""
 
@@ -2231,8 +2231,8 @@ msgid "Loading plugin"
 msgstr ""
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
-#: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1315
-#: src/gui/AstroCalcDialog.cpp:3156 src/gui/BookmarksDialog.cpp:119
+#: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1316
+#: src/gui/AstroCalcDialog.cpp:3157 src/gui/BookmarksDialog.cpp:119
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -2933,18 +2933,18 @@ msgid "Apparent Sidereal Time"
 msgstr ""
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:787
-#: src/gui/AstroCalcDialog.cpp:4430
+#: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:788
+#: src/gui/AstroCalcDialog.cpp:4431
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr ""
 
-#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:4429
+#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:4430
 msgctxt "celestial event"
 msgid "Rise"
 msgstr ""
 
-#: src/core/StelObject.cpp:604 src/gui/AstroCalcDialog.cpp:4431
+#: src/core/StelObject.cpp:604 src/gui/AstroCalcDialog.cpp:4432
 msgctxt "celestial event"
 msgid "Set"
 msgstr ""
@@ -4635,25 +4635,25 @@ msgstr ""
 msgid "Right ascension"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:251 src/gui/AstroCalcDialog.cpp:2725
-#: src/gui/AstroCalcDialog.cpp:2783
+#: src/gui/SearchDialog.cpp:251 src/gui/AstroCalcDialog.cpp:2726
+#: src/gui/AstroCalcDialog.cpp:2784
 msgid "Declination"
 msgstr ""
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:508
-#: src/gui/AstroCalcDialog.cpp:699 src/gui/AstroCalcDialog.cpp:701
-#: src/gui/AstroCalcDialog.cpp:738 src/gui/AstroCalcDialog.cpp:1319
+#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:509
+#: src/gui/AstroCalcDialog.cpp:700 src/gui/AstroCalcDialog.cpp:702
+#: src/gui/AstroCalcDialog.cpp:739 src/gui/AstroCalcDialog.cpp:1320
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
 msgid "Azimuth"
 msgstr ""
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/gui/SearchDialog.cpp:262 src/gui/AstroCalcDialog.cpp:740
-#: src/gui/AstroCalcDialog.cpp:1321 src/gui/AstroCalcDialog.cpp:2333
-#: src/gui/AstroCalcDialog.cpp:2851 src/gui/AstroCalcDialog.cpp:3136
-#: src/gui/AstroCalcDialog.cpp:3138 plugins/Satellites/src/Satellite.cpp:310
+#: src/gui/SearchDialog.cpp:262 src/gui/AstroCalcDialog.cpp:741
+#: src/gui/AstroCalcDialog.cpp:1322 src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2852 src/gui/AstroCalcDialog.cpp:3137
+#: src/gui/AstroCalcDialog.cpp:3139 plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid "Altitude"
 msgstr ""
@@ -4728,20 +4728,20 @@ msgstr ""
 msgid "Gregorian dates. Valid range:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:507 src/gui/AstroCalcDialog.cpp:699
-#: src/gui/AstroCalcDialog.cpp:701 src/gui/AstroCalcDialog.cpp:2332
-#: src/gui/AstroCalcDialog.cpp:3136 src/gui/AstroCalcDialog.cpp:3138
+#: src/gui/AstroCalcDialog.cpp:508 src/gui/AstroCalcDialog.cpp:700
+#: src/gui/AstroCalcDialog.cpp:702 src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:3137 src/gui/AstroCalcDialog.cpp:3139
 msgid "Local Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:692 src/gui/AstroCalcDialog.cpp:3113
+#: src/gui/AstroCalcDialog.cpp:693 src/gui/AstroCalcDialog.cpp:3114
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:734 src/gui/AstroCalcDialog.cpp:1314
-#: src/gui/AstroCalcDialog.cpp:4418 src/ui_configurationDialog.h:1591
+#: src/gui/AstroCalcDialog.cpp:735 src/gui/AstroCalcDialog.cpp:1315
+#: src/gui/AstroCalcDialog.cpp:4419 src/ui_configurationDialog.h:1591
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
@@ -4750,503 +4750,503 @@ msgid "Name"
 msgstr ""
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:745 src/gui/AstroCalcDialog.cpp:1326
+#: src/gui/AstroCalcDialog.cpp:746 src/gui/AstroCalcDialog.cpp:1327
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:747 src/gui/AstroCalcDialog.cpp:1328
+#: src/gui/AstroCalcDialog.cpp:748 src/gui/AstroCalcDialog.cpp:1329
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:752 src/gui/AstroCalcDialog.cpp:4427
+#: src/gui/AstroCalcDialog.cpp:753 src/gui/AstroCalcDialog.cpp:4428
 msgid "Opac."
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:757 src/gui/AstroCalcDialog.cpp:1331
-#: src/gui/AstroCalcDialog.cpp:4422
+#: src/gui/AstroCalcDialog.cpp:758 src/gui/AstroCalcDialog.cpp:1332
+#: src/gui/AstroCalcDialog.cpp:4423
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: angular size, arcminutes
-#: src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:761
 msgid "A.S."
 msgstr ""
 
 #. TRANSLATORS: separation, arcseconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:764 src/gui/AstroCalcDialog.cpp:4435
+#: src/gui/AstroCalcDialog.cpp:765 src/gui/AstroCalcDialog.cpp:4436
 msgid "Sep."
 msgstr ""
 
 #. TRANSLATORS: period, days
-#: src/gui/AstroCalcDialog.cpp:769
+#: src/gui/AstroCalcDialog.cpp:770
 msgid "Per."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:769
+#: src/gui/AstroCalcDialog.cpp:770
 msgctxt "days"
 msgid "d"
 msgstr ""
 
 #. TRANSLATORS: distance, AU
-#: src/gui/AstroCalcDialog.cpp:774 src/gui/AstroCalcDialog.cpp:1335
+#: src/gui/AstroCalcDialog.cpp:775 src/gui/AstroCalcDialog.cpp:1336
 msgid "Dist."
 msgstr ""
 
 #. TRANSLATORS: proper motion, arcsecond per year
-#: src/gui/AstroCalcDialog.cpp:779
+#: src/gui/AstroCalcDialog.cpp:780
 msgid "P.M."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:779
+#: src/gui/AstroCalcDialog.cpp:780
 msgctxt "arcsecond per year"
 msgid "\"/yr"
 msgstr ""
 
 #. TRANSLATORS: surface brightness
-#: src/gui/AstroCalcDialog.cpp:784
+#: src/gui/AstroCalcDialog.cpp:785
 msgid "S.B."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:833 src/ui_viewDialog.h:3050
+#: src/gui/AstroCalcDialog.cpp:834 src/ui_viewDialog.h:3050
 msgid "Solar system objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:834
+#: src/gui/AstroCalcDialog.cpp:835
 msgid "Solar system objects: comets"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:835
+#: src/gui/AstroCalcDialog.cpp:836
 msgid "Solar system objects: minor bodies"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:836
+#: src/gui/AstroCalcDialog.cpp:837
 msgid "Solar system objects: planets"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:909
+#: src/gui/AstroCalcDialog.cpp:910
 #, qt-format
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:933
+#: src/gui/AstroCalcDialog.cpp:934
 msgid "Average angular size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:979 src/gui/AstroCalcDialog.cpp:1369
+#: src/gui/AstroCalcDialog.cpp:980 src/gui/AstroCalcDialog.cpp:1370
 msgid "Planetocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:981 src/gui/AstroCalcDialog.cpp:1371
+#: src/gui/AstroCalcDialog.cpp:982 src/gui/AstroCalcDialog.cpp:1372
 msgid "Topocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:984
+#: src/gui/AstroCalcDialog.cpp:985
 msgid "Angular size (with rings, if any)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1076
+#: src/gui/AstroCalcDialog.cpp:1077
 msgid "star with high proper motion"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1174 src/gui/AstroCalcDialog.cpp:1672
-#: src/gui/AstroCalcDialog.cpp:3487 src/gui/AstroCalcDialog.cpp:4962
+#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1673
+#: src/gui/AstroCalcDialog.cpp:3488 src/gui/AstroCalcDialog.cpp:4963
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1176 src/gui/AstroCalcDialog.cpp:1674
-#: src/gui/AstroCalcDialog.cpp:3489 src/gui/AstroCalcDialog.cpp:4964
+#: src/gui/AstroCalcDialog.cpp:1177 src/gui/AstroCalcDialog.cpp:1675
+#: src/gui/AstroCalcDialog.cpp:3490 src/gui/AstroCalcDialog.cpp:4965
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1180
+#: src/gui/AstroCalcDialog.cpp:1181
 msgid "Save celestial positions of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1198
+#: src/gui/AstroCalcDialog.cpp:1199
 msgid "Celestial positions of objects"
 msgstr ""
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:1333 src/gui/AstroCalcDialog.cpp:2682
-#: src/gui/AstroCalcDialog.cpp:2740
+#: src/gui/AstroCalcDialog.cpp:1334 src/gui/AstroCalcDialog.cpp:2683
+#: src/gui/AstroCalcDialog.cpp:2741
 msgid "Phase"
 msgstr ""
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:1337
+#: src/gui/AstroCalcDialog.cpp:1338
 msgid "Elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1678
+#: src/gui/AstroCalcDialog.cpp:1679
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1696
+#: src/gui/AstroCalcDialog.cpp:1697
 msgid "Ephemerides"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1864
+#: src/gui/AstroCalcDialog.cpp:1865
 msgid "1 minute"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1865
+#: src/gui/AstroCalcDialog.cpp:1866
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1866
+#: src/gui/AstroCalcDialog.cpp:1867
 msgid "30 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1867
+#: src/gui/AstroCalcDialog.cpp:1868
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1868
+#: src/gui/AstroCalcDialog.cpp:1869
 msgid "6 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1869
+#: src/gui/AstroCalcDialog.cpp:1870
 msgid "12 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1870
+#: src/gui/AstroCalcDialog.cpp:1871
 msgid "1 solar day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1871
+#: src/gui/AstroCalcDialog.cpp:1872
 msgid "5 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1872
+#: src/gui/AstroCalcDialog.cpp:1873
 msgid "10 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1873
+#: src/gui/AstroCalcDialog.cpp:1874
 msgid "15 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1874
+#: src/gui/AstroCalcDialog.cpp:1875
 msgid "30 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1875
+#: src/gui/AstroCalcDialog.cpp:1876
 msgid "60 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1876
+#: src/gui/AstroCalcDialog.cpp:1877
 msgid "100 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1877
+#: src/gui/AstroCalcDialog.cpp:1878
 msgid "500 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1878
+#: src/gui/AstroCalcDialog.cpp:1879
 msgid "1 sidereal day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1879
+#: src/gui/AstroCalcDialog.cpp:1880
 msgid "5 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1880
+#: src/gui/AstroCalcDialog.cpp:1881
 msgid "10 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1881
+#: src/gui/AstroCalcDialog.cpp:1882
 msgid "15 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1882
+#: src/gui/AstroCalcDialog.cpp:1883
 msgid "30 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1883
+#: src/gui/AstroCalcDialog.cpp:1884
 msgid "60 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1884
+#: src/gui/AstroCalcDialog.cpp:1885
 msgid "100 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1885
+#: src/gui/AstroCalcDialog.cpp:1886
 msgid "500 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1886
+#: src/gui/AstroCalcDialog.cpp:1887
 msgid "1 sidereal year"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1887
+#: src/gui/AstroCalcDialog.cpp:1888
 msgid "1 Julian day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1888
+#: src/gui/AstroCalcDialog.cpp:1889
 msgid "5 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1889
+#: src/gui/AstroCalcDialog.cpp:1890
 msgid "10 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1890
+#: src/gui/AstroCalcDialog.cpp:1891
 msgid "15 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1891
+#: src/gui/AstroCalcDialog.cpp:1892
 msgid "30 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1892
+#: src/gui/AstroCalcDialog.cpp:1893
 msgid "60 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1893
+#: src/gui/AstroCalcDialog.cpp:1894
 msgid "100 Julian days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1894
+#: src/gui/AstroCalcDialog.cpp:1895
 msgid "1 Julian year"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1895
+#: src/gui/AstroCalcDialog.cpp:1896
 msgid "1 Gaussian year"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1896
+#: src/gui/AstroCalcDialog.cpp:1897
 msgid "1 synodic month"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1897
+#: src/gui/AstroCalcDialog.cpp:1898
 msgid "1 draconic month"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1898
+#: src/gui/AstroCalcDialog.cpp:1899
 msgid "1 mean tropical month"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1899
+#: src/gui/AstroCalcDialog.cpp:1900
 msgid "1 anomalistic month"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1900
+#: src/gui/AstroCalcDialog.cpp:1901
 msgid "1 anomalistic year"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1901
+#: src/gui/AstroCalcDialog.cpp:1902
 msgid "1 saros"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1996
+#: src/gui/AstroCalcDialog.cpp:1997
 msgid "Latest selected object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1997
+#: src/gui/AstroCalcDialog.cpp:1998
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1999 src/gui/AstroCalcDialog.cpp:4351
+#: src/gui/AstroCalcDialog.cpp:2000 src/gui/AstroCalcDialog.cpp:4352
 #: src/translations.h:86 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Asteroids"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2000 src/gui/AstroCalcDialog.cpp:4353
+#: src/gui/AstroCalcDialog.cpp:2001 src/gui/AstroCalcDialog.cpp:4354
 #: src/translations.h:90
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2001 src/gui/AstroCalcDialog.cpp:4352
+#: src/gui/AstroCalcDialog.cpp:2002 src/gui/AstroCalcDialog.cpp:4353
 #: src/translations.h:84 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Comets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2002 src/gui/AstroCalcDialog.cpp:4354
+#: src/gui/AstroCalcDialog.cpp:2003 src/gui/AstroCalcDialog.cpp:4355
 #: src/translations.h:92
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2003 src/gui/AstroCalcDialog.cpp:4355
+#: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:4356
 #: src/translations.h:94
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:4356
+#: src/gui/AstroCalcDialog.cpp:2005 src/gui/AstroCalcDialog.cpp:4357
 #: src/translations.h:96
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2005 src/gui/AstroCalcDialog.cpp:4357
+#: src/gui/AstroCalcDialog.cpp:2006 src/gui/AstroCalcDialog.cpp:4358
 #: src/translations.h:98
 msgid "Oort cloud objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2006 src/gui/AstroCalcDialog.cpp:4358
+#: src/gui/AstroCalcDialog.cpp:2007 src/gui/AstroCalcDialog.cpp:4359
 #: src/translations.h:100
 msgid "Sednoids"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2007
+#: src/gui/AstroCalcDialog.cpp:2008
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2008
+#: src/gui/AstroCalcDialog.cpp:2009
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2009
+#: src/gui/AstroCalcDialog.cpp:2010
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2010
+#: src/gui/AstroCalcDialog.cpp:2011
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2011
+#: src/gui/AstroCalcDialog.cpp:2012
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2012
+#: src/gui/AstroCalcDialog.cpp:2013
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2013 src/gui/AstroCalcDialog.cpp:4348
+#: src/gui/AstroCalcDialog.cpp:2014 src/gui/AstroCalcDialog.cpp:4349
 #: src/translations.h:327 src/ui_viewDialog.h:2714 src/ui_dsoColorsDialog.h:585
 msgid "Dark nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2014
+#: src/gui/AstroCalcDialog.cpp:2015
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2015 src/gui/AstroCalcDialog.cpp:4363
+#: src/gui/AstroCalcDialog.cpp:2016 src/gui/AstroCalcDialog.cpp:4364
 #: src/translations.h:377 src/ui_dsoColorsDialog.h:587
 msgid "Symbiotic stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2016 src/gui/AstroCalcDialog.cpp:4364
+#: src/gui/AstroCalcDialog.cpp:2017 src/gui/AstroCalcDialog.cpp:4365
 #: src/translations.h:379 src/ui_dsoColorsDialog.h:539
 msgid "Emission-line stars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2017 src/gui/AstroCalcDialog.cpp:4369
+#: src/gui/AstroCalcDialog.cpp:2018 src/gui/AstroCalcDialog.cpp:4370
 #: src/translations.h:102
 msgid "Interstellar objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2018
+#: src/gui/AstroCalcDialog.cpp:2019
 msgid "Planets and Sun"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2020
+#: src/gui/AstroCalcDialog.cpp:2021
 msgid "Sun, planets and Moon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2021
+#: src/gui/AstroCalcDialog.cpp:2022
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2583
+#: src/gui/AstroCalcDialog.cpp:2584
 msgid "Magnitude vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2586
+#: src/gui/AstroCalcDialog.cpp:2587
 msgid "Phase vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2589
+#: src/gui/AstroCalcDialog.cpp:2590
 msgid "Distance vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2592
+#: src/gui/AstroCalcDialog.cpp:2593
 msgid "Elongation vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2595
+#: src/gui/AstroCalcDialog.cpp:2596
 msgid "Angular size vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2598
+#: src/gui/AstroCalcDialog.cpp:2599
 msgid "Phase angle vs. Time"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:2602
+#: src/gui/AstroCalcDialog.cpp:2603
 msgid "Heliocentric distance vs. Time"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:2606
+#: src/gui/AstroCalcDialog.cpp:2607
 msgid "Transit altitude vs. Time"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:2610
+#: src/gui/AstroCalcDialog.cpp:2611
 msgid "Right ascension vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2613
+#: src/gui/AstroCalcDialog.cpp:2614
 msgid "Declination vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2654 src/gui/AstroCalcDialog.cpp:2850
+#: src/gui/AstroCalcDialog.cpp:2655 src/gui/AstroCalcDialog.cpp:2851
 msgid "Date"
 msgstr ""
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system,
 #. equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:2665
+#: src/gui/AstroCalcDialog.cpp:2666
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2697 src/gui/AstroCalcDialog.cpp:2755
+#: src/gui/AstroCalcDialog.cpp:2698 src/gui/AstroCalcDialog.cpp:2756
 msgid "Angular size"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:2708 src/gui/AstroCalcDialog.cpp:2766
+#: src/gui/AstroCalcDialog.cpp:2709 src/gui/AstroCalcDialog.cpp:2767
 msgid "Heliocentric distance"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:2714 src/gui/AstroCalcDialog.cpp:2772
+#: src/gui/AstroCalcDialog.cpp:2715 src/gui/AstroCalcDialog.cpp:2773
 msgid "Transit altitude"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:2720 src/gui/AstroCalcDialog.cpp:2778
+#: src/gui/AstroCalcDialog.cpp:2721 src/gui/AstroCalcDialog.cpp:2779
 msgctxt "axis name"
 msgid "Right ascension"
 msgstr ""
 
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:2720 src/gui/AstroCalcDialog.cpp:2778
-#: src/gui/AstroCalcDialog.cpp:2892
+#: src/gui/AstroCalcDialog.cpp:2721 src/gui/AstroCalcDialog.cpp:2779
+#: src/gui/AstroCalcDialog.cpp:2893
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
 #: plugins/Novae/src/gui/NovaeDialog.cpp:184
@@ -5257,280 +5257,280 @@ msgctxt "time"
 msgid "h"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3118
+#: src/gui/AstroCalcDialog.cpp:3119
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3125
+#: src/gui/AstroCalcDialog.cpp:3126
 msgid "Line of civil twilight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3127
+#: src/gui/AstroCalcDialog.cpp:3128
 msgid "Line of nautical twilight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3129
+#: src/gui/AstroCalcDialog.cpp:3130
 msgid "Line of astronomical twilight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3155
+#: src/gui/AstroCalcDialog.cpp:3156
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3157
+#: src/gui/AstroCalcDialog.cpp:3158
 msgid "Object 1"
 msgstr ""
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:3159
+#: src/gui/AstroCalcDialog.cpp:3160
 msgid "Mag. 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3160
+#: src/gui/AstroCalcDialog.cpp:3161
 msgid "Object 2"
 msgstr ""
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:3162
+#: src/gui/AstroCalcDialog.cpp:3163
 msgid "Mag. 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3164
+#: src/gui/AstroCalcDialog.cpp:3165
 msgid "Solar Elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3165
+#: src/gui/AstroCalcDialog.cpp:3166
 msgid "Lunar Elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3493
+#: src/gui/AstroCalcDialog.cpp:3494
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3511 src/gui/AstroCalcDialog.cpp:3513
-#: src/ui_astroCalcDialog.h:1360
+#: src/gui/AstroCalcDialog.cpp:3512 src/gui/AstroCalcDialog.cpp:3514
+#: src/ui_astroCalcDialog.h:1366
 msgid "Phenomena"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3571
+#: src/gui/AstroCalcDialog.cpp:3572
 msgid "Magnitude of first object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3577
+#: src/gui/AstroCalcDialog.cpp:3578
 msgid "Magnitude of second object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3583 src/gui/AstroCalcDialog.cpp:3717
+#: src/gui/AstroCalcDialog.cpp:3584 src/gui/AstroCalcDialog.cpp:3718
 msgid "Angular distance from the Sun"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3589 src/gui/AstroCalcDialog.cpp:3718
+#: src/gui/AstroCalcDialog.cpp:3590 src/gui/AstroCalcDialog.cpp:3719
 msgid "Angular distance from the Moon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3609 src/gui/AstroCalcDialog.cpp:3755
-#: src/gui/AstroCalcDialog.cpp:3826
+#: src/gui/AstroCalcDialog.cpp:3610 src/gui/AstroCalcDialog.cpp:3756
+#: src/gui/AstroCalcDialog.cpp:3827
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3618 src/gui/AstroCalcDialog.cpp:3835
+#: src/gui/AstroCalcDialog.cpp:3619 src/gui/AstroCalcDialog.cpp:3836
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3621 src/gui/AstroCalcDialog.cpp:3647
-#: src/gui/AstroCalcDialog.cpp:3653 src/gui/AstroCalcDialog.cpp:3838
-#: src/gui/AstroCalcDialog.cpp:3854 src/gui/AstroCalcDialog.cpp:3860
+#: src/gui/AstroCalcDialog.cpp:3622 src/gui/AstroCalcDialog.cpp:3648
+#: src/gui/AstroCalcDialog.cpp:3654 src/gui/AstroCalcDialog.cpp:3839
+#: src/gui/AstroCalcDialog.cpp:3855 src/gui/AstroCalcDialog.cpp:3861
 msgid "Eclipse"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3630
+#: src/gui/AstroCalcDialog.cpp:3631
 msgid "Greatest eastern elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3633
+#: src/gui/AstroCalcDialog.cpp:3634
 msgid "Greatest western elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3640 src/gui/AstroCalcDialog.cpp:3847
+#: src/gui/AstroCalcDialog.cpp:3641 src/gui/AstroCalcDialog.cpp:3848
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3643 src/gui/AstroCalcDialog.cpp:3760
-#: src/gui/AstroCalcDialog.cpp:3850
+#: src/gui/AstroCalcDialog.cpp:3644 src/gui/AstroCalcDialog.cpp:3761
+#: src/gui/AstroCalcDialog.cpp:3851
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3668 src/gui/AstroCalcDialog.cpp:3675
-#: src/gui/AstroCalcDialog.cpp:3875 src/gui/AstroCalcDialog.cpp:3882
+#: src/gui/AstroCalcDialog.cpp:3669 src/gui/AstroCalcDialog.cpp:3676
+#: src/gui/AstroCalcDialog.cpp:3876 src/gui/AstroCalcDialog.cpp:3883
 msgid "Superior conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3670 src/gui/AstroCalcDialog.cpp:3677
-#: src/gui/AstroCalcDialog.cpp:3877 src/gui/AstroCalcDialog.cpp:3884
+#: src/gui/AstroCalcDialog.cpp:3671 src/gui/AstroCalcDialog.cpp:3678
+#: src/gui/AstroCalcDialog.cpp:3878 src/gui/AstroCalcDialog.cpp:3885
 msgid "Inferior conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3721
+#: src/gui/AstroCalcDialog.cpp:3722
 msgid "Angular distance from the Sun for second object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3722
+#: src/gui/AstroCalcDialog.cpp:3723
 msgid "Angular distance from the Moon for second object"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:4324
-msgctxt "Celestial object is observed..."
-msgid "In the Evening"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:4325
 msgctxt "Celestial object is observed..."
-msgid "In the Morning"
+msgid "In the Evening"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:4326
 msgctxt "Celestial object is observed..."
-msgid "Around Midnight"
+msgid "In the Morning"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:4327
 msgctxt "Celestial object is observed..."
+msgid "Around Midnight"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4328
+msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4346
+#: src/gui/AstroCalcDialog.cpp:4347
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4347 src/ui_viewDialog.h:2713
+#: src/gui/AstroCalcDialog.cpp:4348 src/ui_viewDialog.h:2713
 msgid "Bright nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4349 src/ui_viewDialog.h:2717
+#: src/gui/AstroCalcDialog.cpp:4350 src/ui_viewDialog.h:2717
 #: src/ui_dsoColorsDialog.h:554
 msgid "Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4350 src/translations.h:343
+#: src/gui/AstroCalcDialog.cpp:4351 src/translations.h:343
 #: src/ui_viewDialog.h:2720 src/ui_dsoColorsDialog.h:588
 msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4359 src/translations.h:325
+#: src/gui/AstroCalcDialog.cpp:4360 src/translations.h:325
 #: src/ui_viewDialog.h:2712 src/ui_dsoColorsDialog.h:553
 msgid "Planetary nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4360 src/translations.h:446
+#: src/gui/AstroCalcDialog.cpp:4361 src/translations.h:446
 msgid "Bright double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4361 src/translations.h:448
+#: src/gui/AstroCalcDialog.cpp:4362 src/translations.h:448
 msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4362 src/translations.h:450
+#: src/gui/AstroCalcDialog.cpp:4363 src/translations.h:450
 msgid "Bright stars with high proper motion"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4365 src/translations.h:355
+#: src/gui/AstroCalcDialog.cpp:4366 src/translations.h:355
 #: src/ui_dsoColorsDialog.h:556
 msgid "Supernova candidates"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4366 src/translations.h:357
+#: src/gui/AstroCalcDialog.cpp:4367 src/translations.h:357
 #: src/ui_dsoColorsDialog.h:557
 msgid "Supernova remnant candidates"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4367 src/translations.h:353
+#: src/gui/AstroCalcDialog.cpp:4368 src/translations.h:353
 #: src/ui_viewDialog.h:2719 src/ui_dsoColorsDialog.h:540
 msgid "Supernova remnants"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4368 src/translations.h:381
+#: src/gui/AstroCalcDialog.cpp:4369 src/translations.h:381
 #: src/ui_viewDialog.h:2716 src/ui_dsoColorsDialog.h:558
 msgid "Clusters of galaxies"
 msgstr ""
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:4440
+#: src/gui/AstroCalcDialog.cpp:4441
 msgid "Ang. Size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4541 src/ui_astroCalcDialog.h:1494
+#: src/gui/AstroCalcDialog.cpp:4542 src/ui_astroCalcDialog.h:1501
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4542 src/ui_astroCalcDialog.h:1492
+#: src/gui/AstroCalcDialog.cpp:4543 src/ui_astroCalcDialog.h:1499
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4543 src/ui_astroCalcDialog.h:1496
+#: src/gui/AstroCalcDialog.cpp:4544 src/ui_astroCalcDialog.h:1503
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4544 src/ui_astroCalcDialog.h:1499
+#: src/gui/AstroCalcDialog.cpp:4545 src/ui_astroCalcDialog.h:1506
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4837
+#: src/gui/AstroCalcDialog.cpp:4838
 msgid "Limit angular separation:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4838
+#: src/gui/AstroCalcDialog.cpp:4839
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4839
+#: src/gui/AstroCalcDialog.cpp:4840
 msgid "Minimal angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4840
+#: src/gui/AstroCalcDialog.cpp:4841
 msgid "Maximum angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4968
+#: src/gui/AstroCalcDialog.cpp:4969
 msgid "Save list of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4986 src/ui_astroCalcDialog.h:1366
+#: src/gui/AstroCalcDialog.cpp:4987 src/ui_astroCalcDialog.h:1372
 msgid "What's Up Tonight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5142
+#: src/gui/AstroCalcDialog.cpp:5143
 msgid "spin-orbit resonance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5194 src/gui/AstroCalcDialog.cpp:5377
+#: src/gui/AstroCalcDialog.cpp:5195 src/gui/AstroCalcDialog.cpp:5378
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5195 src/gui/AstroCalcDialog.cpp:5358
+#: src/gui/AstroCalcDialog.cpp:5196 src/gui/AstroCalcDialog.cpp:5359
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5196 src/gui/AstroCalcDialog.cpp:5361
-#: src/gui/AstroCalcDialog.cpp:5378
+#: src/gui/AstroCalcDialog.cpp:5197 src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5379
 msgid "Angular distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5358 src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5359 src/gui/AstroCalcDialog.cpp:5362
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5419
+#: src/gui/AstroCalcDialog.cpp:5420
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
@@ -8982,7 +8982,7 @@ msgstr ""
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1488
+#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1495
 #: plugins/Satellites/src/ui_satellitesDialog.h:797
 msgid "Search in list..."
 msgstr ""
@@ -10823,331 +10823,335 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1347
+#: src/ui_astroCalcDialog.h:1353
 msgid "Astronomical calculations"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1353
+#: src/ui_astroCalcDialog.h:1359
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1355
+#: src/ui_astroCalcDialog.h:1361
 msgid "Celestial bodies above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1358
+#: src/ui_astroCalcDialog.h:1364
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1362 src/ui_astroCalcDialog.h:1481
-#: src/ui_astroCalcDialog.h:1513
+#: src/ui_astroCalcDialog.h:1368 src/ui_astroCalcDialog.h:1488
+#: src/ui_astroCalcDialog.h:1520
 msgid "Graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1364
+#: src/ui_astroCalcDialog.h:1370
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1369
+#: src/ui_astroCalcDialog.h:1375
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1371
+#: src/ui_astroCalcDialog.h:1377
 msgid "Planetary Calculator"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1379
+#: src/ui_astroCalcDialog.h:1385
 msgid "Save positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1380
+#: src/ui_astroCalcDialog.h:1386
 msgid "Update positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1381 src/ui_astroCalcDialog.h:1485
+#: src/ui_astroCalcDialog.h:1387 src/ui_astroCalcDialog.h:1492
 msgid "Show objects brighter than magnitude:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1383
+#: src/ui_astroCalcDialog.h:1389
 msgid "List of objects above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1385 src/ui_astroCalcDialog.h:1399
+#: src/ui_astroCalcDialog.h:1391 src/ui_astroCalcDialog.h:1406
 msgid "Use horizontal coordinates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1386
+#: src/ui_astroCalcDialog.h:1392
 msgid "Show:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1388
+#: src/ui_astroCalcDialog.h:1393
+msgid "line"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1395
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1390
+#: src/ui_astroCalcDialog.h:1397
 msgid "markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1392
+#: src/ui_astroCalcDialog.h:1399
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1394
+#: src/ui_astroCalcDialog.h:1401
 msgid "dates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1396
+#: src/ui_astroCalcDialog.h:1403
 msgid "Show magnitudes of current celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1398
+#: src/ui_astroCalcDialog.h:1405
 msgid "magnitudes"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1400
+#: src/ui_astroCalcDialog.h:1407
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1401
+#: src/ui_astroCalcDialog.h:1408
 msgid "Save ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1403 src/ui_astroCalcDialog.h:1446
+#: src/ui_astroCalcDialog.h:1410 src/ui_astroCalcDialog.h:1453
 #: plugins/Satellites/src/ui_satellitesDialog.h:844
 msgid "Calculations require time, please be patient"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1405
+#: src/ui_astroCalcDialog.h:1412
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1406 src/ui_astroCalcDialog.h:1449
+#: src/ui_astroCalcDialog.h:1413 src/ui_astroCalcDialog.h:1456
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1407 src/ui_astroCalcDialog.h:1439
+#: src/ui_astroCalcDialog.h:1414 src/ui_astroCalcDialog.h:1446
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1408
+#: src/ui_astroCalcDialog.h:1415
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1409 src/ui_astroCalcDialog.h:1479
+#: src/ui_astroCalcDialog.h:1416 src/ui_astroCalcDialog.h:1486
 msgid "Celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1411
+#: src/ui_astroCalcDialog.h:1418
 msgid "or"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1413
+#: src/ui_astroCalcDialog.h:1420
 msgid ""
 "Compute ephemeris for all planets visible to the unaided eye (works on Earth "
 "only)"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1415
+#: src/ui_astroCalcDialog.h:1422
 msgid "all naked-eye planets"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1417
+#: src/ui_astroCalcDialog.h:1424
 msgid "Color of generic ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1420
+#: src/ui_astroCalcDialog.h:1427
 msgid "Color of selected ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1423
+#: src/ui_astroCalcDialog.h:1430
 msgid "Color of Mercury's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1426
+#: src/ui_astroCalcDialog.h:1433
 msgid "Color of Venus' ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1430
+#: src/ui_astroCalcDialog.h:1437
 msgid "Color of Mars' ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1433
+#: src/ui_astroCalcDialog.h:1440
 msgid "Color of Jupiter's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1436
+#: src/ui_astroCalcDialog.h:1443
 msgid "Color of Saturn's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1438
+#: src/ui_astroCalcDialog.h:1445
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1440
+#: src/ui_astroCalcDialog.h:1447
 msgid "Calculate oppositions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1441
+#: src/ui_astroCalcDialog.h:1448
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1442
+#: src/ui_astroCalcDialog.h:1449
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1443
+#: src/ui_astroCalcDialog.h:1450
 msgid "Cleanup of phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1444
+#: src/ui_astroCalcDialog.h:1451
 msgid "Save phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1448
+#: src/ui_astroCalcDialog.h:1455
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1450
+#: src/ui_astroCalcDialog.h:1457
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1451
+#: src/ui_astroCalcDialog.h:1458
 msgid "Also the graph for the Sun"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1452
+#: src/ui_astroCalcDialog.h:1459
 msgid "Also the graph for the Moon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1454 src/ui_astroCalcDialog.h:1465
+#: src/ui_astroCalcDialog.h:1461 src/ui_astroCalcDialog.h:1472
 msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1456 src/ui_astroCalcDialog.h:1467
+#: src/ui_astroCalcDialog.h:1463 src/ui_astroCalcDialog.h:1474
 msgid "Above altitude:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1458 src/ui_astroCalcDialog.h:1469
+#: src/ui_astroCalcDialog.h:1465 src/ui_astroCalcDialog.h:1476
 msgid "Altitude limit in degrees"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1460
+#: src/ui_astroCalcDialog.h:1467
 msgid "Altitude vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1461
+#: src/ui_astroCalcDialog.h:1468
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1462
+#: src/ui_astroCalcDialog.h:1469
 msgid "Azimuth vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1463
+#: src/ui_astroCalcDialog.h:1470
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1472
+#: src/ui_astroCalcDialog.h:1479
 msgid "Local Time in hours"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1475
+#: src/ui_astroCalcDialog.h:1482
 msgid "Monthly Elevation"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1476
+#: src/ui_astroCalcDialog.h:1483
 msgid "Graphs on the current year"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1477
+#: src/ui_astroCalcDialog.h:1484
 msgid "First graph:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1478
+#: src/ui_astroCalcDialog.h:1485
 msgid "Second graph:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1480
+#: src/ui_astroCalcDialog.h:1487
 msgid "Draw graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1482
+#: src/ui_astroCalcDialog.h:1489
 msgid "Angular distance limit, degrees:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1483
+#: src/ui_astroCalcDialog.h:1490
 msgid "Important note: this tool works on Earth only!"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1484
+#: src/ui_astroCalcDialog.h:1491
 msgid "Lunar Distance"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1486
+#: src/ui_astroCalcDialog.h:1493
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1487
+#: src/ui_astroCalcDialog.h:1494
 msgid "Matching objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1489
+#: src/ui_astroCalcDialog.h:1496
 msgid "Save list of objects"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1490
+#: src/ui_astroCalcDialog.h:1497
 msgid "Select a category:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1501
+#: src/ui_astroCalcDialog.h:1508
 msgid "First celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1502
+#: src/ui_astroCalcDialog.h:1509
 msgid "Second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1503
+#: src/ui_astroCalcDialog.h:1510
 msgid "Orbital resonance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1504
+#: src/ui_astroCalcDialog.h:1511
 msgid "Synodic period:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1505
+#: src/ui_astroCalcDialog.h:1512
 msgid "Orbital velocity of first celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1506
+#: src/ui_astroCalcDialog.h:1513
 msgid "Angular distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1507
+#: src/ui_astroCalcDialog.h:1514
 msgid "Linear distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1508
+#: src/ui_astroCalcDialog.h:1515
 msgid "Orbital velocity of second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1509
+#: src/ui_astroCalcDialog.h:1516
 msgid "Equatorial diameters ratio:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1511
+#: src/ui_astroCalcDialog.h:1518
 msgid "Data"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1512
+#: src/ui_astroCalcDialog.h:1519
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
