@@ -429,8 +429,11 @@
             </item>
             <item>
              <widget class="QCheckBox" name="ephemerisShowLineCheckBox">
+              <property name="toolTip">
+               <string>Show connecting line between the ephemeris markers</string>
+              </property>
               <property name="text">
-               <string>line</string>
+               <string comment="show line" extracomment="full phrase is 'show line'">line</string>
               </property>
              </widget>
             </item>
