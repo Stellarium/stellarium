@@ -85,6 +85,8 @@ SolarSystem::SolarSystem()
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
 	, ephemerisLineDisplayed(false)
+	, ephemerisSkipDataDisplayed(false)
+	, ephemerisDataStep(0)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
 	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
@@ -227,6 +229,8 @@ void SolarSystem::init()
 	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
 	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
+	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
+	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 0).toInt());
 	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
 	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
 	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
@@ -1386,6 +1390,8 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		float size, shift, baseSize = 4.f;
 		bool showDates = getFlagEphemerisDates();
 		bool showMagnitudes = getFlagEphemerisMagnitudes();
+		bool showSkippedData = getFlagEphemerisSkipData();
+		int dataStep = getEphemerisDataStep() + 1;
 		QString info = "";
 		Vec3d win;
 		Vec3f colorMarker;
@@ -1416,6 +1422,9 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 			if (showDates || showMagnitudes)
 			{
+				if (showSkippedData && ((i + 1)%dataStep)!=1)
+					continue;
+
 				shift = 3.f + size/1.6f;
 				if (showDates && showMagnitudes)
 					info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisList[i].objDate, QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2));
@@ -1424,7 +1433,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 				if (!showDates && showMagnitudes)
 					info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
 
-				sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
+				sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);				
 			}
 		}
 	}
@@ -1997,6 +2006,34 @@ void SolarSystem::setFlagEphemerisMagnitudes(bool b)
 bool SolarSystem::getFlagEphemerisMagnitudes() const
 {
 	return ephemerisMagnitudesDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisSkipData(bool b)
+{
+	if (b!=ephemerisSkipDataDisplayed)
+	{
+		ephemerisSkipDataDisplayed=b;
+		conf->setValue("astrocalc/flag_ephemeris_skip_data", b); // Immediate saving of state
+		emit ephemerisSkipDataChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisSkipData() const
+{
+	return ephemerisSkipDataDisplayed;
+}
+
+void SolarSystem::setEphemerisDataStep(int step)
+{
+	ephemerisDataStep = step;
+	// automatic saving of the setting
+	conf->setValue("astrocalc/ephemeris_data_step", step);
+	emit ephemerisDataStepChanged(step);
+}
+
+int SolarSystem::getEphemerisDataStep() const
+{
+	return ephemerisDataStep;
 }
 
 void SolarSystem::setEphemerisGenericMarkerColor(const Vec3f& color)

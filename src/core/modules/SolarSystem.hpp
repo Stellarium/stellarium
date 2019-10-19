@@ -171,6 +171,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisLine
 		   NOTIFY ephemerisLineChanged
 		   )
+	Q_PROPERTY(bool ephemerisSkippedData
+		   READ getFlagEphemerisSkipData
+		   WRITE setFlagEphemerisSkipData
+		   NOTIFY ephemerisSkipDataChanged
+		   )
+	Q_PROPERTY(int ephemerisDataStep
+		   READ getEphemerisDataStep
+		   WRITE setEphemerisDataStep
+		   NOTIFY ephemerisDataStepChanged
+		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
@@ -898,6 +908,8 @@ signals:
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisSkipDataChanged(bool b);
+	void ephemerisDataStepChanged(int s);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -1021,6 +1033,12 @@ private slots:
 	void setFlagEphemerisMagnitudes(bool b);
 	bool getFlagEphemerisMagnitudes() const;
 
+	void setFlagEphemerisSkipData(bool b);
+	bool getFlagEphemerisSkipData() const;
+
+	void setEphemerisDataStep(int step);
+	int getEphemerisDataStep() const;
+
 	void setEphemerisGenericMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisGenericMarkerColor(void) const;
 
@@ -1140,6 +1158,8 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	bool ephemerisSkipDataDisplayed;
+	int ephemerisDataStep;
 	Vec3f ephemerisGenericMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
