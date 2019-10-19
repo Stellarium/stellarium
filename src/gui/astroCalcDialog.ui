@@ -51,7 +51,7 @@
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -424,6 +424,13 @@
              <widget class="QLabel" name="label">
               <property name="text">
                <string>Show:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="ephemerisShowLineCheckBox">
+              <property name="text">
+               <string>line</string>
               </property>
              </widget>
             </item>
