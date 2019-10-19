@@ -230,7 +230,7 @@ void SolarSystem::init()
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
 	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
 	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
-	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 0).toInt());
+	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
 	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
 	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
 	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
@@ -1391,7 +1391,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		bool showDates = getFlagEphemerisDates();
 		bool showMagnitudes = getFlagEphemerisMagnitudes();
 		bool showSkippedData = getFlagEphemerisSkipData();
-		int dataStep = getEphemerisDataStep() + 1;
+		int dataStep = getEphemerisDataStep();
 		QString info = "";
 		Vec3d win;
 		Vec3f colorMarker;

@@ -42,6 +42,7 @@
 #include <QStringListModel>
 
 #include "AstroCalcDialog.hpp"
+#include "AstroCalcExtraEphemerisDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
 #include "external/qcustomplot/qcustomplot.h"
@@ -82,6 +83,7 @@ QString AstroCalcDialog::yAxis2Legend = "";
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
+	, extraEphemerisDialog(Q_NULLPTR)
 	, wutModel(Q_NULLPTR)
 	, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
@@ -125,6 +127,7 @@ AstroCalcDialog::~AstroCalcDialog()
 		currentTimeLine = Q_NULLPTR;
 	}
 	delete ui;
+	delete extraEphemerisDialog;
 }
 
 void AstroCalcDialog::retranslate()
@@ -240,6 +243,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenFromDateEdit->setToolTip(validDates);
 	ui->phenomenToDateEdit->setMinimumDate(min);	
 	ui->phenomenToDateEdit->setToolTip(validDates);
+	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
@@ -428,6 +432,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
 	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
 
+	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
+
 	updateTabBarListWidgetWidth();
 
 	// Let's improve visibility of the text
@@ -446,6 +452,14 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+}
+
+void AstroCalcDialog::showExtraEphemerisDialog()
+{
+	if (extraEphemerisDialog == Q_NULLPTR)
+		extraEphemerisDialog = new AstroCalcExtraEphemerisDialog();
+
+	extraEphemerisDialog->setVisible(true);
 }
 
 void AstroCalcDialog::searchWutClear()

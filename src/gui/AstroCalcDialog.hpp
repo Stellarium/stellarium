@@ -41,6 +41,7 @@ class Ui_astroCalcDialogForm;
 class QListWidgetItem;
 class QSortFilterProxyModel;
 class QStringListModel;
+class AstroCalcExtraEphemerisDialog;
 
 struct Ephemeris
 {
@@ -256,7 +257,10 @@ private slots:
 
 	void updateSolarSystemData();
 
+	void showExtraEphemerisDialog();
+
 private:
+	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
 	class StelCore* core;
 	class SolarSystem* solarSystem;
 	class NebulaMgr* dsoMgr;

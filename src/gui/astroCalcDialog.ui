@@ -465,6 +465,20 @@
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="pushButtonExtraEphemerisDialog">
+              <property name="toolTip">
+               <string>Extra options for ephemeris visualization</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/8-off-settings.png</normaloff>:/graphicGui/8-off-settings.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1893,6 +1907,8 @@
    <header>external/qcustomplot/qcustomplot.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>
