@@ -86,7 +86,7 @@ SolarSystem::SolarSystem()
 	, ephemerisHorizontalCoordinates(false)
 	, ephemerisLineDisplayed(false)
 	, ephemerisSkipDataDisplayed(false)
-	, ephemerisDataStep(0)
+	, ephemerisDataStep(1)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
 	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
@@ -1422,7 +1422,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 			if (showDates || showMagnitudes)
 			{
-				if (showSkippedData && ((i + 1)%dataStep)!=1)
+				if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 					continue;
 
 				shift = 3.f + size/1.6f;
