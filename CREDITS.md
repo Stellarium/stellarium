@@ -414,7 +414,7 @@
 	     http://www2.lowell.edu/
 	     License: public domain
 	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433,
-	     NGC1788, NGC2442, NGC2547, PGC10074,
+	     NGC1788, NGC2442, PGC10074,
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
@@ -529,7 +529,7 @@
 	     from ESO and Joe DePasquale
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.63 Images of Vela supernova remnant
+	4.63 Images of NGC2547, Vela supernova remnant
 	     from ESO/J.Perez
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
