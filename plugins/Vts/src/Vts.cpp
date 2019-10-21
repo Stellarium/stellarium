@@ -18,19 +18,54 @@
 
 #include "Vts.hpp"
 
+#include "CLIProcessor.hpp"
 #include "StelModule.hpp"
 #include "StelTranslator.hpp"
 
+#include <QApplication>
 #include <QDebug>
+#include <QTcpSocket>
 
 class Vts : public StelModule
 {
+public:
 	virtual void init();
 	virtual void update(double) {;}
+
+private:
+	QTcpSocket socket;
+	int port;
+
+private slots:
+	void onConnected();
+	void onDisconnected();
+	void onReadyRead();
 };
 
 void Vts::init()
 {
+	port = CLIProcessor::argsGetOptionWithArg(qApp->arguments(), "", "--serverport", 8888).toInt();
+	qDebug() << "Start Vts on port" << port;
+
+	connect(&socket, &QTcpSocket::connected, this, &Vts::onConnected);
+	connect(&socket, &QTcpSocket::disconnected, this, &Vts::onDisconnected);
+	connect(&socket, &QTcpSocket::readyRead, this, &Vts::onReadyRead);
+	socket.connectToHost("localhost", port);
+}
+
+void Vts::onConnected()
+{
+	socket.write("INIT Stellarium CONSTRAINT 1.0\n");
+}
+
+void Vts::onDisconnected()
+{
+}
+
+void Vts::onReadyRead()
+{
+	QByteArray line = socket.readLine();
+	qDebug() << "got line:" << line;
 }
 
 StelModule* VtsStelPluginInterface::getStelModule() const
