@@ -3654,12 +3654,12 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			if (separation < 0.0) // we use negative value for start retrograde motion!
 			{
 				// TRANSLATORS: The planet are stand still in the equatorial coordinates
-				phenomenType = q_("Stationary (begin retrograde)");
+				phenomenType = q_("Stationary (begin retrograde motion)");
 			}
 			else
 			{
 				// TRANSLATORS: The planet are stand still in the equatorial coordinates
-				phenomenType = q_("Stationary (begin prograde)");
+				phenomenType = q_("Stationary (begin prograde motion)");
 			}
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
