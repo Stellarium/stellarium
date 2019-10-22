@@ -35,7 +35,9 @@ class NavStarsWindow;
 /*! @defgroup navigationalStars Navigational Stars Plug-in
 @{
 The Navigational Stars plugin marks the 58 navigational stars of the
-Nautical Almanach and the 2102-D Rude Star Finder on the sky.
+Nautical Almanach and the 2102-D Rude Star Finder on the sky. Alternatively,
+the french, german, and russian selection of navigational stars are also
+available.
 
 The NavStars class is the main class of the plug-in. It manages the list of
 navigational stars and manipulate show/hide markers of them. All markers
@@ -70,6 +72,7 @@ public:
 	{
 		AngloAmerican,	//!< Anglo-American set (The Nautical Almanach)
 		French,		//!< French set (Ephémérides Nautiques)
+		German,		//!< German set (Nautisches Jahrbuch)
 		Russian		//!< Russian set (Морской астрономический ежегодник)
 	};
 

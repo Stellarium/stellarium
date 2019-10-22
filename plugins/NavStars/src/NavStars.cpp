@@ -302,6 +302,12 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("The 81 stars that are listed in the <em>%1</em> published by the French Bureau des Longitudes.").arg("Ephémérides Nautiques");
 			break;
 		}
+		case German:
+		{
+			// TRANSLATORS: The emphasis tags mark a book title.
+			txt = q_("The 80 stars that are listed in the <em>%1</em> published by the German Bundesamt für Seeschiffahrt und Hydrographie.").arg("Nautisches Jahrbuch");
+			break;
+		}
 		case Russian:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
@@ -354,6 +360,25 @@ void NavStars::populateNavigationalStarsSet(void)
 				    <<  82396 <<  85927 <<  86032 <<  87833 <<  90185 <<  91262 <<  92855
 				    <<  97649 << 100453 << 100751 << 102098 << 105199 << 107315 << 109268
 				    << 112122 << 113368 << 113881 << 113963;
+			break;
+		}
+		case German:
+		{
+			// 80 stars from German Nautical Almanac
+			// Original German name: Nautisches Jahrbuch
+			// The numbers are identical to the "Nautisches Jahrbuch"
+			starNumbers <<    677 <<   1067 <<   2081 <<   3179 <<   3419 <<   4427 <<   5447
+				    <<   7588 <<  11767 <<   9640 <<   9884 <<  14135 <<  14576 <<  15863
+				    <<  17702 <<  21421 <<  24436 <<  24608 <<  25336 <<  25428 <<  26311
+				    <<  26727 <<  27366 <<  27989 <<  28360 <<  30324 <<  30438 <<  31681
+				    <<  32349 <<  33579 <<  34444 <<  36850 <<  37279 <<  37826 <<  41037
+				    <<  44816 <<  45238 <<  46390 <<  49669 <<  52419 <<  54061 <<  57632
+				    <<  60718 <<  61084 <<  62434 <<  62956 <<  63608 <<  65378 <<  65474
+				    <<  67301 <<  68702 <<  68933 <<  69673 <<  71683 <<  72105 <<  72622
+				    <<  72607 <<  74785 <<  76267 <<  77070 <<  80763 <<  82273 <<  82396
+				    <<  85927 <<  86032 <<  86228 <<  87833 <<  90185 <<  91262 <<  92855
+				    <<  97649 << 100751 << 102098 << 105199 << 107315 << 109268 << 112122
+				    << 113368 << 113881 << 113963;
 			break;
 		}
 		case Russian:
