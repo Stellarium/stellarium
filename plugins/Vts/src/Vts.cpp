@@ -19,6 +19,8 @@
 #include "Vts.hpp"
 
 #include "CLIProcessor.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelModule.hpp"
 #include "StelTranslator.hpp"
 
@@ -35,6 +37,9 @@ public:
 private:
 	QTcpSocket socket;
 	int port;
+
+	// Private methods.
+	void processMessage(const QByteArray& msg);
 
 private slots:
 	void onConnected();
@@ -62,10 +67,41 @@ void Vts::onDisconnected()
 {
 }
 
+void Vts::processMessage(const QByteArray& msg)
+{
+	QTextStream stream(msg);
+	QString cmd;
+	stream >> cmd;
+
+	StelCore* core = StelApp::getInstance().getCore();
+
+	if (cmd == "CMD")
+	{
+		if (msg == "CMD TIME PAUSE\n")
+			core->setTimeRate(0);
+		return;
+	}
+
+	if (cmd == "TIME")
+	{
+		const double JD1950 = 2433282.5;
+		double time, ratio;
+		stream >> time >> ratio;
+
+		core->setJD(time + JD1950);
+		core->setTimeRate(StelCore::JD_SECOND * ratio);
+		return;
+	}
+	qWarning() << "Unknown CMD" << msg;
+}
+
 void Vts::onReadyRead()
 {
-	QByteArray line = socket.readLine();
-	qDebug() << "got line:" << line;
+	while (socket.canReadLine())
+	{
+		QByteArray message = socket.readLine();
+		processMessage(message);
+	}
 }
 
 StelModule* VtsStelPluginInterface::getStelModule() const
