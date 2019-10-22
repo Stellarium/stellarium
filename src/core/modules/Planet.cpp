@@ -658,16 +658,17 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelCore* core1 = StelApp::getInstance().getCore();
 				bool state = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
+				core1->update(0); // enforce update cache!
 				double eclJDE = earth->getRotObliquity(core1->getJDE());
 				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));				
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
 				core1->setUseTopocentricCoordinates(state);
 				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = static_cast<int>(std::round(deltaLong));
+				int deltaLongI = qRound(deltaLong);
 				if (deltaLongI==45)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
 				if (deltaLongI==90)
