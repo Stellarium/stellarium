@@ -38,6 +38,12 @@
 #include <QSharedPointer>
 #include <QMetaEnum>
 
+#include <StelMainScriptAPI.hpp>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
 	return new NavStars();
@@ -52,7 +58,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
 	info.contact = STELLARIUM_URL;
-	info.description = N_("This plugin marks navigational stars from a selected set.");
+	info.description = N_("This plugin marks navigational stars from a selected set. Additionally for a selected object relevant navigational data are provided. ");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	info.license = NAVSTARS_PLUGIN_LICENSE;
 	return info;
@@ -149,6 +155,29 @@ bool NavStars::configureGui(bool show)
 	return true;
 }
 
+/* Adds/subtracts 360deg to ensure a SHA, GHA, or LHA between 0 and 360deg.
+   This is taken from observability plugin and adapted for NavStars */
+double NavStars::toUnsigned_HA(double HA)
+{
+		double tempHA,tempmod;
+		if (HA<0.0)
+		{
+			tempmod = std::modf(-HA/360.,&tempHA);
+			HA += 360.*(tempHA+1.0)+0.0*tempmod;
+		};
+		double auxHA = 360.*std::modf(HA/360.,&tempHA);
+		auxHA += (auxHA<0.0)?360.0:((auxHA>360.0)?-360.0:0.0);
+		return auxHA;
+}
+
+
+/* rounding to one decimal figure */
+double roundToOneFigure(double x)
+{
+		return (int)(x*10 + 0.5)/10.;
+}
+
+
 void NavStars::draw(StelCore* core)
 {
 	// Drawing is enabled?
@@ -199,6 +228,88 @@ void NavStars::draw(StelCore* core)
 				label = QString("%1 (%2)").arg(label).arg(i+1);
 			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 		}
+	}
+
+
+	StelObjectP selectedObject;
+	bool isSource = StelApp::getInstance().getStelObjectMgr().getWasSelected();
+
+	// Only execute plugin if we are on Earth.
+	if (core->getCurrentLocation().planetName != "Earth")
+		return;
+
+//	if(selectedObject->getType() == "Satellite")
+//		return;
+
+	QString navText;
+	if (isSource)	//(a object was chosen)
+	{
+		StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
+
+		/* compute UTC */
+		QString myTime = StelMainScriptAPI::getDate("utc");
+
+
+		/* compute declination of selected object */
+		EquPos = selectedObject->getEquinoxEquatorialPos(core);
+		EquPos.normalize();
+		double myDec = std::asin(EquPos[2]) * 180./M_PI;
+		double selDecDeg, selDecMin = std::modf(myDec, &selDecDeg) * 60.;
+		selDecMin = roundToOneFigure(selDecMin);
+
+		char* selHemisphere = (char*) " ";
+		if (EquPos[2] < 0) selHemisphere = (char*) "S";
+		if (EquPos[2] > 0) selHemisphere = (char*) "N";
+
+		selDecDeg = std::abs(selDecDeg);
+		selDecMin = std::abs(selDecMin);
+
+
+		/* compute SHA of selected object */
+		double mySHA = toUnsigned_HA(- std::atan2(EquPos[1], EquPos[0]) * 180./M_PI);
+		double selSHADeg, selSHAMin = std::modf(mySHA, &selSHADeg) * 60.;
+		selSHAMin = roundToOneFigure(selSHAMin);
+		
+
+		/* compute LHA of selected object */
+		LocPos = selectedObject->getSiderealPosGeometric(core);
+		double myLHA = toUnsigned_HA(- std::atan2(LocPos[1], LocPos[0]) * 180./M_PI);
+		double selLHADeg, selLHAMin = std::modf(myLHA, &selLHADeg) * 60.;
+		selLHAMin = roundToOneFigure(selLHAMin);
+
+
+		/* compute GHA of selected object */
+		GWPos = selectedObject->getSiderealPosGeometric(core);
+		double myLon = core->getCurrentLocation().longitude;		// this is already in deg, E -> +, W -> -
+		double myGHA = toUnsigned_HA(myLHA - myLon);
+		double selGHADeg, selGHAMin = std::modf(myGHA, &selGHADeg) * 60.;
+		selGHAMin = roundToOneFigure(selGHAMin);
+
+
+		/* compute GHA of vernal equinox */
+		double selGHAEq = toUnsigned_HA(myGHA - mySHA);
+		double selGHAEqDeg, selGHAEqMin = std::modf(selGHAEq, &selGHAEqDeg) * 60.;
+		selGHAEqMin = roundToOneFigure(selGHAEqMin);
+
+
+		/* Note: In nautical applications angles are measured in deg, min, decimal min */
+		navText = QString("%1 UTC").arg(myTime);
+		painter.drawText(65, 260, navText, 0, 10.f, 10.f, false);
+
+		navText = QString("SHA = %1° %2'").arg(selSHADeg).arg(selSHAMin);		
+		painter.drawText(65, 220, navText, 0, 10.f, 10.f, false);
+
+		navText = QString("GHA = %1° %2'").arg(selGHADeg).arg(selGHAMin);
+		painter.drawText(200, 220, navText, 0, 10.f, 10.f, false);
+
+		navText = QString("GHA (Vernal Equinox) = %1° %2'").arg(selGHAEqDeg).arg(selGHAEqMin);
+		painter.drawText(200, 200, navText, 0, 10.f, 10.f, false);
+	
+		navText = QString("LHA = %1° %2'").arg(selLHADeg).arg(selLHAMin);
+		painter.drawText(65, 200, navText, 0, 10.f, 10.f, false);
+	
+		navText = QString("Dec = %1° %2' %3").arg(selDecDeg).arg(selDecMin).arg(selHemisphere);
+		painter.drawText(65, 180, navText, 0, 10.f, 10.f, false);
 	}
 }
 

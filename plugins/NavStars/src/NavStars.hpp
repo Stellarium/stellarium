@@ -26,6 +26,9 @@
 #include "StelTexture.hpp"
 
 #include <QSettings>
+#include <QFont>
+#include <QString>
+#include <QPair>							
 
 class StelButton;
 class StelPainter;
@@ -159,6 +162,17 @@ private:
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
+
+	//! Adds/subtracts 360deg to ensure a SHA, GHA, or LHA between 0 and 360deg.
+	//! @param angle right ascension (in hours).
+	double toUnsigned_HA(double angle);
+
+	//! Co-ordinates of currently-selected source.
+	Vec3d EquPos, LocPos, GWPos;
+
+	//! A boolean to check the kind of source selected.
+	bool isSun;
+
 };
 
 
