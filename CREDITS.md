@@ -396,7 +396,7 @@
 	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA
 	     License: public domain
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
-	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
+	4.28 Images of IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
 	     NGC4038-4039, NGC5257, NGC6027, NGC6050, NGC6369, NGC6826, NGC7742, IC883,
@@ -663,6 +663,9 @@
 	4.96 Images of rho Oph
 	     from ESO/S. Guisard
 	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	4.97 Images of IC59, IC63
+	     from Zhang Ruiping
 	     License: Creative Commons Attribution 4.0 International 
 ```
 
