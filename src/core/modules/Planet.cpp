@@ -668,7 +668,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				core1->setUseTopocentricCoordinates(state);
 				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = qRound(deltaLong);
+				int deltaLongI = qRound(deltaLong);				
 				if (deltaLongI==45)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
 				if (deltaLongI==90)

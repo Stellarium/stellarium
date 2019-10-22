@@ -96,7 +96,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 			location.planetName = "Earth";
 		// Tolerate decimal values in .ini file, but round to nearest integer
 		if (landscapeIni.contains("location/altitude"))
-			location.altitude = static_cast<int>(round(landscapeIni.value("location/altitude").toDouble()));
+			location.altitude = qRound(landscapeIni.value("location/altitude").toDouble());
 		if (landscapeIni.contains("location/latitude"))
 			location.latitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI);
 		if (landscapeIni.contains("location/longitude"))
