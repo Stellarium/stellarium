@@ -426,7 +426,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAngularDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateGroupCelestialBodyList()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -2031,8 +2030,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Emission-line stars"), "19");
 	groups->addItem(q_("Interstellar objects"), "20");
 	groups->addItem(q_("Planets and Sun"), "21");
-	if (core->getCurrentPlanet()==solarSystem->getEarth())
-		groups->addItem(q_("Sun, planets and Moon"), "22");
+	groups->addItem(q_("Sun, planets and moons"), "22");
 	groups->addItem(q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -3381,13 +3379,16 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 22: // Sun, planets and Moon
+		case 22: // Sun, planets and moons
+		{
+			PlanetP cp = core->getCurrentPlanet();
 			for (const auto& object : allObjects)
 			{
-				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar || object==solarSystem->getMoon()) && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
+				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar || (object->getParent()==cp && object->getPlanetType()==Planet::isMoon)) && object->getEnglishName() != cp->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
 			}
 			break;
+		}
 		case 23: // Bright Solar system objects
 			for (const auto& object : allObjects)
 			{
@@ -3473,7 +3474,7 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 		}
 
-		if (planet!=sun && planet!=solarSystem->getMoon())
+		if (planet!=sun && planet->getPlanetType()!=Planet::isMoon)
 		{
 			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
 			if (planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
