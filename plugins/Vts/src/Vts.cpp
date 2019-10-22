@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModule.hpp"
+#include "StelScriptMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include <QApplication>
@@ -40,6 +41,7 @@ private:
 
 	// Private methods.
 	void processMessage(const QByteArray& msg);
+	void processPropCmd(const QString& prop, const QString& value);
 
 private slots:
 	void onConnected();
@@ -67,6 +69,12 @@ void Vts::onDisconnected()
 {
 }
 
+void Vts::processPropCmd(const QString& prop, const QString& value)
+{
+	QString script = QString("%1 = %2").arg(prop, value);
+	StelApp::getInstance().getScriptMgr().runPreprocessedScript(script, "Vts");
+}
+
 void Vts::processMessage(const QByteArray& msg)
 {
 	QTextStream stream(msg);
@@ -78,8 +86,18 @@ void Vts::processMessage(const QByteArray& msg)
 	if (cmd == "CMD")
 	{
 		if (msg == "CMD TIME PAUSE\n")
+		{
 			core->setTimeRate(0);
-		return;
+			return;
+		}
+		stream >> cmd;
+		if (cmd == "PROP")
+		{
+			QString prop, value;
+			stream >> prop >> value;
+			processPropCmd(prop, value);
+			return;
+		}
 	}
 
 	if (cmd == "TIME")
