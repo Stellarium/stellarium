@@ -815,7 +815,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 }
 
 // Used by the method below
-QVector<Vec2f> StelPainter::smallCircleVertexArray;
+QVector<Vec3f> StelPainter::smallCircleVertexArray;
 QVector<Vec4f> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
@@ -826,7 +826,7 @@ void StelPainter::drawSmallCircleVertexArray()
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
 	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
-	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
+	setVertexPointer(3, GL_FLOAT, smallCircleVertexArray.constData());
 	if (!smallCircleColorArray.isEmpty())
 		setColorPointer(4, GL_FLOAT, smallCircleColorArray.constData());
 	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
@@ -890,10 +890,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		const bool p2InViewport = prj->checkInViewport(p2);
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			smallCircleVertexArray.append(Vec2f(static_cast<float>(p1[0]), static_cast<float>(p1[1])));
+			smallCircleVertexArray.append(Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
 			if (i+1==tessArc.constEnd())
 			{
-				smallCircleVertexArray.append(Vec2f(static_cast<float>(p2[0]), static_cast<float>(p2[1])));
+				smallCircleVertexArray.append(Vec3f(static_cast<float>(p2[0]), static_cast<float>(p2[1]), static_cast<float>(p2[2])));
 				drawSmallCircleVertexArray();
 			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
@@ -909,7 +909,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		{
 			// Break the line, draw the stored vertex and flush the list
 			if (!smallCircleVertexArray.isEmpty())
-				smallCircleVertexArray.append(Vec2f(static_cast<float>(p1[0]), static_cast<float>(p1[1])));
+				smallCircleVertexArray.append(Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
 			drawSmallCircleVertexArray();
 		}
 	}
@@ -931,12 +931,12 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 		if (!prj->intersectViewportDiscontinuity(p1, p2))
 		{
 			prj->project(p1, win);
-			smallCircleVertexArray.append(Vec2f(static_cast<float>(win[0]), static_cast<float>(win[1])));
+			smallCircleVertexArray.append(Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])));
 			smallCircleColorArray.append(colors[i]);
 			if (i+2==points.size())
 			{
 				prj->project(p2, win);
-				smallCircleVertexArray.append(Vec2f(static_cast<float>(win[0]), static_cast<float>(win[1])));
+				smallCircleVertexArray.append(Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])));
 				smallCircleColorArray.append(colors[i + 1]);
 				drawSmallCircleVertexArray();
 			}
@@ -947,7 +947,7 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 			if (!smallCircleVertexArray.isEmpty())
 			{
 				prj->project(p1, win);
-				smallCircleVertexArray.append(Vec2f(static_cast<float>(win[0]), static_cast<float>(win[1])));
+				smallCircleVertexArray.append(Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])));
 				smallCircleColorArray.append(colors[i]);
 			}
 			drawSmallCircleVertexArray();
