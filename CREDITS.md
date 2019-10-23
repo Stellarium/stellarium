@@ -350,7 +350,7 @@
 	     http://kepler-observatorium.ru
 	     License: Creative Commons Attribution 3.0 Unported
 	4.16 Images of NGC2903, NGC3185, NGC3187, NGC3189,
-	     NGC3190, NGC3193, NGC3718, NGC3729, NGC4490, NGC5981, NGC5982,
+	     NGC3190, NGC3193, NGC3718, NGC3729, NGC5981, NGC5982,
 	     NGC5985
 	     from Oleg Bryzgalov 
 	     http://olegbr.astroclub.kiev.ua/
@@ -484,7 +484,7 @@
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.51 Images of M95, NGC520, NGC660, NGC925, NGC1300, NGC7129, NGC7497, NGC6888
+	4.51 Images of M95, NGC520, NGC660, NGC925, NGC1300, NGC4490, NGC6888, NGC7129, NGC7497
 	     from Jschulman555
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 3.0 Unported
