@@ -388,7 +388,7 @@
 	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3166, NGC3310, NGC3344, 
 	     NGC3359, NGC3504, NGC3512, NGC3521, NGC3628, NGC3938, NGC4151, 
 	     NGC4535, NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, 
-	     NGC7318, NGC7331, NGC7380, NGC7479, NGC7635, NGC7640, NGC7789, 
+	     NGC7318, NGC7331, NGC7479, NGC7635, NGC7640, NGC7789, 
 	     PGC1803573, Barnard 142, Barnard 173, Sh2-101, 
 	     LDN1235, Sadr region (Gamma Cygni), Jones-Emberson 1, Medusa
 	     from Peter Vasey, Plover Hill Observatory
@@ -564,7 +564,7 @@
 	     from ESO, F. Ferraro (University of Bologna)
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.72 Images of SH2-80, SH2-106
+	4.72 Images of NGC7380, SH2-80, SH2-106
 	     from Cristina Cellini
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 4.0 International
