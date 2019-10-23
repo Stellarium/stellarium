@@ -670,7 +670,7 @@
 	4.98 Images of IC423
 	     from Astrowicht
 	     https://commons.wikimedia.org/wiki/
-	     License:  Creative Commons Attribution-Share Alike 3.0 Unported
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 ```
 
 ## Appendix
