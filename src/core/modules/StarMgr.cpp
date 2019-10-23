@@ -1145,7 +1145,7 @@ void StarMgr::loadPlxErr(const QString& plxErrFile)
 		}
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
 }
 
 int StarMgr::getMaxSearchLevel() const
