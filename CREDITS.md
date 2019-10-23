@@ -572,7 +572,7 @@
 	     from Davide De Martin & the ESA/ESO/NASA Photoshop FITS Liberator
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International 
-	4.74 Images of SH2-240
+	4.74 Images of SH2-1, SH2-240
 	     from Rogelio Bernal Andreo
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
