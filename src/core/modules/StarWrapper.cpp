@@ -257,10 +257,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			QString plx = q_("Parallax");
 			if (plxErr>0.f)
-				oss <<  QString("%1: %2%3%4\"").arg(plx, QString::number(0.00001*s->getPlx(), 'f', 5), QChar(0x00B1), QString::number(0.001*plxErr, 'f', 5));
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(plxErr, 'f', 3));
 			else
-				oss << QString("%1: %2\"").arg(plx, QString::number(0.00001*s->getPlx(), 'f', 5));
-			oss  << "<br />";
+				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
 		}
 
 		if (vPeriod>0)

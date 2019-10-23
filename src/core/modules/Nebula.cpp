@@ -349,7 +349,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		if (parallax!=0.f)
+		if (qAbs(parallax)>0.f)
 		{
 			QString dx;
 			// distance in light years from parallax
@@ -419,18 +419,16 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << QString("%1: %2").arg(q_("Redshift"), z) << "<br />";
 		}
-		if (parallax!=0.f)
+		if (qAbs(parallax)>0.f)
 		{
 			QString px;
-
 			if (parallaxErr>0.f)
-				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax), 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr, 'f', 3));
 			else
-				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+				px = QString("%1").arg(QString::number(qAbs(parallax), 'f', 3));
 
-			oss << QString("%1: %2\"").arg(q_("Parallax"), px) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br />";
 		}
-
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 	}
