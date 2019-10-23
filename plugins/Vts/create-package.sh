@@ -13,6 +13,7 @@ mkdir -p $OUT/bin $OUT/doc
 cp $SCRIPT_DIR/data/launcherStellarium.sh $OUT/bin/
 cp $SCRIPT_DIR/data/stellariumVtsConf.ini $OUT/doc/
 cp $SCRIPT_DIR/data/vtsclient.json $OUT/doc/
+cp $SCRIPT_DIR/data/config.ini $OUT/bin/
 cp $BUILD_DIR/src/stellarium $OUT/bin/
 
 for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa

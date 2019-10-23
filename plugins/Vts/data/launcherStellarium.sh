@@ -21,4 +21,4 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-echo $appid $vtsconfig $appid --serverport $serverport
+echo $appid $vtsconfig $appid --serverport $serverport --config-file $VTS_WORKING_DIR/config.ini
