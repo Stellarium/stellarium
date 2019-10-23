@@ -387,7 +387,7 @@ private:
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
 	// Used by the method below
-	static QVector<Vec2f> smallCircleVertexArray;
+	static QVector<Vec3f> smallCircleVertexArray;
 	static QVector<Vec4f> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
 
