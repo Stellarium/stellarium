@@ -341,6 +341,11 @@ public:
 	//! @return separation in arcseconds
 	static float getWdsLastSeparation(int hip);
 
+	//! Get the parallax error for star with a Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the parallax error (mas)
+	static float getPlxError(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -402,6 +407,10 @@ private:
 	//! Loads cross-identification data from a file.
 	//! @param the path to a file containing the cross-identification data.
 	void loadCrossIdentificationData(const QString& crossIdFile);
+
+	//! Loads parallax error data from a file.
+	//! @param the path to a file containing the parallax error data.
+	void loadPlxErr(const QString& plxErrFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
@@ -474,6 +483,8 @@ private:
 	static QMap<int, int> saoStarsIndex;
 	static QMap<int, int> hdStarsIndex;
 	static QMap<int, int> hrStarsIndex;
+
+	static QHash<int, float> hipParallaxErrors;
 
 	static QHash<int, QString> referenceMap;
 

@@ -107,6 +107,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
+	const float plxErr = StarMgr::getPlxError(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -253,7 +254,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
 
 		if (s->getPlx())
-			oss << QString("%1: %2\"").arg(q_("Parallax"), QString::number(0.00001*s->getPlx(), 'f', 5)) << "<br />";
+		{
+			QString plx = q_("Parallax");
+			if (plxErr>0.f)
+				oss <<  QString("%1: %2%3%4\"").arg(plx, QString::number(0.00001*s->getPlx(), 'f', 5), QChar(0x00B1), QString::number(0.001*plxErr, 'f', 5));
+			else
+				oss << QString("%1: %2\"").arg(plx, QString::number(0.00001*s->getPlx(), 'f', 5));
+			oss  << "<br />";
+		}
 
 		if (vPeriod>0)
 			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
