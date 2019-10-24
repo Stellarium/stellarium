@@ -81,7 +81,7 @@ bool Lx200CommandSetSelectedRa::writeCommandToBuffer(char *&p, char *end)
 	*p++ = ':';
 	*p++ = 'S';
 	*p++ = 'r';
-	*p++ = ' ';
+//	*p++ = ' ';  // GZ seems this space is wrong?
 	int x = ra;
 	p += 8;
 	p[-1] = '0' + (x % 10); x /= 10;
@@ -157,7 +157,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	*p++ = ':';
 	*p++ = 'S';
 	*p++ = 'd';
-	*p++ = ' ';
+//	*p++ = ' ';  // GZ seems this space is wrong?
 	int x = dec;
 	if (x < 0)
 	{
@@ -174,7 +174,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	p[-3] = ':';
 	p[-4] = '0' + (x % 10); x /= 10;
 	p[-5] = '0' + (x %  6); x /=  6;	
-	p[-6] = '\xDF'; // = 223, degree symbol
+	p[-6] = '*'; // '\xDF'; // = 223, degree symbol. GZ: Should be asterisk, according to specs.
 	p[-7] = '0' + (x % 10); x /= 10;
 	p[-8] = '0' + static_cast<char>(x);
 	*p++ = '#';
@@ -492,11 +492,11 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	
 	dec = ((*p++) - '0');
 	dec *= 10; dec += ((*p++) - '0');
-	if (*p++ != (static_cast<char>(223)))
+	if (*p++ != ('*'))
 	{
 		*log_file << Now()
 		          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-		             "error: degree sign expected"
+			     "error: degree sign (*) expected"
 		          << endl;
 	}
 	

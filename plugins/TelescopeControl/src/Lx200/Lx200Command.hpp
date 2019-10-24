@@ -86,7 +86,7 @@ private:
 	void print(QTextStream &o) const;
 };
 
-//! Meade LX200 command: Set right ascension.
+//! Meade LX200 command: Set right ascension. LONG FORMAT ONLY!
 class Lx200CommandSetSelectedRa : public Lx200Command
 {
 public:
@@ -100,7 +100,7 @@ private:
 	const int ra;
 };
 
-//! Meade LX200 command: Set declination.
+//! Meade LX200 command: Set declination. LONG FORMAT ONLY!
 class Lx200CommandSetSelectedDec : public Lx200Command
 {
 public:
