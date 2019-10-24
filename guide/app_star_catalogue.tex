@@ -45,9 +45,9 @@ section~\ref{sec:Directories}).
 The main catalogue data is split into several files:
 
 \begin{description}
-\item[\file{stars\_0\_0v0\_7.cat}]
-\item[\file{stars\_1\_0v0\_7.cat}]
-\item[\file{stars\_2\_0v0\_7.cat}]
+\item[\file{stars\_0\_0v0\_8.cat}]
+\item[\file{stars\_1\_0v0\_8.cat}]
+\item[\file{stars\_2\_0v0\_8.cat}]
 \item[\file{stars\_3\_1v0\_4.cat}]
 \item[\file{stars\_4\_1v0\_2.cat}]
 \item[\file{stars\_5\_2v0\_1.cat}]
@@ -64,6 +64,7 @@ There also exist some control and reference files:
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
 \item[\file{cross-id.dat}]
+\item[\file{hip\_plx\_err.dat}]
 \item[\file{stars.ini}]
 \item[\file{name.fab}]
 \end{description}
@@ -80,6 +81,8 @@ which again contains references into the main catalogue files.
 
 The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO, HD and HR designations.
 
+The file \file{hip\_plx\_err.dat} contains parallax errors data for HIP stars.
+
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
 Individual star records do not contain full positional coordinates,
@@ -93,9 +96,9 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data     } & \emph{Data            } & \emph{Geodesic      } & \emph{\#Records} & \emph{Notes}\\
             & \emph{     Type} & \emph{     Record Size} & \emph{         Level} &                  &             \\
 \midrule
-\file{stars\_0\_0v0\_7.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
-\file{stars\_1\_0v0\_7.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
-\file{stars\_2\_0v0\_7.cat} & 0 & 28 bytes & 2 &    150,850 & Hipparcos\\
+\file{stars\_0\_0v0\_8.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
+\file{stars\_1\_0v0\_8.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
+\file{stars\_2\_0v0\_8.cat} & 0 & 28 bytes & 2 &    150,824 & Hipparcos\\
 \file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 &    425,807 & Tycho 2\\
 \file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 &  1,692,779 & Tycho 2\\
 \file{stars\_5\_2v0\_1.cat} & 2 &  8 bytes & 5 &  7,083,058 & NOMAD\\
