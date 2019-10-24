@@ -5,7 +5,7 @@ SCRIPT_DIR=$(dirname `which $0`)
 
 # TODO: Compute those.
 BUILD_DIR=$SCRIPT_DIR/../../build/
-QT_DIR=~/Qt/5.12.4/gcc_64/
+QT_DIR=$(qtpaths --install-prefix)
 
 echo Copy all files to \"$OUT\"
 
