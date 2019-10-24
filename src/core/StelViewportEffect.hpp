@@ -32,7 +32,7 @@ class StelViewportEffect
 public:
 	StelViewportEffect() {;}
 	virtual ~StelViewportEffect() {;}
-	virtual QString getName() {return "framebufferOnly";}
+	virtual QString getName() const {return "framebufferOnly";}
 	//! Alter the GL frame buffer, this method must not display anything.
 	//! The default implementation does nothing.
 	virtual void alterBuffer(QOpenGLFramebufferObject*) const {;}
@@ -42,7 +42,7 @@ public:
 	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const;
 	//! Distort an x,y position according to the distortion.
 	//! The default implementation does nothing.
-	virtual void distortXY(float& x, float& y) const {Q_UNUSED(x); Q_UNUSED(y);}
+	virtual void distortXY(qreal& x, qreal& y) const {Q_UNUSED(x); Q_UNUSED(y);}
 };
 
 
@@ -51,9 +51,9 @@ class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 public:
 	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
 	~StelViewportDistorterFisheyeToSphericMirror();
-	virtual QString getName() {return "sphericMirrorDistorter";}
+	virtual QString getName() const {return "sphericMirrorDistorter";}
 	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const;
-	virtual void distortXY(float& x, float& y) const;
+	virtual void distortXY(qreal& x, qreal& y) const;
 private:
 	const int screen_w;
 	const int screen_h;
@@ -63,7 +63,7 @@ private:
 
 	Vec2f *texture_point_array;
 	int max_x,max_y;
-	double step_x,step_y;
+	float step_x,step_y;
 
 	QVector<Vec2f> displayVertexList;
 	QVector<Vec4f> displayColorList;

@@ -51,7 +51,6 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 
-
 public slots:
 	void retranslate();	
 
@@ -78,19 +77,18 @@ private slots:
 	void updateLog(int);
 
 	//! Updated text in Help tab.
-	void updateHelpText(void);
+	void updateHelpText(void) const;
 
 	//! Updated text in About tab.
-	void updateAboutText(void);
+	void updateAboutText(void) const;
 
 	//! Sync the displayed log.
-	void refreshLog();
+	void refreshLog() const;
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 	void checkUpdates(void);
 	void downloadComplete(QNetworkReply * reply);
-
 };
 
 #endif /*_HELPDIALOG_HPP*/

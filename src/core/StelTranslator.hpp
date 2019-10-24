@@ -49,7 +49,6 @@
 class StelTranslator
 {
 public:
-
 	//! Create a translator from a language name.
 	//! If the passed locale name cannot be handled by the system, default value will be used.
 	//! The passed language name is a language code string like "fr" or "fr_FR".

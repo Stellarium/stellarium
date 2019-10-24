@@ -294,7 +294,6 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (deltaJD>t9)
 			vmag = minMagnitude;
-
 	}
 	else
 	{
@@ -319,7 +318,7 @@ double Nova::getAngularSize(const StelCore*) const
 
 void Nova::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Nova::draw(StelCore* core, StelPainter* painter)

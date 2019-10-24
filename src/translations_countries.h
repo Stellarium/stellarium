@@ -526,6 +526,5 @@ class GeoLocTranslations
 		N_("Zambia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Zimbabwe
 		N_("Zimbabwe");
-
 	}
 };

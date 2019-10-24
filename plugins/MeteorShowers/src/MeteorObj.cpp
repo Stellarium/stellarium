@@ -27,7 +27,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 	// if speed is zero, use a random value
 	if (!speed)
 	{
-		speed = 11 + (double)qrand() / ((double)RAND_MAX + 1) * 61;  // abs range 11-72 km/s
+		speed = 11 + static_cast<int>(static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1) * 61);  // abs range 11-72 km/s
 	}
 
 	// building meteor model
@@ -42,7 +42,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 	if (pidx > 1.f)
 	{
 		// higher pidx implies a larger fraction of faint meteors than average
-		float prob = (float) qrand() / ((float) RAND_MAX + 1);
+		float prob = static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1);
 		if (prob > 1.f / pidx)
 		{
 			// Increase the absolute magnitude ([-3; 4.5]) in 1.5!

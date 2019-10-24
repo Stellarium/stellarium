@@ -1,7 +1,7 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-add_library(TelescopeControl_Lx200
+add_library(TelescopeControl_Lx200 STATIC
     Lx200Command.hpp
     Lx200Command.cpp
     Lx200Connection.hpp

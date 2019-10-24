@@ -25,9 +25,9 @@ def writePolys(pl, f):
 
 class StructCredits:
     def __init__(self):
-        self.short = None;
-        self.full = None;
-        self.infoUrl = None;
+        self.short = None
+        self.full = None
+        self.infoUrl = None
         return
 
     def outJSON(self, f, levTab):
@@ -98,10 +98,10 @@ class SkyImageTile:
         f.write(',\n')
         if self.maxBrightness:
             f.write(levTab + '\t"maxBrightness": %f,\n' % self.maxBrightness)
-        if self.alphaBlend == True:
+        if self.alphaBlend:
             f.write(levTab + '\t"alphaBlend": true,\n')
         f.write(levTab + '\t"minResolution": %f' % self.minResolution)
-        if len(self.subTiles) == 0:
+        if not self.subTiles:
             f.write('\n' + levTab + '}')
             return
         f.write(',\n')

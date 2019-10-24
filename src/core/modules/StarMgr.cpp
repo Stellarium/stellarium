@@ -57,7 +57,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 
-#include <errno.h>
+#include <cstdlib>
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -65,7 +65,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 10;
+static const int StarCatalogFormatVersion = 11;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -91,6 +91,7 @@ QMap<int, int> StarMgr::saoStarsIndex;
 QMap<int, int> StarMgr::hdStarsIndex;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
+QHash<int, float> StarMgr::hipParallaxErrors;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -370,6 +371,14 @@ int StarMgr::getGcvsMM(int hip)
 	return -99;
 }
 
+float StarMgr::getPlxError(int hip)
+{
+	auto it = hipParallaxErrors.find(hip);
+	if (it!=hipParallaxErrors.end())
+		return it.value();
+	return 0.f;
+}
+
 void StarMgr::copyDefaultConfigFile()
 {
 	try
@@ -425,7 +434,8 @@ void StarMgr::init()
 	populateStarsDesignations();
 	populateHipparcosLists();
 
-	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -1082,6 +1092,62 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
+void StarMgr::loadPlxErr(const QString& plxErrFile)
+{
+	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
+	hipParallaxErrors.clear();
+
+	qDebug() << "Loading parallax errors data from" << QDir::toNativeSeparators(plxErrFile);
+	QFile ciFile(plxErrFile);
+	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(plxErrFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
+	ciFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	// record structure is delimited with a 'tab' character. Example record strings:
+	// "1	0.0606"
+	// "2	0.3193"
+	for (const auto& record : allRecords)
+	{
+		++lineNumber;
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+		if (fields.size()!=2)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			unsigned int hip = fields.at(0).toUInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
+					   << " - failed to convert " << fields.at(0) << "to a number";
+				continue;
+			}
+			hipParallaxErrors[hip] = fields.at(1).toFloat(&ok);
+
+			++readOk;
+		}
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
+}
+
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
@@ -1158,7 +1224,7 @@ void StarMgr::draw(StelCore* core)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
 			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
-			int x = (int)((maxMag-mag_min)/k);
+			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;
 		}
@@ -1305,14 +1371,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by HP number if it's an HP formated number
+	// Search by HP number if it's an HP formatted number
 	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
-	// Search by SAO number if it's an SAO formated number
+	// Search by SAO number if it's an SAO formatted number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
@@ -1321,7 +1387,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(sao.value());
 	}
 
-	// Search by HD number if it's an HD formated number
+	// Search by HD number if it's an HD formatted number
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
@@ -1330,7 +1396,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(hd.value());
 	}
 
-	// Search by HR number if it's an HR formated number
+	// Search by HR number if it's an HR formatted number
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
@@ -1517,7 +1583,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
-
 	}
 	else
 	{
@@ -1704,7 +1769,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(float newFontSize)
+void StarMgr::setFontSize(int newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
 }
@@ -1761,6 +1826,12 @@ void StarMgr::populateStarsDesignations()
 		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
+
+	fic = StelFileMgr::findFile("stars/default/hip_plx_err.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load parallax errors data file: stars/default/hip_plx_err.dat";
+	else
+		loadPlxErr(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const

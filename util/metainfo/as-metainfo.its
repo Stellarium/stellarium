@@ -3,6 +3,9 @@
   version="1.0">
   <its:translateRule translate="no" selector="/component"/>
   <its:translateRule translate="yes"
-    selector="/component/name | /component/summary |
-              /component/description | /component/screenshots/screenshot/caption | /component/developer_name"/>
+    selector="/component/name | 
+              /component/summary | 
+              /component/description | 
+              /component/screenshots/screenshot/caption | 
+              /component/developer_name" />
 </its:rules>

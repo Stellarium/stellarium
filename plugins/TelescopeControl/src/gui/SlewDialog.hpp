@@ -103,8 +103,8 @@ private:
 	void savePointsToFile();
 	void loadPointsFromFile();
 
-	TelescopeControl * telescopeManager =  nullptr;
-	StoredPointsDialog * storedPointsDialog = nullptr;
+	TelescopeControl * telescopeManager =  Q_NULLPTR;
+	StoredPointsDialog * storedPointsDialog = Q_NULLPTR;
 	QHash<QString, int> connectedSlotsByName;
 	QVariantMap storedPointsDescriptions;
 };

@@ -322,6 +322,24 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorSolsticePoints
 		   NOTIFY solsticePointsColorChanged)
 
+	Q_PROPERTY(bool antisolarPointDisplayed
+		   READ getFlagAntisolarPoint
+		   WRITE setFlagAntisolarPoint
+		   NOTIFY antisolarPointDisplayedChanged)
+	Q_PROPERTY(Vec3f antisolarPointColor
+		   READ getColorAntisolarPoint
+		   WRITE setColorAntisolarPoint
+		   NOTIFY antisolarPointColorChanged)
+
+	Q_PROPERTY(bool apexPointsDisplayed
+		   READ getFlagApexPoints
+		   WRITE setFlagApexPoints
+		   NOTIFY apexPointsDisplayedChanged)
+	Q_PROPERTY(Vec3f apexPointsColor
+		   READ getColorApexPoints
+		   WRITE setColorApexPoints
+		   NOTIFY apexPointsColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -357,6 +375,13 @@ public slots:
 	void setFlagGridlines(const bool displayed);
 	//! Accessor ("master switch") for displaying any grid/line.
 	bool getFlagGridlines(void) const;
+
+	//! Setter ("master switch by type") for displaying all grids.
+	void setFlagAllGrids(const bool displayed);
+	//! Setter ("master switch by type") for displaying all lines.
+	void setFlagAllLines(const bool displayed);
+	//! Setter ("master switch by type") for displaying all points.
+	void setFlagAllPoints(const bool displayed);
 
 	//! Setter for displaying Azimuthal Grid.
 	void setFlagAzimuthalGrid(const bool displayed);
@@ -570,14 +595,8 @@ public slots:
 
 	//! Setter for displaying Galactic Equator Line.
 	void setFlagGalacticEquatorLine(const bool displayed);
-	//! @deprecated Setter for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be deleted in version 0.14
-	void setFlagGalacticPlaneLine(const bool displayed) { setFlagGalacticEquatorLine(displayed); }
 	//! Accessor for displaying Galactic Equator Line.
 	bool getFlagGalacticEquatorLine(void) const;
-	//! @deprecated Accessor for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be deleted in version 0.14
-	bool getFlagGalacticPlaneLine(void) const { return getFlagGalacticEquatorLine(); }
 	//! Get the current color of the Galactic Equator Line.
 	Vec3f getColorGalacticEquatorLine(void) const;
 	//! Set the color of the Galactic Equator Line.
@@ -798,6 +817,33 @@ public slots:
 	//! @endcode
 	void setColorSolsticePoints(const Vec3f& newColor);
 
+	//! Setter for displaying antisolar point.
+	void setFlagAntisolarPoint(const bool displayed);
+	//! Accessor for displaying antisolar point.
+	bool getFlagAntisolarPoint(void) const;
+	//! Get the current color of the antisolar point.
+	Vec3f getColorAntisolarPoint(void) const;
+	//! Set the color of the antisolar point.
+	//! @param newColor The color of antisolar point
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorAntisolarPoint(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorAntisolarPoint(const Vec3f& newColor);
+
+	//! Setter for displaying the Apex and Antapex points, i.e. where the observer planet is heading to or coming from, respectively
+	void setFlagApexPoints(const bool displayed);
+	//! Accessor for displaying Apex/Antapex points.
+	bool getFlagApexPoints(void) const;
+	//! Get the current color of the Apex/Antapex points.
+	Vec3f getColorApexPoints(void) const;
+	//! Set the color of the Apex/Antapex points.
+	//! @param newColor The color of Apex/Antapex points.
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorApexPoints(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorApexPoints(const Vec3f& newColor);
 signals:
 	void gridlinesDisplayedChanged(const bool) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
@@ -862,14 +908,21 @@ signals:
 	void solsticeJ2000PointsColorChanged(const Vec3f & newColor) const;
 	void solsticePointsDisplayedChanged(const bool displayed) const;
 	void solsticePointsColorChanged(const Vec3f & newColor) const;
+	void antisolarPointDisplayedChanged(const bool displayed) const;
+	void antisolarPointColorChanged(const Vec3f & newColor) const;
+	void apexPointsDisplayedChanged(const bool displayed) const;
+	void apexPointsColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
-	//! Contains only calls to SkyLine::updateLabel().
-	void updateLineLabels();
+	//! Contains only calls to SkyLine::updateLabel() and SkyPoint::updateLabel().
+	void updateLabels();
 	//! Connect the earth shared pointer.
 	//! Must be connected to SolarSystem::solarSystemDataReloaded()
 	void connectEarthFromSolarSystem();
+
+	//! Connect from StelApp to reset all fonts of the grids, lines and points.
+	void setFontSizeFromApp(int size);
 
 private:
 	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
@@ -908,6 +961,8 @@ private:
 	SkyPoint * equinoxPoints;		// Equinox points
 	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
 	SkyPoint * solsticePoints;		// Solstice points
+	SkyPoint * antisolarPoint;		// Solstice points
+	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
 };
 
 #endif // GRIDLINESMGR_HPP

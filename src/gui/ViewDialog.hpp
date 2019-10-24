@@ -76,7 +76,7 @@ private slots:
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	void setLightPollutionSpinBoxStatus();
+	//void setLightPollutionSpinBoxStatus();
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
 
@@ -94,51 +94,7 @@ private slots:
 
 	void updateHips();
 	void hipsListItemChanged(QListWidgetItem* item);
-
-	void askEclipticJ2000GridColor();
-	void askEclipticGridColor();
-	void askEquatorJ2000GridColor();
-	void askEquatorGridColor();
-	void askGalacticGridColor();
-	void askSupergalacticGridColor();
-	void askAzimuthalGridColor();
-	void askEclipticLineJ2000Color();
-	void askEclipticLineColor();
-	void askEquatorLineJ2000Color();
-	void askEquatorLineColor();
-	void askGalacticEquatorLineColor();
-	void askSupergalacticEquatorLineColor();
-	void askLongitudeLineColor();
-	void askHorizonLineColor();
-	void askColureLinesColor();
-	void askCircumpolarCirclesColor();
-	void askPrecessionCirclesColor();
-	void askPrimeVerticalLineColor();
-	void askMeridianLineColor();
-	void askCardinalPointsColor();
-	void askCelestialJ2000PolesColor();
-	void askCelestialPolesColor();
-	void askZenithNadirColor();
-	void askEclipticJ2000PolesColor();
-	void askEclipticPolesColor();
-	void askGalacticPolesColor();
-	void askSupergalacticPolesColor();
-	void askEquinoxJ2000PointsColor();
-	void askEquinoxPointsColor();
-	void askSolsticeJ2000PointsColor();
-	void askSolsticePointsColor();
-	// constellations colors
-	void askConstellationLabelsColor();
-	void askConstellationLinesColor();
-	void askConstellationBoundariesColor();
-	// asterisms colors
-	void askAsterismLabelsColor();
-	void askAsterismLinesColor();
-	void askRayHelpersColor();
-	// nomenclature color
-	void askPlanetNomenclatureColor();	
-	void askPlanetLabelsColor();
-	void askPlanetTrailsColor();
+	void populateHipsGroups();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
@@ -146,8 +102,6 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
-
-	void colorButton(QToolButton *toolButton, QString propName);
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

@@ -36,7 +36,6 @@ Location::Location() :
     hasDuplicate(false),
     lineNum(0)
 {
-	;
 }
 
 
@@ -140,7 +139,6 @@ Location* Location::fromLine(const QString& line)
 	// Empty planet name is interpreted as Earth.
 	if (splitline.size() > 10)
 	{
-		
 		loc->planetName = splitline.at(10);
 	}
 	

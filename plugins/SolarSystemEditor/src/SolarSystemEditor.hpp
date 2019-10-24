@@ -105,19 +105,7 @@ public:
 	//! a valid line in MPC format.
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
 	SsoElements readMpcOneLineMinorPlanetElements(QString oneLineElements) const;
-/* DEAD CODE. MAYBE REACTIVATE as scripting function (public slot)?
-	//! Reads a single object's orbital elements from a string.
-	//! This function converts a line of orbital elements in XEphem format
-	//! to a hash in Stellarium's ssystem.ini format.
-	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
-	//! It recognises only the 'e', 'h' and 'p' types of orbits in XEphem's
-	//! format (comets and minor planets). It is used in handling on-line search
-	//! queries to the MPC's Minor Planet and Comet Ephemeris System, as
-	//! using the MPC format causes long object names to be truncated
-	//! due to the fixed width of the columns.
-	//! An object's type (comet or asteroid) is determined based on its name.
-	SsoElements readXEphemOneLineElements(QString oneLineElements);
-*/
+
 	//! Reads a list of comet orbital elements from a file.
 	//! This function reads a list of comet orbital elements in MPC's one-line
 	//! format from a file (one comet per line) and converts it to a list of
@@ -135,21 +123,6 @@ public:
 	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
 	//! readMpcOneLineMinorPlanetElements() is used internally to parse each line.
 	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const;
-
-	/*
-	 * GZ identified as DEAD CODE as of 0.16pre. Maybe reactivate as public slot for scripting use?
-	//! Reads a list of Solar System object orbital elements from a file.
-	//! This function reads a list of Solar System object orbital elements in
-	//! XEphem's one-line format (one object per line, comment lines starting
-	//! with # are skipped) and converts it to a list of hashes in Stellarium's
-	//! ssystem.ini format. XEphem's file format is described in its manual:
-	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
-	//! Example source file can be any of the lists of objects on the MPC site:
-	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft03Cmt.txt
-	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft03Bright.txt
-	//! readXEphemOneLineElements() is used internally to parse each line.
-	QList<SsoElements> readXEphemOneLineElementsFromFile(QString filePath);
-	*/
 
 	//! Adds a new entry at the end of the user solar system configuration file.
 	//! This function writes directly to the file. See the note on why QSettings

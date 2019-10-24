@@ -27,6 +27,11 @@ QT5_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
 
 ADD_LIBRARY(Supernovae-static STATIC ${Supernovae_SRCS} ${Supernovae_RES_CXX} ${SupernovaeDialog_UIS_H})
 TARGET_LINK_LIBRARIES(Supernovae-static Qt5::Core Qt5::Network Qt5::Widgets)
+
+IF(ENABLE_TESTING)
+    ADD_SUBDIRECTORY(test)
+ENDIF(ENABLE_TESTING)
+
 SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES OUTPUT_NAME "Supernovae")
 SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Supernovae-static)

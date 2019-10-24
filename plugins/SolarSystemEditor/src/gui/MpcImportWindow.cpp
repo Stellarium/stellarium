@@ -329,9 +329,11 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
-							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a text file"), directories[0]);
+	QString filter = q_("Plain Text File");
+	filter.append(" (*.txt);;");
+	filter.append(q_("All Files"));
+	filter.append(" (*.*)");
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file"), QDir::homePath(), filter);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -865,8 +867,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegExp cometProvisionalDesignation("[PCDX]/");
-		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QRegExp cometProvisionalDesignation("[PCDXI]/");
+		QRegExp cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
 		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)

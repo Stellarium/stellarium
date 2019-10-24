@@ -508,7 +508,6 @@ public:
   static bool validRange(const QCPRange &range);
   static const double minRange; //1e-280;
   static const double maxRange; //1e280;
-  
 };
 Q_DECLARE_TYPEINFO(QCPRange, Q_MOVABLE_TYPE);
 
@@ -1600,7 +1599,6 @@ protected:
   
 private:
   Q_DISABLE_COPY(QCPItemPosition)
-  
 };
 
 

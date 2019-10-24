@@ -148,7 +148,6 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
 	rule.format = &functionFormat;
 	highlightingRules.append(rule);
-
 }
 
 void StelScriptSyntaxHighlighter::setFormats(void)
@@ -186,7 +185,6 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 	functionFormat.setFontItalic(true);
 	col = StelUtils::strToVec3f(conf->value(section + "/script_console_function_color", defaultColor).toString());
 	functionFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
-
 }
 
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)

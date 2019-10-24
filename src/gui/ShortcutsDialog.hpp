@@ -104,7 +104,7 @@ private:
 	QStandardItem* updateGroup(const QString& group);
 
 	//! search for first appearence of item with requested data.
-	QStandardItem* findItemByData(QVariant value, int role, int column = 0);
+	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
 	//! pointer to mgr, for not getting it from stelapp every time.
 	class StelActionMgr* actionMgr;

@@ -137286,7 +137286,7 @@ void CalcVsop87Elem(const double t,double elem[8*6], void *user) {
   if (use_polynomials > 0) {
 	if (use_polynomials > 1.0) use_polynomials = 1.0;
 	for (i=0;i<8*6;i++) {
-	  int alpha;
+	  unsigned int alpha;
 	  for (alpha=5;alpha>0;alpha--) {
 		const int j = vsop87_index_translation_table[i*6+alpha];
 		if (j >= 0) {
