@@ -4,14 +4,25 @@
 \label{ch:DSO}
 
 
-Since version 0.10.0 Stellarium uses the ``json'' cataloguing system of configuring textures. At the same time the Simbad online catalogue was added to the search feature, making the catalog somewhat redundant and used now only as a first search point or if there is no internet connection.
+Since version 0.10.0 Stellarium uses the ``json'' cataloguing system
+of configuring textures. At the same time the Simbad online catalogue
+was added to the search feature, making the catalog somewhat redundant
+and used now only as a first search point or if there is no Internet
+connection.
 
-If the object has a name (not just a catalogue number), you should add one or more records to the \file{.../nebulae/default/names.dat} file (where \file{...} is either the installation directory or the user directory). See section~\ref{sec:dso:modifyingNamesDat} Modifying \file{names.dat} for details of the file format.
+If the object has a name (not just a catalogue number), you should add
+one or more records to the \file{.../nebulae/default/names.dat} file
+(where \file{...} is either the installation directory or (preferrably) the user
+directory). See section~\ref{sec:dso:modifyingNamesDat} Modifying
+\file{names.dat} for details of the file format.
 
-If you wish to associate a texture (image) with the object, you must add a record to the \file{.../nebulae/default/textures.json} file. See section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
+If you wish to associate a texture (image) with the object, you must
+add a record to the \file{.../nebulae/default/textures.json} file. See
+section~\ref{sec:dso:modifyingTexturesJson} for details.
 
-If you wish to associate an outline with the object, you must add the series of lines to the 
-\file{.../nebulae/default/outlines.dat} file. See section~\ref{sec:dso:modifyingOutlines} for details of the file format.
+If you wish to associate an outline with the object, you must add the
+series of lines to the \file{.../nebulae/default/outlines.dat}
+file. See section~\ref{sec:dso:modifyingOutlines} for details.
 
 
 \section{Stellarium DSO Catalog}
@@ -29,7 +40,7 @@ with over one million objects may be downloaded and installed manually (see sect
 \file{names.dat}   &List of proper names of the objects from file \file{catalog.dat}
 \end{tabularx}
 
-ASCII file can be converted into binary format through enabling an option in the file \file{config.ini} (See \ref{sec:ConfigurationFile}):
+An edited ASCII file can be converted into binary format through enabling an option in the file \file{config.ini} (See \ref{sec:ConfigurationFile}):
 \begin{configfile}
 [devel]
 convert_dso_catalog = true
@@ -350,8 +361,304 @@ Example for outline of M42:
 
 The format of the file \file{outlines.dat} is compatible with the similar file of the \program{SkyChart/Cartes du Ciel} planetarium.
 
-\section{Adding Extra Nebulae Images}%\label{adding-extra-nebulae-images}
+\section{Adding Extra Nebula Images}%\label{adding-extra-nebulae-images}
 \label{sec:dso:adding_images}
+\sectionauthor*{Glenn Newell}
+
+\begin{figure}[htb]
+\centering\includegraphics[width=\textwidth]{nebula-display.jpg}
+\caption{Screen shot of nebula images displayed in Stellarium}
+\label{fig:dso:adding_images}
+\end{figure}
+
+% Contributed 10/2019 for 0.19.3
+\noindent In previous versions of this guide, the technique for preparing Deep
+Space Object (DSO) images for inclusion in Stellarium involved \indexterm{plate
+solving} the image to find its center on the sky, and then calculating
+the corners of the image in the World Coordinate System (WCS\footnote{%
+\url{https://fits.gsfc.nasa.gov/fits_wcs.html}}) using the scale of the
+image, arcseconds/pixel.
+
+
+The problem with that approach is that it did not account for any
+spatial distortion in the image, due to telescope optics or sensor
+tilt, etc. This resulted in a labor intensive manual process of trial
+and error to adjust the WCS corners of the image until the stars in
+the image aligned with those displayed in Stellarium.
+
+Fortunately, this problem has been solved for us by astronomers with
+similar needs, extending \indexterm{FITS}\footnote{The \emph{Flexible Image
+    Transport System} is the dominating image format used in
+  astronomy.} file headers to include information on how
+to map every pixel in an image correctly onto WCS coordinates. This
+information can be added to your image when you plate solve it on
+\program{nova.astrometry.net}, or similar services (local copies of
+\program{astrometry.net}, such as \program{ansvr}, or in
+\program{Pixinsight}, etc.). This system of correcting for distortions
+in astronomical images was refined for the Spitzer
+Space Telescope\footnote{\url{https://www.cs.helsinki.fi/group/goa/viewing/viewtransf/viewTrans.html}}.
+
+It is now possible to utilize this pixel to WCS transformation data
+included in plate solved images to prepare images for Stellarium that
+map perfectly to the Stellarium sky without manual WCS corner
+adjustments.
+
+There are \program{Python} libraries, namely \program{astropy} and a
+related ``channel'' \program{astroquery}, that can automate some or
+all of the needed steps, and there are both manual and fully automated
+scripts for that purpose available on Stellarium's Github site. These
+scripts can be run on Windows, Mac, or Linux platforms, using the
+\program{Anaconda Python} distribution.
+
+\subsection{Image requirements for inclusion in Stellarium}
+\label{sec:dso:adding_images:image-requirements}
+
+The final image must be aligned with the equatorial (J2000.0)
+coordinate system so that north is directly up and not inverted side
+to side or up and down as can happen with photos taken with a diagonal
+mirror in the path (In the WCS system, ``Parity'' must be 1.)
+
+Next you will need to crop and/or rescale the picture, setting the
+main feature at the center and making the cropped size a power of 2,
+e.g.\ 64, 128, 256, 512, 1024 or 2048 pixels square (or elongated like
+$512\times1024$). If this requirement is not met, your textures may
+not be visible, or graphics performance may be seriously impacted on
+some systems. Textures larger than 2048 may only be supported on
+high-end hardware. Images must be in PNG format. When cropping, make
+sure you leave at least six prominent background stars for
+\indexterm{plate solving}). The next step is to process your photo to
+make the background black, really black. This will ensure that your
+background will meld with the Stellarium background and not be noticed
+as ugly gray square. Do not use ``transparent'' pixels available in
+the PNG format as they will show as white, not black, in Stellarium.
+
+Images covering more than 10 degrees of sky should be divided into
+separate images, and images with pixel scales less than 1 arcsec per
+pixel should be rescaled so as to have a pixel scale of 1 arcsec per
+pixel or larger.
+
+\subsection{Processing requirements}
+\label{sec:dso:adding_images:processing-requirements}
+
+\begin{itemize}
+\item \program{Python 3.7} (Anaconda 64~bit
+  installer\footnote{\url{https://www.anaconda.com/distribution/}}) During
+  installation, follow directions, taking defaults to install for
+  just your user (vs.\ everyone on your computer)
+\item \program{Astropy} (included in Anaconda)
+\item \program{Astroquery} (latest version) To install on Windows,
+  open an ``Anaconda Prompt''. On Mac and Linux, just open a
+  terminal. At the prompt, enter:
+  \begin{commands}
+    pip install --pre --upgrade astroquery
+  \end{commands}
+\item For the fully automated process:
+  \begin{itemize}
+  \item An API Key from your account at \url{http://nova.astrometry.net}:
+    \begin{itemize}
+    \item Create an account (or log in with google, etc.) at \url{http://nova.astrometry.net}
+    \item On the API tab, copy your API key (shown in green)
+    \item Using a text editor (e.g., \program{Notepad++} on Windows,
+      \program{Text Wrangler} on Mac OS), paste that key over the \texttt{X}'s
+      in \file{Stellarium\_Nebulae\_Images\_Prep.py}'s
+      \texttt{ast.api\_key = 'XXXXXXXXXXXXXXXX'}
+    \end{itemize}
+  \end{itemize}
+\item For the more manual process: 
+  \begin{itemize}
+  \item Images plate solved at \url{http://nova.astrometry.net} (or \program{Pixinsight} -- not yet tested) so that WCS data is created
+  \item Graphics software to flip, rotate, scale, etc. and save as \file{.png}, e.g., \program{Photoshop}, \program{GIMP}, \program{Pixinsight}, etc.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Script and Shortcut placement}
+
+Download the Python scripts from Stellarium's site at Github\footnote{\url{https://github.com/Stellarium/stellarium-data/adding-nebula-images}}:
+\begin{itemize}
+\item \file{WCS\_corners.py} script
+\item \file{Stellarium\_Nebulae\_Image\_Prep.py} script
+\end{itemize}
+\begin{description}
+\item[Windows]\mbox{}
+  \begin{itemize}
+  \item Place the two \file{.py} and \file{.bat} scripts into \file{\%USERPROFILE\%\textbackslash{}Anaconda3\textbackslash{}}
+  \item Place the two Shortcuts on your desktop or an \file{astro tools} folder (optional)
+  \item You can now drag and drop one or more images or \file{wcs.fits} files onto the shortcuts (or \file{.bat} scripts) for processing
+  \end{itemize}
+\item[Mac]\mbox{}
+  \begin{itemize}
+  \item Place the two \file{.py} script files in the \file{anaconda3} directory, which should be inside your home directory (the directory with your username).
+  \item Place the two \file{.app} files on your desktop or an \file{astro tools} folder (optional)
+  \item You can now drag and drop one or more images or \file{wcs.fits} files onto the \program{Automator} app icons for processing
+  \end{itemize}
+\item[Linux]\mbox{}
+  \begin{itemize}
+  \item Place the two \file{.py} script files in the \file{anaconda3} directory, which should be inside your home directory (the directory with your username).
+  \item Place the two \file{.desktop} files on your desktop or an \file{astro tools} folder (optional)
+  \item You can now drag and drop one or more images or \file{wcs.fits} files onto the desktop icons for processing
+  \end{itemize}
+\end{description}
+
+\subsection{Manual processing}
+\label{sec:dso:adding_images:manual}
+
+We present the more manual of the two workflows and script first,
+\program{WCS\_Corners.py}, so you understand the process, before
+introducing the completely automated image processing pipeline. It is
+also possible that if plate solving fails in the fully automated
+script, you could continue, using this  manual process:
+
+\begin{description}
+\item[Plate Solve]\mbox{}
+  \begin{itemize}
+  \item Plate solve your image @ \url{nova.astrometry.net} (Fig.~\ref{fig:dso:adding_images:manual:plate-solving})
+  \item Note \emph{pixel scale} and \emph{orientation}
+  \end{itemize}
+\item[Adjust Parity]\mbox{}
+  \begin{itemize}
+  \item Download the \file{wcs.fits} file from the ``Results'' page and run \program{WCS\_Corners.py} on it (Fig.~\ref{fig:dso:adding_images:manual:python}).
+  \item If \emph{Parity} is -1, flip your image horizontally (do this before rotate step below)
+  \end{itemize}
+\item[Rotate]
+  Rotate your image so ``up'' is exactly ``North''. i.e., if the orientation of your image was ``261 degrees East of North'' then rotate your image 261 degrees CW.
+\item[``Blacken'' Sky]
+  Fill in the blank areas of your rotated image with black pixels, and set your ``sky'' background to be black.
+\item[Crop]
+  Crop your image so that both $x$ and $y$ dimensions are powers of two pixels, e.g. $512\times512$, $1024\times1024$, $2048\times2048$, $1024\times2048$, etc.
+\item[Save PNG]\mbox{}
+  \begin{itemize}
+  \item Save your image as \file{.png} file
+  \item Place a copy into the \file{\%USERDIR\%/nebulae/default} directory
+  \end{itemize}
+\item[Plate Solve final image]\mbox{}
+  \begin{itemize}
+  \item Plate Solve your flipped, rotated, and cropped image again @ \url{nova.astrometry.net}
+  \item Download the new \file{wcs.fits} file.
+  \end{itemize}
+\item[Calculate WCS corners]\mbox{}
+  \begin{itemize}
+  \item Run \program{WCS\_Corners.py} on the final \file{wcs.fits} file
+  \item Edit Stellarium's \file{textures.json} with the image file name and the generated world coordinates
+  \end{itemize}
+\item[Finalize image]
+  Try to minimize the number of stars visible around your nebula in your image. Stellarium draws its own stars, and a rectangle of excessive stars may look bad. Just blacken them out. 
+\item[Restart Stellarium]
+  View your image in Stellarium (and adjust \texttt{maxBrightness} in \file{textures.json} if needed)
+\end{description}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.9\textwidth]{dso-add-1.jpg}
+\caption{Online plate solving}
+\label{fig:dso:adding_images:manual:plate-solving}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-2.png}
+\caption{Python processing. If you just leave a space after \texttt{python WCS\_corners.py},
+you can drag and drop your \file{wcs.fits} file into Windows' Anaconda Prompt window.}
+\label{fig:dso:adding_images:manual:python}
+\end{figure}
+
+\newpage
+Some additional information you should be aware of:
+\begin{itemize}
+\item Images in Stellarium are NOT tied to an object, just placed on the sky by \texttt{worldCoords}
+  \begin{itemize}
+  \item So multiple image can overlap. E.g., the bubble nebula has overlapping textures 
+  \item Black is rendered transparent
+  \item ``Transparent'' areas of \file{.png} show as white
+  \end{itemize}
+\item See section~\ref{sec:Directories} on Directories for where to put your own copy of the default images + yours, so yours won’t get overwritten by Stellarium Updates
+\item If plate solve fails: adjust gamma/blackpoint so ``only'' stars are showing (Fig.~\ref{fig:dso:adding_images:manual:gamma})
+\end{itemize}
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[width=0.38\textwidth]{dso-add-gamma1.png}&$\rightarrow$&
+      \includegraphics[width=0.38\textwidth]{dso-add-gamma2.png}
+    \end{tabular}
+\caption{Reduce gamma to temporarily help the plate solving algorithm finding stars.}
+\label{fig:dso:adding_images:manual:gamma}
+\end{figure}
+
+  Stellarium keyboard shortcuts you may find useful when adding images:
+  
+\begin{tabular}{cl}
+	\key{F3}&  brings up object search – Tab through search results\\
+	\key{G} & to remove ground (in case your object is currently behind the landscape)\\
+	\key{A} & to remove atmosphere  (in case it is daytime)\\
+	\key{I} & to toggle nebulae images on and off – use to test star alignment\\
+	\key{M} & to toggle Milky Way on and off\\
+	\key{/} & to zoom into selected object\\
+	\key{\textbackslash{}} & to zoom back out
+\end{tabular}
+
+
+\subsection{Automated processing}
+\label{sec:dso:adding_images:auto}
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\textwidth]{dso-add-auto-cli.png}
+\caption{Automated Python processing with \program{Stellarium\_Nebulae\_Image\_Prep.py}}
+\label{fig:dso:adding_images:auto}
+\end{figure}
+
+With the recent addition of \program{astrometry.net} queries to the
+Python \program{astroquery} library it is now possible to automate
+the entire image processing pipeline as well as automatically create
+full \file{.json} entries for each image for inclusion in the
+\file{textures.json} file. The python script for this is
+\program{Stellarium\_Nebulae\_Image\_Prep.py}. Wrapper scripts
+\program{Stellarium\_Nebulae\_Image\_Prep.bat} and
+\program{Stellarium\_Nebulae\_Image\_Prep.sh} are also included so you
+can process multiple images at once. With the desktop links you can even
+process one or more \file{.jpg} or \file{.tiff} files by drag and
+drop, on Windows, Mac, and Linux systems.
+
+Figure~\ref{fig:dso:adding_images:auto} is an example run of
+\program{Stellarium\_Nebulae\_Image\_Prep.py}.  This converts
+(rotates, scales, etc.) the JPEG image as seen in
+Fig.~\ref{fig:dso:adding_images:auto-result}, and a \file{.json} file
+for inclusion in \file{textures.json}
+(Fig.~\ref{fig:dso:adding_images:auto-json}), along with two
+``unstretched'' \file{\_stars.jpg} images used for plate solving,
+which can be deleted.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tabular}{ccc}
+    \includegraphics[height=5cm]{dso-add-auto1.jpg}&$\rightarrow$&
+    \includegraphics[height=5cm]{dso-add-auto2.png}
+  \end{tabular}
+  \caption{Automatic processing of a DSO image.}
+  \label{fig:dso:adding_images:auto-result}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-auto-json.png}
+\caption{\file{.json} result from processing with \program{Stellarium\_Nebulae\_Image\_Prep.py}}
+\label{fig:dso:adding_images:auto-json}
+\end{figure}
+
+\subsection{Troubleshooting}
+
+
+If no images show up in Stellarium, chances are you have introduced
+one or more errors in the \file{textures.json} file.  You can use
+\program{Json Lint} \footnote{An online service available at
+  \url{https://jsonlint.com/}} to check for problems.
+
+Just paste the entire contents of the file in and press ``Validate JSON''.
+
+However, the original  \file{textures.json} file as shipped in v0.19.1 also fails:
+\begin{itemize}
+\item Missing leading zeros in front of decimal points
+\item White space (a tab in this case) before \texttt{http} in \texttt{infoUrl} entries
+\end{itemize}
+These minor issues seem however not to irritate Stellarium.
+
+
+% %%%%%%%%%%%%%%%% OLD INSTRUCTIONS. Delete when the new instructions are fully integrated.
+\iffalse 
 \sectionauthor*{Barry Gerdes}
 
 \subsection{Preparing a photo for inclusion to the \texorpdfstring{\file{textures.json} file}{textures.json file}}
@@ -472,6 +779,8 @@ and make small changes to the coordinates. Restart Stellarium each time
 and check if you have moved into the right direction. Continue with each
 corner until all the stars match. With a little bit of practice this
 will be done in about 10 minutes.
+\fi
+% %%%%%%%%%%% OLD INSTRUCTIONS END
 
 
 %%% Local Variables: 
