@@ -141,7 +141,7 @@ void AstroCalcDialog::retranslate()
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
-		populateMajorPlanetList();
+		populatePlanetList();
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
 		prepareAxesAndGraph();
@@ -197,7 +197,7 @@ void AstroCalcDialog::createDialogContent()
 	populateCelestialBodyList();
 	populateCelestialCategoryList();
 	populateEphemerisTimeStepsList();
-	populateMajorPlanetList();
+	populatePlanetList();
 	populateGroupCelestialBodyList();
 	// Altitude vs. Time feature
 	prepareAxesAndGraph();
@@ -470,7 +470,7 @@ void AstroCalcDialog::updateAstroCalcData()
 {
 	drawAltVsTimeDiagram();
 	populateCelestialBodyList();
-	populateMajorPlanetList();
+	populatePlanetList();
 }
 
 void AstroCalcDialog::saveAltVsTimeSunFlag(bool state)
@@ -1814,25 +1814,41 @@ void AstroCalcDialog::populateCelestialBodyList()
 	// Restore the selection
 	indexP = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexP < 0)
+	{
 		indexP = planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexP<0)
+			indexP = 0;
+	}
 	planets->setCurrentIndex(indexP);
 	planets->model()->sort(0);
 
 	indexG = graphsp->findData(selectedGraphsPId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexG < 0)
+	{
 		indexG = graphsp->findData(conf->value("astrocalc/graphs_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexG<0)
+			indexG = 0;
+	}
 	graphsp->setCurrentIndex(indexG);
 	graphsp->model()->sort(0);
 
 	indexFCB = firstCB->findData(selectedFirstCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexFCB < 0)
+	{
 		indexFCB = firstCB->findData(conf->value("astrocalc/first_celestial_body", "Sun").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexFCB<0)
+			indexFCB = 0;
+	}
 	firstCB->setCurrentIndex(indexFCB);
 	firstCB->model()->sort(0);
 
 	indexSCB = secondCB->findData(selectedSecondCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexSCB < 0)
+	{
 		indexSCB = secondCB->findData(conf->value("astrocalc/second_celestial_body", "Earth").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexSCB<0)
+			indexSCB = 0;
+	}
 	secondCB->setCurrentIndex(indexSCB);
 	secondCB->model()->sort(0);
 
@@ -1958,38 +1974,55 @@ void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 	reGenerateEphemeris();
 }
 
-void AstroCalcDialog::populateMajorPlanetList()
+void AstroCalcDialog::populatePlanetList()
 {
 	Q_ASSERT(ui->object1ComboBox); // object 1 is always major planet
 
-	QComboBox* majorPlanet = ui->object1ComboBox;
+	QComboBox* planetList = ui->object1ComboBox;
 	QList<PlanetP> planets = solarSystem->getAllPlanets();
 	const StelTranslator& trans = localeMgr->getSkyTranslator();
+	QString cpName = core->getCurrentPlanet()->getEnglishName();
 
 	// Save the current selection to be restored later
-	majorPlanet->blockSignals(true);
-	int index = majorPlanet->currentIndex();
-	QVariant selectedPlanetId = majorPlanet->itemData(index);
-	majorPlanet->clear();
+	planetList->blockSignals(true);
+	int index = planetList->currentIndex();
+	QVariant selectedPlanetId = planetList->itemData(index);
+	planetList->clear();
 	// For each planet, display the localized name and store the original as user
 	// data. Unfortunately, there's no other way to do this than with a cycle.
 	for (const auto& planet : planets)
 	{
 		// major planets and the Sun
-		if ((planet->getPlanetType() == Planet::isPlanet || planet->getPlanetType() == Planet::isStar) && planet->getEnglishName() != core->getCurrentPlanet()->getEnglishName())
-			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+		if ((planet->getPlanetType() == Planet::isPlanet || planet->getPlanetType() == Planet::isStar) && planet->getEnglishName() != cpName)
+			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
 
 		// moons of the current planet
-		if (planet->getPlanetType() == Planet::isMoon && planet->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && planet->getParent() == core->getCurrentPlanet())
-			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+		if (planet->getPlanetType() == Planet::isMoon && planet->getEnglishName() != cpName && planet->getParent() == core->getCurrentPlanet())
+			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+	}
+	// special case: selected dwarf and minot planets
+	planets.clear();
+	planets.append(solarSystem->searchByEnglishName("Pluto"));
+	planets.append(solarSystem->searchByEnglishName("Ceres"));
+	planets.append(solarSystem->searchByEnglishName("Pallas"));
+	planets.append(solarSystem->searchByEnglishName("Juno"));
+	planets.append(solarSystem->searchByEnglishName("Vesta"));
+	for (const auto& planet : planets)
+	{
+		if (!planet.isNull() && planet->getEnglishName()!=cpName)
+			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
 	}
 	// Restore the selection
-	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
+	index = planetList->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
-		index = majorPlanet->findData(conf->value("astrocalc/phenomena_celestial_body", "Venus").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-	majorPlanet->setCurrentIndex(index);
-	majorPlanet->model()->sort(0);
-	majorPlanet->blockSignals(false);
+	{
+		index = planetList->findData(conf->value("astrocalc/phenomena_celestial_body", "Venus").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (index<0)
+			index = 0;
+	}
+	planetList->setCurrentIndex(index);
+	planetList->model()->sort(0);
+	planetList->blockSignals(false);
 }
 
 void AstroCalcDialog::savePhenomenaCelestialBody(int index)

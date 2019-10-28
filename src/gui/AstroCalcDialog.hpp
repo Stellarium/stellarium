@@ -302,8 +302,8 @@ private:
 	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
-	//! Populates the drop-down list of major planets.
-	void populateMajorPlanetList();
+	//! Populates the drop-down list of planets.
+	void populatePlanetList();
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
