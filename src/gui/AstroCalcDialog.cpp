@@ -1391,10 +1391,13 @@ void AstroCalcDialog::generateEphemeris()
 
 	initListEphemeris();
 
+	if (currentPlanet.isEmpty()) // avoid crash
+		return;
+
 	int idxRow = 0, colorIndex = 0;
 	double currentStep;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
-	const PlanetP& cplanet = core->getCurrentPlanet();	
+	const PlanetP& cplanet = core->getCurrentPlanet();		
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		if (cplanet==solarSystem->getEarth())
