@@ -4014,10 +4014,12 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	double step = (stopJD - startJD) / 8.0;
 	double limit = 24.8 * 365.25;
 
-	if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive))
+	if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive) || objects.contains("Pluto",Qt::CaseInsensitive))
 		limit = 1811.25;
 	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
 		limit = 181.125;
+	else if (objects.contains("Ceres",Qt::CaseInsensitive) || objects.contains("Juno",Qt::CaseInsensitive) || objects.contains("Pallas",Qt::CaseInsensitive) || objects.contains("Vesta",Qt::CaseInsensitive))
+		limit = 90.5625;
 	else if (objects.contains("Mars",Qt::CaseInsensitive))
 		limit = 5.;
 	else if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
