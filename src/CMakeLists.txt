@@ -740,6 +740,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testPrecession testPrecession)
     SET_TARGET_PROPERTIES(testPrecession PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testSiderealTime_SRCS
+        tests/testSiderealTime.hpp
+        tests/testSiderealTime.cpp
+    )
+    ADD_EXECUTABLE(testSiderealTime ${tests_testSiderealTime_SRCS})
+    TARGET_LINK_LIBRARIES(testSiderealTime ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testSiderealTime)
+    ADD_TEST(testSiderealTime testSiderealTime)
+    SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
+
     SET(tests_testEphemeris_SRCS
         tests/testEphemeris.hpp
         tests/testEphemeris.cpp
