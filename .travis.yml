@@ -231,7 +231,7 @@ matrix:
             - qt5-qmake
             - qtbase5-dev
             - qtbase5-dev-tools
-            - libgps-dev            
+            - libgps-dev
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
@@ -253,7 +253,7 @@ matrix:
             - qt5-qmake
             - qtbase5-dev
             - qtbase5-dev-tools
-            - libgps-dev            
+            - libgps-dev
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
@@ -275,10 +275,10 @@ matrix:
             - qt5-qmake
             - qtbase5-dev
             - qtbase5-dev-tools
-            - libgps-dev            
+            - libgps-dev
             - zlib1g-dev
             - libgl1-mesa-dev
-            - xvfb            
+            - xvfb
           update:
             - true
       env:
@@ -297,10 +297,10 @@ matrix:
             - qt5-qmake
             - qtbase5-dev
             - qtbase5-dev-tools
-            - libgps-dev            
+            - libgps-dev
             - zlib1g-dev
             - libgl1-mesa-dev
-            - xvfb            
+            - xvfb
           update:
             - true
       env:
