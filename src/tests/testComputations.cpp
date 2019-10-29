@@ -287,9 +287,9 @@ void TestComputations::testEclToEquTransformations()
 void TestComputations::testSpheToRectTransformations()
 {
 	double longitude, latitude;
-	float longitudeF, latitudeF;
+	float longitudeF1, latitudeF1, longitudeF2, latitudeF2;
 	Vec3f eVec3f, rVec3f;
-	Vec3d eVec3d, rVec3d;
+	Vec3d eVec3d, rVec3d1, rVec3d2;
 
 	QVariantList data;
 	//     Longitude          Latitude         Expected
@@ -305,13 +305,16 @@ void TestComputations::testSpheToRectTransformations()
 	{
 		longitude	= data.takeFirst().toDouble();
 		latitude	= data.takeFirst().toDouble();
-		longitudeF=float(longitude);
-		latitudeF=float(latitude);
+		longitudeF1	=float(longitude);
+		latitudeF1		=float(latitude);
+		longitudeF2	=float(longitude);
+		latitudeF2		=float(latitude);
 		eVec3f	= StelUtils::strToVec3f(data.takeFirst().toString());
 		eVec3d	= eVec3f.toVec3d();
 
-		StelUtils::spheToRect(longitudeF*M_PI_180f, latitudeF*M_PI_180f, rVec3f);
-		StelUtils::spheToRect(longitude*M_PI/180., latitude*M_PI/180., rVec3d);
+		StelUtils::spheToRect(longitudeF1*M_PI_180f, latitudeF1*M_PI_180f, rVec3f);
+		StelUtils::spheToRect(longitudeF2*M_PI_180f, latitudeF2*M_PI_180f, rVec3d2);
+		StelUtils::spheToRect(longitude*M_PI/180., latitude*M_PI/180., rVec3d1);
 
 		QVERIFY2(qAbs(rVec3f[0]-eVec3f[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[1]-eVec3f[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[2]-eVec3f[2])<=ERROR_HIGH_LIMIT,
 				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
@@ -320,11 +323,18 @@ void TestComputations::testSpheToRectTransformations()
 					   .arg(rVec3f.toString())
 					   .arg(eVec3f.toString())));
 
-		QVERIFY2(qAbs(rVec3d[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
+		QVERIFY2(qAbs(rVec3d2[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d2[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d2[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
 				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
 					   .arg(QString::number(longitude, 'f', 4))
 					   .arg(QString::number(latitude, 'f', 4))
-					   .arg(rVec3d.toString())
+					   .arg(rVec3d2.toString())
+					   .arg(eVec3d.toString())));
+
+		QVERIFY2(qAbs(rVec3d1[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d1[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d1[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
+				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
+					   .arg(QString::number(longitude, 'f', 4))
+					   .arg(QString::number(latitude, 'f', 4))
+					   .arg(rVec3d1.toString())
 					   .arg(eVec3d.toString())));
 	}
 }
