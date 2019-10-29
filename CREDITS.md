@@ -682,7 +682,7 @@
 	4.101 Images of NGC7027 from Judy Schmidt
 	      https://commons.wikimedia.org/wiki/
 	      License: public domain 
-	4.101 Images of NGC6309, NGC6891 from Fabian RRRR
+	4.102 Images of NGC6309, NGC6891 from Fabian RRRR
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 3.0 Unported
 ```
