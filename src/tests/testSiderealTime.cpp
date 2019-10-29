@@ -63,20 +63,65 @@ void TestSiderealTime::testGreenwichMeanSiderealTime()
 	data << 2449261.5 <<  0 << 38 << 56.4662;
 	data << 2449292.5 <<  2 << 41 <<  9.5825;
 	data << 2449322.5 <<  4 << 39 << 26.2436;
+	// year 2017;
+	// source: Astronomical Almanac for the Year 2017
+	data << 2457844.5 << 12 << 38 << 11.0891;
+	data << 2457874.5 << 14 << 36 << 27.7502;
+	data << 2457905.5 << 16 << 38 << 40.9666;
+	data << 2457935.5 << 18 << 36 << 57.6276;
+	data << 2457966.5 << 20 << 39 << 10.8440;
 
-	double acceptableError = 2e-4;
+	double JD, JDE, s, est, ast, actualError, acceptableError = 2e-4;
+	int h, m;
 
 	while(data.count() >= 4)
 	{
-		double JD = data.takeFirst().toDouble();
-		int h = data.takeFirst().toInt();
-		int m = data.takeFirst().toInt();
-		double s = data.takeFirst().toDouble();
-		double est = h + m/60. + s/3600.;
-		double ast = get_mean_sidereal_time(JD, JD)/15.;
+		JD = data.takeFirst().toDouble();
+		JDE = JD + StelUtils::getDeltaTByEspenakMeeus(JD)/86400.;
+		h = data.takeFirst().toInt();
+		m = data.takeFirst().toInt();
+		s = data.takeFirst().toDouble();
+		est = h + m/60. + s/3600.;
+		ast = get_mean_sidereal_time(JD, JDE)/15.;
 		ast=fmod(ast, 24.);
 		if (ast < 0.) ast+=24.;
-		double actualError = qAbs(qAbs(est) - qAbs(ast));
+		actualError = qAbs(qAbs(est) - qAbs(ast));
+		QVERIFY2(actualError <= acceptableError, QString("JD=%1 expected=%2 result=%3 error=%4")
+							.arg(QString::number(JD, 'f', 1))
+							.arg(StelUtils::hoursToHmsStr(est))
+							.arg(StelUtils::hoursToHmsStr(ast))
+							.arg(actualError)
+							.toUtf8());
+	}
+}
+
+void TestSiderealTime::testGreenwichApparentSiderealTime()
+{
+	QVariantList data;
+	// JD << h << m << s
+	// year 2017;
+	// source: Astronomical Almanac for the Year 2017
+	data << 2457844.5 << 12 << 38 << 10.5428;
+	data << 2457874.5 << 14 << 36 << 27.1459;
+	data << 2457905.5 << 16 << 38 << 40.3712;
+	data << 2457935.5 << 18 << 36 << 57.0663;
+	data << 2457966.5 << 20 << 39 << 10.2937;
+
+	double JD, JDE, s, est, ast, actualError, acceptableError = 1e-4;
+	int h, m;
+
+	while(data.count() >= 4)
+	{
+		JD = data.takeFirst().toDouble();
+		JDE = JD + StelUtils::getDeltaTByEspenakMeeus(JD)/86400.;
+		h = data.takeFirst().toInt();
+		m = data.takeFirst().toInt();
+		s = data.takeFirst().toDouble();
+		est = h + m/60. + s/3600.;
+		ast = get_apparent_sidereal_time(JD, JDE)/15.;
+		ast=fmod(ast, 24.);
+		if (ast < 0.) ast+=24.;
+		actualError = qAbs(qAbs(est) - qAbs(ast));
 		QVERIFY2(actualError <= acceptableError, QString("JD=%1 expected=%2 result=%3 error=%4")
 							.arg(QString::number(JD, 'f', 1))
 							.arg(StelUtils::hoursToHmsStr(est))

@@ -11,6 +11,7 @@ git:
 matrix:
   include:
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -36,6 +37,7 @@ matrix:
          - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -51,6 +53,7 @@ matrix:
          - TRANSLATE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -67,6 +70,7 @@ matrix:
          - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -83,6 +87,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -99,7 +104,24 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=true
 
+   - os: linux
+      arch: amd64
+      dist: bionic
+      env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+   - os: linux
+      arch: arm64
+      dist: bionic
+      env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -117,6 +139,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -134,6 +157,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -151,6 +175,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -167,6 +192,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -183,6 +209,7 @@ matrix:
         - COVERAGE=false
 
     - os: linux
+      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -221,6 +248,13 @@ matrix:
 
     - os: osx
       osx_image: xcode11.1
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    - os: osx
+      osx_image: xcode11.2
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false

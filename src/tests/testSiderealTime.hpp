@@ -31,6 +31,7 @@ class TestSiderealTime : public QObject
 private slots:
 	void initTestCase();
 	void testGreenwichMeanSiderealTime();
+	void testGreenwichApparentSiderealTime();
 };
 
 #endif // TESTSIDEREALTIME_HPP
