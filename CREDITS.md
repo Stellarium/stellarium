@@ -677,8 +677,11 @@
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
 	4.100 Images of NGC7009 from ESO/J. Walsh
-		    http://eso.org/public/
+	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International 
+	4.101 Images of NGC7027 from Judy Schmidt
+	      https://commons.wikimedia.org/wiki/
+	      License: public domain 
 ```
 
 ## Appendix
