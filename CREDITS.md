@@ -495,7 +495,7 @@
 	4.53 Images of NGC6818
 	     from Robert Rubin (NASA/ESA Ames Research Center), Reginald Dufour and Matt Browning (Rice University), Patrick Harrington (University of Maryland), and NASA/ESA
 	     https://www.spacetelescope.org/
-	     License: public domain
+	     License: Creative Commons Attribution 4.0 International
 	4.54 Images of NGC6188
 	     from Ivan Bok
 	     https://commons.wikimedia.org/wiki/
@@ -671,6 +671,11 @@
 	     from Astrowicht
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.99 Images of IC418, IC4593
+	     from NASA/ESA and The Hubble Heritage Team (STScI/AURA)
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
+	     
 ```
 
 ## Appendix
