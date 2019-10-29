@@ -104,21 +104,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=true
 
-   - os: linux
-      arch: amd64
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
-   - os: linux
-      arch: arm64
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
+     - os: linux
       arch: amd64
       dist: trusty
       sudo: required
