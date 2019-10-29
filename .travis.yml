@@ -281,11 +281,11 @@ matrix:
             - xvfb            
           update:
             - true
-        env:
-            - MATRIX_EVAL="CC=clang && CXX=clang++"
-            - TRANSLATE=false
-            - COVERAGE=false
-            - REPQT=true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+        - REPQT=true
 
     - os: linux
       arch: arm64
@@ -303,11 +303,11 @@ matrix:
             - xvfb            
           update:
             - true
-        env:
-            - MATRIX_EVAL="CC=clang && CXX=clang++"
-            - TRANSLATE=false
-            - COVERAGE=false
-            - REPQT=true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+        - REPQT=true
 
     - os: osx
       osx_image: xcode10.1
