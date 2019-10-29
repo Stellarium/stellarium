@@ -480,7 +480,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
+	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M102, M107
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -492,10 +492,10 @@
 	     from Clh288
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic
-	4.53 Images of M102
-	     from David Chifiriuc
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.53 Images of NGC6818
+	     from Robert Rubin (NASA/ESA Ames Research Center), Reginald Dufour and Matt Browning (Rice University), Patrick Harrington (University of Maryland), and NASA/ESA
+	     https://www.spacetelescope.org/
+	     License: public domain
 	4.54 Images of NGC6188
 	     from Ivan Bok
 	     https://commons.wikimedia.org/wiki/
