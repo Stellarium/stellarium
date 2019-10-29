@@ -53,6 +53,7 @@ private slots:
 	void testVec3fToStr();
 	void testStrToVec4d();
 	void testVec4dToStr();
+	void testQDateTimeToJD();
 };
 
 #endif // _TESTCONVERSIONS_HPP
