@@ -546,7 +546,7 @@
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.67 Images of NGC2867
+	4.67 Images of NGC2867, NGC6884
 	     from Howard Bond (ST ScI) and NASA/ESA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International 
