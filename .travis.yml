@@ -106,7 +106,6 @@ matrix:
 
    - os: linux
       arch: amd64
-      dist: bionic
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
@@ -114,7 +113,6 @@ matrix:
 
    - os: linux
       arch: arm64
-      dist: bionic
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
