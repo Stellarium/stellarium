@@ -11,7 +11,6 @@ git:
 matrix:
   include:
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -37,7 +36,6 @@ matrix:
          - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -53,7 +51,6 @@ matrix:
          - TRANSLATE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -70,7 +67,6 @@ matrix:
          - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -87,7 +83,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -105,7 +100,6 @@ matrix:
         - COVERAGE=true
 
      - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -123,7 +117,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -141,7 +134,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -159,7 +151,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -176,7 +167,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -193,7 +183,6 @@ matrix:
         - COVERAGE=false
 
     - os: linux
-      arch: amd64
       dist: trusty
       sudo: required
       addons:
@@ -206,6 +195,12 @@ matrix:
             - true
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    - os: linux
+      env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
