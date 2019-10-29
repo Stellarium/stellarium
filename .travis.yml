@@ -198,12 +198,6 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    - os: linux
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
     - os: osx
       osx_image: xcode10.1
       env:
