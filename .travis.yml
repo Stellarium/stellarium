@@ -99,7 +99,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=true
 
-     - os: linux
+    - os: linux
       dist: trusty
       sudo: required
       addons:
