@@ -672,7 +672,7 @@
 	     from Astrowicht
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.99 Images of IC418, IC4593
+	4.99 Images of NGC5315, IC418, IC4593
 	     from NASA/ESA and The Hubble Heritage Team (STScI/AURA)
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
