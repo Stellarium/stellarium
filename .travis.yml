@@ -279,6 +279,7 @@ matrix:
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
+            - clang
           update:
             - true
         env:
@@ -301,6 +302,7 @@ matrix:
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
+            - clang
           update:
             - true
         env:
