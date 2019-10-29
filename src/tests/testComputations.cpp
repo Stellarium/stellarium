@@ -116,6 +116,41 @@ void TestComputations::testIsPowerOfTwo()
 	}
 }
 
+void TestComputations::testGetBiggerPowerOfTwo()
+{
+	int n, e, r;
+	QVariantList data;
+	data	<< 0	<< 1;
+	data	<< 1	<< 1;
+	data	<< 2	<< 2;
+	data	<< 3	<< 4;
+	data	<< 4	<< 4;
+	data	<< 5	<< 8;
+	data	<< 6	<< 8;
+	data	<< 7	<< 8;
+	data	<< 8	<< 8;
+	data	<< 9	<< 16;
+	data	<< 10	<< 16;
+	data	<< 11	<< 16;
+	data	<< 12	<< 16;
+	data	<< 13	<< 16;
+	data	<< 14	<< 16;
+	data	<< 15	<< 16;
+	data	<< 16	<< 16;
+
+	while (data.count() >= 2)
+	{
+		n	= data.takeFirst().toInt();
+		e	= data.takeFirst().toInt();
+		r	= StelUtils::getBiggerPowerOfTwo(n);
+
+		QVERIFY2(r==e, qPrintable(QString("Number: %1 getBiggerPowerOfTwo(): %2 (expected: %3)")
+					   .arg(n)
+					   .arg(r)
+					   .arg(e)));
+	}
+}
+
 void TestComputations::testDayInYear()
 {
 	int year, month, day, en, n;

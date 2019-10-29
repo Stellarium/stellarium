@@ -31,6 +31,7 @@ private slots:
 	void testSiderealPeriodComputations();
 	void testJDFromBesselianEpoch();
 	void testIsPowerOfTwo();
+	void testGetBiggerPowerOfTwo();
 	void testDayInYear();
 	void testYearFraction();
 	void testEquToEqlTransformations();

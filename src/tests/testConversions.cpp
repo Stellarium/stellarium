@@ -604,10 +604,13 @@ void TestConversions::testStringCoordinateToRad()
 	data << "123.567 S"	<< -2.1567;
 	data << "123.567 W"	<< -2.1567;
 	data << "+46d6'31\""	<< 0.8047;
-	data << "12h0m0s"	<< M_PI;
-	data << "6h0m0s"	<< M_PI/2.;
+	data << "12h0m0s"	        << M_PI;
+	data << "6h0m0s"	        << M_PI/2.;
 	data << "10h30m0s"	<< 2.749;
 	data << "+80°25'10\""	<< 1.404;
+	data << "-45d0m0s"	<< -M_PI/4.;
+	data << "-80°25'10\""	<< -1.404;
+	data << "-80r25m10s"	<< -0.0;
 
 	while (data.count()>=2)
 	{
@@ -844,6 +847,7 @@ void TestConversions::testStrToVec2f()
 	data << "1,0" << 1.f << 0.f;
 	data << "0,1" << 0.f << 1.f;
 	data << "0,0" << 0.f << 0.f;
+	data << "0"    << 0.f << 0.f;
 
 	while (data.count()>=3)
 	{
@@ -892,6 +896,8 @@ void TestConversions::testStrToVec3f()
 	data << "1,0,1" << 1.f << 0.f << 1.f;
 	data << "0,1,0" << 0.f << 1.f << 0.f;
 	data << "0,0,0" << 0.f << 0.f << 0.f;
+	data << "0,0"    << 0.f << 0.f << 0.f;
+	data << "0"       << 0.f << 0.f << 0.f;
 
 	while (data.count()>=4)
 	{
@@ -942,6 +948,9 @@ void TestConversions::testStrToVec4d()
 	data << "1,0,1,0" << 1. << 0. << 1. << 0.;
 	data << "0,1,0,1" << 0. << 1. << 0. << 1.;
 	data << "0,0,0,0" << 0. << 0. << 0. << 0.;
+	data << "0,0,0"    << 0. << 0. << 0. << 0.;
+	data << "0,0"       << 0. << 0. << 0. << 0.;
+	data << "0"          << 0. << 0. << 0. << 0.;
 
 	while (data.count()>=5)
 	{
