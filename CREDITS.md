@@ -589,7 +589,7 @@
 	     from NASA, ESA and A. Evans (Stony Brook University, New York, University of Virginia & National Radio Astronomy Observatory, Charlottesville, USA)
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
-	4.78 Images of NGC3808
+	4.78 Images of NGC3808, NGC5882, NGC6210, NGC6572, NGC6741
 	     from ESA/Hubble & NASA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
