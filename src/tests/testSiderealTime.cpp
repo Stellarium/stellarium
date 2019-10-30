@@ -130,3 +130,25 @@ void TestSiderealTime::testGreenwichApparentSiderealTime()
 							.toUtf8());
 	}
 }
+
+void TestSiderealTime::testSiderealPeriodComputations()
+{
+	QVariantList data;
+	// According to WolframAlpha
+	data << 1.00000011	<< 365.25636;	// Earth
+	data << 0.38709893	<< 87.96926;	// Mercury
+	data << 0.72333199	<< 224.7008;	// Venus
+
+	double acceptableError = 1e-3;
+	while (data.count() >= 2)
+	{
+		double distance = data.takeFirst().toDouble();
+		double exPeriod = data.takeFirst().toDouble();
+		double period = StelUtils::calculateSiderealPeriod(distance);
+
+		QVERIFY2(qAbs(period-exPeriod)<=acceptableError, qPrintable(QString("Sidereal period is %1 days for %2 AU (expected %3 days)")
+									.arg(QString::number(period, 'f', 6))
+									.arg(QString::number(distance, 'f', 5))
+									.arg(QString::number(exPeriod, 'f', 6))));
+	}
+}

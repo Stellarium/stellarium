@@ -34,29 +34,6 @@
 
 QTEST_GUILESS_MAIN(TestComputations)
 
-void TestComputations::testSiderealPeriodComputations()
-{
-	QVariantList data;
-
-	// According to WolframAlpha
-	data << 1.00000011	<< 365.25636;	// Earth
-	data << 0.38709893	<< 87.96926;	// Mercury
-	data << 0.72333199	<< 224.7008;	// Venus
-
-	while (data.count() >= 2)
-	{
-		double distance = data.takeFirst().toDouble();
-		double exPeriod = data.takeFirst().toDouble();
-		double period = StelUtils::calculateSiderealPeriod(distance);
-
-		QVERIFY2(qAbs(period-exPeriod)<=ERROR_LOW_LIMIT, qPrintable(QString("Sidereal period is %1 days for %2 AU (expected %3 days)")
-									.arg(QString::number(period, 'f', 6))
-									.arg(QString::number(distance, 'f', 5))
-									.arg(QString::number(exPeriod, 'f', 6))));
-	}
-}
-
-
 void TestComputations::testJDFromBesselianEpoch()
 {
 	QVariantList data;
@@ -64,11 +41,8 @@ void TestComputations::testJDFromBesselianEpoch()
 	// According to Observational Astrophysics by Pierre Lena, Francois Lebrun, Francois Mignard (ISBN 3662036851, 9783662036853)
 	data << 1900.0		<< 2415020.3135;
 	data << 1950.0		<< 2433282.4235;
-	//data << 1995.00048	<< 2449718.5; // GZ: Where did you get this "expected" result?
-	// FIXME: WTF??? --- GZ: Can you please write the problem (what was your expectation and why) and not just WTF?
-	data << 1995.0004862412	<< 2449718.5; // GZ: These 2 tuples are from manual calculation with our formulae.
+	data << 1995.0004862412	<< 2449718.5;
 	data << 1995.0		<< 2449718.3224;
-	// The next 3 were reactivated after converting the argument to double. B2000 had a typo.
 	data << 2000.0		<< 2451544.5334;
 	data << 1950.000210	<< 2433282.5;
 	data << 2000.001278	<< 2451545.0;

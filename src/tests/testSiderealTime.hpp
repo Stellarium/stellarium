@@ -32,6 +32,7 @@ private slots:
 	void initTestCase();
 	void testGreenwichMeanSiderealTime();
 	void testGreenwichApparentSiderealTime();
+	void testSiderealPeriodComputations();
 };
 
 #endif // TESTSIDEREALTIME_HPP

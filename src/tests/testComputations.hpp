@@ -28,7 +28,6 @@ class TestComputations : public QObject
 	Q_OBJECT
 
 private slots:
-	void testSiderealPeriodComputations();
 	void testJDFromBesselianEpoch();
 	void testIsPowerOfTwo();
 	void testGetBiggerPowerOfTwo();
