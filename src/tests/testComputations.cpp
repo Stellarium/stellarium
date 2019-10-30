@@ -759,21 +759,37 @@ void TestComputations::testDoubleMod()
 void TestComputations::testExp()
 {
 	QList<float> data;
-	data << 0.f << 1.f << 2.f << 2.7f << 3.f << -1.f;
+	data << -1.f << -0.75f << -0.5f << -0.25f << 0.f << 0.25f << 0.5f << 0.75f << 1.f;
+	float v, e, r, err;
 	for (int i = 0; i < data.size(); ++i)
 	{
-		float v = data.at(i);
-		qFuzzyCompare(exp(v),StelUtils::fastExp(v));
+		v = data.at(i);
+		e = exp(v);
+		r = StelUtils::fastExp(v);
+		err = qAbs(e-r);
+		QVERIFY2(err<=1e-2, qPrintable(QString("value: %1 std. exp: %2 fast exp: %3 (error: %4)")
+					   .arg(QString::number(v, 'f', 5))
+					   .arg(QString::number(e, 'f', 5))
+					   .arg(QString::number(r, 'f', 5))
+					   .arg(QString::number(err, 'f', 5))));
 	}
 }
 
 void TestComputations::testACos()
 {
 	QList<float> data;
-	data << 0.f << 0.25f << 0.75f << 1.f << -0.75f << -0.25f << -1.f;
+	data << 0.f << 0.25f << 0.75f << -0.75f << -0.25f << 0.5f << -0.5f;
+	float v, e, r, err;
 	for (int i = 0; i < data.size(); ++i)
 	{
-		float v = data.at(i);
-		qFuzzyCompare(acos(v),StelUtils::fastAcos(v));
+		v = data.at(i);
+		e = acos(v);
+		r = StelUtils::fastAcos(v);
+		err = qAbs(e-r);
+		QVERIFY2(err<=2e-2, qPrintable(QString("value: %1 std. acos: %2 fast acos: %3 (error: %4)")
+					   .arg(QString::number(v, 'f', 5))
+					   .arg(QString::number(e, 'f', 5))
+					   .arg(QString::number(r, 'f', 5))
+					   .arg(QString::number(err, 'f', 5))));
 	}
 }
