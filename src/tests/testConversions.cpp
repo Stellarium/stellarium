@@ -1043,3 +1043,32 @@ void TestConversions::testQDateTimeToJD()
 		 qFuzzyCompare(i.key(), StelUtils::qDateTimeToJd(QDateTime::fromString(i.value(), Qt::ISODate)));
 	 }
 }
+
+void TestConversions::testTrunc()
+{
+	QMap<double, double> mapd;
+	mapd[0.0] = 0.0;
+	mapd[-1.0] = -1.0;
+	mapd[2454466.0] = 2454466.0;
+	mapd[24.4] = 24.0;
+	mapd[34.5] = 34.0;
+	mapd[-4.9] = -4.0;
+
+	QMap<float, float> mapf;
+	mapd[0.f] = 0.f;
+	mapd[-1.f] = -1.f;
+	mapd[2454466.f] = 2454466.f;
+	mapd[24.4f] = 24.f;
+	mapd[34.5f] = 34.f;
+	mapd[-4.9f] = -4.f;
+
+	for (QMap<double, double>::ConstIterator i=mapd.constBegin();i!=mapd.constEnd();++i)
+	{
+		qFuzzyCompare(i.key(), StelUtils::trunc(i.value()));
+	}
+
+	for (QMap<float, float>::ConstIterator i=mapf.constBegin();i!=mapf.constEnd();++i)
+	{
+		qFuzzyCompare(i.key(), StelUtils::trunc(i.value()));
+	}
+}

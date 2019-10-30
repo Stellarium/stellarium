@@ -54,6 +54,7 @@ private slots:
 	void testStrToVec4d();
 	void testVec4dToStr();
 	void testQDateTimeToJD();
+	void testTrunc();
 };
 
 #endif // _TESTCONVERSIONS_HPP
