@@ -43,6 +43,8 @@ private slots:
 	void testIntMod();
 	void testFloatMod();
 	void testDoubleMod();
+	void testExp();
+	void testACos();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

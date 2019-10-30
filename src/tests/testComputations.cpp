@@ -738,6 +738,7 @@ void TestComputations::testFloatMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -763,6 +764,7 @@ void TestComputations::testDoubleMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -776,5 +778,29 @@ void TestComputations::testDoubleMod()
 					   .arg(QString::number(b, 'f', 2))
 					   .arg(QString::number(r, 'f', 2))
 					   .arg(QString::number(eR, 'f', 2))));
+	}
+}
+
+void TestComputations::testExp()
+{
+	QList<float> data;
+
+	data << 0.f << 1.f << 2.f << 2.7f << 3.f << -1.f;
+
+	for (auto& item: data)
+	{
+		qFuzzyCompare(exp(item),StelUtils::fastExp(item));
+	}
+}
+
+void TestComputations::testACos()
+{
+	QList<float> data;
+
+	data << 0.f << 0.25f << 0.75f << 1.f << -0.75f << -0.25f << -1.f;
+
+	for (auto& item: data)
+	{
+		qFuzzyCompare(acos(item),StelUtils::fastAcos(item));
 	}
 }
