@@ -687,6 +687,7 @@ void TestComputations::testIntMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -758,23 +759,21 @@ void TestComputations::testDoubleMod()
 void TestComputations::testExp()
 {
 	QList<float> data;
-
 	data << 0.f << 1.f << 2.f << 2.7f << 3.f << -1.f;
-
-	for (auto& item: data)
+	for (int i = 0; i < data.size(); ++i)
 	{
-		qFuzzyCompare(exp(item),StelUtils::fastExp(item));
+		float v = data.at(i);
+		qFuzzyCompare(exp(v),StelUtils::fastExp(v));
 	}
 }
 
 void TestComputations::testACos()
 {
 	QList<float> data;
-
 	data << 0.f << 0.25f << 0.75f << 1.f << -0.75f << -0.25f << -1.f;
-
-	for (auto& item: data)
+	for (int i = 0; i < data.size(); ++i)
 	{
-		qFuzzyCompare(acos(item),StelUtils::fastAcos(item));
+		float v = data.at(i);
+		qFuzzyCompare(acos(v),StelUtils::fastAcos(v));
 	}
 }
