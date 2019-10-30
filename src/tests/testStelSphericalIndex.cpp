@@ -84,6 +84,14 @@ void TestStelSphericalIndex::testBase()
 	StelUtils::spheToRect(-0.5, 0.5, c1[0]);
 	SphericalConvexPolygon bigSquareConvex;
 	bigSquareConvex.setContour(c1);
+
+	QVector<Vec3d> c2(4);
+	StelUtils::spheToRect(-0.5, -0.5, c2[3]);
+	StelUtils::spheToRect(0.5, -0.5, c2[2]);
+	StelUtils::spheToRect(0.5, 0.5, c2[1]);
+	StelUtils::spheToRect(-0.5, 0.5, c2[0]);
+	SphericalPolygon bigConvex;
+	bigConvex.setContour(c2);
 	
 	// try with many elements
 	for (int i=0;i<10000;++i)
@@ -91,13 +99,18 @@ void TestStelSphericalIndex::testBase()
 		grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.99)))));
 		grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalPoint(Vec3d(1,0,0))))));
 		grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalConvexPolygon(c1)))));
+		grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalPolygon(c2)))));
 	}
 	countFunc.count=0;
 	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5))), countFunc);
-	QVERIFY(countFunc.count==30000);
+	QVERIFY(countFunc.count==40000);
 	countFunc.count=0;
 	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalConvexPolygon(c1))), countFunc);
 	qDebug() << countFunc.count;
-	QVERIFY(countFunc.count==30000);
+	QVERIFY(countFunc.count==40000);
+	countFunc.count=0;
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalPolygon(c2))), countFunc);
+	qDebug() << countFunc.count;
+	QVERIFY(countFunc.count==40000);
 }
 
