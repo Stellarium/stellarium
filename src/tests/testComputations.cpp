@@ -793,3 +793,63 @@ void TestComputations::testACos()
 					   .arg(QString::number(err, 'f', 5))));
 	}
 }
+
+void TestComputations::testSign()
+{
+	QVariantList data;
+	data << 1 << 1;
+	data << -1 << -1;
+	data << 10 << 1;
+	data << -22 << -1;
+	data << 15 << 1;
+	data << 0 << 0;
+	while (data.count() >= 2)
+	{
+		int a = data.takeFirst().toInt();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(a)
+					   .arg(r)
+					   .arg(e)));
+	}
+
+	data.clear();
+	data << 1.0 << 1;
+	data << -1.0 << -1;
+	data << 10.5 << 1;
+	data << -22.1 << -1;
+	data << 15.8 << 1;
+	data << 0.0 << 0;
+	while (data.count() >= 2)
+	{
+		double a = data.takeFirst().toDouble();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(QString::number(a, 'f', 1))
+					   .arg(r)
+					   .arg(e)));
+	}
+
+	data.clear();
+	data << 1.f << 1;
+	data << -1.f << -1;
+	data << 10.5f << 1;
+	data << -22.1f << -1;
+	data << 15.8f << 1;
+	data << 0.f << 0;
+	while (data.count() >= 2)
+	{
+		float a = data.takeFirst().toFloat();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(QString::number(a, 'f', 1))
+					   .arg(r)
+					   .arg(e)));
+	}
+}

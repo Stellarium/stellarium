@@ -44,6 +44,7 @@ private slots:
 	void testDoubleMod();
 	void testExp();
 	void testACos();
+	void testSign();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP
