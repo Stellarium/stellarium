@@ -1054,21 +1054,9 @@ void TestConversions::testTrunc()
 	mapd[34.5] = 34.0;
 	mapd[-4.9] = -4.0;
 
-	QMap<float, float> mapf;
-	mapd[0.f] = 0.f;
-	mapd[-1.f] = -1.f;
-	mapd[2454466.f] = 2454466.f;
-	mapd[24.4f] = 24.f;
-	mapd[34.5f] = 34.f;
-	mapd[-4.9f] = -4.f;
-
 	for (QMap<double, double>::ConstIterator i=mapd.constBegin();i!=mapd.constEnd();++i)
 	{
 		qFuzzyCompare(i.key(), StelUtils::trunc(i.value()));
-	}
-
-	for (QMap<float, float>::ConstIterator i=mapf.constBegin();i!=mapf.constEnd();++i)
-	{
-		qFuzzyCompare(i.key(), StelUtils::trunc(i.value()));
+		qFuzzyCompare(static_cast<float>(i.key()), StelUtils::trunc(static_cast<float>(i.value())));
 	}
 }
