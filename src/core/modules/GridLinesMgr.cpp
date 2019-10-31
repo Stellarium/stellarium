@@ -993,6 +993,22 @@ void SkyPoint::updateLabel()
 			northernLabel = q_("Apex");
 			// TRANSLATORS: Antapex Point, where the observer planet is receding from
 			southernLabel = q_("Antapex");
+			// add heliocentric speed
+			StelCore *core=StelApp::getInstance().getCore();
+			QSharedPointer<Planet> planet=core->getCurrentObserver()->getHomePlanet();
+			Q_ASSERT(planet);
+			const Vec3d dir=planet->getHeliocentricEclipticVelocity();
+			const double speed=dir.length()*(AU/86400.0);
+			// In some cases we don't have a valid speed vector
+			if (speed>0.)
+			{
+				const QString kms = qc_("km/s", "speed");
+				QString speedStr = QString(" (%1%2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				northernLabel += speedStr;
+				speedStr = QString(" (-%1%2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				southernLabel += speedStr;
+			}
+
 			break;
 		}
 		default:
@@ -1370,6 +1386,7 @@ void GridLinesMgr::update(double deltaTime)
 	solsticePoints->update(deltaTime);
 	antisolarPoint->update(deltaTime);
 	apexPoints->update(deltaTime);
+	apexPoints->updateLabel();
 }
 
 void GridLinesMgr::draw(StelCore* core)
