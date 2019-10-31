@@ -407,7 +407,7 @@
 	4.30 Image of NGC40 from Steven Bellavia
 	4.31 Images of NGC1579, NGC2467, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC5474, NGC6397, NGC7009, Sh2-264, Sh2-308, LDN1622
+	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC5474, NGC6397, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
 	     License: public domain
 	4.33 Images of IC10, PGC143, PGC6830, PGC29653, UGC5373, UGC12613 from Lowell Observatory
@@ -447,8 +447,9 @@
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316, NGC1978, 
-	     NGC2207, NGC2736, NGC3532, NGC4945, NGC5128, NGC5189, NGC6362, NGC6752, NGC6769, NGC6822, NGC7793
+	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316,
+	     NGC1978, NGC2207, NGC2736, NGC3532, NGC4945, NGC5128, NGC5189, NGC6362, NGC6537,
+	     NGC6752, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -480,7 +481,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
+	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M102, M107
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -492,10 +493,10 @@
 	     from Clh288
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic
-	4.53 Images of M102
-	     from David Chifiriuc
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.53 Images of NGC6818
+	     from Robert Rubin (NASA/ESA Ames Research Center), Reginald Dufour and Matt Browning (Rice University), Patrick Harrington (University of Maryland), and NASA/ESA
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
 	4.54 Images of NGC6188
 	     from Ivan Bok
 	     https://commons.wikimedia.org/wiki/
@@ -545,7 +546,7 @@
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.67 Images of NGC2867
+	4.67 Images of NGC2867, NGC6884
 	     from Howard Bond (ST ScI) and NASA/ESA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International 
@@ -588,7 +589,7 @@
 	     from NASA, ESA and A. Evans (Stony Brook University, New York, University of Virginia & National Radio Astronomy Observatory, Charlottesville, USA)
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
-	4.78 Images of NGC3808
+	4.78 Images of NGC3808, NGC5882, NGC6210, NGC6572, NGC6741
 	     from ESA/Hubble & NASA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
@@ -671,6 +672,22 @@
 	     from Astrowicht
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.99 Images of NGC5315, IC418, IC4593
+	     from NASA/ESA and The Hubble Heritage Team (STScI/AURA)
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
+	4.100 Images of NGC7009 from ESO/J. Walsh
+	      http://eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.101 Images of NGC7027 from Judy Schmidt
+	      https://commons.wikimedia.org/wiki/
+	      License: public domain 
+	4.102 Images of NGC6309, NGC6891 from Fabian RRRR
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.103 Images of NGC2022 from ESA/Hubble & NASA, R. Wade
+	      https://www.spacetelescope.org/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
