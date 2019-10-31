@@ -93,7 +93,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
@@ -222,7 +222,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			float minimumM1 = minVMag;
 			float minimumM2 = min2VMag;
-			if (magFlag==1) // Amplitude
+			if (magFlag==1.f) // Amplitude
 			{
 				minimumM1 += maxVMag;
 				minimumM2 += maxVMag;
@@ -241,11 +241,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
-	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if ((flags&Distance) && s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
 		QString ly = qc_("ly", "distance");
-		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
+		if (plxErr==0.f || (plxErr>0.f && (0.01*s->getPlx())>plxErr)) // No distance when error of parallax is bigger than parallax!
+			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)
