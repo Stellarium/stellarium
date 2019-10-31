@@ -357,7 +357,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			float distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
-				distanceErr = 3.162e-5f/(qAbs(parallaxErr)*4.848e-9f);
+				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
 
 			if (distanceErr>0.f)
 				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
