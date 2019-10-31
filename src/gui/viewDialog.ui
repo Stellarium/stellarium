@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>809</width>
-    <height>591</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="font">
@@ -704,40 +704,17 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="adaptationCheckbox">
-               <property name="toolTip">
-                <string>Dim faint stars when a very bright object is visible</string>
-               </property>
-               <property name="text">
-                <string>Dynamic eye adaptation</string>
-               </property>
-               <property name="checked">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="useLightPollutionFromLocationDataCheckBox">
-               <property name="toolTip">
-                <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
-               </property>
-               <property name="text">
-                <string>Light pollution data from locations database</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <layout class="QHBoxLayout" name="_2">
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_milkyWay">
                <item>
-                <widget class="QLabel" name="label_4">
+                <widget class="QCheckBox" name="milkyWayCheckBox">
                  <property name="text">
-                  <string>Light pollution:</string>
+                  <string>Milky Way brightness/saturation:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="lightPollutionSpinBox">
+                <widget class="QDoubleSpinBox" name="milkyWayBrightnessDoubleSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>75</width>
@@ -747,20 +724,121 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <property name="minimum">
-                  <number>1</number>
+                 <property name="decimals">
+                  <number>2</number>
                  </property>
                  <property name="maximum">
-                  <number>9</number>
+                  <double>10.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
                  </property>
                  <property name="value">
-                  <number>1</number>
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="milkyWaySaturationDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Changing saturation from totally unsaturated (0.00) to default (1.00) value.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="7" column="0">
+             <item row="3" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_21">
+               <item>
+                <widget class="QCheckBox" name="atmosphereCheckBox">
+                 <property name="text">
+                  <string>Atmosphere visualization</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="toolTip">
+                  <string>pressure, temperature, extinction coefficient</string>
+                 </property>
+                 <property name="text">
+                  <string>Refraction/Extinction settings...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_zodiacalLight">
+               <item>
+                <widget class="QCheckBox" name="zodiacalLightCheckBox">
+                 <property name="text">
+                  <string>Zodiacal Light brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="maximum">
+                  <double>10.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="9" column="0">
               <layout class="QGridLayout" name="gridLayout_6">
                <item row="0" column="0">
                 <widget class="QLabel" name="label_14">
@@ -855,120 +933,79 @@
                </item>
               </layout>
              </item>
-             <item row="6" column="0">
-              <widget class="QPushButton" name="pushButtonAtmosphereDetails">
-               <property name="focusPolicy">
-                <enum>Qt::NoFocus</enum>
-               </property>
-               <property name="toolTip">
-                <string>pressure, temperature, extinction coefficient</string>
-               </property>
-               <property name="text">
-                <string>Refraction/Extinction settings...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_zodiacalLight">
+             <item row="7" column="0">
+              <layout class="QHBoxLayout" name="_2">
                <item>
-                <widget class="QCheckBox" name="zodiacalLightCheckBox">
+                <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>Zodiacal Light brightness:</string>
+                  <string>Light pollution:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
+                <widget class="QSpinBox" name="lightPollutionSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>75</width>
                    <height>16777215</height>
                   </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_milkyWay">
-               <item>
-                <widget class="QCheckBox" name="milkyWayCheckBox">
-                 <property name="text">
-                  <string>Milky Way brightness/saturation:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="milkyWayBrightnessDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="milkyWaySaturationDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Changing saturation from totally unsaturated (0.00) to default (1.00) value.</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
-                  <double>0.000000000000000</double>
+                  <number>1</number>
                  </property>
                  <property name="maximum">
-                  <double>1.000000000000000</double>
+                  <number>9</number>
                  </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
+                 <property name="value">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>or</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="useLightPollutionFromLocationDataCheckBox">
+                 <property name="toolTip">
+                  <string>Use light pollution data from locations database and ignore settings for light pollution in left box</string>
+                 </property>
+                 <property name="text">
+                  <string>take from locations database</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="atmosphereCheckBox">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="adaptationCheckbox">
+               <property name="toolTip">
+                <string>Dim faint stars when a very bright object is visible</string>
+               </property>
                <property name="text">
-                <string>Atmosphere visualization</string>
+                <string>Dynamic eye adaptation</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -1082,7 +1119,7 @@
                   <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
                  </property>
                  <property name="text">
-                  <string>Show trails only for N latest selected objects:</string>
+                  <string>Only for N latest selected objects:</string>
                  </property>
                 </widget>
                </item>
@@ -2258,6 +2295,9 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_14">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitSizeCheckBox">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
                    <property name="text">
                     <string>Limit angular size (arcmin):</string>
                    </property>
@@ -3934,10 +3974,7 @@
   <tabstop>zodiacalLightCheckBox</tabstop>
   <tabstop>zodiacalLightBrightnessDoubleSpinBox</tabstop>
   <tabstop>adaptationCheckbox</tabstop>
-  <tabstop>atmosphereCheckBox</tabstop>
-  <tabstop>useLightPollutionFromLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
-  <tabstop>pushButtonAtmosphereDetails</tabstop>
   <tabstop>zhrSlider</tabstop>
   <tabstop>zhrSpinBox</tabstop>
   <tabstop>page_DSO</tabstop>
@@ -4033,12 +4070,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
