@@ -155,6 +155,12 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
+	// Support high DPI pixmaps and fonts
+	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 6, 0))
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+	#endif
+
 	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
@@ -337,15 +343,8 @@ int main(int argc, char **argv)
 	StelScriptOutput::init(outputFile);
 	#endif
 
-
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
-
-	// Support high DPI pixmaps and fonts
-	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 6, 0))
-	app.setAttribute(Qt::AA_EnableHighDpiScaling, true);
-	#endif
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
