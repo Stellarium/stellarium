@@ -36,8 +36,11 @@ static QPixmap makePixmap()
 
 void SplashScreen::present()
 {
+	QFont splashFont;
+	splashFont.setPixelSize(11);
 	Q_ASSERT(!instance);
 	instance=new SplashScreenWidget(makePixmap());
+	instance->setFont(splashFont);
 	instance->show();
 	instance->ensureFirstPaint();
 }

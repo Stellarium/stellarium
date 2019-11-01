@@ -228,7 +228,7 @@ protected:
 		int mainFBO;
 		gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
 
-		int pixelRatio = paintDevice->devicePixelRatio();
+		double pixelRatio = paintDevice->devicePixelRatioF();
 		QSize size(paintDevice->width() * pixelRatio, paintDevice->height() * pixelRatio);
 		if (fbo && fbo->size() != size)
 		{
