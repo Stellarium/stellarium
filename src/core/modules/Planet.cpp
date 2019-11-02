@@ -2471,14 +2471,13 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
-		//calculate and set oren-nayar parameters
-		float roughnessSq = roughness * roughness;
-		QVector3D vec(
-					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.57f), //x = A
+		//calculate and set oren-nayar parameters. The 75 in the scaling computation is arbitrary, to make the terminator visible.
+		const float roughnessSq = roughness * roughness;
+		QVector4D vec(
+					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.33f), // 0.57f), //x = A. If interreflection term is removed from shader, use 0.57 instead of 0.33.
 					0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
-					1.85f	//z = scale factor
-					);
-
+					75.0f * albedo/M_PIf, // was: 1.85f, but unclear why. //z = scale factor=rho/pi*Eo. rho=albedo=0.12, Eo~50? Higher Eo looks better!
+					roughnessSq);
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 
