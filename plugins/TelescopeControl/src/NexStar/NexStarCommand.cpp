@@ -115,6 +115,84 @@ void NexStarCommandGotoPosition::print(QTextStream &o) const
 	  << ra << "," << dec <<')';
 }
 
+NexStarCommandSync::NexStarCommandSync(Server &server, unsigned int ra_int, int dec_int) : NexStarCommand(server)
+{
+	dec = dec_int;
+	ra = static_cast<int>(ra_int);
+}
+
+bool NexStarCommandSync::writeCommandToBuffer(char *&p,char *end)
+{
+	#ifdef DEBUG5
+	char *b = p;
+	#endif
+
+	if (end-p < 18)
+		return false;
+	// high-precision aiming:
+	*p++ = 's';
+
+	// set the RA
+	int x = ra;
+	*p++ = NIBTOASCII ((x>>28) & 0x0f);
+	*p++ = NIBTOASCII ((x>>24) & 0x0f);
+	*p++ = NIBTOASCII ((x>>20) & 0x0f);
+	*p++ = NIBTOASCII ((x>>16) & 0x0f);
+	*p++ = NIBTOASCII ((x>>12) & 0x0f);
+	*p++ = NIBTOASCII ((x>>8) & 0x0f);
+	*p++ = NIBTOASCII ((x>>4) & 0x0f);
+	*p++ = NIBTOASCII (x & 0x0f);
+	*p++ = ',';
+
+	// set dec:
+	x = dec;
+	*p++ = NIBTOASCII ((x>>28) & 0x0f);
+	*p++ = NIBTOASCII ((x>>24) & 0x0f);
+	*p++ = NIBTOASCII ((x>>20) & 0x0f);
+	*p++ = NIBTOASCII ((x>>16) & 0x0f);
+	*p++ = NIBTOASCII ((x>>12) & 0x0f);
+	*p++ = NIBTOASCII ((x>>8) & 0x0f);
+	*p++ = NIBTOASCII ((x>>4) & 0x0f);
+	*p++ = NIBTOASCII (x & 0x0f);
+	*p = 0;
+
+	has_been_written_to_buffer = true;
+	#ifdef DEBUG5
+	*log_file << Now() << "NexStarCommandSync::writeCommandToBuffer:"
+		  << b << endl;
+	#endif
+
+	return true;
+}
+
+int NexStarCommandSync::readAnswerFromBuffer(const char *&buff, const char *end) const
+{
+	if (buff >= end)
+		return 0;
+
+	if (*buff=='#')
+	{
+		#ifdef DEBUG4
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync ok"
+			  << endl;
+		#endif
+	}
+	else
+	{
+		#ifdef DEBUG4
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync failed." << endl;
+		#endif
+	}
+	buff++;
+	return 1;
+}
+
+void NexStarCommandSync::print(QTextStream &o) const
+{
+	o << "NexStarCommandSync("
+	  << ra << "," << dec <<')';
+}
+
 bool NexStarCommandGetRaDec::writeCommandToBuffer(char *&p, char *end)
 {
 	if (end-p < 1)

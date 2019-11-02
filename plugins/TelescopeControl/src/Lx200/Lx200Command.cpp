@@ -337,7 +337,107 @@ void Lx200CommandGotoSelected::print(QTextStream &o) const
 	o << "Lx200CommandGotoSelected";
 }
 
+bool Lx200CommandSyncSelected::writeCommandToBuffer(char *&p, char *end)
+{
+	if (end-p < 4)
+		return false;
 
+	  // slew to current object coordinates
+	*p++ = ':';
+	*p++ = 'C';
+	*p++ = 'M';
+	*p++ = '#';
+	has_been_written_to_buffer = true;
+	return true;
+}
+
+int Lx200CommandSyncSelected::readAnswerFromBuffer(const char *&buff,
+						   const char *end)
+{
+	if (buff < end && *buff=='#')
+		buff++; // ignore silly byte
+
+	if (buff >= end)
+		return 0;
+
+	const char *p = buff;
+	if (first_byte == 256)
+	{
+		first_byte = buff[0];
+		p++;
+	}
+
+	switch (first_byte)
+	{
+		case '0':
+			#ifdef DEBUG4
+			*log_file << Now()
+				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+				     "sync ok"
+				  << endl;
+			#endif
+			buff++;
+			return 1;
+
+		case '1':
+		case '2':
+		{
+			if (p == end)
+			{
+				// the AutoStar 494 returns just '1', nothing else
+				#ifdef DEBUG4
+				*log_file << Now()
+					  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+					     "sync failed ("
+					  << (static_cast<char>(first_byte))
+					  << "), "
+					     "but no complete answer yet"
+					  << endl;
+				#endif
+				buff++;
+				return 0;
+			}
+
+			for (;;p++)
+			{
+				if (p >= end)
+				{
+					return 0;
+				}
+				if (*p == '#')
+					break;
+			}
+			#ifdef DEBUG4
+			*log_file << Now()
+			<< "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+			   "sync failed ("
+			<< (static_cast<char>(first_byte))
+			<< "): '"
+			<< QByteArray(buff + 1, static_cast<int>(p - buff - 1))
+			<< '\''
+			<< endl;
+			#endif
+			buff = p+1;
+			return 1;
+		}
+
+		default:
+			#ifdef DEBUG4
+			*log_file << Now()
+				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+				     "sync returns something weird"
+				  << endl;
+			#endif
+			break;
+	}
+
+	return -1;
+}
+
+void Lx200CommandSyncSelected::print(QTextStream &o) const
+{
+	o << "Lx200CommandSyncSelected";
+}
 
 
 bool Lx200CommandGetRa::writeCommandToBuffer(char *&p, char *end)

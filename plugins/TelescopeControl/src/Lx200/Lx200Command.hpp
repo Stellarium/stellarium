@@ -130,6 +130,21 @@ private:
 	int first_byte;
 };
 
+class Lx200CommandSyncSelected : public Lx200Command
+{
+public:
+	Lx200CommandSyncSelected(Server &server)
+				: Lx200Command(server), first_byte(256) {}
+	bool writeCommandToBuffer(char *&buff, char *end);
+	int readAnswerFromBuffer(const char *&buff, const char *end);
+	void print(QTextStream &o) const;
+	bool isCommandGotoSelected(void) const {return true;}
+	bool shortAnswerReceived(void) const {return (first_byte != 256);}
+
+private:
+	int first_byte;
+};
+
 //! Meade LX200 command: Get the current right ascension.
 class Lx200CommandGetRa : public Lx200Command
 {

@@ -51,7 +51,12 @@ void NexStarConnection::resetCommunication(void)
 
 void NexStarConnection::sendGoto(unsigned int ra_int, int dec_int)
 {
-  sendCommand(new NexStarCommandGotoPosition(server, ra_int, dec_int));
+	sendCommand(new NexStarCommandGotoPosition(server, ra_int, dec_int));
+}
+
+void NexStarConnection::sendSync(unsigned int ra_int, int dec_int)
+{
+	sendCommand(new NexStarCommandSync(server, ra_int, dec_int));
 }
 
 void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
@@ -112,12 +117,10 @@ void NexStarConnection::sendCommand(NexStarCommand *command)
 		*log_file << Now() << "NexStarConnection::sendCommand(" << *command
 			  << ")" << endl;
 		#endif
-			command_list.push_back(command);
+		command_list.push_back(command);
 		while (!command_list.front()->hasBeenWrittenToBuffer())
 		{
-			if (command_list.front()->writeCommandToBuffer(
-				                          write_buff_end,
-				                          write_buff+sizeof(write_buff)))
+			if (command_list.front()->writeCommandToBuffer(write_buff_end, write_buff+sizeof(write_buff)))
 			{
 				//*log_file << Now() << "NexStarConnection::sendCommand: "
 				//                   << (*command_list.front())

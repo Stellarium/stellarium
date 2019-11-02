@@ -250,6 +250,16 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 	networkManager.get(setR);
 }
 
+void TelescopeClientJsonRts2::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	Q_UNUSED(j2000Pos)
+	Q_UNUSED(selectObject)
+	if (!isConnected())
+		return;
+
+	return;
+}
+
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 {
 	return interpolatedPosition.isKnown();

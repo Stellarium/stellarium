@@ -71,6 +71,7 @@ void SlewDialog::createDialogContent()
 	connect(ui->radioButtonDecimal, SIGNAL(toggled(bool)), this, SLOT(setFormatDecimal(bool)));
 
 	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
+	connect(ui->pushButtonSync, SIGNAL(clicked()), this, SLOT(sync()));
 	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
@@ -221,6 +222,22 @@ void SlewDialog::slew()
 
 	StelObjectP selectObject = Q_NULLPTR;
 	telescope->telescopeGoto(targetPosition, selectObject);
+}
+
+void SlewDialog::sync()
+{
+	double radiansRA  = ui->spinBoxRA->valueRadians();
+	double radiansDec = ui->spinBoxDec->valueRadians();
+
+	Vec3d targetPosition;
+	StelUtils::spheToRect(radiansRA, radiansDec, targetPosition);
+
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
+
+	StelObjectP selectObject = Q_NULLPTR;
+	telescope->telescopeSync(targetPosition, selectObject);
 }
 
 void SlewDialog::getCurrentObjectInfo()

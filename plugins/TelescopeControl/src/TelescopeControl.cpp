@@ -409,6 +409,30 @@ void TelescopeControl::slewTelescopeToViewDirection(const int idx)
 	telescopeGoto(idx, centerPosition);
 }
 
+void TelescopeControl::syncTelescopeWithSelectedObject(const int idx)
+{
+	// Find out the coordinates of the target
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
+		return;
+
+	StelObjectP selectObject = omgr->getSelectedObject().at(0);
+	if (!selectObject)  // should never happen
+		return;
+
+	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+
+	telescopeSync(idx, objectPosition, selectObject);
+}
+
+void TelescopeControl::syncTelescopeWithViewDirection(const int idx)
+{
+	// Find out the coordinates of the target
+	Vec3d centerPosition = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+
+	telescopeSync(idx, centerPosition);
+}
+
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
 {
 #ifndef COMPATIBILITY_001002
@@ -441,6 +465,13 @@ void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos, Stel
 	//TODO: See the original code. I think that something is wrong here...
 	if(telescopeClients.contains(slotNumber))
 		telescopeClients.value(slotNumber)->telescopeGoto(j2000Pos, selectObject);
+}
+
+void TelescopeControl::telescopeSync(int slotNumber, const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	//TODO: See the original code. I think that something is wrong here...
+	if(telescopeClients.contains(slotNumber))
+		telescopeClients.value(slotNumber)->telescopeSync(j2000Pos, selectObject);
 }
 
 QSharedPointer<TelescopeClient> TelescopeControl::telescopeClient(int index) const

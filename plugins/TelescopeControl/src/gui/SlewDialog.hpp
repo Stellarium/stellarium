@@ -59,6 +59,8 @@ private slots:
 
 	//! reads the fields and slews a telescope
 	void slew();
+	//! reads the fields and sync a telescope
+	void sync();
 
 	void addTelescope(int slot, QString name);
 	void removeTelescope(int slot);

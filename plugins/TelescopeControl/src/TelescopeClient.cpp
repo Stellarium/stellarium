@@ -276,7 +276,7 @@ void TelescopeTCP::hangup(void)
 //! "Stellarium telescope control protocol" text file
 void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
-	Q_UNUSED(selectObject);
+	Q_UNUSED(selectObject)
 
 	if (!isConnected())
 		return;
@@ -340,6 +340,13 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 	{
 		qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
 	}
+}
+
+void TelescopeTCP::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	Q_UNUSED(j2000Pos)
+	Q_UNUSED(selectObject)
+	return;
 }
 
 void TelescopeTCP::performWriting(void)
