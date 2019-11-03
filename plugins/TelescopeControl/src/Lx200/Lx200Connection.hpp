@@ -38,6 +38,7 @@ class Lx200Connection : public SerialPort
 public:
 	Lx200Connection(Server &server, const char *serial_device);
 	void sendGoto(unsigned int ra_int, int dec_int);
+	void sendSync(unsigned int ra_int, int dec_int);
 	void sendCommand(Lx200Command * command);
 	void setTimeBetweenCommands(long long int micro_seconds)
 	{

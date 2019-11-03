@@ -93,7 +93,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
@@ -107,6 +107,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
+	const float plxErr = StarMgr::getPlxError(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -221,7 +222,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			float minimumM1 = minVMag;
 			float minimumM2 = min2VMag;
-			if (magFlag==1) // Amplitude
+			if (magFlag==1.f) // Amplitude
 			{
 				minimumM1 += maxVMag;
 				minimumM2 += maxVMag;
@@ -240,11 +241,17 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
-	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if ((flags&Distance) && s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
 		QString ly = qc_("ly", "distance");
-		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
+		double k = AU/(SPEED_OF_LIGHT*86400*365.25);
+		double d = ((0.00001/3600.)*(M_PI/180));
+		double distance = k/(s->getPlx()*d);
+		if (plxErr>0.f && (0.01*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
+			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
+		else
+			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)
@@ -253,7 +260,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
 
 		if (s->getPlx())
-			oss << QString("%1: %2\"").arg(q_("Parallax"), QString::number(0.00001*s->getPlx(), 'f', 5)) << "<br />";
+		{
+			QString plx = q_("Parallax");
+			if (plxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(plxErr, 'f', 3));
+			else
+				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
+		}
 
 		if (vPeriod>0)
 			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";

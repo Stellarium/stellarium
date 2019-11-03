@@ -630,7 +630,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedOcularIndex = qMin(settings->value("ocular_index", 0).toInt(), actualOcularCount-1);
+			selectedOcularIndex = settings->value("ocular_index", 0).toInt();
 		}
 
 		int ccdCount = settings->value("ccd_count", 0).toInt();
@@ -652,7 +652,7 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 			ready = false;
 		}
-		selectedCCDIndex = qMin(settings->value("ccd_index", 0).toInt(), actualCcdCount-1);
+		selectedCCDIndex = settings->value("ccd_index", 0).toInt();
 
 		int telescopeCount = settings->value("telescope_count", 0).toInt();
 		int actualTelescopeCount = telescopeCount;
@@ -682,7 +682,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);
+			selectedTelescopeIndex = settings->value("telescope_index", 0).toInt();
 		}
 
 		int lensCount = settings->value("lens_count", 0).toInt();
@@ -703,7 +703,7 @@ void Oculars::init()
 		{
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
-		selectedLensIndex=qMin(settings->value("lens_index", -1).toInt(), actualLensCount-1); // Lens is not selected by default!
+		selectedLensIndex=settings->value("lens_index", -1).toInt(); // Lens is not selected by default!
 
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");

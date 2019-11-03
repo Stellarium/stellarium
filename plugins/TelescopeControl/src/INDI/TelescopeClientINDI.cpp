@@ -88,6 +88,13 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 	mConnection.setPosition(positionJNow);
 }
 
+void TelescopeClientINDI::telescopeSync(const Vec3d &positionJ2000, StelObjectP selectObject)
+{
+	Q_UNUSED(selectObject)
+	Q_UNUSED(positionJ2000)
+	return;
+}
+
 bool TelescopeClientINDI::isConnected() const
 {
 	return mConnection.isDeviceConnected();

@@ -81,7 +81,7 @@ bool Lx200CommandSetSelectedRa::writeCommandToBuffer(char *&p, char *end)
 	*p++ = ':';
 	*p++ = 'S';
 	*p++ = 'r';
-	*p++ = ' ';
+//	*p++ = ' ';  // GZ seems this space is wrong?
 	int x = ra;
 	p += 8;
 	p[-1] = '0' + (x % 10); x /= 10;
@@ -157,7 +157,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	*p++ = ':';
 	*p++ = 'S';
 	*p++ = 'd';
-	*p++ = ' ';
+//	*p++ = ' ';  // GZ seems this space is wrong?
 	int x = dec;
 	if (x < 0)
 	{
@@ -174,7 +174,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	p[-3] = ':';
 	p[-4] = '0' + (x % 10); x /= 10;
 	p[-5] = '0' + (x %  6); x /=  6;	
-	p[-6] = '\xDF'; // = 223, degree symbol
+	p[-6] = '*'; // '\xDF'; // = 223, degree symbol. GZ: Should be asterisk, according to specs.
 	p[-7] = '0' + (x % 10); x /= 10;
 	p[-8] = '0' + static_cast<char>(x);
 	*p++ = '#';
@@ -337,7 +337,107 @@ void Lx200CommandGotoSelected::print(QTextStream &o) const
 	o << "Lx200CommandGotoSelected";
 }
 
+bool Lx200CommandSyncSelected::writeCommandToBuffer(char *&p, char *end)
+{
+	if (end-p < 4)
+		return false;
 
+	  // slew to current object coordinates
+	*p++ = ':';
+	*p++ = 'C';
+	*p++ = 'M';
+	*p++ = '#';
+	has_been_written_to_buffer = true;
+	return true;
+}
+
+int Lx200CommandSyncSelected::readAnswerFromBuffer(const char *&buff,
+						   const char *end)
+{
+	if (buff < end && *buff=='#')
+		buff++; // ignore silly byte
+
+	if (buff >= end)
+		return 0;
+
+	const char *p = buff;
+	if (first_byte == 256)
+	{
+		first_byte = buff[0];
+		p++;
+	}
+
+	switch (first_byte)
+	{
+		case '0':
+			#ifdef DEBUG4
+			*log_file << Now()
+				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+				     "sync ok"
+				  << endl;
+			#endif
+			buff++;
+			return 1;
+
+		case '1':
+		case '2':
+		{
+			if (p == end)
+			{
+				// the AutoStar 494 returns just '1', nothing else
+				#ifdef DEBUG4
+				*log_file << Now()
+					  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+					     "sync failed ("
+					  << (static_cast<char>(first_byte))
+					  << "), "
+					     "but no complete answer yet"
+					  << endl;
+				#endif
+				buff++;
+				return 0;
+			}
+
+			for (;;p++)
+			{
+				if (p >= end)
+				{
+					return 0;
+				}
+				if (*p == '#')
+					break;
+			}
+			#ifdef DEBUG4
+			*log_file << Now()
+			<< "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+			   "sync failed ("
+			<< (static_cast<char>(first_byte))
+			<< "): '"
+			<< QByteArray(buff + 1, static_cast<int>(p - buff - 1))
+			<< '\''
+			<< endl;
+			#endif
+			buff = p+1;
+			return 1;
+		}
+
+		default:
+			#ifdef DEBUG4
+			*log_file << Now()
+				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
+				     "sync returns something weird"
+				  << endl;
+			#endif
+			break;
+	}
+
+	return -1;
+}
+
+void Lx200CommandSyncSelected::print(QTextStream &o) const
+{
+	o << "Lx200CommandSyncSelected";
+}
 
 
 bool Lx200CommandGetRa::writeCommandToBuffer(char *&p, char *end)
@@ -492,11 +592,11 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	
 	dec = ((*p++) - '0');
 	dec *= 10; dec += ((*p++) - '0');
-	if (*p++ != (static_cast<char>(223)))
+	if (*p++ != ('*'))
 	{
 		*log_file << Now()
 		          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-		             "error: degree sign expected"
+			     "error: degree sign (*) expected"
 		          << endl;
 	}
 	

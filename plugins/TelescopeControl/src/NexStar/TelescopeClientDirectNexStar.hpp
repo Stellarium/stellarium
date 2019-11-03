@@ -69,6 +69,7 @@ private:
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject);
 	bool isInitialized(void) const;
 	
 	//======================================================================
@@ -76,6 +77,7 @@ private:
 	void sendPosition(unsigned int ra_int, int dec_int, int status);
 	//TODO: Find out if this method is needed. It's called by Connection.
 	void gotoReceived(unsigned int ra_int, int dec_int);
+	void syncReceived(unsigned int ra_int, int dec_int);
 	
 private:
 	void hangup(void);

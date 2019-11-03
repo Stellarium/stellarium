@@ -21,7 +21,6 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QTest>
 #include <QBuffer>
 #include <stdexcept>
 

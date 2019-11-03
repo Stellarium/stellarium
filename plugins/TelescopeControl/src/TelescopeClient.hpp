@@ -79,8 +79,8 @@ public:
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
-	virtual void telescopeGoto(const Vec3d& j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) {};
+	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
 	virtual void telescopeAbortSlew() {};
 
 	//!
@@ -106,8 +106,8 @@ protected:
 
 	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
-		Q_UNUSED(core);
-		Q_UNUSED(flags);
+		Q_UNUSED(core)
+		Q_UNUSED(flags)
 		return QString();
 	}
 private:
@@ -153,6 +153,11 @@ public:
 		desired_pos = j2000Pos;
 		desired_pos.normalize();
 	}
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+	{
+		Q_UNUSED(selectObject)
+		Q_UNUSED(j2000Pos)
+	}
 	bool hasKnownPosition(void) const
 	{
 		return true;
@@ -192,6 +197,7 @@ private:
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject);
 	bool isInitialized(void) const
 	{
 		return (!address.isNull());

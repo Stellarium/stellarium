@@ -28,7 +28,7 @@ void TestStelVertexArray::initTestCase()
 	QVector<Vec3d> vertices;
 	QVector<Vec2f> textureCoords;
 
-	for (int i = 0; i < 1000; ++i)
+	for (int i = 0; i < 3000; ++i) // Use i%3 for enable testing all types of triangles
 	{
 		Vec3d v(i+1, i+1, i+1);
 		v.normalize();
@@ -40,6 +40,7 @@ void TestStelVertexArray::initTestCase()
 
 	arrayTriangleStrip = StelVertexArray(vertices, StelVertexArray::TriangleStrip, textureCoords);
 	arrayTriangleFan = StelVertexArray(vertices, StelVertexArray::TriangleFan, textureCoords);
+	arrayTriangles = StelVertexArray(vertices, StelVertexArray::Triangles, textureCoords);
 }
 
 struct EmptyVisitor
@@ -59,6 +60,9 @@ void TestStelVertexArray::benchmarkForeachTriangleNoOp()
 	}
 	QBENCHMARK {
 		arrayTriangleFan.foreachTriangle(EmptyVisitor());
+	}
+	QBENCHMARK {
+		arrayTriangles.foreachTriangle(EmptyVisitor());
 	}
 }
 
@@ -90,6 +94,13 @@ void TestStelVertexArray::benchmarkForeachTriangle()
 	sum.set(0, 0, 0);
 	QBENCHMARK {
 		VerticesVisitor result = arrayTriangleFan.foreachTriangle(VerticesVisitor());
+		sum = result.sum;
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		VerticesVisitor result = arrayTriangles.foreachTriangle(VerticesVisitor());
 		sum = result.sum;
 	}
 	qDebug() << sum.toString();
@@ -127,6 +138,19 @@ void TestStelVertexArray::benchmarkForeachTriangleDirect()
 			else
 			{
 				sum += arrayTriangleFan.vertex.at(i-2) + arrayTriangleFan.vertex.at(i);
+			}
+		}
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		sum = Vec3d(0, 0, 0);
+		for (int i = 3; i < arrayTriangles.vertex.size(); ++i)
+		{
+			if ((i % 3) == 0)
+			{
+				sum += arrayTriangles.vertex.at(i-2) + arrayTriangles.vertex.at(i-1) + arrayTriangles.vertex.at(i);
 			}
 		}
 	}

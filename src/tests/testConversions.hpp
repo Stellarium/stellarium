@@ -21,7 +21,7 @@
 #define TESTCONVERSIONS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestConversions : public QObject
 {
@@ -53,6 +53,8 @@ private slots:
 	void testVec3fToStr();
 	void testStrToVec4d();
 	void testVec4dToStr();
+	void testQDateTimeToJD();
+	void testTrunc();
 };
 
 #endif // _TESTCONVERSIONS_HPP

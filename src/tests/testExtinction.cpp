@@ -19,7 +19,6 @@
 
 #include <QObject>
 #include <QtDebug>
-#include <QtTest>
 
 #include "tests/testExtinction.hpp"
 

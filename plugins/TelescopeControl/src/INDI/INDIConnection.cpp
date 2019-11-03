@@ -57,7 +57,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
 	{
-		qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
+		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
 		return;
 	}
 

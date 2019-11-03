@@ -604,10 +604,13 @@ void TestConversions::testStringCoordinateToRad()
 	data << "123.567 S"	<< -2.1567;
 	data << "123.567 W"	<< -2.1567;
 	data << "+46d6'31\""	<< 0.8047;
-	data << "12h0m0s"	<< M_PI;
-	data << "6h0m0s"	<< M_PI/2.;
+	data << "12h0m0s"	        << M_PI;
+	data << "6h0m0s"	        << M_PI/2.;
 	data << "10h30m0s"	<< 2.749;
 	data << "+80°25'10\""	<< 1.404;
+	data << "-45d0m0s"	<< -M_PI/4.;
+	data << "-80°25'10\""	<< -1.404;
+	data << "-80r25m10s"	<< -0.0;
 
 	while (data.count()>=2)
 	{
@@ -844,6 +847,7 @@ void TestConversions::testStrToVec2f()
 	data << "1,0" << 1.f << 0.f;
 	data << "0,1" << 0.f << 1.f;
 	data << "0,0" << 0.f << 0.f;
+	data << "0"    << 0.f << 0.f;
 
 	while (data.count()>=3)
 	{
@@ -892,6 +896,8 @@ void TestConversions::testStrToVec3f()
 	data << "1,0,1" << 1.f << 0.f << 1.f;
 	data << "0,1,0" << 0.f << 1.f << 0.f;
 	data << "0,0,0" << 0.f << 0.f << 0.f;
+	data << "0,0"    << 0.f << 0.f << 0.f;
+	data << "0"       << 0.f << 0.f << 0.f;
 
 	while (data.count()>=4)
 	{
@@ -942,6 +948,9 @@ void TestConversions::testStrToVec4d()
 	data << "1,0,1,0" << 1. << 0. << 1. << 0.;
 	data << "0,1,0,1" << 0. << 1. << 0. << 1.;
 	data << "0,0,0,0" << 0. << 0. << 0. << 0.;
+	data << "0,0,0"    << 0. << 0. << 0. << 0.;
+	data << "0,0"       << 0. << 0. << 0. << 0.;
+	data << "0"          << 0. << 0. << 0. << 0.;
 
 	while (data.count()>=5)
 	{
@@ -983,5 +992,71 @@ void TestConversions::testVec4dToStr()
 							   .arg(srcVec.toString())
 							   .arg(dstVec)
 							   .arg(vec)));
+	}
+}
+
+void TestConversions::testQDateTimeToJD()
+{
+	 QMap<double, QString> map;
+	 map[0.0] = "-4712-01-01T12:00:00";
+	 map[-1.0] = "-4713-12-31T12:00:00";
+	 map[2454466.0] = "2007-12-31T12:00:00";
+	 map[1721058.0] = "0000-01-01T12:00:00";
+	 map[2500000.0] = "2132-08-31T12:00:00";
+	 map[366.0] = "-4711-01-01T12:00:00";
+	 map[2454534] = "2008-03-08T12:00:00";
+	 map[2299161.0] = "1582-10-15T12:00:00";
+	 map[2454466.5] = "2008-01-01T00:00:00";
+	 map[1720692.0] = "-0002-12-31T12:00:00";
+	 map[1720693.0] = "-0001-01-01T12:00:00";
+	 map[2400000.0] = "1858-11-16T12:00:00";
+	 map[2110516.00000] = "1066-04-12T12:00:00";
+	 map[1918395.00000] = "0540-04-12T12:00:00";
+	 map[1794575.00000] = "0201-04-12T12:00:00";
+	 map[1757319.00000] = "0099-04-12T12:00:00";
+	 map[1721424.0] = "0001-01-01T12:00:00";
+	 map[1721789.0] = "0002-01-01T12:00:00";
+	 map[1721423.0] = "0000-12-31T12:00:00";
+	 map[1000000.0] = "-1975-11-07T12:00:00";
+	 map[-31.0] = "-4713-12-01T12:00:00";
+	 map[-61.0] = "-4713-11-01T12:00:00";
+	 map[-92.0] = "-4713-10-01T12:00:00";
+	 map[-122.0] = "-4713-09-01T12:00:00";
+	 map[-153.0] = "-4713-08-01T12:00:00";
+	 map[-184.0] = "-4713-07-01T12:00:00";
+	 map[-214.0] = "-4713-06-01T12:00:00";
+	 map[-245.0] = "-4713-05-01T12:00:00";
+	 map[-275.0] = "-4713-04-01T12:00:00";
+	 map[-306.0] = "-4713-03-01T12:00:00";
+	 map[-334.0] = "-4713-02-01T12:00:00"; // 28 days
+	 map[-365.0] = "-4713-01-01T12:00:00";
+	 map[-699.0] = "-4714-02-01T12:00:00"; // 28 days
+	 map[-1064.0] = "-4715-02-01T12:00:00"; // 28 days
+	 map[-1430.0] = "-4716-02-01T12:00:00"; // 29 days
+	 map[-1795.0] = "-4717-02-01T12:00:00"; // 28 days
+	 map[-39388.5] = "-4820-02-29T00:00:00"; // 29 days
+	 map[-1930711.0] ="-9998-01-01T12:00:00";
+	 map[-1930712.0] ="-9999-12-31T12:00:00";
+
+	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
+	 {
+		 qFuzzyCompare(i.key(), StelUtils::qDateTimeToJd(QDateTime::fromString(i.value(), Qt::ISODate)));
+	 }
+}
+
+void TestConversions::testTrunc()
+{
+	QMap<double, double> mapd;
+	mapd[0.0] = 0.0;
+	mapd[-1.0] = -1.0;
+	mapd[2454466.0] = 2454466.0;
+	mapd[24.4] = 24.0;
+	mapd[34.5] = 34.0;
+	mapd[-4.9] = -4.0;
+
+	for (QMap<double, double>::ConstIterator i=mapd.constBegin();i!=mapd.constEnd();++i)
+	{
+		qFuzzyCompare(i.key(), StelUtils::trunc(i.value()));
+		qFuzzyCompare(static_cast<float>(i.key()), StelUtils::trunc(static_cast<float>(i.value())));
 	}
 }

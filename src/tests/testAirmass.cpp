@@ -20,7 +20,6 @@
 #include <QObject>
 #include <QtDebug>
 #include <QVariantList>
-#include <QtTest>
 
 #include "tests/testAirmass.hpp"
 #include "StelUtils.hpp"

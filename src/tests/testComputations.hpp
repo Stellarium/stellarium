@@ -21,16 +21,16 @@
 #define TESTCOMPUTATIONS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestComputations : public QObject
 {
 	Q_OBJECT
 
 private slots:
-	void testSiderealPeriodComputations();
 	void testJDFromBesselianEpoch();
 	void testIsPowerOfTwo();
+	void testGetBiggerPowerOfTwo();
 	void testDayInYear();
 	void testYearFraction();
 	void testEquToEqlTransformations();
@@ -42,6 +42,9 @@ private slots:
 	void testIntMod();
 	void testFloatMod();
 	void testDoubleMod();
+	void testExp();
+	void testACos();
+	void testSign();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

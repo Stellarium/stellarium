@@ -96,7 +96,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 //! queues a GOTO command
 void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
-	Q_UNUSED(selectObject);
+	Q_UNUSED(selectObject)
 
 	if (!isConnected())
 		return;
@@ -108,29 +108,49 @@ void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObje
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
 	}
 
-	//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
-	//TODO: See the else clause, think how to do the same thing
-	{
-		const double ra_signed = atan2(position[1], position[0]);
-		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
-		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
-		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
-		unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
-		int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	const double ra_signed = atan2(position[1], position[0]);
+	//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
+	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
+	const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
+	unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
 
-		gotoReceived(ra_int, dec_int);
-	}
-	/*
-		else
-		{
-			qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
-		}
-	*/
+	gotoReceived(ra_int, dec_int);
 }
+
+void TelescopeClientDirectNexStar::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	Q_UNUSED(selectObject)
+
+	if (!isConnected())
+		return;
+
+	Vec3d position = j2000Pos;
+	if (equinox == EquinoxJNow)
+	{
+		const StelCore* core = StelApp::getInstance().getCore();
+		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
+	}
+
+	const double ra_signed = atan2(position[1], position[0]);
+	//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
+	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
+	const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
+	unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
+
+	syncReceived(ra_int, dec_int);
+}
+
 
 void TelescopeClientDirectNexStar::gotoReceived(unsigned int ra_int, int dec_int)
 {
 	nexstar->sendGoto(ra_int, dec_int);
+}
+
+void TelescopeClientDirectNexStar::syncReceived(unsigned int ra_int, int dec_int)
+{
+	nexstar->sendSync(ra_int, dec_int);
 }
 
 //! estimates where the telescope is by interpolation in the stored

@@ -658,16 +658,17 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelCore* core1 = StelApp::getInstance().getCore();
 				bool state = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
+				core1->update(0); // enforce update cache!
 				double eclJDE = earth->getRotObliquity(core1->getJDE());
 				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));				
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
 				core1->setUseTopocentricCoordinates(state);
 				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = static_cast<int>(std::round(deltaLong));
+				int deltaLongI = qRound(deltaLong);				
 				if (deltaLongI==45)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
 				if (deltaLongI==90)
@@ -735,8 +736,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));		
 		map.insert("velocity", getEclipticVelocity().toString());
+		map.insert("velocity-kms", QString::number(getEclipticVelocity().length()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
-		map.insert("scale", sphereScale);
+		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().length()* AU/86400., 'f', 5));
+		map.insert("scale", sphereScale);		
 	}
 	else
 	{
@@ -2468,14 +2471,13 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
-		//calculate and set oren-nayar parameters
-		float roughnessSq = roughness * roughness;
-		QVector3D vec(
-					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.57f), //x = A
+		//calculate and set oren-nayar parameters. The 75 in the scaling computation is arbitrary, to make the terminator visible.
+		const float roughnessSq = roughness * roughness;
+		QVector4D vec(
+					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.33f), // 0.57f), //x = A. If interreflection term is removed from shader, use 0.57 instead of 0.33.
 					0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
-					1.85f	//z = scale factor
-					);
-
+					75.0f * albedo/M_PIf, // was: 1.85f, but unclear why. //z = scale factor=rho/pi*Eo. rho=albedo=0.12, Eo~50? Higher Eo looks better!
+					roughnessSq);
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 

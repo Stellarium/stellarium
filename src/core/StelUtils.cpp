@@ -1146,16 +1146,7 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 // Calculate and getting sidereal period in days from semi-major axis
 double calculateSiderealPeriod(const double SemiMajorAxis)
 {
-/*	// Calculate semi-major axis in meters
-	double a = AU*1000*SemiMajorAxis;
-	// Calculate orbital period in seconds
-	// Here 1.32712440018e20 is heliocentric gravitational constant
-	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
-	return period/86400; // return period in days
-	*/
-	// Much simpler from: Heafner, Fundamental Eph. Comp. p.71.
-	//double meanMotion=0.01720209895/sqrt(SemiMajorAxis*SemiMajorAxis*SemiMajorAxis); // radians/day
-	//return 2.*M_PI/meanMotion;
+	// Source: Heafner, Fundamental Eph. Comp. p.71.
 	return (2.*M_PI/0.01720209895)*sqrt(SemiMajorAxis*SemiMajorAxis*SemiMajorAxis);
 }
 
@@ -1163,12 +1154,13 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
 	int h = static_cast<int>(hours);
-	int m = static_cast<int>((qAbs(hours)-qAbs(double(h)))*60);
+	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
 	if (lowprecision)
-		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+		return QString("%1h%2m").arg(h).arg(qRound(minutes), 2, 10, QChar('0'));
 	else
 	{
-		float s = static_cast<float>((((qAbs(hours)-qAbs(double(h)))*60)-m)*60);
+		int m = static_cast<int>(minutes);
+		float s = static_cast<float>((((qAbs(hours)-qAbs(double(h)))*60.)-m)*60.);
 		if (s>59.9f)
 		{
 			m += 1;

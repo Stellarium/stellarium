@@ -34,29 +34,6 @@
 
 QTEST_GUILESS_MAIN(TestComputations)
 
-void TestComputations::testSiderealPeriodComputations()
-{
-	QVariantList data;
-
-	// According to WolframAlpha
-	data << 1.00000011	<< 365.25636;	// Earth
-	data << 0.38709893	<< 87.96926;	// Mercury
-	data << 0.72333199	<< 224.7008;	// Venus
-
-	while (data.count() >= 2)
-	{
-		double distance = data.takeFirst().toDouble();
-		double exPeriod = data.takeFirst().toDouble();
-		double period = StelUtils::calculateSiderealPeriod(distance);
-
-		QVERIFY2(qAbs(period-exPeriod)<=ERROR_LOW_LIMIT, qPrintable(QString("Sidereal period is %1 days for %2 AU (expected %3 days)")
-									.arg(QString::number(period, 'f', 6))
-									.arg(QString::number(distance, 'f', 5))
-									.arg(QString::number(exPeriod, 'f', 6))));
-	}
-}
-
-
 void TestComputations::testJDFromBesselianEpoch()
 {
 	QVariantList data;
@@ -64,11 +41,8 @@ void TestComputations::testJDFromBesselianEpoch()
 	// According to Observational Astrophysics by Pierre Lena, Francois Lebrun, Francois Mignard (ISBN 3662036851, 9783662036853)
 	data << 1900.0		<< 2415020.3135;
 	data << 1950.0		<< 2433282.4235;
-	//data << 1995.00048	<< 2449718.5; // GZ: Where did you get this "expected" result?
-	// FIXME: WTF??? --- GZ: Can you please write the problem (what was your expectation and why) and not just WTF?
-	data << 1995.0004862412	<< 2449718.5; // GZ: These 2 tuples are from manual calculation with our formulae.
+	data << 1995.0004862412	<< 2449718.5;
 	data << 1995.0		<< 2449718.3224;
-	// The next 3 were reactivated after converting the argument to double. B2000 had a typo.
 	data << 2000.0		<< 2451544.5334;
 	data << 1950.000210	<< 2433282.5;
 	data << 2000.001278	<< 2451545.0;
@@ -113,6 +87,41 @@ void TestComputations::testIsPowerOfTwo()
 					   .arg(n)
 					   .arg(r ? "is":"is not")
 					   .arg(f)));
+	}
+}
+
+void TestComputations::testGetBiggerPowerOfTwo()
+{
+	int n, e, r;
+	QVariantList data;
+	data	<< 0	<< 1;
+	data	<< 1	<< 1;
+	data	<< 2	<< 2;
+	data	<< 3	<< 4;
+	data	<< 4	<< 4;
+	data	<< 5	<< 8;
+	data	<< 6	<< 8;
+	data	<< 7	<< 8;
+	data	<< 8	<< 8;
+	data	<< 9	<< 16;
+	data	<< 10	<< 16;
+	data	<< 11	<< 16;
+	data	<< 12	<< 16;
+	data	<< 13	<< 16;
+	data	<< 14	<< 16;
+	data	<< 15	<< 16;
+	data	<< 16	<< 16;
+
+	while (data.count() >= 2)
+	{
+		n	= data.takeFirst().toInt();
+		e	= data.takeFirst().toInt();
+		r	= StelUtils::getBiggerPowerOfTwo(n);
+
+		QVERIFY2(r==e, qPrintable(QString("Number: %1 getBiggerPowerOfTwo(): %2 (expected: %3)")
+					   .arg(n)
+					   .arg(r)
+					   .arg(e)));
 	}
 }
 
@@ -252,9 +261,9 @@ void TestComputations::testEclToEquTransformations()
 void TestComputations::testSpheToRectTransformations()
 {
 	double longitude, latitude;
-	float longitudeF, latitudeF;
+	float longitudeF1, latitudeF1, longitudeF2, latitudeF2;
 	Vec3f eVec3f, rVec3f;
-	Vec3d eVec3d, rVec3d;
+	Vec3d eVec3d, rVec3d1, rVec3d2;
 
 	QVariantList data;
 	//     Longitude          Latitude         Expected
@@ -270,13 +279,16 @@ void TestComputations::testSpheToRectTransformations()
 	{
 		longitude	= data.takeFirst().toDouble();
 		latitude	= data.takeFirst().toDouble();
-		longitudeF=float(longitude);
-		latitudeF=float(latitude);
+		longitudeF1	=float(longitude);
+		latitudeF1		=float(latitude);
+		longitudeF2	=float(longitude);
+		latitudeF2		=float(latitude);
 		eVec3f	= StelUtils::strToVec3f(data.takeFirst().toString());
 		eVec3d	= eVec3f.toVec3d();
 
-		StelUtils::spheToRect(longitudeF*M_PI_180f, latitudeF*M_PI_180f, rVec3f);
-		StelUtils::spheToRect(longitude*M_PI/180., latitude*M_PI/180., rVec3d);
+		StelUtils::spheToRect(longitudeF1*M_PI_180f, latitudeF1*M_PI_180f, rVec3f);
+		StelUtils::spheToRect(longitudeF2*M_PI_180f, latitudeF2*M_PI_180f, rVec3d2);
+		StelUtils::spheToRect(longitude*M_PI/180., latitude*M_PI/180., rVec3d1);
 
 		QVERIFY2(qAbs(rVec3f[0]-eVec3f[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[1]-eVec3f[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[2]-eVec3f[2])<=ERROR_HIGH_LIMIT,
 				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
@@ -285,11 +297,18 @@ void TestComputations::testSpheToRectTransformations()
 					   .arg(rVec3f.toString())
 					   .arg(eVec3f.toString())));
 
-		QVERIFY2(qAbs(rVec3d[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
+		QVERIFY2(qAbs(rVec3d2[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d2[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d2[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
 				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
 					   .arg(QString::number(longitude, 'f', 4))
 					   .arg(QString::number(latitude, 'f', 4))
-					   .arg(rVec3d.toString())
+					   .arg(rVec3d2.toString())
+					   .arg(eVec3d.toString())));
+
+		QVERIFY2(qAbs(rVec3d1[0]-eVec3d[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3d1[1]-eVec3d[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3d1[2]-eVec3d[2])<=ERROR_HIGH_LIMIT,
+				qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
+					   .arg(QString::number(longitude, 'f', 4))
+					   .arg(QString::number(latitude, 'f', 4))
+					   .arg(rVec3d1.toString())
 					   .arg(eVec3d.toString())));
 	}
 }
@@ -668,6 +687,7 @@ void TestComputations::testIntMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -693,6 +713,7 @@ void TestComputations::testFloatMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -718,6 +739,7 @@ void TestComputations::testDoubleMod()
 	data << 1 << 3 << 1;
 	data << 2 << 4 << 2;
 	data << 2 << 5 << 2;
+	data << -2 << 5 << 3;
 
 	while (data.count() >= 3)
 	{
@@ -731,5 +753,103 @@ void TestComputations::testDoubleMod()
 					   .arg(QString::number(b, 'f', 2))
 					   .arg(QString::number(r, 'f', 2))
 					   .arg(QString::number(eR, 'f', 2))));
+	}
+}
+
+void TestComputations::testExp()
+{
+	QList<float> data;
+	data << -1.f << -0.75f << -0.5f << -0.25f << 0.f << 0.25f << 0.5f << 0.75f << 1.f;
+	float v, e, r, err;
+	for (int i = 0; i < data.size(); ++i)
+	{
+		v = data.at(i);
+		e = exp(v);
+		r = StelUtils::fastExp(v);
+		err = qAbs(e-r);
+		QVERIFY2(err<=1e-2, qPrintable(QString("value: %1 std. exp: %2 fast exp: %3 (error: %4)")
+					   .arg(QString::number(v, 'f', 5))
+					   .arg(QString::number(e, 'f', 5))
+					   .arg(QString::number(r, 'f', 5))
+					   .arg(QString::number(err, 'f', 5))));
+	}
+}
+
+void TestComputations::testACos()
+{
+	QList<float> data;
+	data << 0.f << 0.25f << 0.75f << -0.75f << -0.25f << 0.5f << -0.5f;
+	float v, e, r, err;
+	for (int i = 0; i < data.size(); ++i)
+	{
+		v = data.at(i);
+		e = acos(v);
+		r = StelUtils::fastAcos(v);
+		err = qAbs(e-r);
+		QVERIFY2(err<=2e-2, qPrintable(QString("value: %1 std. acos: %2 fast acos: %3 (error: %4)")
+					   .arg(QString::number(v, 'f', 5))
+					   .arg(QString::number(e, 'f', 5))
+					   .arg(QString::number(r, 'f', 5))
+					   .arg(QString::number(err, 'f', 5))));
+	}
+}
+
+void TestComputations::testSign()
+{
+	QVariantList data;
+	data << 1 << 1;
+	data << -1 << -1;
+	data << 10 << 1;
+	data << -22 << -1;
+	data << 15 << 1;
+	data << 0 << 0;
+	while (data.count() >= 2)
+	{
+		int a = data.takeFirst().toInt();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(a)
+					   .arg(r)
+					   .arg(e)));
+	}
+
+	data.clear();
+	data << 1.0 << 1;
+	data << -1.0 << -1;
+	data << 10.5 << 1;
+	data << -22.1 << -1;
+	data << 15.8 << 1;
+	data << 0.0 << 0;
+	while (data.count() >= 2)
+	{
+		double a = data.takeFirst().toDouble();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(QString::number(a, 'f', 1))
+					   .arg(r)
+					   .arg(e)));
+	}
+
+	data.clear();
+	data << 1.f << 1;
+	data << -1.f << -1;
+	data << 10.5f << 1;
+	data << -22.1f << -1;
+	data << 15.8f << 1;
+	data << 0.f << 0;
+	while (data.count() >= 2)
+	{
+		float a = data.takeFirst().toFloat();
+		int e = data.takeFirst().toInt();
+		int r = StelUtils::sign(a);
+
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
+					   .arg(QString::number(a, 'f', 1))
+					   .arg(r)
+					   .arg(e)));
 	}
 }

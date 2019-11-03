@@ -26,7 +26,6 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
-#include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"

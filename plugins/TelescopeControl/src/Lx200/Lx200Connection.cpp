@@ -99,6 +99,39 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 	}
 }
 
+void Lx200Connection::sendSync(unsigned int ra_int, int dec_int)
+{
+	if (goto_commands_queued <= 1)
+	{
+		int dec = static_cast<int>(floor(0.5 + dec_int * (360*3600/4294967296.0)));
+		if (dec < -90*3600)
+		{
+			dec = -180*3600 - dec;
+			ra_int += 0x80000000;
+		}
+		else if (dec > 90*3600)
+		{
+			dec = 180*3600 - dec;
+			ra_int += 0x80000000;
+		}
+		int ra = static_cast<int>(floor(0.5 + ra_int * (86400.0/4294967296.0)));
+		if (ra >= 86400)
+			ra -= 86400;
+		sendCommand(new Lx200CommandStopSlew(server));
+		sendCommand(new Lx200CommandSetSelectedRa(server, ra));
+		sendCommand(new Lx200CommandSetSelectedDec(server, dec));
+		sendCommand(new Lx200CommandSyncSelected(server));
+		goto_commands_queued++;
+	}
+	else
+	{
+		#ifdef DEBUG4
+		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << endl;
+		#endif
+	}
+}
+
+
 bool Lx200Connection::writeFrontCommandToBuffer(void)
 {
 	if(command_list.empty())

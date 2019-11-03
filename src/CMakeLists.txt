@@ -333,6 +333,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/CustomDeltaTEquationDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
+          gui/AstroCalcExtraEphemerisDialog.hpp
+          gui/AstroCalcExtraEphemerisDialog.cpp
           gui/BookmarksDialog.hpp
           gui/BookmarksDialog.cpp
           gui/StelDialog.hpp
@@ -353,6 +355,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
+          gui/astroCalcExtraEphemerisDialog.ui
           gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
@@ -736,6 +739,16 @@ IF(ENABLE_TESTING)
     ADD_DEPENDENCIES(buildTests testPrecession)
     ADD_TEST(testPrecession testPrecession)
     SET_TARGET_PROPERTIES(testPrecession PROPERTIES FOLDER "src/tests")
+
+    SET(tests_testSiderealTime_SRCS
+        tests/testSiderealTime.hpp
+        tests/testSiderealTime.cpp
+    )
+    ADD_EXECUTABLE(testSiderealTime ${tests_testSiderealTime_SRCS})
+    TARGET_LINK_LIBRARIES(testSiderealTime ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testSiderealTime)
+    ADD_TEST(testSiderealTime testSiderealTime)
+    SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
 
     SET(tests_testEphemeris_SRCS
         tests/testEphemeris.hpp
