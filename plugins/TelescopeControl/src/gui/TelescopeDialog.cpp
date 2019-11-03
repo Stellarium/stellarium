@@ -589,6 +589,10 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 			// TRANSLATORS: Telescope connection type
 			typeLabel = N_("remote, INDI");
 			break;
+		case ConnectionASCOM:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("local, ASCOM");
+			break;
 		default:
 			;
 	}

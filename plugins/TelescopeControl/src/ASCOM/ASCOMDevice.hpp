@@ -42,8 +42,7 @@ public:
 	static QString showDeviceChooser(QString previousDeviceId = "");
 
 	ASCOMDevice(QObject* parent = Q_NULLPTR, QString ascomDeviceId = Q_NULLPTR);
-	~ASCOMDevice();
-
+	
 	bool isDeviceConnected() const;
 	bool isParked() const;
 	bool connect();
@@ -62,9 +61,9 @@ signals:
 
 private:
 	IDispatch* pTelescopeDispatch;
+	bool mConnected = false;
 	ASCOMCoordinates mCoordinates;
 	QString mAscomDeviceId;
-	bool mFailedToInitialize = false;
 	static const wchar_t* LSlewToCoordinatesAsync;
 	static const wchar_t* LSyncToCoordinates;
 	static const wchar_t* LAbortSlew;

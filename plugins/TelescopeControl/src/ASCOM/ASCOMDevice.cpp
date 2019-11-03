@@ -22,31 +22,25 @@
 
 ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(parent)
 {
+	mAscomDeviceId = ascomDeviceId;
+}
+
+bool ASCOMDevice::connect()
+{
+	if (mConnected) return true;
+
 	HRESULT hResult;
+	VARIANT v1;
 	BOOL initResult;
 
-	mAscomDeviceId = ascomDeviceId;
 	initResult = OleInit(COINIT_APARTMENTTHREADED);
 	hResult = OleCreateInstance(reinterpret_cast<const wchar_t*>(mAscomDeviceId.toStdWString().c_str()), &pTelescopeDispatch);
 
 	if (FAILED(hResult)) {
 		qDebug() << "Initialization failed for device: " << mAscomDeviceId;
-		mFailedToInitialize = true;
+		return false;
 	};
-}
 
-ASCOMDevice::~ASCOMDevice()
-{
-	pTelescopeDispatch->Release();
-}
-
-bool ASCOMDevice::connect()
-{
-	if (mFailedToInitialize) return false;
-
-	VARIANT v1;
-	HRESULT hResult;
-	
 	v1 = OleBoolToVariant(TRUE);
 
 	hResult = OlePropertyPut(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LConnected), 1, v1);
@@ -57,12 +51,13 @@ bool ASCOMDevice::connect()
 		return false;
 	}
 	
+	mConnected = true;
 	return true;
 }
 
 bool ASCOMDevice::disconnect()
 {
-	if (mFailedToInitialize) return false;
+	if (!mConnected) return true;
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -76,7 +71,10 @@ bool ASCOMDevice::disconnect()
 		qDebug() << "Could not disconnect device: " << mAscomDeviceId;
 		return false;
 	};
+	
+	pTelescopeDispatch->Release();
 
+	mConnected = false;
 	return true;
 }
 
@@ -88,7 +86,7 @@ ASCOMDevice::ASCOMCoordinates ASCOMDevice::position() const
 
 void ASCOMDevice::slewToCoordinates(ASCOMDevice::ASCOMCoordinates coords) 
 {
-	if (mFailedToInitialize) return;
+	if (!mConnected) return;
 
 	VARIANT v1, v2;
 	HRESULT hResult;
@@ -101,7 +99,7 @@ void ASCOMDevice::slewToCoordinates(ASCOMDevice::ASCOMCoordinates coords)
 
 void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
 {
-	if (mFailedToInitialize) return;
+	if (!mConnected) return;
 
 	VARIANT v1, v2;
 	HRESULT hResult;
@@ -118,7 +116,7 @@ void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
 
 void ASCOMDevice::abortSlew()
 {
-	if (mFailedToInitialize) return;
+	if (!mConnected) return;
 
 	HRESULT hResult;
 	hResult = OleMethodCall(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LAbortSlew));
@@ -130,7 +128,7 @@ void ASCOMDevice::abortSlew()
 
 bool ASCOMDevice::isDeviceConnected() const
 {
-	if (mFailedToInitialize) return false;
+	if (!mConnected) return false;
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -148,7 +146,7 @@ bool ASCOMDevice::isDeviceConnected() const
 
 bool ASCOMDevice::isParked() const
 {
-	if (mFailedToInitialize) return true;
+	if (!mConnected) return true;
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -167,7 +165,7 @@ bool ASCOMDevice::isParked() const
 
 ASCOMDevice::ASCOMEquatorialCoordinateType ASCOMDevice::getEquatorialCoordinateType()
 {
-	if (mFailedToInitialize) return ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
+	if (!mConnected) return ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -185,7 +183,7 @@ ASCOMDevice::ASCOMEquatorialCoordinateType ASCOMDevice::getEquatorialCoordinateT
 
 bool ASCOMDevice::doesRefraction()
 {
-	if (mFailedToInitialize) return false;
+	if (!mConnected) return false;
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -206,7 +204,7 @@ ASCOMDevice::ASCOMCoordinates ASCOMDevice::getCoordinates()
 {
 	ASCOMDevice::ASCOMCoordinates coords;
 
-	if (mFailedToInitialize) return coords;
+	if (!mConnected) return coords;
 
 	VARIANT v1, v2;
 	HRESULT hResult;
