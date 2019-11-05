@@ -605,7 +605,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qDebug() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
-	for (const auto& catV : catalogsDescription)
+	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
 		checkAndLoadCatalog(m);
@@ -613,9 +613,9 @@ void StarMgr::loadData(QVariantMap starsConfig)
 
 	for (int i=0; i<=NR_OF_HIP; i++)
 	{
-		hipIndex[i].a = 0;
-		hipIndex[i].z = 0;
-		hipIndex[i].s = 0;
+		hipIndex[i].a = Q_NULLPTR;
+		hipIndex[i].z = Q_NULLPTR;
+		hipIndex[i].s = Q_NULLPTR;
 	}
 	for (auto* z : gridLevels)
 		z->updateHipIndex(hipIndex);
