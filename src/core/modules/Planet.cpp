@@ -645,30 +645,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				elo = StelUtils::radToDmsStr(elongation, true);
 			}
 
-			oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
-			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
-			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1)) << "<br />";
-			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
-
+			QString moonPhase = "";
 			if (englishName=="Moon" && onEarth)
 			{
-				// NOTE: Should we just remove this piece of code to avoid switch context?
-				// For compute the Moon age we use geocentric coordinates
-				QString moonPhase = "";
-				StelCore* core1 = StelApp::getInstance().getCore();
-				bool state = core1->getUseTopocentricCoordinates();
-				core1->setUseTopocentricCoordinates(false);
-				core1->update(0); // enforce update cache!
-				double eclJDE = earth->getRotObliquity(core1->getJDE());
+				double eclJDE = earth->getRotObliquity(core->getJDE());
 				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));				
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
-				core1->setUseTopocentricCoordinates(state);
 				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = qRound(deltaLong);				
+				int deltaLongI = qRound(deltaLong);
 				if (deltaLongI==45)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
 				if (deltaLongI==90)
@@ -685,13 +673,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					moonPhase = qc_("Waning Crescent", "Moon phase");
 				if (deltaLongI==0 || deltaLongI==360)
 					moonPhase = qc_("New Moon", "Moon phase");
-
-				double age = deltaLong*29.530588853/360.;
-				oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
-				if (!moonPhase.isEmpty())
-					oss << QString(" (%4)").arg(moonPhase);
-				oss << "<br />";
 			}
+
+			oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
+			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
+			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+			if (!moonPhase.isEmpty())
+				oss << QString(" (%1)").arg(moonPhase);
+			oss << "<br />";
+			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
 		}
 
 		if (englishName=="Sun")
