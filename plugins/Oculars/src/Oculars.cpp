@@ -172,6 +172,7 @@ Oculars::Oculars()
 	, flagInitDirectionUsage(false)
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
+	, flagScalingFOVForCCD(true)
 	, flagShowResolutionCriterions(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
@@ -729,6 +730,7 @@ void Oculars::init()
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
+		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
@@ -806,6 +808,8 @@ void Oculars::setFlagScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
+	if (!getFlagScalingFOVForCCD())
+		return;
 	Lens * lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 	{
@@ -2560,6 +2564,19 @@ void Oculars::setFlagScalingFOVForTelrad(const bool b)
 bool Oculars::getFlagScalingFOVForTelrad() const
 {
 	return  flagScalingFOVForTelrad;
+}
+
+void Oculars::setFlagScalingFOVForCCD(const bool b)
+{
+	flagScalingFOVForCCD = b;
+	settings->setValue("use_ccd_fov_scaling", b);
+	settings->sync();
+	emit flagScalingFOVForCCDChanged(b);
+}
+
+bool Oculars::getFlagScalingFOVForCCD() const
+{
+	return  flagScalingFOVForCCD;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)

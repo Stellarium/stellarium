@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>707</width>
-    <height>693</height>
+    <height>696</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -497,6 +497,13 @@
                </item>
               </layout>
              </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxCCDFOVScaling">
+               <property name="text">
+                <string>Enable scaling FOV for CCD</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -677,7 +684,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
                   </property>
                  </widget>
@@ -697,7 +704,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
@@ -990,7 +997,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
                   </property>
                  </widget>
@@ -1010,7 +1017,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
@@ -1265,7 +1272,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
                   </property>
                  </widget>
@@ -1285,7 +1292,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
@@ -1756,7 +1763,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
                   </property>
                  </widget>
@@ -1776,7 +1783,7 @@
                    </size>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                   <iconset>
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
@@ -2000,8 +2007,6 @@
   <tabstop>telescopeEQ</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
