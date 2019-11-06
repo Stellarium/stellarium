@@ -349,12 +349,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
+		float distance, distanceErr, distanceLY, distanceErrLY;
 		if (qAbs(parallax)>0.f)
 		{
 			QString dx;
 			// distance in light years from parallax
-			float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9);
-			float distanceErr = 0.f;
+			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9);
+			distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
 				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
@@ -382,25 +383,37 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString duly = qc_("ly", "distance");
 
-			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO)
+			distance = oDistance;
+			distanceErr = oDistanceErr;
+			distanceLY = oDistance*dc;
+			distanceErrLY= oDistanceErr*dc;
+			if (oDistance>=1000.f)
 			{
-				dc = 3.262f;
-				ms = 3;
+				distance = oDistance/1000.f;
+				distanceErr = oDistanceErr/1000.f;
 				//TRANSLATORS: Unit of measure for distance - Megaparsecs
 				dupc = qc_("Mpc", "distance");
+
+			}
+
+			if (distanceLY>=1e6)
+			{
+				distanceLY = distanceLY/1e6;
+				distanceErrLY = distanceErrLY/1e6;
+				ms = 3;
 				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
 				duly = qc_("M ly", "distance");
 			}
 
 			if (oDistanceErr>0.f)
 			{
-				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
-				dy = QString("%1%2%3").arg(QString::number((double)oDistance*dc, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number((double)oDistanceErr*dc, 'f', ms));
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+				dy = QString("%1%2%3").arg(QString::number(distanceLY, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(distanceErrLY, 'f', ms));
 			}
 			else
 			{
-				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
-				dy = QString("%1").arg(QString::number((double)oDistance*dc, 'f', ms));
+				dx = QString("%1").arg(QString::number(distance, 'f', 3));
+				dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
 			}
 
 			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";

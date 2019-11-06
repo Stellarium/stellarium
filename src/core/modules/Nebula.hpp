@@ -278,8 +278,8 @@ private:
 	float majorAxisSize;			// Major axis size in degrees
 	float minorAxisSize;			// Minor axis size in degrees
 	int orientationAngle;			// Orientation angle in degrees
-	float oDistance;				// distance (Mpc for galaxies, kpc for other objects)
-	float oDistanceErr;			// Error of distance (Mpc for galaxies, kpc for other objects)
+	float oDistance;				// distance (kpc)
+	float oDistanceErr;			// Error of distance (kpc)
 	float redshift;
 	float redshiftErr;
 	float parallax;
