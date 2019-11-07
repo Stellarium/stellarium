@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>288</width>
+    <width>305</width>
     <height>100</height>
    </rect>
   </property>
@@ -162,6 +162,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="smartDatesCheckBox">
+        <property name="text">
+         <string>Use smart format for dates</string>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="verticalSpacer">

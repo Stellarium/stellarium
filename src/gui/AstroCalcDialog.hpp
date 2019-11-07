@@ -47,7 +47,8 @@ struct Ephemeris
 {
 	Vec3d coord;
 	int colorIndex;
-	QString objDate;
+	double objDate;
+	QString objDateStr;
 	float magnitude;
 };
 Q_DECLARE_METATYPE(Ephemeris)

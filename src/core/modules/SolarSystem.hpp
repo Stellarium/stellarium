@@ -181,6 +181,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setEphemerisDataStep
 		   NOTIFY ephemerisDataStepChanged
 		   )
+	Q_PROPERTY(bool ephemerisSmartDates
+		   READ getFlagEphemerisSmartDates
+		   WRITE setFlagEphemerisSmartDates
+		   NOTIFY ephemerisSmartDatesChanged
+		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
@@ -910,6 +915,7 @@ signals:
 	void ephemerisLineChanged(bool b);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
+	void ephemerisSmartDatesChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -950,6 +956,7 @@ signals:
 	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
 
 	void solarSystemDataReloaded();
+	void requestEphemerisVisualization();
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -1036,6 +1043,9 @@ private slots:
 	void setFlagEphemerisSkipData(bool b);
 	bool getFlagEphemerisSkipData() const;
 
+	void setFlagEphemerisSmartDates(bool b);
+	bool getFlagEphemerisSmartDates() const;
+
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
@@ -1062,6 +1072,8 @@ private slots:
 
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
+
+	void fillEphemerisDates();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -1160,6 +1172,7 @@ private:
 	bool ephemerisLineDisplayed;
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
+	bool ephemerisSmartDatesDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;

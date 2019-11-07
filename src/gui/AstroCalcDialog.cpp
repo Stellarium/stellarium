@@ -1536,9 +1536,6 @@ void AstroCalcDialog::generateEphemeris()
 	int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
-	bool withTime = false;
-	if (currentStep < StelCore::JD_DAY)
-		withTime = true;
 
 	QList<PlanetP> celestialObjects;
 	celestialObjects.clear();
@@ -1628,11 +1625,8 @@ void AstroCalcDialog::generateEphemeris()
 
 			Ephemeris item;
 			item.coord = pos;
-			item.colorIndex = colorIndex;
-			if (withTime)
-				item.objDate = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
-			else
-				item.objDate = localeMgr->getPrintableDateLocal(JD);
+			item.colorIndex = colorIndex;			
+			item.objDate = JD;
 			item.magnitude = obj->getVMagnitudeWithExtinction(core);
 			EphemerisList.append(item);
 
@@ -1682,6 +1676,8 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+
+	emit solarSystem->requestEphemerisVisualization();
 }
 
 void AstroCalcDialog::saveEphemeris()

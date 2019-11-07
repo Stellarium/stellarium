@@ -671,3 +671,47 @@ QString StelLocaleMgr::longGenitiveMonthName(int month)
 	return r;
 }
 
+QString StelLocaleMgr::romanMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = "I";
+			break;
+		case 2:
+			r = "II";
+			break;
+		case 3:
+			r = "III";
+			break;
+		case 4:
+			r = "IV";
+			break;
+		case 5:
+			r = "V";
+			break;
+		case 6:
+			r = "VI";
+			break;
+		case 7:
+			r = "VII";
+			break;
+		case 8:
+			r = "VIII";
+			break;
+		case 9:
+			r = "IX";
+			break;
+		case 10:
+			r = "X";
+			break;
+		case 11:
+			r = "XI";
+			break;
+		case 12:
+			r = "XII";
+			break;
+	}
+	return r;
+}

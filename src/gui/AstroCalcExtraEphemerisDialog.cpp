@@ -54,6 +54,7 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 
 	connectBoolProperty(ui->skipDataCheckBox, "SolarSystem.ephemerisSkippedData");
 	connectIntProperty(ui->dataStepSpinBox, "SolarSystem.ephemerisDataStep");
+	connectBoolProperty(ui->smartDatesCheckBox, "SolarSystem.ephemerisSmartDates");
 }
 
 void AstroCalcExtraEphemerisDialog::setVisible(bool v)

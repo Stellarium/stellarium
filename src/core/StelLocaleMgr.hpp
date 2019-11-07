@@ -170,6 +170,9 @@ public:
 
 	//! Returns the genitive long name of the \a month
 	static QString longGenitiveMonthName(int month);
+
+	//! Returns the Roman name (a number) of the \a month
+	static QString romanMonthName(int month);
 	
 private:
 	// The translator used for astronomical object naming
