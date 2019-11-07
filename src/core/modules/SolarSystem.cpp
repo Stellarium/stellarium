@@ -1506,7 +1506,6 @@ void SolarSystem::fillEphemerisDates()
 		StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 		bool showSmartDates = getFlagEphemerisSmartDates();
 		double firstJD = AstroCalcDialog::EphemerisList.first().objDate;
-		double lastJD = AstroCalcDialog::EphemerisList.last().objDate;
 		bool withTime = false;
 		if (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-firstJD<1.0))
 			withTime = true;
@@ -1515,11 +1514,7 @@ void SolarSystem::fillEphemerisDates()
 		QString info;
 		const double shift = StelApp::getInstance().getCore()->getUTCOffset(firstJD)*0.041666666666;
 		StelUtils::getDateFromJulianDay(firstJD+shift, &fYear, &fMonth, &fDay);
-		StelUtils::getDateFromJulianDay(lastJD+shift, &sYear, &sMonth, &sDay);
-		bool sFlag = false;
-		if (fYear!=sYear && fMonth!=sMonth)
-			sFlag = true;
-
+		bool sFlag = true;
 		sYear = fYear;
 		sMonth = fMonth;
 		sDay = fDay;
