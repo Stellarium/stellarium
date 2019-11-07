@@ -1502,18 +1502,17 @@ void SolarSystem::fillEphemerisDates()
 	int fsize = AstroCalcDialog::EphemerisList.count();
 	if (fsize>0) // The array of data is not empty - good news!
 	{
-		double JD;
 		StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 		bool showSmartDates = getFlagEphemerisSmartDates();
-		double firstJD = AstroCalcDialog::EphemerisList.first().objDate;
+		double JD = AstroCalcDialog::EphemerisList.first().objDate;
 		bool withTime = false;
-		if (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-firstJD<1.0))
+		if (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-JD<1.0))
 			withTime = true;
 
 		int fYear, fMonth, fDay, sYear, sMonth, sDay, h, m, s;
 		QString info;
-		const double shift = StelApp::getInstance().getCore()->getUTCOffset(firstJD)*0.041666666666;
-		StelUtils::getDateFromJulianDay(firstJD+shift, &fYear, &fMonth, &fDay);
+		const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*0.041666666666;
+		StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
 		bool sFlag = true;
 		sYear = fYear;
 		sMonth = fMonth;
