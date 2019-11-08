@@ -88,6 +88,7 @@ SolarSystem::SolarSystem()
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisDataStep(1)
 	, ephemerisSmartDatesDisplayed(true)
+	, ephemerisScaleMarkersDisplayed(false)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
 	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
@@ -124,7 +125,7 @@ SolarSystem::~SolarSystem()
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
 
-	texCircle.clear();
+	texEphemerisMarker.clear();
 	texPointer.clear();
 
 	delete allTrails;
@@ -233,6 +234,7 @@ void SolarSystem::init()
 	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
 	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
 	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
+	setFlagEphemerisScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
 	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
 	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
 	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
@@ -251,7 +253,7 @@ void SolarSystem::init()
 		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
-	texCircle = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
+	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	
 	StelApp *app = &StelApp::getInstance();
@@ -1404,8 +1406,8 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		Vec3d win;
 		Vec3f colorMarker;
 
-		if (getFlagEphemerisLine())
-			baseSize = 2.f;
+		if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
+			baseSize = 3.f; // The line lies through center of marker
 
 		for (int i =0; i < fsize; i++)
 		{
@@ -1425,7 +1427,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			}
 			sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
 			sPainter.setBlending(true, GL_ONE, GL_ONE);
-			texCircle->bind();
+			texEphemerisMarker->bind();
 			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
 
 			if (showDates || showMagnitudes)
@@ -2124,6 +2126,21 @@ void SolarSystem::setFlagEphemerisSmartDates(bool b)
 bool SolarSystem::getFlagEphemerisSmartDates() const
 {
 	return ephemerisSmartDatesDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisScaleMarkers(bool b)
+{
+	if (b!=ephemerisScaleMarkersDisplayed)
+	{
+		ephemerisScaleMarkersDisplayed=b;
+		conf->setValue("astrocalc/flag_ephemeris_scale_markers", b); // Immediate saving of state
+		emit ephemerisScaleMarkersChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisScaleMarkers() const
+{
+	return ephemerisScaleMarkersDisplayed;
 }
 
 void SolarSystem::setEphemerisDataStep(int step)

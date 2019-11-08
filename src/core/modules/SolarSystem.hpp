@@ -186,6 +186,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisSmartDates
 		   NOTIFY ephemerisSmartDatesChanged
 		   )
+	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed
+		   READ getFlagEphemerisScaleMarkers
+		   WRITE setFlagEphemerisScaleMarkers
+		   NOTIFY ephemerisScaleMarkersChanged
+		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
@@ -916,6 +921,7 @@ signals:
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
+	void ephemerisScaleMarkersChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -1046,6 +1052,9 @@ private slots:
 	void setFlagEphemerisSmartDates(bool b);
 	bool getFlagEphemerisSmartDates() const;
 
+	void setFlagEphemerisScaleMarkers(bool b);
+	bool getFlagEphemerisScaleMarkers() const;
+
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
@@ -1155,7 +1164,7 @@ private:
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
-	StelTextureSP texCircle;                    // The symbolic circle texture
+	StelTextureSP texEphemerisMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1173,6 +1182,7 @@ private:
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
 	bool ephemerisSmartDatesDisplayed;
+	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
