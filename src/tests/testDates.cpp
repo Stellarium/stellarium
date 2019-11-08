@@ -77,17 +77,17 @@ void TestDates::dateRoundTrip()
 	map[-1930711.0] ="-9998-01-01T12:00:00";
 	map[-1930712.0] ="-9999-12-31T12:00:00";
 
-	bool ok;
-	Q_UNUSED(ok);
+	bool ok;	
 	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	{
 		QCOMPARE(StelUtils::julianDayToISO8601String(i.key()), i.value());
 		double tmp = StelUtils::getJulianDayFromISO8601String(i.value(), &ok);
 		QVERIFY(ok);
 		if (i.key()!=0.0)
-			qFuzzyCompare(i.key(), tmp);
+			ok = qFuzzyCompare(i.key(), tmp);
 		else
-			qFuzzyCompare(i.key()+1.0, tmp+1.0);
+			ok = qFuzzyCompare(i.key()+1.0, tmp+1.0);
+		QVERIFY(ok);
 	}
 }
 
