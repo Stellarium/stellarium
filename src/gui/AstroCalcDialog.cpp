@@ -4578,7 +4578,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright nebulae"), 2);
 	wutCategories.insert(q_("Dark nebulae"), 3);
 	wutCategories.insert(q_("Galaxies"), 4);
-	wutCategories.insert(q_("Star clusters"), 5);
+	wutCategories.insert(q_("Open star clusters"), 5);
 	wutCategories.insert(q_("Asteroids"), 6);
 	wutCategories.insert(q_("Comets"), 7);
 	wutCategories.insert(q_("Plutinos"), 8);
@@ -4598,6 +4598,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Supernova remnants"), 22);
 	wutCategories.insert(q_("Clusters of galaxies"), 23);
 	wutCategories.insert(q_("Interstellar objects"), 24);
+	wutCategories.insert(q_("Globular star clusters"), 25);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -4877,6 +4878,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 21:
 				case 22:
 				case 23:
+				case 25:
 				{
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
@@ -4905,8 +4907,8 @@ void AstroCalcDialog::calculateWutObjects()
 								if ((bool)(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 5: // Star clusters
-								if ((bool)(tflags & Nebula::TypeStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebGc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
+							case 5: // Open Star clusters
+								if ((bool)(tflags & Nebula::TypeOpenStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 14: // Planetary nebulae
@@ -4944,6 +4946,10 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 							case 23: // Clusters of galaxies
 								if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 25: // Globular Star clusters
+								if (((bool)(tflags & Nebula::TypeGlobularStarClusters) && ntype == Nebula::NebGc) && mag <= magLimit)
 									passByType = true;
 								break;
 						}

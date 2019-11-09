@@ -417,8 +417,10 @@ void NebulaMgr::init()
 		typeFilters	|= Nebula::TypeActiveGalaxies;
 	if (conf->value("flag_show_interacting_galaxies", true).toBool())
 		typeFilters	|= Nebula::TypeInteractingGalaxies;
-	if (conf->value("flag_show_clusters", true).toBool())
-		typeFilters	|= Nebula::TypeStarClusters;
+	if (conf->value("flag_show_open_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeOpenStarClusters;
+	if (conf->value("flag_show_globular_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeGlobularStarClusters;
 	if (conf->value("flag_show_bright_nebulae", true).toBool())
 		typeFilters	|= Nebula::TypeBrightNebulae;
 	if (conf->value("flag_show_dark_nebulae", true).toBool())

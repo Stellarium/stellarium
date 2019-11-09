@@ -1070,12 +1070,11 @@ bool Nebula::objectInDisplayedType() const
 		case NebIGx:
 			cntype = 2; // Interacting Galaxies
 			break;
-		case NebOc:
-		case NebGc:
+		case NebOc:		
 		case NebCl:
 		case NebSA:
 		case NebSC:
-			cntype = 3; // Star Clusters
+			cntype = 3; // Open Star Clusters
 			break;
 		case NebHII:
 		case NebISM:
@@ -1108,8 +1107,11 @@ bool Nebula::objectInDisplayedType() const
 		case NebGxCl:
 			cntype = 10;
 			break;
-		default:
+		case NebGc:
 			cntype = 11;
+			break;
+		default:
+			cntype = 12;
 			break;
 	}
 	if (typeFilters&TypeGalaxies && cntype==0)
@@ -1118,7 +1120,9 @@ bool Nebula::objectInDisplayedType() const
 		r = true;
 	else if (typeFilters&TypeInteractingGalaxies && cntype==2)
 		r = true;
-	else if (typeFilters&TypeStarClusters && cntype==3)
+	else if (typeFilters&TypeOpenStarClusters && cntype==3)
+		r = true;
+	else if (typeFilters&TypeGlobularStarClusters && cntype==11)
 		r = true;
 	else if (typeFilters&TypeHydrogenRegions && cntype==4)
 		r = true;
@@ -1130,11 +1134,11 @@ bool Nebula::objectInDisplayedType() const
 		r = true;
 	else if (typeFilters&TypeSupernovaRemnants && cntype==8)
 		r = true;
-	else if (typeFilters&TypeStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+	else if (typeFilters&TypeOpenStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
 		r = true;
 	else if (typeFilters&TypeGalaxyClusters && cntype==10)
 		r = true;
-	else if (typeFilters&TypeOther && cntype==11)
+	else if (typeFilters&TypeOther && cntype==12)
 		r = true;
 
 	return r;

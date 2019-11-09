@@ -664,8 +664,10 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 		flags |= Nebula::TypeActiveGalaxies;
 	if (ui->checkBoxInteractingGalaxiesType->isChecked())
 		flags |= Nebula::TypeInteractingGalaxies;
-	if (ui->checkBoxStarClustersType->isChecked())
-		flags |= Nebula::TypeStarClusters;
+	if (ui->checkBoxOpenStarClustersType->isChecked())
+		flags |= Nebula::TypeOpenStarClusters;
+	if (ui->checkBoxGlobularStarClustersType->isChecked())
+		flags |= Nebula::TypeGlobularStarClusters;
 	if (ui->checkBoxBrightNebulaeType->isChecked())
 		flags |= Nebula::TypeBrightNebulae;
 	if (ui->checkBoxDarkNebulaeType->isChecked())
@@ -722,7 +724,8 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
 	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
 	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);
-	ui->checkBoxStarClustersType->setChecked(flags & Nebula::TypeStarClusters);
+	ui->checkBoxOpenStarClustersType->setChecked(flags & Nebula::TypeOpenStarClusters);
+	ui->checkBoxGlobularStarClustersType->setChecked(flags & Nebula::TypeGlobularStarClusters);
 	ui->checkBoxBrightNebulaeType->setChecked(flags & Nebula::TypeBrightNebulae);
 	ui->checkBoxDarkNebulaeType->setChecked(flags & Nebula::TypeDarkNebulae);
 	ui->checkBoxPlanetaryNebulaeType->setChecked(flags & Nebula::TypePlanetaryNebulae);

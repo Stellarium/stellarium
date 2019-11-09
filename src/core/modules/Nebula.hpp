@@ -80,20 +80,21 @@ public:
 		TypeGalaxies			= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
-		TypeStarClusters		= 0x00000008, //!< Star Clusters
-		TypeHydrogenRegions	= 0x00000010, //!< Hydrogen Regions
-		TypeBrightNebulae		= 0x00000020, //!< Bright Nebulae
-		TypeDarkNebulae		= 0x00000040, //!< Dark Nebulae
-		TypePlanetaryNebulae	= 0x00000080, //!< Planetary Nebulae
-		TypeSupernovaRemnants	= 0x00000100, //!< Supernova Remnants
-		TypeGalaxyClusters		= 0x00000200, //!< Galaxy Clusters
-		TypeOther			= 0x00000400  //!< Other objects
+		TypeOpenStarClusters	= 0x00000008, //!< Open Star Clusters
+		TypeGlobularStarClusters	= 0x00000010, //!< Globular Star Clusters
+		TypeHydrogenRegions	= 0x00000020, //!< Hydrogen Regions
+		TypeBrightNebulae		= 0x00000040, //!< Bright Nebulae
+		TypeDarkNebulae		= 0x00000080, //!< Dark Nebulae
+		TypePlanetaryNebulae	= 0x00000100, //!< Planetary Nebulae
+		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
+		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
+		TypeOther			= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatAbell|CatESO|CatVdBH|CatDWB);
-	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
+	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType
