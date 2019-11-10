@@ -1456,7 +1456,7 @@ void Oculars::toggleCCD(bool show)
 		//Zoom out
 		if (getFlagInitFovUsage())
 			movementManager->zoomTo(movementManager->getInitFov());
-		else
+		else if (!flagShowTelrad)
 			movementManager->zoomTo(initialFOV);
 
 		if (getFlagInitDirectionUsage())
@@ -2209,7 +2209,7 @@ void Oculars::unzoomOcular()
 
 	if (getFlagInitFovUsage())
 		movementManager->zoomTo(movementManager->getInitFov());
-	else
+	else if (!flagShowTelrad)
 		movementManager->zoomTo(initialFOV);
 
 	if (getFlagInitDirectionUsage())
