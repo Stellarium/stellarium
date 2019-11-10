@@ -188,7 +188,6 @@ void Cardinals::updateI18n()
 	sNorthwest = trans.qtranslate("NW");
 }
 
-
 LandscapeMgr::LandscapeMgr()
 	: StelModule()
 	, atmosphere(Q_NULLPTR)

@@ -61,27 +61,27 @@ public:
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
-		CColumnName,		//! name of object
-		CColumnRA,		//! right ascension
-		CColumnDec,		//! declination
-		CColumnMagnitude,	//! magnitude
+		CColumnName,			//! name of object
+		CColumnRA,			//! right ascension
+		CColumnDec,			//! declination
+		CColumnMagnitude,		//! magnitude
 		CColumnAngularSize,	//! angular size
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnExtra,			//! extra data (surface brightness, separation, period, etc.)
 		CColumnTransit,		//! time of transit
-		CColumnType,		//! type of object
-		CColumnCount		//! total number of columns
+		CColumnType,			//! type of object
+		CColumnCount			//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
-		EphemerisCOName,	//! name of celestial object
+		EphemerisCOName,		//! name of celestial object
 		EphemerisDate,		//! date and time of ephemeris		
-		EphemerisRA,		//! right ascension
-		EphemerisDec,		//! declination
+		EphemerisRA,			//! right ascension
+		EphemerisDec,			//! declination
 		EphemerisMagnitude,	//! magnitude
 		EphemerisPhase,		//! phase
-		EphemerisDistance,	//! distance
+		EphemerisDistance,		//! distance
 		EphemerisElongation,	//! elongation
 		EphemerisCount		//! total number of columns
 	};
@@ -91,9 +91,9 @@ public:
 	enum PhenomenaColumns {
 		PhenomenaType,			//! type of phenomena
 		PhenomenaDate,			//! date and time of ephemeris
-		PhenomenaObject1,		//! first object
+		PhenomenaObject1,			//! first object
 		PhenomenaMagnitude1,		//! magnitude of first object
-		PhenomenaObject2,		//! second object
+		PhenomenaObject2,			//! second object
 		PhenomenaMagnitude2,		//! magnitude of second object
 		PhenomenaSeparation,		//! angular separation
 		PhenomenaElongation,		//! elongation (from the Sun)
@@ -111,12 +111,12 @@ public:
 	//! Defines the number and the order of the columns in the WUT tool
 	//! @enum WUTColumns
 	enum WUTColumns {
-		WUTObjectName,		//! object name
-		WUTMagnitude,		//! magnitude
+		WUTObjectName,	//! object name
+		WUTMagnitude,	//! magnitude
 		WUTRiseTime,		//! rise time
-		WUTTransitTime,		//! transit time
+		WUTTransitTime,	//! transit time
 		WUTSetTime,		//! set time
-		WUTAngularSize,		//! angular size
+		WUTAngularSize,	//! angular size
 		WUTCount		//! total number of columns
 	};
 
@@ -124,7 +124,7 @@ public:
 	//! @enum GraphsTypes
 	enum GraphsTypes {
 		GraphMagnitudeVsTime		= 1,
-		GraphPhaseVsTime		= 2,
+		GraphPhaseVsTime			= 2,
 		GraphDistanceVsTime		= 3,
 		GraphElongationVsTime		= 4,
 		GraphAngularSizeVsTime		= 5,
