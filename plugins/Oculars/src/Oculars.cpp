@@ -326,44 +326,23 @@ void Oculars::draw(StelCore* core)
 	}
 	else if (flagShowOculars)
 	{
-		// Ensure there is a selected ocular & telescope
-		if (selectedCCDIndex > ccds.count())
+		if (selectedOcularIndex >= 0)
 		{
-			qWarning() << "Oculars: the selected sensor index of "
-				   << selectedCCDIndex << " is greater than the sensor count of "
-				   << ccds.count() << ". Module disabled!";
-			ready = false;
-		}
-		if (selectedOcularIndex > oculars.count())
-		{
-			qWarning() << "Oculars: the selected ocular index of "
-				   << selectedOcularIndex << " is greater than the ocular count of "
-				   << oculars.count() << ". Module disabled!";
-			ready = false;
-		}
-		else if (selectedTelescopeIndex > telescopes.count())
-		{
-			qWarning() << "Oculars: the selected telescope index of "
-				   << selectedTelescopeIndex << " is greater than the telescope count of "
-				   << telescopes.count() << ". Module disabled!";
-			ready = false;
-		}
-		
-		if (ready)
-		{
-			if (selectedOcularIndex > -1)
-			{
-				paintOcularMask(core);
-				if (flagShowCrosshairs)
-				{
-					paintCrosshairs();
-				}
-			}
+			paintOcularMask(core);
+			if (flagShowCrosshairs)
+				paintCrosshairs();
+
 			if (!flagGuiPanelEnabled)
 			{
 				// Paint the information in the upper-right hand corner
 				paintText(core);
 			}
+		}
+		else
+		{
+			qWarning() << "Oculars: the selected ocular index of "
+				   << selectedOcularIndex << " is greater than the ocular count of "
+				   << oculars.count() << ". Module disabled!";
 		}
 	}
 	else if (flagShowCCD)
@@ -1841,9 +1820,7 @@ void Oculars::paintTelrad()
 void Oculars::paintOcularMask(const StelCore *core)
 {
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
-	{
 		paintCrosshairs();
-	}
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
@@ -1864,13 +1841,10 @@ void Oculars::paintOcularMask(const StelCore *core)
 	if (!reticleTexture.isNull())
 	{
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-
 		reticleTexture->bind();
-
 		int textureHeight;
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
-
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
 	}
 
