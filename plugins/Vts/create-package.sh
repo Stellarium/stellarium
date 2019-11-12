@@ -20,3 +20,5 @@ for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa
 do
     cp $QT_DIR/lib/libQt5${lib}.so.5 $OUT/bin/
 done
+
+cp $SCRIPT_DIR/../../data/icons/128x128/stellarium.png $OUT/doc/icon.png
