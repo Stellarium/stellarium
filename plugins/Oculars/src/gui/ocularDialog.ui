@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>707</width>
-    <height>696</height>
+    <height>728</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -346,17 +346,13 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
-               <property name="text">
-                <string>Scale image circle</string>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+               <property name="toolTip">
+                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
                </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="requireSelectionCheckBox">
                <property name="text">
-                <string>Enable only if an object is selected</string>
+                <string>Limit stellar magnitude</string>
                </property>
               </widget>
              </item>
@@ -367,13 +363,23 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
-               <property name="toolTip">
-                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+             <item row="8" column="0">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="requireSelectionCheckBox">
                <property name="text">
-                <string>Limit stellar magnitude</string>
+                <string>Enable only if an object is selected</string>
                </property>
               </widget>
              </item>
@@ -387,18 +393,19 @@
                </property>
               </widget>
              </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="text">
+                <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
              <item row="7" column="0">
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+              <widget class="QCheckBox" name="contourCheckBox">
+               <property name="text">
+                <string>Show contour of FOV</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
+              </widget>
              </item>
             </layout>
            </widget>

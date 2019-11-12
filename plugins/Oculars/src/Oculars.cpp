@@ -178,6 +178,7 @@ Oculars::Oculars()
 	, reticleRotation(0.)
 	, flagShowCcdCropOverlay(false)
 	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
+	, flagShowContour(false)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -719,6 +720,7 @@ void Oculars::init()
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
+		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1893,6 +1895,13 @@ void Oculars::paintOcularMask(const StelCore *core)
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
 	painter.enableClientStates(false);
+
+	if (getFlagShowContour())
+	{
+		// TODO: Make it configurable?
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.drawCircle(centerScreen[0], centerScreen[1], inner);
+	}
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -2597,6 +2606,19 @@ void Oculars::setFlagShowCcdCropOverlay(const bool b)
 bool Oculars::getFlagShowCcdCropOverlay(void) const
 {
 	return flagShowCcdCropOverlay;
+}
+
+void Oculars::setFlagShowContour(const bool b)
+{
+	flagShowContour = b;
+	settings->setValue("show_ocular_contour", b);
+	settings->sync();
+	emit flagShowContourChanged(b);
+}
+
+bool Oculars::getFlagShowContour(void) const
+{
+	return flagShowContour;
 }
 
 void Oculars::setArrowButtonScale(const double val)
