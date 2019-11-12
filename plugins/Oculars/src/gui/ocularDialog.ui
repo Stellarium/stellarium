@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>ocularDialogForm</class>
  <widget class="QWidget" name="ocularDialogForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>701</width>
+    <height>507</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
     <horstretch>0</horstretch>
@@ -362,8 +370,8 @@
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>20</width>
-                 <height>40</height>
+                 <width>0</width>
+                 <height>5</height>
                 </size>
                </property>
               </spacer>
@@ -405,8 +413,7 @@
              <item row="8" column="0">
               <widget class="QCheckBox" name="cardinalsCheckBox">
                <property name="toolTip">
-                <string>Show cardinal directions in equatorial coordinate
-system</string>
+                <string>Show cardinal directions in equatorial coordinate system</string>
                </property>
                <property name="text">
                 <string>Show compass rose</string>
@@ -556,12 +563,6 @@ system</string>
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
               </spacer>
              </item>
             </layout>
@@ -571,12 +572,6 @@ system</string>
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>187</width>
-              <height>285</height>
-             </size>
             </property>
            </spacer>
           </item>
@@ -891,12 +886,6 @@ system</string>
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>86</height>
-                </size>
-               </property>
               </spacer>
              </item>
             </layout>
@@ -1159,12 +1148,6 @@ system</string>
               <spacer name="verticalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
                </property>
               </spacer>
              </item>
@@ -1663,12 +1646,6 @@ system</string>
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>86</height>
-                </size>
-               </property>
               </spacer>
              </item>
             </layout>
@@ -1941,12 +1918,6 @@ system</string>
               <spacer name="verticalSpacer_2">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>38</height>
-                </size>
                </property>
               </spacer>
              </item>
