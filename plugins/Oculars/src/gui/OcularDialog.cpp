@@ -310,6 +310,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,    "Oculars.flagShowCcdCropOverlay");
 	connectIntProperty(ui->guiCcdCropOverlaySizeSpinBox,   "Oculars.ccdCropOverlaySize");
 	connectBoolProperty(ui->contourCheckBox,    "Oculars.flagShowContour");
+	connectBoolProperty(ui->cardinalsCheckBox,    "Oculars.flagShowCardinals");
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>707</width>
-    <height>728</height>
+    <height>792</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -363,7 +363,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="9" column="0">
               <spacer name="verticalSpacer_6">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -404,6 +404,16 @@
               <widget class="QCheckBox" name="contourCheckBox">
                <property name="text">
                 <string>Show contour of FOV</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="cardinalsCheckBox">
+               <property name="toolTip">
+                <string>Show cardinal and ordinal directions for equatorial coordinate system</string>
+               </property>
+               <property name="text">
+                <string>Show compass rose</string>
                </property>
               </widget>
              </item>

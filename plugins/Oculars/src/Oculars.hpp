@@ -103,7 +103,8 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
 	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
-	Q_PROPERTY(bool flagShowContour	READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
+	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
+	Q_PROPERTY(bool flagShowCardinals		READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
@@ -249,6 +250,9 @@ public slots:
 	void setFlagShowContour(const bool b);
 	bool getFlagShowContour(void) const;
 
+	void setFlagShowCardinals(const bool b);
+	bool getFlagShowCardinals(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -279,6 +283,7 @@ signals:
 	void flagShowCcdCropOverlayChanged(bool value);
 	void ccdCropOverlaySizeChanged(int value);
 	void flagShowContourChanged(bool value);
+	void flagShowCardinalsChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -430,6 +435,7 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
+	StelTextureSP cardinalsTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
@@ -443,6 +449,7 @@ private:
 	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
 	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
 	bool flagShowContour;
+	bool flagShowCardinals;
 };
 
 

@@ -179,6 +179,7 @@ Oculars::Oculars()
 	, flagShowCcdCropOverlay(false)
 	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 	, flagShowContour(false)
+	, flagShowCardinals(false)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -316,6 +317,8 @@ void Oculars::deinit()
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
 	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
+
+	cardinalsTexture.clear();
 }
 
 //! Draw any parts on the screen which are for our module
@@ -721,12 +724,15 @@ void Oculars::init()
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
+		setFlagShowCardinals(settings->value("show_ocular_cardinals", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
 	}
+
+	cardinalsTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -1844,9 +1850,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 	{
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		reticleTexture->bind();
+		/* Why it need?
 		int textureHeight;
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
+		*/
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
 	}
 
@@ -1902,6 +1910,30 @@ void Oculars::paintOcularMask(const StelCore *core)
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		painter.drawCircle(centerScreen[0], centerScreen[1], inner);
 	}
+
+	if (getFlagShowCardinals())
+	{
+		// Compute polar angle for cardinals and show it
+		double polarAngle = 0;
+		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
+		Vec3d CPos;
+		Vector2<qreal> cpos = projector->getViewportCenter();
+		projector->unProject(cpos[0], cpos[1], CPos);
+		Vec3d CPrel(CPos);
+		CPrel[2]*=0.2;
+		Vec3d crel;
+		projector->project(CPrel, crel);
+		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+		if (CPos[2] > 0)
+			polarAngle += 90.0;
+		else
+			polarAngle -= 90.0;
+
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		cardinalsTexture->bind();
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, -polarAngle);
+	}
+
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -2619,6 +2651,19 @@ void Oculars::setFlagShowContour(const bool b)
 bool Oculars::getFlagShowContour(void) const
 {
 	return flagShowContour;
+}
+
+void Oculars::setFlagShowCardinals(const bool b)
+{
+	flagShowCardinals = b;
+	settings->setValue("show_ocular_cardinals", b);
+	settings->sync();
+	emit flagShowCardinalsChanged(b);
+}
+
+bool Oculars::getFlagShowCardinals(void) const
+{
+	return flagShowCardinals;
 }
 
 void Oculars::setArrowButtonScale(const double val)
