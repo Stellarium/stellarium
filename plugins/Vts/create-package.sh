@@ -1,11 +1,21 @@
 #!/bin/bash
 
-OUT=$1/Stellarium
-SCRIPT_DIR=$(dirname `which $0`)
+if [ $# -eq 0 ]; then
+    echo "Usage: create-package.sh <vts-app-dir>"
+    exit -1
+fi
 
-# TODO: Compute those.
-BUILD_DIR=$SCRIPT_DIR/../../build/
+
+OUT=$1/Apps/Stellarium
+SCRIPT_DIR=$(pwd)/$(dirname `which $0`)
 QT_DIR=$(qtpaths --install-prefix)
+
+BUILD_DIR=/tmp/build/
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_PLUGIN_VTS=1 $SCRIPT_DIR/../../
+make -j8
+cd -
 
 echo Copy all files to \"$OUT\"
 
