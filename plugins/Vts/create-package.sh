@@ -26,9 +26,15 @@ cp $SCRIPT_DIR/data/vtsclient.json $OUT/doc/
 cp $SCRIPT_DIR/data/config.ini $OUT/bin/
 cp $BUILD_DIR/src/stellarium $OUT/bin/
 
-for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa
+for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa \
+           Concurrent MultimediaWidgets Multimedia \
+           Positioning SerialPort PrintSupport
 do
     cp $QT_DIR/lib/libQt5${lib}.so.5 $OUT/bin/
 done
+
+cp $QT_DIR/lib/libicui18n.so.56 $OUT/bin/
+cp $QT_DIR/lib/libicuuc.so.56 $OUT/bin/
+cp $QT_DIR/lib/libicudata.so.56 $OUT/bin/
 
 cp $SCRIPT_DIR/../../data/icons/128x128/stellarium.png $OUT/doc/icon.png
