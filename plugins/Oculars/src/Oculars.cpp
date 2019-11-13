@@ -318,7 +318,8 @@ void Oculars::deinit()
 	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 
-	cardinalsTexture.clear();
+	cardinalsNormalTexture.clear();
+	cardinalsMirroredTexture.clear();
 }
 
 //! Draw any parts on the screen which are for our module
@@ -732,7 +733,8 @@ void Oculars::init()
 		ready = false;
 	}
 
-	cardinalsTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
+	cardinalsNormalTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
+	cardinalsMirroredTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals-mirrored.png");
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -1929,8 +1931,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-		cardinalsTexture->bind();
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);		
+		if (core->getFlipHorz() && !core->getFlipVert())
+			cardinalsMirroredTexture->bind();
+		else
+			cardinalsNormalTexture->bind();
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, -polarAngle);
 	}
 

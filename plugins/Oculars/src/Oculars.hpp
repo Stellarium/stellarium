@@ -435,7 +435,8 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	StelTextureSP cardinalsTexture;
+	StelTextureSP cardinalsNormalTexture;
+	StelTextureSP cardinalsMirroredTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
