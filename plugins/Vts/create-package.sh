@@ -7,7 +7,7 @@ fi
 
 
 OUT=$1/Apps/Stellarium
-SCRIPT_DIR=$(pwd)/$(dirname `which $0`)
+SCRIPT_DIR=$(dirname `realpath $0`)
 QT_DIR=$(qtpaths --install-prefix)
 
 BUILD_DIR=/tmp/build/
