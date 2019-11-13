@@ -412,7 +412,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		return;
 	}
 
-	nbDecorRepeat      = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
+	nbDecorRepeat      = landscapeIni.value("landscape/nb_decor_repeat", 1).toUInt();
 	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
 	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
 	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
@@ -425,9 +425,9 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
 	// Load sides textures
-	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
+	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toUInt();
 	sideTexs = new StelTextureSP[static_cast<size_t>(2*nbSideTexs)]; // 0.14: allow upper half for light textures!
-	for (int i=0; i<nbSideTexs; ++i)
+	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
 		QString textureName = landscapeIni.value(textureKey).toString();
@@ -461,19 +461,19 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	{
 		Q_ASSERT(sidesImages.size()==nbSideTexs);
 	}
-	QMap<int, int> texToSide;
+	QMap<unsigned int, unsigned int> texToSide;
 	// Init sides parameters
-	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
+	nbSide = landscapeIni.value("landscape/nbside", 0).toUInt();
 	sides = new landscapeTexCoord[static_cast<size_t>(nbSide)];
-	int texnum;
-	for (int i=0;i<nbSide;++i)
+	unsigned int texnum;
+	for (unsigned int i=0;i<nbSide;++i)
 	{
 		const QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
 		//sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toInt();                 // 0
+		texnum = textureName.right(textureName.length() - 3).toUInt();                 // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
@@ -508,13 +508,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	//const int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	//if (slices_per_side<=0) // GZ: How can negative ever happen?
 	//	slices_per_side = 1;
-	const int slices_per_side = qMax(3*64/(nbDecorRepeat*nbSide), 1);
+	const unsigned int slices_per_side = qMax(3u*64u/(nbDecorRepeat*nbSide), 1u);
 
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
 	// in cylinder projection mode.
-	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
-	int level = 0;
+	unsigned int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
+	uint level = 0;
 	while ((slices_inside&1)==0 && slices_inside > 4)
 	{
 		++level;
@@ -564,11 +564,11 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	LOSSide precompSide;
 	precompSide.arr.primitiveType=StelVertexArray::Triangles;
-	for (int n=0;n<nbDecorRepeat;n++)
+	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
-		for (int i=0;i<nbSide;i++)
+		for (unsigned int i=0;i<nbSide;i++)
 		{
-			int ti;
+			unsigned int ti;
 			if (texToSide.contains(i))
 				ti = texToSide[i];
 			else
@@ -608,8 +608,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					z += d_z;
 					ty0 += d_ty;
 				}
-				unsigned short int offset = j*(stacks+1)*2;
-				for (unsigned short int k = 2;k<stacks*2+2;k+=2)
+				unsigned short int offset = j*(stacks+1u)*2u;
+				for (unsigned short int k = 2;k<stacks*2u+2u;k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;
@@ -790,7 +790,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	float x_in_panel=fmodf(az_panel, 1.0f);
 	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
-	Q_ASSERT(currentSide<nbSideTexs);
+	Q_ASSERT(currentSide<static_cast<int>(nbSideTexs));
 	int x= static_cast<int>(sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
 			* sidesImages[currentSide]->width(); // pixel X from left.
 

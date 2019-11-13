@@ -290,13 +290,13 @@ private:
 	QVector<double> groundVertexArr;
 	QVector<float> groundTexCoordArr;
 	StelTextureSP* sideTexs;
-	int nbSideTexs;
-	int nbSide;
+	unsigned int nbSideTexs;
+	unsigned int nbSide;
 	landscapeTexCoord* sides;
 	StelTextureSP fogTex;
 	StelTextureSP groundTex;
 	QVector<QImage*> sidesImages; // Required for opacity lookup
-	int nbDecorRepeat;
+	unsigned int nbDecorRepeat;
 	float fogAltAngle;
 	float fogAngleShift;
 	float decorAltAngle; // vertical extent of the side panels

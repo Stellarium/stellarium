@@ -357,21 +357,21 @@ void StelPainter::drawViewportShape(void)
 		glEnable(GL_BLEND);
 }
 
-void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
+void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
 	Q_ASSERT(level<32);
 	float rad[64];
-	int i,j;
+	uint i,j;
 	rad[level] = radius;
-	for (i=level-1;i>=0;--i)
+	for (i=level-1u;i!=-1u;--i)
 	{
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
-	int slices = innerFanSlices<<level;
+	uint slices = innerFanSlices<<level;
 	
 	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(static_cast<uint>(slices));
 	float* cos_sin_theta_p;
-	int slices_step = 2;
+	uint slices_step = 2;
 	float x,y,xa,ya;
 	radius*=2.f;
 	vertexArr.resize(0);
