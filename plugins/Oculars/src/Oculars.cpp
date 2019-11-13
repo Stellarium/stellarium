@@ -778,11 +778,6 @@ void Oculars::instrumentChanged()
 	}
 }
 
-//void Oculars::setFlagRequireSelection(bool state)
-//{
-//	flagRequireSelection = state;
-//}
-
 void Oculars::setFlagScaleImageCircle(bool state)
 {
 	if (state)
@@ -797,8 +792,10 @@ void Oculars::setFlagScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
-	if (!getFlagScalingFOVForCCD())
+	// CCD is not shown and FOV scaling is disabled, but telescope is changed - do not change FOV!
+	if (!(getFlagScalingFOVForCCD() && flagShowCCD))
 		return;
+
 	Lens * lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 	{
@@ -1078,7 +1075,6 @@ void Oculars::decrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
 	}
-
 	emit(selectedOcularChanged(selectedOcularIndex));
 }
 
@@ -1294,7 +1290,6 @@ void Oculars::incrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectTelescopeAtIndex(0);
 	}
-
 	emit(selectedOcularChanged(selectedOcularIndex));
 }
 
@@ -1842,11 +1837,9 @@ void Oculars::paintOcularMask(const StelCore *core)
 	{
 		inner = oculars[selectedOcularIndex]->apparentFOV() * inner / maxEyepieceAngle;
 	}
-
-	painter.setBlending(true);
-
 	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
 
+	painter.setBlending(true);
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
@@ -1931,7 +1924,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);		
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		if (core->getFlipHorz() && !core->getFlipVert())
 			cardinalsMirroredTexture->bind();
 		else
