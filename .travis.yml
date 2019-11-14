@@ -598,6 +598,7 @@ before_install:
       export PATH=c:\\qt5\\bin:$PATH;
       export QT_PLUGIN_PATH=c:\\qt5\\plugins;
       cd;
+      cd build\\Stellarium\\stellarium;
       dir;
     fi
   # ... + Coverage
