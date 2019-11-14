@@ -43,6 +43,15 @@ SET(MINIMAL_QT_VERSION "5.4.0")
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
+### Define minimal version for Windows
+# Use installer for checking minimum requirements
+# Stellarium/MSVC require Windows 7 (6.1) for work
+# Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+SET(ISS_MIN_WIN_VERSION "6.1")
+# Define required version for MSVC
+# Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
+SET(MIN_WIN_VERSION "0x0601")
+
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
@@ -182,6 +191,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          # Set minimal version of Windows
+          #SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
                SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
 
@@ -667,18 +678,6 @@ IF(WIN32)
 
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
-
-     IF(MSVC)
-          # Use installer for checking minimum requirements
-          # Stellarium/MSVC require Windows Vista (6.0) for work
-          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-          SET(MIN_VERSION "6.0")
-     ELSE()
-          # Use installer for checking minimum requirements
-          # Stellarium/MinGW require Windows XP (5.1) for work
-          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-          SET(MIN_VERSION "5.1")
-     ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
      IF(ENABLE_SPOUT)

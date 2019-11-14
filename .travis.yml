@@ -58,43 +58,6 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-          packages:
-            - clang-3.6
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
-
-    - os: linux
-      arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
-
-    - os: linux
-      arch: amd64
       dist: xenial
       addons:
         apt:
@@ -566,6 +529,13 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
+    - os: windows
+      env:
+        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
+        - MSVCNAME="Visual Studio 15 2017 Win64"
+        - TRANSLATE=false
+        - COVERAGE=false
+        
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
@@ -579,7 +549,21 @@ before_install:
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      export PATH="/usr/local/opt/qt/bin:/usr/local/lib:/usr/local/include:$PATH";
+      export PATH="/usr/local/opt/qt/bin:$PATH";
+      export CPATH="/usr/local/include:$CPATH";
+    fi
+  # Windows
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+      mkdir /c/qt5;
+      cd /c/qt5;
+      wget -q -O qt5.zip http://dss.stellarium.org/qt/qt512x64w.zip;
+      unzip -qq qt5.zip -d /c/qt5;
+      export PATH=/c/qt5/bin:$PATH;
+      export QT_PLUGIN_PATH=/c/qt5/plugins;
+      echo $PATH;
+      cd;
+      cd build/Stellarium/stellarium;
+      dir;
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
@@ -599,8 +583,14 @@ before_script:
   - cd build
 
 script:
-  - cmake -DENABLE_TESTING=1 ..
-  - make -j5
+  - if [[ "$TRAVIS_OS_NAME" == "linux" || "$TRAVIS_OS_NAME" == "osx" ]]; then
+      cmake -DENABLE_TESTING=1 .. ;
+      make -j5 ;      
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+      cmake -DENABLE_TESTING=1 -G "$MSVCNAME" .. ;      
+      cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;      
+    fi
   - ctest --output-on-failure
   - if [[ "$COVERAGE" == true ]]; then
       make coverage;
