@@ -58,43 +58,6 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-          packages:
-            - clang-3.6
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
-
-    - os: linux
-      arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
-
-    - os: linux
-      arch: amd64
       dist: xenial
       addons:
         apt:
