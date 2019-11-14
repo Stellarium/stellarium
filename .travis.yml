@@ -594,9 +594,9 @@ before_install:
       mkdir /c/qt5;
       cd /c/qt5;
       wget -q -O qt5.zip http://dss.stellarium.org/qt/qt512x64w.zip;
-      unzip -qq qt5.zip;
-      export PATH=/c:/qt5/bin:/c:/qt5/qt5/bin:$PATH;
-      export QT_PLUGIN_PATH=/c/qt5/plugins:/c/qt5/qt5/plugins;
+      unzip -qq qt5.zip -d /c/qt5;
+      export PATH=/c/qt5/bin:$PATH;
+      export QT_PLUGIN_PATH=/c/qt5/plugins;
       echo $PATH;
       cd;
       cd build/Stellarium/stellarium;
