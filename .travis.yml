@@ -498,14 +498,6 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    - os: windows
-      env:
-        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
-        - MSVCNAME="Visual Studio 15 2017 Win64"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
-
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
@@ -520,15 +512,6 @@ before_install:
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
-    fi
-  # Windows
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      mkdir c:\qt5;
-      cd c:\qt5;
-      wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.12/qt512x64w.zip;
-      unzip -qq qt5.zip -d qt5;
-      set PATH=c:\qt5\bin;$PATH
-      set QT_PLUGIN_PATH=c:\qt5\plugins
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
@@ -548,10 +531,8 @@ before_script:
   - cd build
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]]; then cmake -DENABLE_TESTING=1 .. ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-pkg -G "$MSVCNAME" .. ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]]; then make -j5 ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then msbuild stellarium\build\Stellarium.sln ; fi
+  - cmake -DENABLE_TESTING=1 ..
+  - make -j5
   - ctest --output-on-failure
   - if [[ "$COVERAGE" == true ]]; then
       make coverage;
