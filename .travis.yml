@@ -435,6 +435,12 @@ matrix:
 
     - os: osx
       osx_image: xcode10.1
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
@@ -442,6 +448,12 @@ matrix:
 
     - os: osx
       osx_image: xcode10.2
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
@@ -449,6 +461,12 @@ matrix:
 
     - os: osx
       osx_image: xcode11
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
@@ -456,6 +474,12 @@ matrix:
 
     - os: osx
       osx_image: xcode11.1
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
@@ -463,6 +487,12 @@ matrix:
 
     - os: osx
       osx_image: xcode11.2
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
@@ -481,9 +511,6 @@ before_install:
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update > /dev/null;
-      brew upgrade > /dev/null;
-      brew install qt;
       export PATH="/usr/local/opt/qt/bin:$PATH";
     fi
   # ... + Coverage
