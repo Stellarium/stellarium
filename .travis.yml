@@ -598,6 +598,7 @@ before_install:
       export PATH=c:\\qt5\\bin:$PATH;
       export QT_PLUGIN_PATH=c:\\qt5\\plugins;
       cd;
+      dir; # where is we?
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
