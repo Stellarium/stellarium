@@ -597,7 +597,8 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       set PATH=c:\\qt5\\bin:%PATH%;
       set QT_PLUGIN_PATH=c:\\qt5\\plugins;
-      print %PATH%;
+      echo %PATH%;
+      echo $PATH;
       cd;
       cd build\\Stellarium\\stellarium;
       dir;
