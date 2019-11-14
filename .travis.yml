@@ -594,9 +594,9 @@ before_install:
       mkdir /c/qt5;
       cd /c/qt5;
       wget -q -O qt5.zip http://dss.stellarium.org/qt/qt512x64w.zip;
-      unzip -q qt5.zip;
-      export PATH=/c:/qt5/bin:$PATH;
-      export QT_PLUGIN_PATH=/c/qt5/plugins;      
+      unzip -qq qt5.zip;
+      export PATH=/c:/qt5/bin:/c:/qt5/qt5/bin:$PATH;
+      export QT_PLUGIN_PATH=/c/qt5/plugins:/c/qt5/qt5/plugins;
       echo $PATH;
       cd;
       cd build/Stellarium/stellarium;
@@ -626,7 +626,8 @@ script:
     fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
       cmake -DENABLE_TESTING=1 -G "$MSVCNAME" .. ;
-      cmake --build . --config RelWithDebInfo --parallel ;
+      print /c/Users/travis/build/Stellarium/stellarium/build/CMakeFiles/CMakeOutput.log
+      cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;
     fi
   - ctest --output-on-failure
   - if [[ "$COVERAGE" == true ]]; then
