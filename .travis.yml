@@ -37,469 +37,469 @@ matrix:
          - COVERAGE=false
          - REPQT=false
 
-    - os: linux
-      arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - lcov
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-        - TRANSLATE=false
-        - COVERAGE=true
-        - REPQT=false
+    #- os: linux
+      #arch: amd64
+      #dist: trusty
+      #sudo: required
+      #addons:
+        #apt:
+          #sources:
+            #- ubuntu-toolchain-r-test
+          #packages:
+            #- g++-7
+            #- lcov
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        #- TRANSLATE=false
+        #- COVERAGE=true
+        #- REPQT=false
 
-    - os: linux
-      arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-          packages:
-            - clang-3.6
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
+    #- os: linux
+      #arch: amd64
+      #dist: trusty
+      #sudo: required
+      #addons:
+        #apt:
+          #sources:
+            #- ubuntu-toolchain-r-test
+            #- llvm-toolchain-precise-3.6
+          #packages:
+            #- clang-3.6
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=false
 
-    - os: linux
-      arch: amd64
-      dist: trusty
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=false
+    #- os: linux
+      #arch: amd64
+      #dist: trusty
+      #sudo: required
+      #addons:
+        #apt:
+          #sources:
+            #- llvm-toolchain-trusty-5.0
+          #packages:
+            #- clang-5.0
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=false
 
-    - os: linux
-      arch: amd64
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: amd64
+      #dist: xenial
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: arm64
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: arm64
+      #dist: xenial
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: amd64
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: amd64
+      #dist: xenial
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: arm64
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: arm64
+      #dist: xenial
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: amd64
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: amd64
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: arm64
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: arm64
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: amd64
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: amd64
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: arm64
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: arm64
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: ppc64le
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: ppc64le
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: ppc64le
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: ppc64le
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: s390x
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: s390x
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=gcc && CXX=g++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
-    - os: linux
-      arch: s390x
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-        - REPQT=true
+    #- os: linux
+      #arch: s390x
+      #dist: bionic
+      #addons:
+        #apt:
+          #packages:
+            #- qt5-default
+            #- qt5-qmake
+            #- qtbase5-dev
+            #- qtbase5-dev-tools
+            #- qttools5-dev
+            #- qttools5-dev-tools
+            #- qtscript5-dev
+            #- libqt5svg5-dev
+            #- libqt5opengl5-dev
+            #- qtmultimedia5-dev
+            #- libqt5multimedia5-plugins
+            #- libqt5serialport5
+            #- libqt5serialport5-dev
+            #- qtpositioning5-dev
+            #- libqt5positioning5
+            #- libqt5positioning5-plugins
+            #- libgps-dev
+            #- zlib1g-dev
+            #- libgl1-mesa-dev
+            #- xvfb
+          #update:
+            #- true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+        #- REPQT=true
 
     - os: osx
       osx_image: xcode10.1
@@ -514,58 +514,65 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    - os: osx
-      osx_image: xcode10.2
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
+    #- os: osx
+      #osx_image: xcode10.2
+      #addons:
+        #homebrew:
+          #packages:
+          #- qt
+          #- gpsd
+          #update: true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+
+    #- os: osx
+      #osx_image: xcode11
+      #addons:
+        #homebrew:
+          #packages:
+          #- qt
+          #- gpsd
+          #update: true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+
+    #- os: osx
+      #osx_image: xcode11.1
+      #addons:
+        #homebrew:
+          #packages:
+          #- qt
+          #- gpsd
+          #update: true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+
+    #- os: osx
+      #osx_image: xcode11.2
+      #addons:
+        #homebrew:
+          #packages:
+          #- qt
+          #- gpsd
+          #update: true
+      #env:
+        #- MATRIX_EVAL="CC=clang && CXX=clang++"
+        #- TRANSLATE=false
+        #- COVERAGE=false
+
+    - os: windows
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
+        - MSVCNAME="Visual Studio 15 2017 Win64"
         - TRANSLATE=false
         - COVERAGE=false
-
-    - os: osx
-      osx_image: xcode11
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: osx
-      osx_image: xcode11.1
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: osx
-      osx_image: xcode11.2
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
+        
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
@@ -581,6 +588,16 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
       export CPATH="/usr/local/include:$CPATH";
+    fi
+  # Windows
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+      mkdir c:\\qt5;
+      cd c:\\qt5;
+      wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.12/qt512x64w.zip;
+      unzip -qq qt5.zip -d qt5;
+      export PATH=c:\\qt5\\bin:$PATH;
+      export QT_PLUGIN_PATH=c:\\qt5\\plugins;
+      cd;
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
