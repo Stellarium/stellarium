@@ -591,15 +591,15 @@ before_install:
     fi
   # Windows
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      mkdir c:\\qt5;
-      cd c:\\qt5;
+      mkdir /c/qt5;
+      cd /c/qt5;
       wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.12/qt512x64w.zip;
       unzip -qq qt5.zip -d qt5;
-      set PATH=c:\\qt5\\bin:$PATH;
-      set QT_PLUGIN_PATH=c:\\qt5\\plugins;      
+      export PATH=/c:/qt5/bin:$PATH;
+      export QT_PLUGIN_PATH=/c/qt5/plugins;      
       echo $PATH;
       cd;
-      cd build\\Stellarium\\stellarium;
+      cd build/Stellarium/stellarium;
       dir;
     fi
   # ... + Coverage
