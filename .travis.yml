@@ -579,7 +579,7 @@ before_install:
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      export PATH="/usr/local/opt/qt/bin:$PATH";
+      export PATH="/usr/local/opt/qt/bin:/usr/local/lib:/usr/local/include:$PATH";
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
