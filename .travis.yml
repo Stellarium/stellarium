@@ -365,6 +365,74 @@ matrix:
         - COVERAGE=false
         - REPQT=true
 
+    - os: linux
+      arch: ppc64le
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - qt5-default
+            - qt5-qmake
+            - qtbase5-dev
+            - qtbase5-dev-tools
+            - qttools5-dev
+            - qttools5-dev-tools
+            - qtscript5-dev
+            - libqt5svg5-dev
+            - libqt5opengl5-dev
+            - qtmultimedia5-dev
+            - libqt5multimedia5-plugins
+            - libqt5serialport5
+            - libqt5serialport5-dev
+            - qtpositioning5-dev
+            - libqt5positioning5
+            - libqt5positioning5-plugins
+            - libgps-dev
+            - zlib1g-dev
+            - libgl1-mesa-dev
+            - xvfb
+          update:
+            - true
+      env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - TRANSLATE=false
+        - COVERAGE=false
+        - REPQT=true
+
+    - os: linux
+      arch: ppc64le
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - qt5-default
+            - qt5-qmake
+            - qtbase5-dev
+            - qtbase5-dev-tools
+            - qttools5-dev
+            - qttools5-dev-tools
+            - qtscript5-dev
+            - libqt5svg5-dev
+            - libqt5opengl5-dev
+            - qtmultimedia5-dev
+            - libqt5multimedia5-plugins
+            - libqt5serialport5
+            - libqt5serialport5-dev
+            - qtpositioning5-dev
+            - libqt5positioning5
+            - libqt5positioning5-plugins
+            - libgps-dev
+            - zlib1g-dev
+            - libgl1-mesa-dev
+            - xvfb
+          update:
+            - true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+        - REPQT=true
+
     - os: osx
       osx_image: xcode10.1
       env:
