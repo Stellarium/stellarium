@@ -192,7 +192,7 @@ IF(WIN32)
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
           # Set minimal version of Windows
-          #SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
                SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
 
