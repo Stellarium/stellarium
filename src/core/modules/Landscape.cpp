@@ -372,7 +372,7 @@ LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	, decorAngleShift(0.)
 	, groundAngleShift(0.)
 	, groundAngleRotateZ(0.)
-	, drawGroundFirst(0)
+	, drawGroundFirst(false)
 	, tanMode(false)
 	, calibrated(false)
 	, memorySize(sizeof(LandscapeOldStyle)) // start with just the known entries.
@@ -412,7 +412,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		return;
 	}
 
-	nbDecorRepeat      = landscapeIni.value("landscape/nb_decor_repeat", 1).toUInt();
+	nbDecorRepeat      = static_cast<unsigned short>(landscapeIni.value("landscape/nb_decor_repeat", 1).toUInt());
 	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
 	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
 	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
@@ -420,12 +420,12 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat()  * M_PI_180f;
 	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat()   * M_PI_180f;
 	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toDouble() * M_PI_180;
-	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
+	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", false).toBool();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
 	// Load sides textures
-	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toUInt();
+	nbSideTexs = static_cast<unsigned short>(landscapeIni.value("landscape/nbsidetex", 0).toUInt());
 	sideTexs = new StelTextureSP[static_cast<size_t>(2*nbSideTexs)]; // 0.14: allow upper half for light textures!
 	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
@@ -463,7 +463,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 	QMap<unsigned int, unsigned int> texToSide;
 	// Init sides parameters
-	nbSide = landscapeIni.value("landscape/nbside", 0).toUInt();
+	nbSide = static_cast<unsigned short>(landscapeIni.value("landscape/nbside", 0).toUInt());
 	sides = new landscapeTexCoord[static_cast<size_t>(nbSide)];
 	unsigned int texnum;
 	for (unsigned int i=0;i<nbSide;++i)
@@ -508,12 +508,12 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	//const int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	//if (slices_per_side<=0) // GZ: How can negative ever happen?
 	//	slices_per_side = 1;
-	const unsigned int slices_per_side = qMax(3u*64u/(nbDecorRepeat*nbSide), 1u);
+	const unsigned short int slices_per_side = static_cast<const unsigned short>(qMax(3u*64u/(nbDecorRepeat*nbSide), 1u));
 
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
 	// in cylinder projection mode.
-	unsigned int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
+	unsigned short int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
 	uint level = 0;
 	while ((slices_inside&1)==0 && slices_inside > 4)
 	{

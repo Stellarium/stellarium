@@ -542,9 +542,11 @@ Where:
 \item[\var{fog\_angle\_shift}] (degrees) vertical angular offset of
   the fog texture - at what height is it drawn. Accurate vertical
   placement requires \var{calibrated=true}.
-\item[\var{draw\_ground\_first}] if 1 the ground is drawn in front of
-  the scenery, i.e. the side textures will overlap over the ground
-  texture.
+\item[\var{draw\_ground\_first}] if \var{true} or
+  \var{1}\footnote{Boolean values \var{true|false} preferred since
+    V0.19.3, but \var{0|1} are still accepted.} the ground is drawn in
+  front of the scenery, i.e. the side textures will overlap over the
+  ground texture.
 \item[\var{calibrated}] (optional).\newFeature{v0.10.6} Only if true,
   \var{decor\_alt\_angle} etc. really work as documented above. The
   (buggy) old code was left to work with the landscapes already

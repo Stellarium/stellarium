@@ -290,20 +290,20 @@ private:
 	QVector<double> groundVertexArr;
 	QVector<float> groundTexCoordArr;
 	StelTextureSP* sideTexs;
-	unsigned int nbSideTexs;
-	unsigned int nbSide;
+	unsigned short int nbSideTexs;
+	unsigned short int nbSide;
 	landscapeTexCoord* sides;
 	StelTextureSP fogTex;
 	StelTextureSP groundTex;
 	QVector<QImage*> sidesImages; // Required for opacity lookup
-	unsigned int nbDecorRepeat;
+	unsigned short int nbDecorRepeat;
 	float fogAltAngle;
 	float fogAngleShift;
 	float decorAltAngle; // vertical extent of the side panels
 	float decorAngleShift;
 	float groundAngleShift; //! [radians]: altitude of the bottom plane. Usually negative and equal to decorAngleShift
 	double groundAngleRotateZ; //! [radians]: rotation to bring top of texture away from due east.
-	int drawGroundFirst;
+	bool drawGroundFirst;
 	bool tanMode;		// Whether the angles should be converted using tan instead of sin, i.e., for a cylindrical pano
 	bool calibrated;	// if true, the documented altitudes are indeed correct (the original code is buggy!)
 	struct LOSSide
