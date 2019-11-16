@@ -87,12 +87,14 @@ void ZodiacalLight::init()
 
 	StelCore* core=StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
+
+	propMgr=StelApp::getInstance().getStelPropertyManager();
 }
 
 void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
 {
 	// This just forces update() to re-compute longitude.
-	Q_UNUSED(loc);
+	Q_UNUSED(loc)
 	lastJD=-1e12;
 }
 
@@ -170,7 +172,7 @@ bool ZodiacalLight::getFlagShow() const
 
 void ZodiacalLight::draw(StelCore* core)
 {
-	if (!fader->getInterstate()  || (getIntensity()<0.01) )
+	if ((fader->getInterstate() == 0.f) || (getIntensity()<0.01) || !(propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool()))
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.

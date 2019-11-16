@@ -26,6 +26,7 @@
 #include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
+#include "StelPropertyMgr.hpp"
 
 //! @class ZodiacalLight 
 //! Manages the displaying of the Zodiacal Light. The brightness values follow the paper:
@@ -123,6 +124,7 @@ signals:
 	void colorChanged(Vec3f color);
 	
 private:
+	StelPropertyMgr* propMgr;
 	StelTextureSP tex;
 	Vec3f color; // global color
 	double intensity;
