@@ -549,10 +549,10 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
-	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
+	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 	theta = std::atan2(dy - 1, dx);
-	theta_o = M_PIf + std::atan2(dx, dy - 1);
+	theta_o = M_PIf + std::atan2(dx, dy - 1);	
 	psi = std::atan2(static_cast<float>(getFontMetrics().boundingRect(ws).width()/ws.length()),d + 1) * M_180_PIf;
 	if (psi>5)
 		psi = 5;

@@ -62,6 +62,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
 	  namesDisplayed(0),
+	  checkLoadingData(false),
 	  constellationLineThickness(1),
 	  constellationBoundariesThickness(1)
 {
@@ -99,6 +100,8 @@ void ConstellationMgr::init()
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
 	setConstellationLineThickness(conf->value("viewing/constellation_boundaries_thickness", 1).toInt());
+	// The setting for developers
+	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -227,6 +230,18 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	lastLoadedSkyCulture = skyCultureDir;
+
+	if (getFlagCheckLoadingData())
+	{
+		int i = 1;
+		for (auto* constellation : constellations)
+		{
+			qWarning() << "[Constellation] #" << i << " abbr:" << constellation->abbreviation << " name:" << constellation->getEnglishName() << " segments:" << constellation->numberOfSegments;
+			i++;
+		}
+	}
+
+
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
@@ -824,7 +839,7 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 	if (rulesFile.isEmpty())
 		flag = false;
 
-	// clear previous names
+	// clear previous rules
 	for (auto* constellation : constellations)
 	{
 		constellation->beginSeason = 1;
