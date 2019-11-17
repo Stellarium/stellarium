@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-09 17:17+0700\n"
+"POT-Creation-Date: 2019-11-12 21:43+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Sirish Kumar Tummala <sirishtummala@gmail.com>, 2019\n"
 "Language-Team: Telugu (https://www.transifex.com/stellarium/teams/80998/te/)\n"
@@ -57,7 +57,7 @@ msgstr "నక్షత్ర సమూహం"
 #: src/core/modules/AsterismMgr.cpp:96
 #: src/core/modules/ConstellationMgr.cpp:141 src/core/modules/StarMgr.cpp:459
 #: src/core/modules/GridLinesMgr.cpp:1308
-#: src/core/modules/LandscapeMgr.cpp:480
+#: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:76 src/core/modules/NebulaMgr.cpp:458
 #: src/core/modules/NebulaMgr.cpp:459 src/core/modules/SolarSystem.cpp:264
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
@@ -413,50 +413,50 @@ msgstr "సౌరవ్యతిరేక బిందువు"
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:481
+#: src/core/modules/LandscapeMgr.cpp:480
 msgid "Atmosphere"
 msgstr "వాతావరణం"
 
-#: src/core/modules/LandscapeMgr.cpp:482
+#: src/core/modules/LandscapeMgr.cpp:481
 msgid "Fog"
 msgstr "పొగమంచు"
 
-#: src/core/modules/LandscapeMgr.cpp:483 src/ui_viewDialog.h:2931
+#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:2931
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Cardinal points"
 msgstr "నలుదిక్కుల బిందువులు"
 
-#: src/core/modules/LandscapeMgr.cpp:484
+#: src/core/modules/LandscapeMgr.cpp:483
 msgid "Ground"
 msgstr "నేల"
 
-#: src/core/modules/LandscapeMgr.cpp:485
+#: src/core/modules/LandscapeMgr.cpp:484
 msgid "Landscape illumination"
 msgstr "ల్యాండ్‌స్కేపు ప్రకాశం"
 
-#: src/core/modules/LandscapeMgr.cpp:486
+#: src/core/modules/LandscapeMgr.cpp:485
 msgid "Landscape labels"
 msgstr "ల్యాండ్‌స్కేపు చీటీలు"
 
-#: src/core/modules/LandscapeMgr.cpp:487
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Light pollution data from locations database"
 msgstr "స్థలాల డేటాబేసు నుండి కాంతి కాలుష్యం డేటా"
 
-#: src/core/modules/LandscapeMgr.cpp:489
+#: src/core/modules/LandscapeMgr.cpp:488
 msgid "Increase light pollution"
 msgstr "కాంతి కాలుష్యాన్ని పెంచు"
 
-#: src/core/modules/LandscapeMgr.cpp:490
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Reduce light pollution"
 msgstr "కాంతి కాలుష్యాన్ని తగ్గించు"
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:490
 msgid "Cyclic change in light pollution"
 msgstr "కాంతి కాలుష్యంలో చక్రీయ మార్పు"
 
-#: src/core/modules/LandscapeMgr.cpp:895 src/scripting/StelScriptMgr.cpp:260
+#: src/core/modules/LandscapeMgr.cpp:894 src/scripting/StelScriptMgr.cpp:260
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
@@ -474,36 +474,36 @@ msgid "Author"
 msgstr "కర్త"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:901 src/gui/StelGuiItems.cpp:761
+#: src/core/modules/LandscapeMgr.cpp:900 src/gui/StelGuiItems.cpp:761
 msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:904 src/ui_locationDialogGui.h:483
+#: src/core/modules/LandscapeMgr.cpp:903 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
 msgstr "స్థానం"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:925
+#: src/core/modules/LandscapeMgr.cpp:924
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:935
+#: src/core/modules/LandscapeMgr.cpp:934
 msgid "extinction coefficient"
 msgstr "కాంతి శోషణ గుణకం"
 
-#: src/core/modules/LandscapeMgr.cpp:938
+#: src/core/modules/LandscapeMgr.cpp:937
 msgid "Atmospheric conditions"
 msgstr "వాతావరణ పరిస్థితులు"
 
-#: src/core/modules/LandscapeMgr.cpp:942
+#: src/core/modules/LandscapeMgr.cpp:941
 msgid "Light pollution"
 msgstr "కాంతి కాలుష్యం"
 
-#: src/core/modules/LandscapeMgr.cpp:942
+#: src/core/modules/LandscapeMgr.cpp:941
 msgid "by Bortle scale"
 msgstr "బోర్టిల్ స్కేలు ప్రకారం"
 
@@ -3577,7 +3577,7 @@ msgstr "సంప్రదించండి"
 
 #: src/gui/ConfigurationDialog.cpp:1065 src/scripting/StelScriptMgr.cpp:270
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:489
+#: plugins/Oculars/src/gui/OcularDialog.cpp:491
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3599,7 +3599,7 @@ msgstr "వెర్షన్"
 
 #: src/gui/ConfigurationDialog.cpp:1066 src/scripting/StelScriptMgr.cpp:265
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:490
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -3868,7 +3868,7 @@ msgid "24-hour format"
 msgstr "24-hour format"
 
 #: src/gui/ConfigurationDialog.cpp:1706 src/ui_configurationDialog.h:1565
-#: plugins/Oculars/src/Oculars.cpp:2417
+#: plugins/Oculars/src/Oculars.cpp:2432
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr ""
@@ -4149,7 +4149,7 @@ msgstr "OSX డెవలపరు: %1"
 
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -7566,10 +7566,10 @@ msgstr "&Copy"
 msgid "&Paste"
 msgstr "&Paste"
 
-#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1311
-#: plugins/Oculars/src/ui_ocularDialog.h:1320
-#: plugins/Oculars/src/ui_ocularDialog.h:1326
-#: plugins/Oculars/src/ui_ocularDialog.h:1347
+#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1331
+#: plugins/Oculars/src/ui_ocularDialog.h:1340
+#: plugins/Oculars/src/ui_ocularDialog.h:1346
+#: plugins/Oculars/src/ui_ocularDialog.h:1367
 msgid "Delete"
 msgstr "తొలగించు"
 
@@ -12020,7 +12020,7 @@ msgstr ""
 "హవాయిలో ఉంటే ఎంత బాగుండో కదా అని అనుకున్నాం."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:557
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12040,7 +12040,7 @@ msgid "Links"
 msgstr "లింకులు"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12065,7 +12065,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:561
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12086,7 +12086,7 @@ msgstr "మీకు సందేహాలేమైనా ఉంటే, {ఇక�
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12107,7 +12107,7 @@ msgstr "బగ్ రిపోర్టులు, కొత్త అంశా�
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:563
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12191,7 +12191,7 @@ msgid "Restore default settings"
 msgstr "తిరిగి డిఫాల్టు సెట్టింగులను స్థాపించు"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1375
 #: plugins/Satellites/src/ui_satellitesDialog.h:849
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12225,9 +12225,9 @@ msgstr "దిగంతంపై దిక్సూచి బేరింగు 
 msgid "Compass marks"
 msgstr "దిక్సూచి గుర్తులు"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1537
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1524
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1264
+#: plugins/Oculars/src/ui_ocularDialog.h:1276
 msgid "Oculars"
 msgstr "ఆక్యులర్లు"
 
@@ -12241,106 +12241,106 @@ msgstr ""
 "(పరిమాణం, దృశ్యపరిషిని మాత్రమే సిమ్యులేటు చేస్తుంది). సెన్సరు ఫ్రేమును, "
 "టెల్‌రాడ్ దృశ్యాన్నీ కూడా చూపించగలదు."
 
-#: plugins/Oculars/src/Oculars.cpp:1035
+#: plugins/Oculars/src/Oculars.cpp:1022
 msgid "Please select an object before switching to ocular view."
 msgstr "ఆక్యులర్ వ్యూకు వెళ్ళే ముందు ఒక వస్తువును ఎంచుకోండి."
 
-#: plugins/Oculars/src/Oculars.cpp:1131
+#: plugins/Oculars/src/Oculars.cpp:1118
 msgid "&Previous ocular"
 msgstr "&Previous ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1132
+#: plugins/Oculars/src/Oculars.cpp:1119
 msgid "&Next ocular"
 msgstr "&Next ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1133
+#: plugins/Oculars/src/Oculars.cpp:1120
 msgid "Select &ocular"
 msgstr "Select &ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1176
+#: plugins/Oculars/src/Oculars.cpp:1163
 msgid "Toggle &crosshair"
 msgstr "Toggle &crosshair"
 
-#: plugins/Oculars/src/Oculars.cpp:1186
+#: plugins/Oculars/src/Oculars.cpp:1173
 msgid "Configure &Oculars"
 msgstr "Configure &Oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1195
+#: plugins/Oculars/src/Oculars.cpp:1182
 msgid "Toggle &CCD"
 msgstr "Toggle &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/Oculars.cpp:1190
 msgid "Toggle &Telrad"
 msgstr "Toggle &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1212
+#: plugins/Oculars/src/Oculars.cpp:1199
 msgid "&Previous CCD"
 msgstr "&Previous CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1213
+#: plugins/Oculars/src/Oculars.cpp:1200
 msgid "&Next CCD"
 msgstr "&Next CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1214
+#: plugins/Oculars/src/Oculars.cpp:1201
 msgid "&Select CCD"
 msgstr "&Select CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1236
+#: plugins/Oculars/src/Oculars.cpp:1223
 msgid "&Rotate CCD"
 msgstr "&Rotate CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1258
+#: plugins/Oculars/src/Oculars.cpp:1245
 msgid "&Reset rotation"
 msgstr "&Reset rotation"
 
-#: plugins/Oculars/src/Oculars.cpp:1538
-#: plugins/Oculars/src/ui_ocularDialog.h:1283
+#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1295
 msgid "Ocular view"
 msgstr "అక్యులర్ వ్యూ"
 
-#: plugins/Oculars/src/Oculars.cpp:1539
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Oculars popup menu"
 msgstr "ఆక్యులర్స్ పాపప్ మెనూ"
 
-#: plugins/Oculars/src/Oculars.cpp:1540
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Show crosshairs"
 msgstr "క్రాస్‌హెయిర్స్ ను చూపించు"
 
-#: plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Image sensor frame"
 msgstr "ఇమేజ్ సెన్సర్ ఫ్రేము"
 
-#: plugins/Oculars/src/Oculars.cpp:1542
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Telrad sight"
 msgstr "టెల్‌రాడ్ దృశ్యం"
 
-#: plugins/Oculars/src/Oculars.cpp:1543
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Oculars plugin configuration"
 msgstr "ఆక్యులర్స్ ప్లగిన్ కాన్ఫిగరేషన్"
 
-#: plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/Oculars.cpp:1532
 msgid "Select next telescope"
 msgstr "తరువతి టెలిస్కోపును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1547
+#: plugins/Oculars/src/Oculars.cpp:1534
 msgid "Select previous telescope"
 msgstr "గత టెలిస్కోపును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1549
+#: plugins/Oculars/src/Oculars.cpp:1536
 msgid "Select next eyepiece"
 msgstr "తరువతి ఐపీసును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1551
+#: plugins/Oculars/src/Oculars.cpp:1538
 msgid "Select previous eyepiece"
 msgstr "గత ఐపీసును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1761
+#: plugins/Oculars/src/Oculars.cpp:1748
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "క్రాస్ యొక్క RA/Dec (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1772
+#: plugins/Oculars/src/Oculars.cpp:1759
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
@@ -12369,121 +12369,121 @@ msgstr ""
 "&Previous telescope\n"
 "&Next telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:1790
+#: plugins/Oculars/src/Oculars.cpp:1777
 msgctxt "pixel"
 msgid "px"
 msgstr "=\"`\"&A2478&\"`\""
 
-#: plugins/Oculars/src/Oculars.cpp:1968
+#: plugins/Oculars/src/Oculars.cpp:1983
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "ఆక్యులర్"
 
-#: plugins/Oculars/src/Oculars.cpp:1970
+#: plugins/Oculars/src/Oculars.cpp:1985
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "బైనాక్యులర్"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1990
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Ocular FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2012
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Ocular aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2023
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "లెన్స్ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2012
+#: plugins/Oculars/src/Oculars.cpp:2027
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "లెన్స్ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2017
+#: plugins/Oculars/src/Oculars.cpp:2032
 msgid "Lens: none"
 msgstr "లెన్స్: ఏదీలేదు"
 
-#: plugins/Oculars/src/Oculars.cpp:2032 plugins/Oculars/src/Oculars.cpp:2092
+#: plugins/Oculars/src/Oculars.cpp:2047 plugins/Oculars/src/Oculars.cpp:2107
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "టెలిస్కోపు #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2041
+#: plugins/Oculars/src/Oculars.cpp:2056
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr "సంవర్ధనం: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2048
+#: plugins/Oculars/src/Oculars.cpp:2063
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Exit pupil: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2055
+#: plugins/Oculars/src/Oculars.cpp:2070
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2076
+#: plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "కొలతలు: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2080
+#: plugins/Oculars/src/Oculars.cpp:2095
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "సెన్సరు #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2084
+#: plugins/Oculars/src/Oculars.cpp:2099
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "సెన్సరు #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2097
+#: plugins/Oculars/src/Oculars.cpp:2112
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "టెలిస్కోపు #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2428
 msgid "&Lens"
 msgstr "&Lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2429
 msgid "&Previous lens"
 msgstr "&Previous lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2415
+#: plugins/Oculars/src/Oculars.cpp:2430
 msgid "&Next lens"
 msgstr "&Next lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2460
 msgid "&Telescope"
 msgstr "&Telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2461
 msgid "&Previous telescope"
 msgstr "&Previous telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2447
+#: plugins/Oculars/src/Oculars.cpp:2462
 msgid "&Next telescope"
 msgstr "&Next telescope"
 
@@ -12683,53 +12683,53 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "దృశ్య రిసొల్యూషన్ కంటి గుణాలు, సంవర్ధనంపై ఆధారపడి ఉంటుంది"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:467
+#: plugins/Oculars/src/gui/OcularDialog.cpp:469
 msgid "tFOV:"
 msgstr "tFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:469
+#: plugins/Oculars/src/gui/OcularDialog.cpp:471
 msgid "Magnification factor:"
 msgstr "సంవర్ధన గుణకం:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:470
-#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
+#: plugins/Oculars/src/ui_ocularDialog.h:1370
 msgid "Diameter:"
 msgstr "వ్యాసం:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:474
-#: plugins/Oculars/src/ui_ocularDialog.h:1313
+#: plugins/Oculars/src/gui/OcularDialog.cpp:476
+#: plugins/Oculars/src/ui_ocularDialog.h:1333
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:475
-#: plugins/Oculars/src/ui_ocularDialog.h:1314
-#: plugins/Oculars/src/ui_ocularDialog.h:1349
+#: plugins/Oculars/src/gui/OcularDialog.cpp:477
+#: plugins/Oculars/src/ui_ocularDialog.h:1334
+#: plugins/Oculars/src/ui_ocularDialog.h:1369
 msgid "Focal length:"
 msgstr "నాభ్యంతరం:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:476
-#: plugins/Oculars/src/ui_ocularDialog.h:1315
+#: plugins/Oculars/src/gui/OcularDialog.cpp:478
+#: plugins/Oculars/src/ui_ocularDialog.h:1335
 msgid "Field stop:"
 msgstr "ఫీల్డ్ స్టాప్:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:488
+#: plugins/Oculars/src/gui/OcularDialog.cpp:490
 msgid "Oculars Plug-in"
 msgstr "ఆక్యులర్స్ ప్లగిన్"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
 msgid "Barlow lens feature"
 msgstr "బార్లో లెన్సు విశేషం"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Sensor crop overlay feature"
 msgstr "సెన్సర్ క్రాప్ ఓవర్లే విశేషం"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/gui/OcularDialog.cpp:503
 msgid "Overview"
 msgstr "అవలోకనం"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -12741,11 +12741,11 @@ msgstr ""
 " తీసెయ్యటం చెయ్యవచ్చు. దీన్ని మొదటిసారి వాడుతున్నపుడు మీకు మార్గదర్శకంగా "
 "ఉండేందుకు కొన్ని నమూనాలను చూపిస్తుంది."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "You can choose to scale the image you see on the screen."
 msgstr "తెరపై కనిపించే బొమ్మను మీరు కావాలంటే స్కేలు చేసుకోవచ్చు."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -12753,7 +12753,7 @@ msgstr ""
 "ఒక ఐపీసు/టెలిస్కోపు కాంబినేషను మరొక దానితో పోలిస్తే ఎలా ఉంటుందో చూపించేండం "
 "దీని ఉద్దేశం"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -12761,7 +12761,7 @@ msgstr ""
 "ఒకే ఐపీసు వేరువేరు నాభ్యంతరాలున్న రెండు వేరువేరు టెలిస్కోపుల్లో రెండు "
 "విభిన్న ఎక్జిట్ ప్యూపిల్స్ ను ఏర్పరుస్తుంది. దీంతో దృశ్యం కొంత మారుతుంది."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -12769,14 +12769,14 @@ msgstr ""
 "దీంతో ఉన్న ఇబ్బందేమిటంటే, బొమ్మను స్కేలు చెయ్యడం వలన తెరపై చాలా భాగం వృధా "
 "కావచ్చు."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:510
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
 msgstr ""
 "అంచేత, మీకు అది అవసరమనిపిస్తే తప్ప, దీన్నిలా వదిలెయ్యమని చెబుతా న్నేను."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
@@ -12786,7 +12786,7 @@ msgstr ""
 "అనుసంధిస్తే బాగుంటుందని అనుకున్నాను. కానీ అలా చెయ్యలేకపోయాను. అంచేత అది "
 "ప్రస్తుతం తెర పై భాగానికి అనుసంధానమై ఉంది."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:510
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -12799,63 +12799,63 @@ msgstr ""
 "గీస్తుంది. తద్వారా, టెల్‌రాడ్ ఫైండరు నుండి ఉత్త కంటితో ఏం చూడగలరో మీకు "
 "తెలుస్తుంది. "
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "ఏమైనా సమస్య లెదురైతే నాకు చెప్పండి. ఇక కానివ్వండి, సరదా చేసుకోండి!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "Hot Keys"
 msgstr "హాట్ కీస్"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 "ఈ ప్లగిన్ కీ బంధనాలను కీబోర్డ్ షార్ట్‌కట్ ఎడిటరు (F7) ద్వారా మార్చవచ్చు."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:529
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "[no key defined]"
 msgstr "[కీ దేన్నీ చూపించలేదు]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "Switches on/off the ocular overlay."
 msgstr "ఆక్యులర్ ఓవర్లేను ఆన్/ఆఫ్ చేస్తుంది."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
+#: plugins/Oculars/src/gui/OcularDialog.cpp:544
 msgid "Opens the pop-up navigation menu."
 msgstr "పాపప్ నేవిగేషన్ మెనూను తెరుస్తుంది."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:546
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "ఐపీసు రెటికిల్ ప్యాటర్నును సయదిశలో తిప్పు."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "ఐపీసు రెటికిల్ ప్యాటర్నును అపసవ్యదిశలో తిప్పు."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1266
+#: plugins/Oculars/src/ui_ocularDialog.h:1278
 msgid "Interface"
 msgstr "ఇంటర్‌ఫేస్"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1267
+#: plugins/Oculars/src/ui_ocularDialog.h:1279
 msgid "On-screen control panel"
 msgstr "తెరపై కంట్రోల్ ప్యానెల్"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1268
+#: plugins/Oculars/src/ui_ocularDialog.h:1280
 msgid "Font size"
 msgstr "ఫాంట్ సైజు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1272
+#: plugins/Oculars/src/ui_ocularDialog.h:1284
 msgid "Arrow button scale (requires restart)"
 msgstr "యారో బట్న్ స్కేలు (రీస్టార్టు చెయ్యాలి)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1273
+#: plugins/Oculars/src/ui_ocularDialog.h:1285
 msgid "Show resolution criteria"
 msgstr "రిసొల్యూషన్ క్రైటీరియాను చూపించు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1275
+#: plugins/Oculars/src/ui_ocularDialog.h:1287
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -12863,11 +12863,11 @@ msgstr ""
 "స్టెల్లేరియమ్ ను మొదలు పెట్టినపుడు FOV ఎంత ఉంటుందో అంతే ఉండాలనుకుంటే దీన్ని "
 "మార్కు చెయ్యండి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1277
+#: plugins/Oculars/src/ui_ocularDialog.h:1289
 msgid "Restore FOV to initial values"
 msgstr "FOV ని తొలి విలువలకు తీసుకెళ్ళు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1279
+#: plugins/Oculars/src/ui_ocularDialog.h:1291
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -12875,52 +12875,68 @@ msgstr ""
 "స్టెల్లేరియమ్ ను మొదలు పెట్టినపుడు దిశ ఎంత ఉంటుందో అంతే ఉండాలనుకుంటే దీన్ని "
 "మార్కు చెయ్యండి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1281
+#: plugins/Oculars/src/ui_ocularDialog.h:1293
 msgid "Restore direction to initial values"
 msgstr "దిశను తొలి విలువలకు తీసుకెళ్ళు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1282
+#: plugins/Oculars/src/ui_ocularDialog.h:1294
 msgid "Show oculars button on toolbar"
 msgstr "టూల్‌బరులో ఆక్యులర్ బటన్ను చూపించు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1284
-msgid "Scale image circle"
-msgstr "ఇమేజి సర్కిల్‌ను స్కేలు చెయ్యి"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1285
-msgid "Enable only if an object is selected"
-msgstr "వస్తువేదైనా ఎంచుకుంటేనే చేతనం చెయ్యి"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1286
-msgid "Hide grids and lines when enabled"
-msgstr "చేతనం చేసినపుడు అల్లికను, రేఖలనూ దాచు"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1288
+#: plugins/Oculars/src/ui_ocularDialog.h:1297
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "టెలిస్కోపుల్ విభిన్న ఏపర్చర్లకు స్టెల్లార్ పరిమాణ పరిమితిని వర్తింపజేయి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1290
+#: plugins/Oculars/src/ui_ocularDialog.h:1299
 msgid "Limit stellar magnitude"
 msgstr "స్టెల్లార్ పరిమాణాన్ని పరిమితించు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1292
+#: plugins/Oculars/src/ui_ocularDialog.h:1300
+msgid "Hide grids and lines when enabled"
+msgstr "చేతనం చేసినపుడు అల్లికను, రేఖలనూ దాచు"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1301
+msgid "Enable only if an object is selected"
+msgstr "వస్తువేదైనా ఎంచుకుంటేనే చేతనం చెయ్యి"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1303
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "ఆక్యులర్ మోడ్‌లో ఆక్యులర్ వృత్తం బయట కొంత దృశ్యాన్ని ఉండనివ్వు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1294
+#: plugins/Oculars/src/ui_ocularDialog.h:1305
 msgid "Use semi-transparent mask"
 msgstr "అర్థ పారదర్శక ముసుగును వాడు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1295
+#: plugins/Oculars/src/ui_ocularDialog.h:1306
+msgid "Scale image circle"
+msgstr "ఇమేజి సర్కిల్‌ను స్కేలు చెయ్యి"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1308
+msgid "Show border circle"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1310
+msgid "Show FOV outline"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1312
+msgid "Show cardinal directions in equatorial coordinate system"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1314
+msgid "Show compass rose"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1315
 msgid "Sensor view"
 msgstr "సెన్సర్ దృశ్యం"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1296
+#: plugins/Oculars/src/ui_ocularDialog.h:1316
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD' yokka 'FOV కి డిగ్రీలు నిముషాలను వాడు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1298
+#: plugins/Oculars/src/ui_ocularDialog.h:1318
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -12928,77 +12944,77 @@ msgstr ""
 "CCD ఫ్రేము హారిజాంటల్ ఓరియెంటేషనుకు మౌంట్ రకం ఆటోమాటిగ్గా మారేలా టెలిస్కోపు "
 "సెట్టింగుల్లో చేతనం చెయ్యి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1300
+#: plugins/Oculars/src/ui_ocularDialog.h:1320
 msgid "Enable automatic switch of mount type"
 msgstr "మౌంట్ రకం ఆటోమాటిగ్గా మారడాన్ని చేతనం చెయ్యి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1302
+#: plugins/Oculars/src/ui_ocularDialog.h:1322
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
 msgstr "పిక్సెళ్ళ ఇఫెక్టివ్ సైజు చూపేలా చతురస్ర ఓవర్లేను చేతనం చెయ్యి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1304
+#: plugins/Oculars/src/ui_ocularDialog.h:1324
 msgid "Show sensor crop overlay"
 msgstr "సెన్సర్ క్రాప్ ఓవర్లేను చూపించు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1305
+#: plugins/Oculars/src/ui_ocularDialog.h:1325
 msgid "Overlay size (px)"
 msgstr "ఓవర్లే పరిమాణం (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1306
+#: plugins/Oculars/src/ui_ocularDialog.h:1326
 msgid "Enable scaling FOV for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1307
+#: plugins/Oculars/src/ui_ocularDialog.h:1327
 msgid "Telrad view"
 msgstr "టెల్‌రాడ్ దృశ్యం"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1308
+#: plugins/Oculars/src/ui_ocularDialog.h:1328
 msgid "Enable scaling FOV for Telrad"
 msgstr "టెల్‌రాడ్ కోసం స్కేలింగ్ FOV ను చేతనం చేస్తున్నాం"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1309
+#: plugins/Oculars/src/ui_ocularDialog.h:1329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "జనరల్"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1310
-#: plugins/Oculars/src/ui_ocularDialog.h:1319
-#: plugins/Oculars/src/ui_ocularDialog.h:1325
-#: plugins/Oculars/src/ui_ocularDialog.h:1346
+#: plugins/Oculars/src/ui_ocularDialog.h:1330
+#: plugins/Oculars/src/ui_ocularDialog.h:1339
+#: plugins/Oculars/src/ui_ocularDialog.h:1345
+#: plugins/Oculars/src/ui_ocularDialog.h:1366
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "చేర్చు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1312
-#: plugins/Oculars/src/ui_ocularDialog.h:1321
-#: plugins/Oculars/src/ui_ocularDialog.h:1327
-#: plugins/Oculars/src/ui_ocularDialog.h:1348
+#: plugins/Oculars/src/ui_ocularDialog.h:1332
+#: plugins/Oculars/src/ui_ocularDialog.h:1341
+#: plugins/Oculars/src/ui_ocularDialog.h:1347
+#: plugins/Oculars/src/ui_ocularDialog.h:1368
 #: plugins/Satellites/src/ui_satellitesDialog.h:813
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "పేరు:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1316
+#: plugins/Oculars/src/ui_ocularDialog.h:1336
 msgid "Binoculars"
 msgstr "బైనాక్యులర్లు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1317
+#: plugins/Oculars/src/ui_ocularDialog.h:1337
 msgid "Has permanent cross-hairs"
 msgstr "శాశ్వత క్రాస్‌హెయిర్లు ఉంటాయి"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1318
+#: plugins/Oculars/src/ui_ocularDialog.h:1338
 msgid "Eyepieces"
 msgstr "ఐపీసులు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1322
+#: plugins/Oculars/src/ui_ocularDialog.h:1342
 msgid "Multiplier:"
 msgstr "మల్టిప్లయరు:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1323
+#: plugins/Oculars/src/ui_ocularDialog.h:1343
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -13006,89 +13022,89 @@ msgstr ""
 "మల్టిప్లిసిటీ విలువలు > 1 నాభ్యంతరాన్ని పెంపు (బార్లో లెన్స్). మల్టిప్లిసిటీ"
 " విలువలు < 1 నాభ్యంతరాన్ని తగ్గింపు (షేప్లీ లెన్స్). "
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1324
+#: plugins/Oculars/src/ui_ocularDialog.h:1344
 msgid "Lenses"
 msgstr "లెన్సులు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1328
+#: plugins/Oculars/src/ui_ocularDialog.h:1348
 msgid "Resolution x (pixels):"
 msgstr "రిసొల్యూషన్ x (pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1329
+#: plugins/Oculars/src/ui_ocularDialog.h:1349
 msgid "Resolution y (pixels):"
 msgstr "రిసొల్యూషన్ y (pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1330
+#: plugins/Oculars/src/ui_ocularDialog.h:1350
 msgid "Chip height (mm):"
 msgstr "చిప్ ఎత్తు (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1331
+#: plugins/Oculars/src/ui_ocularDialog.h:1351
 msgid "Chip width (mm):"
 msgstr "చిప్ వెడల్పు (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1332
+#: plugins/Oculars/src/ui_ocularDialog.h:1352
 msgid "Pixel width (micron):"
 msgstr "పిక్సెల్ వెడల్పు (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1333
+#: plugins/Oculars/src/ui_ocularDialog.h:1353
 msgid "Pixel height (micron):"
 msgstr "పిక్సెల్ ఎత్తు (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1335
+#: plugins/Oculars/src/ui_ocularDialog.h:1355
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr "ఇది ఇమేజింగ్ సెన్సరు నుండి పట్టకం అడుగు వరకూ ఉన్న దూరం"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1337
+#: plugins/Oculars/src/ui_ocularDialog.h:1357
 msgid "Prism/CCD distance (mm):"
 msgstr "పట్టకం/CCD దూరం (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1338
+#: plugins/Oculars/src/ui_ocularDialog.h:1358
 msgid "Prism/CCD height (mm):"
 msgstr "పట్టకం/CCD ఎత్తు (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1339
+#: plugins/Oculars/src/ui_ocularDialog.h:1359
 msgid "Prism/CCD width (mm):"
 msgstr "పట్టకం/CCD వెడల్పు (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1340
+#: plugins/Oculars/src/ui_ocularDialog.h:1360
 msgid "Position angle (degrees):"
 msgstr "స్థానపు కోణం (degrees):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1341
+#: plugins/Oculars/src/ui_ocularDialog.h:1361
 msgid "Off-Axis guider"
 msgstr "ఆఫ్-యాక్సిస్ గైడర్"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1362
 msgid "Rotation Angle (degrees):"
 msgstr "రొటేషన్ కోణం (degrees):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1343
+#: plugins/Oculars/src/ui_ocularDialog.h:1363
 msgid "Binning x:"
 msgstr "బిన్నింగ్ x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1344
+#: plugins/Oculars/src/ui_ocularDialog.h:1364
 msgid "Binning y:"
 msgstr "బిన్నింగ్ y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1345
+#: plugins/Oculars/src/ui_ocularDialog.h:1365
 msgid "Sensors"
 msgstr "సెన్సర్లు"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1371
 msgid "Horizontal flip"
 msgstr "హారిజాంటల్ తిరగవేత"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1352
+#: plugins/Oculars/src/ui_ocularDialog.h:1372
 msgid "Vertical flip"
 msgstr "వర్టికల్ తిరగవేత"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1353
+#: plugins/Oculars/src/ui_ocularDialog.h:1373
 msgid "Equatorial Mount"
 msgstr "ఈక్వటోరియల్ మౌంట్"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1354
+#: plugins/Oculars/src/ui_ocularDialog.h:1374
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"

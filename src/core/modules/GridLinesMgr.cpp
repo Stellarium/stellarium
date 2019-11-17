@@ -207,7 +207,7 @@ struct ViewportEdgeIntersectCallbackData
 	ViewportEdgeIntersectCallbackData(StelPainter* p)
 		: sPainter(p)
 		, raAngle(0.0)
-		, frameType(StelCore::FrameUninitialized) {;}
+		, frameType(StelCore::FrameUninitialized) {}
 	StelPainter* sPainter;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
@@ -345,8 +345,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	else
 		text = d->text;
 
-	Vec3f direc=direction.toVec3f();
-	direc.normalize();
+	Vec3f direc=direction.toVec3f();	
+	direc.normalize();	
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
 	float xshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
@@ -364,7 +364,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 void SkyGrid::draw(const StelCore* core) const
 {
 	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
-	if (!fader.getInterstate())
+	if (fader.getInterstate() <= 0.f)
 		return;
 
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
