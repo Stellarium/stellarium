@@ -1741,15 +1741,16 @@ void Oculars::paintCCDBounds()
 						cxt = StelUtils::radToHmsStr(cx, true);
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
+					float scaleFactor = static_cast<float>(1.2 * params.devicePixelsPerPixel);
 					// Coordinates of center of visible field of view for CCD (red rectangle)
 					QString coords = QString("%1:").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin"));
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f + fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f + fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					coords = QString("%1/%2").arg(cxt.simplified()).arg(cyt);
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Dimensions of visible field of view for CCD (red rectangle)
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
@@ -1759,11 +1760,11 @@ void Oculars::paintCCDBounds()
 							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
 							.arg(unit)
 							.arg(QChar(0x00D7));
-					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(scales), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(scales)*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Rotation angle of visible field of view for CCD (red rectangle)
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
-					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(angle), static_cast<int>(height*0.5f + 5.f)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(angle)*params.devicePixelsPerPixel), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), angle, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1773,7 +1774,7 @@ void Oculars::paintCCDBounds()
 								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
-						a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f) - painter.getFontMetrics().width(resolutionOverlayText), static_cast<int>(-overlayHeight*0.5f - fontSize*1.2f)));
+						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}
