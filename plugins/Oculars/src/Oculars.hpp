@@ -105,6 +105,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
 	Q_PROPERTY(bool flagShowCardinals		READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
+	Q_PROPERTY(bool flagAlignCrosshair		READ getFlagAlignCrosshair   WRITE setFlagAlignCrosshair   NOTIFY flagAlignCrosshairChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
@@ -253,6 +254,9 @@ public slots:
 	void setFlagShowCardinals(const bool b);
 	bool getFlagShowCardinals(void) const;
 
+	void setFlagAlignCrosshair(const bool b);
+	bool getFlagAlignCrosshair(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -284,6 +288,7 @@ signals:
 	void ccdCropOverlaySizeChanged(int value);
 	void flagShowContourChanged(bool value);
 	void flagShowCardinalsChanged(bool value);
+	void flagAlignCrosshairChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -451,6 +456,7 @@ private:
 	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
 	bool flagShowContour;
 	bool flagShowCardinals;
+	bool flagAlignCrosshair;
 };
 
 

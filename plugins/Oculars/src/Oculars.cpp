@@ -180,6 +180,7 @@ Oculars::Oculars()
 	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 	, flagShowContour(false)
 	, flagShowCardinals(false)
+	, flagAlignCrosshair(false)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -726,6 +727,7 @@ void Oculars::init()
 		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
 		setFlagShowCardinals(settings->value("show_ocular_cardinals", false).toBool());
+		setFlagAlignCrosshair(settings->value("align_crosshair", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1798,11 +1800,32 @@ void Oculars::paintCrosshairs()
 		length *= static_cast<float>(oculars[selectedOcularIndex]->apparentFOV() / maxEyepieceAngle);
 	}
 	length *= static_cast<float>(params.devicePixelsPerPixel);
+	double polarAngle = 0.;
+	if (getFlagAlignCrosshair())
+	{
+		Vec3d CPos;
+		Vector2<qreal> cpos = projector->getViewportCenter();
+		projector->unProject(cpos[0], cpos[1], CPos);
+		Vec3d CPrel(CPos);
+		CPrel[2]*=0.2;
+		Vec3d crel;
+		projector->project(CPrel, crel);
+		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+		if (CPos[2] > 0) polarAngle += 90.0;
+		else polarAngle -= 90.0;
+	}
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-	painter.drawLine2d(centerScreen[0], centerScreen[1] - length, centerScreen[0], centerScreen[1] + length);
-	painter.drawLine2d(centerScreen[0] - length, centerScreen[1], centerScreen[0] + length, centerScreen[1]);
+	QPoint a, b;
+	int hw = qRound(length);
+	QTransform ch_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-polarAngle);
+	a = ch_transform.map(QPoint(0, -hw));
+	b = ch_transform.map(QPoint(0, hw));
+	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+	a = ch_transform.map(QPoint(-hw, 0));
+	b = ch_transform.map(QPoint(hw, 0));
+	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 }
 
 void Oculars::paintTelrad()
@@ -2663,6 +2686,19 @@ void Oculars::setFlagShowCardinals(const bool b)
 bool Oculars::getFlagShowCardinals(void) const
 {
 	return flagShowCardinals;
+}
+
+void Oculars::setFlagAlignCrosshair(const bool b)
+{
+	flagAlignCrosshair = b;
+	settings->setValue("align_crosshair", b);
+	settings->sync();
+	emit flagAlignCrosshairChanged(b);
+}
+
+bool Oculars::getFlagAlignCrosshair(void) const
+{
+	return flagAlignCrosshair;
 }
 
 void Oculars::setArrowButtonScale(const double val)

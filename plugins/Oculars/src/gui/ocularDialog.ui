@@ -346,13 +346,20 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="contourCheckBox">
                <property name="toolTip">
-                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+                <string>Show border circle</string>
                </property>
                <property name="text">
-                <string>Limit stellar magnitude</string>
+                <string>Show FOV outline</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="text">
+                <string>Scale image circle</string>
                </property>
               </widget>
              </item>
@@ -362,19 +369,6 @@
                 <string>Hide grids and lines when enabled</string>
                </property>
               </widget>
-             </item>
-             <item row="9" column="0">
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>0</width>
-                 <height>5</height>
-                </size>
-               </property>
-              </spacer>
              </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="requireSelectionCheckBox">
@@ -393,22 +387,18 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
-               <property name="text">
-                <string>Scale image circle</string>
+             <item row="10" column="0">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="contourCheckBox">
-               <property name="toolTip">
-                <string>Show border circle</string>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>5</height>
+                </size>
                </property>
-               <property name="text">
-                <string>Show FOV outline</string>
-               </property>
-              </widget>
+              </spacer>
              </item>
              <item row="8" column="0">
               <widget class="QCheckBox" name="cardinalsCheckBox">
@@ -417,6 +407,26 @@
                </property>
                <property name="text">
                 <string>Show compass rose</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+               <property name="toolTip">
+                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+               </property>
+               <property name="text">
+                <string>Limit stellar magnitude</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="alignCrosshairCheckBox">
+               <property name="toolTip">
+                <string>Align the crosshair in equatorial coordinate system</string>
+               </property>
+               <property name="text">
+                <string>Align crosshair</string>
                </property>
               </widget>
              </item>
@@ -563,6 +573,12 @@
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
               </spacer>
              </item>
             </layout>
@@ -572,6 +588,12 @@
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
             </property>
            </spacer>
           </item>
@@ -886,6 +908,12 @@
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
               </spacer>
              </item>
             </layout>
@@ -1148,6 +1176,12 @@
               <spacer name="verticalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
                </property>
               </spacer>
              </item>
@@ -1646,6 +1680,12 @@
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
               </spacer>
              </item>
             </layout>
@@ -1918,6 +1958,12 @@
               <spacer name="verticalSpacer_2">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
                </property>
               </spacer>
              </item>

@@ -291,26 +291,27 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	connectBoolProperty(ui->checkBoxControlPanel,          "Oculars.flagGuiPanelEnabled");
-	connectIntProperty(ui->guiFontSizeSpinBox,             "Oculars.guiPanelFontSize");
-	connectBoolProperty(ui->checkBoxInitialFOV,            "Oculars.flagInitFOVUsage");
-	connectBoolProperty(ui->checkBoxInitialDirection,      "Oculars.flagInitDirectionUsage");
-	connectBoolProperty(ui->checkBoxResolutionCriterion,   "Oculars.flagShowResolutionCriterions");
-	connectBoolProperty(ui->requireSelectionCheckBox,      "Oculars.flagRequireSelection");
-	connectBoolProperty(ui->limitStellarMagnitudeCheckBox, "Oculars.flagLimitMagnitude");
-	connectBoolProperty(ui->hideGridsLinesCheckBox,        "Oculars.flagHideGridsLines");
-	connectBoolProperty(ui->scaleImageCircleCheckBox,      "Oculars.flagScaleImageCircle");
-	connectBoolProperty(ui->semiTransparencyCheckBox,      "Oculars.flagSemiTransparency");
-	connectBoolProperty(ui->checkBoxDMSDegrees,            "Oculars.flagDMSDegrees");
-	connectBoolProperty(ui->checkBoxTypeOfMount,           "Oculars.flagAutosetMountForCCD");
-	connectBoolProperty(ui->checkBoxTelradFOVScaling,      "Oculars.flagScalingFOVForTelrad");
-	connectBoolProperty(ui->checkBoxCCDFOVScaling,      "Oculars.flagScalingFOVForCCD");
-	connectBoolProperty(ui->checkBoxToolbarButton,         "Oculars.flagShowOcularsButton");
-	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox, "Oculars.arrowButtonScale");
-	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,    "Oculars.flagShowCcdCropOverlay");
-	connectIntProperty(ui->guiCcdCropOverlaySizeSpinBox,   "Oculars.ccdCropOverlaySize");
-	connectBoolProperty(ui->contourCheckBox,    "Oculars.flagShowContour");
-	connectBoolProperty(ui->cardinalsCheckBox,    "Oculars.flagShowCardinals");
+	connectBoolProperty(ui->checkBoxControlPanel,		"Oculars.flagGuiPanelEnabled");
+	connectIntProperty(ui->guiFontSizeSpinBox,		"Oculars.guiPanelFontSize");
+	connectBoolProperty(ui->checkBoxInitialFOV,		"Oculars.flagInitFOVUsage");
+	connectBoolProperty(ui->checkBoxInitialDirection,	"Oculars.flagInitDirectionUsage");
+	connectBoolProperty(ui->checkBoxResolutionCriterion,	"Oculars.flagShowResolutionCriterions");
+	connectBoolProperty(ui->requireSelectionCheckBox,	"Oculars.flagRequireSelection");
+	connectBoolProperty(ui->limitStellarMagnitudeCheckBox,	"Oculars.flagLimitMagnitude");
+	connectBoolProperty(ui->hideGridsLinesCheckBox,		"Oculars.flagHideGridsLines");
+	connectBoolProperty(ui->scaleImageCircleCheckBox,	"Oculars.flagScaleImageCircle");
+	connectBoolProperty(ui->semiTransparencyCheckBox,	"Oculars.flagSemiTransparency");
+	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
+	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
+	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
+	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
+	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
+	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox,	"Oculars.arrowButtonScale");
+	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,	"Oculars.flagShowCcdCropOverlay");
+	connectIntProperty(ui->guiCcdCropOverlaySizeSpinBox,	"Oculars.ccdCropOverlaySize");
+	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");
+	connectBoolProperty(ui->cardinalsCheckBox,		"Oculars.flagShowCardinals");
+	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -508,7 +509,7 @@ void OcularDialog::initAboutText()
 	html +=         q_("The same eyepiece in two different telescopes of differing focal length will produce two different exit pupils, changing the view somewhat.") + " ";
 	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
 	html +=         q_("Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
-	html += "<p>" + q_("You can toggle a crosshair in the view.  Ideally, I wanted this to be aligned to North.  I've been unable to do so.  So currently it aligns to the top of the screen.") + "</p>";
+	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
 	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
 	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
 
