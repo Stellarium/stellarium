@@ -161,6 +161,7 @@ no whitespace between the numbers!
 \midrule
 default\_color           				& \ccbox{0.5,0.5,0.7} & default colour.\\\midrule
 daylight\_text\_color            		& \ccbox{0.0,0.0,0.0} & info text at daylight. \\\midrule
+info\_text\_color               		& \ccbox{1.0,1.0,1.0} & info text color when overwrite mode for text color is enabled. \\\midrule
 sky\_background\_color                  & \ccbox{0.0,0.0,0.0} & sky background (non-black is useful for artists only). \\\midrule
 %% Ecliptic J2000 group: red tones
 ecliptical\_J2000\_color 				& \ccbox{0.4,0.1,0.1} &  ecliptical grid (J2000.0 frame). \\%\midrule
@@ -436,6 +437,7 @@ flag\_show\_bookmark\_button           & bool  & false & Show a button to show a
 flag\_show\_fullscreen\_button         & bool  & true  & Show a button to toggle fullscreen view\\
 flag\_show\_quit\_button               & bool  & true  & Show a button to quit via button press\\
 flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
+flag\_overwrite\_info\_color           & bool  & false & Set \emph{true} to use one color for test in info panel for all objects.\\\midrule
 %
 selected\_object\_info            & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
                                                     and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule

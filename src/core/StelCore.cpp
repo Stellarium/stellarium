@@ -2469,13 +2469,6 @@ bool StelCore::isBrightDaylight() const
 
 	// immediately decide upon sky background brightness...
 	return (GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance() > static_cast<float>(getSkyDrawer()->getDaylightLabelThreshold()));
-
-	// Old solution: based on solar altitude
-//	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
-//	if (sunPos[2] > -0.10452846326) // Nautical twilight (sin (6 deg))
-//		return true;
-//	else
-//		return false;
 }
 
 double StelCore::getCurrentEpoch() const

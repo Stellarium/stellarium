@@ -182,7 +182,7 @@ QVariantMap Supernova::getInfoMap(const StelCore *core) const
 
 Vec3f Supernova::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
 }
 
 float Supernova::getVMagnitude(const StelCore* core) const

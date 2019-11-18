@@ -245,6 +245,7 @@ StelApp::StelApp(StelMainView *parent)
 	, flagUseAzimuthFromSouth(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
+	, flagOverwriteInfoColor(false)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(Q_NULLPTR)
 	#endif
@@ -610,6 +611,7 @@ void StelApp::init(QSettings* conf)
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
+	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
@@ -931,6 +933,14 @@ void StelApp::setVisionModeNight(bool b)
 	}
 }
 
+void StelApp::setFlagOverwriteInfoColor(bool b)
+{
+	if (flagOverwriteInfoColor!=b)
+	{
+		flagOverwriteInfoColor=b;
+		emit(flagOverwriteInfoColorChanged(b));
+	}
+}
 
 void StelApp::setFlagShowDecimalDegrees(bool b)
 {

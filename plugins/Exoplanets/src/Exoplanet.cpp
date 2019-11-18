@@ -569,7 +569,7 @@ QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 
 Vec3f Exoplanet::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
 }
 
 float Exoplanet::getVMagnitude(const StelCore* core) const

@@ -313,7 +313,7 @@ QVariantMap Pulsar::getInfoMap(const StelCore *core) const
 
 Vec3f Pulsar::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
 }
 
 float Pulsar::getVMagnitude(const StelCore* core) const

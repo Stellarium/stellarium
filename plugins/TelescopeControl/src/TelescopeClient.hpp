@@ -63,7 +63,7 @@ public:
 	QString getNameI18n(void) const {return nameI18n;}
 	Vec3f getInfoColor(void) const
 	{
-		return Vec3f(1, 1, 1);
+		return Vec3f(1.f, 1.f, 1.f);
 	}
 	//! TelescopeClient supports the following InfoStringGroup flags:
 	//! - Name

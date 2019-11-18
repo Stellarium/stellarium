@@ -73,6 +73,7 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
+	Q_PROPERTY(bool flagOverwriteInfoColor READ getFlagOverwriteInfoColor WRITE setFlagOverwriteInfoColor NOTIFY flagOverwriteInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
@@ -240,6 +241,11 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for activating overwrite mode for text color in info panel.
+	void setFlagOverwriteInfoColor(bool);
+	//! Get flag for activating overwrite mode for text color in info panel.
+	bool getFlagOverwriteInfoColor() const {return flagOverwriteInfoColor; }
+
 	//! Set flag for showing decimal degree in various places.
 	void setFlagShowDecimalDegrees(bool b);
 	//! Get flag for showing decimal degree in various places.
@@ -298,6 +304,7 @@ signals:
 	void flagUseAzimuthFromSouthChanged(bool);
 	void flagUseCCSDesignationChanged(bool);
 	void flagUseFormattingOutputChanged(bool);
+	void flagOverwriteInfoColorChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void screenFontSizeChanged(int);
@@ -442,6 +449,7 @@ private:
 	bool flagUseAzimuthFromSouth; // Display calculate azimuth from south towards west (as in some astronomical literature)
 	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
 	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
+	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

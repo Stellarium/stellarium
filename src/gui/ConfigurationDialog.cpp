@@ -222,6 +222,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
 	connectBoolProperty(ui->checkBoxUseFormattingOutput, "StelApp.flagUseFormattingOutput");
 	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
+	connectBoolProperty(ui->overwriteTextColorCheckBox,  "StelApp.flagOverwriteInfoColor");
 
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
@@ -308,15 +309,15 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	connectBoolProperty(ui->showQuitButtonCheckBox,		"StelGui.flagShowQuitButton");
-	connectBoolProperty(ui->showFlipButtonsCheckbox,	"StelGui.flagShowFlipButtons");
-	connectBoolProperty(ui->showNebulaBgButtonCheckbox,	"StelGui.flagShowNebulaBackgroundButton");
+	connectBoolProperty(ui->showQuitButtonCheckBox,			"StelGui.flagShowQuitButton");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,			"StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showNebulaBgButtonCheckbox,		"StelGui.flagShowNebulaBackgroundButton");
 	connectBoolProperty(ui->showBookmarksButtonCheckBox,	"StelGui.flagShowBookmarksButton");
-	connectBoolProperty(ui->showICRSGridButtonCheckBox,	"StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,	"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,	"StelGui.flagShowEclipticGridButton");
-	connectBoolProperty(ui->showHipsButtonCheckBox,		"StelGui.flagShowHiPSButton");
-	connectBoolProperty(ui->showDSSButtonCheckbox,		"StelGui.flagShowDSSButton");
+	connectBoolProperty(ui->showHipsButtonCheckBox,			"StelGui.flagShowHiPSButton");
+	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
 	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,	"StelGui.flagShowGotoSelectedObjectButton");
 	connectBoolProperty(ui->showNightmodeButtonCheckBox,	"StelGui.flagShowNightmodeButton");
 	connectBoolProperty(ui->showFullscreenButtonCheckBox,	"StelGui.flagShowFullscreenButton");
@@ -325,14 +326,14 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,	"StelGui.flagShowAsterismLinesButton");
 	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,	"StelGui.flagShowAsterismLabelsButton");
 
-	connectBoolProperty(ui->decimalDegreeCheckBox, "StelApp.flagShowDecimalDegrees");
-	connectBoolProperty(ui->azimuthFromSouthcheckBox, "StelApp.flagUseAzimuthFromSouth");
+	connectBoolProperty(ui->decimalDegreeCheckBox,			"StelApp.flagShowDecimalDegrees");
+	connectBoolProperty(ui->azimuthFromSouthcheckBox,		"StelApp.flagUseAzimuthFromSouth");
 
-	connectBoolProperty(ui->mouseTimeoutCheckbox, "MainView.flagCursorTimeout");
-	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
-	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "StelGui.flagUseButtonsBackground");
-	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
-	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->mouseTimeoutCheckbox,			"MainView.flagCursorTimeout");
+	connectDoubleProperty(ui->mouseTimeoutSpinBox,			"MainView.cursorTimeout");
+	connectBoolProperty(ui->useButtonsBackgroundCheckBox,	"StelGui.flagUseButtonsBackground");
+	connectBoolProperty(ui->indicationMountModeCheckBox,		"StelMovementMgr.flagIndicationMountMode");
+	connectBoolProperty(ui->kineticScrollingCheckBox,			"StelGui.flagUseKineticScrolling");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -655,54 +656,54 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_enable_kinetic_scrolling", 	propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
-	conf->setValue("stars/absolute_scale",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toDouble(), 'f', 2));
-	conf->setValue("stars/relative_scale",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toDouble(), 'f', 2));
-	conf->setValue("stars/flag_star_twinkle",		QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toDouble(), 'f', 2));
-	conf->setValue("stars/star_twinkle_amount",		QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_star_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
-	conf->setValue("astro/star_magnitude_limit",		QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_planet_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());
+	conf->setValue("stars/absolute_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toDouble(), 'f', 2));
+	conf->setValue("stars/relative_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toDouble(), 'f', 2));
+	conf->setValue("stars/flag_star_twinkle",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toDouble(), 'f', 2));
+	conf->setValue("stars/star_twinkle_amount",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
+	conf->setValue("astro/flag_star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
+	conf->setValue("astro/star_magnitude_limit",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));
+	conf->setValue("astro/flag_planet_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());
 	conf->setValue("astro/planet_magnitude_limit",		QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customPlanetMagLimit").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_nebula_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagNebulaMagnitudeLimit").toBool());
 	conf->setValue("astro/nebula_magnitude_limit",		QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customNebulaMagLimit").toDouble(), 'f', 2));
 	conf->setValue("viewing/use_luminance_adaptation",	propMgr->getStelPropertyValue("StelSkyDrawer.flagLuminanceAdaptation").toBool());
-	conf->setValue("astro/flag_planets",			propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
-	conf->setValue("astro/flag_planets_hints",		propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
-	conf->setValue("astro/flag_planets_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
-	conf->setValue("astro/flag_permanent_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
-	conf->setValue("viewing/flag_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
-	conf->setValue("viewing/number_isolated_trails",	propMgr->getStelPropertyValue("SolarSystem.numberIsolatedTrails").toInt());
-	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
-	conf->setValue("viewing/flag_planets_orbits_only",	propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
-	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
-	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
-	conf->setValue("viewing/moon_scale",			QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
-	conf->setValue("viewing/flag_minorbodies_scaled",	propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
-	conf->setValue("viewing/minorbodies_scale",		QString::number(propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble(), 'f', 2));
-	conf->setValue("astro/meteor_zhr",			propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
-	conf->setValue("astro/flag_milky_way",			propMgr->getStelPropertyValue("MilkyWay.flagMilkyWayDisplayed").toBool());
-	conf->setValue("astro/milky_way_intensity",		QString::number(propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble(), 'f', 2));
-	conf->setValue("astro/milky_way_saturation",		QString::number(propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_zodiacal_light",		propMgr->getStelPropertyValue("ZodiacalLight.flagZodiacalLightDisplayed").toBool());
-	conf->setValue("astro/zodiacal_light_intensity",	QString::number(propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_grs_custom",			propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
-	conf->setValue("astro/grs_longitude",			propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
-	conf->setValue("astro/grs_drift",			propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
-	conf->setValue("astro/grs_jd",				propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
-	conf->setValue("astro/flag_planets_labels",		propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
-	conf->setValue("astro/labels_amount",			propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
+	conf->setValue("astro/flag_planets",					propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
+	conf->setValue("astro/flag_planets_hints",			propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
+	conf->setValue("astro/flag_planets_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
+	conf->setValue("astro/flag_permanent_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
+	conf->setValue("viewing/flag_isolated_trails",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
+	conf->setValue("viewing/number_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.numberIsolatedTrails").toInt());
+	conf->setValue("viewing/flag_isolated_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
+	conf->setValue("viewing/flag_planets_orbits_only",		propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
+	conf->setValue("astro/flag_light_travel_time",			propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
+	conf->setValue("viewing/flag_moon_scaled",			propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
+	conf->setValue("viewing/moon_scale",				QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
+	conf->setValue("viewing/flag_minorbodies_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
+	conf->setValue("viewing/minorbodies_scale",			QString::number(propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble(), 'f', 2));
+	conf->setValue("astro/meteor_zhr",					propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
+	conf->setValue("astro/flag_milky_way",				propMgr->getStelPropertyValue("MilkyWay.flagMilkyWayDisplayed").toBool());
+	conf->setValue("astro/milky_way_intensity",			QString::number(propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble(), 'f', 2));
+	conf->setValue("astro/milky_way_saturation",			QString::number(propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble(), 'f', 2));
+	conf->setValue("astro/flag_zodiacal_light",			propMgr->getStelPropertyValue("ZodiacalLight.flagZodiacalLightDisplayed").toBool());
+	conf->setValue("astro/zodiacal_light_intensity",		QString::number(propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble(), 'f', 2));
+	conf->setValue("astro/flag_grs_custom",				propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
+	conf->setValue("astro/grs_longitude",				propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
+	conf->setValue("astro/grs_drift",					propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
+	conf->setValue("astro/grs_jd",						propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
+	conf->setValue("astro/flag_planets_labels",			propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
+	conf->setValue("astro/labels_amount",				propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
 	conf->setValue("viewing/flag_planets_native_names",	propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
-	conf->setValue("astro/flag_use_obj_models",		propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
-	conf->setValue("astro/flag_show_obj_self_shadows",	propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
+	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
+	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",	Planet::getApparentMagnitudeAlgorithmString());
-	conf->setValue("astro/flag_planets_nomenclature",	propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
+	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",	propMgr->getStelPropertyValue("NomenclatureMgr.localNomenclatureHided").toBool());
 
 	// view dialog / markings tab settings
-	conf->setValue("viewing/flag_gridlines",			propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
+	conf->setValue("viewing/flag_gridlines",				propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
 	conf->setValue("viewing/flag_azimuthal_grid",			propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equatorial_grid",			propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool());
-	conf->setValue("viewing/flag_equatorial_J2000_grid",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
+	conf->setValue("viewing/flag_equatorial_J2000_grid",	propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_line",			propMgr->getStelPropertyValue("GridLinesMgr.equatorLineDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_J2000_line",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000LineDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_line",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticLineDisplayed").toBool());
@@ -721,64 +722,64 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_circumpolar_circles",		propMgr->getStelPropertyValue("GridLinesMgr.circumpolarCirclesDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_grid",		propMgr->getStelPropertyValue("GridLinesMgr.supergalacticGridDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_equator_line",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorLineDisplayed").toBool());
-	conf->setValue("viewing/flag_celestial_J2000_poles",		propMgr->getStelPropertyValue("GridLinesMgr.celestialJ2000PolesDisplayed").toBool());
+	conf->setValue("viewing/flag_celestial_J2000_poles",	propMgr->getStelPropertyValue("GridLinesMgr.celestialJ2000PolesDisplayed").toBool());
 	conf->setValue("viewing/flag_celestial_poles",			propMgr->getStelPropertyValue("GridLinesMgr.celestialPolesDisplayed").toBool());
 	conf->setValue("viewing/flag_zenith_nadir",			propMgr->getStelPropertyValue("GridLinesMgr.zenithNadirDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_poles",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PolesDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_poles",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticPolesDisplayed").toBool());
 	conf->setValue("viewing/flag_galactic_poles",			propMgr->getStelPropertyValue("GridLinesMgr.galacticPolesDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_poles",		propMgr->getStelPropertyValue("GridLinesMgr.supergalacticPolesDisplayed").toBool());
-	conf->setValue("viewing/flag_equinox_J2000_points",		propMgr->getStelPropertyValue("GridLinesMgr.equinoxJ2000PointsDisplayed").toBool());
+	conf->setValue("viewing/flag_equinox_J2000_points",	propMgr->getStelPropertyValue("GridLinesMgr.equinoxJ2000PointsDisplayed").toBool());
 	conf->setValue("viewing/flag_equinox_points",			propMgr->getStelPropertyValue("GridLinesMgr.equinoxPointsDisplayed").toBool());
-	conf->setValue("viewing/flag_solstice_J2000_points",		propMgr->getStelPropertyValue("GridLinesMgr.solsticeJ2000PointsDisplayed").toBool());
+	conf->setValue("viewing/flag_solstice_J2000_points",	propMgr->getStelPropertyValue("GridLinesMgr.solsticeJ2000PointsDisplayed").toBool());
 	conf->setValue("viewing/flag_solstice_points",			propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 	conf->setValue("viewing/flag_apex_points",			propMgr->getStelPropertyValue("GridLinesMgr.apexPointsDisplayed").toBool());
 
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
-	conf->setValue("viewing/flag_constellation_drawing",		propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_name",		propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
-	conf->setValue("viewing/flag_constellation_boundaries",		propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",		propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
-	conf->setValue("viewing/flag_landscape_autoselection",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
-	conf->setValue("viewing/flag_light_pollution_database",		propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
-	conf->setValue("viewing/flag_environment_auto_enable",		propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
-	conf->setValue("viewing/constellation_art_intensity",		propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
+	conf->setValue("viewing/flag_landscape_autoselection",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
+	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
+	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
+	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
-	conf->setValue("viewing/constellation_line_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
+	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
 	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationBoundariesThickness").toInt());
 
 	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
-	conf->setValue("viewing/flag_asterism_drawing",			propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
+	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_asterism_name",			propMgr->getStelPropertyValue("AsterismMgr.namesDisplayed").toBool());
 	conf->setValue("viewing/asterism_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toInt());
 	conf->setValue("viewing/flag_rayhelper_drawing",		propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool());
 	conf->setValue("viewing/rayhelper_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.rayHelperThickness").toInt());
 	conf->setValue("viewing/sky_brightness_label_threshold",	propMgr->getStelPropertyValue("StelSkyDrawer.daylightLabelThreshold").toFloat());
-	conf->setValue("viewing/flag_night",				StelApp::getInstance().getVisionModeNight());
-	conf->setValue("astro/flag_stars",				propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
+	conf->setValue("viewing/flag_night",					StelApp::getInstance().getVisionModeNight());
+	conf->setValue("astro/flag_stars",					propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
 	conf->setValue("astro/flag_star_name",				propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
 	conf->setValue("astro/flag_star_additional_names",		propMgr->getStelPropertyValue("StarMgr.flagAdditionalNamesDisplayed").toBool());
 	conf->setValue("stars/labels_amount",				propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
 	conf->setValue("astro/nebula_hints_amount",			propMgr->getStelPropertyValue("NebulaMgr.hintsAmount").toDouble());
 	conf->setValue("astro/nebula_labels_amount",			propMgr->getStelPropertyValue("NebulaMgr.labelsAmount").toDouble());
-	conf->setValue("astro/flag_nebula_hints_proportional",		propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());
-	conf->setValue("astro/flag_surface_brightness_usage",		propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessUsage").toBool());
-	conf->setValue("gui/flag_surface_brightness_arcsec",		propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
+	conf->setValue("astro/flag_nebula_hints_proportional",	propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());
+	conf->setValue("astro/flag_surface_brightness_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessUsage").toBool());
+	conf->setValue("gui/flag_surface_brightness_arcsec",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
 	conf->setValue("gui/flag_surface_brightness_short",		propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessShortNotationUsage").toBool());
 	conf->setValue("astro/flag_dso_designation_usage",		propMgr->getStelPropertyValue("NebulaMgr.flagDesignationLabels").toBool());
-	conf->setValue("astro/flag_dso_outlines_usage",			propMgr->getStelPropertyValue("NebulaMgr.flagOutlinesDisplayed").toBool());
+	conf->setValue("astro/flag_dso_outlines_usage",		propMgr->getStelPropertyValue("NebulaMgr.flagOutlinesDisplayed").toBool());
 	conf->setValue("astro/flag_dso_additional_names",		propMgr->getStelPropertyValue("NebulaMgr.flagAdditionalNamesDisplayed").toBool());
 	conf->setValue("astro/flag_nebula_name",			propMgr->getStelPropertyValue("NebulaMgr.flagHintDisplayed").toBool());
 	conf->setValue("astro/flag_use_type_filter",			propMgr->getStelPropertyValue("NebulaMgr.flagTypeFiltersUsage").toBool());
-	conf->setValue("astro/flag_nebula_display_no_texture",		!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
+	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
 
 	conf->setValue("astro/flag_size_limits_usage",			propMgr->getStelPropertyValue("NebulaMgr.flagUseSizeLimits").toBool());
 	conf->setValue("astro/size_limit_min",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toDouble(), 'f', 0));
 	conf->setValue("astro/size_limit_max",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toDouble(), 'f', 0));
 
-	conf->setValue("projection/type",				core->getCurrentProjectionTypeKey());
+	conf->setValue("projection/type",					core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation",				core->getUseNutation());
 	conf->setValue("astro/flag_topocentric_coordinates",		core->getUseTopocentricCoordinates());
 
@@ -897,37 +898,38 @@ void ConfigurationDialog::saveAllSettings()
 	}
 
 	// toolbar auto-hide status
-	conf->setValue("gui/auto_hide_horizontal_toolbar",	propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
-	conf->setValue("gui/auto_hide_vertical_toolbar",	propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
-	conf->setValue("gui/flag_show_quit_button",		propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
+	conf->setValue("gui/auto_hide_horizontal_toolbar",		propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
+	conf->setValue("gui/auto_hide_vertical_toolbar",		propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
+	conf->setValue("gui/flag_show_quit_button",			propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
 	conf->setValue("gui/flag_show_nebulae_background_button",propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
-	conf->setValue("gui/flag_show_dss_button",		propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());
-	conf->setValue("gui/flag_show_hips_button",		propMgr->getStelPropertyValue("StelGui.flagShowHiPSButton").toBool());
+	conf->setValue("gui/flag_show_dss_button",			propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());
+	conf->setValue("gui/flag_show_hips_button",			propMgr->getStelPropertyValue("StelGui.flagShowHiPSButton").toBool());
 	conf->setValue("gui/flag_show_goto_selected_button",	propMgr->getStelPropertyValue("StelGui.flagShowGotoSelectedObjectButton").toBool());
-	conf->setValue("gui/flag_show_nightmode_button",	propMgr->getStelPropertyValue("StelGui.flagShowNightmodeButton").toBool());
-	conf->setValue("gui/flag_show_fullscreen_button",	propMgr->getStelPropertyValue("StelGui.flagShowFullscreenButton").toBool());
-	conf->setValue("gui/flag_show_bookmarks_button",	propMgr->getStelPropertyValue("StelGui.flagShowBookmarksButton").toBool());
-	conf->setValue("gui/flag_show_icrs_grid_button",	propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
+	conf->setValue("gui/flag_show_nightmode_button",		propMgr->getStelPropertyValue("StelGui.flagShowNightmodeButton").toBool());
+	conf->setValue("gui/flag_show_fullscreen_button",		propMgr->getStelPropertyValue("StelGui.flagShowFullscreenButton").toBool());
+	conf->setValue("gui/flag_show_bookmarks_button",		propMgr->getStelPropertyValue("StelGui.flagShowBookmarksButton").toBool());
+	conf->setValue("gui/flag_show_icrs_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
 	conf->setValue("gui/flag_show_galactic_grid_button",	propMgr->getStelPropertyValue("StelGui.flagShowGalacticGridButton").toBool());
 	conf->setValue("gui/flag_show_ecliptic_grid_button",	propMgr->getStelPropertyValue("StelGui.flagShowEclipticGridButton").toBool());
-	conf->setValue("gui/flag_show_boundaries_button",	propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
+	conf->setValue("gui/flag_show_boundaries_button",		propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
 	conf->setValue("gui/flag_show_asterism_lines_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
 	conf->setValue("gui/flag_show_asterism_labels_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
 	conf->setValue("gui/flag_show_decimal_degrees",		propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
-	conf->setValue("gui/flag_use_azimuth_from_south",	propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
-	conf->setValue("gui/flag_use_formatting_output",	propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
+	conf->setValue("gui/flag_use_azimuth_from_south",		propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
+	conf->setValue("gui/flag_use_formatting_output",		propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
 	conf->setValue("gui/flag_use_ccs_designations",		propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
-	conf->setValue("gui/flag_time_jd",			gui->getButtonBar()->getFlagTimeJd());
+	conf->setValue("gui/flag_overwrite_info_color",			propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
+	conf->setValue("gui/flag_time_jd",					gui->getButtonBar()->getFlagTimeJd());
 	conf->setValue("gui/flag_show_buttons_background",	propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
-	conf->setValue("gui/flag_indication_mount_mode",	mvmgr->getFlagIndicationMountMode());
+	conf->setValue("gui/flag_indication_mount_mode",		mvmgr->getFlagIndicationMountMode());
 
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys",		mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation",	mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_move_keys",		mvmgr->getFlagEnableMoveKeys());
 	conf->setValue("navigation/startup_time_mode",			core->getStartupTimeMode());
-	conf->setValue("navigation/today_time",				core->getInitTodayTime());
-	conf->setValue("navigation/preset_sky_time",			core->getPresetSkyTime());
+	conf->setValue("navigation/today_time",					core->getInitTodayTime());
+	conf->setValue("navigation/preset_sky_time",				core->getPresetSkyTime());
 	conf->setValue("navigation/time_correction_algorithm",		core->getCurrentDeltaTAlgorithmKey());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
@@ -942,24 +944,24 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_flip_buttons",			propMgr->getStelPropertyValue("StelGui.flagShowFlipButtons").toBool());
 	conf->setValue("video/viewport_effect",				StelApp::getInstance().getViewportEffect());
 	conf->setValue("projection/viewport",				StelProjector::maskTypeToString(proj->getMaskType()));
-	conf->setValue("projection/viewport_center_offset_x",		core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
-	conf->setValue("projection/viewport_center_offset_y",		core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/viewport_center_offset_x",	core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
+	conf->setValue("projection/viewport_center_offset_y",	core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
 	conf->setValue("projection/flip_horz",				core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",				core->getCurrentStelProjectorParams().flipVert);
 	conf->setValue("viewing/flag_gravity_labels",			proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
+	conf->setValue("gui/flag_mouse_cursor_timeout",		propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
 	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
 	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
-	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+	conf->setValue("gui/gui_font_size",					propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
-	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
-	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
-	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
+	conf->setValue("main/screenshot_custom_size",		propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
+	conf->setValue("main/screenshot_custom_width",		propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
+	conf->setValue("main/screenshot_custom_height",		propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
 	conf->setValue("video/screen_number", screenNum);
