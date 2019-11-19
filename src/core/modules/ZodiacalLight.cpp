@@ -53,6 +53,7 @@ ZodiacalLight::ZodiacalLight()
 {
 	setObjectName("ZodiacalLight");
 	fader = new LinearFader();
+	propMgr=StelApp::getInstance().getStelPropertyManager();
 }
 
 ZodiacalLight::~ZodiacalLight()
@@ -87,8 +88,6 @@ void ZodiacalLight::init()
 
 	StelCore* core=StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
-
-	propMgr=StelApp::getInstance().getStelPropertyManager();
 }
 
 void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
