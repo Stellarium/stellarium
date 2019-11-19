@@ -240,8 +240,6 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 			i++;
 		}
 	}
-
-
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
