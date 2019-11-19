@@ -43,7 +43,8 @@
 
 // Class which manages the displaying of the Zodiacal Light
 ZodiacalLight::ZodiacalLight()
-	: color(1.f, 1.f, 1.f)
+	: propMgr(Q_NULLPTR)
+	, color(1.f, 1.f, 1.f)
 	, intensity(1.)
 	, intensityFovScale(1.0)
 	, intensityMinFov(0.25) // when zooming in further, Z.L. is no longer visible.
