@@ -360,26 +360,24 @@ Where:
   define the exact position of the horizon. If missing, the texture
   can be queried for horizon transparency (for accurate object
   rising/setting times)
-\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}  %
-      % the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or gradians(gon).
-      % The value must be one of azDeg_altDeg|azDeg_zdDeg|azRad_altRad|azRad_zdRad|azGrad_altGrad|azGrad_zdGrad. Default: azDeg_altDeg
-\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}  %Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g. when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
-\item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}  %(optional, default: invisible) used to draw a polygonal horizon line.
-\item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal}  %(optional, default=-1, i.e. use preset landscape/minimal_brightness from global config.ini) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] (optional, default=-2) Some sky
+\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
+\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
+\item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{v0.14.0} Some sky
   elements, e.g.\ stars, are not drawn below this altitude for
   efficiency. Under certain circumstances (e.g.\ for space station
   panoramas where you may have sky below your feet, or for deep
   valleys/high mountains, you may want to specify something else
-  here. (since v0.14.0)
+  here.
 \end{description}
 %
 To save texture memory, %since v0.13.0
 you can trim away the transparent
 sky and define the angle \var{maptex\_top}. Likewise,
 \var{fogtex\_top}, \var{fogtex\_bottom}, \var{maptex\_illum\_top} and
-\var{maptex\_illum\_top}. You should then stretch the texture to a
-full power of 2, like $4096\times1024$ (but note that some hardware is
+\var{maptex\_illum\_bottom}. You should then stretch the texture to a
+full power of 2 for maximum compatibility, like $4096\times1024$ (but note that some hardware is
 even limited to 2048 pixels). The easiest method to create perfectly
 aligned fog and illumination layers is with an image editor that
 supports layers like the \program{GIMP} or \program{Photoshop}. Fog
@@ -532,10 +530,14 @@ Where:
   has its leftmost edge pointing towards east.
 \item[\var{ground\_angle\_shift}] (degrees) vertical angular offset of
   the ground texture, at which height the ground texture is placed.
+  Values above -10 are not recommended for non-photographic content
+  (e.g., a map) due to high distortion.
 \item[\var{ground\_angle\_rotatez}] (degrees) angular rotation of the
   ground texture around the vertical axis. When the sides are rotated,
   the ground texture may need to be rotated as well to match up with
-  the sides.
+  the sides. If 0, east is up. if North is up in your image, set this to
+  90. Note that adjustments of \var{decor\_angle\_rotatez} require
+  adjustments of this angle in the opposite direction!
 \item[\var{fog\_alt\_angle}] (degrees) vertical angular size of the
   fog cylinder - how fog looks. Accurate vertical size requires
   \var{calibrated=true}.
@@ -546,7 +548,8 @@ Where:
   \var{1}\footnote{Boolean values \var{true|false} preferred since
     V0.19.3, but \var{0|1} are still accepted.} the ground is drawn in
   front of the scenery, i.e. the side textures will overlap over the
-  ground texture.
+  ground texture if \var{ground\_angle\_shift} >
+  \var{decor\_angle\_shift}.
 \item[\var{calibrated}] (optional).\newFeature{v0.10.6} Only if true,
   \var{decor\_alt\_angle} etc. really work as documented above. The
   (buggy) old code was left to work with the landscapes already
@@ -559,31 +562,12 @@ Where:
   \var{decor\_angle\_shift} may be a bit more difficult with this, but
   now (v0.13.0) works also with calibrated. A fog image created as
   overlay on the pano will be perfectly placed.
-\item[\var{decor\_angle\_rotatez}] angular rotation of the scenery
-  around the vertical axis. This is handy for rotating the landscape
-  so North is in the correct direction. If 0, the left edge of
-  \var{tex0} is due east.
-\item[\var{ground\_angle\_shift}] vertical angular offset of the
-  ground texture, at which height the ground texture is placed. Values
-  above -10 are not recommended for non-photographic content (e.g., a
-  map) due to high distortion.
-\item[\var{ground\_angle\_rotatez}] angular rotation of the ground
-  texture around the vertical axis. When the sides are rotated, the
-  ground texture may need to be rotated as well to match up with the
-  sides. If 0, east is up. if North is up in your image, set this to
-  90. Note that adjustments of \var{decor\_angle\_rotatez} require
-  adjustments of this angle in the opposite direction!
-\item[\var{fog\_alt\_angle}] vertical angular size of the fog cylinder.
-\item[\var{fog\_angle\_shift}] vertical angular offset of the fog cylinder.
-\item[\var{draw\_ground\_first}] if 1, the ground is drawn before the
-  sides, i.e.\ the side textures may overlap the ground texture if
-  \var{ground\_angle\_shift} > \var{decor\_angle\_shift}.
-\item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Polygonal} %is the name of the (measured) horizon data file for this landscape. Can be used to query horizon transparency (for accurate object rising/setting times)
-\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}  %the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or gradians(gon). The value must be one of azDeg_altDeg|azDeg_zdDeg|azRad_altRad|azRad_zdRad|azGrad_altGrad|azGrad_zdGrad. Default: azDeg_altDeg
-\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} %Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g. when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
-\item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}  % (optional, default: invisible) used to draw a polygonal horizon line.
-\item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use landscape/minimal\_brightness from global config.ini) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal}  % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0)
+\item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Spherical}
+\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
+\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
+\item[\var{horizon\_line\_color}] (optional) see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_brightness}]  (optional) see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_altitude}] (optional) see \ref{sec:landscapes:Polygonal}
 \end{description}
 
 
@@ -645,16 +629,12 @@ Where:
   in your landscape appear broken, try increasing.
 \item[\var{tesselate\_cols}] (optional, default=40) If straight edges
   in your landscape appear broken, try increasing.
-\item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Polygonal}  %is the name of the (measured) horizon data file for this landscape.
+\item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Spherical}
 \item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
-%
-%  the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or
-%  gradians(gon). The value must be one of \var{azDeg\_altDeg | azDeg\_zdDeg | azRad\_altRad | azRad\_zdRad | azGrad\_altGrad |  azGrad\_zdGrad}. Default: \var{azDeg\_altDeg}
-%
-\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} % Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g.\ when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
-\item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal} % (optional, default: invisible) used to draw a polygonal horizon line.
-\item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use preset \var{landscape/minimal\_brightness} from global \file{config.ini}) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal} % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0)
+\item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
+\item[\var{horizon\_line\_color}] (optional) see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_brightness}] (optional)  see \ref{sec:landscapes:Polygonal}
+\item[\var{minimal\_altitude}] (optional) see \ref{sec:landscapes:Polygonal}
 \end{description}
 
 
