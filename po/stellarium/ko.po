@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-12 21:43+0700\n"
+"POT-Creation-Date: 2019-11-18 19:45+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: ysjbserver <ysjbserver@naver.com>, 2019\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -42,7 +42,7 @@ msgstr "사용자 표지"
 #: src/core/modules/MinorPlanet.cpp:202 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:206
 #: src/core/modules/StarWrapper.cpp:209 src/gui/AstroCalcDialog.cpp:803
-#: src/ui_configurationDialog.h:1598 plugins/Satellites/src/Satellite.cpp:283
+#: src/ui_configurationDialog.h:1609 plugins/Satellites/src/Satellite.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:146
 #: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:181
@@ -60,14 +60,14 @@ msgid "asterism"
 msgstr "성군"
 
 #: src/core/modules/AsterismMgr.cpp:96
-#: src/core/modules/ConstellationMgr.cpp:141 src/core/modules/StarMgr.cpp:459
+#: src/core/modules/ConstellationMgr.cpp:144 src/core/modules/StarMgr.cpp:459
 #: src/core/modules/GridLinesMgr.cpp:1308
 #: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:76 src/core/modules/NebulaMgr.cpp:458
 #: src/core/modules/NebulaMgr.cpp:459 src/core/modules/SolarSystem.cpp:264
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:607 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:608 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
 msgid "Display Options"
@@ -89,38 +89,38 @@ msgstr "광선 도움말"
 msgid "constellation"
 msgstr "별자리"
 
-#: src/core/modules/ConstellationMgr.cpp:142
+#: src/core/modules/ConstellationMgr.cpp:145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Constellation lines"
 msgstr "별자리 선"
 
-#: src/core/modules/ConstellationMgr.cpp:143
+#: src/core/modules/ConstellationMgr.cpp:146
 msgid "Constellation art"
 msgstr "별자리 그림"
 
-#: src/core/modules/ConstellationMgr.cpp:144
+#: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Constellation labels"
 msgstr "별자리 이름표"
 
-#: src/core/modules/ConstellationMgr.cpp:145
+#: src/core/modules/ConstellationMgr.cpp:148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Constellation boundaries"
 msgstr "별자리 경계선"
 
-#: src/core/modules/ConstellationMgr.cpp:146 src/ui_configurationDialog.h:1742
+#: src/core/modules/ConstellationMgr.cpp:149 src/ui_configurationDialog.h:1785
 msgid "Select single constellation"
 msgstr "하나의 별자리 선택"
 
-#: src/core/modules/ConstellationMgr.cpp:147
+#: src/core/modules/ConstellationMgr.cpp:150
 msgid "Remove selection of constellations"
 msgstr "별자리 선택 제거"
 
-#: src/core/modules/ConstellationMgr.cpp:148
+#: src/core/modules/ConstellationMgr.cpp:151
 msgid "Select all constellations"
 msgstr "모든 별자리 선택"
 
-#: src/core/modules/ConstellationMgr.cpp:150
+#: src/core/modules/ConstellationMgr.cpp:153
 msgid "Reload the sky culture"
 msgstr "하늘 문화 다시 불러오기"
 
@@ -461,7 +461,7 @@ msgstr "광공해 주기적 변화"
 
 #: src/core/modules/LandscapeMgr.cpp:894 src/scripting/StelScriptMgr.cpp:260
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
@@ -1275,7 +1275,7 @@ msgstr "초"
 msgid "Contrast index"
 msgstr "콘트라스트 인덱스"
 
-#: src/core/modules/Nebula.cpp:328 src/ui_configurationDialog.h:1602
+#: src/core/modules/Nebula.cpp:328 src/ui_configurationDialog.h:1613
 msgid "Size"
 msgstr "크기"
 
@@ -1298,7 +1298,7 @@ msgstr "광년"
 #: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:252
 #: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:2732
-#: src/gui/AstroCalcDialog.cpp:2790 src/ui_configurationDialog.h:1604
+#: src/gui/AstroCalcDialog.cpp:2790 src/ui_configurationDialog.h:1615
 #: plugins/Supernovae/src/Supernova.cpp:161 plugins/Novae/src/Nova.cpp:166
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Distance"
@@ -2125,139 +2125,139 @@ msgstr "디지털 전천 탐색 (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "계층적 진척 탐색 켜고 끄기 (시험용)"
 
-#: src/core/StelApp.cpp:417
+#: src/core/StelApp.cpp:418
 msgid "Initializing textures..."
 msgstr "텍스쳐를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:421
+#: src/core/StelApp.cpp:422
 msgid "Initializing network access..."
 msgstr "네트워크 접근을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:426
+#: src/core/StelApp.cpp:427
 msgid "Initializing network disk cache..."
 msgstr "네트워크 디스크 캐시를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:440
+#: src/core/StelApp.cpp:441
 msgid "Initializing network proxy..."
 msgstr "네트워크 프록시를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:456
+#: src/core/StelApp.cpp:457
 msgid "Initializing Object Database..."
 msgstr "천체 데이터베이스를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:461
+#: src/core/StelApp.cpp:462
 msgid "Initializing locales..."
 msgstr "언어를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:465
+#: src/core/StelApp.cpp:466
 msgid "Initializing HiPS survey..."
 msgstr "HiPS 탐색을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:471
+#: src/core/StelApp.cpp:472
 msgid "Initializing Solar System objects..."
 msgstr "태양계 천체를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:477
+#: src/core/StelApp.cpp:478
 msgid "Initializing planetary nomenclature..."
 msgstr "행성 지형을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:483
+#: src/core/StelApp.cpp:484
 msgid "Initializing stars..."
 msgstr "별 정보를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:489
 msgid "Initializing core..."
 msgstr "코어 스크립트를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:493
 msgid "Initializing deep-sky objects..."
 msgstr "딥스카이 천체들을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:499
 msgid "Initializing Milky Way..."
 msgstr "은하수를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:504
+#: src/core/StelApp.cpp:505
 msgid "Initializing zodiacal light..."
 msgstr "황도광을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:510
+#: src/core/StelApp.cpp:511
 msgid "Initializing sky image layer..."
 msgstr "하늘 사진 레이어를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:516
+#: src/core/StelApp.cpp:517
 msgid "Initializing TOAST surveys..."
 msgstr "TOAST 탐색을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:523
 msgid "Initializing audio..."
 msgstr "소리를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:526
+#: src/core/StelApp.cpp:527
 msgid "Initializing video..."
 msgstr "영상을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:533
 msgid "Initializing constellations..."
 msgstr "별자리를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:538
+#: src/core/StelApp.cpp:539
 msgid "Initializing asterisms..."
 msgstr "성군을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:544
+#: src/core/StelApp.cpp:545
 msgid "Initializing landscape..."
 msgstr "풍경을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:550
 msgid "Initializing grid lines..."
 msgstr "격자 선을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:556
 msgid "Initializing sporadic meteors..."
 msgstr "산발적인 유성을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:561
+#: src/core/StelApp.cpp:562
 msgid "Initializing user labels..."
 msgstr "사용자 설정 이름표를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:567
 msgid "Initializing sky cultures..."
 msgstr "하늘 문화를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:570
+#: src/core/StelApp.cpp:571
 msgid "Initializing user markers..."
 msgstr "사용자 설정 표지를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:576
+#: src/core/StelApp.cpp:577
 msgid "Initializing custom objects..."
 msgstr "사용자 천체를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:582
+#: src/core/StelApp.cpp:583
 msgid "Initializing highlights..."
 msgstr "강조를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:591
 msgid "Initializing scripting..."
 msgstr "스크립트를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:595
+#: src/core/StelApp.cpp:596
 msgid "Initializing color scheme..."
 msgstr "색채를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:607
+#: src/core/StelApp.cpp:608
 msgid "Night mode"
 msgstr "야간 모드"
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:633
 msgid "Initializing SPOUT sender..."
 msgstr "SPOUT sender를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:641
+#: src/core/StelApp.cpp:643
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout sender를 생성할 수 없습니다. 자세한 상황을 보려면 로그를 보십시오."
 
-#: src/core/StelApp.cpp:667
+#: src/core/StelApp.cpp:669
 msgid "Loading plugin"
 msgstr "플러그인 불러오기"
 
@@ -3572,25 +3572,25 @@ msgctxt "genitive"
 msgid "December"
 msgstr "12월"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:597
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 지정"
 
-#: src/gui/ConfigurationDialog.cpp:989
+#: src/gui/ConfigurationDialog.cpp:991
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "초기 시야각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:997
+#: src/gui/ConfigurationDialog.cpp:999
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "초기 시야 방향 방위각/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1060
+#: src/gui/ConfigurationDialog.cpp:1062
 msgid "Acknowledgements"
 msgstr "인정"
 
-#: src/gui/ConfigurationDialog.cpp:1062
+#: src/gui/ConfigurationDialog.cpp:1064
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
@@ -3598,13 +3598,13 @@ msgstr "인정"
 msgid "Authors"
 msgstr "저자"
 
-#: src/gui/ConfigurationDialog.cpp:1063
+#: src/gui/ConfigurationDialog.cpp:1065
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:1065 src/scripting/StelScriptMgr.cpp:270
+#: src/gui/ConfigurationDialog.cpp:1067 src/scripting/StelScriptMgr.cpp:270
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3624,9 +3624,9 @@ msgstr "연락처"
 msgid "Version"
 msgstr "버전"
 
-#: src/gui/ConfigurationDialog.cpp:1066 src/scripting/StelScriptMgr.cpp:265
+#: src/gui/ConfigurationDialog.cpp:1068 src/scripting/StelScriptMgr.cpp:265
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -3646,20 +3646,20 @@ msgstr "버전"
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:1070
+#: src/gui/ConfigurationDialog.cpp:1072
 msgctxt "license"
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:1250
+#: src/gui/ConfigurationDialog.cpp:1252
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3667,16 +3667,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "새 별을 보려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:1256
 msgid "All available star catalogs have been installed."
 msgstr "모든 별 목록이 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:1259
+#: src/gui/ConfigurationDialog.cpp:1261
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2개 중 %1번째 목록 받기"
 
-#: src/gui/ConfigurationDialog.cpp:1266
+#: src/gui/ConfigurationDialog.cpp:1268
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3685,7 +3685,7 @@ msgstr ""
 "%1 내려받는 중... \n"
 "(이 창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:1273
+#: src/gui/ConfigurationDialog.cpp:1275
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3696,7 +3696,7 @@ msgstr ""
 "별 갯수: %2 백만\n"
 "등급 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1319 src/gui/ConfigurationDialog.cpp:1356
+#: src/gui/ConfigurationDialog.cpp:1321 src/gui/ConfigurationDialog.cpp:1358
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3705,11 +3705,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1415
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3718,208 +3718,208 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "파일이 손상되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:1462 src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1464 src/gui/ConfigurationDialog.cpp:1473
 msgid "Available"
 msgstr "사용 가능"
 
-#: src/gui/ConfigurationDialog.cpp:1464 src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1466 src/gui/ConfigurationDialog.cpp:1475
 msgid "Not Available"
 msgstr "사용 불가능"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1542
+#: src/gui/ConfigurationDialog.cpp:1544
 msgid "Algorithm of"
 msgstr "알고리즘"
 
-#: src/gui/ConfigurationDialog.cpp:1555
+#: src/gui/ConfigurationDialog.cpp:1557
 msgid "Without correction"
 msgstr "보정 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1556
+#: src/gui/ConfigurationDialog.cpp:1558
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1557
+#: src/gui/ConfigurationDialog.cpp:1559
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1558
+#: src/gui/ConfigurationDialog.cpp:1560
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1559
+#: src/gui/ConfigurationDialog.cpp:1561
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1560
+#: src/gui/ConfigurationDialog.cpp:1562
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1561
+#: src/gui/ConfigurationDialog.cpp:1563
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1562
+#: src/gui/ConfigurationDialog.cpp:1564
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1563
+#: src/gui/ConfigurationDialog.cpp:1565
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1566
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1565
+#: src/gui/ConfigurationDialog.cpp:1567
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1566
+#: src/gui/ConfigurationDialog.cpp:1568
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1567
+#: src/gui/ConfigurationDialog.cpp:1569
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1568
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1569
+#: src/gui/ConfigurationDialog.cpp:1571
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1571
+#: src/gui/ConfigurationDialog.cpp:1573
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1572
+#: src/gui/ConfigurationDialog.cpp:1574
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1574
+#: src/gui/ConfigurationDialog.cpp:1576
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1575
+#: src/gui/ConfigurationDialog.cpp:1577
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1576
+#: src/gui/ConfigurationDialog.cpp:1578
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1577
+#: src/gui/ConfigurationDialog.cpp:1579
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1578
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1582
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1585
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
-#: src/gui/ConfigurationDialog.cpp:1585
+#: src/gui/ConfigurationDialog.cpp:1587
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1586
+#: src/gui/ConfigurationDialog.cpp:1588
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1587
+#: src/gui/ConfigurationDialog.cpp:1589
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1588
+#: src/gui/ConfigurationDialog.cpp:1590
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1589
+#: src/gui/ConfigurationDialog.cpp:1591
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1590
+#: src/gui/ConfigurationDialog.cpp:1592
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1591
+#: src/gui/ConfigurationDialog.cpp:1593
 msgid "Henriksson (2017)"
 msgstr "헨리크슨 (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1592
+#: src/gui/ConfigurationDialog.cpp:1594
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "사용자 정의 %1T 공식"
 
-#: src/gui/ConfigurationDialog.cpp:1640 src/gui/ConfigurationDialog.cpp:1677
+#: src/gui/ConfigurationDialog.cpp:1642 src/gui/ConfigurationDialog.cpp:1679
 #: src/gui/StelGuiItems.cpp:681 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "시스템 기본 설정"
 
-#: src/gui/ConfigurationDialog.cpp:1641
+#: src/gui/ConfigurationDialog.cpp:1643
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "년-월-일 (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1642
+#: src/gui/ConfigurationDialog.cpp:1644
 msgid "dd-mm-yyyy"
 msgstr "일-월-년"
 
-#: src/gui/ConfigurationDialog.cpp:1643
+#: src/gui/ConfigurationDialog.cpp:1645
 msgid "mm-dd-yyyy"
 msgstr "월-일-년"
 
-#: src/gui/ConfigurationDialog.cpp:1644
+#: src/gui/ConfigurationDialog.cpp:1646
 msgid "ww, yyyy-mm-dd"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1645
+#: src/gui/ConfigurationDialog.cpp:1647
 msgid "ww, dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1646
+#: src/gui/ConfigurationDialog.cpp:1648
 msgid "ww, mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1678
+#: src/gui/ConfigurationDialog.cpp:1680
 msgid "12-hour format"
 msgstr "12시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:1679
+#: src/gui/ConfigurationDialog.cpp:1681
 msgid "24-hour format"
 msgstr "24시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:1706 src/ui_configurationDialog.h:1565
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: src/gui/ConfigurationDialog.cpp:1708 src/ui_configurationDialog.h:1576
+#: plugins/Oculars/src/Oculars.cpp:2454
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr "없음"
 
-#: src/gui/ConfigurationDialog.cpp:1707
+#: src/gui/ConfigurationDialog.cpp:1709
 msgid "5/6/5 bits"
 msgstr "5/6/5 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1708
+#: src/gui/ConfigurationDialog.cpp:1710
 msgid "6/6/6 bits"
 msgstr "6/6/6 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1709
+#: src/gui/ConfigurationDialog.cpp:1711
 msgid "8/8/8 bits"
 msgstr "8/8/8 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1710
+#: src/gui/ConfigurationDialog.cpp:1712
 msgid "10/10/10 bits"
 msgstr "10/10/10 비트"
 
@@ -4177,7 +4177,7 @@ msgstr "OSX 개발자: %1"
 
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
-#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4877,7 +4877,7 @@ msgstr "현재는 %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:748 src/gui/AstroCalcDialog.cpp:1328
-#: src/gui/AstroCalcDialog.cpp:4650 src/ui_configurationDialog.h:1591
+#: src/gui/AstroCalcDialog.cpp:4650 src/ui_configurationDialog.h:1602
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
@@ -5728,7 +5728,7 @@ msgstr ""
 msgid "Date and Time in Gregorian calendar"
 msgstr "그레고리안 책력에서의 날짜 및 시간"
 
-#: src/scripting/StelScriptMgr.cpp:170 src/ui_configurationDialog.h:1510
+#: src/scripting/StelScriptMgr.cpp:170 src/ui_configurationDialog.h:1521
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "Scripts"
 msgstr "스크립트"
@@ -7533,10 +7533,10 @@ msgstr "복사 (&C)"
 msgid "&Paste"
 msgstr "붙여넣기 (&P)"
 
-#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1331
-#: plugins/Oculars/src/ui_ocularDialog.h:1340
-#: plugins/Oculars/src/ui_ocularDialog.h:1346
-#: plugins/Oculars/src/ui_ocularDialog.h:1367
+#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1341
+#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/ui_ocularDialog.h:1356
+#: plugins/Oculars/src/ui_ocularDialog.h:1377
 msgid "Delete"
 msgstr "삭제"
 
@@ -7560,7 +7560,7 @@ msgstr "폴더"
 msgid "&Choose"
 msgstr "선택 (&C)"
 
-#: src/translations.h:735 src/ui_configurationDialog.h:1692
+#: src/translations.h:735 src/ui_configurationDialog.h:1703
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "취소"
@@ -8982,7 +8982,7 @@ msgstr "프로그램 정보"
 msgid "Log"
 msgstr "로그"
 
-#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:1767
+#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:1778
 msgid "Edit keyboard shortcuts..."
 msgstr "키보드 단축키 편집..."
 
@@ -9248,8 +9248,8 @@ msgid "Lock position when coordinates are used"
 msgstr "좌표가 사용될 때 위치 고정"
 
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2998
-#: src/ui_viewDialog.h:3020 src/ui_configurationDialog.h:1822
-#: src/ui_configurationDialog.h:1833
+#: src/ui_viewDialog.h:3020 src/ui_configurationDialog.h:1837
+#: src/ui_configurationDialog.h:1848
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "설정"
@@ -10181,131 +10181,131 @@ msgstr "하늘 문화"
 msgid "Surveys"
 msgstr "탐색"
 
-#: src/ui_configurationDialog.h:1488
+#: src/ui_configurationDialog.h:1499
 msgid "Configuration"
 msgstr "설정"
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1505
 msgid "Main"
 msgstr "주 설정"
 
-#: src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1507
 msgid "Information"
 msgstr "정보"
 
-#: src/ui_configurationDialog.h:1498 src/ui_configurationDialog.h:1553
+#: src/ui_configurationDialog.h:1509 src/ui_configurationDialog.h:1564
 msgid "Selected object information"
 msgstr "선택한 천체 정보"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1512
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr "추가 설정"
 
-#: src/ui_configurationDialog.h:1503
+#: src/ui_configurationDialog.h:1514
 msgid "Additional settings for Graphical User Interface"
 msgstr "사용자 그래픽 인터페이스 추가 설정"
 
-#: src/ui_configurationDialog.h:1506
+#: src/ui_configurationDialog.h:1517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "시간"
 
-#: src/ui_configurationDialog.h:1508
+#: src/ui_configurationDialog.h:1519
 msgid "Tools"
 msgstr "도구"
 
-#: src/ui_configurationDialog.h:1512
+#: src/ui_configurationDialog.h:1523
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/ui_configurationDialog.h:1515
+#: src/ui_configurationDialog.h:1526
 msgid "Language settings"
 msgstr "언어 설정"
 
-#: src/ui_configurationDialog.h:1516
+#: src/ui_configurationDialog.h:1527
 msgid "Program Language"
 msgstr "프로그램 언어"
 
-#: src/ui_configurationDialog.h:1517
+#: src/ui_configurationDialog.h:1528
 msgid "Sky Culture Language"
 msgstr "하늘 문화 언어"
 
-#: src/ui_configurationDialog.h:1519
+#: src/ui_configurationDialog.h:1530
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "이 기능은 아직 정밀히 시험되지 않았습니다!"
 
-#: src/ui_configurationDialog.h:1521
+#: src/ui_configurationDialog.h:1532
 msgid "Ephemeris settings (experimental)"
 msgstr "천문력 설정 (시험용)"
 
-#: src/ui_configurationDialog.h:1522 src/ui_configurationDialog.h:1523
+#: src/ui_configurationDialog.h:1533 src/ui_configurationDialog.h:1534
 msgid "Not installed"
 msgstr "설치되지 않음"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1536
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr "DE431은 -13000년부터 +17000년까지의 위치 데이터를 제공합니다. 특수한 경우에만 사용합니다."
 
-#: src/ui_configurationDialog.h:1527
+#: src/ui_configurationDialog.h:1538
 msgid "Use DE431 (long-time data)"
 msgstr "DE431 (장기간) 사용"
 
-#: src/ui_configurationDialog.h:1529
+#: src/ui_configurationDialog.h:1540
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430은 정확도가 높지만, 자료의 기간은 1550~2650년밖에 되지 않습니다."
 
-#: src/ui_configurationDialog.h:1531
+#: src/ui_configurationDialog.h:1542
 msgid "Use DE430 (high accuracy)"
 msgstr "DE430 (정확도 높음) 사용"
 
-#: src/ui_configurationDialog.h:1533
+#: src/ui_configurationDialog.h:1544
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr "VSOP87의 권장 범위는 -4000~+8000년이지만, 이 범위를 벗어나도 위치 정보는 유용합니다."
 
-#: src/ui_configurationDialog.h:1535
+#: src/ui_configurationDialog.h:1546
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr "VSOP87/ELP2000-82B는 위의 것들이 설치 및 활성화가 되지 않았을 때 사용됩니다."
 
-#: src/ui_configurationDialog.h:1536
+#: src/ui_configurationDialog.h:1547
 msgid "Default options"
 msgstr "기본 설정"
 
-#: src/ui_configurationDialog.h:1537
+#: src/ui_configurationDialog.h:1548
 msgid "Save View"
 msgstr "시야 저장"
 
-#: src/ui_configurationDialog.h:1539
+#: src/ui_configurationDialog.h:1550
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "사용 중 변경한 사항을 스텔라리움을 시작할 때에 적용되도록 저장합니다."
 
-#: src/ui_configurationDialog.h:1541
+#: src/ui_configurationDialog.h:1552
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
 msgstr "설정 저장"
 
-#: src/ui_configurationDialog.h:1543
+#: src/ui_configurationDialog.h:1554
 msgid "Restore the default settings that came with Stellarium"
 msgstr "스텔라리움의 기본 설정으로 되돌립니다."
 
-#: src/ui_configurationDialog.h:1545
+#: src/ui_configurationDialog.h:1556
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
 msgstr "기본값 복원"
 
-#: src/ui_configurationDialog.h:1546
+#: src/ui_configurationDialog.h:1557
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
@@ -10314,587 +10314,595 @@ msgstr ""
 "다음번에 스텔라리움을 실행할 때 표시할 시야각과 시선 방향을 지정(저장)할 수 있습니다. 기본값으로 되돌리려면 스텔라리움을 재시작해야 "
 "합니다."
 
-#: src/ui_configurationDialog.h:1548
+#: src/ui_configurationDialog.h:1559
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "스텔라리움 시작 시 보이는 수직 (높이)"
 
-#: src/ui_configurationDialog.h:1551
+#: src/ui_configurationDialog.h:1562
 msgid "The direction you're looking when Stellarium starts"
 msgstr "시작 시 보이는 시야 방향"
 
-#: src/ui_configurationDialog.h:1555
+#: src/ui_configurationDialog.h:1566
 msgid "Display less information"
 msgstr "정보 일부만 표시"
 
-#: src/ui_configurationDialog.h:1557
+#: src/ui_configurationDialog.h:1568
 msgid "Short"
 msgstr "짧게"
 
-#: src/ui_configurationDialog.h:1559
+#: src/ui_configurationDialog.h:1570
 msgid "Display all information available"
 msgstr "가능한 모든 정보 보기"
 
-#: src/ui_configurationDialog.h:1561
+#: src/ui_configurationDialog.h:1572
 msgid "All available"
 msgstr "모두"
 
-#: src/ui_configurationDialog.h:1563
+#: src/ui_configurationDialog.h:1574
 msgid "Display no information"
 msgstr "정보 보이지 않음"
 
-#: src/ui_configurationDialog.h:1567
+#: src/ui_configurationDialog.h:1578
 msgid "Display user settings information"
 msgstr "사용자가 설정한 정보 보기"
 
-#: src/ui_configurationDialog.h:1569
+#: src/ui_configurationDialog.h:1580
 msgid "Customized"
 msgstr "사용자 정의"
 
-#: src/ui_configurationDialog.h:1570
+#: src/ui_configurationDialog.h:1581
 msgid "Displayed fields"
 msgstr "표시 항목"
 
-#: src/ui_configurationDialog.h:1572
+#: src/ui_configurationDialog.h:1583
 msgid "Horizontal coordinates"
 msgstr "지평좌표계"
 
-#: src/ui_configurationDialog.h:1574
+#: src/ui_configurationDialog.h:1585
 msgid "Azimuth/Altitude"
 msgstr "방위각/고도"
 
-#: src/ui_configurationDialog.h:1576
+#: src/ui_configurationDialog.h:1587
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "J2000.0에서의 적도좌표계 및 분점"
 
-#: src/ui_configurationDialog.h:1578
+#: src/ui_configurationDialog.h:1589
 msgid "Right ascension/Declination (J2000)"
 msgstr "적경/적위 (J2000)"
 
-#: src/ui_configurationDialog.h:1580
+#: src/ui_configurationDialog.h:1591
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "현재 기준의 적도좌표계 및 분점 (지구 기준만)"
 
-#: src/ui_configurationDialog.h:1582
+#: src/ui_configurationDialog.h:1593
 msgid "Ecliptic coordinates (of date)"
 msgstr "황도좌표계 (현재)"
 
-#: src/ui_configurationDialog.h:1584
+#: src/ui_configurationDialog.h:1595
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "J2000.0에서의 황도좌표계 및 분점"
 
-#: src/ui_configurationDialog.h:1586
+#: src/ui_configurationDialog.h:1597
 msgid "Ecliptic coordinates (J2000)"
 msgstr "황도좌표계 (J2000)"
 
-#: src/ui_configurationDialog.h:1588 src/ui_configurationDialog.h:1611
+#: src/ui_configurationDialog.h:1599 src/ui_configurationDialog.h:1622
 msgid "Equatorial coordinates, equinox of date"
 msgstr "황도좌표계 (현재)"
 
-#: src/ui_configurationDialog.h:1590
+#: src/ui_configurationDialog.h:1601
 msgid "Right ascension/Declination (of date)"
 msgstr "적경/적위(현재)"
 
-#: src/ui_configurationDialog.h:1592
+#: src/ui_configurationDialog.h:1603
 msgid "Supergalactic coordinates"
 msgstr "초은하 좌표계"
 
-#: src/ui_configurationDialog.h:1593
+#: src/ui_configurationDialog.h:1604
 msgid "Visual magnitude"
 msgstr "겉보기등급"
 
-#: src/ui_configurationDialog.h:1594
+#: src/ui_configurationDialog.h:1605
 msgid "Absolute magnitude"
 msgstr "절대등급"
 
-#: src/ui_configurationDialog.h:1596
+#: src/ui_configurationDialog.h:1607
 msgid "The type of the object (star, planet, etc.)"
 msgstr "천체의 종류(별, 행성, 기타 등등)"
 
-#: src/ui_configurationDialog.h:1600
+#: src/ui_configurationDialog.h:1611
 msgid "Angular or physical size"
 msgstr "각지름 또는 물리적 크기"
 
-#: src/ui_configurationDialog.h:1603
+#: src/ui_configurationDialog.h:1614
 msgid "Velocity"
 msgstr "속도"
 
-#: src/ui_configurationDialog.h:1605
+#: src/ui_configurationDialog.h:1616
 msgid "Sidereal time"
 msgstr "항성시"
 
-#: src/ui_configurationDialog.h:1607
+#: src/ui_configurationDialog.h:1618
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "IAU 별자리 3자 축약법"
 
-#: src/ui_configurationDialog.h:1609
+#: src/ui_configurationDialog.h:1620
 msgid "Constellation"
 msgstr "별자리"
 
-#: src/ui_configurationDialog.h:1613
+#: src/ui_configurationDialog.h:1624
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Hour angle/Declination"
 msgstr "시간각/적위"
 
-#: src/ui_configurationDialog.h:1614
+#: src/ui_configurationDialog.h:1625
 msgid "Catalog number(s)"
 msgstr "카탈로그 번호"
 
-#: src/ui_configurationDialog.h:1616
+#: src/ui_configurationDialog.h:1627
 msgid "Show time of rise, transit and set of celestial object"
 msgstr "천체의 출, 통과, 몰 시간 보이기"
 
-#: src/ui_configurationDialog.h:1618
+#: src/ui_configurationDialog.h:1629
 msgid "Rises, transits and sets"
 msgstr "출, 통과, 몰"
 
-#: src/ui_configurationDialog.h:1620
+#: src/ui_configurationDialog.h:1631
 msgid "Spectral class, nebula type, etc."
 msgstr "분광형, 성운 종류, 기타 등등"
 
-#: src/ui_configurationDialog.h:1622
+#: src/ui_configurationDialog.h:1633
 msgid "Additional information"
 msgstr "추가 정보"
 
-#: src/ui_configurationDialog.h:1623
+#: src/ui_configurationDialog.h:1634
 msgid "Galactic coordinates"
 msgstr "은경/은위"
 
-#: src/ui_configurationDialog.h:1624
+#: src/ui_configurationDialog.h:1635
 msgid "Additional buttons"
 msgstr "추가 버튼"
 
-#: src/ui_configurationDialog.h:1626
+#: src/ui_configurationDialog.h:1637
 msgid "Enable a feature to store favorite views."
 msgstr "좋아하는 시야를 저장하는 기능 활성화"
 
-#: src/ui_configurationDialog.h:1628
+#: src/ui_configurationDialog.h:1639
 msgid "Show bookmarks button"
 msgstr "즐겨찾기 버튼 표시"
 
-#: src/ui_configurationDialog.h:1630 src/ui_configurationDialog.h:1661
-#: src/ui_configurationDialog.h:1669 src/ui_configurationDialog.h:1673
+#: src/ui_configurationDialog.h:1641 src/ui_configurationDialog.h:1672
+#: src/ui_configurationDialog.h:1680 src/ui_configurationDialog.h:1684
 msgid "Show button in addition to keyboard shortcut?"
 msgstr "키보드 단축키 외에도 버튼을 표시할까요?"
 
-#: src/ui_configurationDialog.h:1632
+#: src/ui_configurationDialog.h:1643
 msgid "Show centering button"
 msgstr "선택한 천체로 이동 버튼 표시"
 
-#: src/ui_configurationDialog.h:1634
+#: src/ui_configurationDialog.h:1645
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
 msgstr "HiPS 탐색 버튼 보이기를 켜고 끄기. 보기 설정에서 탐색 종류를 고르세요."
 
-#: src/ui_configurationDialog.h:1636
+#: src/ui_configurationDialog.h:1647
 msgid "Show HiPS button"
 msgstr "HiPS 버튼 표시"
 
-#: src/ui_configurationDialog.h:1638
+#: src/ui_configurationDialog.h:1649
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr "디지털화 전천 탐색 버튼 보이기를 켜고 끄기."
 
-#: src/ui_configurationDialog.h:1640
+#: src/ui_configurationDialog.h:1651
 msgid "Show DSS button"
 msgstr "DSS 버튼 표시"
 
-#: src/ui_configurationDialog.h:1642
+#: src/ui_configurationDialog.h:1653
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "화면 상하 반전과 좌우 반전 단추를 켜고 끕니다."
 
-#: src/ui_configurationDialog.h:1644
+#: src/ui_configurationDialog.h:1655
 msgid "Show flip buttons"
 msgstr "반전 단추 표시"
 
-#: src/ui_configurationDialog.h:1645
+#: src/ui_configurationDialog.h:1656
 msgid "Show asterism lines button"
 msgstr "성군 선 버튼 표시"
 
-#: src/ui_configurationDialog.h:1647
+#: src/ui_configurationDialog.h:1658
 msgid "Toggle display of nebula images."
 msgstr "성운 사진 표시 켜고 끄기."
 
-#: src/ui_configurationDialog.h:1649
+#: src/ui_configurationDialog.h:1660
 msgid "Show nebula background button"
 msgstr "성운 배경 버튼 표시"
 
-#: src/ui_configurationDialog.h:1650
+#: src/ui_configurationDialog.h:1661
 msgid "Show asterism labels button"
 msgstr "성군 이름표 버튼 표시"
 
-#: src/ui_configurationDialog.h:1652
+#: src/ui_configurationDialog.h:1663
 msgid "A button to toggle ecliptic grid of date"
 msgstr "현재 황도 격자를 켜고 끄는 버튼"
 
-#: src/ui_configurationDialog.h:1654
+#: src/ui_configurationDialog.h:1665
 msgid "Show ecliptic grid button"
 msgstr "황도 격자 버튼 표시"
 
-#: src/ui_configurationDialog.h:1655
+#: src/ui_configurationDialog.h:1666
 msgid "Show constellation boundaries button"
 msgstr "별자리 경계선 버튼 표시"
 
-#: src/ui_configurationDialog.h:1657
+#: src/ui_configurationDialog.h:1668
 msgid "A button to toggle equatorial J2000 grid"
 msgstr " J2000 적도좌표계 격자를 켜고 끄는 버튼"
 
-#: src/ui_configurationDialog.h:1659
+#: src/ui_configurationDialog.h:1670
 msgid "Show ICRS grid button"
 msgstr "ICRS 격자 표시"
 
-#: src/ui_configurationDialog.h:1663
+#: src/ui_configurationDialog.h:1674
 msgid "Show nightmode button"
 msgstr "야간  모드 버튼 표시"
 
-#: src/ui_configurationDialog.h:1665
+#: src/ui_configurationDialog.h:1676
 msgid "A button to toggle galactic grid"
 msgstr "은하좌표계 격자를 켜고 끄는 버튼"
 
-#: src/ui_configurationDialog.h:1667
+#: src/ui_configurationDialog.h:1678
 msgid "Show galactic grid button"
 msgstr "은하좌표계 격자 버튼 표시"
 
-#: src/ui_configurationDialog.h:1671
+#: src/ui_configurationDialog.h:1682
 msgid "Show fullscreen button"
 msgstr "전체화면 모드 버튼 표시"
 
-#: src/ui_configurationDialog.h:1675
+#: src/ui_configurationDialog.h:1686
 msgid "Show Quit button"
 msgstr "종료 버튼 표시"
 
-#: src/ui_configurationDialog.h:1677
+#: src/ui_configurationDialog.h:1688
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "GUI 버튼을 통해 배경 사용하기 켜고 끄기"
 
-#: src/ui_configurationDialog.h:1679
+#: src/ui_configurationDialog.h:1690
 msgid "Use buttons background"
 msgstr "버튼 배경 사용"
 
-#: src/ui_configurationDialog.h:1680
+#: src/ui_configurationDialog.h:1691
 msgid "Star catalog updates"
 msgstr "별 목록 업데이트"
 
-#: src/ui_configurationDialog.h:1682
+#: src/ui_configurationDialog.h:1693
 msgid "Click here to start downloading"
 msgstr "내려받으려면 클릭하세요."
 
-#: src/ui_configurationDialog.h:1684
+#: src/ui_configurationDialog.h:1695
 msgid "Download this file to view even more stars"
 msgstr "더 많은 별을 볼 수 있게 파일 내려받기"
 
-#: src/ui_configurationDialog.h:1686
+#: src/ui_configurationDialog.h:1697
 msgid "Restart the download"
 msgstr "내려받기 다시 시작"
 
-#: src/ui_configurationDialog.h:1688
+#: src/ui_configurationDialog.h:1699
 msgid "Retry"
 msgstr "다시 시도"
 
-#: src/ui_configurationDialog.h:1690
+#: src/ui_configurationDialog.h:1701
 msgid "Stop the download. You can always restart it later"
 msgstr "내려받기 중단. 이후 언제라도 다시 받을 수 있습니다."
 
-#: src/ui_configurationDialog.h:1693
+#: src/ui_configurationDialog.h:1704
 msgid "Additional information settings"
 msgstr "추가 정보 설정"
 
-#: src/ui_configurationDialog.h:1694
+#: src/ui_configurationDialog.h:1705
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr "표면 광도를 표시할 때 줄인 단위를 사용"
 
-#: src/ui_configurationDialog.h:1695
+#: src/ui_configurationDialog.h:1706
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr "표면 광도의 단위를 등급/초^2 로 사용"
 
-#: src/ui_configurationDialog.h:1696
+#: src/ui_configurationDialog.h:1707
 msgid "Use formatting output for coordinates and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1697
+#: src/ui_configurationDialog.h:1708
 msgid "Use designations for celestial coordinate systems"
 msgstr "천체 좌표계를 학술적 이름으로 표시"
 
-#: src/ui_configurationDialog.h:1698
+#: src/ui_configurationDialog.h:1709
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "Startup date and time"
 msgstr "시작시 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1700
+#: src/ui_configurationDialog.h:1711
 msgid "Starts Stellarium at system clock date and time"
 msgstr "시스템 날짜 및 시각으로 스텔라리움을 시작합니다."
 
-#: src/ui_configurationDialog.h:1702
+#: src/ui_configurationDialog.h:1713
 msgid "System date and time"
 msgstr "시스템 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1704
+#: src/ui_configurationDialog.h:1715
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "스텔라리움을 시작할 때 시뮬레이션 시각을 다음 시각으로 맞춥니다."
 
-#: src/ui_configurationDialog.h:1706
+#: src/ui_configurationDialog.h:1717
 msgid "System date at:"
 msgstr "시각 지정:"
 
-#: src/ui_configurationDialog.h:1708
+#: src/ui_configurationDialog.h:1719
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "스텔라리움을 시작할 때 특정한 날짜 및 시각을 사용합니다."
 
-#: src/ui_configurationDialog.h:1710
+#: src/ui_configurationDialog.h:1721
 msgid "Other:"
 msgstr "기타:"
 
-#: src/ui_configurationDialog.h:1712
+#: src/ui_configurationDialog.h:1723
 msgid "Use current local date and time"
 msgstr "현재 지방시를 사용합니다"
 
-#: src/ui_configurationDialog.h:1714
+#: src/ui_configurationDialog.h:1725
 msgid "use current"
 msgstr "현재 시간 사용"
 
-#: src/ui_configurationDialog.h:1716
+#: src/ui_configurationDialog.h:1727
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
 msgstr "이 설정은 시간과 날짜가 아래 표시줄에 나타내는 형식을 정합니다."
 
-#: src/ui_configurationDialog.h:1718
+#: src/ui_configurationDialog.h:1729
 msgid "Display formats of date and time"
 msgstr "날짜와 시간의 표시 형식 보이기"
 
-#: src/ui_configurationDialog.h:1719
+#: src/ui_configurationDialog.h:1730
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "날짜:"
 
-#: src/ui_configurationDialog.h:1720
+#: src/ui_configurationDialog.h:1731
 msgid "and time:"
 msgstr "시간:"
 
-#: src/ui_configurationDialog.h:1721
+#: src/ui_configurationDialog.h:1732
 msgid "Time correction"
 msgstr "시간 보정"
 
-#: src/ui_configurationDialog.h:1724
+#: src/ui_configurationDialog.h:1735
 msgid "Edit equation"
 msgstr "공식 편집"
 
-#: src/ui_configurationDialog.h:1726
+#: src/ui_configurationDialog.h:1737
 msgid "Planetarium options"
 msgstr "플라네타리움 설정"
 
-#: src/ui_configurationDialog.h:1728
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr "구면경 왜곡은 저가형 플라네타리움 시스템에서 구면경에 스텔라리움을 투영할 때 사용합니다."
+#: src/ui_configurationDialog.h:1739
+msgid "Hides the mouse cursor when inactive"
+msgstr "멈췄을 때 마우스 커서 숨기기"
 
-#: src/ui_configurationDialog.h:1730
-msgid "Spheric mirror distortion"
-msgstr "구면경 왜곡"
+#: src/ui_configurationDialog.h:1741
+msgid "Mouse cursor timeout:"
+msgstr "마우스 커서 제한시간:"
 
-#: src/ui_configurationDialog.h:1731
-msgid "Dithering"
-msgstr "디터링"
-
-#: src/ui_configurationDialog.h:1733
-msgid "Align labels with the screen center"
-msgstr "이름표를 화면 중앙으로 정렬"
-
-#: src/ui_configurationDialog.h:1735
-msgid "Gravity labels"
-msgstr "중력 이름표"
-
-#: src/ui_configurationDialog.h:1737 src/ui_configurationDialog.h:1740
-msgid "Hide other constellations when you click one"
-msgstr "별자리를 클릭할 때 다른 별자리 감추기"
-
-#: src/ui_configurationDialog.h:1744
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "마우스로 회전(드래그)과 줌(마우스 휠)을 가능하게 합니다"
+#: src/ui_configurationDialog.h:1743
+msgid "seconds"
+msgstr "초"
 
 #: src/ui_configurationDialog.h:1746
-msgid "Enable mouse navigation"
-msgstr "마우스 탐색 활성화"
-
-#: src/ui_configurationDialog.h:1748
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr "활성화되면 \"자동 축소\" 키를 눌렀을 때 초기 시야 방향으로도 돌아갑니다"
-
-#: src/ui_configurationDialog.h:1750
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "자동 축소 키로 초기 시야 방향으로 돌아가기"
-
-#: src/ui_configurationDialog.h:1752
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr "(권장) 행성 표면에서의 시야를 활성화합니다. 비활성화된 경우, 행성 중심 기준의 시야를 보여줍니다."
 
-#: src/ui_configurationDialog.h:1754
+#: src/ui_configurationDialog.h:1748
 msgid "Topocentric coordinates"
 msgstr "지구중심좌표계"
 
-#: src/ui_configurationDialog.h:1756
+#: src/ui_configurationDialog.h:1750
+msgid "Flash a short message when toggling mount mode."
+msgstr "가대 모드를 켜고 끌 때 짧은 메시지를 깜빡입니다."
+
+#: src/ui_configurationDialog.h:1752
+msgid "Indication for mount mode"
+msgstr "가대 방식 표시"
+
+#: src/ui_configurationDialog.h:1753
+msgid "Dithering"
+msgstr "디터링"
+
+#: src/ui_configurationDialog.h:1755
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "마우스로 회전(드래그)과 줌(마우스 휠)을 가능하게 합니다"
+
+#: src/ui_configurationDialog.h:1757
+msgid "Enable mouse navigation"
+msgstr "마우스 탐색 활성화"
+
+#: src/ui_configurationDialog.h:1759
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr "구면경 왜곡은 저가형 플라네타리움 시스템에서 구면경에 스텔라리움을 투영할 때 사용합니다."
+
+#: src/ui_configurationDialog.h:1761
+msgid "Spheric mirror distortion"
+msgstr "구면경 왜곡"
+
+#: src/ui_configurationDialog.h:1763
+msgid "Automatic change of landscape when planet is changed"
+msgstr "행성이 변화될 때 자동으로 풍경이 변합니다"
+
+#: src/ui_configurationDialog.h:1765
+msgid "Auto select landscapes"
+msgstr "풍경 자동 선택"
+
+#: src/ui_configurationDialog.h:1767
+msgid "Align labels with the screen center"
+msgstr "이름표를 화면 중앙으로 정렬"
+
+#: src/ui_configurationDialog.h:1769
+msgid "Gravity labels"
+msgstr "중력 이름표"
+
+#: src/ui_configurationDialog.h:1771
+msgid "Activate this option to calculate azimuth from south towards west."
+msgstr "방위각을 남쪽에서 서쪽 방향으로 계산하고 싶다면 이 설정을 활성화하세요."
+
+#: src/ui_configurationDialog.h:1773
+msgid "Azimuth from South"
+msgstr "방위각의 기준점을 남쪽으로 설정"
+
+#: src/ui_configurationDialog.h:1775
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "화면 중심의 원 바깥쪽에 있는 모든 것을 표시하지 않습니다"
+
+#: src/ui_configurationDialog.h:1777
+msgid "Disc viewport"
+msgstr "원형 뷰포트"
+
+#: src/ui_configurationDialog.h:1780 src/ui_configurationDialog.h:1783
+msgid "Hide other constellations when you click one"
+msgstr "별자리를 클릭할 때 다른 별자리 감추기"
+
+#: src/ui_configurationDialog.h:1787
+msgid "Use decimal degrees for coordinates"
+msgstr "좌표에 십진법 각도 사용"
+
+#: src/ui_configurationDialog.h:1789
+msgid "Use decimal degrees"
+msgstr "십진법 각도 사용"
+
+#: src/ui_configurationDialog.h:1791
 msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
 msgstr "위치 창에서 위치를 선택할 때 대기권 및 지형을 자동으로 선택합니다."
 
-#: src/ui_configurationDialog.h:1758
+#: src/ui_configurationDialog.h:1793
 msgid "Auto-enabling for the environment"
 msgstr "환경 자동 활성화 "
 
-#: src/ui_configurationDialog.h:1760
+#: src/ui_configurationDialog.h:1795
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr "활성화되면 \"자동 축소\" 키를 눌렀을 때 초기 시야 방향으로도 돌아갑니다"
+
+#: src/ui_configurationDialog.h:1797
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "자동 축소 키로 초기 시야 방향으로 돌아가기"
+
+#: src/ui_configurationDialog.h:1799
+msgid "Allow keyboard to pan and zoom"
+msgstr "키보드로 회전과 줌을 가능하게 합니다"
+
+#: src/ui_configurationDialog.h:1801
+msgid "Enable keyboard navigation"
+msgstr "키보드 탐색 활성화"
+
+#: src/ui_configurationDialog.h:1803
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr "징동은 지구 자전축이 몇 각초 단위로 흔들리는 현상을 말합니다."
 
-#: src/ui_configurationDialog.h:1762
+#: src/ui_configurationDialog.h:1805
 msgid "Include nutation"
 msgstr "장동 포함"
 
-#: src/ui_configurationDialog.h:1764
-msgid "Use decimal degrees for coordinates"
-msgstr "좌표에 십진법 각도 사용"
-
-#: src/ui_configurationDialog.h:1766
-msgid "Use decimal degrees"
-msgstr "십진법 각도 사용"
-
-#: src/ui_configurationDialog.h:1769
-msgid "Flash a short message when toggling mount mode."
-msgstr "가대 모드를 켜고 끌 때 짧은 메시지를 깜빡입니다."
-
-#: src/ui_configurationDialog.h:1771
-msgid "Indication for mount mode"
-msgstr "가대 방식 표시"
-
-#: src/ui_configurationDialog.h:1773
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "화면 중심의 원 바깥쪽에 있는 모든 것을 표시하지 않습니다"
-
-#: src/ui_configurationDialog.h:1775
-msgid "Disc viewport"
-msgstr "원형 뷰포트"
-
-#: src/ui_configurationDialog.h:1777
-msgid "Activate this option to calculate azimuth from south towards west."
-msgstr "방위각을 남쪽에서 서쪽 방향으로 계산하고 싶다면 이 설정을 활성화하세요."
-
-#: src/ui_configurationDialog.h:1779
-msgid "Azimuth from South"
-msgstr "방위각의 기준점을 남쪽으로 설정"
-
-#: src/ui_configurationDialog.h:1781
-msgid "Hides the mouse cursor when inactive"
-msgstr "멈췄을 때 마우스 커서 숨기기"
-
-#: src/ui_configurationDialog.h:1783
-msgid "Mouse cursor timeout:"
-msgstr "마우스 커서 제한시간:"
-
-#: src/ui_configurationDialog.h:1785
-msgid "seconds"
-msgstr "초"
-
-#: src/ui_configurationDialog.h:1788
-msgid "Allow keyboard to pan and zoom"
-msgstr "키보드로 회전과 줌을 가능하게 합니다"
-
-#: src/ui_configurationDialog.h:1790
-msgid "Enable keyboard navigation"
-msgstr "키보드 탐색 활성화"
-
-#: src/ui_configurationDialog.h:1792
-msgid "Automatic change of landscape when planet is changed"
-msgstr "행성이 변화될 때 자동으로 풍경이 변합니다"
-
-#: src/ui_configurationDialog.h:1794
-msgid "Auto select landscapes"
-msgstr "풍경 자동 선택"
-
-#: src/ui_configurationDialog.h:1795
-msgid "Font size: Screen"
-msgstr "글꼴 크기: 화면"
-
-#: src/ui_configurationDialog.h:1797
-msgid "Base font size for on-screen text"
-msgstr "스크린 위 글자에 대한 기본 글꼴 크기"
-
-#: src/ui_configurationDialog.h:1800
-msgid "Graphical user interface"
-msgstr "사용자 그래픽 인터페이스"
-
-#: src/ui_configurationDialog.h:1802
-msgctxt "abbreviation"
-msgid "GUI"
-msgstr "GUI"
-
-#: src/ui_configurationDialog.h:1804
-msgid "Base font size for dialogs"
-msgstr "목록에 대한 기본 글꼴 크기"
-
 #: src/ui_configurationDialog.h:1807
-msgid "Pre-select fonts for a particular writing system"
-msgstr "특정 문자 체계에 대해서는 미리 글꼴을 선택해 주세요"
+msgid "Set one color for text in info panel for all objects"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1810
-msgid "Application font"
-msgstr "프로그램 글꼴"
+#: src/ui_configurationDialog.h:1809
+msgid "Overwrite text color"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1813
+#: src/ui_configurationDialog.h:1811
 msgid ""
 "Kinetic scrolling means dragging text panels directly instead of dragging "
 "window handles."
 msgstr "키네틱 스크롤링은 글자를 읽을 때 가변의 스크롤바 대신 글자를 드래그해서 창을 스크롤할 수 있도록 해 주는 것입니다."
 
-#: src/ui_configurationDialog.h:1815
+#: src/ui_configurationDialog.h:1813
 msgid "Use kinetic scrolling"
 msgstr "키네틱 스크롤링 사용"
 
+#: src/ui_configurationDialog.h:1814
+msgid "Font size: Screen"
+msgstr "글꼴 크기: 화면"
+
 #: src/ui_configurationDialog.h:1816
+msgid "Base font size for on-screen text"
+msgstr "스크린 위 글자에 대한 기본 글꼴 크기"
+
+#: src/ui_configurationDialog.h:1819
+msgid "Graphical user interface"
+msgstr "사용자 그래픽 인터페이스"
+
+#: src/ui_configurationDialog.h:1821
+msgctxt "abbreviation"
+msgid "GUI"
+msgstr "GUI"
+
+#: src/ui_configurationDialog.h:1823
+msgid "Base font size for dialogs"
+msgstr "목록에 대한 기본 글꼴 크기"
+
+#: src/ui_configurationDialog.h:1826
+msgid "Pre-select fonts for a particular writing system"
+msgstr "특정 문자 체계에 대해서는 미리 글꼴을 선택해 주세요"
+
+#: src/ui_configurationDialog.h:1829
+msgid "Application font"
+msgstr "프로그램 글꼴"
+
+#: src/ui_configurationDialog.h:1831
 msgid "Screenshots"
 msgstr "스크린샷"
 
-#: src/ui_configurationDialog.h:1817
+#: src/ui_configurationDialog.h:1832
 msgid "Screenshot Directory"
 msgstr "스크린샷 경로"
 
-#: src/ui_configurationDialog.h:1819
+#: src/ui_configurationDialog.h:1834
 msgid "File format"
 msgstr "파일 형식"
 
-#: src/ui_configurationDialog.h:1820
+#: src/ui_configurationDialog.h:1835
 msgid "Invert colors"
 msgstr "색 반전"
 
-#: src/ui_configurationDialog.h:1821
+#: src/ui_configurationDialog.h:1836
 msgid "Custom size"
 msgstr "크기 조절"
 
-#: src/ui_configurationDialog.h:1824
+#: src/ui_configurationDialog.h:1839
 msgid "Close window when script runs"
 msgstr "스크립트 실행 중에 창 닫기"
 
-#: src/ui_configurationDialog.h:1826
+#: src/ui_configurationDialog.h:1841
 msgid "Run the selected script"
 msgstr "선택한 스크립트 실행"
 
-#: src/ui_configurationDialog.h:1830
+#: src/ui_configurationDialog.h:1845
 msgid "Stop a running script"
 msgstr "실행 중인 스크립트 정지"
 
-#: src/ui_configurationDialog.h:1834
+#: src/ui_configurationDialog.h:1849
 msgid "Load at startup"
 msgstr "시작시 불러오기"
 
-#: src/ui_configurationDialog.h:1835
+#: src/ui_configurationDialog.h:1850
 msgid "configure"
 msgstr "설정"
 
@@ -11916,7 +11924,7 @@ msgstr ""
 " 향하고 있었습니다. 우린 그걸 재서 계산했습니다. 우리가 하와이에 있었으면 했죠."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -11936,7 +11944,7 @@ msgid "Links"
 msgstr "링크"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -11959,7 +11967,7 @@ msgstr "지원은 Github 웹사이트를 통해 이루어집니다. 글을 올�
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -11980,7 +11988,7 @@ msgstr "질문이 있으시다면, {여기에서 답을 찾을 수 있습니다}
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:563
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12001,7 +12009,7 @@ msgstr "오류 제보 및 기능 제안은 {여기}에서 하실 수 있습니�
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:565
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12084,7 +12092,7 @@ msgid "Restore default settings"
 msgstr "기본 설정 복원"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1375
+#: plugins/Oculars/src/ui_ocularDialog.h:1385
 #: plugins/Satellites/src/ui_satellitesDialog.h:849
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12118,9 +12126,9 @@ msgstr "지평선을 따라 나침반 방위 표시를 나타냅니다."
 msgid "Compass marks"
 msgstr "나침반 표시"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1523
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1276
+#: plugins/Oculars/src/ui_ocularDialog.h:1282
 msgid "Oculars"
 msgstr "접안렌즈"
 
@@ -12133,7 +12141,7 @@ msgstr ""
 "망원경 접안렌즈를 통해 보는 것처럼 하늘을 보여줍니다. (배율과 시야각만 재현합니다.) 또 센서 프레임과 텔라드 시야를 표시할 수 "
 "있습니다."
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1023
 msgid "Please select an object before switching to ocular view."
 msgstr "접안부 시야로 전환하기 전에 천체를 선택해주세요."
 
@@ -12185,44 +12193,44 @@ msgstr "CCD 회전(&R)"
 msgid "&Reset rotation"
 msgstr "회전 초기화(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
-#: plugins/Oculars/src/ui_ocularDialog.h:1295
+#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/ui_ocularDialog.h:1301
 msgid "Ocular view"
 msgstr "접안렌즈 시야"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1525
 msgid "Oculars popup menu"
 msgstr "접안렌즈 팝업 메뉴"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Show crosshairs"
 msgstr "십자선 보이기"
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Image sensor frame"
 msgstr "이미지 센서 프레임"
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Telrad sight"
 msgstr "텔라드 시야"
 
-#: plugins/Oculars/src/Oculars.cpp:1530
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Oculars plugin configuration"
 msgstr "접안렌즈 플러그인 설정"
 
-#: plugins/Oculars/src/Oculars.cpp:1532
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Select next telescope"
 msgstr "다음 망원경 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1534
+#: plugins/Oculars/src/Oculars.cpp:1533
 msgid "Select previous telescope"
 msgstr "이전 망원경 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1536
+#: plugins/Oculars/src/Oculars.cpp:1535
 msgid "Select next eyepiece"
 msgstr "다음 접안렌즈 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1538
+#: plugins/Oculars/src/Oculars.cpp:1537
 msgid "Select previous eyepiece"
 msgstr "이전 접안렌즈 선택"
 
@@ -12243,116 +12251,116 @@ msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1983
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "단안경"
 
-#: plugins/Oculars/src/Oculars.cpp:1985
+#: plugins/Oculars/src/Oculars.cpp:2007
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "쌍안경"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2005
+#: plugins/Oculars/src/Oculars.cpp:2027
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "접안렌즈 초점거리: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2012
+#: plugins/Oculars/src/Oculars.cpp:2034
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "접안부 aFOV(시야각):%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "렌즈 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2027
+#: plugins/Oculars/src/Oculars.cpp:2049
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "렌즈 #%1:%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2032
+#: plugins/Oculars/src/Oculars.cpp:2054
 msgid "Lens: none"
 msgstr "렌즈: 없음"
 
-#: plugins/Oculars/src/Oculars.cpp:2047 plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2069 plugins/Oculars/src/Oculars.cpp:2129
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "망원경 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2056
+#: plugins/Oculars/src/Oculars.cpp:2078
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr "배율: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2063
+#: plugins/Oculars/src/Oculars.cpp:2085
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "사출동공: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2070
+#: plugins/Oculars/src/Oculars.cpp:2092
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr "시야각: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2091
+#: plugins/Oculars/src/Oculars.cpp:2113
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "범위: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2117
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "센서 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2099
+#: plugins/Oculars/src/Oculars.cpp:2121
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "센서 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2112
+#: plugins/Oculars/src/Oculars.cpp:2134
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "망원경 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2428
+#: plugins/Oculars/src/Oculars.cpp:2450
 msgid "&Lens"
 msgstr "렌즈(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2429
+#: plugins/Oculars/src/Oculars.cpp:2451
 msgid "&Previous lens"
 msgstr "이전 렌즈(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2430
+#: plugins/Oculars/src/Oculars.cpp:2452
 msgid "&Next lens"
 msgstr "다음 렌즈(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2460
+#: plugins/Oculars/src/Oculars.cpp:2482
 msgid "&Telescope"
 msgstr "망원경(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2461
+#: plugins/Oculars/src/Oculars.cpp:2483
 msgid "&Previous telescope"
 msgstr "이전 망원경(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2462
+#: plugins/Oculars/src/Oculars.cpp:2484
 msgid "&Next telescope"
 msgstr "다음 망원경(&N)"
 
@@ -12552,53 +12560,53 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "관측 해상도는 눈(eye)과 배율에 달려 있습니다."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:469
+#: plugins/Oculars/src/gui/OcularDialog.cpp:470
 msgid "tFOV:"
 msgstr "실시계범위:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:471
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
 msgid "Magnification factor:"
 msgstr "배율 상수:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:472
-#: plugins/Oculars/src/ui_ocularDialog.h:1370
+#: plugins/Oculars/src/gui/OcularDialog.cpp:473
+#: plugins/Oculars/src/ui_ocularDialog.h:1380
 msgid "Diameter:"
 msgstr "직경:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:476
-#: plugins/Oculars/src/ui_ocularDialog.h:1333
+#: plugins/Oculars/src/gui/OcularDialog.cpp:477
+#: plugins/Oculars/src/ui_ocularDialog.h:1343
 msgid "aFOV:"
 msgstr "겉보기 시야각:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:477
-#: plugins/Oculars/src/ui_ocularDialog.h:1334
-#: plugins/Oculars/src/ui_ocularDialog.h:1369
+#: plugins/Oculars/src/gui/OcularDialog.cpp:478
+#: plugins/Oculars/src/ui_ocularDialog.h:1344
+#: plugins/Oculars/src/ui_ocularDialog.h:1379
 msgid "Focal length:"
 msgstr "초점거리:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:478
-#: plugins/Oculars/src/ui_ocularDialog.h:1335
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/ui_ocularDialog.h:1345
 msgid "Field stop:"
 msgstr "시야 조리개:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:490
+#: plugins/Oculars/src/gui/OcularDialog.cpp:491
 msgid "Oculars Plug-in"
 msgstr "접안렌즈 플러그인"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:495
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
 msgid "Barlow lens feature"
 msgstr "바로우 렌즈 부분"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:499
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Sensor crop overlay feature"
 msgstr "센서 자르기 오버레이 기능"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Overview"
 msgstr "개요"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -12608,44 +12616,39 @@ msgstr ""
 "이 플러그인은 접안렌즈를 통해 보이는 시야를 재현하며, 설정에서 접안렌즈, 망원경, CCD 센서를 추가, 수정, 삭제할 수 있습니다. 맨"
 " 처음 시작할 때 몇 샘플이 주어집니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "You can choose to scale the image you see on the screen."
 msgstr "화면에 표시되는 이미지의 크기를 조정할 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "이 플러그인은 접안렌즈/망원경의 조합을 서로 비교할 수 있게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr "같은 접안렌즈를 사용해도 망원경이 다르면 사출동공이 달라져 상이 변하게 됩니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:510
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "이미지 크기가 조정되면 화면 공간 대부분이 낭비될 수도 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:510
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
 msgstr "그러므로 평소에는 끄고 있다가, 필요할 때만 사용하는 것을 추천합니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
-msgid ""
-"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
-"aligned to North.  I've been unable to do so.  So currently it aligns to the"
-" top of the screen."
-msgstr ""
-"시야에서 십자표시를 켜고 끌 수 있습니다. 이상적으론 이 십자표시가 북쪽으로 정렬되어야 하지만 구현할 수가 없었고,  그래서 지금은 "
-"화면의 위를 기준으로 정렬됩니다."
-
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
+msgid "You can toggle a crosshair in the view."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -12656,302 +12659,310 @@ msgstr ""
 "텔라드 파인더를 켜고 끌 수 있습니다; 이 때 접안렌즈로 보고 있지 않은 상태여야 합니다. 이 기능은 중심이 같은 0.5%1, "
 "2.0%1, 4.0%1의 크기의 원을 그려 텔라드(혹은 비슷한) 파인더를 맨눈으로 보았을 때 어떻게 보이는지를 짐작하게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:514
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "어떠한 오류를 발견했다면 알려주세요. 감사합니다!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 msgid "Hot Keys"
 msgstr "단축키"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "이 플러그인의 키 설정은 키보드 단축키 모음 (F7) 에서 바꿀 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "[no key defined]"
 msgstr "[설정된 키가 없습니다]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 msgid "Switches on/off the ocular overlay."
 msgstr "접안부 오버레이 켜기/끄기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "접안렌즈의 원판을 시계 방향으로 회전"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "접안렌즈의 원판을 반시계 방향으로 회전"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1278
+#: plugins/Oculars/src/ui_ocularDialog.h:1284
 msgid "Interface"
 msgstr "인터페이스"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1279
+#: plugins/Oculars/src/ui_ocularDialog.h:1285
 msgid "On-screen control panel"
 msgstr "화면상의 조정 패널"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1280
+#: plugins/Oculars/src/ui_ocularDialog.h:1286
 msgid "Font size"
 msgstr "글꼴 크기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1284
+#: plugins/Oculars/src/ui_ocularDialog.h:1290
 msgid "Arrow button scale (requires restart)"
 msgstr "화살표 버튼 크기 (재시작 필요)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1285
+#: plugins/Oculars/src/ui_ocularDialog.h:1291
 msgid "Show resolution criteria"
 msgstr "분해능 제한 보이기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1287
+#: plugins/Oculars/src/ui_ocularDialog.h:1293
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "시야각을 스텔라리움 시작 시와 똑같게 하려면 체크하세요."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1289
+#: plugins/Oculars/src/ui_ocularDialog.h:1295
 msgid "Restore FOV to initial values"
 msgstr "시야각을 처음 값으로 복구"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1291
+#: plugins/Oculars/src/ui_ocularDialog.h:1297
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr "스텔라리움이 처음 시작할 때 가리키는 방향을 보고 싶다면 체크하세요."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1293
+#: plugins/Oculars/src/ui_ocularDialog.h:1299
 msgid "Restore direction to initial values"
 msgstr "방향을 초기 값으로 복구"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1294
+#: plugins/Oculars/src/ui_ocularDialog.h:1300
 msgid "Show oculars button on toolbar"
 msgstr "툴바에 접안 랜즈 버튼 표시"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1297
-msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr "망원경의 구경에 따라 볼 수 있는 천체의 한계등급을 다르게 설정합니다."
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1299
-msgid "Limit stellar magnitude"
-msgstr "별의 한계등급"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1300
-msgid "Hide grids and lines when enabled"
-msgstr "작동할 시 격자와 선 숨기기"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1301
-msgid "Enable only if an object is selected"
-msgstr "천체를 선택한 경우에만 사용"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1303
-msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr "단안경 모드에서는 렌즈 원 바깥이 살짝 보입니다."
+msgid "Show border circle"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1305
-msgid "Use semi-transparent mask"
-msgstr "반투명 덮개 사용"
+msgid "Show FOV outline"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1306
 msgid "Scale image circle"
 msgstr "이미지 서클 크기 조정"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:1307
+msgid "Hide grids and lines when enabled"
+msgstr "작동할 시 격자와 선 숨기기"
+
 #: plugins/Oculars/src/ui_ocularDialog.h:1308
-msgid "Show border circle"
-msgstr ""
+msgid "Enable only if an object is selected"
+msgstr "천체를 선택한 경우에만 사용"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1310
-msgid "Show FOV outline"
-msgstr ""
+msgid "In ocular mode, allow some visibility outside ocular circle."
+msgstr "단안경 모드에서는 렌즈 원 바깥이 살짝 보입니다."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1312
+msgid "Use semi-transparent mask"
+msgstr "반투명 덮개 사용"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1314
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1314
+#: plugins/Oculars/src/ui_ocularDialog.h:1316
 msgid "Show compass rose"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1315
+#: plugins/Oculars/src/ui_ocularDialog.h:1318
+msgid "Apply limits stellar magnitude for different apertures of telescopes"
+msgstr "망원경의 구경에 따라 볼 수 있는 천체의 한계등급을 다르게 설정합니다."
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1320
+msgid "Limit stellar magnitude"
+msgstr "별의 한계등급"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1322
+msgid "Align the crosshair in equatorial coordinate system"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1324
+msgid "Align crosshair"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1325
 msgid "Sensor view"
 msgstr "센서 시야"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1316
+#: plugins/Oculars/src/ui_ocularDialog.h:1326
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD 시야각을 도와 분으로 표시"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1318
+#: plugins/Oculars/src/ui_ocularDialog.h:1328
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr "CCD 프레임의 수평 방향에 대한 망원경 설정에서 가대 유형 자동 전환을 활성화합니다."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1320
+#: plugins/Oculars/src/ui_ocularDialog.h:1330
 msgid "Enable automatic switch of mount type"
 msgstr "가대 방식 자동 전환 사용"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1322
+#: plugins/Oculars/src/ui_ocularDialog.h:1332
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
 msgstr "여러 픽셀의 유효 크기를 보여주는 사각형 오버레이를 활성화합니다."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1324
+#: plugins/Oculars/src/ui_ocularDialog.h:1334
 msgid "Show sensor crop overlay"
 msgstr "감지기, 센서 자르기 오버레이 표시"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1325
+#: plugins/Oculars/src/ui_ocularDialog.h:1335
 msgid "Overlay size (px)"
 msgstr "오버레이 사이즈 (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1326
+#: plugins/Oculars/src/ui_ocularDialog.h:1336
 msgid "Enable scaling FOV for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1327
+#: plugins/Oculars/src/ui_ocularDialog.h:1337
 msgid "Telrad view"
 msgstr "텔라드 보기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1328
+#: plugins/Oculars/src/ui_ocularDialog.h:1338
 msgid "Enable scaling FOV for Telrad"
 msgstr "텔라드 FOV 체계 켜기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1329
+#: plugins/Oculars/src/ui_ocularDialog.h:1339
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "일반"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1330
-#: plugins/Oculars/src/ui_ocularDialog.h:1339
-#: plugins/Oculars/src/ui_ocularDialog.h:1345
-#: plugins/Oculars/src/ui_ocularDialog.h:1366
+#: plugins/Oculars/src/ui_ocularDialog.h:1340
+#: plugins/Oculars/src/ui_ocularDialog.h:1349
+#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1376
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "추가"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1332
-#: plugins/Oculars/src/ui_ocularDialog.h:1341
-#: plugins/Oculars/src/ui_ocularDialog.h:1347
-#: plugins/Oculars/src/ui_ocularDialog.h:1368
+#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1357
+#: plugins/Oculars/src/ui_ocularDialog.h:1378
 #: plugins/Satellites/src/ui_satellitesDialog.h:813
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "이름:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1336
+#: plugins/Oculars/src/ui_ocularDialog.h:1346
 msgid "Binoculars"
 msgstr "쌍안경"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1337
+#: plugins/Oculars/src/ui_ocularDialog.h:1347
 msgid "Has permanent cross-hairs"
 msgstr "영구적인 (제거 불가능한) 십자선이 있음"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1338
+#: plugins/Oculars/src/ui_ocularDialog.h:1348
 msgid "Eyepieces"
 msgstr "접안렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1352
 msgid "Multiplier:"
 msgstr "배율:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1343
+#: plugins/Oculars/src/ui_ocularDialog.h:1353
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr "배율이 1 초과면 초점거리 증가 (바로우 렌즈). 배율이 1 미만이면 초점거리 감소(섀플리 렌즈)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1344
+#: plugins/Oculars/src/ui_ocularDialog.h:1354
 msgid "Lenses"
 msgstr "렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1348
+#: plugins/Oculars/src/ui_ocularDialog.h:1358
 msgid "Resolution x (pixels):"
 msgstr "가로 해상도 (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1349
+#: plugins/Oculars/src/ui_ocularDialog.h:1359
 msgid "Resolution y (pixels):"
 msgstr "세로 해상도 (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/ui_ocularDialog.h:1360
 msgid "Chip height (mm):"
 msgstr "칩 높이 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1361
 msgid "Chip width (mm):"
 msgstr "칩 폭 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1352
+#: plugins/Oculars/src/ui_ocularDialog.h:1362
 msgid "Pixel width (micron):"
 msgstr "픽셀 폭 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1353
+#: plugins/Oculars/src/ui_ocularDialog.h:1363
 msgid "Pixel height (micron):"
 msgstr "픽셀 높이 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1365
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr "화상 센서 중심부터 프리즘 바닥까지의 거리입니다"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1357
+#: plugins/Oculars/src/ui_ocularDialog.h:1367
 msgid "Prism/CCD distance (mm):"
 msgstr "프리즘/CCD 거리 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1358
+#: plugins/Oculars/src/ui_ocularDialog.h:1368
 msgid "Prism/CCD height (mm):"
 msgstr "프리즘/CCD 높이 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1359
+#: plugins/Oculars/src/ui_ocularDialog.h:1369
 msgid "Prism/CCD width (mm):"
 msgstr "프리즘/CCD 너비 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1360
+#: plugins/Oculars/src/ui_ocularDialog.h:1370
 msgid "Position angle (degrees):"
 msgstr "위치각(°):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1361
+#: plugins/Oculars/src/ui_ocularDialog.h:1371
 msgid "Off-Axis guider"
 msgstr "축외 유도기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1362
+#: plugins/Oculars/src/ui_ocularDialog.h:1372
 msgid "Rotation Angle (degrees):"
 msgstr "회전 각도:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1363
+#: plugins/Oculars/src/ui_ocularDialog.h:1373
 msgid "Binning x:"
 msgstr "x축 비우기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1364
+#: plugins/Oculars/src/ui_ocularDialog.h:1374
 msgid "Binning y:"
 msgstr "y축 비우기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1365
+#: plugins/Oculars/src/ui_ocularDialog.h:1375
 msgid "Sensors"
 msgstr "센서"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1371
+#: plugins/Oculars/src/ui_ocularDialog.h:1381
 msgid "Horizontal flip"
 msgstr "좌우 반전"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1372
+#: plugins/Oculars/src/ui_ocularDialog.h:1382
 msgid "Vertical flip"
 msgstr "상하 반전"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1373
+#: plugins/Oculars/src/ui_ocularDialog.h:1383
 msgid "Equatorial Mount"
 msgstr "적도의"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1374
+#: plugins/Oculars/src/ui_ocularDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"

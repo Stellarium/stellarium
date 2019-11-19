@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-12 21:43+0700\n"
+"POT-Creation-Date: 2019-11-18 19:45+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2019\n"
 "Language-Team: Catalan (https://www.transifex.com/stellarium/teams/80998/ca/)\n"
@@ -40,7 +40,7 @@ msgstr "marcador personalitzat"
 #: src/core/modules/MinorPlanet.cpp:202 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:206
 #: src/core/modules/StarWrapper.cpp:209 src/gui/AstroCalcDialog.cpp:803
-#: src/ui_configurationDialog.h:1598 plugins/Satellites/src/Satellite.cpp:283
+#: src/ui_configurationDialog.h:1609 plugins/Satellites/src/Satellite.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:146
 #: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:181
@@ -58,14 +58,14 @@ msgid "asterism"
 msgstr "asterisme"
 
 #: src/core/modules/AsterismMgr.cpp:96
-#: src/core/modules/ConstellationMgr.cpp:141 src/core/modules/StarMgr.cpp:459
+#: src/core/modules/ConstellationMgr.cpp:144 src/core/modules/StarMgr.cpp:459
 #: src/core/modules/GridLinesMgr.cpp:1308
 #: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:76 src/core/modules/NebulaMgr.cpp:458
 #: src/core/modules/NebulaMgr.cpp:459 src/core/modules/SolarSystem.cpp:264
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:607 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:608 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
 msgid "Display Options"
@@ -87,38 +87,38 @@ msgstr "Ajudants de raigs"
 msgid "constellation"
 msgstr "constel·lació"
 
-#: src/core/modules/ConstellationMgr.cpp:142
+#: src/core/modules/ConstellationMgr.cpp:145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Constellation lines"
 msgstr "Línies de les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:143
+#: src/core/modules/ConstellationMgr.cpp:146
 msgid "Constellation art"
 msgstr "Dibuix de les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:144
+#: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Constellation labels"
 msgstr "Etiquetes de les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:145
+#: src/core/modules/ConstellationMgr.cpp:148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Constellation boundaries"
 msgstr "Límits de les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:146 src/ui_configurationDialog.h:1742
+#: src/core/modules/ConstellationMgr.cpp:149 src/ui_configurationDialog.h:1785
 msgid "Select single constellation"
 msgstr "Selecciona constel·lació individual"
 
-#: src/core/modules/ConstellationMgr.cpp:147
+#: src/core/modules/ConstellationMgr.cpp:150
 msgid "Remove selection of constellations"
 msgstr "Eliminar la selecció de constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:148
+#: src/core/modules/ConstellationMgr.cpp:151
 msgid "Select all constellations"
 msgstr "Seleccionar totes les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:150
+#: src/core/modules/ConstellationMgr.cpp:153
 msgid "Reload the sky culture"
 msgstr "Recarrega la cultura del cel"
 
@@ -459,7 +459,7 @@ msgstr "Canvi cíclic de la contaminació lumínica"
 
 #: src/core/modules/LandscapeMgr.cpp:894 src/scripting/StelScriptMgr.cpp:260
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
@@ -1287,7 +1287,7 @@ msgstr "arcseg"
 msgid "Contrast index"
 msgstr "Índex de contrast"
 
-#: src/core/modules/Nebula.cpp:328 src/ui_configurationDialog.h:1602
+#: src/core/modules/Nebula.cpp:328 src/ui_configurationDialog.h:1613
 msgid "Size"
 msgstr "Mida"
 
@@ -1310,7 +1310,7 @@ msgstr "al"
 #: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:252
 #: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:2732
-#: src/gui/AstroCalcDialog.cpp:2790 src/ui_configurationDialog.h:1604
+#: src/gui/AstroCalcDialog.cpp:2790 src/ui_configurationDialog.h:1615
 #: plugins/Supernovae/src/Supernova.cpp:161 plugins/Novae/src/Nova.cpp:166
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Distance"
@@ -2143,140 +2143,140 @@ msgstr "Digitized Sky Survey (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "Commuta els Mapes Jeràrquics Progressius (experimentals)"
 
-#: src/core/StelApp.cpp:417
+#: src/core/StelApp.cpp:418
 msgid "Initializing textures..."
 msgstr "Inicialitzant textures..."
 
-#: src/core/StelApp.cpp:421
+#: src/core/StelApp.cpp:422
 msgid "Initializing network access..."
 msgstr "Inicialitzant l'accés a la xarxa ..."
 
-#: src/core/StelApp.cpp:426
+#: src/core/StelApp.cpp:427
 msgid "Initializing network disk cache..."
 msgstr "Inicialitzant la memòria cau del disc de la xarxa ..."
 
-#: src/core/StelApp.cpp:440
+#: src/core/StelApp.cpp:441
 msgid "Initializing network proxy..."
 msgstr "Inicialitzant el proxy de xarxa ..."
 
-#: src/core/StelApp.cpp:456
+#: src/core/StelApp.cpp:457
 msgid "Initializing Object Database..."
 msgstr "Inicialitzant la Base de Dades d'Objectes ..."
 
-#: src/core/StelApp.cpp:461
+#: src/core/StelApp.cpp:462
 msgid "Initializing locales..."
 msgstr "Inicialitzant traduccions..."
 
-#: src/core/StelApp.cpp:465
+#: src/core/StelApp.cpp:466
 msgid "Initializing HiPS survey..."
 msgstr "Inicialitzant mapes HiPS..."
 
-#: src/core/StelApp.cpp:471
+#: src/core/StelApp.cpp:472
 msgid "Initializing Solar System objects..."
 msgstr "Inicialitzant objectes del Sistema Solar ..."
 
-#: src/core/StelApp.cpp:477
+#: src/core/StelApp.cpp:478
 msgid "Initializing planetary nomenclature..."
 msgstr "Inicialitzant nomenclatura planetària..."
 
-#: src/core/StelApp.cpp:483
+#: src/core/StelApp.cpp:484
 msgid "Initializing stars..."
 msgstr "Inicialitzant estels..."
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:489
 msgid "Initializing core..."
 msgstr "Inicialitzant nuclis..."
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:493
 msgid "Initializing deep-sky objects..."
 msgstr "Inicialitzant objectes del cel profund..."
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:499
 msgid "Initializing Milky Way..."
 msgstr "Inicialitzant Via Làctia..."
 
-#: src/core/StelApp.cpp:504
+#: src/core/StelApp.cpp:505
 msgid "Initializing zodiacal light..."
 msgstr "Inicialitzant llum zodiacal.."
 
-#: src/core/StelApp.cpp:510
+#: src/core/StelApp.cpp:511
 msgid "Initializing sky image layer..."
 msgstr "Inicialitzant la capa d’imatge del cel ..."
 
-#: src/core/StelApp.cpp:516
+#: src/core/StelApp.cpp:517
 msgid "Initializing TOAST surveys..."
 msgstr "Inicialitzant mapes TOAST..."
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:523
 msgid "Initializing audio..."
 msgstr "Inicialitzant àudio..."
 
-#: src/core/StelApp.cpp:526
+#: src/core/StelApp.cpp:527
 msgid "Initializing video..."
 msgstr "Inicialitzant vídeo..."
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:533
 msgid "Initializing constellations..."
 msgstr "Inicialitzant constel·lacions..."
 
-#: src/core/StelApp.cpp:538
+#: src/core/StelApp.cpp:539
 msgid "Initializing asterisms..."
 msgstr "Inicialitzant asterismes..."
 
-#: src/core/StelApp.cpp:544
+#: src/core/StelApp.cpp:545
 msgid "Initializing landscape..."
 msgstr "Inicialitzant paisatge..."
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:550
 msgid "Initializing grid lines..."
 msgstr "Inicialitzant graelles..."
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:556
 msgid "Initializing sporadic meteors..."
 msgstr "Inicialitzant meteors esporàdics..."
 
-#: src/core/StelApp.cpp:561
+#: src/core/StelApp.cpp:562
 msgid "Initializing user labels..."
 msgstr "Inicialitzant etiquetes d'usuari..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:567
 msgid "Initializing sky cultures..."
 msgstr "Inicialitzant cultures del cel..."
 
-#: src/core/StelApp.cpp:570
+#: src/core/StelApp.cpp:571
 msgid "Initializing user markers..."
 msgstr "Inicialitzant marques d'usuari..."
 
-#: src/core/StelApp.cpp:576
+#: src/core/StelApp.cpp:577
 msgid "Initializing custom objects..."
 msgstr "Inicialitzant objectes personalitzats..."
 
-#: src/core/StelApp.cpp:582
+#: src/core/StelApp.cpp:583
 msgid "Initializing highlights..."
 msgstr "inicialitzant destacats..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:591
 msgid "Initializing scripting..."
 msgstr "Inicialitzant scripts..."
 
-#: src/core/StelApp.cpp:595
+#: src/core/StelApp.cpp:596
 msgid "Initializing color scheme..."
 msgstr "Inicialitzant l'esquema de colors ..."
 
-#: src/core/StelApp.cpp:607
+#: src/core/StelApp.cpp:608
 msgid "Night mode"
 msgstr "Mode nocturn"
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:633
 msgid "Initializing SPOUT sender..."
 msgstr "Inicialitzant remitent SPOUT..."
 
-#: src/core/StelApp.cpp:641
+#: src/core/StelApp.cpp:643
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "No es pot crear el remitent Spout. Vegeu el registre per obtenir detalls."
 
-#: src/core/StelApp.cpp:667
+#: src/core/StelApp.cpp:669
 msgid "Loading plugin"
 msgstr "Carregant connector"
 
@@ -3661,25 +3661,25 @@ msgctxt "genitive"
 msgid "December"
 msgstr "Desembre"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:597
 msgid "Select screenshot directory"
 msgstr "Selecciona la carpeta per les captures de pantalles"
 
-#: src/gui/ConfigurationDialog.cpp:989
+#: src/gui/ConfigurationDialog.cpp:991
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV inicial: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:997
+#: src/gui/ConfigurationDialog.cpp:999
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcció de la vista inicial Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1060
+#: src/gui/ConfigurationDialog.cpp:1062
 msgid "Acknowledgements"
 msgstr "Agraïments"
 
-#: src/gui/ConfigurationDialog.cpp:1062
+#: src/gui/ConfigurationDialog.cpp:1064
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
@@ -3687,13 +3687,13 @@ msgstr "Agraïments"
 msgid "Authors"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:1063
+#: src/gui/ConfigurationDialog.cpp:1065
 msgid "Contact"
 msgstr "Contacte"
 
-#: src/gui/ConfigurationDialog.cpp:1065 src/scripting/StelScriptMgr.cpp:270
+#: src/gui/ConfigurationDialog.cpp:1067 src/scripting/StelScriptMgr.cpp:270
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3713,9 +3713,9 @@ msgstr "Contacte"
 msgid "Version"
 msgstr "Versió"
 
-#: src/gui/ConfigurationDialog.cpp:1066 src/scripting/StelScriptMgr.cpp:265
+#: src/gui/ConfigurationDialog.cpp:1068 src/scripting/StelScriptMgr.cpp:265
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -3735,20 +3735,20 @@ msgstr "Versió"
 msgid "License"
 msgstr "Llicència"
 
-#: src/gui/ConfigurationDialog.cpp:1070
+#: src/gui/ConfigurationDialog.cpp:1072
 msgctxt "license"
 msgid "unknown"
 msgstr "desconegut"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Running script: "
 msgstr "Executant script: "
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Running script: [none]"
 msgstr "Executant script: [cap]"
 
-#: src/gui/ConfigurationDialog.cpp:1250
+#: src/gui/ConfigurationDialog.cpp:1252
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3756,16 +3756,16 @@ msgstr ""
 "Finalitzada la descàrrega del nous catàlegs estel·lars!\n"
 "Reinicia Stellarium per poder fer-los servir."
 
-#: src/gui/ConfigurationDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:1256
 msgid "All available star catalogs have been installed."
 msgstr "Tots els catàlegs estelars han sigut instal·lats"
 
-#: src/gui/ConfigurationDialog.cpp:1259
+#: src/gui/ConfigurationDialog.cpp:1261
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obtenint catàleg %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:1266
+#: src/gui/ConfigurationDialog.cpp:1268
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3774,7 +3774,7 @@ msgstr ""
 "Descarregant %1...\n"
 "(pots tancat aquesta finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:1273
+#: src/gui/ConfigurationDialog.cpp:1275
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3785,7 +3785,7 @@ msgstr ""
 "Nombre d'estels: %2 Milions\n"
 "Rang de magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1319 src/gui/ConfigurationDialog.cpp:1356
+#: src/gui/ConfigurationDialog.cpp:1321 src/gui/ConfigurationDialog.cpp:1358
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3794,11 +3794,11 @@ msgstr ""
 "Error descarregant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Verifying file integrity..."
 msgstr "Verificant integritat del fitxer..."
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1415
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3807,208 +3807,208 @@ msgstr ""
 "Error descarregant %1:\n"
 "El fitxer està corrupte."
 
-#: src/gui/ConfigurationDialog.cpp:1462 src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1464 src/gui/ConfigurationDialog.cpp:1473
 msgid "Available"
 msgstr "Disponible"
 
-#: src/gui/ConfigurationDialog.cpp:1464 src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1466 src/gui/ConfigurationDialog.cpp:1475
 msgid "Not Available"
 msgstr "No disponible"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1542
+#: src/gui/ConfigurationDialog.cpp:1544
 msgid "Algorithm of"
 msgstr "Algoritme de"
 
-#: src/gui/ConfigurationDialog.cpp:1555
+#: src/gui/ConfigurationDialog.cpp:1557
 msgid "Without correction"
 msgstr "Sense correció"
 
-#: src/gui/ConfigurationDialog.cpp:1556
+#: src/gui/ConfigurationDialog.cpp:1558
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1557
+#: src/gui/ConfigurationDialog.cpp:1559
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1558
+#: src/gui/ConfigurationDialog.cpp:1560
 msgid "IAU (1952)"
 msgstr "UAI (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1559
+#: src/gui/ConfigurationDialog.cpp:1561
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Efemèrides astronòmiques (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1560
+#: src/gui/ConfigurationDialog.cpp:1562
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) i Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1561
+#: src/gui/ConfigurationDialog.cpp:1563
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller i Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1562
+#: src/gui/ConfigurationDialog.cpp:1564
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1563
+#: src/gui/ConfigurationDialog.cpp:1565
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel i Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1566
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel i Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1565
+#: src/gui/ConfigurationDialog.cpp:1567
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison i Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1566
+#: src/gui/ConfigurationDialog.cpp:1568
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson i Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1567
+#: src/gui/ConfigurationDialog.cpp:1569
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson i Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1568
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1569
+#: src/gui/ConfigurationDialog.cpp:1571
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze i Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1571
+#: src/gui/ConfigurationDialog.cpp:1573
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson i Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1572
+#: src/gui/ConfigurationDialog.cpp:1574
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1574
+#: src/gui/ConfigurationDialog.cpp:1576
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (aamb Chapront, Chapront-Touze i Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1575
+#: src/gui/ConfigurationDialog.cpp:1577
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1576
+#: src/gui/ConfigurationDialog.cpp:1578
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus i Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1577
+#: src/gui/ConfigurationDialog.cpp:1579
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison i Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1578
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison i Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1582
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak i Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1585
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak i Meeus (2006) cap acceleració addicional de la lluna"
 
-#: src/gui/ConfigurationDialog.cpp:1585
+#: src/gui/ConfigurationDialog.cpp:1587
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1586
+#: src/gui/ConfigurationDialog.cpp:1588
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1587
+#: src/gui/ConfigurationDialog.cpp:1589
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck i Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1588
+#: src/gui/ConfigurationDialog.cpp:1590
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold i Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1589
+#: src/gui/ConfigurationDialog.cpp:1591
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq i Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1590
+#: src/gui/ConfigurationDialog.cpp:1592
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana i Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1591
+#: src/gui/ConfigurationDialog.cpp:1593
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1592
+#: src/gui/ConfigurationDialog.cpp:1594
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equació personalitzada per %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1640 src/gui/ConfigurationDialog.cpp:1677
+#: src/gui/ConfigurationDialog.cpp:1642 src/gui/ConfigurationDialog.cpp:1679
 #: src/gui/StelGuiItems.cpp:681 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "Predeterminat del sistema"
 
-#: src/gui/ConfigurationDialog.cpp:1641
+#: src/gui/ConfigurationDialog.cpp:1643
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "aaaa-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1642
+#: src/gui/ConfigurationDialog.cpp:1644
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1643
+#: src/gui/ConfigurationDialog.cpp:1645
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1644
+#: src/gui/ConfigurationDialog.cpp:1646
 msgid "ww, yyyy-mm-dd"
 msgstr "ss, aaa-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:1645
+#: src/gui/ConfigurationDialog.cpp:1647
 msgid "ww, dd-mm-yyyy"
 msgstr "ss, dd-mm-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1646
+#: src/gui/ConfigurationDialog.cpp:1648
 msgid "ww, mm-dd-yyyy"
 msgstr "ww, mm-dd-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1678
+#: src/gui/ConfigurationDialog.cpp:1680
 msgid "12-hour format"
 msgstr "Format de 12 hores"
 
-#: src/gui/ConfigurationDialog.cpp:1679
+#: src/gui/ConfigurationDialog.cpp:1681
 msgid "24-hour format"
 msgstr "Format de 24 hores"
 
-#: src/gui/ConfigurationDialog.cpp:1706 src/ui_configurationDialog.h:1565
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: src/gui/ConfigurationDialog.cpp:1708 src/ui_configurationDialog.h:1576
+#: plugins/Oculars/src/Oculars.cpp:2454
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr "Cap"
 
-#: src/gui/ConfigurationDialog.cpp:1707
+#: src/gui/ConfigurationDialog.cpp:1709
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1708
+#: src/gui/ConfigurationDialog.cpp:1710
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1709
+#: src/gui/ConfigurationDialog.cpp:1711
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1710
+#: src/gui/ConfigurationDialog.cpp:1712
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
@@ -4275,7 +4275,7 @@ msgstr "Desenvolupador OSX: %1"
 
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
-#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4985,7 +4985,7 @@ msgstr "Ara sobre %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:748 src/gui/AstroCalcDialog.cpp:1328
-#: src/gui/AstroCalcDialog.cpp:4650 src/ui_configurationDialog.h:1591
+#: src/gui/AstroCalcDialog.cpp:4650 src/ui_configurationDialog.h:1602
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
@@ -5837,7 +5837,7 @@ msgstr "Data i hora al calendari Julià"
 msgid "Date and Time in Gregorian calendar"
 msgstr "Data i hora al calendari Gregorià"
 
-#: src/scripting/StelScriptMgr.cpp:170 src/ui_configurationDialog.h:1510
+#: src/scripting/StelScriptMgr.cpp:170 src/ui_configurationDialog.h:1521
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "Scripts"
 msgstr "Scripts"
@@ -7704,10 +7704,10 @@ msgstr "&Copiar"
 msgid "&Paste"
 msgstr "&Enganxar"
 
-#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1331
-#: plugins/Oculars/src/ui_ocularDialog.h:1340
-#: plugins/Oculars/src/ui_ocularDialog.h:1346
-#: plugins/Oculars/src/ui_ocularDialog.h:1367
+#: src/translations.h:729 plugins/Oculars/src/ui_ocularDialog.h:1341
+#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/ui_ocularDialog.h:1356
+#: plugins/Oculars/src/ui_ocularDialog.h:1377
 msgid "Delete"
 msgstr "Suprimeix"
 
@@ -7731,7 +7731,7 @@ msgstr "Carpeta"
 msgid "&Choose"
 msgstr "T&ria"
 
-#: src/translations.h:735 src/ui_configurationDialog.h:1692
+#: src/translations.h:735 src/ui_configurationDialog.h:1703
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Cancel·lar"
@@ -9153,7 +9153,7 @@ msgstr "Quant a"
 msgid "Log"
 msgstr "Registre"
 
-#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:1767
+#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:1778
 msgid "Edit keyboard shortcuts..."
 msgstr "Edita les dreceres de teclat ..."
 
@@ -9426,8 +9426,8 @@ msgid "Lock position when coordinates are used"
 msgstr "Bloqueja posició quan s'utilitzen les coordenades"
 
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2998
-#: src/ui_viewDialog.h:3020 src/ui_configurationDialog.h:1822
-#: src/ui_configurationDialog.h:1833
+#: src/ui_viewDialog.h:3020 src/ui_configurationDialog.h:1837
+#: src/ui_configurationDialog.h:1848
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "Opcions"
@@ -10403,70 +10403,70 @@ msgstr "Mitologia"
 msgid "Surveys"
 msgstr "Mapes"
 
-#: src/ui_configurationDialog.h:1488
+#: src/ui_configurationDialog.h:1499
 msgid "Configuration"
 msgstr "Configuració"
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1505
 msgid "Main"
 msgstr "Principal"
 
-#: src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1507
 msgid "Information"
 msgstr "Informació"
 
-#: src/ui_configurationDialog.h:1498 src/ui_configurationDialog.h:1553
+#: src/ui_configurationDialog.h:1509 src/ui_configurationDialog.h:1564
 msgid "Selected object information"
 msgstr "Informació del objecte selecionat"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1512
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr "Extres"
 
-#: src/ui_configurationDialog.h:1503
+#: src/ui_configurationDialog.h:1514
 msgid "Additional settings for Graphical User Interface"
 msgstr "Paràmetres addicionals de la Interfície Gràfica d'Usuari"
 
-#: src/ui_configurationDialog.h:1506
+#: src/ui_configurationDialog.h:1517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Data i hora"
 
-#: src/ui_configurationDialog.h:1508
+#: src/ui_configurationDialog.h:1519
 msgid "Tools"
 msgstr "Eines"
 
-#: src/ui_configurationDialog.h:1512
+#: src/ui_configurationDialog.h:1523
 msgid "Plugins"
 msgstr "Connectors"
 
-#: src/ui_configurationDialog.h:1515
+#: src/ui_configurationDialog.h:1526
 msgid "Language settings"
 msgstr "Paràmetres d'idioma"
 
-#: src/ui_configurationDialog.h:1516
+#: src/ui_configurationDialog.h:1527
 msgid "Program Language"
 msgstr "Llenguatge de programació"
 
-#: src/ui_configurationDialog.h:1517
+#: src/ui_configurationDialog.h:1528
 msgid "Sky Culture Language"
 msgstr "Idioma de la Cultura del Cel"
 
-#: src/ui_configurationDialog.h:1519
+#: src/ui_configurationDialog.h:1530
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Aquesta característica no ha estat provada a fons encara!"
 
-#: src/ui_configurationDialog.h:1521
+#: src/ui_configurationDialog.h:1532
 msgid "Ephemeris settings (experimental)"
 msgstr "Configuració d'efemèrides (experimental)"
 
-#: src/ui_configurationDialog.h:1522 src/ui_configurationDialog.h:1523
+#: src/ui_configurationDialog.h:1533 src/ui_configurationDialog.h:1534
 msgid "Not installed"
 msgstr "No instal·lat"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1536
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -10474,19 +10474,19 @@ msgstr ""
 "DE431 proporciona dades de posició durant els anys -13.000 ... + 17000. "
 "Només per a aplicacions especials."
 
-#: src/ui_configurationDialog.h:1527
+#: src/ui_configurationDialog.h:1538
 msgid "Use DE431 (long-time data)"
 msgstr "Ús DE431 (dades en temps amplis)"
 
-#: src/ui_configurationDialog.h:1529
+#: src/ui_configurationDialog.h:1540
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 ofereix la més alta precisió, només per als anys 1550 ... 2650."
 
-#: src/ui_configurationDialog.h:1531
+#: src/ui_configurationDialog.h:1542
 msgid "Use DE430 (high accuracy)"
 msgstr "Ús DE430 (alta precisió)"
 
-#: src/ui_configurationDialog.h:1533
+#: src/ui_configurationDialog.h:1544
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -10494,22 +10494,22 @@ msgstr ""
 "Usant VSOP87 es recomana per als anys -4000 ... + 8000 només, però ofereix "
 "posicions útils fora d'aquest rang."
 
-#: src/ui_configurationDialog.h:1535
+#: src/ui_configurationDialog.h:1546
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP 2000-82B s'utilitza quan aquests no estan instal·lats o no "
 "activades."
 
-#: src/ui_configurationDialog.h:1536
+#: src/ui_configurationDialog.h:1547
 msgid "Default options"
 msgstr "Opcions per ﻿omissió"
 
-#: src/ui_configurationDialog.h:1537
+#: src/ui_configurationDialog.h:1548
 msgid "Save View"
 msgstr "Desa la vista"
 
-#: src/ui_configurationDialog.h:1539
+#: src/ui_configurationDialog.h:1550
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -10517,25 +10517,25 @@ msgstr ""
 "Desa la configuració canviada en aquesta sessió per que sigui la mateixa "
 "quan arrenquis la propera vegada que Stellarium"
 
-#: src/ui_configurationDialog.h:1541
+#: src/ui_configurationDialog.h:1552
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
 msgstr "Desa els paràmetres"
 
-#: src/ui_configurationDialog.h:1543
+#: src/ui_configurationDialog.h:1554
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Retorna a la configuració per defecte de Stellarium"
 
-#: src/ui_configurationDialog.h:1545
+#: src/ui_configurationDialog.h:1556
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
 msgstr "Restaura predeterminats"
 
-#: src/ui_configurationDialog.h:1546
+#: src/ui_configurationDialog.h:1557
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
@@ -10545,174 +10545,174 @@ msgstr ""
 "per a l'ús en el següent inici. La restauració dels paràmetres per defecte "
 "requereix un reinici de Stellarium. "
 
-#: src/ui_configurationDialog.h:1548
+#: src/ui_configurationDialog.h:1559
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "El camp vertical (altura) de la vista quan s'inicia Stellarium"
 
-#: src/ui_configurationDialog.h:1551
+#: src/ui_configurationDialog.h:1562
 msgid "The direction you're looking when Stellarium starts"
 msgstr "La direcció de la vista quan arrenca Stellarium"
 
-#: src/ui_configurationDialog.h:1555
+#: src/ui_configurationDialog.h:1566
 msgid "Display less information"
 msgstr "Mostra menys informació"
 
-#: src/ui_configurationDialog.h:1557
+#: src/ui_configurationDialog.h:1568
 msgid "Short"
 msgstr "Mínima"
 
-#: src/ui_configurationDialog.h:1559
+#: src/ui_configurationDialog.h:1570
 msgid "Display all information available"
 msgstr "Mostra tota la informació disponible"
 
-#: src/ui_configurationDialog.h:1561
+#: src/ui_configurationDialog.h:1572
 msgid "All available"
 msgstr "Tota la disponible"
 
-#: src/ui_configurationDialog.h:1563
+#: src/ui_configurationDialog.h:1574
 msgid "Display no information"
 msgstr "No mostris cap informació"
 
-#: src/ui_configurationDialog.h:1567
+#: src/ui_configurationDialog.h:1578
 msgid "Display user settings information"
 msgstr "Mostra la informació de configuració de l'usuari"
 
-#: src/ui_configurationDialog.h:1569
+#: src/ui_configurationDialog.h:1580
 msgid "Customized"
 msgstr "Personalitzada"
 
-#: src/ui_configurationDialog.h:1570
+#: src/ui_configurationDialog.h:1581
 msgid "Displayed fields"
 msgstr "Camps mostrats"
 
-#: src/ui_configurationDialog.h:1572
+#: src/ui_configurationDialog.h:1583
 msgid "Horizontal coordinates"
 msgstr "Coordenades horitzontals"
 
-#: src/ui_configurationDialog.h:1574
+#: src/ui_configurationDialog.h:1585
 msgid "Azimuth/Altitude"
 msgstr "Azimut/Altitud"
 
-#: src/ui_configurationDialog.h:1576
+#: src/ui_configurationDialog.h:1587
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Coordinades equatorials, equinocci de J2000.0"
 
-#: src/ui_configurationDialog.h:1578
+#: src/ui_configurationDialog.h:1589
 msgid "Right ascension/Declination (J2000)"
 msgstr "Ascensió Recta / Declinació (J2000)"
 
-#: src/ui_configurationDialog.h:1580
+#: src/ui_configurationDialog.h:1591
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "Coordenades eclíptiques, equinocci de data (només per la Terra)"
 
-#: src/ui_configurationDialog.h:1582
+#: src/ui_configurationDialog.h:1593
 msgid "Ecliptic coordinates (of date)"
 msgstr "Coordenades eclíptiques (de data)"
 
-#: src/ui_configurationDialog.h:1584
+#: src/ui_configurationDialog.h:1595
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Coordenades eclíptiques, equinocci J2000.0"
 
-#: src/ui_configurationDialog.h:1586
+#: src/ui_configurationDialog.h:1597
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Coordenades eclíptiques (J2000)"
 
-#: src/ui_configurationDialog.h:1588 src/ui_configurationDialog.h:1611
+#: src/ui_configurationDialog.h:1599 src/ui_configurationDialog.h:1622
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Coordinades equatorials, equinocci de la data"
 
-#: src/ui_configurationDialog.h:1590
+#: src/ui_configurationDialog.h:1601
 msgid "Right ascension/Declination (of date)"
 msgstr "Ascensió Recta / Declinació (de la data)"
 
-#: src/ui_configurationDialog.h:1592
+#: src/ui_configurationDialog.h:1603
 msgid "Supergalactic coordinates"
 msgstr "Coordenades supergalàctiques"
 
-#: src/ui_configurationDialog.h:1593
+#: src/ui_configurationDialog.h:1604
 msgid "Visual magnitude"
 msgstr "Magnitud visual"
 
-#: src/ui_configurationDialog.h:1594
+#: src/ui_configurationDialog.h:1605
 msgid "Absolute magnitude"
 msgstr "Magnitud absoluta"
 
-#: src/ui_configurationDialog.h:1596
+#: src/ui_configurationDialog.h:1607
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Tipus d'objecte (estel, planeta, etc.)"
 
-#: src/ui_configurationDialog.h:1600
+#: src/ui_configurationDialog.h:1611
 msgid "Angular or physical size"
 msgstr "Mida angular o física"
 
-#: src/ui_configurationDialog.h:1603
+#: src/ui_configurationDialog.h:1614
 msgid "Velocity"
 msgstr "Velocitat"
 
-#: src/ui_configurationDialog.h:1605
+#: src/ui_configurationDialog.h:1616
 msgid "Sidereal time"
 msgstr "Temps sideral"
 
-#: src/ui_configurationDialog.h:1607
+#: src/ui_configurationDialog.h:1618
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Abreviació de 3 lletres constel·lació UAI"
 
-#: src/ui_configurationDialog.h:1609
+#: src/ui_configurationDialog.h:1620
 msgid "Constellation"
 msgstr "Constel·lació"
 
-#: src/ui_configurationDialog.h:1613
+#: src/ui_configurationDialog.h:1624
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Hour angle/Declination"
 msgstr "Hora angle / Declinació"
 
-#: src/ui_configurationDialog.h:1614
+#: src/ui_configurationDialog.h:1625
 msgid "Catalog number(s)"
 msgstr "El(s) nombre(s) del catàleg"
 
-#: src/ui_configurationDialog.h:1616
+#: src/ui_configurationDialog.h:1627
 msgid "Show time of rise, transit and set of celestial object"
 msgstr "Mostra el temps de sortides, trànsits i postes d'objectes celestes"
 
-#: src/ui_configurationDialog.h:1618
+#: src/ui_configurationDialog.h:1629
 msgid "Rises, transits and sets"
 msgstr "Sortides, trànsits i postes"
 
-#: src/ui_configurationDialog.h:1620
+#: src/ui_configurationDialog.h:1631
 msgid "Spectral class, nebula type, etc."
 msgstr "Classe espectral, el tipus de nebulosa, etc."
 
-#: src/ui_configurationDialog.h:1622
+#: src/ui_configurationDialog.h:1633
 msgid "Additional information"
 msgstr "Informació addicional"
 
-#: src/ui_configurationDialog.h:1623
+#: src/ui_configurationDialog.h:1634
 msgid "Galactic coordinates"
 msgstr "Coordenades galàctiques"
 
-#: src/ui_configurationDialog.h:1624
+#: src/ui_configurationDialog.h:1635
 msgid "Additional buttons"
 msgstr "Botons addicionals"
 
-#: src/ui_configurationDialog.h:1626
+#: src/ui_configurationDialog.h:1637
 msgid "Enable a feature to store favorite views."
 msgstr "Activa una funció per emmagatzemar les visualitzacions favorites."
 
-#: src/ui_configurationDialog.h:1628
+#: src/ui_configurationDialog.h:1639
 msgid "Show bookmarks button"
 msgstr "Mostra botó de favorits"
 
-#: src/ui_configurationDialog.h:1630 src/ui_configurationDialog.h:1661
-#: src/ui_configurationDialog.h:1669 src/ui_configurationDialog.h:1673
+#: src/ui_configurationDialog.h:1641 src/ui_configurationDialog.h:1672
+#: src/ui_configurationDialog.h:1680 src/ui_configurationDialog.h:1684
 msgid "Show button in addition to keyboard shortcut?"
 msgstr "Mostra el botó a més de la drecera del teclat?"
 
-#: src/ui_configurationDialog.h:1632
+#: src/ui_configurationDialog.h:1643
 msgid "Show centering button"
 msgstr "Mostra el botó de centrar"
 
-#: src/ui_configurationDialog.h:1634
+#: src/ui_configurationDialog.h:1645
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
@@ -10720,150 +10720,150 @@ msgstr ""
 "Commuta la visualització del botó per els mapes HiPS. Seleccioneu un mapa a "
 "la configuració de la vista."
 
-#: src/ui_configurationDialog.h:1636
+#: src/ui_configurationDialog.h:1647
 msgid "Show HiPS button"
 msgstr "Mostra el botó HiPS"
 
-#: src/ui_configurationDialog.h:1638
+#: src/ui_configurationDialog.h:1649
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr "Commuta la visualització del botó per el Digitized Sky Survey."
 
-#: src/ui_configurationDialog.h:1640
+#: src/ui_configurationDialog.h:1651
 msgid "Show DSS button"
 msgstr "Mostrar botó DSS"
 
-#: src/ui_configurationDialog.h:1642
+#: src/ui_configurationDialog.h:1653
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Commuta botons per invertir la imatge vertical i horitzontal."
 
-#: src/ui_configurationDialog.h:1644
+#: src/ui_configurationDialog.h:1655
 msgid "Show flip buttons"
 msgstr "Mostra botons d'inversió"
 
-#: src/ui_configurationDialog.h:1645
+#: src/ui_configurationDialog.h:1656
 msgid "Show asterism lines button"
 msgstr "Mostra el botó de línies d'asterisme"
 
-#: src/ui_configurationDialog.h:1647
+#: src/ui_configurationDialog.h:1658
 msgid "Toggle display of nebula images."
 msgstr "Commuta la visualització de les imatges de la nebulosa."
 
-#: src/ui_configurationDialog.h:1649
+#: src/ui_configurationDialog.h:1660
 msgid "Show nebula background button"
 msgstr "Mostra el botó nebulosa de fons"
 
-#: src/ui_configurationDialog.h:1650
+#: src/ui_configurationDialog.h:1661
 msgid "Show asterism labels button"
 msgstr "Mostra el botó d'etiquetes d'asterisme"
 
-#: src/ui_configurationDialog.h:1652
+#: src/ui_configurationDialog.h:1663
 msgid "A button to toggle ecliptic grid of date"
 msgstr "Un botó per conmutar graella eclíptica de la data"
 
-#: src/ui_configurationDialog.h:1654
+#: src/ui_configurationDialog.h:1665
 msgid "Show ecliptic grid button"
 msgstr "Mostra botó de la graella eclíptica"
 
-#: src/ui_configurationDialog.h:1655
+#: src/ui_configurationDialog.h:1666
 msgid "Show constellation boundaries button"
 msgstr "Mostrar botó de contorns de les constel·lacions"
 
-#: src/ui_configurationDialog.h:1657
+#: src/ui_configurationDialog.h:1668
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "Un botó per conmutar graella equatorial J2000"
 
-#: src/ui_configurationDialog.h:1659
+#: src/ui_configurationDialog.h:1670
 msgid "Show ICRS grid button"
 msgstr "Mostra botó de la graella ICRS"
 
-#: src/ui_configurationDialog.h:1663
+#: src/ui_configurationDialog.h:1674
 msgid "Show nightmode button"
 msgstr "Mostra el botó de mode nocturn"
 
-#: src/ui_configurationDialog.h:1665
+#: src/ui_configurationDialog.h:1676
 msgid "A button to toggle galactic grid"
 msgstr "Un botó per alternar graella galàctica"
 
-#: src/ui_configurationDialog.h:1667
+#: src/ui_configurationDialog.h:1678
 msgid "Show galactic grid button"
 msgstr "Mostra botó de la graella galàctica"
 
-#: src/ui_configurationDialog.h:1671
+#: src/ui_configurationDialog.h:1682
 msgid "Show fullscreen button"
 msgstr "Mostra el botó de pantalla completa"
 
-#: src/ui_configurationDialog.h:1675
+#: src/ui_configurationDialog.h:1686
 msgid "Show Quit button"
 msgstr "Mostra el botó de Sortir"
 
-#: src/ui_configurationDialog.h:1677
+#: src/ui_configurationDialog.h:1688
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "Conmutar l'ús de fons en els botons de la IGU"
 
-#: src/ui_configurationDialog.h:1679
+#: src/ui_configurationDialog.h:1690
 msgid "Use buttons background"
 msgstr "Utilitza els botons de fons"
 
-#: src/ui_configurationDialog.h:1680
+#: src/ui_configurationDialog.h:1691
 msgid "Star catalog updates"
 msgstr "Actualització de catàlegs estel·lars"
 
-#: src/ui_configurationDialog.h:1682
+#: src/ui_configurationDialog.h:1693
 msgid "Click here to start downloading"
 msgstr "Fes clic aquí per començar la descàrrega"
 
-#: src/ui_configurationDialog.h:1684
+#: src/ui_configurationDialog.h:1695
 msgid "Download this file to view even more stars"
 msgstr "Descarrega aquest fitxer per veure encara més estels"
 
-#: src/ui_configurationDialog.h:1686
+#: src/ui_configurationDialog.h:1697
 msgid "Restart the download"
 msgstr "Reinicia la descàrrega"
 
-#: src/ui_configurationDialog.h:1688
+#: src/ui_configurationDialog.h:1699
 msgid "Retry"
 msgstr "Reintenta"
 
-#: src/ui_configurationDialog.h:1690
+#: src/ui_configurationDialog.h:1701
 msgid "Stop the download. You can always restart it later"
 msgstr "Atura la descàrrega. Sempre es pot reiniciar després"
 
-#: src/ui_configurationDialog.h:1693
+#: src/ui_configurationDialog.h:1704
 msgid "Additional information settings"
 msgstr "Paràmetres d'informació addicional"
 
-#: src/ui_configurationDialog.h:1694
+#: src/ui_configurationDialog.h:1705
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr ""
 "Utilitzeu una notació curta per a la unitat de mesura de la brillantor "
 "superficial"
 
-#: src/ui_configurationDialog.h:1695
+#: src/ui_configurationDialog.h:1706
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr "Ús d'unitat de mesura mag/arcsegons^2 per lluentor superficial"
 
-#: src/ui_configurationDialog.h:1696
+#: src/ui_configurationDialog.h:1707
 msgid "Use formatting output for coordinates and time"
 msgstr "Utilitzeu la sortida de format per coordenades i temps"
 
-#: src/ui_configurationDialog.h:1697
+#: src/ui_configurationDialog.h:1708
 msgid "Use designations for celestial coordinate systems"
 msgstr "Utilitza designacions per a sistemes de coordenades celestes"
 
-#: src/ui_configurationDialog.h:1698
+#: src/ui_configurationDialog.h:1709
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "Startup date and time"
 msgstr "Data i hora a l'arrancada"
 
-#: src/ui_configurationDialog.h:1700
+#: src/ui_configurationDialog.h:1711
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Iniciar Stellarium amb la data i hora del sistema"
 
-#: src/ui_configurationDialog.h:1702
+#: src/ui_configurationDialog.h:1713
 msgid "System date and time"
 msgstr "Data i hora del sistema"
 
-#: src/ui_configurationDialog.h:1704
+#: src/ui_configurationDialog.h:1715
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -10871,27 +10871,27 @@ msgstr ""
 "Estableix l'hora de simulació a la propera instància d'aquesta hora del dia "
 "quan Stellarium arrenqui"
 
-#: src/ui_configurationDialog.h:1706
+#: src/ui_configurationDialog.h:1717
 msgid "System date at:"
 msgstr "Data del sistema:"
 
-#: src/ui_configurationDialog.h:1708
+#: src/ui_configurationDialog.h:1719
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Fes servir una data i hora específica quan Stellarium arrenqui"
 
-#: src/ui_configurationDialog.h:1710
+#: src/ui_configurationDialog.h:1721
 msgid "Other:"
 msgstr "Altres:"
 
-#: src/ui_configurationDialog.h:1712
+#: src/ui_configurationDialog.h:1723
 msgid "Use current local date and time"
 msgstr "Utilitza data i hora local actual"
 
-#: src/ui_configurationDialog.h:1714
+#: src/ui_configurationDialog.h:1725
 msgid "use current"
 msgstr "Fes servir l'actual"
 
-#: src/ui_configurationDialog.h:1716
+#: src/ui_configurationDialog.h:1727
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
@@ -10899,81 +10899,44 @@ msgstr ""
 "Aquests paràmetres controlen la manera com es mostren la data i l'hora a la "
 "barra inferior."
 
-#: src/ui_configurationDialog.h:1718
+#: src/ui_configurationDialog.h:1729
 msgid "Display formats of date and time"
 msgstr "Visualització de formats de data i hora"
 
-#: src/ui_configurationDialog.h:1719
+#: src/ui_configurationDialog.h:1730
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Data:"
 
-#: src/ui_configurationDialog.h:1720
+#: src/ui_configurationDialog.h:1731
 msgid "and time:"
 msgstr "i temps:"
 
-#: src/ui_configurationDialog.h:1721
+#: src/ui_configurationDialog.h:1732
 msgid "Time correction"
 msgstr "Correciò temporal"
 
-#: src/ui_configurationDialog.h:1724
+#: src/ui_configurationDialog.h:1735
 msgid "Edit equation"
 msgstr "Editar equació"
 
-#: src/ui_configurationDialog.h:1726
+#: src/ui_configurationDialog.h:1737
 msgid "Planetarium options"
 msgstr "Opcions de planetari"
 
-#: src/ui_configurationDialog.h:1728
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"La distorsió de mirall esfèrica es fa servir quan projectem Stellarium en un"
-" mirall esfèric, com a planetari de baix cost."
+#: src/ui_configurationDialog.h:1739
+msgid "Hides the mouse cursor when inactive"
+msgstr "Amaga el cursor del ratoli quan estigui inactiu"
 
-#: src/ui_configurationDialog.h:1730
-msgid "Spheric mirror distortion"
-msgstr "Distorsió de mirall esfèrica"
+#: src/ui_configurationDialog.h:1741
+msgid "Mouse cursor timeout:"
+msgstr "Temps d'espera del cursor del ratolí:"
 
-#: src/ui_configurationDialog.h:1731
-msgid "Dithering"
-msgstr "Tramat"
-
-#: src/ui_configurationDialog.h:1733
-msgid "Align labels with the screen center"
-msgstr "Alinea etiquetes amb el centre de la pantalla"
-
-#: src/ui_configurationDialog.h:1735
-msgid "Gravity labels"
-msgstr "﻿Etiquetes de gravetat"
-
-#: src/ui_configurationDialog.h:1737 src/ui_configurationDialog.h:1740
-msgid "Hide other constellations when you click one"
-msgstr "Oculta la resta de constel·lacions quan facis clic en una"
-
-#: src/ui_configurationDialog.h:1744
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Permetre al ratolí deplaçament (arrosegant) i zoom (roda del ratolí)"
+#: src/ui_configurationDialog.h:1743
+msgid "seconds"
+msgstr "segons"
 
 #: src/ui_configurationDialog.h:1746
-msgid "Enable mouse navigation"
-msgstr "Activar navegació amb ratolí"
-
-#: src/ui_configurationDialog.h:1748
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-"Quan està actiu, la tecla \"l'allunyament automàtic\" també establirà la "
-"direcció inicial de la vista"
-
-#: src/ui_configurationDialog.h:1750
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
-
-#: src/ui_configurationDialog.h:1752
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -10981,11 +10944,87 @@ msgstr ""
 "Activa per veure com es veu des de la superfície del planeta (recomanat). Si"
 " es desconnecta, mostrar la vista planetocéntrica."
 
-#: src/ui_configurationDialog.h:1754
+#: src/ui_configurationDialog.h:1748
 msgid "Topocentric coordinates"
 msgstr "Coordenades topocèntriques"
 
-#: src/ui_configurationDialog.h:1756
+#: src/ui_configurationDialog.h:1750
+msgid "Flash a short message when toggling mount mode."
+msgstr "Mostrar un missatge breu al canviar el mode de la muntura."
+
+#: src/ui_configurationDialog.h:1752
+msgid "Indication for mount mode"
+msgstr "Indicació per el tipus de muntura"
+
+#: src/ui_configurationDialog.h:1753
+msgid "Dithering"
+msgstr "Tramat"
+
+#: src/ui_configurationDialog.h:1755
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "Permetre al ratolí deplaçament (arrosegant) i zoom (roda del ratolí)"
+
+#: src/ui_configurationDialog.h:1757
+msgid "Enable mouse navigation"
+msgstr "Activar navegació amb ratolí"
+
+#: src/ui_configurationDialog.h:1759
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"La distorsió de mirall esfèrica es fa servir quan projectem Stellarium en un"
+" mirall esfèric, com a planetari de baix cost."
+
+#: src/ui_configurationDialog.h:1761
+msgid "Spheric mirror distortion"
+msgstr "Distorsió de mirall esfèrica"
+
+#: src/ui_configurationDialog.h:1763
+msgid "Automatic change of landscape when planet is changed"
+msgstr "Canviar automàticament el paisatge quan es canvia de planeta"
+
+#: src/ui_configurationDialog.h:1765
+msgid "Auto select landscapes"
+msgstr "Seleciona automàticament el paisatge"
+
+#: src/ui_configurationDialog.h:1767
+msgid "Align labels with the screen center"
+msgstr "Alinea etiquetes amb el centre de la pantalla"
+
+#: src/ui_configurationDialog.h:1769
+msgid "Gravity labels"
+msgstr "﻿Etiquetes de gravetat"
+
+#: src/ui_configurationDialog.h:1771
+msgid "Activate this option to calculate azimuth from south towards west."
+msgstr "Activa aquesta opció per calcular l'azimut des del sud cap a l'oest."
+
+#: src/ui_configurationDialog.h:1773
+msgid "Azimuth from South"
+msgstr "Azimuth del Sud"
+
+#: src/ui_configurationDialog.h:1775
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Oculta-ho tot fora del cercle central a la vista principal."
+
+#: src/ui_configurationDialog.h:1777
+msgid "Disc viewport"
+msgstr "Vista de disc"
+
+#: src/ui_configurationDialog.h:1780 src/ui_configurationDialog.h:1783
+msgid "Hide other constellations when you click one"
+msgstr "Oculta la resta de constel·lacions quan facis clic en una"
+
+#: src/ui_configurationDialog.h:1787
+msgid "Use decimal degrees for coordinates"
+msgstr "Utilitzeu graus decimals per les coordenades"
+
+#: src/ui_configurationDialog.h:1789
+msgid "Use decimal degrees"
+msgstr "Utilitzeu graus decimals"
+
+#: src/ui_configurationDialog.h:1791
 msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
@@ -10993,112 +11032,51 @@ msgstr ""
 "Activa automàticament l'atmosfera i el paissatge quan seleccioneu un cos "
 "celeste a la finestra d'ubicació."
 
-#: src/ui_configurationDialog.h:1758
+#: src/ui_configurationDialog.h:1793
 msgid "Auto-enabling for the environment"
 msgstr "Activa automàticament per l'entorn"
 
-#: src/ui_configurationDialog.h:1760
+#: src/ui_configurationDialog.h:1795
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"Quan està actiu, la tecla \"l'allunyament automàtic\" també establirà la "
+"direcció inicial de la vista"
+
+#: src/ui_configurationDialog.h:1797
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
+
+#: src/ui_configurationDialog.h:1799
+msgid "Allow keyboard to pan and zoom"
+msgstr "Permetre al teclat desplaçament i zoom"
+
+#: src/ui_configurationDialog.h:1801
+msgid "Enable keyboard navigation"
+msgstr "Activar navegació amb teclat"
+
+#: src/ui_configurationDialog.h:1803
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Nutació és un petit balanceig de l'eix de la Terra,  d'una magnitud d'uns "
 "segons d'arc."
 
-#: src/ui_configurationDialog.h:1762
+#: src/ui_configurationDialog.h:1805
 msgid "Include nutation"
 msgstr "Incloure nutació"
 
-#: src/ui_configurationDialog.h:1764
-msgid "Use decimal degrees for coordinates"
-msgstr "Utilitzeu graus decimals per les coordenades"
-
-#: src/ui_configurationDialog.h:1766
-msgid "Use decimal degrees"
-msgstr "Utilitzeu graus decimals"
-
-#: src/ui_configurationDialog.h:1769
-msgid "Flash a short message when toggling mount mode."
-msgstr "Mostrar un missatge breu al canviar el mode de la muntura."
-
-#: src/ui_configurationDialog.h:1771
-msgid "Indication for mount mode"
-msgstr "Indicació per el tipus de muntura"
-
-#: src/ui_configurationDialog.h:1773
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "Oculta-ho tot fora del cercle central a la vista principal."
-
-#: src/ui_configurationDialog.h:1775
-msgid "Disc viewport"
-msgstr "Vista de disc"
-
-#: src/ui_configurationDialog.h:1777
-msgid "Activate this option to calculate azimuth from south towards west."
-msgstr "Activa aquesta opció per calcular l'azimut des del sud cap a l'oest."
-
-#: src/ui_configurationDialog.h:1779
-msgid "Azimuth from South"
-msgstr "Azimuth del Sud"
-
-#: src/ui_configurationDialog.h:1781
-msgid "Hides the mouse cursor when inactive"
-msgstr "Amaga el cursor del ratoli quan estigui inactiu"
-
-#: src/ui_configurationDialog.h:1783
-msgid "Mouse cursor timeout:"
-msgstr "Temps d'espera del cursor del ratolí:"
-
-#: src/ui_configurationDialog.h:1785
-msgid "seconds"
-msgstr "segons"
-
-#: src/ui_configurationDialog.h:1788
-msgid "Allow keyboard to pan and zoom"
-msgstr "Permetre al teclat desplaçament i zoom"
-
-#: src/ui_configurationDialog.h:1790
-msgid "Enable keyboard navigation"
-msgstr "Activar navegació amb teclat"
-
-#: src/ui_configurationDialog.h:1792
-msgid "Automatic change of landscape when planet is changed"
-msgstr "Canviar automàticament el paisatge quan es canvia de planeta"
-
-#: src/ui_configurationDialog.h:1794
-msgid "Auto select landscapes"
-msgstr "Seleciona automàticament el paisatge"
-
-#: src/ui_configurationDialog.h:1795
-msgid "Font size: Screen"
-msgstr "Mida de lletra: Pantalla"
-
-#: src/ui_configurationDialog.h:1797
-msgid "Base font size for on-screen text"
-msgstr "Mida de lletra per al text en pantalla"
-
-#: src/ui_configurationDialog.h:1800
-msgid "Graphical user interface"
-msgstr "Interfície gràfica d'usuari"
-
-#: src/ui_configurationDialog.h:1802
-msgctxt "abbreviation"
-msgid "GUI"
-msgstr "IGU"
-
-#: src/ui_configurationDialog.h:1804
-msgid "Base font size for dialogs"
-msgstr "Mida de la lletra per als diàlegs"
-
 #: src/ui_configurationDialog.h:1807
-msgid "Pre-select fonts for a particular writing system"
+msgid "Set one color for text in info panel for all objects"
 msgstr ""
-"Tipus de lletra pre-seleccionada per a un sistema d'escriptura determinat"
 
-#: src/ui_configurationDialog.h:1810
-msgid "Application font"
-msgstr "Tipus de lletra de l'aplicació"
+#: src/ui_configurationDialog.h:1809
+msgid "Overwrite text color"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1813
+#: src/ui_configurationDialog.h:1811
 msgid ""
 "Kinetic scrolling means dragging text panels directly instead of dragging "
 "window handles."
@@ -11106,47 +11084,77 @@ msgstr ""
 "El desplaçament cinètic significa arrossegar panells de text directament en "
 "comptes d'arrossegar de les vores de les finestres."
 
-#: src/ui_configurationDialog.h:1815
+#: src/ui_configurationDialog.h:1813
 msgid "Use kinetic scrolling"
 msgstr "Utilitzeu el desplaçament cinètic"
 
+#: src/ui_configurationDialog.h:1814
+msgid "Font size: Screen"
+msgstr "Mida de lletra: Pantalla"
+
 #: src/ui_configurationDialog.h:1816
+msgid "Base font size for on-screen text"
+msgstr "Mida de lletra per al text en pantalla"
+
+#: src/ui_configurationDialog.h:1819
+msgid "Graphical user interface"
+msgstr "Interfície gràfica d'usuari"
+
+#: src/ui_configurationDialog.h:1821
+msgctxt "abbreviation"
+msgid "GUI"
+msgstr "IGU"
+
+#: src/ui_configurationDialog.h:1823
+msgid "Base font size for dialogs"
+msgstr "Mida de la lletra per als diàlegs"
+
+#: src/ui_configurationDialog.h:1826
+msgid "Pre-select fonts for a particular writing system"
+msgstr ""
+"Tipus de lletra pre-seleccionada per a un sistema d'escriptura determinat"
+
+#: src/ui_configurationDialog.h:1829
+msgid "Application font"
+msgstr "Tipus de lletra de l'aplicació"
+
+#: src/ui_configurationDialog.h:1831
 msgid "Screenshots"
 msgstr "Captura de pantalla"
 
-#: src/ui_configurationDialog.h:1817
+#: src/ui_configurationDialog.h:1832
 msgid "Screenshot Directory"
 msgstr "Carpeta de captura de pantalla"
 
-#: src/ui_configurationDialog.h:1819
+#: src/ui_configurationDialog.h:1834
 msgid "File format"
 msgstr "Format de fitxer"
 
-#: src/ui_configurationDialog.h:1820
+#: src/ui_configurationDialog.h:1835
 msgid "Invert colors"
 msgstr "Invertir colors"
 
-#: src/ui_configurationDialog.h:1821
+#: src/ui_configurationDialog.h:1836
 msgid "Custom size"
 msgstr "Mida personalitzada"
 
-#: src/ui_configurationDialog.h:1824
+#: src/ui_configurationDialog.h:1839
 msgid "Close window when script runs"
 msgstr "Tanca la finestra quan s'executi l'script"
 
-#: src/ui_configurationDialog.h:1826
+#: src/ui_configurationDialog.h:1841
 msgid "Run the selected script"
 msgstr "Executa l'script seleccionat"
 
-#: src/ui_configurationDialog.h:1830
+#: src/ui_configurationDialog.h:1845
 msgid "Stop a running script"
 msgstr "Atura un script que estigui corrent"
 
-#: src/ui_configurationDialog.h:1834
+#: src/ui_configurationDialog.h:1849
 msgid "Load at startup"
 msgstr "Carregar a l'engegada"
 
-#: src/ui_configurationDialog.h:1835
+#: src/ui_configurationDialog.h:1850
 msgid "configure"
 msgstr "configura"
 
@@ -12191,7 +12199,7 @@ msgstr ""
 "mesurar. El varem calcular. Haguéssim desitjat estar a Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12211,7 +12219,7 @@ msgid "Links"
 msgstr "Enllaços"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12236,7 +12244,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12257,7 +12265,7 @@ msgstr "Si teniu una pregunta, podeu {obtenir una resposta aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:563
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12278,7 +12286,7 @@ msgstr "Es poden fer informes d'error i sol·licituds de funcions {aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:565
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12363,7 +12371,7 @@ msgid "Restore default settings"
 msgstr "Restableix la configuració predterminada"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1375
+#: plugins/Oculars/src/ui_ocularDialog.h:1385
 #: plugins/Satellites/src/ui_satellitesDialog.h:849
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12397,9 +12405,9 @@ msgstr "La brúixola apareix amb senyals a l'horitzó"
 msgid "Compass marks"
 msgstr "Marques de la brúixola"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1523
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1276
+#: plugins/Oculars/src/ui_ocularDialog.h:1282
 msgid "Oculars"
 msgstr "Oculars"
 
@@ -12413,7 +12421,7 @@ msgstr ""
 "(Només l'ampliació i el camp visual son simulats.) També pot mostrar un "
 "sensor de fotograma i una marca Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1023
 msgid "Please select an object before switching to ocular view."
 msgstr "Seleccioneu un objecte abans de canviar a la vista ocular, si us plau"
 
@@ -12465,44 +12473,44 @@ msgstr "&Gira el CCD"
 msgid "&Reset rotation"
 msgstr "&Restableix el gir"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
-#: plugins/Oculars/src/ui_ocularDialog.h:1295
+#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/ui_ocularDialog.h:1301
 msgid "Ocular view"
 msgstr "Vista d'ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1525
 msgid "Oculars popup menu"
 msgstr "Menú emergent d'oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Show crosshairs"
 msgstr "Mostra els cursors"
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Image sensor frame"
 msgstr "Marc del sensor d'imatge"
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Telrad sight"
 msgstr "Punt de mira Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1530
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Oculars plugin configuration"
 msgstr "Configuració del connector d'oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1532
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Select next telescope"
 msgstr "Selecciona el  telescopi següent"
 
-#: plugins/Oculars/src/Oculars.cpp:1534
+#: plugins/Oculars/src/Oculars.cpp:1533
 msgid "Select previous telescope"
 msgstr "Selecciona el  telescopi previ"
 
-#: plugins/Oculars/src/Oculars.cpp:1536
+#: plugins/Oculars/src/Oculars.cpp:1535
 msgid "Select next eyepiece"
 msgstr "Selecciona l'ocular següent"
 
-#: plugins/Oculars/src/Oculars.cpp:1538
+#: plugins/Oculars/src/Oculars.cpp:1537
 msgid "Select previous eyepiece"
 msgstr "Selecciona l'ocular previ"
 
@@ -12523,116 +12531,116 @@ msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1983
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "Ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1985
+#: plugins/Oculars/src/Oculars.cpp:2007
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "Binocles"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2005
+#: plugins/Oculars/src/Oculars.cpp:2027
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "DF de l'ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2012
+#: plugins/Oculars/src/Oculars.cpp:2034
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "FOVa de l'ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lents #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2027
+#: plugins/Oculars/src/Oculars.cpp:2049
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lents #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2032
+#: plugins/Oculars/src/Oculars.cpp:2054
 msgid "Lens: none"
 msgstr "Lents: cap"
 
-#: plugins/Oculars/src/Oculars.cpp:2047 plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2069 plugins/Oculars/src/Oculars.cpp:2129
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescopi #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2056
+#: plugins/Oculars/src/Oculars.cpp:2078
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Aument: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2063
+#: plugins/Oculars/src/Oculars.cpp:2085
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Pupil·la de sortida: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2070
+#: plugins/Oculars/src/Oculars.cpp:2092
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2091
+#: plugins/Oculars/src/Oculars.cpp:2113
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensions: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2117
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2099
+#: plugins/Oculars/src/Oculars.cpp:2121
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2112
+#: plugins/Oculars/src/Oculars.cpp:2134
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescopi #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2428
+#: plugins/Oculars/src/Oculars.cpp:2450
 msgid "&Lens"
 msgstr "&Lents"
 
-#: plugins/Oculars/src/Oculars.cpp:2429
+#: plugins/Oculars/src/Oculars.cpp:2451
 msgid "&Previous lens"
 msgstr "Lents %prèvies"
 
-#: plugins/Oculars/src/Oculars.cpp:2430
+#: plugins/Oculars/src/Oculars.cpp:2452
 msgid "&Next lens"
 msgstr "Lents &següents"
 
-#: plugins/Oculars/src/Oculars.cpp:2460
+#: plugins/Oculars/src/Oculars.cpp:2482
 msgid "&Telescope"
 msgstr "&Telescopi"
 
-#: plugins/Oculars/src/Oculars.cpp:2461
+#: plugins/Oculars/src/Oculars.cpp:2483
 msgid "&Previous telescope"
 msgstr "Telescopi &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2462
+#: plugins/Oculars/src/Oculars.cpp:2484
 msgid "&Next telescope"
 msgstr "Telescopi &següent"
 
@@ -12836,54 +12844,54 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "La resolució visual es basa en les propietats oculars i l'augment"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:469
+#: plugins/Oculars/src/gui/OcularDialog.cpp:470
 msgid "tFOV:"
 msgstr "FOVv:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:471
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
 msgid "Magnification factor:"
 msgstr "Factor d'ampliació:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:472
-#: plugins/Oculars/src/ui_ocularDialog.h:1370
+#: plugins/Oculars/src/gui/OcularDialog.cpp:473
+#: plugins/Oculars/src/ui_ocularDialog.h:1380
 msgid "Diameter:"
 msgstr "Diàmetre:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:476
-#: plugins/Oculars/src/ui_ocularDialog.h:1333
+#: plugins/Oculars/src/gui/OcularDialog.cpp:477
+#: plugins/Oculars/src/ui_ocularDialog.h:1343
 msgid "aFOV:"
 msgstr "FOVa:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:477
-#: plugins/Oculars/src/ui_ocularDialog.h:1334
-#: plugins/Oculars/src/ui_ocularDialog.h:1369
+#: plugins/Oculars/src/gui/OcularDialog.cpp:478
+#: plugins/Oculars/src/ui_ocularDialog.h:1344
+#: plugins/Oculars/src/ui_ocularDialog.h:1379
 msgid "Focal length:"
 msgstr "Distància focal:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:478
-#: plugins/Oculars/src/ui_ocularDialog.h:1335
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/ui_ocularDialog.h:1345
 msgid "Field stop:"
 msgstr "Camp d'aturada:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:490
+#: plugins/Oculars/src/gui/OcularDialog.cpp:491
 msgid "Oculars Plug-in"
 msgstr "Connector d'oculars"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:495
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
 msgid "Barlow lens feature"
 msgstr "Característiques de la lent Barlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:499
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Sensor crop overlay feature"
 msgstr ""
 "Característica del retall de la superposició del sensor (crop overlay)"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Overview"
 msgstr "Vista general"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -12896,11 +12904,11 @@ msgstr ""
 "primera vegada que s'executa l'aplicació, aquesta omplirà algunes mostres "
 "per que tingui d'exemple."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Pots triar escalar la imatge que es veu a la pantalla."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -12908,7 +12916,7 @@ msgstr ""
 "Amb això es pretén mostrar una millor comparació del que una combinació "
 "d'ocular/telescopi respecte una altra."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -12917,7 +12925,7 @@ msgstr ""
 "produirà dues pupil·les de sortida diferents, canviant el punt de vista "
 "alguna cosa."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:510
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -12925,7 +12933,7 @@ msgstr ""
 "La compensació d'això és que, amb la imatge escalada, una gran part de la "
 "pantalla es pot desaprofitar."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:510
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
@@ -12933,17 +12941,11 @@ msgstr ""
 "Per tant, recomano que ho deixis fora, llevat que sentis que tens una "
 "necessitat d'ell."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
-msgid ""
-"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
-"aligned to North.  I've been unable to do so.  So currently it aligns to the"
-" top of the screen."
-msgstr ""
-"Podeu commutar una retícula a la vista. Idealment, jo volia que això "
-"estigués alineat cap al Nord. He estat incapaç de fer-ho. Així que "
-"actualment s'alinea amb la part superior de la pantalla."
-
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
+msgid "You can toggle a crosshair in the view."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -12956,15 +12958,15 @@ msgstr ""
 "d'un 0,5%1, 2,0% 1, i 4,0%1, i això ajuda a veure el que es pot esperar per "
 "veure a ull nu a través del cercador Telrad (o similar)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:514
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Si trobeu qualsevol problema, si us plau feu-m'ho saber. Disfruteu!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 msgid "Hot Keys"
 msgstr "Tecles de drecera"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -12972,58 +12974,58 @@ msgstr ""
 "Les tecles associades als connectors es poden editar en l'editor de dreceres"
 " de teclat (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "[no key defined]"
 msgstr "[Sense clau definida]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 msgid "Switches on/off the ocular overlay."
 msgstr "Activa/desactiva la superposició ocular."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 msgid "Opens the pop-up navigation menu."
 msgstr "Obre el menú emergent de navegació."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "Gira patró de la retícula de l'ocular en sentit horari."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "Gira patró de la retícula de l'ocular en sentit anti horari."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1278
+#: plugins/Oculars/src/ui_ocularDialog.h:1284
 msgid "Interface"
 msgstr "Interfície"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1279
+#: plugins/Oculars/src/ui_ocularDialog.h:1285
 msgid "On-screen control panel"
 msgstr "Panell de control en pantalla"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1280
+#: plugins/Oculars/src/ui_ocularDialog.h:1286
 msgid "Font size"
 msgstr "Mida de la font"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1284
+#: plugins/Oculars/src/ui_ocularDialog.h:1290
 msgid "Arrow button scale (requires restart)"
 msgstr "Escala dels botons de les fletxes (requereix reinici)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1285
+#: plugins/Oculars/src/ui_ocularDialog.h:1291
 msgid "Show resolution criteria"
 msgstr "Mostra criteri de resolució"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1287
+#: plugins/Oculars/src/ui_ocularDialog.h:1293
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "Marca-ho si vols el valor del FOV igual que a l'inici de Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1289
+#: plugins/Oculars/src/ui_ocularDialog.h:1295
 msgid "Restore FOV to initial values"
 msgstr "Restaura el FOV als valors inicials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1291
+#: plugins/Oculars/src/ui_ocularDialog.h:1297
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -13031,69 +13033,77 @@ msgstr ""
 "Marcar si voleu que la direcció sigui la mateixa com a l'arrancada de "
 "Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1293
+#: plugins/Oculars/src/ui_ocularDialog.h:1299
 msgid "Restore direction to initial values"
 msgstr "Restaurar direcció als valors inicials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1294
+#: plugins/Oculars/src/ui_ocularDialog.h:1300
 msgid "Show oculars button on toolbar"
 msgstr "Mostra els botons dels oculars a la barra d'eines"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1297
-msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
-"Aplicar límits de magnituds estelar per diferents apertures de telescopis"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1299
-msgid "Limit stellar magnitude"
-msgstr "Límit de magnitud estel · lar"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1300
-msgid "Hide grids and lines when enabled"
-msgstr "Quan està activat, amaga graella i línies"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1301
-msgid "Enable only if an object is selected"
-msgstr "Habilita només si hi ha un objecte seleccionat"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1303
-msgid "In ocular mode, allow some visibility outside ocular circle."
+msgid "Show border circle"
 msgstr ""
-"En el mode ocular, permet una certa visibilitat fora del cercle ocular."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1305
-msgid "Use semi-transparent mask"
-msgstr "Utilitza màscara semitransparent"
+msgid "Show FOV outline"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1306
 msgid "Scale image circle"
 msgstr "Canvia l'escala del cercle d'imatge"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:1307
+msgid "Hide grids and lines when enabled"
+msgstr "Quan està activat, amaga graella i línies"
+
 #: plugins/Oculars/src/ui_ocularDialog.h:1308
-msgid "Show border circle"
-msgstr ""
+msgid "Enable only if an object is selected"
+msgstr "Habilita només si hi ha un objecte seleccionat"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1310
-msgid "Show FOV outline"
+msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
+"En el mode ocular, permet una certa visibilitat fora del cercle ocular."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1312
+msgid "Use semi-transparent mask"
+msgstr "Utilitza màscara semitransparent"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1314
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1314
+#: plugins/Oculars/src/ui_ocularDialog.h:1316
 msgid "Show compass rose"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1315
+#: plugins/Oculars/src/ui_ocularDialog.h:1318
+msgid "Apply limits stellar magnitude for different apertures of telescopes"
+msgstr ""
+"Aplicar límits de magnituds estelar per diferents apertures de telescopis"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1320
+msgid "Limit stellar magnitude"
+msgstr "Límit de magnitud estel · lar"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1322
+msgid "Align the crosshair in equatorial coordinate system"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1324
+msgid "Align crosshair"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1325
 msgid "Sensor view"
 msgstr "Vista del sensor"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1316
+#: plugins/Oculars/src/ui_ocularDialog.h:1326
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Utilitzeu graus i minuts per FOV de la CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1318
+#: plugins/Oculars/src/ui_ocularDialog.h:1328
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -13101,79 +13111,79 @@ msgstr ""
 "Habilitar canvi automàtic de tipus de muntura des dels paràmetres del "
 "telescopi per orientacions horitzontals del marc CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1320
+#: plugins/Oculars/src/ui_ocularDialog.h:1330
 msgid "Enable automatic switch of mount type"
 msgstr "Habilitar canvi automàtic de tipus de muntura"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1322
+#: plugins/Oculars/src/ui_ocularDialog.h:1332
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
 msgstr ""
 "Habiliteu una superposició quadrada que mostri la mida efectiva d'el nombre "
 "de píxels."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1324
+#: plugins/Oculars/src/ui_ocularDialog.h:1334
 msgid "Show sensor crop overlay"
 msgstr "Mostrar retall de la superposició del sensor (crop overlay)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1325
+#: plugins/Oculars/src/ui_ocularDialog.h:1335
 msgid "Overlay size (px)"
 msgstr "Mida de superposició (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1326
+#: plugins/Oculars/src/ui_ocularDialog.h:1336
 msgid "Enable scaling FOV for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1327
+#: plugins/Oculars/src/ui_ocularDialog.h:1337
 msgid "Telrad view"
 msgstr "Vista Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1328
+#: plugins/Oculars/src/ui_ocularDialog.h:1338
 msgid "Enable scaling FOV for Telrad"
 msgstr "Activar escalat del FOV per Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1329
+#: plugins/Oculars/src/ui_ocularDialog.h:1339
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Opcions generals"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1330
-#: plugins/Oculars/src/ui_ocularDialog.h:1339
-#: plugins/Oculars/src/ui_ocularDialog.h:1345
-#: plugins/Oculars/src/ui_ocularDialog.h:1366
+#: plugins/Oculars/src/ui_ocularDialog.h:1340
+#: plugins/Oculars/src/ui_ocularDialog.h:1349
+#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1376
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "Afegeix"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1332
-#: plugins/Oculars/src/ui_ocularDialog.h:1341
-#: plugins/Oculars/src/ui_ocularDialog.h:1347
-#: plugins/Oculars/src/ui_ocularDialog.h:1368
+#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1357
+#: plugins/Oculars/src/ui_ocularDialog.h:1378
 #: plugins/Satellites/src/ui_satellitesDialog.h:813
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "Nom:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1336
+#: plugins/Oculars/src/ui_ocularDialog.h:1346
 msgid "Binoculars"
 msgstr "Binoculars"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1337
+#: plugins/Oculars/src/ui_ocularDialog.h:1347
 msgid "Has permanent cross-hairs"
 msgstr "Té la mira permanent"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1338
+#: plugins/Oculars/src/ui_ocularDialog.h:1348
 msgid "Eyepieces"
 msgstr "Oculars"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1352
 msgid "Multiplier:"
 msgstr "Multiplicador:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1343
+#: plugins/Oculars/src/ui_ocularDialog.h:1353
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -13181,90 +13191,90 @@ msgstr ""
 "Valors de multiplicador >1 amplia la llargada focal (lent Barlow). Valors de"
 " multiplicador <1 redueix la llargada focal (lent Shapley)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1344
+#: plugins/Oculars/src/ui_ocularDialog.h:1354
 msgid "Lenses"
 msgstr "Lents"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1348
+#: plugins/Oculars/src/ui_ocularDialog.h:1358
 msgid "Resolution x (pixels):"
 msgstr "Resolució x (píxels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1349
+#: plugins/Oculars/src/ui_ocularDialog.h:1359
 msgid "Resolution y (pixels):"
 msgstr "Resolució y (píxels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/ui_ocularDialog.h:1360
 msgid "Chip height (mm):"
 msgstr "Alçada del xip (mm)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1361
 msgid "Chip width (mm):"
 msgstr "Amplada del xip (mm)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1352
+#: plugins/Oculars/src/ui_ocularDialog.h:1362
 msgid "Pixel width (micron):"
 msgstr "Amplada del píxel (micres)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1353
+#: plugins/Oculars/src/ui_ocularDialog.h:1363
 msgid "Pixel height (micron):"
 msgstr "Alçada del píxel (micres)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1365
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr ""
 "Aquesta és la distància del centre del Sensor d'Imatges al fons del Prisma"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1357
+#: plugins/Oculars/src/ui_ocularDialog.h:1367
 msgid "Prism/CCD distance (mm):"
 msgstr "Distancia prisma/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1358
+#: plugins/Oculars/src/ui_ocularDialog.h:1368
 msgid "Prism/CCD height (mm):"
 msgstr "Altura prisma/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1359
+#: plugins/Oculars/src/ui_ocularDialog.h:1369
 msgid "Prism/CCD width (mm):"
 msgstr "Amplada prisma/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1360
+#: plugins/Oculars/src/ui_ocularDialog.h:1370
 msgid "Position angle (degrees):"
 msgstr "Angle posició (graus):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1361
+#: plugins/Oculars/src/ui_ocularDialog.h:1371
 msgid "Off-Axis guider"
 msgstr "Guia fora d'eix"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1362
+#: plugins/Oculars/src/ui_ocularDialog.h:1372
 msgid "Rotation Angle (degrees):"
 msgstr "Angle rotació (graus):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1363
+#: plugins/Oculars/src/ui_ocularDialog.h:1373
 msgid "Binning x:"
 msgstr "Binning x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1364
+#: plugins/Oculars/src/ui_ocularDialog.h:1374
 msgid "Binning y:"
 msgstr "Binning y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1365
+#: plugins/Oculars/src/ui_ocularDialog.h:1375
 msgid "Sensors"
 msgstr "Sensors"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1371
+#: plugins/Oculars/src/ui_ocularDialog.h:1381
 msgid "Horizontal flip"
 msgstr "Capgira horitzontalment"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1372
+#: plugins/Oculars/src/ui_ocularDialog.h:1382
 msgid "Vertical flip"
 msgstr "Capgira veticalment"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1373
+#: plugins/Oculars/src/ui_ocularDialog.h:1383
 msgid "Equatorial Mount"
 msgstr "Muntura equatorial"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1374
+#: plugins/Oculars/src/ui_ocularDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"

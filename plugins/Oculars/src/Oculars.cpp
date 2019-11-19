@@ -1015,7 +1015,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
 
 	// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
-	if (!flagShowOculars && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
+	if (!flagShowOculars && !flagShowTelrad && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
 	{
 		if (usageMessageLabelID == -1)
 		{
