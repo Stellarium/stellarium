@@ -337,6 +337,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/BookmarksDialog.hpp
           gui/BookmarksDialog.cpp
+          gui/BookmarksListNameDialog.hpp
+          gui/BookmarksListNameDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
@@ -357,6 +359,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/bookmarksDialog.ui
+          gui/bookmarksListNameDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
-    <height>359</height>
+    <width>685</width>
+    <height>441</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -130,7 +130,7 @@
       <item row="0" column="0">
        <widget class="QTreeView" name="bookmarksTreeView"/>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -146,7 +146,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <layout class="QHBoxLayout" name="horizontalLayout_checkbox">
            <item>
             <widget class="QCheckBox" name="dateTimeCheckBox">
              <property name="text">
@@ -164,7 +164,67 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <layout class="QHBoxLayout" name="horizontalLayout_buttons_1" stretch="0,0,0,0">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="createBookmarksListButton">
+             <property name="toolTip">
+              <string>Create a new bookmarks list</string>
+             </property>
+             <property name="text">
+              <string>Create new bookmarks list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="deleteCurrentBookmarksListButton">
+             <property name="text">
+              <string>Delete current bookmarks list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="bookmarksListComboLabel">
+             <property name="text">
+              <string>Select bookmarks list:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="bookmarksListCombo">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="editable">
+              <bool>false</bool>
+             </property>
+             <property name="currentIndex">
+              <number>-1</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>0</width>
+             <height>5</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_buttons_2">
            <item>
             <widget class="QPushButton" name="addBookmarkButton">
              <property name="toolTip">
@@ -199,12 +259,15 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout_buttons_3">
            <property name="topMargin">
             <number>0</number>
            </property>
            <item>
             <widget class="QPushButton" name="importBookmarksButton">
+             <property name="toolTip">
+              <string>Import bookmarks to current selected list</string>
+             </property>
              <property name="text">
               <string>Import bookmarks</string>
              </property>
@@ -212,6 +275,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="exportBookmarksButton">
+             <property name="toolTip">
+              <string>Export current selected bookmarks list</string>
+             </property>
              <property name="text">
               <string>Export bookmarks</string>
              </property>
