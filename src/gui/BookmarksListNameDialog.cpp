@@ -51,7 +51,6 @@ void BookmarksListNameDialog::createDialogContent()
     ui->lineEditListName->setValidator(new QRegExpValidator( QRegExp("[A-Za-z0-9_-]+"), this ));
     // only 40 characters
     ui->lineEditListName->setMaxLength(40);
-    
 }
 
 
@@ -62,7 +61,6 @@ void BookmarksListNameDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 	}
-
 }
 
 // Called when the button ok is pressed

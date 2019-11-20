@@ -242,8 +242,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
             } else
             {
                 Location = QString("%1, %2").arg(loc.name).arg(loc.country);
-            }
-				
+            }				
 		}
 
 		int lastRow = bookmarksListModel->rowCount();
@@ -276,7 +275,6 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		if (!visibleFlag)
         {
 			bm.isVisibleMarker = visibleFlag;
-            
         }
 		if (fov > 0.0)
         {
@@ -466,7 +464,6 @@ void BookmarksDialog::loadBookmarks()
 		return;
 	}
     
-    
     QVariantMap map;
     QFile jsonFile(jsonFilePath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
@@ -478,7 +475,6 @@ void BookmarksDialog::loadBookmarks()
 		
         if(jsonFile.size()!=0)
         {
-            
             try
             {
                 map = StelJsonParser::parse(jsonFile.readAll()).toMap();

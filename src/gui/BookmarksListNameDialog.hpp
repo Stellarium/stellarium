@@ -36,7 +36,6 @@ class BookmarksListNameDialog :  public StelDialog
     Q_OBJECT
     
 public:
-    
     BookmarksListNameDialog();
 
     BookmarksListNameDialog(const BookmarksListNameDialog& other);
@@ -50,19 +49,16 @@ public:
     Ui_bookmarksListNameDialogForm * getUi() const;
 
 protected:
-    
     //! Initialize the dialog widgets and connect the signals/slots.
     virtual void createDialogContent();
     
     Ui_bookmarksListNameDialogForm *ui;
     
 private:
-    
     QString bookmarksListName;
     
 
 signals:
-    
     //To notified that the list name is retrieved
     void listNameRetrieved();
 
