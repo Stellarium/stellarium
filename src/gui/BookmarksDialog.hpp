@@ -127,8 +127,6 @@ private slots:
     void loadSelectedBookmarksList(int selectedIndex );
     
     void deleteCurrentBookmarksList();
-
-
 };
 
 
