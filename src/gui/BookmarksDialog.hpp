@@ -59,13 +59,11 @@ public:
 	void styleChanged();
     
 protected:
-    
     //! Initialize the dialog widgets and connect the signals/slots.
     virtual void createDialogContent();
 	Ui_bookmarksDialogForm *ui;
     
 private:
-    
     static constexpr const char* FILE_PREFIX = "bookmarks_";
 	
     enum BookmarksColumns {

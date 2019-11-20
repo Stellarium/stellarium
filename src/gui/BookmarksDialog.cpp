@@ -51,7 +51,6 @@
 BookmarksDialog::BookmarksDialog(QObject *parent)
 	: StelDialog("Bookmarks", parent) , bookmarksListNameDialog(Q_NULLPTR)
 {
-	
 	ui = new Ui_bookmarksDialogForm;
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -59,7 +58,6 @@ BookmarksDialog::BookmarksDialog(QObject *parent)
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
 	bookmarksDirectoryPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable));
     jsonFilePath = "";
-    
 }
 
 
@@ -462,7 +460,6 @@ void BookmarksDialog::goToBookmark(QString uuid)
 //! Load the bookmarks
 void BookmarksDialog::loadBookmarks()
 {
-	
     if (jsonFilePath == Q_NULLPTR || jsonFilePath.isEmpty())
 	{
 		qWarning() << "[Bookmarks] Error saving bookmarks -> file path empty or null";
@@ -544,12 +541,10 @@ void BookmarksDialog::loadBookmarks()
                 qDebug() << "[Bookmarks] File format is wrong! Error: " << e.what();
                 return;
             }
-            
         }
         else{
             qWarning() << "[Bookmarks] the file is empty";
         }
-        
 	}
 }
 
@@ -557,7 +552,6 @@ void BookmarksDialog::loadBookmarks()
 //! Import bookmarks to the selected list
 void BookmarksDialog::importBookmarks()
 {
-	
 	if (jsonFilePath != Q_NULLPTR && jsonFilePath != "")
     {
        QString originalBookmarksFile = jsonFilePath;
@@ -569,14 +563,12 @@ void BookmarksDialog::importBookmarks()
     } else {
         qWarning() << "[Bookmarks] Import: no list selected";
     }
-    
 }
 
 
 //! Export the current selected bookmarks file
 void BookmarksDialog::exportBookmarks()
 {
-
 	if (jsonFilePath != Q_NULLPTR && jsonFilePath != "")
     {
         QString originalBookmarksFile = jsonFilePath;
@@ -590,15 +582,13 @@ void BookmarksDialog::exportBookmarks()
 							 
     } else {
         qWarning() << "[Bookmarks] Export: no list selected";
-    }
-	
+    }	
 }
 
 
 //! Save the bookmars into the current selected file
 void BookmarksDialog::saveBookmarks() const
 {
-	
     if (jsonFilePath == Q_NULLPTR || jsonFilePath.isEmpty())
 	{
 		qWarning() << "[Bookmarks] Error saving bookmarks -> file path empty or null";
@@ -677,8 +667,6 @@ void BookmarksDialog::showBookmarksListNameDialog()
     }
     
     bookmarksListNameDialog->setVisible(true);
-    
-    
 }
 
 //! Create a new bookmarks file
@@ -718,7 +706,6 @@ void BookmarksDialog::createNewBookmarksFile()
 //! @param selectedIndex: the index of the selected item in the combobox
 void BookmarksDialog::loadSelectedBookmarksList ( int selectedIndex )
 {
-    
     if( selectedIndex != 0)
     {
         jsonFilePath = ui->bookmarksListCombo->itemData( selectedIndex ).toString();
@@ -737,7 +724,6 @@ void BookmarksDialog::loadSelectedBookmarksList ( int selectedIndex )
 //! Load all the bookmarks list files
 void BookmarksDialog::loadBookmarksListFiles()
 {
-    
     if (bookmarksDirectoryPath ==  Q_NULLPTR || bookmarksDirectoryPath == "") {
         qWarning() << "[Bookmarks] Load bookmarks files -> bookmarks directory path is null or empty";
         return;
@@ -789,7 +775,6 @@ void BookmarksDialog::loadBookmarksListFiles()
 //! Delete the current bookmarks list
 void BookmarksDialog::deleteCurrentBookmarksList()
 {
-
     int selectedIndex = ui->bookmarksListCombo->currentIndex();
     
     if (selectedIndex != 0)
