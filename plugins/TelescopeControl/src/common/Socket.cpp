@@ -41,7 +41,7 @@ long long int GetNow(void)
 	union
 	{
 		FILETIME file_time;
-		__int64 t;
+		qint64 t;
 	} tmp;
 	GetSystemTimeAsFileTime(&tmp.file_time);
 	t = (tmp.t/10) - 86400000000LL*(369*365+89);
