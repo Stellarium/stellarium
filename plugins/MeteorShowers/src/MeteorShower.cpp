@@ -485,11 +485,11 @@ QString MeteorShower::getSolarLongitude(QDate date)
 	const double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
-	float l = static_cast<float>(280.460 + 0.9856474 * n);
+	double l = (280.460 + 0.9856474 * n);
 
 	// put it in the range 0 to 360 degrees
-	l /= 360.f;
-	l = (l - static_cast<int>(l)) * 360.f - 1.f;
+	l /= 360.;
+	l = (l - static_cast<int>(l)) * 360. - 1.;
 
 	return QString::number(l, 'f', 2);
 }
