@@ -255,6 +255,9 @@ public slots:
 	//! Unzoom to the previous position.
 	void autoZoomOut(float moveDuration = 1.f, bool full = 0);
 
+	//! Deselect the selected object
+	void deselection(void);
+
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
 
