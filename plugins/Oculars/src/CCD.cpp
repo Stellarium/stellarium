@@ -50,18 +50,18 @@ CCD::CCD(const QObject& other)
 	: m_name(other.property("name").toString())
 	, m_resolutionX(other.property("resolutionX").toInt())
 	, m_resolutionY(other.property("resolutionY").toInt())
-	, m_chipWidth(other.property("chipWidth").toFloat())
-	, m_chipHeight(other.property("chipHeight").toFloat())
-	, m_pixelWidth(other.property("pixelWidth").toFloat())
-	, m_pixelHeight(other.property("pixelHeight").toFloat())
-	, m_chipRotAngle(other.property("chipRotAngle").toFloat())
+	, m_chipWidth(other.property("chipWidth").toDouble())
+	, m_chipHeight(other.property("chipHeight").toDouble())
+	, m_pixelWidth(other.property("pixelWidth").toDouble())
+	, m_pixelHeight(other.property("pixelHeight").toDouble())
+	, m_chipRotAngle(other.property("chipRotAngle").toDouble())
 	, m_binningX(other.property("binningX").toInt())
 	, m_binningY(other.property("binningY").toInt())
 	, m_has_oag(other.property("hasOAG").toBool())
-	, m_oag_prismHeight(other.property("prismHeight").toFloat())
-	, m_oag_prismWidth(other.property("prismWidth").toFloat())
-	, m_oag_prismDistance(other.property("prismDistance").toFloat())
-	, m_oag_prismPosAngle(other.property("prismPosAngle").toFloat())
+	, m_oag_prismHeight(other.property("prismHeight").toDouble())
+	, m_oag_prismWidth(other.property("prismWidth").toDouble())
+	, m_oag_prismDistance(other.property("prismDistance").toDouble())
+	, m_oag_prismPosAngle(other.property("prismPosAngle").toDouble())
 {
 }
 
@@ -254,35 +254,35 @@ void CCD::setBinningY(int binning)
 
 double CCD::getInnerOAGRadius(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
 double CCD::getOuterOAGRadius(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
 double CCD::getOAGActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->prismWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
 double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovY;
 }

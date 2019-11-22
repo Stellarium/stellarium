@@ -1577,7 +1577,7 @@ void Oculars::paintCCDBounds()
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
-	double screenFOV = params.fov;
+	double screenFOV = static_cast<double>(params.fov);
 
 	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
 			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
@@ -1874,7 +1874,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 		*/
-		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(reticleRotation));
 	}
 
 	float alpha = 1.f;
@@ -1883,7 +1883,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	painter.setColor(0.f,0.f,0.f,alpha);
 
-	GLfloat outerRadius = params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel;
+	GLfloat outerRadius = static_cast<GLfloat>(params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel);
 	GLint slices = 239;
 
 	GLfloat sinCache[240];
@@ -1927,7 +1927,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 	{
 		// TODO: Make it configurable?
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-		painter.drawCircle(centerScreen[0], centerScreen[1], inner);
+		painter.drawCircle(centerScreen[0], centerScreen[1], static_cast<float>(inner));
 	}
 
 	if (getFlagShowCardinals())
@@ -1953,7 +1953,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 			cardinalsMirroredTexture->bind();
 		else
 			cardinalsNormalTexture->bind();
-		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, -polarAngle);
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(-polarAngle));
 	}
 
 }
@@ -2756,24 +2756,24 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		if (fovX >= 1.0)
 		{
 			int degrees = static_cast<int>(fovX);
-			float minutes = (fovX - degrees) * 60.f;
+			double minutes = (fovX - degrees) * 60.;
 			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = fovX * 60.f;
+			double minutes = fovX * 60.;
 			stringFovX = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = static_cast<int>(fovY);
-			float minutes = (fovY - degrees) * 60.f;
+			double minutes = (fovY - degrees) * 60.;
 			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = fovY * 60.f;
+			double minutes = fovY * 60;
 			stringFovY = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 	}
