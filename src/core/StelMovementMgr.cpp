@@ -512,9 +512,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		{
 			if (event->type()==QEvent::MouseButtonRelease)
 			{
-				// Deselect the selected object
-				StelApp::getInstance().getStelObjectMgr().unSelect();
-				setFlagLockEquPos(false);
+				// The code for deselect the selected object was moved into separate method.
+				deselection();
 				event->accept();
 				return;
 			}
@@ -1176,8 +1175,7 @@ void StelMovementMgr::deselection(void)
 {
 	// Deselect the selected object
 	StelApp::getInstance().getStelObjectMgr().unSelect();
-	setFlagLockEquPos(false);
-	setFlagTracking(false);
+	setFlagLockEquPos(false);	
 	return;
 }
 

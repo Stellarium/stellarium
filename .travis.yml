@@ -464,9 +464,9 @@ matrix:
         - COVERAGE=false
         - REPQT=true
 
-    # macOS 10.11 
+    # macOS 10.13 
     - os: osx
-      osx_image: xcode8
+      osx_image: xcode9.4
       addons:
         homebrew:
           packages:
@@ -478,9 +478,9 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.12 
+    # macOS 10.13 
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode10
       addons:
         homebrew:
           packages:
@@ -495,6 +495,62 @@ matrix:
     # macOS 10.13 
     - os: osx
       osx_image: xcode10.1
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    # macOS 10.14
+    - os: osx
+      osx_image: xcode10.2
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    # macOS 10.14
+    - os: osx
+      osx_image: xcode10.3
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    # macOS 10.14
+    - os: osx
+      osx_image: xcode11
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
+    # macOS 10.14
+    - os: osx
+      osx_image: xcode11.1
       addons:
         homebrew:
           packages:
