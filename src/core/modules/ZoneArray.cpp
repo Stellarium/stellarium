@@ -29,7 +29,7 @@
 #include <QDir>
 #ifdef Q_OS_WIN
 #include <io.h>
-#include <windows.h>
+#include <Windows.h>
 #endif
 
 

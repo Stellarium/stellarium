@@ -207,7 +207,7 @@ private:
 private:
 	void hangup(void);
 	QHostAddress address;
-	unsigned int port;
+	quint16 port;
 	QTcpSocket * tcpSocket;
 	bool wait_for_connection_establishment;
 	qint64 end_of_timeout;

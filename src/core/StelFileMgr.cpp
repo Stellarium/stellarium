@@ -32,9 +32,9 @@
 #include <cstdio>
 
 #ifdef Q_OS_WIN
-#include <windows.h>
+#include <Windows.h>
 #ifndef _SHOBJ_H
-	#include <shlobj.h>
+	#include <ShlObj.h>
 	#include <QLibrary>
 #endif
 #endif
@@ -530,7 +530,7 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 	if (SHGetSpecialFolderPath)
 	{
 		TCHAR tpath[MAX_PATH];
-		SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
+		SHGetSpecialFolderPath(Q_NULLPTR, tpath, csidlId, FALSE);
 		return QString::fromUtf16((ushort*)tpath);
 	}
 
