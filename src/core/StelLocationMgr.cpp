@@ -261,7 +261,6 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			qDebug() << "  ProductID:"      << pi.productIdentifier();
 			qDebug() << "  SerialNumber:"   << pi.serialNumber();
 			qDebug() << "  Busy:"           << pi.isBusy();
-			qDebug() << "  Valid:"          << pi.isValid();
 			qDebug() << "  Null:"           << pi.isNull();
 			if (pi.portName()==portName)
 			{
@@ -363,8 +362,8 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 	{
 		StelCore *core=StelApp::getInstance().getCore();
 		StelLocation loc;
-		loc.longitude=coord.longitude();
-		loc.latitude=coord.latitude();
+		loc.longitude=static_cast<float>(coord.longitude());
+		loc.latitude=static_cast<float>(coord.latitude());
 		// 2D fix may have only long/lat, invalid altitude.
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		if (verbose)
@@ -1009,7 +1008,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		{
 			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
 					<< "\nLet's use Paris, France as default location...";
-			core->moveObserverTo(getLastResortLocation(), 0.0f, 0.0f); // Answer is not in JSON format! A possible block by DNS server or firewall
+			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
 	else

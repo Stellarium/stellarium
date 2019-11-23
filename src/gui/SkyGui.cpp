@@ -344,12 +344,12 @@ QVariant SkyGui::itemChange(GraphicsItemChange change, const QVariant & value)
 
 int SkyGui::getSkyGuiWidth() const
 {
-	return geometry().width();
+	return static_cast<int>(geometry().width());
 }
 
 int SkyGui::getSkyGuiHeight() const
 {
-	return geometry().height();
+	return static_cast<int>(geometry().height());
 }
 
 //! Update the position of the button bars in the main window

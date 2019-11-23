@@ -150,7 +150,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 // Compute great-circle distance between two locations
 float StelLocation::distanceDegrees(const float long1, const float lat1, const float long2, const float lat2)
 {
-	const float DEGREES=M_PI/180.0f;
+	const float DEGREES=M_PIf/180.0f;
 	return std::acos( std::sin(lat1*DEGREES)*std::sin(lat2*DEGREES) +
 			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
 			  std::cos((long1-long2)*DEGREES) ) / DEGREES;

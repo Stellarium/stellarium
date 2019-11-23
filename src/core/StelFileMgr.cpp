@@ -526,12 +526,12 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));
 	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
-	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+	GetSpecialFolderPath SHGetSpecialFolderPath = reinterpret_cast<GetSpecialFolderPath>(library.resolve("SHGetSpecialFolderPathW"));
 	if (SHGetSpecialFolderPath)
 	{
 		TCHAR tpath[MAX_PATH];
 		SHGetSpecialFolderPath(Q_NULLPTR, tpath, csidlId, FALSE);
-		return QString::fromUtf16((ushort*)tpath);
+		return QString::fromUtf16(reinterpret_cast<ushort*>(tpath));
 	}
 
 	return QString();

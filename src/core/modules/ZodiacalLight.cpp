@@ -77,7 +77,7 @@ void ZodiacalLight::init()
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,60,30,1, true)); // 6x6 degree quads
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,60,30,1, true)); // 6x6 degree quads
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(color);
 
