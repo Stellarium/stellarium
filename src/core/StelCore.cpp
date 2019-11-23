@@ -22,7 +22,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelToneReproducer.hpp"
-#include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
@@ -37,7 +36,6 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
-#include "StelPropertyMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
@@ -74,6 +72,7 @@ const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
 StelCore::StelCore()
 	: skyDrawer(Q_NULLPTR)
 	, movementMgr(Q_NULLPTR)
+	, propMgr(Q_NULLPTR)
 	, geodesicGrid(Q_NULLPTR)
 	, currentProjectionType(ProjectionStereographic)
 	, currentDeltaTAlgorithm(EspenakMeeus)
@@ -239,14 +238,12 @@ void StelCore::init()
 	currentProjectorParams.fov = static_cast<float>(movementMgr->getInitFov());
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
-
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 	propMgr->registerObject(skyDrawer);
 	propMgr->registerObject(this);
-
 
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();
@@ -2459,6 +2456,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
+	if (propMgr->getStelPropertyValue("Oculars.enableOcular").toBool())
+		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
 		return false;
