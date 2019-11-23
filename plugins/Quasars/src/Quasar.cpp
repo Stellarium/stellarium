@@ -78,6 +78,7 @@ Quasar::Quasar(const QVariantMap& map)
 		bV = -99.f;
 	qRA = StelUtils::getDecAngle(map.value("RA").toString());
 	qDE = StelUtils::getDecAngle(map.value("DE").toString());
+	StelUtils::spheToRect(qRA, qDE, XYZ);
 	redshift = map.value("z").toFloat();
 	if (map.contains("f6"))
 		f6 = map.value("f6").toFloat();
@@ -211,19 +212,14 @@ void Quasar::update(double deltaTime)
 
 void Quasar::draw(StelCore* core, StelPainter& painter)
 {
-	StelSkyDrawer* sd = core->getSkyDrawer();
-
-	StelUtils::spheToRect(qRA, qDE, XYZ);
-
 	Vec3d win;
 	// Check visibility of quasar
 	if (!(painter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	float size, mag, mlimit, shift=0;
-
-	mlimit = sd->getLimitMagnitude();
-	mag = getVMagnitudeWithExtinction(core);
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	const float mlimit = sd->getLimitMagnitude();
+	float mag = getVMagnitudeWithExtinction(core);
 	if (useMarkers)
 		mag -= shiftVisibility;
 
@@ -232,6 +228,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	if (mag <= mlimit)
 	{
+		float size, shift=0;
 		if (distributionMode || useMarkers)
 		{
 			painter.setBlending(true, GL_ONE, GL_ONE);
@@ -250,7 +247,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
+			sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
 			painter.setColor(color[0], color[1], color[2], 1);
 			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;
@@ -268,15 +265,6 @@ unsigned char Quasar::BvToColorIndex(float b_v)
 {
 	if (b_v<-98.f)
 		b_v = 0.f;
-	double dBV = b_v;
-	dBV *= 1000.0;
-	if (dBV < -500)
-	{
-		dBV = -500;
-	}
-	else if (dBV > 3499)
-	{
-		dBV = 3499;
-	}
-	return (unsigned int)floor(0.5+127.0*((500.0+dBV)/4000.0));
+	double dBV = qBound(-500., static_cast<double>(b_v)*1000., 3499.);
+	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }

@@ -71,7 +71,8 @@ Nova::Nova(const QVariantMap& map)
 	m6 = map.value("m6", -1).toInt();
 	m9 = map.value("m9", -1).toInt();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	Dec = StelUtils::getDecAngle(map.value("Dec").toString());	
+	Dec = StelUtils::getDecAngle(map.value("Dec").toString());
+	StelUtils::spheToRect(RA, Dec, XYZ);
 	distance = map.value("distance").toDouble();
 
 	initialized = true;
@@ -199,9 +200,9 @@ Vec3f Nova::getInfoColor(void) const
 float Nova::getVMagnitude(const StelCore* core) const
 {
 	// OK, start from minimal brightness
-	double vmag = minMagnitude;
+	float vmag = minMagnitude;
 	double currentJD = core->getJDE();
-	double deltaJD = qAbs(peakJD-currentJD);
+	float deltaJD = static_cast<float>(qAbs(peakJD-currentJD));
     
 	// Fill "default" values for mX
 	int t2 = m2;
@@ -324,25 +325,20 @@ void Nova::update(double deltaTime)
 void Nova::draw(StelCore* core, StelPainter* painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-
-	Vec3f color = Vec3f(1.f,1.f,1.f);
-	RCMag rcMag;
-	float size, shift;
-	double mag;
-
-	StelUtils::spheToRect(RA, Dec, XYZ);
-	mag = getVMagnitudeWithExtinction(core);
-	sd->preDrawPointSource(painter);
-	float mlimit = sd->getLimitMagnitude();
+	const float mlimit = sd->getLimitMagnitude();
+	float mag = getVMagnitudeWithExtinction(core);
 
 	if (mag <= mlimit)
 	{
+		Vec3f color(1.f);
+		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
-		sd->drawPointSource(painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
-		painter->setColor(color[0], color[1], color[2], 1.f);
-		size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
-		shift = 6.f + size/1.8f;
+		sd->preDrawPointSource(painter);
+		sd->drawPointSource(painter, XYZ.toVec3f(), rcMag, color, false);
+		painter->setColor(color, 1.f);
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float shift = 6.f + size/1.8f;
+		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;

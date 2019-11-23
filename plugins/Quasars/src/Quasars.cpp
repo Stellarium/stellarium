@@ -160,7 +160,7 @@ void Quasars::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
 		if (catalogJsonPath.isEmpty())
 			return;
 
@@ -270,7 +270,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& quasar : QSO)
@@ -279,7 +279,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 		{
 			equPos = quasar->XYZ;
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(quasar));
 			}

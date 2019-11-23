@@ -233,7 +233,7 @@ QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, co
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& sn : snstar)
@@ -242,7 +242,7 @@ QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, co
 		{
 			equPos = sn->XYZ;
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(sn));
 			}

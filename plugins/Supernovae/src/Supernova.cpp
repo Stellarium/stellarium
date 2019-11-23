@@ -62,6 +62,7 @@ Supernova::Supernova(const QVariantMap& map)
 	peakJD = map.value("peakJD").toDouble();
 	snra = StelUtils::getDecAngle(map.value("alpha").toString());
 	snde = StelUtils::getDecAngle(map.value("delta").toString());
+	StelUtils::spheToRect(snra, snde, XYZ);
 	note = map.value("note").toString();
 	distance = map.value("distance").toDouble();
 
@@ -255,23 +256,20 @@ void Supernova::update(double deltaTime)
 void Supernova::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-	const Vec3f color = Vec3f(1.f,1.f,1.f);
 	const float mlimit = sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
-
-	StelUtils::spheToRect(snra, snde, XYZ);
-	sd->preDrawPointSource(&painter);
 	
 	if (mag <= mlimit)
 	{
+		const Vec3f color(1.f);
 		RCMag rcMag;
-		float size, shift;
 		sd->computeRCMag(mag, &rcMag);
+		sd->preDrawPointSource(&painter);
 		sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color, false);
-		painter.setColor(color[0], color[1], color[2], 1.f);
-		size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
-		shift = 6.f + size/1.8f;
+		painter.setColor(color, 1.f);
+		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
+		float shift = 6.f + size/1.8f;
+		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
