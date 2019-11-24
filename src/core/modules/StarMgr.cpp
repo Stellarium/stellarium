@@ -353,7 +353,7 @@ double StarMgr::getGcvsEpoch(int hip)
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().epoch;
-	return -99.f;
+	return -99.;
 }
 
 double StarMgr::getGcvsPeriod(int hip)
@@ -361,7 +361,7 @@ double StarMgr::getGcvsPeriod(int hip)
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().period;
-	return -99.f;
+	return -99.;
 }
 
 int StarMgr::getGcvsMM(int hip)
@@ -441,7 +441,7 @@ void StarMgr::init()
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
-	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
+	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -682,9 +682,9 @@ void StarMgr::populateHipparcosLists()
 				doubleHipStars.push_back(sd);
 			}
 			// use separate variables for avoid the overflow (esp. for Barnard's star)
-			float pmX = 0.1 * s->getDx0();
-			float pmY = 0.1 * s->getDx1();
-			float pm = 0.001 * std::sqrt((pmX*pmX) + (pmY*pmY));
+			float pmX = 0.1f * s->getDx0();
+			float pmY = 0.1f * s->getDx1();
+			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;

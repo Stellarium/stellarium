@@ -161,9 +161,10 @@ void Planet::PlanetOBJModel::performScaling(double scale)
 	scaledArray = posArray;
 
 	//pre-scale the cpu-side array
+	float aScale=static_cast<float>(scale);
 	for(int i = 0; i<posArray.size();++i)
 	{
-		scaledArray[i]*=scale;
+		scaledArray[i]*=aScale;
 	}
 
 	needsRescale = false;
@@ -213,7 +214,7 @@ Planet::Planet(const QString& englishName,
 	  survey(Q_NULLPTR),
 	  rings(Q_NULLPTR),
 	  distance(0.0),
-	  sphereScale(1.f),
+	  sphereScale(1.),
 	  lastJDE(J2000),
 	  coordFunc(coordFunc),
 	  orbitPtr(anOrbitPtr),
@@ -415,7 +416,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation		
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (sphereScale != 1.f)
+		if (sphereScale != 1.)
 			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
 	}
@@ -425,7 +426,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getPlanetTypeString())) << "<br />";
 	}
 
-	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
+	if (flags&Magnitude && !fuzzyEquals(getVMagnitude(core), std::numeric_limits<float>::infinity()))
 	{
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
@@ -517,7 +518,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 //				orbVelKms=orbVel;
 			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
 			double helioVel=getHeliocentricEclipticVelocity().length();
-			if (helioVel!=orbVel)
+			if (!fuzzyEquals(helioVel, orbVel))
 				oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
 		}
 		if (qAbs(re.period)>0.f)
@@ -550,7 +551,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			if (sphereScale!=1.) // We must give correct diameters even if upscaling (e.g. Moon)
 			{
 				if (withDecimalDegree)
 				{
@@ -779,7 +780,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 	oss.setRealNumberPrecision(3);
 	oss << getNameI18n();
 
-	if (sphereScale != 1.f)
+	if (sphereScale != 1.)
 	{
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 	}
@@ -807,7 +808,7 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(equatorialRadius*static_cast<double>(sphereScale)*2./getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
+	return std::atan(equatorialRadius*sphereScale*2./getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
@@ -1093,7 +1094,7 @@ double Planet::getMeanSolarDay() const
 Vec3d Planet::getEclipticPos(double dateJDE) const
 {
 	// Use current position if the time match.
-	if (dateJDE == lastJDE)
+	if (fuzzyEquals(dateJDE, lastJDE))
 		return eclipticPos;
 
 	// Otherwise try to use a cached position.
@@ -1416,8 +1417,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Callisto")
 					return shadowFactor<1.0 ? 21.0f : static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
 
-				if ((absoluteMagnitude!=-99.) && (englishName!="Moon"))
-					return absoluteMagnitude+d;
+				if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
+					return absoluteMagnitude+static_cast<float>(d);
 
 				break;
 			}
@@ -1562,13 +1563,13 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = equatorialRadius;
 	if (rings)
 		rad = rings->getSize();
-	return std::atan2(rad*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(equatorialRadius*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(equatorialRadius*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 //the Planet and all the related infos : name, circle etc..
@@ -1632,7 +1633,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+	float screenSz = static_cast<float>(getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
 	float viewportBufferSz=screenSz;
 	// enlarge if this is sun with its huge halo.
 	if (englishName=="Sun")
@@ -1640,7 +1641,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 
-	if ((prj->project(Vec3d(0.), screenPos)
+	if ((prj->project(Vec3f(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
 	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz))
 	{
@@ -2154,7 +2155,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		core->getClippingPlanes(&n,&f); // Save clipping planes
 
 		//determine the minimum size of the clip space
-		double r = equatorialRadius*static_cast<double>(sphereScale);
+		double r = equatorialRadius*sphereScale;
 		if(rings)
 			r+=rings->getSize();
 
@@ -2304,7 +2305,7 @@ struct Planet3DModel
 };
 
 
-void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblateness, const unsigned int slices, const unsigned int stacks)
+void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblateness, const unsigned short int slices, const unsigned short int stacks)
 {
 	model->indiceArr.resize(0);
 	model->vertexArr.resize(0);
@@ -2312,7 +2313,7 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	
 	GLfloat x, y, z;
 	GLfloat s=0.f, t=1.f;
-	GLuint i, j;
+	GLushort i, j;
 
 	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	const float* cos_sin_theta =  StelUtils::ComputeCosSinTheta(slices);
@@ -2345,11 +2346,11 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 			model->vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
 		}
-		unsigned int offset = i*(slices+1)*2;
+		unsigned short int offset = i*(slices+1)*2;
 		for (j = 2;j<slices*2+2;j+=2)
 		{
-			model->indiceArr << offset+j-2 << offset+j-1 << offset+j;
-			model->indiceArr << offset+j << offset+j-1 << offset+j+1;
+			model->indiceArr << offset+j-2u << offset+j-1u << offset+j;
+			model->indiceArr << offset+j << offset+j-1u << offset+j+1u;
 		}
 		t -= dt;
 	}
@@ -2363,7 +2364,7 @@ struct Ring3DModel
 };
 
 
-void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, const int stacks)
+void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned short int slices, const unsigned short int stacks)
 {
 	float x,y;
 	
@@ -2376,10 +2377,10 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, c
 	model->indiceArr.resize(0);
 
 	float r = rMin;
-	for (int i=0; i<=stacks; ++i)
+	for (unsigned short int i=0; i<=stacks; ++i)
 	{
 		const float tex_r0 = (r-rMin)/(rMax-rMin);
-		int j;
+		unsigned short int j;
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
@@ -2389,12 +2390,12 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, c
 		}
 		r+=dr;
 	}
-	for (int i=0; i<stacks; ++i)
+	for (unsigned short int i=0; i<stacks; ++i)
 	{
-		for (int j=0; j<slices; ++j)
+		for (unsigned short int j=0; j<slices; ++j)
 		{
-			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1;
-			model->indiceArr << i*slices+j+1 << (i+1)*slices+j << (i+1)*slices+j+1;
+			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1u;
+			model->indiceArr << i*slices+j+1u << (i+1u)*slices+j << (i+1u)*slices+j+1u;
 		}
 	}
 }
@@ -2503,17 +2504,18 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = qBound(10, static_cast<int>(screenSz * 40.f/50.f), 100);	// 40 facets for 1024 pixels diameter on screen
+	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenSz * 40.f/50.f), 100u));	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertice
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
 	
 	QVector<float> projectedVertexArr(model.vertexArr.size());
+	const float sphereScaleF=static_cast<float>(sphereScale);
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 	{
 		Vec3f p = *(reinterpret_cast<const Vec3f*>(model.vertexArr.constData()+i*3));
-		p *= sphereScale;
+		p *= sphereScaleF;
 		painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
 	}
 	
@@ -2684,7 +2686,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	// Backup transformation so that we can restore it later.
 	StelProjector::ModelViewTranformP transfo = painter->getProjector()->getModelViewTransform()->clone();
 	Vec4f color = painter->getColor();
-	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * static_cast<double>(sphereScale)));
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * sphereScale));
 
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
@@ -2904,7 +2906,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	}
 
 	if(objModel->needsRescale)
-		objModel->performScaling(AU_KM * static_cast<double>(sphereScale));
+		objModel->performScaling(AU_KM * sphereScale);
 
 	//the model is ready to draw!
 	painter->setBlending(false);

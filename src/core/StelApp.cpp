@@ -412,7 +412,7 @@ void StelApp::init(QSettings* conf)
 	setGuiFontSize(confSettings->value("gui/gui_font_size", 13).toInt());
 
 	core = new StelCore();
-	if (saveProjW!=-1. && saveProjH!=-1.)
+	if (!fuzzyEquals(saveProjW, -1.) && !fuzzyEquals(saveProjH, -1.))
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
 	SplashScreen::showMessage(q_("Initializing textures..."));
@@ -1018,7 +1018,7 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(qreal dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (!viewportEffect && devicePixelsPerPixel!=dppp)
+	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();

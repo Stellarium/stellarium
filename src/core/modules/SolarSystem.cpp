@@ -417,21 +417,21 @@ void SolarSystem::drawPointer(const StelCore* core)
 		Vec3f color = getPointerColor();
 		sPainter.setColor(color[0],color[1],color[2]);
 
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
+		double size = obj->getAngularSize(core)*M_PI_180*prj->getPixelPerRadAtCenter()*2.;
 		
-		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
-		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getAnimationTime()));
+		const double scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+		size+= scale * (45. + 10.*std::sin(2. * StelApp::getInstance().getAnimationTime()));
 
 		texPointer->bind();
 
 		sPainter.setBlending(true);
 
 		size*=0.5;
-		const float angleBase = StelApp::getInstance().getAnimationTime() * 10;
+		const double angleBase = StelApp::getInstance().getAnimationTime() * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
-			const float angle = angleBase + i * 90;
+			const double angle = angleBase + i * 90;
 			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
 			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
 			sPainter.drawSprite2dMode(x, y, 10, angle);
@@ -530,14 +530,8 @@ void SolarSystem::loadPlanets()
 
 unsigned char SolarSystem::BvToColorIndex(float bV)
 {
-	double dBV = bV;
-	dBV *= 1000.0;
-	if (dBV < -500)
-		dBV = -500;
-	else if (dBV > 3499)
-		dBV = 3499;
-
-	return (unsigned int)floor(0.5+127.0*((500.0+dBV)/4000.0));
+	double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
+	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
 bool SolarSystem::loadPlanets(const QString& filePath)
@@ -1776,7 +1770,7 @@ void SolarSystem::setFlagTrails(bool b)
 
 bool SolarSystem::getFlagTrails() const
 {
-	return (bool)trailFader;
+	return static_cast<bool>(trailFader);
 }
 
 void SolarSystem::setFlagHints(bool b)
@@ -1917,7 +1911,7 @@ void SolarSystem::setSelected(PlanetP obj)
 
 void SolarSystem::update(double deltaTime)
 {
-	trailFader.update(deltaTime*1000);
+	trailFader.update(static_cast<int>(deltaTime*1000));
 	if (trailFader.getInterstate()>0.f)
 	{
 		allTrails->update();
@@ -2672,7 +2666,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 // Set/Get Moon display scaling factor. This goes directly to the Moon object.
 void SolarSystem::setMoonScale(double f)
 {
-	if(moonScale != f)
+	if(!fuzzyEquals(moonScale, f))
 	{
 		moonScale = f;
 		if (flagMoonScale)
@@ -2703,7 +2697,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 // Set/Get minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
 void SolarSystem::setMinorBodyScale(double f)
 {
-	if(minorBodyScale != f)
+	if(!fuzzyEquals(minorBodyScale, f))
 	{
 		minorBodyScale = f;
 		if(flagMinorBodyScale) //update the bodies with the new scale

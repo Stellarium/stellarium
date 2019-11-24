@@ -39,8 +39,8 @@
 #include <QDebug>
 
 // for compute tail shape
-#define COMET_TAIL_SLICES 16 // segments around the perimeter
-#define COMET_TAIL_STACKS 16 // cuts along the rotational axis
+#define COMET_TAIL_SLICES 16u // segments around the perimeter
+#define COMET_TAIL_STACKS 16u // cuts along the rotational axis
 
 // These are to avoid having index arrays for each comet when all are equal.
 bool Comet::createTailIndices=true;
@@ -119,7 +119,7 @@ Comet::~Comet()
 
 void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if (slope < 0 || slope > 20.0)
+	if (slope < 0 || slope > 20.0f)
 	{
 		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between 0 and 20)";
 		return;
@@ -153,7 +153,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (sphereScale != 1.f)
+		if (sphereScale != 1.)
 			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
 	}
@@ -280,9 +280,9 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		QString comaEst = q_("Coma diameter (estimate)");
-		float coma = floor(tailFactors[0]*AU/1000.0f)*1000.0f;
-		double tail = tailFactors[1]*AU;
-		double distanceKm = AU * getJ2000EquatorialPos(core).length();
+		const double coma = floor(static_cast<double>(tailFactors[0])*AU/1000.0)*1000.0;
+		const double tail = static_cast<double>(tailFactors[1])*AU;
+		const double distanceKm = AU * getJ2000EquatorialPos(core).length();
 		// Try to estimate tail length in degrees.
 		// TODO: Take projection effect into account!
 		// The estimates here assume that the tail is seen from the side.
@@ -318,8 +318,8 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 QVariantMap Comet::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = Planet::getInfoMap(core);
-	map.insert("tail-length-km", tailFactors[1]*AU);
-	map.insert("coma-diameter-km", tailFactors[0]*AU);
+	map.insert("tail-length-km", tailFactors[1]*AUf);
+	map.insert("coma-diameter-km", tailFactors[0]*AUf);
 
 	return map;
 }
@@ -351,8 +351,8 @@ float Comet::getVMagnitude(const StelCore* core) const
 	//Calculate distances
 	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
-	const double cometSunDistance = cometHeliocentricPosition.length();
-	const double observerCometDistance = (observerHeliocentricPosition - cometHeliocentricPosition).length();
+	const float cometSunDistance = static_cast<float>(cometHeliocentricPosition.length());
+	const float observerCometDistance = static_cast<float>((observerHeliocentricPosition - cometHeliocentricPosition).length());
 
 	//Calculate apparent magnitude
 	//Sources: http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId564354
@@ -360,9 +360,7 @@ float Comet::getVMagnitude(const StelCore* core) const
 	//http://www.ayton.id.au/gary/Science/Astronomy/Ast_comets.htm#Comet%20facts:
 	// GZ: Note that Meeus, Astr.Alg.1998 p.231, has m=absoluteMagnitude+5log10(observerCometDistance) + kappa*log10(cometSunDistance)
 	// with kappa typically 5..15. MPC provides Slope parameter. So we should expect to have slopeParameter (a word only used for minor planets!) for our comets 2..6
-	double apparentMagnitude = absoluteMagnitude + 5 * std::log10(observerCometDistance) + 2.5 * slopeParameter * std::log10(cometSunDistance);
-
-	return apparentMagnitude;
+	return absoluteMagnitude + 5.f * std::log10(observerCometDistance) + 2.5f * slopeParameter * std::log10(cometSunDistance);
 }
 
 void Comet::update(int deltaTime)
@@ -370,15 +368,15 @@ void Comet::update(int deltaTime)
 	Planet::update(deltaTime);
 
 	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
-	const double vfov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
-	intensityFovScale = qBound(0.25,(vfov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);
+	const float vfov = static_cast<float>(StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov());
+	intensityFovScale = qBound(0.25f,(vfov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0f);
 
 	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
 	double dateJDE=core->getJDE();
 
 	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=(CometOrbit*)orbitPtr;
+	CometOrbit* orbit=static_cast<CometOrbit*>(orbitPtr);
 	Q_ASSERT(orbit);
 	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
@@ -410,7 +408,7 @@ void Comet::update(int deltaTime)
 				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
 				//gastailColorArr.fill(Vec3f(0.3,0.3,0.3), gastailVertexArr.length());
 				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
-				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*orbit->getVelocity().length());
+				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(orbit->getVelocity().length()));
 				//dusttailColorArr.fill(Vec3f(0.3,0.3,0.3), dusttailVertexArr.length());
 
 
@@ -424,12 +422,12 @@ void Comet::update(int deltaTime)
 				//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
 				// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
 				// In addition, we let the dust tail already start with a light tilt.
-				dustTailRot=gasTailRot * Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI) * Mat4d::yrotation(5.0f*velocity.length());
+				dustTailRot=gasTailRot * Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI) * Mat4d::yrotation(5.0*velocity.length());
 
 				// Rotate vertex arrays:
-				Vec3d* gasVertices=(Vec3d*) (gastailVertexArr.data());
-				Vec3d* dustVertices=(Vec3d*) (dusttailVertexArr.data());
-				for (int i=0; i<COMET_TAIL_SLICES*COMET_TAIL_STACKS+1; ++i)
+				Vec3d* gasVertices= static_cast<Vec3d*>(gastailVertexArr.data());
+				Vec3d* dustVertices=static_cast<Vec3d*>(dusttailVertexArr.data());
+				for (unsigned short int i=0; i<COMET_TAIL_SLICES*COMET_TAIL_STACKS+1; ++i)
 				{
 					gasVertices[i].transfo4d(gasTailRot);
 					dustVertices[i].transfo4d(dustTailRot);
@@ -540,7 +538,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		return;
 	}
 	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=(CometOrbit*)orbitPtr;
+	CometOrbit* orbit=static_cast<CometOrbit*>(orbitPtr);
 	Q_ASSERT(orbit);
 	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
@@ -551,22 +549,24 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-	float viewport_left = prj->getViewportPosX();
-	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0.), screenPos)
-		&& screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-		&& screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	const float screenSz = static_cast<float>(getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
+	const float viewport_left = prj->getViewportPosX();
+	const float viewport_bottom = prj->getViewportPosY();
+	if (prj->project(Vec3f(0.), screenPos)
+		&& screenPos[1] > viewport_bottom - screenSz
+		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+		&& screenPos[0] > viewport_left - screenSz
+		&& screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(getEclipticPos().length()/getEquinoxEquatorialPos(core).length())/core->getMovementMgr()->getCurrentFov();
+		float ang_dist = 300.f*static_cast<float>(atan(getEclipticPos().length()/getEquinoxEquatorialPos(core).length())/core->getMovementMgr()->getCurrentFov());
 		// if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun.. --> GZ: we can remove it.
 
 		// by putting here, only draw orbit if Comet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(core))
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core))
 		{
 			labelsFader=true;
 		}
@@ -606,11 +606,11 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	tailTexture->bind();
 
 	if (gas) {
-		sPainter.setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)gastailColorArr.constData());
+		sPainter.setArrays(static_cast<const Vec3d*>(gastailVertexArr.constData()), reinterpret_cast<const Vec2f*>(tailTexCoordArr.constData()), static_cast<const Vec3f*>(gastailColorArr.constData()));
 		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 
 	} else {
-		sPainter.setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)dusttailColorArr.constData());
+		sPainter.setArrays(static_cast<const Vec3d*>(dusttailVertexArr.constData()), reinterpret_cast<const Vec2f*>(tailTexCoordArr.constData()), static_cast<const Vec3f*>(dusttailColorArr.constData()));
 		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
 	sPainter.setBlending(false);
@@ -634,8 +634,8 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float aLum =eye->adaptLuminanceScaled(lum);
 	float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);
 	comaTexture->bind();
-	sPainter.setColor(0.3f*magFactor,0.7*magFactor,magFactor);
-	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
+	sPainter.setColor(0.3f*magFactor,0.7f*magFactor,magFactor);
+	sPainter.setArrays(reinterpret_cast<const Vec3d*>(comaVertexArr.constData()), reinterpret_cast<const Vec2f*>(comaTexCoordArr.constData()));
 	sPainter.drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
 
 	sPainter.setBlending(false);
@@ -644,13 +644,13 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
 Vec2f Comet::getComaDiameterAndTailLengthAU() const
 {
-	float r = getHeliocentricEclipticPos().length();
-	float mhelio = absoluteMagnitude + slopeParameter * log10(r);
-	float Do = pow(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
-	float common = 1.0f - pow(10.0f, (-2.0f*r));
-	float D = Do * common * (1.0f - pow(10.0f, -r)) * (1000.0f*AU_KM);
-	float Lo = pow(10.0f, ((-0.0075f*mhelio - 0.19f) * mhelio + 2.1f));
-	float L = Lo*(1.0f-pow(10.0f, -4.0f*r)) * common * (1e6*AU_KM);
+	const float r = static_cast<float>(getHeliocentricEclipticPos().length());
+	const float mhelio = absoluteMagnitude + slopeParameter * log10(r);
+	const float Do = pow(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
+	const float common = 1.0f - pow(10.0f, (-2.0f*r));
+	const float D = Do * common * (1.0f - pow(10.0f, -r)) * (1000.0f*AU_KMf);
+	const float Lo = pow(10.0f, ((-0.0075f*mhelio - 0.19f) * mhelio + 2.1f));
+	const float L = Lo*(1.0f-pow(10.0f, -4.0f*r)) * common * (1e6f*AU_KMf);
 	return Vec2f(D, L);
 }
 
@@ -668,48 +668,46 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 						  QVector<unsigned short> &indices, const float xOffset)
 {
 	// keep the array and replace contents. However, using replace() is only slightly faster.
-	if (vertexArr.length() < ((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
+	if (vertexArr.length() < static_cast<int>(((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1))))
 		vertexArr.resize((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
 	if (createTailIndices) indices.clear();
 	if (createTailTextureCoords) texCoordArr.clear();
-	int i;
 	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
 	float xa[2*COMET_TAIL_SLICES];
 	float ya[2*COMET_TAIL_SLICES];
 	float x, y, z;
 	
 	// fill xa, ya with sin/cosines. TBD: make more efficient with index mirroring etc.
-	float da=M_PI/COMET_TAIL_SLICES; // full circle/2slices
-	for (i=0; i<2*COMET_TAIL_SLICES; ++i){
+	float da=M_PIf/COMET_TAIL_SLICES; // full circle/2slices
+	for (unsigned short int i=0; i<2*COMET_TAIL_SLICES; ++i){
 		xa[i]=-sin(i*da);
 		ya[i]=cos(i*da);
 	}
 	
-	vertexArr.replace(0, Vec3d(0.0, 0.0, zshift));
+	vertexArr.replace(0, Vec3d(0.0, 0.0, static_cast<double>(zshift)));
 	int vertexArrIndex=1;
 	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
-	int ring;
-	for (ring=1; ring<=COMET_TAIL_STACKS; ++ring){
+	for (unsigned short int ring=1; ring<=COMET_TAIL_STACKS; ++ring){
 		z=ring*radius/COMET_TAIL_STACKS; z=z*z/(2*parameter) + zshift;
-		float xShift= xOffset*z*z;
-		for (i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
+		const float xShift= xOffset*z*z;
+		for (unsigned short int i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
-			vertexArr.replace(vertexArrIndex++, Vec3d(x+xShift, y, z));
-			if (createTailTextureCoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
+			vertexArr.replace(vertexArrIndex++, Vec3d(static_cast<double>(x+xShift), static_cast<double>(y), static_cast<double>(z)));
+			if (createTailTextureCoords) texCoordArr << 0.5f+ 0.5f*x/radius << 0.5f+0.5f*y/radius;
 		}
 	}
 	// now link the faces with indices.
 	if (createTailIndices)
 	{
-		for (i=1; i<COMET_TAIL_SLICES; ++i) indices << 0 << i << i+1;
+		for (unsigned short i=1; i<COMET_TAIL_SLICES; ++i) indices << 0 << i << i+1;
 		indices << 0 << COMET_TAIL_SLICES << 1; // close inner fan.
 		// The other slices are a repeating pattern of 2 possibilities. Index @ring always is on the inner ring (slices-agon)
-		for (ring=1; ring<COMET_TAIL_STACKS; ring+=2) { // odd rings
-			const int first=(ring-1)*COMET_TAIL_SLICES+1;
-			for (i=0; i<COMET_TAIL_SLICES-1; ++i){
+		for (unsigned short ring=1; ring<COMET_TAIL_STACKS; ring+=2) { // odd rings
+			const unsigned short int first=(ring-1)*COMET_TAIL_SLICES+1;
+			for (unsigned short int i=0; i<COMET_TAIL_SLICES-1; ++i){
 				indices << first+i << first+COMET_TAIL_SLICES+i << first+COMET_TAIL_SLICES+1+i;
 				indices << first+i << first+COMET_TAIL_SLICES+1+i << first+1+i;
 			}
@@ -718,9 +716,9 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			indices << ring*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1 << first;
 		}
 
-		for (ring=2; ring<COMET_TAIL_STACKS; ring+=2) { // even rings: different sequence.
-			const int first=(ring-1)*COMET_TAIL_SLICES+1;
-			for (i=0; i<COMET_TAIL_SLICES-1; ++i){
+		for (unsigned short int ring=2; ring<COMET_TAIL_STACKS; ring+=2) { // even rings: different sequence.
+			const unsigned short int first=(ring-1)*COMET_TAIL_SLICES+1;
+			for (unsigned short int i=0; i<COMET_TAIL_SLICES-1; ++i){
 				indices << first+i << first+COMET_TAIL_SLICES+i << first+1+i;
 				indices << first+1+i << first+COMET_TAIL_SLICES+i << first+COMET_TAIL_SLICES+1+i;
 			}
