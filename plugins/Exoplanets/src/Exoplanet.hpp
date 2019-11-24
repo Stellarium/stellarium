@@ -35,13 +35,13 @@ typedef struct
 {
 	QString planetName;		//! Exoplanet designation
 	QString planetProperName;	//! Exoplanet proper name
-	float mass;				//! Exoplanet mass (Mjup)
-	float radius;				//! Exoplanet radius (Rjup)
-	float period;				//! Exoplanet period (days)
-	float semiAxis;				//! Exoplanet orbit semi-major axis (AU)
-	float eccentricity;			//! Exoplanet orbit eccentricity
-	float inclination;			//! Exoplanet orbit inclination
-	float angleDistance;			//! Exoplanet angle distance
+	double mass;				//! Exoplanet mass (Mjup)
+	double radius;				//! Exoplanet radius (Rjup)
+	double period;				//! Exoplanet period (days)
+	double semiAxis;				//! Exoplanet orbit semi-major axis (AU)
+	double eccentricity;			//! Exoplanet orbit eccentricity
+	double inclination;			//! Exoplanet orbit inclination
+	double angleDistance;			//! Exoplanet angle distance
 	int discovered;				//! Exoplanet discovered year
 	QString pclass;				//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
 	int EqTemp;				//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
@@ -196,20 +196,21 @@ private:
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
 	QString starProperName;			//! The proper name of the host star
-	float RA;				//! J2000 right ascension of host star
-	float DE;				//! J2000 declination of host star
-	float distance;				//! Distance to star in pc
+	double RA;				//! J2000 right ascension of host star // ALMOST USELESS AFTER CONSTRUCTOR!
+	double DE;				//! J2000 declination of host star     // ALMOST USELESS AFTER CONSTRUCTOR!   use XYZ
+	double distance;			//! Distance to star in pc
 	QString stype;				//! Spectral type of star
-	float smass;				//! Mass of star in Msun
-	float smetal;				//! [Fe/H] of star
-	float Vmag;				//! Visual magnitude of star
-	float sradius;				//! Radius of star in Rsun
+	double smass;				//! Mass of star in Msun
+	double smetal;				//! [Fe/H] of star
+	double Vmag;				//! Visual magnitude of star
+	double sradius;				//! Radius of star in Rsun
 	int effectiveTemp;			//! Effective temperature of star in K
 	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
 
+	// FIXME: Document the purpose of these lists?
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
 		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
 		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;

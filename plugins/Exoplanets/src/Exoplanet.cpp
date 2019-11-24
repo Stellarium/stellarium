@@ -64,7 +64,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	, effectiveTemp(0)
 	, hasHabitableExoplanets(false)
 {
-	// return initialized if the mandatory fields are not present
+	// return semi-initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
 		return;
 
@@ -72,14 +72,16 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 		
 	designation  = map.value("designation").toString();
 	starProperName = map.value("starProperName").toString();
-	RA = static_cast<float>(StelUtils::getDecAngle(map.value("RA").toString()));
-	DE = static_cast<float>(StelUtils::getDecAngle(map.value("DE").toString()));
-	distance = map.value("distance").toFloat();
+	// TODO: get rid of RA, DE and show data reverse-computed from XYZ later?
+	RA = StelUtils::getDecAngle(map.value("RA").toString());
+	DE = StelUtils::getDecAngle(map.value("DE").toString());
+	StelUtils::spheToRect(RA, DE, XYZ);
+	distance = map.value("distance").toDouble();
 	stype = map.value("stype").toString();
-	smass = map.value("smass").toFloat();
-	smetal = map.value("smetal").toFloat();
-	Vmag = map.value("Vmag", 99.f).toFloat();
-	sradius = map.value("sradius").toFloat();
+	smass = map.value("smass").toDouble();
+	smetal = map.value("smetal").toDouble();
+	Vmag = map.value("Vmag", 99.).toDouble();
+	sradius = map.value("sradius").toDouble();
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
@@ -122,13 +124,13 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				englishNames.append(p.planetProperName);
 				translatedNames.append(trans.qtranslate(p.planetProperName));
 			}
-			p.period = exoplanetMap.value("period", -1.f).toFloat();
-			p.mass = exoplanetMap.value("mass", -1.f).toFloat();
-			p.radius = exoplanetMap.value("radius", -1.f).toFloat();
-			p.semiAxis = exoplanetMap.value("semiAxis", -1.f).toFloat();
-			p.eccentricity = exoplanetMap.value("eccentricity", -1.f).toFloat();
-			p.inclination = exoplanetMap.value("inclination", -1.f).toFloat();
-			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
+			p.period = exoplanetMap.value("period", -1.f).toDouble();
+			p.mass = exoplanetMap.value("mass", -1.f).toDouble();
+			p.radius = exoplanetMap.value("radius", -1.f).toDouble();
+			p.semiAxis = exoplanetMap.value("semiAxis", -1.f).toDouble();
+			p.eccentricity = exoplanetMap.value("eccentricity", -1.f).toDouble();
+			p.inclination = exoplanetMap.value("inclination", -1.f).toDouble();
+			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toDouble();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
 			p.pclass = exoplanetMap.value("pclass", "").toString();			
 			if (!p.pclass.isEmpty())
@@ -141,37 +143,14 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 
 			exoplanets.append(p);
 
-			if (p.eccentricity>0)
-				eccentricityList.append(p.eccentricity);
-			else
-				eccentricityList.append(0);
+			eccentricityList.append(qMax(0., p.eccentricity));
+			semiAxisList.append(qMax(0., p.semiAxis));
+			massList.append(qMax(0., p.mass));
+			radiusList.append(qMax(0., p.radius));
+			angleDistanceList.append(qMax(0., p.angleDistance));
+			periodList.append(qMax(0., p.period));
 
-			if (p.semiAxis>0)
-				semiAxisList.append(p.semiAxis);
-			else
-				semiAxisList.append(0);
-
-			if (p.mass>0)
-				massList.append(p.mass);
-			else
-				massList.append(0);
-
-			if (p.radius>0)
-				radiusList.append(p.radius);
-			else
-				radiusList.append(0);
-
-			if (p.angleDistance>0)
-				angleDistanceList.append(p.angleDistance);
-			else
-				angleDistanceList.append(0);
-
-			if (p.period>0)
-				periodList.append(p.period);
-			else
-				periodList.append(0);
-
-			if (p.discovered>0)
+			if (p.discovered>0) // FIXME: No default entry here? What happens if the next entry has a year? Will the list order suffer?
 				yearDiscoveryList.append(p.discovered);
 
 			effectiveTempHostStarList.append(effectiveTemp);
@@ -215,13 +194,13 @@ QVariantMap Exoplanet::getMap(void) const
 		QVariantMap explMap;
 		explMap["planetName"] = p.planetName;
 		if (!p.planetProperName.isEmpty()) explMap["planetProperName"] = p.planetProperName;
-		if (p.mass > -1.f) explMap["mass"] = p.mass;
-		if (p.period > -1.f) explMap["period"] = p.period;
-		if (p.radius > -1.f) explMap["radius"] = p.radius;
-		if (p.semiAxis > -1.f) explMap["semiAxis"] = p.semiAxis;
-		if (p.inclination > -1.f) explMap["inclination"] = p.inclination;
-		if (p.eccentricity > -1.f) explMap["eccentricity"] = p.eccentricity;
-		if (p.angleDistance > -1.f) explMap["angleDistance"] = p.angleDistance;
+		if (p.mass > -1.) explMap["mass"] = p.mass;
+		if (p.period > -1.) explMap["period"] = p.period;
+		if (p.radius > -1.) explMap["radius"] = p.radius;
+		if (p.semiAxis > -1.) explMap["semiAxis"] = p.semiAxis;
+		if (p.inclination > -1.) explMap["inclination"] = p.inclination;
+		if (p.eccentricity > -1.) explMap["eccentricity"] = p.eccentricity;
+		if (p.angleDistance > -1.) explMap["angleDistance"] = p.angleDistance;
 		if (p.discovered > 0) explMap["discovered"] = p.discovered;
 		if (!p.pclass.isEmpty()) explMap["pclass"] = p.pclass;		
 		if (p.EqTemp > 0) explMap["EqTemp"] = p.EqTemp;
@@ -378,37 +357,37 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				else
 					planetProperNameLabel.append(emptyRow);
 
-				if (p.period > -1.f)
+				if (p.period > -1.)
 					periodLabel.append(row.arg(QString::number(p.period, 'f', 2)));
 				else
 					periodLabel.append(emptyRow);
 
-				if (p.mass > -1.f)
+				if (p.mass > -1.)
 					massLabel.append(row.arg(QString::number(p.mass, 'f', 2)));
 				else
 					massLabel.append(emptyRow);
 
-				if (p.radius > -1.f)
+				if (p.radius > -1.)
 					radiusLabel.append(row.arg(QString::number(p.radius, 'f', 1)));
 				else
 					radiusLabel.append(emptyRow);
 
-				if (p.eccentricity > -1.f)
+				if (p.eccentricity > -1.)
 					eccentricityLabel.append(row.arg(QString::number(p.eccentricity, 'f', 3)));
 				else
 					eccentricityLabel.append(emptyRow);
 
-				if (p.inclination > -1.f)
+				if (p.inclination > -1.)
 					inclinationLabel.append(row.arg(QString::number(p.inclination, 'f', 1)));
 				else
 					inclinationLabel.append(emptyRow);
 
-				if (p.semiAxis > -1.f)
+				if (p.semiAxis > -1.)
 					semiAxisLabel.append(row.arg(QString::number(p.semiAxis, 'f', 4)));
 				else
 					semiAxisLabel.append(emptyRow);
 
-				if (p.angleDistance > -1.f)
+				if (p.angleDistance > -1.)
 					angleDistanceLabel.append(row.arg(QString::number(p.angleDistance, 'f', 6)));
 				else
 					angleDistanceLabel.append(emptyRow);
@@ -518,7 +497,7 @@ float Exoplanet::getTemperature(float temperature) const
 		case 0: // Kelvins
 			rt = temperature;
 			break;
-		case 2: //
+		case 2: // Fahrenheit
 			rt = (temperature - 273.15f)*1.8f + 32.f;
 			break;
 		case 1: // Celsius
@@ -581,14 +560,7 @@ float Exoplanet::getVMagnitude(const StelCore* core) const
 	}
 	else
 	{
-		if (Vmag<99)
-		{
-			return Vmag;
-		}
-		else
-		{
-			return 6.f;
-		}
+		return (Vmag<99. ? static_cast<float>(Vmag) : 6.f);
 	}
 }
 
@@ -630,50 +602,30 @@ void Exoplanet::update(double deltaTime)
 
 void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
-	bool visible;
-	StelSkyDrawer* sd = core->getSkyDrawer();
-	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
+	if ((habitableMode) &&  (!hasHabitableExoplanets)) {return;}
 
-	Vec3f color = exoplanetMarkerColor;
-	if (hasHabitableExoplanets)
-		color = habitableExoplanetMarkerColor;
-
-	StelUtils::spheToRect(RA, DE, XYZ);
-	double mag = getVMagnitudeWithExtinction(core);
-
-	painter->setBlending(true, GL_ONE, GL_ONE);
-	painter->setColor(color[0], color[1], color[2], 1);
-
-	if (timelineMode)
-	{
-		visible = isDiscovered(core);
-	}
-	else
-	{
-		visible = true;
-	}
-
-	if (habitableMode)
-	{
-		if (!hasHabitableExoplanets)
-			return;
-	}
-
+	bool visible = (timelineMode? isDiscovered(core) : true);
 	Vec3d win;
 	// Check visibility of exoplanet system
 	if(!visible || !(painter->getProjector()->projectCheck(XYZ, win))) {return;}
 
-	float mlimit = sd->getLimitMagnitude();
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	const float mlimit = sd->getLimitMagnitude();
+	const float mag = getVMagnitudeWithExtinction(core);
 
 	if (mag <= mlimit)
 	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		Vec3f color = (hasHabitableExoplanets ? habitableExoplanetMarkerColor : exoplanetMarkerColor);
+		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PIf/180.f*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
+		painter->setBlending(true, GL_ONE, GL_ONE);
+		painter->setColor(color, 1);
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		float coeff = 4.5f + std::log10(sradius + 0.1f);
+		float coeff = 4.5f + std::log10(static_cast<float>(sradius) + 0.1f);
+		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels() && showDesignations)
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
