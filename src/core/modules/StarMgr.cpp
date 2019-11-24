@@ -138,14 +138,15 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 
 
 StarMgr::StarMgr(void)
-	: flagStarName(false)	
+	: StelObjectModule()
+	, flagStarName(false)
 	, labelsAmount(0.)
 	, gravityLabel(false)
+	, maxGeodesicGridLevel(-1)
+	, lastMaxSearchLevel(-1)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
-	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }

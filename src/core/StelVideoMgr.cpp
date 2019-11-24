@@ -31,7 +31,7 @@
 #endif
 
 
-StelVideoMgr::StelVideoMgr()
+StelVideoMgr::StelVideoMgr() : StelModule()
 {
     setObjectName("StelVideoMgr");
 #ifdef ENABLE_MEDIA

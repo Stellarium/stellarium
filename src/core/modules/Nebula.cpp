@@ -110,7 +110,8 @@ double Nebula::minSizeLimit = 1.0;
 double Nebula::maxSizeLimit = 600.0;
 
 Nebula::Nebula()
-	: DSO_nb(0)
+	: StelObject()
+	, DSO_nb(0)
 	, M_nb(0)
 	, NGC_nb(0)
 	, IC_nb(0)
@@ -328,16 +329,16 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		QString majorAxS, minorAxS, sizeAx = q_("Size");
 		if (withDecimalDegree)
 		{
-			majorAxS = StelUtils::radToDecDegStr(majorAxisSize*M_PI/180., 5, false, true);
-			minorAxS = StelUtils::radToDecDegStr(minorAxisSize*M_PI/180., 5, false, true);
+			majorAxS = StelUtils::radToDecDegStr(static_cast<double>(majorAxisSize)*M_PI/180., 5, false, true);
+			minorAxS = StelUtils::radToDecDegStr(static_cast<double>(minorAxisSize)*M_PI/180., 5, false, true);
 		}
 		else
 		{
-			majorAxS = StelUtils::radToDmsPStr(majorAxisSize*M_PI/180., 2);
-			minorAxS = StelUtils::radToDmsPStr(minorAxisSize*M_PI/180., 2);
+			majorAxS = StelUtils::radToDmsPStr(static_cast<double>(majorAxisSize)*M_PI/180., 2);
+			minorAxS = StelUtils::radToDmsPStr(static_cast<double>(minorAxisSize)*M_PI/180., 2);
 		}
 
-		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
+		if (fuzzyEquals(majorAxisSize, minorAxisSize) || minorAxisSize==0.f)
 			oss << QString("%1: %2").arg(sizeAx, majorAxS) << "<br />";
 		else
 		{
@@ -354,7 +355,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		{
 			QString dx;
 			// distance in light years from parallax
-			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9);
+			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
 			distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
@@ -395,10 +396,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				dupc = qc_("Mpc", "distance");
 			}
 
-			if (distanceLY>=1e6)
+			if (distanceLY>=1e6f)
 			{
-				distanceLY = distanceLY/1e6;
-				distanceErrLY = distanceErrLY/1e6;
+				distanceLY /= 1e6f;
+				distanceErrLY /= 1e6f;
 				ms = 3;
 				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
 				duly = qc_("M ly", "distance");
@@ -524,9 +525,9 @@ float Nebula::getVMagnitude(const StelCore* core) const
 double Nebula::getAngularSize(const StelCore *) const
 {
 	float size = majorAxisSize;
-	if (majorAxisSize!=minorAxisSize || minorAxisSize>0)
+	if (!fuzzyEquals(majorAxisSize, minorAxisSize) || minorAxisSize>0)
 		size = (majorAxisSize+minorAxisSize)*0.5f;
-	return size;
+	return static_cast<double>(size);
 }
 
 float Nebula::getSelectPriority(const StelCore* core) const
@@ -621,7 +622,7 @@ float Nebula::getContrastIndex(const StelCore* core) const
 
 float Nebula::getSurfaceArea(void) const
 {
-	if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
+	if (minorAxisSize==0.f)
 		return M_PIf*(majorAxisSize/2.f)*(majorAxisSize/2.f); // S = pi*R^2 = pi*(D/2)^2
 	else
 		return M_PIf*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
@@ -629,113 +630,77 @@ float Nebula::getSurfaceArea(void) const
 
 Vec3f Nebula::getHintColor(void) const
 {
-	Vec3f color=circleColor;
 	switch (nType)
 	{
 		case NebGx:
-			color=galaxyColor;
-			break;
+			return galaxyColor;
 		case NebIGx:
-			color=interactingGalaxyColor;
-			break;
+			return interactingGalaxyColor;
 		case NebAGx:
-			color=activeGalaxyColor;
-			break;
+			return activeGalaxyColor;
 		case NebQSO:
-			color=quasarColor;
-			break;
+			return quasarColor;
 		case NebPossQSO:
-			color=possibleQuasarColor;
-			break;
+			return possibleQuasarColor;
 		case NebBLL:
-			color=blLacObjectColor;
-			break;
+			return blLacObjectColor;
 		case NebBLA:
-			color=blazarColor;
-			break;
+			return blazarColor;
 		case NebRGx:
-			color=radioGalaxyColor;
-			break;
+			return radioGalaxyColor;
 		case NebOc:
-			color=openClusterColor;
-			break;
+			return openClusterColor;
 		case NebSA:
-			color=stellarAssociationColor;
-			break;
+			return stellarAssociationColor;
 		case NebSC:
-			color=starCloudColor;
-			break;
+			return starCloudColor;
 		case NebCl:
-			color=clusterColor;
-			break;
+			return clusterColor;
 		case NebGc:
-			color=globularClusterColor;
-			break;
+			return globularClusterColor;
 		case NebN:
-			color=nebulaColor;
-			break;
+			return nebulaColor;
 		case NebHII:
-			color=hydrogenRegionColor;
-			break;
+			return hydrogenRegionColor;
 		case NebMolCld:
-			color=molecularCloudColor;
-			break;
+			return molecularCloudColor;
 		case NebYSO:
-			color=youngStellarObjectColor;
-			break;
+			return youngStellarObjectColor;
 		case NebRn:
-			color=reflectionNebulaColor;
-			break;
+			return reflectionNebulaColor;
 		case NebSNR:
-			color=supernovaRemnantColor;
-			break;
+			return supernovaRemnantColor;
 		case NebBn:
-			color=bipolarNebulaColor;
-			break;
+			return bipolarNebulaColor;
 		case NebEn:
-			color=emissionNebulaColor;
-			break;
+			return emissionNebulaColor;
 		case NebPn:
-			color=planetaryNebulaColor;
-			break;
+			return planetaryNebulaColor;
 		case NebPossPN:
-			color=possiblePlanetaryNebulaColor;
-			break;
+			return possiblePlanetaryNebulaColor;
 		case NebPPN:
-			color=protoplanetaryNebulaColor;
-			break;
+			return protoplanetaryNebulaColor;
 		case NebDn:
-			color=darkNebulaColor;
-			break;
+			return darkNebulaColor;
 		case NebCn:
-			color=clusterWithNebulosityColor;
-			break;
+			return clusterWithNebulosityColor;
 		case NebEMO:
-			color=emissionObjectColor;
-			break;
+			return emissionObjectColor;
 		case NebStar:
-			color=starColor;
-			break;
+			return starColor;
 		case NebSymbioticStar:
-			color=symbioticStarColor;
-			break;
+			return symbioticStarColor;
 		case NebEmissionLineStar:
-			color=emissionLineStarColor;
-			break;
+			return emissionLineStarColor;
 		case NebSNC:
-			color=supernovaCandidateColor;
-			break;
+			return supernovaCandidateColor;
 		case NebSNRC:
-			color=supernovaRemnantCandidateColor;
-			break;
+			return supernovaRemnantCandidateColor;
 		case NebGxCl:
-			color=galaxyClusterColor;
-			break;
+			return galaxyClusterColor;
 		default:
-			color=circleColor;
+			return circleColor;
 	}
-
-	return color;
 }
 
 float Nebula::getVisibilityLevelByMagnitude(void) const
@@ -764,10 +729,8 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 			// The qMin() maximized the visibility gain for large objects.
 			if (majorAxisSize>0.f && mag<90.f)
 				lim = mLim - mag - 2.0f*qMin(majorAxisSize, 1.5f);
-			else if (B_nb>0)
-				lim = 9.0f;
 			else
-				lim= 12.0f; // GZ I assume LDN objects are rather elusive.
+				lim = (B_nb>0 ? 9.0f : 12.0f); // GZ I assume LDN objects are rather elusive.
 		}
 		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
 		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
@@ -787,10 +750,10 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
 
 	float lum = 1.f;
-	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	Vec3f col(color*lum*hintsBrightness);
 	if (!objectInDisplayedType())
-		col = Vec3f(0.f,0.f,0.f);
-	sPainter.setColor(col[0], col[1], col[2], 1);
+		col.set(0.f,0.f,0.f);
+	sPainter.setColor(col, 1);
 
 	// Show outlines
 	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
@@ -917,11 +880,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	}
 
 	float lum = 1.f;
-	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	Vec3f col(color*lum*hintsBrightness);
 	if (!objectInDisplayedType())
-		col = Vec3f(0.f,0.f,0.f);
+		col.set(0.f,0.f,0.f);
 
-	sPainter.setColor(col[0], col[1], col[2], 1);
+	sPainter.setColor(col, 1);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	// Rotation looks good only for galaxies.
@@ -950,11 +913,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 	if (getVisibilityLevelByMagnitude()>maxMagLabel)
 		return;
 
-	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
-	if (objectInDisplayedType())
-		sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
-	else
-		sPainter.setColor(col[0], col[1], col[2], 0.f);
+	sPainter.setColor(labelColor, objectInDisplayedType() ? hintsBrightness : 0.f);
 
 	const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter();
 	const float shift = 5.f + (drawHintProportional ? size*0.9f : 0.f);
@@ -1213,10 +1172,7 @@ bool Nebula::objectInAllowedSizeRangeLimits(void) const
 	if (flagUseSizeLimits)
 	{
 		const double size = 60. * static_cast<double>(qMax(majorAxisSize, minorAxisSize));
-		if (size>=minSizeLimit && size<=maxSizeLimit)
-			r = true;
-		else
-			r = false;
+		r = (size>=minSizeLimit && size<=maxSizeLimit);
 	}
 	return r;
 }
@@ -1512,118 +1468,79 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 QString Nebula::getTypeString(void) const
 {
-	QString wsType;
-
 	switch(nType)
 	{
 		case NebGx:
-			wsType = q_("galaxy");
-			break;
+			return q_("galaxy");
 		case NebAGx:
-			wsType = q_("active galaxy");
-			break;
+			return q_("active galaxy");
 		case NebRGx:
-			wsType = q_("radio galaxy");
-			break;
+			return q_("radio galaxy");
 		case NebIGx:
-			wsType = q_("interacting galaxy");
-			break;
+			return q_("interacting galaxy");
 		case NebQSO:
-			wsType = q_("quasar");
-			break;
+			return q_("quasar");
 		case NebCl:
-			wsType = q_("star cluster");
-			break;
+			return q_("star cluster");
 		case NebOc:
-			wsType = q_("open star cluster");
-			break;
+			return q_("open star cluster");
 		case NebGc:
-			wsType = q_("globular star cluster");
-			break;
+			return q_("globular star cluster");
 		case NebN:
-			wsType = q_("nebula");
-			break;
+			return q_("nebula");
 		case NebPn:
-			wsType = q_("planetary nebula");
-			break;
+			return q_("planetary nebula");
 		case NebDn:
-			wsType = q_("dark nebula");
-			break;
+			return q_("dark nebula");
 		case NebCn:
-			wsType = q_("cluster associated with nebulosity");
-			break;
+			return q_("cluster associated with nebulosity");
 		case NebBn:
-			wsType = q_("bipolar nebula");
-			break;
+			return q_("bipolar nebula");
 		case NebEn:
-			wsType = q_("emission nebula");
-			break;
+			return q_("emission nebula");
 		case NebHII:
-			wsType = q_("HII region");
-			break;
+			return q_("HII region");
 		case NebRn:
-			wsType = q_("reflection nebula");
-			break;		
+			return q_("reflection nebula");
 		case NebSNR:
-			wsType = q_("supernova remnant");
-			break;
+			return q_("supernova remnant");
 		case NebSNC:
-			wsType = q_("supernova candidate");
-			break;
+			return q_("supernova candidate");
 		case NebSNRC:
-			wsType = q_("supernova remnant candidate");
-			break;
+			return q_("supernova remnant candidate");
 		case NebSA:
-			wsType = q_("stellar association");
-			break;
+			return q_("stellar association");
 		case NebSC:
-			wsType = q_("star cloud");
-			break;
+			return q_("star cloud");
 		case NebISM:
-			wsType = q_("interstellar matter");
-			break;
+			return q_("interstellar matter");
 		case NebEMO:
-			wsType = q_("emission object");
-			break;
+			return q_("emission object");
 		case NebBLL:
-			wsType = q_("BL Lac object");
-			break;
+			return q_("BL Lac object");
 		case NebBLA:
-			wsType = q_("blazar");
-			break;
+			return q_("blazar");
 		case NebMolCld:
-			wsType = q_("molecular cloud");
-			break;
+			return q_("molecular cloud");
 		case NebYSO:
-			wsType = q_("young stellar object");
-			break;
+			return q_("young stellar object");
 		case NebPossQSO:
-			wsType = q_("possible quasar");
-			break;
+			return q_("possible quasar");
 		case NebPossPN:
-			wsType = q_("possible planetary nebula");
-			break;
+			return q_("possible planetary nebula");
 		case NebPPN:
-			wsType = q_("protoplanetary nebula");
-			break;
+			return q_("protoplanetary nebula");
 		case NebStar:
-			wsType = q_("star");
-			break;
+			return q_("star");
 		case NebSymbioticStar:
-			wsType = q_("symbiotic star");
-			break;
+			return q_("symbiotic star");
 		case NebEmissionLineStar:
-			wsType = q_("emission-line star");
-			break;
+			return q_("emission-line star");
 		case NebGxCl:
-			wsType = q_("cluster of galaxies");
-			break;
+			return q_("cluster of galaxies");
 		case NebUnknown:
-			wsType = q_("object of unknown nature");
-			break;
+			return q_("object of unknown nature");
 		default:
-			wsType = q_("undocumented type");
-			break;
+			return q_("undocumented type");
 	}
-	return wsType;
 }

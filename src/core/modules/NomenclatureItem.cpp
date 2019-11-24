@@ -823,7 +823,7 @@ Vec3f NomenclatureItem::getInfoColor(void) const
 
 Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 {
-	if (jde == core->getJDE()) return XYZ;
+	if (fuzzyEquals(jde, core->getJDE())) return XYZ;
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// Calculate the radius of the planet. It is necessary to re-scale it
@@ -879,7 +879,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			return;
 	}
 
-	double screenSize = getAngularSize(core)*M_PI/180.*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
+	const double screenSize = getAngularSize(core)*M_PI/180.*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
 
 	// We can use ratio of angular size to the FOV to checking visibility of features also!
 	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
@@ -889,7 +889,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
-		painter->setColor(color[0], color[1], color[2], 1.0);
+		painter->setColor(color, 1.0);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}

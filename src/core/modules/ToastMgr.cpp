@@ -31,7 +31,9 @@
 
 #include <QSettings>
 
-ToastMgr::ToastMgr() : survey(Q_NULLPTR)
+ToastMgr::ToastMgr() :
+	StelModule()
+	, survey(Q_NULLPTR)
 {	
 	setObjectName("ToastMgr");
 	fader = new LinearFader();

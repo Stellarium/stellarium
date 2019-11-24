@@ -136,8 +136,8 @@ bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
 void NebulaMgr::setFlagAdditionalNames(const bool flag) {if(Nebula::flagShowAdditionalNames!=flag){ Nebula::flagShowAdditionalNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
 bool NebulaMgr::getFlagAdditionalNames(void) const {return Nebula::flagShowAdditionalNames;}
 
-NebulaMgr::NebulaMgr(void)
-	: nebGrid(200)
+NebulaMgr::NebulaMgr(void) : StelObjectModule()
+	, nebGrid(200)
 	, hintsAmount(0)
 	, labelsAmount(0)
 	, flagConverter(false)
@@ -848,13 +848,13 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 	for (const auto& n : dsoArray)
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
-		if (equPos*v>=cosLimFov)
+		if (equPos*v >= cosLimFov)
 		{
 			result.push_back(qSharedPointerCast<StelObject>(n));
 		}

@@ -418,7 +418,6 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	static const double d2000 = 2451545.0;
 	const float movementFactor = static_cast<float>((M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / static_cast<double>(star_position_scale));
 
-	// GZ, added for extinction
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
 	const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
@@ -489,8 +488,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		{
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
-			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
+			sPainter->setColor(colorr,names_brightness);
+			sPainter->drawText(vf.toVec3d(), s->getNameI18n(), 0, offset, offset, false);
 		}
 	}
 }
@@ -503,12 +502,12 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
-	Vec3f vf(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
+	Vec3f vf = v.toVec3f();
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		s->getJ2000Pos(z,static_cast<float>(movementFactor), tmp);
 		tmp.normalize();
-		if (tmp*vf >= cosLimFov)
+		if (tmp*vf >= static_cast<float>(cosLimFov))
 		{
 			// TODO: do not select stars that are too faint to display
 			result.push_back(s->createStelObject(this,z));

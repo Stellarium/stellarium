@@ -62,8 +62,8 @@
 #include <QDir>
 #include <QHash>
 
-SolarSystem::SolarSystem()
-	: shadowPlanetCount(0)
+SolarSystem::SolarSystem() : StelObjectModule()
+	, shadowPlanetCount(0)
 	, flagMoonScale(false)
 	, moonScale(1.0)
 	, flagMinorBodyScale(false)
