@@ -391,10 +391,11 @@ private:
 
 	QString jsonCatalogPath;
 
-	int PSCount; // FIXME: comment code!
-	int EPCountAll;
-	int EPCountPH;
+	int PSCount;	// Count of planetary systems
+	int EPCountAll;	// Count of exoplents
+	int EPCountPH;	// Count of exoplanets in habitable zone
 
+	// Lists of various data about exoplanets for quick plot of graphs
 	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll,
 		      EPEffectiveTempHostStarAll, EPYearDiscoveryAll, EPMetallicityHostStarAll, EPVMagHostStarAll,
 		      EPRAHostStarAll, EPDecHostStarAll, EPDistanceHostStarAll, EPMassHostStarAll, EPRadiusHostStarAll;

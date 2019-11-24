@@ -638,7 +638,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			StelUtils::radToDecDeg(az, sign, deg);			
+			StelUtils::radToDecDeg(az, sign, deg);
 			aY.append(deg);			
 		}		
 		core->setJD(currentJD);

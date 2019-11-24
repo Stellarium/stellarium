@@ -75,7 +75,12 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	// TODO: get rid of RA, DE and show data reverse-computed from XYZ later?
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
-	StelUtils::spheToRect(RA, DE, XYZ);
+	StelUtils::spheToRect(RA, DE, XYZ);	
+	bool sign;
+	double RAdd, DEdd;
+	StelUtils::radToDecDeg(RA, sign, RAdd);
+	StelUtils::radToDecDeg(DE, sign, DEdd);
+	if (!sign) DEdd *= -1;
 	distance = map.value("distance").toDouble();
 	stype = map.value("stype").toString();
 	smass = map.value("smass").toDouble();
@@ -149,16 +154,13 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			radiusList.append(qMax(0., p.radius));
 			angleDistanceList.append(qMax(0., p.angleDistance));
 			periodList.append(qMax(0., p.period));
-
-			if (p.discovered>0) // FIXME: No default entry here? What happens if the next entry has a year? Will the list order suffer?
-				yearDiscoveryList.append(p.discovered);
-
+			yearDiscoveryList.append(p.discovered);
 			effectiveTempHostStarList.append(effectiveTemp);
 			metallicityHostStarList.append(smetal);
 			if (Vmag<99)
 				vMagHostStarList.append(Vmag);
-			raHostStarList.append(RA);
-			decHostStarList.append(DE);
+			raHostStarList.append(RAdd);
+			decHostStarList.append(DEdd);
 			distanceHostStarList.append(distance);
 			massHostStarList.append(smass);
 			radiusHostStarList.append(sradius);
