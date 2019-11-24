@@ -274,7 +274,7 @@ int StarMgr::getWdsLastObservation(int hip)
 	return 0;
 }
 
-int StarMgr::getWdsLastPositionAngle(int hip)
+float StarMgr::getWdsLastPositionAngle(int hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -747,7 +747,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
+			int hip = recordRx.capturedTexts().at(1).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -851,7 +851,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
@@ -918,7 +918,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		unsigned int hip = fields.at(0).toUInt(&ok);
+		int hip = fields.at(0).toInt(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
@@ -993,7 +993,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		unsigned int hip = fields.at(0).toUInt(&ok);
+		int hip = fields.at(0).toInt(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
@@ -1065,7 +1065,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
@@ -1074,9 +1074,9 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			}
 
 			QString hipstar = QString("%1%2").arg(hip).arg(fields.at(1).trimmed());
-			crossIdData.sao = fields.at(2).toUInt(&ok);
-			crossIdData.hd = fields.at(3).toUInt(&ok);
-			crossIdData.hr = fields.at(4).toUInt(&ok);
+			crossIdData.sao = fields.at(2).toInt(&ok);
+			crossIdData.hd = fields.at(3).toInt(&ok);
+			crossIdData.hr = fields.at(4).toInt(&ok);
 
 			crossIdMap[hipstar] = crossIdData;
 			if (crossIdData.sao>0)
@@ -1133,7 +1133,7 @@ void StarMgr::loadPlxErr(const QString& plxErrFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
