@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelUtils.hpp"
 
 #ifdef Q_OS_WIN
-  #include <windows.h> // GetSystemTimeAsFileTime
+  #include <Windows.h> // GetSystemTimeAsFileTime
 #else
   #include <sys/time.h>
 #endif
@@ -41,7 +41,7 @@ long long int GetNow(void)
 	union
 	{
 		FILETIME file_time;
-		__int64 t;
+		qint64 t;
 	} tmp;
 	GetSystemTimeAsFileTime(&tmp.file_time);
 	t = (tmp.t/10) - 86400000000LL*(369*365+89);

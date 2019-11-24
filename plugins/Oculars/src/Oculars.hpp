@@ -34,6 +34,7 @@
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 3.1f
+#define DEFAULT_CCD_CROP_OVERLAY_SIZE 250
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
@@ -100,9 +101,17 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
+	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
+	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
+	Q_PROPERTY(bool flagShowCardinals		READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
+	Q_PROPERTY(bool flagAlignCrosshair		READ getFlagAlignCrosshair   WRITE setFlagAlignCrosshair   NOTIFY flagAlignCrosshairChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
+	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
+
+	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay WRITE setFlagShowCcdCropOverlay NOTIFY flagShowCcdCropOverlayChanged)
+	Q_PROPERTY(int ccdCropOverlaySize        READ getCcdCropOverlaySize        WRITE setCcdCropOverlaySize        NOTIFY ccdCropOverlaySizeChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -183,6 +192,8 @@ public slots:
 	
 	void enableGuiPanel(bool enable = true);
 	bool getFlagGuiPanelEnabled(void) const {return flagGuiPanelEnabled;}
+	void setGuiPanelFontSize(int size);
+	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
@@ -205,11 +216,17 @@ public slots:
 	void setFlagScalingFOVForTelrad(const bool b);
 	bool getFlagScalingFOVForTelrad(void) const;
 
+	void setFlagScalingFOVForCCD(const bool b);
+	bool getFlagScalingFOVForCCD(void) const;
+
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
 	void setFlagShowResolutionCriterions(const bool b);
 	bool getFlagShowResolutionCriterions(void) const;
+
+	void setCcdCropOverlaySize(int size);
+	int getCcdCropOverlaySize()const {return ccdCropOverlaySize;}
 
 	void setArrowButtonScale(const double val);
 	double getArrowButtonScale() const;
@@ -224,6 +241,22 @@ public slots:
 	void setFlagShowOcularsButton(bool b);
 	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
 
+	void setFontSize(int s){font.setPixelSize(s);}
+	//! Connect this to StelApp font size.
+	void setFontSizeFromApp(int s){font.setPixelSize(s+1);}
+
+	void setFlagShowCcdCropOverlay(const bool b);
+	bool getFlagShowCcdCropOverlay(void) const;
+
+	void setFlagShowContour(const bool b);
+	bool getFlagShowContour(void) const;
+
+	void setFlagShowCardinals(const bool b);
+	bool getFlagShowCardinals(void) const;
+
+	void setFlagAlignCrosshair(const bool b);
+	bool getFlagAlignCrosshair(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -236,9 +269,11 @@ signals:
 	void selectedCCDRotationAngleChanged(double value);
 
 	void flagGuiPanelEnabledChanged(bool value);
+	void guiPanelFontSizeChanged(int value);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
+	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void flagShowResolutionCriterionsChanged(bool value);
 	void arrowButtonScaleChanged(double value);
@@ -249,6 +284,11 @@ signals:
 	void flagDMSDegreesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
 	void flagShowOcularsButtonChanged(bool value);
+	void flagShowCcdCropOverlayChanged(bool value);
+	void ccdCropOverlaySizeChanged(int value);
+	void flagShowContourChanged(bool value);
+	void flagShowCardinalsChanged(bool value);
+	void flagAlignCrosshairChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -335,20 +375,20 @@ private:
 	bool flagAdaptationMain;	//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStarsMain;        //!< Flag to track limit magnitude for stars
-	float magLimitStarsMain;        //!< Value of limited magnitude for stars
+	double magLimitStarsMain;       //!< Value of limited magnitude for stars
 	bool flagLimitDSOsMain;	        //!< Flag to track limit magnitude for DSOs
-	float magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
+	double magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
 	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-	float magLimitPlanetsMain;      //!< Value of limited magnitude for planets, asteroids, comets etc.
-	float relativeStarScaleMain;    //!< Value to store the usual relative star scale when activating ocular or CCD view
-	float absoluteStarScaleMain;    //!< Value to store the usual absolute star scale when activating ocular or CCD view
-	float relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
-	float absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
-	float relativeStarScaleCCD;     //!< Value to store the relative star scale when switching off CCD view
-	float absoluteStarScaleCCD;     //!< Value to store the absolute star scale when switching off CCD view
+	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
+	double absoluteStarScaleMain;   //!< Value to store the usual absolute star scale when activating ocular or CCD view
+	double relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
+	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
+	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
+	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
-	float milkyWaySaturation;
+	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Read from the ini file, whether an object is required to be selected to zoom in.
@@ -396,18 +436,27 @@ private:
 	StelAction * actionOcularDecrement;
 
 	class OcularsGuiPanel * guiPanel;
+	int guiPanelFontSize;
 
 	//Reticle
 	StelTextureSP reticleTexture;
+	StelTextureSP cardinalsNormalTexture;
+	StelTextureSP cardinalsMirroredTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
+	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
 	bool flagShowResolutionCriterions;
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
+	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
+	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
+	bool flagShowContour;
+	bool flagShowCardinals;
+	bool flagAlignCrosshair;
 };
 
 

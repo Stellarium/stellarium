@@ -46,7 +46,7 @@ public:
 public slots:
 	// Methods callable from script and GUI
 	//! Get the current zenith hourly rate.
-	int getZHR() { return m_zhr; }
+	int getZHR() const { return m_zhr; }
 	//! Set the zenith hourly rate.
 	void setZHR(int zhr);
 

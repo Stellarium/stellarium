@@ -40,10 +40,10 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, baseurl("http://localhost:8889/")
 	, telName("")
 	, telReadonly(false)
-	, telLatitude(NAN)
-	, telLongitude(NAN)
-	, telAltitude(NAN)
-	, telTargetDist(NAN)
+	, telLatitude(static_cast<double>(NAN))
+	, telLongitude(static_cast<double>(NAN))
+	, telAltitude(static_cast<double>(NAN))
+	, telTargetDist(static_cast<double>(NAN))
 	, time_delay(50)
 	, reconnectTimer(-1)
 	, refresh_delay(500)
@@ -248,6 +248,16 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 	qDebug() << "TelescopeRTS2(" << name << ")::telescopeGoto: request: " << set.toString();
 
 	networkManager.get(setR);
+}
+
+void TelescopeClientJsonRts2::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	Q_UNUSED(j2000Pos)
+	Q_UNUSED(selectObject)
+	if (!isConnected())
+		return;
+
+	return;
 }
 
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const

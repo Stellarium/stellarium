@@ -54,6 +54,7 @@ class StelModule : public QObject
 	// load plugins on windows.
 	Q_ENUMS(StelModuleSelectAction)
 	Q_ENUMS(StelModuleActionName)
+
 public:
 	StelModule();
 
@@ -82,7 +83,7 @@ public:
 	virtual QString getAuthorName() const {return "Stellarium's Team";}
 
 	//! Get the email adress of the module author
-	virtual QString getAuthorEmail() const {return "http://www.stellarium.org";}
+	virtual QString getAuthorEmail() const {return "stellarium@googlegroups.com";}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
@@ -143,7 +144,6 @@ public:
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 
 protected:
-
 	//! convenience methods to add an action (call to slot) to the StelActionMgr object.
 	//! @param id unique identifier. Should be called actionMy_Action. (i.e., start with "action" and then "Capitalize_Underscore" style.)
 	//! @param groupId string to be used in the Help menu. The action will be listed in this group.

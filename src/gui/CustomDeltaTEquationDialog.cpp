@@ -74,7 +74,6 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	connect(ui->lineEditCoefficientA, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffA(const QString&)));
 	connect(ui->lineEditCoefficientB, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffB(const QString&)));
 	connect(ui->lineEditCoefficientC, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffC(const QString&)));
-
 }
 
 void CustomDeltaTEquationDialog::setVisible(bool v)
@@ -95,35 +94,35 @@ void CustomDeltaTEquationDialog::saveSettings(void) const
 
 void CustomDeltaTEquationDialog::setNDot(const QString& v)
 {
-	ndot = v.toFloat();
+	ndot = v.toDouble();
 	core->setDeltaTCustomNDot(ndot);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setYear(const QString& v)
 {
-	year = v.toFloat();
+	year = v.toDouble();
 	core->setDeltaTCustomYear(year);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffA(const QString& v)
 {
-	coeff[0] = v.toFloat();
+	coeff[0] = v.toDouble();
 	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffB(const QString& v)
 {
-	coeff[1] = v.toFloat();
+	coeff[1] = v.toDouble();
 	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
 {
-	coeff[2] = v.toFloat();
+	coeff[2] = v.toDouble();
 	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }

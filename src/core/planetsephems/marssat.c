@@ -385,7 +385,7 @@ static const double dome = -0.1061;
 static const double dinc =  0.0609;
 
 static
-void GenerateMarsSatToVSOP87(double t,double mars_sat_to_vsop87[9]) {
+void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
   t -= 6491.5;
   {
     const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
@@ -404,7 +404,7 @@ void GenerateMarsSatToVSOP87(double t,double mars_sat_to_vsop87[9]) {
     m[3] = so;  m[4] =  ci*co; m[5] = -si*co;
     m[6] = 0.0; m[7] =  si;    m[8] =  ci;
 #endif
-    MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
+    MultMat(J2000_to_VSOP87,m,mat_mars_sat_to_vsop87);
   }
 }
 

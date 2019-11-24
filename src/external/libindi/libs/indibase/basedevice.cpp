@@ -1249,7 +1249,7 @@ void BaseDevice::addMessage(const std::string& msg)
 
 std::string BaseDevice::messageQueue(int index) const
 {
-    if (index >= (int)messageLog.size())
+    if (index >= static_cast<int>(messageLog.size()))
         return nullptr;
 
     return messageLog.at(index);

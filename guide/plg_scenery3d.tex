@@ -3,18 +3,10 @@
 %% 2016-04-12 adapted from Scenery3D plugin documentation. Just reformatted.
 %% Doc should be edited in here from now on. 
 %% 2017-12-09 update about performance after playing with big models. Added section about temporally changing material.
+%% 2019-10-11 added current references
 %% !!!!!!!!!! Please ask GZ before editing this file. !!!!!!!!!!!!!!!
 
-% \documentclass[a4paper]{article}
-% \usepackage[latin1]{inputenc}
-% \usepackage[T1]{fontenc}
-% \usepackage{a4wide}
-% \usepackage{hyperref}
-
-%\newcommand{\filename}[1]{\texttt{#1}}
-%\newcommand{\cmd}[1]{\texttt{#1}}
-
-\chapter{Scenery3d -- 3D Landscapes}% in Stellarium} 
+\chapter{Scenery3d -- 3D Landscapes}
 \label{ch:scenery3d}
 \chapterauthor*{Georg Zotti and Florian Schaukowitsch}
 
@@ -340,8 +332,8 @@ better shadows for such objects. If required, alpha testing can be combined with
 
 Sometimes, exported objects only have a single side (``paper wall''), and are only visible
 from one side when looked at in Scenery3d. This is caused by an optimization
-called \href{https://en.wikipedia.org/wiki/Back-face_culling}{back-face
-culling}, which skips drawing the back sides of objects because they are usually
+called \emph{back-face culling}\footnote{\url{https://en.wikipedia.org/wiki/Back-face_culling}},
+which skips drawing the back sides of objects because they are usually
 not visible anyway. If possible, avoid such ``thin'' geometry, this will also
 produce better shadows on the object. As a workaround, you can also set
 \parameter{bBackface} to 1 to disable back-face culling for this material.
@@ -841,12 +833,15 @@ Florian Schaukowitsch adapted the code to work with Qt~5 and the
 Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer~\citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}. % TODO: add more (SEAC2017) when they are published.
+supervised by Michael Wimmer~\citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
-the Austrian Science Fund (FWF) under grant number P~21208-G19.
+the Austrian Science Fund (FWF) under grant number P~21208-G19. Further development is
+partially supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology in Vienna, Austria\footnote{%
+  \url{http://archpro.lbg.ac.at}}.
 
-%\end{document}
+If you are using this plugin in scientific work, please cite: \citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017,Zotti-etal:SIA2016,Zotti:TAG2016}.
+
 
 %%% Local Variables: 
 %%% mode: latex

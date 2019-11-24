@@ -68,6 +68,19 @@ private:
 	int ra, dec;
 };
 
+//! Celestron NexStar command: sync a given position.
+class NexStarCommandSync : public NexStarCommand
+{
+public:
+	NexStarCommandSync(Server &server, unsigned int ra_int, int dec_int);
+	bool writeCommandToBuffer(char *&buff, char *end);
+	int readAnswerFromBuffer(const char *&buff, const char *end) const;
+	void print(QTextStream &o) const;
+
+private:
+	int ra, dec;
+};
+
 //! Celestron NexStar command: Get the current position.
 class NexStarCommandGetRaDec : public NexStarCommand
 {

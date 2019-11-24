@@ -40,7 +40,7 @@ public:
 		bool operator!=(const Coordinates &other) const;
 	};
 
-	INDIConnection(QObject* parent = nullptr);
+	INDIConnection(QObject* parent = Q_NULLPTR);
 	INDIConnection(const INDIConnection& that) = delete;
 
 	Coordinates position() const;
@@ -63,7 +63,7 @@ private:
 	void setSpeed(int speed);
 
 	mutable std::mutex mMutex;
-	INDI::BaseDevice* mTelescope = nullptr;
+	INDI::BaseDevice* mTelescope = Q_NULLPTR;
 	Coordinates mCoordinates;
 	QStringList mDevices;
 

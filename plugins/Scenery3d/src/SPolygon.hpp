@@ -30,7 +30,6 @@ class Plane;
 class SPolygon
 {
 public:
-
 	SPolygon();
 	//! Construct a polygon from 4 corner vertices
 	SPolygon(const Vec3f &c0, const Vec3f &c1, const Vec3f &c2, const Vec3f &c3);
@@ -55,7 +54,6 @@ public:
 	void render();
 
 private:
-
 };
 
 #endif

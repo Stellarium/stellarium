@@ -177,7 +177,7 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
          /*  17          14          13      TT - TDB */
 
     for(i = 0; i < 4; i++)
-      if(ntarg == (int)i + 14)
+      if(ntarg == static_cast<int>(i) + 14)
       {
         if(eph->ipt[i + 11][1] > 0) /* quantity is in ephemeris */
         {
@@ -423,7 +423,6 @@ static void interp(struct interpolation_info *iinfo,
             /* polynomials) are not stored for repeated use,  for example. */
     if(velocity_flag == 3)
     {
-
       double accel_coeffs[MAX_CHEBY];
 
       accel_coeffs[0] = accel_coeffs[1] = 0.;
@@ -608,7 +607,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;
@@ -664,7 +663,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 					dest = eph->pvsun;
 				else
 					dest = nut;
-				interp(&eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
+				interp(&eph->iinfo, &buf[iptr[0]-1], t, static_cast<int>(iptr[1]),
 						dimension(i + 1),
 						n_intervals, quantities, dest);
 
@@ -971,7 +970,7 @@ double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name
 	double rval = 0.;
 
 	*constant_name = '\0';
-	if(idx >= 0 && idx < (int)eph->ncon)
+	if(idx >= 0 && idx < static_cast<int>(eph->ncon))
 	{
 		// GZ extended from const long to const long long
 		const long long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :

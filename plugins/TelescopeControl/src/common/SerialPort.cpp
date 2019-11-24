@@ -40,7 +40,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	#endif
 {
 #ifdef Q_OS_WIN
-	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
+	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
@@ -171,8 +171,8 @@ SerialPort::~SerialPort(void)
 int SerialPort::readNonblocking(char *buf, int count)
 {
 	DWORD rval;
-	if (ReadFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+	if (ReadFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;
@@ -181,8 +181,8 @@ int SerialPort::readNonblocking(char *buf, int count)
 int SerialPort::writeNonblocking(const char *buf, int count)
 {
 	DWORD rval;
-	if (WriteFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+	if (WriteFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;
@@ -195,6 +195,9 @@ void SerialPort::prepareSelectFds(fd_set &read_fds,
                                   int &fd_max)
 {
 #ifdef Q_OS_WIN
+	Q_UNUSED(read_fds)
+	Q_UNUSED(write_fds)
+	Q_UNUSED(fd_max)
 	// handle all IO here
 	if (write_buff_end > write_buff)
 		performWriting();

@@ -52,11 +52,11 @@ public:
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
 		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
 		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance		= 0x00000040, //!< Info about an object's distance
-		Size			= 0x00000080, //!< Info about an object's size
-		Velocity                = 0x00000100, //!< Info about object's velocity
-		Extra			= 0x00000200, //!< Derived class-specific extra fields
-		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		Distance			= 0x00000040, //!< Info about an object's distance
+		Size				= 0x00000080, //!< Info about an object's size
+		Velocity			= 0x00000100, //!< Info about object's velocity
+		Extra				= 0x00000200, //!< Derived class-specific extra fields
+		HourAngle			= 0x00000400, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
 		GalacticCoord		= 0x00001000, //!< The galactic position
 		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
@@ -67,22 +67,20 @@ public:
 		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
 		NoFont			= 0x00100000,
-		PlainText		= 0x00200000, //!< Strip HTML tags from output
+		PlainText			= 0x00200000, //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
-
-
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() {}
 
@@ -116,6 +114,12 @@ public:
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
+	//! - hourAngle-dd : hour angle in decimal degrees
+	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - iauConstellation : 3-letter abbreviation of IAU constellation (string)
+	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
@@ -207,6 +211,9 @@ public:
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
+	//! Get parallactic angle, which is the deviation between zenith angle and north angle. [radians]
+	float getParallacticAngle(const StelCore* core) const;
+
 	//! Checking position an object above mathematical horizon for current location.
 	//! @return true if object an above mathematical horizon
 	bool isAboveHorizon(const StelCore* core) const;
@@ -232,7 +239,7 @@ public:
 	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
-	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
+	virtual Vec3f getInfoColor() const {return Vec3f(1.f,1.f,1.f);}
 
 	//! Return the best FOV in degree to use for a close view of the object
 	virtual double getCloseViewFov(const StelCore*) const {return 10.;}
@@ -246,8 +253,14 @@ public:
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
-protected:
+public slots:
+	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! Hard-set this string to str
+	virtual void setExtraInfoString(const QString &str);
+	//! Add str to the extra string. This should be preferrable over hard setting.
+	virtual void addToExtraInfoString(const QString &str);
 
+protected:
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
@@ -265,6 +278,10 @@ private:
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
 	Vec3f computeRTSTime(StelCore* core) const;
+
+	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
+	//! TODO: Maybe convert this to a Map or Hash, and let modules/plugins set or reset strings with their IDs, to avoid conflicts.
+	QString extraInfoString;
 
 	static int stelObjectPMetaTypeID;
 };

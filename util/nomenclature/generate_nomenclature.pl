@@ -5,7 +5,7 @@
 #
 # Please extract all DBF files from archives into this directory and run the tool.
 #
-# Copyright (c) 2017 Alexander Wolf
+# Copyright (c) 2017, 2018, 2019 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,12 @@ while(defined(my $file = readdir(DIR))) {
 my @header;
 open(TMPL, "<./header.tmpl");
 @header = <TMPL>;
+close TMPL;
+
+# Some objects do not have DBF for nomenclature; let's use extra file for it
+my @extra;
+open(TMPL, "<./nomenclature.extra");
+@extra = <TMPL>;
 close TMPL;
 
 open(FAB, ">./nomenclature.fab");
@@ -77,4 +83,11 @@ for(my $i=0; $i<scalar(@dbfiles); $i++)
 	print FAB $pName."\t".$id."\t_(\"".$featureName."\",\"".$type."\")\t".$arr->[5]."\t".$latitude."\t".$longitude."\t".$arr->[2]."\n";
     }
 }
+
+for(my $k=0;$k<scalar(@extra);$k++) {
+    print FAB $extra[$k];
+}
+print FAB "\n";
+
 close FAB;
+

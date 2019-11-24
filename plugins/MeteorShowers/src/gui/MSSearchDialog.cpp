@@ -21,6 +21,7 @@
 
 #include "MSSearchDialog.hpp"
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
@@ -54,9 +55,13 @@ void MSSearchDialog::createDialogContent()
 	m_ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << m_ui->listEvents;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << m_ui->listEvents;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshRangeDates()));
 

@@ -56,8 +56,10 @@ core.wait(...);
   scripting engine via an object with the same name as the corresponding class:
    - ConstellationMgr
    - CustomObjectMgr
+   - HighlightMgr
    - GridLinesMgr
    - LabelMgr
+   - MarkerMgr
    - LandscapeMgr
    - SporadicMeteorMgr
    - NebulaMgr
@@ -68,7 +70,6 @@ core.wait(...);
    - StelAudioMgr
    - StelVideoMgr
    - StelMovementMgr
-   - StelSkyCultureMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
    - MilkyWay

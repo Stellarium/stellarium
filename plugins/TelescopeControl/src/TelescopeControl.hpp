@@ -156,14 +156,14 @@ public:
 	//! Returns a list of the currently connected clients
 	QHash<int, QString> getConnectedClientsNames();
 	
-	bool getFlagUseServerExecutables() {return useServerExecutables;}
+	bool getFlagUseServerExecutables() const {return useServerExecutables;}
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	void setFlagUseServerExecutables(bool b);
-	const QString& getServerExecutablesDirectoryPath();
+	const QString& getServerExecutablesDirectoryPath() const;
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	bool setServerExecutablesDirectoryPath(const QString& newPath);
 	
-	bool getFlagUseTelescopeServerLogs () {return useTelescopeServerLogs;}
+	bool getFlagUseTelescopeServerLogs () const {return useTelescopeServerLogs;}
 
 public slots:
 	//! Set display flag for telescope reticles
@@ -268,6 +268,8 @@ public slots:
 	//! @endcode
 	void slewTelescopeToSelectedObject(const int idx);
 
+	void syncTelescopeWithSelectedObject(const int idx);
+
 	//! slews a telescope at slot idx to the point of the celestial sphere currently
 	//! in the center of the screen.
 	//! @code
@@ -275,6 +277,8 @@ public slots:
 	//! TelescopeControl.slewTelescopeToViewDirection(1);
 	//! @endcode
 	void slewTelescopeToViewDirection(const int idx);
+
+	void syncTelescopeWithViewDirection(const int idx);
 	
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
@@ -295,6 +299,8 @@ private:
 	//! @param j2000Pos the direction in equatorial J2000 frame
 	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
 	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+
+	void telescopeSync(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
 
 	//! Draw a nice animated pointer around the object if it's selected
 	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
@@ -345,9 +351,9 @@ private:
 	SlewDialog * slewDialog;
 	
 	//! Used internally. Checks if the argument is a valid slot number.
-	bool isValidSlotNumber(int slot);
-	bool isValidPort(uint port);
-	bool isValidDelay(int delay);
+	static bool isValidSlotNumber(int slot);
+	static bool isValidPort(uint port);
+	static bool isValidDelay(int delay);
 	
 	//! Start the telescope server defined for a given slot in a new QProcess
 	//! @param slot the slot number

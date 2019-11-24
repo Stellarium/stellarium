@@ -54,9 +54,9 @@ void gTime::setTime(int year, double day)
 	int A = (year / 100);
 	int B = 2 - A + (A / 4);
 
-	double JDforYear = (int)(365.25 * year) +
-	                   (int)(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expresion (30.6001 * (mm +1))
-	                   1720994.5 + B;
+	double JDforYear = static_cast<int>(365.25 * year) +
+				      static_cast<int>(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expresion (30.6001 * (mm +1))
+				      1720994.5 + B;
 
 	m_time = JDforYear + day;
 }
@@ -66,14 +66,17 @@ void gTime::setTime(int year, double day)
 
 gTime gTime::getCurrentTime()
 {
-
 	time_t rawtime;
-	struct tm * timeinfo;
+	struct tm timeinfo;
 
 	time(&rawtime);
-	timeinfo = gmtime(&rawtime);
+	#ifdef _MSC_VER
+	gmtime_s(&timeinfo, &rawtime);
+	#else
+	gmtime_r(&rawtime, &timeinfo);
+	#endif
 
-	return gTime(*timeinfo);
+	return gTime(timeinfo);
 }
 
 
@@ -92,8 +95,8 @@ gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 {
 	// Calculate N, the day of the year (1..366)
 	int N;
-	int F1 = (int)((275.0 * nMonth) / 9.0);
-	int F2 = (int)((nMonth + 9.0) / 12.0);
+	int F1 = static_cast<int>((275.0 * nMonth) / 9.0);
+	int F2 = static_cast<int>((nMonth + 9.0) / 12.0);
 
 	if(isLeapYear(nYear))
 	{
@@ -110,18 +113,15 @@ gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 
 
 	setTime(nYear, dDay);
-
 }
 
 
 gTime::gTime(const gTime& timeSrc):m_time(timeSrc.m_time)
 {
-
 }
 
 gTime::gTime(struct tm ai_timestruct)
 {
-
 	int    year = ai_timestruct.tm_year + 1900;
 
 	double day  = ai_timestruct.tm_yday + 1;
@@ -132,13 +132,18 @@ gTime::gTime(struct tm ai_timestruct)
 
 gTimeSpan gTime::getTimeToUTC()
 {
-
 	//Time to utc calculation.
 	time_t when   = time(nullptr);
-	struct tm utc = *gmtime(&when);
-	struct tm lcl = *localtime(&when);
+	struct tm utc;
+	struct tm lcl;
+	#ifdef _MSC_VER
+	gmtime_s(&utc, &when);
+	localtime_s(&lcl, &when);
+	#else
+	gmtime_r(&when, &utc);
+	localtime_r(&when, &lcl);
+	#endif
 	gTimeSpan tUTCDiff;
-
 
 	int delta_h = lcl.tm_hour - utc.tm_hour;
 	tUTCDiff = (time_t) delta_h*3600;
@@ -155,18 +160,22 @@ const gTime& gTime::operator=(const gTime& timeSrc)
 
 const gTime& gTime::operator=(time_t t)
 {
-	struct tm *ptm = gmtime(&t);
-	assert(ptm);
+	struct tm ptm;
 
-	int    year = ptm->tm_year + 1900;
+	#ifdef _MSC_VER
+	gmtime_s(&ptm, &t);
+	#else
+	gmtime_r(&t, &ptm);
+	#endif
 
-	double day  = ptm->tm_yday + 1;
-	day += (ptm->tm_hour + (ptm->tm_min + (ptm->tm_sec / 60.0)) / 60.0) / 24.0;
+	int    year = ptm.tm_year + 1900;
+
+	double day  = ptm.tm_yday + 1;
+	day += (ptm.tm_hour + (ptm.tm_min + (ptm.tm_sec / 60.0)) / 60.0) / 24.0;
 
 	setTime(year, day);
 
 	return (*this);
-
 }
 
 
@@ -185,13 +194,10 @@ double gTime::getLocalTm() const
 time_t gTime::toTime() const
 {
 	return ((m_time - JDAY_JAN1_00H_1970)*KSEC_PER_DAY);
-
-
 }
 
 void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 {
-
 	assert(pYear != nullptr);
 	assert(pMonth != nullptr);
 	assert(pDom != nullptr);
@@ -200,7 +206,7 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	int Z, C, D, E, month, year;
 
 	jdAdj = m_time + 0.5;
-	Z     = (int)jdAdj;  // integer part
+	Z     = static_cast<int>(jdAdj);  // integer part
 	F     = jdAdj - Z;   // fractional part
 
 	if(Z < 2299161)
@@ -209,16 +215,16 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	}
 	else
 	{
-		alpha = (int)((Z - 1867216.25) / 36524.25);
-		A     = Z + 1 + alpha - (int)(alpha / 4.0);
+		alpha = static_cast<int>((Z - 1867216.25) / 36524.25);
+		A     = Z + 1 + alpha - static_cast<int>(alpha / 4.0);
 	}
 
 	B     = A + 1524.0;
-	C     = (int)((B - 122.1) / 365.25);
-	D     = (int)(C * 365.25);
-	E     = (int)((B - D) / 30.6001);
+	C     = static_cast<int>((B - 122.1) / 365.25);
+	D     = static_cast<int>(C * 365.25);
+	E     = static_cast<int>((B - D) / 30.6001);
 
-	DOM   = B - D - (int)(E * 30.6001) + F;
+	DOM   = B - D - static_cast<int>(E * 30.6001) + F;
 	month = (E < 13.5) ? (E - 1) : (E - 13);
 	year  = (month > 2.5) ? (C - 4716) : (C - 4715);
 
@@ -229,7 +235,6 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 
 double gTime::toJCenturies() const
 {
-
 	double jd;
 	double UT = fmod((m_time + 0.5), 1.0);
 	jd = m_time - UT;
@@ -244,7 +249,6 @@ double gTime::toJCenturies() const
 // prime meridian.
 double gTime::toThetaGMST() const
 {
-
 	double jd, Theta_JD;
 	double UT = fmod((m_time + 0.5), 1.0);
 	jd = m_time - UT;
@@ -292,7 +296,6 @@ const gTime& gTime::operator+=(gTimeSpan ai_timeSpan)
 {
 	m_time += ai_timeSpan.getDblDays();
 	return (*this);
-
 }
 
 const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
@@ -303,7 +306,6 @@ const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
 
 bool gTime::operator==(gTime ai_time) const
 {
-
 	if(m_time == ai_time.m_time)
 		return true;
 
@@ -312,7 +314,6 @@ bool gTime::operator==(gTime ai_time) const
 
 bool gTime::operator!=(gTime ai_time) const
 {
-
 	if(m_time != ai_time.m_time)
 		return true;
 
@@ -321,7 +322,6 @@ bool gTime::operator!=(gTime ai_time) const
 
 bool gTime::operator<(gTime ai_time) const
 {
-
 	if(m_time < ai_time.m_time)
 		return true;
 
@@ -330,7 +330,6 @@ bool gTime::operator<(gTime ai_time) const
 
 bool gTime::operator>(gTime ai_time) const
 {
-
 	if(m_time > ai_time.m_time)
 		return true;
 
@@ -339,7 +338,6 @@ bool gTime::operator>(gTime ai_time) const
 
 bool gTime::operator<=(gTime ai_time) const
 {
-
 	if(m_time <= ai_time.m_time)
 		return true;
 
@@ -348,7 +346,6 @@ bool gTime::operator<=(gTime ai_time) const
 
 bool gTime::operator>=(gTime ai_time) const
 {
-
 	if(m_time >= ai_time.m_time)
 		return true;
 

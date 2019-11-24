@@ -23,6 +23,7 @@ class ITemplateTranslationProvider
 public:
 	/** Implement this method to provide a translated string for a given key */
 	virtual QString getTranslation(const QString& key) = 0;
+	virtual ~ITemplateTranslationProvider(){}
 };
 
 
@@ -101,7 +102,6 @@ public:
 
 class DECLSPEC Template : public QString {
 public:
-
     /**
       Constructor that reads the template from a string.
       @param source The template source text
@@ -178,7 +178,6 @@ public:
     void translate(ITemplateTranslationProvider& provider);
 
 private:
-
     /** Name of the source file */
     QString sourceName;
 

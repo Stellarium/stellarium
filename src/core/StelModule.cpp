@@ -23,8 +23,9 @@
 
 StelModule::StelModule()
 {
-	//set the default object name to the class name
-	setObjectName(metaObject()->className());
+	// Attempt to set the default object name to the class name
+	// However, this does not work, and every derived class MUST call setObjectName(className) in its constructor by itself.
+	setObjectName(metaObject()->className()); // lgtm [cpp/virtual-call-in-constructor]
 }
 
 /*************************************************************************
