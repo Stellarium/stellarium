@@ -483,7 +483,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		sPainter.setBlending(true);
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getAnimationTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);
 	}
 }
 
@@ -541,7 +541,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			}
 			else
 			{
-				md5Hash.addData((const char*)cat, cat_sz);
+				md5Hash.addData(reinterpret_cast<const char*>(cat), cat_sz);
 				file.unmap(cat);
 			}
 			file.close();
@@ -672,7 +672,7 @@ void StarMgr::populateHipparcosLists()
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
 				QMap<StelObjectP, float> sa;
-				sa[so] = getGcvsPeriod(s->getHip());
+				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
 			}
 			if (!getWdsName(s->getHip()).isEmpty())
@@ -1220,11 +1220,11 @@ void StarMgr::draw(StelCore* core)
 		}
 		lastMaxSearchLevel = z->level;
 
-		unsigned int maxMagStarName = 0;
+		int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
 			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;

@@ -630,77 +630,41 @@ float Nebula::getSurfaceArea(void) const
 
 Vec3f Nebula::getHintColor(void) const
 {
-	switch (nType)
-	{
-		case NebGx:
-			return galaxyColor;
-		case NebIGx:
-			return interactingGalaxyColor;
-		case NebAGx:
-			return activeGalaxyColor;
-		case NebQSO:
-			return quasarColor;
-		case NebPossQSO:
-			return possibleQuasarColor;
-		case NebBLL:
-			return blLacObjectColor;
-		case NebBLA:
-			return blazarColor;
-		case NebRGx:
-			return radioGalaxyColor;
-		case NebOc:
-			return openClusterColor;
-		case NebSA:
-			return stellarAssociationColor;
-		case NebSC:
-			return starCloudColor;
-		case NebCl:
-			return clusterColor;
-		case NebGc:
-			return globularClusterColor;
-		case NebN:
-			return nebulaColor;
-		case NebHII:
-			return hydrogenRegionColor;
-		case NebMolCld:
-			return molecularCloudColor;
-		case NebYSO:
-			return youngStellarObjectColor;
-		case NebRn:
-			return reflectionNebulaColor;
-		case NebSNR:
-			return supernovaRemnantColor;
-		case NebBn:
-			return bipolarNebulaColor;
-		case NebEn:
-			return emissionNebulaColor;
-		case NebPn:
-			return planetaryNebulaColor;
-		case NebPossPN:
-			return possiblePlanetaryNebulaColor;
-		case NebPPN:
-			return protoplanetaryNebulaColor;
-		case NebDn:
-			return darkNebulaColor;
-		case NebCn:
-			return clusterWithNebulosityColor;
-		case NebEMO:
-			return emissionObjectColor;
-		case NebStar:
-			return starColor;
-		case NebSymbioticStar:
-			return symbioticStarColor;
-		case NebEmissionLineStar:
-			return emissionLineStarColor;
-		case NebSNC:
-			return supernovaCandidateColor;
-		case NebSNRC:
-			return supernovaRemnantCandidateColor;
-		case NebGxCl:
-			return galaxyClusterColor;
-		default:
-			return circleColor;
-	}
+	QMap<Nebula::NebulaType, Vec3f>map = {
+		{ NebGx     , galaxyColor },
+		{ NebIGx    , interactingGalaxyColor },
+		{ NebAGx    , activeGalaxyColor },
+		{ NebQSO    , quasarColor },
+		{ NebPossQSO, possibleQuasarColor },
+		{ NebBLL    , blLacObjectColor },
+		{ NebBLA    , blazarColor },
+		{ NebRGx    , radioGalaxyColor },
+		{ NebOc     , openClusterColor },
+		{ NebSA     , stellarAssociationColor },
+		{ NebSC     , starCloudColor },
+		{ NebCl     , clusterColor },
+		{ NebGc     , globularClusterColor },
+		{ NebN      , nebulaColor },
+		{ NebHII    , hydrogenRegionColor },
+		{ NebMolCld , molecularCloudColor },
+		{ NebYSO    , youngStellarObjectColor },
+		{ NebRn     , reflectionNebulaColor },
+		{ NebSNR    , supernovaRemnantColor },
+		{ NebBn     , bipolarNebulaColor },
+		{ NebEn     , emissionNebulaColor },
+		{ NebPn     , planetaryNebulaColor },
+		{ NebPossPN , possiblePlanetaryNebulaColor },
+		{ NebPPN    , protoplanetaryNebulaColor },
+		{ NebDn     , darkNebulaColor },
+		{ NebCn     , clusterWithNebulosityColor },
+		{ NebEMO    , emissionObjectColor },
+		{ NebStar   , starColor },
+		{ NebSymbioticStar   , symbioticStarColor },
+		{ NebEmissionLineStar, emissionLineStarColor },
+		{ NebSNC    , supernovaCandidateColor },
+		{ NebSNRC   , supernovaRemnantCandidateColor },
+		{ NebGxCl   , galaxyClusterColor }};
+	return map.value(nType, circleColor);
 }
 
 float Nebula::getVisibilityLevelByMagnitude(void) const
@@ -1106,57 +1070,32 @@ bool Nebula::objectInDisplayedType() const
 bool Nebula::objectInDisplayedCatalog() const
 {
 	bool r = false;
-	if ((catalogFilters&CatM) && (M_nb>0))
-		r = true;
-	else if ((catalogFilters&CatC) && (C_nb>0))
-		r = true;
-	else if ((catalogFilters&CatNGC) && (NGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatIC) && (IC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatB) && (B_nb>0))
-		r = true;
-	else if ((catalogFilters&CatSh2) && (Sh2_nb>0))
-		r = true;
-	else if ((catalogFilters&CatVdB) && (VdB_nb>0))
-		r = true;
-	else if ((catalogFilters&CatRCW) && (RCW_nb>0))
-		r = true;
-	else if ((catalogFilters&CatLDN) && (LDN_nb>0))
-		r = true;
-	else if ((catalogFilters&CatLBN) && (LBN_nb>0))
-		r = true;
-	else if ((catalogFilters&CatCr) && (Cr_nb>0))
-		r = true;
-	else if ((catalogFilters&CatMel) && (Mel_nb>0))
-		r = true;
-	else if ((catalogFilters&CatPGC) && (PGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatUGC) && (UGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatCed) && !(Ced_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatArp) && (Arp_nb>0))
-		r = true;
-	else if ((catalogFilters&CatVV) && (VV_nb>0))
-		r = true;
-	else if ((catalogFilters&CatPK) && !(PK_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatPNG) && !(PNG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatSNRG) && !(SNRG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatHCG) && (!HCG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatAbell) && (Abell_nb>0))
-		r = true;
-	else if ((catalogFilters&CatESO) && (!ESO_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatVdBH) && (!VdBH_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatDWB) && (DWB_nb>0))
+	if (       ((catalogFilters&CatM)     && (M_nb>0))
+		|| ((catalogFilters&CatC)     && (C_nb>0))
+		|| ((catalogFilters&CatNGC)   && (NGC_nb>0))
+		|| ((catalogFilters&CatIC)    && (IC_nb>0))
+		|| ((catalogFilters&CatB)     && (B_nb>0))
+		|| ((catalogFilters&CatSh2)   && (Sh2_nb>0))
+		|| ((catalogFilters&CatVdB)   && (VdB_nb>0))
+		|| ((catalogFilters&CatRCW)   && (RCW_nb>0))
+		|| ((catalogFilters&CatLDN)   && (LDN_nb>0))
+		|| ((catalogFilters&CatLBN)   && (LBN_nb>0))
+		|| ((catalogFilters&CatCr)    && (Cr_nb>0))
+		|| ((catalogFilters&CatMel)   && (Mel_nb>0))
+		|| ((catalogFilters&CatPGC)   && (PGC_nb>0))
+		|| ((catalogFilters&CatUGC)   && (UGC_nb>0))
+		|| ((catalogFilters&CatCed)   && !(Ced_nb.isEmpty()))
+		|| ((catalogFilters&CatArp)   && (Arp_nb>0))
+		|| ((catalogFilters&CatVV)    && (VV_nb>0))
+		|| ((catalogFilters&CatPK)    && !(PK_nb.isEmpty()))
+		|| ((catalogFilters&CatPNG)   && !(PNG_nb.isEmpty()))
+		|| ((catalogFilters&CatSNRG)  && !(SNRG_nb.isEmpty()))
+		|| ((catalogFilters&CatACO)   && (!ACO_nb.isEmpty()))
+		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))
+		|| ((catalogFilters&CatAbell) && (Abell_nb>0))
+		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
+		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
+		|| ((catalogFilters&CatDWB)   && (DWB_nb>0)))
 		r = true;
 
 	// Special case: objects without ID from current catalogs
@@ -1468,79 +1407,41 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 QString Nebula::getTypeString(void) const
 {
-	switch(nType)
-	{
-		case NebGx:
-			return q_("galaxy");
-		case NebAGx:
-			return q_("active galaxy");
-		case NebRGx:
-			return q_("radio galaxy");
-		case NebIGx:
-			return q_("interacting galaxy");
-		case NebQSO:
-			return q_("quasar");
-		case NebCl:
-			return q_("star cluster");
-		case NebOc:
-			return q_("open star cluster");
-		case NebGc:
-			return q_("globular star cluster");
-		case NebN:
-			return q_("nebula");
-		case NebPn:
-			return q_("planetary nebula");
-		case NebDn:
-			return q_("dark nebula");
-		case NebCn:
-			return q_("cluster associated with nebulosity");
-		case NebBn:
-			return q_("bipolar nebula");
-		case NebEn:
-			return q_("emission nebula");
-		case NebHII:
-			return q_("HII region");
-		case NebRn:
-			return q_("reflection nebula");
-		case NebSNR:
-			return q_("supernova remnant");
-		case NebSNC:
-			return q_("supernova candidate");
-		case NebSNRC:
-			return q_("supernova remnant candidate");
-		case NebSA:
-			return q_("stellar association");
-		case NebSC:
-			return q_("star cloud");
-		case NebISM:
-			return q_("interstellar matter");
-		case NebEMO:
-			return q_("emission object");
-		case NebBLL:
-			return q_("BL Lac object");
-		case NebBLA:
-			return q_("blazar");
-		case NebMolCld:
-			return q_("molecular cloud");
-		case NebYSO:
-			return q_("young stellar object");
-		case NebPossQSO:
-			return q_("possible quasar");
-		case NebPossPN:
-			return q_("possible planetary nebula");
-		case NebPPN:
-			return q_("protoplanetary nebula");
-		case NebStar:
-			return q_("star");
-		case NebSymbioticStar:
-			return q_("symbiotic star");
-		case NebEmissionLineStar:
-			return q_("emission-line star");
-		case NebGxCl:
-			return q_("cluster of galaxies");
-		case NebUnknown:
-			return q_("object of unknown nature");
-		default:
-			return q_("undocumented type");
-	}
+	QMap<Nebula::NebulaType, QString> tMap= {
+		{ NebGx     , q_("galaxy") },
+		{ NebAGx    , q_("active galaxy") },
+		{ NebRGx    , q_("radio galaxy") },
+		{ NebIGx    , q_("interacting galaxy") },
+		{ NebQSO    , q_("quasar") },
+		{ NebCl     , q_("star cluster") },
+		{ NebOc     , q_("open star cluster") },
+		{ NebGc     , q_("globular star cluster") },
+		{ NebN      , q_("nebula") },
+		{ NebPn     , q_("planetary nebula") },
+		{ NebDn     , q_("dark nebula") },
+		{ NebCn     , q_("cluster associated with nebulosity") },
+		{ NebBn     , q_("bipolar nebula") },
+		{ NebEn     , q_("emission nebula") },
+		{ NebHII    , q_("HII region") },
+		{ NebRn     , q_("reflection nebula") },
+		{ NebSNR    , q_("supernova remnant") },
+		{ NebSNC    , q_("supernova candidate") },
+		{ NebSNRC   , q_("supernova remnant candidate") },
+		{ NebSA     , q_("stellar association") },
+		{ NebSC     , q_("star cloud") },
+		{ NebISM    , q_("interstellar matter") },
+		{ NebEMO    , q_("emission object") },
+		{ NebBLL    , q_("BL Lac object") },
+		{ NebBLA    , q_("blazar") },
+		{ NebMolCld , q_("molecular cloud") },
+		{ NebYSO    , q_("young stellar object") },
+		{ NebPossQSO, q_("possible quasar") },
+		{ NebPossPN , q_("possible planetary nebula") },
+		{ NebPPN    , q_("protoplanetary nebula") },
+		{ NebStar   , q_("star") },
+		{ NebSymbioticStar   , q_("symbiotic star") },
+		{ NebEmissionLineStar, q_("emission-line star") },
+		{ NebGxCl   , q_("cluster of galaxies") },
+		{ NebUnknown, q_("object of unknown nature") }};
+	return tMap.value(nType, q_("undocumented type"));
 }

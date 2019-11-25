@@ -111,17 +111,17 @@ public:
 	//! @enum STimeFormat
 	//! The time display format.
 	enum STimeFormat {
+		STimeSystemDefault,	//!< use the system default format.
 		STime24h,		//!< 24 hour clock, e.g. "18:22:00"
-		STime12h,		//!< 12 hour clock, e.g. "06:22:00 pm"
-  		STimeSystemDefault	//!< use the system default format.
+		STime12h		//!< 12 hour clock, e.g. "06:22:00 pm"
 	};
 	
 	//! @enum SDateFormat
 	//! The date display format.
 	enum SDateFormat {
+		SDateSystemDefault,	//!< Use the system default date format
 		SDateMMDDYYYY,		//!< e.g. "07-05-1998" for July 5th 1998
 		SDateDDMMYYYY,		//!< e.g. "05-07-1998" for July 5th 1998
-		SDateSystemDefault,	//!< Use the system default date format
 		SDateYYYYMMDD,		//!< e.g. "1998-07-05" for July 5th 1998
 		SDateWWMMDDYYYY,	//!< e.g. "Sun, 07-05-1998" for Sunday, July 5th 1998
 		SDateWWDDMMYYYY,	//!< e.g. "Sun, 05-07-1998" for Sunday, July 5th 1998
@@ -156,22 +156,22 @@ public:
 	//! Return an alphabetically ordered list of all the known country names
 	static QStringList getAllCountryNames();
 
-	//! Returns the short name of the \a weekday
+	//! Returns the short name of the \a weekday [0=Sunday, 1=Monday..6]; weekday mod 7)
 	static QString shortDayName(int weekday);
 
-	//! Returns the long name of the \a weekday
+	//! Returns the long name of the \a weekday ([0..6]; weekday mod 7)
 	static QString longDayName(int weekday);
 
-	//! Returns the short name of the \a month
+	//! Returns the short name of the \a month [1..12]
 	static QString shortMonthName(int month);
 
-	//! Returns the long name of the \a month
+	//! Returns the long name of the \a month [1..12]
 	static QString longMonthName(int month);
 
-	//! Returns the genitive long name of the \a month
+	//! Returns the genitive long name of the \a month [1..12]
 	static QString longGenitiveMonthName(int month);
 
-	//! Returns the Roman name (a number) of the \a month
+	//! Returns the Roman name (a number) of the \a month [1..12]
 	static QString romanMonthName(int month);
 	
 private:
@@ -186,12 +186,12 @@ private:
 	SDateFormat dateFormat;
 
 	// Convert the time format enum to its associated string and reverse
-	STimeFormat stringToSTimeFormat(const QString&) const;
-	QString sTimeFormatToString(STimeFormat) const;
+	static STimeFormat stringToSTimeFormat(const QString&);
+	static QString sTimeFormatToString(STimeFormat);
 	
 	// Convert the date format enum to its associated string and reverse
-	SDateFormat stringToSDateFormat(const QString& df) const;
-	QString sDateFormatToString(SDateFormat df) const;
+	static SDateFormat stringToSDateFormat(const QString& df);
+	static QString sDateFormatToString(SDateFormat df);
 	
 	static QMap<QString, QString> countryCodeToStringMap;
 	

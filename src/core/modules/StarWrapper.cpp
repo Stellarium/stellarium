@@ -306,9 +306,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 
-		float dx = 0.1*s->getDx0();
-		float dy = 0.1*s->getDx1();
-		float pa = 90.f - std::atan2(dy, dx)*180.f/M_PI;
+		float dx = 0.1f*s->getDx0();
+		float dy = 0.1f*s->getDx1();
+		float pa = 90.f - std::atan2(dy, dx)*180.f/M_PIf;
 		if (pa<0)
 			pa += 360.f;
 
@@ -363,7 +363,7 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		map.insert("parallax", 0.00001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())));
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(1.f+std::log10(0.00001f*s->getPlx())));
 		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
 	}
 

@@ -61,291 +61,177 @@ NomenclatureItem::~NomenclatureItem()
 
 QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 {
-	switch (nType)
-	{
-		case niAlbedoFeature:
+	QMap<NomenclatureItemType, QString>map = {
 			// TRANSLATORS: Geographic area distinguished by amount of reflected light
-			return qc_("albedo feature", "landform");
-		case niArcus:
+		{ niAlbedoFeature, qc_("albedo feature", "landform") },
 			// TRANSLATORS: Arc-shaped feature
-			return qc_("arcus", "landform");
-		case niAstrum:
+		{ niArcus, qc_("arcus", "landform") },
 			// TRANSLATORS: Radial-patterned features on Venus
-			return qc_("astrum", "landform");
-		case niCatena:
+		{ niAstrum, qc_("astrum", "landform") },
 			// TRANSLATORS: Chain of craters
-			return qc_("catena", "landform");
-		case niCavus:
+		{ niCatena, qc_("catena", "landform") },
 			// TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
-			return qc_("cavus", "landform");
-		case niChaos:
+		{ niCavus, qc_("cavus", "landform") },
 			// TRANSLATORS: Distinctive area of broken terrain
-			return qc_("chaos", "landform");
-		case niChasma:
+		{ niChaos, qc_("chaos", "landform") },
 			// TRANSLATORS: A deep, elongated, steep-sided depression
-			return qc_("chasma", "landform");
-		case niCollis:
+		{ niChasma, qc_("chasma", "landform") },
 			// TRANSLATORS: Small hills or knobs
-			return qc_("collis", "landform");
-		case niCorona:
+		{ niCollis, qc_("collis", "landform") },
 			// TRANSLATORS: Ovoid-shaped feature
-			return qc_("corona", "landform");
-		case niCrater:
+		{ niCorona, qc_("corona", "landform") },
 			// TRANSLATORS: A circular depression
-			return qc_("crater", "landform");
-		case niDorsum:
+		{ niCrater, qc_("crater", "landform") },
 			// TRANSLATORS: Ridge
-			return qc_("dorsum", "landform");
-		case niEruptiveCenter:
+		{ niDorsum, qc_("dorsum", "landform") },
 			// TRANSLATORS: Active volcanic centers on Io
-			return qc_("eruptive center", "landform");
-		case niFacula:
+		{ niEruptiveCenter, qc_("eruptive center", "landform") },
 			// TRANSLATORS: Bright spot
-			return qc_("facula", "landform");
-		case niFarrum:
+		{ niFacula, qc_("facula", "landform") },
 			// TRANSLATORS: Pancake-like structure, or a row of such structures
-			return qc_("farrum", "landform");
-		case niFlexus:
+		{ niFarrum, qc_("farrum", "landform") },
 			// TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-			return qc_("flexus", "landform");
-		case niFluctus:
+		{ niFlexus, qc_("flexus", "landform") },
 			// TRANSLATORS: Flow terrain
-			return qc_("fluctus", "landform");
-		case niFlumen:
+		{ niFluctus, qc_("fluctus", "landform") },
 			// TRANSLATORS: Channel on Titan that might carry liquid
-			return qc_("flumen", "landform");
-		case niFretum:
+		{ niFlumen, qc_("flumen", "landform") },
 			// TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
-			return qc_("fretum", "landform");
-		case niFossa:
+		{ niFretum, qc_("fretum", "landform") },
 			// TRANSLATORS: Long, narrow depression
-			return qc_("fossa", "landform");
-		case niInsula:
+		{ niFossa, qc_("fossa", "landform") },
 			// TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-			return qc_("insula", "landform");
-		case niLabes:
+		{ niInsula, qc_("insula", "landform") },
 			// TRANSLATORS: Landslide
-			return qc_("labes", "landform");
-		case niLabyrinthus:
+		{ niLabes, qc_("labes", "landform") },
 			// TRANSLATORS: Complex of intersecting valleys or ridges
-			return qc_("labyrinthus", "landform");
-		case niLacuna:
+		{ niLabyrinthus, qc_("labyrinthus", "landform") },
 			// TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
-			return qc_("lacuna", "landform");
-		case niLacus:
+		{ niLacuna, qc_("lacuna", "landform") },
 			// TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
-			return qc_("lacus", "landform");
-		case niLargeRingedFeature:
+		{ niLacus, qc_("lacus", "landform") },
 			// TRANSLATORS: Cryptic ringed feature
-			return qc_("large ringed feature", "landform");
-		case niLenticula:
+		{ niLargeRingedFeature, qc_("large ringed feature", "landform") },
 			// TRANSLATORS: Small dark spots on Europa
-			return qc_("lenticula", "landform");
-		case niLinea:
+		{ niLenticula, qc_("lenticula", "landform") },
 			// TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-			return qc_("linea", "landform");
-		case niLingula:
+		{ niLinea, qc_("linea", "landform") },
 			// TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
-			return qc_("lingula", "landform");
-		case niMacula:
+		{ niLingula, qc_("lingula", "landform") },
 			// TRANSLATORS: Dark spot, may be irregular
-			return qc_("macula", "landform");
-		case niMare:
+		{ niMacula, qc_("macula", "landform") },
 			// TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
-			return qc_("mare", "landform");
-		case niMensa:
+		{ niMare, qc_("mare", "landform") },
 			// TRANSLATORS: A flat-topped prominence with cliff-like edges
-			return qc_("mensa", "landform");
-		case niMons:
+		{ niMensa, qc_("mensa", "landform") },
 			// TRANSLATORS: Mountain
-			return qc_("mons", "landform");
-		case niOceanus:
+		{ niMons, qc_("mons", "landform") },
 			// TRANSLATORS: A very large dark area on the Moon
-			return qc_("oceanus", "landform");
-		case niPalus:
+		{ niOceanus, qc_("oceanus", "landform") },
 			// TRANSLATORS: "Swamp"; small plain
-			return qc_("palus", "landform");
-		case niPatera:
+		{ niPalus, qc_("palus", "landform") },
 			// TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-			return qc_("patera", "landform");
-		case niPlanitia:
+		{ niPatera, qc_("patera", "landform") },
 			// TRANSLATORS: Low plain
-			return qc_("planitia", "landform");
-		case niPlanum:
+		{ niPlanitia, qc_("planitia", "landform") },
 			// TRANSLATORS: Plateau or high plain
-			return qc_("planum", "landform");
-		case niPlume:
+		{ niPlanum, qc_("planum", "landform") },
 			// TRANSLATORS: Cryo-volcanic features on Triton
-			return qc_("plume", "landform");
-		case niPromontorium:
+		{ niPlume, qc_("plume", "landform") },
 			// TRANSLATORS: "Cape"; headland promontoria
-			return qc_("promontorium", "landform");
-		case niRegio:
+		{ niPromontorium, qc_("promontorium", "landform") },
 			// TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
-			return qc_("regio", "landform");
-		case niReticulum:
+		{ niRegio, qc_("regio", "landform") },
 			// TRANSLATORS: Reticular (netlike) pattern on Venus
-			return qc_("reticulum", "landform");
-		case niRima:
+		{ niReticulum, qc_("reticulum", "landform") },
 			// TRANSLATORS: Fissure
-			return qc_("rima", "landform");
-		case niRupes:
+		{ niRima, qc_("rima", "landform") },
 			// TRANSLATORS: Scarp
-			return qc_("rupes", "landform");
-		case niSatelliteFeature:
+		{ niRupes, qc_("rupes", "landform") },
 			// TRANSLATORS: A feature that shares the name of an associated feature.
-			return qc_("satellite feature", "landform");
-		case niScopulus:
+		{ niSatelliteFeature, qc_("satellite feature", "landform") },
 			// TRANSLATORS: Lobate or irregular scarp
-			return qc_("scopulus", "landform");
-		case niSerpens:
+		{ niScopulus, qc_("scopulus", "landform") },
 			// TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
-			return qc_("serpens", "landform");
-		case niSulcus:
+		{ niSerpens, qc_("serpens", "landform") },
 			// TRANSLATORS: Subparallel furrows and ridges
-			return qc_("sulcus", "landform");
-		case niSinus:
+		{ niSulcus, qc_("sulcus", "landform") },
 			// TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
-			return qc_("sinus", "landform");
-		case niTerra:
+		{ niSinus, qc_("sinus", "landform") },
 			// TRANSLATORS: Extensive land mass
-			return qc_("terra", "landform");
-		case niTessera:
+		{ niTerra, qc_("terra", "landform") },
 			// TRANSLATORS: Tile-like, polygonal terrain
-			return qc_("tessera", "landform");
-		case niTholus:
+		{ niTessera, qc_("tessera", "landform") },
 			// TRANSLATORS: Small domical mountain or hill
-			return qc_("tholus", "landform");
-		case niUnda:
+		{ niTholus, qc_("tholus", "landform") },
 			// TRANSLATORS: Dunes
-			return qc_("unda", "landform");
-		case niVallis:
+		{ niUnda, qc_("unda", "landform") },
 			// TRANSLATORS: Valley
-			return qc_("vallis", "landform");
-		case niVastitas:
+		{ niVallis, qc_("vallis", "landform") },
 			// TRANSLATORS: Extensive plain
-			return qc_("vastitas", "landform");
-		case niVirga:
+		{ niVastitas, qc_("vastitas", "landform") },
 			// TRANSLATORS: A streak or stripe of color
-			return qc_("virga", "landform");
-		case niLandingSite:
+		{ niVirga, qc_("virga", "landform") },
 			// TRANSLATORS: Lunar features at or near Apollo landing sites
-			return qc_("landing site name", "landform");
-		case niUNDEFINED:
-		default:
-			return qc_("undocumented landform type", "landform");
-	}
+		{ niLandingSite, qc_("landing site name", "landform") }};
+	return map.value(nType, qc_("undocumented landform type", "landform"));
 }
 
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
-	switch (nType)
-	{
-		case niArcus:
-			return "arcus";
-		case niAstrum:
-			return "astrum";
-		case niCatena:
-			return "catena";
-		case niCavus:
-			return "cavus";
-		case niChaos:
-			return "chaos";
-		case niChasma:
-			return "chasma";
-		case niCollis:
-			return "collis";
-		case niCorona:
-			return "corona";
-		case niCrater:
-			return "crater";
-		case niDorsum:
-			return "dorsum";
-		case niFacula:
-			return "facula";
-		case niFarrum:
-			return "farrum";
-		case niFlexus:
-			return "flexus";
-		case niFluctus:
-			return "fluctus";
-		case niFlumen:
-			return "flumen";
-		case niFretum:
-			return "fretum";
-		case niFossa:
-			return "fossa";
-		case niInsula:
-			return "insula";
-		case niLabes:
-			return "labes";
-		case niLabyrinthus:
-			return "labyrinthus";
-		case niLacuna:
-			return "lacuna";
-		case niLacus:
-			return "lacus";
-		case niLenticula:
-			return "lenticula";
-		case niLinea:
-			return "linea";
-		case niLingula:
-			return "lingula";
-		case niMacula:
-			return "macula";
-		case niMare:
-			return "mare";
-		case niMensa:
-			return "mensa";
-		case niMons:
-			return "mons";
-		case niOceanus:
-			return "oceanus";
-		case niPalus:
-			return "palus";
-		case niPatera:
-			return "patera";
-		case niPlanitia:
-			return "planitia";
-		case niPlanum:
-			return "planum";
-		case niPlume:
-			return "plume";
-		case niPromontorium:
-			return "promontorium";
-		case niRegio:
-			return "regio";
-		case niReticulum:
-			return "reticulum";
-		case niRima:
-			return "rima";
-		case niRupes:
-			return "rupes";
-		case niScopulus:
-			return "scopulus";
-		case niSerpens:
-			return "serpens";
-		case niSulcus:
-			return "sulcus";
-		case niSinus:
-			return "sinus";
-		case niTerra:
-			return "terra";
-		case niTessera:
-			return "tessera";
-		case niTholus:
-			return "tholus";
-		case niUnda:
-			return "unda";
-		case niVallis:
-			return "vallis";
-		case niVastitas:
-			return "vastitas";
-		case niVirga:
-			return "virga";
-		default:
-			return "";
-	}
+	QMap<NomenclatureItemType, QString>map = {
+		{ niArcus  , "arcus" },
+		{ niAstrum , "astrum" },
+		{ niCatena , "catena" },
+		{ niCavus  , "cavus" },
+		{ niChaos  , "chaos" },
+		{ niChasma , "chasma" },
+		{ niCollis , "collis" },
+		{ niCorona , "corona" },
+		{ niCrater , "crater" },
+		{ niDorsum , "dorsum" },
+		{ niFacula , "facula" },
+		{ niFarrum , "farrum" },
+		{ niFlexus , "flexus" },
+		{ niFluctus, "fluctus" },
+		{ niFlumen , "flumen" },
+		{ niFretum , "fretum" },
+		{ niFossa  , "fossa" },
+		{ niInsula , "insula" },
+		{ niLabes  , "labes" },
+		{ niLabyrinthus, "labyrinthus" },
+		{ niLacuna   , "lacuna" },
+		{ niLacus    , "lacus" },
+		{ niLenticula, "lenticula" },
+		{ niLinea    , "linea" },
+		{ niLingula  , "lingula" },
+		{ niMacula   , "macula" },
+		{ niMare     , "mare" },
+		{ niMensa    , "mensa" },
+		{ niMons     , "mons" },
+		{ niOceanus  , "oceanus" },
+		{ niPalus    , "palus" },
+		{ niPatera   , "patera" },
+		{ niPlanitia , "planitia" },
+		{ niPlanum   , "planum" },
+		{ niPlume    , "plume" },
+		{ niPromontorium, "promontorium" },
+		{ niRegio    , "regio" },
+		{ niReticulum, "reticulum" },
+		{ niRima     , "rima" },
+		{ niRupes    , "rupes" },
+		{ niScopulus , "scopulus" },
+		{ niSerpens  , "serpens" },
+		{ niSulcus   , "sulcus" },
+		{ niSinus    , "sinus" },
+		{ niTerra    , "terra" },
+		{ niTessera  , "tessera" },
+		{ niTholus   , "tholus" },
+		{ niUnda     , "unda" },
+		{ niVallis   , "vallis" },
+		{ niVastitas , "vastitas" },
+		{ niVirga    , "virga" }};
+		return map.value(nType, "");
 }
 
 QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName)
