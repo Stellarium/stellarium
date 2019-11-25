@@ -535,7 +535,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Since V0.13, calibrated&&tanMode also works!
 	// In calibrated && !tan_mode, the vertical position is computed correctly, so that quads off the horizon are larger.
 	// in calibrated &&  tan_mode, d_z can become a constant because the texture is already predistorted in cylindrical projection.
-	const unsigned short int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
+	const unsigned short int stacks = (calibrated ? 16u : 8u); // GZ: 8->16, I need better precision.
 	float z0, d_z;
 	if (calibrated)
 	{
@@ -592,7 +592,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				const float tx1 = tx0 + d_tx;
 				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-				for (unsigned short int k=0u;k<=static_cast<unsigned short>(stacks*2u);k+=2u)
+				for (unsigned short int k=0u;k<=static_cast<unsigned short int>(stacks*2u);k+=2u)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
@@ -609,7 +609,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					ty0 += d_ty;
 				}
 				unsigned short int offset = j*(stacks+1u)*2u;
-				for (unsigned short int k = 2;k<static_cast<unsigned short>(stacks*2u+2u);k+=2u)
+				for (unsigned short int k = 2;k<static_cast<unsigned short int>(stacks*2u+2u);k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;
