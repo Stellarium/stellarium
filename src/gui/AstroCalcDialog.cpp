@@ -5222,7 +5222,8 @@ void AstroCalcDialog::saveWutObjects()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("What's Up Tonight"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
+		if (ui->wutCategoryListWidget->currentRow()>0) // Fixed crash when category of objects is not selected
+			xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
