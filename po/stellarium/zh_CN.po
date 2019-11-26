@@ -10797,11 +10797,11 @@ msgstr "含章动"
 
 #: src/ui_configurationDialog.h:1807
 msgid "Set one color for text in info panel for all objects"
-msgstr "为面板上的所有天体的文字信息设置单一颜色"
+msgstr "屏幕上显示的所有天体文字信息使用单一颜色"
 
 #: src/ui_configurationDialog.h:1809
 msgid "Overwrite text color"
-msgstr "覆盖文字颜色"
+msgstr "单一文字颜色"
 
 #: src/ui_configurationDialog.h:1811
 msgid ""
@@ -12571,7 +12571,7 @@ msgstr "巴洛透镜功能"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Sensor crop overlay feature"
-msgstr "传感器像素框功能"
+msgstr "传感器裁剪叠加层功能"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Overview"
@@ -12615,7 +12615,7 @@ msgstr "因此，我建议您只在有需要时使用它。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 msgid "You can toggle a crosshair in the view."
-msgstr "你可以切换视图中的十字丝。"
+msgstr "您可以切换视图中的十字丝方向。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:513
 #, qt-format
@@ -12713,7 +12713,7 @@ msgstr "在目镜视场边缘显示轮廓线"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1305
 msgid "Show FOV outline"
-msgstr "显示视场轮廓线"
+msgstr "显示目镜视场轮廓线"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1306
 msgid "Scale image circle"
@@ -12753,11 +12753,11 @@ msgstr "星体极限星等"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1322
 msgid "Align the crosshair in equatorial coordinate system"
-msgstr "在赤道坐标系中对齐十字丝"
+msgstr "选中使十字丝对齐赤经赤纬而不是屏幕边框"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1324
 msgid "Align crosshair"
-msgstr "对齐十字丝"
+msgstr "十字丝对齐赤经赤纬"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1325
 msgid "Sensor view"
@@ -12780,15 +12780,15 @@ msgstr "自动切换不同装置类型"
 #: plugins/Oculars/src/ui_ocularDialog.h:1332
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
-msgstr "显示所选取的方形传感器像素框代表的有效像素。"
+msgstr "启用一个正方形叠加层，以显示所设定像素的有效尺寸。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1334
 msgid "Show sensor crop overlay"
-msgstr "显示传感器像素框"
+msgstr "显示传感器裁剪叠加层"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1335
 msgid "Overlay size (px)"
-msgstr "像素框大小（像素）"
+msgstr "叠加层大小（像素）"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1336
 msgid "Enable scaling FOV for CCD"
@@ -12901,7 +12901,7 @@ msgstr "位置角（度）"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1371
 msgid "Off-Axis guider"
-msgstr "离轴导向器"
+msgstr "离轴导星镜"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1372
 msgid "Rotation Angle (degrees):"
@@ -16519,7 +16519,7 @@ msgstr "系外行星设置窗口"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1022
 msgid "Hot"
-msgstr "热"
+msgstr "炎热"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1024
@@ -16529,7 +16529,7 @@ msgstr "温暖"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Cold"
-msgstr "冷"
+msgstr "寒冷"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1029
@@ -16717,7 +16717,7 @@ msgstr "本插件可显示潜在适居系外行星(橙色标识)以及有关这�
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
-msgstr "对潜在适居行星的低可能性样本采用斜体标注。"
+msgstr "斜体文字标记了有关潜在宜居行星的乐观样本的额外信息。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "Planetary Class"
@@ -16729,8 +16729,8 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
-"行星级别源自主星光谱型分类(F、G、K、M)或适居区域(热、暖、冷)或尺寸((迷你地球型, 次地球型, 地球型, 超级地球型,木星型, "
-"海王星型)(地球对应 G-暖-地球型)。"
+"行星分类源自寄主星光谱型 (F、G、K、M) 或宜居带 (炎热、温暖、寒冷) 或尺寸 (迷你地球型, 次地球型, 地球型, 超级地球型,木星型, "
+"海王星型) (地球对应 G-暖-地球型)。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Equilibrium Temperature"
@@ -16743,21 +16743,20 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
-"行星平衡温度是一个理论温度(℃)，简单地将行星作为黑体(假设以0.3为反射率)被其母星加热。如地球的行星平衡温度是18.15℃(255K)。"
+"行星平衡温度是一个理论温度 (℃)，简单地将行星作为黑体(假设以0.3为反射率)被其母星加热。如地球的行星平衡温度是18.15℃ (255K)。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
-msgstr ""
-"实际表面温度预计将比平衡温度高，程度取决于行星大气状况，但这目前是未知的。 (例如, 地球平均全球表面温度大约是 288 K 或15°C)。"
+msgstr "实际表面温度预计将比平衡温度高，程度取决于行星目前未知的大气状况。(例如，地球平均全球表面温度大约是 288 K 或15°C)。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
-msgstr "行星的平均辐射通量 ，用地球的辐射通量表示 (地球 = 1.0 S<sub>E</sub>)。"
+msgstr "行星的平均辐射通量 ，用地球的辐射通量为单位 (地球 = 1.0 S<sub>E</sub>)。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
@@ -16768,7 +16767,7 @@ msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
-msgstr "类地指数的值由0到1，1代表最相似地球，类地指数的值由该行星的半径，质量密度，逃逸速度和表面温度所计算出"
+msgstr "类地指数的值由0到1，1代表最相似地球，类地指数的值由该行星的半径，质量密度，逃逸速度和表面温度所计算出。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Proper names"
@@ -17148,11 +17147,11 @@ msgstr "命名系外行星(国际天文联会)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr "全面专业的关于太阳系外行星的网站"
+msgstr "与系外行星有关的一般专业网站"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr "系外行星插件：XKCD 1071的互动版本"
+msgstr "系外行星：XKCD 1071的互动版本"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "HEK (The Hunt for Exomoons with Kepler)"
@@ -17164,15 +17163,15 @@ msgstr "双星和聚星系统中的地外行星（理查德·施瓦兹）"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Naming exoplanets (IAU)"
-msgstr "命名的系外行星（IAU）"
+msgstr "系外行星命名（IAU）"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
-msgstr "一些天文学家和团体活跃于系外行星的研究"
+msgstr "一些活跃于系外行星的研究的天文学家和团体"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "update: 16 April 2012"
-msgstr "更新：2012年4月16日"
+msgstr "更新日期：2012年4月16日"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Exoplanet Data Explorer"
@@ -17188,11 +17187,11 @@ msgstr "日内瓦太阳系外行星搜寻计划"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr "OLBIN(光学长基线干涉新闻"
+msgstr "OLBIN(光学长基线干涉仪资讯）"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "NASA's Exoplanet Exploration Program"
-msgstr "NASA系外行星系统命名竞赛网站"
+msgstr "NASA的系外行星探索计划"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "Pulsar planets"
@@ -17204,15 +17203,15 @@ msgstr "NASA 系外行星档案"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr "国际天文联会委员会53：太阳系外行星"
+msgstr "IAU委员会53：太阳系外行星"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "ExoMol"
-msgstr "分子谱线列表数据库"
+msgstr "ExoMol：系外行星和其他高温大气的分子谱线列表"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "The Habitable Zone Gallery"
-msgstr "适居带画廊"
+msgstr "宜居带画廊"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "PlanetQuest - The Search for Another Earth"
@@ -17236,19 +17235,19 @@ msgstr "轨道离心率"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
 msgid "Orbit Semi-Major Axis, AU"
-msgstr "轨道半长轴,天文单位"
+msgstr "轨道半长轴, 天文单位"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
 msgid "Planetary Mass, Mjup"
-msgstr "行星质量,M木星"
+msgstr "行星质量, M木星"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
 msgid "Planetary Radius, Rjup"
-msgstr "行星半径,R木星"
+msgstr "行星半径, R木星"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid "Orbital Period, days"
-msgstr "轨道周期，天"
+msgstr "轨道周期, 天"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
 msgid "Angular Distance, arcsec"
@@ -17256,7 +17255,7 @@ msgstr "角距离,角秒"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
 msgid "Effective temperature of host star, K"
-msgstr "主星的有效温度,K"
+msgstr "寄主星的有效温度, K"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid "Year of Discovery"
@@ -17264,31 +17263,31 @@ msgstr "发现年份"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid "Metallicity of host star"
-msgstr "主星的金属量"
+msgstr "寄主星的金属量"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
 msgid "V magnitude of host star, mag"
-msgstr "主星的V星等,星等"
+msgstr "寄主星的V星等, 星等"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
 msgid "RA (J2000) of star, deg"
-msgstr "恒星的赤经 (J2000) , 度"
+msgstr "寄主星赤经 (J2000), 度"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
 msgid "Dec (J2000) of star, deg"
-msgstr "恒星的赤纬 (J2000) , 度"
+msgstr "寄主星赤纬 (J2000), 度"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
 msgid "Distance to star, pc"
-msgstr "恒星距离,秒差距"
+msgstr "寄主星距离, 秒差距"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:567
 msgid "Mass of host star, Msol"
-msgstr "主星的质量,M太阳"
+msgstr "寄主星的质量, M太阳"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:568
 msgid "Radius of host star, Rsol"
-msgstr "主星的半径,R太阳"
+msgstr "寄主星的半径, R太阳"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:602
@@ -17344,11 +17343,11 @@ msgstr "启用太阳系外行星发现的时间线"
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr "显示行星系统，其中包含潜在适居系外行星"
+msgstr "显示包含潜在适居系外行星的行星系统"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr "仅允许显示潜在适居系外行星"
+msgstr "仅显示潜在适居系外行星"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
 msgid "Enable display of designations for exoplanets"

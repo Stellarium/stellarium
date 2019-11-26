@@ -14781,6 +14781,8 @@ msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>Zpoždění připojení</b>: Pokud není pohyb záměrného kříže dalekohledu na "
+"obrazovce rovnoměrný, můžete zkusit tuto hodnotu zvýšit nebo snížit."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
@@ -14789,23 +14791,32 @@ msgid ""
 "use the equinox of the date (EOD, also known as JNow), making necessary this"
 " override."
 msgstr ""
+"<b>Souřadnicový systém</b>: Některé dalekohledy Celestron aktualizovaly svůj"
+" firmware a nyní interpretují souřadnice, které dostávají, jako souřadnice, "
+"které používají epochu k datu (poloha rovníku a ekliptiky odpovídá datu "
+"pozorování, známé také jako JNow), což je potřeba tímto nastavením změnit."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>Spustit/připojit při spuštění</b>: zaškrtněte tuto volbu, pokud chcete, "
+"aby se Stellarium pokusilo připojit k dalekohledu bezprostředně po svém "
+"spuštění."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"V opačném případě musíte dalekohled připojit tak, že otevřete hlavní okno, "
+"vybrat dalekohled a stisknout tlačítko \"Připojit\"."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid "This section is active only for DIRECT connections (see {above})."
-msgstr ""
+msgstr "Tato sekce je aktivní pouze pro PŘÍMÉ připojení (viz {výše})."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
@@ -15386,7 +15397,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Start/connect at startup"
-msgstr "Spustit/přpojit při spuštění"
+msgstr "Spustit/připojit při spuštění"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Serial port:"
@@ -16637,6 +16648,8 @@ msgid ""
 "This plugin was created in the 2015 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
+"Tento zásuvný modul byl vytvořen v roce 2015 v rámci programu ESA Summer of "
+"Code in Space."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:150
 msgid "Remote control"

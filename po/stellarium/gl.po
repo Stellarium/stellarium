@@ -256,12 +256,12 @@ msgstr "ASP"
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:993
 msgid "Apex"
-msgstr ""
+msgstr "Apex"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
 #: src/core/modules/GridLinesMgr.cpp:995
 msgid "Antapex"
-msgstr ""
+msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1005 src/core/modules/Planet.cpp:509
@@ -412,7 +412,7 @@ msgstr "Punto antisolar"
 
 #: src/core/modules/GridLinesMgr.cpp:1342 src/ui_viewDialog.h:2990
 msgid "Apex points"
-msgstr ""
+msgstr "Puntos apex"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Atmosphere"
@@ -2158,7 +2158,7 @@ msgstr "Inicializando localizacións..."
 
 #: src/core/StelApp.cpp:466
 msgid "Initializing HiPS survey..."
-msgstr ""
+msgstr "Inicializando a enquisa HiPS..."
 
 #: src/core/StelApp.cpp:472
 msgid "Initializing Solar System objects..."
@@ -2174,7 +2174,7 @@ msgstr "Inicializando estrelas..."
 
 #: src/core/StelApp.cpp:489
 msgid "Initializing core..."
-msgstr ""
+msgstr "Inicializando o núcleo"
 
 #: src/core/StelApp.cpp:493
 msgid "Initializing deep-sky objects..."
@@ -2194,7 +2194,7 @@ msgstr "Inicializando capa de imaxe do ceo..."
 
 #: src/core/StelApp.cpp:517
 msgid "Initializing TOAST surveys..."
-msgstr ""
+msgstr "Inicializando as enquisas TOAST..."
 
 #: src/core/StelApp.cpp:523
 msgid "Initializing audio..."
@@ -2242,7 +2242,7 @@ msgstr "Inicializando obxectos personalizados..."
 
 #: src/core/StelApp.cpp:583
 msgid "Initializing highlights..."
-msgstr ""
+msgstr "Inicializando o máis destacado..."
 
 #: src/core/StelApp.cpp:591
 msgid "Initializing scripting..."
@@ -2258,7 +2258,7 @@ msgstr "Modo nocturno"
 
 #: src/core/StelApp.cpp:633
 msgid "Initializing SPOUT sender..."
-msgstr ""
+msgstr "Inicializando o envío SPOUT..."
 
 #: src/core/StelApp.cpp:643
 msgid "Cannot create Spout sender. See log for details."
@@ -3164,15 +3164,15 @@ msgstr "Próxima posta do obxecto seleccionado"
 
 #: src/core/StelObjectMgr.cpp:58
 msgid "Today's transit of the selected object"
-msgstr ""
+msgstr "Tránsito de hoxe do obxecto seleccionado"
 
 #: src/core/StelObjectMgr.cpp:59
 msgid "Today's rising of the selected object"
-msgstr ""
+msgstr "Saída hoxe do obxecto seleccionado"
 
 #: src/core/StelObjectMgr.cpp:60
 msgid "Today's setting of the selected object"
-msgstr ""
+msgstr "Configuración para hoxe do obxecto seleccionado"
 
 #: src/core/StelObjectMgr.cpp:61
 msgid "Previous transit of the selected object"
@@ -3658,7 +3658,7 @@ msgstr "Comezar na dirección Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:1062
 msgid "Acknowledgements"
-msgstr ""
+msgstr "Agradecementos"
 
 #: src/gui/ConfigurationDialog.cpp:1064
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
@@ -3953,15 +3953,15 @@ msgstr "mm-dd-aaaa"
 
 #: src/gui/ConfigurationDialog.cpp:1646
 msgid "ww, yyyy-mm-dd"
-msgstr ""
+msgstr "ww, yyyy-mm-dd"
 
 #: src/gui/ConfigurationDialog.cpp:1647
 msgid "ww, dd-mm-yyyy"
-msgstr ""
+msgstr "ww, dd-mm-yyyy"
 
 #: src/gui/ConfigurationDialog.cpp:1648
 msgid "ww, mm-dd-yyyy"
-msgstr ""
+msgstr "ww, mm-dd-yyyy"
 
 #: src/gui/ConfigurationDialog.cpp:1680
 msgid "12-hour format"
@@ -4784,7 +4784,7 @@ msgstr "gráfico de estrelas"
 
 #: src/gui/ScriptConsole.cpp:129
 msgid "Stellarium Script Files"
-msgstr ""
+msgstr "Arquivos Script de Stellarium"
 
 #: src/gui/ScriptConsole.cpp:133
 msgid "Load Script"
@@ -4802,21 +4802,21 @@ msgstr "Seleccionar script incluído no cartafol"
 #: src/gui/ScriptConsole.cpp:299
 msgctxt "text cursor"
 msgid "R"
-msgstr ""
+msgstr "F"
 
 #. TRANSLATORS: The first letter of word "Column"
 #: src/gui/ScriptConsole.cpp:301
 msgctxt "text cursor"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: src/gui/ScriptConsole.cpp:311
 msgid "Stellarium Script"
-msgstr ""
+msgstr "Script de Stellarium"
 
 #: src/gui/ScriptConsole.cpp:313
 msgid "Include File"
-msgstr ""
+msgstr "Inclúe arquivo"
 
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
@@ -5115,7 +5115,7 @@ msgstr "Efemérides"
 
 #: src/gui/AstroCalcDialog.cpp:1893
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuto"
 
 #: src/gui/AstroCalcDialog.cpp:1894
 msgid "10 minutes"
@@ -5346,7 +5346,7 @@ msgstr "Cúmulos de estrelas brillantes (<%1 mag)"
 #: src/gui/AstroCalcDialog.cpp:2057
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
-msgstr ""
+msgstr "Nebulosa planetaria (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:2058
 #, qt-format
@@ -5385,16 +5385,16 @@ msgstr "Obxectos interestelares"
 
 #: src/gui/AstroCalcDialog.cpp:2064
 msgid "Planets and Sun"
-msgstr ""
+msgstr "Planetas e Sol"
 
 #: src/gui/AstroCalcDialog.cpp:2065
 msgid "Sun, planets and moons"
-msgstr ""
+msgstr "Sol, planetas e lúas"
 
 #: src/gui/AstroCalcDialog.cpp:2066
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
-msgstr ""
+msgstr "Obxectos brillantes do Sistema Solar (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:2628
 msgid "Magnitude vs. Time"
@@ -5436,11 +5436,11 @@ msgstr "Altitude de Tránsito vs. Tempo"
 #. you can short it to use in the drop-down list.
 #: src/gui/AstroCalcDialog.cpp:2655
 msgid "Right ascension vs. Time"
-msgstr ""
+msgstr "Ascensión recta vs. Tempo"
 
 #: src/gui/AstroCalcDialog.cpp:2658
 msgid "Declination vs. Time"
-msgstr ""
+msgstr "Declinación vs. Tempo"
 
 #: src/gui/AstroCalcDialog.cpp:2699 src/gui/AstroCalcDialog.cpp:2895
 msgid "Date"
@@ -5474,7 +5474,7 @@ msgstr "Altitude de Tránsito"
 #: src/gui/AstroCalcDialog.cpp:2765 src/gui/AstroCalcDialog.cpp:2823
 msgctxt "axis name"
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensión Recta"
 
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2765 src/gui/AstroCalcDialog.cpp:2823
@@ -5517,7 +5517,7 @@ msgstr "Obxecto 1"
 #. TRANSLATORS: Magnitude of object 1
 #: src/gui/AstroCalcDialog.cpp:3204
 msgid "Mag. 1"
-msgstr ""
+msgstr "Mag. 1"
 
 #: src/gui/AstroCalcDialog.cpp:3205
 msgid "Object 2"
@@ -5526,7 +5526,7 @@ msgstr "Obxecto 2"
 #. TRANSLATORS: Magnitude of object 2
 #: src/gui/AstroCalcDialog.cpp:3207
 msgid "Mag. 2"
-msgstr ""
+msgstr "Mag. 2"
 
 #: src/gui/AstroCalcDialog.cpp:3209
 msgid "Solar Elongation"
@@ -5547,11 +5547,11 @@ msgstr "Fenómenos"
 
 #: src/gui/AstroCalcDialog.cpp:3621
 msgid "Magnitude of first object"
-msgstr ""
+msgstr "Magnitude do primeiro obxecto"
 
 #: src/gui/AstroCalcDialog.cpp:3627
 msgid "Magnitude of second object"
-msgstr ""
+msgstr "Magnitude do segundo obxecto"
 
 #: src/gui/AstroCalcDialog.cpp:3633 src/gui/AstroCalcDialog.cpp:3780
 msgid "Angular distance from the Sun"
@@ -5578,21 +5578,21 @@ msgstr "Eclipse"
 
 #: src/gui/AstroCalcDialog.cpp:3680
 msgid "Greatest eastern elongation"
-msgstr ""
+msgstr "Maior elongación cara ó leste"
 
 #: src/gui/AstroCalcDialog.cpp:3683
 msgid "Greatest western elongation"
-msgstr ""
+msgstr "Maior elongación cara ó oeste"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
 #: src/gui/AstroCalcDialog.cpp:3690
 msgid "Stationary (begin retrograde motion)"
-msgstr ""
+msgstr "Estacionario (inicio de movemento retrógrado)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
 #: src/gui/AstroCalcDialog.cpp:3695
 msgid "Stationary (begin prograde motion)"
-msgstr ""
+msgstr "Estacionario (inicio de movemento prógrado)"
 
 #: src/gui/AstroCalcDialog.cpp:3703 src/gui/AstroCalcDialog.cpp:3918
 msgctxt "passage of the celestial body"
@@ -5607,12 +5607,12 @@ msgstr "Ocultación"
 #: src/gui/AstroCalcDialog.cpp:3731 src/gui/AstroCalcDialog.cpp:3738
 #: src/gui/AstroCalcDialog.cpp:3946 src/gui/AstroCalcDialog.cpp:3953
 msgid "Superior conjunction"
-msgstr ""
+msgstr "Conxunción superior"
 
 #: src/gui/AstroCalcDialog.cpp:3733 src/gui/AstroCalcDialog.cpp:3740
 #: src/gui/AstroCalcDialog.cpp:3948 src/gui/AstroCalcDialog.cpp:3955
 msgid "Inferior conjunction"
-msgstr ""
+msgstr "Conxunción inferior"
 
 #: src/gui/AstroCalcDialog.cpp:3784
 msgid "Angular distance from the Sun for second object"
@@ -6785,7 +6785,7 @@ msgstr "Catálogos de estrelas do sur rodeadas de nebulosidade"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:429
 msgid "Catalogue and distances of optically visible H II regions"
-msgstr ""
+msgstr "Catálogo e distancias de rexións H II opticamente visibles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:431
@@ -7025,7 +7025,7 @@ msgstr "Armintxe Cave"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:537
 msgid "Vanuatu (Netwar)"
-msgstr ""
+msgstr "Vanuatu (Rede de guerra)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:542
@@ -7345,7 +7345,7 @@ msgstr "Analemma de Urano"
 #. TRANSLATORS: Name of script
 #: src/translations.h:672
 msgid "Messier Marathon"
-msgstr ""
+msgstr "Maratón Messier"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:678
@@ -7648,6 +7648,9 @@ msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
+"Maratón Messier do 20 de marzo de 2020. Os datos do script tomáronxe do "
+"arquivo de observación de GaoXing "
+"http://www.xjltp.com/2_huodong/2_030301.htm"
 
 #: src/translations.h:724
 msgid "&Undo"
@@ -9499,10 +9502,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
 msgstr ""
+"Usar datos de polución lumínica da base de datos de localizacións e ignorar "
+"os axustes para a polución lumínica da caixa esquerda"
 
 #: src/ui_viewDialog.h:2590
 msgid "take from locations database"
-msgstr ""
+msgstr "Tirar da base de datos de localizacións"
 
 #: src/ui_viewDialog.h:2592
 msgid "Dim faint stars when a very bright object is visible"
@@ -9529,7 +9534,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2600
 msgid "Only for N latest selected objects:"
-msgstr ""
+msgstr "Só para os obxectos seleccionados máis recentemente ó N"
 
 #: src/ui_viewDialog.h:2602
 msgid ""
@@ -9549,11 +9554,11 @@ msgstr "Amosar órbitas"
 
 #: src/ui_viewDialog.h:2607
 msgid "Show orbit even if planet is off screen"
-msgstr ""
+msgstr "Amosar a órbita aínda que o planeta estea fóra da pantalla"
 
 #: src/ui_viewDialog.h:2609
 msgid "permanently"
-msgstr ""
+msgstr "permanentemente"
 
 #: src/ui_viewDialog.h:2611
 msgid "Configure colors of orbit lines"
@@ -9755,6 +9760,7 @@ msgstr ""
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
+"Catálogo e distancias de rexións H II opticamente visibles (Dickel+, 1969)"
 
 #: src/ui_viewDialog.h:2735
 msgid "Filter by type"
@@ -10164,13 +10170,15 @@ msgstr "Cor de punto antisolar"
 
 #: src/ui_viewDialog.h:2985
 msgid "Color of Apex and Antapex points"
-msgstr ""
+msgstr "Cor dos puntos Apex e Antapex"
 
 #: src/ui_viewDialog.h:2988
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
 msgstr ""
+"Apex e Antapex indican cara a onde o planeta do observador avanza ou "
+"retrocede, respectivamente."
 
 #: src/ui_viewDialog.h:2992
 msgid "Color of precession circles"
@@ -10797,7 +10805,7 @@ msgstr "Usar unidades de medida mag/arcsec^2 para o brillo de superficie"
 
 #: src/ui_configurationDialog.h:1707
 msgid "Use formatting output for coordinates and time"
-msgstr ""
+msgstr "Usar saída con formato para as coordenadas e o tempo"
 
 #: src/ui_configurationDialog.h:1708
 msgid "Use designations for celestial coordinate systems"
@@ -11024,10 +11032,12 @@ msgstr "Incluír nutación"
 #: src/ui_configurationDialog.h:1807
 msgid "Set one color for text in info panel for all objects"
 msgstr ""
+"Establecer unha cor para o texto no panel de información para todos os "
+"obxectos"
 
 #: src/ui_configurationDialog.h:1809
 msgid "Overwrite text color"
-msgstr ""
+msgstr "Sobreescribir cor do texto"
 
 #: src/ui_configurationDialog.h:1811
 msgid ""
@@ -11261,7 +11271,7 @@ msgstr "Saída"
 
 #: src/ui_scriptConsole.h:397
 msgid "Load scripts from the User Directory by default"
-msgstr ""
+msgstr "Cargar scripts dende o cartafol do usuario opor defecto"
 
 #: src/ui_scriptConsole.h:398 plugins/Satellites/src/ui_satellitesDialog.h:796
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
@@ -11347,12 +11357,12 @@ msgstr "Amosar:"
 
 #: src/ui_astroCalcDialog.h:1417
 msgid "Show connecting line between the ephemeris markers"
-msgstr ""
+msgstr "Amosar liña de conexión entre os marcadores de efemérides"
 
 #: src/ui_astroCalcDialog.h:1419
 msgctxt "show line"
 msgid "line"
-msgstr ""
+msgstr "liña"
 
 #: src/ui_astroCalcDialog.h:1421
 msgid "Show markers of positions of the current celestial body on the sky"
@@ -11381,7 +11391,7 @@ msgstr "magnitudes"
 
 #: src/ui_astroCalcDialog.h:1433 src/ui_astroCalcExtraEphemerisDialog.h:143
 msgid "Extra options for ephemeris visualization"
-msgstr ""
+msgstr "Opcións extra para visualización de efemérides"
 
 #: src/ui_astroCalcDialog.h:1436
 msgid "Cleanup ephemerides"
@@ -11423,6 +11433,8 @@ msgid ""
 "Compute ephemeris for all planets visible to the unaided eye (works on Earth"
 " only)"
 msgstr ""
+"Calcular efemérides para todos os planetas visibles a simple vista (funciona"
+" só na Terra)"
 
 #: src/ui_astroCalcDialog.h:1451
 msgid "all naked-eye planets"
@@ -11501,10 +11513,12 @@ msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
 msgstr ""
+"Debuxar só a parte da gráfica na que a altitude é maior có valor dado na "
+"caixa dereita."
 
 #: src/ui_astroCalcDialog.h:1492 src/ui_astroCalcDialog.h:1503
 msgid "Above altitude:"
-msgstr ""
+msgstr "Sobre altitude:"
 
 #: src/ui_astroCalcDialog.h:1494 src/ui_astroCalcDialog.h:1505
 msgid "Altitude limit in degrees"
@@ -11517,6 +11531,7 @@ msgstr "Altitude vs. Tempo"
 #: src/ui_astroCalcDialog.h:1497
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
 msgstr ""
+"Selecciona un obxecto para representar a súa gráfica \"Azimuth vs. Tempo\"."
 
 #: src/ui_astroCalcDialog.h:1498
 msgid "Azimuth vs. Time"
@@ -11620,7 +11635,7 @@ msgstr "Velocidade orbital do segundo corpo celeste:"
 
 #: src/ui_astroCalcDialog.h:1547
 msgid "Orbital periods ratio:"
-msgstr ""
+msgstr "Relación dos períodos orbitais:"
 
 #: src/ui_astroCalcDialog.h:1549
 msgid "Data"
@@ -11636,19 +11651,19 @@ msgstr ""
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:141
 msgid "Extra options"
-msgstr ""
+msgstr "Opcións extra:"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:144
 msgid "Label each N steps, where N is"
-msgstr ""
+msgstr "Etiquetar cada N pasos, onde N é"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:145
 msgid "Use smart format for dates"
-msgstr ""
+msgstr "Usar formato intelixente para as datas"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:146
 msgid "Use small markers, when line is enabled"
-msgstr ""
+msgstr "Usar marcadores pequenos cando a liña estea activada"
 
 #: src/ui_bookmarksDialog.h:207
 msgid "Add date and time"
@@ -12828,7 +12843,7 @@ msgstr "Característica de lente Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Sensor crop overlay feature"
-msgstr ""
+msgstr "Función de superposición de recorte do sensor"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Overview"
@@ -12884,7 +12899,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 msgid "You can toggle a crosshair in the view."
-msgstr ""
+msgstr "Podes alternar unha cruceta na vista"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:513
 #, qt-format
@@ -12984,11 +12999,11 @@ msgstr "Amosar botón de oculares na barra"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1303
 msgid "Show border circle"
-msgstr ""
+msgstr "Amosar o círculo do bordo"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1305
 msgid "Show FOV outline"
-msgstr ""
+msgstr "Amosar as marcas de FOV"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1306
 msgid "Scale image circle"
@@ -13012,11 +13027,11 @@ msgstr "Usar máscara semitransparente"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1314
 msgid "Show cardinal directions in equatorial coordinate system"
-msgstr ""
+msgstr "Amosar direccións cardinais no sistema de coordenadas ecuatorial"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1316
 msgid "Show compass rose"
-msgstr ""
+msgstr "Amosar a rosa do compás"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1318
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -13029,11 +13044,11 @@ msgstr "Limitar a magnitude estelar"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1322
 msgid "Align the crosshair in equatorial coordinate system"
-msgstr ""
+msgstr "Aliñar a cruceta no sistema de coordenadas ecuatorial"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1324
 msgid "Align crosshair"
-msgstr ""
+msgstr "Aliñar a cruceta"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1325
 msgid "Sensor view"
@@ -13059,18 +13074,20 @@ msgstr "Activa a selección automática do tipo de montura"
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
 msgstr ""
+"Habilitar un cadrado superposto que amose o tamaño efectivo dun número de "
+"píxeles."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1334
 msgid "Show sensor crop overlay"
-msgstr ""
+msgstr "Amosar superposición de recorte do sensor"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1335
 msgid "Overlay size (px)"
-msgstr ""
+msgstr "Tamaño da superposición (px)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1336
 msgid "Enable scaling FOV for CCD"
-msgstr ""
+msgstr "Habilitar a escala de FOV para CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1337
 msgid "Telrad view"
@@ -15447,7 +15464,7 @@ msgstr "&Mover"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:359
 msgid "Sync"
-msgstr ""
+msgstr "Sinc"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:360
 msgid "Configure &telescopes..."
@@ -16776,6 +16793,8 @@ msgid ""
 "This plugin was created in the 2015 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
+"Este complemento creouse na campaña 2015 do programa ESA Summer of Code in "
+"Space."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:150
 msgid "Remote control"
@@ -16816,12 +16835,12 @@ msgstr "Este plugin usa o {QtWebApp HTTP server} de Stefan Frings."
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:172
 msgid "Publications"
-msgstr ""
+msgstr "Publicacións"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:173
 msgid "If you use this plugin in your publications, please cite:"
-msgstr ""
+msgstr "Se usas este plugin nas túas publicacións, por favor,  fai unha cita:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:145
@@ -16906,6 +16925,8 @@ msgid ""
 "This plugin was created in the 2015/2016 campaigns of the ESA Summer of Code"
 " in Space programme."
 msgstr ""
+"Este complemento creouse nas campañas 2015/2016 do programa ESA Summer of "
+"Code in Space."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:119
 #, qt-format
@@ -18689,6 +18710,8 @@ msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
+"Este complemento creouse na campaña 2013 do programa ESA Summer of Code in "
+"Space."
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:642
 msgid ""
@@ -19854,6 +19877,12 @@ msgid ""
 " view (i.e. zoom in for fine adjustments). You can even keep moving by "
 "releasing Ctrl before cursor key.</p>"
 msgstr ""
+"<p>Visualizador en 3D. Camiña, busca e evita obstrucións no teu xardín, "
+"busca e demostra posibles aliñacións astronómicas nos templos, ver sombras "
+"en reloxo de sol, etc.</p><p>Para moverte, preme Ctrl + teclas de cursor. "
+"Para elevar a altura dos ollos, usa Ctrl + PgUp / PgDn. A velocidade de "
+"movemento está ligada ao campo de visión (é dicir, facer zoom para axustes "
+"finos). Podes mover e soltar Ctrl antes da tecla do cursor.</p>"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:1124
 msgid ""
@@ -19863,6 +19892,11 @@ msgid ""
 "Institute for Archaeological Prospection and Virtual Archaeology, Vienna, "
 "Austria (http://archpro.lbg.ac.at/)."
 msgstr ""
+"O desenvolvemento deste complemento estivo desenvolvido en parte polo "
+"proxecto ASTROSIM (PF 21208-G19; https://astrosim.univie.ac.at/). <br/>O "
+"desenvolvemento continúa apoiado en parte polo Instituto Ludwig Boltzmann de"
+" Prospección Arqueolóxica e Arqueoloxía Virtual, Viena, Austria "
+"(http://archpro.lbg.ac.at/)."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:398
 msgid "Scenery3d shader error, can't draw. Check debug output for details."

@@ -438,7 +438,6 @@ QString StelLocaleMgr::shortDayName(int weekday)
 
 QString StelLocaleMgr::longDayName(int weekday)
 {
-
 	QStringList weekdays = {
 		qc_("Sunday",    "long day name"),
 		qc_("Monday",    "long day name"),

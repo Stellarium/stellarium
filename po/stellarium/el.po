@@ -5518,7 +5518,7 @@ msgstr "Γαλαξίες"
 #: src/gui/AstroCalcDialog.cpp:4581 src/translations.h:319
 #: src/ui_viewDialog.h:2745 src/ui_dsoColorsDialog.h:568
 msgid "Open star clusters"
-msgstr ""
+msgstr "Άνοιγμα αστρικών σμηνών"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:4590 src/translations.h:325
@@ -5569,7 +5569,7 @@ msgstr "Σμήνη γαλαξιών"
 #: src/gui/AstroCalcDialog.cpp:4601 src/translations.h:321
 #: src/ui_viewDialog.h:2747 src/ui_dsoColorsDialog.h:551
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Σφαιρωτά αστρικά σμήνη"
 
 #. TRANSLATORS: angular size
 #: src/gui/AstroCalcDialog.cpp:4672
@@ -6516,12 +6516,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:383 src/ui_viewDialog.h:2697
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Κατάλογος Μεσιέ"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:385 src/ui_viewDialog.h:2691
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Κατάλογος Caldwell"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:387
@@ -9199,7 +9199,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2558
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Περιορισμός μεγέθους αστέρων"
 
 #: src/ui_viewDialog.h:2560 src/ui_viewDialog.h:2652 src/ui_viewDialog.h:2760
 msgid "Limit magnitude:"
@@ -9221,16 +9221,17 @@ msgstr "Ουρανός"
 
 #: src/ui_viewDialog.h:2564
 msgid "Milky Way brightness/saturation:"
-msgstr ""
+msgstr "Φωτεινότητα/κορεσμός Γαλαξία:"
 
 #: src/ui_viewDialog.h:2566
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
+"Αλλαγή κορεσμού από πλήρως ακόρεστο (0.00) στην προεπιλεγμένη (1.00) τιμή."
 
 #: src/ui_viewDialog.h:2568
 msgid "Atmosphere visualization"
-msgstr ""
+msgstr "Ατμοσφαιρική απεικόνιση"
 
 #: src/ui_viewDialog.h:2570
 msgid "pressure, temperature, extinction coefficient"
@@ -9264,13 +9265,15 @@ msgstr "Φωτορύπανση:"
 
 #: src/ui_viewDialog.h:2586 src/ui_astroCalcDialog.h:1447
 msgid "or"
-msgstr ""
+msgstr "ή"
 
 #: src/ui_viewDialog.h:2588
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
 msgstr ""
+"Χρήση δεδομένων φωτορύπανσης από βάση τοποθεσιών και αγνόηση ρυθμίσεων  για "
+"φωτορύπανση στο αριστερό κουτί."
 
 #: src/ui_viewDialog.h:2590
 msgid "take from locations database"
@@ -9287,7 +9290,7 @@ msgstr "Δυναμική προσαρμογή ματιού"
 
 #: src/ui_viewDialog.h:2595
 msgid "Solar System objects"
-msgstr ""
+msgstr "Ανικείμενα ηλιακού συστήματος"
 
 #: src/ui_viewDialog.h:2596
 msgid "Hide nomenclature on the celestial body of observer"
@@ -9315,15 +9318,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2605
 msgid "Show orbits"
-msgstr ""
+msgstr "Εμφάνιση τροχιών"
 
 #: src/ui_viewDialog.h:2607
 msgid "Show orbit even if planet is off screen"
-msgstr ""
+msgstr "Εμφάνιση τροχίας ακόμη κι αν ο πλανήτης είναι εκτός οθόνης"
 
 #: src/ui_viewDialog.h:2609
 msgid "permanently"
-msgstr ""
+msgstr "μόνιμα"
 
 #: src/ui_viewDialog.h:2611
 msgid "Configure colors of orbit lines"
@@ -9614,15 +9617,15 @@ msgstr "Ισημερινό πλέγμα (J2000.0)"
 
 #: src/ui_viewDialog.h:2789
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Χρώμα ισημερινού πλέγματος (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2792
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Ισημερινές συντεταγμένες τρέχουσας ημερομηνίας και πλανήτη"
 
 #: src/ui_viewDialog.h:2794
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Ισημερινό πλέγμα (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2796
 msgid "Color of the ecliptical grid (J2000.0)"
@@ -9688,7 +9691,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2837
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Ισημερίες (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2839
 msgid "Color of the solstice points (J2000.0)"
@@ -9704,7 +9707,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2847
 msgid "Solstices (of date)"
-msgstr ""
+msgstr "Ηλιοστάσια (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2849
 msgid "Color of equator (J2000.0)"
@@ -9712,7 +9715,7 @@ msgstr "Χρώμα ισημερινού (J2000.0)"
 
 #: src/ui_viewDialog.h:2852
 msgid "Show celestial equator of J2000.0."
-msgstr "Εμφάνιση ουράνιου ησημερινού J2000.0."
+msgstr "Εμφάνιση ουράνιου ησιμερινού J2000.0."
 
 #: src/ui_viewDialog.h:2854
 msgid "Equator (J2000)"
@@ -9720,7 +9723,7 @@ msgstr "Ισημερινός (J2000)"
 
 #: src/ui_viewDialog.h:2856
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Χρώμα ισημερινού (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2859
 msgid "Show celestial equator of current planet and date."
@@ -9728,7 +9731,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2861
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Ισημερινός (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2863
 msgid "Color of ecliptic (J2000.0)"
@@ -9744,19 +9747,19 @@ msgstr "Εκλειπτική (J2000)"
 
 #: src/ui_viewDialog.h:2870
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Χρώμα εκλειπτικής (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2873
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Εμφάνιση εκληπτικής γραμμής τρέχουσας ημερομηνίας."
 
 #: src/ui_viewDialog.h:2875
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Εκλειπτική (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2877
 msgid "Color of horizon"
-msgstr ""
+msgstr "Χρώμα ορίζοντα"
 
 #: src/ui_viewDialog.h:2880
 msgid "Show mathematical horizon line."
@@ -9838,11 +9841,11 @@ msgstr "Εμφάνιση ουράνιων πόλων J2000.0."
 
 #: src/ui_viewDialog.h:2938
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Ουράνιοι πόλοι (J2000)"
 
 #: src/ui_viewDialog.h:2940
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "Χρώμα ουράνιων πόλων (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2943
 msgid "Show celestial poles of current planet and date."
@@ -9850,47 +9853,47 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2945
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "Ουράνιοι πόλοι (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2947
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Χρώμα εκλειπτικών πόλων (J2000.0)"
 
 #: src/ui_viewDialog.h:2950
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Εμφάνιση εκλειπτικών πόλων J2000.0"
 
 #: src/ui_viewDialog.h:2952
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Εκλειπτικοί πόλοι (J2000)"
 
 #: src/ui_viewDialog.h:2954
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "Χρώμα εκλειπτικών πόλων (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2957
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "Εμφάνιση εκλειπτικών πόλων τρέχουσας ημερομηνίας."
 
 #: src/ui_viewDialog.h:2959
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "Εκλειπτικοί πόλοι (ημερομηνίας)"
 
 #: src/ui_viewDialog.h:2961
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "Χρώμα Ζενίθ και Ναδίρ"
 
 #: src/ui_viewDialog.h:2963
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "Ζενίθ και Ναδίρ"
 
 #: src/ui_viewDialog.h:2965
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Χρώμα γαλαξιακών πόλων"
 
 #: src/ui_viewDialog.h:2969
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Χρώμα υπεργαλακτικών πόλων"
 
 #: src/ui_viewDialog.h:2973
 msgid "Color of the opposition/conjunction longitude line"
@@ -9918,7 +9921,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2992
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Χρώμα κύκλων μετάπτωσης"
 
 #: src/ui_viewDialog.h:2995
 msgid ""
@@ -9928,7 +9931,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2997
 msgid "Precession circles"
-msgstr ""
+msgstr "Κύκλοι μετάπτωσης"
 
 #: src/ui_viewDialog.h:2999
 msgid "Show fog"
@@ -10018,11 +10021,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3041
 msgid "Color of constellation boundaries"
-msgstr ""
+msgstr "Χρώμα ορίων αστερισμών"
 
 #: src/ui_viewDialog.h:3044
 msgid "Show boundaries of constellations"
-msgstr ""
+msgstr "Εμφάνιση ορίων αστερισμών"
 
 #: src/ui_viewDialog.h:3046
 msgid "Show boundaries"
