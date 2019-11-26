@@ -47,7 +47,7 @@
 #include "ui_bookmarksDialog.h"
 #include "ui_bookmarksListNameDialog.h"
 
-//CONSTRUCTOR
+//!CONSTRUCTOR
 BookmarksDialog::BookmarksDialog(QObject *parent): StelDialog("Bookmarks", parent) , bookmarksListNameDialog(Q_NULLPTR)
 {
 	ui = new Ui_bookmarksDialogForm;
@@ -59,10 +59,10 @@ BookmarksDialog::BookmarksDialog(QObject *parent): StelDialog("Bookmarks", paren
     jsonFilePath = "";
 }
 
-//DESTRUCTOR
+//!DESTRUCTOR
 BookmarksDialog::~BookmarksDialog()
 {
-	delete ui;
+    delete ui;
 	delete bookmarksListModel;
     
     if(bookmarksListNameDialog){
@@ -246,8 +246,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		int lastRow = bookmarksListModel->rowCount();
 		QString uuid = QUuid::createUuid().toString();
 		addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
-
-		bookmark bm;
+		
+        bookmark bm;
 		bm.name	= name;
 		if (!nameI18n.isEmpty())
         {

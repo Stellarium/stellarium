@@ -37,7 +37,6 @@ class BookmarksListNameDialog :  public StelDialog
     
 public:
     BookmarksListNameDialog();
-
     BookmarksListNameDialog(const BookmarksListNameDialog& other);
 
     /**
