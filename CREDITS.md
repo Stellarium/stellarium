@@ -688,6 +688,9 @@
 	4.103 Images of NGC2022 from ESA/Hubble & NASA, R. Wade
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
+	4.104 Images of NGC654 from Antonio F. Sanchez
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
