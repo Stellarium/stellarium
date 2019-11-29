@@ -375,7 +375,7 @@
 	     License: Creative Commons Attribution 4.0 International
 	4.22 Images of SMC (Magellanic Clouds) from Albert Van
 	     Donkelaar
-	4.23 Images of NGC1365, NGC6726, NGC6744, NGC7293
+	4.23 Images of NGC1365, NGC6726, NGC6744
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
@@ -690,6 +690,9 @@
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
 	4.104 Images of NGC654 from Antonio F. Sanchez
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.105 Images of NGC7293 from Radan Mitrovi
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
