@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>701</width>
-    <height>507</height>
+    <height>607</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -196,6 +196,79 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
+               <property name="text">
+                <string>Show resolution criteria</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialDirection">
+               <property name="toolTip">
+                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore direction to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="checkBoxToolbarButton">
+               <property name="text">
+                <string>Show oculars button on toolbar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="arrowButtonScaleLabel">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="text">
+                  <string>Arrow button scale (requires restart)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>80</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2.500000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.050000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="3" column="0">
               <layout class="QHBoxLayout" name="guiPanelHorizontalLayout">
                <item>
@@ -252,78 +325,18 @@
                </item>
               </layout>
              </item>
-             <item row="11" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <item>
-                <widget class="QLabel" name="arrowButtonScaleLabel">
-                 <property name="toolTip">
-                  <string/>
-                 </property>
-                 <property name="text">
-                  <string>Arrow button scale (requires restart)</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>2.500000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.050000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.500000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
-               <property name="text">
-                <string>Show resolution criteria</string>
+             <item row="12" column="0">
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxInitialFOV">
-               <property name="toolTip">
-                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
                </property>
-               <property name="text">
-                <string>Restore FOV to initial values</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxInitialDirection">
-               <property name="toolTip">
-                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore direction to initial values</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="checkBoxToolbarButton">
-               <property name="text">
-                <string>Show oculars button on toolbar</string>
-               </property>
-              </widget>
+              </spacer>
              </item>
             </layout>
            </widget>

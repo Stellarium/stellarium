@@ -5,6 +5,8 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
+# Alexander Wolf <alex.v.wolf@gmail.com>, 2019
+# Jon Saalbach <jon.saalbach@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2019-11-18 19:45+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Jon Saalbach <jon.saalbach@gmail.com>, 2019\n"
 "Language-Team: Danish (https://www.transifex.com/stellarium/teams/80998/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +54,7 @@ msgstr ""
 
 #: src/core/modules/Asterism.cpp:211
 msgid "asterism"
-msgstr ""
+msgstr "asterisme"
 
 #: src/core/modules/AsterismMgr.cpp:96
 #: src/core/modules/ConstellationMgr.cpp:144 src/core/modules/StarMgr.cpp:459
@@ -70,11 +72,11 @@ msgstr "Visningsindstillinger"
 
 #: src/core/modules/AsterismMgr.cpp:97
 msgid "Asterism lines"
-msgstr ""
+msgstr "asterismelinier"
 
 #: src/core/modules/AsterismMgr.cpp:98
 msgid "Asterism labels"
-msgstr ""
+msgstr "asterismeetiketter"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
@@ -2198,7 +2200,7 @@ msgstr ""
 
 #: src/core/StelApp.cpp:539
 msgid "Initializing asterisms..."
-msgstr ""
+msgstr "Initialiserer asterismer..."
 
 #: src/core/StelApp.cpp:545
 msgid "Initializing landscape..."
@@ -4373,6 +4375,8 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Anvender en 3D polygonmodel for udvalgte små objekter (små måner, "
+"asteroider, kometer) i stedet for en sfærisk tilnærmelse"
 
 #: src/gui/ViewDialog.cpp:819
 msgid ""
@@ -5428,7 +5432,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3680
 msgid "Greatest eastern elongation"
-msgstr ""
+msgstr "Største østlige elongation"
 
 #: src/gui/AstroCalcDialog.cpp:3683
 msgid "Greatest western elongation"
@@ -5760,22 +5764,22 @@ msgstr "V"
 #. TRANSLATORS: Ordinals names: Northeast
 #: src/translations.h:43
 msgid "NE"
-msgstr ""
+msgstr "NØ"
 
 #. TRANSLATORS: Ordinals names: Southeast
 #: src/translations.h:45
 msgid "SE"
-msgstr ""
+msgstr "SØ"
 
 #. TRANSLATORS: Ordinals names: Southwest
 #: src/translations.h:47
 msgid "SW"
-msgstr ""
+msgstr "SV"
 
 #. TRANSLATORS: Ordinals names: Northwest
 #: src/translations.h:49
 msgid "NW"
-msgstr ""
+msgstr "NV"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
@@ -5860,7 +5864,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:108
 msgid "Asterisms"
-msgstr ""
+msgstr "Asterismer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:110
@@ -10074,11 +10078,11 @@ msgstr "Vælg hvis du vil have navne forkortet, oversat eller oprindelige"
 
 #: src/ui_viewDialog.h:3034
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "Farve for asterismelinier"
 
 #: src/ui_viewDialog.h:3036
 msgid "Show asterism lines"
-msgstr ""
+msgstr "Vis asterismelinier"
 
 #: src/ui_viewDialog.h:3038 src/ui_viewDialog.h:3048 src/ui_viewDialog.h:3055
 #: src/ui_viewDialog.h:3063
@@ -10123,11 +10127,11 @@ msgstr "Brug denne himmelkultur som standard"
 
 #: src/ui_viewDialog.h:3067
 msgid "Color of asterism names"
-msgstr ""
+msgstr "Farve for asterismenavne"
 
 #: src/ui_viewDialog.h:3069
 msgid "Show asterism labels"
-msgstr ""
+msgstr "Vis asterismeetiketter"
 
 #: src/ui_viewDialog.h:3070
 msgid "Constellations font size"
@@ -10135,7 +10139,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3071
 msgid "Asterisms font size"
-msgstr ""
+msgstr "Asterisme skriftstørrelse"
 
 #: src/ui_viewDialog.h:3078
 msgctxt "Solar system objects"
@@ -10497,7 +10501,7 @@ msgstr "Vis spejlvendingsknapper"
 
 #: src/ui_configurationDialog.h:1656
 msgid "Show asterism lines button"
-msgstr ""
+msgstr "Vis asterismelinier-knap"
 
 #: src/ui_configurationDialog.h:1658
 msgid "Toggle display of nebula images."
@@ -10509,7 +10513,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1661
 msgid "Show asterism labels button"
-msgstr ""
+msgstr "Vis asterismelinier-knap"
 
 #: src/ui_configurationDialog.h:1663
 msgid "A button to toggle ecliptic grid of date"

@@ -10680,11 +10680,11 @@ msgstr "地形中心坐標系統"
 
 #: src/ui_configurationDialog.h:1750
 msgid "Flash a short message when toggling mount mode."
-msgstr "當切換支架模式時顯示一個簡短訊息"
+msgstr "當切換架台型式時顯示一個簡短訊息"
 
 #: src/ui_configurationDialog.h:1752
 msgid "Indication for mount mode"
-msgstr "標示支架模式"
+msgstr "標示架台模式"
 
 #: src/ui_configurationDialog.h:1753
 msgid "Dithering"
@@ -13851,12 +13851,12 @@ msgstr "移動望遠鏡到設定的座標"
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
-msgstr "任何相容於 Meade's AutoStar 控制器的望遠鏡或望遠鏡支架。"
+msgstr "任何相容於 Meade's AutoStar 控制器的望遠鏡或望遠鏡架台。"
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1723
 msgid "Any telescope or telescope mount compatible with Meade LX200."
-msgstr "任何相容於 Meade LX200 的望遠鏡或望遠鏡支架。"
+msgstr "任何相容於 Meade LX200 的望遠鏡或望遠鏡架台。"
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1725
@@ -13868,7 +13868,7 @@ msgstr "使用 #494 Autostar 控制器和 #506 連接線組的 Meade's ETX70"
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1727
 msgid "Losmandy's G-11 telescope mount."
-msgstr "Losmandy's G-11 望遠鏡支架"
+msgstr "Losmandy's G-11 望遠鏡架台"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
@@ -13879,7 +13879,7 @@ msgstr "在 Meade LX200 模擬模式時使用 Wildcard Innovations 的 Argo Navi
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1731
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
-msgstr "任何相容 Celestron NexStar 的望遠鏡或望遠鏡支架。"
+msgstr "任何相容 Celestron NexStar 的望遠鏡或望遠鏡架台。"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
@@ -13887,13 +13887,13 @@ msgstr "任何相容 Celestron NexStar 的望遠鏡或望遠鏡支架。"
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
-msgstr "任何使用第三版或更新的 SynScan 操控器的 Sky-Watcher 支架。"
+msgstr "任何使用第3版或更新的 SynScan 操控器的 Sky-Watcher 架台。"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1735
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
-msgstr "Sky-Watcher SynScan AZ GOTO  支架被許多望遠鏡款式使用。"
+msgstr "Sky-Watcher SynScan AZ GOTO  架台被許多望遠鏡款式使用。"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:286
 msgid "Read-only telescope"
@@ -14668,7 +14668,7 @@ msgstr "任何使用 NexStar 介面的裝置"
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
-msgstr "一個由 Losmandy 所製造的電腦化望遠鏡支架(Meade LX-200/Autostar 介面)。"
+msgstr "一個由 Losmandy 所製造的電腦化望遠鏡架台(Meade LX-200/Autostar 介面)。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
@@ -14692,7 +14692,7 @@ msgstr "根據測試者回報，它有點慢，所以它的「%1連接延遲%2�
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
-msgstr "適用於使用 Sky-Watcher SynScan AZ GoTo 支架的一些望遠鏡。"
+msgstr "適用於使用 Sky-Watcher SynScan AZ GoTo 架台的一些望遠鏡。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
 msgid ""
@@ -14701,7 +14701,7 @@ msgid ""
 "controller version 3.0 or greater is supported by the plug-in, as it uses "
 "the NexStar protocol."
 msgstr ""
-"<b>SynScan</b> 也是使用在 Sky-Watcher GoTo 支架的其他手動控制器名稱，而且只要使用 SynScan "
+"<b>SynScan</b> 也是使用在 Sky-Watcher GoTo 架台的其他手動控制器名稱，而且只要使用 SynScan "
 "控制器版本3.0或以後的都可以被這個外掛程式支援，它似乎使用 NexStar 的通訊協定。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
