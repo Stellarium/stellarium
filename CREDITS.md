@@ -363,7 +363,7 @@
 	     from Aldeabaran66
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.19 Images of M20, M21, M47, NGC3324, NGC7590, RCW158
+	4.19 Images of M21, M47, NGC3324, NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
 	4.20 Images of NGC1532
@@ -429,7 +429,7 @@
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.39 Images of M4, M12, M14, M19, M22, M55, M56, M62, M88, M92, M108, 
+	4.39 Images of M4, M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
 	     M109, IC5146, NGC225, NGC663, NGC891, NGC1931, NGC6823, NGC7814
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
