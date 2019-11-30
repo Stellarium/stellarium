@@ -456,7 +456,7 @@
  	4.43 Images of M33, M42, NGC253, NGC2170, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
 	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC6334, NGC6357,
-	     NGC6726, SMC (Hydrogen Alpha)
+	     NGC6726, NGC7293, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
 	     License: public domain
@@ -690,9 +690,6 @@
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
 	4.104 Images of NGC654 from Antonio F. Sanchez
-	      https://commons.wikimedia.org/wiki/
-	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.105 Images of NGC7293 from Radan Mitrovi
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
