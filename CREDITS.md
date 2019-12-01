@@ -555,7 +555,7 @@
 	     from Klaus Hohmann
 	     https://commons.wikimedia.org/wiki
 	     License: Creative Commons Attribution-Share Alike 3.0 Germany
-	4.69 Images of NGC5286
+	4.69 Images of NGC5286, RCW53
 	     from Kong Fanxi
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.70 Images of NGC5897
