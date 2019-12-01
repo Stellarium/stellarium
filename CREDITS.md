@@ -399,7 +399,7 @@
 	4.28 Images of IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
-	     NGC4038-4039, NGC5257, NGC5307, NGC6027, NGC6050, NGC6369, NGC6826, NGC7742, IC883,
+	     NGC4038-4039, NGC5257, NGC6027, NGC6050, NGC6369, NGC6826, NGC7742, IC883,
 	     IC4406, PGC2248, PGC3589, UGC1810, UGC8335, UGC9618, Red Rectangle and Calabash Nebula
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
@@ -443,7 +443,7 @@
 	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
 	     NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
 	     NGC5216, NGC5248, NGC5426NGC5466, NGC6302, NGC6522, NGC6563, NGC6781, NGC6894, NGC7000,
-	     NGC7354, SH2-136, UGC3697, Abell31, Abell33, Abell39, Cassiopeia A, LBN438, Wild's Triplet
+	     NGC7354, SH2-136, UGC3697, Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
