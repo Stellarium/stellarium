@@ -64,10 +64,10 @@
 	{
 		"imageCredits": {"short" : "Dylan O'Donnell", "infoUrl": "http://deography.com/m8-lagoon-nebula-ngc6559/"},
 		"imageUrl" : "m8.png",
-		"worldCoords" : [[[272.8181,-25.2821], [270.1585,-25.2721], [270.1911,-22.8681], [272.8031,-22.8771]]],
+		"worldCoords" :	[[[272.9501,-25.1911],[270.2975,-25.3538],[270.1469,-22.9536],[272.7492,-22.7959]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 1.412181098,
-		"maxBrightness" : 14.1
+		"maxBrightness" : 13.8
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
@@ -2183,6 +2183,14 @@
 		"maxBrightness" : 13.4
 	},
 	{
+		"imageCredits" : {"short" : "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble","infoUrl": "https://www.spacetelescope.org/images/opo0733e/"},
+		"imageUrl" : "n5307.png",
+		"worldCoords" :	[[[207.7727, -51.2089],[207.7584,-51.2115],[207.7543,-51.2025],[207.7686,-51.2]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.9
+	},
+	{
 		"imageCredits": {"short" : "SDSS"},
 		"imageUrl" : "n5053-sdss.png",
 		"worldCoords" :	[[[199.2342, 17.5678],[198.9707,17.5678],[198.9705,17.8185],[199.2343,17.8185]]],	
@@ -3713,6 +3721,14 @@
 		"maxBrightness" : 14.3
 	},
 	{
+		"imageCredits" : {"short" : "Kong Fanxi"},
+		"imageUrl" : "rcw53.png",
+		"worldCoords" :	[[[159.9675,-58.9628], [157.3934,-58.9739], [157.4259,-57.6485], [159.9024,-57.6389]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.9
+	},
+	{
 		"imageCredits" : {"Short": "Trevor Gerdes", "infoUrl": "http://www.sarcasmogerdes.com/"},
 		"imageUrl" : "rcw158-trev.png",
 		"worldCoords" : [[[ 272.1720, -14.7860], [ 271.0250, -14.7750], [ 271.0365, -13.6690], [ 272.1810, -13.6800]]],
@@ -3920,13 +3936,37 @@
 		"minResolution" : 0.266023154,
 		"maxBrightness" : 14.7
 	},
-		{
+	{
 		"imageCredits" : {"short" : "Hubble Space Telescope","infoUrl": "https://commons.wikimedia.org/wiki/File:Barnard_175.jpg"},
 		"imageUrl" : "vdb152.png",
 		"worldCoords" : [[[334.0176,70.1601], [333.0047,70.1604], [332.9964,70.5039], [334.0241,70.5037]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.266023154,
 		"maxBrightness" : 13.8
+	},
+	{
+		"imageCredits" : {"Short": "Adam Block/Mount Lemmon SkyCenter/University of Arizona", "infoUrl": "http://www.caelumobservatory.com/gallery/abell31.shtml"},
+		"imageUrl" : "abell31.png",
+		"worldCoords" :	[[[133.7808, 8.8209],[133.4686,8.6704],[133.3161,8.9789],[133.6286,9.1295]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 15.5
+	},
+	{
+		"imageCredits" : {"Short": "Adam Block/Mount Lemmon SkyCenter/University of Arizona", "infoUrl": "http://www.caelumobservatory.com/gallery/abell33.shtml"},
+		"imageUrl" : "abell33.png",
+		"worldCoords" :	[[[144.8349, -2.8697],[144.7298,-2.8559],[144.7437,-2.751],[144.8487,-2.7648]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 15.6
+	},
+	{
+		"imageCredits" : {"Short": "Adam Block/Mount Lemmon SkyCenter/University of Arizona", "infoUrl": "http://www.caelumobservatory.com/gallery/abell39.shtml"},
+		"imageUrl" : "abell39.png",
+		"worldCoords" :	[[[246.9205, 27.8802],[246.8589,27.8831],[246.8621,27.9375],[246.9237,27.9346]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 15.6
 	},
 	{
 		"imageCredits" : {"short" : "ESA/Hubble & NASA","infoUrl": "https://www.spacetelescope.org/images/potw1705a/"},
