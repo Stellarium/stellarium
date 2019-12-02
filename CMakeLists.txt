@@ -62,7 +62,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
@@ -116,6 +116,20 @@ ENDIF()
 IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
+ENDIF()
+
+# Add ASan (AddressSanitizer) build options if necessary
+# Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
+IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+ENDIF()
+
+# Add UBSan (UndefinedBehaviorSanitizer) build options if necessary
+# Details: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+IF(${CMAKE_BUILD_TYPE} MATCHES "UBSan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -g")
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
