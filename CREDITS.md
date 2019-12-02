@@ -326,7 +326,7 @@
 	    License: public domain 
 	4.10 Images of M1, M27, M57, M97, NGC6946 from Stephane
 	     Dumont
-	4.11 Images of M44, NGC856, NGC884 from Maxime Spano
+	4.11 Images of NGC856, NGC884 from Maxime Spano
 	4.12 Constellation art, GUI buttons, logo created by Johan Meuris
 	     (Jomejome) (jomejome at users.sourceforge.net)
 	     http://www.johanmeuris.eu/
@@ -427,7 +427,7 @@
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
-	4.38 Images of IC1396 from Giuseppe Donatiello
+	4.38 Images of M44, IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M4, M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
 	     M109, IC5146, NGC225, NGC663, NGC891, NGC1931, NGC6823, NGC7814
