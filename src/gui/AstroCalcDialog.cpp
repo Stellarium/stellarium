@@ -3295,37 +3295,17 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9:
 		case 20:
 		{
-			Planet::PlanetType pType = Planet::isUNDEFINED;
-			switch (obj2Type)
-			{
-				case 2: // Asteroids
-					pType = Planet::isAsteroid;
-					break;
-				case 3: // Plutinos
-					pType = Planet::isPlutino;
-					break;
-				case 4: // Comets
-					pType = Planet::isComet;
-					break;
-				case 5: // Dwarf planets
-					pType = Planet::isDwarfPlanet;
-					break;
-				case 6: // Cubewanos
-					pType = Planet::isCubewano;
-					break;
-				case 7: // Scattered disc objects
-					pType = Planet::isSDO;
-					break;
-				case 8: // Oort cloud objects
-					pType = Planet::isOCO;
-					break;
-				case 9: // Sednoids
-					pType = Planet::isSednoid;
-					break;
-				case 20: // Interstellar objects
-					pType = Planet::isInterstellar;
-					break;
-			}
+			const QMap<int, Planet::PlanetType>map = {
+				{2, Planet::isAsteroid},
+				{3, Planet::isPlutino},
+				{4, Planet::isComet},
+				{5, Planet::isDwarfPlanet},
+				{6, Planet::isCubewano},
+				{7, Planet::isSDO},
+				{8, Planet::isOCO},
+				{9, Planet::isSednoid},
+				{20, Planet::isInterstellar}};
+			const Planet::PlanetType pType = map.value(obj2Type, Planet::isUNDEFINED);
 
 			for (const auto& object : allObjects)
 			{
@@ -5004,40 +4984,18 @@ void AstroCalcDialog::calculateWutObjects()
 				case 13:
 				case 24:
 				{
-					Planet::PlanetType pType = Planet::isInterstellar;
-					switch (categoryId)
-					{
-						case 0: // Planets
-							pType = Planet::isPlanet;
-							break;
-						case 6: // Asteroids
-							pType = Planet::isAsteroid;
-							break;
-						case 7: // Comets
-							pType = Planet::isComet;
-							break;
-						case 8: // Plutinos
-							pType = Planet::isPlutino;
-							break;
-						case 9: // Dwarf planets
-							pType = Planet::isDwarfPlanet;
-							break;
-						case 10: // Cubewanos
-							pType = Planet::isCubewano;
-							break;
-						case 11: // Scattered disc objects
-							pType = Planet::isSDO;
-							break;
-						case 12: // Oort cloud objects
-							pType = Planet::isOCO;
-							break;
-						case 13: // Sednoids
-							pType = Planet::isSednoid;
-							break;
-						case 24: // Interstellar objects
-							pType = Planet::isInterstellar;
-							break;
-					}
+					const QMap<int, Planet::PlanetType>map = {
+						{0, Planet::isPlanet},
+						{6, Planet::isAsteroid},
+						{7, Planet::isComet},
+						{8, Planet::isPlutino},
+						{9, Planet::isDwarfPlanet},
+						{10, Planet::isCubewano},
+						{11, Planet::isSDO},
+						{12, Planet::isOCO},
+						{13, Planet::isSednoid},
+						{24, Planet::isInterstellar}};
+					const Planet::PlanetType pType = map.value(categoryId, Planet::isInterstellar);
 
 					for (const auto& object : allObjects)
 					{
@@ -5064,7 +5022,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (categoryId==7)
+					if (pType==Planet::isComet)
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 
 					break;
