@@ -43,7 +43,8 @@
 
 // Class which manages the displaying of the Zodiacal Light
 ZodiacalLight::ZodiacalLight()
-	: color(1.f, 1.f, 1.f)
+	: propMgr(Q_NULLPTR)
+	, color(1.f, 1.f, 1.f)
 	, intensity(1.)
 	, intensityFovScale(1.0)
 	, intensityMinFov(0.25) // when zooming in further, Z.L. is no longer visible.
@@ -53,6 +54,7 @@ ZodiacalLight::ZodiacalLight()
 {
 	setObjectName("ZodiacalLight");
 	fader = new LinearFader();
+	propMgr=StelApp::getInstance().getStelPropertyManager();
 }
 
 ZodiacalLight::~ZodiacalLight()
@@ -75,7 +77,7 @@ void ZodiacalLight::init()
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,60,30,1, true)); // 6x6 degree quads
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,60,30,1, true)); // 6x6 degree quads
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(color);
 
@@ -92,7 +94,7 @@ void ZodiacalLight::init()
 void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
 {
 	// This just forces update() to re-compute longitude.
-	Q_UNUSED(loc);
+	Q_UNUSED(loc)
 	lastJD=-1e12;
 }
 
@@ -170,7 +172,7 @@ bool ZodiacalLight::getFlagShow() const
 
 void ZodiacalLight::draw(StelCore* core)
 {
-	if (!fader->getInterstate()  || (getIntensity()<0.01) )
+	if ((fader->getInterstate() == 0.f) || (getIntensity()<0.01) || !(propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool()))
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.

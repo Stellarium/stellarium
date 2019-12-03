@@ -64,9 +64,9 @@ typedef struct
 
 typedef struct
 {
-	unsigned int sao;
-	unsigned int hd;
-	unsigned int hr;
+	int sao;
+	int hd;
+	int hr;
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
@@ -333,7 +333,7 @@ public:
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
 	//! @return position angle in degrees
-	static int getWdsLastPositionAngle(int hip);
+	static float getWdsLastPositionAngle(int hip);
 
 	//! Get separation angle at date of last satisfactory observation of double star with a
 	//! Hipparcos catalogue number.

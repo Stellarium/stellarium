@@ -2022,16 +2022,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxOtherType">
-               <property name="text">
-                <string>Other</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOTypes</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxPlanetaryNebulaeType">
                <property name="text">
@@ -2113,9 +2103,9 @@
               </widget>
              </item>
              <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxStarClustersType">
+              <widget class="QCheckBox" name="checkBoxOpenStarClustersType">
                <property name="text">
-                <string>Star clusters</string>
+                <string>Open star clusters</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -2134,6 +2124,26 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="checkBoxOtherType">
+               <property name="text">
+                <string>Other</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxGlobularStarClustersType">
+               <property name="text">
+                <string>Globular star clusters</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -4004,8 +4014,7 @@
   <tabstop>checkBoxActiveGalaxiesType</tabstop>
   <tabstop>checkBoxInteractingGalaxiesType</tabstop>
   <tabstop>checkBoxGalaxyClustersType</tabstop>
-  <tabstop>checkBoxStarClustersType</tabstop>
-  <tabstop>checkBoxOtherType</tabstop>
+  <tabstop>checkBoxOpenStarClustersType</tabstop>
   <tabstop>checkBoxBrightNebulaeType</tabstop>
   <tabstop>checkBoxDarkNebulaeType</tabstop>
   <tabstop>checkBoxPlanetaryNebulaeType</tabstop>

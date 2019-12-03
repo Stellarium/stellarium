@@ -23,7 +23,7 @@
 #include <QDateTime>
 #include <QProcess>
 #ifdef Q_OS_WIN
- #include <windows.h>
+ #include <Windows.h>
 #endif
 
 // Init statics variables.
@@ -152,7 +152,7 @@ void StelLogger::init(const QString& logFilePath)
 	else
 		writeLog("Windows version too old to get memory info.");
 
-	HKEY hKey = NULL;
+	HKEY hKey = Q_NULLPTR;
 	DWORD dwType = REG_DWORD;
 	DWORD numVal = 0;
 	DWORD dwSize = sizeof(numVal);
@@ -169,7 +169,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueExA(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -182,7 +182,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueExA(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -251,7 +251,7 @@ void StelLogger::init(const QString& logFilePath)
 
 void StelLogger::deinit()
 {
-	qInstallMessageHandler(0);
+	qInstallMessageHandler(Q_NULLPTR);
 	logFile.close();
 }
 

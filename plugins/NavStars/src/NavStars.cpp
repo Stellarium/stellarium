@@ -152,7 +152,7 @@ bool NavStars::configureGui(bool show)
 void NavStars::draw(StelCore* core)
 {
 	// Drawing is enabled?
-	if (markerFader.getInterstate() <= 0.0)
+	if (markerFader.getInterstate() <= 0.0f)
 	{
 		return;
 	}
@@ -188,7 +188,7 @@ void NavStars::draw(StelCore* core)
 				painter.setBlending(true);
 				painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
 				markerTexture->bind();
-				painter.drawSprite2dMode(pos[0], pos[1], 11.f);
+				painter.drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), 11.f);
 			}
 
 			// Draw the localized name of the star and its ordinal number
@@ -197,7 +197,7 @@ void NavStars::draw(StelCore* core)
 				label = QString("%1").arg(i+1);
 			else
 				label = QString("%1 (%2)").arg(label).arg(i+1);
-			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
+			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 10.f, 10.f, false);
 		}
 	}
 }
@@ -269,7 +269,7 @@ void NavStars::saveConfiguration(void)
 void NavStars::setCurrentNavigationalStarsSetKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("NavigationalStarsSet"));
-	NavigationalStarsSet nsSet = (NavigationalStarsSet)en.keyToValue(key.toLatin1().data());
+	NavigationalStarsSet nsSet = static_cast<NavigationalStarsSet>(en.keyToValue(key.toLatin1().data()));
 	if (nsSet<0)
 	{
 		qWarning() << "Unknown navigational stars set:" << key << "setting \"AngloAmerican\" instead";

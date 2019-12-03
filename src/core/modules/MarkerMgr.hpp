@@ -72,6 +72,7 @@ public slots:
 	//! - crossed-circle: the cross under circle
 	//! - target: the target shape
 	//! - gear: the gear shape
+	//! - disk: the disk shape
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
 	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
@@ -104,6 +105,7 @@ public slots:
 	//! - crossed-circle: the cross under circle
 	//! - target: the target shape
 	//! - gear: the gear shape
+	//! - disk: the disk shape
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
 	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
@@ -137,6 +139,7 @@ public slots:
 	//! - crossed-circle: the cross under circle
 	//! - target: the target shape
 	//! - gear: the gear shape
+	//! - disk: the disk shape
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
 	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once

@@ -10,23 +10,24 @@ The interesting part is now getting all tools right to create the documents. Of 
 
 ## Installation of tools
 ### Windows
-Windows is still the most common desktop platform in 2017, like it or not. Its command shell is an embarassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. Fortunately the GNUWin32 project has created the relevant tools to fill in the gaps. From GnuWin32, we need to install make and uname. We also need to install GhostScript. Make sure the relevant programs are found in PATH.
 
-The classic TeX environment on Windows is MikTeX, a very complete TeX environment with its own package management system. Install it with the option to download mising packages as required. 
+The classic TeX environment on Windows is MikTeX, a very complete TeX environment with its own package management system. Install it with the option to download missing packages as required. 
 
-Alternatively, to be inline with the other Systems, consider TeXlive also for WIndows.
-See https://www.tug.org/texlive/windows.html
+Alternatively, to be inline with the other Systems, consider TeXlive also for Windows (https://www.tug.org/texlive/windows.html). 
 
-
+Windows is still the most common desktop platform in 2019, like it or not. However, its command shell is an embarassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. 
 The shortcomings of the command line have brought several Options for Linux-affine working:
 
+* GNUWin32 tools
 * Cygwin
 * MinGW
-* Ubuntu for Windows 10. As of late 2017, this is "14.04.5 LTS, Trusty Tahr"
+* Windows Subsystem for Linux (WSL): Ubuntu for Windows 10. Consider installing Version 18.04 LTS.
 
 In addition, the GIT Version Control System brings its own MinGW-based git shell. 
 
-Cygwin and Ubuntu can bring their own optional TeXLive installations, which are however usually a bit outdated and should be avoided in favor of the current TeXlive (see below). But if you have already MikTeX installed, you can use it from the MinGW/git, cygwin or Ubuntu bash shell and save the diskspace (up to a few gigabytes) for a TeX Installation. However, while cygwin and MinGW based shells will find executables in the Windows PATH called without the .exe extension, Ubuntu's shell needs the .exe in the called filenames. 
+The GNUWin32 project provides many important tools to fill in the gaps. From GnuWin32, we need to install make and uname. We also need to install GhostScript. Make sure the relevant programs are found in PATH. Also install Clink from http://mridgers.github.io/clink.
+
+Cygwin and Ubuntu can bring their own optional TeXLive installations, which may however be a bit outdated. If you have problems with the following setup, consider installing current TeXlive (see below). But if you have already MikTeX installed, you can use it from the MinGW/git, cygwin or Ubuntu bash shell and save the diskspace (up to a few gigabytes) for a TeX Installation. However, while cygwin and MinGW based shells will find executables in the Windows PATH called without the .exe extension, WSL/Ubuntu's shell needs the .exe in the called filenames. 
 
 The Makefile is able to detect all these setups on Windows. You can check with 
 
@@ -38,9 +39,9 @@ whether your System is properly identified. Note that it does not check whether 
 
 ### Linux
 
-These instructions are valid for Ubuntu 14.04 LTS. Find out and add the changes required for your System.
+These instructions are based on Ubuntu. Find out and add the changes required for your System.
 
-Unfortunately, Ubuntu's TeXlive is a bit outdated. It is recommended to *not* install these packages:
+Unfortunately, Ubuntu 14.04's TeXlive is a bit outdated. It is recommended to *not* install these packages:
 
 ```
 sudo apt-get install texlive-full biber make 
@@ -48,7 +49,8 @@ sudo apt-get install texlive-full biber make
 
 but rather install TeXlive directly. See https://www.tug.org/texlive/quickinstall.html
 
-On Ubuntu 19.04, 
+On Ubuntu 18.04 and 19.04 the following should work (it uses less filespace than the commands shown above), 
+
 ```
 sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
 texlive-latex-extra texlive-pictures biber make
@@ -225,6 +227,7 @@ sudo fmtutil-sys --all
 Very odd: It seems section labels must not contain the name ":config". Or we have far too many labels. This seems to be a problem in the chapters with many tables. I had to reduce the number of valid labels.  Else: stack size exceeded. 
 
 #Help Wanted!
+
 If you have some experience with tex4ht to create a pleasing online version of Stellarium's User Guide, please feel free to put in your TeXnical wisdom. Discuss with the team what kind of format is most useful. Apparently a frameset is possible but requires some extra work in the configuration. "The LaTeX Web Companion" will be your best friend, it is surprising how little in-depth information is available online.
 
 Some info is in 

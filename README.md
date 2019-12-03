@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/Stellarium/stellarium.svg?branch=master)](https://travis-ci.org/Stellarium/stellarium)
 [![Build status](https://ci.appveyor.com/api/projects/status/sw8j9l8q95ejkalo?svg=true)](https://ci.appveyor.com/project/alex-w/stellarium)
 [![Coverity Scan](https://img.shields.io/coverity/scan/2098.svg)](https://scan.coverity.com/projects/stellarium-stellarium)
-<br/>[![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
+[![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Stellarium/stellarium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Stellarium/stellarium/alerts/)
 

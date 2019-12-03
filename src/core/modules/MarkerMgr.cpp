@@ -43,7 +43,7 @@ class StelMarker
 {
 public:
 	StelMarker(const float& mSize, const Vec3f& mColor);
-	virtual ~StelMarker() {;}
+	virtual ~StelMarker() {}
 
 	//! draw the marker on the sky
 	//! @param core the StelCore object
@@ -87,7 +87,8 @@ public:
 		SquaredDCircle	= 8,
 		CrossedCircle	= 9,
 		Target		= 10,
-		Gear		= 11
+		Gear			= 11,
+		Disk			= 12
 	};
 
 	//! Constructor of a SkyMarker which is "attached" to the equatorial coordinates for epoch J2000.0
@@ -220,6 +221,9 @@ SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker
 		case Gear:
 			fileName = "gear.png";
 			break;
+		case Disk:
+			fileName = "disk.png";
+			break;
 	}
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
 }
@@ -269,6 +273,8 @@ SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 		return SkyMarker::Target;
 	else if (s.toLower()=="gear")
 		return SkyMarker::Gear;
+	else if (s.toLower()=="disk")
+		return SkyMarker::Disk;
 	else
 		return SkyMarker::Cross;
 }
@@ -318,6 +324,9 @@ HorizonMarker::HorizonMarker(const float az, const float alt, const float& size,
 			break;
 		case SkyMarker::Gear:
 			fileName = "gear.png";
+			break;
+		case SkyMarker::Disk:
+			fileName = "disk.png";
 			break;
 	}
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);

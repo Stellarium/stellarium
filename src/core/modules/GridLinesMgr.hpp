@@ -925,15 +925,15 @@ private slots:
 	void setFontSizeFromApp(int size);
 
 private:
-	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
-	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
-	SkyGrid * equGrid;			// Equatorial grid
+	QSharedPointer<Planet> earth;	// shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
+	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)
+	SkyGrid * equGrid;				// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
-	SkyGrid * eclGrid;			// Ecliptic of Date grid
+	SkyGrid * eclGrid;				// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
-	SkyGrid * aziGrid;			// Azimuthal grid
+	SkyGrid * aziGrid;				// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
@@ -941,7 +941,7 @@ private:
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
-	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
@@ -951,17 +951,17 @@ private:
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
-	SkyPoint * celestialPoles;		// Celestial poles
+	SkyPoint * celestialPoles;			// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
-	SkyPoint * eclipticPoles;		// Ecliptic poles
-	SkyPoint * galacticPoles;		// Galactic poles
+	SkyPoint * eclipticPoles;			// Ecliptic poles
+	SkyPoint * galacticPoles;			// Galactic poles
 	SkyPoint * supergalacticPoles;		// Supergalactic poles
 	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
-	SkyPoint * equinoxPoints;		// Equinox points
+	SkyPoint * equinoxPoints;			// Equinox points
 	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
-	SkyPoint * solsticePoints;		// Solstice points
-	SkyPoint * antisolarPoint;		// Solstice points
+	SkyPoint * solsticePoints;			// Solstice points
+	SkyPoint * antisolarPoint;			// Antisolar point
 	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
 };
 

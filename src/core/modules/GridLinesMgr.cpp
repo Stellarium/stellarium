@@ -207,7 +207,7 @@ struct ViewportEdgeIntersectCallbackData
 	ViewportEdgeIntersectCallbackData(StelPainter* p)
 		: sPainter(p)
 		, raAngle(0.0)
-		, frameType(StelCore::FrameUninitialized) {;}
+		, frameType(StelCore::FrameUninitialized) {}
 	StelPainter* sPainter;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
@@ -345,8 +345,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	else
 		text = d->text;
 
-	Vec3f direc=direction.toVec3f();
-	direc.normalize();
+	Vec3f direc=direction.toVec3f();	
+	direc.normalize();	
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
 	float xshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
@@ -364,7 +364,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 void SkyGrid::draw(const StelCore* core) const
 {
 	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
-	if (!fader.getInterstate())
+	if (fader.getInterstate() <= 0.f)
 		return;
 
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
@@ -1003,9 +1003,9 @@ void SkyPoint::updateLabel()
 			if (speed>0.)
 			{
 				const QString kms = qc_("km/s", "speed");
-				QString speedStr = QString(" (%1%2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
 				northernLabel += speedStr;
-				speedStr = QString(" (-%1%2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
 				southernLabel += speedStr;
 			}
 
@@ -1412,7 +1412,8 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
-		antisolarPoint->draw(core); // FIXME: why only on earth?
+		// Antisolar point are calculated in Ecliptic (on date) frame (Earth only)
+		antisolarPoint->draw(core);
 	}
 
 	equJ2000Grid->draw(core);

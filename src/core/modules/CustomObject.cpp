@@ -96,7 +96,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 Vec3f CustomObject::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const

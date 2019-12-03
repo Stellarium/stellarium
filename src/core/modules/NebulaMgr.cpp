@@ -53,7 +53,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.7";
+static const QString StellariumDSOCatalogVersion = "3.8";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -136,8 +136,8 @@ bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
 void NebulaMgr::setFlagAdditionalNames(const bool flag) {if(Nebula::flagShowAdditionalNames!=flag){ Nebula::flagShowAdditionalNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
 bool NebulaMgr::getFlagAdditionalNames(void) const {return Nebula::flagShowAdditionalNames;}
 
-NebulaMgr::NebulaMgr(void)
-	: nebGrid(200)
+NebulaMgr::NebulaMgr(void) : StelObjectModule()
+	, nebGrid(200)
 	, hintsAmount(0)
 	, labelsAmount(0)
 	, flagConverter(false)
@@ -417,8 +417,10 @@ void NebulaMgr::init()
 		typeFilters	|= Nebula::TypeActiveGalaxies;
 	if (conf->value("flag_show_interacting_galaxies", true).toBool())
 		typeFilters	|= Nebula::TypeInteractingGalaxies;
-	if (conf->value("flag_show_clusters", true).toBool())
-		typeFilters	|= Nebula::TypeStarClusters;
+	if (conf->value("flag_show_open_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeOpenStarClusters;
+	if (conf->value("flag_show_globular_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeGlobularStarClusters;
 	if (conf->value("flag_show_bright_nebulae", true).toBool())
 		typeFilters	|= Nebula::TypeBrightNebulae;
 	if (conf->value("flag_show_dark_nebulae", true).toBool())
@@ -846,13 +848,13 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 	for (const auto& n : dsoArray)
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
-		if (equPos*v>=cosLimFov)
+		if (equPos*v >= cosLimFov)
 		{
 			result.push_back(qSharedPointerCast<StelObject>(n));
 		}

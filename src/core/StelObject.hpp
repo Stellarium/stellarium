@@ -52,11 +52,11 @@ public:
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
 		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
 		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance		= 0x00000040, //!< Info about an object's distance
-		Size			= 0x00000080, //!< Info about an object's size
-		Velocity                = 0x00000100, //!< Info about object's velocity
-		Extra			= 0x00000200, //!< Derived class-specific extra fields
-		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		Distance			= 0x00000040, //!< Info about an object's distance
+		Size				= 0x00000080, //!< Info about an object's size
+		Velocity			= 0x00000100, //!< Info about object's velocity
+		Extra				= 0x00000200, //!< Derived class-specific extra fields
+		HourAngle			= 0x00000400, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
 		GalacticCoord		= 0x00001000, //!< The galactic position
 		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
@@ -67,7 +67,7 @@ public:
 		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
 		NoFont			= 0x00100000,
-		PlainText		= 0x00200000, //!< Strip HTML tags from output
+		PlainText			= 0x00200000, //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
@@ -239,7 +239,7 @@ public:
 	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
-	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
+	virtual Vec3f getInfoColor() const {return Vec3f(1.f,1.f,1.f);}
 
 	//! Return the best FOV in degree to use for a close view of the object
 	virtual double getCloseViewFov(const StelCore*) const {return 10.;}

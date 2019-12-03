@@ -25,6 +25,7 @@
 #include "StelProjectorType.hpp"
 #include "StelLocation.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelPropertyMgr.hpp"
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -776,6 +777,7 @@ private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
 	StelMovementMgr* movementMgr;		// Manage vision movements
+	StelPropertyMgr* propMgr;
 
 	// Manage geodesic grid
 	mutable StelGeodesicGrid* geodesicGrid;

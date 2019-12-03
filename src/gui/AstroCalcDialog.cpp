@@ -638,7 +638,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			StelUtils::radToDecDeg(az, sign, deg);			
+			StelUtils::radToDecDeg(az, sign, deg);
 			aY.append(deg);			
 		}		
 		core->setJD(currentJD);
@@ -1536,9 +1536,6 @@ void AstroCalcDialog::generateEphemeris()
 	int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
-	bool withTime = false;
-	if (currentStep < StelCore::JD_DAY)
-		withTime = true;
 
 	QList<PlanetP> celestialObjects;
 	celestialObjects.clear();
@@ -1628,11 +1625,8 @@ void AstroCalcDialog::generateEphemeris()
 
 			Ephemeris item;
 			item.coord = pos;
-			item.colorIndex = colorIndex;
-			if (withTime)
-				item.objDate = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
-			else
-				item.objDate = localeMgr->getPrintableDateLocal(JD);
+			item.colorIndex = colorIndex;			
+			item.objDate = JD;
 			item.magnitude = obj->getVMagnitudeWithExtinction(core);
 			EphemerisList.append(item);
 
@@ -1682,6 +1676,8 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+
+	emit solarSystem->requestEphemerisVisualization();
 }
 
 void AstroCalcDialog::saveEphemeris()
@@ -3299,37 +3295,17 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9:
 		case 20:
 		{
-			Planet::PlanetType pType = Planet::isUNDEFINED;
-			switch (obj2Type)
-			{
-				case 2: // Asteroids
-					pType = Planet::isAsteroid;
-					break;
-				case 3: // Plutinos
-					pType = Planet::isPlutino;
-					break;
-				case 4: // Comets
-					pType = Planet::isComet;
-					break;
-				case 5: // Dwarf planets
-					pType = Planet::isDwarfPlanet;
-					break;
-				case 6: // Cubewanos
-					pType = Planet::isCubewano;
-					break;
-				case 7: // Scattered disc objects
-					pType = Planet::isSDO;
-					break;
-				case 8: // Oort cloud objects
-					pType = Planet::isOCO;
-					break;
-				case 9: // Sednoids
-					pType = Planet::isSednoid;
-					break;
-				case 20: // Interstellar objects
-					pType = Planet::isInterstellar;
-					break;
-			}
+			const QMap<int, Planet::PlanetType>map = {
+				{2, Planet::isAsteroid},
+				{3, Planet::isPlutino},
+				{4, Planet::isComet},
+				{5, Planet::isDwarfPlanet},
+				{6, Planet::isCubewano},
+				{7, Planet::isSDO},
+				{8, Planet::isOCO},
+				{9, Planet::isSednoid},
+				{20, Planet::isInterstellar}};
+			const Planet::PlanetType pType = map.value(obj2Type, Planet::isUNDEFINED);
 
 			for (const auto& object : allObjects)
 			{
@@ -4582,7 +4558,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright nebulae"), 2);
 	wutCategories.insert(q_("Dark nebulae"), 3);
 	wutCategories.insert(q_("Galaxies"), 4);
-	wutCategories.insert(q_("Star clusters"), 5);
+	wutCategories.insert(q_("Open star clusters"), 5);
 	wutCategories.insert(q_("Asteroids"), 6);
 	wutCategories.insert(q_("Comets"), 7);
 	wutCategories.insert(q_("Plutinos"), 8);
@@ -4602,6 +4578,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Supernova remnants"), 22);
 	wutCategories.insert(q_("Clusters of galaxies"), 23);
 	wutCategories.insert(q_("Interstellar objects"), 24);
+	wutCategories.insert(q_("Globular star clusters"), 25);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -4881,6 +4858,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 21:
 				case 22:
 				case 23:
+				case 25:
 				{
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
@@ -4909,8 +4887,8 @@ void AstroCalcDialog::calculateWutObjects()
 								if ((bool)(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 5: // Star clusters
-								if ((bool)(tflags & Nebula::TypeStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebGc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
+							case 5: // Open Star clusters
+								if ((bool)(tflags & Nebula::TypeOpenStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 14: // Planetary nebulae
@@ -4948,6 +4926,10 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 							case 23: // Clusters of galaxies
 								if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 25: // Globular Star clusters
+								if (((bool)(tflags & Nebula::TypeGlobularStarClusters) && ntype == Nebula::NebGc) && mag <= magLimit)
 									passByType = true;
 								break;
 						}
@@ -5002,40 +4984,18 @@ void AstroCalcDialog::calculateWutObjects()
 				case 13:
 				case 24:
 				{
-					Planet::PlanetType pType = Planet::isInterstellar;
-					switch (categoryId)
-					{
-						case 0: // Planets
-							pType = Planet::isPlanet;
-							break;
-						case 6: // Asteroids
-							pType = Planet::isAsteroid;
-							break;
-						case 7: // Comets
-							pType = Planet::isComet;
-							break;
-						case 8: // Plutinos
-							pType = Planet::isPlutino;
-							break;
-						case 9: // Dwarf planets
-							pType = Planet::isDwarfPlanet;
-							break;
-						case 10: // Cubewanos
-							pType = Planet::isCubewano;
-							break;
-						case 11: // Scattered disc objects
-							pType = Planet::isSDO;
-							break;
-						case 12: // Oort cloud objects
-							pType = Planet::isOCO;
-							break;
-						case 13: // Sednoids
-							pType = Planet::isSednoid;
-							break;
-						case 24: // Interstellar objects
-							pType = Planet::isInterstellar;
-							break;
-					}
+					const QMap<int, Planet::PlanetType>map = {
+						{0, Planet::isPlanet},
+						{6, Planet::isAsteroid},
+						{7, Planet::isComet},
+						{8, Planet::isPlutino},
+						{9, Planet::isDwarfPlanet},
+						{10, Planet::isCubewano},
+						{11, Planet::isSDO},
+						{12, Planet::isOCO},
+						{13, Planet::isSednoid},
+						{24, Planet::isInterstellar}};
+					const Planet::PlanetType pType = map.value(categoryId, Planet::isInterstellar);
 
 					for (const auto& object : allObjects)
 					{
@@ -5062,7 +5022,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (categoryId==7)
+					if (pType==Planet::isComet)
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 
 					break;
@@ -5220,7 +5180,8 @@ void AstroCalcDialog::saveWutObjects()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("What's Up Tonight"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
+		if (ui->wutCategoryListWidget->currentRow()>0) // Fixed crash when category of objects is not selected
+			xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);

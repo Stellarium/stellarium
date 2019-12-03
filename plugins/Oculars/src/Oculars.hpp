@@ -101,7 +101,11 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
+	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
+	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
+	Q_PROPERTY(bool flagShowCardinals		READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
+	Q_PROPERTY(bool flagAlignCrosshair		READ getFlagAlignCrosshair   WRITE setFlagAlignCrosshair   NOTIFY flagAlignCrosshairChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
@@ -212,6 +216,9 @@ public slots:
 	void setFlagScalingFOVForTelrad(const bool b);
 	bool getFlagScalingFOVForTelrad(void) const;
 
+	void setFlagScalingFOVForCCD(const bool b);
+	bool getFlagScalingFOVForCCD(void) const;
+
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
@@ -240,6 +247,16 @@ public slots:
 
 	void setFlagShowCcdCropOverlay(const bool b);
 	bool getFlagShowCcdCropOverlay(void) const;
+
+	void setFlagShowContour(const bool b);
+	bool getFlagShowContour(void) const;
+
+	void setFlagShowCardinals(const bool b);
+	bool getFlagShowCardinals(void) const;
+
+	void setFlagAlignCrosshair(const bool b);
+	bool getFlagAlignCrosshair(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -256,6 +273,7 @@ signals:
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
+	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void flagShowResolutionCriterionsChanged(bool value);
 	void arrowButtonScaleChanged(double value);
@@ -268,6 +286,9 @@ signals:
 	void flagShowOcularsButtonChanged(bool value);
 	void flagShowCcdCropOverlayChanged(bool value);
 	void ccdCropOverlaySizeChanged(int value);
+	void flagShowContourChanged(bool value);
+	void flagShowCardinalsChanged(bool value);
+	void flagAlignCrosshairChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -419,17 +440,23 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
+	StelTextureSP cardinalsNormalTexture;
+	StelTextureSP cardinalsMirroredTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
+	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
 	bool flagShowResolutionCriterions;
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
 	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
 	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
+	bool flagShowContour;
+	bool flagShowCardinals;
+	bool flagAlignCrosshair;
 };
 
 

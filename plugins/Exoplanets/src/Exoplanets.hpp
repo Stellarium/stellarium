@@ -198,46 +198,32 @@ public:
 		{
 			case 1:
 				return EPSemiAxisAll;
-				break;
 			case 2:
 				return EPMassAll;
-				break;
 			case 3:
 				return EPRadiusAll;
-				break;
 			case 4:
 				return EPPeriodAll;
-				break;
 			case 5:
 				return EPAngleDistanceAll;
-				break;
 			case 6:
 				return EPEffectiveTempHostStarAll;
-				break;
 			case 7:
 				return EPYearDiscoveryAll;
-				break;
 			case 8:
 				return EPMetallicityHostStarAll;
-				break;
 			case 9:
 				return EPVMagHostStarAll;
-				break;
 			case 10:
 				return EPRAHostStarAll;
-				break;
 			case 11:
 				return EPDecHostStarAll;
-				break;
 			case 12:
 				return EPDistanceHostStarAll;
-				break;
 			case 13:
 				return EPMassHostStarAll;
-				break;
 			case 14:
 				return EPRadiusHostStarAll;
-				break;
 			default:
 				return EPEccentricityAll;
 		}
@@ -353,7 +339,7 @@ public slots:
 	//! Get the current temperature scale
 	TemperatureScale getCurrentTemperatureScale() const
 	{
-		return (TemperatureScale)Exoplanet::temperatureScaleID;
+		return static_cast<TemperatureScale>(Exoplanet::temperatureScaleID);
 	}
 	//! Get the key of current temperature scale
 	QString getCurrentTemperatureScaleKey(void) const;
@@ -405,10 +391,11 @@ private:
 
 	QString jsonCatalogPath;
 
-	int PSCount;
-	int EPCountAll;
-	int EPCountPH;
+	int PSCount;	// Count of planetary systems
+	int EPCountAll;	// Count of exoplents
+	int EPCountPH;	// Count of exoplanets in habitable zone
 
+	// Lists of various data about exoplanets for quick plot of graphs
 	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll,
 		      EPEffectiveTempHostStarAll, EPYearDiscoveryAll, EPMetallicityHostStarAll, EPVMagHostStarAll,
 		      EPRAHostStarAll, EPDecHostStarAll, EPDistanceHostStarAll, EPMassHostStarAll, EPRadiusHostStarAll;

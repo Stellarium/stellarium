@@ -31,7 +31,7 @@
 
 #ifdef _WINDOWS
 #include <WinSock2.h>
-#include <windows.h>
+#include <Windows.h>
 
 #define net_read(x,y,z) recv(x,y,z,0)
 #define net_write(x,y,z) send(x,(const char *)(y),z,0)

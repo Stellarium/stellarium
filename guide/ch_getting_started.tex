@@ -19,10 +19,7 @@
 \label{sec:GettingStarted:SystemRequirements}
 
 Stellarium has been seen to run on most systems where Qt5 is
-available, from tiny ARM computers like the Raspberry Pi~2/3\footnote{As
-  of autumn 2017, you need to enable the experimental OpenGL driver
-  and compile the drm and Mesa~17 libraries from sources. 
-  See~\ref{sec:GettingStarted:Installation:Linux}} 
+available, from tiny ARM computers like the Raspberry Pi~2/3/4
 or Odroid C1 to big museum installations with multiple projectors 
 and planetaria with fish-eye projectors. 
 The most important hardware requirement is a contemporary graphics subsystem.
@@ -54,7 +51,7 @@ The most important hardware requirement is a contemporary graphics subsystem.
 \section{Downloading}
 \label{sec:GettingStarted:Downloading}
 
-Download the correct package for your operating system directly from the main page, \newline \url{http://stellarium.org}.
+Download the correct package for your operating system directly from the main page, \newline \url{https://stellarium.org}.
 An archive of all available versions is available at \url{https://github.com/Stellarium/stellarium/releases}.
 
 \section{Installation}\index{Installation}
@@ -106,9 +103,14 @@ sudo apt-get update
 sudo apt-get install stellarium
 \end{commands}
 
-Or download and run our AppImage package for 64-bit linuxes (we do not provide an AppImage for old 32-bit systems): \file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible conflicts due architectural features of AppImage please remove stellarium package, where you installed from repository.
+Or download and run our AppImage package for 64-bit linuxes (we do not
+provide an AppImage for old 32-bit systems):
+\file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible
+conflicts due to architectural features of AppImage, please remove
+the stellarium package which you have installed from the repository.
 
 \subsubsection{Raspberry Pi 2/3}
+% TODO: Update this section for 0.19.3, include notes on RPi4.
 These tiny ARM-based computers are very popular for small and energy-efficient applications like controlling push-to Dobsonians. 
 A new open-source OpenGL driver stack has been made available recently, but as of October 2017 the default 
 Raspbian operating system comes with an outdated version. Stellarium requires Mesa~17 or later. 

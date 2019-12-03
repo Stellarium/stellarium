@@ -64,7 +64,7 @@ static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 		d = -d;
 		dec_sign = '-';
 	}
-	h = (unsigned int)floor(0.5+h*(24*3600*10000/4294967296.0));
+	h = static_cast<unsigned int>(floor(0.5+h*(24*3600*10000/4294967296.0)));
 	const int ra_ms = h % 10000; h /= 10000;
 	const int ra_s = h % 60; h /= 60;
 	const int ra_m = h % 60; h /= 60;
@@ -129,8 +129,8 @@ void Connection::handleSelectFds(const fd_set &read_fds,
 
 void Connection::performWriting(void)
 {
-	const int to_write = write_buff_end - write_buff;
-	const int rc = writeNonblocking(write_buff, to_write);
+	const qint64 to_write = write_buff_end - write_buff;
+	const int rc = writeNonblocking(write_buff, static_cast<int>(to_write));
 	if (rc < 0)
 	{
 		if (ERRNO != EINTR && ERRNO != EAGAIN)
@@ -161,7 +161,7 @@ void Connection::performWriting(void)
 		else
 		{
 			// partly written
-			memmove(write_buff, write_buff + rc, to_write - rc);
+			memmove(write_buff, write_buff + rc, static_cast<size_t>(to_write - rc));
 			write_buff_end -= rc;
 		}
 	}
@@ -169,8 +169,8 @@ void Connection::performWriting(void)
 
 void Connection::performReading(void)
 {
-	const int to_read = read_buff + sizeof(read_buff) - read_buff_end;
-	const int rc = readNonblocking(read_buff_end, to_read);
+	const qint64 to_read = read_buff + sizeof(read_buff) - read_buff_end;
+	const int rc = readNonblocking(read_buff_end, static_cast<int>(to_read));
 	if (rc < 0)
 	{
 		if (ERRNO == ECONNRESET)
@@ -222,7 +222,7 @@ void Connection::performReading(void)
 			//*log_file << Now() << "Connection::performReading: partly handled: "
 			//          << (p-read_buff) << endl;
 			// partly handled
-			memmove(read_buff, p, read_buff_end - p);
+			memmove(read_buff, p, static_cast<size_t>(read_buff_end - p));
 			read_buff_end -= (p - read_buff);
 		}
 	}
@@ -232,8 +232,8 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 {
 	while (read_buff_end - p >= 2)
 	{
-		const int size = static_cast<int>( ((unsigned char)(p[0])) |
-		                        (((unsigned int)(unsigned char)(p[1])) << 8) );
+		const int size = static_cast<int>( (static_cast<unsigned char>(p[0])) |
+					((static_cast<unsigned int>(static_cast<unsigned char>(p[1]))) << 8) );
 		if (size > static_cast<int>(sizeof(read_buff)) || size < 4)
 		{
 			*log_file << Now() << "Connection::dataReceived: "
@@ -246,8 +246,8 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 			// wait for complete packet
 			break;
 		}
-		const int type = static_cast<int>( ((unsigned char)(p[2])) |
-		                        (((unsigned int)(unsigned char)(p[3])) << 8) );
+		const int type = static_cast<int>( (static_cast<unsigned char>(p[2])) |
+					((static_cast<unsigned int>(static_cast<unsigned char>(p[3]))) << 8) );
 		// dispatch:
 		switch (type)
 		{
@@ -261,26 +261,26 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 					hangup();
 					return;
 				}
-				const long long int client_micros = (long long int)
-				               (  ((unsigned long long int)(unsigned char)(p[ 4])) |
-				                 (((unsigned long long int)(unsigned char)(p[ 5])) <<  8) |
-				                 (((unsigned long long int)(unsigned char)(p[ 6])) << 16) |
-				                 (((unsigned long long int)(unsigned char)(p[ 7])) << 24) |
-				                 (((unsigned long long int)(unsigned char)(p[ 8])) << 32) |
-				                 (((unsigned long long int)(unsigned char)(p[ 9])) << 40) |
-				                 (((unsigned long long int)(unsigned char)(p[10])) << 48) |
-				                 (((unsigned long long int)(unsigned char)(p[11])) << 56) );
+				const long long int client_micros = static_cast<long long int>
+					       (  (static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 4]))) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 5]))) <<  8) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 6]))) << 16) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 7]))) << 24) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 8]))) << 32) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[ 9]))) << 40) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[10]))) << 48) |
+						 ((static_cast<unsigned long long int>(static_cast<unsigned char>(p[11]))) << 56) );
 				server_minus_client_time = GetNow() - client_micros;
 				const unsigned int ra_int =
-				                  ((unsigned int)(unsigned char)(p[12])) |
-				                 (((unsigned int)(unsigned char)(p[13])) <<  8) |
-				                 (((unsigned int)(unsigned char)(p[14])) << 16) |
-				                 (((unsigned int)(unsigned char)(p[15])) << 24);
-				const int dec_int =
-					  static_cast<int>(  ((unsigned int)(unsigned char)(p[16])) |
-				                 (((unsigned int)(unsigned char)(p[17])) <<  8) |
-				                 (((unsigned int)(unsigned char)(p[18])) << 16) |
-				                 (((unsigned int)(unsigned char)(p[19])) << 24) );
+					       (   static_cast<unsigned int>(static_cast<unsigned char>(p[12])) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[13]))) <<  8) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[14]))) << 16) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[15]))) << 24) );
+				const int dec_int = static_cast<int>
+					       (  (static_cast<unsigned int>(static_cast<unsigned char>(p[16]))) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[17]))) <<  8) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[18]))) << 16) |
+						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[19]))) << 24) );
 				#ifdef DEBUG5
 				*log_file << Now() << "Connection::dataReceived: "
 				                   << PrintRaDec(ra_int, dec_int)
@@ -324,29 +324,29 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 		*write_buff_end++ = 0;
 		// server_micros:
 		long long int now = GetNow();
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now; now>>=8;
-		*write_buff_end++ = now;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF); now>>=8;
+		*write_buff_end++ = static_cast<char>(now & 0xFF);
 		// ra:
-		*write_buff_end++ = ra_int; ra_int>>=8;
-		*write_buff_end++ = ra_int; ra_int>>=8;
-		*write_buff_end++ = ra_int; ra_int>>=8;
-		*write_buff_end++ = ra_int;
+		*write_buff_end++ = static_cast<char>(ra_int & 0xFF); ra_int>>=8;
+		*write_buff_end++ = static_cast<char>(ra_int & 0xFF); ra_int>>=8;
+		*write_buff_end++ = static_cast<char>(ra_int & 0xFF); ra_int>>=8;
+		*write_buff_end++ = static_cast<char>(ra_int & 0xFF);
 		// dec:
-		*write_buff_end++ = dec_int; dec_int>>=8;
-		*write_buff_end++ = dec_int; dec_int>>=8;
-		*write_buff_end++ = dec_int; dec_int>>=8;
-		*write_buff_end++ = dec_int;
+		*write_buff_end++ = static_cast<char>(dec_int & 0xFF); dec_int>>=8;
+		*write_buff_end++ = static_cast<char>(dec_int & 0xFF); dec_int>>=8;
+		*write_buff_end++ = static_cast<char>(dec_int & 0xFF); dec_int>>=8;
+		*write_buff_end++ = static_cast<char>(dec_int & 0xFF);
 		// status:
-		*write_buff_end++ = status; status>>=8;
-		*write_buff_end++ = status; status>>=8;
-		*write_buff_end++ = status; status>>=8;
-		*write_buff_end++ = status;
+		*write_buff_end++ = static_cast<char>(status & 0xFF); status>>=8;
+		*write_buff_end++ = static_cast<char>(status & 0xFF); status>>=8;
+		*write_buff_end++ = static_cast<char>(status & 0xFF); status>>=8;
+		*write_buff_end++ = static_cast<char>(status & 0xFF);
 		}
 		else
 		{

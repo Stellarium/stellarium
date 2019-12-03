@@ -147,7 +147,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	// For accessing star scale, twinkle etc.
 	objectValue = engine->newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
 	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
-	
+
 	setScriptRate(1.0);
 	
 	engine->setProcessEventsInterval(1); // was 10, let's allow a smoother script execution

@@ -140,11 +140,7 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	void draw(StelCore* core, StelPainter *painter);
-
-	QString getNomenclatureTypeString() const;	
-	QString getNomenclatureTypeDescription() const;
 	NomenclatureItemType getNomenclatureType() const { return nType;}
-
 	void update(double deltaTime);
 
 	void setFlagLabels(bool b){ labelsFader = b; }
@@ -155,6 +151,8 @@ public:
 	PlanetP getPlanet(void) const { return planet;}
 	float getLatitude(void) const {return latitude;}
 	float getLongitude(void) const {return longitude;}
+	static QString getNomenclatureTypeString(NomenclatureItemType nType);
+	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
 
 private:
 	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
@@ -163,7 +161,7 @@ private:
 	static Vec3f color;
 	static bool hideLocalNomenclature;
 
-	QString getNomenclatureTypeLatinString() const;
+	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 
 	PlanetP planet;
 	int identificator;

@@ -71,7 +71,6 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-// TODO: Migrate to static const? --BM ==> GZ during JDfix for 0.14: SURE!
 // Some useful constants:
 const double Observability::Rad2Deg = M_180_PI;         // Convert degrees into radians
 const double Observability::Rad2Hr = 12./M_PI;           // Convert hours into radians
@@ -96,17 +95,25 @@ Observability::Observability()
 	, horizonAltDeg(0.)
 	, selRA(0.)
 	, selDec(0.)
+	, mylat(1000.)
+	, mylon(1000.)
 	, alti(0.)
 	, horizH(0.)
 	, culmAlt(0.)
+	, myJD(0., 0.)
 	, MoonRise(0.)
 	, MoonSet(0.)
 	, MoonCulm(0.)	
 	, lastJDMoon(0.)	
 	, ObserverLoc(0.)
 	, myPlanet(Q_NULLPTR)
+	, curYear(0)
 	, nDays(0)
 	, dmyFormat(false)
+	, isStar(true)
+	, isMoon(false)
+	, isSun(false)
+	, isScreen(true)
 	, hasRisen(false)
 	, configChanged(false)
 	, souChanged(false)
@@ -122,17 +129,6 @@ Observability::Observability()
 {
 	setObjectName("Observability");
 
-	// Dummy initial values for parameters and data vectors:
-	mylat = 1000.;
-	mylon = 1000.;
-	myJD.first = 0.;
-	myJD.second = 0.;
-	curYear = 0;
-	isStar = true;
-	isMoon = false;
-	isSun = false;
-	isScreen = true;
-
 	//Get pointer to the Earth:
 	PlanetP Earth = GETSTELMODULE(SolarSystem)->getEarth();
 	myEarth = Earth.data();
@@ -141,16 +137,9 @@ Observability::Observability()
 	PlanetP Moon = GETSTELMODULE(SolarSystem)->getMoon();
 	myMoon = Moon.data();
 
-	// I think this can be done in a more simple way...--BM
 	for (int i=0;i<366;i++) {
-//		sunRA[i] = 0.0; sunDec[i] = 0.0;
-//		objectRA[i] = 0.0; objectDec[i]=0.0;
-//		sunSidT[0][i]=0.0; sunSidT[1][i]=0.0;
-//		objectSidT[0][i]=0.0; objectSidT[1][i]=0.0;
-//		objectH0[i] = 0.0;
 		yearJD[i]=QPair<double, double>(0.0, 0.0);
 	};
-	// GZ Sure:
 	memset(sunRA,      0,   366*sizeof(double));
 	memset(sunDec,     0,   366*sizeof(double));
 	memset(objectRA,   0,   366*sizeof(double));
@@ -267,8 +256,8 @@ void Observability::draw(StelCore* core)
 	painter.setFont(font);
 
 // Get current date, location, and check if there is something selected.
-	double currlat = (core->getCurrentLocation().latitude)/Rad2Deg;
-	double currlon = (core->getCurrentLocation().longitude)/Rad2Deg;
+	double currlat = static_cast<double>(core->getCurrentLocation().latitude)/Rad2Deg;
+	double currlon = static_cast<double>(core->getCurrentLocation().longitude)/Rad2Deg;
 	double currheight = (6371.+(core->getCurrentLocation().altitude)/1000.)/UA;
 	double currJD = core->getJD();
 	double currJDint;
@@ -814,9 +803,9 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	int lineSpacing = static_cast<int> (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
-	int groupSpacing = 6*fontSize*params.devicePixelsPerPixel;  // between daily and yearly results
-	int yLine = 8*fontSize*params.devicePixelsPerPixel + 110;
+	int lineSpacing = static_cast<int>(params.devicePixelsPerPixel * 1.3 * fontSize);  // between lines
+	int groupSpacing = static_cast<int>(6*fontSize*params.devicePixelsPerPixel);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*params.devicePixelsPerPixel) + 110;
 	int xLine = 80;
 
 	if (show_Today) 
@@ -1012,7 +1001,7 @@ void Observability::updateSunData(StelCore* core)
 	Vec3d pos, sunPos;
 	for (int i=0; i<nDays; i++)
 	{
-		yearJD[i].first = Jan1stJD + (double)i;
+		yearJD[i].first = Jan1stJD + i;
 		yearJD[i].second = yearJD[i].first+core->computeDeltaT(yearJD[i].first)/86400.0;
 		myEarth->computePosition(yearJD[i].second);
 		myEarth->computeTransMatrix(yearJD[i].first, yearJD[i].second);
@@ -1076,12 +1065,12 @@ bool Observability::CheckRise(int day)
 	int nBin = 1000;
 	double auxSid1 = sunSidT[0][day];
 	auxSid1 += (sunSidT[0][day] < sunSidT[1][day]) ? 24.0 : 0.0;
-	double deltaT = (auxSid1-sunSidT[1][day]) / ((double)nBin);
+	double deltaT = (auxSid1-sunSidT[1][day]) / static_cast<double>(nBin);
 
 	double hour; 
 	for (int j=0; j<nBin; j++)
 	{
-		hour = toUnsignedRA(sunSidT[1][day]+deltaT*(double)j - objectRA[day]);
+		hour = toUnsignedRA(sunSidT[1][day]+deltaT*static_cast<double>(j) - objectRA[day]);
 		hour -= (hour>12.) ? 24.0 : 0.0;
 		if (qAbs(hour)<objectH0[day] || (objectH0[day] < 0.0 && alti>0.0))
 			return true;
@@ -1344,7 +1333,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 {
 	const int NUM_ITER = 100;
 	int i;
-	double hHoriz, ra, dec, raSun, decSun, tempH, /* tempJd, */ tempEphH, curSidT, eclLon;
+	double hHoriz, ra, dec, raSun = 0.0, decSun = 0.0, tempH, /* tempJd, */ tempEphH, curSidT, eclLon;
 	QPair<double, double> tempJd;
 	//Vec3d Observer;
 
@@ -1829,14 +1818,14 @@ void Observability::setFontSize(int size)
 
 void Observability::setTwilightAltitude(int altitude)
 {
-	twilightAltRad  = ((double) altitude)/Rad2Deg ;
+	twilightAltRad  = static_cast<double>(altitude)/Rad2Deg ;
 	twilightAltDeg = altitude;
 	configChanged = true;
 }
 
 void Observability::setHorizonAltitude(int altitude)
 {
-	horizonAltitude = ((double) altitude)/Rad2Deg ;
+	horizonAltitude = static_cast<double>(altitude)/Rad2Deg ;
 	horizonAltDeg = altitude;
 	configChanged = true;
 }

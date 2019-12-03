@@ -63,7 +63,7 @@ public:
 	QString getNameI18n(void) const {return nameI18n;}
 	Vec3f getInfoColor(void) const
 	{
-		return Vec3f(1, 1, 1);
+		return Vec3f(1.f, 1.f, 1.f);
 	}
 	//! TelescopeClient supports the following InfoStringGroup flags:
 	//! - Name
@@ -208,7 +208,7 @@ private:
 private:
 	void hangup(void);
 	QHostAddress address;
-	unsigned int port;
+	quint16 port;
 	QTcpSocket * tcpSocket;
 	bool wait_for_connection_establishment;
 	qint64 end_of_timeout;

@@ -172,11 +172,15 @@ Oculars::Oculars()
 	, flagInitDirectionUsage(false)
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
+	, flagScalingFOVForCCD(true)
 	, flagShowResolutionCriterions(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 	, flagShowCcdCropOverlay(false)
 	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
+	, flagShowContour(false)
+	, flagShowCardinals(false)
+	, flagAlignCrosshair(false)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -314,6 +318,9 @@ void Oculars::deinit()
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
 	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
+
+	cardinalsNormalTexture.clear();
+	cardinalsMirroredTexture.clear();
 }
 
 //! Draw any parts on the screen which are for our module
@@ -325,44 +332,23 @@ void Oculars::draw(StelCore* core)
 	}
 	else if (flagShowOculars)
 	{
-		// Ensure there is a selected ocular & telescope
-		if (selectedCCDIndex > ccds.count())
+		if (selectedOcularIndex >= 0)
 		{
-			qWarning() << "Oculars: the selected sensor index of "
-				   << selectedCCDIndex << " is greater than the sensor count of "
-				   << ccds.count() << ". Module disabled!";
-			ready = false;
-		}
-		if (selectedOcularIndex > oculars.count())
-		{
-			qWarning() << "Oculars: the selected ocular index of "
-				   << selectedOcularIndex << " is greater than the ocular count of "
-				   << oculars.count() << ". Module disabled!";
-			ready = false;
-		}
-		else if (selectedTelescopeIndex > telescopes.count())
-		{
-			qWarning() << "Oculars: the selected telescope index of "
-				   << selectedTelescopeIndex << " is greater than the telescope count of "
-				   << telescopes.count() << ". Module disabled!";
-			ready = false;
-		}
-		
-		if (ready)
-		{
-			if (selectedOcularIndex > -1)
-			{
-				paintOcularMask(core);
-				if (flagShowCrosshairs)
-				{
-					paintCrosshairs();
-				}
-			}
+			paintOcularMask(core);
+			if (flagShowCrosshairs)
+				paintCrosshairs();
+
 			if (!flagGuiPanelEnabled)
 			{
 				// Paint the information in the upper-right hand corner
 				paintText(core);
 			}
+		}
+		else
+		{
+			qWarning() << "Oculars: the selected ocular index of "
+				   << selectedOcularIndex << " is greater than the ocular count of "
+				   << oculars.count() << ". Module disabled!";
 		}
 	}
 	else if (flagShowCCD)
@@ -729,6 +715,7 @@ void Oculars::init()
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
+		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
@@ -738,12 +725,18 @@ void Oculars::init()
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
+		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
+		setFlagShowCardinals(settings->value("show_ocular_cardinals", false).toBool());
+		setFlagAlignCrosshair(settings->value("align_crosshair", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
 	}
+
+	cardinalsNormalTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
+	cardinalsMirroredTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals-mirrored.png");
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -787,11 +780,6 @@ void Oculars::instrumentChanged()
 	}
 }
 
-//void Oculars::setFlagRequireSelection(bool state)
-//{
-//	flagRequireSelection = state;
-//}
-
 void Oculars::setFlagScaleImageCircle(bool state)
 {
 	if (state)
@@ -806,6 +794,10 @@ void Oculars::setFlagScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
+	// CCD is not shown and FOV scaling is disabled, but telescope is changed - do not change FOV!
+	if (!(getFlagScalingFOVForCCD() && flagShowCCD))
+		return;
+
 	Lens * lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 	{
@@ -1023,7 +1015,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
 
 	// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
-	if (!flagShowOculars && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
+	if (!flagShowOculars && !flagShowTelrad && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
 	{
 		if (usageMessageLabelID == -1)
 		{
@@ -1085,7 +1077,6 @@ void Oculars::decrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
 	}
-
 	emit(selectedOcularChanged(selectedOcularIndex));
 }
 
@@ -1301,7 +1292,6 @@ void Oculars::incrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectTelescopeAtIndex(0);
 	}
-
 	emit(selectedOcularChanged(selectedOcularIndex));
 }
 
@@ -1452,7 +1442,7 @@ void Oculars::toggleCCD(bool show)
 		//Zoom out
 		if (getFlagInitFovUsage())
 			movementManager->zoomTo(movementManager->getInitFov());
-		else
+		else if (!flagShowTelrad)
 			movementManager->zoomTo(initialFOV);
 
 		if (getFlagInitDirectionUsage())
@@ -1587,7 +1577,7 @@ void Oculars::paintCCDBounds()
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
-	double screenFOV = params.fov;
+	double screenFOV = static_cast<double>(params.fov);
 
 	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
 			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
@@ -1753,15 +1743,16 @@ void Oculars::paintCCDBounds()
 						cxt = StelUtils::radToHmsStr(cx, true);
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
+					float scaleFactor = static_cast<float>(1.2 * params.devicePixelsPerPixel);
 					// Coordinates of center of visible field of view for CCD (red rectangle)
 					QString coords = QString("%1:").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin"));
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f + fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f + fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					coords = QString("%1/%2").arg(cxt.simplified()).arg(cyt);
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Dimensions of visible field of view for CCD (red rectangle)
-					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(-width*0.5f), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
@@ -1771,11 +1762,11 @@ void Oculars::paintCCDBounds()
 							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
 							.arg(unit)
 							.arg(QChar(0x00D7));
-					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(scales), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(scales)*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Rotation angle of visible field of view for CCD (red rectangle)
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
-					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(angle), static_cast<int>(height*0.5f + 5.f)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(angle)*params.devicePixelsPerPixel), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), angle, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1785,7 +1776,7 @@ void Oculars::paintCCDBounds()
 								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
-						a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f) - painter.getFontMetrics().width(resolutionOverlayText), static_cast<int>(-overlayHeight*0.5f - fontSize*1.2f)));
+						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}
@@ -1809,11 +1800,32 @@ void Oculars::paintCrosshairs()
 		length *= static_cast<float>(oculars[selectedOcularIndex]->apparentFOV() / maxEyepieceAngle);
 	}
 	length *= static_cast<float>(params.devicePixelsPerPixel);
+	double polarAngle = 0.;
+	if (getFlagAlignCrosshair())
+	{
+		Vec3d CPos;
+		Vector2<qreal> cpos = projector->getViewportCenter();
+		projector->unProject(cpos[0], cpos[1], CPos);
+		Vec3d CPrel(CPos);
+		CPrel[2]*=0.2;
+		Vec3d crel;
+		projector->project(CPrel, crel);
+		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+		if (CPos[2] > 0) polarAngle += 90.0;
+		else polarAngle -= 90.0;
+	}
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-	painter.drawLine2d(centerScreen[0], centerScreen[1] - length, centerScreen[0], centerScreen[1] + length);
-	painter.drawLine2d(centerScreen[0] - length, centerScreen[1], centerScreen[0] + length, centerScreen[1]);
+	QPoint a, b;
+	int hw = qRound(length);
+	QTransform ch_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-polarAngle);
+	a = ch_transform.map(QPoint(0, -hw));
+	b = ch_transform.map(QPoint(0, hw));
+	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+	a = ch_transform.map(QPoint(-hw, 0));
+	b = ch_transform.map(QPoint(hw, 0));
+	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 }
 
 void Oculars::paintTelrad()
@@ -1837,9 +1849,7 @@ void Oculars::paintTelrad()
 void Oculars::paintOcularMask(const StelCore *core)
 {
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
-	{
 		paintCrosshairs();
-	}
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
@@ -1851,23 +1861,20 @@ void Oculars::paintOcularMask(const StelCore *core)
 	{
 		inner = oculars[selectedOcularIndex]->apparentFOV() * inner / maxEyepieceAngle;
 	}
-
-	painter.setBlending(true);
-
 	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
 
+	painter.setBlending(true);
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-
 		reticleTexture->bind();
-
+		/* Why it need?
 		int textureHeight;
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
-
-		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
+		*/
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(reticleRotation));
 	}
 
 	float alpha = 1.f;
@@ -1876,7 +1883,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	painter.setColor(0.f,0.f,0.f,alpha);
 
-	GLfloat outerRadius = params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel;
+	GLfloat outerRadius = static_cast<GLfloat>(params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel);
 	GLint slices = 239;
 
 	GLfloat sinCache[240];
@@ -1915,6 +1922,40 @@ void Oculars::paintOcularMask(const StelCore *core)
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
 	painter.enableClientStates(false);
+
+	if (getFlagShowContour())
+	{
+		// TODO: Make it configurable?
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.drawCircle(centerScreen[0], centerScreen[1], static_cast<float>(inner));
+	}
+
+	if (getFlagShowCardinals())
+	{
+		// Compute polar angle for cardinals and show it
+		double polarAngle = 0;
+		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
+		Vec3d CPos;
+		Vector2<qreal> cpos = projector->getViewportCenter();
+		projector->unProject(cpos[0], cpos[1], CPos);
+		Vec3d CPrel(CPos);
+		CPrel[2]*=0.2;
+		Vec3d crel;
+		projector->project(CPrel, crel);
+		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+		if (CPos[2] > 0)
+			polarAngle += 90.0;
+		else
+			polarAngle -= 90.0;
+
+		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		if (core->getFlipHorz() && !core->getFlipVert())
+			cardinalsMirroredTexture->bind();
+		else
+			cardinalsNormalTexture->bind();
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(-polarAngle));
+	}
+
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -2205,7 +2246,7 @@ void Oculars::unzoomOcular()
 
 	if (getFlagInitFovUsage())
 		movementManager->zoomTo(movementManager->getInitFov());
-	else
+	else if (!flagShowTelrad)
 		movementManager->zoomTo(initialFOV);
 
 	if (getFlagInitDirectionUsage())
@@ -2562,6 +2603,19 @@ bool Oculars::getFlagScalingFOVForTelrad() const
 	return  flagScalingFOVForTelrad;
 }
 
+void Oculars::setFlagScalingFOVForCCD(const bool b)
+{
+	flagScalingFOVForCCD = b;
+	settings->setValue("use_ccd_fov_scaling", b);
+	settings->sync();
+	emit flagScalingFOVForCCDChanged(b);
+}
+
+bool Oculars::getFlagScalingFOVForCCD() const
+{
+	return  flagScalingFOVForCCD;
+}
+
 void Oculars::setFlagUseSemiTransparency(const bool b)
 {
 	flagSemiTransparency = b;
@@ -2606,6 +2660,45 @@ void Oculars::setFlagShowCcdCropOverlay(const bool b)
 bool Oculars::getFlagShowCcdCropOverlay(void) const
 {
 	return flagShowCcdCropOverlay;
+}
+
+void Oculars::setFlagShowContour(const bool b)
+{
+	flagShowContour = b;
+	settings->setValue("show_ocular_contour", b);
+	settings->sync();
+	emit flagShowContourChanged(b);
+}
+
+bool Oculars::getFlagShowContour(void) const
+{
+	return flagShowContour;
+}
+
+void Oculars::setFlagShowCardinals(const bool b)
+{
+	flagShowCardinals = b;
+	settings->setValue("show_ocular_cardinals", b);
+	settings->sync();
+	emit flagShowCardinalsChanged(b);
+}
+
+bool Oculars::getFlagShowCardinals(void) const
+{
+	return flagShowCardinals;
+}
+
+void Oculars::setFlagAlignCrosshair(const bool b)
+{
+	flagAlignCrosshair = b;
+	settings->setValue("align_crosshair", b);
+	settings->sync();
+	emit flagAlignCrosshairChanged(b);
+}
+
+bool Oculars::getFlagAlignCrosshair(void) const
+{
+	return flagAlignCrosshair;
 }
 
 void Oculars::setArrowButtonScale(const double val)
@@ -2663,24 +2756,24 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		if (fovX >= 1.0)
 		{
 			int degrees = static_cast<int>(fovX);
-			float minutes = (fovX - degrees) * 60.f;
+			double minutes = (fovX - degrees) * 60.;
 			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = fovX * 60.f;
+			double minutes = fovX * 60.;
 			stringFovX = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = static_cast<int>(fovY);
-			float minutes = (fovY - degrees) * 60.f;
+			double minutes = (fovY - degrees) * 60.;
 			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = fovY * 60.f;
+			double minutes = fovY * 60;
 			stringFovY = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 	}

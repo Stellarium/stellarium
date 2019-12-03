@@ -1056,6 +1056,7 @@ void MpcImportWindow::loadBookmarks()
 	}
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
+	bookmarks[MpcComets].insert("Gideon van Buitenen: comets","http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
 
 	//Try to save them to a file
 	saveBookmarks();

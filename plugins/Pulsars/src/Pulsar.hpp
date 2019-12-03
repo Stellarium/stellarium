@@ -130,8 +130,8 @@ private:
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
 	QString pulsarName;	//! The proper name of the pulsar
-	float RA;		//! J2000 right ascension
-	float DE;		//! J2000 declination
+	double RA;		//! J2000 right ascension
+	double DE;		//! J2000 declination
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)

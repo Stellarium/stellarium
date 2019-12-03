@@ -2353,11 +2353,11 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 
 	// zlib stream
 	z_stream strm;
-	strm.zalloc = Z_NULL;
-	strm.zfree = Z_NULL;
-	strm.opaque = Z_NULL;
+	strm.zalloc = Q_NULLPTR;
+	strm.zfree = Q_NULLPTR;
+	strm.opaque = Q_NULLPTR;
 	strm.avail_in = Z_NULL;
-	strm.next_in = Z_NULL;
+	strm.next_in = Q_NULLPTR;
 
 	// the amount of bytes already read from the device
 	qint64 bytesRead = 0;

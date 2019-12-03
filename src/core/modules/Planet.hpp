@@ -324,8 +324,8 @@ public:
 
 	void setRings(Ring* r) {rings = r;}
 
-	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
-	float getSphereScale() const { return sphereScale; }
+	void setSphereScale(double s) { if(!fuzzyEquals(s, sphereScale)) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
+	double getSphereScale() const { return sphereScale; }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -532,7 +532,7 @@ protected:
 					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
 					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
-	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
+	Vec3f screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
@@ -560,7 +560,7 @@ protected:
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 	// it is used for sorting while drawing
-	float sphereScale;               // Artificial scaling for better viewing.
+	double sphereScale;              // Artificial scaling for better viewing.
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;

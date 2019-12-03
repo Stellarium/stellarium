@@ -72,7 +72,7 @@ void MilkyWay::init()
 	setSaturation(conf->value("astro/milky_way_saturation", 1.).toDouble());
 
 	// A new texture was provided by Fabien. Better resolution, but in equatorial coordinates. I had to enhance it a bit, and shift it by 90 degrees.
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true)); // GZ orig: slices=stacks=20.
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0f, 0.3f, 0.9f));
 

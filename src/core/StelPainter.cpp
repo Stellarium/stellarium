@@ -357,21 +357,21 @@ void StelPainter::drawViewportShape(void)
 		glEnable(GL_BLEND);
 }
 
-void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
+void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
 	Q_ASSERT(level<32);
 	float rad[64];
-	int i,j;
+	uint i,j;
 	rad[level] = radius;
-	for (i=level-1;i>=0;--i)
+	for (i=level-1u;i!=-1u;--i)
 	{
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
-	int slices = innerFanSlices<<level;
+	uint slices = innerFanSlices<<level;
 	
 	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(static_cast<uint>(slices));
 	float* cos_sin_theta_p;
-	int slices_step = 2;
+	uint slices_step = 2;
 	float x,y,xa,ya;
 	radius*=2.f;
 	vertexArr.resize(0);
@@ -542,25 +542,26 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 
 void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
-	float dx, dy, d, theta, theta_o, psi;
+	float dx, dy, d, theta, theta_o, psi, width;
 	dx = x - static_cast<float>(prj->viewportCenter[0]);
 	dy = y - static_cast<float>(prj->viewportCenter[1]);
 	d = std::sqrt(dx*dx + dy*dy);
 	float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
-	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
+	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
+
+	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
+	float stdWidth = static_cast<float>(getFontMetrics().boundingRect("a").width());
 	theta = std::atan2(dy - 1, dx);
-	theta_o = M_PIf + std::atan2(dx, dy - 1);
-	psi = std::atan2(static_cast<float>(getFontMetrics().boundingRect(ws).width()/ws.length()),d + 1) * M_180_PIf;
+	theta_o = M_PIf + std::atan2(dx, dy - 1);	
+	psi = std::atan2(cWidth, d + 1) * M_180_PIf;
 	if (psi>5)
 		psi = 5;
 
-	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
 	float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
 	float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
-
 	const float cosr = std::cos(-theta_o * M_PI_180f);
 	const float sinr = std::sin(-theta_o * M_PI_180f);
 	float xom = x + xshift*cosr - yshift*sinr;
@@ -582,7 +583,11 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 				y = d * std::sin(theta) + yVc ;
 				drawText(x, y, ws[i], 90.f + theta*M_180_PIf, 0., 0.);
 				// Compute how much the character contributes to the angle
-				theta += psi * M_PI_180f * (1 + (static_cast<float>(getFontMetrics().boundingRect(ws[i]).width()) - cWidth)/ cWidth);
+				if (ws[i].isSpace())
+					width = stdWidth;
+				else
+					width = static_cast<float>(getFontMetrics().boundingRect(ws[i]).width());
+				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
 			}
 		}
 	}
@@ -602,7 +607,11 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 				x = d * std::cos(theta) + xVc;
 				y = d * std::sin(theta) + yVc;
 				drawText(x, y, ws[slen-1-i], 90.f + theta*M_180_PIf, 0., 0.);
-				theta += psi * M_PI_180f * (1 + (static_cast<float>(getFontMetrics().boundingRect(ws[slen-1-i]).width()) - cWidth)/ cWidth);
+				if (ws[slen-1-i].isSpace())
+					width = stdWidth;
+				else
+					width = static_cast<float>(getFontMetrics().boundingRect(ws[slen-1-i]).width());
+				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
 			}
 		}
 	}
@@ -1479,9 +1488,11 @@ class VertexArrayProjector
 public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
 						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=Q_NULLPTR, QVarLengthArray<Vec3f, 4096>* aoutColors=Q_NULLPTR, double amaxSqDistortion=5.)
-		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
+		   : //vertexArray(ar),
+		     painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
 			 outColors(aoutColors), outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
 	{
+		Q_UNUSED(ar)
 	}
 
 	// Project a single triangle and add it into the output arrays
@@ -1527,7 +1538,7 @@ public:
 	}
 
 private:
-	const StelVertexArray& vertexArray;
+	//const StelVertexArray& vertexArray; // UNUSED?
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;

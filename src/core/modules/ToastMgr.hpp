@@ -31,7 +31,7 @@ class ToastMgr : public StelModule
 			NOTIFY surveyDisplayedChanged)
 public:
 	ToastMgr();
-	virtual ~ToastMgr();
+	virtual ~ToastMgr() Q_DECL_OVERRIDE;
 	virtual void init() Q_DECL_OVERRIDE;
 	virtual void deinit() Q_DECL_OVERRIDE;
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;

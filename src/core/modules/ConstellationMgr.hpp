@@ -322,6 +322,9 @@ private slots:
 
 	void reloadSkyCulture(void);
 
+	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
+	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
+
 private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names
@@ -409,6 +412,7 @@ private:
 	bool boundariesDisplayed;
 	bool linesDisplayed;
 	bool namesDisplayed;
+	bool checkLoadingData;
 
 	// Store the thickness of lines of the constellations
 	int constellationLineThickness;

@@ -188,6 +188,7 @@ void StelMovementMgr::init()
 	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
 	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
+	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
 	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
 	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
@@ -511,9 +512,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		{
 			if (event->type()==QEvent::MouseButtonRelease)
 			{
-				// Deselect the selected object
-				StelApp::getInstance().getStelObjectMgr().unSelect();
-				setFlagLockEquPos(false);
+				// The code for deselect the selected object was moved into separate method.
+				deselection();
 				event->accept();
 				return;
 			}
@@ -1169,6 +1169,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			}
 		}
 	}
+}
+
+void StelMovementMgr::deselection(void)
+{
+	// Deselect the selected object
+	StelApp::getInstance().getStelObjectMgr().unSelect();
+	setFlagLockEquPos(false);	
+	return;
 }
 
 // Go and zoom to the selected object. (Action linked to key, default "/")

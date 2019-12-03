@@ -65,7 +65,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 11;
+static const int StarCatalogFormatVersion = 12;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -138,14 +138,15 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 
 
 StarMgr::StarMgr(void)
-	: flagStarName(false)	
+	: StelObjectModule()
+	, flagStarName(false)
 	, labelsAmount(0.)
 	, gravityLabel(false)
+	, maxGeodesicGridLevel(-1)
+	, lastMaxSearchLevel(-1)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
-	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -273,7 +274,7 @@ int StarMgr::getWdsLastObservation(int hip)
 	return 0;
 }
 
-int StarMgr::getWdsLastPositionAngle(int hip)
+float StarMgr::getWdsLastPositionAngle(int hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -352,7 +353,7 @@ double StarMgr::getGcvsEpoch(int hip)
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().epoch;
-	return -99.f;
+	return -99.;
 }
 
 double StarMgr::getGcvsPeriod(int hip)
@@ -360,7 +361,7 @@ double StarMgr::getGcvsPeriod(int hip)
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().period;
-	return -99.f;
+	return -99.;
 }
 
 int StarMgr::getGcvsMM(int hip)
@@ -440,7 +441,7 @@ void StarMgr::init()
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
-	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
+	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -482,7 +483,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		sPainter.setBlending(true);
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getAnimationTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);
 	}
 }
 
@@ -540,7 +541,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			}
 			else
 			{
-				md5Hash.addData((const char*)cat, cat_sz);
+				md5Hash.addData(reinterpret_cast<const char*>(cat), cat_sz);
 				file.unmap(cat);
 			}
 			file.close();
@@ -605,7 +606,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qDebug() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
-	for (const auto& catV : catalogsDescription)
+	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
 		checkAndLoadCatalog(m);
@@ -613,9 +614,9 @@ void StarMgr::loadData(QVariantMap starsConfig)
 
 	for (int i=0; i<=NR_OF_HIP; i++)
 	{
-		hipIndex[i].a = 0;
-		hipIndex[i].z = 0;
-		hipIndex[i].s = 0;
+		hipIndex[i].a = Q_NULLPTR;
+		hipIndex[i].z = Q_NULLPTR;
+		hipIndex[i].s = Q_NULLPTR;
 	}
 	for (auto* z : gridLevels)
 		z->updateHipIndex(hipIndex);
@@ -671,7 +672,7 @@ void StarMgr::populateHipparcosLists()
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
 				QMap<StelObjectP, float> sa;
-				sa[so] = getGcvsPeriod(s->getHip());
+				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
 			}
 			if (!getWdsName(s->getHip()).isEmpty())
@@ -681,9 +682,9 @@ void StarMgr::populateHipparcosLists()
 				doubleHipStars.push_back(sd);
 			}
 			// use separate variables for avoid the overflow (esp. for Barnard's star)
-			float pmX = 0.1 * s->getDx0();
-			float pmY = 0.1 * s->getDx1();
-			float pm = 0.001 * std::sqrt((pmX*pmX) + (pmY*pmY));
+			float pmX = 0.1f * s->getDx0();
+			float pmY = 0.1f * s->getDx1();
+			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;
@@ -746,7 +747,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
+			int hip = recordRx.capturedTexts().at(1).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -850,7 +851,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
@@ -917,7 +918,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		unsigned int hip = fields.at(0).toUInt(&ok);
+		int hip = fields.at(0).toInt(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
@@ -992,7 +993,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		unsigned int hip = fields.at(0).toUInt(&ok);
+		int hip = fields.at(0).toInt(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
@@ -1064,7 +1065,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
@@ -1073,9 +1074,9 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			}
 
 			QString hipstar = QString("%1%2").arg(hip).arg(fields.at(1).trimmed());
-			crossIdData.sao = fields.at(2).toUInt(&ok);
-			crossIdData.hd = fields.at(3).toUInt(&ok);
-			crossIdData.hr = fields.at(4).toUInt(&ok);
+			crossIdData.sao = fields.at(2).toInt(&ok);
+			crossIdData.hd = fields.at(3).toInt(&ok);
+			crossIdData.hr = fields.at(4).toInt(&ok);
 
 			crossIdMap[hipstar] = crossIdData;
 			if (crossIdData.sao>0)
@@ -1132,7 +1133,7 @@ void StarMgr::loadPlxErr(const QString& plxErrFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			unsigned int hip = fields.at(0).toUInt(&ok);
+			int hip = fields.at(0).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
@@ -1219,11 +1220,11 @@ void StarMgr::draw(StelCore* core)
 		}
 		lastMaxSearchLevel = z->level;
 
-		unsigned int maxMagStarName = 0;
+		int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
 			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;

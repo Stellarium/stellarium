@@ -181,6 +181,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setEphemerisDataStep
 		   NOTIFY ephemerisDataStepChanged
 		   )
+	Q_PROPERTY(bool ephemerisSmartDates
+		   READ getFlagEphemerisSmartDates
+		   WRITE setFlagEphemerisSmartDates
+		   NOTIFY ephemerisSmartDatesChanged
+		   )
+	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed
+		   READ getFlagEphemerisScaleMarkers
+		   WRITE setFlagEphemerisScaleMarkers
+		   NOTIFY ephemerisScaleMarkersChanged
+		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
@@ -448,7 +458,7 @@ public slots:
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(a!=labelsAmount) {labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a) {if(!fuzzyEquals(a, labelsAmount)) {labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	double getLabelsAmount(void) const {return labelsAmount;}
@@ -910,6 +920,8 @@ signals:
 	void ephemerisLineChanged(bool b);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
+	void ephemerisSmartDatesChanged(bool b);
+	void ephemerisScaleMarkersChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -950,6 +962,7 @@ signals:
 	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
 
 	void solarSystemDataReloaded();
+	void requestEphemerisVisualization();
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -1036,6 +1049,12 @@ private slots:
 	void setFlagEphemerisSkipData(bool b);
 	bool getFlagEphemerisSkipData() const;
 
+	void setFlagEphemerisSmartDates(bool b);
+	bool getFlagEphemerisSmartDates() const;
+
+	void setFlagEphemerisScaleMarkers(bool b);
+	bool getFlagEphemerisScaleMarkers() const;
+
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
@@ -1062,6 +1081,8 @@ private slots:
 
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
+
+	void fillEphemerisDates();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -1143,7 +1164,7 @@ private:
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
-	StelTextureSP texCircle;                    // The symbolic circle texture
+	StelTextureSP texEphemerisMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1160,6 +1181,8 @@ private:
 	bool ephemerisLineDisplayed;
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
+	bool ephemerisSmartDatesDisplayed;
+	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
