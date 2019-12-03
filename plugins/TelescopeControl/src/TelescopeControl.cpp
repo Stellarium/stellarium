@@ -201,7 +201,7 @@ void TelescopeControl::init()
 			abortSlew->setMapping(actionAbortSlew, i);
 		}
 		connect(slewObj, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToSelectedObject(int)));
-		connect(syncObj, SIGNAL(mapped(int)), this, SLOT(syncTelescopeToSelectedObject(int)));
+		connect(syncObj, SIGNAL(mapped(int)), this, SLOT(syncTelescopeWithSelectedObject(int)));
 		connect(slewDir, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToViewDirection(int)));
 		connect(abortSlew, SIGNAL(mapped(int)), this, SLOT(abortTelescopeSlew(int)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
