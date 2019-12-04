@@ -96,8 +96,7 @@ void TestTelescopeControl_ASCOM::ascomDeviceShouldFailToInitializeWithInvalidDev
 	device = new ASCOMDevice(Q_NULLPTR, Q_NULLPTR);
 
 	// Then
-	QVERIFY(device->connect() == false);
-	QVERIFY(device->disconnect() == false);
+	QVERIFY(device->connect() == false);	
 }
 
 QTEST_MAIN(TestTelescopeControl_ASCOM)

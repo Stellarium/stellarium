@@ -36,10 +36,11 @@ bool ASCOMDevice::connect()
 	initResult = OleInit(COINIT_APARTMENTTHREADED);
 	hResult = OleCreateInstance(reinterpret_cast<const wchar_t*>(mAscomDeviceId.toStdWString().c_str()), &pTelescopeDispatch);
 
-	if (FAILED(hResult)) {
+	if (FAILED(hResult))
+	{
 		qDebug() << "Initialization failed for device: " << mAscomDeviceId;
 		return false;
-	};
+	}
 
 	v1 = OleBoolToVariant(TRUE);
 
@@ -70,7 +71,7 @@ bool ASCOMDevice::disconnect()
 	{
 		qDebug() << "Could not disconnect device: " << mAscomDeviceId;
 		return false;
-	};
+	}
 	
 	pTelescopeDispatch->Release();
 
