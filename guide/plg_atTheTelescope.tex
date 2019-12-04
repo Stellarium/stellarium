@@ -11,12 +11,11 @@ Two plugins are bundled with Stellarium which are designed to be used
 at the telescope: Oculars (section~\ref{sec:plugins:Oculars}), which
 provides field of view hints for telescopes, oculars and sensors, and
 TelescopeControl (section~\ref{sec:plugins:TelescopeControl}), which
-allows you to send GOTO commands to many motorized telescope mounts. Other
+allows you to send GOTO commands to most motorized telescope mounts. Other
 GOTO telescopes are supported by external programs which you must
-install separately: \program{StellariumScope}
-(section~\ref{sec:plugins:StellariumScope}), \program{RTS2} (section~\ref{sec:plugins:TelescopeControl:RTS2}) 
-or \program{INDI} (section~\ref{sec:plugins:TelescopeControl:INDI}). This can also help DIY hardware 
-tinkerers who like to build their own control systems (section~\ref{sec:plugins:TelescopeControl:Other}).
+install separately: \program{RTS2} (section~\ref{sec:plugins:TelescopeControl:RTS2}), 
+\program{INDI} (section~\ref{sec:plugins:TelescopeControl:INDI}) or \program{ASCOM} (section~\ref{sec:plugins:TelescopeControl:ASCOM}). 
+This can also help DIY hardware tinkerers who like to build their own control systems (section~\ref{sec:plugins:TelescopeControl:Other}).
 
 In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
 can be used for planning the best times to observe your favourite
@@ -436,11 +435,13 @@ protection.
 \subsection{Abilities and limitations}
 \label{sec:plugins:TelescopeControl:Limitations}
 
-This plug-in allows Stellarium to send only 'slew' ('go to') commands
-to the device and to receive its current position. It cannot issue any
-other commands, so users should be aware of the possibility for mount
-collisions and similar situations. (To abort a slew, you can start
-another one to a safe position.)
+This plug-in allows Stellarium to send 'slew' ('go to') commands
+to the device and to receive its current position. There are some scopes which
+additionally support 'sync' commands to be received in order to update the internal
+pointing model of the mount. Some scopes also have the ability to abort a previous 
+slew command. However, users should always be aware of the possibility for mount 
+collisions and similar situations. You should always make sure that a slew does 
+not cause parts of the telescope to collide with the environment or mount itself. 
 
 Currently this plug-in does not allow satellite tracking unless the controlled 
 telescope is an RTS2 system (see section~\ref{sec:plugins:TelescopeControl:RTS2}), 
@@ -498,7 +499,7 @@ The plug-in's main window can be opened:
 
 \begin{itemize}
 \item The \emph{number (\#)} column shows the number used to control this
-  telescope. For example, for telescope \#2, the shortcut is
+  telescope. For example, for slewing telescope \#2, the shortcut is
   \keys{\ctrl+2}.
 \item The \emph{Status} column indicates if this connection is
   currently active or not. Unfortunately, there are some cases in
@@ -508,6 +509,7 @@ The plug-in's main window can be opened:
   \item[virtual] means a virtual telescope (test mode).
   \item[local, Stellarium] means a DIRECT connection to the telescope (see above).
   \item[local, external] means an INDIRECT connection to a program running on the same computer.
+  \item[local, ASCOM] means an INDIRECT connection to a ASCOM driver running on the same computer.
   \item[remote, unknown] means an INDIRECT connection over a network to a remote machine.
   \item[remote, RTS2] means an INDIRECT connection over a network to an RTS2 server.
   \item[remote, INDI] means an INDIRECT connection over a network to an INDI server.
@@ -531,10 +533,12 @@ Telescope controlled by:
 \item[External software or a remote computer] is an INDIRECT case
 \item[RTS2 Telescope] is another INDIRECT case\newFeature{v0.16.0}
 \item[INDI] is another INDIRECT case\newFeature{v0.17.0}
+\item[ASCOM] is another INDIRECT case\newFeature{v0.19.3}
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
 \paragraph{Telescope properties}
+\label{sec:plugins:TelescopeProperties}
 
 \begin{description}
 \item[Name] is the label that will be displayed on the screen next to
@@ -545,7 +549,8 @@ Telescope controlled by:
 \item[Coordinate system] Some Celestron telescopes have had their
   firmware updated and now interpret the coordinates they receive as
   coordinates that use the equinox of the date (EOD, also known as
-  JNow), making necessary this setting.
+  JNow), making necessary this setting. With ASCOM telescopes it's also
+  possible to use this setting to override the default device preference. 
 \item[Start/connect at startup] Check this option if you want
   Stellarium to attempt to connect to the telescope immediately after
   it starts. Otherwise, to start the telescope, you need to open the
@@ -567,7 +572,7 @@ This section is active only for DIRECT connections (see above).
 	Depending on your flavour of Linux, this may e.g.\ require some group membership.
   \item On Mac OS X, the list is empty as it names its ports in a
     peculiar way.
-  If you are using an USB cable, the default serial port of your
+  If you are using a USB cable, the default serial port of your
   telescope most probably is not in the list of suggestions.  To list
   all valid serial port names in Mac OS X, open a terminal and type:
 
@@ -616,6 +621,10 @@ rts2-user} for details on how to manipulate RTS2 users.
 \paragraph{INDI settings} (see also \ref{sec:plugins:TelescopeControl:INDI})
 You will need access to an INDI server through a TCP/IP connection.\newFeature{v0.17.0}
 Please see INDI documentation for details. You will need to select the correct INDI device to manage it.
+
+\paragraph{ASCOM settings}
+You can choose an ASCOM telescope driver installed in your system using the ASCOM chooser.\newFeature{v0.19.3} Additionally you can choose how Stellarium is determining the
+coordinate system used to communicate with the ASCOM mount. For more information, please see \ref{sec:plugins:TelescopeControl:ASCOM}.
 
 \paragraph{User Interface Settings: Field of view indicators}
 
@@ -738,6 +747,10 @@ is beyond the scope of this handbook, but see section~\ref{sec:plugins:Telescope
 for a few notes to be able to connect and command the telescope with Stellarium.
 Please refer to the INDI web pages\footnote{\url{http://indilib.org}} for further details.
 
+\subsubsection{ASCOM telescopes}
+\newFeature{v0.19.3}ASCOM specific settings can be configured when a ASCOM telescope was selected.
+Please see section~\ref{sec:plugins:TelescopeControl:ASCOM} for futher information about
+configuration possibilities.
 
 \subsubsection{Virtual telescope}
 If you want to test this plug-in without an actual device connected to
@@ -837,10 +850,42 @@ List of telescope types supported by INDI\footnote{\url{http://indilib.org/devic
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
+\section{ASCOM}
+\label{sec:plugins:TelescopeControl:ASCOM}
+
+\indexterm{ASCOM}, \newFeature{v0.19.3}is probably the most widely used way how to communicate with telescopes, mounts
+and other astronomy equipment. The ASCOM platform aims to decouple device dependent specifics by introducing a common
+standard for communication between device drivers and applications. Almost every telescope mount comes with an ASCOM 
+driver and most of the astronomy software and tools can communicate with ASCOM compatible devices.
+
+The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.
+
+Note that in order for Stellarium to communicate with your ASCOM compatible mount, you will need to have the ASCOM
+plaform installed on your Windows machine (version 6 or higher). Also, the ASCOM driver of your telescope mount
+needs to be installed before you can start using the telescope in Stellarium.
+
+\textbf{Important:} Most modern ASCOM drivers are written to run in 32bit and 64bit mode (any) and therefore are 
+compatible with the 64bit and 32bit version of Stellarium. However, if you happen to have a 32bit or 64bit only
+driver for your telescope mount, you will also need to install the respective Stellarium version.
+
+In order to use your ASCOM telescope you need to select the correct device in the ASCOM chooser by clicking
+the button \button{Choose ASCOM telescope}. The selected device is shown below that button.
+
+By default, Stellarium is trying to ask the ASCOM driver in order to determine if JNow or J2000 coordinates 
+should be used for communicating with the mount. If you'd like to override this behavior and tell the ASCOM telescope
+to communicate in the coordinate system configured in the section \nameref{sec:plugins:TelescopeProperties}, you can
+switch the radio button \button{Let ASCOM device decide} to \button{Use Stellarium settings} in the ASCOM settings of 
+the Configure Telescope dialog.
+
 %\newpage
 \section{StellariumScope}
 \label{sec:plugins:StellariumScope}
 \program{StellariumScope} is a free add-on that enables you to control your telescope with Stellarium. 
+
+Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. There's no need to 
+  use StellariumScope in order to use your ASCOM telescopes with Stellarium anymore. We are 
+  encouraging our users to switch to the native ASCOM option going forward and the use of
+  StellariumScope is most likely not recommended in the future.
 
 \begin{figure}[htp]
 \begin{center}

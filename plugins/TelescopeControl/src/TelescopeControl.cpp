@@ -78,7 +78,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
-	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi";
+	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi, Gion Kunz";
 	info.contact = STELLARIUM_URL;
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
@@ -96,6 +96,8 @@ TelescopeControl::TelescopeControl()
 	, slewDialog(Q_NULLPTR)
 	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
+	, syncActionId("actionSync_Telescope_To_Selection_%1")
+	, abortSlewActionId("actionAbortSlew_Telescope_Slew_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {
 	setObjectName("TelescopeControl");
@@ -106,6 +108,7 @@ TelescopeControl::TelescopeControl()
 	connectionTypeNames.insert(ConnectionRemote, "remote");
 	connectionTypeNames.insert(ConnectionRTS2, "RTS2");
 	connectionTypeNames.insert(ConnectionINDI, "INDI");
+	connectionTypeNames.insert(ConnectionASCOM, "ASCOM");
 }
 
 TelescopeControl::~TelescopeControl()
@@ -158,7 +161,9 @@ void TelescopeControl::init()
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 		QSignalMapper* slewObj = new QSignalMapper(this);
+		QSignalMapper* syncObj = new QSignalMapper(this);
 		QSignalMapper* slewDir = new QSignalMapper(this);
+		QSignalMapper* abortSlew = new QSignalMapper(this);
 
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
@@ -180,9 +185,25 @@ void TelescopeControl::init()
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			StelAction* actionSlewDir = addAction(name, section, text, slewDir, "map()", shortcut);
 			slewDir->setMapping(actionSlewDir, i);
+
+			// "Sync to object" commands
+			name = syncActionId.arg(i);
+			shortcut = QString("Ctrl+Shift+%1").arg(i);
+			text = q_("Sync telescope #%1 position to selected object").arg(i);
+			StelAction* actionSyncObj = addAction(name, section, text, syncObj, "map()", shortcut);
+			syncObj->setMapping(actionSyncObj, i);
+
+			// "Abort Slew" commands
+			name = abortSlewActionId.arg(i);
+			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
+			text = q_("Abort last slew command of telescope #%1").arg(i);
+			StelAction* actionAbortSlew = addAction(name, section, text, abortSlew, "map()", shortcut);
+			abortSlew->setMapping(actionAbortSlew, i);
 		}
-		connect(slewObj,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToSelectedObject(int)));
-		connect(slewDir,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToViewDirection(int)));
+		connect(slewObj, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToSelectedObject(int)));
+		connect(syncObj, SIGNAL(mapped(int)), this, SLOT(syncTelescopeWithSelectedObject(int)));
+		connect(slewDir, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToViewDirection(int)));
+		connect(abortSlew, SIGNAL(mapped(int)), this, SLOT(abortTelescopeSlew(int)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 				this, SLOT(translateActionDescriptions()));
 
@@ -225,9 +246,17 @@ void TelescopeControl::translateActionDescriptions()
 		name = moveToSelectedActionId.arg(i);
 		description = q_("Move telescope #%1 to selected object").arg(i);
 		actionMgr->findAction(name)->setText(description);
+
+		name = syncActionId.arg(i);
+		description = q_("Abort last slew command of telescope #%1").arg(i);
+		actionMgr->findAction(name)->setText(description);
 		
 		name = moveToCenterActionId.arg(i);
 		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+		actionMgr->findAction(name)->setText(description);
+
+		name = abortSlewActionId.arg(i);
+		description = q_("Abort last slew command of telescope #%1").arg(i);
 		actionMgr->findAction(name)->setText(description);
 	}
 }
@@ -425,12 +454,9 @@ void TelescopeControl::syncTelescopeWithSelectedObject(const int idx)
 	telescopeSync(idx, objectPosition, selectObject);
 }
 
-void TelescopeControl::syncTelescopeWithViewDirection(const int idx)
-{
-	// Find out the coordinates of the target
-	Vec3d centerPosition = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
-
-	telescopeSync(idx, centerPosition);
+void TelescopeControl::abortTelescopeSlew(const int idx) {
+	if (telescopeClients.contains(idx))
+		telescopeClients.value(idx)->telescopeAbortSlew();
 }
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
@@ -799,6 +825,8 @@ void TelescopeControl::loadTelescopes()
 		QString rts2Username("");
 		QString rts2Password("");
 		int rts2Refresh = DEFAULT_RTS2_REFRESH;
+		QString ascomDeviceId("");
+		bool ascomUseDeviceEqCoordType = true;
 
 		if (connectionType == ConnectionInternal)
 		{
@@ -847,6 +875,12 @@ void TelescopeControl::loadTelescopes()
 			portTCP = telescope.value("tcp_port").toInt();
 			hostName = telescope.value("host_name").toString();
 			deviceModelName = telescope.value("device_model").toString();
+		}
+
+		if (connectionType == ConnectionASCOM)
+		{
+			ascomDeviceId = telescope.value("ascom_device_id").toString();
+			ascomUseDeviceEqCoordType = telescope.value("ascom_use_device_eq_coord_type").toBool();
 		}
 
 		if (connectionType == ConnectionRTS2)
@@ -956,7 +990,7 @@ void TelescopeControl::loadTelescopes()
 			}
 			else
 			{
-				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
+				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 				{
 					qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 					//Unnecessary due to if-else construction;
@@ -980,7 +1014,7 @@ void TelescopeControl::loadTelescopes()
 	telescopeDescriptions = result;
 }
 
-bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh)
+bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId, bool ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
@@ -997,6 +1031,12 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("host_name", host);
 		telescope.insert("tcp_port", portTCP);
 		telescope.insert("device_model", deviceModelName);
+	}
+
+	if (connectionType == ConnectionASCOM)
+	{
+		telescope.insert("ascom_device_id", ascomDeviceId);
+		telescope.insert("ascom_use_device_eq_coord_type", ascomUseDeviceEqCoordType);
 	}
 
 	if (connectionType == ConnectionRemote || connectionType == ConnectionLocal)
@@ -1062,7 +1102,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	return true;
 }
 
-bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh)
+bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId, bool& ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slot))
@@ -1109,6 +1149,11 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 	{
 		deviceModelName = telescope.value("device_model").toString();
 	}
+	if(connectionType == ConnectionASCOM)
+	{
+		ascomDeviceId = telescope.value("ascom_device_id").toString();
+		ascomUseDeviceEqCoordType = telescope.value("ascom_use_device_eq_coord_type").toBool();
+	}
 
 	return true;
 }
@@ -1144,7 +1189,10 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	QString rts2Username;
 	QString rts2Password;
 	int rts2Refresh;
-	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
+	QString ascomDeviceId;
+	bool ascomUseDeviceEqCoordType;
+
+	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
 		//TODO: Add debug
 		return false;
@@ -1180,7 +1228,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	}
 	else
 	{
-		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
+		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 		{
 			emit clientConnected(slot, name);
 			return true;
@@ -1314,7 +1362,7 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 	return true;
 }
 
-bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh)
+bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId, bool ascomUseDeviceEqCoordType)
 {
 	//Validation
 	if(!isValidSlotNumber(slotNumber))
@@ -1352,6 +1400,10 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 
 	case ConnectionINDI:
 		initString = QString("%1:%2:%3:%4:%5:%6").arg(name, "INDI", "J2000", host, QString::number(portTCP), deviceModelName);
+		break;
+
+	case ConnectionASCOM:
+		initString = QString("%1:%2:%3:%4:%5").arg(name, "ASCOM", equinox, ascomDeviceId, ascomUseDeviceEqCoordType ? "true" : "false");
 		break;
 
 	case ConnectionRemote:
