@@ -638,7 +638,7 @@
 	     from Adam Block/ChileScope
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.90 Images of M74, NGC1788, Sh2-132, Coma Cluster, Leo Cluster, barnard150, LDN673
+	4.90 Images of M74, NGC1788, NGC5053, Sh2-132, Coma Cluster, Leo Cluster, barnard150, LDN673
 	     from Bart Delsaert
 	     https://delsaert.com/
 	     License: Creative Commons Attribution 3.0 Unported
