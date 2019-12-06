@@ -590,7 +590,7 @@
 	     from NASA, ESA and A. Evans (Stony Brook University, New York, University of Virginia & National Radio Astronomy Observatory, Charlottesville, USA)
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
-	4.78 Images of NGC3808, NGC5882, NGC6210, NGC6572, NGC6741
+	4.78 Images of IC4634, NGC3808, NGC5882, NGC6210, NGC6572, NGC6741
 	     from ESA/Hubble & NASA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
@@ -673,7 +673,7 @@
 	     from Astrowicht
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.99 Images of NGC5315, IC418, IC4593
+	4.99 Images of IC418, IC4593, NGC5315, NGC6751
 	     from NASA/ESA and The Hubble Heritage Team (STScI/AURA)
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
