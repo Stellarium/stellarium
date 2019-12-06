@@ -374,6 +374,29 @@
            </property>
           </widget>
          </item>
+         <item row="6" column="2">
+          <widget class="QSpinBox" name="lineWidthSpinBox">
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QLabel" name="lineWidthLabel">
+           <property name="text">
+            <string>Line width</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

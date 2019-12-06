@@ -68,6 +68,7 @@ ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
 	//, withDecimalDegree(false)
 	//, flagUseDmsFormat(false)
+	, lineWidth(1)
 	, flagShowEquinox(false)
 	, flagShowSolstices(false)
 	, flagShowCrossquarters(false)
@@ -505,6 +506,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
+	setLineWidth(conf->value("ArchaeoLines/line_width", 1).toInt());
 	setEquinoxColor(                StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
 	setSolsticesColor(              StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
 	setCrossquartersColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
@@ -572,6 +574,16 @@ void ArchaeoLines::loadSettings()
 	showCustomDeclination2(conf->value("ArchaeoLines/show_custom_declination_2", false).toBool());
 
 	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
+}
+
+void ArchaeoLines::setLineWidth(int width)
+{
+	if (width!=lineWidth)
+	{
+		lineWidth=qBound(1, width, 8); // Force some sensible limit
+		conf->setValue("ArchaeoLines/line_width", lineWidth);
+		emit lineWidthChanged(lineWidth);
+	}
 }
 
 void ArchaeoLines::showEquinox(bool b)
@@ -861,7 +873,7 @@ void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 
 void ArchaeoLines::setCustomAzimuth1(double az)
 {
-	if (az!=customAzimuth1Line->getDefiningAngle())
+	if (!qFuzzyCompare(az, customAzimuth1Line->getDefiningAngle()))
 	{
 		customAzimuth1Line->setDefiningAngle(az);
 		conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
@@ -870,7 +882,7 @@ void ArchaeoLines::setCustomAzimuth1(double az)
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
-	if (az!=customAzimuth1Line->getDefiningAngle())
+	if (!qFuzzyCompare(az, customAzimuth1Line->getDefiningAngle()))
 	{
 		customAzimuth2Line->setDefiningAngle(az);
 		conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
@@ -891,7 +903,7 @@ void ArchaeoLines::setCustomAzimuth2Label(QString label)
 }
 void ArchaeoLines::setCustomDeclination1(double dec)
 {
-	if (dec!=customDeclination1Line->getDefiningAngle())
+	if (!qFuzzyCompare(dec, customDeclination1Line->getDefiningAngle()))
 	{
 		customDeclination1Line->setDefiningAngle(dec);
 		conf->setValue("ArchaeoLines/custom_declination_1_angle", dec);
@@ -900,7 +912,7 @@ void ArchaeoLines::setCustomDeclination1(double dec)
 }
 void ArchaeoLines::setCustomDeclination2(double dec)
 {
-	if (dec!=customDeclination1Line->getDefiningAngle())
+	if (!qFuzzyCompare(dec, customDeclination1Line->getDefiningAngle()))
 	{
 		customDeclination2Line->setDefiningAngle(dec);
 		conf->setValue("ArchaeoLines/custom_declination_2_angle", dec);
@@ -1336,6 +1348,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth());
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
@@ -1456,7 +1469,7 @@ void ArchaeoLine::setColor(const Vec3f& c)
 }
 void ArchaeoLine::setDefiningAngle(const double angle)
 {
-	if (angle != definingAngle)
+	if (!qFuzzyCompare(angle, definingAngle))
 	{
 		definingAngle=angle;
 		emit definingAngleChanged(angle);

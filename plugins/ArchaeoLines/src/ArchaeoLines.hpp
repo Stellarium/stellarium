@@ -224,6 +224,7 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(Vec3f customDeclination1Color      READ getCustomDeclination1Color      WRITE setCustomDeclination1Color      NOTIFY customDeclination1ColorChanged      )
 	Q_PROPERTY(Vec3f customDeclination2Color      READ getCustomDeclination2Color      WRITE setCustomDeclination2Color      NOTIFY customDeclination2ColorChanged      )
 
+	Q_PROPERTY(int lineWidth    READ getLineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
 public:
 	ArchaeoLines();
 	virtual ~ArchaeoLines();
@@ -306,6 +307,7 @@ signals:
 	void customAzimuth2ColorChanged(Vec3f color);
 	void customDeclination1ColorChanged(Vec3f color);
 	void customDeclination2ColorChanged(Vec3f color);
+	void lineWidthChanged(int width);
 
 public slots:
 	void enableArchaeoLines(bool b);
@@ -430,6 +432,9 @@ public slots:
 	void setCustomDeclination1Color(Vec3f color);
 	void setCustomDeclination2Color(Vec3f color);
 
+	int getLineWidth() const {return lineWidth;}
+	void setLineWidth(int width);
+
 
 
 
@@ -446,6 +451,7 @@ private:
 	//bool withDecimalDegree;
 	//bool flagUseDmsFormat;
 	LinearFader lineFader;
+	int lineWidth;
 
 	Vec3f equinoxColor;
 	Vec3f solsticesColor;
