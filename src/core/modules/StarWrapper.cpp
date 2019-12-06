@@ -248,7 +248,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		double k = AU/(SPEED_OF_LIGHT*86400*365.25);
 		double d = ((0.00001/3600.)*(M_PI/180));
 		double distance = k/(s->getPlx()*d);
-		if (plxErr>0.f && (0.01*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
+		if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
 			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
 		else
 			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";

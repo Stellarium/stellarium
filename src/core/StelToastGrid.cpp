@@ -151,10 +151,10 @@ QVector<unsigned short> ToastGrid::getTrianglesIndex(int level, int x, int y, in
 		for (int j = 0; j < size - 1; ++j)
 		{
 			Q_ASSERT(i * size + j <= std::numeric_limits<short>::max());
-			unsigned int a = i * size + j;
-			unsigned int b = (i + 1) * size + j;
-			unsigned int c = (i + 1) * size + j + 1;
-			unsigned int d = i * size + j + 1;
+			unsigned short int a = static_cast<unsigned short int>(i * size + j);
+			unsigned short int b = static_cast<unsigned short int>((i + 1) * size + j);
+			unsigned short int c = static_cast<unsigned short int>((i + 1) * size + j) + 1;
+			unsigned short int d = static_cast<unsigned short int>(i * size + j + 1);
 			if (!invert)
 				ret << b << c << a << c << d << a;
 			else

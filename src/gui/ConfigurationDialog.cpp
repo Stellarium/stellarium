@@ -1299,7 +1299,7 @@ void ConfigurationDialog::newStarCatalogData()
 	if (!starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute).isNull())
 		return;
 	qint64 size = starCatalogDownloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
+	progressBar->setValue(progressBar->getValue()+static_cast<int>(size/1024));
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
@@ -1342,7 +1342,7 @@ void ConfigurationDialog::downloadStars()
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
-	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
+	progressBar->setRange(0, static_cast<int>(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024));
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 
 	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();

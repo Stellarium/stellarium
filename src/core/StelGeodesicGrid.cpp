@@ -38,8 +38,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <cmath>
 #include <cstdlib>
 
-static const float icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
-static const float icosahedron_b = 1.0/std::sqrt(1.0+icosahedron_G*icosahedron_G);
+static const float icosahedron_G = 0.5f*(1.0f+std::sqrt(5.0f));
+static const float icosahedron_b = 1.0f/std::sqrt(1.0f+icosahedron_G*icosahedron_G);
 static const float icosahedron_a = icosahedron_b*icosahedron_G;
 
 static const Vec3f icosahedron_corners[12] =
@@ -93,7 +93,7 @@ StelGeodesicGrid::StelGeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastM
 	if (maxLevel > 0)
 	{
 		triangles = new Triangle*[maxLevel+1];
-		int nr_of_triangles = 20;
+		uint nr_of_triangles = 20;
 		for (int i=0;i<maxLevel;i++)
 		{
 			triangles[i] = new Triangle[nr_of_triangles];
@@ -207,7 +207,7 @@ void StelGeodesicGrid::initTriangle(int lev,int index,
 								const Vec3f &c1,
 								const Vec3f &c2)
 {
-	Q_ASSERT((c0^c1)*c2 >= 0.0);
+	Q_ASSERT((c0^c1)*c2 >= 0.0f);
 	Triangle &t(triangles[lev][index]);
 	t.e0 = c1+c2;
 	t.e0.normalize();
@@ -276,22 +276,22 @@ int StelGeodesicGrid::getZoneNumberForPoint(const Vec3f &v,int searchLevel) cons
 		const Vec3f &c0(icosahedron_corners[corners[0]]);
 		const Vec3f &c1(icosahedron_corners[corners[1]]);
 		const Vec3f &c2(icosahedron_corners[corners[2]]);
-		if (((c0^c1)*v >= 0.0) && ((c1^c2)*v >= 0.0) && ((c2^c0)*v >= 0.0))
+		if (((c0^c1)*v >= 0.0f) && ((c1^c2)*v >= 0.0f) && ((c2^c0)*v >= 0.0f))
 		{
 			// v lies inside this icosahedron triangle
 			for (int lev=0;lev<searchLevel;lev++)
 			{
 				Triangle &t(triangles[lev][i]);
 				i <<= 2;
-				if ((t.e1^t.e2)*v <= 0.0)
+				if ((t.e1^t.e2)*v <= 0.0f)
 				{
 					// i += 0;
 				}
-				else if ((t.e2^t.e0)*v <= 0.0)
+				else if ((t.e2^t.e0)*v <= 0.0f)
 				{
 					i += 1;
 				}
-				else if ((t.e0^t.e1)*v <= 0.0)
+				else if ((t.e0^t.e1)*v <= 0.0f)
 				{
 					i += 2;
 				}

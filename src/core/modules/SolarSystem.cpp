@@ -296,22 +296,22 @@ void SolarSystem::recreateTrails()
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
 
-	unsigned long cnt = (unsigned long) selectedSSO.size();
+	unsigned long cnt = static_cast<unsigned long>(selectedSSO.size());
 	if (cnt>0 && getFlagIsolatedTrails())
 	{
-		unsigned long limit = getNumberIsolatedTrails();
+		unsigned long limit = static_cast<unsigned long>(getNumberIsolatedTrails());
 		if (cnt<limit)
 			limit = cnt;
 		for (unsigned long i=0; i<limit; i++)
 		{
-			allTrails->addObject((QSharedPointer<StelObject>)selectedSSO[cnt - i - 1], &trailColor);
+			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(selectedSSO[cnt - i - 1]), &trailColor);
 		}
 	}
 	else
 	{
 		for (const auto& p : getSun()->satellites)
 		{
-			allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
 		}
 	}
 }
@@ -2749,16 +2749,16 @@ QStringList SolarSystem::getAllMinorPlanetCommonEnglishNames() const
 void SolarSystem::reloadPlanets()
 {
 	// Save flag states
-	bool flagScaleMoon = getFlagMoonScale();
-	float moonScale = getMoonScale();
-	bool flagScaleMinorBodies=getFlagMinorBodyScale();
-	float minorScale= getMinorBodyScale();
-	bool flagPlanets = getFlagPlanets();
-	bool flagHints = getFlagHints();
-	bool flagLabels = getFlagLabels();
-	bool flagOrbits = getFlagOrbits();
-	bool flagNative = getFlagNativePlanetNames();
-	bool flagTrans = getFlagTranslatedNames();
+	const bool flagScaleMoon = getFlagMoonScale();
+	const double moonScale = getMoonScale();
+	const bool flagScaleMinorBodies=getFlagMinorBodyScale();
+	const double minorScale= getMinorBodyScale();
+	const bool flagPlanets = getFlagPlanets();
+	const bool flagHints = getFlagHints();
+	const bool flagLabels = getFlagLabels();
+	const bool flagOrbits = getFlagOrbits();
+	const bool flagNative = getFlagNativePlanetNames();
+	const bool flagTrans = getFlagTranslatedNames();
 	bool hasSelection = false;
 
 	// Save observer location (fix for LP bug # 969211)
@@ -3017,7 +3017,7 @@ bool SolarSystem::removeMinorPlanet(QString name)
 		qWarning() << "Cannot remove planet " << name << ": Not found.";
 		return false;
 	}
-	Orbit* orbPtr=(Orbit*) candidate->orbitPtr;
+	Orbit* orbPtr=static_cast<Orbit*>(candidate->orbitPtr);
 	if (orbPtr)
 		orbits.removeOne(orbPtr);
 	systemPlanets.removeOne(candidate);
