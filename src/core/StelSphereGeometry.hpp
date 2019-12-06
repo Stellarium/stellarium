@@ -55,6 +55,7 @@ public:
 	template <class Deleter> SphericalRegionP(SphericalRegion* ptr, Deleter deleter) : QSharedPointer<SphericalRegion>(ptr, deleter) {;}
 	SphericalRegionP(const SphericalRegionP& other) : QSharedPointer<SphericalRegion>(other) {;}
 	SphericalRegionP(const QWeakPointer<SphericalRegion>& other) : QSharedPointer<SphericalRegion>(other) {;}
+	inline SphericalRegionP& operator=(const SphericalRegionP &other){QSharedPointer<SphericalRegion>::operator=(other); return *this;}
 
 	//! Create a SphericalRegion from the given input JSON stream.
 	//! The type of the region is automatically recognized from the input format.
@@ -281,7 +282,7 @@ public:
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
 	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
-		Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+		Q_ASSERT(d==0 || qFuzzyCompare(n.lengthSquared(),1.));}
 	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.
 	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.
@@ -294,6 +295,7 @@ public:
 
 	//! Copy constructor.
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
+	inline SphericalCap& operator=(const SphericalCap &other){n=other.n; d=other.d; return *this;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Cap;}
 	virtual OctahedronPolygon getOctahedronPolygon() const;
@@ -312,7 +314,7 @@ public:
 
 	// Contain and intersect	
 	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
-	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
+	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v.toVec3d()*n>=d);}
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& h) const
 	{
@@ -428,6 +430,8 @@ class SphericalPoint : public SphericalRegion
 {
 public:
 	SphericalPoint(const Vec3d& an) : n(an) {Q_ASSERT(std::fabs(1.-n.length())<0.0000001);}
+	SphericalPoint(const SphericalPoint &other): n(other.n){}
+	inline SphericalPoint& operator=(const SphericalPoint &other){n=other.n; return *this;}
 	virtual ~SphericalPoint() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Point;}
