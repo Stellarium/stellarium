@@ -699,6 +699,10 @@
 	      from ESA/Hubble, Digitized Sky Survey 2
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
+	4.106 Images of NGC1672
+	      from Davide De Martin (ESA/Hubble), the ESA/ESO/NASA Photoshop FITS Liberator & Digitized Sky Survey 2
+	      https://www.spacetelescope.org/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
