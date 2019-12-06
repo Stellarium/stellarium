@@ -344,8 +344,7 @@
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 	     the terms of the Creative Commons Attribution Share-Alike
 	     license.
-	4.15 Images of NGC281, NGC6543, NGC7317,
-	     NGC7319, NGC7320
+	4.15 Images of NGC6543, NGC7317, NGC7319, NGC7320
 	     from Andrey Kuznetsov, Kepler Observatory
 	     http://kepler-observatorium.ru
 	     License: Creative Commons Attribution 3.0 Unported
@@ -430,7 +429,7 @@
 	4.38 Images of M44, IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M4, M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
-	     M109, IC5146, NGC225, NGC663, NGC891, NGC1931, NGC6823, NGC7814
+	     M109, IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
