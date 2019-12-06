@@ -400,7 +400,7 @@
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
 	     NGC4038-4039, NGC5257, NGC5307, NGC6027, NGC6050, NGC6369, NGC6826, NGC7742, IC883,
-	     IC4406, PGC2248, PGC3589, UGC1810, UGC8335, UGC9618, Red Rectangle and Calabash Nebula
+	     IC4406, PGC2248, UGC1810, UGC8335, UGC9618, Red Rectangle and Calabash Nebula
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
@@ -696,6 +696,10 @@
 	     from Mohamad Abbas
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.106 Images of PGC3589
+	      from ESA/Hubble, Digitized Sky Survey 2
+	      https://www.spacetelescope.org/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
