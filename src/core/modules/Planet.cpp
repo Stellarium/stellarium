@@ -1220,44 +1220,34 @@ float Planet::getMeanOppositionMagnitude() const
 {
 	if (absoluteMagnitude<=-99.f)
 		return 100.f;
-	if (englishName=="Sun")
-		return 100.f;
 
 	double semimajorAxis=0.;
-	if (englishName=="Moon")
-		return -12.74f;
-	else 	if (englishName=="Mars")
-		return -2.01f;
-	else if (englishName=="Jupiter")
-		return -2.7f;
-	else if (englishName=="Saturn")
-		return 0.67f;
-	else if (englishName=="Uranus")
-		return 5.52f;
-	else if (englishName=="Neptune")
-		return 7.84f;
-	else if (englishName=="Pluto")
-		return 15.12f;
-	else if (englishName=="Io")
-		return 5.02f;
-	else if (englishName=="Europa")
-		return 5.29f;
-	else if (englishName=="Ganymede")
-		return 4.61f;
-	else if (englishName=="Callisto")
-		return 5.65f;
-	else if (parent->englishName=="Mars")
-		semimajorAxis=1.52371034;
-	else if (parent->englishName=="Jupiter")
-		semimajorAxis=5.202887;
-	else if (parent->englishName=="Saturn")
-		semimajorAxis=9.53667594;
-	else if (parent->englishName=="Uranus")
-		semimajorAxis=19.18916464;
-	else if (parent->englishName=="Neptune")
-		semimajorAxis=30.06992276;
-	else if (parent->englishName=="Pluto")
-		semimajorAxis=39.48211675;
+
+	const QMap<QString, float>nameMap = {
+		{ "Sun",    100.f},
+		{ "Moon",   -12.74f},
+		{ "Mars",    -2.01f},
+		{ "Jupiter", -2.7f},
+		{ "Saturn",   0.67f},
+		{ "Uranus",   5.52f},
+		{ "Neptune",  7.84f},
+		{ "Pluto",   15.12f},
+		{ "Io",       5.02f},
+		{ "Europa",   5.29f},
+		{ "Ganymede", 4.61f},
+		{ "Callisto", 5.65f}};
+	if (nameMap.contains(englishName))
+		return nameMap.value(englishName);
+
+	const QMap<QString, double>smaMap = {
+		{ "Mars",     1.52371034 },
+		{ "Jupiter",  5.202887   },
+		{ "Saturn",   9.53667594 },
+		{ "Uranus",  19.18916464 },
+		{ "Neptune", 30.06992276 },
+		{ "Pluto",   39.48211675 }};
+	if (smaMap.contains(parent->englishName))
+		semimajorAxis=smaMap.value(parent->englishName);
 	else if (pType>= isAsteroid)
 	{
 		if (orbitPtr)
@@ -1281,11 +1271,9 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		// check how much of it is visible
 		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		double shadowFactor = ssm->getEclipseFactor(core);
+		const double shadowFactor = qMin(0.000128, ssm->getEclipseFactor(core));
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
-		if(shadowFactor < 0.000128)
-			shadowFactor = 0.000128;
 
 		return static_cast<float>(4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor)));
 	}
@@ -3155,67 +3143,34 @@ Vec3f Planet::getCurrentOrbitColor() const
 	{
 		case ocsGroups:
 		{
-			switch (pType)
-			{
-				case isMoon:
-					orbColor = orbitMoonsColor;
-					break;
-				case isPlanet:
-					orbColor = orbitMajorPlanetsColor;
-					break;
-				case isAsteroid:
-					orbColor = orbitMinorPlanetsColor;
-					break;
-				case isDwarfPlanet:
-					orbColor = orbitDwarfPlanetsColor;
-					break;
-				case isCubewano:
-					orbColor = orbitCubewanosColor;
-					break;
-				case isPlutino:
-					orbColor = orbitPlutinosColor;
-					break;
-				case isSDO:
-					orbColor = orbitScatteredDiscObjectsColor;
-					break;
-				case isOCO:
-					orbColor = orbitOortCloudObjectsColor;
-					break;
-				case isComet:
-					orbColor = orbitCometsColor;
-					break;
-				case isSednoid:
-					orbColor = orbitSednoidsColor;
-					break;
-				case isInterstellar:
-					orbColor = orbitInterstellarColor;
-					break;
-				default:
-					orbColor = orbitColor;
-			}
+			const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
+				{ isMoon,         orbitMoonsColor       },
+				{ isPlanet,       orbitMajorPlanetsColor},
+				{ isAsteroid,     orbitMinorPlanetsColor},
+				{ isDwarfPlanet,  orbitDwarfPlanetsColor},
+				{ isCubewano,     orbitCubewanosColor   },
+				{ isPlutino,      orbitPlutinosColor    },
+				{ isSDO,          orbitScatteredDiscObjectsColor},
+				{ isOCO,          orbitOortCloudObjectsColor},
+				{ isComet,        orbitCometsColor      },
+				{ isSednoid,      orbitSednoidsColor    },
+				{ isInterstellar, orbitInterstellarColor}};
+			orbColor = typeColorMap.value(pType, orbitColor);
 			break;
 		}
 		case ocsMajorPlanets:
 		{
-			QString pName = getEnglishName().toLower();
-			if (pName=="mercury")
-				orbColor = orbitMercuryColor;
-			else if (pName=="venus")
-				orbColor = orbitVenusColor;
-			else if (pName=="earth")
-				orbColor = orbitEarthColor;
-			else if (pName=="mars")
-				orbColor = orbitMarsColor;
-			else if (pName=="jupiter")
-				orbColor = orbitJupiterColor;
-			else if (pName=="saturn")
-				orbColor = orbitSaturnColor;
-			else if (pName=="uranus")
-				orbColor = orbitUranusColor;
-			else if (pName=="neptune")
-				orbColor = orbitNeptuneColor;
-			else
-				orbColor = orbitColor;
+			const QString pName = getEnglishName().toLower();
+			const QMap<QString, Vec3f>majorPlanetColorMap = {
+				{ "mercury", orbitMercuryColor},
+				{ "venus",   orbitVenusColor  },
+				{ "earth",   orbitEarthColor  },
+				{ "mars",    orbitMarsColor   },
+				{ "jupiter", orbitJupiterColor},
+				{ "saturn",  orbitSaturnColor },
+				{ "uranus",  orbitUranusColor },
+				{ "neptune", orbitNeptuneColor}};
+			orbColor=majorPlanetColorMap.value(pName, orbitColor);
 			break;
 		}
 		case ocsOneColor:
