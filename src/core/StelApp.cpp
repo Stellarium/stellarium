@@ -1043,6 +1043,11 @@ void StelApp::setViewportEffect(const QString& name)
 	}
 	if (name == "none") return;
 
+	if (!core)
+	{
+		qDebug() << "No core to set viewport effect";
+		return;
+	}
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	int w = params.viewportXywh[2];
 	int h = params.viewportXywh[3];

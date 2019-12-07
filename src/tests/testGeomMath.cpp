@@ -62,25 +62,25 @@ void TestGeomMath::testAABBox()
 		mLeft.set(-1.0f, 0.0f, 0.0f, -min.v[0]);
 		mRight.set(1.0f, 0.0f, 0.0f, max.v[0]);
 
-		AABBox* aabox = new AABBox(min, max);
+		AABBox aabox(min, max);
 
-		QVERIFY(aabox->isValid());
-		QVERIFY(aabox->getVolume()==res);
-		QVERIFY(aabox->getCorner(AABBox::MinMinMin)==min);
-		QVERIFY(aabox->getCorner(AABBox::MinMinMax)==minMinMax);
-		QVERIFY(aabox->getCorner(AABBox::MinMaxMin)==minMaxMin);
-		QVERIFY(aabox->getCorner(AABBox::MinMaxMax)==minMaxMax);
-		QVERIFY(aabox->getCorner(AABBox::MaxMinMin)==maxMinMin);
-		QVERIFY(aabox->getCorner(AABBox::MaxMinMax)==maxMinMax);
-		QVERIFY(aabox->getCorner(AABBox::MaxMaxMin)==maxMaxMin);
-		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==max);
-		QVERIFY(aabox->getPlane(AABBox::Front)==mFront);
-		QVERIFY(aabox->getPlane(AABBox::Back)==mBack);
-		QVERIFY(aabox->getPlane(AABBox::Bottom)==mBottom);
-		QVERIFY(aabox->getPlane(AABBox::Top)==mTop);
-		QVERIFY(aabox->getPlane(AABBox::Left)==mLeft);
-		QVERIFY(aabox->getPlane(AABBox::Right)==mRight);
-		QVERIFY(aabox->positiveVertex(max)==max);
-		QVERIFY(aabox->negativeVertex(max)==min);
+		QVERIFY(aabox.isValid());
+		QVERIFY(aabox.getVolume()==res);
+		QVERIFY(aabox.getCorner(AABBox::MinMinMin)==min);
+		QVERIFY(aabox.getCorner(AABBox::MinMinMax)==minMinMax);
+		QVERIFY(aabox.getCorner(AABBox::MinMaxMin)==minMaxMin);
+		QVERIFY(aabox.getCorner(AABBox::MinMaxMax)==minMaxMax);
+		QVERIFY(aabox.getCorner(AABBox::MaxMinMin)==maxMinMin);
+		QVERIFY(aabox.getCorner(AABBox::MaxMinMax)==maxMinMax);
+		QVERIFY(aabox.getCorner(AABBox::MaxMaxMin)==maxMaxMin);
+		QVERIFY(aabox.getCorner(AABBox::MaxMaxMax)==max);
+		QVERIFY(aabox.getPlane(AABBox::Front)==mFront);
+		QVERIFY(aabox.getPlane(AABBox::Back)==mBack);
+		QVERIFY(aabox.getPlane(AABBox::Bottom)==mBottom);
+		QVERIFY(aabox.getPlane(AABBox::Top)==mTop);
+		QVERIFY(aabox.getPlane(AABBox::Left)==mLeft);
+		QVERIFY(aabox.getPlane(AABBox::Right)==mRight);
+		QVERIFY(aabox.positiveVertex(max)==max);
+		QVERIFY(aabox.negativeVertex(max)==min);
 	}
 }

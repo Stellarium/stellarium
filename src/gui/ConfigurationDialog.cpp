@@ -156,11 +156,11 @@ void ConfigurationDialog::createDialogContent()
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->pluginsListWidget << ui->scriptListWidget;
-	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui)
+	StelGui* appGui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (appGui)
 	{
-		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		enableKineticScrolling(appGui->getFlagUseKineticScrolling());
+		connect(appGui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
