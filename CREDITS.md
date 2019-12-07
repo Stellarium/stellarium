@@ -610,7 +610,7 @@
 	     from NASA, Holland Ford (JHU), the ACS Science Team and ESA
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
-	4.83 Images of NGC6503, Hydra Cluster
+	4.83 Images of NGC6503, NGC7714, Hydra Cluster
 	     from NASA, ESA, Digitized Sky Survey 2
 	     https://www.spacetelescope.org/
 	     License: Creative Commons Attribution 4.0 International
@@ -700,8 +700,12 @@
 	      from ESA/Hubble, Digitized Sky Survey 2
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
-	4.106 Images of NGC1672
+	4.107 Images of NGC1672
 	      from Davide De Martin (ESA/Hubble), the ESA/ESO/NASA Photoshop FITS Liberator & Digitized Sky Survey 2
+	      https://www.spacetelescope.org/
+	      License: Creative Commons Attribution 4.0 International
+	4.108 Images of NGC4298
+	      from NASA, ESA, Digitized Sky Survey 2; Acknowledgement: Davide De Martin
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
 ```
