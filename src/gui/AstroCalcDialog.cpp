@@ -1804,7 +1804,11 @@ void AstroCalcDialog::populateCelestialBodyList()
 		{
 			if (p->getEnglishName() != core->getCurrentPlanet()->getEnglishName())
 			{
-				planets->addItem(p->getNameI18n(), p->getEnglishName());
+				// Let's exclude moons from list of celestial body for ephemeris tool (except the moons of current planet)
+				if (p->getPlanetType()==Planet::isMoon && p->getParent()==core->getCurrentPlanet())
+					planets->addItem(p->getNameI18n(), p->getEnglishName());
+				if (p->getPlanetType()!=Planet::isMoon)
+					planets->addItem(p->getNameI18n(), p->getEnglishName());
 				graphsp->addItem(p->getNameI18n(), p->getEnglishName());
 			}
 			firstCB->addItem(p->getNameI18n(), p->getEnglishName());
