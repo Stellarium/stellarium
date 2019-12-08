@@ -506,7 +506,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	setLineWidth(conf->value("ArchaeoLines/line_width", 1).toInt());
+	setLineWidth(conf->value("ArchaeoLines/line_thickness", 1).toInt());
 	setEquinoxColor(                StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
 	setSolsticesColor(              StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
 	setCrossquartersColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
@@ -581,7 +581,7 @@ void ArchaeoLines::setLineWidth(int width)
 	if (width!=lineWidth)
 	{
 		lineWidth=qBound(1, width, 8); // Force some sensible limit
-		conf->setValue("ArchaeoLines/line_width", lineWidth);
+		conf->setValue("ArchaeoLines/line_thickness", lineWidth);
 		emit lineWidthChanged(lineWidth);
 	}
 }

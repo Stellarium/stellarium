@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-08 19:22+0700\n"
+"POT-Creation-Date: 2019-12-08 19:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9810,7 +9810,8 @@ msgid "The line thickness for grids and lines"
 msgstr ""
 
 #: src/ui_viewDialog.h:3023
-msgid "Line thickness:"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
+msgid "Line thickness"
 msgstr ""
 
 #: src/ui_viewDialog.h:3025
@@ -19318,10 +19319,6 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:613
 msgid "Selected Object Hour Angle"
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
-msgid "Line width"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:618
