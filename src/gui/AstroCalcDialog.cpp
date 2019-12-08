@@ -667,7 +667,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 			if (otype == "Star")
+			{
 				name = selectedObject->getID();
+				if (name.isEmpty())
+					name = q_("Unnamed star");
+			}
 		}
 
 		drawTransitTimeDiagram();
@@ -2280,7 +2284,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 			if (otype == "Star")
+			{
 				name = selectedObject->getID();
+				if (name.isEmpty())
+					name = q_("Unnamed star");
+			}
 		}
 
 		drawTransitTimeDiagram();
