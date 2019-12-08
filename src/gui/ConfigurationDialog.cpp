@@ -735,6 +735,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_solstice_points",			propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 	conf->setValue("viewing/flag_apex_points",			propMgr->getStelPropertyValue("GridLinesMgr.apexPointsDisplayed").toBool());
+	conf->setValue("viewing/line_thickness",				propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());

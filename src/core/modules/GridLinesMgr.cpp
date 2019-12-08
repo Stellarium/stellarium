@@ -56,11 +56,14 @@ public:
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
+	void setLineThickness(const int thickness) {lineThickness = thickness;}
+	int getLineThickness() const {return lineThickness;}
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	QFont font;
 	LinearFader fader;
+	int lineThickness;
 };
 
 //! @class SkyPoint
@@ -144,6 +147,8 @@ public:
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
 	void setFontSize(int newSize);
+	void setLineThickness(const int thickness) {lineThickness = thickness;}
+	int getLineThickness() const {return lineThickness;}
 	//! Re-translates the label.
 	void updateLabel();
 private:
@@ -154,10 +159,11 @@ private:
 	LinearFader fader;
 	QFont font;
 	QString label;
+	int lineThickness;
 };
 
 // rms added color as parameter
-SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame)
+SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1)
 {
 	// Font size is 12
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
@@ -412,6 +418,8 @@ void SkyGrid::draw(const StelCore* core) const
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
+	if (lineThickness>1)
+		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
@@ -610,11 +618,12 @@ void SkyGrid::draw(const StelCore* core) const
 		}
 	}
 
+	if (lineThickness>1)
+		sPainter.setLineWidth(1); // reset tickness of line
 	sPainter.setLineSmooth(false);
 }
 
-
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -716,6 +725,8 @@ void SkyLine::draw(StelCore *core) const
 	StelPainter sPainter(prj);
 	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	sPainter.setBlending(true);
+	if (lineThickness>1)
+		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	Vec4f textColor(color[0], color[1], color[2], 0);		
@@ -772,6 +783,8 @@ void SkyLine::draw(StelCore *core) const
 				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
 			}
 
+			if (lineThickness>1)
+				sPainter.setLineWidth(1); // reset tickness of line
 			sPainter.setLineSmooth(false);
 			sPainter.setBlending(false);
 			return;
@@ -791,6 +804,8 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
 		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 
+		if (lineThickness>1)
+			sPainter.setLineWidth(1); // reset tickness of line
 		sPainter.setLineSmooth(false);
 		sPainter.setBlending(false);
 
@@ -854,6 +869,8 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
+	if (lineThickness>1)
+		sPainter.setLineWidth(1); // reset tickness of line
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
 
@@ -1264,6 +1281,9 @@ void GridLinesMgr::init()
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
+
+	// Set the line thickness for grids and lines
+	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -2367,6 +2387,47 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 		apexPoints->setColor(newColor);
 		emit apexPointsColorChanged(newColor);
 	}
+}
+
+void GridLinesMgr::setLineThickness(const int thickness)
+{
+	int lineThickness = equGrid->getLineThickness();
+	if (lineThickness!=thickness)
+	{
+		lineThickness=qBound(1, thickness, 5);
+		// Grids
+		equGrid->setLineThickness(lineThickness);
+		equJ2000Grid->setLineThickness(lineThickness);
+		galacticGrid->setLineThickness(lineThickness);
+		supergalacticGrid->setLineThickness(lineThickness);
+		eclGrid->setLineThickness(lineThickness);
+		eclJ2000Grid->setLineThickness(lineThickness);
+		aziGrid->setLineThickness(lineThickness);
+		// Lines
+		equatorLine->setLineThickness(lineThickness);
+		equatorJ2000Line->setLineThickness(lineThickness);
+		eclipticLine->setLineThickness(lineThickness);
+		eclipticJ2000Line->setLineThickness(lineThickness);
+		precessionCircleN->setLineThickness(lineThickness);
+		precessionCircleS->setLineThickness(lineThickness);
+		meridianLine->setLineThickness(lineThickness);
+		longitudeLine->setLineThickness(lineThickness);
+		horizonLine->setLineThickness(lineThickness);
+		galacticEquatorLine->setLineThickness(lineThickness);
+		supergalacticEquatorLine->setLineThickness(lineThickness);
+		primeVerticalLine->setLineThickness(lineThickness);
+		colureLine_1->setLineThickness(lineThickness);
+		colureLine_2->setLineThickness(lineThickness);
+		circumpolarCircleN->setLineThickness(lineThickness);
+		circumpolarCircleS->setLineThickness(lineThickness);
+
+		emit lineThicknessChanged(lineThickness);
+	}
+}
+
+ int GridLinesMgr::getLineThickness() const
+{
+	return equGrid->getLineThickness();
 }
 
 void GridLinesMgr::setFontSizeFromApp(int size)

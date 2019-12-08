@@ -340,6 +340,11 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorApexPoints
 		   NOTIFY apexPointsColorChanged)
 
+	Q_PROPERTY(int lineThickness
+		   READ getLineThickness
+		   WRITE setLineThickness
+		   NOTIFY lineThicknessChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -844,8 +849,16 @@ public slots:
 	//! GridLinesMgr.setColorApexPoints(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorApexPoints(const Vec3f& newColor);
+
+	//! Set the thickness of lines
+	//! @param thickness of line in pixels
+	void setLineThickness(const int thickness);
+	//! Get the thickness of lines
+	int getLineThickness() const;
+
 signals:
 	void gridlinesDisplayedChanged(const bool) const;
+	void lineThicknessChanged(const int) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
 	void equatorGridDisplayedChanged(const bool displayed) const;
