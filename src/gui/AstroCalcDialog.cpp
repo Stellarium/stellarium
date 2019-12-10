@@ -98,6 +98,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotAziVsTime(false)	
 	, altVsTimePositiveLimit(0)
 	, monthlyElevationPositiveLimit(0)
+	, graphsDuration(1)
 	, delimiter(", ")
 	, acEndl("\n")
 	, oldGraphJD(0)
@@ -352,6 +353,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
 	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
 	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
+	graphsDuration = qBound(1,conf->value("astrocalc/graphs_duration",1).toInt() ,30);
+	ui->graphsDurationSpinBox->setValue(graphsDuration);
+	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
 
 	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
@@ -446,6 +450,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsFirstLabel->setStyleSheet(style);
 	ui->graphsCelestialBodyLabel->setStyleSheet(style);
 	ui->graphsSecondLabel->setStyleSheet(style);	
+	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
@@ -1890,6 +1895,15 @@ void AstroCalcDialog::saveGraphsSecondId(int index)
 	conf->setValue("astrocalc/graphs_second_id", ui->graphsSecondComboBox->itemData(index).toInt());
 }
 
+void AstroCalcDialog::updateGraphsDuration(int duration)
+{
+	if (graphsDuration!=duration)
+	{
+		graphsDuration = duration;
+		conf->setValue("astrocalc/graphs_duration", duration);
+	}
+}
+
 void AstroCalcDialog::populateEphemerisTimeStepsList()
 {
 	Q_ASSERT(ui->ephemerisStepComboBox);
@@ -2481,6 +2495,10 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
 	if (!ssObj.isNull())
 	{
+		if (graphsDuration==1)
+			ui->graphsLabel->setText(q_("Graphs on the current year"));
+		else
+			ui->graphsLabel->setText(q_("Graphs on few years since 1 January of the current year"));
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
 
@@ -2492,7 +2510,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double width = 1.0;
 		double UTCshift = core->getUTCOffset(startJD) / 24.;
-		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 3;
+		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
 		int secondGraph = ui->graphsSecondComboBox->currentData().toInt();
 
@@ -2862,7 +2880,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
 
-	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 1) * 86400;
+	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 1) * 86400;
 	ui->graphsPlot->xAxis->setRange(0, dYear);
 	ui->graphsPlot->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);

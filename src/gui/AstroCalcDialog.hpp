@@ -234,6 +234,7 @@ private slots:
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
 	void saveGraphsSecondId(int index);
+	void updateGraphsDuration(int duration);
 	void drawXVsTimeGraphs();
 
 	void drawMonthlyElevationGraph();
@@ -359,7 +360,7 @@ private:
 	double findHeliocentricDistance(double JD, PlanetP object1);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
-	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;
+	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader;
 	static float brightLimit;
