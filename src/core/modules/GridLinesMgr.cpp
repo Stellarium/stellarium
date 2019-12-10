@@ -1416,6 +1416,9 @@ void GridLinesMgr::draw(StelCore* core)
 
 	galacticGrid->draw(core);
 	supergalacticGrid->draw(core);
+	equJ2000Grid->draw(core);
+	equGrid->draw(core);
+	aziGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
@@ -1436,9 +1439,6 @@ void GridLinesMgr::draw(StelCore* core)
 		antisolarPoint->draw(core);
 	}
 
-	equJ2000Grid->draw(core);
-	equGrid->draw(core);
-	aziGrid->draw(core);
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
 	supergalacticEquatorLine->draw(core);
