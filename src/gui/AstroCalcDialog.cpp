@@ -99,8 +99,6 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, altVsTimePositiveLimit(0)
 	, monthlyElevationPositiveLimit(0)
 	, graphsDuration(1)
-	, delimiter(", ")
-	, acEndl("\n")
 	, oldGraphJD(0)
 	, graphPlotNeedsRefresh(false)
 {
@@ -179,12 +177,6 @@ void AstroCalcDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
-#ifdef Q_OS_WIN
-	acEndl = "\r\n";
-#else
-	acEndl = "\n";
-#endif
 
 	// Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -926,18 +918,18 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	initListCelestialPositions();
 
-	double mag = ui->celestialMagnitudeDoubleSpinBox->value();
-	bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
-	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const double mag = ui->celestialMagnitudeDoubleSpinBox->value();
+	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-	double JD = core->getJD();
+	const double JD = core->getJD();
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
 	Q_ASSERT(ui->celestialCategoryComboBox);
 	QComboBox* category = ui->celestialCategoryComboBox;
 	QString celType = category->itemData(category->currentIndex()).toString();
-	int celTypeId = celType.toInt();
+	const int celTypeId = celType.toInt();
 
 	if (celTypeId < 170)
 	{
@@ -1389,17 +1381,17 @@ void AstroCalcDialog::reGenerateEphemeris()
 
 void AstroCalcDialog::generateEphemeris()
 {
-	float ra, dec;
+	double ra, dec;
 	Vec3d observerHelioPos, pos;
 	QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
 	QString distanceInfo = q_("Planetocentric distance");
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
-	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "", dash = QChar(0x2014);
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
+	const bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	initListEphemeris();
 
@@ -1602,12 +1594,10 @@ void AstroCalcDialog::generateEphemeris()
 			{
 				pos = obj->getAltAzPosAuto(core);
 				StelUtils::rectToSphe(&ra, &dec, pos);
-				float direction = 3.; // N is zero, E is 90 degrees
+				double direction = 3.; // N is zero, E is 90 degrees
 				if (useSouthAzimuth)
 					direction = 2.;
-				ra = direction * M_PI - ra;
-				if (ra > M_PI * 2)
-					ra -= M_PI * 2;
+				ra = fmod(direction * M_PI - ra, M_PI * 2);
 				if (withDecimalDegree)
 				{
 					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
@@ -2160,7 +2150,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		double xMaxY = -100.f;
+		double xMaxY = -100.;
 		int step = 180;
 		int limit = 485;		
 		bool isSatellite = false;
@@ -5493,25 +5483,23 @@ void AstroCalcDialog::computePlanetaryData()
 	PlanetP secondCBId = solarSystem->searchByEnglishName(secondCelestialBody);
 	Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 
-	double distanceAu = (posFCB - posSCB).length();
-	double distanceKm = AU * distanceAu;
+	const double distanceAu = (posFCB - posSCB).length();
+	const double distanceKm = AU * distanceAu;
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
 	QString Mkm = qc_("M km", "distance");
 	QString distAU, distKM;
-	bool useKM = true;
-	if (distanceAu < 0.1)
+	const bool useKM = (distanceAu < 0.1);
+	if (useKM)
 	{
 		distAU = QString::number(distanceAu, 'f', 5);
 		distKM = QString::number(distanceKm, 'f', 3);
-		useKM = true;
 	}
 	else
 	{
 		distAU = QString::number(distanceAu, 'f', 5);
 		distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
-		useKM = false;
 	}
 
 	double r = std::acos(sin(posFCB.latitude()) * sin(posSCB.latitude()) + cos(posFCB.latitude()) * cos(posSCB.latitude()) * cos(posFCB.longitude() - posSCB.longitude()));
@@ -6009,3 +5997,11 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 
 	table.close();
 }
+
+const QString AstroCalcDialog::dash = QChar(0x2014);
+const QString AstroCalcDialog::delimiter(", ");
+#ifdef Q_OS_WIN
+const QString AstroCalcDialog::acEndl("\r\n");
+#else
+const QString AstroCalcDialog::acEndl("\n");
+#endif
