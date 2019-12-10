@@ -105,7 +105,8 @@ public:
 		Conjuction		= 0,
 		Opposition		= 1,
 		GreatestElongation	= 2,
-		StationaryPoint		= 3
+		StationaryPoint		= 3,
+		OrbitalPoint		= 4
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
@@ -192,6 +193,7 @@ private slots:
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);
 	void savePhenomenaOppositionFlag(bool b);
+	void savePhenomenaPerihelionAphelionFlag(bool b);
 
 	//! Compute planetary data
 	void saveFirstCelestialBody(int index);
@@ -351,6 +353,10 @@ private:
 	QMap<double, double> findStationaryPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseStationaryPoint(QPair<double, double>* out, PlanetP object, double JD, double stopJD, double step, bool retrograde);
 	double findRightAscension(double JD, PlanetP object);
+	//! Calculation perihelion and aphelion points
+	QMap<double, double> findOrbitalPointApproach(PlanetP& object1, double startJD, double stopJD);
+	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
+	double findHeliocentricDistance(double JD, PlanetP object1);
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;

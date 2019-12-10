@@ -298,6 +298,8 @@ void AstroCalcDialog::createDialogContent()
 
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
+	ui->phenomenaPerihelionAphelionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_perihelion", false).toBool());
+	connect(ui->phenomenaPerihelionAphelionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaPerihelionAphelionFlag(bool)));
 	ui->allowedSeparationSpinBox->setDegrees(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
 	connect(ui->allowedSeparationSpinBox, SIGNAL(valueChanged()), this, SLOT(savePhenomenaAngularSeparation()));
 
@@ -2098,6 +2100,11 @@ void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
 	conf->setValue("astrocalc/flag_phenomena_opposition", b);
 }
 
+void AstroCalcDialog::savePhenomenaPerihelionAphelionFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_phenomena_perihelion", b);
+}
+
 void AstroCalcDialog::savePhenomenaAngularSeparation()
 {
 	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(ui->allowedSeparationSpinBox->valueDegrees(), 'f', 5));
@@ -3261,6 +3268,7 @@ void AstroCalcDialog::calculatePhenomena()
 	QString currentPlanet = ui->object1ComboBox->currentData().toString();
 	double separation = ui->allowedSeparationSpinBox->valueDegrees();
 	bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
+	bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
 
 	initListPhenomena();
 
@@ -3508,6 +3516,9 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			// stationary points
 			fillPhenomenaTable(findStationaryPointApproach(planet, startJD, stopJD), planet, sun, PhenomenaTypeIndex::StationaryPoint);
+			// perihelion and aphelion points
+			if (perihelion)
+				fillPhenomenaTable(findOrbitalPointApproach(planet, startJD, stopJD), planet, sun, PhenomenaTypeIndex::OrbitalPoint);
 		}
 
 		core->setJD(currentJD); // restore time
@@ -3686,6 +3697,13 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				// TRANSLATORS: The planet are stand still in the equatorial coordinates
 				phenomenType = q_("Stationary (begin prograde motion)");
 			}
+		}
+		else if (mode==PhenomenaTypeIndex::OrbitalPoint)
+		{
+			if (separation < 0.0) // we use negative value for perihelion!
+				phenomenType = q_("Perihelion");
+			else
+				phenomenType = q_("Aphelion");
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
@@ -4380,6 +4398,164 @@ double AstroCalcDialog::findRightAscension(double JD, PlanetP object)
 	return ra*M_180_PI;
 }
 
+QMap<double, double> AstroCalcDialog::findOrbitalPointApproach(PlanetP &object1, double startJD, double stopJD)
+{
+	double distance, prevDistance, step, step0;
+	QMap<double, double> separations;
+	QPair<double, double> extremum;
+
+	QStringList objects;
+	objects.clear();
+	objects.append(object1->getEnglishName());
+	step0 = findInitialStep(startJD, stopJD, objects);
+	step = step0;
+	double jd = startJD - step;
+	prevDistance = findRightAscension(jd, object1);
+	jd += step;
+	double stopJDfx = stopJD + step;
+	while (jd <= stopJDfx)
+	{
+		distance = findHeliocentricDistance(jd, object1);
+		double factor = qAbs((distance - prevDistance) / distance);
+		if (factor > 10.)
+			step = step0 * factor / 10.;
+		else
+			step = step0;
+
+		if (distance>prevDistance)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				while (jd <= stopJDfx)
+				{
+					distance = findHeliocentricDistance(jd, object1);
+					if (distance<prevDistance)
+						break;
+
+					prevDistance = distance;
+					jd += step;
+				}
+			}
+
+			if (findPreciseOrbitalPoint(&extremum, object1, jd, stopJDfx, step, false))
+			{
+				if (extremum.first>startJD && extremum.first<stopJD)
+					separations.insert(extremum.first, extremum.second);
+			}
+		}
+
+		prevDistance = distance;
+		jd += step;
+	}
+
+	step0 = findInitialStep(startJD, stopJD, objects);
+	step = step0;
+	jd = startJD - step;
+	prevDistance = findRightAscension(jd, object1);
+	jd += step;
+	while (jd <= stopJDfx)
+	{
+		distance = findHeliocentricDistance(jd, object1);
+		double factor = qAbs((distance - prevDistance) / distance);
+		if (factor > 10.)
+			step = step0 * factor / 10.;
+		else
+			step = step0;
+
+		if (distance<prevDistance)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				while (jd <= stopJDfx)
+				{
+					distance = findHeliocentricDistance(jd, object1);
+					if (distance>prevDistance)
+						break;
+
+					prevDistance = distance;
+					jd += step;
+				}
+			}
+
+			if (findPreciseOrbitalPoint(&extremum, object1, jd, stopJDfx, step, true))
+			{
+				if (extremum.first>startJD && extremum.first<stopJD)
+					separations.insert(extremum.first, extremum.second);
+			}
+		}
+
+		prevDistance = distance;
+		jd += step;
+	}
+
+	return separations;
+}
+
+bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal)
+{
+	double dist, prevDist;
+
+	if (out == Q_NULLPTR)
+		return false;
+
+	prevDist = findHeliocentricDistance(JD, object1);
+	step = -step / 2.;
+
+	while (true)
+	{
+		JD += step;
+		dist = findHeliocentricDistance(JD, object1);
+
+		if (qAbs(step) < 1. / 1440.)
+		{
+			out->first = JD - step / 2.0;
+			out->second = findHeliocentricDistance(JD - step / 2.0, object1);
+			if (minimal)
+			{
+				if (out->second > findHeliocentricDistance(JD - step / 5.0, object1))
+				{
+					out->second *= -1;
+					return true;
+				}
+				else
+					return false;
+			}
+			else
+			{
+				if (out->second < findHeliocentricDistance(JD - step / 5.0, object1))
+					return true;
+				else
+					return false;
+			}
+		}
+		if (minimal)
+		{
+			if (dist>prevDist)
+				step = -step / 2.0;
+		}
+		else
+		{
+			if (dist<prevDist)
+				step = -step / 2.0;
+		}
+		prevDist = dist;
+
+		if (JD > stopJD)
+			return false;
+	}
+}
+
+double AstroCalcDialog::findHeliocentricDistance(double JD, PlanetP object1)
+{
+	core->setJD(JD);
+	core->update(0);
+	return object1->getHeliocentricEclipticPos().length();
+}
+
 void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* previous)
 {
 	if (!current)
@@ -4395,7 +4571,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (ui->stackListWidget->row(current) == 3)
 	{
 		int idx = ui->tabWidgetGraphs->currentIndex();
-		if (idx==0) // First tab - 'Alt. vs Time' is visible
+		if (idx==0) // 'Alt. vs Time' is visible
 		{
 			plotAltVsTime = true;
 			drawAltVsTimeDiagram(); // Is object already selected?
@@ -4403,7 +4579,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotAltVsTime = false;
 
-		if (idx==1) // Second tab - 'Azi. vs Time' is visible
+		if (idx==1) //  'Azi. vs Time' is visible
 		{
 			plotAziVsTime = true;
 			drawAziVsTimeDiagram(); // Is object already selected?
@@ -4411,7 +4587,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotAziVsTime = false;
 
-		if (idx==2) // Third tab - 'Monthly Elevation' is visible
+		if (idx==2) // 'Monthly Elevation' is visible
 		{
 			plotMonthlyElevation = true;
 			drawMonthlyElevationGraph(); // Is object already selected?
@@ -4419,7 +4595,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotMonthlyElevation = false;
 
-		if(idx==4) // Last tab - 'Angular distance' is visible
+		if(idx==4) // 'Angular distance' is visible
 		{
 			plotAngularDistanceGraph = true;
 			drawAngularDistanceGraph();
