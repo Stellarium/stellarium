@@ -2597,7 +2597,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				QVector<double> xj = axj.toVector(), yj = ayj.toVector();
 				int j = 2 + i;
 				ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
-				ui->graphsPlot->graph(j)->setPen(QPen(Qt::red, 1));
+				ui->graphsPlot->graph(j)->setPen(QPen(Qt::red, 1, Qt::DashLine));
 				ui->graphsPlot->graph(j)->setLineStyle(QCPGraph::lsLine);
 				ui->graphsPlot->graph(j)->setData(xj, yj);
 				ui->graphsPlot->graph(j)->setName(QString("[%1]").arg(j));

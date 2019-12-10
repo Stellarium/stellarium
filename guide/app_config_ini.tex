@@ -134,6 +134,7 @@ celestial\_magnitude\_limit    & float  & 6.0   & Value of limiting magnitude fo
 celestial\_category            & int    & 200   & Identificator for default category of celestial bodies.\\%\midrule
 flag\_horizontal\_coordinates  & bool   & false & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\%\midrule
 flag\_phenomena\_opposition    & bool   & false & Set to \emph{true} to compute of opposition phenomenon between the Solar system bodies.\\%\midrule
+flag\_phenomena\_perihelion    & bool   & false & Set to \emph{true} to compute perihelion and aphelion for Solar system bodies (except moons).\\%\midrule
 phenomena\_angular\_separation & float  & 1.0   & Allowed angular separation between celestial bodies for computation of phenomena.\\%\midrule
 phenomena\_celestial\_body     & string & Venus & Default celestial body for computation of phenomena.\\%\midrule
 phenomena\_celestial\_group    & int    & 0     & Identificator for group of celestial bodies for computation of phenomenae.\\%\midrule
@@ -143,6 +144,7 @@ wut\_angular\_limit\_flag      & bool   & false & Set to \emph{true} to use the 
 wut\_angular\_limit\_min       & float  & 1.0   & Minimal allowed angular size, arcminutes.\\%\midrule
 wut\_angular\_limit\_max       & float  & 600.0 & Maximal allowed angular size, arcminutes.\\%\midrule
 graphs\_celestial\_body        & string & Moon  & Default celestial body for draw of graphs.\\%\midrule
+graphs\_duration               & int    & 1     & How much years account into calculation of graphs.\\%\midrule
 graphs\_first\_id              & int    & 1     & Identificator for left graph (blue line).\\%\midrule
 graphs\_second\_id             & int    & 2     & Identificator for right graph (yellow line).\\\bottomrule
 \end{longtable}
