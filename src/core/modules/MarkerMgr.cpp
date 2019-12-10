@@ -184,47 +184,21 @@ SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker
 	, markerPosition(pos)
 	, markerType(style)
 {
-	QString fileName = "cross.png";
 	// TODO: Use unicode chars for markers or SVG instead?
-	switch (markerType)
-	{
-		case Cross:
-			fileName = "cross.png";
-			break;
-		case Circle:
-			fileName = "neb_lrg.png";
-			break;
-		case Ellipse:
-			fileName = "neb_gal_lrg.png";
-			break;
-		case Square:
-			fileName = "neb_dif_lrg.png";
-			break;
-		case DottedCircle:
-			fileName = "neb_ocl_lrg.png";
-			break;
-		case CircledCross:
-			fileName = "neb_gcl_lrg.png";
-			break;
-		case DashedSquare:
-			fileName = "neb_drk_lrg.png";
-			break;
-		case SquaredDCircle:
-			fileName = "neb_ocln_lrg.png";
-			break;
-		case CrossedCircle:
-			fileName = "neb_pnb.png";
-			break;
-		case Target:
-			fileName = "pointeur2.png";
-			break;
-		case Gear:
-			fileName = "gear.png";
-			break;
-		case Disk:
-			fileName = "disk.png";
-			break;
-	}
+	const QMap<SkyMarker::MarkerType, QString>map={
+		{ Cross,          "cross.png"},
+		{ Circle,         "neb_lrg.png"},
+		{ Ellipse,        "neb_gal_lrg.png"},
+		{ Square,         "neb_dif_lrg.png"},
+		{ DottedCircle,   "neb_ocl_lrg.png"},
+		{ CircledCross,   "neb_gcl_lrg.png"},
+		{ DashedSquare,   "neb_drk_lrg.png"},
+		{ SquaredDCircle, "neb_ocln_lrg.png"},
+		{ CrossedCircle,  "neb_pnb.png"},
+		{ Target,         "pointeur2.png"},
+		{ Gear,           "gear.png"},
+		{ Disk,           "disk.png"}};
+	const QString fileName = map.value(markerType, "cross.png");
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
 }
 
@@ -253,30 +227,21 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 
 SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 {
-	if (s.toLower()=="circle")
-		return SkyMarker::Circle;
-	else if (s.toLower()=="ellipse")
-		return SkyMarker::Ellipse;
-	else if (s.toLower()=="square")
-		return SkyMarker::Square;
-	else if (s.toLower()=="dotted-circle")
-		return SkyMarker::DottedCircle;
-	else if (s.toLower()=="circled-cross" || s.toLower()=="circled-plus")
-		return SkyMarker::CircledCross;
-	else if (s.toLower()=="dashed-square")
-		return SkyMarker::DashedSquare;
-	else if (s.toLower()=="squared-dotted-circle" || s.toLower()=="squared-dcircle")
-		return SkyMarker::SquaredDCircle;
-	else if (s.toLower()=="crossed-circle")
-		return SkyMarker::CrossedCircle;
-	else if (s.toLower()=="target")
-		return SkyMarker::Target;
-	else if (s.toLower()=="gear")
-		return SkyMarker::Gear;
-	else if (s.toLower()=="disk")
-		return SkyMarker::Disk;
-	else
-		return SkyMarker::Cross;
+	const QMap<QString, SkyMarker::MarkerType>map={
+		{ "circle",                SkyMarker::Circle},
+		{ "ellipse",               SkyMarker::Ellipse},
+		{ "square",                SkyMarker::Square},
+		{ "dotted-circle",         SkyMarker::DottedCircle},
+		{ "circled-cross",         SkyMarker::CircledCross},
+		{ "circled-plus",          SkyMarker::CircledCross},
+		{ "dashed-square",         SkyMarker::DashedSquare},
+		{ "squared-dotted-circle", SkyMarker::SquaredDCircle},
+		{ "squared-dcircle",       SkyMarker::SquaredDCircle},
+		{ "crossed-circle",        SkyMarker::CrossedCircle},
+		{ "target",                SkyMarker::Target},
+		{ "gear",                  SkyMarker::Gear},
+		{ "disk",                  SkyMarker::Disk}};
+		return map.value(s.toLower(), SkyMarker::Cross);
 }
 
 ///////////////////////
@@ -288,47 +253,21 @@ HorizonMarker::HorizonMarker(const float az, const float alt, const float& size,
 	, markerType(style)
 {
 	StelUtils::spheToRect((180.0-static_cast<double>(az))*M_PI/180.0, static_cast<double>(alt)*M_PI/180.0, altaz);
-	QString fileName = "cross.png";
 	// TODO: Use unicode chars for markers or SVG instead?
-	switch (markerType)
-	{
-		case SkyMarker::Cross:
-			fileName = "cross.png";
-			break;
-		case SkyMarker::Circle:
-			fileName = "neb_lrg.png";
-			break;
-		case SkyMarker::Ellipse:
-			fileName = "neb_gal_lrg.png";
-			break;
-		case SkyMarker::Square:
-			fileName = "neb_dif_lrg.png";
-			break;
-		case SkyMarker::DottedCircle:
-			fileName = "neb_ocl_lrg.png";
-			break;
-		case SkyMarker::CircledCross:
-			fileName = "neb_gcl_lrg.png";
-			break;
-		case SkyMarker::DashedSquare:
-			fileName = "neb_drk_lrg.png";
-			break;
-		case SkyMarker::SquaredDCircle:
-			fileName = "neb_ocln_lrg.png";
-			break;
-		case SkyMarker::CrossedCircle:
-			fileName = "neb_pnb.png";
-			break;
-		case SkyMarker::Target:
-			fileName = "pointer2.png";
-			break;
-		case SkyMarker::Gear:
-			fileName = "gear.png";
-			break;
-		case SkyMarker::Disk:
-			fileName = "disk.png";
-			break;
-	}
+	const QMap<SkyMarker::MarkerType, QString>map={
+		{ SkyMarker::Cross,          "cross.png"},
+		{ SkyMarker::Circle,         "neb_lrg.png"},
+		{ SkyMarker::Ellipse,        "neb_gal_lrg.png"},
+		{ SkyMarker::Square,         "neb_dif_lrg.png"},
+		{ SkyMarker::DottedCircle,   "neb_ocl_lrg.png"},
+		{ SkyMarker::CircledCross,   "neb_gcl_lrg.png"},
+		{ SkyMarker::DashedSquare,   "neb_drk_lrg.png"},
+		{ SkyMarker::SquaredDCircle, "neb_ocln_lrg.png"},
+		{ SkyMarker::CrossedCircle,  "neb_pnb.png"},
+		{ SkyMarker::Target,         "pointeur2.png"},
+		{ SkyMarker::Gear,           "gear.png"},
+		{ SkyMarker::Disk,           "disk.png"}};
+	const QString fileName = map.value(markerType, "cross.png");
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
 }
 
