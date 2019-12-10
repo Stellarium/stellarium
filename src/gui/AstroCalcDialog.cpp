@@ -451,6 +451,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsCelestialBodyLabel->setStyleSheet(style);
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
+	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
@@ -2495,10 +2496,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
 	if (!ssObj.isNull())
 	{
-		if (graphsDuration==1)
-			ui->graphsLabel->setText(q_("Graphs on the current year"));
-		else
-			ui->graphsLabel->setText(q_("Graphs on few years since 1 January of the current year"));
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
 
@@ -2584,6 +2581,30 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		ui->graphsPlot->graph(1)->rescaleAxes(true);
 		ui->graphsPlot->graph(1)->setData(x, yb);
 		ui->graphsPlot->graph(1)->setName("[1]");
+
+		if (graphsDuration>1)
+		{
+			int JDshift = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod());
+			QList<double> axj, ayj;
+			for (int i = 0; i < graphsDuration; i++)
+			{
+				JD = startJD + i*JDshift;
+				ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
+				axj.append(ltime);
+				axj.append(ltime);
+				ayj.append(minY1);
+				ayj.append(maxY1);
+				QVector<double> xj = axj.toVector(), yj = ayj.toVector();
+				int j = 2 + i;
+				ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
+				ui->graphsPlot->graph(j)->setPen(QPen(Qt::red, 1));
+				ui->graphsPlot->graph(j)->setLineStyle(QCPGraph::lsLine);
+				ui->graphsPlot->graph(j)->setData(xj, yj);
+				ui->graphsPlot->graph(j)->setName(QString("[%1]").arg(j));
+				axj.clear();
+				ayj.clear();
+			}
+		}
 
 		ui->graphsPlot->replot();
 	}
@@ -2892,7 +2913,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->xAxis->setDateTimeFormat("d\nMMM");
 	ui->graphsPlot->xAxis->setDateTimeSpec(Qt::UTC);
 	ui->graphsPlot->xAxis->setAutoTicks(true);
-	ui->graphsPlot->xAxis->setAutoTickCount(15);
+	ui->graphsPlot->xAxis->setAutoTickCount(20);
 
 	ui->graphsPlot->yAxis->setRange(minY1, maxY1);
 	ui->graphsPlot->yAxis->setScaleType(QCPAxis::stLinear);
