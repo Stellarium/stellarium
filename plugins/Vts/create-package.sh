@@ -15,7 +15,7 @@ mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_BUILD_TYPE=Release \
     -DUSE_PLUGIN_VTS=1 -DUSE_PLUGIN_TELESCOPECONTROL=0 \
-    -DENABLE_GPS=0 \
+    -DENABLE_GPS=0 -DENABLE_MEDIA=0 \
     $SCRIPT_DIR/../../
 make -j8
 cd -
@@ -35,8 +35,7 @@ cp $SCRIPT_DIR/data/config.ini $OUT/bin/
 cp $BUILD_DIR/src/stellarium $OUT/bin/
 
 for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa \
-           Concurrent MultimediaWidgets Multimedia \
-           Positioning SerialPort PrintSupport
+           Concurrent SerialPort PrintSupport
 do
     cp $QT_DIR/lib/libQt5${lib}.so.5 $OUT/bin/
 done
