@@ -15,6 +15,7 @@ mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_BUILD_TYPE=Release \
     -DUSE_PLUGIN_VTS=1 -DUSE_PLUGIN_TELESCOPECONTROL=0 \
+    -DENABLE_GPS=0 \
     $SCRIPT_DIR/../../
 make -j8
 cd -
