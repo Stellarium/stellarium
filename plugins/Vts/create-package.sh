@@ -1,50 +1,48 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-    echo "Usage: create-package.sh <vts-app-dir>"
-    exit -1
-fi
-
-
-OUT=$1/Apps/Stellarium
+OUT=/tmp/Stellarium
 SCRIPT_DIR=$(dirname `realpath $0`)
-QT_DIR=$(qtpaths --install-prefix)
+QT_DIR=/usr/lib64/qt5
 
 BUILD_DIR=/tmp/build/
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_PLUGIN_VTS=1 -DUSE_PLUGIN_TELESCOPECONTROL=0 \
-    -DENABLE_GPS=0 -DENABLE_MEDIA=0 \
+    -DUSE_PLUGIN_VTS=1 -DUSE_PLUGIN_TELESCOPECONTROL=0 -DENABLE_GPS=0 -DENABLE_MEDIA=0 -DUSE_PLUGIN_SCENERY3D=0 \
     $SCRIPT_DIR/../../
 make -j8
 cd -
 
 echo Copy all files to \"$OUT\"
 
+mkdir -p $OUT/bin $OUT/doc
+
 for file in landscapes nebulae skycultures stars textures data
 do
     cp -rf $SCRIPT_DIR/../../$file $OUT/bin/
 done
 
-mkdir -p $OUT/bin $OUT/doc
 cp $SCRIPT_DIR/data/launcherStellarium.sh $OUT/bin/
 cp $SCRIPT_DIR/data/stellariumVtsConf.ini $OUT/doc/
 cp $SCRIPT_DIR/data/vtsclient.json $OUT/doc/
 cp $SCRIPT_DIR/data/config.ini $OUT/bin/
 cp $BUILD_DIR/src/stellarium $OUT/bin/
 
-for lib in Core DBus Gui NetworkAuth Network OpenGL Script Widgets XcbQpa \
-           Concurrent SerialPort PrintSupport
+for lib in libQt5*.so.5 \
+libicui18n.so.50 libicuuc.so.50 libicudata.so.50 libpcre2-16.so.0 \
+libpng15.so.15 libssl.so.10 libcrypto.so.10
 do
-    cp $QT_DIR/lib/libQt5${lib}.so.5 $OUT/bin/
+    cp /lib64/${lib} $OUT/bin/
 done
-
-cp $QT_DIR/lib/libicui18n.so.56 $OUT/bin/
-cp $QT_DIR/lib/libicuuc.so.56 $OUT/bin/
-cp $QT_DIR/lib/libicudata.so.56 $OUT/bin/
 
 cp -rf $QT_DIR/plugins/xcbglintegrations $OUT/bin/
 cp -rf $QT_DIR/plugins/platforms $OUT/bin/
 
 cp $SCRIPT_DIR/../../data/icons/128x128/stellarium.png $OUT/doc/icon.png
+
+chown -R 1000:1000 $OUT
+cd /tmp
+tar -czf Stellarium.tgz Stellarium
+cd -
+cp /tmp/Stellarium.tgz .
+chown 1000:1000 Stellarium.tgz
