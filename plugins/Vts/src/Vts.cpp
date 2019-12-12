@@ -81,11 +81,13 @@ void Vts::processPropCmd(const QString& prop, const QString& value)
 
 void Vts::processMessage(const QByteArray& msg)
 {
-	QTextStream stream(msg);
+	QList<QByteArray> token = msg.split(' ');
+	StelCore* core;
 	QString cmd;
-	stream >> cmd;
 
-	StelCore* core = StelApp::getInstance().getCore();
+	if (token.size() == 0) goto error;
+	cmd = token[0];
+	core = StelApp::getInstance().getCore();
 
 	if (cmd == "CMD")
 	{
@@ -94,27 +96,35 @@ void Vts::processMessage(const QByteArray& msg)
 			core->setTimeRate(0);
 			return;
 		}
-		stream >> cmd;
-		if (cmd == "PROP")
+		if (token.size() == 4 && token[1] == "PROP")
 		{
-			QString prop, value;
-			stream >> prop >> value;
-			processPropCmd(prop, value);
+			processPropCmd(token[2], token[3]);
 			return;
 		}
 	}
 
 	if (cmd == "TIME")
 	{
+		if (token[1] == "TimeModeChanged")
+			return;
+		if (token.size() < 2) goto error;
 		const double JD1950 = 2433282.5;
 		double time, ratio;
-		stream >> time >> ratio;
-
+		bool ok;
+		time = token[1].toDouble(&ok);
+		if (!ok) goto error;
 		core->setJD(time + JD1950);
-		core->setTimeRate(StelCore::JD_SECOND * ratio);
+		if (token.size() > 2)
+		{
+			ratio = token[2].toDouble(&ok);
+			if (!ok) goto error;
+			core->setTimeRate(StelCore::JD_SECOND * ratio);
+		}
 		return;
 	}
-	qWarning() << "Unknown CMD" << msg;
+
+error:
+	qWarning() << "Cannot process cmd:" << msg;
 }
 
 void Vts::onReadyRead()
