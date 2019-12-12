@@ -4,7 +4,7 @@ OUT=/tmp/Stellarium
 SCRIPT_DIR=$(dirname `realpath $0`)
 QT_DIR=/usr/lib64/qt5
 
-BUILD_DIR=/tmp/build/
+BUILD_DIR=/app/build/
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_BUILD_TYPE=Release \
@@ -40,9 +40,7 @@ cp -rf $QT_DIR/plugins/platforms $OUT/bin/
 
 cp $SCRIPT_DIR/../../data/icons/128x128/stellarium.png $OUT/doc/icon.png
 
-chown -R 1000:1000 $OUT
 cd /tmp
 tar -czf Stellarium.tgz Stellarium
 cd -
 cp /tmp/Stellarium.tgz .
-chown 1000:1000 Stellarium.tgz

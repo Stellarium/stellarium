@@ -9,4 +9,8 @@ RUN yum -y install qt5-qtscript-devel
 RUN yum -y install qt5-linguist
 RUN yum -y install cmake
 
+RUN groupadd --gid 1000 app && useradd -g app -u 1000 app
+USER app
+RUN id app
+
 WORKDIR /app
