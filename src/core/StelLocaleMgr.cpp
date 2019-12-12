@@ -425,6 +425,7 @@ QStringList StelLocaleMgr::getAllCountryNames()
 
 QString StelLocaleMgr::shortDayName(int weekday)
 {
+	Q_ASSERT(weekday>=0);
 	QStringList weekdays = {
 		qc_("Sun", "short day name"),
 		qc_("Mon", "short day name"),
@@ -438,6 +439,7 @@ QString StelLocaleMgr::shortDayName(int weekday)
 
 QString StelLocaleMgr::longDayName(int weekday)
 {
+	Q_ASSERT(weekday>=0);
 	QStringList weekdays = {
 		qc_("Sunday",    "long day name"),
 		qc_("Monday",    "long day name"),
@@ -451,6 +453,7 @@ QString StelLocaleMgr::longDayName(int weekday)
 
 QString StelLocaleMgr::shortMonthName(int month)
 {
+	Q_ASSERT(month >= 0);
 	QStringList mNames= {
 		 qc_("Dec", "short month name"),
 		 qc_("Jan", "short month name"),
@@ -469,6 +472,7 @@ QString StelLocaleMgr::shortMonthName(int month)
 
 QString StelLocaleMgr::longMonthName(int month)
 {
+	Q_ASSERT(month >= 0);
 	QStringList mNames= {
 		 qc_("December",  "long month name"),
 		 qc_("January",   "long month name"),
@@ -487,6 +491,7 @@ QString StelLocaleMgr::longMonthName(int month)
 
 QString StelLocaleMgr::longGenitiveMonthName(int month)
 {
+	Q_ASSERT(month >= 0);
 	QStringList mNames= {
 		 qc_("December",  "genitive"),
 		 qc_("January",   "genitive"),
@@ -505,6 +510,7 @@ QString StelLocaleMgr::longGenitiveMonthName(int month)
 
 QString StelLocaleMgr::romanMonthName(int month)
 {
+	Q_ASSERT(month >= 0);
 	QStringList romanMonths = { "XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"};
 	return romanMonths[month % 12];
 }

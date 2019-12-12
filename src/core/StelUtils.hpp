@@ -396,8 +396,8 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){
-		return static_cast<int>(qAbs(floor(fmod(JD+1.5, 7))));
+	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
+		return static_cast<int>(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
