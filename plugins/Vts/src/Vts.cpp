@@ -38,6 +38,7 @@ public:
 private:
 	QTcpSocket socket;
 	int port;
+	int appid;
 
 	// Private methods.
 	void processMessage(const QByteArray& msg);
@@ -52,7 +53,8 @@ private slots:
 void Vts::init()
 {
 	port = CLIProcessor::argsGetOptionWithArg(qApp->arguments(), "", "--serverport", 8888).toInt();
-	qDebug() << "Start Vts on port" << port;
+	appid = CLIProcessor::argsGetOptionWithArg(qApp->arguments(), "", "--appid", 0).toInt();
+	qDebug() << "Start Vts on port" << port << "with appid" << appid;
 
 	connect(&socket, &QTcpSocket::connected, this, &Vts::onConnected);
 	connect(&socket, &QTcpSocket::disconnected, this, &Vts::onDisconnected);
@@ -62,7 +64,9 @@ void Vts::init()
 
 void Vts::onConnected()
 {
-	socket.write("INIT Stellarium CONSTRAINT 1.0\n");
+	socket.write("INIT Stellarium CONSTRAINT 1.0 ");
+	socket.write(QByteArray::number(appid));
+	socket.write("\n");
 }
 
 void Vts::onDisconnected()

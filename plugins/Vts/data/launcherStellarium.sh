@@ -17,8 +17,12 @@ while [ "$1" != "" ]; do
 			serverport=$2
 			shift
 			;;
+		"--appid")
+			appid=$2
+			shift
+			;;
 	esac
 	shift
 done
 
-echo $appid $vtsconfig $appid --serverport $serverport --config-file $VTS_WORKING_DIR/config.ini
+echo $appid $vtsconfig $appid --serverport $serverport --config-file $VTS_WORKING_DIR/config.ini --appid $appid
