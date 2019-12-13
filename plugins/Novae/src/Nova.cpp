@@ -85,20 +85,20 @@ Nova::~Nova()
 
 QVariantMap Nova::getMap(void) const
 {
-	QVariantMap map;
-	map["designation"] = designation;
-	map["name"] = novaName;
-	map["type"] = novaType;
-	map["maxMagnitude"] = maxMagnitude;
-	map["minMagnitude"] = minMagnitude;
-	map["peakJD"] = peakJD;
-	map["m2"] = m2;
-	map["m3"] = m3;
-	map["m6"] = m6;
-	map["m9"] = m9;
-	map["RA"] = RA;
-	map["Dec"] = Dec;	
-	map["distance"] = distance;
+	const QVariantMap map = {
+	{"designation", designation},
+	{"name", novaName},
+	{"type", novaType},
+	{"maxMagnitude", maxMagnitude},
+	{"minMagnitude", minMagnitude},
+	{"peakJD", peakJD},
+	{"m2", m2},
+	{"m3", m3},
+	{"m6", m6},
+	{"m9", m9},
+	{"RA", RA},
+	{"Dec", Dec},
+	{"distance", distance}};
 
 	return map;
 }

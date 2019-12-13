@@ -76,15 +76,15 @@ Supernova::~Supernova()
 
 QVariantMap Supernova::getMap(void) const
 {
-	QVariantMap map;
-	map["designation"] = designation;
-	map["sntype"] = sntype;
-	map["maxMagnitude"] = maxMagnitude;
-	map["peakJD"] = peakJD;
-	map["snra"] = snra;
-	map["snde"] = snde;
-	map["note"] = note;
-	map["distance"] = distance;
+	const QVariantMap map = {
+	{"designation", designation},
+	{"sntype", sntype},
+	{"maxMagnitude", maxMagnitude},
+	{"peakJD", peakJD},
+	{"snra", snra},
+	{"snde", snde},
+	{"note", note},
+	{"distance", distance}};
 
 	return map;
 }

@@ -539,22 +539,22 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisX->clear();
 	axisY->clear();
 
-	QList<axisPair> axis;
-	axis.append(qMakePair(q_("Orbital Eccentricity"), 0));
-	axis.append(qMakePair(q_("Orbit Semi-Major Axis, AU"), 1));
-	axis.append(qMakePair(q_("Planetary Mass, Mjup"), 2));
-	axis.append(qMakePair(q_("Planetary Radius, Rjup"), 3));
-	axis.append(qMakePair(q_("Orbital Period, days"), 4));
-	axis.append(qMakePair(q_("Angular Distance, arcsec"), 5));
-	axis.append(qMakePair(q_("Effective temperature of host star, K"), 6));
-	axis.append(qMakePair(q_("Year of Discovery"), 7));
-	axis.append(qMakePair(q_("Metallicity of host star"), 8));
-	axis.append(qMakePair(q_("V magnitude of host star, mag"), 9));
-	axis.append(qMakePair(q_("RA (J2000) of star, deg"), 10));
-	axis.append(qMakePair(q_("Dec (J2000) of star, deg"), 11));
-	axis.append(qMakePair(q_("Distance to star, pc"), 12));
-	axis.append(qMakePair(q_("Mass of host star, Msol"), 13));
-	axis.append(qMakePair(q_("Radius of host star, Rsol"), 14));
+	const QList<axisPair> axis = {
+	{ q_("Orbital Eccentricity"),          0},
+	{ q_("Orbit Semi-Major Axis, AU"),     1},
+	{ q_("Planetary Mass, Mjup"),          2},
+	{ q_("Planetary Radius, Rjup"),        3},
+	{ q_("Orbital Period, days"),          4},
+	{ q_("Angular Distance, arcsec"),      5},
+	{ q_("Effective temperature of host star, K"), 6},
+	{ q_("Year of Discovery"),             7},
+	{ q_("Metallicity of host star"),      8},
+	{ q_("V magnitude of host star, mag"), 9},
+	{ q_("RA (J2000) of star, deg"),      10},
+	{ q_("Dec (J2000) of star, deg"),     11},
+	{ q_("Distance to star, pc"),         12},
+	{ q_("Mass of host star, Msol"),      13},
+	{ q_("Radius of host star, Rsol"),    14}};
 
 	for(int i=0; i<axis.size(); ++i)
 	{

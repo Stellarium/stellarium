@@ -217,45 +217,15 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 
 Vec4f Meteor::getColorFromName(QString colorName)
 {
-	int R, G, B; // 0-255
-	if (colorName == "violet")
-	{ // Calcium
-		R = 176;
-		G = 67;
-		B = 172;
-	}
-	else if (colorName == "blueGreen")
-	{ // Magnesium
-		R = 0;
-		G = 255;
-		B = 152;
-	}
-	else if (colorName == "yellow")
-	{ // Iron
-		R = 255;
-		G = 255;
-		B = 0;
-	}
-	else if (colorName == "orangeYellow")
-	{ // Sodium
-		R = 255;
-		G = 160;
-		B = 0;
-	}
-	else if (colorName == "red")
-	{ // atmospheric nitrogen and oxygen
-		R = 255;
-		G = 30;
-		B = 0;
-	}
-	else
-	{ // white
-		R = 255;
-		G = 255;
-		B = 255;
-	}
+	const QMap<QString, Vec3f>colorMap={
+		{ "violet",       { 176.f,  67.f, 172.f}},  // Calcium
+		{ "blueGreen",    {   0.f, 255.f, 152.f}},  // Magnesium
+		{ "yellow",       { 255.f, 255.f,   0.f}},  // Iron
+		{ "orangeYellow", { 255.f, 160.f,   0.f}},  // Sodium
+		{ "red",          { 255.f,  30.f,   0.f}}}; // atmospheric nitrogen and oxygen
+	Vec3f rgb=colorMap.value(colorName, Vec3f(255.f));  // default: white
 
-	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
+	return Vec4f(rgb/255.f, 1.0f);
 }
 
 void Meteor::buildColorVectors(const QList<ColorPair> colors)

@@ -643,20 +643,11 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 
 	if (enabled())
 	{
-		QString mstdata;
-		if (m_status == ACTIVE_GENERIC)
-		{
-			mstdata = "generic-data";
-		}
-		else if (m_status == ACTIVE_CONFIRMED)
-		{
-			mstdata = "confirmed-data";
-		}
-		else if (m_status == INACTIVE)
-		{
-			mstdata = "inactive";
-		}
-		map.insert("status", mstdata);
+		const QMap<MeteorShower::Status, QString>mstMap={
+			{ ACTIVE_GENERIC, "generic-data"},
+			{ ACTIVE_CONFIRMED, "confirmed-data"},
+			{ INACTIVE, "inactive"}};
+		map.insert("status", mstMap.value(m_status, ""));
 
 		if (!m_showerID.toInt())
 		{

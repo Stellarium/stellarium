@@ -873,112 +873,51 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc = &cometOrbitPosFunc;
 		}
 
-		else if (funcName=="sun_special")
-			posfunc = &get_sun_helio_coordsv;
-
-		else if (funcName=="mercury_special") {
-			posfunc = &get_mercury_helio_coordsv;
-			osculatingFunc = &get_mercury_helio_osculating_coords;
+		else {
+			const QMap<QString, posFuncType>posfuncMap={
+				{ "sun_special",       &get_sun_helio_coordsv},
+				{ "mercury_special",   &get_mercury_helio_coordsv},
+				{ "venus_special",     &get_venus_helio_coordsv},
+				{ "earth_special",     &get_earth_helio_coordsv},
+				{ "lunar_special",     &get_lunar_parent_coordsv},
+				{ "mars_special",      &get_mars_helio_coordsv},
+				{ "phobos_special",    &get_phobos_parent_coordsv},
+				{ "deimos_special",    &get_deimos_parent_coordsv},
+				{ "jupiter_special",   &get_jupiter_helio_coordsv},
+				{ "io_special",        &get_io_parent_coordsv},
+				{ "europa_special",    &get_europa_parent_coordsv},
+				{ "ganymede_special",  &get_ganymede_parent_coordsv},
+				{ "calisto_special",   &get_callisto_parent_coordsv},
+				{ "callisto_special",  &get_callisto_parent_coordsv},
+				{ "saturn_special",    &get_saturn_helio_coordsv},
+				{ "mimas_special",     &get_mimas_parent_coordsv},
+				{ "enceladus_special", &get_enceladus_parent_coordsv},
+				{ "tethys_special",    &get_tethys_parent_coordsv},
+				{ "dione_special",     &get_dione_parent_coordsv},
+				{ "rhea_special",      &get_rhea_parent_coordsv},
+				{ "titan_special",     &get_titan_parent_coordsv},
+				{ "hyperion_special",  &get_hyperion_parent_coordsv},
+				{ "iapetus_special",   &get_iapetus_parent_coordsv},
+				{ "uranus_special",    &get_uranus_helio_coordsv},
+				{ "miranda_special",   &get_miranda_parent_coordsv},
+				{ "ariel_special",     &get_ariel_parent_coordsv},
+				{ "umbriel_special",   &get_umbriel_parent_coordsv},
+				{ "titania_special",   &get_titania_parent_coordsv},
+				{ "oberon_special",    &get_oberon_parent_coordsv},
+				{ "neptune_special",   &get_neptune_helio_coordsv},
+				{ "pluto_special",     &get_pluto_helio_coordsv}};
+			const QMap<QString, OsculatingFunctType*>osculatingMap={
+				{ "mercury_special",   &get_mercury_helio_osculating_coords},
+				{ "venus_special",     &get_venus_helio_osculating_coords},
+				{ "earth_special",     &get_earth_helio_osculating_coords},
+				{ "mars_special",      &get_mars_helio_osculating_coords},
+				{ "jupiter_special",   &get_jupiter_helio_osculating_coords},
+				{ "saturn_special",    &get_saturn_helio_osculating_coords},
+				{ "uranus_special",    &get_uranus_helio_osculating_coords},
+				{ "neptune_special",   &get_neptune_helio_osculating_coords}};
+			posfunc=posfuncMap.value(funcName, Q_NULLPTR);
+			osculatingFunc=osculatingMap.value(funcName, Q_NULLPTR);
 		}
-
-		else if (funcName=="venus_special") {
-			posfunc = &get_venus_helio_coordsv;
-			osculatingFunc = &get_venus_helio_osculating_coords;
-		}
-
-		else if (funcName=="earth_special") {
-			posfunc = &get_earth_helio_coordsv;
-			osculatingFunc = &get_earth_helio_osculating_coords;
-		}
-
-		else if (funcName=="lunar_special")
-			posfunc = &get_lunar_parent_coordsv;
-
-		else if (funcName=="mars_special") {
-			posfunc = &get_mars_helio_coordsv;
-			osculatingFunc = &get_mars_helio_osculating_coords;
-		}
-
-		else if (funcName=="phobos_special")
-			posfunc = &get_phobos_parent_coordsv;
-
-		else if (funcName=="deimos_special")
-			posfunc = &get_deimos_parent_coordsv;
-
-		else if (funcName=="jupiter_special") {
-			posfunc = &get_jupiter_helio_coordsv;
-			osculatingFunc = &get_jupiter_helio_osculating_coords;
-		}
-
-		else if (funcName=="europa_special")
-			posfunc = &get_europa_parent_coordsv;
-
-		else if (funcName=="calisto_special")
-			posfunc = &get_callisto_parent_coordsv;
-
-		else if (funcName=="io_special")
-			posfunc = &get_io_parent_coordsv;
-
-		else if (funcName=="ganymede_special")
-			posfunc = &get_ganymede_parent_coordsv;
-
-		else if (funcName=="saturn_special") {
-			posfunc = &get_saturn_helio_coordsv;
-			osculatingFunc = &get_saturn_helio_osculating_coords;
-		}
-
-		else if (funcName=="mimas_special")
-			posfunc = &get_mimas_parent_coordsv;
-
-		else if (funcName=="enceladus_special")
-			posfunc = &get_enceladus_parent_coordsv;
-
-		else if (funcName=="tethys_special")
-			posfunc = &get_tethys_parent_coordsv;
-
-		else if (funcName=="dione_special")
-			posfunc = &get_dione_parent_coordsv;
-
-		else if (funcName=="rhea_special")
-			posfunc = &get_rhea_parent_coordsv;
-
-		else if (funcName=="titan_special")
-			posfunc = &get_titan_parent_coordsv;
-
-		else if (funcName=="iapetus_special")
-			posfunc = &get_iapetus_parent_coordsv;
-
-		else if (funcName=="hyperion_special")
-			posfunc = &get_hyperion_parent_coordsv;
-
-		else if (funcName=="uranus_special") {
-			posfunc = &get_uranus_helio_coordsv;
-			osculatingFunc = &get_uranus_helio_osculating_coords;
-		}
-
-		else if (funcName=="miranda_special")
-			posfunc = &get_miranda_parent_coordsv;
-
-		else if (funcName=="ariel_special")
-			posfunc = &get_ariel_parent_coordsv;
-
-		else if (funcName=="umbriel_special")
-			posfunc = &get_umbriel_parent_coordsv;
-
-		else if (funcName=="titania_special")
-			posfunc = &get_titania_parent_coordsv;
-
-		else if (funcName=="oberon_special")
-			posfunc = &get_oberon_parent_coordsv;
-
-		else if (funcName=="neptune_special") {
-			posfunc = &get_neptune_helio_coordsv;
-			osculatingFunc = &get_neptune_helio_osculating_coords;
-		}
-
-		else if (funcName=="pluto_special")
-			posfunc = &get_pluto_helio_coordsv;
-
 
 		if (posfunc==Q_NULLPTR)
 		{
@@ -1094,17 +1033,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			//g,k magnitude system
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
-			const float slope = pd.value(secname+"/slope_parameter", 4.0f).toFloat();
+			const float slope = qBound(0.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 20.0f);
 			if (magnitude > -99)
 			{
-				if (slope >= 0 && slope <= 20)
-				{
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
-				}
-				else
-				{
-					mp->setAbsoluteMagnitudeAndSlope(magnitude, 4.0f);
-				}
 			}
 
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
@@ -1354,30 +1286,15 @@ void SolarSystem::draw(StelCore* core)
 
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 {
-	// Sync index with AstroCalcDialog::generateEphemeris()
-	Vec3f colorMarker = getEphemerisGenericMarkerColor();
-	switch (index)
-	{
-		case 0:
-			colorMarker = getEphemerisGenericMarkerColor();
-			break;
-		case 1:
-			colorMarker = getEphemerisMercuryMarkerColor();
-			break;
-		case 2:
-			colorMarker = getEphemerisVenusMarkerColor();
-			break;
-		case 3:
-			colorMarker = getEphemerisMarsMarkerColor();
-			break;
-		case 4:
-			colorMarker = getEphemerisJupiterMarkerColor();
-			break;
-		case 5:
-			colorMarker = getEphemerisSaturnMarkerColor();
-			break;
-	}
-	return colorMarker;
+	// Sync index with AstroCalcDialog::generateEphemeris(). If required, switch to using a QMap.
+	const QList<Vec3f> colors={
+		ephemerisGenericMarkerColor,
+		ephemerisMercuryMarkerColor,
+		ephemerisVenusMarkerColor,
+		ephemerisMarsMarkerColor,
+		ephemerisJupiterMarkerColor,
+		ephemerisSaturnMarkerColor};
+	return colors.value(index, ephemerisGenericMarkerColor);
 }
 
 void SolarSystem::drawEphemerisMarkers(const StelCore *core)
@@ -2311,12 +2228,7 @@ int SolarSystem::getNumberIsolatedTrails() const
 void SolarSystem::setNumberIsolatedTrails(int n)
 {
 	// [1..5] - valid range for trails
-	if (n<1)
-		numberIsolatedTrails = 1;
-	else if (n>5)
-		numberIsolatedTrails = 5;
-	else
-		numberIsolatedTrails = n;
+	numberIsolatedTrails = qBound(1, n, 5);
 
 	if (getFlagIsolatedTrails())
 		recreateTrails();

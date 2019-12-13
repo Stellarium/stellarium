@@ -253,6 +253,8 @@ public:
 	inline Vector4(const Vector3<T>&);
 	//! Creates an Vector4 with xyz set to the given values, and w set to 1.0
 	inline Vector4(T, T, T);
+	//! Creates an Vector4 with xyz set to the given Vector3, and given last value as w
+	inline Vector4(const Vector3<T>&, T);
 	inline Vector4(T, T, T, T);
 
 	inline Vector4& operator=(const Vector3<T>&);
@@ -868,6 +870,11 @@ template<class T> Vector4<T>::Vector4(const T* x)
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
+}
+
+template<class T> Vector4<T>::Vector4(const Vector3<T>& a, const T w)
+{
+	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=w;
 }
 
 template<class T> Vector4<T>::Vector4(T x, T y, T z)
