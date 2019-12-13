@@ -644,17 +644,8 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-		double minYa = aY.first();
-		double maxYa = aY.first();
-
-		for (auto temp : aY)
-		{
-			if (maxYa < temp) maxYa = temp;
-			if (minYa > temp) minYa = temp;
-		}
-
-		minYaz = minYa - 2.0;
-		maxYaz = maxYa + 2.0;
+		minYaz = *std::min_element(aY.begin(), aY.end()) - 2.0;
+		maxYaz = *std::max_element(aY.begin(), aY.end()) + 2.0;
 
 		prepareAziVsTimeAxesAndGraph();
 		drawCurrentTimeDiagram();
@@ -976,14 +967,14 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
 				if (extra.toFloat() > 90.f)
-					extra = QChar(0x2014);
+					extra = dash;
 
 				// Convert to arcminutes the average angular size of deep-sky object
 				angularSize = QString::number(obj->getAngularSize(core) * 120.f, 'f', 3);
 				if (angularSize.toFloat() < 0.01f)
-					angularSize = QChar(0x2014);
+					angularSize = dash;
 
-				sTransit = QChar(0x2014);
+				sTransit = dash;
 				Vec3f rts = obj->getRTSTime(core);
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
@@ -1057,9 +1048,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
 				angularSize = QString::number(planet->getAngularSize(core) * 120.f, 'f', 4);
 				if (angularSize.toFloat() < 1e-4 || planet->getPlanetType() == Planet::isComet)
-					angularSize = QChar(0x2014);
+					angularSize = dash;
 
-				sTransit = QChar(0x2014);
+				sTransit = dash;
 				Vec3f rts = planet->getRTSTime(core);
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
@@ -1115,12 +1106,12 @@ void AstroCalcDialog::currentCelestialPositions()
 					if (star.value(obj) > 0.f)
 						extra = QString::number(star.value(obj), 'f', 5); // days
 					else
-						extra = QChar(0x2014); // dash
+						extra = dash;
 				}
 				else	// stars with high proper motion
 					extra = QString::number(star.value(obj), 'f', 5); // "/yr
 
-				sTransit = QChar(0x2014);
+				sTransit = dash;
 				Vec3f rts = obj->getRTSTime(core);
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
@@ -1129,7 +1120,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (commonName.isEmpty())
 					commonName = obj->getID();
 
-				fillCelestialPositionTable(commonName, coordinates.first, coordinates.second, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
+				fillCelestialPositionTable(commonName, coordinates.first, coordinates.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sType);
 			}
 		}
 	}
@@ -2235,17 +2226,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-		double minYa = aY.first();
-		double maxYa = aY.first();
-
-		for (auto temp : aY)
-		{
-			if (maxYa < temp) maxYa = temp;
-			if (minYa > temp) minYa = temp;
-		}
-
-		minY = minYa - 2.0;
-		maxY = maxYa + 2.0;
+		minY = *std::min_element(aY.begin(), aY.end()) - 2.0;
+		maxY = *std::max_element(aY.begin(), aY.end()) + 2.0;
 
 		// additional data: Sun + Twilight
 		if (plotAltVsTimeSun)
@@ -2255,17 +2237,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			ysc = sYc.toVector();
 			ysn = sYn.toVector();
 			ysa = sYa.toVector();
-			double minYs = sY.first();
-			double maxYs = sY.first();
+			double minYs = *std::min_element(sY.begin(), sY.end());
+			double maxYs = *std::max_element(sY.begin(), sY.end());
 
-			for (auto temp : sY)
-			{
-				if (maxYs < temp) maxYs = temp;
-				if (minYs > temp) minYs = temp;
-			}
-
-			minY =  (minY < minYs - 2.0) ? minY : minYs - 2.0;
-			maxY = (maxY > maxYs + 20.0) ? maxY : maxYs + 20.0;
+			if (minY >= minYs - 2.0)  minY = minYs - 2.0;
+			if (maxY <= maxYs + 20.0) maxY = maxYs + 20.0;
 		}
 
 		// additional data: Moon
@@ -2273,17 +2249,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		{
 			xm = mX.toVector();
 			ym = mY.toVector();
-			double minYm = mY.first();
-			double maxYm = mY.first();
+			double minYm = *std::min_element(mY.begin(), mY.end());
+			double maxYm = *std::max_element(mY.begin(), mY.end());
 
-			for (auto temp : mY)
-			{
-				if (maxYm < temp) maxYm = temp;
-				if (minYm > temp) minYm = temp;
-			}
-
-			minY =  (minY < minYm - 2.0) ? minY : minYm - 2.0;
-			maxY = (maxY > maxYm + 2.0) ? maxY : maxYm + 2.0;
+			if (minY >= minYm - 2.0)  minY = minYm - 2.0;
+			if (maxY <= maxYm + 2.0)  maxY = maxYm + 2.0;
 		}
 
 		if (plotAltVsTimePositive && minY<altVsTimePositiveLimit)
@@ -2526,27 +2496,15 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		QVector<double> x = aX.toVector(), ya = aY.toVector(), yb = bY.toVector();
 
-		double minYa = aY.first();
-		double maxYa = aY.first();
-
-		for (auto temp : aY)
-		{
-			if (maxYa < temp) maxYa = temp;
-			if (minYa > temp) minYa = temp;
-		}
+		double minYa = *std::min_element(aY.begin(), aY.end());
+		double maxYa = *std::max_element(aY.begin(), aY.end());
 
 		width = (maxYa - minYa) / 50.0;
 		minY1 = minYa - width;
 		maxY1 = maxYa + width;
 
-		minYa = bY.first();
-		maxYa = bY.first();
-
-		for (auto temp : bY)
-		{
-			if (maxYa < temp) maxYa = temp;
-			if (minYa > temp) minYa = temp;
-		}
+		minYa = *std::min_element(bY.begin(), bY.end());
+		maxYa = *std::max_element(bY.begin(), bY.end());
 
 		width = (maxYa - minYa) / 50.0;
 		minY2 = minYa - width;
@@ -2670,42 +2628,20 @@ void AstroCalcDialog::populateFunctionsList()
 	Q_ASSERT(ui->graphsSecondComboBox);
 
 	typedef QPair<QString, GraphsTypes> graph;
-	graph cf;
-	QList<graph> functions;
-	functions.clear();
-	cf.first = q_("Magnitude vs. Time");
-	cf.second = GraphMagnitudeVsTime;
-	functions.append(cf);
-	cf.first = q_("Phase vs. Time");
-	cf.second = GraphPhaseVsTime;
-	functions.append(cf);
-	cf.first = q_("Distance vs. Time");
-	cf.second = GraphDistanceVsTime;
-	functions.append(cf);
-	cf.first = q_("Elongation vs. Time");
-	cf.second = GraphElongationVsTime;
-	functions.append(cf);
-	cf.first = q_("Angular size vs. Time");
-	cf.second = GraphAngularSizeVsTime;
-	functions.append(cf);
-	cf.first = q_("Phase angle vs. Time");
-	cf.second = GraphPhaseAngleVsTime;
-	functions.append(cf);
-	// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
-	cf.first = q_("Heliocentric distance vs. Time");
-	cf.second = GraphHDistanceVsTime;
-	functions.append(cf);
-	// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
-	cf.first = q_("Transit altitude vs. Time");
-	cf.second = GraphTransitAltitudeVsTime;
-	functions.append(cf);
-	// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
-	cf.first = q_("Right ascension vs. Time");
-	cf.second = GraphRightAscensionVsTime;
-	functions.append(cf);
-	cf.first = q_("Declination vs. Time");
-	cf.second = GraphDeclinationVsTime;
-	functions.append(cf);
+	const QList<graph> functions = {
+		{ q_("Magnitude vs. Time"),    GraphMagnitudeVsTime},
+		{ q_("Phase vs. Time"),        GraphPhaseVsTime},
+		{ q_("Distance vs. Time"),     GraphDistanceVsTime},
+		{ q_("Elongation vs. Time"),   GraphElongationVsTime},
+		{ q_("Angular size vs. Time"), GraphAngularSizeVsTime},
+		{ q_("Phase angle vs. Time"),  GraphPhaseAngleVsTime},
+		// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Heliocentric distance vs. Time"), GraphHDistanceVsTime},
+		// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Transit altitude vs. Time"), GraphTransitAltitudeVsTime},
+		// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Right ascension vs. Time"), GraphRightAscensionVsTime},
+		{ q_("Declination vs. Time"), GraphDeclinationVsTime}};
 
 	QComboBox* first = ui->graphsFirstComboBox;
 	QComboBox* second = ui->graphsSecondComboBox;
@@ -3072,15 +3008,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-		double minYa = aY.first();
-		double maxYa = aY.first();
-		for (auto temp : aY)
-		{
-			if (maxYa < temp) maxYa = temp;
-			if (minYa > temp) minYa = temp;
-		}
-		minYme = minYa - 2.0;
-		maxYme = maxYa + 2.0;
+		minYme = *std::min_element(aY.begin(), aY.end()) - 2.0;
+		maxYme = *std::max_element(aY.begin(), aY.end()) + 2.0;
 
 		if (plotMonthlyElevationPositive && minYme<monthlyElevationPositiveLimit)
 			minYme = monthlyElevationPositiveLimit;
@@ -3646,14 +3575,14 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
 	treeItem->setText(PhenomenaObject1, firstObjectName);
 	if (firstObjectMagnitude > 90.f)
-		treeItem->setText(PhenomenaMagnitude1, QChar(0x2014));
+		treeItem->setText(PhenomenaMagnitude1, dash);
 	else
 		treeItem->setText(PhenomenaMagnitude1, QString::number(firstObjectMagnitude, 'f', 2));
 	treeItem->setTextAlignment(PhenomenaMagnitude1, Qt::AlignRight);
 	treeItem->setToolTip(PhenomenaMagnitude1, q_("Magnitude of first object"));
 	treeItem->setText(PhenomenaObject2, secondObjectName);
 	if (secondObjectMagnitude > 90.f)
-		treeItem->setText(PhenomenaMagnitude2, QChar(0x2014));
+		treeItem->setText(PhenomenaMagnitude2, dash);
 	else
 		treeItem->setText(PhenomenaMagnitude2, QString::number(secondObjectMagnitude, 'f', 2));
 	treeItem->setToolTip(PhenomenaMagnitude2, q_("Magnitude of second object"));
@@ -3677,7 +3606,6 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode)
 {
 	QMap<double, double>::ConstIterator it;
-	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
@@ -3691,10 +3619,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;
-		double s1 = object1->getSpheroidAngularSize(core);
-		double s2 = object2->getSpheroidAngularSize(core);
-		double d1 = object1->getJ2000EquatorialPos(core).length();
-		double d2 = object2->getJ2000EquatorialPos(core).length();
+		const double s1 = object1->getSpheroidAngularSize(core);
+		const double s2 = object2->getSpheroidAngularSize(core);
+		const double d1 = object1->getJ2000EquatorialPos(core).length();
+		const double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (mode==PhenomenaTypeIndex::Opposition) // opposition
 		{
 			phenomenType = q_("Opposition");
@@ -3851,7 +3779,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2)
 {
 	QMap<double, double>::ConstIterator it;
-	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
@@ -3922,7 +3849,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode = 0)
 {
 	QMap<double, double>::ConstIterator it;
-	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
@@ -3936,10 +3862,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;		
-		double s1 = object1->getSpheroidAngularSize(core);
-		double s2 = object2->getAngularSize(core);
-		double d1 = object1->getJ2000EquatorialPos(core).length();
-		double d2 = object2->getJ2000EquatorialPos(core).length();
+		const double s1 = object1->getSpheroidAngularSize(core);
+		const double s2 = object2->getAngularSize(core);
+		const double d1 = object1->getJ2000EquatorialPos(core).length();
+		const double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (mode==PhenomenaTypeIndex::Opposition)
 		{
 			phenomenType = q_("Opposition");
@@ -4900,16 +4826,16 @@ void AstroCalcDialog::enableVisibilityAngularLimits(bool visible)
 
 void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees)
 {
-	QString sAngularSize = QChar(0x2014);
-	QString sRise = QChar(0x2014);
-	QString sTransit = QChar(0x2014);
-	QString sSet = QChar(0x2014);
+	QString sAngularSize = dash;
+	QString sRise = dash;
+	QString sTransit = dash;
+	QString sSet = dash;
 
 	WUTTreeWidgetItem* treeItem =  new WUTTreeWidgetItem(ui->wutMatchingObjectsTreeWidget);
 	treeItem->setData(WUTObjectName, Qt::DisplayRole, objectName);
 	treeItem->setData(WUTObjectName, Qt::UserRole, designation);
 	if (magnitude > 98.0)
-		treeItem->setText(WUTMagnitude, QChar(0x2014));
+		treeItem->setText(WUTMagnitude, dash);
 	else
 		treeItem->setText(WUTMagnitude, QString::number(magnitude, 'f', 2));
 	treeItem->setTextAlignment(WUTMagnitude, Qt::AlignRight);
@@ -5515,8 +5441,8 @@ void AstroCalcDialog::computePlanetaryData()
 	double spcb2 = secondCBId->getSiderealPeriod();
 	int cb1 = qRound(spcb1);
 	int cb2 = qRound(spcb2);
-	QString orbitalResonance = QChar(0x2014);
-	QString orbitalPeriodsRatio = QChar(0x2014);
+	QString orbitalResonance = dash;
+	QString orbitalPeriodsRatio = dash;
 	bool spin = false;
 	QString parentFCBName = "";
 	if (firstCelestialBody != "Sun")
@@ -5542,7 +5468,7 @@ void AstroCalcDialog::computePlanetaryData()
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
 
-	QString angularDistance = QChar(0x2014);
+	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
 		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
@@ -5569,14 +5495,14 @@ void AstroCalcDialog::computePlanetaryData()
 	QString kms = qc_("km/s", "speed");
 
 	double orbVelFCB = firstCBId->getEclipticVelocity().length();
-	QString orbitalVelocityFCB = QChar(0x2014);
+	QString orbitalVelocityFCB = dash;
 	if (orbVelFCB > 0.)
 		orbitalVelocityFCB = QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3)).arg(kms);
 
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
-	QString orbitalVelocitySCB = QChar(0x2014);
+	QString orbitalVelocitySCB = dash;
 	if (orbVelSCB>0.)
 		orbitalVelocitySCB = QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
 
@@ -5584,7 +5510,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 	// TRANSLATORS: Unit of measure for period - days
 	QString days = qc_("days", "duration");
-	QString synodicPeriod = QChar(0x2014);
+	QString synodicPeriod = dash;
 	bool showSP = true;
 	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
 		showSP = false;
@@ -5718,34 +5644,14 @@ void AstroCalcDialog::drawDistanceGraph()
 	core->setJD(currentJD);
 
 	QVector<double> x = aX.toVector(), y1 = aY1.toVector(), y2;
-
-	double minY1a = aY1.first();
-	double maxY1a = aY1.first();
-
-	for (auto temp : aY1)
-	{
-		if (maxY1a < temp) maxY1a = temp;
-		if (minY1a > temp) minY1a = temp;
-	}
-
-	minYld = minY1a;
-	maxYld = maxY1a;
+	minYld = *std::min_element(aY1.begin(), aY1.end());
+	maxYld = *std::max_element(aY1.begin(), aY1.end());
 
 	if (!aY2.isEmpty()) // mistake-proofing!
 	{
 		y2 = aY2.toVector();
-
-		double minY2a = aY2.first();
-		double maxY2a = aY2.first();
-
-		for (auto temp : aY2)
-		{
-			if (maxY2a < temp) maxY2a = temp;
-			if (minY2a > temp) minY2a = temp;
-		}
-
-		minYad = minY2a;
-		maxYad = maxY2a;
+		minYad = *std::min_element(aY2.begin(), aY2.end());
+		maxYad = *std::max_element(aY2.begin(), aY2.end());
 	}
 
 	prepareDistanceAxesAndGraph();
@@ -5888,15 +5794,8 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-		double minY = aY.first();
-		double maxY = aY.first();
-		for (auto temp : aY)
-		{
-			if (maxY < temp) maxY = temp;
-			if (minY > temp) minY = temp;
-		}
-		minYadm = minY - 5.0;
-		maxYadm = maxY + 5.0;
+		minYadm = *std::min_element(aY.begin(), aY.end()) - 5.0;
+		maxYadm = *std::max_element(aY.begin(), aY.end()) + 5.0;
 		int limit = ui->angularDistanceLimitSpinBox->value();
 		if (minYadm > limit)
 			minYadm = limit - 5.0;

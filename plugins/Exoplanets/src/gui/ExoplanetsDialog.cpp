@@ -82,8 +82,7 @@ void ExoplanetsDialog::createDialogContent()
 	ep = GETSTELMODULE(Exoplanets);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
@@ -460,20 +459,10 @@ void ExoplanetsDialog::drawDiagram()
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minX, minY, maxX, maxY;
-	minX = maxX = aX.first();
-	minY = maxY = aY.first();
-
-	for (auto temp : aX)
-	{
-		if(maxX < temp) maxX = temp;
-		if(minX > temp) minX = temp;
-	}
-	for (auto temp : aY)
-	{
-		if(maxY < temp) maxY = temp;
-		if(minY > temp) minY = temp;
-	}
+	double minX = *std::min_element(aX.begin(), aX.end());
+	double minY = *std::min_element(aY.begin(), aY.end());
+	double maxX = *std::max_element(aX.begin(), aX.end());
+	double maxY = *std::max_element(aY.begin(), aY.end());
 
 	if (!ui->minX->text().isEmpty())
 		minX = ui->minX->text().toDouble();
