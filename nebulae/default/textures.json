@@ -1247,6 +1247,14 @@
 		"maxBrightness" : 13.0
 	},
 	{
+		"imageCredits" : {"short" : "Kamil Pecinovsky","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC1502.jpg"},
+		"imageUrl" : "n1502.png",
+		"worldCoords" :	[[[62.5729,62.1299], [61.5841,62.0702], [61.4465,62.5329], [62.453,62.5931]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.9
+	},
+	{
 		"imageCredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
 		"imageUrl" : "n1514-vasey.png",
 		"worldCoords" : [[[62.4254, 30.6939], [62.2300, 30.6825], [62.2167, 30.8507], [62.4124, 30.8619]]],
@@ -1271,20 +1279,20 @@
 		"maxBrightness" : 12.1
 	},
 	{
-		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n1555.shtml"},
-		"imageUrl" : "n1555.png",
-		"worldCoords" : [[[65.6222,19.5787], [65.5082,19.3673], [65.284,19.475], [65.3974,19.6859]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2165786418,
-		"maxBrightness" : 14.5
-	},
-	{
 		"imageCredits" : {"short" : "DSS"},
 		"imageUrl" : "n1549-dss.png",
 		"worldCoords" : [[[64.2998,-55.8651], [63.6929,-55.8655], [63.6929,-55.5245], [64.2971,-55.5235]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n1555.shtml"},
+		"imageUrl" : "n1555.png",
+		"worldCoords" : [[[65.6222,19.5787], [65.5082,19.3673], [65.284,19.475], [65.3974,19.6859]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
 	},
 	{
 		"imageCredits" : {"short" : "DSS"},

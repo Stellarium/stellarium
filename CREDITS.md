@@ -708,6 +708,10 @@
 	      from NASA, ESA, Digitized Sky Survey 2; Acknowledgement: Davide De Martin
 	      https://www.spacetelescope.org/
 	      License: Creative Commons Attribution 4.0 International
+	4.109 Images of NGC1502
+	      from Kamil Pecinovsky
+	      https://www.spacetelescope.org/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
