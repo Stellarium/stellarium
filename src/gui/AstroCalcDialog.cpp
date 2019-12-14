@@ -1930,6 +1930,8 @@ void AstroCalcDialog::generateTransits()
 			// sort-by-date
 			ui->transitTreeWidget->sortItems(TransitDate, Qt::AscendingOrder);
 		}
+		else
+			cleanupTransits();
 	}
 }
 
