@@ -1800,27 +1800,13 @@ void AstroCalcDialog::initListTransit()
 void AstroCalcDialog::generateTransits()
 {
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-	QString name, englishName;
 	if (!selectedObjects.isEmpty())
 	{
+		QString name, englishName;
 		StelObjectP selectedObject = selectedObjects[0];
-		name = selectedObject->getNameI18n();
-		englishName = selectedObject->getEnglishName();
+		name = ui->transitCelestialBodyNameLabel->text();
+		selectedObject->getEnglishName().isEmpty() ? englishName = name : englishName = selectedObject->getEnglishName();
 		bool isPlanet = false;
-
-		if (name.isEmpty())
-		{
-			QString otype = selectedObject->getType();
-			if (otype == "Nebula")
-				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-			if (otype == "Star")
-				name = selectedObject->getID();
-
-			englishName = name;
-		}
-
-		if (selectedObject->getType() == "Satellite")
-			name = QString();
 		if (selectedObject->getType() == "Planet")
 			isPlanet = true;
 
