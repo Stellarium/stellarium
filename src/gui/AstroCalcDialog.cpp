@@ -1849,7 +1849,7 @@ void AstroCalcDialog::generateTransits()
 
 			double currentJD = core->getJD();   // save current JD
 			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitFromDateEdit->date()));
-			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitToDateEdit->date().addDays(1)));
+			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitToDateEdit->date()));
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
@@ -1878,11 +1878,11 @@ void AstroCalcDialog::generateTransits()
 				if (withDecimalDegree)
 				{
 					altStr = StelUtils::radToDecDegStr(alt, 5, false, true);
-					if (planet!=sun)
+					if (selectedObject!=sun)
 						elongSStr = StelUtils::radToDecDegStr(selectedObject->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core)), 5, false, true);
 					else
 						elongSStr = dash;
-					if (planet!=moon && planet==earth)
+					if (selectedObject!=moon && planet==earth)
 						elongLStr = StelUtils::radToDecDegStr(selectedObject->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)), 5, false, true);
 					else
 						elongLStr = dash;
@@ -1890,11 +1890,11 @@ void AstroCalcDialog::generateTransits()
 				else
 				{
 					altStr = StelUtils::radToDmsStr(alt, true);
-					if (planet!=sun)
+					if (selectedObject!=sun)
 						elongSStr = StelUtils::radToDmsStr(selectedObject->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core)), true);
 					else
 						elongSStr = dash;
-					if (planet!=moon && planet==solarSystem->getEarth())
+					if (selectedObject!=moon && planet==solarSystem->getEarth())
 						elongLStr = StelUtils::radToDmsStr(selectedObject->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)), true);
 					else
 						elongLStr = dash;
