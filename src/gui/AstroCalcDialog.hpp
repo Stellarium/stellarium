@@ -326,8 +326,8 @@ private:
 	void adjustWUTColumns();
 
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
+	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
+	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString objectType);
 

@@ -879,7 +879,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 	currentCelestialPositions();
 }
 
-void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
+void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
 									    QString angularSize, QString angularSizeToolTip, QString extraData,
 									    QString extraDataToolTip, QString transitTime, QString objectType)
 {
@@ -909,7 +909,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	initListCelestialPositions();
 
-	const double mag = ui->celestialMagnitudeDoubleSpinBox->value();
+	const float mag = static_cast<float>(ui->celestialMagnitudeDoubleSpinBox->value());
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
@@ -970,7 +970,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					extra = dash;
 
 				// Convert to arcminutes the average angular size of deep-sky object
-				angularSize = QString::number(obj->getAngularSize(core) * 120.f, 'f', 3);
+				angularSize = QString::number(obj->getAngularSize(core) * 120., 'f', 3);
 				if (angularSize.toFloat() < 0.01f)
 					angularSize = dash;
 
@@ -1046,8 +1046,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
 				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
-				angularSize = QString::number(planet->getAngularSize(core) * 120.f, 'f', 4);
-				if (angularSize.toFloat() < 1e-4 || planet->getPlanetType() == Planet::isComet)
+				angularSize = QString::number(planet->getAngularSize(core) * 120., 'f', 4);
+				if (angularSize.toFloat() < 1e-4f || planet->getPlanetType() == Planet::isComet)
 					angularSize = dash;
 
 				sTransit = dash;
@@ -2461,10 +2461,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, width = 1.0;
+		double startJD, JD, ltime, UTCshift, width = 1.0;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
-		double UTCshift = core->getUTCOffset(startJD) / 24.;
 
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
@@ -4824,7 +4823,7 @@ void AstroCalcDialog::enableVisibilityAngularLimits(bool visible)
 	ui->wutAngularSizeLimitMaxSpinBox->setVisible(visible);
 }
 
-void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees)
+void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees)
 {
 	QString sAngularSize = dash;
 	QString sRise = dash;
@@ -4834,7 +4833,7 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, doub
 	WUTTreeWidgetItem* treeItem =  new WUTTreeWidgetItem(ui->wutMatchingObjectsTreeWidget);
 	treeItem->setData(WUTObjectName, Qt::DisplayRole, objectName);
 	treeItem->setData(WUTObjectName, Qt::UserRole, designation);
-	if (magnitude > 98.0)
+	if (magnitude > 98.f)
 		treeItem->setText(WUTMagnitude, dash);
 	else
 		treeItem->setText(WUTMagnitude, QString::number(magnitude, 'f', 2));
@@ -4886,10 +4885,11 @@ void AstroCalcDialog::calculateWutObjects()
 		bool passByType, visible;
 		double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
-		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
+		float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
 		double JD = core->getJD();
 		double UTCOffset = core->getUTCOffset(JD) / 24.;
-		double wutJD, az, alt, mag;
+		double wutJD, az, alt;
+		float mag;
 		QSet<QString> objectsList;
 		QString designation, starName;
 
@@ -5016,63 +5016,63 @@ void AstroCalcDialog::calculateWutObjects()
 						switch (categoryId)
 						{
 							case 2: // Bright nebulae
-								if ((bool)(tflags & Nebula::TypeBrightNebulae) && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeBrightNebulae) && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 3: // Dark nebulae
-								if ((bool)(tflags & Nebula::TypeDarkNebulae) && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO))
+								if (static_cast<bool>(tflags & Nebula::TypeDarkNebulae) && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO))
 								{
 									passByType = true;
 									mag = object->getVMagnitude(core);
 								}
 								break;
 							case 4: // Galaxies
-								if ((bool)(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 5: // Open Star clusters
-								if ((bool)(tflags & Nebula::TypeOpenStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeOpenStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 14: // Planetary nebulae
-								if ((bool)(tflags & Nebula::TypePlanetaryNebulae) && (ntype == Nebula::NebPn || ntype == Nebula::NebPossPN || ntype == Nebula::NebPPN) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypePlanetaryNebulae) && (ntype == Nebula::NebPn || ntype == Nebula::NebPossPN || ntype == Nebula::NebPPN) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 18: // Symbiotic stars
-								if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 19: // Emission-line stars
-								if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 20: // Supernova candidates
 							{
 								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
+								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
 									passByType = true;
 								break;
 							}
 							case 21: // Supernova remnant candidates
 							{
 								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
+								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
 									passByType = true;
 								break;
 							}
 							case 22: // Supernova remnants
 							{
 								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
+								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
 									passByType = true;
 								break;
 							}
 							case 23: // Clusters of galaxies
-								if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 25: // Globular Star clusters
-								if (((bool)(tflags & Nebula::TypeGlobularStarClusters) && ntype == Nebula::NebGc) && mag <= magLimit)
+								if ((static_cast<bool>(tflags & Nebula::TypeGlobularStarClusters) && ntype == Nebula::NebGc) && mag <= magLimit)
 									passByType = true;
 								break;
 						}

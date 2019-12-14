@@ -492,6 +492,7 @@ namespace StelUtils
 
 	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
+	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);

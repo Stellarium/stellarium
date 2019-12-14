@@ -1175,6 +1175,11 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 	}
 }
 
+QString hoursToHmsStr(const float hours, const bool lowprecision)
+{
+	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
+}
+
 /* /////////////////// DELTA T VARIANTS
 // For the standard epochs for many formulae, we use
 // J2000.0=2000-jan-1.5=2451545.0,
