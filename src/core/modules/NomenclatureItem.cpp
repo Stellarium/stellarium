@@ -61,7 +61,7 @@ NomenclatureItem::~NomenclatureItem()
 
 QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 {
-	QMap<NomenclatureItemType, QString>map = {
+	static const QMap<NomenclatureItemType, QString>map = {
 			// TRANSLATORS: Geographic area distinguished by amount of reflected light
 		{ niAlbedoFeature, qc_("albedo feature", "landform") },
 			// TRANSLATORS: Arc-shaped feature
@@ -179,7 +179,7 @@ QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
-	QMap<NomenclatureItemType, QString>map = {
+	static const QMap<NomenclatureItemType, QString>map = {
 		{ niArcus  , "arcus" },
 		{ niAstrum , "astrum" },
 		{ niCatena , "catena" },

@@ -1223,7 +1223,7 @@ float Planet::getMeanOppositionMagnitude() const
 
 	double semimajorAxis=0.;
 
-	const QMap<QString, float>nameMap = {
+	static const QMap<QString, float>nameMap = {
 		{ "Sun",    100.f},
 		{ "Moon",   -12.74f},
 		{ "Mars",    -2.01f},
@@ -1239,7 +1239,7 @@ float Planet::getMeanOppositionMagnitude() const
 	if (nameMap.contains(englishName))
 		return nameMap.value(englishName);
 
-	const QMap<QString, double>smaMap = {
+	static const QMap<QString, double>smaMap = {
 		{ "Mars",     1.52371034 },
 		{ "Jupiter",  5.202887   },
 		{ "Saturn",   9.53667594 },
@@ -3143,7 +3143,7 @@ Vec3f Planet::getCurrentOrbitColor() const
 	{
 		case ocsGroups:
 		{
-			const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
+			static const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
 				{ isMoon,         orbitMoonsColor       },
 				{ isPlanet,       orbitMajorPlanetsColor},
 				{ isAsteroid,     orbitMinorPlanetsColor},
@@ -3161,7 +3161,7 @@ Vec3f Planet::getCurrentOrbitColor() const
 		case ocsMajorPlanets:
 		{
 			const QString pName = getEnglishName().toLower();
-			const QMap<QString, Vec3f>majorPlanetColorMap = {
+			static const QMap<QString, Vec3f>majorPlanetColorMap = {
 				{ "mercury", orbitMercuryColor},
 				{ "venus",   orbitVenusColor  },
 				{ "earth",   orbitEarthColor  },

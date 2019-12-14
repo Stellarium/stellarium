@@ -874,7 +874,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		else {
-			const QMap<QString, posFuncType>posfuncMap={
+			static const QMap<QString, posFuncType>posfuncMap={
 				{ "sun_special",       &get_sun_helio_coordsv},
 				{ "mercury_special",   &get_mercury_helio_coordsv},
 				{ "venus_special",     &get_venus_helio_coordsv},
@@ -906,7 +906,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				{ "oberon_special",    &get_oberon_parent_coordsv},
 				{ "neptune_special",   &get_neptune_helio_coordsv},
 				{ "pluto_special",     &get_pluto_helio_coordsv}};
-			const QMap<QString, OsculatingFunctType*>osculatingMap={
+			static const QMap<QString, OsculatingFunctType*>osculatingMap={
 				{ "mercury_special",   &get_mercury_helio_osculating_coords},
 				{ "venus_special",     &get_venus_helio_osculating_coords},
 				{ "earth_special",     &get_earth_helio_osculating_coords},

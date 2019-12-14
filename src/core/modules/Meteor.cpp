@@ -217,7 +217,7 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 
 Vec4f Meteor::getColorFromName(QString colorName)
 {
-	const QMap<QString, Vec3f>colorMap={
+	static const QMap<QString, Vec3f>colorMap={
 		{ "violet",       { 176.f,  67.f, 172.f}},  // Calcium
 		{ "blueGreen",    {   0.f, 255.f, 152.f}},  // Magnesium
 		{ "yellow",       { 255.f, 255.f,   0.f}},  // Iron

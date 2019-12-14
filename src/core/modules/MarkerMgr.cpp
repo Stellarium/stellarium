@@ -185,7 +185,7 @@ SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker
 	, markerType(style)
 {
 	// TODO: Use unicode chars for markers or SVG instead?
-	const QMap<SkyMarker::MarkerType, QString>map={
+	static const QMap<SkyMarker::MarkerType, QString>map={
 		{ Cross,          "cross.png"},
 		{ Circle,         "neb_lrg.png"},
 		{ Ellipse,        "neb_gal_lrg.png"},
@@ -227,7 +227,7 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 
 SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 {
-	const QMap<QString, SkyMarker::MarkerType>map={
+	static const QMap<QString, SkyMarker::MarkerType>map={
 		{ "circle",                SkyMarker::Circle},
 		{ "ellipse",               SkyMarker::Ellipse},
 		{ "square",                SkyMarker::Square},
@@ -254,7 +254,7 @@ HorizonMarker::HorizonMarker(const float az, const float alt, const float& size,
 {
 	StelUtils::spheToRect((180.0-static_cast<double>(az))*M_PI/180.0, static_cast<double>(alt)*M_PI/180.0, altaz);
 	// TODO: Use unicode chars for markers or SVG instead?
-	const QMap<SkyMarker::MarkerType, QString>map={
+	static const QMap<SkyMarker::MarkerType, QString>map={
 		{ SkyMarker::Cross,          "cross.png"},
 		{ SkyMarker::Circle,         "neb_lrg.png"},
 		{ SkyMarker::Ellipse,        "neb_gal_lrg.png"},

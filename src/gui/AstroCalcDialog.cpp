@@ -2936,7 +2936,7 @@ void AstroCalcDialog::populateFunctionsList()
 	Q_ASSERT(ui->graphsSecondComboBox);
 
 	typedef QPair<QString, GraphsTypes> graph;
-	const QList<graph> functions = {
+	static const QList<graph> functions = {
 		{ q_("Magnitude vs. Time"),    GraphMagnitudeVsTime},
 		{ q_("Phase vs. Time"),        GraphPhaseVsTime},
 		{ q_("Distance vs. Time"),     GraphDistanceVsTime},
@@ -3585,7 +3585,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9:
 		case 20:
 		{
-			const QMap<int, Planet::PlanetType>map = {
+			static const QMap<int, Planet::PlanetType>map = {
 				{2, Planet::isAsteroid},
 				{3, Planet::isPlutino},
 				{4, Planet::isComet},
@@ -5444,7 +5444,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 13:
 				case 24:
 				{
-					const QMap<int, Planet::PlanetType>map = {
+					static const QMap<int, Planet::PlanetType>map = {
 						{0, Planet::isPlanet},
 						{6, Planet::isAsteroid},
 						{7, Planet::isComet},

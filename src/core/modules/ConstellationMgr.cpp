@@ -104,7 +104,7 @@ void ConstellationMgr::init()
 	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
-	const QMap<QString, ConstellationDisplayStyle>map={
+	static const QMap<QString, ConstellationDisplayStyle>map={
 		{ "translated",  constellationsTranslated},
 		{ "native",      constellationsNative},
 		{ "abbreviated", constellationsAbbreviated},

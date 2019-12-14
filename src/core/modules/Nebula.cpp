@@ -627,7 +627,7 @@ float Nebula::getSurfaceArea(void) const
 
 Vec3f Nebula::getHintColor(void) const
 {
-	QMap<Nebula::NebulaType, Vec3f>map = {
+	static const QMap<Nebula::NebulaType, Vec3f>map = {
 		{ NebGx     , galaxyColor },
 		{ NebIGx    , interactingGalaxyColor },
 		{ NebAGx    , activeGalaxyColor },
@@ -972,7 +972,6 @@ bool Nebula::objectInDisplayedType() const
 	if (!flagUseTypeFilters)
 		return true;
 
-	bool r = false;
 	int cntype = -1;
 	switch (nType)
 	{
@@ -1034,40 +1033,26 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 12;
 			break;
 	}
-	if (typeFilters&TypeGalaxies && cntype==0)
-		r = true;
-	else if (typeFilters&TypeActiveGalaxies && cntype==1)
-		r = true;
-	else if (typeFilters&TypeInteractingGalaxies && cntype==2)
-		r = true;
-	else if (typeFilters&TypeOpenStarClusters && cntype==3)
-		r = true;
-	else if (typeFilters&TypeGlobularStarClusters && cntype==11)
-		r = true;
-	else if (typeFilters&TypeHydrogenRegions && cntype==4)
-		r = true;
-	else if (typeFilters&TypeBrightNebulae && cntype==5)
-		r = true;
-	else if (typeFilters&TypeDarkNebulae && cntype==6)
-		r = true;
-	else if (typeFilters&TypePlanetaryNebulae && cntype==7)
-		r = true;
-	else if (typeFilters&TypeSupernovaRemnants && cntype==8)
-		r = true;
-	else if (typeFilters&TypeOpenStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
-		r = true;
-	else if (typeFilters&TypeGalaxyClusters && cntype==10)
-		r = true;
-	else if (typeFilters&TypeOther && cntype==12)
-		r = true;
+	bool r = ( (typeFilters&TypeGalaxies             && cntype==0)
+		|| (typeFilters&TypeActiveGalaxies       && cntype==1)
+		|| (typeFilters&TypeInteractingGalaxies  && cntype==2)
+		|| (typeFilters&TypeOpenStarClusters     && cntype==3)
+		|| (typeFilters&TypeGlobularStarClusters && cntype==11)
+		|| (typeFilters&TypeHydrogenRegions      && cntype==4)
+		|| (typeFilters&TypeBrightNebulae        && cntype==5)
+		|| (typeFilters&TypeDarkNebulae          && cntype==6)
+		|| (typeFilters&TypePlanetaryNebulae     && cntype==7)
+		|| (typeFilters&TypeSupernovaRemnants    && cntype==8)
+		|| (typeFilters&TypeOpenStarClusters     && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+		|| (typeFilters&TypeGalaxyClusters       && cntype==10)
+		|| (typeFilters&TypeOther                && cntype==12));
 
 	return r;
 }
 
 bool Nebula::objectInDisplayedCatalog() const
 {
-	bool r = false;
-	if (       ((catalogFilters&CatM)     && (M_nb>0))
+	bool r = ( ((catalogFilters&CatM)     && (M_nb>0))
 		|| ((catalogFilters&CatC)     && (C_nb>0))
 		|| ((catalogFilters&CatNGC)   && (NGC_nb>0))
 		|| ((catalogFilters&CatIC)    && (IC_nb>0))
@@ -1093,11 +1078,9 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0)))
-		r = true;
 
-	// Special case: objects without ID from current catalogs
-	if (withoutID)
-		r = true;
+		// Special case: objects without ID from current catalogs
+		|| (withoutID);
 
 	return r;
 }
@@ -1322,55 +1305,27 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (HIIRx.exactMatch(m)) // HII regions
 	{
-		int form	= HIIRx.capturedTexts().at(1).toInt();
-		int structure	= HIIRx.capturedTexts().at(2).toInt();
-		int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		const int form	= HIIRx.capturedTexts().at(1).toInt();
+		const int structure	= HIIRx.capturedTexts().at(2).toInt();
+		const int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		static const QStringList formList={
+			q_("circular form"),
+			q_("elliptical form"),
+			q_("irregular form")};
+		static const QStringList structureList={
+			q_("amorphous structure"),
+			q_("conventional structure"),
+			q_("filamentary structure")};
+		static const QStringList brightnessList={
+			qc_("faintest", "HII region brightness"),
+			qc_("moderate brightness", "HII region brightness"),
+			qc_("brightest", "HII region brightness")};
+
 		QStringList morph;
-		switch(form)
-		{
-			case 1:
-				morph << q_("circular form");
-				break;
-			case 2:
-				morph << q_("elliptical form");
-				break;
-			case 3:
-				morph << q_("irregular form");
-				break;
-			default:
-				morph << q_("undocumented form");
-				break;
-		}
-		switch(structure)
-		{
-			case 1:
-				morph << q_("amorphous structure");
-				break;
-			case 2:
-				morph << q_("conventional structure");
-				break;
-			case 3:
-				morph << q_("filamentary structure");
-				break;
-			default:
-				morph << q_("undocumented structure");
-				break;
-		}
-		switch(brightness)
-		{
-			case 1:
-				morph << qc_("faintest", "HII region brightness");
-				break;
-			case 2:
-				morph << qc_("moderate brightness", "HII region brightness");
-				break;
-			case 3:
-				morph << qc_("brightest", "HII region brightness");
-				break;
-			default:
-				morph << q_("undocumented brightness");
-				break;
-		}
+		morph << formList.value(form-1, q_("undocumented form"));
+		morph << structureList.value(structure-1, q_("undocumented structure"));
+		morph << brightnessList.value(brightness-1, q_("undocumented brightness"));
+
 		r = morph.join(",<br />");
 	}
 
@@ -1404,7 +1359,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 QString Nebula::getTypeString(void) const
 {
-	QMap<Nebula::NebulaType, QString> tMap= {
+	static const QMap<Nebula::NebulaType, QString> tMap= {
 		{ NebGx     , q_("galaxy") },
 		{ NebAGx    , q_("active galaxy") },
 		{ NebRGx    , q_("radio galaxy") },

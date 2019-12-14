@@ -1869,17 +1869,17 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	{
 		case 0: // Interesting double stars
 		{
-			QStringList doubleStars;
-			doubleStars  << "Asterope" << "Atlas" << "77 Tau" << "δ1 Tau" << "V1016 Ori"
-				     << "42 Ori" << "ι Ori" << "ζ Crv" << "Mizar" << "Zubenelgenubi"
-				     << "ω1 Sco" << "λ Sco" << "μ1 Sco" << "ζ1 Sco" << "ε1 Lyr" << "δ1 Lyr"
-				     << "ν1 Sgr" << "ο1 Cyg" << "ο2 Cyg" << "Algedi" << "Albireo" << "Rigel"
-				     << "Almaak" << "ξ Boo" << "Rasalgethi" << "T Dra" << "Kuma" << "70 Oph"
-				     << "Castor" << "ζ Her" << "Keid" << "Mesarthim" << "Porrima" << "Algieba"
-				     << "β Mon" << "Izar" << "44 Boo" << "Acrab" << "Tegmine" << "φ2 Cnc"
-				     << "Regulus" << "Cor Caroli" << "ι Cas" << "ε Ari" << "Markeb" << "γ1 Del"
-				     << "Bessel's Star" << "55 Aqr" << "σ Cas" << "Achird" << "Polaris" << "36 Oph"
-				     << "65 UMa" << "σ2 UMa" << "55 Cnc" << "16 Cyg" << "HIP 28393" << "HIP 84709";
+			static const QStringList doubleStars = {
+				"Asterope", "Atlas", "77 Tau", "δ1 Tau", "V1016 Ori",
+				"42 Ori", "ι Ori", "ζ Crv", "Mizar", "Zubenelgenubi",
+				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "δ1 Lyr",
+				"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "Algedi", "Albireo", "Rigel",
+				"Almaak", "ξ Boo", "Rasalgethi", "T Dra", "Kuma", "70 Oph",
+				"Castor", "ζ Her", "Keid", "Mesarthim", "Porrima", "Algieba",
+				"β Mon", "Izar", "44 Boo", "Acrab", "Tegmine", "φ2 Cnc",
+				"Regulus", "Cor Caroli", "ι Cas", "ε Ari", "Markeb", "γ1 Del",
+				"Bessel's Star", "55 Aqr", "σ Cas", "Achird", "Polaris", "36 Oph",
+				"65 UMa", "σ2 UMa", "55 Cnc", "16 Cyg", "HIP 28393", "HIP 84709"};
 			if (inEnglish)
 			{
 				result = doubleStars;
@@ -1895,17 +1895,17 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 1: // Interesting variable stars
 		{
-			QStringList variableStars;
-			variableStars << "δ Cep" << "Algol" << "Mira" << "λ Tau" << "Sheliak" << "ζ Gem" << "μ Cep"
-				      << "Rasalgethi" << "η Gem" << "η Aql" << "γ Cas" << "Betelgeuse" << "R And"
-				      << "U Ant" << "θ Aps" << "R Aql" << "V Aql" << "R Aqr" << "ε Aur" << "R Aur"
-				      << "AE Aur" << "W Boo" << "VZ Cam" << "l Car" << "γ Cas" << "WZ Cas"
-				      << "S Cen" << "Proxima" << "T Cep" << "U Cep" << "R CMa" << "VY CMa"
-				      << "S Cnc" << "Alphekka" << "R CrB" << "T CrB" << "U CrB" << "R Cru"
-				      << "SU Cyg" << "EU Del" << "β Dor" << "R Gem" << "30 Her" << "68 Her"
-				      << "R Hor" << "Hind's Crimson Star" << "R Leo" << "RR Lyr" << "U Mon"
-				      << "Mintaka" << "VV Ori" << "κ Pav" << "β Peg" << "Enif" << "ζ Phe" << "R Sct"
-				      << "U Sgr" << "RY Sgr" << "W UMa" << "Polaris";
+			static const QStringList variableStars = {
+				"δ Cep", "Algol", "Mira", "λ Tau", "Sheliak", "ζ Gem", "μ Cep",
+				"Rasalgethi", "η Gem", "η Aql", "γ Cas", "Betelgeuse", "R And",
+				"U Ant", "θ Aps", "R Aql", "V Aql", "R Aqr", "ε Aur", "R Aur",
+				"AE Aur", "W Boo", "VZ Cam", "l Car", "γ Cas", "WZ Cas",
+				"S Cen", "Proxima", "T Cep", "U Cep", "R CMa", "VY CMa",
+				"S Cnc", "Alphekka", "R CrB", "T CrB", "U CrB", "R Cru",
+				"SU Cyg", "EU Del", "β Dor", "R Gem", "30 Her", "68 Her",
+				"R Hor", "Hind's Crimson Star", "R Leo", "RR Lyr", "U Mon",
+				"Mintaka", "VV Ori", "κ Pav", "β Peg", "Enif", "ζ Phe", "R Sct",
+				"U Sgr", "RY Sgr", "W UMa", "Polaris"};
 			if (inEnglish)
 			{
 				result = variableStars;
