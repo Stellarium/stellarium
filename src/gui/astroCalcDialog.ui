@@ -812,7 +812,7 @@
               <item>
                <widget class="QLabel" name="transitCelestialBodyLabel">
                 <property name="text">
-                 <string>Celestial body:</string>
+                 <string>Celestial object:</string>
                 </property>
                </widget>
               </item>
@@ -896,7 +896,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Table of transits for selected celestial body with designation</string>
+             <string>Table of transits for selected celestial object with designation</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

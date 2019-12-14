@@ -1810,6 +1810,7 @@ void AstroCalcDialog::generateTransits()
 		StelObjectP selectedObject = selectedObjects[0];
 		name = selectedObject->getNameI18n();
 		englishName = selectedObject->getEnglishName();
+		bool isPlanet = false;
 
 		if (name.isEmpty())
 		{
@@ -1824,6 +1825,8 @@ void AstroCalcDialog::generateTransits()
 
 		if (selectedObject->getType() == "Satellite")
 			name = QString();
+		if (selectedObject->getType() == "Planet")
+			isPlanet = true;
 
 		if (!name.isEmpty()) // OK, let's calculate!
 		{
@@ -1863,6 +1866,13 @@ void AstroCalcDialog::generateTransits()
 				JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
+				if (isPlanet) // A tiny improvement for accuracy
+				{
+					Vec3f rts = selectedObject->getRTSTime(core);
+					JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
+					core->setJD(JD);
+					core->update(0);
+				}
 
 				StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 				if (withDecimalDegree)
@@ -1898,7 +1908,7 @@ void AstroCalcDialog::generateTransits()
 				ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
 				treeItem->setText(TransitCOName, name);
 				treeItem->setData(TransitCOName, Qt::UserRole, englishName);
-				treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableShortTimeLocal(JD))); // local date and time
+				treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
 				treeItem->setData(TransitDate, Qt::UserRole, JD);
 				treeItem->setText(TransitAltitude, altStr);
 				treeItem->setTextAlignment(TransitAltitude, Qt::AlignRight);
@@ -3871,7 +3881,7 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
 	// local date and time
-	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableShortTimeLocal(JD)));
+	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
 	treeItem->setText(PhenomenaObject1, firstObjectName);
 	if (firstObjectMagnitude > 90.f)

@@ -180,7 +180,7 @@ private slots:
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
 	void saveCelestialPositionsCategory(int index);
 
-	//! Calculate ephemeris for selected celestial body and fill the list.
+	//! Calculating ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
@@ -188,7 +188,7 @@ private slots:
 	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
 	void reGenerateEphemeris();
 
-	//! Calculate transits table for selected celestial body and fill the list.
+	//! Calculating the transits for selected celestial body and fill the list.
 	void generateTransits();
 	void cleanupTransits();
 	void selectCurrentTransit(const QModelIndex &modelIndex);
@@ -200,7 +200,7 @@ private slots:
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
 
-	//! Calculate phenomena for selected celestial body and fill the list.
+	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
 	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
