@@ -2461,12 +2461,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime;
+		double startJD, JD, ltime, width = 1.0;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
-
-		double width = 1.0;
 		double UTCshift = core->getUTCOffset(startJD) / 24.;
+
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
 		int secondGraph = ui->graphsSecondComboBox->currentData().toInt();
@@ -2478,6 +2477,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			if (firstGraph==GraphTransitAltitudeVsTime || secondGraph==GraphTransitAltitudeVsTime)
 			{
 				core->setJD(JD);
+				UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 				Vec3f rts = ssObj->getRTSTime(core);
 				JD += (rts[1]/24. - UTCshift);
 			}
