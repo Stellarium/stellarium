@@ -236,77 +236,115 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 
 QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName)
 {
+	static const QMap<NomenclatureItemType, QString>map = {
+		// TRANSLATORS: Description for landform 'albedo feature'
+		{ niAlbedoFeature, q_("Geographic area distinguished by amount of reflected light.")},
+		// TRANSLATORS: Description for landform 'arcus'
+		{ niArcus, q_("Arc-shaped feature.")},
+		// TRANSLATORS: Description for landform 'astrum'
+		{ niAstrum, q_("Radial-patterned feature.")},
+		// TRANSLATORS: Description for landform 'catena'
+		{ niCatena, q_("Chain of craters.")},
+		// TRANSLATORS: Description for landform 'cavus'
+		{ niCavus, q_("Hollows, irregular steep-sided depressions usually in arrays or clusters.")},
+		// TRANSLATORS: Description for landform 'chaos'
+		{ niChaos, q_("Distinctive area of broken terrain.")},
+		// TRANSLATORS: Description for landform 'chasma'
+		{ niChasma, q_("A deep, elongated, steep-sided depression.")},
+		// TRANSLATORS: Description for landform 'collis'
+		{ niCollis, q_("Small hills or knobs.")},
+		// TRANSLATORS: Description for landform 'corona'
+		{ niCorona, q_("Ovoid-shaped feature.")},
+		// TRANSLATORS: Description for landform 'crater'
+		{ niCrater, q_("A circular depression.")},
+		// TRANSLATORS: Description for landform 'dorsum'
+		{ niDorsum, q_("Ridge.")},
+		// TRANSLATORS: Description for landform 'eruptive center'
+		{ niEruptiveCenter, q_("Active volcanic center.")},
+		// TRANSLATORS: Description for landform 'facula'
+		{ niFacula, q_("Bright spot.")},
+		// TRANSLATORS: Description for landform 'farrum'
+		{ niFarrum, q_("Pancake-like structure, or a row of such structures.")},
+		// TRANSLATORS: Description for landform 'flexus'
+		{ niFlexus, q_("A very low curvilinear ridge with a scalloped pattern.")},
+		// TRANSLATORS: Description for landform 'fluctus'
+		{ niFluctus, q_("Flow terrain.")},
+		// TRANSLATORS: Description for landform 'flumen'
+		{ niFlumen, q_("Channel, that might carry liquid.")},
+		// TRANSLATORS: Description for landform 'fretum'
+		{ niFretum, q_("Strait, a narrow passage of liquid connecting two larger areas of liquid.")},
+		// TRANSLATORS: Description for landform 'fossa'
+		{ niFossa, q_("Long, narrow depression.")},
+		// TRANSLATORS: Description for landform 'insula'
+		{ niInsula, q_("Island, an isolated land area surrounded by, or nearly surrounded by, a liquid area (sea or lake).")},
+		// TRANSLATORS: Description for landform 'labes'
+		{ niLabes, q_("Landslide.")},
+		// TRANSLATORS: Description for landform 'labyrinthus'
+		{ niLabyrinthus, q_("Complex of intersecting valleys or ridges.")},
+		// TRANSLATORS: Description for landform 'lacuna'
+		{ niLacuna, q_("Irregularly shaped depression, having the appearance of a dry lake bed.")},
+		// TRANSLATORS: Description for landform 'large ringed feature'
+		{ niLargeRingedFeature, q_("Cryptic ringed feature.")},
+		// TRANSLATORS: Description for landform 'lenticula'
+		{ niLenticula, q_("Small dark spot.")},
+		// TRANSLATORS: Description for landform 'linea'
+		{ niLinea, q_("A dark or bright elongate marking, may be curved or straight.")},
+		// TRANSLATORS: Description for landform 'lingula'
+		{ niLingula, q_("Extension of plateau having rounded lobate or tongue-like boundaries.")},
+		// TRANSLATORS: Description for landform 'macula'
+		{ niMacula, q_("Dark spot, may be irregular")},
+		// TRANSLATORS: Description for landform 'mensa'
+		{ niMensa, q_("A flat-topped prominence with cliff-like edges.")},
+		// TRANSLATORS: Description for landform 'mons'
+		{ niMons, q_("Mountain.")},
+		// TRANSLATORS: Description for landform 'oceanus'
+		{ niOceanus, q_("A very large dark area.")},
+		// TRANSLATORS: Description for landform 'palus'
+		{ niPalus, q_("'Swamp'; small plain.")},
+		// TRANSLATORS: Description for landform 'patera'
+		{ niPatera, q_("An irregular crater, or a complex one with scalloped edges.")},
+		// TRANSLATORS: Description for landform 'planitia'
+		{ niPlanitia, q_("Low plain.")},
+		// TRANSLATORS: Description for landform 'planum'
+		{ niPlanum, q_("Plateau or high plain.")},
+		// TRANSLATORS: Description for landform 'plume'
+		{ niPlume, q_("Cryo-volcanic feature.")},
+		// TRANSLATORS: Description for landform 'promontorium'
+		{ niPromontorium, q_("'Cape'; headland promontoria.")},
+		// TRANSLATORS: Description for landform 'regio'
+		{ niRegio, q_("A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region.")},
+		// TRANSLATORS: Description for landform 'reticulum'
+		{ niReticulum, q_("Reticular (netlike) pattern.")},
+		// TRANSLATORS: Description for landform 'rima'
+		{ niRima, q_("Fissure.")},
+		// TRANSLATORS: Description for landform 'rupes'
+		{ niRupes, q_("Scarp.")},
+		// TRANSLATORS: Description for landform 'satellite feature'
+		{ niSatelliteFeature, q_("A feature that shares the name of an associated feature.")},
+		// TRANSLATORS: Description for landform 'scopulus'
+		{ niScopulus, q_("Lobate or irregular scarp.")},
+		// TRANSLATORS: Description for landform 'serpens'
+		{ niSerpens, q_("Sinuous feature with segments of positive and negative relief along its length.")},
+		// TRANSLATORS: Description for landform 'sulcus'
+		{ niSulcus, q_("Subparallel furrows and ridges.")},
+		// TRANSLATORS: Description for landform 'terra'
+		{ niTerra, q_("Extensive land mass.")},
+		// TRANSLATORS: Description for landform 'tessera'
+		{ niTessera, q_("Tile-like, polygonal terrain.")},
+		// TRANSLATORS: Description for landform 'tholus'
+		{ niTholus, q_("Small domical mountain or hill.")},
+		// TRANSLATORS: Description for landform 'unda'
+		{ niUnda, q_("Dunes.")},
+		// TRANSLATORS: Description for landform 'vallis'
+		{ niVallis, q_("Valley.")},
+		// TRANSLATORS: Description for landform 'vastitas'
+		{ niVastitas, q_("Extensive plain.")},
+		// TRANSLATORS: Description for landform 'virga'
+		{ niVirga, q_("A streak or stripe of color.")},
+		{ niLandingSite, ""}};
+
 	switch (nType)
 	{
-		case niAlbedoFeature:
-			// TRANSLATORS: Description for landform 'albedo feature'
-			return q_("Geographic area distinguished by amount of reflected light.");
-		case niArcus:
-			// TRANSLATORS: Description for landform 'arcus'
-			return q_("Arc-shaped feature.");
-		case niAstrum:
-			// TRANSLATORS: Description for landform 'astrum'
-			return q_("Radial-patterned feature.");
-		case niCatena:
-			// TRANSLATORS: Description for landform 'catena'
-			return q_("Chain of craters.");
-		case niCavus:
-			// TRANSLATORS: Description for landform 'cavus'
-			return q_("Hollows, irregular steep-sided depressions usually in arrays or clusters.");
-		case niChaos:
-			// TRANSLATORS: Description for landform 'chaos'
-			return q_("Distinctive area of broken terrain.");
-		case niChasma:
-			// TRANSLATORS: Description for landform 'chasma'
-			return q_("A deep, elongated, steep-sided depression.");
-		case niCollis:
-			// TRANSLATORS: Description for landform 'collis'
-			return q_("Small hills or knobs.");
-		case niCorona:
-			// TRANSLATORS: Description for landform 'corona'
-			return q_("Ovoid-shaped feature.");
-		case niCrater:
-			// TRANSLATORS: Description for landform 'crater'
-			return q_("A circular depression.");
-		case niDorsum:
-			// TRANSLATORS: Description for landform 'dorsum'
-			return q_("Ridge.");
-		case niEruptiveCenter:
-			// TRANSLATORS: Description for landform 'eruptive center'
-			return q_("Active volcanic center.");
-		case niFacula:
-			// TRANSLATORS: Description for landform 'facula'
-			return q_("Bright spot.");
-		case niFarrum:
-			// TRANSLATORS: Description for landform 'farrum'
-			return q_("Pancake-like structure, or a row of such structures.");
-		case niFlexus:
-			// TRANSLATORS: Description for landform 'flexus'
-			return q_("A very low curvilinear ridge with a scalloped pattern.");
-		case niFluctus:
-			// TRANSLATORS: Description for landform 'fluctus'
-			return q_("Flow terrain.");
-		case niFlumen:
-			// TRANSLATORS: Description for landform 'flumen'
-			return q_("Channel, that might carry liquid.");
-		case niFretum:
-			// TRANSLATORS: Description for landform 'fretum'
-			return q_("Strait, a narrow passage of liquid connecting two larger areas of liquid.");
-		case niFossa:
-			// TRANSLATORS: Description for landform 'fossa'
-			return q_("Long, narrow depression.");
-		case niInsula:
-			// TRANSLATORS: Description for landform 'insula'
-			return q_("Island, an isolated land area surrounded by, or nearly surrounded by, a liquid area (sea or lake).");
-		case niLabes:
-			// TRANSLATORS: Description for landform 'labes'
-			return q_("Landslide.");
-		case niLabyrinthus:
-			// TRANSLATORS: Description for landform 'labyrinthus'
-			return q_("Complex of intersecting valleys or ridges.");
-		case niLacuna:
-			// TRANSLATORS: Description for landform 'lacuna'
-			return q_("Irregularly shaped depression, having the appearance of a dry lake bed.");
 		case niLacus:
 			if (englishName=="Titan")
 			{
@@ -318,21 +356,6 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 				// TRANSLATORS: Description for landform 'lacus'
 				return q_("'Lake' or small plain.");
 			}
-		case niLargeRingedFeature:
-			// TRANSLATORS: Description for landform 'large ringed feature'
-			return q_("Cryptic ringed feature.");
-		case niLenticula:
-			// TRANSLATORS: Description for landform 'lenticula'
-			return q_("Small dark spot.");
-		case niLinea:
-			// TRANSLATORS: Description for landform 'linea'
-			return q_("A dark or bright elongate marking, may be curved or straight.");
-		case niLingula:
-			// TRANSLATORS: Description for landform 'lingula'
-			return q_("Extension of plateau having rounded lobate or tongue-like boundaries.");
-		case niMacula:
-			// TRANSLATORS: Description for landform 'macula'
-			return q_("Dark spot, may be irregular");
 		case niMare:
 		{
 			if (englishName=="Mars")
@@ -351,57 +374,6 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 				return q_("'Sea'; low albedo, relatively smooth plain, generally of large extent.");
 			//}
 		}
-		case niMensa:
-			// TRANSLATORS: Description for landform 'mensa'
-			return q_("A flat-topped prominence with cliff-like edges.");
-		case niMons:
-			// TRANSLATORS: Description for landform 'mons'
-			return q_("Mountain.");
-		case niOceanus:
-			// TRANSLATORS: Description for landform 'oceanus'
-			return q_("A very large dark area.");
-		case niPalus:
-			// TRANSLATORS: Description for landform 'palus'
-			return q_("'Swamp'; small plain.");
-		case niPatera:
-			// TRANSLATORS: Description for landform 'patera'
-			return q_("An irregular crater, or a complex one with scalloped edges.");
-		case niPlanitia:
-			// TRANSLATORS: Description for landform 'planitia'
-			return q_("Low plain.");
-		case niPlanum:
-			// TRANSLATORS: Description for landform 'planum'
-			return q_("Plateau or high plain.");
-		case niPlume:
-			// TRANSLATORS: Description for landform 'plume'
-			return q_("Cryo-volcanic feature.");
-		case niPromontorium:
-			// TRANSLATORS: Description for landform 'promontorium'
-			return q_("'Cape'; headland promontoria.");
-		case niRegio:
-			// TRANSLATORS: Description for landform 'regio'
-			return q_("A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region.");
-		case niReticulum:
-			// TRANSLATORS: Description for landform 'reticulum'
-			return q_("Reticular (netlike) pattern.");
-		case niRima:
-			// TRANSLATORS: Description for landform 'rima'
-			return q_("Fissure.");
-		case niRupes:
-			// TRANSLATORS: Description for landform 'rupes'
-			return q_("Scarp.");
-		case niSatelliteFeature:
-			// TRANSLATORS: Description for landform 'satellite feature'
-			return q_("A feature that shares the name of an associated feature.");
-		case niScopulus:
-			// TRANSLATORS: Description for landform 'scopulus'
-			return q_("Lobate or irregular scarp.");
-		case niSerpens:
-			// TRANSLATORS: Description for landform 'serpens'
-			return q_("Sinuous feature with segments of positive and negative relief along its length.");
-		case niSulcus:
-			// TRANSLATORS: Description for landform 'sulcus'
-			return q_("Subparallel furrows and ridges.");
 		case niSinus:
 			if (englishName=="Titan")
 			{
@@ -413,32 +385,8 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 				// TRANSLATORS: Description for landform 'sinus'
 				return q_("'Bay'; small plain.");
 			}
-		case niTerra:
-			// TRANSLATORS: Description for landform 'terra'
-			return q_("Extensive land mass.");
-		case niTessera:
-			// TRANSLATORS: Description for landform 'tessera'
-			return q_("Tile-like, polygonal terrain.");
-		case niTholus:
-			// TRANSLATORS: Description for landform 'tholus'
-			return q_("Small domical mountain or hill.");
-		case niUnda:
-			// TRANSLATORS: Description for landform 'unda'
-			return q_("Dunes.");
-		case niVallis:
-			// TRANSLATORS: Description for landform 'vallis'
-			return q_("Valley.");
-		case niVastitas:
-			// TRANSLATORS: Description for landform 'vastitas'
-			return q_("Extensive plain.");
-		case niVirga:
-			// TRANSLATORS: Description for landform 'virga'
-			return q_("A streak or stripe of color.");
-		case niLandingSite:			
-			return "";
-		case niUNDEFINED:
 		default:
-			return q_("Undocumented landform type.");
+			return map.value(nType, q_("Undocumented landform type."));
 	}
 }
 
