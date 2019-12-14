@@ -293,6 +293,26 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	}
 }
 
+QString StelLocaleMgr::getPrintableShortTimeLocal(double JD) const
+{
+	int hour, minute, second, millsec;
+	const double shift = core->getUTCOffset(JD)*0.041666666666;
+	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
+	QTime t(hour, minute, second, millsec);
+	switch (timeFormat)
+	{
+		case STimeSystemDefault:
+			return t.toString();
+		case STime24h:
+			return t.toString("hh:mm");
+		case STime12h:
+			return t.toString("hh:mm AP");
+		default:
+			qWarning() << "WARNING: unknown time format, fallback to system default";
+			return t.toString(Qt::DefaultLocaleShortDate);
+	}
+}
+
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
 	QString timeZone = "";

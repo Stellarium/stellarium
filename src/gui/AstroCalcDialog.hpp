@@ -86,6 +86,18 @@ public:
 		EphemerisCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the transit table
+	//! @enum TransitColumns
+	enum TransitColumns {
+		TransitCOName,		//! name of celestial object
+		TransitDate,			//! date and time of transit
+		TransitAltitude,			//! altitude
+		TransitMagnitude,		//! magnitude
+		TransitElongation,		//! elongation (from the Sun)
+		TransitAngularDistance,	//! angular distance (from the Moon)
+		TransitCount			//! total number of columns
+	};
+
 	//! Defines the number and the order of the columns in the phenomena table
 	//! @enum PhenomenaColumns
 	enum PhenomenaColumns {
@@ -175,6 +187,13 @@ private slots:
 	void saveEphemeris();
 	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
 	void reGenerateEphemeris();
+
+	//! Calculate transits table for selected celestial body and fill the list.
+	void generateTransits();
+	void cleanupTransits();
+	void selectCurrentTransit(const QModelIndex &modelIndex);
+	void saveTransits();
+	void setTransitCelestialBodyName();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
@@ -285,6 +304,8 @@ private:
 	void setCelestialPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
+	//! update header names for transit table
+	void setTransitHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
 	//! Update header names for WUT table
@@ -294,6 +315,8 @@ private:
 	void initListCelestialPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
+	//! Init header and list of transits
+	void initListTransit();
 	//! Init header and list of phenomena
 	void initListPhenomena();
 	//! Init header and list of WUT
@@ -361,7 +384,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader;
 	static float brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -460,6 +483,39 @@ private:
 		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACTransitTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACTransitTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::TransitDate)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else if (column == AstroCalcDialog::TransitMagnitude)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else if (column == AstroCalcDialog::TransitAltitude || column == AstroCalcDialog::TransitElongation || column == AstroCalcDialog::TransitAngularDistance)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else
 		{

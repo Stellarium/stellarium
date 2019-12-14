@@ -226,6 +226,16 @@
         </item>
         <item>
          <property name="text">
+          <string>Transits</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-AstroCalc-CelPos.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Phenomena</string>
          </property>
          <property name="icon">
@@ -744,6 +754,158 @@
          </layout>
         </widget>
         <widget class="QWidget" name="stackedWidgetPage3">
+         <layout class="QGridLayout" name="gridLayout_16">
+          <item row="2" column="0">
+           <widget class="QTreeWidget" name="transitTreeWidget">
+            <property name="rootIsDecorated">
+             <bool>false</bool>
+            </property>
+            <property name="uniformRowHeights">
+             <bool>true</bool>
+            </property>
+            <property name="itemsExpandable">
+             <bool>false</bool>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="expandsOnDoubleClick">
+             <bool>false</bool>
+            </property>
+            <property name="columnCount">
+             <number>0</number>
+            </property>
+            <attribute name="headerShowSortIndicator" stdset="0">
+             <bool>true</bool>
+            </attribute>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_30">
+            <item>
+             <widget class="QPushButton" name="transitsCleanupButton">
+              <property name="text">
+               <string>Cleanup transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsSaveButton">
+              <property name="text">
+               <string>Save transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsCalculateButton">
+              <property name="text">
+               <string>Calculate transits</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_31">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_34">
+              <item>
+               <widget class="QLabel" name="transitCelestialBodyLabel">
+                <property name="text">
+                 <string>Celestial body:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="transitCelestialBodyNameLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_35">
+              <item>
+               <widget class="QLabel" name="transitFromLabel">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="transitFromDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string>yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_32">
+              <item>
+               <widget class="QLabel" name="transitToLabel">
+                <property name="text">
+                 <string>To:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="transitToDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string>yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="transitHeaderLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Table of transits for selected celestial body with designation</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage4">
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -975,7 +1137,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage4">
+        <widget class="QWidget" name="stackedWidgetPage5">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="2" column="0">
            <widget class="QTabWidget" name="tabWidgetGraphs">
@@ -1575,7 +1737,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage5">
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -1761,7 +1923,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
