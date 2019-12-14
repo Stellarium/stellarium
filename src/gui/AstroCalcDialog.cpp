@@ -4832,6 +4832,10 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (ui->stackListWidget->row(current) == 0)
 		currentCelestialPositions();
 
+	// special case - transits
+	if (ui->stackListWidget->row(current) == 2)
+		setTransitCelestialBodyName();
+
 	// special case - graphs
 	if (ui->stackListWidget->row(current) == 4)
 	{
