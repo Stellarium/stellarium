@@ -680,11 +680,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 			if (otype == "Star")
-			{
-				name = selectedObject->getID();
-				if (name.isEmpty())
-					name = q_("Unnamed star");
-			}
+				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
 		drawTransitTimeDiagram();
@@ -2579,11 +2575,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 			if (otype == "Star")
-			{
-				name = selectedObject->getID();
-				if (name.isEmpty())
-					name = q_("Unnamed star");
-			}
+				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
 		drawTransitTimeDiagram();
@@ -3331,11 +3323,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 			if (otype == "Star")
-			{
-				name = selectedObject->getID();
-				if (name.isEmpty())
-					name = q_("Unnamed star");
-			}
+				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
 		ui->monthlyElevationGraph->graph(0)->setName(name);
@@ -6126,11 +6114,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 			if (otype == "Star")
-			{
-				name = selectedObject->getID();
-				if (name.isEmpty())
-					name = q_("Unnamed star");
-			}
+				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->angularDistanceLabel->setText(QString("%1 (%2)").arg(label, name));
 
