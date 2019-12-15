@@ -755,6 +755,31 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage3">
          <layout class="QGridLayout" name="gridLayout_16">
+          <item row="4" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_30">
+            <item>
+             <widget class="QPushButton" name="transitsCleanupButton">
+              <property name="text">
+               <string>Cleanup transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsSaveButton">
+              <property name="text">
+               <string>Save transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsCalculateButton">
+              <property name="text">
+               <string>Calculate transits</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="2" column="0">
            <widget class="QTreeWidget" name="transitTreeWidget">
             <property name="rootIsDecorated">
@@ -779,31 +804,6 @@
              <bool>true</bool>
             </attribute>
            </widget>
-          </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_30">
-            <item>
-             <widget class="QPushButton" name="transitsCleanupButton">
-              <property name="text">
-               <string>Cleanup transits</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="transitsSaveButton">
-              <property name="text">
-               <string>Save transits</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="transitsCalculateButton">
-              <property name="text">
-               <string>Calculate transits</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </item>
           <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_31">
@@ -896,7 +896,17 @@
              </font>
             </property>
             <property name="text">
-             <string>Table of transits for selected celestial object with designation</string>
+             <string>Table of approximate transits for selected celestial object</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="transitNotificationLabel">
+            <property name="text">
+             <string>Note: artificial satellites and unnamed stars are excluded from calculation</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1579,7 +1589,7 @@
                   <item>
                    <widget class="QLabel" name="graphsDurationLabel">
                     <property name="toolTip">
-                     <string>How much years account into calculation</string>
+                     <string>How many years to display</string>
                     </property>
                     <property name="text">
                      <string>Duration:</string>
@@ -1589,7 +1599,7 @@
                   <item>
                    <widget class="QSpinBox" name="graphsDurationSpinBox">
                     <property name="toolTip">
-                     <string>How much years account into calculation</string>
+                     <string>How many years to display</string>
                     </property>
                     <property name="minimum">
                      <number>1</number>

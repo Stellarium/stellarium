@@ -468,6 +468,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
+	ui->transitNotificationLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
