@@ -839,7 +839,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		objectType = "cubewano";
 
 	// Calculate perihelion
-	float r = (1 - eccentricity)*semiMajorAxis;
+	double r = (1 - eccentricity)*semiMajorAxis;
 
 	// Scattered disc objects
 	if (r > 35)
@@ -911,8 +911,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
 QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const
@@ -965,8 +963,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
@@ -1104,26 +1100,26 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
 	// ell_orbit is used for moons (distances in km) while comet_orbit is used for minor bodies around the sun.
-	QStringList orbitalElementsKeys;
-	orbitalElementsKeys << "coord_func"
-			<< "orbit_ArgOfPericenter"
-			<< "orbit_AscendingNode"
-			<< "orbit_Eccentricity"
-			<< "orbit_Epoch"
+	static const QStringList orbitalElementsKeys = {
+		"coord_func",
+		"orbit_ArgOfPericenter",
+		"orbit_AscendingNode",
+		"orbit_Eccentricity",
+		"orbit_Epoch",
 // GZ It seems to have been an error to include these.  They might simply be updated without prior deletion.
-//			<< "orbit_good"
-//			<< "dust_lengthfactor"
-//			<< "dust_brightnessfactor"
-//			<< "dust_widthfactor"
-			<< "orbit_Inclination"
-			<< "orbit_LongOfPericenter"
-			<< "orbit_MeanAnomaly"
-			<< "orbit_MeanLongitude"
-			<< "orbit_MeanMotion"
-			<< "orbit_PericenterDistance"
-			<< "orbit_Period"
-			<< "orbit_SemiMajorAxis"
-			<< "orbit_TimeAtPericenter";
+//		"orbit_good",
+//		"dust_lengthfactor",
+//		"dust_brightnessfactor",
+//		"dust_widthfactor",
+		"orbit_Inclination",
+		"orbit_LongOfPericenter",
+		"orbit_MeanAnomaly",
+		"orbit_MeanLongitude",
+		"orbit_MeanMotion",
+		"orbit_PericenterDistance",
+		"orbit_Period",
+		"orbit_SemiMajorAxis",
+		"orbit_TimeAtPericenter"};
 
 	qDebug() << "Updating objects...";
 	for (auto object : objectList)
