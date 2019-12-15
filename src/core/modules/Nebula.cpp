@@ -1307,15 +1307,15 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		const int form	= HIIRx.capturedTexts().at(1).toInt();
 		const int structure	= HIIRx.capturedTexts().at(2).toInt();
 		const int brightness	= HIIRx.capturedTexts().at(3).toInt();
-		static const QStringList formList={
+		const QStringList formList={
 			q_("circular form"),
 			q_("elliptical form"),
 			q_("irregular form")};
-		static const QStringList structureList={
+		const QStringList structureList={
 			q_("amorphous structure"),
 			q_("conventional structure"),
 			q_("filamentary structure")};
-		static const QStringList brightnessList={
+		const QStringList brightnessList={
 			qc_("faintest", "HII region brightness"),
 			qc_("moderate brightness", "HII region brightness"),
 			qc_("brightest", "HII region brightness")};
@@ -1358,7 +1358,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 QString Nebula::getTypeString(void) const
 {
-	static const QMap<Nebula::NebulaType, QString> tMap= {
+	const QMap<Nebula::NebulaType, QString> tMap= {
 		{ NebGx     , q_("galaxy") },
 		{ NebAGx    , q_("active galaxy") },
 		{ NebRGx    , q_("radio galaxy") },
