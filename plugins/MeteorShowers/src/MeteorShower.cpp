@@ -610,7 +610,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 				       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.finish.month()));
 			}
 			oss << "<br />";
-			oss << q_("Maximum: %1 %2").arg(m_activity.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
+			oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
 
 			oss << QString(" (%1 %2&deg;)")
 			       .arg(q_("Solar longitude"))
