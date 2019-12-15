@@ -1271,7 +1271,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		// check how much of it is visible
 		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		const double shadowFactor = qMin(0.000128, ssm->getEclipseFactor(core));
+		const double shadowFactor = qMax(0.000128, ssm->getEclipseFactor(core));
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
