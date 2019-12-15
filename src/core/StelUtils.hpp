@@ -900,6 +900,12 @@ namespace StelUtils
 		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
 	}
 
+	//! Interval test. This checks whether @param value is within [@param low, @param high]
+	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
+	{
+	    return !(value < low) && !(high < value);
+	}
+
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)

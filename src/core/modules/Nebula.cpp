@@ -1117,8 +1117,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	else
 		m = mTypeString;
 
-	QStringList glclass;
-	glclass << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX" << "X" << "XI" << "XII";
+	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
 
 	if (GlClRx.exactMatch(m)) // Globular Clusters
 	{
@@ -1171,9 +1170,9 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (OClRx.exactMatch(m)) // Open Clusters
 	{
-		QStringList occlass, ocrich, rtxt;
-		occlass << "I" << "II" << "III" << "IV";
-		ocrich << "p" << "m" << "r";
+		QStringList rtxt;
+		static const QStringList occlass = { "I", "II", "III", "IV"};
+		static const QStringList ocrich = { "p", "m", "r"};
 		switch(occlass.indexOf(OClRx.capturedTexts().at(1).trimmed()))
 		{
 			case 0:
@@ -1237,9 +1236,9 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (VdBRx.exactMatch(m)) // Reflection Nebulae
 	{
-		QStringList rnclass, rnbrightness, rtx;
-		rnclass << "I" << "II" << "I-II" << "II P" << "P";
-		rnbrightness << "VBR" << "VB" << "BR" << "M" << "F" << "VF" << ":";
+		QStringList rtx;
+		static const QStringList rnclass = { "I", "II", "I-II", "II P", "P"};
+		static const QStringList rnbrightness = { "VBR", "VB", "BR", "M", "F", "VF", ":"};
 		switch(rnbrightness.indexOf(VdBRx.capturedTexts().at(2).trimmed()))
 		{
 			case 0:

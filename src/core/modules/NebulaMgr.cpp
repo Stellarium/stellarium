@@ -1123,8 +1123,6 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, Abell, DWB;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
-
-	//unsigned int nType;
 	Nebula::NebulaType nType;
 
 	int currentLineNumber = 0;	// what input line we are on
@@ -1229,180 +1227,97 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			// Warning: Hyades and LMC has visual magnitude less than 1.0 (0.5^m and 0.9^m)
 			if (bMag <= 0.f) bMag = 99.f;
 			if (vMag <= 0.f) vMag = 99.f;
+			// TODO: The map could be sorted by probability (number of total objects). More common objects at start...
+			static const QMap<QString, Nebula::NebulaType> oTypesMap = {
+				{ "G"   , Nebula::NebGx  },
+				{ "GX"  , Nebula::NebGx  },
+				{ "GC"  , Nebula::NebGc  },
+				{ "OC"  , Nebula::NebOc  },
+				{ "NB"  , Nebula::NebN   },
+				{ "PN"  , Nebula::NebPn  },
+				{ "DN"  , Nebula::NebDn  },
+				{ "RN"  , Nebula::NebRn  },
+				{ "C+N" , Nebula::NebCn  },
+				{ "RNE" , Nebula::NebRn  },
+				{ "HII" , Nebula::NebHII },
+				{ "SNR" , Nebula::NebSNR },
+				{ "BN"  , Nebula::NebBn  },
+				{ "EN"  , Nebula::NebEn  },
+				{ "SA"  , Nebula::NebSA  },
+				{ "SC"  , Nebula::NebSC  },
+				{ "CL"  , Nebula::NebCl  },
+				{ "IG"  , Nebula::NebIGx },
+				{ "RG"  , Nebula::NebRGx },
+				{ "AGX" , Nebula::NebAGx },
+				{ "QSO" , Nebula::NebQSO },
+				{ "ISM" , Nebula::NebISM },
+				{ "EMO" , Nebula::NebEMO },
+				{ "GNE" , Nebula::NebHII },
+				{ "RAD" , Nebula::NebISM },
+				{ "LIN" , Nebula::NebAGx },// LINER-type active galaxies
+				{ "BLL" , Nebula::NebBLL },
+				{ "BLA" , Nebula::NebBLA },
+				{ "MOC" , Nebula::NebMolCld },
+				{ "YSO" , Nebula::NebYSO },
+				{ "Q?"  , Nebula::NebPossQSO },
+				{ "PN?" , Nebula::NebPossPN },
+				{ "*"   , Nebula::NebStar},
+				{ "SFR" , Nebula::NebMolCld },
+				{ "IR"  , Nebula::NebDn  },
+				{ "**"  , Nebula::NebStar},
+				{ "MUL" , Nebula::NebStar},
+				{ "PPN" , Nebula::NebPPN },
+				{ "GIG" , Nebula::NebIGx },
+				{ "OPC" , Nebula::NebOc  },
+				{ "MGR" , Nebula::NebSA  },
+				{ "IG2" , Nebula::NebIGx },
+				{ "IG3" , Nebula::NebIGx },
+				{ "SY*" , Nebula::NebSymbioticStar},
+				{ "PA*" , Nebula::NebPPN },
+				{ "CV*" , Nebula::NebStar},
+				{ "Y*?" , Nebula::NebYSO },
+				{ "CGB" , Nebula::NebISM },
+				{ "SNRG", Nebula::NebSNR },
+				{ "Y*O" , Nebula::NebYSO },
+				{ "SR*" , Nebula::NebStar},
+				{ "EM*" , Nebula::NebEmissionLineStar },
+				{ "AB*" , Nebula::NebStar },
+				{ "MI*" , Nebula::NebStar },
+				{ "MI?" , Nebula::NebStar },
+				{ "TT*" , Nebula::NebStar },
+				{ "WR*" , Nebula::NebStar },
+				{ "C*"  , Nebula::NebEmissionLineStar },
+				{ "WD*" , Nebula::NebStar },
+				{ "EL*" , Nebula::NebStar },
+				{ "NL*" , Nebula::NebStar },
+				{ "NO*" , Nebula::NebStar },
+				{ "HS*" , Nebula::NebStar },
+				{ "LP*" , Nebula::NebStar },
+				{ "OH*" , Nebula::NebStar },
+				{ "S?R" , Nebula::NebStar },
+				{ "IR*" , Nebula::NebStar },
+				{ "POC" , Nebula::NebMolCld },
+				{ "PNB" , Nebula::NebPn   },
+				{ "GXCL", Nebula::NebGxCl },
+				{ "AL*" , Nebula::NebStar },
+				{ "PR*" , Nebula::NebStar },
+				{ "RS*" , Nebula::NebStar },
+				{ "S*B" , Nebula::NebStar },
+				{ "SN?" , Nebula::NebSNC  },
+				{ "SR?" , Nebula::NebSNRC },
+				{ "DNE" , Nebula::NebDn   },
+				{ "RG*" , Nebula::NebStar },
+				{ "PSR" , Nebula::NebSNR  },
+				{ "HH"  , Nebula::NebISM  },
+				{ "V*"  , Nebula::NebStar },
+				{ "PA?" , Nebula::NebPPN  },
+				{ "BUB" , Nebula::NebISM  },
+				{ "CLG" , Nebula::NebGxCl },
+				{ "CGG" , Nebula::NebGxCl }};
 
-			QStringList oTypes;
-			oTypes << "G"	<< "GX"	 << "GC"  << "OC"  << "NB"  << "PN"  << "DN"  << "RN"  << "C+N"  << "RNE"
-			       << "HII" << "SNR" << "BN"  << "EN"  << "SA"  << "SC"  << "CL"  << "IG"  << "RG"   << "AGX"
-			       << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN" << "BLL" << "BLA" << "MOC"  << "YSO"
-			       << "Q?"	<< "PN?" << "*"	  << "SFR" << "IR"  << "**"  << "MUL" << "PPN" << "GIG"  << "OPC"
-			       << "MGR" << "IG2" << "IG3" << "SY*" << "PA*" << "CV*" << "Y*?" << "CGB" << "SNRG" << "Y*O"
-			       << "SR*" << "EM*" << "AB*" << "MI*" << "MI?" << "TT*" << "WR*" << "C*"  << "WD*"  << "EL*"
-			       << "NL*" << "NO*" << "HS*" << "LP*" << "OH*" << "S?R" << "IR*" << "POC" << "PNB"  << "GXCL"
-			       << "AL*" << "PR*" << "RS*" << "S*B" << "SN?" << "SR?" << "DNE" << "RG*" << "PSR"  << "HH"
-			       << "V*"  << "PA?" << "BUB" << "CLG" << "CGG";
-
-			switch (oTypes.indexOf(oType.toUpper()))
-			{
-				case 0:
-				case 1:
-					nType = Nebula::NebGx;
-					break;
-				case 2:
-					nType = Nebula::NebGc;
-					break;
-				case 3:
-				case 39:
-					nType = Nebula::NebOc;
-					break;
-				case 4:
-					nType = Nebula::NebN;
-					break;
-				case 5:
-				case 68:
-					nType = Nebula::NebPn;
-					break;
-				case 6:
-				case 34:
-				case 76:
-					nType = Nebula::NebDn;
-					break;
-				case 7:
-				case 9:
-					nType = Nebula::NebRn;
-					break;
-				case 8:
-					nType = Nebula::NebCn;
-					break;
-				case 10:
-				case 23:
-					nType = Nebula::NebHII;
-					break;
-				case 11:
-				case 48:
-				case 78:
-					nType = Nebula::NebSNR;
-					break;
-				case 12:
-					nType = Nebula::NebBn;
-					break;
-				case 13:
-					nType = Nebula::NebEn;
-					break;
-				case 14:
-				case 40:
-					nType = Nebula::NebSA;
-					break;
-				case 15:
-					nType = Nebula::NebSC;
-					break;
-				case 16:
-					nType = Nebula::NebCl;
-					break;
-				case 17:
-				case 38:
-				case 41:
-				case 42:
-					nType = Nebula::NebIGx;
-					break;
-				case 18:
-					nType = Nebula::NebRGx;
-					break;
-				case 19:
-				case 25: // LINER-type active galaxies
-					nType = Nebula::NebAGx;
-					break;
-				case 20:
-					nType = Nebula::NebQSO;
-					break;
-				case 21:
-				case 24:
-				case 47:
-				case 79:
-				case 82:
-					nType = Nebula::NebISM;
-					break;
-				case 22:
-					nType = Nebula::NebEMO;
-					break;
-				case 26:
-					nType = Nebula::NebBLL;
-					break;
-				case 27:
-					nType = Nebula::NebBLA;
-					break;
-				case 28:
-				case 33:
-				case 67:
-					nType = Nebula::NebMolCld;
-					break;
-				case 29:
-				case 46:
-				case 49:
-					nType = Nebula::NebYSO;
-					break;
-				case 30:
-					nType = Nebula::NebPossQSO;
-					break;
-				case 31:
-					nType = Nebula::NebPossPN;
-					break;
-				case 32:
-				case 35:
-				case 36:
-				case 45:
-				case 50:
-				case 52:
-				case 53:
-				case 54:
-				case 55:
-				case 56:
-				case 58:
-				case 59:
-				case 60:
-				case 61:
-				case 62:
-				case 63:
-				case 64:
-				case 65:
-				case 66:
-				case 70:
-				case 71:
-				case 72:
-				case 73:
-				case 77:
-				case 80:
-					nType = Nebula::NebStar;
-					break;
-				case 37:
-				case 44:
-				case 81:
-					nType = Nebula::NebPPN;
-					break;
-				case 43:
-					nType = Nebula::NebSymbioticStar;
-					break;
-				case 51:
-				case 57:
-					nType = Nebula::NebEmissionLineStar;
-					break;
-				case 74:
-					nType = Nebula::NebSNC;
-					break;
-				case 75:
-					nType = Nebula::NebSNRC;
-					break;
-				case 69:
-				case 83:
-				case 84:
-					nType = Nebula::NebGxCl;
-					break;
-				default:
-				{
-					nType = Nebula::NebUnknown;
-					qDebug() << "Record with ID" << id <<"has unknown type of object:" << oType;
-					break;
-				}
-			}
+			nType=oTypesMap.value(oType.toUpper(), Nebula::NebUnknown);
+			if (nType == Nebula::NebUnknown)
+				qDebug() << "Record with ID" << id <<"has unknown type of object:" << oType;
 
 			++readOk;
 
@@ -1507,10 +1422,10 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		nb = cdes.toUInt();
 
-		QStringList catalogs;
-		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO"
-			 << "HCG" << "A66" << "ESO" << "VDBH" << "DWB";
+		static const QStringList catalogs = {
+			"IC",    "M",   "C",  "CR",  "MEL",   "B", "SH2", "VDB", "RCW",  "LDN",
+			"LBN", "NGC", "PGC", "UGC",  "CED", "ARP",  "VV",  "PK", "PNG", "SNRG",
+			"ACO", "HCG", "A66", "ESO", "VDBH", "DWB"};
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{

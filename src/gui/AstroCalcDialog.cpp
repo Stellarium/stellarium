@@ -1282,21 +1282,18 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 {
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
-	bool founded = false;
+	bool found = (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n));
 
-	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
-		founded = true;
-	else
+	if (!found)
 	{
 		QStringList list = nameI18n.split("(");
 		if (list.count() > 0 && nameI18n.lastIndexOf("(") != 0 && nameI18n.lastIndexOf("/") < 0)
 			nameI18n = list.at(0).trimmed();
 
-		if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
-			founded = true;
+		found = (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n));
 	}
 
-	if (founded)
+	if (found)
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -1806,9 +1803,7 @@ void AstroCalcDialog::generateTransits()
 		StelObjectP selectedObject = selectedObjects[0];
 		name = ui->transitCelestialBodyNameLabel->text();
 		selectedObject->getEnglishName().isEmpty() ? englishName = name : englishName = selectedObject->getEnglishName();
-		bool isPlanet = false;
-		if (selectedObject->getType() == "Planet")
-			isPlanet = true;
+		const bool isPlanet = (selectedObject->getType() == "Planet");
 
 		if (!name.isEmpty()) // OK, let's calculate!
 		{
@@ -5373,16 +5368,8 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+								continue;
 
 							if (d.isEmpty() && n.isEmpty())
 								continue;
@@ -5436,16 +5423,8 @@ void AstroCalcDialog::calculateWutObjects()
 						mag = object->getVMagnitudeWithExtinction(core);
 						if (object->getPlanetType() == pType && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+								continue;
 
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
@@ -5475,16 +5454,9 @@ void AstroCalcDialog::calculateWutObjects()
 						mag = object->getVMagnitudeWithExtinction(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = dblStar.value(object)/3600.0; // convert from arcseconds to degrees
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
+							// convert from arcseconds to degrees
+							if ((angularSizeLimit) && (!StelUtils::isWithin(static_cast<double>(dblStar.value(object))/3600.0, angularSizeLimitMin, angularSizeLimitMax)))
+								continue;
 
 							designation = object->getEnglishName();
 							if (designation.isEmpty())
