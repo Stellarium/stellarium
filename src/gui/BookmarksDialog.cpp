@@ -112,7 +112,7 @@ void BookmarksDialog::createDialogContent()
 
 void BookmarksDialog::setBookmarksHeaderNames()
 {
-	static const QStringList headerStrings = {
+	const QStringList headerStrings = {
 		"UUID", // Hide the column
 		q_("Object"),
 		q_("Localized name"),

@@ -3143,7 +3143,7 @@ Vec3f Planet::getCurrentOrbitColor() const
 	{
 		case ocsGroups:
 		{
-			static const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
+			const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
 				{ isMoon,         orbitMoonsColor       },
 				{ isPlanet,       orbitMajorPlanetsColor},
 				{ isAsteroid,     orbitMinorPlanetsColor},
@@ -3161,7 +3161,7 @@ Vec3f Planet::getCurrentOrbitColor() const
 		case ocsMajorPlanets:
 		{
 			const QString pName = getEnglishName().toLower();
-			static const QMap<QString, Vec3f>majorPlanetColorMap = {
+			const QMap<QString, Vec3f>majorPlanetColorMap = {
 				{ "mercury", orbitMercuryColor},
 				{ "venus",   orbitVenusColor  },
 				{ "earth",   orbitEarthColor  },
