@@ -710,7 +710,11 @@
 	      License: Creative Commons Attribution 4.0 International
 	4.109 Images of NGC1502
 	      from Kamil Pecinovsky
-	      https://www.spacetelescope.org/
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.110 Images of NGC752
+	      from Tayson82
+	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
