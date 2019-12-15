@@ -109,13 +109,6 @@ void NomenclatureMgr::loadNomenclature()
 	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 	QString record, ctxt;
 
-	QStringList nTypes; // codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
-	nTypes << "AL"	<< "AR"	<< "AS"	<< "CA"	<< "CB"	<< "CH"	<< "CM"	<< "CO"	<< "CR"	<< "AA"
-	       << "DO"	<< "ER"	<< "FA"	<< "FR"	<< "FE"	<< "FL"	<< "FM"	<< "FO"	<< "FT"	<< "IN"
-	       << "LA"	<< "LB"	<< "LU"	<< "LC"	<< "LF"	<< "LG"	<< "LE"	<< "LI"	<< "LN"	<< "MA"
-	       << "ME"	<< "MN"	<< "MO"	<< "OC"	<< "PA"	<< "PE"	<< "PL"	<< "PM"	<< "PU"	<< "PR"
-	       << "RE"	<< "RT"	<< "RI"	<< "RU"	<< "SF"	<< "SC"	<< "SE"	<< "SI"	<< "SU"	<< "TA"
-	       << "TE"	<< "TH"	<< "UN"	<< "VA"	<< "VS"	<< "VI";
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
 	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
@@ -147,7 +140,7 @@ void NomenclatureMgr::loadNomenclature()
 		PlanetP p;
 
 		int featureId;
-		QString name, ntypecode, planet = "", planetName = "", context = "";
+		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		float latitude, longitude, size;
 		QStringList faultPlanets;
@@ -183,181 +176,8 @@ void NomenclatureMgr::loadNomenclature()
 					context = "";
 				}
 				// Read the type of feature
-				ntypecode	= recRx.capturedTexts().at(4).trimmed();
-				switch (nTypes.indexOf(ntypecode.toUpper()))
-				{
-					case 0:
-						ntype = NomenclatureItem::niAlbedoFeature;
-						break;
-					case 1:
-						ntype = NomenclatureItem::niArcus;
-						break;
-					case 2:
-						ntype = NomenclatureItem::niAstrum;
-						break;
-					case 3:
-						ntype = NomenclatureItem::niCatena;
-						break;
-					case 4:
-						ntype = NomenclatureItem::niCavus;
-						break;
-					case 5:
-						ntype = NomenclatureItem::niChaos;
-						break;
-					case 6:
-						ntype = NomenclatureItem::niChasma;
-						break;
-					case 7:
-						ntype = NomenclatureItem::niCollis;
-						break;
-					case 8:
-						ntype = NomenclatureItem::niCorona;
-						break;
-					case 9:
-						ntype = NomenclatureItem::niCrater;
-						break;
-					case 10:
-						ntype = NomenclatureItem::niDorsum;
-						break;
-					case 11:
-						ntype = NomenclatureItem::niEruptiveCenter;
-						break;
-					case 12:
-						ntype = NomenclatureItem::niFacula;
-						break;
-					case 13:
-						ntype = NomenclatureItem::niFarrum;
-						break;
-					case 14:
-						ntype = NomenclatureItem::niFlexus;
-						break;
-					case 15:
-						ntype = NomenclatureItem::niFluctus;
-						break;
-					case 16:
-						ntype = NomenclatureItem::niFlumen;
-						break;
-					case 17:
-						ntype = NomenclatureItem::niFossa;
-						break;
-					case 18:
-						ntype = NomenclatureItem::niFretum;
-						break;
-					case 19:
-						ntype = NomenclatureItem::niInsula;
-						break;
-					case 20:
-						ntype = NomenclatureItem::niLabes;
-						break;
-					case 21:
-						ntype = NomenclatureItem::niLabyrinthus;
-						break;
-					case 22:
-						ntype = NomenclatureItem::niLacuna;
-						break;
-					case 23:
-						ntype = NomenclatureItem::niLacus;
-						break;
-					case 24:
-						ntype = NomenclatureItem::niLandingSite;
-						break;
-					case 25:
-						ntype = NomenclatureItem::niLargeRingedFeature;
-						break;
-					case 26:
-						ntype = NomenclatureItem::niLenticula;
-						break;
-					case 27:
-						ntype = NomenclatureItem::niLinea;
-						break;
-					case 28:
-						ntype = NomenclatureItem::niLingula;
-						break;
-					case 29:
-						ntype = NomenclatureItem::niMacula;
-						break;
-					case 30:
-						ntype = NomenclatureItem::niMare;
-						break;
-					case 31:
-						ntype = NomenclatureItem::niMensa;
-						break;
-					case 32:
-						ntype = NomenclatureItem::niMons;
-						break;
-					case 33:
-						ntype = NomenclatureItem::niOceanus;
-						break;
-					case 34:
-						ntype = NomenclatureItem::niPalus;
-						break;
-					case 35:
-						ntype = NomenclatureItem::niPatera;
-						break;
-					case 36:
-						ntype = NomenclatureItem::niPlanitia;
-						break;
-					case 37:
-						ntype = NomenclatureItem::niPlanum;
-						break;
-					case 38:
-						ntype = NomenclatureItem::niPlume;
-						break;
-					case 39:
-						ntype = NomenclatureItem::niPromontorium;
-						break;
-					case 40:
-						ntype = NomenclatureItem::niRegio;
-						break;
-					case 41:
-						ntype = NomenclatureItem::niReticulum;
-						break;
-					case 42:
-						ntype = NomenclatureItem::niRima;
-						break;
-					case 43:
-						ntype = NomenclatureItem::niRupes;
-						break;
-					case 44:
-						ntype = NomenclatureItem::niSatelliteFeature;
-						break;
-					case 45:
-						ntype = NomenclatureItem::niScopulus;
-						break;
-					case 46:
-						ntype = NomenclatureItem::niSerpens;
-						break;
-					case 47:
-						ntype = NomenclatureItem::niSinus;
-						break;
-					case 48:
-						ntype = NomenclatureItem::niSulcus;
-						break;
-					case 49:
-						ntype = NomenclatureItem::niTerra;
-						break;
-					case 50:
-						ntype = NomenclatureItem::niTessera;
-						break;
-					case 51:
-						ntype = NomenclatureItem::niTholus;
-						break;
-					case 52:
-						ntype = NomenclatureItem::niUnda;
-						break;
-					case 53:
-						ntype = NomenclatureItem::niVallis;
-						break;
-					case 54:
-						ntype = NomenclatureItem::niVastitas;
-						break;
-					case 55:
-						ntype = NomenclatureItem::niVirga;
-						break;
-					default:
-						ntype = NomenclatureItem::niUNDEFINED;
-						break;
-				}
+				QString ntypecode	= recRx.capturedTexts().at(4).trimmed();
+				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
 				latitude	= recRx.capturedTexts().at(5).toFloat();
 				// Read the longitude of feature

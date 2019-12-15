@@ -61,7 +61,7 @@ NomenclatureItem::~NomenclatureItem()
 
 QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 {
-	static const QMap<NomenclatureItemType, QString>map = {
+	const QMap<NomenclatureItemType, QString>map = {
 			// TRANSLATORS: Geographic area distinguished by amount of reflected light
 		{ niAlbedoFeature, qc_("albedo feature", "landform") },
 			// TRANSLATORS: Arc-shaped feature
@@ -236,7 +236,7 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 
 QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName)
 {
-	static const QMap<NomenclatureItemType, QString>map = {
+	const QMap<NomenclatureItemType, QString>map = {
 		// TRANSLATORS: Description for landform 'albedo feature'
 		{ niAlbedoFeature, q_("Geographic area distinguished by amount of reflected light.")},
 		// TRANSLATORS: Description for landform 'arcus'
@@ -551,4 +551,68 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
+}
+
+
+
+NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString abbrev)
+{
+		static const QMap<QString, NomenclatureItem::NomenclatureItemType> niTypes = { // codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
+						{ "AL", NomenclatureItem::niAlbedoFeature	   },
+						{ "AR", NomenclatureItem::niArcus			   },
+						{ "AS", NomenclatureItem::niAstrum			   },
+						{ "CA", NomenclatureItem::niCatena			   },
+						{ "CB", NomenclatureItem::niCavus			   },
+						{ "CH", NomenclatureItem::niChaos			   },
+						{ "CM", NomenclatureItem::niChasma			   },
+						{ "CO", NomenclatureItem::niCollis			   },
+						{ "CR", NomenclatureItem::niCorona			   },
+						{ "AA", NomenclatureItem::niCrater			   },
+						{ "DO", NomenclatureItem::niDorsum			   },
+						{ "ER", NomenclatureItem::niEruptiveCenter	   },
+						{ "FA", NomenclatureItem::niFacula			   },
+						{ "FR", NomenclatureItem::niFarrum			   },
+						{ "FE", NomenclatureItem::niFlexus			   },
+						{ "FL", NomenclatureItem::niFluctus			   },
+						{ "FM", NomenclatureItem::niFlumen			   },
+						{ "FO", NomenclatureItem::niFossa			   },
+						{ "FT", NomenclatureItem::niFretum			   },
+						{ "IN", NomenclatureItem::niInsula			   },
+						{ "LA", NomenclatureItem::niLabes			   },
+						{ "LB", NomenclatureItem::niLabyrinthus		   },
+						{ "LU", NomenclatureItem::niLacuna			   },
+						{ "LC", NomenclatureItem::niLacus			   },
+						{ "LF", NomenclatureItem::niLandingSite		   },
+						{ "LG", NomenclatureItem::niLargeRingedFeature },
+						{ "LE", NomenclatureItem::niLenticula		   },
+						{ "LI", NomenclatureItem::niLinea			   },
+						{ "LN", NomenclatureItem::niLingula			   },
+						{ "MA", NomenclatureItem::niMacula			   },
+						{ "ME", NomenclatureItem::niMare			   },
+						{ "MN", NomenclatureItem::niMensa			   },
+						{ "MO", NomenclatureItem::niMons			   },
+						{ "OC", NomenclatureItem::niOceanus			   },
+						{ "PA", NomenclatureItem::niPalus			   },
+						{ "PE", NomenclatureItem::niPatera			   },
+						{ "PL", NomenclatureItem::niPlanitia		   },
+						{ "PM", NomenclatureItem::niPlanum			   },
+						{ "PU", NomenclatureItem::niPlume			   },
+						{ "PR", NomenclatureItem::niPromontorium	   },
+						{ "RE", NomenclatureItem::niRegio			   },
+						{ "RT", NomenclatureItem::niReticulum		   },
+						{ "RI", NomenclatureItem::niRima			   },
+						{ "RU", NomenclatureItem::niRupes			   },
+						{ "SF", NomenclatureItem::niSatelliteFeature   },
+						{ "SC", NomenclatureItem::niScopulus		   },
+						{ "SE", NomenclatureItem::niSerpens			   },
+						{ "SI", NomenclatureItem::niSinus			   },
+						{ "SU", NomenclatureItem::niSulcus			   },
+						{ "TA", NomenclatureItem::niTerra			   },
+						{ "TE", NomenclatureItem::niTessera			   },
+						{ "TH", NomenclatureItem::niTholus			   },
+						{ "UN", NomenclatureItem::niUnda			   },
+						{ "VA", NomenclatureItem::niVallis			   },
+						{ "VS", NomenclatureItem::niVastitas		   },
+						{ "VI", NomenclatureItem::niVirga			   }};
+return niTypes.value(abbrev, NomenclatureItem::niUNDEFINED);
 }

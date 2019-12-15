@@ -153,6 +153,9 @@ public:
 	float getLongitude(void) const {return longitude;}
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+protected:
+	//! returns a type enum for a given 2-letter code
+	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
 
 private:
 	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
