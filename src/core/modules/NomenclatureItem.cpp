@@ -368,11 +368,8 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 				// TRANSLATORS: Description for landform 'mare' on Titan
 				return q_("'Sea'; large expanses of dark materials thought to be liquid hydrocarbons");
 			}
-			//if (englishName=="Moon")  // Presumably this should also be the default?
-			//{
-				// TRANSLATORS: Description for landform 'mare' on the Moon
-				return q_("'Sea'; low albedo, relatively smooth plain, generally of large extent.");
-			//}
+			// TRANSLATORS: Description for landform 'mare' on the Moon
+			return q_("'Sea'; low albedo, relatively smooth plain, generally of large extent.");
 		}
 		case niSinus:
 			if (englishName=="Titan")
