@@ -175,6 +175,9 @@ public:
 	static QString romanMonthName(int month);
 	
 private:
+	//! fill the class-inherent lists with translated names for weekdays, month names etc. in the current language.
+	//! Call this at program start and then after each language change.
+	static void createNameLists();
 	// The translator used for astronomical object naming
 	StelTranslator* skyTranslator;
 	StelTranslator* planetaryFeaturesTranslator;
@@ -195,6 +198,13 @@ private:
 	
 	static QMap<QString, QString> countryCodeToStringMap;
 	
+	// Lists for rapid access. These must be recreated on language change by createNameLists().
+	static QStringList shortWeekDays;
+	static QStringList longWeekDays;
+	static QStringList shortMonthNames;
+	static QStringList longMonthNames;
+	static QStringList longGenitiveMonthNames;
+
 	static void generateCountryList();
 };
 

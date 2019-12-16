@@ -58,6 +58,7 @@ StelLocaleMgr::StelLocaleMgr()
 		in >> countryCodeToStringMap;
 		file.close();
 	}
+	createNameLists();
 }
 
 
@@ -143,16 +144,17 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
 	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
 
+	createNameLists();
 	if (refreshAll)
+	{
+
 		StelApp::getInstance().updateI18n();
+	}
 }
 
 bool StelLocaleMgr::isAppRTL() const
 {
-	bool rtl = false;
-	if (QString("ar fa ckb ug ur he yi").contains(getAppLanguage()))
-		rtl = true;
-	return rtl;
+	return QString("ar fa ckb ug ur he yi").contains(getAppLanguage());
 }
 
 /*************************************************************************
@@ -184,10 +186,7 @@ QString StelLocaleMgr::getSkyLanguage() const
 
 bool StelLocaleMgr::isSkyRTL() const
 {
-	bool rtl = false;
-	if (QString("ar fa ckb ug ur he yi").contains(getSkyLanguage()))
-		rtl = true;
-	return rtl;
+	return QString("ar fa ckb ug ur he yi").contains(getSkyLanguage());
 }
 
 // Get the StelTranslator currently used for sky objects.
@@ -353,7 +352,7 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf)
 
 QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf)
 {
-	QStringList tfmt={"system_default", "24h", "12h"};
+	static const QStringList tfmt={"system_default", "24h", "12h"};
 	return tfmt[tf];
 }
 
@@ -417,8 +416,9 @@ QString StelLocaleMgr::countryNameToCode(const QString& countryName)
 QStringList StelLocaleMgr::getAllCountryNames()
 {
 	QStringList res;
-	for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.constBegin();i!=countryCodeToStringMap.constEnd();++i)
-		res.append(i.value());
+	//for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.constBegin();i!=countryCodeToStringMap.constEnd();++i)
+	//	res.append(i.value());
+	res=countryCodeToStringMap.values();
 	res.sort();
 	return res;
 }
@@ -426,86 +426,36 @@ QStringList StelLocaleMgr::getAllCountryNames()
 QString StelLocaleMgr::shortDayName(int weekday)
 {
 	Q_ASSERT(weekday>=0);
-	const QStringList weekdays = {
-		qc_("Sun", "short day name"),
-		qc_("Mon", "short day name"),
-		qc_("Tue", "short day name"),
-		qc_("Wed", "short day name"),
-		qc_("Thu", "short day name"),
-		qc_("Fri", "short day name"),
-		qc_("Sat", "short day name")};
-	return weekdays[weekday % 7];
+	Q_ASSERT(shortWeekDays.length()==7);
+	return shortWeekDays[weekday % 7];
 }
 
 QString StelLocaleMgr::longDayName(int weekday)
 {
 	Q_ASSERT(weekday>=0);
-	const QStringList weekdays = {
-		qc_("Sunday",    "long day name"),
-		qc_("Monday",    "long day name"),
-		qc_("Tuesday",   "long day name"),
-		qc_("Wednesday", "long day name"),
-		qc_("Thursday",  "long day name"),
-		qc_("Friday",    "long day name"),
-		qc_("Saturday",  "long day name")};
-	return weekdays[weekday % 7];
+	Q_ASSERT(longWeekDays.length()==7);
+	return longWeekDays[weekday % 7];
 }
 
 QString StelLocaleMgr::shortMonthName(int month)
 {
 	Q_ASSERT(month >= 0);
-	const QStringList mNames= {
-		 qc_("Dec", "short month name"),
-		 qc_("Jan", "short month name"),
-		 qc_("Feb", "short month name"),
-		 qc_("Mar", "short month name"),
-		 qc_("Apr", "short month name"),
-		 qc_("May", "short month name"),
-		 qc_("Jun", "short month name"),
-		 qc_("Jul", "short month name"),
-		 qc_("Aug", "short month name"),
-		 qc_("Sep", "short month name"),
-		 qc_("Oct", "short month name"),
-		 qc_("Nov", "short month name")};
-	return mNames[month % 12];
+	Q_ASSERT(shortMonthNames.length()==12);
+	return shortMonthNames[month % 12];
 }
 
 QString StelLocaleMgr::longMonthName(int month)
 {
 	Q_ASSERT(month >= 0);
-	const QStringList mNames= {
-		 qc_("December",  "long month name"),
-		 qc_("January",   "long month name"),
-		 qc_("February",  "long month name"),
-		 qc_("March",     "long month name"),
-		 qc_("April",     "long month name"),
-		 qc_("May",       "long month name"),
-		 qc_("June",      "long month name"),
-		 qc_("July",      "long month name"),
-		 qc_("August",    "long month name"),
-		 qc_("September", "long month name"),
-		 qc_("October",   "long month name"),
-		 qc_("November",  "long month name")};
-	return mNames[month % 12];
+	Q_ASSERT(longMonthNames.length()==12);
+	return longMonthNames[month % 12];
 }
 
 QString StelLocaleMgr::longGenitiveMonthName(int month)
 {
 	Q_ASSERT(month >= 0);
-	const QStringList mNames= {
-		 qc_("December",  "genitive"),
-		 qc_("January",   "genitive"),
-		 qc_("February",  "genitive"),
-		 qc_("March",     "genitive"),
-		 qc_("April",     "genitive"),
-		 qc_("May",       "genitive"),
-		 qc_("June",      "genitive"),
-		 qc_("July",      "genitive"),
-		 qc_("August",    "genitive"),
-		 qc_("September", "genitive"),
-		 qc_("October",   "genitive"),
-		 qc_("November",  "genitive")};
-	return mNames[month % 12];
+	Q_ASSERT(longGenitiveMonthNames.length()==12);
+	return longGenitiveMonthNames[month % 12];
 }
 
 QString StelLocaleMgr::romanMonthName(int month)
@@ -514,3 +464,76 @@ QString StelLocaleMgr::romanMonthName(int month)
 	static const QStringList romanMonths = { "XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"};
 	return romanMonths[month % 12];
 }
+
+
+void StelLocaleMgr::createNameLists()
+{
+	shortWeekDays.clear();
+	shortWeekDays
+		<< qc_("Sun", "short day name")
+		<< qc_("Mon", "short day name")
+		<< qc_("Tue", "short day name")
+		<< qc_("Wed", "short day name")
+		<< qc_("Thu", "short day name")
+		<< qc_("Fri", "short day name")
+		<< qc_("Sat", "short day name");
+	longWeekDays.clear();
+	longWeekDays
+		<< qc_("Sunday",    "long day name")
+		<< qc_("Monday",    "long day name")
+		<< qc_("Tuesday",   "long day name")
+		<< qc_("Wednesday", "long day name")
+		<< qc_("Thursday",  "long day name")
+		<< qc_("Friday",    "long day name")
+		<< qc_("Saturday",  "long day name");
+
+	shortMonthNames.clear();
+	shortMonthNames
+		<< qc_("Dec", "short month name")
+		<< qc_("Jan", "short month name")
+		<< qc_("Feb", "short month name")
+		<< qc_("Mar", "short month name")
+		<< qc_("Apr", "short month name")
+		<< qc_("May", "short month name")
+		<< qc_("Jun", "short month name")
+		<< qc_("Jul", "short month name")
+		<< qc_("Aug", "short month name")
+		<< qc_("Sep", "short month name")
+		<< qc_("Oct", "short month name")
+		<< qc_("Nov", "short month name");
+
+	longMonthNames.clear();
+	longMonthNames
+		<< qc_("December",  "long month name")
+		<< qc_("January",   "long month name")
+		<< qc_("February",  "long month name")
+		<< qc_("March",     "long month name")
+		<< qc_("April",     "long month name")
+		<< qc_("May",       "long month name")
+		<< qc_("June",      "long month name")
+		<< qc_("July",      "long month name")
+		<< qc_("August",    "long month name")
+		<< qc_("September", "long month name")
+		<< qc_("October",   "long month name")
+		<< qc_("November",  "long month name");
+	longGenitiveMonthNames.clear();
+	longGenitiveMonthNames
+		<< qc_("December",  "genitive")
+		<< qc_("January",   "genitive")
+		<< qc_("February",  "genitive")
+		<< qc_("March",     "genitive")
+		<< qc_("April",     "genitive")
+		<< qc_("May",       "genitive")
+		<< qc_("June",      "genitive")
+		<< qc_("July",      "genitive")
+		<< qc_("August",    "genitive")
+		<< qc_("September", "genitive")
+		<< qc_("October",   "genitive")
+		<< qc_("November",  "genitive");
+}
+
+QStringList StelLocaleMgr::shortWeekDays;
+QStringList StelLocaleMgr::longWeekDays;
+QStringList StelLocaleMgr::shortMonthNames;
+QStringList StelLocaleMgr::longMonthNames;
+QStringList StelLocaleMgr::longGenitiveMonthNames;

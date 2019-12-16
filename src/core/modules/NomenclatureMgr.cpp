@@ -61,6 +61,7 @@ void NomenclatureMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 	// Load the nomenclature
+	NomenclatureItem::createNameLists();
 	loadNomenclature();
 
 	setColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
@@ -465,6 +466,7 @@ bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 // Update i18 names from english names according to current sky culture translator
 void NomenclatureMgr::updateI18n()
 {
+	NomenclatureItem::createNameLists();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
 	for (const auto& i : nomenclatureItems)
 		i->translateName(trans);

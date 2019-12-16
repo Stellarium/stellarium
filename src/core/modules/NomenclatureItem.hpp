@@ -151,11 +151,11 @@ public:
 	PlanetP getPlanet(void) const { return planet;}
 	float getLatitude(void) const {return latitude;}
 	float getLongitude(void) const {return longitude;}
-	static QString getNomenclatureTypeString(NomenclatureItemType nType);
-	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
 protected:
 	//! returns a type enum for a given 2-letter code
 	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
+	//! Should be triggered once at start and then whenever program language setting changes.
+	static void createNameLists();
 
 private:
 	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
@@ -165,6 +165,10 @@ private:
 	static bool hideLocalNomenclature;
 
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
+	static QString getNomenclatureTypeString(NomenclatureItemType nType);
+	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+	static QMap<NomenclatureItemType, QString>niTypeStringMap;
+	static QMap<NomenclatureItemType, QString>niTypeDescriptionMap;
 
 	PlanetP planet;
 	int identificator;
