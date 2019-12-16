@@ -7,14 +7,3 @@ docker run -it -v "$PWD/../..:/app/" vts-stellarium-centos7-builder ./plugins/Vt
 
 This should create a Stellarium.tgz in the top-level stellarium directory.
 It needs to be decompressed in the <path-to-vts>/Apps/Stellarium directory
-
-# How to compile on centos 7
-
-- Install basic devel tools:
-    sudo yum group install "DevelopmentTools"
-- Install Qt from the Qt online installer (not the os version).  Tested with Qt 5.9.7 and Qt 5.9.8.
-- set the PATH to point to the installed qt bin.
-- Run the script: ./plugins/Vts/create-package
-
-This should create a Stellarium.tgz in the top-level stellarium directory.
-It needs to be decompressed in the <path-to-vts>/Apps/Stellarium directory
