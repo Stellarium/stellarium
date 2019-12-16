@@ -1,3 +1,6 @@
+# This is a plugin allowing Stellarium to be used in VTS
+# See https://timeloop.fr/vts/
+
 # How to compile with docker on any OS
 cd plugins/Vts
 # Build the docker image
