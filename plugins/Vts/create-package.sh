@@ -30,7 +30,8 @@ cp $BUILD_DIR/src/stellarium $OUT/bin/
 
 for lib in libQt5*.so.5 \
 libicui18n.so.50 libicuuc.so.50 libicudata.so.50 libpcre2-16.so.0 \
-libpng15.so.15 libssl.so.10 libcrypto.so.10
+libpng15.so.15 libssl.so.10 libcrypto.so.10 \
+libxcb-icccm.so.4 libxcb-render-util.so.0 libxcb-image.so.0 libxcb-keysyms.so.1
 do
     cp /lib64/${lib} $OUT/bin/
 done
