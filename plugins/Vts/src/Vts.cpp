@@ -41,7 +41,7 @@ private:
 	int appid;
 
 	// Private methods.
-	void processMessage(const QByteArray& msg);
+	void processMessage(QByteArray msg);
 	void processPropCmd(const QString& prop, const QString& value);
 
 private slots:
@@ -79,8 +79,9 @@ void Vts::processPropCmd(const QString& prop, const QString& value)
 	StelApp::getInstance().getScriptMgr().runPreprocessedScript(script, "Vts");
 }
 
-void Vts::processMessage(const QByteArray& msg)
+void Vts::processMessage(QByteArray msg)
 {
+	msg = msg.trimmed();
 	QList<QByteArray> token = msg.split(' ');
 	StelCore* core;
 	QString cmd;
@@ -91,7 +92,7 @@ void Vts::processMessage(const QByteArray& msg)
 
 	if (cmd == "CMD")
 	{
-		if (msg == "CMD TIME PAUSE\n")
+		if (msg == "CMD TIME PAUSE")
 		{
 			core->setTimeRate(0);
 			return;
