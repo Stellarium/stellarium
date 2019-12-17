@@ -4,7 +4,7 @@ OUT=/tmp/Stellarium
 SCRIPT_DIR=$(dirname `realpath $0`)
 QT_DIR=/usr/lib64/qt5
 
-BUILD_DIR=./app/build/
+BUILD_DIR=/app/build/
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 cmake -DCMAKE_BUILD_TYPE=Release \
