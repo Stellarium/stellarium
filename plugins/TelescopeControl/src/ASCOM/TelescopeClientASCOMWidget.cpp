@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelLocaleMgr.hpp"
 #include "TelescopeClientASCOMWidget.hpp"
 #include "ui_TelescopeClientASCOMWidget.h"
 
@@ -26,11 +27,25 @@ TelescopeClientASCOMWidget::TelescopeClientASCOMWidget(QWidget* parent)
 	ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
 	QObject::connect(
 	  ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 }
 
 TelescopeClientASCOMWidget::~TelescopeClientASCOMWidget()
 {
 	delete ui;
+}
+
+void TelescopeClientASCOMWidget::retranslate()
+{
+	ui->groupBox->setTitle(q_("ASCOM Settings"));
+	ui->chooseButton->setText(q_("Choose ASCOM Telescope"));
+	ui->selectedDeviceLabel->setText(q_("Selected Device:"));
+	ui->selectedDevice->setText(q_("No device selected"));
+	ui->eqCoordTypeSourceLabel->setText(q_("Source for coordinate system:"));
+	ui->eqCoordTypeSourceASCOMRadio->setToolTip(q_("Let the ASCOM device tell Stellarium what coordinate system to use. Most mounts will handle this correctly, but some might not."));
+	ui->eqCoordTypeSourceASCOMRadio->setText(q_("Let ASCOM device decide"));
+	ui->eqCoordTypeSourceStellariumRadio->setToolTip(q_("Use the coordinate system that is configured in the general telescope properties for this telescope."));
+	ui->eqCoordTypeSourceStellariumRadio->setText(q_("Use Stellarium settings"));
 }
 
 void TelescopeClientASCOMWidget::onChooseButtonClicked()

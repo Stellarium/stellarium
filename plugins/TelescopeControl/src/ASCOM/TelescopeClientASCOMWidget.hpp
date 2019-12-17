@@ -41,6 +41,7 @@ public:
 
 private slots:
 	void onChooseButtonClicked();
+	void retranslate();
 
 private:
 	Ui::TelescopeClientASCOMWidget *ui;

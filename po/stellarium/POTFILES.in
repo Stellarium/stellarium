@@ -97,6 +97,8 @@ plugins/TelescopeControl/src/TelescopeControl.cpp
 plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h
 plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h
+plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOM.cpp
+plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp
 plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp
 plugins/TelescopeControl/src/gui/TelescopeDialog.cpp
 plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp
@@ -174,3 +176,4 @@ plugins/Scenery3d/src/ui_storedViewDialog.h
 plugins/ArchaeoLines/src/ArchaeoLines.cpp
 plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp
 plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h
+plugins/Vts/src/Vts.cpp

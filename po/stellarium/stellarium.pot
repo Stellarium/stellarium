@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-16 02:56+0700\n"
+"POT-Creation-Date: 2019-12-17 20:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,8 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:211
 #: src/core/modules/Constellation.cpp:284
-#: src/core/modules/NomenclatureItem.cpp:445 src/core/modules/Nebula.cpp:279
-#: src/core/modules/Nebula.cpp:281 src/core/modules/Planet.cpp:426
+#: src/core/modules/NomenclatureItem.cpp:203 src/core/modules/Nebula.cpp:246
+#: src/core/modules/Nebula.cpp:248 src/core/modules/Planet.cpp:426
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:206
 #: src/core/modules/StarWrapper.cpp:209 src/gui/AstroCalcDialog.cpp:817
@@ -53,11 +53,11 @@ msgstr ""
 #: src/core/modules/AsterismMgr.cpp:96
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:460
 #: src/core/modules/GridLinesMgr.cpp:1328 src/core/modules/LandscapeMgr.cpp:479
-#: src/core/modules/NomenclatureMgr.cpp:76 src/core/modules/NebulaMgr.cpp:458
-#: src/core/modules/NebulaMgr.cpp:459 src/core/modules/SolarSystem.cpp:265
+#: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:459
+#: src/core/modules/NebulaMgr.cpp:460 src/core/modules/SolarSystem.cpp:265
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:608 src/core/StelCore.cpp:257
+#: src/core/StelApp.cpp:612 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
 msgid "Display Options"
@@ -502,670 +502,51 @@ msgstr ""
 msgid "by Bortle scale"
 msgstr ""
 
-#. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:66
-msgctxt "landform"
-msgid "albedo feature"
-msgstr ""
-
-#. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:68
-msgctxt "landform"
-msgid "arcus"
-msgstr ""
-
-#. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:70
-msgctxt "landform"
-msgid "astrum"
-msgstr ""
-
-#. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:72
-msgctxt "landform"
-msgid "catena"
-msgstr ""
-
-#. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
-#: src/core/modules/NomenclatureItem.cpp:74
-msgctxt "landform"
-msgid "cavus"
-msgstr ""
-
-#. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:76
-msgctxt "landform"
-msgid "chaos"
-msgstr ""
-
-#. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:78
-msgctxt "landform"
-msgid "chasma"
-msgstr ""
-
-#. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:80
-msgctxt "landform"
-msgid "collis"
-msgstr ""
-
-#. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:82
-msgctxt "landform"
-msgid "corona"
-msgstr ""
-
-#. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:84
-msgctxt "landform"
-msgid "crater"
-msgstr ""
-
-#. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:86
-msgctxt "landform"
-msgid "dorsum"
-msgstr ""
-
-#. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:88
-msgctxt "landform"
-msgid "eruptive center"
-msgstr ""
-
-#. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:90
-msgctxt "landform"
-msgid "facula"
-msgstr ""
-
-#. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:92
-msgctxt "landform"
-msgid "farrum"
-msgstr ""
-
-#. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:94
-msgctxt "landform"
-msgid "flexus"
-msgstr ""
-
-#. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:96
-msgctxt "landform"
-msgid "fluctus"
-msgstr ""
-
-#. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:98
-msgctxt "landform"
-msgid "flumen"
-msgstr ""
-
-#. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
-#: src/core/modules/NomenclatureItem.cpp:100
-msgctxt "landform"
-msgid "fretum"
-msgstr ""
-
-#. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:102
-msgctxt "landform"
-msgid "fossa"
-msgstr ""
-
-#. TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:104
-msgctxt "landform"
-msgid "insula"
-msgstr ""
-
-#. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:106
-msgctxt "landform"
-msgid "labes"
-msgstr ""
-
-#. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:108
-msgctxt "landform"
-msgid "labyrinthus"
-msgstr ""
-
-#. TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:110
-msgctxt "landform"
-msgid "lacuna"
-msgstr ""
-
-#. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:112
-msgctxt "landform"
-msgid "lacus"
-msgstr ""
-
-#. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:114
-msgctxt "landform"
-msgid "large ringed feature"
-msgstr ""
-
-#. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:116
-msgctxt "landform"
-msgid "lenticula"
-msgstr ""
-
-#. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:118
-msgctxt "landform"
-msgid "linea"
-msgstr ""
-
-#. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
-#: src/core/modules/NomenclatureItem.cpp:120
-msgctxt "landform"
-msgid "lingula"
-msgstr ""
-
-#. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:122
-msgctxt "landform"
-msgid "macula"
-msgstr ""
-
-#. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:124
-msgctxt "landform"
-msgid "mare"
-msgstr ""
-
-#. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:126
-msgctxt "landform"
-msgid "mensa"
-msgstr ""
-
-#. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:128
-msgctxt "landform"
-msgid "mons"
-msgstr ""
-
-#. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:130
-msgctxt "landform"
-msgid "oceanus"
-msgstr ""
-
-#. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:132
-msgctxt "landform"
-msgid "palus"
-msgstr ""
-
-#. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:134
-msgctxt "landform"
-msgid "patera"
-msgstr ""
-
-#. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:136
-msgctxt "landform"
-msgid "planitia"
-msgstr ""
-
-#. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:138
-msgctxt "landform"
-msgid "planum"
-msgstr ""
-
-#. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:140
-msgctxt "landform"
-msgid "plume"
-msgstr ""
-
-#. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:142
-msgctxt "landform"
-msgid "promontorium"
-msgstr ""
-
-#. TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:144
-msgctxt "landform"
-msgid "regio"
-msgstr ""
-
-#. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:146
-msgctxt "landform"
-msgid "reticulum"
-msgstr ""
-
-#. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:148
-msgctxt "landform"
-msgid "rima"
-msgstr ""
-
-#. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:150
-msgctxt "landform"
-msgid "rupes"
-msgstr ""
-
-#. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:152
-msgctxt "landform"
-msgid "satellite feature"
-msgstr ""
-
-#. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:154
-msgctxt "landform"
-msgid "scopulus"
-msgstr ""
-
-#. TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
-#: src/core/modules/NomenclatureItem.cpp:156
-msgctxt "landform"
-msgid "serpens"
-msgstr ""
-
-#. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:158
-msgctxt "landform"
-msgid "sulcus"
-msgstr ""
-
-#. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:160
-msgctxt "landform"
-msgid "sinus"
-msgstr ""
-
-#. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:162
-msgctxt "landform"
-msgid "terra"
-msgstr ""
-
-#. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:164
-msgctxt "landform"
-msgid "tessera"
-msgstr ""
-
-#. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:166
-msgctxt "landform"
-msgid "tholus"
-msgstr ""
-
-#. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:168
-msgctxt "landform"
-msgid "unda"
-msgstr ""
-
-#. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:170
-msgctxt "landform"
-msgid "vallis"
-msgstr ""
-
-#. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:172
-msgctxt "landform"
-msgid "vastitas"
-msgstr ""
-
-#. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:174
-msgctxt "landform"
-msgid "virga"
-msgstr ""
-
-#. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:176
-msgctxt "landform"
-msgid "landing site name"
-msgstr ""
-
-#: src/core/modules/NomenclatureItem.cpp:177
+#: src/core/modules/NomenclatureItem.cpp:65
 msgctxt "landform"
 msgid "undocumented landform type"
 msgstr ""
 
-#. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:241
-msgid "Geographic area distinguished by amount of reflected light."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:243
-msgid "Arc-shaped feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:245
-msgid "Radial-patterned feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:247
-msgid "Chain of craters."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:249
-msgid ""
-"Hollows, irregular steep-sided depressions usually in arrays or clusters."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:251
-msgid "Distinctive area of broken terrain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:253
-msgid "A deep, elongated, steep-sided depression."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:255
-msgid "Small hills or knobs."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:257
-msgid "Ovoid-shaped feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:259
-msgid "A circular depression."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:261
-msgid "Ridge."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:263
-msgid "Active volcanic center."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:265
-msgid "Bright spot."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:267
-msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:269
-msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:271
-msgid "Flow terrain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:273
-msgid "Channel, that might carry liquid."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:275
-msgid ""
-"Strait, a narrow passage of liquid connecting two larger areas of liquid."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:277
-msgid "Long, narrow depression."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:279
-msgid ""
-"Island, an isolated land area surrounded by, or nearly surrounded by, a "
-"liquid area (sea or lake)."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:281
-msgid "Landslide."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:283
-msgid "Complex of intersecting valleys or ridges."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:285
-msgid "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:287
-msgid "Cryptic ringed feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:289
-msgid "Small dark spot."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:291
-msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:293
-msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:295
-msgid "Dark spot, may be irregular"
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:297
-msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:299
-msgid "Mountain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:301
-msgid "A very large dark area."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:303
-msgid "'Swamp'; small plain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:305
-msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:307
-msgid "Low plain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:309
-msgid "Plateau or high plain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:311
-msgid "Cryo-volcanic feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:313
-msgid "'Cape'; headland promontoria."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:315
-msgid ""
-"A large area marked by reflectivity or color distinctions from adjacent "
-"areas, or a broad geographic region."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:317
-msgid "Reticular (netlike) pattern."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:319
-msgid "Fissure."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:321
-msgid "Scarp."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:323
-msgid "A feature that shares the name of an associated feature."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:325
-msgid "Lobate or irregular scarp."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:327
-msgid ""
-"Sinuous feature with segments of positive and negative relief along its "
-"length."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:329
-msgid "Subparallel furrows and ridges."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:331
-msgid "Extensive land mass."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:333
-msgid "Tile-like, polygonal terrain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:335
-msgid "Small domical mountain or hill."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:337
-msgid "Dunes."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:339
-msgid "Valley."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:341
-msgid "Extensive plain."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:343
-msgid "A streak or stripe of color."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:352
-msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
-
-#. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:357
-msgid "'Lake' or small plain."
+#: src/core/modules/NomenclatureItem.cpp:128
+msgid "Undocumented landform type."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:364
+#: src/core/modules/NomenclatureItem.cpp:132
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr ""
 
+#. TRANSLATORS: Description for landform 'lacus' on Titan
+#: src/core/modules/NomenclatureItem.cpp:137
+msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
+msgstr ""
+
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:369
+#: src/core/modules/NomenclatureItem.cpp:140
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
 
-#. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:372
-msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
-msgstr ""
-
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:378
+#: src/core/modules/NomenclatureItem.cpp:143
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr ""
 
-#. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:383
-msgid "'Bay'; small plain."
-msgstr ""
-
-#: src/core/modules/NomenclatureItem.cpp:386
-msgid "Undocumented landform type."
-msgstr ""
-
-#: src/core/modules/NomenclatureItem.cpp:447
+#: src/core/modules/NomenclatureItem.cpp:205
 msgid "geologic term"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:457
+#: src/core/modules/NomenclatureItem.cpp:215
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:460 src/core/modules/Planet.cpp:582
+#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:582
 #: src/core/modules/MinorPlanet.cpp:326
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:461 src/core/modules/Planet.cpp:469
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:469
 #: src/core/modules/Planet.cpp:494 src/core/modules/Planet.cpp:585
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/MinorPlanet.cpp:326 src/core/modules/Comet.cpp:187
@@ -1177,93 +558,712 @@ msgctxt "distance"
 msgid "km"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:466
+#: src/core/modules/NomenclatureItem.cpp:224
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:467
+#: src/core/modules/NomenclatureItem.cpp:225
 msgid "Celestial body"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:470
+#: src/core/modules/NomenclatureItem.cpp:228
 msgid "Landform description"
 msgstr ""
 
-#: src/core/modules/NomenclatureMgr.cpp:77
+#. TRANSLATORS: Geographic area distinguished by amount of reflected light
+#: src/core/modules/NomenclatureItem.cpp:384
+msgctxt "landform"
+msgid "albedo feature"
+msgstr ""
+
+#. TRANSLATORS: Arc-shaped feature
+#: src/core/modules/NomenclatureItem.cpp:386
+msgctxt "landform"
+msgid "arcus"
+msgstr ""
+
+#. TRANSLATORS: Radial-patterned features on Venus
+#: src/core/modules/NomenclatureItem.cpp:388
+msgctxt "landform"
+msgid "astrum"
+msgstr ""
+
+#. TRANSLATORS: Chain of craters
+#: src/core/modules/NomenclatureItem.cpp:390
+msgctxt "landform"
+msgid "catena"
+msgstr ""
+
+#. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
+#: src/core/modules/NomenclatureItem.cpp:392
+msgctxt "landform"
+msgid "cavus"
+msgstr ""
+
+#. TRANSLATORS: Distinctive area of broken terrain
+#: src/core/modules/NomenclatureItem.cpp:394
+msgctxt "landform"
+msgid "chaos"
+msgstr ""
+
+#. TRANSLATORS: A deep, elongated, steep-sided depression
+#: src/core/modules/NomenclatureItem.cpp:396
+msgctxt "landform"
+msgid "chasma"
+msgstr ""
+
+#. TRANSLATORS: Small hills or knobs
+#: src/core/modules/NomenclatureItem.cpp:398
+msgctxt "landform"
+msgid "collis"
+msgstr ""
+
+#. TRANSLATORS: Ovoid-shaped feature
+#: src/core/modules/NomenclatureItem.cpp:400
+msgctxt "landform"
+msgid "corona"
+msgstr ""
+
+#. TRANSLATORS: A circular depression
+#: src/core/modules/NomenclatureItem.cpp:402
+msgctxt "landform"
+msgid "crater"
+msgstr ""
+
+#. TRANSLATORS: Ridge
+#: src/core/modules/NomenclatureItem.cpp:404
+msgctxt "landform"
+msgid "dorsum"
+msgstr ""
+
+#. TRANSLATORS: Active volcanic centers on Io
+#: src/core/modules/NomenclatureItem.cpp:406
+msgctxt "landform"
+msgid "eruptive center"
+msgstr ""
+
+#. TRANSLATORS: Bright spot
+#: src/core/modules/NomenclatureItem.cpp:408
+msgctxt "landform"
+msgid "facula"
+msgstr ""
+
+#. TRANSLATORS: Pancake-like structure, or a row of such structures
+#: src/core/modules/NomenclatureItem.cpp:410
+msgctxt "landform"
+msgid "farrum"
+msgstr ""
+
+#. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
+#: src/core/modules/NomenclatureItem.cpp:412
+msgctxt "landform"
+msgid "flexus"
+msgstr ""
+
+#. TRANSLATORS: Flow terrain
+#: src/core/modules/NomenclatureItem.cpp:414
+msgctxt "landform"
+msgid "fluctus"
+msgstr ""
+
+#. TRANSLATORS: Channel on Titan that might carry liquid
+#: src/core/modules/NomenclatureItem.cpp:416
+msgctxt "landform"
+msgid "flumen"
+msgstr ""
+
+#. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
+#: src/core/modules/NomenclatureItem.cpp:418
+msgctxt "landform"
+msgid "fretum"
+msgstr ""
+
+#. TRANSLATORS: Long, narrow depression
+#: src/core/modules/NomenclatureItem.cpp:420
+msgctxt "landform"
+msgid "fossa"
+msgstr ""
+
+#. TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
+#: src/core/modules/NomenclatureItem.cpp:422
+msgctxt "landform"
+msgid "insula"
+msgstr ""
+
+#. TRANSLATORS: Landslide
+#: src/core/modules/NomenclatureItem.cpp:424
+msgctxt "landform"
+msgid "labes"
+msgstr ""
+
+#. TRANSLATORS: Complex of intersecting valleys or ridges
+#: src/core/modules/NomenclatureItem.cpp:426
+msgctxt "landform"
+msgid "labyrinthus"
+msgstr ""
+
+#. TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
+#: src/core/modules/NomenclatureItem.cpp:428
+msgctxt "landform"
+msgid "lacuna"
+msgstr ""
+
+#. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
+#: src/core/modules/NomenclatureItem.cpp:430
+msgctxt "landform"
+msgid "lacus"
+msgstr ""
+
+#. TRANSLATORS: Cryptic ringed feature
+#: src/core/modules/NomenclatureItem.cpp:432
+msgctxt "landform"
+msgid "large ringed feature"
+msgstr ""
+
+#. TRANSLATORS: Small dark spots on Europa
+#: src/core/modules/NomenclatureItem.cpp:434
+msgctxt "landform"
+msgid "lenticula"
+msgstr ""
+
+#. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
+#: src/core/modules/NomenclatureItem.cpp:436
+msgctxt "landform"
+msgid "linea"
+msgstr ""
+
+#. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
+#: src/core/modules/NomenclatureItem.cpp:438
+msgctxt "landform"
+msgid "lingula"
+msgstr ""
+
+#. TRANSLATORS: Dark spot, may be irregular
+#: src/core/modules/NomenclatureItem.cpp:440
+msgctxt "landform"
+msgid "macula"
+msgstr ""
+
+#. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
+#: src/core/modules/NomenclatureItem.cpp:442
+msgctxt "landform"
+msgid "mare"
+msgstr ""
+
+#. TRANSLATORS: A flat-topped prominence with cliff-like edges
+#: src/core/modules/NomenclatureItem.cpp:444
+msgctxt "landform"
+msgid "mensa"
+msgstr ""
+
+#. TRANSLATORS: Mountain
+#: src/core/modules/NomenclatureItem.cpp:446
+msgctxt "landform"
+msgid "mons"
+msgstr ""
+
+#. TRANSLATORS: A very large dark area on the Moon
+#: src/core/modules/NomenclatureItem.cpp:448
+msgctxt "landform"
+msgid "oceanus"
+msgstr ""
+
+#. TRANSLATORS: "Swamp"; small plain
+#: src/core/modules/NomenclatureItem.cpp:450
+msgctxt "landform"
+msgid "palus"
+msgstr ""
+
+#. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
+#: src/core/modules/NomenclatureItem.cpp:452
+msgctxt "landform"
+msgid "patera"
+msgstr ""
+
+#. TRANSLATORS: Low plain
+#: src/core/modules/NomenclatureItem.cpp:454
+msgctxt "landform"
+msgid "planitia"
+msgstr ""
+
+#. TRANSLATORS: Plateau or high plain
+#: src/core/modules/NomenclatureItem.cpp:456
+msgctxt "landform"
+msgid "planum"
+msgstr ""
+
+#. TRANSLATORS: Cryo-volcanic features on Triton
+#: src/core/modules/NomenclatureItem.cpp:458
+msgctxt "landform"
+msgid "plume"
+msgstr ""
+
+#. TRANSLATORS: "Cape"; headland promontoria
+#: src/core/modules/NomenclatureItem.cpp:460
+msgctxt "landform"
+msgid "promontorium"
+msgstr ""
+
+#. TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
+#: src/core/modules/NomenclatureItem.cpp:462
+msgctxt "landform"
+msgid "regio"
+msgstr ""
+
+#. TRANSLATORS: Reticular (netlike) pattern on Venus
+#: src/core/modules/NomenclatureItem.cpp:464
+msgctxt "landform"
+msgid "reticulum"
+msgstr ""
+
+#. TRANSLATORS: Fissure
+#: src/core/modules/NomenclatureItem.cpp:466
+msgctxt "landform"
+msgid "rima"
+msgstr ""
+
+#. TRANSLATORS: Scarp
+#: src/core/modules/NomenclatureItem.cpp:468
+msgctxt "landform"
+msgid "rupes"
+msgstr ""
+
+#. TRANSLATORS: A feature that shares the name of an associated feature.
+#: src/core/modules/NomenclatureItem.cpp:470
+msgctxt "landform"
+msgid "satellite feature"
+msgstr ""
+
+#. TRANSLATORS: Lobate or irregular scarp
+#: src/core/modules/NomenclatureItem.cpp:472
+msgctxt "landform"
+msgid "scopulus"
+msgstr ""
+
+#. TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
+#: src/core/modules/NomenclatureItem.cpp:474
+msgctxt "landform"
+msgid "serpens"
+msgstr ""
+
+#. TRANSLATORS: Subparallel furrows and ridges
+#: src/core/modules/NomenclatureItem.cpp:476
+msgctxt "landform"
+msgid "sulcus"
+msgstr ""
+
+#. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
+#: src/core/modules/NomenclatureItem.cpp:478
+msgctxt "landform"
+msgid "sinus"
+msgstr ""
+
+#. TRANSLATORS: Extensive land mass
+#: src/core/modules/NomenclatureItem.cpp:480
+msgctxt "landform"
+msgid "terra"
+msgstr ""
+
+#. TRANSLATORS: Tile-like, polygonal terrain
+#: src/core/modules/NomenclatureItem.cpp:482
+msgctxt "landform"
+msgid "tessera"
+msgstr ""
+
+#. TRANSLATORS: Small domical mountain or hill
+#: src/core/modules/NomenclatureItem.cpp:484
+msgctxt "landform"
+msgid "tholus"
+msgstr ""
+
+#. TRANSLATORS: Dunes
+#: src/core/modules/NomenclatureItem.cpp:486
+msgctxt "landform"
+msgid "unda"
+msgstr ""
+
+#. TRANSLATORS: Valley
+#: src/core/modules/NomenclatureItem.cpp:488
+msgctxt "landform"
+msgid "vallis"
+msgstr ""
+
+#. TRANSLATORS: Extensive plain
+#: src/core/modules/NomenclatureItem.cpp:490
+msgctxt "landform"
+msgid "vastitas"
+msgstr ""
+
+#. TRANSLATORS: A streak or stripe of color
+#: src/core/modules/NomenclatureItem.cpp:492
+msgctxt "landform"
+msgid "virga"
+msgstr ""
+
+#. TRANSLATORS: Lunar features at or near Apollo landing sites
+#: src/core/modules/NomenclatureItem.cpp:494
+msgctxt "landform"
+msgid "landing site name"
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'albedo feature'
+#: src/core/modules/NomenclatureItem.cpp:498
+msgid "Geographic area distinguished by amount of reflected light."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'arcus'
+#: src/core/modules/NomenclatureItem.cpp:500
+msgid "Arc-shaped feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'astrum'
+#: src/core/modules/NomenclatureItem.cpp:502
+msgid "Radial-patterned feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'catena'
+#: src/core/modules/NomenclatureItem.cpp:504
+msgid "Chain of craters."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'cavus'
+#: src/core/modules/NomenclatureItem.cpp:506
+msgid ""
+"Hollows, irregular steep-sided depressions usually in arrays or clusters."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'chaos'
+#: src/core/modules/NomenclatureItem.cpp:508
+msgid "Distinctive area of broken terrain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'chasma'
+#: src/core/modules/NomenclatureItem.cpp:510
+msgid "A deep, elongated, steep-sided depression."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'collis'
+#: src/core/modules/NomenclatureItem.cpp:512
+msgid "Small hills or knobs."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'corona'
+#: src/core/modules/NomenclatureItem.cpp:514
+msgid "Ovoid-shaped feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'crater'
+#: src/core/modules/NomenclatureItem.cpp:516
+msgid "A circular depression."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'dorsum'
+#: src/core/modules/NomenclatureItem.cpp:518
+msgid "Ridge."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'eruptive center'
+#: src/core/modules/NomenclatureItem.cpp:520
+msgid "Active volcanic center."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'facula'
+#: src/core/modules/NomenclatureItem.cpp:522
+msgid "Bright spot."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'farrum'
+#: src/core/modules/NomenclatureItem.cpp:524
+msgid "Pancake-like structure, or a row of such structures."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'flexus'
+#: src/core/modules/NomenclatureItem.cpp:526
+msgid "A very low curvilinear ridge with a scalloped pattern."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'fluctus'
+#: src/core/modules/NomenclatureItem.cpp:528
+msgid "Flow terrain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'flumen'
+#: src/core/modules/NomenclatureItem.cpp:530
+msgid "Channel, that might carry liquid."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'fretum'
+#: src/core/modules/NomenclatureItem.cpp:532
+msgid ""
+"Strait, a narrow passage of liquid connecting two larger areas of liquid."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'fossa'
+#: src/core/modules/NomenclatureItem.cpp:534
+msgid "Long, narrow depression."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'insula'
+#: src/core/modules/NomenclatureItem.cpp:536
+msgid ""
+"Island, an isolated land area surrounded by, or nearly surrounded by, a "
+"liquid area (sea or lake)."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'labes'
+#: src/core/modules/NomenclatureItem.cpp:538
+msgid "Landslide."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'labyrinthus'
+#: src/core/modules/NomenclatureItem.cpp:540
+msgid "Complex of intersecting valleys or ridges."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'lacuna'
+#: src/core/modules/NomenclatureItem.cpp:542
+msgid "Irregularly shaped depression, having the appearance of a dry lake bed."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'lacus'
+#: src/core/modules/NomenclatureItem.cpp:544
+msgid "'Lake' or small plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'large ringed feature'
+#: src/core/modules/NomenclatureItem.cpp:546
+msgid "Cryptic ringed feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'lenticula'
+#: src/core/modules/NomenclatureItem.cpp:548
+msgid "Small dark spot."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'linea'
+#: src/core/modules/NomenclatureItem.cpp:550
+msgid "A dark or bright elongate marking, may be curved or straight."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'lingula'
+#: src/core/modules/NomenclatureItem.cpp:552
+msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'macula'
+#: src/core/modules/NomenclatureItem.cpp:554
+msgid "Dark spot, may be irregular"
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'mare' on the Moon
+#: src/core/modules/NomenclatureItem.cpp:556
+msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'mensa'
+#: src/core/modules/NomenclatureItem.cpp:558
+msgid "A flat-topped prominence with cliff-like edges."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'mons'
+#: src/core/modules/NomenclatureItem.cpp:560
+msgid "Mountain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'oceanus'
+#: src/core/modules/NomenclatureItem.cpp:562
+msgid "A very large dark area."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'palus'
+#: src/core/modules/NomenclatureItem.cpp:564
+msgid "'Swamp'; small plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'patera'
+#: src/core/modules/NomenclatureItem.cpp:566
+msgid "An irregular crater, or a complex one with scalloped edges."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'planitia'
+#: src/core/modules/NomenclatureItem.cpp:568
+msgid "Low plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'planum'
+#: src/core/modules/NomenclatureItem.cpp:570
+msgid "Plateau or high plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'plume'
+#: src/core/modules/NomenclatureItem.cpp:572
+msgid "Cryo-volcanic feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'promontorium'
+#: src/core/modules/NomenclatureItem.cpp:574
+msgid "'Cape'; headland promontoria."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'regio'
+#: src/core/modules/NomenclatureItem.cpp:576
+msgid ""
+"A large area marked by reflectivity or color distinctions from adjacent "
+"areas, or a broad geographic region."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'reticulum'
+#: src/core/modules/NomenclatureItem.cpp:578
+msgid "Reticular (netlike) pattern."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'rima'
+#: src/core/modules/NomenclatureItem.cpp:580
+msgid "Fissure."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'rupes'
+#: src/core/modules/NomenclatureItem.cpp:582
+msgid "Scarp."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'satellite feature'
+#: src/core/modules/NomenclatureItem.cpp:584
+msgid "A feature that shares the name of an associated feature."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'scopulus'
+#: src/core/modules/NomenclatureItem.cpp:586
+msgid "Lobate or irregular scarp."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'serpens'
+#: src/core/modules/NomenclatureItem.cpp:588
+msgid ""
+"Sinuous feature with segments of positive and negative relief along its "
+"length."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'sinus'
+#: src/core/modules/NomenclatureItem.cpp:590
+msgid "'Bay'; small plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'sulcus'
+#: src/core/modules/NomenclatureItem.cpp:592
+msgid "Subparallel furrows and ridges."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'terra'
+#: src/core/modules/NomenclatureItem.cpp:594
+msgid "Extensive land mass."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'tessera'
+#: src/core/modules/NomenclatureItem.cpp:596
+msgid "Tile-like, polygonal terrain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'tholus'
+#: src/core/modules/NomenclatureItem.cpp:598
+msgid "Small domical mountain or hill."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'unda'
+#: src/core/modules/NomenclatureItem.cpp:600
+msgid "Dunes."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'vallis'
+#: src/core/modules/NomenclatureItem.cpp:602
+msgid "Valley."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'vastitas'
+#: src/core/modules/NomenclatureItem.cpp:604
+msgid "Extensive plain."
+msgstr ""
+
+#. TRANSLATORS: Description for landform 'virga'
+#: src/core/modules/NomenclatureItem.cpp:606
+msgid "A streak or stripe of color."
+msgstr ""
+
+#: src/core/modules/NomenclatureMgr.cpp:78
 msgid "Nomenclature labels"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:170 src/core/modules/Nebula.cpp:184
+#: src/core/modules/Nebula.cpp:137 src/core/modules/Nebula.cpp:151
 #: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2987
 #: src/gui/AstroCalcDialog.cpp:3045 plugins/Supernovae/src/Supernova.cpp:126
 msgid "Magnitude"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:172
+#: src/core/modules/Nebula.cpp:139
 msgid "Opacity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:146 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:146 src/core/StelObject.cpp:251
 msgid "by"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:146 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:184 src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/Nebula.cpp:151 src/core/modules/StarWrapper.cpp:237
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:290 src/core/modules/MinorPlanet.cpp:224
+#: src/core/modules/Nebula.cpp:257 src/core/modules/MinorPlanet.cpp:224
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:219
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:295
+#: src/core/modules/Nebula.cpp:262
 msgid "Surface brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:296
+#: src/core/modules/Nebula.cpp:263
 msgid "after extinction"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:306 src/core/modules/Nebula.cpp:308
+#: src/core/modules/Nebula.cpp:273 src/core/modules/Nebula.cpp:275
 #: src/gui/AstroCalcDialog.cpp:955 src/gui/AstroCalcDialog.cpp:957
 msgctxt "magnitude"
 msgid "mag"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:306 src/gui/AstroCalcDialog.cpp:955
+#: src/core/modules/Nebula.cpp:273 src/gui/AstroCalcDialog.cpp:955
 #: src/gui/AstroCalcDialog.cpp:961 src/gui/AstroCalcDialog.cpp:1012
 msgid "arcmin"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:308 src/gui/AstroCalcDialog.cpp:957
+#: src/core/modules/Nebula.cpp:275 src/gui/AstroCalcDialog.cpp:957
 msgid "arcsec"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:321
+#: src/core/modules/Nebula.cpp:288
 msgid "Contrast index"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:329 src/ui_configurationDialog.h:1613
+#: src/core/modules/Nebula.cpp:296 src/ui_configurationDialog.h:1613
 msgid "Size"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:347
+#: src/core/modules/Nebula.cpp:314
 msgid "Orientation angle"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:372 src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:339 src/core/modules/Nebula.cpp:352
 #: src/core/modules/StarWrapper.cpp:247
 #: plugins/Supernovae/src/Supernova.cpp:161 plugins/Novae/src/Nova.cpp:166
 #: plugins/Pulsars/src/Pulsar.cpp:255 plugins/Exoplanets/src/Exoplanet.cpp:301
@@ -1271,7 +1271,7 @@ msgctxt "distance"
 msgid "ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:373 src/core/modules/Nebula.cpp:419
+#: src/core/modules/Nebula.cpp:340 src/core/modules/Nebula.cpp:386
 #: src/core/modules/Planet.cpp:504 src/core/modules/MinorPlanet.cpp:267
 #: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:252
 #: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:2998
@@ -1282,471 +1282,471 @@ msgid "Distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:383 plugins/Pulsars/src/Pulsar.cpp:252
+#: src/core/modules/Nebula.cpp:350 plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:363
 msgctxt "distance"
 msgid "Mpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:405
+#: src/core/modules/Nebula.cpp:372
 msgctxt "distance"
 msgid "M ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:433 plugins/Quasars/src/Quasar.cpp:155
+#: src/core/modules/Nebula.cpp:400 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:443 src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/Nebula.cpp:410 src/core/modules/StarWrapper.cpp:264
 msgid "Parallax"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:443 src/core/modules/StarWrapper.cpp:269
+#: src/core/modules/Nebula.cpp:410 src/core/modules/StarWrapper.cpp:269
 #: plugins/Pulsars/src/Pulsar.cpp:243
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:446
+#: src/core/modules/Nebula.cpp:413
 msgid "Morphological description"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1060
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1063
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1066
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1069
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1074
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1077
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1080
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1083
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1086
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1089
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1092
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1179
+#: src/core/modules/Nebula.cpp:1112
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1182
+#: src/core/modules/Nebula.cpp:1115
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1185
+#: src/core/modules/Nebula.cpp:1118
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1188
+#: src/core/modules/Nebula.cpp:1121
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1191
+#: src/core/modules/Nebula.cpp:1124
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1197
+#: src/core/modules/Nebula.cpp:1130
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1200
+#: src/core/modules/Nebula.cpp:1133
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1203
+#: src/core/modules/Nebula.cpp:1136
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1206
+#: src/core/modules/Nebula.cpp:1139
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1212
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1215
+#: src/core/modules/Nebula.cpp:1148
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1218
+#: src/core/modules/Nebula.cpp:1151
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1221
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1225
+#: src/core/modules/Nebula.cpp:1158
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1246
+#: src/core/modules/Nebula.cpp:1179
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1249
+#: src/core/modules/Nebula.cpp:1182
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1252
+#: src/core/modules/Nebula.cpp:1185
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1255
+#: src/core/modules/Nebula.cpp:1188
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1258
+#: src/core/modules/Nebula.cpp:1191
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1261
+#: src/core/modules/Nebula.cpp:1194
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1264
+#: src/core/modules/Nebula.cpp:1197
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1270
+#: src/core/modules/Nebula.cpp:1203
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1273
+#: src/core/modules/Nebula.cpp:1206
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1276
+#: src/core/modules/Nebula.cpp:1209
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1281
+#: src/core/modules/Nebula.cpp:1214
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1287
+#: src/core/modules/Nebula.cpp:1220
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1291
+#: src/core/modules/Nebula.cpp:1224
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1311
+#: src/core/modules/Nebula.cpp:1244
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1312
+#: src/core/modules/Nebula.cpp:1245
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1246
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1248
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1249
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1317
+#: src/core/modules/Nebula.cpp:1250
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1252
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1320
+#: src/core/modules/Nebula.cpp:1253
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1321
+#: src/core/modules/Nebula.cpp:1254
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1324
+#: src/core/modules/Nebula.cpp:1257
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1325
+#: src/core/modules/Nebula.cpp:1258
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1326
+#: src/core/modules/Nebula.cpp:1259
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1338
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1341
+#: src/core/modules/Nebula.cpp:1274
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1344
+#: src/core/modules/Nebula.cpp:1277
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1347
+#: src/core/modules/Nebula.cpp:1280
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1283
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1353
+#: src/core/modules/Nebula.cpp:1286
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1294
+msgid "undocumented type"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1300
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1301
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1364
+#: src/core/modules/Nebula.cpp:1302
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1303
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1366 plugins/Quasars/src/Quasar.cpp:128
+#: src/core/modules/Nebula.cpp:1304 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1305
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1306
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1307
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1370
-msgid "nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1371
-msgid "planetary nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1372
-msgid "dark nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1373
-msgid "cluster associated with nebulosity"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1374
-msgid "bipolar nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1375
-msgid "emission nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1376
-msgid "HII region"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1377
-msgid "reflection nebula"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1378
-msgid "supernova remnant"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1379
-msgid "supernova candidate"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1380
-msgid "supernova remnant candidate"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1381
+#: src/core/modules/Nebula.cpp:1308
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1382
+#: src/core/modules/Nebula.cpp:1309
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1310
+msgid "nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1311
+msgid "planetary nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1312
+msgid "dark nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1313
+msgid "reflection nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1314
+msgid "bipolar nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1315
+msgid "emission nebula"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1316
+msgid "cluster associated with nebulosity"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1317
+msgid "HII region"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1318
+msgid "supernova remnant"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1319
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1384
+#: src/core/modules/Nebula.cpp:1320
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1385
+#: src/core/modules/Nebula.cpp:1321
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1322
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1387
+#: src/core/modules/Nebula.cpp:1323
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1388
+#: src/core/modules/Nebula.cpp:1324
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1325
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1390
+#: src/core/modules/Nebula.cpp:1326
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1391
+#: src/core/modules/Nebula.cpp:1327
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1392 src/core/modules/StarWrapper.cpp:54
+#: src/core/modules/Nebula.cpp:1328 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:199 src/gui/AstroCalcDialog.cpp:1084
 #: src/translations.h:54
 msgid "star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1393
+#: src/core/modules/Nebula.cpp:1329
 msgid "symbiotic star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1394
+#: src/core/modules/Nebula.cpp:1330
 msgid "emission-line star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1395
+#: src/core/modules/Nebula.cpp:1331
+msgid "supernova candidate"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1332
+msgid "supernova remnant candidate"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1333
 msgid "cluster of galaxies"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1396
+#: src/core/modules/Nebula.cpp:1334
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1397
-msgid "undocumented type"
-msgstr ""
-
-#: src/core/modules/NebulaMgr.cpp:458
+#: src/core/modules/NebulaMgr.cpp:459
 msgid "Deep-sky objects"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:459
+#: src/core/modules/NebulaMgr.cpp:460
 msgid "Toggle DSO type filter"
 msgstr ""
 
@@ -2104,139 +2104,139 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:418
+#: src/core/StelApp.cpp:422
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:422
+#: src/core/StelApp.cpp:426
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:427
+#: src/core/StelApp.cpp:431
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:441
+#: src/core/StelApp.cpp:445
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:457
+#: src/core/StelApp.cpp:461
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:462
+#: src/core/StelApp.cpp:466
 msgid "Initializing locales..."
 msgstr ""
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:472
+#: src/core/StelApp.cpp:476
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:478
+#: src/core/StelApp.cpp:482
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:484
+#: src/core/StelApp.cpp:488
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:489
+#: src/core/StelApp.cpp:493
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:493
+#: src/core/StelApp.cpp:497
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:499
+#: src/core/StelApp.cpp:503
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:505
+#: src/core/StelApp.cpp:509
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:511
+#: src/core/StelApp.cpp:515
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:517
+#: src/core/StelApp.cpp:521
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:523
+#: src/core/StelApp.cpp:527
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:550
+#: src/core/StelApp.cpp:554
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:556
+#: src/core/StelApp.cpp:560
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:566
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:567
+#: src/core/StelApp.cpp:571
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:571
+#: src/core/StelApp.cpp:575
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:577
+#: src/core/StelApp.cpp:581
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:587
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:591
+#: src/core/StelApp.cpp:595
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:596
+#: src/core/StelApp.cpp:600
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:608
+#: src/core/StelApp.cpp:612
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:633
+#: src/core/StelApp.cpp:637
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:643
+#: src/core/StelApp.cpp:647
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:669
+#: src/core/StelApp.cpp:673
 msgid "Loading plugin"
 msgstr ""
 
@@ -3217,263 +3217,263 @@ msgid "Found"
 msgstr ""
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:307
+#: src/core/StelLocaleMgr.cpp:306
 msgctxt "solar time"
 msgid "LMST"
 msgstr ""
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:313
+#: src/core/StelLocaleMgr.cpp:312
 msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:430
+#: src/core/StelLocaleMgr.cpp:473
 msgctxt "short day name"
 msgid "Sun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:431
+#: src/core/StelLocaleMgr.cpp:474
 msgctxt "short day name"
 msgid "Mon"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:432
+#: src/core/StelLocaleMgr.cpp:475
 msgctxt "short day name"
 msgid "Tue"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:433
+#: src/core/StelLocaleMgr.cpp:476
 msgctxt "short day name"
 msgid "Wed"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:434
+#: src/core/StelLocaleMgr.cpp:477
 msgctxt "short day name"
 msgid "Thu"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:435
+#: src/core/StelLocaleMgr.cpp:478
 msgctxt "short day name"
 msgid "Fri"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:436
+#: src/core/StelLocaleMgr.cpp:479
 msgctxt "short day name"
 msgid "Sat"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:444
+#: src/core/StelLocaleMgr.cpp:482
 msgctxt "long day name"
 msgid "Sunday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:445
+#: src/core/StelLocaleMgr.cpp:483
 msgctxt "long day name"
 msgid "Monday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:446
+#: src/core/StelLocaleMgr.cpp:484
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:447
+#: src/core/StelLocaleMgr.cpp:485
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:448
+#: src/core/StelLocaleMgr.cpp:486
 msgctxt "long day name"
 msgid "Thursday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:449
+#: src/core/StelLocaleMgr.cpp:487
 msgctxt "long day name"
 msgid "Friday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:450
+#: src/core/StelLocaleMgr.cpp:488
 msgctxt "long day name"
 msgid "Saturday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:458
+#: src/core/StelLocaleMgr.cpp:492
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:459
+#: src/core/StelLocaleMgr.cpp:493
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:460
+#: src/core/StelLocaleMgr.cpp:494
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:461
+#: src/core/StelLocaleMgr.cpp:495
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:462
+#: src/core/StelLocaleMgr.cpp:496
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:463
+#: src/core/StelLocaleMgr.cpp:497
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:464
+#: src/core/StelLocaleMgr.cpp:498
 msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:465
+#: src/core/StelLocaleMgr.cpp:499
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:466
+#: src/core/StelLocaleMgr.cpp:500
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:467
+#: src/core/StelLocaleMgr.cpp:501
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:468
+#: src/core/StelLocaleMgr.cpp:502
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:469
+#: src/core/StelLocaleMgr.cpp:503
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:477
+#: src/core/StelLocaleMgr.cpp:507
 msgctxt "long month name"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:478
+#: src/core/StelLocaleMgr.cpp:508
 msgctxt "long month name"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:479
+#: src/core/StelLocaleMgr.cpp:509
 msgctxt "long month name"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:480
+#: src/core/StelLocaleMgr.cpp:510
 msgctxt "long month name"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:481
+#: src/core/StelLocaleMgr.cpp:511
 msgctxt "long month name"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:482
+#: src/core/StelLocaleMgr.cpp:512
 msgctxt "long month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:483
+#: src/core/StelLocaleMgr.cpp:513
 msgctxt "long month name"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:484
+#: src/core/StelLocaleMgr.cpp:514
 msgctxt "long month name"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:485
+#: src/core/StelLocaleMgr.cpp:515
 msgctxt "long month name"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:486
+#: src/core/StelLocaleMgr.cpp:516
 msgctxt "long month name"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:487
+#: src/core/StelLocaleMgr.cpp:517
 msgctxt "long month name"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:488
+#: src/core/StelLocaleMgr.cpp:518
 msgctxt "long month name"
 msgid "November"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:496
+#: src/core/StelLocaleMgr.cpp:521
 msgctxt "genitive"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:497
+#: src/core/StelLocaleMgr.cpp:522
 msgctxt "genitive"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:498
+#: src/core/StelLocaleMgr.cpp:523
 msgctxt "genitive"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:499
+#: src/core/StelLocaleMgr.cpp:524
 msgctxt "genitive"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:500
+#: src/core/StelLocaleMgr.cpp:525
 msgctxt "genitive"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:501
+#: src/core/StelLocaleMgr.cpp:526
 msgctxt "genitive"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:502
+#: src/core/StelLocaleMgr.cpp:527
 msgctxt "genitive"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:503
+#: src/core/StelLocaleMgr.cpp:528
 msgctxt "genitive"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:504
+#: src/core/StelLocaleMgr.cpp:529
 msgctxt "genitive"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:505
+#: src/core/StelLocaleMgr.cpp:530
 msgctxt "genitive"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:506
+#: src/core/StelLocaleMgr.cpp:531
 msgctxt "genitive"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:507
+#: src/core/StelLocaleMgr.cpp:532
 msgctxt "genitive"
 msgid "November"
 msgstr ""
@@ -13825,6 +13825,52 @@ msgstr ""
 msgid "Min"
 msgstr ""
 
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOM.cpp:161
+msgid ""
+"Can't slew a telescope which is parked. Unpark before performing any goto "
+"command."
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:40
+msgid "ASCOM Settings"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
+msgid "Choose ASCOM Telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
+msgid "Selected Device:"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:43
+msgid "No device selected"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
+msgid "Source for coordinate system:"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
+msgid ""
+"Let the ASCOM device tell Stellarium what coordinate system to use. Most "
+"mounts will handle this correctly, but some might not."
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:46
+msgid "Let ASCOM device decide"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:47
+msgid ""
+"Use the coordinate system that is configured in the general telescope "
+"properties for this telescope."
+msgstr ""
+
+#: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:48
+msgid "Use Stellarium settings"
+msgstr ""
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:186
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
@@ -19427,4 +19473,12 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:641
 msgid "Custom Lines"
+msgstr ""
+
+#: plugins/Vts/src/Vts.cpp:152
+msgid "Vts"
+msgstr ""
+
+#: plugins/Vts/src/Vts.cpp:155
+msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr ""
