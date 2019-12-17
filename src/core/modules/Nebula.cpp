@@ -63,41 +63,8 @@ bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
 float Nebula::hintsBrightness = 0.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
-Vec3f Nebula::circleColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::galaxyColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::radioGalaxyColor = Vec3f(0.3f,0.3f,0.3f);
-Vec3f Nebula::activeGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::quasarColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::nebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::planetaryNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::reflectionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::bipolarNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::emissionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::darkNebulaColor = Vec3f(0.3f,0.3f,0.3f);
-Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::interstellarMatterColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::clusterWithNebulosityColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::clusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::openClusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::globularClusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::stellarAssociationColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::starCloudColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::emissionObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::blLacObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::blazarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::molecularCloudColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::youngStellarObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::symbioticStarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::emissionLineStarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::supernovaCandidateColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::supernovaRemnantCandidateColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::galaxyClusterColor = Vec3f(0.8f,0.8f,0.5f);
+QMap<Nebula::NebulaType, Vec3f>Nebula::hintColorMap;
+QMap<Nebula::NebulaType, QString> Nebula::typeStringMap;
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(Q_NULLPTR);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -625,43 +592,9 @@ float Nebula::getSurfaceArea(void) const
 		return M_PIf*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
 }
 
-Vec3f Nebula::getHintColor(void) const
+Vec3f Nebula::getHintColor(Nebula::NebulaType nType)
 {
-	static const QMap<Nebula::NebulaType, Vec3f>map = {
-		{ NebGx     , galaxyColor },
-		{ NebIGx    , interactingGalaxyColor },
-		{ NebAGx    , activeGalaxyColor },
-		{ NebQSO    , quasarColor },
-		{ NebPossQSO, possibleQuasarColor },
-		{ NebBLL    , blLacObjectColor },
-		{ NebBLA    , blazarColor },
-		{ NebRGx    , radioGalaxyColor },
-		{ NebOc     , openClusterColor },
-		{ NebSA     , stellarAssociationColor },
-		{ NebSC     , starCloudColor },
-		{ NebCl     , clusterColor },
-		{ NebGc     , globularClusterColor },
-		{ NebN      , nebulaColor },
-		{ NebHII    , hydrogenRegionColor },
-		{ NebMolCld , molecularCloudColor },
-		{ NebYSO    , youngStellarObjectColor },
-		{ NebRn     , reflectionNebulaColor },
-		{ NebSNR    , supernovaRemnantColor },
-		{ NebBn     , bipolarNebulaColor },
-		{ NebEn     , emissionNebulaColor },
-		{ NebPn     , planetaryNebulaColor },
-		{ NebPossPN , possiblePlanetaryNebulaColor },
-		{ NebPPN    , protoplanetaryNebulaColor },
-		{ NebDn     , darkNebulaColor },
-		{ NebCn     , clusterWithNebulosityColor },
-		{ NebEMO    , emissionObjectColor },
-		{ NebStar   , starColor },
-		{ NebSymbioticStar   , symbioticStarColor },
-		{ NebEmissionLineStar, emissionLineStarColor },
-		{ NebSNC    , supernovaCandidateColor },
-		{ NebSNRC   , supernovaRemnantCandidateColor },
-		{ NebGxCl   , galaxyClusterColor }};
-	return map.value(nType, circleColor);
+	return hintColorMap.value(nType, hintColorMap.value(NebUnknown));
 }
 
 float Nebula::getVisibilityLevelByMagnitude(void) const
@@ -705,7 +638,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 {
 	size_t segments = outlineSegments.size();
-	Vec3f color = getHintColor();
+	Vec3f color = getHintColor(nType);
 
 	// tune limits for outlines
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
@@ -752,7 +685,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (getVisibilityLevelByMagnitude()>maxMagHints)
 		return;
 
-	Vec3f color = getHintColor();
+	Vec3f color = getHintColor(nType);
 
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
@@ -1356,43 +1289,47 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	return r;
 }
 
-QString Nebula::getTypeString(void) const
+QString Nebula::getTypeString(Nebula::NebulaType nType)
 {
-	const QMap<Nebula::NebulaType, QString> tMap= {
-		{ NebGx     , q_("galaxy") },
-		{ NebAGx    , q_("active galaxy") },
-		{ NebRGx    , q_("radio galaxy") },
-		{ NebIGx    , q_("interacting galaxy") },
-		{ NebQSO    , q_("quasar") },
-		{ NebCl     , q_("star cluster") },
-		{ NebOc     , q_("open star cluster") },
-		{ NebGc     , q_("globular star cluster") },
-		{ NebN      , q_("nebula") },
-		{ NebPn     , q_("planetary nebula") },
-		{ NebDn     , q_("dark nebula") },
-		{ NebCn     , q_("cluster associated with nebulosity") },
-		{ NebBn     , q_("bipolar nebula") },
-		{ NebEn     , q_("emission nebula") },
-		{ NebHII    , q_("HII region") },
-		{ NebRn     , q_("reflection nebula") },
-		{ NebSNR    , q_("supernova remnant") },
-		{ NebSNC    , q_("supernova candidate") },
-		{ NebSNRC   , q_("supernova remnant candidate") },
-		{ NebSA     , q_("stellar association") },
-		{ NebSC     , q_("star cloud") },
-		{ NebISM    , q_("interstellar matter") },
-		{ NebEMO    , q_("emission object") },
-		{ NebBLL    , q_("BL Lac object") },
-		{ NebBLA    , q_("blazar") },
-		{ NebMolCld , q_("molecular cloud") },
-		{ NebYSO    , q_("young stellar object") },
-		{ NebPossQSO, q_("possible quasar") },
-		{ NebPossPN , q_("possible planetary nebula") },
-		{ NebPPN    , q_("protoplanetary nebula") },
-		{ NebStar   , q_("star") },
-		{ NebSymbioticStar   , q_("symbiotic star") },
-		{ NebEmissionLineStar, q_("emission-line star") },
-		{ NebGxCl   , q_("cluster of galaxies") },
-		{ NebUnknown, q_("object of unknown nature") }};
-	return tMap.value(nType, q_("undocumented type"));
+	return typeStringMap.value(nType, q_("undocumented type"));
+}
+
+void Nebula::buildTypeStringMap()
+{
+	Nebula::typeStringMap.clear();
+	Nebula::typeStringMap.insert( NebGx     , q_("galaxy") );
+	Nebula::typeStringMap.insert( NebAGx    , q_("active galaxy") );
+	Nebula::typeStringMap.insert( NebRGx    , q_("radio galaxy") );
+	Nebula::typeStringMap.insert( NebIGx    , q_("interacting galaxy") );
+	Nebula::typeStringMap.insert( NebQSO    , q_("quasar") );
+	Nebula::typeStringMap.insert( NebCl     , q_("star cluster") );
+	Nebula::typeStringMap.insert( NebOc     , q_("open star cluster") );
+	Nebula::typeStringMap.insert( NebGc     , q_("globular star cluster") );
+	Nebula::typeStringMap.insert( NebSA     , q_("stellar association") );
+	Nebula::typeStringMap.insert( NebSC     , q_("star cloud") );
+	Nebula::typeStringMap.insert( NebN      , q_("nebula") );
+	Nebula::typeStringMap.insert( NebPn     , q_("planetary nebula") );
+	Nebula::typeStringMap.insert( NebDn     , q_("dark nebula") );
+	Nebula::typeStringMap.insert( NebRn     , q_("reflection nebula") );
+	Nebula::typeStringMap.insert( NebBn     , q_("bipolar nebula") );
+	Nebula::typeStringMap.insert( NebEn     , q_("emission nebula") );
+	Nebula::typeStringMap.insert( NebCn     , q_("cluster associated with nebulosity") );
+	Nebula::typeStringMap.insert( NebHII    , q_("HII region") );
+	Nebula::typeStringMap.insert( NebSNR    , q_("supernova remnant") );
+	Nebula::typeStringMap.insert( NebISM    , q_("interstellar matter") );
+	Nebula::typeStringMap.insert( NebEMO    , q_("emission object") );
+	Nebula::typeStringMap.insert( NebBLL    , q_("BL Lac object") );
+	Nebula::typeStringMap.insert( NebBLA    , q_("blazar") );
+	Nebula::typeStringMap.insert( NebMolCld , q_("molecular cloud") );
+	Nebula::typeStringMap.insert( NebYSO    , q_("young stellar object") );
+	Nebula::typeStringMap.insert( NebPossQSO, q_("possible quasar") );
+	Nebula::typeStringMap.insert( NebPossPN , q_("possible planetary nebula") );
+	Nebula::typeStringMap.insert( NebPPN    , q_("protoplanetary nebula") );
+	Nebula::typeStringMap.insert( NebStar   , q_("star") );
+	Nebula::typeStringMap.insert( NebSymbioticStar   , q_("symbiotic star") );
+	Nebula::typeStringMap.insert( NebEmissionLineStar, q_("emission-line star") );
+	Nebula::typeStringMap.insert( NebSNC    , q_("supernova candidate") );
+	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
+	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
+	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
 }

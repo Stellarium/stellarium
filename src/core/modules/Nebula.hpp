@@ -77,18 +77,18 @@ public:
 
 	enum TypeGroupFlags
 	{
-		TypeGalaxies			= 0x00000001, //!< Galaxies
-		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
+		TypeGalaxies		= 0x00000001, //!< Galaxies
+		TypeActiveGalaxies	= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
 		TypeOpenStarClusters	= 0x00000008, //!< Open Star Clusters
-		TypeGlobularStarClusters	= 0x00000010, //!< Globular Star Clusters
+		TypeGlobularStarClusters= 0x00000010, //!< Globular Star Clusters
 		TypeHydrogenRegions	= 0x00000020, //!< Hydrogen Regions
-		TypeBrightNebulae		= 0x00000040, //!< Bright Nebulae
+		TypeBrightNebulae	= 0x00000040, //!< Bright Nebulae
 		TypeDarkNebulae		= 0x00000080, //!< Dark Nebulae
 		TypePlanetaryNebulae	= 0x00000100, //!< Planetary Nebulae
 		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
-		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
-		TypeOther			= 0x00000800  //!< Other objects
+		TypeGalaxyClusters	= 0x00000400, //!< Galaxy Clusters
+		TypeOther		= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
@@ -99,16 +99,16 @@ public:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,		//!< Galaxy
+		NebGx			= 0,	//!< m Galaxy
 		NebAGx			= 1,  	//!< Active galaxy
-		NebRGx			= 2,		//!< Radio galaxy
-		NebIGx			= 3,		//!< Interacting galaxy
-		NebQSO			= 4,		//!< Quasar
-		NebCl			= 5,		//!< Star cluster
-		NebOc			= 6,		//!< Open star cluster
-		NebGc			= 7,		//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA			= 8,		//!< Stellar association
-		NebSC			= 9,		//!< Star cloud
+		NebRGx			= 2,	//!< m Radio galaxy
+		NebIGx			= 3,	//!< Interacting galaxy
+		NebQSO			= 4,	//!< Quasar
+		NebCl			= 5,	//!< Star cluster
+		NebOc			= 6,	//!< Open star cluster
+		NebGc			= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA			= 8,	//!< Stellar association
+		NebSC			= 9,	//!< Star cloud
 		NebN			= 10,	//!< A nebula
 		NebPn			= 11,	//!< Planetary nebula
 		NebDn			= 12,	//!< Dark Nebula
@@ -133,7 +133,7 @@ public:
 		NebSNC			= 31, 	//!< Supernova Candidate
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
-		NebUnknown		= 34		//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebUnknown		= 34	//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -177,11 +177,12 @@ public:
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
-	void setCircleColor(const Vec3f& v) {circleColor = v;}
+	// void setCircleColor(const Vec3f& v) {hintColorMap.insert(NebUnknown, v);}
 
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
-	QString getTypeString() const;
+	QString getTypeString() const {return getTypeString(nType);}
+	static QString getTypeString(Nebula::NebulaType nType);
 
 	NebulaType getDSOType() const {return nType;}
 
@@ -234,7 +235,7 @@ private:
 
 	bool objectInDisplayedType() const;
 
-	Vec3f getHintColor() const;
+	static Vec3f getHintColor(Nebula::NebulaType nType);
 	float getVisibilityLevelByMagnitude() const;
 
 	//! Get the printable description of morphological nebula type.
@@ -294,58 +295,26 @@ private:
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
 	static StelTextureSP texGalaxy;				// Type 0
-	static StelTextureSP texGalaxyLarge;		// Type 0_large
-	static StelTextureSP texOpenCluster;		// Type 1
-	static StelTextureSP texOpenClusterLarge;	// Type 1_large
-	static StelTextureSP texOpenClusterXLarge;	// Type 1_extralarge
+	static StelTextureSP texGalaxyLarge;			// Type 0_large
+	static StelTextureSP texOpenCluster;			// Type 1
+	static StelTextureSP texOpenClusterLarge;		// Type 1_large
+	static StelTextureSP texOpenClusterXLarge;		// Type 1_extralarge
 	static StelTextureSP texGlobularCluster;		// Type 2
-	static StelTextureSP texGlobularClusterLarge;	// Type 2_large
+	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texDiffuseNebula;		// Type 4
-	static StelTextureSP texDiffuseNebulaLarge;	// Type 4_large
-	static StelTextureSP texDiffuseNebulaXLarge;	// Type 4_extralarge
+	static StelTextureSP texDiffuseNebula;			// Type 4
+	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large
+	static StelTextureSP texDiffuseNebulaXLarge;		// Type 4_extralarge
 	static StelTextureSP texDarkNebula;			// Type 5
 	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
 	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
 	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
-	static Vec3f labelColor;					// The color of labels
-	static Vec3f circleColor;					// The color of the symbolic circle texture (default marker; NebUnknown)
-	static Vec3f galaxyColor;					// The color of galaxy marker texture (NebGx)
-	static Vec3f radioGalaxyColor;				// The color of radio galaxy marker texture (NebRGx)
-	static Vec3f activeGalaxyColor;				// The color of active galaxy marker texture (NebAGx)
-	static Vec3f interactingGalaxyColor;			// The color of interacting galaxy marker texture (NebIGx)
-	static Vec3f quasarColor;					// The color of quasar marker texture (NebQSO)
-	static Vec3f nebulaColor;					// The color of nebula marker texture (NebN)
-	static Vec3f planetaryNebulaColor;			// The color of planetary nebula marker texture (NebPn)
-	static Vec3f reflectionNebulaColor;			// The color of reflection nebula marker texture (NebRn)
-	static Vec3f bipolarNebulaColor;			// The color of bipolar nebula marker texture (NebBn)
-	static Vec3f emissionNebulaColor;			// The color of emission nebula marker texture (NebEn)
-	static Vec3f darkNebulaColor;				// The color of dark nebula marker texture (NebDn)
-	static Vec3f hydrogenRegionColor;			// The color of hydrogen region marker texture (NebHII)
-	static Vec3f supernovaRemnantColor;		// The color of supernova remnant marker texture (NebSNR)
-	static Vec3f interstellarMatterColor;			// The color of interstellar matter marker texture (NebISM)
-	static Vec3f clusterWithNebulosityColor;		// The color of cluster associated with nebulosity marker texture (NebCn)
-	static Vec3f clusterColor;					// The color of star cluster marker texture (NebCl)
-	static Vec3f openClusterColor;				// The color of open star cluster marker texture (NebOc)
-	static Vec3f globularClusterColor;			// The color of globular star cluster marker texture (NebGc)
-	static Vec3f stellarAssociationColor;			// The color of stellar association marker texture (NebSA)
-	static Vec3f starCloudColor;				// The color of star cloud marker texture (NebSC)
-	static Vec3f emissionObjectColor;			// The color of emission object marker texture (NebEMO)
-	static Vec3f blLacObjectColor;				// The color of BL Lac object marker texture (NebBLL)
-	static Vec3f blazarColor;					// The color of blazar marker texture (NebBLA)
-	static Vec3f molecularCloudColor;			// The color of molecular cloud marker texture (NebMolCld)
-	static Vec3f youngStellarObjectColor;		// The color of Young Stellar Object marker texture (NebYSO)
-	static Vec3f possibleQuasarColor;			// The color of possible quasar marker texture (NebPossQSO)
-	static Vec3f possiblePlanetaryNebulaColor;	// The color of possible planetary nebula marker texture (NebPossPN)
-	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
-	static Vec3f starColor;					// The color of star marker texture (NebStar)
-	static Vec3f symbioticStarColor;			// The color of symbiotic star marker texture (NebSymbioticStar)
-	static Vec3f emissionLineStarColor;			// The color of emission-line star marker texture (NebEmissionLineStar)
-	static Vec3f supernovaCandidateColor;		// The color of supermova candidate marker texture (NebSNC)
-	static Vec3f supernovaRemnantCandidateColor;	// The color of supermova remnant candidate marker texture (NebSNRC)
-	static Vec3f galaxyClusterColor;				// The color of galaxy cluster marker texture (NebGxCl)
+	static Vec3f labelColor;				// The color of labels
+	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
+	static QMap<Nebula::NebulaType, QString> typeStringMap; // map that keeps type strings for NebulaType. Must be retranslated on language change.
+	static void buildTypeStringMap();			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
