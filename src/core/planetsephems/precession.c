@@ -34,6 +34,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <math.h>
 #include <assert.h>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
+
 /* Interval threshold (days) for re-computing these values. with 1, compute only 1/day:  */
 #define PRECESSION_EPOCH_THRESHOLD 1.0
 /* Interval threshold (days) for re-computing nutation values. with 1/24, compute only every hour  */
