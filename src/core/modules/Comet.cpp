@@ -646,11 +646,11 @@ Vec2f Comet::getComaDiameterAndTailLengthAU() const
 {
 	const float r = static_cast<float>(getHeliocentricEclipticPos().length());
 	const float mhelio = absoluteMagnitude + slopeParameter * log10(r);
-	const float Do = pow(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
-	const float common = 1.0f - pow(10.0f, (-2.0f*r));
-	const float D = Do * common * (1.0f - pow(10.0f, -r)) * (1000.0f*AU_KMf);
-	const float Lo = pow(10.0f, ((-0.0075f*mhelio - 0.19f) * mhelio + 2.1f));
-	const float L = Lo*(1.0f-pow(10.0f, -4.0f*r)) * common * (1e6f*AU_KMf);
+	const float Do = powf(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
+	const float common = 1.0f - powf(10.0f, (-2.0f*r));
+	const float D = Do * common * (1.0f - powf(10.0f, -r)) * (1000.0f*AU_KMf);
+	const float Lo = powf(10.0f, ((-0.0075f*mhelio - 0.19f) * mhelio + 2.1f));
+	const float L = Lo*(1.0f-powf(10.0f, -4.0f*r)) * common * (1e6f*AU_KMf);
 	return Vec2f(D, L);
 }
 

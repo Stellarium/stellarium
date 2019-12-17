@@ -82,8 +82,7 @@ void ExoplanetsDialog::createDialogContent()
 	ep = GETSTELMODULE(Exoplanets);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
@@ -460,20 +459,10 @@ void ExoplanetsDialog::drawDiagram()
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minX, minY, maxX, maxY;
-	minX = maxX = aX.first();
-	minY = maxY = aY.first();
-
-	for (auto temp : aX)
-	{
-		if(maxX < temp) maxX = temp;
-		if(minX > temp) minX = temp;
-	}
-	for (auto temp : aY)
-	{
-		if(maxY < temp) maxY = temp;
-		if(minY > temp) minY = temp;
-	}
+	double minX = *std::min_element(aX.begin(), aX.end());
+	double minY = *std::min_element(aY.begin(), aY.end());
+	double maxX = *std::max_element(aX.begin(), aX.end());
+	double maxY = *std::max_element(aY.begin(), aY.end());
 
 	if (!ui->minX->text().isEmpty())
 		minX = ui->minX->text().toDouble();
@@ -550,22 +539,22 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisX->clear();
 	axisY->clear();
 
-	QList<axisPair> axis;
-	axis.append(qMakePair(q_("Orbital Eccentricity"), 0));
-	axis.append(qMakePair(q_("Orbit Semi-Major Axis, AU"), 1));
-	axis.append(qMakePair(q_("Planetary Mass, Mjup"), 2));
-	axis.append(qMakePair(q_("Planetary Radius, Rjup"), 3));
-	axis.append(qMakePair(q_("Orbital Period, days"), 4));
-	axis.append(qMakePair(q_("Angular Distance, arcsec"), 5));
-	axis.append(qMakePair(q_("Effective temperature of host star, K"), 6));
-	axis.append(qMakePair(q_("Year of Discovery"), 7));
-	axis.append(qMakePair(q_("Metallicity of host star"), 8));
-	axis.append(qMakePair(q_("V magnitude of host star, mag"), 9));
-	axis.append(qMakePair(q_("RA (J2000) of star, deg"), 10));
-	axis.append(qMakePair(q_("Dec (J2000) of star, deg"), 11));
-	axis.append(qMakePair(q_("Distance to star, pc"), 12));
-	axis.append(qMakePair(q_("Mass of host star, Msol"), 13));
-	axis.append(qMakePair(q_("Radius of host star, Rsol"), 14));
+	static const QList<axisPair> axis = {
+	{ q_("Orbital Eccentricity"),          0},
+	{ q_("Orbit Semi-Major Axis, AU"),     1},
+	{ q_("Planetary Mass, Mjup"),          2},
+	{ q_("Planetary Radius, Rjup"),        3},
+	{ q_("Orbital Period, days"),          4},
+	{ q_("Angular Distance, arcsec"),      5},
+	{ q_("Effective temperature of host star, K"), 6},
+	{ q_("Year of Discovery"),             7},
+	{ q_("Metallicity of host star"),      8},
+	{ q_("V magnitude of host star, mag"), 9},
+	{ q_("RA (J2000) of star, deg"),      10},
+	{ q_("Dec (J2000) of star, deg"),     11},
+	{ q_("Distance to star, pc"),         12},
+	{ q_("Mass of host star, Msol"),      13},
+	{ q_("Radius of host star, Rsol"),    14}};
 
 	for(int i=0; i<axis.size(); ++i)
 	{

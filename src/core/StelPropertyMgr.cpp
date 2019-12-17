@@ -106,10 +106,10 @@ QList<StelProperty*> StelPropertyMgr::getAllProperties() const
 	return propMap.values();
 }
 
-StelProperty* StelPropertyMgr::getProperty(const QString &id) const
+StelProperty* StelPropertyMgr::getProperty(const QString &id, const bool noWarning) const
 {
 	StelProperty* prop = propMap.value(id);
-	if(!prop)
+	if((!prop) && (!noWarning))
 		qWarning()<<"StelProperty"<<id<<"not found";
 	return prop;
 }
@@ -158,9 +158,9 @@ void StelPropertyMgr::registerObject(QObject *obj)
 	}
 }
 
-QVariant StelPropertyMgr::getStelPropertyValue(const QString &id) const
+QVariant StelPropertyMgr::getStelPropertyValue(const QString &id, const bool noWarning) const
 {
-	StelProperty* prop = getProperty(id);
+	StelProperty* prop = getProperty(id, noWarning);
 	if(prop)
 	{
 		return prop->getValue();

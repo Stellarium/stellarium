@@ -64,6 +64,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
+	connectIntProperty(ui->lineWidthSpinBox, "ArchaeoLines.lineWidth");
+
 	connectBoolProperty(ui->equinoxCheckBox,         "ArchaeoLines.flagShowEquinox");
 	connectBoolProperty(ui->solsticesCheckBox,       "ArchaeoLines.flagShowSolstices");
 	connectBoolProperty(ui->crossquarterCheckBox,    "ArchaeoLines.flagShowCrossquarters");

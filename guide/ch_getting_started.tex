@@ -31,18 +31,29 @@ The most important hardware requirement is a contemporary graphics subsystem.
 \item 3D graphics capabilities which support OpenGL 3.0 and GLSL 1.3 (2008
   GeForce 8xxx and later, ATI/AMD Radeon HD-2xxx and later; Intel HD
   graphics (Core-i 2xxx and later)) or OpenGL ES 2.0 and GLSL ES 1.0
-  (e.g., ARM SBCs like Raspberry Pi~2/3). On Windows, some older cards
+  (e.g., ARM SBCs like Raspberry Pi~2/3/4). On Windows, some older cards
   may be supported via ANGLE when they support DirectX10.
+\item Screen resolution $1024\times768$\footnote{On Linux, an $800\times600$ screen can still be used by scaling the desktop e.g.\ to $1200\times900$:
+  \begin{commands}
+    xrandr --output HDMI-1 --scale 1.5x1.5
+  \end{commands}
+  To reset after running Stellarium, run
+  \begin{commands}
+    xrandr --output HDMI-1 --scale 1x1
+  \end{commands}}
 \item 512 MB RAM
 \item 250 MB free on disk
+\item Keyboard
 \end{itemize}
 
 \subsection{Recommended}
 \begin{itemize}
 \item Linux/Unix; Windows 7 and later; Mac OS X 10.10.0 and later
 \item 3D graphics card which supports OpenGL 3.3 and above and GLSL1.3 and later
+\item FullHD ($1920\times1080$ or $1920\times1200$) screen.\footnote{HiDPI screens may work, but show occasional platform-dependent issues.}
 \item 1 GB RAM or more
 \item 1.5 GB free on disk (About 3GB extra required for the optional DE430/DE431 files).
+\item Keyboard and mouse or equivalent device (e.g.\ touchpad)
 \item A dark room for realistic rendering --- details like the Milky Way, Zodiacal Light 
       or star twinkling can't be seen in a bright room.
 \end{itemize}
@@ -103,31 +114,24 @@ sudo apt-get update
 sudo apt-get install stellarium
 \end{commands}
 
-Or download and run our AppImage package for 64-bit linuxes (we do not
+You can also download and run our AppImage package for 64-bit linuxes (we do not
 provide an AppImage for old 32-bit systems):
 \file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible
 conflicts due to architectural features of AppImage, please remove
 the stellarium package which you have installed from the repository.
 
-\subsubsection{Raspberry Pi 2/3}
-% TODO: Update this section for 0.19.3, include notes on RPi4.
+\subsubsection{Raspberry Pi 2/3/4}
 These tiny ARM-based computers are very popular for small and energy-efficient applications like controlling push-to Dobsonians. 
-A new open-source OpenGL driver stack has been made available recently, but as of October 2017 the default 
-Raspbian operating system comes with an outdated version. Stellarium requires Mesa~17 or later. 
-To set up a Raspberry Pi~2 or 3 with Raspbian Stretch for use with Stellarium, activate the OpenGL driver in 
-\program{raspi-config} and follow instructions from the VC4 wiki.\footnote{%
-	\url{https://github.com/anholt/mesa/wiki/VC4-complete-Raspbian-upgrade}. You only need to follow the instructions on first boot, \program{libdrm} and \program{Mesa}.} 
-The \program{libdrm} upgrade is required and does not harm, but you can also install \program{Mesa~17} in addition to the stock \program{Mesa~13} 
-following another set of instructions.\footnote{\url{https://github.com/anholt/mesa/wiki/Building-Mesa-for-VC4}. 
-	Note that you may need to add a symbolic link to the VC4 library. With all paths from these instructions, 
-	\verb|ln -s ~/prefix/dri/vc4_dri.so ~/prefix/vc4_dri.so| should do the trick.}
+Stellarium requires Mesa~17 or later, available in the current Raspbian OS. 
+To set up a Raspberry Pi~2 or 3 with Raspbian Buster for use with Stellarium, activate the OpenGL driver in 
+\program{raspi-config}. The latest Raspberry Pi 4 comes with this driver by default and can even drive two HiDPI screens.
+
+You must build Stellarium from sources. Please follow instructions from the wiki\footnote{\url{https://github.com/Stellarium/stellarium/wiki/Raspberry-Pi}}.
 
 For Ubuntu 16.04 LTS, follow instructions\footnote{\url{https://ubuntu-mate.community/t/tutorial-activate-opengl-driver-for-ubuntu-mate-16-04/7094}}. 
 	
-Note that as of October 2017 (Mesa 17.4) the 3D planets do not work.
+Note that as of December 2019 the 3D planets do not work on Raspberry Pi 2/3, and DSS or HiPS surveys seem to cause issues after a while.
 	
-	
-
 
 \section{Running Stellarium}
 \label{sec:GettingStarted:Running}

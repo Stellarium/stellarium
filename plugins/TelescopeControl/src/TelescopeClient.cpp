@@ -43,6 +43,7 @@
 #include <QTextStream>
 
 #ifdef Q_OS_WIN
+	#include "ASCOM/TelescopeClientASCOM.hpp"
 	#include <Windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -112,6 +113,12 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope = new TelescopeClientINDI(name, params);
 	}
+	#ifdef Q_OS_WIN
+	else if (type == "ASCOM")
+	{
+		newTelescope = new TelescopeClientASCOM(name, params, eq);
+	}
+	#endif
 	else
 	{
 		qWarning() << "WARNING - unknown telescope type" << type << "- not creating a telescope object for url" << url;

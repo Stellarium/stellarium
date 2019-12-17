@@ -156,11 +156,11 @@ void ConfigurationDialog::createDialogContent()
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->pluginsListWidget << ui->scriptListWidget;
-	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui)
+	StelGui* appGui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (appGui)
 	{
-		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		enableKineticScrolling(appGui->getFlagUseKineticScrolling());
+		connect(appGui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -658,7 +658,7 @@ void ConfigurationDialog::saveAllSettings()
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toDouble(), 'f', 2));
 	conf->setValue("stars/relative_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toDouble(), 'f', 2));
-	conf->setValue("stars/flag_star_twinkle",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toDouble(), 'f', 2));
+	conf->setValue("stars/flag_star_twinkle",				propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toBool());
 	conf->setValue("stars/star_twinkle_amount",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
 	conf->setValue("astro/star_magnitude_limit",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));
@@ -735,6 +735,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_solstice_points",			propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 	conf->setValue("viewing/flag_apex_points",			propMgr->getStelPropertyValue("GridLinesMgr.apexPointsDisplayed").toBool());
+	conf->setValue("viewing/line_thickness",				propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
@@ -1299,7 +1300,7 @@ void ConfigurationDialog::newStarCatalogData()
 	if (!starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute).isNull())
 		return;
 	qint64 size = starCatalogDownloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
+	progressBar->setValue(progressBar->getValue()+static_cast<int>(size/1024));
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
@@ -1342,7 +1343,7 @@ void ConfigurationDialog::downloadStars()
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
-	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
+	progressBar->setRange(0, static_cast<int>(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024));
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 
 	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();

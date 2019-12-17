@@ -90,8 +90,6 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
-	EPCount=0;
-	PHEPCount=0;
 	eccentricityList.clear();
 	semiAxisList.clear();
 	massList.clear();
@@ -556,14 +554,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	if (distributionMode)
-	{
-		return 4.f;
-	}
-	else
-	{
-		return (Vmag<99. ? static_cast<float>(Vmag) : 6.f);
-	}
+	return (distributionMode ? 4.f : (Vmag<99. ? static_cast<float>(Vmag) : 6.f));
 }
 
 double Exoplanet::getAngularSize(const StelCore*) const

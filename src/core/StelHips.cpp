@@ -273,7 +273,6 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		QString ext = getExt(properties["hips_tile_format"].toString());
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
 		tile->texture = texMgr.createTextureThread(path.url(), StelTexture::StelTextureParams(true), false);
-		tiles.insert(uid, tile);
 
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
@@ -285,6 +284,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
+		tiles.insert(uid, tile);
 	}
 	return tile;
 }

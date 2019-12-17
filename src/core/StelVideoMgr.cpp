@@ -62,7 +62,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	// This sets a tiny size so that if window should appear before proper resize, it should not disturb.
 	videoObjects[id]->videoItem->setSize(QSizeF(1,1));
 
-	videoObjects[id]->player = new QMediaPlayer(0, QMediaPlayer::VideoSurface);
+	videoObjects[id]->player = new QMediaPlayer(Q_NULLPTR, QMediaPlayer::VideoSurface);
 	videoObjects[id]->duration=-1; // -1 to signal "unknown".
 	videoObjects[id]->resolution=QSize(); // initialize with "invalid" empty resolution, we must detect this when player is starting!
 	videoObjects[id]->keepVisible=false;

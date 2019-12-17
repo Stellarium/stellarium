@@ -207,7 +207,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	// Check if we reach the resolution limit
-	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PI;
+	const float degPerPixel = 1.f/core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PIf;
 	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
@@ -261,7 +261,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			sPainter.setBlending(true); // Normal transparency mode
 		else
 			sPainter.setBlending(true, GL_ONE, GL_ONE); // additive blending
-		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
+		color.set(ad_lum,ad_lum,ad_lum, static_cast<float>(texFader->currentValue()));
 	}
 	else
 	{
@@ -444,7 +444,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI/180.f, vl.at(1).toFloat(&ok)*M_PI/180.f, v);
+			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI_180f, vl.at(1).toFloat(&ok)*M_PI_180f, v);
 			if (!ok)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);

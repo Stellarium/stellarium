@@ -184,6 +184,10 @@ Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
 Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_VTS
+Q_IMPORT_PLUGIN(VtsStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;
@@ -1043,6 +1047,11 @@ void StelApp::setViewportEffect(const QString& name)
 	}
 	if (name == "none") return;
 
+	if (!core)
+	{
+		qDebug() << "No core to set viewport effect";
+		return;
+	}
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	int w = params.viewportXywh[2];
 	int h = params.viewportXywh[3];
