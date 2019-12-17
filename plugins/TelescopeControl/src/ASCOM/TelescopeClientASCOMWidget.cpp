@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
 #include "TelescopeClientASCOMWidget.hpp"
 #include "ui_TelescopeClientASCOMWidget.h"
