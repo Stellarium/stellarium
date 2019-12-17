@@ -321,7 +321,7 @@
 	    right to modify and redistribute) "as long as it is credited."
 	4.8 M31 pictures come from LEE ang HG731GZ
 	    License: Creative Commons Attribution 3.0 Unported
-	4.9 Images of NGC6544, NGC6553, Sh2-261
+	4.9 Images of NGC4526, NGC6544, NGC6553, Sh2-261
 	    from Yang Kai
 	    License: public domain 
 	4.10 Images of M1, M27, M57, M97, NGC6946 from Stephane
