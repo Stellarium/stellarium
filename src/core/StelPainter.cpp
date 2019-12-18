@@ -829,10 +829,14 @@ QVector<Vec4f> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
 {
+	if (smallCircleVertexArray.size() == 1)
+	{
+		smallCircleVertexArray.resize(0);
+		smallCircleColorArray.resize(0);
+		return;
+	}
 	if (smallCircleVertexArray.isEmpty())
 		return;
-
-	Q_ASSERT(smallCircleVertexArray.size()>1);
 
 	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
 	setVertexPointer(3, GL_FLOAT, smallCircleVertexArray.constData());
