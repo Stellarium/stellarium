@@ -937,13 +937,26 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 	Q_ASSERT(smallCircleColorArray.isEmpty());
 	Q_ASSERT(points.size() == colors.size());
 	Vec3d win;
+
+	// In general we should add all the points, even if they are hidden, since otherwise we don't
+	// have proper clipping on the sides.  We make an exception for the orthographic projection because
+	// its clipping doesn't work well.  A better solution would be to use a culling test I think.
+	bool skipHiddenPoints = dynamic_cast<StelProjectorOrthographic*>(prj.data());
+
 	for (int i = 0; i+1 != points.size(); i++)
 	{
 		const Vec3d p1 = points[i];
 		const Vec3d p2 = points[i + 1];
 		if (!prj->intersectViewportDiscontinuity(p1, p2))
 		{
-			prj->project(p1, win);
+			bool visible = prj->project(p1, win);
+
+			if (!visible && skipHiddenPoints)
+			{
+				drawSmallCircleVertexArray();
+				continue;
+			}
+
 			smallCircleVertexArray.append(Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])));
 			smallCircleColorArray.append(colors[i]);
 			if (i+2==points.size())
