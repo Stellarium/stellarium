@@ -47,7 +47,7 @@ bool Comet::createTailIndices=true;
 bool Comet::createTailTextureCoords=true;
 StelTextureSP Comet::comaTexture;
 StelTextureSP Comet::tailTexture;
-QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
+QVector<Vec2f> Comet::tailTexCoordArr; // computed only once for all Comets.
 QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
 
 Comet::Comet(const QString& englishName,
@@ -601,17 +601,18 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 {	
 	StelPainter sPainter(core->getProjection(transfo));
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setCullFace(false);
 
 	tailTexture->bind();
 
 	if (gas) {
-		sPainter.setArrays(static_cast<const Vec3d*>(gastailVertexArr.constData()), reinterpret_cast<const Vec2f*>(tailTexCoordArr.constData()), static_cast<const Vec3f*>(gastailColorArr.constData()));
-		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
+		StelVertexArray vaGas(static_cast<const QVector<Vec3d> >(gastailVertexArr), StelVertexArray::Triangles,
+				      static_cast<const QVector<Vec2f> >(tailTexCoordArr), tailIndices, static_cast<const QVector<Vec3f> >(gastailColorArr));
+		sPainter.drawStelVertexArray(vaGas, true);
 
 	} else {
-		sPainter.setArrays(static_cast<const Vec3d*>(dusttailVertexArr.constData()), reinterpret_cast<const Vec2f*>(tailTexCoordArr.constData()), static_cast<const Vec3f*>(dusttailColorArr.constData()));
-		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
+		StelVertexArray vaDust(static_cast<const QVector<Vec3d> >(dusttailVertexArr), StelVertexArray::Triangles,
+				      static_cast<const QVector<Vec2f> >(tailTexCoordArr), tailIndices, static_cast<const QVector<Vec3f> >(dusttailColorArr));
+		sPainter.drawStelVertexArray(vaDust, true);
 	}
 	sPainter.setBlending(false);
 }
@@ -626,18 +627,16 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	StelPainter sPainter(core->getProjection(transfo2));
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setCullFace(false);
 
 	StelToneReproducer* eye = core->getToneReproducer();
 	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
-	float aLum =eye->adaptLuminanceScaled(lum);
-	float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);
+	const float aLum =eye->adaptLuminanceScaled(lum);
+	const float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);
 	comaTexture->bind();
 	sPainter.setColor(0.3f*magFactor,0.7f*magFactor,magFactor);
-	sPainter.setArrays(reinterpret_cast<const Vec3d*>(comaVertexArr.constData()), reinterpret_cast<const Vec2f*>(comaTexCoordArr.constData()));
-	sPainter.drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
-
+	StelVertexArray vaComa(static_cast<const QVector<Vec3d> >(comaVertexArr), StelVertexArray::Triangles, static_cast<const QVector<Vec2f> >(comaTexCoordArr));
+	sPainter.drawStelVertexArray(vaComa, true);
 	sPainter.setBlending(false);
 }
 
@@ -664,7 +663,7 @@ void Comet::computeComa(const float diameter)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
-						  QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr,
+						  QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr,
 						  QVector<unsigned short> &indices, const float xOffset)
 {
 	// keep the array and replace contents. However, using replace() is only slightly faster.
@@ -686,7 +685,7 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	
 	vertexArr.replace(0, Vec3d(0.0, 0.0, static_cast<double>(zshift)));
 	int vertexArrIndex=1;
-	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
+	if (createTailTextureCoords) texCoordArr << Vec2f(0.5f, 0.5f);
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
 	for (unsigned short int ring=1; ring<=COMET_TAIL_STACKS; ++ring){
@@ -696,7 +695,7 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
 			vertexArr.replace(vertexArrIndex++, Vec3d(static_cast<double>(x+xShift), static_cast<double>(y), static_cast<double>(z)));
-			if (createTailTextureCoords) texCoordArr << 0.5f+ 0.5f*x/radius << 0.5f+0.5f*y/radius;
+			if (createTailTextureCoords) texCoordArr << Vec2f(0.5f+ 0.5f*x/radius, 0.5f+0.5f*y/radius);
 		}
 	}
 	// now link the faces with indices.
