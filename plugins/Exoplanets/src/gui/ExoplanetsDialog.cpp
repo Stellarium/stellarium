@@ -213,7 +213,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 			.arg(q_("Earth Similarity Index (ESI)"))
 			.arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
 	html += "<h2>" + q_("Proper names") + "</h2>";
-	html += "<p>" + q_("In December 2015, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
+	html += "<p>" + q_("In December 2015 and in December 2019, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3<sup>1</sup></li>").arg(trans.qtranslate("Veritate"), "14 And", q_("From the latin <em>Veritas</em>, truth. The ablative form means <em>where there is truth</em>."));
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3</li>").arg(trans.qtranslate("Spe"), "14 And b", q_("From the latin <em>Spes</em>, hope. The ablative form means <em>where there is hope</em>."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Musica"), "18 Del", q_("Musica is Latin for <em>music</em>."));
