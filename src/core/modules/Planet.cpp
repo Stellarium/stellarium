@@ -3114,7 +3114,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularSize(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
+	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getSkyLabel(core), 0, tmp, tmp, false);
 
 	// hint disappears smoothly on close view
@@ -3122,7 +3122,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
+	sPainter.setColor(labelColor,labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
 
 	// Draw the 2D small circle
 	sPainter.setBlending(true);
@@ -3221,9 +3221,7 @@ void Planet::drawOrbit(const StelCore* core)
 	// Normal transparency mode
 	sPainter.setBlending(true);
 
-	Vec3f orbColor = getCurrentOrbitColor();
-
-	sPainter.setColor(orbColor[0], orbColor[1], orbColor[2], orbitFader.getInterstate());
+	sPainter.setColor(getCurrentOrbitColor(), orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
 	// on its orbit all the time (since segmented rather than smooth curve)
