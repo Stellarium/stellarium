@@ -2498,13 +2498,19 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
 	
-	QVector<float> projectedVertexArr(model.vertexArr.size());
+	QVector<Vec3f> projectedVertexArr(model.vertexArr.size()/3);
+	QVector<Vec3d> projectedVertexArrD(model.vertexArr.size()/3);
+	QVector<Vec2f> projectedTextureArr(model.vertexArr.size()/3); // I just can't get the casts working. THIS IS BAD CODE, JUST TESTING!
 	const float sphereScaleF=static_cast<float>(sphereScale);
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 	{
 		Vec3f p = *(reinterpret_cast<const Vec3f*>(model.vertexArr.constData()+i*3));
 		p *= sphereScaleF;
-		painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
+		Vec3d pd=p.toVec3d();
+		painter->getProjector()->project(pd, *(reinterpret_cast<Vec3d*>(projectedVertexArrD.data()+i)));
+		projectedVertexArr.insert(i, projectedVertexArrD.value(i).toVec3f());
+		projectedTextureArr.insert(i, Vec2f(model.texCoordArr[2*i], model.texCoordArr[2*i+1]));
+
 	}
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
@@ -2513,8 +2519,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	{
 		texMap->bind();
 		//painter->setColor(2, 2, 0.2); // This is now in draw3dModel() to apply extinction
-		painter->setArrays(reinterpret_cast<const Vec3f*>(projectedVertexArr.constData()), reinterpret_cast<const Vec2f*>(model.texCoordArr.constData()));
-		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
+		//painter->setArrays(reinterpret_cast<const Vec3f*>(projectedVertexArr.constData()), reinterpret_cast<const Vec2f*>(model.texCoordArr.constData()));
+		//painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
+
+		StelVertexArray va(projectedVertexArrD, StelVertexArray::Triangles,
+				      projectedTextureArr, model.indiceArr);
+		painter->drawStelVertexArray(va, true);
+
 		return;
 	}
 
@@ -2593,7 +2604,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		}
 	}
 
-	GL(shader->setAttributeArray(shaderVars->vertex, static_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
+	GL(shader->setAttributeArray(shaderVars->vertex, reinterpret_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->vertex));
 	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, static_cast<const GLfloat*>(model.vertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->unprojectedVertex));
