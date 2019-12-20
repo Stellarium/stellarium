@@ -552,6 +552,18 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	const float screenSz = static_cast<float>(getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
 	const float viewport_left = prj->getViewportPosX();
 	const float viewport_bottom = prj->getViewportPosY();
+
+	// For some stupid reason comets appear also on the wrong side of the globe in Orthographic view. We must exclude them.
+	// This is only a partial fix: we switch off the comet when it is behind the edge of the sphere, but also
+	// when the head is just off screen.  But better than a ghost image. TODO: Find a better test that keeps the comet visible when just off-screen.
+	if ((core->getCurrentProjectionType()==StelCore::ProjectionOrthographic) && !(prj->projectCheck(Vec3f(0.f), screenPos)))
+			return;
+
+	//setExtraInfoString(QString("InView: %1 %2\n").arg(check).arg(StelUtils::vec3fToStr(screenPos)));
+	//Vec3d unDir;
+	//bool un=prj->unProject(960., 600., unDir); // prelim. test: use center position of screen.
+	//addToExtraInfoString(QString("Unprojected: %1 %2\n").arg(un).arg(unDir.toString()));
+
 	if (prj->project(Vec3f(0.), screenPos)
 		&& screenPos[1] > viewport_bottom - screenSz
 		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
