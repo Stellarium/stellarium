@@ -566,14 +566,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		// by putting here, only draw orbit if Comet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core))
-		{
-			labelsFader=true;
-		}
-		else
-		{
-			labelsFader=false;
-		}
+		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
 		drawHints(core, planetNameFont);
 
 		draw3dModel(core,transfo,screenSz);

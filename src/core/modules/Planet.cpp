@@ -592,7 +592,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		PlanetP earth = ssystem->getEarth();
 		PlanetP currentPlanet = core->getCurrentPlanet();
-		bool onEarth = (core->getCurrentPlanet()==earth);
+		const bool onEarth = (core->getCurrentPlanet()==earth);
 
 		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
 		// May be helpful for debugging critical parallax corrections for eclipses.
@@ -665,7 +665,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
-				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
+				double deltaLong = (lambdaMoon - lambdaSun)*M_180_PI;
 				core1->setUseTopocentricCoordinates(state);
 				core1->update(0); // enforce update cache for avoid odd selection of Moon details!
 				if (deltaLong<0.) deltaLong += 360.;
@@ -711,7 +711,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 		}
 	}
-
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -766,7 +765,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		}
 	}
 	map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
-	// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
 
 	return map;
 }
@@ -1017,7 +1015,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 
 	if (englishName=="Jupiter")
 	{
-		// N.B. This is not sideralTime but some SystemII longitude shifted by GRS position and texture position. For the time being, nobody should complain, though.
+		// N.B. This is not siderealTime but some SystemII longitude shifted by GRS position and texture position. For the time being, nobody should complain, though.
 		//
 		// CM2 considerations from http://www.projectpluto.com/grs_form.htm
 		// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
@@ -1034,18 +1032,16 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		// --> None of these correction terms need to be applied!
 		// But the CM2 formula includes an average light time correction for Jupiter, which we have to take off here.
 		// This assumes a start value which includes average light time.
-		const double correction= 870.1869147 * 5.202561*AU / SPEED_OF_LIGHT / 86400.0;
+		static const double correction= 870.1869147 * 5.202561*AU / SPEED_OF_LIGHT / 86400.0;
 		double cm2=181.62 + 870.1869147 * JDE + correction; // Central Meridian II
 		cm2=std::fmod(cm2, 360.0);
 		// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
 		// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
 		// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
 		// Updated 2018-08, note as checkpoint that GRS longitude was given as 292d in S&T August 2018.
-		double longitudeGRS = 0.;
-		if (flagCustomGrsSettings)
-			longitudeGRS = customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25;
-		else
-			longitudeGRS=216+1.25*( JDE - 2456908)/30;
+		double longitudeGRS = (flagCustomGrsSettings ?
+			customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25 :
+			216+1.25*( JDE - 2456908)/30);
 		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
 		return cm2 - longitudeGRS  +  (187./512.)*360.; // Last term is pixel position of GRS in texture.
 		// To verify:
@@ -1221,8 +1217,6 @@ float Planet::getMeanOppositionMagnitude() const
 	if (absoluteMagnitude<=-99.f)
 		return 100.f;
 
-	double semimajorAxis=0.;
-
 	static const QMap<QString, float>nameMap = {
 		{ "Sun",    100.f},
 		{ "Moon",   -12.74f},
@@ -1246,9 +1240,8 @@ float Planet::getMeanOppositionMagnitude() const
 		{ "Uranus",  19.18916464 },
 		{ "Neptune", 30.06992276 },
 		{ "Pluto",   39.48211675 }};
-	if (smaMap.contains(parent->englishName))
-		semimajorAxis=smaMap.value(parent->englishName);
-	else if (pType>= isAsteroid)
+	double semimajorAxis=smaMap.value(parent->englishName, 0.);
+	if (pType>= isAsteroid)
 	{
 		if (orbitPtr)
 			semimajorAxis=(static_cast<CometOrbit*>(orbitPtr))->getSemimajorAxis();
@@ -1380,10 +1373,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
+					const double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
 					return static_cast<float>(-8.88 + d + 0.044*phaseDeg + ringsIllum);
 				}
 				if (englishName=="Uranus")
@@ -1439,10 +1432,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx;
+					const double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx;
 					return static_cast<float>(-8.88 + d + 0.044*phaseDeg + ringsIllum);
 				}
 				if (englishName=="Uranus")
@@ -1480,10 +1473,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					const double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return static_cast<float>(-8.68 + d + 0.044*phaseDeg + ringsIllum);
 				}
 				if (englishName=="Uranus")
@@ -1517,10 +1510,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					const double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return static_cast<float>(-8.88 + d + 0.044*phaseDeg + ringsIllum);
 				}
 				if (englishName=="Uranus")
@@ -1548,9 +1541,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 double Planet::getAngularSize(const StelCore* core) const
 {
-	double rad = equatorialRadius;
-	if (rings)
-		rad = rings->getSize();
+	const double rad = (rings ? rings->getSize() : equatorialRadius);
 	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
