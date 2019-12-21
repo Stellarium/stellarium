@@ -287,8 +287,8 @@ private:
 	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
 	void drawDecor(StelCore* core, StelPainter&, const bool drawLight=false) const;
 	void drawGround(StelCore* core, StelPainter&) const;
-	QVector<double> groundVertexArr;
-	QVector<float> groundTexCoordArr;
+	QVector<Vec3d> groundVertexArr;
+	QVector<Vec2f> groundTexCoordArr;
 	StelTextureSP* sideTexs;
 	unsigned short int nbSideTexs;
 	unsigned short int nbSide;

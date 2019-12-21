@@ -225,7 +225,6 @@ public:
 	//! @param level the number of concentric circles.
 	//! @param vertexArr the vertex array in which the resulting vertices are returned.
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
-	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr);
 
 	//! Draw a fisheye texture in a sphere.
