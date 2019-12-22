@@ -853,18 +853,24 @@ You may also export the list of positions into an XLSX or CSV file.
 \label{sec:gui:AstroCalc:Ephemeris}
 
 Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
-The positions are marked in the sky with yellow circles (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
+The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
 
-When you click on a date, an orange circle indicates this date and/or magnitude. 
+When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
-Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active.
+Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} To show a line between markers please tick checkbox \emph{Show line}. You may customize the format of displayed data near markers and their frequency in \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
 
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_tab.png}
+\centering\includegraphics[width=0.87\textwidth]{astrocalc_dialog_ephemeris_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
 \label{fig:gui:AstroCalc:Ephemeris}
+\end{figure}
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_extra.png}
+\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
+\label{fig:gui:AstroCalc:Ephemeris:Extra}
 \end{figure}
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
@@ -886,6 +892,19 @@ Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and
 \label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
 \end{figure}
 
+\subsection{The Transits Tab}
+\label{sec:gui:AstroCalc:Transits}
+
+This \newFeature{v0.19.3} tab allows you to compute transits of selected celestial object (except unnamed stars and artificial satellites) for specific date range. The tool is proposed for planning observations and he suggest the best time and conditions for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Transits}.
+
+You may also export the list of transits into an XLSX or CSV file.
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_transits_tab.png}
+\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
+\label{fig:gui:AstroCalc:Transits}
+\end{figure}
+
 \newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
@@ -893,8 +912,9 @@ Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations 
-for inner planets and stationary points for all planets in additional to exist phenomena.
+In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations for inner planets and stationary points for all planets in
+additional to exist phenomena. For all Solar system bodies, except the moons, we also propose compute perihelion and aphelion in addition to other phenomena.
+
 You can export the calculated phenomena into an XLSX or CSV file.
 
 \begin{figure}[htbp]
