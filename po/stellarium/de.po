@@ -10,17 +10,17 @@
 # Stefan B. <astro@sbruns.de>, 2018
 # Daniel Sieler <asieler971@gmail.com>, 2018
 # Latein Lebt, 2019
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
 # T Exnicer <transifex@texnicer.de>, 2019
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-19 19:10+0700\n"
+"POT-Creation-Date: 2019-12-20 22:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: T Exnicer <transifex@texnicer.de>, 2019\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2019\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14443,13 +14443,12 @@ msgid ""
 "Can't slew a telescope which is parked. Unpark before performing any goto "
 "command."
 msgstr ""
-"Eine Ausrichtung des Teleskopes ist nicht möglich, wenn sich dieses im "
-"Ruhemodus befindet. Vor der Ausführung von \"goto\"-Anweisungen, den "
-"Bereitschaftsmodus aktivieren."
+"Eine Bewegung des Teleskopes ist nicht möglich, wenn dieses geparkt ist. Vor"
+" der Ausführung von \"goto\"-Anweisungen bitte aus der Parkposition bewegen."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "ASCOM Settings"
-msgstr "ASCOM Einstellungen"
+msgstr "ASCOM-Einstellungen"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
 msgid "Choose ASCOM Telescope"
@@ -14461,7 +14460,7 @@ msgstr "Geräteauswahl:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "No device selected"
-msgstr "Kein Gerät ausgewählt."
+msgstr "Kein Gerät ausgewählt"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid "Source for coordinate system:"
@@ -14473,8 +14472,8 @@ msgid ""
 "mounts will handle this correctly, but some might not."
 msgstr ""
 "Lassen Sie das ASCOM Gerät Stellarium anweisen, welches Koordinatensystem "
-"Verwendung finden soll. Die meisten Aufhängungen werden dies korrekt "
-"verwenden, es ist jedoch möglich, dass es in Einzelfällen nicht klappt. "
+"Verwendung finden soll. Die meisten Montierungen sollten damit "
+"zurechtkommen. "
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:47
 msgid "Let ASCOM device decide"
@@ -14485,12 +14484,12 @@ msgid ""
 "Use the coordinate system that is configured in the general telescope "
 "properties for this telescope."
 msgstr ""
-"Nutze das Koordinatensystem, welches in den allgemeinen Einstellungen für "
-"dieses Teleskop festgelegt wurde."
+"Nutze das Koordinatensystem, welches in den allgemeinen Einstellungen  "
+"festgelegt wurde, für dieses Teleskop."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:49
 msgid "Use Stellarium settings"
-msgstr "Nutze die Einstellung von Stellarium"
+msgstr "Nutze die Einstellungen von Stellarium"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:186
 msgid ""
@@ -17630,11 +17629,13 @@ msgstr "Eigennamen"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
+"In December 2015 and in December 2019, the International Astronomical Union "
+"(IAU) has officially approved names for several exoplanets after a public "
+"vote."
 msgstr ""
-"Im Dezember 2015 vergab die Internationale Astronomische Union (IAU) nach "
-"dem Ergebnis einer öffentlichen Abstimmung erstmals offizielle Eigennamen."
+"Im Dezember 2015 und Dezember 2019 vergab die Internationale Astronomische "
+"Union (IAU) nach dem Ergebnis öffentlicher Abstimmungen erstmals offizielle "
+"Eigennamen."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
@@ -18020,11 +18021,15 @@ msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
+"Die meisten Historiker nehmen an, die Albanier stammen von den Illyrern ab, "
+"eine Bezeichnung, die sie mit Stolz für sich selbst verwenden."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "Arber is the term for the inhabitants of Albania during the middle ages."
 msgstr ""
+"Arber ist die Bezeichnung für die Einwohner Albaniens während des "
+"Mittelalters."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
@@ -18082,11 +18087,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Bubup is the Boonwurrung word for child."
-msgstr ""
+msgstr "Bubup ist das Wort der Boonwurrung für Kind."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "YanYan is the Boonwurrung word for boy."
-msgstr ""
+msgstr "YanYan ist das Wort der Boonwurrung für Bub."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid ""
@@ -18131,6 +18136,8 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "Nervia, adapted from Nervii, was a prominent Belgian Celtic tribe."
 msgstr ""
+"Nervia, abgeleitet von Nervii, war ein bedeutender Keltischer Stamm in "
+"Belgien."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid "Eburonia, adapted from Eburones, was a prominent Belgian Celtic tribe."
@@ -18203,6 +18210,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Tangra is the supreme celestial god that early Bulgars worshiped."
 msgstr ""
+"Tangra ist der oberste Himmelsgott, den die frühen Bulgaren verehrten."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid ""
@@ -18858,12 +18866,16 @@ msgid ""
 "Sagarmatha is the Nepali name for the highest peak in the world (also known "
 "as Mount Everest) and symbol of national pride of Nepal."
 msgstr ""
+"Sagarmatha ist der Nepali-Name für den höchsten Berg der Erde (auch bekannt "
+"als Mount Everest) und Symbol des Nationalstolzes von Nepal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid ""
 "Laligurans are the Nepali variation of the rhododendron flower and is the "
 "national flower of Nepal."
 msgstr ""
+"Laligurans sind die Nepali-Variante des Rhododendron und National-Blume  "
+"Nepals."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
 msgid ""
@@ -19188,12 +19200,15 @@ msgstr ""
 msgid ""
 "Mönch is one of the prominent peaks of the Bernese Alps in Switzerland."
 msgstr ""
+"Der Mönch ist einer der bekannten Berggipfel der Berner Alpen (Schweiz)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:460
 msgid ""
 "Eiger is one of the prominent peaks of the Bernese Alps, in the Jungfrau-"
 "Aletsch protected area."
 msgstr ""
+"Der Eiger ist einer der bekannten Berggipfel der Berner Alpen, im Jungfrau-"
+"Aletsch-Schutzgebiet."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:461
 msgid ""
@@ -22123,4 +22138,4 @@ msgstr "VTS"
 
 #: plugins/Vts/src/Vts.cpp:155
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
-msgstr "Freigabe zur Nutzung von Stellarium als Erweiterung in CNES VTS"
+msgstr "Ermöglicht die Nutzung von Stellarium als Erweiterung in CNES VTS."

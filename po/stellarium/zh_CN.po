@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-19 19:10+0700\n"
+"POT-Creation-Date: 2019-12-20 22:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -5043,11 +5043,11 @@ msgstr "月角距"
 
 #: src/gui/AstroCalcDialog.cpp:1977
 msgid "Save calculated transits as..."
-msgstr "将所计算的凌现象另存为..."
+msgstr "将所计算的中天事件另存为..."
 
 #: src/gui/AstroCalcDialog.cpp:1995 src/ui_astroCalcDialog.h:1589
 msgid "Transits"
-msgstr "凌"
+msgstr "中天"
 
 #: src/gui/AstroCalcDialog.cpp:2186
 msgid "1 minute"
@@ -10020,7 +10020,7 @@ msgstr "显示de Vaucouleurs的超星系坐标(1976)，由附近星系的分布�
 
 #: src/ui_viewDialog.h:3021
 msgid "The line thickness for grids and lines"
-msgstr "网格线的线宽"
+msgstr "网格线和连线的线宽"
 
 #: src/ui_viewDialog.h:3023
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
@@ -11188,7 +11188,7 @@ msgstr "星历表可视化附加选项"
 
 #: src/ui_astroCalcDialog.h:1638
 msgid "Cleanup ephemerides"
-msgstr "清理星历表"
+msgstr "清空星历表"
 
 #: src/ui_astroCalcDialog.h:1639
 msgid "Save ephemeris"
@@ -11263,15 +11263,15 @@ msgstr "土星历表标识颜色"
 
 #: src/ui_astroCalcDialog.h:1676
 msgid "Cleanup transits"
-msgstr "清理凌现象"
+msgstr "清空中天事件"
 
 #: src/ui_astroCalcDialog.h:1677
 msgid "Save transits"
-msgstr "保存凌现象"
+msgstr "保存中天事件"
 
 #: src/ui_astroCalcDialog.h:1678
 msgid "Calculate transits"
-msgstr "计算凌现象"
+msgstr "计算中天事件"
 
 #: src/ui_astroCalcDialog.h:1679
 msgid "Celestial object:"
@@ -11279,7 +11279,7 @@ msgstr "天体："
 
 #: src/ui_astroCalcDialog.h:1683
 msgid "Table of approximate transits for selected celestial object"
-msgstr "选定天体的近似凌现象表"
+msgstr "所选天体临近中天事件表"
 
 #: src/ui_astroCalcDialog.h:1684
 msgid ""
@@ -11392,7 +11392,7 @@ msgstr "曲线图显示的持续年份"
 
 #: src/ui_astroCalcDialog.h:1732
 msgid "Duration:"
-msgstr "持续时间："
+msgstr "为期："
 
 #: src/ui_astroCalcDialog.h:1736
 msgctxt "duration"
@@ -13936,14 +13936,14 @@ msgstr "将望远镜 %1 指向当前屏幕的中心"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:192
 #, qt-format
 msgid "Sync telescope #%1 position to selected object"
-msgstr "同步望远镜 #%1 的位置到所选的天体"
+msgstr "同步望远镜 #%1 指向所选的天体"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:199
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:251
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:259
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
-msgstr "中止望远镜 #%1 的最后指向命令"
+msgstr "取消望远镜 #%1 最后的指向命令"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:214
 msgid "Move a telescope to a given set of coordinates"
@@ -14050,7 +14050,7 @@ msgstr "最小值"
 msgid ""
 "Can't slew a telescope which is parked. Unpark before performing any goto "
 "command."
-msgstr "不能把控制休眠的望远镜。在执行任何goto命令之前必须先取消休眠状态。"
+msgstr "不能控制停驻的望远镜。在执行任何goto命令之前必须先退出停驻状态。"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "ASCOM Settings"
@@ -14062,11 +14062,11 @@ msgstr "选择ASCOM望远镜"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:43
 msgid "Selected Device:"
-msgstr "选取的设备"
+msgstr "所选的设备："
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "No device selected"
-msgstr "没有设备被选取"
+msgstr "无被选设备"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid "Source for coordinate system:"
@@ -16928,9 +16928,10 @@ msgstr "官方命名"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
-msgstr "2015年12月，国际天文协会(IAU)在一次公开投票后官方认定某些系外行星的名称。"
+"In December 2015 and in December 2019, the International Astronomical Union "
+"(IAU) has officially approved names for several exoplanets after a public "
+"vote."
+msgstr "2015年12月和2019年12月，国际天文学联合会(IAU)经过公众投票，正式批准了一些系外行星的名字。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
@@ -17226,7 +17227,7 @@ msgstr "是拉丁文<em>fortitude（坚韧）</em>。坚韧是逆境中的情感
 msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
-msgstr "历史学家普遍认为阿尔巴尼亚人是伊利里亚人的后代，伊利里亚人是阿尔巴尼亚人引以为傲的称呼。"
+msgstr "历史学家普遍认为阿尔巴尼亚人是伊利里亚人（Illyrian）的后代，伊利里亚人是阿尔巴尼亚人引以为傲的称呼。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
@@ -17237,13 +17238,13 @@ msgstr "Arber是中世纪阿尔巴尼亚居民的称呼。"
 msgid ""
 "Hoggar is the name of the main mountain range in the Sahara Desert in "
 "southern Algeria."
-msgstr ""
+msgstr "霍加尔（Hoggar）是阿尔及利亚南部撒哈拉沙漠主要山脉的名称。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "Tassili is a UNESCO World Heritage Site situated in the Sahara Desert and is"
 " renowned for its prehistoric cave art and scenic geological formations."
-msgstr ""
+msgstr "塔西利（Tassili）是位于撒哈拉沙漠中的联合国教科文组织世界遗产，并以其史前洞穴艺术和风景秀丽的地质构造而闻名。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
@@ -17252,6 +17253,7 @@ msgid ""
 " primitive solar calendar and reference point for shepherds and early "
 "inhabitants of Andorra."
 msgstr ""
+"阿尔卡利斯（Arcalis）是安道尔北部的一个著名峰，每年两次在固定日期太阳穿过山上的一个洞。 它被用作原始的太阳历和安道尔的牧羊人和早期居民的参考点。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
@@ -17260,6 +17262,8 @@ msgid ""
 "of Andorra. It is the main part of the Madriu-Perafita-Claror UNESCO World "
 "Heritage Site."
 msgstr ""
+"Madriu（加泰罗尼亚语中的Mare del riu，英文为“河之母”）是冰川谷和贯穿安道尔东南部的河流的名称。 它是联合国教科文组织世界遗产马德留-"
+"配拉菲塔-克拉罗尔大峡谷（Madriu-Perafita-Claror）的主要部分。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
@@ -17279,6 +17283,7 @@ msgid ""
 "stretch that interrupts the limestone and rocky terrace along the coast. Its"
 " shallow clear Caribbean waters make it a popular snorkelling spot."
 msgstr ""
+"Malmok是一个本土名字，指的是阿鲁巴的一个海滩，沿着海岸有一段狭窄的沙地，打断了石灰岩和岩石平台。它的浅水清澈的加勒比海水域使它成为一个受欢迎的潜水地点。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid ""
@@ -17286,26 +17291,32 @@ msgid ""
 "in Arikok National Park along the northeast coast of Aruba. It is named "
 "after Plantation Prins where coconuts are cultivated."
 msgstr ""
+"博卡普林斯（Boca Prins）是一个僻静的海滩，白色的沙丘和标志性的风景位于阿鲁巴（Aruba）东北海岸的阿里科克国家公园（Arikok "
+"National Park）中。 它以种植椰子的种植园王子命名。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Bubup is the Boonwurrung word for child."
-msgstr ""
+msgstr "Bubup 是Boonwurrung单词“孩子”"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "YanYan is the Boonwurrung word for boy."
-msgstr ""
+msgstr "YanYan是Boonwurrung单词“男孩”"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid ""
 "Franz is a character in the movie 'Sissi' embodying an emperor of Austria in"
 " the XIXth century. The role is played by the actor Karlheinz Böhm."
 msgstr ""
+"弗朗兹（Franz）是电影《茜茜公主》（Sissi）中的一个角色，十九世纪时的奥地利皇帝。 该角色由演员卡尔海因茨·伯姆（Karlheinz "
+"Böhm）扮演。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid ""
 "Sissi is a character in the movie 'Sissi', who is married with Franz. The "
 "role is played by the actress Romy Schneider."
 msgstr ""
+"茜茜（Sissi）是电影《茜茜公主》（Sissi）中的角色，与弗朗兹（Franz）结婚。 该角色由女演员罗米·施耐德（Romy "
+"Schneider）扮演。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid ""
@@ -17322,6 +17333,8 @@ msgid ""
 "capital of Azerbaijan, the first capital of the Azerbaijan Democratic "
 "Republic and the city with the spirit of wisdom and freedom."
 msgstr ""
+"甘贾（Ganja）是阿塞拜疆的古城，是诗人Mahsati和Nizami等许多知名人士的出生地。 "
+"它是阿塞拜疆的古都，阿塞拜疆民主共和国的第一个首都和具有智慧和自由精神的城市。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid ""
@@ -17348,13 +17361,13 @@ msgid ""
 "Gakyid means happiness. Gross National Happiness is the development "
 "philosophy conceived and followed in Bhutan and is one of Bhutan's "
 "contributions to the world."
-msgstr ""
+msgstr "Gakyid意味着幸福。国民幸福总值是不丹构想和奉行的发展理念，是不丹对世界的贡献之一。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid ""
 "Drukyul (land of the thunder dragon) is the native name for Bhutan, the "
 "country that came up with the philosophy of Gross National Happiness."
-msgstr ""
+msgstr "Drukyul是不丹的国名，这个国家提出了国民幸福总值的理念。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid ""
@@ -17458,14 +17471,14 @@ msgstr ""
 msgid ""
 "Lion Rock is a lion-shaped peak overlooking Hong Kong and is a cultural "
 "symbol with deep respect from the local community."
-msgstr ""
+msgstr "狮子山是一座狮形山峰，俯瞰香港，是深受当地社区尊重的文化象征。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid ""
 "Victoria Peak overlooks the bustling Victoria Harbour and is regarded as an "
 "ambassadorial gateway for foreign visitors wishing to experience Hong Kong "
 "first hand."
-msgstr ""
+msgstr "太平山山顶俯瞰繁华的维多利亚港，被视为希望亲身体验香港的外国游客的大使馆。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid ""
@@ -17484,7 +17497,7 @@ msgstr ""
 msgid ""
 "Formosa is the historical name of Taiwan used in the 17th century, meaning "
 "beautiful in Latin."
-msgstr ""
+msgstr "福尔摩沙（Formosa）是台湾在17世纪的历史名称，在拉丁语中意为美丽。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid ""
@@ -17493,6 +17506,7 @@ msgid ""
 "the Thao people who are a tribe of Taiwanese aborigines who lived in the "
 "region for hundreds of years."
 msgstr ""
+"Sazum是南投县渔池乡的传统名称，那里有著名的日月潭。Sazum在Thao族的语言中是水的意思，邵人是台湾土著部落，在该地区生活了数百年。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid ""
