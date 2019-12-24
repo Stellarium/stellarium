@@ -37,12 +37,8 @@
 #include <QList>
 #include <QSharedPointer>
 #include <QMetaEnum>
-
+#include "../../../src/core/modules/NomenclatureItem.hpp"
 #include <StelMainScriptAPI.hpp>
-
-#ifndef M_PI
-#define M_PI           3.14159265358979323846
-#endif
 
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
@@ -58,7 +54,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
 	info.contact = STELLARIUM_URL;
-	info.description = N_("This plugin marks navigational stars from a selected set. Additionally for a selected object relevant navigational data are provided. ");
+	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	info.license = NAVSTARS_PLUGIN_LICENSE;
 	return info;
@@ -155,33 +151,10 @@ bool NavStars::configureGui(bool show)
 	return true;
 }
 
-/* Adds/subtracts 360deg to ensure a SHA, GHA, or LHA between 0 and 360deg.
-   This is taken from observability plugin and adapted for NavStars */
-double NavStars::toUnsigned_HA(double HA)
-{
-		double tempHA,tempmod;
-		if (HA<0.0)
-		{
-			tempmod = std::modf(-HA/360.,&tempHA);
-			HA += 360.*(tempHA+1.0)+0.0*tempmod;
-		};
-		double auxHA = 360.*std::modf(HA/360.,&tempHA);
-		auxHA += (auxHA<0.0)?360.0:((auxHA>360.0)?-360.0:0.0);
-		return auxHA;
-}
-
-
-/* rounding to one decimal figure */
-double roundToOneFigure(double x)
-{
-		return (int)(x*10 + 0.5)/10.;
-}
-
-
 void NavStars::draw(StelCore* core)
 {
 	// Drawing is enabled?
-	if (markerFader.getInterstate() <= 0.0)
+	if (markerFader.getInterstate() <= 0.0f)
 	{
 		return;
 	}
@@ -217,7 +190,7 @@ void NavStars::draw(StelCore* core)
 				painter.setBlending(true);
 				painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
 				markerTexture->bind();
-				painter.drawSprite2dMode(pos[0], pos[1], 11.f);
+				painter.drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), 11.f);
 			}
 
 			// Draw the localized name of the star and its ordinal number
@@ -226,7 +199,7 @@ void NavStars::draw(StelCore* core)
 				label = QString("%1").arg(i+1);
 			else
 				label = QString("%1 (%2)").arg(label).arg(i+1);
-			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
+			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 10.f, 10.f, false);
 		}
 	}
 
@@ -238,81 +211,103 @@ void NavStars::draw(StelCore* core)
 	if (core->getCurrentLocation().planetName != "Earth")
 		return;
 
-//	if(selectedObject->getType() == "Satellite")
-//		return;
+        isEnabled = getEnableShowOnScreen();
 
-	QString navText;
-	if (isSource)	//(a object was chosen)
+	if (isSource && isEnabled)	// (a object was chosen and information shall be shown)
 	{
+		StelApp& app = StelApp::getInstance();
+		bool withDesignations = app.getFlagUseCCSDesignation();
+
 		StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
-
-		/* compute UTC */
-		QString myTime = StelMainScriptAPI::getDate("utc");
-
-
-		/* compute declination of selected object */
-		EquPos = selectedObject->getEquinoxEquatorialPos(core);
-		EquPos.normalize();
-		double myDec = std::asin(EquPos[2]) * 180./M_PI;
-		double selDecDeg, selDecMin = std::modf(myDec, &selDecDeg) * 60.;
-		selDecMin = roundToOneFigure(selDecMin);
-
-		char* selHemisphere = (char*) " ";
-		if (EquPos[2] < 0) selHemisphere = (char*) "S";
-		if (EquPos[2] > 0) selHemisphere = (char*) "N";
-
-		selDecDeg = std::abs(selDecDeg);
-		selDecMin = std::abs(selDecMin);
-
-
-		/* compute SHA of selected object */
-		double mySHA = toUnsigned_HA(- std::atan2(EquPos[1], EquPos[0]) * 180./M_PI);
-		double selSHADeg, selSHAMin = std::modf(mySHA, &selSHADeg) * 60.;
-		selSHAMin = roundToOneFigure(selSHAMin);
 		
+		//EquPos = selectedObject->getEquinoxEquatorialPos(core); TODO --> make switch available in GUI
+		EquPos = selectedObject->getJ2000EquatorialPos(core);
 
-		/* compute LHA of selected object */
+		EquPos.normalize();
+		double dec, ra;
+                StelUtils::rectToSphe(&ra, &dec, EquPos);
+
 		LocPos = selectedObject->getSiderealPosGeometric(core);
-		double myLHA = toUnsigned_HA(- std::atan2(LocPos[1], LocPos[0]) * 180./M_PI);
-		double selLHADeg, selLHAMin = std::modf(myLHA, &selLHADeg) * 60.;
-		selLHAMin = roundToOneFigure(selLHAMin);
+		double lon = core->getCurrentLocation().longitude;	// lon is already in degrees
 
+		selectedObject->setExtraInfoString("<br/>");
 
-		/* compute GHA of selected object */
-		GWPos = selectedObject->getSiderealPosGeometric(core);
-		double myLon = core->getCurrentLocation().longitude;		// this is already in deg, E -> +, W -> -
-		double myGHA = toUnsigned_HA(myLHA - myLon);
-		double selGHADeg, selGHAMin = std::modf(myGHA, &selGHADeg) * 60.;
-		selGHAMin = roundToOneFigure(selGHAMin);
+                QString value;
 
+		double sha = 2.*M_PI - ra;
+		double lha = - std::atan2(LocPos[1], LocPos[0]);
+		double gha = 2.*M_PI + (lha - lon * M_PI_180f);
+		double gha0 = gha - sha;
 
-		/* compute GHA of vernal equinox */
-		double selGHAEq = toUnsigned_HA(myGHA - mySHA);
-		double selGHAEqDeg, selGHAEqMin = std::modf(selGHAEq, &selGHAEqDeg) * 60.;
-		selGHAEqMin = roundToOneFigure(selGHAEqMin);
+		/* Notes:
+		 * The time and date of Greenwich is printed to screen here for convenience of the
+		 * user so that he/she can compare the results to nautical almanacs more easily.
+		 *
+		 * UT1 would be more correct for navigational purposes. Since UT1 is
+		 * not directly available in Stellarium and since the difference is less
+		 * than 1 second, UTC (for Greenwich) is given here.
+		 *
+		 * As a nautical mile is defined as one minute of arc of a meridian,
+		 * in nautical applications angles are measured in deg, min, decimal min (DDM)
+		 * and hence a distance on the earth's surface measured in nautical miles and its
+		 * decimal parts can be computed easily by the DDM representation of angles. */
 
+		/* UTC */
+		QString navText = StelMainScriptAPI::getDate("utc") + " UTC";
+		selectedObject->addToExtraInfoString("Date/Time: " + navText + "<br/>");
 
-		/* Note: In nautical applications angles are measured in deg, min, decimal min */
-		navText = QString("%1 UTC").arg(myTime);
-		painter.drawText(65, 260, navText, 0, 10.f, 10.f, false);
+		/* Greenwich Hour Angle (GHA) of Vernal Equinox */
+		QString name_gha0 = qc_("GHA (Vernal Equinox)", "nautical coordinate system");
+		if (withDesignations) name_gha0 = QString("t_Gr, Vernal Equinox");
+		value = StelUtils::radToDdmPStr(gha0, 1, false, 'U');
+		navText = QString("%1: %2").arg(name_gha0, value);
+		selectedObject->addToExtraInfoString(navText + "<br/>");
 
-		navText = QString("SHA = %1° %2'").arg(selSHADeg).arg(selSHAMin);		
-		painter.drawText(65, 220, navText, 0, 10.f, 10.f, false);
+		/* Greenwich Hour Angle (GHA) of selected object */
+		QString name_gha = qc_("GHA", "nautical coordinate system");
+		if (withDesignations)  name_gha = QString("t_Gr");
+		value = StelUtils::radToDdmPStr(gha, 1, false, 'U');
+		navText = QString("%1: %2").arg(name_gha, value);
+		selectedObject->addToExtraInfoString(navText + "<br/>");
 
-		navText = QString("GHA = %1° %2'").arg(selGHADeg).arg(selGHAMin);
-		painter.drawText(200, 220, navText, 0, 10.f, 10.f, false);
+		/* Local Hour Angle (LHA) of selected object */
+		QString name_lha = qc_("LHA", "nautical coordinate system");
+		if (withDesignations) name_lha = QString("t");
+		value = StelUtils::radToDdmPStr(lha, 1, false, 'U');
+		navText = QString("%1: %2").arg(name_lha, value);
+		selectedObject->addToExtraInfoString(navText + "<br/>");
 
-		navText = QString("GHA (Vernal Equinox) = %1° %2'").arg(selGHAEqDeg).arg(selGHAEqMin);
-		painter.drawText(200, 200, navText, 0, 10.f, 10.f, false);
-	
-		navText = QString("LHA = %1° %2'").arg(selLHADeg).arg(selLHAMin);
-		painter.drawText(65, 200, navText, 0, 10.f, 10.f, false);
-	
-		navText = QString("Dec = %1° %2' %3").arg(selDecDeg).arg(selDecMin).arg(selHemisphere);
-		painter.drawText(65, 180, navText, 0, 10.f, 10.f, false);
+		/* Sidereal Hour Angle (SHA) of selected object */
+		QString name_sha = qc_("SHA", "nautical coordinate system");
+		if (withDesignations) name_sha = QString("%1").arg(QChar(0x03B2));
+                value = StelUtils::radToDdmPStr(sha, 1, false, 'U');
+                navText = QString("%1: %2").arg(name_sha, value);
+		selectedObject->addToExtraInfoString(navText + "<br/>");
+
+		/* Declination (Dec) of selected object */
+		QString name_dec = qc_("Dec", "nautical coordinate system");
+                if (withDesignations) name_dec = QString("%1").arg(QChar(0x03B4));
+                value = StelUtils::radToDdmPStr(dec, 1, false, 'V');
+                navText = QString("%1: %2").arg(name_dec, value);
+		selectedObject->addToExtraInfoString(navText + "<br/>");
+
+		/* compute radius of sun or moon */
+		QString name_Radius = qc_("Radius", "nautical coordinate system");
+                if (withDesignations) name_Radius = QString("R");
+                QString name = selectedObject->getEnglishName();
+
+		isMoon = ("Moon" == name);
+		isSun = ("Sun" == name);
+
+		if (isMoon || isSun)
+		{
+		        // Note: For nautical applications only radius is required
+		        angularSize = QString::number(selectedObject->getAngularSize(core) * 60.f, 'f', 1);
+		        navText = QString("%1: %2'").arg(name_Radius, angularSize);
+			selectedObject->addToExtraInfoString(navText + "<br/>");
+		}
 	}
 }
-
 
 void NavStars::update(double deltaTime)
 {
@@ -362,6 +357,7 @@ void NavStars::loadConfiguration(void)
 	setCurrentNavigationalStarsSetKey(conf->value("current_ns_set", "AngloAmerican").toString());
 	markerColor = StelUtils::strToVec3f(conf->value("marker_color", "0.8,0.0,0.0").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	enableShowOnScreen = conf->value("show_on_screen", false).toBool();
 
 	conf->endGroup();
 }
@@ -373,6 +369,7 @@ void NavStars::saveConfiguration(void)
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", StelUtils::vec3fToStr(markerColor));
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("show_on_screen", enableShowOnScreen);
 
 	conf->endGroup();
 }
@@ -380,7 +377,7 @@ void NavStars::saveConfiguration(void)
 void NavStars::setCurrentNavigationalStarsSetKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("NavigationalStarsSet"));
-	NavigationalStarsSet nsSet = (NavigationalStarsSet)en.keyToValue(key.toLatin1().data());
+	NavigationalStarsSet nsSet = static_cast<NavigationalStarsSet>(en.keyToValue(key.toLatin1().data()));
 	if (nsSet<0)
 	{
 		qWarning() << "Unknown navigational stars set:" << key << "setting \"AngloAmerican\" instead";

@@ -26,9 +26,6 @@
 #include "StelTexture.hpp"
 
 #include <QSettings>
-#include <QFont>
-#include <QString>
-#include <QPair>							
 
 class StelButton;
 class StelPainter;
@@ -116,6 +113,9 @@ public slots:
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) const { return enableAtStartup; }
 
+	void setEnableShowOnScreen(bool b) { enableShowOnScreen=b; }
+	bool getEnableShowOnScreen(void) const { return enableShowOnScreen; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{
@@ -145,10 +145,12 @@ private:
 	StelPropertyMgr* propMgr;
 	QSettings* conf;	
 
+	class SolarSystem* solarSystem;
+
 	// The current set of navigational stars
 	NavigationalStarsSet currentNSSet;
 
-	bool enableAtStartup;
+	bool enableAtStartup, enableShowOnScreen;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
@@ -163,15 +165,20 @@ private:
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
 
-	//! Adds/subtracts 360deg to ensure a SHA, GHA, or LHA between 0 and 360deg.
-	//! @param angle right ascension (in hours).
-	double toUnsigned_HA(double angle);
-
 	//! Co-ordinates of currently-selected source.
-	Vec3d EquPos, LocPos, GWPos;
+	Vec3d EquPos, LocPos;
 
 	//! A boolean to check the kind of source selected.
-	bool isSun;
+	bool isSun, isMoon;
+
+	//! A boolean to check whether the nautical data shall be shown on screen
+	bool isEnabled;
+
+	//! Radius of Sun or Moon
+	QString angularSize;
+
+	double sunrise, sunset, duration;
+	bool sunRiseSet;
 
 };
 
