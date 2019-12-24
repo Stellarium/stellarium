@@ -391,6 +391,97 @@ double dmsStrToRad(const QString& s)
 	return rad;
 }
 
+/*************************************************************************
+ Convert an angle in radian to ddm (Degrees and decimal angular minutes)
+*************************************************************************/
+void radToDdm(double angle, const int modulo, bool &sign, int &d, double &m)
+{
+	angle = std::fmod(angle, modulo*M_PI);		// multiple of pi, i.e. 360 deg or 180 deg
+	sign = true;
+	if (angle < 0)
+	{
+		angle *= -1;
+		sign = false;
+	}
+
+	angle *= M_180_PI;
+
+	d = static_cast<unsigned int>(angle);
+
+	if (sign)
+		m = (angle - d) * 60;  			// m = decimal minutes
+	else
+	{
+		m = (1 - angle + d) * 60;
+		d += 1;
+	}
+
+	// workaround for rounding numbers
+	if (m>59.9)
+	{
+		m = 0.;
+		d += 1;
+	}
+	if (d==60)
+	{
+		d += 1;
+	}
+}
+
+/*************************************************************************
+ Convert an angle in radian to a ddm formatted string (Degrees and decimal angular minutes)
+*************************************************************************/
+QString radToDdmPStr(double angle, const int precision, const bool useD, const char flag)
+{
+	int d;
+	double m;
+	bool sign;
+
+	QString prefix, suffix, str;
+	prefix = ' ';
+	suffix = ' ';
+
+	if (flag == 'U')	// mod 360 deg
+	{
+		StelUtils::radToDdm(angle, 2.0, sign, d, m);
+		// this workaround is to ensure d = [0;360) while using function radToDdm.
+		// maybe d should not be "unsigned int" in radToDdm?
+		d *= sign?1:-1;
+		d += sign?0:360;
+		d = fmod(d,360);
+	}
+	else 	// mod 180 deg
+	{
+		StelUtils::radToDdm(angle, 1.0, sign, d, m);
+	}	
+
+	switch (flag)
+	{
+		case 'S': prefix = (sign?'+':'-'); break; // signed +/-
+		case 'U': break; // unsigned
+		case 'H': suffix = (sign?'E':'W'); break; // signed E/W
+		case 'V': suffix = (sign?'N':'S'); break; // signed N/S	
+	}
+
+	QChar degsign('d');
+	if (!useD)
+	{
+		degsign = 0x00B0;
+	}
+
+	QTextStream os(&str);
+	os << prefix << fixed << qSetPadChar('0') << d << degsign << ' ';
+
+	int width = 2;
+	if (precision>0)
+		width = 3 + precision;
+
+	os << qSetRealNumberPrecision(precision);
+	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << m << qSetFieldWidth(0) << "\' " << suffix;
+
+	return str;
+}
+
 Vec2f strToVec2f(const QStringList &s)
 {
 	if (s.size()<2)
@@ -1173,6 +1264,11 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 		}
 		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
+}
+
+QString hoursToHmsStr(const float hours, const bool lowprecision)
+{
+	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
 }
 
 /* /////////////////// DELTA T VARIANTS
@@ -2353,11 +2449,11 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 
 	// zlib stream
 	z_stream strm;
-	strm.zalloc = Z_NULL;
-	strm.zfree = Z_NULL;
-	strm.opaque = Z_NULL;
+	strm.zalloc = Q_NULLPTR;
+	strm.zfree = Q_NULLPTR;
+	strm.opaque = Q_NULLPTR;
 	strm.avail_in = Z_NULL;
-	strm.next_in = Z_NULL;
+	strm.next_in = Q_NULLPTR;
 
 	// the amount of bytes already read from the device
 	qint64 bytesRead = 0;

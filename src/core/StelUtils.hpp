@@ -180,6 +180,21 @@ namespace StelUtils
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
+	//! Convert an angle in decimal degree to ddm format.
+	//! @param angle input angle in decimal degree
+	//! @param modulo input is 1 -> angle is (-180,180] degrees or 2 -> angle is [0,360) degrees
+	//! @param sign true if positive, false otherwise
+	//! @param d degree component
+	//! @param m minute component
+	void radToDdm(double angle, const int modulo, bool &sign, int &d, double &m);
+
+	//! Convert an angle in decimal degrees to a ddm formatted string.
+	//! @param angle input angle in decimal degree
+	//! @param precision
+	//! @param useD Define if letter "d" must be used instead of deg sign
+	//! @param flag: 'U' is unsinged, 'S' is singed with +/-, 'V' is vertically signed N/S, 'H' is horizontally signed E/W
+	QString radToDdmPStr(const double angle, const int precision, const bool useD, const char flag);
+
 	//TODO these Vector-String converters should be removed, and missing functionality added to
 	//the VecMath classes and QVariant-based conversion
 
@@ -396,8 +411,8 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){
-		return static_cast<int>(floor(fmod(JD+1.5, 7)));
+	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
+		return static_cast<int>(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -492,6 +507,7 @@ namespace StelUtils
 
 	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
+	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
@@ -897,6 +913,12 @@ namespace StelUtils
 		T K=J-H;
 
 		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
+	}
+
+	//! Interval test. This checks whether @param value is within [@param low, @param high]
+	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
+	{
+	    return !(value < low) && !(high < value);
 	}
 
 
