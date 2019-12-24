@@ -239,6 +239,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="displayDataOnScreenCheckBox">
+            <property name="text">
+             <string>Display data on screen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

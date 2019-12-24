@@ -27,6 +27,8 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+#include "StelUtils.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <QComboBox>
 
@@ -73,6 +75,8 @@ void NavStarsWindow::createDialogContent()
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
 	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->displayDataOnScreenCheckBox->setChecked(ns->getEnableShowOnScreen());
+	connect(ui->displayDataOnScreenCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayDataOnScreenEnabled(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
@@ -138,6 +142,12 @@ void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
 	ns->setEnableAtStartup(b);
 }
 
+void NavStarsWindow::setDisplayDataOnScreenEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setEnableShowOnScreen(b);
+}
+
 void NavStarsWindow::populateNavigationalStarsSets()
 {
 	Q_ASSERT(ui->nsSetComboBox);
@@ -154,6 +164,8 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("Anglo-American"), "AngloAmerican");
 	// TRANSLATORS: Part of full phrase: French set of navigational stars
 	nsSets->addItem(q_("French"), "French");
+	// TRANSLATORS: Part of full phrase: German set of navigational stars
+	nsSets->addItem(q_("German"), "German");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
 
