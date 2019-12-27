@@ -15,8 +15,6 @@
 
 #include "VecMath.hpp"
 
-class OrbitSampleProc;
-
 //! @internal
 //! Orbit computations used for comet and asteroids
 class Orbit
@@ -55,10 +53,7 @@ public:
 
 	// Original one
 	Vec3d positionAtTime(const double JDE) const;
-	double getPeriod() const;
-	// double getBoundingRadius() const; // Return apoapsis distance. UNUSED!
-	// virtual void sample(double, double, int, OrbitSampleProc&) const; //UNDOCUMENTED & UNUSED
-
+	double getPeriod() const{return period;}
 private:
 	//! returns eccentric anomaly E for Mean anomaly M
 	double eccentricAnomaly(const double M) const;
@@ -116,42 +111,5 @@ private:
 	bool updateTails; //! flag to signal that tails must be recomputed.
 	const double orbitGood; //! orb. elements are only valid for this time from perihel [days]. Don't draw the object outside.
 };
-
-
-class OrbitSampleProc
-{
- public:
-	virtual ~OrbitSampleProc() {;}
-	virtual void sample(const Vec3d&) = 0;
-};
-
-/*
- * Stuff found unused and deactivated pre-0.15
-
-// Custom orbit classes should be derived from CachingOrbit.  The custom
-// orbits can be expensive to compute, with more than 50 periodic terms.
-// Celestia may need require position of a Planet more than once per frame; in
-// order to avoid redundant calculation, the CachingOrbit class saves the
-// result of the last calculation and uses it if the time matches the cached
-// time.
-class CachingOrbit : public Orbit
-{
-public:
-	CachingOrbit() : lastTime(1.0e-30) {} //;
-
-	virtual Vec3d computePosition(double JDE) const = 0;
-	virtual double getPeriod() const = 0;
-	virtual double getBoundingRadius() const = 0;
-
-	Vec3d positionAtTime(double JDE) const;
-
-	virtual void sample(double, double, int, OrbitSampleProc& proc) const;
-
-private:
-	mutable Vec3d lastPosition;
-	mutable double lastTime;
-};
-
-*/
 
 #endif // ORBIT_HPP
