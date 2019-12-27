@@ -87,7 +87,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
 		N_("Bolivia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
-		N_("Caribbean NL");
+		N_("Bonaire, Sint Eustatius and Saba");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 		N_("Brazil");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Bahamas
@@ -111,7 +111,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
 		N_("Central African Rep.");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
-		N_("Congo (Rep.)");
+		N_("Congo");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 		N_("Switzerland");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
@@ -131,15 +131,15 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Cuba
 		N_("Cuba");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
-		N_("Cape Verde");
+		N_("Cabo Verde");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
-		N_("Curacao");
+		N_("Curaçao");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 		N_("Christmas Island");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Cyprus
 		N_("Cyprus");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
-		N_("Czech Republic");
+		N_("Czechia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 		N_("Germany");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Djibouti
@@ -171,7 +171,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Fiji
 		N_("Fiji");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
-		N_("Falkland Islands");
+		N_("Falkland Islands (Malvinas)");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 		N_("Micronesia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Faroe_Islands
@@ -315,7 +315,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Marshall_Islands
 		N_("Marshall Islands");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
-		N_("Macedonia");
+		N_("North Macedonia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 		N_("Mali");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
@@ -323,7 +323,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
 		N_("Mongolia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Macau
-		N_("Macau");
+		N_("Macao");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 		N_("Northern Mariana Islands");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Martinique
@@ -409,7 +409,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Serbia
 		N_("Serbia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Russia
-		N_("Russia");
+		N_("Russian Federation");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 		N_("Rwanda");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Saudi_Arabia
@@ -425,7 +425,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Singapore
 		N_("Singapore");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
-		N_("St Helena");
+		N_("St Helena, Ascension and Tristan da Cunha");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 		N_("Slovenia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Svalbard_&_Jan_Mayen
@@ -451,15 +451,15 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
 		N_("St Maarten (Dutch)");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Syria
-		N_("Syria");
+		N_("Syrian Arab Republic");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
-		N_("Swaziland");
+		N_("Eswatini");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
-		N_("Turks and Caicos Is");
+		N_("Turks and Caicos Islands");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 		N_("Chad");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
-		N_("French Southern and Antarctic Lands");
+		N_("French Southern Territories");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 		N_("Togo");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Thailand
@@ -469,7 +469,7 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Tokelau
 		N_("Tokelau");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
-		N_("East Timor");
+		N_("Timor-Leste");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 		N_("Turkmenistan");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Tunisia
@@ -483,39 +483,39 @@ class GeoLocTranslations
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Tuvalu
 		N_("Tuvalu");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
-		N_("Taiwan");
+		N_("Taiwan (Province of China)");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
-		N_("Tanzania");
+		N_("United Republic of Tanzania");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 		N_("Ukraine");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Uganda
 		N_("Uganda");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
-		N_("US minor outlying islands");
+		N_("US Minor Outlying Islands");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/United_States
-		N_("United States");
+		N_("United States of America");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 		N_("Uruguay");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Uzbekistan
 		N_("Uzbekistan");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
-		N_("Vatican City");
+		N_("Holy See");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
-		N_("St Vincent");
+		N_("St Vincent and the Grenadines");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 		N_("Venezuela");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
-		N_("Virgin Islands (UK)");
+		N_("Virgin Islands (British)");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
-		N_("Virgin Islands (US)");
+		N_("Virgin Islands (U.S.)");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
-		N_("Vietnam");
+		N_("Viet Nam");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 		N_("Vanuatu");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Wallis_&_Futuna
 		N_("Wallis and Futuna");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
-		N_("Samoa (western)");
+		N_("Samoa");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 		N_("Yemen");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Mayotte
@@ -526,5 +526,6 @@ class GeoLocTranslations
 		N_("Zambia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Zimbabwe
 		N_("Zimbabwe");
+
 	}
 };
