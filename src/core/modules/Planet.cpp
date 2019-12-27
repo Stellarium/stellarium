@@ -1285,7 +1285,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
+	const double dr = std::sqrt(observerPlanetRq*planetRq);
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*dr);
 	const double phaseAngle = std::acos(cos_chi);
 
 	double shadowFactor = 1.;
@@ -1332,7 +1333,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
 		const double phaseDeg=phaseAngle*M_180_PI;
-		const double d = 5. * log10(std::sqrt(observerPlanetRq*planetRq));
+		const double d = 5. * log10(dr);
 
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are three solutions:
@@ -1359,11 +1360,16 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Mercury")
 					return static_cast<float>(-0.6 + d + (((3.02e-6*phaseDeg - 0.000488)*phaseDeg + 0.0498)*phaseDeg));
 				if (englishName=="Venus")
-				{ // there are two regions strongly enclosed per phaseDeg (2.7..163.6..170.2). However, we must deliver a solution for every case.
+				{
+					// there are two regions strongly enclosed per phaseDeg (2.2..163.6..170.2). However, we must deliver a solution for every case.
+					// GZ: The model seems flawed. See https://sourceforge.net/p/stellarium/discussion/278769/thread/b7cab45f62/?limit=25#907d
+					// In this case, it seems better to deviate from the paper and --- only for the inferior conjunction --
+					// use a more modern value from Mallama&Hilton, https://doi.org/10.1016/j.ascom.2018.08.002
+					// The reversal and intermediate peak is real and due to forward scattering on sulphur acide droplets.
 					if (phaseDeg<163.6)
 						return static_cast<float>(-4.47 + d + ((0.13e-6*phaseDeg + 0.000057)*phaseDeg + 0.0103)*phaseDeg);
 					else
-						return static_cast<float>(0.98 + d -0.0102*phaseDeg);
+						return static_cast<float>(236.05828 + d - 2.81914*phaseDeg + 8.39034E-3*phaseDeg*phaseDeg);
 				}
 				if (englishName=="Earth")
 					return static_cast<float>(-3.87 + d + (((0.48e-6*phaseDeg + 0.000019)*phaseDeg + 0.0130)*phaseDeg));
