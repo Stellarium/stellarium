@@ -30,8 +30,8 @@ using namespace std;
 // line from vsop87.c, but also used by Heafner, 5.3.12. This is mu, we ignore the comet's mass i.r.t. the Sun's.
 #define GAUSS_GRAV_CONST_SQ (0.01720209895*0.01720209895)
 
-#if defined(_MSC_VER)
-// cuberoot is missing in VC++ !?
+#if defined(_MSC_VER) && (_MSC_VER<1900)
+// cuberoot is missing in older VC++ !?
 #define cbrt(x) pow((x),1./3.)
 #endif
 
@@ -49,16 +49,7 @@ static void InitHyp(const double q, const double n, const double e, const double
 	const double a = q/(e-1.0);
 	Q_ASSERT(a>0.0);
 	const double M = n * dt;
-//	double H = M;
-//	for (;;) { // Newton
-//		const double Hp = H;
-//		H = H-(e*sinh(H)-H-M)/(e*cosh(H)-1);
-//		if (fabs(H - Hp) < EPSILON) break;
-//	}
-//	const double h1 = q*sqrt((e+1.0)/(e-1.0));
-//	a1 = a*(e-cosh(H));
-//	a2 = h1*sinh(H);
-//	GZ Again I prefer Heafner, ch.5.4
+//	Heafner, ch.5.4
 	double E=StelUtils::sign(M)*log(2.0*fabs(M)/e + 1.85);
 //	qDebug() << "InitHyp: E=" << E << " M=" << M ;
 	for (;;)
@@ -80,19 +71,6 @@ static void InitHyp(const double q, const double n, const double e, const double
 //! @param dt: days from perihel
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-/*
-static void InitPar(const double q, const double n, const double dt, double &a1, double &a2)
-{
-	const double A = n*dt;
-	const double h = sqrt(A*A+1.0);
-	double c = cbrt(fabs(A)+h);
-	c = c*c;
-	const double tan_nu_h = 2*A/(1+c+1/c);
-	a1 = q*(1-tan_nu_h*tan_nu_h);
-	a2 = 2.0*q*tan_nu_h;
-}
-*/
-// GZ This implementation now follows Heafner, ch 5.5
 static void InitPar(const double q, const double n, const double dt, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitPar";
@@ -120,12 +98,6 @@ static void InitEll(const double q, const double n, const double e, const double
 	const double a = q/(1.0-e); // semimajor axis
 	double M = fmod(n*dt,2*M_PI);  // Mean Anomaly
 	if (M < 0.0) M += 2.0*M_PI;
-//	double E = M;
-//	for (;;) { // Newton(?) Solve Kepler's equation (similar to Meeus second method, Astro.Alg. 1998 p.199)
-//		const double Ep = E;
-//		E -= (M-E+e*sin(E))/(e*cos(E)-1);
-//		if (fabs(E-Ep) < EPSILON) break;
-//	}
 //	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
 //	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
 //	Ouch! https://bugs.launchpad.net/stellarium/+bug/1465112 ==>It seems we still need an escape counter!
@@ -145,8 +117,7 @@ static void InitEll(const double q, const double n, const double e, const double
 			//qDebug() << "Ell. orbit with eccentricity " << e << "Escaping after" << escape << "loops at E-Ep=" << E-Ep;
 			break;
 		}
-		escape++;
-		if (escape>10)
+		if (++escape>10)
 		{
 			qDebug() << "Ell. orbit with eccentricity " << e << "would have caused endless loop. Escaping after 10 runs at E-Ep=" << E-Ep;
 			break;
@@ -346,16 +317,6 @@ struct SolveKeplerFunc2 : public unary_function<double, double>
 	}
 };
 
-double sign(double x)
-{
-	if (x < 0.)
-		return -1.;
-	else if (x > 0.)
-		return 1.;
-	else
-		return 0.;
-}
-
 struct SolveKeplerLaguerreConway : public unary_function<double, double>
 {
 	double ecc;
@@ -371,7 +332,7 @@ struct SolveKeplerLaguerreConway : public unary_function<double, double>
 		double f = E - s - M;
 		double f1 = 1 - c;
 		double f2 = s;
-		E += -5 * f / (f1 + sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
+		E += -5 * f / (f1 + StelUtils::sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
 
 		return E;
 	}
@@ -391,7 +352,7 @@ struct SolveKeplerLaguerreConwayHyp : public unary_function<double, double>
 		double f = s - x - M;
 		double f1 = c - 1;
 		double f2 = s;
-		x += -5 * f / (f1 + sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
+		x += -5 * f / (f1 + StelUtils::sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
 
 		return x;
 	}
@@ -427,7 +388,7 @@ double EllipticalOrbit::eccentricAnomaly(const double M) const
 		// Extremely stable Laguerre-Conway method for solving Kepler's
 		// equation.  Only use this for high-eccentricity orbits, as it
 		// requires more calculation.
-		double E = M + 0.85 * eccentricity * sign(sin(M));
+		double E = M + 0.85 * eccentricity * StelUtils::sign(sin(M));
 		Solution sol = solveIteration_fixed(SolveKeplerLaguerreConway(eccentricity, M), E, 8);
 		return sol.first;
 	}
@@ -498,46 +459,3 @@ void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JDE, doubl
 	v[1] = rotateToVsop87[3]*pos[0] + rotateToVsop87[4]*pos[1] + rotateToVsop87[5]*pos[2];
 	v[2] = rotateToVsop87[6]*pos[0] + rotateToVsop87[7]*pos[1] + rotateToVsop87[8]*pos[2];
 }
-
-double EllipticalOrbit::getPeriod() const
-{
-	return period;
-}
-
-/* Found undocumented and unused in pre-0.17.
-// return apocenter distance
-double EllipticalOrbit::getBoundingRadius() const
-{
-	// TODO: watch out for unbounded parabolic and hyperbolic orbits
-	return pericenterDistance * ((1.0 + eccentricity) / (1.0 - eccentricity));
-}
-*/
-/*
- * Found undocumented and unused pre-0.17.
-void EllipticalOrbit::sample(double, double, int nSamples, OrbitSampleProc& proc) const
-{
-	double dE = 2. * M_PI / (double) nSamples;
-	for (int i = 0; i < nSamples; i++)
-		proc.sample(positionAtE(dE * i));
-}
-*/
-/*
- * Stuff found unused and deactivated pre-0.15
-Vec3d CachingOrbit::positionAtTime(double JDE) const
-{
-	if (JDE != lastTime)
-	{
-		lastTime = JDE;
-		lastPosition = computePosition(JDE);
-	}
-	return lastPosition;
-}
-
-
-void CachingOrbit::sample(double start, double t, int nSamples, OrbitSampleProc& proc) const
-{
-	double dt = t / (double) nSamples;
-	for (int i = 0; i < nSamples; i++)
-		proc.sample(positionAtTime(start + dt * i));
-}
-*/
