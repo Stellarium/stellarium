@@ -809,8 +809,10 @@ void Oculars::setScreenFOVForCCD()
 		{
 			actualFOVx = actualFOVy;
 		}
+		double factor = 1.75;
+		if (ccds[selectedCCDIndex]->hasOAG()) factor *= 2;
 		movementManager->setFlagTracking(true);
-		movementManager->zoomTo(actualFOVx * 1.75, 0.0);
+		movementManager->zoomTo(actualFOVx * factor, 0.0);
 	}
 }
 
