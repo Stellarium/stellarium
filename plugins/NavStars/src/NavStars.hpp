@@ -130,10 +130,6 @@ signals:
 	//! Emitted when display of markers have been changed.
 	void navStarsMarksChanged(bool b);
 
-private slots:
-	//! Called setNavStarsMarks() if the value changes.
-	void starNamesChanged(const bool b);
-
 private:
 	NavStarsWindow* mainWindow;
 	StelPropertyMgr* propMgr;
@@ -143,6 +139,7 @@ private:
 	NavigationalStarsSet currentNSSet;
 
 	bool enableAtStartup;
+	bool starLabelsState;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;

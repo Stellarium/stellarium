@@ -63,6 +63,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
 	, enableAtStartup(false)
+	, starLabelsState(true)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -95,6 +96,8 @@ void NavStars::init()
 		qDebug() << "[NavStars] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
+	// save default state for star labels
+	starLabelsState = propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool();
 
 	// populate settings from main config file.
 	loadConfiguration();
@@ -126,9 +129,6 @@ void NavStars::init()
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
-
-	// Sync global settings for stars labels
-	connect(GETSTELMODULE(StarMgr), SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(starNamesChanged(bool)));
 }
 
 
@@ -202,36 +202,28 @@ void NavStars::draw(StelCore* core)
 	}
 }
 
-
 void NavStars::update(double deltaTime)
 {
 	markerFader.update(static_cast<int>(deltaTime*1000));
 }
 
-
 void NavStars::setNavStarsMarks(const bool b)
 {
-	if (b != getNavStarsMarks())
-	{
-		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", !b);
-		markerFader = b;
-		emit navStarsMarksChanged(b);
-	}
-}
+	if (b==getNavStarsMarks())
+		return;
 
+	if (b)
+		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", !b);
+	else
+		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", starLabelsState);
+
+	markerFader = b;
+	emit navStarsMarksChanged(b);
+}
 
 bool NavStars::getNavStarsMarks() const
 {
 	return markerFader;
-}
-
-
-void NavStars::starNamesChanged(const bool b)
-{
-	if (b && getNavStarsMarks())
-	{
-		setNavStarsMarks(false);
-	}
 }
 
 void NavStars::restoreDefaultConfiguration(void)
