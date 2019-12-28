@@ -778,6 +778,8 @@ void Oculars::instrumentChanged()
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 		zoom(true);
 	}
+	else if (flagShowCCD)
+		setScreenFOVForCCD();
 }
 
 void Oculars::setFlagScaleImageCircle(bool state)
@@ -1337,8 +1339,7 @@ void Oculars::rotateCCD(int amount)
 	{
 		angle += 360;
 	}
-	ccd->setChipRotAngle(angle);
-	emit(selectedCCDChanged(selectedCCDIndex));
+	ccd->setChipRotAngle(angle);	
 }
 
 void Oculars::selectCCDAtIndex(int index)
@@ -1538,11 +1539,9 @@ void Oculars::initializeActivationActions()
 	// Select previous eyepiece via keyboard
 	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()", "");
 
-	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(setScreenFOVForCCD()));
+	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(instrumentChanged()));	
 	connect(this, SIGNAL(selectedOcularChanged(int)),    this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(setScreenFOVForCCD()));
+	connect(this, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(instrumentChanged()));	
 	connect(this, SIGNAL(selectedLensChanged(int)),      this, SLOT(instrumentChanged()));
 	// GZ these connections are now made in the Dialog setup, and they connect to properties!
 	//connect(ocularDialog, SIGNAL(requireSelectionChanged(bool)), this, SLOT(setRequireSelection(bool)));
@@ -1550,10 +1549,10 @@ void Oculars::initializeActivationActions()
 
 	connect(ccdRotationSignalMapper, SIGNAL(mapped(int)), this, SLOT(rotateCCD(int)));
 	connect(ccdsSignalMapper,        SIGNAL(mapped(int)), this, SLOT(selectCCDAtIndex(int)));
-	connect(ccdsSignalMapper,        SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
+	//connect(ccdsSignalMapper,        SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
 	connect(ocularsSignalMapper,     SIGNAL(mapped(int)), this, SLOT(selectOcularAtIndex(int)));
 	connect(telescopesSignalMapper,  SIGNAL(mapped(int)), this, SLOT(selectTelescopeAtIndex(int)));
-	connect(telescopesSignalMapper,  SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
+	//connect(telescopesSignalMapper,  SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
 	connect(lensesSignalMapper,      SIGNAL(mapped(int)), this, SLOT(selectLensAtIndex(int)));
 }
 
