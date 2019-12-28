@@ -58,8 +58,6 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-
-
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
 	, enableAtStartup(false)
@@ -72,12 +70,10 @@ NavStars::NavStars()
 	mainWindow = new NavStarsWindow();
 }
 
-
 NavStars::~NavStars()
 {
 	delete mainWindow;
 }
-
 
 double NavStars::getCallOrder(StelModuleActionName actionName) const
 {
@@ -87,7 +83,6 @@ double NavStars::getCallOrder(StelModuleActionName actionName) const
 		        .getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
-
 
 void NavStars::init()
 {
@@ -130,7 +125,6 @@ void NavStars::init()
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 }
-
 
 void NavStars::deinit()
 {
