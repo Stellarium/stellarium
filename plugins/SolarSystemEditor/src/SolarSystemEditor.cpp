@@ -31,6 +31,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "SolarSystem.hpp"
+#include "Orbit.hpp"
 
 #include <QDate>
 #include <QDebug>
@@ -831,7 +832,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
+		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)

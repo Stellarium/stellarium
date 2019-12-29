@@ -72,7 +72,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  true,  //Halo
 		  pTypeStr),
 	minorPlanetNumber(0),
-	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
+	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
 	semiMajorAxis(0.),
 	nameIsProvisionalDesignation(false),
 	properName(englishName),
@@ -80,7 +80,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	specT(""),
 	specB("")
 {
-	//Try to detect a naming conflict
+	//Try to detect a naming conflict. FIXME: What is the application of this? Do we need properName at all, in addition to englishName?
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.count() - 1);
 
@@ -147,20 +147,12 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 
 QString MinorPlanet::getEnglishName() const
 {
-	QString r = englishName;
-	if (minorPlanetNumber)
-		r = QString("(%1) %2").arg(minorPlanetNumber).arg(englishName);
-
-	return r;
+	return (minorPlanetNumber ? QString("(%1) %2").arg(minorPlanetNumber).arg(englishName) : englishName);
 }
 
 QString MinorPlanet::getNameI18n() const
 {
-	QString r = nameI18;
-	if (minorPlanetNumber)
-		r = QString("(%1) %2").arg(minorPlanetNumber).arg(nameI18);
-
-	return r;
+	return (minorPlanetNumber ?  QString("(%1) %2").arg(minorPlanetNumber).arg(nameI18) : nameI18);
 }
 
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
@@ -384,7 +376,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 double MinorPlanet::getSiderealPeriod() const
 {
-	return StelUtils::calculateSiderealPeriod(orbitPtr->getSemimajorAxis());
+	return KeplerOrbit::calculateSiderealPeriod(orbitPtr->getSemimajorAxis());
 }
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const

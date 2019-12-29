@@ -1140,14 +1140,6 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	return false;
 }
 
-// Calculate and getting sidereal period in days from semi-major axis
-double calculateSiderealPeriod(const double SemiMajorAxis)
-{
-	// Source: Heafner, Fundamental Eph. Comp. p.71.
-	return (2.*M_PI/0.01720209895)*sqrt(SemiMajorAxis*SemiMajorAxis*SemiMajorAxis);
-}
-
-
 QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
 	int h = static_cast<int>(hours);
