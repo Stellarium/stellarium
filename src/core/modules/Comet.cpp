@@ -61,7 +61,7 @@ Comet::Comet(const QString& englishName,
 	     const QString& atexMapName,
 	     const QString& aobjModelName,
 	     posFuncType coordFunc,
-	     void* orbitPtr,
+	     KeplerOrbit* orbitPtr,
 	     OsculatingFunctType *osculatingFunc,
 	     bool acloseOrbit,
 	     bool hidden,
@@ -161,7 +161,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		QString cometType = qc_("non-periodic", "type of comet");
-		if (semiMajorAxis>0.0)
+		if (orbitPtr->getEccentricity() < 1.0)
 		{
 			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
 			cometType = qc_("periodic", "type of comet");
@@ -330,13 +330,8 @@ void Comet::setSemiMajorAxis(const double value)
 
 double Comet::getSiderealPeriod() const
 {
-	double period;
-	if (semiMajorAxis>0)
-		period = StelUtils::calculateSiderealPeriod(semiMajorAxis);
-	else
-		period = 0;
-
-	return period;
+	const double semiMajorAxis=orbitPtr->getSemimajorAxis();
+	return ((semiMajorAxis>0) ? StelUtils::calculateSiderealPeriod(semiMajorAxis) : 0.);
 }
 
 float Comet::getVMagnitude(const StelCore* core) const
@@ -375,10 +370,7 @@ void Comet::update(int deltaTime)
 	StelCore* core=StelApp::getInstance().getCore();
 	double dateJDE=core->getJDE();
 
-	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=static_cast<CometOrbit*>(orbitPtr);
-	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbitPtr->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
@@ -388,7 +380,7 @@ void Comet::update(int deltaTime)
 	{
 		lastJDEtail=dateJDE;
 
-		if (orbit->getUpdateTails()){
+		if (orbitPtr->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
 			tailFactors=getComaDiameterAndTailLengthAU();
 
@@ -408,7 +400,7 @@ void Comet::update(int deltaTime)
 				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
 				//gastailColorArr.fill(Vec3f(0.3,0.3,0.3), gastailVertexArr.length());
 				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
-				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(orbit->getVelocity().length()));
+				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(orbitPtr->getVelocity().length()));
 				//dusttailColorArr.fill(Vec3f(0.3,0.3,0.3), dusttailVertexArr.length());
 
 
@@ -417,7 +409,7 @@ void Comet::update(int deltaTime)
 				Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
 				gasTailRot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 
-				Vec3d velocity=orbit->getVelocity(); // [AU/d]
+				Vec3d velocity=orbitPtr->getVelocity(); // [AU/d]
 				// This was a try to rotate a straight parabola somewhat away from the antisolar direction.
 				//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
 				// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
@@ -433,7 +425,7 @@ void Comet::update(int deltaTime)
 					dustVertices[i].transfo4d(dustTailRot);
 				}
 			}
-			orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
+			orbitPtr->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 		}
 	}
 
@@ -537,10 +529,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	{
 		return;
 	}
-	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=static_cast<CometOrbit*>(orbitPtr);
-	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbitPtr->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!

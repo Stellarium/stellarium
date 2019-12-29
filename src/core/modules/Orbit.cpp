@@ -129,55 +129,7 @@ static void InitEll(const double q, const double n, const double e, const double
 	rSinNu = h1*sin(E);
 }
 
-//! Compute position vector and (optional) speed vector from orbital elements and true anomaly components. See e.g. Heafner, Fund.Eph.Comp.1999
-//! @param i inclination
-//! @param Omega, longitude of ascending node
-//! @param w omega, argument of pericenter
-//! @param rCosNu: r*cos(nu)
-//! @param rSinNu: r*sin(nu)
-//! @param rx: x component of position vector, AU
-//! @param ry: y component of position vector, AU
-//! @param rz: z component of position vector, AU
-//! @param withVelVector also compute velocity vector (required for comet tails)
-//! @param e excentricity (required if withVelVector=true)
-//! @param q perihel distance, AU (required if withVelVector=true)
-//! @param rdotx: x component of velocity vector, AU/d
-//! @param rdoty: y component of velocity vector, AU/d
-//! @param rdotz: z component of velocity vector, AU/d
-void Init3D(const double i, const double Omega, const double w, const double rCosNu, const double rSinNu,
-	    double &rx,double &ry,double &rz, double &rdotx, double &rdoty, double &rdotz, const bool withVelVector=false,
-	    const double e=0.0, const double q=0.0)
-{
-	const double cw = cos(w);
-	const double sw = sin(w);
-	const double cOm = cos(Omega);
-	const double sOm = sin(Omega);
-	const double ci = cos(i);
-	const double si = sin(i);
-	const double Px=-sw*sOm*ci+cw*cOm; // Heafner, 5.3.1 Px
-	const double Qx=-cw*sOm*ci-sw*cOm; // Heafner, 5.3.4 Qx
-	const double Py= sw*cOm*ci+cw*sOm; // Heafner, 5.3.2 Py
-	const double Qy= cw*cOm*ci-sw*sOm; // Heafner, 5.3.5 Qy
-	const double Pz= sw*si;            // Heafner, 5.3.3 Pz
-	const double Qz= cw*si;            // Heafner, 5.3.6 Qz
-	rx = Px*rCosNu+Qx*rSinNu; // Heafner, 5.3.18 r
-	ry = Py*rCosNu+Qy*rSinNu;
-	rz = Pz*rCosNu+Qz*rSinNu;
-	if (withVelVector)
-	{
-		const double r=std::sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
-		const double sinNu=rSinNu/r;
-		const double cosNu=rCosNu/r;
-		const double p=q*(1.0+e);
-		const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ/p);
-		rdotx=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // Heafner, 5.3.19 r'
-		rdoty=sqrtMuP*((e+cosNu)*Qy - sinNu*Py);
-		rdotz=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz);
-	}
-}
-
-
-CometOrbit::CometOrbit(double pericenterDistance,
+KeplerOrbit::KeplerOrbit(double pericenterDistance,
                        double eccentricity,
                        double inclination,
                        double ascendingNode,
@@ -220,9 +172,8 @@ CometOrbit::CometOrbit(double pericenterDistance,
 	//  qDebug() << "CometOrbit::()...done";
 }
 
-void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool updateVelocityVector)
+void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
-	Q_UNUSED(updateVelocityVector);
 	JDE -= t0;
 	double rCosNu,rSinNu;
 	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
@@ -232,21 +183,46 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool 
 		InitHyp(q,n,e,JDE,rCosNu,rSinNu);
 	}
 	else InitPar(q,n,JDE,rCosNu,rSinNu);
-	double p0,p1,p2, s0, s1, s2;
-	//Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, updateVelocityVector, e, q);
-	Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, true, e, q);
+
+	// Compute position vector and speed vector from orbital elements and true anomaly components. See e.g. Heafner, Fund.Eph.Comp.1999
+	const double cw = cos(w);
+	const double sw = sin(w);
+	const double cOm = cos(Om);
+	const double sOm = sin(Om);
+	const double ci = cos(i);
+	const double si = sin(i);
+	const double Px=-sw*sOm*ci+cw*cOm; // Heafner, 5.3.1 Px
+	const double Qx=-cw*sOm*ci-sw*cOm; // Heafner, 5.3.4 Qx
+	const double Py= sw*cOm*ci+cw*sOm; // Heafner, 5.3.2 Py
+	const double Qy= cw*cOm*ci-sw*sOm; // Heafner, 5.3.5 Qy
+	const double Pz= sw*si;            // Heafner, 5.3.3 Pz
+	const double Qz= cw*si;            // Heafner, 5.3.6 Qz
+	const double p0 = Px*rCosNu+Qx*rSinNu; // rx: x component of position vector, AU Heafner, 5.3.18 r
+	const double p1 = Py*rCosNu+Qy*rSinNu; // ry: y component of position vector, AU
+	const double p2 = Pz*rCosNu+Qz*rSinNu; // rz: z component of position vector, AU
+	const double r=std::sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
+	const double sinNu=rSinNu/r;
+	const double cosNu=rCosNu/r;
+	const double p=q*(1.0+e);
+	const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ/p);
+	const double s0=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // rdotx: x component of velocity vector, AU/d Heafner, 5.3.19 r'
+	const double s1=sqrtMuP*((e+cosNu)*Qy - sinNu*Py); // rdoty: y component of velocity vector, AU/d
+	const double s2=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz); // rdotz: z component of velocity vector, AU/d
+
 	v[0] = rotateToVsop87[0]*p0 + rotateToVsop87[1]*p1 + rotateToVsop87[2]*p2;
 	v[1] = rotateToVsop87[3]*p0 + rotateToVsop87[4]*p1 + rotateToVsop87[5]*p2;
 	v[2] = rotateToVsop87[6]*p0 + rotateToVsop87[7]*p1 + rotateToVsop87[8]*p2;
 
-	//if (updateVelocityVector)
-	//{
-		rdot.set(s0, s1, s2);
-		updateTails=true;
-	//}
+	//rdot.set(s0, s1, s2); // FIXME: The speed also needs to be rotated. Correct?
+
+	rdot[0] = rotateToVsop87[0]*s0 + rotateToVsop87[1]*s1 + rotateToVsop87[2]*s2;
+	rdot[1] = rotateToVsop87[3]*s0 + rotateToVsop87[4]*s1 + rotateToVsop87[5]*s2;
+	rdot[2] = rotateToVsop87[6]*s0 + rotateToVsop87[7]*s1 + rotateToVsop87[8]*s2;
+
+	updateTails=true;
 }
 
-
+/*
 
 EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
                                  double eccentricity,
@@ -268,6 +244,7 @@ EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
 	  period(period),
 	  epoch(epoch)
 {
+	Q_ASSERT(0); // WE WANT TO GET RID OF THIS CLASS!
 	const double c_obl = cos(parentRotObliquity);
 	const double s_obl = sin(parentRotObliquity);
 	const double c_nod = cos(parentRotAscendingnode);
@@ -459,3 +436,4 @@ void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JDE, doubl
 	v[1] = rotateToVsop87[3]*pos[0] + rotateToVsop87[4]*pos[1] + rotateToVsop87[5]*pos[2];
 	v[2] = rotateToVsop87[6]*pos[0] + rotateToVsop87[7]*pos[1] + rotateToVsop87[8]*pos[2];
 }
+*/

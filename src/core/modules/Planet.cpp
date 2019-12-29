@@ -180,7 +180,7 @@ Planet::Planet(const QString& englishName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
 	       posFuncType coordFunc,
-	       void* anOrbitPtr,
+	       KeplerOrbit* anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool acloseOrbit,
 	       bool hidden,
@@ -1243,8 +1243,11 @@ float Planet::getMeanOppositionMagnitude() const
 	double semimajorAxis=smaMap.value(parent->englishName, 0.);
 	if (pType>= isAsteroid)
 	{
+		Q_ASSERT(orbitPtr);
 		if (orbitPtr)
-			semimajorAxis=(static_cast<CometOrbit*>(orbitPtr))->getSemimajorAxis();
+			semimajorAxis=orbitPtr->getSemimajorAxis();
+		else
+			qDebug() << "WARNING: No orbitPtr for " << englishName;
 	}
 
 	if (semimajorAxis>0.)
