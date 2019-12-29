@@ -87,19 +87,21 @@ public:
 		   double parentRotAscendingnode,
 		   double parentRotJ2000Longitude
 		   );
-	// Compute the orbit for a specified Julian day and return a "stellarium compliant" function
-	// GZ: new optional variable: updateVelocityVector, true required for dust tail orientation!
+	//! Compute the orbit for a specified Julian day and return a "stellarium compliant" function
 	void positionAtTimevInVSOP87Coordinates(double JDE, double* v);
-	// updating the tails is a bit expensive. try not to overdo it.
+	//! updating comet tails is a bit expensive. try not to overdo it.
 	bool getUpdateTails() const { return updateTails; }
 	void setUpdateTails(const bool update){ updateTails=update; }
-	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v, true)
+	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v)
 	Vec3d getVelocity() const { return rdot; }
 	void getVelocity(double *vel) const { vel[0]=rdot[0]; vel[1]=rdot[1]; vel[2]=rdot[2];}
 	//! Returns semimajor axis [AU] for elliptic orbit, 0 for a parabolic orbit, and a negative value for hyperbolic orbit.
 	double getSemimajorAxis() const { return (e==1. ? 0. : q / (1.-e)); }
 	double getEccentricity() const { return e; }
 	bool objectDateValid(const double JDE) const { return ((orbitGood<=0) || (fabs(t0-JDE)<orbitGood)); }
+	//! Calculate sidereal period in days from semi-major axis. If sMA<0 (hyperbolic orbit), return max double.
+	//! NOTE: The result is for a solar-centered orbit only!
+	static double calculateSiderealPeriod(const double semiMajorAxis);
 
 private:
 	const double q;  //! perihel distance

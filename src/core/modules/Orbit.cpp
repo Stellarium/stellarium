@@ -222,6 +222,15 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 	updateTails=true;
 }
 
+// Calculate sidereal period in days from semi-major axis.
+// Source: Heafner, Fundamental Eph. Comp. p.71.
+double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis)
+{
+	return (semiMajorAxis >=0 ? (2.*M_PI/0.01720209895)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis) : std::numeric_limits<double>::max() );
+}
+
+
+
 /*
 
 EllipticalOrbit::EllipticalOrbit(double pericenterDistance,

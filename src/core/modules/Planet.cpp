@@ -407,13 +407,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	double distanceAu = getJ2000EquatorialPos(core).length();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation		
+		oss << "<h2>";
+		if (englishName=="Pluto")
+		{
+			// We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
+			oss << QString("(134340) ");
+		}
+		oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.)
