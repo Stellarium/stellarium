@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-19 19:10+0700\n"
+"POT-Creation-Date: 2019-12-27 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2018\n"
 "Language-Team: Icelandic (https://www.transifex.com/stellarium/teams/80998/is/)\n"
@@ -5754,11 +5754,11 @@ msgstr "Flytja inn bókamerki"
 msgid "Export bookmarks as..."
 msgstr "Flytja út bókamerki..."
 
-#: src/gui/DateTimeDialog.cpp:227 src/gui/DateTimeDialog.cpp:228
+#: src/gui/DateTimeDialog.cpp:230 src/gui/DateTimeDialog.cpp:231
 msgid "Date and Time in Julian calendar"
 msgstr ""
 
-#: src/gui/DateTimeDialog.cpp:232 src/gui/DateTimeDialog.cpp:233
+#: src/gui/DateTimeDialog.cpp:235 src/gui/DateTimeDialog.cpp:236
 msgid "Date and Time in Gregorian calendar"
 msgstr "Dagsetning- og tími í Gregoríönsku tímatali"
 
@@ -7916,8 +7916,8 @@ msgstr "Bólivía"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
-msgid "Caribbean NL"
-msgstr "Hollensku Karíbahafseyjar"
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -7976,8 +7976,8 @@ msgstr "Mið-Afríkulýðveldið"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
-msgid "Congo (Rep.)"
-msgstr "Kongó (alþyðulýðveldið)"
+msgid "Congo"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -8026,13 +8026,13 @@ msgstr "Kúba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
-msgid "Cape Verde"
-msgstr "Grænhöfðaeyjar"
+msgid "Cabo Verde"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
-msgid "Curacao"
-msgstr "Curacao"
+msgid "Curaçao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
@@ -8046,8 +8046,8 @@ msgstr "Kýpur"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
-msgid "Czech Republic"
-msgstr "Tékkland"
+msgid "Czechia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -8126,8 +8126,8 @@ msgstr "Fídjieyjar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
-msgid "Falkland Islands"
-msgstr "Falklandseyjar (Malvinas)"
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
@@ -8487,8 +8487,8 @@ msgstr "Marshall-eyjar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
-msgid "Macedonia"
-msgstr "Makedónía"
+msgid "North Macedonia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
@@ -8507,8 +8507,8 @@ msgstr "Mongólía"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
-msgid "Macau"
-msgstr "Maká"
+msgid "Macao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -8722,8 +8722,8 @@ msgstr "Serbía"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
-msgid "Russia"
-msgstr "Rússland"
+msgid "Russian Federation"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -8762,8 +8762,8 @@ msgstr "Singapúr"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
-msgid "St Helena"
-msgstr "Sankti Helena"
+msgid "St Helena, Ascension and Tristan da Cunha"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -8827,18 +8827,18 @@ msgstr "Sankti Maarten (hollenska)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
-msgid "Syria"
-msgstr "Sýrland"
+msgid "Syrian Arab Republic"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
-msgid "Swaziland"
-msgstr "Svasíland"
+msgid "Eswatini"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
-msgid "Turks and Caicos Is"
-msgstr "Turks og Kaikós eyjar"
+msgid "Turks and Caicos Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -8847,8 +8847,8 @@ msgstr "Tsjad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
-msgid "French Southern and Antarctic Lands"
-msgstr "Frönsku suðurhafs- og suðurskautslandssvæðin"
+msgid "French Southern Territories"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -8872,8 +8872,8 @@ msgstr "Tókelá"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
-msgid "East Timor"
-msgstr "Austur-Tímor"
+msgid "Timor-Leste"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
@@ -8907,13 +8907,13 @@ msgstr "Túvalú"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
-msgid "Taiwan"
-msgstr "Tævan"
+msgid "Taiwan (Province of China)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
-msgid "Tanzania"
-msgstr "Tansanía"
+msgid "United Republic of Tanzania"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
@@ -8927,13 +8927,13 @@ msgstr "Úganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
-msgid "US minor outlying islands"
-msgstr "Ytri-smáeyjar Bandaríkjanna"
+msgid "US Minor Outlying Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
-msgid "United States"
-msgstr "Bandaríkin"
+msgid "United States of America"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
@@ -8947,13 +8947,13 @@ msgstr "Úsbekistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
-msgid "Vatican City"
-msgstr "Borgríkið Vatíkanið"
+msgid "Holy See"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
-msgid "St Vincent"
-msgstr "St Vincent"
+msgid "St Vincent and the Grenadines"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -8962,18 +8962,18 @@ msgstr "Venesúela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
-msgid "Virgin Islands (UK)"
-msgstr "Bresku Jómfrúreyjar"
+msgid "Virgin Islands (British)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
-msgid "Virgin Islands (US)"
-msgstr "Bandarísku Jómfrúareyjar"
+msgid "Virgin Islands (U.S.)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
-msgid "Vietnam"
-msgstr "Víetnam"
+msgid "Viet Nam"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -8987,8 +8987,8 @@ msgstr "Wallis- og Fútúnaeyjar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
-msgid "Samoa (western)"
-msgstr "Samóa (vestur)"
+msgid "Samoa"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -17048,11 +17048,10 @@ msgstr "Eiginnöfn"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
+"In December 2015 and in December 2019, the International Astronomical Union "
+"(IAU) has officially approved names for several exoplanets after a public "
+"vote."
 msgstr ""
-"Í desember 2015 samþykkti Alþjóðasamband stjarnfræðinga (IAU) opinberlega "
-"yfirfarin nöfn á nokkrum fjarreikistjörnum eftir opna atkvæðagreiðslu."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""

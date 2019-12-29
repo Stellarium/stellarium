@@ -6,15 +6,16 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # אני ואתה <elishamasw@gmail.com>, 2019
+# אלעזר ז. <ezalo05484@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-19 19:10+0700\n"
+"POT-Creation-Date: 2019-12-27 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: אני ואתה <elishamasw@gmail.com>, 2019\n"
+"Last-Translator: אלעזר ז. <ezalo05484@gmail.com>, 2019\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +54,7 @@ msgstr "סמן"
 
 #: src/core/modules/Asterism.cpp:211
 msgid "asterism"
-msgstr ""
+msgstr "כוכבית"
 
 #: src/core/modules/AsterismMgr.cpp:96
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:460
@@ -71,11 +72,11 @@ msgstr "אפשרויות תצוגה"
 
 #: src/core/modules/AsterismMgr.cpp:97
 msgid "Asterism lines"
-msgstr ""
+msgstr "קווי אסטריזם"
 
 #: src/core/modules/AsterismMgr.cpp:98
 msgid "Asterism labels"
-msgstr ""
+msgstr "תוויות אסטריזם"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
@@ -118,13 +119,13 @@ msgstr "בחר את כל קבוצות הכוכבים"
 
 #: src/core/modules/ConstellationMgr.cpp:142
 msgid "Reload the sky culture"
-msgstr ""
+msgstr "טען מחדש את תרבות השמיים"
 
 #: src/core/modules/StarMgr.cpp:461 src/ui_viewDialog.h:2575
 #: src/ui_dsoColorsDialog.h:542
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Stars"
-msgstr "Stars"
+msgstr "כוכבים"
 
 #: src/core/modules/StarMgr.cpp:462
 msgid "Stars labels"
@@ -132,11 +133,11 @@ msgstr "Stars labels"
 
 #: src/core/modules/StarMgr.cpp:464
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "הגדל את מגבלת העוצמה עבור כוכבים"
 
 #: src/core/modules/StarMgr.cpp:465
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "צמצם את מגבלת העוצמה עבור כוכבים"
 
 #: src/core/modules/GridLinesMgr.cpp:652 src/ui_viewDialog.h:2865
 msgid "Meridian"
@@ -251,7 +252,7 @@ msgstr "SSGP"
 #. TRANSLATORS: Antisolar Point
 #: src/core/modules/GridLinesMgr.cpp:1003
 msgid "ASP"
-msgstr ""
+msgstr "ASP"
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1010
@@ -271,7 +272,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:581
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "ק\"מ / שנייה"
 
 #: src/core/modules/GridLinesMgr.cpp:1329
 msgid "Grids and lines"
@@ -400,19 +401,19 @@ msgstr "Equinox points"
 
 #: src/core/modules/GridLinesMgr.cpp:1359
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Solstice J2000 נקודות"
 
 #: src/core/modules/GridLinesMgr.cpp:1360
 msgid "Solstice points"
-msgstr ""
+msgstr "נקודות סולסטייס"
 
 #: src/core/modules/GridLinesMgr.cpp:1361 src/ui_viewDialog.h:2974
 msgid "Antisolar point"
-msgstr ""
+msgstr "נקודה אנטיסולרית"
 
 #: src/core/modules/GridLinesMgr.cpp:1362 src/ui_viewDialog.h:2944
 msgid "Apex points"
-msgstr ""
+msgstr "נקודות איפקס"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Atmosphere"
@@ -433,11 +434,11 @@ msgstr "Ground"
 
 #: src/core/modules/LandscapeMgr.cpp:484
 msgid "Landscape illumination"
-msgstr ""
+msgstr "תאורת נוף"
 
 #: src/core/modules/LandscapeMgr.cpp:485
 msgid "Landscape labels"
-msgstr ""
+msgstr "תוויות נוף"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Light pollution data from locations database"
@@ -453,7 +454,7 @@ msgstr "הפחת זיהום אור"
 
 #: src/core/modules/LandscapeMgr.cpp:490
 msgid "Cyclic change in light pollution"
-msgstr ""
+msgstr "שינוי מחזורי בזיהום האור"
 
 #: src/core/modules/LandscapeMgr.cpp:894 src/scripting/StelScriptMgr.cpp:260
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
@@ -478,7 +479,7 @@ msgstr "Author"
 #: src/core/modules/LandscapeMgr.cpp:900 src/gui/StelGuiItems.cpp:761
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "M"
 
 #: src/core/modules/LandscapeMgr.cpp:903 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -490,15 +491,15 @@ msgstr "מיקום"
 #: src/core/modules/LandscapeMgr.cpp:924
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:934
 msgid "extinction coefficient"
-msgstr ""
+msgstr "מקדם הכחדה"
 
 #: src/core/modules/LandscapeMgr.cpp:937
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "תנאי אטמוספירה"
 
 #: src/core/modules/LandscapeMgr.cpp:941
 msgid "Light pollution"
@@ -511,7 +512,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:65
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "סוג צורת יבשה לא מתועד"
 
 #: src/core/modules/NomenclatureItem.cpp:128
 msgid "Undocumented landform type."
@@ -2571,9 +2572,8 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
-"This equation was published by P. M. Muller and F. R. Stephenson in the "
-"article <em>The accelerations of the earth and moon from early astronomical "
-"observations</em> (%1)."
+"משוואה זו פורסמה על ידי ראש הממשלה מולר ו FR סטפנסון במאמר ההאצות של כדור "
+"הארץ והירח מהתצפיות האסטרונומיות המוקדמות (%1)."
 
 #: src/core/StelCore.cpp:2290
 #, qt-format
@@ -3972,7 +3972,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:233
 msgid "Stellarium Help"
-msgstr "Stellarium Help"
+msgstr "עזרה בסטלריום"
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:243
 msgid "Keys"
@@ -4269,11 +4269,11 @@ msgstr "Script console window"
 
 #: src/gui/StelGui.cpp:238
 msgid "Help window"
-msgstr "Help window"
+msgstr "חלון עזרה"
 
 #: src/gui/StelGui.cpp:239
 msgid "Configuration window"
-msgstr "Configuration window"
+msgstr "חלון תצורה"
 
 #: src/gui/StelGui.cpp:240 src/ui_searchDialogGui.h:613
 msgid "Search window"
@@ -4293,7 +4293,7 @@ msgstr "חלון מיקום"
 
 #: src/gui/StelGui.cpp:244
 msgid "Shortcuts window"
-msgstr "Shortcuts window"
+msgstr "חלון קיצורי דרך"
 
 #: src/gui/StelGui.cpp:245
 msgid "Astronomical calculations window"
@@ -5768,11 +5768,11 @@ msgstr ""
 msgid "Export bookmarks as..."
 msgstr ""
 
-#: src/gui/DateTimeDialog.cpp:227 src/gui/DateTimeDialog.cpp:228
+#: src/gui/DateTimeDialog.cpp:230 src/gui/DateTimeDialog.cpp:231
 msgid "Date and Time in Julian calendar"
 msgstr ""
 
-#: src/gui/DateTimeDialog.cpp:232 src/gui/DateTimeDialog.cpp:233
+#: src/gui/DateTimeDialog.cpp:235 src/gui/DateTimeDialog.cpp:236
 msgid "Date and Time in Gregorian calendar"
 msgstr "Date and Time in Gregorian calendar"
 
@@ -7132,7 +7132,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:604
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr "Occultation of Earth and Jupiter 2048"
+msgstr "כיבוש כדור הארץ ויופיטר 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:606
@@ -7177,7 +7177,7 @@ msgstr "Sky Culture Tour"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:622
 msgid "Earth Events from Mercury"
-msgstr "Earth Events from Mercury"
+msgstr "אירועי כדור הארץ מכספית"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:624
@@ -7929,8 +7929,8 @@ msgstr "Bolivia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
-msgid "Caribbean NL"
-msgstr "Caribbean NL"
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -7989,8 +7989,8 @@ msgstr "Central African Rep."
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
-msgid "Congo (Rep.)"
-msgstr "Congo (Rep.)"
+msgid "Congo"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -8039,13 +8039,13 @@ msgstr "Cuba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
-msgid "Cape Verde"
-msgstr "Cape Verde"
+msgid "Cabo Verde"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
-msgid "Curacao"
-msgstr "Curacao"
+msgid "Curaçao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
@@ -8059,8 +8059,8 @@ msgstr "Cyprus"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
-msgid "Czech Republic"
-msgstr "Czech Republic"
+msgid "Czechia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -8139,8 +8139,8 @@ msgstr "Fiji"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
-msgid "Falkland Islands"
-msgstr "Falkland Islands"
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
@@ -8500,8 +8500,8 @@ msgstr "Marshall Islands"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
-msgid "Macedonia"
-msgstr "Macedonia"
+msgid "North Macedonia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
@@ -8520,8 +8520,8 @@ msgstr "Mongolia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
-msgid "Macau"
-msgstr "Macau"
+msgid "Macao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -8735,8 +8735,8 @@ msgstr "Serbia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
-msgid "Russia"
-msgstr "Russia"
+msgid "Russian Federation"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -8775,8 +8775,8 @@ msgstr "Singapore"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
-msgid "St Helena"
-msgstr "St Helena"
+msgid "St Helena, Ascension and Tristan da Cunha"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -8840,18 +8840,18 @@ msgstr "St Maarten (Dutch)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
-msgid "Syria"
-msgstr "Syria"
+msgid "Syrian Arab Republic"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
-msgid "Swaziland"
-msgstr "שוויץ"
+msgid "Eswatini"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
-msgid "Turks and Caicos Is"
-msgstr "Turks and Caicos Is"
+msgid "Turks and Caicos Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -8860,8 +8860,8 @@ msgstr "Chad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
-msgid "French Southern and Antarctic Lands"
-msgstr "French Southern and Antarctic Lands"
+msgid "French Southern Territories"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -8885,8 +8885,8 @@ msgstr "Tokelau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
-msgid "East Timor"
-msgstr "East Timor"
+msgid "Timor-Leste"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
@@ -8920,13 +8920,13 @@ msgstr "Tuvalu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
-msgid "Taiwan"
-msgstr "Taiwan"
+msgid "Taiwan (Province of China)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
-msgid "Tanzania"
-msgstr "Tanzania"
+msgid "United Republic of Tanzania"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
@@ -8940,13 +8940,13 @@ msgstr "Uganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
-msgid "US minor outlying islands"
-msgstr "US minor outlying islands"
+msgid "US Minor Outlying Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
-msgid "United States"
-msgstr "United States"
+msgid "United States of America"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
@@ -8960,13 +8960,13 @@ msgstr "Uzbekistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
-msgid "Vatican City"
-msgstr "Vatican City"
+msgid "Holy See"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
-msgid "St Vincent"
-msgstr "St Vincent"
+msgid "St Vincent and the Grenadines"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -8975,18 +8975,18 @@ msgstr "Venezuela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
-msgid "Virgin Islands (UK)"
-msgstr "Virgin Islands (UK)"
+msgid "Virgin Islands (British)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
-msgid "Virgin Islands (US)"
-msgstr "Virgin Islands (US)"
+msgid "Virgin Islands (U.S.)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
-msgid "Vietnam"
-msgstr "Vietnam"
+msgid "Viet Nam"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -9000,8 +9000,8 @@ msgstr "Wallis and Futuna"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
-msgid "Samoa (western)"
-msgstr "Samoa (western)"
+msgid "Samoa"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -10284,11 +10284,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1499
 msgid "Configuration"
-msgstr "Configuration"
+msgstr "תצורה"
 
 #: src/ui_configurationDialog.h:1505
 msgid "Main"
-msgstr "Main"
+msgstr "ראשי"
 
 #: src/ui_configurationDialog.h:1507
 msgid "Information"
@@ -10315,7 +10315,7 @@ msgstr "Time"
 
 #: src/ui_configurationDialog.h:1519
 msgid "Tools"
-msgstr "Tools"
+msgstr "כלים"
 
 #: src/ui_configurationDialog.h:1523
 msgid "Plugins"
@@ -11021,7 +11021,7 @@ msgstr "Load at startup"
 
 #: src/ui_configurationDialog.h:1850
 msgid "configure"
-msgstr "configure"
+msgstr "הגדרות"
 
 #: src/ui_addRemoveLandscapesDialog.h:265
 msgid "Add/Remove Landscapes"
@@ -11200,7 +11200,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:1576
 msgid "Astronomical calculations"
-msgstr "Astronomical calculations"
+msgstr "חישובים אסטרונומיים."
 
 #: src/ui_astroCalcDialog.h:1582
 msgid "Positions"
@@ -15346,11 +15346,11 @@ msgstr "&Current object"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:344
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
-msgstr "Center of the screen"
+msgstr "מרכז המסך"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:347
 msgid "Hours-minutes-seconds format"
-msgstr "Hours-minutes-seconds format"
+msgstr "פורמט שעות-דקות-שניות"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "&HMS"
@@ -15358,7 +15358,7 @@ msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:351
 msgid "Degrees-minutes-seconds format"
-msgstr "Degrees-minutes-seconds format"
+msgstr "פורמט של מעלות-דקות-שניות"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:353
 msgid "&DMS"
@@ -15366,11 +15366,11 @@ msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:355
 msgid "Decimal degrees"
-msgstr "Decimal degrees"
+msgstr "מעלות עשרוניות"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:357
 msgid "D&ecimal"
-msgstr "D&ecimal"
+msgstr "נקודה"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:358
 msgid "&Slew"
@@ -15378,15 +15378,15 @@ msgstr "&Slew"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:359
 msgid "Sync"
-msgstr ""
+msgstr "סינכרון"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:360
 msgid "Configure &telescopes..."
-msgstr "Configure &telescopes..."
+msgstr "הגדר וטלסקופים ..."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "Telescope Configuration"
-msgstr "Telescope Configuration"
+msgstr "תצורת טלסקופ"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:585
 msgid ""
@@ -15410,7 +15410,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
 msgid "External software or a remote computer"
-msgstr "External software or a remote computer"
+msgstr "תוכנה חיצונית או מחשב מרוחק"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
@@ -15490,7 +15490,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:636
 msgid "User interface settings"
-msgstr "User interface settings"
+msgstr "הגדרות ממשק משתמש"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:638
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -15510,7 +15510,7 @@ msgstr "Up to ten decimal values in degrees of arc, separated with commas"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:646
 msgid "OK"
-msgstr "OK"
+msgstr "בסדר"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
@@ -15522,7 +15522,7 @@ msgstr "Configure the selected telescope"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
-msgstr "Configure"
+msgstr "קבע את התצורה"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
@@ -15562,69 +15562,68 @@ msgstr "Use telescope server executables (override built-in drivers)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Executables directory:"
-msgstr "Executables directory:"
+msgstr "מדריך ההפעלה:"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:242
 msgid "Points"
-msgstr "Points"
+msgstr "נקודות"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:249
 msgid "Add point"
-msgstr "Add point"
+msgstr "הוסף נקודה"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:250
 msgid "Remove selected"
-msgstr "Remove selected"
+msgstr "הסר פריטים שנבחרו"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:251
 msgid "Clear list"
-msgstr "Clear list"
+msgstr "נקה רשימה"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:88
 msgid "Text User Interface"
-msgstr "Text User Interface"
+msgstr "ממשק משתמש טקסט"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:91
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
-"planetarium systems"
+"יישום תוסף של ממשק משתמש טקסט (TUI) מסדרת 0.9.x, המשמש במערכות פלנטריום"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
-msgstr "Altitude:"
+msgstr "גובה:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr "Solar System body"
+msgstr "גוף מערכת השמש"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Current date/time"
-msgstr "Current date/time"
+msgstr "תאריך / שעה נוכחיים"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Set time zone"
-msgstr "Set time zone"
+msgstr "הגדר אזור זמן"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Day keys"
-msgstr "Day keys"
+msgstr "מפתחות יום"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date/time preset"
-msgstr "Startup date/time preset"
+msgstr "תאריך / שעה מוגדר מראש"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:190
 msgid "system"
-msgstr "system"
+msgstr "מערכת"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "preset"
-msgstr "preset"
+msgstr "מוגדר מראש"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "mmddyyyy"
@@ -15640,42 +15639,42 @@ msgstr "yyyymmdd"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:201
 msgid "Date display format"
-msgstr "Date display format"
+msgstr "פורמט תצוגת תאריך"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "12h"
-msgstr "12h"
+msgstr " 12 שעות"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "24h"
-msgstr "24h"
+msgstr " 24 שעות"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Time display format"
-msgstr "Time display format"
+msgstr "פורמט תצוגת זמן"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Sky Language"
-msgstr "Sky Language"
+msgstr "שפת שמיים"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:243
 msgid "App Language"
-msgstr "App Language"
+msgstr "שפת אפליקציה"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Show stars"
-msgstr "Show stars"
+msgstr "הראו כוכבים"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Colors"
-msgstr "Colors"
+msgstr "צבעים"
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Art brightness:"
-msgstr "Art brightness:"
+msgstr "בהירות אמנות:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:363
 msgid "Ecliptic line (J2000)"
@@ -15707,7 +15706,7 @@ msgstr "Galactic equator line"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:411
 msgid "Sky Background (default: black)"
-msgstr ""
+msgstr "רקע שמיים (ברירת מחדל \\: שחור)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Effects"
@@ -15715,44 +15714,44 @@ msgstr "Effects"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Setting landscape sets location"
-msgstr "Setting landscape sets location"
+msgstr "הגדרת נוף מגדירה את המיקום"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Zoom duration:"
-msgstr "Zoom duration:"
+msgstr "משך הגדלה:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:475
 msgid "Milky Way intensity:"
-msgstr "Milky Way intensity:"
+msgstr "עוצמת שביל החלב:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Zodiacal light intensity:"
-msgstr "Zodiacal light intensity:"
+msgstr "עוצמת אור גלגל המזלות:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:502
 msgid "Run local script"
-msgstr "Run local script"
+msgstr "הפעל סקריפט מקומי"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:508
 msgid "Stop running script"
-msgstr "Stop running script"
+msgstr "תפסיק להריץ סקריפט"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:523
 msgid "Administration"
-msgstr "Administration"
+msgstr "מינהל"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Load default configuration"
-msgstr "Load default configuration"
+msgstr "טען את תצורת ברירת המחדל"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:530
 msgid "Save current configuration"
-msgstr "Save current configuration"
+msgstr "שמור את התצורה הנוכחית"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:533
 msgid "Shut down"
-msgstr "Shut down"
+msgstr "לכבות"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:609
 msgid "[no TUI node]"
@@ -15760,12 +15759,12 @@ msgstr "[no TUI node]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "On"
+msgstr "מופעל"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr "Off"
+msgstr "כבוי"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -15780,7 +15779,7 @@ msgstr " [RETURN to activate]"
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:135
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:226
 msgid "Solar System Editor"
-msgstr "Solar System Editor"
+msgstr "עורך מערכת סולארית"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:234
@@ -15789,14 +15788,13 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
-"An interface for adding asteroids and comets to Stellarium. It can download "
-"object lists from the Minor Planet Center's website and perform searches in "
-"its online database."
+"ממשק להוספת אסטרואידים ושביטים לסטלריום. זה יכול להוריד רשימות אובייקטים "
+"מאתר מרכז הכוכבים הקטנים ולבצע חיפושים במסד הנתונים המקוון שלו."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:135
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:276
 msgid "Import orbital elements in MPC format..."
-msgstr "Import orbital elements in MPC format..."
+msgstr "ייבא אלמנטים מסלוליים בפורמט MPC ..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
@@ -15807,15 +15805,14 @@ msgstr "Query the MPC's %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 msgid "Only one result will be returned if the query is successful."
-msgstr "Only one result will be returned if the query is successful."
+msgstr "רק תוצאה אחת תוחזר אם השאילתה תצליח."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:163
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
-"Both comets and asteroids can be identified with their number, name (in "
-"English) or provisional designation."
+"ניתן לזהות את שביטים ואסטרואידים עם מספרם, שמם (באנגלית) או ייעודם הזמני."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:170
 #, qt-format
@@ -15832,24 +15829,24 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
 msgid "Select bookmark..."
-msgstr "Select bookmark..."
+msgstr "בחר סימניה ..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:332
 msgid "Plain Text File"
-msgstr ""
+msgstr "קובץ טקסט רגיל"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "All Files"
-msgstr ""
+msgstr "כל הקבצים"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:336
 msgid "Select a file"
-msgstr ""
+msgstr "בחר קובץ"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
 msgid "website"
-msgstr "website"
+msgstr "אתר אינטרנט"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
@@ -15860,27 +15857,29 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
-"You can import comet and asteroid data formatted in the export formats of "
-"the IAU's Minor Planet Center (%1). You can import files with lists of "
-"objects, download such lists from the Internet or search the online Minor "
-"Planet and Comet Ephemeris Service (MPES)."
+"ניתן לייבא נתוני שביט ואסטרואידים המעוצבים בפורמטי הייצוא של מרכז הכוכבים "
+"הקטנים של IAU (% 1). אתה יכול לייבא קבצים עם רשימות של אובייקטים, להוריד "
+"רשימות כאלה מהאינטרנט או לחפש ב- Minor Planet וב- Comet Ephemeris Service "
+"(MPES) המקוון."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
 msgstr ""
+"שמור את גופי מערכת השמש הקטינה כ ...\n"
+" "
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:206
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:214
 msgid "Configuration files"
-msgstr "Configuration files"
+msgstr "קבצי תצורה"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:208
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr ""
+msgstr "בחר קובץ שיחליף את הגופים הקטינים של מערכת השמש"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:216
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "בחר קובץ להוסיף את הגופים הקטינים של מערכת השמש"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Import data"
@@ -15888,15 +15887,15 @@ msgstr "יבא נתונים"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Select the type"
-msgstr "Select the type"
+msgstr "בחר את הסוג"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select the source"
-msgstr "Select the source"
+msgstr "בחר את המקור"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Download a list of objects from the Internet"
-msgstr "Download a list of objects from the Internet"
+msgstr "הורד רשימת אובייקטים מהאינטרנט"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Select a source from the list:"
@@ -16082,14 +16081,13 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Acknowledgments"
-msgstr "Acknowledgments"
+msgstr "תודות"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
-msgstr ""
-"We thank the following people for their contribution and valuable comments:"
+msgstr "אנו מודים לאנשים הבאים על תרומתם והערותיהם היקרות \\:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 msgid "Sergei Blinnikov"
@@ -16225,11 +16223,11 @@ msgstr "Russian"
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 #: plugins/NavStars/src/ui_navStarsWindow.h:221
 msgid "Navigational stars"
-msgstr "Navigational stars"
+msgstr "כוכבי ניווט"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 msgid "Set of navigational stars"
-msgstr "Set of navigational stars"
+msgstr "סט של כוכבי ניווט"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
@@ -17294,11 +17292,10 @@ msgstr "Proper names"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
+"In December 2015 and in December 2019, the International Astronomical Union "
+"(IAU) has officially approved names for several exoplanets after a public "
+"vote."
 msgstr ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
@@ -19640,23 +19637,18 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
-"The days of Cosmical rise/set of an object are estimated as the days when "
-"the object rises (or sets) together with the rise/set of the Sun. The exact "
-"dates of these ephemeris depend on the Observer's location.  On the "
-"contrary, the Acronycal rise (or set) happens when the star rises/sets with "
-"the setting/rising of the Sun (i.e., opposite to the Sun). On the one hand, "
-"it is obvious that the source is hardly observable (or not observable at "
-"all) in the dates between Cosmical set and Cosmical rise. On the other hand,"
-" the dates around the Acronychal set and rise are those when the altitude of"
-" the celestial object uses to be high when the Sun is well below the horizon"
-" (hence the object can be well observed). The date of Heliacal rise is the "
-"first day of the year when a star becomes visible. It happens when the star "
-"is close to the eastern horizon roughly before the end of the astronomical "
-"night (i.e., at the astronomical twilight). In the following nights, the "
-"star will be visibile during longer periods of time, until it reaches its "
-"Heliacal set (i.e., the last night of the year when the star is still "
-"visible). At the Heliacal set, the star sets roughly after the beginning of "
-"the astronomical night."
+"הימים של קוסמי לעלות/סט של חפץ מוערכים כימים שבהם ה- חפץ עולה (או קובע) יחד "
+"עם לעלות/סטשל השמש. התאריכים המדויקים של אלהאפמריס תלוי ב הצופהזה מקום. "
+"נהפוך הוא, האקרוניקללעלות (או סט) קורה כאשר ה- כוכבעולה / קובע עם קביעת / "
+"עליית השמש (כלומר, מול השמש). מצד אחד ברור כי המקור כמעט ולא ניתן לצפייה (או"
+" כלל לא ניתן לצפייה) בתאריכים שבין לביןקוסמי סט ו קוסמי לעלות. מצד שני, "
+"התאריכים סביב ה-אקרוניכל סט ו לעלות הם אלה כאשר גובה של ה שמיימי חפץ משמש "
+"להיות גבוה כאשר השמש נמצאת מתחת לתחום אופק ומכאן חפץניתן לצפות היטב). התאריך"
+" שלהליאקאל לעלות הוא היום הראשון בשנה בו א כוכבהופך לגלוי. זה קורה כאשרכוכב "
+"קרוב למזרח אופק בערך לפני סוף הלילה האסטרונומי (כלומר באסטרונומי דמדומים). "
+"בלילות שלאחר מכן,כוכב יהיה גלוי בפרקי זמן ארוכים יותר, עד שהוא יגיע אליו "
+"הליאקאל סט (כלומר, הלילה האחרון בשנה שבה ה כוכבעדיין גלוי). בהליאקאל סט, ה "
+"כוכב בערך לאחר תחילת הלילה האסטרונומי."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid "Largest Sun separation:"
