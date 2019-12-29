@@ -42,6 +42,7 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double 
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 360
 
+class KeplerOrbit;
 class StelFont;
 class StelPainter;
 class StelTranslator;
@@ -149,7 +150,7 @@ public:
 	       const QString& normalMapName,
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
-	       void* anOrbitPtr,
+	       KeplerOrbit *anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden,
@@ -564,7 +565,7 @@ protected:
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
-	void* orbitPtr;               // this is always used with an Orbit object.
+	KeplerOrbit* orbitPtr;           // Usable for positional computations of Minor Planets, Comets and Moons. For the major planets, it is Q_NULLPTR.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
