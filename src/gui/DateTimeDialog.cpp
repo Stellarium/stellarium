@@ -73,6 +73,9 @@ void DateTimeDialog::createDialogContent()
 	ui->dateDelimiterLabel2->setText(delimiter);
 
 	connectSpinnerEvents();
+
+	// Set focus on day spinner by default
+	ui->spinner_day->setFocus();
 }
 
 void DateTimeDialog::connectSpinnerEvents() const

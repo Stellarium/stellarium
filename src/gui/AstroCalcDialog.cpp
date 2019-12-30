@@ -680,7 +680,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-			if (otype == "Star")
+			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
@@ -1957,7 +1957,7 @@ void AstroCalcDialog::setTransitCelestialBodyName()
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-			if (otype == "Star")
+			if (otype == "Star" || otype=="Pulsar")
 				name = selectedObject->getID();
 		}
 		if (selectedObject->getType()=="Satellite")
@@ -2556,7 +2556,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-			if (otype == "Star")
+			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
@@ -3304,7 +3304,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-			if (otype == "Star")
+			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
@@ -6072,7 +6072,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-			if (otype == "Star")
+			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->angularDistanceLabel->setText(QString("%1 (%2)").arg(label, name));

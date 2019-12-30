@@ -316,7 +316,7 @@ protected:
 
 	ModelViewTranformP modelViewTransform;	// Operator to apply (if not Q_NULLPTR) before the modelview projection step
 
-	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
+	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions. Values only -1 (flip) or +1 (no flip).
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk
 	StelProjectorMaskType maskType;     // The current projector mask
 	double zNear, oneOverZNearMinusZFar;// Near and far clipping planes

@@ -603,7 +603,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
       mkdir /c/qt5;
       cd /c/qt5;
-      wget -q -O qt5.zip http://dss.stellarium.org/qt/qt512x64w.zip;
+      wget -O qt5.zip http://dss.stellarium.org/qt/qt512x64w.zip;
       unzip -qq qt5.zip -d /c/qt5;
       export PATH=/c/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=/c/qt5/plugins;

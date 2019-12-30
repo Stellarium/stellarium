@@ -357,7 +357,7 @@ void StelPainter::drawViewportShape(void)
 		glEnable(GL_BLEND);
 }
 
-void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
+void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr)
 {
 	Q_ASSERT(level<32);
 	float rad[64];
@@ -368,7 +368,7 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
 	uint slices = innerFanSlices<<level;
-	
+
 	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(static_cast<uint>(slices));
 	float* cos_sin_theta_p;
 	uint slices_step = 2;
@@ -382,38 +382,38 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 		{
 			xa = rad[i]*cos_sin_theta_p[slices_step];
 			ya = rad[i]*cos_sin_theta_p[slices_step+1];
-			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
-			vertexArr << static_cast<double>(xa) << static_cast<double>(ya) << 0;
+			texCoordArr << Vec2f(0.5f+xa/radius, 0.5f+ya/radius);
+			vertexArr << Vec3d(static_cast<double>(xa), static_cast<double>(ya), 0);
 
 			x = rad[i]*cos_sin_theta_p[2*slices_step];
 			y = rad[i]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 
 			x = rad[i-1]*cos_sin_theta_p[2*slices_step];
 			y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 
-			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
-			vertexArr << static_cast<double>(xa) << static_cast<double>(ya) << 0;
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+xa/radius, 0.5f+ya/radius);
+			vertexArr << Vec3d(static_cast<double>(xa), static_cast<double>(ya), 0);
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 
 			x = rad[i-1]*cos_sin_theta_p[0];
 			y = rad[i-1]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 
-			texCoordArr << 0.5f+xa/radius << 0.5f+ya/radius;
-			vertexArr << static_cast<double>(xa) << static_cast<double>(ya) << 0;
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+xa/radius, 0.5f+ya/radius);
+			vertexArr << Vec3d(static_cast<double>(xa), static_cast<double>(ya), 0);
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 
 			x = rad[i]*cos_sin_theta_p[0];
 			y = rad[i]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 		}
 	}
 	// draw the inner polygon
@@ -424,36 +424,36 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 	{
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
-		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-		vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+		texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+		vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 		cos_sin_theta_p+=2*slices_step;
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
-		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-		vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+		texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+		vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 		cos_sin_theta_p+=2*slices_step;
 		x = rad[0]*cos_sin_theta_p[0];
 		y = rad[0]*cos_sin_theta_p[1];
-		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-		vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+		texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+		vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 	}
 	else
 	{
 		j=0;
 		while (j<slices)
 		{
-			texCoordArr << 0.5f << 0.5f;
-			vertexArr << 0 << 0 << 0;
+			texCoordArr << Vec2f(0.5f, 0.5f);
+			vertexArr << Vec3d(0, 0, 0);
 			x = rad[0]*cos_sin_theta_p[0];
 			y = rad[0]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 			j+=slices_step;
 			cos_sin_theta_p+=2*slices_step;
 			x = rad[0]*cos_sin_theta_p[0];
 			y = rad[0]*cos_sin_theta_p[1];
-			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-			vertexArr << static_cast<double>(x) << static_cast<double>(y) << 0;
+			texCoordArr << Vec2f(0.5f+x/radius, 0.5f+y/radius);
+			vertexArr << Vec3d(static_cast<double>(x), static_cast<double>(y), 0);
 		}
 	}
 }

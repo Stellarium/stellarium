@@ -114,7 +114,7 @@ QDataStream& operator<<(QDataStream& out, const StelVertexArray& p)
 {
 	out << p.vertex;
 	out << p.texCoords;
-	out << p.colors; // GZ NEW
+	out << p.colors;
 	out << p.indices;
 	out << static_cast<unsigned int>(p.primitiveType);
 	return out;
@@ -124,7 +124,7 @@ QDataStream& operator>>(QDataStream& in, StelVertexArray& p)
 {
 	in >> p.vertex;
 	in >> p.texCoords;
-	in >> p.colors; // GZ NEW
+	in >> p.colors;
 	in >> p.indices;
 	unsigned int t;
 	in >> t;

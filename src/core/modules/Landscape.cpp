@@ -520,7 +520,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		++level;
 		slices_inside>>=1;
 	}
-	StelPainter::computeFanDisk(static_cast<float>(radius), slices_inside, level, groundVertexArr, groundTexCoordArr);
+	StelPainter::computeFanDisk(static_cast<float>(radius), slices_inside, level, groundVertexArr, groundTexCoordArr); //comaVertexArr, comaTexCoordArr);
 
 
 	// Precompute the vertex arrays for side display. The geometry of the sides is always a cylinder.
@@ -746,8 +746,8 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	{
 		groundTex->bind();
 	}
-	sPainter.setArrays(reinterpret_cast<const Vec3d*>(groundVertexArr.constData()), reinterpret_cast<const Vec2f*>(groundTexCoordArr.constData()));
-	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
+	StelVertexArray va(static_cast<const QVector<Vec3d> >(groundVertexArr), StelVertexArray::Triangles, static_cast<const QVector<Vec2f> >(groundTexCoordArr));
+	sPainter.drawStelVertexArray(va, true);
 }
 
 float LandscapeOldStyle::getOpacity(Vec3d azalt) const
