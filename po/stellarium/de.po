@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-20 22:37+0700\n"
+"POT-Creation-Date: 2019-12-27 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2019\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -5867,11 +5867,11 @@ msgstr "Lesezeichen importieren"
 msgid "Export bookmarks as..."
 msgstr "Lesezeichen speichern unter..."
 
-#: src/gui/DateTimeDialog.cpp:227 src/gui/DateTimeDialog.cpp:228
+#: src/gui/DateTimeDialog.cpp:230 src/gui/DateTimeDialog.cpp:231
 msgid "Date and Time in Julian calendar"
 msgstr "Datum und Zeit im Julianischen Kalender"
 
-#: src/gui/DateTimeDialog.cpp:232 src/gui/DateTimeDialog.cpp:233
+#: src/gui/DateTimeDialog.cpp:235 src/gui/DateTimeDialog.cpp:236
 msgid "Date and Time in Gregorian calendar"
 msgstr "Datum und Zeit im Gregorianischen Kalender"
 
@@ -8070,8 +8070,8 @@ msgstr "Bolivien"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
-msgid "Caribbean NL"
-msgstr "Karibische NL"
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -8130,8 +8130,8 @@ msgstr "Zentralafrikan. Rep."
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
-msgid "Congo (Rep.)"
-msgstr "Kongo (Rep.)"
+msgid "Congo"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -8180,13 +8180,13 @@ msgstr "Kuba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
-msgid "Cape Verde"
-msgstr "Kap Verde"
+msgid "Cabo Verde"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
-msgid "Curacao"
-msgstr "Curaçao"
+msgid "Curaçao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
@@ -8200,8 +8200,8 @@ msgstr "Zypern"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
-msgid "Czech Republic"
-msgstr "Tschechien"
+msgid "Czechia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -8280,8 +8280,8 @@ msgstr "Fidschi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
-msgid "Falkland Islands"
-msgstr "Falklandinseln"
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
@@ -8641,8 +8641,8 @@ msgstr "Marshallinseln"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
-msgid "Macedonia"
-msgstr "Mazedonien"
+msgid "North Macedonia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
@@ -8661,8 +8661,8 @@ msgstr "Mongolei"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
-msgid "Macau"
-msgstr "Macao"
+msgid "Macao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -8876,8 +8876,8 @@ msgstr "Serbien"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
-msgid "Russia"
-msgstr "Russland"
+msgid "Russian Federation"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -8916,8 +8916,8 @@ msgstr "Singapur"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
-msgid "St Helena"
-msgstr "St Helena"
+msgid "St Helena, Ascension and Tristan da Cunha"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -8981,18 +8981,18 @@ msgstr "St Maarten (Niederländisch)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
-msgid "Syria"
-msgstr "Syrien"
+msgid "Syrian Arab Republic"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
-msgid "Swaziland"
-msgstr "Swasiland"
+msgid "Eswatini"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
-msgid "Turks and Caicos Is"
-msgstr "Turks und Caicos Inseln"
+msgid "Turks and Caicos Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -9001,8 +9001,8 @@ msgstr "Tschad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
-msgid "French Southern and Antarctic Lands"
-msgstr "Französische Süd- und Antarktisgebiete"
+msgid "French Southern Territories"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -9026,8 +9026,8 @@ msgstr "Tokelau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
-msgid "East Timor"
-msgstr "Osttimor"
+msgid "Timor-Leste"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
@@ -9061,13 +9061,13 @@ msgstr "Tuvalu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
-msgid "Taiwan"
-msgstr "Taiwan"
+msgid "Taiwan (Province of China)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
-msgid "Tanzania"
-msgstr "Tansania"
+msgid "United Republic of Tanzania"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
@@ -9081,13 +9081,13 @@ msgstr "Uganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
-msgid "US minor outlying islands"
-msgstr "US minor outlying islands"
+msgid "US Minor Outlying Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
-msgid "United States"
-msgstr "Vereinigte Staaten"
+msgid "United States of America"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
@@ -9101,13 +9101,13 @@ msgstr "Usbekistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
-msgid "Vatican City"
-msgstr "Vatikanstadt"
+msgid "Holy See"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
-msgid "St Vincent"
-msgstr "St Vincent"
+msgid "St Vincent and the Grenadines"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -9116,18 +9116,18 @@ msgstr "Venezuela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
-msgid "Virgin Islands (UK)"
-msgstr "Virgin Islands (UK)"
+msgid "Virgin Islands (British)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
-msgid "Virgin Islands (US)"
-msgstr "Virgin Islands (US)"
+msgid "Virgin Islands (U.S.)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
-msgid "Vietnam"
-msgstr "Vietnam"
+msgid "Viet Nam"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -9141,8 +9141,8 @@ msgstr "Wallis und Futuna"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
-msgid "Samoa (western)"
-msgstr "Samoa (western)"
+msgid "Samoa"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520

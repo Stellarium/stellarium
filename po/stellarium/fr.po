@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-19 19:10+0700\n"
+"POT-Creation-Date: 2019-12-27 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: nicolas.martignoni, 2019\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -5860,11 +5860,11 @@ msgstr "Importer des signets"
 msgid "Export bookmarks as..."
 msgstr "Importer les signets sous..."
 
-#: src/gui/DateTimeDialog.cpp:227 src/gui/DateTimeDialog.cpp:228
+#: src/gui/DateTimeDialog.cpp:230 src/gui/DateTimeDialog.cpp:231
 msgid "Date and Time in Julian calendar"
 msgstr "Date et heure en calendrier julien"
 
-#: src/gui/DateTimeDialog.cpp:232 src/gui/DateTimeDialog.cpp:233
+#: src/gui/DateTimeDialog.cpp:235 src/gui/DateTimeDialog.cpp:236
 msgid "Date and Time in Gregorian calendar"
 msgstr "Date et heure en calendrier grégorien"
 
@@ -7527,7 +7527,7 @@ msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Les plus belles vues de la Terre depuis d'autres astres du système solaire "
-"durant le 21e siècle."
+"durant le XXI<sup>e</sup> siècle."
 
 #: src/translations.h:698
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -8062,8 +8062,8 @@ msgstr "Bolivie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
-msgid "Caribbean NL"
-msgstr "Caraïbes néerlandaises"
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr "Bonaire, Saint-Eustache et Saba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -8122,8 +8122,8 @@ msgstr "République d'Afrique Centrale"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
-msgid "Congo (Rep.)"
-msgstr "Congo (Rép.)"
+msgid "Congo"
+msgstr "Congo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -8172,12 +8172,12 @@ msgstr "Cuba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
-msgid "Cape Verde"
-msgstr "Cabo Verde"
+msgid "Cabo Verde"
+msgstr "Cap-Vert"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
-msgid "Curacao"
+msgid "Curaçao"
 msgstr "Curaçao"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
@@ -8192,8 +8192,8 @@ msgstr "Chypre"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
-msgid "Czech Republic"
-msgstr "République tchèque"
+msgid "Czechia"
+msgstr "Tchéquie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -8272,7 +8272,7 @@ msgstr "Îles Fidji"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
-msgid "Falkland Islands"
+msgid "Falkland Islands (Malvinas)"
 msgstr "Îles Malouines"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
@@ -8633,8 +8633,8 @@ msgstr "Îles Marshall"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
-msgid "Macedonia"
-msgstr "Macédoine"
+msgid "North Macedonia"
+msgstr "Macédoine du Nord"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
@@ -8653,7 +8653,7 @@ msgstr "Mongolie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
-msgid "Macau"
+msgid "Macao"
 msgstr "Macao"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
@@ -8868,7 +8868,7 @@ msgstr "Serbie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
-msgid "Russia"
+msgid "Russian Federation"
 msgstr "Russie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
@@ -8908,8 +8908,8 @@ msgstr "Singapour"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
-msgid "St Helena"
-msgstr "Sainte Hélène"
+msgid "St Helena, Ascension and Tristan da Cunha"
+msgstr "Sainte-Hélène, Ascension et Tristan da Cunha"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -8973,18 +8973,18 @@ msgstr "Saint Maarten (Pays-Bas)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
-msgid "Syria"
+msgid "Syrian Arab Republic"
 msgstr "Syrie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
-msgid "Swaziland"
-msgstr "Swaziland"
+msgid "Eswatini"
+msgstr "Eswatini"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
-msgid "Turks and Caicos Is"
-msgstr "Îles Turks et Caicos"
+msgid "Turks and Caicos Islands"
+msgstr "Îles Turques-et-Caïques"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -8993,7 +8993,7 @@ msgstr "Tchad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
-msgid "French Southern and Antarctic Lands"
+msgid "French Southern Territories"
 msgstr "Terres australes et antarctiques françaises"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
@@ -9018,7 +9018,7 @@ msgstr "Tokelau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
-msgid "East Timor"
+msgid "Timor-Leste"
 msgstr "Timor oriental"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
@@ -9053,12 +9053,12 @@ msgstr "Tuvalu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
-msgid "Taiwan"
-msgstr "Taïwan"
+msgid "Taiwan (Province of China)"
+msgstr "Taiwan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
-msgid "Tanzania"
+msgid "United Republic of Tanzania"
 msgstr "Tanzanie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
@@ -9073,13 +9073,13 @@ msgstr "Ouganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
-msgid "US minor outlying islands"
+msgid "US Minor Outlying Islands"
 msgstr "Îles mineures éloignées des États-Unis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
-msgid "United States"
-msgstr "États-Unis"
+msgid "United States of America"
+msgstr "États-Unis d'Amérique"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
@@ -9093,13 +9093,13 @@ msgstr "Ouzbékistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
-msgid "Vatican City"
-msgstr "Cité du Vatican"
+msgid "Holy See"
+msgstr "Vatican"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
-msgid "St Vincent"
-msgstr "Saint Vincent"
+msgid "St Vincent and the Grenadines"
+msgstr "Saint-Vincent-et-les-Grenadines"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -9108,17 +9108,17 @@ msgstr "Vénézuela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
-msgid "Virgin Islands (UK)"
-msgstr "Îles Vierges (Britanniques)"
+msgid "Virgin Islands (British)"
+msgstr "Îles Vierges britanniques"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
-msgid "Virgin Islands (US)"
-msgstr "Îles Vierges (Américaines)"
+msgid "Virgin Islands (U.S.)"
+msgstr "Îles Vierges des États-Unis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
-msgid "Vietnam"
+msgid "Viet Nam"
 msgstr "Viêt Nam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
@@ -9133,8 +9133,8 @@ msgstr "Wallis-et-Futuna"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
-msgid "Samoa (western)"
-msgstr "Samoa (occidentales)"
+msgid "Samoa"
+msgstr "Samoa"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -11419,7 +11419,7 @@ msgstr "Aujourd'hui"
 #: src/ui_astroCalcDialog.h:1600
 msgctxt "Planetary Calculator"
 msgid "PC"
-msgstr "CP"
+msgstr "Dist. planètes"
 
 #: src/ui_astroCalcDialog.h:1602
 msgid "Planetary Calculator"
@@ -11570,11 +11570,11 @@ msgstr "Effacer les culminations"
 
 #: src/ui_astroCalcDialog.h:1677
 msgid "Save transits"
-msgstr "Enregistrer les transits"
+msgstr "Enregistrer les culminations"
 
 #: src/ui_astroCalcDialog.h:1678
 msgid "Calculate transits"
-msgstr "Calculer les transits"
+msgstr "Calculer les culminations"
 
 #: src/ui_astroCalcDialog.h:1679
 msgid "Celestial object:"
@@ -14453,7 +14453,7 @@ msgstr "Réglages INDI"
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:130
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "TCP port:"
-msgstr "Port TCP:"
+msgstr "Port TCP :"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:132
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
@@ -17690,12 +17690,13 @@ msgstr "Noms populaires"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"In December 2015, the International Astronomical Union (IAU) has officially "
-"approved names for several exoplanets after a public vote."
+"In December 2015 and in December 2019, the International Astronomical Union "
+"(IAU) has officially approved names for several exoplanets after a public "
+"vote."
 msgstr ""
-"En décembre 2015, l'Union Astronomique Internationale (IAU) a approuvé "
-"officiellement les noms de plusieurs exoplanètes, après une votation "
-"publique."
+"En décembre 2015 et en décembre 2019, l'Union Astronomique Internationale "
+"(UAI) a approuvé officiellement les noms de plusieurs exoplanètes après un "
+"vote public."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
@@ -17861,8 +17862,8 @@ msgid ""
 msgstr ""
 "Hypatie d'Alexandrie était une astronome, mathématicienne et philosophe "
 "grecque célèbre. Elle dirigeait l'école néo-platoniciennne d'Alexandrie au "
-"début du Ve siècle de notre ère, jusqu'à son assassinat en 415 par des "
-"chrétiens."
+"début du V<sup>e</sup> siècle de notre ère, jusqu'à son assassinat en 415 "
+"par des chrétiens."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -18018,8 +18019,9 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
 "Titawin (aujourd'hui la Médina de Tétouan) est une ville du nord du Maroc et"
-" un site du patrimoine mondial de l'UNESCO.  À partir du VIIIe siècle, elle "
-"a été le principal point de jonction entre le Maroc et l'Andalousie."
+" un site du patrimoine mondial de l'UNESCO.  À partir du VIII<sup>e</sup> "
+"siècle, elle a été le principal point de jonction entre le Maroc et "
+"l'Andalousie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
@@ -18030,9 +18032,9 @@ msgid ""
 msgstr ""
 "Saffar est dénommée en référence à Ibn al-Saffar (Abu al‐Qasim Ahmad ibn Abd"
 " Allah ibn Umar al‐Ghafiqī ibn al-Saffar al‐Andalusi), qui enseignait "
-"l'arithmétique, la géométrie et l'astronomie au XIe siècle à Cordoue, en "
-"Andalousie. Il a écrit un traité sur l'utilisation l'astrolabe, d'une grande"
-" influence."
+"l'arithmétique, la géométrie et l'astronomie au XI<sup>e</sup> siècle à "
+"Cordoue, en Andalousie. Il a écrit un traité sur l'utilisation l'astrolabe, "
+"d'une grande influence."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
@@ -18042,7 +18044,7 @@ msgid ""
 msgstr ""
 "Le nom Samh est une référence à Ibn al-Samh (Abu al-Qasim 'Asbagh ibn "
 "Muhammad ibn al-Samh al-Mahri), un astronome et mathématicien de l'école de "
-"al-Majritî ayant vécu au XIe siècle à Cordoue (Andalousie)."
+"al-Majritî ayant vécu au XI<sup>e</sup> siècle à Cordoue (Andalousie)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
@@ -18052,8 +18054,8 @@ msgid ""
 msgstr ""
 "Le nom Majritî est une référence à Maslama al-Majritî (Abû-l-Qâsim Maslama "
 "ibn Ahmad al-Faradi al-Hasib al-Qurtubi al-Majritî),  mathématicien, "
-"chimiste et astronome ayant vécu aux Xe et XIe siècle à Cordoue "
-"(Andalousie)."
+"chimiste et astronome ayant vécu aux X<sup>e</sup> et XI<sup>e</sup> siècles"
+" à Cordoue (Andalousie)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
@@ -18081,23 +18083,30 @@ msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
+"Les historiens pensent que les Albanais sont les descendants des Illyriens, "
+"un terme par lequel les Albanais s'appellent eux-mêmes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "Arber is the term for the inhabitants of Albania during the middle ages."
-msgstr ""
+msgstr "Arber est le nom des habitants de l'Albanie durant le Moyen Âge."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "Hoggar is the name of the main mountain range in the Sahara Desert in "
 "southern Algeria."
 msgstr ""
+"Hoggar est le nom de la chaîne de montagnes principale du désert du Sahara, "
+"dans le sud de l'Algérie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "Tassili is a UNESCO World Heritage Site situated in the Sahara Desert and is"
 " renowned for its prehistoric cave art and scenic geological formations."
 msgstr ""
+"Tassili est un site du patrimoine mondial de l'UNESCO situé dans le désert "
+"du Sahara, reconnue pour l'art rupestre de sa grotte préhistorique et ses "
+"spectaculaires formations géologiques."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
@@ -18106,6 +18115,10 @@ msgid ""
 " primitive solar calendar and reference point for shepherds and early "
 "inhabitants of Andorra."
 msgstr ""
+"Arcalis est un sommet célèbre du nord d'Andorre. Deux fois par an, à date "
+"fixe, le Soleil passe par un trou dans la montagne, qui a été utilisé comme "
+"comme un calendrier solaire primitif et un point de référence pour les "
+"bergers et les premiers habitants d'Andorre."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
@@ -18114,18 +18127,27 @@ msgid ""
 "of Andorra. It is the main part of the Madriu-Perafita-Claror UNESCO World "
 "Heritage Site."
 msgstr ""
+"Madriu (Mare del riu en catalan, Mère de la rivière en français) est le nom "
+"d'une vallée glaciaire et de la rivière qui y coule au sud-est d'Andorre. "
+"C'est la partie principale du site Madriu-Perafita-Claror du patrimoine "
+"mondial de l'UNESCO."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "Nosaxa means spring in the Moqoit language. The word comes from a "
 "combination of nosahuec, which means renew, and ñaaxa, which means year."
 msgstr ""
+"Nosaxa signifie printemps dans la langue Moqoit. Le mot provient d'une "
+"combinaison de nosahuec, qui signifie renouveau, et de ñaaxa, qui signifie "
+"année."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "Naqaỹa means brother-family-relative in the Moqoit language and leads us to "
 "call all humans, indigenous or non-indigenous, brother."
 msgstr ""
+"Naqaỹa signifie membre de la fratrie dans la langue Moqoit, ce qui fait "
+"appeler tous les humains des frères, qu'ils soient indigènes ou non."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid ""
@@ -18133,6 +18155,10 @@ msgid ""
 "stretch that interrupts the limestone and rocky terrace along the coast. Its"
 " shallow clear Caribbean waters make it a popular snorkelling spot."
 msgstr ""
+"Malmok est un nom indigène en Aruba donné à une plage avec un étroite bande "
+"de sable qui interrompt la terrasse de calcaire et de roche le long de la "
+"côte. Ses eaux limpides et peu profondes en font une zone de randonnée "
+"subaquatique prisée des Caraïbes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid ""
@@ -18140,26 +18166,34 @@ msgid ""
 "in Arikok National Park along the northeast coast of Aruba. It is named "
 "after Plantation Prins where coconuts are cultivated."
 msgstr ""
+"Boca Prins est une plage isolée avec des dunes blanches et un paysage "
+"pittoresque située dans le parc national Arikok le long de la côte nord-est "
+"d'Aruba. Elle est nommée d'après la plantation Prins où l'on cultive des "
+"noix de coco."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Bubup is the Boonwurrung word for child."
-msgstr ""
+msgstr "Bubup est le mot Boonwurrung pour enfant."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "YanYan is the Boonwurrung word for boy."
-msgstr ""
+msgstr "YanYan est le mot Boonwurrung pour garçon."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid ""
 "Franz is a character in the movie 'Sissi' embodying an emperor of Austria in"
 " the XIXth century. The role is played by the actor Karlheinz Böhm."
 msgstr ""
+"Franz est le personnage du film « Sissi », l'empereur d'Autriche au "
+"XIX<sup>e</sup> siècle. L'acteur Karlheinz Böhm a joué ce rôle."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid ""
 "Sissi is a character in the movie 'Sissi', who is married with Franz. The "
 "role is played by the actress Romy Schneider."
 msgstr ""
+"Sissi est le personnage du film « Sissi » marrié à Franz. L'actrice Romy "
+"Schneider a joué ce rôle."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid ""
@@ -18168,6 +18202,9 @@ msgid ""
 "and Nizami and was well educated and talented and played numerous musical "
 "instruments."
 msgstr ""
+"Mahsati Ganjavi (1089–1159) est l'une des plus brillantes poétesse de langue"
+" personne. Elle était liée à Omar Khayyam et à Nizami, qu'elle était très "
+"cultivée, talentueuse et qu'elle jouait de nombreux instruments de musique."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
 msgid ""
@@ -18176,26 +18213,36 @@ msgid ""
 "capital of Azerbaijan, the first capital of the Azerbaijan Democratic "
 "Republic and the city with the spirit of wisdom and freedom."
 msgstr ""
+"Ganja est une ancienne cité d'Azerbaïdjan, lieu de naissance de nombreuses "
+"personnalités telles que les poètes Mahsati et Nizami."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid ""
 "Timir means darkness in Bengali language, alluding to the star being far "
 "away in the darkness of space."
 msgstr ""
+"Timir signifie obscurité en Bengali, en référence aux lointaines étoiles "
+"dans l'obscurité de l'espace."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid ""
 "Tondra means nap in Bengali language, alluding to the symbolic notion that "
 "the planet was asleep until discovered."
 msgstr ""
+"Tondra signifie sieste en Bengali, en référence à la notion symbolique "
+"qu'une planète était endormie avant qu'on la découvre."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "Nervia, adapted from Nervii, was a prominent Belgian Celtic tribe."
 msgstr ""
+"Nervia est une adaptation des Nerviens, un des plus puissants peuples celtes"
+" de la Belgique antique."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid "Eburonia, adapted from Eburones, was a prominent Belgian Celtic tribe."
 msgstr ""
+"Eburonia est une adaptation des Éburons, un peuple celte de la Belgique "
+"antique."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 msgid ""
@@ -18203,24 +18250,34 @@ msgid ""
 "philosophy conceived and followed in Bhutan and is one of Bhutan's "
 "contributions to the world."
 msgstr ""
+"Gakyid signifie bonheur. Le Bonheur national brut un indice conçu et utilisé"
+" au Bouthan pour guider le développement du pays tout en respectant les "
+"valeurs spirituelles bouddhistes. "
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid ""
 "Drukyul (land of the thunder dragon) is the native name for Bhutan, the "
 "country that came up with the philosophy of Gross National Happiness."
 msgstr ""
+"Drukyul (la terre du dragon) est le nom local du Bouthan, pays à l'origine "
+"du concept de Bonheur national brut."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid ""
 "Tapecue means eternal path in Guarani and represents the Milky Way through "
 "which the first inhabitants of the Earth arrived and could return."
 msgstr ""
+"Tapecue signifie chemin éternel en Guarani, et représente la Voie Lactée, "
+"par laquelle les premiers habitants de la Terre sont arrivés et pourraient "
+"repartir."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 msgid ""
 "Yvaga means paradise for the Guarani and the Milky Way was known as the road"
 " to Yvaga or paradise."
 msgstr ""
+"Yvaga signifie paradis en Guarani ; la Voie Lactée était pour les Guarani la"
+" route vers Yvaga."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid ""
@@ -18228,6 +18285,8 @@ msgid ""
 "Later, the name was transformed to Bosnia originating from the name of the "
 "Bosna river."
 msgstr ""
+"Bosona est le nom donné au territoire de Bosnie au X<sup>e</sup> siècle. "
+"Plus tard, le nom a été transformé en Bosnie, du nom de la rivière Bosna."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 msgid ""
@@ -18235,6 +18294,9 @@ msgid ""
 "partly in Croatia) in antiquity orginating with the Celts who called it Nera"
 " Etwa which means the Flowing Divinity."
 msgstr ""
+"Naron est l'un des noms donnés dans l'Antiquité au fleuve d'Herzégovine (et "
+"en partie de Croatie) Neretva ; le nom provient des Celtes qui l'appelaient "
+"Nera Etwa, qui signifie Divinité Fluide."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 msgid ""
@@ -18242,34 +18304,45 @@ msgid ""
 "eastern coast of South America, before the Portuguese arrived in the 16th "
 "century."
 msgstr ""
+"Tupi est le nom du peuple indigène le plus nombreux de la côte est de "
+"l'Amérique du Sud, avant l'arrivée des Portugais au XVI<sup>e</sup> siècle."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
 msgid ""
 "Guarani is the name of the most populous Indigenous people living in South "
 "Brazil and parts of Argentina, Paraguay and Uruguay."
 msgstr ""
+"Guarani est le nom du peuple indigène le plus nombreux du sud du Brésil, de "
+"l'argentine, du Paraguay et de l'Uruguay."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid ""
 "Gumala is a Malay word, which means a magic bezoar stone found in snakes, "
 "dragons, etc."
 msgstr ""
+"Gumala est un mot malais qui signifie bézoard, pierre magique trouvée dans "
+"l'estomac des serpents, dragons, etc."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid ""
 "Mastika is a Malay word, which means a gem, precious stone, jewel or the "
 "prettiest, the most beautiful."
 msgstr ""
+"Mastika est un mot malais qui signifie gemme, pierre précieuse, bijoux ou "
+"encore très joli ou très beau."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Tangra is the supreme celestial god that early Bulgars worshiped."
 msgstr ""
+"Tangra est le dieu céleste suprême que les ancient Bulgares vénéraient."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid ""
 "Bendida is the Great Mother Goddess of the Thracians. She was especially "
 "revered as a goddess of marriage and living nature."
 msgstr ""
+"Bendida est la grande déesse mère des Thraces. Elle était spécialement "
+"révérée comme déesse du mariage et de la nature."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid ""
@@ -19406,11 +19479,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:485
 msgid "Natasha means thank you in many languages of Zambia."
-msgstr ""
+msgstr "Natasha signifie merci dans de nombreuses langue de Zambie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
 msgid "Madalitso means blessings in the native language of Nyanja in Zambia."
-msgstr ""
+msgstr "Madalitso signifie bénédictions dans la langue de Nyanja en Zambie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:488
 msgid ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-20 22:37+0700\n"
+"POT-Creation-Date: 2019-12-27 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2019\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -4825,32 +4825,32 @@ msgstr "Zahrnout soubor"
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr "Rovníkové (J2000.0)"
+msgstr "Rovníková (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr "Rovníkové"
+msgstr "Rovníková"
 
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr "Obzorníkové"
+msgstr "Obzorníková"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr "Galaktické"
+msgstr "Galaktická"
 
 #: src/gui/SearchDialog.cpp:218
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr "Supergalactické"
+msgstr "Supergalaktická"
 
 #: src/gui/SearchDialog.cpp:219
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr "Ekliptika"
+msgstr "Ekliptikální"
 
 #: src/gui/SearchDialog.cpp:220
 msgctxt "coordinate system"
@@ -5832,11 +5832,11 @@ msgstr "Importovat záložky"
 msgid "Export bookmarks as..."
 msgstr "Exportovat záložky jako…"
 
-#: src/gui/DateTimeDialog.cpp:227 src/gui/DateTimeDialog.cpp:228
+#: src/gui/DateTimeDialog.cpp:230 src/gui/DateTimeDialog.cpp:231
 msgid "Date and Time in Julian calendar"
 msgstr "Datum a čas v juliánském kalendáři"
 
-#: src/gui/DateTimeDialog.cpp:232 src/gui/DateTimeDialog.cpp:233
+#: src/gui/DateTimeDialog.cpp:235 src/gui/DateTimeDialog.cpp:236
 msgid "Date and Time in Gregorian calendar"
 msgstr "Datum a čas v gregoriánském kalendáři"
 
@@ -8016,8 +8016,8 @@ msgstr "Bolívie"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
-msgid "Caribbean NL"
-msgstr "Karibské Nizozemsko"
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -8076,8 +8076,8 @@ msgstr "Středoafrická republika"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
-msgid "Congo (Rep.)"
-msgstr "Republika Kongo"
+msgid "Congo"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -8126,13 +8126,13 @@ msgstr "Kuba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
-msgid "Cape Verde"
-msgstr "Kapverdy"
+msgid "Cabo Verde"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
-msgid "Curacao"
-msgstr "Curacao"
+msgid "Curaçao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
@@ -8146,8 +8146,8 @@ msgstr "Kypr"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
-msgid "Czech Republic"
-msgstr "Česká republika"
+msgid "Czechia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -8226,8 +8226,8 @@ msgstr "Fidži"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
-msgid "Falkland Islands"
-msgstr "Falklandy"
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
@@ -8587,8 +8587,8 @@ msgstr "Marshallovy ostrovy"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
-msgid "Macedonia"
-msgstr "Makedonie"
+msgid "North Macedonia"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
@@ -8607,8 +8607,8 @@ msgstr "Mongolsko"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
-msgid "Macau"
-msgstr "Macao"
+msgid "Macao"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -8822,8 +8822,8 @@ msgstr "Sbrsko"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
-msgid "Russia"
-msgstr "Rusko"
+msgid "Russian Federation"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -8862,8 +8862,8 @@ msgstr "Singapur"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
-msgid "St Helena"
-msgstr "Svatá Helena"
+msgid "St Helena, Ascension and Tristan da Cunha"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -8927,18 +8927,18 @@ msgstr "Svatý Martin (nizozemská část)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
-msgid "Syria"
-msgstr "Sýrie"
+msgid "Syrian Arab Republic"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
-msgid "Swaziland"
-msgstr "Svazijsko"
+msgid "Eswatini"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
-msgid "Turks and Caicos Is"
-msgstr "Turks a Caicos"
+msgid "Turks and Caicos Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -8947,8 +8947,8 @@ msgstr "Čad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
-msgid "French Southern and Antarctic Lands"
-msgstr "Francouzská jižní a antarktická území"
+msgid "French Southern Territories"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -8972,8 +8972,8 @@ msgstr "Tokelau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
-msgid "East Timor"
-msgstr "Východní Timor"
+msgid "Timor-Leste"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
@@ -9007,13 +9007,13 @@ msgstr "Tuvalu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
-msgid "Taiwan"
-msgstr "Taiwan"
+msgid "Taiwan (Province of China)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
-msgid "Tanzania"
-msgstr "Tanzánie"
+msgid "United Republic of Tanzania"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
@@ -9027,13 +9027,13 @@ msgstr "Uganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
-msgid "US minor outlying islands"
-msgstr "Menší odlehlé ostrovy USA"
+msgid "US Minor Outlying Islands"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
-msgid "United States"
-msgstr "Spojené státy"
+msgid "United States of America"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
@@ -9047,13 +9047,13 @@ msgstr "Uzbekistán"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
-msgid "Vatican City"
-msgstr "Vatikán"
+msgid "Holy See"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
-msgid "St Vincent"
-msgstr "Svatý Vincenc"
+msgid "St Vincent and the Grenadines"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -9062,18 +9062,18 @@ msgstr "Venezuela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
-msgid "Virgin Islands (UK)"
-msgstr "Panenské ostrovy (UK)"
+msgid "Virgin Islands (British)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
-msgid "Virgin Islands (US)"
-msgstr "Panenské ostrovy (USA)"
+msgid "Virgin Islands (U.S.)"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
-msgid "Vietnam"
-msgstr "Vietnam"
+msgid "Viet Nam"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -9087,8 +9087,8 @@ msgstr "Wallis a Futuna"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
-msgid "Samoa (western)"
-msgstr "Samoa (západní)"
+msgid "Samoa"
+msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -9351,12 +9351,12 @@ msgstr "Řecká písmena pro Bayerovo označení"
 #: src/ui_searchDialogGui.h:698
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr "Poznámka: tento nástroj nepoužívá korekci souřadnic na refrakci"
+msgstr "Poznámka: tento nástroj nepoužívá opravu souřadnic na refrakci"
 
 #: src/ui_searchDialogGui.h:700
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:603
 msgid "Coordinate system:"
-msgstr "Souřadnicový systém:"
+msgstr "Souřadnicová soustava:"
 
 #: src/ui_searchDialogGui.h:702
 msgid "Position"
@@ -10201,7 +10201,7 @@ msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
-"Zobrazit de Vaucouleursovy supergalactické souřadnice (1976), definované "
+"Zobrazit de Vaucouleursovy supergalaktické souřadnice (1976), definované "
 "rozdělením blízkých galaxií."
 
 #: src/ui_viewDialog.h:3021
@@ -10608,7 +10608,7 @@ msgstr "Rektascenze/Deklinace (k datu)"
 
 #: src/ui_configurationDialog.h:1603
 msgid "Supergalactic coordinates"
-msgstr "Supergalactické souřadnice"
+msgstr "Supergalaktické souřadnice"
 
 #: src/ui_configurationDialog.h:1604
 msgid "Visual magnitude"
@@ -14227,7 +14227,7 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a"
 " computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Tento zásuvný modul umožňuje Stellariu zasílat příkazy pro otáčení "
+"Tento zásuvný modul umožňuje Stellariu zasílat příkazy pro navádění "
 "dalekohledu na počítačem ovládané montáži (dalekohled typu \"GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
@@ -14252,7 +14252,7 @@ msgstr "Synchronizovat polohu dalekohledu #%1 na vybraný objekt"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:259
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
-msgstr "Přerušit poslední příkaz pro otočení dalekohledu #%1"
+msgstr "Přerušit poslední příkaz pro navádění dalekohledu #%1"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:214
 msgid "Move a telescope to a given set of coordinates"
@@ -14606,7 +14606,7 @@ msgstr "Indikátory zorného pole"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:444
 msgid "'Slew telescope to' window"
-msgstr "Okno 'Otočit dalekohled na'"
+msgstr "Okno 'Navést dalekohled na'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid "Telescope commands"
@@ -14630,10 +14630,10 @@ msgid ""
 "collisions and similar situations. (To abort a slew, you can start another "
 "one to a safe position.)"
 msgstr ""
-"Tento zásuvný modul umožňuje Stellariu posílat pouze '<b>otáčecí</b>' ('go "
+"Tento zásuvný modul umožňuje Stellariu posílat pouze '<b>naváděcí</b>' ('go "
 "to') příkazy do přístroje a přijímat jeho aktuální polohu. Nemůže vydávat "
 "jakékoli jiné příkazy, takže uživatel musí být opatrný, aby nedošlo ke "
-"kolizi montáže apod. (Pro zrušení otáčení můžete vydat další příkaz k "
+"kolizi montáže apod. (Pro zrušení navádění můžete vydat další příkaz k "
 "otočení přístroje na bezpečnou pozici.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
@@ -14670,8 +14670,8 @@ msgid ""
 "before sunset without appropriate protection."
 msgstr ""
 "Dokonce se během dne může stát, i když to neuděláte úmyslně, že váš "
-"dalekohled bude mířit na Slunce při přejíždění k zadanému cíli. Proto "
-"důrazně doporučujeme, abyste do západu Slunce nepoužívali ovládání "
+"dalekohled bude při navádění k zadanému cíli namířený na Slunce. Proto "
+"důrazně doporučujeme, abyste před západem Slunce nepoužívali ovládání "
 "dalekohledu bez vhodné ochrany."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
@@ -14817,7 +14817,7 @@ msgid ""
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
-"Stiskem tlačítka 'Nastavit dalekohledy...' v {okně 'Otočit dalekohled na'} "
+"Stiskem tlačítka 'Nastavit dalekohledy...' v {okně 'Navést dalekohled na'} "
 "(otevřeném stiskem <b>Ctrl+0</b> nebo příslušného tlačítka na dolní "
 "nástrojové liště)."
 
@@ -15125,7 +15125,7 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
-"Okno 'Otočit dalekohled na' může být otevřeno stiskem <b>Ctrl+0</b> nebo "
+"Okno 'Navést dalekohled na' může být otevřeno stiskem <b>Ctrl+0</b> nebo "
 "odpovídajícím tlačítkem na dolní liště nástrojů."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -15149,14 +15149,14 @@ msgid ""
 "will be disabled."
 msgstr ""
 "Pokud nejsou připojena žádná zařízení, seznam zůstane prázdný a tlačítko "
-"'Otočit' bude neaktivní."
+"'Navést' bude neaktivní."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
-"Stisknutí tlačítka <b>Otočit</b> otočí vybrané zařízení na vybrané "
+"Stisknutí tlačítka <b>Navést</b> navede vybrané zařízení na vybrané "
 "souřadnice."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
@@ -15182,7 +15182,7 @@ msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
-"<b>TIP:</b> Podtržená písmena uvnitř okna 'Otočit' znamenají, že můžete "
+"<b>TIP:</b> Podtržená písmena uvnitř okna 'Navést' znamenají, že můžete "
 "místo kliknutí použít současný stisk kláves 'Alt + podtržené písmeno'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
@@ -15190,7 +15190,7 @@ msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
-"Například stisk <b>Alt+S</b> je ekvivalentní kliknutí na tlačítko 'Otočit', "
+"Například stisk <b>Alt+S</b> je ekvivalentní kliknutí na tlačítko 'Navést', "
 "stisk <b>Alt+E</b> přepíná formát na desetinné stupně, atd."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
@@ -15246,7 +15246,7 @@ msgstr "Například Alt+1 pro dalekohled #1."
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 msgid ""
 "This will slew the device to the point in the center of the current view."
-msgstr "Tím se zařízení otočí na bod ve středu aktuálního pole."
+msgstr "Tím se zařízení navede na bod ve středu aktuálního pole."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
@@ -15262,8 +15262,8 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
 msgstr ""
-"<b>Pro otočení zařízení na dalé souřadnice:</b> Použijte {okno 'Otočit na'} "
-"(stiskněte <b>Ctrl+0</b>)."
+"<b>Pro zaměření zařízení na dalé souřadnice:</b> Použijte {okno 'Navést na'}"
+" (stiskněte <b>Ctrl+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
@@ -15407,10 +15407,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
-"Pro otočení připojeného dalekohledu na objekt (například hvězdu), objekt "
+"Pro navedení připojeného dalekohledu na objekt (například hvězdu), objekt "
 "vyberte, pak podržte klávesu %1 a stiskněte klávesu s číslem dalekohledu. "
-"Pro otočení do středu současného zobrazení, podržte klávesu Alt a stiskněte "
-"klávesu s číslem dalekohledu."
+"Pro navedení do středu současného zobrazení, podržte klávesu Alt a stiskněte"
+" klávesu s číslem dalekohledu."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
@@ -15519,7 +15519,7 @@ msgstr "Vybrat jeden"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "Slew telescope to"
-msgstr "Otočit dalekohled na"
+msgstr "Navést dalekohled na"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "There are no active devices."
@@ -15527,7 +15527,7 @@ msgstr "Nejsou žádná aktivní zařízení."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:340
 msgid "Slew telescope to coordinates"
-msgstr "Otočit dalekohled na souřadnice"
+msgstr "Navést dalekohled na souřadnice"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
@@ -15575,7 +15575,7 @@ msgstr "D&esetinné"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:358
 msgid "&Slew"
-msgstr "&Otočit"
+msgstr "&Navést"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:359
 msgid "Sync"
@@ -17011,145 +17011,157 @@ msgstr "Zapnout automaticky při spuštění"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr ""
+msgstr "Server vypnutý - nebo Server naslouchá na IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:53
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Remote Sync"
-msgstr ""
+msgstr "Vzdálená synchronizace"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:56
 msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
 msgstr ""
+"Zajišťuje synchronizaci stavu pro více instancí Stellaria běžících v síti. "
+"Podrobný popis viz příručka."
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:57
 msgid ""
 "This plugin was created in the 2015/2016 campaigns of the ESA Summer of Code"
 " in Space programme."
 msgstr ""
+"Tento zásuvný modul byl vytvořen v rámci programu ESA Summer of Code in "
+"Space programme 2015/2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:119
 #, qt-format
 msgid "ERROR: %1"
-msgstr ""
+msgstr "CHYBA: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Start server"
-msgstr ""
+msgstr "Spustit server"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:141
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Connect to server"
-msgstr ""
+msgstr "Připojit k serveru"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:144
 msgid "Not running"
-msgstr ""
+msgstr "Není spuštěn"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:149
 msgid "Stop server"
-msgstr ""
+msgstr "Zastavit server"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "Spuštěn jako server na portu %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
 msgid "Cancel connecting"
-msgstr ""
+msgstr "Zrušit připojování"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 #, qt-format
 msgid "Connecting to %1: %2..."
-msgstr ""
+msgstr "Připojování k %1: %2..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
 #, qt-format
 msgid "Retrying connection to %1: %2..."
-msgstr ""
+msgstr "Opakuji připojování k %1: %2..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:180
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnecting..."
-msgstr ""
+msgstr "Odpojování..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
 msgid "Disconnect from server"
-msgstr ""
+msgstr "Odpojit od serveru"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
 #, qt-format
 msgid "Connected to %1: %2"
-msgstr ""
+msgstr "Připojeno k %1: %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "Zásuvný modul Vzdálená synchronizace"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
+"Zásuvný modul Vzdálená synchronizace zajišťuje synchronizaci stavu pro více "
+"instancí Stellaria běžících v síti."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
+"To můžete využít například pro nastavení více obrazovek používajících "
+"několik fyzických PC."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
+"Částečná synchronizace umožňuje například paralelní nastavení celkového "
+"náhledu a detailních pohledů."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "Detailní popis naleznete v manuálu."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
+"Tento zásuvný modul byl vyvinut během ESA Summer of Code in Space "
+"2015&amp;2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server Name"
-msgstr ""
+msgstr "Jméno serveru"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:255
 msgid "Server not active."
-msgstr ""
+msgstr "Server není aktivní"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:460
 msgid "Remote Sync Plug-in Configuration"
-msgstr ""
+msgstr "Nastavení zásuvného modulu Vzdálená synchronizace"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Stav:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Server mode"
-msgstr ""
+msgstr "Serverový režim"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Server port"
-msgstr ""
+msgstr "Port serveru"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Client mode"
-msgstr ""
+msgstr "Klientský režim"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "Server host address/name"
-msgstr ""
+msgstr "Adresa/jméno hostitele serveru"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "127.0.0.1"
@@ -17157,31 +17169,32 @@ msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
 msgid "When connection is lost"
-msgstr ""
+msgstr "Při ztrátě připojení"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Do nothing"
-msgstr ""
+msgstr "Nedělat nic"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Try reconnecting"
-msgstr ""
+msgstr "Pokusit se o opětovné připojení"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "When server quits"
-msgstr ""
+msgstr "Při ukončení serveru"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Changes on this page require a re-connection to the server"
 msgstr ""
+"Změny provedené na této stránce vyžadují opětovné připojení k serveru."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "Nastavení použitá u tohoto klienta"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "Selection"
-msgstr ""
+msgstr "Výběr"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
@@ -17189,35 +17202,35 @@ msgstr "Směr pohledu"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
-msgstr ""
+msgstr "Filtry vlastností"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "Vyloučit vlastnosti související s GUI"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "Toto jsou všechny dostupné vlastnosti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "Toto jsou vlastnosti aktuálně vyloučené ze synchronizace."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "Vyloučené vlastnosti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "Synchronizované vlastnosti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "Další vyloučené vlastnosti:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavení klienta"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:172
@@ -17230,12 +17243,12 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Tento modul zobrazí pozici hvězd s exoplanetami. Data exoplanet jsou "
+"Tento modul zobrazí polohy hvězd s exoplanetami. Data pro exoplanety jsou "
 "odvozena z 'Extrasolar Planets Encyclopaedia' na exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:172
 msgid "Show exoplanets"
-msgstr "Zobrazit exoplanety"
+msgstr "Exoplanety"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:173
 msgid "Exoplanets configuration window"
@@ -17244,47 +17257,47 @@ msgstr "Okno nastavení exoplanet"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1022
 msgid "Hot"
-msgstr ""
+msgstr "Horká"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1024
 msgid "Warm"
-msgstr ""
+msgstr "Teplá"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Cold"
-msgstr ""
+msgstr "Chladná"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1029
 msgid "Miniterran"
-msgstr ""
+msgstr "Minizemě"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1031
 msgid "Subterran"
-msgstr ""
+msgstr "Podzemě"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1033
 msgid "Terran"
-msgstr ""
+msgstr "Země"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "Superterran"
-msgstr ""
+msgstr "Nadzemě"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1037
 msgid "Jovian"
-msgstr ""
+msgstr "Jupiter"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1039
 msgid "Neptunian"
-msgstr ""
+msgstr "Neptun"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1042
@@ -17403,7 +17416,7 @@ msgstr "Rovnovážná teplota na Zemi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Exoplanets Plug-in"
-msgstr "Zásuvný modul exoplanet"
+msgstr "Zásuvný modul Exoplanety"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 #, qt-format
@@ -19359,11 +19372,11 @@ msgstr "Nastavení exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Nastavení zás. modulu exoplanet"
+msgstr "Nastavení zásuvného modulu Exoplanety"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Update exoplanets data from Internet"
-msgstr "Aktualizovat data exoplanet z internetu"
+msgstr "Aktualizovat data pro exoplanety z internetu"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Settings for exoplanets"
@@ -20939,7 +20952,7 @@ msgstr "Galactická délka/šířka"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:215
 msgid "Supergalactic Longitude/Latitude"
-msgstr "Supergalactická délka/šířka"
+msgstr "Supergalaktická délka/šířka"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:245
 msgid "Coordinates of custom position:"
