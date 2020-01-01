@@ -302,11 +302,8 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 *************************************************************************/
 QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 {
-	int precission = 0;
-	if (decimal)
-		precission = 1;
-
-	return StelUtils::radToDmsPStr(angle, precission, useD);	
+	const int precision = decimal ? 1 : 0;
+	return StelUtils::radToDmsPStr(angle, precision, useD);
 }
 
 /*************************************************************************
