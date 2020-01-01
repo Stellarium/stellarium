@@ -693,7 +693,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
-	str.append(extraInfoString);
+	str.append(getExtraInfoStrings(flags|DebugAid).join(' '));
 
 	// hack for avoiding an empty line before table
 	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
@@ -874,11 +874,32 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-void StelObject::setExtraInfoString(const QString &str)
+void StelObject::setExtraInfoString(const InfoStringGroup flags, const QString &str)
 {
-	extraInfoString=str;
+	extraInfoStrings.remove(flags); // delete all entries with these flags
+	if (str.length()>0)
+		extraInfoStrings.insert(flags, str);
 }
-void StelObject::addToExtraInfoString(const QString &str)
+void StelObject::addToExtraInfoString(const InfoStringGroup flags, const QString &str)
 {
-	extraInfoString.append(str);
+	extraInfoStrings.insertMulti(flags, str);
+}
+
+QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
+{
+	QStringList list;
+	QMultiMap<InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
+	  while (i != extraInfoStrings.constEnd()) {
+		  if (i.key() & flags)
+		  {
+			  QString val=i.value();
+			  // TODO: Maybe exclude DebugAid flags from Release builds.
+			  if (flags&DebugAid)
+				  val.prepend("DEBUG: ");
+			  list.append(val);
+		  }
+		  ++i;
+	  }
+
+	return list;
 }

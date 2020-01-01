@@ -68,6 +68,7 @@ public:
 		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
 		NoFont			= 0x00100000,
 		PlainText			= 0x00200000, //!< Strip HTML tags from output
+		DebugAid                = 0x40000000  //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
@@ -255,10 +256,13 @@ public:
 
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
-	//! Hard-set this string to str
-	virtual void setExtraInfoString(const QString &str);
+	//! Hard-set this string group to a single str, or delete all messages when str==""
+	//! @note This should be used with caution.
+	virtual void setExtraInfoString(const InfoStringGroup flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
-	virtual void addToExtraInfoString(const QString &str);
+	virtual void addToExtraInfoString(const StelObject::InfoStringGroup flags, const QString &str);
+	//! Retrieve a QStringList of all extra info strings that match flags.
+	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
 
 protected:
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
@@ -280,8 +284,9 @@ private:
 	Vec3f computeRTSTime(StelCore* core) const;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
-	//! TODO: Maybe convert this to a Map or Hash, and let modules/plugins set or reset strings with their IDs, to avoid conflicts.
-	QString extraInfoString;
+	//! TODO: Maybe enrich this Map with some Module ID, to avoid conflicts?
+	//! Make sure this string map gets cleared e.g. in update() methods.
+	QMultiMap<InfoStringGroup, QString> extraInfoStrings;
 
 	static int stelObjectPMetaTypeID;
 };
