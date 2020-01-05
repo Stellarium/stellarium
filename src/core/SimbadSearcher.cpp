@@ -84,11 +84,18 @@ void SimbadLookupReply::httpQueryFinished()
 	QByteArray line;
 	bool found = false;
 	//qDebug() << reply->readAll();
+	bool cooAnswer=false; // if we asked for an object at coordinates
+
+	// We have 2 kinds of answers...
+
 	if (!reply->isSequential())
 		reply->reset();
+
 	while (!reply->atEnd())
 	{
 		line = reply->readLine();
+		if (line.contains("query coo "))
+			cooAnswer=true;
 		if (line.startsWith("::data"))
 		{
 			found = true;
@@ -97,6 +104,17 @@ void SimbadLookupReply::httpQueryFinished()
 		}
 	}
 	if (found)
+	{
+		if (cooAnswer){
+
+			resultIDs.clear();
+			while (!reply->atEnd())
+				resultIDs.append(reply->readLine());
+			qDebug() << "Cleaned result: " << resultIDs;
+		}
+		currentStatus = SimbadCoordinateLookupFinished;
+	}
+	else
 	{
 		line = reply->readLine();
 		line.chop(1); // Remove a line break at the end
@@ -133,15 +151,14 @@ void SimbadLookupReply::httpQueryFinished()
 				StelUtils::spheToRect(ra, dec, v);
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");				
+				line.replace("NAME " ,"");
 				resultPositions[line.simplified()]=v; // Remove an extra spaces
 			}
 			line = reply->readLine();
 			line.chop(1); // Remove a line break at the end
 		}
+		currentStatus = SimbadLookupFinished;
 	}
-
-	currentStatus = SimbadLookupFinished;
 	emit statusChanged();
 }
 
@@ -156,6 +173,8 @@ QString SimbadLookupReply::getCurrentStatusString() const
 			return q_("Error");
 		case SimbadLookupFinished:
 			return resultPositions.isEmpty() ? q_("Not found") : q_("Found");
+		case SimbadCoordinateLookupFinished:
+			return resultIDs.isEmpty() ? q_("Not found") : q_("Found");
 	}
 	return QString();
 }
@@ -173,6 +192,33 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 	QString query = "format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
 	query += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
 	query += objectName;
+	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
+
+	url += "simbad/sim-script?script=";
+	url += ba.constData();
+	return new SimbadLookupReply(url, networkMgr, delayMs);
+}
+
+// Lookup in Simbad for the passed object coordinates.
+SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult, int delayMs)
+{
+	double ra, de;
+	StelUtils::rectToSphe(&ra, &de, coordsJ2000);
+	QString rastring = StelUtils::radToHmsStr(ra);
+	//rastring.replace('h', ' ');
+	//rastring.replace('m', ' ');
+	//rastring.replace('s', ' ');
+	QString destring = StelUtils::radToDmsStr(de, false, true);
+	//destring.replace('d', ' ');
+	destring.replace('\'', 'm');
+	destring.replace('\"', 's');
+
+	// Create the Simbad query
+	QString url(serverUrl);
+	// The result format could be enriched! http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-fscript#Formats
+	QString query = "format object \"%4.2COO(s;A D) --- %IDLIST(1)\\nIdentifiers:\\n%IDLIST[%-30* | %-30*\\n]\"\n";
+	query += QString("set epoch J2000\nset limit %1\n query coo ").arg(maxNbResult);
+	query += rastring + " " + destring + " radius=1m ";
 	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
 
 	url += "simbad/sim-script?script=";

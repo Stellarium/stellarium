@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>507</width>
-    <height>223</height>
+    <height>263</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -295,6 +295,26 @@
          </property>
          <property name="textInteractionFlags">
           <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="simbadQueryButton">
+         <property name="text">
+          <string>Query SIMBAD about selected object</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextBrowser" name="simbadTextBrowser">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>4</height>
+          </size>
+         </property>
+         <property name="acceptRichText">
+          <bool>false</bool>
          </property>
         </widget>
        </item>

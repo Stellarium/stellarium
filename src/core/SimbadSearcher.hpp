@@ -37,18 +37,21 @@ class SimbadLookupReply : public QObject
 	friend class SimbadSearcher;
 
 public:
-	//! Possible status for a simbad query.
+	//! Possible status for a Simbad query.
 	enum SimbadLookupStatus
 	{
 		SimbadLookupQuerying,		//!< Simbad is still being queried.
 		SimbadLookupErrorOccured,	//!< An error occured while looking up Simbad. Call getErrorString() for a description of the error.
-		SimbadLookupFinished		//!< The query is over. The reply can be deleted.
+		SimbadLookupFinished,		//!< The query is over. The reply can be deleted.
+		SimbadCoordinateLookupFinished  //!< A coordinate lookup is finished. The reply can be deleted.
 	};
 
 	~SimbadLookupReply();
 
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}
+	//! Get the raw result string from position-based search
+	QString getResult() const {return resultIDs;}
 
 	//! Get the current status.
 	SimbadLookupStatus getCurrentStatus() const {return currentStatus;}
@@ -82,6 +85,8 @@ private:
 
 	//! The list of resulting objectNames/Position in ICRS.
 	QMap<QString, Vec3d> resultPositions;
+	//! The text result of a coordinate query.
+	QString resultIDs;
 
 	//! Current lookup status.
 	SimbadLookupStatus currentStatus;
@@ -109,6 +114,7 @@ public:
 	//! This used to group requests, e.g. send only one request when a used types a word insead of one per letter.
 	//! @return a new SimbadLookupReply which is owned by the caller.
 	SimbadLookupReply* lookup(const QString& serverUrl, const QString& objectName, int maxNbResult=1, int delayMs=500);
+	SimbadLookupReply* lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult=1, int delayMs=500);
 
 private:
 	//! The network manager used query simbad

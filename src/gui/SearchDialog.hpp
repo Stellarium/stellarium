@@ -136,6 +136,8 @@ protected:
 
 private slots:
 	void greekLetterClicked();
+	//! Query SIMBAD for data at the J2000.0 coordinates of the selected object.
+	void lookupCoordinates();
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
 	//! Called when the user changed the input text

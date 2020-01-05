@@ -316,6 +316,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		     this, SLOT(onSearchTextChanged(const QString&)));
+	connect(ui->simbadQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
@@ -626,6 +627,23 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	}
 }
 
+void SearchDialog::lookupCoordinates()
+{
+	if (!useSimbad)
+		return;
+
+	StelCore * core=StelApp::getInstance().getCore();
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	Vec3d coords=sel.at(0)->getJ2000EquatorialPos(core);
+
+	simbadReply = simbadSearcher->lookupCoords(simbadServerUrl, coords, 4);
+	onSimbadStatusChanged();
+	connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+
+}
 
 // Called when the current simbad query status changes
 void SearchDialog::onSimbadStatusChanged()
@@ -638,6 +656,7 @@ void SearchDialog::onSimbadStatusChanged()
 					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
+		ui->simbadTextBrowser->clear();
 	}
 	else
 	{
@@ -654,6 +673,12 @@ void SearchDialog::onSimbadStatusChanged()
 		ui->completionLabel->appendValues(simbadResults.keys());
 		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
+	}
+
+	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadCoordinateLookupFinished)
+	{
+		QString ret = simbadReply->getResult();
+		ui->simbadTextBrowser->setText(ret);
 	}
 
 	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)
