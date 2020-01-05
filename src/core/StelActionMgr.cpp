@@ -58,7 +58,7 @@ StelAction::StelAction(const QString& actionId,
 	QString cfgOpt = "shortcuts/" + actionId;
 	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ");
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", QString::SkipEmptyParts);
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";
 		setShortcut(shortcuts[0]);
