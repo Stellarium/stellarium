@@ -1,5 +1,5 @@
 The scripts in this folder may be useful for those who want to
-organize sustainable translation process of the sky culture description translation.
+organize sustainable translation process of the landscape description translation.
 
 Prerequisites:
 
@@ -14,12 +14,12 @@ Usage:
 
    sh extract.sh
 
-3. The sky cultures POT file will be stored in
-   po/stellarium-skycultures-descriptions of the Stellarium code folder.
+3. The landscapes POT file will be stored in
+   po/stellarium-landscapes-descriptions of the Stellarium code folder.
 
 II translate.sh
 
-1. Put your translations into po/stellarium-skycultures-descriptions
+1. Put your translations into po/stellarium-landscapes-descriptions
 2. Run from this folder
 
 sh translate.sh <your_locale>
@@ -31,7 +31,7 @@ Or run
 sh translate.sh
 
 if you need to translate the descriptions for all available locales.
-3. The translated descriptions will be created in the skycultures folder, ready
+3. The translated descriptions will be created in the landscapes folder, ready
    for you to create a pull request.
 
   * Both of these files are free software. They come without any warranty, to

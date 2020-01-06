@@ -2,7 +2,7 @@
 LANG=$1
 
 if [[ $LANG == "" ]]; then
-    for PO in ../../po/stellarium-skyculture-descriptions/*.po
+    for PO in ../../po/stellarium-skycultures-descriptions/*.po
     do
         pofilename=$(basename -- $PO)
         for i in ../../skycultures/*/*en.utf8
@@ -13,6 +13,6 @@ if [[ $LANG == "" ]]; then
 else
     for i in ../../skycultures/*/*en.utf8
     do
-        po4a-translate -k 0 -f xhtml -m $i -M utf-8 -p ../../po/stellarium-skyculture-descriptions/$LANG.po -l ${i%.*.*}.$LANG.utf8
+        po4a-translate -k 0 -f xhtml -m $i -M utf-8 -p ../../po/stellarium-skycultures-descriptions/$LANG.po -l ${i%.*.*}.$LANG.utf8
     done
 fi
