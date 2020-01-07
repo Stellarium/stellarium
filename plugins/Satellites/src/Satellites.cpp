@@ -1653,9 +1653,11 @@ void Satellites::parseTleFile(QFile& openFile,
 				lastData.second = line;
 				// The Satellite Catalog Number is the second number
 				// on the second line.
-				QString id = line.split(' ').at(1).trimmed();
-				if (id.isEmpty())
+				QString id = getSatIdFromLine2(line);
+				if (id.isEmpty()) {
+					qDebug() << "[Satellites] failed to extract SatId from \"" << line << "\"";
 					continue;
+				}
 				lastData.id = id;
 				
 				// This is the second line and there will be no more,
@@ -1677,6 +1679,12 @@ void Satellites::parseTleFile(QFile& openFile,
 				qDebug() << "[Satellites] unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
 		}
 	}
+}
+
+QString Satellites::getSatIdFromLine2(const QString& line)
+{
+	QString id = line.split(' ',  QString::SkipEmptyParts).at(1).trimmed();
+	return id;
 }
 
 void Satellites::parseQSMagFile(QString qsMagFile)
