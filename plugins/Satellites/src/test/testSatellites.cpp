@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Andy Kirkham
+ * Copyright (C) 2020 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 QTEST_GUILESS_MAIN(TestSatellites)
 
-void TestSatellites::testIssue897CelestrackFormattedLine2()
+void TestSatellites::testCelestrackFormattedLine2()
 {
     QString Line = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
     QString dut = Satellites::getSatIdFromLine2(Line);
@@ -29,7 +29,7 @@ void TestSatellites::testIssue897CelestrackFormattedLine2()
     QVERIFY("7530" == dut);
 }
 
-void TestSatellites::testIssue897SpaceTrackFormattedLine2()
+void TestSatellites::testSpaceTrackFormattedLine2()
 {
     QString Line = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
     QString dut = Satellites::getSatIdFromLine2(Line);
@@ -37,7 +37,7 @@ void TestSatellites::testIssue897SpaceTrackFormattedLine2()
     QVERIFY("7530" == dut);
 }
 
-void TestSatellites::testIssue897NoSatDuplication()
+void TestSatellites::testNoSatDuplication()
 {
     QString LineA = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
     QString LineB = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";

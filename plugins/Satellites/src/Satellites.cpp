@@ -1348,7 +1348,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 				if (updateSources[i].url == url)
 				{
 					updateSources[i].file = tmpFile;
-					tmpFile = 0;
+					tmpFile = Q_NULLPTR;
 					break;
 				}
 			}
@@ -1393,7 +1393,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			             updateSources[i].addNew);
 			updateSources[i].file->close();
 			delete updateSources[i].file;
-			updateSources[i].file = 0;
+			updateSources[i].file = Q_NULLPTR;
 		}
 	}
 	updateSources.clear();	

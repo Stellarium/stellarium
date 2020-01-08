@@ -363,7 +363,7 @@ public:
 
 	//! Insert a three line TLE into the hash array.
 	//! @param[in] line The second line from the TLE
-	static QString Satellites::getSatIdFromLine2(const QString& line);
+	static QString getSatIdFromLine2(const QString& line);
 
 	//! Reads qs.mag file and its parsing for getting id and standard magnitude
 	//! for satellites.
