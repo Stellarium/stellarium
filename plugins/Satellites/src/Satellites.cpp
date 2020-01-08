@@ -55,6 +55,7 @@
 #include <QVariant>
 #include <QDir>
 #include <QTemporaryFile>
+#include <QRegExp>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -1684,6 +1685,11 @@ void Satellites::parseTleFile(QFile& openFile,
 QString Satellites::getSatIdFromLine2(const QString& line)
 {
 	QString id = line.split(' ',  QString::SkipEmptyParts).at(1).trimmed();
+	if (!id.isEmpty())
+	{
+		// Strip any leading zeros as they should be unique ints as strings.
+		id.remove(QRegExp("^[0]*"));
+	}
 	return id;
 }
 
