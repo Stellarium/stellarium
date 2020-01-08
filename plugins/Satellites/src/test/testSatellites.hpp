@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Andy Kirkham <>
+ * Copyright (C) 2019 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,9 @@ class TestSatellites : public QObject
 {
 Q_OBJECT
 private slots:
-    void testIssue408_CelestrackFormattedLine2();
-    void testIssue408_SpaceTrackFormattedLine2();
+    void testIssue897CelestrackFormattedLine2();
+    void testIssue897SpaceTrackFormattedLine2();
+    void testIssue897NoSatDuplication();
 };
 
 #endif // TESTSATELLITES_HPP

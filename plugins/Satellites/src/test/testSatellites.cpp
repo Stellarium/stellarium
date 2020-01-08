@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Andy Kirkham <ToDo>
+ * Copyright (C) 2019 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,18 +21,29 @@
 
 QTEST_GUILESS_MAIN(TestSatellites)
 
-void TestSatellites::testIssue408_CelestrackFormattedLine2()
+void TestSatellites::testIssue897CelestrackFormattedLine2()
 {
-    QString Line  = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
+    QString Line = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
     QString dut = Satellites::getSatIdFromLine2(Line);
     QVERIFY(!dut.isEmpty());
-    QVERIFY("07530" == dut);
+    QVERIFY("7530" == dut);
 }
 
-void TestSatellites::testIssue408_SpaceTrackFormattedLine2()
+void TestSatellites::testIssue897SpaceTrackFormattedLine2()
 {
     QString Line = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
     QString dut = Satellites::getSatIdFromLine2(Line);
     QVERIFY(!dut.isEmpty());
     QVERIFY("7530" == dut);
 }
+
+void TestSatellites::testIssue897NoSatDuplication()
+{
+    QString LineA = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
+    QString LineB = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
+    QString dutA = Satellites::getSatIdFromLine2(LineA);
+    QString dutB = Satellites::getSatIdFromLine2(LineB);
+    QVERIFY(dutA == dutB);
+}
+
+
