@@ -110,7 +110,7 @@ void SimbadLookupReply::httpQueryFinished()
 			resultIDs.clear();
 			while (!reply->atEnd())
 				resultIDs.append(reply->readLine());
-			qDebug() << "Cleaned result: " << resultIDs;
+			//qDebug() << "Cleaned result: " << resultIDs;
 		}
 		currentStatus = SimbadCoordinateLookupFinished;
 	}

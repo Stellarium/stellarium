@@ -317,6 +317,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		     this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
+	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
@@ -567,6 +568,7 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onSearchTextChanged(const QString& text)
 {
+	clearSimbadText(StelModule::ReplaceSelection);
 	// This block needs to go before the trimmedText.isEmpty() or the SIMBAD result does not
 	// get properly cleared.
 	if (useSimbad) {
@@ -643,6 +645,11 @@ void SearchDialog::lookupCoordinates()
 	onSimbadStatusChanged();
 	connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 
+}
+
+void SearchDialog::clearSimbadText(StelModule::StelModuleSelectAction)
+{
+	ui->simbadTextBrowser->clear();
 }
 
 // Called when the current simbad query status changes
