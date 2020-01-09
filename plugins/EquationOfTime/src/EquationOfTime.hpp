@@ -132,6 +132,8 @@ public slots:
 
 private slots:
 	void updateMessageText();
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 
 signals:
 	void equationOfTimeStateChanged(bool b);

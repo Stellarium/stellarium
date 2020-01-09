@@ -254,6 +254,8 @@ private slots:
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveSettingsToConfig(); }
 
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);

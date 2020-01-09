@@ -74,8 +74,7 @@ void NavStarsWindow::createDialogContent()
 	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
 	// About tab

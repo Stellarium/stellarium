@@ -149,6 +149,8 @@ void RemoteControl::init()
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Remote_Control", N_("Remote Control"), N_("Remote control"), "enabled", "");
 
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+
 	// Add a toolbar button. TODO:  decide whether a button is necessary at all. Maye the button should not only enable, but call the GUI dialog directly?
 	try
 	{
@@ -181,7 +183,7 @@ void RemoteControl::update(double deltaTime)
 //! Draw any parts on the screen which are for our module
 void RemoteControl::draw(StelCore* core)
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 }
 
 void RemoteControl::setFlagEnabled(bool b)

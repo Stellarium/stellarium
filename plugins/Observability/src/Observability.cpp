@@ -230,6 +230,7 @@ void Observability::init()
 	updateMessageText();
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(updateMessageText()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 }
 
 /////////////////////////////////////////////

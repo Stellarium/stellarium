@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "ui_MSSearchDialog.h"
 
@@ -103,11 +104,11 @@ void MSSearchDialog::checkDates()
 
 	if (jdFrom > jdTo)
 	{
-		QMessageBox::warning(0, "Stellarium", q_("Start date greater than end date!"));
+		QMessageBox::warning(Q_NULLPTR, "Stellarium", q_("Start date greater than end date!"));
 	}
 	else if (jdTo-jdFrom > 365)
 	{
-		QMessageBox::warning(0, "Stellarium", q_("Time interval must be less than one year!"));
+		QMessageBox::warning(Q_NULLPTR, "Stellarium", q_("Time interval must be less than one year!"));
 	}
 	else
 	{
@@ -127,7 +128,7 @@ void MSSearchDialog::searchEvents()
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnDataType, r.type);
-		treeItem->setText(ColumnPeak, r.peak.toString("d MMMM yyyy"));
+		treeItem->setText(ColumnPeak, QString("%1 %2").arg(r.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(r.peak.month())));
 		if (r.zhrMin != r.zhrMax)
 			treeItem->setText(ColumnZHR, QString("%1-%2").arg(r.zhrMin).arg(r.zhrMax));
 		else
@@ -160,12 +161,11 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 	}
 
 	// Change date
-	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
-	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "d MMMM yyyy").toJulianDay());
-	m_mgr->repaint();
+	QDate peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data(Qt::UserRole).toDate();
+	StelApp::getInstance().getCore()->setJD(peak.toJulianDay());
 
 	// Find the object
-	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();	
 	StelObjectP obj = m_mgr->getMeteorShowers()->searchByNameI18n(nameI18n);
 	if (!obj)
 	{

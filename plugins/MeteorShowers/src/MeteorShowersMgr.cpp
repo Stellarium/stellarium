@@ -102,8 +102,8 @@ void MeteorShowersMgr::init()
 	// always check if we are on Earth
 	StelCore* core = StelApp::getInstance().getCore();
 	m_onEarth = core->getCurrentPlanet()->getEnglishName() == "Earth";
-	connect(core, SIGNAL(locationChanged(StelLocation)),
-		this, SLOT(locationChanged(StelLocation)));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(locationChanged(StelLocation)));
+	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	// enable at startup?
 	setEnablePlugin(getEnableAtStartup());
@@ -154,10 +154,10 @@ void MeteorShowersMgr::loadConfig()
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setShowEnableButton(m_conf->value(MS_CONFIG_PREFIX + "/show_enable_button", true).toBool());
 	setShowSearchButton(m_conf->value(MS_CONFIG_PREFIX + "/show_search_button", true).toBool());
-	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
-	setColorARC(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "255,240,0").toString()));
-	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
-	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());
+	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString()));
+	setColorARC(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString()));
+	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString()));
+	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());	
 	setFontSize(m_conf->value(MS_CONFIG_PREFIX + "/font_size", 13).toInt());
 	setEnableLabels(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_labels", true).toBool());
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
@@ -165,7 +165,13 @@ void MeteorShowersMgr::loadConfig()
 	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
-	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());
+	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());	
+}
+
+void MeteorShowersMgr::saveSettings()
+{
+	// Let's interpret hided radiants as "disabled at startup" when main settings are saving
+	m_conf->setValue(MS_CONFIG_PREFIX + "/enable_at_startup", getEnablePlugin());
 }
 
 void MeteorShowersMgr::loadTextures()

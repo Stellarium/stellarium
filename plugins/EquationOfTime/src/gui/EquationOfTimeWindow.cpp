@@ -74,7 +74,6 @@ void EquationOfTimeWindow::createDialogContent()
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveEquationOfTimeSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetEquationOfTimeSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveEquationOfTimeSettings()));
 
 	setAboutHtml();
 }

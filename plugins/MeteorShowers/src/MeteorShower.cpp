@@ -350,8 +350,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 			break;
 		default: //Inactive
 			rgb = m_mgr->getColorIR();
-	}
-	rgb /= 255.f;
+	}	
 	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
 
 	// Hide the radiant markers at during day light and make it visible

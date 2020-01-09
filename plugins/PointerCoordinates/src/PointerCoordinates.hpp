@@ -140,6 +140,10 @@ public:
 signals:
 	void flagCoordinatesVisibilityChanged(bool b);
 
+private slots:
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveConfiguration(); }
+
 public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);

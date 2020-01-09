@@ -126,8 +126,7 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();

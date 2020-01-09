@@ -320,6 +320,8 @@ private slots:
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
 	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveSettingsToConfig(); }
 };
 
 

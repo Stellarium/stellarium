@@ -260,6 +260,9 @@ private slots:
 
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
+
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 };
 
 #include <QObject>

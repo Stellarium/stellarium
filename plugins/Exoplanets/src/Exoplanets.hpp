@@ -438,7 +438,9 @@ private slots:
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
-	void reloadCatalog(void);	
+	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveConfiguration(); }
 };
 
 

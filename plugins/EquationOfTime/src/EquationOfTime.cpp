@@ -101,6 +101,7 @@ void EquationOfTime::init()
 	// the language changes.
 	updateMessageText();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 }
 
 void EquationOfTime::deinit()

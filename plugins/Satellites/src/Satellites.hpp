@@ -257,7 +257,7 @@ public:
 	void loadSettings();
 
 	//! Save the plugin's settings to the main configuration file.
-	void saveSettings();
+	void saveSettingsToConfig();
 
 	//! Get the groups used in the currently loaded satellite collection.
 	//! See @ref groups for details. Use getGroupIdList() if you need a list.
@@ -487,6 +487,8 @@ public slots:
 private slots:
 	//! Update satellites visibility on wide range of dates changes - by month or year
 	void updateSatellitesVisibility();
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 
 private:
 	//! Add to the current collection the satellite described by the data.

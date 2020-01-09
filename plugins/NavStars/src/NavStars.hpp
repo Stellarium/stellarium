@@ -126,6 +126,10 @@ public slots:
 	//! Set the set of navigational stars from its key
 	void setCurrentNavigationalStarsSetKey(QString key);
 
+private slots:
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveConfiguration(); }
+
 signals:
 	//! Emitted when display of markers have been changed.
 	void navStarsMarksChanged(bool b);

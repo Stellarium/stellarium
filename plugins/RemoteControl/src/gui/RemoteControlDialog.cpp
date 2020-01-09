@@ -98,8 +98,7 @@ void RemoteControlDialog::createDialogContent()
 
 	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));	
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rc, SLOT(restoreDefaultSettings()));
 
 	setAboutHtml();
