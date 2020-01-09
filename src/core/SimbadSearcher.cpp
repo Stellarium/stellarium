@@ -107,10 +107,10 @@ void SimbadLookupReply::httpQueryFinished()
 	{
 		if (cooAnswer){
 
-			resultIDs.clear();
+			cooResult.clear();
 			while (!reply->atEnd())
-				resultIDs.append(reply->readLine());
-			//qDebug() << "Cleaned result: " << resultIDs;
+				cooResult.append(reply->readLine());
+			//qDebug() << "Cleaned result: " << cooResult;
 		}
 		currentStatus = SimbadCoordinateLookupFinished;
 	}
@@ -174,7 +174,7 @@ QString SimbadLookupReply::getCurrentStatusString() const
 		case SimbadLookupFinished:
 			return resultPositions.isEmpty() ? q_("Not found") : q_("Found");
 		case SimbadCoordinateLookupFinished:
-			return resultIDs.isEmpty() ? q_("Not found") : q_("Found");
+			return cooResult.isEmpty() ? q_("Not found") : q_("Found");
 	}
 	return QString();
 }
@@ -216,9 +216,17 @@ SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const 
 	// Create the Simbad query
 	QString url(serverUrl);
 	// The result format could be enriched! http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-fscript#Formats
-	QString query = "format object \"%4.2COO(s;A D) --- %IDLIST(1)\\nIdentifiers:\\n%IDLIST[%-30* | %-30*\\n]\"\n";
+	QString query = "format object \""
+			"%4.2COO(s:;A D) --- %IDLIST(1) (%OTYPE(v))\\n"
+			"Distance from query: %5.2DIST arcsec\\n"
+			"Other Identifiers:\\n%IDLIST[%-30* | %-30*\\n]"
+			"Object Type(s): %OTYPELIST(V)\\n"
+			"Spectral Type: %SP(S)\\n"
+			"Morph. Type: %MT(M)\\n"
+			"Dimensions: %DIM(X)'x%DIM(Y)' at %DIM(A) degrees\\n"
+			"\\n\\n\"\n";
 	query += QString("set epoch J2000\nset limit %1\n query coo ").arg(maxNbResult);
-	query += rastring + " " + destring + " radius=1m ";
+	query += rastring + " " + destring + " radius=30s ";
 	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
 
 	url += "simbad/sim-script?script=";

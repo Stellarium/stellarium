@@ -299,13 +299,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="simbadQueryButton">
-         <property name="text">
-          <string>Query SIMBAD about selected object</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QTextBrowser" name="simbadTextBrowser">
          <property name="minimumSize">
           <size>
@@ -330,6 +323,13 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="simbadQueryButton">
+         <property name="text">
+          <string>Query SIMBAD about selected object</string>
          </property>
         </widget>
        </item>

@@ -51,7 +51,7 @@ public:
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}
 	//! Get the raw result string from position-based search
-	QString getResult() const {return resultIDs;}
+	QString getResult() const {return cooResult;}
 
 	//! Get the current status.
 	SimbadLookupStatus getCurrentStatus() const {return currentStatus;}
@@ -86,7 +86,7 @@ private:
 	//! The list of resulting objectNames/Position in ICRS.
 	QMap<QString, Vec3d> resultPositions;
 	//! The text result of a coordinate query.
-	QString resultIDs;
+	QString cooResult;
 
 	//! Current lookup status.
 	SimbadLookupStatus currentStatus;
