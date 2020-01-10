@@ -299,6 +299,14 @@ void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &p
 	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
 
+void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
+}
+
 void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName)
 {
 	toolButton->setProperty("propName", propertyName);
@@ -410,6 +418,27 @@ void QAbstractButtonStelPropertyConnectionHelper::onPropertyChanged(const QVaria
 	bool b = button->blockSignals(true);
 	button->setChecked(value.toBool());
 	button->blockSignals(b);
+}
+
+QGroupBoxStelPropertyConnectionHelper::QGroupBoxStelPropertyConnectionHelper(StelProperty *prop, QGroupBox *box)
+	:StelPropertyProxy(prop,box), box(box)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<bool>();
+	Q_ASSERT_X(ok,"QGroupBoxStelPropertyConnectionHelper","Can not convert to bool datatype");
+	Q_UNUSED(ok);
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(box, &QGroupBox::toggled, prop, &StelProperty::setValue);
+}
+
+void QGroupBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = box->blockSignals(true);
+	box->setChecked(value.toBool());
+	box->blockSignals(b);
 }
 
 QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(StelProperty *prop, QComboBox *combo)

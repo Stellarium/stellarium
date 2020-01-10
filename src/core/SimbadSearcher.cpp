@@ -200,7 +200,8 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 }
 
 // Lookup in Simbad for the passed object coordinates.
-SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult, int delayMs)
+SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult, int delayMs,
+						int radius, bool IDs, bool types, bool spectrum, bool morpho, bool dim)
 {
 	double ra, de;
 	StelUtils::rectToSphe(&ra, &de, coordsJ2000);
@@ -215,18 +216,21 @@ SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const 
 
 	// Create the Simbad query
 	QString url(serverUrl);
-	// The result format could be enriched! http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-fscript#Formats
+	// The query format could be enriched! http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-fscript#Formats
+	// NOTE: Newlines and other specials must be coded with double-backslash!
 	QString query = "format object \""
-			"%4.2COO(s:;A D) --- %IDLIST(1) (%OTYPE(v))\\n"
-			"Distance from query: %5.2DIST arcsec\\n"
-			"Other Identifiers:\\n%IDLIST[%-30* | %-30*\\n]"
-			"Object Type(s): %OTYPELIST(V)\\n"
-			"Spectral Type: %SP(S)\\n"
-			"Morph. Type: %MT(M)\\n"
-			"Dimensions: %DIM(X)'x%DIM(Y)' at %DIM(A) degrees\\n"
-			"\\n\\n\"\n";
+			"At coords (J2000.0) %-20COO(s:;A D):\\n"
+			"Object: %IDLIST(1) (%OTYPE(V))\\n"
+			"Distance from query: %5.2DIST arcsec\\n";
+	if (IDs)      query += "Other Identifiers:\\n%IDLIST[ - %-50* \\n]";
+	if (types)    query += "Object Type(s): %OTYPELIST(V)\\n";
+	if (spectrum) query += "Spectral Type: %SP(S)\\n";
+	if (morpho)   query += "Morph. Type: %MT(M)\\n";
+	if (dim)      query += "Dimensions: %3.1DIM(X)'x%3.1DIM(Y)' at %3.0DIM(A) degrees\\n";
+	query += "\\n\\n\"\n"; // add 2 newlines at end of each record
 	query += QString("set epoch J2000\nset limit %1\n query coo ").arg(maxNbResult);
-	query += rastring + " " + destring + " radius=30s ";
+	query += rastring + " " + destring;
+	query += QString(" radius=%1s ").arg(radius);
 	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
 
 	url += "simbad/sim-script?script=";

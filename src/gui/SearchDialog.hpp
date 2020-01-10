@@ -75,6 +75,15 @@ QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
 class SearchDialog : public StelDialog
 {
 	Q_OBJECT
+	Q_PROPERTY(bool useSimbad       READ simbadSearchEnabled WRITE enableSimbadSearch  NOTIFY simbadUseChanged)
+	Q_PROPERTY(int  simbadDist      READ getSimbadQueryDist  WRITE setSimbadQueryDist  NOTIFY simbadQueryDistChanged)
+	Q_PROPERTY(int  simbadCount     READ getSimbadQueryCount WRITE setSimbadQueryCount NOTIFY simbadQueryCountChanged)
+	Q_PROPERTY(bool simbadGetIds    READ getSimbadGetsIds    WRITE setSimbadGetsIds    NOTIFY simbadGetsIdsChanged)
+	Q_PROPERTY(bool simbadGetSpec   READ getSimbadGetsSpec   WRITE setSimbadGetsSpec   NOTIFY simbadGetsSpecChanged)
+	Q_PROPERTY(bool simbadGetMorpho READ getSimbadGetsMorpho WRITE setSimbadGetsMorpho NOTIFY simbadGetsMorphoChanged)
+	Q_PROPERTY(bool simbadGetTypes  READ getSimbadGetsTypes  WRITE setSimbadGetsTypes  NOTIFY simbadGetsTypesChanged)
+	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
+
 	Q_ENUMS(CoordinateSystem)
 
 public:
@@ -104,6 +113,17 @@ public:
 	static QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	//! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
+
+signals:
+	void simbadUseChanged(bool use);
+	void simbadQueryDistChanged(int dist);
+	void simbadQueryCountChanged(int count);
+	void simbadGetsIdsChanged(bool b);
+	void simbadGetsSpecChanged(bool b);
+	void simbadGetsDistChanged(bool b);
+	void simbadGetsMorphoChanged(bool b);
+	void simbadGetsTypesChanged(bool b);
+	void simbadGetsDimsChanged(bool b);
 
 public slots:
 	void retranslate();
@@ -157,6 +177,7 @@ private slots:
 
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
+	bool simbadSearchEnabled() const {return useSimbad;}
 
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
@@ -181,6 +202,22 @@ private slots:
 	void pasteAndGo();
 
 	void changeTab(int index);
+
+	int  getSimbadQueryDist () const { return simbadDist;}
+	int  getSimbadQueryCount() const { return simbadCount;}
+	bool getSimbadGetsIds   () const { return simbadGetIds;}
+	bool getSimbadGetsSpec  () const { return simbadGetSpec;}
+	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
+	bool getSimbadGetsTypes () const { return simbadGetTypes;}
+	bool getSimbadGetsDims  () const { return simbadGetDims;}
+
+	void setSimbadQueryDist(int dist);
+	void setSimbadQueryCount(int count);
+	void setSimbadGetsIds(bool b);
+	void setSimbadGetsSpec(bool b);
+	void setSimbadGetsMorpho(bool b);
+	void setSimbadGetsTypes(bool b);
+	void setSimbadGetsDims(bool b);
 
 private:
 	class SearchDialogStaticData
@@ -239,6 +276,16 @@ private:
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;
+
+	//! Properties for SIMBAD position query
+	int  simbadDist;      //!< Distance from queried coordinates
+	int  simbadCount;     //!< At max, retrieve so many results
+	bool simbadGetIds;    //!< get all IDs for object
+	bool simbadGetSpec;   //!< get spectral data
+	bool simbadGetMorpho; //!< get morphological description
+	bool simbadGetTypes;  //!< get object types
+	bool simbadGetDims;   //!< get dimensions
+
 	void populateSimbadServerList();
 
 	// The current coordinate system

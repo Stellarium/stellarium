@@ -28,6 +28,7 @@
 #include "StelApp.hpp"
 
 class QAbstractButton;
+class QGroupBox;
 class QComboBox;
 class QSpinBox;
 class QLineEdit;
@@ -166,6 +167,10 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
+	//! Helper function to connect a groupbox to a bool StelProperty
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
 	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
 	//! @param toolButton the QToolButton which shows the color

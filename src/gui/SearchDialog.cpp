@@ -139,17 +139,27 @@ SearchDialog::SearchDialog(QObject* parent)
 	, proxyModel(Q_NULLPTR)
 	, flagHasSelectedText(false)
 {
+	setObjectName("SearchDialog");
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 
+	StelApp::getInstance().getStelPropertyManager()->registerObject(this);
 	conf = StelApp::getInstance().getSettings();
-	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
+
+	setSimbadQueryDist( conf->value("search/simbad_query_dist",  30).toInt());
+	setSimbadQueryCount(conf->value("search/simbad_query_count",  3).toInt());
+	setSimbadGetsIds(   conf->value("search/simbad_query_IDs",        true ).toBool());
+	setSimbadGetsSpec(  conf->value("search/simbad_query_spec",       false).toBool());
+	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     false).toBool());
+	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
+	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
 }
 
 SearchDialog::~SearchDialog()
@@ -316,7 +326,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		     this, SLOT(onSearchTextChanged(const QString&)));
-	connect(ui->simbadQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
+	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
@@ -373,8 +383,16 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->simbadGroupBox, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
-	ui->simbadGroupBox->setChecked(useSimbad);
+	connectBoolProperty(ui->simbadGroupBox, "SearchDialog.useSimbad");
+	//connect(ui->simbadGroupBox, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
+	//ui->simbadGroupBox->setChecked(useSimbad);
+	connectIntProperty(ui->searchRadiusSpinBox,    "SearchDialog.simbadDist");
+	connectIntProperty(ui->resultsSpinBox,         "SearchDialog.simbadCount");
+	connectBoolProperty(ui->allIDsCheckBox,        "SearchDialog.simbadGetIds");
+	connectBoolProperty(ui->spectralClassCheckBox, "SearchDialog.simbadGetSpec");
+	connectBoolProperty(ui->morphoCheckBox,        "SearchDialog.simbadGetMorpho");
+	connectBoolProperty(ui->typesCheckBox,         "SearchDialog.simbadGetTypes");
+	connectBoolProperty(ui->dimsCheckBox,          "SearchDialog.simbadGetDims");
 
 	populateSimbadServerList();
 	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -432,9 +450,59 @@ void SearchDialog::setHasSelectedFlag()
 
 void SearchDialog::enableSimbadSearch(bool enable)
 {
-	useSimbad = enable;	
+	useSimbad = enable;
 	conf->setValue("search/flag_search_online", useSimbad);
-	ui->simbadStatusLabel->clear();
+	if (dialog && ui->simbadStatusLabel) ui->simbadStatusLabel->clear();
+	emit simbadUseChanged(enable);
+}
+
+
+void SearchDialog::setSimbadQueryDist(int dist)
+{
+	simbadDist=dist;
+	conf->setValue("search/simbad_query_dist", simbadDist);
+	emit simbadQueryDistChanged(dist);
+}
+
+void SearchDialog::setSimbadQueryCount(int count)
+{
+	simbadCount=count;
+	conf->setValue("search/simbad_query_count", simbadCount);
+	emit simbadQueryCountChanged(count);
+}
+void SearchDialog::setSimbadGetsIds(bool b)
+{
+	simbadGetIds=b;
+	conf->setValue("search/simbad_query_IDs", b);
+	emit simbadGetsIdsChanged(b);
+}
+
+void SearchDialog::setSimbadGetsSpec(bool b)
+{
+	simbadGetSpec=b;
+	conf->setValue("search/simbad_query_spec", b);
+	emit simbadGetsSpecChanged(b);
+}
+
+void SearchDialog::setSimbadGetsMorpho(bool b)
+{
+	simbadGetMorpho=b;
+	conf->setValue("search/simbad_query_morpho", b);
+	emit simbadGetsMorphoChanged(b);
+}
+
+void SearchDialog::setSimbadGetsTypes(bool b)
+{
+	simbadGetTypes=b;
+	conf->setValue("search/simbad_query_types", b);
+	emit simbadGetsTypesChanged(b);
+}
+
+void SearchDialog::setSimbadGetsDims(bool b)
+{
+	simbadGetDims=b;
+	conf->setValue("search/simbad_query_dimensions", b);
+	emit simbadGetsDimsChanged(b);
 }
 
 void SearchDialog::enableStartOfWordsAutofill(bool enable)
@@ -641,7 +709,9 @@ void SearchDialog::lookupCoordinates()
 
 	Vec3d coords=sel.at(0)->getJ2000EquatorialPos(core);
 
-	simbadReply = simbadSearcher->lookupCoords(simbadServerUrl, coords, 4);
+	simbadReply = simbadSearcher->lookupCoords(simbadServerUrl, coords, getSimbadQueryCount(), 500,
+						   getSimbadQueryDist(), getSimbadGetsIds(), getSimbadGetsTypes(),
+						   getSimbadGetsSpec(), getSimbadGetsMorpho(), getSimbadGetsDims());
 	onSimbadStatusChanged();
 	connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 
@@ -649,7 +719,7 @@ void SearchDialog::lookupCoordinates()
 
 void SearchDialog::clearSimbadText(StelModule::StelModuleSelectAction)
 {
-	ui->simbadTextBrowser->clear();
+	ui->simbadCooResultsTextBrowser->clear();
 }
 
 // Called when the current simbad query status changes
@@ -663,7 +733,7 @@ void SearchDialog::onSimbadStatusChanged()
 					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
-		ui->simbadTextBrowser->clear();
+		ui->simbadCooResultsTextBrowser->clear();
 	}
 	else
 	{
@@ -685,7 +755,7 @@ void SearchDialog::onSimbadStatusChanged()
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadCoordinateLookupFinished)
 	{
 		QString ret = simbadReply->getResult();
-		ui->simbadTextBrowser->setText(ret);
+		ui->simbadCooResultsTextBrowser->setText(ret);
 	}
 
 	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)

@@ -114,7 +114,21 @@ public:
 	//! This used to group requests, e.g. send only one request when a used types a word insead of one per letter.
 	//! @return a new SimbadLookupReply which is owned by the caller.
 	SimbadLookupReply* lookup(const QString& serverUrl, const QString& objectName, int maxNbResult=1, int delayMs=500);
-	SimbadLookupReply* lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult=1, int delayMs=500);
+	//! Lookup in Simbad for objects which have a position coordsJ2000
+	//! @param serverUrl URL of the SIMBAD mirror server.
+	//! @param objectName the possibly truncated object name.
+	//! @param maxNbResult the maximum number of returned result.
+	//! @param delayMs a delay in ms to wait for before actually triggering the lookup.
+	//! @param radius search radius, arcseconds
+	//! @param IDs retrieve lists of all IDs in addition to the primary ID
+	//! @param types retrieve type information
+	//! @param spectrum retrieve spectral class (if available)
+	//! @param morpho retrieve morphological information (if available)
+	//! @param dim retrieve dimensions (if available)
+	//! @return a new SimbadLookupReply which is owned by the caller.
+	//! The returned information is a raw query answer. Depending on object, the spectrum, morpho or dim information may be useless.
+	SimbadLookupReply* lookupCoords(const QString& serverUrl, const Vec3d coordsJ2000, int maxNbResult=1, int delayMs=500,
+					int radius=30, bool IDs=false, bool types=false, bool spectrum=false, bool morpho=false, bool dim=false);
 
 private:
 	//! The network manager used query simbad
