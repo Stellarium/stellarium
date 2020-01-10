@@ -131,7 +131,11 @@ void LibGPSLookupHelper::query()
 //				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
+#if GPSD_API_MAJOR_VERSION < 9
 			if (newdata->online==0.0) // no device?
+#else
+			if (newdata->online.tv_sec == 0 && newdata->online.tv_nsec == 0) // no device?
+#endif
 			{
 				// This can happen when unplugging the GPS while running Stellarium,
 				// or running gpsd with no GPS receiver.
@@ -158,7 +162,11 @@ void LibGPSLookupHelper::query()
 				//qDebug() << "newdata->online=" << newdata->online;
 				qDebug() << "Solution from " << newdata->satellites_used << "out of " << newdata->satellites_visible << " visible Satellites.";
 				dop_t dop=newdata->dop;
+#if GPSD_API_MAJOR_VERSION < 9
 				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altitude;
+#else
+				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altHAE;
+#endif
 				qDebug() << "Dilution of Precision:";
 				qDebug() << " - xdop:" << dop.xdop << "ydop:" << dop.ydop;
 				qDebug() << " - pdop:" << dop.pdop << "hdop:" << dop.hdop;
@@ -183,7 +191,11 @@ void LibGPSLookupHelper::query()
 			}
 			else
 			{
+#if GPSD_API_MAJOR_VERSION < 9
 				loc.altitude=static_cast<int>(newdata->fix.altitude);
+#else
+				loc.altitude=static_cast<int>(newdata->fix.altHAE);
+#endif
 				if (verbose)
 				{
 					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
