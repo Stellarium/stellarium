@@ -1236,48 +1236,6 @@ void StelMainScriptAPI::goHome()
 	emit(requestSetHomePosition());
 }
 
-void StelMainScriptAPI::setMilkyWayVisible(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use MilkyWay.setFlagShow() instead.";
-	GETSTELMODULE(MilkyWay)->setFlagShow(b);
-}
-
-void StelMainScriptAPI::setMilkyWayIntensity(double i)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.setIntensity() instead.";
-	GETSTELMODULE(MilkyWay)->setIntensity(i);
-}
-
-double StelMainScriptAPI::getMilkyWayIntensity()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.getMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.getIntensity() instead.";
-	return GETSTELMODULE(MilkyWay)->getIntensity();
-}
-
-void StelMainScriptAPI::setZodiacalLightVisible(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setZodiacalLightVisible() is deprecated and will soon be removed. Use ZodiacalLight.setFlagShow() instead.";
-	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
-}
-
-void StelMainScriptAPI::setZodiacalLightIntensity(double i)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.setIntensity() instead.";
-	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
-}
-
-double StelMainScriptAPI::getZodiacalLightIntensity()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.getZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.getIntensity() instead.";
-	return GETSTELMODULE(ZodiacalLight)->getIntensity();
-}
-
 int StelMainScriptAPI::getBortleScaleIndex()
 {
 	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
@@ -1304,20 +1262,6 @@ double StelMainScriptAPI::refraction(double altitude, bool apparent)
 		refraction.forward(pos);
 	}
 	return asin(pos[2])*M_180_PI;
-}
-
-void StelMainScriptAPI::setDSSMode(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setDSSMode() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
-	GETSTELMODULE(ToastMgr)->setFlagShow(b);
-}
-
-bool StelMainScriptAPI::isDSSModeEnabled()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.isDSSModeEnabled() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
-	return GETSTELMODULE(ToastMgr)->getFlagShow();
 }
 
 QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
