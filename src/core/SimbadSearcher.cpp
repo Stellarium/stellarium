@@ -111,55 +111,55 @@ void SimbadLookupReply::httpQueryFinished()
 			while (!reply->atEnd())
 				cooResult.append(reply->readLine());
 			//qDebug() << "Cleaned result: " << cooResult;
+			currentStatus = SimbadCoordinateLookupFinished;
 		}
-		currentStatus = SimbadCoordinateLookupFinished;
-	}
-	else
-	{
-		line = reply->readLine();
-		line.chop(1); // Remove a line break at the end
-		while (!line.isEmpty())
+		else
 		{
-			if (line=="No Coord.")
+			line = reply->readLine();
+			line.chop(1); // Remove a line break at the end
+			while (!line.isEmpty())
 			{
-				reply->readLine();
-				line = reply->readLine();
-				line.chop(1); // Remove a line break at the end
-				continue;
-			}
-			QList<QByteArray> l = line.split(' ');
-			if (l.size()!=2)
-			{
-				currentStatus = SimbadLookupErrorOccured;
-				errorString = q_("Error parsing position");
-				emit statusChanged();
-				return;
-			}
-			else
-			{
-				bool ok1, ok2;
-				const double ra = l[0].toDouble(&ok1)*M_PI/180.;
-				const double dec = l[1].toDouble(&ok2)*M_PI/180.;
-				if (ok1==false || ok2==false)
+				if (line=="No Coord.")
+				{
+					reply->readLine();
+					line = reply->readLine();
+					line.chop(1); // Remove a line break at the end
+					continue;
+				}
+				QList<QByteArray> l = line.split(' ');
+				if (l.size()!=2)
 				{
 					currentStatus = SimbadLookupErrorOccured;
 					errorString = q_("Error parsing position");
 					emit statusChanged();
 					return;
 				}
-				Vec3d v;
-				StelUtils::spheToRect(ra, dec, v);
+				else
+				{
+					bool ok1, ok2;
+					const double ra = l[0].toDouble(&ok1)*M_PI/180.;
+					const double dec = l[1].toDouble(&ok2)*M_PI/180.;
+					if (ok1==false || ok2==false)
+					{
+						currentStatus = SimbadLookupErrorOccured;
+						errorString = q_("Error parsing position");
+						emit statusChanged();
+						return;
+					}
+					Vec3d v;
+					StelUtils::spheToRect(ra, dec, v);
+					line = reply->readLine();
+					line.chop(1); // Remove a line break at the end
+					line.replace("NAME " ,"");
+					resultPositions[line.simplified()]=v; // Remove an extra spaces
+				}
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");
-				resultPositions[line.simplified()]=v; // Remove an extra spaces
 			}
-			line = reply->readLine();
-			line.chop(1); // Remove a line break at the end
+			currentStatus = SimbadLookupFinished;
 		}
-		currentStatus = SimbadLookupFinished;
+		emit statusChanged();
 	}
-	emit statusChanged();
 }
 
 // Get a I18n string describing the current status.

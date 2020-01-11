@@ -436,7 +436,7 @@ void SearchDialog::changeTab(int index)
 	if (index==0) // First tab: Search
 		ui->lineEditSearchSkyObject->setFocus();
 
-	if (index==2) // Third tab: Lists
+	if (index==3) // Fourth tab: Lists
 	{
 		updateListTab();
 		ui->searchInListLineEdit->setFocus();
