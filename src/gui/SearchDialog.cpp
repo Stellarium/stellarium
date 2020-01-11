@@ -429,6 +429,10 @@ void SearchDialog::createDialogContent()
 	// Set the focus directly on the line edit
 	if (ui->tabWidget->currentIndex()==0)
 		ui->lineEditSearchSkyObject->setFocus();
+
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->simbadStatusLabel->setStyleSheet(style);
+	ui->labelGreekLetterTitle->setStyleSheet(style);
 }
 
 void SearchDialog::changeTab(int index)
