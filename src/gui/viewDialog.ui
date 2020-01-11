@@ -3929,8 +3929,9 @@
           <string>Solar system objects</string>
          </property>
          <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/tabicon-sky.png</normaloff>:/graphicGui/tabicon-sky.png</iconset>
+          <iconset>
+           <normalon>:/graphicGui/tabicon-sso.png</normalon>
+          </iconset>
          </property>
         </item>
         <item>
