@@ -1,9 +1,9 @@
+#################
 ## Note from the user guide at https://launchpadlibrarian.net/330148407/stellarium_user_guide-0.16.0-1.pdf:
 #
 # The native constellations are listed in constellation_names.eng.fab. It consists of 3 simple
-# columns: Abbreviation(or just a serial number), native name, and english translation. The writing
-# _("name") allows automatic translation of the English strings to other languages. These strings
-# will be used as constellation labels.
+# columns: Abbreviation(or just a serial number), native name, and english translation. 
+# The writing _("name") allows automatic translation of the English strings to other languages. These strings will be used as constellation labels.
 # The first column (abbreviation) in the Western sky culture provides the canonical 3-letter
 # abbreviation for constellations as used by the International Astronomical Union. Such abbreviations
 # may not be available for the skyculture you are working with, so you must invent your own. These
@@ -19,22 +19,31 @@
 # If your skyculture is not a variant of the generally known Western skyculture, please include an
 # English translation to the name given in the native language. Else translators will not be able to
 # translate the name
+#################
 
 # Whether we show a given Nakṣatra as an asterism or as a constellation depends on whether we can associate the corresponding asterism with related and intuitive constellation art. We show Nakṣatra-s associated with a single star as a star, rather than as a constellation. 
 
 # We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
 ## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
 
-# TRANSLATORS: Deer avatar of King Prajapati
-N05	"Mṛgaśirā"		_("The deer's head")
+# Key to special constellation IDs- N05 signifies 5th nakshatra. R09 signifies 9th rashi.
+
+#################
+# Some Nakshatra-s.
+#################
+# TRANSLATORS: Deer avatāra of Prajapati
+N05	"Mṛgaśiras"		_("The deer's head")
 # TRANSLATORS: (Serpant's) embrace. 
-N09	"Aśleṣā"		_("The embrace")
+N09	"Aśleṣa"		_("The embrace")
 N13	"Hasta"			_("The hand")
 # TRANSLATORS: Origin
 N19	"Mulā"			_("The root")
-N22	"Śravaṇā"		_("The Ear")
+N22	"Śravaṇa"		_("The Ear")
 N25	"Pūrva bhādrapada"	_("The first of the blessed feet")
 N26	"Uttara bhādrapada"	_("The second of the blessed feet")
+#################
+# Some Rāśis
+#################
 # TRANSLATORS: Ram
 R01	_("Meṣa Rāśi")
 # TRANSLATORS: Bull
@@ -59,7 +68,9 @@ R10	_("Makara Rāśi")
 R11	_("Kumbha Rāśi")
 # TRANSLATORS: Fishes
 R12	_("Mīna Rāśi")
-# TRANSLATORS: Hunter
+#################
+# Other constellations.
+#################
 C01	_("Kālapuruṣa")
 # TRANSLATORS: Hunter's Dog
 C02	_("Bṛihān śvāna")
