@@ -4,6 +4,7 @@
 # The native constellations are listed in constellation_names.eng.fab. It consists of 3 simple
 # columns: Abbreviation(or just a serial number), native name, and english translation. 
 # The writing _("name") allows automatic translation of the English strings to other languages. These strings will be used as constellation labels.
+#
 # The first column (abbreviation) in the Western sky culture provides the canonical 3-letter
 # abbreviation for constellations as used by the International Astronomical Union. Such abbreviations
 # may not be available for the skyculture you are working with, so you must invent your own. These
@@ -26,53 +27,37 @@
 # We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
 ## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
 
-# Key to special constellation IDs- N05 signifies 5th nakshatra. R09 signifies 9th rashi.
-
 #################
 # Some Nakshatra-s.
 #################
-# TRANSLATORS: Deer avatāra of Prajapati
-N05	"Mṛgaśiras"		_("The deer's head")
-# TRANSLATORS: (Serpant's) embrace. 
-N09	"Aśleṣa"		_("The embrace")
-N13	"Hasta"			_("The hand")
-# TRANSLATORS: Origin
-N19	"Mulā"			_("The root")
-N22	"Śravaṇa"		_("The Ear")
-N25	"Pūrva bhādrapada"	_("The first of the blessed feet")
-N26	"Uttara bhādrapada"	_("The second of the blessed feet")
+mRgashiras	"Mṛgaśiras"		_("Deer's head")
+AshleSha	"Aśleṣa"	_("Embrace")
+hasta	"Hasta"	_("Hand")
+mUla	"Mula"	_("Root")
+shravaNa	"Śravaṇa"	_("Ear")
+pUrvabhAdrapada	"Pūrva bhādrapada"	_("The first of the blessed feet")
+uttarabhAdrapada	"Uttara bhādrapada"	_("The second of the blessed feet")
 #################
 # Some Rāśis
 #################
-# TRANSLATORS: Ram
-R01	_("Meṣa Rāśi")
-# TRANSLATORS: Bull
-R02	_("Vṛṣa Rāśi")
-# TRANSLATORS: Twin
-R03	_("Mithuna Rāśi")
-# TRANSLATORS: Crab
-R04	_("Karkaṭa Rāśi")
-# TRANSLATORS: Lion
-R05	_("Simha Rāśi")
-# TRANSLATORS: Virgin
-R06	_("Kanyā Rāśi")
-# TRANSLATORS: Balance
-R07	_("Tulā Rāśi")
-# TRANSLATORS: Scorpion
-R08	_("Vṛścikā Rāśi")
-# TRANSLATORS: Archer
-R09	_("Dhanur Rāśi")
-# TRANSLATORS: Crocodile
-R10	_("Makara Rāśi")
-# TRANSLATORS: Potter
-R11	_("Kumbha Rāśi")
-# TRANSLATORS: Fishes
-R12	_("Mīna Rāśi")
+# For simplicity in mapping prexisting constellation art, we use some codes from the western skyculture.
+# Where the latin and sanskrit match, we follow the instruction from the manual: "please use the canonical Latin names, they have all been translated already."
+Ari	"Meṣa Rāśi"	_("Aries")
+Tau	"Vṛṣa Rāśi"_("Taurus")
+Gem	"Mithuna Rāśi"	_("Gemini")
+Cnc	"Karkaṭa Rāśi"	_("Cancer")
+Leo	"Simha Rāśi"	_("Leo")
+Vir	"Kanyā Rāśi"	_("Virgo")
+Lib	"Tulā Rāśi"	_("Libra")
+Sco	"Vṛścikā Rāśi"	_("Scorpius")
+Sgr	"Dhanur Rāśi"	_("Bow")
+Cap	"Makara Rāśi"	_("Crocodile")
+Aqr	"Kumbha Rāśi"	_("Aquarius")
+Psc	"Mīna Rāśi"	_("Pisces")
 #################
 # Other constellations.
 #################
-C01	_("Kālapuruṣa")
-# TRANSLATORS: Hunter's Dog
-C02	_("Bṛihān śvāna")
-# TRANSLATORS: The Seven Sages
-C03	_("Saptarṣi")
+# Where the latin and sanskrit match, we follow the instruction from the manual: "please use the canonical Latin names, they have all been translated already."
+C01	"Kālapuruṣa"	
+CMa	"Bṛihān śvāna"	_("Canis Major")
+C03	"Saptarṣi"	_("Seven sages")
