@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 21:12+0700\n"
+"POT-Creation-Date: 2020-01-11 07:23+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
 "Language-Team: Malay (https://www.transifex.com/stellarium/teams/80998/ms/)\n"
@@ -41,9 +41,9 @@ msgstr "penanda suai"
 #: src/ui_configurationDialog.h:1609 plugins/Satellites/src/Satellite.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
 #: plugins/Supernovae/src/Supernova.cpp:142 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:182
-#: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Exoplanets/src/Exoplanet.cpp:280
-#: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:280
+#: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Jenis"
 
@@ -268,7 +268,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/Comet.cpp:231
 #: src/gui/AstroCalcDialog.cpp:5759 plugins/Satellites/src/Satellite.cpp:309
 #: plugins/Satellites/src/Satellite.cpp:346
-#: plugins/MeteorShowers/src/MeteorShower.cpp:581
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr ""
@@ -459,16 +459,16 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:148
 msgid "Author"
@@ -1285,7 +1285,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:339 src/core/modules/Nebula.cpp:352
 #: src/core/modules/StarWrapper.cpp:247
 #: plugins/Supernovae/src/Supernova.cpp:161 plugins/Novae/src/Nova.cpp:166
-#: plugins/Pulsars/src/Pulsar.cpp:255 plugins/Exoplanets/src/Exoplanet.cpp:301
+#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:301
 msgctxt "distance"
 msgid "ly"
 msgstr ""
@@ -1301,7 +1301,7 @@ msgid "Distance"
 msgstr "Jarak"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:350 plugins/Pulsars/src/Pulsar.cpp:252
+#: src/core/modules/Nebula.cpp:350 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
@@ -1328,12 +1328,12 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:410 src/core/modules/StarWrapper.cpp:269
-#: plugins/Pulsars/src/Pulsar.cpp:243
+#: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:413
+#: src/core/modules/Nebula.cpp:413 src/ui_searchDialogGui.h:856
 msgid "Morphological description"
 msgstr ""
 
@@ -2841,7 +2841,7 @@ msgstr ""
 "Ini merupakan formula kuadratik untuk pengiraan %1T dengan pemalar yang "
 "ditakrif oleh pengguna."
 
-#: src/core/StelCore.cpp:2368 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2368 src/core/SimbadSearcher.cpp:173
 msgid "Error"
 msgstr "Ralat"
 
@@ -3315,19 +3315,19 @@ msgstr ""
 msgid "Network error"
 msgstr "Ralat rangkaian"
 
-#: src/core/SimbadSearcher.cpp:116 src/core/SimbadSearcher.cpp:128
+#: src/core/SimbadSearcher.cpp:134 src/core/SimbadSearcher.cpp:146
 msgid "Error parsing position"
 msgstr "Ralat menghurai kedudukan"
 
-#: src/core/SimbadSearcher.cpp:154
+#: src/core/SimbadSearcher.cpp:171
 msgid "Querying"
 msgstr "Menanya"
 
-#: src/core/SimbadSearcher.cpp:158
+#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
 msgid "Not found"
 msgstr "Tidak ditemui"
 
-#: src/core/SimbadSearcher.cpp:158
+#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
 msgid "Found"
 msgstr "Temui"
 
@@ -3612,10 +3612,10 @@ msgid "Acknowledgements"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1065
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:113
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "Authors"
 msgstr "Pengarang"
 
@@ -3626,9 +3626,31 @@ msgstr "Hubungi"
 #: src/gui/ConfigurationDialog.cpp:1068 src/scripting/StelScriptMgr.cpp:270
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:492
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+#: plugins/Novae/src/gui/NovaeDialog.cpp:121
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
+msgid "Version"
+msgstr "Versi"
+
+#: src/gui/ConfigurationDialog.cpp:1069 src/scripting/StelScriptMgr.cpp:265
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
@@ -3639,30 +3661,8 @@ msgstr "Hubungi"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
-msgid "Version"
-msgstr "Versi"
-
-#: src/gui/ConfigurationDialog.cpp:1069 src/scripting/StelScriptMgr.cpp:265
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
-#: plugins/Novae/src/gui/NovaeDialog.cpp:123
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:113
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:147
 msgid "License"
 msgstr "Lesen"
@@ -3923,7 +3923,7 @@ msgid "24-hour format"
 msgstr "Format 24-jam"
 
 #: src/gui/ConfigurationDialog.cpp:1709 src/ui_configurationDialog.h:1576
-#: plugins/Oculars/src/Oculars.cpp:2454
+#: plugins/Oculars/src/Oculars.cpp:2455
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Tiada"
@@ -4207,13 +4207,13 @@ msgstr "Pembangun OSX: %1"
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:655
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:116
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:201
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:223
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 msgid "Contributors"
 msgstr "Penyumbang"
 
@@ -4270,7 +4270,7 @@ msgstr "Tetingkap Bantuan"
 msgid "Configuration window"
 msgstr "Tetingkap Konfigurasi"
 
-#: src/gui/StelGui.cpp:240 src/ui_searchDialogGui.h:613
+#: src/gui/StelGui.cpp:240 src/ui_searchDialogGui.h:763
 msgid "Search window"
 msgstr "Tetingkap Gelintar"
 
@@ -4753,98 +4753,98 @@ msgstr ""
 msgid "Include File"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:224
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:225
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Khatulistiwa"
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:226
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Mengufuk"
 
-#: src/gui/SearchDialog.cpp:217
+#: src/gui/SearchDialog.cpp:227
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galaktik"
 
-#: src/gui/SearchDialog.cpp:218
+#: src/gui/SearchDialog.cpp:228
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:219
+#: src/gui/SearchDialog.cpp:229
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Ekliptik"
 
-#: src/gui/SearchDialog.cpp:220
+#: src/gui/SearchDialog.cpp:230
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:248
+#: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:251 src/gui/AstroCalcDialog.cpp:3036
+#: src/gui/SearchDialog.cpp:261 src/gui/AstroCalcDialog.cpp:3036
 #: src/gui/AstroCalcDialog.cpp:3094
 msgid "Declination"
 msgstr "Keserongan"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:545
+#: src/gui/SearchDialog.cpp:269 src/gui/AstroCalcDialog.cpp:545
 #: src/gui/AstroCalcDialog.cpp:727 src/gui/AstroCalcDialog.cpp:729
 #: src/gui/AstroCalcDialog.cpp:766 src/gui/AstroCalcDialog.cpp:1344
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid "Azimuth"
 msgstr "Azimut"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/gui/SearchDialog.cpp:262 src/gui/AstroCalcDialog.cpp:768
+#: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:768
 #: src/gui/AstroCalcDialog.cpp:1346 src/gui/AstroCalcDialog.cpp:1775
 #: src/gui/AstroCalcDialog.cpp:2655 src/gui/AstroCalcDialog.cpp:3162
 #: src/gui/AstroCalcDialog.cpp:3440 src/gui/AstroCalcDialog.cpp:3442
 #: plugins/Satellites/src/Satellite.cpp:311
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
 msgid "Altitude"
 msgstr "Altitud"
 
-#: src/gui/SearchDialog.cpp:273
+#: src/gui/SearchDialog.cpp:283
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:622
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:628
 msgid "Longitude"
 msgstr "Longitud"
 
-#: src/gui/SearchDialog.cpp:276
+#: src/gui/SearchDialog.cpp:286
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:623
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:629
 msgid "Latitude"
 msgstr "Latitud"
 
-#: src/gui/SearchDialog.cpp:637
+#: src/gui/SearchDialog.cpp:732
 msgid "Simbad Lookup Error"
 msgstr "Ralat Carian Simbad"
 
-#: src/gui/SearchDialog.cpp:645
+#: src/gui/SearchDialog.cpp:741
 msgid "Simbad Lookup"
 msgstr "Carian Simbad"
 
-#: src/gui/SearchDialog.cpp:850
+#: src/gui/SearchDialog.cpp:952
 msgid "University of Strasbourg (France)"
 msgstr "Universiti Strasbourg (Perancis)"
 
-#: src/gui/SearchDialog.cpp:851
+#: src/gui/SearchDialog.cpp:953
 msgid "Harvard University (USA)"
 msgstr "Universiti Harvad (AS)"
 
-#: src/gui/SearchDialog.cpp:938
+#: src/gui/SearchDialog.cpp:1040
 msgid "Paste and Search"
 msgstr "Tampal dan Gelintar"
 
@@ -5020,14 +5020,14 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1202 src/gui/AstroCalcDialog.cpp:1694
 #: src/gui/AstroCalcDialog.cpp:1971 src/gui/AstroCalcDialog.cpp:3780
 #: src/gui/AstroCalcDialog.cpp:5564
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1204 src/gui/AstroCalcDialog.cpp:1696
 #: src/gui/AstroCalcDialog.cpp:1973 src/gui/AstroCalcDialog.cpp:3782
 #: src/gui/AstroCalcDialog.cpp:5566
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
 msgid "CSV (Comma delimited)"
 msgstr ""
 
@@ -5440,12 +5440,12 @@ msgstr ""
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3031 src/gui/AstroCalcDialog.cpp:3089
 #: src/gui/AstroCalcDialog.cpp:3203
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
-#: plugins/Novae/src/gui/NovaeDialog.cpp:184
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:182
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:570
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Novae/src/gui/NovaeDialog.cpp:183
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:569
 msgctxt "time"
 msgid "h"
 msgstr ""
@@ -5743,7 +5743,7 @@ msgstr ""
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:697
+#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:847
 msgid "Object"
 msgstr "Objek"
 
@@ -9136,171 +9136,207 @@ msgstr "Negara:"
 msgid "Enable daylight saving time"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:762
 msgid "Find Object"
 msgstr "Cari Objek"
 
-#: src/ui_searchDialogGui.h:616 src/ui_searchDialogGui.h:620
+#: src/ui_searchDialogGui.h:766 src/ui_searchDialogGui.h:770
 msgid "Use tab key for select of found items"
 msgstr "Guna kekunci tab untuk pilih item yang ditemui"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:775
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:778
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:631
+#: src/ui_searchDialogGui.h:781
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:634
+#: src/ui_searchDialogGui.h:784
 msgid "gamma"
 msgstr "gama"
 
-#: src/ui_searchDialogGui.h:637
+#: src/ui_searchDialogGui.h:787
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:640
+#: src/ui_searchDialogGui.h:790
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:793
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:796
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:799
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:802
 msgid "kappa"
 msgstr "kapa"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:805
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:808
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:661
+#: src/ui_searchDialogGui.h:811
 msgid "nu"
 msgstr "nu"
 
-#: src/ui_searchDialogGui.h:664
+#: src/ui_searchDialogGui.h:814
 msgid "xi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:667
+#: src/ui_searchDialogGui.h:817
 msgid "omicron"
 msgstr "omikron"
 
-#: src/ui_searchDialogGui.h:670
+#: src/ui_searchDialogGui.h:820
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:673
+#: src/ui_searchDialogGui.h:823
 msgid "rho"
 msgstr "rho"
 
-#: src/ui_searchDialogGui.h:676
+#: src/ui_searchDialogGui.h:826
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:679
+#: src/ui_searchDialogGui.h:829
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:682
+#: src/ui_searchDialogGui.h:832
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/ui_searchDialogGui.h:685
+#: src/ui_searchDialogGui.h:835
 msgid "phi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:688
+#: src/ui_searchDialogGui.h:838
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:691
+#: src/ui_searchDialogGui.h:841
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:694
+#: src/ui_searchDialogGui.h:844
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:846
 msgid "Greek letters for Bayer designations"
 msgstr "Huruf Greek untuk Gelaran Bayer"
 
-#: src/ui_searchDialogGui.h:698
+#: src/ui_searchDialogGui.h:848
+msgid "Max. search radius"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:849
+msgid "arcseconds"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:850
+msgid "Max. results "
+msgstr ""
+
+#: src/ui_searchDialogGui.h:851
+msgid "Query SIMBAD about selected object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:852
+msgid "All IDs"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:853
+msgid "Types"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:854
+msgid "Spectral Class"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:858
+msgid "Morph. Descr."
+msgstr ""
+
+#: src/ui_searchDialogGui.h:859
+msgid "Dimensions"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:860
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:700
+#: src/ui_searchDialogGui.h:862
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:603
 msgid "Coordinate system:"
 msgstr "Sistem koordinat:"
 
-#: src/ui_searchDialogGui.h:702
+#: src/ui_searchDialogGui.h:864
 msgid "Position"
 msgstr "Kedudukan"
 
-#: src/ui_searchDialogGui.h:704
+#: src/ui_searchDialogGui.h:866
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "Sesetengah objek akan timbul selepas pengaktifan pemalam berkaitan"
 
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:868
 msgid "names in English"
 msgstr "nama dalam bahasa Inggeris"
 
-#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1745
+#: src/ui_searchDialogGui.h:869 src/ui_astroCalcDialog.h:1745
 #: plugins/Satellites/src/ui_satellitesDialog.h:797
 msgid "Search in list..."
 msgstr "Gelintar dalam senarai..."
 
-#: src/ui_searchDialogGui.h:708
+#: src/ui_searchDialogGui.h:870
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Lists"
 msgstr "Senarai"
 
-#: src/ui_searchDialogGui.h:710
+#: src/ui_searchDialogGui.h:872
 msgid "Use on-line astronomical database SIMBAD"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:712
+#: src/ui_searchDialogGui.h:874
 msgid "Use SIMBAD"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:713
+#: src/ui_searchDialogGui.h:875
 msgid "Server:"
 msgstr "Pelayan:"
 
-#: src/ui_searchDialogGui.h:714
+#: src/ui_searchDialogGui.h:876
 msgid "Search options"
 msgstr "Pilihan gelintar"
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:877
 msgid "Use autofill only from the beginning of words"
 msgstr "Guna isian-sendiri hanya dari permulaan perkataan"
 
-#: src/ui_searchDialogGui.h:716
+#: src/ui_searchDialogGui.h:878
 msgid "Lock position when coordinates are used"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:3024
+#: src/ui_searchDialogGui.h:879 src/ui_viewDialog.h:3024
 #: src/ui_viewDialog.h:3046 src/ui_configurationDialog.h:1837
 #: src/ui_configurationDialog.h:1848
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
@@ -9662,7 +9698,7 @@ msgid "Hydrogen regions"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2768 plugins/Exoplanets/src/Exoplanets.cpp:1052
+#: src/ui_viewDialog.h:2768 plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Other"
 msgstr "Lain-lain"
 
@@ -10269,7 +10305,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1517
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr ""
@@ -10494,7 +10530,7 @@ msgid "Constellation"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1624
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
 msgid "Hour angle/Declination"
 msgstr "Sudut/Keserongan Jam"
 
@@ -12050,39 +12086,39 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
-#: plugins/Novae/src/gui/NovaeDialog.cpp:140
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:96
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
+#: plugins/Novae/src/gui/NovaeDialog.cpp:139
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:142
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
 msgid "Links"
 msgstr "Pautan"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:559
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
-#: plugins/Novae/src/gui/NovaeDialog.cpp:141
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:146
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
+#: plugins/Novae/src/gui/NovaeDialog.cpp:140
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:145
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:96
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 #, qt-format
 msgid ""
@@ -12093,20 +12129,20 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:697
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
-#: plugins/Novae/src/gui/NovaeDialog.cpp:144
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:142
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:169
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:100
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
+#: plugins/Novae/src/gui/NovaeDialog.cpp:143
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:141
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:148
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
 msgid "If you have a question, you can {get an answer here}."
 msgstr ""
@@ -12114,20 +12150,20 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:150
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
-#: plugins/Novae/src/gui/NovaeDialog.cpp:146
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:171
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:151
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:102
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:108
+#: plugins/Novae/src/gui/NovaeDialog.cpp:145
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:150
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:144
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:187
 msgid "Bug reports and feature requests can be made {here}."
 msgstr ""
@@ -12135,20 +12171,20 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:701
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:111
-#: plugins/Novae/src/gui/NovaeDialog.cpp:148
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:153
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:104
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:110
+#: plugins/Novae/src/gui/NovaeDialog.cpp:147
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:152
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:103
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:146
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:145
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -12251,7 +12287,7 @@ msgstr "Papar tanda bering kompas sepanjang ufuk"
 msgid "Compass marks"
 msgstr "Tanda kompas"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1523
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1287
 msgid "Oculars"
@@ -12267,226 +12303,226 @@ msgstr ""
 "dan medan paparan disimulasikan). Ia boleh paparkan bingkai penderia dan "
 "pandangan Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1027
 msgid "Please select an object before switching to ocular view."
 msgstr "Sila pilih objek sebelum menukar ke paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1118
+#: plugins/Oculars/src/Oculars.cpp:1122
 msgid "&Previous ocular"
 msgstr "Okular &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1119
+#: plugins/Oculars/src/Oculars.cpp:1123
 msgid "&Next ocular"
 msgstr "Okular &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1120
+#: plugins/Oculars/src/Oculars.cpp:1124
 msgid "Select &ocular"
 msgstr "Pilih o&kular"
 
-#: plugins/Oculars/src/Oculars.cpp:1163
+#: plugins/Oculars/src/Oculars.cpp:1167
 msgid "Toggle &crosshair"
 msgstr "Togol reramb&ut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:1173
+#: plugins/Oculars/src/Oculars.cpp:1177
 msgid "Configure &Oculars"
 msgstr "Konfigur &Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1186
 msgid "Toggle &CCD"
 msgstr "Togol &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1190
+#: plugins/Oculars/src/Oculars.cpp:1194
 msgid "Toggle &Telrad"
 msgstr "Togol Tel&rad"
 
-#: plugins/Oculars/src/Oculars.cpp:1199
+#: plugins/Oculars/src/Oculars.cpp:1203
 msgid "&Previous CCD"
 msgstr "CCD &Terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1200
+#: plugins/Oculars/src/Oculars.cpp:1204
 msgid "&Next CCD"
 msgstr "CCD &Berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1201
+#: plugins/Oculars/src/Oculars.cpp:1205
 msgid "&Select CCD"
 msgstr "&Pilih CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1223
+#: plugins/Oculars/src/Oculars.cpp:1227
 msgid "&Rotate CCD"
 msgstr "P&utar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1245
+#: plugins/Oculars/src/Oculars.cpp:1249
 msgid "&Reset rotation"
 msgstr "T&etap semula putaran"
 
-#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:1527
 #: plugins/Oculars/src/ui_ocularDialog.h:1306
 msgid "Ocular view"
 msgstr "Paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Oculars popup menu"
 msgstr "Menu timbul okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Show crosshairs"
 msgstr "Papar rerambut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Image sensor frame"
 msgstr "Bingkai penderia imej"
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Telrad sight"
 msgstr "Pandangan telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1532
 msgid "Oculars plugin configuration"
 msgstr "Konfigurasi pemalam okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1531
+#: plugins/Oculars/src/Oculars.cpp:1534
 msgid "Select next telescope"
 msgstr "Pilih teleskop berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1533
+#: plugins/Oculars/src/Oculars.cpp:1536
 msgid "Select previous telescope"
 msgstr "Pilih teleskop terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1535
+#: plugins/Oculars/src/Oculars.cpp:1538
 msgid "Select next eyepiece"
 msgstr "Pilih kanta mata berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1537
+#: plugins/Oculars/src/Oculars.cpp:1540
 msgid "Select previous eyepiece"
 msgstr "Pilih kanta mata terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1748
+#: plugins/Oculars/src/Oculars.cpp:1749
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1759
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
+#: plugins/Oculars/src/Oculars.cpp:1760
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1777
+#: plugins/Oculars/src/Oculars.cpp:1778
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2005
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
+#: plugins/Oculars/src/Oculars.cpp:2006
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2007
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
+#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2027
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/Oculars.cpp:2028
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2034
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
+#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2045
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
+#: plugins/Oculars/src/Oculars.cpp:2046
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr "Kanta #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2049
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
+#: plugins/Oculars/src/Oculars.cpp:2050
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Kanta #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2054
+#: plugins/Oculars/src/Oculars.cpp:2055
 msgid "Lens: none"
 msgstr "Kanta: tiada"
 
-#: plugins/Oculars/src/Oculars.cpp:2069 plugins/Oculars/src/Oculars.cpp:2129
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
+#: plugins/Oculars/src/Oculars.cpp:2070 plugins/Oculars/src/Oculars.cpp:2130
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2078
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
+#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:867
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2085
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
+#: plugins/Oculars/src/Oculars.cpp:2086
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:878
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2092
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:2093
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2113
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
+#: plugins/Oculars/src/Oculars.cpp:2114
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2117
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
+#: plugins/Oculars/src/Oculars.cpp:2118
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2121
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
+#: plugins/Oculars/src/Oculars.cpp:2122
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2134
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
+#: plugins/Oculars/src/Oculars.cpp:2135
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:777
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2450
+#: plugins/Oculars/src/Oculars.cpp:2451
 msgid "&Lens"
 msgstr "K&anta"
 
-#: plugins/Oculars/src/Oculars.cpp:2451
+#: plugins/Oculars/src/Oculars.cpp:2452
 msgid "&Previous lens"
 msgstr "Kanta t&erdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:2452
+#: plugins/Oculars/src/Oculars.cpp:2453
 msgid "&Next lens"
 msgstr "Kanta &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:2482
+#: plugins/Oculars/src/Oculars.cpp:2483
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2483
+#: plugins/Oculars/src/Oculars.cpp:2484
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:2484
+#: plugins/Oculars/src/Oculars.cpp:2485
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -12565,125 +12601,125 @@ msgstr "Putar bingkai penderia 5 darjah ikut jam"
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Putar bingkai penderia 1 darjah ikut jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:558
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:561
 msgid "Effective focal length of the ocular"
 msgstr "Jarak fokus efektif bagi okular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 msgid "Apparent field of view of the ocular"
 msgstr "Medan tampan paparan bagi okular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Kegandaan: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
 msgstr "Kanta: Tiada"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
 msgstr "Kegandaan: T/B"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Focal length of eyepiece"
 msgstr "Jarak fokus kanta mata"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "Dimensions field of view"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 msgid "X scale"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
 msgid "Horizontal scale"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Y scale"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:717
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Vertical scale"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:726
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Putaran: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:845
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:848
 msgid "Magnification provided by these binoculars"
 msgstr "pembesaran yang disediakan oleh binokular ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:849
 msgid "Actual field of view provided by these binoculars"
 msgstr "Medan sebenar bagi paparan yang disediakan oleh binokular ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:847
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:850
 msgid "Exit pupil provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:855
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:858
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Pembesaran disediakan oleh gabungan okular/kanta/teleskop ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:859
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Medan sebenar pandangan yang disediakan oleh gabungan okular/kanta/teleskop "
 "ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:857
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:913
 msgid "Rayleigh criterion"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:912
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:915
 msgid "The Rayleigh resolution criterion"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:917
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:920
 msgid "Dawes' limit"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:922
 msgid "Dawes' resolution criterion"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:924
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:927
 msgid "Abbe's limit"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
 msgid "Abbe’s diffraction resolution limit"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:931
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:934
 msgid "Sparrow's limit"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:936
 msgid "Sparrow's resolution limit"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:959
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:962
 msgid "Visual resolution"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:961
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:964
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 
@@ -13102,13 +13138,13 @@ msgstr ""
 msgid "Telescopes"
 msgstr "Teleskop"
 
-#: plugins/Satellites/src/Satellites.cpp:71
-#: plugins/Satellites/src/Satellites.cpp:146
+#: plugins/Satellites/src/Satellites.cpp:72
+#: plugins/Satellites/src/Satellites.cpp:147
 #: plugins/Satellites/src/ui_satellitesDialog.h:830
 msgid "Satellites"
 msgstr "Satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:74
+#: plugins/Satellites/src/Satellites.cpp:75
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -13116,198 +13152,198 @@ msgstr ""
 "Ramalan kedudukan satelit tiruan didalam orbit Bumi yang berpandukan data "
 "TLE NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:147
+#: plugins/Satellites/src/Satellites.cpp:148
 msgid "Satellite hints"
 msgstr "Pembayang satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:148
+#: plugins/Satellites/src/Satellites.cpp:149
 msgid "Satellite labels"
 msgstr "Label satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:149
+#: plugins/Satellites/src/Satellites.cpp:150
 msgid "Satellites configuration window"
 msgstr "Tetingkap konfigurasi satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:174
+#: plugins/Satellites/src/Satellites.cpp:175
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2079
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2081
 msgid "scientific"
 msgstr "saintifik"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2068
+#: plugins/Satellites/src/Satellites.cpp:2083
 msgid "communications"
 msgstr "komunikasi"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2070
+#: plugins/Satellites/src/Satellites.cpp:2085
 msgid "navigation"
 msgstr "navigasi"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2072
+#: plugins/Satellites/src/Satellites.cpp:2087
 msgid "amateur"
 msgstr "amatur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2074
+#: plugins/Satellites/src/Satellites.cpp:2089
 msgid "weather"
 msgstr "cuaca"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2076
+#: plugins/Satellites/src/Satellites.cpp:2091
 msgid "geostationary"
 msgstr "geopegun"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2078
+#: plugins/Satellites/src/Satellites.cpp:2093
 msgid "non-operational"
 msgstr "tidak-berfungsi"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2080
+#: plugins/Satellites/src/Satellites.cpp:2095
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2082
+#: plugins/Satellites/src/Satellites.cpp:2097
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2084
+#: plugins/Satellites/src/Satellites.cpp:2099
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2086
+#: plugins/Satellites/src/Satellites.cpp:2101
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2088
+#: plugins/Satellites/src/Satellites.cpp:2103
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2090
+#: plugins/Satellites/src/Satellites.cpp:2105
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2092
+#: plugins/Satellites/src/Satellites.cpp:2107
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2097
+#: plugins/Satellites/src/Satellites.cpp:2112
 msgid "The Hubble Space Telescope"
 msgstr "Teleskop Angkasa Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2099
+#: plugins/Satellites/src/Satellites.cpp:2114
 msgid "The International Space Station"
 msgstr "Stesen Angkasa Antarabangsa"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2101
+#: plugins/Satellites/src/Satellites.cpp:2116
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2103
+#: plugins/Satellites/src/Satellites.cpp:2118
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2105
+#: plugins/Satellites/src/Satellites.cpp:2120
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2107
+#: plugins/Satellites/src/Satellites.cpp:2122
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2109
+#: plugins/Satellites/src/Satellites.cpp:2124
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2111
+#: plugins/Satellites/src/Satellites.cpp:2126
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2113
+#: plugins/Satellites/src/Satellites.cpp:2128
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2117
+#: plugins/Satellites/src/Satellites.cpp:2132
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2119
+#: plugins/Satellites/src/Satellites.cpp:2134
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2121
+#: plugins/Satellites/src/Satellites.cpp:2136
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2123
+#: plugins/Satellites/src/Satellites.cpp:2138
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2127
+#: plugins/Satellites/src/Satellites.cpp:2142
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2129
+#: plugins/Satellites/src/Satellites.cpp:2144
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2131
+#: plugins/Satellites/src/Satellites.cpp:2146
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2133
+#: plugins/Satellites/src/Satellites.cpp:2148
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2135
+#: plugins/Satellites/src/Satellites.cpp:2150
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2137
+#: plugins/Satellites/src/Satellites.cpp:2152
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -13407,7 +13443,7 @@ msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:426 plugins/Pulsars/src/Pulsar.cpp:272
+#: plugins/Satellites/src/Satellite.cpp:426 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
@@ -13458,41 +13494,41 @@ msgctxt "operational status"
 msgid "decayed"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
 msgid "Save predicted Iridium flares as..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:366
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:367
 msgid "Predicted Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 msgid "Stellarium Satellites Plugin"
 msgstr "Pemalam Satelit Stellarium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:657
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 msgid "Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:661
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
 "Pemalam Satelit meramal kedudukan satelit buatan manusia dalam orbit Bumi."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
 msgid "Notes for users"
 msgstr "Nota untuk pengguna"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "Satelit dan orbitnya hanya dipaparkan bila pemerhati berada di Bumi."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -13502,7 +13538,7 @@ msgstr ""
 "minggu atau mungkin bulan pada masa lepas atau masa akan datang). Jangkakan "
 "perkara pelik berlaku bila melihat tarikh diluar julat ini."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -13514,7 +13550,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -13525,7 +13561,7 @@ msgstr ""
 "kembalikan ke fail %3 lalai. Fail lama akan disandar sebagai %4. Ia boleh "
 "ditemui dalam direktori data pengguna, dibawah \"modules/Satellites/\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:673
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -13534,11 +13570,11 @@ msgstr ""
 "lengkap, hilang atau mengandungi pepijat."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 msgid "TLE data updates"
 msgstr "Kemaskini data TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -13548,7 +13584,7 @@ msgstr ""
 "Internet, dan secara lalai pemalam akan lakukan ini jika data sedia ada "
 "berusia lebih dari 72 jam. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -13559,7 +13595,7 @@ msgstr ""
 "pada komputer anda. Fail ini mestilah mempunyai format yang sama denga "
 "kemaskini Celestrak (rujuk %1 sebagai contoh)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -13567,27 +13603,27 @@ msgstr ""
 "<b>Perhatian:</b> jika nama satelit dalam data kemaskini mempunyai tanda "
 "kurungan dipenghujungnya, ia akan dibuang sebelum data digunakan."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:683
 msgid "Adding new satellites"
 msgstr "Menambah satelit baru"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:686
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:687
 msgid "Technical notes"
 msgstr "Nota teknikal"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input. "
@@ -13595,7 +13631,7 @@ msgstr ""
 "Kedudukan dikira menggunakan kaedah SGP4 & SDP4, menggunakan data TLE NORAD "
 "sebagai input. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:690
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -13605,147 +13641,147 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
-#: plugins/Novae/src/gui/NovaeDialog.cpp:163
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:188
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
+#: plugins/Novae/src/gui/NovaeDialog.cpp:162
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "Next update"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:194
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
+#: plugins/Novae/src/gui/NovaeDialog.cpp:168
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
 msgid "Internet updates disabled"
 msgstr "Kemaskini Internet dilumpuhkan"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:221
-#: plugins/Novae/src/gui/NovaeDialog.cpp:171
-#: plugins/Novae/src/gui/NovaeDialog.cpp:217
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:277
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:632
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
+#: plugins/Novae/src/gui/NovaeDialog.cpp:170
+#: plugins/Novae/src/gui/NovaeDialog.cpp:216
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:238
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:195
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:631
 msgid "Updating now..."
 msgstr "Mengemaskini sekarang..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
-#: plugins/Novae/src/gui/NovaeDialog.cpp:173
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:198
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Novae/src/gui/NovaeDialog.cpp:172
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid "< 1 minute"
 msgstr ""
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:182
-#: plugins/Novae/src/gui/NovaeDialog.cpp:178
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:176
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:220
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:736
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
+#: plugins/Novae/src/gui/NovaeDialog.cpp:177
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:221
 msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:224
-#: plugins/Novae/src/gui/NovaeDialog.cpp:220
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:242
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:280
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:635
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
+#: plugins/Novae/src/gui/NovaeDialog.cpp:219
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:634
 msgid "Update error"
 msgstr "Ralat kemaskini"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:767
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:766
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "%1/%2 satelit dikemaskini; %3 ditambah; %4 dibuang"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:769
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:768
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "%1/%2 satelit dikemaskini; %3 ditambah; %4 hilang"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "[new source]"
 msgstr "[sumber baru]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:883
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
 #: plugins/Satellites/src/ui_satellitesDialog.h:765
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:206
+#: plugins/Novae/src/gui/NovaeDialog.cpp:205
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:203
 #: plugins/Quasars/src/ui_quasarsDialog.h:295
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:230
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:622
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:621
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "Kemaskini sekarang"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
-#: plugins/Novae/src/gui/NovaeDialog.cpp:208
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:233
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:624
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
+#: plugins/Novae/src/gui/NovaeDialog.cpp:207
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:623
 msgid "Update from files"
 msgstr "Kemaskini dari fail"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:927
 msgid "[orbit calculation error]"
 msgstr "[ralat pengiraan orbit]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "[all newly added]"
 msgstr "[semua terbaru ditambah]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
 msgid "[all not displayed]"
 msgstr "[semua tidak dipaparkan]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
 msgid "[all displayed]"
 msgstr "[semua dipaparkan]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:932
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
 msgid "[all]"
 msgstr "[semua]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
 msgid "New group..."
 msgstr "Kumpulan baru..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1182
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1181
 msgid "Select TLE Update File"
 msgstr "Pilih Fail Kemaskini TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
 msgid "Satellite"
 msgstr ""
 
@@ -15761,7 +15797,7 @@ msgid "Minor Solar System objects"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Note"
 msgstr "Nota"
 
@@ -15840,33 +15876,33 @@ msgstr ""
 msgid "Maximum brightness"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 msgid "Historical Supernovae Plug-in"
 msgstr "Pemalam Supernova Bersejarah"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
 "Pemalam ini membolehkan anda melihat beberapa supernova bersejarah yang "
 "terang: "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
+#: plugins/Novae/src/gui/NovaeDialog.cpp:131
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "Senarai ini kesemuanya mengandungi %1 bintang."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "Semua supernova tersebut adalah lebih cerah %1 pada puncak kecerahan."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
-#: plugins/Novae/src/gui/NovaeDialog.cpp:134
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 msgid "Light curves"
 msgstr "Lengkung Cahaya"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -15878,40 +15914,40 @@ msgstr ""
 "yang berlainan. Pandangan biasa lengkungan cahaya untuk supernova jenis I "
 "dan II boleh dilihat %1disini%2, dan model ini digunakan untuk pemalam ini."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 msgid "Acknowledgments"
 msgstr "Penghargaan"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
 "Terima kasih kepada individu ini atas sumbangan dan ulasan yang membina:"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 msgid "Sergei Blinnikov"
 msgstr "Sergei Blinnikov"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "Institut Fizik Teori dan Eksperimen"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 msgid "in Russia"
 msgstr "di Rusia"
 
 #. TRANSLATORS: days.
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
-#: plugins/Novae/src/gui/NovaeDialog.cpp:190
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:215
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
+#: plugins/Novae/src/gui/NovaeDialog.cpp:189
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:187
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:214
 msgctxt "time"
 msgid "d"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:231
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:230
 msgid "Historical supernovae is updated"
 msgstr "Supernova bersejarah telah dikemaskini"
 
@@ -15953,21 +15989,21 @@ msgstr "Kekerapan kemaskini (hari):"
 msgid "[next update info]"
 msgstr "[maklumat kemaskini berikutnya]"
 
-#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:112
+#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:110
 msgid "Navigational Stars"
 msgstr "Bintang Bernavigasi"
 
 #: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:100
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:99
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:112
+#: plugins/NavStars/src/NavStars.cpp:110
 msgid "Mark the navigational stars"
 msgstr "Tanda bintang bernavigasi"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:296
+#: plugins/NavStars/src/NavStars.cpp:284
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -15977,7 +16013,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:302
+#: plugins/NavStars/src/NavStars.cpp:290
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
@@ -15985,29 +16021,29 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:308
+#: plugins/NavStars/src/NavStars.cpp:296
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
 msgid "Navigational Stars Plug-in"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
 msgid "Anglo-American"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:156
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:155
 msgid "French"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:158
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
 msgid "Russian"
 msgstr ""
 
@@ -16045,7 +16081,7 @@ msgstr "Benarkan paparan semasa permulaan"
 msgid "Bright Novae"
 msgstr "Nova Terang"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:127
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "Pemalam yang menunjukkan beberapa nova terang dalam bima Sakti."
 
@@ -16057,11 +16093,11 @@ msgstr "Tetingkap konfigurasi Nova cerah"
 msgid "nova"
 msgstr "nova"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:121
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "Bright Novae Plug-in"
 msgstr "Pemalam Nova Terang"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
@@ -16069,16 +16105,16 @@ msgstr ""
 "Anda boleh cari nova melalui alat gelintar dengan memasukkan julukan nova "
 "atau nama umumnya (cth. 'Nova Cygni 1975' atau 'V1500 Cyg')."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 msgid "This plugin allows you to see recent bright novae: "
 msgstr "Pemalam ini membolehkan anda lihat novae cerah baru-baru ini: "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "Semua nova tersebut lebih cerah berbanding %1 pada puncak kecerahan."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:135
+#: plugins/Novae/src/gui/NovaeDialog.cpp:134
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
@@ -16086,7 +16122,7 @@ msgstr ""
 "Pemalam ini gunakan model sangat ringkas untuk pengiraan lengkuk cahaya bagi"
 " bintang nova."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/Novae/src/gui/NovaeDialog.cpp:135
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
@@ -16095,7 +16131,7 @@ msgstr ""
 "Modil ini berasaskan masa untuk susut sebanyak %1 magnitud dari nilai "
 "maksimum, yang mana %1 adalah 2, 3, 6 dan 9."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:137
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
@@ -16103,7 +16139,7 @@ msgstr ""
 "Jika nova tidak mempunyai nilai untuk susutan magnitud maka pemalam ini akan"
 " gunakan nilai diperumum baginya."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:227
+#: plugins/Novae/src/gui/NovaeDialog.cpp:226
 msgid "Novae is updated"
 msgstr "Nova telah dikemaskini"
 
@@ -16144,27 +16180,27 @@ msgstr ""
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 msgid "Quasars Plug-in"
 msgstr "Pemalam Kuasar"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "Katalog semasa mengandungi maklumat mengenai kuasar %1."
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:249
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:248
 msgid "Quasars is updated"
 msgstr "Kuasar telah dikemaskinikan"
 
@@ -16206,7 +16242,7 @@ msgid "Pulsars"
 msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -16222,141 +16258,141 @@ msgstr "Papar pulsar"
 msgid "Pulsars configuration window"
 msgstr "Tetingkap konfigurasi pulsar"
 
-#: plugins/Pulsars/src/Pulsar.cpp:182
+#: plugins/Pulsars/src/Pulsar.cpp:184
 msgid "pulsar"
 msgstr "pulsar"
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:186
 msgid "pulsar with glitches"
 msgstr "pulsar dengan glic"
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:186
 msgid "registered glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:195
+#: plugins/Pulsars/src/Pulsar.cpp:197
 msgid "Barycentric period"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:198
+#: plugins/Pulsars/src/Pulsar.cpp:200
 msgctxt "period"
 msgid "s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Time derivative of barycentric period"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:207
+#: plugins/Pulsars/src/Pulsar.cpp:209
 msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:210
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgctxt "distance"
 msgid "pc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "distance"
 msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:219
+#: plugins/Pulsars/src/Pulsar.cpp:221
 msgid "Spin down energy loss rate"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:222
+#: plugins/Pulsars/src/Pulsar.cpp:224
 msgctxt "power"
 msgid "ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:228
+#: plugins/Pulsars/src/Pulsar.cpp:230
 msgid "Binary period of pulsar"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:231 plugins/Exoplanets/src/Exoplanet.cpp:328
+#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:328
 msgctxt "period"
 msgid "days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:332
+#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:332
 msgid "Eccentricity"
 msgstr "Ketakpusatan"
 
-#: plugins/Pulsars/src/Pulsar.cpp:240
+#: plugins/Pulsars/src/Pulsar.cpp:242
 msgid "Annual parallax"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:249
+#: plugins/Pulsars/src/Pulsar.cpp:251
 msgid "Distance based on electron density model"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:262
+#: plugins/Pulsars/src/Pulsar.cpp:264
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:265
+#: plugins/Pulsars/src/Pulsar.cpp:267
 msgctxt "time"
 msgid "ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:270
+#: plugins/Pulsars/src/Pulsar.cpp:272
 msgid "Time averaged flux density at"
 msgstr "Ketumpatan fluks terpurata masa pada"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Pulsars/src/Pulsar.cpp:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:348
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:286
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:487
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid "Notes"
 msgstr "Catatan"
 
-#: plugins/Pulsars/src/Pulsar.cpp:374
+#: plugins/Pulsars/src/Pulsar.cpp:376
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "Pulsar sinar-X beranomali atau pengulang sinar-gama dengan denyutan yang "
 "dikesan"
 
-#: plugins/Pulsars/src/Pulsar.cpp:379
+#: plugins/Pulsars/src/Pulsar.cpp:381
 msgid "has one or more binary companions"
 msgstr "mempunyai satu atau lebih rakan binari"
 
-#: plugins/Pulsars/src/Pulsar.cpp:384
+#: plugins/Pulsars/src/Pulsar.cpp:386
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "dengan pemancaran berdenyut dari radio kedapa frekuensi inframerah atau  "
 "lebih tinggi"
 
-#: plugins/Pulsars/src/Pulsar.cpp:389
+#: plugins/Pulsars/src/Pulsar.cpp:391
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "dengan pemancaran terdenyut hanya pada frekuensi inframerah atau lebih "
 "tinggi"
 
-#: plugins/Pulsars/src/Pulsar.cpp:394
+#: plugins/Pulsars/src/Pulsar.cpp:396
 msgid "with pulsed emission in the radio band"
 msgstr "dengan pemancaran terdenyut dalam jaluran radio"
 
-#: plugins/Pulsars/src/Pulsar.cpp:399
+#: plugins/Pulsars/src/Pulsar.cpp:401
 msgid "with intermittently pulsed radio emission"
 msgstr "dengan pemancaran radio terdenyut sekejap-sekejap"
 
-#: plugins/Pulsars/src/Pulsar.cpp:404
+#: plugins/Pulsars/src/Pulsar.cpp:406
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -16364,11 +16400,11 @@ msgstr ""
 "Bintang neutron terasing dengan pemancaran Sinar-X terma tetapi tanpa "
 "pemancara radio yang boleh dikesan"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Pulsars Plug-in"
 msgstr "Pemalam Pulsar"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N.,"
@@ -16379,40 +16415,40 @@ msgstr ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "Katalog semasa mengandungi maklumat mengenai %1 pulsar."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "Pengenalpasti pulsar mempunyai awalan 'PSR'"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "Acknowledgment"
 msgstr "Penghargaan"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Balai Cerap Radio Astronomi  Pushchino"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 msgid "Nancay Radioastronomical Observatory"
 msgstr "Balai Cerap Radioastronomi  Nancay"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 msgid "in France"
 msgstr "di Perancis"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:287
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:286
 msgid "Pulsars is updated"
 msgstr "Pulsar dikemaskini"
 
@@ -16478,54 +16514,54 @@ msgstr ""
 msgid "Remote control"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:110
 msgid "Remote Control Plug-in"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:119
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:118
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
 msgid "Publications"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:145
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:144
 msgid "Further information can be found in the {developer documentation}."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:192
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:191
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:197
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:196
 msgid "Not active."
 msgstr ""
 
@@ -16594,98 +16630,98 @@ msgid ""
 " in Space programme."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:119
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:118
 #, qt-format
 msgid "ERROR: %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:135
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Start server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:141
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Connect to server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:144
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:143
 msgid "Not running"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:149
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:148
 msgid "Stop server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:153
 #, qt-format
 msgid "Running as server on port %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
 msgid "Cancel connecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr ""
 
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:180
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnecting..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
 msgid "Disconnect from server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid "Remote Sync Plug-in"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:246
 msgid "Server Name"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:255
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:254
 msgid "Server not active."
 msgstr ""
 
@@ -16806,82 +16842,82 @@ msgid "Exoplanets configuration window"
 msgstr "Tetingkap konfigurasi eksoplanet"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1022
+#: plugins/Exoplanets/src/Exoplanets.cpp:1023
 msgid "Hot"
 msgstr "Panas"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1024
+#: plugins/Exoplanets/src/Exoplanets.cpp:1025
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1026
+#: plugins/Exoplanets/src/Exoplanets.cpp:1027
 msgid "Cold"
 msgstr "Dingin"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1029
+#: plugins/Exoplanets/src/Exoplanets.cpp:1030
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1031
+#: plugins/Exoplanets/src/Exoplanets.cpp:1032
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1033
+#: plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1035
+#: plugins/Exoplanets/src/Exoplanets.cpp:1036
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1037
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1039
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1042
+#: plugins/Exoplanets/src/Exoplanets.cpp:1043
 msgid "Primary Transit"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1044
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Microlensing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1046
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Radial Velocity"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1048
+#: plugins/Exoplanets/src/Exoplanets.cpp:1049
 msgid "Imaging"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1050
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1054
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Astrometry"
 msgstr ""
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1056
+#: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgid "TTV"
 msgstr ""
 
@@ -16952,7 +16988,7 @@ msgstr ""
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Flux"
 msgstr ""
 
@@ -16965,11 +17001,11 @@ msgstr "ESI"
 msgid "Equilibrium temperature on Earth"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid "Exoplanets Plug-in"
 msgstr "Pemalam Eksoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -16978,7 +17014,7 @@ msgstr ""
 "Pemalam ini plotkan kedudukan bintang dengan eksoplanetnya. Data eksoplanet "
 "diambil dari  \"%1The Extrasolar Planets Encyclopaedia%2\""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -16989,7 +17025,7 @@ msgstr ""
 "diambil dari \"%1The Habitable Exoplanets Catalog%3\" oleh %2Planetary "
 "Habitability Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -17000,38 +17036,38 @@ msgstr ""
 "mempunyai %2 ekso-planet (termasuklah %3 ekso-planet berpotensi boleh "
 "didiami)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Potential habitable exoplanets"
 msgstr "Ekso-planet boleh didiami berpotensi"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "Planetary Class"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "Equilibrium Temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -17039,24 +17075,24 @@ msgid ""
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid "Earth Similarity Index (ESI)"
 msgstr "Indeks Keserupaan Bumi (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -17066,86 +17102,86 @@ msgstr ""
 "Bumi. ESI bergantung pada jejari, ketumpatan, halaju keluar, dan suhu "
 "permukaan planet."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Proper names"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "In December 2015 and in December 2019, the International Astronomical Union "
 "(IAU) has officially approved names for several exoplanets after a public "
 "vote."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid "Musica is Latin for <em>music</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -17154,7 +17190,7 @@ msgid ""
 " the phases of Venus, among other discoveries."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -17162,153 +17198,153 @@ msgid ""
 "planetary motion."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Smertrios was a Gallic deity of war."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -17316,7 +17352,7 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -17324,21 +17360,21 @@ msgid ""
 "treatise on the uses of the astrolabe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -17346,37 +17382,37 @@ msgid ""
 "popular symbol of liberty."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid ""
 "Arber is the term for the inhabitants of Albania during the middle ages."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "Hoggar is the name of the main mountain range in the Sahara Desert in "
 "southern Algeria."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "Tassili is a UNESCO World Heritage Site situated in the Sahara Desert and is"
 " renowned for its prehistoric cave art and scenic geological formations."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "Arcalis is a famous peak in the north of Andorra, where the Sun passes "
 "through a hole in the mountain twice a year at fixed dates. It was used as a"
@@ -17384,7 +17420,7 @@ msgid ""
 "inhabitants of Andorra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "Madriu (Mare del riu in Catalan, Mother of the River in English) is the name"
 " of a glacial valley and of the river that runs through it in the southeast "
@@ -17392,53 +17428,53 @@ msgid ""
 "Heritage Site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
 "Nosaxa means spring in the Moqoit language. The word comes from a "
 "combination of nosahuec, which means renew, and ñaaxa, which means year."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "Naqaỹa means brother-family-relative in the Moqoit language and leads us to "
 "call all humans, indigenous or non-indigenous, brother."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "Malmok is an indigenous name given to a beach in Aruba with a narrow sandy "
 "stretch that interrupts the limestone and rocky terrace along the coast. Its"
 " shallow clear Caribbean waters make it a popular snorkelling spot."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid ""
 "Boca Prins is a secluded beach with white dunes and iconic scenery situated "
 "in Arikok National Park along the northeast coast of Aruba. It is named "
 "after Plantation Prins where coconuts are cultivated."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Bubup is the Boonwurrung word for child."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "YanYan is the Boonwurrung word for boy."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid ""
 "Franz is a character in the movie 'Sissi' embodying an emperor of Austria in"
 " the XIXth century. The role is played by the actor Karlheinz Böhm."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid ""
 "Sissi is a character in the movie 'Sissi', who is married with Franz. The "
 "role is played by the actress Romy Schneider."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid ""
 "Mahsati Ganjavi (1089–1159) is one of the brightest shining stars of "
 "Azerbaijani poetry. She was said to have associated with both Omar Khayyam "
@@ -17446,7 +17482,7 @@ msgid ""
 "instruments."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid ""
 "Ganja is an ancient city of Azerbaijan, and is the birth place of many "
 "prominent people such as the poets Mahsati and Nizami. It is the ancient "
@@ -17454,170 +17490,170 @@ msgid ""
 "Republic and the city with the spirit of wisdom and freedom."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
 msgid ""
 "Timir means darkness in Bengali language, alluding to the star being far "
 "away in the darkness of space."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid ""
 "Tondra means nap in Bengali language, alluding to the symbolic notion that "
 "the planet was asleep until discovered."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid "Nervia, adapted from Nervii, was a prominent Belgian Celtic tribe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "Eburonia, adapted from Eburones, was a prominent Belgian Celtic tribe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid ""
 "Gakyid means happiness. Gross National Happiness is the development "
 "philosophy conceived and followed in Bhutan and is one of Bhutan's "
 "contributions to the world."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 msgid ""
 "Drukyul (land of the thunder dragon) is the native name for Bhutan, the "
 "country that came up with the philosophy of Gross National Happiness."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid ""
 "Tapecue means eternal path in Guarani and represents the Milky Way through "
 "which the first inhabitants of the Earth arrived and could return."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid ""
 "Yvaga means paradise for the Guarani and the Milky Way was known as the road"
 " to Yvaga or paradise."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 msgid ""
 "Bosona is the name given to the territory of Bosnia in the 10th century. "
 "Later, the name was transformed to Bosnia originating from the name of the "
 "Bosna river."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid ""
 "Naron is one of the names given to the Neretva river in Herzegovina (and "
 "partly in Croatia) in antiquity orginating with the Celts who called it Nera"
 " Etwa which means the Flowing Divinity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 msgid ""
 "Tupi is the name of the most populous Indigenous People living on the "
 "eastern coast of South America, before the Portuguese arrived in the 16th "
 "century."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 msgid ""
 "Guarani is the name of the most populous Indigenous people living in South "
 "Brazil and parts of Argentina, Paraguay and Uruguay."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
 msgid ""
 "Gumala is a Malay word, which means a magic bezoar stone found in snakes, "
 "dragons, etc."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid ""
 "Mastika is a Malay word, which means a gem, precious stone, jewel or the "
 "prettiest, the most beautiful."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "Tangra is the supreme celestial god that early Bulgars worshiped."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid ""
 "Bendida is the Great Mother Goddess of the Thracians. She was especially "
 "revered as a goddess of marriage and living nature."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid ""
 "Mouhoun, also called Volta Noire, is the largest river in Burkina Faso and "
 "plays an important role in the lives of the people in the areas it passes "
 "through."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid ""
 "The Nakanbé, also called Volta Blanche, is the second largest river in "
 "Burkina Faso. Its source is in the heart of the Sahara Burkinabe and ends in"
 " Ghana."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid ""
 "Nikawiy is the word for mother in the Indigenous Cree language of Canada."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid ""
 "Awasis is the word for child in the Indigenous Cree language of Canada."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid ""
 "Pincoya is a female water spirit from southern Chilean mythology who is said"
 " to bring drowned sailors to the Caleuche so that they can live in the "
 "afterlife."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid ""
 "Caleuche is a large ghost ship from southern Chilean mythology which sails "
 "the seas around the island of Chiloé at night."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid ""
 "Lion Rock is a lion-shaped peak overlooking Hong Kong and is a cultural "
 "symbol with deep respect from the local community."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid ""
 "Victoria Peak overlooks the bustling Victoria Harbour and is regarded as an "
 "ambassadorial gateway for foreign visitors wishing to experience Hong Kong "
 "first hand."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid ""
 "Xihe (羲和) is the goddess of the sun in the Chinese mythology and also "
 "represents the earliest astronomers and developers of calendars in ancient "
 "China."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid ""
 "Wangshu (望舒) is the goddess who drives for the Moon and also represents the "
 "Moon in Chinese mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid ""
 "Formosa is the historical name of Taiwan used in the 17th century, meaning "
 "beautiful in Latin."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid ""
 "Sazum is the traditional name of Yuchi, a Township in Nantou county, in "
 "which the famous Sun-Moon Lake lies. Sazum means water in the language of "
@@ -17625,995 +17661,995 @@ msgid ""
 "region for hundreds of years."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid ""
 "Macondo is the mythical village of the novel One Hundred Years of Solitude "
 "(Cien años de soledad) the classic novel by Gabriel García Marquez. Macondo "
 "is a fictional place where magic and reality are mixed."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid ""
 "Melquíades is a fictional character that walks around Macondo, like a planet"
 " orbiting a star, connecting it with the external world by introducing new "
 "knowledge using his inventions as well as his stories."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid ""
 "Poerava is the word in the Cook Islands Maori language for a large mystical "
 "black pearl of utter beauty and perfection."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid ""
 "Pipitea is a small, white and gold pearl found in Penrhyn lagoon in the "
 "northern group of the Cook Islands."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:311
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid ""
 "Dìwö in Bribri language means the sun (bigger than the sun we know) and that"
 " never turns off."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:312
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:311
 msgid "Ditsö̀ is the name that the god Sibö̀ gave to the first Bribri people."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:313
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:312
 msgid ""
 "Stribor is God of winds in Slavic mythology, as well as a literature "
 "character in the book Priče iz davnine (Croatian Tales of Long Ago) by the "
 "Croatian author Ivana Brlić-Mažuranić."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:313
 msgid "Veles is a major Slavic god of earth, waters and the underworld."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:315
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
 msgid ""
 "Felix Varela (1788–1853) was the first to teach science in Cuba at the San "
 "Carlos and San Ambrosio Seminary. He opened the way to education for all, "
 "and began the experimental teaching of physics in Cuba."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:316
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:315
 msgid ""
 "Carlos Juan Finlay (1833–1915) was an epidemiologist recognized as a pioneer"
 " in the research of yellow fever, determining that it was transmitted "
 "through mosquitoes."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:316
 msgid ""
 "Alasia is the first historically recorded name of Cyprus, dating back to "
 "mid-fifteenth century BC."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid ""
 "Onasilos is the oldest historically recorded doctor in Cyprus, inscribed on "
 "the fifth century BC Idalion Tablet. Also known as the Onasilou Plate, it is"
 " considered as the oldest legal contract found in the world."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid ""
 "Absolutno is a fictional miraculous substance in the sci-fi novel Továrna na"
 " absolutno (The Factory for the Absolute) by influential Czech writer Karel "
 "Čapek."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
 "Makropulos is the name from Karel Čapek's play Věc Makropulos (The "
 "Makropulos Affair), dealing with problems of immortality and consequences of"
 " an artificial prolongation of life."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
 "Muspelheim is the Norse mythological realm of fire. The first gods used the "
 "sparks of Muspelheim to form the sun, moon, planets, and stars."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:322
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
 msgid ""
 "Surt is the ruler of Muspelheim and the fire giants there in Norse "
 "mythology. At Ragnarok, the end of the world, he will lead the attack on our"
 " world and destroy it in flames."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:322
 msgid ""
 "Márohu the god of drought is the protector of the Sun and is engraved at a "
 "higher position on the stalagmite than Boinayel in the El Puente cave, where"
 " the Sun makes its way down every 21 December."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:324
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
 msgid ""
 "Boinayel the god of rain that fertilizes the soil is engraved on the "
 "stalagmite at a lower position than Márohu in the El Puente cave."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:324
 msgid ""
 "Nenque means the Sun in the language spoken by the Indigenous Waorani tribes"
 " of the Amazon regions of Ecuador"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:326
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 msgid ""
 "Eyeke means near in the language spoken by the Indigenous Waorani tribes of "
 "the Amazon regions of Ecuador. This word is suggested for the exoplanet "
 "owing to the proximity of the planet to the host star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:326
 msgid "Citalá means River of stars in the native Nahuat language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:328
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
 msgid ""
 "Cayahuanca means The rock looking at the stars in the native Nahuat "
 "language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:328
 msgid ""
 "Koit is Estonian for the time when the Sun rises in the morning (dawn)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
 msgid ""
 "Hämarik is Estonian for the time when the Sun goes down in the evening "
 "(twilight)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
 msgid "Buna is the commonly used word for coffee in Ethiopia."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:332
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid ""
 "Abol is the first of three rounds of coffee in the Ethiopian traditional "
 "coffee ceremony."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:332
 msgid "Horna is hell or the underworld from Finnic mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:334
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
 msgid ""
 "Hiisi represents sacred localities and later evil spirits from Finnic "
 "mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:334
 msgid ""
 "Bélénos was the god of light, of the Sun, and of health in Gaulish "
 "mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:336
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
 msgid ""
 "Bélisama was the goddess of fire, notably of the hearth and of metallurgy "
 "and glasswork, in Gaulish mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:336
 msgid "Itonda, in the Myene tongue, corresponds to all that is beautiful."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:338
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
 msgid ""
 "Mintome, in the Fang tongue, is a mythical land where a brotherhood of brave"
 " men live."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:338
 msgid ""
 "Mago is a National Park in Ethiopia noted for its giraffes. The star also "
 "happens to be in the constellation of Camelopardis (the giraffe)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
 msgid ""
 "The Neri river in Ethiopia runs through parts of the Mago National park."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:341
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
 msgid ""
 "Sika means gold in the Ewe language and gold is one of Ghana's principal "
 "exports."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:342
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:341
 msgid "Toge means earring in the Ewe language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:343
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:342
 msgid ""
 "Lerna was the name of a lake in the eastern Peloponnese, where the Lernaean "
 "Hydra, an immortal mythical nine-headed beast lived. The star lies in the "
 "constellation of Hydra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:343
 msgid ""
 "Iolaus was the nephew of Heracles from Greek mythology, moving around lake "
 "Lerna in helping Heracles to exterminate the Lernaean Hydra. Similarly this "
 "exoplanet in the constellation of Hydra moves around its parent star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:345
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
 msgid ""
 "Tojil is the name of one of the Mayan deities related to rain, storms, and "
 "fire."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:345
 msgid ""
 "Koyopa' is the word associated with lightning in K'iche' (Quiché) Mayan "
 "language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:347
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgid ""
 "The Citadelle is a large mountaintop fortress in Nord, Haiti built after "
 "Haiti's independence, and was designated a UNESCO World Heritage site along "
 "with the nearby Sans-Souci Palace."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:348
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:347
 msgid ""
 "Indépendance is named after the Haitian Declaration of Independence on 1 "
 "January 1804, when Haiti became the first independent black republic."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:348
 msgid ""
 "Hunahpú was one of the twin gods who became the Sun in K'iche' (Quiché) "
 "Mayan mythology as recounted in the Popol Vuh."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
 msgid ""
 "Ixbalanqué was one of the twin gods who became the Moon in K'iche' (Quiché) "
 "Mayan mythology as recounted in the Popol Vuh."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:351
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
 msgid ""
 "Hunor was a legendary ancestor of the Huns and the Hungarian nation, and "
 "brother of Magor."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:351
 msgid ""
 "Magor was a legendary ancestor of the Magyar people and the Hungarian "
 "nation, and brother of Hunor."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:353
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Funi is an old Icelandic word meaning fire or blaze."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:354
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:353
 msgid "Fold is an old Icelandic word meaning earth or soil."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:355
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:354
 msgid ""
 "Bibhā [/bɪbɦa/] is the Bengali pronunciation of the Sanskrit word Vibha, "
 "which means a bright beam of light."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:356
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:355
 msgid ""
 "Santamasa [/səntəməs/] in Sanskrit means clouded, which alludes to the "
 "exoplanet’s atmosphere."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:357
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:356
 msgid "Dofida means our star in Nias language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:358
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:357
 msgid ""
 "Noifasui means revolve around in Nias language, derived from the word "
 "ifasui, meaning to revolve around, and no, indicating that the action "
 "occurred in the past and continued to the present time."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:358
 msgid ""
 "Kaveh is one of the heroes of Shahnameh, the epic poem composed by Persian "
 "poet Ferdowsi between 977 and 1010 CE. Kaveh is a blacksmith who symbolises "
 "justice."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
 msgid ""
 "Kaveh carries a banner called Derafsh Kaviani (Derafsh: banner, Kaviani: "
 "relating to Kaveh)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
 msgid ""
 "Uruk was an ancient city of the Sumer and Babylonian civilizations in "
 "Mesopotamia situated along an ancient channel of the Euphrates river in "
 "modern-day Iraq."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:362
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
 msgid ""
 "Babylonia was a key kingdom in ancient Mesopotamia from the 18th to 6th "
 "centuries BC whose name-giving capital city was built on the Euphrates "
 "river."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:362
 msgid ""
 "Tuiren was the aunt of the hunterwarrior Fionn mac Cumhaill of Irish legend,"
 " who was turned into a hound by the jealous fairy Uchtdealbh."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
 msgid ""
 "Tuiren's son Bran was a hound and cousin of the hunterwarrior Fionn mac "
 "Cumhaill of Irish legend."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:365
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
 msgid ""
 "Tevel means Universe or everything and begins with the letter Taf, the last "
 "letter in the Hebrew alphabet."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:366
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:365
 msgid "Alef is the first letter in the Hebrew alphabet and also means bull."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:367
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:366
 msgid ""
 "Flegetonte is the underworld river of fire from Greek Mythology in the "
 "Italian narrative poem on the afterlife 'Divina Commedia' (Divine Commedy) "
 "by Dante Alighieri, chosen as an allusion to the star's fiery nature."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:368
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:367
 msgid ""
 "Lete is the oblivion river made of fog from Greek Mythology in the Italian "
 "narrative poem on the afterlife 'Divina Commedia' (Divine Commedy) by Dante "
 "Alighieri, chosen as an allusion to the planet's gaseous nature."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:369
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:368
 msgid "Nyamien refers to the supreme creator deity of Akan mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:369
 msgid "Asye refers to the Earth goddess of Akan mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
 msgid ""
 "Kamui is a word in the Ainu language denoting a supernatural entity "
 "possessing spiritual energy."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:372
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
 msgid ""
 "Chura is a word in the Ryukyuan/Okinawan language meaning natural beauty."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:372
 msgid ""
 "Petra is a historical and archaeological city in southern Jordan and a "
 "UNESCO World Heritage site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:374
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
 msgid ""
 "Wadi Rum (Valley of the Moon) is located at the far south of Jordan, it is "
 "the largest valley in Jordan, set on the high plateau at the western edge of"
 " the Arabian Desert."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:375
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:374
 msgid ""
 "The word Kalausi means a very strong whirling column of wind in the Dholuo "
 "language of Kenya."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:376
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:375
 msgid ""
 "Buru means dust in the Dholuo language of Kenya and is typically associated "
 "with wind storms."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:377
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:376
 msgid ""
 "Liesma means flame, and it is the name of a character from the Latvian poem "
 "Staburags un Liesma."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:378
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:377
 msgid ""
 "Staburags is the name of a character from the Latvian poem Staburags un "
 "Liesma, and denotes a rock with symbolic meaning in literature and history."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:379
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:378
 msgid ""
 "Phoenicia was an ancient thalassocratic civilisation of the Mediterranean "
 "that originated from the area of modern-day Lebanon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:380
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:379
 msgid ""
 "Beirut is one of the oldest continuously inhabited cities in the world and "
 "was a Phoenician port. Beirut is now the capital and largest city of "
 "Lebanon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:381
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:380
 msgid ""
 "In the local dialect of Triesenberg, Pipoltr is a bright and visible "
 "butterfly, alluding to the properties of a star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:381
 msgid ""
 "In the local dialect of southern Liechtenstein, Umbäässa is a small and "
 "barely visible ant, alluding to the properties of a planet with respect to "
 "its star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:383
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
 msgid "Taika means peace in the Lithuanian language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:383
 msgid "Vytis is the symbol of the Lithuanian coat of arms."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
 msgid ""
 "The Lucilinburhuc fortress was built in 963 by the founder of Luxembourg, "
 "Count Siegfried."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:386
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
 msgid ""
 "Peitruss is derived from the name of the Luxembourg river Pétrusse, with the"
 " river's bend around Lucilinburhuc fortress alluding to the orbit of the "
 "planet around its star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:387
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:386
 msgid "Rapeto is a giant creature from Malagasy tales."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:388
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:387
 msgid "Trimobe is a rich ogre from Malagasy tales."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:389
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:388
 msgid ""
 "Intan means diamond in the Malay language (Bahasa Melayu), alluding to the "
 "shining of a star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:390
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:389
 msgid ""
 "Baiduri means opal in Malay language (Bahasa Melayu), alluding to the "
 "mysterious beauty of the planet."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:391
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:390
 msgid ""
 "Sansuna is the name of the mythological giant from traditional Maltese folk "
 "tales that carried the stones of the Gozo megalithic temples on her head."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:392
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:391
 msgid ""
 "Ġgantija means giantess: the megalithic temple complex on the island of "
 "Gozo, which alludes to the grandeur of this gas giant exoplanet."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:392
 msgid ""
 "Diya is an oil lamp that is brought by Indian ancestors to Mauritius in the "
 "1820's, and is used for lighting during special occasions, including the "
 "light festival of Diwali."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
 msgid ""
 "Cuptor is a thermally insulated chamber used for baking or drying "
 "substances, that has long disappeared in Mauritius and has been replaced by "
 "more sophisticated ovens."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:395
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
 msgid ""
 "Axólotl means water animal in the native Nahuatl language, which is a unique"
 " and culturally significant endemic amphibious species from the basin of "
 "Mexico."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:395
 msgid ""
 "Xólotl means animal in the native Nahuatl language and was an Aztec deity "
 "associated with the evening star (Venus)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:397
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid ""
 "Tislit is the name of a lake in the Atlas mountains of Morocco. It means the"
 " bride in the Amazigh language and it is associated with a heartbroken "
 "beautiful girl in an ancient local legend."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:397
 msgid ""
 "Isli is the name of a lake in the Atlas mountains of Morocco. It means the "
 "groom in the Amazigh language and it is associated with a heartbroken "
 "handsome boy in an ancient local legend."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:399
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 msgid ""
 "Emiw represents love in the local Makhuwa language of the northern region of"
 " Mozambique."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:399
 msgid ""
 "Hairu represents unity in the local Makhuwa language of the northern region "
 "of Mozambique."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:401
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid "Ayeyarwady is the largest and most important river in Myanmar."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:402
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:401
 msgid ""
 "Bagan is one of Myanmar's ancient cities that lies beside the Ayeyarwardy "
 "river."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:403
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:402
 msgid ""
 "Sagarmatha is the Nepali name for the highest peak in the world (also known "
 "as Mount Everest) and symbol of national pride of Nepal."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:403
 msgid ""
 "Laligurans are the Nepali variation of the rhododendron flower and is the "
 "national flower of Nepal."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid ""
 "The Sterrennacht (Starry Night) is a world-famous painting by Dutch grand "
 "master Van Gogh that was painted in France in 1889 and now belongs to the "
 "permanent collection of New York's Museum of Modern Art."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
 msgid ""
 "The Nachtwacht (Night Watch) is a world-famous painting by Dutch grand "
 "master Rembrandt that was completed in 1642 and now belongs to the "
 "collection of the Rijksmuseum in Amsterdam."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:407
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
 msgid ""
 "Karaka is the word in the Māori language for a plant endemic to New Zealand "
 "that produces a bright orange, fleshy fruit."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:407
 msgid ""
 "Kererū is the word in the Māori language for a large bush pigeon native to "
 "New Zealand."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:409
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid ""
 "Cocibolca is the Nahualt name for the largest lake in Central America in "
 "Nicaragua."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:409
 msgid ""
 "Xolotlan is the name of the second largest lake of Nicaragua and its name is"
 " from the Nahualt language of the indigenous tribe that settled in "
 "Nicaragua, which symbolises a native god and a refuge for animals."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
 msgid ""
 "Amadioha is the god of thunder in Igbo mythology. As well as representing "
 "justice, Amadioha is also a god of love, peace and unity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:412
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid ""
 "Equiano was a writer and abolitionist from Ihiala, Nigeria who fought "
 "injustice and the elimination of the slave trade."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:413
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:412
 msgid "Násti means star in the Northern Sami language of Norway."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:414
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:413
 msgid "Albmi means sky in the Northern Sami language of Norway."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:415
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:414
 msgid ""
 "Shama is an Urdu literary term meaning a small lamp or flame, symbolic of "
 "the light of the star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:415
 msgid ""
 "Perwana means moth in Urdu, alluding to the eternal love of an object "
 "circling the source of light (the lamp)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:417
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
 msgid ""
 "Moriah is an ancient name for the mountain within the Old City of Jerusalem."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:417
 msgid ""
 "Jebus was the ancient name of Jerusalem in 2nd millennium BC when populated "
 "by the Canaanite tribe of Jebusites."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:419
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid ""
 "Montuno is the traditional costume the man wears in the “El Punto”, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:420
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:419
 msgid ""
 "Pollera is the traditional costume the woman wears in the El Punto, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:421
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:420
 msgid ""
 "Tupã is one of four principle gods of the Guarani Cosmogony in popular "
 "Paraguayan folklore that helped the supreme god Ñamandu to create the "
 "Universe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:422
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:421
 msgid ""
 "Tume Arandu is a son of Rupavê and Sypavê, the original man and woman of the"
 " Universe, who is known as the Father of Wisdom in popular Paraguayan "
 "folklore."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:423
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:422
 msgid ""
 "Inquil was one half of the couple involved in the tragic love story Way to "
 "the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:424
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:423
 msgid ""
 "Sumaj Majta was one half of the couple involved in a tragic love story Way "
 "to the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:425
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:424
 msgid ""
 "Aman Sinaya is one of the two trinity deities of the Philippine's Tagalog "
 "mythology, and is the primordial deity of the ocean and protector of "
 "fisherman."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:426
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:425
 msgid ""
 "Haik is the successor of the primordial Aman Sinaya as the God of the Sea of"
 " the Philippine's Tagalog mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:427
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:426
 msgid ""
 "Uklun means us or we in the Pitkern language of the people of Pitcairn "
 "Islands."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:428
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:427
 msgid ""
 "Lekl Sullun means child or children in the Pitkern language of the people of"
 " Pitcairn Islands."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:429
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:428
 msgid ""
 "Solaris is the title of a 1961 science fiction novel about an ocean-covered "
 "exoplanet by Polish writer Stanislaw Lem."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:430
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:429
 msgid ""
 "Pirx is a fictional character from books by Polish science-fiction writer "
 "Stanisław Lem."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:431
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:430
 msgid ""
 "Lusitânia is the ancient name of the western region of the Iberic Peninsula "
 "where the Lusitanian people lived and where most of modern-day Portugal is "
 "situated."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:432
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:431
 msgid ""
 "Viriato was a legendary leader of the Lusitanian people, a herdsman and "
 "hunter who led the resistance against Roman invaders during 2nd century B.C."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:433
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:432
 msgid ""
 "Koeia was the word for star in the language of the Taíno Indigenous People "
 "of the Caribbean."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:434
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:433
 msgid ""
 "Aumatex was the God of Wind in the mythology of the Taíno Indigenous People "
 "of the Caribbean."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:435
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:434
 msgid ""
 "Moldoveanu is the highest peak in Romania of the Făgăraș mountain range with"
 " an altitude of 2544 metres."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:436
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:435
 msgid ""
 "Negoiu is the second highest peak in Romania of the Făgăraș mountain range "
 "with an altitude of 2535 metres."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:437
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:436
 msgid ""
 "Dombay is a resort region in the North Caucasus mountains that is enclosed "
 "by mountain forests and rich wildlife, including bears (as this star lies in"
 " the constellation Ursa Major, the great bear)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:438
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:437
 msgid ""
 "Teberda is a mountain river in Dombay region with a rapid water flow, "
 "symbolising the planet's rapid motion around its host star."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:439
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:438
 msgid "Belel is a rare source of water in the north of Senegal."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:440
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:439
 msgid ""
 "Dopere is an expansive historical area in the north of Senegal where Belel "
 "was located."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:441
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:440
 msgid "Morava is the longest river system in Serbia."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:442
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:441
 msgid ""
 "Vlasina is one of the most significant tributaries of the South Morava "
 "river."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:443
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:442
 msgid ""
 "Parumleo is a Latin term for little lion, symbolising Singapore's struggle "
 "for independence."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:444
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:443
 msgid ""
 "Viculus is a Latin term for little village, embodying the spirit of the "
 "Singaporean people."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:445
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:444
 msgid "Chasoň is an ancient Slovak term for Sun."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:446
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:445
 msgid "Kráľomoc is an ancient Slovak term for the planet Jupiter."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:447
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:446
 msgid ""
 "Irena is a leading character in the novel Under the Free Sun: a Story of the"
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Irena is a "
 "woman of the court."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:448
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:447
 msgid ""
 "Iztok is a leading character in the novel Under the Free Sun: a Story of the"
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Iztok is a "
 "freedom fighter for the Slavic people."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:449
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:448
 msgid ""
 "Naledi means star in the Sesotho, SeTswana and SePedi languages and is "
 "typically given as a name to girls in the hope that they will bring light, "
 "joy and peace to their communities."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:450
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:449
 msgid ""
 "Krotoa is considered the Mother of Africa and member of the indigenous Khoi "
 "people, who was a community builder and educator during colonial times."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:451
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:450
 msgid ""
 "Baekdu is the highest mountain on the Korean peninsula, situated in North "
 "Korea, and symbolises the national spirit of Korea."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:452
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:451
 msgid ""
 "Halla is the highest mountain in South Korea and is regarded as a sacred "
 "place in the region."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:453
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:452
 msgid ""
 "Rosalía de Castro was a significant figure of Galician culture and prominent"
 " Spanish writer, whose pioneeting work often referenced the night and "
 "celestial objects."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:454
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:453
 msgid ""
 "Rio Sar is the name of a river that was present in much of the literary work"
 " of the pioneering Spanish author Rosalía de Castro."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:455
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:454
 msgid "Sāmaya means peace in the Sinhalese language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:456
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:455
 msgid "Samagiya means togetherness and unity in the Sinhalese language."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:457
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:456
 msgid ""
 "Aniara is the name of a spaceship in the epic poem Aniara by Swedish author "
 "Harry Martinson."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:458
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:457
 msgid ""
 "Isagel is the name of the spaceship pilot in the epic science fiction poem "
 "Aniara written by Swedish author Harry Martinson."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:459
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:458
 msgid ""
 "Mönch is one of the prominent peaks of the Bernese Alps in Switzerland."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:460
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:459
 msgid ""
 "Eiger is one of the prominent peaks of the Bernese Alps, in the Jungfrau-"
 "Aletsch protected area."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:461
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:460
 msgid ""
 "Ebla was one of the earliest kingdoms in Syria, and served as a prominent "
 "region in the 2nd and 3rd millenia B.C."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:462
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:461
 msgid ""
 "Ugarit was a city where its scribes devised the Ugaritic alphabet around "
 "1400 B.C. The alphabet was made up of thirty letters and was inscribed on "
 "clay tablets."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:463
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:462
 msgid ""
 "Mpingo is a famous tree that grows in southern Tanzania and produces ebony "
 "wood used for musical instruments and curios."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:464
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:463
 msgid ""
 "Tanzanite is the name of a precious stone mined in Tanzania and is treasured"
 " worldwide."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:465
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:464
 msgid "Chao Phraya is the great river of Thailand."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:466
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:465
 msgid ""
 "Mae Ping is one of the tributaries of Thailand's great river Chao Phraya."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:467
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:466
 msgid ""
 "Atakoraka means the chain of the Atacora: the largest mountain range in "
 "Togo."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:468
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:467
 msgid ""
 "Agouto (Mount Agou) is the highest mountain in Togo and a treasured region "
 "of the Atakoraka."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:469
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:468
 msgid ""
 "Dingolay means to dance, twist and turn in elaborate movements, symbolising "
 "the culture and language of the ancestors of the people of Trinidad and "
 "Tobago."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:470
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:469
 msgid ""
 "Ramajay means to sing and make music in a steelpan style, representing the "
 "love of culture and languages of the ancestors of the people of Trinidad and"
 " Tobago."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:471
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:470
 msgid ""
 "Chechia is a flat-surfaced, traditional red wool hat worn by men and women, "
 "symbolising the country's rich traditions and is considered as the national "
 "headdress for in Tunisia."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:472
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:471
 msgid ""
 "Khomsa is a palm-shaped amulet that is popular in Tunisia, used in jewelry "
 "and decorations. It depicts an open right hand and is often found in modern "
 "designs."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:473
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:472
 msgid ""
 "Anadolu is the primary homeland of Turkey and refers to the motherland in "
 "Turkish culture."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:474
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:473
 msgid ""
 "Göktürk refers to the historical origin of the Turkish people, as it was the"
 " first established state in Turkey in 5th century AD. It is also the name of"
@@ -18621,93 +18657,93 @@ msgid ""
 "means sky."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:475
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:474
 msgid ""
 "Berehinya was a Slavic deity of waters and riverbanks but in more recent "
 "times her status has been promoted to that of a national goddess — 'hearth "
 "mother, protectress of the earth'."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:476
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:475
 msgid ""
 "Tryzub is the most recognised ancient symbol of Ukraine, that was minted on "
 "the coins of Prince Volodymyr the Great and today remains one of the "
 "country's state symbols (a small coat)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:477
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:476
 msgid ""
 "Sharjah is the cultural capital of United Arab Emirates, and considered the "
 "city of knowledge due to its many educational centers, institutes, museums, "
 "libraries and heritage centers."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:478
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:477
 msgid ""
 "A barajeel is a wind tower used to direct the flow of the wind so that air "
 "can be recirculated as a form of air conditioning."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:479
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:478
 msgid "In Manx Gaelic, Gloas means to shine (like a star)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:480
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:479
 msgid ""
 "In Manx Gaelic, Cruinlagh means to orbit (like a planet around its star)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:481
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:480
 msgid ""
 "Nushagak is a regional river near Dilingham, Alaska, which is famous for its"
 " wild salmon that sustain local Indigenous communities."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:482
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:481
 msgid ""
 "The Mulchatna River is a tributary of the Nushagak River in southwestern "
 "Alaska, USA."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:483
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:482
 msgid ""
 "Ceibo is the name of the native tree of Uruguay that gives rise to the "
 "national flower."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:484
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:483
 msgid ""
 "Ibirapitá is the name of a native tree that is characteristic of the country"
 " of Uruguay, and is also known as Artigas' tree, after the national hero."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:485
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:484
 msgid "Natasha means thank you in many languages of Zambia."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:485
 msgid "Madalitso means blessings in the native language of Nyanja in Zambia."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:488
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:487
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:489
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:488
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:490
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:489
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:490
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -18715,18 +18751,18 @@ msgid ""
 "discovered in 2004."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -18734,194 +18770,194 @@ msgid ""
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Additional info"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Circumstellar habitable zone"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:497
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Planetary equilibrium temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:497
 msgid "Planetary habitability"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:499
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
 msgid "Earth Similarity Index"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:500
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:499
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:501
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:500
 msgid "NameExoWorlds website"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Laman Sesawang profesional umum yang berkaitan dengan planet ekstra-solar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanet: merupakan versi interaktif XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exolanet dalam sistem binari dan berbilang (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
 msgid "Naming exoplanets (IAU)"
 msgstr "Exoplanet bernama (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Sesetengah Ahli Astronomi dan Kumpulan aktif dalam kajian planet luar suria"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid "update: 16 April 2012"
 msgstr "kemaskini: 16 April 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid "The Exoplanet Data Explorer"
 msgstr "Penjelajah Data Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
 msgid "The Anglo-Australian Planet Search"
 msgstr "Pencarian Planet Anglo-Australia"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Program Pencarian Planet Luar Suria Geneva"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Program Penjelajahan Exoplanet NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid "Pulsar planets"
 msgstr "Planet pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid "The NASA Exoplanet Archive"
 msgstr "Arkib Exoplanet NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
 msgid "The Habitable Zone Gallery"
 msgstr "Galeri Zon Sesuai Didiami"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - Pencarian Bumi Lain"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
 msgid "Open Exoplanet Catalogue"
 msgstr "Buka Katalog Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Katalog Exoplanet Boleh Didiami"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:642
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:641
 msgid "Exoplanets is updated"
 msgstr "Eksopanet telah dikemaskini"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:768
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:767
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:769
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:768
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:770
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:769
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:771
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:770
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:772
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:771
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:772
 msgid "Angular Distance, arcsec"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
 msgid "Effective temperature of host star, K"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774
 msgid "Year of Discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
 msgid "Metallicity of host star"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
 msgid "V magnitude of host star, mag"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
 msgid "RA (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
 msgid "Dec (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
 msgid "Distance to star, pc"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
 msgid "Mass of host star, Msol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:782
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
 msgid "Radius of host star, Rsol"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:816
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:815
 msgctxt "temperature scale"
 msgid "Kelvin"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:818
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:817
 msgctxt "temperature scale"
 msgid "Celsius"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:820
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:819
 msgctxt "temperature scale"
 msgid "Fahrenheit"
 msgstr ""
@@ -19201,11 +19237,11 @@ msgstr "Ketercerapan"
 msgid "Observability configuration window"
 msgstr "Tetingkap konfigurasi ketercerapan"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 msgid "Observability Plug-in"
 msgstr "Pemalam Ketercerapan"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen"
 " center, if no source is selected). The plugin can show rise, transit, and "
@@ -19225,15 +19261,15 @@ msgstr ""
 "mengucapkan terima kasih keatas Alexander Wolf dan Georg Zotti atas nasihat "
 "mereka.<br><br>Ivan Marti-Vidal (Balai Cerap Angkasa Onsala)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid "Explanation of some parameters"
 msgstr "Penerangan beberapa parameter"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Sun altitude at twilight:"
 msgstr "Altitut Matahari pada waktu senja:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -19245,11 +19281,11 @@ msgstr ""
 "-18 darjah. Parameter ini hanya digunakan untuk menganggar julat bagi epok "
 "yang boleh dicerap (rujuk dibawah)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Horizon altitude:"
 msgstr "Altitud ufuk:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
@@ -19257,11 +19293,11 @@ msgstr ""
 "Altitud boleh cerap minimum (disebabkan gunung, bangunan, atau hanya lekapan"
 " teleskop yang terhad)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Today ephemeris:"
 msgstr "Efemeris hari ini:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -19273,11 +19309,11 @@ msgstr ""
 "sebagai rentang masa (dirujuk terhadap masa semasa) dan sebagai jam waktu "
 "(dalam masa setempat)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid ""
 "The days of Cosmical rise/set of an object are estimated as the days when "
 "the object rises (or sets) together with the rise/set of the Sun. The exact "
@@ -19298,11 +19334,11 @@ msgid ""
 "the astronomical night."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Largest Sun separation:"
 msgstr "Pemisahan Matahari yang terbesar:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object"
 " are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -19322,11 +19358,11 @@ msgstr ""
 "Langit pada keserongan. Maka, ia adalah malam 'terbaik' untuk mencerap objek"
 " tertentu."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid "Nights with source above horizon:"
 msgstr "Malam dengan sumber diatas ufuk:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program"
@@ -19363,11 +19399,11 @@ msgstr ""
 "Matahari Senja oleh pengguna) akan dilaksana dalam versi akan datang pemalam"
 " ini."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid "Full Moon:"
 msgstr "Bulan Purnama:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -19375,12 +19411,12 @@ msgstr ""
 "Bila Bula dipilih, program dapat mengira tarikh terdekat sebenar bagi Bulan "
 "yang bertentangan dengan Matahari."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:205
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:204
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:211
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:210
 #, qt-format
 msgid "Horizon altitude: %1 deg."
 msgstr ""
@@ -19443,7 +19479,7 @@ msgstr "Tarikh Bulan Purnama terdahulu dan berikutnya"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:218
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:219
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:235
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:237
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
@@ -19451,7 +19487,7 @@ msgid "Equation of Time"
 msgstr "Persamaan Masa"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:93
 msgid "This plugin shows the solution of the equation of time."
 msgstr "Pemalam ini menunjukkan penyelesaian bagi persamaan masa."
 
@@ -19460,12 +19496,12 @@ msgid "Show solution for Equation of Time"
 msgstr "Tunjuk penyelesaian bagi Persamaan Masa"
 
 #. TRANSLATORS: seconds.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:222
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
 msgid "Equation of Time plug-in"
 msgstr "Pemalam Persamaan Masa"
 
@@ -19514,7 +19550,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:637
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:643
 msgid "Meteor Showers"
 msgstr "Hujan Meteor"
 
@@ -19536,17 +19572,17 @@ msgstr ""
 msgid "Show search dialog"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:255
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:261
 msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:640
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:646
 msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:642
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:648
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -19573,52 +19609,52 @@ msgstr ""
 msgid "Generic"
 msgstr "Generik"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:527
+#: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "generic data"
 msgstr "data generik"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:531
+#: plugins/MeteorShowers/src/MeteorShower.cpp:530
 msgid "confirmed data"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:535
+#: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "inactive"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "meteor shower"
 msgstr "hujan meteor"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:570
+#: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Radiant drift (per day)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:578
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:586
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:589
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:594
+#: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
 msgstr "Aktiviti"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:613
+#: plugins/MeteorShowers/src/MeteorShower.cpp:612
 msgctxt "meteor shower activity"
 msgid "Maximum"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:616
+#: plugins/MeteorShowers/src/MeteorShower.cpp:615
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:626
+#: plugins/MeteorShowers/src/MeteorShower.cpp:625
 msgid "variable"
 msgstr "pembolehubah"
 
@@ -20205,11 +20241,11 @@ msgid ""
 "subject when posting."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:106
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
 msgid "Start date greater than end date!"
 msgstr "Tarikh mula lebih besar dari tarikh akhir!"
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:110
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:111
 msgid "Time interval must be less than one year!"
 msgstr "Sela masa mesti kurang dari satu tahun"
 
@@ -20336,103 +20372,103 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:141
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:143
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:157
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:159
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:178
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:194
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:210
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:212
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:229
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:231
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:248
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:250
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:266
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:268
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "The right bottom corner of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:186
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
 msgid "Near mouse cursor"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:187
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:186
 msgid "Custom position"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
 msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Right ascension/Declination"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Ecliptic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Altitude/Azimuth"
 msgstr "Altitud/Azimut"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
 msgid "Galactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:215
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
 msgid "Supergalactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:245
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:244
 msgid "Coordinates of custom position:"
 msgstr ""
 
