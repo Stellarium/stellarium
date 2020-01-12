@@ -433,6 +433,7 @@ void SearchDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->simbadStatusLabel->setStyleSheet(style);
 	ui->labelGreekLetterTitle->setStyleSheet(style);
+	ui->simbadCooStatusLabel->setStyleSheet(style);
 }
 
 void SearchDialog::changeTab(int index)
@@ -457,6 +458,7 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	useSimbad = enable;
 	conf->setValue("search/flag_search_online", useSimbad);
 	if (dialog && ui->simbadStatusLabel) ui->simbadStatusLabel->clear();
+	if (dialog && ui->simbadCooStatusLabel) ui->simbadCooStatusLabel->clear();
 	emit simbadUseChanged(enable);
 }
 
@@ -526,6 +528,7 @@ void SearchDialog::setSimpleStyle()
 	ui->AxisXSpinBox->setVisible(false);
 	ui->AxisXSpinBox->setVisible(false);
 	ui->simbadStatusLabel->setVisible(false);
+	ui->simbadCooStatusLabel->setVisible(false);
 	ui->AxisXLabel->setVisible(false);
 	ui->AxisYLabel->setVisible(false);
 	ui->coordinateSystemLabel->setVisible(false);
@@ -660,6 +663,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
 		ui->simbadStatusLabel->setText("");
+		ui->simbadCooStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	} else {
 		if (useSimbad)
@@ -718,7 +722,6 @@ void SearchDialog::lookupCoordinates()
 						   getSimbadGetsSpec(), getSimbadGetsMorpho(), getSimbadGetsDims());
 	onSimbadStatusChanged();
 	connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-
 }
 
 void SearchDialog::clearSimbadText(StelModule::StelModuleSelectAction)
@@ -730,20 +733,26 @@ void SearchDialog::clearSimbadText(StelModule::StelModuleSelectAction)
 void SearchDialog::onSimbadStatusChanged()
 {
 	Q_ASSERT(simbadReply);
+	int index = ui->tabWidget->currentIndex();
+	QString info;
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
-		ui->simbadStatusLabel->setText(QString("%1: %2")
-					       .arg(q_("Simbad Lookup Error"))
-					       .arg(simbadReply->getErrorString()));
+		info = QString("%1: %2").arg(q_("Simbad Lookup Error")).arg(simbadReply->getErrorString());
+		if (index==1)
+			ui->simbadCooStatusLabel->setText(info);
+		else
+			ui->simbadStatusLabel->setText(info);
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 		ui->simbadCooResultsTextBrowser->clear();
 	}
 	else
 	{
-		ui->simbadStatusLabel->setText(QString("%1: %2")
-					       .arg(q_("Simbad Lookup"))
-					       .arg(simbadReply->getCurrentStatusString()));
+		info = QString("%1: %2").arg(q_("Simbad Lookup")).arg(simbadReply->getCurrentStatusString());
+		if (index==1)
+			ui->simbadCooStatusLabel->setText(info);
+		else
+			ui->simbadStatusLabel->setText(info);
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
@@ -905,8 +914,6 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 			extSearchText.clear();
 		}
 	}
-
-
 	return false;
 }
 

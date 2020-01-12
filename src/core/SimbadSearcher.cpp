@@ -105,8 +105,8 @@ void SimbadLookupReply::httpQueryFinished()
 	}
 	if (found)
 	{
-		if (cooAnswer){
-
+		if (cooAnswer)
+		{
 			cooResult.clear();
 			while (!reply->atEnd())
 				cooResult.append(reply->readLine());
