@@ -366,20 +366,20 @@ void OcularDialog::createDialogContent()
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
-	connect(ui->ccdChipY,    SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdChipX,    SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdPixelY,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdPixelX,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdResX,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdResY,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdBinningX, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->ccdBinningY, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->OAG_checkBox,SIGNAL(stateChanged(int)), ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismH,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismW,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->OAGDist,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismPA,  SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdChipY,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdChipX,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdPixelY,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdPixelX,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdResX,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdResY,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdBinningX, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->ccdBinningY, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->OAG_checkBox,SIGNAL(stateChanged(int)), this, SLOT(updateCCD()));
+	connect(ui->OAGPrismH,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->OAGPrismW,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->OAGDist,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(ui->OAGPrismPA,  SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
@@ -454,6 +454,12 @@ void OcularDialog::updateLens()
 {
 	lensMapper->submit();
 	plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
+}
+
+void OcularDialog::updateCCD()
+{
+	ccdMapper->submit();
+	plugin->selectCCDAtIndex(plugin->getSelectedCCDIndex());
 }
 
 void OcularDialog::updateTelescope()

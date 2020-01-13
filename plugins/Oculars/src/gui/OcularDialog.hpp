@@ -74,6 +74,7 @@ public slots:
 	// Mini-methods required to immediately update display
 	void updateOcular();
 	void updateLens();
+	void updateCCD();
 	void updateTelescope();
 
 protected:
