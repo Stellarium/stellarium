@@ -850,8 +850,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
-		if (!satData.contains("stdMag") && qsMagList.contains(satId))
-			satData["stdMag"] = qsMagList[satId];
+		int sid = satId.toInt();
+		if (!satData.contains("stdMag") && qsMagList.contains(sid))
+			satData["stdMag"] = qsMagList[sid];
 
 		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
@@ -1001,8 +1002,9 @@ bool Satellites::add(const TleData& tleData)
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
-	if (qsMagList.contains(tleData.id))
-		satProperties.insert("stdMag", qsMagList[tleData.id]);
+	int sid = tleData.id.toInt();
+	if (qsMagList.contains(sid))
+		satProperties.insert("stdMag", qsMagList[sid]);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 	
@@ -1517,8 +1519,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
 			}
-			if (qsMagList.contains(id))
-				sat->stdMag = qsMagList[id];
+			int sid = id.toInt();
+			if (qsMagList.contains(sid))
+				sat->stdMag = qsMagList[sid];
 		}
 		else
 		{
@@ -1713,7 +1716,7 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 	while (!qsmFile.atEnd())
 	{
 		QString line = QString(qsmFile.readLine());
-		QString id   = line.mid(0,5).trimmed();
+		int id   = line.mid(0,5).trimmed().toInt();
 		QString smag = line.mid(33,4).trimmed();
 		if (!smag.isEmpty())
 			qsMagList.insert(id, smag.toDouble());

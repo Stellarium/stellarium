@@ -31,6 +31,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QTextStream>
 #include <QRegExp>
@@ -364,6 +365,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(QChar(0x00B0)); // Degree sign
 			oss << "<br />";
 		}
+
+		QDate sd = lastUpdated.date();
+		oss << QString("%1: %2 %3 %4 %5 %6").arg(q_("Last updated TLE")).arg(sd.day())
+		       .arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
+		       .arg(qc_("at","at time")).arg(lastUpdated.time().toString("hh:mm:ss")) << "<br />";
 
 		// Groups of the artificial satellites
 		QStringList groupList;
