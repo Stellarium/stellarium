@@ -45,7 +45,6 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 	mConnection.setServer(host.toStdString().c_str(), port);
 	mConnection.watchDevice(mDevice.toStdString().c_str());
 	mConnection.connectServer();
-	qWarning() << "TelescopeClientINDI";
 }
 
 TelescopeClientINDI::~TelescopeClientINDI()
