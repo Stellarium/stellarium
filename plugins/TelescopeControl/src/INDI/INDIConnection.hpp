@@ -63,7 +63,7 @@ private:
 	void setSpeed(int speed);
 
 	mutable std::mutex mMutex;
-	INDI::BaseDevice* mTelescope = Q_NULLPTR;
+	INDI::BaseDevice* mTelescope = Q_NULLPTR;	
 	Coordinates mCoordinates;
 	QStringList mDevices;
 
@@ -80,6 +80,8 @@ public: // from INDI::BaseClient
 	void newMessage(INDI::BaseDevice *dp, int messageID) override;
 	void serverConnected() override;
 	void serverDisconnected(int exit_code) override;
+	void unParkTelescope();
+	//void parkTelescope();
 };
 
 #endif // INDICONNECTION_HPP

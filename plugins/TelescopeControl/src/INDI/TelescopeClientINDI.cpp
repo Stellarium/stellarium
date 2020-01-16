@@ -45,6 +45,7 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 	mConnection.setServer(host.toStdString().c_str(), port);
 	mConnection.watchDevice(mDevice.toStdString().c_str());
 	mConnection.connectServer();
+	qWarning() << "TelescopeClientINDI";
 }
 
 TelescopeClientINDI::~TelescopeClientINDI()
@@ -85,6 +86,9 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 	positionJNow.RA = longitudeRad;
 	positionJNow.DEC = latitudeRad;
 
+	// unpark telescope before slewing!
+	// TODO: Add commands and buttons for park/unpark telescope for all telescopes
+	mConnection.unParkTelescope();
 	mConnection.setPosition(positionJNow);
 }
 

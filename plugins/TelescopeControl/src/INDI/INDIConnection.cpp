@@ -81,6 +81,67 @@ const QStringList INDIConnection::devices() const
 	return mDevices;
 }
 
+void INDIConnection::unParkTelescope()
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
+
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_PARK");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		return;
+	}
+
+	ISwitch *park = IUFindSwitch(switchVector, "PARK");
+	if (park->s == ISS_ON)
+	{
+		park->s = ISS_OFF;
+		sendNewSwitch(switchVector);
+	}
+
+	// The telescope will work without running command below, but I use it to avoid undefined state for parking property.
+	ISwitch *unpark = IUFindSwitch(switchVector, "UNPARK");
+	if (unpark->s == ISS_OFF)
+	{
+		unpark->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+}
+
+/*
+ * Unused at the moment
+ * TODO: Enable method after changes in the GUI
+void INDIConnection::parkTelescope()
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
+
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_PARK");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		return;
+	}
+
+	ISwitch *park = IUFindSwitch(switchVector, "PARK");
+	if (park->s == ISS_OFF)
+	{
+		park->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+
+	ISwitch *unpark = IUFindSwitch(switchVector, "UNPARK");
+	if (unpark->s == ISS_ON)
+	{
+		unpark->s = ISS_OFF;
+		sendNewSwitch(switchVector);
+	}
+}
+*/
+
 void INDIConnection::moveNorth(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
