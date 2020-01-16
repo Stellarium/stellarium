@@ -42,6 +42,9 @@ if [ -n "$tmpmofiles" ]; then
     itstool -i $ASMETAINFOITS -j $tmpxmlfile -o $metainfo_file $tmpmofiles
 fi
 
+# format (pretty print)
+xmllint --fromat --output $metainfo_file $metainfo_file
+
 # cleanup
 rm -rf $tmpdir
 rm $tmpxmlfile
