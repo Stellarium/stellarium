@@ -365,8 +365,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), sm, SLOT(map()));
 	connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
 
-	// AW: Seems the block below is not need anymore
-	/*
 	connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(rotateCcdMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(rotateCcdMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
@@ -374,7 +372,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	*/
 
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
