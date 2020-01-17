@@ -118,7 +118,10 @@ void SolarSystemEditor::init()
 	{
 		//Make sure that a user ssystem_minor.ini actually exists
 		if (!cloneSolarSystemConfigurationFile())
+		{
+			qWarning() << "SolarSystemEditor: Cannot copy ssystem_minor.ini to user data directory. Plugin will not work.";
 			return;
+		}
 
 		mainWindow = new SolarSystemManagerWindow();
 	}
