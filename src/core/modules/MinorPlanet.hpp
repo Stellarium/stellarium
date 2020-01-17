@@ -54,7 +54,7 @@ public:
 		    bool hidden,
 		    const QString &pTypeStr);
 
-	~MinorPlanet();
+	~MinorPlanet() Q_DECL_OVERRIDE;
 
 	//Inherited from StelObject via Planet
 	//! Get a string with data about the MinorPlanet.
@@ -69,17 +69,17 @@ public:
 	//! \param core the StelCore object
 	//! \param flags a set of InfoStringGroup items to include in the return value.
 	//! \return a QString containing an HMTL encoded description of the MinorPlanet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const Q_DECL_OVERRIDE;
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! sets the nameI18 property with the appropriate translation.
-	//! Function overriden to handle the problem with name conflicts.
-	virtual void translateName(const StelTranslator& trans);
-	virtual QString getEnglishName(void) const;
-	virtual QString getNameI18n(void) const;
+	//! Function overridden to handle the problem with name conflicts.
+	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 
