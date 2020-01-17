@@ -42,9 +42,13 @@ if [ -n "$tmpmofiles" ]; then
     itstool -i $ASMETAINFOITS -j $tmpxmlfile -o $metainfo_file $tmpmofiles
 fi
 
-# format (pretty print)
-xmllint --fromat --output $metainfo_file $metainfo_file
-
 # cleanup
 rm -rf $tmpdir
 rm $tmpxmlfile
+
+# update list of releases
+./update_releases_appdata.pl
+
+# format (pretty print)
+xmllint --fromat --output $metainfo_file $metainfo_file
+

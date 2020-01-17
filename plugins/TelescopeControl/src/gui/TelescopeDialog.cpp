@@ -587,7 +587,7 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 			break;
 		case ConnectionINDI:
 			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("remote, INDI");
+			typeLabel = N_("remote, INDI/INDIGO");
 			break;
 		case ConnectionASCOM:
 			// TRANSLATORS: Telescope connection type

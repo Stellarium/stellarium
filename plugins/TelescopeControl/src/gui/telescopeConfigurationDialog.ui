@@ -237,16 +237,16 @@
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeINDI">
         <property name="text">
-         <string notr="true">INDI</string>
+         <string notr="true">INDI/INDIGO</string>
         </property>
        </widget>
       </item>
       <item>
-        <widget class="QRadioButton" name="radioButtonTelescopeASCOM">
-          <property name="text">
-            <string notr="true">ASCOM</string>
-          </property>
-        </widget>
+       <widget class="QRadioButton" name="radioButtonTelescopeASCOM">
+        <property name="text">
+         <string notr="true">ASCOM</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
@@ -279,9 +279,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-348</y>
+        <y>0</y>
         <width>519</width>
-        <height>714</height>
+        <height>733</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -477,22 +477,22 @@
        <item>
         <widget class="TelescopeClientINDIWidget" name="INDIProperties" native="true"/>
        </item>
-        <item>
-          <layout class="QVBoxLayout" name="ASCOMLayout">
-            <property name="leftMargin">
-              <number>0</number>
-            </property>
-            <property name="topMargin">
-              <number>0</number>
-            </property>
-            <property name="rightMargin">
-              <number>0</number>
-            </property>
-            <property name="bottomMargin">
-              <number>0</number>
-            </property>
-          </layout>
-        </item>
+       <item>
+        <layout class="QVBoxLayout" name="ASCOMLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </item>
        <item>
         <widget class="QGroupBox" name="groupBoxDeviceSettings">
          <property name="title">
