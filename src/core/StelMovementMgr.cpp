@@ -243,8 +243,9 @@ void StelMovementMgr::setEquatorialMount(bool b)
 
 		StelProjector::StelProjectorParams projectorParams = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
 		StelPainter painter(StelApp::getInstance().getCore()->getProjection2d());
-		int xPosition = qRound(projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0]) - (painter.getFontMetrics().boundingRect(mode).width()/2);
-		int yPosition = qRound(projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1]) - (painter.getFontMetrics().height()/2);
+		int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
+		int xPosition = qRound(projectorParams.viewportCenter[0] - painter.getFontMetrics().boundingRect(mode).width()/2);
+		int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - painter.getFontMetrics().height()/2);
 		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getScreenFontSize() + 3, "#99FF99", true, 2000);
 	}
 }

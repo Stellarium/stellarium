@@ -1026,10 +1026,9 @@ void Oculars::enableOcular(bool enableOcularMode)
 			QFontMetrics metrics(font);
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = qRound(projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0]);
-			xPosition -= 0.5 * (metrics.width(labelText));
-			int yPosition = qRound(projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1]);
-			yPosition -= 0.5 * (metrics.height());
+			int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
+			int xPosition = qRound(projectorParams.viewportCenter[0] - 0.5 * metrics.width(labelText));
+			int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 0.5 * metrics.height());
 			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
 									true, font.pixelSize(), tcolor);
@@ -1579,7 +1578,6 @@ void Oculars::paintCCDBounds()
 
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	double screenFOV = static_cast<double>(params.fov);
-
 	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
 			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
 
@@ -1834,7 +1832,7 @@ void Oculars::paintTelrad()
 	if (!flagShowOculars)
 	{
 		StelCore *core = StelApp::getInstance().getCore();
-		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
+		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);		
 		// StelPainter drawing
 		StelPainter painter(projector);		
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
@@ -1989,15 +1987,13 @@ void Oculars::paintText(const StelCore* core)
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
 	QString widthString = "MMMMMMMMMMMMMMMMMMM";
-	const float insetFromRHS = painter.getFontMetrics().width(widthString);
+	const double insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportXywh[2] - qRound(projectorParams.viewportCenterOffset[0]);
-	xPosition -= insetFromRHS;
-	int yPosition = projectorParams.viewportXywh[3] - qRound(projectorParams.viewportCenterOffset[1]);
-	yPosition -= 40;
+	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
+	int xPosition = qRound(projectorParams.viewportCenter[0] - insetFromRHS);
+	int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 40);
 	const int lineHeight = painter.getFontMetrics().height();
-	
-	
+
 	// The Ocular
 	if (flagShowOculars && ocular!=Q_NULLPTR)
 	{
@@ -2017,7 +2013,7 @@ void Oculars::paintText(const StelCore* core)
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length())
 		{
-			xPosition -= (insetFromRHS*0.5f);
+			xPosition -= qRound(insetFromRHS*0.5);
 		}
 		painter.drawText(xPosition, yPosition, ocularNumberLabel);
 		yPosition-=lineHeight;
