@@ -54,7 +54,7 @@
 #   DSW: Deep-Sky Wonders: A Tour of the Universe with Sky and Telescope's Sue French, Firefly Books, 2011
 #   TSS: Treasures of the Southern Sky by Robert Gendler, Lars Lindberg Christensen and David Malin, Springer-Verlag New York, 2011; DOI: 10.1007/978-1-4614-0628-0
 #   BCH: Robert Burnham Jr., Burnham's Celestial Handbook: An Observer's Guide to the Universe Beyond the Solar System, Vol. 1-3, Dover Publications, 1978-1979
-#   DWH: Walter Scott Houston, Stephen James O'Meara, Deep-Sky Wonders, Sky Pub Cor, 1998. ISBN 978-0933346932
+#   DWH: Walter Scott Houston, Stephen James O'Meara, Deep-Sky Wonders, Sky Pub Cor, 1999. ISBN 0-933346-93-X
 #   SG: Deep-Sky Companions: Southern Gems by Stephen James O'Meara, Cambridge University Press, 2013. ISBN 978-1107015012
 #   HT: Deep-Sky Companions: Hidden Treasures by Stephen James O'Meara, Cambridge University Press, 2007. ISBN 978-0521837040
 #   SD: Deep-Sky Companions: The Secret Deep by Stephen James O'Meara, Cambridge University Press, 2011. ISBN 978-0521198769
@@ -322,7 +322,8 @@ NGC  2546            _("Heart and Dagger Cluster") # B500, SG, HT
 NGC  2546            _("Wounded Heart Cluster") # SG, HT
 NGC  2547            _("Golden Earring Cluster") # SG, HT
 NGC  2547            _("St. Peter's Cross Cluster") # SG, HT
-NGC  2548            _("Beehive Cluster") # DWH
+# Apparently this is misprint on page 96
+# NGC  2548            _("Beehive Cluster") # DWH
 NGC  2557            _("Malus Cluster") # SG, HT
 NGC  2573            _("Polarissima Australis") # SIMBAD, WSO, WSG
 NGC  2632            _("Beehive Cluster") # WK, SIMBAD, DSW, BCH, SOG, PSA, BH, CC, DSNI
