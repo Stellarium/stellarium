@@ -1277,7 +1277,7 @@ void Satellites::updateFromOnlineSources()
 	for (auto url : updateUrls)
 	{
 		TleSource source;
-		source.file = 0;
+		source.file = Q_NULLPTR;
 		source.addNew = false;
 		if (url.startsWith("1,"))
 		{
@@ -1673,7 +1673,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
-				if (!lastData.name.isEmpty() &&	!lastData.first.isEmpty())
+				if (!lastData.name.isEmpty() && !lastData.first.isEmpty())
 				{
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
