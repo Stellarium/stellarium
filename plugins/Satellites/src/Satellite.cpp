@@ -272,6 +272,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 {
 	QString str;
 	QTextStream oss(&str);
+	QString degree = QChar(0x00B0);
 	
 	if (flags & Name)
 	{
@@ -339,6 +340,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(mins).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
+		float inclination = getSatInclinationFromLine2(tleElements.second.data());
+		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
+		       .arg(QString::number(inclination, 'f', 4)).arg(degree) << "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
@@ -379,7 +383,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		{  // Iridium
 			oss << QString("%1: %2%3").arg(q_("Sun reflection angle"))
 			       .arg(sunReflAngle,0,'f',1)
-			       .arg(QChar(0x00B0)); // Degree sign
+			       .arg(degree);
 			oss << "<br />";
 		}
 
@@ -457,6 +461,12 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+float Satellite::getSatInclinationFromLine2(QString tle2) const
+{
+	QString incl = tle2.left(16).right(7);
+	return incl.toFloat();
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
