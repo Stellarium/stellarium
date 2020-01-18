@@ -303,6 +303,7 @@ private:
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED
 
+	Vec3f    infoColor;
 	//Satellite Orbit Draw
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days

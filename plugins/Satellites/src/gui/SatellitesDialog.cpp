@@ -130,7 +130,9 @@ void SatellitesDialog::createDialogContent()
 	// Set symbols on buttons
 	ui->addSatellitesButton->setText(QChar(0x2795)); // Heavy plus symbol
 	ui->removeSatellitesButton->setText(QChar(0x2796)); // Heavy minus symbol
-	ui->satColorPickerButton->setText(QChar(0x2740)); // Florette symbol
+	ui->satMarkerColorPickerButton->setText(QChar(0x2740)); // Florette symbol
+	ui->satOrbitColorPickerButton->setText(QChar(0x2740)); // Florette symbol
+	ui->satInfoColorPickerButton->setText(QChar(0x2740)); // Florette symbol
 	ui->saveSatellitesButton->setText(QString());
 	ui->addSourceButton->setText(QChar(0x2795)); // Heavy plus symbol
 	ui->deleteSourceButton->setText(QChar(0x2796)); // Heavy minus symbol
@@ -201,7 +203,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->orbitCheckbox,     SIGNAL(clicked()), this, SLOT(setFlags()));
 	connect(ui->userCheckBox,      SIGNAL(clicked()), this, SLOT(setFlags()));
 
-	connect(ui->satColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatColor()));
+	connect(ui->satMarkerColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatMarkerColor()));
+	connect(ui->satOrbitColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
+	connect(ui->satInfoColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,  SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
 
 
@@ -241,8 +245,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 }
 
-// for now, the color picker changes hintColor AND orbitColor at once
-void SatellitesDialog::askSatColor()
+void SatellitesDialog::askSatMarkerColor()
 {
 	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
 
@@ -251,7 +254,7 @@ void SatellitesDialog::askSatColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-	QColor c = QColorDialog::getColor(buttonColor, Q_NULLPTR, "");
+	QColor c = QColorDialog::getColor(buttonMarkerColor, Q_NULLPTR, "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -262,14 +265,70 @@ void SatellitesDialog::askSatColor()
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
-
 			sat->hintColor = vColor;
+		}
+
+		// colorize the button
+		buttonMarkerColor = c;
+		ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+	}
+}
+
+void SatellitesDialog::askSatOrbitColor()
+{
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+
+	if (selection.isEmpty()) return;
+
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
+
+	QColor c = QColorDialog::getColor(buttonOrbitColor, Q_NULLPTR, "");
+	if (c.isValid())
+	{
+		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		SatelliteP sat;
+
+		// colorize all selected satellites
+		for (int i = 0; i < selection.size(); i++)
+		{
+			const QModelIndex& index = selection.at(i);
+			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->orbitColor = vColor;
 		}
 
 		// colorize the button
-		buttonColor = c;
-		ui->satColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonColor.name() + "; }");
+		buttonOrbitColor = c;
+		ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+	}
+}
+
+void SatellitesDialog::askSatInfoColor()
+{
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+
+	if (selection.isEmpty()) return;
+
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
+
+	QColor c = QColorDialog::getColor(buttonInfoColor, Q_NULLPTR, "");
+	if (c.isValid())
+	{
+		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		SatelliteP sat;
+
+		// colorize all selected satellites
+		for (int i = 0; i < selection.size(); i++)
+		{
+			const QModelIndex& index = selection.at(i);
+			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
+			sat->infoColor = vColor;
+		}
+
+		// colorize the button
+		buttonInfoColor = c;
+		ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 	}
 }
 
@@ -460,11 +519,12 @@ void SatellitesDialog::updateSatelliteData()
 	// needed for colorbutton
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
-	Vec3f vColor;
+	Vec3f mColor, oColor, iColor;
 
 	// set default
-	buttonColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-
+	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 
 	if (selection.count() > 1)
 	{
@@ -479,7 +539,9 @@ void SatellitesDialog::updateSatelliteData()
 			QString id = index.data(Qt::UserRole).toString();
 			SatelliteP sat = SatellitesMgr->getById(id);
 
-			vColor = sat->hintColor;
+			mColor = sat->hintColor;
+			oColor = sat->orbitColor;
+			iColor = sat->infoColor;
 
 			for (int i = 1; i < selection.size(); i++)
 			{
@@ -490,9 +552,11 @@ void SatellitesDialog::updateSatelliteData()
 
 				// test for more than one color in the selection.
 				// if there are, return grey
-				if (sat->hintColor != vColor)
+				if (sat->hintColor != mColor || sat->orbitColor != oColor || sat->infoColor != iColor)
 				{
-					vColor = Vec3f(0.4, 0.4, 0.4);
+					mColor = Vec3f(0.4f, 0.4f, 0.4f);
+					oColor = Vec3f(0.4f, 0.4f, 0.4f);
+					iColor = Vec3f(0.4f, 0.4f, 0.4f);
 					break;
 				}
 			}
@@ -536,12 +600,18 @@ void SatellitesDialog::updateSatelliteData()
 		// get color of the one selected sat
 		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = SatellitesMgr->getById(id);
-		vColor = sat->hintColor;
+		mColor = sat->hintColor;
+		oColor = sat->orbitColor;
+		iColor = sat->infoColor;
 	}
 
 	// colorize the colorpicker button
-	buttonColor.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	ui->satColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonColor.name() + "; }");
+	buttonMarkerColor.setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
+	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+	buttonOrbitColor.setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
+	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+	buttonInfoColor.setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
+	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();

@@ -615,7 +615,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="satColorPickerButton">
+            <widget class="QPushButton" name="satMarkerColorPickerButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -623,10 +623,42 @@
               </sizepolicy>
              </property>
              <property name="toolTip">
-              <string>Change color for selected satellites</string>
+              <string>Change markers color for selected satellites</string>
              </property>
              <property name="text">
-              <string notr="true">Color</string>
+              <string notr="true">Marker Color</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="satOrbitColorPickerButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Change orbits color for selected satellites</string>
+             </property>
+             <property name="text">
+              <string notr="true">Orbit Color</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="satInfoColorPickerButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Change info color for selected satellites</string>
+             </property>
+             <property name="text">
+              <string notr="true">Info Color</string>
              </property>
             </widget>
            </item>
@@ -1048,7 +1080,7 @@
   <tabstop>tleSecondLineEdit</tabstop>
   <tabstop>addSatellitesButton</tabstop>
   <tabstop>removeSatellitesButton</tabstop>
-  <tabstop>satColorPickerButton</tabstop>
+  <tabstop>satMarkerColorPickerButton</tabstop>
   <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>

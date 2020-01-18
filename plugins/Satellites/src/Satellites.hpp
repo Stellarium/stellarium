@@ -576,7 +576,6 @@ private:
 	// FIXME: Possible bug with the Solar System recreated by the SSEditor.
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
-	Vec3f defaultOrbitColor;
 	QFont labelFont;
 	
 	//! @name Updater module

@@ -82,8 +82,7 @@ Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
 	, earth(Q_NULLPTR)
-	, defaultHintColor(0.0f, 0.4f, 0.6f)
-	, defaultOrbitColor(0.0f, 0.3f, 0.6f)
+	, defaultHintColor(0.0f, 0.4f, 0.6f)	
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, progressBar(Q_NULLPTR)
@@ -828,6 +827,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 
+
 	if (map.contains("hintColor"))
 	{
 		defaultHintColorMap = map.value("hintColor").toList();
@@ -850,6 +850,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
+		if (!satData.contains("infoColor"))
+			satData["infoColor"] = satData["hintColor"];
+
 		int sid = satId.toInt();
 		if (!satData.contains("stdMag") && qsMagList.contains(sid))
 			satData["stdMag"] = qsMagList[sid];
@@ -871,7 +874,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 QVariantMap Satellites::createDataMap(void)
 {
 	QVariantMap map;
-	QVariantList defHintCol;
+	QVariantList defHintCol, defOrbitCol, defInfoCol;
 	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
@@ -889,6 +892,9 @@ QVariantMap Satellites::createDataMap(void)
 
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
+
+		if (satMap["infoColor"].toList() == defHintCol)
+			satMap.remove("infoColor");
 
 		if (satMap["stdMag"].toFloat() == 99.f)
 			satMap.remove("stdMag");
@@ -998,7 +1004,7 @@ bool Satellites::add(const TleData& tleData)
 	satProperties.insert("name", tleData.name);
 	satProperties.insert("tle1", tleData.first);
 	satProperties.insert("tle2", tleData.second);
-	satProperties.insert("hintColor", hintColor);
+	satProperties.insert("hintColor", hintColor);	
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
