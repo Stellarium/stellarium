@@ -322,12 +322,18 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & Extra)
 	{
+		QString km = qc_("km", "distance");
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
-		oss << QString("%1: %2 %3").arg(q_("Range")).arg(range, 5, 'f', 2).arg(qc_("km", "distance")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("Range")).arg(range, 5, 'f', 2).arg(km) << "<br/>";
 		// TRANSLATORS: Rate at which the distance changes
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
-		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(height, 5, 'f', 2).arg(qc_("km", "distance")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(height, 5, 'f', 2).arg(km) << "<br/>";
+		Vec2d pa = pSatWrapper->getPerigeeApogeeAltitudes();
+		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
+		       .arg(QString::number(pa[0], 'f', 2)).arg(km)
+		       .arg(QString::number(pa[1], 'f', 2)).arg(km)
+		<< "<br/>";
 		double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 		if (orbitalPeriod>0.0)
 		{
@@ -340,9 +346,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(mins).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
-		float inclination = getSatInclinationFromLine2(tleElements.second.data());
-		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
-		       .arg(QString::number(inclination, 'f', 4)).arg(degree) << "<br/>";
+		double inclination = pSatWrapper->getOrbitalInclination();
+		oss << QString("%1: %2 (%3%4)")
+		       .arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
+		       .arg(QString::number(inclination, 'f', 4)).arg(degree)
+		<< "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
@@ -463,12 +471,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
-float Satellite::getSatInclinationFromLine2(QString tle2) const
-{
-	QString incl = tle2.left(16).right(7);
-	return incl.toFloat();
-}
-
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
@@ -481,7 +483,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	if (!internationalDesignator.isEmpty())
 		map.insert("international-designator", internationalDesignator);
 
-	if (stdMag==99.f) // replace whatever has been computed
+	if (stdMag==99.) // replace whatever has been computed
 	{
 		map.insert("vmag", "?");
 		map.insert("vmage", "?");
@@ -498,7 +500,12 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("TEME-speed-X", velocity[0]);
 	map.insert("TEME-speed-Y", velocity[1]);
 	map.insert("TEME-speed-Z", velocity[2]);
-	if (sunReflAngle>0)
+	map.insert("inclination", pSatWrapper->getOrbitalInclination());
+	map.insert("period", pSatWrapper->getOrbitalPeriod());
+	Vec2d pa = pSatWrapper->getPerigeeApogeeAltitudes();
+	map.insert("perigee-altitude", pa[0]);
+	map.insert("apogee-altitude", pa[0]);
+	if (sunReflAngle>0.)
 	{  // Iridium
 		map.insert("sun-reflection-angle", sunReflAngle);
 	}

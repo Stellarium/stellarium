@@ -102,13 +102,13 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational		= 2,
+		StatusNonoperational	= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission		= 6,
+		StatusExtendedMission	= 6,
 		StatusDecayed			= 7,
-		StatusUnknown			= 0
+		StatusUnknown		= 0
 	};
 
 	//! \param identifier unique identifier (currently the Catalog Number)
@@ -151,6 +151,10 @@ public:
 	//! - height (height in km)
 	//! - subpoint-lat (latitude of subpoint, decimal degrees)
 	//! - subpoint-long (longitude of subpoint, decimal degrees)
+	//! - inclination (decimal degrees)
+	//! - period (minutes)
+	//! - perigee-altitude (height in km)
+	//! - apogee-altitude (height in km)
 	//! - TEME-km-X
 	//! - TEME-km-Y
 	//! - TEME-km-Z
@@ -217,7 +221,6 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	float getSatInclinationFromLine2(QString tle2) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.

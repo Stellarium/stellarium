@@ -250,6 +250,16 @@ double gSatWrapper::getOrbitalPeriod() const
 	return pSatellite->getPeriod();
 }
 
+double gSatWrapper::getOrbitalInclination() const
+{
+	return pSatellite->getInclination();
+}
+
+Vec2d gSatWrapper::getPerigeeApogeeAltitudes() const
+{
+	return pSatellite->getPerigeeApogee();
+}
+
 gTime gSatWrapper::epoch;
 gTime gSatWrapper::lastSunECIepoch=0.0; // store last time of computation to avoid all-1 computations.
 gTime gSatWrapper::lastCalcObserverECIPosition;
