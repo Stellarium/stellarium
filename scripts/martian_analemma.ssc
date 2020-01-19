@@ -1,6 +1,6 @@
 //
 // Author: Alexander Wolf
-// Version: 1.0
+// Version: 1.1
 // License: Public Domain
 // Name: Martian analemma
 // Description: A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.
@@ -16,6 +16,7 @@ core.setGuiVisible(false);
 label = LabelMgr.labelScreen(tr("Martian analemma"), 20, 20, false, 30, color);
 LabelMgr.setLabelShow(label, true);
 core.wait(1);
+core.setTimeRate(1);
 core.clear("natural");
 core.setObserverLocation(0, 40, 1, 1, "", "Mars");
 core.setDate("2019-12-01T23:55:00", "UTC");

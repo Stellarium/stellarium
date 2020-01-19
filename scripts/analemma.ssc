@@ -1,6 +1,6 @@
 //
 // Author: Alexander Wolf
-// Version: 2.0
+// Version: 2.1
 // License: Public Domain
 // Name: Analemma
 // Description: A demonstration of the analemma - the path of the Sun across the sky during the year on Earth.
@@ -12,6 +12,7 @@ core.goHome();
 var JD = core.getJDay();
 var color = "#aa0000";
 core.setGuiVisible(false);
+core.setTimeRate(1);
 label = LabelMgr.labelScreen(tr("Analemma"), 20, 20, false, 30, color);
 LabelMgr.setLabelShow(label, true);
 core.wait(1);

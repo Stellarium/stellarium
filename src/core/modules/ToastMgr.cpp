@@ -106,15 +106,3 @@ bool ToastMgr::getFlagShow() const
 {
 	return *fader;
 }
-
-void ToastMgr::setFlagSurveyShow(bool displayed)
-{
-	qWarning() << "WARNING: ToastMgr.setFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
-	setFlagShow(displayed);
-}
-
-bool ToastMgr::getFlagSurveyShow(void) const
-{
-	qWarning() << "WARNING: ToastMgr.getFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
-	return getFlagShow();
-}
