@@ -69,6 +69,18 @@ public slots:
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setPassword(const QString& pw);
 
+	//! Sets wether CORS is enabled.
+	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
+	void setEnableCors(bool v);
+	//! Returns if CORS is enabled
+	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
+	bool getEnableCors() { return enableCors; }
+	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
+	void setCorsHosts(const QString& hosts);
+
+
+
+
 private slots:
 	void refreshTemplates();
 
@@ -80,6 +92,8 @@ private:
 
 	bool usePassword;
 	QString password;
+	bool enableCors;
+	QString corsHosts;
 	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;

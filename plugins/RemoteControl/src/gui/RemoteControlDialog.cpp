@@ -91,9 +91,21 @@ void RemoteControlDialog::createDialogContent()
 	ui->portNumberSpinBox->setValue(rc->getPort());
 	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
 
+	ui->enableCorsCheckbox->setChecked(rc->getFlagEnableCors());
+	connect(ui->enableCorsCheckbox, SIGNAL(toggled(bool)), rc, SLOT(setFlagEnableCors(bool)));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), ui->enableCorsCheckbox, SLOT(setChecked(bool)));
+
+	ui->corsHostsEdit->setEnabled(rc->getFlagEnableCors());
+	ui->corsHostsEdit->setText(rc->getCorsHosts());
+
+	connect(rc,SIGNAL(flagEnableCorsChanged(bool)),ui->corsHostsEdit,SLOT(setEnabled(bool)));
+	connect(ui->corsHostsEdit, SIGNAL(textChanged(QString)), rc, SLOT(setCorsHosts(QString)));
+
 	ui->restartPanel->setVisible(false);
 	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(corsHostsChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
 
 	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
