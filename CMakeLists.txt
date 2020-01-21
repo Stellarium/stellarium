@@ -259,11 +259,6 @@ IF(APPLE)
 
      # We support only 64 bits MacOSX
      SET(CMAKE_OSX_ARCHITECTURES "x86_64")
- 
-     IF(STELLARIUM_OSX_CERTIFICATE)
-          ADD_DEFINITIONS(-DSTELLARIUM_OSX_CERTIFICATE)
-          MESSAGE(STATUS "Defined certificate for OSX bundle: ${STELLARIUM_OSX_CERTIFICATE}")
-     ENDIF()
 ENDIF()
 
 # This activates Link Time Optimization on recent GCC
