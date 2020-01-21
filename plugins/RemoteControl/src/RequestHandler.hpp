@@ -64,7 +64,6 @@ public slots:
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setUsePassword(bool v);
 	//! Returns if a password is required to access the remote control
-	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	bool getUsePassword() { return usePassword; }
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setPassword(const QString& pw);
@@ -73,7 +72,6 @@ public slots:
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setEnableCors(bool v);
 	//! Returns if CORS is enabled
-	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	bool getEnableCors() { return enableCors; }
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setCorsHosts(const QString& hosts);
