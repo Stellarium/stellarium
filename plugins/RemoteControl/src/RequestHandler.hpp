@@ -73,6 +73,7 @@ public slots:
 	void setEnableCors(bool v);
 	//! Returns if CORS is enabled
 	bool getEnableCors() { return enableCors; }
+	//! Set the host for which CORS is enabled. Specify "*" to let any website take control.
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setCorsHosts(const QString& hosts);
 
