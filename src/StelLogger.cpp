@@ -301,6 +301,7 @@ void StelLogger::writeLog(QString msg)
 
 QString StelLogger::getMsvcVersionString(int ver)
 {
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
 	QString version;
 	switch(ver)
 	{
@@ -345,6 +346,18 @@ QString StelLogger::getMsvcVersionString(int ver)
 			break;
 		case 1916:
 			version = "MSVC++ 15.9 (Visual Studio 2017)";
+			break;
+		case 1920:
+			version = "MSVC++ 16.0 (Visual Studio 2019 RTW)";
+			break;
+		case 1921:
+			version = "MSVC++ 16.1 (Visual Studio 2019)";
+			break;
+		case 1922:
+			version = "MSVC++ 16.2 (Visual Studio 2019)";
+			break;
+		case 1923:
+			version = "MSVC++ 16.3 (Visual Studio 2019)";
 			break;
 		default:
 			version = "unknown MSVC++ version";

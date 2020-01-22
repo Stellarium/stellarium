@@ -666,8 +666,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((coordFuncName=="ell_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="kepler_orbit")) // ell_orbit used for planet moons. TODO: rename to kepler_orbit for all!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
-			// Read the orbital elements
-			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
+			// Read the orbital elements			
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity", 0.0).toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
 			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble(); // AU, or km for ell_orbit!
@@ -686,7 +685,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 								? 0.0 // parabolic orbits have no semi_major_axis
 								: pericenterDistance / (1.0-eccentricity);
 			}
-			if (parent->englishName!="Sun")
+			//if (parent->englishName!="Sun")
+			if (strParent!="Sun")
 				pericenterDistance /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
 
 			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble(); // degrees/day
@@ -778,8 +778,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			orbitPtr = orb;
 			posfunc = &keplerOrbitPosFunc;
 		}
-
-		else {
+		else
+		{
 			static const QMap<QString, posFuncType>posfuncMap={
 				{ "sun_special",       &get_sun_helio_coordsv},
 				{ "mercury_special",   &get_mercury_helio_coordsv},
