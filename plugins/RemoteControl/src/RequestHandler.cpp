@@ -85,7 +85,7 @@ private:
 	StelTranslator* rcTranslator;
 };
 
-RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), templateMutex(QMutex::Recursive)
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex(QMutex::Recursive)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -155,6 +155,13 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 		}
 	}
 
+	if(enableCors)
+	{
+		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
+		response.setHeader("Vary","Origin");
+	}
+
 	//QByteArray rawPath = request.getRawPath();
 	QByteArray path = request.getPath();
 	//qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
@@ -215,6 +222,17 @@ void RequestHandler::setPassword(const QString &pw)
 	arr.prepend(':');
 	passwordReply = "Basic " + arr.toBase64();
 }
+
+void RequestHandler::setEnableCors(bool v)
+{
+	enableCors = v;
+}
+
+void RequestHandler::setCorsOrigin(const QString &origin)
+{
+	corsOrigin = origin;
+}
+
 
 void RequestHandler::refreshTemplates()
 {
