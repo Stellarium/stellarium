@@ -157,7 +157,7 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 
 	if(enableCors)
 	{
-		response.setHeader("Access-Control-Allow-Origin",corsHosts.toUtf8());
+		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
 		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
 		response.setHeader("Vary","Origin");
 	}
@@ -228,9 +228,9 @@ void RequestHandler::setEnableCors(bool v)
 	enableCors = v;
 }
 
-void RequestHandler::setCorsHosts(const QString &hosts)
+void RequestHandler::setCorsOrigin(const QString &origin)
 {
-	corsHosts = hosts;
+	corsOrigin = origin;
 }
 
 

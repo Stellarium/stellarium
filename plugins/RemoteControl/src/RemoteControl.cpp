@@ -73,7 +73,7 @@ RemoteControl::RemoteControl()
 	, usePassword(false)
 	, password("")
 	, enableCors(false)
-	, corsHosts("")
+	, corsOrigin("")
 	, port(8090)
 	, minThreads(1)
 	, maxThreads(30)
@@ -241,12 +241,12 @@ void RemoteControl::setFlagEnableCors(bool b)
 	}
 }
 
-void RemoteControl::setCorsHosts(const QString &corsHosts)
+void RemoteControl::setCorsOrigin(const QString &corsOrigin)
 {
-	if(corsHosts != this->corsHosts)
+	if(corsOrigin != this->corsOrigin)
 	{
-		this->corsHosts = corsHosts;
-		emit corsHostsChanged(corsHosts);
+		this->corsOrigin = corsOrigin;
+		emit corsOriginChanged(corsOrigin);
 	}
 }
 
@@ -267,7 +267,7 @@ void RemoteControl::startServer()
 	requestHandler->setPassword(password);
 	requestHandler->setUsePassword(usePassword);
 	requestHandler->setEnableCors(enableCors);
-	requestHandler->setCorsHosts(corsHosts);
+	requestHandler->setCorsOrigin(corsOrigin);
 	HttpListenerSettings settings;
 	settings.port = port;
 	settings.minThreads = minThreads;
@@ -302,7 +302,7 @@ void RemoteControl::loadSettings()
 	setFlagUsePassword(conf->value("use_password", false).toBool());
 	setPassword(conf->value("password", "").toString());
 	setFlagEnableCors(conf->value("enable_cors", false).toBool());
-	setCorsHosts(conf->value("cors_hosts", "").toString());
+	setCorsOrigin(conf->value("cors_origin", "").toString());
 	setPort(conf->value("port", 8090).toInt());
 	minThreads = conf->value("min_threads", 1).toInt();
 	maxThreads = conf->value("max_threads", 30).toInt();
@@ -316,7 +316,7 @@ void RemoteControl::saveSettings()
 	conf->setValue("use_password", usePassword);
 	conf->setValue("password", password);
 	conf->setValue("enable_cors", enableCors);
-	conf->setValue("cors_hosts", corsHosts);
+	conf->setValue("cors_origin", corsOrigin);
 	conf->setValue("port", port);
 	conf->setValue("min_threads", minThreads);
 	conf->setValue("max_threads", maxThreads);

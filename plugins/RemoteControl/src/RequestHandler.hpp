@@ -75,7 +75,7 @@ public slots:
 	bool getEnableCors() const { return enableCors; }
 	//! Set the host for which CORS is enabled. Specify "*" to let any website take control.
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
-	void setCorsHosts(const QString& hosts);
+	void setCorsOrigin(const QString& origin);
 
 
 
@@ -92,7 +92,7 @@ private:
 	bool usePassword;
 	QString password;
 	bool enableCors;
-	QString corsHosts;
+	QString corsOrigin;
 	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;

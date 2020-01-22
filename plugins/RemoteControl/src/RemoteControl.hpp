@@ -86,7 +86,7 @@ public:
 	bool getFlagEnableCors() const { return enableCors; }
 
 	QString getPassword() const { return password; }
-	QString getCorsHosts() const { return corsHosts; }
+	QString getCorsOrigin() const { return corsOrigin; }
 	int getPort() const {return port; }
 
 public slots:
@@ -106,8 +106,8 @@ public slots:
 	//! If true, Access-Control-Allow-Origin header will be appended to responses.
 	void setFlagEnableCors(bool b);
 
-	//! Sets the CORS hosts that are optionally enabled with setFlagEnableCors().
-	void setCorsHosts(const QString& corsHosts);
+	//! Sets the CORS origin that is optionally enabled with setFlagEnableCors().
+	void setCorsOrigin(const QString& corsOrigin);
 
 
 	//! Sets the port where the server listens. Must be done before startServer() is called,
@@ -147,7 +147,7 @@ signals:
 
 	void portChanged(int val);
 	void passwordChanged(const QString& val);
-	void corsHostsChanged(const QString& val);
+	void corsOriginChanged(const QString& val);
 
 
 private:
@@ -161,7 +161,7 @@ private:
 	bool usePassword;
 	QString password;
 	bool enableCors;
-	QString corsHosts;
+	QString corsOrigin;
 
 	int port;
 	int minThreads;
