@@ -99,6 +99,8 @@ private:
 	QMutex templateMutex;
 
 	static const QByteArray AUTH_REALM;
+
+	void handleCorsPreflightRequest(HttpRequest &request, HttpResponse &response);
 };
 
 #endif

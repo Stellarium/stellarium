@@ -137,11 +137,23 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_PLUGIN_VERSION
 	response.setHeader("Server",SERVER_HEADER);
 
+	if(QString::compare(request.getMethod(),"OPTIONS",Qt::CaseInsensitive)==0) {
+		handleCorsPreflightRequest(request,response);
+		return;
+	}
+
 	//try to support keep-alive connections
 	if(QString::compare(request.getHeader("Connection"),"keep-alive",Qt::CaseInsensitive)==0)
 		response.setHeader("Connection","keep-alive");
 	else
 		response.setHeader("Connection","close");
+
+	if(enableCors)
+	{
+		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
+		response.setHeader("Vary","Origin");
+	}
 
 	if(usePassword)
 	{
@@ -153,13 +165,6 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 			response.write("HTTP 401 Not Authorized",true);
 			return;
 		}
-	}
-
-	if(enableCors)
-	{
-		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
-		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
-		response.setHeader("Vary","Origin");
 	}
 
 	//QByteArray rawPath = request.getRawPath();
@@ -286,4 +291,13 @@ void RequestHandler::refreshTemplates()
 	{
 		qWarning()<<"[RemoteControl] "<<transFileList.fileName()<<" could not be opened, can not automatically translate files with StelTranslator!";
 	}
+}
+
+void RequestHandler::handleCorsPreflightRequest(HttpRequest &request, HttpResponse &response) {
+	response.setStatus(204,"No Content");
+	response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+	response.setHeader("Access-Control-Allow-Methods","GET, POST");
+	response.setHeader("Access-Control-Allow-Headers",request.getHeader("Access-Control-Request-Headers"));
+	response.setHeader("Access-Control-Max-Age","0");
+	response.setHeader("Vary","Origin");
 }
