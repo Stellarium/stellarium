@@ -148,6 +148,13 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 	else
 		response.setHeader("Connection","close");
 
+	if(enableCors)
+	{
+		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
+		response.setHeader("Vary","Origin");
+	}
+
 	if(usePassword)
 	{
 		//Check if the browser provided correct password, else reject request
@@ -158,13 +165,6 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 			response.write("HTTP 401 Not Authorized",true);
 			return;
 		}
-	}
-
-	if(enableCors)
-	{
-		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
-		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
-		response.setHeader("Vary","Origin");
 	}
 
 	//QByteArray rawPath = request.getRawPath();
