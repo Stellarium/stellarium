@@ -508,6 +508,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 
 		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+		// TRANSLATORS: Distance measured in terms of the speed of light
 		oss << QString("%1: %2").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) ) << "<br />";
 	}
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-01-23 21:20+0700\n"
+"POT-Creation-Date: 2020-01-23 23:12+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,7 +258,7 @@ msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1022 src/core/modules/Planet.cpp:517
+#: src/core/modules/GridLinesMgr.cpp:1022 src/core/modules/Planet.cpp:518
 #: src/core/modules/MinorPlanet.cpp:266 src/core/modules/Comet.cpp:231
 #: src/gui/AstroCalcDialog.cpp:5758 plugins/Satellites/src/Satellite.cpp:329
 #: plugins/Satellites/src/Satellite.cpp:376
@@ -540,14 +540,14 @@ msgstr ""
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:589
+#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:590
 #: src/core/modules/MinorPlanet.cpp:319
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:475
-#: src/core/modules/Planet.cpp:500 src/core/modules/Planet.cpp:592
+#: src/core/modules/Planet.cpp:500 src/core/modules/Planet.cpp:593
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/MinorPlanet.cpp:319 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:790
@@ -1791,141 +1791,142 @@ msgstr ""
 msgid "Distance from Sun"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:511
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:512
 msgid "Light time"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/Planet.cpp:527 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:237
 msgid "Orbital velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:529 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:530 src/core/modules/MinorPlanet.cpp:276
 msgid "Heliocentric velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:534 src/core/modules/MinorPlanet.cpp:281
+#: src/core/modules/Planet.cpp:535 src/core/modules/MinorPlanet.cpp:281
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:557
+#: src/core/modules/Planet.cpp:558
 msgid "with rings"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:574 src/core/modules/MinorPlanet.cpp:303
+#: src/core/modules/Planet.cpp:575 src/core/modules/MinorPlanet.cpp:303
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:584 src/core/modules/MinorPlanet.cpp:313
+#: src/core/modules/Planet.cpp:585 src/core/modules/MinorPlanet.cpp:313
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:591
+#: src/core/modules/Planet.cpp:592
 msgid "Equatorial diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:610 src/core/modules/MinorPlanet.cpp:338
+#: src/core/modules/Planet.cpp:611 src/core/modules/MinorPlanet.cpp:338
 #: src/core/modules/StarWrapper.cpp:273 src/gui/AstroCalcDialog.cpp:5775
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:614 src/core/modules/MinorPlanet.cpp:342
+#: src/core/modules/Planet.cpp:615 src/core/modules/MinorPlanet.cpp:342
 #: src/core/modules/Comet.cpp:248
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:618
+#: src/core/modules/Planet.cpp:619
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:620
+#: src/core/modules/Planet.cpp:621
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:624
+#: src/core/modules/Planet.cpp:625
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:636 src/core/modules/MinorPlanet.cpp:350
+#: src/core/modules/Planet.cpp:637 src/core/modules/MinorPlanet.cpp:350
 #: src/core/modules/Comet.cpp:256
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:656 src/core/modules/MinorPlanet.cpp:368
+#: src/core/modules/Planet.cpp:657 src/core/modules/MinorPlanet.cpp:368
 #: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:3012
 #: src/gui/AstroCalcDialog.cpp:3070 plugins/Satellites/src/Satellite.cpp:388
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:657 src/core/modules/MinorPlanet.cpp:369
+#: src/core/modules/Planet.cpp:658 src/core/modules/MinorPlanet.cpp:369
 #: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:3002
 #: src/gui/AstroCalcDialog.cpp:3060
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:658
+#: src/core/modules/Planet.cpp:659
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:660
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:682
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:683
+#: src/core/modules/Planet.cpp:684
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:685
+#: src/core/modules/Planet.cpp:686
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:688
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:690
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:691
+#: src/core/modules/Planet.cpp:692
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:693
+#: src/core/modules/Planet.cpp:694
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:695
+#: src/core/modules/Planet.cpp:696
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:698
+#: src/core/modules/Planet.cpp:699
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:698
+#: src/core/modules/Planet.cpp:699
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:711
+#: src/core/modules/Planet.cpp:712
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:716
+#: src/core/modules/Planet.cpp:717
 msgid "Eclipse magnitude"
 msgstr ""
 
