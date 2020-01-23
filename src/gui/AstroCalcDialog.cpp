@@ -355,10 +355,9 @@ void AstroCalcDialog::createDialogContent()
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
 	ui->monthlyElevationPositiveCheckBox->setChecked(plotMonthlyElevationPositive);
 	ui->monthlyElevationPositiveLimitSpinBox->setValue(conf->value("astrocalc/me_positive_limit", 0).toInt());
-	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());	
+	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
 	syncMonthlyElevationTime();
-	connect(ui->monthlyElevationTime, SIGNAL(sliderReleased()), this, SLOT(updateMonthlyElevationTime()));
-	connect(ui->monthlyElevationTime, SIGNAL(sliderMoved(int)), this, SLOT(syncMonthlyElevationTime()));
+	connect(ui->monthlyElevationTime, SIGNAL(valueChanged(int)), this, SLOT(updateMonthlyElevationTime()));
 	connect(ui->monthlyElevationPositiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMonthlyElevationPositiveFlag(bool)));
 	connect(ui->monthlyElevationPositiveLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveMonthlyElevationPositiveLimit(int)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
@@ -3274,10 +3273,10 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
 		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
-		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 3;
+		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()/5.) + 3;
 		for (int i = -2; i <= dYear; i++)
 		{
-			JD = startJD + i;
+			JD = startJD + i*5;
 			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
 			aX.append(ltime);
 			core->setJD(JD);
