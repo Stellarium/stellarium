@@ -120,7 +120,7 @@ public:
 	double getOrbitalPeriod() const;
 	//! Get orbital inclination in degrees
 	double getOrbitalInclination() const;
-	//! Get perigee/apogee altitudes in kilometers
+	//! Get perigee/apogee altitudes in kilometers for equatorial radius of Earth
 	Vec2d getPerigeeApogeeAltitudes() const;
 	static gTime getEpoch() { return epoch; }
 

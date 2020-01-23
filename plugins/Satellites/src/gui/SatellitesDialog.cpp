@@ -740,6 +740,7 @@ void SatellitesDialog::populateAboutPage()
 			.arg(jsonFileName)
 			.arg(oldJsonFileName);
 	html += "<li>" + resetSettingsText + "</li>";
+	html += "<li>" + q_("The value of perigee and apogee altitudes compute for mean Earth radius.") + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
 	html += "</ul></p>";
 

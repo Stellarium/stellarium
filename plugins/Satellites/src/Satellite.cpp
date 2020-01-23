@@ -324,16 +324,16 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		QString km = qc_("km", "distance");
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
-		oss << QString("%1: %2 %3").arg(q_("Range")).arg(range, 5, 'f', 2).arg(km) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("Range")).arg(qRound(range)).arg(km) << "<br/>";
 		// TRANSLATORS: Rate at which the distance changes
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
-		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(height, 5, 'f', 2).arg(km) << "<br/>";
-		Vec2d pa = pSatWrapper->getPerigeeApogeeAltitudes();
+		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
+		Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
-		       .arg(QString::number(pa[0], 'f', 2)).arg(km)
-		       .arg(QString::number(pa[1], 'f', 2)).arg(km)
-		<< "<br/>";
+		       .arg(qRound(pa[0])).arg(km)
+		       .arg(qRound(pa[1])).arg(km)
+		<< "<br/>";		
 		double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 		if (orbitalPeriod>0.0)
 		{
@@ -362,9 +362,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
 		QString temeCoords = QString(xyz)
-		        .arg(position[0], 5, 'f', 2)
-		        .arg(position[1], 5, 'f', 2)
-		        .arg(position[2], 5, 'f', 2);
+			.arg(qRound(position[0]))
+			.arg(qRound(position[1]))
+			.arg(qRound(position[2]));
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME coordinates")).arg(temeCoords).arg(qc_("km", "distance")) << "<br/>";
 		
@@ -395,10 +395,17 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			oss << "<br />";
 		}
 
-		QDate sd = lastUpdated.date();
-		oss << QString("%1: %2 %3 %4 %5 %6").arg(q_("Last updated TLE")).arg(sd.day())
-		       .arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
-		       .arg(qc_("at","at time")).arg(lastUpdated.time().toString("hh:mm:ss")) << "<br />";
+		QString updDate;
+		if (!lastUpdated.isValid())
+			updDate = qc_("unknown", "unknown date");
+		else
+		{
+			QDate sd = lastUpdated.date();
+			updDate = QString("%1 %2 %3 %4 %5").arg(sd.day())
+					.arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
+					.arg(qc_("at","at time")).arg(lastUpdated.time().toString("hh:mm:ss"));
+		}
+		oss << QString("%1: %2").arg(q_("Last updated TLE"), updDate) << "<br />";
 
 		// Groups of the artificial satellites
 		QStringList groupList;
@@ -471,6 +478,18 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+// Calculate perigee and apogee altitudes for mean Earth radius
+Vec2d Satellite::calculatePerigeeApogeeFromLine2(QString tle) const
+{
+	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
+	const double meanEarthRadius = 6371.0088;
+	const double k = 8681663.653;
+	const double meanMotion = tle.left(63).right(11).toDouble();
+	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
+	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	return Vec2d(semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius, semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius);
+}
+
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
@@ -502,7 +521,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("TEME-speed-Z", velocity[2]);
 	map.insert("inclination", pSatWrapper->getOrbitalInclination());
 	map.insert("period", pSatWrapper->getOrbitalPeriod());
-	Vec2d pa = pSatWrapper->getPerigeeApogeeAltitudes();
+	Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 	map.insert("perigee-altitude", pa[0]);
 	map.insert("apogee-altitude", pa[0]);
 	if (sunReflAngle>0.)

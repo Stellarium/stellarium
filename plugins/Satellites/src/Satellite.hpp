@@ -221,6 +221,7 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
+	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
