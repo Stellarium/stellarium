@@ -467,8 +467,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 #endif
 	if (flags&Distance)
 	{
-		double hdistanceAu = getHeliocentricEclipticPos().length();
-		double hdistanceKm = AU * hdistanceAu;
+		const double hdistanceAu = getHeliocentricEclipticPos().length();
+		const double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
 		QString au = qc_("AU", "distance, astronomical unit");
 		// TRANSLATORS: Unit of measure for distance - kilometers
@@ -491,7 +491,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 		}
-		double distanceKm = AU * distanceAu;
+		const double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
@@ -508,6 +508,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 
 		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) ) << "<br />";
 	}
 
 	if (flags&Velocity)
@@ -1009,15 +1010,12 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			return get_mean_sidereal_time(JD, JDE);
 	}
 
-	double t = JDE - re.epoch;
+	const double t = JDE - re.epoch;
 	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
-	double rotations = 1.; // NOTE: Maybe 1e-3 will be better?
-	if (re.period!=0.f) // OK, it's not a moon with chaotic period of rotation :)
-	{
-		rotations = t / static_cast<double>(re.period);
-	}
-	double wholeRotations = floor(rotations);
-	double remainder = rotations - wholeRotations;
+	const double rotations = (re.period==0.f ? 1.  // moon with chaotic period of rotation
+						: t / static_cast<double>(re.period));
+	const double wholeRotations = floor(rotations);
+	const double remainder = rotations - wholeRotations;
 
 	if (englishName=="Jupiter")
 	{
@@ -1621,15 +1619,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	float screenSz = static_cast<float>(getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
-	float viewportBufferSz=screenSz;
-	// enlarge if this is sun with its huge halo.
-	if (englishName=="Sun")
-		viewportBufferSz+=125.f;
-	float viewport_left = prj->getViewportPosX();
-	float viewport_bottom = prj->getViewportPosY();
+	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
+	const double viewportBufferSz= (englishName=="Sun" ? screenSz+125. : screenSz);	// enlarge if this is sun with its huge halo.
+	const double viewport_left = prj->getViewportPosX();
+	const double viewport_bottom = prj->getViewportPosY();
 
-	if ((prj->project(Vec3f(0.), screenPos)
+	if ((prj->project(Vec3d(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
 	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz))
 	{
@@ -1652,7 +1647,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		}
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,screenSz);
+		draw3dModel(core,transfo,static_cast<float>(screenSz));
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);

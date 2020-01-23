@@ -538,10 +538,10 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	const float screenSz = static_cast<float>(getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
-	const float viewport_left = prj->getViewportPosX();
-	const float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3f(0.), screenPos)
+	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
+	const double viewport_left = prj->getViewportPosX();
+	const double viewport_bottom = prj->getViewportPosY();
+	if (prj->project(Vec3d(0.), screenPos)
 		&& screenPos[1] > viewport_bottom - screenSz
 		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
 		&& screenPos[0] > viewport_left - screenSz
@@ -558,7 +558,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,screenSz);
+		draw3dModel(core,transfo,static_cast<float>(screenSz));
 	}
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)

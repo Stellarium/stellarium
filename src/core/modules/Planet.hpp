@@ -533,7 +533,7 @@ protected:
 					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
 					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
-	Vec3f screenPos;                 // Used to store temporarily the 2D position on screen
+	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
