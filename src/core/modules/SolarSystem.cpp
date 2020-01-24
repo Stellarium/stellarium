@@ -1034,6 +1034,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (secname=="sun") sun = newP;
 		if (secname=="moon") moon = newP;
 
+		// At this point the orbit and object type (class Planet and subclasses) have been fixed.
+		// For many objects we have oriented spheroids with rotational parameters.
+
+		// There are two ways of defining the axis orientation: obliquity and ascending node, which was used by Stellarium based on Celestia.
 		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
 		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
 
@@ -1045,14 +1049,15 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE1 = pd.value(secname+"/rot_pole_de1", 0.).toDouble()*M_PI_180;
-		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees!
-		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // stays in degrees!
+		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees! Basically the same idea as rot_rotation_offset.
+		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // stays in degrees! Basically the same idea as 360/rot_periode
 
-		const double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.;
-		const double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
+		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
+		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
 		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
 		{
+			// Recompute obliquity and AscNode from the new data.
 			// Old solution: Make this once for J2000.
 			// New in 0.20: Repeat this block in planet::update() if required.
 			Vec3d J2000NPole;
@@ -1068,7 +1073,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << StelUtils::getEndLineChar();
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << StelUtils::getEndLineChar();
-			/*
+
 			if (J2000NPoleW0 >0)
 			{
 				// this is just another name for offset...
@@ -1078,26 +1083,29 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				// this is just another expression for rotational speed.
 				rotPeriod=360.0/J2000NPoleW1;
-				// qDebug() << "\t" << englishName << ": Calculated rotational speed: " << rotPeriod*180./M_PI << endl;
+				qDebug() << "\t" << englishName << ": Calculated rotational period (days): " << rotPeriod << endl;
 			}
-			*/
+
 		}
 
-		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
+		// rot_periode given in hours (from which rotPeriod in days),
+		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
+		// The last parameter is only used to derive how long the orbit should be plotted. It is NOT a rotational element.
 		newP->setRotationElements(
 			rotPeriod,
 			rotOffset,
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
-			//pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
 			J2000NPoleRA,
 			J2000NPoleRA1,
 			J2000NPoleDE,
 			J2000NPoleDE1,
 			J2000NPoleW0,
 			J2000NPoleW1,
-			pd.value(secname+"/orbit_good", pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()).toDouble()); // this is given in days. TODO; Get rid of the last parameter!
+			pd.value(secname+"/orbit_visualization_period",
+				 fabs(pd.value(secname+"/orbit_Period",
+					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble()); // TODO; Get rid of the last parameter!
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
@@ -1160,6 +1168,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
 		for (const auto& p : systemPlanets)
 		{
+			p->setExtraInfoString(StelObject::DebugAid, "");
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
 			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::EarthMoon);
@@ -1173,6 +1182,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	{
 		for (const auto& p : systemPlanets)
 		{
+			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE);
 			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE, Planet::EarthMoon);
 			else if (p->englishName=="Jupiter") Planet::updatePlanetCorrections(dateJDE, Planet::Jupiter);
