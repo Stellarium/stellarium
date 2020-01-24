@@ -275,7 +275,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			if (!fuzzyEquals(helioVel, orbVel))
 				oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
 		}
-		if (qAbs(re.period)>0.f)
+		if (qAbs(re.period)>0.)
 		{
 			double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
 			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms) << "<br />";
@@ -376,7 +376,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 double MinorPlanet::getSiderealPeriod() const
 {
-	return KeplerOrbit::calculateSiderealPeriod(orbitPtr->getSemimajorAxis());
+	return KeplerOrbit::calculateSiderealPeriod(static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis());
 }
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const

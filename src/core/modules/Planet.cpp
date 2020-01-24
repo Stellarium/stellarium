@@ -180,7 +180,7 @@ Planet::Planet(const QString& englishName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
 	       posFuncType coordFunc,
-	       KeplerOrbit* anOrbitPtr,
+	       Orbit* anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool acloseOrbit,
 	       bool hidden,
@@ -1250,7 +1250,7 @@ float Planet::getMeanOppositionMagnitude() const
 	{
 		Q_ASSERT(orbitPtr);
 		if (orbitPtr)
-			semimajorAxis=orbitPtr->getSemimajorAxis();
+			semimajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
 		else
 			qDebug() << "WARNING: No orbitPtr for " << englishName;
 	}
@@ -3211,6 +3211,12 @@ void Planet::drawOrbit(const StelCore* core)
 		return;
 	if (!static_cast<bool>(re.siderealPeriod))
 		return;
+
+	if (orbitPtr && pType>=isArtificial)
+	{
+		if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(lastJDE))
+			return;
+	}
 
 	// Update the orbit positions to the current planet date.
 	computeOrbit();
