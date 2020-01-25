@@ -596,7 +596,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !getEnglishName().contains("observer", Qt::CaseInsensitive))
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive))
 	{
 		Vec3f rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");

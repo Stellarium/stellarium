@@ -4,18 +4,18 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2019
 # Hazira Fakhrurrozi <hazirafakhrurrozi@gmail.com>, 2019
 # Ian Sebastian <iansebastian.tan@gmail.com>, 2019
+# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 21:12+0700\n"
+"POT-Creation-Date: 2020-01-25 13:32+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Ian Sebastian <iansebastian.tan@gmail.com>, 2019\n"
+"Last-Translator: Hariyadi Putraga <hariyadiputraga@gmail.com>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,24 +23,24 @@ msgstr ""
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: scripts/analemma.ssc:15
+#: scripts/analemma.ssc:16
 msgid "Analemma"
 msgstr "analema"
 
-#: scripts/analemma.ssc:40
+#: scripts/analemma.ssc:41
 msgid "Week"
 msgstr "Minggu"
 
-#: scripts/analemma.ssc:46
+#: scripts/analemma.ssc:47
 msgid "Near winter solstice"
 msgstr "Di dekat Titik Balik Selatan"
 
-#: scripts/analemma.ssc:50
+#: scripts/analemma.ssc:51
 msgid "Near summer solstice"
 msgstr "Di dekat Titik Balik Utara"
 
-#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
-#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
+#: scripts/analemma.ssc:55 scripts/martian_analemma.ssc:48
+#: scripts/saturnian_analemma.ssc:48 scripts/uranian_analemma.ssc:48
 msgid "Yearly path of the Sun"
 msgstr "Jalur Tahunan Matahari"
 
@@ -657,11 +657,11 @@ msgstr "δ Tauri"
 
 #: scripts/double_stars.ssc:31
 msgid "δ1-δ2: 17.6 arcseconds (ESE); δ1-δ3: 43.25 arcseconds (NE)"
-msgstr ""
+msgstr "δ1-δ2: 17.6 detik busur (TTG); δ1-δ3: 43.25 detik busur(TL)"
 
 #: scripts/double_stars.ssc:31
 msgid "Easy naked-eye triple"
-msgstr ""
+msgstr "Rangkap tiga yang mudah diamati dengan mata telanjang"
 
 #: scripts/double_stars.ssc:32
 msgid "θ Orionis"
@@ -674,143 +674,144 @@ msgstr "2.24 menit busur (BL)"
 #: scripts/double_stars.ssc:32
 msgid "Very difficult because of stars and nebulosity in the area"
 msgstr ""
+"Sangat sulit dikarenakan terdapat bintang dan nebulosity di area tersebut"
 
 #: scripts/double_stars.ssc:33
 msgid "42 and 45 Orionis"
-msgstr ""
+msgstr "42 dan 45 Orionis"
 
 #: scripts/double_stars.ssc:33
 msgid "4.2 arcminutes (ESE)"
-msgstr ""
+msgstr "4.2 menit busur (TTG)"
 
 #: scripts/double_stars.ssc:33 scripts/double_stars.ssc:34
 msgid "Moderately difficult optical double"
-msgstr ""
+msgstr "Kesulitan Optik ganda menengah "
 
 #: scripts/double_stars.ssc:34
 msgid "ι Orionis"
-msgstr ""
+msgstr "ι Orionis"
 
 #: scripts/double_stars.ssc:34
 msgid "8 arcminutes (SW)"
-msgstr ""
+msgstr "8 menit busur (BD)"
 
 #: scripts/double_stars.ssc:35
 msgid "ζ Corvi"
-msgstr ""
+msgstr "ζ Corvi"
 
 #: scripts/double_stars.ssc:35
 msgid "5.85 arcminutes (WNW)"
-msgstr ""
+msgstr "5.85 menit busur (BBL)"
 
 #: scripts/double_stars.ssc:36
 msgid "Mizar and Alcor"
-msgstr ""
+msgstr "Mizar dan Alcor"
 
 #: scripts/double_stars.ssc:36
 msgid "11.8 arcminutes (ENE)"
-msgstr ""
+msgstr "11.8 menit busur (TTL)"
 
 #: scripts/double_stars.ssc:36 scripts/double_stars.ssc:44
 #: scripts/double_stars.ssc:45
 msgid "Easy naked-eye double"
-msgstr ""
+msgstr "Ganda yang mudah diamati mata telanjang"
 
 #: scripts/double_stars.ssc:37
 msgid "Zubenelgenubi"
-msgstr ""
+msgstr "Zubenelgenubi"
 
 #: scripts/double_stars.ssc:37
 msgid "3.83 arcminutes (NW)"
-msgstr ""
+msgstr "3.83 menit busur (BD)"
 
 #: scripts/double_stars.ssc:37
 msgid "Very difficult because of the magnitude difference"
-msgstr ""
+msgstr "Sangat sulit dikarenakan perbedaan magnitudo"
 
 #: scripts/double_stars.ssc:38
 msgid "ω Scorpii"
-msgstr ""
+msgstr "ω Scorpii"
 
 #: scripts/double_stars.ssc:38
 msgid "14.6 arcminutes (SSE)"
-msgstr ""
+msgstr "14.6 menit busur (STG)"
 
 #: scripts/double_stars.ssc:38
 msgid "Easy optical double"
-msgstr ""
+msgstr "Ganda mudah dengan optik"
 
 #: scripts/double_stars.ssc:39
 msgid "λ and υ Scorpii"
-msgstr ""
+msgstr "λ dan υ Scorpii"
 
 #: scripts/double_stars.ssc:39
 msgid "36 arcminutes (WSW)"
-msgstr ""
+msgstr "36 menit busur (BBD)"
 
 #: scripts/double_stars.ssc:39
 msgid "Easy double"
-msgstr ""
+msgstr "Ganda mudah"
 
 #: scripts/double_stars.ssc:40
 msgid "μ Scorpii"
-msgstr ""
+msgstr "μ Scorpii"
 
 #: scripts/double_stars.ssc:40
 msgid "5.8 arcminutes (ENE)"
-msgstr ""
+msgstr "5.8 menit busur (TTL)"
 
 #: scripts/double_stars.ssc:40
 msgid "Showcase double!"
-msgstr ""
+msgstr "Memamerkan Ganda!"
 
 #: scripts/double_stars.ssc:41
 msgid "ζ Scorpii"
-msgstr ""
+msgstr "ζ Scorpii"
 
 #: scripts/double_stars.ssc:41
 msgid "6.5 arcminutes (W)"
-msgstr ""
+msgstr "6.5 menit busur (B)"
 
 #: scripts/double_stars.ssc:42
 msgid "ε Lyrae"
-msgstr ""
+msgstr "ε Lyrae"
 
 #: scripts/double_stars.ssc:42
 msgid "3.5 arcminutes (N)"
-msgstr ""
+msgstr "3.5 menit busur (U)"
 
 #: scripts/double_stars.ssc:43
 msgid "δ Lyrae"
-msgstr ""
+msgstr "δ Lyrae"
 
 #: scripts/double_stars.ssc:43
 msgid "10.3 arcminutes (WNW)"
-msgstr ""
+msgstr "10.3 menit busur (BBL)"
 
 #: scripts/double_stars.ssc:44
 msgid "ν Sagittarii"
-msgstr ""
+msgstr "ν Sagittarii"
 
 #: scripts/double_stars.ssc:44
 msgid "13.9 arcminutes (ENE)"
-msgstr ""
+msgstr "13.9 menit busur (TTL)"
 
 #: scripts/double_stars.ssc:45
 msgid "ο1 and ο2 Cygni"
-msgstr ""
+msgstr "ο1 dan ο2 Cygni"
 
 #: scripts/double_stars.ssc:45
 msgid "61.3 arcminutes (NNE)"
-msgstr ""
+msgstr "61.3 menit busur (TTL)"
 
 #: scripts/double_stars.ssc:46
 msgid "ο1 Cygni (ο1 Cygni, 30 Cyg and HD 192579)"
-msgstr ""
+msgstr "ο1 Cygni (ο1 Cygni, 30 Cyg dan HD 192579)"
 
 #: scripts/double_stars.ssc:46
 msgid "5.6 arcminutes (NW)"
-msgstr ""
+msgstr "5.6 menit busur (BL)"
 
 #: scripts/double_stars.ssc:46
 msgid "Moderately difficult optical triple star"
@@ -818,7 +819,7 @@ msgstr ""
 
 #: scripts/double_stars.ssc:47
 msgid "Algedi"
-msgstr ""
+msgstr "Algedi"
 
 #: scripts/double_stars.ssc:47
 msgid "6.3 arcminutes (WNW)"
@@ -832,16 +833,16 @@ msgstr "Separasi:"
 msgid "Martian analemma"
 msgstr "Analema Mars"
 
-#: scripts/martian_analemma.ssc:41
+#: scripts/martian_analemma.ssc:42
 msgid "Sol"
-msgstr ""
+msgstr "Sol"
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
 #: scripts/morsels_1.ssc:38 scripts/morsels_1.ssc:43
 msgid "Shadows from Io, Ganymede and Callisto"
-msgstr ""
+msgstr "Bayangan dari Io, Ganymede dan Callisto"
 
 #: scripts/morsels_1.ssc:17 scripts/morsels_1.ssc:19 scripts/morsels_1.ssc:20
 #: scripts/morsels_1.ssc:21 scripts/morsels_1.ssc:25 scripts/morsels_1.ssc:26
@@ -850,20 +851,20 @@ msgstr ""
 #: scripts/morsels_1.ssc:39 scripts/morsels_1.ssc:41 scripts/morsels_1.ssc:42
 #: scripts/morsels_1.ssc:44 scripts/morsels_1.ssc:45 scripts/morsels_1.ssc:46
 msgid "Shadows from Io, Europe and Callisto"
-msgstr ""
+msgstr "Bayangan dari Io, Europe dan Callisto"
 
 #: scripts/morsels_1.ssc:24 scripts/morsels_1.ssc:32 scripts/morsels_1.ssc:40
 msgid "Shadows from Europe, Ganymede and Callisto"
-msgstr ""
+msgstr "bayangan dari Europe, Ganymede dan Callisto"
 
 #: scripts/morsels_1.ssc:60
 msgid "Triple shadow phenomena of the satellites of Jupiter"
-msgstr ""
+msgstr "Fenomena bayangan rangkap tiga dari satelit Jupiter"
 
 #: scripts/morsels_1.ssc:62 scripts/morsels_2.ssc:78 scripts/morsels_3.ssc:52
 #: scripts/morsels_4.ssc:70
 msgid "phenomena in all"
-msgstr ""
+msgstr "Fenomena dalam semuanya"
 
 #: scripts/morsels_1.ssc:77 scripts/morsels_2.ssc:98 scripts/morsels_3.ssc:62
 #: scripts/morsels_4.ssc:81
@@ -885,19 +886,19 @@ msgstr "Jupiter tanpa satelit Galilean"
 
 #: scripts/morsels_2.ssc:100
 msgid "Limits of the disappearance:"
-msgstr ""
+msgstr "Ambang menghilang"
 
 #: scripts/morsels_3.ssc:50
 msgid "Occultations of bright stars by planets"
-msgstr ""
+msgstr "Okultasi bintang terang oleh planet"
 
 #: scripts/morsels_4.ssc:68
 msgid "Mutual occultations of planets"
-msgstr ""
+msgstr "Okultasi Planet - planet bersama"
 
 #: scripts/supernova.ssc:22
 msgid "Europe, Uraniborg."
-msgstr ""
+msgstr "Eropa, Uraniborg."
 
 #: scripts/supernova.ssc:30
 msgid "Evening of 20 October 1572"
@@ -905,7 +906,7 @@ msgstr "Malam hari, tanggal 20 Oktober 1572"
 
 #: scripts/supernova.ssc:39
 msgid "Constellation Cassiopeia"
-msgstr ""
+msgstr "Konstelasi Cassiopeia"
 
 #: scripts/supernova.ssc:60
 msgid "5 days later..."
@@ -925,11 +926,11 @@ msgstr "Malam hari, tanggal 31 Oktober 1572"
 
 #: scripts/supernova.ssc:85
 msgid "Evening of "
-msgstr ""
+msgstr "Senja dari"
 
 #: scripts/supernova.ssc:85
 msgid " November 1572"
-msgstr ""
+msgstr " Nopember 1572"
 
 #: scripts/supernova.ssc:92
 msgid "Hooray! First observations in Korea and Europe."
@@ -943,18 +944,20 @@ msgstr "Observasi pertama di Cina"
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
 msgstr ""
+"Awannya telah pergi dan  Tycho Brahe mengamati bintang baru untuk pertama "
+"kalinya"
 
 #: scripts/supernova.ssc:117
 msgid "Next 60 days..."
-msgstr ""
+msgstr "60 hari berikutnya ..."
 
 #: scripts/supernova.ssc:128
 msgid "Next other 40 days..."
-msgstr ""
+msgstr "40 hari selanjutnya..."
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
-msgstr ""
+msgstr "400 Katalog Herschel"
 
 #: scripts/h400_tour.ssc:17
 msgid ""
@@ -967,6 +970,8 @@ msgid ""
 "published in 1864 of 5,000 objects, and hence also of the New General "
 "Catalogue."
 msgstr ""
+"Dipublikasikan pada 1864 dengan 5000 objek, dan juga menjadi katalog umum "
+"baru."
 
 #: scripts/h400_tour.ssc:19
 msgid "Vital statistics:"
@@ -978,19 +983,19 @@ msgstr "Katalog ini memuat 400 objek"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr ""
+msgstr "*Semua objek dari NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
-msgstr ""
+msgstr "* Semua yang terlihat di intang tengah utara"
 
 #: scripts/h400_tour.ssc:23
 msgid "* All visible in 150 mm (6\") or larger telescopes"
-msgstr ""
+msgstr "* Semua yang terlihat dalam 150 mm (6\") atau teleskop yang lebih besar"
 
 #: scripts/largest_known_stars.ssc:12
 msgid "PZ Cassiopeiae"
-msgstr ""
+msgstr "PZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:13
 msgid ""
@@ -1001,7 +1006,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:14
 msgid "VX Sagittarii"
-msgstr ""
+msgstr "VX Sagittarii"
 
 #: scripts/largest_known_stars.ssc:15
 msgid ""
@@ -1011,7 +1016,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:16
 msgid "VV Cephei A"
-msgstr ""
+msgstr "VV Cephei A"
 
 #: scripts/largest_known_stars.ssc:17
 msgid ""
@@ -1022,7 +1027,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:18
 msgid "RW Cephei"
-msgstr ""
+msgstr "RW Cephei"
 
 #: scripts/largest_known_stars.ssc:19
 msgid ""
@@ -1033,7 +1038,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:20
 msgid "VY Canis Majoris"
-msgstr ""
+msgstr "VY Canis Majoris"
 
 #: scripts/largest_known_stars.ssc:21
 msgid ""
@@ -1044,7 +1049,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:22
 msgid "AH Scorpii"
-msgstr ""
+msgstr "AH Scorpii"
 
 #: scripts/largest_known_stars.ssc:23
 msgid ""
@@ -1055,7 +1060,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:24
 msgid "V766 Centauri A"
-msgstr ""
+msgstr "V766 Centauri A"
 
 #: scripts/largest_known_stars.ssc:25
 msgid ""
@@ -1065,19 +1070,19 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:26
 msgid "KW Sagittarii"
-msgstr ""
+msgstr "KW Sagittarii"
 
 #: scripts/largest_known_stars.ssc:27
 msgid "BC Cygni"
-msgstr ""
+msgstr "BC Cygni"
 
 #: scripts/largest_known_stars.ssc:28
 msgid "RT Carinae"
-msgstr ""
+msgstr "RT Carinae"
 
 #: scripts/largest_known_stars.ssc:29
 msgid "Betelgeuse"
-msgstr ""
+msgstr "Betelgeuse"
 
 #: scripts/largest_known_stars.ssc:30
 msgid "Ninth brightest star in the night sky."
@@ -1085,59 +1090,59 @@ msgstr "Bintang paling terang ke-sembilan di langit malam."
 
 #: scripts/largest_known_stars.ssc:31
 msgid "Mu Cephei (Herschel's \"Garnet Star\")"
-msgstr ""
+msgstr "Mu Cephei (\"Bintang Garnet \" Herschel )"
 
 #: scripts/largest_known_stars.ssc:32
 msgid "S Persei"
-msgstr ""
+msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr ""
+msgstr "Di dalam klaster ganda Perseus."
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"
-msgstr ""
+msgstr "RW Cygni"
 
 #: scripts/largest_known_stars.ssc:35
 msgid "Antares A"
-msgstr ""
+msgstr "Antares A"
 
 #: scripts/largest_known_stars.ssc:36
 msgid "Theta Muscae"
-msgstr ""
+msgstr "Theta Muscae"
 
 #: scripts/largest_known_stars.ssc:37
 msgid "V1749 Cygni"
-msgstr ""
+msgstr "V1749 Cygni"
 
 #: scripts/largest_known_stars.ssc:38
 msgid "TZ Cassiopeiae"
-msgstr ""
+msgstr "TZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:39
 msgid "IX Carinae"
-msgstr ""
+msgstr "IX Carinae"
 
 #: scripts/largest_known_stars.ssc:40
 msgid "TV Geminorum"
-msgstr ""
+msgstr "TV Geminorum"
 
 #: scripts/largest_known_stars.ssc:41
 msgid "T Cephei"
-msgstr ""
+msgstr "T Cephei"
 
 #: scripts/largest_known_stars.ssc:42
 msgid "V382 Carinae"
-msgstr ""
+msgstr "V382 Carinae"
 
 #: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
 msgid "Yellow hypergiant, one of the rarest types of star."
-msgstr ""
+msgstr "Maha Raksasa Kuning, salah satu jenis bintang paling langka."
 
 #: scripts/largest_known_stars.ssc:44
 msgid "V509 Cassiopeiae"
-msgstr ""
+msgstr "V509 Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:46
 msgid "CE Tauri (\"Ruby Star\")"
@@ -1293,316 +1298,322 @@ msgstr "Matahari Terbenam #3"
 
 #: scripts/saturnian_analemma.ssc:16
 msgid "Saturnian analemma"
-msgstr ""
+msgstr "Analemma Saturnian"
 
-#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+#: scripts/saturnian_analemma.ssc:42 scripts/uranian_analemma.ssc:42
 msgid "Solar day"
-msgstr ""
+msgstr "Hari Solar"
 
 #: scripts/uranian_analemma.ssc:16
 msgid "Uranian analemma"
-msgstr ""
+msgstr "Analemma Uranian"
 
 #: scripts/messier_marathon.ssc:17
 msgid "Messier Marathon"
-msgstr ""
+msgstr "Marathon Messier"
 
 #: scripts/messier_marathon.ssc:84
 msgid "Difficulty is 0"
-msgstr ""
+msgstr "Kesulitannya 0"
 
 #: scripts/messier_marathon.ssc:85
 msgid "Very diffuse, very dark, very difficult"
-msgstr ""
+msgstr "sangat bias, sangat gelap, dan sangat susah"
 
 #: scripts/messier_marathon.ssc:86
 msgid "Easier than M74, small"
-msgstr ""
+msgstr "Lebih mudah daripada M74, kecil"
 
 #: scripts/messier_marathon.ssc:87
 msgid "Visible to the naked eye, no difficulty"
-msgstr ""
+msgstr "Terlihat dengan mata telanjang, tidak ada kesulitan"
 
 #: scripts/messier_marathon.ssc:88
 msgid "More difficult than M110 to verify, small"
-msgstr ""
+msgstr "Lebih sulit daripada M110 untuk di verifikasi, kecil"
 
 #: scripts/messier_marathon.ssc:89
 msgid "In the west of M31, it is easy to detect"
-msgstr ""
+msgstr "Di Barat M31, sangat mudah dideteksi"
 
 #: scripts/messier_marathon.ssc:90
 msgid "Diffuse, great, brighter"
-msgstr ""
+msgstr "Pencar, besar, lebih terang"
 
 #: scripts/messier_marathon.ssc:91
 msgid "Small, easy to locate, not as horror as imagined"
-msgstr ""
+msgstr "Kecil, mudah di cari, tidak semenakutkan yang dibayangkan"
 
 #: scripts/messier_marathon.ssc:92
 msgid "Difficult to locate, easy to detect and verify"
-msgstr ""
+msgstr "Sulit dicari, mudah untuk dideteksi dan diverifikasi"
 
 #: scripts/messier_marathon.ssc:93
 msgid "Small, easy to locate, don't confuse with NGC663"
-msgstr ""
+msgstr "Kecil, mudah dicari, jangan dibingungkan dengan NGC663"
 
 #: scripts/messier_marathon.ssc:94
 msgid "Large, scattered, easy"
-msgstr ""
+msgstr "Besar, berpencar, mudah"
 
 #: scripts/messier_marathon.ssc:95
 msgid "Fuzzy, easy to find, accompanied by a small star"
-msgstr ""
+msgstr "kabur, mudah ditemukan, bersama dengan bintang yang lebih kecil"
 
 #: scripts/messier_marathon.ssc:96
 msgid "Visible to the naked eye, better than M31"
-msgstr ""
+msgstr "Terlihat dengan mata telanjang, lebih baik daripada M31"
 
 #: scripts/messier_marathon.ssc:97
 msgid "Very close to M42, not easy to see the fuzzy"
-msgstr ""
+msgstr "Sangat dekat dengan M42, tidak mudah untuk melihat pengaburan"
 
 #: scripts/messier_marathon.ssc:98
 msgid "Small, dark, few stars around"
-msgstr ""
+msgstr "Kecil, gelap, sedikit bintang disekitarnya"
 
 #: scripts/messier_marathon.ssc:99
 msgid "Easy to locate, easy to detect in a good transparency."
-msgstr ""
+msgstr "Mudah dicari, mudah dideteksi dengan sifat tembus yang baik"
 
 #: scripts/messier_marathon.ssc:100
 msgid "Visible to the naked eye, easier"
-msgstr ""
+msgstr "Terlihat dengan mata telanjang, lebih mudah"
 
 #: scripts/messier_marathon.ssc:101 scripts/messier_marathon.ssc:153
 #: scripts/messier_marathon.ssc:174
 msgid "Easy to locate and verify"
-msgstr ""
+msgstr "Mudah dicari dan diverifikasi"
 
 #: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:103
 msgid "Large, scattered"
-msgstr ""
+msgstr "Besar, tersebar"
 
 #: scripts/messier_marathon.ssc:104
 msgid "Bright, easy to verify, difficult to locate"
-msgstr ""
+msgstr "Terang, mudah diverifikasi, sulit dicari"
 
 #: scripts/messier_marathon.ssc:105
 msgid "Large, difficult to locate, easy to confuse with NGC2506"
-msgstr ""
+msgstr "Besar, sulit dicari, mudah terbingungkan dengan NGC2506"
 
 #: scripts/messier_marathon.ssc:106
 msgid "Easy, more scattered"
-msgstr ""
+msgstr "Mudah, lebih tersebar"
 
 #: scripts/messier_marathon.ssc:107
 msgid "Easy, fuzzy"
-msgstr ""
+msgstr "Mudah, pencar"
 
 #: scripts/messier_marathon.ssc:108
 msgid "Easy, scattered"
-msgstr ""
+msgstr "Mudah, tersebar"
 
 #: scripts/messier_marathon.ssc:109
 msgid "Easy, large, scattered"
-msgstr ""
+msgstr "Mudah, besar, tersebar"
 
 #: scripts/messier_marathon.ssc:110
 msgid "Very close to M96 and M105"
-msgstr ""
+msgstr "Sangat dekat ke M96 dan M105"
 
 #: scripts/messier_marathon.ssc:111
 msgid "Easy to locate and verify, assist to verify M95 and M105"
-msgstr ""
+msgstr "sangat mudah dicari dan diverifikasi, membantu memverifikasi M95"
 
 #: scripts/messier_marathon.ssc:112
 msgid "Dark"
-msgstr ""
+msgstr "Gelap"
 
 #: scripts/messier_marathon.ssc:113
 msgid "Very close, it’s like M81 and M82"
-msgstr ""
+msgstr "Sangat dekat, seperti M81 dan M82"
 
 #: scripts/messier_marathon.ssc:114
 msgid "There is NGC3628 nearby, don't think you have found a new comet"
 msgstr ""
+"terdapat NGC3628 di dekatnya, jangan dipikir anda telah menemukan sebuah "
+"komet baru"
 
 #: scripts/messier_marathon.ssc:115
 msgid "Like the darkened M33, require a high sky conditions"
-msgstr ""
+msgstr "seperti M33 yang digelapkan, memerlukan kondisi langit yang tinggi"
 
 #: scripts/messier_marathon.ssc:116
 msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
-msgstr ""
+msgstr "Sulit dicari, 4 bintang dari kebalikan bentuk 7 disampingnya"
 
 #: scripts/messier_marathon.ssc:117
 msgid "Easy, you can see the companion galaxy"
-msgstr ""
+msgstr "Mudah, anda dapat melihat galaksi yang bersamanya"
 
 #: scripts/messier_marathon.ssc:118
 msgid "Easy to verify"
-msgstr ""
+msgstr "Mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:119
 msgid "Not easy to locate, small, slightly dark"
-msgstr ""
+msgstr "Tidak mudah dilokasikan, kecil, dan sedikit gelap"
 
 #: scripts/messier_marathon.ssc:120
 msgid "Not easy to locate, bright"
-msgstr ""
+msgstr "Tidak mudah dicari, terang"
 
 #: scripts/messier_marathon.ssc:121
 msgid "Not easy to locate, no bright stars nearby"
-msgstr ""
+msgstr "Tidak mudah dicari, tidak ada bintang terang didekatnya"
 
 #: scripts/messier_marathon.ssc:122
 msgid "Easy to locate"
-msgstr ""
+msgstr "mudah dicari"
 
 #: scripts/messier_marathon.ssc:123
 msgid "Beside M60, it is easy to verify"
-msgstr ""
+msgstr "Disamping M60, mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:124
 msgid "It’s an easier one"
-msgstr ""
+msgstr "Merupakan salah satu yang mudah"
 
 #: scripts/messier_marathon.ssc:125
 msgid "As bright as M85, easy to verify"
-msgstr ""
+msgstr "Seterang M85, mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:126
 msgid "Dark, hard to look"
-msgstr ""
+msgstr "Gelap, sulit dilihat"
 
 #: scripts/messier_marathon.ssc:127
 msgid "Easy to detect than M89, easy to locate"
-msgstr ""
+msgstr "Mudah dideteksi daripada M89, mudah dicari"
 
 #: scripts/messier_marathon.ssc:128
 msgid "Easy to locate, detect once"
-msgstr ""
+msgstr "Mudah dicari, sekali deteksi"
 
 #: scripts/messier_marathon.ssc:129
 msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
 msgstr ""
+"Terdapat NGC4438 di dekat M84 dan M86, jangan sampai membuat kesalahan"
 
 #: scripts/messier_marathon.ssc:130
 msgid "M84 are together, closer to NGC4438"
-msgstr ""
+msgstr "bersama M84, lebih dekat ke NGC4438"
 
 #: scripts/messier_marathon.ssc:131
 msgid "Just above M90, almost like M90"
-msgstr ""
+msgstr "tepat diatas M90, hampir mirip M90"
 
 #: scripts/messier_marathon.ssc:132
 msgid "Look hard"
-msgstr ""
+msgstr "Lihat lagi"
 
 #: scripts/messier_marathon.ssc:133
 msgid "This bunch of things in the Virgo Cluster is not easy"
-msgstr ""
+msgstr "Sekumpulan sesuatu di Klaster Virgo yang tidak mudah"
 
 #: scripts/messier_marathon.ssc:134
 msgid "M99 is easier to verify than M98"
-msgstr ""
+msgstr "M99 lebih mudah diverifikasi daripada M98"
 
 #: scripts/messier_marathon.ssc:135
 msgid "First find M100 and then find M98 and M99"
-msgstr ""
+msgstr "Pertama temukan M100 dan kemudian temukan M98 dan M99"
 
 #: scripts/messier_marathon.ssc:136
 msgid "Far away, but very bright, easy to find"
-msgstr ""
+msgstr "Lebih jauh, tetapi sangat terang, mudah ditemukan"
 
 #: scripts/messier_marathon.ssc:137
 msgid "Small, not easy to locate, a little difficult"
-msgstr ""
+msgstr "Kecil, tidak mudah dicari, sedikit sulit"
 
 #: scripts/messier_marathon.ssc:138
 msgid "Not easy to locate, easy to verify"
-msgstr ""
+msgstr "Tidak mudah dicari, mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:139
 msgid "Easy to locate and verify, small"
-msgstr ""
+msgstr "Mudah dicari dan diverifikasi, kecil"
 
 #: scripts/messier_marathon.ssc:140
 msgid "Easy to verify, a star 5 magnitude nearby"
-msgstr ""
+msgstr "Mudah diverifikasi, sebuah bintang bermagnitudo 5 didekatnya"
 
 #: scripts/messier_marathon.ssc:141
 msgid "Visible to the naked eye, big, bright"
-msgstr ""
+msgstr "terlihat dengan mata telanjang, besar, terang"
 
 #: scripts/messier_marathon.ssc:142
 msgid "Bright and big in the galaxies, not hard to find"
-msgstr ""
+msgstr "Terang dan besar dalam galaksi, tidak sulit ditemukan"
 
 #: scripts/messier_marathon.ssc:143
 msgid "Bright, easy to verify"
-msgstr ""
+msgstr "Terang, mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:144
 msgid "Easy to verify in a right location"
-msgstr ""
+msgstr "Mudah diverifikasi pada lokasi yang benar"
 
 #: scripts/messier_marathon.ssc:145
 msgid "Famous, like the shoulder pole star"
-msgstr ""
+msgstr "Terkenal, seperti punggung bintang kutub"
 
 #: scripts/messier_marathon.ssc:146
 msgid "It may be easier to locate from the Dragon"
-msgstr ""
+msgstr "mungkin lebih mudah untuk dicari dari Naga"
 
 #: scripts/messier_marathon.ssc:147
 msgid "Small, 20 times or more is still easy to detect"
-msgstr ""
+msgstr "Kecil, 20 kali atau lebih tetapi tetap lebih mudah dideteksi"
 
 #: scripts/messier_marathon.ssc:148
 msgid "More difficult than M57, not easy to locate, very small"
-msgstr ""
+msgstr "lebih sulit daripada M57, tidak mudah dicari, sangat kecil"
 
 #: scripts/messier_marathon.ssc:149
 msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
-msgstr ""
+msgstr "Mudah, kecil, terlihat seperti klaster bintang bermagnitudo 7-8"
 
 #: scripts/messier_marathon.ssc:150
 msgid "Larger than imagined, very scattered, not easy to locate"
 msgstr ""
+"Lebih besar daripada yang dibayangkan, sangat tersebar, tidak mudah dicari"
 
 #: scripts/messier_marathon.ssc:151
 msgid "Find M71 first, then find M27, and will be easier to locate"
 msgstr ""
+"Temukan M71 duluan, lalu temukan M27, dan akan lebih mudah untuk dicari"
 
 #: scripts/messier_marathon.ssc:152
 msgid "Easy to locate, easy to verify in 50 binos"
-msgstr ""
+msgstr "Mudah dicari, mudah diverifikasi dalam 50 bino"
 
 #: scripts/messier_marathon.ssc:154
 msgid "Bright, like M13, easy to find"
-msgstr ""
+msgstr "Terang, seperti M13, mudah ditemukan"
 
 #: scripts/messier_marathon.ssc:155
 msgid "Detect it with M12, brighter than M12"
-msgstr ""
+msgstr "Deteksi dengan M12, lebih terang daripada M12"
 
 #: scripts/messier_marathon.ssc:156
 msgid "Difficult to locate, easy to verify"
-msgstr ""
+msgstr "sulit dicari, mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:157
 msgid "Small, not easy to verify"
-msgstr ""
+msgstr "Kecil, tidak mudah diverifikasi"
 
 #: scripts/messier_marathon.ssc:158
 msgid "Bright, big, don't forget to detect NGC6144 nearby"
-msgstr ""
+msgstr "Terang, besar, jangan lupa untuk mendeteksi NGC6144"
 
 #: scripts/messier_marathon.ssc:159
 msgid "Not easy to verify at low power, easy at high power"
 msgstr ""
+"Tidak mudah untuk diverifikasi pada daya lemah, mudah saat daya tinggi"
 
 #: scripts/messier_marathon.ssc:160
 msgid "Follow the line of M4 and Antares, easy to verify"
@@ -1611,14 +1622,15 @@ msgstr ""
 #: scripts/messier_marathon.ssc:161
 msgid "Looking down from M19, darker than M19, but easy to verify"
 msgstr ""
+"Lihat kebawah dari M19, lebih gelap daripada M19, tetapi mudah di verifikasi"
 
 #: scripts/messier_marathon.ssc:162
 msgid "Easy to locate, bright, and almost like M13"
-msgstr ""
+msgstr "Mudah dicari, terang, dan seperti M13"
 
 #: scripts/messier_marathon.ssc:163
 msgid "Easy to locate M26 by M11"
-msgstr ""
+msgstr "Mudah mencari M26 dengan M11"
 
 #: scripts/messier_marathon.ssc:164
 msgid "Easy"
