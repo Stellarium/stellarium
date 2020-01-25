@@ -334,6 +334,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox,	"StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox,		"StelMovementMgr.flagIndicationMountMode");
 	connectBoolProperty(ui->kineticScrollingCheckBox,			"StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,		"StelGui.flagEnableFocusOnDaySpinner");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -1701,19 +1702,17 @@ void ConfigurationDialog::setTimeFormat()
 void ConfigurationDialog::populateDitherList()
 {
 	Q_ASSERT(ui->ditheringComboBox);
-
 	QComboBox* ditherCombo = ui->ditheringComboBox;
 
 	ditherCombo->blockSignals(true);
 	ditherCombo->clear();
-	ditherCombo->addItem(q_("None"),          "disabled"   );
-	ditherCombo->addItem(q_("5/6/5 bits"),    "color565"   );
-	ditherCombo->addItem(q_("6/6/6 bits"),    "color666"   );
-	ditherCombo->addItem(q_("8/8/8 bits"),    "color888"   );
+	ditherCombo->addItem(qc_("None","disabled"), "disabled");
+	ditherCombo->addItem(q_("5/6/5 bits"), "color565");
+	ditherCombo->addItem(q_("6/6/6 bits"), "color666");
+	ditherCombo->addItem(q_("8/8/8 bits"), "color888");
 	ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
 
-	//show current setting
-
+	// show current setting
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");

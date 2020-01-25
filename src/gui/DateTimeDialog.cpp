@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelGui.hpp"
 
 #include "ui_dateTimeDialogGui.h"
 
@@ -42,7 +43,8 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	jd(0),
 	oldyear(0),
 	oldmonth(0),
-	oldday(0)
+	oldday(0),
+	enableFocus(false)
 {
 	ui = new Ui_dateTimeDialogForm;
 	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
@@ -65,6 +67,8 @@ void DateTimeDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	connect(gui, SIGNAL(flagEnableFocusOnDaySpinnerChanged(bool)), this, SLOT(setFlagEnableFocus(bool)));
 
 	// Use ISO 8601 to date formatting
 	// See details: https://bugs.launchpad.net/stellarium/+bug/1655630
@@ -73,9 +77,22 @@ void DateTimeDialog::createDialogContent()
 	ui->dateDelimiterLabel2->setText(delimiter);
 
 	connectSpinnerEvents();
+	setFlagEnableFocus(gui->getFlagEnableFocusOnDaySpinner());
+}
 
-	// Set focus on day spinner by default
-	ui->spinner_day->setFocus();
+void DateTimeDialog::setFlagEnableFocus(bool b)
+{
+	if (enableFocus!=b)
+	{
+		enableFocus=b;
+		if (enableFocus)
+		{
+			// Set focus on day spinner by default
+			ui->spinner_day->setFocus();
+		}
+		else
+			ui->dateTimeTab->setFocus();
+	}
 }
 
 void DateTimeDialog::connectSpinnerEvents() const

@@ -80,6 +80,7 @@ StelGui::StelGui()
 	, skyGui(Q_NULLPTR)
 	, flagUseButtonsBackground(true)
 	, flagUseKineticScrolling(false)
+	, flagEnableFocusOnDaySpinner(false)
 	, buttonTimeRewind(Q_NULLPTR)
 	, buttonTimeRealTimeSpeed(Q_NULLPTR)
 	, buttonTimeCurrent(Q_NULLPTR)
@@ -422,6 +423,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowAsterismLinesButton(conf->value("gui/flag_show_asterism_lines_button", false).toBool());
 	setFlagShowAsterismLabelsButton(conf->value("gui/flag_show_asterism_labels_button", false).toBool());
 	setFlagShowQuitButton(conf->value("gui/flag_show_quit_button", true).toBool());
+
+	setFlagEnableFocusOnDaySpinner(conf->value("gui/flag_focus_day_spinner", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -1155,6 +1158,19 @@ void StelGui::setFlagUseKineticScrolling(bool b)
 		conf->setValue("gui/flag_enable_kinetic_scrolling", b);
 		conf->sync();
 		emit flagUseKineticScrollingChanged(b);
+	}
+}
+
+void StelGui::setFlagEnableFocusOnDaySpinner(bool b)
+{
+	if (b!=flagEnableFocusOnDaySpinner)
+	{
+		flagEnableFocusOnDaySpinner=b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_focus_day_spinner", b);
+		conf->sync();
+		emit flagEnableFocusOnDaySpinnerChanged(b);
 	}
 }
 
