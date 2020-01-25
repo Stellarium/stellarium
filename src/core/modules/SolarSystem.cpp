@@ -529,9 +529,9 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 }
 
-unsigned char SolarSystem::BvToColorIndex(double bV)
+unsigned char SolarSystem::BvToColorIndex(float bV)
 {
-	const double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
+	double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
 	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
@@ -972,13 +972,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/tex_map", "nomap.png").toString(),
-					       pd.value(secname+"/normals_map", englishName.toLower().append("_normals.png")).toString(),
+					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
 					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", false).toBool(),
+					       hidden,
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
@@ -1010,7 +1010,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
 		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
 
-		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
+		if(J2000NPoleRA || J2000NPoleDE)
 		{
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);

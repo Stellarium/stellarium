@@ -60,7 +60,7 @@ public:
 	      float dustTailBrightnessFact=1.5f
 	);
 
-	virtual ~Comet() Q_DECL_OVERRIDE;
+	virtual ~Comet();
 
 	//Inherited from StelObject via Planet
 	//! Get a string with data about the Comet.
