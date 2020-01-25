@@ -1,9 +1,9 @@
 // orbit.cpp
 //
-// Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
-//
+// Initial structure of orbit computation; EllipticalOrbit: Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
 // CometOrbit, InitHyp,InitPar,InitEll,Init3D: Copyright (C) 1995,2007,2008 Johannes Gajdosik
 // InitHyp,InitPar,InitEll,Init3D checked, improved, extended, annotated 2013 Georg Zotti (GZ).
+// Combination to KeplerOrbit, GimbalOrbit (c) 2020 Georg Zotti
 // Algorithms identified and extended from:
 //    Meeus: Astronomical Algorithms 1998
 //    Heafner: Fundamental Ephemeris Computations 1999
@@ -147,16 +147,28 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 	  w(argOfPerhelion),
 	  t0(timeAtPerihelion),
 	  n(meanMotion),
+	  rdot(0.0),
 	  updateTails(true),
 	  orbitGood(orbitGoodDays)
 {
-	// GZ MAKE SURE THIS IS ALWAYS 0/0/0. ==> OK.
-	//qDebug() << "parentRotObliquity" << parentRotObliquity << "parentRotAscendingnode" << parentRotAscendingnode << "parentRotJ2000Longitude" << parentRotJ2000Longitude;
-	rdot.set(0.0, 0.0, 0.0);
+	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
+	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
+}
+
+//! For planet moons which have orbits given in relation to their parent planet's equator.
+//! This is called by the constructor, and must be updated for parent planets when their axis changes over time.
+void Orbit::setParentOrientation(const double parentRotObliquity, const double parentRotAscendingNode, const double parentRotJ2000Longitude)
+{
+	// GZ MAKE SURE THIS IS ALWAYS 0/0/0. ==> OK for all sun-parented objects: Minor Planets and Comets.
+	// qDebug() << "parentRotObliquity" << parentRotObliquity*M_180_PI << "parentRotAscendingnode" << parentRotAscendingNode*M_180_PI << "parentRotJ2000Longitude" << parentRotJ2000Longitude*M_180_PI;
+	// For Moons on Kepler orbits, these elements describe the orientation of its orbit, apparently in epoch J2000.
+	// This indicates that in Stellarium, all those moon orbits are given with relation to the Planet equator.
+	// The problem is that on a planet with changing axis, this rotation matrix should be recomputed e.g. once per year or so.
+	// Another problem is that probably moons exist with elements given in other reference frames. ExplanSup2013 even has many orbits w.r.t. B1950 ecliptic.
 	const double c_obl = cos(parentRotObliquity);
 	const double s_obl = sin(parentRotObliquity);
-	const double c_nod = cos(parentRotAscendingnode);
-	const double s_nod = sin(parentRotAscendingnode);
+	const double c_nod = cos(parentRotAscendingNode);
+	const double s_nod = sin(parentRotAscendingNode);
 	const double cj = cos(parentRotJ2000Longitude);
 	const double sj = sin(parentRotJ2000Longitude);
 
@@ -169,8 +181,8 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 	rotateToVsop87[6] =                 s_obl*sj;
 	rotateToVsop87[7] =                 s_obl*cj;
 	rotateToVsop87[8] =                 c_obl;
-	//  qDebug() << "CometOrbit::()...done";
 }
+
 
 void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
@@ -229,220 +241,23 @@ double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis)
 	return (semiMajorAxis >=0 ? (2.*M_PI/0.01720209895)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis) : std::numeric_limits<double>::max() );
 }
 
-
-
-/*
-
-EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
-                                 double eccentricity,
-                                 double inclination,
-                                 double ascendingNode,
-                                 double argOfPeriapsis,
-                                 double meanAnomalyAtEpoch,
-                                 double period,
-                                 double epoch,
-                                 double parentRotObliquity,
-				 double parentRotAscendingnode,
-				 double parentRotJ2000Longitude)
-	: pericenterDistance(pericenterDistance),
-	  eccentricity(eccentricity),
-	  inclination(inclination),
-	  ascendingNode(ascendingNode),
-	  argOfPeriapsis(argOfPeriapsis),
-	  meanAnomalyAtEpoch(meanAnomalyAtEpoch),
-	  period(period),
-	  epoch(epoch)
+GimbalOrbit::GimbalOrbit(double distance, double longitude, double latitude):
+	distance(distance),
+	longitude(longitude),
+	latitude(latitude)
 {
-	Q_ASSERT(0); // WE WANT TO GET RID OF THIS CLASS!
-	const double c_obl = cos(parentRotObliquity);
-	const double s_obl = sin(parentRotObliquity);
-	const double c_nod = cos(parentRotAscendingnode);
-	const double s_nod = sin(parentRotAscendingnode);
-	const double cj = cos(parentRotJ2000Longitude);
-	const double sj = sin(parentRotJ2000Longitude);
-
-	rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
-	rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
-	rotateToVsop87[2] =           s_nod*s_obl;
-	rotateToVsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
-	rotateToVsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
-	rotateToVsop87[5] =          -c_nod*s_obl;
-	rotateToVsop87[6] =                 s_obl*sj;
-	rotateToVsop87[7] =                 s_obl*cj;
-	rotateToVsop87[8] =                 c_obl;
-}
-
-// Standard iteration for solving Kepler's Equation
-struct SolveKeplerFunc1 : public unary_function<double, double>
-{
-	double ecc;
-	double M;
-
-	SolveKeplerFunc1(double _ecc, double _M) : ecc(_ecc), M(_M) {}
-
-	double operator()(double x) const
-	{
-		return M + ecc * sin(x);
-	}
+	setParentOrientation(0., 0., 0.);
 };
-
-
-// Faster converging iteration for Kepler's Equation; more efficient
-// than above for orbits with eccentricities greater than 0.3.  This
-// is from Jean Meeus's _Astronomical Algorithms_ (2nd ed), p. 199
-struct SolveKeplerFunc2 : public unary_function<double, double>
+//! Compute the position (JDE is just a placeholder) and return a "stellarium compliant" position
+void GimbalOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double* v)
 {
-	double ecc;
-	double M;
-
-	SolveKeplerFunc2(double _ecc, double _M) : ecc(_ecc), M(_M) {}
-
-	double operator()(double x) const
-	{
-		return x + (M + ecc * sin(x) - x) / (1 - ecc * cos(x));
-	}
-};
-
-struct SolveKeplerLaguerreConway : public unary_function<double, double>
-{
-	double ecc;
-	double M;
-
-	SolveKeplerLaguerreConway(double _ecc, double _M) : ecc(_ecc), M(_M) {}
-	// cf Heafner, Fundamental Ephemeris Computations p.73
-	// GZ: note&add Heafner's initial guess for E!
-	double operator()(double E) const
-	{
-		double s = ecc * sin(E);
-		double c = ecc * cos(E);
-		double f = E - s - M;
-		double f1 = 1 - c;
-		double f2 = s;
-		E += -5 * f / (f1 + StelUtils::sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
-
-		return E;
-	}
-};
-
-struct SolveKeplerLaguerreConwayHyp : public unary_function<double, double>
-{
-	double ecc;
-	double M;
-
-	SolveKeplerLaguerreConwayHyp(double _ecc, double _M) : ecc(_ecc), M(_M) {}
-	// cf Heafner, Fundamental Ephemeris Computations p.73
-	double operator()(double x) const
-	{
-		double s = ecc * sinh(x);
-		double c = ecc * cosh(x);
-		double f = s - x - M;
-		double f1 = c - 1;
-		double f2 = s;
-		x += -5 * f / (f1 + StelUtils::sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
-
-		return x;
-	}
-};
-
-typedef pair<double, double> Solution;
-
-double EllipticalOrbit::eccentricAnomaly(const double M) const
-{
-	if (eccentricity == 0.0)
-	{
-		// Circular orbit
-		return M;
-	}
-	else if (eccentricity < 0.2)
-	{
-		// Low eccentricity, so use the standard iteration technique
-		Solution sol = solveIteration_fixed(SolveKeplerFunc1(eccentricity, M), M, 5);
-		return sol.first;
-	}
-	else if (eccentricity < 0.9)
-	{
-		// Higher eccentricity elliptical orbit; use a more complex but
-		// much faster converging iteration.
-		Solution sol = solveIteration_fixed(SolveKeplerFunc2(eccentricity, M), M, 6);
-		// Debugging
-		// qDebug("ecc: %f, error: %f mas\n",
-		//        eccentricity, radToDeg(sol.second) * 3600000);
-		return sol.first;
-	}
-	else if (eccentricity < 1.0)
-	{
-		// Extremely stable Laguerre-Conway method for solving Kepler's
-		// equation.  Only use this for high-eccentricity orbits, as it
-		// requires more calculation.
-		double E = M + 0.85 * eccentricity * StelUtils::sign(sin(M));
-		Solution sol = solveIteration_fixed(SolveKeplerLaguerreConway(eccentricity, M), E, 8);
-		return sol.first;
-	}
-	else if (eccentricity == 1.0)
-	{
-		// parabolic orbit; very common for comets
-		// TODO: handle this.
-		// Problem: E does not make sense here. True anomaly quantities (rSinNu, rCosNu) computed directly.
-		// Anyhow, Comets use CometOrbit class.
-		return M;
-	}
-	else
-	{
-		// Laguerre-Conway method for hyperbolic (ecc > 1) orbits.
-		double E = log(2 * M / eccentricity + 1.85);
-		Solution sol = solveIteration_fixed(SolveKeplerLaguerreConwayHyp(eccentricity, M), E, 30);
-		return sol.first;
-	}
-}
-
-
-Vec3d EllipticalOrbit::positionAtE(const double E) const
-{
-	double x, z;
-
-	if (eccentricity < 1.0)
-	{
-		double a = pericenterDistance / (1.0 - eccentricity);
-		x = a * (cos(E) - eccentricity);
-		z = a * std::sqrt(1 - eccentricity * eccentricity) * -sin(E);
-	}
-	else if (eccentricity > 1.0) // N.B. This is odd at least: elliptical must have ecc<1!
-	{
-		Q_ASSERT(0); // We should never come here!
-		double a = pericenterDistance / (1.0 - eccentricity);
-		x = -a * (eccentricity - cosh(E));
-		z = -a * std::sqrt(eccentricity * eccentricity - 1) * -sinh(E);
-	}
-	else
-	{
-		// TODO: Handle parabolic orbits
-		Q_ASSERT(0); // We should never come here!
-		x = 0.0;
-		z = 0.0;
-	}
-
-	Mat4d R = (Mat4d::zrotation(ascendingNode) *
-		   Mat4d::xrotation(inclination) *
-		   Mat4d::zrotation(argOfPeriapsis));
-
-	return R * Vec3d(x, -z, 0);
-}
-
-// Return the offset from the center.
-Vec3d EllipticalOrbit::positionAtTime(const double JDE) const
-{
-	double meanMotion = 2.0 * M_PI / period;
-	double meanAnomaly = meanAnomalyAtEpoch + (JDE-epoch) * meanMotion;
-	double E = eccentricAnomaly(meanAnomaly);
-
-	return positionAtE(E);
-}
-
-void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JDE, double* v) const
-{
-	Vec3d pos = positionAtTime(JDE);
+	Q_UNUSED(JDE)
+	Vec3d pos;
+	StelUtils::spheToRect(longitude, latitude, pos);
 	v[0] = rotateToVsop87[0]*pos[0] + rotateToVsop87[1]*pos[1] + rotateToVsop87[2]*pos[2];
 	v[1] = rotateToVsop87[3]*pos[0] + rotateToVsop87[4]*pos[1] + rotateToVsop87[5]*pos[2];
 	v[2] = rotateToVsop87[6]*pos[0] + rotateToVsop87[7]*pos[1] + rotateToVsop87[8]*pos[2];
+	v[0] *= distance;
+	v[1] *= distance;
+	v[2] *= distance;
 }
-*/

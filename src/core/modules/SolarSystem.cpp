@@ -446,6 +446,12 @@ void keplerOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orbitPt
 	static_cast<KeplerOrbit*>(orbitPtr)->getVelocity(xyzdot);
 }
 
+void gimbalOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orbitPtr)
+{
+	static_cast<GimbalOrbit*>(orbitPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+	static_cast<GimbalOrbit*>(orbitPtr)->getVelocity(xyzdot);
+}
+
 // Init and load the solar system data (2 files)
 void SolarSystem::loadPlanets()
 {
@@ -523,9 +529,9 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 }
 
-unsigned char SolarSystem::BvToColorIndex(double bV)
+unsigned char SolarSystem::BvToColorIndex(float bV)
 {
-	const double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
+	double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
 	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
@@ -658,11 +664,27 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: Add a new default for all non *_special.
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
 		posFuncType posfunc=Q_NULLPTR;
-		KeplerOrbit* orbitPtr=Q_NULLPTR;
+		Orbit* orbitPtr=Q_NULLPTR;
 		OsculatingFunctType *osculatingFunc = Q_NULLPTR;
 		bool closeOrbit = true;
 		double semi_major_axis=0; // used again below.
+		const QString type = pd.value(secname+"/type").toString();
 
+
+#ifdef USE_GIMBAL_ORBIT
+		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infintely slow KeplerOrbit)
+		// Note that for now we ignore any orbit-related config values from the ini file.
+		if (type=="observer")
+		{
+			// Create a pseudo orbit that allows interaction with keyboard
+			GimbalOrbit *orb = new GimbalOrbit(1, 0., 90.);    // [1 AU over north pole]
+			orbits.push_back(orb);
+
+			orbitPtr = orb;
+			posfunc = &gimbalOrbitPosFunc;
+		}
+		else
+#endif
 		if ((coordFuncName=="ell_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="kepler_orbit")) // ell_orbit used for planet moons. TODO: rename to kepler_orbit for all!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
@@ -762,6 +784,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
 
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
+			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
 			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
 								   eccentricity,           // 0..>1, but practically only 0..1
 								   inclination,            // [radians]
@@ -832,17 +855,16 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();
-
 		//TODO: Refactor the subclass selection to reduce duplicate code mess here,
 		// by at least using this base class pointer and using setXXX functions instead of mega-constructors
 		// that have to pass most of it on to the Planet class
-		PlanetP p;
+		PlanetP newP;
 
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" || type == "interstellar object") && !englishName.contains("Pluto"))
+		// FIXME: Try Pluto as MinorPlanet! It has its own pos_func and just no KeplerOrbit. So what? (Just fix getSiderealPeriod())
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type=="sednoid" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" || type == "interstellar object") && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
 
@@ -856,7 +878,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const bool hidden = pd.value(secname+"/hidden", false).toBool();
 			const QString normalMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 
-			p = PlanetP(new MinorPlanet(englishName,
+			newP = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius", 1.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
 						    color, // halo color
@@ -866,12 +888,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/normals_map", normalMapName).toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
-						    orbitPtr, // the CometOrbit object created previously
+						    static_cast<KeplerOrbit*>(orbitPtr), // the KeplerOrbit object created previously
 						    osculatingFunc, // should be Q_NULLPTR
 						    closeOrbit,
 						    hidden,
 						    type));
-			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
+			QSharedPointer<MinorPlanet> mp =  newP.dynamicCast<MinorPlanet>();
 
 			//Number, Provisional designation
 			mp->setMinorPlanetNumber(pd.value(secname+"/minor_planet_number", 0).toInt());
@@ -889,24 +911,24 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			mp->setColorIndexBV(bV);
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 
-			systemMinorBodies.push_back(p);
+			systemMinorBodies.push_back(newP);
 		}
 		else if (type == "comet")
 		{
 			minorBodies << englishName;
-			p = PlanetP(new Comet(englishName,
+			newP = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
 					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
-					      pd.value(secname+"/albedo", 0.25f).toFloat(),
+					      pd.value(secname+"/albedo", 0.075f).toFloat(), // assume very dark surface
 					      pd.value(secname+"/roughness",0.9f).toFloat(),
 					      pd.value(secname+"/outgas_intensity",0.1f).toFloat(),
 					      pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
 					      pd.value(secname+"/tex_map", "nomap.png").toString(),
 					      pd.value(secname+"/model").toString(),
 					      posfunc,
-					      orbitPtr,
-					      osculatingFunc,
+					      static_cast<KeplerOrbit*>(orbitPtr), // the KeplerOrbit object
+					      osculatingFunc, // ALWAYS NULL for comets.
 					      closeOrbit,
 					      pd.value(secname+"/hidden", false).toBool(),
 					      type,
@@ -914,11 +936,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
 					      pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
 					      ));
-			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			QSharedPointer<Comet> mp = newP.dynamicCast<Comet>();
 
 			//g,k magnitude system
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
-			const float slope = qBound(0.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 20.0f);
+			const float slope = qBound(-1.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 20.0f);
 			if (magnitude > -99)
 			{
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
@@ -930,48 +952,54 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
 			}
-			systemMinorBodies.push_back(p);
+			systemMinorBodies.push_back(newP);
 		}
-		else
+		else // type==star|planet|moon|dwarf planet|observer|artificial
 		{
+			//qDebug() << type;
+			Q_ASSERT(type=="star" || type=="planet" || type=="moon" || type=="artificial" || type=="observer" || type=="dwarf planet"); // TBD: remove Pluto...
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
-			p = PlanetP(new Planet(englishName,
+			QString normalMapName = "";
+			bool hidden = pd.value(secname+"/hidden", false).toBool();
+			if (!hidden) // no normal maps for invisible objects!
+				normalMapName = englishName.toLower().append("_normals.png");
+			newP = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
 					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/tex_map", "nomap.png").toString(),
-					       pd.value(secname+"/normals_map", englishName.toLower().append("_normals.png")).toString(),
+					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
-					       orbitPtr, // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
+					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", false).toBool(),
+					       hidden,
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
-			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
+			newP->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
 
 			// Moon designation (planet index + IAU moon number)
 			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
 			if (!moonDesignation.isEmpty())
 			{
-				p->setIAUMoonNumber(moonDesignation);
+				newP->setIAUMoonNumber(moonDesignation);
 			}
 		}
 
 		if (!parent.isNull())
 		{
-			parent->satellites.append(p);
-			p->parent = parent;
+			parent->satellites.append(newP);
+			newP->parent = parent;
 		}
-		if (secname=="earth") earth = p;
-		if (secname=="sun") sun = p;
-		if (secname=="moon") moon = p;
+		if (secname=="earth") earth = newP;
+		if (secname=="sun") sun = newP;
+		if (secname=="moon") moon = newP;
 
 		float rotObliquity = pd.value(secname+"/rot_obliquity",0.).toFloat()*(M_PI_180f);
 		float rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toFloat()*(M_PI_180f);
@@ -982,7 +1010,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
 		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
 
-		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
+		if(J2000NPoleRA || J2000NPoleDE)
 		{
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
@@ -1000,7 +1028,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
-		p->setRotationElements(
+		newP->setRotationElements(
 			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toFloat()/24.f,
 			pd.value(secname+"/rot_rotation_offset",0.).toFloat(),
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
@@ -1009,15 +1037,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
 			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
 
-
-		if (pd.value(secname+"/rings", 0).toBool()) {
+		if (pd.value(secname+"/rings", false).toBool()) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
 			const float rMax = pd.value(secname+"/ring_outer_size").toFloat()/AUf;
 			Ring *r = new Ring(rMin,rMax,pd.value(secname+"/tex_ring").toString());
-			p->setRings(r);
+			newP->setRings(r);
 		}
 
-		systemPlanets.push_back(p);
+		systemPlanets.push_back(newP);
 		readOk++;
 	}
 
@@ -1026,6 +1053,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		qWarning() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
+	else qDebug() << "SolarSystem has " << systemPlanets.count() << "entries.";
 
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)

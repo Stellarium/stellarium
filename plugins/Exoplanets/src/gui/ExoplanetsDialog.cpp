@@ -763,7 +763,7 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisX->clear();
 	axisY->clear();
 
-	const QList<axisPair> axis = {
+	static const QList<axisPair> axis = {
 	{ q_("Orbital Eccentricity"),          0},
 	{ q_("Orbit Semi-Major Axis, AU"),     1},
 	{ q_("Planetary Mass, Mjup"),          2},
