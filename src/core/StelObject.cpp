@@ -145,7 +145,7 @@ bool StelObject::isAboveRealHorizon(const StelCore *core) const
 
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	return 99;
 }
 
@@ -267,7 +267,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	bool withDesignations = app.getFlagUseCCSDesignation();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 	QString cepoch = qc_("on date", "coordinates for current epoch");
 	QString res;
 	QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
@@ -596,7 +596,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=QStringLiteral("Satellite"))
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		Vec3f rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");

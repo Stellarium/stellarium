@@ -86,10 +86,7 @@ void DateTimeDialog::setFlagEnableFocus(bool b)
 	{
 		enableFocus=b;
 		if (enableFocus)
-		{
-			// Set focus on day spinner by default
 			ui->spinner_day->setFocus();
-		}
 		else
 			ui->dateTimeTab->setFocus();
 	}

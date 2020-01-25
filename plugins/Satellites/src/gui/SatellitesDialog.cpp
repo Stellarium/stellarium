@@ -1020,8 +1020,7 @@ void SatellitesDialog::populateSourcesList()
 
 	Satellites* plugin = GETSTELMODULE(Satellites);
 	QStringList urls = plugin->getTleSources();
-	checkStateRole = plugin->isAutoAddEnabled() ? Qt::CheckStateRole
-						    : Qt::UserRole;
+	checkStateRole = plugin->isAutoAddEnabled() ? Qt::CheckStateRole : Qt::UserRole;
 	for (auto url : urls)
 	{
 		bool checked = false;
@@ -1036,8 +1035,7 @@ void SatellitesDialog::populateSourcesList()
 		item->setData(checkStateRole, checked ? Qt::Checked : Qt::Unchecked);
 	}
 	ui->sourceList->blockSignals(false);
-
-	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
+	// if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
 void SatellitesDialog::addSpecialGroupItem()

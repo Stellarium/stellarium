@@ -320,7 +320,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
 	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,	"StelGui.flagShowGotoSelectedObjectButton");
 	connectBoolProperty(ui->showNightmodeButtonCheckBox,	"StelGui.flagShowNightmodeButton");
-	connectBoolProperty(ui->showFullscreenButtonCheckBox,	"StelGui.flagShowFullscreenButton");
+	connectBoolProperty(ui->showFullscreenButtonCheckBox,		"StelGui.flagShowFullscreenButton");
 
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,	"StelGui.flagShowAsterismLinesButton");
