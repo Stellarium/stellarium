@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>358</height>
+    <width>666</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -251,9 +251,9 @@
         <widget class="QLineEdit" name="corsOriginEdit"/>
        </item>
        <item row="12" column="0" colspan="2">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="corsLabel">
          <property name="text">
-          <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify "*" to let any website take control - do this at your own risk.</string>
+          <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify &quot;*&quot; to let any website take control - do this at your own risk.</string>
          </property>
         </widget>
        </item>
