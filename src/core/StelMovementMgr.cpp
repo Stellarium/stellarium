@@ -406,63 +406,25 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				}
 				break;
 			case Qt::Key_PageUp:
-				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
-					gimbal->addToDistance(gimbal->getDistance()*0.05);
-				else
-					zoomIn(true);
+			case Qt::Key_multiply:
+				zoomIn(true);
 				break;
 			case Qt::Key_PageDown:
-				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
-					gimbal->addToDistance(-gimbal->getDistance()*0.05);
-				else
-					zoomOut(true);
-				break;
-			case Qt::Key_multiply:
-				if (gimbal && event->modifiers().testFlag(Qt::KeypadModifier))
-				{
-					//qDebug() << "Num-*";
-					gimbal->addToDistance(gimbal->getDistance()*0.05);
-				} else
-					zoomIn(true);
-				break;
 			case Qt::Key_division:
-				if (gimbal && event->modifiers().testFlag(Qt::KeypadModifier))
-				{
-					//qDebug() << "Num-/";
-					gimbal->addToDistance(-gimbal->getDistance()*0.05);
-				}
-				else
-					zoomOut(true);
+				zoomOut(true);
 				break;
-			case Qt::Key_Plus:
+			case Qt::Key_End:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
-					//qDebug() << "Alt-Plus";
 					gimbal->addToDistance(gimbal->getDistance()*0.05);
 				}
 				break;
-			case Qt::Key_Minus:
+			case Qt::Key_Home:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
-					//qDebug() << "Alt-Minus";
 					gimbal->addToDistance(-gimbal->getDistance()*0.05);
 				}
 				break;
-			case Qt::Key_5:
-				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
-				{
-					//qDebug() << "5";
-					gimbal->addToDistance(gimbal->getDistance()*0.05);
-				}
-				break;
-			case Qt::Key_6:
-				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
-				{
-					//qDebug() << "6";
-					gimbal->addToDistance(-gimbal->getDistance()*0.05);
-				}
-				break;
-
 			case Qt::Key_Shift:
 				moveSlow(true); break;
 			default:
