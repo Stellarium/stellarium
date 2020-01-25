@@ -788,7 +788,7 @@ namespace StelUtils
 		return (T(0) < val) - (val < T(0));
 	}
 	
-	//! Compute cosines and sines around a circle which is split in "segments" parts.
+	//! Compute cosines and sines around a circle which is split in "slices" parts.
 	//! Values are stored in the global static array cos_sin_theta.
 	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
 	//! @param slices number of partitions (elsewhere called "segments") for the circle
