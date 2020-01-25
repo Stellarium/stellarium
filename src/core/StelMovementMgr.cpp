@@ -33,6 +33,8 @@
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "LabelMgr.hpp"
+#include "Planet.hpp"
+#include "Orbit.hpp"
 
 #include <cmath>
 #include <QString>
@@ -353,33 +355,114 @@ double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
 
 void StelMovementMgr::handleKeys(QKeyEvent* event)
 {
+	GimbalOrbit *gimbal=Q_NULLPTR;
+#ifdef USE_GIMBAL_ORBIT
+	StelCore *core=StelApp::getInstance().getCore();
+	Planet* obsPlanet= core->getCurrentPlanet().data();
+	if (obsPlanet->getPlanetType()==Planet::isObserver)
+	{
+		gimbal=static_cast<GimbalOrbit*>(obsPlanet->getOrbit());
+	}
+#endif
         if (event->type() == QEvent::KeyPress)
 	{
+		// qDebug() << "Modifiers:" << event->modifiers();
+		// FIXME: Alt modifier seems problematic. The keys to modify distance in an observer gimbal seem to
+		// collide with operating system hotkeys. Using Alt5/Alt6 is experimental just to have "some" working solution.
 		// Direction and zoom deplacements
 		switch (event->key())
 		{
 			case Qt::Key_Left:
-				turnLeft(true); break;
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
+					gimbal->addToLongitude(-5.);
+				} else {
+					turnLeft(true);
+				}
+				break;
 			case Qt::Key_Right:
-				turnRight(true); break;
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
+					gimbal->addToLongitude(5.);
+				} else
+				turnRight(true);
+				break;
 			case Qt::Key_Up:
-				if (event->modifiers().testFlag(Qt::ControlModifier)){
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
+					gimbal->addToLatitude(5.);
+				}
+				else if (event->modifiers().testFlag(Qt::ControlModifier)){
 					zoomIn(true);
 				} else {
 					turnUp(true);
 				}
 				break;
 			case Qt::Key_Down:
-				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
+					gimbal->addToLatitude(-5.);
+				}
+				else if (event->modifiers().testFlag(Qt::ControlModifier)) {
 					zoomOut(true);
 				} else {
 					turnDown(true);
 				}
 				break;
 			case Qt::Key_PageUp:
-				zoomIn(true); break;
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+					gimbal->addToDistance(gimbal->getDistance()*0.05);
+				else
+					zoomIn(true);
+				break;
 			case Qt::Key_PageDown:
-				zoomOut(true); break;
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+				else
+					zoomOut(true);
+				break;
+			case Qt::Key_multiply:
+				if (gimbal && event->modifiers().testFlag(Qt::KeypadModifier))
+				{
+					//qDebug() << "Num-*";
+					gimbal->addToDistance(gimbal->getDistance()*0.05);
+				} else
+					zoomIn(true);
+				break;
+			case Qt::Key_division:
+				if (gimbal && event->modifiers().testFlag(Qt::KeypadModifier))
+				{
+					//qDebug() << "Num-/";
+					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+				}
+				else
+					zoomOut(true);
+				break;
+			case Qt::Key_Plus:
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+				{
+					//qDebug() << "Alt-Plus";
+					gimbal->addToDistance(gimbal->getDistance()*0.05);
+				}
+				break;
+			case Qt::Key_Minus:
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+				{
+					//qDebug() << "Alt-Minus";
+					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+				}
+				break;
+			case Qt::Key_5:
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+				{
+					//qDebug() << "5";
+					gimbal->addToDistance(gimbal->getDistance()*0.05);
+				}
+				break;
+			case Qt::Key_6:
+				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
+				{
+					//qDebug() << "6";
+					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+				}
+				break;
+
 			case Qt::Key_Shift:
 				moveSlow(true); break;
 			default:

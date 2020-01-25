@@ -921,18 +921,13 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 
 void StelMainScriptAPI::clear(const QString& state)
 {
-	int stateInt = 0;
-	if (state.toLower() == "natural")
-		stateInt = 1;
-	else if (state.toLower() == "starchart")
-		stateInt = 2;
-	else if (state.toLower() == "deepspace")
-		stateInt = 3;
-	else if (state.toLower() == "galactic")
-		stateInt = 4;
-	else if (state.toLower() == "supergalactic")
-		stateInt = 5;
-
+	static const QMap<QString, int>stateMap={
+		{ "natural",   1},
+		{ "starchart", 2},
+		{ "deepspace", 3},
+		{ "galactic",  4},
+		{ "supergalactic", 5 }};
+	const int stateInt = stateMap.value(state.toLower(), 0);
 	if (stateInt == 0)
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
@@ -952,7 +947,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
-		// Hide artificial satellites through StelProperties to avoid crash if plugin was did't loaded
+		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
 		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
 		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
 		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);

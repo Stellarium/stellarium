@@ -161,7 +161,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		QString cometType = qc_("non-periodic", "type of comet");
-		if (orbitPtr->getEccentricity() < 1.0)
+		if (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() != 1.0)
 		{
 			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
 			cometType = qc_("periodic", "type of comet");
@@ -190,8 +190,8 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	QString distAU, distKM;
 	if (flags&Distance)
 	{
-		const double hdistanceAu = getHeliocentricEclipticPos().length();
-		const double hdistanceKm = AU * hdistanceAu;
+		double hdistanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
 		QString au = qc_("AU", "distance, astronomical unit");
 		bool useKM = true;
@@ -208,8 +208,8 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		}
 		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 
-		const double distanceAu = getJ2000EquatorialPos(core).length();
-		const double distanceKm = AU * distanceAu;
+		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
@@ -230,8 +230,8 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		// TRANSLATORS: Unit of measure for speed - kilometers per second
 		QString kms = qc_("km/s", "speed");
 
-		const Vec3d orbitalVel=getEclipticVelocity();
-		const double orbVel=orbitalVel.length();
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
 			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
@@ -241,14 +241,14 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&Extra)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
-		const double siderealPeriod = getSiderealPeriod();
+		double siderealPeriod = getSiderealPeriod();
 		if (siderealPeriod>0.0)
 		{
 			// Sidereal (orbital) period for comets in Julian years (symbol: a)
 			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
-		const double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
+		double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
 		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
 		{
 			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
@@ -276,7 +276,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 
 
-	if ((flags&Size) && (tailFactors[0]>0.0))
+	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		QString comaEst = q_("Coma diameter (estimate)");
@@ -330,7 +330,7 @@ void Comet::setSemiMajorAxis(const double value)
 
 double Comet::getSiderealPeriod() const
 {
-	const double semiMajorAxis=orbitPtr->getSemimajorAxis();
+	const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
 	return ((semiMajorAxis>0) ? KeplerOrbit::calculateSiderealPeriod(semiMajorAxis) : 0.);
 }
 
@@ -370,7 +370,7 @@ void Comet::update(int deltaTime)
 	StelCore* core=StelApp::getInstance().getCore();
 	double dateJDE=core->getJDE();
 
-	if (!orbitPtr->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
@@ -380,7 +380,7 @@ void Comet::update(int deltaTime)
 	{
 		lastJDEtail=dateJDE;
 
-		if (orbitPtr->getUpdateTails()){
+		if (static_cast<KeplerOrbit*>(orbitPtr)->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
 			tailFactors=getComaDiameterAndTailLengthAU();
 
@@ -400,7 +400,7 @@ void Comet::update(int deltaTime)
 				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
 				//gastailColorArr.fill(Vec3f(0.3,0.3,0.3), gastailVertexArr.length());
 				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
-				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(orbitPtr->getVelocity().length()));
+				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(static_cast<KeplerOrbit*>(orbitPtr)->getVelocity().length()));
 				//dusttailColorArr.fill(Vec3f(0.3,0.3,0.3), dusttailVertexArr.length());
 
 
@@ -409,7 +409,7 @@ void Comet::update(int deltaTime)
 				Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
 				gasTailRot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 
-				Vec3d velocity=orbitPtr->getVelocity(); // [AU/d]
+				Vec3d velocity=static_cast<KeplerOrbit*>(orbitPtr)->getVelocity(); // [AU/d]
 				// This was a try to rotate a straight parabola somewhat away from the antisolar direction.
 				//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
 				// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
@@ -425,7 +425,7 @@ void Comet::update(int deltaTime)
 					dustVertices[i].transfo4d(dustTailRot);
 				}
 			}
-			orbitPtr->setUpdateTails(false); // don't update until position has been recalculated elsewhere
+			static_cast<KeplerOrbit*>(orbitPtr)->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 		}
 	}
 
@@ -529,7 +529,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	{
 		return;
 	}
-	if (!orbitPtr->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!

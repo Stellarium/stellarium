@@ -119,7 +119,7 @@ public:
 	void setColorIndexBV(float bv=99.f);
 
 	//! get sidereal period for minor planet
-	double getSiderealPeriod() const;
+	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
 
 private:
 	int minorPlanetNumber;
