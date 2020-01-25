@@ -1120,7 +1120,7 @@ private:
 
 	//! Calculate a color of Solar system bodies
 	//! @param bV value of B-V color index
-	unsigned char BvToColorIndex(float bV);
+	static unsigned char BvToColorIndex(double bV);
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;

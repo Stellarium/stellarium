@@ -529,9 +529,9 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 }
 
-unsigned char SolarSystem::BvToColorIndex(float bV)
+unsigned char SolarSystem::BvToColorIndex(double bV)
 {
-	double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
+	const double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
 	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
@@ -894,7 +894,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    hidden,
 						    type));
 			QSharedPointer<MinorPlanet> mp =  newP.dynamicCast<MinorPlanet>();
-
 			//Number, Provisional designation
 			mp->setMinorPlanetNumber(pd.value(secname+"/minor_planet_number", 0).toInt());
 			mp->setProvisionalDesignation(pd.value(secname+"/provisional_designation", "").toString());
@@ -960,11 +959,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			Q_ASSERT(type=="star" || type=="planet" || type=="moon" || type=="artificial" || type=="observer" || type=="dwarf planet"); // TBD: remove Pluto...
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
-			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
-			QString normalMapName = "";
-			bool hidden = pd.value(secname+"/hidden", false).toBool();
-			if (!hidden) // no normal maps for invisible objects!
-				normalMapName = englishName.toLower().append("_normals.png");
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609			
 			newP = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -972,13 +967,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/tex_map", "nomap.png").toString(),
-					       pd.value(secname+"/normals_map", normalMapName).toString(),
+					       pd.value(secname+"/normals_map", englishName.toLower().append("_normals.png")).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
 					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
 					       osculatingFunc,
 					       closeOrbit,
-					       hidden,
+					       pd.value(secname+"/hidden", false).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
@@ -1010,7 +1005,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
 		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
 
-		if(J2000NPoleRA || J2000NPoleDE)
+		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
 		{
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
