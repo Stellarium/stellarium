@@ -682,7 +682,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			orbitPtr = orb;
 			posfunc = &gimbalOrbitPosFunc;
-
 		}
 		else
 #endif
@@ -957,7 +956,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else // type==star|planet|moon|dwarf planet|observer|artificial
 		{
-			qDebug() << type;
+			//qDebug() << type;
 			Q_ASSERT(type=="star" || type=="planet" || type=="moon" || type=="artificial" || type=="observer" || type=="dwarf planet"); // TBD: remove Pluto...
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png

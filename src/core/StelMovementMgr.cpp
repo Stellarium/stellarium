@@ -358,7 +358,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 	GimbalOrbit *gimbal=Q_NULLPTR;
 #ifdef USE_GIMBAL_ORBIT
 	StelCore *core=StelApp::getInstance().getCore();
-	Planet* obsPlanet= core->getCurrentPlanet().get();
+	Planet* obsPlanet= core->getCurrentPlanet().data();
 	if (obsPlanet->getPlanetType()==Planet::isObserver)
 	{
 		gimbal=static_cast<GimbalOrbit*>(obsPlanet->getOrbit());
