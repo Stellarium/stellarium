@@ -151,6 +151,7 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		res.append(QString("%1: <b>%2</b> (%3: B)<br />").arg(q_("Magnitude"), QString::number(bMag, 'f', decimals), q_("Photometric system")));
 	// TODO: Extinction for B magnitude? Or show B magnitude in addition to valid V magnitude?
 
+	res += getExtraInfoStrings(Magnitude).join(" ");
 	return res;
 }
 

@@ -250,7 +250,9 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 
 			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
-		return QString("%1: <b>%2</b>%3<br />").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals), emag);
+		QString str = QString("%1: <b>%2</b>%3<br />").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals), emag);
+		str += getExtraInfoStrings(Magnitude).join(" ");
+		return str;
 	}
 	else
 		return QString();
@@ -415,9 +417,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		// TRANSLATORS: Azimuth/Altitude
-		QString AzAlt = qc_("Az./Alt.", "celestial coordinate system");
-		if (withDesignations)
-			AzAlt = "A/a";
+		const QString AzAlt = (withDesignations ? "A/a" : qc_("Az./Alt.", "celestial coordinate system"));
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
@@ -441,10 +441,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		// TRANSLATORS: Galactic longitude/latitude
-		QString GalLongLat = qc_("Gal. long./lat.", "celestial coordinate system");
-		if (withDesignations)
-			GalLongLat = "l/b";
-
+		const QString GalLongLat = (withDesignations ? "l/b" : qc_("Gal. long./lat.", "celestial coordinate system"));
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		else
@@ -467,9 +464,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		// TRANSLATORS: Supergalactic longitude/latitude
-		QString SGalLongLat = qc_("Supergal. long./lat.", "celestial coordinate system");
-		if (withDesignations)
-			SGalLongLat = "SGL/SGB";
+		const QString SGalLongLat = (withDesignations ? "SGL/SGB" : qc_("Supergal. long./lat.", "celestial coordinate system"));
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
@@ -485,9 +480,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
 	// TRANSLATORS: Ecliptic longitude/latitude
-	QString EqlLongLat = qc_("Ecl. long./lat.", "celestial coordinate system");
-	if (withDesignations)
-		EqlLongLat = QString("%1/%2").arg(QChar(0x03BB), QChar(0x03B2));
+	const QString EqlLongLat = (withDesignations ? QString("%1/%2").arg(QChar(0x03BB), QChar(0x03B2)) :
+						       qc_("Ecl. long./lat.", "celestial coordinate system") );
 
 	if (flags&EclipticCoordJ2000)
 	{
@@ -562,6 +556,10 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (withTables)
 		 res += "</table>";
+	if (flags&EclipticCoordJ2000)
+		res += getExtraInfoStrings(flags&EclipticCoordJ2000).join(' ');
+	if (flags&EclipticCoordOfDate)
+		res += getExtraInfoStrings(flags&EclipticCoordOfDate).join(' ');
 
 	if ((flags&SiderealTime) && (currentPlanet==QStringLiteral("Earth")))
 	{
@@ -594,6 +592,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		if (withTables && !(flags&RTSTime && getType()!=QStringLiteral("Satellite")))
 			res += "</table>";
+		res += getExtraInfoStrings(flags&SiderealTime).join(' ');
 	}
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive))
@@ -667,24 +666,30 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += q_("Polar dawn") + "<br />";
 		else if (rts[0]<99.f && rts[2]>99.f)
 			res += q_("Polar dusk") + "<br />";
+		res += getExtraInfoStrings(flags&RTSTime).join(' ');
 	}
 
-	if (flags&Extra && getType()!=QStringLiteral("Star"))
+	if (flags&Extra)
 	{
-		QString pa;
-		const double par = static_cast<double>(getParallacticAngle(core));
-		if (withDecimalDegree)
-			pa = StelUtils::radToDecDegStr(par);
-		else
-			pa = StelUtils::radToDmsStr(par, true);
+		if (getType()!=QStringLiteral("Star"))
+		{
+			QString pa;
+			const double par = static_cast<double>(getParallacticAngle(core));
+			if (withDecimalDegree)
+				pa = StelUtils::radToDecDegStr(par);
+			else
+				pa = StelUtils::radToDmsStr(par, true);
 
-		res += QString("%1: %2").arg(q_("Parallactic Angle")).arg(pa) + "<br />";
+			res += QString("%1: %2").arg(q_("Parallactic Angle")).arg(pa) + "<br />";
+		}
+		res += getExtraInfoStrings(Extra).join(' ');
 	}
 
 	if (flags&IAUConstellation)
 	{
 		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
 		res += QString("%1: %2").arg(q_("IAU Constellation"), constel) + "<br>";
+		res += getExtraInfoStrings(flags&IAUConstellation).join(' ');
 	}
 
 	return res;
@@ -693,7 +698,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
-	str.append(getExtraInfoStrings(flags|DebugAid).join(' '));
+	str.append(getExtraInfoStrings(Script).join(' '));
+	str.append(QString("Object has %1 Script infostrings").arg(getExtraInfoStrings(Script).length())); // FIXME: Remove this line after developing!
+	str.append(getExtraInfoStrings(DebugAid).join(' '));
 
 	// hack for avoiding an empty line before table
 	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
@@ -874,13 +881,13 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-void StelObject::setExtraInfoString(const InfoStringGroup flags, const QString &str)
+void StelObject::setExtraInfoString(const InfoStringGroup& flags, const QString &str)
 {
 	extraInfoStrings.remove(flags); // delete all entries with these flags
 	if (str.length()>0)
 		extraInfoStrings.insert(flags, str);
 }
-void StelObject::addToExtraInfoString(const InfoStringGroup flags, const QString &str)
+void StelObject::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)
 {
 	extraInfoStrings.insertMulti(flags, str);
 }
@@ -902,4 +909,17 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 	  }
 
 	return list;
+}
+
+void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
+{
+	QStringList list;
+	QMultiMap<InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
+	  while (i != extraInfoStrings.end()) {
+		  if (i.key() & flags)
+		  {
+			  extraInfoStrings.remove(i.key(), i.value());
+		  }
+		  ++i;
+	  }
 }

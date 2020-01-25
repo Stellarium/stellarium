@@ -124,6 +124,7 @@ QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoString
 			res = StelObject::getMagnitudeInfoString(core, flags, alt_app, decimals);
 		else
 			res = QString("%1: <b>--</b><br />").arg(q_("Magnitude"));
+		res += getExtraInfoStrings(Magnitude).join(" ");
 	}
 	return res;
 }

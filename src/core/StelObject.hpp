@@ -66,9 +66,10 @@ public:
 		IAUConstellation        = 0x00020000, //!< Three-letter constellation code (And, Boo, Cas, ...)
 		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
-		NoFont			= 0x00100000,
-		PlainText			= 0x00200000, //!< Strip HTML tags from output
-		DebugAid                = 0x40000000  //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		Script                  = 0x00100000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x00200000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		NoFont			= 0x01000000,
+		PlainText		= 0x02000000  //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
@@ -258,14 +259,21 @@ public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
 	//! @note This should be used with caution.
-	virtual void setExtraInfoString(const InfoStringGroup flags, const QString &str);
+	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
-	virtual void addToExtraInfoString(const StelObject::InfoStringGroup flags, const QString &str);
+	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 	//! Retrieve a QStringList of all extra info strings that match flags.
 	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
+	//! Remove the extraInfoStrings with the given flags.
+	//! After display, InfoPanel::setTextFromObjects() auto-clears the strings of the selected object using the AllInfo constant.
+	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
+	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
+	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
 protected:
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	//! FIXME: We should split this and provide shorter virtual methods for various parts of the InfoString.
+	//! The ExtraInfoStrings should be placed per flag, where they best fit.
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Format the magnitude info string for the object
@@ -275,7 +283,8 @@ protected:
 	//! @param decimals significant digits after the comma.
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
 
-	//! Apply post processing on the info string
+	//! Apply post processing on the info string.
+	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 private:
 	//! Compute time of rise, transit and set for celestial object for current location.
@@ -284,8 +293,10 @@ private:
 	Vec3f computeRTSTime(StelCore* core) const;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
-	//! TODO: Maybe enrich this Map with some Module ID, to avoid conflicts?
-	//! Make sure this string map gets cleared e.g. in update() methods.
+	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
+	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.
+	//! This string map gets cleared by InfoPanel::setTextFromObjects(), with the exception of strings with Script or DebugAid flags,
+	//! which have been injected by scripts or for debugging (take care of those yourself!).
 	QMultiMap<InfoStringGroup, QString> extraInfoStrings;
 
 	static int stelObjectPMetaTypeID;
