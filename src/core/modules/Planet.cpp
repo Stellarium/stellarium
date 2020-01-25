@@ -518,14 +518,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString kms = qc_("km/s", "speed");
 
 		Vec3d orbitalVel=getEclipticVelocity();
-		double orbVel=orbitalVel.length();
+		const double orbVel=orbitalVel.length();
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
-			double orbVelKms=orbVel* AU/86400.;
+			const double orbVelKms=orbVel* AU/86400.;
 //			if (englishName=="Moon")
 //				orbVelKms=orbVel;
 			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
-			double helioVel=getHeliocentricEclipticVelocity().length();
+			const double helioVel=getHeliocentricEclipticVelocity().length();
 			if (!fuzzyEquals(helioVel, orbVel))
 				oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
 		}
@@ -537,7 +537,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 
-	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	const double angularSize = 2.*getAngularSize(core)*M_PI_180;
 	if (flags&Size && angularSize>=4.8e-8)
 	{
 		QString s1, s2, sizeStr = "";
@@ -593,8 +593,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: %2 %3").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
 	}
 
-	double siderealPeriod = getSiderealPeriod();
-	double siderealDay = getSiderealDay();
+	const double siderealPeriod = getSiderealPeriod();
+	const double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -626,7 +626,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 		}
 
-		double siderealPeriodCurrentPlanet = currentPlanet->getSiderealPeriod();
+		const double siderealPeriodCurrentPlanet = currentPlanet->getSiderealPeriod();
 		QString celestialObject = getEnglishName();
 		if (celestialObject!="Sun")
 			celestialObject = getParent()->getEnglishName();
