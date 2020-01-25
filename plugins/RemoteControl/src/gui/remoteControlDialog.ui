@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>358</height>
+    <width>666</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -146,7 +146,7 @@
       </attribute>
       <layout class="QFormLayout" name="formLayout">
        <item row="7" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="labelPortNumber">
          <property name="text">
           <string>Port Number:</string>
          </property>
@@ -206,7 +206,7 @@
         </widget>
        </item>
        <item row="9" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labelPassword">
          <property name="text">
           <string>Password</string>
          </property>
@@ -219,7 +219,7 @@
         <widget class="QLineEdit" name="passwordEdit"/>
        </item>
        <item row="10" column="0" colspan="2">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="labelNote">
          <property name="font">
           <font>
            <italic>true</italic>
@@ -251,9 +251,9 @@
         <widget class="QLineEdit" name="corsOriginEdit"/>
        </item>
        <item row="12" column="0" colspan="2">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="labelCors">
          <property name="text">
-          <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify "*" to let any website take control - do this at your own risk.</string>
+          <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify &quot;*&quot; to let any website take control - do this at your own risk.</string>
          </property>
         </widget>
        </item>

@@ -129,11 +129,7 @@ public:
 	virtual bool configureGui(bool show=true);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	//! Returns the module-specific style sheet.
-	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
-	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
-	//! while flagShowOculars or flagShowCCD == true.
-	virtual void handleKeys(class QKeyEvent* event);
+	//! Returns the module-specific style sheet.	
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void update(double) {;}
 
@@ -160,6 +156,9 @@ public slots:
 	void incrementTelescopeIndex();
 	void incrementLensIndex();
 	void disableLens();
+	// Rotate reticle
+	void  rotateReticleClockwise();
+	void  rotateReticleCounterclockwise();
 
 	void rotateCCD(int amount);     //!< amount must be a number. This adds to the current rotation.
 	double getSelectedCCDRotationAngle(void) const; //!< get rotation angle from currently selected CCD

@@ -527,20 +527,18 @@ void OcularDialog::initAboutText()
 	Q_ASSERT(gui);
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	Q_ASSERT(actionMgr);
-	StelAction* actionOcular = actionMgr->findAction("actionShow_Ocular");
-	Q_ASSERT(actionOcular);
-	StelAction* actionMenu = actionMgr->findAction("actionShow_Ocular_Menu");
-	Q_ASSERT(actionMenu);
-	QKeySequence ocularShortcut = actionOcular->getShortcut();
-	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);
-	ocularString = ocularString.toHtmlEscaped();
+	QString ocularString = actionMgr->findAction("actionShow_Ocular")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
 	if (ocularString.isEmpty())
 		ocularString = q_("[no key defined]");
-	QKeySequence menuShortcut = actionMenu->getShortcut();
-	QString menuString = menuShortcut.toString(QKeySequence::NativeText);
-	menuString = menuString.toHtmlEscaped();
+	QString menuString = actionMgr->findAction("actionShow_Ocular_Menu")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
 	if (menuString.isEmpty())
 		menuString = q_("[no key defined]");
+	QString rotateClockwiseString = actionMgr->findAction("actionShow_Ocular_Rotate_Reticle_Clockwise")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
+	if (rotateClockwiseString.isEmpty())
+		rotateClockwiseString = q_("[no key defined]");
+	QString rotateCounterclockwiseString = actionMgr->findAction("actionShow_Ocular_Rotate_Reticle_Counterclockwise")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
+	if (rotateCounterclockwiseString.isEmpty())
+		rotateCounterclockwiseString = q_("[no key defined]");
 
 	html += "<ul>";
 	html += "<li>";
@@ -552,11 +550,11 @@ void OcularDialog::initAboutText()
 	html += "</li>";
 
 	html += "<li>";
-	html += QString("<strong>%1:</strong> %2").arg("Alt+M").arg(q_("Rotate reticle pattern of the eyepiece clockwise."));
+	html += QString("<strong>%1:</strong> %2").arg(rotateClockwiseString).arg(q_("Rotate reticle pattern of the eyepiece clockwise."));
 	html += "</li>";
 
 	html += "<li>";
-	html += QString("<strong>%1:</strong> %2").arg("Shift+Alt+M").arg(q_("Rotate reticle pattern of the eyepiece сounterclockwise."));
+	html += QString("<strong>%1:</strong> %2").arg(rotateCounterclockwiseString).arg(q_("Rotate reticle pattern of the eyepiece сounterclockwise."));
 	html += "</li>";
 
 	html += "</ul>";
