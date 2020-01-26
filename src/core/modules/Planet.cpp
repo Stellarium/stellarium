@@ -1580,7 +1580,6 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				Mat4d::zrotation(re.ascendingNode) * Mat4d::xrotation(re.obliquity);
 
 		// MAYBE rotLocalToParent=StelCore::matJ2000ToVsop87 * Mat4d::zrotation(re.ra0) * Mat4d::xrotation(M_PI_2-re.de0);
-
 	} else
 	if (parent)
 	{
@@ -1665,13 +1664,13 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		}
 		else if (englishName=="Phobos")
 		{
-			const double M1=(M_PI_180)*(169.51+0.4357640*t);
+			const double M1=M_PI_180*(169.51+remainder(0.4357640*t, 360.0));
 			J2000NPoleRA+=(1.79*M_PI_180)*sin(M1);
 			J2000NPoleDE-=(1.08*M_PI_180)*cos(M1);
 		}
 		else if (englishName=="Deimos")
 		{
-			const double M3=(M_PI/180)*(53.47-0.0181510*t);
+			const double M3=M_PI_180*(53.47-remainder(0.0181510*t, 360.0));
 			J2000NPoleRA+=(2.98*M_PI_180)*sin(M3);
 			J2000NPoleDE-=(1.78*M_PI_180)*cos(M3);
 		}
@@ -1919,26 +1918,25 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		}
 		else {
 			debugAid.append( QString("CTMxNR: No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
-
 		}
-		if (re.method==RotationElements::WGCCRE)
-		{
-			// The new model directly gives a matrix into ICRF, which is practically identical and called VSOP87 for us.
-			setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
-						 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
-						 //*StelCore::matJ2000ToVsop87
-						 );
-			debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
-		}
-		else
-		{
-		// 0.20+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
-		// Also here, the preliminary version for Earth's precession was modelled, before the Vondrak2011 model which came in V0.14.
-		// No other Planet had precessionRate defined, so it's safe to remove it here.
-		//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
-		rotLocalToParent = Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity);
-		//qDebug() << "Planet" << englishName << ": computeTransMatrix() setting old-style rotLocalToParent.";
-		debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+		switch (re.method) {
+			case RotationElements::WGCCRE:
+				// The new model directly gives a matrix into ICRF, which is practically identical and called VSOP87 for us.
+				setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
+							 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
+							 //*StelCore::matJ2000ToVsop87
+							 );
+				debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+				break;
+			case RotationElements::Traditional:
+				// 0.20+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
+				// Also here, the preliminary version for Earth's precession was modelled, before the Vondrak2011 model which came in V0.14.
+				// No other Planet had precessionRate defined, so it's safe to remove it here.
+				//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
+				rotLocalToParent = Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity);
+				//qDebug() << "Planet" << englishName << ": computeTransMatrix() setting old-style rotLocalToParent.";
+				debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+				break;
 		}
 	}
 	addToExtraInfoString(DebugAid, debugAid);
@@ -1964,25 +1962,29 @@ Mat4d Planet::getRotEquatorialToVsop87(void) const
 
 void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 {
-	if (re.method==RotationElements::Traditional)
-	{
-		Mat4d a = Mat4d::identity();
-		if (parent)
+	switch (re.method) {
+		case RotationElements::Traditional:
 		{
-			for (PlanetP p=parent;p->parent;p=p->parent)
+			Mat4d a = Mat4d::identity();
+			if (parent)
 			{
-				// The Sun is the ultimate parent. However, we don't want its matrix!
-				if (p->pType!=isStar)
+				for (PlanetP p=parent;p->parent;p=p->parent)
 				{
-					addToExtraInfoString(DebugAid, QString("This involves localToParent of %1 <br/>").arg(p->englishName));
-					a = p->rotLocalToParent * a;
+					// The Sun is the ultimate parent. However, we don't want its matrix!
+					if (p->pType!=isStar)
+					{
+						addToExtraInfoString(DebugAid, QString("This involves localToParent of %1 <br/>").arg(p->englishName));
+						a = p->rotLocalToParent * a;
+					}
 				}
 			}
+			rotLocalToParent = a.transpose() * m;
 		}
-		rotLocalToParent = a.transpose() * m;
+			break;
+		case RotationElements::WGCCRE:
+			rotLocalToParent = m;
+			break;
 	}
-	else
-		rotLocalToParent = m;
 }
 
 
@@ -2195,6 +2197,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		}
 		// re.currentAxisW=w; // TODO Maybe allow this later, and separate "computeSiderealTime()" from "getSiderealTime()"
 		// FIXME: Do "WHATEVER" to convert this into sidereal time!
+		//return w-re.currentAxisRA*M_180_PI;  // NOT working
 		return w;
 	}
 
@@ -2812,10 +2815,21 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	}
 
 	PlanetP p = parent;
-	while (p && p->parent)
-	{
-		mat = Mat4d::translation(p->eclipticPos) * mat * p->rotLocalToParent;
-		p = p->parent;
+	switch (re.method) {
+		case RotationElements::Traditional:
+			while (p && p->parent)
+			{
+				mat = Mat4d::translation(p->eclipticPos) * mat * p->rotLocalToParent;
+				p = p->parent;
+			}
+			break;
+		case RotationElements::WGCCRE:
+			while (p && p->parent)
+			{
+				mat = Mat4d::translation(p->eclipticPos) * mat; // * p->rotLocalToParent;
+				p = p->parent;
+			}
+			break;
 	}
 
 	// This removed totally the Planet shaking bug!!!
@@ -3616,6 +3630,10 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 // Used in drawSphere() to compute shadows.
 void Planet::computeModelMatrix(Mat4d &result) const
 {
+	// if (englishName=="Earth")
+	// {
+	// 	qDebug() << "computeModelMatrix for Earth: " << (re.method==RotationElements::Traditional ? "Traditional" : "WGCCRE"); // ==> WGCCRE
+	// }
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
 	switch (re.method)
@@ -3626,6 +3644,7 @@ void Planet::computeModelMatrix(Mat4d &result) const
 				result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
 				p = p->parent;
 			}
+			result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 			break;
 		case RotationElements::WGCCRE:
 			while (p && p->parent)
@@ -3633,9 +3652,10 @@ void Planet::computeModelMatrix(Mat4d &result) const
 				result = Mat4d::translation(p->eclipticPos) * result;
 				p = p->parent;
 			}
+			result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation +	90.f)); // FIXME: Probably something else!
 			break;
 	}
-	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+//	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
 Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
@@ -4525,7 +4545,7 @@ void Planet::updatePlanetCorrections(const double JDE, const PlanetCorrection pl
 
 	switch (planet){
 		case EarthMoon:
-			if (fabs(JDE-planetCorrections.JDE_E)>0.01)
+			if (fabs(JDE-planetCorrections.JDE_E)>StelCore::JD_MINUTE)
 			{ // Moon/Earth correction terms. This is from WGCCRE2009. We must fmod them, else we have sin(LARGE)>>1
 				planetCorrections.JDE_E=JDE; // keep record of when these values are valid.
 				planetCorrections.E1= M_PI_180* (125.045 - remainder( 0.0529921*d, 360.0));

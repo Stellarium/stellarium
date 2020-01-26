@@ -1087,7 +1087,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				rotPeriod=360.0/J2000NPoleW1;
 				qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
 			}
-
 		}
 
 		// rot_periode given in hours (from which rotPeriod in days),
