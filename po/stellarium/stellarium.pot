@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-01-26 18:22+0700\n"
+"POT-Creation-Date: 2020-01-26 18:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12147,6 +12147,7 @@ msgid "Select previous eyepiece"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
@@ -12603,12 +12604,8 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
-msgid "Rotate reticle pattern of the eyepiece clockwise."
-msgstr ""
-
 #: plugins/Oculars/src/gui/OcularDialog.cpp:557
-msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
+msgid "Rotate reticle pattern of the eyepiece сounterclockwise"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1289
