@@ -52,34 +52,32 @@ public:
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
 		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
 		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance			= 0x00000040, //!< Info about an object's distance
-		Size				= 0x00000080, //!< Info about an object's size
-		Velocity			= 0x00000100, //!< Info about object's velocity
-		Extra				= 0x00000200, //!< Derived class-specific extra fields
-		HourAngle			= 0x00000400, //!< The hour angle + DE (of date)
+		Distance		= 0x00000040, //!< Info about an object's distance
+		Size			= 0x00000080, //!< Info about an object's size
+		Velocity		= 0x00000100, //!< Info about object's velocity
+		Extra			= 0x00000200, //!< Derived class-specific extra fields
+		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
 		GalacticCoord		= 0x00001000, //!< The galactic position
 		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
-		ObjectType		= 0x00004000, //!< The type of the object (star, planet, etc.)
-		EclipticCoordJ2000	= 0x00008000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
-		EclipticCoordOfDate	= 0x00010000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00020000, //!< Three-letter constellation code (And, Boo, Cas, ...)
-		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
-		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
-		Script                  = 0x00100000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x00200000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		OtherCoord		= 0x00004000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
+		ObjectType		= 0x00008000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000	= 0x00010000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate	= 0x00020000, //!< The ecliptic position (of date)
+		IAUConstellation        = 0x00040000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		SiderealTime		= 0x00080000, //!< Mean and Apparent Sidereal Time
+		RTSTime			= 0x00100000, //!< Time of rise, transit and set of celestial object
+		Script                  = 0x00200000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x00400000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
 		NoFont			= 0x01000000,
 		PlainText		= 0x02000000  //!< Strip HTML tags from output
-// TODO GZ
-//		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
-//		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
-									   GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
+									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
@@ -258,16 +256,25 @@ public:
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
-	//! @note This should be used with caution.
+	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
 	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
+	//! Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
+	//! Additional coordinates not fitting into one of the predefined coordinate sets should be flagged with OtherCoords,
+	//! and must be adapted to table or non-table layout as required.
+	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
+	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
 	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
-	//! Retrieve a QStringList of all extra info strings that match flags.
+	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
+	//! Normally the order matches the order of addition, but this cannot be guaranteed.
 	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
 	//! Remove the extraInfoStrings with the given flags.
+	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
 	//! After display, InfoPanel::setTextFromObjects() auto-clears the strings of the selected object using the AllInfo constant.
 	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
 	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
+	//! The behaviour of DebugAid texts depends on the use case.
 	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
 protected:
