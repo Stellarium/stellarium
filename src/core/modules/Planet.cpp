@@ -427,6 +427,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
+	if (flags&Name)
+	{
+		QStringList extraNames=getExtraInfoStrings(Name);
+		if (extraNames.length()>0)
+			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
+	}
+
+	if (flags&CatalogNumber)
+	{
+		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+		if (extraCat.length()>0)
+			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
+	}
+
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getPlanetTypeString())) << "<br />";
@@ -444,6 +458,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (moMag<50.f)
 			oss << QString("%1: %2").arg(q_("Mean Opposition Magnitude")).arg(moMag, 0, 'f', 2) << "<br />";
 	}
+	if (flags&AbsoluteMagnitude)
+		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
 	oss << getCommonInfoString(core, flags);
 
@@ -510,6 +526,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 		// TRANSLATORS: Distance measured in terms of the speed of light
 		oss << QString("%1: %2").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) ) << "<br />";
+		oss << getExtraInfoStrings(Distance).join("");
 	}
 
 	if (flags&Velocity)
@@ -534,6 +551,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
 			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms) << "<br />";
 		}
+		oss << getExtraInfoStrings(Velocity).join("");
 	}
 
 
@@ -591,6 +609,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (getPlanetType()==isPlanet)
 			diam = q_("Equatorial diameter");
 		oss << QString("%1: %2 %3").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
+		oss << getExtraInfoStrings(Size).join("");
 	}
 
 	const double siderealPeriod = getSiderealPeriod();

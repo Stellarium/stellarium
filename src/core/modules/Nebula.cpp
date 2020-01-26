@@ -151,6 +151,7 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		res.append(QString("%1: <b>%2</b> (%3: B)<br />").arg(q_("Magnitude"), QString::number(bMag, 'f', decimals), q_("Photometric system")));
 	// TODO: Extinction for B magnitude? Or show B magnitude in addition to valid V magnitude?
 
+	res += getExtraInfoStrings(Magnitude).join("");
 	return res;
 }
 
@@ -239,6 +240,19 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 
+	if (flags&Name)
+	{
+		QStringList extraNames=getExtraInfoStrings(Name);
+		if (extraNames.length()>0)
+			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
+	}
+	if (flags&CatalogNumber)
+	{
+		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+		if (extraCat.length()>0)
+			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
+	}
+
 	if (flags&ObjectType)
 	{
 		QString mt = getMorphologicalTypeString();
@@ -246,6 +260,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getTypeString()) << "<br>";
 		else
 			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getTypeString(), mt) << "<br>";
+		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
 	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
@@ -314,6 +329,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br />";
 		}
 	}
+	if (flags&Size)
+		oss << getExtraInfoStrings(Size).join("");
 
 	if (flags&Distance)
 	{
@@ -385,6 +402,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";
 		}
+		oss << getExtraInfoStrings(Distance).join("");
 	}
 
 	if (flags&Extra)

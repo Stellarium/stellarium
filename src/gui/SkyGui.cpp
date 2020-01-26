@@ -176,6 +176,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
 		QFont font;
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		setFont(font);

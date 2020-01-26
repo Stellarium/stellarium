@@ -168,6 +168,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
+	if (flags&Name)
+	{
+		QStringList extraNames=getExtraInfoStrings(Name);
+		if (extraNames.length()>0)
+			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
+	}
+	if (flags&CatalogNumber)
+	{
+		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+		if (extraCat.length()>0)
+			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
+	}
 
 	bool ebsFlag = false;
 	if (flags&ObjectType)
@@ -207,12 +219,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		}
 		else
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), startype) << "<br />";
+		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
 	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
+	if (flags&AbsoluteMagnitude)
+		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
 	if (flags&Extra)
 	{
@@ -241,24 +256,25 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
-	if ((flags&Distance) && s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if (flags&Distance)
 	{
-		//TRANSLATORS: Unit of measure for distance - Light Years
-		QString ly = qc_("ly", "distance");
-		double k = AU/(SPEED_OF_LIGHT*86400*365.25);
-		double d = ((0.00001/3600.)*(M_PI/180));
-		double distance = k/(s->getPlx()*d);
-		if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
-			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
-		else
-			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+		if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("ly", "distance");
+			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
+			double d = ((0.00001/3600.)*(M_PI/180));
+			double distance = k/(s->getPlx()*d);
+			if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
+			else
+				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+		}
+		oss << getExtraInfoStrings(Distance).join("");
 	}
 
 	if (flags&Extra)
 	{
-		if (s->getSpInt())
-			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
-
 		if (s->getPlx())
 		{
 			QString plx = q_("Parallax");
@@ -268,6 +284,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
 			oss  << qc_("mas", "parallax") << "<br />";
 		}
+
+		if (s->getSpInt())
+			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
 
 		if (vPeriod>0)
 			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
@@ -312,9 +331,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (pa<0)
 			pa += 360.f;
 
+		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
+		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
+		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
-		oss << QString("%1: %2%3").arg(q_("Position angle of the proper motion")).arg(QString::number(pa,'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 (%3)").arg(q_("Angular speed of the proper motion")).arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	StelObject::postProcessInfoString(str, flags);

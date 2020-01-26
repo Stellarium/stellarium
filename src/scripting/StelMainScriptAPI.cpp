@@ -911,10 +911,13 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 	}
 
 	StelObjectP obj = omgr->getSelectedObject()[0];
-	if (replace)
-		obj->setExtraInfoString(str);
-	else
-		obj->addToExtraInfoString(str);
+	if (obj)
+	{
+		if (replace)
+			obj->setExtraInfoString(StelObject::Script, str);
+		else
+			obj->addToExtraInfoString(StelObject::Script, str);
+	}
 }
 
 
