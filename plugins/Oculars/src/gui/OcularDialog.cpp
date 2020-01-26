@@ -554,7 +554,7 @@ void OcularDialog::initAboutText()
 	html += "</li>";
 
 	html += "<li>";
-	html += QString("<strong>%1:</strong> %2.").arg(rotateCounterclockwiseString).arg(q_("Rotate reticle pattern of the eyepiece сounterclockwise"));
+	html += QString("<strong>%1:</strong> %2.").arg(rotateCounterclockwiseString).arg(q_("Rotate reticle pattern of the eyepiece counterclockwise"));
 	html += "</li>";
 
 	html += "</ul>";
