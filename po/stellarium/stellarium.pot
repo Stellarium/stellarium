@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-01-27 00:31+0700\n"
+"POT-Creation-Date: 2020-01-27 00:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,14 +28,14 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:211
 #: src/core/modules/Constellation.cpp:284
-#: src/core/modules/NomenclatureItem.cpp:203 src/core/modules/Nebula.cpp:246
-#: src/core/modules/Nebula.cpp:248 src/core/modules/Planet.cpp:432
+#: src/core/modules/NomenclatureItem.cpp:203 src/core/modules/Nebula.cpp:260
+#: src/core/modules/Nebula.cpp:262 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:194 src/core/modules/Comet.cpp:169
-#: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:206
-#: src/core/modules/StarWrapper.cpp:209 src/gui/AstroCalcDialog.cpp:816
+#: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
+#: src/core/modules/StarWrapper.cpp:221 src/gui/AstroCalcDialog.cpp:816
 #: src/ui_configurationDialog.h:1615 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
-#: plugins/Supernovae/src/Supernova.cpp:142 plugins/Novae/src/Nova.cpp:147
+#: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
 #: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:280
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
@@ -258,7 +258,7 @@ msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1022 src/core/modules/Planet.cpp:518
+#: src/core/modules/GridLinesMgr.cpp:1022 src/core/modules/Planet.cpp:535
 #: src/core/modules/MinorPlanet.cpp:266 src/core/modules/Comet.cpp:231
 #: src/gui/AstroCalcDialog.cpp:5758 plugins/Satellites/src/Satellite.cpp:329
 #: plugins/Satellites/src/Satellite.cpp:376
@@ -540,14 +540,14 @@ msgstr ""
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:590
+#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:608
 #: src/core/modules/MinorPlanet.cpp:319
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:475
-#: src/core/modules/Planet.cpp:500 src/core/modules/Planet.cpp:593
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:491
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:611
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/MinorPlanet.cpp:319 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:790
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:137 src/core/modules/Nebula.cpp:151
 #: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2986
-#: src/gui/AstroCalcDialog.cpp:3044 plugins/Supernovae/src/Supernova.cpp:126
+#: src/gui/AstroCalcDialog.cpp:3044 plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr ""
 
@@ -1214,530 +1214,540 @@ msgstr ""
 msgid "Airmasses"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:151 src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/Nebula.cpp:151 src/core/modules/StarWrapper.cpp:252
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:257 src/core/modules/MinorPlanet.cpp:217
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:219
+#: src/core/modules/Nebula.cpp:247 src/core/modules/Planet.cpp:434
+#: src/core/modules/StarWrapper.cpp:175
+msgid "Additional names: "
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:441
+#: src/core/modules/StarWrapper.cpp:181
+msgid "Additional catalog numbers: "
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:272 src/core/modules/MinorPlanet.cpp:217
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:262
+#: src/core/modules/Nebula.cpp:277
 msgid "Surface brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:263
+#: src/core/modules/Nebula.cpp:278
 msgid "after extinction"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:273 src/core/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:288 src/core/modules/Nebula.cpp:290
 #: src/gui/AstroCalcDialog.cpp:954 src/gui/AstroCalcDialog.cpp:956
 msgctxt "magnitude"
 msgid "mag"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:273 src/gui/AstroCalcDialog.cpp:954
+#: src/core/modules/Nebula.cpp:288 src/gui/AstroCalcDialog.cpp:954
 #: src/gui/AstroCalcDialog.cpp:960 src/gui/AstroCalcDialog.cpp:1011
 msgid "arcmin"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:275 src/gui/AstroCalcDialog.cpp:956
+#: src/core/modules/Nebula.cpp:290 src/gui/AstroCalcDialog.cpp:956
 msgid "arcsec"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:288
+#: src/core/modules/Nebula.cpp:303
 msgid "Contrast index"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:296 src/ui_configurationDialog.h:1619
+#: src/core/modules/Nebula.cpp:311 src/ui_configurationDialog.h:1619
 msgid "Size"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:314
+#: src/core/modules/Nebula.cpp:329
 msgid "Orientation angle"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:339 src/core/modules/Nebula.cpp:352
-#: src/core/modules/StarWrapper.cpp:247
-#: plugins/Supernovae/src/Supernova.cpp:161 plugins/Novae/src/Nova.cpp:166
+#: src/core/modules/Nebula.cpp:356 src/core/modules/Nebula.cpp:369
+#: src/core/modules/StarWrapper.cpp:264
+#: plugins/Supernovae/src/Supernova.cpp:164 plugins/Novae/src/Nova.cpp:166
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:301
 msgctxt "distance"
 msgid "ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:340 src/core/modules/Nebula.cpp:386
-#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:260
-#: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:252
-#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:2997
+#: src/core/modules/Nebula.cpp:357 src/core/modules/Nebula.cpp:403
+#: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:269
+#: src/core/modules/StarWrapper.cpp:271 src/gui/AstroCalcDialog.cpp:2997
 #: src/gui/AstroCalcDialog.cpp:3055 src/ui_configurationDialog.h:1621
-#: plugins/Supernovae/src/Supernova.cpp:162 plugins/Novae/src/Nova.cpp:167
+#: plugins/Supernovae/src/Supernova.cpp:165 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "Distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:350 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:367 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:363
+#: src/core/modules/Nebula.cpp:380
 msgctxt "distance"
 msgid "Mpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:372
+#: src/core/modules/Nebula.cpp:389
 msgctxt "distance"
 msgid "M ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:400 plugins/Quasars/src/Quasar.cpp:155
+#: src/core/modules/Nebula.cpp:418 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:410 src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/Nebula.cpp:428 src/core/modules/StarWrapper.cpp:280
 msgid "Parallax"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:410 src/core/modules/StarWrapper.cpp:269
+#: src/core/modules/Nebula.cpp:428 src/core/modules/StarWrapper.cpp:285
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:413 src/ui_searchDialogGui.h:860
+#: src/core/modules/Nebula.cpp:431 src/ui_searchDialogGui.h:860
 msgid "Morphological description"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1078
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1066
+#: src/core/modules/Nebula.cpp:1084
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1087
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1092
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1095
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1098
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1101
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1086
+#: src/core/modules/Nebula.cpp:1104
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1089
+#: src/core/modules/Nebula.cpp:1107
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1092
+#: src/core/modules/Nebula.cpp:1110
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1130
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1133
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1136
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1139
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1148
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1151
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1157
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1163
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1166
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1151
+#: src/core/modules/Nebula.cpp:1169
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1154
+#: src/core/modules/Nebula.cpp:1172
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1158
+#: src/core/modules/Nebula.cpp:1176
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1179
+#: src/core/modules/Nebula.cpp:1197
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1182
+#: src/core/modules/Nebula.cpp:1200
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1185
+#: src/core/modules/Nebula.cpp:1203
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1188
+#: src/core/modules/Nebula.cpp:1206
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1191
+#: src/core/modules/Nebula.cpp:1209
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1194
+#: src/core/modules/Nebula.cpp:1212
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1197
+#: src/core/modules/Nebula.cpp:1215
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1203
+#: src/core/modules/Nebula.cpp:1221
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1206
+#: src/core/modules/Nebula.cpp:1224
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1209
+#: src/core/modules/Nebula.cpp:1227
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1214
+#: src/core/modules/Nebula.cpp:1232
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1220
+#: src/core/modules/Nebula.cpp:1238
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1224
+#: src/core/modules/Nebula.cpp:1242
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1262
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1245
+#: src/core/modules/Nebula.cpp:1263
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1246
+#: src/core/modules/Nebula.cpp:1264
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1248
+#: src/core/modules/Nebula.cpp:1266
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1249
+#: src/core/modules/Nebula.cpp:1267
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1268
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1252
+#: src/core/modules/Nebula.cpp:1270
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1254
+#: src/core/modules/Nebula.cpp:1272
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1257
+#: src/core/modules/Nebula.cpp:1275
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1258
+#: src/core/modules/Nebula.cpp:1276
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1277
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1271
+#: src/core/modules/Nebula.cpp:1289
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1274
+#: src/core/modules/Nebula.cpp:1292
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1277
+#: src/core/modules/Nebula.cpp:1295
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1298
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1283
+#: src/core/modules/Nebula.cpp:1301
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1286
+#: src/core/modules/Nebula.cpp:1304
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1294
+#: src/core/modules/Nebula.cpp:1312
 msgid "undocumented type"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1300
+#: src/core/modules/Nebula.cpp:1318
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1319
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1302
+#: src/core/modules/Nebula.cpp:1320
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1303
+#: src/core/modules/Nebula.cpp:1321
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1304 plugins/Quasars/src/Quasar.cpp:128
+#: src/core/modules/Nebula.cpp:1322 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1305
+#: src/core/modules/Nebula.cpp:1323
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1306
+#: src/core/modules/Nebula.cpp:1324
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1307
+#: src/core/modules/Nebula.cpp:1325
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1308
+#: src/core/modules/Nebula.cpp:1326
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1309
+#: src/core/modules/Nebula.cpp:1327
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1328
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1311
+#: src/core/modules/Nebula.cpp:1329
 msgid "planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1312
+#: src/core/modules/Nebula.cpp:1330
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1331
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1314
+#: src/core/modules/Nebula.cpp:1332
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1333
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1334
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1317
+#: src/core/modules/Nebula.cpp:1335
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1318
+#: src/core/modules/Nebula.cpp:1336
 msgid "supernova remnant"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1337
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1320
+#: src/core/modules/Nebula.cpp:1338
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1321
+#: src/core/modules/Nebula.cpp:1339
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1322
+#: src/core/modules/Nebula.cpp:1340
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1323
+#: src/core/modules/Nebula.cpp:1341
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1324
+#: src/core/modules/Nebula.cpp:1342
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1325
+#: src/core/modules/Nebula.cpp:1343
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1326
+#: src/core/modules/Nebula.cpp:1344
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1327
+#: src/core/modules/Nebula.cpp:1345
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1328 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:199 src/gui/AstroCalcDialog.cpp:1083
+#: src/core/modules/Nebula.cpp:1346 src/core/modules/StarWrapper.cpp:54
+#: src/core/modules/StarWrapper.cpp:211 src/gui/AstroCalcDialog.cpp:1083
 #: src/translations.h:54
 msgid "star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1329
+#: src/core/modules/Nebula.cpp:1347
 msgid "symbiotic star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1348
 msgid "emission-line star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1331
+#: src/core/modules/Nebula.cpp:1349
 msgid "supernova candidate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1332
+#: src/core/modules/Nebula.cpp:1350
 msgid "supernova remnant candidate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1333
+#: src/core/modules/Nebula.cpp:1351
 msgid "cluster of galaxies"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1334
+#: src/core/modules/Nebula.cpp:1352
 msgid "object of unknown nature"
 msgstr ""
 
@@ -1749,24 +1759,24 @@ msgstr ""
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:442 src/core/modules/MinorPlanet.cpp:212
-#: src/core/modules/Comet.cpp:180 src/core/modules/StarWrapper.cpp:215
+#: src/core/modules/Planet.cpp:456 src/core/modules/MinorPlanet.cpp:212
+#: src/core/modules/Comet.cpp:180 src/core/modules/StarWrapper.cpp:228
 #: plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:445
+#: src/core/modules/Planet.cpp:459
 msgid "Mean Opposition Magnitude"
 msgstr ""
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:465
+#: src/core/modules/Planet.cpp:481
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:226
+#: src/core/modules/Planet.cpp:489 src/core/modules/MinorPlanet.cpp:226
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:801
 #: src/gui/AstroCalcDialog.cpp:1009 src/gui/AstroCalcDialog.cpp:1359
 #: src/gui/AstroCalcDialog.cpp:1396 src/gui/AstroCalcDialog.cpp:2965
@@ -1779,154 +1789,154 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
-#: src/core/modules/Planet.cpp:489 src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:505 src/core/modules/Planet.cpp:523
 #: src/core/modules/MinorPlanet.cpp:240 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:5680
 msgctxt "distance"
 msgid "M km"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:492 src/core/modules/MinorPlanet.cpp:242
+#: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:242
 #: src/core/modules/Comet.cpp:209
 msgid "Distance from Sun"
 msgstr ""
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:512
+#: src/core/modules/Planet.cpp:528
 msgid "Light time"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:527 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/Planet.cpp:544 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:237
 msgid "Orbital velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:530 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:547 src/core/modules/MinorPlanet.cpp:276
 msgid "Heliocentric velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:535 src/core/modules/MinorPlanet.cpp:281
+#: src/core/modules/Planet.cpp:552 src/core/modules/MinorPlanet.cpp:281
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:558
+#: src/core/modules/Planet.cpp:576
 msgid "with rings"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:575 src/core/modules/MinorPlanet.cpp:303
+#: src/core/modules/Planet.cpp:593 src/core/modules/MinorPlanet.cpp:303
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:585 src/core/modules/MinorPlanet.cpp:313
+#: src/core/modules/Planet.cpp:603 src/core/modules/MinorPlanet.cpp:313
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:592
+#: src/core/modules/Planet.cpp:610
 msgid "Equatorial diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:611 src/core/modules/MinorPlanet.cpp:338
-#: src/core/modules/StarWrapper.cpp:273 src/gui/AstroCalcDialog.cpp:5775
+#: src/core/modules/Planet.cpp:630 src/core/modules/MinorPlanet.cpp:338
+#: src/core/modules/StarWrapper.cpp:292 src/gui/AstroCalcDialog.cpp:5775
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:615 src/core/modules/MinorPlanet.cpp:342
+#: src/core/modules/Planet.cpp:634 src/core/modules/MinorPlanet.cpp:342
 #: src/core/modules/Comet.cpp:248
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:619
+#: src/core/modules/Planet.cpp:638
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:621
+#: src/core/modules/Planet.cpp:640
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:625
+#: src/core/modules/Planet.cpp:644
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:637 src/core/modules/MinorPlanet.cpp:350
+#: src/core/modules/Planet.cpp:656 src/core/modules/MinorPlanet.cpp:350
 #: src/core/modules/Comet.cpp:256
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:657 src/core/modules/MinorPlanet.cpp:368
+#: src/core/modules/Planet.cpp:676 src/core/modules/MinorPlanet.cpp:368
 #: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:3012
 #: src/gui/AstroCalcDialog.cpp:3070 plugins/Satellites/src/Satellite.cpp:388
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/MinorPlanet.cpp:369
+#: src/core/modules/Planet.cpp:677 src/core/modules/MinorPlanet.cpp:369
 #: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:3002
 #: src/gui/AstroCalcDialog.cpp:3060
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:678
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:660
+#: src/core/modules/Planet.cpp:679
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:682
+#: src/core/modules/Planet.cpp:701
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:684
+#: src/core/modules/Planet.cpp:703
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:686
+#: src/core/modules/Planet.cpp:705
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:688
+#: src/core/modules/Planet.cpp:707
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:690
+#: src/core/modules/Planet.cpp:709
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:692
+#: src/core/modules/Planet.cpp:711
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:694
+#: src/core/modules/Planet.cpp:713
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:696
+#: src/core/modules/Planet.cpp:715
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:699
+#: src/core/modules/Planet.cpp:718
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:699
+#: src/core/modules/Planet.cpp:718
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:712
+#: src/core/modules/Planet.cpp:731
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:717
+#: src/core/modules/Planet.cpp:736
 msgid "Eclipse magnitude"
 msgstr ""
 
@@ -2008,88 +2018,89 @@ msgstr ""
 msgid "Native planet names (from starlore)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:180
+#: src/core/modules/StarWrapper.cpp:192
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:182
+#: src/core/modules/StarWrapper.cpp:194
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:184
+#: src/core/modules/StarWrapper.cpp:196
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:186
+#: src/core/modules/StarWrapper.cpp:198
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:189
+#: src/core/modules/StarWrapper.cpp:201
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:193 src/gui/AstroCalcDialog.cpp:1097
+#: src/core/modules/StarWrapper.cpp:205 src/gui/AstroCalcDialog.cpp:1097
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:197 src/gui/AstroCalcDialog.cpp:1091
+#: src/core/modules/StarWrapper.cpp:209 src/gui/AstroCalcDialog.cpp:1091
 msgid "double star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/StarWrapper.cpp:252
 msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:260 plugins/Quasars/src/Quasar.cpp:151
+#: src/core/modules/StarWrapper.cpp:289 plugins/Quasars/src/Quasar.cpp:151
 #: plugins/Exoplanets/src/Exoplanet.cpp:296
 msgid "Spectral Type"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:273
+#: src/core/modules/StarWrapper.cpp:292
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "Period"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:281
+#: src/core/modules/StarWrapper.cpp:300
 msgid "Next maximum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:283
+#: src/core/modules/StarWrapper.cpp:302
 msgid "Next minimum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:290
+#: src/core/modules/StarWrapper.cpp:309
 msgid "Rising time"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:311
 msgid "Duration of eclipse"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:299
+#: src/core/modules/StarWrapper.cpp:318
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:303 src/core/modules/StarWrapper.cpp:305
+#: src/core/modules/StarWrapper.cpp:322 src/core/modules/StarWrapper.cpp:324
 #: src/gui/AstroCalcDialog.cpp:3466
 msgid "Separation"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:315
-msgid "Proper motions by axes"
+#: src/core/modules/StarWrapper.cpp:334
+msgid "Proper motion"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:315 src/core/modules/StarWrapper.cpp:317
+#: src/core/modules/StarWrapper.cpp:335 src/core/modules/StarWrapper.cpp:337
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:316
-msgid "Position angle of the proper motion"
+#: src/core/modules/StarWrapper.cpp:336
+msgctxt "into the direction of"
+msgid "towards"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:317
-msgid "Angular speed of the proper motion"
+#: src/core/modules/StarWrapper.cpp:337
+msgid "Proper motions by axes"
 msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:80
@@ -2890,12 +2901,12 @@ msgid ""
 "longer mapped to infinity."
 msgstr ""
 
-#: src/core/StelObject.cpp:271
+#: src/core/StelObject.cpp:270
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr ""
 
-#: src/core/StelObject.cpp:276
+#: src/core/StelObject.cpp:272
 msgid "(apparent)"
 msgstr ""
 
@@ -2912,91 +2923,90 @@ msgid "HA/Dec"
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:418
+#: src/core/StelObject.cpp:417
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr ""
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:444
+#: src/core/StelObject.cpp:442
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr ""
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:470
+#: src/core/StelObject.cpp:466
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr ""
 
-#. TRANSLATORS: Ecliptic longitude/latitude
-#: src/core/StelObject.cpp:488
+#: src/core/StelObject.cpp:484
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr ""
 
-#: src/core/StelObject.cpp:553
+#: src/core/StelObject.cpp:549
 msgid "Ecliptic obliquity"
 msgstr ""
 
-#: src/core/StelObject.cpp:572
+#: src/core/StelObject.cpp:574
 msgid "Mean Sidereal Time"
 msgstr ""
 
-#: src/core/StelObject.cpp:588
+#: src/core/StelObject.cpp:590
 msgid "Apparent Sidereal Time"
 msgstr ""
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:814
+#: src/core/StelObject.cpp:605 src/gui/AstroCalcDialog.cpp:814
 #: src/gui/AstroCalcDialog.cpp:5070
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr ""
 
-#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:5069
+#: src/core/StelObject.cpp:606 src/gui/AstroCalcDialog.cpp:5069
 msgctxt "celestial event"
 msgid "Rise"
 msgstr ""
 
-#: src/core/StelObject.cpp:604 src/gui/AstroCalcDialog.cpp:5071
+#: src/core/StelObject.cpp:607 src/gui/AstroCalcDialog.cpp:5071
 msgctxt "celestial event"
 msgid "Set"
 msgstr ""
 
-#: src/core/StelObject.cpp:642
+#: src/core/StelObject.cpp:645
 msgid "Daytime"
 msgstr ""
 
-#: src/core/StelObject.cpp:655
+#: src/core/StelObject.cpp:658
 msgid "Polar night"
 msgstr ""
 
-#: src/core/StelObject.cpp:657
+#: src/core/StelObject.cpp:660
 msgid "This object never rises"
 msgstr ""
 
-#: src/core/StelObject.cpp:662
+#: src/core/StelObject.cpp:665
 msgid "Polar day"
 msgstr ""
 
-#: src/core/StelObject.cpp:664
+#: src/core/StelObject.cpp:667
 msgid "Circumpolar (never sets)"
 msgstr ""
 
-#: src/core/StelObject.cpp:667
+#: src/core/StelObject.cpp:670
 msgid "Polar dawn"
 msgstr ""
 
-#: src/core/StelObject.cpp:669
+#: src/core/StelObject.cpp:672
 msgid "Polar dusk"
 msgstr ""
 
-#: src/core/StelObject.cpp:681
+#: src/core/StelObject.cpp:687
 msgid "Parallactic Angle"
 msgstr ""
 
-#: src/core/StelObject.cpp:687
+#: src/core/StelObject.cpp:695
 msgid "IAU Constellation"
 msgstr ""
 
@@ -15529,15 +15539,15 @@ msgstr ""
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:142
+#: plugins/Supernovae/src/Supernova.cpp:145
 msgid "supernova"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:156
+#: plugins/Supernovae/src/Supernova.cpp:159
 msgid "Type of supernova"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:157 plugins/Novae/src/Nova.cpp:162
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:162
 msgid "Maximum brightness"
 msgstr ""
 
