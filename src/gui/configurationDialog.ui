@@ -2085,10 +2085,10 @@
              <item row="17" column="1">
               <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
                <property name="toolTip">
-                <string>Enable focus on day spinner in Date and Time dialog when option is enabled</string>
+                <string>Force date/time tab and focus on day input when activating date panel</string>
                </property>
                <property name="text">
-                <string>Enable focus on day spinner</string>
+                <string>Set keyboard focus to day input</string>
                </property>
               </widget>
              </item>
