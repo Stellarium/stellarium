@@ -453,8 +453,6 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 
 void Oculars::init()
 {
-	qDebug() << "Ocular plugin - press Command-O to toggle eyepiece view mode. Press ALT-o for configuration.";
-
 	// Load settings from ocular.ini
 	try {
 		validateAndLoadIniFile();

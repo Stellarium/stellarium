@@ -523,42 +523,6 @@ void OcularDialog::initAboutText()
 	html += "<h3>" + q_("Hot Keys") + "</h3>";
 	html += "<p>" + q_("The plug-in's key bindings can be edited in the Keyboard shortcuts editor (F7).") + "</p>";
 
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	Q_ASSERT(actionMgr);
-	QString ocularString = actionMgr->findAction("actionShow_Ocular")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
-	if (ocularString.isEmpty())
-		ocularString = q_("[no key defined]");
-	QString menuString = actionMgr->findAction("actionShow_Ocular_Menu")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
-	if (menuString.isEmpty())
-		menuString = q_("[no key defined]");
-	QString rotateClockwiseString = actionMgr->findAction("actionShow_Ocular_Rotate_Reticle_Clockwise")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
-	if (rotateClockwiseString.isEmpty())
-		rotateClockwiseString = q_("[no key defined]");
-	QString rotateCounterclockwiseString = actionMgr->findAction("actionShow_Ocular_Rotate_Reticle_Counterclockwise")->getShortcut().toString(QKeySequence::NativeText).toHtmlEscaped();
-	if (rotateCounterclockwiseString.isEmpty())
-		rotateCounterclockwiseString = q_("[no key defined]");
-
-	html += "<ul>";
-	html += "<li>";
-	html += QString("<strong>%1:</strong> %2").arg(ocularString).arg(q_("Switches on/off the ocular overlay."));
-	html += "</li>";
-	
-	html += "<li>";
-	html += QString("<strong>%1:</strong> %2").arg(menuString).arg(q_("Opens the pop-up navigation menu."));
-	html += "</li>";
-
-	html += "<li>";
-	html += QString("<strong>%1:</strong> %2.").arg(rotateClockwiseString).arg(q_("Rotate reticle pattern of the eyepiece clockwise"));
-	html += "</li>";
-
-	html += "<li>";
-	html += QString("<strong>%1:</strong> %2.").arg(rotateCounterclockwiseString).arg(q_("Rotate reticle pattern of the eyepiece counterclockwise"));
-	html += "</li>";
-
-	html += "</ul>";
-
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Oculars plugin") + "</p>";
 	html += "<p><ul>";
@@ -570,6 +534,8 @@ void OcularDialog::initAboutText()
 	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Oculars_plugin\">\\1</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
 	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 	ui->textBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 
