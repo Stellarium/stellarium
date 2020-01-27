@@ -479,7 +479,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
 		// TRANSLATORS: Ecliptical rectangular coordinates
 		oss << QString("%1 XYZ (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates")).arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
-
 	}
 #endif
 

@@ -547,9 +547,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
 	result.insert("type", "comet");
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func", "comet_orbit");
+	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -731,9 +731,9 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun");	 // 0.16: omit obvious default.
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func","comet_orbit");
+	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
@@ -1104,7 +1104,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//TODO: Move to constructor?
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
-	// ell_orbit is used for moons (distances in km) while comet_orbit is used for minor bodies around the sun.
+	// ell_orbit is used for moons (distances in km) while kepler_orbit is used for minor bodies around the sun.
 	static const QStringList orbitalElementsKeys = {
 		"coord_func",
 		"orbit_ArgOfPericenter",
@@ -1190,7 +1190,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
-			// GZ This seems completely useless now. Type of orbit will not change as it is always comet_orbit.
+			// GZ This seems completely useless now. Type of orbit will not change as it is always kepler_orbit.
 			for (auto key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);
