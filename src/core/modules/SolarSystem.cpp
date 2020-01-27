@@ -539,7 +539,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	qDebug() << "Loading from :"  << filePath;
-	int readOk = 0;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -629,7 +628,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// qDebug() << orderedSections;
 
 	// Stage 3 (as described above).
-	//int readOk=0;
+	int readOk=0;
 	//int totalPlanets=0;
 
 	// qDebug() << "Adding " << orderedSections.size() << "objects...";
@@ -847,7 +846,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc=posfuncMap.value(coordFuncName, Q_NULLPTR);
 			osculatingFunc=osculatingMap.value(coordFuncName, Q_NULLPTR);
 		}
-
 		if (posfunc==Q_NULLPTR)
 		{
 			qCritical() << "ERROR in section " << secname << ": can't find posfunc " << coordFuncName << " for " << englishName;
@@ -906,9 +904,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				mp->setAbsoluteMagnitudeAndSlope(magnitude, qBound(0.0f, slope, 1.0f));
 			}
 
-			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
 			mp->setColorIndexBV(bV);
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
+			if (semi_major_axis>0)
+				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
+			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))
+				qWarning() << "WARNING: Minor Body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -945,12 +946,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
 			}
 
-			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
-			const double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
-			if (eccentricity<1 && pericenterDistance>0)
-			{
-				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
-			}
 			systemMinorBodies.push_back(newP);
 		}
 		else // type==star|planet|moon|dwarf planet|observer|artificial
@@ -1032,7 +1027,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
 			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
 
-		if (pd.value(secname+"/rings", false).toBool()) {
+		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
 			const float rMax = pd.value(secname+"/ring_outer_size").toFloat()/AUf;
 			Ring *r = new Ring(rMin,rMax,pd.value(secname+"/tex_ring").toString());
@@ -1746,6 +1741,7 @@ void SolarSystem::update(double deltaTime)
 bool SolarSystem::nearLunarEclipse() const
 {
 	// TODO: could replace with simpler test
+	// TODO Source?
 
 	Vec3d e = getEarth()->getEclipticPos();
 	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
@@ -1757,11 +1753,11 @@ bool SolarSystem::nearLunarEclipse() const
 	Vec3d shadow = en * (e.length() + m.length());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000./AU;
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU) return false;   // not visible so don't bother drawing
+	if(mdist.length() > r_penumbra + 2000./AU) return false;   // not visible so don't bother drawing
 
 	return true;
 }

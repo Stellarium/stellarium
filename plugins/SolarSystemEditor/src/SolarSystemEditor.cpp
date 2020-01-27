@@ -577,7 +577,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
 	result.insert("orbit_PericenterDistance", perihelionDistance);
 
-	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
+	double eccentricity = mpcParser.cap(8).toDouble(&ok);//NOT degrees, but without dimension.
 	result.insert("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
@@ -593,8 +593,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	if (eccentricity < 1.0)
 	{
 		// Heafner, Fundamental Ephemeris Computations, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
-		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day (0.01720209895 is Gaussian gravitational constant (symbol k))
+		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
 		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
 		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
