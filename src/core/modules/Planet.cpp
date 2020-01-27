@@ -612,8 +612,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(Size).join("");
 	}
 
-	const double siderealPeriod = getSiderealPeriod();
-	const double siderealDay = getSiderealDay();
+	const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
+	const double siderealDay = getSiderealDay(); // =re.period
 	if (flags&Extra)
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -639,9 +639,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				if (englishName!="Sun")
 					oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";
 			}
-			else if (re.period==0.f) // WILL NEVER BE CALLED! In this case siderealPeriod==0, the enclosing brace will exclude this!
+			else if (re.period==0.f)
 			{
-				Q_ASSERT(0);
 				oss << q_("The period of rotation is chaotic") << "<br />";
 			}
 		}
@@ -697,25 +696,27 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				core1->update(0); // enforce update cache for avoid odd selection of Moon details!
 				double deltaLong = (lambdaMoon-lambdaSun)*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				const int deltaLongI = static_cast<int>(std::round(deltaLong));
-				if (deltaLongI==0 || deltaLongI==360)
+				if (deltaLong<0.5 || deltaLong>359.5)
 					moonPhase = qc_("New Moon", "Moon phase");
-				else if (deltaLongI<90)
+				else if (deltaLong<89.5)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
-				else if (deltaLongI==90)
+				else if (deltaLong<90.5)
 					moonPhase = qc_("First Quarter", "Moon phase");
-				else if (deltaLongI<180)
+				else if (deltaLong<179.5)
 					moonPhase = qc_("Waxing Gibbous", "Moon phase");
-				else if (deltaLongI==180)
+				else if (deltaLong<180.5)
 					moonPhase = qc_("Full Moon", "Moon phase");
-				else if (deltaLongI<270)
+				else if (deltaLong<269.5)
 					moonPhase = qc_("Waning Gibbous", "Moon phase");
-				else if (deltaLongI==270)
+				else if (deltaLong<270.5)
 					moonPhase = qc_("Third Quarter", "Moon phase");
-				else if (deltaLongI<360)
+				else if (deltaLong<359.5)
 					moonPhase = qc_("Waning Crescent", "Moon phase");
 				else
-					moonPhase = qc_("ERROR IN PHASE STRING PROGRAMMING!", "Moon phase");
+				{
+					qWarning() << "ERROR IN PHASE STRING PROGRAMMING!";
+					Q_ASSERT(0);
+				}
 
 				const double age = deltaLong*29.530588853/360.;
 				oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
@@ -729,7 +730,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
 				StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
 				const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
-				oss << QString("%1: %2").arg(q_("PA of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0))) << "<br/>";
+				oss << QString("%1: %2").arg(q_("Position angle of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0))) << "<br/>";
 			}
 		}
 
