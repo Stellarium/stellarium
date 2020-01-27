@@ -227,7 +227,7 @@ QFrame#j2000Frame {
 
 QPushButton {
 	border: 1px solid rgb(0, 0, 0);
-	border-radius: 4px;
+	border-radius: 2px;
 	padding: 2px 8px;
 	color: rgb(31, 31, 31);
 	font-size: 92%;
@@ -235,7 +235,9 @@ QPushButton {
 }
 
 QPushButton::disabled {
-	color: rgb(240, 240, 240);
+	color: rgb(61, 61, 61);
+	border: 1px solid rgba(31, 31, 31);
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
 }
 
 QPushButton:pressed {
@@ -733,6 +735,21 @@ QComboBox {
 
 QComboBox:disabled, QSpinBox:disabled {
 	color: #f0f0f0;
+	border: 1px solid rgba(31, 31, 31);
+	color: rgba(61, 61, 61);
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
+}
+
+QSpinBox::up-button:disabled,QTimeEdit::up-button:disabled,QDoubleSpinBox::up-button:disabled,AngleSpinBox::up-button:disabled,QDateTimeEdit::up-button:disabled {
+	background: rgb(75, 75, 75);
+	border-top: 1px solid rgba(31, 31, 31);
+	border-right: 1px solid rgba(31, 31, 31);
+}
+
+QSpinBox::down-button:disabled,QTimeEdit::down-button:disabled,QDoubleSpinBox::down-button:disabled,AngleSpinBox::down-button:disabled,QDateTimeEdit::down-button:disabled {
+	background: rgb(70, 70, 70);
+	border-bottom: 1px solid rgba(31, 31, 31);
+	border-right: 1px solid rgba(31, 31, 31);
 }
 
 QProgressBar {
