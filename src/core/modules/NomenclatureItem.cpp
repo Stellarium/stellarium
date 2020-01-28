@@ -108,6 +108,7 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 		{ niReticulum, "reticulum" },
 		{ niRima     , "rima" },
 		{ niRupes    , "rupes" },
+		{ niSaxa	   , "saxa" },
 		{ niScopulus , "scopulus" },
 		{ niSerpens  , "serpens" },
 		{ niSulcus   , "sulcus" },
@@ -361,6 +362,7 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 		{ "RT", NomenclatureItem::niReticulum		},
 		{ "RI", NomenclatureItem::niRima		},
 		{ "RU", NomenclatureItem::niRupes		},
+		{ "SA", NomenclatureItem::niSaxa		},
 		{ "SF", NomenclatureItem::niSatelliteFeature	},
 		{ "SC", NomenclatureItem::niScopulus		},
 		{ "SE", NomenclatureItem::niSerpens		},
@@ -380,117 +382,119 @@ QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDe
 void NomenclatureItem::createNameLists()
 {
 	niTypeStringMap.clear();
-		// TRANSLATORS: Geographic area distinguished by amount of reflected light
+	// TRANSLATORS: Geographic area distinguished by amount of reflected light
 	niTypeStringMap.insert( niAlbedoFeature, qc_("albedo feature", "landform") );
-		// TRANSLATORS: Arc-shaped feature
+	// TRANSLATORS: Arc-shaped feature
 	niTypeStringMap.insert( niArcus, qc_("arcus", "landform") );
-		// TRANSLATORS: Radial-patterned features on Venus
+	// TRANSLATORS: Radial-patterned features on Venus
 	niTypeStringMap.insert( niAstrum, qc_("astrum", "landform") );
-		// TRANSLATORS: Chain of craters
+	// TRANSLATORS: Chain of craters
 	niTypeStringMap.insert( niCatena, qc_("catena", "landform") );
-		// TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
+	// TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
 	niTypeStringMap.insert( niCavus, qc_("cavus", "landform") );
-		// TRANSLATORS: Distinctive area of broken terrain
+	// TRANSLATORS: Distinctive area of broken terrain
 	niTypeStringMap.insert( niChaos, qc_("chaos", "landform") );
-		// TRANSLATORS: A deep, elongated, steep-sided depression
+	// TRANSLATORS: A deep, elongated, steep-sided depression
 	niTypeStringMap.insert( niChasma, qc_("chasma", "landform") );
-		// TRANSLATORS: Small hills or knobs
+	// TRANSLATORS: Small hills or knobs
 	niTypeStringMap.insert( niCollis, qc_("collis", "landform") );
-		// TRANSLATORS: Ovoid-shaped feature
+	// TRANSLATORS: Ovoid-shaped feature
 	niTypeStringMap.insert( niCorona, qc_("corona", "landform") );
-		// TRANSLATORS: A circular depression
+	// TRANSLATORS: A circular depression
 	niTypeStringMap.insert( niCrater, qc_("crater", "landform") );
-		// TRANSLATORS: Ridge
+	// TRANSLATORS: Ridge
 	niTypeStringMap.insert( niDorsum, qc_("dorsum", "landform") );
-		// TRANSLATORS: Active volcanic centers on Io
+	// TRANSLATORS: Active volcanic centers on Io
 	niTypeStringMap.insert( niEruptiveCenter, qc_("eruptive center", "landform") );
-		// TRANSLATORS: Bright spot
+	// TRANSLATORS: Bright spot
 	niTypeStringMap.insert( niFacula, qc_("facula", "landform") );
-		// TRANSLATORS: Pancake-like structure, or a row of such structures
+	// TRANSLATORS: Pancake-like structure, or a row of such structures
 	niTypeStringMap.insert( niFarrum, qc_("farrum", "landform") );
-		// TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
+	// TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 	niTypeStringMap.insert( niFlexus, qc_("flexus", "landform") );
-		// TRANSLATORS: Flow terrain
+	// TRANSLATORS: Flow terrain
 	niTypeStringMap.insert( niFluctus, qc_("fluctus", "landform") );
-		// TRANSLATORS: Channel on Titan that might carry liquid
+	// TRANSLATORS: Channel on Titan that might carry liquid
 	niTypeStringMap.insert( niFlumen, qc_("flumen", "landform") );
-		// TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
+	// TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
 	niTypeStringMap.insert( niFretum, qc_("fretum", "landform") );
-		// TRANSLATORS: Long, narrow depression
+	// TRANSLATORS: Long, narrow depression
 	niTypeStringMap.insert( niFossa, qc_("fossa", "landform") );
-		// TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
+	// TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
 	niTypeStringMap.insert( niInsula, qc_("insula", "landform") );
-		// TRANSLATORS: Landslide
+	// TRANSLATORS: Landslide
 	niTypeStringMap.insert( niLabes, qc_("labes", "landform") );
-		// TRANSLATORS: Complex of intersecting valleys or ridges
+	// TRANSLATORS: Complex of intersecting valleys or ridges
 	niTypeStringMap.insert( niLabyrinthus, qc_("labyrinthus", "landform") );
-		// TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
+	// TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
 	niTypeStringMap.insert( niLacuna, qc_("lacuna", "landform") );
-		// TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
+	// TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
 	niTypeStringMap.insert( niLacus, qc_("lacus", "landform") );
-		// TRANSLATORS: Cryptic ringed feature
+	// TRANSLATORS: Cryptic ringed feature
 	niTypeStringMap.insert( niLargeRingedFeature, qc_("large ringed feature", "landform") );
-		// TRANSLATORS: Small dark spots on Europa
+	// TRANSLATORS: Small dark spots on Europa
 	niTypeStringMap.insert( niLenticula, qc_("lenticula", "landform") );
-		// TRANSLATORS: A dark or bright elongate marking, may be curved or straight
+	// TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 	niTypeStringMap.insert( niLinea, qc_("linea", "landform") );
-		// TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
+	// TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
 	niTypeStringMap.insert( niLingula, qc_("lingula", "landform") );
-		// TRANSLATORS: Dark spot, may be irregular
+	// TRANSLATORS: Dark spot, may be irregular
 	niTypeStringMap.insert( niMacula, qc_("macula", "landform") );
-		// TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
+	// TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
 	niTypeStringMap.insert( niMare, qc_("mare", "landform") );
-		// TRANSLATORS: A flat-topped prominence with cliff-like edges
+	// TRANSLATORS: A flat-topped prominence with cliff-like edges
 	niTypeStringMap.insert( niMensa, qc_("mensa", "landform") );
-		// TRANSLATORS: Mountain
+	// TRANSLATORS: Mountain
 	niTypeStringMap.insert( niMons, qc_("mons", "landform") );
-		// TRANSLATORS: A very large dark area on the Moon
+	// TRANSLATORS: A very large dark area on the Moon
 	niTypeStringMap.insert( niOceanus, qc_("oceanus", "landform") );
-		// TRANSLATORS: "Swamp"; small plain
+	// TRANSLATORS: "Swamp"; small plain
 	niTypeStringMap.insert( niPalus, qc_("palus", "landform") );
-		// TRANSLATORS: An irregular crater, or a complex one with scalloped edges
+	// TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 	niTypeStringMap.insert( niPatera, qc_("patera", "landform") );
-		// TRANSLATORS: Low plain
+	// TRANSLATORS: Low plain
 	niTypeStringMap.insert( niPlanitia, qc_("planitia", "landform") );
-		// TRANSLATORS: Plateau or high plain
+	// TRANSLATORS: Plateau or high plain
 	niTypeStringMap.insert( niPlanum, qc_("planum", "landform") );
-		// TRANSLATORS: Cryo-volcanic features on Triton
+	// TRANSLATORS: Cryo-volcanic features on Triton
 	niTypeStringMap.insert( niPlume, qc_("plume", "landform") );
-		// TRANSLATORS: "Cape"; headland promontoria
+	// TRANSLATORS: "Cape"; headland promontoria
 	niTypeStringMap.insert( niPromontorium, qc_("promontorium", "landform") );
-		// TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
+	// TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
 	niTypeStringMap.insert( niRegio, qc_("regio", "landform") );
-		// TRANSLATORS: Reticular (netlike) pattern on Venus
+	// TRANSLATORS: Reticular (netlike) pattern on Venus
 	niTypeStringMap.insert( niReticulum, qc_("reticulum", "landform") );
-		// TRANSLATORS: Fissure
+	// TRANSLATORS: Fissure
 	niTypeStringMap.insert( niRima, qc_("rima", "landform") );
-		// TRANSLATORS: Scarp
+	// TRANSLATORS: Scarp
 	niTypeStringMap.insert( niRupes, qc_("rupes", "landform") );
-		// TRANSLATORS: A feature that shares the name of an associated feature.
+	// TRANSLATORS: A feature that shares the name of an associated feature.
 	niTypeStringMap.insert( niSatelliteFeature, qc_("satellite feature", "landform") );
-		// TRANSLATORS: Lobate or irregular scarp
+	// TRANSLATORS: Boulder or rock
+	niTypeStringMap.insert( niSaxa, qc_("saxa", "landform") );
+	// TRANSLATORS: Lobate or irregular scarp
 	niTypeStringMap.insert( niScopulus, qc_("scopulus", "landform") );
-		// TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
+	// TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
 	niTypeStringMap.insert( niSerpens, qc_("serpens", "landform") );
-		// TRANSLATORS: Subparallel furrows and ridges
+	// TRANSLATORS: Subparallel furrows and ridges
 	niTypeStringMap.insert( niSulcus, qc_("sulcus", "landform") );
-		// TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
+	// TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
 	niTypeStringMap.insert( niSinus, qc_("sinus", "landform") );
-		// TRANSLATORS: Extensive land mass
+	// TRANSLATORS: Extensive land mass
 	niTypeStringMap.insert( niTerra, qc_("terra", "landform") );
-		// TRANSLATORS: Tile-like, polygonal terrain
+	// TRANSLATORS: Tile-like, polygonal terrain
 	niTypeStringMap.insert( niTessera, qc_("tessera", "landform") );
-		// TRANSLATORS: Small domical mountain or hill
+	// TRANSLATORS: Small domical mountain or hill
 	niTypeStringMap.insert( niTholus, qc_("tholus", "landform") );
-		// TRANSLATORS: Dunes
+	// TRANSLATORS: Dunes
 	niTypeStringMap.insert( niUnda, qc_("unda", "landform") );
-		// TRANSLATORS: Valley
+	// TRANSLATORS: Valley
 	niTypeStringMap.insert( niVallis, qc_("vallis", "landform") );
-		// TRANSLATORS: Extensive plain
+	// TRANSLATORS: Extensive plain
 	niTypeStringMap.insert( niVastitas, qc_("vastitas", "landform") );
-		// TRANSLATORS: A streak or stripe of color
+	// TRANSLATORS: A streak or stripe of color
 	niTypeStringMap.insert( niVirga, qc_("virga", "landform") );
-		// TRANSLATORS: Lunar features at or near Apollo landing sites
+	// TRANSLATORS: Lunar features at or near Apollo landing sites
 	niTypeStringMap.insert( niLandingSite, qc_("landing site name", "landform") );
 
 	niTypeDescriptionMap.clear();
@@ -582,6 +586,8 @@ void NomenclatureItem::createNameLists()
 	niTypeDescriptionMap.insert( niRupes, q_("Scarp."));
 	// TRANSLATORS: Description for landform 'satellite feature'
 	niTypeDescriptionMap.insert( niSatelliteFeature, q_("A feature that shares the name of an associated feature."));
+	// TRANSLATORS: Description for landform 'saxa'
+	niTypeDescriptionMap.insert( niSaxa, q_("Boulder or rock."));
 	// TRANSLATORS: Description for landform 'scopulus'
 	niTypeDescriptionMap.insert( niScopulus, q_("Lobate or irregular scarp."));
 	// TRANSLATORS: Description for landform 'serpens'

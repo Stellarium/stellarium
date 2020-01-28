@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-01-28 20:33+0700\n"
+"POT-Creation-Date: 2020-01-28 23:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:211
 #: src/core/modules/Constellation.cpp:284
-#: src/core/modules/NomenclatureItem.cpp:203 src/core/modules/Nebula.cpp:260
+#: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:260
 #: src/core/modules/Nebula.cpp:262 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:194 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
@@ -507,46 +507,46 @@ msgctxt "landform"
 msgid "undocumented landform type"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:128
+#: src/core/modules/NomenclatureItem.cpp:129
 msgid "Undocumented landform type."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:132
+#: src/core/modules/NomenclatureItem.cpp:133
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:137
+#: src/core/modules/NomenclatureItem.cpp:138
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:140
+#: src/core/modules/NomenclatureItem.cpp:141
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:143
+#: src/core/modules/NomenclatureItem.cpp:144
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:205
+#: src/core/modules/NomenclatureItem.cpp:206
 msgid "geologic term"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:215
+#: src/core/modules/NomenclatureItem.cpp:216
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:218 src/core/modules/Planet.cpp:608
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:608
 #: src/core/modules/MinorPlanet.cpp:319
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:491
+#: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:491
 #: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:611
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/MinorPlanet.cpp:319 src/core/modules/Comet.cpp:187
@@ -557,634 +557,645 @@ msgctxt "distance"
 msgid "km"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:224
+#: src/core/modules/NomenclatureItem.cpp:225
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:225
+#: src/core/modules/NomenclatureItem.cpp:226
 msgid "Celestial body"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:228
+#: src/core/modules/NomenclatureItem.cpp:229
 msgid "Landform description"
 msgstr ""
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:384
+#: src/core/modules/NomenclatureItem.cpp:386
 msgctxt "landform"
 msgid "albedo feature"
 msgstr ""
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:386
+#: src/core/modules/NomenclatureItem.cpp:388
 msgctxt "landform"
 msgid "arcus"
 msgstr ""
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:388
+#: src/core/modules/NomenclatureItem.cpp:390
 msgctxt "landform"
 msgid "astrum"
 msgstr ""
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:390
+#: src/core/modules/NomenclatureItem.cpp:392
 msgctxt "landform"
 msgid "catena"
 msgstr ""
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
-#: src/core/modules/NomenclatureItem.cpp:392
+#: src/core/modules/NomenclatureItem.cpp:394
 msgctxt "landform"
 msgid "cavus"
 msgstr ""
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:394
+#: src/core/modules/NomenclatureItem.cpp:396
 msgctxt "landform"
 msgid "chaos"
 msgstr ""
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:396
+#: src/core/modules/NomenclatureItem.cpp:398
 msgctxt "landform"
 msgid "chasma"
 msgstr ""
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:398
+#: src/core/modules/NomenclatureItem.cpp:400
 msgctxt "landform"
 msgid "collis"
 msgstr ""
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:400
+#: src/core/modules/NomenclatureItem.cpp:402
 msgctxt "landform"
 msgid "corona"
 msgstr ""
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:402
+#: src/core/modules/NomenclatureItem.cpp:404
 msgctxt "landform"
 msgid "crater"
 msgstr ""
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:404
+#: src/core/modules/NomenclatureItem.cpp:406
 msgctxt "landform"
 msgid "dorsum"
 msgstr ""
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:406
+#: src/core/modules/NomenclatureItem.cpp:408
 msgctxt "landform"
 msgid "eruptive center"
 msgstr ""
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:408
+#: src/core/modules/NomenclatureItem.cpp:410
 msgctxt "landform"
 msgid "facula"
 msgstr ""
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:410
+#: src/core/modules/NomenclatureItem.cpp:412
 msgctxt "landform"
 msgid "farrum"
 msgstr ""
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:412
+#: src/core/modules/NomenclatureItem.cpp:414
 msgctxt "landform"
 msgid "flexus"
 msgstr ""
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:414
+#: src/core/modules/NomenclatureItem.cpp:416
 msgctxt "landform"
 msgid "fluctus"
 msgstr ""
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:416
+#: src/core/modules/NomenclatureItem.cpp:418
 msgctxt "landform"
 msgid "flumen"
 msgstr ""
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
-#: src/core/modules/NomenclatureItem.cpp:418
+#: src/core/modules/NomenclatureItem.cpp:420
 msgctxt "landform"
 msgid "fretum"
 msgstr ""
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:420
+#: src/core/modules/NomenclatureItem.cpp:422
 msgctxt "landform"
 msgid "fossa"
 msgstr ""
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:422
+#: src/core/modules/NomenclatureItem.cpp:424
 msgctxt "landform"
 msgid "insula"
 msgstr ""
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:424
+#: src/core/modules/NomenclatureItem.cpp:426
 msgctxt "landform"
 msgid "labes"
 msgstr ""
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:426
+#: src/core/modules/NomenclatureItem.cpp:428
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr ""
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:428
+#: src/core/modules/NomenclatureItem.cpp:430
 msgctxt "landform"
 msgid "lacuna"
 msgstr ""
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:430
+#: src/core/modules/NomenclatureItem.cpp:432
 msgctxt "landform"
 msgid "lacus"
 msgstr ""
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:432
+#: src/core/modules/NomenclatureItem.cpp:434
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr ""
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:434
+#: src/core/modules/NomenclatureItem.cpp:436
 msgctxt "landform"
 msgid "lenticula"
 msgstr ""
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:436
+#: src/core/modules/NomenclatureItem.cpp:438
 msgctxt "landform"
 msgid "linea"
 msgstr ""
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
-#: src/core/modules/NomenclatureItem.cpp:438
+#: src/core/modules/NomenclatureItem.cpp:440
 msgctxt "landform"
 msgid "lingula"
 msgstr ""
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:440
+#: src/core/modules/NomenclatureItem.cpp:442
 msgctxt "landform"
 msgid "macula"
 msgstr ""
 
 #. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:442
+#: src/core/modules/NomenclatureItem.cpp:444
 msgctxt "landform"
 msgid "mare"
 msgstr ""
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:444
+#: src/core/modules/NomenclatureItem.cpp:446
 msgctxt "landform"
 msgid "mensa"
 msgstr ""
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:446
+#: src/core/modules/NomenclatureItem.cpp:448
 msgctxt "landform"
 msgid "mons"
 msgstr ""
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:448
+#: src/core/modules/NomenclatureItem.cpp:450
 msgctxt "landform"
 msgid "oceanus"
 msgstr ""
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:450
+#: src/core/modules/NomenclatureItem.cpp:452
 msgctxt "landform"
 msgid "palus"
 msgstr ""
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:452
+#: src/core/modules/NomenclatureItem.cpp:454
 msgctxt "landform"
 msgid "patera"
 msgstr ""
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:454
+#: src/core/modules/NomenclatureItem.cpp:456
 msgctxt "landform"
 msgid "planitia"
 msgstr ""
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:456
+#: src/core/modules/NomenclatureItem.cpp:458
 msgctxt "landform"
 msgid "planum"
 msgstr ""
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:458
+#: src/core/modules/NomenclatureItem.cpp:460
 msgctxt "landform"
 msgid "plume"
 msgstr ""
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:460
+#: src/core/modules/NomenclatureItem.cpp:462
 msgctxt "landform"
 msgid "promontorium"
 msgstr ""
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:462
+#: src/core/modules/NomenclatureItem.cpp:464
 msgctxt "landform"
 msgid "regio"
 msgstr ""
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:464
+#: src/core/modules/NomenclatureItem.cpp:466
 msgctxt "landform"
 msgid "reticulum"
 msgstr ""
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:466
+#: src/core/modules/NomenclatureItem.cpp:468
 msgctxt "landform"
 msgid "rima"
 msgstr ""
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:468
+#: src/core/modules/NomenclatureItem.cpp:470
 msgctxt "landform"
 msgid "rupes"
 msgstr ""
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:470
+#: src/core/modules/NomenclatureItem.cpp:472
 msgctxt "landform"
 msgid "satellite feature"
 msgstr ""
 
+#. TRANSLATORS: Boulder or rock
+#: src/core/modules/NomenclatureItem.cpp:474
+msgctxt "landform"
+msgid "saxa"
+msgstr ""
+
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:472
+#: src/core/modules/NomenclatureItem.cpp:476
 msgctxt "landform"
 msgid "scopulus"
 msgstr ""
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
-#: src/core/modules/NomenclatureItem.cpp:474
+#: src/core/modules/NomenclatureItem.cpp:478
 msgctxt "landform"
 msgid "serpens"
 msgstr ""
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:476
+#: src/core/modules/NomenclatureItem.cpp:480
 msgctxt "landform"
 msgid "sulcus"
 msgstr ""
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:478
+#: src/core/modules/NomenclatureItem.cpp:482
 msgctxt "landform"
 msgid "sinus"
 msgstr ""
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:480
+#: src/core/modules/NomenclatureItem.cpp:484
 msgctxt "landform"
 msgid "terra"
 msgstr ""
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:482
+#: src/core/modules/NomenclatureItem.cpp:486
 msgctxt "landform"
 msgid "tessera"
 msgstr ""
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:484
+#: src/core/modules/NomenclatureItem.cpp:488
 msgctxt "landform"
 msgid "tholus"
 msgstr ""
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:486
+#: src/core/modules/NomenclatureItem.cpp:490
 msgctxt "landform"
 msgid "unda"
 msgstr ""
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:488
+#: src/core/modules/NomenclatureItem.cpp:492
 msgctxt "landform"
 msgid "vallis"
 msgstr ""
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:490
+#: src/core/modules/NomenclatureItem.cpp:494
 msgctxt "landform"
 msgid "vastitas"
 msgstr ""
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:492
+#: src/core/modules/NomenclatureItem.cpp:496
 msgctxt "landform"
 msgid "virga"
 msgstr ""
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:494
+#: src/core/modules/NomenclatureItem.cpp:498
 msgctxt "landform"
 msgid "landing site name"
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:498
+#: src/core/modules/NomenclatureItem.cpp:502
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:500
+#: src/core/modules/NomenclatureItem.cpp:504
 msgid "Arc-shaped feature."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:502
+#: src/core/modules/NomenclatureItem.cpp:506
 msgid "Radial-patterned feature."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:504
+#: src/core/modules/NomenclatureItem.cpp:508
 msgid "Chain of craters."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:506
+#: src/core/modules/NomenclatureItem.cpp:510
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:508
+#: src/core/modules/NomenclatureItem.cpp:512
 msgid "Distinctive area of broken terrain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:510
+#: src/core/modules/NomenclatureItem.cpp:514
 msgid "A deep, elongated, steep-sided depression."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:512
+#: src/core/modules/NomenclatureItem.cpp:516
 msgid "Small hills or knobs."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:514
+#: src/core/modules/NomenclatureItem.cpp:518
 msgid "Ovoid-shaped feature."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:516
+#: src/core/modules/NomenclatureItem.cpp:520
 msgid "A circular depression."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:518
+#: src/core/modules/NomenclatureItem.cpp:522
 msgid "Ridge."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:520
+#: src/core/modules/NomenclatureItem.cpp:524
 msgid "Active volcanic center."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:522
+#: src/core/modules/NomenclatureItem.cpp:526
 msgid "Bright spot."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:524
+#: src/core/modules/NomenclatureItem.cpp:528
 msgid "Pancake-like structure, or a row of such structures."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:526
+#: src/core/modules/NomenclatureItem.cpp:530
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:528
+#: src/core/modules/NomenclatureItem.cpp:532
 msgid "Flow terrain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:530
+#: src/core/modules/NomenclatureItem.cpp:534
 msgid "Channel, that might carry liquid."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:532
+#: src/core/modules/NomenclatureItem.cpp:536
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:534
+#: src/core/modules/NomenclatureItem.cpp:538
 msgid "Long, narrow depression."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:536
+#: src/core/modules/NomenclatureItem.cpp:540
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:538
+#: src/core/modules/NomenclatureItem.cpp:542
 msgid "Landslide."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:540
+#: src/core/modules/NomenclatureItem.cpp:544
 msgid "Complex of intersecting valleys or ridges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:542
+#: src/core/modules/NomenclatureItem.cpp:546
 msgid "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:544
+#: src/core/modules/NomenclatureItem.cpp:548
 msgid "'Lake' or small plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:546
+#: src/core/modules/NomenclatureItem.cpp:550
 msgid "Cryptic ringed feature."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:548
+#: src/core/modules/NomenclatureItem.cpp:552
 msgid "Small dark spot."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:550
+#: src/core/modules/NomenclatureItem.cpp:554
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:552
+#: src/core/modules/NomenclatureItem.cpp:556
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:554
+#: src/core/modules/NomenclatureItem.cpp:558
 msgid "Dark spot, may be irregular"
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:556
+#: src/core/modules/NomenclatureItem.cpp:560
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:558
+#: src/core/modules/NomenclatureItem.cpp:562
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:560
+#: src/core/modules/NomenclatureItem.cpp:564
 msgid "Mountain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:562
+#: src/core/modules/NomenclatureItem.cpp:566
 msgid "A very large dark area."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:564
+#: src/core/modules/NomenclatureItem.cpp:568
 msgid "'Swamp'; small plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:566
+#: src/core/modules/NomenclatureItem.cpp:570
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:568
+#: src/core/modules/NomenclatureItem.cpp:572
 msgid "Low plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:570
+#: src/core/modules/NomenclatureItem.cpp:574
 msgid "Plateau or high plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:572
+#: src/core/modules/NomenclatureItem.cpp:576
 msgid "Cryo-volcanic feature."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:574
+#: src/core/modules/NomenclatureItem.cpp:578
 msgid "'Cape'; headland promontoria."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:576
+#: src/core/modules/NomenclatureItem.cpp:580
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:578
+#: src/core/modules/NomenclatureItem.cpp:582
 msgid "Reticular (netlike) pattern."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:580
+#: src/core/modules/NomenclatureItem.cpp:584
 msgid "Fissure."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:582
+#: src/core/modules/NomenclatureItem.cpp:586
 msgid "Scarp."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:584
+#: src/core/modules/NomenclatureItem.cpp:588
 msgid "A feature that shares the name of an associated feature."
 msgstr ""
 
+#. TRANSLATORS: Description for landform 'saxa'
+#: src/core/modules/NomenclatureItem.cpp:590
+msgid "Boulder or rock."
+msgstr ""
+
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:586
+#: src/core/modules/NomenclatureItem.cpp:592
 msgid "Lobate or irregular scarp."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:588
+#: src/core/modules/NomenclatureItem.cpp:594
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:590
+#: src/core/modules/NomenclatureItem.cpp:596
 msgid "'Bay'; small plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:592
+#: src/core/modules/NomenclatureItem.cpp:598
 msgid "Subparallel furrows and ridges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:594
+#: src/core/modules/NomenclatureItem.cpp:600
 msgid "Extensive land mass."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:596
+#: src/core/modules/NomenclatureItem.cpp:602
 msgid "Tile-like, polygonal terrain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:598
+#: src/core/modules/NomenclatureItem.cpp:604
 msgid "Small domical mountain or hill."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:600
+#: src/core/modules/NomenclatureItem.cpp:606
 msgid "Dunes."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:602
+#: src/core/modules/NomenclatureItem.cpp:608
 msgid "Valley."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:604
+#: src/core/modules/NomenclatureItem.cpp:610
 msgid "Extensive plain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:606
+#: src/core/modules/NomenclatureItem.cpp:612
 msgid "A streak or stripe of color."
 msgstr ""
 
