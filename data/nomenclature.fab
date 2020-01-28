@@ -829,6 +829,8 @@ Mercury	14962	_("Henri","crater")	AA	79.680770	152.983074	163.797
 Mercury	14966	_("Mendelssohn","crater")	AA	70.310067	102.319481	291
 # TRANSLATORS: Shota; Georgian poet (c. 1160-1216).
 Mercury	14971	_("Rustaveli","crater")	AA	52.411878	82.738099	200
+# TRANSLATORS: Nadine (1923-2014), South African writer; recipient of the Nobel Prize in Literature (1991) and the Booker Prize (1974).
+Mercury	15865	_("Gordimer","crater")	AA	87.730000	189.100000	58
 # TRANSLATORS: English; Cook's ship on last voyage to Pacific, 1776-80.
 Mercury	1548	_("Discovery Rupes","rupes")	RU	-54.700044	322.758525	412
 # TRANSLATORS: María; Mexican painter (c.1902-1955).
@@ -1873,8 +1875,6 @@ Titan	15281	_("Buyan Insula","insula")	IN	77.300000	114.900000	48
 Titan	15282	_("Bralgu Insulae","insula")	IN	76.200000	108.500000	55
 # TRANSLATORS: Hari Seldon, the fictional, intellectual hero of Isaac Asimov's Foundation Series, First Minister of the Galactic Empire.
 Titan	15283	_("Seldon Fretum","fretum")	FT	66.000000	43.400000	67
-# TRANSLATORS: Golan Trevize, fictional character in Isaac Asimov's Foundation Series, councilman of the planet Terminus.
-Titan	15284	_("Trevize Fretum","fretum")	FT	74.400000	90.100000	173
 # TRANSLATORS: Bayta Darell, fictional character in Isaac Asimov's Foundation Series, wife of the Trader Tran Darell and grandmother of famous author Arcadia “Arcady” Darell.
 Titan	15285	_("Bayta Fretum","fretum")	FT	73.000000	48.800000	165
 # TRANSLATORS: Salvor Hardin, fictional character in Isaac Asimov's Foundation Series, first Mayor of the planet Terminus.
@@ -1893,6 +1893,8 @@ Titan	15295	_("Rombaken Sinus","sinus")	SI	75.300000	127.100000	92.5
 Titan	15299	_("Kumbaru Sinus","sinus")	SI	56.800000	56.200000	122
 # TRANSLATORS: Bay in Namibia.
 Titan	15300	_("Walvis Sinus","sinus")	SI	58.200000	35.900000	253
+# TRANSLATORS: Golan Trevize, fictional character in Isaac Asimov's Foundation Series, councilman of the planet Terminus.
+Titan	15284	_("Trevize Fretum","fretum")	FT	74.400000	90.100000	173
 # TRANSLATORS: Bay in New Zealand.
 Titan	15290	_("Okahu Sinus","sinus")	SI	73.700000	78.000000	141
 # TRANSLATORS: Gulf in Tunisia.
@@ -1917,8 +1919,6 @@ Titan	15312	_("Beag","crater")	AA	-34.736023	190.449097	27
 Titan	15360	_("Aura Undae","unda")	UN	13.793809	133.137721	490
 # TRANSLATORS: Aztec rain god.
 Titan	15354	_("Tlaloc Virgae","virga")	VI	23.728506	152.299796	600
-# TRANSLATORS: Intermittent lake in Bosnia-Herzegovina.
-Titan	15359	_("Veliko Lacuna","lacuna")	LU	-76.800000	326.900000	93
 # TRANSLATORS: Planet from the Dune series; “sanctuary planet” for defeated houses of the Imperium.
 Titan	15358	_("Tupile Labyrinthus","labyrinthus")	LB	-80.500000	327.800000	84
 # TRANSLATORS: Peace Queen of the Iroquois.
@@ -1989,6 +1989,8 @@ Titan	15603	_("Rwegura Lacus","lacus")	LC	71.500000	254.800000	21.7
 Titan	15356	_("Mystis","crater")	AA	0.071411	165.142639	20
 # TRANSLATORS: Persian rain god.
 Titan	15352	_("Tishtrya Virgae","virga")	VI	23.836026	180.245045	276
+# TRANSLATORS: Intermittent lake in Bosnia-Herzegovina.
+Titan	15359	_("Veliko Lacuna","lacuna")	LU	-76.800000	326.900000	90
 # TRANSLATORS: River in the Iliad.
 Titan	15436	_("Xanthus Flumen","flumen")	FM	83.468353	117.236958	78
 # TRANSLATORS: Lake in Antarctica.
@@ -5751,8 +5753,28 @@ Mars	15506	_("Baum","crater")	AA	-24.719238	28.300781	62
 Mars	15508	_("Nybyen","crater")	AA	-37.024612	343.343834	6.2
 # TRANSLATORS: Village in Iceland.
 Mars	15509	_("Flateyri","crater")	AA	-35.864868	330.922897	9.5
+# TRANSLATORS: Town in Georgia, USA.
+Mars	15871	_("Hartwell","crater")	AA	18.530000	77.720000	1.7
+# TRANSLATORS: Town in West Virginia, USA.
+Mars	15872	_("Belva","crater")	AA	18.480000	77.380000	0.9
+# TRANSLATORS: Town in New York, USA.
+Mars	15873	_("Angelica","crater")	AA	18.650000	76.950000	3.5
+# TRANSLATORS: Town in California, USA.
+Mars	15874	_("Marysville","crater")	AA	18.130000	77.180000	1.85
+# TRANSLATORS: Town in Arizona, USA.
+Mars	15876	_("Sedona","crater")	AA	17.840000	77.540000	7.4
+# TRANSLATORS: River in Bosnia and Herzegovina and Croatia.
+Mars	15878	_("Una Vallis","vallis")	VA	18.290000	77.070000	5
+# TRANSLATORS: River in Bosnia and Herzegovina and Croatia.
+Mars	15879	_("Neretva Vallis","vallis")	VA	18.550000	77.200000	17
+# TRANSLATORS: Town in Sweden.
+Mars	15875	_("Ulricehamn","crater")	AA	17.950000	76.910000	2.34
+# TRANSLATORS: Town in Colorado, USA.
+Mars	15877	_("Dacono","crater")	AA	18.340000	77.950000	2.2
 # TRANSLATORS: Town in Chile.
 Mars	15526	_("Taltal","crater")	AA	-39.508209	234.210114	10
+# TRANSLATORS: Classical albedo feature name.
+Mars	15880	_("Nili Planum","planum")	PM	18.600000	77.100000	128.547
 # TRANSLATORS: Classical albedo feature name of Greek origin.
 Mars	15184	_("Simois Colles","collis")	CO	-37.718875	183.408252	86.941
 # TRANSLATORS: Classical albedo feature name.
@@ -6193,6 +6215,32 @@ Oberon	5176	_("Romeo","crater")	AA	-28.700000	89.400000	159
 Oberon	957	_("Caesar","crater")	AA	-26.600000	61.100000	76
 # TRANSLATORS: Shakespearean hero.
 Oberon	1312	_("Coriolanus","crater")	AA	-11.400000	345.200000	120
+# TRANSLATORS: Urashima Taro; fisherman in Japanese fairy tale who rescued a turtle and traveled on its back to the dragon Ryujin’s undersea Ryugu Palace, where he was welcomed by princess Otohime.
+Ryugu	15786	_("Urashima","crater")	AA	-8.100000	92.900000	0.29
+# TRANSLATORS: Protagonist of a fairy tale Cendrillon by French writer Charles Perrault (1697), also known as Cinderella.
+Ryugu	15787	_("Cendrillon","crater")	AA	31.900000	350.500000	0.22
+# TRANSLATORS: ‘Golden Boy’ in Japanese fairy tale, who grew up in the wild forests of Mount Ashigara and had a superhuman strength.
+Ryugu	15790	_("Kintaro","crater")	AA	0.400000	157.800000	0.17
+# TRANSLATORS: A brave young fellow, who defeated a giant, from Dutch fairy tale.
+Ryugu	15789	_("Brabo","crater")	AA	4.500000	229.700000	0.14
+# TRANSLATORS: Small ball-like bun, which ran away from home and rolled on the road, singing his tricky song; protagonist of a Russian fairy tale.
+Ryugu	15788	_("Kolobok","crater")	AA	-1.500000	333.500000	0.18
+# TRANSLATORS: ‘Peach Boy’ in Japanese fairy tale, who came to Earth inside a giant peach and once undertook a journey to fight horned ogres in a distant island.
+Ryugu	15791	_("Momotaro","crater")	AA	-12.500000	51.900000	0.19
+# TRANSLATORS: Japanese ball-like dumplings made from the flour of the kibi (proso millet) grain that the fairy tale hero Momotaro brought on his distant journey because this sweet keeps its softness for a long time.
+Ryugu	15792	_("Kibidango","crater")	AA	-31.200000	50.000000	0.13
+# TRANSLATORS: ‘Dragon god’, sea ruler in Japanese fairy tale, father of princess Otohime, master of the undersea Ryugu Palace where fisherman Urashima Taro was a guest.
+Ryugu	15780	_("Ryujin Dorsum","dorsum")	DO	0.000000	180.000000	3.2
+# TRANSLATORS: Immortal world of Japanese mythology, eternal, timeless land across the sea or undersea kingdom, where the princess Otohime lives in the fairy tale about the fisherman Urashima.
+Ryugu	15796	_("Tokoyo Fossa","fossa")	FO	-50.500000	166.200000	0.56
+# TRANSLATORS: Mythical Mount Horai (Penglai in Chinese), paradise of the immortals; in some versions of the Japanese fairy tale about fisherman Urashima is located in the sea on the shell of tortoise that princess Otohime has turned into.
+Ryugu	15797	_("Horai Fossa","fossa")	FO	32.100000	296.600000	0.33
+# TRANSLATORS: Smart boy, who marked a trail in the woods with corn meal to know the way back, from Cajun (Southern USA) fairy tale.
+Ryugu	15798	_("Catafo Saxum","saxum")	SA	-5.500000	0.000000	0.05
+# TRANSLATORS: Otohime Sama; princess in Japanese fairy tale, sea mistress, who welcomed fisherman Urashima Taro in undersea Ryugu Palace and gave him a parting gift, a jewel box whose lid he was told never to open.
+Ryugu	15799	_("Otohime Saxum","saxum")	SA	-69.800000	274.400000	0.16
+# TRANSLATORS: Seacoast in Japanese fairy tale where fisherman Urashima Taro rescued a turtle and started his journey to the undersea Ryugu Palace.
+Ryugu	15800	_("Ejima Saxum","saxum")	SA	-32.000000	101.100000	0.07
 # TRANSLATORS: Arabic first name.
 Venus	2293	_("Guzel","crater")	AA	-57.600000	298.700000	7.3
 # TRANSLATORS: Polynesian fertility goddess.
@@ -10141,6 +10189,10 @@ Venus	6769	_("Zvereva","crater")	AA	45.400000	283.100000	22.9
 Venus	15018	_("Rona Chasma","chasma")	CM	2.500000	288.000000	1520
 # TRANSLATORS: Scottish first name of Latin origin.
 Venus	15652	_("Annabelle","crater")	AA	-4.150000	286.290000	7.7
+# TRANSLATORS: Indian goddess of inauspicious things; sister of Lakshmi.
+Venus	15863	_("Jyestha Tesserae","tessera")	TE	65.050000	343.410000	1252
+# TRANSLATORS: Hattian/Hittite goddess of destiny, who spins the threads of fate.
+Venus	15864	_("Istustaya Tesserae","tessera")	TE	-8.760000	42.230000	505
 # TRANSLATORS: Scottish mischievous spirits.
 Puck	6953	_("Bogle","crater")	AA	0.000000	0.000000	0
 # TRANSLATORS: German roguish or evil spirits.
@@ -10837,8 +10889,50 @@ Steins	14999	_("Chernykh Regio","regio")	RE	-20.000000	60.000000	7.5
 Steins	14998	_("Tourmaline","crater")	AA	-20.900000	347.600000	0.22
 # TRANSLATORS: Jeanne Baret (Baré); first woman to have completed circumnavigation voyage of the globe (1740-1807).
 Pluto	15751	_("Baret Montes","mons")	MO	14.600000	157.800000	170.392
+# TRANSLATORS: Rolan; Georgian (Caucasus) astronomer. Investigated the dynamics, astrometry and photometry of Pluto (1931–2010).
+Pluto	15832	_("Kiladze","crater")	AA	28.387779	212.922051	44.42
+# TRANSLATORS: Ahmed Muhiddin, also known as Piri Reis, Ottoman navigator and cartographer (c. 1470–1553). Author of one of the earliest existing world maps in 1513. His “Book of the Sea” (1521), containing 290 maps, was one of the most famous cartographical work
+Pluto	15839	_("Piri Rupes","rupes")	RU	27.130000	108.900000	549
+# TRANSLATORS: Auguste; Swiss-Belgian inventor and physicist known for his pioneering balloon flights into the Earth’s upper atmosphere up to 17 km (1884–1962).
+Pluto	15834	_("Piccard Mons","mons")	MO	-35.260000	176.790000	257
+# TRANSLATORS: Antonio; Italian scholar and explorer, whose journal is the only original description of the discoveries made during the first circumnavigation of the Earth which started in Spain in 1519 under the leadership of Magellan (c.1491 – c.1531).
+Pluto	15836	_("Pigafetta Montes","mons")	MO	-6.830000	146.440000	234
+# TRANSLATORS: Juan Sebastián; Spanish explorer of Basque origin, who completed in 1522 the first circumnavigation of the Earth which started in 1519 under the leadership of Magellan (c.1476–1526).
+Pluto	15837	_("Elcano Montes","mons")	MO	-26.040000	143.700000	488
+# TRANSLATORS: Percival; American astronomer who in 1906-1916 undertook extensive searches of transneptunian planets (1855-1916).
+Pluto	15838	_("Lowell Regio","regio")	RE	86.000000	338.000000	1215
+# TRANSLATORS: One of the Hero Twins (with Xbalanque) in Mayan mythology, who defeated the lords of the Underworld in a ball game.
+Pluto	15842	_("Hunahpu Valles","vallis")	VA	49.090000	154.410000	295
+# TRANSLATORS: Nyanga (Eastern Dem. Rep. Congo/Zaire) epic hero who travelled to the underworld and after returning home became a wise and powerful king.
+Pluto	15833	_("Mwindo Fossae","fossa")	FO	34.740000	245.780000	406
+# TRANSLATORS: Orville (1871–1948) and Wilbur (1867–1912), brothers, U.S. aviation pioneers who invented, built, and flew in 1903 the world’s first successful powered heavier-than-air flying machine (airplane) with a pilot aboard.
+Pluto	15835	_("Wright Mons","mons")	MO	-21.360000	173.240000	165
+# TRANSLATORS: Series of the Soviet Union’s 16 spacecraft sent to Venus in 1961–1983. The missions accomplished a number of firsts, including the first human made device to enter the atmosphere of another planet (Venera 3, 1966), to measure in situ atmosphere compo
+Pluto	15840	_("Venera Terra","terra")	TA	56.890000	117.620000	742
+# TRANSLATORS: A pair of the Soviet Union’s Vega 1 and Vega 2 spacecraft launched in 1984 that were the first ones to fly balloons on another planet (Venus, 1985) and then the first ones to image the nucleus of a comet (1P/Halley, 1986).
+Pluto	15841	_("Vega Terra","terra")	TA	33.960000	85.490000	1614
+# TRANSLATORS: A bottomless lake, one of the entrances to the underworld in Greek mythology.
+Pluto	15843	_("Alcyonia Lacus","lacus")	LC	36.440000	151.950000	30
+# TRANSLATORS: Bishun; Indian-born American atmosphere chemistry scientist, investigated, in particular, tholins, the organic molecules that probably account for the darkest regions on Pluto (1933–2013).
+Pluto	15844	_("Khare","crater")	AA	27.850000	94.560000	58
+# TRANSLATORS: Damon; American astronomer; investigated the formation history of Pluto (1959–2004).
+Pluto	15845	_("Simonelli","crater")	AA	12.790000	314.760000	286
+# TRANSLATORS: Epic hero of the Chochenyo/Ohlone (N. California) mythology, an anthropomorphic being resembling a peregrine falcon, who traveled to the underworld to battle Wiwe (“Body of Stone”), the lord of the underworld.
+Pluto	15852	_("Kaknú Fossa","fossa")	FO	-30.450000	122.070000	249
 # TRANSLATORS: Edmund; New Zealand mountaineer (1919–2008).
 Pluto	15671	_("Hillary Montes","mons")	MO	3.260000	169.580000	388
+# TRANSLATORS: Son of Odin, who rode the horse Sleipnir into the underworld to retrieve his brother, Balder.
+Pluto	15861	_("Hermod Fossae","fossa")	FO	-8.630000	119.340000	592
+# TRANSLATORS: Junko Tabei, Japanese mountaineer and the first woman to climb both Mount Everest and the Seven Summits (1939–2016).
+Pluto	15866	_("Tabei Montes","mons")	MO	-11.730000	164.330000	105
+# TRANSLATORS: Thomas Boyd; American mechanical/space engineer, first project manager of the New Horizons mission to Pluto and the Kuiper Belt (1941–2014).
+Pluto	15867	_("Coughlin","crater")	AA	15.240000	150.540000	45
+# TRANSLATORS: Zulu tale hero, who followed a porcupine underground and came upon the village of dead souls.
+Pluto	15869	_("Uncama Fossa","fossa")	FO	23.960000	142.620000	227
+# TRANSLATORS: Korean traveler and scholar, who crossed the Asian continent from China to Arabia and back (724-727), and documented the journey in his journals (704–787).
+Pluto	15870	_("Hyecho Palus","palus")	PA	-17.430000	167.440000	322.559
+# TRANSLATORS: Robert H.; American astronomer, co-discoverer (1955) of Pluto’s 6.4-day rotation period (1923–1989).
+Pluto	15868	_("Hardie","crater")	AA	23.820000	141.580000	25
 # TRANSLATORS: A pair of US-launched Voyager 1 and Voyager 2 spacecraft that performed the “grand tour” of all four giant planets (1977-1989).
 Pluto	15678	_("Voyager Terra","terra")	TA	60.080000	153.520000	843
 # TRANSLATORS: Tenzing Norgay; Nepalese (Sherpa) mountaineer (1914–1986).
@@ -13741,7 +13835,7 @@ Moon	3201	_("Lacroix","crater")	AA	-37.933679	300.799984	36.074
 Moon	3202	_("Lacus Aestatis","lacus")	LC	-14.833825	291.430304	86.3872
 # TRANSLATORS: "Lake of Autumn."
 Moon	3203	_("Lacus Autumni","lacus")	LC	-11.814986	276.827614	195.645
-# TRANSLATORS: Aleksey Arkhipovich; Soviet cosmonaut (1934-Live).
+# TRANSLATORS: Aleksey Arkhipovich; Soviet cosmonaut (1934-2019).
 Moon	3352	_("Leonov","crater")	AA	19.065182	148.362784	34.043
 # TRANSLATORS: Jean Antoine; French archaeologist (1787-1848).
 Moon	3363	_("Letronne","crater")	AA	-10.500642	317.512091	117.587
@@ -29459,6 +29553,24 @@ Ceres	15533	_("Yamor Mons","mons")	MO	85.500000	12.000000	16
 Ceres	15666	_("Jacheongbi","crater")	AA	-69.200000	2.300000	31
 # TRANSLATORS: Fijian serpent god of agriculture and the underworld. He makes the breadfruit and other fruit trees blossom and yield fruit.
 Ceres	15667	_("Ratumaibulu","crater")	AA	-67.300000	77.500000	20
+# TRANSLATORS: Dutch (The Netherlands) day of thanksgiving for the crop (1st Wednesday of November).
+Ceres	15802	_("Dankdag Labes","labes")	LA	78.380000	39.210000	23.5
+# TRANSLATORS: Jewish autumn festival of double thanksgiving, celebrated for 8 days in September – October.
+Ceres	15803	_("Sukkot Labes","labes")	LA	50.550000	26.810000	11
+# TRANSLATORS: Harvest festival in Kerala, India, held in August-September.
+Ceres	15804	_("Onam Labes","labes")	LA	51.230000	316.020000	4.8
+# TRANSLATORS: Punjabi (Pakistan, NW India) harvest festival. Held on January 13.
+Ceres	15805	_("Lohri Tholus","tholus")	TH	19.660000	238.660000	3.8
+# TRANSLATORS: Belarusian harvest festival (21 September).
+Ceres	15806	_("Bagach Tholus","tholus")	TH	20.040000	238.910000	4.3
+# TRANSLATORS: Finnish harvest festival (first Saturday of November).
+Ceres	15807	_("Kekri Tholus","tholus")	TH	19.850000	240.590000	4.6
+# TRANSLATORS: The major festival in Ancient Rome to celebrate for the grain goddess Ceres (8 days in mid- to late April).
+Ceres	15808	_("Cerealia Tholus","tholus")	TH	19.610000	239.650000	3.2
+# TRANSLATORS: Festival of rice planting season at Sumba Island (Lesser Sunda Islands, E. Indonesia). (February – March).
+Ceres	15809	_("Pasola Facula","facula")	FA	19.470000	239.220000	2.9
+# TRANSLATORS: Hawaiian harvest festival in honor of Lono, a god of fertility, agriculture, and rainfall (lasts four months, from October through February).
+Ceres	15810	_("Makahiki Labyrinthus","labyrinthus")	LB	17.490000	237.840000	22
 # TRANSLATORS: Soldier of Turnus, brother of Lucagus.
 Dione	14358	_("Liger","crater")	AA	24.000000	233.370000	53
 # TRANSLATORS: Soldier of Turnus, brother of Liger.
@@ -30677,8 +30789,6 @@ Ganymede	4145	_("Nanshe Catena","catena")	CA	15.400000	7.100000	103.8
 Ganymede	15497	_("Gushkin","crater")	AA	20.747681	314.024414	40.5
 # TRANSLATORS: In Greek mythology, legendary king of Troy, nephew (or possibly father) of Ganymede.
 Ganymede	15813	_("Laomedon","crater")	AA	20.900000	282.100000	64
-# TRANSLATORS: Chilote (southern Chile) legendary, sentient ghost ship, which could suddenly appear and then quickly disappears again, leaving no evidence of its presence.
-Charon	15732	_("Caleuche Chasma","chasma")	CM	72.400000	241.800000	445
 # TRANSLATORS: Greek mythological ship sailed by Jason and his crew, the Argonauts, from Iolcos to Colchis to retrieve the Golden Fleece, described in the "Argonautica" epic poem by Apollonius Rhodius (3rd cen. BC).
 Charon	15734	_("Argo Chasma","chasma")	CM	27.800000	80.400000	355
 # TRANSLATORS: Stanley, American-British film director and screenwriter (1928-1999). His film "2001: A Space Odyssey" (1968) after the screenplay co-wrote with Arthur Clarke tells the story of humanity’s evolution from tool-using hominids to space explorers and beyon
@@ -30701,6 +30811,8 @@ Charon	15738	_("Dorothy","crater")	AA	58.530000	40.580000	261
 Charon	15739	_("Nasreddin","crater")	AA	25.500000	308.600000	29.7
 # TRANSLATORS: Russian merchant in the medieval epic tale (Bylina), who traveled to the bottom of the sea.
 Charon	15742	_("Sadko","crater")	AA	-16.100000	331.200000	28
+# TRANSLATORS: Chilote (southern Chile) legendary, sentient ghost ship, which could suddenly appear and then quickly disappears again, leaving no evidence of its presence.
+Charon	15732	_("Caleuche Chasma","chasma")	CM	72.500000	241.800000	400
 # TRANSLATORS: Persian god of light.
 Io	3933	_("Mithra Patera","patera")	PE	-59.035356	93.524036	32.1602
 # TRANSLATORS: Hawaiian thunder god.
@@ -31159,47 +31271,4 @@ Hyperion	2427	_("Helios","crater")	AA	71.000000	228.000000	0
 Hyperion	2805	_("Jarilo","crater")	AA	61.000000	177.000000	0
 # TRANSLATORS: Bororo folk hero; the sun.
 Hyperion	3852	_("Meri","crater")	AA	3.000000	189.000000	0
-# TRANSLATORS: A brave young fellow, who defeated a giant, from Dutch fairy tale.
-Ryugu	15789	_("Brabo","crater")	AA	4.500000	229.700000	0.14
-# TRANSLATORS: Protagonist of a fairy tale Cendrillon by French writer Charles Perrault (1697), also known as Cinderella.
-Ryugu	15787	_("Cendrillon","crater")	AA	31.900000	350.500000	0.21
-# TRANSLATORS: Japanese ball-like dumplings made from the flour of the kibi (proso millet) grain that the fairy tale hero Momotaro brought on his distant journey because this sweet keeps its softness for a long time.
-Ryugu	15792	_("Kibidango","crater")	AA	-29.500000	49.400000	0.17
-# TRANSLATORS: 'Golden Boy' in Japanese fairy tale, who grew up in the wild forests of Mount Ashigara and had a superhuman strength.
-Ryugu	15790	_("Kintaro","crater")	AA	2.800000	159.700000	0.16
-# TRANSLATORS: Small ball-like bun, which ran away from home and rolled on the road, singing his tricky song; protagonist of a Russian fairy tale.
-Ryugu	15788	_("Kolobok","crater")	AA	3.6500000	333.300000	0.18
-# TRANSLATORS: 'Peach Boy' in Japanese fairy tale, who came to Earth inside a giant peach and once undertook a journey to fight horned ogres in a distant island.
-Ryugu	15791	_("Momotaro","crater")	AA	-15.400000	50.600000	0.16
-# TRANSLATORS: 'Dragon god', sea ruler in Japanese fairy tale, father of princess Otohime, master of the undersea Ryugu Palace where fisherman Urashima Taro was a guest.
-Ryugu	15780	_("Ryujin Dorsum","dorsum")	DO	0.000000	180.000000	3.2
-# TRANSLATORS: Urashima Taro; fisherman in Japanese fairy tale who rescued a turtle and traveled on its back to the dragon Ryujin’s undersea Ryugu Palace, where he was welcomed by princess Otohime.
-Ryugu	15786	_("Urashima","crater")	AA	-8.100000	92.900000	0.3
-#
-# Surface features on CERES (not in the official DBF file; approved Mar 27, 2019)
-#
-# TRANSLATORS: Dutch (The Netherlands) day of thanksgiving for the crop (1st Wednesday of November).
-Ceres	15802	_("Dankdag Labes","labes")	LA	78.38	39.21	23.5
-# TRANSLATORS: Festival of rice planting season at Sumba Island (Lesser Sunda Islands, E. Indonesia). (February – March).
-Ceres	15809	_("Pasola Facula","facula")	FA	19.47	239.22	2.9
-# TRANSLATORS: The major festival in Ancient Rome to celebrate for the grain goddess Ceres (8 days in mid- to late April).
-Ceres	15808	_("Cerealia Tholus","tholus")	TH	19.61	239.65	3.2
-# TRANSLATORS: Finnish harvest festival (first Saturday of November).
-Ceres	15807	_("Kekri Tholus","tholus")	TH	19.85	240.59	4.6
-# TRANSLATORS: Belarusian harvest festival (21 September).
-Ceres	15806	_("Bagach Tholus","tholus")	TH	20.04	238.91	4.3
-# TRANSLATORS: Punjabi (Pakistan, NW India) harvest festival. Held on January 13.
-Ceres	15805	_("Lohri Tholus","tholus")	TH	19.66	238.66	3.8
-# TRANSLATORS: Harvest festival in Kerala, India, held in August-September.
-Ceres	15804	_("Onam Labes","labes")	LA	51.23	316.02	4.8
-# TRANSLATORS: Jewish autumn festival of double thanksgiving, celebrated for 8 days in September – October.
-Ceres	15803	_("Sukkot Labes","labes")	LA	50.55	26.81	11
-# TRANSLATORS: Hawaiian harvest festival in honor of Lono, a god of fertility, agriculture, and rainfall (lasts four months, from October through February).
-Ceres	15810	_("Makahiki Labyrinthus","labyrinthus")	LB	17.49	237.84	22
-#
-# Surface features on PLUTO (not in the official DBF file; approved Aug 12, 2019)
-#
-# TRANSLATORS: Epic hero of the Chochenyo/Ohlone (N. California) mythology, an anthropomorphic being resembling a peregrine falcon, who traveled to the underworld to battle Wiwe ("Body of Stone"), the lord of the underworld.
-Pluto	15852	_("Kaknu Fossa","fossa")	FO	-30.45	122.07	249
-# TRANSLATORS: Son of Odin, who rode the horse Sleipnir into the underworld to retrieve his brother, Balder.
-Pluto	15861	_("Hermod Fossae","fossa")	FO	-8.63	119.34	592
+
