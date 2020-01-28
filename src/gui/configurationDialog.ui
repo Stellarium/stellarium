@@ -728,19 +728,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxAltAz">
-               <property name="toolTip">
-                <string>Horizontal coordinates</string>
-               </property>
-               <property name="text">
-                <string>Azimuth/Altitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecJ2000">
                <property name="toolTip">
@@ -754,26 +741,46 @@
                </attribute>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate">
-               <property name="toolTip">
-                <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
-               </property>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxDistance">
                <property name="text">
-                <string>Ecliptic coordinates (of date)</string>
+                <string>Distance</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000">
+             <item row="11" column="0">
+              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
+               <property name="text">
+                <string>Supergalactic coordinates</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra">
                <property name="toolTip">
-                <string>Ecliptic coordinates, equinox J2000.0</string>
+                <string>Spectral class, nebula type, etc.</string>
                </property>
                <property name="text">
-                <string>Ecliptic coordinates (J2000)</string>
+                <string>Additional information</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string>Equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string>Hour angle/Declination</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -793,46 +800,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxName">
-               <property name="text">
-                <string>Name</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
-               <property name="text">
-                <string>Supergalactic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBoxVisualMag">
-               <property name="text">
-                <string>Visual magnitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
-               <property name="text">
-                <string>Absolute magnitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="checkBoxType">
                <property name="toolTip">
@@ -846,33 +813,13 @@
                </attribute>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="checkBoxSize">
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="checkBoxRTSTime">
                <property name="toolTip">
-                <string>Angular or physical size</string>
+                <string>Show time of rise, transit and set of celestial object</string>
                </property>
                <property name="text">
-                <string>Size</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="checkBoxVelocity">
-               <property name="text">
-                <string>Velocity</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
+                <string>Rises, transits and sets</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -902,13 +849,79 @@
                </attribute>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBoxHourAngle">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxAltAz">
                <property name="toolTip">
-                <string>Equatorial coordinates, equinox of date</string>
+                <string>Horizontal coordinates</string>
                </property>
                <property name="text">
-                <string>Hour angle/Declination</string>
+                <string>Azimuth/Altitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBoxVisualMag">
+               <property name="text">
+                <string>Visual magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxName">
+               <property name="text">
+                <string>Name</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox J2000.0</string>
+               </property>
+               <property name="text">
+                <string>Ecliptic coordinates (J2000)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+               <property name="text">
+                <string>Absolute magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
+               <property name="text">
+                <string>Galactic coordinates</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -925,40 +938,34 @@
                </attribute>
               </widget>
              </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="checkBoxRTSTime">
-               <property name="toolTip">
-                <string>Show time of rise, transit and set of celestial object</string>
-               </property>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxVelocity">
                <property name="text">
-                <string>Rises, transits and sets</string>
+                <string>Velocity</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate">
                <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
+                <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
                </property>
                <property name="text">
-                <string>Additional information</string>
+                <string>Ecliptic coordinates (of date)</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
+             <item row="12" column="0">
+              <widget class="QCheckBox" name="checkBoxOtherCoords">
                <property name="text">
-                <string>Galactic coordinates</string>
+                <string>Additional coordinates (from plugins)</string>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
               </widget>
              </item>
             </layout>

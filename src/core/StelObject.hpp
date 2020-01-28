@@ -46,6 +46,7 @@ public:
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
+		None			= 0x00000000, //!< Show Nothing
 		Name			= 0x00000001, //!< An object's name
 		CatalogNumber		= 0x00000002, //!< Catalog numbers
 		Magnitude		= 0x00000004, //!< Magnitude related data

@@ -556,14 +556,18 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += QString("%1 (%3): %2").arg(eqlObl, firstCoordinate, cepoch) + "<br>";
 	}
 
+	if (withTables)
+		 res += "</table>";
+
 	// Specialized plugins (e.g. Astro Navigation or ethno-astronomical specialties) may want to provide additional types of coordinates here.
 	if (flags&OtherCoord)
 	{
+		if (withTables)
+			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 		res += getExtraInfoStrings(OtherCoord).join("");
+		if (withTables)
+			 res += "</table>";
 	}
-
-	if (withTables)
-		 res += "</table>";
 
 	if ((flags&SiderealTime) && (currentPlanet==QStringLiteral("Earth")))
 	{

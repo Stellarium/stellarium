@@ -575,6 +575,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::GalacticCoord;
 	if (ui->checkBoxSupergalacticCoordinates->isChecked())
 		flags |= StelObject::SupergalacticCoord;
+	if (ui->checkBoxOtherCoords->isChecked())
+		flags |= StelObject::OtherCoord;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::ObjectType;
 	if (ui->checkBoxEclipticCoordsJ2000->isChecked())
@@ -890,6 +892,7 @@ void ConfigurationDialog::saveAllSettings()
 		conf->setValue("flag_show_extra",		static_cast<bool>(flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
 		conf->setValue("flag_show_supergalcoord",	static_cast<bool>(flags & StelObject::SupergalacticCoord));
+		conf->setValue("flag_show_othercoord",		static_cast<bool>(flags & StelObject::OtherCoord));
 		conf->setValue("flag_show_type",		static_cast<bool>(flags & StelObject::ObjectType));
 		conf->setValue("flag_show_eclcoordofdate",	static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
 		conf->setValue("flag_show_eclcoordj2000",	static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
@@ -1496,6 +1499,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 	ui->checkBoxSupergalacticCoordinates->setChecked(flags & StelObject::SupergalacticCoord);
+	ui->checkBoxOtherCoords->setChecked(flags & StelObject::OtherCoord);
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
 	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);

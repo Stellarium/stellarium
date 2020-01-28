@@ -47,11 +47,11 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "none")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
 		
 		conf->beginGroup("custom_selected_info");
 		if (conf->value("flag_show_name", false).toBool())
@@ -84,6 +84,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::GalacticCoord;
 		if (conf->value("flag_show_supergalcoord", false).toBool())
 			infoTextFilters |= StelObject::SupergalacticCoord;
+		if (conf->value("flag_show_othercoord", false).toBool())
+			infoTextFilters |= StelObject::OtherCoord;
 		if (conf->value("flag_show_eclcoordofdate", false).toBool())
 			infoTextFilters |= StelObject::EclipticCoordOfDate;
 		if (conf->value("flag_show_eclcoordj2000", false).toBool())
