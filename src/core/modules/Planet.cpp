@@ -2171,7 +2171,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			r+=rings->getSize();
 
 		const double dist = getEquinoxEquatorialPos(core).length();
-		const double z_near = qMax(0.0001, (dist - r)); //near Z should be as close as possible to the actual geometry
+		const double z_near = qMax(0.00001, (dist - r)); //near Z should be as close as possible to the actual geometry
 		const double z_far  = (dist + 10*r); //far Z should be quite a bit further behind (Z buffer accuracy is worse near the far plane)
 		core->setClippingPlanes(z_near,z_far);
 
