@@ -108,7 +108,7 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 		{ niReticulum, "reticulum" },
 		{ niRima     , "rima" },
 		{ niRupes    , "rupes" },
-		{ niSaxa	   , "saxa" },
+		{ niSaxum  , "saxum" },
 		{ niScopulus , "scopulus" },
 		{ niSerpens  , "serpens" },
 		{ niSulcus   , "sulcus" },
@@ -362,7 +362,7 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 		{ "RT", NomenclatureItem::niReticulum		},
 		{ "RI", NomenclatureItem::niRima		},
 		{ "RU", NomenclatureItem::niRupes		},
-		{ "SA", NomenclatureItem::niSaxa		},
+		{ "SA", NomenclatureItem::niSaxum		},
 		{ "SF", NomenclatureItem::niSatelliteFeature	},
 		{ "SC", NomenclatureItem::niScopulus		},
 		{ "SE", NomenclatureItem::niSerpens		},
@@ -471,7 +471,7 @@ void NomenclatureItem::createNameLists()
 	// TRANSLATORS: A feature that shares the name of an associated feature.
 	niTypeStringMap.insert( niSatelliteFeature, qc_("satellite feature", "landform") );
 	// TRANSLATORS: Boulder or rock
-	niTypeStringMap.insert( niSaxa, qc_("saxa", "landform") );
+	niTypeStringMap.insert( niSaxum, qc_("saxum", "landform") );
 	// TRANSLATORS: Lobate or irregular scarp
 	niTypeStringMap.insert( niScopulus, qc_("scopulus", "landform") );
 	// TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
@@ -586,8 +586,8 @@ void NomenclatureItem::createNameLists()
 	niTypeDescriptionMap.insert( niRupes, q_("Scarp."));
 	// TRANSLATORS: Description for landform 'satellite feature'
 	niTypeDescriptionMap.insert( niSatelliteFeature, q_("A feature that shares the name of an associated feature."));
-	// TRANSLATORS: Description for landform 'saxa'
-	niTypeDescriptionMap.insert( niSaxa, q_("Boulder or rock."));
+	// TRANSLATORS: Description for landform 'saxum'
+	niTypeDescriptionMap.insert( niSaxum, q_("Boulder or rock."));
 	// TRANSLATORS: Description for landform 'scopulus'
 	niTypeDescriptionMap.insert( niScopulus, q_("Lobate or irregular scarp."));
 	// TRANSLATORS: Description for landform 'serpens'
