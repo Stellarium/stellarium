@@ -681,7 +681,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			{
 				// For compute the Moon age we use geocentric coordinates
 				QString moonPhase = "";
-				StelCore* core1 = StelApp::getInstance().getCore(); // FIXME: Why do we need a different reference to the (singular) core here?
+				StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
 				const bool state = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
 				core1->update(0); // enforce update cache!
