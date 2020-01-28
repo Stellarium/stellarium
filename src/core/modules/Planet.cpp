@@ -724,15 +724,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 		if (englishName=="Sun")
 		{
-			// Only show during eclipse, show percent?
-			const double eclipseObscuration = 100.*(1.-ssystem->getEclipseFactor(core));
+			// Only show during eclipse or transit, show percent?
+			QPair<double, PlanetP> eclObj = ssystem->getEclipseFactor(core);
+			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
 				oss << QString("%1: %2%").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2)) << "<br />";
-				if (onEarth)
+				PlanetP obj = eclObj.second;
+				if (onEarth && obj==ssystem->getMoon())
 				{
-					PlanetP moon = ssystem->getMoon();
-					const double eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
+					const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularSize(core)*M_PI_180)/obj->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
 					oss << QString("%1: %2").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3)) << "<br />";
 				}
 			}
@@ -771,15 +772,16 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	else
 	{
 		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		const double eclipseObscuration = 100.*(1.-ssystem->getEclipseFactor(core));
+		QPair<double, PlanetP> eclObj = ssystem->getEclipseFactor(core);
+		const double eclipseObscuration = 100.*(1.-eclObj.first);
 		if (eclipseObscuration>1.e-7)
 		{
 			map.insert("eclipse-obscuration", eclipseObscuration);
-			if (core->getCurrentPlanet()==ssystem->getEarth())
+			PlanetP obj = eclObj.second;
+			if (core->getCurrentPlanet()==ssystem->getEarth() && obj==ssystem->getMoon())
 			{
-				double angularSize = 2.*getAngularSize(core)*M_PI/180.;
-				PlanetP moon = ssystem->getMoon();
-				const double eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
+				double angularSize = 2.*getAngularSize(core)*M_PI_180;
+				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularSize(core)*M_PI_180)/obj->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
 				map.insert("eclipse-magnitude", eclipseMagnitude);
 			}
 			else
@@ -1291,7 +1293,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		// check how much of it is visible
 		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		const double shadowFactor = qMax(0.000128, ssm->getEclipseFactor(core));
+		const double shadowFactor = qMax(0.000128, ssm->getEclipseFactor(core).first);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
@@ -1595,7 +1597,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core)==1.0)
+		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core).first==1.0)
 			return;
 	}
 
@@ -2283,7 +2285,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-			const float eclipseFactor = static_cast<float>(ssm->getEclipseFactor(core));
+			const float eclipseFactor = static_cast<float>(ssm->getEclipseFactor(core).first);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 			// But without atmosphere we should indeed draw a visible corona!
 			const float alpha= ( !lmgr->getFlagAtmosphere() ? 0.7f : -0.1f*qMax(-10.0f, static_cast<float>(std::log10(eclipseFactor))));

@@ -2757,8 +2757,9 @@ QString SolarSystem::getOrbitColorStyle() const
 	return r;
 }
 
-double SolarSystem::getEclipseFactor(const StelCore* core) const
+QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 {
+	PlanetP p;
 	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
 	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getEquatorialRadius();
@@ -2817,10 +2818,13 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		}
 
 		if(illumination < final_illumination)
+		{
 			final_illumination = illumination;
+			p = planet;
+		}
 	}
 
-	return final_illumination;
+	return QPair<double, PlanetP>(final_illumination, p);
 }
 
 bool SolarSystem::removeMinorPlanet(QString name)
