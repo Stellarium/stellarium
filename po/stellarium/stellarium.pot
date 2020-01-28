@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-01-28 20:05+0700\n"
+"POT-Creation-Date: 2020-01-28 20:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4035,53 +4035,53 @@ msgstr ""
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:428
+#: src/gui/HelpDialog.cpp:428 src/gui/HelpDialog.cpp:434
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:429 src/gui/HelpDialog.cpp:430
-#: src/gui/HelpDialog.cpp:431 src/gui/HelpDialog.cpp:432
-#: src/gui/HelpDialog.cpp:438 src/gui/HelpDialog.cpp:439
-#: src/gui/HelpDialog.cpp:440 src/gui/HelpDialog.cpp:441
-#: src/gui/HelpDialog.cpp:442 src/gui/HelpDialog.cpp:443
-#: src/gui/HelpDialog.cpp:444 src/gui/HelpDialog.cpp:445
-#: src/gui/HelpDialog.cpp:446
+#: src/gui/HelpDialog.cpp:431 src/gui/HelpDialog.cpp:436
+#: src/gui/HelpDialog.cpp:437 src/gui/HelpDialog.cpp:438
+#: src/gui/HelpDialog.cpp:439 src/gui/HelpDialog.cpp:440
+#: src/gui/HelpDialog.cpp:441 src/gui/HelpDialog.cpp:442
+#: src/gui/HelpDialog.cpp:443 src/gui/HelpDialog.cpp:444
+#: src/gui/HelpDialog.cpp:445
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:433
-#, qt-format
-msgid "Continuous Integration: %1"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:434
-#, qt-format
-msgid "Tester: %1"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:432
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:436
+#: src/gui/HelpDialog.cpp:433
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:437
+#: src/gui/HelpDialog.cpp:435
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:447 src/gui/HelpDialog.cpp:448
+#: src/gui/HelpDialog.cpp:446 src/gui/HelpDialog.cpp:447
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
+#: src/gui/HelpDialog.cpp:448
+#, qt-format
+msgid "Continuous Integration: %1"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:449
+#, qt-format
+msgid "Tester: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:450
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:501
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
@@ -4094,7 +4094,7 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:450
+#: src/gui/HelpDialog.cpp:451
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
