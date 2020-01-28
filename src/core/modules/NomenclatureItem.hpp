@@ -102,7 +102,7 @@ public:
 		niReticulum			= 54, // type="reticulum"
 		niSatelliteFeature		= 55, // type="satellite feature"
 		niTessera				= 56, // type="tessera"
-		niSaxa				= 56  // type="saxa"
+		niSaxa				= 57  // type="saxa"
 	};
 
 	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
