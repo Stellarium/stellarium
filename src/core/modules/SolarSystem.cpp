@@ -761,6 +761,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				time_at_pericenter = epoch - mean_anomaly / meanMotion;
 			}
 
+			static const QMap<QString, double>massMap={ // masses from DE430/431
+				{ "Sun",            1.0},
+				{ "Mercury",  6023682.155592},
+				{ "Venus",     408523.718658},
+				{ "Earth",     332946.048834},
+				{ "Mars",     3098703.590291},
+				{ "Jupiter",     1047.348625},
+				{ "Saturn",      3497.901768},
+				{ "Uranus",     22902.981613},
+				{ "Neptune",    19412.259776},
+				{ "Pluto",  135836683.768617}};
+
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
@@ -785,16 +797,17 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
 			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
 			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
-								   eccentricity,           // 0..>1, but practically only 0..1
-								   inclination,            // [radians]
-								   ascending_node,         // [radians]
-								   arg_of_pericenter,      // [radians]
-								   time_at_pericenter,     // JD
-								   orbitGoodDays,          // orbitGoodDays. 0=always good.
-								   meanMotion,             // [radians/day]
-								   parentRotObliquity,     // [radians]
-								   parent_rot_asc_node,    // [radians]
-								   parent_rot_j2000_longitude); // [radians]
+							   eccentricity,           // 0..>1, but practically only 0..1
+							   inclination,            // [radians]
+							   ascending_node,         // [radians]
+							   arg_of_pericenter,      // [radians]
+							   time_at_pericenter,     // JD
+							   orbitGoodDays,          // orbitGoodDays. 0=always good.
+							   meanMotion,             // [radians/day]
+							   parentRotObliquity,     // [radians]
+							   parent_rot_asc_node,    // [radians]
+							   parent_rot_j2000_longitude, // [radians]
+							   1./massMap.value(parent->englishName, 1.));
 			orbits.push_back(orb);
 
 			orbitPtr = orb;
@@ -2756,8 +2769,8 @@ QString SolarSystem::getOrbitColorStyle() const
 QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 {
 	PlanetP p;
-	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
-	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	const Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
+	const Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getEquatorialRadius();
 
 	double final_illumination = 1.0;
@@ -2775,12 +2788,10 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 
 		Vec3d v1 = Lp - P3;
 		Vec3d v2 = C - P3;
-
 		const double L = v1.length();
 		const double l = v2.length();
-
-		v1 = v1 / L;
-		v2 = v2 / l;
+		v1 /= L;
+		v2 /= l;
 
 		const double R = RS / L;
 		const double r = radius / l;

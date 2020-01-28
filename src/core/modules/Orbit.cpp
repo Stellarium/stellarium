@@ -130,16 +130,17 @@ static void InitEll(const double q, const double n, const double e, const double
 }
 
 KeplerOrbit::KeplerOrbit(double pericenterDistance,
-                       double eccentricity,
-                       double inclination,
-                       double ascendingNode,
-                       double argOfPerhelion,
-                       double timeAtPerihelion,
-                       double orbitGoodDays,
-                       double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
-		       double parentRotObliquity,
-		       double parentRotAscendingnode,
-		       double parentRotJ2000Longitude)
+			double eccentricity,
+			double inclination,
+			double ascendingNode,
+			double argOfPerhelion,
+			double timeAtPerihelion,
+			double orbitGoodDays,
+			double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
+			double parentRotObliquity,
+			double parentRotAscendingnode,
+			double parentRotJ2000Longitude,
+			double centralMass)
 	: q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
@@ -147,9 +148,10 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 	  w(argOfPerhelion),
 	  t0(timeAtPerihelion),
 	  n(meanMotion),
+	  centralMass(centralMass),
+	  orbitGood(orbitGoodDays),
 	  rdot(0.0),
-	  updateTails(true),
-	  orbitGood(orbitGoodDays)
+	  updateTails(true)
 {
 	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
 	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
@@ -215,8 +217,11 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 	const double r=std::sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
 	const double sinNu=rSinNu/r;
 	const double cosNu=rCosNu/r;
-	const double p=q*(1.0+e);
-	const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ/p);
+	const double p=q*(1.0+e); // Heafner: semilatus rectum
+	// From the definition (see https://de.wikipedia.org/wiki/Vis-Viva-Gleichung):
+	// Gaussian Grav. Constant k=sqrt(GM/1AU)=2pi AU/year ~ 0.0172020 AU/d ~ 29.8km/s.
+	// it seems k for moon orbits around the planets should be just reduced by m/M=centralMass/1.
+	const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ*centralMass/p);
 	const double s0=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // rdotx: x component of velocity vector, AU/d Heafner, 5.3.19 r'
 	const double s1=sqrtMuP*((e+cosNu)*Qy - sinNu*Py); // rdoty: y component of velocity vector, AU/d
 	const double s2=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz); // rdotz: z component of velocity vector, AU/d

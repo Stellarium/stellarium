@@ -1009,6 +1009,7 @@ public:
 	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
