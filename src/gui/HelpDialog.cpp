@@ -397,7 +397,8 @@ void HelpDialog::updateAboutText(void) const
 		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
 		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
 		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
-		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong";
+		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
+		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia";
 	contributors.sort();
 
 	// populate About tab
