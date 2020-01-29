@@ -82,11 +82,6 @@ QString AstroCalcDialog::yAxis1Legend = "";
 QString AstroCalcDialog::yAxis2Legend = "";
 const QString AstroCalcDialog::dash = QChar(0x2014);
 const QString AstroCalcDialog::delimiter(", ");
-#ifdef Q_OS_WIN
-const QString AstroCalcDialog::acEndl("\r\n");
-#else
-const QString AstroCalcDialog::acEndl("\n");
-#endif
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
@@ -6142,7 +6137,7 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 		if (i < columns - 1)
 			tableData << delimiter;
 		else
-			tableData << acEndl;
+			tableData << StelUtils::getEndLineChar();
 	}
 
 	for (int i = 0; i < count; i++)
@@ -6153,7 +6148,7 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 			if (j < columns - 1)
 				tableData << delimiter;
 			else
-				tableData << acEndl;
+				tableData << StelUtils::getEndLineChar();
 		}
 	}
 

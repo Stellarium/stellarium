@@ -430,6 +430,7 @@ void BottomStelBar::setFontSizeFromApp(int size)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
+		// to avoid crash
 		SkyGui* skyGui=gui->getSkyGui();
 		if (skyGui)
 			skyGui->updateBarsPos();
@@ -447,6 +448,7 @@ void BottomStelBar::setFont(QFont font)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
+		// to avoid crash
 		SkyGui* skyGui=gui->getSkyGui();
 		if (skyGui)
 			skyGui->updateBarsPos();

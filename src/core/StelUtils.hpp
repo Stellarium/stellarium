@@ -84,6 +84,15 @@ namespace StelUtils
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
+	inline const QString getEndLineChar() {
+		#ifdef Q_OS_WIN
+		const QString stelEndl="\r\n";
+		#else
+		const QString stelEndl="\n";
+		#endif
+		return stelEndl;
+	}
+
 	//! Convert hours, minutes, seconds to decimal hours
 	inline double hmsToHours(const unsigned int h, const unsigned int m, const double s){
 		return static_cast<double>(h)+static_cast<double>(m)/60.+s/3600.;

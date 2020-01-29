@@ -165,7 +165,7 @@ private:
 	//! Makes sure that newly added source lines are as checkable as the rest.
 	Qt::ItemDataRole checkStateRole;
 
-	QString delimiter, acEndl;
+	QString delimiter;
 	QStringList iridiumFlaresHeader;
 
 	// colorpickerbutton's color

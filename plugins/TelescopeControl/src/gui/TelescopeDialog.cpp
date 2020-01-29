@@ -511,9 +511,11 @@ void TelescopeDialog::setAboutText()
 	helpPage += "</body></html>";
 	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->textBrowserHelp->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if (gui)
+	{
+		ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->textBrowserHelp->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	}
 	ui->textBrowserAbout->setHtml(aboutPage);
 	ui->textBrowserHelp->setHtml(helpPage);
 }
@@ -1040,9 +1042,8 @@ void TelescopeDialog::updateStyle()
 	if (dialog)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		QString style(gui->getStelStyle().htmlStyleSheet);
-		ui->textBrowserAbout->document()->setDefaultStyleSheet(style);
+		if (gui)
+			ui->textBrowserAbout->document()->setDefaultStyleSheet(gui->getStelStyle().htmlStyleSheet);
 	}
 }
 

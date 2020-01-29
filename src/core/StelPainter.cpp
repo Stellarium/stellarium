@@ -719,7 +719,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		for (int i=0;i<4;i++)
 		{
 			texCoords[i*2+0] = static_cast<float>(tex->getTexSize().width()) * (i % 2);
-			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - i / 2);
+			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - static_cast<float>(i) / 2);
 		}
 		setTexCoordPointer(2, GL_FLOAT, texCoords);
 

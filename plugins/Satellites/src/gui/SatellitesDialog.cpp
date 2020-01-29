@@ -64,8 +64,7 @@ SatellitesDialog::SatellitesDialog()
 	, importWindow(Q_NULLPTR)
 	, filterModel(Q_NULLPTR)
 	, checkStateRole(Qt::UserRole)
-	, delimiter(", ")
-	, acEndl("\n")
+	, delimiter(", ")	
 {
 	ui = new Ui_satellitesDialog;
 	iridiumFlaresHeader.clear();
@@ -120,12 +119,6 @@ void SatellitesDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
-#ifdef Q_OS_WIN
-	acEndl="\r\n";
-#else
-	acEndl="\n";
-#endif
 
 	// Set symbols on buttons
 	ui->addSatellitesButton->setText(QChar(0x2795)); // Heavy plus symbol
@@ -397,7 +390,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 		QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
 		predictedIridiumFlaresList.setCodec("UTF-8");
 
-		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << acEndl;
+		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << StelUtils::getEndLineChar();
 
 		for (int i = 0; i < count; i++)
 		{
@@ -408,7 +401,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 				if (j<columns-1)
 					predictedIridiumFlaresList << delimiter;
 				else
-					predictedIridiumFlaresList << acEndl;
+					predictedIridiumFlaresList << StelUtils::getEndLineChar();
 			}
 		}
 		predictedIridiumFlares.close();

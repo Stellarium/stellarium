@@ -426,7 +426,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Load sides textures
 	nbSideTexs = static_cast<unsigned short>(landscapeIni.value("landscape/nbsidetex", 0).toUInt());
-	sideTexs = new StelTextureSP[static_cast<size_t>(2*nbSideTexs)]; // 0.14: allow upper half for light textures!
+	sideTexs = new StelTextureSP[static_cast<size_t>(nbSideTexs)*2]; // 0.14: allow upper half for light textures!
 	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);

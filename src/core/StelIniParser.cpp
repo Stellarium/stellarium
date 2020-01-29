@@ -18,6 +18,7 @@
  */
 
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
 
 #include <QSettings>
 #include <QString>
@@ -78,6 +79,11 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 
 bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 {
+	// QSettings only gives us a binary file handle when writing the
+	// ini file, so we must handle alternative end of line marks
+	// ourselves.
+	const QString stelEndl = StelUtils::getEndLineChar();
+
 	int maxKeyWidth = 30;
 	QRegExp reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 

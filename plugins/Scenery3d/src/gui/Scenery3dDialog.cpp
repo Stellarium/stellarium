@@ -172,8 +172,8 @@ void Scenery3dDialog::createDialogContent()
 	}
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if (gui)
+		ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->checkBoxDefaultScene->setVisible(false);
 	ui->pushButtonOpenStoredViewDialog->setVisible(false);
 
