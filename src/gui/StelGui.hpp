@@ -287,6 +287,9 @@ private:
 	//! convenience method to find an action in the StelActionMgr.
 	StelAction* getAction(const QString& actionName) const;
 
+	void addButtonOnBottomBar(QString buttonName, QString actionName, QString groupName);
+	void addButtonOnLeftBar(QString buttonName, QString actionName);
+
 	QGraphicsWidget* topLevelGraphicsWidget;
 
 	class SkyGui* skyGui;
