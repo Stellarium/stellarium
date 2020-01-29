@@ -67,8 +67,6 @@ void DateTimeDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	connect(gui, SIGNAL(flagEnableFocusOnDaySpinnerChanged(bool)), this, SLOT(setFlagEnableFocus(bool)));
 
 	// Use ISO 8601 to date formatting
 	// See details: https://bugs.launchpad.net/stellarium/+bug/1655630
@@ -77,7 +75,12 @@ void DateTimeDialog::createDialogContent()
 	ui->dateDelimiterLabel2->setText(delimiter);
 
 	connectSpinnerEvents();
-	setFlagEnableFocus(gui->getFlagEnableFocusOnDaySpinner());
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		connect(gui, SIGNAL(flagEnableFocusOnDaySpinnerChanged(bool)), this, SLOT(setFlagEnableFocus(bool)));
+		setFlagEnableFocus(gui->getFlagEnableFocusOnDaySpinner());
+	}
 }
 
 void DateTimeDialog::setFlagEnableFocus(bool b)

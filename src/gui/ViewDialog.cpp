@@ -528,7 +528,8 @@ void ViewDialog::updateHips()
 			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
 		}
 		html += "</ul>\n";
-		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		if (gui)
+			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
 }

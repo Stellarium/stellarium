@@ -1563,8 +1563,12 @@ void StelMainView::doScreenshot(void)
 	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
-	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
-	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
+	StelGui* stelGui = dynamic_cast<StelGui*>(gui);
+	if (stelGui)
+	{
+		stelGui->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+		stelGui->forceRefreshGui();
+	}
 #endif
 
 	if (nightModeWasEnabled)
