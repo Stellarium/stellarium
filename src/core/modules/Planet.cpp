@@ -481,7 +481,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1 XYZ (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates")).arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 	}
 #endif
-
 	if (flags&Distance)
 	{
 		const double hdistanceAu = getHeliocentricEclipticPos().length();
@@ -682,7 +681,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				// For compute the Moon age we use geocentric coordinates
 				QString moonPhase = "";
 				StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
-				const bool state = core1->getUseTopocentricCoordinates();
+				const bool useTopocentric = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
 				core1->update(0); // enforce update cache!
 				const double eclJDE = earth->getRotObliquity(core1->getJDE());
@@ -691,8 +690,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &betaMoon);
 				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
-				core1->setUseTopocentricCoordinates(state);
-				core1->update(0); // enforce update cache for avoid odd selection of Moon details!
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 				double deltaLong = (lambdaMoon-lambdaSun)*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
 				if (deltaLong<0.5 || deltaLong>359.5)
@@ -723,11 +722,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					oss << QString(" (%4)").arg(moonPhase);
 				oss << "<br />";
 
-				// we must repeat the position lookup from above in case we have topocentric corrections.
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &betaMoon);
-				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
+				if (useTopocentric)
+				{
+					// we must repeat the position lookup from above in case we have topocentric corrections.
+					StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+					StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				}
 				const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
 				oss << QString("%1: %2").arg(q_("Position angle of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0))) << "<br/>";
 			}

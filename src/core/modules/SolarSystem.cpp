@@ -640,7 +640,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
-		PlanetP parent;
+		PlanetP parent=Q_NULLPTR;
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
@@ -659,8 +659,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				continue;
 			}
 		}
+		Q_ASSERT(parent);
 
-		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: Add a new default for all non *_special.
+		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
 		posFuncType posfunc=Q_NULLPTR;
 		Orbit* orbitPtr=Q_NULLPTR;
@@ -671,7 +672,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 
 #ifdef USE_GIMBAL_ORBIT
-		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infintely slow KeplerOrbit)
+		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infinitely slow KeplerOrbit)
 		// Note that for now we ignore any orbit-related config values from the ini file.
 		if (type=="observer")
 		{
@@ -684,7 +685,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 #endif
-		if ((coordFuncName=="ell_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="kepler_orbit")) // ell_orbit used for planet moons. TODO: rename to kepler_orbit for all!
+		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TODO in V0.21: remove non-kepler_orbit!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
@@ -706,7 +707,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 								? 0.0 // parabolic orbits have no semi_major_axis
 								: pericenterDistance / (1.0-eccentricity);
 			}
-			//if (parent->englishName!="Sun")
 			if (strParent!="Sun")
 				pericenterDistance /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
 
@@ -721,7 +721,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant for calculating meanMotion:
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // Heafner: Fund.Eph.Comp. W / dt
 									: 0.01720209895 / (fabs(semi_major_axis)*std::sqrt(fabs(semi_major_axis)));
 					}
 				} else {
@@ -797,7 +797,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
 			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
 			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
-							   eccentricity,           // 0..>1, but practically only 0..1
+							   eccentricity,           // 0..>1 (>>1 for Interstellar objects)
 							   inclination,            // [radians]
 							   ascending_node,         // [radians]
 							   arg_of_pericenter,      // [radians]
