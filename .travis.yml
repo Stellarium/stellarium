@@ -576,6 +576,20 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
+    # macOS 10.14
+    - os: osx
+      osx_image: xcode11.3
+      addons:
+        homebrew:
+          packages:
+          - qt
+          - gpsd
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
     - os: windows
       env:
         - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
