@@ -1,0 +1,88 @@
+/*
+ * Stellarium
+ * Copyright (C) 2020 Martin Bernardi
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+@page gui GUI
+
+@tableofcontents
+
+@section introduction Introduction
+
+The GUI is based on Qt Widgets.
+
+Relevant files:
+
+- 
+
+Icon design:
+
+Colors of side panels icons:
+
+- Disabled: 6d6d6dff. Main color when disabled.
+- Enabled: ffffffff. Main color when enabled.
+- Disabled variation: cacacaff. Used when a single color is not enough to design
+  the icon. E.g. the atmosphere enable/disable icon.
+- Enabled variation: 8a8a8aff. Used when a single color is not enough to design
+  the icon. E.g. the atmosphere enable/disable icon.
+- Shadow: 000000ff. Every disabled icon has a shadow.
+- Glow: c3c3c3ff. Every enabled icon has a glow
+
+Colors of windows elements:
+
+- Checkboxes/buttons/spinners border: 242424ff
+- Disabled checkboxes/buttons/spinners border: 404040ff
+- Unselected checkboxes background (vertical gradient):
+  - Stop at 0: 8f8f8fff
+  - Stop at 0.08: 5a5a5aff
+  - Stop at 1: a0a0a0ff
+- Selected checkboxes background (vertical gradient):
+  - Stop at 0: feda77ff
+  - Stop at 0.08: d1aa5dff
+  - Stop at 1: fefebcff
+- Unselected radio buttons background (vertical gradient):
+  - Stop at 0: 4f4f4fff
+  - Stop at 1: b3b3b3ff
+- Selected radio buttons background (vertical gradient):
+  - Stop at 0: c89a3eff
+  - Stop at 1: fefeb3ff
+- Disabled checkboxes and radio buttons background (vertical gradient):
+  - Stop at 0: 808080ff
+  - Stop at 1: 909090ff
+
+- Buttons/spinners background (vertical gradient):
+  - Stop at 0: a0a0a0ff
+  - Stop at 1: 707070ff
+- Buttons/spinners text: 242424ff
+- Buttons/spinners icons:
+  - Stop at 0: 303030ff
+  - Stop at 1: 202020ff
+
+- Disabled buttons/spinners background (vertical gradient):
+  - Stop at 0: 808080ff
+  - Stop at 1: 909090ff
+- Disabled buttons/spinners text: 404040ff
+- Disabled buttons/spinners icons: 505050ff
+
+
+
+
+
+*/
+
