@@ -80,7 +80,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	specT(""),
 	specB("")
 {
-	//Try to detect a naming conflict. FIXME: What is the application of this? Do we need properName at all, in addition to englishName?
+	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.count() - 1);
 
