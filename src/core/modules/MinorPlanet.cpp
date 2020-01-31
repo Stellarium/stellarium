@@ -372,7 +372,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 double MinorPlanet::getSiderealPeriod() const
 {
-	return KeplerOrbit::calculateSiderealPeriod(static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis());
+	return static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
 }
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const

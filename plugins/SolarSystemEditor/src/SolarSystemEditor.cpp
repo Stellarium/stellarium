@@ -833,7 +833,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis));
+		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)
@@ -844,14 +844,14 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		objectType = "cubewano";
 
 	// Calculate perihelion
-	double r = (1 - eccentricity)*semiMajorAxis;
+	const double q = (1 - eccentricity)*semiMajorAxis;
 
 	// Scattered disc objects
-	if (r > 35)
+	if (q > 35)
 		objectType = "scattered disc object";
 
 	// Sednoids [https://en.wikipedia.org/wiki/Planet_Nine]
-	if (r > 30 && semiMajorAxis > 250)
+	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
 	//Radius and albedo

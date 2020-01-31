@@ -77,9 +77,11 @@ public:
 	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
 	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
 	bool objectDateValid(const double JDE) const { return ((orbitGood<=0) || (fabs(t0-JDE)<orbitGood)); }
-	//! Calculate sidereal period in days from semi-major axis. If SMA<0 (hyperbolic orbit), return max double.
-	//! NOTE: The result is for a solar-centered orbit only!
-	static double calculateSiderealPeriod(const double semiMajorAxis);
+	//! Calculate sidereal period in days from semi-major axis and central mass. If SMA<=0 (hyperbolic orbit), return max double.
+	double calculateSiderealPeriod() const;
+	//! @param semiMajorAxis in AU
+	//! @param centralMass in units of Solar masses
+	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
 
 private:
 	const double q;  //!< pericenter distance [AU]
@@ -88,11 +90,14 @@ private:
 	const double Om; //!< longitude of ascending node [radians]
 	const double w;  //!< argument of perihel [radians]
 	const double t0; //!< time of perihel, JDE
-	const double n;  //!< mean motion (for parabolic orbits: W/dt in Heafner's presentation) [radians/day]
+	const double n;  //!< mean motion (for parabolic orbits: W/dt in Heafner's presentation, ch5.5) [radians/day]
 	const double centralMass; //!< Mass in Solar masses. Velocity depends on this.
 	const double orbitGood; //!< orb. elements are only valid for this time from perihel [days]. Don't draw the object outside. Values <=0 mean "always good" (objects on undisturbed elliptic orbit)
 	Vec3d rdot;       //!< velocity vector. Caches velocity from last position computation, [AU/d]
 	bool updateTails; //!< flag to signal that comet tails must be recomputed.
+	void InitEll(const double dt, double &rCosNu, double &rSinNu);
+	void InitPar(const double dt, double &rCosNu, double &rSinNu);
+	void InitHyp(const double dt, double &rCosNu, double &rSinNu);
 };
 
 //! A pseudo-orbit for "observers" linked to a planet's sphere. It allows setting distance and longitude/latitude in the VSOP87 frame.

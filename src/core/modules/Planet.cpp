@@ -875,13 +875,15 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 	Q_UNUSED(_precessionRate)
 	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
 
-	if (orbitPtr && pType>=isArtificial)
+	if (orbitPtr && pType!=isObserver)
 	{
 		const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
 		const double eccentricity=static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity();
 		if (semiMajorAxis>0 && eccentricity<0.9)
 		{
-			re.siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod(semiMajorAxis);
+			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
+			re.siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
+			//qDebug() << re.siderealPeriod;
 			closeOrbit=true;
 		}
 		else {
