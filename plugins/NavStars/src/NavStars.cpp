@@ -67,12 +67,12 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
-	, enableAtStartup(false)
-	, highlightWhenVisible(false)
-	, limitInfoToNavStars(false)
-	, upperLimb(false)
+	, enableAtStartup(false)	
 	, starLabelsState(true)
 	, toolbarButton(Q_NULLPTR)
+	, upperLimb(false)
+	, highlightWhenVisible(false)
+	, limitInfoToNavStars(false)	
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();

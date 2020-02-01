@@ -140,7 +140,21 @@ public slots:
 
 	//! For the currently select object add the extraString info
 	//! in a format that matches the Nautical Almanac.
-	void NavStars::extraInfoStrings(const QMap<QString, double>& data, QMap<QString, QString>& strings, QString extraText = "");
+	//REMOVE!void extraInfoStrings(const QMap<QString, double>& data, QMap<QString, QString>& strings, QString extraText = "");
+
+	//! Adds StelObject::ExtraInfo for selected object.
+	void addExtraInfo(StelCore* core);
+
+	//! For the currently select object add the extraString info
+	//! in a format that matches the Nautical Almanac.
+	void extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
+
+	//! Given two QStrings return in a format consistent with the
+	//! property setting of "withTables".
+	//! @param QString a The cell left value
+	//! @param QString b The cell right value
+	//! @return QString The representation of the extraString info.
+    QString oneRowTwoCells(const QString& a, const QString& b);
 
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
@@ -177,20 +191,6 @@ private:
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
-
-	//! Adds StelObject::ExtraInfo for selected object.
-	void NavStars::addExtraInfo(StelCore* core);
-
-	//! For the currently select object add the extraString info
-	//! in a format that matches the Nautical Almanac.
-	void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
-
-	//! Given two QStrings return in a format consistent with the
-	//! property setting of "withTables".
-	//! @param QString a The cell left value
-	//! @param QString b The cell right value
-	//! @return QString The representation of the extraString info.
-    QString oneRowTwoCells(const QString& a, const QString& b);
 };
 
 
