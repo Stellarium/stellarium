@@ -41,10 +41,9 @@ file (section [NavigationalStars]).
 
 #include <cmath>
 
-#include <QMap>
 #include <QString>
 
-#include "StelUtils.hpp"
+//#include "StelUtils.hpp"
 
 #define DEG2RAD(x) ((x * M_PI) / 180.)
 #define RAD2DEG(x) ((x * 180.) / M_PI)
@@ -56,28 +55,10 @@ class NavStarsCalculator
 {
 public:	
     NavStarsCalculator();
-    NavStarsCalculator(const StelCore* c, const StelObjectP p);
     ~NavStarsCalculator();
 
-    //! For the provided StelObject return a QMap of data of Nautical Almanac data
-	//! @param StelCore* core
-	//! @param StelObjectP selectedObject
-	//! @param QMap<QString, double>& map (Data output to this map)
-	void getCelestialNavData(QMap<QString, double>& map);
-
     //! Calculate intermediates.
-    void calculateCelestialNavData();
-    
-    //! Given raw data format into display strings.
-    //! @param const QMap<QString, double>& data The raw data.
-    //! @param QMap<QString, QString>& strings Where to place the output strings.
-    //! @param QString extraText Fixed extra info to append to b above.
-    void extraInfoStrings(const QMap<QString, double>& data, QMap<QString, QString>& strings, QString extraText);
-
-    NavStarsCalculator& setWithTables(bool b);
-
-    const QString getUTC() { return utc; }
-    NavStarsCalculator& setUTC(const QString& s);
+    void execute();
     
     //! Get a string that represents degrees and decimal minutes of an angle.
 	//! Format is as per the standard Nautical Almanac, +/-DDDMM.m
@@ -97,49 +78,186 @@ public:
 	//! @return The wrapped value.
     static double wrap360(double d);
 
-    //! Given two QStrings return in a format consistent with the
-	//! property setting of "withTables".
-	//! @param QString a The cell left value
-	//! @param QString b The cell right value
-	//! @param QString c The cell right extra value
-	//! @return QString The representation of the extraString info.
-    QString oneRowTwoCells(const QString& a, const QString& b, QString c);
-
-protected:
-    void setupFixedStrings();
-
 private:
     QString utc;
-    bool withTables = false;
-    const StelCore* core;
-    const StelObjectP selectedObject;
-
-    static QMap<QString, QString> fixedStrings;
-
 public:
-    double az;
-    double alt;
-    double hc;
-    double zn;
-    double jd;
-    double jde;
-    double lha;
-    double lat;
-    double lat_rad;
-    double lon;
-    double lon_rad;
-    double gmst;
-    double gmst_rad;
-    double gmst_raw;
-    double lmst;
-    double lmst_rad;
-    double az_app;
-	double alt_app;
-    double gha_rad;
-	double object_dec;
-	double object_ra;		
-	double object_sha;
-};
+    NavStarsCalculator& setUTC(const QString& s);
+    QString getUTC() {
+        return utc;
+    }
 
+private:
+    double lmst;
+public:
+    QString lmstDegreesPrintable() {
+        return QString("%1%2").arg(QString::number(lmst, 'f', 3)).arg("&deg;");
+    }
+
+
+private:
+    double sha_rad;    
+public:
+    QString shaPrintable() {
+        return radToDm(sha_rad);
+    }
+
+private:
+    double lha;    
+public:
+    QString lhaPrintable() {
+        return radToDm(lha);
+    }
+
+private:
+    double gmst_rad;
+
+private:
+    double lmst_rad;
+public:
+    QString lmstPrintable() {
+        return radToDm(lmst_rad);
+    }
+
+private:
+    double hc_rad;
+public:
+    QString hcPrintable() {
+        return radToDm(hc_rad);
+    }
+
+
+private:
+    double zn_rad;
+public:
+    QString znPrintable() {
+        return radToDm(zn_rad);
+    }
+
+private:
+    double gha_rad;
+public:
+    QString ghaPrintable() {
+        return (radToDm(gha_rad) + "&deg;");
+    }
+
+private:
+    double gmst;
+public:
+    double getGmst() { return gmst;  }
+    NavStarsCalculator& setGmst(double d) {
+        gmst = wrap360(d);
+        return *this;
+    }
+    QString gmstDegreesPrintable() {
+        return QString("%1%2").arg(QString::number(gmst, 'f', 3)).arg("&deg;");
+    }
+
+private:
+    double lat_deg;    
+    double lat_rad;
+public:
+    NavStarsCalculator& setLatDeg(double d) {
+        lat_deg = d;
+        lat_rad = DEG2RAD(d);
+        return *this;
+    }
+    QString latPrintable() {
+        return radToDm(lat_rad, "N", "S");
+    }
+
+private:
+    double lon_deg;
+    double lon_rad;
+public:
+    NavStarsCalculator& setLonDeg(double d) {
+        lon_deg = d;
+        lon_rad = DEG2RAD(d);
+        return *this;
+    }
+    QString lonPrintable() {
+        return radToDm(lon_rad, "E", "W");
+    }
+
+private:
+    double az_rad;
+public:
+    NavStarsCalculator& setAzRad(double d) {
+        az_rad = d;
+        return *this;
+    }
+
+private:
+    double alt_rad;
+public:
+    NavStarsCalculator& setAltRad(double d) {
+        alt_rad = d;
+        return *this;
+    }
+    
+private:
+    double az_app_rad;
+public:
+    NavStarsCalculator& setAzAppRad(double d) {
+        az_app_rad = d;
+        return *this;
+    }
+    QString azAppPrintable() {
+        return radToDm(az_app_rad);
+    }
+
+
+private:
+	double alt_app_rad;
+public:
+    NavStarsCalculator& setAltAppRad(double d) {
+        alt_app_rad = d;
+        return *this;
+    }
+    QString altAppPrintable() {
+        return radToDm(alt_app_rad);
+    }
+    NavStarsCalculator& addAltAppRad(double d) {
+        alt_app_rad += d;
+        return *this;
+    }
+
+private:
+    double jd;
+public:
+    double getJd() { return jd; }
+    NavStarsCalculator& setJd(double d) {
+        jd = d;
+        return *this;
+    }
+
+private:
+    double jde;
+public:
+    double getJde() { return jde; }
+    NavStarsCalculator& setJde(double d) {
+        jde = d;
+        return *this;
+    }
+
+private:
+	double dec_rad;
+public:
+    NavStarsCalculator& setDecRad(double d) {
+        dec_rad = d;
+        return *this;
+    }
+    QString decPrintable() {
+        return radToDm(dec_rad);
+    }
+
+private:
+	double ra_rad;		
+public:
+    NavStarsCalculator& setRaRad(double d) {
+        ra_rad = d;
+        sha_rad = (2. * M_PI) - ra_rad;
+        return *this;
+    }
+};
 
 #endif /* NAVSTARSCALCULATOR_HPP */

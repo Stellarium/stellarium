@@ -78,6 +78,9 @@ void NavStarsWindow::createDialogContent()
 	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
 	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
 
+	ui->upperLimb->setChecked(ns->getUpperLimb());
+	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
+
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
@@ -152,6 +155,12 @@ void NavStarsWindow::setLimitInfoToNavStarsEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ns->setLimitInfoToNavStars(b);
+}
+
+void NavStarsWindow::setUpperLimbEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setUpperLimb(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

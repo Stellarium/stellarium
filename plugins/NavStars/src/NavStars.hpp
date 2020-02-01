@@ -119,6 +119,9 @@ public slots:
 	void setLimitInfoToNavStars(bool b) { limitInfoToNavStars=b; }
 	bool getLimitInfoToNavStars(void) const { return limitInfoToNavStars; }
 
+	void setUpperLimb(bool b) { upperLimb=b; }
+	bool getUpperLimb(void) const { return upperLimb; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{
@@ -158,6 +161,7 @@ private:
 	bool withTables;
 	bool enableAtStartup;
 	bool starLabelsState;
+	bool upperLimb;
 	bool highlightWhenVisible;
 	bool limitInfoToNavStars;
 
@@ -180,6 +184,13 @@ private:
 	//! For the currently select object add the extraString info
 	//! in a format that matches the Nautical Almanac.
 	void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
+
+	//! Given two QStrings return in a format consistent with the
+	//! property setting of "withTables".
+	//! @param QString a The cell left value
+	//! @param QString b The cell right value
+	//! @return QString The representation of the extraString info.
+    QString oneRowTwoCells(const QString& a, const QString& b);
 };
 
 

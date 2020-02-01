@@ -70,6 +70,7 @@ NavStars::NavStars()
 	, enableAtStartup(false)
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)
+	, upperLimb(false)
 	, starLabelsState(true)
 	, toolbarButton(Q_NULLPTR)
 {
@@ -441,55 +442,70 @@ void NavStars::addExtraInfo(StelCore *core)
 
 void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables)
 {
-	QString extraText = "";
-	QMap<QString, double> data;
-	QMap<QString, QString> strings;
-	QString englishName = selectedObject->getEnglishName();
+	double jd, jde, x = 0., y = 0.;
+	QString extraText = "", englishName = selectedObject->getEnglishName();
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 
-	NavStarsCalculator calc(core, selectedObject);
-	calc.setUTC(StelMainScriptAPI::getDate("utc"))
-		.setWithTables(withTables)
-		.getCelestialNavData(data);
+	jd  = core->getJD();
+	jde = core->getJDE();
 
-	if (data.contains("alt_app_rad") && ("Sun" == englishName || "Moon" == englishName)) 
+	NavStarsCalculator calc;
+	calc.setUTC(StelMainScriptAPI::getDate("utc"))
+		.setLatDeg(core->getCurrentLocation().latitude)
+		.setLonDeg(core->getCurrentLocation().longitude)
+		.setJd(jd)
+		.setJde(jde)
+		.setGmst(get_mean_sidereal_time(jd, jde));
+
+	StelUtils::rectToSphe(&x, &y, selectedObject->getEquinoxEquatorialPosApparent(core));	
+	calc.setRaRad(x)
+		.setDecRad(y);
+
+	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosGeometric(core)); 
+	calc.setAzRad(x)
+		.setAltAppRad(y);
+
+	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosApparent(core)); 
+	calc.setAzAppRad(x)
+		.setAltAppRad(y);
+
+	calc.execute();
+
+	if ("Sun" == englishName || "Moon" == englishName) 
 	{
-		// Adjust Ho if target is Sun or Moon by adding half the angular diameter.
+		// Adjust Ho if target is Sun or Moon by adding/subtracting half the angular diameter.
 		double d = selectedObject->getAngularSize(core);
-		data["alt_app_rad"] += (((d / 2) * M_PI) / 180.);
-		extraText = " (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
+		if (upperLimb)
+			d *= -1;
+		calc.addAltAppRad(((d / 2) * M_PI) / 180.);
+		extraText = upperLimb ?
+			" (" + QString(qc_("upper limb", "the highest part of the Sun or Moon")) + ")" :
+			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
 	}
 	
-	calc.extraInfoStrings(data, strings, extraText);
-
-	if(!withTables)
-		extraText = qc_("UTC: ", "universal time coordinated") + calc.getUTC() + "<br/>";
-	else
-		extraText = "<tr><td>" + qc_("UTC:", "universal time coordinated") + calc.getUTC() + "</td></tr>";
-	
-	selectedObject->addToExtraInfoString(infoGroup, extraText);
-	if(strings.contains("alt_app_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["alt_app_rad"]);
-	if(strings.contains("gmst_deg"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["gmst_deg"]);
-	if(strings.contains("lmst_deg"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["lmst_deg"]);
-	if(strings.contains("gmst_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["gmst_rad"]);
-	if(strings.contains("object_sha_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["object_sha_rad"]);
-	if(strings.contains("object_dec_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["object_dec_rad"]);
-	if(strings.contains("gha_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["gha_rad"]);
-	if(strings.contains("lha_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["lha_rad"]);
-	if(strings.contains("lat_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["lat_rad"]);
-	if(strings.contains("lon_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["lon_rad"]);
-	if(strings.contains("Hc_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["Hc_rad"]);
-	if(strings.contains("Zn_rad"))
-		selectedObject->addToExtraInfoString(infoGroup, strings["Zn_rad"]);
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable() + extraText));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstDegreesPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.latPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.lonPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
 }
+
+QString NavStars::oneRowTwoCells(const QString& a, const QString& b)
+{
+	QString rval;
+	if (withTables) {
+		rval += "<tr><td>" + a + ":</td><td>" + b + "</td></tr>";
+	}
+	else {
+		rval += a + ": " + b + "<br/>";
+	}
+	return rval;
+}
+

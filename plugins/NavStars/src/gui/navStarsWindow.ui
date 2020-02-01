@@ -253,6 +253,13 @@
             </widget>
           </item>
           <item>
+            <widget class="QCheckBox" name="upperLimb">
+              <property name="text">
+                <string>Use upper limb for Sun and Moon</string>
+              </property>
+            </widget>
+           </item>
+           <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

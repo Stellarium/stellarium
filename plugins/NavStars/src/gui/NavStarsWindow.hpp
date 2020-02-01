@@ -54,6 +54,7 @@ private slots:
 	void setDisplayAtStartupEnabled(int checkState);
     void setHighlightWhenVisibleEnabled(int checkState);
     void setLimitInfoToNavStarsEnabled(int checkState);
+    void setUpperLimbEnabled(int checkState);
     
 	void populateNavigationalStarsSets();
 	void setNavigationalStarsSet(int nsSetID);

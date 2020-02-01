@@ -1,9 +1,11 @@
 
-core.setObserverLocation((3.0+(47.25/60))*-1, 56.0+(26/60), 10);
+// Isle Of May lighthouse.
+// 56°11'08.3"N 2°33'26.7"W
+core.setObserverLocation(-2.557428, 56.185647, 73);
 LandscapeMgr.setCurrentLandscapeName("Ocean");
 LandscapeMgr.setFlagLandscape(true);
 LandscapeMgr.setFlagAtmosphere(true);
 GridLinesMgr.setFlagHorizonLine(true);
 LandscapeMgr.setFlagCardinalsPoints(true);
-core.setDate("2020-01-13T07:12:34");
+core.setDate("2005-01-05T10:32:45");
 core.setTimeRate(0);
