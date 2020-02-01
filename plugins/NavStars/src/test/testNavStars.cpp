@@ -109,7 +109,7 @@ void TestNavStars::TestAgainstAlmancVega()
 	expects["latPrintable"] = "N56&deg;11.1'";
 	expects["lonPrintable"] = "W2&deg;33.4'";
 	expects["hcPrintable"] = "+46&deg;39.6'";
-	expects["znPrintable"] = "+3&deg;23.0'";
+	expects["znPrintable"] = "+86&deg;36.9'";
 
 	performTest(QString("2020-01-13T07:12:34"), inputs, expects, false);
 }

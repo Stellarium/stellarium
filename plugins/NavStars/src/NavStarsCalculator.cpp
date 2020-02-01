@@ -55,12 +55,12 @@ void NavStarsCalculator::execute()
 	if (az_app_rad > (2 * M_PI)) 
 		az_app_rad -= (2 * M_PI);
 	hc_rad = asin((sin(dec_rad) * sin(lat_rad)) + (cos(dec_rad) * cos(lat_rad) * cos(lha)));
-	zn_rad = ((sin(dec_rad) * cos(lat_rad)) - (cos(dec_rad) * sin(lat_rad) * cos(lha))) / cos(hc_rad);
+	zn_rad = (std::sin(dec_rad) * std::cos(lat_rad)) - 
+		            (std::cos(dec_rad) * std::sin(lat_rad) * std::cos(lha));
+	zn_rad = acos(zn_rad / cos(hc_rad));
+	
 	if (lha < M_PI) 
 		zn_rad = (2*M_PI) - zn_rad;
-#ifdef _DEBUG
-	examineCalc(*this);
-#endif
 }
 
 QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString neg)
