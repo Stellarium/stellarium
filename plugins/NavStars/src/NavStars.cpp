@@ -53,7 +53,7 @@ StelModule* NavStarsStelPluginInterface::getStelModule() const
 StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 {
 	Q_INIT_RESOURCE(NavStars);
-
+ 
 	StelPluginInfo info;
 	info.id = "NavStars";
 	info.displayedName = N_("Navigational Stars");
@@ -68,11 +68,11 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
 	, enableAtStartup(false)	
-	, starLabelsState(true)
-	, toolbarButton(Q_NULLPTR)
+	, starLabelsState(true)	
 	, upperLimb(false)
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)	
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
