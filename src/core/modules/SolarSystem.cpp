@@ -640,7 +640,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
-		PlanetP parent=Q_NULLPTR;
+		PlanetP parent;
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
