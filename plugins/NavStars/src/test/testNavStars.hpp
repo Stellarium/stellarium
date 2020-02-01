@@ -28,6 +28,8 @@ class TestNavStars : public QObject
 	Q_OBJECT
 
 private slots:
+    void TestAgainstAlmancVega();
+    //void TestAgainstAlmancDubhe();
 };
 
 #endif // TESTNAVSTARS_HPP

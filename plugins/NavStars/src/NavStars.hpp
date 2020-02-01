@@ -27,6 +27,8 @@
 
 #include <QSettings>
 
+#include "NavStarsCalculator.hpp"
+
 class StelButton;
 class StelPainter;
 class StelPropertyMgr;
@@ -54,6 +56,7 @@ file (section [NavigationalStars]).
 //! @class NavStars
 //! Main class of the %Navigational Stars plugin.
 //! @author Alexander Wolf
+//! @author Andy Kirkham
 //! @ingroup navigationalStars
 class NavStars : public StelModule
 {
@@ -110,6 +113,12 @@ public slots:
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) const { return enableAtStartup; }
 
+	void setHighlightWhenVisible(bool b) { highlightWhenVisible=b; }
+	bool getHighlightWhenVisible(void) const { return highlightWhenVisible; }
+
+	void setLimitInfoToNavStars(bool b) { limitInfoToNavStars=b; }
+	bool getLimitInfoToNavStars(void) const { return limitInfoToNavStars; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{
@@ -125,6 +134,10 @@ public slots:
 	QString getCurrentNavigationalStarsSetDescription(void) const;
 	//! Set the set of navigational stars from its key
 	void setCurrentNavigationalStarsSetKey(QString key);
+
+	//! For the currently select object add the extraString info
+	//! in a format that matches the Nautical Almanac.
+	void NavStars::extraInfoStrings(const QMap<QString, double>& data, QMap<QString, QString>& strings, QString extraText = "");
 
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
@@ -142,8 +155,11 @@ private:
 	// The current set of navigational stars
 	NavigationalStarsSet currentNSSet;
 
+	bool withTables;
 	bool enableAtStartup;
 	bool starLabelsState;
+	bool highlightWhenVisible;
+	bool limitInfoToNavStars;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
@@ -157,8 +173,14 @@ private:
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
-};
 
+	//! Adds StelObject::ExtraInfo for selected object.
+	void NavStars::addExtraInfo(StelCore* core);
+
+	//! For the currently select object add the extraString info
+	//! in a format that matches the Nautical Almanac.
+	void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
+};
 
 
 #include <QObject>

@@ -73,6 +73,10 @@ void NavStarsWindow::createDialogContent()
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
 	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->highlightWhenVisible->setChecked(ns->getHighlightWhenVisible());
+	connect(ui->highlightWhenVisible, SIGNAL(stateChanged(int)), this, SLOT(setHighlightWhenVisibleEnabled(int)));
+	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
+	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
@@ -94,6 +98,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin marks navigational stars from a selected set.");
@@ -135,6 +140,18 @@ void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ns->setEnableAtStartup(b);
+}
+
+void NavStarsWindow::setHighlightWhenVisibleEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setHighlightWhenVisible(b);
+}
+
+void NavStarsWindow::setLimitInfoToNavStarsEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setLimitInfoToNavStars(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

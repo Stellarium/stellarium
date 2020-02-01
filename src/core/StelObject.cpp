@@ -923,6 +923,7 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 
 void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 {
+	extraInfoStrings.clear();
 	QMultiMap<InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
 	  while (i != extraInfoStrings.end()) {
 		  if (i.key() & flags)

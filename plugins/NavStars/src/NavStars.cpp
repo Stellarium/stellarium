@@ -33,10 +33,17 @@
 #include "StelUtils.hpp"
 #include "NavStars.hpp"
 #include "NavStarsWindow.hpp"
+#include "NavStarsCalculator.hpp"
+#include "Planet.hpp"
+#include <StelMainScriptAPI.hpp>
 
 #include <QList>
 #include <QSharedPointer>
 #include <QMetaEnum>
+
+#include "planetsephems/sidereal_time.h"
+
+class NavStarsCalculatorDataProviderImpl;
 
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
@@ -61,6 +68,8 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
 	, enableAtStartup(false)
+	, highlightWhenVisible(false)
+	, limitInfoToNavStars(false)
 	, starLabelsState(true)
 	, toolbarButton(Q_NULLPTR)
 {
@@ -168,13 +177,18 @@ void NavStars::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-	
+	float mlimit = core->getSkyDrawer()->getLimitMagnitude();
+
 	Vec3d pos;
 	for (int i = 0; i < sn.size(); ++i)
 	{
 		if (stars[i].isNull())
 			continue;
 		
+		// Don't show if magnitude too low for visibility.
+		if (highlightWhenVisible && stars[i]->getVMagnitude(core) > mlimit)
+			continue;
+
 		// Get the current position of the navigational star...
 		if (prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos))
 		{
@@ -196,6 +210,8 @@ void NavStars::draw(StelCore* core)
 			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 10.f, 10.f, false);
 		}
 	}
+
+	addExtraInfo(core);
 }
 
 void NavStars::update(double deltaTime)
@@ -239,7 +255,8 @@ void NavStars::loadConfiguration(void)
 	setCurrentNavigationalStarsSetKey(conf->value("current_ns_set", "AngloAmerican").toString());
 	markerColor = StelUtils::strToVec3f(conf->value("marker_color", "0.8,0.0,0.0").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
-
+	highlightWhenVisible = conf->value("highlight_when_visible", false).toBool();
+	limitInfoToNavStars  = conf->value("limit_info_to_nav_stars", false).toBool();
 	conf->endGroup();
 }
 
@@ -250,6 +267,8 @@ void NavStars::saveConfiguration(void)
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", StelUtils::vec3fToStr(markerColor));
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("highlight_when_visible", highlightWhenVisible);
+	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
 
 	conf->endGroup();
 }
@@ -376,4 +395,101 @@ void NavStars::populateNavigationalStarsSet(void)
 	}
 
 	setNavStarsMarks(currentState);
+}
+
+void NavStars::addExtraInfo(StelCore *core)
+{
+	if (0 == stars.size() || "Earth" != core->getCurrentPlanet()->getEnglishName()) 
+		return;
+
+	StelApp& stelApp = StelApp::getInstance();
+	bool isSource = stelApp.getStelObjectMgr().getWasSelected();
+
+	if (isSource) 
+	{
+		bool doExtraInfo = true;
+		StelObjectP selectedObject = stelApp.getStelObjectMgr().getSelectedObject()[0];
+		if (limitInfoToNavStars) 
+		{
+			doExtraInfo = false;
+			QString type = selectedObject->getType();
+			QString englishName = selectedObject->getEnglishName();			
+			if (englishName == "Sun" || englishName == "Moon" || type == QStringLiteral("Planet"))
+			{
+				doExtraInfo = true;
+			}
+			else {
+				for (QVector<StelObjectP>::const_iterator itor = stars.begin();
+					itor != stars.end();
+					itor++)
+				{
+					StelObjectP p = *itor;
+					if (p->getEnglishName() == selectedObject->getEnglishName())
+					{
+						doExtraInfo = true;
+						break;
+					}
+				}
+			}
+		}
+		if (doExtraInfo) {
+			withTables = stelApp.getFlagUseFormattingOutput();
+			extraInfo(core, selectedObject, withTables);
+		}
+	}
+}
+
+void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables)
+{
+	QString extraText = "";
+	QMap<QString, double> data;
+	QMap<QString, QString> strings;
+	QString englishName = selectedObject->getEnglishName();
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
+
+	NavStarsCalculator calc(core, selectedObject);
+	calc.setUTC(StelMainScriptAPI::getDate("utc"))
+		.setWithTables(withTables)
+		.getCelestialNavData(data);
+
+	if (data.contains("alt_app_rad") && ("Sun" == englishName || "Moon" == englishName)) 
+	{
+		// Adjust Ho if target is Sun or Moon by adding half the angular diameter.
+		double d = selectedObject->getAngularSize(core);
+		data["alt_app_rad"] += (((d / 2) * M_PI) / 180.);
+		extraText = " (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
+	}
+	
+	calc.extraInfoStrings(data, strings, extraText);
+
+	if(!withTables)
+		extraText = qc_("UTC: ", "universal time coordinated") + calc.getUTC() + "<br/>";
+	else
+		extraText = "<tr><td>" + qc_("UTC:", "universal time coordinated") + calc.getUTC() + "</td></tr>";
+	
+	selectedObject->addToExtraInfoString(infoGroup, extraText);
+	if(strings.contains("alt_app_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["alt_app_rad"]);
+	if(strings.contains("gmst_deg"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["gmst_deg"]);
+	if(strings.contains("lmst_deg"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["lmst_deg"]);
+	if(strings.contains("gmst_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["gmst_rad"]);
+	if(strings.contains("object_sha_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["object_sha_rad"]);
+	if(strings.contains("object_dec_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["object_dec_rad"]);
+	if(strings.contains("gha_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["gha_rad"]);
+	if(strings.contains("lha_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["lha_rad"]);
+	if(strings.contains("lat_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["lat_rad"]);
+	if(strings.contains("lon_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["lon_rad"]);
+	if(strings.contains("Hc_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["Hc_rad"]);
+	if(strings.contains("Zn_rad"))
+		selectedObject->addToExtraInfoString(infoGroup, strings["Zn_rad"]);
 }

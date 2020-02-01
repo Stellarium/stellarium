@@ -239,6 +239,20 @@
            </widget>
           </item>
           <item>
+            <widget class="QCheckBox" name="highlightWhenVisible">
+              <property name="text">
+                <string>Only highlight when visible</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QCheckBox" name="limitInfoToNavStars">
+              <property name="text">
+                <string>Only show extra information for marked Navigation Stars</string>
+              </property>
+            </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
