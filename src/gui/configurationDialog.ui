@@ -741,33 +741,10 @@
                </attribute>
               </widget>
              </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="11" column="0">
               <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
                <property name="text">
                 <string>Supergalactic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
-               <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
-               </property>
-               <property name="text">
-                <string>Additional information</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -807,42 +784,6 @@
                </property>
                <property name="text">
                 <string>Type</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="checkBoxRTSTime">
-               <property name="toolTip">
-                <string>Show time of rise, transit and set of celestial object</string>
-               </property>
-               <property name="text">
-                <string>Rises, transits and sets</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="checkBoxSiderealTime">
-               <property name="text">
-                <string>Sidereal time</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="checkBoxConstellation">
-               <property name="toolTip">
-                <string>3-letter IAU constellation abbreviation</string>
-               </property>
-               <property name="text">
-                <string>Constellation</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -965,6 +906,78 @@
               <widget class="QCheckBox" name="checkBoxOtherCoords">
                <property name="text">
                 <string>Additional coordinates (from plugins)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="checkBoxRTSTime">
+               <property name="toolTip">
+                <string>Show time of rise, transit and set of celestial object</string>
+               </property>
+               <property name="text">
+                <string>Rises, transits and sets</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="checkBoxConstellation">
+               <property name="toolTip">
+                <string>3-letter IAU constellation abbreviation</string>
+               </property>
+               <property name="text">
+                <string>Constellation</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="checkBoxSiderealTime">
+               <property name="text">
+                <string>Sidereal time</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string>Distance</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxProperMotion">
+               <property name="toolTip">
+                <string>Annual proper motion (stars) or hourly motion (solar system objects)</string>
+               </property>
+               <property name="text">
+                <string>Proper Motion</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
