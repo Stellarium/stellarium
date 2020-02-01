@@ -1040,50 +1040,52 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// There are two ways of defining the axis orientation: obliquity and ascending node, which was used by Stellarium based on Celestia.
 		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
 		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
+		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
+		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
-		// Use more common planet North pole data if available
-		// NB: N pole as defined by IAU (NOT right hand rotation rule)
-		// NB: J2000 epoch
+		// 0.20: Use WGCCRE planet North pole data if available
+		// NB: N pole for J2000 epoch as defined by IAU (NOT right hand rotation rule)
 		// GZ TODO for 0.20: Make this more flexible with changing axes. and have special functions for more complicated axes.
 		const double J2000NPoleRA  = pd.value(secname+"/rot_pole_ra",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE1 = pd.value(secname+"/rot_pole_de1", 0.).toDouble()*M_PI_180;
-		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees! Basically the same idea as rot_rotation_offset.
+		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees! Basically the same idea as rot_rotation_offset, but W!=rotAngle
 		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // stays in degrees! Basically the same idea as 360/rot_periode
-
-		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
-		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
 		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
 		{
-			// Recompute obliquity and AscNode from the new data.
+			// If available, recompute obliquity and AscNode from the new data.
 			// Old solution: Make this once for J2000.
-			// New in 0.20: Repeat this block in planet::update() if required.
+			// New in 0.20: Repeat this block in Planet::computeTransMatrix() if required.
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 
 			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 
-			double ra, de;
-			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
+			double lon, lat;
+			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
 
-			rotObliquity = (M_PI_2 - de);
-			rotAscNode = (ra + M_PI_2);
+			rotObliquity = (M_PI_2 - lat);
+			rotAscNode = (lon + M_PI_2);
 
-			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << StelUtils::getEndLineChar();
-			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << StelUtils::getEndLineChar();
+			qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
+			qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
+			qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
 
 			if (J2000NPoleW0 >0)
 			{
-				// this is just another name for offset...
-				rotOffset=J2000NPoleW0;
+				// this is NOT just another name for offset!
+				// W0 is counted from the ascending node, but rotOffset from Aries1.
+				// Try this assumption by just counting Offset=W0+90+RA0.
+				rotOffset=J2000NPoleW0 + lon*M_180_PI;
+				qDebug() << "\tRotational offset (degrees): " << rotOffset;
 			}
 			if (J2000NPoleW1 >0)
 			{
 				// this is just another expression for rotational speed.
 				rotPeriod=360.0/J2000NPoleW1;
-				qDebug() << "\t" << englishName << ": Calculated rotational period (days): " << rotPeriod << endl;
+				qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
 			}
 
 		}
@@ -1105,7 +1107,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			J2000NPoleW1,
 			pd.value(secname+"/orbit_visualization_period",
 				 fabs(pd.value(secname+"/orbit_Period",
-					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble()); // TODO; Get rid of the last parameter!
+					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble()); // TODO: Get rid of the last parameter!
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;

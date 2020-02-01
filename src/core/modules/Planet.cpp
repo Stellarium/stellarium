@@ -513,7 +513,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		// TRANSLATORS: Ecliptical rectangular coordinates
 		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates")).arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 
-		oss << q_("DEBUG: Sidereal Time of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
+		if (re.method==RotationElements::WGCCRE)
+			oss << q_("DEBUG: Value related to Sidereal Time of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
+		else
+			oss << q_("DEBUG: Sidereal Time of Prime Meridian (NOT angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
 		oss << q_("DEBUG: Axis (RA/Dec): %1°/%2°").arg(QString::number(getCurrentAxisRA()*M_180_PI, 'f', 6), QString::number(getCurrentAxisDE()*M_180_PI, 'f', 6)) << "<br>";
 		oss << q_("DEBUG: RotObliquity: %1°").arg(QString::number(re.obliquity*M_180_PI, 'f', 6)) << "<br>";
 
@@ -589,7 +592,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			.arg(QString::number(rotLocalToParent[13], 'f', 7))
 			.arg(QString::number(rotLocalToParent[14], 'f', 7))
 			.arg(QString::number(rotLocalToParent[15], 'f', 7)) << "<br>";
-		oss << QString("DEBUG: Planet using %1 axis computation<br>").arg(re.useICRF?"new":"old");
+		oss << QString("DEBUG: Planet using <strong>%1</strong> axis computation<br>").arg(re.method==RotationElements::WGCCRE?"WGCCRE":"traditional");
 	}
 //#endif
 
@@ -1443,7 +1446,7 @@ void Planet::setRotationElements(const double _period, const double _offset, con
 	re.currentAxisDE=0.;
 	re.currentAxisW=0.;
 
-	re.useICRF=(_w0==0. ? false : true);
+	re.method=(_w0==0. ? RotationElements::Traditional : RotationElements::WGCCRE);
 
 	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
 
@@ -1564,10 +1567,21 @@ void Planet::computePosition(const double dateJDE)
 // TODO: Verify for the other planets if their axes are relative to J2000 ecliptic (VSOP87A XY plane) or relative to (precessed) ecliptic of date?
 void Planet::computeTransMatrix(double JD, double JDE)
 {
+	QString debugAid; // We have to collect all debug strings to keep some order in the output.
+
 	// We have to call with both to correct this for earth with the new model.
 	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
 
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane), not solar equator...
+	// 0.21:  We are building this matrix, but we must exclude its use for the other planets.
+	if (englishName=="Sun")
+	{
+		rotLocalToParent= // StelCore::matJ2000ToVsop87 *
+				Mat4d::zrotation(re.ascendingNode) * Mat4d::xrotation(re.obliquity);
+
+		// MAYBE rotLocalToParent=StelCore::matJ2000ToVsop87 * Mat4d::zrotation(re.ra0) * Mat4d::xrotation(M_PI_2-re.de0);
+
+	} else
 	if (parent)
 	{
 		// We can inject a proper precession plus even nutation matrix in this stage, if available.
@@ -1598,6 +1612,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			return;
 		}
 		// Pre-0.20 there was a model with fixed axes in J2000 coordinates given with node and obliquity for all other planets and moons.
+		//
 		// IAU prefers axes with RA, DE. These were transformed (if available) to the old system at time of reading ssystem.ini.
 		// Temporally changing axes were not possible. Now we allow it, and re-formulate nodes and obliquity on the fly.
 		double re_ascendingNode=re.ascendingNode;
@@ -1613,7 +1628,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			J2000NPoleRA+=re.ra1*T; // these values in radians
 			J2000NPoleDE+=re.de1*T;
 
-		// Apply detailed corrections from ExplSup2016 and WGCCRE2009. The nesting increases lookup speed.
+		// Apply detailed corrections from ExplSup2013 and WGCCRE2009. The nesting increases lookup speed.
 		if (englishName=="Moon")
 		{ // TODO; HERE IS THE MOST URGENT, IMPORTANT AND DEMANDING PART STILL MISSING!!
 			// This is from WGCCRE2009reprint. The angles are always given in degrees. I let the compiler do the conversion. Leave it for readability!
@@ -1872,7 +1887,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			}
 		}
 		}
-		addToExtraInfoString(DebugAid, QString("J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE)));
+		debugAid = QString("cTM1: J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE));
 
 		if (retransform)
 		{
@@ -1884,33 +1899,36 @@ void Planet::computeTransMatrix(double JD, double JDE)
 
 			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 
-			double ra, de;
-			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
+			double lon, lat;
+			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
 			if (englishName=="Moon")
 			{
-				addToExtraInfoString(DebugAid, QString("CTMx: Moon: J2000NPoleRA: %1 J2000NPoleDE: %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE)));
-				addToExtraInfoString(DebugAid, QString("CTMx:           RA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(ra)).arg(StelUtils::radToDecDegStr(de)));
+				debugAid.append( QString("CTMxR: Moon: J2000NPoleRA: %1 J2000NPoleDE: %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE)));
+				debugAid.append( QString("CTMxR:           &lambda;: %1 &beta; %2<br/>").arg(StelUtils::radToDecDegStr(lon)).arg(StelUtils::radToDecDegStr(lat)));
 			}
 
-			re_obliquity = (M_PI_2 - de);
-			re_ascendingNode = (ra + M_PI_2);
+			re_obliquity = (M_PI_2 - lat);
+			re_ascendingNode = (lon + M_PI_2);
 
-			addToExtraInfoString(DebugAid, QString("CTMx: Calculated rotational obliquity: %1<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)));
-			addToExtraInfoString(DebugAid, QString("CTMx: Calculated rotational ascending node: %1<br/>").arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+			debugAid.append( QString("CTMxR: Calculated rotational obliquity: %1<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)));
+			debugAid.append( QString("CTMxR: Calculated rotational ascending node: %1<br/>").arg(StelUtils::radToDecDegStr(re_ascendingNode)));
 			re.obliquity=re_obliquity; // WE NEED THIS AGAIN IN getRotObliquity()
 			re.ascendingNode=re_ascendingNode;
-			addToExtraInfoString(DebugAid, QString("Retransform: Pole in VSOP87 coords: &alpha;=%1, &delta;=%2<br/>").arg(StelUtils::radToDecDegStr(ra)).arg(StelUtils::radToDecDegStr(de)));
-			addToExtraInfoString(DebugAid, QString("new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
+			debugAid.append( QString("CTMxR: Retransform: Pole in VSOP87 coords: &lambda;=%1, &beta;=%2<br/>").arg(StelUtils::radToDecDegStr(lon)).arg(StelUtils::radToDecDegStr(lat)));
+			debugAid.append( QString("CTMxR: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
 		}
 		else {
-			addToExtraInfoString(DebugAid, QString("No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
-		}
+			debugAid.append( QString("CTMxNR: No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
 
-		if (re.useICRF)
+		}
+		if (re.method==RotationElements::WGCCRE)
 		{
 			// The new model directly gives a matrix into ICRF, which is practically identical and called VSOP87 for us.
-			setRotEquatorialToVsop87(Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity));
-			addToExtraInfoString(DebugAid, QString("useICRF: new re.obliquity=%1, re.ascendingNode=%2").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+			setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
+						 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
+						 //*StelCore::matJ2000ToVsop87
+						 );
+			debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
 		}
 		else
 		{
@@ -1920,21 +1938,25 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
 		rotLocalToParent = Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity);
 		//qDebug() << "Planet" << englishName << ": computeTransMatrix() setting old-style rotLocalToParent.";
-		addToExtraInfoString(DebugAid, QString("OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+		debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
 		}
 	}
+	addToExtraInfoString(DebugAid, debugAid);
 }
 
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;
-	if (parent)
+	if (re.method==RotationElements::Traditional)
 	{
-		for (PlanetP p=parent;p->parent;p=p->parent)
+		if (parent)
 		{
-			// The Sun is the ultimate parent. However, we don't want its matrix!
-			if (p->pType!=isStar)
-				rval = p->rotLocalToParent * rval;
+			for (PlanetP p=parent;p->parent;p=p->parent)
+			{
+				// The Sun is the ultimate parent. However, we don't want its matrix!
+				if (p->pType!=isStar)
+					rval = p->rotLocalToParent * rval;
+			}
 		}
 	}
 	return rval;
@@ -1942,20 +1964,34 @@ Mat4d Planet::getRotEquatorialToVsop87(void) const
 
 void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 {
-	Mat4d a = Mat4d::identity();
-	if (parent)
+	if (re.method==RotationElements::Traditional)
 	{
-		for (PlanetP p=parent;p->parent;p=p->parent)
-			a = p->rotLocalToParent * a;
+		Mat4d a = Mat4d::identity();
+		if (parent)
+		{
+			for (PlanetP p=parent;p->parent;p=p->parent)
+			{
+				// The Sun is the ultimate parent. However, we don't want its matrix!
+				if (p->pType!=isStar)
+				{
+					addToExtraInfoString(DebugAid, QString("This involves localToParent of %1 <br/>").arg(p->englishName));
+					a = p->rotLocalToParent * a;
+				}
+			}
+		}
+		rotLocalToParent = a.transpose() * m;
 	}
-	rotLocalToParent = a.transpose() * m;
+	else
+		rotLocalToParent = m;
 }
 
 
 // GZ TODO: UPDATE THIS DESCRIPTION LINE! Compute the z rotation [degrees] to use from equatorial to geographic coordinates.
-// V0.18 sidereal time in this context is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
+// V0.20
+// W in this context is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
+// sidereal time on the other hand is the angle along the planet equator from RA0 to the meridian, i.e. hour angle of the first point of Aries.
 // For Earth (of course) it is sidereal time at Greenwich.
-// The usual model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these should be handled separately in here.
+// The usual WGCCRE model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these should be handled separately in here.
 // TODO: Make sure this is compatible with the old model!
 // We need both JD and JDE here for Earth. (For other planets only JDE.)
 double Planet::getSiderealTime(double JD, double JDE) const
@@ -1968,9 +2004,10 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			return get_mean_sidereal_time(JD, JDE); // degrees
 	}
 
-	// V0.20 new rotational values from ExplSup2013 or WGCCRE2009.
-	if (re.useICRF)  // could also become  (re.W0!=0)
+	// V0.20: new rotational values from ExplSup2013 or WGCCRE2009.
+	if (re.method==RotationElements::WGCCRE)
 	{
+		// This returns angle W, but this is NOT the desired angle!
 		const double t=JDE-J2000;
 		const double T=t/36525.0;
 		double w=re.W0+remainder(t*re.W1, 360.); // W is given and also returned in degrees, clamped to small angles so that adding small corrections makes sense.
@@ -2000,13 +2037,13 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		{
 			w -= (0.48)*sin(planetCorrections.Na);
 		}
-		if (englishName=="Phobos")
+		else if (englishName=="Phobos")
 		{
 			const double M1=(169.51*M_PI_180) - (0.4357640*M_PI_180)*t;
 			const double M2=(192.93*M_PI_180) + (1128.4096700*M_PI_180)*t +(8.864*M_PI_180)*T*T;
 			w+=  (8.864)*T*T - (1.42)*sin(M1) - (0.78)*sin(M2);
 		}
-		if (englishName=="Deimos")
+		else if (englishName=="Deimos")
 		{
 			const double M3=(53.47*M_PI_180) - (0.0181510*M_PI_180)*t;
 			w+=  (-0.520)*T*T - (2.58)*sin(M3) + (0.19)*sin(M3);
@@ -2157,6 +2194,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			}
 		}
 		// re.currentAxisW=w; // TODO Maybe allow this later, and separate "computeSiderealTime()" from "getSiderealTime()"
+		// FIXME: Do "WHATEVER" to convert this into sidereal time!
 		return w;
 	}
 
@@ -3580,10 +3618,22 @@ void Planet::computeModelMatrix(Mat4d &result) const
 {
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
-	while (p && p->parent)
+	switch (re.method)
 	{
-		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
-		p = p->parent;
+		case RotationElements::Traditional:
+			while (p && p->parent)
+			{
+				result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
+				p = p->parent;
+			}
+			break;
+		case RotationElements::WGCCRE:
+			while (p && p->parent)
+			{
+				result = Mat4d::translation(p->eclipticPos) * result;
+				p = p->parent;
+			}
+			break;
 	}
 	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }

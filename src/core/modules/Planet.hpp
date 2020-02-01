@@ -96,9 +96,14 @@ typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
 class RotationElements
 {
 public:
+	enum ComputationMethod {
+		Traditional, // Stellarium prior to 0.20, This is unfortunately not documented. Orbits and axes given w.r.t. parent axes.
+		WGCCRE       // Orientation as described by the IAU Working Group on Cartographic Coordinates and Rotational Elements
+			     // There may be others added, like elements w.r.t. Laplacian Plane, w.r.t. Ecliptic B1950 or J2000, ...
+	};
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), //precessionRate(0.),
 		siderealPeriod(0.),
-		useICRF(false), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
+		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
 	double period;          // (sidereal) rotation period [earth days]   CURRENTLY NOT:  If useICRF, this is from the time term of W.
 	double offset;          // rotation at epoch  [degrees]              CURRENTLY NOT:  If useICRF, this is the constant term of W
 	double epoch;          // JDE (JD TT) of epoch for these elements
@@ -107,8 +112,8 @@ public:
 	// Field rot_precession_rate in ssystem.ini is no longer used. We still keep Earth's value as it is evaluated in older versions (until 0.13.*).
 //	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)] [ NO LONGER USED WITH 0.14 (was used for Earth only, and that was too simple.) ]
 	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days] [FIXME: This is NOT a rotational element and should be stored elsewhere!]
-	// GZ for 0.19: I propose changes here: The 6 new entries after the switch are enough for many objects. Else, design special_functions.
-	bool useICRF;          // Use values w.r.t. ICRF (should ultimately be true for all objects!) This can be set when rot_pole_ra1 or w0(?) is given. Updating the axis is required if ra1<>0
+	// GZ for 0.20: I propose changes here: The 6/9 new entries after the switch are enough for many objects. Else, design special_functions.
+	ComputationMethod method; // The reference system in use for the respective object. WGCCRE is preferred, but we don't have all data.
 	double ra0;            // [rad] RA_0 right ascension of north pole. ssystem.ini: rot_pole_ra    /180*M_PI
 	double ra1;            // [rad/century] rate of change in axis ra   ssystem.ini: rot_pole_ra1   /180*M_PI
 	double de0;            // [rad] DE_0 declination of north pole      ssystem.ini: rot_pole_de    /180*M_PI
@@ -116,9 +121,9 @@ public:
 	// These values are only in the modern algorithms. invalid if W0=0.
 	double W0;             // [deg] mean longitude of prime meridian along equator measured from intersection with ICRS plane at epoch.
 	double W1;             // [deg/d] mean longitude motion. W=W0+d*W1.
-	double currentAxisRA;  // Mostly debug aid (infostring during development). Usual model RA=RA0+d*RA1(+corrections)
-	double currentAxisDE;  // Mostly debug aid (infostring during development). Usual model DE=DE0+d*DE1(+corrections)
-	double currentAxisW;   // Mostly debug aid (infostring during development). Usual model W =W0+d*W1(+corrections)
+	double currentAxisRA;  // [rad] Mostly debug aid (infostring during development). Usual model RA=RA0+d*RA1(+corrections)
+	double currentAxisDE;  // [rad] Mostly debug aid (infostring during development). Usual model DE=DE0+d*DE1(+corrections)
+	double currentAxisW;   // [deg] Mostly debug aid (infostring during development). Usual model W =W0+d*W1(+corrections)
 };
 
 // Class to manage rings for planets like Saturn
@@ -295,7 +300,7 @@ public:
 	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day
 	//! Get duration of sidereal day (earth days, may come from rot_periode or orbit_period (for moons) from ssystem.ini)
-	double getSiderealDay(void) const { if (re.W1) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
+	double getSiderealDay(void) const { if (re.W1!=0.) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
@@ -651,13 +656,15 @@ protected:
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
-	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
+	Mat4d rotLocalToParent;          // GZ2015: undocumented.
 					 // Apparently this is the axis orientation with respect to the parent body.
 					 // For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
 					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
-					 // For V0.20+, and for planets computed after the IAU2009 paper this is angle W (rotDeg), (TODO: or something related to it?)
+					 // For V0.20+, and for planets computed after the IAU2009/WGCCRE papers this is related to angle W (rotDeg),
 					 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
+					 // HOWEVER: axisRotation and WGCCRE's definition of W differ!
+					 // FIXME: Find axisRotation(W)
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
