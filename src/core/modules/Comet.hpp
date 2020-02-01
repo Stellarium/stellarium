@@ -91,8 +91,6 @@ public:
 	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return englishName;}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return nameI18;}
-	QString getCommonEnglishName(void) const {return englishName;}
-	QString getCommonNameI18n(void) const {return nameI18;}
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -101,10 +99,7 @@ public:
 	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
-	//! set value for semi-major axis in AU
-	void setSemiMajorAxis(const double value);
-
-	//! get sidereal period for comet, days, or returns 0 if not possible (paraboloid, hyperboloid orbit)
+	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
 
 	//! re-implementation of Planet's draw()
@@ -137,7 +132,6 @@ private:
 	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
 	float slopeParameter;
-	double semiMajorAxis;
 	bool isCometFragment;
 	bool nameIsProvisionalDesignation;
 
@@ -160,7 +154,7 @@ private:
 	float intensityMaxFov;
 
 
-	// These are to avoid having index arrays for each comet when all are equal.
+	// These are static to avoid having index arrays for each comet when all are equal.
 	static bool createTailIndices;
 	static bool createTailTextureCoords;
 

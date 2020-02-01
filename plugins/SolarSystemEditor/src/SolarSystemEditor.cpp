@@ -547,9 +547,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
 	result.insert("type", "comet");
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func", "comet_orbit");
+	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -577,7 +577,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
 	result.insert("orbit_PericenterDistance", perihelionDistance);
 
-	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
+	double eccentricity = mpcParser.cap(8).toDouble(&ok);//NOT degrees, but without dimension.
 	result.insert("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
@@ -593,8 +593,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	if (eccentricity < 1.0)
 	{
 		// Heafner, Fundamental Ephemeris Computations, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
-		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day (0.01720209895 is Gaussian gravitational constant (symbol k))
+		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
 		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
 		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
@@ -730,9 +731,9 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun");	 // 0.16: omit obvious default.
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func","comet_orbit");
+	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
@@ -832,7 +833,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis));
+		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)
@@ -843,14 +844,14 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		objectType = "cubewano";
 
 	// Calculate perihelion
-	double r = (1 - eccentricity)*semiMajorAxis;
+	const double q = (1 - eccentricity)*semiMajorAxis;
 
 	// Scattered disc objects
-	if (r > 35)
+	if (q > 35)
 		objectType = "scattered disc object";
 
 	// Sednoids [https://en.wikipedia.org/wiki/Planet_Nine]
-	if (r > 30 && semiMajorAxis > 250)
+	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
 	//Radius and albedo
@@ -1103,7 +1104,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//TODO: Move to constructor?
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
-	// ell_orbit is used for moons (distances in km) while comet_orbit is used for minor bodies around the sun.
+	// ell_orbit is used for moons (distances in km) while kepler_orbit is used for minor bodies around the sun.
 	static const QStringList orbitalElementsKeys = {
 		"coord_func",
 		"orbit_ArgOfPericenter",
@@ -1189,7 +1190,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
-			// GZ This seems completely useless now. Type of orbit will not change as it is always comet_orbit.
+			// GZ This seems completely useless now. Type of orbit will not change as it is always kepler_orbit.
 			for (auto key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);

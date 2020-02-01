@@ -1747,7 +1747,7 @@ void StelCore::addSiderealDays(double d)
 	setJD(getJD() + d);
 }
 
-// Get the sidereal time shifted by the observer longitude
+// Get the sidereal time of the prime meridian (i.e. Rotation Angle) shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.

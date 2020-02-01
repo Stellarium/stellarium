@@ -539,7 +539,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	qDebug() << "Loading from :"  << filePath;
-	int readOk = 0;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -629,7 +628,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// qDebug() << orderedSections;
 
 	// Stage 3 (as described above).
-	//int readOk=0;
+	int readOk=0;
 	//int totalPlanets=0;
 
 	// qDebug() << "Adding " << orderedSections.size() << "objects...";
@@ -660,8 +659,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				continue;
 			}
 		}
+		Q_ASSERT(parent);
 
-		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: Add a new default for all non *_special.
+		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
 		posFuncType posfunc=Q_NULLPTR;
 		Orbit* orbitPtr=Q_NULLPTR;
@@ -672,7 +672,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 
 #ifdef USE_GIMBAL_ORBIT
-		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infintely slow KeplerOrbit)
+		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infinitely slow KeplerOrbit)
 		// Note that for now we ignore any orbit-related config values from the ini file.
 		if (type=="observer")
 		{
@@ -685,7 +685,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 #endif
-		if ((coordFuncName=="ell_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="kepler_orbit")) // ell_orbit used for planet moons. TODO: rename to kepler_orbit for all!
+		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TODO in V0.21: remove non-kepler_orbit!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
@@ -707,7 +707,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 								? 0.0 // parabolic orbits have no semi_major_axis
 								: pericenterDistance / (1.0-eccentricity);
 			}
-			//if (parent->englishName!="Sun")
 			if (strParent!="Sun")
 				pericenterDistance /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
 
@@ -722,7 +721,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant for calculating meanMotion:
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // Heafner: Fund.Eph.Comp. W / dt
 									: 0.01720209895 / (fabs(semi_major_axis)*std::sqrt(fabs(semi_major_axis)));
 					}
 				} else {
@@ -762,6 +761,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				time_at_pericenter = epoch - mean_anomaly / meanMotion;
 			}
 
+			static const QMap<QString, double>massMap={ // masses from DE430/431
+				{ "Sun",            1.0},
+				{ "Mercury",  6023682.155592},
+				{ "Venus",     408523.718658},
+				{ "Earth",     332946.048834},
+				{ "Mars",     3098703.590291},
+				{ "Jupiter",     1047.348625},
+				{ "Saturn",      3497.901768},
+				{ "Uranus",     22902.981613},
+				{ "Neptune",    19412.259776},
+				{ "Pluto",  135836683.768617}};
+
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
@@ -786,16 +797,17 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
 			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
 			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
-								   eccentricity,           // 0..>1, but practically only 0..1
-								   inclination,            // [radians]
-								   ascending_node,         // [radians]
-								   arg_of_pericenter,      // [radians]
-								   time_at_pericenter,     // JD
-								   orbitGoodDays,          // orbitGoodDays. 0=always good.
-								   meanMotion,             // [radians/day]
-								   parentRotObliquity,     // [radians]
-								   parent_rot_asc_node,    // [radians]
-								   parent_rot_j2000_longitude); // [radians]
+							   eccentricity,           // 0..>1 (>>1 for Interstellar objects)
+							   inclination,            // [radians]
+							   ascending_node,         // [radians]
+							   arg_of_pericenter,      // [radians]
+							   time_at_pericenter,     // JD
+							   orbitGoodDays,          // orbitGoodDays. 0=always good.
+							   meanMotion,             // [radians/day]
+							   parentRotObliquity,     // [radians]
+							   parent_rot_asc_node,    // [radians]
+							   parent_rot_j2000_longitude, // [radians]
+							   1./massMap.value(parent->englishName, 1.));
 			orbits.push_back(orb);
 
 			orbitPtr = orb;
@@ -847,7 +859,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc=posfuncMap.value(coordFuncName, Q_NULLPTR);
 			osculatingFunc=osculatingMap.value(coordFuncName, Q_NULLPTR);
 		}
-
 		if (posfunc==Q_NULLPTR)
 		{
 			qCritical() << "ERROR in section " << secname << ": can't find posfunc " << coordFuncName << " for " << englishName;
@@ -906,9 +917,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				mp->setAbsoluteMagnitudeAndSlope(magnitude, qBound(0.0f, slope, 1.0f));
 			}
 
-			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
 			mp->setColorIndexBV(bV);
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
+			if (semi_major_axis>0)
+				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
+			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))
+				qWarning() << "WARNING: Minor Body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -945,12 +959,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
 			}
 
-			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
-			const double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
-			if (eccentricity<1 && pericenterDistance>0)
-			{
-				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
-			}
 			systemMinorBodies.push_back(newP);
 		}
 		else // type==star|planet|moon|dwarf planet|observer|artificial
@@ -1032,7 +1040,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
 			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
 
-		if (pd.value(secname+"/rings", false).toBool()) {
+		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
 			const float rMax = pd.value(secname+"/ring_outer_size").toFloat()/AUf;
 			Ring *r = new Ring(rMin,rMax,pd.value(secname+"/tex_ring").toString());
@@ -1746,6 +1754,7 @@ void SolarSystem::update(double deltaTime)
 bool SolarSystem::nearLunarEclipse() const
 {
 	// TODO: could replace with simpler test
+	// TODO Source?
 
 	Vec3d e = getEarth()->getEclipticPos();
 	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
@@ -1757,11 +1766,11 @@ bool SolarSystem::nearLunarEclipse() const
 	Vec3d shadow = en * (e.length() + m.length());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000./AU;
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU) return false;   // not visible so don't bother drawing
+	if(mdist.length() > r_penumbra + 2000./AU) return false;   // not visible so don't bother drawing
 
 	return true;
 }
@@ -2760,8 +2769,8 @@ QString SolarSystem::getOrbitColorStyle() const
 QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 {
 	PlanetP p;
-	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
-	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	const Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
+	const Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getEquatorialRadius();
 
 	double final_illumination = 1.0;
@@ -2779,12 +2788,10 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 
 		Vec3d v1 = Lp - P3;
 		Vec3d v2 = C - P3;
-
 		const double L = v1.length();
 		const double l = v2.length();
-
-		v1 = v1 / L;
-		v2 = v2 / l;
+		v1 /= L;
+		v2 /= l;
 
 		const double R = RS / L;
 		const double r = radius / l;

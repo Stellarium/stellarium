@@ -208,7 +208,7 @@ Planet::Planet(const QString& englishName,
 	  outgas_intensity(0.f),
 	  outgas_falloff(0.f),
 	  rotLocalToParent(Mat4d::identity()),
-	  axisRotation(0.),
+	  axisRotation(0.f),
 	  objModel(Q_NULLPTR),
 	  objModelLoader(Q_NULLPTR),
 	  survey(Q_NULLPTR),
@@ -519,7 +519,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
-			// TRANSLATORS: Unit of measure for distance - milliones kilometers
+			// TRANSLATORS: Unit of measure for distance - millions of kilometers
 			km = qc_("M km", "distance");
 		}
 
@@ -539,8 +539,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
 			const double orbVelKms=orbVel* AU/86400.;
-//			if (englishName=="Moon")
-//				orbVelKms=orbVel;
 			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
 			const double helioVel=getHeliocentricEclipticVelocity().length();
 			if (!fuzzyEquals(helioVel, orbVel))
@@ -612,8 +610,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(Size).join("");
 	}
 
-	const double siderealPeriod = getSiderealPeriod();
-	const double siderealDay = getSiderealDay();
+	const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
+	const double siderealDay = getSiderealDay(); // =re.period
 	if (flags&Extra)
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -682,43 +680,56 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			{
 				// For compute the Moon age we use geocentric coordinates
 				QString moonPhase = "";
-				double eclJDE = earth->getRotObliquity(core->getJDE());
-				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelCore* core1 = StelApp::getInstance().getCore();
-				bool state = core1->getUseTopocentricCoordinates();
+				StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+				const bool useTopocentric = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
-				core1->update(0); // enforce update cache to avoid error in computation!
+				core1->update(0); // enforce update cache!
+				const double eclJDE = earth->getRotObliquity(core1->getJDE());
+				double ra_equ, dec_equ, lambdaMoon, lambdaSun, betaMoon, betaSun, raSun, deSun;
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
-				double deltaLong = (lambdaMoon - lambdaSun)*M_180_PI;
-				core1->setUseTopocentricCoordinates(state);
-				core1->update(0); // enforce update cache for avoid odd selection of Moon details!
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &betaMoon);
+				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+				StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+				double deltaLong = (lambdaMoon-lambdaSun)*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = qRound(deltaLong);
-				if (deltaLongI==45)
-					moonPhase = qc_("Waxing Crescent", "Moon phase");
-				if (deltaLongI==90)
-					moonPhase = qc_("First Quarter", "Moon phase");
-				if (deltaLongI==135)
-					moonPhase = qc_("Waxing Gibbous", "Moon phase");
-				if (deltaLongI==180)
-					moonPhase = qc_("Full Moon", "Moon phase");
-				if (deltaLongI==225)
-					moonPhase = qc_("Waning Gibbous", "Moon phase");
-				if (deltaLongI==270)
-					moonPhase = qc_("Third Quarter", "Moon phase");
-				if (deltaLongI==315)
-					moonPhase = qc_("Waning Crescent", "Moon phase");
-				if (deltaLongI==0 || deltaLongI==360)
+				if (deltaLong<0.5 || deltaLong>359.5)
 					moonPhase = qc_("New Moon", "Moon phase");
+				else if (deltaLong<89.5)
+					moonPhase = qc_("Waxing Crescent", "Moon phase");
+				else if (deltaLong<90.5)
+					moonPhase = qc_("First Quarter", "Moon phase");
+				else if (deltaLong<179.5)
+					moonPhase = qc_("Waxing Gibbous", "Moon phase");
+				else if (deltaLong<180.5)
+					moonPhase = qc_("Full Moon", "Moon phase");
+				else if (deltaLong<269.5)
+					moonPhase = qc_("Waning Gibbous", "Moon phase");
+				else if (deltaLong<270.5)
+					moonPhase = qc_("Third Quarter", "Moon phase");
+				else if (deltaLong<359.5)
+					moonPhase = qc_("Waning Crescent", "Moon phase");
+				else
+				{
+					qWarning() << "ERROR IN PHASE STRING PROGRAMMING!";
+					Q_ASSERT(0);
+				}
 
-				double age = deltaLong*29.530588853/360.;
+				const double age = deltaLong*29.530588853/360.;
 				oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
 				if (!moonPhase.isEmpty())
 					oss << QString(" (%4)").arg(moonPhase);
 				oss << "<br />";
+
+				if (useTopocentric)
+				{
+					// we must repeat the position lookup from above in case we have topocentric corrections.
+					StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+					StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				}
+				const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
+				oss << QString("%1: %2").arg(q_("Position angle of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0))) << "<br/>";
 			}
 		}
 
@@ -740,7 +751,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 	}
 	postProcessInfoString(str, flags);
-
 	return str;
 }
 
@@ -862,14 +872,32 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 	re.epoch = _epoch;
 	re.obliquity = _obliquity;
 	re.ascendingNode = _ascendingNode;
-	re.precessionRate = _precessionRate;
-	re.siderealPeriod = _siderealPeriod;  // used for drawing orbit lines
+	Q_UNUSED(_precessionRate)
+	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
 
-	deltaOrbitJDE = re.siderealPeriod/ORBIT_SEGMENTS;
+	if (orbitPtr && pType!=isObserver)
+	{
+		const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
+		const double eccentricity=static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity();
+		if (semiMajorAxis>0 && eccentricity<0.9)
+		{
+			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
+			re.siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
+			//qDebug() << re.siderealPeriod;
+			closeOrbit=true;
+		}
+		else {
+			closeOrbit=false;
+		}
+	}
+	deltaOrbitJDE = re.siderealPeriod/ORBIT_SEGMENTS;                              // TODO: Remove siderealPeriod from RotationalElements!
 }
 
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 {
+	// A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
+	// To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
+	// Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
 	if (englishName=="Sun")
 		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
 	else
@@ -877,8 +905,13 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 }
 
 // return value in radians!
-// For Earth, this is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
+// For Earth, this is epsilon_A, the angle between earth's rotational axis and pole of mean ecliptic of date.
 // Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
+// GZ notes  2017:
+// For the other planets, it must be the angle between axis and Normal to the VSOP_J2000 coordinate frame.
+// For moons, it may be the obliquity against its planet's equatorial plane.
+// GZ: Note that such a scheme is highly confusing, and should be avoided. IAU models use the J2000 frame.
+//     In any case, re.obliquity can now be updated during computeTransMatrix()
 double Planet::getRotObliquity(double JDE) const
 {
 	// JDay=2451545.0 for J2000.0
@@ -964,7 +997,6 @@ void Planet::computeTransMatrix(double JD, double JDE)
 
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane),
 	// not solar equator...
-
 	if (parent)
 	{
 		// We can inject a proper precession plus even nutation matrix in this stage, if available.
@@ -1003,7 +1035,11 @@ Mat4d Planet::getRotEquatorialToVsop87(void) const
 	if (parent)
 	{
 		for (PlanetP p=parent;p->parent;p=p->parent)
-			rval = p->rotLocalToParent * rval;
+		{
+			// The Sun is the ultimate parent. However, we don't want its matrix!
+			if (p->pType!=isStar)
+				rval = p->rotLocalToParent * rval;
+		}
 	}
 	return rval;
 }
@@ -1020,24 +1056,23 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 }
 
 
-// Compute the z rotation to use from equatorial to geographic coordinates.
+// Compute the z rotation [degrees] to use from equatorial to geographic coordinates.
 // We need both JD and JDE here for Earth. (For other planets only JDE.)
 double Planet::getSiderealTime(double JD, double JDE) const
 {
 	if (englishName=="Earth")
 	{	// Check to make sure that nutation is just those few arcseconds.
 		if (StelApp::getInstance().getCore()->getUseNutation())
-			return get_apparent_sidereal_time(JD, JDE);
+			return get_apparent_sidereal_time(JD, JDE); // degrees
 		else
-			return get_mean_sidereal_time(JD, JDE);
+			return get_mean_sidereal_time(JD, JDE); // degrees
 	}
 
 	const double t = JDE - re.epoch;
-	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
-	const double rotations = (re.period==0.f ? 1.  // moon with chaotic period of rotation
-						: t / static_cast<double>(re.period));
-	const double wholeRotations = floor(rotations);
-	const double remainder = rotations - wholeRotations;
+	// avoid division by zero (typical case for moons with chaotic period of rotation)
+	double rotations = (re.period==0. ? 1.  // moon with chaotic period of rotation
+					  : t / static_cast<double>(re.period));
+	rotations = remainder(rotations, 1.0); // remove full rotations to limit angle.
 
 	if (englishName=="Jupiter")
 	{
@@ -1079,9 +1114,10 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
 	}
 	else
-		return remainder * 360. + static_cast<double>(re.offset);
+		return rotations * 360. + static_cast<double>(re.offset);
 }
 
+// Get duration of mean solar day (in earth days)
 double Planet::getMeanSolarDay() const
 {
 	double msd = 0.;
@@ -1093,8 +1129,8 @@ double Planet::getMeanSolarDay() const
 		return 1.;
 	}
 
-	double sday = getSiderealDay();
-	double coeff = qAbs(sday/getSiderealPeriod());
+	const double sday = getSiderealDay();
+	const double coeff = qAbs(sday/getSiderealPeriod());
 	double sign = 1.;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
@@ -1103,7 +1139,7 @@ double Planet::getMeanSolarDay() const
 	if (pType==Planet::isMoon)
 	{
 		// duration of mean solar day on moon are same as synodic month on this moon
-		double a = parent->getSiderealPeriod()/sday;
+		const double a = parent->getSiderealPeriod()/sday;
 		msd = sday*(a/(a-1));
 	}
 	else
@@ -1112,7 +1148,7 @@ double Planet::getMeanSolarDay() const
 	return msd;
 }
 
-// Get the Planet position in the parent Planet ecliptic coordinate in AU
+// Get the Planet position in Cartesian ecliptic (J2000) coordinates in AU, centered on the parent Planet
 Vec3d Planet::getEclipticPos(double dateJDE) const
 {
 	// Use current position if the time match.
@@ -1131,11 +1167,10 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 	return *pos;
 }
 
-// Return heliocentric coordinate of p
+// Return heliocentric ecliptical coordinate of p [AU]
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
-	// Note: using shared copies is too slow here.  So we use direct access
-	// instead.
+	// Note: using shared copies is too slow here.  So we use direct access instead.
 	Vec3d pos = p;
 	const Planet* pp = parent.data();
 	if (pp)
@@ -1180,8 +1215,7 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 // Return heliocentric velocity of planet.
 Vec3d Planet::getHeliocentricEclipticVelocity() const
 {
-	// Note: using shared copies is too slow here.  So we use direct access
-	// instead.
+	// Note: using shared copies is too slow here.  So we use direct access instead.
 	Vec3d vel = eclipticVelocity;
 	const Planet* pp = parent.data();
 	if (pp)
@@ -1216,7 +1250,7 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
-// Get the planet phase[0..1] for an observer at pos obsPos in heliocentric coordinates (in AU)
+// Get the planet phase ([0..1] illuminated fraction of the planet disk) for an observer at pos obsPos in heliocentric coordinates (in AU)
 float Planet::getPhase(const Vec3d& obsPos) const
 {
 	const double observerRq = obsPos.lengthSquared();
@@ -1438,10 +1472,9 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
-
 			case ExplanatorySupplement_1992:
 			{
-				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+				// Algorithm contributed by Pere Planesas (Observatorio Astronomico Nacional)
 				// GZ2016: Actually, this is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 1992! (chap. 7.12)
 				// The value -8.88 for Saturn V(1,0) seems to be a correction of a typo, where Suppl.Astr. gives -7.19 just like for Uranus.
 				double f1 = phaseDeg/100.;
@@ -1482,7 +1515,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
-
 			case Mueller_1893:
 			{
 				// (1)
@@ -1595,7 +1627,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Exclude drawing if user set a hard limit magnitude.
 	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 	{
-		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
+		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
 		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core).first==1.0)
 			return;
@@ -2183,11 +2215,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-		light.position=Vec4d(sunPos);
+		light.position=sunPos;
 
 		// Set the light parameters taking sun as the light source
-		light.diffuse = Vec4f(1.f,static_cast<float>(magFactorGreen)*1.f,static_cast<float>(magFactorBlue)*1.f);
-		light.ambient = Vec4f(0.02f,static_cast<float>(magFactorGreen)*0.02f,static_cast<float>(magFactorBlue)*0.02f);
+		light.diffuse.set(1.f,static_cast<float>(magFactorGreen)*1.f,static_cast<float>(magFactorBlue)*1.f);
+		light.ambient.set(0.02f,static_cast<float>(magFactorGreen)*0.02f,static_cast<float>(magFactorBlue)*0.02f);
 
 		if (this==ssm->getMoon())
 		{
@@ -2198,7 +2230,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// When atm.brightness has fallen to 2000cd/m^2, we allow ashen light to appear visible. Its impact is full when atm.brightness is below 1000.
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
-			double atmLum=(lmgr->getFlagAtmosphere() ? static_cast<double>(lmgr->getAtmosphereAverageLuminance()) : 0.0);
+			const double atmLum=(lmgr->getFlagAtmosphere() ? static_cast<double>(lmgr->getAtmosphereAverageLuminance()) : 0.0);
 			if (atmLum<2000.0)
 			{
 				double atmScaling=1.0 - (qMax(1000.0, atmLum)-1000.0)*0.001; // full impact when atmLum<1000.
@@ -2214,7 +2246,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				fovFactor -= 0.1*static_cast<double>(5.0f-qMax(2.0f, fov));
 			}
 			// Special case for the Moon. Was 1.6, but this often is too bright.
-			light.diffuse = Vec4f(static_cast<float>(fovFactor),static_cast<float>(magFactorGreen*fovFactor),static_cast<float>(magFactorBlue*fovFactor),1.f);
+			light.diffuse.set(static_cast<float>(fovFactor),static_cast<float>(magFactorGreen*fovFactor),static_cast<float>(magFactorBlue*fovFactor));
 		}
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
@@ -2267,7 +2299,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core))*60.f;
-		surfArcMin2 = surfArcMin2*surfArcMin2*static_cast<float>(M_PI); // the total illuminated area in arcmin^2
+		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 		Vec3d tmp = getJ2000EquatorialPos(core);
@@ -2332,7 +2364,7 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// t goes from 0.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	// If the texture is flipped, we iterate the coordinates backward.
 	const GLfloat ds = 1.f / slices;
@@ -2410,6 +2442,7 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 	}
 }
 
+// Used in drawSphere() to compute shadows.
 void Planet::computeModelMatrix(Mat4d &result) const
 {
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
@@ -2516,7 +2549,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	// Adapt the number of facets according with the size of the sphere for optimization
 	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenSz * 40.f/50.f), 100u));	// 40 facets for 1024 pixels diameter on screen
 
-	// Generates the vertice
+	// Generates the vertices
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
 	
@@ -3232,7 +3265,7 @@ void Planet::drawOrbit(const StelCore* core)
 		return;
 	if (!static_cast<bool>(re.siderealPeriod))
 		return;
-
+	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
 	{
 		if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(lastJDE))
