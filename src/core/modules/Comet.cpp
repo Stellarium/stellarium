@@ -86,8 +86,7 @@ Comet::Comet(const QString& englishName,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
-	  slopeParameter(-1.f), //== uninitialized: used in getVMagnitude()
-	  semiMajorAxis(0.),
+	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
 	  nameIsProvisionalDesignation(false),
 	  tailFactors(-1., -1.), // mark "invalid"
@@ -104,6 +103,7 @@ Comet::Comet(const QString& englishName,
 {
 	this->outgas_intensity =outgas_intensity;
 	this->outgas_falloff   =outgas_falloff;
+
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -119,9 +119,10 @@ Comet::~Comet()
 
 void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if (slope < 0 || slope > 20.0f)
+	if (slope <= -1.f || slope > 20.0f)
 	{
-		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between 0 and 20)";
+		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
+		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 20)";
 		return;
 	}
 
@@ -163,7 +164,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		QString cometType = qc_("non-periodic", "type of comet");
 		if (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() != 1.0)
 		{
-			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
+			// Parabolic and hyperbolic comets don't have semi-major axis of the orbit. We have comet with elliptic orbit.
 			cometType = qc_("periodic", "type of comet");
 		}
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getPlanetTypeString()), cometType) << "<br />";
@@ -174,9 +175,10 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&AbsoluteMagnitude)
 	{
 		//TODO: Make sure absolute magnitude is a sane value
-		//If the two parameter magnitude system is not use, don't display this
+		//If the two parameter magnitude system is not used, don't display this
 		//value. (Using radius/albedo doesn't make any sense for comets.)
-		if (slopeParameter >= 0)
+		// Note that slope parameter can be <0 (down to -2?), so -10 is now used for "uninitialized"
+		if (slopeParameter >= -9.9f)
 			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 	}
 
@@ -323,22 +325,18 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 
 	return map;
 }
-void Comet::setSemiMajorAxis(const double value)
-{
-	semiMajorAxis = value;
-}
 
 double Comet::getSiderealPeriod() const
 {
 	const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
-	return ((semiMajorAxis>0) ? KeplerOrbit::calculateSiderealPeriod(semiMajorAxis) : 0.);
+	return ((semiMajorAxis>0) ? KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.0) : 0.);
 }
 
 float Comet::getVMagnitude(const StelCore* core) const
 {
 	//If the two parameter system is not used,
 	//use the default radius/albedo mechanism
-	if (slopeParameter < 0)
+	if (slopeParameter < -9.0f)
 	{
 		return Planet::getVMagnitude(core);
 	}
@@ -371,7 +369,6 @@ void Comet::update(int deltaTime)
 	double dateJDE=core->getJDE();
 
 	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
-
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qBound(1.0, eclipticPos.length(), 20.0);
@@ -433,7 +430,7 @@ void Comet::update(int deltaTime)
 	const bool withAtmosphere=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
+	const float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
 

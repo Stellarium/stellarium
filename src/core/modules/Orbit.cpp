@@ -27,22 +27,24 @@ using namespace std;
 
 #define EPSILON 1e-10
 //#define EPSILON 1e-4
-// line from vsop87.c, but also used by Heafner, 5.3.12. This is mu, we ignore the comet's mass i.r.t. the Sun's.
-#define GAUSS_GRAV_CONST_SQ (0.01720209895*0.01720209895)
+// Gaussian gravitation constant k, also used by Heafner, 5.3.12.
+// From the definition (see https://de.wikipedia.org/wiki/Vis-Viva-Gleichung):
+// Gaussian Grav. Constant k=sqrt(GM/1AU)=2pi AU/year ~ 0.0172020 AU/d ~ 29.8km/s.
+// Here M is solar mass=1.
+// For effects around moon orbits around planets, we must reduce the central body's mass to m/M=centralMass/1.
+#define GAUSS_GRAV_k 0.01720209895
+#define GAUSS_GRAV_k_SQ (GAUSS_GRAV_k*GAUSS_GRAV_k)
 
 #if defined(_MSC_VER) && (_MSC_VER<1900)
 // cuberoot is missing in older VC++ !?
 #define cbrt(x) pow((x),1./3.)
 #endif
 
-//! Solve true anomaly nu for hyperbolic orbit.
-//! @param q: perihel distance
-//! @param n: mean motion
-//! @param e: excentricity
+//! Solve true anomaly nu for hyperbolic "orbit" (better: trajectory) around the sun.
 //! @param dt: days from perihel
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-static void InitHyp(const double q, const double n, const double e, const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitHyp(const double dt, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitHyp";
 	Q_ASSERT(e>1.0);
@@ -65,15 +67,14 @@ static void InitHyp(const double q, const double n, const double e, const double
 	rSinNu = a*std::sqrt(e*e-1.0)*sinh(E);
 }
 
-//! Solve true anomaly nu for parabolic orbit.
-//! @param q: perihel distance
-//! @param n: mean motion equivalent related to W (n=W/dt) in Heafner, ch5.5
+//! Solve true anomaly nu for parabolic orbit around the sun.
 //! @param dt: days from perihel
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-static void InitPar(const double q, const double n, const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitPar(const double dt, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitPar";
+	Q_ASSERT(e==1.0);
 //	const double M=dt*sqrt(GAUSS_GRAV_CONST/(2.0*q*q*q));
 //	const double W=1.5*M;
 	const double W=dt*n;
@@ -85,13 +86,10 @@ static void InitPar(const double q, const double n, const double dt, double &rCo
 
 
 //! Solve true anomaly nu for elliptical orbit with Laguerre-Conway's method. (May have high e)
-//! @param q: perihel distance
-//! @param n: mean motion
-//! @param e: excentricity
 //! @param dt: days from perihel
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-static void InitEll(const double q, const double n, const double e, const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitEll(const double dt, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitEll";
 	Q_ASSERT(e<1.0);
@@ -130,16 +128,17 @@ static void InitEll(const double q, const double n, const double e, const double
 }
 
 KeplerOrbit::KeplerOrbit(double pericenterDistance,
-                       double eccentricity,
-                       double inclination,
-                       double ascendingNode,
-                       double argOfPerhelion,
-                       double timeAtPerihelion,
-                       double orbitGoodDays,
-                       double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
-		       double parentRotObliquity,
-		       double parentRotAscendingnode,
-		       double parentRotJ2000Longitude)
+			double eccentricity,
+			double inclination,
+			double ascendingNode,
+			double argOfPerhelion,
+			double timeAtPerihelion,
+			double orbitGoodDays,
+			double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
+			double parentRotObliquity,
+			double parentRotAscendingnode,
+			double parentRotJ2000Longitude,
+			double centralMass)
 	: q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
@@ -147,9 +146,10 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 	  w(argOfPerhelion),
 	  t0(timeAtPerihelion),
 	  n(meanMotion),
+	  centralMass(centralMass),
+	  orbitGood(orbitGoodDays),
 	  rdot(0.0),
-	  updateTails(true),
-	  orbitGood(orbitGoodDays)
+	  updateTails(true)
 {
 	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
 	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
@@ -165,13 +165,19 @@ void Orbit::setParentOrientation(const double parentRotObliquity, const double p
 	// This indicates that in Stellarium, all those moon orbits are given with relation to the Planet equator.
 	// The problem is that on a planet with changing axis, this rotation matrix should be recomputed e.g. once per year or so.
 	// Another problem is that probably moons exist with elements given in other reference frames. ExplanSup2013 even has many orbits w.r.t. B1950 ecliptic.
+#ifdef _GNU_SOURCE
+	double c_obl, s_obl, c_nod, s_nod, cj, sj;
+	sincos(parentRotObliquity, &s_obl, &c_obl);
+	sincos(parentRotAscendingNode, &s_nod, &c_nod);
+	sincos(parentRotJ2000Longitude, &sj, &cj);
+#else
 	const double c_obl = cos(parentRotObliquity);
 	const double s_obl = sin(parentRotObliquity);
 	const double c_nod = cos(parentRotAscendingNode);
 	const double s_nod = sin(parentRotAscendingNode);
 	const double cj = cos(parentRotJ2000Longitude);
 	const double sj = sin(parentRotJ2000Longitude);
-
+#endif
 	rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
 	rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
 	rotateToVsop87[2] =           s_nod*s_obl;
@@ -188,21 +194,28 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
 	JDE -= t0;
 	double rCosNu,rSinNu;
-	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
+	if (e < 1.0) InitEll(JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
 	else if (e > 1.0)
 	{
 		// qDebug() << "Hyperbolic orbit for ecc=" << e << ", i=" << i << ", w=" << w << ", Mean Motion n=" << n;
-		InitHyp(q,n,e,JDE,rCosNu,rSinNu);
+		InitHyp(JDE,rCosNu,rSinNu);
 	}
-	else InitPar(q,n,JDE,rCosNu,rSinNu);
+	else InitPar(JDE,rCosNu,rSinNu);
 
 	// Compute position vector and speed vector from orbital elements and true anomaly components. See e.g. Heafner, Fund.Eph.Comp.1999
+#ifdef _GNU_SOURCE
+	double cw, sw, cOm, sOm, ci, si;
+	sincos(w, &sw, &cw);
+	sincos(Om, &sOm, &cOm);
+	sincos(i, &si, &ci);
+#else
 	const double cw = cos(w);
 	const double sw = sin(w);
 	const double cOm = cos(Om);
 	const double sOm = sin(Om);
 	const double ci = cos(i);
 	const double si = sin(i);
+#endif
 	const double Px=-sw*sOm*ci+cw*cOm; // Heafner, 5.3.1 Px
 	const double Qx=-cw*sOm*ci-sw*cOm; // Heafner, 5.3.4 Qx
 	const double Py= sw*cOm*ci+cw*sOm; // Heafner, 5.3.2 Py
@@ -215,8 +228,8 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 	const double r=std::sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
 	const double sinNu=rSinNu/r;
 	const double cosNu=rCosNu/r;
-	const double p=q*(1.0+e);
-	const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ/p);
+	const double p=q*(1.0+e); // Heafner: semilatus rectum
+	const double sqrtMuP=std::sqrt(GAUSS_GRAV_k_SQ*centralMass/p);
 	const double s0=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // rdotx: x component of velocity vector, AU/d Heafner, 5.3.19 r'
 	const double s1=sqrtMuP*((e+cosNu)*Qy - sinNu*Py); // rdoty: y component of velocity vector, AU/d
 	const double s2=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz); // rdotz: z component of velocity vector, AU/d
@@ -236,9 +249,18 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 
 // Calculate sidereal period in days from semi-major axis.
 // Source: Heafner, Fundamental Eph. Comp. p.71.
-double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis)
+double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis, const double centralMass)
 {
-	return (semiMajorAxis >=0 ? (2.*M_PI/0.01720209895)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis) : std::numeric_limits<double>::max() );
+	// Solution for non-Solar central mass (Moons:) we need to take central mass (in Solar units) into account. Tested with comparison of preconfigured Moon data.
+	return (semiMajorAxis >0 ? (2.*M_PI/GAUSS_GRAV_k)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/centralMass) : std::numeric_limits<double>::max() );
+}
+
+double KeplerOrbit::calculateSiderealPeriod() const
+{
+	if (e>=1.)
+		return std::numeric_limits<double>::max();
+	const double a = q/(1.0-e); // semimajor axis
+	return calculateSiderealPeriod(a, centralMass);
 }
 
 GimbalOrbit::GimbalOrbit(double distance, double longitude, double latitude):

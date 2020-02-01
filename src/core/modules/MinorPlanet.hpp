@@ -80,8 +80,6 @@ public:
 	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
-	QString getCommonEnglishName(void) const {return englishName;}
-	QString getCommonNameI18n(void) const {return nameI18;}
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -97,20 +95,18 @@ public:
 	//! \todo Include them in the search lists.
 	void setProvisionalDesignation(QString designation);
 
-
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system
 	//! for minor planets. They are used to calculate the apparent magnitude at
 	//! different phase angles.
+	//! @param magnitude Absolute magnitude H
+	//! @param slope Slope parameter G. This is usually [0..1], sometimes slightly outside. Allowed here [-1..2].
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! renders the subscript in a minor planet provisional designation with HTML.
 	//! \returns an emtpy string if the source string is not a provisional
 	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
-
-	//! set value for semi-major axis in AU
-	void setSemiMajorAxis(double value);
 
 	//! set values for spectral types
 	void setSpectralType(QString sT="", QString sB="");
@@ -123,8 +119,7 @@ public:
 
 private:
 	int minorPlanetNumber;
-	float  slopeParameter;
-	double semiMajorAxis;
+	float  slopeParameter; // This is G from the H, G system for computation of apparent magnitude.
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;

@@ -44,7 +44,11 @@ typedef QSharedPointer<Planet> PlanetP;
 
 //! @class SolarSystem
 //! This StelObjectModule derivative is used to model SolarSystem bodies.
-//! This includes the Major Planets, Minor Planets and Comets.
+//! This includes the Major Planets (class Planet), Minor Planets (class MinorPlanet) and Comets (class Comet).
+// GZ's documentation attempt, early 2017.
+//! This class and the handling of solar system data has seen many changes, and unfortunately, not much has been consistently documented.
+//! The following is a reverse-engineered analysis.
+//!
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
@@ -812,13 +816,16 @@ public slots:
 	//! @li O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
 	//! @li Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
 	//! @li Sean E. Urban and P. Kenneth Seidelmann "Explanatory Supplement to the Astronomical Almanac" (3rd edition, 2013)
+	//! It is interesting to note that Meeus in his discussion of "Harris" states that Harris did not give new values.
+	//! The book indeed mentions a few values for the inner planets citing Danjon, but different from those then listed by Meeus.
+	//! Therefore it must be assumed that the "Harris" values are misnomed, and are the least certain set.
 	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = ExpSup2013
 	//! @param algorithm the case in-sensitive algorithm name
 	//! @note: The structure of algorithms is almost identical, just the numbers are different!
 	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
 	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
 
-	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	//! Get the algorithm used for computation of apparent magnitudes for planets in case observer on the Earth
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
@@ -1002,6 +1009,7 @@ public:
 	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
