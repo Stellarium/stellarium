@@ -7,5 +7,5 @@ LandscapeMgr.setFlagLandscape(true);
 LandscapeMgr.setFlagAtmosphere(true);
 GridLinesMgr.setFlagHorizonLine(true);
 LandscapeMgr.setFlagCardinalsPoints(true);
-core.setDate("2005-01-05T10:32:45");
+core.setDate("2020-01-13T07:12:34");
 core.setTimeRate(0);

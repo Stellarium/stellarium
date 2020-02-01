@@ -463,7 +463,7 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 
 	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosGeometric(core)); 
 	calc.setAzRad(x)
-		.setAltAppRad(y);
+		.setAltRad(y);
 
 	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosApparent(core)); 
 	calc.setAzAppRad(x)
@@ -483,18 +483,30 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
 	}
 	
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable() + extraText));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstDegreesPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.latPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.lonPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable() + extraText));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstDegreesPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.latPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.lonPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
 }
 
 QString NavStars::oneRowTwoCells(const QString& a, const QString& b)

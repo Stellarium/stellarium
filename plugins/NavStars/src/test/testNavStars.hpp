@@ -29,7 +29,6 @@ class TestNavStars : public QObject
 
 private slots:
     void TestAgainstAlmancVega();
-    //void TestAgainstAlmancDubhe();
 };
 
 #endif // TESTNAVSTARS_HPP

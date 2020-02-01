@@ -18,117 +18,99 @@
  */
 
 #include "test/testNavStars.hpp"
-#include "NavStars.hpp"
 #include "NavStarsCalculator.hpp"
 
-#ifdef _DEBUG
-#include <string>
+#include <QMap>
 #include <QDebug>
-#endif
+#include <QString>
 
 QTEST_GUILESS_MAIN(TestNavStars)
 
+typedef QMap<QString, double> inputs_t;
+typedef QMap<QString, QString> expects_t;
+
+static void
+examineCalc(NavStarsCalculator& calc)
+{
+	qWarning() << "getUTC: " << calc.getUTC();
+	qWarning() << "hcPrintable" << calc.hcPrintable();
+	qWarning() << "altAppPrintable" << calc.altAppPrintable();
+	qWarning() << "gmstDegreesPrintable" << calc.gmstDegreesPrintable();
+	qWarning() << "lmstDegreesPrintable" << calc.lmstDegreesPrintable();
+	qWarning() << "shaPrintable" << calc.shaPrintable();
+	qWarning() << "decPrintable" << calc.decPrintable();
+	qWarning() << "ghaPrintable" << calc.ghaPrintable();
+	qWarning() << "lhaPrintable" << calc.lhaPrintable();
+	qWarning() << "latPrintable" << calc.latPrintable();
+	qWarning() << "lonPrintable" << calc.lonPrintable();
+	qWarning() << "hcPrintable" << calc.hcPrintable();
+	qWarning() << "znPrintable" << calc.znPrintable();
+}
+
+static void performTest(QString utc, inputs_t& inputs, expects_t& expects, bool examine = false)
+{
+	NavStarsCalculator calc;
+	calc.setUTC(utc)
+		.setLatDeg(inputs["setLatDeg"])
+		.setLonDeg(inputs["setLonDeg"])
+		.setJd(inputs["setJd"])
+		.setJde(inputs["setJde"])
+		.setGmst(inputs["setGmst"])
+		.setRaRad(inputs["setRaRad"])
+		.setDecRad(inputs["setDecRad"])
+		.setAzRad(inputs["setAzRad"])
+		.setAltAppRad(inputs["setAltAppRad"])
+		.setAzAppRad(inputs["setAzAppRad"])
+		.setAltAppRad(inputs["setAltAppRad"])
+		.execute();
+	
+	if(examine)
+		examineCalc(calc);
+
+	QVERIFY(calc.getUTC() == utc);
+	QVERIFY(calc.hcPrintable() == expects["hcPrintable"]);
+	QVERIFY(calc.altAppPrintable() == expects["altAppPrintable"]);
+	QVERIFY(calc.gmstDegreesPrintable() == expects["gmstDegreesPrintable"]);
+	QVERIFY(calc.lmstDegreesPrintable() == expects["lmstDegreesPrintable"]);
+	QVERIFY(calc.shaPrintable() == expects["shaPrintable"]);
+	QVERIFY(calc.decPrintable() == expects["decPrintable"]);
+	QVERIFY(calc.ghaPrintable() == expects["ghaPrintable"]);
+	QVERIFY(calc.lhaPrintable() == expects["lhaPrintable"]);
+	QVERIFY(calc.latPrintable() == expects["latPrintable"]);
+	QVERIFY(calc.lonPrintable() == expects["lonPrintable"]);
+	QVERIFY(calc.hcPrintable() == expects["hcPrintable"]);
+	QVERIFY(calc.znPrintable() == expects["znPrintable"]);
+}
 
 void TestNavStars::TestAgainstAlmancVega()
 {
-#if 0
-    QString extraText;
-    QMap<QString, QString> strings;
-    QMap<QString, double> inputs, expects, actuals;
+	inputs_t inputs;
+	inputs["setLatDeg"] = 56.185647;
+	inputs["setLonDeg"] = -2.557428;
+	inputs["setJd"] = 2458861.8003982641;
+	inputs["setJde"] = 2458861.8012185576;
+	inputs["setGmst"] = 220.38903985816341;
+	inputs["setRaRad"] = -1.4068775342410453;
+	inputs["setDecRad"] = 0.67745840300450966;
+	inputs["setAzRad"] = 1.6357089293679654;
+	inputs["setAltAppRad"] = 0.80973585409014781;
+	inputs["setAzAppRad"] = 1.6357089293679654;
+	inputs["setAltAppRad"] = 0.81001296240472365;
 
-	// Create a calculator and set date.
-    NavStarsCalculator calc;
-    calc.setUTC("2020-01-13T07:12:34");
+	expects_t expects;
+	expects["hcPrintable"] = "+46&deg;39.6'";
+	expects["altAppPrintable"] = "+46&deg;24.6'";
+	expects["gmstDegreesPrintable"] = "220.389&deg;";
+	expects["lmstDegreesPrintable"] = "217.832&deg;";
+	expects["shaPrintable"] = "+80&deg;36.5'";
+	expects["decPrintable"] = "+38&deg;48.9'";
+	expects["ghaPrintable"] = "+300&deg;59.8'&deg;";
+	expects["lhaPrintable"] = "+298&deg;26.4'";
+	expects["latPrintable"] = "N56&deg;11.1'";
+	expects["lonPrintable"] = "W2&deg;33.4'";
+	expects["hcPrintable"] = "+46&deg;39.6'";
+	expects["znPrintable"] = "+3&deg;23.0'";
 
-	// Inputs into the calculator under test.
-    calc.jd = 2458861.8003982641;
-	calc.jde = 2458861.8012185576;
-	inputs["getMeanSiderealTime"] = 220.38903985816341;
-	inputs["getAltAzPosApparentALT"] = 0.81001296240472365;
-	inputs["getAltAzPosApparentAZM"] = 1.6357089293679654;
-	inputs["getAltAzPosGeometricALT"] = 0.80973585409014781;
-	inputs["getAltAzPosGeometricAZM"] = 1.6357089293679654;
-	inputs["getCurrentLocationLatitude"] = 56.208698272705078;
-	inputs["getCurrentLocationLongitude"] = -3.0044000148773193;
-	inputs["getEquinoxEquatorialPosApparentRA"] = -1.4068775342410453;
-	inputs["getEquinoxEquatorialPosApparentDEC"] = 0.67745840300450966;
-
-    NavStarsCalculatorDataProviderFake* pfake = new NavStarsCalculatorDataProviderFake();
-    pfake->inputs = inputs;
-
-	// Create the fake DI data provider for the calculator.
-    NavStarsCalculatorDataProviderIf::ShPtr dataProvider = 
-        NavStarsCalculatorDataProviderIf::ShPtr(pfake);
-
-	// Set calculator to use a fake data provider.
-    calc.setDataProvider(dataProvider);
-
-	// List the calculator expectations.
-	expects["Hc_rad"] = 0.81005249901058163;
-	expects["Zn_rad"] = 1.5059402285716805;
-	expects["alt_app_rad"] = 0.81001296240472365;
-	expects["alt_rad"] = 0.80973585409014781;
-	expects["az_app_rad"] = 1.6357089293679654;
-	expects["az_rad"] = 1.6357089293679654;
-	expects["gha_rad"] = 5.2533919150750137;
-	expects["gmst_deg"] = 220.38903985816341;
-	expects["gmst_rad"] = 3.8465143808339683;
-	expects["jd"] = 2458861.8003982641;
-	expects["jde"] = 2458861.8012185576;
-	expects["lat_deg"] = 56.208698272705078;
-	expects["lat_rad"] = 0.98102685311875315;
-	expects["lha_rad"] = 5.2009552427684378;
-	expects["lmst_deg"] = 217.38463984328610;
-	expects["lmst_rad"] = 3.7940777085273925;
-	expects["lon_deg"] = -3.0044000148773193;
-	expects["lon_rad"] = -0.052436672306575845;
-	expects["object_dec_rad"] = 0.67745840300450966;
-
-	// Perform the calculations, this is the function being tested.
-    calc.getCelestialNavData(actuals);
-
-	// Test the actual vs the expected.
-	for (QMap<QString, double>::iterator itor = expects.begin();
-		itor != expects.end();
-		itor++)
-	{
-		QVERIFY(actuals.contains(itor.key()));
-		QVERIFY(QString::number(itor.value(), 'f', 6) 
-			 == QString::number(actuals[itor.key()], 'f', 6));
-	}
-#endif
-
-#if 0
-	// Cannot run these tests as the extraInfoString() uses qc_()
-	// which trys to do translations. It seems when called from a
-	// Unit Test enviroment this xlation system simply crashes.
-    calc.extraInfoStrings(outputs, strings, extraText);
-
-    QVERIFY(strings.contains("alt_app_rad"));
-	QVERIFY(strings.contains("gmst_deg"));
-	QVERIFY(strings.contains("lmst_deg"));
-	QVERIFY(strings.contains("gmst_rad"));
-	QVERIFY(strings.contains("object_sha_rad"));
-	QVERIFY(strings.contains("object_dec_rad"));
-	QVERIFY(strings.contains("gha_rad"));
-	QVERIFY(strings.contains("lha_rad"));
-	QVERIFY(strings.contains("lat_rad"));
-	QVERIFY(strings.contains("lon_rad"));
-	QVERIFY(strings.contains("Hc_rad"));
-	QVERIFY(strings.contains("Zn_rad"));
-
-    QVERIFY("Ho: +46&deg;24.6'<br/>" == strings["alt_app_rad"]);
-	QVERIFY("GMST: 220.388&deg;<br/>" == strings["gmst_deg"]);
-	QVERIFY("LMST: 217.384&deg;<br/>" == strings["lmst_deg"]);
-	QVERIFY("GHA&#9800;: +220&deg;23.3'<br/>" == strings["gmst_rad"]);
-	QVERIFY("SHA: +80&deg;36.5'<br/>" == strings["object_sha_rad"]);
-	QVERIFY("DEC: +38&deg;48.9'<br/>" == strings["object_dec_rad"]);
-	QVERIFY("GHA: +300&deg;59.8'<br/>" == strings["gha_rad"]);
-	QVERIFY("LHA: +297&deg;59.5'<br/>" == strings["lha_rad"]);
-	QVERIFY("Lat: N56&deg;12.5'<br/>" == strings["lat_rad"]);
-	QVERIFY("Lon: W3&deg;0.3'<br/>" == strings["lon_rad"]);
-	QVERIFY("Hc: +46&deg;24.7'<br/>" == strings["Hc_rad"]);
-	QVERIFY("Zn: +86&deg;17.0'<br/>" == strings["Zn_rad"]);
-#endif
+	performTest(QString("2020-01-13T07:12:34"), inputs, expects, false);
 }
 

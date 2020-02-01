@@ -25,6 +25,10 @@ using std::cos;
 using std::asin;
 using std::acos;
 
+#ifdef _DEBUG
+static void examineCalc(NavStarsCalculator& calc);
+#endif 
+
 NavStarsCalculator::NavStarsCalculator()
 {}
 
@@ -54,6 +58,9 @@ void NavStarsCalculator::execute()
 	zn_rad = ((sin(dec_rad) * cos(lat_rad)) - (cos(dec_rad) * sin(lat_rad) * cos(lha))) / cos(hc_rad);
 	if (lha < M_PI) 
 		zn_rad = (2*M_PI) - zn_rad;
+#ifdef _DEBUG
+	examineCalc(*this);
+#endif
 }
 
 QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString neg)
@@ -86,6 +93,28 @@ double NavStarsCalculator::wrap360(double d)
 	else if (d < 0.) d += 360.;
 	return d;
 }
+
+#ifdef _DEBUG
+#include <QDebug>
+static void
+examineCalc(NavStarsCalculator& calc)
+{
+	qWarning() << "getUTC: " << calc.getUTC();
+	qWarning() << "hcPrintable" << calc.hcPrintable();
+	qWarning() << "altAppPrintable" << calc.altAppPrintable();
+	qWarning() << "gmstDegreesPrintable" << calc.gmstDegreesPrintable();
+	qWarning() << "lmstDegreesPrintable" << calc.lmstDegreesPrintable();
+	qWarning() << "shaPrintable" << calc.shaPrintable();
+	qWarning() << "decPrintable" << calc.decPrintable();
+	qWarning() << "ghaPrintable" << calc.ghaPrintable();
+	qWarning() << "lhaPrintable" << calc.lhaPrintable();
+	qWarning() << "latPrintable" << calc.latPrintable();
+	qWarning() << "lonPrintable" << calc.lonPrintable();
+	qWarning() << "hcPrintable" << calc.hcPrintable();
+	qWarning() << "znPrintable" << calc.znPrintable();
+}
+#endif
+
 
 
 
