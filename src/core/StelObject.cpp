@@ -279,7 +279,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
 	// TRANSLATORS: Right ascension/Declination
-	const QString RADec = withDesignations ? QString("%1/%2").arg(QChar(0x03B1), QChar(0x03B4)) : qc_("RA/Dec", "celestial coordinate system");
+	const QString RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
 
 	if (flags&RaDecJ2000)
 	{
@@ -366,7 +366,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		// TRANSLATORS: Hour angle/Declination
-		const QString HADec = withDesignations ? QString("h/%1").arg(QChar(0x03B4)) : qc_("HA/Dec", "celestial coordinate system");
+		const QString HADec = withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system");
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
@@ -480,7 +480,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
 	// TRANSLATORS: Ecliptic longitude/latitude
-	const QString EqlLongLat = (withDesignations ? QString("%1/%2").arg(QChar(0x03BB), QChar(0x03B2)) :
+	const QString EqlLongLat = (withDesignations ? QString("&lambda;/&beta;") :
 						       qc_("Ecl. long./lat.", "celestial coordinate system") );
 
 	if (flags&EclipticCoordJ2000)
