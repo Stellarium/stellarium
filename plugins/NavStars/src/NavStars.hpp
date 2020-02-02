@@ -122,6 +122,9 @@ public slots:
 	void setUpperLimb(bool b) { upperLimb=b; }
 	bool getUpperLimb(void) const { return upperLimb; }
 
+	void setTabulatedDisplay(bool b) { tabulatedDisplay=b; }
+	bool getTabulatedDisplay(void) const { return tabulatedDisplay; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{
@@ -148,6 +151,13 @@ public slots:
 	//! For the currently select object add the extraString info
 	//! in a format that matches the Nautical Almanac.
 	void extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
+
+	//! Used to display the extraInfoStrings in standard "paired" lines (for example gha/dev)
+	void displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
+
+	//! Used to display the extraInfoStrings in tabulated form more suited to students of CN
+	//! as found when using Nautical Almanacs.
+	void displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
 
 	//! Given two QStrings return in a format consistent with the
 	//! property setting of "withTables".
@@ -178,6 +188,7 @@ private:
 	bool upperLimb;
 	bool highlightWhenVisible;
 	bool limitInfoToNavStars;
+	bool tabulatedDisplay;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;

@@ -252,6 +252,13 @@
               </property>
             </widget>
           </item>
+           <item>
+             <widget class="QCheckBox" name="tabulatedDisplay">
+               <property name="text">
+                 <string>Show information as a tabulated list</string>
+               </property>
+             </widget>
+           </item> 
           <item>
             <widget class="QCheckBox" name="upperLimb">
               <property name="text">

@@ -72,6 +72,7 @@ NavStars::NavStars()
 	, upperLimb(false)
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)	
+	, tabulatedDisplay(false)	
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -482,7 +483,39 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 			" (" + QString(qc_("upper limb", "the highest part of the Sun or Moon")) + ")" :
 			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
 	}
+
+	if (tabulatedDisplay)
+		displayTabulatedInfo(selectedObject, calc, extraText);
+	else
+		displayStandardInfo(selectedObject, calc, extraText);
+}
+
+
+void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
+{
+	QString temp;
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
+	temp = calc.ghaPrintable() + "/" + calc.decPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle of object"), temp));
 	
+	temp = calc.latPrintable() + "/" + calc.lonPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp));
+	temp = calc.hcPrintable() + "/" + calc.znPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Hc/Zn", "Navigation/horizontal coordinate system, calculated altitude and azimuth"), temp));
+}
+
+void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
+{
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC()));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -508,6 +541,7 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
 }
+
 
 QString NavStars::oneRowTwoCells(const QString& a, const QString& b)
 {

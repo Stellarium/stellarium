@@ -90,7 +90,11 @@ private:
     double lmst;
 public:
     QString lmstDegreesPrintable() {
-        return QString("%1%2").arg(QString::number(lmst, 'f', 3)).arg("&deg;");
+        QString sign = lmst < 0. ? "-" : "+";
+        return QString("%1%2%3")
+            .arg(sign)
+            .arg(QString::number(lmst, 'f', 3))
+            .arg("&deg;");
     }
 
 
@@ -149,7 +153,11 @@ public:
         return *this;
     }
     QString gmstDegreesPrintable() {
-        return QString("%1%2").arg(QString::number(gmst, 'f', 3)).arg("&deg;");
+        QString sign = gmst < 0. ? "-" : "+";
+        return QString("%1%2%3")
+            .arg(sign)
+            .arg(QString::number(gmst, 'f', 3))
+            .arg("&deg;");
     }
 
 private:

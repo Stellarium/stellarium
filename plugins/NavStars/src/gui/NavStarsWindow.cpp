@@ -81,6 +81,9 @@ void NavStarsWindow::createDialogContent()
 	ui->upperLimb->setChecked(ns->getUpperLimb());
 	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
 
+	ui->tabulatedDisplay->setChecked(ns->getTabulatedDisplay());
+	connect(ui->tabulatedDisplay, SIGNAL(stateChanged(int)), this, SLOT(setTabulatedDisplayEnabled(int)));
+
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
@@ -161,6 +164,12 @@ void NavStarsWindow::setUpperLimbEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ns->setUpperLimb(b);
+}
+
+void NavStarsWindow::setTabulatedDisplayEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setTabulatedDisplay(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
