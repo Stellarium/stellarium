@@ -659,7 +659,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				continue;
 			}
 		}
-		Q_ASSERT(parent);
+		Q_ASSERT(parent || englishName=="Sun");
 
 		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
