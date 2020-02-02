@@ -3,6 +3,7 @@ Jump to...
 * [Linux](#linux)
 * [Mac OS](#macos)
 * [Windows](#windows)
+* [RPi](#stellarium-on-raspberry-pi)
 * [Testing](#testing)
 
 # Linux
@@ -14,9 +15,87 @@ It is also possible to get the "in development" sourcecode using Git.  This may 
 ## Warning: 
 *Git versions of the Stellarium sourcecode are work in progress, and as such may produce an unstable program, may not work at all, or may not even compile.*
 
+## build dependencies
+
+Stellarium needs a few things to be installed on your system before you can build it. 
+
+ - [CMake](http://www.cmake.org/)  cmake 
+ Version 2.8.11 required for Stellarium 0.13.0 and above; Version 2.8.12 (3.1.3 better) required for Stellarium 0.13.3 and above.
+ - [GNU C Compiler](https://gcc.gnu.org/) gcc
+ Or compatible alternative (''clang'').
+ - [GNU C++ Compiler](https://gcc.gnu.org/) g++
+ Or compatible alternative (''clang++'').
+ - [OpenGL](https://www.opengl.org/) libgl1-mesa-dev
+ - [Zlib](http://www.zlib.net) zlib1g-dev 
+ 
+ - [Qt](http://www.qt.io/) >= 5.4.0 Packages: 
+   * qtdeclarative5-dev, qtdeclarative5-dev-tools,  libqt5declarative5, qtquick1-5-dev, qtquick1-qml-plugins needed to build Stellarium prior version 0.15.0
+   * qtscript5-dev, libqt5svg5-dev, qttools5-dev-tools, qttools5-dev, libqt5opengl5-dev, 
+   * libqt5serialport5-dev (Needed when Telescope Control plugin and/or GPS support enabled; See notes below.)
+   * GPS for Qt5: qtpositioning5-dev, libgps-dev (''Optional.''. Needed to build GPS support. )
+   * Multimedia for Qt5: qtmultimedia5-dev, libqt5multimedia5-plugins (''Optional.''. Needed to build audio support. )
+ - [gettext](https://www.gnu.org/software/gettext/) gettext (''Optional.'' Required for developers for extract of lines for translation. No required for users who want to test the application.)
+ - [Doxygen](http://doxygen.org/) doxygen (''Optional''. If you want to build the API documentation you will need this.)
+ - [Graphviz](http://www.graphviz.org/) graphviz (''Optional''. Required to build the API documentation and include fancy class diagrams.)
+ - [Git](https://git-scm.com) git to access the code repository
+
+### Linux users:
+If your distribution separates libraries into normal and development version, *make sure you also get the development ones* (e.g. in Debian/Ubuntu, the '''-dev''' packages).
+
+Debian/Ubuntu users can install all these dependencies in one go by running this command in a terminal:
+```
+ sudo apt-get install build-essential cmake zlib1g-dev libgl1-mesa-dev gcc g++ \
+      graphviz doxygen gettext git \
+      qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev \
+      libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
+      libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev \
+      libqt5positioning5 libqt5positioning5-plugins
+```
+
+On CentOS 7.4 (First attempt 2018/March! Unfinished yet. No libgps? -- sorry):
+```
+sudo yum install cmake gcc \
+     graphviz doxygen gettext git \
+     qt5-qttools-devel.x86_64 qt5-qtscript-devel.x86_64 
+     qt5-qtdeclarative-devel.x86_64 qt5-qtmultimedia-devel.x86_64 \
+     qt5-qtserialport-devel.x86_64 qt5-qtlocation-devel.x86_64 
+```
+LibINDI complains about some missing C99 flag. You may need to disable Telescope plugin in the CMakeFile.txt, or solve this and report your solution please. Also note that qDebug() reporting fails giving information about OpenGL on this system. 
+
+## Latest Qt Libraries for Linux distros which don't have them in the repos
+
+Stellarium tracks the recent Qt releases fairly closely and as such many Linux distribution repositories do not contain an up-to-date enough version for building Stellarium.  In the case of Ubuntu, the ''backports'' repository is often good enough, but there may be a need to install it "outside" your package manager.   Here's how.
+
+The Qt development team provides binary installers.  If you want to build Qt yourself from source, this is fine but it will take a ''long'' time.  We recommend the following procedure for manually installing the latest Qt (required: 5.4 or above at the moment):
+* Download the Linux/X11 package from [here](http://www.qt.io/download-open-source/).  Choose 32/64 bit as appropriate.
+* Install it in `/opt/Qt5`
+* When you want to build Stellarium, execute these commands to set up the environment so that the new Qt is used (for 64-bit package):
+```
+ export QTDIR=/opt/Qt5/5.4/gcc_64
+ export PATH=$QTDIR/bin:$PATH
+ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+```
+* After installation, you should write a script which sets `LD_LIBRARY_PATH` and then calls Stellarium:
+```
+ #!/bin/sh
+ export QTDIR=/opt/Qt5/5.4/gcc_64
+ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+ ./stellarium
+```
+
+Once these essentials are installed the compile should progress with no more problems.
+
+## Qt versions:
+
+* Stellarium 0.13.0 required Qt version 5.1.0 or above for building.
+* Stellarium 0.13.1 and 0.13.2 required Qt version 5.2.0 or above for building.
+* Stellarium 0.13.3 required Qt version 5.3.0 or above for building (Or, if you disable Scenery3D plugin you can reduce Qt version to 5.2.0).
+* Stellarium 0.15.2 required Qt version 5.3.0 or above (recommended: 5.4) for building.
+* Stellarium HEAD (as of V0.16.0) required Qt version 5.4.0 or above for building.
+
 ## Building latest versions
 
-First make sure all [build dependencies](Linux-build-dependencies.md) are met on your system.  Then decide whether you want to build a release version or follow the bleeding edge of development.
+First make sure all build dependencies are met on your system.  Then decide whether you want to build a release version or follow the bleeding edge of development.
 
 ### Getting the source code
 Open a terminal and cd to the directory where you wish to build Stellarium. 
@@ -421,6 +500,118 @@ If you have followed the above procedure the current git/cmake build will genera
 It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder "installers". So you can find in <tt>C:\Devel\stellarium\stellarium\installers</tt>
 
 Run the program generated and Stellarium will be installed in program files\stellarium or wherever you select and place an icon on the desktop.
+
+# Stellarium on Raspberry Pi
+
+The Raspberry Pi is a very popular family of single-board computers for many kinds of programming experiments and hardware tinkering projects. A new open-source graphics driver has been created by Eric Anholt, which enables you to run Stellarium with hardware acceleration on the multi-core models 2 and 3. Don't expect a super computer, but you should get typically over 10 frames per seconds, which should be enough for many applications where you don't want to waste too much energy. (E.g. solar/battery powered observatory.) I get 18fps on a 1400x1050 screen with Satellites not shown. 
+
+For the current Raspbian ("Buster", 2019), just 
+ - activate the "OpenGL Driver" in <code>raspi-config</code>, Advanced options, Full KMS. 
+ - install the [build requirements](Linux-build-dependencies.md) and 
+ - follow the [building instructions for Linux](Compilation-on-Linux.md).
+
+For previous Raspbian ("Stretch" as of early 2018), you must 
+ - activate the "Experimental OpenGL Driver" in <code>raspi-config</code>
+ - build <code>libdrm</code> and <code>Mesa 17</code> from sources (see below)
+ - install the [build requirements](Linux-build-dependencies.md) and 
+ - follow the [building instructions for Linux](Compilation-on-Linux.md).
+
+Alternatively, you can run Ubuntu Mate. On version 16.04.3 which has Mesa 17.0.7, I followed https://ubuntu-mate.community/t/tutorial-activate-opengl-driver-for-ubuntu-mate-16-04/7094 to activate VC4, and tried Stellarium 0.16.1 from our ppa. You don't have to compile anything yourself!
+
+I (AF) found this preferable with Stretch 2018-0627 because Mesa would not configure for me.
+
+The following seemed to work on Pi3B+ model 
+http://www.raspberryconnect.com/gamessoftware/item/314-trying_out_opengl_on_raspberry_pi_3
+
+2019-08: Ubuntu Mate 18.04.2 LTS also works. However, the arm64 version seems not yet polished. Stellarium shows nice 8-14fps in 1680x1050 but frequently crashes. 
+
+
+## First Impressions, limitations
+The new driver seems to work pretty well in many cases, but some hardware limitations persist.
+
+* You cannot show your own landscapes or 3D sceneries with any textures larger than 2048x2048 pixels. Also the built-in "Sterngarten" scenery will not work. 
+* The Scenery3D plugin should be used with Perspective Projection only. All other projections require too much texture memory. 
+* It seems that some bug prevents OBJ planets from being rendered. Keep this option disabled!
+* If you want higher framerate, consider disabling the Satellites plugin, or at least think about reducing number of satellites to the ones you are critically interested in. Also, don't load too many minor bodies.  
+* The DSS layer seems to work for short periods, then the X server fails. It may have to do with limitations of texture memory. You can try to press Ctrl-Alt-Backspace to restart it, but sometimes you will have to reboot if the graphics failed.
+
+***
+
+## Building the external libraries
+
+The following instructions which are required for Raspbian "Stretch" have been taken from Eric Anholt's site (https://github.com/anholt/mesa/wiki/VC4-complete-Raspbian-upgrade) on February 24, 2018. Fortunately we don't need to build a new kernel!  
+
+
+### libdrm
+
+Until Raspbian gets its libdrm updated, we need to build it ourselves.
+
+    sudo apt-get install \
+        xutils-dev libpthread-stubs0-dev \
+        automake autoconf libtool git
+    git clone git://anongit.freedesktop.org/mesa/drm
+    cd drm
+    ./autogen.sh \
+        --prefix=/usr \
+        --libdir=/usr/lib/arm-linux-gnueabihf
+    make
+    sudo make install
+
+### Mesa
+    sudo apt-get install \
+        flex bison python-mako \
+        libxcb-dri3-dev libxcb-dri2-0-dev \
+        libxcb-glx0-dev libx11-xcb-dev \
+        libxcb-present-dev libxcb-sync-dev \
+        libxshmfence-dev \
+        libxdamage-dev libxext-dev libxfixes-dev \
+        x11proto-dri2-dev x11proto-dri3-dev \
+        x11proto-present-dev x11proto-gl-dev \
+        libexpat1-dev libudev-dev gettext \
+        libxrandr-dev
+    
+    git clone git://anongit.freedesktop.org/mesa/mesa
+    cd mesa
+    ./autogen.sh \
+        --prefix=/usr \
+        --libdir=/usr/lib/arm-linux-gnueabihf \
+        --with-gallium-drivers=vc4 \
+        --with-dri-drivers= \
+        --with-egl-platforms=x11,drm
+    make
+    sudo make install
+
+## Notes for building Stellarium
+
+You may want to install a swap file, otherwise you may run out of virtual memory when compiling
+[https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
+
+Then, make sure to install the [build requirements](Linux-build-dependencies.md) and follow the [building instructions for Linux](Compilation-on-Linux.md).
+
+If you are doing the compile on your Pi, follow the Linux instructions but use the command
+<pre>
+nice make -j4
+</pre>
+Otherwise, you may lose control of the pi with all cores busy. Or run with 
+<pre>
+make -j3
+</pre>
+to keep one core free for other tasks.
+
+## Raspberry Pi Model 4B
+
+2019-10-10: Stellarium works great out of the box. Install Raspbian, clone the GIT repo, install Linux build dependencies, and 
+
+    mkdir build; cd build
+    cmake -DCMAKE_BUILD_TYPE="Release" ../stellarium
+    make -j4 
+
+On a model with 4GB you don't need a larger swap file. Within 16 minutes, Stellarium was built, with about 17fps at FullHD resolution. Without satellites, 22fps. 
+
+2020-01-29:
+On an aarch64 build, we found (#940) you need to convince MESA to run without issues:
+
+`MESA_GL_VERSION_OVERRIDE=3.0 MESA_GLSL_VERSION_OVERRIDE=130 stellarium`
 
 # Testing
 
