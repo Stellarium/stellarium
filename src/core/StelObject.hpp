@@ -56,20 +56,21 @@ public:
 		Distance		= 0x00000040, //!< Info about an object's distance
 		Size			= 0x00000080, //!< Info about an object's size
 		Velocity		= 0x00000100, //!< Info about object's velocity
-		Extra			= 0x00000200, //!< Derived class-specific extra fields
-		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
-		GalacticCoord		= 0x00001000, //!< The galactic position
-		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
-		OtherCoord		= 0x00004000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
-		ObjectType		= 0x00008000, //!< The type of the object (star, planet, etc.)
-		EclipticCoordJ2000	= 0x00010000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
-		EclipticCoordOfDate	= 0x00020000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00040000, //!< Three-letter constellation code (And, Boo, Cas, ...)
-		SiderealTime		= 0x00080000, //!< Mean and Apparent Sidereal Time
-		RTSTime			= 0x00100000, //!< Time of rise, transit and set of celestial object
-		Script                  = 0x00200000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x00400000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		ProperMotion		= 0x00000200, //!< Annual proper motion (for stars) or or hourly motion (for Planets)
+		Extra			= 0x00000400, //!< Derived class-specific extra fields
+		HourAngle		= 0x00000800, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00001000, //!< The absolute magnitude
+		GalacticCoord		= 0x00002000, //!< The galactic position
+		SupergalacticCoord	= 0x00004000, //!< The supergalactic position
+		OtherCoord		= 0x00008000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
+		ObjectType		= 0x00010000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000	= 0x00020000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate	= 0x00040000, //!< The ecliptic position (of date)
+		IAUConstellation        = 0x00080000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		SiderealTime		= 0x00100000, //!< Mean and Apparent Sidereal Time
+		RTSTime			= 0x00200000, //!< Time of rise, transit and set of celestial object
+		Script                  = 0x00400000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x00800000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
 		NoFont			= 0x01000000,
 		PlainText		= 0x02000000  //!< Strip HTML tags from output
 	};
@@ -77,7 +78,7 @@ public:
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
-									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
+									   Distance|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString

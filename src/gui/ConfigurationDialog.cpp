@@ -567,6 +567,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Distance;
 	if (ui->checkBoxVelocity->isChecked())
 		flags |= StelObject::Velocity;
+	if (ui->checkBoxProperMotion->isChecked())
+		flags |= StelObject::ProperMotion;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
 	if (ui->checkBoxExtra->isChecked())
@@ -885,9 +887,10 @@ void ConfigurationDialog::saveAllSettings()
 		conf->setValue("flag_show_radecj2000",		static_cast<bool>(flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
-		conf->setValue("flag_show_altaz",		static_cast<bool>(flags &  StelObject::AltAzi));
+		conf->setValue("flag_show_altaz",		static_cast<bool>(flags & StelObject::AltAzi));
 		conf->setValue("flag_show_distance",		static_cast<bool>(flags & StelObject::Distance));
 		conf->setValue("flag_show_velocity",		static_cast<bool>(flags & StelObject::Velocity));
+		conf->setValue("flag_show_propermotion",	static_cast<bool>(flags & StelObject::ProperMotion));
 		conf->setValue("flag_show_size",		static_cast<bool>(flags & StelObject::Size));
 		conf->setValue("flag_show_extra",		static_cast<bool>(flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
@@ -1495,6 +1498,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
 	ui->checkBoxVelocity->setChecked(flags & StelObject::Velocity);
+	ui->checkBoxProperMotion->setChecked(flags & StelObject::ProperMotion);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);

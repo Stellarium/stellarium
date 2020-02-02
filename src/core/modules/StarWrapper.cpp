@@ -273,6 +273,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
+	if (flags&ProperMotion)
+	{
+		float dx = 0.1f*s->getDx0();
+		float dy = 0.1f*s->getDx1();
+		float pa = std::atan2(dx, dy)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
+		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
+		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
 	if (flags&Extra)
 	{
 		if (s->getPlx())
@@ -324,17 +337,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
 			}
 		}
-
-		float dx = 0.1f*s->getDx0();
-		float dy = 0.1f*s->getDx1();
-		float pa = 90.f - std::atan2(dy, dx)*180.f/M_PIf;
-		if (pa<0)
-			pa += 360.f;
-
-		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
-		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
-		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	StelObject::postProcessInfoString(str, flags);

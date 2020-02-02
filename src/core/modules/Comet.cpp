@@ -240,6 +240,27 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		}
 	}
 
+	if (flags&ProperMotion)
+	{
+		Vec3d equPos=getEquinoxEquatorialPos(core);
+		double dec_equ, ra_equ;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
+		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+		const double currentJD=core1->getJD();
+		core1->setJD(currentJD-StelCore::JD_HOUR);
+		core1->update(0);
+		Vec3d equPosPrev=getEquinoxEquatorialPos(core1);
+		double dec_equPrev, ra_equPrev;
+		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
+		core1->setJD(currentJD);
+		core1->update(0);
+		const double deltaEq=equPos.angle(equPosPrev);
+		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
+		if (pa<0) pa += 2.*M_PI;
+		oss << QString("%1: %2 %3 %4%5").arg(q_("Hourly motion"), StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0)) << "<br/>";
+		oss << QString("%1: d&alpha;=%2 d&delta;=%3").arg(q_("Hourly motion"), StelUtils::radToDmsStr(ra_equ-ra_equPrev), StelUtils::radToDmsStr(dec_equ-dec_equPrev)) << "<br/>";
+	}
+
 	if (flags&Extra)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
