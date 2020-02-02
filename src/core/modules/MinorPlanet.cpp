@@ -293,9 +293,9 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		core1->setJD(currentJD);
 		core1->update(0);
 		const double deltaEq=equPos.angle(equPosPrev);
-		double pa=atan2(ra_equPrev-ra_equ, dec_equ-dec_equPrev); // position angle: From North clockwise!
+		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
 		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5").arg(q_("Hourly motion"), StelUtils::radToDmsStr(deltaEq), q_("towards"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0)) << "<br/>";
+		oss << QString("%1: %2 %3 %4%5").arg(q_("Hourly motion"), StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0)) << "<br/>";
 		oss << QString("%1: d&alpha;=%2 d&delta;=%3").arg(q_("Hourly motion"), StelUtils::radToDmsStr(ra_equ-ra_equPrev), StelUtils::radToDmsStr(dec_equ-dec_equPrev)) << "<br/>";
 	}
 
