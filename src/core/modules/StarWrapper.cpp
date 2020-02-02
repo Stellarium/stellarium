@@ -277,7 +277,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		float dx = 0.1f*s->getDx0();
 		float dy = 0.1f*s->getDx1();
-		float pa = 90.f - std::atan2(dy, dx)*180.f/M_PIf;
+		float pa = std::atan2(dx, dy)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;
 		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
