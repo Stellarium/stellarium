@@ -1,3 +1,9 @@
+Jump to...
+
+* [Linux](#linux)
+* [Mac OS](#macos)
+* [Windows](#windows)
+
 # Linux
 
 Each time Stellarium is released, the source code is released in Github's packaging system.  Building source code that is released in this way should give you a working copy of Stellarium which is functionally identical to the binaries for that release.  
