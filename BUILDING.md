@@ -3,6 +3,7 @@ Jump to...
 * [Linux](#linux)
 * [Mac OS](#macos)
 * [Windows](#windows)
+* [Testing](#testing)
 
 # Linux
 
@@ -420,4 +421,12 @@ If you have followed the above procedure the current git/cmake build will genera
 It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder "installers". So you can find in <tt>C:\Devel\stellarium\stellarium\installers</tt>
 
 Run the program generated and Stellarium will be installed in program files\stellarium or wherever you select and place an icon on the desktop.
+
+# Testing
+
+There are several test programs in the repository. To build them, define `-DCMAKE_ENABLE_TESTING=ON`, or configure cmake in QCreator's Projects tab.
+
+Then configure a Debug build and select a test... application to be executed.
+
+Please try to test your changes before committing to master. Our automated Travis builds will signal failure when tests don't complete.
 
