@@ -873,8 +873,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
-		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		// FIXME: Try Pluto as MinorPlanet! It has its own pos_func and just no KeplerOrbit. So what? (Just fix getSiderealPeriod())
+		// have one exception: Pluto - as long as we use a special function for calculation of Pluto's orbit.
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type=="sednoid" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" || type == "interstellar object") && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
