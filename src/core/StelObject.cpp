@@ -905,31 +905,30 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 {
 	QStringList list;
 	QMultiMap<InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
-	  while (i != extraInfoStrings.constEnd()) {
-		  if (i.key() & flags)
-		  {
-			  QString val=i.value();
-			  // TODO: Maybe exclude DebugAid flags from Release builds?
-			  if (flags&DebugAid)
-				  val.prepend("DEBUG: ");
-			  // For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
-			  list.prepend(val);
-		  }
-		  ++i;
-	  }
-
+	while (i != extraInfoStrings.constEnd())
+	{
+		if (i.key() & flags)
+		{
+			QString val=i.value();
+			// TODO: Maybe exclude DebugAid flags from Release builds?
+			if (flags&DebugAid)
+				val.prepend("DEBUG: ");
+			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
+			list.prepend(val);
+		}
+		++i;
+	}
 	return list;
 }
 
 void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 {
 	QMultiMap<InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
-	  while (i != extraInfoStrings.end()) {
-		  if (i.key() & flags)
-		  {
+	while (i != extraInfoStrings.end())
+	{
+		if (i.key() & flags)
 			i=extraInfoStrings.erase(i);
-		  }
-		  else
+		else
 			++i;
-	  }
+	}
 }
