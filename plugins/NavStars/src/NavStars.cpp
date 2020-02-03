@@ -445,7 +445,6 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 {
 	double jd, jde, x = 0., y = 0.;
 	QString extraText = "", englishName = selectedObject->getEnglishName();
-	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 
 	jd  = core->getJD();
 	jde = core->getJDE();
