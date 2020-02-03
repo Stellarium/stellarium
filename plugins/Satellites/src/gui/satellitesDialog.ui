@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
+    <width>750</width>
     <height>491</height>
    </rect>
   </property>
@@ -779,7 +779,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="1" column="0" colspan="2">
             <widget class="QCheckBox" name="userCheckBox">
              <property name="toolTip">
               <string>Do not update (or remove on update) the selected satellite(s)</string>

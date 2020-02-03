@@ -160,6 +160,9 @@ public slots:
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
 
+	//! @return a localized HTML description of the references for the current sky culture
+	QString getCurrentSkyCultureHtmlReferences() const;
+
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display
 	QString getCurrentSkyCultureHtmlDescription() const;

@@ -53,7 +53,7 @@ On Ubuntu 18.04 and 19.04 the following should work (it uses less filespace than
 
 ```
 sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
-texlive-latex-extra texlive-pictures biber make
+texlive-latex-extra texlive-pictures texlive-fonts-recommended biber make
 ```
 
 

@@ -281,9 +281,45 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 		}
 	}
 
+	description.append(getCurrentSkyCultureHtmlReferences());
 	description.append(getCurrentSkyCultureHtmlClassification());
 
 	return description;
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
+{
+	QString reference = "";
+	QString referencePath = StelFileMgr::findFile("skycultures/" + getCurrentSkyCultureID() + "/reference.fab");
+	if (!referencePath.isEmpty())
+	{
+		QFile refFile(referencePath);
+		if (!refFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(referencePath);
+			return reference;
+		}
+		QString record;
+		// Allow empty and comment lines where first char (after optional blanks) is #
+		QRegExp commentRx("^(\\s*#.*|\\s*)$");
+		reference = QString("<h3>%1</h3><ul>").arg(q_("References"));
+		while(!refFile.atEnd())
+		{
+			record = QString::fromUtf8(refFile.readLine()).trimmed();
+			if (commentRx.exactMatch(record))
+				continue;
+
+			QStringList ref = record.split(QRegExp("\\|"), QString::KeepEmptyParts);
+			// 1 - URID; 2 - Reference; 3 - URL (optional)
+			if (ref.at(2).isEmpty())
+				reference.append(QString("<li>%1</li>").arg(ref.at(1)));
+			else
+				reference.append(QString("<li><a href='%2' class='external text' rel='nofollow'>%1</a></li>").arg(ref.at(1), ref.at(2)));
+		}
+		refFile.close();
+		reference.append("</ul>");
+	}
+	return reference;
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory) const

@@ -261,7 +261,7 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 {
 	QList<Vec3d> highlights;
 	highlights.clear();
-	highlightLabelIDs.clear();
+	clearHighlightsButtonPressed(); // Enable fool protection
 	int fontSize = StelApp::getInstance().getScreenFontSize();
 	HighlightMgr* hlMgr = GETSTELMODULE(HighlightMgr);
 	QString color = StelUtils::vec3fToHtmlColor(hlMgr->getColor());
