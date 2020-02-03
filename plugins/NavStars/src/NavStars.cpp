@@ -259,6 +259,9 @@ void NavStars::loadConfiguration(void)
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	highlightWhenVisible = conf->value("highlight_when_visible", false).toBool();
 	limitInfoToNavStars  = conf->value("limit_info_to_nav_stars", false).toBool();
+	tabulatedDisplay = conf->value("tabulated_display", false).toBool();
+	upperLimb = conf->value("upper_limb", false).toBool();
+
 	conf->endGroup();
 }
 
@@ -271,6 +274,8 @@ void NavStars::saveConfiguration(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("highlight_when_visible", highlightWhenVisible);
 	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
+	conf->setValue("tabulated_display", tabulatedDisplay);
+	conf->setValue("upper_limb", upperLimb);
 
 	conf->endGroup();
 }
