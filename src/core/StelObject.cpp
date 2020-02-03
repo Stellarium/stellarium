@@ -927,8 +927,9 @@ void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 	  while (i != extraInfoStrings.end()) {
 		  if (i.key() & flags)
 		  {
-			  extraInfoStrings.remove(i.key(), i.value());
+			i=extraInfoStrings.erase(i);
 		  }
-		  ++i;
+		  else
+			++i;
 	  }
 }
