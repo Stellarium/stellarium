@@ -104,7 +104,7 @@ void TestNavStars::TestAgainstAlmancVega()
 	expects["lmstDegreesPrintable"] = "+217.832&deg;";
 	expects["shaPrintable"] = "+80&deg;36.5'";
 	expects["decPrintable"] = "+38&deg;48.9'";
-	expects["ghaPrintable"] = "+300&deg;59.8'&deg;";
+	expects["ghaPrintable"] = "+300&deg;59.8'";
 	expects["lhaPrintable"] = "+298&deg;26.4'";
 	expects["latPrintable"] = "N56&deg;11.1'";
 	expects["lonPrintable"] = "W2&deg;33.4'";

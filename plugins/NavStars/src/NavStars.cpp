@@ -531,9 +531,9 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
-	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable()));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 

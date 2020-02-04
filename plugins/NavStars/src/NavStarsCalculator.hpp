@@ -141,7 +141,7 @@ private:
     double gha_rad;
 public:
     QString ghaPrintable() {
-        return (radToDm(gha_rad) + "&deg;");
+        return (radToDm(gha_rad));
     }
 
 private:
