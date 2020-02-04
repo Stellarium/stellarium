@@ -719,8 +719,8 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 			if (btShowNebulaeBackground==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
-				QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+				QPixmap pxmapOn(":/graphicGui/btNebulaeBackground-on.png");
+				QPixmap pxmapOff(":/graphicGui/btNebulaeBackground-off.png");
 				btShowNebulaeBackground = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSO_Textures");
 			}
 			getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
@@ -748,8 +748,8 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 			if (btShowBookmarks==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
-				QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
+				QPixmap pxmapOn(":/graphicGui/btBookmarks-on.png");
+				QPixmap pxmapOff(":/graphicGui/btBookmarks-off.png");
 				btShowBookmarks = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
 			}
 			getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");

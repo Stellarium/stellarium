@@ -234,10 +234,10 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
 	buttonBar = new BottomStelBar(this,
-				      QPixmap(":/graphicGui/btbg-left.png"),
-				      QPixmap(":/graphicGui/btbg-right.png"),
-				      QPixmap(":/graphicGui/btbg-middle.png"),
-				      QPixmap(":/graphicGui/btbg-single.png"));
+				      QPixmap(":/graphicGui/btbgLeft.png"),
+				      QPixmap(":/graphicGui/btbgRight.png"),
+				      QPixmap(":/graphicGui/btbgMiddle.png"),
+				      QPixmap(":/graphicGui/btbgSingle.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
