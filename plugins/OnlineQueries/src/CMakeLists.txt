@@ -11,6 +11,8 @@ LINK_DIRECTORIES(${BUILD_DIR}/src)
 SET(ONLINEQUERIES_SRCS
      OnlineQueries.hpp
      OnlineQueries.cpp
+     StarnamesSearcher.hpp
+     StarnamesSearcher.cpp
      gui/OnlineQueriesDialog.hpp
      gui/OnlineQueriesDialog.cpp
 )
@@ -26,7 +28,7 @@ SET(ONLINEQUERIES_RES ../resources/OnlineQueries.qrc)
 QT5_ADD_RESOURCES(ONLINEQUERIES_RES_CXX ${ONLINEQUERIES_RES})
 
 ADD_LIBRARY(OnlineQueries-static STATIC ${ONLINEQUERIES_SRCS} ${ONLINEQUERIES_RES_CXX} ${ONLINEQUERIES_UIS_H})
-TARGET_LINK_LIBRARIES(OnlineQueries-static Qt5::Core Qt5::Widgets)
+TARGET_LINK_LIBRARIES(OnlineQueries-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(OnlineQueries-static PROPERTIES OUTPUT_NAME "OnlineQueries")
 SET_TARGET_PROPERTIES(OnlineQueries-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins OnlineQueries-static)

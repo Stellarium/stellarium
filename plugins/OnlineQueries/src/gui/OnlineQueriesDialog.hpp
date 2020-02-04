@@ -23,6 +23,7 @@
 
 #include "StelDialog.hpp"
 #include "ui_onlineQueriesDialog.h"
+#include "StarnamesSearcher.hpp"
 
 class OnlineQueries;
 
@@ -39,6 +40,10 @@ public slots:
 protected:
 	void createDialogContent();
 
+private slots:
+	void queryStarnames();    //!< Connect to a button that triggers information query
+	void queryWikipedia();    //!< Connect to a button that triggers information query
+	void onStarnameStatusChanged(); //!< To be connected
 
 private:
 	//! Connects the UI to update events from the OnlineQueries
@@ -50,6 +55,10 @@ private:
 	QVector<QAbstractButton*> shortcutButtons;
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
+
+	StarnamesSearcher starnamesSearcher;
+	StarnamesLookupReply *starnamesLookupReply;
+	QString starnamesResult;
 };
 
 #endif

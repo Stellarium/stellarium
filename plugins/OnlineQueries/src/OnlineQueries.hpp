@@ -100,6 +100,10 @@ private:
 	Vec3f textColor; // Probably not required
 	int fontSize;    // Probably not required
 	StelButton* toolbarButton;
+
+	QString ptolemyUrl;
+	QString wikipediaUrl;
+	QString ancientSkiesUrl;
 };
 
 

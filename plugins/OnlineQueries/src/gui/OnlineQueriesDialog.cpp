@@ -22,9 +22,12 @@
 #include "OnlineQueries.hpp"
 
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "Star.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "StarnamesSearcher.hpp"
 
 #include <QLineEdit>
 #include <QStandardItemModel>
@@ -85,6 +88,8 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//setToInitialValues();
 	updateTextBrowser();
+	connect(ui->ptolemaicPushButton, SIGNAL(clicked()), this, SLOT(queryStarnames()));
+	connect(ui->wikipediaPushButton, SIGNAL(clicked()), this, SLOT(queryWikipedia()));
 }
 
 void OnlineQueriesDialog::createUpdateConnections()
@@ -102,4 +107,62 @@ void OnlineQueriesDialog::updateTextBrowser()
 }
 
 
+void OnlineQueriesDialog::queryStarnames()
+{
+	ui->onlineQueriesTextBrowser->setHtml("<h1>Starnames</h1><p>WIP...</p>");
+
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+	if (obj->getType()!=STAR_TYPE)
+		return;
+
+	QString hipStr=obj->getID();
+	if (!hipStr.startsWith("HIP"))
+		return;
+
+	int hipNr=hipStr.split(' ').at(1).toInt();
+
+	StarnamesLookupReply* reply=starnamesSearcher.lookup(hipNr);
+	//StarnamesLookupReply* reply=starnamesSearcher.lookup(44699);
+
+	onStarnameStatusChanged();
+	connect(reply, SIGNAL(statusChanged()), this, SLOT(onStarnameStatusChanged()));
+
+
+}
+
+// Called when the current simbad query status changes
+void OnlineQueriesDialog::onStarnameStatusChanged()
+{
+	Q_ASSERT(starnamesLookupReply);
+	QString info;
+	if (starnamesLookupReply->getCurrentStatus()==StarnamesLookupReply::StarnamesLookupErrorOccured)
+	{
+		info = QString("%1: %2").arg(q_("Simbad Lookup Error")).arg(starnamesLookupReply->getErrorString());
+		//ui->starnamesStatusLabel->setText(info);
+		ui->onlineQueriesTextBrowser->setHtml("<p>No result</p>");
+	}
+
+	if (starnamesLookupReply->getCurrentStatus()==StarnamesLookupReply::StarnamesLookupFinished)
+	{
+		starnamesResult = starnamesLookupReply->getResult();
+	}
+
+	if (starnamesLookupReply->getCurrentStatus()!=StarnamesLookupReply::StarnamesLookupQuerying)
+	{
+		disconnect(starnamesLookupReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+		delete starnamesLookupReply;
+		starnamesLookupReply=Q_NULLPTR;
+	}
+}
+
+
+
+void OnlineQueriesDialog::queryWikipedia()
+{
+	ui->onlineQueriesTextBrowser->setHtml("<h1>Wikipedia</h1><p>Not yet supported.</p>");
+}
 
