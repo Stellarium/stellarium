@@ -35,6 +35,22 @@ NavStarsCalculator::NavStarsCalculator()
 NavStarsCalculator::~NavStarsCalculator()
 {}
 
+NavStarsCalculator::NavStarsCalculator(const NavStarCalculatorDegreeInputs* ip)
+{
+	setUTC(ip->utc);
+	setLatDeg(ip->lat);
+	setLonDeg(ip->lon);
+	setJd(ip->jd);
+	setJde(ip->jde);
+	setGmst(ip->gmst);
+	setRaRad(DEG2RAD(ip->ra));
+	setDecRad(DEG2RAD(ip->dec));
+	setAzRad(DEG2RAD(ip->az));
+	setAltRad(DEG2RAD(ip->alt));
+	setAzAppRad(DEG2RAD(ip->az_app));
+	setAltAppRad(DEG2RAD(ip->alt_app));
+}
+
 NavStarsCalculator& 
 NavStarsCalculator::setUTC(const QString& s)
 {
@@ -94,26 +110,33 @@ double NavStarsCalculator::wrap360(double d)
 	return d;
 }
 
-#ifdef _DEBUG
-#include <QDebug>
-static void
-examineCalc(NavStarsCalculator& calc)
-{
-	qWarning() << "getUTC: " << calc.getUTC();
-	qWarning() << "hcPrintable" << calc.hcPrintable();
-	qWarning() << "altAppPrintable" << calc.altAppPrintable();
-	qWarning() << "gmstDegreesPrintable" << calc.gmstDegreesPrintable();
-	qWarning() << "lmstDegreesPrintable" << calc.lmstDegreesPrintable();
-	qWarning() << "shaPrintable" << calc.shaPrintable();
-	qWarning() << "decPrintable" << calc.decPrintable();
-	qWarning() << "ghaPrintable" << calc.ghaPrintable();
-	qWarning() << "lhaPrintable" << calc.lhaPrintable();
-	qWarning() << "latPrintable" << calc.latPrintable();
-	qWarning() << "lonPrintable" << calc.lonPrintable();
-	qWarning() << "hcPrintable" << calc.hcPrintable();
-	qWarning() << "znPrintable" << calc.znPrintable();
-}
+#ifndef CRLF
+#ifdef WIN32
+#define CRLF "\r\n"
+#else
+#define CRLF "\n"
 #endif
+#endif
+
+QMap<QString, QString> NavStarsCalculator::printable()
+{
+	QMap<QString, QString> rval;
+	rval["getUTC"] = getUTC();
+	rval["hcPrintable"] = hcPrintable();
+	rval["altAppPrintable"] = altAppPrintable();
+	rval["gmstDegreesPrintable"] = gmstDegreesPrintable();
+	rval["lmstDegreesPrintable"] = lmstDegreesPrintable();
+	rval["shaPrintable"] = shaPrintable();
+	rval["decPrintable"] = decPrintable();
+	rval["ghaPrintable"] = ghaPrintable();
+	rval["lhaPrintable"] = lhaPrintable();
+	rval["latPrintable"] = latPrintable();
+	rval["lonPrintable"] = lonPrintable();
+	rval["hcPrintable"] = hcPrintable();
+	rval["znPrintable"] = znPrintable();
+	return rval;
+}
+
 
 
 

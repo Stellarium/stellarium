@@ -43,8 +43,6 @@
 
 #include "planetsephems/sidereal_time.h"
 
-class NavStarsCalculatorDataProviderImpl;
-
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
 	return new NavStars();
@@ -79,6 +77,12 @@ NavStars::NavStars()
 	conf = StelApp::getInstance().getSettings();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 	mainWindow = new NavStarsWindow();
+	permittedObjects.push_back(QStringLiteral("Sun"));
+	permittedObjects.push_back(QStringLiteral("Moon"));
+	permittedObjects.push_back(QStringLiteral("Venus"));
+	permittedObjects.push_back(QStringLiteral("Mars"));
+	permittedObjects.push_back(QStringLiteral("Jupiter"));
+	permittedObjects.push_back(QStringLiteral("Saturn"));
 }
 
 NavStars::~NavStars()
@@ -420,12 +424,7 @@ void NavStars::addExtraInfo(StelCore *core)
 		{
 			doExtraInfo = false;
 			QString type = selectedObject->getType();
-			QString englishName = selectedObject->getEnglishName();			
-			if (englishName == "Sun" || englishName == "Moon" || type == QStringLiteral("Planet"))
-			{
-				doExtraInfo = true;
-			}
-			else {
+			if(selectedObject->getType() == QStringLiteral("Star")) {
 				for (QVector<StelObjectP>::const_iterator itor = stars.begin();
 					itor != stars.end();
 					itor++)
@@ -436,6 +435,14 @@ void NavStars::addExtraInfo(StelCore *core)
 						doExtraInfo = true;
 						break;
 					}
+				}
+			}
+			else
+			{
+				QString englishName = selectedObject->getEnglishName();
+				if (isPermittedObject(englishName))
+				{
+					doExtraInfo = true;
 				}
 			}
 		}
@@ -500,7 +507,7 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -525,9 +532,9 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable() + extraText));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstDegreesPrintable()));
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable()));	
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstDegreesPrintable()));
+		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -546,7 +553,6 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
 }
 
-
 QString NavStars::oneRowTwoCells(const QString& a, const QString& b)
 {
 	QString rval;
@@ -559,3 +565,14 @@ QString NavStars::oneRowTwoCells(const QString& a, const QString& b)
 	return rval;
 }
 
+bool NavStars::isPermittedObject(const QString& s)
+{
+	QVector<QString>::const_iterator itor = permittedObjects.begin();
+	while (itor != permittedObjects.end())
+	{
+		if (*itor == s)
+			return true;
+		++itor;
+	}
+	return false;
+}

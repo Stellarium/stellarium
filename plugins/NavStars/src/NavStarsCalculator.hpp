@@ -41,12 +41,19 @@ file (section [NavigationalStars]).
 
 #include <cmath>
 
+#include <QMap>
 #include <QString>
 
-//#include "StelUtils.hpp"
-
+#ifndef DEG2RAD
 #define DEG2RAD(x) ((x * M_PI) / 180.)
+#endif
+
+#ifndef RAD2DEG
 #define RAD2DEG(x) ((x * 180.) / M_PI)
+#endif
+
+//! Forward declaration for UT inputter.
+struct NavStarCalculatorDegreeInputs;
 
 //! @class NavStarsCalculator
 //! @author Andy Kirkham
@@ -55,6 +62,7 @@ class NavStarsCalculator
 {
 public:	
     NavStarsCalculator();
+    NavStarsCalculator(const NavStarCalculatorDegreeInputs* ip);
     ~NavStarsCalculator();
 
     //! Calculate intermediates.
@@ -86,8 +94,11 @@ public:
         return utc;
     }
 
+    QMap<QString, QString> printable();
+
 private:
     double lmst;
+    double lmst_rad;
 public:
     QString lmstDegreesPrintable() {
         QString sign = lmst < 0. ? "-" : "+";
@@ -96,7 +107,9 @@ public:
             .arg(QString::number(lmst, 'f', 3))
             .arg("&deg;");
     }
-
+    QString lmstPrintable() {
+        return radToDm(lmst_rad);
+    }
 
 private:
     double sha_rad;    
@@ -113,22 +126,11 @@ public:
     }
 
 private:
-    double gmst_rad;
-
-private:
-    double lmst_rad;
-public:
-    QString lmstPrintable() {
-        return radToDm(lmst_rad);
-    }
-
-private:
     double hc_rad;
 public:
     QString hcPrintable() {
         return radToDm(hc_rad);
     }
-
 
 private:
     double zn_rad;
@@ -146,6 +148,7 @@ public:
 
 private:
     double gmst;
+    double gmst_rad;
 public:
     double getGmst() { return gmst;  }
     NavStarsCalculator& setGmst(double d) {
@@ -158,6 +161,9 @@ public:
             .arg(sign)
             .arg(QString::number(gmst, 'f', 3))
             .arg("&deg;");
+    }
+    QString gmstPrintable() {
+        return radToDm(gmst_rad);
     }
 
 private:
@@ -213,7 +219,6 @@ public:
         return radToDm(az_app_rad);
     }
 
-
 private:
 	double alt_app_rad;
 public:
@@ -266,6 +271,25 @@ public:
         sha_rad = (2. * M_PI) - ra_rad;
         return *this;
     }
+};
+
+// When exactly does code to support Unit Testing become intrusive?
+// I've done worse than this before so it's not all that bad.
+// See specialised constructor above.
+struct NavStarCalculatorDegreeInputs
+{
+    QString utc;
+    double ra;
+    double dec;
+    double lat;
+    double lon;
+    double jd;
+    double jde;
+    double gmst;
+    double az;
+    double alt;
+    double az_app;
+    double alt_app;
 };
 
 #endif /* NAVSTARSCALCULATOR_HPP */

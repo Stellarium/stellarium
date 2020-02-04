@@ -166,6 +166,8 @@ public slots:
 	//! @return QString The representation of the extraString info.
     QString oneRowTwoCells(const QString& a, const QString& b);
 
+	bool isPermittedObject(const QString& s);
+
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void 	saveSettings() { saveConfiguration(); }
@@ -189,6 +191,8 @@ private:
 	bool highlightWhenVisible;
 	bool limitInfoToNavStars;
 	bool tabulatedDisplay;
+
+	QVector<QString> permittedObjects;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
