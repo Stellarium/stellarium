@@ -371,7 +371,9 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();
+	//! decrease artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void reduceStarsMagnitudeLimit();
 
 signals:

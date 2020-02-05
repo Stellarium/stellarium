@@ -53,42 +53,38 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		// TODO: Define license info (+separate license info for artwork?) and use it in description of skyculture like for plugins and scripts
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
-		StelSkyCulture::BOUNDARIES boundaries = StelSkyCulture::NONE;
-		if (boundariesStr.contains("iau", Qt::CaseInsensitive))
-			boundaries = StelSkyCulture::IAU;
-		else if (boundariesStr.contains("generic", Qt::CaseInsensitive))
+		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
+			{ "none",    StelSkyCulture::NONE},
+			{ "iau",     StelSkyCulture::IAU},
+			{ "generic", StelSkyCulture::IAU}, // deprecated, add warning below
+			{ "own",     StelSkyCulture::OWN},
+		};
+		StelSkyCulture::BOUNDARIES boundaries = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::NONE);
+		if (boundariesStr.contains("generic", Qt::CaseInsensitive))
 		{
 			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
-			boundaries = StelSkyCulture::IAU;
 		}
-		else if (boundariesStr.contains("own", Qt::CaseInsensitive))
-			boundaries = StelSkyCulture::OWN;
-		else
-		{
-			if (!boundariesStr.contains("none", Qt::CaseInsensitive))
+		else if (!boundariesMap.contains(boundariesStr.toLower()))
 			{
 				qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
+				qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
 			}
-			boundaries = StelSkyCulture::NONE;
-		}
 		dirToNameEnglish[dir].boundaries = boundaries;
 		// Use 'traditional' as default
 		QString classificationStr = pd.value("info/classification", "traditional").toString();
-		StelSkyCulture::CLASSIFICATION classification=StelSkyCulture::INCOMPLETE;
-		if (classificationStr.contains("ethnographic", Qt::CaseInsensitive))
-			classification = StelSkyCulture::ETHNOGRAPHIC;
-		else if (classificationStr.contains("traditional", Qt::CaseInsensitive))
-			classification = StelSkyCulture::TRADITIONAL;
-		else if (classificationStr.contains("historical", Qt::CaseInsensitive))
-			classification = StelSkyCulture::HISTORICAL;
-		else if (classificationStr.contains("single", Qt::CaseInsensitive))
-			classification = StelSkyCulture::SINGLE;
-		else if (classificationStr.contains("personal", Qt::CaseInsensitive))
-			classification = StelSkyCulture::PERSONAL;
-		else if (!classificationStr.contains("incomplete", Qt::CaseInsensitive))
+		static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
+			{ "traditional",  StelSkyCulture::TRADITIONAL},
+			{ "historical",   StelSkyCulture::HISTORICAL},
+			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
+			{ "single",       StelSkyCulture::SINGLE},
+			{ "personal",     StelSkyCulture::PERSONAL},
+			{ "incomplete",   StelSkyCulture::INCOMPLETE},
+		};
+		StelSkyCulture::CLASSIFICATION classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
+		if (!classificationMap.keys().contains(classificationStr.toLower()))
 		{
 			qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
-			classification = StelSkyCulture::INCOMPLETE;
+			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";
 		}
 		dirToNameEnglish[dir].classification = classification;
 	}	

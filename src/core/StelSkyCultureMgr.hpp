@@ -88,9 +88,9 @@ public:
 	QString author;
 	//! The license
 	QString license;
-	//! Type of the boundaries (-1=none;0=generic;1=own)
+	//! Type of the boundaries (enum)
 	BOUNDARIES boundaries;
-	//! Classification of sky culture (1=scientific;2=traditional;3=single;4=personal)
+	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
 };
 

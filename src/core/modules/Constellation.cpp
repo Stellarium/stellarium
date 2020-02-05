@@ -69,14 +69,10 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
-	QString abb;
-	istr >> abb >> numberOfSegments;
+	// allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
+	istr >> abbreviation >> numberOfSegments;
 	if (istr.status()!=QTextStream::Ok)
 		return false;
-
-	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	//abbreviation = abb.toUpper();
-	abbreviation=abb;
 
 	constellation = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
@@ -85,8 +81,6 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		istr >> HP;
 		if(HP == 0)
 		{
-			// TODO: why is this delete commented?
-			// delete[] constellation;
 			return false;
 		}
 
@@ -94,12 +88,11 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		if (!constellation[i])
 		{
 			qWarning() << "Error in Constellation " << abbreviation << ": can't find star HIP" << HP;
-			// TODO: why is this delete commented?
-			// delete[] constellation;
 			return false;
 		}
 	}
 
+	// Name tag should go to constellation's centre of gravity
 	XYZname.set(0.,0.,0.);
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
@@ -267,7 +260,7 @@ bool Constellation::checkVisibility() const
 
 QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
 
