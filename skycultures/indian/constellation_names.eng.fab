@@ -27,10 +27,26 @@
 # For column 3: We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
 
 #################
-# Some Nakshatra-s.
+# Nakshatra-s.
 #################
-# Whether we show a given Nakṣatra as an asterism or as a constellation depends on whether we can associate the corresponding asterism with related and intuitive constellation art. We show Nakṣatra-s associated with a single star as a star, rather than as a constellation. 
+# We show Nakṣatra-s associated with a single star as a star, rather than as a constellation.
+# From @gzotti: "if some Nakshatras may receive sky art, all Nakshatras should be coded as constellations. When we do the change mentioned above, those will then be separated (or just marked inside the constellation file)." 
 
+Aśv	"Aśvinī"	_("Divine physician twins")
+Bhar	"Bharanī"	_("Bearer")
+Kṛt	"Kṛttikā"	_("Cutter")
+PVas	"Punarvasū"	_("Wealth-restorer")
+Puṣ	"Puṣya"	_("Nourisher")
+Magh	"Maghā"	_("Bountiful")
+# E. फल् to bear fruit, Unādi aff. उनन् and गुक् aug.
+PPhā	"Pūrva phālgunī"	_("Former Fruitful")
+UPhā	"Uttara phālgunī"	_("Latter Fruitful")
+Viś	"Viśākhā"	_("Well branched")
+Anur	"Anurādhā"	_("Following Rādhā")
+Jyeṣ	"Jyeṣṭhā"	_("Elder")
+PAṣ	"Pūrva aṣādhā"	_("Former invincible one")
+UAṣ	"Uttara aṣādhā"	_("Latter invincible one")
+Dhan	"Dhaniṣṭhā"	_("Wealthiest")
 # Provenance for art - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted elsewhere in this doc). 
 Mṛg	"Mṛgaśiras"	_("Deer's head")
 # Associated with the snakes, as per taittirIya bhrAhmaNa.
@@ -40,6 +56,7 @@ Mūl	"Mūla"	_("Root")
 Śra	"Śravaṇa"	_("Ear")
 PBhā	"Pūrva bhādrapada"	_("The first of the blessed feet")
 UBhā	"Uttara bhādrapada"	_("The second of the blessed feet")
+
 #################
 # Some Rāśis
 #################
@@ -70,3 +87,7 @@ Shim	"Shiṁśumāra"	_("Dolphin")
 ṛkṣa	"ṛkṣa"	_("Ursa Major")
 # Provenance - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted above). Amarakosha says:  मृगशीर्षं मृगशिरस्तस्मिन्नेवाग्रहायणी। इल्वलास् तच्छिरोदेशे तारका निवसन्ति याः॥. Some modern dictionaries thence identify iNvakA-s with the head of Orion, but given its identification with the arrow, it is more likely to be Orion's belt as illustrated by Tilak. 
 Inv	"Invakā"	_("Arrow")
+# Provenance for the below: Purana-s and kAvya-s.
+Sapt	"Saptarṣi"	_("7 Sages")
+# Provenance: kaumAra nakShatra or khachakra nyAsa.
+śara	"śaravaṇa"	_("Reed forest")
