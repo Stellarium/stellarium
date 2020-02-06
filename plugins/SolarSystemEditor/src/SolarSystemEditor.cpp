@@ -550,6 +550,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -734,6 +735,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
@@ -1104,7 +1106,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//TODO: Move to constructor?
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
-	// ell_orbit is used for moons (distances in km) while kepler_orbit is used for minor bodies around the sun.
+	// ell_orbit is used for moons (distances in km) while kepler_orbit (comet_orbit) is used for minor bodies around the sun.
 	static const QStringList orbitalElementsKeys = {
 		"coord_func",
 		"orbit_ArgOfPericenter",
