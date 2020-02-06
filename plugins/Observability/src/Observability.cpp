@@ -214,7 +214,7 @@ void Observability::init()
 	addAction("actionShow_Observability_ConfigDialog",
 	          N_("Observability"),
 	          N_("Observability configuration window"),
-	          configDialog, "visible");
+		  configDialog, "visible", ""); // Allow assign shortkey
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
