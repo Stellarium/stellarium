@@ -54,10 +54,12 @@ after_build:
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
-  - path: installers\*-win32.exe
-    name: installer-win32
-  - path: installers\*-win64.exe
-    name: installer-win64
+  - path: installers\*.exe
+    name: installer
+#  - path: installers\*-win32.exe
+#    name: installer-win32
+#  - path: installers\*-win64.exe
+#    name: installer-win64
 
 notifications:
 - provider: Email
