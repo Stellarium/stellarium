@@ -65,7 +65,7 @@ deploy:
   - provider: Webhook
     url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
     authorization:
-      secure: uUXtHmbf5kJinxrkhA48zWrMclYVjnH6mZqaJtfctLr0Nw3QK5vjbZ7xsIkWox4A
+      secure: nOBnc+Det/8J6M1SCb6eY3M2uldET8TFC5toTHO1MttPJt42lBAXlLNA39ObUEko
 
 notifications:
 - provider: Email
