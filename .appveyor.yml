@@ -61,6 +61,15 @@ artifacts:
 #  - path: installers\*-win64.exe
 #    name: installer-win64
 
+# scripts to run before deployment
+before_deploy:
+
+# scripts to run after deployment
+after_deploy:
+
+# to run your custom scripts instead of provider deployments
+deploy_script:
+
 deploy:
 - provider: Webhook
   url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
