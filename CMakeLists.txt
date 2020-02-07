@@ -62,7 +62,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
