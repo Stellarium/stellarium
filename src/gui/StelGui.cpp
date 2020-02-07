@@ -953,8 +953,8 @@ void StelGui::setFlagShowDSSButton(bool b)
 			if (btShowDSS==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
-				QPixmap pxmapOff(":/graphicGui/btToastSurvey-off");
+				QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
+				QPixmap pxmapOff(":/graphicGui/btDSS-off");
 				btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
 			}
 			getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
@@ -979,8 +979,8 @@ void StelGui::setFlagShowHiPSButton(bool b)
 			if (btShowHiPS==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btSurveys-on.png");
-				QPixmap pxmapOff(":/graphicGui/btSurveys-off.png");
+				QPixmap pxmapOn(":/graphicGui/btHIPS-on.png");
+				QPixmap pxmapOff(":/graphicGui/btHIPS-off.png");
 				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
 			}
 			getButtonBar()->addButton(btShowHiPS, "040-nebulaeGroup");
