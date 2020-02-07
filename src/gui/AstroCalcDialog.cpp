@@ -433,8 +433,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
-	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
-	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));	
+
+	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
+	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));
 	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
 	if (moduleMgr.isPluginLoaded("Quasars"))
 	{

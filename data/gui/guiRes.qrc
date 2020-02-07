@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/graphicGui">
-        <file>backspace-white.png</file>
-        <file>backspace.png</file>
         <file>bbtAstroCalc-off.png</file>
         <file>bbtAstroCalc-on.png</file>
         <file>bbtHelp-off.png</file>
@@ -40,8 +38,8 @@
         <file>btConstellationLabels-on.png</file>
         <file>btConstellationLines-off.png</file>
         <file>btConstellationLines-on.png</file>
-        <file>btNebulaeBackground-off.png</file>
-        <file>btNebulaeBackground-on.png</file>
+        <file>btDSS-off.png</file>
+        <file>btDSS-on.png</file>
         <file>btEclipticGrid-off.png</file>
         <file>btEclipticGrid-on.png</file>
         <file>btEquatorialGrid-off.png</file>
@@ -62,6 +60,10 @@
         <file>btGotoSelectedObject-on.png</file>
         <file>btGround-off.png</file>
         <file>btGround-on.png</file>
+        <file>btHIPS-off.png</file>
+        <file>btHIPS-on.png</file>
+        <file>btNebulaeBackground-off.png</file>
+        <file>btNebulaeBackground-on.png</file>
         <file>btNebula-off.png</file>
         <file>btNebula-on.png</file>
         <file>btNightView-off.png</file>
@@ -73,8 +75,6 @@
         <file>btScriptRun-on.png</file>
         <file>btScriptStop-off.png</file>
         <file>btScriptStop-on.png</file>
-        <file>btHIPS-off.png</file>
-        <file>btHIPS-on.png</file>
         <file>btTimeForward-off.png</file>
         <file>btTimeForward-on.png</file>
         <file>btTimeNow-off.png</file>
@@ -84,52 +84,17 @@
         <file>btTimeRealtime-on.png</file>
         <file>btTimeRewind-off.png</file>
         <file>btTimeRewind-on.png</file>
-        <file>btDSS-off.png</file>
-        <file>btDSS-on.png</file>
-        <file>checkbox-checked.png</file>
-        <file>checkbox-partial.png</file>
-        <file>checkbox-unchecked.png</file>
-        <file>closeButton-hover.png</file>
-        <file>closeButton.png</file>
-        <file>filesave.png</file>
-        <file>folder.png</file>
-        <file>glow.png</file>
-        <file>glow32x32.png</file>
-        <file>HorizontalAutoHideOff.png</file>
-        <file>HorizontalAutoHideOn.png</file>
-        <file>map-pointeur.png</file>
-        <file>normalHtml.css</file>
-        <file>normalStyle.css</file>
-        <file>nv_btTimeRealtime-off.png</file>
-        <file>nv_checkbox-checked.png</file>
-        <file>nv_checkbox-partial.png</file>
-        <file>nv_checkbox-unchecked.png</file>
-        <file>nv_closeButton-hover.png</file>
-        <file>nv_closeButton.png</file>
-        <file>nv_filesave.png</file>
-        <file>nv_folder.png</file>
-        <file>nv_radio-checked.png</file>
-        <file>nv_radio-unchecked.png</file>
-        <file>nv_resize.png</file>
-        <file>nv_searchBoxBackground.png</file>
-        <file>nv_searchButtonImage.png</file>
+        <file>miscGlow32x32.png</file>
+        <file>miscGlow.png</file>
+        <file>miscHorAutoHide-off.png</file>
+        <file>miscHorAutoHide-on.png</file>
+        <file>miscVertAutoHide-fff.png</file>
+        <file>miscVertAutoHide-on.png</file>
+        <file>miscWorldMap.png</file>
         <file>nv_spindown.png</file>
         <file>nv_spinleft.png</file>
         <file>nv_spinright.png</file>
         <file>nv_spinup.png</file>
-        <file>radio-checked.png</file>
-        <file>radio-unchecked.png</file>
-        <file>resize.png</file>
-        <file>searchBoxBackground.png</file>
-        <file>searchButtonImage.png</file>
-        <file>spindown-pressed.png</file>
-        <file>spindown.png</file>
-        <file>spinleft-pressed.png</file>
-        <file>spinleft.png</file>
-        <file>spinright-pressed.png</file>
-        <file>spinright.png</file>
-        <file>spinup-pressed.png</file>
-        <file>spinup.png</file>
         <file>tabDSO.png</file>
         <file>tabEclipses.png</file>
         <file>tabEphemeris.png</file>
@@ -154,8 +119,42 @@
         <file>tabTools.png</file>
         <file>tabTransit.png</file>
         <file>tabWhatsUp.png</file>
-        <file>VerticalAutoHideOff.png</file>
-        <file>VerticalAutoHideOn.png</file>
-        <file>world.png</file>
+        <file>uibtBackspace.png</file>
+        <file>uibtClose.png</file>
+        <file>uibtDownload-nv.png</file>
+        <file>uibtDownload.png</file>
+        <file>uibtFolder-nv.png</file>
+        <file>uibtFolder.png</file>
+        <file>uibtSave.png</file>
+        <file>uibtSearch-nv.png</file>
+        <file>uibtSearch.png</file>
+        <file>uibtSpindown.png</file>
+        <file>uibtSpindown-pressed.png</file>
+        <file>uibtSpinleft.png</file>
+        <file>uibtSpinleft-pressed.png</file>
+        <file>uibtSpinright.png</file>
+        <file>uibtSpinright-pressed.png</file>
+        <file>uibtSpinup.png</file>
+        <file>uibtSpinup-pressed.png</file>
+        <file>uibtTrash.png</file>
+        <file>uieBackspaceInputButton.png</file>
+        <file>uieCheckbox-checked-nv.png</file>
+        <file>uieCheckbox-checked.png</file>
+        <file>uieCheckbox-partial-nv.png</file>
+        <file>uieCheckbox-partial.png</file>
+        <file>uieCheckbox-unchecked-nv.png</file>
+        <file>uieCheckbox-unchecked.png</file>
+        <file>uieCloseButton-hover-nv.png</file>
+        <file>uieCloseButton-hover.png</file>
+        <file>uieCloseButton-nv.png</file>
+        <file>uieCloseButton.png</file>
+        <file>uieMapPointer.png</file>
+        <file>uieRadio-checked-nv.png</file>
+        <file>uieRadio-checked.png</file>
+        <file>uieRadio-unchecked-nv.png</file>
+        <file>uieRadio-unchecked.png</file>
+        <file>uieSave-nv.png</file>
+        <file>uieSearchBoxBackground-nv.png</file>
+        <file>uieSearchBoxBackground.png</file>
     </qresource>
 </RCC>
