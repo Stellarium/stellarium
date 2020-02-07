@@ -11,7 +11,7 @@ skip_branch_with_pr: true
 # build Configuration
 configuration: Release
 # set clone depth
-clone_depth: 5
+#clone_depth: 5
 # clone directory
 clone_folder: c:\stellarium
 # environment variables
@@ -54,8 +54,10 @@ after_build:
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
-  - path: installers\*.exe
-    name: installer
+  - path: installers\*-win32.exe
+    name: installer-win32
+  - path: installers\*-win64.exe
+    name: installer-win64
 
 notifications:
 - provider: Email
