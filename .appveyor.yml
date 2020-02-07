@@ -40,7 +40,7 @@ before_build:
 
     mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
 
-    cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+    cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
@@ -54,11 +54,8 @@ after_build:
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
-  - path: c:\stellarium\build-%qtver%-%qtbin%\installer\*.exe
+  - path: installer\*.exe
     name: installer
-
-test_script:
-- cmd: ctest --output-on-failure
 
 notifications:
 - provider: Email
