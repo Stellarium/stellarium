@@ -61,11 +61,11 @@ artifacts:
 #  - path: installers\*-win64.exe
 #    name: installer-win64
 
-deploy:
-  - provider: Webhook
-    url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
-    authorization:
-      secure: H9LO2gVMd45sDzDiubRSWhE1itV0RHP3smW/SB6jz2Rn1cCXYYIvfC/yo8ipuP1lcM2ywkYJAtofPXMbJ3ofSA==
+#deploy:
+#  - provider: Webhook
+#    url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
+#    authorization:
+#      secure: H9LO2gVMd45sDzDiubRSWhE1itV0RHP3smW/SB6jz2Rn1cCXYYIvfC/yo8ipuP1lcM2ywkYJAtofPXMbJ3ofSA==
 
 notifications:
 - provider: Email
