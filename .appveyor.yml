@@ -53,6 +53,10 @@ after_build:
 
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
+artifacts:
+  - path: c:\stellarium\build-%qtver%-%qtbin%\installer\*.exe
+    name: installer
+
 test_script:
 - cmd: ctest --output-on-failure
 
