@@ -54,7 +54,7 @@ after_build:
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
-  - path: installer\*.exe
+  - path: installers\*.exe
     name: installer
 
 notifications:
