@@ -4,7 +4,7 @@ version: '{branch}-{build}'
 branches:
   # whitelist
   only:
-    - appveyor-experiments
+  - appveyor-experiments
 
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
@@ -17,30 +17,30 @@ clone_folder: c:\stellarium
 # environment variables
 environment:
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      platform: x64
-      qtver: 5.9
-      qtbin: msvc2015_64
-      msvcname: Visual Studio 14 2015 Win64 
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      platform: Win32
-      qtver: 5.9
-      qtbin: msvc2015
-      msvcname: Visual Studio 14 2015
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: x64
+    qtver: 5.9
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015 Win64 
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: Win32
+    qtver: 5.9
+    qtbin: msvc2015
+    msvcname: Visual Studio 14 2015
 
 before_build:
-  - cmd: >-
-      mkdir stellarium-%qtver%-%qtbin%
+- cmd: >-
+    mkdir stellarium-%qtver%-%qtbin%
     
-      set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+    set INNSPATH=C:\Program Files (x86)\Inno Setup 5
     
-      set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
+    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
 
-      cd c:\stellarium
+    cd c:\stellarium
 
-      mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
+    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
 
-      cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+    cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
@@ -48,14 +48,14 @@ build:
   verbosity: minimal
   
 after_build:
-  - cmd: >-
-      cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
+- cmd: >-
+    cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
 
-      cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+    cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
-  - path: installers\*.exe
-    name: installer
+- path: installers\*.exe
+  name: installer
 
 # scripts to run before deployment
 before_deploy:
@@ -65,16 +65,16 @@ after_deploy:
 
 # deployment
 deploy:
-  - provider: Webhook
-    url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
-    authorization:
-      secure: H9LO2gVMd45sDzDiubRSWhE1itV0RHP3smW/SB6jz2Rn1cCXYYIvfC/yo8ipuP1lcM2ywkYJAtofPXMbJ3ofSA==
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
+  authorization:
+    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug
 
 notifications:
-  - provider: Email
-    to:
-      - mcardinot@gmail.com
-      - alex.v.wolf@gmail.com
-    on_build_success: false
-    on_build_failure: true
-    on_build_status_changed: true
+- provider: Email
+  to:
+  - mcardinot@gmail.com
+  - alex.v.wolf@gmail.com
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
