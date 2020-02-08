@@ -166,6 +166,8 @@ Oculars::Oculars()
 	, actionOcularDecrement(Q_NULLPTR)
 	, guiPanel(Q_NULLPTR)
 	, guiPanelFontSize(12)
+	, textColor(0.)
+	, lineColor(0.)
 	, actualFOV(0.)
 	, initialFOV(0.)
 	, flagInitFOVUsage(false)
@@ -173,7 +175,7 @@ Oculars::Oculars()
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
 	, flagScalingFOVForCCD(true)
-	, flagShowResolutionCriterions(false)
+	, flagShowResolutionCriteria(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 	, flagShowCcdCropOverlay(false)
@@ -313,6 +315,8 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
+	settings->setValue("text_color", StelUtils::vec3fToStr(textColor));
+	settings->setValue("line_color", StelUtils::vec3fToStr(lineColor));
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -574,6 +578,8 @@ void Oculars::init()
 
 		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
+		textColor=StelUtils::strToVec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
+		lineColor=StelUtils::strToVec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -589,7 +595,7 @@ void Oculars::init()
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
-		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
+		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
@@ -1474,7 +1480,7 @@ void Oculars::paintCCDBounds()
 		if (ccd)
 		{
 			StelPainter painter(projector);
-			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
+			painter.setColor(lineColor);
 			painter.setFont(font);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 
@@ -1701,7 +1707,7 @@ void Oculars::paintCrosshairs()
 	}
 	// Draw the lines
 	StelPainter painter(projector);
-	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+	painter.setColor(lineColor);
 	QPoint a, b;
 	int hw = qRound(length);
 	QTransform ch_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-polarAngle);
@@ -1721,7 +1727,7 @@ void Oculars::paintTelrad()
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);		
 		// StelPainter drawing
 		StelPainter painter(projector);		
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.setColor(lineColor);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
 		const float pixelsPerRad = projector->getPixelPerRadAtCenter(); // * params.devicePixelsPerPixel;
@@ -1752,7 +1758,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.setColor(lineColor);
 		reticleTexture->bind();
 		/* Why it need?
 		int textureHeight;
@@ -1810,8 +1816,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	if (getFlagShowContour())
 	{
-		// TODO: Make it configurable?
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.setColor(lineColor);
 		painter.drawCircle(centerScreen[0], centerScreen[1], static_cast<float>(inner));
 	}
 
@@ -1833,7 +1838,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
+		painter.setColor(lineColor);
 		if (core->getFlipHorz() && !core->getFlipVert())
 			cardinalsMirroredTexture->bind();
 		else
@@ -1866,7 +1871,7 @@ void Oculars::paintText(const StelCore* core)
 	Lens *lens = selectedLens();
 
 	// set up the color and the GL state
-	painter.setColor(0.8f, 0.48f, 0.f, 1.f);
+	painter.setColor(textColor);
 	painter.setBlending(true);
 
 	// Get the X & Y positions, and the line height
@@ -2511,17 +2516,17 @@ bool Oculars::getFlagUseSemiTransparency() const
 	return flagSemiTransparency;
 }
 
-void Oculars::setFlagShowResolutionCriterions(const bool b)
+void Oculars::setFlagShowResolutionCriteria(const bool b)
 {
-	flagShowResolutionCriterions = b;
-	settings->setValue("show_resolution_criterions", b);
+	flagShowResolutionCriteria = b;
+	settings->setValue("show_resolution_criteria", b);
 	settings->sync();
-	emit flagShowResolutionCriterionsChanged(b);
+	emit flagShowResolutionCriteriaChanged(b);
 }
 
-bool Oculars::getFlagShowResolutionCriterions() const
+bool Oculars::getFlagShowResolutionCriteria() const
 {
-	return flagShowResolutionCriterions;
+	return flagShowResolutionCriteria;
 }
 
 void Oculars::setCcdCropOverlaySize(int size) {
