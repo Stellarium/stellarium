@@ -59,6 +59,7 @@ artifacts:
 
 # scripts to run before deployment
 before_deploy:
+- ps: Install-Module -Name SignPath
 
 # scripts to run after deployment
 after_deploy:
