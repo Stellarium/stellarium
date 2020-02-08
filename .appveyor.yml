@@ -67,9 +67,8 @@ after_deploy:
 deploy:
   - provider: Webhook
     url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
-    headers:
-      authorization:
-        secure: H9LO2gVMd45sDzDiubRSWhE1itV0RHP3smW/SB6jz2Rn1cCXYYIvfC/yo8ipuP1lcM2ywkYJAtofPXMbJ3ofSA==
+    authorization:
+      secure: H9LO2gVMd45sDzDiubRSWhE1itV0RHP3smW/SB6jz2Rn1cCXYYIvfC/yo8ipuP1lcM2ywkYJAtofPXMbJ3ofSA==
 
 notifications:
   - provider: Email
