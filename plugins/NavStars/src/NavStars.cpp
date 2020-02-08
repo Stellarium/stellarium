@@ -469,7 +469,7 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 		.setJde(jde)
 		.setGmst(get_mean_sidereal_time(jd, jde));
 
-	StelUtils::rectToSphe(&x, &y, selectedObject->getEquinoxEquatorialPosApparent(core));	
+	StelUtils::rectToSphe(&x, &y, selectedObject->getEquinoxEquatorialPos(core));	
 	calc.setRaRad(x)
 		.setDecRad(y);
 
