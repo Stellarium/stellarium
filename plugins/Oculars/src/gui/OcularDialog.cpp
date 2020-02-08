@@ -312,8 +312,8 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");
 	connectBoolProperty(ui->cardinalsCheckBox,		"Oculars.flagShowCardinals");
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
-	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color");
-	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color");
+	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "General/text_color", "Oculars");
+	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "General/line_color", "Oculars");
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));

@@ -167,7 +167,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler->setTextWidth(maxWidth);
 
 	// Retrieve value from setting directly, because at this stage the plugin has not parsed it yet.
-	float scale=lineHeight*plugin->appSettings()->value("arrow_scale", 1.5).toDouble();
+	float scale=lineHeight*plugin->getSettings()->value("arrow_scale", 1.5).toDouble();
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
 	QPixmap prevArrow = pa.scaledToHeight(scale, Qt::SmoothTransformation);

@@ -121,24 +121,26 @@ class Oculars : public StelModule
 
 public:
 	Oculars();
-	virtual ~Oculars();
-	static QSettings* appSettings();
+	virtual ~Oculars() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
-	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual void update(double) {;}
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
 
 public slots:
+	//! return the plugin's own settings (these do not include the settings from the main application)
+	//! This implementation return a singleton (class static) QSettings object.
+	virtual QSettings* getSettings() Q_DECL_OVERRIDE;
 	//! Update the ocular, telescope and sensor lists after the removal of a member.
 	//! Necessary because of the way model/view management in the OcularDialog
 	//! is implemented.
