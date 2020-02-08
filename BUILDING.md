@@ -507,14 +507,14 @@ The Raspberry Pi is a very popular family of single-board computers for many kin
 
 For the current Raspbian ("Buster", 2019), just 
  - activate the "OpenGL Driver" in <code>raspi-config</code>, Advanced options, Full KMS. 
- - install the [build requirements](Linux-build-dependencies.md) and 
- - follow the [building instructions for Linux](Compilation-on-Linux.md).
+ - install the [build requirements](#build-dependencies) and 
+ - follow the [building instructions for Linux](#linux).
 
 For previous Raspbian ("Stretch" as of early 2018), you must 
  - activate the "Experimental OpenGL Driver" in <code>raspi-config</code>
  - build <code>libdrm</code> and <code>Mesa 17</code> from sources (see below)
- - install the [build requirements](Linux-build-dependencies.md) and 
- - follow the [building instructions for Linux](Compilation-on-Linux.md).
+ - install the [build requirements](#build-dependencies) and 
+ - follow the [building instructions for Linux](#linux).
 
 Alternatively, you can run Ubuntu Mate. On version 16.04.3 which has Mesa 17.0.7, I followed https://ubuntu-mate.community/t/tutorial-activate-opengl-driver-for-ubuntu-mate-16-04/7094 to activate VC4, and tried Stellarium 0.16.1 from our ppa. You don't have to compile anything yourself!
 
@@ -586,7 +586,7 @@ Until Raspbian gets its libdrm updated, we need to build it ourselves.
 You may want to install a swap file, otherwise you may run out of virtual memory when compiling
 [https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
 
-Then, make sure to install the [build requirements](Linux-build-dependencies.md) and follow the [building instructions for Linux](Compilation-on-Linux.md).
+Then, make sure to install the [build requirements](#lbuild-dependencies) and follow the [building instructions for Linux](#linux).
 
 If you are doing the compile on your Pi, follow the Linux instructions but use the command
 <pre>
