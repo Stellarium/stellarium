@@ -1421,7 +1421,8 @@ void Oculars::initializeActivationActions()
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "enableCrosshairs", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "enableCCD");
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "enableTelrad", "Ctrl+B");
-	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Oculars configuration window"), ocularDialog, "visible", ""); // Allow assign shortkey
+	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Toggle Oculars configuration window"), ocularDialog, "visible", ""); // Allow assign shortkey
+	addAction("actionShow_Oculars_GUI", ocularsGroup, N_("Toggle Oculars button bar"), "flagGuiPanelEnabled", ""); // Allow assign shortkey
 	// Select next telescope via keyboard
 	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()", "");
 	// Select previous telescope via keyboard
