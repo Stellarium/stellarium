@@ -11,7 +11,7 @@ skip_branch_with_pr: true
 # build Configuration
 configuration: Release
 # set clone depth
-#clone_depth: 5
+clone_depth: 5
 # clone directory
 clone_folder: c:\stellarium
 # environment variables
@@ -49,6 +49,8 @@ build:
   
 after_build:
 - cmd: >-
+    appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+    
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
 
     cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
@@ -58,13 +60,13 @@ artifacts:
   name: installer
 
 # deployment
-deploy:
-- provider: Webhook
-  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
-  authorization:
-    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
-  on:
-    ARTIFACT_SIGNING_ENABLED: true
+#deploy:
+#- provider: Webhook
+#  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
+#  authorization:
+#    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
+#  on:
+#    ARTIFACT_SIGNING_ENABLED: true
 
 notifications:
 - provider: Email
