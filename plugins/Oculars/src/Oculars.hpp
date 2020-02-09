@@ -92,7 +92,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagGuiPanelEnabled          READ getFlagGuiPanelEnabled          WRITE enableGuiPanel NOTIFY flagGuiPanelEnabledChanged)
 	Q_PROPERTY(bool flagInitFOVUsage             READ getFlagInitFovUsage             WRITE setFlagInitFovUsage NOTIFY flagInitFOVUsageChanged) 
 	Q_PROPERTY(bool flagInitDirectionUsage       READ getFlagInitDirectionUsage       WRITE setFlagInitDirectionUsage NOTIFY flagInitDirectionUsageChanged) 
-	Q_PROPERTY(bool flagShowResolutionCriterions READ getFlagShowResolutionCriterions WRITE setFlagShowResolutionCriterions NOTIFY flagShowResolutionCriterionsChanged)
+	Q_PROPERTY(bool flagShowResolutionCriteria   READ getFlagShowResolutionCriteria   WRITE setFlagShowResolutionCriteria  NOTIFY flagShowResolutionCriteriaChanged)
 	Q_PROPERTY(bool flagRequireSelection   READ getFlagRequireSelection    WRITE setFlagRequireSelection    NOTIFY flagRequireSelectionChanged) 
 	Q_PROPERTY(bool flagLimitMagnitude     READ getFlagLimitMagnitude      WRITE setFlagLimitMagnitude      NOTIFY flagLimitMagnitudeChanged) 
 	Q_PROPERTY(bool flagHideGridsLines     READ getFlagHideGridsLines      WRITE setFlagHideGridsLines      NOTIFY flagHideGridsLinesChanged)
@@ -109,9 +109,11 @@ class Oculars : public StelModule
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
+	Q_PROPERTY(Vec3f textColor             READ getTextColor               WRITE setTextColor               NOTIFY textColorChanged)
+	Q_PROPERTY(Vec3f lineColor             READ getLineColor               WRITE setLineColor               NOTIFY textColorChanged)
 
-	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay WRITE setFlagShowCcdCropOverlay NOTIFY flagShowCcdCropOverlayChanged)
-	Q_PROPERTY(int ccdCropOverlaySize        READ getCcdCropOverlaySize        WRITE setCcdCropOverlaySize        NOTIFY ccdCropOverlaySizeChanged)
+	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay  NOTIFY flagShowCcdCropOverlayChanged)
+	Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY ccdCropOverlaySizeChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -119,24 +121,26 @@ class Oculars : public StelModule
 
 public:
 	Oculars();
-	virtual ~Oculars();
-	static QSettings* appSettings();
+	virtual ~Oculars() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
-	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual void update(double) {;}
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
 
 public slots:
+	//! return the plugin's own settings (these do not include the settings from the main application)
+	//! This implementation return a singleton (class static) QSettings object.
+	virtual QSettings* getSettings() Q_DECL_OVERRIDE;
 	//! Update the ocular, telescope and sensor lists after the removal of a member.
 	//! Necessary because of the way model/view management in the OcularDialog
 	//! is implemented.
@@ -194,6 +198,11 @@ public slots:
 	void setGuiPanelFontSize(int size);
 	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
+	void setTextColor(Vec3f color) {textColor=color; emit textColorChanged(color);}
+	Vec3f getTextColor() const {return textColor;}
+	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
+	Vec3f getLineColor() const {return lineColor;}
+
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
 
@@ -221,8 +230,8 @@ public slots:
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
-	void setFlagShowResolutionCriterions(const bool b);
-	bool getFlagShowResolutionCriterions(void) const;
+	void setFlagShowResolutionCriteria(const bool b);
+	bool getFlagShowResolutionCriteria(void) const;
 
 	void setCcdCropOverlaySize(int size);
 	int getCcdCropOverlaySize()const {return ccdCropOverlaySize;}
@@ -269,12 +278,14 @@ signals:
 
 	void flagGuiPanelEnabledChanged(bool value);
 	void guiPanelFontSizeChanged(int value);
+	void textColorChanged(Vec3f color);
+	void lineColorChanged(Vec3f color);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
 	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
-	void flagShowResolutionCriterionsChanged(bool value);
+	void flagShowResolutionCriteriaChanged(bool value);
 	void arrowButtonScaleChanged(double value);
 	void flagInitDirectionUsageChanged(bool value);
 	void flagInitFOVUsageChanged(bool value);
@@ -436,6 +447,8 @@ private:
 
 	class OcularsGuiPanel * guiPanel;
 	int guiPanelFontSize;
+	Vec3f textColor;
+	Vec3f lineColor;
 
 	//Reticle
 	StelTextureSP reticleTexture;
@@ -448,7 +461,7 @@ private:
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
 	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
-	bool flagShowResolutionCriterions;
+	bool flagShowResolutionCriteria;
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
 	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.

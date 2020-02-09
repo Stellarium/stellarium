@@ -68,6 +68,10 @@ public:
 	//! Deinitialize all openGL texture in this method.
 	virtual void deinit() {;}
 
+	//! Return module-specific settings. This can be useful mostly by plugins which may want to keep their settings to their own files.
+	//! The default implementation returns a null pointer!
+	virtual QSettings *getSettings() {return Q_NULLPTR;}
+
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
 	virtual void draw(StelCore* core) {Q_UNUSED(core);}

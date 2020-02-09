@@ -167,7 +167,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler->setTextWidth(maxWidth);
 
 	// Retrieve value from setting directly, because at this stage the plugin has not parsed it yet.
-	float scale=lineHeight*plugin->appSettings()->value("arrow_scale", 1.5).toDouble();
+	float scale=lineHeight*plugin->getSettings()->value("arrow_scale", 1.5).toDouble();
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
 	QPixmap prevArrow = pa.scaledToHeight(scale, Qt::SmoothTransformation);
@@ -905,7 +905,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 	}
 
 	double diameter = telescope->diameter();
-	if (diameter>0.0 && ocularsPlugin->getFlagShowResolutionCriterions())
+	if (diameter>0.0 && ocularsPlugin->getFlagShowResolutionCriteria())
 	{
 		QString rayleighLabel = QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138/diameter, 'f', 2));
 		fieldRayleighCriterion->setPlainText(rayleighLabel);
@@ -950,7 +950,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 	}
 
 	// Visual resolution
-	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriterions() && diameter>0.0)
+	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
 	{
 		float rayleigh = 138/diameter;
 		float vres = 60/mag;

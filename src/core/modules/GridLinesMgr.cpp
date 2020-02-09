@@ -1286,7 +1286,7 @@ void GridLinesMgr::init()
 	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
 
 	// Load colors from config file
-	QString defaultColor = conf->value("color/default_color").toString();
+	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value("color/equatorial_color", defaultColor).toString()));
 	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
 	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
