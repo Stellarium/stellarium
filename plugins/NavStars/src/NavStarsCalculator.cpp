@@ -77,6 +77,17 @@ void NavStarsCalculator::execute()
 	
 	if (lha < M_PI) 
 		zn_rad = (2*M_PI) - zn_rad;
+
+	// Convert object GHA to geodetic longitude.
+	double d = gha_rad;
+	if (d < M_PI)
+		d *= -1;
+	else
+		d = (2 * M_PI) - d;
+
+	// Set the ground geodetic position.
+	setGpLonRad(d);
+	setGpLatRad(dec_rad);
 }
 
 QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString neg)
@@ -89,24 +100,28 @@ QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString
 	md = static_cast<double>(m);
 	md += (s / 60.);
 	rval += (sign ? pos : neg)
-		+ QString::number(d, 'f', 0)
-		+ QString("&deg;")
-		+ QString::number(md, 'f', 1)
-		+ "'";
+		+ QString::number(d, 'f', 0) + QString("&deg;")
+		+ QString::number(md, 'f', 1) + "'";
+#ifdef _DEBUG
+	// An easier to use display when working with Google Earth, 
+	// Google Maps, custom software tools, etc. Keep everything
+	// decimal. Only need DDMM.m for Almanac display.
+	rval += " (" + (sign ? pos : neg) + QString::number(RAD2DEG(rad), 'f', 3) + ")";
+#endif
 	return rval;
 }
 
 double NavStarsCalculator::wrap2pi(double d)
 {
-	if (d > (2. * M_PI)) d -= (2 * M_PI);
-	else if (d < 0.) d += (2 * M_PI);
+	while(d > (2. * M_PI)) d -= (2 * M_PI);
+	while(d < 0.) d += (2 * M_PI);
 	return d;
 }
 
 double NavStarsCalculator::wrap360(double d)
 {
-	if (d > 360.) d -= 360.;
-	else if (d < 0.) d += 360.;
+	while(d > 360.) d -= 360.;
+	while(d < 0.) d += 360.;
 	return d;
 }
 

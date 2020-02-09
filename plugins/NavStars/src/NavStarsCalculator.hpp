@@ -193,6 +193,32 @@ public:
     }
 
 private:
+    double gp_lat_deg;    
+    double gp_lat_rad;
+public:
+    NavStarsCalculator& setGpLatRad(double d) {
+        gp_lat_rad = d;
+        gp_lat_deg = DEG2RAD(d);
+        return *this;
+    }
+    QString gplatPrintable() {
+        return radToDm(gp_lat_rad, "N", "S");
+    }
+
+private:
+    double gp_lon_deg;
+    double gp_lon_rad;
+public:
+    NavStarsCalculator& setGpLonRad(double d) {
+        gp_lon_rad = d;
+        gp_lon_deg = DEG2RAD(d);
+        return *this;
+    }
+    QString gplonPrintable() {
+        return radToDm(gp_lon_rad, "E", "W");
+    }
+
+private:
     double az_rad;
 public:
     NavStarsCalculator& setAzRad(double d) {

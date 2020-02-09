@@ -514,8 +514,10 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
 	temp = calc.ghaPrintable() + "/" + calc.decPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle of object"), temp));
-	
+		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle/declination of object"), temp));
+	temp = calc.gplatPrintable() + "/" + calc.gplonPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GP: LAT/LON", "geodetic coordinate system, latitude and longitude of ground point"), temp));
 	temp = calc.latPrintable() + "/" + calc.lonPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp));
@@ -544,9 +546,9 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.latPrintable()));
+		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.gplatPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.lonPrintable()));
+		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.gplonPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable()));
 	selectedObject->addToExtraInfoString(infoGroup, 
