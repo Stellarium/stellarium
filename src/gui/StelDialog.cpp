@@ -25,6 +25,7 @@
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QDebug>
 #include <QAbstractButton>
@@ -307,10 +308,11 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
 }
 
-void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName)
+void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
 {
 	toolButton->setProperty("propName", propertyName);
 	toolButton->setProperty("iniName", iniName);
+	toolButton->setProperty("moduleName", moduleName);
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
 	Vec3f vColor = prop->getValue().value<Vec3f>();
 	QColor color=QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
@@ -338,7 +340,8 @@ void StelDialog::askColor()
 	}
 	QString propName=sender()->property("propName").toString();
 	QString iniName=sender()->property("iniName").toString();
-	if ((propName.length()==0) || (iniName.length()==0))
+	QString moduleName=sender()->property("moduleName").toString(); // optional
+	if ((propName.isEmpty()) || (iniName.isEmpty()))
 	{
 		qWarning() << "ColorButton not set up properly! Ignoring.";
 		Q_ASSERT(0);
@@ -351,7 +354,15 @@ void StelDialog::askColor()
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
-		StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
+		if (moduleName.isEmpty())
+			StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
+		else
+		{
+			StelModule *module=StelApp::getInstance().getModuleMgr().getModule(moduleName);
+			QSettings *settings=module->getSettings();
+			Q_ASSERT(settings);
+			settings->setValue(iniName, StelUtils::vec3fToStr(vColor));
+		}
 		static_cast<QToolButton*>(QObject::sender())->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }

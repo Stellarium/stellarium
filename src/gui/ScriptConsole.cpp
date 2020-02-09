@@ -119,8 +119,8 @@ void ScriptConsole::loadScript()
 	QString openDir;
 	if (getFlagUserDir())
 	{
-		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-		if (openDir.isEmpty())
+		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));		
+		if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir()))
 			openDir = StelFileMgr::getUserDir();
 	}
 	else

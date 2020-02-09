@@ -176,9 +176,10 @@ protected:
 	//! @param toolButton the QToolButton which shows the color
 	//! @param propertyName a StelProperty name which must represent a color (coded as Vec3f)
 	//! @param iniName the associated entry for config.ini, in the form group/name. Usually "color/some_feature_name_color".
+	//! @param moduleName if the iniName is for a module (plugin)-specific ini file, add the module name here. The module needs an implementation of getSettings()
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
-	void connectColorButton(QToolButton* button, QString propertyName, QString iniName);
+	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
 
 	//! The main dialog
 	QWidget* dialog;

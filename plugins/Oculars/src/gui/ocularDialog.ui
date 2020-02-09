@@ -199,40 +199,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
-               <property name="text">
-                <string>Show resolution criteria</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxInitialFOV">
-               <property name="toolTip">
-                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore FOV to initial values</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxInitialDirection">
-               <property name="toolTip">
-                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore direction to initial values</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="checkBoxToolbarButton">
-               <property name="text">
-                <string>Show oculars button on toolbar</string>
-               </property>
-              </widget>
-             </item>
              <item row="11" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
@@ -271,6 +237,23 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
+               <property name="text">
+                <string>Show resolution criteria</string>
+               </property>
+              </widget>
              </item>
              <item row="3" column="0">
               <layout class="QHBoxLayout" name="guiPanelHorizontalLayout">
@@ -328,7 +311,75 @@
                </item>
               </layout>
              </item>
-             <item row="12" column="0">
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialDirection">
+               <property name="toolTip">
+                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore direction to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
+              <layout class="QHBoxLayout" name="colorHorizontalLayout">
+               <item>
+                <widget class="QToolButton" name="lineColorToolButton">
+                 <property name="toolTip">
+                  <string>Color for ocular circles and sensor frames</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lineColorLabel">
+                 <property name="text">
+                  <string>Line Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="textColorToolButton">
+                 <property name="toolTip">
+                  <string>Color for text which is shown only when GUI is switched off.</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="textColorLabel">
+                 <property name="text">
+                  <string>Text Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="colorHorizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="checkBoxToolbarButton">
+               <property name="text">
+                <string>Show oculars button on toolbar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="0">
               <spacer name="verticalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>

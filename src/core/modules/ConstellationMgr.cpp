@@ -443,7 +443,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegExp commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());

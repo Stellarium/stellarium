@@ -167,7 +167,7 @@ void Pulsars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
+		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 
 		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
