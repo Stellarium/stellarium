@@ -341,7 +341,7 @@ void StelDialog::askColor()
 	QString propName=sender()->property("propName").toString();
 	QString iniName=sender()->property("iniName").toString();
 	QString moduleName=sender()->property("moduleName").toString(); // optional
-	if ((propName.length()==0) || (iniName.length()==0))
+	if ((propName.isEmpty()) || (iniName.isEmpty()))
 	{
 		qWarning() << "ColorButton not set up properly! Ignoring.";
 		Q_ASSERT(0);
@@ -354,7 +354,7 @@ void StelDialog::askColor()
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
-		if (moduleName.length()==0)
+		if (moduleName.isEmpty())
 			StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
 		else
 		{
