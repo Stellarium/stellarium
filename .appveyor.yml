@@ -61,11 +61,8 @@ test_script:
   - ctest --output-on-failure
 
 artifacts:
-- ps: >- 
-  if ($env:APPVEYOR_REPO_TAG -eq "true") { 
-    path: installers\*.exe 
-    name: stellarium-installer
-  }
+- path: installers\*.exe 
+  name: stellarium-installer
 
 # deployment
 deploy:
