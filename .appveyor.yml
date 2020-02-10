@@ -1,13 +1,4 @@
 version: '{branch}-{build}'
-
-# branches to build
-branches:
-  # whitelist
-  only:
-  - appveyor-experiments
-
-# Do not build feature branch with open Pull Requests
-skip_branch_with_pr: true
 # build Configuration
 configuration: Release
 # set clone depth
@@ -29,31 +20,22 @@ environment:
     msvcname: Visual Studio 14 2015
 
 before_build:
-- cmd: >-
-    mkdir stellarium-%qtver%-%qtbin%
-    
-    set INNSPATH=C:\Program Files (x86)\Inno Setup 5
-    
-    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
-
-    cd c:\stellarium
-
-    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-
-    cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+  - mkdir stellarium-%qtver%-%qtbin%
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
+  - cd c:\stellarium
+  - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
+  - cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
-  parallel: false
+  parallel: true
   verbosity: minimal
   
 after_build:
-- cmd: >-
-    appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
-    
-    cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
-
-    cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
+  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
 
 artifacts:
 - path: installers\*.exe
@@ -62,7 +44,7 @@ artifacts:
 # deployment
 deploy:
 - provider: Webhook
-  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
   authorization:
     secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
   artifact: stellarium-installer
