@@ -7,8 +7,6 @@ clone_depth: 5
 clone_folder: c:\stellarium
 # environment variables
 environment:
-  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
-  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: x64
@@ -42,6 +40,8 @@ environment:
     packaging: false
 
 before_build:
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
