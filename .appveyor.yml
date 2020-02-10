@@ -32,18 +32,19 @@ environment:
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
     packaging: false
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: x64
     qtver: 5.14
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
+    qtbin: msvc2019_64
+    msvcname: Visual Studio 16 2019 Win64
     packaging: false
 
 before_build:
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
+  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
-  - cd c:\stellarium
+  - cd c:\stellarium  
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
   - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
@@ -52,8 +53,7 @@ build:
   parallel: true
   verbosity: minimal
   
-after_build:
-  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+after_build:  
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   
