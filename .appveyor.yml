@@ -57,16 +57,15 @@ after_build:
 
 artifacts:
 - path: installers\*.exe
-  name: installer
+  name: stellarium-installer
 
 # deployment
-#deploy:
-#- provider: Webhook
-#  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
-#  authorization:
-#    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
-#  on:
-#    ARTIFACT_SIGNING_ENABLED: true
+deploy:
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?SigningPolicyId=579f46ce-4396-4162-9cbf-6040d588c611
+  authorization:
+    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
+  artifact: stellarium-installer
 
 notifications:
 - provider: Email
