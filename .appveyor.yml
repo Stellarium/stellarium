@@ -7,25 +7,45 @@ clone_depth: 5
 clone_folder: c:\stellarium
 # environment variables
 environment:
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: x64
     qtver: 5.9
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64 
+    packaging: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: Win32
     qtver: 5.9
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
+    packaging: true
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: Win32
+    qtver: 5.12
+    qtbin: msvc2017
+    msvcname: Visual Studio 15 2017
+    packaging: false
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.12
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+    packaging: false
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.14
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+    packaging: false
 
 before_build:
   - mkdir stellarium-%qtver%-%qtbin%
-  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
-  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
@@ -36,10 +56,16 @@ after_build:
   - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  
+test_script:
+  - ctest --output-on-failure
 
 artifacts:
-- path: installers\*.exe
-  name: stellarium-installer
+- ps: >- 
+  if ($env:APPVEYOR_REPO_TAG -eq "true") { 
+    path: installers\*.exe 
+    name: stellarium-installer
+  }
 
 # deployment
 deploy:
@@ -48,6 +74,9 @@ deploy:
   authorization:
     secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
   artifact: stellarium-installer
+  on:
+    branch: appveyor-experiments
+    packaging: true
 
 notifications:
 - provider: Email
