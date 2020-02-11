@@ -1,7 +1,9 @@
 version: '{branch}-{build}'
+# build Configuration
 configuration: Release
-clone_depth: 5
+# clone directory
 clone_folder: c:\stellarium
+# environment variables
 environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -9,57 +11,60 @@ environment:
     qtver: 5.9
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64 
-    packaging: false
+    packaging: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: Win32
     qtver: 5.9
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
-    packaging: false
+    packaging: true
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.12
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+    packaging: false  
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: Win32
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: false
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: x64
-    qtver: 5.12
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
-    packaging: false
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: x64
-    qtver: 5.13
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
-    packaging: false
-
+  
 before_build:
-- cmd: >-
-    mkdir stellarium-%qtver%-%qtbin%
-    
-    set INNSPATH=C:\Program Files (x86)\Inno Setup 5
-    
-    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
-
-    cd c:\stellarium
-
-    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-
-    cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
+  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - mkdir stellarium-%qtver%-%qtbin%
+  - cd c:\stellarium  
+  - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
+  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
   
-#after_build:
-#- cmd: >-
-#    if "%packaging%"=="true" ( cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target install & cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config Release --target stellarium-installer )
-
+after_build:  
+  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
+  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  
 test_script:
-- cmd: ctest --output-on-failure
+  - ctest --output-on-failure
+
+artifacts:
+- path: 'installers\stellarium*.exe'
+  name: stellarium-installer
+
+# deployment
+deploy:
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
+  authorization:
+    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==  
+  on:
+    branch: appveyor-experiments
+    packaging: true
 
 notifications:
 - provider: Email

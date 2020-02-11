@@ -596,7 +596,7 @@ matrix:
         - MSVCNAME="Visual Studio 15 2017 Win64"
         - TRANSLATE=false
         - COVERAGE=false
-        
+
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
@@ -654,7 +654,7 @@ script:
       cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;      
     fi
   #- ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; then
+  - if [[ "$COVERAGE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
       make coverage;
     fi
 
@@ -664,7 +664,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true ]]; then
+  - if [[ "$COVERAGE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
       lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info;
       coveralls-lcov coverage.info;
     fi
