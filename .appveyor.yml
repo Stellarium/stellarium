@@ -23,7 +23,7 @@ environment:
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
-    packaging: false  
+    packaging: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: Win32
     qtver: 5.12
@@ -36,7 +36,7 @@ before_build:
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
-  - cd c:\stellarium  
+  - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
   - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
 
@@ -45,8 +45,8 @@ build:
   parallel: true
   verbosity: minimal
   
-after_build:  
-  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install 
+after_build:
+  - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   
 test_script:
@@ -61,7 +61,7 @@ deploy:
 - provider: Webhook
   url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
   authorization:
-    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==  
+    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
   on:
     branch: release
     packaging: true

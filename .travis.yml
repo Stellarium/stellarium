@@ -53,10 +53,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - TRANSLATE=false
-        - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; 
-          then COVERAGE=true;
-          else COVERAGE=false;
-          fi
+        - COVERAGE=true
         - REPQT=false
 
     - os: linux
