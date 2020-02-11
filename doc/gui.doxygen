@@ -31,6 +31,33 @@ Relevant files:
 
 - 
 
+Important things to note when designing icons on Inkscape:
+
+- When designing small icons it is very important to align the elements to a
+  1px by 1px grid. Otherwise exported icons will look a little blurry because of
+  antialiasing. This is not an Inkscape limitation, icons should be
+  pixel-perfect.
+
+- For blurs and shadows we use the ? tool. Blurs in Inkscape are quite strange,
+  each blur element has a bounding box. It is important to make the bounding box
+  big enough so a cut is not visible. Also important to make the bounding box
+  small enough so the blur does not extend outside the icon (icons are located
+  one next to the other, blur can get into other icons!).
+
+- Blurs in Inkscape have some kind of bug. Let's say that we want a blur with
+  amount equal to 0.5 units, the result is different depending on the kind of
+  object, each one of these will look different:
+
+  - Objects like rectangles
+
+  - Paths (even if the path has a rectangular shape)
+
+  - Groups of objects (even if you just did a group of a single element)
+
+  This is the reason why you should *always create a group before applying a
+  blur*, even if you have only one element. This way, a blur of 0.5 units will
+  have a consistent look across icons.
+
 Icon design:
 
 Colors of side panels icons:
@@ -80,6 +107,21 @@ Colors of windows elements:
 - Disabled buttons/spinners text: 404040ff
 - Disabled buttons/spinners icons: 505050ff
 
+
+Icon filenames:
+
+Every kind of icon has a different prefix on the filename. E.g. bbtHelp-off.png
+and bbtSearch-on.png
+
+- bbt: Left bar buttons, also named actions. Each one has an on and off state.
+- bt: Bottom bar buttons. Each one has an on and off state.
+- btbg: Backgrounds of bottom bar buttons.
+- tab: Buttons on window tabs. There is no off state because the buttons are
+  painted programatically in that case.
+- uibt: Images for classic UI buttons. Each one has a normal and a disabled
+  state used when the button is greyed out.
+- uie: UI elements, things that go inside of UI windows like checkboxes.
+- misc: Some more misc images.
 
 
 

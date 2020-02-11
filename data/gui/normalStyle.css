@@ -244,6 +244,10 @@ QPushButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
+QPushButton:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 165), stop: 1 rgb(111, 113, 94));
+}
+
 QPushButton:flat {
 	border: none; /* no border for a flat push button */
 	background: transparent;
@@ -583,6 +587,30 @@ QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/uieCheckbox-unchecked.png);
 }
 
+QCheckBox::indicator:hover:checked {
+	image: url(:/graphicGui/uieCheckbox-checked-hover.png);
+}
+
+QCheckBox::indicator:hover:indeterminate {
+	image: url(:/graphicGui/uieCheckbox-partial-hover.png);
+}
+
+QCheckBox::indicator:hover:unchecked {
+	image: url(:/graphicGui/uieCheckbox-unchecked-hover.png);
+}
+
+QCheckBox::indicator:checked:disabled {
+	image: url(:/graphicGui/uieCheckbox-checked-disabled.png);
+}
+
+QCheckBox::indicator:indeterminate:disabled {
+	image: url(:/graphicGui/uieCheckbox-partial-disabled.png);
+}
+
+QCheckBox::indicator:unchecked:disabled {
+	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.png);
+}
+
 QGroupBox::indicator:checked {
 	image: url(:/graphicGui/uieCheckbox-checked.png);
 }
@@ -627,6 +655,22 @@ QRadioButton::indicator:checked {
 
 QRadioButton::indicator:unchecked {
 	image: url(:/graphicGui/uieRadio-unchecked.png);
+}
+
+QRadioButton::indicator:checked:hover {
+	image: url(:/graphicGui/uieRadio-checked-hover.png);
+}
+
+QRadioButton::indicator:unchecked:hover {
+	image: url(:/graphicGui/uieRadio-unchecked-hover.png);
+}
+
+QRadioButton::indicator:checked:disabled {
+	image: url(:/graphicGui/uieRadio-checked-disabled.png);
+}
+
+QRadioButton::indicator:unchecked:disabled {
+	image: url(:/graphicGui/uieRadio-unchecked-disabled.png);
 }
 
 /*
@@ -733,11 +777,23 @@ QComboBox {
 	padding-left: 3px;
 }
 
-QComboBox:disabled, QSpinBox:disabled {
+QComboBox:disabled,
+QSpinBox:disabled,
+QDoubleSpinBox:disabled,
+AngleSpinBox:disabled,
+QDateTimeEdit:disabled {
 	color: #f0f0f0;
 	border: 1px solid rgba(31, 31, 31);
 	color: rgba(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
+}
+
+QComboBox:focus, QComboBox:hover,
+QSpinBox:focus, QSpinBox:hover,
+QDoubleSpinBox:focus, QDoubleSpinBox:hover,
+AngleSpinBox:focus, AngleSpinBox:hover,
+QDateTimeEdit:focus, QDateTimeEdit:hover {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(180, 180, 163), stop: 1 rgb(93, 95, 78));
 }
 
 QSpinBox::up-button:disabled,QTimeEdit::up-button:disabled,QDoubleSpinBox::up-button:disabled,AngleSpinBox::up-button:disabled,QDateTimeEdit::up-button:disabled {
