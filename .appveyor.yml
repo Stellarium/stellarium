@@ -1,8 +1,6 @@
 version: '{branch}-{build}'
 # build Configuration
 configuration: Release
-# set clone depth
-clone_depth: 5
 # clone directory
 clone_folder: c:\stellarium
 # environment variables
@@ -55,7 +53,7 @@ test_script:
   - ctest --output-on-failure
 
 artifacts:
-- path: installers\*.exe 
+- path: 'installers\stellarium*.exe'
   name: stellarium-installer
 
 # deployment
