@@ -63,13 +63,12 @@ deploy:
   authorization:
     secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==  
   on:
-    branch: appveyor-experiments
+    branch: release
     packaging: true
 
 notifications:
 - provider: Email
   to:
-  - mcardinot@gmail.com
   - alex.v.wolf@gmail.com
   on_build_success: false
   on_build_failure: true
