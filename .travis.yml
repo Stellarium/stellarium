@@ -53,7 +53,10 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - TRANSLATE=false
-        - COVERAGE=true
+        - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; 
+          then COVERAGE=true;
+          else COVERAGE=false;
+          fi
         - REPQT=false
 
     - os: linux
@@ -654,7 +657,7 @@ script:
       cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;      
     fi
   #- ctest --output-on-failure
-  - if [[ "$COVERAGE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
+  - if [[ "$COVERAGE" == true ]]; then
       make coverage;
     fi
 
@@ -664,7 +667,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
+  - if [[ "$COVERAGE" == true ]]; then
       lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info;
       coveralls-lcov coverage.info;
     fi
