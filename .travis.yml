@@ -645,13 +645,13 @@ before_script:
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" || "$TRAVIS_OS_NAME" == "osx" ]]; then
-      cmake -DENABLE_TESTING=1 .. ;
+      cmake -DENABLE_TESTING=1 -DCMAKE_BUILD_TYPE=Debug .. ;
       make -j5 ;
       ctest --output-on-failure ;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      cmake -DENABLE_TESTING=0 -G "$MSVCNAME" .. ;      
-      cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;      
+      cmake -DENABLE_TESTING=0 -G "$MSVCNAME" .. ;
+      cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;
     fi
   #- ctest --output-on-failure
   - if [[ "$COVERAGE" == true ]]; then
@@ -672,7 +672,6 @@ after_success:
 notifications:
   email:
     recipients:
-      - mcardinot@gmail.com
       - alex.v.wolf@gmail.com
     on_success: change
     on_failure: always
