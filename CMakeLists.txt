@@ -56,7 +56,7 @@ SET(MIN_WIN_VERSION "0x0601")
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Show platform info
-MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
