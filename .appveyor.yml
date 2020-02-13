@@ -47,6 +47,10 @@ build:
   
 after_build:
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
+  - if ($env:packaging -eq "true") {
+      appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%platform%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
+      7z x c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -oc:\stellarium-%qtver%-%qtbin%\bin -ao
+    }
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   
 test_script:
