@@ -147,7 +147,7 @@ SolarSystem::~SolarSystem()
 }
 
 /*************************************************************************
- Reimplementation of the getCallOrder method
+ Re-implementation of the getCallOrder method
 *************************************************************************/
 double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 {
@@ -310,6 +310,7 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
+		// NOTE: Should we add draw the trails for moons of current planet?
 		for (const auto& p : getSun()->satellites)
 		{
 			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
@@ -1586,10 +1587,9 @@ void SolarSystem::setFlagTrails(bool b)
 	if (getFlagTrails() != b)
 	{
 		trailFader = b;
-		if (getFlagIsolatedTrails())
-			recreateTrails();
 		if (b)
 			allTrails->reset();
+		recreateTrails();
 		emit trailsDisplayedChanged(b);
 	}
 }
@@ -2120,6 +2120,7 @@ void SolarSystem::setFlagIsolatedTrails(bool b)
 	if(b!=flagIsolatedTrails)
 	{
 		flagIsolatedTrails = b;
+		recreateTrails();
 		emit flagIsolatedTrailsChanged(b);
 	}
 }
