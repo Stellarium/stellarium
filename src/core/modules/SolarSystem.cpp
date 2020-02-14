@@ -38,6 +38,7 @@
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 #include "StelMainView.hpp"
+#include "StelObserver.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -310,11 +311,11 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
-		// NOTE: Should we add draw the trails for moons of current planet?
 		for (const auto& p : getSun()->satellites)
 		{
 			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
 		}
+		allTrails->addObject(static_cast<QSharedPointer<StelObject>>(moon), &trailColor);
 	}
 }
 

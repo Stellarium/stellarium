@@ -294,7 +294,7 @@ public:
 	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
 
-	//! Get the informations on the current location
+	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
 	double getUTCOffset(const double JD) const;

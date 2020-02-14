@@ -54,7 +54,7 @@ after_build:
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   
 test_script:
-  - ctest --output-on-failure
+  - cmd: ctest --output-on-failure
 
 artifacts:
 - path: 'installers\stellarium*.exe'
@@ -63,7 +63,7 @@ artifacts:
 # deployment
 deploy:
 - provider: Webhook
-  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=test-signing
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=release-signing
   authorization:
     secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
   on:
