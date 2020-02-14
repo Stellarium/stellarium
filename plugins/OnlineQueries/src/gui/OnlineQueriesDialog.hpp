@@ -44,15 +44,16 @@ private slots:
 	void queryStarnames();    //!< Connect to a button that triggers information query
 	void queryWikipedia();    //!< Connect to a button that triggers information query
 	void onStarnameStatusChanged(); //!< To be connected
+	//void onWikipediaStatusChanged(); //!< To be connected
 
 private:
 	//! Connects the UI to update events from the OnlineQueries
 	void createUpdateConnections();
 	//! This updates the whole GUI to represent current OnlineQueries values
 	//void setToInitialValues();
-	void updateTextBrowser();
+	//void updateTextBrowser();
 
-	QVector<QAbstractButton*> shortcutButtons;
+	//QVector<QAbstractButton*> shortcutButtons;
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
 
