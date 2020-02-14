@@ -38,7 +38,6 @@
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 #include "StelMainView.hpp"
-#include "StelObserver.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -315,6 +314,7 @@ void SolarSystem::recreateTrails()
 		{
 			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
 		}
+		// 99.9% users on Earth, so...
 		allTrails->addObject(static_cast<QSharedPointer<StelObject>>(moon), &trailColor);
 	}
 }
