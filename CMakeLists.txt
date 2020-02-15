@@ -56,14 +56,15 @@ SET(MIN_WIN_VERSION "0x0601")
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Show platform info
-MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
+MESSAGE(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      IF(CMAKE_COMPILER_IS_GNUCXX)

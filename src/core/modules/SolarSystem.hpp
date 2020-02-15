@@ -1091,6 +1091,8 @@ private slots:
 	void onNewSurvey(HipsSurveyP survey);
 
 	void fillEphemerisDates();
+	//! Reset and recreate trails
+	void recreateTrails();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -1121,8 +1123,6 @@ private:
 
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
-
-	void recreateTrails();
 
 	Vec3f getEphemerisMarkerColor(int index) const;
 

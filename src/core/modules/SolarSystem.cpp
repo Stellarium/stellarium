@@ -46,6 +46,7 @@
 #include "RefractionExtinction.hpp"
 
 #include "AstroCalcDialog.hpp"
+#include "StelObserver.hpp"
 
 #include <functional>
 #include <algorithm>
@@ -147,7 +148,7 @@ SolarSystem::~SolarSystem()
 }
 
 /*************************************************************************
- Reimplementation of the getCallOrder method
+ Re-implementation of the getCallOrder method
 *************************************************************************/
 double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 {
@@ -261,6 +262,8 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
 	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
+	StelCore *core = app->getCore();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -313,6 +316,15 @@ void SolarSystem::recreateTrails()
 		for (const auto& p : getSun()->satellites)
 		{
 			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
+		}
+		// Add moons of current planet
+		StelCore *core=StelApp::getInstance().getCore();
+		const StelObserver *obs=core->getCurrentObserver();
+		if (obs)
+		{
+			const QSharedPointer<Planet> planet=obs->getHomePlanet();
+			for (const auto& m : planet->satellites)
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailColor);
 		}
 	}
 }
@@ -1586,10 +1598,9 @@ void SolarSystem::setFlagTrails(bool b)
 	if (getFlagTrails() != b)
 	{
 		trailFader = b;
-		if (getFlagIsolatedTrails())
-			recreateTrails();
 		if (b)
 			allTrails->reset();
+		recreateTrails();
 		emit trailsDisplayedChanged(b);
 	}
 }
@@ -2120,6 +2131,7 @@ void SolarSystem::setFlagIsolatedTrails(bool b)
 	if(b!=flagIsolatedTrails)
 	{
 		flagIsolatedTrails = b;
+		recreateTrails();
 		emit flagIsolatedTrailsChanged(b);
 	}
 }
