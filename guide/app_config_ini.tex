@@ -62,9 +62,6 @@ flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to i
                                            for the time it takes for light to travel. This has a slight impact on performance, 
                                            but is essential e.g.\ for Jupiter's moons.\\%\midrule
 flag\_object\_trails               & bool   & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\%\midrule
-flag\_isolated\_trails             & bool   & true  & Turns on and off drawing of isolated trails.\\%\midrule
-number\_isolated\_trails           & int    & 1     & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
-flag\_isolated\_orbits             & bool   & true  & Turns on and off drawing of isolated orbits.\\\midrule
 %
 flag\_nebula                       & bool   & true  & Set to \emph{false} to hide the nebulae on start-up. \\%\midrule
 flag\_nebula\_name                 & bool   & false & Set to \emph{true} to show the nebula labels on start-up. \\%\midrule
@@ -814,6 +811,9 @@ flag\_constellation\_isolate\_selected  & bool & If \emph{true}, constellation l
 flag\_constellation\_pick     & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\\\midrule
 %
 flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to see the trail line drawn for the selected planet (asteroid, comet, moon)\\%\midrule
+number\_isolated\_trails      & int  & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
+max\_trail\_points            & int  & Limit maximum length of trails. Trails are drawn for 1 year or this number of computing steps.
+                                       Default 5000, reduce if drawing trails slows down the program too much.\\
 flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\%\midrule
 flag\_azimutal\_grid          & bool & Display azimuthal grid \\%\midrule
 flag\_equatorial\_grid        & bool & Display equatorial grid (of date) \\%\midrule
