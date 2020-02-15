@@ -1091,6 +1091,7 @@ private slots:
 	void onNewSurvey(HipsSurveyP survey);
 
 	void fillEphemerisDates();
+	//! Reset and recreate trails
 	void recreateTrails();
 
 private:

@@ -46,6 +46,7 @@
 #include "RefractionExtinction.hpp"
 
 #include "AstroCalcDialog.hpp"
+#include "StelObserver.hpp"
 
 #include <functional>
 #include <algorithm>
@@ -316,8 +317,15 @@ void SolarSystem::recreateTrails()
 		{
 			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
 		}
-		// 99.9% users on Earth, so...
-		allTrails->addObject(static_cast<QSharedPointer<StelObject>>(moon), &trailColor);
+		// Add moons of current planet
+		StelCore *core=StelApp::getInstance().getCore();
+		const StelObserver *obs=core->getCurrentObserver();
+		if (obs)
+		{
+			const QSharedPointer<Planet> planet=obs->getHomePlanet();
+			for (const auto& m : planet->satellites)
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailColor);
+		}
 	}
 }
 
