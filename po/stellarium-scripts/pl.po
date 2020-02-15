@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-12-27 21:12+0700\n"
+"POT-Creation-Date: 2020-02-13 12:44+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Paweł Zienowicz <pawel.zienowicz@nask.pl>, 2019\n"
 "Language-Team: Polish (https://www.transifex.com/stellarium/teams/80998/pl/)\n"
@@ -23,24 +23,24 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: scripts/analemma.ssc:15
+#: scripts/analemma.ssc:16
 msgid "Analemma"
 msgstr "Analemma"
 
-#: scripts/analemma.ssc:40
+#: scripts/analemma.ssc:41
 msgid "Week"
 msgstr "Tydzień"
 
-#: scripts/analemma.ssc:46
+#: scripts/analemma.ssc:47
 msgid "Near winter solstice"
 msgstr "W okolicach przesilenia zimowego"
 
-#: scripts/analemma.ssc:50
+#: scripts/analemma.ssc:51
 msgid "Near summer solstice"
 msgstr "W okolicach przesilenia letniego"
 
-#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
-#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
+#: scripts/analemma.ssc:55 scripts/martian_analemma.ssc:48
+#: scripts/saturnian_analemma.ssc:48 scripts/uranian_analemma.ssc:48
 msgid "Yearly path of the Sun"
 msgstr "Linia zakreślana przez Słońce w ciągu roku"
 
@@ -836,7 +836,7 @@ msgstr "Separacja:"
 msgid "Martian analemma"
 msgstr "Analemma z Marsa"
 
-#: scripts/martian_analemma.ssc:41
+#: scripts/martian_analemma.ssc:42
 msgid "Sol"
 msgstr "Sol"
 
@@ -1324,7 +1324,7 @@ msgstr "Zachód Słońca nr 3"
 msgid "Saturnian analemma"
 msgstr "Analemma z Saturna"
 
-#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+#: scripts/saturnian_analemma.ssc:42 scripts/uranian_analemma.ssc:42
 msgid "Solar day"
 msgstr "Doba słoneczna"
 
