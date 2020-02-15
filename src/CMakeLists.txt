@@ -340,6 +340,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/ObsListDialog.hpp
+          gui/ObsListDialog.cpp
+          gui/ObsListCreateEditDialog.hpp
+          gui/ObsListCreateEditDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -360,6 +364,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/obsListDialog.ui
+          gui/obsListCreateEditDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)

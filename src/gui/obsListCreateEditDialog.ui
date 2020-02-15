@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>bookmarksDialogForm</class>
- <widget class="QWidget" name="bookmarksDialogForm">
+ <class>obsListCreateEditDialogForm</class>
+ <widget class="QWidget" name="obsListCreateEditDialogForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -224,7 +224,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="obsExitButton">
+            <widget class="QPushButton" name="obsListExitButton">
              <property name="text">
               <string>Exit</string>
              </property>
