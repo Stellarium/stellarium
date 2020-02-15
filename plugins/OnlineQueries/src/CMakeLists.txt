@@ -11,8 +11,8 @@ LINK_DIRECTORIES(${BUILD_DIR}/src)
 SET(ONLINEQUERIES_SRCS
      OnlineQueries.hpp
      OnlineQueries.cpp
-     StarnamesSearcher.hpp
-     StarnamesSearcher.cpp
+     HipOnlineQuery.hpp
+     HipOnlineQuery.cpp
      gui/OnlineQueriesDialog.hpp
      gui/OnlineQueriesDialog.cpp
 )

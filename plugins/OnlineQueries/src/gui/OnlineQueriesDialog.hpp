@@ -23,7 +23,7 @@
 
 #include "StelDialog.hpp"
 #include "ui_onlineQueriesDialog.h"
-#include "StarnamesSearcher.hpp"
+#include "HipOnlineQuery.hpp"
 
 class OnlineQueries;
 
@@ -42,24 +42,26 @@ protected:
 
 private slots:
 	void queryStarnames();    //!< Connect to a button that triggers information query
+	void queryAncientSkies(); //!< Connect to a button that triggers information query
 	void queryWikipedia();    //!< Connect to a button that triggers information query
 	void onStarnameStatusChanged(); //!< To be connected
+	void onAncientSkiesStatusChanged(); //!< To be connected
 	//void onWikipediaStatusChanged(); //!< To be connected
 
 private:
-	//! Connects the UI to update events from the OnlineQueries
-	void createUpdateConnections();
-	//! This updates the whole GUI to represent current OnlineQueries values
-	//void setToInitialValues();
-	//void updateTextBrowser();
-
-	//QVector<QAbstractButton*> shortcutButtons;
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
 
-	StarnamesSearcher starnamesSearcher;
-	StarnamesLookupReply *starnamesLookupReply;
-	QString starnamesResult;
+	// The query target websites:
+	// Patrick Gleason's site
+	HipOnlineQuery *starnamesHipQuery;
+	HipOnlineReply *starnamesHipReply;
+	// ancient-skies.org
+	HipOnlineQuery *ancientSkiesHipQuery;
+	HipOnlineReply *ancientSkiesHipReply;
+	// TODO: develop a new class for Wikipedia queries?
+
+	QString queryResult; //!< Keep result of last online query
 };
 
 #endif
