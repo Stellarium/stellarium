@@ -552,7 +552,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(Velocity).join("");
 	}
 
-	if (flags&ProperMotion)
+	// Second part for fix crash when observer is on spaceship
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
 		Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;
