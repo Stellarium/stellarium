@@ -31,12 +31,19 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
     
 public:
-    ObsListCreateEditDialog(QObject* parent);
-    ~ObsListCreateEditDialog();
+   static ObsListCreateEditDialog& Instance(); 
     
 protected:
     Ui_obsListCreateEditDialogForm *ui;
     
+private:
+   static ObsListCreateEditDialog * m_instance;
+   ObsListCreateEditDialog(QObject* parent);
+   virtual ~ObsListCreateEditDialog(); 
+    
+
+public slots:
+    void retranslate();
 private slots:
     void obsListAddObjectButtonPressed();
     void obsListRemoveObjectButtonPressed();

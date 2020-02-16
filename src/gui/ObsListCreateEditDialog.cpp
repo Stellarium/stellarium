@@ -32,6 +32,17 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 }
 
 /*
+ * Retranslate dialog
+*/
+void ObsListCreateEditDialog::retranslate()
+{
+    if (dialog)
+	{
+		ui->retranslateUi(dialog);
+	}
+}
+
+/*
  * Slot for button obsListAddObjectButton
 */
 void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
