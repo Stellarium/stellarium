@@ -24,13 +24,15 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "Star.hpp"
+#include "StarMgr.hpp"
+#include "Planet.hpp"
+#include "NebulaMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
-#include <QLineEdit>
-#include <QStandardItemModel>
-#include <QTimer>
+#include <QDesktopServices>
+#include <QSharedPointer>
 
 #define STARNAMES_URL "https://biblicalastronomy.co/playground/fetch.cfm?Hipp="
 #define ANCIENT_SKIES_URL "https://www.ancient-skies.org/webservice?hip="
@@ -84,10 +86,7 @@ void OnlineQueriesDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// For now, hide tabs that we don't yet attempt to support
-	//ui->tab_ancientSkies->setEnabled(false);
-	//ui->tab_ancientSkies->setVisible(false);
 	//ui->tabWidget->removeTab(2); // Remove Ancient Skies for now.
-	ui->tabWidget->removeTab(0); // Remove Wikipedia for now.
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -216,5 +215,54 @@ void OnlineQueriesDialog::onAncientSkiesStatusChanged()
 
 void OnlineQueriesDialog::queryWikipedia()
 {
-	ui->onlineQueriesTextBrowser->setHtml("<h1>Wikipedia</h1><p>Not yet supported.</p>");
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+
+	QString objName;
+	if (obj->getType()==STAR_TYPE)
+	{
+		QString hipStr=obj->getID();
+		if (!hipStr.startsWith("HIP"))
+			return;
+		int hipNr=hipStr.split(' ').at(1).toInt();
+		objName=StarMgr::getCommonEnglishName(hipNr);
+	}
+	else if (obj->getType()==Planet::PLANET_TYPE)
+	{
+		objName=obj->getEnglishName();
+	}
+	else if (obj->getType()==Nebula::NEBULA_TYPE)
+	{
+		// clumsy workaround for uncastable pointer...
+		objName = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		if (objName.isEmpty())
+		{
+			objName=obj->getEnglishName();
+		}
+		// WP has all Messiers with Messier_X. Use that directly to avoid ambiguity.
+		if (objName.startsWith("M "))
+		{
+			objName=objName.replace("M ", "Messier_");
+		}
+		// TODO: Other similar replacements?
+		if (objName.isEmpty())
+		{
+			ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few catalogs to form a numerical name.</p>"));
+			return;
+		}
+	}
+	else
+	{
+		ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects only.</p>"));
+		return;
+	}
+
+	//QString objName=obj->getEnglishName();
+	ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>Opened page on '%1' in your webbrowser.</p>").arg(objName));
+
+	QUrl wikiURL(QString("https://en.wikipedia.org/wiki/%1").arg(objName));
+	QDesktopServices::openUrl(wikiURL);
 }
