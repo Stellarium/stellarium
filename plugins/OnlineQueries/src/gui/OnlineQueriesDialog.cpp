@@ -37,6 +37,7 @@
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialog("OnlineQueries", parent),
+	plugin(Q_NULLPTR),
 	starnamesHipQuery(Q_NULLPTR),
 	starnamesHipReply(Q_NULLPTR),
 	ancientSkiesHipQuery(Q_NULLPTR),
@@ -44,9 +45,6 @@ OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 {
 	setObjectName("OnlineQueriesDialog");
 	ui = new Ui_onlineQueriesDialogForm;
-	//plugin should be finalized at this point. Probably, we can even use the plugin main class as parent?
-	plugin = GETSTELMODULE(OnlineQueries);
-	Q_ASSERT(plugin);
 	starnamesHipQuery=new HipOnlineQuery(STARNAMES_URL);
 	ancientSkiesHipQuery=new HipOnlineQuery(ANCIENT_SKIES_URL);
 }
@@ -80,6 +78,8 @@ void OnlineQueriesDialog::retranslate()
 
 void OnlineQueriesDialog::createDialogContent()
 {
+	plugin = GETSTELMODULE(OnlineQueries);
+
 	//load UI from form file
 	ui->setupUi(dialog);
 
