@@ -41,30 +41,22 @@ OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialog("OnlineQueries", parent),
 	plugin(Q_NULLPTR),
 	starnamesHipQuery(Q_NULLPTR),
-	starnamesHipReply(Q_NULLPTR),
 	ancientSkiesHipQuery(Q_NULLPTR),
-	ancientSkiesHipReply(Q_NULLPTR)
+	hipOnlineReply(Q_NULLPTR)
 {
 	setObjectName("OnlineQueriesDialog");
 	ui = new Ui_onlineQueriesDialogForm;
-	starnamesHipQuery=new HipOnlineQuery(STARNAMES_URL);
-	ancientSkiesHipQuery=new HipOnlineQuery(ANCIENT_SKIES_URL);
 }
 
 OnlineQueriesDialog::~OnlineQueriesDialog()
 {
-	if (starnamesHipReply)
+	if (hipOnlineReply)
 	{
-		starnamesHipReply->deleteLater();
-		starnamesHipReply = Q_NULLPTR;
+		hipOnlineReply->deleteLater();
+		hipOnlineReply = Q_NULLPTR;
 	}
 	delete starnamesHipQuery;
 	starnamesHipQuery=Q_NULLPTR;
-	if (ancientSkiesHipReply)
-	{
-		ancientSkiesHipReply->deleteLater();
-		ancientSkiesHipReply = Q_NULLPTR;
-	}
 	delete ancientSkiesHipQuery;
 	ancientSkiesHipQuery=Q_NULLPTR;
 	delete ui;
@@ -81,6 +73,8 @@ void OnlineQueriesDialog::retranslate()
 void OnlineQueriesDialog::createDialogContent()
 {
 	plugin = GETSTELMODULE(OnlineQueries);
+	starnamesHipQuery=new HipOnlineQuery(plugin->getPtolemyUrl());
+	ancientSkiesHipQuery=new HipOnlineQuery(plugin->getAncientSkiesUrl());
 
 	//load UI from form file
 	ui->setupUi(dialog);
@@ -117,9 +111,15 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), this, SLOT(queryWikipedia()));
 }
 
+void OnlineQueriesDialog::setOutputHtml(QString html)
+{
+	if (ui)
+		ui->onlineQueriesTextBrowser->setHtml(html);
+}
+
 void OnlineQueriesDialog::queryStarnames()
 {
-	ui->onlineQueriesTextBrowser->setHtml("<h1>Starnames</h1><p>querying...</p>");
+	setOutputHtml("<h1>Starnames</h1><p>querying...</p>");
 
 	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 	if (sel.length()==0)
@@ -134,40 +134,41 @@ void OnlineQueriesDialog::queryStarnames()
 		return;
 
 	int hipNr=hipStr.split(' ').at(1).toInt();
-	starnamesHipReply=starnamesHipQuery->lookup(hipNr);
+	hipOnlineReply=starnamesHipQuery->lookup(hipNr);
 
-	onStarnameStatusChanged();
-	connect(starnamesHipReply, SIGNAL(statusChanged()), this, SLOT(onStarnameStatusChanged()));
+	//onStarnameStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 }
 
 // Called when the current HIP query status changes
-void OnlineQueriesDialog::onStarnameStatusChanged()
+void OnlineQueriesDialog::onHipQueryStatusChanged()
 {
-	Q_ASSERT(starnamesHipReply);
-	if (starnamesHipReply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
+	HipOnlineReply *reply=static_cast<HipOnlineReply*>(sender());
+	Q_ASSERT(reply);
+	if (reply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
 	{
-		QString info = QString("%1: %2").arg(q_("Starnames Lookup Error")).arg(starnamesHipReply->getErrorString());
+		QString info = QString("%1: %2").arg(q_("Starnames Lookup Error")).arg(reply->getErrorString());
 		//ui->starnamesStatusLabel->setText(info);
-		ui->onlineQueriesTextBrowser->setHtml("<p>No result</p>");
+		setOutputHtml("<p>No result</p>");
 	}
 
-	if (starnamesHipReply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
+	if (reply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
 	{
-		queryResult = starnamesHipReply->getResult();
-		ui->onlineQueriesTextBrowser->setHtml(queryResult);
+		queryResult = reply->getResult();
+		setOutputHtml(queryResult);
 	}
 
-	if (starnamesHipReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
+	if (reply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
 	{
-		disconnect(starnamesHipReply, SIGNAL(statusChanged()), this, SLOT(onStarnameStatusChanged()));
-		delete starnamesHipReply;
-		starnamesHipReply=Q_NULLPTR;
+		disconnect(reply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		delete reply;
+		reply=Q_NULLPTR;
 	}
 }
 
 void OnlineQueriesDialog::queryAncientSkies()
 {
-	ui->onlineQueriesTextBrowser->setHtml("<h1>Ancient-Skies.org</h1><p>querying...</p>");
+	setOutputHtml("<h1>Ancient-Skies.org</h1><p>querying...</p>");
 
 	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 	if (sel.length()==0)
@@ -182,36 +183,12 @@ void OnlineQueriesDialog::queryAncientSkies()
 		return;
 
 	int hipNr=hipStr.split(' ').at(1).toInt();
-	ancientSkiesHipReply=ancientSkiesHipQuery->lookup(hipNr);
+	hipOnlineReply=ancientSkiesHipQuery->lookup(hipNr);
 
-	onAncientSkiesStatusChanged();
-	connect(ancientSkiesHipReply, SIGNAL(statusChanged()), this, SLOT(onAncientSkiesStatusChanged()));
+	//onAncientSkiesStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 }
 
-// Called when the current HIP query status changes
-void OnlineQueriesDialog::onAncientSkiesStatusChanged()
-{
-	Q_ASSERT(ancientSkiesHipReply);
-	if (ancientSkiesHipReply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
-	{
-		QString info = QString("%1: %2").arg(q_("Starnames Lookup Error")).arg(ancientSkiesHipReply->getErrorString());
-		//ui->starnamesStatusLabel->setText(info);
-		ui->onlineQueriesTextBrowser->setHtml("<p>No result</p>");
-	}
-
-	if (ancientSkiesHipReply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
-	{
-		queryResult = ancientSkiesHipReply->getResult();
-		ui->onlineQueriesTextBrowser->setHtml(queryResult);
-	}
-
-	if (ancientSkiesHipReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
-	{
-		disconnect(ancientSkiesHipReply, SIGNAL(statusChanged()), this, SLOT(onAncientSkiesStatusChanged()));
-		delete ancientSkiesHipReply;
-		ancientSkiesHipReply=Q_NULLPTR;
-	}
-}
 
 void OnlineQueriesDialog::queryWikipedia()
 {
@@ -250,19 +227,16 @@ void OnlineQueriesDialog::queryWikipedia()
 		// TODO: Other similar replacements?
 		if (objName.isEmpty())
 		{
-			ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few catalogs to form a numerical name.</p>"));
+			setOutputHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few catalogs to form a numerical name.</p>"));
 			return;
 		}
 	}
 	else
 	{
-		ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects only.</p>"));
+		setOutputHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects only.</p>"));
 		return;
 	}
+	setOutputHtml(QString("<h1>Wikipedia</h1><p>Opened page on '%1' in your webbrowser.</p>").arg(objName));
 
-	//QString objName=obj->getEnglishName();
-	ui->onlineQueriesTextBrowser->setHtml(QString("<h1>Wikipedia</h1><p>Opened page on '%1' in your webbrowser.</p>").arg(objName));
-
-	QUrl wikiURL(QString("https://en.wikipedia.org/wiki/%1").arg(objName));
-	QDesktopServices::openUrl(wikiURL);
+	QDesktopServices::openUrl(QUrl(QString("https://en.wikipedia.org/wiki/%1").arg(objName)));
 }

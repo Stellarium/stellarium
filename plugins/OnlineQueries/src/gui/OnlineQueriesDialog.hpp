@@ -36,17 +36,16 @@ public:
 
 public slots:
 	void retranslate();
+	void setOutputHtml(QString html);
 
 protected:
 	void createDialogContent();
 
 private slots:
-	void queryStarnames();    //!< Connect to a button that triggers information query
-	void queryAncientSkies(); //!< Connect to a button that triggers information query
-	void queryWikipedia();    //!< Connect to a button that triggers information query
-	void onStarnameStatusChanged(); //!< To be connected
-	void onAncientSkiesStatusChanged(); //!< To be connected
-	//void onWikipediaStatusChanged(); //!< To be connected
+	void queryStarnames();    //!< Connect from a button that triggers information query
+	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	void queryWikipedia();    //!< Connect from a button that triggers information query
+	void onHipQueryStatusChanged(); //!< To be connected
 
 private:
 	Ui_onlineQueriesDialogForm* ui;
@@ -55,11 +54,10 @@ private:
 	// The query target websites:
 	// Patrick Gleason's site
 	HipOnlineQuery *starnamesHipQuery;
-	HipOnlineReply *starnamesHipReply;
 	// ancient-skies.org
 	HipOnlineQuery *ancientSkiesHipQuery;
-	HipOnlineReply *ancientSkiesHipReply;
-	// TODO: develop a new class for Wikipedia queries?
+
+	HipOnlineReply *hipOnlineReply;
 
 	QString queryResult; //!< Keep result of last online query
 };

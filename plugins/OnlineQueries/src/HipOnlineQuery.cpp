@@ -105,8 +105,7 @@ HipOnlineQuery::HipOnlineQuery(QString baseURL, QObject* parent) : QObject(paren
 HipOnlineReply* HipOnlineQuery::lookup(const int hipID)
 {
 	// Create the Starnames query
-	QString url(baseURL);
-	url.append(QString::number(hipID));
+	QString url=QString(baseURL).arg(QString::number(hipID));
 	qDebug() << "looking up HIP " << hipID << "at "<< url;
 	return new HipOnlineReply(url, networkMgr);
 }

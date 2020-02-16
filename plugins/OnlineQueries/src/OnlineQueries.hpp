@@ -60,7 +60,6 @@ public:
 	virtual void deinit();
 	virtual void update(double) {;}
 	virtual void draw(StelCore *core);
-	// virtual double getCallOrder(StelModuleActionName actionName) const; // Default 0 seems OK for now.
 	virtual bool configureGui(bool show);
 
 signals:
@@ -72,10 +71,8 @@ public slots:
 	//! Is plugin enabled?
 	bool isEnabled() const { return enabled; }
 
-	//! Get font size for messages
-	int getFontSize(void) const { return fontSize; }
-	//! Set font size for message
-	void setFontSize(int size) { fontSize=size; }
+	QString getPtolemyUrl() const { return ptolemyUrl; }
+	QString getAncientSkiesUrl() const { return ancientSkiesUrl; }
 
 	//! Save the settings to the main configuration file.
 	void saveConfiguration(void);
@@ -93,16 +90,11 @@ private:
 	void createToolbarButton() const;
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
-	StelGui* gui;
 	bool enabled;
 
-	QFont font;      // Probably not required
-	Vec3f textColor; // Probably not required
-	int fontSize;    // Probably not required
 	StelButton* toolbarButton;
 
 	QString ptolemyUrl;
-	QString wikipediaUrl;
 	QString ancientSkiesUrl;
 };
 

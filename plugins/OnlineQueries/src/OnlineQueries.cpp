@@ -63,15 +63,14 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 
 OnlineQueries::OnlineQueries() :
 	enabled(false),
-	textColor(1,0.5,0),
-	fontSize(14),
+	//textColor(1,0.5,0),
+	//fontSize(14),
 	toolbarButton(Q_NULLPTR)
 {
 	setObjectName("OnlineQueries");
 	dialog = new OnlineQueriesDialog();
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
-	gui = dynamic_cast<StelGui*>(app.getGui());
 }
 
 OnlineQueries::~OnlineQueries()
@@ -106,7 +105,6 @@ void OnlineQueries::draw(StelCore *core)
 	Q_UNUSED(core)
 	if (!isEnabled())
 		return;
-
 }
 
 void OnlineQueries::setEnabled(bool b)
@@ -118,14 +116,6 @@ void OnlineQueries::setEnabled(bool b)
 	}
 	configureGui(b);
 }
-
-// Default return 0 seems OK.
-// double OnlineQueries::getCallOrder(StelModuleActionName actionName) const
-// {
-// 	if (actionName==StelModule::ActionDraw)
-// 		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+10.;
-// 	return 0;
-// }
 
 bool OnlineQueries::configureGui(bool show)
 {
@@ -147,16 +137,16 @@ void OnlineQueries::restoreDefaultConfiguration(void)
 void OnlineQueries::loadConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
-	setFontSize(conf->value("font_size", 14).toInt());
+	ptolemyUrl=conf->value("ptolemy_url", "https://biblicalastronomy.co/playground/fetch.cfm?Hipp=%1").toString();
+	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/webservice?hip=%1").toString();
 	conf->endGroup();
 }
 
 void OnlineQueries::saveConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
-	conf->setValue("text_color", StelUtils::vec3fToStr(textColor));
-	conf->setValue("font_size", getFontSize());
+	conf->setValue("ptolemy_url", ptolemyUrl);
+	conf->setValue("ancientskies_url", ancientSkiesUrl);
 	conf->endGroup();
 }
 
