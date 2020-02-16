@@ -31,7 +31,7 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
     
 public:
-   static ObsListCreateEditDialog& Instance(); 
+   static ObsListCreateEditDialog * Instance(); 
     
 protected:
     Ui_obsListCreateEditDialogForm *ui;
