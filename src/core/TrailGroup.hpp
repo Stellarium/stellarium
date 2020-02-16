@@ -29,7 +29,7 @@ class StelPainter;
 class TrailGroup
 {
 public:
-	TrailGroup(float atimeExtent);
+	TrailGroup(float atimeExtent, int maxPoints);
 
 	void draw(StelCore* core, StelPainter*);
 
@@ -43,8 +43,8 @@ public:
 
 	void setOpacity(float op) {opacity=op;}
 
-	//! Reset all trails points
-	void reset();
+	//! Reset (clear) all trails points, and set maximum trail length to keep up framerate
+	void reset(int maxPoints);
 
 private:
 	class Trail
@@ -57,10 +57,12 @@ private:
 		Vec3f color;
 	};
 
+	StelCore *core;
 	QList<Trail> allTrails;
 
 	// Maximum time extent in days
 	float timeExtent;
+	int maxPoints; //!< Limitation to avoid fps breakdown.
 
 	QList<float> times;
 

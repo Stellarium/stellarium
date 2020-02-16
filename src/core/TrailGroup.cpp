@@ -24,10 +24,12 @@
 #include "StelObject.hpp"
 #include "Planet.hpp"
 
-TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
+TrailGroup::TrailGroup(float te, int maxPoints) : timeExtent(te), maxPoints(maxPoints), opacity(1.f)
 {
 	j2000ToTrailNative=Mat4d::identity();
 	j2000ToTrailNativeInverted=Mat4d::identity();
+	core=StelApp::getInstance().getCore();
+	Q_ASSERT(core);
 }
 
 static QVector<Vec3d> vertexArray;
@@ -35,7 +37,7 @@ static QVector<Vec4f> colorArray;
 void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	sPainter->setBlending(true);
-	float currentTime = core->getJDE();
+	float currentTime = static_cast<float>(core->getJDE());
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
@@ -46,7 +48,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		{
 			// Avoid drawing the trails if the object is the home planet
 			QString homePlanetName = hpl->getEnglishName();
-			if (homePlanetName==StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			if (homePlanetName==core->getCurrentLocation().planetName)
 				continue;
 		}
 		const QList<Vec3d>& posHistory = trail.posHistory;
@@ -65,12 +67,12 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 // Add 1 point to all the curves at current time and suppress too old points
 void TrailGroup::update()
 {
-	times.append(StelApp::getInstance().getCore()->getJDE());
+	times.append(static_cast<float>(core->getJDE()));
 	for (auto& trail : allTrails)
 	{
-		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
+		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
 	}
-	if (StelApp::getInstance().getCore()->getJDE()-times.at(0)>timeExtent)
+	if (static_cast<float>(core->getJDE())-times.at(0)>timeExtent || times.length()>maxPoints)
 	{
 		times.pop_front();
 		for (auto& trail : allTrails)
@@ -92,8 +94,9 @@ void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
 	allTrails.append(TrailGroup::Trail(obj, col==Q_NULLPTR ? obj->getInfoColor() : *col));
 }
 
-void TrailGroup::reset()
+void TrailGroup::reset(int maxPoints)
 {
+	this->maxPoints=maxPoints;
 	times.clear();
 	for (auto& trail : allTrails)
 	{

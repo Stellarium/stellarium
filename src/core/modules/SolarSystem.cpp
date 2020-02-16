@@ -80,6 +80,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
+	, maxTrailPoints(5000)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
 	, ephemerisMarkersDisplayed(true)
@@ -190,6 +191,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
+	setMaxTrailPoints(conf->value("viewing/max_trail_points", 5000).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -298,7 +300,7 @@ void SolarSystem::recreateTrails()
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
 	if (allTrails!=Q_NULLPTR)
 		delete allTrails;
-	allTrails = new TrailGroup(365.f);
+	allTrails = new TrailGroup(365.f, maxTrailPoints);
 
 	unsigned long cnt = static_cast<unsigned long>(selectedSSO.size());
 	if (cnt>0 && getFlagIsolatedTrails())
@@ -1599,7 +1601,7 @@ void SolarSystem::setFlagTrails(bool b)
 	{
 		trailFader = b;
 		if (b)
-			allTrails->reset();
+			allTrails->reset(maxTrailPoints);
 		recreateTrails();
 		emit trailsDisplayedChanged(b);
 	}
@@ -1608,6 +1610,17 @@ void SolarSystem::setFlagTrails(bool b)
 bool SolarSystem::getFlagTrails() const
 {
 	return static_cast<bool>(trailFader);
+}
+
+void SolarSystem::setMaxTrailPoints(int max)
+{
+	if (maxTrailPoints != max)
+	{
+		maxTrailPoints = max;
+		allTrails->reset(max);
+		recreateTrails();
+		emit maxTrailPointsChanged(max);
+	}
 }
 
 void SolarSystem::setFlagHints(bool b)
