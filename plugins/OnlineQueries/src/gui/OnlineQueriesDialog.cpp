@@ -141,7 +141,7 @@ void OnlineQueriesDialog::queryStarnames()
 	connect(starnamesHipReply, SIGNAL(statusChanged()), this, SLOT(onStarnameStatusChanged()));
 }
 
-// Called when the current simbad query status changes
+// Called when the current HIP query status changes
 void OnlineQueriesDialog::onStarnameStatusChanged()
 {
 	Q_ASSERT(starnamesHipReply);
@@ -189,7 +189,7 @@ void OnlineQueriesDialog::queryAncientSkies()
 	connect(ancientSkiesHipReply, SIGNAL(statusChanged()), this, SLOT(onAncientSkiesStatusChanged()));
 }
 
-// Called when the current simbad query status changes
+// Called when the current HIP query status changes
 void OnlineQueriesDialog::onAncientSkiesStatusChanged()
 {
 	Q_ASSERT(ancientSkiesHipReply);

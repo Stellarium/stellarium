@@ -23,23 +23,15 @@
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QDebug>
-#include <QTimer>
 
 
-
-HipOnlineReply::HipOnlineReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs)
+HipOnlineReply::HipOnlineReply(const QString& aurl, QNetworkAccessManager* anetMgr)
 	: url(aurl)
-	, reply(Q_NULLPTR)
 	, netMgr(anetMgr)
 	, currentStatus(HipQueryQuerying)
 {
-	if(delayMs <= 0)
-		delayTimerCompleted();
-	else
-	{
-		// First wait before starting query. This is likely not necessary.
-		QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
-	}
+	reply = netMgr->get(QNetworkRequest(url));
+	connect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 }
 
 HipOnlineReply::~HipOnlineReply()
@@ -66,12 +58,6 @@ void HipOnlineReply::deleteNetworkReply()
 	}
 }
 
-void HipOnlineReply::delayTimerCompleted()
-{
-	reply = netMgr->get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
-}
-
 void HipOnlineReply::httpQueryFinished()
 {
 	qDebug() << "StarnamesLookupReply::httpQueryFinished()";
@@ -93,72 +79,6 @@ void HipOnlineReply::httpQueryFinished()
 
 	currentStatus = HipQueryFinished;
 	emit statusChanged();
-
-
-/*
-	// We have 2 kinds of answers...
-
-	if (!reply->isSequential())
-		reply->reset();
-	bool found = false;
-
-	while (!reply->atEnd())
-	{
-		line = reply->readLine();
-		if (line.startsWith("::data"))
-		{
-			found = true;
-			line = reply->readLine();	// Discard first header line
-			break;
-		}
-	}
-	if (found)
-	{
-		line = reply->readLine();
-		line.chop(1); // Remove a line break at the end
-		while (!line.isEmpty())
-		{
-			if (line=="No Coord.")
-			{
-				reply->readLine();
-				line = reply->readLine();
-				line.chop(1); // Remove a line break at the end
-				continue;
-			}
-			QList<QByteArray> l = line.split(' ');
-			if (l.size()!=2)
-			{
-				currentStatus = StarnamesLookupErrorOccured;
-				errorString = q_("Error parsing position");
-				emit statusChanged();
-				return;
-			}
-			else
-			{
-				bool ok1, ok2;
-				const double ra = l[0].toDouble(&ok1)*M_PI/180.;
-				const double dec = l[1].toDouble(&ok2)*M_PI/180.;
-				if (ok1==false || ok2==false)
-				{
-					currentStatus = StarnamesLookupErrorOccured;
-					errorString = q_("Error parsing position");
-					emit statusChanged();
-					return;
-				}
-				Vec3d v;
-				StelUtils::spheToRect(ra, dec, v);
-				line = reply->readLine();
-				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");
-				resultPositions[line.simplified()]=v; // Remove an extra spaces
-			}
-			line = reply->readLine();
-			line.chop(1); // Remove a line break at the end
-		}
-		currentStatus = StarnamesLookupFinished;
-		emit statusChanged();
-	}
-*/
 }
 
 // Get a I18n string describing the current status.
@@ -181,12 +101,12 @@ HipOnlineQuery::HipOnlineQuery(QString baseURL, QObject* parent) : QObject(paren
 	networkMgr = new QNetworkAccessManager(this);
 }
 
-// Lookup in Starnames for the passed object name.
-HipOnlineReply* HipOnlineQuery::lookup(const int hipID, const int delayMs)
+// Lookup in external database for the passed HIP number.
+HipOnlineReply* HipOnlineQuery::lookup(const int hipID)
 {
 	// Create the Starnames query
 	QString url(baseURL);
 	url.append(QString::number(hipID));
 	qDebug() << "looking up HIP " << hipID << "at "<< url;
-	return new HipOnlineReply(url, networkMgr, delayMs);
+	return new HipOnlineReply(url, networkMgr);
 }

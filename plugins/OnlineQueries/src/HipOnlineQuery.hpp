@@ -19,9 +19,7 @@
 #ifndef HIPONLINEQUERY_HPP
 #define HIPONLINEQUERY_HPP
 
-#include "VecMath.hpp"
 #include <QObject>
-#include <QMap>
 
 class QNetworkReply;
 class QNetworkAccessManager;
@@ -68,11 +66,10 @@ signals:
 
 private slots:
 	void httpQueryFinished();
-	void delayTimerCompleted();
 
 private:
 	//! Private constructor can be called by HipOnlineQuery only.
-	HipOnlineReply(const QString& url, QNetworkAccessManager* mgr, int delayMs=0);
+	HipOnlineReply(const QString& url, QNetworkAccessManager* mgr);
 
 	const QString url;
 
@@ -102,11 +99,10 @@ public:
 	//! @param baseURL complete URL like "https://mysite.org/lookForInfo.php?HIP="
 	HipOnlineQuery(QString baseURL, QObject* parent = Q_NULLPTR);
 
-	//! Lookup in a Starnames site for object with catalog number.
+	//! Lookup in an external starnames information site for object with catalog number.
 	//! @param hipID the object ID. Only HIP IDs are supported.
-	//! @param delayMs a delay in ms to wait for before actually triggering the lookup.
-	//! @return a new StarnamesLookupReply which is owned by the caller.
-	HipOnlineReply* lookup(const int hipID, const int delayMs=500);
+	//! @return a new HipOnlineReply which is owned by the caller.
+	HipOnlineReply* lookup(const int hipID);
 
 private:
 	//! The specific URL for the site like "https://mysite.org/lookForInfo.php?HIP="
