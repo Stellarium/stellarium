@@ -21,8 +21,10 @@
 #define OBSLISTDIALOG_H
 
 #include <QObject>
+#include <QStandardItemModel>
 
 #include "StelDialog.hpp"
+#include "StelCore.hpp"
 
 class Ui_obsListDialogForm;
 
@@ -34,6 +36,31 @@ public:
     ObsListDialog(QObject* parent);
     virtual ~ObsListDialog();
 
+protected:
+    Ui_obsListDialogForm *ui;
+    //! Initialize the dialog widgets and connect the signals/slots.
+    virtual void createDialogContent();
+    
+private:
+    enum ObsListColumns {
+		ColumnUUID,	//! UUID of observing list
+		ColumnName,	//! name or designation of object
+		ColumnRa,	//! Right ascencion of object
+		ColumnDec,	//! Declination of object
+		ColumnMagnitude,	//! Magnitude of object
+		ColumnConstellation, //! Constellation of object
+		ColumnCount	//! total number of columns
+	};
+    QStandardItemModel * obsListListModel;
+    class StelCore* core;
+    
+    //! Update header names for observing list table
+	void setObservingListHeaderNames();
+    
+
+public slots:
+    void retranslate();
+    
 private slots:
     void obsListHighLightAllButtonPressed();
     void obsListClearHighLightButtonPressed();

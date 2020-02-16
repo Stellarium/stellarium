@@ -34,6 +34,9 @@ public:
     ObsListCreateEditDialog(QObject* parent);
     ~ObsListCreateEditDialog();
     
+protected:
+    Ui_obsListCreateEditDialogForm *ui;
+    
 private slots:
     void obsListAddObjectButtonPressed();
     void obsListRemoveObjectButtonPressed();

@@ -20,8 +20,9 @@
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
 
-ObsListCreateEditDialog::ObsListCreateEditDialog(QObject* parent)
+ObsListCreateEditDialog::ObsListCreateEditDialog(QObject* parent): StelDialog("Observing list creation/edition", parent)
 {
+    ui = new Ui_obsListCreateEditDialogForm();
 
 }
 
