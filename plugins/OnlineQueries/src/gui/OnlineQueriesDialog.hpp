@@ -23,7 +23,6 @@
 
 #include "StelDialog.hpp"
 #include "ui_onlineQueriesDialog.h"
-#include "HipOnlineQuery.hpp"
 
 class OnlineQueries;
 
@@ -42,24 +41,11 @@ protected:
 	void createDialogContent();
 
 private slots:
-	void queryStarnames();    //!< Connect from a button that triggers information query
-	void queryAncientSkies(); //!< Connect from a button that triggers information query
-	void queryWikipedia();    //!< Connect from a button that triggers information query
-	void onHipQueryStatusChanged(); //!< To be connected
 
 private:
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
 
-	// The query target websites:
-	// Patrick Gleason's site
-	HipOnlineQuery *starnamesHipQuery;
-	// ancient-skies.org
-	HipOnlineQuery *ancientSkiesHipQuery;
-
-	HipOnlineReply *hipOnlineReply;
-
-	QString queryResult; //!< Keep result of last online query
 };
 
 #endif

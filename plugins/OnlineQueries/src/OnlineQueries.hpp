@@ -22,6 +22,7 @@
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
+#include "HipOnlineQuery.hpp"
 
 #include <QFont>
 #include <QString>
@@ -59,7 +60,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core){Q_UNUSED(core)}
 	virtual bool configureGui(bool show);
 
 signals:
@@ -68,14 +69,18 @@ signals:
 public slots:
 	//! Enable plugin usage (show dialog)
 	void setEnabled(bool b);
-	//! Is plugin enabled?
+	//! Is plugin dialog shown?
 	bool isEnabled() const { return enabled; }
 
-	QString getPtolemyUrl() const { return ptolemyUrl; }
-	QString getAncientSkiesUrl() const { return ancientSkiesUrl; }
+	//QString getPtolemyUrl() const { return ptolemyUrl; }
+	//QString getAncientSkiesUrl() const { return ancientSkiesUrl; }
 
 	//! Save the settings to the main configuration file.
 	void saveConfiguration(void);
+
+	void queryStarnames();    //!< Connect from a button that triggers information query
+	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	void queryWikipedia();    //!< Connect from a button that triggers information query
 
 private slots:
 	//! Set up the plugin with default values.  This means clearing out the OnlineQueries section in the
@@ -86,16 +91,24 @@ private slots:
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void loadConfiguration(void);
 
+	void onHipQueryStatusChanged(); //!< To be connected
+
 private:
 	void createToolbarButton() const;
+	void setOutputHtml(QString html); // Forward html to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;
 
 	StelButton* toolbarButton;
 
-	QString ptolemyUrl;
-	QString ancientSkiesUrl;
+	QString ptolemyUrl;                    // settable via config.ini
+	QString ancientSkiesUrl;               // settable via config.ini
+
+	// The query target websites:
+	HipOnlineQuery *starnamesHipQuery;     // Patrick Gleason's site
+	HipOnlineQuery *ancientSkiesHipQuery;  // ancient-skies.org
+	HipOnlineReply *hipOnlineReply;        // Common reply object
 };
 
 

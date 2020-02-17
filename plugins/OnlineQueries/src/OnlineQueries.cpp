@@ -28,6 +28,10 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelObjectMgr.hpp"
+#include "Star.hpp"
+#include "StarMgr.hpp"
+#include "Planet.hpp"
+#include "NebulaMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelDialog.hpp"
 #include "OnlineQueries.hpp"
@@ -37,6 +41,7 @@
 #include <QSettings>
 #include <QMetaEnum>
 #include <QLoggingCategory>
+#include <QDesktopServices>
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
 
@@ -63,9 +68,10 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 
 OnlineQueries::OnlineQueries() :
 	enabled(false),
-	//textColor(1,0.5,0),
-	//fontSize(14),
-	toolbarButton(Q_NULLPTR)
+	toolbarButton(Q_NULLPTR),
+	starnamesHipQuery(Q_NULLPTR),
+	ancientSkiesHipQuery(Q_NULLPTR),
+	hipOnlineReply(Q_NULLPTR)
 {
 	setObjectName("OnlineQueries");
 	dialog = new OnlineQueriesDialog();
@@ -75,6 +81,15 @@ OnlineQueries::OnlineQueries() :
 
 OnlineQueries::~OnlineQueries()
 {
+	if (hipOnlineReply)
+	{
+		hipOnlineReply->deleteLater();
+		hipOnlineReply = Q_NULLPTR;
+	}
+	delete starnamesHipQuery;
+	starnamesHipQuery=Q_NULLPTR;
+	delete ancientSkiesHipQuery;
+	ancientSkiesHipQuery=Q_NULLPTR;
 	delete dialog;
 }
 
@@ -88,23 +103,20 @@ void OnlineQueries::init()
 	// populate settings from main config file.
 	loadConfiguration();
 
-	addAction("actionShow_OnlineQueries", N_("Online Queries"), N_("Show window for Online Queries"), this, "enabled", "");
-	createToolbarButton();
+	starnamesHipQuery=new HipOnlineQuery(ptolemyUrl);
+	ancientSkiesHipQuery=new HipOnlineQuery(ancientSkiesUrl);
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int))); // Probably not needed.
+	addAction("actionShow_OnlineQueries", N_("Online Queries"), N_("Show window for Online Queries"), this, "enabled", "");
+	addAction("actionShow_OnlineQueries_SN", N_("Online Queries"), N_("Call a Starnames site on current selection"), this, "queryStarnames()", "");
+	addAction("actionShow_OnlineQueries_AS", N_("Online Queries"), N_("Call ancient-skies on current selection"), this, "queryAncientSkies()", "");
+	addAction("actionShow_OnlineQueries_WP", N_("Online Queries"), N_("Call Wikipedia on current selection"), this, "queryWikipedia()", "");
+	createToolbarButton();
 }
 
 void OnlineQueries::deinit()
 {
 	//
-}
-
-void OnlineQueries::draw(StelCore *core)
-{
-	Q_UNUSED(core)
-	if (!isEnabled())
-		return;
 }
 
 void OnlineQueries::setEnabled(bool b)
@@ -119,8 +131,7 @@ void OnlineQueries::setEnabled(bool b)
 
 bool OnlineQueries::configureGui(bool show)
 {
-	if (show)
-		dialog->setVisible(show);
+	dialog->setVisible(show);
 	return true;
 }
 
@@ -173,4 +184,131 @@ void OnlineQueries::createToolbarButton() const
 	{
 		qCWarning(onlineQueries) << "WARNING: unable to create toolbar button for OnlineQueries plugin: " << e.what();
 	}
+}
+
+void OnlineQueries::queryStarnames()
+{
+	setOutputHtml("<h1>Starnames</h1><p>querying...</p>");
+
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+	if (obj->getType()!=STAR_TYPE)
+		return;
+
+	QString hipStr=obj->getID();
+	if (!hipStr.startsWith("HIP"))
+		return;
+
+	int hipNr=hipStr.split(' ').at(1).toInt();
+	hipOnlineReply=starnamesHipQuery->lookup(hipNr);
+
+	onHipQueryStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+}
+
+void OnlineQueries::queryAncientSkies()
+{
+	setOutputHtml("<h1>Ancient-Skies.org</h1><p>querying...</p>");
+
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+	if (obj->getType()!=STAR_TYPE)
+		return;
+
+	QString hipStr=obj->getID();
+	if (!hipStr.startsWith("HIP"))
+		return;
+
+	int hipNr=hipStr.split(' ').at(1).toInt();
+	hipOnlineReply=ancientSkiesHipQuery->lookup(hipNr);
+
+	onHipQueryStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+}
+
+// Called when the current HIP query status changes
+void OnlineQueries::onHipQueryStatusChanged()
+{
+	setEnabled(true); // show dialog
+	//HipOnlineReply *reply=static_cast<HipOnlineReply*>(sender());
+	Q_ASSERT(hipOnlineReply);
+	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
+	{
+		setOutputHtml(QString("<p>Lookup error: %1</p>").arg(hipOnlineReply->getErrorString()));
+	}
+
+	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
+	{
+		setOutputHtml(hipOnlineReply->getResult());
+	}
+
+	if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
+	{
+		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		delete hipOnlineReply;
+		hipOnlineReply=Q_NULLPTR;
+	}
+}
+
+void OnlineQueries::queryWikipedia()
+{
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+
+	QString objName;
+	if (obj->getType()==STAR_TYPE)
+	{
+		QString hipStr=obj->getID();
+		if (!hipStr.startsWith("HIP"))
+			return;
+		int hipNr=hipStr.split(' ').at(1).toInt();
+		objName=StarMgr::getCommonEnglishName(hipNr);
+	}
+	else if (obj->getType()==Planet::PLANET_TYPE)
+	{
+		objName=obj->getEnglishName();
+	}
+	else if (obj->getType()==Nebula::NEBULA_TYPE)
+	{
+		// clumsy workaround for uncastable pointer...
+		objName = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		if (objName.isEmpty())
+		{
+			objName=obj->getEnglishName();
+		}
+		// WP has all Messiers with Messier_X. Use that directly to avoid ambiguity.
+		if (objName.startsWith("M "))
+		{
+			objName=objName.replace("M ", "Messier_");
+		}
+		// TODO: Other similar replacements?
+		if (objName.isEmpty())
+		{
+			setOutputHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few catalogs to form a numerical name.</p>"));
+			return;
+		}
+	}
+	else
+	{
+		setOutputHtml(QString("<h1>Wikipedia</h1><p>This can request data for stars, planets and deep-sky objects only.</p>"));
+		return;
+	}
+	setOutputHtml(QString("<h1>Wikipedia</h1><p>Opened page on '%1' in your webbrowser.</p>").arg(objName));
+
+	QDesktopServices::openUrl(QUrl(QString("https://en.wikipedia.org/wiki/%1").arg(objName)));
+}
+
+void OnlineQueries::setOutputHtml(QString html)
+{
+	if (dialog)
+		dialog->setOutputHtml(html);
 }
