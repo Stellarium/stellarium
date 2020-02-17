@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "ui_MSSearchDialog.h"
@@ -156,29 +157,30 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 {
 	// plugin is disabled ? enable it automatically
 	if (!m_mgr->getEnablePlugin())
-	{
 		m_mgr->setEnablePlugin(true);
-	}
 
 	// Change date
+	StelCore *core = StelApp::getInstance().getCore();
 	QDate peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data(Qt::UserRole).toDate();
-	StelApp::getInstance().getCore()->setJD(peak.toJulianDay());
+	core->setJD(peak.toJulianDay());
 
 	// Find the object
-	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();	
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
 	StelObjectP obj = m_mgr->getMeteorShowers()->searchByNameI18n(nameI18n);
 	if (!obj)
-	{
 		obj = m_mgr->getMeteorShowers()->searchByName(nameI18n);
+
+	if (obj) // Set time near transit...
+	{
+		Vec3f rts = obj->getRTSTime(core);
+		double JD = core->getJD();
+		JD = static_cast<int>(JD) + 0.5 + rts[1]/24.f - core->getUTCOffset(JD)/24.;
+		core->setJD(JD);
 	}
 
 	//Move to object
-	if (obj)
-	{
-		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-		mvmgr->moveToObject(obj, mvmgr->getAutoMoveDuration());
-		mvmgr->setFlagTracking(true);
-	}
+	GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(nameI18n);
+	GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 }
 
 void MSSearchDialog::refreshRangeDates()

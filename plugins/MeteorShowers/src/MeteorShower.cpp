@@ -510,41 +510,23 @@ Vec3f MeteorShower::getInfoColor(void) const
 
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	if (!enabled())
-	{
-		GETSTELMODULE(StelObjectMgr)->unSelect();
-		return "";
-	}
-
 	QString str;
 	QTextStream oss(&str);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-	QString mstdata;
-	if (m_status == ACTIVE_GENERIC)
-	{
-		mstdata = q_("generic data");
-	}
-	else if (m_status == ACTIVE_CONFIRMED)
-	{
-		mstdata = q_("confirmed data");
-	}
-	else if (m_status == INACTIVE)
-	{
-		mstdata = q_("inactive");
-	}
+	const QMap<MeteorShower::Status, QString>mstMap={
+		{ ACTIVE_GENERIC, q_("generic data")},
+		{ ACTIVE_CONFIRMED, q_("confirmed data")},
+		{ INACTIVE, q_("inactive")}};
+	QString mstdata = mstMap.value(m_status, "");
 
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
 		if (!m_showerID.toInt())
-		{
 			oss << " (" << m_showerID  <<")</h2>";
-		}
 		else
-		{
 			oss << "</h2>";
-		}
 	}
 
 	if (flags&Extra)
