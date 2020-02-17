@@ -47,21 +47,21 @@ build:
   parallel: true
   verbosity: minimal
   
-after_build:
+test_script:
+  - ctest --output-on-failure
+  
+after_test:
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
   - if [%packaging%]==[true] (
       appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%platform%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip &&
       7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
     )
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
-  - if [%packaging%]==[true] ( for /R c:\stellarium\installers %a in (stellarium*.exe) do appveyor PushArtifact %a )
-  
-test_script:
-  - cmd: ctest --output-on-failure
+#  - if [%packaging%]==[true] ( for /R c:\stellarium\installers %a in (stellarium*.exe) do appveyor PushArtifact %a )
 
-#artifacts:
-#- path: 'installers\stellarium*.exe'
-#  name: stellarium-installer
+artifacts:
+- path: 'installers\stellarium*.exe'
+  name: stellarium-installer
 
 # deployment
 deploy:
