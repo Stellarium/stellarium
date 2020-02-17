@@ -54,7 +54,7 @@ after_build:
       7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
     )
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
-  - if [%packaging%]==[true] ( for /R c:\stellarium\installers %a in (stellarium*.exe) do set fileName=%a && appveyor PushArtifact %fileName% )
+  - if [%packaging%]==[true] ( for /R c:\stellarium\installers %a in (stellarium*.exe) do appveyor PushArtifact %a )
   
 test_script:
   - cmd: ctest --output-on-failure
