@@ -3,6 +3,8 @@ version: '{branch}-{build}'
 configuration: Release
 # clone directory
 clone_folder: c:\stellarium
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true
 # environment variables
 environment:
   matrix:
@@ -52,13 +54,14 @@ after_build:
       7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
     )
   - cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  - if [%packaging%]==[true] ( appveyor PushArtifact c:\stellarium\installers\stellarium*.exe )
   
 test_script:
   - cmd: ctest --output-on-failure
 
-artifacts:
-- path: 'installers\stellarium*.exe'
-  name: stellarium-installer
+#artifacts:
+#- path: 'installers\stellarium*.exe'
+#  name: stellarium-installer
 
 # deployment
 deploy:
