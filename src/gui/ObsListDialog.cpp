@@ -73,6 +73,16 @@ void ObsListDialog::retranslate()
 	}
 }
 
+
+/*
+ * Style changed 
+*/
+void ObsListDialog::styleChanged()
+{
+    // Nothing for now
+}
+
+
 /*
  * Set the header for the observing list table
  * (obsListTreeVView)

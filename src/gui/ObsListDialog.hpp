@@ -35,6 +35,9 @@ class ObsListDialog : public StelDialog
 public:
     ObsListDialog(QObject* parent);
     virtual ~ObsListDialog();
+    
+    //! Notify that the application style changed
+	void styleChanged();
 
 protected:
     Ui_obsListDialogForm *ui;

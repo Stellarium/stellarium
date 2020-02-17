@@ -42,7 +42,7 @@ class SearchDialog;
 class ViewDialog;
 class ShortcutsDialog;
 class AstroCalcDialog;
-class BookmarksDialog;
+class ObsListDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
@@ -181,10 +181,10 @@ public slots:
 	//! Get whether the button toggling fullscreen view is visible
 	bool getFlagShowFullscreenButton() const;
 
-	//! Define whether the button toggling bookmarks should be visible
-	void setFlagShowBookmarksButton(bool b);
-	//! Get whether the button toggling bookmarks is visible
-	bool getFlagShowBookmarksButton() const;
+	//! Define whether the button toggling observing list should be visible
+	void setFlagShowObsListButton(bool b);
+	//! Get whether the button toggling observing list is visible
+	bool getFlagShowObsListButton() const;
 
 	//! Define whether the button toggling ICRS grid should be visible
 	void setFlagShowICRSGridButton(bool b);
@@ -263,7 +263,7 @@ signals:
 	void flagShowGotoSelectedObjectButtonChanged(bool b);
 	void flagShowNightmodeButtonChanged(bool b);
 	void flagShowFullscreenButtonChanged(bool b);
-	void flagShowBookmarksButtonChanged(bool b);
+	void flagShowObsListButtonChanged(bool b);
 	void flagShowICRSGridButtonChanged(bool b);
 	void flagShowGalacticGridButtonChanged(bool b);
 	void flagShowEclipticGridButtonChanged(bool b);
@@ -320,7 +320,7 @@ private:
 	ScriptConsole* scriptConsole;
 #endif
 	AstroCalcDialog* astroCalcDialog;
-	BookmarksDialog* bookmarksDialog;
+    ObsListDialog* obsListDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;
@@ -341,8 +341,8 @@ private:
 	bool flagShowFullscreenButton;
 	StelButton* buttonFullscreen;
 
-	bool flagShowBookmarksButton;
-	StelButton* btShowBookmarks;
+	bool flagShowObsListButton;
+	StelButton* btShowObsList;
 
 	bool flagShowICRSGridButton;
 	StelButton* btShowICRSGrid;

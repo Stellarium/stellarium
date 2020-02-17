@@ -31,13 +31,15 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
     
 public:
-   static ObsListCreateEditDialog * Instance(); 
+   static ObsListCreateEditDialog * Instance(QObject* parent); 
     
 protected:
+    static ObsListCreateEditDialog * m_instance;
     Ui_obsListCreateEditDialogForm *ui;
+    //! Initialize the dialog widgets and connect the signals/slots.
+    virtual void createDialogContent();
     
 private:
-   static ObsListCreateEditDialog * m_instance;
    ObsListCreateEditDialog(QObject* parent);
    virtual ~ObsListCreateEditDialog(); 
     

@@ -20,6 +20,8 @@
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
 
+ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
+
 ObsListCreateEditDialog::ObsListCreateEditDialog(QObject* parent): StelDialog("Observing list creation/edition", parent)
 {
     ui = new Ui_obsListCreateEditDialogForm();
@@ -29,6 +31,26 @@ ObsListCreateEditDialog::ObsListCreateEditDialog(QObject* parent): StelDialog("O
 ObsListCreateEditDialog::~ObsListCreateEditDialog()
 {
 
+}
+
+/**
+ * Get instance of class 
+*/
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance(QObject* parent)
+{
+    if(m_instance == nullptr){
+        m_instance = new ObsListCreateEditDialog(parent);
+    }
+    
+    return m_instance;
+}
+
+
+/*
+ * Initialize the dialog widgets and connect the signals/slots.
+*/
+void ObsListCreateEditDialog::createDialogContent()
+{
 }
 
 /*
