@@ -427,16 +427,9 @@ MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) c
 		found = date.operator >=(g.start) && date.operator <=(g.finish);
 	}
 
-	if (found)
-	{
-		g.year = g.start.year();
-		g.peak.setDate(peakOnStart ? g.start.year() : g.finish.year(),
-			       g.peak.month(),
-			       g.peak.day());
-		return g;
-	}
-
-	return Activity();
+	g.year = g.start.year();
+	g.peak.setDate(peakOnStart ? g.start.year() : g.finish.year(), g.peak.month(), g.peak.day());
+	return g;
 }
 
 MeteorShower::Activity MeteorShower::hasConfirmedShower(QDate date, bool& found) const
@@ -497,9 +490,7 @@ QString MeteorShower::getSolarLongitude(QDate date)
 QString MeteorShower::getDesignation() const
 {
 	if (m_showerID.toInt()) // if showerID is a number
-	{
-		return "";
-	}
+		return QString();
 	return m_showerID;
 }
 
@@ -569,55 +560,48 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		if (!m_parentObj.isEmpty())
 			oss << QString("%1: %2").arg(q_("Parent body")).arg(q_(m_parentObj)) << "<br />";
 
-		// activity info
-		if (m_status != INACTIVE)
+		QString actStr = q_("Activity");
+		if(m_activity.start.month() == m_activity.finish.month())
 		{
-			QString actStr = q_("Activity");
-			if(m_activity.start.month() == m_activity.finish.month())
+			oss << QString("%1: %2 - %3 %4")
+			       .arg(actStr)
+			       .arg(m_activity.start.day())
+			       .arg(m_activity.finish.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()));
+		}
+		else
+		{
+			oss << QString("%1: %2 %3 - %4 %5")
+			       .arg(actStr)
+			       .arg(m_activity.start.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()))
+			       .arg(m_activity.finish.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.finish.month()));
+		}
+		oss << "<br />";
+		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
+
+		oss << QString(" (%1 %2&deg;)")
+		       .arg(q_("Solar longitude"))
+		       .arg(getSolarLongitude(m_activity.peak));
+		oss << "<br />";
+
+		if(m_activity.zhr > 0)
+			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
+		else
+		{
+			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
+			if(m_activity.variable.size() == 2)
 			{
-				oss << QString("%1: %2 - %3 %4")
-				       .arg(actStr)
-				       .arg(m_activity.start.day())
-				       .arg(m_activity.finish.day())
-				       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()));
-			}
-			else
-			{
-				oss << QString("%1: %2 %3 - %4 %5")
-				       .arg(actStr)
-				       .arg(m_activity.start.day())
-				       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()))
-				       .arg(m_activity.finish.day())
-				       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.finish.month()));
+				oss << QString("; %1-%2")
+				       .arg(m_activity.variable.at(0))
+				       .arg(m_activity.variable.at(1));
 			}
 			oss << "<br />";
-			oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
-
-			oss << QString(" (%1 %2&deg;)")
-			       .arg(q_("Solar longitude"))
-			       .arg(getSolarLongitude(m_activity.peak));
-			oss << "<br />";
-
-			if(m_activity.zhr > 0)
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
-			}
-			else
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
-				if(m_activity.variable.size() == 2)
-				{
-					oss << QString("; %1-%2")
-					       .arg(m_activity.variable.at(0))
-					       .arg(m_activity.variable.at(1));
-				}
-				oss << "<br />";
-			}
 		}
 	}
 
 	postProcessInfoString(str, flags);
-
 	return str;
 }
 
