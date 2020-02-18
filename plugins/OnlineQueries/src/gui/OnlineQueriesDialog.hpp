@@ -45,7 +45,6 @@ private slots:
 private:
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
-
 };
 
 #endif
