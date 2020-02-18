@@ -640,8 +640,8 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$REPQT" == true ]]; then ( Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
-  - mkdir build
-  - cd build
+  - mkdir builds
+  - cd builds
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" || "$TRAVIS_OS_NAME" == "osx" ]]; then

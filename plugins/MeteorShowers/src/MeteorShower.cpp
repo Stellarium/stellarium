@@ -501,7 +501,7 @@ Vec3f MeteorShower::getInfoColor(void) const
 
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	QString str;
+	QString str, designation = getDesignation();
 	QTextStream oss(&str);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
@@ -514,10 +514,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
-		if (!m_showerID.toInt())
-			oss << " (" << m_showerID  <<")</h2>";
-		else
-			oss << "</h2>";
+		if (!designation.isEmpty())
+			oss << " (" << designation  <<")";
+		oss << "</h2>";
 	}
 
 	if (flags&Extra)
@@ -537,12 +536,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			sDriftRA = StelUtils::radToDecDegStr(static_cast<double>(m_driftAlpha),4,false,true);
 			sDriftDE = StelUtils::radToDecDegStr(static_cast<double>(m_driftDelta),4,false,true);
 		}
-
-		oss << QString("%1: %2/%3")
-			.arg(q_("Radiant drift (per day)"))
-			.arg(sDriftRA)
-			.arg(sDriftDE);
-		oss << "<br />";
+		oss << QString("%1: %2/%3").arg(q_("Radiant drift (per day)"), sDriftRA, sDriftDE) << "<br />";
 
 		if (m_speed > 0)
 		{
@@ -579,12 +573,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.finish.month()));
 		}
 		oss << "<br />";
-		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
-
-		oss << QString(" (%1 %2&deg;)")
-		       .arg(q_("Solar longitude"))
-		       .arg(getSolarLongitude(m_activity.peak));
-		oss << "<br />";
+		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day())
+		       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(getSolarLongitude(m_activity.peak)) << "<br />";
 
 		if(m_activity.zhr > 0)
 			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
@@ -592,11 +583,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		{
 			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
 			if(m_activity.variable.size() == 2)
-			{
-				oss << QString("; %1-%2")
-				       .arg(m_activity.variable.at(0))
-				       .arg(m_activity.variable.at(1));
-			}
+				oss << QString("; %1-%2").arg(m_activity.variable.at(0)).arg(m_activity.variable.at(1));
 			oss << "<br />";
 		}
 	}
@@ -617,23 +604,14 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 			{ INACTIVE, "inactive"}};
 		map.insert("status", mstMap.value(m_status, ""));
 
-		if (!m_showerID.toInt())
-		{
-			map.insert("id", m_showerID);
-		}
-		else
-		{
-			map.insert("id", "?");
-		}
-
+		QString designation = getDesignation();
+		map.insert("id", designation.isEmpty() ? "?" : designation);
 		map.insert("velocity", m_speed);
 		map.insert("population-index", m_pidx);
 		map.insert("parent", m_parentObj);
 
 		if(m_activity.zhr > 0)
-		{
 			map.insert("zhr-max", m_activity.zhr);
-		}
 		else
 		{
 			QString varStr="variable";
