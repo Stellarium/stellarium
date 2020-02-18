@@ -746,8 +746,8 @@ void StelGui::setFlagShowObsListButton(bool b)
 			if (btShowObsList==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
-				QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
+				QPixmap pxmapOn(":/graphicGui/btObsListA-on.png");
+				QPixmap pxmapOff(":/graphicGui/btObsListA-off.png");
 				btShowObsList = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_ObsList_Window_Global");
 			}
 			getButtonBar()->addButton(btShowObsList, "060-othersGroup");
@@ -1242,9 +1242,9 @@ bool StelGui::getFlagShowFullscreenButton() const
 	return flagShowFullscreenButton;
 }
 
-bool StelGui::getFlagShowBookmarksButton() const
+bool StelGui::getFlagShowObsListButton() const
 {
-	return flagShowBookmarksButton;
+	return flagShowObsListButton;
 }
 
 bool StelGui::getFlagShowICRSGridButton() const

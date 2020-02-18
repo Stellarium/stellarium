@@ -47,6 +47,7 @@ void ObsListDialog::createDialogContent()
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+    connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
     
     //Initializing the list of observing list
 	obsListListModel->setColumnCount(ColumnCount);
