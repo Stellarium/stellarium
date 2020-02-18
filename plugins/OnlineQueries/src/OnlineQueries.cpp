@@ -285,11 +285,17 @@ void OnlineQueries::queryWikipedia()
 		{
 			objName=obj->getEnglishName();
 		}
-		// WP has all Messiers with Messier_X. Use that directly to avoid ambiguity.
+		// WP has all Messiers and a few other catalogs with Messier_X and similar fuller names. Use those directly to avoid ambiguity.
 		if (objName.startsWith("M "))
-		{
 			objName=objName.replace("M ", "Messier_");
-		}
+		else if (objName.startsWith("C "))
+			objName=objName.replace("C ", "Caldwell_");
+		else if (objName.startsWith("B "))
+			objName=objName.replace("B ", "Barnard_");
+		else if (objName.startsWith("Cr "))
+			objName=objName.replace("Cr ", "Collinder_");
+		else if (objName.startsWith("Mel "))
+			objName=objName.replace("Mel ", "Melotte_");
 		// TODO: Other similar replacements?
 		if (objName.isEmpty())
 		{
