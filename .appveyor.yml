@@ -20,18 +20,18 @@ environment:
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
     packaging: true
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: x64
-    qtver: 5.12
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
-    packaging: false
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: Win32
-    qtver: 5.12
-    qtbin: msvc2017
-    msvcname: Visual Studio 15 2017
-    packaging: false
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#    platform: x64
+#    qtver: 5.12
+#    qtbin: msvc2017_64
+#    msvcname: Visual Studio 15 2017 Win64
+#    packaging: false
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#    platform: Win32
+#    qtver: 5.12
+#    qtbin: msvc2017
+#    msvcname: Visual Studio 15 2017
+#    packaging: false
   
 before_build:
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
