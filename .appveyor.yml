@@ -32,8 +32,9 @@ environment:
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: false
-  
+
 before_build:
+  - set PUBLISH_BINARY=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
@@ -49,21 +50,16 @@ build:
   
 test_script:
   - ctest --output-on-failure
-  
+
 after_test:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%platform%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
-  - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff    
+  - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
-  - if [%PUBLISH_BINARY%]==[true] for /R c:\stellarium\installers %a in (stellarium*.exe) do set artifactName=%a
-  - if [%PUBLISH_BINARY%]==[true] echo %artifactName%
-  - if [%PUBLISH_BINARY%]==[true] appveyor PushArtifact %artifactName%
-
-#artifacts:
-#- path: 'installers\stellarium*.exe'
-#  name: stellarium-installer
+  - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
+  - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
 
 # deployment
 deploy:

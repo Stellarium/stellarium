@@ -590,12 +590,12 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    - os: windows
-      env:
-        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
-        - MSVCNAME="Visual Studio 15 2017 Win64"
-        - TRANSLATE=false
-        - COVERAGE=false
+#    - os: windows
+#      env:
+#        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
+#        - MSVCNAME="Visual Studio 15 2017 Win64"
+#        - TRANSLATE=false
+#        - COVERAGE=false
 
 before_install:
   - eval "${MATRIX_EVAL}"
