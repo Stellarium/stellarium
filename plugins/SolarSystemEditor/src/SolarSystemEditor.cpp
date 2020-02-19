@@ -194,7 +194,7 @@ bool SolarSystemEditor::configureGui(bool show)
 void SolarSystemEditor::updateI18n()
 {
 	//The Solar System MUST be translated before updating the window
-	//TODO: Remove this if/when you merge this module in the Solar System module
+	//NOTE: Remove this if/when you merge this module in the Solar System module
 	solarSystem->updateI18n();
 }
 

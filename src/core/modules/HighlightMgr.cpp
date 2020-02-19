@@ -76,41 +76,41 @@ void HighlightMgr::draw(StelCore* core)
 
 QList<StelObjectP> HighlightMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
-	Q_UNUSED(av);
-	Q_UNUSED(limitFov);
+	Q_UNUSED(av)
+	Q_UNUSED(limitFov)
 	return QList<StelObjectP>();
 }
 
 StelObjectP HighlightMgr::searchByName(const QString& englishName) const
 {
-	Q_UNUSED(englishName);
+	Q_UNUSED(englishName)
 	return Q_NULLPTR;
 }
 
 StelObjectP HighlightMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	Q_UNUSED(nameI18n);
+	Q_UNUSED(nameI18n)
 	return Q_NULLPTR;
 }
 
 StelObjectP HighlightMgr::searchByID(const QString& id) const
 {
-	Q_UNUSED(id);
+	Q_UNUSED(id)
 	return Q_NULLPTR;
 }
 
 QStringList HighlightMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
-	Q_UNUSED(objPrefix);
-	Q_UNUSED(maxNbItem);
-	Q_UNUSED(useStartOfWords);
-	Q_UNUSED(inEnglish);
+	Q_UNUSED(objPrefix)
+	Q_UNUSED(maxNbItem)
+	Q_UNUSED(useStartOfWords)
+	Q_UNUSED(inEnglish)
 	return QStringList();
 }
 
 QStringList HighlightMgr::listAllObjects(bool inEnglish) const
 {
-	Q_UNUSED(inEnglish);
+	Q_UNUSED(inEnglish)
 	return QStringList();
 }
 

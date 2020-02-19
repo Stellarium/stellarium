@@ -105,7 +105,7 @@ public slots:
 	const Vec3f& getColor(void) const;
 
 	//! Set the size of highlight markers.
-	//! @param c The size of the highlight markers
+	//! @param size The size of the highlight markers
 	//! @code
 	//! // example of usage in scripts
 	//! HighlightMgr.setMarkersSize(13.f);
