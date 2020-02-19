@@ -347,52 +347,54 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NomenclatureMgr:53"] = "Geological features: lenticulae";
 		objModulesMap["NomenclatureMgr:54"] = "Geological features: reticula";
 		objModulesMap["NomenclatureMgr:56"] = "Geological features: tesserae";
-		// list of celestial bodies
-		objModulesMap["NomenclatureMgr:Epimetheus"] = "Named geological features of Epimetheus";
-		objModulesMap["NomenclatureMgr:Vesta"]      = "Named geological features of Vesta";
-		objModulesMap["NomenclatureMgr:Mathilde"]   = "Named geological features of Mathilde";
-		objModulesMap["NomenclatureMgr:Venus"]      = "Named geological features of Venus";
-		objModulesMap["NomenclatureMgr:Mercury"]    = "Named geological features of Mercury";
-		objModulesMap["NomenclatureMgr:Iapetus"]    = "Named geological features of Iapetus";
-		objModulesMap["NomenclatureMgr:Ganymede"]   = "Named geological features of Ganymede";
-		objModulesMap["NomenclatureMgr:Ceres"]      = "Named geological features of Ceres";
-		objModulesMap["NomenclatureMgr:Ida"]        = "Named geological features of Ida";
-		objModulesMap["NomenclatureMgr:Triton"]     = "Named geological features of Triton";
-		objModulesMap["NomenclatureMgr:Oberon"]     = "Named geological features of Oberon";
-		objModulesMap["NomenclatureMgr:Itokawa"]    = "Named geological features of Itokawa";
-		objModulesMap["NomenclatureMgr:Thebe"]      = "Named geological features of Thebe";
-		objModulesMap["NomenclatureMgr:Gaspra"]     = "Named geological features of Gaspra";
-		objModulesMap["NomenclatureMgr:Rhea"]       = "Named geological features of Rhea";
-		objModulesMap["NomenclatureMgr:Enceladus"]  = "Named geological features of Enceladus";
-		objModulesMap["NomenclatureMgr:Moon"]       = "Named geological features of the Moon";
-		objModulesMap["NomenclatureMgr:Dione"]      = "Named geological features of Dione";
-		objModulesMap["NomenclatureMgr:Steins"]     = "Named geological features of Steins";
-		objModulesMap["NomenclatureMgr:Phoebe"]     = "Named geological features of Phoebe";
-		objModulesMap["NomenclatureMgr:Puck"]       = "Named geological features of Puck";
-		objModulesMap["NomenclatureMgr:Europa"]     = "Named geological features of Europa";
-		objModulesMap["NomenclatureMgr:Lutetia"]    = "Named geological features of Lutetia";
-		objModulesMap["NomenclatureMgr:Tethys"]     = "Named geological features of Tethys";
-		objModulesMap["NomenclatureMgr:Eros"]       = "Named geological features of Eros";
-		objModulesMap["NomenclatureMgr:Callisto"]   = "Named geological features of Callisto";
-		objModulesMap["NomenclatureMgr:Phobos"]     = "Named geological features of Phobos";
-		objModulesMap["NomenclatureMgr:Proteus"]    = "Named geological features of Proteus";
-		objModulesMap["NomenclatureMgr:Hyperion"]   = "Named geological features of Hyperion";
-		objModulesMap["NomenclatureMgr:Titania"]    = "Named geological features of Titania";
-		objModulesMap["NomenclatureMgr:Deimos"]     = "Named geological features of Deimos";
-		objModulesMap["NomenclatureMgr:Io"]         = "Named geological features of Io";
-		objModulesMap["NomenclatureMgr:Ariel"]      = "Named geological features of Ariel";
-		objModulesMap["NomenclatureMgr:Dactyl"]     = "Named geological features of Dactyl";
-		objModulesMap["NomenclatureMgr:Titan"]      = "Named geological features of Titan";
+		objModulesMap["NomenclatureMgr:57"] = "Geological features: saxa";
+		// list of celestial bodies (alphabetical sorting)
 		objModulesMap["NomenclatureMgr:Amalthea"]   = "Named geological features of Amalthea";
-		objModulesMap["NomenclatureMgr:Umbriel"]    = "Named geological features of Umbriel";
+		objModulesMap["NomenclatureMgr:Ariel"]      = "Named geological features of Ariel";
+		objModulesMap["NomenclatureMgr:Callisto"]   = "Named geological features of Callisto";
+		objModulesMap["NomenclatureMgr:Ceres"]      = "Named geological features of Ceres";
+		objModulesMap["NomenclatureMgr:Charon"]     = "Named geological features of Charon";
+		objModulesMap["NomenclatureMgr:Dactyl"]     = "Named geological features of Dactyl";
+		objModulesMap["NomenclatureMgr:Deimos"]     = "Named geological features of Deimos";
+		objModulesMap["NomenclatureMgr:Dione"]      = "Named geological features of Dione";
+		objModulesMap["NomenclatureMgr:Enceladus"]  = "Named geological features of Enceladus";
+		objModulesMap["NomenclatureMgr:Epimetheus"] = "Named geological features of Epimetheus";
+		objModulesMap["NomenclatureMgr:Eros"]       = "Named geological features of Eros";
+		objModulesMap["NomenclatureMgr:Europa"]     = "Named geological features of Europa";
+		objModulesMap["NomenclatureMgr:Ganymede"]   = "Named geological features of Ganymede";
+		objModulesMap["NomenclatureMgr:Gaspra"]     = "Named geological features of Gaspra";
+		objModulesMap["NomenclatureMgr:Hyperion"]   = "Named geological features of Hyperion";
+		objModulesMap["NomenclatureMgr:Iapetus"]    = "Named geological features of Iapetus";
+		objModulesMap["NomenclatureMgr:Ida"]        = "Named geological features of Ida";
+		objModulesMap["NomenclatureMgr:Io"]         = "Named geological features of Io";
+		objModulesMap["NomenclatureMgr:Itokawa"]    = "Named geological features of Itokawa";
 		objModulesMap["NomenclatureMgr:Janus"]      = "Named geological features of Janus";
+		objModulesMap["NomenclatureMgr:Lutetia"]    = "Named geological features of Lutetia";
 		objModulesMap["NomenclatureMgr:Mars"]       = "Named geological features of Mars";
-		objModulesMap["NomenclatureMgr:Miranda"]    = "Named geological features of Miranda";
+		objModulesMap["NomenclatureMgr:Mathilde"]   = "Named geological features of Mathilde";
+		objModulesMap["NomenclatureMgr:Mercury"]    = "Named geological features of Mercury";
 		objModulesMap["NomenclatureMgr:Mimas"]      = "Named geological features of Mimas";
+		objModulesMap["NomenclatureMgr:Miranda"]    = "Named geological features of Miranda";
+		objModulesMap["NomenclatureMgr:Moon"]       = "Named geological features of the Moon";
+		objModulesMap["NomenclatureMgr:Oberon"]     = "Named geological features of Oberon";
+		objModulesMap["NomenclatureMgr:Phobos"]     = "Named geological features of Phobos";
+		objModulesMap["NomenclatureMgr:Phoebe"]     = "Named geological features of Phoebe";
 		objModulesMap["NomenclatureMgr:Pluto"]      = "Named geological features of Pluto";
+		objModulesMap["NomenclatureMgr:Proteus"]    = "Named geological features of Proteus";
+		objModulesMap["NomenclatureMgr:Puck"]       = "Named geological features of Puck";
+		objModulesMap["NomenclatureMgr:Rhea"]       = "Named geological features of Rhea";
+		objModulesMap["NomenclatureMgr:Ryugu"]      = "Named geological features of Ryugu";
+		objModulesMap["NomenclatureMgr:Steins"]     = "Named geological features of Steins";
+		objModulesMap["NomenclatureMgr:Tethys"]     = "Named geological features of Tethys";
+		objModulesMap["NomenclatureMgr:Thebe"]      = "Named geological features of Thebe";
+		objModulesMap["NomenclatureMgr:Titania"]    = "Named geological features of Titania";
+		objModulesMap["NomenclatureMgr:Titan"]      = "Named geological features of Titan";
+		objModulesMap["NomenclatureMgr:Triton"]     = "Named geological features of Triton";
+		objModulesMap["NomenclatureMgr:Umbriel"]    = "Named geological features of Umbriel";
+		objModulesMap["NomenclatureMgr:Venus"]      = "Named geological features of Venus";
+		objModulesMap["NomenclatureMgr:Vesta"]      = "Named geological features of Vesta";
 	}
 }
-
 
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
