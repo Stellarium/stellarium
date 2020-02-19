@@ -76,11 +76,17 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->ptolemaicPushButton,    SIGNAL(clicked()), plugin, SLOT(queryStarnames()));
 	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
+	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
+	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
 }
 
+// TODO: Maybe allow setting a stylesheet? GCVS would be nicer with Courier font.
 void OnlineQueriesDialog::setOutputHtml(QString html)
 {
 	if (ui->onlineQueriesTextBrowser)
+	{
 		ui->onlineQueriesTextBrowser->setHtml(html);
+		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
+	}
 }
 

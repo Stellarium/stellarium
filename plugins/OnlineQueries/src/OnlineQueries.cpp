@@ -42,6 +42,7 @@
 #include <QMetaEnum>
 #include <QLoggingCategory>
 #include <QDesktopServices>
+#include <QXmlStreamReader>
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
 
@@ -71,6 +72,8 @@ OnlineQueries::OnlineQueries() :
 	toolbarButton(Q_NULLPTR),
 	starnamesHipQuery(Q_NULLPTR),
 	ancientSkiesHipQuery(Q_NULLPTR),
+	aavsoHipQuery(Q_NULLPTR),
+	gcvsHipQuery(Q_NULLPTR),
 	hipOnlineReply(Q_NULLPTR)
 {
 	setObjectName("OnlineQueries");
@@ -90,6 +93,12 @@ OnlineQueries::~OnlineQueries()
 	starnamesHipQuery=Q_NULLPTR;
 	delete ancientSkiesHipQuery;
 	ancientSkiesHipQuery=Q_NULLPTR;
+	delete aavsoHipQuery;
+	aavsoHipQuery=Q_NULLPTR;
+	//delete aavsoOidQuery;
+	//aavsoOidQuery=Q_NULLPTR;
+	delete gcvsHipQuery;
+	gcvsHipQuery=Q_NULLPTR;
 	delete dialog;
 }
 
@@ -105,11 +114,16 @@ void OnlineQueries::init()
 
 	starnamesHipQuery=new HipOnlineQuery(ptolemyUrl);
 	ancientSkiesHipQuery=new HipOnlineQuery(ancientSkiesUrl);
+	aavsoHipQuery=new HipOnlineQuery(aavsoHipUrl);
+	//aavsoOidQuery=new HipOnlineQuery(aavsoOidUrl);
+	gcvsHipQuery=new HipOnlineQuery(gcvsUrl);
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 	addAction("actionShow_OnlineQueries", N_("Online Queries"), N_("Show window for Online Queries"), this, "enabled", "");
 	addAction("actionShow_OnlineQueries_SN", N_("Online Queries"), N_("Call a Starnames site on current selection"), this, "queryStarnames()", "");
 	addAction("actionShow_OnlineQueries_AS", N_("Online Queries"), N_("Call ancient-skies on current selection"), this, "queryAncientSkies()", "");
+	addAction("actionShow_OnlineQueries_AAVSO", N_("Online Queries"), N_("Call AAVSO database on current selection"), this, "queryAAVSO()", "");
+	addAction("actionShow_OnlineQueries_GCVS",  N_("Online Queries"), N_("Call GCVS database on current selection"), this, "queryGCVS()", "");
 	addAction("actionShow_OnlineQueries_WP", N_("Online Queries"), N_("Call Wikipedia on current selection"), this, "queryWikipedia()", "");
 	createToolbarButton();
 }
@@ -150,6 +164,10 @@ void OnlineQueries::loadConfiguration(void)
 	conf->beginGroup("OnlineQueries");
 	ptolemyUrl=conf->value("ptolemy_url", "https://biblicalastronomy.co/playground/fetch.cfm?Hipp=%1").toString();
 	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/webservice?hip=%1").toString();
+	aavsoHipUrl=conf->value("aavso_hip_url", "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
+	aavsoOidUrl=conf->value("aavso_iod_url", "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
+	gcvsUrl=conf->value("gcvs_url", "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
+	wikipediaUrl=conf->value("wikipedia_url", "https://en.wikipedia.org/wiki/%1").toString();
 	conf->endGroup();
 }
 
@@ -158,6 +176,10 @@ void OnlineQueries::saveConfiguration(void)
 	conf->beginGroup("OnlineQueries");
 	conf->setValue("ptolemy_url", ptolemyUrl);
 	conf->setValue("ancientskies_url", ancientSkiesUrl);
+	conf->setValue("aavso_hip_url", aavsoHipUrl);
+	conf->setValue("aavso_oid_url", aavsoOidUrl);
+	conf->setValue("gcvs_url", gcvsUrl);
+	conf->setValue("wikipedia_url", wikipediaUrl);
 	conf->endGroup();
 }
 
@@ -232,11 +254,58 @@ void OnlineQueries::queryAncientSkies()
 	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 }
 
-// Called when the current HIP query status changes
+// 2-step query.
+void OnlineQueries::queryAAVSO()
+{
+	setOutputHtml("<h1>AAVSO</h1><p>querying...</p>");
+
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+	if (obj->getType()!=STAR_TYPE)
+		return;
+
+	QString hipStr=obj->getID();
+	if (!hipStr.startsWith("HIP"))
+		return;
+
+	int hipNr=hipStr.split(' ').at(1).toInt();
+	hipOnlineReply=aavsoHipQuery->lookup(hipNr);
+
+	// This only delivers the OID for the second AAVSO query
+	onAavsoHipQueryStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
+}
+
+void OnlineQueries::queryGCVS()
+{
+	setOutputHtml("<h1>GCVS</h1><p>querying...</p>");
+
+	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (sel.length()==0)
+		return;
+
+	const StelObjectP obj=sel.at(0);
+	if (obj->getType()!=STAR_TYPE)
+		return;
+
+	QString hipStr=obj->getID();
+	if (!hipStr.startsWith("HIP"))
+		return;
+
+	int hipNr=hipStr.split(' ').at(1).toInt();
+	hipOnlineReply=gcvsHipQuery->lookup(hipNr);
+
+	onHipQueryStatusChanged();
+	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+}
+
+// Called when the current HIP query status changes. This displays simple HTML answers.
 void OnlineQueries::onHipQueryStatusChanged()
 {
 	setEnabled(true); // show dialog
-	//HipOnlineReply *reply=static_cast<HipOnlineReply*>(sender());
 	Q_ASSERT(hipOnlineReply);
 	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
 	{
@@ -246,6 +315,55 @@ void OnlineQueries::onHipQueryStatusChanged()
 	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
 	{
 		setOutputHtml(hipOnlineReply->getResult());
+	}
+
+	if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
+	{
+		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		delete hipOnlineReply;
+		hipOnlineReply=Q_NULLPTR;
+	}
+}
+
+
+// Called when the current HIP query status changes. This displays simple HTML answers.
+void OnlineQueries::onAavsoHipQueryStatusChanged()
+{
+	setEnabled(true); // show dialog
+	Q_ASSERT(hipOnlineReply);
+	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryErrorOccured)
+	{
+		setOutputHtml(QString("<p>Lookup error: %1</p>").arg(hipOnlineReply->getErrorString()));
+	}
+
+	if (hipOnlineReply->getCurrentStatus()==HipOnlineReply::HipQueryFinished)
+	{
+		//setOutputHtml(hipOnlineReply->getResult());
+		// Parse XML, extract OID, lookup again.
+		QXmlStreamReader xml(hipOnlineReply->getResult());
+		int oid=0;
+		while (!xml.atEnd()) {
+			xml.readNext();
+			if (xml.isStartElement() && xml.name()=="OID")
+			{
+				oid=xml.readElementText().toInt();
+			}
+		  }
+		  if (xml.hasError()) {
+			qDebug() << "XML error in AAVSO's answer:" << xml.errorString();
+		  }
+		qDebug() << "We have found OID=" << oid;
+
+		//disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
+		//delete hipOnlineReply;
+
+		// Trigger second AAVSO query. Note that we mangle the name a bit.
+		//hipOnlineReply=aavsoOidQuery->lookup(oid);
+		//onHipQueryStatusChanged();
+		//connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		// It's prettier to call the browser externally.
+		setOutputHtml(QString("<h1>AAVSO</h1><p>Opened AAVSO page on OID=%1 in your webbrowser.</p>").arg(QString::number(oid)));
+		QDesktopServices::openUrl(QUrl(aavsoOidUrl.arg(oid)));
 	}
 
 	if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
@@ -310,7 +428,7 @@ void OnlineQueries::queryWikipedia()
 	}
 	setOutputHtml(QString("<h1>Wikipedia</h1><p>Opened page on '%1' in your webbrowser.</p>").arg(objName));
 
-	QDesktopServices::openUrl(QUrl(QString("https://en.wikipedia.org/wiki/%1").arg(objName)));
+	QDesktopServices::openUrl(QUrl(wikipediaUrl.arg(objName)));
 }
 
 void OnlineQueries::setOutputHtml(QString html)

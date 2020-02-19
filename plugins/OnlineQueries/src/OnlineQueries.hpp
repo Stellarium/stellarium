@@ -80,6 +80,8 @@ public slots:
 
 	void queryStarnames();    //!< Connect from a button that triggers information query
 	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	void queryAAVSO();        //!< Connect from a button that triggers information query
+	void queryGCVS();         //!< Connect from a button that triggers information query
 	void queryWikipedia();    //!< Connect from a button that triggers information query
 
 private slots:
@@ -91,7 +93,8 @@ private slots:
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
 	void loadConfiguration(void);
 
-	void onHipQueryStatusChanged(); //!< To be connected
+	void onHipQueryStatusChanged();      //!< To be connected
+	void onAavsoHipQueryStatusChanged(); //!< To be connected
 
 private:
 	void createToolbarButton() const;
@@ -102,12 +105,20 @@ private:
 
 	StelButton* toolbarButton;
 
-	QString ptolemyUrl;                    // settable via config.ini
-	QString ancientSkiesUrl;               // settable via config.ini
+	// URLs are settable via config.ini
+	QString ptolemyUrl;
+	QString ancientSkiesUrl;
+	QString aavsoHipUrl;
+	QString aavsoOidUrl;
+	QString gcvsUrl;
+	QString wikipediaUrl;
 
 	// The query target websites:
 	HipOnlineQuery *starnamesHipQuery;     // Patrick Gleason's site
 	HipOnlineQuery *ancientSkiesHipQuery;  // ancient-skies.org
+	HipOnlineQuery *aavsoHipQuery;         // aavso.org
+	//HipOnlineQuery *aavsoOidQuery;         // aavso.org. We are slightly abusing this class, as it just feeds any INT index to the configured URL.
+	HipOnlineQuery *gcvsHipQuery;          // gcvs
 	HipOnlineReply *hipOnlineReply;        // Common reply object
 };
 
