@@ -362,13 +362,18 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		//onHipQueryStatusChanged();
 		//connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 		// It's prettier to call the browser externally.
-		setOutputHtml(QString("<h1>AAVSO</h1><p>Opened AAVSO page on OID=%1 in your webbrowser.</p>").arg(QString::number(oid)));
-		QDesktopServices::openUrl(QUrl(aavsoOidUrl.arg(oid)));
+		if (oid>0)
+		{
+			setOutputHtml(QString("<h1>AAVSO</h1><p>Opened AAVSO page on OID=%1 in your webbrowser.</p>").arg(QString::number(oid)));
+			QDesktopServices::openUrl(QUrl(aavsoOidUrl.arg(oid)));
+		}
+		else
+			setOutputHtml(QString("<h1>AAVSO</h1><p>AAVSO has no entry for this star.</p>"));
 	}
 
 	if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
 	{
-		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
 		delete hipOnlineReply;
 		hipOnlineReply=Q_NULLPTR;
 	}
