@@ -208,6 +208,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabPlanetPos.png</normalon>
+           <selectedon>:/graphicGui/tabPlanetPos-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -221,6 +222,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabEphemeris.png</normalon>
+           <selectedon>:/graphicGui/tabEphemeris-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -231,6 +233,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabTransit.png</normalon>
+           <selectedon>:/graphicGui/tabTransit-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -241,6 +244,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabPhenomena.png</normalon>
+           <selectedon>:/graphicGui/tabPhenomena-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -251,6 +255,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabGraphs.png</normalon>
+           <selectedon>:/graphicGui/tabGraphs-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -264,6 +269,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabWhatsUp.png</normalon>
+           <selectedon>:/graphicGui/tabWhatsUp-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -277,6 +283,7 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabPC.png</normalon>
+           <selectedon>:/graphicGui/tabPC-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -486,7 +493,7 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset resource="../../data/gui/guiRes.qrc">
+               <iconset>
                 <normaloff>:/graphicGui/8-off-settings.png</normaloff>:/graphicGui/8-off-settings.png</iconset>
               </property>
              </widget>
