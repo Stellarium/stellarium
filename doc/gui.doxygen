@@ -27,6 +27,15 @@
 
 The GUI is based on Qt Widgets.
 
+Notes:
+
+- When making mistakes in the stylesheet (/data/normalStyle.css), errors may be
+  silent. Enable debug logging by adding a `~/.config/QtProject/qtlogging.ini`:
+
+    [Rules]
+    *.debug=true
+    qt.*.debug=false
+
 Relevant files:
 
 - 
