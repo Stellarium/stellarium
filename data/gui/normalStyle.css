@@ -273,6 +273,10 @@ QListView::item#stackListWidget {
 	padding-right: 8px;
 }
 
+/*
+ * QCheckBox
+ */
+
 QCheckBox {
 	color: rgb(3, 3, 3);
 	background: none;
@@ -282,75 +286,82 @@ QCheckBox:disabled {
 	color: rgb(50, 50, 50);
 }
 
-QCheckBox::indicator {
+QCheckBox::indicator,
+QListWidget::indicator,
+QListView::indicator,
+QGroupBox::indicator {
 	width: 16px;
 	height: 16px;
 	margin: 0px;
 	background: none;
 }
 
-QCheckBox::indicator:checked {
-	image: url(:/graphicGui/uieCheckbox-checked.png);
-}
-
-QCheckBox::indicator:indeterminate {
-	image: url(:/graphicGui/uieCheckbox-partial.png);
-}
-
-QCheckBox::indicator:unchecked {
-	image: url(:/graphicGui/uieCheckbox-unchecked.png);
-}
-
-QCheckBox::indicator:hover:checked {
-	image: url(:/graphicGui/uieCheckbox-checked-hover.png);
-}
-
-QCheckBox::indicator:hover:indeterminate {
-	image: url(:/graphicGui/uieCheckbox-partial-hover.png);
-}
-
-QCheckBox::indicator:hover:unchecked {
-	image: url(:/graphicGui/uieCheckbox-unchecked-hover.png);
-}
-
-QCheckBox::indicator:checked:disabled {
-	image: url(:/graphicGui/uieCheckbox-checked-disabled.png);
-}
-
-QCheckBox::indicator:indeterminate:disabled {
-	image: url(:/graphicGui/uieCheckbox-partial-disabled.png);
-}
-
-QCheckBox::indicator:unchecked:disabled {
-	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.png);
-}
-
+QCheckBox::indicator:checked,
+QListWidget::indicator:checked,
+QListView::indicator:checked,
 QGroupBox::indicator:checked {
 	image: url(:/graphicGui/uieCheckbox-checked.png);
 }
 
+QCheckBox::indicator:indeterminate,
+QListWidget::indicator:indeterminate,
+QListView::indicator:indeterminate,
+QGroupBox::indicator:indeterminate {
+	image: url(:/graphicGui/uieCheckbox-partial.png);
+}
+
+QCheckBox::indicator:unchecked,
+QListWidget::indicator:unchecked,
+QListView::indicator:unchecked,
 QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/uieCheckbox-unchecked.png);
 }
 
-QListWidget::indicator:checked, QListView::indicator:checked {
-	image: url(:/graphicGui/uieCheckbox-checked.png);
+QCheckBox::indicator:hover:checked,
+QListWidget::indicator:hover:checked,
+QListView::indicator:hover:checked,
+QGroupBox::indicator:hover:checked {
+	image: url(:/graphicGui/uieCheckbox-checked-hover.png);
 }
 
-QListWidget::indicator:indeterminate, QListView::indicator:indeterminate {
-	image: url(:/graphicGui/uieCheckbox-partial.png);
+QCheckBox::indicator:hover:indeterminate,
+QListWidget::indicator:hover:indeterminate,
+QListView::indicator:hover:indeterminate,
+QGroupBox::indicator:hover:indeterminate {
+	image: url(:/graphicGui/uieCheckbox-partial-hover.png);
 }
 
-QListWidget::indicator:unchecked, QListView::indicator:unchecked {
-	image: url(:/graphicGui/uieCheckbox-unchecked.png);
+QCheckBox::indicator:hover:unchecked,
+QListWidget::indicator:hover:unchecked,
+QListView::indicator:hover:unchecked,
+QGroupBox::indicator:hover:unchecked {
+	image: url(:/graphicGui/uieCheckbox-unchecked-hover.png);
 }
 
-QListWidget::indicator, QListView::indicator {
-	width: 16px;
-	height: 16px;
-	margin: 0px;
-	background: none;
+QCheckBox::indicator:checked:disabled,
+QListWidget::indicator:checked:disabled,
+QListView::indicator:checked:disabled,
+QGroupBox::indicator:checked:disabled {
+	image: url(:/graphicGui/uieCheckbox-checked-disabled.png);
 }
+
+QCheckBox::indicator:indeterminate:disabled,
+QListWidget::indicator:indeterminate:disabled,
+QListView::indicator:indeterminate:disabled,
+QGroupBox::indicator:indeterminate:disabled {
+	image: url(:/graphicGui/uieCheckbox-partial-disabled.png);
+}
+
+QCheckBox::indicator:unchecked:disabled,
+QListWidget::indicator:unchecked:disabled,
+QListView::indicator:unchecked:disabled,
+QGroupBox::indicator:unchecked:disabled {
+	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.png);
+}
+
+/*
+ * QRadioButton
+ */
 
 QRadioButton {
 	color: rgb(3, 3, 3);
@@ -386,6 +397,10 @@ QRadioButton::indicator:checked:disabled {
 QRadioButton::indicator:unchecked:disabled {
 	image: url(:/graphicGui/uieRadio-unchecked-disabled.png);
 }
+
+/*
+ * Spinners
+ */
 
 QSpinBox,
 QTimeEdit,
@@ -443,6 +458,10 @@ QDoubleSpinBox::up-button:pressed,
 AngleSpinBox::up-button:pressed {
 	image: url(:/graphicGui/uieSpinup-pressed.png);
 }
+
+/*
+ * QComboBox
+ */
 
 QComboBox::drop-down,
 .QDateTimeEdit::drop-down {
