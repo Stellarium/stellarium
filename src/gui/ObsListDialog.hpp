@@ -25,6 +25,7 @@
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
+#include "ObsListCreateEditDialog.hpp"
 
 class Ui_obsListDialogForm;
 
@@ -47,18 +48,21 @@ protected:
 private:
     enum ObsListColumns {
 		ColumnUUID,	//! UUID of observing list
-		ColumnName,	//! name or designation of object
+		ColumnName,	//! Name or designation of object
+        ColumnTType, //! Type of the object
 		ColumnRa,	//! Right ascencion of object
 		ColumnDec,	//! Declination of object
 		ColumnMagnitude,	//! Magnitude of object
 		ColumnConstellation, //! Constellation of object
-		ColumnCount	//! total number of columns
+		ColumnCount	//! Total number of columns
 	};
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     
     //! Update header names for observing list table
 	void setObservingListHeaderNames();
+    
+    ObsListCreateEditDialog * createEditDialog_instance;
     
 
 public slots:

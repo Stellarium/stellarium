@@ -112,6 +112,17 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
     //TODO
 }
 
+/*
+ * Destructor of singleton
+*/ 
+void ObsListCreateEditDialog::kill()
+{
+    if(m_instance != nullptr){
+        delete m_instance;
+    }
+}
+
+
 
 
 

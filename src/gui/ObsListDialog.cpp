@@ -29,6 +29,7 @@ ObsListDialog::ObsListDialog(QObject* parent): StelDialog("Observing list", pare
     ui = new Ui_obsListDialogForm();
     core = StelApp::getInstance().getCore();
     obsListListModel = new QStandardItemModel(0,ColumnCount);
+    createEditDialog_instance = Q_NULLPTR;
 }
 
 
@@ -48,6 +49,11 @@ void ObsListDialog::createDialogContent()
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
     connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+    
+    connect(ui->obsListNewListButton, SIGNAL(clicked()), this, SLOT(obsListNewListButtonPressed()));
+    connect(ui->obsListEditListButton, SIGNAL(clicked()), this, SLOT(obsListEditButtonPressed()));
+    connect(ui->obsListClearHighlightButton, SIGNAL(clicked()), this, SLOT(obsListClearHighLightButtonPressed()));
+    connect(ui->obsListHighlightAllButton, SIGNAL(clicked()), this, SLOT(obsListHighLightAllButtonPressed()));
     
     //Initializing the list of observing list
 	obsListListModel->setColumnCount(ColumnCount);
@@ -93,6 +99,7 @@ void ObsListDialog::setObservingListHeaderNames()
     const QStringList headerStrings = {
 		"UUID", // Hided the column
 		q_("Object name"),
+		q_("Type"),
 		q_("Right ascencion"),
 		q_("Declination"),
 		q_("Magnitude"),
@@ -124,7 +131,8 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 */
 void ObsListDialog::obsListNewListButtonPressed()
 {
-    //TODO
+    createEditDialog_instance = ObsListCreateEditDialog::Instance(this);
+    createEditDialog_instance->setVisible(true);
 }
 
 /*

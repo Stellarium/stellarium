@@ -31,7 +31,8 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
     
 public:
-   static ObsListCreateEditDialog * Instance(QObject* parent); 
+   static ObsListCreateEditDialog * Instance(QObject* parent);
+   static void kill();
     
 protected:
     static ObsListCreateEditDialog * m_instance;
