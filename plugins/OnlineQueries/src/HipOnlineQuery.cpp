@@ -109,3 +109,32 @@ HipOnlineReply* HipOnlineQuery::lookup(const int hipID)
 	qDebug() << "looking up HIP " << hipID << "at "<< url;
 	return new HipOnlineReply(url, networkMgr);
 }
+
+// Lookup in external database for the passed name.
+HipOnlineReply* HipOnlineQuery::lookup(const QString name)
+{
+	// Create the Starnames query
+	QString url=QString(baseURL).arg(name);
+	qDebug() << "looking up " << name << "at "<< url;
+	return new HipOnlineReply(url, networkMgr);
+}
+
+// Lookup in external database for the passed HIP number.
+HipOnlineReply* HipOnlineQuery::lookup(const QString url, const int hipID)
+{
+	baseURL=url;
+	// Create the Starnames query
+	QString queryUrl=QString(baseURL).arg(QString::number(hipID));
+	qDebug() << "looking up HIP " << hipID << "at "<< url;
+	return new HipOnlineReply(queryUrl, networkMgr);
+}
+
+// Lookup in external database for the passed name.
+HipOnlineReply* HipOnlineQuery::lookup(const QString url, const QString name)
+{
+	baseURL=url;
+	// Create the Starnames query
+	QString queryUrl=QString(baseURL).arg(name);
+	qDebug() << "looking up " << name << "at "<< url;
+	return new HipOnlineReply(queryUrl, networkMgr);
+}

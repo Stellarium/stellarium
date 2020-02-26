@@ -54,9 +54,6 @@ void OnlineQueriesDialog::createDialogContent()
 	//load UI from form file
 	ui->setupUi(dialog);
 
-	// For now, hide tabs that we don't yet attempt to support
-	//ui->tabWidget->removeTab(2); // Remove Ancient Skies for now?
-
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	//connect UI events
@@ -73,11 +70,38 @@ void OnlineQueriesDialog::createDialogContent()
 		ui->onlineQueriesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
-	connect(ui->ptolemaicPushButton,    SIGNAL(clicked()), plugin, SLOT(queryStarnames()));
-	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
 	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
 	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
+	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
+	// set custom tab titles to hostnames, or deactivate unconfigured tabs
+	if (!plugin->getCustomUrl1().isEmpty())
+	{
+		ui->tabWidget->setTabText(ui->tabWidget->count()-3, QUrl(plugin->getCustomUrl1()).host());
+		connect(ui->custom1PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite1()));
+	}
+	else {
+		ui->tabWidget->setTabText(ui->tabWidget->count()-3, "(Custom 1)");
+		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-3, false);
+	}
+	if (!plugin->getCustomUrl2().isEmpty())
+	{
+		ui->tabWidget->setTabText(ui->tabWidget->count()-2, QUrl(plugin->getCustomUrl2()).host());
+		connect(ui->custom2PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite2()));
+	}
+	else {
+		ui->tabWidget->setTabText(ui->tabWidget->count()-2, "(Custom 2)");
+		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-2, false);
+	}
+	if (!plugin->getCustomUrl3().isEmpty())
+	{
+		ui->tabWidget->setTabText(ui->tabWidget->count()-1, QUrl(plugin->getCustomUrl3()).host());
+		connect(ui->custom3PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite3()));
+	}
+	else {
+		ui->tabWidget->setTabText(ui->tabWidget->count()-1, "(Custom 3)");
+		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-1, false);
+	}
 }
 
 // TODO: Maybe allow setting a stylesheet? GCVS would be nicer with Courier font.

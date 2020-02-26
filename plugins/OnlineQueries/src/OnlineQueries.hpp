@@ -72,17 +72,19 @@ public slots:
 	//! Is plugin dialog shown?
 	bool isEnabled() const { return enabled; }
 
-	//QString getPtolemyUrl() const { return ptolemyUrl; }
-	//QString getAncientSkiesUrl() const { return ancientSkiesUrl; }
-
 	//! Save the settings to the main configuration file.
 	void saveConfiguration(void);
 
-	void queryStarnames();    //!< Connect from a button that triggers information query
-	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	void queryWikipedia();    //!< Connect from a button that triggers information query
 	void queryAAVSO();        //!< Connect from a button that triggers information query
 	void queryGCVS();         //!< Connect from a button that triggers information query
-	void queryWikipedia();    //!< Connect from a button that triggers information query
+	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	void queryCustomSite1();  //!< Connect from a button that triggers information query
+	void queryCustomSite2();  //!< Connect from a button that triggers information query
+	void queryCustomSite3();  //!< Connect from a button that triggers information query
+	QString getCustomUrl1() const { return customUrl1;}
+	QString getCustomUrl2() const { return customUrl2;}
+	QString getCustomUrl3() const { return customUrl3;}
 
 private slots:
 	//! Set up the plugin with default values.  This means clearing out the OnlineQueries section in the
@@ -97,28 +99,34 @@ private slots:
 	void onAavsoHipQueryStatusChanged(); //!< To be connected
 
 private:
+	//! The actual query worker: build name or HIP number from currently selected object, and present result in dialog or external browser
+	void query(QString url, bool useHip, bool useBrowser);
 	void createToolbarButton() const;
-	void setOutputHtml(QString html); // Forward html to GUI dialog
+	void setOutputHtml(QString html); //!< Forward html to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;
 
 	StelButton* toolbarButton;
 
-	// URLs are settable via config.ini
-	QString ptolemyUrl;
+	// URLs are settable via config.ini.
+	// TODO: Maybe add a config panel for the custom sites?
 	QString ancientSkiesUrl;
 	QString aavsoHipUrl;
 	QString aavsoOidUrl;
 	QString gcvsUrl;
 	QString wikipediaUrl;
+	QString customUrl1;
+	QString customUrl2;
+	QString customUrl3;
+	bool custom1UseHip; //!< Use HIP number, not common name, in query?
+	bool custom2UseHip; //!< Use HIP number, not common name, in query?
+	bool custom3UseHip; //!< Use HIP number, not common name, in query?
+	bool custom1inBrowser; //!< True if custom1 URL should be opened in a webbrowser, not in our panel
+	bool custom2inBrowser; //!< True if custom2 URL should be opened in a webbrowser, not in our panel
+	bool custom3inBrowser; //!< True if custom3 URL should be opened in a webbrowser, not in our panel
 
-	// The query target websites:
-	HipOnlineQuery *starnamesHipQuery;     // Patrick Gleason's site
-	HipOnlineQuery *ancientSkiesHipQuery;  // ancient-skies.org
-	HipOnlineQuery *aavsoHipQuery;         // aavso.org
-	//HipOnlineQuery *aavsoOidQuery;         // aavso.org. We are slightly abusing this class, as it just feeds any INT index to the configured URL.
-	HipOnlineQuery *gcvsHipQuery;          // gcvs
+	HipOnlineQuery *hipQuery;              // one is actually enough!
 	HipOnlineReply *hipOnlineReply;        // Common reply object
 };
 

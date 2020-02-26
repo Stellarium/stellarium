@@ -271,7 +271,7 @@
               </sizepolicy>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="tab_wikipedia">
               <attribute name="title">
@@ -318,23 +318,6 @@
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_ptolemaic">
-              <attribute name="title">
-               <string>Ptolemaic Tradition</string>
-              </attribute>
-              <layout class="QFormLayout" name="formLayout_ptolemaic">
-               <property name="fieldGrowthPolicy">
-                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-               </property>
-               <item row="0" column="0">
-                <widget class="QPushButton" name="ptolemaicPushButton">
-                 <property name="text">
-                  <string>Query</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
              <widget class="QWidget" name="tab_ancientSkies">
               <property name="enabled">
                <bool>true</bool>
@@ -348,6 +331,57 @@
                </property>
                <item row="0" column="0">
                 <widget class="QPushButton" name="ancientSkiesPushButton">
+                 <property name="text">
+                  <string>Query</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_custom1">
+              <attribute name="title">
+               <string>Custom 1</string>
+              </attribute>
+              <layout class="QFormLayout" name="formLayout_custom1">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+               </property>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="custom1PushButton">
+                 <property name="text">
+                  <string>Query</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_custom2">
+              <attribute name="title">
+               <string>Custom 2</string>
+              </attribute>
+              <layout class="QFormLayout" name="formLayout_custom2">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+               </property>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="custom2PushButton">
+                 <property name="text">
+                  <string>Query</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_custom3">
+              <attribute name="title">
+               <string>Custom 3</string>
+              </attribute>
+              <layout class="QFormLayout" name="formLayout_custom3">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+               </property>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="custom3PushButton">
                  <property name="text">
                   <string>Query</string>
                  </property>
