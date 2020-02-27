@@ -17,6 +17,7 @@ matrix:
         apt:
           packages:
             - gcc-4.8
+            - g++-4.8
             - ca-certificates
             - xvfb
           update: true
