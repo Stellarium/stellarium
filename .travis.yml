@@ -18,7 +18,9 @@ matrix:
           packages:
             - gcc-4.8
             - g++-4.8
-            - ca-certificates
+            - libgps-dev
+            - zlib1g-dev
+            - libgl1-mesa-dev
             - xvfb
           update: true
         coverity_scan:
