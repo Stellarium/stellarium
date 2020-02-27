@@ -21,6 +21,9 @@
 #define OBSLISTCREATEEDITDIALOG_H
 
 #include <QObject>
+#include <QStandardItemModel>
+
+#include <string>
 
 #include "StelDialog.hpp"
 
@@ -29,21 +32,42 @@ class Ui_obsListCreateEditDialogForm;
 class ObsListCreateEditDialog : public StelDialog
 {
     Q_OBJECT
-    
+
 public:
-   static ObsListCreateEditDialog * Instance(QObject* parent);
-   static void kill();
-    
+    static ObsListCreateEditDialog * Instance ( QObject* parent, std::string listName );
+    static void kill();
+
+    //! Notify that the application style changed
+    void styleChanged();
+
 protected:
     static ObsListCreateEditDialog * m_instance;
     Ui_obsListCreateEditDialogForm *ui;
     //! Initialize the dialog widgets and connect the signals/slots.
     virtual void createDialogContent();
-    
+
 private:
-   ObsListCreateEditDialog(QObject* parent);
-   virtual ~ObsListCreateEditDialog(); 
-    
+    enum ObsListColumns {
+        ColumnUUID,	//! UUID of object
+        ColumnName,	//! Name or designation of object
+        ColumnType, //! Type of the object
+        ColumnRa,	//! Right ascencion of object
+        ColumnDec,	//! Declination of object
+        ColumnMagnitude,	//! Magnitude of object
+        ColumnConstellation, //! Constellation of object
+        ColumnCount	//! Total number of columns
+    };
+    QStandardItemModel * obsListListModel;
+    class StelCore* core;
+    std::string listName_;
+
+    //! Set header names for observing list table
+    void setObservingListHeaderNames();
+
+    //Private constructor and destructor
+    ObsListCreateEditDialog ( QObject* parent, const std::string listName );
+    virtual ~ObsListCreateEditDialog();
+
 
 public slots:
     void retranslate();

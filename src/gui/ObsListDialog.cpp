@@ -23,12 +23,14 @@
 #include "ObsListDialog.hpp"
 #include "ui_obsListDialog.h"
 
+using namespace std;
 
-ObsListDialog::ObsListDialog(QObject* parent): StelDialog("Observing list", parent)
+
+ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list", parent )
 {
     ui = new Ui_obsListDialogForm();
     core = StelApp::getInstance().getCore();
-    obsListListModel = new QStandardItemModel(0,ColumnCount);
+    obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     createEditDialog_instance = Q_NULLPTR;
 }
 
@@ -36,7 +38,7 @@ ObsListDialog::ObsListDialog(QObject* parent): StelDialog("Observing list", pare
 ObsListDialog::~ObsListDialog()
 {
     delete ui;
-	delete obsListListModel;
+    delete obsListListModel;
 }
 
 /*
@@ -44,28 +46,28 @@ ObsListDialog::~ObsListDialog()
 */
 void ObsListDialog::createDialogContent()
 {
-    ui->setupUi(dialog);
-	
-	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-    connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-    
-    connect(ui->obsListNewListButton, SIGNAL(clicked()), this, SLOT(obsListNewListButtonPressed()));
-    connect(ui->obsListEditListButton, SIGNAL(clicked()), this, SLOT(obsListEditButtonPressed()));
-    connect(ui->obsListClearHighlightButton, SIGNAL(clicked()), this, SLOT(obsListClearHighLightButtonPressed()));
-    connect(ui->obsListHighlightAllButton, SIGNAL(clicked()), this, SLOT(obsListHighLightAllButtonPressed()));
-    
+    ui->setupUi ( dialog );
+
+    //Signals and slots
+    connect ( &StelApp::getInstance(), SIGNAL ( languageChanged() ), this, SLOT ( retranslate() ) );
+    connect ( ui->closeStelWindow, SIGNAL ( clicked() ), this, SLOT ( close() ) );
+
+    connect ( ui->obsListNewListButton, SIGNAL ( clicked() ), this, SLOT ( obsListNewListButtonPressed() ) );
+    connect ( ui->obsListEditListButton, SIGNAL ( clicked() ), this, SLOT ( obsListEditButtonPressed() ) );
+    connect ( ui->obsListClearHighlightButton, SIGNAL ( clicked() ), this, SLOT ( obsListClearHighLightButtonPressed() ) );
+    connect ( ui->obsListHighlightAllButton, SIGNAL ( clicked() ), this, SLOT ( obsListHighLightAllButtonPressed() ) );
+
     //Initializing the list of observing list
-	obsListListModel->setColumnCount(ColumnCount);
-	setObservingListHeaderNames();
-    
-    ui->obsListTreeView->setModel(obsListListModel);
-	ui->obsListTreeView->header()->setSectionsMovable(false);
-	ui->obsListTreeView->header()->setSectionResizeMode(ColumnName, QHeaderView::ResizeToContents);
-	ui->obsListTreeView->header()->setStretchLastSection(true);
-	ui->obsListTreeView->hideColumn(ColumnUUID);
+    obsListListModel->setColumnCount ( ColumnCount );
+    setObservingListHeaderNames();
+
+    ui->obsListTreeView->setModel ( obsListListModel );
+    ui->obsListTreeView->header()->setSectionsMovable ( false );
+    ui->obsListTreeView->header()->setSectionResizeMode ( ColumnName, QHeaderView::ResizeToContents );
+    ui->obsListTreeView->header()->setStretchLastSection ( true );
+    ui->obsListTreeView->hideColumn ( ColumnUUID );
     //Enable the sort for columns
-    ui->obsListTreeView->setSortingEnabled(true);
+    ui->obsListTreeView->setSortingEnabled ( true );
 }
 
 /*
@@ -73,16 +75,15 @@ void ObsListDialog::createDialogContent()
 */
 void ObsListDialog::retranslate()
 {
-    if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setObservingListHeaderNames();		
-	}
+    if ( dialog ) {
+        ui->retranslateUi ( dialog );
+        setObservingListHeaderNames();
+    }
 }
 
 
 /*
- * Style changed 
+ * Style changed
 */
 void ObsListDialog::styleChanged()
 {
@@ -97,16 +98,16 @@ void ObsListDialog::styleChanged()
 void ObsListDialog::setObservingListHeaderNames()
 {
     const QStringList headerStrings = {
-		"UUID", // Hided the column
-		q_("Object name"),
-		q_("Type"),
-		q_("Right ascencion"),
-		q_("Declination"),
-		q_("Magnitude"),
-        q_("Constellation")
+        "UUID", // Hided the column
+        q_ ( "Object name" ),
+        q_ ( "Type" ),
+        q_ ( "Right ascencion" ),
+        q_ ( "Declination" ),
+        q_ ( "Magnitude" ),
+        q_ ( "Constellation" )
     };
-    
-    obsListListModel->setHorizontalHeaderLabels(headerStrings);;
+
+    obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
 }
 
 
@@ -131,8 +132,9 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 */
 void ObsListDialog::obsListNewListButtonPressed()
 {
-    createEditDialog_instance = ObsListCreateEditDialog::Instance(this);
-    createEditDialog_instance->setVisible(true);
+    string listName = "";
+    createEditDialog_instance = ObsListCreateEditDialog::Instance ( this,listName );
+    createEditDialog_instance->setVisible ( true );
 }
 
 /*

@@ -32,42 +32,42 @@ class Ui_obsListDialogForm;
 class ObsListDialog : public StelDialog
 {
     Q_OBJECT
-    
+
 public:
-    ObsListDialog(QObject* parent);
+    ObsListDialog ( QObject* parent );
     virtual ~ObsListDialog();
-    
+
     //! Notify that the application style changed
-	void styleChanged();
+    void styleChanged();
 
 protected:
     Ui_obsListDialogForm *ui;
     //! Initialize the dialog widgets and connect the signals/slots.
     virtual void createDialogContent();
-    
+
 private:
     enum ObsListColumns {
-		ColumnUUID,	//! UUID of observing list
-		ColumnName,	//! Name or designation of object
-        ColumnTType, //! Type of the object
-		ColumnRa,	//! Right ascencion of object
-		ColumnDec,	//! Declination of object
-		ColumnMagnitude,	//! Magnitude of object
-		ColumnConstellation, //! Constellation of object
-		ColumnCount	//! Total number of columns
-	};
+        ColumnUUID,	//! UUID of object
+        ColumnName,	//! Name or designation of object
+        ColumnType, //! Type of the object
+        ColumnRa,	//! Right ascencion of object
+        ColumnDec,	//! Declination of object
+        ColumnMagnitude,	//! Magnitude of object
+        ColumnConstellation, //! Constellation of object
+        ColumnCount	//! Total number of columns
+    };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
-    
-    //! Update header names for observing list table
-	void setObservingListHeaderNames();
-    
+
+    //! Set header names for observing list table
+    void setObservingListHeaderNames();
+
     ObsListCreateEditDialog * createEditDialog_instance;
-    
+
 
 public slots:
     void retranslate();
-    
+
 private slots:
     void obsListHighLightAllButtonPressed();
     void obsListClearHighLightButtonPressed();
