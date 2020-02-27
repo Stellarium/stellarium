@@ -19,7 +19,7 @@ matrix:
             - gcc-4.8
             - g++-4.8
             - libgps-dev
-            - zlib1g-dev
+            - libpulse-dev
             - libgl1-mesa-dev
             - xvfb
           update: true
