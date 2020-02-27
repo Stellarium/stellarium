@@ -1479,14 +1479,27 @@ float Planet::getVMagnitude(const StelCore* core) const
 				// AW 2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
 				// TODO: Need experimental data to fitting to real world or the scientific paper with description of model.
 				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
+				// AW 2020-02: Let's use linear model in the first approximation for smooth reduce the brightness of Jovian moons for get more realistic look
 				if (englishName=="Io")
-					return shadowFactor<1.0 ? 21.0f : static_cast<float>(-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
+				{
+					const float mag = static_cast<float>(-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
 				if (englishName=="Europa")
-					return shadowFactor<1.0 ? 21.0f : static_cast<float>(-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
+				{
+					const float mag = static_cast<float>(-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
 				if (englishName=="Ganymede")
-					return shadowFactor<1.0 ? 21.0f : static_cast<float>(-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
+				{
+					const float mag = static_cast<float>(-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
 				if (englishName=="Callisto")
-					return shadowFactor<1.0 ? 21.0f : static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
+				{
+					const float mag = static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
 
 				if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
 					return absoluteMagnitude+static_cast<float>(d);

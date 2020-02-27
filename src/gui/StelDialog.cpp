@@ -73,15 +73,14 @@ void StelDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());		
 		QSize screenSize = StelMainView::getInstance().size();
 		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
 			// reload stylesheet, in case size changed!
-			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
-
+			if (gui)
+				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			dialog->show();
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
@@ -110,8 +109,8 @@ void StelDialog::setVisible(bool v)
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
-			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
-
+			if (gui)
+				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			// Ensure that tooltip get rendered in red in night mode.
 			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
 			updateNightModeProperty();
@@ -123,7 +122,6 @@ void StelDialog::setVisible(bool v)
 			connect(proxy, SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
 
 			int newX, newY;
-
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
 			// else centre dialog according to current window size.
 			QSettings *conf=StelApp::getInstance().getSettings();
@@ -208,10 +206,10 @@ void StelDialog::handleFontChanged()
 {
 	if (dialog && dialog->isVisible())
 	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
 		// reload stylesheet, in case size or font changed!
-		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui)
+			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	}
 }
 

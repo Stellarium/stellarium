@@ -178,9 +178,9 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 		core->setJD(JD);
 	}
 
-	//Move to object
-	GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(nameI18n);
-	GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
+	// Move to object
+	if (GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(nameI18n))
+		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 }
 
 void MSSearchDialog::refreshRangeDates()

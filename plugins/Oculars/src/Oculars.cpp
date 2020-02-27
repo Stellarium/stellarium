@@ -705,15 +705,15 @@ void Oculars::enableGuiPanel(bool enable)
 	{
 		if (!guiPanel)
 		{
-			StelApp& app = StelApp::getInstance();
-			StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-			Q_ASSERT(gui);
-			guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
-			
-			if (flagShowOculars)
-				guiPanel->showOcularGui();
-			else if (flagShowCCD)
-				guiPanel->showCcdGui();
+			StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+			if (gui)
+			{
+				guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+				if (flagShowOculars)
+					guiPanel->showOcularGui();
+				else if (flagShowCCD)
+					guiPanel->showCcdGui();
+			}
 		}
 	}
 	else
@@ -742,15 +742,15 @@ void Oculars::retranslateGui()
 		delete guiPanel;
 		guiPanel = Q_NULLPTR;
 		
-		StelApp& app = StelApp::getInstance();
-		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		Q_ASSERT(gui);
-		guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
-		
-		if (flagShowOculars)
-			guiPanel->showOcularGui();
-		else if (flagShowCCD)
-			guiPanel->showCcdGui();
+		StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui)
+		{
+			guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+			if (flagShowOculars)
+				guiPanel->showOcularGui();
+			else if (flagShowCCD)
+				guiPanel->showCcdGui();
+		}
 	}
 }
 
@@ -1412,9 +1412,6 @@ void Oculars::toggleTelrad()
 /* ****************************************************************************************************************** */
 void Oculars::initializeActivationActions()
 {
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-
 	QString ocularsGroup = N_("Oculars");
 	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
 	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
@@ -2678,7 +2675,7 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 void Oculars::setFlagShowOcularsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=Q_NULLPTR)
+	if (gui)
 	{
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
