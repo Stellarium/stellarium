@@ -353,7 +353,7 @@ before_install:
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$REPQT" == false ]]; then
       mkdir qt5;
-      wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/qt5.zip;
+      wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.9/qt5.zip;
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
@@ -387,8 +387,7 @@ install:
 
 before_script:
   - export DISPLAY=:99.0
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$REPQT" == false ]]; then sh -e /etc/init.d/xvfb start ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$REPQT" == true ]]; then ( Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ( Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
   - mkdir builds
