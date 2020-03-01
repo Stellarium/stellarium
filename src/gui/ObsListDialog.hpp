@@ -73,6 +73,7 @@ private slots:
     void obsListClearHighLightButtonPressed();
     void obsListNewListButtonPressed();
     void obsListEditButtonPressed();
+    void obsListCreateEditDialogClosed();
 
 };
 

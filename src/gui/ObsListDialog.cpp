@@ -133,8 +133,9 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 void ObsListDialog::obsListNewListButtonPressed()
 {
     string listName = "";
-    createEditDialog_instance = ObsListCreateEditDialog::Instance ( this,listName );
-    createEditDialog_instance->setVisible ( true );
+    createEditDialog_instance = ObsListCreateEditDialog::Instance (listName );
+    connect(createEditDialog_instance, SIGNAL(exitButtonClicked()), this, SLOT(obsListCreateEditDialogClosed()));
+    createEditDialog_instance->setVisible(true);
 }
 
 /*
@@ -144,6 +145,17 @@ void ObsListDialog::obsListEditButtonPressed()
 {
     //TODO
 }
+
+
+/*
+ * Slot to manage the close of obsListCreateEditDialog
+*/
+void ObsListDialog::obsListCreateEditDialogClosed()
+{
+    //ObsListCreateEditDialog::kill();
+    createEditDialog_instance = Q_NULLPTR;
+}
+
 
 
 

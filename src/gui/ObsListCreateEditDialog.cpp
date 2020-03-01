@@ -26,7 +26,7 @@ using namespace std;
 
 ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog ( QObject* parent, string listName ) : StelDialog ( "Observing list creation/edition", parent )
+ObsListCreateEditDialog::ObsListCreateEditDialog (string listName )
 {
     listName_ = listName;
     ui = new Ui_obsListCreateEditDialogForm();
@@ -37,16 +37,17 @@ ObsListCreateEditDialog::ObsListCreateEditDialog ( QObject* parent, string listN
 
 ObsListCreateEditDialog::~ObsListCreateEditDialog()
 {
-
+    delete ui;
+    delete obsListListModel;
 }
 
 /**
  * Get instance of class
 */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( QObject* parent, string listName )
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance (string listName )
 {
     if ( m_instance == nullptr ) {
-        m_instance = new ObsListCreateEditDialog ( parent,listName );
+        m_instance = new ObsListCreateEditDialog (listName );
     }
 
     return m_instance;
@@ -58,6 +59,30 @@ ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( QObject* parent, s
 */
 void ObsListCreateEditDialog::createDialogContent()
 {
+    ui->setupUi ( dialog );
+
+    //Signals and slots
+    connect ( &StelApp::getInstance(), SIGNAL ( languageChanged() ), this, SLOT ( retranslate() ) );
+    connect ( ui->closeStelWindow, SIGNAL ( clicked() ), this, SLOT ( close() ) );
+    
+    connect(ui->obsListAddObjectButton, SIGNAL(clicked()), this, SLOT(obsListAddObjectButtonPressed()));
+    connect(ui->obsListExitButton, SIGNAL(clicked()), this, SLOT(obsListExitButtonPressed()));
+    connect(ui->obsListSaveButton, SIGNAL(clicked()), this, SLOT(obsListSaveButtonPressed()));
+    connect(ui->obsListRemoveObjectButton, SIGNAL(clicked()), this, SLOT(obsListRemoveObjectButtonPressed()));
+    connect(ui->obsListImportListButton, SIGNAL(clicked()), this, SLOT(obsListImportListButtonPresssed()));
+    connect(ui->obsListExportListButton, SIGNAL(clicked()), this, SLOT(obsListExportListButtonPressed()));
+    
+    //Initializing the list of observing list
+    obsListListModel->setColumnCount ( ColumnCount );
+    setObservingListHeaderNames();
+    
+    ui->obsListCreationEditionTreeView->setModel ( obsListListModel );
+    ui->obsListCreationEditionTreeView->header()->setSectionsMovable ( false );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnName, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setStretchLastSection ( true );
+    ui->obsListCreationEditionTreeView->hideColumn ( ColumnUUID );
+    //Enable the sort for columns
+    ui->obsListCreationEditionTreeView->setSortingEnabled ( true );
 }
 
 /*
@@ -142,7 +167,8 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed()
 */
 void ObsListCreateEditDialog::obsListExitButtonPressed()
 {
-    //TODO
+    this->close();
+    emit exitButtonClicked();
 }
 
 /*

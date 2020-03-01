@@ -34,7 +34,7 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
 
 public:
-    static ObsListCreateEditDialog * Instance ( QObject* parent, std::string listName );
+    static ObsListCreateEditDialog * Instance (std::string listName );
     static void kill();
 
     //! Notify that the application style changed
@@ -65,7 +65,7 @@ private:
     void setObservingListHeaderNames();
 
     //Private constructor and destructor
-    ObsListCreateEditDialog ( QObject* parent, const std::string listName );
+    ObsListCreateEditDialog (std::string listName );
     virtual ~ObsListCreateEditDialog();
 
 
@@ -78,6 +78,10 @@ private slots:
     void obsListImportListButtonPresssed();
     void obsListSaveButtonPressed();
     void obsListExitButtonPressed();
+
+signals:
+    //To notified that the exit button is clicked
+    void exitButtonClicked();
 
 };
 
