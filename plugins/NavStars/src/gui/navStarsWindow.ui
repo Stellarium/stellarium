@@ -239,6 +239,34 @@
            </widget>
           </item>
           <item>
+            <widget class="QCheckBox" name="highlightWhenVisible">
+              <property name="text">
+                <string>Only highlight when visible</string>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QCheckBox" name="limitInfoToNavStars">
+              <property name="text">
+                <string>Only show extra information for marked Navigation Stars</string>
+              </property>
+            </widget>
+          </item>
+           <item>
+             <widget class="QCheckBox" name="tabulatedDisplay">
+               <property name="text">
+                 <string>Show information as a tabulated list</string>
+               </property>
+             </widget>
+           </item> 
+          <item>
+            <widget class="QCheckBox" name="upperLimb">
+              <property name="text">
+                <string>Use upper limb for Sun and Moon</string>
+              </property>
+            </widget>
+           </item>
+           <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
