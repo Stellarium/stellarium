@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-19 13:55+0700\n"
+"POT-Creation-Date: 2020-03-01 22:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,7 +454,6 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:502
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
@@ -3541,6 +3540,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1073
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:184
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "Authors"
@@ -3557,7 +3557,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:182
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
@@ -3579,7 +3579,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
@@ -4380,101 +4380,101 @@ msgstr ""
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1018
+#: src/gui/ViewDialog.cpp:1019
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1020
+#: src/gui/ViewDialog.cpp:1021
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1022
+#: src/gui/ViewDialog.cpp:1023
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1024
+#: src/gui/ViewDialog.cpp:1025
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1026
+#: src/gui/ViewDialog.cpp:1027
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1028
+#: src/gui/ViewDialog.cpp:1029
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1030
+#: src/gui/ViewDialog.cpp:1031
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1032
+#: src/gui/ViewDialog.cpp:1033
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1034
+#: src/gui/ViewDialog.cpp:1035
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1036
+#: src/gui/ViewDialog.cpp:1037
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1038
+#: src/gui/ViewDialog.cpp:1039
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1101
-msgctxt "magnitude algorithm"
-msgid "G. Mueller (1893)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1102
 msgctxt "magnitude algorithm"
-msgid "Astronomical Almanach (1984)"
+msgid "G. Mueller (1893)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1103
 msgctxt "magnitude algorithm"
-msgid "Explanatory Supplement (1992)"
+msgid "Astronomical Almanach (1984)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1104
 msgctxt "magnitude algorithm"
-msgid "Explanatory Supplement (2013)"
+msgid "Explanatory Supplement (1992)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1105
 msgctxt "magnitude algorithm"
+msgid "Explanatory Supplement (2013)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1106
+msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1132
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1134
+#: src/gui/ViewDialog.cpp:1135
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical Ephemeris</"
 "em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1137
+#: src/gui/ViewDialog.cpp:1138
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1140
+#: src/gui/ViewDialog.cpp:1141
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1143
+#: src/gui/ViewDialog.cpp:1144
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
@@ -4700,7 +4700,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:269 src/gui/AstroCalcDialog.cpp:539
 #: src/gui/AstroCalcDialog.cpp:721 src/gui/AstroCalcDialog.cpp:723
 #: src/gui/AstroCalcDialog.cpp:760 src/gui/AstroCalcDialog.cpp:1338
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1266
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1265
 msgid "Azimuth"
 msgstr ""
 
@@ -4711,7 +4711,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2649 src/gui/AstroCalcDialog.cpp:3156
 #: src/gui/AstroCalcDialog.cpp:3434 src/gui/AstroCalcDialog.cpp:3436
 #: plugins/Satellites/src/Satellite.cpp:331
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1265
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1264
 msgid "Altitude"
 msgstr ""
 
@@ -5329,7 +5329,7 @@ msgstr ""
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3025 src/gui/AstroCalcDialog.cpp:3083
 #: src/gui/AstroCalcDialog.cpp:3197
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -10124,7 +10124,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1537
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1263
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1262
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr ""
@@ -10205,7 +10205,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:1572
-#: plugins/NavStars/src/ui_navStarsWindow.h:220
+#: plugins/NavStars/src/ui_navStarsWindow.h:248
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
@@ -10216,7 +10216,7 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1576
-#: plugins/NavStars/src/ui_navStarsWindow.h:219
+#: plugins/NavStars/src/ui_navStarsWindow.h:247
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
@@ -10257,7 +10257,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2342
+#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2339
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr ""
@@ -11908,7 +11908,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:240
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
@@ -11928,7 +11928,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:241
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
@@ -11951,7 +11951,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:244
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:141
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
@@ -11972,7 +11972,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:108
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
 #: plugins/Novae/src/gui/NovaeDialog.cpp:145
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
@@ -11993,7 +11993,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:110
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
@@ -12076,7 +12076,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/NavStars/src/ui_navStarsWindow.h:222
+#: plugins/NavStars/src/ui_navStarsWindow.h:250
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:311
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
@@ -12105,7 +12105,7 @@ msgstr ""
 msgid "Compass marks"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1415
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid "Oculars"
@@ -12170,186 +12170,186 @@ msgstr ""
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1416
 #: plugins/Oculars/src/ui_ocularDialog.h:1228
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1417
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1418
 msgid "Show crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1422
+#: plugins/Oculars/src/Oculars.cpp:1419
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1420
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1421
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1422
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1427
+#: plugins/Oculars/src/Oculars.cpp:1424
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1429
+#: plugins/Oculars/src/Oculars.cpp:1426
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1431
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1433
+#: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1435
+#: plugins/Oculars/src/Oculars.cpp:1432
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1637
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1651
+#: plugins/Oculars/src/Oculars.cpp:1648
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1669
+#: plugins/Oculars/src/Oculars.cpp:1666
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1893
+#: plugins/Oculars/src/Oculars.cpp:1890
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1895
+#: plugins/Oculars/src/Oculars.cpp:1892
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1915
+#: plugins/Oculars/src/Oculars.cpp:1912
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1922
+#: plugins/Oculars/src/Oculars.cpp:1919
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1933
+#: plugins/Oculars/src/Oculars.cpp:1930
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1937
+#: plugins/Oculars/src/Oculars.cpp:1934
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1942
+#: plugins/Oculars/src/Oculars.cpp:1939
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1957 plugins/Oculars/src/Oculars.cpp:2017
+#: plugins/Oculars/src/Oculars.cpp:1954 plugins/Oculars/src/Oculars.cpp:2014
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1963
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1973
+#: plugins/Oculars/src/Oculars.cpp:1970
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1980
+#: plugins/Oculars/src/Oculars.cpp:1977
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:1998
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2005
+#: plugins/Oculars/src/Oculars.cpp:2002
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2009
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2022
+#: plugins/Oculars/src/Oculars.cpp:2019
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2338
+#: plugins/Oculars/src/Oculars.cpp:2335
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2339
+#: plugins/Oculars/src/Oculars.cpp:2336
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2340
+#: plugins/Oculars/src/Oculars.cpp:2337
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2370
+#: plugins/Oculars/src/Oculars.cpp:2367
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2371
+#: plugins/Oculars/src/Oculars.cpp:2368
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2372
+#: plugins/Oculars/src/Oculars.cpp:2369
 msgid "&Next telescope"
 msgstr ""
 
@@ -12976,174 +12976,174 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2088
+#: plugins/Satellites/src/Satellites.cpp:2089
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2090
+#: plugins/Satellites/src/Satellites.cpp:2091
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2092
+#: plugins/Satellites/src/Satellites.cpp:2093
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2094
+#: plugins/Satellites/src/Satellites.cpp:2095
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2096
+#: plugins/Satellites/src/Satellites.cpp:2097
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2098
+#: plugins/Satellites/src/Satellites.cpp:2099
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2100
+#: plugins/Satellites/src/Satellites.cpp:2101
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2102
+#: plugins/Satellites/src/Satellites.cpp:2103
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2104
+#: plugins/Satellites/src/Satellites.cpp:2105
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2106
+#: plugins/Satellites/src/Satellites.cpp:2107
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2108
+#: plugins/Satellites/src/Satellites.cpp:2109
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2110
+#: plugins/Satellites/src/Satellites.cpp:2111
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2112
+#: plugins/Satellites/src/Satellites.cpp:2113
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2114
+#: plugins/Satellites/src/Satellites.cpp:2115
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2116
+#: plugins/Satellites/src/Satellites.cpp:2117
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2121
+#: plugins/Satellites/src/Satellites.cpp:2122
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2123
+#: plugins/Satellites/src/Satellites.cpp:2124
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2125
+#: plugins/Satellites/src/Satellites.cpp:2126
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2127
+#: plugins/Satellites/src/Satellites.cpp:2128
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2129
+#: plugins/Satellites/src/Satellites.cpp:2130
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2131
+#: plugins/Satellites/src/Satellites.cpp:2132
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2133
+#: plugins/Satellites/src/Satellites.cpp:2134
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2135
+#: plugins/Satellites/src/Satellites.cpp:2136
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2137
+#: plugins/Satellites/src/Satellites.cpp:2138
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2141
+#: plugins/Satellites/src/Satellites.cpp:2142
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2143
+#: plugins/Satellites/src/Satellites.cpp:2144
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2145
+#: plugins/Satellites/src/Satellites.cpp:2146
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2147
+#: plugins/Satellites/src/Satellites.cpp:2148
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2151
+#: plugins/Satellites/src/Satellites.cpp:2152
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2153
+#: plugins/Satellites/src/Satellites.cpp:2154
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2155
+#: plugins/Satellites/src/Satellites.cpp:2156
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2157
+#: plugins/Satellites/src/Satellites.cpp:2158
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2159
+#: plugins/Satellites/src/Satellites.cpp:2160
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2161
+#: plugins/Satellites/src/Satellites.cpp:2162
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -13444,7 +13444,7 @@ msgstr ""
 msgid "See %1this document%2 for details."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -13453,7 +13453,7 @@ msgstr ""
 msgid "Next update"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -13462,8 +13462,8 @@ msgstr ""
 msgid "Internet updates disabled"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -13477,7 +13477,7 @@ msgstr ""
 msgid "Updating now..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:794
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -13487,7 +13487,7 @@ msgid "< 1 minute"
 msgstr ""
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:799
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -13498,7 +13498,7 @@ msgctxt "time"
 msgid "m"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:817
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -13507,21 +13507,21 @@ msgstr ""
 msgid "Update error"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:893
 msgid "[new source]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 #: plugins/Satellites/src/ui_satellitesDialog.h:783
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -13537,7 +13537,7 @@ msgstr ""
 msgid "Update now"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:948
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:947
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -13546,40 +13546,40 @@ msgstr ""
 msgid "Update from files"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:990
 msgid "[orbit calculation error]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
 msgid "[all newly added]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:994
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:994
 msgid "[all]"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1037
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
 msgid "New group..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1243
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1242
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1264
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1263
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1267
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1266
 msgid "Satellite"
 msgstr ""
 
@@ -15733,21 +15733,21 @@ msgstr ""
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:110
+#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
 msgid "Navigational Stars"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:99
+#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:188
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:110
+#: plugins/NavStars/src/NavStars.cpp:125
 msgid "Mark the navigational stars"
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:284
+#: plugins/NavStars/src/NavStars.cpp:314
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -15757,7 +15757,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:290
+#: plugins/NavStars/src/NavStars.cpp:320
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
@@ -15765,60 +15765,272 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:296
+#: plugins/NavStars/src/NavStars.cpp:326
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
-msgid "Navigational Stars Plug-in"
+#: plugins/NavStars/src/NavStars.cpp:494
+msgctxt "the highest part of the Sun or Moon"
+msgid "upper limb"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:495
+msgctxt "the lowest part of the Sun or Moon"
+msgid "lower limb"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:511 plugins/NavStars/src/NavStars.cpp:539
+msgctxt "Greenwich hour angle, first point of Aries"
+msgid "GHA"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:513 plugins/NavStars/src/NavStars.cpp:543
+msgctxt "object sidereal hour angle (ERA, Earth rotation angle)"
+msgid "SHA"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:515 plugins/NavStars/src/NavStars.cpp:549
+msgctxt "local hour angle"
+msgid "LHA"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:518
+msgctxt "greenwich hour angle/declination of object"
+msgid "GP: GHA/DEC"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:521
+msgctxt "geodetic coordinate system, latitude and longitude of ground point"
+msgid "GP: LAT/LON"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:524
+msgctxt "geodetic coordinate system, latitude and longitude of user"
+msgid "AP: LAT/LON"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:527
+msgctxt ""
+"Navigation/horizontal coordinate system, calculated altitude and azimuth"
+msgid "Hc/Zn"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:534
+msgctxt "universal time coordinated"
+msgid "UTC"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:537
+msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
+msgid "Ho"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:541
+msgctxt "local hour angle"
+msgid "LMST"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:545
+msgctxt "greenwich hour angle"
+msgid "GHA"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:547
+msgctxt "declination"
+msgid "DEC"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:551
+msgctxt "geodetic coordinate system, latitude"
+msgid "LAT"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:553
+msgctxt "geodetic coordinate system, longitude"
+msgid "LON"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:555
+msgctxt "Navigation/horizontal coordinate system, calculated altitude"
+msgid "Hc"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:557
+msgctxt "Navigation/horizontal coordinate system, calculated azmiuth"
+msgid "Zn"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:151
 msgid "Anglo-American"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:155
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
 msgid "French"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:155
 msgid "Russian"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:209
-#: plugins/NavStars/src/ui_navStarsWindow.h:221
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:181
+msgid "Navigational Stars Plug-in"
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:192
+msgid ""
+"Additional information fields can be displayed by selecting \"Information "
+"&gt; Additional coordinates (from plugins)\""
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:196
+msgid "These fields are:"
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
+#, qt-format
+msgid "GHA%1: The Greenwich Hour Angle for the first point of Aries."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:199
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
+msgid "SHA: Sidereal Hour Angle of navigation star."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
+msgid "LHA: The observers local hour angle to the navigation star."
+msgstr ""
+
+#. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astonomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
+msgid ""
+"GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
+"Declination."
+msgstr ""
+
+#. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a starting close by where the observer knows themselves to be. For example, from dead reckoning.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:204
+msgid ""
+"AP: LAT/LON: The observers assumed position as geodetic latitude and "
+"longitude."
+msgstr ""
+
+#. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
+msgid ""
+"Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
+"star."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:210
+msgid ""
+"The user has two different view options selected by \"Show information as a "
+"tabulated list\"."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:214
+msgid ""
+"When tabulated list is selected the fields then become which is more inline "
+"with <em>The Nautical Almanac</em> format:"
+msgstr ""
+
+#. TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:218
+msgid "Ho: Simulated observed altitude of navigation star using a sextant."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:219
+#, qt-format
+msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:220
+msgid "LMST: Local mean sidereal time."
+msgstr ""
+
+#. TRANSLATORS: celestial coordinate system, declination.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
+msgid "DEC: The navigation star's declination."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:224
+msgid "GHA: The navigation star's Greenwich Hour Angle."
+msgstr ""
+
+#. TRANSLATORS: Geodetic coordinate system, latitude.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
+msgid "LAT: The observers geodetic latitude."
+msgstr ""
+
+#. TRANSLATORS: Geodetic coordinate system, longitude.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
+msgid "LON: The observers geodetic longitude."
+msgstr ""
+
+#. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude)
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
+msgid "Hc: The calculated height (altitude) of navigation star."
+msgstr ""
+
+#. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn computed azimuth
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
+msgid "Zn: The calculated azimuth of navigation star."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:237
+msgid "For further information please refer to the Stellarium User Guide."
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:233
+#: plugins/NavStars/src/ui_navStarsWindow.h:249
 msgid "Navigational stars"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:211
+#: plugins/NavStars/src/ui_navStarsWindow.h:235
 msgid "Set of navigational stars"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:213
+#: plugins/NavStars/src/ui_navStarsWindow.h:237
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:215
+#: plugins/NavStars/src/ui_navStarsWindow.h:239
 msgid "Current set:"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:216
+#: plugins/NavStars/src/ui_navStarsWindow.h:240
 msgid "Note:"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:218
+#: plugins/NavStars/src/ui_navStarsWindow.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:301
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:337
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
 msgid "Enable display at startup"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:243
+msgid "Only highlight when visible"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:244
+msgid "Only show extra information for marked Navigation Stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:245
+msgid "Show information as a tabulated list"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:246
+msgid "Use upper limb for Sun and Moon"
 msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:144

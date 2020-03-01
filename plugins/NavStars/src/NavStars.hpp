@@ -164,7 +164,7 @@ public slots:
 	//! @param QString a The cell left value
 	//! @param QString b The cell right value
 	//! @return QString The representation of the extraString info.
-    QString oneRowTwoCells(const QString& a, const QString& b);
+	QString oneRowTwoCells(const QString& a, const QString& b, const QString& extra, bool tabulatedView);
 
 	bool isPermittedObject(const QString& s);
 

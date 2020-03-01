@@ -55,7 +55,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "NavStars";
 	info.displayedName = N_("Navigational Stars");
-	info.authors = "Alexander Wolf";
+	info.authors = "Alexander Wolf, Andy Kirkham";
 	info.contact = STELLARIUM_URL;
 	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
@@ -504,66 +504,67 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 
 void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
+	Q_UNUSED(extraText)
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable()));
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", false));
 	temp = calc.ghaPrintable() + "/" + calc.decPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle/declination of object"), temp));
+		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle/declination of object"), temp, "", false));
 	temp = calc.gplatPrintable() + "/" + calc.gplonPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GP: LAT/LON", "geodetic coordinate system, latitude and longitude of ground point"), temp));
+		oneRowTwoCells(qc_("GP: LAT/LON", "geodetic coordinate system, latitude and longitude of ground point"), temp, "", false));
 	temp = calc.latPrintable() + "/" + calc.lonPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp));
+		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp, "", false));
 	temp = calc.hcPrintable() + "/" + calc.znPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("Hc/Zn", "Navigation/horizontal coordinate system, calculated altitude and azimuth"), temp));
+		oneRowTwoCells(qc_("Hc/Zn", "Navigation/horizontal coordinate system, calculated altitude and azimuth"), temp, "", false));
 }
 
 void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
-	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;	
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC()));
+		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC(), "", false));
+	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable() + extraText));
+		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable(), extraText, true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable()));	
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstPrintable()));
+		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable()));
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable()));
+		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable()));
+		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable()));
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.gplatPrintable()));
+		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.gplatPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.gplonPrintable()));
+		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.gplonPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable()));
+		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable()));
+		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, "</table>");
 }
 
-QString NavStars::oneRowTwoCells(const QString& a, const QString& b)
+QString NavStars::oneRowTwoCells(const QString& a, const QString& b, const QString &extra, bool tabulatedView)
 {
 	QString rval;
-	if (withTables) {
-		rval += "<tr><td>" + a + ":</td><td>" + b + "</td></tr>";
-	}
-	else {
-		rval += a + ": " + b + "<br/>";
-	}
+	if (tabulatedView)
+		rval += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td>%3</td></tr>").arg(a, b, extra);
+	else
+		rval += QString("%1: %2 %3<br />").arg(a, b, extra);
 	return rval;
 }
 

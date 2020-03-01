@@ -181,8 +181,8 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin marks navigational stars from a selected set.") + "</p>";
@@ -193,7 +193,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "</p>";
 
 	html += "<p>";
-	html += q_("These fields are:-");
+	html += q_("These fields are:");
 	html += "<ul>";
 	html += "<li>" + q_("GHA%1: The Greenwich Hour Angle for the first point of Aries.").arg("&#9800;") + "</li>";
 	html += "<li>" + q_("SHA: Sidereal Hour Angle of navigation star.") + "</li>";
@@ -211,7 +211,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "</p>";
 
 	html += "<p>";
-	html += q_("When tabulated list is selected the fields then become which is more inline with The Nautical Almanac format:-");
+	html += q_("When tabulated list is selected the fields then become which is more inline with <em>The Nautical Almanac</em> format:");
 	html += "<ul>";
 
 	//! TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
