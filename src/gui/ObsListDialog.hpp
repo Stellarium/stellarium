@@ -58,9 +58,12 @@ private:
     };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
+    std::string selectedObservingList;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
+    
+    void invokeObsListCreateEditDialog(std::string listName);
 
     ObsListCreateEditDialog * createEditDialog_instance;
 

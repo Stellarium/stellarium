@@ -132,10 +132,9 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 */
 void ObsListDialog::obsListNewListButtonPressed()
 {
-    string listName = "";
-    createEditDialog_instance = ObsListCreateEditDialog::Instance (listName );
-    connect(createEditDialog_instance, SIGNAL(exitButtonClicked()), this, SLOT(obsListCreateEditDialogClosed()));
-    createEditDialog_instance->setVisible(true);
+    string listName = string();
+    invokeObsListCreateEditDialog(listName);
+    
 }
 
 /*
@@ -143,8 +142,24 @@ void ObsListDialog::obsListNewListButtonPressed()
 */
 void ObsListDialog::obsListEditButtonPressed()
 {
-    //TODO
+    if(!selectedObservingList.empty()){
+        invokeObsListCreateEditDialog(selectedObservingList);
+    } else {
+        qWarning() << "The selected observing list name is empty";
+    }
 }
+
+
+/**
+ * Open the observing list create/edit dialog
+*/
+void ObsListDialog::invokeObsListCreateEditDialog(std::string listName)
+{
+    createEditDialog_instance = ObsListCreateEditDialog::Instance (listName );
+    connect(createEditDialog_instance, SIGNAL(exitButtonClicked()), this, SLOT(obsListCreateEditDialogClosed()));
+    createEditDialog_instance->setVisible(true);
+}
+
 
 
 /*
@@ -152,7 +167,7 @@ void ObsListDialog::obsListEditButtonPressed()
 */
 void ObsListDialog::obsListCreateEditDialogClosed()
 {
-    //ObsListCreateEditDialog::kill();
+    ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;
 }
 
