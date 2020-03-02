@@ -153,6 +153,8 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("French"), "French");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
+	// TRANSLATORS: Part of full phrase: German set of navigational stars
+	nsSets->addItem(q_("German"), "German");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -198,7 +200,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "<li>" + q_("GHA%1: The Greenwich Hour Angle for the first point of Aries.").arg("&#9800;") + "</li>";
 	html += "<li>" + q_("SHA: Sidereal Hour Angle of navigation star.") + "</li>";
 	html += "<li>" + q_("LHA: The observers local hour angle to the navigation star.") + "</li>";
-	//! TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astonomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
+	//! TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
 	html += "<li>" + q_("GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and Declination.") + "</li>";	
 	//! TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a starting close by where the observer knows themselves to be. For example, from dead reckoning.
 	html += "<li>" + q_("AP: LAT/LON: The observers assumed position as geodetic latitude and longitude.") + "</li>";

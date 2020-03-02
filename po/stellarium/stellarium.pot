@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-01 22:20+0700\n"
+"POT-Creation-Date: 2020-03-02 19:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3540,7 +3540,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1073
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:184
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:186
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "Authors"
@@ -3557,7 +3557,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:182
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:184
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
@@ -3579,7 +3579,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:185
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
@@ -11908,7 +11908,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:240
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:242
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
@@ -11928,7 +11928,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:241
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
@@ -11951,7 +11951,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:244
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:141
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
@@ -11972,7 +11972,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 #: plugins/Novae/src/gui/NovaeDialog.cpp:145
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
@@ -11993,7 +11993,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
@@ -15738,7 +15738,7 @@ msgid "Navigational Stars"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:60
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:188
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 
@@ -15760,8 +15760,8 @@ msgstr ""
 #: plugins/NavStars/src/NavStars.cpp:320
 #, qt-format
 msgid ""
-"The 81 stars that are listed in the <em>%1</em> published by the French "
-"Bureau des Longitudes."
+"The 81 stars that are listed in the French Nautical Almanac (The original "
+"French title is <em>%1</em>) published by the French Bureau des Longitudes."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
@@ -15772,93 +15772,102 @@ msgid ""
 "Russian title is <em>%1</em>)."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:494
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:332
+#, qt-format
+msgid ""
+"The 80 stars that are listed in the German Nautical Almanac (The original "
+"German title is <em>%1</em>) published by the Federal Maritime and "
+"Hydrographic Agency of Germany."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:495
+#: plugins/NavStars/src/NavStars.cpp:522
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:511 plugins/NavStars/src/NavStars.cpp:539
+#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
 msgctxt "Greenwich hour angle, first point of Aries"
 msgid "GHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:513 plugins/NavStars/src/NavStars.cpp:543
+#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
 msgctxt "object sidereal hour angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:515 plugins/NavStars/src/NavStars.cpp:549
+#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
 msgctxt "local hour angle"
 msgid "LHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:518
+#: plugins/NavStars/src/NavStars.cpp:545
 msgctxt "greenwich hour angle/declination of object"
 msgid "GP: GHA/DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:548
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:524
+#: plugins/NavStars/src/NavStars.cpp:551
 msgctxt "geodetic coordinate system, latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:527
+#: plugins/NavStars/src/NavStars.cpp:554
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:534
+#: plugins/NavStars/src/NavStars.cpp:561
 msgctxt "universal time coordinated"
 msgid "UTC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:537
+#: plugins/NavStars/src/NavStars.cpp:564
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:541
+#: plugins/NavStars/src/NavStars.cpp:568
 msgctxt "local hour angle"
 msgid "LMST"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:572
 msgctxt "greenwich hour angle"
 msgid "GHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:547
+#: plugins/NavStars/src/NavStars.cpp:574
 msgctxt "declination"
 msgid "DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:578
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:553
+#: plugins/NavStars/src/NavStars.cpp:580
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:555
+#: plugins/NavStars/src/NavStars.cpp:582
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:557
+#: plugins/NavStars/src/NavStars.cpp:584
 msgctxt "Navigation/horizontal coordinate system, calculated azmiuth"
 msgid "Zn"
 msgstr ""
@@ -15878,112 +15887,117 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:181
+#. TRANSLATORS: Part of full phrase: German set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
+msgid "German"
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
 msgid "Navigational Stars Plug-in"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:192
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:194
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:196
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
 msgid "These fields are:"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle for the first point of Aries."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:199
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
 msgid "LHA: The observers local hour angle to the navigation star."
 msgstr ""
 
-#. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astonomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
+#. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:204
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a starting close by where the observer knows themselves to be. For example, from dead reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:204
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
 msgid ""
 "AP: LAT/LON: The observers assumed position as geodetic latitude and "
 "longitude."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:208
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:210
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:212
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:214
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:216
 msgid ""
 "When tabulated list is selected the fields then become which is more inline "
 "with <em>The Nautical Almanac</em> format:"
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:218
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:220
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:219
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:220
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:222
 msgid "LMST: Local mean sidereal time."
 msgstr ""
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
 msgid "DEC: The navigation star's declination."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:224
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:226
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
 msgid "LAT: The observers geodetic latitude."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
 msgid "LON: The observers geodetic longitude."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude)
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
 msgid "Hc: The calculated height (altitude) of navigation star."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:235
 msgid "Zn: The calculated azimuth of navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:237
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:239
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 
