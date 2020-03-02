@@ -33,10 +33,15 @@
 #include "StelUtils.hpp"
 #include "NavStars.hpp"
 #include "NavStarsWindow.hpp"
+#include "NavStarsCalculator.hpp"
+#include "Planet.hpp"
+#include <StelMainScriptAPI.hpp>
 
 #include <QList>
 #include <QSharedPointer>
 #include <QMetaEnum>
+
+#include "planetsephems/sidereal_time.h"
 
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
@@ -46,11 +51,11 @@ StelModule* NavStarsStelPluginInterface::getStelModule() const
 StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 {
 	Q_INIT_RESOURCE(NavStars);
-
+ 
 	StelPluginInfo info;
 	info.id = "NavStars";
 	info.displayedName = N_("Navigational Stars");
-	info.authors = "Alexander Wolf";
+	info.authors = "Alexander Wolf, Andy Kirkham";
 	info.contact = STELLARIUM_URL;
 	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
@@ -60,14 +65,24 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
-	, enableAtStartup(false)
-	, starLabelsState(true)
+	, enableAtStartup(false)	
+	, starLabelsState(true)	
+	, upperLimb(false)
+	, highlightWhenVisible(false)
+	, limitInfoToNavStars(false)	
+	, tabulatedDisplay(false)	
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 	mainWindow = new NavStarsWindow();
+	permittedObjects.push_back(QStringLiteral("Sun"));
+	permittedObjects.push_back(QStringLiteral("Moon"));
+	permittedObjects.push_back(QStringLiteral("Venus"));
+	permittedObjects.push_back(QStringLiteral("Mars"));
+	permittedObjects.push_back(QStringLiteral("Jupiter"));
+	permittedObjects.push_back(QStringLiteral("Saturn"));
 }
 
 NavStars::~NavStars()
@@ -168,13 +183,18 @@ void NavStars::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-	
+	float mlimit = core->getSkyDrawer()->getLimitMagnitude();
+
 	Vec3d pos;
 	for (int i = 0; i < sn.size(); ++i)
 	{
 		if (stars[i].isNull())
 			continue;
 		
+		// Don't show if magnitude too low for visibility.
+		if (highlightWhenVisible && stars[i]->getVMagnitude(core) > mlimit)
+			continue;
+
 		// Get the current position of the navigational star...
 		if (prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos))
 		{
@@ -196,6 +216,8 @@ void NavStars::draw(StelCore* core)
 			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 10.f, 10.f, false);
 		}
 	}
+
+	addExtraInfo(core);
 }
 
 void NavStars::update(double deltaTime)
@@ -239,6 +261,10 @@ void NavStars::loadConfiguration(void)
 	setCurrentNavigationalStarsSetKey(conf->value("current_ns_set", "AngloAmerican").toString());
 	markerColor = StelUtils::strToVec3f(conf->value("marker_color", "0.8,0.0,0.0").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	highlightWhenVisible = conf->value("highlight_when_visible", false).toBool();
+	limitInfoToNavStars  = conf->value("limit_info_to_nav_stars", false).toBool();
+	tabulatedDisplay = conf->value("tabulated_display", false).toBool();
+	upperLimb = conf->value("upper_limb", false).toBool();
 
 	conf->endGroup();
 }
@@ -250,6 +276,10 @@ void NavStars::saveConfiguration(void)
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", StelUtils::vec3fToStr(markerColor));
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("highlight_when_visible", highlightWhenVisible);
+	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
+	conf->setValue("tabulated_display", tabulatedDisplay);
+	conf->setValue("upper_limb", upperLimb);
 
 	conf->endGroup();
 }
@@ -287,13 +317,19 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case French:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 81 stars that are listed in the <em>%1</em> published by the French Bureau des Longitudes.").arg("Ephémérides Nautiques");
+			txt = q_("The 81 stars that are listed in the French Nautical Almanac (The original French title is <em>%1</em>) published by the French Bureau des Longitudes.").arg("Ephémérides Nautiques");
 			break;
 		}
 		case Russian:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
 			txt = q_("The 160 stars that are listed in the Russian Nautical Almanac (The original Russian title is <em>%1</em>).").arg("Морской астрономический ежегодник");
+			break;
+		}
+		case German:
+		{
+			// TRANSLATORS: The emphasis tags mark a book title.
+			txt = q_("The 80 stars that are listed in the German Nautical Almanac (The original German title is <em>%1</em>) published by the Federal Maritime and Hydrographic Agency of Germany.").arg("Nautisches Jahrbuch");
 			break;
 		}
 	}
@@ -373,7 +409,200 @@ void NavStars::populateNavigationalStarsSet(void)
 				    << 110130 << 112122 << 113368 << 113881 << 113963 <<  11767;
 			break;
 		}
+		case German:
+		{
+			// 80 stars from German Nautical Almanac
+			// Original German name: Nautisches Jahrbuch
+			// The numbers are identical to the "Nautisches Jahrbuch"
+			starNumbers <<    677 <<    1067 <<      2081 <<    3179 <<     3419 <<     4427
+					 <<     5447 <<     7588 <<   11767 <<     9640 <<     9884 <<   14135
+					 <<   14576 <<   15863 <<   17702 <<   21421 <<   24436 <<   24608
+					 <<   25336 <<   25428 <<   26311 <<   26727 <<   27366 <<   27989
+					 <<   28360 <<   30324 <<   30438 <<   31681 <<   32349 <<   33579
+					 <<   34444 <<   36850 <<   37279 <<   37826 <<   41037 <<   44816
+					 <<   45238 <<   46390 <<   49669 <<   52419 <<   54061 <<   57632
+					 <<   60718 <<   61084 <<   62434 <<   62956 <<   63608 <<   65378
+					 <<   65474 <<   67301 <<   68702 <<   68933 <<   69673 <<   71683
+					 <<   72105 <<   72622 <<   72607 <<   74785 <<   76267 <<   77070
+					 <<   80763 <<   82273 <<   82396 <<   85927 <<   86032 <<   86228
+					 <<   87833 <<   90185 <<   91262 <<   92855 <<   97649 << 100751
+					 << 102098 << 105199 << 107315 << 109268 << 112122 << 113368
+					 << 113881 << 113963;
+			break;
+		}
 	}
 
 	setNavStarsMarks(currentState);
+}
+
+void NavStars::addExtraInfo(StelCore *core)
+{
+	if (0 == stars.size() || "Earth" != core->getCurrentPlanet()->getEnglishName()) 
+		return;
+
+	StelApp& stelApp = StelApp::getInstance();
+	bool isSource = stelApp.getStelObjectMgr().getWasSelected();
+
+	if (isSource) 
+	{
+		bool doExtraInfo = true;
+		StelObjectP selectedObject = stelApp.getStelObjectMgr().getSelectedObject()[0];
+		if (limitInfoToNavStars) 
+		{
+			doExtraInfo = false;
+			QString type = selectedObject->getType();
+			if(selectedObject->getType() == QStringLiteral("Star")) {
+				for (QVector<StelObjectP>::const_iterator itor = stars.begin();
+					itor != stars.end();
+					itor++)
+				{
+					StelObjectP p = *itor;
+					if (p->getEnglishName() == selectedObject->getEnglishName())
+					{
+						doExtraInfo = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				QString englishName = selectedObject->getEnglishName();
+				if (isPermittedObject(englishName))
+				{
+					doExtraInfo = true;
+				}
+			}
+		}
+		if (doExtraInfo) {
+			withTables = stelApp.getFlagUseFormattingOutput();
+			extraInfo(core, selectedObject, withTables);
+		}
+	}
+}
+
+void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables)
+{
+	double jd, jde, x = 0., y = 0.;
+	QString extraText = "", englishName = selectedObject->getEnglishName();
+
+	jd  = core->getJD();
+	jde = core->getJDE();
+
+	NavStarsCalculator calc;
+	calc.setUTC(StelMainScriptAPI::getDate("utc"))
+		.setLatDeg(core->getCurrentLocation().latitude)
+		.setLonDeg(core->getCurrentLocation().longitude)
+		.setJd(jd)
+		.setJde(jde)
+		.setGmst(get_mean_sidereal_time(jd, jde));
+
+	StelUtils::rectToSphe(&x, &y, selectedObject->getEquinoxEquatorialPos(core));	
+	calc.setRaRad(x)
+		.setDecRad(y);
+
+	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosGeometric(core)); 
+	calc.setAzRad(x)
+		.setAltRad(y);
+
+	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosApparent(core)); 
+	calc.setAzAppRad(x)
+		.setAltAppRad(y);
+
+	calc.execute();
+
+	if ("Sun" == englishName || "Moon" == englishName) 
+	{
+		// Adjust Ho if target is Sun or Moon by adding/subtracting half the angular diameter.
+		double d = selectedObject->getAngularSize(core);
+		if (upperLimb)
+			d *= -1;
+		calc.addAltAppRad(((d / 2) * M_PI) / 180.);
+		extraText = upperLimb ?
+			" (" + QString(qc_("upper limb", "the highest part of the Sun or Moon")) + ")" :
+			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
+	}
+
+	if (tabulatedDisplay)
+		displayTabulatedInfo(selectedObject, calc, extraText);
+	else
+		displayStandardInfo(selectedObject, calc, extraText);
+}
+
+
+void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
+{
+	Q_UNUSED(extraText)
+	QString temp;
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", false));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", false));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", false));
+	temp = calc.ghaPrintable() + "/" + calc.decPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle/declination of object"), temp, "", false));
+	temp = calc.gplatPrintable() + "/" + calc.gplonPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GP: LAT/LON", "geodetic coordinate system, latitude and longitude of ground point"), temp, "", false));
+	temp = calc.latPrintable() + "/" + calc.lonPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp, "", false));
+	temp = calc.hcPrintable() + "/" + calc.znPrintable();
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Hc/Zn", "Navigation/horizontal coordinate system, calculated altitude and azimuth"), temp, "", false));
+}
+
+void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
+{
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;	
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC(), "", false));
+	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable(), extraText, true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.gplatPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("LON", "geodetic coordinate system, longitude"), calc.gplonPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, 
+		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable(), "", true));
+	selectedObject->addToExtraInfoString(infoGroup, "</table>");
+}
+
+QString NavStars::oneRowTwoCells(const QString& a, const QString& b, const QString &extra, bool tabulatedView)
+{
+	QString rval;
+	if (tabulatedView)
+		rval += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td>%3</td></tr>").arg(a, b, extra);
+	else
+		rval += QString("%1: %2 %3<br />").arg(a, b, extra);
+	return rval;
+}
+
+bool NavStars::isPermittedObject(const QString& s)
+{
+	QVector<QString>::const_iterator itor = permittedObjects.begin();
+	while (itor != permittedObjects.end())
+	{
+		if (*itor == s)
+			return true;
+		++itor;
+	}
+	return false;
 }

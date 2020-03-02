@@ -1,0 +1,4 @@
+
+include("navstars-common.inc");
+core.selectObjectByName("Dubhe", false);
+StelMovementMgr.setFlagTracking(true);

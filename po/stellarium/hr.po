@@ -80,7 +80,7 @@ msgstr "Oznake asterizma"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
-msgstr "Pomoćne zrake"
+msgstr "Pomoćne linije"
 
 #: src/core/modules/Constellation.cpp:277
 msgid "constellation"
@@ -178,7 +178,7 @@ msgstr "Supergalaktički ekvator"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:2858
 msgid "O./C. longitude"
-msgstr "Dužina O./K. "
+msgstr "Dužina Op./Konj. "
 
 #: src/core/modules/GridLinesMgr.cpp:694
 #: src/core/modules/GridLinesMgr.cpp:1347 src/ui_viewDialog.h:2832
@@ -856,7 +856,7 @@ msgstr "satelitsko obilježje"
 #: src/core/modules/NomenclatureItem.cpp:474
 msgctxt "landform"
 msgid "saxum"
-msgstr ""
+msgstr "saxum"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:476
@@ -1007,23 +1007,24 @@ msgstr "Struktura slična palačinki ili niz takvih struktura."
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:530
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr "Vrlo nizak greben s ponavljajućim uzorkom krivulja"
+msgstr "Vrlo nizak greben s ponavljajućim uzorkom krivulja."
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:532
 msgid "Flow terrain."
-msgstr ""
+msgstr "Naplavna ravan."
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:534
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "Kanal s mogućim tekućim tokom."
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:536
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
+"Tjesnac, uzak prolaz tekućine koji povezuje dva veća područja tekućine."
 
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:538
@@ -1047,13 +1048,14 @@ msgstr "Klizište."
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:544
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "Cjelina kojom se presijecaju doline i grebeni."
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:546
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
+"Depresija nepravilnog oblika, izgledom podsjeća na dno presušenog jezera."
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:548
@@ -1073,7 +1075,7 @@ msgstr "Mala tamna točka."
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:554
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
+msgstr "Tamna ili svijetla izdužena oznaka, može biti krivudava ili ravna."
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:556
@@ -1094,7 +1096,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:562
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
+msgstr "Istaknuti plosnati vrh s rubovima nalik liticama."
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:564
@@ -1166,7 +1168,7 @@ msgstr "Značajka koja dijeli naziv pridružene značajke."
 #. TRANSLATORS: Description for landform 'saxum'
 #: src/core/modules/NomenclatureItem.cpp:590
 msgid "Boulder or rock."
-msgstr ""
+msgstr "Veliki kamen ili stijena."
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:592
@@ -1193,17 +1195,17 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:600
 msgid "Extensive land mass."
-msgstr ""
+msgstr "Prostrana kopnena masa."
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:602
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "Pločasti, poligonalni teren."
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:604
 msgid "Small domical mountain or hill."
-msgstr ""
+msgstr "Mala kupolasta planina ili brdo."
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:606
@@ -1223,7 +1225,7 @@ msgstr "Prostrana ravnica"
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:612
 msgid "A streak or stripe of color."
-msgstr ""
+msgstr "Trag ili pruga u boji."
 
 #: src/core/modules/NomenclatureMgr.cpp:78
 msgid "Nomenclature labels"
@@ -1245,31 +1247,31 @@ msgstr "svedeno na"
 
 #: src/core/modules/Nebula.cpp:146 src/core/StelObject.cpp:251
 msgid "by"
-msgstr ""
+msgstr "do"
 
 #: src/core/modules/Nebula.cpp:146 src/core/StelObject.cpp:251
 msgid "Airmasses"
-msgstr ""
+msgstr "Zračne mase"
 
 #: src/core/modules/Nebula.cpp:151 src/core/modules/StarWrapper.cpp:252
 msgid "Photometric system"
-msgstr ""
+msgstr "Fotometrijski sistem"
 
 #: src/core/modules/Nebula.cpp:247 src/core/modules/Planet.cpp:434
 #: src/core/modules/StarWrapper.cpp:175
 msgid "Additional names: "
-msgstr ""
+msgstr "Dodatni nazivi:"
 
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:441
 #: src/core/modules/StarWrapper.cpp:181
 msgid "Additional catalog numbers: "
-msgstr ""
+msgstr "Dodatni kataloški brojevi:"
 
 #: src/core/modules/Nebula.cpp:272 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Index boje (B-V)"
 
 #: src/core/modules/Nebula.cpp:277
 msgid "Surface brightness"
@@ -1296,7 +1298,7 @@ msgstr "kut. sek."
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Contrast index"
-msgstr ""
+msgstr "Indeks kontrasta"
 
 #: src/core/modules/Nebula.cpp:311 src/ui_configurationDialog.h:1628
 msgid "Size"
@@ -1304,7 +1306,7 @@ msgstr "Veličina"
 
 #: src/core/modules/Nebula.cpp:329
 msgid "Orientation angle"
-msgstr ""
+msgstr "Orijentacijski kut"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
@@ -1522,22 +1524,22 @@ msgstr "neodređeni sjaj"
 #: src/core/modules/Nebula.cpp:1215
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr ""
+msgstr "nezabilježeni sjaj reflektivnih maglica"
 
 #: src/core/modules/Nebula.cpp:1221
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "osvijetljavajuća zvijezda je ukomponirana u zamagljenju"
 
 #: src/core/modules/Nebula.cpp:1224
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "zvijezda se nalazi izvan osvijetljenog zamagljenja"
 
 #: src/core/modules/Nebula.cpp:1227
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "zvijezda se nalazi na rubu osvijetljenog zamagljenja"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:1232
@@ -1659,7 +1661,7 @@ msgstr "radiogalaksija"
 
 #: src/core/modules/Nebula.cpp:1321
 msgid "interacting galaxy"
-msgstr ""
+msgstr "interaktivna galaksija"
 
 #: src/core/modules/Nebula.cpp:1322 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
@@ -1699,7 +1701,7 @@ msgstr "tamna maglica"
 
 #: src/core/modules/Nebula.cpp:1331
 msgid "reflection nebula"
-msgstr ""
+msgstr "Reflektivna maglica"
 
 #: src/core/modules/Nebula.cpp:1332
 msgid "bipolar nebula"
@@ -1707,7 +1709,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1333
 msgid "emission nebula"
-msgstr ""
+msgstr "Emisijska maglica"
 
 #: src/core/modules/Nebula.cpp:1334
 msgid "cluster associated with nebulosity"
@@ -1747,15 +1749,15 @@ msgstr "Mladi zvjezdani objekt"
 
 #: src/core/modules/Nebula.cpp:1343
 msgid "possible quasar"
-msgstr ""
+msgstr "potencijalni kvazar"
 
 #: src/core/modules/Nebula.cpp:1344
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "potencijalna planetarna maglica"
 
 #: src/core/modules/Nebula.cpp:1345
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "proto-planetarna maglica"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1346 src/core/modules/StarWrapper.cpp:54
@@ -1778,7 +1780,7 @@ msgstr "kandidat za supernovu"
 
 #: src/core/modules/Nebula.cpp:1350
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "Potencijalni ostatak supernove"
 
 #: src/core/modules/Nebula.cpp:1351
 msgid "cluster of galaxies"
@@ -1786,7 +1788,7 @@ msgstr "skup galaksija"
 
 #: src/core/modules/Nebula.cpp:1352
 msgid "object of unknown nature"
-msgstr ""
+msgstr "objekt nepoznate prirode"
 
 #: src/core/modules/NebulaMgr.cpp:459
 msgid "Deep-sky objects"
@@ -1848,7 +1850,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:542 src/core/modules/MinorPlanet.cpp:269
 #: src/core/modules/Comet.cpp:239
 msgid "Orbital velocity"
-msgstr ""
+msgstr "Orbitalna brzina"
 
 #: src/core/modules/Planet.cpp:545 src/core/modules/MinorPlanet.cpp:272
 msgid "Heliocentric velocity"
@@ -1862,13 +1864,13 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:298 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:260 src/core/modules/Comet.cpp:261
 msgid "Hourly motion"
-msgstr ""
+msgstr "Satni pomak"
 
 #: src/core/modules/Planet.cpp:573 src/core/modules/MinorPlanet.cpp:298
 #: src/core/modules/Comet.cpp:260 src/core/modules/StarWrapper.cpp:285
 msgctxt "into the direction of"
 msgid "towards"
-msgstr ""
+msgstr "prema"
 
 #: src/core/modules/Planet.cpp:595
 msgid "with rings"
@@ -1876,7 +1878,7 @@ msgstr "s prstenovima"
 
 #: src/core/modules/Planet.cpp:612 src/core/modules/MinorPlanet.cpp:320
 msgid "scaled up to"
-msgstr ""
+msgstr "uvećan do"
 
 #: src/core/modules/Planet.cpp:622 src/core/modules/MinorPlanet.cpp:330
 msgid "Apparent diameter"
@@ -2030,7 +2032,7 @@ msgstr ""
 
 #: src/core/modules/Comet.cpp:333
 msgid "Core diameter"
-msgstr ""
+msgstr "Promjer jezgre"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:271 src/gui/AstroCalcDialog.cpp:2331
@@ -2083,7 +2085,7 @@ msgstr "pulsirajuća promjenjiva zvijezda"
 
 #: src/core/modules/StarWrapper.cpp:196
 msgid "rotating variable star"
-msgstr ""
+msgstr "rotirajuća promjenjiva zvijezda"
 
 #: src/core/modules/StarWrapper.cpp:198
 msgid "cataclysmic variable star"
@@ -2121,12 +2123,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:302 plugins/Quasars/src/Quasar.cpp:151
 #: plugins/Exoplanets/src/Exoplanet.cpp:296
 msgid "Spectral Type"
-msgstr ""
+msgstr "Spektralni razred"
 
 #: src/core/modules/StarWrapper.cpp:305
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "Period"
-msgstr ""
+msgstr "Period"
 
 #: src/core/modules/StarWrapper.cpp:313
 msgid "Next maximum light"
@@ -2159,7 +2161,7 @@ msgstr "Mlječna staza"
 
 #: src/core/modules/ZodiacalLight.cpp:88
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Zodijačka svijetlost"
 
 #: src/core/modules/ToastMgr.cpp:62
 msgid "Digitized Sky Survey (TOAST)"
@@ -2179,7 +2181,7 @@ msgstr "Inicijalizacija mrežnog pristupa..."
 
 #: src/core/StelApp.cpp:431
 msgid "Initializing network disk cache..."
-msgstr ""
+msgstr "Inicijalizacija predmemorije mrežnog diska..."
 
 #: src/core/StelApp.cpp:445
 msgid "Initializing network proxy..."
@@ -2223,7 +2225,7 @@ msgstr "Inicijalizacija Mliječne staze..."
 
 #: src/core/StelApp.cpp:509
 msgid "Initializing zodiacal light..."
-msgstr ""
+msgstr "Inicijalizacija zodijačke svijetlosti"
 
 #: src/core/StelApp.cpp:515
 msgid "Initializing sky image layer..."
@@ -2497,11 +2499,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:303
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Oduzmi 1 anomalističku godinu"
 
 #: src/core/StelCore.cpp:304
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Oduzmi 100 anomalističkih godina"
 
 #: src/core/StelCore.cpp:305
 msgid "Subtract 1 mean tropical month"
@@ -2541,7 +2543,7 @@ msgstr "Postavi matični planet na odabrani planet"
 
 #: src/core/StelCore.cpp:315
 msgid "Go to home"
-msgstr ""
+msgstr "Vrati se na početnu poziciju"
 
 #: src/core/StelCore.cpp:317
 msgid "Flip scene horizontally"
@@ -2973,11 +2975,11 @@ msgstr ""
 #: src/core/StelObject.cpp:270
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "na datum"
 
 #: src/core/StelObject.cpp:272
 msgid "(apparent)"
-msgstr ""
+msgstr "(prividni)"
 
 #. TRANSLATORS: Right ascension/Declination
 #: src/core/StelObject.cpp:282
@@ -3012,7 +3014,7 @@ msgstr "Supergal. duž./šir."
 #: src/core/StelObject.cpp:484
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "Ekl. duž./šir."
 
 #: src/core/StelObject.cpp:549
 msgid "Ecliptic obliquity"
@@ -3024,7 +3026,7 @@ msgstr "Srednje sideričko vrijeme"
 
 #: src/core/StelObject.cpp:594
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "Prividno sideričko vrijeme"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:609 src/gui/AstroCalcDialog.cpp:809
@@ -3198,7 +3200,7 @@ msgstr "nedefinirani"
 
 #: src/core/StelSkyCultureMgr.cpp:206
 msgid "Classification"
-msgstr ""
+msgstr "Klasifikacija"
 
 #: src/core/StelSkyCultureMgr.cpp:268
 msgid "No description"
@@ -3642,7 +3644,7 @@ msgstr "Licenca"
 #: src/gui/ConfigurationDialog.cpp:1081
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "nepoznato"
 
 #: src/gui/ConfigurationDialog.cpp:1189
 msgid "Running script: "
@@ -3734,7 +3736,7 @@ msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1570
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1571
 msgid "IAU (1952)"
@@ -3897,7 +3899,7 @@ msgstr "24-satni format"
 #: src/gui/ConfigurationDialog.cpp:1718
 msgctxt "disabled"
 msgid "None"
-msgstr ""
+msgstr "Nijedno"
 
 #: src/gui/ConfigurationDialog.cpp:1719
 msgid "5/6/5 bits"
@@ -4376,12 +4378,12 @@ msgstr "Sunčev sustav"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:783
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Prirodno nebo"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:785
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Tipično tamno nebo"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:787
@@ -4416,11 +4418,11 @@ msgstr "Gradsko nebo"
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:799
 msgid "Inner-city sky"
-msgstr "Nebo nad gradskim centrom"
+msgstr "Nebo nad gradskim središtem"
 
 #: src/gui/ViewDialog.cpp:813
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Granična zvjezdana magnituda vidljiva golim okom"
 
 #: src/gui/ViewDialog.cpp:821
 msgid ""
@@ -4440,7 +4442,7 @@ msgstr "Skraćeno"
 
 #: src/gui/ViewDialog.cpp:846
 msgid "Native"
-msgstr ""
+msgstr "Narodno"
 
 #: src/gui/ViewDialog.cpp:847
 msgid "Translated"
@@ -4681,7 +4683,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:82
 msgid "natural"
-msgstr ""
+msgstr "prirodni"
 
 #: src/gui/ScriptConsole.cpp:83
 msgid "starchart"
@@ -4756,7 +4758,7 @@ msgstr "Ekliptika"
 #: src/gui/SearchDialog.cpp:230
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Ekliptika (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -4808,11 +4810,11 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:963
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Sveučilište u Strasbourg-u (Francuska)"
 
 #: src/gui/SearchDialog.cpp:964
 msgid "Harvard University (USA)"
-msgstr "Harvard University (USA)"
+msgstr "Sveučilište Harvard (SAD)"
 
 #: src/gui/SearchDialog.cpp:1051
 msgid "Paste and Search"
@@ -4820,7 +4822,7 @@ msgstr "Zalijepi i Traži"
 
 #: src/gui/ShortcutsDialog.cpp:500
 msgid "Action"
-msgstr ""
+msgstr "Radnja"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
@@ -4871,7 +4873,7 @@ msgstr "Neimenovana zvijezda"
 #: src/gui/AstroCalcDialog.cpp:714 src/gui/AstroCalcDialog.cpp:3411
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "Trenutno oko %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:756 src/gui/AstroCalcDialog.cpp:1333
@@ -4897,7 +4899,7 @@ msgstr "Dec (J2000)"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:774 src/gui/AstroCalcDialog.cpp:5062
 msgid "Opac."
-msgstr ""
+msgstr "Neprozir."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:779 src/gui/AstroCalcDialog.cpp:1350
@@ -4908,7 +4910,7 @@ msgstr "Mag."
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:782
 msgid "A.S."
-msgstr ""
+msgstr "K.V."
 
 #. TRANSLATORS: separation, arcseconds
 #. TRANSLATORS: separation
@@ -5013,7 +5015,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1352 src/gui/AstroCalcDialog.cpp:2987
 #: src/gui/AstroCalcDialog.cpp:3045
 msgid "Phase"
-msgstr ""
+msgstr "Faza"
 
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:1356
@@ -5038,11 +5040,11 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1971
 msgid "Save calculated transits as..."
-msgstr ""
+msgstr "Spremi proračunate tranzite kao:"
 
 #: src/gui/AstroCalcDialog.cpp:1989 src/ui_astroCalcDialog.h:1589
 msgid "Transits"
-msgstr ""
+msgstr "Tranziti"
 
 #: src/gui/AstroCalcDialog.cpp:2180
 msgid "1 minute"
@@ -5850,7 +5852,7 @@ msgstr "planet"
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "comet"
-msgstr "kometa"
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
@@ -5895,7 +5897,7 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:76
 msgid "interstellar object"
-msgstr ""
+msgstr "Međuzvjezdani objekt"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:78
@@ -6215,7 +6217,7 @@ msgstr "Geološka obilježja: tesserae"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:227
 msgid "Geological features: saxa"
-msgstr ""
+msgstr "Geološka obilježja: saxa"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -6245,7 +6247,7 @@ msgstr "Imenovana geološka obilježja Ceresa"
 #. the search tool)
 #: src/translations.h:240
 msgid "Named geological features of Charon"
-msgstr ""
+msgstr "Imenovana geološka obilježja Harona"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -6425,7 +6427,7 @@ msgstr "Imenovana geološka obilježja Rhee"
 #. the search tool)
 #: src/translations.h:300
 msgid "Named geological features of Ryugu"
-msgstr ""
+msgstr "Imenovana geološka obilježja Ryugu-a"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -6876,7 +6878,7 @@ msgstr "Nordijsko"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:511
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwe"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:513
@@ -7118,7 +7120,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:616
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Obilazak Zvježđa"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:618
@@ -7148,17 +7150,17 @@ msgstr ""
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:628
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Događaji Zemlje s Merkura"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:630
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Događaji Zemlje s plutajućeg grada na Veneri"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:632
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Događaji Zemlje s Marsa"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:634
@@ -7204,7 +7206,7 @@ msgstr "Popis najvećih poznatih zvijezda"
 #. TRANSLATORS: Name of script
 #: src/translations.h:650
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Herschel 400 Obilazak"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:652
@@ -7360,6 +7362,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
+"Čuvar zaslona s različitim događanjima u Sunčevom sustavu. 300 događanja "
+"sveukupno!"
 
 #: src/translations.h:700
 msgid "A tour of the western constellations."
@@ -7410,7 +7414,7 @@ msgstr ""
 
 #: src/translations.h:709
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Obilazak Messierovih objekata"
 
 #: src/translations.h:710
 msgid ""
@@ -7618,7 +7622,7 @@ msgstr ""
 
 #: src/translations.h:754
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&Odaberi boju s ekrana"
 
 #: src/translations.h:755
 msgid "&Custom colors"
@@ -9210,7 +9214,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:858
 msgid "Spectral Class"
-msgstr ""
+msgstr "Spektralni razred"
 
 #: src/ui_searchDialogGui.h:862
 msgid "Morph. Descr."
@@ -9218,7 +9222,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:863
 msgid "Dimensions"
-msgstr ""
+msgstr "Dimenzije"
 
 #: src/ui_searchDialogGui.h:864
 msgid "Max. search radius"
@@ -9305,7 +9309,7 @@ msgstr "Projekcija"
 
 #: src/ui_viewDialog.h:2574
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Pomak vertikalnog pogleda"
 
 #: src/ui_viewDialog.h:2576
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
@@ -9451,7 +9455,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2633
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "Konfiguracija boja linija orbita"
 
 #: src/ui_viewDialog.h:2635
 msgid "Colors..."
@@ -9483,7 +9487,7 @@ msgstr "Samo orbite glavnih planeta"
 
 #: src/ui_viewDialog.h:2651
 msgid "Color of nomenclature labels"
-msgstr ""
+msgstr "Boja oznaka nomenklature"
 
 #: src/ui_viewDialog.h:2655
 msgid "Show hints and labels for planetary features"
@@ -9748,7 +9752,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2814
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Ekvator (na dan)"
 
 #: src/ui_viewDialog.h:2816
 msgid "Labels for the Cardinal and Ordinal directions."
@@ -10056,7 +10060,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3021
 msgid "The line thickness for grids and lines"
-msgstr ""
+msgstr "Debljina linija za mreže i linije"
 
 #: src/ui_viewDialog.h:3023
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
@@ -10366,6 +10370,9 @@ msgid ""
 " for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
+"Spremite ili trenutno vidno polje i smjer gledanja ili sve trenutne "
+"mogućnosti za upotrebu pri sljedećem pokretanju. Vraćanje zadanih postavki "
+"zahtijeva ponovno pokretanje Stellariuma."
 
 #: src/ui_configurationDialog.h:1579
 msgid "The vertical field (height) of your view when Stellarium starts"
@@ -10631,7 +10638,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1711
 msgid "Show Quit button"
-msgstr ""
+msgstr "Prikaži gumb za Izlazak"
 
 #: src/ui_configurationDialog.h:1713
 msgid "Toggle the usage of background under GUI buttons"
@@ -10784,7 +10791,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1774
 msgctxt "abbreviation"
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: src/ui_configurationDialog.h:1776
 msgid "Base font size for dialogs"
@@ -10935,6 +10942,8 @@ msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
 msgstr ""
+"Automatski omogući atmosferu i krajolik prilikom odabira nebeskog tijela u "
+"prozoru Položaj."
 
 #: src/ui_configurationDialog.h:1848
 msgid "Auto-enabling for the environment"
@@ -11006,7 +11015,7 @@ msgstr "Instaliraj novi krajolik iz ZIP arhive..."
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
-msgstr ""
+msgstr "Prebaci na novi krajolik nakon instalacije"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
@@ -11084,7 +11093,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:175
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Godišnji otklon (u stupnjevima):"
 
 #: src/ui_greatRedSpotDialog.h:176
 msgid "Longitude of GRS (degrees):"
@@ -11338,15 +11347,15 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1676
 msgid "Cleanup transits"
-msgstr ""
+msgstr "Očisti tranzite"
 
 #: src/ui_astroCalcDialog.h:1677
 msgid "Save transits"
-msgstr ""
+msgstr "Spremi tranzite"
 
 #: src/ui_astroCalcDialog.h:1678
 msgid "Calculate transits"
-msgstr ""
+msgstr "Proračunaj tranzite"
 
 #: src/ui_astroCalcDialog.h:1679
 msgid "Celestial object:"
@@ -11354,12 +11363,13 @@ msgstr "Nebeski objekt:"
 
 #: src/ui_astroCalcDialog.h:1683
 msgid "Table of approximate transits for selected celestial object"
-msgstr ""
+msgstr "Tablica približnih tranzita za odabrani nebeski objekt"
 
 #: src/ui_astroCalcDialog.h:1684
 msgid ""
 "Note: artificial satellites and unnamed stars are excluded from calculation"
 msgstr ""
+"Napomena: umjetni sateliti i neimenovane zvijezde isključeni su iz proračuna"
 
 #: src/ui_astroCalcDialog.h:1686
 msgid "Between objects:"
@@ -11467,7 +11477,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1730 src/ui_astroCalcDialog.h:1734
 msgid "How many years to display"
-msgstr ""
+msgstr "Koliko godina za prikaz"
 
 #: src/ui_astroCalcDialog.h:1732
 msgid "Duration:"
@@ -11574,7 +11584,7 @@ msgstr ""
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:147
 msgid "Use small markers, when line is enabled"
-msgstr ""
+msgstr "Koristi male oznake kada je linija omogućena"
 
 #: src/ui_bookmarksDialog.h:207
 msgid "Add date and time"
@@ -11647,7 +11657,7 @@ msgstr "Potencijalne planetarne maglice"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Possible pl. nebulae"
-msgstr ""
+msgstr "Potencijalne pl. maglice"
 
 #: src/ui_dsoColorsDialog.h:572
 msgid "Clusters with neb."
@@ -11851,7 +11861,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:403
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Orbite prirodnih satelita planeta"
 
 #: src/ui_orbitColorsDialog.h:407
 msgid "Orbit of Neptune"
@@ -12868,7 +12878,7 @@ msgstr "Boja linija"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Color for text which is shown only when GUI is switched off."
-msgstr ""
+msgstr "Boja teksta koji se prikazuje u trenutku kad je GUI isključeno."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Text Color"
@@ -12896,7 +12906,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1235
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Omogući samo ako je objekt odabran"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1237
 msgid "In ocular mode, allow some visibility outside ocular circle."
@@ -13835,7 +13845,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Frekvencija ažuriranja (sati):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:787
 msgid "Label font size (pixels):"
@@ -14040,6 +14050,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a"
 " computerized mount (a \"GoTo telescope\")."
 msgstr ""
+"Ovaj dodatak omogućuje Stellarium-u da šalje \"zakretne\" naredbe teleskopu "
+"na kompjuteriziranoj montaži („GoTo teleskop“)."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:247
@@ -14174,7 +14186,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "ASCOM Settings"
-msgstr ""
+msgstr "ASCOM Postavke"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
 msgid "Choose ASCOM Telescope"
@@ -14182,15 +14194,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:43
 msgid "Selected Device:"
-msgstr ""
+msgstr "Odabrani uređaj:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "No device selected"
-msgstr ""
+msgstr "Uređaj nije odabran"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid "Source for coordinate system:"
-msgstr ""
+msgstr "Izvor koordinatnog sustava:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:46
 msgid ""
@@ -14207,10 +14219,12 @@ msgid ""
 "Use the coordinate system that is configured in the general telescope "
 "properties for this telescope."
 msgstr ""
+"Upotrijebi koordinatni sustav koji je konfiguriran u općim postavka za ovaj "
+"teleskop"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:49
 msgid "Use Stellarium settings"
-msgstr ""
+msgstr "Koristi postavke Stellarium-a"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:186
 msgid ""
@@ -14321,7 +14335,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid "Contents"
-msgstr ""
+msgstr "Sadržaj"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
@@ -14415,6 +14429,8 @@ msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"UPOZORENJE: Stellarium NE MOŽE spriječiti da Vaš teleskop bude usmjeren  "
+"prema Suncu."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -14875,7 +14891,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 msgid "This will move the telescope to the selected object."
-msgstr ""
+msgstr "Ova radnja će pomaknuti teleskop na odabrani objekt."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid ""
@@ -15184,7 +15200,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:359
 msgid "Sync"
-msgstr ""
+msgstr "Sinkroniziraj"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:360
 msgid "Configure &telescopes..."
@@ -15683,7 +15699,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Preuzmi popis objekata s Interneta"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Select a source from the list:"
@@ -17211,6 +17227,9 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"Ogma je bila božanstvo elokventnosti, pisanja i velike fizičke snage u "
+"keltskim mitologijama Irske i Škotske, a može biti povezano s galo-rimskim "
+"božanstvom <em>Ogmios</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Smertrios was a Gallic deity of war."
@@ -18821,7 +18840,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:641
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Egzoplaneti su ažurirani"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:767
 msgid "Orbital Eccentricity"
@@ -18915,7 +18934,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Postavke egzoplaneta"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:535
 msgid "Plot all systems with exoplanets without labels"
@@ -19725,7 +19744,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiidi"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
@@ -19905,7 +19924,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Komet 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
@@ -19935,7 +19954,7 @@ msgstr "Komet C/1917 F1 (Mellish)"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Komet C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
@@ -20252,7 +20271,7 @@ msgstr "Rezultati"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Koordinate pokazivača"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
 msgid "This plugin shows the coordinates of the mouse pointer."
@@ -20295,7 +20314,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:250
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "Ekl. duž./šir. (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:268
 msgctxt "abbreviated in the plugin"
@@ -20312,7 +20331,7 @@ msgstr "Prikaži koordinate pokazivača miša na ekranu."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Gornji dio u centru ekrana"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "In center of the top right half of the screen"
@@ -20412,7 +20431,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:328
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Prikaži dijaloški okvir za položaj promatranja."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 msgid "Toggle shadows"
@@ -21056,7 +21075,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:159
 msgid "Declination of the currently selected object"
-msgstr "Deklinacija trenutno odobranog objekta"
+msgstr "Deklinacija trenutno odabranog objekta"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:160
 msgid "Azimuth of the currently selected object"
@@ -21223,7 +21242,7 @@ msgstr "Prilagođene linije"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
-msgstr ""
+msgstr "Vts"
 
 #: plugins/Vts/src/Vts.cpp:155
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
