@@ -51,10 +51,10 @@ private:
         ColumnUUID,	//! UUID of object
         ColumnName,	//! Name or designation of object
         ColumnType, //! Type of the object
-        ColumnRa,	//! Right ascencion of object
-        ColumnDec,	//! Declination of object
-        ColumnMagnitude,	//! Magnitude of object
-        ColumnConstellation, //! Constellation of object
+        ColumnRa,	//! Right ascencion of the object
+        ColumnDec,	//! Declination of the object
+        ColumnMagnitude,	//! Magnitude of the object
+        ColumnConstellation, //! Constellation in which the object is located
         ColumnCount	//! Total number of columns
     };
     QStandardItemModel * obsListListModel;
@@ -63,6 +63,17 @@ private:
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
+    
+    //! Add row in the obsListListModel
+    //! @param number row number
+    //! @param uuid id of the record
+    //! @param name name or the designation of the object
+    //! @param type type of the object
+    //! @param ra right ascencion of the object
+    //! @param dec declination of the object
+    //! @param magnitude magnitude of the object
+    //! @param constellation constellation in which the object is located
+    void addModelRow(int number, QString uuid, QString name, QString type, QString ra, QString dec, QString magnitude, QString constellation);
 
     //Private constructor and destructor
     ObsListCreateEditDialog (std::string listName );

@@ -26,7 +26,7 @@ using namespace std;
 
 ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog (string listName )
+ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
 {
     listName_ = listName;
     ui = new Ui_obsListCreateEditDialogForm();
@@ -44,10 +44,10 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 /**
  * Get instance of class
 */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance (string listName )
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listName )
 {
     if ( m_instance == nullptr ) {
-        m_instance = new ObsListCreateEditDialog (listName );
+        m_instance = new ObsListCreateEditDialog ( listName );
     }
 
     return m_instance;
@@ -64,18 +64,18 @@ void ObsListCreateEditDialog::createDialogContent()
     //Signals and slots
     connect ( &StelApp::getInstance(), SIGNAL ( languageChanged() ), this, SLOT ( retranslate() ) );
     connect ( ui->closeStelWindow, SIGNAL ( clicked() ), this, SLOT ( close() ) );
-    
-    connect(ui->obsListAddObjectButton, SIGNAL(clicked()), this, SLOT(obsListAddObjectButtonPressed()));
-    connect(ui->obsListExitButton, SIGNAL(clicked()), this, SLOT(obsListExitButtonPressed()));
-    connect(ui->obsListSaveButton, SIGNAL(clicked()), this, SLOT(obsListSaveButtonPressed()));
-    connect(ui->obsListRemoveObjectButton, SIGNAL(clicked()), this, SLOT(obsListRemoveObjectButtonPressed()));
-    connect(ui->obsListImportListButton, SIGNAL(clicked()), this, SLOT(obsListImportListButtonPresssed()));
-    connect(ui->obsListExportListButton, SIGNAL(clicked()), this, SLOT(obsListExportListButtonPressed()));
-    
+
+    connect ( ui->obsListAddObjectButton, SIGNAL ( clicked() ), this, SLOT ( obsListAddObjectButtonPressed() ) );
+    connect ( ui->obsListExitButton, SIGNAL ( clicked() ), this, SLOT ( obsListExitButtonPressed() ) );
+    connect ( ui->obsListSaveButton, SIGNAL ( clicked() ), this, SLOT ( obsListSaveButtonPressed() ) );
+    connect ( ui->obsListRemoveObjectButton, SIGNAL ( clicked() ), this, SLOT ( obsListRemoveObjectButtonPressed() ) );
+    connect ( ui->obsListImportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListImportListButtonPresssed() ) );
+    connect ( ui->obsListExportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListExportListButtonPressed() ) );
+
     //Initializing the list of observing list
     obsListListModel->setColumnCount ( ColumnCount );
     setObservingListHeaderNames();
-    
+
     ui->obsListCreationEditionTreeView->setModel ( obsListListModel );
     ui->obsListCreationEditionTreeView->header()->setSectionsMovable ( false );
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnName, QHeaderView::ResizeToContents );
@@ -121,6 +121,48 @@ void ObsListCreateEditDialog::setObservingListHeaderNames()
 
     obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
 }
+
+
+/*
+ * Add row in the obsListListModel
+*/
+void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString name, QString type, QString ra, QString dec, QString magnitude, QString constellation )
+{
+    QStandardItem* item = Q_NULLPTR;
+
+    item = new QStandardItem ( uuid );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnUUID, item );
+
+    item = new QStandardItem ( name );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnName, item );
+
+    item = new QStandardItem ( type );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnType, item );
+
+    item = new QStandardItem ( ra );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnRa, item );
+
+    item = new QStandardItem ( dec );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnDec, item );
+
+    item = new QStandardItem ( magnitude );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnMagnitude, item );
+
+    item = new QStandardItem ( constellation );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnConstellation, item );
+
+    for ( int i = 0; i < ColumnCount; ++i ) {
+        ui->obsListCreationEditionTreeView->resizeColumnToContents ( i );
+    }
+}
+
 
 /*
  * Slot for button obsListAddObjectButton
