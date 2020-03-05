@@ -3,7 +3,7 @@
  *************************************************************************************************************/
 
 QWidget {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(90, 90, 90), stop: 1 rgb(70, 70, 70));
 	selection-background-color: rgb(253, 216, 134);
 	selection-color: rgb(3, 3, 3);
 }
@@ -21,13 +21,13 @@ QLabel:disabled {
 QLabel#stelWindowTitle {
 	margin-left: 24px;
 	font-size: 108%;
-	color: rgb(194, 194, 195);
+	color: rgb(150, 150, 150);
 	font: bold;
 	background: none;
 }
 
 QDockWidget {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(90, 90, 90), stop: 1 rgb(70, 49, 52));
 }
 
 QFrame {
@@ -81,7 +81,7 @@ QLineEdit[collision="true"] {
 
 QTextBrowser {
 	border: 0px solid rgb(0, 0, 0);
-	background: rgb(86, 87, 90);
+	background: rgb(90, 90, 90);
 	color: rgb(3, 3, 3);
 }
 
@@ -130,11 +130,11 @@ QGroupBox {
 	margin-left: 10px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color: rgba(149, 150, 152, 20%);
+	background-color: rgba(150, 150, 150, 30%);
 	border: 1px solid rgba(0, 0, 0, 10%);
 	border-style: inset;
 	font-weight: bold;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 QGroupBox::title {
@@ -211,7 +211,7 @@ QTabBar::tab:top {
 }
 
 QTabBar::tab:top:selected {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(90, 90, 90));
 }
 
 QTabBar::tab:bottom {
@@ -220,7 +220,7 @@ QTabBar::tab:bottom {
 }
 
 QTabBar::tab:bottom:selected {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 49, 52), stop: 1 rgb(68, 69, 72));
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(68, 69, 72));
 }
 
 QTabBar QToolButton {
@@ -254,15 +254,18 @@ QListView#citiesListView::item {
 	padding: 2px 0px;
 }
 
+/* Main tab bar */
+
 QListView#stackListWidget {
 	font-weight: bold;
+	color: rgb(120, 120, 120);
 }
 
 QListView::item:selected#stackListWidget {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
-	color: rgb(220, 223, 214);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(90, 90, 90));
+	color: rgb(207, 207, 207);
 }
 
 QListView::item#stackListWidget {
@@ -335,7 +338,7 @@ QPushButton#pushButtonPickExecutablesDirectory {
 }
 
 QMenu {
-	background-color: rgb(86, 87, 90); /* sets background of the menu */
+	background-color: rgb(90, 90, 90); /* sets background of the menu */
 	border: 1px solid rgb(0, 0, 0);
 	color: rgb(222, 222, 222);
 }
@@ -602,7 +605,6 @@ QSpinBox:disabled,
 QDoubleSpinBox:disabled,
 AngleSpinBox:disabled,
 QDateTimeEdit:disabled {
-	color: #f0f0f0;
 	border: 1px solid rgba(31, 31, 31);
 	color: rgba(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
