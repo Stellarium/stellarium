@@ -268,8 +268,8 @@ void SkyGui::init(StelGui* astelGui)
 	QPixmap pxmapOn = QPixmap(":/graphicGui/miscHorAutoHide-on.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/miscHorAutoHide-off.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
-	pxmapOn = QPixmap(":/graphicGui/miscVerAutoHide-on.png");
-	pxmapOff = QPixmap(":/graphicGui/miscVerAutoHide-off.png");
+	pxmapOn = QPixmap(":/graphicGui/miscVertAutoHide-on.png");
+	pxmapOff = QPixmap(":/graphicGui/miscVertAutoHide-off.png");
 	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideVerticalButtonBar", true);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
@@ -294,7 +294,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
