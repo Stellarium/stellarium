@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of pulsars
 #
-# Copyright (C) 2012-2018 Alexander Wolf
+# Copyright (C) 2012-2020 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -31,12 +31,11 @@
 #
 use Math::Trig;
 
-$PSRCAT	= "./psrcat.db";
+$PSRCAT	= "./psrcat_tar/psrcat.db";
 $JSON	= "./pulsars.json";
 $NAMES	= "./propernames.lst";
 
 $FORMAT = 2;
-$CATVER = 1.62;
 
 open (PSRN, "<$NAMES");
 @psrnames = <PSRN>;
@@ -59,7 +58,12 @@ foreach $s (@catalog) {
 	$psrcat .= $s;
 }
 
-@cat = split("@",$psrcat);
+$version = $catalog[0];
+$version =~ m/CATALOGUE\s+([\d\.]+)/gi;
+$CATVER = $1;
+$CATVER =~ s/\s+//gi;
+
+@cat = split("@\-\-\-",$psrcat);
 
 open (JSON, ">$JSON");
 print JSON "{\n";
@@ -69,6 +73,7 @@ print JSON "\t\"originalCatalogURL\": \"http://www.atnf.csiro.au/research/pulsar
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
+%psrnameslist = ();
 for ($i=0;$i<scalar(@cat)-1;$i++) {
 	@lines = split("\n", $cat[$i]);
 	$period = 0;
@@ -148,23 +153,23 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 
 		if ($lines[$j] =~ /^W50(\s+)([\d\.]+)/) {
-			$w50 = $2;
+			$w50 = $2 + 0.0;
 		}
 
 		if ($lines[$j] =~ /^S400(\s+)([\d\.]+)/) {
-			$s400 = $2;
+			$s400 = $2 + 0.0;
 		}
 
 		if ($lines[$j] =~ /^S600(\s+)([\d\.]+)/) {
-			$s600 = $2;
+			$s600 = $2 + 0.0;
 		}
 
 		if ($lines[$j] =~ /^S1400(\s+)([\d\.]+)/) {
-			$s1400 = $2;
+			$s1400 = $2 + 0.0;
 		}
 
 		if ($lines[$j] =~ /^PX(\s+)([\d\.]+)/) {
-			$parallax = $2;
+			$parallax = $2 + 0.0;
 		}
 
 		if ($lines[$j] =~ /^DM(\s+)([\d\.]+)/) {
@@ -189,6 +194,12 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		{
 			$glitch = $2;
 		}
+	}
+
+	if (exists($psrnameslist{$name})) {
+		next;
+	} else {
+		$psrnameslist{$name} = 1;
 	}
 
 	$jname = "J".$name;
