@@ -2586,7 +2586,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	// Generates the vertices
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
-	
+
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	const float sphereScaleF=static_cast<float>(sphereScale);
 	for (int i=0;i<model.vertexArr.size()/3;++i)

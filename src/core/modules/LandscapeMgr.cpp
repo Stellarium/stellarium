@@ -768,6 +768,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagAtmosphere(false);
 				setFlagFog(false);
 				setFlagLandscape(false);
+				setFlagCardinalsPoints(false);
 			}
 		}
 		else
@@ -780,6 +781,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
 				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 				setFlagLandscape(true);
+				setFlagCardinalsPoints(conf->value("viewing/flag_cardinal_points",true).toBool());
 			}
 		}
 	}
