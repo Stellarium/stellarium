@@ -42,7 +42,7 @@ the French, German, and Russian selection of navigational stars are also
 available.
 
 The NavStars class is the main class of the plug-in. It manages the list of
-navigational stars and manipulate show/hide markers of them. All markers
+navigational stars and manipulate show/hide markers of them. Markers
 are not objects!
 
 The plugin is also an example of a custom plugin that just marks existing stars.

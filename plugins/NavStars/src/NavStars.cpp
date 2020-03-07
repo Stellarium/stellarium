@@ -535,20 +535,20 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", false));
+		oneRowTwoCells(qc_("GHA", "Greenwich our Angle of first point of Aries") + "&#9800;", calc.gmstPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", false));
+		oneRowTwoCells(qc_("SHA", "object Sidereal Hour Angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", false));
+		oneRowTwoCells(qc_("LHA", "Local Hour Angle"), calc.lhaPrintable(), "", false));
 	temp = calc.ghaPrintable() + "/" + calc.decPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GP: GHA/DEC", "greenwich hour angle/declination of object"), temp, "", false));
+		oneRowTwoCells(qc_("GP: GHA/DEC", "Ground Position of object"), temp, "", false));
 	temp = calc.gplatPrintable() + "/" + calc.gplonPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("GP: LAT/LON", "geodetic coordinate system, latitude and longitude of ground point"), temp, "", false));
 	temp = calc.latPrintable() + "/" + calc.lonPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, latitude and longitude of user"), temp, "", false));
+		oneRowTwoCells(qc_("AP: LAT/LON", "geodetic coordinate system, assumed latitude and longitude of user"), temp, "", false));
 	temp = calc.hcPrintable() + "/" + calc.znPrintable();
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Hc/Zn", "Navigation/horizontal coordinate system, calculated altitude and azimuth"), temp, "", false));
@@ -558,20 +558,20 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 {
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;	
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("UTC", "universal time coordinated"), calc.getUTC(), "", false));
+		oneRowTwoCells(qc_("UTC", "Universal Time Coordinated"), calc.getUTC(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable(), extraText, true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich hour angle, first point of Aries") + "&#9800;", calc.gmstPrintable(), "", true));
+		oneRowTwoCells(qc_("GHA", "Greenwich our Angle of  first point of Aries") + "&#9800;", calc.gmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LMST", "local hour angle"), calc.lmstPrintable(), "", true));
+		oneRowTwoCells(qc_("LMST", "Local Hour Angle"), calc.lmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("SHA", "object sidereal hour angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", true));
+		oneRowTwoCells(qc_("SHA", "object Sidereal Hour Angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "greenwich hour angle"), calc.ghaPrintable(), "", true));
+		oneRowTwoCells(qc_("GHA", "Greenwich Hour Angle"), calc.ghaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("DEC", "declination"), calc.decPrintable(), "", true));
+		oneRowTwoCells(qc_("DEC", "Declination"), calc.decPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -581,7 +581,7 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Hc", "Navigation/horizontal coordinate system, calculated altitude"), calc.hcPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azmiuth"), calc.znPrintable(), "", true));
+		oneRowTwoCells(qc_("Zn", "Navigation/horizontal coordinate system, calculated azimuth"), calc.znPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, "</table>");
 }
 

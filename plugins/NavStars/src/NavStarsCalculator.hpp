@@ -22,11 +22,10 @@
 
 /*! @defgroup navigationalStars Navigational Stars Plug-in
 @{
-The Navigational Stars plugin marks the 58 navigational stars of the
-Nautical Almanach and the 2102-D Rude Star Finder on the sky.
+The Navigational Stars plugin marks a set of navigational stars.
 
 The NavStars class is the main class of the plug-in. It manages the list of
-navigational stars and manipulate show/hide markers of them. All markers
+navigational stars and manipulate show/hide markers of them. Markers
 are not objects!
 
 The plugin is also an example of a custom plugin that just marks existing stars.

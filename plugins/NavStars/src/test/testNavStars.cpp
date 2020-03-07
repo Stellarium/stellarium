@@ -32,8 +32,7 @@ typedef QMap<QString, QString> expects_t;
 static void
 examineCalc(NavStarsCalculator& calc)
 {
-	qWarning() << "getUTC: " << calc.getUTC();
-	qWarning() << "hcPrintable" << calc.hcPrintable();
+	qWarning() << "getUTC: " << calc.getUTC();	
 	qWarning() << "altAppPrintable" << calc.altAppPrintable();
 	qWarning() << "gmstDegreesPrintable" << calc.gmstDegreesPrintable();
 	qWarning() << "lmstDegreesPrintable" << calc.lmstDegreesPrintable();
@@ -59,7 +58,7 @@ static void performTest(QString utc, inputs_t& inputs, expects_t& expects, bool 
 		.setRaRad(inputs["setRaRad"])
 		.setDecRad(inputs["setDecRad"])
 		.setAzRad(inputs["setAzRad"])
-		.setAltAppRad(inputs["setAltAppRad"])
+		.setAltRad(inputs["setAltRad"])
 		.setAzAppRad(inputs["setAzAppRad"])
 		.setAltAppRad(inputs["setAltAppRad"])
 		.execute();
@@ -67,8 +66,7 @@ static void performTest(QString utc, inputs_t& inputs, expects_t& expects, bool 
 	if(examine)
 		examineCalc(calc);
 
-	QVERIFY(calc.getUTC() == utc);
-	QVERIFY(calc.hcPrintable() == expects["hcPrintable"]);
+	QVERIFY(calc.getUTC() == utc);	
 	QVERIFY(calc.altAppPrintable() == expects["altAppPrintable"]);
 	QVERIFY(calc.gmstDegreesPrintable() == expects["gmstDegreesPrintable"]);
 	QVERIFY(calc.lmstDegreesPrintable() == expects["lmstDegreesPrintable"]);
@@ -82,7 +80,7 @@ static void performTest(QString utc, inputs_t& inputs, expects_t& expects, bool 
 	QVERIFY(calc.znPrintable() == expects["znPrintable"]);
 }
 
-void TestNavStars::TestAgainstAlmancVega()
+void TestNavStars::TestAgainstAlmanacVega()
 {
 	inputs_t inputs;
 	inputs["setLatDeg"] = 56.185647;
@@ -93,12 +91,11 @@ void TestNavStars::TestAgainstAlmancVega()
 	inputs["setRaRad"] = -1.4068775342410453;
 	inputs["setDecRad"] = 0.67745840300450966;
 	inputs["setAzRad"] = 1.6357089293679654;
-	inputs["setAltAppRad"] = 0.80973585409014781;
+	inputs["setAltRad"] = 0.80973585409014781;
 	inputs["setAzAppRad"] = 1.6357089293679654;
 	inputs["setAltAppRad"] = 0.81001296240472365;
 
-	expects_t expects;
-	expects["hcPrintable"] = "+46&deg;39.6'";
+	expects_t expects;	
 	expects["altAppPrintable"] = "+46&deg;24.6'";
 	expects["gmstDegreesPrintable"] = "+220.389&deg;";
 	expects["lmstDegreesPrintable"] = "+217.832&deg;";

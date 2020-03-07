@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-02 19:52+0700\n"
+"POT-Creation-Date: 2020-03-07 13:50+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -449,7 +449,7 @@ msgstr ""
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:894 src/scripting/StelScriptMgr.cpp:260
+#: src/core/modules/LandscapeMgr.cpp:896 src/scripting/StelScriptMgr.cpp:260
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:502
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
@@ -468,36 +468,36 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:900 src/gui/StelGuiItems.cpp:771
+#: src/core/modules/LandscapeMgr.cpp:902 src/gui/StelGuiItems.cpp:771
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:903 src/ui_locationDialogGui.h:483
+#: src/core/modules/LandscapeMgr.cpp:905 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:924
+#: src/core/modules/LandscapeMgr.cpp:926
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:934
+#: src/core/modules/LandscapeMgr.cpp:936
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:937
+#: src/core/modules/LandscapeMgr.cpp:939
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:941
+#: src/core/modules/LandscapeMgr.cpp:943
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:941
+#: src/core/modules/LandscapeMgr.cpp:943
 msgid "by Bortle scale"
 msgstr ""
 
@@ -10257,7 +10257,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2339
+#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2338
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr ""
@@ -12105,7 +12105,7 @@ msgstr ""
 msgid "Compass marks"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1415
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1414
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid "Oculars"
@@ -12118,238 +12118,238 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:908
+#: plugins/Oculars/src/Oculars.cpp:907
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1014
+#: plugins/Oculars/src/Oculars.cpp:1013
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1015
+#: plugins/Oculars/src/Oculars.cpp:1014
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1016
+#: plugins/Oculars/src/Oculars.cpp:1015
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1059
+#: plugins/Oculars/src/Oculars.cpp:1058
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1069
+#: plugins/Oculars/src/Oculars.cpp:1068
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1078
+#: plugins/Oculars/src/Oculars.cpp:1077
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1086
+#: plugins/Oculars/src/Oculars.cpp:1085
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1095
+#: plugins/Oculars/src/Oculars.cpp:1094
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1096
+#: plugins/Oculars/src/Oculars.cpp:1095
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1097
+#: plugins/Oculars/src/Oculars.cpp:1096
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1119
+#: plugins/Oculars/src/Oculars.cpp:1118
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1141
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1416
+#: plugins/Oculars/src/Oculars.cpp:1415
 #: plugins/Oculars/src/ui_ocularDialog.h:1228
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1417
+#: plugins/Oculars/src/Oculars.cpp:1416
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:1417
 msgid "Show crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1418
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1419
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1420
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1422
+#: plugins/Oculars/src/Oculars.cpp:1421
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1423
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1426
+#: plugins/Oculars/src/Oculars.cpp:1425
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1428
+#: plugins/Oculars/src/Oculars.cpp:1427
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1430
+#: plugins/Oculars/src/Oculars.cpp:1429
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1431
+#: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1432
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1637
+#: plugins/Oculars/src/Oculars.cpp:1636
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1648
+#: plugins/Oculars/src/Oculars.cpp:1647
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1666
+#: plugins/Oculars/src/Oculars.cpp:1665
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1890
+#: plugins/Oculars/src/Oculars.cpp:1889
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1892
+#: plugins/Oculars/src/Oculars.cpp:1891
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1912
+#: plugins/Oculars/src/Oculars.cpp:1911
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1918
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1930
+#: plugins/Oculars/src/Oculars.cpp:1929
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/Oculars.cpp:1933
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1939
+#: plugins/Oculars/src/Oculars.cpp:1938
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1954 plugins/Oculars/src/Oculars.cpp:2014
+#: plugins/Oculars/src/Oculars.cpp:1953 plugins/Oculars/src/Oculars.cpp:2013
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1963
+#: plugins/Oculars/src/Oculars.cpp:1962
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1970
+#: plugins/Oculars/src/Oculars.cpp:1969
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1977
+#: plugins/Oculars/src/Oculars.cpp:1976
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:1997
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2002
+#: plugins/Oculars/src/Oculars.cpp:2001
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2006
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2019
+#: plugins/Oculars/src/Oculars.cpp:2018
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2335
+#: plugins/Oculars/src/Oculars.cpp:2334
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2336
+#: plugins/Oculars/src/Oculars.cpp:2335
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2337
+#: plugins/Oculars/src/Oculars.cpp:2336
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2367
+#: plugins/Oculars/src/Oculars.cpp:2366
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2368
+#: plugins/Oculars/src/Oculars.cpp:2367
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2369
+#: plugins/Oculars/src/Oculars.cpp:2368
 msgid "&Next telescope"
 msgstr ""
 
@@ -15791,23 +15791,23 @@ msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-msgctxt "Greenwich hour angle, first point of Aries"
+#: plugins/NavStars/src/NavStars.cpp:538
+msgctxt "Greenwich our Angle of first point of Aries"
 msgid "GHA"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
-msgctxt "object sidereal hour angle (ERA, Earth rotation angle)"
+msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
-msgctxt "local hour angle"
+#: plugins/NavStars/src/NavStars.cpp:542
+msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:545
-msgctxt "greenwich hour angle/declination of object"
+msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr ""
 
@@ -15817,7 +15817,7 @@ msgid "GP: LAT/LON"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:551
-msgctxt "geodetic coordinate system, latitude and longitude of user"
+msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr ""
 
@@ -15828,7 +15828,7 @@ msgid "Hc/Zn"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:561
-msgctxt "universal time coordinated"
+msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr ""
 
@@ -15837,19 +15837,29 @@ msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr ""
 
+#: plugins/NavStars/src/NavStars.cpp:566
+msgctxt "Greenwich our Angle of  first point of Aries"
+msgid "GHA"
+msgstr ""
+
 #: plugins/NavStars/src/NavStars.cpp:568
-msgctxt "local hour angle"
+msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:572
-msgctxt "greenwich hour angle"
+msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:574
-msgctxt "declination"
+msgctxt "Declination"
 msgid "DEC"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:576
+msgctxt "local hour angle"
+msgid "LHA"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:578
@@ -15868,7 +15878,7 @@ msgid "Hc"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:584
-msgctxt "Navigation/horizontal coordinate system, calculated azmiuth"
+msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr ""
 
@@ -15907,18 +15917,18 @@ msgid "These fields are:"
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 #, qt-format
-msgid "GHA%1: The Greenwich Hour Angle for the first point of Aries."
+msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
-msgid "SHA: Sidereal Hour Angle of navigation star."
+msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
-msgid "LHA: The observers local hour angle to the navigation star."
+msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
@@ -15928,18 +15938,18 @@ msgid ""
 "Declination."
 msgstr ""
 
-#. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a starting close by where the observer knows themselves to be. For example, from dead reckoning.
+#. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point close by where the observer knows themselves to be. For example, from dead reckoning.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
 msgid ""
-"AP: LAT/LON: The observers assumed position as geodetic latitude and "
+"AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
 msgstr ""
 
-#. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth.
+#. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth, as seen from the AP.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:208
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
-"star."
+"star, seen from AP."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:212
@@ -15950,8 +15960,8 @@ msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:216
 msgid ""
-"When tabulated list is selected the fields then become which is more inline "
-"with <em>The Nautical Almanac</em> format:"
+"When 'tabulated list' is selected the fields more closely follow the <em>The "
+"Nautical Almanac</em> format:"
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
@@ -15959,13 +15969,12 @@ msgstr ""
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
-#, qt-format
-msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
-msgstr ""
-
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:222
 msgid "LMST: Local mean sidereal time."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
+msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr ""
 
 #. TRANSLATORS: celestial coordinate system, declination.
@@ -15979,22 +15988,22 @@ msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
-msgid "LAT: The observers geodetic latitude."
+msgid "LAT: The observer's geodetic latitude."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
-msgid "LON: The observers geodetic longitude."
+msgid "LON: The observer's geodetic longitude."
 msgstr ""
 
-#. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude)
+#. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude) for the AP
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
-msgid "Hc: The calculated height (altitude) of navigation star."
+msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn computed azimuth
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:235
-msgid "Zn: The calculated azimuth of navigation star."
+msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:239
