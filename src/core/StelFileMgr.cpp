@@ -27,9 +27,11 @@
 #include <QDebug>
 #include <QStandardPaths>
 #include <QProcessEnvironment>
+#include <QMessageBox>
 #include <QtGlobal>
 
 #include <cstdio>
+#include <iostream>
 
 #ifdef Q_OS_WIN
 #include <Windows.h>
@@ -47,35 +49,14 @@ QString StelFileMgr::userDir;
 QString StelFileMgr::screenshotDir;
 QString StelFileMgr::installDir;
 
+QDir resolveUserDirectory();
+
 void StelFileMgr::init()
 {
-	// Set the userDir member.
-#ifdef Q_OS_WIN
-	QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
-	if (!winApiPath.isEmpty())
-	{
-		userDir = winApiPath + "\\Stellarium";
-	}
-#elif defined(Q_OS_MAC)
-	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
-#else
-	userDir = QDir::homePath() + "/.stellarium";
-#endif
+    auto resolvedUserDirectory =  resolveUserDirectory();
+    userDir = resolvedUserDirectory.path();
 
-#if QT_VERSION >= 0x050A00
-	if (qEnvironmentVariableIsSet("STEL_USERDIR"))
-	{
-		userDir=qEnvironmentVariable("STEL_USERDIR");
-	}
-#else
-	QByteArray userDirCand=qgetenv("STEL_USERDIR");
-	if (userDirCand.length()>0)
-	{
-		userDir=QString::fromLocal8Bit(userDirCand);
-	}
-#endif
-
-	if (!QFile(userDir).exists())
+    if (!resolvedUserDirectory.exists())
 	{
 		qWarning() << "User config directory does not exist: " << QDir::toNativeSeparators(userDir);
 	}
@@ -115,7 +96,7 @@ void StelFileMgr::init()
 		QDir ResourcesDir(MacOSdir.absolutePath());
 		if (!QCoreApplication::applicationDirPath().contains("src")) {
 			ResourcesDir.cd(QString("Resources"));
-		}
+        }
 		QFileInfo installLocation(ResourcesDir.absolutePath());
 		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
 	#elif defined(Q_OS_WIN)		
@@ -323,6 +304,100 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	}
 
 	return result;
+}
+
+QString getLegacyUserDirectory()
+{
+    // Set the userDir member.
+#ifdef Q_OS_WIN
+    QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
+    if (winApiPath.isEmpty())
+        return QString();
+    }
+
+    return QString(winApiPath + "\\Stellarium");
+#elif defined(Q_OS_MAC)
+    return QString(QDir::homePath() + "/Library/Application Support/Stellarium");
+#else
+    return QString(QDir::homePath() + "/.stellarium");
+#endif
+}
+
+QString getAppConfigLocation()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+}
+
+QString getEnvUserDirectory()
+{
+#if QT_VERSION >= 0x050A00
+    if (qEnvironmentVariableIsSet("STEL_USERDIR"))
+    {
+        return qEnvironmentVariable("STEL_USERDIR");
+    }
+#else
+    QByteArray userDirCand=qgetenv("STEL_USERDIR");
+    if (userDirCand.length()>0)
+    {
+        return QString::fromLocal8Bit(userDirCand);
+    }
+#endif
+    return QString();
+}
+
+QDir resolveUserDirectory()
+{
+    auto envUserDirectory = getEnvUserDirectory();
+
+    if (!envUserDirectory.isEmpty()) {
+        qDebug() << "Using ENV defined user config directory: " << envUserDirectory;
+        return QDir(envUserDirectory);
+    }
+
+    auto legacyUserDirectory = QDir(getLegacyUserDirectory());
+    auto appConfigLocation = QDir(getAppConfigLocation());
+
+    // if appConfigLocation does not exist, and a legacy user directory detected,
+    // ask the user if they want to migrate or remove their old config folder
+    if (legacyUserDirectory.exists() && !appConfigLocation.exists()) {
+        QString question("Stellarium has changed it's configuration directory location.\n");
+        question.append("Would you like to migrate your existing config?");
+        auto reply =  QMessageBox::question(nullptr, "Migrate Legacy Config?", question, QMessageBox::Yes | QMessageBox::No);
+
+        // discarding removes old legacy directory
+        if (reply == QMessageBox::Yes) {
+            qDebug() << "Copying Legacy Directory (" << legacyUserDirectory.path() << ") to new location ("<< appConfigLocation.path() <<")";
+
+            if (!appConfigLocation.exists()) {
+                QDir().mkpath(appConfigLocation.path());
+            }
+
+            // move all the files from the legacy directory ithe new directory
+            for (auto entry: legacyUserDirectory.entryInfoList()) {
+                if (entry.fileName() != "." && entry.fileName() != "..") {
+                    auto destination = appConfigLocation.path() + "/" + entry.fileName();
+                    qDebug() << "Moving: " << entry.filePath() << " To: " << destination;
+                    QFile(entry.filePath()).rename(destination);
+                }
+            }
+
+            // remove the old directory
+            legacyUserDirectory.removeRecursively();
+
+        } else {
+            auto reply =  QMessageBox::question(nullptr,
+                "Remove Legacy Config?",
+                "Would you like to remove your legacy config directory?",
+                QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes) {
+                legacyUserDirectory.removeRecursively();
+            }
+        }
+    }
+
+    qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
+    return appConfigLocation;
 }
 
 void StelFileMgr::setSearchPaths(const QStringList& paths)
