@@ -71,7 +71,7 @@ void main()
     //other objects use the spherical normals
     highp vec3 normal = normalize(unprojectedVertex.xyz);
     #ifdef IS_MOON
-        if (abs(normal.z)==1) // avoid invalid pole anomaly
+        if (abs(normal.z)==1.0) // avoid invalid pole anomaly
         {
             normalX=vec3(0);
             normalY=vec3(0);

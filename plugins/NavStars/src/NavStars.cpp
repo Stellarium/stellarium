@@ -535,7 +535,7 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich our Angle of first point of Aries") + "&#9800;", calc.gmstPrintable(), "", false));
+		oneRowTwoCells(qc_("GHA", "Greenwich Hour Angle") + "&#9800;", calc.gmstPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("SHA", "object Sidereal Hour Angle (ERA, Earth rotation angle)"), calc.shaPrintable(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -563,7 +563,7 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable(), extraText, true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("GHA", "Greenwich our Angle of  first point of Aries") + "&#9800;", calc.gmstPrintable(), "", true));
+		oneRowTwoCells(qc_("GHA", "Greenwich Hour Angle") + "&#9800;", calc.gmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("LMST", "Local Hour Angle"), calc.lmstPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -573,7 +573,7 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("DEC", "Declination"), calc.decPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
-		oneRowTwoCells(qc_("LHA", "local hour angle"), calc.lhaPrintable(), "", true));
+		oneRowTwoCells(qc_("LHA", "Local Hour Angle"), calc.lhaPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("LAT", "geodetic coordinate system, latitude"), calc.gplatPrintable(), "", true));
 	selectedObject->addToExtraInfoString(infoGroup, 

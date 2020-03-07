@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-07 13:50+0700\n"
+"POT-Creation-Date: 2020-03-07 23:43+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15791,8 +15791,9 @@ msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:538
-msgctxt "Greenwich our Angle of first point of Aries"
+#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
+#: plugins/NavStars/src/NavStars.cpp:572
+msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr ""
 
@@ -15801,7 +15802,7 @@ msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:542
+#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr ""
@@ -15837,29 +15838,14 @@ msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:566
-msgctxt "Greenwich our Angle of  first point of Aries"
-msgid "GHA"
-msgstr ""
-
 #: plugins/NavStars/src/NavStars.cpp:568
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:572
-msgctxt "Greenwich Hour Angle"
-msgid "GHA"
-msgstr ""
-
 #: plugins/NavStars/src/NavStars.cpp:574
 msgctxt "Declination"
 msgid "DEC"
-msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:576
-msgctxt "local hour angle"
-msgid "LHA"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:578
