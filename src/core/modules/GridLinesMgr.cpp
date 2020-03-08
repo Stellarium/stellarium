@@ -846,9 +846,10 @@ void SkyLine::draw(StelCore *core) const
 		fpt.set(0,0,1);
 	}
 
-//	if (showPartitions)
-//	{
-	sPainter.setLineWidth(3);
+	if (showPartitions)
+	{
+		const float lineThickness=sPainter.getLineWidth();
+		sPainter.setLineWidth(partThickness);
 		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
 		// Define short lines from "equator" a bit southwards
 		Vec3d part0(1,0,0);
@@ -865,6 +866,13 @@ void SkyLine::draw(StelCore *core) const
 			partAxis.set(0,0,1);
 			partZAxis.set(1,0,0);
 		}
+		else if (line_type==LONGITUDE)
+		{
+			// TODO: Fix That!
+			part0=fpt;
+			partAxis=meridianSphericalCap.n;
+		}
+
 		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
 		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
 		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
@@ -886,8 +894,8 @@ void SkyLine::draw(StelCore *core) const
 			part10.transfo4d(rotZ1);
 			part30.transfo4d(rotZ1);
 		}
-		sPainter.setLineWidth(1);
-//	}
+		sPainter.setLineWidth(lineThickness);
+	}
 
 
 	Vec3d p1, p2;
