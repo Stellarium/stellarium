@@ -19,6 +19,8 @@
 
 #include <StelTranslator.hpp>
 
+#include "StelFileMgr.hpp"
+
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
 
@@ -29,9 +31,18 @@ ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
 {
     listName_ = listName;
+
+    if ( listName_.size() == 0 ) {
+        isCreationMode = true;
+    } else {
+        isCreationMode = false;
+    }
+
     ui = new Ui_obsListCreateEditDialogForm();
     core = StelApp::getInstance().getCore();
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
+    observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( jsonFileName );
+
 
 }
 
@@ -81,6 +92,8 @@ void ObsListCreateEditDialog::createDialogContent()
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnName, QHeaderView::ResizeToContents );
     ui->obsListCreationEditionTreeView->header()->setStretchLastSection ( true );
     ui->obsListCreationEditionTreeView->hideColumn ( ColumnUUID );
+    ui->obsListCreationEditionTreeView->hideColumn ( ColumnJD );
+    ui->obsListCreationEditionTreeView->hideColumn ( ColumnLocation );
     //Enable the sort for columns
     ui->obsListCreationEditionTreeView->setSortingEnabled ( true );
 }
@@ -110,16 +123,18 @@ void ObsListCreateEditDialog::styleChanged()
 void ObsListCreateEditDialog::setObservingListHeaderNames()
 {
     const QStringList headerStrings = {
-        "UUID", // Hided the column
+        "UUID", // Hided column
         q_ ( "Object name" ),
         q_ ( "Type" ),
         q_ ( "Right ascencion" ),
         q_ ( "Declination" ),
         q_ ( "Magnitude" ),
-        q_ ( "Constellation" )
+        q_ ( "Constellation" ),
+        q_ ( "Date" ), // Hided column
+        q_ ( "Location" ) // Hided column
     };
 
-    obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
+    obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
 
 

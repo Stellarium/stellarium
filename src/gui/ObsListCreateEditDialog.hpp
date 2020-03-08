@@ -29,6 +29,20 @@
 
 class Ui_obsListCreateEditDialogForm;
 
+struct observingListItem {
+    QString name;
+    QString type;
+    QString ra;
+    QString dec;
+    QString magnitude;
+    QString constellation;
+    QString jd;
+    QString location;
+    double fov;
+    bool isVVisibleMarker;
+};
+Q_DECLARE_METATYPE(observingListItem)
+
 class ObsListCreateEditDialog : public StelDialog
 {
     Q_OBJECT
@@ -47,6 +61,9 @@ protected:
     virtual void createDialogContent();
 
 private:
+    //! To know if the dialog is open in creation mode or editionn mode
+    // if true we are in creation mode otherwise in edition mode
+    bool isCreationMode;
     enum ObsListColumns {
         ColumnUUID,	//! UUID of object
         ColumnName,	//! Name or designation of object
@@ -55,11 +72,15 @@ private:
         ColumnDec,	//! Declination of the object
         ColumnMagnitude,	//! Magnitude of the object
         ColumnConstellation, //! Constellation in which the object is located
+        ColumnJD, //! Date in julian day
+        ColumnLocation, //! Location where the object is observed
         ColumnCount	//! Total number of columns
     };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     std::string listName_;
+    static constexpr char const * jsonFileName = "observingList.json";
+    QString observingListJsonPath;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
