@@ -1195,7 +1195,7 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// TODO: verify that this works correctly for custom projections [comment not by GZ]
 	// seam is at East, except if angleRotateZ has been given.
-	sPainter.sSphere(radius, 1.0, cols, rows, 1, true, mapTexTop, mapTexBottom);
+	sPainter.sSphere(radius, 1.0, cols, rows, true, true, mapTexTop, mapTexBottom);
 	// Since 0.13: Fog also for sphericals...
 	if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 	{
@@ -1204,7 +1204,7 @@ void LandscapeSpherical::draw(StelCore* core)
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 		mapTexFog->bind();
-		sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom))), 1, true, fogTexTop, fogTexBottom);
+		sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom))), true, true, fogTexTop, fogTexBottom);
 	}
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
@@ -1215,7 +1215,7 @@ void LandscapeSpherical::draw(StelCore* core)
 				  lightScapeBrightness*illumFader.getInterstate(),
 				  lightScapeBrightness*illumFader.getInterstate(), landFader.getInterstate());
 		mapTexIllum->bind();
-		sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), 1, true, illumTexTop, illumTexBottom);
+		sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), true, true, illumTexTop, illumTexBottom);
 	}	
 	//qDebug() << "before drawing line";
 

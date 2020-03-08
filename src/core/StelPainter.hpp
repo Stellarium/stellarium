@@ -195,9 +195,9 @@ public:
 	//!        region around the bottom pole, like for a spherical equirectangular horizon panorama (SphericalLandscape class).
 	//!        Example: your light pollution image (pano photo) goes down to just -5 degrees altitude (lowest street lamps below you):
 	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
-	void sSphere(double radius, double oneMinusOblateness, unsigned int slices, unsigned int stacks,
-		     int orientInside = 0, bool flipTexture = false,
-		     float topAngle = 0.0f, float bottomAngle = static_cast<float>(M_PI));
+	void sSphere(const double radius, const double oneMinusOblateness, const unsigned int slices, const unsigned int stacks,
+		     const bool orientInside = false, const bool flipTexture = false,
+		     const float topAngle = 0.0f, const float bottomAngle = static_cast<float>(M_PI));
 
 	//! Generate a StelVertexArray for a sphere.
 	//! @param radius

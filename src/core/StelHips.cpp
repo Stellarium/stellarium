@@ -224,7 +224,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	int drawOrder = qRound(ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth))));
+	int drawOrder = qRound(ceil(log2(px / (4.0 * std::sqrt(2.0) * tileWidth))));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
 
@@ -277,7 +277,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = static_cast<int>(sqrt(12 * (1 << (2 * order))));
+			int nbw = static_cast<int>(std::sqrt(12 * (1 << (2 * order))));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;

@@ -1815,9 +1815,9 @@ void StelPainter::drawLine2d(const float x1, const float y1, const float x2, con
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode.
 // This used to draw a full sphere. Since 0.13 it's possible to have a spherical zone only.
-void StelPainter::sSphere(const double radius, double oneMinusOblateness,
-			  unsigned int slices, unsigned int stacks,
-			  const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
+void StelPainter::sSphere(const double radius, const double oneMinusOblateness,
+			  const unsigned int slices, const unsigned int stacks,
+			  const bool orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
 	double x, y, z;
 	GLfloat s=0.f, t=0.f;

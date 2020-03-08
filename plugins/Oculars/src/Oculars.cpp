@@ -381,7 +381,6 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 	{
 		order = GETSTELMODULE(LabelMgr)->getCallOrder(actionName) + 100.0;
 	}
-
 	return order;
 }
 

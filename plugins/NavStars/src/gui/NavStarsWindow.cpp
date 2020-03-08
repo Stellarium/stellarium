@@ -197,15 +197,15 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "<p>";
 	html += q_("These fields are:");
 	html += "<ul>";
-	html += "<li>" + q_("GHA%1: The Greenwich Hour Angle for the first point of Aries.").arg("&#9800;") + "</li>";
-	html += "<li>" + q_("SHA: Sidereal Hour Angle of navigation star.") + "</li>";
-	html += "<li>" + q_("LHA: The observers local hour angle to the navigation star.") + "</li>";
+	html += "<li>" + q_("GHA%1: The Greenwich Hour Angle of the first point of Aries.").arg("&#9800;") + "</li>";
+	html += "<li>" + q_("SHA: Sidereal Hour Angle of the navigation star.") + "</li>";
+	html += "<li>" + q_("LHA: The observer's Local Hour Angle to the navigation star.") + "</li>";
 	//! TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
 	html += "<li>" + q_("GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and Declination.") + "</li>";	
-	//! TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a starting close by where the observer knows themselves to be. For example, from dead reckoning.
-	html += "<li>" + q_("AP: LAT/LON: The observers assumed position as geodetic latitude and longitude.") + "</li>";
-	//! TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth.
-	html += "<li>" + q_("Hc/Zn: The calculated height (altitude) and computed azimuth of navigation star.") + "</li>";
+	//! TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point close by where the observer knows themselves to be. For example, from dead reckoning.
+	html += "<li>" + q_("AP: LAT/LON: The observer's Assumed Position as geodetic latitude and longitude.") + "</li>";
+	//! TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth, as seen from the AP.
+	html += "<li>" + q_("Hc/Zn: The calculated height (altitude) and computed azimuth of navigation star, seen from AP.") + "</li>";
 	html += "</ul></p>";
 
 	html += "<p>";
@@ -213,7 +213,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "</p>";
 
 	html += "<p>";
-	html += q_("When tabulated list is selected the fields then become which is more inline with <em>The Nautical Almanac</em> format:");
+	html += q_("When 'tabulated list' is selected the fields more closely follow the <em>The Nautical Almanac</em> format:");
 	html += "<ul>";
 
 	//! TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
@@ -224,15 +224,15 @@ void NavStarsWindow::setAboutHtml(void)
 	//! TRANSLATORS: celestial coordinate system, declination.
 	html += "<li>" + q_("DEC: The navigation star's declination.") + "</li>";
 	html += "<li>" + q_("GHA: The navigation star's Greenwich Hour Angle.") + "</li>";
-	html += "<li>" + q_("LHA: The observers local hour angle to the navigation star.") + "</li>";
+	html += "<li>" + q_("LHA: The observer's Local Hour Angle to the navigation star.") + "</li>";
 	//! TRANSLATORS: Geodetic coordinate system, latitude.
-	html += "<li>" + q_("LAT: The observers geodetic latitude.") + "</li>";
+	html += "<li>" + q_("LAT: The observer's geodetic latitude.") + "</li>";
 	//! TRANSLATORS: Geodetic coordinate system, longitude.
-	html += "<li>" + q_("LON: The observers geodetic longitude.") + "</li>";
-	//! TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude)
-	html += "<li>" + q_("Hc: The calculated height (altitude) of navigation star.") + "</li>";
+	html += "<li>" + q_("LON: The observer's geodetic longitude.") + "</li>";
+	//! TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude) for the AP
+	html += "<li>" + q_("Hc: The AP calculated height (altitude) of navigation star.") + "</li>";
 	//! TRANSLATORS: The process of Sight Reduction outputs computed values. Zn computed azimuth
-	html += "<li>" + q_("Zn: The calculated azimuth of navigation star.") + "</li>";
+	html += "<li>" + q_("Zn: The AP calculated azimuth of navigation star.") + "</li>";
 	html += "</ul></p>";
 
 	html += "<p>";
