@@ -141,6 +141,8 @@ public:
 	virtual ~SkyLine();
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
+	void setPartitions(bool visible) {showPartitions = visible;}
+	bool showsPartitions() const {return showPartitions;}
 	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
@@ -160,6 +162,7 @@ private:
 	QFont font;
 	QString label;
 	int lineThickness;
+	bool showPartitions;
 };
 
 // rms added color as parameter
@@ -623,7 +626,7 @@ void SkyGrid::draw(const StelCore* core) const
 	sPainter.setLineSmooth(false);
 }
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), showPartitions(true)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -1256,17 +1259,29 @@ void GridLinesMgr::init()
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
 	setFlagSupergalacticGrid(conf->value("viewing/flag_supergalactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
+	setFlagEquatorParts(conf->value("viewing/flag_equator_parts").toBool());
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
+	setFlagEquatorJ2000Parts(conf->value("viewing/flag_equator_J2000_parts").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
+	setFlagEclipticParts(conf->value("viewing/flag_ecliptic_parts").toBool());
 	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
+	setFlagEclipticJ2000Parts(conf->value("viewing/flag_ecliptic_J2000_parts").toBool());
 	setFlagPrecessionCircles(conf->value("viewing/flag_precession_circles").toBool());
+	setFlagPrecessionParts(conf->value("viewing/flag_precession_parts").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
+	setFlagMeridianParts(conf->value("viewing/flag_meridian_parts").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
+	setFlagHorizonParts(conf->value("viewing/flag_horizon_parts").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
+	setFlagGalacticEquatorParts(conf->value("viewing/flag_galactic_equator_parts").toBool());
 	setFlagSupergalacticEquatorLine(conf->value("viewing/flag_supergalactic_equator_line").toBool());
+	setFlagSupergalacticEquatorParts(conf->value("viewing/flag_supergalactic_equator_parts").toBool());
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
+	setFlagLongitudeParts(conf->value("viewing/flag_longitude_parts").toBool());
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
+	setFlagPrimeVerticalParts(conf->value("viewing/flag_prime_vertical_parts").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
+	setFlagColureParts(conf->value("viewing/flag_colure_parts").toBool());
 	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
 	setFlagCelestialJ2000Poles(conf->value("viewing/flag_celestial_J2000_poles").toBool());
 	setFlagCelestialPoles(conf->value("viewing/flag_celestial_poles").toBool());
@@ -1744,6 +1759,19 @@ bool GridLinesMgr::getFlagEquatorLine(void) const
 {
 	return equatorLine->isDisplayed();
 }
+//! Set flag for displaying Equatorial Line partitions
+void GridLinesMgr::setFlagEquatorParts(const bool displayed)
+{
+	if(displayed != equatorLine->showsPartitions()) {
+		equatorLine->setPartitions(displayed);
+		emit equatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Equatorial Line partitions
+bool GridLinesMgr::getFlagEquatorParts(void) const
+{
+	return equatorLine->showsPartitions();
+}
 Vec3f GridLinesMgr::getColorEquatorLine(void) const
 {
 	return equatorLine->getColor();
@@ -1768,6 +1796,19 @@ void GridLinesMgr::setFlagEquatorJ2000Line(const bool displayed)
 bool GridLinesMgr::getFlagEquatorJ2000Line(void) const
 {
 	return equatorJ2000Line->isDisplayed();
+}
+//! Set flag for displaying J2000 Equatorial Line partitions
+void GridLinesMgr::setFlagEquatorJ2000Parts(const bool displayed)
+{
+	if(displayed != equatorJ2000Line->showsPartitions()) {
+		equatorJ2000Line->setPartitions(displayed);
+		emit equatorJ2000PartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying J2000 Equatorial Line partitions
+bool GridLinesMgr::getFlagEquatorJ2000Parts(void) const
+{
+	return equatorJ2000Line->showsPartitions();
 }
 Vec3f GridLinesMgr::getColorEquatorJ2000Line(void) const
 {
@@ -1794,6 +1835,19 @@ bool GridLinesMgr::getFlagEclipticLine(void) const
 {
 	return eclipticLine->isDisplayed();
 }
+//! Set flag for displaying Ecliptic Line partitions
+void GridLinesMgr::setFlagEclipticParts(const bool displayed)
+{
+	if(displayed != eclipticLine->showsPartitions()) {
+		eclipticLine->setPartitions(displayed);
+		emit eclipticPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic Line partitions
+bool GridLinesMgr::getFlagEclipticParts(void) const
+{
+	return eclipticLine->showsPartitions();
+}
 Vec3f GridLinesMgr::getColorEclipticLine(void) const
 {
 	return eclipticLine->getColor();
@@ -1818,6 +1872,19 @@ void GridLinesMgr::setFlagEclipticJ2000Line(const bool displayed)
 bool GridLinesMgr::getFlagEclipticJ2000Line(void) const
 {
 	return eclipticJ2000Line->isDisplayed();
+}
+//! Set flag for displaying Ecliptic J2000 Line partitions
+void GridLinesMgr::setFlagEclipticJ2000Parts(const bool displayed)
+{
+	if(displayed != eclipticJ2000Line->showsPartitions()) {
+		eclipticJ2000Line->setPartitions(displayed);
+		emit eclipticJ2000PartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic J2000 Line partitions
+bool GridLinesMgr::getFlagEclipticJ2000Parts(void) const
+{
+	return eclipticJ2000Line->showsPartitions();
 }
 Vec3f GridLinesMgr::getColorEclipticJ2000Line(void) const
 {
@@ -1846,6 +1913,21 @@ bool GridLinesMgr::getFlagPrecessionCircles(void) const
 	// precessionCircleS is always synchronous, no separate queries.
 	return precessionCircleN->isDisplayed();
 }
+//! Set flag for displaying Precession Circle partitions
+void GridLinesMgr::setFlagPrecessionParts(const bool displayed)
+{
+	if(displayed != precessionCircleN->showsPartitions()) {
+		precessionCircleN->setPartitions(displayed);
+		precessionCircleS->setPartitions(displayed);
+		emit precessionPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Precession Circle partitions
+bool GridLinesMgr::getFlagPrecessionParts(void) const
+{
+	// precessionCircleS is always synchronous, no separate queries.
+	return precessionCircleN->showsPartitions();
+}
 Vec3f GridLinesMgr::getColorPrecessionCircles(void) const
 {
 	return precessionCircleN->getColor();
@@ -1872,6 +1954,19 @@ bool GridLinesMgr::getFlagMeridianLine(void) const
 {
 	return meridianLine->isDisplayed();
 }
+//! Set flag for displaying Meridian Line partitions
+void GridLinesMgr::setFlagMeridianParts(const bool displayed)
+{
+	if(displayed != meridianLine->showsPartitions()) {
+		meridianLine->setPartitions(displayed);
+		emit meridianPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Meridian Line partitions
+bool GridLinesMgr::getFlagMeridianParts(void) const
+{
+	return meridianLine->showsPartitions();
+}
 Vec3f GridLinesMgr::getColorMeridianLine(void) const
 {
 	return meridianLine->getColor();
@@ -1896,6 +1991,19 @@ void GridLinesMgr::setFlagLongitudeLine(const bool displayed)
 bool GridLinesMgr::getFlagLongitudeLine(void) const
 {
 	return longitudeLine->isDisplayed();
+}
+//! Set flag for displaying opposition/conjunction longitude line partitions
+void GridLinesMgr::setFlagLongitudeParts(const bool displayed)
+{
+	if(displayed != longitudeLine->showsPartitions()) {
+		longitudeLine->setPartitions(displayed);
+		emit longitudePartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying opposition/conjunction longitude line partitions
+bool GridLinesMgr::getFlagLongitudeParts(void) const
+{
+	return longitudeLine->showsPartitions();
 }
 Vec3f GridLinesMgr::getColorLongitudeLine(void) const
 {
@@ -1922,6 +2030,19 @@ bool GridLinesMgr::getFlagHorizonLine(void) const
 {
 	return horizonLine->isDisplayed();
 }
+//! Set flag for displaying Horizon Line partitions
+void GridLinesMgr::setFlagHorizonParts(const bool displayed)
+{
+	if(displayed != horizonLine->showsPartitions()) {
+		horizonLine->setPartitions(displayed);
+		emit horizonPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Horizon Line partitions
+bool GridLinesMgr::getFlagHorizonParts(void) const
+{
+	return horizonLine->showsPartitions();
+}
 Vec3f GridLinesMgr::getColorHorizonLine(void) const
 {
 	return horizonLine->getColor();
@@ -1947,7 +2068,19 @@ bool GridLinesMgr::getFlagGalacticEquatorLine(void) const
 {
 	return galacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticEquatorLine(void) const
+//! Set flag for displaying Galactic Equator Line partitions
+void GridLinesMgr::setFlagGalacticEquatorParts(const bool displayed)
+{
+	if(displayed != galacticEquatorLine->showsPartitions()) {
+		galacticEquatorLine->setPartitions(displayed);
+		emit galacticEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Galactic Equator Line partitions
+bool GridLinesMgr::getFlagGalacticEquatorParts(void) const
+{
+	return galacticEquatorLine->showsPartitions();
+}Vec3f GridLinesMgr::getColorGalacticEquatorLine(void) const
 {
 	return galacticEquatorLine->getColor();
 }
@@ -1972,7 +2105,19 @@ bool GridLinesMgr::getFlagSupergalacticEquatorLine(void) const
 {
 	return supergalacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
+//! Set flag for displaying Supergalactic Equator Line partitions
+void GridLinesMgr::setFlagSupergalacticEquatorParts(const bool displayed)
+{
+	if(displayed != supergalacticEquatorLine->showsPartitions()) {
+		supergalacticEquatorLine->setPartitions(displayed);
+		emit supergalacticEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Equator Line partitions
+bool GridLinesMgr::getFlagSupergalacticEquatorParts(void) const
+{
+	return supergalacticEquatorLine->showsPartitions();
+}Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
 {
 	return supergalacticEquatorLine->getColor();
 }
@@ -1997,7 +2142,19 @@ bool GridLinesMgr::getFlagPrimeVerticalLine(void) const
 {
 	return primeVerticalLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
+//! Set flag for displaying Prime Vertical Line partitions
+void GridLinesMgr::setFlagPrimeVerticalParts(const bool displayed)
+{
+	if(displayed != primeVerticalLine->showsPartitions()) {
+		primeVerticalLine->setPartitions(displayed);
+		emit  primeVerticalPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Prime Vertical Line partitions
+bool GridLinesMgr::getFlagPrimeVerticalParts(void) const
+{
+	return primeVerticalLine->showsPartitions();
+}Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
 {
 	return primeVerticalLine->getColor();
 }
@@ -2022,6 +2179,20 @@ void GridLinesMgr::setFlagColureLines(const bool displayed)
 bool GridLinesMgr::getFlagColureLines(void) const
 {
 	return colureLine_1->isDisplayed();
+}
+//! Set flag for displaying Colure Line partitions
+void GridLinesMgr::setFlagColureParts(const bool displayed)
+{
+	if(displayed != colureLine_1->showsPartitions()) {
+		colureLine_1->setPartitions(displayed);
+		colureLine_2->setPartitions(displayed);
+		emit  colurePartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Colure Line partitions
+bool GridLinesMgr::getFlagColureParts(void) const
+{
+	return colureLine_1->showsPartitions();
 }
 Vec3f GridLinesMgr::getColorColureLines(void) const
 {
