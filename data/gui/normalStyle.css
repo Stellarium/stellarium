@@ -18,14 +18,6 @@ QLabel:disabled {
 	color: rgb(50, 50, 50);
 }
 
-QLabel#stelWindowTitle {
-	margin-left: 24px;
-	font-size: 108%;
-	color: rgb(150, 150, 150);
-	font: bold;
-	background: none;
-}
-
 QDockWidget {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(90, 90, 90), stop: 1 rgb(70, 49, 52));
 }
@@ -33,14 +25,6 @@ QDockWidget {
 QFrame {
 	background: none;
 	border: none;
-}
-
-QFrame#viewContent {
-	background: rgb(0, 0, 0);
-}
-
-QFrame#TitleBar {
-	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
 }
 
 QToolTip {
@@ -74,16 +58,265 @@ QLineEdit:disabled {
 	background: rgb(90, 90, 90);
 }
 
-/* TODO: Used in keyboard shortcuts? */
-QLineEdit[collision="true"] {
-	color: red;
-}
-
 QTextBrowser {
 	border: 0px solid rgb(0, 0, 0);
 	background: rgb(90, 90, 90);
 	color: rgb(3, 3, 3);
 }
+
+QGroupBox {
+	padding: 15px;
+	padding-top: 35px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: rgba(150, 150, 150, 30%);
+	border: 1px solid rgba(0, 0, 0, 10%);
+	border-style: inset;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+QGroupBox::title {
+	subcontrol-position: top left;
+	subcontrol-origin: margin;
+	color: rgb(0, 0, 0);
+	left: 27px;
+	top: 20px;
+}
+
+QTabWidget::pane {
+	border: none;
+	margin-top: 0px;
+}
+
+QTabWidget::tab-bar {
+	width: 1000px;
+	/*
+	 * Used as a workaround to set the background of the space between the last
+	 * tab (normally the rightmost one and the end of the window. Not necessary
+	 * if QTabWidget::documentMode is set to 'true', but that solution leads to
+	 * a hard-coded line below the tab bar.
+	*/
+}
+
+QTabBar {
+	margin: 0px;
+	padding: 0px;
+	font-weight: bold;
+	color: rgb(170, 173, 164);
+	background-color: rgb(31, 31, 31);
+	font-size: 108%;
+	/*
+	 * Don't put font-size in QTabBar::tab, as it causes the tab labels to be
+	 * cut by the frame.
+	*/
+}
+
+QListView {
+	font-size: 108%;
+	color: rgb(170, 173, 164);
+	background: rgb(31, 31, 31);
+	show-decoration-selected: 1;
+	border: none;
+}
+
+QListView::item {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+QListView::item:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(55, 55, 40), stop: 1 rgb(35, 35, 31));
+}
+
+QListView::item:selected {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
+}
+
+QProgressBar {
+	border: 1px solid rgba(102, 102, 128, 50%);
+	border-radius: 2px;
+	background-color: rgba(38, 41, 48, 20%);
+	text-align: center;
+	color: rgb(111, 111, 127);
+	font-size: 92%;
+}
+
+QProgressBar::chunk {
+	background-color: rgba(68, 68, 109, 50%);
+	width: 10px;
+	margin: 0.5px;
+}
+
+QTreeView {
+	background-color: rgb(76, 77, 80);
+	color: rgb(238, 238, 238);
+	font-size: 92%;
+}
+
+QHeaderView::section {
+	background-color: rgb(31, 31, 31);
+	font: bold;
+	color: rgb(255, 255, 255);
+	font-size: 92%;
+	padding-left: 4px;
+	border: 1px solid rgb(108, 108, 108);
+}
+
+QHeaderView::up-arrow {
+	image: url(:/graphicGui/uieSpinup.png);
+}
+
+QHeaderView::down-arrow {
+	image: url(:/graphicGui/uieSpindown.png);
+}
+
+/* TODO move to .ui or class */
+#configurationDialogForm QPushButton#screenshotBrowseButton,
+QPushButton#pushButtonPickExecutablesDirectory {
+	image: url(:/graphicGui/uibtFolder.png);
+}
+
+QMenu {
+	background-color: rgb(90, 90, 90); /* sets background of the menu */
+	border: 1px solid rgb(0, 0, 0);
+	color: rgb(222, 222, 222);
+}
+
+QMenu::item {
+	/*
+	sets background of menu item. set this to something non-transparent if you
+	want menu color and menu item color to be different
+	*/
+	background-color: rgb(66, 67, 70);
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+	background-color: rgb(101, 99, 33);
+}
+
+/*
+ * Windows
+ */
+
+QFrame#TitleBar {
+	/* Title bar on windows */
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
+}
+
+QPushButton#closeStelWindow {
+	border: 0px;
+	background: none;
+	background-image: url(:/graphicGui/uieCloseButton.png);
+}
+
+QPushButton:hover#closeStelWindow {
+	background-image: url(:/graphicGui/uieCloseButton-hover.png);
+}
+
+QLabel#stelWindowTitle {
+	/* Titles of windows */
+	margin-left: 24px;
+	font-size: 108%;
+	color: rgb(150, 150, 150);
+	font: bold;
+	background: none;
+}
+
+QFrame#viewContent {
+	/*
+	 * Content of windows.
+	 *
+	 * Includes everything inside a window apart from the stelWindowTitle
+	 */
+	background: rgb(0, 0, 0);
+}
+
+/*
+ * Main tab bar on windows
+ */
+
+QListView#stackListWidget {
+	font-weight: bold;
+	color: rgb(120, 120, 120);
+}
+
+QListView::item:hover#stackListWidget {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(50, 50, 40), stop: 1 rgb(31, 31, 31));
+}
+
+QListView::item:selected#stackListWidget {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(90, 90, 90));
+	color: rgb(207, 207, 207);
+}
+
+QListView::item#stackListWidget {
+	margin: 0px;
+	padding-top: 0px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+/*
+ * Secondary tab bar
+ */
+
+QTabBar::tab {
+	border: none;
+	margin: 0px;
+	padding: 1ex 2ex;
+	min-height: 28px;
+}
+
+QTabBar::tab:selected {
+	border: none;
+	margin: 0px;
+	color: rgb(220, 223, 214);
+}
+
+QTabBar::tab:top {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+QTabBar::tab:top:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(50, 50, 40), stop: 1 rgb(31, 31, 31));
+}
+
+QTabBar::tab:top:selected {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(90, 90, 90));
+}
+
+QTabBar::tab:bottom {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+QTabBar::tab:bottom:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(31, 31, 31), stop: 1 rgb(50, 50, 40));
+}
+
+QTabBar::tab:bottom:selected {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(68, 69, 72));
+}
+
+QTabBar QToolButton {
+	background-color: rgb(31, 31, 31);
+}
+
+
+/*
+ * QPushButton
+ */
 
 QPushButton {
 	border: 1px solid rgb(0, 0, 0);
@@ -111,266 +344,6 @@ QPushButton:hover {
 QPushButton:flat {
 	border: none; /* no border for a flat push button */
 	background: transparent;
-}
-
-QPushButton#closeStelWindow {
-	border: 0px;
-	background: none;
-	background-image: url(:/graphicGui/uieCloseButton.png);
-}
-
-QPushButton:hover#closeStelWindow {
-	background-image: url(:/graphicGui/uieCloseButton-hover.png);
-}
-
-QGroupBox {
-	padding: 15px;
-	padding-top: 35px;
-	margin-right: 10px;
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: rgba(150, 150, 150, 30%);
-	border: 1px solid rgba(0, 0, 0, 10%);
-	border-style: inset;
-	font-weight: bold;
-	border-radius: 5px;
-}
-
-QGroupBox::title {
-	subcontrol-position: top left;
-	subcontrol-origin: margin;
-	color: rgb(0, 0, 0);
-	left: 27px;
-	top: 20px;
-}
-
-/* TODO: Move to .ui file */
-QPushButton#saveSatellitesButton {
-	image: url(:/graphicGui/uibtSave.png);
-}
-
-/* TODO: Move to another section */
-QTextBrowser#helpBrowser,
-QTextBrowser#aboutBrowser {
-	padding-left: 11px;
-}
-
-/* TODO: Move to another section */
-QTextBrowser#deltaTAlgorithmDescription,
-QTextBrowser#projectionTextBrowser {
-	background: transparent;
-	padding: 0px;
-	margin: 0px;
-}
-
-QTabWidget::pane {
-	border: none;
-	margin-top: 0px;
-}
-
-QTabWidget::tab-bar {
-	width: 1000px;
-	/*
-	Used as a workaround to set the background of the space between the last
-	tab (normally the rightmost one and the end of the window. Not necessary if
-	QTabWidget::documentMode is set to 'true', but that solution leads to a
-	hard-coded line below the tab bar.
-	*/
-}
-
-QTabBar {
-	margin: 0px;
-	padding: 0px;
-	font-weight: bold;
-	color: rgb(170, 173, 164);
-	background-color: rgb(31, 31, 31);
-	font-size: 108%;
-	/*
-	Don't put font-size in QTabBar::tab, as it causes the tab labels to be cut
-	by the frame.
-	*/
-}
-
-QTabBar::tab {
-	border: none;
-	margin: 0px;
-	padding: 1ex 2ex;
-	min-height: 28px;
-}
-
-QTabBar::tab:selected {
-	border: none;
-	margin: 0px;
-	color: rgb(220, 223, 214);
-}
-
-QTabBar::tab:top {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-QTabBar::tab:top:selected {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(90, 90, 90));
-}
-
-QTabBar::tab:bottom {
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-QTabBar::tab:bottom:selected {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(68, 69, 72));
-}
-
-QTabBar QToolButton {
-	background-color: rgb(31, 31, 31);
-}
-
-QListView {
-	font-size: 108%;
-	color: rgb(170, 173, 164);
-	background: rgb(31, 31, 31);
-	show-decoration-selected: 1;
-	border: none;
-}
-
-QListView::item {
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-left: 0px;
-	padding-right: 0px;
-}
-
-QListView::item:selected {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
-}
-
-QListView#citiesListView {
-	font-size: 92%;
-}
-
-QListView#citiesListView::item {
-	padding: 2px 0px;
-}
-
-/* Main tab bar */
-
-QListView#stackListWidget {
-	font-weight: bold;
-	color: rgb(120, 120, 120);
-}
-
-QListView::item:selected#stackListWidget {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(90, 90, 90));
-	color: rgb(207, 207, 207);
-}
-
-QListView::item#stackListWidget {
-	margin: 0px;
-	padding-top: 0px;
-	padding-bottom: 5px;
-	padding-left: 8px;
-	padding-right: 8px;
-}
-
-QProgressBar {
-	border: 1px solid rgba(102, 102, 128, 50%);
-	border-radius: 2px;
-	background-color: rgba(38, 41, 48, 20%);
-	text-align: center;
-	color: rgb(111, 111, 127);
-	font-size: 92%;
-}
-
-QProgressBar::chunk {
-	background-color: rgba(68, 68, 109, 50%);
-	width: 10px;
-	margin: 0.5px;
-}
-
-QListWidget#satellitesList,
-QListWidget#sourceList {
-	font-size: 60%;
-}
-
-QTreeView {
-	background-color: rgb(76, 77, 80);
-	color: rgb(238, 238, 238);
-	font-size: 92%;
-}
-
-QTreeView::item:selected#treeView {
-	background-color: rgb(59, 144, 235);
-	color: rgb(255,255,255);
-}
-
-QTreeView::item:!enabled#treeView {
-	color : rgb(58,59,62);
-}
-
-QTextBrowser#selectedLineInfo {
-	background-color: rgb(76, 77, 80);
-}
-
-QHeaderView::section {
-	background-color: rgb(31, 31, 31);
-	font: bold;
-	color: rgb(255, 255, 255);
-	font-size: 92%;
-	padding-left: 4px;
-	border: 1px solid rgb(108, 108, 108);
-}
-
-QHeaderView::up-arrow {
-	image: url(:/graphicGui/uieSpinup.png);
-}
-
-QHeaderView::down-arrow {
-	image: url(:/graphicGui/uieSpindown.png);
-}
-
-#configurationDialogForm QPushButton#screenshotBrowseButton,
-QPushButton#pushButtonPickExecutablesDirectory {
-	image: url(:/graphicGui/uibtFolder.png);
-}
-
-QMenu {
-	background-color: rgb(90, 90, 90); /* sets background of the menu */
-	border: 1px solid rgb(0, 0, 0);
-	color: rgb(222, 222, 222);
-}
-
-QMenu::item {
-	/*
-	sets background of menu item. set this to something non-transparent if you
-	want menu color and menu item color to be different
-	*/
-	background-color: rgb(66, 67, 70);
-}
-
-QMenu::item:selected { /* when user selects item using mouse or keyboard */
-	background-color: rgb(101, 99, 33);
-}
-
-QPushButton#pushButtonMoveSensorUp,
-QPushButton#pushButtonMoveOcularUp,
-QPushButton#pushButtonMoveTelescopeUp,
-QPushButton#pushButtonMoveLensUp {
-	image: url(:/graphicGui/uieSpinup.png);
-}
-
-QPushButton#pushButtonMoveSensorDown,
-QPushButton#pushButtonMoveOcularDown,
-QPushButton#pushButtonMoveTelescopeDown,
-QPushButton#pushButtonMoveLensDown {
-	image: url(:/graphicGui/uieSpindown.png);
-}
-
-QLabel#lensNote {
-	margin-left: 5px;
 }
 
 /*
@@ -770,6 +743,10 @@ QSlider::handle:horizontal {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
+QSlider::handle:horizontal:hover {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 165), stop: 1 rgb(111, 113, 94));
+}
+
 QSlider::groove:horizontal:disabled {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 61, 61), stop: 1 rgb(80, 80, 80));
 }
@@ -777,6 +754,18 @@ QSlider::groove:horizontal:disabled {
 QSlider::handle:horizontal:disabled {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
 	border: 1px solid rgba(64, 64, 64);
+}
+
+/**************************************************************************************************************
+ * shortcutsDialog
+ *************************************************************************************************************/
+
+QLineEdit[collision="true"] {
+	/*
+	 * Shortcut collision, when a user selects the same shortcut for two
+	 * functions
+	 */
+	color: red;
 }
 
 /**************************************************************************************************************
@@ -906,4 +895,90 @@ QLineEdit#citySearchLineEdit {
 	background-repeat: none;
 	background-position: center left;
 	border: none;
+}
+
+QListView#citiesListView {
+	font-size: 92%;
+}
+
+QListView#citiesListView::item {
+	padding: 2px 0px;
+}
+
+/**************************************************************************************************************
+ * configurationDialog
+ *************************************************************************************************************/
+
+QTextBrowser#deltaTAlgorithmDescription {
+	background: transparent;
+	padding: 0px;
+	margin: 0px;
+}
+
+/**************************************************************************************************************
+ * viewDialog
+ *************************************************************************************************************/
+
+QTextBrowser#projectionTextBrowser {
+	background: transparent;
+	padding: 0px;
+	margin: 0px;
+}
+
+/**************************************************************************************************************
+ * helpDialog
+ *************************************************************************************************************/
+
+QTextBrowser#helpBrowser,
+QTextBrowser#aboutBrowser {
+	padding-left: 11px;
+}
+
+/**************************************************************************************************************
+ * satellitesDialog
+ *************************************************************************************************************/
+
+QListWidget#satellitesList,
+QListWidget#sourceList {
+	font-size: 60%;
+}
+/* TODO: Move to .ui file */
+QPushButton#saveSatellitesButton {
+	image: url(:/graphicGui/uibtSave.png);
+}
+
+
+/**************************************************************************************************************
+ * TelescopeControl
+ *************************************************************************************************************/
+
+QTreeView::item:selected#treeView {
+	background-color: rgb(59, 144, 235);
+	color: rgb(255,255,255);
+}
+
+QTreeView::item:!enabled#treeView {
+	color : rgb(58,59,62);
+}
+
+/**************************************************************************************************************
+ * ocularDialog
+ *************************************************************************************************************/
+
+QPushButton#pushButtonMoveSensorUp,
+QPushButton#pushButtonMoveOcularUp,
+QPushButton#pushButtonMoveTelescopeUp,
+QPushButton#pushButtonMoveLensUp {
+	image: url(:/graphicGui/uieSpinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown,
+QPushButton#pushButtonMoveOcularDown,
+QPushButton#pushButtonMoveTelescopeDown,
+QPushButton#pushButtonMoveLensDown {
+	image: url(:/graphicGui/uieSpindown.png);
+}
+
+QLabel#lensNote {
+	margin-left: 5px;
 }
