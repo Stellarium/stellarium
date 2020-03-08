@@ -150,7 +150,7 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(Vec3f apexPointsColor		READ getColorApexPoints		WRITE setColorApexPoints		NOTIFY apexPointsColorChanged)
 
 	Q_PROPERTY(int lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
-
+	Q_PROPERTY(int partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -710,9 +710,16 @@ public slots:
 	//! Get the thickness of lines
 	int getLineThickness() const;
 
+	//! Set the thickness of partition lines
+	//! @param thickness of line in pixels
+	void setPartThickness(const int thickness);
+	//! Get the thickness of lines
+	int getPartThickness() const;
+
 signals:
 	void gridlinesDisplayedChanged(const bool) const;
 	void lineThicknessChanged(const int) const;
+	void partThicknessChanged(const int) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
 	void equatorGridDisplayedChanged(const bool displayed) const;

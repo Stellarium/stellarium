@@ -151,6 +151,8 @@ public:
 	void setFontSize(int newSize);
 	void setLineThickness(const int thickness) {lineThickness = thickness;}
 	int getLineThickness() const {return lineThickness;}
+	void setPartThickness(const int thickness) {partThickness = thickness;}
+	int getPartThickness() const {return partThickness;}
 	//! Re-translates the label.
 	void updateLabel();
 private:
@@ -162,6 +164,7 @@ private:
 	QFont font;
 	QString label;
 	int lineThickness;
+	int partThickness;
 	bool showPartitions;
 };
 
@@ -626,7 +629,7 @@ void SkyGrid::draw(const StelCore* core) const
 	sPainter.setLineSmooth(false);
 }
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), showPartitions(true)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -745,6 +748,7 @@ void SkyLine::draw(StelCore *core) const
 	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
 	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 	{
+		// TODO: partitions, at least for precession. (mark millennia!)
 		double lat;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
@@ -817,7 +821,7 @@ void SkyLine::draw(StelCore *core) const
 
 	// All the other "lines" are Great Circles
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
-	Vec3d fpt(1,0,0);
+	Vec3d fpt(1,0,0); // First Point
 	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
 		meridianSphericalCap.n.set(0,1,0);
@@ -841,6 +845,50 @@ void SkyLine::draw(StelCore *core) const
 		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
+
+//	if (showPartitions)
+//	{
+	sPainter.setLineWidth(3);
+		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
+		// Define short lines from "equator" a bit southwards
+		Vec3d part0(1,0,0);
+		Vec3d partAxis(0,1,0);
+		Vec3d partZAxis(0,0,1); // rotation axis for the 360 partitions
+		if ((line_type==MERIDIAN) || (line_type==COLURE_1))
+		{
+			partAxis.set(0,0,1);  // OK: 001
+			partZAxis.set(0,1,0); // OK: 010
+		}
+		else if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
+		{
+			part0.set(0,1,0);
+			partAxis.set(0,0,1);
+			partZAxis.set(1,0,0);
+		}
+		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
+		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
+		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
+		for (int i=0; i<360; ++i)
+		{
+			if (i%30 == 0)
+				sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			else if (i%10 == 0)
+				sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			else if (i%5 == 0)
+				sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			else
+				sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			part0.transfo4d(rotZ1);
+			part1.transfo4d(rotZ1);
+			part5.transfo4d(rotZ1);
+			part10.transfo4d(rotZ1);
+			part30.transfo4d(rotZ1);
+		}
+		sPainter.setLineWidth(1);
+//	}
+
 
 	Vec3d p1, p2;
 	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
@@ -1156,8 +1204,8 @@ GridLinesMgr::GridLinesMgr()
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
-	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000); // previous eclipticLine
-	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // NEW in 0.14
+	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000);
+	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE);
 	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
 	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
@@ -1299,6 +1347,7 @@ void GridLinesMgr::init()
 
 	// Set the line thickness for grids and lines
 	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
+	setPartThickness(conf->value("viewing/part_thickness", 1).toInt());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
@@ -2600,6 +2649,39 @@ void GridLinesMgr::setLineThickness(const int thickness)
 {
 	return equGrid->getLineThickness();
 }
+
+ void GridLinesMgr::setPartThickness(const int thickness)
+ {
+	 int partThickness = equatorLine->getPartThickness();
+	 if (partThickness!=thickness)
+	 {
+		 partThickness=qBound(1, thickness, 5);
+		 // Lines
+		 equatorLine->setPartThickness(partThickness);
+		 equatorJ2000Line->setPartThickness(partThickness);
+		 eclipticLine->setPartThickness(partThickness);
+		 eclipticJ2000Line->setPartThickness(partThickness);
+		 precessionCircleN->setPartThickness(partThickness);
+		 precessionCircleS->setPartThickness(partThickness);
+		 meridianLine->setPartThickness(partThickness);
+		 longitudeLine->setPartThickness(partThickness);
+		 horizonLine->setPartThickness(partThickness);
+		 galacticEquatorLine->setPartThickness(partThickness);
+		 supergalacticEquatorLine->setPartThickness(partThickness);
+		 primeVerticalLine->setPartThickness(partThickness);
+		 colureLine_1->setPartThickness(partThickness);
+		 colureLine_2->setPartThickness(partThickness);
+		 circumpolarCircleN->setPartThickness(partThickness);
+		 circumpolarCircleS->setPartThickness(partThickness);
+
+		 emit partThicknessChanged(partThickness);
+	 }
+ }
+
+  int GridLinesMgr::getPartThickness() const
+ {
+	 return equatorLine->getPartThickness();
+ }
 
 void GridLinesMgr::setFontSizeFromApp(int size)
 {
