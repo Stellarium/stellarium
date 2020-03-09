@@ -729,18 +729,15 @@ void SkyLine::draw(StelCore *core) const
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
-	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
+	sPainter.setColor(color, fader.getInterstate());
 	sPainter.setBlending(true);
-	if (lineThickness>1)
-		sPainter.setLineWidth(lineThickness); // set line thickness
+	const float oldLineWidth=sPainter.getLineWidth();
+	sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
-
-	Vec4f textColor(color[0], color[1], color[2], 0);		
-	textColor[3]=fader.getInterstate();
 
 	ViewportEdgeIntersectCallbackData userData(&sPainter);	
 	sPainter.setFont(font);
-	userData.textColor = textColor;	
+	userData.textColor = Vec4f(color, fader.getInterstate());
 	userData.text = label;
 	/////////////////////////////////////////////////
 	// Draw the line
@@ -758,8 +755,12 @@ void SkyLine::draw(StelCore *core) const
 		{
 			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI_180);
 			if (obsLatRad == 0.)
+			{
+				sPainter.setLineWidth(oldLineWidth); // restore painter state
+				sPainter.setLineSmooth(false);
+				sPainter.setBlending(false);
 				return;
-
+			}
 			if (line_type==CIRCUMPOLARCIRCLE_N)
 				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI_2);
 			else // southern circle
@@ -789,30 +790,26 @@ void SkyLine::draw(StelCore *core) const
 				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
 				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
 			}
-
-			if (lineThickness>1)
-				sPainter.setLineWidth(1); // reset tickness of line
-			sPainter.setLineSmooth(false);
-			sPainter.setBlending(false);
-			return;
 		}
-		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
-		middlePoint.normalize();
-		middlePoint*=(p1-rotCenter).length();
-		middlePoint+=rotCenter;
-		if (!viewPortSphericalCap.contains(middlePoint))
+		else
 		{
-			middlePoint-=rotCenter;
-			middlePoint*=-1.;
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+			middlePoint.normalize();
+			middlePoint*=(p1-rotCenter).length();
 			middlePoint+=rotCenter;
+			if (!viewPortSphericalCap.contains(middlePoint))
+			{
+				middlePoint-=rotCenter;
+				middlePoint*=-1.;
+				middlePoint+=rotCenter;
+			}
+
+			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		}
 
-		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
-		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-
-		if (lineThickness>1)
-			sPainter.setLineWidth(1); // reset tickness of line
+		sPainter.setLineWidth(oldLineWidth); // restore line thickness
 		sPainter.setLineSmooth(false);
 		sPainter.setBlending(false);
 
@@ -820,18 +817,18 @@ void SkyLine::draw(StelCore *core) const
 	}
 
 	// All the other "lines" are Great Circles
-	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
+	SphericalCap sphericalCap(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0); // First Point
 	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
-		meridianSphericalCap.n.set(0,1,0);
+		sphericalCap.n.set(0,1,0);
 	}
-	if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
+	else if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
 	{
-		meridianSphericalCap.n.set(1,0,0);
+		sphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
-	if (line_type==LONGITUDE)
+	else if (line_type==LONGITUDE)
 	{
 		Vec3d coord;		
 		double eclJDE = earth->getRotObliquity(core->getJDE());
@@ -842,7 +839,7 @@ void SkyLine::draw(StelCore *core) const
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 
 		StelUtils::spheToRect(lambdaJDE + M_PI_2, 0., coord);
-		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
+		sphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
 
@@ -870,7 +867,8 @@ void SkyLine::draw(StelCore *core) const
 		{
 			// TODO: Fix That!
 			part0=fpt;
-			partAxis=meridianSphericalCap.n;
+			partZAxis=sphericalCap.n;
+			partAxis.set(1,0,0); // ?? 101 and 010 makes oblique lines at the right place, 001 makes nothing.
 		}
 
 		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
@@ -899,13 +897,13 @@ void SkyLine::draw(StelCore *core) const
 
 
 	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 	{
-		if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
-			|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
+		if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
+			|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
 		{
 			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI_180);
+			const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
 			Vec3d rotFpt=fpt;
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
@@ -913,23 +911,21 @@ void SkyLine::draw(StelCore *core) const
 			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			return;
 		}
-		else
-			return;
+	}
+	else
+	{
+		Vec3d middlePoint = p1+p2;
+		middlePoint.normalize();
+		if (!viewPortSphericalCap.contains(middlePoint))
+			middlePoint*=-1.;
+
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
 
-	Vec3d middlePoint = p1+p2;
-	middlePoint.normalize();
-	if (!viewPortSphericalCap.contains(middlePoint))
-		middlePoint*=-1.;
-
-	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-	sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-
-	if (lineThickness>1)
-		sPainter.setLineWidth(1); // reset tickness of line
+	sPainter.setLineWidth(oldLineWidth); // restore line thickness
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
 
@@ -2174,7 +2170,8 @@ void GridLinesMgr::setFlagSupergalacticEquatorParts(const bool displayed)
 bool GridLinesMgr::getFlagSupergalacticEquatorParts(void) const
 {
 	return supergalacticEquatorLine->showsPartitions();
-}Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
+}
+Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
 {
 	return supergalacticEquatorLine->getColor();
 }
@@ -2211,7 +2208,8 @@ void GridLinesMgr::setFlagPrimeVerticalParts(const bool displayed)
 bool GridLinesMgr::getFlagPrimeVerticalParts(void) const
 {
 	return primeVerticalLine->showsPartitions();
-}Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
+}
+Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
 {
 	return primeVerticalLine->getColor();
 }
@@ -2679,8 +2677,8 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		 primeVerticalLine->setPartThickness(partThickness);
 		 colureLine_1->setPartThickness(partThickness);
 		 colureLine_2->setPartThickness(partThickness);
-		 circumpolarCircleN->setPartThickness(partThickness);
-		 circumpolarCircleS->setPartThickness(partThickness);
+		 //circumpolarCircleN->setPartThickness(partThickness);
+		 //circumpolarCircleS->setPartThickness(partThickness);
 
 		 emit partThicknessChanged(partThickness);
 	 }

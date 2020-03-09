@@ -1348,6 +1348,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
+	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth());
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
@@ -1381,7 +1382,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				//sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
-				return;
+				//return;
 //			}
 //			//else
 //			//	return;
@@ -1408,54 +1409,56 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	}
 	/////////////////////////////////////////////////
 	// Else draw small circles (declinations). (Technically, Equator is one, but ok...)
-
-	// Draw the line
-	const double lat=definingAngle*M_PI/180.0;
-	SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
-	const Vec3d rotCenter(0,0,declinationCap.d);
-
-	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+	else
 	{
-		if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
-			|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
-		{
-			// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			Vec3d pt1;
-			Vec3d pt2;
-			Vec3d pt3;
-			const double lon1=0.0;
-			const double lon2=120.0*M_PI/180.0;
-			const double lon3=240.0*M_PI/180.0;
-			StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
-			StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
-			StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+		// Draw the line
+		const double lat=definingAngle*M_PI/180.0;
+		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+		const Vec3d rotCenter(0,0,declinationCap.d);
 
-			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
+		Vec3d p1, p2;
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+		{
+			if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+					|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+			{
+				// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				Vec3d pt1;
+				Vec3d pt2;
+				Vec3d pt3;
+				const double lon1=0.0;
+				const double lon2=120.0*M_PI/180.0;
+				const double lon3=240.0*M_PI/180.0;
+				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+
+				sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
+			}
+		}
+		else
+		{
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+			middlePoint.normalize();
+			middlePoint*=(p1-rotCenter).length();
+			middlePoint+=rotCenter;
+			if (!viewPortSphericalCap.contains(middlePoint))
+			{
+				middlePoint-=rotCenter;
+				middlePoint*=-1.;
+				middlePoint+=rotCenter;
+			}
+
+			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
 		}
 
-		sPainter.setLineSmooth(false);
-		sPainter.setBlending(false);
-		return;
-	}
-	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
-	middlePoint.normalize();
-	middlePoint*=(p1-rotCenter).length();
-	middlePoint+=rotCenter;
-	if (!viewPortSphericalCap.contains(middlePoint))
-	{
-		middlePoint-=rotCenter;
-		middlePoint*=-1.;
-		middlePoint+=rotCenter;
 	}
 
-	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
-	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
-
-	sPainter.setLineWidth(1); // restore
+	sPainter.setLineWidth(oldLineWidth); // restore
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
 }
