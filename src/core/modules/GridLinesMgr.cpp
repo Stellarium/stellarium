@@ -848,27 +848,22 @@ void SkyLine::draw(StelCore *core) const
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
 		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
-		// Define short lines from "equator" a bit southwards
-		Vec3d part0(1,0,0);
+		// Define short lines from "equator" a bit "southwards"
+		Vec3d part0 = fpt;
 		Vec3d partAxis(0,1,0);
-		Vec3d partZAxis(0,0,1); // rotation axis for the 360 partitions
+		Vec3d partZAxis = sphericalCap.n; // rotation axis for the 360 partitions
 		if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 		{
-			partAxis.set(0,0,1);  // OK: 001
-			partZAxis.set(0,1,0); // OK: 010
+			partAxis.set(0,0,1);
 		}
 		else if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
 		{
 			part0.set(0,1,0);
 			partAxis.set(0,0,1);
-			partZAxis.set(1,0,0);
 		}
 		else if (line_type==LONGITUDE)
 		{
-			// TODO: Fix That!
-			part0=fpt;
-			partZAxis=sphericalCap.n;
-			partAxis.set(1,0,0); // ?? 101 and 010 makes oblique lines at the right place, 001 makes nothing.
+			partAxis=sphericalCap.n ^ part0;
 		}
 
 		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
