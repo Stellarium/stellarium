@@ -1311,7 +1311,7 @@ QString StelMainScriptAPI::getPlatformName(void)
 		os = "NetBSD";
 	else if (os.contains("OpenBSD", Qt::CaseInsensitive))
 		os = "OpenBSD";
-	else if (os.contains("linux", Qt::CaseInsensitive))
+	else if (os.contains("linux", Qt::CaseInsensitive) || QSysInfo::kernelType().contains("linux", Qt::CaseInsensitive))
 		os = "Linux";
 	else if (os.contains("windows", Qt::CaseInsensitive) || os.contains("winrt", Qt::CaseInsensitive))
 		os = "Windows";
