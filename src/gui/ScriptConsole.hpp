@@ -64,6 +64,7 @@ private:
 	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
 	bool useUserDir;
+	QString scriptFileName;
 
 	bool getFlagUserDir() { return useUserDir; }
 };

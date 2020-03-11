@@ -42,6 +42,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
 	, useUserDir(false)
+	, scriptFileName("")
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -129,12 +130,12 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
-	QFile file(fileName);
+	scriptFileName = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+	QFile file(scriptFileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
-		ui->includeEdit->setText(StelFileMgr::dirName(fileName));
+		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName));
 		file.close();
 	}
 	ui->tabs->setCurrentIndex(0);
@@ -147,8 +148,9 @@ void ScriptConsole::saveScript()
 		saveDir = StelFileMgr::getUserDir();
 
 	QString defaultFilter("(*.ssc)");
-	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
-	QFile file(fileName);
+	if (scriptFileName.isEmpty()) // Let's ask file name, when file is new and overwrite him in other case
+		scriptFileName = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+	QFile file(scriptFileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
@@ -163,7 +165,10 @@ void ScriptConsole::saveScript()
 void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
+	{
 		ui->scriptEdit->clear();
+		scriptFileName.clear(); // OK, it's a new file!
+	}
 	else if (ui->tabs->currentIndex() == 1)
 		ui->logBrowser->clear();
 	else if (ui->tabs->currentIndex() == 2)
