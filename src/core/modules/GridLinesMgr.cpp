@@ -884,22 +884,34 @@ void SkyLine::draw(StelCore *core) const
 
 				if (showLabel)
 				{
-					int value;
+					int value=i;
+					QString label;
 					switch (line_type) {
 						case HORIZON:
-							value=360-i;
+							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
 							break;
 						case MERIDIAN:
+						case COLURE_1:
+							if (i<90) value=-i;
+							else if (i>270) value=360-i;
+							else value=i-180;
+							break;
 						case PRIME_VERTICAL:
+						case COLURE_2:
+							if (i<90) value=i;
+							else if (i<270) value=180-i;
+							else value=i-360;
+							break;
 						case LONGITUDE:
-							// TODO: go from 0..90..0..-90..0.
+							value=( i<180 ? 90-i : i-270 );
+							break;
 						default:
-							value=i;
+							break;
 					}
-					QString s = QString("%1").arg((value)%360);
-					const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(s).width()) / 2.f;
+					label = QString("%1").arg(value);
+					const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
 					const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
-					sPainter.drawText(part30, s, 0, -shiftx, -shifty);
+					sPainter.drawText(part30, label, 0, -shiftx, -shifty);
 				}
 			}
 
