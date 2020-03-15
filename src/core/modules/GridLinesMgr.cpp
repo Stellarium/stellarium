@@ -885,8 +885,17 @@ void SkyLine::draw(StelCore *core) const
 				if (showLabel)
 				{
 					int value=i;
+					QString unit("°");
 					QString label;
 					switch (line_type) {
+						case EQUATOR_J2000:
+						case EQUATOR_OF_DATE:
+							if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+							{
+								value /= 15;
+								unit="h";
+							}
+							break;
 						case HORIZON:
 							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
 							break;
@@ -908,10 +917,10 @@ void SkyLine::draw(StelCore *core) const
 						default:
 							break;
 					}
-					label = QString("%1").arg(value);
+					label = QString("%1%2").arg(value).arg(unit);
 					const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
 					const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
-					sPainter.drawText(part30, label, 0, -shiftx, -shifty);
+					sPainter.drawText(part30, label, 0, -shiftx, -shifty, false);
 				}
 			}
 
