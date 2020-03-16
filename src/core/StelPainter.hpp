@@ -90,7 +90,7 @@ public:
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
 	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
 	//! @param xshift shift in pixel in the rotated x direction.

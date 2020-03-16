@@ -578,6 +578,8 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		draw3dModel(core,transfo,static_cast<float>(screenSz));
 	}
+	else
+		return; // End prematurely. This excludes bad comet tail in ortho projection!
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
