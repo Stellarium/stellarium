@@ -139,6 +139,7 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
 	virtual ~SkyLine();
+	static void init(); //! call once before creating the first line.
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	void setPartitions(bool visible) {showPartitions = visible;}
@@ -155,7 +156,7 @@ public:
 	int getLineThickness() const {return lineThickness;}
 	void setPartThickness(const int thickness) {partThickness = thickness;}
 	int getPartThickness() const {return partThickness;}
-	//! Re-translates the label.
+	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
 private:
 	QSharedPointer<Planet> earth, sun;
@@ -169,6 +170,7 @@ private:
 	int partThickness;
 	bool showPartitions;
 	bool showLabel;
+	static QMap<int, double> precessionPartitions;
 };
 
 // rms added color as parameter
@@ -643,6 +645,22 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 	updateLabel();
 }
 
+// Contains ecliptic rotations from -13000, -12900, ... , +13000
+QMap<int, double> SkyLine::precessionPartitions;
+
+//! call once before creating the first line.
+void SkyLine::init()
+{
+	// The years for the precession circles start in -13000, this is 15000 before J2000.
+	for (int y=-13000; y<=17000; y+=100) // Range of DE431. Maybe extend to -50000..+50000?
+	{
+		double jdY0, epsilonA, chiA, omegaA, psiA;
+		StelUtils::getJDFromDate(&jdY0, y, 1, 0, 0, 0, 0); // JD of Jan.0.
+		getPrecessionAnglesVondrak(jdY0, &epsilonA, &chiA, &omegaA, &psiA);
+		precessionPartitions.insert(y, psiA); // Store only the value of shift along the ecliptic.
+	}
+}
+
 SkyLine::~SkyLine()
 {
 }
@@ -812,6 +830,98 @@ void SkyLine::draw(StelCore *core) const
 			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		}
 
+		if (showPartitions && (line_type==PRECESSIONCIRCLE_N))
+		{
+			const float lineThickness=sPainter.getLineWidth();
+			sPainter.setLineWidth(partThickness);
+
+			// Find current value of node rotation.
+			double epsilonA, chiA, omegaA, psiA;
+			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+			Vec3d part0; // current pole point on the northern precession circle.
+			StelUtils::spheToRect(0., M_PI/2.-core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+			Vec3d partAxis(0,1,0);
+			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
+			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+
+			Vec3d pt0, ptTgt;
+			for (int y=-13000; y<13000; y+=100)
+			{
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+				if (y%1000 == 0)
+				{
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						QString label(QString::number(y));
+						const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
+						const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
+						sPainter.drawText(ptTgt, label, 0, -shiftx, -shifty, false);
+					}
+				}
+				else
+				{
+					ptTgt=(y%500 == 0 ? part500 : part100);
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				}
+			}
+
+			sPainter.setLineWidth(lineThickness);
+		}
+		// FIXME: Repeat for Southern circle.
+		if (showPartitions && (line_type==PRECESSIONCIRCLE_S))
+		{
+			const float lineThickness=sPainter.getLineWidth();
+			sPainter.setLineWidth(partThickness);
+
+			// Find current value of node rotation.
+			double epsilonA, chiA, omegaA, psiA;
+			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+			Vec3d part0; // current pole point on the northern precession circle.
+			StelUtils::spheToRect(0., -M_PI/2.+core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+			Vec3d partAxis(0,1,0);
+			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, -0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
+			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.45*M_PI/180));
+
+			Vec3d pt0, ptTgt;
+			for (int y=-13000; y<13000; y+=100)
+			{
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+				if (y%1000 == 0)
+				{
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						QString label(QString::number(y));
+						const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
+						const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
+						sPainter.drawText(ptTgt, label, 0, -shiftx, -shifty, false);
+					}
+				}
+				else
+				{
+					ptTgt=(y%500 == 0 ? part500 : part100);
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				}
+			}
+
+			sPainter.setLineWidth(lineThickness);
+		}
+
 		sPainter.setLineWidth(oldLineWidth); // restore line thickness
 		sPainter.setLineSmooth(false);
 		sPainter.setBlending(false);
@@ -850,7 +960,6 @@ void SkyLine::draw(StelCore *core) const
 	{
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
-		const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
 
 		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
 		// Define short lines from "equator" a bit "southwards"
@@ -972,10 +1081,6 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
-
-// 	// Johannes: use a big radius as a dirty workaround for the bug that the
-// 	// ecliptic line is not drawn around the observer, but around the sun:
-// 	const Vec3d vv(1000000,0,0);
 }
 
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
@@ -1242,6 +1347,7 @@ GridLinesMgr::GridLinesMgr()
 	: gridlinesDisplayed(true)
 {
 	setObjectName("GridLinesMgr");
+	SkyLine::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
