@@ -237,14 +237,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 {
 	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	const Vec4f tmpColor = d->sPainter->getColor();
-	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	d->sPainter->setColor(d->textColor);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
 	{
-		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
+		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h) to use
 		Vec3d tmpV;
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
 		double lon, lat, textAngle;
@@ -373,7 +373,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	}
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
-	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
+	d->sPainter->setColor(tmpColor);
 	d->sPainter->setBlending(true);
 }
 
@@ -848,34 +848,43 @@ void SkyLine::draw(StelCore *core) const
 			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
 			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
 			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+			Vec3d part1000l=part0; part1000l.transfo4d(Mat4d::rotation(partAxis, 0.475*M_PI/180)); // label
 
 			Vec3d pt0, ptTgt;
 			for (int y=-13000; y<13000; y+=100)
 			{
-				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+				const double tickAngle=M_PI_2+psiA-precessionPartitions.value(y, 0.);
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 				if (y%1000 == 0)
 				{
-					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					if (showLabel)
 					{
+						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						QString label(QString::number(y));
-						const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
-						const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
-						sPainter.drawText(ptTgt, label, 0, -shiftx, -shifty, false);
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(ptTgt, screenPosTgt);
+						prj->project(ptTgtL, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+
+						const float shiftx = 2.f;
+						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
 					}
 				}
 				else
 				{
 					ptTgt=(y%500 == 0 ? part500 : part100);
-					ptTgt.transfo4d(Mat4d::rotation(partZAxis, M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 				}
 			}
 
 			sPainter.setLineWidth(lineThickness);
 		}
-		// FIXME: Repeat for Southern circle.
 		if (showPartitions && (line_type==PRECESSIONCIRCLE_S))
 		{
 			const float lineThickness=sPainter.getLineWidth();
@@ -894,27 +903,37 @@ void SkyLine::draw(StelCore *core) const
 			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, -0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
 			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
 			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.45*M_PI/180));
+			Vec3d part1000l=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.475*M_PI/180)); // label
 
 			Vec3d pt0, ptTgt;
 			for (int y=-13000; y<13000; y+=100)
 			{
-				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+				const double tickAngle=-M_PI_2+psiA-precessionPartitions.value(y, 0.);
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 				if (y%1000 == 0)
 				{
-					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					if (showLabel)
 					{
+						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						QString label(QString::number(y));
-						const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
-						const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
-						sPainter.drawText(ptTgt, label, 0, -shiftx, -shifty, false);
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(ptTgt, screenPosTgt);
+						prj->project(ptTgtL, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+
+						const float shiftx = -5.f - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width());
+						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
 					}
 				}
 				else
 				{
 					ptTgt=(y%500 == 0 ? part500 : part100);
-					ptTgt.transfo4d(Mat4d::rotation(partZAxis, -M_PI_2+psiA-precessionPartitions.value(y, 0.)));
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 				}
 			}
