@@ -699,6 +699,12 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+void StelCore::setMatAltAzModelView(const Mat4d& mat)
+{
+	matAltAzModelView = mat;
+	invertMatAltAzModelView = matAltAzModelView.inverse();
+}
+
 Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
