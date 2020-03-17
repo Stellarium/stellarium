@@ -266,6 +266,8 @@ public:
 
 	//! Sets the line width. Default is 1.0f.
 	void setLineWidth(float width);
+	//! Gets the line width.
+	float getLineWidth() const {return glState.lineWidth;}
 
 	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
 	void setSaturation(float v) { saturation = v; }

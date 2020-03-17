@@ -754,7 +754,7 @@ QString localeDateString(const int year, const int month, const int day, const i
 			}
 			else if (frag == "yyyy")
 			{
-				int dispyear = (year >= 0 ? year : -1 * year);
+				int dispyear = abs(year);
 				if (year <  0)
 				{
 					out += QLatin1Char('-');
