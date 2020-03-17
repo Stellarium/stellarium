@@ -1003,6 +1003,7 @@ void SkyLine::draw(StelCore *core) const
 		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
 		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
 		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
+		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
 		for (int i=0; i<360; ++i)
 		{
@@ -1012,7 +1013,13 @@ void SkyLine::draw(StelCore *core) const
 
 				if (showLabel)
 				{
+					// we must adapt (rotate) some labels to observers on the southern hemisphere.
+					const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
 					int value=i;
+					float extraTextAngle=0.f;
+					// shiftx/y is OK for equator, horizon, ecliptic.
+					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
+					float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
 					QString unit("°");
 					QString label;
 					switch (line_type) {
@@ -1023,32 +1030,76 @@ void SkyLine::draw(StelCore *core) const
 								value /= 15;
 								unit="h";
 							}
+							extraTextAngle = southernHemi ? -90.f : 90.f;
+							if (southernHemi) shifty*=-0.25f;
 							break;
 						case HORIZON:
 							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
+							extraTextAngle=90.f;
 							break;
 						case MERIDIAN:
-						case COLURE_1:
-							if (i<90) value=-i;
-							else if (i>270) value=360-i;
-							else value=i-180;
+						case COLURE_1: // Equinoctial Colure
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							if (i<90) // South..Nadir | ARI0..CSP
+							{
+								value=-i;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else if (i>270) // Zenith..South | CNP..ARI0
+							{
+								value=360-i;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else // Nadir..North..Zenith | CSP..Equator:12h..CNP
+							{
+								value=i-180;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+							}
 							break;
 						case PRIME_VERTICAL:
-						case COLURE_2:
-							if (i<90) value=i;
-							else if (i<270) value=180-i;
-							else value=i-360;
+						case COLURE_2: // Solstitial Colure
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
+							{
+								value=i;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
+							{
+								value=180-i;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+							}
+							else // Nadir..East | CSP..Equator:6h
+							{
+								value=i-360;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
 							break;
 						case LONGITUDE:
 							value=( i<180 ? 90-i : i-270 );
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
 							break;
 						default:
+							extraTextAngle = southernHemi ? -90.f : 90.f;
+							if (southernHemi) shifty*=-0.25f;
 							break;
 					}
 					label = QString("%1%2").arg(value).arg(unit);
-					const float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) / 2.f;
-					const float shifty = static_cast<float>(sPainter.getFontMetrics().height()) / 2.f;
-					sPainter.drawText(part30, label, 0, -shiftx, -shifty, false);
+					Vec3d screenPosTgt, screenPosTgtL;
+					prj->project(part30, screenPosTgt);
+					prj->project(part30l, screenPosTgtL);
+					double dx=screenPosTgtL[0]-screenPosTgt[0];
+					double dy=screenPosTgtL[1]-screenPosTgt[1];
+					float textAngle=static_cast<float>(atan2(dy,dx));
+					sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
 				}
 			}
 
@@ -1063,6 +1114,7 @@ void SkyLine::draw(StelCore *core) const
 			part5.transfo4d(rotZ1);
 			part10.transfo4d(rotZ1);
 			part30.transfo4d(rotZ1);
+			part30l.transfo4d(rotZ1);
 		}
 		sPainter.setLineWidth(lineThickness);
 	}
