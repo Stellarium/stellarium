@@ -31,6 +31,7 @@ class Ui_obsListCreateEditDialogForm;
 
 struct observingListItem {
     QString name;
+    QString nameI18n;
     QString type;
     QString ra;
     QString dec;
@@ -39,7 +40,7 @@ struct observingListItem {
     QString jd;
     QString location;
     double fov;
-    bool isVVisibleMarker;
+    bool isVisibleMarker;
 };
 Q_DECLARE_METATYPE(observingListItem)
 
@@ -67,6 +68,7 @@ private:
     enum ObsListColumns {
         ColumnUUID,	//! UUID of object
         ColumnName,	//! Name or designation of object
+        ColumnNameI18n,	//! Localized name of object
         ColumnType, //! Type of the object
         ColumnRa,	//! Right ascencion of the object
         ColumnDec,	//! Declination of the object
@@ -78,9 +80,11 @@ private:
     };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
+    class StelObjectMgr* objectMgr;
     std::string listName_;
     static constexpr char const * jsonFileName = "observingList.json";
     QString observingListJsonPath;
+    QHash<QString, observingListItem> observingListItemCollection;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
@@ -94,7 +98,10 @@ private:
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
-    void addModelRow(int number, QString uuid, QString name, QString type, QString ra, QString dec, QString magnitude, QString constellation);
+    void addModelRow(int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation);
+    
+    //! Save the object informations into json file
+    void saveObservedObject();
 
     //Private constructor and destructor
     ObsListCreateEditDialog (std::string listName );

@@ -18,8 +18,15 @@
  */
 
 #include <StelTranslator.hpp>
+#include <QUuid>
 
+#include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "NebulaMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
 
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
@@ -40,6 +47,7 @@ ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
 
     ui = new Ui_obsListCreateEditDialogForm();
     core = StelApp::getInstance().getCore();
+    objectMgr = GETSTELMODULE ( StelObjectMgr );
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( jsonFileName );
 
@@ -141,7 +149,7 @@ void ObsListCreateEditDialog::setObservingListHeaderNames()
 /*
  * Add row in the obsListListModel
 */
-void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString name, QString type, QString ra, QString dec, QString magnitude, QString constellation )
+void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation )
 {
     QStandardItem* item = Q_NULLPTR;
 
@@ -152,6 +160,10 @@ void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString na
     item = new QStandardItem ( name );
     item->setEditable ( false );
     obsListListModel->setItem ( number, ColumnName, item );
+
+    item = new QStandardItem ( nameI18n );
+    item->setEditable ( false );
+    obsListListModel->setItem ( number, ColumnNameI18n, item );
 
     item = new QStandardItem ( type );
     item->setEditable ( false );
@@ -184,8 +196,118 @@ void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString na
 */
 void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 {
+    const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
+    if ( !selectedObject.isEmpty() ) {
+
+        int lastRow = obsListListModel->rowCount();
+        QString objectUuid = QUuid::createUuid().toString();
+
+        QString objectName = selectedObject[0]->getEnglishName();
+        QString objectNameI18n = selectedObject[0]->getNameI18n();
+        if ( selectedObject[0]->getType() =="Nebula" ) {
+            objectName = GETSTELMODULE ( NebulaMgr )->getLatestSelectedDSODesignation();
+        }
+
+        QString objectRaStr = "", objectDecStr = "";
+        bool visibleFlag = false;
+        double fov = -1.0;
+
+
+        QString objectType = selectedObject[0]->getType();
+        if ( objectName.isEmpty() || objectType =="CustomObject" ) {
+            float ra, dec;
+            StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
+            objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
+            objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
+            if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
+                visibleFlag = true;
+            }
+
+            if ( objectName.isEmpty() ) {
+                objectName = QString ( "%1, %2" ).arg ( objectRaStr, objectDecStr );
+                objectNameI18n = q_ ( "Unnamed object" );
+                fov = GETSTELMODULE ( StelMovementMgr )->getCurrentFov();
+            }
+
+        }
+
+
+
+
+        float objectMagnitude = selectedObject[0]->getVMagnitude ( core );
+        QString objectMagnitudeStr = QString::number ( objectMagnitude );
+
+        QVariantMap objectMap = selectedObject[0]->getInfoMap ( core );
+        QVariant objectConstellationVariant = objectMap["iauConstellation"];
+        QString objectConstellation ( "unknown" );
+        if ( objectConstellationVariant.canConvert<QString>() ) {
+            objectConstellation = objectConstellationVariant.value<QString>();
+        }
+
+        QString JDs = "";
+        double JD = -1.;
+        JD = core->getJD();
+        JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+
+        QString Location = "";
+        StelLocation loc = core->getCurrentLocation();
+        if ( loc.name.isEmpty() ) {
+            Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+        } else {
+            Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+        }
+
+        addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
+
+        observingListItem item;
+        item.name = objectName;
+        item.nameI18n = objectNameI18n;
+        if ( !objectType.isEmpty() ) {
+            item.type = objectType;
+        }
+        if (!objectRaStr.isEmpty()){
+            item.ra = objectRaStr;
+        }
+        if(!objectDecStr.isEmpty()){
+            item.dec = objectDecStr;
+        }
+        if(!objectMagnitudeStr.isEmpty()){
+            item.magnitude = objectMagnitudeStr;
+        }
+        if(!objectConstellation.isEmpty()){
+            item.constellation = objectMagnitudeStr;
+        }
+        if(!JDs.isEmpty()){
+            item.jd = JDs;
+        }
+        if(!Location.isEmpty()){
+            item.location = Location;
+        }
+        if (!visibleFlag){
+            item.isVisibleMarker = visibleFlag;
+        }
+		if (fov > 0.0) {
+            item.fov = fov;
+        }
+        
+        observingListItemCollection.insert(objectUuid,item);
+        
+        //TODO saveObservedObject()
+			
+    } else {
+        qWarning() << "selected object is empty !";
+    }
+}
+
+
+/*
+ * Save observed object into json file
+*/
+void ObsListCreateEditDialog::saveObservedObject()
+{
     //TODO
 }
+
 
 /*
  * Slot for button obsListRemoveObjectButton
@@ -216,7 +338,8 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 */
 void ObsListCreateEditDialog::obsListSaveButtonPressed()
 {
-    //TODO
+    // generat the uuid of the list
+    const QString uuidList = QUuid::createUuid().toString();
 }
 
 /*
