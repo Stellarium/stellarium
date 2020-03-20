@@ -28,6 +28,9 @@ class TestComparisons : public QObject
 Q_OBJECT
 private slots:
 	void testVersions();
+	void testOSReports();
+	void testUAReports();
+	void testAppName();
 };
 
 #endif // _TESTCOMPARISONS_HPP

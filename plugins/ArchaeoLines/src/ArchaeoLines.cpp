@@ -1455,7 +1455,6 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
 		}
-
 	}
 
 	sPainter.setLineWidth(oldLineWidth); // restore
