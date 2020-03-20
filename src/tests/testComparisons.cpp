@@ -51,3 +51,17 @@ void TestComparisons::testVersions()
 	}
 }
 
+void TestComparisons::testOSReports()
+{
+	QVERIFY2(!StelUtils::getOperatingSystemInfo().isEmpty(), "Oops... No operating system info exist!");
+}
+
+void TestComparisons::testUAReports()
+{
+	QVERIFY2(StelUtils::getUserAgentString().contains("Stellarium", Qt::CaseInsensitive), "Oops... No user agent info exist!");
+}
+
+void TestComparisons::testAppName()
+{
+	QVERIFY2(StelUtils::getApplicationName().contains("Stellarium", Qt::CaseInsensitive), "Oops... No application name exist!");
+}

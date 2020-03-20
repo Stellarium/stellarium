@@ -695,9 +695,9 @@ void TestDeltaT::testDeltaTByMontenbruckPfleger()
 	// test data taken from book  "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000), p. 42
 
 	QVariantList data;
-
-	data << 1900 <<  -2.72;
-	data << 1905 <<   3.86;
+	data << 1820 <<  0.00; // zero outside the valid range
+	data << 1900 << -2.72;
+	data << 1905 <<  3.86;
 	data << 1910 << 10.46;
 	data << 1915 << 17.20;
 	data << 1920 << 21.16;
@@ -717,6 +717,7 @@ void TestDeltaT::testDeltaTByMontenbruckPfleger()
 	data << 1990 << 56.86;
 	data << 1995 << 60.82;
 	//data << 2000 << 63.83; // NOTE: ???
+	data << 2010 <<  0.00; // zero outside the valid range
 
 	while(data.count() >= 2)
 	{
