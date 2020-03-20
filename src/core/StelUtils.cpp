@@ -1200,7 +1200,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double y = getDecYear(year, month, day);
+	double y = yearFraction(year, month, day);
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
@@ -1383,7 +1383,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	// Limited years!
 	year=qBound(-391, year, 1600);
 
-	double u = (getDecYear(year, month, day)-1800)/100;
+	double u = (yearFraction(year, month, day)-1800)/100;
 
 	if (-391 < year && year <= 948)
 		deltaT = (44.3*u +320.0)*u +1360.0;
@@ -1523,7 +1523,7 @@ double getDeltaTByChaprontMeeus(const double jDay)
 	//        deltaT= (((((((( 58353.42*u19 -232424.66)*u19 +372919.88)*u19 - 303191.19)*u19 + 124906.15)*u19 - 18756.33)*u19 - 2637.80)*u19 + 815.20)*u19 + 87.24)*u19 - 2.44;
 	else if (year <2000)
 	{
-		double yeardec=getDecYear(year, month, day);
+		double yeardec=yearFraction(year, month, day);
 		int pos=(year-1620)/2; // this is a deliberate integer division! 2->1, 3->1, 4->2, 5->2 etc.
 		deltaT= MeeusDeltaTTable[pos]+ (yeardec-(2*pos+1620))*0.5  *(MeeusDeltaTTable[pos+1]-MeeusDeltaTTable[pos]);
 		deltaT /= 10.0;
@@ -1937,7 +1937,7 @@ double getMoonSecularAcceleration(const double jDay, const double nd, const bool
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double t = (getDecYear(year, month, day)-1955.5)/100.0;
+	double t = (yearFraction(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
 	double ephND = -23.8946;
@@ -2158,7 +2158,7 @@ double getMoonFluctuation(const double jDay)
 	int year, month, day, index;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double t = getDecYear(year, month, day);
+	double t = yearFraction(year, month, day);
 	if (t>=1681.0 && t<=1936.5) {
 		index = qRound(std::floor((t - 1681.0)*10));
 		f = MoonFluctuationTable[index]*0.07; // Get interpolated data and convert to seconds of time
@@ -2263,11 +2263,6 @@ float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const
 		cos_sin += 2;
 	}
 	return cos_sin_rho;
-}
-
-double getDecYear(const int year, const int month, const int day)
-{
-	return year+((month-1)*30.5+day/31.*30.5)/366;
 }
 
 int getFixedFromGregorian(const int year, const int month, const int day)

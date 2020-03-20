@@ -1950,7 +1950,7 @@ double StelCore::computeDeltaT(const double JD)
 		deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 		int year, month, day;
 		StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-		double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100.;
+		double u = (StelUtils::yearFraction(year,month,day)-getDeltaTCustomYear())/100.;
 		DeltaT = deltaTCustomEquationCoeff[0] + u*(deltaTCustomEquationCoeff[1] + u*deltaTCustomEquationCoeff[2]);
 	}
 
