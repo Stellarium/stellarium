@@ -42,6 +42,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
 	, useUserDir(false)
+	, scriptFileName("")
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -129,15 +130,12 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR,
-							q_("Load Script"),
-							openDir,
-							filter);
-	QFile file(fileName);
+	scriptFileName = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+	QFile file(scriptFileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
-		ui->includeEdit->setText(StelFileMgr::dirName(fileName));
+		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName));
 		file.close();
 	}
 	ui->tabs->setCurrentIndex(0);
@@ -150,12 +148,9 @@ void ScriptConsole::saveScript()
 		saveDir = StelFileMgr::getUserDir();
 
 	QString defaultFilter("(*.ssc)");
-	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save Script"),
-							saveDir + "/myscript.ssc",
-							getFileMask(),
-							&defaultFilter);
-	QFile file(fileName);
+	if (scriptFileName.isEmpty()) // Let's ask file name, when file is new and overwrite him in other case
+		scriptFileName = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+	QFile file(scriptFileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
@@ -164,13 +159,16 @@ void ScriptConsole::saveScript()
 		file.close();
 	}
 	else
-		qWarning() << "ERROR - cannot write script file";
+		qWarning() << "[ScriptConsole] ERROR - cannot write script file";
 }
 
 void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
+	{
 		ui->scriptEdit->clear();
+		scriptFileName.clear(); // OK, it's a new file!
+	}
 	else if (ui->tabs->currentIndex() == 1)
 		ui->logBrowser->clear();
 	else if (ui->tabs->currentIndex() == 2)
@@ -179,18 +177,17 @@ void ScriptConsole::clearButtonPressed()
 
 void ScriptConsole::preprocessScript()
 {
-	qDebug() << "ScriptConsole::preprocessScript";
 	//perform pre-processing without an intermediate temp file
 	QString dest;
 	QString src = ui->scriptEdit->toPlainText();
 
 	if (sender() == ui->preprocessSSCButton)
 	{
-		qDebug() << "Preprocessing with SSC proprocessor";
+		qDebug() << "[ScriptConsole] Preprocessing with SSC proprocessor";
 		StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
 	}
 	else
-		qWarning() << "WARNING: unknown preprocessor type";
+		qWarning() << "[ScriptConsole] WARNING - unknown preprocessor type";
 
 	ui->scriptEdit->setPlainText(dest);
 	ui->tabs->setCurrentIndex(0);
@@ -205,7 +202,7 @@ void ScriptConsole::runScript()
 	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script");
-		qWarning() << "ScriptConsole::runScript " + msg;
+		qWarning() << "[ScriptConsole] " + msg;
 		appendLogLine(msg);
 		return;
 	}
@@ -255,42 +252,38 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR,
-								   q_("Select Script Include Directory"),
-	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts"));
 }
 
 void ScriptConsole::quickRun(int idx)
 {
-	ui->quickrunCombo->setCurrentIndex(0);
-	QString scriptText;
-	if (idx==1)
-	{
-		scriptText = QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText();
-		qDebug() << "selected script text is:" << scriptText; 
-	}
-	if (idx==2)
-	{
-		scriptText = "LabelMgr.deleteAllLabels();\n";
-	}
-	if (idx==3)
-	{
-		scriptText = "ScreenImageMgr.deleteAllImages()\n";
-	}
-	if (idx==4)
-	{
-		scriptText = "core.clear(\"natural\");\n";
-	}
-	if (idx==5)
-	{
-		scriptText = "core.clear(\"starchart\");\n";
-	}
-
-	if (scriptText.isEmpty())
+	if (idx==0)
 		return;
 
-	appendLogLine(QString("Running: %1").arg(scriptText));
-	StelApp::getInstance().getScriptMgr().runScriptDirect(scriptText);
+	QString scriptText;
+	switch (idx) {
+		case 2:
+			scriptText = "LabelMgr.deleteAllLabels();\n";
+			break;
+		case 3:
+			scriptText = "ScreenImageMgr.deleteAllImages()\n";
+			break;
+		case 4:
+			scriptText = "core.clear(\"natural\");\n";
+			break;
+		case 5:
+			scriptText = "core.clear(\"starchart\");\n";
+			break;
+		default:
+			scriptText = QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText();
+	}
+
+	if (!scriptText.isEmpty())
+	{
+		appendLogLine(QString("Running: %1").arg(scriptText));
+		StelApp::getInstance().getScriptMgr().runScriptDirect(scriptText);
+		ui->quickrunCombo->setCurrentIndex(0);
+	}
 }
 
 void ScriptConsole::rowColumnChanged()
@@ -300,10 +293,8 @@ void ScriptConsole::rowColumnChanged()
 	// TRANSLATORS: The first letter of word "Column"
 	QString column = qc_("C", "text cursor");
 	ui->rowColumnLabel->setText(QString("%1:%2 %3:%4")
-				    .arg(row)
-				    .arg(ui->scriptEdit->textCursor().blockNumber())
-				    .arg(column)
-				    .arg(ui->scriptEdit->textCursor().columnNumber()));
+				    .arg(row).arg(ui->scriptEdit->textCursor().blockNumber())
+				    .arg(column).arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
 const QString ScriptConsole::getFileMask()

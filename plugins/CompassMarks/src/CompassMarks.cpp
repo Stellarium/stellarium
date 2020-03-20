@@ -126,9 +126,7 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	int f = 0;
-	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
-		f = 180;
+	const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
 
 	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
 	painter.setBlending(true);

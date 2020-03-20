@@ -188,6 +188,8 @@ NGC  1554            _("Struve's Nebula") # SIMBAD
 NGC  1554            _("Hind's Variable Nebula") # PSA
 NGC  1555            _("Hind's Variable Nebula") # SIMBAD, BCH, DWH, WSO, PSA
 NGC  1555            _("Hind's Nebula") # SIMBAD
+NGC  1566            _("Doradus Cluster") # SIMBAD
+NGC  1566            _("NGC 1566 Group") # SIMBAD
 NGC  1579            _("Northern Trifid Nebula") # DSW, SD
 NGC  1595            _("Carafe Group")
 NGC  1598            _("Carafe Group")
@@ -541,7 +543,8 @@ NGC  5904            _("Rose Cluster") # B500
 NGC  5906            _("Splinter Galaxy") # WSG, DSW, SD, DN
 NGC  5906            _("Cat Scratch Galaxy") # B500, SD
 NGC  5906            _("Knife Edge Galaxy") # B500, SD
-NGC  6027            _("Seyfert's Sextet") # NED, WSG
+NGC  6027            _("Seyfert's Sextet") # NED, WSG, SIMBAD
+NGC  6027            _("Seyfert's Quintet") # SIMBAD
 NGC  6027            _("Serpens Sextet")
 NGC  6087            _("S Nor Cluster") # SIMBAD, SG, CSOG-MSC
 NGC  6121            _("Crab Globular Cluster") # B500
@@ -666,6 +669,7 @@ NGC  6853            _("Diabolo Nebula") # SIMBAD
 NGC  6853            _("Apple Core Nebula") # ???
 NGC  6866            _("Kite Cluster") # B500, SIMBAD, CSOG-MSC
 NGC  6866            _("Frigate (Pirate) Bird Cluster") # HT
+NGC  6868            _("Telescopium Cluster") # SIMBAD
 NGC  6872            _("Condor Galaxy") # APOD
 NGC  6885            _("20 Vulpeculae Cluster")
 NGC  6888            _("Crescent Nebula") # SIMBAD, DSW, BCH, WSO, PSA, CC, DN
@@ -873,6 +877,7 @@ B    143             _("Triple Cave Nebula") # PSA
 B    143             _("Barnard's E Nebula") # BH
 B    144             _("Fish on the platter nebula")
 B    168             _("Cocoon Nebula") # DN
+B    218             _("Northern Streamer") # SIMBAD
 B    228             _("Dark Wolf Nebula") # APOD
 C    41              _("Hyades") # WK, BCH, DWH, PSA, BH, CCG, CSOG-MSC
 C    99              _("Coalsack Nebula") # WK, PSA
@@ -949,6 +954,7 @@ LDN  906             _("Northern Coalsack Nebula") # ST1, HT, PSA
 LDN  935             _("Gulf of Mexico Nebula")
 LDN  1235            _("Dark Shark Nebula") # WK
 LDN  1382            _("Pazmino's Cluster") # SBSX
+LDN  1529            _("Kutner's Cloud") # SIMBAD
 LDN  1613            _("Cone Nebula") # DSW
 PGC  120             _("Taffy Galaxies")
 PGC  120             _("Taffy System") # SIMBAD
@@ -1032,8 +1038,10 @@ PGC  42102           _("Malin 1") # NED
 PGC  42911           _("Centaurus Chain") # WSG
 PGC  43345           _("Shapley-Ames 3") # NED
 PGC  44014           _("Shapley-Ames 4") # NED
+PGC  44750           _("X Comae Galaxy") # SIMBAD
 PGC  44491           _("Imprint of a Foot Galaxy") # NED
 PGC  45901           _("Hardcastle's Galaxy") # NED, SIMBAD
+PGC  45901           _("Hardcastle Nebula") # SIMBAD
 PGC  45927           _("Holmberg VIII") # WSG
 PGC  47847           _("Fourcade-Figueroa Object") # NED, SIMBAD
 PGC  47847           _("Fourcade-Figueroa Galaxy") # NED, SIMBAD
@@ -1042,14 +1050,17 @@ PGC  49448           _("Holmberg IV") # WSG
 PGC  49560           _("The Dentist's Chair") # SIMBAD
 PGC  50779           _("Circinus Galaxy") # NED, SIMBAD
 PGC  52283           _("Segner's Wheel") # SIMBAD
-PGC  54074           _("Ursa Minor Dwarf Galaxy") # NED
-PGC  54559           _("Hoag's Object") # WSG
+PGC  54074           _("Ursa Minor Dwarf Galaxy") # NED, SIMBAD
+PGC  54559           _("Hoag's Object") # WSG, SIMBAD
 PGC  54817           _("Hooked Galaxy")
 PGC  58985           _("Kathryn's Wheel") # SIMBAD
 PGC  59061           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59085           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59102           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59117           _("Hercules A") # NED
+PGC  59858           _("Goldfish Galaxy") # SIMBAD
+PGC  59867           _("Beaver Galaxy") # SIMBAD
+PGC  59953           _("Bean Galaxy") # SIMBAD
 PGC  60095           _("Draco Dwarf Galaxy") # NED, SIMBAD
 PGC  62946           _("The Bird") # SIMBAD
 PGC  63287           _("Sagittarius Dwarf Galaxy") # NED
@@ -1058,8 +1069,10 @@ PGC  65367           _("Aquarius Dwarf Galaxy") # NED, DSNI
 PGC  63932           _("Cygnus A") # NED, SIMBAD
 PGC  64180           _("McLeish's Object") # NED, SIMBAD
 PGC  66669           _("Shapley-Ames 6") # NED
+PGC  69018           _("Kinman Dwarf Galaxy") # SIMBAD
 PGC  69457           _("Huchra's Lens") # SIMBAD
-PGC  69519           _("Tucana Dwarf Galaxy")
+PGC  69519           _("Tucana Dwarf Galaxy") # SIMBAD
+PGC  69877           _("South America Galaxy") # SIMBAD
 PGC  71538           _("Pegasus Dwarf Galaxy") # NED
 PGC  71938           _("Barbon's Galaxy") # NED, DSNI
 PGC  73957           _("Minkowski's Object") # NED, SIMBAD
@@ -1076,15 +1089,20 @@ PGC  139235          _("Sextans Ring")
 PGC  139235          _("Ring Galaxy in Sextans")
 PGC  166082          _("Camelopardalis A") # WSG
 PGC  166084          _("Camelopardalis B") # WSG
+PGC  1694462         _("Beetle Galaxy") # SIMBAD
 PGC  2807155         _("Cassiopeia Dwarf Spheroidal Galaxy") # SIMBAD
 PGC  2807155         _("Andromeda VII") # SIMBAD
 PGC  2807158         _("Pegasus Dwarf Galaxy")
 PGC  2807158         _("Pegasus II")
 PGC  2807158         _("Andromeda VI")
+PGC  2822840         _("Dragonfly Galaxy") # SIMBAD
+PGC  2826829         _("Spiderweb Galaxy") # SIMBAD
 PGC  3074547         _("Boomerang Nebula") # SIMBAD, DSNI
 PGC  3074547         _("Centaurus Bipolar Nebula") # SIMBAD
 PGC  3097690         _("Cepheus I")
 PGC  3097691         _("Cetus Dwarf Galaxy") # SIMBAD
+PGC  3098124         _("Grasshopper B") # SIMBAD
+UGC  2489            _("Zwicky's Nonet") # SIMBAD
 UGC  3087            _("BW Tauri")
 UGC  4881            _("The Grasshopper Galaxy") # ST2
 UGC  5364            _("Leo A") # NED, SIMBAD
@@ -1122,10 +1140,13 @@ PK   331-12.1        _("Stingray Nebula") # WP, SIMBAD
 PK   340-03.1        _("Water Lily Nebula") # SIMBAD
 PNG  010.4+04.4      _("Sakurai's Object") # SIMBAD
 PNG  054.2-03.4      _("Necklace Nebula") # HST
+PNG  126.6+01.3      _("Principes de Asturias Nebula") # SIMBAD
+PNG  250.4-01.3      _("Manzana") # SIMBAD
 PNG  353.8+02.9      _("Cotton Candy Nebula") # SIMBAD
 ACO  151             _("Haufen A") # WSG
 ACO  194             _("Cetus Cluster") # WSO
 ACO  426             _("Perseus Cluster") # NED, WP, DWH, WSO, WSG
+ACO  407             _("Zwicky's Nonet") # SIMBAD
 ACO  520             _("Train Wreck Cluster") # WP
 ACO  780             _("Hydra A") # NED
 ACO  1060            _("Hydra Cluster") # NED, WP, WSO
@@ -1136,11 +1157,13 @@ ACO  1656            _("Coma Cluster") # NED, WP, WSO, WSG
 ACO  1930            _("Bootes Cluster") # DSNI
 ACO  2065            _("Corona Borealis Cluster") # WP, DWH, WSG
 ACO  2151            _("Hercules Cluster") # NED, WP, WSO, WSG
+ACO  2218            _("KESR Galaxy") # SIMBAD
 ACO  2744            _("Pandora’s Cluster") # WP
 ACO  3526            _("Centaurus Cluster") # NED, WP, WSO, WSG
 ACO  3558            _("Shapley 8 Cluster") # NED, WP
 ACO  3627            _("Norma Cluster") # NED, WP
 ACO  3627            _("Great Attractor") # WSG
+ACO  3742            _("Indus Cluster") # SIMBAD
 ACO  S373            _("Fornax Cluster") # NED, WP, BCH, WSO, WSG
 ACO  S737            _("Fornax Group") # SIMBAD
 ACO  S737            _("NGC 1399 Group") # WP, SIMBAD
@@ -1161,11 +1184,21 @@ ESO  252-18A         _("Pictor A") # SIMBAD
 ESO  277-12          _("Ara Cluster") # SIMBAD
 ESO  333-16          _("Tonantzintla 2") # SIMBAD
 ESO  600-11          _("Capricorn Dwarf Galaxy") # SIMBAD
+SNRG 005.3-01.0      _("Duck Redux") # SIMBAD
+SNRG 005.3-01.0      _("Bird") # SIMBAD
 SNRG 039.7-02.0      _("Manatee Nebula") # WP
 SNRG 111.7-02.1      _("Cassiopeia A") # WP
 SNRG 120.2+01.4      _("Tycho's supernova remnant") # WP
+SNRG 194.7+00.4      _("Origem Loop") # SIMBAD
+SNRG 201.1+08.3      _("Monogem Ring") # SIMBAD
+SNRG 205.0+00.5      _("Monoceros Nebula") # SIMBAD
+SNRG 205.0+00.5      _("Monoceros Loop") # SIMBAD
 SNRG 260.4-03.4      _("Puppis A") # WP
 SNRG 266.2-01.2      _("Vela Junior") # WP
+SNRG 315.9-00.0      _("Frying Pan") # SIMBAD
+SNRG 330.0+15.0      _("Lupus Loop") # SIMBAD
+SNRG 357.7-00.1      _("Tornado Nebula") # SIMBAD
+SNRG 357.7+00.3      _("Square Nebula") # SIMBAD
 DWB  26              _("Rosette Nebula") # DWB
 DWB  63              _("γ Cyg Nebula") # DWB
 DWB  64              _("Inverted Horseshoe Nebula") # DWB
@@ -1174,7 +1207,8 @@ DWB  111             _("Propeller Nebula") # WK
      18              _("Calabash Nebula") # WP
      18              _("Rotten Egg Nebula") # WP
      19              _("Frosty Leo Nebula")
-     20              _("Gomez's Hamburger")
+     20              _("Gomez's Hamburger") # SIMBAD
+     20              _("Gomez Nebula") # SIMBAD
      21              _("Footprint Nebula") # PSA
      21              _("Minkowski's Footprint") # DSW
      22              _("Sagittarius A East")

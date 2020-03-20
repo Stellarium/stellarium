@@ -818,13 +818,6 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
-	//! Compute date in decimal year format
-	//! @param year
-	//! @param month
-	//! @param day
-	//! @return decimal year
-	double getDecYear(const int year, const int month, const int day);
-
 	//! Calculate fixed days (R.D.) from Gregorian date
 	//! @param year
 	//! @param month

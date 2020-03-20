@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2020 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,34 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTDATES_HPP
-#define TESTDATES_HPP
+#ifndef TESTCOMPARISONS_HPP
+#define TESTCOMPARISONS_HPP
 
 #include <QObject>
 #include <QtTest>
 
-class TestDates : public QObject
+class TestComparisons : public QObject
 {
 Q_OBJECT
 private slots:
-	void dateRoundTrip();
-	void formatting();
-	void testRolloverAndValidity();
-	void testJulianDays();
-	void testLeapYears();
-	void testNumberOfDaysInMonthInYear();
-	void testFixedFromGregorian();
-	void testWeekdays();
-	void testDatesFromJD();
-	void benchmarkOldGetDateFromJulianDay();
-	void benchmarkGetDateFromJulianDayFloatingPoint();
-	void benchmarkGetDateFromJulianDay();
-	void benchmarkOldGetJDFromDate();
-	void benchmarkGetJDFromDate();
-
-private:
-	void testJulianDaysRange(int jd_first, int jd_last);
+	void testVersions();
 };
 
-#endif // _TESTDATES_HPP
+#endif // _TESTCOMPARISONS_HPP
 

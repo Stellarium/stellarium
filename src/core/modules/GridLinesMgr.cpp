@@ -55,7 +55,7 @@ public:
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	bool isDisplayed(void) const {return fader;}
+	bool isDisplayed() const {return fader;}
 	void setLineThickness(const int thickness) {lineThickness = thickness;}
 	int getLineThickness() const {return lineThickness;}
 private:
@@ -96,7 +96,7 @@ public:
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	bool isDisplayed(void) const {return fader;}
+	bool isDisplayed() const {return fader;}
 	void setFontSize(int newSize);
 	//! Re-translates the label.
 	void updateLabel();
@@ -139,17 +139,24 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
 	virtual ~SkyLine();
+	static void init(); //! call once before creating the first line.
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
+	void setPartitions(bool visible) {showPartitions = visible;}
+	bool showsPartitions() const {return showPartitions;}
 	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	bool isDisplayed(void) const {return fader;}
+	bool isDisplayed() const {return fader;}
+	void setLabeled(const bool displayed){showLabel = displayed;}
+	bool isLabeled() const {return showLabel;}
 	void setFontSize(int newSize);
 	void setLineThickness(const int thickness) {lineThickness = thickness;}
 	int getLineThickness() const {return lineThickness;}
-	//! Re-translates the label.
+	void setPartThickness(const int thickness) {partThickness = thickness;}
+	int getPartThickness() const {return partThickness;}
+	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
 private:
 	QSharedPointer<Planet> earth, sun;
@@ -160,6 +167,10 @@ private:
 	QFont font;
 	QString label;
 	int lineThickness;
+	int partThickness;
+	bool showPartitions;
+	bool showLabel;
+	static QMap<int, double> precessionPartitions;
 };
 
 // rms added color as parameter
@@ -226,14 +237,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 {
 	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	const Vec4f tmpColor = d->sPainter->getColor();
-	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	d->sPainter->setColor(d->textColor);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
 	{
-		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
+		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h) to use
 		Vec3d tmpV;
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
 		double lon, lat, textAngle;
@@ -362,7 +373,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	}
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
-	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
+	d->sPainter->setColor(tmpColor);
 	d->sPainter->setBlending(true);
 }
 
@@ -623,7 +634,7 @@ void SkyGrid::draw(const StelCore* core) const
 	sPainter.setLineSmooth(false);
 }
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true), showLabel(true)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -632,6 +643,22 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
 	updateLabel();
+}
+
+// Contains ecliptic rotations from -13000, -12900, ... , +13000
+QMap<int, double> SkyLine::precessionPartitions;
+
+//! call once before creating the first line.
+void SkyLine::init()
+{
+	// The years for the precession circles start in -13000, this is 15000 before J2000.
+	for (int y=-13000; y<=17000; y+=100) // Range of DE431. Maybe extend to -50000..+50000?
+	{
+		double jdY0, epsilonA, chiA, omegaA, psiA;
+		StelUtils::getJDFromDate(&jdY0, y, 1, 0, 0, 0, 0); // JD of Jan.0.
+		getPrecessionAnglesVondrak(jdY0, &epsilonA, &chiA, &omegaA, &psiA);
+		precessionPartitions.insert(y, psiA); // Store only the value of shift along the ecliptic.
+	}
 }
 
 SkyLine::~SkyLine()
@@ -723,18 +750,15 @@ void SkyLine::draw(StelCore *core) const
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
-	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
+	sPainter.setColor(color, fader.getInterstate());
 	sPainter.setBlending(true);
-	if (lineThickness>1)
-		sPainter.setLineWidth(lineThickness); // set line thickness
+	const float oldLineWidth=sPainter.getLineWidth();
+	sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
-
-	Vec4f textColor(color[0], color[1], color[2], 0);		
-	textColor[3]=fader.getInterstate();
 
 	ViewportEdgeIntersectCallbackData userData(&sPainter);	
 	sPainter.setFont(font);
-	userData.textColor = textColor;	
+	userData.textColor = Vec4f(color, fader.getInterstate());
 	userData.text = label;
 	/////////////////////////////////////////////////
 	// Draw the line
@@ -742,6 +766,7 @@ void SkyLine::draw(StelCore *core) const
 	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
 	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 	{
+		// TODO: partitions, at least for precession. (mark millennia!)
 		double lat;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
@@ -751,8 +776,12 @@ void SkyLine::draw(StelCore *core) const
 		{
 			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI_180);
 			if (obsLatRad == 0.)
+			{
+				sPainter.setLineWidth(oldLineWidth); // restore painter state
+				sPainter.setLineSmooth(false);
+				sPainter.setBlending(false);
 				return;
-
+			}
 			if (line_type==CIRCUMPOLARCIRCLE_N)
 				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI_2);
 			else // southern circle
@@ -782,30 +811,137 @@ void SkyLine::draw(StelCore *core) const
 				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
 				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
 			}
-
-			if (lineThickness>1)
-				sPainter.setLineWidth(1); // reset tickness of line
-			sPainter.setLineSmooth(false);
-			sPainter.setBlending(false);
-			return;
 		}
-		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
-		middlePoint.normalize();
-		middlePoint*=(p1-rotCenter).length();
-		middlePoint+=rotCenter;
-		if (!viewPortSphericalCap.contains(middlePoint))
+		else
 		{
-			middlePoint-=rotCenter;
-			middlePoint*=-1.;
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+			middlePoint.normalize();
+			middlePoint*=(p1-rotCenter).length();
 			middlePoint+=rotCenter;
+			if (!viewPortSphericalCap.contains(middlePoint))
+			{
+				middlePoint-=rotCenter;
+				middlePoint*=-1.;
+				middlePoint+=rotCenter;
+			}
+
+			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 		}
 
-		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
-		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+		if (showPartitions && (line_type==PRECESSIONCIRCLE_N))
+		{
+			const float lineThickness=sPainter.getLineWidth();
+			sPainter.setLineWidth(partThickness);
 
-		if (lineThickness>1)
-			sPainter.setLineWidth(1); // reset tickness of line
+			// Find current value of node rotation.
+			double epsilonA, chiA, omegaA, psiA;
+			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+			Vec3d part0; // current pole point on the northern precession circle.
+			StelUtils::spheToRect(0., M_PI/2.-core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+			Vec3d partAxis(0,1,0);
+			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
+			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+			Vec3d part1000l=part0; part1000l.transfo4d(Mat4d::rotation(partAxis, 0.475*M_PI/180)); // label
+
+			Vec3d pt0, ptTgt;
+			for (int y=-13000; y<13000; y+=100)
+			{
+				const double tickAngle=M_PI_2+psiA-precessionPartitions.value(y, 0.);
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+				if (y%1000 == 0)
+				{
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						QString label(QString::number(y));
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(ptTgt, screenPosTgt);
+						prj->project(ptTgtL, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+
+						const float shiftx = 2.f;
+						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+					}
+				}
+				else
+				{
+					ptTgt=(y%500 == 0 ? part500 : part100);
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				}
+			}
+
+			sPainter.setLineWidth(lineThickness);
+		}
+		if (showPartitions && (line_type==PRECESSIONCIRCLE_S))
+		{
+			const float lineThickness=sPainter.getLineWidth();
+			sPainter.setLineWidth(partThickness);
+
+			// Find current value of node rotation.
+			double epsilonA, chiA, omegaA, psiA;
+			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+			Vec3d part0; // current pole point on the northern precession circle.
+			StelUtils::spheToRect(0., -M_PI/2.+core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+			Vec3d partAxis(0,1,0);
+			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, -0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
+			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.45*M_PI/180));
+			Vec3d part1000l=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.475*M_PI/180)); // label
+
+			Vec3d pt0, ptTgt;
+			for (int y=-13000; y<13000; y+=100)
+			{
+				const double tickAngle=-M_PI_2+psiA-precessionPartitions.value(y, 0.);
+				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+				if (y%1000 == 0)
+				{
+					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						QString label(QString::number(y));
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(ptTgt, screenPosTgt);
+						prj->project(ptTgtL, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+
+						const float shiftx = -5.f - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width());
+						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+					}
+				}
+				else
+				{
+					ptTgt=(y%500 == 0 ? part500 : part100);
+					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				}
+			}
+
+			sPainter.setLineWidth(lineThickness);
+		}
+
+		sPainter.setLineWidth(oldLineWidth); // restore line thickness
 		sPainter.setLineSmooth(false);
 		sPainter.setBlending(false);
 
@@ -813,18 +949,18 @@ void SkyLine::draw(StelCore *core) const
 	}
 
 	// All the other "lines" are Great Circles
-	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
-	Vec3d fpt(1,0,0);
+	SphericalCap sphericalCap(Vec3d(0,0,1), 0);
+	Vec3d fpt(1,0,0); // First Point
 	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
-		meridianSphericalCap.n.set(0,1,0);
+		sphericalCap.n.set(0,1,0);
 	}
-	if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
+	else if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
 	{
-		meridianSphericalCap.n.set(1,0,0);
+		sphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
-	if (line_type==LONGITUDE)
+	else if (line_type==LONGITUDE)
 	{
 		Vec3d coord;		
 		double eclJDE = earth->getRotObliquity(core->getJDE());
@@ -835,18 +971,163 @@ void SkyLine::draw(StelCore *core) const
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 
 		StelUtils::spheToRect(lambdaJDE + M_PI_2, 0., coord);
-		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
+		sphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
 
-	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+	if (showPartitions)
 	{
-		if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
-			|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
+		const float lineThickness=sPainter.getLineWidth();
+		sPainter.setLineWidth(partThickness);
+
+		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
+		// Define short lines from "equator" a bit "southwards"
+		Vec3d part0 = fpt;
+		Vec3d partAxis(0,1,0);
+		Vec3d partZAxis = sphericalCap.n; // rotation axis for the 360 partitions
+		if ((line_type==MERIDIAN) || (line_type==COLURE_1))
+		{
+			partAxis.set(0,0,1);
+		}
+		else if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
+		{
+			part0.set(0,1,0);
+			partAxis.set(0,0,1);
+		}
+		else if (line_type==LONGITUDE)
+		{
+			partAxis=sphericalCap.n ^ part0;
+		}
+
+		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
+		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
+		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
+		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
+		for (int i=0; i<360; ++i)
+		{
+			if (i%30 == 0)
+			{
+				sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+
+				if (showLabel)
+				{
+					// we must adapt (rotate) some labels to observers on the southern hemisphere.
+					const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
+					int value=i;
+					float extraTextAngle=0.f;
+					// shiftx/y is OK for equator, horizon, ecliptic.
+					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
+					float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
+					QString unit("°");
+					QString label;
+					switch (line_type) {
+						case EQUATOR_J2000:
+						case EQUATOR_OF_DATE:
+							if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+							{
+								value /= 15;
+								unit="h";
+							}
+							extraTextAngle = southernHemi ? -90.f : 90.f;
+							if (southernHemi) shifty*=-0.25f;
+							break;
+						case HORIZON:
+							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
+							extraTextAngle=90.f;
+							break;
+						case MERIDIAN:
+						case COLURE_1: // Equinoctial Colure
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							if (i<90) // South..Nadir | ARI0..CSP
+							{
+								value=-i;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else if (i>270) // Zenith..South | CNP..ARI0
+							{
+								value=360-i;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else // Nadir..North..Zenith | CSP..Equator:12h..CNP
+							{
+								value=i-180;
+								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
+								shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+							}
+							break;
+						case PRIME_VERTICAL:
+						case COLURE_2: // Solstitial Colure
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
+							{
+								value=i;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
+							{
+								value=180-i;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+							}
+							else // Nadir..East | CSP..Equator:6h
+							{
+								value=i-360;
+								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							}
+							break;
+						case LONGITUDE:
+							value=( i<180 ? 90-i : i-270 );
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+							extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
+							break;
+						default:
+							extraTextAngle = southernHemi ? -90.f : 90.f;
+							if (southernHemi) shifty*=-0.25f;
+							break;
+					}
+					label = QString("%1%2").arg(value).arg(unit);
+					Vec3d screenPosTgt, screenPosTgtL;
+					prj->project(part30, screenPosTgt);
+					prj->project(part30l, screenPosTgtL);
+					double dx=screenPosTgtL[0]-screenPosTgt[0];
+					double dy=screenPosTgtL[1]-screenPosTgt[1];
+					float textAngle=static_cast<float>(atan2(dy,dx));
+					sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
+				}
+			}
+
+			else if (i%10 == 0)
+				sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			else if (i%5 == 0)
+				sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			else
+				sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			part0.transfo4d(rotZ1);
+			part1.transfo4d(rotZ1);
+			part5.transfo4d(rotZ1);
+			part10.transfo4d(rotZ1);
+			part30.transfo4d(rotZ1);
+			part30l.transfo4d(rotZ1);
+		}
+		sPainter.setLineWidth(lineThickness);
+	}
+
+
+	Vec3d p1, p2;
+	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
+	{
+		if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
+			|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
 		{
 			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI_180);
+			const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
 			Vec3d rotFpt=fpt;
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
@@ -854,29 +1135,23 @@ void SkyLine::draw(StelCore *core) const
 			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			return;
 		}
-		else
-			return;
+	}
+	else
+	{
+		Vec3d middlePoint = p1+p2;
+		middlePoint.normalize();
+		if (!viewPortSphericalCap.contains(middlePoint))
+			middlePoint*=-1.;
+
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
 
-	Vec3d middlePoint = p1+p2;
-	middlePoint.normalize();
-	if (!viewPortSphericalCap.contains(middlePoint))
-		middlePoint*=-1.;
-
-	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-	sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-
-	if (lineThickness>1)
-		sPainter.setLineWidth(1); // reset tickness of line
+	sPainter.setLineWidth(oldLineWidth); // restore line thickness
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
-
-// 	// Johannes: use a big radius as a dirty workaround for the bug that the
-// 	// ecliptic line is not drawn around the observer, but around the sun:
-// 	const Vec3d vv(1000000,0,0);
 }
 
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
@@ -1143,6 +1418,7 @@ GridLinesMgr::GridLinesMgr()
 	: gridlinesDisplayed(true)
 {
 	setObjectName("GridLinesMgr");
+	SkyLine::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
@@ -1153,8 +1429,8 @@ GridLinesMgr::GridLinesMgr()
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
-	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000); // previous eclipticLine
-	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // NEW in 0.14
+	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000);
+	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE);
 	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
 	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
@@ -1256,17 +1532,41 @@ void GridLinesMgr::init()
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
 	setFlagSupergalacticGrid(conf->value("viewing/flag_supergalactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
+	setFlagEquatorParts(conf->value("viewing/flag_equator_parts").toBool());
+	setFlagEquatorLabeled(conf->value("viewing/flag_equator_labels").toBool());
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
+	setFlagEquatorJ2000Parts(conf->value("viewing/flag_equator_J2000_parts").toBool());
+	setFlagEquatorJ2000Labeled(conf->value("viewing/flag_equator_J2000_labels").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
+	setFlagEclipticParts(conf->value("viewing/flag_ecliptic_parts").toBool());
+	setFlagEclipticLabeled(conf->value("viewing/flag_ecliptic_labels").toBool());
 	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
+	setFlagEclipticJ2000Parts(conf->value("viewing/flag_ecliptic_J2000_parts").toBool());
+	setFlagEclipticJ2000Labeled(conf->value("viewing/flag_ecliptic_J2000_labels").toBool());
 	setFlagPrecessionCircles(conf->value("viewing/flag_precession_circles").toBool());
+	setFlagPrecessionParts(conf->value("viewing/flag_precession_parts").toBool());
+	setFlagPrecessionLabeled(conf->value("viewing/flag_precession_labels").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
+	setFlagMeridianParts(conf->value("viewing/flag_meridian_parts").toBool());
+	setFlagMeridianLabeled(conf->value("viewing/flag_meridian_labels").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
+	setFlagHorizonParts(conf->value("viewing/flag_horizon_parts").toBool());
+	setFlagHorizonLabeled(conf->value("viewing/flag_horizon_labels").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
+	setFlagGalacticEquatorParts(conf->value("viewing/flag_galactic_equator_parts").toBool());
+	setFlagGalacticEquatorLabeled(conf->value("viewing/flag_galactic_equator_labels").toBool());
 	setFlagSupergalacticEquatorLine(conf->value("viewing/flag_supergalactic_equator_line").toBool());
+	setFlagSupergalacticEquatorParts(conf->value("viewing/flag_supergalactic_equator_parts").toBool());
+	setFlagSupergalacticEquatorLabeled(conf->value("viewing/flag_supergalactic_equator_labels").toBool());
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
+	setFlagLongitudeParts(conf->value("viewing/flag_longitude_parts").toBool());
+	setFlagLongitudeLabeled(conf->value("viewing/flag_longitude_labels").toBool());
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
+	setFlagPrimeVerticalParts(conf->value("viewing/flag_prime_vertical_parts").toBool());
+	setFlagPrimeVerticalLabeled(conf->value("viewing/flag_prime_vertical_labels").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
+	setFlagColureParts(conf->value("viewing/flag_colure_parts").toBool());
+	setFlagColureLabeled(conf->value("viewing/flag_colure_labels").toBool());
 	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
 	setFlagCelestialJ2000Poles(conf->value("viewing/flag_celestial_J2000_poles").toBool());
 	setFlagCelestialPoles(conf->value("viewing/flag_celestial_poles").toBool());
@@ -1284,6 +1584,7 @@ void GridLinesMgr::init()
 
 	// Set the line thickness for grids and lines
 	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
+	setPartThickness(conf->value("viewing/part_thickness", 1).toInt());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
@@ -1503,7 +1804,7 @@ void GridLinesMgr::setFlagGridlines(const bool displayed)
 	}
 }
 //! Accessor ("master switch") for displaying any grid/line.
-bool GridLinesMgr::getFlagGridlines(void) const
+bool GridLinesMgr::getFlagGridlines() const
 {
 	return gridlinesDisplayed;
 }
@@ -1565,11 +1866,11 @@ void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
 	}
 }
 //! Get flag for displaying Azimuthal Grid
-bool GridLinesMgr::getFlagAzimuthalGrid(void) const
+bool GridLinesMgr::getFlagAzimuthalGrid() const
 {
 	return aziGrid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorAzimuthalGrid(void) const
+Vec3f GridLinesMgr::getColorAzimuthalGrid() const
 {
 	return aziGrid->getColor();
 }
@@ -1590,11 +1891,11 @@ void GridLinesMgr::setFlagEquatorGrid(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial Grid
-bool GridLinesMgr::getFlagEquatorGrid(void) const
+bool GridLinesMgr::getFlagEquatorGrid() const
 {
 	return equGrid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquatorGrid(void) const
+Vec3f GridLinesMgr::getColorEquatorGrid() const
 {
 	return equGrid->getColor();
 }
@@ -1615,11 +1916,11 @@ void GridLinesMgr::setFlagEquatorJ2000Grid(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const
+bool GridLinesMgr::getFlagEquatorJ2000Grid() const
 {
 	return equJ2000Grid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const
+Vec3f GridLinesMgr::getColorEquatorJ2000Grid() const
 {
 	return equJ2000Grid->getColor();
 }
@@ -1640,11 +1941,11 @@ void GridLinesMgr::setFlagEclipticJ2000Grid(const bool displayed)
 	}
 }
 //! Get flag for displaying Ecliptic J2000 Grid
-bool GridLinesMgr::getFlagEclipticJ2000Grid(void) const
+bool GridLinesMgr::getFlagEclipticJ2000Grid() const
 {
 	return eclJ2000Grid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticJ2000Grid(void) const
+Vec3f GridLinesMgr::getColorEclipticJ2000Grid() const
 {
 	return eclJ2000Grid->getColor();
 }
@@ -1665,11 +1966,11 @@ void GridLinesMgr::setFlagEclipticGrid(const bool displayed)
 	}
 }
 //! Get flag for displaying Ecliptic of Date Grid
-bool GridLinesMgr::getFlagEclipticGrid(void) const
+bool GridLinesMgr::getFlagEclipticGrid() const
 {
 	return eclGrid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticGrid(void) const
+Vec3f GridLinesMgr::getColorEclipticGrid() const
 {
 	return eclGrid->getColor();
 }
@@ -1690,11 +1991,11 @@ void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 	}
 }
 //! Get flag for displaying Galactic Grid
-bool GridLinesMgr::getFlagGalacticGrid(void) const
+bool GridLinesMgr::getFlagGalacticGrid() const
 {
 	return galacticGrid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticGrid(void) const
+Vec3f GridLinesMgr::getColorGalacticGrid() const
 {
 	return galacticGrid->getColor();
 }
@@ -1715,11 +2016,11 @@ void GridLinesMgr::setFlagSupergalacticGrid(const bool displayed)
 	}
 }
 //! Get flag for displaying Supergalactic Grid
-bool GridLinesMgr::getFlagSupergalacticGrid(void) const
+bool GridLinesMgr::getFlagSupergalacticGrid() const
 {
 	return supergalacticGrid->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSupergalacticGrid(void) const
+Vec3f GridLinesMgr::getColorSupergalacticGrid() const
 {
 	return supergalacticGrid->getColor();
 }
@@ -1740,11 +2041,35 @@ void GridLinesMgr::setFlagEquatorLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial Line
-bool GridLinesMgr::getFlagEquatorLine(void) const
+bool GridLinesMgr::getFlagEquatorLine() const
 {
 	return equatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquatorLine(void) const
+//! Set flag for displaying Equatorial Line partitions
+void GridLinesMgr::setFlagEquatorParts(const bool displayed)
+{
+	if(displayed != equatorLine->showsPartitions()) {
+		equatorLine->setPartitions(displayed);
+		emit equatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Equatorial Line partitions
+bool GridLinesMgr::getFlagEquatorParts() const
+{
+	return equatorLine->showsPartitions();
+}
+void GridLinesMgr::setFlagEquatorLabeled(const bool displayed)
+{
+	if(displayed != equatorLine->isLabeled()) {
+		equatorLine->setLabeled(displayed);
+		emit equatorPartsLabeledChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagEquatorLabeled() const
+{
+	return equatorLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorEquatorLine() const
 {
 	return equatorLine->getColor();
 }
@@ -1765,11 +2090,35 @@ void GridLinesMgr::setFlagEquatorJ2000Line(const bool displayed)
 	}
 }
 //! Get flag for displaying J2000 Equatorial Line
-bool GridLinesMgr::getFlagEquatorJ2000Line(void) const
+bool GridLinesMgr::getFlagEquatorJ2000Line() const
 {
 	return equatorJ2000Line->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquatorJ2000Line(void) const
+//! Set flag for displaying J2000 Equatorial Line partitions
+void GridLinesMgr::setFlagEquatorJ2000Parts(const bool displayed)
+{
+	if(displayed != equatorJ2000Line->showsPartitions()) {
+		equatorJ2000Line->setPartitions(displayed);
+		emit equatorJ2000PartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying J2000 Equatorial Line partitions
+bool GridLinesMgr::getFlagEquatorJ2000Parts() const
+{
+	return equatorJ2000Line->showsPartitions();
+}
+void GridLinesMgr::setFlagEquatorJ2000Labeled(const bool displayed)
+{
+	if(displayed != equatorJ2000Line->isLabeled()) {
+		equatorJ2000Line->setLabeled(displayed);
+		emit equatorJ2000PartsLabeledChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagEquatorJ2000Labeled() const
+{
+	return equatorJ2000Line->isLabeled();
+}
+Vec3f GridLinesMgr::getColorEquatorJ2000Line() const
 {
 	return equatorJ2000Line->getColor();
 }
@@ -1790,11 +2139,37 @@ void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Ecliptic Line
-bool GridLinesMgr::getFlagEclipticLine(void) const
+bool GridLinesMgr::getFlagEclipticLine() const
 {
 	return eclipticLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticLine(void) const
+//! Set flag for displaying Ecliptic Line partitions
+void GridLinesMgr::setFlagEclipticParts(const bool displayed)
+{
+	if(displayed != eclipticLine->showsPartitions()) {
+		eclipticLine->setPartitions(displayed);
+		emit eclipticPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic Line partitions
+bool GridLinesMgr::getFlagEclipticParts() const
+{
+	return eclipticLine->showsPartitions();
+}
+//! Set flag for displaying Ecliptic Line partitions
+void GridLinesMgr::setFlagEclipticLabeled(const bool displayed)
+{
+	if(displayed != eclipticLine->isLabeled()) {
+		eclipticLine->setLabeled(displayed);
+		emit eclipticPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic Line partitions
+bool GridLinesMgr::getFlagEclipticLabeled() const
+{
+	return eclipticLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorEclipticLine() const
 {
 	return eclipticLine->getColor();
 }
@@ -1815,11 +2190,37 @@ void GridLinesMgr::setFlagEclipticJ2000Line(const bool displayed)
 	}
 }
 //! Get flag for displaying Ecliptic J2000 Line
-bool GridLinesMgr::getFlagEclipticJ2000Line(void) const
+bool GridLinesMgr::getFlagEclipticJ2000Line() const
 {
 	return eclipticJ2000Line->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticJ2000Line(void) const
+//! Set flag for displaying Ecliptic J2000 Line partitions
+void GridLinesMgr::setFlagEclipticJ2000Parts(const bool displayed)
+{
+	if(displayed != eclipticJ2000Line->showsPartitions()) {
+		eclipticJ2000Line->setPartitions(displayed);
+		emit eclipticJ2000PartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic J2000 Line partitions
+bool GridLinesMgr::getFlagEclipticJ2000Parts() const
+{
+	return eclipticJ2000Line->showsPartitions();
+}
+//! Set flag for displaying Ecliptic J2000 Line partitions
+void GridLinesMgr::setFlagEclipticJ2000Labeled(const bool displayed)
+{
+	if(displayed != eclipticJ2000Line->isLabeled()) {
+		eclipticJ2000Line->setLabeled(displayed);
+		emit eclipticJ2000PartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic J2000 Line partitions
+bool GridLinesMgr::getFlagEclipticJ2000Labeled() const
+{
+	return eclipticJ2000Line->isLabeled();
+}
+Vec3f GridLinesMgr::getColorEclipticJ2000Line() const
 {
 	return eclipticJ2000Line->getColor();
 }
@@ -1841,12 +2242,42 @@ void GridLinesMgr::setFlagPrecessionCircles(const bool displayed)
 	}
 }
 //! Get flag for displaying Precession Circles
-bool GridLinesMgr::getFlagPrecessionCircles(void) const
+bool GridLinesMgr::getFlagPrecessionCircles() const
 {
 	// precessionCircleS is always synchronous, no separate queries.
 	return precessionCircleN->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorPrecessionCircles(void) const
+//! Set flag for displaying Precession Circle partitions
+void GridLinesMgr::setFlagPrecessionParts(const bool displayed)
+{
+	if(displayed != precessionCircleN->showsPartitions()) {
+		precessionCircleN->setPartitions(displayed);
+		precessionCircleS->setPartitions(displayed);
+		emit precessionPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Precession Circle partitions
+bool GridLinesMgr::getFlagPrecessionParts() const
+{
+	// precessionCircleS is always synchronous, no separate queries.
+	return precessionCircleN->showsPartitions();
+}
+//! Set flag for displaying Precession Circle partitions
+void GridLinesMgr::setFlagPrecessionLabeled(const bool displayed)
+{
+	if(displayed != precessionCircleN->isLabeled()) {
+		precessionCircleN->setLabeled(displayed);
+		precessionCircleS->setLabeled(displayed);
+		emit precessionPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Precession Circle partitions
+bool GridLinesMgr::getFlagPrecessionLabeled() const
+{
+	// precessionCircleS is always synchronous, no separate queries.
+	return precessionCircleN->isLabeled();
+}
+Vec3f GridLinesMgr::getColorPrecessionCircles() const
 {
 	return precessionCircleN->getColor();
 }
@@ -1868,11 +2299,37 @@ void GridLinesMgr::setFlagMeridianLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Meridian Line
-bool GridLinesMgr::getFlagMeridianLine(void) const
+bool GridLinesMgr::getFlagMeridianLine() const
 {
 	return meridianLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorMeridianLine(void) const
+//! Set flag for displaying Meridian Line partitions
+void GridLinesMgr::setFlagMeridianParts(const bool displayed)
+{
+	if(displayed != meridianLine->showsPartitions()) {
+		meridianLine->setPartitions(displayed);
+		emit meridianPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Meridian Line partitions
+bool GridLinesMgr::getFlagMeridianParts() const
+{
+	return meridianLine->showsPartitions();
+}
+//! Set flag for displaying Meridian Line partitions
+void GridLinesMgr::setFlagMeridianLabeled(const bool displayed)
+{
+	if(displayed != meridianLine->isLabeled()) {
+		meridianLine->setLabeled(displayed);
+		emit meridianPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Meridian Line partitions
+bool GridLinesMgr::getFlagMeridianLabeled() const
+{
+	return meridianLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorMeridianLine() const
 {
 	return meridianLine->getColor();
 }
@@ -1893,11 +2350,36 @@ void GridLinesMgr::setFlagLongitudeLine(const bool displayed)
 	}
 }
 //! Get flag for displaying opposition/conjunction longitude line
-bool GridLinesMgr::getFlagLongitudeLine(void) const
+bool GridLinesMgr::getFlagLongitudeLine() const
 {
 	return longitudeLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorLongitudeLine(void) const
+//! Set flag for displaying opposition/conjunction longitude line partitions
+void GridLinesMgr::setFlagLongitudeParts(const bool displayed)
+{
+	if(displayed != longitudeLine->showsPartitions()) {
+		longitudeLine->setPartitions(displayed);
+		emit longitudePartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying opposition/conjunction longitude line partitions
+bool GridLinesMgr::getFlagLongitudeParts() const
+{
+	return longitudeLine->showsPartitions();
+}
+//! Set flag for displaying opposition/conjunction longitude line partitions
+void GridLinesMgr::setFlagLongitudeLabeled(const bool displayed)
+{
+	if(displayed != longitudeLine->isLabeled()) {
+		longitudeLine->setLabeled(displayed);
+		emit longitudePartsLabeledChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagLongitudeLabeled() const
+{
+	return longitudeLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorLongitudeLine() const
 {
 	return longitudeLine->getColor();
 }
@@ -1918,11 +2400,37 @@ void GridLinesMgr::setFlagHorizonLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Horizon Line
-bool GridLinesMgr::getFlagHorizonLine(void) const
+bool GridLinesMgr::getFlagHorizonLine() const
 {
 	return horizonLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorHorizonLine(void) const
+//! Set flag for displaying Horizon Line partitions
+void GridLinesMgr::setFlagHorizonParts(const bool displayed)
+{
+	if(displayed != horizonLine->showsPartitions()) {
+		horizonLine->setPartitions(displayed);
+		emit horizonPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Horizon Line partitions
+bool GridLinesMgr::getFlagHorizonParts() const
+{
+	return horizonLine->showsPartitions();
+}
+//! Set flag for displaying Horizon Line partitions
+void GridLinesMgr::setFlagHorizonLabeled(const bool displayed)
+{
+	if(displayed != horizonLine->isLabeled()) {
+		horizonLine->setLabeled(displayed);
+		emit horizonPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Horizon Line partitions
+bool GridLinesMgr::getFlagHorizonLabeled() const
+{
+	return horizonLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorHorizonLine() const
 {
 	return horizonLine->getColor();
 }
@@ -1943,11 +2451,37 @@ void GridLinesMgr::setFlagGalacticEquatorLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Galactic Equator Line
-bool GridLinesMgr::getFlagGalacticEquatorLine(void) const
+bool GridLinesMgr::getFlagGalacticEquatorLine() const
 {
 	return galacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticEquatorLine(void) const
+//! Set flag for displaying Galactic Equator Line partitions
+void GridLinesMgr::setFlagGalacticEquatorParts(const bool displayed)
+{
+	if(displayed != galacticEquatorLine->showsPartitions()) {
+		galacticEquatorLine->setPartitions(displayed);
+		emit galacticEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Galactic Equator Line partitions
+bool GridLinesMgr::getFlagGalacticEquatorParts() const
+{
+	return galacticEquatorLine->showsPartitions();
+}
+//! Set flag for displaying Galactic Equator Line partitions
+void GridLinesMgr::setFlagGalacticEquatorLabeled(const bool displayed)
+{
+	if(displayed != galacticEquatorLine->isLabeled()) {
+		galacticEquatorLine->setLabeled(displayed);
+		emit galacticEquatorPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Galactic Equator Line partitions
+bool GridLinesMgr::getFlagGalacticEquatorLabeled() const
+{
+	return galacticEquatorLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorGalacticEquatorLine() const
 {
 	return galacticEquatorLine->getColor();
 }
@@ -1968,11 +2502,37 @@ void GridLinesMgr::setFlagSupergalacticEquatorLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Supergalactic Equator Line
-bool GridLinesMgr::getFlagSupergalacticEquatorLine(void) const
+bool GridLinesMgr::getFlagSupergalacticEquatorLine() const
 {
 	return supergalacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
+//! Set flag for displaying Supergalactic Equator Line partitions
+void GridLinesMgr::setFlagSupergalacticEquatorParts(const bool displayed)
+{
+	if(displayed != supergalacticEquatorLine->showsPartitions()) {
+		supergalacticEquatorLine->setPartitions(displayed);
+		emit supergalacticEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Equator Line partitions
+bool GridLinesMgr::getFlagSupergalacticEquatorParts() const
+{
+	return supergalacticEquatorLine->showsPartitions();
+}
+//! Set flag for displaying Supergalactic Equator Line partitions
+void GridLinesMgr::setFlagSupergalacticEquatorLabeled(const bool displayed)
+{
+	if(displayed != supergalacticEquatorLine->isLabeled()) {
+		supergalacticEquatorLine->setLabeled(displayed);
+		emit supergalacticEquatorPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Equator Line partitions
+bool GridLinesMgr::getFlagSupergalacticEquatorLabeled() const
+{
+	return supergalacticEquatorLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorSupergalacticEquatorLine() const
 {
 	return supergalacticEquatorLine->getColor();
 }
@@ -1993,11 +2553,37 @@ void GridLinesMgr::setFlagPrimeVerticalLine(const bool displayed)
 	}
 }
 //! Get flag for displaying Prime Vertical Line
-bool GridLinesMgr::getFlagPrimeVerticalLine(void) const
+bool GridLinesMgr::getFlagPrimeVerticalLine() const
 {
 	return primeVerticalLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
+//! Set flag for displaying Prime Vertical Line partitions
+void GridLinesMgr::setFlagPrimeVerticalParts(const bool displayed)
+{
+	if(displayed != primeVerticalLine->showsPartitions()) {
+		primeVerticalLine->setPartitions(displayed);
+		emit  primeVerticalPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Prime Vertical Line partitions
+bool GridLinesMgr::getFlagPrimeVerticalParts() const
+{
+	return primeVerticalLine->showsPartitions();
+}
+//! Set flag for displaying Prime Vertical Line partitions
+void GridLinesMgr::setFlagPrimeVerticalLabeled(const bool displayed)
+{
+	if(displayed != primeVerticalLine->isLabeled()) {
+		primeVerticalLine->setLabeled(displayed);
+		emit  primeVerticalPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Prime Vertical Line partitions
+bool GridLinesMgr::getFlagPrimeVerticalLabeled() const
+{
+	return primeVerticalLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorPrimeVerticalLine() const
 {
 	return primeVerticalLine->getColor();
 }
@@ -2019,11 +2605,38 @@ void GridLinesMgr::setFlagColureLines(const bool displayed)
 	}
 }
 //! Get flag for displaying Colure Lines
-bool GridLinesMgr::getFlagColureLines(void) const
+bool GridLinesMgr::getFlagColureLines() const
 {
 	return colureLine_1->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorColureLines(void) const
+//! Set flag for displaying Colure Line partitions
+void GridLinesMgr::setFlagColureParts(const bool displayed)
+{
+	if(displayed != colureLine_1->showsPartitions()) {
+		colureLine_1->setPartitions(displayed);
+		colureLine_2->setPartitions(displayed);
+		emit  colurePartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Colure Line partitions
+bool GridLinesMgr::getFlagColureParts() const
+{
+	return colureLine_1->showsPartitions();
+}
+void GridLinesMgr::setFlagColureLabeled(const bool displayed)
+{
+	if(displayed != colureLine_1->isLabeled()) {
+		colureLine_1->setLabeled(displayed);
+		colureLine_2->setLabeled(displayed);
+		emit  colurePartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Colure Line partitions
+bool GridLinesMgr::getFlagColureLabeled() const
+{
+	return colureLine_1->isLabeled();
+}
+Vec3f GridLinesMgr::getColorColureLines() const
 {
 	return colureLine_1->getColor();
 }
@@ -2046,12 +2659,12 @@ void GridLinesMgr::setFlagCircumpolarCircles(const bool displayed)
 	}
 }
 //! Get flag for displaying Circumpolar Circles
-bool GridLinesMgr::getFlagCircumpolarCircles(void) const
+bool GridLinesMgr::getFlagCircumpolarCircles() const
 {
 	// circumpolarCircleS is always synchronous, no separate queries.
 	return circumpolarCircleN->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorCircumpolarCircles(void) const
+Vec3f GridLinesMgr::getColorCircumpolarCircles() const
 {
 	return circumpolarCircleN->getColor();
 }
@@ -2073,11 +2686,11 @@ void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
 	}
 }
 //! Get flag for displaying celestial poles of J2000
-bool GridLinesMgr::getFlagCelestialJ2000Poles(void) const
+bool GridLinesMgr::getFlagCelestialJ2000Poles() const
 {
 	return celestialJ2000Poles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorCelestialJ2000Poles(void) const
+Vec3f GridLinesMgr::getColorCelestialJ2000Poles() const
 {
 	return celestialJ2000Poles->getColor();
 }
@@ -2098,11 +2711,11 @@ void GridLinesMgr::setFlagCelestialPoles(const bool displayed)
 	}
 }
 //! Get flag for displaying celestial poles
-bool GridLinesMgr::getFlagCelestialPoles(void) const
+bool GridLinesMgr::getFlagCelestialPoles() const
 {
 	return celestialPoles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorCelestialPoles(void) const
+Vec3f GridLinesMgr::getColorCelestialPoles() const
 {
 	return celestialPoles->getColor();
 }
@@ -2123,11 +2736,11 @@ void GridLinesMgr::setFlagZenithNadir(const bool displayed)
 	}
 }
 //! Get flag for displaying zenith and nadir
-bool GridLinesMgr::getFlagZenithNadir(void) const
+bool GridLinesMgr::getFlagZenithNadir() const
 {
 	return zenithNadir->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorZenithNadir(void) const
+Vec3f GridLinesMgr::getColorZenithNadir() const
 {
 	return zenithNadir->getColor();
 }
@@ -2148,11 +2761,11 @@ void GridLinesMgr::setFlagEclipticJ2000Poles(const bool displayed)
 	}
 }
 //! Get flag for displaying ecliptic poles of J2000
-bool GridLinesMgr::getFlagEclipticJ2000Poles(void) const
+bool GridLinesMgr::getFlagEclipticJ2000Poles() const
 {
 	return eclipticJ2000Poles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticJ2000Poles(void) const
+Vec3f GridLinesMgr::getColorEclipticJ2000Poles() const
 {
 	return eclipticJ2000Poles->getColor();
 }
@@ -2173,11 +2786,11 @@ void GridLinesMgr::setFlagEclipticPoles(const bool displayed)
 	}
 }
 //! Get flag for displaying ecliptic poles
-bool GridLinesMgr::getFlagEclipticPoles(void) const
+bool GridLinesMgr::getFlagEclipticPoles() const
 {
 	return eclipticPoles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEclipticPoles(void) const
+Vec3f GridLinesMgr::getColorEclipticPoles() const
 {
 	return eclipticPoles->getColor();
 }
@@ -2198,11 +2811,11 @@ void GridLinesMgr::setFlagGalacticPoles(const bool displayed)
 	}
 }
 //! Get flag for displaying galactic poles
-bool GridLinesMgr::getFlagGalacticPoles(void) const
+bool GridLinesMgr::getFlagGalacticPoles() const
 {
 	return galacticPoles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticPoles(void) const
+Vec3f GridLinesMgr::getColorGalacticPoles() const
 {
 	return galacticPoles->getColor();
 }
@@ -2223,11 +2836,11 @@ void GridLinesMgr::setFlagSupergalacticPoles(const bool displayed)
 	}
 }
 //! Get flag for displaying supergalactic poles
-bool GridLinesMgr::getFlagSupergalacticPoles(void) const
+bool GridLinesMgr::getFlagSupergalacticPoles() const
 {
 	return supergalacticPoles->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSupergalacticPoles(void) const
+Vec3f GridLinesMgr::getColorSupergalacticPoles() const
 {
 	return supergalacticPoles->getColor();
 }
@@ -2248,11 +2861,11 @@ void GridLinesMgr::setFlagEquinoxJ2000Points(const bool displayed)
 	}
 }
 //! Get flag for displaying equinox points of J2000
-bool GridLinesMgr::getFlagEquinoxJ2000Points(void) const
+bool GridLinesMgr::getFlagEquinoxJ2000Points() const
 {
 	return equinoxJ2000Points->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquinoxJ2000Points(void) const
+Vec3f GridLinesMgr::getColorEquinoxJ2000Points() const
 {
 	return equinoxJ2000Points->getColor();
 }
@@ -2273,11 +2886,11 @@ void GridLinesMgr::setFlagEquinoxPoints(const bool displayed)
 	}
 }
 //! Get flag for displaying equinox points
-bool GridLinesMgr::getFlagEquinoxPoints(void) const
+bool GridLinesMgr::getFlagEquinoxPoints() const
 {
 	return equinoxPoints->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorEquinoxPoints(void) const
+Vec3f GridLinesMgr::getColorEquinoxPoints() const
 {
 	return equinoxPoints->getColor();
 }
@@ -2298,11 +2911,11 @@ void GridLinesMgr::setFlagSolsticeJ2000Points(const bool displayed)
 	}
 }
 //! Get flag for displaying solstice points of J2000
-bool GridLinesMgr::getFlagSolsticeJ2000Points(void) const
+bool GridLinesMgr::getFlagSolsticeJ2000Points() const
 {
 	return solsticeJ2000Points->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSolsticeJ2000Points(void) const
+Vec3f GridLinesMgr::getColorSolsticeJ2000Points() const
 {
 	return solsticeJ2000Points->getColor();
 }
@@ -2323,11 +2936,11 @@ void GridLinesMgr::setFlagSolsticePoints(const bool displayed)
 	}
 }
 //! Get flag for displaying solstice points
-bool GridLinesMgr::getFlagSolsticePoints(void) const
+bool GridLinesMgr::getFlagSolsticePoints() const
 {
 	return solsticePoints->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorSolsticePoints(void) const
+Vec3f GridLinesMgr::getColorSolsticePoints() const
 {
 	return solsticePoints->getColor();
 }
@@ -2348,11 +2961,11 @@ void GridLinesMgr::setFlagAntisolarPoint(const bool displayed)
 	}
 }
 //! Get flag for displaying antisolar point
-bool GridLinesMgr::getFlagAntisolarPoint(void) const
+bool GridLinesMgr::getFlagAntisolarPoint() const
 {
 	return antisolarPoint->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorAntisolarPoint(void) const
+Vec3f GridLinesMgr::getColorAntisolarPoint() const
 {
 	return antisolarPoint->getColor();
 }
@@ -2373,11 +2986,11 @@ void GridLinesMgr::setFlagApexPoints(const bool displayed)
 	}
 }
 //! Get flag for displaying vector point
-bool GridLinesMgr::getFlagApexPoints(void) const
+bool GridLinesMgr::getFlagApexPoints() const
 {
 	return apexPoints->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorApexPoints(void) const
+Vec3f GridLinesMgr::getColorApexPoints() const
 {
 	return apexPoints->getColor();
 }
@@ -2429,6 +3042,39 @@ void GridLinesMgr::setLineThickness(const int thickness)
 {
 	return equGrid->getLineThickness();
 }
+
+ void GridLinesMgr::setPartThickness(const int thickness)
+ {
+	 int partThickness = equatorLine->getPartThickness();
+	 if (partThickness!=thickness)
+	 {
+		 partThickness=qBound(1, thickness, 5);
+		 // Lines
+		 equatorLine->setPartThickness(partThickness);
+		 equatorJ2000Line->setPartThickness(partThickness);
+		 eclipticLine->setPartThickness(partThickness);
+		 eclipticJ2000Line->setPartThickness(partThickness);
+		 precessionCircleN->setPartThickness(partThickness);
+		 precessionCircleS->setPartThickness(partThickness);
+		 meridianLine->setPartThickness(partThickness);
+		 longitudeLine->setPartThickness(partThickness);
+		 horizonLine->setPartThickness(partThickness);
+		 galacticEquatorLine->setPartThickness(partThickness);
+		 supergalacticEquatorLine->setPartThickness(partThickness);
+		 primeVerticalLine->setPartThickness(partThickness);
+		 colureLine_1->setPartThickness(partThickness);
+		 colureLine_2->setPartThickness(partThickness);
+		 //circumpolarCircleN->setPartThickness(partThickness);
+		 //circumpolarCircleS->setPartThickness(partThickness);
+
+		 emit partThicknessChanged(partThickness);
+	 }
+ }
+
+  int GridLinesMgr::getPartThickness() const
+ {
+	 return equatorLine->getPartThickness();
+ }
 
 void GridLinesMgr::setFontSizeFromApp(int size)
 {
