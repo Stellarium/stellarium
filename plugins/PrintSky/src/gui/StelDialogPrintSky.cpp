@@ -19,8 +19,8 @@
 
 
 #include "StelDialogPrintSky.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
+//#include "StelMainWindow.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -30,7 +30,7 @@
 class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
@@ -59,7 +59,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 };
 
-StelDialogPrintSky::StelDialogPrintSky() : dialog(NULL)
+StelDialogPrintSky::StelDialogPrintSky() : dialog(Q_NULLPTR)
 {
 }
 
@@ -71,8 +71,6 @@ StelDialogPrintSky::~StelDialogPrintSky()
 void StelDialogPrintSky::close()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
-	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
 
 void StelDialogPrintSky::setVisible(bool v)
@@ -80,11 +78,11 @@ void StelDialogPrintSky::setVisible(bool v)
 	if (v)
 	{
 
-		QSize screenSize = StelMainWindow::getInstance().size();
+		QSize screenSize = StelMainView::getInstance().size();
 		if (dialog)
 		{
 			dialog->show();
-			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
 			// will be off screen.  Check for this and move it to a visible
 			// position if necessary
@@ -99,29 +97,25 @@ void StelDialogPrintSky::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
-		dialog = new QDialog(NULL);
+		dialog = new QDialog(Q_NULLPTR);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 
-		proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		QRectF bound = proxy->boundingRect();
 
 		// centre with dialog according to current window size.
 		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
-		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
+		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 
-		// The caching is buggy on all plateforms with Qt 4.5.2
+		// The caching is buggy on all platforms with Qt 4.5.2
 
-#if QT_VERSION==0x040502
-		proxy->setCacheMode(QGraphicsItem::NoCache);
-#else
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-#endif
 
 		proxy->setZValue(100);
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
@@ -129,6 +123,6 @@ void StelDialogPrintSky::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 	}
 }

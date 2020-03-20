@@ -20,7 +20,7 @@
 #include "ui_printskyDialog.h"
 #include "PrintSky.hpp"
 #include <QAction>
-#include <QGLWidget>
+#include <QOpenGLWidget>
 #include <QPrintDialog>
 #include <QTimer>
 #include <QGraphicsWidget>
@@ -29,7 +29,7 @@
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -58,12 +58,12 @@ PrintSkyDialog::~PrintSkyDialog()
 	}
 
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 
 }
 
 /* ********************************************************************* */
-void PrintSkyDialog::languageChanged()
+void PrintSkyDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
@@ -89,7 +89,7 @@ void PrintSkyDialog::styleChanged()
 void PrintSkyDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 }
 
 
@@ -100,7 +100,7 @@ void PrintSkyDialog::invertColorsStateChanged(int state)
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		bool useInvertColors = settings.value("use_invert_colors", 0.0).toBool();
@@ -124,7 +124,7 @@ void PrintSkyDialog::scaleToFitStateChanged(int state)
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		bool useScaleToFit = settings.value("use_scale_to_fit", 0.0).toBool();
@@ -144,11 +144,12 @@ void PrintSkyDialog::scaleToFitStateChanged(int state)
 /* ********************************************************************* */
 void PrintSkyDialog::orientationStateChanged(bool state)
 {
+	Q_UNUSED(state)
 	QString newOrientation=(ui->orientationPortraitRadioButton->isChecked()? "Portrait": "Landscape");
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		QString currentOrientation = settings.value("orientation", "Portrait").toString();
@@ -172,7 +173,7 @@ void PrintSkyDialog::printDataStateChanged(int state)
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		bool printData = settings.value("print_data", 0.0).toBool();
@@ -196,7 +197,7 @@ void PrintSkyDialog::printSSEphemeridesStateChanged(int state)
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		bool printSSEphemerides = settings.value("print_SS_ephemerides", 0.0).toBool();
@@ -233,7 +234,7 @@ void PrintSkyDialog::createDialogContent()
 	// set the initial state
 	try
 		{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		bool useInvertColors = settings.value("use_invert_colors", false).toBool();
@@ -292,11 +293,11 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 	QPainter painter(printer);
 
-	QGLWidget* glQGLWidget=(QGLWidget *) StelMainGraphicsView::getInstance().getStelQGLWidget();
-	Q_ASSERT(glQGLWidget);
+	//QGLWidget* glQGLWidget=(QGLWidget *) StelMainView::getInstance().getStelQGLWidget();
+	//Q_ASSERT(glQGLWidget);
 
-
-	QImage img=glQGLWidget->grabFrameBuffer();
+	// FIXME: Get screenshot from StelMainView. TODO: implement a function there...
+	QImage img; // =glQGLWidget->grabFrameBuffer();
 
 	int imageYPos=(printDataOption? 400: 0);
 
@@ -315,7 +316,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation locationData=core->getCurrentLocation();
-	double jd = core->getJDay();
+	const double jd = core->getJD();
 
 	int fontsize = (int)printer->pageRect().width()/60;
 	font.setPixelSize(fontsize);
@@ -354,12 +355,17 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		painter.drawText(surfaceData.adjusted(50, lineSpacing, 0, 0), Qt::AlignLeft, location);
 
 		StelLocaleMgr lmgr = StelApp::getInstance().getLocaleMgr();
-		QString datetime = QString("%1: %2 %3 (UTC%4%5)")
+		//QString datetime = QString("%1: %2 %3 (UTC%4%5)")
+		//			.arg(q_("Local time"))
+		//			.arg(lmgr.getPrintableDateLocal(jd))
+		//			.arg(lmgr.getPrintableTimeLocal(jd))
+		//			.arg(lmgr.getGMTShift(jd)>=0? '+':'-')
+		//			.arg(lmgr.getGMTShift(jd));
+		QString datetime = QString("%1: %2 %3 (%4)")
 					.arg(q_("Local time"))
 					.arg(lmgr.getPrintableDateLocal(jd))
 					.arg(lmgr.getPrintableTimeLocal(jd))
-					.arg(lmgr.getGMTShift(jd)>=0? '+':'-')
-					.arg(lmgr.getGMTShift(jd));
+					.arg(locationData.ianaTimeZone);
 
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*2, 0, 0), Qt::AlignLeft, datetime);
 
@@ -399,7 +405,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		double geographicLatitude=locationData.latitude*M_PI/180.;
 
 		PlanetP pHome=ssmgr->searchByEnglishName(locationData.planetName);
-		double standardSideralTime=pHome->getSiderealTime(((int) jd)+0.5)*M_PI/180.;
+		//double standardSideralTime=pHome->getSiderealTime(((int) jd)+0.5)*M_PI/180.;
+		double standardSideralTime=pHome->getSiderealTime(floor(jd)+0.5, floor(jd)+0.5)*M_PI/180.;
 
 		QStringList allBodiesNames=ssmgr->getAllPlanetEnglishNames();
 		allBodiesNames.sort();
@@ -468,7 +475,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				if (setting<0.)
 					setting+=1.;
 
-				int shift=StelApp::getInstance().getLocaleMgr().getGMTShift(jd);
+				int shift=0; // FIXME: StelApp::getInstance().getLocaleMgr().getGMTShift(jd);
 
 				int ratioWidth=300.*(double) fontsize/45.;
 				int xPos=printer->pageRect().left()-ratioWidth;
@@ -524,7 +531,7 @@ void PrintSkyDialog::executePrinterOutputOption()
 
 	try
 	{
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
 		invertColorsOption=settings.value("use_invert_colors", false).toBool();
@@ -561,7 +568,8 @@ void PrintSkyDialog::executePrinterOutputOption()
 	}
 
 	gui->setVisible(currentVisibilityGui);
-	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
+	// FIXME: what to do?
+	//((QGraphicsWidget*)StelMainView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
 
 
@@ -580,11 +588,15 @@ QString PrintSkyDialog::printableTime(double time, int shift)
 		time-=24.;
 	if (time<0)
 		time+=24.;
-	int hour=(int) time;
-	time-=hour;
-	time*=60;
-	int minute=(int) time;
-	return(QString("%1:%2").arg(hour, 2, 10, QChar('0')).arg(minute, 2, 10, QChar('0')));
+
+	//int hour=(int) time;
+	//time-=hour;
+	//time*=60;
+	//int minute=(int) time;
+	//return(QString("%1:%2").arg(hour, 2, 10, QChar('0')).arg(minute, 2, 10, QChar('0')));
+	QTime tm(0,0);
+	tm.addMSecs(static_cast<int>(time/24.*86400000.));
+	return tm.toString("HH:mm");
 }
 
 //! Get relations between magnitude stars and draw radius
@@ -594,15 +606,15 @@ QList< QPair<float, float> > PrintSkyDialog::getListMagnitudeRadius(StelCore *co
     StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
 
-    float rcmag_table[1];
+    RCMag rcmag_table[1];
     for (int mag=-30; mag<100; ++mag)
     {
 	skyDrawer->computeRCMag(mag,rcmag_table);
-	if (rcmag_table[0]>0. && rcmag_table[0]<13.)
+	if (rcmag_table[0].radius>0.f && rcmag_table[0].radius<13.f)
 	{
 	    QPair<float, float> pairMagnitudeRadius;
 	    pairMagnitudeRadius.first=mag;
-	    pairMagnitudeRadius.second=rcmag_table[0];
+	    pairMagnitudeRadius.second=rcmag_table[0].radius;
 	    listPairsMagnitudesRadius << pairMagnitudeRadius;
 	}
     }

@@ -13,8 +13,8 @@
 #include "StelVertexArray.hpp"
 #include "PrintSky.hpp"
 #include <QAction>
-#include "StelMainGraphicsView.hpp"
-#include <QGLWidget>
+#include "StelMainView.hpp"
+#include <QOpenGLWidget>
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
@@ -25,28 +25,33 @@ StelModule* PrintSkyStelPluginInterface::getStelModule() const
 
 StelPluginInfo PrintSkyStelPluginInterface::getPluginInfo() const
 {
+	// Allow to load the resources when used as a static plugin
+	//Q_INIT_RESOURCE(PrintSky);
+
 	StelPluginInfo info;
 	info.id = "PrintSky";
 	info.displayedName =  N_("Print Sky");
-	info.authors = "Pep Pujols";
+	info.authors = "Pep Pujols, Georg Zotti";
 	info.contact = "maslarocaxica@gmail.com";
 	info.description = N_("Provides a system printing sky");
+	info.version = PRINTSKY_PLUGIN_VERSION;
+	info.license = PRINTSKY_PLUGIN_LICENSE;
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(PrintSky, PrintSkyStelPluginInterface)
-
-PrintSky::PrintSky()
+PrintSky::PrintSky() :
+	useInvertColors(false),
+	scaleToFit(false),
+	printData(true),
+	printSSEphemerides(true)
 {
 	setObjectName("PrintSky");
-	useInvertColors=scaleToFit=false;
-	printData=true;
 }
 
 PrintSky::~PrintSky()
 {
 	delete printskyDialog;
-	printskyDialog = NULL;
+	printskyDialog = Q_NULLPTR;
 }
 
 void PrintSky::init()
@@ -57,16 +62,17 @@ void PrintSky::init()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	gui->addGuiActions("actionInit_Printing_Sky", N_("Printing Sky"), "Ctrl+P", N_("Plugin Key Bindings"), true, false);
-	gui->getGuiActions("actionInit_Printing_Sky")->setChecked(true);
-	connect(gui->getGuiActions("actionInit_Printing_Sky"), SIGNAL(triggered()), this, SLOT(initPrintingSky()));
+	// FIXME: correct action syntax after fixing the properties.
+	//gui->addGuiActions("actionInit_Printing_Sky", N_("Printing Sky"), "Ctrl+P", N_("Plugin Key Bindings"), true, false);
+	//gui->getGuiActions("actionInit_Printing_Sky")->setChecked(true);
+	//connect(gui->getGuiActions("actionInit_Printing_Sky"), SIGNAL(triggered()), this, SLOT(initPrintingSky()));
 
 	try
 	{
 		//Make sure that "/modules/PrintSky" exists
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/PrintSky/");
 
-		StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
@@ -84,33 +90,39 @@ void PrintSky::init()
 
 void PrintSky::update(double deltaTime)
 {
+	Q_UNUSED(deltaTime)
 }
 
 //! Draw any parts on the screen which are for our module
 void PrintSky::draw(StelCore* core)
 {
+	Q_UNUSED(core)
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
 double PrintSky::getCallOrder(StelModuleActionName actionName) const
 {
+	Q_UNUSED(actionName)
 	return 0;
 }
 
 void PrintSky::handleKeys(QKeyEvent* event)
 {
-		event->setAccepted(false);
+	event->setAccepted(false);
 }
 
 void PrintSky::handleMouseClicks(class QMouseEvent* event)
 {
-		event->setAccepted(false);
+	event->setAccepted(false);
 
 }
 
 bool PrintSky::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
-		return false;
+	Q_UNUSED(x)
+	Q_UNUSED(y)
+	Q_UNUSED(b)
+	return false;
 }
 
 //! Show dialog printing enabling preview and print buttons
@@ -120,10 +132,10 @@ void PrintSky::initPrintingSky()
 	printskyDialog->enableOutputOptions(true);
 }
 
-void PrintSky::setStelStyle(const QString& section)
-{
-	printskyDialog->updateStyle();
-}
+//void PrintSky::setStelStyle(const QString& section)
+//{
+//	printskyDialog->updateStyle();
+//}
 
 bool PrintSky::configureGui(bool show)
 {

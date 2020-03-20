@@ -17,14 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef _STELDIALOGPRINTSKY_HPP_
-#define _STELDIALOGPRINTSKY_HPP_
+#ifndef STELDIALOGPRINTSKY_HPP
+#define STELDIALOGPRINTSKY_HPP
 
 #include <QObject>
 
 //! @class StelDialog
 //! A local copy of StelDialog, the base class for all the GUI windows in Stellarium, included to allow the plug-in to be
 //! loaded dynamically on Windows. (An "Invalid access to memory location" error is thrown otherwise.)
+//! 2020/Qt5: This class is currently unused, plugin is created static only.
 class StelDialogPrintSky : public QObject
 {
 	Q_OBJECT

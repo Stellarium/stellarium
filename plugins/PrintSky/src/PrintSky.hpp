@@ -27,7 +27,7 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	virtual void setStelStyle(const QString& style);
+	//virtual void setStelStyle(const QString& style);
 
 public slots:
 
@@ -44,7 +44,7 @@ private:
 	PrintSkyDialog *printskyDialog;
 };
 
-#include "fixx11h.h"
+//#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -52,10 +52,12 @@ private:
 class PrintSkyStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
  };
 
 #endif // PrintSky_H

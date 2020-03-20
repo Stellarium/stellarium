@@ -199,7 +199,7 @@ Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_PRINTSKY
-Q_IMPORT_PLUGIN(PrintSky)
+Q_IMPORT_PLUGIN(PrintSkyStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SCENERY3D

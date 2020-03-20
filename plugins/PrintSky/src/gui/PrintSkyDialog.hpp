@@ -16,11 +16,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PRINTSKYDIALOG_HPP_
-#define _PRINTSKYDIALOG_HPP_
+#ifndef PRINTSKYDIALOG_HPP
+#define PRINTSKYDIALOG_HPP
 
 #include <QObject>
-#include "StelDialogPrintSky.hpp"
+//#include "StelDialogPrintSky.hpp"
+#include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include <QPrinter>
 #include <QPrintPreviewWidget>
@@ -30,14 +31,14 @@
 class Ui_printskyDialogForm;
 
 
-class PrintSkyDialog : public StelDialogPrintSky
+class PrintSkyDialog : public StelDialog // PrintSky
 {
 	Q_OBJECT
 
 public:
 	PrintSkyDialog();
 	virtual ~PrintSkyDialog();
-	void languageChanged();
+	virtual void retranslate();
 	void updateStyle();
 
 	//! Notify that the application style changed
@@ -95,4 +96,4 @@ private:
 
 };
 
-#endif // _OCULARDIALOG_HPP_
+#endif // PRINTSKYDIALOG_HPP
