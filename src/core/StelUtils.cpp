@@ -1596,15 +1596,12 @@ double getDeltaTByMeeusSimons(const double jDay)
 {
 	int year, month, day;
 	double u;	
-	double deltaT = 0.;
+	double deltaT = 0.0;
 	getDateFromJulianDay(jDay, &year, &month, &day);
-
-	//double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	//double ub = (yeardec-2000)/100;
 	const double ub=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
-	if (year <1620)
-		deltaT=0.0;
+	if (year<1620)
+		deltaT = 0.0;
 	else if (year < 1690)
 	{
 		u = 3.45 + ub;
@@ -1735,7 +1732,6 @@ double getDeltaTByBanjevic(const double jDay)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
-
 	double u, c;
 
 	// Limited years!

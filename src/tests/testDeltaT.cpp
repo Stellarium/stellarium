@@ -595,6 +595,7 @@ void TestDeltaT::testDeltaTByMeeusSimons()
 	// http://adsabs.harvard.edu/abs/1998JBAA..108..154M
 
 	QVariantList data;
+	data << 1619 <<  0.00; // zero outside the valid range
 	data << 1974 << 44.49;
 	data << 1975 << 45.48;
 	data << 1976 << 46.46;
@@ -619,6 +620,8 @@ void TestDeltaT::testDeltaTByMeeusSimons()
 	data << 1995 << 60.79;
 	data << 1996 << 61.63;
 	data << 1997 << 62.30;
+	data << 1999 << 64.00;
+	data << 2001 <<  0.00; // zero outside the valid range
 
 	while(data.count() >= 2)
 	{

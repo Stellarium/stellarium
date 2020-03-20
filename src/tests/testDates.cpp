@@ -497,6 +497,42 @@ void TestDates::testWeekdays()
 	}
 }
 
+void TestDates::testDatesFromJD()
+{
+	QVariantList data;
+	data << 2500000.0 <<  2132 <<  8 << 31;
+	data << 2454466.5 <<  2008 <<  1 <<  1;
+	data << 2454466.0 <<  2007 << 12 << 31;
+	data << 2451545.0 <<  2000 <<  1 <<  1;
+	data << 2442413.5 <<  1975 <<  1 <<  1;
+	data << 2433282.5 <<  1950 <<  1 <<  1;
+	data << 2415020.5 <<  1900 <<  1 <<  1;
+	data << 2405889.5 <<  1875 <<  1 <<  1;
+	data << 2400000.0 <<  1858 << 11 << 16;
+	data << 2396758.5 <<  1850 <<  1 <<  1;
+	data << 2385800.5 <<  1820 <<  1 <<  1;
+	data << 2378496.5 <<  1800 <<  1 <<  1;
+	data << 2110516.0 <<  1066 <<  4 << 12;
+	data << 1720693.0 <<    -1 <<  1 <<  1;
+	data <<     366.0 << -4711 <<  1 <<  1;
+	data <<      -1.0 << -4713 << 12 << 31;
+
+	while (data.count() >=4)
+	{
+		int yout, mout, dout;
+		double JD = data.takeFirst().toDouble();
+		int year  = data.takeFirst().toInt();
+		int month = data.takeFirst().toInt();
+		int day	  = data.takeFirst().toInt();
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+
+		QVERIFY2((year==yout && month==mout && day == dout), qPrintable(QString("JD %1 = %2-%3-%4 (expected %5-%6-%7)")
+						  .arg(QString::number(JD, 'f', 1))
+						  .arg(yout).arg(mout).arg(dout)
+						  .arg(year).arg(month).arg(day)));
+	}
+}
+
 #define TJ1 (2450000)
 
 void TestDates::benchmarkOldGetDateFromJulianDay()
