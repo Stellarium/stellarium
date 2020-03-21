@@ -93,126 +93,6 @@ void PrintSkyDialog::closeWindow()
 }
 
 
-/* ********************************************************************* */
-void PrintSkyDialog::invertColorsStateChanged(int state)
-{
-	bool shouldInvert = (state == Qt::Checked);
-
-	try
-	{
-		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
-		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		bool useInvertColors = settings.value("use_invert_colors", 0.0).toBool();
-		if (state != useInvertColors)
-		{
-			settings.setValue("use_invert_colors", shouldInvert);
-			emit(invertColorsChanged(shouldInvert));
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
-	}
-
-}
-
-/* ********************************************************************* */
-void PrintSkyDialog::scaleToFitStateChanged(int state)
-{
-	bool shouldScale = (state == Qt::Checked);
-
-	try
-	{
-		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
-		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		bool useScaleToFit = settings.value("use_scale_to_fit", 0.0).toBool();
-		if (state != useScaleToFit)
-		{
-			settings.setValue("use_scale_to_fit", shouldScale);
-			emit(scaleToFitChanged(shouldScale));
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
-	}
-
-}
-
-/* ********************************************************************* */
-void PrintSkyDialog::orientationStateChanged(bool state)
-{
-	Q_UNUSED(state)
-	QString newOrientation=(ui->orientationPortraitRadioButton->isChecked()? "Portrait": "Landscape");
-
-	try
-	{
-		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
-		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		QString currentOrientation = settings.value("orientation", "Portrait").toString();
-		if (newOrientation != currentOrientation)
-		{
-			settings.setValue("orientation", newOrientation);
-			emit(orientationChanged(true));
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
-	}
-
-}
-
-/* ********************************************************************* */
-void PrintSkyDialog::printDataStateChanged(int state)
-{
-	bool shouldPrint = (state == Qt::Checked);
-
-	try
-	{
-		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
-		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		bool printData = settings.value("print_data", 0.0).toBool();
-		if (state != printData)
-		{
-			settings.setValue("print_data", shouldPrint);
-			emit(printDataChanged(shouldPrint));
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
-	}
-
-}
-
-/* ********************************************************************* */
-void PrintSkyDialog::printSSEphemeridesStateChanged(int state)
-{
-	bool shouldPrint = (state == Qt::Checked);
-
-	try
-	{
-		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
-		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
-		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		bool printSSEphemerides = settings.value("print_SS_ephemerides", 0.0).toBool();
-		if (state != printSSEphemerides)
-		{
-			settings.setValue("print_SS_ephemerides", shouldPrint);
-			emit(printSSEphemeridesChanged(shouldPrint));
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
-	}
-
-}
 
 
 /* ********************************************************************* */
@@ -223,13 +103,21 @@ void PrintSkyDialog::createDialogContent()
 
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->invertColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(invertColorsStateChanged(int)));
-	connect(ui->scaleToFitCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleToFitStateChanged(int)));
+	//connect(ui->invertColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(invertColorsStateChanged(int)));
+	//connect(ui->scaleToFitCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleToFitStateChanged(int)));
 	connect(ui->previewSkyPushButton, SIGNAL(clicked()), this, SLOT(previewSky()));
 	connect(ui->printSkyPushButton, SIGNAL(clicked()), this, SLOT(printSky()));
-	connect(ui->orientationPortraitRadioButton, SIGNAL(toggled(bool)), this, SLOT(orientationStateChanged(bool)));
-	connect(ui->printDataCheckBox, SIGNAL(stateChanged(int)), this, SLOT(printDataStateChanged(int)));
-	connect(ui->printSSEphemeridesCheckBox, SIGNAL(stateChanged(int)), this, SLOT(printSSEphemeridesStateChanged(int)));
+	//connect(ui->orientationPortraitRadioButton, SIGNAL(toggled(bool)), this, SLOT(orientationStateChanged(bool)));
+	//connect(ui->printDataCheckBox, SIGNAL(stateChanged(int)), this, SLOT(printDataStateChanged(int)));
+	//connect(ui->printSSEphemeridesCheckBox, SIGNAL(stateChanged(int)), this, SLOT(printSSEphemeridesStateChanged(int)));
+
+	connectBoolProperty(ui->invertColorsCheckBox, "PrintSky.useInvertColors");
+	connectBoolProperty(ui->scaleToFitCheckBox, "PrintSky.scaleToFit");
+	connectBoolProperty(ui->printDataCheckBox, "PrintSky.printData");
+	connectBoolProperty(ui->printSSEphemeridesCheckBox, "PrintSky.printSSEphemerides");
+	// FIXME: Do something to select orientation.
+	//connectBoolProperty(ui->scaleToFitCheckBox, "PrintSky.scaleToFit");
+
 
 	// set the initial state
 	try
@@ -237,31 +125,31 @@ void PrintSkyDialog::createDialogContent()
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		bool useInvertColors = settings.value("use_invert_colors", false).toBool();
-		if (useInvertColors)
-		{
-			ui->invertColorsCheckBox->setCheckState(Qt::Checked);
-		}
-		bool useScaleToFit = settings.value("use_scale_to_fit", true).toBool();
-		if (useScaleToFit)
-		{
-			ui->scaleToFitCheckBox->setCheckState(Qt::Checked);
-		}
-		QString orientation=settings.value("orientation", "Portrait").toString();
-		if (orientation=="Portrait")
-			ui->orientationPortraitRadioButton->setChecked(true);
-		if (orientation=="Landscape")
-			ui->orientationLandscapeRadioButton->setChecked(true);
-		bool printData = settings.value("print_data", true).toBool();
-		if (printData)
-		{
-			ui->printDataCheckBox->setCheckState(Qt::Checked);
-		}
-		bool printSSEphemerides = settings.value("print_SS_ephemerides", true).toBool();
-		if (printSSEphemerides)
-		{
-			ui->printSSEphemeridesCheckBox->setCheckState(Qt::Checked);
-		}
+//		bool useInvertColors = settings.value("use_invert_colors", false).toBool();
+//		if (useInvertColors)
+//		{
+//			ui->invertColorsCheckBox->setCheckState(Qt::Checked);
+//		}
+//		bool useScaleToFit = settings.value("use_scale_to_fit", true).toBool();
+//		if (useScaleToFit)
+//		{
+//			ui->scaleToFitCheckBox->setCheckState(Qt::Checked);
+//		}
+//		QString orientation=settings.value("orientation", "Portrait").toString();
+//		if (orientation=="Portrait")
+//			ui->orientationPortraitRadioButton->setChecked(true);
+//		if (orientation=="Landscape")
+//			ui->orientationLandscapeRadioButton->setChecked(true);
+//		bool printData = settings.value("print_data", true).toBool();
+//		if (printData)
+//		{
+//			ui->printDataCheckBox->setCheckState(Qt::Checked);
+//		}
+//		bool printSSEphemerides = settings.value("print_SS_ephemerides", true).toBool();
+//		if (printSSEphemerides)
+//		{
+//			ui->printSSEphemeridesCheckBox->setCheckState(Qt::Checked);
+//		}
 
 	}
 	catch (std::runtime_error& e)
@@ -290,6 +178,7 @@ void PrintSkyDialog::previewSky()
 void PrintSkyDialog::printDataSky(QPrinter * printer)
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	PrintSky *plugin=GETSTELMODULE(PrintSky);
 
 	QPainter painter(printer);
 
@@ -299,15 +188,15 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	// FIXME: Get screenshot from StelMainView. TODO: implement a function there...
 	QImage img; // =glQGLWidget->grabFrameBuffer();
 
-	int imageYPos=(printDataOption? 400: 0);
+	int imageYPos=(plugin->getPrintDataState()? 400: 0);
 
 	QSize sizeReal=printer->pageRect().size();
 	sizeReal.setHeight(sizeReal.height()-imageYPos);
 
-	if (scaleToFitOption)
+	if (plugin->getScaleToFitState())
 		img=img.scaled(sizeReal, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-	if (invertColorsOption)
+	if (plugin->getInvertColorsState())
 		img.invertPixels();
 
 	int imageXPos=(printer->pageRect().width()-img.width())/2;
@@ -332,7 +221,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	//qDebug() << "Paper Rect: "<< printer->paperRect();
 	//qDebug() << "Page Rect: "<< printer->pageRect();
 
-	if (printDataOption)
+	if (plugin->getPrintDataState())
 	{
 		int posY=img.height()+lineSpacing;
 
@@ -396,7 +285,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	}
 
 		// Print solar system ephemerides
-	if (printSSEphemeridesOption)
+	if (plugin->getPrintSSEphemeridesState())
 	{
 
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -523,11 +412,11 @@ void PrintSkyDialog::printSky()
 void PrintSkyDialog::executePrinterOutputOption()
 {
 	//Options for printing image.
-	invertColorsOption=false;
-	scaleToFitOption=true;
+	bool invertColorsOption=false;
+	bool scaleToFitOption=true;
 	orientationOption="Portrait";
-	printDataOption=true;
-	printSSEphemeridesOption=true;
+	bool printDataOption=true;
+	bool printSSEphemeridesOption=true;
 
 	try
 	{

@@ -12,6 +12,12 @@
 class PrintSky : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool useInvertColors     READ getInvertColorsState        WRITE setInvertColorsState        NOTIFY invertColorsChanged)
+	Q_PROPERTY(bool scaleToFit          READ getScaleToFitState          WRITE setScaleToFitState          NOTIFY scaleToFitChanged)
+	Q_PROPERTY(bool printData           READ getPrintDataState           WRITE setPrintDataState           NOTIFY printDataChanged)
+	Q_PROPERTY(bool printSSEphemerides  READ getPrintSSEphemeridesState  WRITE setPrintSSEphemeridesState  NOTIFY printSSEphemeridesChanged)
+	Q_PROPERTY(bool orientationPortrait READ getOrientationPortraitState WRITE setOrientationPortraitState NOTIFY orientationChanged)
+
 public:
 	 PrintSky();
 	virtual ~PrintSky();
@@ -29,17 +35,37 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//virtual void setStelStyle(const QString& style);
 
+signals:
+	void invertColorsChanged(bool state);
+	void scaleToFitChanged(bool state);
+	void orientationChanged(bool state);
+	void printDataChanged(bool state);
+	void printSSEphemeridesChanged(bool state);
+
 public slots:
 
 	//! Show dialog printing enabling preview and print buttons
 	void initPrintingSky();
+
+	void setInvertColorsState(bool state);
+	void setScaleToFitState(bool state);
+	void setOrientationPortraitState(bool state);
+	void setPrintDataState(bool state);
+	void setPrintSSEphemeridesState(bool state);
+	bool getInvertColorsState() const { return useInvertColors;}
+	bool getScaleToFitState() const { return scaleToFit;}
+	bool getOrientationPortraitState() const { return orientationPortrait;}
+	bool getPrintDataState() const { return printData;}
+	bool getPrintSSEphemeridesState() const { return printSSEphemerides;}
+
 
 private slots:
 
 private:
 	//Printing options
 	bool useInvertColors, scaleToFit, printData, printSSEphemerides;
-	QString orientation;
+	//QString orientation;
+	bool orientationPortrait; // true for Portrait paper, false for Landscape
 
 	PrintSkyDialog *printskyDialog;
 };

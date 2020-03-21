@@ -55,12 +55,6 @@ public slots:
 	//! Print report direct to printer
 	void printSky();
 
-signals:
-	void invertColorsChanged(bool state);
-	void scaleToFitChanged(bool state);
-	void orientationChanged(bool state);
-	void printDataChanged(bool state);
-	void printSSEphemeridesChanged(bool state);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -68,14 +62,9 @@ protected:
 	Ui_printskyDialogForm* ui;
 
 private slots:
-	void invertColorsStateChanged(int state);
 	//! Draw contents report
 	//! @param printer the paint device to paint on a print
 	void printDataSky(QPrinter * printer);
-	void scaleToFitStateChanged(int state);
-	void orientationStateChanged(bool state);
-	void printDataStateChanged(int state);
-	void printSSEphemeridesStateChanged(int state);
 
 private:
 	QFont font;
@@ -85,11 +74,11 @@ private:
 
 	//! Printing options
 	bool outputOption;
-	bool invertColorsOption;
-	bool scaleToFitOption;
+	//bool invertColorsOption;
+	//bool scaleToFitOption;
 	QString orientationOption;
-	bool printDataOption;
-	bool printSSEphemeridesOption;
+	//bool printDataOption;
+	//bool printSSEphemeridesOption;
 	QString printableTime(double time, int shift);
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
 
