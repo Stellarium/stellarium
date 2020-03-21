@@ -55,6 +55,7 @@
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "ToastMgr.hpp"
+#include "getEnv.hpp"
 
 #include <QDateTime>
 #include <QDebug>
@@ -100,7 +101,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 }
 
@@ -759,7 +760,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	StelCore *core = StelApp::getInstance().getCore();
 	if (dt == "now")
 		return StelUtils::getJDFromSystem();
-	
+
 	bool ok;
 	double jd;
 	if (spec=="local")
@@ -772,7 +773,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	}
 	if (ok)
 		return jd;
-	
+
 	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|sol|sols|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
 	if (nowRe.exactMatch(dt))
 	{
@@ -825,7 +826,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			jd -= (unit * delta);
 		return jd;
 	}
-	
+
 	qWarning() << "StelMainScriptAPI::jdFromDateString error: date string" << dt << "not recognised, returning \"now\"";
 	return StelUtils::getJDFromSystem();
 }
@@ -1116,7 +1117,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
-	double dAlt = StelUtils::getDecAngle(alt);	
+	double dAlt = StelUtils::getDecAngle(alt);
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
 	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
@@ -1169,7 +1170,7 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dRa = StelUtils::getDecAngle(ra);
 	double dDec = StelUtils::getDecAngle(dec);
 
-	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
+	StelUtils::spheToRect(dRa,dDec,aimJ2000);
 	// make up vector more stable. Not sure if we have to set the up vector in this case though.
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 	Vec3d aimUp;
@@ -1286,11 +1287,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= 0x050A00
-	return qEnvironmentVariable(var.toLocal8Bit().constData());
-#else
-	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
-#endif
+	return getEnv(var.toLocal8Bit().constData());
 }
 
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.

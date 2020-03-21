@@ -31,6 +31,16 @@
 
 class QFileInfo;
 
+//! options for setting directories used by StelFileMgr
+//! by default they are empty string, and will be ignore in favor of
+//! defaults values adhereing to this XDG data directory standard
+struct StelFileMgrInitOptions {
+    QString configDirPath;
+    QString dataDirPath;
+		//! Used in tests to mock legacy user paths
+		QString _test_legacyUserPath;
+};
+
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
 //! directories in which to look for files called the search path. Typcially this
@@ -56,10 +66,14 @@ public:
 
 	//! Initialize the directories.
 	//! By default, StelFileMgr will be created with the Stellarium installation directory
-	//! config_root in the search path. On systems which provide a per-user data/settings
-	//! directory (which we call the user_settings directory, this is also included in
-	//! the search path, before the \<config_root> directory.
-	static void init();
+    //! config_root in the search path. On systems which provide per-user data and config
+    //! directories (which we call the data and config directories respectively, these are included in
+    //! the search path, before the \<config_root> (installation) directory.
+    static void init();
+
+    //! Initialize directories with options for setting directory locations
+    //! If provided the defined directories will override the defaults
+    static void init(const StelFileMgrInitOptions &options);
 
 	//! Search for a path within the search paths, for example "textures/fog.png".
 	//! findFile looks through the search paths in order, returning the first instance
@@ -182,12 +196,17 @@ public:
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
 	static const QDir getCacheDir();
 
-	//! Sets the user directory.  This updates the search paths (first element)
-	//! @param newDir the new value of the user directory
+    //! Sets the user config directory.  This updates the search paths (first element)
+    //! @param newConfigDir the new value of the user config directory
 	//! @exception NOT_VALID if the specified user directory is not usable
-	static void setConfigDir(const QString& newDir);
+    static void setConfigDir(const QString& neConfigDir);
 
-	//! This is the directory into which screenshots will be saved.
+    //! Sets the user data directory.  This updates the search paths (first element)
+    //! @param newDataDir the new value of the user data directory
+    //! @exception NOT_VALID if the specified user data directory is not usable
+    static void setDataDir(const QString& neDataDir);
+
+    //! This is the directory into which screenshots will be saved.
 	//! It is $HOME on Linux, BSD, Solaris etc.
 	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
 	//! It is ??? on Windows
@@ -234,16 +253,16 @@ private:
     static QString getLegacyUserDirPath();
 
     //! Determine the directory to be used for configuration storage
-    static QDir resolveConfigDirectory();
+    static QDir resolveConfigDirectory(const QString& configDirFromOptions);
 
     //! Determine the directory to be used for application data storage
-    static QDir resolveDataDirectory();
+    static QDir resolveDataDirectory(const QString& dataDirFromOptions);
 
     //! Set the installation directory
     static void initInstallDirectory();
 
     //! Set the installation directory
-    static void migrateLegacyUserDirectory();
+    static void migrateLegacyUserDirectory(const StelFileMgrInitOptions& options);
 
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.

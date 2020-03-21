@@ -53,8 +53,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--version (or -v)       : Print program name and version and exit.\n"
 			  << "--help (or -h)          : This cruft.\n"
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
-			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
-			  << "--verbose               : Even more diagnostic output in logfile \n"
+              << "--user-dir (or -u)      : Use an alternative user config directory\n"
+              << "--data-dir (or -d)      : Use an alternative user data directory\n"
+              << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
 			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
 			  << "                          May help for certain driver configurations. Mac?\n"
@@ -153,16 +154,27 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	try
 	{
-		QString newUserDir;
-		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
-		if (newUserDir!="" && !newUserDir.isEmpty())
-			StelFileMgr::setConfigDir(newUserDir);
+        auto newConfigDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
+        if (newConfigDir !="" && !newConfigDir .isEmpty())
+            StelFileMgr::setConfigDir(newConfigDir );
 	}
 	catch (std::runtime_error& e)
 	{
 		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
 		exit(1);
 	}
+
+    try
+    {
+        auto newDataDir = argsGetOptionWithArg(argList, "-d", "--data-dir", "").toString();
+        if (newDataDir !="" && !newDataDir .isEmpty())
+            StelFileMgr::setDataDir(newDataDir );
+    }
+    catch (std::runtime_error& e)
+    {
+        qCritical() << "ERROR: while processing --user-dir option: " << e.what();
+        exit(1);
+    }
 }
 
 void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings* confSettings)

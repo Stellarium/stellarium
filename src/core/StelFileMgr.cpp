@@ -28,7 +28,6 @@
 #include <QStandardPaths>
 #include <QProcessEnvironment>
 #include <QMessageBox>
-#include <QtGlobal>
 
 #include <cstdio>
 #include <iostream>
@@ -52,12 +51,17 @@ QDir StelFileMgr::installDir;
 
 void StelFileMgr::init()
 {
-    configDir = resolveConfigDirectory();
-    dataDir = resolveDataDirectory();
+    init({});
+}
+
+void StelFileMgr::init(const StelFileMgrInitOptions &options)
+{
+    configDir = resolveConfigDirectory(options.configDirPath);
+    dataDir = resolveDataDirectory(options.dataDirPath);
     initInstallDirectory();
 
     // migrate legacy user directory into config and data directories
-    migrateLegacyUserDirectory();
+    migrateLegacyUserDirectory(options);
 
     if (!configDir.exists())
 	{
@@ -240,73 +244,37 @@ QString StelFileMgr::getLegacyUserDirPath()
 #endif
 }
 
-//! retreive data directory defined by Environment Variable STEL_USERDIR
-QString getEnvUserDirectory()
+QDir StelFileMgr::resolveConfigDirectory(const QString& optionalConfigPath)
 {
-#if QT_VERSION >= 0x050A00
-    if (qEnvironmentVariableIsSet("STEL_USERDIR"))
-    {
-        return qEnvironmentVariable("STEL_USERDIR");
-    }
-#else
-    QByteArray dataDirCandidate=qgetenv("STEL_USERDIR");
-    if (dataDirCandidate.length()>0)
-    {
-        return QString::fromLocal8Bit(dataDirCandidate);
-    }
-#endif
-    return QString();
-}
-
-QDir StelFileMgr::resolveConfigDirectory()
-{
-    const auto envUserDirectory = getEnvUserDirectory();
-
-    if (!envUserDirectory.isEmpty()) {
-        qDebug() << "Using ENV defined config directory: " << envUserDirectory;
-        return QDir(envUserDirectory);
+    if (optionalConfigPath.isEmpty()) {
+        const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
+        return appConfigLocation;
     }
 
-    const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
-    qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
-    return appConfigLocation;
-}
-
-//! retreive data directory defined by Environment Variable STEL_DATADIR
-QString getEnvDataDirectory()
-{
-#if QT_VERSION >= 0x050A00
-    if (qEnvironmentVariableIsSet("STEL_DATADIR"))
-    {
-        return qEnvironmentVariable("STEL_DATADIR");
-    }
-#else
-    QByteArray dataDirCandidate = qgetenv("STEL_DATADIR");
-    if (dataDirCandidate.length()>0)
-    {
-        return QString::fromLocal8Bit(dataDirCandidate);
-    }
-#endif
-    return QString();
+    qDebug() << "Using ENV option config directory: " << optionalConfigPath;
+    return QDir(optionalConfigPath);
 }
 
 //! Determine the directory to be used for application data storage
-QDir StelFileMgr::resolveDataDirectory()
+QDir StelFileMgr::resolveDataDirectory(const QString& optionalDataPath)
 {
-    const auto envDataDirectory = getEnvDataDirectory();
-
-    if(!envDataDirectory.isEmpty()) {
-        qDebug() << "Using ENV defined data directory: " << envDataDirectory;
+    if(optionalDataPath.isEmpty()) {
+        const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
+        return appConfigLocation;
     }
 
-    const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
-    qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
-    return appConfigLocation;
+    qDebug() << "Using ENV defined data directory: " << optionalDataPath;
+    return QDir(optionalDataPath);
 }
 
-void StelFileMgr::migrateLegacyUserDirectory()
+void StelFileMgr::migrateLegacyUserDirectory(const StelFileMgrInitOptions &options)
 {
-//   const auto legacyUserDirectory = QDir(getLegacyUserDirPath());
+    const auto legacyPath = options._test_legacyUserPath.isEmpty() ?
+                getLegacyUserDirPath() :
+                options._test_legacyUserPath;
+    const auto legacyUserDirectory = QDir(legacyPath);
 
 //    if (legacyUserDirectory.exists() && (!configDir.exists() || !dataDir.exists())) {
 //          QString question("Stellarium has changed it's configuration directory location.\n");
@@ -552,15 +520,24 @@ const QDir& StelFileMgr::getConfigDir()
     return configDir;
 }
 
-void StelFileMgr::setConfigDir(const QString& newDir)
+void StelFileMgr::setConfigDir(const QString& newConfigDir)
 {
-	makeSureDirExistsAndIsWritable(newDir);
-    searchDirectories[0] = QDir(newDir);
+    makeSureDirExistsAndIsWritable(newConfigDir);
+    configDir = QDir(newConfigDir);
+    searchDirectories[0] = configDir;
+
 }
 
 const QDir& StelFileMgr::getDataDir()
 {
     return dataDir;
+}
+
+void StelFileMgr::setDataDir(const QString& newDataDir)
+{
+    makeSureDirExistsAndIsWritable(newDataDir);
+    dataDir = QDir(newDataDir);
+    searchDirectories[1] = dataDir;
 }
 
 const QDir& StelFileMgr::getInstallationDir()

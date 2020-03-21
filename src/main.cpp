@@ -26,6 +26,7 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
+#include "getEnv.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptOutput.hpp"
 #endif
@@ -190,8 +191,8 @@ int main(int argc, char **argv)
 	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
 	qputenv("QT_HARFBUZZ", "old");
 
-	// Init the file manager
-	StelFileMgr::init();
+	// Init the file manager with directories optionally defined by ENV
+	StelFileMgr::init({	getEnv("STEL_CONFIG_DIR"), getEnv("STEL_DATA_DIR")});
 
 	SplashScreen::present();
 
@@ -203,13 +204,16 @@ int main(int argc, char **argv)
 		argList << argv[i];
 		argStr += QString("%1 ").arg(argv[i]);
 	}
-	// add contents of STEL_OPTS environment variable.
-	QString envStelOpts(qgetenv("STEL_OPTS").constData());
-	if (envStelOpts.length()>0)
+
+    // add contents of STEL_OPTS environment variable.
+    const auto envStelOpts = getEnv("STEL_OPTS");
+
+    if (!envStelOpts.isEmpty())
 	{
 		argList+= envStelOpts.split(" ");
-		argStr += " " + envStelOpts;
-	}
+        argStr += " " + envStelOpts;
+    }
+
 	//save the modified arg list as an app property for later use
 	qApp->setProperty("stelCommandLine", argList);
 
