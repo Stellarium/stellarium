@@ -158,7 +158,7 @@ void MpcImportWindow::updateTexts()
 	// TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 	QString queryString(q_("Query the MPC's %1:"));
 	ui->labelQueryLink->setText(QString(queryString).arg(linkText));
-	
+
 	QString firstLine(q_("Only one result will be returned if the query is successful."));
 	QString secondLine(q_("Both comets and asteroids can be identified with their number, name (in English) or provisional designation."));
 	QString cPrefix("<b>C/</b>");
@@ -775,7 +775,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	#endif
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
-	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
+	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
@@ -864,7 +864,7 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 	QTemporaryFile file;
 	if (file.open())
 	{
-		file.write(reply->readAll());		
+		file.write(reply->readAll());
 		file.close();
 
 		QRegExp cometProvisionalDesignation("[PCDXI]/");
@@ -982,7 +982,8 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcComets].clear();
 	bookmarks[MpcMinorPlanets].clear();
 
-	QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor/bookmarks.json");
+	const auto bookmarksFilePath = StelFileMgr::getDataDir().absoluteFilePath("modules/SolarSystemEditor/bookmarks.json");
+
 	bool outdated = false;
 	if (StelFileMgr::isReadable(bookmarksFilePath))
 	{
@@ -1079,11 +1080,11 @@ void MpcImportWindow::saveBookmarks()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getDataDir().absoluteFilePath("modules/SolarSystemEditor"));
 
 		QVariantMap jsonRoot;
 
-		QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor/bookmarks.json");
+		const auto bookmarksFilePath = StelFileMgr::getDataDir().absoluteFilePath("modules/SolarSystemEditor/bookmarks.json");
 
 		//If the file exists, load it first
 		if (StelFileMgr::isReadable(bookmarksFilePath))

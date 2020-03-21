@@ -78,11 +78,11 @@ void MeteorShowersMgr::init()
 	loadConfig();
 
 	// MeteorShowers directory
-	QString userDir = StelFileMgr::getUserDir() + "/modules/MeteorShowers";
-	StelFileMgr::makeSureDirExistsAndIsWritable(userDir);
+    const auto meteorShowersDir = QDir(StelFileMgr::getDataDir().absoluteFilePath("modules/MeteorShowers"));
+	StelFileMgr::makeSureDirExistsAndIsWritable(meteorShowersDir);
 
 	// Loads the JSON catalog
-	m_catalogPath = userDir + "/showers.json";
+    m_catalogPath =  meteorShowersDir.absoluteFilePath("showers.json");
 	if (!loadCatalog(m_catalogPath))
 	{
 		displayMessage(q_("The current catalog of Meteor Showers is invalid!"), "#bb0000");
@@ -163,7 +163,7 @@ void MeteorShowersMgr::loadConfig()
 	color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorIR(color);
-	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());	
+	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());
 	setFontSize(m_conf->value(MS_CONFIG_PREFIX + "/font_size", 13).toInt());
 	setEnableLabels(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_labels", true).toBool());
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
@@ -171,7 +171,7 @@ void MeteorShowersMgr::loadConfig()
 	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
-	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());	
+	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());
 }
 
 void MeteorShowersMgr::saveSettings()
@@ -183,11 +183,11 @@ void MeteorShowersMgr::saveSettings()
 void MeteorShowersMgr::loadTextures()
 {
 	m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
-				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
+				StelFileMgr::getInstallationDir().absoluteFilePath("textures/cometComa.png"),
 				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	m_pointerTexture = StelApp::getInstance().getTextureManager().createTexture(
-				StelFileMgr::getInstallationDir() + "/textures/pointeur5.png");
+				StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur5.png"));
 
 	m_radiantTexture = StelApp::getInstance().getTextureManager().createTexture(
 				":/MeteorShowers/radiant.png");
@@ -538,19 +538,19 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 {
-	m_colorARG = rgb;	
+	m_colorARG = rgb;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", StelUtils::vec3fToStr(rgb));
 }
 
 void MeteorShowersMgr::setColorARC(const Vec3f& rgb)
 {
-	m_colorARC = rgb;	
+	m_colorARC = rgb;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", StelUtils::vec3fToStr(rgb));
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
 {
-	m_colorIR = rgb;	
+	m_colorIR = rgb;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", StelUtils::vec3fToStr(rgb));
 }
 

@@ -130,19 +130,19 @@ void TelescopeControl::init()
 		loadConfiguration();
 		//Make sure that such a section is created, if it doesn't exist
 		saveConfiguration();
-		
+
 		//Make sure that the module directory exists
-		QString moduleDirectoryPath = StelFileMgr::getUserDir() + "/modules/TelescopeControl";
+		const auto moduleDirectoryPath = StelFileMgr::getDataDir().absoluteFilePath("modules/TelescopeControl");
 		if(!StelFileMgr::exists(moduleDirectoryPath))
 			StelFileMgr::mkDir(moduleDirectoryPath);
-		
+
 		//Load the device models
 		loadDeviceModels();
 		if(deviceModels.isEmpty())
 		{
 			qWarning() << "[TelescopeControl] No device model descriptions have been loaded. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.";
 		}
-		
+
 		//Unload Stellarium's internal telescope control module
 		//(not necessary since revision 6308; remains as an example)
 		//StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);
@@ -152,13 +152,14 @@ void TelescopeControl::init()
 			normally, but Stellarium crashed later with a segmentation fault,
 			because LandscapeMgr::getCallOrder() depended on the module's
 			existence to return a value.*/
-		
+
 		//Load and start all telescope clients
 		loadTelescopes();
-		
+
 		//Load OpenGL textures
-		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
-		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+        reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
+        const auto pointeur2Path = StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png");
+        selectionTexture = StelApp::getInstance().getTextureManager().createTexture(pointeur2Path);
 
 		QSignalMapper* slewObj = new QSignalMapper(this);
 		QSignalMapper* syncObj = new QSignalMapper(this);
@@ -230,14 +231,14 @@ void TelescopeControl::init()
 		qWarning() << "[TelescopeControl] init() error: " << e.what();
 		return;
 	}
-	
+
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
 void TelescopeControl::translateActionDescriptions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	
+
 	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 	{
 		QString name;
@@ -250,7 +251,7 @@ void TelescopeControl::translateActionDescriptions()
 		name = syncActionId.arg(i);
 		description = q_("Abort last slew command of telescope #%1").arg(i);
 		actionMgr->findAction(name)->setText(description);
-		
+
 		name = moveToCenterActionId.arg(i);
 		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 		actionMgr->findAction(name)->setText(description);
@@ -622,7 +623,7 @@ void TelescopeControl::loadConfiguration()
 		{
 			//qDebug() << "TelescopeControl: No telescope servers directory detected.";
 			useServerExecutables = false;
-			serverDirectoryPath = StelFileMgr::getUserDir() + "/servers";
+			serverDirectoryPath = StelFileMgr::getConfigDir().absoluteFilePath("servers");
 		}
 		else
 		{
@@ -1321,7 +1322,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
-			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
+			serverArguments << QString(StelFileMgr::getConfigDir().absoluteFilePath("log_TelescopeServer" + slotName + ".txt"));
 
 		qDebug() << "[TelescopeControl] Starting tellescope server at slot" << slotName
 				 << "with path"	 << QDir::toNativeSeparators(serverExecutablePath)
@@ -1459,7 +1460,7 @@ bool TelescopeControl::stopClientAtSlot(int slotNumber)
 void TelescopeControl::loadDeviceModels()
 {
 	//qDebug() << "TelescopeControl: Loading device model descriptions...";
-	
+
 	//Make sure that the device models file exists
 	bool useDefaultList = false;
 	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
@@ -1600,11 +1601,11 @@ void TelescopeControl::loadDeviceModels()
 			}
 			//else: everything is OK, using embedded server
 		}
-		
+
 		//Description and default connection delay
 		QString description = model.value("description", "No description is available.").toString();
 		int delay = model.value("default_delay", DEFAULT_DELAY).toInt();
-		
+
 		//Add this to the main list
 		DeviceModel newDeviceModel = {name, description, server, delay, useExecutable};
 		deviceModels.insert(name, newDeviceModel);
@@ -1700,7 +1701,7 @@ void TelescopeControl::addLogAtSlot(int slot)
 			return;
 		}
 
-		QString filePath = StelFileMgr::getUserDir() + "/log_TelescopeServer" + QString::number(slot) + ".txt";
+		const auto filePath = StelFileMgr::getConfigDir().absoluteFilePath("log_TelescopeServer" + QString::number(slot) + ".txt");
 		QFile* logFile = new QFile(filePath);
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
@@ -1787,4 +1788,3 @@ void TelescopeControl::translations()
 			N_("The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.")
 		#endif
 }
-

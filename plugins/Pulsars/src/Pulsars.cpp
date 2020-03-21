@@ -40,6 +40,7 @@
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
 #include <QFile>
 #include <QTimer>
@@ -54,7 +55,7 @@
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
 /*
- This method is the one called automatically by the StelModuleMgr just 
+ This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
 */
 StelModule* PulsarsStelPluginInterface::getStelModule() const
@@ -146,7 +147,8 @@ void Pulsars::init()
 
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Pulsars");
+        const auto pulsarPath = StelFileMgr::getDataDir().absoluteFilePath("modules/Pulsars");
+		StelFileMgr::makeSureDirExistsAndIsWritable(pulsarPath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Pulsars"))
@@ -162,7 +164,7 @@ void Pulsars::init()
 		if (jsonCatalogPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
@@ -226,7 +228,7 @@ void Pulsars::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	for (const auto& pulsar : psr)
 	{
 		if (pulsar && pulsar->initialized)
@@ -384,7 +386,7 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 				result << pulsar->getNameI18n();
 			result << pulsar->getDesignation();
 		}
-	}	
+	}
 	return result;
 }
 
@@ -551,7 +553,7 @@ bool Pulsars::checkJsonFileFormat()
 	QVariantMap map;
 	try
 	{
-		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();		
+		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();
 		jsonPSRCatalogFile.close();
 	}
 	catch (std::runtime_error& e)
@@ -597,7 +599,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("enable_at_startup", false);
-	conf->setValue("updates_enabled", true);	
+	conf->setValue("updates_enabled", true);
 	conf->setValue("url", "https://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_pulsars_button", true);

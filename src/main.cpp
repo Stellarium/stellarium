@@ -124,7 +124,7 @@ void copyDefaultConfigFile(const QString& newPath)
 void clearCache()
 {
 	QNetworkDiskCache* cacheMgr = new QNetworkDiskCache();
-	cacheMgr->setCacheDirectory(StelFileMgr::getCacheDir());
+    cacheMgr->setCacheDirectory(StelFileMgr::getCacheDir().absolutePath());
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
 	#elif defined(Q_OS_WIN)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
-	#endif	
+	#endif
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
 	#endif
 
 	// Start logging.
-	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
+    StelLogger::init(StelFileMgr::getConfigDir().absoluteFilePath("log.txt"));
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
@@ -246,7 +246,7 @@ int main(int argc, char **argv)
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
+        qDebug() << " " << n << ". " << QDir::toNativeSeparators(i.absolutePath());
 		++n;
 	}
 
@@ -337,9 +337,9 @@ int main(int argc, char **argv)
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
 	#ifndef DISABLE_SCRIPTING
-	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
+	QString outputFile = StelFileMgr::getConfigDir().absoluteFilePath("output.txt");
 	if (confSettings->value("main/use_separate_output_file", false).toBool())
-		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
+		outputFile = StelFileMgr::getConfigDir().absoluteFilePath("output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt");
 	StelScriptOutput::init(outputFile);
 	#endif
 
@@ -350,7 +350,7 @@ int main(int argc, char **argv)
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
 	if (!fName.isEmpty())
 		QFontDatabase::addApplicationFont(fName);
-	
+
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
 	{
@@ -377,8 +377,8 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
-	
+	StelTranslator::init(StelFileMgr::getInstallationDir().absoluteFilePath("data/iso639-1.utf8"));
+
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
@@ -399,4 +399,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-

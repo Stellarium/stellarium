@@ -58,7 +58,7 @@ double NomenclatureMgr::getCallOrder(StelModuleActionName actionName) const
 
 void NomenclatureMgr::init()
 {
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));
 
 	// Load the nomenclature
 	NomenclatureItem::createNameLists();
@@ -71,7 +71,7 @@ void NomenclatureMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(ssystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateNomenclatureData()));
 
 	QString displayGroup = N_("Display Options");
@@ -90,7 +90,7 @@ void NomenclatureMgr::loadNomenclature()
 {
 	qDebug() << "Loading nomenclature for Solar system bodies ...";
 
-	nomenclatureItems.clear();	
+	nomenclatureItems.clear();
 
 	// regular expression to find the comments and empty lines
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -191,7 +191,7 @@ void NomenclatureMgr::loadNomenclature()
 					p = ssystem->searchByEnglishName(planet);
 					if (p.isNull()) // is it a minor planet?
 						p = ssystem->searchMinorPlanetByEnglishName(planet);
-					planetName = planet;					
+					planetName = planet;
 				}
 
 				if (!p.isNull())

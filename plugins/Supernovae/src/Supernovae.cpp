@@ -54,7 +54,7 @@
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
 /*
- This method is the one called automatically by the StelModuleMgr just 
+ This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
 */
 StelModule* SupernovaeStelPluginInterface::getStelModule() const
@@ -128,7 +128,7 @@ void Supernovae::init()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovae");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getDataDir().absoluteFilePath("modules/Supernovae"));
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Supernovae"))
@@ -144,7 +144,8 @@ void Supernovae::init()
 		if (sneJsonPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		const auto pointuer2Path  = StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(pointuer2Path);
 
 		// key bindings and other actions
 		addAction("actionShow_Supernovae_ConfigDialog", N_("Historical Supernovae"), N_("Historical Supernovae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
@@ -196,7 +197,7 @@ void Supernovae::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	for (const auto& sn : snstar)
 	{
 		if (sn && sn->initialized)
@@ -420,7 +421,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 }
 
 int Supernovae::getJsonFileVersion(void) const
-{	
+{
 	int jsonVersion = -1;
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))

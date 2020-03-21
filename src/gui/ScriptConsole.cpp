@@ -2,17 +2,17 @@
  *
  * Stellarium
  * Copyright (C) 2009 Matthew Gates
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -61,7 +61,7 @@ void ScriptConsole::retranslate()
 void ScriptConsole::styleChanged()
 {
 	if (highlighter)
-	{ 
+	{
 		highlighter->setFormats();
 		highlighter->rehighlight();
 	}
@@ -73,7 +73,7 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
-	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
+	ui->includeEdit->setText(StelFileMgr::getInstallationDir().absoluteFilePath("scripts"));
 
 	ui->quickrunCombo->addItem(q_("quickrun..."));
 	ui->quickrunCombo->addItem(q_("selected text"));
@@ -119,12 +119,16 @@ void ScriptConsole::loadScript()
 	QString openDir;
 	if (getFlagUserDir())
 	{
-		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));		
-		if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir()))
-			openDir = StelFileMgr::getUserDir();
+		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+        if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir().path()))
+        {
+            openDir = StelFileMgr::getConfigDir().absolutePath();
+        }
 	}
-	else
-		openDir = StelFileMgr::getInstallationDir() + "/scripts";
+    else
+    {
+        openDir = StelFileMgr::getInstallationDir().absoluteFilePath("scripts");
+    }
 
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
@@ -146,8 +150,10 @@ void ScriptConsole::loadScript()
 void ScriptConsole::saveScript()
 {
 	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-	if (saveDir.isEmpty())
-		saveDir = StelFileMgr::getUserDir();
+    if (saveDir.isEmpty())
+    {
+        saveDir = StelFileMgr::getConfigDir().absolutePath();
+    }
 
 	QString defaultFilter("(*.ssc)");
 	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR,
@@ -255,9 +261,13 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR,
-								   q_("Select Script Include Directory"),
-	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
+	ui->includeEdit->setText(
+		QFileDialog::getExistingDirectory(
+			Q_NULLPTR,
+			q_("Select Script Include Directory"),
+			StelFileMgr::getInstallationDir().absoluteFilePath("scripts")
+		)
+	);
 }
 
 void ScriptConsole::quickRun(int idx)
@@ -267,7 +277,7 @@ void ScriptConsole::quickRun(int idx)
 	if (idx==1)
 	{
 		scriptText = QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText();
-		qDebug() << "selected script text is:" << scriptText; 
+		qDebug() << "selected script text is:" << scriptText;
 	}
 	if (idx==2)
 	{

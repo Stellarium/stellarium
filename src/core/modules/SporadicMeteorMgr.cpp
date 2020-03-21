@@ -48,7 +48,7 @@ SporadicMeteorMgr::~SporadicMeteorMgr()
 void SporadicMeteorMgr::init()
 {
 	m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
-				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
+                StelFileMgr::getInstallationDir().absoluteFilePath("textures/cometComa.png"),
 				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	QSettings* conf = StelApp::getInstance().getSettings();

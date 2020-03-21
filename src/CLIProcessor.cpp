@@ -156,7 +156,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		QString newUserDir;
 		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
 		if (newUserDir!="" && !newUserDir.isEmpty())
-			StelFileMgr::setUserDir(newUserDir);
+			StelFileMgr::setConfigDir(newUserDir);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -166,7 +166,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 }
 
 void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings* confSettings)
-{	
+{
 	// Over-ride config file options with command line options
 	// We should catch exceptions from argsGetOptionWithArg...
 	int fullScreen, altitude;
@@ -294,7 +294,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			{
 				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
 			}
-		}		
+		}
 	}
 
 #ifdef ENABLE_SPOUT

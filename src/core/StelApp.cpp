@@ -434,7 +434,7 @@ void StelApp::init(QSettings* conf)
 	//make maximum cache size configurable (in MB)
 	//the default Qt value (50 MB) is quite low, especially for DSS
 	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
-	QString cachePath = StelFileMgr::getCacheDir();
+    const auto cachePath = StelFileMgr::getCacheDir().absolutePath();
 
 	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);

@@ -1240,7 +1240,7 @@ void SatellitesDialog::updateTLEs(void)
 	{
 		QStringList updateFiles = QFileDialog::getOpenFileNames(Q_NULLPTR,
 									q_("Select TLE Update File"),
-									StelFileMgr::getDesktopDir(),
+                                    StelFileMgr::getDesktopDir().absolutePath(),
 									"*.*");
 		GETSTELMODULE(Satellites)->updateFromFiles(updateFiles, false);
 	}

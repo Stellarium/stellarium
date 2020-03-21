@@ -54,7 +54,7 @@
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
 /*
- This method is the one called automatically by the StelModuleMgr just 
+ This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
 */
 StelModule* NovaeStelPluginInterface::getStelModule() const
@@ -124,7 +124,8 @@ void Novae::init()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Novae");
+    const auto novaePath = StelFileMgr::getDataDir().absoluteFilePath("modules/Novae");
+		StelFileMgr::makeSureDirExistsAndIsWritable(novaePath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Novae"))
@@ -140,7 +141,7 @@ void Novae::init()
 		if (novaeJsonPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+        texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));
 		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 	}
 	catch (std::runtime_error &e)
@@ -190,7 +191,7 @@ void Novae::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	for (const auto& n : nova)
 	{
 		if (n && n->initialized)
@@ -461,7 +462,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 }
 
 int Novae::getJsonFileVersion(void) const
-{	
+{
 	int jsonVersion = -1;
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))

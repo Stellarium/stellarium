@@ -50,7 +50,7 @@ double CustomObjectMgr::getCallOrder(StelModuleActionName actionName) const
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
 	if (actionName==StelModule::ActionHandleMouseClicks)
-		return -11;	
+		return -11;
 	return 0;
 }
 
@@ -118,7 +118,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 
 void CustomObjectMgr::init()
 {
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+    texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));
 
 	customObjects.clear();
 
@@ -133,7 +133,7 @@ void CustomObjectMgr::init()
 
 void CustomObjectMgr::deinit()
 {
-	customObjects.clear();	
+	customObjects.clear();
 	texPointer.clear();
 }
 

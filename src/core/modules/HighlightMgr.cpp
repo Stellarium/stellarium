@@ -50,7 +50,7 @@ double HighlightMgr::getCallOrder(StelModuleActionName actionName) const
 
 void HighlightMgr::init()
 {
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));
 
 	// Highlights
 	setColor(StelUtils::strToVec3f(conf->value("gui/highlight_marker_color", "0.0,1.0,1.0").toString()));

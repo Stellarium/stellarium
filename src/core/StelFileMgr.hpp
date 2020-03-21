@@ -23,6 +23,8 @@
 #define CHECK_FILE "data/ssystem_major.ini"
 
 #include <stdexcept>
+#include <map>
+#include <QDir>
 #include <QSet>
 #include <QString>
 #include <QStringList>
@@ -93,15 +95,18 @@ public:
 
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
-	static const QStringList& getSearchPaths(void) {return fileLocations;}
+	static const std::vector<QDir>& getSearchPaths(void) {return searchDirectories;}
 
 	//! Set the search paths.
-	//! @param paths is a vector of strings which will become the new search paths
-	static void setSearchPaths(const QStringList& paths);
+	//! @param paths is a vector of QDir which will become the new search paths
+	static void setSearchDirectories(const std::vector<QDir>& newSearchDirectories);
 
 	//! Make sure the passed directory path exist and is writable.
 	//! If it doesn't exist creates it. If it's not possible throws an error.
 	static void makeSureDirExistsAndIsWritable(const QString& dirFullPath);
+	//! Make sure the passed directory exist and is writable.
+	//! If it doesn't exist creates it. If it's not possible throws an error.
+	static void makeSureDirExistsAndIsWritable(const QDir& dir);
 
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
@@ -152,36 +157,42 @@ public:
 	//! This is a portable way to retrieve the directory for the user's desktop.
 	//! On Linux and OSX this is $HOME/Desktop. For Windows, we rely on Qt.
 	//! @return the path to the user's desktop directory or empty string if it can't be found.
-	static QString getDesktopDir();
+    static const QDir getDesktopDir();
 
-	//! Returns the path to the user directory.
+	//! Returns a QDir object referencing the config directory.
 	//! This is the directory where we expect to find the [default] writable
-	//! configuration file, user versions of scripts, nebulae, stars, skycultures etc.
+	//! configuration file.
 	//! It will be the first directory in the path which is used when
 	//! trying to find most data files
-	//! @return the path to the user private data directory
-	static QString getUserDir();
+	//! @return a QDir referncing configuration data directory
+    static const QDir& getConfigDir();
+
+    //! Returns QDir referencing application data
+    //! This is where we expect to find the [default] writable
+    //! user versions of scripts, nebulae, stars, skycultures etc
+	//! @return a QDir referncing application data directory
+    static const QDir& getDataDir();
 
 	//! Returns the path to the installation directory.
 	//! This is the directory where we expect to find scripts, nebulae, stars,
 	//! skycultures etc, and will be added at the end of the search path
-	//! @return the full path to the installation data directory
-	static QString getInstallationDir();
+	//! @return A QDir referencing the installation data directory
+	static const QDir& getInstallationDir();
 
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
-	static QString getCacheDir();
+	static const QDir getCacheDir();
 
 	//! Sets the user directory.  This updates the search paths (first element)
 	//! @param newDir the new value of the user directory
 	//! @exception NOT_VALID if the specified user directory is not usable
-	static void setUserDir(const QString& newDir);
+	static void setConfigDir(const QString& newDir);
 
 	//! This is the directory into which screenshots will be saved.
 	//! It is $HOME on Linux, BSD, Solaris etc.
 	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
-	static QString getScreenshotDir();
+	static const QDir& getScreenshotDir();
 
 	//! Sets the screenshot directory.
 	//! This is set to platform-specific values in the StelFileMgr constructor,
@@ -205,17 +216,35 @@ private:
 	//! @exception misc
 	static bool fileFlagsCheck(const QFileInfo& thePath, const Flags& flags=static_cast<Flags>(0));
 
-	static QStringList fileLocations;
+	static std::vector<QDir> searchDirectories;
 
-	//! Used to store the user data directory
-	static QString userDir;
+	//! User configuration location
+    static QDir configDir;
 
-	//! Used to store the screenshot directory
-	static QString screenshotDir;
+	//! Application data location
+    static QDir dataDir;
 
-	//! Used to store the application data directory
-	static QString installDir;
-	
+	//! Screenshots location
+    static QDir screenshotDir;
+
+	//! Application install location
+    static QDir installDir;
+
+    //! Determine the directory to be used for configuration storage
+    static QString getLegacyUserDirPath();
+
+    //! Determine the directory to be used for configuration storage
+    static QDir resolveConfigDirectory();
+
+    //! Determine the directory to be used for application data storage
+    static QDir resolveDataDirectory();
+
+    //! Set the installation directory
+    static void initInstallDirectory();
+
+    //! Set the installation directory
+    static void migrateLegacyUserDirectory();
+
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA

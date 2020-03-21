@@ -248,8 +248,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
 					lon = 0.;
 
-				const double delta = raAngle<M_PI ? M_PI : -M_PI;				
-				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))					
+				const double delta = raAngle<M_PI ? M_PI : -M_PI;
+				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))
 					textAngle = raAngle;
 				else
 					textAngle = raAngle+delta;
@@ -265,7 +265,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
-				break;			
+				break;
 			}
 			case StelCore::FrameObservercentricEclipticJ2000:
 			case StelCore::FrameObservercentricEclipticOfDate:
@@ -294,7 +294,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
-				break;			
+				break;
 			}
 			case StelCore::FrameGalactic:
 			case StelCore::FrameSupergalactic:
@@ -325,7 +325,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 				break;
 			}
-			default:			
+			default:
 			{
 				if (std::fabs(2.*M_PI-lon)<0.001)
 				{
@@ -351,8 +351,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	else
 		text = d->text;
 
-	Vec3f direc=direction.toVec3f();	
-	direc.normalize();	
+	Vec3f direc=direction.toVec3f();
+	direc.normalize();
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
 	float xshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
@@ -729,12 +729,12 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
-	Vec4f textColor(color[0], color[1], color[2], 0);		
+	Vec4f textColor(color[0], color[1], color[2], 0);
 	textColor[3]=fader.getInterstate();
 
-	ViewportEdgeIntersectCallbackData userData(&sPainter);	
+	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	sPainter.setFont(font);
-	userData.textColor = textColor;	
+	userData.textColor = textColor;
 	userData.text = label;
 	/////////////////////////////////////////////////
 	// Draw the line
@@ -813,7 +813,7 @@ void SkyLine::draw(StelCore *core) const
 	}
 
 	// All the other "lines" are Great Circles
-	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
+	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0);
 	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
@@ -826,7 +826,7 @@ void SkyLine::draw(StelCore *core) const
 	}
 	if (line_type==LONGITUDE)
 	{
-		Vec3d coord;		
+		Vec3d coord;
 		double eclJDE = earth->getRotObliquity(core->getJDE());
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
@@ -883,7 +883,7 @@ SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
-	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/cross.png"));
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -1042,7 +1042,7 @@ void SkyPoint::draw(StelCore *core) const
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
-	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());	
+	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	Vec4f textColor(color[0], color[1], color[2], 0);
 	textColor[3]=fader.getInterstate();
 
@@ -1324,7 +1324,7 @@ void GridLinesMgr::init()
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
 	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
-	
+
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
@@ -1338,7 +1338,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");	
+	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 	addAction("actionShow_Supergalactic_Grid", displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
 	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
@@ -1442,7 +1442,7 @@ void GridLinesMgr::draw(StelCore* core)
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
 	supergalacticEquatorLine->draw(core);
-	eclipticJ2000Line->draw(core);	
+	eclipticJ2000Line->draw(core);
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
 	meridianLine->draw(core);
@@ -1457,7 +1457,7 @@ void GridLinesMgr::draw(StelCore* core)
 	galacticPoles->draw(core);
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
-	solsticeJ2000Points->draw(core);	
+	solsticeJ2000Points->draw(core);
 	apexPoints->draw(core);
 }
 

@@ -167,7 +167,7 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -256,10 +256,10 @@ void SolarSystem::init()
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
-	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
-	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-	
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur4.png"));
+	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/disk.png"));
+	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/planet-indicator.png"));
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
@@ -433,7 +433,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		double size = obj->getAngularSize(core)*M_PI_180*prj->getPixelPerRadAtCenter()*2.;
-		
+
 		const double scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
 		size+= scale * (45. + 10.*std::sin(2. * StelApp::getInstance().getAnimationTime()));
 
@@ -515,18 +515,19 @@ void SolarSystem::loadPlanets()
 				{
 					p->satellites.clear();
 				}
-			}			
-			systemPlanets.clear();			
-			//Memory leak? What's the proper way of cleaning shared pointers?
+			}
+			systemPlanets.clear();
+			// Memory leak? What's the proper way of cleaning shared pointers?
 
 			// TODO: 0.16pre what about the orbits list?
-
-			//If the file is in the user data directory, rename it:
-			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
+			// If the file is in the user data directory, rename it:
+			if (solarSystemFile.contains(StelFileMgr::getConfigDir().path()))
 			{
-				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
-				if (QFile::rename(solarSystemFile, newName))
-					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
+				const auto newName = QString("ssystem-%2.ini").arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+                const auto newPath = StelFileMgr::getConfigDir().absoluteFilePath(newName);
+
+				if (QFile::rename(solarSystemFile, newPath))
+					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newPath);
 				else
 				{
 					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "cannot be removed!";
@@ -702,7 +703,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TODO in V0.21: remove non-kepler_orbit!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
-			// Read the orbital elements			
+			// Read the orbital elements
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity", 0.0).toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
 			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble(); // AU, or km for ell_orbit!
@@ -980,7 +981,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			Q_ASSERT(type=="star" || type=="planet" || type=="moon" || type=="artificial" || type=="observer" || type=="dwarf planet"); // TBD: remove Pluto...
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
-			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609			
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
 			newP = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1073,14 +1074,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)
-		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
+		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/earth-shadow.png"));
 
 	// Also comets just have static textures.
 	if (!Comet::comaTexture)
-		Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+		Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir().absoluteFilePath("textures/cometComa.png"), StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	if (!Comet::tailTexture)
-		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir().absoluteFilePath("textures/cometTail.png"), StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	if (readOk>0)
 		qDebug() << "Loaded" << readOk << "Solar System bodies";
@@ -1202,7 +1203,7 @@ void SolarSystem::draw(StelCore* core)
 
 	// AstroCalcDialog
 	if (getFlagEphemerisMarkers())
-		drawEphemerisMarkers(core);		
+		drawEphemerisMarkers(core);
 
 	if (getFlagEphemerisLine())
 		drawEphemerisLine(core);
@@ -1279,7 +1280,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 				if (!showDates && showMagnitudes)
 					info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
 
-				sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);				
+				sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 			}
 		}
 	}
@@ -2653,11 +2654,11 @@ void SolarSystem::reloadPlanets()
 	Comet::comaTexture.clear();
 
 	// Re-load the ssystem_major.ini and ssystem_minor.ini file
-	loadPlanets();	
+	loadPlanets();
 	computePositions(core->getJDE(), getSun());
 	setSelected("");
 	recreateTrails();
-	
+
 	// Restore observer location
 	core->moveObserverTo(loc, 0., 0.);
 

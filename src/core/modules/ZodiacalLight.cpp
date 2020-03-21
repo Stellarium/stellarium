@@ -61,7 +61,7 @@ ZodiacalLight::~ZodiacalLight()
 {
 	delete fader;
 	fader = Q_NULLPTR;
-	
+
 	delete vertexArray;
 	vertexArray = Q_NULLPTR;
 }
@@ -71,9 +71,9 @@ void ZodiacalLight::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	// The Paper describes brightness values over the complete sky, so also the texture covers the full sky. 
+	// The Paper describes brightness values over the complete sky, so also the texture covers the full sky.
 	// The data hole around the sun has been filled by useful values.
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/zodiacallight_2004.png"));
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
 

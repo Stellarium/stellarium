@@ -147,8 +147,9 @@ void Quasars::init()
 	upgradeConfigIni();
 
 	try
-	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
+  {
+  	auto quasarPath = StelFileMgr::getDataDir().absoluteFilePath("modules/Quasars");
+    StelFileMgr::makeSureDirExistsAndIsWritable(quasarPath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Quasars"))
@@ -164,7 +165,8 @@ void Quasars::init()
 		if (catalogJsonPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+        const auto pointeur2Path = StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png");
+        texPointer = StelApp::getInstance().getTextureManager().createTexture(pointeur2Path);
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions

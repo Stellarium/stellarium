@@ -206,7 +206,7 @@ LandscapeMgr::LandscapeMgr()
 
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
 	packagedLandscapeIDs = (QStringList() << "guereins");
-	QDirIterator directories(StelFileMgr::getInstallationDir()+"/landscapes/", QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+	QDirIterator directories(StelFileMgr::getInstallationDir().absoluteFilePath("landscapes/"), QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
 	while(directories.hasNext())
 	{
 		directories.next();
@@ -607,7 +607,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 {
 	if (name.isEmpty())
 		return false;
-	
+
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
@@ -905,7 +905,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 				.arg(StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180))
 				.arg(landscape->getLocation().altitude).arg(alt);
 
-		QString planetName = landscape->getLocation().planetName;		
+		QString planetName = landscape->getLocation().planetName;
 		if (!planetName.isEmpty())
 		{
 			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -939,7 +939,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		int bortle = landscape->getDefaultBortleIndex();
 		if (bortle>-1)
 			desc += QString("<b>%1</b>: %2 (%3)").arg(q_("Light pollution")).arg(bortle).arg(q_("by Bortle scale"));
-	}	
+	}
 	return desc;
 }
 
@@ -1139,7 +1139,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 
 	QDir parentDestinationDir;
-	parentDestinationDir.setPath(StelFileMgr::getUserDir());
+	parentDestinationDir.setPath(StelFileMgr::getConfigDir().absolutePath());
 
 	if (!parentDestinationDir.exists("landscapes"))
 	{
@@ -1410,7 +1410,7 @@ QString LandscapeMgr::getDescription() const
 
 	// Check localized description for landscape
 	if (!locDescriptionFile.isEmpty() && QFileInfo(locDescriptionFile).exists())
-	{		
+	{
 		descFile = locDescriptionFile;
 	}
 	// OK. Localized description of landscape not exists. What about english description of its?

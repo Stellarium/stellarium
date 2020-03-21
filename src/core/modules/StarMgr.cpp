@@ -384,10 +384,10 @@ void StarMgr::copyDefaultConfigFile()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
-		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getDataDir().absoluteFilePath("stars/default"));
+		starConfigFileFullPath = StelFileMgr::getDataDir().absoluteFilePath("stars/default/starsConfig.json");
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
-		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/default/defaultStarsConfig.json", starConfigFileFullPath);
+		QFile::copy(StelFileMgr::getInstallationDir().absoluteFilePath("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
 		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
@@ -448,7 +448,7 @@ void StarMgr::init()
 	setLabelColor(StelUtils::strToVec3f(conf->value("color/star_label_color", defaultColor).toString()));
 
 	objectMgr->registerStelObjectMgr(this);
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png"));   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	for (auto* z : gridLevels)
@@ -650,7 +650,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;	
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
 }
 
 void StarMgr::populateHipparcosLists()
@@ -1024,8 +1024,8 @@ void StarMgr::loadWds(const QString& WdsFile)
 void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 {
 	crossIdMap.clear();
-	saoStarsIndex.clear();	
-	hdStarsIndex.clear();	
+	saoStarsIndex.clear();
+	hdStarsIndex.clear();
 	hrStarsIndex.clear();
 
 	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
@@ -1189,7 +1189,7 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
-	
+
 	// Draw all the stars of all the selected zones
 	for (const auto* z : gridLevels)
 	{
@@ -1203,10 +1203,10 @@ void StarMgr::draw(StelCore* core)
 			{
 				if (i==0)
 					goto exit_loop;
-				
+
 				// The last magnitude at which the star is visible
 				limitMagIndex = i-1;
-				
+
 				// We reached the point where stars are not visible anymore
 				// Fill the rest of the table with zero and leave.
 				for (;i<RCMAG_TABLE_SIZE;++i)
@@ -1230,7 +1230,7 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		
+
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)

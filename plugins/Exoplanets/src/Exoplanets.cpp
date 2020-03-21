@@ -58,7 +58,7 @@
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
 /*
- This method is the one called automatically by the StelModuleMgr just 
+ This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
 */
 StelModule* ExoplanetsStelPluginInterface::getStelModule() const
@@ -149,7 +149,8 @@ void Exoplanets::init()
 
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Exoplanets");
+        const auto expoplanetsPath = StelFileMgr::getDataDir().absoluteFilePath("modules/Exoplanets");
+        StelFileMgr::makeSureDirExistsAndIsWritable(expoplanetsPath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Exoplanets"))
@@ -165,7 +166,8 @@ void Exoplanets::init()
 		if (jsonCatalogPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+        const auto pointeur2Path = StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur2.png");
+        texPointer = StelApp::getInstance().getTextureManager().createTexture(pointeur2Path);
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
@@ -222,7 +224,7 @@ void Exoplanets::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	
+
 	for (const auto& eps : ep)
 	{
 		if (eps && eps->initialized)

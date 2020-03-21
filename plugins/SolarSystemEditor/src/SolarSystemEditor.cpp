@@ -1,6 +1,6 @@
 /*
  * Solar System editor plug-in for Stellarium
- * 
+ *
  * Copyright (C) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
@@ -52,7 +52,7 @@ StelModule* SolarSystemEditorStelPluginInterface::getStelModule() const
 StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 {
 	//Q_INIT_RESOURCE(solarSystemEditor);
-	
+
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
 	info.displayedName = N_("Solar System Editor");
@@ -74,9 +74,9 @@ SolarSystemEditor::SolarSystemEditor():
 
 	//I really hope that the file manager is instantiated before this
 	// GZ new: Not sure whether this should be major or minor here.
-	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_minor.ini").absoluteFilePath();
-	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
-	majorSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_major.ini").absoluteFilePath();
+	defaultSolarSystemFilePath	= StelFileMgr::getInstallationDir().absoluteFilePath("ssystem_minor.ini");
+	customSolarSystemFilePath	= StelFileMgr::getDataDir().absoluteFilePath("ssystem_minor.ini");
+	majorSolarSystemFilePath	= StelFileMgr::getInstallationDir().absoluteFilePath("ssystem_major.ini");
 }
 
 SolarSystemEditor::~SolarSystemEditor()
@@ -110,8 +110,9 @@ void SolarSystemEditor::init()
 		defaultSsoIdentifiers=listAllLoadedObjectsInFile(majorSolarSystemFilePath);
 	}
 	else
-	{
-		qDebug() << "SolarSystemEditor: Something is horribly wrong with installdir (major)" << QDir::toNativeSeparators(StelFileMgr::getInstallationDir());
+    {
+        const auto installPathString = QDir::toNativeSeparators(StelFileMgr::getInstallationDir().absolutePath());
+        qDebug() << "SolarSystemEditor: Something is horribly wrong with installdir (major)" << installPathString;
 		return;
 	}
 
@@ -200,7 +201,7 @@ void SolarSystemEditor::updateI18n()
 
 bool SolarSystemEditor::cloneSolarSystemConfigurationFile() const
 {
-	QDir userDataDirectory(StelFileMgr::getUserDir());
+	QDir userDataDirectory(StelFileMgr::getConfigDir());
 	if (!userDataDirectory.exists())
 	{
 		qCritical() << "Unable to find user data directory:" << QDir::toNativeSeparators(userDataDirectory.absolutePath());

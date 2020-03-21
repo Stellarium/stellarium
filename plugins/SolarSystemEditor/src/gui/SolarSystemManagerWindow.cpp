@@ -103,7 +103,7 @@ void SolarSystemManagerWindow::updateTexts()
 	// TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 	QString linkText(q_("website"));
 	QString linkCode = QString("<a href=\"https://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
-	       
+
 	// TRANSLATORS: IAU = International Astronomical Union
 	QString mpcText(q_("You can import comet and asteroid data formatted in the export formats of the IAU's Minor Planet Center (%1). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES)."));
 	ui->labelMPC->setText(QString(mpcText).arg(linkCode));
@@ -213,7 +213,11 @@ void SolarSystemManagerWindow::addConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
+    QString filePath = QFileDialog::getOpenFileName(0,
+        q_("Select a file to add the Solar System minor bodies"),
+        QDir::toNativeSeparators(StelFileMgr::getInstallationDir().absoluteFilePath("data/ssystem_1000comets.ini")),
+        filter
+    );
 	ssEditor->addFromSolarSystemConfigurationFile(filePath);
 }
 

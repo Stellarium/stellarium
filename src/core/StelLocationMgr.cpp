@@ -466,7 +466,7 @@ StelLocationMgr::StelLocationMgr()
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
 	locations.unite(loadCities("data/user_locations.txt", true));
-	
+
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
 }
@@ -742,20 +742,10 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	emit locationListChanged();
 
 	// Append to the user location file
-	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	QString cityDataPath = StelFileMgr::findFile("user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (cityDataPath.isEmpty())
 	{
-		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
-		{
-			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()+"/data"))
-			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << QDir::toNativeSeparators(StelFileMgr::getUserDir()+"/data");
-				qWarning() << "Location cannot be saved";
-				return false;
-			}
-		}
-
-		cityDataPath = StelFileMgr::getUserDir()+"/data/user_locations.txt";
+		cityDataPath = StelFileMgr::getConfigDir().absoluteFilePath("user_locations.txt");
 		qWarning() << "Will create a new user location file: " << QDir::toNativeSeparators(cityDataPath);
 	}
 
@@ -800,20 +790,10 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	emit locationListChanged();
 
 	// Resave the whole remaining user locations file
-	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
+	QString cityDataPath = StelFileMgr::findFile("user_locations.txt", StelFileMgr::Writable);
 	if (cityDataPath.isEmpty())
 	{
-		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
-		{
-			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()+"/data"))
-			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << QDir::toNativeSeparators(StelFileMgr::getUserDir()+"/data");
-				qWarning() << "Location cannot be saved";
-				return false;
-			}
-		}
-
-		cityDataPath = StelFileMgr::getUserDir()+"/data/user_locations.txt";
+		cityDataPath = StelFileMgr::getConfigDir().absoluteFilePath("data/user_locations.txt");
 		qWarning() << "Will create a new user location file: " << QDir::toNativeSeparators(cityDataPath);
 	}
 
@@ -976,7 +956,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 	if (networkReply->error() == QNetworkReply::NoError && networkReply->bytesAvailable()>0)
 	{
-		// success		 
+		// success
 		try
 		{
 			QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();

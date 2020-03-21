@@ -501,20 +501,20 @@ QSettings* StoredView::getUserViews()
 		return userviews;
 
 	//try to find an writable location
-	QString file = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	if (file.isEmpty())
+	QString userViewsFile = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (userViewsFile.isEmpty())
 	{
 		//make sure the new file goes into user dir
-		file = StelFileMgr::getUserDir() + "/" + USERVIEWS_FILE;
+		const auto userViewsFile = StelFileMgr::getDataDir().absoluteFilePath(USERVIEWS_FILE);
 	}
 
-	if(!StelFileMgr::exists(file))
+	if(!StelFileMgr::exists(userViewsFile))
 	{
 		//create an empty file, or QSettings may complain
 		//is this somehow easier to do in Qt?
-		QFileInfo f(file);
+		QFileInfo f(userViewsFile);
 		QDir().mkpath(f.absolutePath());
-		QFile qfile(file);
+		QFile qfile(userViewsFile);
 		if (!qfile.open(QIODevice::WriteOnly))
 		{
 			qCWarning(storedView) << "StoredView: cannot create userviews file!";
@@ -524,6 +524,6 @@ QSettings* StoredView::getUserViews()
 
 	//QSettings gets deleted when plugin is shut down (also saves settings)
 	//TODO StelIniFormat has bugs with saving HTML! so we use the default Qt format here, no idea if this may cause some problems.
-	userviews = new QSettings(file,QSettings::IniFormat,GETSTELMODULE(Scenery3d));
+	userviews = new QSettings(userViewsFile,QSettings::IniFormat,GETSTELMODULE(Scenery3d));
 	return userviews;
 }

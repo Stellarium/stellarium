@@ -87,12 +87,13 @@ void TestStelFileMgr::initTestCase()
 		f.close();
 	}
 
-	QStringList path;
-	path << "./"+partialPath1;
-	path << workingDir+"/"+partialPath2;
+    std::vector<QDir> searchDirectories{
+        QDir("./"+partialPath1),
+        QDir(workingDir+"/"+partialPath2),
+    };
 
 	StelFileMgr::init();
-	StelFileMgr::setSearchPaths(path);
+    StelFileMgr::setSearchDirectories(searchDirectories);
 	//qDebug() << "search paths are:  " << path;
 }
 

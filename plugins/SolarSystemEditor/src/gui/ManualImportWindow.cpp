@@ -198,8 +198,8 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 	QDir newFileParentDirectory = newFileInfo.dir();
 	if (newFileParentDirectory.dirName() != "textures")
 		return;
-	QDir installedTexturesDirectory(StelFileMgr::getInstallationDir() + "/textures");
-	QDir userTexturesDirectory(StelFileMgr::getUserDir() + "/textures");
+	QDir installedTexturesDirectory(StelFileMgr::getInstallationDir().absoluteFilePath("textures"));
+	QDir userTexturesDirectory(StelFileMgr::getConfigDir().absoluteFilePath("textures"));
 	if (newFileParentDirectory != installedTexturesDirectory && newFileParentDirectory != userTexturesDirectory)
 		return;
 

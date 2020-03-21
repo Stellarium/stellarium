@@ -110,7 +110,7 @@ void ConfigurationDialog::retranslate()
 
 		//Initial FOV and direction on the "Main" page
 		updateConfigLabels();
-		
+
 		//Star catalog download button and info
 		updateStarCatalogControlsText();
 
@@ -205,7 +205,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
 	{
-		ui->briefSelectedInfoRadio->setChecked(true);	
+		ui->briefSelectedInfoRadio->setChecked(true);
 	}
 	else if (gui->getInfoTextFilters() == StelObject::AllInfo)
 	{
@@ -228,7 +228,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
-	
+
 	// Navigation tab
 	// Startup time
 	if (core->getStartupTimeMode()=="actual")
@@ -286,7 +286,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 
 	// Delta-T
-	populateDeltaTAlgorithmsList();	
+	populateDeltaTAlgorithmsList();
 	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
@@ -367,7 +367,7 @@ void ConfigurationDialog::createDialogContent()
 	// Screenshots
 	populateScreenshotFileformatsCombo();
 	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
-	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
+    ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir().absolutePath());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
@@ -544,7 +544,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
 		ui->customSelectedInfoRadio->setChecked(true);
-	
+
 	StelObject::InfoStringGroup flags(Q_NULLPTR);
 
 	if (ui->checkBoxName->isChecked())
@@ -598,7 +598,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
-	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
+    QString oldScreenshorDir = StelFileMgr::getScreenshotDir().absolutePath();
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
@@ -879,7 +879,7 @@ void ConfigurationDialog::saveAllSettings()
 	else
 	{
 		conf->setValue("gui/selected_object_info", "custom");
-		
+
 		conf->beginGroup("custom_selected_info");
 		conf->setValue("flag_show_name",		static_cast<bool>(flags & StelObject::Name));
 		conf->setValue("flag_show_catalognumber",	static_cast<bool>(flags & StelObject::CatalogNumber));
@@ -966,7 +966,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/gui_font_size",					propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 
 
-	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
+    conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir().absolutePath());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
 	conf->setValue("main/screenshot_custom_size",		propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
 	conf->setValue("main/screenshot_custom_width",		propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
@@ -1031,7 +1031,7 @@ void ConfigurationDialog::populatePluginsList()
 
 	plugins->clear();
 	QString selectedPluginName = "";
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	for (const auto& desc : pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
@@ -1060,7 +1060,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
+			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
@@ -1161,22 +1161,22 @@ void ConfigurationDialog::populateScriptsList(void)
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
-		return;	
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
+		return;
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = scriptMgr.getHtmlDescription(s);
-	ui->scriptInfoBrowser->setHtml(html);	
+	ui->scriptInfoBrowser->setHtml(html);
 }
 
 void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
-		this->close();	
+		this->close();
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
-	}	
+	}
 }
 
 void ConfigurationDialog::stopScriptClicked(void)
@@ -1185,10 +1185,10 @@ void ConfigurationDialog::stopScriptClicked(void)
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
-{	
+{
 	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
-	ui->stopScriptButton->setEnabled(true);	
+	ui->stopScriptButton->setEnabled(true);
 }
 
 void ConfigurationDialog::aScriptHasStopped(void)
@@ -1271,7 +1271,7 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 		               .arg(nextStarCatalogToDownloadIndex)
 		               .arg(starCatalogsCount);
 		ui->getStarsButton->setText(text);
-		
+
 		if (isDownloadingStarCatalog)
 		{
 			QString text = QString(q_("Downloading %1...\n(You can close this window.)"))
@@ -1320,7 +1320,8 @@ void ConfigurationDialog::downloadStars()
 	Q_ASSERT(currentDownloadFile==Q_NULLPTR);
 	Q_ASSERT(progressBar==Q_NULLPTR);
 
-	QString path = StelFileMgr::getUserDir()+QString("/stars/default/")+nextStarCatalogToDownload.value("fileName").toString();
+    const auto nextCatalogFileName = nextStarCatalogToDownload.value("fileName");
+    QString path = StelFileMgr::getDataDir().absoluteFilePath(QString("/stars/default/").append(nextCatalogFileName.toString()));
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{
@@ -1344,7 +1345,7 @@ void ConfigurationDialog::downloadStars()
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
+	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
@@ -1488,7 +1489,7 @@ void ConfigurationDialog::resetEphemControls()
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 {
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
-	
+
 	ui->checkBoxName->setChecked(flags & StelObject::Name);
 	ui->checkBoxCatalogNumbers->setChecked(flags & StelObject::CatalogNumber);
 	ui->checkBoxVisualMag->setChecked(flags & StelObject::Magnitude);
@@ -1580,12 +1581,12 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
 	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
-	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
+	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
 	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
 	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
 	// The dropdown label is too long for the string, and Meeus 1998 is very popular, this should be in the beginning of the tag.
 	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
-	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016)"), "StephensonMorrisonHohenkerk2016");
@@ -1671,7 +1672,7 @@ void ConfigurationDialog::setDateFormat()
 	if (selectedFormat == localeManager.getDateFormatStr())
 		return;
 
-	localeManager.setDateFormatStr(selectedFormat);	
+	localeManager.setDateFormatStr(selectedFormat);
 }
 
 void ConfigurationDialog::populateTimeFormatsList()
@@ -1705,7 +1706,7 @@ void ConfigurationDialog::setTimeFormat()
 	if (selectedFormat == localeManager.getTimeFormatStr())
 		return;
 
-	localeManager.setTimeFormatStr(selectedFormat);	
+	localeManager.setTimeFormatStr(selectedFormat);
 }
 
 void ConfigurationDialog::populateDitherList()

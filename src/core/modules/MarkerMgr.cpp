@@ -199,7 +199,7 @@ SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker
 		{ Gear,           "gear.png"},
 		{ Disk,           "disk.png"}};
 	const QString fileName = map.value(markerType, "cross.png");
-	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
+    markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/"+fileName));
 }
 
 SkyMarker::~SkyMarker()
@@ -268,7 +268,7 @@ HorizonMarker::HorizonMarker(const float az, const float alt, const float& size,
 		{ SkyMarker::Gear,           "gear.png"},
 		{ SkyMarker::Disk,           "disk.png"}};
 	const QString fileName = map.value(markerType, "cross.png");
-	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
+	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/"+fileName));
 }
 
 HorizonMarker::~HorizonMarker()
@@ -302,7 +302,7 @@ MarkerMgr::MarkerMgr() : counter(0)
 {
 	setObjectName("MarkerMgr");
 }
- 
+
 MarkerMgr::~MarkerMgr()
 {
 }
@@ -382,7 +382,7 @@ int MarkerMgr::markerObject(const QString& objectName,
 		qWarning() << "MarkerMgr::markerObject object not found: " << objectName;
 		return -1;
 	}
-	
+
 	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
@@ -455,13 +455,13 @@ bool MarkerMgr::getMarkerShow(int id) const
 	else
 		return false;
 }
-	
+
 void MarkerMgr::setMarkerShow(int id, bool show)
 {
 	if (allMarkers.contains(id))  // mistake-proofing!
 		allMarkers[id]->setFlagShow(show);
 }
-	
+
 void MarkerMgr::deleteMarker(int id)
 {
 	if (id<0 || !allMarkers.contains(id))
@@ -473,13 +473,13 @@ void MarkerMgr::deleteMarker(int id)
 	delete allMarkers[id];
 	allMarkers.remove(id);
 }
-	
+
 void MarkerMgr::update(double deltaTime)
 {
 	for (auto* m : allMarkers)
 		m->update(deltaTime);
 }
-	
+
 double MarkerMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)

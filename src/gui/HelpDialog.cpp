@@ -60,7 +60,7 @@ HelpDialog::HelpDialog(QObject* parent)
 	, networkManager(Q_NULLPTR)
 	, downloadReply(Q_NULLPTR)
 {
-	ui = new Ui_helpDialogForm;	
+	ui = new Ui_helpDialogForm;
 }
 
 HelpDialog::~HelpDialog()
@@ -115,8 +115,8 @@ void HelpDialog::createDialogContent()
 	// About page
 	updateAboutText();
 
-	// Log page	
-	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
+	// Log page
+	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getConfigDir().path()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
@@ -192,7 +192,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 
 	QString appVersion = StelUtils::getApplicationVersion();
-	QStringList c = appVersion.split(".");	
+	QStringList c = appVersion.split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
 	if (r==-1 || c.count()>3 || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");

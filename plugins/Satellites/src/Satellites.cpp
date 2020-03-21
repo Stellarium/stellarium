@@ -82,7 +82,7 @@ Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
 	, earth(Q_NULLPTR)
-	, defaultHintColor(0.0f, 0.4f, 0.6f)	
+	, defaultHintColor(0.0f, 0.4f, 0.6f)
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, progressBar(Q_NULLPTR)
@@ -118,10 +118,10 @@ void Satellites::init()
 	{
 		// TODO: Compatibility with installation-dir modules? --BM
 		// It seems that the original code couldn't handle them either.
-		QString dirPath = StelFileMgr::getUserDir() + "/modules/Satellites";
+		const auto satellitesPath = StelFileMgr::getDataDir().absoluteFilePath("modules/Satellites");
 		// TODO: Ideally, this should return a QDir object
-		StelFileMgr::makeSureDirExistsAndIsWritable(dirPath);
-		dataDir.setPath(dirPath);
+		StelFileMgr::makeSureDirExistsAndIsWritable(satellitesPath);
+		dataDir.setPath(satellitesPath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
@@ -138,11 +138,12 @@ void Satellites::init()
 		// absolute file name for qs.mag file
 		qsMagFilePath = dataDir.absoluteFilePath("qs.mag");
 
-		// Load and find resources used in the plugin
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+        // Load and find resources used in the plugin
+        const auto pointeur5Path = StelFileMgr::getInstallationDir().absoluteFilePath("textures/pointeur5.png");
+        texPointer = StelApp::getInstance().getTextureManager().createTexture(pointeur5Path);
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
-		// key bindings and other actions		
+		// key bindings and other actions
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Alt+Shift+Z");
@@ -180,7 +181,7 @@ void Satellites::init()
 		qDebug() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
-	
+
 	if(!QFileInfo(qsMagFilePath).exists())
 	{
 		restoreDefaultQSMagFile();
@@ -209,8 +210,8 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	
-	// let sat symbols stay on-screen even if highly unprecise over time 
+
+	// let sat symbols stay on-screen even if highly unprecise over time
 	//connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
 	//connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
 }
@@ -306,9 +307,9 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
-	
+
 	QString objw = nameI18n.toUpper();
-	
+
 	StelObjectP result = searchByNoradNumber(objw);
 	if (result)
 		return result;
@@ -339,11 +340,11 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		return Q_NULLPTR;
 
 	QString objw = englishName.toUpper();
-	
+
 	StelObjectP result = searchByNoradNumber(objw);
 	if (result)
 		return result;
-	
+
 	for (const auto& sat : satellites)
 	{
 		if (sat->initialized && sat->displayed)
@@ -381,13 +382,13 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
-	
+
 	// If the search string is a catalog number...
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	if (regExp.exactMatch(noradNumber))
 	{
 		QString numberString = regExp.capturedTexts().at(2);
-		
+
 		for (const auto& sat : satellites)
 		{
 			if (sat->initialized && sat->displayed)
@@ -397,7 +398,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 			}
 		}
 	}
-	
+
 	return StelObjectP();
 }
 
@@ -525,9 +526,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
 	conf->setValue("realistic_mode_enabled", true);
-	
+
 	conf->endGroup(); // saveTleSources() opens it for itself
-	
+
 	// TLE update sources
 	QStringList urls;
 	urls << "1,http://www.celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
@@ -622,7 +623,7 @@ void Satellites::loadSettings()
 
 	// Load update sources list...
 	updateUrls.clear();
-	
+
 	// Backward compatibility: try to detect and read an old-stlye array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
@@ -665,9 +666,9 @@ void Satellites::loadSettings()
 		}
 		conf->endArray();
 	}
-	
-	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
-	
+
+	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM
+
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towell Day.  <3 DA
@@ -727,7 +728,7 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("hide_invisible_satellites", getFlagHideInvisibleSatellites());
 
 	conf->endGroup();
-	
+
 	// Update sources...
 	saveTleSources(updateUrls);
 }
@@ -837,7 +838,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
-	
+
 	satellites.clear();
 	groups.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
@@ -867,7 +868,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 		}
 	}
 	std::sort(satellites.begin(), satellites.end());
-	
+
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 }
@@ -903,7 +904,7 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["status"].toInt() == Satellite::StatusUnknown)
 			satMap.remove("status");
 
-		sats[sat->id] = satMap;		
+		sats[sat->id] = satMap;
 	}
 	map["satellites"] = sats;
 	return map;
@@ -988,24 +989,24 @@ QStringList Satellites::listAllIds() const
 bool Satellites::add(const TleData& tleData)
 {
 	//TODO: Duplicates check!!! --BM
-	
+
 	// More validation?
 	if (tleData.id.isEmpty() ||
 	        tleData.name.isEmpty() ||
 	        tleData.first.isEmpty() ||
 	        tleData.second.isEmpty())
 		return false;
-	
+
 	QVariantList hintColor;
 	hintColor << defaultHintColor[0]
 	          << defaultHintColor[1]
 	          << defaultHintColor[2];
-	
+
 	QVariantMap satProperties;
 	satProperties.insert("name", tleData.name);
 	satProperties.insert("tle1", tleData.first);
 	satProperties.insert("tle2", tleData.second);
-	satProperties.insert("hintColor", hintColor);	
+	satProperties.insert("hintColor", hintColor);
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
@@ -1014,7 +1015,7 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("stdMag", qsMagList[sid]);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
-	
+
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
 	{
@@ -1030,7 +1031,7 @@ void Satellites::add(const TleDataList& newSatellites)
 {
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
-	
+
 	int numAdded = 0;
 	for (const auto& tleSet : newSatellites)
 	{
@@ -1041,10 +1042,10 @@ void Satellites::add(const TleDataList& newSatellites)
 	}
 	if (numAdded > 0)
 		std::sort(satellites.begin(), satellites.end());
-	
+
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
-	
+
 	qDebug() << "[Satellites] "
 		 << newSatellites.count() << "satellites proposed for addition, "
 		 << numAdded << " added, "
@@ -1055,7 +1056,7 @@ void Satellites::remove(const QStringList& idList)
 {
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
-	
+
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
 	for (int i = 0; i < satellites.size(); i++)
@@ -1066,7 +1067,7 @@ void Satellites::remove(const QStringList& idList)
 			QList<StelObjectP> selected = objMgr->getSelectedObject("Satellite");
 			if (selected.contains(sat.staticCast<StelObject>()))
 				objMgr->unSelect();
-			
+
 			qDebug() << "Satellite removed:" << sat->id << sat->name;
 			satellites.removeAt(i);
 			i--; //Compensate for the change in the array's indexing
@@ -1074,7 +1075,7 @@ void Satellites::remove(const QStringList& idList)
 		}
 	}
 	// As the satellite list is kept sorted, no need for re-sorting.
-	
+
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 
@@ -1253,7 +1254,7 @@ void Satellites::updateFromOnlineSources()
 	{
 		qWarning() << "[Satellites] update failed."
 		           << "No update sources are defined!";
-		
+
 		// Prevent from re-entering this method on the next check:
 		markLastUpdate();
 		// TODO: Do something saner, such as disabling internet updates,
@@ -1289,7 +1290,7 @@ void Satellites::updateFromOnlineSources()
 		}
 		else if (url.startsWith("0,"))
 			url.remove(0, 2);
-		
+
 		source.url.setUrl(url);
 		if (source.url.isValid())
 		{
@@ -1350,7 +1351,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			}
 			tmpFile->write(fd);
 			tmpFile->close();
-			
+
 			// The reply URL can be different form the requested one...
 			QUrl url = reply->request().url();
 			for (int i = 0; i < updateSources.count(); i++)
@@ -1380,16 +1381,16 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		progressBar->setValue(numberDownloadsComplete);
 
 	// Check if all files have been downloaded.
-	// TODO: It's better to keep track of the network requests themselves. --BM 
+	// TODO: It's better to keep track of the network requests themselves. --BM
 	if (numberDownloadsComplete < updateSources.size())
 		return;
-	
+
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = Q_NULLPTR;
 	}
-	
+
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
 	for (int i = 0; i < updateSources.count(); i++)
@@ -1406,7 +1407,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			updateSources[i].file = Q_NULLPTR;
 		}
 	}
-	updateSources.clear();	
+	updateSources.clear();
 	parseQSMagFile(qsMagFilePath);
 	updateSatellites(newData);
 }
@@ -1472,7 +1473,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	// Save the update time.
 	// One of the reasons it's here is that lastUpdate is used below.
 	markLastUpdate();
-	
+
 	if (newTleSets.isEmpty())
 	{
 		qWarning() << "[Satellites] update files contain no TLE sets!";
@@ -1480,10 +1481,10 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		emit(updateStateChanged(updateState));
 		return;
 	}
-	
+
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
-	
+
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
 	// which this module is managing, see if it exists with an updated element, and update it if so...
 	int sourceCount = newTleSets.count(); // newTleSets is modified below
@@ -1495,7 +1496,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	for (const auto& sat : satellites)
 	{
 		totalCount++;
-		
+
 		// Satellites marked as "user-defined" are protected from updates and
 		// removal.
 		if (sat->userDefined)
@@ -1504,7 +1505,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			         << sat->id << sat->name;
 			continue;
 		}
-		
+
 		QString id = sat->id;
 		TleData newTle = newTleSets.take(id);
 		if (!newTle.name.isEmpty())
@@ -1515,7 +1516,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			{
 				// We have updated TLE elements for this satellite
 				sat->setNewTleElements(newTle.first, newTle.second);
-				
+
 				// Update the name if it has been changed in the source list
 				sat->name = newTle.name;
 
@@ -1548,7 +1549,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			missingCount++;
 		}
 	}
-	
+
 	// Only those not in the loaded collection have remained
 	// (autoAddEnabled is not checked, because it's already in the flags)
 	for (const auto& tleData : newTleSets)
@@ -1562,13 +1563,13 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	}
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
-	
+
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
 		remove(toBeRemoved);
 	}
-	
+
 	if (updatedCount > 0 ||
 	        (autoRemoveEnabled && missingCount > 0))
 	{
@@ -1577,7 +1578,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	}
 	else
 		updateState = CompleteNoUpdates;
-	
+
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 
@@ -1597,12 +1598,12 @@ void Satellites::parseTleFile(QFile& openFile,
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
-	
+
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
 	lastData.addThis = addFlagValue;
-	
+
 	while (!openFile.atEnd())
 	{
 		QString line = QString(openFile.readLine()).trimmed();
@@ -1611,7 +1612,7 @@ void Satellites::parseTleFile(QFile& openFile,
 			// New entry in the list, so reset all fields
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
-			
+
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
 			QStringList codes;
@@ -1671,7 +1672,7 @@ void Satellites::parseTleFile(QFile& openFile,
 					continue;
 				}
 				lastData.id = id;
-				
+
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
 				if (!lastData.name.isEmpty() && !lastData.first.isEmpty())
@@ -1681,7 +1682,7 @@ void Satellites::parseTleFile(QFile& openFile,
 					// so try to preserve the flag - if it's set,
 					// feel free to overwrite the existing value.
 					// If not, overwrite only if it's not in the list already.
-					// NOTE: Second case overwrite may need to check which TLE set is newer. 
+					// NOTE: Second case overwrite may need to check which TLE set is newer.
 					if (lastData.addThis || !tleList.contains(id))
 						tleList.insert(id, lastData); // Overwrite if necessary
 				}
@@ -2115,7 +2116,7 @@ void Satellites::translations()
 	N_("education");
 	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 	N_("observatory");
-	
+
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.

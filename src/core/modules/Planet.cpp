@@ -793,12 +793,12 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		double elongation = getElongation(observerHelioPos);
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
-		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));		
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("velocity-kms", QString::number(getEclipticVelocity().length()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().length()* AU/86400., 'f', 5));
-		map.insert("scale", sphereScale);		
+		map.insert("scale", sphereScale);
 	}
 	else
 	{
@@ -947,22 +947,22 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 {
 	Vec3d thisPos = thisPlanet->getHeliocentricEclipticPos();
 	Vec3d planetPos = p->getHeliocentricEclipticPos();
-	
+
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
 
 	Vec3d ppVector = planetPos;
 	ppVector.normalize();
-	
+
 	double shadowDistance = ppVector * thisPos;
 	static const double sunRadius = 696000./AU;
 	double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
 	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
-	
+
 	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).length();
-	
+
 	if (penumbraCenterToThisPlanetCenterDistance<penumbraRadius+thisPlanet->getEquatorialRadius())
 		return true;
 	return false;
@@ -975,7 +975,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	const Planet* sun = ssystem->getSun().data();
 	if (this==sun || (parent.data()==sun && satellites.empty()))
 		return res;
-	
+
 	for (const auto& planet : satellites)
 	{
 		if (willCastShadow(this, planet.data()))
@@ -995,7 +995,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 				res.append(planet.data());
 		}
 	}
-	
+
 	return res;
 }
 
@@ -1427,7 +1427,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		switch (Planet::getApparentMagnitudeAlgorithm())
 		{
-			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
+			case UndefinedAlgorithm:	// The most recent solution should be activated by default
 			case ExplanatorySupplement_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
@@ -2245,7 +2245,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		transfo2->combine(Mat4d::zrotation(M_PI_180*static_cast<double>(axisRotation + 90.f)));
 		StelPainter sPainter(core->getProjection(transfo2));
 		gl = sPainter.glFuncs();
-		
+
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
@@ -2386,14 +2386,14 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	model->indiceArr.resize(0);
 	model->vertexArr.resize(0);
 	model->texCoordArr.resize(0);
-	
+
 	GLfloat x, y, z;
 	GLfloat s=0.f, t=1.f;
 	GLushort i, j;
 
 	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	const float* cos_sin_theta =  StelUtils::ComputeCosSinTheta(slices);
-	
+
 	const float* cos_sin_rho_p;
 	const float *cos_sin_theta_p;
 
@@ -2443,7 +2443,7 @@ struct Ring3DModel
 void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned short int slices, const unsigned short int stacks)
 {
 	float x,y;
-	
+
 	const float dr = (rMax-rMin) / stacks;
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float* cos_sin_theta_p;
@@ -2586,7 +2586,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	// Generates the vertices
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
-	
+
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	const float sphereScaleF=static_cast<float>(sphereScale);
 	for (int i=0;i<model.vertexArr.size()/3;++i)
@@ -2595,7 +2595,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		p *= sphereScaleF;
 		painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
 	}
-	
+
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	if (this==ssm->getSun())
@@ -2610,7 +2610,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	//cancel out if shaders are invalid
 	if(shaderError)
 		return;
-	
+
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -2648,7 +2648,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->bind());
 
 	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
-	
+
 	if (rings!=Q_NULLPTR)
 	{
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, false));
@@ -2695,7 +2695,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		painter->setDepthTest(true);
 		gl->glClear(GL_DEPTH_BUFFER_BIT);
 	}
-	
+
 	if (!drawOnlyRing)
 		GL(gl->glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
@@ -2709,11 +2709,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
-		
+
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.tex, 2));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
-		
+
 		QMatrix4x4 shadowCandidatesData;
 		const Vec4d position = rData.mTarget * rData.modelMatrix.getColumn(3);
 		shadowCandidatesData(0, 0) = static_cast<float>(position[0]);
@@ -2722,31 +2722,31 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shadowCandidatesData(3, 0) = static_cast<float>(getEquatorialRadius());
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowCount, 1));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowData, shadowCandidatesData));
-		
+
 		projectedVertexArr.resize(ringModel.vertexArr.size());
 		for (int i=0;i<ringModel.vertexArr.size()/3;++i)
 			painter->getProjector()->project(*(reinterpret_cast<const Vec3f*>(ringModel.vertexArr.constData()+i*3)), *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
-		
+
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.vertex, reinterpret_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.vertex));
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.unprojectedVertex, reinterpret_cast<const GLfloat*>(ringModel.vertexArr.constData()), 3));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.unprojectedVertex));
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.texCoord, reinterpret_cast<const GLfloat*>(ringModel.texCoordArr.constData()), 2));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
-		
+
 		if (rData.eyePos[2]<0)
 			gl->glCullFace(GL_FRONT);
 
 		GL(gl->glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
-		
+
 		if (rData.eyePos[2]<0)
 			gl->glCullFace(GL_BACK);
-		
+
 		painter->setDepthTest(false);
 	}
-	
+
 	GL(shader->release());
-	
+
 	painter->setCullFace(false);
 }
 
@@ -3222,7 +3222,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	:radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/")+texname);
 }
 
 Vec3f Planet::getCurrentOrbitColor() const

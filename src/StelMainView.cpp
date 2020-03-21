@@ -820,7 +820,7 @@ void StelMainView::init()
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
 	actionMgr->addAction("actionReload_Shaders", N_("Miscellaneous"), N_("Reload shaders (for development)"), this, "reloadShaders()", "Ctrl+R, P");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
-	
+
 	StelPainter::initGLShaders();
 
 	guiItem = new StelGuiItem(rootItem);
@@ -1233,7 +1233,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
 		qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
-		
+
 		qDebug() << "OpenGL shader capabilities and details:";
 		qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
 		qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
@@ -1241,7 +1241,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << " - TessellationControl Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationControl, context) ? "YES" : "NO");
 		qDebug() << " - TessellationEvaluation Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationEvaluation, context) ? "YES" : "NO");
 		qDebug() << " - Compute Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Compute, context) ? "YES" : "NO");
-		
+
 		// GZ: List available extensions. Not sure if this is in any way useful?
 		QSet<QByteArray> extensionSet=context->extensions();
 		qDebug() << "We have" << extensionSet.count() << "OpenGL extensions:";
@@ -1260,7 +1260,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		}
 		// Apparently EXT_gpu_shader4 is required for GLSL1.3. (http://en.wikipedia.org/wiki/OpenGL#OpenGL_3.0).
 		qDebug() << "EXT_gpu_shader4" << (extensionSet.contains(("EXT_gpu_shader4")) ? "present, OK." : "MISSING!");
-		
+
 		QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
 		if (programParameterPtr == Q_NULLPTR) {
 			qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
@@ -1584,6 +1584,7 @@ void StelMainView::doScreenshot(void)
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
+	// TODO: Move location of screenshot directory into StelFileMgr init
 	if (StelFileMgr::getScreenshotDir().isEmpty())
 	{
 		qWarning() << "Oops, the directory for screenshots is not set! Let's try create and set it...";
@@ -1593,7 +1594,7 @@ void StelMainView::doScreenshot(void)
 		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
 			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
 		else
-			screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+            screenshotDir = StelFileMgr::getConfigDir().absoluteFilePath(screenshotDirSuffix);
 
 		try
 		{
@@ -1607,7 +1608,7 @@ void StelMainView::doScreenshot(void)
 	}
 
 	if (screenShotDir == "")
-		shotDir = QFileInfo(StelFileMgr::getScreenshotDir());
+        shotDir = QFileInfo(StelFileMgr::getScreenshotDir().absolutePath());
 	else
 		shotDir = QFileInfo(screenShotDir);
 

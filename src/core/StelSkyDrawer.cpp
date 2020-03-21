@@ -134,10 +134,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	if (!ok)
 		setAtmospherePressure(1013.0);
 
-	// Initialize buffers for use by gl vertex array	
-	
+	// Initialize buffers for use by gl vertex array
+
 	vertexArray = new StarVertex[maxPointSources*6];
-	
+
 	textureCoordArray = new unsigned char[maxPointSources*6*2];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
@@ -153,7 +153,7 @@ StelSkyDrawer::~StelSkyDrawer()
 	vertexArray = Q_NULLPTR;
 	delete[] textureCoordArray;
 	textureCoordArray = Q_NULLPTR;
-	
+
 	delete starShaderProgram;
 	starShaderProgram = Q_NULLPTR;
 }
@@ -164,10 +164,10 @@ void StelSkyDrawer::init()
 	initializeOpenGLFunctions();
 
 	// Load star texture no mipmap:
-	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
-	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
-	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");	
-	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
+	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/star16x16.png"));
+	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/haloLune.png"));
+	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/halo.png"));
+	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir().absoluteFilePath("textures/corona.png"));
 
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -406,7 +406,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
+
 	starShaderProgram->bind();
 	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, reinterpret_cast<GLfloat*>(vertexArray), 2, sizeof(StarVertex));
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
@@ -415,14 +415,14 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
 	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(textureCoordArray), 2, 0);
 	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
-	
+
 	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbPointSources)*6);
-	
+
 	starShaderProgram->disableAttributeArray(starShaderVars.pos);
 	starShaderProgram->disableAttributeArray(starShaderVars.color);
 	starShaderProgram->disableAttributeArray(starShaderVars.texCoord);
 	starShaderProgram->release();
-	
+
 	nbPointSources = 0;
 }
 
@@ -460,7 +460,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	starColor[0] = static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255));
 	starColor[1] = static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255));
 	starColor[2] = static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255));
-	
+
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
 	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
