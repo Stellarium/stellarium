@@ -1285,11 +1285,6 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 	return map;
 }
 
-QString StelMainScriptAPI::getEnv(const QString &var)
-{
-	return getEnv(var.toLocal8Bit().constData());
-}
-
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
 bool StelMainScriptAPI::isModuleLoaded(const QString &moduleID)
 {

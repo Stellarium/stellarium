@@ -31,16 +31,6 @@
 
 class QFileInfo;
 
-//! options for setting directories used by StelFileMgr
-//! by default they are empty string, and will be ignore in favor of
-//! defaults values adhereing to this XDG data directory standard
-struct StelFileMgrInitOptions {
-    QString configDirPath;
-    QString dataDirPath;
-		//! Used in tests to mock legacy user paths
-		QString _test_legacyUserPath;
-};
-
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
 //! directories in which to look for files called the search path. Typcially this
@@ -69,11 +59,15 @@ public:
     //! config_root in the search path. On systems which provide per-user data and config
     //! directories (which we call the data and config directories respectively, these are included in
     //! the search path, before the \<config_root> (installation) directory.
-    static void init();
-
-    //! Initialize directories with options for setting directory locations
-    //! If provided the defined directories will override the defaults
-    static void init(const StelFileMgrInitOptions &options);
+    //! If provided, the defined directories will override the defaults
+    //! @param configDirPath or, defined the user configuration path
+    //! @param dataDirPath or, defined the user data path
+    //! @param _test_legacyUserPath, is ised by tests to mock legacy user data directories
+    static void init(
+            const QString& configDirPath = QString(),
+            const QString& dataDirPath = QString(),
+            const QString& _test_legacyUserPath = QString()
+    );
 
 	//! Search for a path within the search paths, for example "textures/fog.png".
 	//! findFile looks through the search paths in order, returning the first instance
@@ -262,7 +256,7 @@ private:
     static void initInstallDirectory();
 
     //! Set the installation directory
-    static void migrateLegacyUserDirectory(const StelFileMgrInitOptions& options);
+    static void migrateLegacyUserDirectory(const QString &_test_legacyUserPath);
 
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.

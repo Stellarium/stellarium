@@ -207,7 +207,7 @@ public slots:
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
-	//! - localized-name : localized name	
+	//! - localized-name : localized name
 	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
 	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
@@ -249,7 +249,7 @@ public slots:
 	//! - natural : azimuthal mount, atmosphere, landscape,
 	//!   no lines, labels or markers
 	//! - starchart : equatorial mount, constellation lines,
-	//!   no landscape, atmosphere etc.  labels & markers on.	
+	//!   no landscape, atmosphere etc.  labels & markers on.
 	//! - deepspace : like starchart, but no planets, no eq.grid, no markers, no lines.
 	//! - galactic  : like deepspace, but in galactic coordinate system.
 	//! - supergalactic  : like deepspace, but in supergalactic coordinate system.
@@ -723,7 +723,7 @@ public slots:
 	//! if the script rate was 1.
 	static void setScriptRate(double r);
 
-	//! Pause the currently running script. Note that you may need to use 
+	//! Pause the currently running script. Note that you may need to use
 	//! a key sequence like 'Ctrl-D,R' or the GUI to resume script execution.
 	static void pauseScript();
 
@@ -823,11 +823,6 @@ public slots:
 	//! @param spec "local" or "utc"
 	static void waitFor(const QString& dt, const QString& spec="utc");
 
-	//! Retrieve value of environment variable @param name.
-	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
-	//! string contains Unicode characters not representable in the ANSI encoding.
-	static QString getEnv(const QString& var);
-
 	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	static bool isModuleLoaded(const QString& moduleID);
@@ -872,7 +867,7 @@ signals:
 	void requestSetVideoAlpha(const QString& id, float alpha);
 	void requestResizeVideo(const QString& id, float w, float h);
 	void requestShowVideo(const QString& id, bool show);
-	
+
 	void requestSetProjectionMode(QString id);
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);
@@ -881,4 +876,3 @@ signals:
 };
 
 #endif // STELMAINSCRIPTAPI_HPP
-

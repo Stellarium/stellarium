@@ -49,19 +49,14 @@ QDir StelFileMgr::dataDir;
 QDir StelFileMgr::screenshotDir;
 QDir StelFileMgr::installDir;
 
-void StelFileMgr::init()
+void StelFileMgr:: init(const QString& configDirPath, const QString& dataDirPath, const QString& _test_legacyUserPath)
 {
-    init({});
-}
-
-void StelFileMgr::init(const StelFileMgrInitOptions &options)
-{
-    configDir = resolveConfigDirectory(options.configDirPath);
-    dataDir = resolveDataDirectory(options.dataDirPath);
+    configDir = resolveConfigDirectory(configDirPath);
+    dataDir = resolveDataDirectory(dataDirPath);
     initInstallDirectory();
 
     // migrate legacy user directory into config and data directories
-    migrateLegacyUserDirectory(options);
+    migrateLegacyUserDirectory(_test_legacyUserPath);
 
     if (!configDir.exists())
 	{
@@ -269,11 +264,11 @@ QDir StelFileMgr::resolveDataDirectory(const QString& optionalDataPath)
     return QDir(optionalDataPath);
 }
 
-void StelFileMgr::migrateLegacyUserDirectory(const StelFileMgrInitOptions &options)
+void StelFileMgr::migrateLegacyUserDirectory(const QString &_test_legacyUserPath)
 {
-    const auto legacyPath = options._test_legacyUserPath.isEmpty() ?
+    const auto legacyPath = _test_legacyUserPath.isEmpty() ?
                 getLegacyUserDirPath() :
-                options._test_legacyUserPath;
+                _test_legacyUserPath;
     const auto legacyUserDirectory = QDir(legacyPath);
 
 //    if (legacyUserDirectory.exists() && (!configDir.exists() || !dataDir.exists())) {
