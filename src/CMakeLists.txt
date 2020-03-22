@@ -776,4 +776,14 @@ IF(ENABLE_TESTING)
     SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
         ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
+    SET(tests_testGetEnv_SRCS
+     tests/testGetEnv.cpp
+     tests/testGetEnv.hpp
+    )
+    ADD_EXECUTABLE(testGetEnv ${tests_testGetEnv_SRCS})
+    TARGET_LINK_LIBRARIES(testGetEnv ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testGetEnv)
+    ADD_TEST(testGetEnv testGetEnv)
+    SET_TARGET_PROPERTIES(testGetEnv PROPERTIES FOLDER "src/tests")
+
 ENDIF (ENABLE_TESTING)
