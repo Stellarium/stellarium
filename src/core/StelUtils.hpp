@@ -208,7 +208,7 @@ namespace StelUtils
 	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
 	Vec4d strToVec4d(const QString& s);
 
-	// Converts a Vec2f to a string in the same format that can be read by strToVec2f
+	//! Converts a Vec2f to a string in the same format that can be read by strToVec2f
 	QString vec2fToStr(const Vec2f& v);
 	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
 	QString vec3fToStr(const Vec3f& v);
