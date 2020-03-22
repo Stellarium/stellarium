@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2010 Pep Pujols
+ * Copyright (C) 2020 Georg Zotti
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 #ifndef PrintSky_H
 #define PrintSky_H
 
@@ -12,11 +31,11 @@
 class PrintSky : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool useInvertColors     READ getInvertColorsState        WRITE setInvertColorsState        NOTIFY invertColorsChanged)
-	Q_PROPERTY(bool scaleToFit          READ getScaleToFitState          WRITE setScaleToFitState          NOTIFY scaleToFitChanged)
-	Q_PROPERTY(bool printData           READ getPrintDataState           WRITE setPrintDataState           NOTIFY printDataChanged)
-	Q_PROPERTY(bool printSSEphemerides  READ getPrintSSEphemeridesState  WRITE setPrintSSEphemeridesState  NOTIFY printSSEphemeridesChanged)
-	Q_PROPERTY(bool orientationPortrait READ getOrientationPortraitState WRITE setOrientationPortraitState NOTIFY orientationChanged)
+	Q_PROPERTY(bool invertColors        READ getInvertColors        WRITE setInvertColors        NOTIFY invertColorsChanged)
+	Q_PROPERTY(bool scaleToFit          READ getScaleToFit          WRITE setScaleToFit          NOTIFY scaleToFitChanged)
+	Q_PROPERTY(bool printData           READ getPrintData           WRITE setPrintData           NOTIFY printDataChanged)
+	Q_PROPERTY(bool printSSEphemerides  READ getPrintSSEphemerides  WRITE setPrintSSEphemerides  NOTIFY printSSEphemeridesChanged)
+	Q_PROPERTY(bool orientationPortrait READ getOrientationPortrait WRITE setOrientationPortrait NOTIFY orientationChanged)
 
 public:
 	 PrintSky();
@@ -44,33 +63,31 @@ signals:
 
 public slots:
 
-	//! Show dialog printing enabling preview and print buttons
-	void initPrintingSky();
+	// Show dialog printing enabling preview and print buttons
+	//void initPrintingSky();
 
-	void setInvertColorsState(bool state);
-	void setScaleToFitState(bool state);
-	void setOrientationPortraitState(bool state);
-	void setPrintDataState(bool state);
-	void setPrintSSEphemeridesState(bool state);
-	bool getInvertColorsState() const { return useInvertColors;}
-	bool getScaleToFitState() const { return scaleToFit;}
-	bool getOrientationPortraitState() const { return orientationPortrait;}
-	bool getPrintDataState() const { return printData;}
-	bool getPrintSSEphemeridesState() const { return printSSEphemerides;}
+	void setInvertColors(bool state);
+	void setScaleToFit(bool state);
+	void setOrientationPortrait(bool state);
+	void setPrintData(bool state);
+	void setPrintSSEphemerides(bool state);
+	bool getInvertColors() const { return invertColors;}
+	bool getScaleToFit() const { return scaleToFit;}
+	bool getOrientationPortrait() const { return orientationPortrait;}
+	bool getPrintData() const { return printData;}
+	bool getPrintSSEphemerides() const { return printSSEphemerides;}
 
 
 private slots:
 
 private:
 	//Printing options
-	bool useInvertColors, scaleToFit, printData, printSSEphemerides;
-	//QString orientation;
+	bool invertColors, scaleToFit, printData, printSSEphemerides;
 	bool orientationPortrait; // true for Portrait paper, false for Landscape
 
 	PrintSkyDialog *printskyDialog;
 };
 
-//#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 

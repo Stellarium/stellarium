@@ -26,7 +26,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -141,7 +150,16 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
@@ -157,7 +175,16 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -166,7 +193,16 @@
              <string>Options</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0" colspan="2">
@@ -207,7 +243,16 @@
                 <string>Orientation</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -261,7 +306,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>0</height>
              </size>
             </property>
            </spacer>
@@ -280,7 +325,7 @@
 
 In a optional second page you can get some Solar System ephemerides.
 
-Use Ctrl+P to open the print window.</string>
+Use Ctrl+Alt+P to open the print window.</string>
             </property>
             <property name="textFormat">
              <enum>Qt::AutoText</enum>
@@ -309,7 +354,7 @@ Use Ctrl+P to open the print window.</string>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Author: &lt;a href=&quot;mailto:maslarocaxica@gmail.com&quot;&gt;Pep Pujols&lt;/a&gt; (with fixes by Bogdan Marinov)</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Author: &lt;a href=&quot;mailto:maslarocaxica@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Pep Pujols&lt;/span&gt;&lt;/a&gt; (with fixes by Bogdan Marinov, and ports to Qt5 by Georg Zotti)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>

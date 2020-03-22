@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 Pep Pujols
+ * Copyright (C) 2020 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,10 +51,10 @@ public slots:
 
 	//! Print report on a preview window
 	void previewSky();
-	//! Read the printer parameters and run the output option selected (Print/Preview)
-	void executePrinterOutputOption();
 	//! Print report direct to printer
 	void printSky();
+	//! Read the printer parameters and run the output option selected (Print/Preview)
+	void executePrinterOutputOption();
 
 
 protected:
@@ -68,18 +69,12 @@ private slots:
 
 private:
 	QFont font;
-	//Gui
-	StelGui* gui;
-	bool currentVisibilityGui;
+	StelGui* gui; // main StelGui
+	bool stelGuiVisible;
 
 	//! Printing options
-	bool outputOption;
-	//bool invertColorsOption;
-	//bool scaleToFitOption;
-	QString orientationOption;
-	//bool printDataOption;
-	//bool printSSEphemeridesOption;
-	QString printableTime(double time, int shift);
+	bool outputPreview;
+	QString printableTime(double time, double shift);
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
 
 

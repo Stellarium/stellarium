@@ -33,14 +33,14 @@ StelPluginInfo PrintSkyStelPluginInterface::getPluginInfo() const
 	info.displayedName =  N_("Print Sky");
 	info.authors = "Pep Pujols, Georg Zotti";
 	info.contact = "maslarocaxica@gmail.com";
-	info.description = N_("Provides a system printing sky");
+	info.description = N_("Provides a report printing option");
 	info.version = PRINTSKY_PLUGIN_VERSION;
 	info.license = PRINTSKY_PLUGIN_LICENSE;
 	return info;
 }
 
 PrintSky::PrintSky() :
-	useInvertColors(false),
+	invertColors(false),
 	scaleToFit(false),
 	printData(true),
 	printSSEphemerides(true)
@@ -59,15 +59,8 @@ void PrintSky::init()
 	printskyDialog = new PrintSkyDialog();
 
 	// create action for enable/disable & hook up signals
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-
-	// FIXME: correct action syntax after fixing the properties.
-	//gui->addGuiActions("actionInit_Printing_Sky", N_("Printing Sky"), "Ctrl+P", N_("Plugin Key Bindings"), true, false);
-	//gui->getGuiActions("actionInit_Printing_Sky")->setChecked(true);
-	//connect(gui->getGuiActions("actionInit_Printing_Sky"), SIGNAL(triggered()), this, SLOT(initPrintingSky()));
 	QString section=N_("Print Sky");
-	addAction("action_PrintSkyDialog", section, N_("Printing Sky"), this, SLOT(initPrintingSky), "Ctrl+P");
+	addAction("action_PrintSkyDialog", section, N_("Printing Sky"), printskyDialog, "visible", "Ctrl+Alt+P");
 
 	try
 	{
@@ -78,9 +71,8 @@ void PrintSky::init()
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		useInvertColors = settings.value("use_invert_colors", 0.0).toBool();
+		invertColors = settings.value("use_invert_colors", 0.0).toBool();
 		scaleToFit=settings.value("use_scale_to_fit", true).toBool();
-		//orientation=settings.value("orientation", "Portrait").toString();
 		orientationPortrait=settings.value("orientation_portrait", true).toBool();
 		printData=settings.value("print_data", true).toBool();
 		printSSEphemerides=settings.value("print_SS_ephemerides", true).toBool();
@@ -102,7 +94,7 @@ void PrintSky::draw(StelCore* core)
 	Q_UNUSED(core)
 }
 
-//! Determine which "layer" the plagin's drawing will happen on.
+//! Determine which "layer" the plugin's drawing will happen on.
 double PrintSky::getCallOrder(StelModuleActionName actionName) const
 {
 	Q_UNUSED(actionName)
@@ -117,7 +109,6 @@ void PrintSky::handleKeys(QKeyEvent* event)
 void PrintSky::handleMouseClicks(class QMouseEvent* event)
 {
 	event->setAccepted(false);
-
 }
 
 bool PrintSky::handleMouseMoves(int x, int y, Qt::MouseButtons b)
@@ -128,12 +119,12 @@ bool PrintSky::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 	return false;
 }
 
-//! Show dialog printing enabling preview and print buttons
-void PrintSky::initPrintingSky()
-{
-	printskyDialog->setVisible(true);
-	printskyDialog->enableOutputOptions(true);
-}
+////! Show dialog printing enabling preview and print buttons
+//void PrintSky::initPrintingSky()
+//{
+//	printskyDialog->setVisible(true);
+//	printskyDialog->enableOutputOptions(true);
+//}
 
 //void PrintSky::setStelStyle(const QString& section)
 //{
@@ -145,24 +136,23 @@ bool PrintSky::configureGui(bool show)
 	if (show)
 	{
 		printskyDialog->setVisible(true);
-		printskyDialog->enableOutputOptions(false);
+		printskyDialog->enableOutputOptions(true); // was false, but there is no use for a dysfunctional GUI.
 	}
 
 	return true;
 }
 
 /* ********************************************************************* */
-void PrintSky::setInvertColorsState(bool state)
+void PrintSky::setInvertColors(bool state)
 {
 	try
 	{
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		//bool useInvertColors = settings.value("use_invert_colors", 0.0).toBool();
-		if (state != useInvertColors)
+		if (state != invertColors)
 		{
-			useInvertColors=state;
+			invertColors=state;
 			settings.setValue("use_invert_colors", state);
 			emit(invertColorsChanged(state));
 		}
@@ -171,18 +161,16 @@ void PrintSky::setInvertColorsState(bool state)
 	{
 		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
 	}
-
 }
 
 /* ********************************************************************* */
-void PrintSky::setScaleToFitState(bool state)
+void PrintSky::setScaleToFit(bool state)
 {
 	try
 	{
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		//bool useScaleToFit = settings.value("use_scale_to_fit", 0.0).toBool();
 		if (state != scaleToFit)
 		{
 			scaleToFit=state;
@@ -194,44 +182,36 @@ void PrintSky::setScaleToFitState(bool state)
 	{
 		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
 	}
-
 }
 
 /* ********************************************************************* */
-void PrintSky::setOrientationPortraitState(bool state)
+void PrintSky::setOrientationPortrait(bool state)
 {
-	//Q_UNUSED(state)
-	//QString newOrientation=(ui->orientationPortraitRadioButton->isChecked()? "Portrait": "Landscape");
-
 	try
 	{
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		//QString currentOrientation = settings.value("orientation", "Portrait").toString();
-		//if (newOrientation != currentOrientation)
+		if (state != orientationPortrait)
 		{
-			//settings.setValue("orientation", newOrientation);
 			settings.setValue("orientation_portrait", state);
-			emit(orientationChanged(true));
+			emit(orientationChanged(state));
 		}
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
 	}
-
 }
 
 /* ********************************************************************* */
-void PrintSky::setPrintDataState(bool state)
+void PrintSky::setPrintData(bool state)
 {
 	try
 	{
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		//bool printData = settings.value("print_data", 0.0).toBool();
 		if (state != printData)
 		{
 			printData=state;
@@ -243,18 +223,16 @@ void PrintSky::setPrintDataState(bool state)
 	{
 		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
 	}
-
 }
 
 /* ********************************************************************* */
-void PrintSky::setPrintSSEphemeridesState(bool state)
+void PrintSky::setPrintSSEphemerides(bool state)
 {
 	try
 	{
 		StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 		QString printskyIniPath = StelFileMgr::findFile("modules/PrintSky/", flags) + "printsky.ini";
 		QSettings settings(printskyIniPath, QSettings::IniFormat);
-		//bool printSSEphemerides = settings.value("print_SS_ephemerides", 0.0).toBool();
 		if (state != printSSEphemerides)
 		{
 			printSSEphemerides=state;
@@ -266,5 +244,4 @@ void PrintSky::setPrintSSEphemeridesState(bool state)
 	{
 		qWarning() << "WARNING: unable to locate printsky.ini file or create a default one for PrintSky plugin: " << e.what();
 	}
-
 }
