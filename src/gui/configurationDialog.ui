@@ -2166,6 +2166,11 @@
                  <property name="text">
                   <string/>
                  </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+                 </property>
                 </widget>
                </item>
               </layout>

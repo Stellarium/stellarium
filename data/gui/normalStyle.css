@@ -175,12 +175,6 @@ QHeaderView::down-arrow {
 	image: url(:/graphicGui/uieSpindown.png);
 }
 
-/* TODO move to .ui or class */
-#configurationDialogForm QPushButton#screenshotBrowseButton,
-QPushButton#pushButtonPickExecutablesDirectory {
-	image: url(:/graphicGui/uibtFolder.png);
-}
-
 QMenu {
 	background-color: rgb(90, 90, 90); /* sets background of the menu */
 	border: 1px solid rgb(0, 0, 0);
@@ -942,11 +936,6 @@ QListWidget#satellitesList,
 QListWidget#sourceList {
 	font-size: 60%;
 }
-/* TODO: Move to .ui file */
-QPushButton#saveSatellitesButton {
-	image: url(:/graphicGui/uibtSave.png);
-}
-
 
 /**************************************************************************************************************
  * TelescopeControl
