@@ -49,14 +49,14 @@ QDir StelFileMgr::dataDir;
 QDir StelFileMgr::screenshotDir;
 QDir StelFileMgr::installDir;
 
-void StelFileMgr:: init(const QString& configDirPath, const QString& dataDirPath, const QString& _test_legacyUserPath)
+void StelFileMgr:: init(const StelFileMgrOptions& options)
 {
-    configDir = resolveConfigDirectory(configDirPath);
-    dataDir = resolveDataDirectory(dataDirPath);
+    configDir = resolveConfigDirectory(options.configDirPath);
+    dataDir = resolveDataDirectory(options.dataDirPath);
     initInstallDirectory();
 
     // migrate legacy user directory into config and data directories
-    migrateLegacyUserDirectory(_test_legacyUserPath);
+    migrateLegacyUserDirectory(options._test_legacyUserPath);
 
     if (!configDir.exists())
 	{
@@ -255,7 +255,7 @@ QDir StelFileMgr::resolveConfigDirectory(const QString& optionalConfigPath)
 QDir StelFileMgr::resolveDataDirectory(const QString& optionalDataPath)
 {
     if(optionalDataPath.isEmpty()) {
-        const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        const auto appConfigLocation = QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
         qDebug() << "Using XDG App Config Directory: " << appConfigLocation.path();
         return appConfigLocation;
     }

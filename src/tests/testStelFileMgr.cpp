@@ -285,3 +285,33 @@ void TestStelFileMgr::testListContentsDirAbs()
 	resultSetQueryExpected << "ls1" << "ls3";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
+    
+void TestStelFileMgr::testDefaultConfigDir(){
+	StelFileMgr::init();
+	const auto expectedDir = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+	QCOMPARE(StelFileMgr::getConfigDir(), expectedDir);
+};
+
+void TestStelFileMgr::testDefaultDataDir(){
+	StelFileMgr::init();
+	const auto expectedDir = QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+	QCOMPARE(StelFileMgr::getDataDir(), expectedDir);
+};
+
+void TestStelFileMgr::testCustomConfigDir(){
+	auto configDirPath = QDir::tempPath();
+	StelFileMgrOptions options;
+	options.configDirPath = configDirPath;
+
+	StelFileMgr::init(options);
+	QCOMPARE(QDir(configDirPath), StelFileMgr::getConfigDir());
+};
+
+void TestStelFileMgr::testCustomDataDir(){
+	auto dataDirPath = QDir::tempPath();
+	StelFileMgrOptions options;
+	options.dataDirPath = dataDirPath;
+
+	StelFileMgr::init(options);
+	QCOMPARE(QDir(dataDirPath), StelFileMgr::getDataDir());
+};

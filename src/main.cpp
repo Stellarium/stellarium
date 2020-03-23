@@ -192,7 +192,11 @@ int main(int argc, char **argv)
 	qputenv("QT_HARFBUZZ", "old");
 
 	// Init the file manager with directories optionally defined by ENV
-    StelFileMgr::init(getEnv("STEL_CONFIG_DIR"), getEnv("STEL_DATA_DIR"));
+	// TODO: replace with designated initializers in C++20
+	StelFileMgrOptions options;
+	options.configDirPath = getEnv("STEL_CONFIG_DIR");
+	options.dataDirPath = getEnv("STEL_DATA_DIR");
+    StelFileMgr::init(options);
 
 	SplashScreen::present();
 

@@ -47,6 +47,10 @@ private slots:
 	void testListContentsFileAbs();
 	void testListContentsDir();
 	void testListContentsDirAbs();
+    void testDefaultConfigDir();
+    void testDefaultDataDir();
+    void testCustomConfigDir();
+    void testCustomDataDir();
 
 private:
 	QTemporaryDir tempDir;

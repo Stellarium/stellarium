@@ -31,6 +31,12 @@
 
 class QFileInfo;
 
+struct StelFileMgrOptions {
+	QString configDirPath = QString();
+	QString dataDirPath = QString();
+	QString _test_legacyUserPath = QString();
+};
+
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
 //! directories in which to look for files called the search path. Typcially this
@@ -63,11 +69,7 @@ public:
     //! @param configDirPath or, defined the user configuration path
     //! @param dataDirPath or, defined the user data path
     //! @param _test_legacyUserPath, is ised by tests to mock legacy user data directories
-    static void init(
-            const QString& configDirPath = QString(),
-            const QString& dataDirPath = QString(),
-            const QString& _test_legacyUserPath = QString()
-    );
+    static void init(const StelFileMgrOptions& options = {});
 
 	//! Search for a path within the search paths, for example "textures/fog.png".
 	//! findFile looks through the search paths in order, returning the first instance
