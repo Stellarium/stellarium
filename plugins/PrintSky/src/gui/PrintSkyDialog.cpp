@@ -338,13 +338,9 @@ void PrintSkyDialog::executePrinterOutputOption()
 
 	if (outputPreview)
 	{
-		// FIXME: This crashes.
-		//QPrintPreviewDialog oPrintPreviewDialog(&printer, &StelMainGraphicsView::getInstance());
 		QPrintPreviewDialog printPreviewDialog(&printer);
 		connect(&printPreviewDialog, SIGNAL(paintRequested(QPrinter *)), this, SLOT(printDataSky(QPrinter *)));
-		qDebug() << "calling preview...";
 		printPreviewDialog.exec();
-		qDebug() << "preview done.";
 	}
 	else
 	{
@@ -354,10 +350,8 @@ void PrintSkyDialog::executePrinterOutputOption()
 			printDataSky(&printer);
 	}
 
-	qDebug() << "preview done 2.";
 	Q_ASSERT(gui);
 	gui->setVisible(stelGuiVisible);
-	qDebug() << "preview done 3.";
 	// FIXME: what to do?
 	//((QGraphicsWidget*)StelMainView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
