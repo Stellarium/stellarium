@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-02-19 13:55+0700\n"
+"POT-Creation-Date: 2020-03-16 01:07+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2020\n"
 "Language-Team: Croatian (https://www.transifex.com/stellarium/teams/80998/hr/)\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr "Nije moguće dohvatiti popis akcija"
+msgstr "Nije moguće dohvatiti popis radnji"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Akcija'%1' nije prihvaćena od strane servera: "
+msgstr "Radnja '%1' nije prihvaćena od strane poslužitelja: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Greška pri slanju akcije '%1' serveru: "
+msgstr "Greška pri slanju radnje '%1' poslužitelju: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -54,15 +54,15 @@ msgstr "Nije moguće dohvatiti popis svojstva"
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "Svojstvo '%1' nije prihvaćeno od strane servera: "
+msgstr "Svojstvo '%1' nije prihvaćeno od strane poslužitelja: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "Greška pri slanju svojstva '%1' serveru: "
+msgstr "Greška pri slanju svojstva '%1' poslužitelju: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr "Greška pri slanju naredbe serveru:"
+msgstr "Greška pri slanju naredbe poslužitelju:"
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
@@ -87,7 +87,7 @@ msgstr "u mirovanju"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr "Greška pri učitavanju tipova objekta"
+msgstr "Greška pri učitavanju vrsta objekta"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
@@ -164,7 +164,7 @@ msgstr "ODS"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr "Akcije i skripte"
+msgstr "Radnje i skripte"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
@@ -204,11 +204,11 @@ msgstr "Sinodički mjesec"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr "Nodički mjesec"
+msgstr "Drakonistički mjesec"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr "Nodička godina"
+msgstr "Drakonistička godina"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
@@ -357,19 +357,19 @@ msgstr ""
 
 #: index.html:377 tablet7in.html:472
 msgid "Solstices"
-msgstr "Solsticiji."
+msgstr "Solsticiji"
 
 #: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
-msgstr "Poprečne četvrti"
+msgstr "Srednje točke između solsticija i ekvinocija"
 
 #: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
-msgstr "Velika stajna točka"
+msgstr "Maksimalni ekstrem deklinacije"
 
 #: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr "Mala stajna točka"
+msgstr "Minimalni ekstrem deklinacije"
 
 #: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
@@ -393,7 +393,7 @@ msgstr "Nazivi i oznake"
 
 #: index.html:566 tablet7in.html:655
 msgid "Show illumination"
-msgstr "Prikaži svjetlinu"
+msgstr "Prikaži osvjetljenje"
 
 #: index.html:571 tablet7in.html:661
 msgid "Current landscape"
@@ -421,7 +421,7 @@ msgstr "Odabir zviježđa izoliran"
 
 #: index.html:609 tablet7in.html:702
 msgid "Current sky culture"
-msgstr "Trenutna kultura neba"
+msgstr "Trenutna kultura zvijezđa"
 
 #: index.html:622 tablet7in.html:727
 msgid "Active script:"
@@ -437,11 +437,11 @@ msgstr "Zaustavi trenutnu skriptu"
 
 #: index.html:628 tablet7in.html:41 tablet7in.html:712
 msgid "Actions"
-msgstr "Akcije"
+msgstr "Radnje"
 
 #: index.html:632 tablet7in.html:716
 msgid "Run/toggle action"
-msgstr "Pokreni/prebaci akciju"
+msgstr "Pokreni/prebaci radnju"
 
 #: index.html:643 tablet7in.html:751
 msgid "Planet map"
@@ -485,11 +485,11 @@ msgstr "Učitaj odabranu scenu"
 
 #: index.html:734 tablet7in.html:843
 msgid "No response from server"
-msgstr "Nema odgovora servera"
+msgstr "Nema odgovora poslužitelja"
 
 #: index.html:735 tablet7in.html:844
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr "Nema odgovora servera % 1 sekundi. Je li Stellarium još u radu?"
+msgstr "Nema odgovora poslužitelja %1 sekundi. Je li Stellarium još u radu?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -545,11 +545,11 @@ msgstr "Sirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr "Arktur"
+msgstr "Arcturus"
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr "Kapela"
+msgstr "Capella"
 
 #: tablet7in.html:269
 msgid "Vega"
