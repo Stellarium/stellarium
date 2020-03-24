@@ -1,20 +1,10 @@
 #include <QDebug>
-#include <QKeyEvent>
-#include "StelProjector.hpp"
-#include "StelPainter.hpp"
-#include "StelApp.hpp"
+#include "PrintSky.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
-#include "StelVertexArray.hpp"
-#include "PrintSky.hpp"
-#include <QAction>
-#include "StelMainView.hpp"
-#include <QOpenGLWidget>
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library

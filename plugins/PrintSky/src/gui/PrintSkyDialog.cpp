@@ -18,13 +18,13 @@
 
 #include "PrintSkyDialog.hpp"
 #include "ui_printskyDialog.h"
-#include "PrintSky.hpp"
-#include <QAction>
-#include <QOpenGLWidget>
+#include <QPrinter>
 #include <QPrintDialog>
-#include <QTimer>
-#include <QGraphicsWidget>
+#include <QPrintPreviewWidget>
+#include <QPrintPreviewDialog>
+#include <QDebug>
 
+#include "PrintSky.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
@@ -34,15 +34,9 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelSkyDrawer.hpp"
-#include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 
-#include <QDataWidgetMapper>
-#include <QDebug>
-#include <QFrame>
-#include <QSettings>
 
 
 PrintSkyDialog::PrintSkyDialog() :

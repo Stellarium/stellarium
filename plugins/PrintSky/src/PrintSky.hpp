@@ -21,9 +21,6 @@
 #define PrintSky_H
 
 #include "StelModule.hpp"
-#include <QPrinter>
-#include <QPrintPreviewWidget>
-#include <QPrintPreviewDialog>
 #include "StelStyle.hpp"
 #include "PrintSkyDialog.hpp"
 

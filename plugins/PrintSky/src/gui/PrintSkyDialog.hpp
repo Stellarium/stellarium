@@ -23,15 +23,14 @@
 #include <QObject>
 //#include "StelDialogPrintSky.hpp"
 #include "StelDialog.hpp"
-#include "StelStyle.hpp"
-#include <QPrinter>
-#include <QPrintPreviewWidget>
-#include <QPrintPreviewDialog>
-#include "StelGui.hpp"
+
+class QPrinter;
+class StelGui;
 
 class Ui_printskyDialogForm;
 
-
+// N.B. Deriving from a local copy of StelDialog called StelDialogPrintSky (still preserved here from Qt4 times)
+// may allow building as dynamic plugin. This has not been tested in Qt5 yet.
 class PrintSkyDialog : public StelDialog // PrintSky
 {
 	Q_OBJECT
@@ -56,7 +55,6 @@ public slots:
 	//! Read the printer parameters and run the output option selected (Print/Preview)
 	void executePrinterOutputOption();
 
-
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -76,8 +74,6 @@ private:
 	bool outputPreview;
 	QString printableTime(double time, double shift);
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
-
-
 };
 
 #endif // PRINTSKYDIALOG_HPP
