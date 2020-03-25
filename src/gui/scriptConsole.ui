@@ -280,11 +280,34 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="quickrunCombo">
+         <widget class="QLabel" name="quickrunLabel">
           <property name="toolTip">
-           <string>quickly load and run a utility script</string>
+           <string>Quickly load and run a utility script</string>
+          </property>
+          <property name="text">
+           <string>Quick run:</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="quickrunCombo">
+          <property name="toolTip">
+           <string>Quickly load and run a utility script</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QPushButton" name="runButton">

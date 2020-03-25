@@ -75,7 +75,7 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::populateQuickRunList()
 {
 	ui->quickrunCombo->clear();
-	ui->quickrunCombo->addItem(q_("quickrun..."));
+	ui->quickrunCombo->addItem("");
 	ui->quickrunCombo->addItem(q_("selected text"));
 	ui->quickrunCombo->addItem(q_("clear text"));
 	ui->quickrunCombo->addItem(q_("clear images"));
@@ -118,6 +118,10 @@ void ScriptConsole::createDialogContent()
 	ui->closeWindowAtScriptRunCheckbox->setChecked(hideWindowAtScriptRun);
 	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
 	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
+
+	// Let's improve visibility of the text
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->quickrunLabel->setStyleSheet(style);
 }
 
 void ScriptConsole::setFlagUserDir(bool b)
