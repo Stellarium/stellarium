@@ -8,23 +8,41 @@ Ptolem&auml;us, der &auml;ltere und eigene Beobachtungen in den
 Sternkatalog  einbrachte. Sein Werk hie&szlig; auf Griechisch &quot;Gro&szlig;e
 Zusammenschrift&quot; (<i>Mathematike Syntaxis</i>), ist aber
 heute unter dem arabisierten Namen Almagest bekannter, denn dieses
-Buch sollte f&uuml;r die n&auml;chsten 1500 Jahre das Hauptwerk der
+Buch sollte f&uuml;r die n&auml;chsten ca. 1500 Jahre das Hauptwerk der
 Astronomie bilden. </p>
 <p >
 Der Sternkatalog Almagest setzt sich aus 13 Teilen zusammen, die B&uuml;cher
-genannt werden. Im siebten Buch wurden von Ptolem&auml;us insgesamt
+genannt werden. Im siebten und achten Buch wurden von Ptolem&auml;us insgesamt
 1022 Sterne, die zu 48 Sternbildern geh&ouml;ren, aufgelistet. In
 Form einer Tabelle sind jedem Stern eine Helligkeit, ekliptikale
 Koordinaten sowie Beschreibungen ihrer Lage im Sternbild zugeordnet.
 Als einer der ersten in seiner Zeit nutzte Ptolem&auml;us auch
 Magnituden, um die Helligkeit der Sterne nicht nur mit Worten, sondern mit Zahlen zu beschreiben. M&ouml;glicherweise hat er dies von Hipparch &uuml;bernommen, aber
-das l&auml;sst sich nicht mit Sicherheit sagen, da dessen Sternenkatalog nicht erhalten
+das l&auml;sst sich nicht mit Sicherheit sagen, da dessen Sternkatalog nicht erhalten
 ist. Die Skala beginnt mit 1 f&uuml;r sehr helle Sterne  und geht weiter bis 6 f&uuml;r die schw&auml;chsten, gerade
 noch sichtbaren Sterne.
  </p>
+ <p>
+  Dass der Almagest für die Berechnung von Planetenpositionen mit einem geozentrischen Weltbild arbeitet, ist hier unerheblich. 
+Erstens ist das erlaubt, weil man für Berechnungen sein Koordinatensystem frei wählen darf und der Sternbeobachter stets auf 
+der Erde steht, so dass es sinnvoll ist, den Koordinatenursprung in die Erde zu legen (machen wir heute auch für Sternkataloge). 
+Zweitens ist ein Sternkatalog eine "Bestandsaufnahme" und für Ptolemäus ist das erklärte Ziel dieser "Inventur der Fixsterne" 
+die Erstellung eines Himmelsglobus (siehe Alm. VIII, 3). Er wählt ekliptikale Koordinaten, weil er es künftigen Globenherstellern
+(und Astronomen) einfacher machen möchte: Im ekliptikalen System bleibt bei der Präzessionsbewegung der Breitengrad stets gleich
+und die Änderung des Längengrades (ekliptikale Länge) lässt sich durch Subtraktion einer Konstante (wie er annimmt: 1° pro Jahrhundert) 
+leicht berechnen. Für die Genauigkeit von Himmelsgloben ist diese Abschätzung legitim und hinreichend; heute brauchen wir es 
+freilich für viele Anwendungen genauer.  
+</p>
 
 <h2>Wie wurde diese Sky Culture erstellt?</h2></p>
 
+<p> Das Format der Angaben im <i>Almagest</i> folgt einem simplen Schema: "Beschreibung des Sterns in der Figur, Längengrad, 
+Breitengrad, Helligkeit (Bsp.: Ellbogen von X, Länge, Breite, Magnitude). Daher können wir diesen Sternkatalog zur Rekonstruktion 
+der Figurbilder nutzen. Das ist wie "malen nach Zahlen", da Teile der Figur mit Koordinaten angegeben sind. Ein einfaches Beispiel
+führen wir anhand des Sternbildes Rabe vor und listen in der Tabelle darunter auf, wo wir bei anderen Sternbilder ggf. interpolieren
+mussten oder eine Linie durch nicht gelistete Sterne legen, um die Figur in der Weise erkennbar zu machen, wie Ptolemäus es sich 
+laut seinen Beschreibungen vorgestellt (bzw. auf seinem Himmelsglobus gezeichnet) hatte.  
+</p>
 <p >Der Prozess der Erstellung dieser Sternbilderkultur kann am Beispiel des Sternbilds des Raben gut nachvollzogen werden: </p>
 <p>Im Sternbild Corvus (Rabe) ist  &alpha; Crv der &quot;Kopfstern&quot;,
 	verbunden ist dieser mit dem &quot;Stern im Nacken&quot;,  &epsilon; 
@@ -33,7 +51,7 @@ noch sichtbaren Sterne.
 	zu den Sternen an den Fl&uuml;gelspitzen des Raben.  &gamma; 
 	Crv ist der Stern im vorderen Fl&uuml;gel,  &delta; 
 	Crv der Stern im hinteren Fl&uuml;gel. Vom Bruststern geht noch eine
-	weitere Sternbildlinie ab zu  &beta; 
+	weitere Sternbildlinie ab, nämlich zu &beta; 
 	Crv, dem Stern im Fu&szlig; des Raben.</p>
 <p > <img width="800" src="corvus_drawExample_s.png"/></p>
 <p >Nach dem Identifizieren der Sterne durch ihre Koordinaten und Namen
@@ -91,7 +109,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td >Dra		</td>
-		<td >&Delta;&rho;&#940;&kappa;&omicron;&nu;&tau;&omicron;&sigmaf; 	</td>
+		<td >&Delta;&rho;&#940;&kappa;&omega;&nu; 	</td>
 		<td>Drache 	</td>
 		<td>Draco </td>
 		<td>alle Dreiecke und Vierecke sind Wirbel oder Teile des Körpers; 
@@ -150,7 +168,7 @@ noch sichtbaren Sterne.
 	<tr valign="top">
 		<td>Lyr  </td>
 		<td>
-		&Lambda;&#973;&rho;&alpha;&sigmaf; 
+		&Lambda;&#973;&rho;&alpha; 
 		</td>
 		<td > Lyre</td>
 		<td> Lyra</td>
@@ -169,7 +187,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Cas	</td>
-		<td>&Kappa;&alpha;&sigma;&sigma;&iota;&epsilon;&pi;&epsilon;&#943;&alpha;&sigmaf; </td>
+		<td>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;;&alpha; </td>
 		<td >Königin Kassiepeia 		</td>
 		<td>Cassiopeia 		</td>
 		<td>Königin sitzt auf Thron	</td>
@@ -232,7 +250,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Del </td>
-		<td> &Delta;&epsilon;&lambda;&phi;&iota;&#771;&nu;&omicron;&sigmaf; 		</td>
+		<td> &Delta;&epsilon;&lambda;&phi;&#943;&sigmaf; 		</td>
 		<td> Delphin 		</td>
 		<td> Delphinus 		</td>
 		<td> 		</td>
@@ -256,10 +274,10 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td >And </td>
-		<td> &#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;&sigmaf; 	</td>
+		<td> &#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;	</td>
 		<td> Andromeda 	</td>
 		<td> Andromeda 	</td>
-		<td> Kleid und Gürtel 	</td>
+		<td> Kleid und Gürtel beschrieben</td>
 		<td> 		</td>
 	</tr>
 	<tr valign="top">
@@ -288,7 +306,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Gem </td>
-		<td> &Delta;&#943;&delta;&upsilon;&mu;&omicron;&sigmaf; </td>
+		<td> &Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota; </td>
 		<td> Zwillinge </td>
 		<td> Gemini </td>
 		<td> haben einen Stern gemeinsam, d.h. berühren sich an den Händen</td>
@@ -316,7 +334,7 @@ noch sichtbaren Sterne.
 		<td> Junge Frau </td>
 		<td> Virgo 		</td>
 		<td>kein Kopfstern 		</td>
-		<td>Flügel nicht eingezeichnet</td>
+		<td>schwache Sterne ergänzt für Flügel</td>
 	</tr>
 	<tr valign="top">
 		<td> Lib 		</td>
@@ -360,7 +378,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Psc 		</td>
-		<td> &#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf; 		</td>
+		<td> &#702;&Iota;&chi;&theta;&#973;&sigmaf; 		</td>
 		<td> Fische 		</td>
 		<td> Pisces 	</td>
 		<td> 		</td>
@@ -391,7 +409,7 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Eri 		</td>
-		<td>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#768;&sigmaf; 		</td>
+		<td>&Pi;&omicron;&tau;&alpha;&mu;&972;&sigmaf; 		</td>
 		<td> Fluss [namenlos] 	</td>
 		<td> Eridanus 		</td>
 		<td> wie IAU Sternbild, aber kürzer 		</td>
@@ -403,7 +421,7 @@ noch sichtbaren Sterne.
 		<td> Hase	</td>
 		<td> Lepus 		</td>
 		<td> 		</td>
-		<td> Schwänzchen gekürzt </td>
+		<td> die "4 Sterne über dem Ohr" als Ohren skizziert </td>
 	</tr>
 	<tr valign="top">
 		<td> CMa 		</td>
@@ -411,10 +429,7 @@ noch sichtbaren Sterne.
 		<td> Hund 		</td>
 		<td> Canis Major </td>
 		<td> 	</td>
-		<td> &alpha; CMa beschrieben als &bdquo;Stern an der Schnautze&ldquo;,
-			aber von uns als Bruststern genutzt, &theta;
-			stattdessen an Schnautze, obgleich beschrieben als &bdquo;Star on the ears&ldquo;, &omicron;1
-			heißt "Schulterstern", aber ist am Bauch
+		<td> 
 		</td>
 	</tr>
 	<tr valign="top">
@@ -445,11 +460,11 @@ noch sichtbaren Sterne.
 	</tr>
 	<tr valign="top">
 		<td> Crt 		</td>
-		<td>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho; 		</td>
-		<td> Krater 		</td>
+		<td>&Kappa;&rho;&alpha;&tau;&#942;&rho; 		</td>
+		<td> Krater (Gefäß)	</td>
 		<td> Crater 		</td>
 		<td> 		</td>
-		<td> ein "Krater" ist eine spezielle griechische Vase: <a href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a> Ptolemäus
+		<td> ein "Krater" ist ein spezielles, großes Gefäß zum Weinmischen, sieht aus wie eine Amphore oder Schale: <a href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a> Ptolemäus
 			nennt nur einen Stern im Fuß (&alpha; Crt) und zwei Handgriffe (&eta;, &theta; Crt) </td>
 	</tr>
 	<tr valign="top">
@@ -466,8 +481,7 @@ noch sichtbaren Sterne.
 		<td> Kentauros 		</td>
 		<td> Centaurus 		</td>
 		<td> 		</td>
-		<td> Abweichend von Beschreibung:  &theta; Cen als Kopf, Kopfstern als Schulter.
-			 anderer Schulterstern (&iota; Cen) als linker Arm. &lsquo;Thyrsus&lsquo;-Stab nicht gezeichnet.
+		<td> Abweichend von Beschreibung:  HIP 65373 anstelle von &omega; Cen als Rückenstern; &lsquo;Thyrsus&lsquo;-Stab nicht gezeichnet.
 		</td>
 	</tr>
 	<tr valign="top">
@@ -503,14 +517,22 @@ noch sichtbaren Sterne.
 	<tr valign="top">
 		<td>PsA 		</td>
 		<td>&Nu;&#972;&tau;&iota;&omicron;&sigmaf;
-			&#700;&Iota;&chi;&theta;&#973;&omicron;&sigmaf;		</td>
+			&#700;&Iota;&chi;&theta;&#973;&sigmaf;		</td>
 		<td> Südlicher Fisch 		</td>
 		<td> Piscis Austrinus </td>
 		<td> schwimmt auf dem Rücken	</td>
 		<td> zum Schwanz einige Sterne ergänzt (&beta; sollte Schwanzspitze sein, aber wir nehmen ihn als Wurzel) </td>
 	</tr>
 </table>
-
+<h2>Literatur</2> 
+<p> 
+ <ul> 
+  <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, 1990 </li>
+  <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, Leipzig, 1898 </li>
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017 </li>
+  <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984 </li>
+ </ul>
+</p>
 <h2>Fair Use</h2>
 <p>
 	Diese Sternbilderkultur wurde in einem einjährigen Schülerforschungsprojekt entwickelt. 
