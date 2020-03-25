@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-25 21:10+0700\n"
+"POT-Creation-Date: 2020-03-26 00:16+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4596,59 +4596,92 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:79
-msgid "selected text"
-msgstr ""
-
 #: src/gui/ScriptConsole.cpp:80
-msgid "clear text"
+msgctxt "command"
+msgid "selected text as script"
 msgstr ""
 
 #: src/gui/ScriptConsole.cpp:81
-msgid "clear images"
+msgctxt "command"
+msgid "remove screen text"
 msgstr ""
 
 #: src/gui/ScriptConsole.cpp:82
-msgid "natural"
+msgctxt "command"
+msgid "remove screen images"
 msgstr ""
 
 #: src/gui/ScriptConsole.cpp:83
-msgid "starchart"
+msgctxt "command"
+msgid "remove screen markers"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:157
+#: src/gui/ScriptConsole.cpp:84
+msgctxt "command"
+msgid "clear map: natural"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:85
+msgctxt "command"
+msgid "clear map: starchart"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:86
+msgctxt "command"
+msgid "clear map: deepspace"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:87
+msgctxt "command"
+msgid "clear map: galactic"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:88
+msgctxt "command"
+msgid "clear map: supergalactic"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:162
 msgid "Stellarium Script Files"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:160
+#: src/gui/ScriptConsole.cpp:165
 msgid "Load Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:179
+#: src/gui/ScriptConsole.cpp:184
 msgid "Save Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:286
+#: src/gui/ScriptConsole.cpp:201
+msgid "Clear script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:201
+msgid "Are you sure?"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:294
 msgid "Select Script Include Directory"
 msgstr ""
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:323
+#: src/gui/ScriptConsole.cpp:324
 msgctxt "text cursor"
 msgid "R"
 msgstr ""
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:325
+#: src/gui/ScriptConsole.cpp:326
 msgctxt "text cursor"
 msgid "C"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:333
+#: src/gui/ScriptConsole.cpp:334
 msgid "Stellarium Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:335
+#: src/gui/ScriptConsole.cpp:336
 msgid "Include File"
 msgstr ""
 
@@ -10988,12 +11021,8 @@ msgstr ""
 msgid "pre-process script using SSC preprocessor"
 msgstr ""
 
-#: src/ui_scriptConsole.h:401 src/ui_scriptConsole.h:405
-msgid "Quickly load and run a utility script"
-msgstr ""
-
 #: src/ui_scriptConsole.h:403
-msgid "Quick run:"
+msgid "Execute:"
 msgstr ""
 
 #: src/ui_scriptConsole.h:408
