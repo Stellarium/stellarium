@@ -53,6 +53,8 @@ private slots:
 	void rowColumnChanged();
 
 	void setFlagUserDir(bool b);
+	void setFlagHideWindow(bool b);
+	void populateQuickRunList();
 	
 protected:
 	Ui_scriptConsoleForm* ui;
@@ -64,6 +66,7 @@ private:
 	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
 	bool useUserDir;
+	bool hideWindowAtScriptRun;
 	QString scriptFileName;
 
 	bool getFlagUserDir() { return useUserDir; }

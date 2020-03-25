@@ -42,6 +42,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
 	, useUserDir(false)
+	, hideWindowAtScriptRun(false)
 	, scriptFileName("")
 {
 	ui = new Ui_scriptConsoleForm;
@@ -56,7 +57,10 @@ ScriptConsole::~ScriptConsole()
 void ScriptConsole::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populateQuickRunList();
+	}
 }
 
 void ScriptConsole::styleChanged()
@@ -68,6 +72,17 @@ void ScriptConsole::styleChanged()
 	}
 }
 
+void ScriptConsole::populateQuickRunList()
+{
+	ui->quickrunCombo->clear();
+	ui->quickrunCombo->addItem(q_("quickrun..."));
+	ui->quickrunCombo->addItem(q_("selected text"));
+	ui->quickrunCombo->addItem(q_("clear text"));
+	ui->quickrunCombo->addItem(q_("clear images"));
+	ui->quickrunCombo->addItem(q_("natural"));
+	ui->quickrunCombo->addItem(q_("starchart"));
+}
+
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -76,12 +91,7 @@ void ScriptConsole::createDialogContent()
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
 
-	ui->quickrunCombo->addItem(q_("quickrun..."));
-	ui->quickrunCombo->addItem(q_("selected text"));
-	ui->quickrunCombo->addItem(q_("clear text"));
-	ui->quickrunCombo->addItem(q_("clear images"));
-	ui->quickrunCombo->addItem(q_("natural"));
-	ui->quickrunCombo->addItem(q_("starchart"));
+	populateQuickRunList();
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -101,9 +111,13 @@ void ScriptConsole::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 	ui->scriptEdit->setFocus();
 
-	useUserDir = StelApp::getInstance().getSettings()->value("gui/flag_scripts_user_dir", false).toBool();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	useUserDir = conf->value("gui/flag_scripts_user_dir", false).toBool();
 	ui->useUserDirCheckBox->setChecked(useUserDir);
+	hideWindowAtScriptRun = conf->value("gui/flag_scripts_hide_window", false).toBool();
+	ui->closeWindowAtScriptRunCheckbox->setChecked(hideWindowAtScriptRun);
 	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
+	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
 }
 
 void ScriptConsole::setFlagUserDir(bool b)
@@ -112,6 +126,15 @@ void ScriptConsole::setFlagUserDir(bool b)
 	{
 		useUserDir = b;
 		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_user_dir", b);
+	}
+}
+
+void ScriptConsole::setFlagHideWindow(bool b)
+{
+	if (b!=hideWindowAtScriptRun)
+	{
+		hideWindowAtScriptRun = b;
+		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_hide_window", b);
 	}
 }
 
@@ -214,6 +237,8 @@ void ScriptConsole::scriptStarted()
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
+	if (hideWindowAtScriptRun)
+		dialog->setVisible(false);
 }
 
 void ScriptConsole::scriptEnded()
@@ -224,6 +249,8 @@ void ScriptConsole::scriptEnded()
 	ui->quickrunCombo->setEnabled(true);
 	ui->runButton->setEnabled(true);
 	ui->stopButton->setEnabled(false);
+	if (hideWindowAtScriptRun)
+		dialog->setVisible(true);
 }
 
 void ScriptConsole::appendLogLine(const QString& s)

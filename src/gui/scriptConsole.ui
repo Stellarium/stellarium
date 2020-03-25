@@ -463,6 +463,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox">
+            <property name="text">
+             <string>Close window when script runs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
