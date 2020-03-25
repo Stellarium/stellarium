@@ -858,7 +858,8 @@ void SkyLine::draw(StelCore *core) const
 				if (y%1000 == 0)
 				{
 					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					if (showLabel)
 					{
 						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
@@ -879,7 +880,8 @@ void SkyLine::draw(StelCore *core) const
 				{
 					ptTgt=(y%500 == 0 ? part500 : part100);
 					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 				}
 			}
 
@@ -913,7 +915,8 @@ void SkyLine::draw(StelCore *core) const
 				if (y%1000 == 0)
 				{
 					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					if (showLabel)
 					{
 						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
@@ -934,7 +937,8 @@ void SkyLine::draw(StelCore *core) const
 				{
 					ptTgt=(y%500 == 0 ? part500 : part100);
 					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 				}
 			}
 
@@ -1007,7 +1011,7 @@ void SkyLine::draw(StelCore *core) const
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
 		for (int i=0; i<360; ++i)
 		{
-			if (i%30 == 0)
+			if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 			{
 				sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
@@ -1103,11 +1107,11 @@ void SkyLine::draw(StelCore *core) const
 				}
 			}
 
-			else if (i%10 == 0)
+			else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
 				sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else if (i%5 == 0)
+			else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
 				sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else
+			else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
 				sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 			part0.transfo4d(rotZ1);
 			part1.transfo4d(rotZ1);
