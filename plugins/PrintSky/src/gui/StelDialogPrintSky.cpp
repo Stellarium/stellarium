@@ -30,7 +30,7 @@
 class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
@@ -44,7 +44,6 @@ class CustomProxy : public QGraphicsProxyWidget
 			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
 		}
 	protected:
-
 		virtual bool event(QEvent* event)
 		{
 			if (event->type()==QEvent::WindowDeactivate)
@@ -77,7 +76,6 @@ void StelDialogPrintSky::setVisible(bool v)
 {
 	if (v)
 	{
-
 		QSize screenSize = StelMainView::getInstance().size();
 		if (dialog)
 		{
@@ -109,11 +107,7 @@ void StelDialogPrintSky::setVisible(bool v)
 		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
 		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
-
-		// The caching is buggy on all platforms with Qt 4.5.2
-
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-
 		proxy->setZValue(100);
 		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();

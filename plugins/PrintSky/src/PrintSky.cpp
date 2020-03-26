@@ -62,11 +62,6 @@ void PrintSky::init()
 	conf->endGroup();
 }
 
-void PrintSky::update(double deltaTime)
-{
-	Q_UNUSED(deltaTime)
-}
-
 //! Draw any parts on the screen which are for our module
 void PrintSky::draw(StelCore* core)
 {

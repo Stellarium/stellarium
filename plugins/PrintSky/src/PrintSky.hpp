@@ -43,7 +43,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual bool configureGui(bool show=true);
-	virtual void update(double deltaTime);
+	virtual void update(double) {}
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 

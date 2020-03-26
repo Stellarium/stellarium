@@ -47,11 +47,6 @@ PrintSkyDialog::PrintSkyDialog() :
 
 PrintSkyDialog::~PrintSkyDialog()
 {
-	//These exist only if the window has been shown once:
-	if (dialog)
-	{
-	}
-
 	delete ui;
 	ui = Q_NULLPTR;
 }
