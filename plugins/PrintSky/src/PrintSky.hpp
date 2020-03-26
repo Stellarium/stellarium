@@ -46,10 +46,6 @@ public:
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(class QKeyEvent* event);
-	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	//virtual void setStelStyle(const QString& style);
 
 signals:
 	void invertColorsChanged(bool state);
@@ -79,10 +75,10 @@ private slots:
 
 private:
 	//Printing options
-	bool invertColors, scaleToFit, printData, printSSEphemerides;
-	bool orientationPortrait; // true for Portrait paper, false for Landscape
+	bool invertColors, scaleToFit, printData, printSSEphemerides, orientationPortrait; // true for Portrait paper, false for Landscape
 
 	PrintSkyDialog *printskyDialog;
+	QSettings* conf;
 };
 
 #include <QObject>
