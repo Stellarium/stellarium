@@ -596,7 +596,8 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 
 					if (path.isEmpty())
 					{
-						qWarning() << "WARNING: script include:" << QDir::toNativeSeparators(fileName);
+						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(fileName))));
+						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(fileName);
 						return false;
 					}
 				}
@@ -606,12 +607,13 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 			bool ok = fic.open(QIODevice::ReadOnly);
 			if (ok)
 			{
-				qDebug() << "script include: " << QDir::toNativeSeparators(path);
+				qWarning() << "script include: " << QDir::toNativeSeparators(path);
 				preprocessScript(fic, output, scriptDir);
 			}
 			else
 			{
-				qWarning() << "WARNING: could not open script include file for reading:" << QDir::toNativeSeparators(path);
+				emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(fileName))));
+				qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(fileName);
 				return false;
 			}
 		}
@@ -652,9 +654,9 @@ StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine)
 
 void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int columnNumber)
 {
-	Q_UNUSED(scriptId);
-	Q_UNUSED(lineNumber);
-	Q_UNUSED(columnNumber);
+	Q_UNUSED(scriptId)
+	Q_UNUSED(lineNumber)
+	Q_UNUSED(columnNumber)
 
 	while (isPaused) {
 		// TODO : sleep for 'processEventsInterval' time
