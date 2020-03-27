@@ -569,7 +569,7 @@ bool StelScriptMgr::strToBool(const QString& str)
 
 bool StelScriptMgr::preprocessScript(const QString &input, QString &output, const QString &scriptDir)
 {
-	QStringList lines = input.split("\n", QString::SkipEmptyParts);
+	QStringList lines = input.split("\n");
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	for (const auto& line : lines)
 	{
