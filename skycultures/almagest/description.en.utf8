@@ -18,7 +18,7 @@ translations.  To create this sky culture we used the English translation by Too
 of 1022 stars in 48 constellations (among which are about 5 star-like
 objects like globular star clusters).  It is a table of coordinates
 of the stars with a description of their position in the
-constellation (such as "star at the ellbow of X, longitude, latitude, magnitude").  
+constellation (such as "star at the elbow of X, longitude, latitude, magnitude").  
 With regard to precession, Ptolemy used ecliptic coordinates.  As one of the first of
 his time, Ptolemy included the magnitude, a quantitative scale of
 stellar brightness, probably adopted from Hipparchus (which is not
@@ -29,13 +29,14 @@ down to magnitude of 6, for the faintest stars visible.
 
 <p>For the computation of planet positions Ptolemy used a
 geocentric model (which is allowed because the observer always stands on Earth) and, thus, 
-contributed to the scientific believe that the heliocentric model by
+contributed to the scientific belief that the heliocentric model by
 Aristarch was not needed. However, for the star catalogue of the <i>Almagest</i> 
 this does not matter at all because a star catalogue always represents a sort of inventory 
 of the fixed dots in the sky and Ptolemy's proclaimed aim of the catalogue is to provide a list
-for making a celestial globe (see Alm., VIII, 3). He uses ecliptical coordinates
-because being aware of precession he wants to ease the business of future globemakers as they 
-might wish to transform his catalogue into coordinates of their epoch. </p>
+for making a celestial globe (see Alm., VIII, 3). Being aware of precession he wants to ease the 
+business of future globemakers by using ecliptical coordinates: Precession as known to Ptolemy 
+shifts all stars parallel to the ecliptic, therefore updates to the epoch of the respective globemaker 
+could be applied by a simple subtraction of the value for ecliptic longitude. </p>
 
 <h2>How this sky culture was made</h2></p>
 
@@ -69,8 +70,7 @@ it doesn't show up in the Almagest.
 
 </p>
 <p >The
-following table displays the original constellation
- name in Greek and its
+following table displays the original constellation name in Greek and its
 English translation (column 2 and 3) and denotes our uncertainties in
 the reconstruction (column 6). 
 </p>
@@ -123,8 +123,8 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td >	Cep</td>
-		<td >&Kappa;&eta;&phi;&#941;&omega;&sigmaf; 	</td>
-		<td Kepheus	</td>
+		<td > &Kappa;&eta;&phi;&epsilon;&#973;&sigmaf; 	</td>
+		<td >Kepheus	</td>
 		<td > Cepheus	</td>
 		<td >king, upside down </td>
 		<td> three head stars are tiara; &beta; seen as part of
@@ -173,7 +173,7 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td>Cyg </td>
-		<td > &#700;&#714;&Omicron;&rho;&nu;&iota;&theta;&omicron;&sigmaf; 	</td>
+		<td > &#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf; 	</td>
 		<td> Bird </td>
 		<td>Cygnus </td>
 		<td> swan with legs </td>
@@ -189,7 +189,7 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td>			Per		</td>
-		<td>&Pi;&epsilon;&rho;&sigma;&#941;&omega;&sigmaf;	</td>
+		<td>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;	</td>
 		<td>Perseus</td>
 		<td>Perseus </td>
 		<td>Double star cluster NGC 869 und NGC 884 as Deep Sky Object -&gt; one
@@ -200,7 +200,7 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td>Aur		</td>
-		<td>&#702;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf; 		</td>
+		<td>&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf; 		</td>
 		<td>Charioteer 		</td>
 		<td>Auriga 		</td>
 		<td> wears long garment; garment limited through shoulders	and hem </td>
@@ -368,8 +368,8 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td> Psc 		</td>
-		<td> &#702;&Iota;&chi;&theta;&#973;&sigmaf; 		</td>
-		<td> Fish 		</td>
+		<td> &#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf; 		</td>
+		<td> [2] Fish 		</td>
 		<td> Pisces 	</td>
 		<td> 		</td>
 		<td> northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we took them as fin because mouth should be at g and &tau; Psc.
@@ -435,7 +435,7 @@ the reconstruction (column 6).
 	</tr>
 	<tr valign="top">
 		<td> CMi 	</td>
-		<td>&Pi;&rho;&omicron;&#769;&kappa;&upsilon;&nu;&omicron;&sigmaf; </td>
+		<td>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</td>
 		<td> The One before the Dog </td>
 		<td> Canis Minor 	</td>
 		<td> 		</td>
@@ -470,7 +470,7 @@ the reconstruction (column 6).
 		<td> Krater (vessel)	</td>
 		<td> Crater 		</td>
 		<td> 		</td>
-		<td> a Krater is special Greek mixing vessel which looks like an amphora or vase: <a href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a> Ptolemy
+		<td> a Krater is special Greek wine mixing vessel which looks like an amphora or vase: <a href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a> Ptolemy
 			describes only one star in the foot (&alpha; Crt) and two handles (&eta;, &theta; Crt) </td>
 	</tr>
 	<tr valign="top">
