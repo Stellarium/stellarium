@@ -308,6 +308,8 @@
 	     from Cassini data, colored by RVS. Public domain.
 	4.5m All other planet maps from David Seal's site:
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
+	4.5n Bennu map is created by NASA from OSIRIS-REx spacecraft data. Public domain.
+	     Full size mosaic: https://www.asteroidmission.org/bennu_global_mosaic/
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
 	    pictures available from
