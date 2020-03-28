@@ -1,57 +1,56 @@
-<h1>Almagest </h1>
+<h1>Almagest</h1>
+
 <p>
-This ancient Greek sky culture
-is based on the Almagest, a compilation of astronomical knowledge of former
-astronomers including results from observations and mathematical astronomy. Pieced
-together by Claudius Ptolemy, using older, as well as his own,
-observations, it was written in Greek, published in the Second
-Century and remained the main astronomical work for the following
-1500 years.  It was originally written with the title <i>Mathematike
-Syntaxis</i>, in 
-Ancient Greek.  The name <i>Almagest</i>,
-meaning &ldquo;The Largest [Book]&rdquo;, was developed from Arabian
-translations.  To create this sky culture we used the English translation by Toomer
-(1984). </p>
+This ancient Greek sky culture is based on the Almagest, a compilation of 
+astronomical knowledge of former astronomers including results from 
+observations and mathematical astronomy. Pieced together by Claudius 
+Ptolemy, using older, as well as his own, observations, it was written 
+in Greek, published in the Second Century and remained the main 
+astronomical work for the following 1500 years. It was originally written 
+with the title <i>Mathematike Syntaxis</i>, in Ancient Greek. 
+The name <i>Almagest</i>, meaning &ldquo;The Largest [Book]&rdquo;, was 
+developed from Arabian translations. To create this sky culture we used 
+the English translation by Toomer (1984).</p>
 
-<p>The Almagest consists of
-13 sections, called books.  In the seventh and eighth book, Ptolemy listed a total
-of 1022 stars in 48 constellations (among which are about 5 star-like
-objects like globular star clusters).  It is a table of coordinates
-of the stars with a description of their position in the
-constellation (such as "star at the elbow of X, longitude, latitude, magnitude").  
-With regard to precession, Ptolemy used ecliptic coordinates.  As one of the first of
-his time, Ptolemy included the magnitude, a quantitative scale of
-stellar brightness, probably adopted from Hipparchus (which is not
-certain because Hipparchus&rsquo; catalog is not preserved).  The
-scale starts with the brightest star with the magnitude of 1, going
-down to magnitude of 6, for the faintest stars visible.
-</p>
+<p>The Almagest consists of 13 sections, called books. In the seventh 
+and eighth book, Ptolemy listed a total of 1022 stars in 48 constellations 
+(among which are about 5 star-like objects like globular star clusters). 
+It is a table of coordinates of the stars with a description of their 
+position in the constellation (such as "star at the elbow of X, longitude, 
+latitude, magnitude"). With regard to precession, Ptolemy used ecliptic 
+coordinates. As one of the first of his time, Ptolemy included the 
+magnitude, a quantitative scale of stellar brightness, probably adopted 
+from Hipparchus (which is not certain because Hipparchus&rsquo; catalog 
+is not preserved). The scale starts with the brightest star with the 
+magnitude of 1, going down to magnitude of 6, for the faintest stars 
+visible.</p>
 
-<p>For the computation of planet positions Ptolemy used a
-geocentric model (which is allowed because the observer always stands on Earth) and, thus, 
-contributed to the scientific belief that the heliocentric model by
-Aristarch was not needed. However, for the star catalogue of the <i>Almagest</i> 
-this does not matter at all because a star catalogue always represents a sort of inventory 
-of the fixed dots in the sky and Ptolemy's proclaimed aim of the catalogue is to provide a list
-for making a celestial globe (see Alm., VIII, 3). Being aware of precession he wants to ease the 
-business of future globemakers by using ecliptical coordinates: Precession as known to Ptolemy 
-shifts all stars parallel to the ecliptic, therefore updates to the epoch of the respective globemaker 
-could be applied by a simple subtraction of the value for ecliptic longitude. </p>
+<p>For the computation of planet positions Ptolemy used a geocentric model 
+(which is allowed because the observer always stands on Earth) and, thus, 
+contributed to the scientific belief that the heliocentric model by 
+Aristarch was not needed. However, for the star catalogue of the 
+<i>Almagest</i> this does not matter at all because a star catalogue 
+always represents a sort of inventory of the fixed dots in the sky and 
+Ptolemy's proclaimed aim of the catalogue is to provide a list for making 
+a celestial globe (see Alm., VIII, 3). Being aware of precession he wants 
+to ease the business of future globemakers by using ecliptical coordinates: 
+Precession as known to Ptolemy shifts all stars parallel to the ecliptic, 
+therefore updates to the epoch of the respective globemaker could be 
+applied by a simple subtraction of the value for ecliptic longitude.</p>
 
-<h2>How this sky culture was made</h2></p>
+<h2>How this sky culture was made</h2>
 
-<p >The process can be described
-as sketched here with the example of Corvus: 
-</p>
-<p>In the constellation of Corvus
-(Raven), &alpha; Crv is the star in the &quot;head of the raven&quot;.
- It is connected with the &quot;star in the neck&quot;, &epsilon;
-Crv.  This one is connected with &quot;the star in the breast&quot; &zeta;
-Crv.  From there two lines go to the tips of the wings.  &gamma; 
-Crv is the star in the advanced wing and &delta; Crv the star in the
-rear wing.  From the star in the breast another line goes to the
-&quot;foot of the raven&quot;, the star &beta; Crv.</p>
-<p ><img width="800" src="corvus_drawExample_s.png"/></p>
+<p >The process can be described as sketched here with the example of 
+Corvus:</p>
+<p>In the constellation of Corvus (Raven), &alpha; Crv is the star in 
+the &quot;head of the raven&quot;. It is connected with the &quot;star 
+in the neck&quot;, &epsilon; Crv.  This one is connected with &quot;the 
+star in the breast&quot; &zeta; Crv.  From there two lines go to the 
+tips of the wings. &gamma; Crv is the star in the advanced wing and 
+&delta; Crv the star in the rear wing. From the star in the breast 
+another line goes to the &quot;foot of the raven&quot;, the star &beta; 
+Crv.</p>
+<p><img width="800" src="corvus_drawExample_s.png"/></p>
 <p>After identifying the stars based on their coordinates and names, we
 reconnected the stars according to the descriptions in the table
 presented in the <i>Almagest</i>.</p>
@@ -60,21 +59,19 @@ presented in the <i>Almagest</i>.</p>
 only. E.g. Ptolemy uses the name &quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;
 (The Torch-like)&quot; for Aldebaran in his other work, the
 <i>Tetrabiblos</i>, but this is not implemented in this sky culture because
-it doesn't show up in the Almagest. 
-</p>
+it doesn't show up in the Almagest.</p>
 
 <p>The following table displays the original constellation name in Greek and its
 English translation (column 2 and 3) and denotes our uncertainties in
-the reconstruction (column 6). 
-</p>
+the reconstruction (column 6).</p>
 
-<p><table>
+<table>
 	<tr valign="top">
 		<td>	<b>Abbreviation</b>		</td>
 		<td><b>	Original name</b>		</td>
 		<td><b>	Translation</b>			(direct)		</td>
 		<td><b>	IAU (Latin) name</b>		</td>
-		<td><b>hints to constellation</font></b>		</td>
+		<td><b>hints to constellation</b>		</td>
 		<td><b>freedom of art</b> 		</td>
 	</tr>
 	<tr valign="top">
@@ -270,7 +267,8 @@ the reconstruction (column 6).
 		<td> half body, only two legs visible; direction of view to observer </td>
 		<td> </td>
 	</tr>
-	<tr> Gem </td>
+	<tr>
+		<td> Gem </td>
 		<td>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota; </td>
 		<td> Twins </td>
 		<td> Gemini </td>
@@ -286,7 +284,7 @@ the reconstruction (column 6).
 		<td> </td>
 	</tr>
 	<tr valign="top">
-		<td>Leo<</td>
+		<td>Leo</td>
 		<td> &Lambda;&#941;&omega;&nu; </td>
 		<td> Lion 	</td>
 		<td> Leo 	</td>
@@ -501,28 +499,28 @@ the reconstruction (column 6).
 		<td> The fish is laying on his back.</td>
 		<td> We added a few stars to mark the tail as such (&beta; should be the tip of the tail but we used it as its root) </td>
 	</tr>
-</table></p>
+</table>
 
 <h2>References/ Additional Literature</h2> 
-<p> 
  <ul> 
   <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, 1990 </li>
   <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, Leipzig, 1898 </li>
   <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017 </li>
   <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984 </li>
  </ul>
-</p>
-<h2>Fair Use</h2>
-<p>
-	This sky culture originates from a student's year of research. 
-	We provide this for free but authors of contributions certainly deserve to be cited according to the common rules. 
-	This sky culture is provided under CC BY-ND 4.0 International Public Licence (share-alike, do not change it without consulting the contributors, and cite the contributors). Thank you!
-</p>		
+
+ <h2>Fair Use</h2>
+<p>This sky culture originates from a student's year of research. We provide this for free but 
+authors of contributions certainly deserve to be cited according to the common rules. This sky 
+culture is provided under CC BY-ND 4.0 International Public Licence (share-alike, do not change 
+it without consulting the contributors, and cite the contributors). Thank you!</p>		
+
 <h2>Thanks</h2>
-<p>
-The authors thank Patrick Gleason and Georg Zotti for English proofreading and interesting discussions.
-</p>		
+<p>The authors thank Patrick Gleason and Georg Zotti for English proofreading and interesting 
+discussions.</p>		
+
 <h2>Authors</h2>
-This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea Jabschinski, Marie von Seggern und Susanne M. Hoffmann: service@uhura-uraniae.com 
+<p>This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea Jabschinski, 
+Marie von Seggern und Susanne M. Hoffmann: service@uhura-uraniae.com </p>
 
 <h5 align="center">written in English: <br />the authors </h5>
