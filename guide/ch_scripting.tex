@@ -51,7 +51,7 @@ which are documented in the scripting API documentation\footnote{
 \section{The Script Console}
 \label{sec:scripting:console}
 It is possible to load, edit, run and save scripts using the script
-console window. To toggle the script console, press \key{F12}. 
+console window. To toggle the script console, press \key{F12}.  
 
 \subsection{The Tabs in the Console}
 
@@ -78,6 +78,11 @@ results in a call to {\tt core.clear}, using one of the arguments
 These calls reset Stellarium's state, resulting in a basic state
 of the display and providing a clean starting point for another run of
 your script.
+
+The button SSC runs the SSC preprocessor with the script in the text
+field as input and produces an output by recursively inserting all
+included scripts into the text.
+\emph{This output replaces the contents of the Script text field.}
 
 \subsection{German Keyboards}
 
