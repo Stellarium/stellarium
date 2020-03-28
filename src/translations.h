@@ -110,6 +110,10 @@ class Translations
 		N_("Geological features");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Artificial objects");
+		
+		// =====================================================================
+		// Special location
+		N_("landing site");
 
 		// =====================================================================
 		// List of geological features by type

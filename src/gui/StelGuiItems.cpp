@@ -767,8 +767,13 @@ void BottomStelBar::updateText(bool updatePos)
 			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 		else
 		{
-			//TRANSLATORS: Unit of measure for distance - meter
-			newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+			if (loc->name.contains("->")) // a spaceship
+				newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
+			else
+			{
+				//TRANSLATORS: Unit of measure for distance - meter
+				newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+			}
 		}
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
@@ -801,7 +806,10 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			rho = q_("planetocentric observer");
 
-		location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
+		if (newLocation.contains("->")) // a spaceship
+			location->setToolTip(QString());
+		else
+			location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));
