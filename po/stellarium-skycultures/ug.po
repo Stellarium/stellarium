@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-16 01:07+0700\n"
+"POT-Creation-Date: 2020-03-28 21:05+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2018\n"
 "Language-Team: Uighur (https://www.transifex.com/stellarium/teams/80998/ug/)\n"
@@ -1693,117 +1693,124 @@ msgctxt "minor planet"
 msgid "Apophis"
 msgstr ""
 
+#. TRANSLATORS: Asteroid (101955) Bennu
+#. TRANSLATORS: https://en.wikipedia.org/wiki/101955_Bennu
+#: skycultures/translations.fab:750
+msgctxt "minor planet"
+msgid "Bennu"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (136818) Selqet
 #. TRANSLATORS: https://en.wikipedia.org/wiki/136818_Selqet
-#: skycultures/translations.fab:750
+#: skycultures/translations.fab:753
 msgctxt "minor planet"
 msgid "Selqet"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (137052) Tjelvar
 #. TRANSLATORS: https://en.wikipedia.org/wiki/137052_Tjelvar
-#: skycultures/translations.fab:753
+#: skycultures/translations.fab:756
 msgctxt "minor planet"
 msgid "Tjelvar"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (162173) Ryugu
 #. TRANSLATORS: https://en.wikipedia.org/wiki/162173_Ryugu
-#: skycultures/translations.fab:756
+#: skycultures/translations.fab:759
 msgctxt "minor planet"
 msgid "Ryugu"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (163693) Atira
 #. TRANSLATORS: https://en.wikipedia.org/wiki/163693_Atira
-#: skycultures/translations.fab:759
+#: skycultures/translations.fab:762
 msgctxt "minor planet"
 msgid "Atira"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (306367) Nut
 #. TRANSLATORS: https://en.wikipedia.org/wiki/306367_Nut
-#: skycultures/translations.fab:762
+#: skycultures/translations.fab:765
 msgctxt "minor planet"
 msgid "Nut"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (326290) Akhenaten
 #. TRANSLATORS: https://en.wikipedia.org/wiki/326290_Akhenaten
-#: skycultures/translations.fab:765
+#: skycultures/translations.fab:768
 msgctxt "minor planet"
 msgid "Akhenaten"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (367943) Duende [2012 DA14]
 #. TRANSLATORS: https://en.wikipedia.org/wiki/367943_Duende
-#: skycultures/translations.fab:768
+#: skycultures/translations.fab:771
 msgctxt "minor planet"
 msgid "Duende"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (385571) Otrera [2004 UP10]
 #. TRANSLATORS: https://en.wikipedia.org/wiki/385571_Otrera
-#: skycultures/translations.fab:771
+#: skycultures/translations.fab:774
 msgctxt "minor planet"
 msgid "Otrera"
 msgstr ""
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: skycultures/translations.fab:777
+#: skycultures/translations.fab:780
 msgctxt "comet"
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
 #. TRANSLATORS: https://en.wikipedia.org/wiki/SN_1572
-#: skycultures/translations.fab:788
+#: skycultures/translations.fab:791
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kepler%27s_Supernova
-#: skycultures/translations.fab:791
+#: skycultures/translations.fab:794
 msgid "Kepler's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1680A
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cassiopeia_A
-#: skycultures/translations.fab:794 nebulae/default/names.dat:1190
+#: skycultures/translations.fab:797 nebulae/default/names.dat:1190
 msgid "Cassiopeia A"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1885A
 #. TRANSLATORS: https://en.wikipedia.org/wiki/SN_1885A
-#: skycultures/translations.fab:797
+#: skycultures/translations.fab:800
 msgid "S Andromedae"
 msgstr ""
 
 #. TRANSLATORS: Template for Nova name
-#: skycultures/translations.fab:802
+#: skycultures/translations.fab:805
 msgctxt "Nova template"
 msgid "Nova"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J0534+2200 (Source: SIMBAD)
-#: skycultures/translations.fab:807
+#: skycultures/translations.fab:810
 msgid "Crab Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J0633+1746 (Source: SIMBAD;
 #. https://en.wikipedia.org/wiki/Geminga)
-#: skycultures/translations.fab:809
+#: skycultures/translations.fab:812
 msgid "Geminga Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J0659+1414 (Source: SIMBAD)
-#: skycultures/translations.fab:811
+#: skycultures/translations.fab:814
 msgid "Monogem Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J0834-4511 or PSR J0835-4510
 #. (Source: SIMBAD; https://en.wikipedia.org/wiki/Vela_Pulsar)
-#: skycultures/translations.fab:813
+#: skycultures/translations.fab:816
 msgid "Vela Pulsar"
 msgstr ""
 
@@ -1811,324 +1818,324 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/PSR_B1257%2B12)
 #. TRANSLATORS: Proper name of pulsar PSR 1257+12
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12
-#: skycultures/translations.fab:815 skycultures/translations.fab:942
+#: skycultures/translations.fab:818 skycultures/translations.fab:945
 msgid "Lich"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1412+7922 (Source: SIMBAD)
-#: skycultures/translations.fab:817
+#: skycultures/translations.fab:820
 msgid "Calvera"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1513-5908 (Source: SIMBAD)
-#: skycultures/translations.fab:819
+#: skycultures/translations.fab:822
 msgid "Cir Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1809-2332 (Source: SIMBAD)
-#: skycultures/translations.fab:821
+#: skycultures/translations.fab:824
 msgid "Tasmanian Devil Nebula"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1915+1606 (Source: SIMBAD;
 #. https://en.wikipedia.org/wiki/Hulse–Taylor_binary)
-#: skycultures/translations.fab:823
+#: skycultures/translations.fab:826
 msgid "Hulse-Taylor Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1959+2048 (Source: SIMBAD)
-#: skycultures/translations.fab:825
+#: skycultures/translations.fab:828
 msgid "Black Widow"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J2021+3651 (Source: SIMBAD)
-#: skycultures/translations.fab:827
+#: skycultures/translations.fab:830
 msgid "Dragonfly Nebula"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J2225+6535 (Source: SIMBAD)
-#: skycultures/translations.fab:829
+#: skycultures/translations.fab:832
 msgid "Guitar Nebula"
 msgstr ""
 
 #. TRANSLATORS: Proper name of pulsar PSR J1921+2153 (Source: SIMBAD; LGM is
 #. abbreviation for "little green men";
 #. https://en.wikipedia.org/wiki/PSR_B1919%2B21)
-#: skycultures/translations.fab:831
+#: skycultures/translations.fab:834
 msgid "LGM-1"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 14 Andromedae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/14_Andromedae
-#: skycultures/translations.fab:837 skycultures/western/star_names.fab:12
+#: skycultures/translations.fab:840 skycultures/western/star_names.fab:12
 msgid "Veritate"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 14 Andromedae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/14_Andromedae_b
-#: skycultures/translations.fab:840
+#: skycultures/translations.fab:843
 msgid "Spe"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 18 Delphini
 #. TRANSLATORS: https://en.wikipedia.org/wiki/18_Delphini
-#: skycultures/translations.fab:843 skycultures/western/star_names.fab:395
+#: skycultures/translations.fab:846 skycultures/western/star_names.fab:395
 msgid "Musica"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 18 Delphini b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/18_Delphini_b
-#: skycultures/translations.fab:846
+#: skycultures/translations.fab:849
 msgid "Arion"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 42 Draconis
 #. TRANSLATORS: https://en.wikipedia.org/wiki/42_Draconis
-#: skycultures/translations.fab:849 skycultures/western/star_names.fab:433
+#: skycultures/translations.fab:852 skycultures/western/star_names.fab:433
 msgid "Fafnir"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 42 Draconis b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/42_Draconis_b
-#: skycultures/translations.fab:852
+#: skycultures/translations.fab:855
 msgid "Orbitar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris
-#: skycultures/translations.fab:855 skycultures/western/star_names.fab:994
+#: skycultures/translations.fab:858 skycultures/western/star_names.fab:994
 msgid "Chalawan"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris_b
-#: skycultures/translations.fab:858
+#: skycultures/translations.fab:861
 msgid "Taphao Thong"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris_c
-#: skycultures/translations.fab:861
+#: skycultures/translations.fab:864
 msgid "Taphao Kaew"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 51 Pegasi
 #. TRANSLATORS: https://en.wikipedia.org/wiki/51_Pegasi
-#: skycultures/translations.fab:864 skycultures/western/star_names.fab:734
+#: skycultures/translations.fab:867 skycultures/western/star_names.fab:734
 msgid "Helvetios"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 51 Pegasi b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/51_Pegasi_b
-#: skycultures/translations.fab:867
+#: skycultures/translations.fab:870
 msgid "Dimidium"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star 55 Cancri
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri
-#: skycultures/translations.fab:870 skycultures/western/star_names.fab:152
+#: skycultures/translations.fab:873 skycultures/western/star_names.fab:152
 msgid "Copernicus"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_b
-#: skycultures/translations.fab:873
+#: skycultures/translations.fab:876
 msgid "Galileo"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_c
-#: skycultures/translations.fab:876
+#: skycultures/translations.fab:879
 msgid "Brahe"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_d
-#: skycultures/translations.fab:879
+#: skycultures/translations.fab:882
 msgid "Lipperhey"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri e
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_e
-#: skycultures/translations.fab:882
+#: skycultures/translations.fab:885
 msgid "Janssen"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri f
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_f
-#: skycultures/translations.fab:885
+#: skycultures/translations.fab:888
 msgid "Harriot"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet Ain b (epsilon Tauri b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Tauri_b
-#: skycultures/translations.fab:888
+#: skycultures/translations.fab:891
 msgid "Amateru"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet Edasich b (iota Draconis b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iota_Draconis_b
-#: skycultures/translations.fab:891
+#: skycultures/translations.fab:894
 msgid "Hypatia"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star epsilon Eridani
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Eridani
-#: skycultures/translations.fab:894 skycultures/western/star_names.fab:473
+#: skycultures/translations.fab:897 skycultures/western/star_names.fab:473
 msgid "Ran"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet epsilon Eridani b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Eridani_b
-#: skycultures/translations.fab:897
+#: skycultures/translations.fab:900
 msgid "AEgir"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei Ab)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gamma_Cephei_Ab
-#: skycultures/translations.fab:900
+#: skycultures/translations.fab:903
 msgid "Tadmor"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet Fomalhaut b (alpha Piscis Austrini b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Fomalhaut_b
-#: skycultures/translations.fab:903
+#: skycultures/translations.fab:906
 msgid "Dagon"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 104985
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_104985
-#: skycultures/translations.fab:906 skycultures/western/star_names.fab:140
+#: skycultures/translations.fab:909 skycultures/western/star_names.fab:140
 msgid "Tonatiuh"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 104985 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_104985_b
-#: skycultures/translations.fab:909
+#: skycultures/translations.fab:912
 msgid "Meztli"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 149026
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_149026
-#: skycultures/translations.fab:912 skycultures/western/star_names.fab:533
+#: skycultures/translations.fab:915 skycultures/western/star_names.fab:533
 msgid "Ogma"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 149026 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_149026_b
-#: skycultures/translations.fab:915
+#: skycultures/translations.fab:918
 msgid "Smertrios"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 81688
 #. TRANSLATORS: https://en.wikipedia.org/wiki/41_Lyncis
-#: skycultures/translations.fab:918 skycultures/western/star_names.fab:993
+#: skycultures/translations.fab:921 skycultures/western/star_names.fab:993
 msgid "Intercrus"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 81688 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/41_Lyncis_b
-#: skycultures/translations.fab:921
+#: skycultures/translations.fab:924
 msgid "Arkas"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star mu Arae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae
-#: skycultures/translations.fab:924 skycultures/western/star_names.fab:64
+#: skycultures/translations.fab:927 skycultures/western/star_names.fab:64
 msgid "Cervantes"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_b
-#: skycultures/translations.fab:927
+#: skycultures/translations.fab:930
 msgid "Quijote"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_c
-#: skycultures/translations.fab:930
+#: skycultures/translations.fab:933
 msgid "Dulcinea"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_d
-#: skycultures/translations.fab:933
+#: skycultures/translations.fab:936
 msgid "Rocinante"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae e
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_e
-#: skycultures/translations.fab:936
+#: skycultures/translations.fab:939
 msgid "Sancho"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet Pollux b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pollux_b
-#: skycultures/translations.fab:939
+#: skycultures/translations.fab:942
 msgid "Thestias"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_b
-#: skycultures/translations.fab:945
+#: skycultures/translations.fab:948
 msgid "Draugr"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_c
-#: skycultures/translations.fab:948
+#: skycultures/translations.fab:951
 msgid "Poltergeist"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_d
-#: skycultures/translations.fab:951
+#: skycultures/translations.fab:954
 msgid "Phobetor"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star upsilon Andromedae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae
-#: skycultures/translations.fab:954 skycultures/western/star_names.fab:11
+#: skycultures/translations.fab:957 skycultures/western/star_names.fab:11
 msgid "Titawin"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_b
-#: skycultures/translations.fab:957
+#: skycultures/translations.fab:960
 msgid "Saffar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_c
-#: skycultures/translations.fab:960
+#: skycultures/translations.fab:963
 msgid "Samh"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_d
-#: skycultures/translations.fab:963
+#: skycultures/translations.fab:966
 msgid "Majriti"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star xi Aquilae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xi_Aquilae
-#: skycultures/translations.fab:966 skycultures/western/star_names.fab:47
+#: skycultures/translations.fab:969 skycultures/western/star_names.fab:47
 msgid "Libertas"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet xi Aquilae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xi_Aquilae_b
-#: skycultures/translations.fab:969
+#: skycultures/translations.fab:972
 msgid "Fortitudo"
 msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Teegarden%27s_Star
-#: skycultures/translations.fab:971
+#: skycultures/translations.fab:974
 msgid "Teegarden's"
 msgstr ""
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Teegarden%27s_Star
-#: skycultures/translations.fab:973
+#: skycultures/translations.fab:976
 msgid "Teegarden's Star"
 msgstr ""
 
@@ -2136,7 +2143,7 @@ msgstr ""
 #. TRANSLATORS: Historians largely believe that the Albanians are descendants
 #. of the Illyrians, a term Albanians proudly call themselves.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:977 skycultures/western/star_names.fab:607
+#: skycultures/translations.fab:980 skycultures/western/star_names.fab:607
 msgid "Illyrian"
 msgstr ""
 
@@ -2144,7 +2151,7 @@ msgstr ""
 #. TRANSLATORS: Arber is the term for the inhabitants of Albania during the
 #. middle ages.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:981
+#: skycultures/translations.fab:984
 msgid "Arber"
 msgstr ""
 
@@ -2152,7 +2159,7 @@ msgstr ""
 #. TRANSLATORS: Hoggar is the name of the main mountain range in the Sahara
 #. Desert in southern Algeria.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:985 skycultures/western/star_names.fab:953
+#: skycultures/translations.fab:988 skycultures/western/star_names.fab:953
 msgid "Hoggar"
 msgstr ""
 
@@ -2161,7 +2168,7 @@ msgstr ""
 #. Desert and is renowned for its prehistoric cave art and scenic geological
 #. formations.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:989
+#: skycultures/translations.fab:992
 msgid "Tassili"
 msgstr ""
 
@@ -2171,7 +2178,7 @@ msgstr ""
 #. was used as a primitive solar calendar and reference point for shepherds
 #. and early inhabitants of Andorra.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:993 skycultures/western/star_names.fab:137
+#: skycultures/translations.fab:996 skycultures/western/star_names.fab:137
 msgid "Arcalís"
 msgstr ""
 
@@ -2181,7 +2188,7 @@ msgstr ""
 #. it in the southeast of Andorra. It is the main part of the Madriu-Perafita-
 #. Claror UNESCO World Heritage Site.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:997
+#: skycultures/translations.fab:1000
 msgid "Madriu"
 msgstr ""
 
@@ -2190,7 +2197,7 @@ msgstr ""
 #. from a combination of nosahuec, which means renew, and ñaaxa, which means
 #. year.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1001 skycultures/western/star_names.fab:808
+#: skycultures/translations.fab:1004 skycultures/western/star_names.fab:808
 msgid "Nosaxa"
 msgstr ""
 
@@ -2198,7 +2205,7 @@ msgstr ""
 #. TRANSLATORS: Naqaỹa means brother-family-relative in the Moqoit language
 #. and leads us to call all humans, indigenous or non-indigenous, brother.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1005
+#: skycultures/translations.fab:1008
 msgid "Naqaỹa"
 msgstr ""
 
@@ -2208,7 +2215,7 @@ msgstr ""
 #. the coast. Its shallow clear Caribbean waters make it a popular snorkelling
 #. spot.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1009
+#: skycultures/translations.fab:1012
 msgid "Malmok"
 msgstr ""
 
@@ -2217,21 +2224,21 @@ msgstr ""
 #. scenery situated in Arikok National Park along the northeast coast of
 #. Aruba. It is named after Plantation Prins where coconuts are cultivated.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1013
+#: skycultures/translations.fab:1016
 msgid "Bocaprins"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 38283
 #. TRANSLATORS: Bubup is the Boonwurrung word for child.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1017 skycultures/western/star_names.fab:650
+#: skycultures/translations.fab:1020 skycultures/western/star_names.fab:650
 msgid "Bubup"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 38283 b
 #. TRANSLATORS: YanYan is the Boonwurrung word for boy.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1021
+#: skycultures/translations.fab:1024
 msgid "Yanyan"
 msgstr ""
 
@@ -2240,7 +2247,7 @@ msgstr ""
 #. of Austria in the XIXth century. The role is played by the actor Karlheinz
 #. Böhm.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1025
+#: skycultures/translations.fab:1028
 msgid "Franz"
 msgstr ""
 
@@ -2248,7 +2255,7 @@ msgstr ""
 #. TRANSLATORS: Sissi is a character in the movie 'Sissi', who is married with
 #. Franz. The role is played by the actress Romy Schneider.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1029
+#: skycultures/translations.fab:1032
 msgid "Sissi"
 msgstr ""
 
@@ -2258,7 +2265,7 @@ msgstr ""
 #. Khayyam and Nizami and was well educated and talented and played numerous
 #. musical instruments.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1033 skycultures/western/star_names.fab:676
+#: skycultures/translations.fab:1036 skycultures/western/star_names.fab:676
 msgid "Mahsati"
 msgstr ""
 
@@ -2268,7 +2275,7 @@ msgstr ""
 #. ancient capital of Azerbaijan, the first capital of the Azerbaijan
 #. Democratic Republic and the city with the spirit of wisdom and freedom.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1037
+#: skycultures/translations.fab:1040
 msgid "Ganja"
 msgstr ""
 
@@ -2276,7 +2283,7 @@ msgstr ""
 #. TRANSLATORS: Timir means darkness in Bengali language, alluding to the star
 #. being far away in the darkness of space.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1041 skycultures/western/star_names.fab:677
+#: skycultures/translations.fab:1044 skycultures/western/star_names.fab:677
 msgid "Timir"
 msgstr ""
 
@@ -2284,7 +2291,7 @@ msgstr ""
 #. TRANSLATORS: Tondra means nap in Bengali language, alluding to the symbolic
 #. notion that the planet was asleep until discovered.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1045
+#: skycultures/translations.fab:1048
 msgid "Tondra"
 msgstr ""
 
@@ -2292,7 +2299,7 @@ msgstr ""
 #. TRANSLATORS: Nervia, adapted from Nervii, was a prominent Belgian Celtic
 #. tribe.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1049 skycultures/western/star_names.fab:112
+#: skycultures/translations.fab:1052 skycultures/western/star_names.fab:112
 msgid "Nervia"
 msgstr ""
 
@@ -2300,7 +2307,7 @@ msgstr ""
 #. TRANSLATORS: Eburonia, adapted from Eburones, was a prominent Belgian
 #. Celtic tribe.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1053
+#: skycultures/translations.fab:1056
 msgid "Eburonia"
 msgstr ""
 
@@ -2309,7 +2316,7 @@ msgstr ""
 #. development philosophy conceived and followed in Bhutan and is one of
 #. Bhutan's contributions to the world.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1057 skycultures/western/star_names.fab:158
+#: skycultures/translations.fab:1060 skycultures/western/star_names.fab:158
 msgid "Gakyid"
 msgstr ""
 
@@ -2318,7 +2325,7 @@ msgstr ""
 #. Bhutan, the country that came up with the philosophy of Gross National
 #. Happiness.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1061
+#: skycultures/translations.fab:1064
 msgid "Drukyul"
 msgstr ""
 
@@ -2327,7 +2334,7 @@ msgstr ""
 #. Way through which the first inhabitants of the Earth arrived and could
 #. return.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1065 skycultures/western/star_names.fab:219
+#: skycultures/translations.fab:1068 skycultures/western/star_names.fab:219
 msgid "Tapecue"
 msgstr ""
 
@@ -2335,7 +2342,7 @@ msgstr ""
 #. TRANSLATORS: Yvaga means paradise for the Guarani and the Milky Way was
 #. known as the road to Yvaga or paradise.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1069
+#: skycultures/translations.fab:1072
 msgid "Yvaga"
 msgstr ""
 
@@ -2344,7 +2351,7 @@ msgstr ""
 #. 10th century. Later, the name was transformed to Bosnia originating from
 #. the name of the Bosna river.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1073 skycultures/western/star_names.fab:40
+#: skycultures/translations.fab:1076 skycultures/western/star_names.fab:40
 msgid "Bosona"
 msgstr ""
 
@@ -2353,7 +2360,7 @@ msgstr ""
 #. Herzegovina (and partly in Croatia) in antiquity orginating with the Celts
 #. who called it Nera Etwa which means the Flowing Divinity.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1077
+#: skycultures/translations.fab:1080
 msgid "Naron"
 msgstr ""
 
@@ -2362,7 +2369,7 @@ msgstr ""
 #. on the eastern coast of South America, before the Portuguese arrived in the
 #. 16th century.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1081 skycultures/western/star_names.fab:810
+#: skycultures/translations.fab:1084 skycultures/western/star_names.fab:810
 msgid "Tupi"
 msgstr ""
 
@@ -2370,7 +2377,7 @@ msgstr ""
 #. TRANSLATORS: Guarani is the name of the most populous Indigenous people
 #. living in South Brazil and parts of Argentina, Paraguay and Uruguay.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1085
+#: skycultures/translations.fab:1088
 msgid "Guarani"
 msgstr ""
 
@@ -2378,7 +2385,7 @@ msgstr ""
 #. TRANSLATORS: Gumala is a Malay word, which means a magic bezoar stone found
 #. in snakes, dragons, etc.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1089 skycultures/western/star_names.fab:855
+#: skycultures/translations.fab:1092 skycultures/western/star_names.fab:855
 msgid "Gumala"
 msgstr ""
 
@@ -2386,7 +2393,7 @@ msgstr ""
 #. TRANSLATORS: Mastika is a Malay word, which means a gem, precious stone,
 #. jewel or the prettiest, the most beautiful.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1093
+#: skycultures/translations.fab:1096
 msgid "Mastika"
 msgstr ""
 
@@ -2394,7 +2401,7 @@ msgstr ""
 #. TRANSLATORS: Tangra is the supreme celestial god that early Bulgars
 #. worshiped.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1097
+#: skycultures/translations.fab:1100
 msgid "Tangra"
 msgstr ""
 
@@ -2402,7 +2409,7 @@ msgstr ""
 #. TRANSLATORS: Bendida is the Great Mother Goddess of the Thracians. She was
 #. especially revered as a goddess of marriage and living nature.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1101
+#: skycultures/translations.fab:1104
 msgid "Bendida"
 msgstr ""
 
@@ -2411,7 +2418,7 @@ msgstr ""
 #. Burkina Faso and plays an important role in the lives of the people in the
 #. areas it passes through.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1105 skycultures/western/star_names.fab:482
+#: skycultures/translations.fab:1108 skycultures/western/star_names.fab:482
 msgid "Mouhoun"
 msgstr ""
 
@@ -2420,7 +2427,7 @@ msgstr ""
 #. river in Burkina Faso. Its source is in the heart of the Sahara Burkinabe
 #. and ends in Ghana.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1109
+#: skycultures/translations.fab:1112
 msgid "Nakanbé"
 msgstr ""
 
@@ -2428,7 +2435,7 @@ msgstr ""
 #. TRANSLATORS: Nikawiy is the word for mother in the Indigenous Cree language
 #. of Canada.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1113 skycultures/western/star_names.fab:138
+#: skycultures/translations.fab:1116 skycultures/western/star_names.fab:138
 msgid "Nikawiy"
 msgstr ""
 
@@ -2436,7 +2443,7 @@ msgstr ""
 #. TRANSLATORS: Awasis is the word for child in the Indigenous Cree language
 #. of Canada.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1117
+#: skycultures/translations.fab:1120
 msgid "Awasis"
 msgstr ""
 
@@ -2445,7 +2452,7 @@ msgstr ""
 #. mythology who is said to bring drowned sailors to the Caleuche so that they
 #. can live in the afterlife.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1121 skycultures/western/star_names.fab:856
+#: skycultures/translations.fab:1124 skycultures/western/star_names.fab:856
 msgid "Pincoya"
 msgstr ""
 
@@ -2453,7 +2460,7 @@ msgstr ""
 #. TRANSLATORS: Caleuche is a large ghost ship from southern Chilean mythology
 #. which sails the seas around the island of Chiloé at night.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1125
+#: skycultures/translations.fab:1128
 msgid "Caleuche"
 msgstr ""
 
@@ -2461,7 +2468,7 @@ msgstr ""
 #. TRANSLATORS: Lion Rock is a lion-shaped peak overlooking Hong Kong and is a
 #. cultural symbol with deep respect from the local community.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1129 skycultures/western/star_names.fab:41
+#: skycultures/translations.fab:1132 skycultures/western/star_names.fab:41
 msgid "Lionrock"
 msgstr ""
 
@@ -2470,7 +2477,7 @@ msgstr ""
 #. regarded as an ambassadorial gateway for foreign visitors wishing to
 #. experience Hong Kong first hand.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1133
+#: skycultures/translations.fab:1136
 msgid "Victoriapeak"
 msgstr ""
 
@@ -2479,7 +2486,7 @@ msgstr ""
 #. and also represents the earliest astronomers and developers of calendars in
 #. ancient China.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1137 skycultures/western/star_names.fab:648
+#: skycultures/translations.fab:1140 skycultures/western/star_names.fab:648
 msgid "Xihe"
 msgstr ""
 
@@ -2487,7 +2494,7 @@ msgstr ""
 #. TRANSLATORS: Wangshu (望舒) is the goddess who drives for the Moon and also
 #. represents the Moon in Chinese mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1141
+#: skycultures/translations.fab:1144
 msgid "Wangshu"
 msgstr ""
 
@@ -2495,7 +2502,7 @@ msgstr ""
 #. TRANSLATORS: Formosa is the historical name of Taiwan used in the 17th
 #. century, meaning beautiful in Latin.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1145 skycultures/western/star_names.fab:594
+#: skycultures/translations.fab:1148 skycultures/western/star_names.fab:594
 msgid "Formosa"
 msgstr ""
 
@@ -2505,7 +2512,7 @@ msgstr ""
 #. language of the Thao people who are a tribe of Taiwanese aborigines who
 #. lived in the region for hundreds of years.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1149
+#: skycultures/translations.fab:1152
 msgid "Sazum"
 msgstr ""
 
@@ -2514,7 +2521,7 @@ msgstr ""
 #. of Solitude (Cien años de soledad) the classic novel by Gabriel García
 #. Marquez. Macondo is a fictional place where magic and reality are mixed.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1153 skycultures/western/star_names.fab:16
+#: skycultures/translations.fab:1156 skycultures/western/star_names.fab:16
 msgid "Macondo"
 msgstr ""
 
@@ -2523,7 +2530,7 @@ msgstr ""
 #. like a planet orbiting a star, connecting it with the external world by
 #. introducing new knowledge using his inventions as well as his stories.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1157
+#: skycultures/translations.fab:1160
 msgid "Melquíades"
 msgstr ""
 
@@ -2531,7 +2538,7 @@ msgstr ""
 #. TRANSLATORS: Poerava is the word in the Cook Islands Maori language for a
 #. large mystical black pearl of utter beauty and perfection.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1161 skycultures/western/star_names.fab:962
+#: skycultures/translations.fab:1164 skycultures/western/star_names.fab:962
 msgid "Poerava"
 msgstr ""
 
@@ -2539,7 +2546,7 @@ msgstr ""
 #. TRANSLATORS: Pipitea is a small, white and gold pearl found in Penrhyn
 #. lagoon in the northern group of the Cook Islands.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1165
+#: skycultures/translations.fab:1168
 msgid "Pipitea"
 msgstr ""
 
@@ -2547,7 +2554,7 @@ msgstr ""
 #. TRANSLATORS: Dìwö in Bribri language means the sun (bigger than the sun we
 #. know) and that never turns off.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1169
+#: skycultures/translations.fab:1172
 msgid "Dìwö"
 msgstr ""
 
@@ -2555,7 +2562,7 @@ msgstr ""
 #. TRANSLATORS: Ditsö̀ is the name that the god Sibö̀ gave to the first Bribri
 #. people.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1173
+#: skycultures/translations.fab:1176
 msgid "Ditsö̀"
 msgstr ""
 
@@ -2564,7 +2571,7 @@ msgstr ""
 #. literature character in the book Priče iz davnine (Croatian Tales of Long
 #. Ago) by the Croatian author Ivana Brlić-Mažuranić.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1177 skycultures/western/star_names.fab:632
+#: skycultures/translations.fab:1180 skycultures/western/star_names.fab:632
 msgid "Stribor"
 msgstr ""
 
@@ -2572,7 +2579,7 @@ msgstr ""
 #. TRANSLATORS: Veles is a major Slavic god of earth, waters and the
 #. underworld.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1181
+#: skycultures/translations.fab:1184
 msgid "Veles"
 msgstr ""
 
@@ -2581,7 +2588,7 @@ msgstr ""
 #. Cuba at the San Carlos and San Ambrosio Seminary. He opened the way to
 #. education for all, and began the experimental teaching of physics in Cuba.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1185 skycultures/western/star_names.fab:309
+#: skycultures/translations.fab:1188 skycultures/western/star_names.fab:309
 msgid "Felixvarela"
 msgstr ""
 
@@ -2590,7 +2597,7 @@ msgstr ""
 #. recognized as a pioneer in the research of yellow fever, determining that
 #. it was transmitted through mosquitoes.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1189
+#: skycultures/translations.fab:1192
 msgid "Finlay"
 msgstr ""
 
@@ -2598,7 +2605,7 @@ msgstr ""
 #. TRANSLATORS: Alasia is the first historically recorded name of Cyprus,
 #. dating back to mid-fifteenth century BC.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1193 skycultures/western/star_names.fab:915
+#: skycultures/translations.fab:1196 skycultures/western/star_names.fab:915
 msgid "Alasia"
 msgstr ""
 
@@ -2608,7 +2615,7 @@ msgstr ""
 #. Onasilou Plate, it is considered as the oldest legal contract found in the
 #. world.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1197
+#: skycultures/translations.fab:1200
 msgid "Onasilos"
 msgstr ""
 
@@ -2617,7 +2624,7 @@ msgstr ""
 #. novel Továrna na absolutno (The Factory for the Absolute) by influential
 #. Czech writer Karel Čapek.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1201
+#: skycultures/translations.fab:1204
 msgid "Absolutno"
 msgstr ""
 
@@ -2626,7 +2633,7 @@ msgstr ""
 #. (The Makropulos Affair), dealing with problems of immortality and
 #. consequences of an artificial prolongation of life.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1205
+#: skycultures/translations.fab:1208
 msgid "Makropulos"
 msgstr ""
 
@@ -2635,7 +2642,7 @@ msgstr ""
 #. gods used the sparks of Muspelheim to form the sun, moon, planets, and
 #. stars.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1209
+#: skycultures/translations.fab:1212
 msgid "Muspelheim"
 msgstr ""
 
@@ -2644,7 +2651,7 @@ msgstr ""
 #. Norse mythology. At Ragnarok, the end of the world, he will lead the attack
 #. on our world and destroy it in flames.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1213
+#: skycultures/translations.fab:1216
 msgid "Surt"
 msgstr ""
 
@@ -2653,7 +2660,7 @@ msgstr ""
 #. engraved at a higher position on the stalagmite than Boinayel in the El
 #. Puente cave, where the Sun makes its way down every 21 December.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1217
+#: skycultures/translations.fab:1220
 msgid "Márohu"
 msgstr ""
 
@@ -2661,7 +2668,7 @@ msgstr ""
 #. TRANSLATORS: Boinayel the god of rain that fertilizes the soil is engraved
 #. on the stalagmite at a lower position than Márohu in the El Puente cave.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1221
+#: skycultures/translations.fab:1224
 msgid "Boinayel"
 msgstr ""
 
@@ -2669,7 +2676,7 @@ msgstr ""
 #. TRANSLATORS: Nenque means the Sun in the language spoken by the Indigenous
 #. Waorani tribes of the Amazon regions of Ecuador
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1225 skycultures/western/star_names.fab:770
+#: skycultures/translations.fab:1228 skycultures/western/star_names.fab:770
 msgid "Nenque"
 msgstr ""
 
@@ -2678,14 +2685,14 @@ msgstr ""
 #. Waorani tribes of the Amazon regions of Ecuador. This word is suggested for
 #. the exoplanet owing to the proximity of the planet to the host star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1229
+#: skycultures/translations.fab:1232
 msgid "Eyeke"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 52265
 #. TRANSLATORS: Citalá means River of stars in the native Nahuat language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1233 skycultures/western/star_names.fab:654
+#: skycultures/translations.fab:1236 skycultures/western/star_names.fab:654
 msgid "Citalá"
 msgstr ""
 
@@ -2693,7 +2700,7 @@ msgstr ""
 #. TRANSLATORS: Cayahuanca means The rock looking at the stars in the native
 #. Nahuat language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1237
+#: skycultures/translations.fab:1240
 msgid "Cayahuanca"
 msgstr ""
 
@@ -2701,7 +2708,7 @@ msgstr ""
 #. TRANSLATORS: Koit is Estonian for the time when the Sun rises in the
 #. morning (dawn).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1241
+#: skycultures/translations.fab:1244
 msgid "Koit"
 msgstr ""
 
@@ -2709,14 +2716,14 @@ msgstr ""
 #. TRANSLATORS: Hämarik is Estonian for the time when the Sun goes down in the
 #. evening (twilight).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1245
+#: skycultures/translations.fab:1248
 msgid "Hämarik"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 16175
 #. TRANSLATORS: Buna is the commonly used word for coffee in Ethiopia.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1249 skycultures/western/star_names.fab:14
+#: skycultures/translations.fab:1252 skycultures/western/star_names.fab:14
 msgid "Buna"
 msgstr ""
 
@@ -2724,14 +2731,14 @@ msgstr ""
 #. TRANSLATORS: Abol is the first of three rounds of coffee in the Ethiopian
 #. traditional coffee ceremony.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1253
+#: skycultures/translations.fab:1256
 msgid "Abol"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HAT-P-38
 #. TRANSLATORS: Horna is hell or the underworld from Finnic mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1257
+#: skycultures/translations.fab:1260
 msgid "Horna"
 msgstr ""
 
@@ -2739,7 +2746,7 @@ msgstr ""
 #. TRANSLATORS: Hiisi represents sacred localities and later evil spirits from
 #. Finnic mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1261
+#: skycultures/translations.fab:1264
 msgid "Hiisi"
 msgstr ""
 
@@ -2747,7 +2754,7 @@ msgstr ""
 #. TRANSLATORS: Bélénos was the god of light, of the Sun, and of health in
 #. Gaulish mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1265 skycultures/western/star_names.fab:790
+#: skycultures/translations.fab:1268 skycultures/western/star_names.fab:790
 msgid "Bélénos"
 msgstr ""
 
@@ -2755,7 +2762,7 @@ msgstr ""
 #. TRANSLATORS: Bélisama was the goddess of fire, notably of the hearth and of
 #. metallurgy and glasswork, in Gaulish mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1269
+#: skycultures/translations.fab:1272
 msgid "Bélisama"
 msgstr ""
 
@@ -2763,7 +2770,7 @@ msgstr ""
 #. TRANSLATORS: Itonda, in the Myene tongue, corresponds to all that is
 #. beautiful.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1273 skycultures/western/star_names.fab:520
+#: skycultures/translations.fab:1276 skycultures/western/star_names.fab:520
 msgid "Itonda"
 msgstr ""
 
@@ -2771,7 +2778,7 @@ msgstr ""
 #. TRANSLATORS: Mintome, in the Fang tongue, is a mythical land where a
 #. brotherhood of brave men live.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1277
+#: skycultures/translations.fab:1280
 msgid "Mintome"
 msgstr ""
 
@@ -2780,7 +2787,7 @@ msgstr ""
 #. The star also happens to be in the constellation of Camelopardis (the
 #. giraffe).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1281 skycultures/western/star_names.fab:141
+#: skycultures/translations.fab:1284 skycultures/western/star_names.fab:141
 msgid "Mago"
 msgstr ""
 
@@ -2788,7 +2795,7 @@ msgstr ""
 #. TRANSLATORS: The Neri river in Ethiopia runs through parts of the Mago
 #. National park.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1285
+#: skycultures/translations.fab:1288
 msgid "Neri"
 msgstr ""
 
@@ -2796,14 +2803,14 @@ msgstr ""
 #. TRANSLATORS: Sika means gold in the Ewe language and gold is one of Ghana's
 #. principal exports.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1289 skycultures/western/star_names.fab:857
+#: skycultures/translations.fab:1292 skycultures/western/star_names.fab:857
 msgid "Sika"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 181720 b
 #. TRANSLATORS: Toge means earring in the Ewe language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1293
+#: skycultures/translations.fab:1296
 msgid "Toge"
 msgstr ""
 
@@ -2812,7 +2819,7 @@ msgstr ""
 #. the Lernaean Hydra, an immortal mythical nine-headed beast lived. The star
 #. lies in the constellation of Hydra.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1297
+#: skycultures/translations.fab:1300
 msgid "Lerna"
 msgstr ""
 
@@ -2822,7 +2829,7 @@ msgstr ""
 #. Similarly this exoplanet in the constellation of Hydra moves around its
 #. parent star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1301
+#: skycultures/translations.fab:1304
 msgid "Iolaus"
 msgstr ""
 
@@ -2830,7 +2837,7 @@ msgstr ""
 #. TRANSLATORS: Tojil is the name of one of the Mayan deities related to rain,
 #. storms, and fire.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1305
+#: skycultures/translations.fab:1308
 msgid "Tojil"
 msgstr ""
 
@@ -2838,7 +2845,7 @@ msgstr ""
 #. TRANSLATORS: Koyopa' is the word associated with lightning in K'iche'
 #. (Quiché) Mayan language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1309
+#: skycultures/translations.fab:1312
 msgid "Koyopa'"
 msgstr ""
 
@@ -2847,7 +2854,7 @@ msgstr ""
 #. built after Haiti's independence, and was designated a UNESCO World
 #. Heritage site along with the nearby Sans-Souci Palace.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1313 skycultures/western/star_names.fab:791
+#: skycultures/translations.fab:1316 skycultures/western/star_names.fab:791
 msgid "Citadelle"
 msgstr ""
 
@@ -2856,7 +2863,7 @@ msgstr ""
 #. Independence on 1 January 1804, when Haiti became the first independent
 #. black republic.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1317
+#: skycultures/translations.fab:1320
 msgid "Indépendance"
 msgstr ""
 
@@ -2864,7 +2871,7 @@ msgstr ""
 #. TRANSLATORS: Hunahpú was one of the twin gods who became the Sun in K'iche'
 #. (Quiché) Mayan mythology as recounted in the Popol Vuh.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1321 skycultures/western/star_names.fab:355
+#: skycultures/translations.fab:1324 skycultures/western/star_names.fab:355
 msgid "Hunahpú"
 msgstr ""
 
@@ -2872,7 +2879,7 @@ msgstr ""
 #. TRANSLATORS: Ixbalanqué was one of the twin gods who became the Moon in
 #. K'iche' (Quiché) Mayan mythology as recounted in the Popol Vuh.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1325
+#: skycultures/translations.fab:1328
 msgid "Ixbalanqué"
 msgstr ""
 
@@ -2880,7 +2887,7 @@ msgstr ""
 #. TRANSLATORS: Hunor was a legendary ancestor of the Huns and the Hungarian
 #. nation, and brother of Magor.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1329 skycultures/western/star_names.fab:535
+#: skycultures/translations.fab:1332 skycultures/western/star_names.fab:535
 msgid "Hunor"
 msgstr ""
 
@@ -2888,21 +2895,21 @@ msgstr ""
 #. TRANSLATORS: Magor was a legendary ancestor of the Magyar people and the
 #. Hungarian nation, and brother of Hunor.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1333
+#: skycultures/translations.fab:1336
 msgid "Magor"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 109246
 #. TRANSLATORS: Funi is an old Icelandic word meaning fire or blaze.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1337 skycultures/western/star_names.fab:450
+#: skycultures/translations.fab:1340 skycultures/western/star_names.fab:450
 msgid "Funi"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 109246 b
 #. TRANSLATORS: Fold is an old Icelandic word meaning earth or soil.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1341
+#: skycultures/translations.fab:1344
 msgid "Fold"
 msgstr ""
 
@@ -2910,7 +2917,7 @@ msgstr ""
 #. TRANSLATORS: Bibhā [/bɪbɦa/] is the Bengali pronunciation of the Sanskrit
 #. word Vibha, which means a bright beam of light.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1345 skycultures/western/star_names.fab:918
+#: skycultures/translations.fab:1348 skycultures/western/star_names.fab:918
 msgid "Bibhā"
 msgstr ""
 
@@ -2918,14 +2925,14 @@ msgstr ""
 #. TRANSLATORS: Santamasa [/səntəməs/] in Sanskrit means clouded, which
 #. alludes to the exoplanet’s atmosphere.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1349
+#: skycultures/translations.fab:1352
 msgid "Santamasa"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 117618
 #. TRANSLATORS: Dofida means our star in Nias language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1353 skycultures/western/star_names.fab:257
+#: skycultures/translations.fab:1356 skycultures/western/star_names.fab:257
 msgid "Dofida"
 msgstr ""
 
@@ -2934,7 +2941,7 @@ msgstr ""
 #. the word ifasui, meaning to revolve around, and no, indicating that the
 #. action occurred in the past and continued to the present time.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1357
+#: skycultures/translations.fab:1360
 msgid "Noifasui"
 msgstr ""
 
@@ -2943,7 +2950,7 @@ msgstr ""
 #. composed by Persian poet Ferdowsi between 977 and 1010 CE. Kaveh is a
 #. blacksmith who symbolises justice.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1361 skycultures/western/star_names.fab:916
+#: skycultures/translations.fab:1364 skycultures/western/star_names.fab:916
 msgid "Kaveh"
 msgstr ""
 
@@ -2951,7 +2958,7 @@ msgstr ""
 #. TRANSLATORS: Kaveh carries a banner called Derafsh Kaviani (Derafsh:
 #. banner, Kaviani: relating to Kaveh).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1365
+#: skycultures/translations.fab:1368
 msgid "Kavian"
 msgstr ""
 
@@ -2960,7 +2967,7 @@ msgstr ""
 #. civilizations in Mesopotamia situated along an ancient channel of the
 #. Euphrates river in modern-day Iraq.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1369 skycultures/western/star_names.fab:813
+#: skycultures/translations.fab:1372 skycultures/western/star_names.fab:813
 msgid "Uruk"
 msgstr ""
 
@@ -2969,7 +2976,7 @@ msgstr ""
 #. 18th to 6th centuries BC whose name-giving capital city was built on the
 #. Euphrates river.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1373
+#: skycultures/translations.fab:1376
 msgid "Babylonia"
 msgstr ""
 
@@ -2977,7 +2984,7 @@ msgstr ""
 #. TRANSLATORS: Tuiren was the aunt of the hunterwarrior Fionn mac Cumhaill of
 #. Irish legend, who was turned into a hound by the jealous fairy Uchtdealbh.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1377
+#: skycultures/translations.fab:1380
 msgid "Tuiren"
 msgstr ""
 
@@ -2985,7 +2992,7 @@ msgstr ""
 #. TRANSLATORS: Tuiren's son Bran was a hound and cousin of the hunterwarrior
 #. Fionn mac Cumhaill of Irish legend.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1381
+#: skycultures/translations.fab:1384
 msgid "Bran"
 msgstr ""
 
@@ -2993,7 +3000,7 @@ msgstr ""
 #. TRANSLATORS: Tevel means Universe or everything and begins with the letter
 #. Taf, the last letter in the Hebrew alphabet.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1385
+#: skycultures/translations.fab:1388
 msgid "Tevel"
 msgstr ""
 
@@ -3001,7 +3008,7 @@ msgstr ""
 #. TRANSLATORS: Alef is the first letter in the Hebrew alphabet and also means
 #. bull.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1389
+#: skycultures/translations.fab:1392
 msgid "Alef"
 msgstr ""
 
@@ -3011,7 +3018,7 @@ msgstr ""
 #. (Divine Commedy) by Dante Alighieri, chosen as an allusion to the star's
 #. fiery nature.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1393 skycultures/western/star_names.fab:1077
+#: skycultures/translations.fab:1396 skycultures/western/star_names.fab:1077
 msgid "Flegetonte"
 msgstr ""
 
@@ -3021,21 +3028,21 @@ msgstr ""
 #. Commedy) by Dante Alighieri, chosen as an allusion to the planet's gaseous
 #. nature.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1397
+#: skycultures/translations.fab:1400
 msgid "Lete"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star WASP-15
 #. TRANSLATORS: Nyamien refers to the supreme creator deity of Akan mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1401
+#: skycultures/translations.fab:1404
 msgid "Nyamien"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet WASP-15 b
 #. TRANSLATORS: Asye refers to the Earth goddess of Akan mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1405
+#: skycultures/translations.fab:1408
 msgid "Asye"
 msgstr ""
 
@@ -3043,7 +3050,7 @@ msgstr ""
 #. TRANSLATORS: Kamui is a word in the Ainu language denoting a supernatural
 #. entity possessing spiritual energy.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1409 skycultures/western/star_names.fab:339
+#: skycultures/translations.fab:1412 skycultures/western/star_names.fab:339
 msgid "Kamui"
 msgstr ""
 
@@ -3051,7 +3058,7 @@ msgstr ""
 #. TRANSLATORS: Chura is a word in the Ryukyuan/Okinawan language meaning
 #. natural beauty.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1413
+#: skycultures/translations.fab:1416
 msgid "Chura"
 msgstr ""
 
@@ -3059,7 +3066,7 @@ msgstr ""
 #. TRANSLATORS: Petra is a historical and archaeological city in southern
 #. Jordan and a UNESCO World Heritage site.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1417
+#: skycultures/translations.fab:1420
 msgid "Petra"
 msgstr ""
 
@@ -3068,7 +3075,7 @@ msgstr ""
 #. Jordan, it is the largest valley in Jordan, set on the high plateau at the
 #. western edge of the Arabian Desert.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1421
+#: skycultures/translations.fab:1424
 msgid "Wadirum"
 msgstr ""
 
@@ -3076,7 +3083,7 @@ msgstr ""
 #. TRANSLATORS: The word Kalausi means a very strong whirling column of wind
 #. in the Dholuo language of Kenya.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1425 skycultures/western/star_names.fab:1049
+#: skycultures/translations.fab:1428 skycultures/western/star_names.fab:1049
 msgid "Kalausi"
 msgstr ""
 
@@ -3084,7 +3091,7 @@ msgstr ""
 #. TRANSLATORS: Buru means dust in the Dholuo language of Kenya and is
 #. typically associated with wind storms.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1429
+#: skycultures/translations.fab:1432
 msgid "Buru"
 msgstr ""
 
@@ -3092,7 +3099,7 @@ msgstr ""
 #. TRANSLATORS: Liesma means flame, and it is the name of a character from the
 #. Latvian poem Staburags un Liesma.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1433 skycultures/western/star_names.fab:1017
+#: skycultures/translations.fab:1436 skycultures/western/star_names.fab:1017
 msgid "Liesma"
 msgstr ""
 
@@ -3101,7 +3108,7 @@ msgstr ""
 #. Staburags un Liesma, and denotes a rock with symbolic meaning in literature
 #. and history.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1437
+#: skycultures/translations.fab:1440
 msgid "Staburags"
 msgstr ""
 
@@ -3109,7 +3116,7 @@ msgstr ""
 #. TRANSLATORS: Phoenicia was an ancient thalassocratic civilisation of the
 #. Mediterranean that originated from the area of modern-day Lebanon.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1441 skycultures/western/star_names.fab:61
+#: skycultures/translations.fab:1444 skycultures/western/star_names.fab:61
 msgid "Phoenicia"
 msgstr ""
 
@@ -3118,7 +3125,7 @@ msgstr ""
 #. the world and was a Phoenician port. Beirut is now the capital and largest
 #. city of Lebanon.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1445
+#: skycultures/translations.fab:1448
 msgid "Beirut"
 msgstr ""
 
@@ -3126,7 +3133,7 @@ msgstr ""
 #. TRANSLATORS: In the local dialect of Triesenberg, Pipoltr is a bright and
 #. visible butterfly, alluding to the properties of a star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1449
+#: skycultures/translations.fab:1452
 msgid "Pipoltr"
 msgstr ""
 
@@ -3135,21 +3142,21 @@ msgstr ""
 #. small and barely visible ant, alluding to the properties of a planet with
 #. respect to its star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1453
+#: skycultures/translations.fab:1456
 msgid "Umbäässa"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HAT-P-40
 #. TRANSLATORS: Taika means peace in the Lithuanian language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1457
+#: skycultures/translations.fab:1460
 msgid "Taika"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HAT-P-40 b
 #. TRANSLATORS: Vytis is the symbol of the Lithuanian coat of arms.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1461
+#: skycultures/translations.fab:1464
 msgid "Vytis"
 msgstr ""
 
@@ -3157,7 +3164,7 @@ msgstr ""
 #. TRANSLATORS: The Lucilinburhuc fortress was built in 963 by the founder of
 #. Luxembourg, Count Siegfried.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1465 skycultures/western/star_names.fab:113
+#: skycultures/translations.fab:1468 skycultures/western/star_names.fab:113
 msgid "Lucilinburhuc"
 msgstr ""
 
@@ -3166,21 +3173,21 @@ msgstr ""
 #. Pétrusse, with the river's bend around Lucilinburhuc fortress alluding to
 #. the orbit of the planet around its star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1469
+#: skycultures/translations.fab:1472
 msgid "Peitruss"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 153950
 #. TRANSLATORS: Rapeto is a giant creature from Malagasy tales.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1473 skycultures/western/star_names.fab:899
+#: skycultures/translations.fab:1476 skycultures/western/star_names.fab:899
 msgid "Rapeto"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 153950 b
 #. TRANSLATORS: Trimobe is a rich ogre from Malagasy tales.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1477
+#: skycultures/translations.fab:1480
 msgid "Trimobe"
 msgstr ""
 
@@ -3188,7 +3195,7 @@ msgstr ""
 #. TRANSLATORS: Intan means diamond in the Malay language (Bahasa Melayu),
 #. alluding to the shining of a star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1481 skycultures/western/star_names.fab:488
+#: skycultures/translations.fab:1484 skycultures/western/star_names.fab:488
 msgid "Intan"
 msgstr ""
 
@@ -3196,7 +3203,7 @@ msgstr ""
 #. TRANSLATORS: Baiduri means opal in Malay language (Bahasa Melayu), alluding
 #. to the mysterious beauty of the planet.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1485
+#: skycultures/translations.fab:1488
 msgid "Baiduri"
 msgstr ""
 
@@ -3205,7 +3212,7 @@ msgstr ""
 #. Maltese folk tales that carried the stones of the Gozo megalithic temples
 #. on her head.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1489
+#: skycultures/translations.fab:1492
 msgid "Sansuna"
 msgstr ""
 
@@ -3213,7 +3220,7 @@ msgstr ""
 #. TRANSLATORS: Ġgantija means giantess: the megalithic temple complex on the
 #. island of Gozo, which alludes to the grandeur of this gas giant exoplanet.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1493
+#: skycultures/translations.fab:1496
 msgid "Ġgantija"
 msgstr ""
 
@@ -3222,7 +3229,7 @@ msgstr ""
 #. Mauritius in the 1820's, and is used for lighting during special occasions,
 #. including the light festival of Diwali.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1497
+#: skycultures/translations.fab:1500
 msgid "Diya"
 msgstr ""
 
@@ -3231,7 +3238,7 @@ msgstr ""
 #. drying substances, that has long disappeared in Mauritius and has been
 #. replaced by more sophisticated ovens.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1501
+#: skycultures/translations.fab:1504
 msgid "Cuptor"
 msgstr ""
 
@@ -3240,7 +3247,7 @@ msgstr ""
 #. which is a unique and culturally significant endemic amphibious species
 #. from the basin of Mexico.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1505 skycultures/western/star_names.fab:310
+#: skycultures/translations.fab:1508 skycultures/western/star_names.fab:310
 msgid "Axólotl"
 msgstr ""
 
@@ -3248,7 +3255,7 @@ msgstr ""
 #. TRANSLATORS: Xólotl means animal in the native Nahuatl language and was an
 #. Aztec deity associated with the evening star (Venus).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1509
+#: skycultures/translations.fab:1512
 msgid "Xólotl"
 msgstr ""
 
@@ -3257,7 +3264,7 @@ msgstr ""
 #. Morocco. It means the bride in the Amazigh language and it is associated
 #. with a heartbroken beautiful girl in an ancient local legend.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1513
+#: skycultures/translations.fab:1516
 msgid "Tislit"
 msgstr ""
 
@@ -3266,7 +3273,7 @@ msgstr ""
 #. It means the groom in the Amazigh language and it is associated with a
 #. heartbroken handsome boy in an ancient local legend.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1517
+#: skycultures/translations.fab:1520
 msgid "Isli"
 msgstr ""
 
@@ -3274,7 +3281,7 @@ msgstr ""
 #. TRANSLATORS: Emiw represents love in the local Makhuwa language of the
 #. northern region of Mozambique.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1521 skycultures/western/star_names.fab:963
+#: skycultures/translations.fab:1524 skycultures/western/star_names.fab:963
 msgid "Emiw"
 msgstr ""
 
@@ -3282,14 +3289,14 @@ msgstr ""
 #. TRANSLATORS: Hairu represents unity in the local Makhuwa language of the
 #. northern region of Mozambique.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1525
+#: skycultures/translations.fab:1528
 msgid "Hairu"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 18742
 #. TRANSLATORS: Ayeyarwady is the largest and most important river in Myanmar.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1529 skycultures/western/star_names.fab:483
+#: skycultures/translations.fab:1532 skycultures/western/star_names.fab:483
 msgid "Ayeyarwady"
 msgstr ""
 
@@ -3297,7 +3304,7 @@ msgstr ""
 #. TRANSLATORS: Bagan is one of Myanmar's ancient cities that lies beside the
 #. Ayeyarwardy river.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1533
+#: skycultures/translations.fab:1536
 msgid "Bagan"
 msgstr ""
 
@@ -3305,7 +3312,7 @@ msgstr ""
 #. TRANSLATORS: Sagarmatha is the Nepali name for the highest peak in the
 #. world (also known as Mount Everest) and symbol of national pride of Nepal.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1537 skycultures/western/star_names.fab:595
+#: skycultures/translations.fab:1540 skycultures/western/star_names.fab:595
 msgid "Sagarmatha"
 msgstr ""
 
@@ -3313,7 +3320,7 @@ msgstr ""
 #. TRANSLATORS: Laligurans are the Nepali variation of the rhododendron flower
 #. and is the national flower of Nepal.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1541
+#: skycultures/translations.fab:1544
 msgid "Laligurans"
 msgstr ""
 
@@ -3322,7 +3329,7 @@ msgstr ""
 #. Dutch grand master Van Gogh that was painted in France in 1889 and now
 #. belongs to the permanent collection of New York's Museum of Modern Art.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1545
+#: skycultures/translations.fab:1548
 msgid "Sterrennacht"
 msgstr ""
 
@@ -3331,7 +3338,7 @@ msgstr ""
 #. Dutch grand master Rembrandt that was completed in 1642 and now belongs to
 #. the collection of the Rijksmuseum in Amsterdam.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1549
+#: skycultures/translations.fab:1552
 msgid "Nachtwacht"
 msgstr ""
 
@@ -3339,7 +3346,7 @@ msgstr ""
 #. TRANSLATORS: Karaka is the word in the Māori language for a plant endemic
 #. to New Zealand that produces a bright orange, fleshy fruit.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1553 skycultures/western/star_names.fab:18
+#: skycultures/translations.fab:1556 skycultures/western/star_names.fab:18
 msgid "Karaka"
 msgstr ""
 
@@ -3347,7 +3354,7 @@ msgstr ""
 #. TRANSLATORS: Kererū is the word in the Māori language for a large bush
 #. pigeon native to New Zealand.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1557
+#: skycultures/translations.fab:1560
 msgid "Kererū"
 msgstr ""
 
@@ -3355,7 +3362,7 @@ msgstr ""
 #. TRANSLATORS: Cocibolca is the Nahualt name for the largest lake in Central
 #. America in Nicaragua.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1561 skycultures/western/star_names.fab:902
+#: skycultures/translations.fab:1564 skycultures/western/star_names.fab:902
 msgid "Cocibolca"
 msgstr ""
 
@@ -3365,7 +3372,7 @@ msgstr ""
 #. settled in Nicaragua, which symbolises a native god and a refuge for
 #. animals.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1565
+#: skycultures/translations.fab:1568
 msgid "Xolotlan"
 msgstr ""
 
@@ -3373,7 +3380,7 @@ msgstr ""
 #. TRANSLATORS: Amadioha is the god of thunder in Igbo mythology. As well as
 #. representing justice, Amadioha is also a god of love, peace and unity.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1569 skycultures/western/star_names.fab:184
+#: skycultures/translations.fab:1572 skycultures/western/star_names.fab:184
 msgid "Amadioha"
 msgstr ""
 
@@ -3381,21 +3388,21 @@ msgstr ""
 #. TRANSLATORS: Equiano was a writer and abolitionist from Ihiala, Nigeria who
 #. fought injustice and the elimination of the slave trade.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1573
+#: skycultures/translations.fab:1576
 msgid "Equiano"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 68988
 #. TRANSLATORS: Násti means star in the Northern Sami language of Norway.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1577 skycultures/western/star_names.fab:1018
+#: skycultures/translations.fab:1580 skycultures/western/star_names.fab:1018
 msgid "Násti"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HD 68988 b
 #. TRANSLATORS: Albmi means sky in the Northern Sami language of Norway.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1581
+#: skycultures/translations.fab:1584
 msgid "Albmi"
 msgstr ""
 
@@ -3403,7 +3410,7 @@ msgstr ""
 #. TRANSLATORS: Shama is an Urdu literary term meaning a small lamp or flame,
 #. symbolic of the light of the star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1585
+#: skycultures/translations.fab:1588
 msgid "Shama"
 msgstr ""
 
@@ -3411,7 +3418,7 @@ msgstr ""
 #. TRANSLATORS: Perwana means moth in Urdu, alluding to the eternal love of an
 #. object circling the source of light (the lamp).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1589
+#: skycultures/translations.fab:1592
 msgid "Perwana"
 msgstr ""
 
@@ -3419,7 +3426,7 @@ msgstr ""
 #. TRANSLATORS: Moriah is an ancient name for the mountain within the Old City
 #. of Jerusalem.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1593 skycultures/western/star_names.fab:596
+#: skycultures/translations.fab:1596 skycultures/western/star_names.fab:596
 msgid "Moriah"
 msgstr ""
 
@@ -3427,7 +3434,7 @@ msgstr ""
 #. TRANSLATORS: Jebus was the ancient name of Jerusalem in 2nd millennium BC
 #. when populated by the Canaanite tribe of Jebusites.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1597
+#: skycultures/translations.fab:1600
 msgid "Jebus"
 msgstr ""
 
@@ -3436,7 +3443,7 @@ msgstr ""
 #. Punto”, a Panamanian dance in which a man and woman dance to the sound of
 #. drums.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1601
+#: skycultures/translations.fab:1604
 msgid "Montuno"
 msgstr ""
 
@@ -3445,7 +3452,7 @@ msgstr ""
 #. Punto, a Panamanian dance in which a man and woman dance to the sound of
 #. drums.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1605
+#: skycultures/translations.fab:1608
 msgid "Pollera"
 msgstr ""
 
@@ -3454,7 +3461,7 @@ msgstr ""
 #. popular Paraguayan folklore that helped the supreme god Ñamandu to create
 #. the Universe.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1609 skycultures/western/star_names.fab:363
+#: skycultures/translations.fab:1612 skycultures/western/star_names.fab:363
 msgid "Tupã"
 msgstr ""
 
@@ -3463,7 +3470,7 @@ msgstr ""
 #. and woman of the Universe, who is known as the Father of Wisdom in popular
 #. Paraguayan folklore.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1613
+#: skycultures/translations.fab:1616
 msgid "Tumearandu"
 msgstr ""
 
@@ -3471,7 +3478,7 @@ msgstr ""
 #. TRANSLATORS: Inquil was one half of the couple involved in the tragic love
 #. story Way to the Sun by famous Peruvian writer Abraham Valdelomar.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1617 skycultures/western/star_names.fab:65
+#: skycultures/translations.fab:1620 skycultures/western/star_names.fab:65
 msgid "Inquill"
 msgstr ""
 
@@ -3479,7 +3486,7 @@ msgstr ""
 #. TRANSLATORS: Sumaj Majta was one half of the couple involved in a tragic
 #. love story Way to the Sun by famous Peruvian writer Abraham Valdelomar.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1621
+#: skycultures/translations.fab:1624
 msgid "Sumajmajta"
 msgstr ""
 
@@ -3488,7 +3495,7 @@ msgstr ""
 #. Philippine's Tagalog mythology, and is the primordial deity of the ocean
 #. and protector of fisherman.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1625
+#: skycultures/translations.fab:1628
 msgid "Amansinaya"
 msgstr ""
 
@@ -3496,7 +3503,7 @@ msgstr ""
 #. TRANSLATORS: Haik is the successor of the primordial Aman Sinaya as the God
 #. of the Sea of the Philippine's Tagalog mythology.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1629
+#: skycultures/translations.fab:1632
 msgid "Haik"
 msgstr ""
 
@@ -3504,7 +3511,7 @@ msgstr ""
 #. TRANSLATORS: Uklun means us or we in the Pitkern language of the people of
 #. Pitcairn Islands.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1633 skycultures/western/star_names.fab:258
+#: skycultures/translations.fab:1636 skycultures/western/star_names.fab:258
 msgid "Uklun"
 msgstr ""
 
@@ -3512,7 +3519,7 @@ msgstr ""
 #. TRANSLATORS: Lekl Sullun means child or children in the Pitkern language of
 #. the people of Pitcairn Islands.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1637
+#: skycultures/translations.fab:1640
 msgid "Leklsullun"
 msgstr ""
 
@@ -3520,7 +3527,7 @@ msgstr ""
 #. TRANSLATORS: Solaris is the title of a 1961 science fiction novel about an
 #. ocean-covered exoplanet by Polish writer Stanislaw Lem.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1641
+#: skycultures/translations.fab:1644
 msgid "Solaris"
 msgstr ""
 
@@ -3528,7 +3535,7 @@ msgstr ""
 #. TRANSLATORS: Pirx is a fictional character from books by Polish science-
 #. fiction writer Stanisław Lem.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1645
+#: skycultures/translations.fab:1648
 msgid "Pirx"
 msgstr ""
 
@@ -3537,7 +3544,7 @@ msgstr ""
 #. Iberic Peninsula where the Lusitanian people lived and where most of
 #. modern-day Portugal is situated.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1649 skycultures/western/star_names.fab:655
+#: skycultures/translations.fab:1652 skycultures/western/star_names.fab:655
 msgid "Lusitânia"
 msgstr ""
 
@@ -3546,7 +3553,7 @@ msgstr ""
 #. herdsman and hunter who led the resistance against Roman invaders during
 #. 2nd century B.C.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1653
+#: skycultures/translations.fab:1656
 msgid "Viriato"
 msgstr ""
 
@@ -3554,7 +3561,7 @@ msgstr ""
 #. TRANSLATORS: Koeia was the word for star in the language of the Taíno
 #. Indigenous People of the Caribbean.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1657 skycultures/western/star_names.fab:484
+#: skycultures/translations.fab:1660 skycultures/western/star_names.fab:484
 msgid "Koeia"
 msgstr ""
 
@@ -3562,7 +3569,7 @@ msgstr ""
 #. TRANSLATORS: Aumatex was the God of Wind in the mythology of the Taíno
 #. Indigenous People of the Caribbean.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1661
+#: skycultures/translations.fab:1664
 msgid "Aumatex"
 msgstr ""
 
@@ -3570,7 +3577,7 @@ msgstr ""
 #. TRANSLATORS: Moldoveanu is the highest peak in Romania of the Făgăraș
 #. mountain range with an altitude of 2544 metres.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1665
+#: skycultures/translations.fab:1668
 msgid "Moldoveanu"
 msgstr ""
 
@@ -3578,7 +3585,7 @@ msgstr ""
 #. TRANSLATORS: Negoiu is the second highest peak in Romania of the Făgăraș
 #. mountain range with an altitude of 2535 metres.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1669
+#: skycultures/translations.fab:1672
 msgid "Negoiu"
 msgstr ""
 
@@ -3587,7 +3594,7 @@ msgstr ""
 #. is enclosed by mountain forests and rich wildlife, including bears (as this
 #. star lies in the constellation Ursa Major, the great bear).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1673
+#: skycultures/translations.fab:1676
 msgid "Dombay"
 msgstr ""
 
@@ -3595,14 +3602,14 @@ msgstr ""
 #. TRANSLATORS: Teberda is a mountain river in Dombay region with a rapid
 #. water flow, symbolising the planet's rapid motion around its host star.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1677
+#: skycultures/translations.fab:1680
 msgid "Teberda"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 181342
 #. TRANSLATORS: Belel is a rare source of water in the north of Senegal.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1681 skycultures/western/star_names.fab:858
+#: skycultures/translations.fab:1684 skycultures/western/star_names.fab:858
 msgid "Belel"
 msgstr ""
 
@@ -3610,14 +3617,14 @@ msgstr ""
 #. TRANSLATORS: Dopere is an expansive historical area in the north of Senegal
 #. where Belel was located.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1685
+#: skycultures/translations.fab:1688
 msgid "Dopere"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star WASP-60
 #. TRANSLATORS: Morava is the longest river system in Serbia.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1689
+#: skycultures/translations.fab:1692
 msgid "Morava"
 msgstr ""
 
@@ -3625,7 +3632,7 @@ msgstr ""
 #. TRANSLATORS: Vlasina is one of the most significant tributaries of the
 #. South Morava river.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1693
+#: skycultures/translations.fab:1696
 msgid "Vlasina"
 msgstr ""
 
@@ -3633,7 +3640,7 @@ msgstr ""
 #. TRANSLATORS: Parumleo is a Latin term for little lion, symbolising
 #. Singapore's struggle for independence.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1697
+#: skycultures/translations.fab:1700
 msgid "Parumleo"
 msgstr ""
 
@@ -3641,21 +3648,21 @@ msgstr ""
 #. TRANSLATORS: Viculus is a Latin term for little village, embodying the
 #. spirit of the Singaporean people.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1701
+#: skycultures/translations.fab:1704
 msgid "Viculus"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HAT-P-5
 #. TRANSLATORS: Chasoň is an ancient Slovak term for Sun.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1705
+#: skycultures/translations.fab:1708
 msgid "Chasoň"
 msgstr ""
 
 #. TRANSLATORS: Proper name of exoplanet HAT-P-5 b
 #. TRANSLATORS: Kráľomoc is an ancient Slovak term for the planet Jupiter.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1709
+#: skycultures/translations.fab:1712
 msgid "Kráľomoc"
 msgstr ""
 
@@ -3664,7 +3671,7 @@ msgstr ""
 #. a Story of the Ancient Grandfathers by Slovene writer Fran Saleški Finžgar.
 #. Irena is a woman of the court.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1713
+#: skycultures/translations.fab:1716
 msgid "Irena"
 msgstr ""
 
@@ -3673,7 +3680,7 @@ msgstr ""
 #. a Story of the Ancient Grandfathers by Slovene writer Fran Saleški Finžgar.
 #. Iztok is a freedom fighter for the Slavic people.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1717
+#: skycultures/translations.fab:1720
 msgid "Iztok"
 msgstr ""
 
@@ -3682,7 +3689,7 @@ msgstr ""
 #. languages and is typically given as a name to girls in the hope that they
 #. will bring light, joy and peace to their communities.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1721
+#: skycultures/translations.fab:1724
 msgid "Naledi"
 msgstr ""
 
@@ -3691,7 +3698,7 @@ msgstr ""
 #. indigenous Khoi people, who was a community builder and educator during
 #. colonial times.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1725
+#: skycultures/translations.fab:1728
 msgid "Krotoa"
 msgstr ""
 
@@ -3699,7 +3706,7 @@ msgstr ""
 #. TRANSLATORS: Baekdu is the highest mountain on the Korean peninsula,
 #. situated in North Korea, and symbolises the national spirit of Korea.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1729 skycultures/western/star_names.fab:1019
+#: skycultures/translations.fab:1732 skycultures/western/star_names.fab:1019
 msgid "Baekdu"
 msgstr ""
 
@@ -3707,7 +3714,7 @@ msgstr ""
 #. TRANSLATORS: Halla is the highest mountain in South Korea and is regarded
 #. as a sacred place in the region.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1733
+#: skycultures/translations.fab:1736
 msgid "Halla"
 msgstr ""
 
@@ -3716,7 +3723,7 @@ msgstr ""
 #. and prominent Spanish writer, whose pioneeting work often referenced the
 #. night and celestial objects.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1737 skycultures/western/star_names.fab:678
+#: skycultures/translations.fab:1740 skycultures/western/star_names.fab:678
 msgid "Rosalíadecastro"
 msgstr ""
 
@@ -3724,14 +3731,14 @@ msgstr ""
 #. TRANSLATORS: Rio Sar is the name of a river that was present in much of the
 #. literary work of the pioneering Spanish author Rosalía de Castro.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1741
+#: skycultures/translations.fab:1744
 msgid "Riosar"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 205739
 #. TRANSLATORS: Sāmaya means peace in the Sinhalese language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1745 skycultures/western/star_names.fab:799
+#: skycultures/translations.fab:1748 skycultures/western/star_names.fab:799
 msgid "Sāmaya"
 msgstr ""
 
@@ -3739,7 +3746,7 @@ msgstr ""
 #. TRANSLATORS: Samagiya means togetherness and unity in the Sinhalese
 #. language.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1749
+#: skycultures/translations.fab:1752
 msgid "Samagiya"
 msgstr ""
 
@@ -3747,7 +3754,7 @@ msgstr ""
 #. TRANSLATORS: Aniara is the name of a spaceship in the epic poem Aniara by
 #. Swedish author Harry Martinson.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1753 skycultures/western/star_names.fab:1020
+#: skycultures/translations.fab:1756 skycultures/western/star_names.fab:1020
 msgid "Aniara"
 msgstr ""
 
@@ -3755,7 +3762,7 @@ msgstr ""
 #. TRANSLATORS: Isagel is the name of the spaceship pilot in the epic science
 #. fiction poem Aniara written by Swedish author Harry Martinson.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1757
+#: skycultures/translations.fab:1760
 msgid "Isagel"
 msgstr ""
 
@@ -3763,7 +3770,7 @@ msgstr ""
 #. TRANSLATORS: Mönch is one of the prominent peaks of the Bernese Alps in
 #. Switzerland.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1761 skycultures/western/star_names.fab:1078
+#: skycultures/translations.fab:1764 skycultures/western/star_names.fab:1078
 msgid "Mönch"
 msgstr ""
 
@@ -3771,7 +3778,7 @@ msgstr ""
 #. TRANSLATORS: Eiger is one of the prominent peaks of the Bernese Alps, in
 #. the Jungfrau-Aletsch protected area.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1765
+#: skycultures/translations.fab:1768
 msgid "Eiger"
 msgstr ""
 
@@ -3779,7 +3786,7 @@ msgstr ""
 #. TRANSLATORS: Ebla was one of the earliest kingdoms in Syria, and served as
 #. a prominent region in the 2nd and 3rd millenia B.C.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1769 skycultures/western/star_names.fab:792
+#: skycultures/translations.fab:1772 skycultures/western/star_names.fab:792
 msgid "Ebla"
 msgstr ""
 
@@ -3788,7 +3795,7 @@ msgstr ""
 #. alphabet around 1400 B.C. The alphabet was made up of thirty letters and
 #. was inscribed on clay tablets.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1773
+#: skycultures/translations.fab:1776
 msgid "Ugarit"
 msgstr ""
 
@@ -3796,7 +3803,7 @@ msgstr ""
 #. TRANSLATORS: Mpingo is a famous tree that grows in southern Tanzania and
 #. produces ebony wood used for musical instruments and curios.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1777
+#: skycultures/translations.fab:1780
 msgid "Mpingo"
 msgstr ""
 
@@ -3804,14 +3811,14 @@ msgstr ""
 #. TRANSLATORS: Tanzanite is the name of a precious stone mined in Tanzania
 #. and is treasured worldwide.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1781
+#: skycultures/translations.fab:1784
 msgid "Tanzanite"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star WASP-50
 #. TRANSLATORS: Chao Phraya is the great river of Thailand.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1785
+#: skycultures/translations.fab:1788
 msgid "Chaophraya"
 msgstr ""
 
@@ -3819,7 +3826,7 @@ msgstr ""
 #. TRANSLATORS: Mae Ping is one of the tributaries of Thailand's great river
 #. Chao Phraya.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1789
+#: skycultures/translations.fab:1792
 msgid "Maeping"
 msgstr ""
 
@@ -3827,7 +3834,7 @@ msgstr ""
 #. TRANSLATORS: Atakoraka means the chain of the Atacora: the largest mountain
 #. range in Togo.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1793
+#: skycultures/translations.fab:1796
 msgid "Atakoraka"
 msgstr ""
 
@@ -3835,7 +3842,7 @@ msgstr ""
 #. TRANSLATORS: Agouto (Mount Agou) is the highest mountain in Togo and a
 #. treasured region of the Atakoraka.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1797
+#: skycultures/translations.fab:1800
 msgid "Agouto"
 msgstr ""
 
@@ -3844,7 +3851,7 @@ msgstr ""
 #. movements, symbolising the culture and language of the ancestors of the
 #. people of Trinidad and Tobago.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1801 skycultures/western/star_names.fab:597
+#: skycultures/translations.fab:1804 skycultures/western/star_names.fab:597
 msgid "Dingolay"
 msgstr ""
 
@@ -3853,7 +3860,7 @@ msgstr ""
 #. representing the love of culture and languages of the ancestors of the
 #. people of Trinidad and Tobago.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1805
+#: skycultures/translations.fab:1808
 msgid "Ramajay"
 msgstr ""
 
@@ -3862,7 +3869,7 @@ msgstr ""
 #. men and women, symbolising the country's rich traditions and is considered
 #. as the national headdress for in Tunisia.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1809 skycultures/western/star_names.fab:62
+#: skycultures/translations.fab:1812 skycultures/western/star_names.fab:62
 msgid "Chechia"
 msgstr ""
 
@@ -3871,7 +3878,7 @@ msgstr ""
 #. used in jewelry and decorations. It depicts an open right hand and is often
 #. found in modern designs.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1813
+#: skycultures/translations.fab:1816
 msgid "Khomsa"
 msgstr ""
 
@@ -3879,7 +3886,7 @@ msgstr ""
 #. TRANSLATORS: Anadolu is the primary homeland of Turkey and refers to the
 #. motherland in Turkish culture.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1817
+#: skycultures/translations.fab:1820
 msgid "Anadolu"
 msgstr ""
 
@@ -3889,7 +3896,7 @@ msgstr ""
 #. also the name of a Turkish satellite and is the combination of two words,
 #. of which 'Gök' means sky.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1821
+#: skycultures/translations.fab:1824
 msgid "Göktürk"
 msgstr ""
 
@@ -3898,7 +3905,7 @@ msgstr ""
 #. more recent times her status has been promoted to that of a national
 #. goddess — 'hearth mother, protectress of the earth'.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1825
+#: skycultures/translations.fab:1828
 msgid "Berehinya"
 msgstr ""
 
@@ -3907,7 +3914,7 @@ msgstr ""
 #. was minted on the coins of Prince Volodymyr the Great and today remains one
 #. of the country's state symbols (a small coat).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1829
+#: skycultures/translations.fab:1832
 msgid "Tryzub"
 msgstr ""
 
@@ -3916,7 +3923,7 @@ msgstr ""
 #. considered the city of knowledge due to its many educational centers,
 #. institutes, museums, libraries and heritage centers.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1833 skycultures/western/star_names.fab:900
+#: skycultures/translations.fab:1836 skycultures/western/star_names.fab:900
 msgid "Sharjah"
 msgstr ""
 
@@ -3924,14 +3931,14 @@ msgstr ""
 #. TRANSLATORS: A barajeel is a wind tower used to direct the flow of the wind
 #. so that air can be recirculated as a form of air conditioning.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1837
+#: skycultures/translations.fab:1840
 msgid "Barajeel"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star WASP-13
 #. TRANSLATORS: In Manx Gaelic, Gloas means to shine (like a star).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1841
+#: skycultures/translations.fab:1844
 msgid "Gloas"
 msgstr ""
 
@@ -3939,7 +3946,7 @@ msgstr ""
 #. TRANSLATORS: In Manx Gaelic, Cruinlagh means to orbit (like a planet around
 #. its star).
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1845
+#: skycultures/translations.fab:1848
 msgid "Cruinlagh"
 msgstr ""
 
@@ -3947,7 +3954,7 @@ msgstr ""
 #. TRANSLATORS: Nushagak is a regional river near Dilingham, Alaska, which is
 #. famous for its wild salmon that sustain local Indigenous communities.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1849 skycultures/western/star_names.fab:239
+#: skycultures/translations.fab:1852 skycultures/western/star_names.fab:239
 msgid "Nushagak"
 msgstr ""
 
@@ -3955,7 +3962,7 @@ msgstr ""
 #. TRANSLATORS: The Mulchatna River is a tributary of the Nushagak River in
 #. southwestern Alaska, USA.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1853
+#: skycultures/translations.fab:1856
 msgid "Mulchatna"
 msgstr ""
 
@@ -3963,7 +3970,7 @@ msgstr ""
 #. TRANSLATORS: Ceibo is the name of the native tree of Uruguay that gives
 #. rise to the national flower.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1857 skycultures/western/star_names.fab:312
+#: skycultures/translations.fab:1860 skycultures/western/star_names.fab:312
 msgid "Ceibo"
 msgstr ""
 
@@ -3972,14 +3979,14 @@ msgstr ""
 #. of the country of Uruguay, and is also known as Artigas' tree, after the
 #. national hero.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1861
+#: skycultures/translations.fab:1864
 msgid "Ibirapitá"
 msgstr ""
 
 #. TRANSLATORS: Proper name of star HD 85390
 #. TRANSLATORS: Natasha means thank you in many languages of Zambia.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1865 skycultures/western/star_names.fab:1050
+#: skycultures/translations.fab:1868 skycultures/western/star_names.fab:1050
 msgid "Natasha"
 msgstr ""
 
@@ -3987,446 +3994,446 @@ msgstr ""
 #. TRANSLATORS: Madalitso means blessings in the native language of Nyanja in
 #. Zambia.
 #. TRANSLATORS: https://iau.org/news/pressreleases/detail/iau1912/
-#: skycultures/translations.fab:1869
+#: skycultures/translations.fab:1872
 msgid "Madalitso"
-msgstr ""
-
-#: skycultures/translations.fab:1874
-msgctxt "Genitive name of constellation"
-msgid "Andromedae"
-msgstr ""
-
-#: skycultures/translations.fab:1875
-msgctxt "Genitive name of constellation"
-msgid "Antliae"
-msgstr ""
-
-#: skycultures/translations.fab:1876
-msgctxt "Genitive name of constellation"
-msgid "Apodis"
 msgstr ""
 
 #: skycultures/translations.fab:1877
 msgctxt "Genitive name of constellation"
-msgid "Aquarii"
+msgid "Andromedae"
 msgstr ""
 
 #: skycultures/translations.fab:1878
 msgctxt "Genitive name of constellation"
-msgid "Aquilae"
+msgid "Antliae"
 msgstr ""
 
 #: skycultures/translations.fab:1879
 msgctxt "Genitive name of constellation"
-msgid "Arae"
+msgid "Apodis"
 msgstr ""
 
 #: skycultures/translations.fab:1880
 msgctxt "Genitive name of constellation"
-msgid "Arietis"
+msgid "Aquarii"
 msgstr ""
 
 #: skycultures/translations.fab:1881
 msgctxt "Genitive name of constellation"
-msgid "Aurigae"
+msgid "Aquilae"
 msgstr ""
 
 #: skycultures/translations.fab:1882
 msgctxt "Genitive name of constellation"
-msgid "Bootis"
+msgid "Arae"
 msgstr ""
 
 #: skycultures/translations.fab:1883
 msgctxt "Genitive name of constellation"
-msgid "Caeli"
+msgid "Arietis"
 msgstr ""
 
 #: skycultures/translations.fab:1884
 msgctxt "Genitive name of constellation"
-msgid "Camelopardalis"
+msgid "Aurigae"
 msgstr ""
 
 #: skycultures/translations.fab:1885
 msgctxt "Genitive name of constellation"
-msgid "Cancri"
+msgid "Bootis"
 msgstr ""
 
 #: skycultures/translations.fab:1886
 msgctxt "Genitive name of constellation"
-msgid "Canum Venaticorum"
+msgid "Caeli"
 msgstr ""
 
 #: skycultures/translations.fab:1887
 msgctxt "Genitive name of constellation"
-msgid "Canis Majoris"
+msgid "Camelopardalis"
 msgstr ""
 
 #: skycultures/translations.fab:1888
 msgctxt "Genitive name of constellation"
-msgid "Canis Minoris"
+msgid "Cancri"
 msgstr ""
 
 #: skycultures/translations.fab:1889
 msgctxt "Genitive name of constellation"
-msgid "Capricorni"
+msgid "Canum Venaticorum"
 msgstr ""
 
 #: skycultures/translations.fab:1890
 msgctxt "Genitive name of constellation"
-msgid "Carinae"
+msgid "Canis Majoris"
 msgstr ""
 
 #: skycultures/translations.fab:1891
 msgctxt "Genitive name of constellation"
-msgid "Cassiopeiae"
+msgid "Canis Minoris"
 msgstr ""
 
 #: skycultures/translations.fab:1892
 msgctxt "Genitive name of constellation"
-msgid "Centauri"
+msgid "Capricorni"
 msgstr ""
 
 #: skycultures/translations.fab:1893
 msgctxt "Genitive name of constellation"
-msgid "Cephei"
+msgid "Carinae"
 msgstr ""
 
 #: skycultures/translations.fab:1894
 msgctxt "Genitive name of constellation"
-msgid "Ceti"
+msgid "Cassiopeiae"
 msgstr ""
 
 #: skycultures/translations.fab:1895
 msgctxt "Genitive name of constellation"
-msgid "Chamaeleontis"
+msgid "Centauri"
 msgstr ""
 
 #: skycultures/translations.fab:1896
 msgctxt "Genitive name of constellation"
-msgid "Circini"
+msgid "Cephei"
 msgstr ""
 
 #: skycultures/translations.fab:1897
 msgctxt "Genitive name of constellation"
-msgid "Columbae"
+msgid "Ceti"
 msgstr ""
 
 #: skycultures/translations.fab:1898
 msgctxt "Genitive name of constellation"
-msgid "Comae Berenices"
+msgid "Chamaeleontis"
 msgstr ""
 
 #: skycultures/translations.fab:1899
 msgctxt "Genitive name of constellation"
-msgid "Coronae Australis"
+msgid "Circini"
 msgstr ""
 
 #: skycultures/translations.fab:1900
 msgctxt "Genitive name of constellation"
-msgid "Coronae Borealis"
+msgid "Columbae"
 msgstr ""
 
 #: skycultures/translations.fab:1901
 msgctxt "Genitive name of constellation"
-msgid "Corvi"
+msgid "Comae Berenices"
 msgstr ""
 
 #: skycultures/translations.fab:1902
 msgctxt "Genitive name of constellation"
-msgid "Crateris"
+msgid "Coronae Australis"
 msgstr ""
 
 #: skycultures/translations.fab:1903
 msgctxt "Genitive name of constellation"
-msgid "Crucis"
+msgid "Coronae Borealis"
 msgstr ""
 
 #: skycultures/translations.fab:1904
 msgctxt "Genitive name of constellation"
-msgid "Cygni"
+msgid "Corvi"
 msgstr ""
 
 #: skycultures/translations.fab:1905
 msgctxt "Genitive name of constellation"
-msgid "Delphini"
+msgid "Crateris"
 msgstr ""
 
 #: skycultures/translations.fab:1906
 msgctxt "Genitive name of constellation"
-msgid "Doradus"
+msgid "Crucis"
 msgstr ""
 
 #: skycultures/translations.fab:1907
 msgctxt "Genitive name of constellation"
-msgid "Draconis"
+msgid "Cygni"
 msgstr ""
 
 #: skycultures/translations.fab:1908
 msgctxt "Genitive name of constellation"
-msgid "Equulei"
+msgid "Delphini"
 msgstr ""
 
 #: skycultures/translations.fab:1909
 msgctxt "Genitive name of constellation"
-msgid "Eridani"
+msgid "Doradus"
 msgstr ""
 
 #: skycultures/translations.fab:1910
 msgctxt "Genitive name of constellation"
-msgid "Fornacis"
+msgid "Draconis"
 msgstr ""
 
 #: skycultures/translations.fab:1911
 msgctxt "Genitive name of constellation"
-msgid "Geminorum"
+msgid "Equulei"
 msgstr ""
 
 #: skycultures/translations.fab:1912
 msgctxt "Genitive name of constellation"
-msgid "Gruis"
+msgid "Eridani"
 msgstr ""
 
 #: skycultures/translations.fab:1913
 msgctxt "Genitive name of constellation"
-msgid "Herculis"
+msgid "Fornacis"
 msgstr ""
 
 #: skycultures/translations.fab:1914
 msgctxt "Genitive name of constellation"
-msgid "Horologii"
+msgid "Geminorum"
 msgstr ""
 
 #: skycultures/translations.fab:1915
 msgctxt "Genitive name of constellation"
-msgid "Hydrae"
+msgid "Gruis"
 msgstr ""
 
 #: skycultures/translations.fab:1916
 msgctxt "Genitive name of constellation"
-msgid "Hydri"
+msgid "Herculis"
 msgstr ""
 
 #: skycultures/translations.fab:1917
 msgctxt "Genitive name of constellation"
-msgid "Indi"
+msgid "Horologii"
 msgstr ""
 
 #: skycultures/translations.fab:1918
 msgctxt "Genitive name of constellation"
-msgid "Lacertae"
+msgid "Hydrae"
 msgstr ""
 
 #: skycultures/translations.fab:1919
 msgctxt "Genitive name of constellation"
-msgid "Leonis"
+msgid "Hydri"
 msgstr ""
 
 #: skycultures/translations.fab:1920
 msgctxt "Genitive name of constellation"
-msgid "Leonis Minoris"
+msgid "Indi"
 msgstr ""
 
 #: skycultures/translations.fab:1921
 msgctxt "Genitive name of constellation"
-msgid "Leporis"
+msgid "Lacertae"
 msgstr ""
 
 #: skycultures/translations.fab:1922
 msgctxt "Genitive name of constellation"
-msgid "Librae"
+msgid "Leonis"
 msgstr ""
 
 #: skycultures/translations.fab:1923
 msgctxt "Genitive name of constellation"
-msgid "Lupi"
+msgid "Leonis Minoris"
 msgstr ""
 
 #: skycultures/translations.fab:1924
 msgctxt "Genitive name of constellation"
-msgid "Lyncis"
+msgid "Leporis"
 msgstr ""
 
 #: skycultures/translations.fab:1925
 msgctxt "Genitive name of constellation"
-msgid "Lyrae"
+msgid "Librae"
 msgstr ""
 
 #: skycultures/translations.fab:1926
 msgctxt "Genitive name of constellation"
-msgid "Mensae"
+msgid "Lupi"
 msgstr ""
 
 #: skycultures/translations.fab:1927
 msgctxt "Genitive name of constellation"
-msgid "Microscopii"
+msgid "Lyncis"
 msgstr ""
 
 #: skycultures/translations.fab:1928
 msgctxt "Genitive name of constellation"
-msgid "Monocerotis"
+msgid "Lyrae"
 msgstr ""
 
 #: skycultures/translations.fab:1929
 msgctxt "Genitive name of constellation"
-msgid "Muscae"
+msgid "Mensae"
 msgstr ""
 
 #: skycultures/translations.fab:1930
 msgctxt "Genitive name of constellation"
-msgid "Normae"
+msgid "Microscopii"
 msgstr ""
 
 #: skycultures/translations.fab:1931
 msgctxt "Genitive name of constellation"
-msgid "Octantis"
+msgid "Monocerotis"
 msgstr ""
 
 #: skycultures/translations.fab:1932
 msgctxt "Genitive name of constellation"
-msgid "Ophiuchi"
+msgid "Muscae"
 msgstr ""
 
 #: skycultures/translations.fab:1933
 msgctxt "Genitive name of constellation"
-msgid "Orionis"
+msgid "Normae"
 msgstr ""
 
 #: skycultures/translations.fab:1934
 msgctxt "Genitive name of constellation"
-msgid "Pavonis"
+msgid "Octantis"
 msgstr ""
 
 #: skycultures/translations.fab:1935
 msgctxt "Genitive name of constellation"
-msgid "Pegasi"
+msgid "Ophiuchi"
 msgstr ""
 
 #: skycultures/translations.fab:1936
 msgctxt "Genitive name of constellation"
-msgid "Persei"
+msgid "Orionis"
 msgstr ""
 
 #: skycultures/translations.fab:1937
 msgctxt "Genitive name of constellation"
-msgid "Phoenicis"
+msgid "Pavonis"
 msgstr ""
 
 #: skycultures/translations.fab:1938
 msgctxt "Genitive name of constellation"
-msgid "Pictoris"
+msgid "Pegasi"
 msgstr ""
 
 #: skycultures/translations.fab:1939
 msgctxt "Genitive name of constellation"
-msgid "Piscium"
+msgid "Persei"
 msgstr ""
 
 #: skycultures/translations.fab:1940
 msgctxt "Genitive name of constellation"
-msgid "Piscis Austrini"
+msgid "Phoenicis"
 msgstr ""
 
 #: skycultures/translations.fab:1941
 msgctxt "Genitive name of constellation"
-msgid "Puppis"
+msgid "Pictoris"
 msgstr ""
 
 #: skycultures/translations.fab:1942
 msgctxt "Genitive name of constellation"
-msgid "Pyxidis"
+msgid "Piscium"
 msgstr ""
 
 #: skycultures/translations.fab:1943
 msgctxt "Genitive name of constellation"
-msgid "Reticuli"
+msgid "Piscis Austrini"
 msgstr ""
 
 #: skycultures/translations.fab:1944
 msgctxt "Genitive name of constellation"
-msgid "Sagittae"
+msgid "Puppis"
 msgstr ""
 
 #: skycultures/translations.fab:1945
 msgctxt "Genitive name of constellation"
-msgid "Sagittarii"
+msgid "Pyxidis"
 msgstr ""
 
 #: skycultures/translations.fab:1946
 msgctxt "Genitive name of constellation"
-msgid "Scorpii"
+msgid "Reticuli"
 msgstr ""
 
 #: skycultures/translations.fab:1947
 msgctxt "Genitive name of constellation"
-msgid "Sculptoris"
+msgid "Sagittae"
 msgstr ""
 
 #: skycultures/translations.fab:1948
 msgctxt "Genitive name of constellation"
-msgid "Scuti"
+msgid "Sagittarii"
 msgstr ""
 
 #: skycultures/translations.fab:1949
 msgctxt "Genitive name of constellation"
-msgid "Serpentis"
+msgid "Scorpii"
 msgstr ""
 
 #: skycultures/translations.fab:1950
 msgctxt "Genitive name of constellation"
-msgid "Sextantis"
+msgid "Sculptoris"
 msgstr ""
 
 #: skycultures/translations.fab:1951
 msgctxt "Genitive name of constellation"
-msgid "Tauri"
+msgid "Scuti"
 msgstr ""
 
 #: skycultures/translations.fab:1952
 msgctxt "Genitive name of constellation"
-msgid "Telescopii"
+msgid "Serpentis"
 msgstr ""
 
 #: skycultures/translations.fab:1953
 msgctxt "Genitive name of constellation"
-msgid "Trianguli"
+msgid "Sextantis"
 msgstr ""
 
 #: skycultures/translations.fab:1954
 msgctxt "Genitive name of constellation"
-msgid "Trianguli Australis"
+msgid "Tauri"
 msgstr ""
 
 #: skycultures/translations.fab:1955
 msgctxt "Genitive name of constellation"
-msgid "Tucanae"
+msgid "Telescopii"
 msgstr ""
 
 #: skycultures/translations.fab:1956
 msgctxt "Genitive name of constellation"
-msgid "Ursae Majoris"
+msgid "Trianguli"
 msgstr ""
 
 #: skycultures/translations.fab:1957
 msgctxt "Genitive name of constellation"
-msgid "Ursae Minoris"
+msgid "Trianguli Australis"
 msgstr ""
 
 #: skycultures/translations.fab:1958
 msgctxt "Genitive name of constellation"
-msgid "Velorum"
+msgid "Tucanae"
 msgstr ""
 
 #: skycultures/translations.fab:1959
 msgctxt "Genitive name of constellation"
-msgid "Virginis"
+msgid "Ursae Majoris"
 msgstr ""
 
 #: skycultures/translations.fab:1960
 msgctxt "Genitive name of constellation"
-msgid "Volantis"
+msgid "Ursae Minoris"
 msgstr ""
 
 #: skycultures/translations.fab:1961
+msgctxt "Genitive name of constellation"
+msgid "Velorum"
+msgstr ""
+
+#: skycultures/translations.fab:1962
+msgctxt "Genitive name of constellation"
+msgid "Virginis"
+msgstr ""
+
+#: skycultures/translations.fab:1963
+msgctxt "Genitive name of constellation"
+msgid "Volantis"
+msgstr ""
+
+#: skycultures/translations.fab:1964
 msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr ""
@@ -8387,6 +8394,7 @@ msgid "Duck Redux"
 msgstr ""
 
 #: nebulae/default/names.dat:1188
+#: skycultures/almagest/constellation_names.eng.fab:9
 #: skycultures/egyptian/constellation_names.eng.fab:6
 msgid "Bird"
 msgstr ""
@@ -8489,6 +8497,403 @@ msgstr ""
 
 #: nebulae/default/names.dat:1217
 msgid "Dark Doodad Nebula"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:1
+msgid "Small Bear"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:2
+msgid "Great Bear"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:3
+msgid "Dragon"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:4
+msgid "King Kepheus"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:5
+#: skycultures/macedonian/constellation_names.eng.fab:13
+msgid "Ploughman"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:6
+msgid "Crown"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:7
+msgid "Kneeler"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:8
+msgid "Lyre"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:10
+msgid "Queen Kassiepeia"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:11
+#: skycultures/chinese_contemporary/constellation_names.eng.fab:63
+#: skycultures/western/constellation_names.eng.fab:63
+#: skycultures/western_rey/constellation_names.eng.fab:57
+#: skycultures/western_hlad/constellation_names.eng.fab:64
+#: skycultures/western_SnT/constellation_names.eng.fab:63
+msgid "Perseus"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:12
+#: skycultures/korean/constellation_names.eng.fab:77
+msgid "Charioteer"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:13
+msgid "Serpent Bearer"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:14
+#: skycultures/maya/constellation_names.eng.fab:7
+msgid "Snake"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:15
+#: skycultures/korean/constellation_names.eng.fab:155
+#: skycultures/mulapin/constellation_names.eng.fab:38
+msgid "Arrow"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:16
+msgid "Eagle with Antinoos"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:17
+msgid "Dolphin"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:18
+msgid "Bust [of a Horse]"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:19
+#: skycultures/mulapin/constellation_names.eng.fab:26
+msgid "Horse"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:20
+msgid "Princess Andromeda"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:21
+#: skycultures/chinese/constellation_names.eng.fab:198
+#: skycultures/egyptian/constellation_names.eng.fab:8
+msgid "Triangle"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:22
+msgid "Ram"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:23
+msgid "Bull"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:24
+#: skycultures/seleucid/constellation_names.eng.fab:5
+msgid "Twins"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:25
+#: skycultures/mulapin/constellation_names.eng.fab:7
+#: skycultures/seleucid/constellation_names.eng.fab:7
+msgid "Crab"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:26
+#: skycultures/egyptian/constellation_names.eng.fab:3
+msgid "Lion"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:27
+msgid "Maiden"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:28
+msgid "Claws [of Scorpion]"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:29
+#: skycultures/maya/constellation_names.eng.fab:6
+#: skycultures/mulapin/constellation_names.eng.fab:56
+#: skycultures/seleucid/constellation_names.eng.fab:55
+msgid "Scorpion"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:30
+msgid "Archer"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:31
+msgid "The One with the Goat's Horn"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:32
+msgid "Water-carrier"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:33
+msgid "Fishes"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:34
+msgid "Sea monster"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:35
+msgid "Hero Orion"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:36
+msgid "River"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:37
+msgid "Hare"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:38
+#: skycultures/chinese/constellation_names.eng.fab:89
+#: skycultures/chinese_medieval/constellation_names.eng.fab:147
+#: skycultures/korean/constellation_names.eng.fab:47
+#: skycultures/mulapin/constellation_names.eng.fab:21
+msgid "Dog"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:39
+msgid "The One before the Dog"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:40
+msgid "The ship Argo"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:41
+msgid "Water snake"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:42
+msgid "Vessel"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:43
+#: skycultures/mulapin/constellation_names.eng.fab:41
+msgid "Raven"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:44
+msgid "Kentaur"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:45
+msgid "Beast"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:46
+msgid "Altar"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:47
+msgid "Southern Crown"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:48
+msgid "Southern Fish"
+msgstr ""
+
+#: skycultures/almagest/constellation_names.eng.fab:49
+msgid "The Lock [in Leo]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:1
+msgid "Κάνωβος (Kanobos)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:2
+msgid "ἀντάρης (Antares)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:3
+msgid "λύρα (Lyra)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:4
+msgid "αἴξ (Goat)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:5
+msgid "Ἀρκτοῦρος (Arkturos, Guard)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:6
+msgid "βασιλίσκος (Princelet)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:7
+msgid "στάχυς (Ear of Grain)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:8
+msgid "Προτρυγητήρ (Harbinger of Vintage)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:9
+msgid " Ἔριφοι (Kids [of the Goat]) I"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:10
+msgid " Ἔριφοι (Kids [of the Goat]) II"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:11
+msgid "ἀετός (Eagle)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:12
+msgid "ὄνος (Ass) I"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:13
+msgid "ὄνος (Ass) II"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:14
+msgid "κύων (Dog)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:15
+msgid "Προκύων (Prokyon, The One [rising] before the Dog)"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:16
+msgid "4 stars over the rump [of the Ram]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:17
+msgid "Star over the head [of the Ram]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:18
+msgid ""
+"Bright star of the Hyades, the reddish one on the southern Eye [of the Bull]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:19
+msgid "Northern Eye [of the Bull]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:20
+msgid "Nostrils [of the Bull]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:21
+msgid "the one between [the nostrils] and the southern eye"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:22
+msgid "the one between [the nostrils] and the northern eye"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:23
+msgid "Northern end of advanced side [of the Pleiades]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:24
+msgid "Southern end of advanced side [of the Pleiades]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:25
+msgid "rearmost and narrowest end [of the Pleiades]"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:26
+msgid "the small star outside the Pleiades"
+msgstr ""
+
+#: skycultures/almagest/star_names.fab:27
+msgid "the star some distance under the tail [of the Eagle]"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:1
+msgid "Zeus/Dios (Jupiter)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:2
+msgid "Aphrodite (Venus)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:3
+msgid "Ares (Mars)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:4
+msgid "Kronos (Saturn)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:5
+msgid "Hermes (Mercury)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:6
+msgid "Helios (Sun)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:7
+msgid "Selene (Moon)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:8
+msgid "Uranus (1781)"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:9
+msgid "Neptun (1846)"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:1
+msgid "Πλειάδες (Pleiades)"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:2
+msgid "ʿΥάδες (Hyades)"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:3
+msgid "πλόκαμος (The Lock [of Queen Berenike])"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:4
+msgid "The nebulous mass on the right hand [of Perseus] II"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:5
+msgid "The nebulous mass on the right hand [of Perseus] I"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:6
+msgid ""
+"The star on the place where the back [of Kentauros] joins [the horse's body]"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:7
+msgid "φάτνη (Manger)"
+msgstr ""
+
+#: skycultures/almagest/dso_names.fab:8 skycultures/almagest/dso_names.fab:9
+msgid ""
+"The nebulous star to the rear of the sting [of Scorpion, outside the "
+"constellation]"
 msgstr ""
 
 #: skycultures/anutan/constellation_names.eng.fab:1
@@ -11117,13 +11522,6 @@ msgstr ""
 msgid "Lock (Vassal of Room)"
 msgstr ""
 
-#: skycultures/chinese/constellation_names.eng.fab:89
-#: skycultures/chinese_medieval/constellation_names.eng.fab:147
-#: skycultures/korean/constellation_names.eng.fab:47
-#: skycultures/mulapin/constellation_names.eng.fab:21
-msgid "Dog"
-msgstr ""
-
 #: skycultures/chinese/constellation_names.eng.fab:90
 #: skycultures/chinese_medieval/constellation_names.eng.fab:148
 msgid "Territory of Dog"
@@ -11614,11 +12012,6 @@ msgstr ""
 #: skycultures/chinese/constellation_names.eng.fab:197
 #: skycultures/chinese_medieval/constellation_names.eng.fab:34
 msgid "Three Excellencies (In Purple Forbidden Enclosure)"
-msgstr ""
-
-#: skycultures/chinese/constellation_names.eng.fab:198
-#: skycultures/egyptian/constellation_names.eng.fab:8
-msgid "Triangle"
 msgstr ""
 
 #: skycultures/chinese/constellation_names.eng.fab:200
@@ -46665,14 +47058,6 @@ msgstr ""
 msgid "Pictor"
 msgstr ""
 
-#: skycultures/chinese_contemporary/constellation_names.eng.fab:63
-#: skycultures/western/constellation_names.eng.fab:63
-#: skycultures/western_rey/constellation_names.eng.fab:57
-#: skycultures/western_hlad/constellation_names.eng.fab:64
-#: skycultures/western_SnT/constellation_names.eng.fab:63
-msgid "Perseus"
-msgstr ""
-
 #: skycultures/chinese_contemporary/constellation_names.eng.fab:64
 #: skycultures/western/constellation_names.eng.fab:64
 #: skycultures/western_rey/constellation_names.eng.fab:131
@@ -48128,10 +48513,6 @@ msgstr ""
 msgid "Two Poles"
 msgstr ""
 
-#: skycultures/egyptian/constellation_names.eng.fab:3
-msgid "Lion"
-msgstr ""
-
 #: skycultures/egyptian/constellation_names.eng.fab:4
 msgid "Two Jaws"
 msgstr ""
@@ -49466,10 +49847,6 @@ msgstr ""
 msgid "Groom"
 msgstr ""
 
-#: skycultures/korean/constellation_names.eng.fab:77
-msgid "Charioteer"
-msgstr ""
-
 #: skycultures/korean/constellation_names.eng.fab:78
 msgid "Human"
 msgstr ""
@@ -49742,11 +50119,6 @@ msgstr ""
 #: skycultures/korean/constellation_names.eng.fab:153
 #: skycultures/korean/constellation_names.eng.fab:208
 msgid "Folding Screen"
-msgstr ""
-
-#: skycultures/korean/constellation_names.eng.fab:155
-#: skycultures/mulapin/constellation_names.eng.fab:38
-msgid "Arrow"
 msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:156
@@ -50485,10 +50857,6 @@ msgstr ""
 msgid "Tongs"
 msgstr ""
 
-#: skycultures/macedonian/constellation_names.eng.fab:13
-msgid "Ploughman"
-msgstr ""
-
 #: skycultures/macedonian/constellation_names.eng.fab:14
 msgid "Cock"
 msgstr ""
@@ -50693,16 +51061,6 @@ msgstr ""
 msgid "Shark"
 msgstr ""
 
-#: skycultures/maya/constellation_names.eng.fab:6
-#: skycultures/mulapin/constellation_names.eng.fab:56
-#: skycultures/seleucid/constellation_names.eng.fab:55
-msgid "Scorpion"
-msgstr ""
-
-#: skycultures/maya/constellation_names.eng.fab:7
-msgid "Snake"
-msgstr ""
-
 #: skycultures/maya/constellation_names.eng.fab:8
 msgid "Paddler Gods"
 msgstr ""
@@ -50872,11 +51230,6 @@ msgstr ""
 msgid "Little Twins"
 msgstr ""
 
-#: skycultures/mulapin/constellation_names.eng.fab:7
-#: skycultures/seleucid/constellation_names.eng.fab:7
-msgid "Crab"
-msgstr ""
-
 #: skycultures/mulapin/constellation_names.eng.fab:8
 #: skycultures/seleucid/constellation_names.eng.fab:8
 msgid "Urgulu-demon"
@@ -50953,10 +51306,6 @@ msgstr ""
 msgid "Pig"
 msgstr ""
 
-#: skycultures/mulapin/constellation_names.eng.fab:26
-msgid "Horse"
-msgstr ""
-
 #: skycultures/mulapin/constellation_names.eng.fab:27
 msgid "Stag"
 msgstr ""
@@ -51009,10 +51358,6 @@ msgstr ""
 
 #: skycultures/mulapin/constellation_names.eng.fab:40
 msgid "MUSH-Snake (god)"
-msgstr ""
-
-#: skycultures/mulapin/constellation_names.eng.fab:41
-msgid "Raven"
 msgstr ""
 
 #: skycultures/mulapin/constellation_names.eng.fab:42
@@ -52823,10 +53168,6 @@ msgstr ""
 
 #: skycultures/sardinian/planet_names.fab:1
 msgid "Evening Star / Morning Star (Venus)"
-msgstr ""
-
-#: skycultures/seleucid/constellation_names.eng.fab:5
-msgid "Twins"
 msgstr ""
 
 #: skycultures/seleucid/constellation_names.eng.fab:6

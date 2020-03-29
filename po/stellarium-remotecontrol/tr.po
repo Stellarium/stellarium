@@ -5,15 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
+# M Durmus, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-16 01:07+0700\n"
+"POT-Creation-Date: 2020-03-28 21:05+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: M Durmus, 2020\n"
 "Language-Team: Turkish (https://www.transifex.com/stellarium/teams/80998/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,7 +79,7 @@ msgstr "Hata (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Simbad araması yapılırken hata oluştu"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
@@ -164,7 +165,7 @@ msgstr ""
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Eylemler ve komut dosyaları"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
@@ -212,7 +213,7 @@ msgstr "Drakonik yıl"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gauss yılı"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
@@ -228,15 +229,15 @@ msgstr "Ayrıksı yüzyıl"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr ""
+msgstr "Ortalama tropikal ay"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr ""
+msgstr "Ortalama tropikal yıl"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr ""
+msgstr "Ortalama tropik yüzyıl"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
@@ -252,11 +253,11 @@ msgstr "Jülyen yüzyılı"
 
 #: index.html:123 tablet7in.html:101
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Azimut'ta ufka doğru bakış"
 
 #: index.html:144 tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Dikey Görünüm dengesi"
 
 #: index.html:154 tablet7in.html:133
 msgid "Reset"
@@ -280,7 +281,7 @@ msgstr "Seçim modu"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Nesne üzerinde ortala"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
@@ -308,7 +309,7 @@ msgstr "Geçerli seçim"
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Samanyolu parlaklığı:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
@@ -320,23 +321,23 @@ msgstr ""
 
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
-msgstr ""
+msgstr "Gezegen yörüngelerini göster"
 
 #: index.html:288 tablet7in.html:352
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "Yalnızca gezegen yörüngelerini göster"
 
 #: index.html:289 tablet7in.html:353
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Seçilen gezegenin yörüngesini göster"
 
 #: index.html:290 tablet7in.html:354
 msgid "Show planet trails"
-msgstr ""
+msgstr "Gezegen yollarını göster"
 
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "İzi(yolu) yalnızca seçilen gezegen için göster"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -351,6 +352,8 @@ msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
+"Ekliptik kutuplar etrafındaki hareketinde dünya ekseninin anlık daireleri. "
+"Yalnızca Dünya'da görüntülenir."
 
 #: index.html:377 tablet7in.html:472
 msgid "Solstices"
@@ -398,7 +401,7 @@ msgstr "Mevcut manzara"
 
 #: index.html:583 tablet7in.html:674
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Satırları kalınlaştırarak göster"
 
 #: index.html:588 tablet7in.html:679
 msgid "Show asterisms with thickness"
@@ -406,11 +409,11 @@ msgstr "Yıldız kümelerini kalınlaştır"
 
 #: index.html:592 tablet7in.html:683
 msgid "Show ray helpers with thickness"
-msgstr ""
+msgstr "Işın yardımcılarını kalınlaştırarak göster"
 
 #: index.html:600 tablet7in.html:693
 msgid "Show boundaries with thickness"
-msgstr ""
+msgstr "Sınırları kalınlaştırarak göster"
 
 #: index.html:605 tablet7in.html:698
 msgid "Constellation selection isolated"
@@ -418,7 +421,7 @@ msgstr ""
 
 #: index.html:609 tablet7in.html:702
 msgid "Current sky culture"
-msgstr ""
+msgstr "Mevcut gökyüzü kültürü"
 
 #: index.html:622 tablet7in.html:727
 msgid "Active script:"
