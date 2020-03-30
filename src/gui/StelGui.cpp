@@ -521,7 +521,7 @@ void StelGui::update()
 	} else if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateOff) {
 		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
-	const bool isTimeNow=core->getIsTimeNow();
+	const bool isTimeNow=core->getIsTimeNow() && core->getRealTimeSpeed();
 	if (static_cast<bool>(buttonTimeCurrent->isChecked())!=isTimeNow) {
 		buttonTimeCurrent->setChecked(isTimeNow);
 	}

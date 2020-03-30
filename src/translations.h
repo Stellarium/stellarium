@@ -110,6 +110,10 @@ class Translations
 		N_("Geological features");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Artificial objects");
+		
+		// =====================================================================
+		// Special location
+		N_("landing site");
 
 		// =====================================================================
 		// List of geological features by type
@@ -457,6 +461,8 @@ class Translations
 		
 		// =====================================================================
 		// Constellation cultures
+		// TRANSLATORS: Name of the sky culture
+		N_("Almagest");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
 		// TRANSLATORS: Name of the sky culture

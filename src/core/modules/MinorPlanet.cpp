@@ -24,6 +24,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelObserver.hpp"
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
@@ -152,13 +153,12 @@ QString MinorPlanet::getNameI18n() const
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
-
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	if (flags&Name)
 	{
@@ -278,7 +278,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&ProperMotion)
+	// Second test avoids crash when observer is on spaceship
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
 		Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;

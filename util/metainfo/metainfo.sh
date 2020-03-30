@@ -50,5 +50,5 @@ rm $tmpxmlfile
 ./update_releases_appdata.pl
 
 # format (pretty print)
-xmllint --fromat --output $metainfo_file $metainfo_file
+xmllint --format --output $metainfo_file $metainfo_file
 

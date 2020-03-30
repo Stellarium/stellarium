@@ -1128,8 +1128,8 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-				loc.planetName = pl->getEnglishName();
-				loc.name = "-";
+				loc.planetName = pl->getEnglishName();				
+				loc.name = "landing site";
 				loc.state = "";
 
 				// Let's try guess name of location...
@@ -1198,7 +1198,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			// Avoid using a temporary location name to create another temporary one (otherwise it looks like loc1 -> loc2 -> loc3 etc..)
 			curLoc.name = ".";
 		}
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);		
 		setObserver(newObs);
 		newObs->update(0);
 	}

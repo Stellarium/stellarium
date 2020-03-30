@@ -28,6 +28,7 @@
 #include "StelScriptSyntaxHighlighter.hpp"
 
 #include <QDialog>
+#include <QMessageBox>
 #include <QDebug>
 #include <QTextStream>
 #include <QTemporaryFile>
@@ -42,6 +43,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
 	, useUserDir(false)
+	, hideWindowAtScriptRun(false)
 	, scriptFileName("")
 {
 	ui = new Ui_scriptConsoleForm;
@@ -56,7 +58,10 @@ ScriptConsole::~ScriptConsole()
 void ScriptConsole::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populateQuickRunList();
+	}
 }
 
 void ScriptConsole::styleChanged()
@@ -68,6 +73,21 @@ void ScriptConsole::styleChanged()
 	}
 }
 
+void ScriptConsole::populateQuickRunList()
+{
+	ui->quickrunCombo->clear();
+	ui->quickrunCombo->addItem(""); // First line is empty!
+	ui->quickrunCombo->addItem(qc_("selected text as script","command"));
+	ui->quickrunCombo->addItem(qc_("remove screen text","command"));
+	ui->quickrunCombo->addItem(qc_("remove screen images","command"));
+	ui->quickrunCombo->addItem(qc_("remove screen markers","command"));
+	ui->quickrunCombo->addItem(qc_("clear map: natural","command"));
+	ui->quickrunCombo->addItem(qc_("clear map: starchart","command"));
+	ui->quickrunCombo->addItem(qc_("clear map: deepspace","command"));
+	ui->quickrunCombo->addItem(qc_("clear map: galactic","command"));
+	ui->quickrunCombo->addItem(qc_("clear map: supergalactic","command"));
+}
+
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -76,12 +96,7 @@ void ScriptConsole::createDialogContent()
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
 
-	ui->quickrunCombo->addItem(q_("quickrun..."));
-	ui->quickrunCombo->addItem(q_("selected text"));
-	ui->quickrunCombo->addItem(q_("clear text"));
-	ui->quickrunCombo->addItem(q_("clear images"));
-	ui->quickrunCombo->addItem(q_("natural"));
-	ui->quickrunCombo->addItem(q_("starchart"));
+	populateQuickRunList();
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -101,9 +116,17 @@ void ScriptConsole::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 	ui->scriptEdit->setFocus();
 
-	useUserDir = StelApp::getInstance().getSettings()->value("gui/flag_scripts_user_dir", false).toBool();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	useUserDir = conf->value("gui/flag_scripts_user_dir", false).toBool();
 	ui->useUserDirCheckBox->setChecked(useUserDir);
+	hideWindowAtScriptRun = conf->value("gui/flag_scripts_hide_window", false).toBool();
+	ui->closeWindowAtScriptRunCheckbox->setChecked(hideWindowAtScriptRun);
 	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
+	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
+
+	// Let's improve visibility of the text
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->quickrunLabel->setStyleSheet(style);
 }
 
 void ScriptConsole::setFlagUserDir(bool b)
@@ -112,6 +135,15 @@ void ScriptConsole::setFlagUserDir(bool b)
 	{
 		useUserDir = b;
 		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_user_dir", b);
+	}
+}
+
+void ScriptConsole::setFlagHideWindow(bool b)
+{
+	if (b!=hideWindowAtScriptRun)
+	{
+		hideWindowAtScriptRun = b;
+		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_hide_window", b);
 	}
 }
 
@@ -166,8 +198,11 @@ void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
 	{
-		ui->scriptEdit->clear();
-		scriptFileName.clear(); // OK, it's a new file!
+		if (QMessageBox::question(Q_NULLPTR, q_("Clear script"), q_("Are you sure?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+		{
+			ui->scriptEdit->clear();
+			scriptFileName.clear(); // OK, it's a new file!
+		}
 	}
 	else if (ui->tabs->currentIndex() == 1)
 		ui->logBrowser->clear();
@@ -214,6 +249,8 @@ void ScriptConsole::scriptStarted()
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
+	if (hideWindowAtScriptRun)
+		dialog->setVisible(false);
 }
 
 void ScriptConsole::scriptEnded()
@@ -224,6 +261,8 @@ void ScriptConsole::scriptEnded()
 	ui->quickrunCombo->setEnabled(true);
 	ui->runButton->setEnabled(true);
 	ui->stopButton->setEnabled(false);
+	if (hideWindowAtScriptRun)
+		dialog->setVisible(true);
 }
 
 void ScriptConsole::appendLogLine(const QString& s)
@@ -259,24 +298,17 @@ void ScriptConsole::quickRun(int idx)
 {
 	if (idx==0)
 		return;
-
-	QString scriptText;
-	switch (idx) {
-		case 2:
-			scriptText = "LabelMgr.deleteAllLabels();\n";
-			break;
-		case 3:
-			scriptText = "ScreenImageMgr.deleteAllImages()\n";
-			break;
-		case 4:
-			scriptText = "core.clear(\"natural\");\n";
-			break;
-		case 5:
-			scriptText = "core.clear(\"starchart\");\n";
-			break;
-		default:
-			scriptText = QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText();
-	}
+	// TODO: Switch to unique keys?
+	static const QMap<int, QString>map = {
+		{2, "LabelMgr.deleteAllLabels();\n"},
+		{3, "ScreenImageMgr.deleteAllImages();\n"},
+		{4, "MarkerMgr.deleteAllMarkers();\n"},
+		{5, "core.clear(\"natural\");\n"},
+		{6, "core.clear(\"starchart\");\n"},
+		{7, "core.clear(\"deepspace\");\n"},
+		{8, "core.clear(\"galactic\");\n"},
+		{9, "core.clear(\"supergalactic\");\n"}};
+	QString scriptText = map.value(idx, QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText());
 
 	if (!scriptText.isEmpty())
 	{

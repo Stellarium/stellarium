@@ -1196,7 +1196,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
-		this->close();	
+		this->close();
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{

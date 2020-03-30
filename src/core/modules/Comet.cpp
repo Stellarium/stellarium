@@ -24,6 +24,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelObserver.hpp"
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
@@ -240,7 +241,8 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		}
 	}
 
-	if (flags&ProperMotion)
+	// Second test avoids crash when observer is on spaceship
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
 		Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;

@@ -39,13 +39,13 @@
 
 namespace StelUtils
 {
-//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+//! Return the full name of stellarium, i.e. "stellarium 0.19.0"
 QString getApplicationName()
 {
 	return QString("Stellarium")+" "+StelUtils::getApplicationVersion();
 }
 
-//! Return the version of stellarium, i.e. "0.9.0"
+//! Return the version of stellarium, i.e. "0.19.0"
 QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
@@ -431,16 +431,16 @@ Vec4d strToVec4d(const QString& str)
 QString vec2fToStr(const Vec2f &v)
 {
 	return QString("%1,%2")
-		.arg(v[0],0,'f',6)
-		.arg(v[1],0,'f',6);
+		.arg(static_cast<double>(v[0]),0,'f',6)
+		.arg(static_cast<double>(v[1]),0,'f',6);
 }
 
 QString vec3fToStr(const Vec3f &v)
 {
 	return QString("%1,%2,%3")
-		.arg(v[0],0,'f',6)
-		.arg(v[1],0,'f',6)
-		.arg(v[2],0,'f',6);
+		.arg(static_cast<double>(v[0]),0,'f',6)
+		.arg(static_cast<double>(v[1]),0,'f',6)
+		.arg(static_cast<double>(v[2]),0,'f',6);
 }
 
 QString vec4dToStr(const Vec4d &v)
@@ -1811,7 +1811,7 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	return deltaT;
 }
 
-// Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+// Implementation of polynomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
 double getDeltaTByKhalidSultanaZaidi(const double jDay)
 {
 	int year, month, day;
@@ -2265,12 +2265,8 @@ int getFixedFromGregorian(const int year, const int month, const int day)
 {
 	int y = year - 1;
 	int r = 365*y + static_cast<int>(std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.));
-	if (month <= 2)
-		r += 0;
-	else if (isLeapYear(year))
-		r -= 1;
-	else
-		r -= 2;
+	if (month>2)
+		r -= isLeapYear(year) ? 1 : 2;
 	r += day;
 
 	return r;
