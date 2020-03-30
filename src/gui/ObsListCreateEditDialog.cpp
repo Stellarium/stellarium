@@ -19,6 +19,8 @@
 
 #include <StelTranslator.hpp>
 #include <QUuid>
+#include <QDir>
+#include <QDateTime>
 
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -27,6 +29,7 @@
 #include "NebulaMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelJsonParser.hpp"
 
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
@@ -265,35 +268,35 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
         if ( !objectType.isEmpty() ) {
             item.type = objectType;
         }
-        if (!objectRaStr.isEmpty()){
+        if ( !objectRaStr.isEmpty() ) {
             item.ra = objectRaStr;
         }
-        if(!objectDecStr.isEmpty()){
+        if ( !objectDecStr.isEmpty() ) {
             item.dec = objectDecStr;
         }
-        if(!objectMagnitudeStr.isEmpty()){
+        if ( !objectMagnitudeStr.isEmpty() ) {
             item.magnitude = objectMagnitudeStr;
         }
-        if(!objectConstellation.isEmpty()){
+        if ( !objectConstellation.isEmpty() ) {
             item.constellation = objectMagnitudeStr;
         }
-        if(!JDs.isEmpty()){
+        if ( !JDs.isEmpty() ) {
             item.jd = JDs;
         }
-        if(!Location.isEmpty()){
+        if ( !Location.isEmpty() ) {
             item.location = Location;
         }
-        if (!visibleFlag){
+        if ( !visibleFlag ) {
             item.isVisibleMarker = visibleFlag;
         }
-		if (fov > 0.0) {
+        if ( fov > 0.0 ) {
             item.fov = fov;
         }
-        
-        observingListItemCollection.insert(objectUuid,item);
-        
+
+        observingListItemCollection.insert ( objectUuid,item );
+
         //TODO saveObservedObject()
-			
+
     } else {
         qWarning() << "selected object is empty !";
     }
@@ -305,7 +308,75 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 */
 void ObsListCreateEditDialog::saveObservedObject()
 {
-    //TODO
+    if ( observingListJsonPath.isEmpty() || ui->nameOfListLineEdit->selectedText().isEmpty() ) {
+        qWarning() << "[ObservingList] Error saving observing list";
+        return;
+    }
+
+    QFile jsonFile ( observingListJsonPath );
+    if ( !jsonFile.open ( QFile::WriteOnly|QFile::Text ) ) {
+        qWarning() << "[ObservingList] observing list can not be saved. A file can not be open for writing:"
+                   << QDir::toNativeSeparators ( observingListJsonPath );
+        return;
+    }
+
+    QVariantMap observingListDataList;
+    QString oblListUuid = QUuid::createUuid().toString();
+    observingListDataList.insert("UUID", oblListUuid);
+    QString currentDateTime = QDateTime::currentDateTime().toString();
+    observingListDataList.insert("Current date time", currentDateTime);
+    
+    QHashIterator<QString, observingListItem> i ( observingListItemCollection );
+    while ( i.hasNext() ) {
+        i.next();
+
+        observingListItem item = i.value();
+        QVariantMap obl;
+        obl.insert ( "name", item.name );
+        if ( !item.nameI18n.isEmpty() ) {
+            obl.insert ( "nameI18n", item.nameI18n );
+        }
+        if ( !item.type.isEmpty() ) {
+            obl.insert ( "type", item.type );
+        }
+        if ( !item.ra.isEmpty() ) {
+            obl.insert ( "ra", item.ra );
+        }
+        if ( !item.dec.isEmpty() ) {
+            obl.insert ( "dec", item.dec );
+        }
+        if ( !item.magnitude.isEmpty() ) {
+            obl.insert ( "magnitude", item.magnitude );
+        }
+        if ( !item.constellation.isEmpty() ) {
+            obl.insert ( "constellation", item.constellation );
+        }
+        if ( !item.jd.isEmpty() ) {
+            obl.insert ( "jd", item.jd );
+        }
+        if ( !item.location.isEmpty() ) {
+            obl.insert ( "location", item.location );
+        }
+        if ( item.fov > 0.0 ) {
+            obl.insert ( "fov", item.fov );
+        }
+        //TODO: check if thi IF is useful
+        if ( item.isVisibleMarker ) {
+            obl.insert ( "isVisibleMarker", item.isVisibleMarker );
+        }
+
+        observingListDataList.insert ( i.key(), obl );
+    }
+    
+    QVariantMap oblList;
+    oblList.insert(ui->nameOfListLineEdit->text(), observingListDataList);
+    
+    //Convert the tree to JSON
+	StelJsonParser::write(oblList, &jsonFile);
+	jsonFile.flush();
+	jsonFile.close();
+    
+    
 }
 
 
