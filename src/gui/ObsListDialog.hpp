@@ -63,7 +63,7 @@ private:
     //! Set header names for observing list table
     void setObservingListHeaderNames();
     
-    void invokeObsListCreateEditDialog(std::string listName);
+    void invokeObsListCreateEditDialog(std::string listUuid);
 
     ObsListCreateEditDialog * createEditDialog_instance;
 

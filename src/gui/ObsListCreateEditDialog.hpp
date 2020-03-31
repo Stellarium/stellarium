@@ -49,7 +49,7 @@ class ObsListCreateEditDialog : public StelDialog
     Q_OBJECT
 
 public:
-    static ObsListCreateEditDialog * Instance (std::string listName );
+    static ObsListCreateEditDialog * Instance (std::string listUuid );
     static void kill();
 
     //! Notify that the application style changed
@@ -81,7 +81,7 @@ private:
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     class StelObjectMgr* objectMgr;
-    std::string listName_;
+    std::string listUuid_;
     static constexpr char const * jsonFileName = "observingList.json";
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
@@ -104,7 +104,7 @@ private:
     void saveObservedObject();
 
     //Private constructor and destructor
-    ObsListCreateEditDialog (std::string listName );
+    ObsListCreateEditDialog (std::string listUuid );
     virtual ~ObsListCreateEditDialog();
 
 
