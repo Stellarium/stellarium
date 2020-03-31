@@ -1473,6 +1473,8 @@ QString SolarSystem::getPlanetType(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
+	if (p.isNull())
+		return QString("UNDEFINED");
 	return p->getPlanetTypeString();
 }
 

@@ -35,7 +35,6 @@
 #include "NavStarsWindow.hpp"
 #include "NavStarsCalculator.hpp"
 #include "Planet.hpp"
-#include <StelMainScriptAPI.hpp>
 
 #include <QList>
 #include <QSharedPointer>
@@ -489,7 +488,7 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 	jde = core->getJDE();
 
 	NavStarsCalculator calc;
-	calc.setUTC(StelMainScriptAPI::getDate("utc"))
+	calc.setUTC(StelUtils::julianDayToISO8601String(jd))
 		.setLatDeg(core->getCurrentLocation().latitude)
 		.setLonDeg(core->getCurrentLocation().longitude)
 		.setJd(jd)
