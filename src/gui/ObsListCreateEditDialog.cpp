@@ -38,14 +38,17 @@ using namespace std;
 
 ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog ( string listUuid )
+ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
 {
-    listUuid_ = listUuid;
+    listName_ = listName;
 
-    if ( listUuid_.size() == 0 ) {
+    if ( listName_.size() == 0 ) {
+        // case of creation mode
         isCreationMode = true;
     } else {
+        // case of edit mode
         isCreationMode = false;
+        loadObservingList();
     }
 
     ui = new Ui_obsListCreateEditDialogForm();
@@ -64,10 +67,10 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 /**
  * Get instance of class
 */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listUuid )
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listName )
 {
     if ( m_instance == nullptr ) {
-        m_instance = new ObsListCreateEditDialog ( listUuid );
+        m_instance = new ObsListCreateEditDialog ( listName );
     }
 
     return m_instance;
@@ -323,7 +326,8 @@ void ObsListCreateEditDialog::saveObservedObject()
     }
 
     QVariantMap observingListDataList;
-    observingListDataList.insert ( "listName", ui->nameOfListLineEdit->text() );
+    QString oblListUuid = QUuid::createUuid().toString();
+    observingListDataList.insert ( "UUID",  oblListUuid);
     QString currentDateTime = QDateTime::currentDateTime().toString();
     observingListDataList.insert ( "Current date time", currentDateTime );
 
@@ -370,8 +374,7 @@ void ObsListCreateEditDialog::saveObservedObject()
     }
 
     QVariantMap oblList;
-    QString oblListUuid = QUuid::createUuid().toString();
-    oblList.insert ( oblListUuid, observingListDataList );
+    oblList.insert ( ui->nameOfListLineEdit->text(), observingListDataList );
 
     //Convert the tree to JSON
     StelJsonParser::write ( oblList, &jsonFile );
@@ -423,6 +426,15 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
     this->close();
     emit exitButtonClicked();
 }
+
+
+/*
+ * Load the observing liste in case of edit mode
+*/
+void ObsListCreateEditDialog::loadObservingList()
+{
+}
+
 
 /*
  * Destructor of singleton
