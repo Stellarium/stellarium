@@ -207,18 +207,17 @@ void StelMovementMgr::init()
 	// Field of view
 	// The feature was moved from FOV plugin
 	// TODO: Switch to use C++/Qt lambda's
-	QString fovGroup = N_("Field of View");
-	QString fovText = q_("Set FOV to");
-	addAction("actionSet_FOV_180deg",	 fovGroup, QString("%1 %2%3").arg(fovText, " 180", QChar(0x00B0)), "setFOV180Deg()", "Ctrl+Alt+1");
-	addAction("actionSet_FOV_90deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  90", QChar(0x00B0)),   "setFOV90Deg()",   "Ctrl+Alt+2");
-	addAction("actionSet_FOV_60deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  60", QChar(0x00B0)),   "setFOV60Deg()",   "Ctrl+Alt+3");
-	addAction("actionSet_FOV_45deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  45", QChar(0x00B0)),   "setFOV45Deg()",   "Ctrl+Alt+4");
-	addAction("actionSet_FOV_20deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  20", QChar(0x00B0)),   "setFOV20Deg()",   "Ctrl+Alt+5");
-	addAction("actionSet_FOV_10deg",   fovGroup, QString("%1 %2%3").arg(fovText, "  10", QChar(0x00B0)),   "setFOV10Deg()",   "Ctrl+Alt+6");
-	addAction("actionSet_FOV_5deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   5", QChar(0x00B0)),     "setFOV5Deg()",     "Ctrl+Alt+7");
-	addAction("actionSet_FOV_2deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   2", QChar(0x00B0)),     "setFOV2Deg()",     "Ctrl+Alt+8");
-	addAction("actionSet_FOV_1deg",     fovGroup, QString("%1 %2%3").arg(fovText, "   1", QChar(0x00B0)),     "setFOV1Deg()",     "Ctrl+Alt+9");
-	addAction("actionSet_FOV_0_5deg", fovGroup, QString("%1 %2%3").arg(fovText, "0.5", QChar(0x00B0)),  "setFOV05Deg()",   "Ctrl+Alt+0");
+	QString fovGroup = N_("Field of View");	
+	addAction("actionSet_FOV_180deg",	 fovGroup, N_("Set FOV to 180°"), "setFOV180Deg()", "Ctrl+Alt+1");
+	addAction("actionSet_FOV_90deg",   fovGroup,	 N_("Set FOV to 90°"),   "setFOV90Deg()",   "Ctrl+Alt+2");
+	addAction("actionSet_FOV_60deg",   fovGroup, N_("Set FOV to 60°"),   "setFOV60Deg()",   "Ctrl+Alt+3");
+	addAction("actionSet_FOV_45deg",   fovGroup, N_("Set FOV to 45°"),   "setFOV45Deg()",   "Ctrl+Alt+4");
+	addAction("actionSet_FOV_20deg",   fovGroup, N_("Set FOV to 20°"),   "setFOV20Deg()",   "Ctrl+Alt+5");
+	addAction("actionSet_FOV_10deg",   fovGroup, N_("Set FOV to 10°"),   "setFOV10Deg()",   "Ctrl+Alt+6");
+	addAction("actionSet_FOV_5deg",     fovGroup, N_("Set FOV to 5°"),     "setFOV5Deg()",     "Ctrl+Alt+7");
+	addAction("actionSet_FOV_2deg",     fovGroup, N_("Set FOV to 2°"),     "setFOV2Deg()",     "Ctrl+Alt+8");
+	addAction("actionSet_FOV_1deg",     fovGroup, N_("Set FOV to 1°"),     "setFOV1Deg()",     "Ctrl+Alt+9");
+	addAction("actionSet_FOV_0_5deg", fovGroup, N_("Set FOV to 0.5°"),  "setFOV05Deg()",   "Ctrl+Alt+0");
 	// Remove all FOV settings
 	conf->beginGroup("FOV");
 	conf->remove("");
