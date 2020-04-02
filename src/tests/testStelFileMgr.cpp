@@ -332,6 +332,27 @@ void TestStelFileMgr::testConfigMigration() {
 	auto configDir = QDir(configDirPath);
 	auto legacyDir = QDir(legacyDirPath);
 
+	// Data dir files
+	/**
+	 * "modules/**
+	 * "stars/**"
+	 * "scripts/**"
+	 * "stars/default/**"
+	 * "textures/**"
+	 * "output.txt"
+	 * "output-**.txt"
+	 * log.txt
+	 * 
+	// Config Dir files
+	 * ssystem_minor.ini
+	 * ssystem_major.ini
+	 * ssystem_*.ini
+	 * scenery3d/userviews.ini
+	 * servers/**
+	 * log_TelescopeServer_[slotName].txt (not a data dir file)
+	 * data/user_locations.txt -> user_locations.txt (not a data dir file)
+	 */
+
 	QFile helloFile(dataDir.filePath("hello.txt"));
 	helloFile.open(QIODevice::WriteOnly | QIODevice::Text);
 	QTextStream out(&helloFile);

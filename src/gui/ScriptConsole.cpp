@@ -122,7 +122,7 @@ void ScriptConsole::loadScript()
 		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
         if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir().path()))
         {
-            openDir = StelFileMgr::getConfigDir().absolutePath();
+            openDir = StelFileMgr::getDataDir().absolutePath();
         }
 	}
     else
@@ -152,7 +152,7 @@ void ScriptConsole::saveScript()
 	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
     if (saveDir.isEmpty())
     {
-        saveDir = StelFileMgr::getConfigDir().absolutePath();
+        saveDir = StelFileMgr::getDataDir().absolutePath();
     }
 
 	QString defaultFilter("(*.ssc)");

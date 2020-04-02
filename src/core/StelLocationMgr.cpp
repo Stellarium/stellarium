@@ -793,7 +793,7 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	QString cityDataPath = StelFileMgr::findFile("user_locations.txt", StelFileMgr::Writable);
 	if (cityDataPath.isEmpty())
 	{
-		cityDataPath = StelFileMgr::getConfigDir().absoluteFilePath("data/user_locations.txt");
+		cityDataPath = StelFileMgr::getConfigDir().absoluteFilePath("user_locations.txt");
 		qWarning() << "Will create a new user location file: " << QDir::toNativeSeparators(cityDataPath);
 	}
 

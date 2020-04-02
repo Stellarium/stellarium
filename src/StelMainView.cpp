@@ -1591,10 +1591,11 @@ void StelMainView::doScreenshot(void)
 		// Create a directory for screenshots if main/screenshot_dir option is unset and user do screenshot at the moment!
 		QString screenshotDirSuffix = "/Stellarium";
 		QString screenshotDir;
+		// remove this conditional, according to qt docks QStandardPaths::PicturesLocation with return a fallback if no pictures dir is found
 		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
 			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
 		else
-            screenshotDir = StelFileMgr::getConfigDir().absoluteFilePath(screenshotDirSuffix);
+            screenshotDir = StelFileMgr::getDataDir().absoluteFilePath(screenshotDirSuffix);
 
 		try
 		{

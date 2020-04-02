@@ -75,7 +75,7 @@ SolarSystemEditor::SolarSystemEditor():
 	//I really hope that the file manager is instantiated before this
 	// GZ new: Not sure whether this should be major or minor here.
 	defaultSolarSystemFilePath	= StelFileMgr::getInstallationDir().absoluteFilePath("ssystem_minor.ini");
-	customSolarSystemFilePath	= StelFileMgr::getDataDir().absoluteFilePath("ssystem_minor.ini");
+	customSolarSystemFilePath	= StelFileMgr::getConfigDir().absoluteFilePath("ssystem_minor.ini");
 	majorSolarSystemFilePath	= StelFileMgr::getInstallationDir().absoluteFilePath("ssystem_major.ini");
 }
 

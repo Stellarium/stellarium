@@ -505,7 +505,7 @@ QSettings* StoredView::getUserViews()
 	if (userViewsFile.isEmpty())
 	{
 		//make sure the new file goes into user dir
-		const auto userViewsFile = StelFileMgr::getDataDir().absoluteFilePath(USERVIEWS_FILE);
+		const auto userViewsFile = StelFileMgr::getConfigDir().absoluteFilePath(USERVIEWS_FILE);
 	}
 
 	if(!StelFileMgr::exists(userViewsFile))

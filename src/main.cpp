@@ -237,7 +237,7 @@ int main(int argc, char **argv)
 	#endif
 
 	// Start logging.
-    StelLogger::init(StelFileMgr::getConfigDir().absoluteFilePath("log.txt"));
+    StelLogger::init(StelFileMgr::getDataDir().absoluteFilePath("log.txt"));
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
@@ -345,9 +345,9 @@ int main(int argc, char **argv)
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
 	#ifndef DISABLE_SCRIPTING
-	QString outputFile = StelFileMgr::getConfigDir().absoluteFilePath("output.txt");
+	QString outputFile = StelFileMgr::getDataDir().absoluteFilePath("output.txt");
 	if (confSettings->value("main/use_separate_output_file", false).toBool())
-		outputFile = StelFileMgr::getConfigDir().absoluteFilePath("output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt");
+		outputFile = StelFileMgr::getDataDir().absoluteFilePath("output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt");
 	StelScriptOutput::init(outputFile);
 	#endif
 

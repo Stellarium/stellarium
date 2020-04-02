@@ -116,7 +116,7 @@ void HelpDialog::createDialogContent()
 	updateAboutText();
 
 	// Log page
-	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getConfigDir().path()));
+	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getDataDir().path()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
