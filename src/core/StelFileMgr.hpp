@@ -257,7 +257,7 @@ private:
     //! Set the installation directory
     static void initInstallDirectory();
 
-    //! Set the installation directory
+    //! Move data from legacy location to XDG compatible directories
     static void migrateLegacyUserDirectory(const QString &_test_legacyUserPath);
 
 #ifdef Q_OS_WIN

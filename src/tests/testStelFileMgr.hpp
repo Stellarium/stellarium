@@ -51,6 +51,7 @@ private slots:
     void testDefaultDataDir();
     void testCustomConfigDir();
     void testCustomDataDir();
+    void testConfigMigration();
 
 private:
 	QTemporaryDir tempDir;
