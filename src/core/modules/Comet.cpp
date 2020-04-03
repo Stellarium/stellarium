@@ -561,7 +561,8 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0.), screenPos)
+	const bool projectionValid=prj->project(Vec3d(0.), screenPos);
+	if (projectionValid
 		&& screenPos[1] > viewport_bottom - screenSz
 		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
 		&& screenPos[0] > viewport_left - screenSz
@@ -581,7 +582,8 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		draw3dModel(core,transfo,static_cast<float>(screenSz));
 	}
 	else
-		return; // End prematurely. This excludes bad comet tail in ortho projection!
+		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))
+			return; // End prematurely. This excludes bad "ghost" comet tail on the wrong hemisphere in ortho projection! Maybe also Fisheye, but it's less problematic.
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
