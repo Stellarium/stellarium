@@ -1091,6 +1091,10 @@ void SkyLine::draw(StelCore *core) const
 							shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
 							extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
 							break;
+						case GALACTICEQUATOR:
+						case SUPERGALACTICEQUATOR:
+							extraTextAngle = 90.f;
+							break;
 						default:
 							extraTextAngle = southernHemi ? -90.f : 90.f;
 							if (southernHemi) shifty*=-0.25f;
