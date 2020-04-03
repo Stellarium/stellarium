@@ -524,7 +524,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
-	conf->setValue("iconic_mode_enabled", true);
+	conf->setValue("iconic_mode_enabled", false);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
