@@ -70,6 +70,7 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
 	Q_PROPERTY(bool startupTimeStop READ getStartupTimeStop WRITE setStartupTimeStop NOTIFY startupTimeStopChanged)
 	Q_PROPERTY(DitheringMode ditheringMode READ getDitheringMode WRITE setDitheringMode NOTIFY ditheringModeChanged)
+	Q_PROPERTY(bool flagClearSky READ getFlagClearSky WRITE setFlagClearSky NOTIFY flagClearSkyChanged)
 
 public:
 	//! @enum FrameType
@@ -865,6 +866,11 @@ public slots:
 	//! Converts magnitude/arcsec² to luminance in cd/m².
 	static float mpsasToLuminance(const float mag) { return 10.8e4f*std::pow(10.f, -0.4f*mag); }
 
+	//! get state of the clear sky flag. For regular use it should be true, while false will overdraw the previous frame
+	bool getFlagClearSky() const {return flagClearSky;}
+	//! set state of the clear sky flag. For regular use it should be true, while false will overdraw the previous frame
+	void setFlagClearSky(const bool state);
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
@@ -922,6 +928,8 @@ signals:
 	void configurationDataSaved();
 	void updateSearchLists();
 	void ditheringModeChanged(DitheringMode mode);
+	//! Emitted when clear sky flag changed.
+	void flagClearSkyChanged(bool state);
 
 	//! Called just after algorithm/theory for ephemeris is changed in the GUI
 	void ephemAlgorithmChanged();
@@ -1038,7 +1046,7 @@ private:
 	
 	// Variables for caching the observer position relative to the star catalog reference frame
 	static Vec3d cachedParallaxDiff;
-    static double cachedParallaxJD; // Cached Julian Date
+	static double cachedParallaxJD; // Cached Julian Date
 	static PlanetP cachedParallaxPlanet;
 	Vec3d calculateParallaxDiff(double JD) const; // Actual calculation
 
@@ -1047,5 +1055,7 @@ private:
 	static double cachedAberrationJD;
 	static PlanetP cachedAberrationPlanet;
 	Vec3d calculateAberrationVec(double JD) const; // Actual calculation
+
+	bool flagClearSky; // Keep this true unless you want to render star streaks.
 };
 #endif // STELCORE_HPP
