@@ -144,8 +144,8 @@ void Satellites::init()
 
 		// key bindings and other actions		
 		QString satGroup = N_("Satellites");
-		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
-		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Alt+Shift+Z");
+		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "flagHintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
@@ -217,8 +217,8 @@ void Satellites::init()
 
 void Satellites::updateSatellitesVisibility()
 {
-	if (getFlagHints())
-		setFlagHints(false);
+	if (getFlagHintsVisible())
+		setFlagHintsVisible(false);
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -524,7 +524,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
-	conf->setValue("realistic_mode_enabled", true);
+	conf->setValue("iconic_mode_enabled", true);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -670,9 +670,9 @@ void Satellites::loadSettings()
 	
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
-	// last update default is the first Towell Day.  <3 DA
+	// last update default is the first Towel Day.  <3 DA
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
-	setFlagHints(conf->value("show_satellite_hints", true).toBool());
+	setFlagHintsVisible(conf->value("show_satellite_hints", true).toBool());
 	Satellite::showLabels = conf->value("show_satellite_labels", false).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
@@ -692,9 +692,9 @@ void Satellites::loadSettings()
 
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 
-	// realistic mode
-	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
-	setFlagHideInvisibleSatellites(conf->value("hide_invisible_satellites", false).toBool());
+	// iconic mode
+	setFlagIconicMode(conf->value("iconic_mode_enabled", true).toBool());
+	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
 
 	conf->endGroup();
 }
@@ -706,7 +706,7 @@ void Satellites::saveSettingsToConfig()
 
 	// updater related settings...
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
-	conf->setValue("show_satellite_hints", getFlagHints());
+	conf->setValue("show_satellite_hints", getFlagHintsVisible());
 	conf->setValue("show_satellite_labels", Satellite::showLabels);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("auto_add_enabled", autoAddEnabled);
@@ -722,9 +722,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
 
-	// realistic mode
-	conf->setValue("realistic_mode_enabled", getFlagRealisticMode());
-	conf->setValue("hide_invisible_satellites", getFlagHideInvisibleSatellites());
+	// iconic mode
+	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
+	conf->setValue("hide_invisible_satellites", getFlagHideInvisible());
 
 	conf->endGroup();
 	
@@ -1123,83 +1123,88 @@ void Satellites::saveTleSources(const QStringList& urls)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabels() const
+bool Satellites::getFlagLabelsVisible() const
 {
 	return Satellite::showLabels;
 }
 
-void Satellites::enableInternetUpdates(bool enabled)
+void Satellites::setUpdatesEnabled(bool enabled)
 {
 	if (enabled != updatesEnabled)
 	{
 		updatesEnabled = enabled;
 		emit settingsChanged();
+		emit updatesEnabledChanged(enabled);
 	}
 }
 
-void Satellites::enableAutoAdd(bool enabled)
+void Satellites::setAutoAddEnabled(bool enabled)
 {
 	if (autoAddEnabled != enabled)
 	{
 		autoAddEnabled = enabled;
+		emit autoAddEnabledChanged(enabled);
 		emit settingsChanged();
 	}
 }
 
-void Satellites::enableAutoRemove(bool enabled)
+void Satellites::setAutoRemoveEnabled(bool enabled)
 {
 	if (autoRemoveEnabled != enabled)
 	{
 		autoRemoveEnabled = enabled;
+		emit autoRemoveEnabledChanged(enabled);
 		emit settingsChanged();
 	}
 }
 
-bool Satellites::getFlagRealisticMode() const
+bool Satellites::getFlagIconicMode() const
 {
-	return Satellite::realisticModeFlag;
+	return Satellite::iconicModeFlag;
 }
 
-bool Satellites::getFlagHideInvisibleSatellites() const
+bool Satellites::getFlagHideInvisible() const
 {
 	return Satellite::hideInvisibleSatellitesFlag;
 }
 
-void Satellites::setFlagRelisticMode(bool b)
+void Satellites::setFlagIconicMode(bool b)
 {
-	if (Satellite::realisticModeFlag != b)
+	if (Satellite::iconicModeFlag != b)
 	{
-		Satellite::realisticModeFlag = b;
+		Satellite::iconicModeFlag = b;
 		emit settingsChanged();
+		emit flagIconicModeChanged(b);
 	}
 }
 
-void Satellites::setFlagHideInvisibleSatellites(bool b)
+void Satellites::setFlagHideInvisible(bool b)
 {
 	if (Satellite::hideInvisibleSatellitesFlag != b)
 	{
 		Satellite::hideInvisibleSatellitesFlag = b;
 		emit settingsChanged();
+		emit flagHideInvisibleChanged(b);
 	}
 }
 
-void Satellites::setFlagHints(bool b)
+void Satellites::setFlagHintsVisible(bool b)
 {
 	if (hintFader != b)
 	{
 		hintFader = b;
 		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
-		emit hintsVisibleChanged(b);
+		emit flagHintsVisibleChanged(b);
 	}
 }
 
-void Satellites::setFlagLabels(bool b)
+void Satellites::setFlagLabelsVisible(bool b)
 {
 	if (Satellite::showLabels != b)
 	{
 		Satellite::showLabels = b;
 		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
-		emit labelsVisibleChanged(b);
+		emit flagLabelsVisibleChanged(b);
 	}
 }
 
@@ -1208,7 +1213,38 @@ void Satellites::setLabelFontSize(int size)
 	if (labelFont.pixelSize() != size)
 	{
 		labelFont.setPixelSize(size);
+		emit labelFontSizeChanged(size);
 		emit settingsChanged();
+	}
+}
+
+void Satellites::setOrbitLineSegments(int s)
+{
+	if (s != Satellite::orbitLineSegments)
+	{
+		Satellite::orbitLineSegments=s;
+		emit orbitLineSegmentsChanged(s);
+		recalculateOrbitLines();
+	}
+}
+
+void Satellites::setOrbitLineFadeSegments(int s)
+{
+	if (s != Satellite::orbitLineFadeSegments)
+	{
+		Satellite::orbitLineFadeSegments=s;
+		emit orbitLineFadeSegmentsChanged(s);
+		recalculateOrbitLines();
+	}
+}
+
+void Satellites::setOrbitLineSegmentDuration(int s)
+{
+	if (s != Satellite::orbitLineSegmentDuration)
+	{
+		Satellite::orbitLineSegmentDuration=s;
+		emit orbitLineSegmentDurationChanged(s);
+		recalculateOrbitLines();
 	}
 }
 
@@ -1217,6 +1253,7 @@ void Satellites::setUpdateFrequencyHours(int hours)
 	if (updateFrequencyHours != hours)
 	{
 		updateFrequencyHours = hours;
+		emit updateFrequencyHoursChanged(hours);
 		emit settingsChanged();
 	}
 }

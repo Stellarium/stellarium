@@ -62,7 +62,7 @@ int Satellite::orbitLineSegments = 90;
 int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
-bool Satellite::realisticModeFlag = false;
+bool Satellite::iconicModeFlag = true;
 bool Satellite::hideInvisibleSatellitesFlag = false;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
@@ -184,10 +184,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	orbitValid = true;
 	initialized = true;
-	if (name=="ISS" || name=="ISS (ZARYA)")
-		isISS = true;
-	else
-		isISS = false;
+	isISS = (name=="ISS" || name=="ISS (ZARYA)");
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
@@ -375,16 +372,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
 
-		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-		QString pha;
-		if (withDecimalDegree)
-		{
-			pha = StelUtils::radToDecDegStr(phaseAngle,4,false,true);
-		}
-		else
-		{
-			pha = StelUtils::radToDmsStr(phaseAngle, true);
-		}
+		QString pha = StelApp::getInstance().getFlagShowDecimalDegrees() ?
+				StelUtils::radToDecDegStr(phaseAngle,4,false,true) :
+				StelUtils::radToDmsStr(phaseAngle, true);
 		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
 
 		if (sunReflAngle>0)
@@ -414,10 +404,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (!groupList.isEmpty())
 		{
-			QString group = q_("Group");
-			if (groups.count()>1)
-				group = q_("Groups");
-
+			QString group = groups.count()>1 ? q_("Group") : q_("Groups");
 			oss << QString("%1: %2").arg(group, groupList.join(", ")) << "<br />";
 		}
 
@@ -584,7 +571,6 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-
 Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
 {
 	// Bugfix LP:1654331. I assume the elAzPosition has been computed without refraction! We must say this definitely.
@@ -600,13 +586,13 @@ float Satellite::getVMagnitude(const StelCore* core) const
 {	
 	Q_UNUSED(core);
 	float vmag = 7.f; // Optimistic value of magnitude for artificial satellite without data for standard magnitude
-	if (!realisticModeFlag)
+	if (iconicModeFlag)
 		vmag = 5.0;
 
-	if (realisticModeFlag && visibility != gSatWrapper::VISIBLE)
+	if (!iconicModeFlag && visibility != gSatWrapper::VISIBLE)
 		vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 
-	if (stdMag!=99.f)
+	if (stdMag!=99.)
 	{
 		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
@@ -785,36 +771,16 @@ float Satellite::calculateIlluminatedFraction() const
 
 QString Satellite::getOperationalStatus() const
 {
-	QString statusStr = qc_("unknown", "operational status");
-	switch (status)
-	{
-		case StatusOperational:
-			statusStr = qc_("operational", "operational status");
-			break;
-		case StatusNonoperational:
-			statusStr = qc_("nonoperational", "operational status");
-			break;
-		case StatusPartiallyOperational:
-			statusStr = qc_("partially operational", "operational status");
-			break;
-		case StatusStandby:
-			statusStr = qc_("standby", "operational status");
-			break;
-		case StatusSpare:
-			statusStr = qc_("spare", "operational status");
-			break;
-		case StatusExtendedMission:
-			statusStr = qc_("extended mission", "operational status");
-			break;
-		case StatusDecayed:
-			statusStr = qc_("decayed", "operational status");
-			break;
-		default:
-			statusStr = qc_("unknown", "operational status");
-			break;
-	}
-
-	return statusStr;
+	const QMap<int,QString>map={
+		{ StatusOperational,          qc_("operational", "operational status")},
+		{ StatusNonoperational,       qc_("nonoperational", "operational status")},
+		{ StatusPartiallyOperational, qc_("partially operational", "operational status")},
+		{ StatusStandby,              qc_("standby", "operational status")},
+		{ StatusSpare,                qc_("spare", "operational status")},
+		{ StatusExtendedMission,      qc_("extended mission", "operational status")},
+		{ StatusDecayed,              qc_("decayed", "operational status")},
+	};
+	return map.value(status,              qc_("unknown", "operational status"));
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -883,10 +849,7 @@ void Satellite::update(double)
 
 double Satellite::getDoppler(double freq) const
 {
-	double result;
-	double f = freq * 1000000;
-	result = -f*((rangeRate*1000.0)/SPEED_OF_LIGHT);
-	return result/1000000;
+	return  -freq*((rangeRate*1000.0)/SPEED_OF_LIGHT);
 }
 
 void Satellite::recalculateOrbitLines(void)
@@ -957,10 +920,7 @@ bool Satellite::operator <(const Satellite& another) const
 		return false;
 	
 	// If the names are the same, compare IDs, i.e. NORAD numbers.
-	if (id < another.id)
-		return true;
-	else
-		return false;
+	return (id < another.id);
 }
 
 void Satellite::draw(StelCore* core, StelPainter& painter)
@@ -981,9 +941,9 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
-		if (realisticModeFlag)
+		if (!iconicModeFlag)
 		{
-			float mag = getVMagnitude(core);
+			const float mag = getVMagnitude(core);
 			StelSkyDrawer* sd = core->getSkyDrawer();
 
 			RCMag rcMag;
@@ -997,7 +957,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (mag <= sd->getLimitMagnitude())
 			{
 				sd->computeRCMag(mag, &rcMag);
-				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
+				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color*hintBrightness, true);
 			}
 			sd->postDrawPointSource(&painter);
 
@@ -1005,10 +965,10 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (visibility != gSatWrapper::VISIBLE)
 			{
 				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);				
+				painter.setColor(invisibleSatelliteColor, hintBrightness);
 			}
 			else
-				painter.setColor(color[0], color[1], color[2], 1.f);
+				painter.setColor(color, hintBrightness);
 
 			// Draw the label of the satellite when it enabled
 			if (txtMag <= sd->getLimitMagnitude() && showLabels)
@@ -1017,8 +977,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			// Special case: crossing of the ISS of the Moon or the Sun
 			if (isISS && screenSizeISS>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core)))
 			{
-				Vec3f issColor = Vec3f(0.f,0.f,0.f);
-				painter.setColor(issColor[0], issColor[1], issColor[2], 1.f);
+				painter.setColor(0.f,0.f,0.f,1.f);
 				painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 				hintTexture->bind(); // NOTE: Should we use real ISS texture here?
 				painter.drawSprite2dMode(XYZ, qMin(screenSizeISS, 15));
@@ -1026,14 +985,12 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 		else
 		{
-			bool visible = true;
-			if (hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE)
-				visible = false;
+			const bool visible = (hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? false : true;
 
 			if (visible)
 			{
 				Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
-				painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
+				painter.setColor(drawColor*hintBrightness, hintBrightness);
 
 				if (showLabels)
 					painter.drawText(XYZ, name, 0, 10, 10, false);
@@ -1079,8 +1036,6 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
 }
 
-
-
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
 	int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
@@ -1103,7 +1058,6 @@ void Satellite::computeOrbitPoints()
 	gTime lastEpochComp(lastEpochCompForOrbit);
 	Vec3d elAzVector;
 	int diffSlots;
-
 
 	if (orbitPoints.isEmpty())//Setup orbitPoins
 	{
@@ -1183,7 +1137,6 @@ void Satellite::computeOrbitPoints()
 		}
 	}
 }
-
 
 bool operator <(const SatelliteP& left, const SatelliteP& right)
 {

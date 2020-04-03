@@ -106,14 +106,11 @@ private slots:
 	void handleGroupChanges(QListWidgetItem* item);
 	//! Display, select and start tracking the double clicked satellite.
 	void trackSatellite(const QModelIndex & index);
-	void setOrbitParams(void);
 	void updateTLEs(void);
 
 	void predictIridiumFlares();
 	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
 	void savePredictedIridiumFlares();
-
-	void setFlagRealisticMode(bool state);
 
 	void searchSatellitesClear();
 
@@ -124,7 +121,6 @@ private slots:
 
 	// change description text
 	void descriptionTextChanged();
-
 
 private:
 	//! @todo find out if this is really necessary... --BM
