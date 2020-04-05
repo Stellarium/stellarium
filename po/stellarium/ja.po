@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-02 00:02+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 通りすがり <tmhrozw@gmail.com>, 2020\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -135,11 +135,11 @@ msgstr "恒星名"
 
 #: src/core/modules/StarMgr.cpp:464
 msgid "Increase the magnitude limit for stars"
-msgstr "星の等級の限界を上げる"
+msgstr "恒星の限界等級を上げる"
 
 #: src/core/modules/StarMgr.cpp:465
 msgid "Reduce the magnitude limit for stars"
-msgstr "星の等級の限界を下げる"
+msgstr "恒星の限界等級を下げる"
 
 #: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3283
 msgid "Meridian"
@@ -2170,75 +2170,75 @@ msgstr "HiPS(実験中)"
 
 #: src/core/StelApp.cpp:422
 msgid "Initializing textures..."
-msgstr "テクスチャデータを読み込み中"
+msgstr "テクスチャデータを読み込み中..."
 
 #: src/core/StelApp.cpp:426
 msgid "Initializing network access..."
-msgstr "ネットワークアクセスの初期化中"
+msgstr "ネットワークアクセスの初期化中..."
 
 #: src/core/StelApp.cpp:431
 msgid "Initializing network disk cache..."
-msgstr "ネットワークディスクキャッシュの初期化中"
+msgstr "ネットワークディスクキャッシュの初期化中..."
 
 #: src/core/StelApp.cpp:445
 msgid "Initializing network proxy..."
-msgstr "ネットワークプロクシの初期化中"
+msgstr "ネットワークプロクシの初期化中..."
 
 #: src/core/StelApp.cpp:461
 msgid "Initializing Object Database..."
-msgstr "天体のデータベースを読み込み中"
+msgstr "天体のデータベースを読み込み中..."
 
 #: src/core/StelApp.cpp:466
 msgid "Initializing locales..."
-msgstr "言語データを読み込み中"
+msgstr "言語データを読み込み中..."
 
 #: src/core/StelApp.cpp:470
 msgid "Initializing HiPS survey..."
-msgstr "HiPS調査データを読み込み中"
+msgstr "HiPS調査データを読み込み中..."
 
 #: src/core/StelApp.cpp:476
 msgid "Initializing Solar System objects..."
-msgstr "太陽系天体のデータを読み込み中"
+msgstr "太陽系天体のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:482
 msgid "Initializing planetary nomenclature..."
-msgstr "惑星命名法のデータを読み込み中"
+msgstr "惑星命名法のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:488
 msgid "Initializing stars..."
-msgstr "恒星データを読み込み中"
+msgstr "恒星データを読み込み中..."
 
 #: src/core/StelApp.cpp:493
 msgid "Initializing core..."
-msgstr "中心部のデータを読み込み中"
+msgstr "中心部のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:497
 msgid "Initializing deep-sky objects..."
-msgstr "深宇宙天体のデータを読み込み中"
+msgstr "深宇宙天体のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:503
 msgid "Initializing Milky Way..."
-msgstr "天の川のデータを読み込み中"
+msgstr "天の川のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:509
 msgid "Initializing zodiacal light..."
-msgstr "黄道光のデータを読み込み中"
+msgstr "黄道光のデータを読み込み中..."
 
 #: src/core/StelApp.cpp:515
 msgid "Initializing sky image layer..."
-msgstr "空の画像レイヤーを読み込み中"
+msgstr "空の画像レイヤーを読み込み中..."
 
 #: src/core/StelApp.cpp:521
 msgid "Initializing TOAST surveys..."
-msgstr "TOAST調査データを読み込み中"
+msgstr "TOAST調査データを読み込み中..."
 
 #: src/core/StelApp.cpp:527
 msgid "Initializing audio..."
-msgstr "オーディオデータを読み込み中"
+msgstr "オーディオデータを読み込み中..."
 
 #: src/core/StelApp.cpp:531
 msgid "Initializing video..."
-msgstr "ビデオデータを読み込み中"
+msgstr "ビデオデータを読み込み中..."
 
 #: src/core/StelApp.cpp:537
 msgid "Initializing constellations..."
@@ -2246,47 +2246,47 @@ msgstr "星座データを読み込み中"
 
 #: src/core/StelApp.cpp:543
 msgid "Initializing asterisms..."
-msgstr "星群データを読み込み中"
+msgstr "星群データを読み込み中..."
 
 #: src/core/StelApp.cpp:549
 msgid "Initializing landscape..."
-msgstr "風景画像を読み込み中"
+msgstr "風景画像を読み込み中..."
 
 #: src/core/StelApp.cpp:554
 msgid "Initializing grid lines..."
-msgstr "グリッド線を読み込み中"
+msgstr "グリッド線を読み込み中..."
 
 #: src/core/StelApp.cpp:560
 msgid "Initializing sporadic meteors..."
-msgstr "散在流星データを読み込み中"
+msgstr "散在流星データを読み込み中..."
 
 #: src/core/StelApp.cpp:566
 msgid "Initializing user labels..."
-msgstr "ユーザー名を読み込み中"
+msgstr "ユーザー名を読み込み中..."
 
 #: src/core/StelApp.cpp:571
 msgid "Initializing sky cultures..."
-msgstr "星の文化データを読み込み中"
+msgstr "星の文化データを読み込み中..."
 
 #: src/core/StelApp.cpp:575
 msgid "Initializing user markers..."
-msgstr "ユーザーマーカーのデータを読み込み中"
+msgstr "ユーザーマーカーのデータを読み込み中..."
 
 #: src/core/StelApp.cpp:581
 msgid "Initializing custom objects..."
-msgstr "カスタムオブジェクトデータを読み込み中"
+msgstr "カスタムオブジェクトデータを読み込み中..."
 
 #: src/core/StelApp.cpp:587
 msgid "Initializing highlights..."
-msgstr "ハイライトしたデータを読み込み中"
+msgstr "ハイライトしたデータを読み込み中..."
 
 #: src/core/StelApp.cpp:595
 msgid "Initializing scripting..."
-msgstr "スクリプトのデータを読み込み中"
+msgstr "スクリプトのデータを読み込み中..."
 
 #: src/core/StelApp.cpp:600
 msgid "Initializing color scheme..."
-msgstr "配色データの読み込み中"
+msgstr "配色データの読み込み中..."
 
 #: src/core/StelApp.cpp:612
 msgid "Night mode"
@@ -2294,7 +2294,7 @@ msgstr "夜間照明"
 
 #: src/core/StelApp.cpp:637
 msgid "Initializing SPOUT sender..."
-msgstr "SPOUT senderを読み込み中"
+msgstr "SPOUT senderを読み込み中..."
 
 #: src/core/StelApp.cpp:647
 msgid "Cannot create Spout sender. See log for details."
@@ -2552,7 +2552,7 @@ msgstr "上下の切り替え"
 
 #: src/core/StelCore.cpp:2266
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "補正は無効です。何をするか判っている場合にのみ使用してください！"
 
 #: src/core/StelCore.cpp:2269
 #, qt-format
@@ -2561,13 +2561,15 @@ msgid ""
 " Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"この歴史的な式は1931年にC.ショックが得た式で、G. "
+"ヘンリクソンの論文「古代の日食によって確認されたアインシュタインの相対性理論」(%1年)で使用されました。詳細は%2ここ%3を見て下さい。"
 
 #: src/core/StelCore.cpp:2272
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
-msgstr ""
+msgstr "この経験式はG.M.クレメンスの論文「天文定数の体系について」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2275
 #, qt-format
@@ -2577,6 +2579,8 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"この式は、スペンサー・ジョーンズ(%1年)による1650年以降の太陽、月、惑星の観測の研究に基づいています。ジャン・メウスの『電卓による天文計算』に使用されました。またパソコンソフト\"SunTracker"
+" Pro\"に採用されました。"
 
 #: src/core/StelCore.cpp:2279
 msgid ""
@@ -2584,6 +2588,7 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
 " Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"これは国際天文学連合(1952年)の式をわずかに修正したバージョンで、『天体暦』やマッケ＆ミース(1983年)の『日食の規範』に採用されました。"
 
 #: src/core/StelCore.cpp:2283
 msgid ""
@@ -2592,6 +2597,7 @@ msgid ""
 "same relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"タッカーマン(1962年、1964年)の表は、紀元前601年から紀元1649年までの5日と10日間隔での太陽、月、惑星の位置を示しています。ゴールドスタイン(1973年)の朔望表でも同様の関係が暗黙のうちに採用されました。"
 
 #: src/core/StelCore.cpp:2287
 #, qt-format
@@ -2599,14 +2605,14 @@ msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
-msgstr ""
+msgstr "この方程式は、P.M.ミュラーとF.R.スティーブンソンの論文「初期の天体観測による地球と月の加速」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2290
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
-msgstr ""
+msgstr "この方程式は、F.R.スティーブンソンの論文「望遠鏡登場前の天体観測」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2293
 #, qt-format
@@ -2616,6 +2622,9 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"この12次多項式はブラウワー(1952年)の公開データに合わせ、L.D.シュマデル & "
+"G.ゼックの論文「1800年から1975年の期間における多項式近似によるΔT(歴表時-"
+"世界時)の補正」(%1年)で公開されました。式は1988年にシュマデル & ゼックにより更新されました。"
 
 #: src/core/StelCore.cpp:2296
 msgid ""
@@ -2623,6 +2632,8 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"このアルゴリズムはP.ブレタニョン & "
+"L.サイモンの『-4000年から+2800年までの惑星計算と惑星表』(1986年)とパソコンのプラネタリウムソフト\"RedShift\"に採用されました。"
 
 #: src/core/StelCore.cpp:2299
 #, qt-format
@@ -2631,10 +2642,12 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"この式はF. R. スティーブンソン & L.V.モリソンの論文「地球回転の長期的変化 - "
+"紀元前700年から西暦1980年まで」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2302
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "このアルゴリズムはパソコンのプラネタリウムソフト\"Guide 7\"で使用されています。"
 
 #: src/core/StelCore.cpp:2305
 msgid ""
@@ -2642,13 +2655,15 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"このアルゴリズムはF. エスペナクの『日食50年の規範:1986年 - 2035年』(1987年)と『月食50年の規範:1986年 - "
+"2035年』(1989年)が出典です。"
 
 #: src/core/StelCore.cpp:2308
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
-msgstr ""
+msgstr "この式はK.M. ボルコウスキー(%1年)により、紀元前2137年から紀元1715年の31個の日食の記録を解析して得られました。"
 
 #: src/core/StelCore.cpp:2311
 #, qt-format
@@ -2658,6 +2673,9 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"この12次多項式はL.D.シュマデル & "
+"G.ゼックの論文「1800年から1988年の期間における世界時から歴表時への経験的変換」(%1年)で公開されました。データはスティーブンソン & "
+"モリソン(1984年)の値に合わせています。"
 
 #: src/core/StelCore.cpp:2314
 msgid ""
@@ -2665,6 +2683,8 @@ msgid ""
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"この式はM.シャプロント・トウゼ & J. "
+"シャプロントの『紀元前4000年から西暦8000年までの月の表とプログラム』(1991年)においてELP2000-85の月理論の短縮版として採用されました。"
 
 #: src/core/StelCore.cpp:2317
 #, qt-format
@@ -2673,13 +2693,14 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"この方程式はF.R.スティーブンソン & L.V.モリソンの論文「地球自転の長期変動:紀元前700年から西暦1990年」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2320
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
-msgstr ""
+msgstr "F. R. スティーブンソンはこの公式を著作『歴史的な日食と地球の自転』(%1年)で公開しました。"
 
 #: src/core/StelCore.cpp:2323
 msgid ""
@@ -2687,20 +2708,23 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"J. "
+"メウスによる『天文計算のアルゴリズム』(第2版、1998年)で広く使用されています。1620年から2000年までの表とシャプロント、シャプロント・トウゼ"
+" & フランコウ(1997年)の更新によるそれ以外の期間の表も含まれます。"
 
 #: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
-msgstr ""
+msgstr "NASAジェット推進研究所の太陽系力学グループが彼らの対話式ウェブサイト%1JPL ホライズンズ%2で使用しています。"
 
 #: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
-msgstr ""
+msgstr "この多項式はJ.メウス &  L.サイモンの論文「ΔTの多項式近似、西暦1620年から2000年」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2332
 msgid ""
@@ -2708,6 +2732,7 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
 " for the recent past."
 msgstr ""
+"O.モンテンブルック & T.プフレガーの『パソコンの天文学』(第4版、2000年)は直近の過去に適合する単純な3次多項式データを提供します。"
 
 #: src/core/StelCore.cpp:2335
 msgid ""
@@ -2716,6 +2741,7 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E.M.レインゴールド＆N.デルショヴィッツが『暦の計算』(第4版、2018年)と『カレンダーの作成』(2002年)でこの多項式データを提示します。データはジャン・メウスの『天文計算のアルゴリズム』(1991年)に基づいています。"
 
 #: src/core/StelCore.cpp:2338
 #, qt-format
@@ -2724,6 +2750,8 @@ msgid ""
 " in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"この重要な解はL.V.モリソン & "
+"F.R.スティーブンソンの論文「地球時計の誤差%1Tの歴史的な値と食の計算」(%2年)とその補遺(%3)で公開されました。"
 
 #: src/core/StelCore.cpp:2341
 #, qt-format
@@ -2733,6 +2761,8 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"スティーブンソン & モリソン(%2年)によって決定した1日の長さ(Length of "
+"Day,LOD)から、ビクター・レイスは余弦関数と二乗関数を使用したシンプレックス法による最適化を用いて、%1Tの式を導きました。これはスティーブンソン(%2年)によって記述された可能な周期に基づいています。詳細は%3こちら%4にあります。"
 
 #: src/core/StelCore.cpp:2344 src/core/StelCore.cpp:2347
 #, qt-format
@@ -2743,14 +2773,16 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the"
 " solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"この解はモリソン & スティーブンソン(2004年)を基にしてF.エスペナック & "
+"J.メウスの論文「日食の規範5000年:-1900年から+3000年」(2006年)で公開されました。1600年から2000年までの表形式の値による多項式近似です。%1NASAの日食サイト%2で使われ、太陽、月、惑星暦のプログラム\"SOLEX\"でも使用されました。"
 
 #: src/core/StelCore.cpp:2344
 msgid "Used by default."
-msgstr "既定値として使用中"
+msgstr "既定値として使用中。"
 
 #: src/core/StelCore.cpp:2347
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr ""
+msgstr "<b>パッチを当てたバージョンで月の加速は考慮していません</b>。"
 
 #: src/core/StelCore.cpp:2350
 #, qt-format
@@ -2759,6 +2791,7 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"この解はスティーブンソン & モリソン(1984年)を基にしており、B.バンジェビッチの論文「古代の食とバビロン崩壊の日付」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2353
 #, qt-format
@@ -2767,6 +2800,8 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial"
 " Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"この解はメウス & サイモンズ(2000年)を基にしており、 S.イスラム, M.サディク & "
+"M.S.クレシの論文「ΔTの多項式近似の誤差最小化」(%1年)で公開されました。また2013年にサナ・イスラムが再考察しました。"
 
 #: src/core/StelCore.cpp:2356
 #, qt-format
@@ -2775,6 +2810,8 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"この多項式近似は0.6秒の精度を持ち、M.ハリド、マリアム・スルタナ & ファヒーム・ザイディの論文「ΔT: "
+"1620年から2013年の期間の多項式近似」(%1)で公開されました。"
 
 #: src/core/StelCore.cpp:2359
 #, qt-format
@@ -2784,6 +2821,8 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"この解は、F.R.スティーブンソン、L.V.モリソン & C.Y.ホーエンケルク(2016年)の論文「地球自転の測定 : "
+"紀元前720年から西暦2015年まで」(%1年)で公開されました。有功範囲外ではスプライン補完モデルによる近似放物線から値が得られます。"
 
 #: src/core/StelCore.cpp:2362
 #, qt-format
@@ -2792,13 +2831,14 @@ msgid ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
+"この解はC.ショックの公式(1931年)を基にしており、G.ヘンリクソンの論文「月と宇宙の加速 - 重力子の質量」(%1年)で公開されました。"
 
 #: src/core/StelCore.cpp:2365
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
-msgstr ""
+msgstr "これはユーザーが係数を定義して%1Tを計算する2次式です。"
 
 #: src/core/StelCore.cpp:2368 src/core/SimbadSearcher.cpp:173
 msgid "Error"
@@ -2809,39 +2849,39 @@ msgstr "エラー"
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
-msgstr ""
+msgstr "%2(月の永年加速)に対する解が%1の場合は調整が必要です。詳細はガイドを見てください。"
 
 #: src/core/StelCore.cpp:2419
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "有効範囲外の値は0です"
 
 #: src/core/StelCore.cpp:2422
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "典型的には1秒の正確性があり、有効範囲外の値は0です"
 
 #: src/core/StelCore.cpp:2425
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
-msgstr ""
+msgstr "平均の誤差は1秒未満で最大は1.9秒、有効範囲外でもStellariumの限界の年まで値があります"
 
 #: src/core/StelCore.cpp:2432
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "有効範囲外でもStellariumの限界の年まで値があります"
 
 #: src/core/StelCore.cpp:2442
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr "有効範囲は%1年からと%2,%3年の間です。"
+msgstr "有効範囲は%1年から%2年で、%3。"
 
 #: src/core/StelCore.cpp:2444
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr "有効範囲は%1年から%2年の間です。"
+msgstr "有効範囲は%1年から%2年です。"
 
 #: src/core/StelProjector.cpp:134
 msgid "Maximum FOV: "
-msgstr "最大視野: "
+msgstr "最大視野角: "
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
@@ -3254,15 +3294,51 @@ msgid "Field of View"
 msgstr "視野角のショートカット"
 
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to"
-msgstr "視野角のショートカットの設定"
+msgid "Set FOV to 180°"
+msgstr "視野角180°"
 
-#: src/core/StelMovementMgr.cpp:239
+#: src/core/StelMovementMgr.cpp:212
+msgid "Set FOV to 90°"
+msgstr "視野角90°"
+
+#: src/core/StelMovementMgr.cpp:213
+msgid "Set FOV to 60°"
+msgstr "視野角60°"
+
+#: src/core/StelMovementMgr.cpp:214
+msgid "Set FOV to 45°"
+msgstr "視野角45°"
+
+#: src/core/StelMovementMgr.cpp:215
+msgid "Set FOV to 20°"
+msgstr "視野角20°"
+
+#: src/core/StelMovementMgr.cpp:216
+msgid "Set FOV to 10°"
+msgstr "視野角10°"
+
+#: src/core/StelMovementMgr.cpp:217
+msgid "Set FOV to 5°"
+msgstr "視野角5°"
+
+#: src/core/StelMovementMgr.cpp:218
+msgid "Set FOV to 2°"
+msgstr "視野角2°"
+
+#: src/core/StelMovementMgr.cpp:219
+msgid "Set FOV to 1°"
+msgstr "視野角1°"
+
+#: src/core/StelMovementMgr.cpp:220
+msgid "Set FOV to 0.5°"
+msgstr "視野角0.5°"
+
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "赤道儀"
 
-#: src/core/StelMovementMgr.cpp:241
+#: src/core/StelMovementMgr.cpp:240
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "経緯台"
@@ -3302,37 +3378,37 @@ msgstr "地方真太陽時"
 #: src/core/StelLocaleMgr.cpp:473
 msgctxt "short day name"
 msgid "Sun"
-msgstr "(日)"
+msgstr "日曜"
 
 #: src/core/StelLocaleMgr.cpp:474
 msgctxt "short day name"
 msgid "Mon"
-msgstr "(月)"
+msgstr "月曜"
 
 #: src/core/StelLocaleMgr.cpp:475
 msgctxt "short day name"
 msgid "Tue"
-msgstr "(火)"
+msgstr "火曜"
 
 #: src/core/StelLocaleMgr.cpp:476
 msgctxt "short day name"
 msgid "Wed"
-msgstr "(水)"
+msgstr "水曜"
 
 #: src/core/StelLocaleMgr.cpp:477
 msgctxt "short day name"
 msgid "Thu"
-msgstr "(木)"
+msgstr "木曜"
 
 #: src/core/StelLocaleMgr.cpp:478
 msgctxt "short day name"
 msgid "Fri"
-msgstr "(金)"
+msgstr "金曜"
 
 #: src/core/StelLocaleMgr.cpp:479
 msgctxt "short day name"
 msgid "Sat"
-msgstr "(土)"
+msgstr "土曜"
 
 #: src/core/StelLocaleMgr.cpp:482
 msgctxt "long day name"
@@ -3787,7 +3863,7 @@ msgstr "メーウス（1998）（シャプロント、シャプロントトゥ�
 
 #: src/gui/ConfigurationDialog.cpp:1613
 msgid "JPL Horizons"
-msgstr "JPL ホライゾンズ"
+msgstr "JPL ホライズンズ"
 
 #: src/gui/ConfigurationDialog.cpp:1614
 msgid "Meeus & Simons (2000)"
@@ -3799,48 +3875,48 @@ msgstr "モリソン、スティーブンソン（2004, 2005）"
 
 #: src/gui/ConfigurationDialog.cpp:1616
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "スティーブンソン、モリソン、ホーエンケルク (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1618
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "エスペナック、メウス (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1621
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "エスペナック、メウス (2006) 特別な月の加速無し"
 
 #: src/gui/ConfigurationDialog.cpp:1623
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "レイス (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1624
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "バンジェビッチ (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1625
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "モンテンブルック、プフレガー (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1626
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
-msgstr ""
+msgstr "レインゴールド、デルショヴィッツ (2002, 2007, 2018)"
 
 #: src/gui/ConfigurationDialog.cpp:1627
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "イスラム、サディク、クレシ (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1628
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "ハリド、スルタナ、ザイディ (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1629
 msgid "Henriksson (2017)"
-msgstr ""
+msgstr "ヘンリクソン (2017)"
 
 #: src/gui/ConfigurationDialog.cpp:1630
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "ユーザー定義の%1T計算式"
 
 #: src/gui/ConfigurationDialog.cpp:1678 src/gui/ConfigurationDialog.cpp:1715
 #: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:469
@@ -4060,22 +4136,22 @@ msgstr "以下のリンクは外部のウェブサイトであり、ウェブブ
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:334
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Frequently Asked Questions} Stellarium に関する質問と回答"
+msgstr "{Frequently Asked Questions} Stellarium に関する質問と回答。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:339
 msgid "{The Stellarium Wiki} - general information."
-msgstr "{The Stellarium Wiki} - 一般的な情報"
+msgstr "{The Stellarium Wiki} - 一般的な情報。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:344
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
-msgstr "{The landscapes} - ユーザーの作成した風景画像"
+msgstr "{The landscapes} - ユーザーの作成した風景画像。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:349
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
-msgstr "{The scripts} - ユーザーの作成した公式スクリプト"
+msgstr "{The scripts} - ユーザーの作成した公式スクリプト。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:354
@@ -4150,7 +4226,7 @@ msgstr "継続的な調整・統合者: %1"
 #: src/gui/HelpDialog.cpp:449
 #, qt-format
 msgid "Tester: %1"
-msgstr "テスト者: %1"
+msgstr "テスター: %1"
 
 #: src/gui/HelpDialog.cpp:450
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
@@ -4180,83 +4256,83 @@ msgstr "ウィンドウ"
 msgid "Quit"
 msgstr "終了"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Speed up the script execution rate"
 msgstr "スクリプトの実行速度を速める"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Slow down the script execution rate"
 msgstr "スクリプトの実行速度を遅くする"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Set the normal script execution rate"
 msgstr "標準のスクリプト実行速度を設定する"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Stop script execution"
 msgstr "スクリプトの実行を停止する"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Pause script execution"
 msgstr "スクリプトの実行を休止する"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Resume script execution"
 msgstr "スクリプトの実行を再開する"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:238
 msgid "Script console window"
 msgstr "スクリプトコンソール画面"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Help window"
 msgstr "ヘルプ画面"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Configuration window"
 msgstr "設定画面"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
 msgid "Search window"
 msgstr "検索画面"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
 msgstr "空と表示の設定"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:245
 msgid "Date/time window"
 msgstr "日付/時刻"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:246
 msgid "Location window"
 msgstr "現在位置"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Shortcuts window"
 msgstr "ショートカット画面"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Astronomical calculations window"
 msgstr "天文計算ウィンドウ"
 
-#: src/gui/StelGui.cpp:247 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "選択された天体の情報をクリップボードにコピー"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:256
 msgid "Auto hide horizontal button bar"
 msgstr "横メニューを自動で隠す"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:257
 msgid "Auto hide vertical button bar"
 msgstr "縦メニューを自動で隠す"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:260
 msgid "Toggle visibility of GUI"
 msgstr "GUI 表示の切り替え"
 
@@ -4421,11 +4497,11 @@ msgstr "略号"
 
 #: src/gui/ViewDialog.cpp:871
 msgid "Native"
-msgstr ""
+msgstr "英名"
 
 #: src/gui/ViewDialog.cpp:872
 msgid "Translated"
-msgstr ""
+msgstr "和名"
 
 #: src/gui/ViewDialog.cpp:1044
 msgid "No shooting stars"
@@ -4710,7 +4786,7 @@ msgstr "スクリプトをセーブ"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Clear script"
-msgstr ""
+msgstr "スクリプトをクリア"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Are you sure?"
@@ -4734,11 +4810,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:334
 msgid "Stellarium Script"
-msgstr ""
+msgstr "ステラリウムのスクリプト"
 
 #: src/gui/ScriptConsole.cpp:336
 msgid "Include File"
-msgstr ""
+msgstr "ファイルを含む"
 
 #: src/gui/SearchDialog.cpp:224
 msgctxt "coordinate system"
@@ -4850,7 +4926,7 @@ msgstr "第2のショートカット"
 #: src/gui/CustomDeltaTEquationDialog.cpp:132
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr "%1Tのカスタム計算式"
+msgstr "ユーザー定義の%1T計算式"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:133
 #, qt-format
@@ -5063,7 +5139,7 @@ msgstr "正中"
 
 #: src/gui/AstroCalcDialog.cpp:2180
 msgid "1 minute"
-msgstr "1分以内"
+msgstr "1分"
 
 #: src/gui/AstroCalcDialog.cpp:2181
 msgid "10 minutes"
@@ -5966,7 +6042,7 @@ msgstr "人工天体"
 
 #: src/translations.h:116
 msgid "landing site"
-msgstr ""
+msgstr "着地点"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -6782,7 +6858,7 @@ msgstr "興味深い変光星"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:465
 msgid "Almagest"
-msgstr ""
+msgstr "アルマゲスト"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:467
@@ -9235,7 +9311,7 @@ msgstr "バイエル符号(ギリシャ文字)"
 
 #: src/ui_searchDialogGui.h:855
 msgid "Query SIMBAD about selected object"
-msgstr ""
+msgstr "選択天体をSIMBADに問い合わせ"
 
 #: src/ui_searchDialogGui.h:856
 msgid "All IDs"
@@ -9381,7 +9457,7 @@ msgstr "空"
 
 #: src/ui_viewDialog.h:2758
 msgid "Milky Way brightness/saturation:"
-msgstr "天の川の明るさ/彩度"
+msgstr "天の川の明るさ/彩度:"
 
 #: src/ui_viewDialog.h:2760
 msgid ""
@@ -9430,11 +9506,11 @@ msgstr "又"
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
-msgstr ""
+msgstr "光害データは位置情報から取得し、左のボックスは無視します"
 
 #: src/ui_viewDialog.h:2784
 msgid "take from locations database"
-msgstr ""
+msgstr "位置情報から光害データを取得する"
 
 #: src/ui_viewDialog.h:2786
 msgid "Dim faint stars when a very bright object is visible"
@@ -9768,7 +9844,7 @@ msgstr "黄経/黄緯(J2000.0)の色"
 #: src/ui_viewDialog.h:3070 src/ui_viewDialog.h:3084 src/ui_viewDialog.h:3154
 #: src/ui_viewDialog.h:3163 src/ui_viewDialog.h:3171 src/ui_viewDialog.h:3195
 msgid "Show partitions"
-msgstr ""
+msgstr "パーティションの表示"
 
 #: src/ui_viewDialog.h:2988
 msgid "Color of equator (of date)"
@@ -9913,11 +9989,11 @@ msgstr "天の極(瞬時)"
 
 #: src/ui_viewDialog.h:3113
 msgid "The line thickness for circle partitions"
-msgstr ""
+msgstr "円で区切る時の線の太さ"
 
 #: src/ui_viewDialog.h:3115
 msgid "Partition thickness"
-msgstr ""
+msgstr "パーティションの太さ"
 
 #: src/ui_viewDialog.h:3117
 msgid "Color of cardinal points"
@@ -10094,7 +10170,7 @@ msgstr "de Vaucouleursが1976年提唱した超銀河座標を表示する。座
 #: src/ui_viewDialog.h:3273 src/ui_viewDialog.h:3277 src/ui_viewDialog.h:3281
 #: src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3289 src/ui_viewDialog.h:3293
 msgid "Label partitions"
-msgstr ""
+msgstr "パーティション名"
 
 #: src/ui_viewDialog.h:3251
 msgid "Equator (J2000)"
@@ -10313,7 +10389,7 @@ msgstr "追加設定"
 
 #: src/ui_configurationDialog.h:1534
 msgid "Additional settings for Graphical User Interface"
-msgstr ""
+msgstr "グラフィカル・ユーザー・インターフェイスの追加設定"
 
 #: src/ui_configurationDialog.h:1537
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1262
@@ -10827,20 +10903,20 @@ msgstr "フォントサイズ:スクリーン"
 
 #: src/ui_configurationDialog.h:1769
 msgid "Base font size for on-screen text"
-msgstr ""
+msgstr "スクリーン・フォントの基本サイズ"
 
 #: src/ui_configurationDialog.h:1772
 msgid "Graphical user interface"
-msgstr ""
+msgstr "グラフィック・ユーザー・インターフェイス"
 
 #: src/ui_configurationDialog.h:1774
 msgctxt "abbreviation"
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: src/ui_configurationDialog.h:1776
 msgid "Base font size for dialogs"
-msgstr ""
+msgstr "ダイアログ・フォントの基本サイズ"
 
 #: src/ui_configurationDialog.h:1779
 msgid "Pre-select fonts for a particular writing system"
@@ -10848,7 +10924,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1782
 msgid "Application font"
-msgstr ""
+msgstr "アプリケーションのフォント"
 
 #: src/ui_configurationDialog.h:1786
 msgid "Allow keyboard to pan and zoom"
@@ -10928,11 +11004,11 @@ msgstr "マウス操作を有効にする"
 
 #: src/ui_configurationDialog.h:1819
 msgid "Set one color for text in info panel for all objects"
-msgstr ""
+msgstr "全ての天体の情報パネルの文字色を一色にする"
 
 #: src/ui_configurationDialog.h:1821
 msgid "Overwrite text color"
-msgstr ""
+msgstr "天体情報の文字色を一つに"
 
 #: src/ui_configurationDialog.h:1823
 msgid "Hides the mouse cursor when inactive"
@@ -11105,7 +11181,7 @@ msgstr "吸光は地球大気による減光。単位は 等/空気量。空気�
 
 #: src/ui_atmosphereDialog.h:188
 msgid "Extinction Coefficient:"
-msgstr "吸光度"
+msgstr "吸光度:"
 
 #: src/ui_atmosphereDialog.h:190
 msgid ""
@@ -11163,7 +11239,7 @@ msgstr "SSCプリプロセッサを使用した前処理のスクリプト"
 
 #: src/ui_scriptConsole.h:403
 msgid "Execute:"
-msgstr ""
+msgstr "実行:"
 
 #: src/ui_scriptConsole.h:408
 msgid "run script"
@@ -11274,7 +11350,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:1621
 msgctxt "show line"
 msgid "line"
-msgstr ""
+msgstr "線"
 
 #: src/ui_astroCalcDialog.h:1623
 msgid "Show markers of positions of the current celestial body on the sky"
@@ -11345,7 +11421,7 @@ msgstr "天体:"
 msgid ""
 "Compute ephemeris for all planets visible to the unaided eye (works on Earth"
 " only)"
-msgstr ""
+msgstr "全ての肉眼惑星の暦を計算する(地球上のみ使用可)"
 
 #: src/ui_astroCalcDialog.h:1653
 msgid "all naked-eye planets"
@@ -11353,56 +11429,56 @@ msgstr "全ての肉眼惑星"
 
 #: src/ui_astroCalcDialog.h:1655
 msgid "Color of generic ephemeris marker"
-msgstr "一般的な天体歴マーカーの色"
+msgstr "一般的な天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1658
 msgid "Color of selected ephemeris marker"
-msgstr "選択中の天体歴マーカーの色"
+msgstr "選択中の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1661
 msgid "Color of Mercury's ephemeris marker"
-msgstr "水星の天体歴マーカーの色"
+msgstr "水星の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1664
 msgid "Color of Venus' ephemeris marker"
-msgstr "金星の天体歴マーカーの色"
+msgstr "金星の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1668
 msgid "Color of Mars' ephemeris marker"
-msgstr "火星の天体歴マーカーの色"
+msgstr "火星の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1671
 msgid "Color of Jupiter's ephemeris marker"
-msgstr "木星の天体歴マーカーの色"
+msgstr "木星の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1674
 msgid "Color of Saturn's ephemeris marker"
-msgstr "土星の天体歴マーカーの色"
+msgstr "土星の天体暦マーカーの色"
 
 #: src/ui_astroCalcDialog.h:1676
 msgid "Cleanup transits"
-msgstr ""
+msgstr "クリア"
 
 #: src/ui_astroCalcDialog.h:1677
 msgid "Save transits"
-msgstr ""
+msgstr "保存"
 
 #: src/ui_astroCalcDialog.h:1678
 msgid "Calculate transits"
-msgstr ""
+msgstr "計算"
 
 #: src/ui_astroCalcDialog.h:1679
 msgid "Celestial object:"
-msgstr ""
+msgstr "天体:"
 
 #: src/ui_astroCalcDialog.h:1683
 msgid "Table of approximate transits for selected celestial object"
-msgstr ""
+msgstr "選択天体の近似正中時刻表"
 
 #: src/ui_astroCalcDialog.h:1684
 msgid ""
 "Note: artificial satellites and unnamed stars are excluded from calculation"
-msgstr ""
+msgstr "注:人工衛星と命名されていない恒星は計算出来ません"
 
 #: src/ui_astroCalcDialog.h:1686
 msgid "Between objects:"
@@ -11430,15 +11506,15 @@ msgstr "計算"
 
 #: src/ui_astroCalcDialog.h:1696
 msgid "Calculate:"
-msgstr ""
+msgstr "計算:"
 
 #: src/ui_astroCalcDialog.h:1697
 msgid "oppositions"
-msgstr ""
+msgstr "衝"
 
 #: src/ui_astroCalcDialog.h:1698
 msgid "perihelion and aphelion"
-msgstr ""
+msgstr "近日点と遠日点"
 
 #: src/ui_astroCalcDialog.h:1699
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
@@ -11456,11 +11532,11 @@ msgstr "月の高度も表示"
 msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
-msgstr "選択した高度以上のグラフだけを表示する"
+msgstr "選択した高度以上のグラフだけを表示する。"
 
 #: src/ui_astroCalcDialog.h:1705 src/ui_astroCalcDialog.h:1716
 msgid "Above altitude:"
-msgstr "下限高度"
+msgstr "下限高度:"
 
 #: src/ui_astroCalcDialog.h:1707 src/ui_astroCalcDialog.h:1718
 msgid "Altitude limit in degrees"
@@ -11472,7 +11548,7 @@ msgstr "今日の高度"
 
 #: src/ui_astroCalcDialog.h:1710
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
-msgstr "方位角のグラフを表示する天体を選択してください"
+msgstr "方位角のグラフを表示する天体を選択してください。"
 
 #: src/ui_astroCalcDialog.h:1711
 msgid "Azimuth vs. Time"
@@ -11482,7 +11558,7 @@ msgstr "今日の方位角"
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
-msgstr "その時刻での月ごとの高度を表示する天体を選択してください。"
+msgstr "その時刻での毎月の高度を表示する天体を選択してください。"
 
 #: src/ui_astroCalcDialog.h:1721
 msgid "Local Time in hours"
@@ -11490,7 +11566,7 @@ msgstr "地方時(時)"
 
 #: src/ui_astroCalcDialog.h:1724
 msgid "Monthly Elevation"
-msgstr "月ごとの高度"
+msgstr "毎月の高度"
 
 #: src/ui_astroCalcDialog.h:1725
 msgid "Graphs since January 1st of the current year"
@@ -11498,11 +11574,11 @@ msgstr "その年の1月1日からのグラフ"
 
 #: src/ui_astroCalcDialog.h:1726
 msgid "Second graph:"
-msgstr "第二グラフ"
+msgstr "第二グラフ:"
 
 #: src/ui_astroCalcDialog.h:1727
 msgid "First graph:"
-msgstr "第一グラフ"
+msgstr "第一グラフ:"
 
 #: src/ui_astroCalcDialog.h:1730 src/ui_astroCalcDialog.h:1734
 msgid "How many years to display"
@@ -11510,7 +11586,7 @@ msgstr "表示期間(年)"
 
 #: src/ui_astroCalcDialog.h:1732
 msgid "Duration:"
-msgstr "期間"
+msgstr "期間:"
 
 #: src/ui_astroCalcDialog.h:1736
 msgctxt "duration"
@@ -11551,15 +11627,15 @@ msgstr "種類を選択:"
 
 #: src/ui_astroCalcDialog.h:1758
 msgid "First celestial body:"
-msgstr "1番目の天体:"
+msgstr "天体1:"
 
 #: src/ui_astroCalcDialog.h:1759
 msgid "Second celestial body:"
-msgstr "2番目の天体:"
+msgstr "天体2:"
 
 #: src/ui_astroCalcDialog.h:1760
 msgid "Orbital velocity of first celestial body:"
-msgstr "1番目の天体の軌道速度:"
+msgstr "天体1の軌道速度:"
 
 #: src/ui_astroCalcDialog.h:1761
 msgid "Angular distance:"
@@ -11579,15 +11655,15 @@ msgstr "共鳴周期:"
 
 #: src/ui_astroCalcDialog.h:1766
 msgid "Equatorial diameters ratio:"
-msgstr "赤道直径の比"
+msgstr "赤道直径の比:"
 
 #: src/ui_astroCalcDialog.h:1767
 msgid "Orbital velocity of second celestial body:"
-msgstr "2番目の天体の軌道速度:"
+msgstr "天体2の軌道速度:"
 
 #: src/ui_astroCalcDialog.h:1768
 msgid "Orbital periods ratio:"
-msgstr ""
+msgstr "軌道周期の比:"
 
 #: src/ui_astroCalcDialog.h:1770
 msgid "Data"
@@ -11926,7 +12002,7 @@ msgstr "全ての軌道"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Orbits (trajectories) of interstellar objects"
-msgstr ""
+msgstr "星間天体の軌道(軌跡)"
 
 #: src/ui_orbitColorsDialog.h:422
 msgid "Orbits of cubewanos"
@@ -11982,7 +12058,7 @@ msgstr "散乱円盤天体(SDO)の軌道の色"
 
 #: src/ui_orbitColorsDialog.h:448
 msgid "Color of interstellar objects' orbits"
-msgstr ""
+msgstr "星間天体の軌道の色"
 
 #: src/ui_orbitColorsDialog.h:451
 msgid "Color of planet moon orbits"
@@ -12415,11 +12491,11 @@ msgstr "前のアイピース"
 
 #: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Rotate reticle pattern of the eyepiece clockwise"
-msgstr ""
+msgstr "アイピースのレチクルパターンを時計回りに回転"
 
 #: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
-msgstr ""
+msgstr "アイピースのレチクルパターンを反時計回りに回転"
 
 #: plugins/Oculars/src/Oculars.cpp:1636
 msgctxt "abbreviated in the plugin"
@@ -12649,7 +12725,7 @@ msgstr "補正レンズ倍率: 無効"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
 msgid "Focal length of eyepiece"
-msgstr "接眼レンズの焦点距離 "
+msgstr "接眼レンズの焦点距離"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
@@ -12862,7 +12938,7 @@ msgstr "インターフェイス"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Arrow button scale (requires restart)"
-msgstr ""
+msgstr "矢印ボタンの大きさ(再起動が必要)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid ""
@@ -12884,7 +12960,7 @@ msgstr "コントロールパネルを表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Font size"
-msgstr ""
+msgstr "フォント・サイズ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid ""
@@ -12898,11 +12974,11 @@ msgstr "視野の方向を初期値に戻す"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Color for ocular circles and sensor frames"
-msgstr ""
+msgstr "視野円とセンサー枠の色"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 msgid "Line Color"
-msgstr ""
+msgstr "線の色"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Color for text which is shown only when GUI is switched off."
@@ -12910,11 +12986,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Text Color"
-msgstr ""
+msgstr "文字の色"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1227
 msgid "Show oculars button on toolbar"
-msgstr ""
+msgstr "望遠鏡視野のボタンをツールバーに表示する"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1230
 msgid "Show border circle"
@@ -12946,11 +13022,11 @@ msgstr "半透明マスクを使用する"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1241
 msgid "Show cardinal directions in equatorial coordinate system"
-msgstr ""
+msgstr "赤道座標系で方位を表示する"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1243
 msgid "Show compass rose"
-msgstr ""
+msgstr "コンパスローズの表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1245
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -12962,11 +13038,11 @@ msgstr "限界等級"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1249
 msgid "Align the crosshair in equatorial coordinate system"
-msgstr ""
+msgstr "十字線は赤道座標系に添って表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1251
 msgid "Align crosshair"
-msgstr ""
+msgstr "十字線は天の東西南北の向き"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1252
 msgid "Sensor view"
@@ -13009,7 +13085,7 @@ msgstr "テルラド視野"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1265
 msgid "Enable scaling FOV for Telrad"
-msgstr ""
+msgstr "テルラドに合わせて視野角を調整"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1266
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
@@ -13331,23 +13407,23 @@ msgstr "ISS(ザーリャ)"
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2154
 msgid "ISS"
-msgstr ""
+msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:2156
 msgid "HST"
-msgstr ""
+msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:2158
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:2160
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:2162
@@ -13382,7 +13458,7 @@ msgstr "距離の変化率"
 
 #: plugins/Satellites/src/Satellite.cpp:333
 msgid "Perigee/apogee altitudes"
-msgstr ""
+msgstr "近地点高度/遠地点高度"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
@@ -13429,7 +13505,7 @@ msgstr "太陽光の反射角度"
 #: plugins/Satellites/src/Satellite.cpp:400
 msgctxt "unknown date"
 msgid "unknown"
-msgstr ""
+msgstr "不明"
 
 #: plugins/Satellites/src/Satellite.cpp:406
 msgctxt "at time"
@@ -13438,7 +13514,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Last updated TLE"
-msgstr ""
+msgstr "TLEの最終更新"
 
 #: plugins/Satellites/src/Satellite.cpp:417
 msgid "Group"
@@ -13470,7 +13546,7 @@ msgstr "地平線下(観測不可能)"
 
 #: plugins/Satellites/src/Satellite.cpp:449
 msgid "Radio communication"
-msgstr ""
+msgstr "電波通信"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:468 plugins/Pulsars/src/Pulsar.cpp:274
@@ -13913,11 +13989,11 @@ msgstr "セグメント1つの長さ(秒):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:810
 msgid "Show artificial satellites as markers"
-msgstr ""
+msgstr "人工衛星はマーカーで表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:811
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "肉眼で見えない場合は非表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:813
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -13945,15 +14021,15 @@ msgstr "選択した人工衛星を削除"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 msgid "Change markers color for selected satellites"
-msgstr ""
+msgstr "選択した人工衛星のマーカーの色"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:829
 msgid "Change orbits color for selected satellites"
-msgstr ""
+msgstr "選択した人工衛星の軌道ーの色"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:832
 msgid "Change info color for selected satellites"
-msgstr ""
+msgstr "選択した人工衛星の情報の色"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:835
 msgid "Save changes"
@@ -14004,7 +14080,7 @@ msgstr ""
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
-msgstr ""
+msgstr "チェックされた配布元に含まれ、手元にまだデータが無い人工衛星は、次回の更新時に自動的に追加されます。"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:857
 msgid ""
@@ -15906,7 +15982,7 @@ msgstr "以下の人たちの貢献と価値あるコメントに感謝します
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "セルゲイ・ブリニコフ(Sergei Blinnikov)"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
 msgid "Institute for Theoretical and Experimental Physics"
@@ -15924,7 +16000,7 @@ msgstr "(ロシア)"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:214
 msgctxt "time"
 msgid "d"
-msgstr ""
+msgstr "日後"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:230
 msgid "Historical supernovae is updated"
@@ -15968,21 +16044,21 @@ msgstr "更新間隔(日):"
 msgid "[next update info]"
 msgstr "[次回の更新]"
 
-#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:124
 msgid "Navigational Stars"
 msgstr "天測航法の星"
 
-#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/NavStars.cpp:59
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "このプラグインは各国の天体暦から天測航法に使える恒星をマークします。"
 
-#: plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:124
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "天測航法の星"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:314
+#: plugins/NavStars/src/NavStars.cpp:313
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -15996,113 +16072,113 @@ msgstr ""
 "Finder</em>や<em>Identifier</em>などにも使用されています。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:320
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
 "French title is <em>%1</em>) published by the French Bureau des Longitudes."
-msgstr ""
+msgstr "フランス経度局が刊行したフランス天体暦(フランス語では<em>%1</em>)に掲載された81個の恒星。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:326
+#: plugins/NavStars/src/NavStars.cpp:325
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
-msgstr "ロシア天体暦(Russian Nautical Almanac 、ロシア語では<em>%1</em>)に掲載された160個の恒星。"
+msgstr "ロシア天体暦(ロシア語では<em>%1</em>)に掲載された160個の恒星。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:332
+#: plugins/NavStars/src/NavStars.cpp:331
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
 "German title is <em>%1</em>) published by the Federal Maritime and "
 "Hydrographic Agency of Germany."
-msgstr ""
+msgstr "ドイツ連邦海事水路庁が刊行したドイツ天体暦(ドイツ語では<em>%1</em>)に掲載された80個の恒星。"
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:520
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:522
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:537 plugins/NavStars/src/NavStars.cpp:565
+#: plugins/NavStars/src/NavStars.cpp:571
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:539 plugins/NavStars/src/NavStars.cpp:569
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:541 plugins/NavStars/src/NavStars.cpp:575
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:544
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:548
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:554
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:561
+#: plugins/NavStars/src/NavStars.cpp:560
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:564
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:567
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:573
 msgctxt "Declination"
 msgid "DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:577
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:579
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:581
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:584
+#: plugins/NavStars/src/NavStars.cpp:583
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr ""
@@ -16125,7 +16201,7 @@ msgstr "ロシア"
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
 msgid "German"
-msgstr ""
+msgstr "ドイツ"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
 msgid "Navigational Stars Plug-in"
@@ -16362,6 +16438,8 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"このプラグインは実視等級が18等より明るいクエーサーを表示します。クエーサーのカタログは'Quasars and Active Galactic "
+"Nuclei'(13版、Veron他、2010年)から編集されました。"
 
 #: plugins/Quasars/src/Quasars.cpp:171
 msgid "Show quasars"
@@ -16375,7 +16453,7 @@ msgstr "クエーサー設定ウィンドウ"
 #: plugins/Quasars/src/Quasar.cpp:153
 msgctxt "radio flux density"
 msgid "Jy"
-msgstr ""
+msgstr "Jy"
 
 #: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
@@ -16395,6 +16473,8 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"クエーサープラグインは実視等級が18等より明るいクエーサーを表示します。クエーサーのカタログは\"Quasars and Active Galactic"
+" Nuclei\" (13版)から編集されました。"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 msgid "Veron+ 2010"
@@ -16435,11 +16515,11 @@ msgstr "ツールバーにボタンを表示"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:303
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "マーカーで表示"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:304
 msgid "Quasars marker color"
-msgstr ""
+msgstr "マーカーの色"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:169
 #: plugins/Pulsars/src/Pulsars.cpp:170
@@ -16471,7 +16551,7 @@ msgstr "グリッチが観測されたパルサー"
 
 #: plugins/Pulsars/src/Pulsar.cpp:186
 msgid "registered glitches"
-msgstr ""
+msgstr "登録済みのグリッチ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgid "Barycentric period"
@@ -16625,7 +16705,7 @@ msgstr "謝辞"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "ウラジミール・サモドゥロフ(Vladimir Samodourov)"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 msgid "Pushchino Radio Astronomy Observatory"
@@ -16633,7 +16713,7 @@ msgstr "プーシチノ電波天文台"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "マチェイ・セリラック(Maciej Serylak)"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 msgid "Nancay Radioastronomical Observatory"
@@ -16669,11 +16749,11 @@ msgstr "ツールバーにボタンを表示"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:339
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "マーカーの色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "パルサーのマーカーの色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
@@ -16681,11 +16761,11 @@ msgstr "グリッチの観測されたパルサーは色を変える"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "グリッチの観測されたパルサーのマーカーの色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
-msgstr ""
+msgstr "400MHzの平均フラックス密度が右の値以上のパルサーのみ表示"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:152
@@ -19323,6 +19403,7 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"選択した天体のある日の観測可能日時、つまり出、没と正中を計算して表示し、その年の観測可能な期間も表示します。(天体が夜間のほんの一瞬でも地平線上にある場合、観測可能としています)。太陽の最大離角の日やアクロニカル・ライズ/セット、コズミカル・ライズ/セットの日も表示します。詳しい説明はプラグイン設定ウィンドウの「このプラグインについて」タブにあります。"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:162
@@ -19484,6 +19565,8 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti"
 " for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"選択天体の観測可能日時を解析するプラグインです。天体が選択されていない場合は視野中央の値を計算します。プラグインは天体の出、正中と没の時刻、1年でベストな日(つまり太陽の離角が最大の日)、天体が夜間に地平線上に見える期間、アクロニカル/コズミカル・ライズ/セットの日付を表示します。<br>太陽系天体はその暦と視差効果を考慮しています。<br><br>アレクサンダー・ウルフとゲオルク・ゾッティの助言に作者は感謝します。<br><br>イヴァン・マルティ=ビダル"
+" (オンサラ天文台)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid "Explanation of some parameters"
@@ -19549,6 +19632,7 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"ある天体のコズミカル・ライズ/セットの日はその天体が太陽と同時に出/没すると推定される日になります。これら天体暦の正確な日付は、観測場所によって異なります。コズミカル・セットとコズミカル・ライズの間の日付では、天体がほとんど観測できない(または全く観測できない)ことは明らかです。逆にアクロニカル・ライズ/セットは天体の出/没が日没/日出と同時(つまり太陽の逆)になります。アクロニカル・セットとライズの周辺は、太陽が地平線よりもかなり下にあるときに天体の高度が高くなるために使用される日です(したがって天体観測に適します)。ヘリアカル・ライズの日は、その年の最初に天体が見えるようになる日です。天文学的な夜の終わりのほぼ前(つまり天文薄明)で天体が東の地平線に近いときがヘリアカル・ライズとなります。翌日の夜からヘリアカル・セットの日(つまり天体まだ見える年間の最後の夜)までの長い期間、天体の観測出来ます。へリアカル・セットでは、およそ天文学的な夜の始まりの後に天体が沈みます。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Largest Sun separation:"
@@ -19590,6 +19674,7 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation"
 " by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"このプログラムは夜間に天体が地平線の上に一瞬でもある期間を計算します。薄明の太陽高度よりも低い「夜」の時間帯を考慮します(ユーザーで設定できます。上記を参照してください)。天球を移動しない天体や外惑星の場合、ある年の観測可能な期間は2つのケースに分かれます。ある日付から別の日付までの期間(例えば1月20日から9月15日)と2つの期間に分かれる(1月1日から特定の日付まで、別の日付から12月31日まで)ケースです。1番目のケースでは最初の日付(この例では1月20日)はいわゆる「ヘリアカル・ライズ」の日に近く、2番目の日付(この例では9月15日)は「ヘリアカル・セット」の日の近くです。2番目のケース(例えば1月1日から5月20日および9月21日から12月31日の形式の範囲)では、最初の日付(この例では5月20日)がヘリアカル・セットの日に近く、2番目の日付(例では2月21日)がヘリアカル・ライズに近くなります。将来のバージョンではユーザーによる薄明の太陽高度の入力値に依存せず、恒星と惑星のヘリアカル・ライズ/セットを推定するためのより正確な方程式が実装される予定です。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid "Full Moon:"
@@ -19653,7 +19738,7 @@ msgstr "今日の暦(出没、正中時刻)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr "アクロニカル/コズミカル/ヘリアカル 出/没の日"
+msgstr "アクロニカル/コズミカル/ヘリアカル・ライズ/セットの日"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -19707,6 +19792,7 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"均時差は2種類の太陽時の不一致を表します。太陽の動きを直接なぞる「視太陽時」と、正午24時間ごとの架空の「平均」太陽をなぞる「平均太陽時」です。均時差の符号で普遍的に受け入れられている定義はありません。ある出版物では日時計が時計よりも進んでいる時に均時差をプラスとし、その他の出版物では時計が日時計よりも進んでいる時にプラスとします。英語圏では前者の方が一般的ですが、常にそうとは限りません。出版された表やグラフを使用する人は、最初にその符号の使用法を確認する必要があります。"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
@@ -19761,6 +19847,8 @@ msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
+"このプラグインはthe 2013 campaign of the ESA Summer of Code in Space "
+"programmeで作成されました。"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:654
 msgid ""
@@ -19778,28 +19866,31 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>このプラグインは毎年観測される流星群をシミュレーションします。また活動中または活動期間外の輻射点をそれぞれのマーカーで表示します。</p><p>輻射点マーカーをクリックするとその位置や活動の有無などの詳細なデータが表示されます。このプラグインのデータの多くは<a"
+" "
+"href=\"http://imo.net\">国際流星機構</a>の公式データに依っています。</p><p>マーカーは3種類に分かれます:<ul><li><b>確定値:</b>活動中の輻射点で、確実なデータになります。これは過去に実際に観測されたか、確かな予測の流星群です。</li><li><b>平年値:</b>活動中の輻射点ですが、確かなデータではありません。これは実際に発生する可能性があることを意味しますが、その年の活動に関する適切なデータがありません。</li><li><b>活動期間外:</b>流星群はその時点で非活動期間です。</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "確定値"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:131
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "平年値"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:509
 msgid "generic data"
-msgstr ""
+msgstr "平年値"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:510
 msgid "confirmed data"
-msgstr ""
+msgstr "確定値"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:511
 msgid "inactive"
-msgstr ""
+msgstr "活動期間外"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:524
 msgid "meteor shower"
@@ -19823,12 +19914,12 @@ msgstr "母天体"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:557
 msgid "Activity"
-msgstr "活動"
+msgstr "活動期"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:576
 msgctxt "meteor shower activity"
 msgid "Maximum"
-msgstr ""
+msgstr "最大"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:578
 msgid "Solar longitude"
@@ -20151,7 +20242,7 @@ msgstr "ろくぶんぎ座流星群"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "Daytime Sextantids"
-msgstr ""
+msgstr "昼間のろくぶんぎ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
@@ -20297,7 +20388,7 @@ msgstr "流星群プラグイン"
 msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a"
 " marker for each active and inactive radiant."
-msgstr ""
+msgstr "このプラグインは毎年観測される流星群をシミュレーションします。また活動中または活動期間外の輻射点をそれぞれのマーカーで表示します。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:235
 msgid ""
@@ -20306,6 +20397,8 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"輻射点マーカーをクリックするとその位置や活動の有無などの詳細なデータが表示されます。このプラグインのデータの多くは<a "
+"href=\"http://imo.net\">国際流星機構</a>の公式データに依っています。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:242
 msgid ""
@@ -20317,6 +20410,7 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>マーカーは3種類に分かれます:<ul><li><b>確定値:</b>活動中の輻射点で、確実なデータになります。これは過去に実際に観測されたか、確かな予測の流星群です。</li><li><b>平年値:</b>活動中の輻射点ですが、確かなデータではありません。これは実際に発生する可能性があることを意味しますが、その年の活動に関する適切なデータがありません。</li><li><b>活動期間外:</b>流星群はその時点で非活動期間です。</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:264
 msgid "Terms"
@@ -20337,6 +20431,7 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"流星群は多くの流星が夜空の1点から放射または発生することが観測される天文現象です。これらは平行軌道上を非常に高速で地球大気に突入する隕石と呼ばれる宇宙の破片の流れによって引き起こされます。ほとんどの流星は砂粒よりも小さいため、ほとんどすべての流星は崩壊し、地球の表面に衝突することはありません。激しいまたは異常な流星群は流星バーストおよび流星雨として知られており、1時間に1,000を超える流星を生成する可能性があります。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:275
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
@@ -20350,6 +20445,7 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"流星群の輻射点、または見かけの輻射点は、(惑星観測者にとって)流星がそこから始まるように見える空の点です。例えばペルセウス座流星群はペルセウス座の中のある地点から来たように見える流星です。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:283
 msgid ""
@@ -20358,13 +20454,14 @@ msgid ""
 " point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"流星群の流星は空のどの位置にも見ることが出来ますが、動きを逆にたどれば輻射点に到達します。所定の流星群の既知の輻射点にさかのぼれない流星は散在流星と呼ばれ、その流星群の流星とは見なされません。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
-msgstr ""
+msgstr "多くの流星群では活動期間中に輻射点の位置を変えます。例えばぎょしゃ座δ流星群の場合、輻射点は一晩で1°以上移動します。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:292
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -20378,6 +20475,7 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"天頂出現数(ZHR)の定義は、快晴の極限等級6.5等の暗い空で、輻射点が天頂にあると仮定した時、1人の観測者が1時間で見られるであろう流星の数になります。実際に見られる流星の割合はほとんどの場合にZHRより低くなり、輻射点が地平線に近いほど減少します。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:300
 msgid "Population index"
@@ -20390,12 +20488,13 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the"
 " share of faint meteors is larger than usual."
 msgstr ""
+"光度比は流星群の等級分布を示します。光度比が2.5未満の場合、明るい流星が平均よりも多く見られる分布に対応しています。一方光度比が3.0より大きい場合、かすかな流星の割合が通常よりも多いことを意味します。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:308
 msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
-msgstr ""
+msgstr "このプラグインは主にthe ESA Summer of Code in Space 2013でのプロジェクトで作成されました。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 msgid "Info"
@@ -20417,14 +20516,14 @@ msgstr "Wikipedia のページ - %1Meteor shower%2"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:315
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1国際流星機構%2"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 #, qt-format
 msgid ""
 "Support is provided via the Github website. Be sure to put \"%1\" in the "
 "subject when posting."
-msgstr ""
+msgstr "サポートはGithubを通じて行います。投稿時は必ず題名を\"%1\"として下さい。"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:108
 msgid "Start date greater than end date!"
@@ -20493,7 +20592,7 @@ msgstr "輻射点の色"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "活動中の輻射点 - 平年値"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
@@ -20505,7 +20604,7 @@ msgstr "活動期間外"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "活動中の輻射点 - 確定値"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"

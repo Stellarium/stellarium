@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-02 00:02+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -3383,15 +3383,51 @@ msgid "Field of View"
 msgstr "পছন্দসই দৃষ্টিক্ষেত্র"
 
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to"
-msgstr "দৃষ্টিক্ষেত্র"
+msgid "Set FOV to 180°"
+msgstr "১৮০° দৃষ্টিক্ষেত্র ব্যবহার করুন"
 
-#: src/core/StelMovementMgr.cpp:239
+#: src/core/StelMovementMgr.cpp:212
+msgid "Set FOV to 90°"
+msgstr "৯০° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:213
+msgid "Set FOV to 60°"
+msgstr "৬০° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:214
+msgid "Set FOV to 45°"
+msgstr "৪৫° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:215
+msgid "Set FOV to 20°"
+msgstr "২০° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:216
+msgid "Set FOV to 10°"
+msgstr "১০° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:217
+msgid "Set FOV to 5°"
+msgstr "৫° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:218
+msgid "Set FOV to 2°"
+msgstr "২° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:219
+msgid "Set FOV to 1°"
+msgstr "১° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:220
+msgid "Set FOV to 0.5°"
+msgstr "০.৫° দৃষ্টিক্ষেত্র ব্যবহার করুন"
+
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "নিরক্ষীয় বিচলন"
 
-#: src/core/StelMovementMgr.cpp:241
+#: src/core/StelMovementMgr.cpp:240
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "দিগংশিক বিচলন"
@@ -4316,83 +4352,83 @@ msgstr "উইন্ডোসমূহ নির্বাচন"
 msgid "Quit"
 msgstr "প্রস্থান"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Speed up the script execution rate"
 msgstr "কার্যলিপির গতি বৃদ্ধি"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Slow down the script execution rate"
 msgstr "কার্যলিপির গতি হ্রাস"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Set the normal script execution rate"
 msgstr "স্ক্রিপ্টের স্বাভাবিক গতি"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Stop script execution"
 msgstr "কার্যলিপি চালনা বন্ধ"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Pause script execution"
 msgstr "কার্যলিপি চালনায় বিরতি"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Resume script execution"
 msgstr "কার্যলিপি পুনঃচালনা"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:238
 msgid "Script console window"
 msgstr "কার্যলিপি সম্পাদনা"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Help window"
 msgstr "সাহায্য ও ব্যবহার পদ্ধতি"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Configuration window"
 msgstr "ব্যবহার পদ্ধতি"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
 msgid "Search window"
 msgstr "অনুসন্ধান"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
 msgstr "দৃশ্যপট"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:245
 msgid "Date/time window"
 msgstr "তারিখ/সময়"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:246
 msgid "Location window"
 msgstr "অবস্থান নির্বাচন"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Shortcuts window"
 msgstr "চটজলদি উপায়গুলির বিন্যাস"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Astronomical calculations window"
 msgstr "ঘটনাপঞ্জী"
 
-#: src/gui/StelGui.cpp:247 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "সঞ্চিত দৃশ্য"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "নির্বাচিত জ্যোতিষ্কের তথ্য অনুকরণ"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:256
 msgid "Auto hide horizontal button bar"
 msgstr "স্বয়ংক্রিয় ভাবে নিচের সরঞ্জামগুলির অদৃশ্যকরন"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:257
 msgid "Auto hide vertical button bar"
 msgstr "স্বয়ংক্রিয় ভাবে পাশের সরঞ্জামগুলির অদৃশ্যকরন"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:260
 msgid "Toggle visibility of GUI"
 msgstr "দৃশ্যপটের রূপরেখা পরিবর্তন"
 
@@ -4854,11 +4890,11 @@ msgstr "কার্যলিপি সঞ্চয় করুন"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Clear script"
-msgstr ""
+msgstr "কার্যলিপিটি মুছে ফেলুন"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Are you sure?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত ?"
 
 #: src/gui/ScriptConsole.cpp:294
 msgid "Select Script Include Directory"
@@ -4945,7 +4981,7 @@ msgstr "দিগংশ"
 #: plugins/Satellites/src/Satellite.cpp:331
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1264
 msgid "Altitude"
-msgstr "উন্নতি কোণ"
+msgstr "উন্নতি কোণ / উচ্চতা"
 
 #: src/gui/SearchDialog.cpp:283
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:622
@@ -6112,7 +6148,7 @@ msgstr "মনুষ্যনির্মিত বস্তু"
 
 #: src/translations.h:116
 msgid "landing site"
-msgstr ""
+msgstr "অবতরণ স্থল"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -6928,7 +6964,7 @@ msgstr "কৌতূহলোদ্দীপক অসম ঔজ্জ্�
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:465
 msgid "Almagest"
-msgstr ""
+msgstr "অ্যালমাজেষ্ট"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:467
@@ -7746,6 +7782,8 @@ msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
+"মার্চ ২০, ২০২০ এর আকাশ । এটি GaoXing এর পর্যবেক্ষন লিপি "
+"http://www.xjltp.com/2_huodong/2_030301.htm থেকে নেওয়া হয়েছে ।"
 
 #: src/translations.h:736
 msgid "&Undo"
@@ -8307,7 +8345,7 @@ msgstr "ফিজি"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "ফকল্যান্ড দ্বীপপুঞ্জ (মালভিনাস)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
@@ -8688,7 +8726,7 @@ msgstr "মোঙ্গোলিয়া"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
 msgid "Macao"
-msgstr ""
+msgstr "ম্যাকাও"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -8903,7 +8941,7 @@ msgstr "সার্বিয়া"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
 msgid "Russian Federation"
-msgstr ""
+msgstr "রাশিয়ান ফেডারেশান"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -9028,7 +9066,7 @@ msgstr "চাদ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
 msgid "French Southern Territories"
-msgstr ""
+msgstr "দক্ষিণ গোলার্ধের ফরাসী অঞ্চল সমূহ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -9133,7 +9171,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
 msgid "St Vincent and the Grenadines"
-msgstr ""
+msgstr "সেন্ট ভিনসেন্ট ও গ্রেনাডীন্জ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -9979,7 +10017,7 @@ msgstr "সৌরপথীয় ছকের (J2000.0 অনুযায়ী) র�
 #: src/ui_viewDialog.h:3070 src/ui_viewDialog.h:3084 src/ui_viewDialog.h:3154
 #: src/ui_viewDialog.h:3163 src/ui_viewDialog.h:3171 src/ui_viewDialog.h:3195
 msgid "Show partitions"
-msgstr ""
+msgstr "রেখা বিভাজন দাগ"
 
 #: src/ui_viewDialog.h:2988
 msgid "Color of equator (of date)"
@@ -10126,11 +10164,11 @@ msgstr "মেরু বিন্দু (বর্তমান)"
 
 #: src/ui_viewDialog.h:3113
 msgid "The line thickness for circle partitions"
-msgstr ""
+msgstr "বিভিন্ন বৃত্তের বিভাজন দাগ গুলির বেধ"
 
 #: src/ui_viewDialog.h:3115
 msgid "Partition thickness"
-msgstr ""
+msgstr "রেখা বিভাজন দাগগুলির বেধ"
 
 #: src/ui_viewDialog.h:3117
 msgid "Color of cardinal points"
@@ -10317,7 +10355,7 @@ msgstr ""
 #: src/ui_viewDialog.h:3273 src/ui_viewDialog.h:3277 src/ui_viewDialog.h:3281
 #: src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3289 src/ui_viewDialog.h:3293
 msgid "Label partitions"
-msgstr ""
+msgstr "রেখা বিভাজন গুলির মান"
 
 #: src/ui_viewDialog.h:3251
 msgid "Equator (J2000)"
@@ -11416,7 +11454,7 @@ msgstr "SSC preprocessor এর সাহায্যে কার্যলি�
 
 #: src/ui_scriptConsole.h:403
 msgid "Execute:"
-msgstr ""
+msgstr "সম্পাদন করুন :"
 
 #: src/ui_scriptConsole.h:408
 msgid "run script"
@@ -11865,15 +11903,15 @@ msgstr "অতিরিক্ত কিছু বিকল্প"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:145
 msgid "Label each N steps, where N is"
-msgstr ""
+msgstr "কিছু ধাপ অন্তর বিবরণ প্রদর্শণ, ধাপের অবকাশ"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:146
 msgid "Use smart format for dates"
-msgstr ""
+msgstr "ছিমছাম তারিখ ব্যবহার"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:147
 msgid "Use small markers, when line is enabled"
-msgstr ""
+msgstr "রেখা প্রদ্রশিত হলে ছোটো নিশানা ব্যবহার"
 
 #: src/ui_bookmarksDialog.h:207
 msgid "Add date and time"
@@ -12664,7 +12702,7 @@ msgstr "প্রতিফলকীয় নিশানা"
 
 #: plugins/Oculars/src/Oculars.cpp:1420
 msgid "Toggle Oculars configuration window"
-msgstr ""
+msgstr "দূরবীন অনুকরন বিভাগ"
 
 #: plugins/Oculars/src/Oculars.cpp:1421
 msgid "Toggle Oculars button bar"
@@ -12688,11 +12726,11 @@ msgstr "পূর্ববর্তী লেন্স"
 
 #: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Rotate reticle pattern of the eyepiece clockwise"
-msgstr ""
+msgstr "নিশানা ক্রশটি ঘড়ির দিকে ঘোরান"
 
 #: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
-msgstr ""
+msgstr "নিশানা ক্রশটি ঘড়ির বিপরীতে ঘোরান"
 
 #: plugins/Oculars/src/Oculars.cpp:1636
 msgctxt "abbreviated in the plugin"
@@ -13113,7 +13151,7 @@ msgstr "তাই একান্ত জরুরী না থাকলে আ�
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:520
 msgid "You can toggle a crosshair in the view."
-msgstr ""
+msgstr "প্রয়োজনে নিশানা ক্রশ চালু বা বন্ধ করা যেতে পারে ।"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:521
 #, qt-format
@@ -13184,19 +13222,19 @@ msgstr "ব্যবহার শেষে আগের অভিমুখে �
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Color for ocular circles and sensor frames"
-msgstr ""
+msgstr "সেনসর কিংবা দৃষ্টিক্ষেত্র বৃত্তের পরিসীমার রং"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 msgid "Line Color"
-msgstr ""
+msgstr "রেখার রং"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Color for text which is shown only when GUI is switched off."
-msgstr ""
+msgstr "গ্রাফিক্যাল ইন্টারফেস বন্ধ থাকা অবস্থায় হরফের রং"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Text Color"
-msgstr ""
+msgstr "হরফের রং"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1227
 msgid "Show oculars button on toolbar"
@@ -13204,11 +13242,11 @@ msgstr "টুলবারে দূরবীন অনুকরণ বোতা
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1230
 msgid "Show border circle"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্রের পরিসীমা বৃত্ত"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1232
 msgid "Show FOV outline"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্রের পরিসীমা"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1233
 msgid "Scale image circle"
@@ -13232,11 +13270,11 @@ msgstr "অর্ধ স্বচ্ছ আচ্ছাদন ব্যবহা
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1241
 msgid "Show cardinal directions in equatorial coordinate system"
-msgstr ""
+msgstr "ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা অনুসারে দিক নির্দেশ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1243
 msgid "Show compass rose"
-msgstr ""
+msgstr "দিক নির্দেশ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1245
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -13250,11 +13288,11 @@ msgstr "ঔজ্জ্বল্যের সীমাবদ্ধতা"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1249
 msgid "Align the crosshair in equatorial coordinate system"
-msgstr ""
+msgstr "ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা অনুসারে নিশানা ক্রশ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1251
 msgid "Align crosshair"
-msgstr ""
+msgstr "দিক অনুসারে নিশানা ক্রশ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1252
 msgid "Sensor view"
@@ -13291,7 +13329,7 @@ msgstr "আকার (পিক্সেল)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1263
 msgid "Enable scaling FOV for CCD"
-msgstr ""
+msgstr "সংবেদক অনুযায়ী দৃষ্টিক্ষেত্র নির্ধারণ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1264
 msgid "Telrad view"
@@ -13668,7 +13706,7 @@ msgstr "আপাত উজ্জ্ব্যলতা"
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:327
 msgid "Range"
-msgstr "দূরত্ব"
+msgstr "আপাত দূরত্ব"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:329
@@ -13677,7 +13715,7 @@ msgstr "দূরত্ব পরিবর্তনের হার"
 
 #: plugins/Satellites/src/Satellite.cpp:333
 msgid "Perigee/apogee altitudes"
-msgstr ""
+msgstr "সর্বনিম্ন ও সর্বোচ্চ দূরত্ব"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
@@ -13729,11 +13767,11 @@ msgstr "অজানা"
 #: plugins/Satellites/src/Satellite.cpp:406
 msgctxt "at time"
 msgid "at"
-msgstr ""
+msgstr ", সময় :"
 
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Last updated TLE"
-msgstr ""
+msgstr "সর্বশেষ তথ্য"
 
 #: plugins/Satellites/src/Satellite.cpp:417
 msgid "Group"
@@ -13890,6 +13928,8 @@ msgstr ""
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
+"সর্বনিম্ন ও সর্বোচ্চ দূরত্ব গণনার ক্ষেত্রে পৃথিবীর গড় ব্যাসার্ধকে ভূপৃষ্ঠ "
+"হিসাবে ধরে নেওয়া হয়েছে ।"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
 msgid ""
@@ -14267,15 +14307,15 @@ msgstr "নির্বাচিত কৃত্রিম উপগ্রহগ�
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 msgid "Change markers color for selected satellites"
-msgstr ""
+msgstr "নির্বাচিত উপগ্রহগুলির নিশানার রং পাল্টান"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:829
 msgid "Change orbits color for selected satellites"
-msgstr ""
+msgstr "নির্বাচিত উপগ্রহগুলির কক্ষপথের রং পাল্টান"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:832
 msgid "Change info color for selected satellites"
-msgstr ""
+msgstr "নির্বাচিত উপগ্রহগুলির বিবরনের রং পাল্টান"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:835
 msgid "Save changes"
@@ -14431,7 +14471,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:259
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
-msgstr ""
+msgstr "দূরবীন #%1 কে ঘোরানোর নির্দেশ বাতিল করুন"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:214
 msgid "Move a telescope to a given set of coordinates"
@@ -16491,23 +16531,23 @@ msgstr "সংশোধনের হার (দিন) :"
 msgid "[next update info]"
 msgstr "[পরবর্তী সংশোধন তথ্য]"
 
-#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:124
 msgid "Navigational Stars"
 msgstr "দিকনির্দেশী নক্ষত্র"
 
-#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/NavStars.cpp:59
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "এই সরঞ্জামটি বিভিন্ন ক্ষেত্রে ব্যবহৃত দিক নির্দেশকারী নক্ষত্রগুলিকে চিহ্নিত "
 "করে ।"
 
-#: plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:124
 msgid "Mark the navigational stars"
 msgstr "দিক নির্দেশকারী নক্ষত্রগুলির অবস্থান"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:314
+#: plugins/NavStars/src/NavStars.cpp:313
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -16521,7 +16561,7 @@ msgstr ""
 "<em>Identifier</em> এর মত দিকনির্ণয়ে সাহায্যকারী নথিতেও এর ব্যবহার রয়েছে ।"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:320
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -16531,7 +16571,7 @@ msgstr ""
 "দেখানো হয়েছে ।"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:326
+#: plugins/NavStars/src/NavStars.cpp:325
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -16541,7 +16581,7 @@ msgstr ""
 "নির্দেশকারী তারা দেখানো হয়েছে ।"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:332
+#: plugins/NavStars/src/NavStars.cpp:331
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -16551,89 +16591,89 @@ msgstr ""
 "এক্ষেত্রে জার্মান নৌসারনী ( জার্মান নাম <em>%1</em>) তালিকায় প্রকাশিত ৮০টি "
 "তারা দেখানো হয়েছে ।"
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:520
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "উপরিভাগ"
 
-#: plugins/NavStars/src/NavStars.cpp:522
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "নিম্নভাগ"
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:537 plugins/NavStars/src/NavStars.cpp:565
+#: plugins/NavStars/src/NavStars.cpp:571
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "ঘঃকোণ (গ্রীনিচ)"
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:539 plugins/NavStars/src/NavStars.cpp:569
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "ঘঃকোণ (ক্রান্তীয়)"
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:541 plugins/NavStars/src/NavStars.cpp:575
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "ঘঃকোণ (স্থানীয়)"
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:544
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
-msgstr ""
+msgstr "অবস্থান (গ্রীনিচ): ঘঃকোণ / বিষুবলম্ব"
 
-#: plugins/NavStars/src/NavStars.cpp:548
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "অবস্থান: অক্ষ / দ্রাঘিমা"
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "ঠিকানা: অক্ষ / দ্রাঘিমা"
 
-#: plugins/NavStars/src/NavStars.cpp:554
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "উন্নতি / দিগংশ (পরিমিত)"
 
-#: plugins/NavStars/src/NavStars.cpp:561
+#: plugins/NavStars/src/NavStars.cpp:560
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "আন্তঃ সময়"
 
-#: plugins/NavStars/src/NavStars.cpp:564
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "উন্নতি (সং)"
 
-#: plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:567
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "সময় দ্রাঘ (স্থানীয়)"
 
-#: plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:573
 msgctxt "Declination"
 msgid "DEC"
 msgstr "বিষুবলম্ব"
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:577
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "অক্ষাংশ"
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:579
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "দ্রাঘিমাংশ"
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:581
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "উন্নতি (পরিমিত)"
 
-#: plugins/NavStars/src/NavStars.cpp:584
+#: plugins/NavStars/src/NavStars.cpp:583
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "দিগংশ (পরিমিত)"
@@ -16667,25 +16707,32 @@ msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
 msgstr ""
+"অতিরিক্ত তথ্য দেখার জন্য বেছে নিন \"তথ্যাদি &gt; অতিরিক্ত স্থানাঙ্ক (সরঞ্জাম"
+" থেকে)\""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
 msgid "These fields are:"
-msgstr ""
+msgstr "বিশেষ তথ্য :"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr ""
+"ঘঃকোণ (গ্রীনিচ) %1 : গ্রীনিচ বা মূলমধ্যরেখা থেকে পরিমিত মহাবিষুব বিন্দুর "
+"ঘন্টাকোণ"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr ""
+"ঘঃকোণ (ক্রান্তীয়) : ক্রান্তীয় বিন্দু থেকে পরিমিত দিকনির্দেশী নক্ষত্রের "
+"ঘন্টাকোণ"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
+"ঘঃকোণ (স্থানীয়) : পর্যবেক্ষণ স্থল থেকে পরিমিত দিকনির্দেশী নক্ষত্রের ঘন্টাকোণ"
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
@@ -16695,6 +16742,8 @@ msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
 msgstr ""
+"অবস্থান (গ্রীনিচ): ঘঃকোণ / বিষুবলম্ব : গ্রীনিচ থেকে পরিমিত দিকনির্দেশী "
+"নক্ষত্রের বিন্দুর ঘন্টাকোণ ও বিষুবলম্ব"
 
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
@@ -16739,6 +16788,8 @@ msgstr ""
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr ""
+"ঘঃকোণ (ক্রান্তীয়) : ক্রান্তীয় বিন্দু থেকে পরিমিত দিকনির্দেশী নক্ষত্রের "
+"ঘন্টাকোণ"
 
 #. TRANSLATORS: celestial coordinate system, declination.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
@@ -16748,6 +16799,8 @@ msgstr ""
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:226
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr ""
+"ঘঃকোণ (গ্রীনিচ) : গ্রীনিচ বা মূলমধ্যরেখা থেকে পরিমিত দিকনির্দেশী নক্ষত্রের "
+"ঘন্টাকোণ"
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
@@ -19108,18 +19161,20 @@ msgid ""
 "Bagan is one of Myanmar's ancient cities that lies beside the Ayeyarwardy "
 "river."
 msgstr ""
+"বাগাঁ হল মায়ানমারের প্রাচীন শহরগুলির মধ্যে একটি । এটি ইরাবদী নদীর তীরে "
+"অবস্থিত ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:402
 msgid ""
 "Sagarmatha is the Nepali name for the highest peak in the world (also known "
 "as Mount Everest) and symbol of national pride of Nepal."
-msgstr ""
+msgstr "সগরমাথা আসলে নেপাল তথা পৃথিবীর সর্বোচ্চ পর্বত (মাউন্ট এভারেষ্ট) ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:403
 msgid ""
 "Laligurans are the Nepali variation of the rhododendron flower and is the "
 "national flower of Nepal."
-msgstr ""
+msgstr "লাল গুঁরাস এক বিশেষ প্রজাতির রোডোডেনড্রন এবং নেপালের জাতীয় ফুল ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid ""

@@ -8,18 +8,18 @@
 # Gerard Prins <gejepe@manquehue.net>, 2018
 # Patrick Ahles <p.ahles@gmail.com>, 2018
 # Jeroen Beuzenberg <jeroenbeuz@hotmail.com>, 2018
-# CC KK <kogacarlo@gmail.com>, 2020
 # albert van de mosselaer <albert.doel@gmail.com>, 2020
 # Harry Mensch, 2020
+# CC KK <kogacarlo@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-02 00:02+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Harry Mensch, 2020\n"
+"Last-Translator: CC KK <kogacarlo@gmail.com>, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1245,7 +1245,7 @@ msgstr "Een kleur streep of strip."
 
 #: src/core/modules/NomenclatureMgr.cpp:78
 msgid "Nomenclature labels"
-msgstr "Naamregister labels"
+msgstr "Naamregisterlabels"
 
 #: src/core/modules/Nebula.cpp:137 src/core/modules/Nebula.cpp:151
 #: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2981
@@ -2063,7 +2063,7 @@ msgstr "Planeten"
 #: src/core/modules/SolarSystem.cpp:272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet labels"
-msgstr "Planeet labels"
+msgstr "Planeetlabels"
 
 #: src/core/modules/SolarSystem.cpp:273
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
@@ -2152,7 +2152,7 @@ msgstr "Periode"
 
 #: src/core/modules/StarWrapper.cpp:313
 msgid "Next maximum light"
-msgstr "Volgende maximaal licht"
+msgstr "Volgend maximaal licht"
 
 #: src/core/modules/StarWrapper.cpp:315
 msgid "Next minimum light"
@@ -2285,7 +2285,7 @@ msgstr "Sporadische meteoren initialiseren..."
 
 #: src/core/StelApp.cpp:566
 msgid "Initializing user labels..."
-msgstr "Gebruiker labels initialiseren..."
+msgstr "Gebruikerlabels initialiseren..."
 
 #: src/core/StelApp.cpp:571
 msgid "Initializing sky cultures..."
@@ -2968,7 +2968,7 @@ msgstr "Geldige gebruiksinterval: tussen jaar %1 en %2."
 
 #: src/core/StelProjector.cpp:134
 msgid "Maximum FOV: "
-msgstr "Maximum gezichtsveld:"
+msgstr "Maximaal zichtveld:"
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
@@ -2982,7 +2982,7 @@ msgid ""
 msgstr ""
 "Bij perspectieve projectie worden de horizon en andere grote cirkels als de "
 "evenaar, ecliptica, uurlijnen, enz. afgebeeld in rechte lijnen. De "
-"wiskundige naam voor deze methode is <i>gnomonische projectie</i>."
+"wiskundige naam van deze projectie is <i>gnomonische projectie</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -2994,7 +2994,7 @@ msgid ""
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
 "De volledige naam van deze projectiemethode is <i>Lambert azimutaal gelijk-"
-"oppervlak projectie</i>. Het behoudt het gebied, maar niet de hoek."
+"oppervlak projectie</i>. Ze behoudt de oppervlakte maar niet de hoek."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -3006,9 +3006,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross"
 " each other but it does not preserve area."
 msgstr ""
-"Stereografische projectie is bekend sinds de oudheid en was oorspronkelijk "
-"bekend als de planisfeerprojectie. Het behoudt de hoeken waarbij curven "
-"elkaar kruisen, maar het gebied wordt niet behouden."
+"De stereografische projectie was in de oudheid al bekend en heette "
+"oorspronkelijk planisfeerprojectie. Ze behoudt de hoeken onder welke curven "
+"elkaar kruisen maar de oppervlakte wordt niet behouden."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -3021,10 +3021,9 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"In vissenoogprojectie, ofwel <i>azimutaal equidistante projectie</i>, worden"
-" rechte lijnen omgebogen naarmate deze onder een grotere hoekafstand hebben "
-"naar het midden van het gezichtsveld (vergelijkbaar met de vervormingen te "
-"zien bij een extreme groothoeklens)."
+"In vissenoogprojectie of <i>azimutaal equidistante projectie</i> worden "
+"rechte lijnen krommer naarmate ze verder van het midden van het gezichtsveld"
+" liggen (vergelijkbaar met de vervormingen van een extreme groothoeklens)."
 
 #: src/core/StelProjectorClasses.cpp:261
 msgid "Hammer-Aitoff"
@@ -3035,8 +3034,8 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"De Hammer projectie is een gelijke-oppervlakte kaart projectie, beschreven "
-"door Ernst Hammer in 1892 en geïnspireerd door de Aitoff projectie."
+"De Hammerprojectie is een gelijke-oppervlakte kaartprojectie, beschreven "
+"door Ernst Hammer in 1892 en geïnspireerd door de Aitoffprojectie."
 
 #: src/core/StelProjectorClasses.cpp:316
 msgid "Cylinder"
@@ -3047,9 +3046,9 @@ msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"De volledige naam voor deze projectiemodus is <i>cilindrische equidistale "
-"projectie</i>. In deze projectiemodus zijn alle parallellen op gelijke "
-"afstand van elkaar geplaatst."
+"De volledige naam van deze projectie is <i>cilindrische equidistante "
+"projectie</i>. In deze projectie liggen alle parallellen op gelijke afstand "
+"van elkaar."
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
@@ -3061,9 +3060,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"De Mercator projectie is een van de meest gebruikte wereldkaartprojecties. "
-"Het behoud richting en vormen maar vervormt de grootte, in toenemende mate "
-"weg van de evenaar."
+"De mercatorprojectie is een van de meest gebruikte wereldkaartprojecties. Ze"
+" is richtinggetrouw maar vervormt de grootte steeds meer naarmate de afstand"
+" tot de evenaar groter wordt."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
@@ -3074,12 +3073,12 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"Orthografische projectie lijkt op perspectieve projectie, maar het "
-"perspectieve punt is hier gesteld op een oneindig grote afstand."
+"Orthografische projectie lijkt op perspectieve projectie maar het "
+"perspectiefpunt is gesteld op oneindig grote afstand."
 
 #: src/core/StelProjectorClasses.cpp:470
 msgid "Sinusoidal"
-msgstr "Sinusoidal"
+msgstr "Sinusoïdaal"
 
 #: src/core/StelProjectorClasses.cpp:475
 msgid ""
@@ -3087,9 +3086,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
-"De sinusoidal projectie is een <i>pseudo-cilindrische gelijk oppervlak "
-"projectie</i>, soms genoemd de Sanson–Flamsteed of de Mercator gelijk "
-"oppervlak projectie."
+"De sinusoïdale projectie is een <i>pseudo-cilindrische gelijke-"
+"oppervlakteprojectie</i>, soms genoemd Sanson–Flamsteed- of Mercator "
+"gelijke-oppervlakteprojectie."
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -3101,9 +3100,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
-"De Miller cilindrische projectie is een gemodificeerde Mercator projectie, "
-"voorgesteld door Osborn Maitland Miller (1897–1979) in 1942. De polen worden"
-" niet langer in het oneindige afgebeeld."
+"De Miller cilindrische projectie is een aangepaste Mercatorprojectie, "
+"voorgesteld door Osborn Maitland Miller (1897-1979) in 1942. De polen worden"
+" niet langer geprojecteerd in het oneindige."
 
 #: src/core/StelObject.cpp:270
 msgctxt "coordinates for current epoch"
@@ -3420,15 +3419,51 @@ msgid "Field of View"
 msgstr "Gezichtsveld"
 
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to"
-msgstr "FOV instellen op"
+msgid "Set FOV to 180°"
+msgstr ""
 
-#: src/core/StelMovementMgr.cpp:239
+#: src/core/StelMovementMgr.cpp:212
+msgid "Set FOV to 90°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:213
+msgid "Set FOV to 60°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:214
+msgid "Set FOV to 45°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:215
+msgid "Set FOV to 20°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:216
+msgid "Set FOV to 10°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:217
+msgid "Set FOV to 5°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:218
+msgid "Set FOV to 2°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:219
+msgid "Set FOV to 1°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:220
+msgid "Set FOV to 0.5°"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Equatoriale montage"
 
-#: src/core/StelMovementMgr.cpp:241
+#: src/core/StelMovementMgr.cpp:240
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Alt-azimut montage"
@@ -4356,83 +4391,83 @@ msgstr "Vensters"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Speed up the script execution rate"
 msgstr "Script uitvoering versnellen"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Slow down the script execution rate"
 msgstr "Script uitvoering vertragen"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Set the normal script execution rate"
 msgstr "Normale script uitvoering"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Stop script execution"
 msgstr "Script uitvoering stoppen"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Pause script execution"
 msgstr "Script uitvoering pauzeren"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Resume script execution"
 msgstr "Script uitvoering hervatten"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:238
 msgid "Script console window"
 msgstr "Script console venster"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Help window"
 msgstr "Help venster"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Configuration window"
 msgstr "Configuratie"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
 msgid "Search window"
 msgstr "Zoeken"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
 msgstr "Ruimte- en projectie instellingen"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:245
 msgid "Date/time window"
 msgstr "Datum/tijd"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:246
 msgid "Location window"
 msgstr "Locatie"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Shortcuts window"
 msgstr "Sneltoetsenvenster"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Astronomical calculations window"
 msgstr "Astronomische berekeningen"
 
-#: src/gui/StelGui.cpp:247 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "Geselecteerde objectinformatie kopiëren naar het klembord"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:256
 msgid "Auto hide horizontal button bar"
 msgstr "Horizontale knoppenbalk automatisch verbergen"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:257
 msgid "Auto hide vertical button bar"
 msgstr "Verticale knoppenbalk automatisch verbergen"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:260
 msgid "Toggle visibility of GUI"
 msgstr "Zichtbaarheid van de GUI aan-/uitzetten"
 
@@ -7202,7 +7237,7 @@ msgstr "Maan"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:560
 msgid "Hurricane"
-msgstr "Orkaan"
+msgstr "Hurricane Ridge"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:562
@@ -10510,11 +10545,11 @@ msgstr "Selecteer of u de namen wilt inkorten, origineel of vertaald"
 
 #: src/ui_viewDialog.h:3332
 msgid "Color of asterism lines"
-msgstr "Kleur van asterisme lijnen"
+msgstr "Kleur van asterismelijnen"
 
 #: src/ui_viewDialog.h:3334
 msgid "Show asterism lines"
-msgstr "Asterisme lijnen weergeven"
+msgstr "Asterismelijnen weergeven"
 
 #: src/ui_viewDialog.h:3336 src/ui_viewDialog.h:3346 src/ui_viewDialog.h:3353
 #: src/ui_viewDialog.h:3361
@@ -10559,11 +10594,11 @@ msgstr "Deze hemelcultuur als standaard gebruiken"
 
 #: src/ui_viewDialog.h:3365
 msgid "Color of asterism names"
-msgstr "Kleur van asterisme namen"
+msgstr "Kleur van asterismenamen"
 
 #: src/ui_viewDialog.h:3367
 msgid "Show asterism labels"
-msgstr "Asterisme labels weergeven"
+msgstr "Asterismelabels weergeven"
 
 #: src/ui_viewDialog.h:3368
 msgid "Constellations font size"
@@ -10923,7 +10958,7 @@ msgstr "Een functie inschakelen om favoriete afbeeldingen op te slaan."
 
 #: src/ui_configurationDialog.h:1664
 msgid "Show bookmarks button"
-msgstr "Bladwijzertoets weergeven"
+msgstr "Bladwijzers"
 
 #: src/ui_configurationDialog.h:1666 src/ui_configurationDialog.h:1697
 #: src/ui_configurationDialog.h:1705 src/ui_configurationDialog.h:1709
@@ -10932,7 +10967,7 @@ msgstr "Knop naast sneltoets weergeven ?"
 
 #: src/ui_configurationDialog.h:1668
 msgid "Show centering button"
-msgstr "Centreringtoets wergeven"
+msgstr "Centreren"
 
 #: src/ui_configurationDialog.h:1670
 msgid ""
@@ -10942,7 +10977,7 @@ msgstr "De toets voor de 'HiPS overzichten' wel/niet weergeven."
 
 #: src/ui_configurationDialog.h:1672
 msgid "Show HiPS button"
-msgstr "HiPS-toets weergeven"
+msgstr "HiPS"
 
 #: src/ui_configurationDialog.h:1674
 msgid "Toggle display of the button for the Digitized Sky Survey."
@@ -10950,7 +10985,7 @@ msgstr "De toets voor het 'Digitized Sky Survey' wel/niet weergeven."
 
 #: src/ui_configurationDialog.h:1676
 msgid "Show DSS button"
-msgstr "DSS toets weergeven"
+msgstr "DSS"
 
 #: src/ui_configurationDialog.h:1678
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -10958,11 +10993,11 @@ msgstr "Verticale en horizontale spiegeltoetsen wel/niet weergeven."
 
 #: src/ui_configurationDialog.h:1680
 msgid "Show flip buttons"
-msgstr "Spiegeltoetsen weergeven"
+msgstr "Spiegelen"
 
 #: src/ui_configurationDialog.h:1681
 msgid "Show asterism lines button"
-msgstr "Asterisme lijnen toets weergeven"
+msgstr "Asterismelijnen"
 
 #: src/ui_configurationDialog.h:1683
 msgid "Toggle display of nebula images."
@@ -10970,11 +11005,11 @@ msgstr "Schakelen tussen weergaven van nevelafbeeldingen."
 
 #: src/ui_configurationDialog.h:1685
 msgid "Show nebula background button"
-msgstr "Nevelachtergrond toets weergeven"
+msgstr "Nevelachtergrond"
 
 #: src/ui_configurationDialog.h:1686
 msgid "Show asterism labels button"
-msgstr "Asterisme labels toets weergeven"
+msgstr "Asterismelabels"
 
 #: src/ui_configurationDialog.h:1688
 msgid "A button to toggle ecliptic grid of date"
@@ -10982,11 +11017,11 @@ msgstr "De ecliptica raster toets wel/niet weergeven"
 
 #: src/ui_configurationDialog.h:1690
 msgid "Show ecliptic grid button"
-msgstr "Ecliptica raster toets weergeven"
+msgstr "Eclipticaraster "
 
 #: src/ui_configurationDialog.h:1691
 msgid "Show constellation boundaries button"
-msgstr "Toets voor sterrenbeeldgrenzen weergeven"
+msgstr "Sterrenbeeldgrenzen"
 
 #: src/ui_configurationDialog.h:1693
 msgid "A button to toggle equatorial J2000 grid"
@@ -10994,11 +11029,11 @@ msgstr "De equatoriale J2000 raster toets wel/niet weergeven"
 
 #: src/ui_configurationDialog.h:1695
 msgid "Show ICRS grid button"
-msgstr "ICRS raster toets weergeven"
+msgstr "ICRS-raster"
 
 #: src/ui_configurationDialog.h:1699
 msgid "Show nightmode button"
-msgstr "Nachtmodustoets weergeven"
+msgstr "Nachtmodus"
 
 #: src/ui_configurationDialog.h:1701
 msgid "A button to toggle galactic grid"
@@ -11006,15 +11041,15 @@ msgstr "De galactisch raster toets wel/niet weergeven"
 
 #: src/ui_configurationDialog.h:1703
 msgid "Show galactic grid button"
-msgstr "Galactisch raster toets weergeven"
+msgstr "Galactisch raster"
 
 #: src/ui_configurationDialog.h:1707
 msgid "Show fullscreen button"
-msgstr "Volledig scherm toets weergeven"
+msgstr "Volledig scherm"
 
 #: src/ui_configurationDialog.h:1711
 msgid "Show Quit button"
-msgstr "Afsluitentoets weergeven"
+msgstr "Programma afsluiten"
 
 #: src/ui_configurationDialog.h:1713
 msgid "Toggle the usage of background under GUI buttons"
@@ -11022,7 +11057,7 @@ msgstr "Wisselt het gebruik van achtergrond onder de GUI toetsen"
 
 #: src/ui_configurationDialog.h:1715
 msgid "Use buttons background"
-msgstr "Achtergrond toetsen gebruiken"
+msgstr "Achtergrond bij toetsen"
 
 #: src/ui_configurationDialog.h:1716
 msgid "Star catalog updates"
@@ -13585,7 +13620,7 @@ msgstr "Satelliet tips"
 
 #: plugins/Satellites/src/Satellites.cpp:148
 msgid "Satellite labels"
-msgstr "Satelliet labels"
+msgstr "Satellietlabels"
 
 #: plugins/Satellites/src/Satellites.cpp:149
 msgid "Satellites configuration window"
@@ -16589,7 +16624,7 @@ msgstr "Type supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:162
 msgid "Maximum brightness"
-msgstr "Maximum helderheid"
+msgstr "Maximale helderheid"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 msgid "Historical Supernovae Plug-in"
@@ -16704,21 +16739,21 @@ msgstr "Update frequentie (dagen):"
 msgid "[next update info]"
 msgstr "[volgende update info]"
 
-#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:124
 msgid "Navigational Stars"
 msgstr "Navigatie sterren"
 
-#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/NavStars.cpp:59
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Deze plug-in markeert navigatie sterren vanuit een geselecteerde set."
 
-#: plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:124
 msgid "Mark the navigational stars"
 msgstr "De navigatie sterren markeren"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:314
+#: plugins/NavStars/src/NavStars.cpp:313
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -16733,7 +16768,7 @@ msgstr ""
 "en <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:320
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -16744,7 +16779,7 @@ msgstr ""
 "des Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:326
+#: plugins/NavStars/src/NavStars.cpp:325
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -16754,7 +16789,7 @@ msgstr ""
 "originele Russische titel is <em>%1</em>)."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:332
+#: plugins/NavStars/src/NavStars.cpp:331
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -16765,89 +16800,89 @@ msgstr ""
 "originele Duitse titel is <em>%1</em>) gepubliceerd door het Federal "
 "Maritime and Hydrographic Agency of Germany."
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:520
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "bovenste deel"
 
-#: plugins/NavStars/src/NavStars.cpp:522
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "onderste deel"
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:537 plugins/NavStars/src/NavStars.cpp:565
+#: plugins/NavStars/src/NavStars.cpp:571
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:539 plugins/NavStars/src/NavStars.cpp:569
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:541 plugins/NavStars/src/NavStars.cpp:575
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:544
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:548
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:554
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:561
+#: plugins/NavStars/src/NavStars.cpp:560
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:564
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:567
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:573
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:577
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:579
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:581
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:584
+#: plugins/NavStars/src/NavStars.cpp:583
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -17101,8 +17136,8 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
-"Dit model is gebaseerd op de tijdvertraging bij %1 magnitude van de maximum "
-"waarde, waar %1 is 2, 3, 6 en 9."
+"Dit model is gebaseerd op de tijdvertraging bij %1 magnitude van de maximale"
+" waarde, waar %1 is 2, 3, 6 en 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 msgid ""
@@ -21180,7 +21215,7 @@ msgstr "Meteoorzwermen"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 msgid "Toggle meteor showers"
-msgstr "Meteoorzwermen in-/uitschalen"
+msgstr "Laat meteoorzwermen zien"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle radiant labels"

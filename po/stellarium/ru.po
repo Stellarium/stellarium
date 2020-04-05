@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-02 00:02+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -3153,7 +3153,7 @@ msgstr "Видимое звёздное время"
 #: src/gui/AstroCalcDialog.cpp:5065
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
-msgstr "Транзит"
+msgstr "Кульминация"
 
 #: src/core/StelObject.cpp:610 src/gui/AstroCalcDialog.cpp:5064
 msgctxt "celestial event"
@@ -3203,7 +3203,7 @@ msgstr "Созвездие МАС"
 
 #: src/core/StelObjectMgr.cpp:55
 msgid "Next transit of the selected object"
-msgstr "Следующий транзит выбранного объекта"
+msgstr "Следующая кульминация выбранного объекта"
 
 #: src/core/StelObjectMgr.cpp:56
 msgid "Next rising of the selected object"
@@ -3215,7 +3215,7 @@ msgstr "Следующий заход выбранного объекта"
 
 #: src/core/StelObjectMgr.cpp:58
 msgid "Today's transit of the selected object"
-msgstr "Сегодняшний транзит выбранного объекта"
+msgstr "Сегодняшняя кульминация выбранного объекта"
 
 #: src/core/StelObjectMgr.cpp:59
 msgid "Today's rising of the selected object"
@@ -3227,7 +3227,7 @@ msgstr "Сегодняшний заход выбранного объекта"
 
 #: src/core/StelObjectMgr.cpp:61
 msgid "Previous transit of the selected object"
-msgstr "Предыдущий транзит выбранного объекта"
+msgstr "Предыдущая кульминация выбранного объекта"
 
 #: src/core/StelObjectMgr.cpp:62
 msgid "Previous rising of the selected object"
@@ -3405,15 +3405,51 @@ msgid "Field of View"
 msgstr "Поле зрения"
 
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to"
-msgstr "Установить поле зрения в"
+msgid "Set FOV to 180°"
+msgstr "Установить поле зрения в 180°"
 
-#: src/core/StelMovementMgr.cpp:239
+#: src/core/StelMovementMgr.cpp:212
+msgid "Set FOV to 90°"
+msgstr "Установить поле зрения в 90°"
+
+#: src/core/StelMovementMgr.cpp:213
+msgid "Set FOV to 60°"
+msgstr "Установить поле зрения в 60°"
+
+#: src/core/StelMovementMgr.cpp:214
+msgid "Set FOV to 45°"
+msgstr "Установить поле зрения в 45°"
+
+#: src/core/StelMovementMgr.cpp:215
+msgid "Set FOV to 20°"
+msgstr "Установить поле зрения в 20°"
+
+#: src/core/StelMovementMgr.cpp:216
+msgid "Set FOV to 10°"
+msgstr "Установить поле зрения в 10°"
+
+#: src/core/StelMovementMgr.cpp:217
+msgid "Set FOV to 5°"
+msgstr "Установить поле зрения в 5°"
+
+#: src/core/StelMovementMgr.cpp:218
+msgid "Set FOV to 2°"
+msgstr "Установить поле зрения в 2°"
+
+#: src/core/StelMovementMgr.cpp:219
+msgid "Set FOV to 1°"
+msgstr "Установить поле зрения в 1°"
+
+#: src/core/StelMovementMgr.cpp:220
+msgid "Set FOV to 0.5°"
+msgstr "Установить поле зрения в 0.5°"
+
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Экваториальная монтировка"
 
-#: src/core/StelMovementMgr.cpp:241
+#: src/core/StelMovementMgr.cpp:240
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Альт-азимутальная монтировка"
@@ -4339,83 +4375,83 @@ msgstr "Окна"
 msgid "Quit"
 msgstr "Выход"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Speed up the script execution rate"
 msgstr "Ускорить выполнение сценария"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Slow down the script execution rate"
 msgstr "Замедлить выполнение сценария"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Set the normal script execution rate"
 msgstr "Установить нормальную скорость для выполнения сценария"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Stop script execution"
 msgstr "Остановить работу сценария"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Pause script execution"
 msgstr "Приостановить выполнение сценария"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Resume script execution"
 msgstr "Продолжить выполнение сценария"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:238
 msgid "Script console window"
 msgstr "Окно консоли сценариев"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Help window"
 msgstr "Окно справки"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Configuration window"
 msgstr "Окно настройки"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
 msgid "Search window"
 msgstr "Окно поиска"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
 msgstr "Окно настроек неба и наблюдения"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:245
 msgid "Date/time window"
 msgstr "Окно даты/времени"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:246
 msgid "Location window"
 msgstr "Окно местоположения"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Shortcuts window"
 msgstr "Окно клавиатурных сокращений"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Astronomical calculations window"
 msgstr "Окно астрономических расчётов"
 
-#: src/gui/StelGui.cpp:247 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "Копирование информации о выбранном объекте в буфер обмена"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:256
 msgid "Auto hide horizontal button bar"
 msgstr "Автоскрытие горизонтальной панели"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:257
 msgid "Auto hide vertical button bar"
 msgstr "Автоскрытие вертикальной панели"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:260
 msgid "Toggle visibility of GUI"
 msgstr "Отобразить панель инструментов"
 
@@ -5225,11 +5261,11 @@ msgstr "Лунная элонгация"
 
 #: src/gui/AstroCalcDialog.cpp:1971
 msgid "Save calculated transits as..."
-msgstr "Сохранить рассчитанные транзиты как..."
+msgstr "Сохранить рассчитанные кульминации как..."
 
 #: src/gui/AstroCalcDialog.cpp:1989 src/ui_astroCalcDialog.h:1589
 msgid "Transits"
-msgstr "Транзиты"
+msgstr "Кульминации"
 
 #: src/gui/AstroCalcDialog.cpp:2180
 msgid "1 minute"
@@ -5548,7 +5584,7 @@ msgstr "Гелиоцентр. расстояние от времени"
 #. and you can short it to use in the drop-down list.
 #: src/gui/AstroCalcDialog.cpp:2917
 msgid "Transit altitude vs. Time"
-msgstr "Высота транзита от времени"
+msgstr "Высота кульминации от времени"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
@@ -5585,7 +5621,7 @@ msgstr "Гелиоцентр. расстояние"
 #. and you can short it.
 #: src/gui/AstroCalcDialog.cpp:3019 src/gui/AstroCalcDialog.cpp:3077
 msgid "Transit altitude"
-msgstr "Высота транзита"
+msgstr "Высота кульминации"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it.
@@ -5715,7 +5751,7 @@ msgstr "Афелий"
 #: src/gui/AstroCalcDialog.cpp:3946 src/gui/AstroCalcDialog.cpp:4159
 msgctxt "passage of the celestial body"
 msgid "Transit"
-msgstr "Транзит"
+msgstr "Прохождение"
 
 #: src/gui/AstroCalcDialog.cpp:3949 src/gui/AstroCalcDialog.cpp:4073
 #: src/gui/AstroCalcDialog.cpp:4162
@@ -10856,11 +10892,11 @@ msgstr "Дополнительная информация"
 
 #: src/ui_configurationDialog.h:1647
 msgid "Show time of rise, transit and set of celestial object"
-msgstr "Показывать время восхода, транзита и заката небесных объектов"
+msgstr "Показывать время восхода, кульминации и заката небесных объектов"
 
 #: src/ui_configurationDialog.h:1649
 msgid "Rises, transits and sets"
-msgstr "Восходы, транзиты и закаты"
+msgstr "Восходы, кульминации и закаты"
 
 #: src/ui_configurationDialog.h:1651
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
@@ -11714,15 +11750,15 @@ msgstr "Цвет эфемеридного маркера Сатурна"
 
 #: src/ui_astroCalcDialog.h:1676
 msgid "Cleanup transits"
-msgstr "Очистка транзитов"
+msgstr "Очистка кульминаций"
 
 #: src/ui_astroCalcDialog.h:1677
 msgid "Save transits"
-msgstr "Сохранить транзиты"
+msgstr "Сохранить кульминации"
 
 #: src/ui_astroCalcDialog.h:1678
 msgid "Calculate transits"
-msgstr "Рассчитать транзиты"
+msgstr "Рассчитать кульминации"
 
 #: src/ui_astroCalcDialog.h:1679
 msgid "Celestial object:"
@@ -11730,7 +11766,7 @@ msgstr "Небесный объект:"
 
 #: src/ui_astroCalcDialog.h:1683
 msgid "Table of approximate transits for selected celestial object"
-msgstr "Таблица приблизительных транзитов для выбранного небесного объекта"
+msgstr "Таблица приблизительных кульминаций для выбранного небесного объекта"
 
 #: src/ui_astroCalcDialog.h:1684
 msgid ""
@@ -16662,21 +16698,21 @@ msgstr "Частота обновлений (в днях):"
 msgid "[next update info]"
 msgstr "[следующее обновление]"
 
-#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:124
 msgid "Navigational Stars"
 msgstr "Навигационные звёзды"
 
-#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/NavStars.cpp:59
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Этот плагин отмечает навигационные звёзды из выбранного набора."
 
-#: plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:124
 msgid "Mark the navigational stars"
 msgstr "Отметить навигационные звёзды"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:314
+#: plugins/NavStars/src/NavStars.cpp:313
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -16691,7 +16727,7 @@ msgstr ""
 "<em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:320
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -16702,7 +16738,7 @@ msgstr ""
 " долгот."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:326
+#: plugins/NavStars/src/NavStars.cpp:325
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -16712,7 +16748,7 @@ msgstr ""
 " русское название <em>%1</em>)."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:332
+#: plugins/NavStars/src/NavStars.cpp:331
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -16723,89 +16759,89 @@ msgstr ""
 " немецкое название <em>%1</em>) издаваемого Федеральным морским и "
 "гидрографическим агентством Германии."
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:520
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "верхний лимб"
 
-#: plugins/NavStars/src/NavStars.cpp:522
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "нижний лимб"
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:537 plugins/NavStars/src/NavStars.cpp:565
+#: plugins/NavStars/src/NavStars.cpp:571
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "Г.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:539 plugins/NavStars/src/NavStars.cpp:569
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "З.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:541 plugins/NavStars/src/NavStars.cpp:575
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "М.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:544
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "Н.П.: Г.Ч.У./Скл."
 
-#: plugins/NavStars/src/NavStars.cpp:548
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "Н.П.: Шир./Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "П.М.: Шир./Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:554
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:561
+#: plugins/NavStars/src/NavStars.cpp:560
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:564
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:567
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "М.С.З.В."
 
-#: plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:573
 msgctxt "Declination"
 msgid "DEC"
 msgstr "Скл."
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:577
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "Шир."
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:579
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:581
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:584
+#: plugins/NavStars/src/NavStars.cpp:583
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -20678,7 +20714,7 @@ msgstr "Настройки отображения"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr "Сегодняшние эфемериды (время восхода, заката и транзита)"
+msgstr "Сегодняшние эфемериды (время восхода, заката и кульминации)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
