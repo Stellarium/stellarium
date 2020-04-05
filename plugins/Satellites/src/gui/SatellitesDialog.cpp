@@ -134,10 +134,10 @@ void SatellitesDialog::createDialogContent()
 	// These controls are refreshed by updateSettingsPage(), which in
 	// turn is triggered by setting any of these values. Because
 	// clicked() is issued only by user input, there's no endless loop.
-	connect(ui->internetUpdatesCheckbox, SIGNAL(clicked(bool)),     plugin, SLOT(enableInternetUpdates(bool)));
-	connect(ui->checkBoxAutoAdd,         SIGNAL(clicked(bool)),     plugin, SLOT(enableAutoAdd(bool)));
-	connect(ui->checkBoxAutoRemove,      SIGNAL(clicked(bool)),     plugin, SLOT(enableAutoRemove(bool)));
-	connect(ui->updateFrequencySpinBox,  SIGNAL(valueChanged(int)), plugin, SLOT(setUpdateFrequencyHours(int)));
+	connectBoolProperty(ui->internetUpdatesCheckbox, "Satellites.updatesEnabled");
+	connectBoolProperty(ui->checkBoxAutoAdd,         "Satellites.autoAddEnabled");
+	connectBoolProperty(ui->checkBoxAutoRemove,      "Satellites.autoRemoveEnabled");
+	connectIntProperty(ui->updateFrequencySpinBox,   "Satellites.updateFrequencyHours");
 	connect(ui->updateButton,            SIGNAL(clicked()),         this,   SLOT(updateTLEs()));
 	connect(ui->jumpToSourcesButton,     SIGNAL(clicked()),         this,   SLOT(jumpToSourcesTab()));
 	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(showUpdateState(Satellites::UpdateState)));
@@ -148,25 +148,23 @@ void SatellitesDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	// Settings tab / General settings group
-	// This does call Satellites::setFlagLabels() indirectly.
-	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Satellite_Labels");
-	connect(ui->labelsGroup,           SIGNAL(clicked(bool)),     action, SLOT(setChecked(bool)));
-	connect(ui->fontSizeSpinBox,       SIGNAL(valueChanged(int)), plugin, SLOT(setLabelFontSize(int)));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),         this,   SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton,    SIGNAL(clicked()),         this,   SLOT(saveSettings()));
+	connectBoolProperty(ui->labelsGroup,    "Satellites.flagLabelsVisible");
+	connectIntProperty(ui->fontSizeSpinBox, "Satellites.labelFontSize");
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Settings tab / realistic mode group
-	connect(ui->realisticGroup,          SIGNAL(clicked(bool)), this,   SLOT(setFlagRealisticMode(bool)));
-	connect(ui->hideInvisibleSatellites, SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideInvisibleSatellites(bool)));
+	connectBoolProperty(ui->iconicGroup,             "Satellites.flagIconicMode");
+	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
 
 	// Settings tab - populate all values
 	updateSettingsPage();
 
 	// Settings tab / orbit lines group
-	connect(ui->orbitLinesGroup,   SIGNAL(clicked(bool)),   plugin, SLOT(setFlagOrbitLines(bool)));
-	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-	connect(ui->orbitFadeSpin,     SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
+	connectBoolProperty(ui->orbitLinesGroup,  "Satellites.flagOrbitLines");
+	connectIntProperty(ui->orbitSegmentsSpin, "Satellites.orbitLineSegments");
+	connectIntProperty(ui->orbitFadeSpin,     "Satellites.orbitLineFadeSegments");
+	connectIntProperty(ui->orbitDurationSpin, "Satellites.orbitLineSegmentDuration");
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
@@ -197,9 +195,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->userCheckBox,      SIGNAL(clicked()), this, SLOT(setFlags()));
 
 	connect(ui->satMarkerColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatMarkerColor()));
-	connect(ui->satOrbitColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
-	connect(ui->satInfoColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
-	connect(ui->descriptionTextEdit,  SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
+	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
+	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
 
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
@@ -348,12 +346,6 @@ void SatellitesDialog::descriptionTextChanged()
 			sat->description = newdesc;
 		}
 	}
-}
-
-
-void SatellitesDialog::setFlagRealisticMode(bool state)
-{
-	GETSTELMODULE(Satellites)->setFlagRelisticMode(!state);
 }
 
 void SatellitesDialog::searchSatellitesClear()
@@ -781,7 +773,7 @@ void SatellitesDialog::updateCountdown()
 {
 	QString nextUpdate = q_("Next update");
 	Satellites* plugin = GETSTELMODULE(Satellites);
-	bool updatesEnabled = plugin->getUpdatesEnabled();
+	const bool updatesEnabled = plugin->getUpdatesEnabled();
 
 	if (!updatesEnabled)
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
@@ -901,7 +893,7 @@ void SatellitesDialog::toggleCheckableSources()
 	if (list->count() < 1)
 		return; // Saves effort checking it on every step
 
-	bool enabled = ui->checkBoxAutoAdd->isChecked(); // proxy :)
+	const bool enabled = GETSTELMODULE(Satellites)->isAutoAddEnabled();
 	if (!enabled == list->item(0)->data(Qt::CheckStateRole).isNull())
 		return; // Nothing to do
 
@@ -939,30 +931,14 @@ void SatellitesDialog::updateSettingsPage()
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Update stuff
-	bool updatesEnabled = plugin->getUpdatesEnabled();
-	ui->internetUpdatesCheckbox->setChecked(updatesEnabled);
+	const bool updatesEnabled = plugin->getUpdatesEnabled();
 	if(updatesEnabled)
 		ui->updateButton->setText(q_("Update now"));
 	else
 		ui->updateButton->setText(q_("Update from files"));
-	ui->checkBoxAutoAdd->setChecked(plugin->isAutoAddEnabled());
-	ui->checkBoxAutoRemove->setChecked(plugin->isAutoRemoveEnabled());
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
 
 	updateCountdown();
-
-	// Presentation stuff
-	ui->labelsGroup->setChecked(plugin->getFlagLabels());
-	ui->fontSizeSpinBox->setValue(plugin->getLabelFontSize());
-
-	ui->orbitLinesGroup->setChecked(plugin->getFlagOrbitLines());
-	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
-	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
-	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
-
-	ui->realisticGroup->setChecked(!plugin->getFlagRealisticMode());
-	ui->hideInvisibleSatellites->setChecked(plugin->getFlagHideInvisibleSatellites());
 }
 
 void SatellitesDialog::populateFilterMenu()
@@ -1206,7 +1182,7 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 	sat->displayed = true;
 
 	// If Satellites are not currently displayed, make them visible.
-	if (!SatellitesMgr->getFlagHints())
+	if (!SatellitesMgr->getFlagHintsVisible())
 	{
 		StelAction* setHintsAction = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Satellite_Hints");
 		Q_ASSERT(setHintsAction);
@@ -1220,14 +1196,6 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
 		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 	}
-}
-
-void SatellitesDialog::setOrbitParams(void)
-{
-	Satellite::orbitLineSegments = ui->orbitSegmentsSpin->value();
-	Satellite::orbitLineFadeSegments = ui->orbitFadeSpin->value();
-	Satellite::orbitLineSegmentDuration = ui->orbitDurationSpin->value();
-	GETSTELMODULE(Satellites)->recalculateOrbitLines();
 }
 
 void SatellitesDialog::updateTLEs(void)

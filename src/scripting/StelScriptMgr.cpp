@@ -380,9 +380,12 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	emit(scriptRunning());
 	emit runningScriptIdChanged(scriptId);
 
-	// run that script
+	// run that script in a new context
+	QScriptContext *context = engine->pushContext();
 	engine->evaluate(preprocessedScript);
+	engine->popContext();
 	scriptEnded();
+	Q_UNUSED(context)
 	return true;
 }
 

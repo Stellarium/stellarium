@@ -281,7 +281,7 @@ private:
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
-	static bool  realisticModeFlag;
+	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
