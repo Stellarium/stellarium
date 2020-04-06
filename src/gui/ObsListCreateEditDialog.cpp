@@ -21,6 +21,7 @@
 #include <QUuid>
 #include <QDir>
 #include <QDateTime>
+#include <QDebug>
 
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -38,11 +39,11 @@ using namespace std;
 
 ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
+ObsListCreateEditDialog::ObsListCreateEditDialog ( string listUuid )
 {
-    listName_ = listName;
+    listUuid_ = listUuid;
 
-    if ( listName_.size() == 0 ) {
+    if ( listUuid_.size() == 0 ) {
         // case of creation mode
         isCreationMode = true;
     } else {
@@ -56,6 +57,7 @@ ObsListCreateEditDialog::ObsListCreateEditDialog ( string listName )
     objectMgr = GETSTELMODULE ( StelObjectMgr );
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( jsonFileName );
+    sorting = "";
 }
 
 ObsListCreateEditDialog::~ObsListCreateEditDialog()
@@ -67,10 +69,10 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 /**
  * Get instance of class
 */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listName )
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listUuid )
 {
     if ( m_instance == nullptr ) {
-        m_instance = new ObsListCreateEditDialog ( listName );
+        m_instance = new ObsListCreateEditDialog ( listUuid );
     }
 
     return m_instance;
@@ -102,6 +104,11 @@ void ObsListCreateEditDialog::createDialogContent()
     ui->obsListCreationEditionTreeView->setModel ( obsListListModel );
     ui->obsListCreationEditionTreeView->header()->setSectionsMovable ( false );
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnName, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnType, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnRa, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnDec, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnConstellation, QHeaderView::ResizeToContents );
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode ( ColumnMagnitude, QHeaderView::ResizeToContents );
     ui->obsListCreationEditionTreeView->header()->setStretchLastSection ( true );
     ui->obsListCreationEditionTreeView->hideColumn ( ColumnUUID );
     ui->obsListCreationEditionTreeView->hideColumn ( ColumnNameI18n );
@@ -109,6 +116,10 @@ void ObsListCreateEditDialog::createDialogContent()
     ui->obsListCreationEditionTreeView->hideColumn ( ColumnLocation );
     //Enable the sort for columns
     ui->obsListCreationEditionTreeView->setSortingEnabled ( true );
+
+    QHeaderView * header = ui->obsListCreationEditionTreeView->header();
+    connect ( header, SIGNAL ( sectionClicked ( int ) ), this, SLOT ( headerClicked ( int ) ) );
+
 }
 
 /*
@@ -220,25 +231,20 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
 
         QString objectType = selectedObject[0]->getType();
-        if ( objectName.isEmpty() || objectType =="CustomObject" ) {
-            float ra, dec;
-            StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
-            objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
-            objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
-            if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
-                visibleFlag = true;
-            }
 
-            if ( objectName.isEmpty() ) {
-                objectName = QString ( "%1, %2" ).arg ( objectRaStr, objectDecStr );
-                objectNameI18n = q_ ( "Unnamed object" );
-                fov = GETSTELMODULE ( StelMovementMgr )->getCurrentFov();
-            }
-
+        float ra, dec;
+        StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
+        objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
+        objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
+        if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
+            visibleFlag = true;
         }
 
-
-
+        if ( objectName.isEmpty() ) {
+            objectName = QString ( "%1, %2" ).arg ( objectRaStr, objectDecStr );
+            objectNameI18n = q_ ( "Unnamed object" );
+            fov = GETSTELMODULE ( StelMovementMgr )->getCurrentFov();
+        }
 
         float objectMagnitude = selectedObject[0]->getVMagnitude ( core );
         QString objectMagnitudeStr = QString::number ( objectMagnitude );
@@ -251,8 +257,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
         }
 
         QString JDs = "";
-        double JD = -1.;
-        JD = core->getJD();
+        double JD = core->getJD();
         JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
 
         QString Location = "";
@@ -298,8 +303,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
         observingListItemCollection.insert ( objectUuid,item );
 
-        saveObservedObject();
-
     } else {
         qWarning() << "selected object is empty !";
     }
@@ -326,58 +329,57 @@ void ObsListCreateEditDialog::saveObservedObject()
     }
 
     QVariantMap observingListDataList;
-    QString oblListUuid = QUuid::createUuid().toString();
-    observingListDataList.insert ( "UUID",  oblListUuid);
-    QString currentDateTime = QDateTime::currentDateTime().toString();
-    observingListDataList.insert ( "Current date time", currentDateTime );
 
+    // Description
+    QString description = ui->descriptionLineEdit->text();
+    observingListDataList.insert ( "description", description );
+
+    // Julian day
+    QString JDString = "";
+    double JD = core->getJD();
+    JDString = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+    observingListDataList.insert ( "jd", JDString );
+
+    // Location
+    QString Location = "";
+    StelLocation loc = core->getCurrentLocation();
+    if ( loc.name.isEmpty() ) {
+        Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+    } else {
+        Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+    }
+    observingListDataList.insert ( "location", Location );
+
+    // Name of the liste
+    QString name = ui->nameOfListLineEdit->text();
+    observingListDataList.insert ( "name", name );
+
+    /// List of objects
+    QVariantList listOfObjects;
     QHashIterator<QString, observingListItem> i ( observingListItemCollection );
     while ( i.hasNext() ) {
         i.next();
 
         observingListItem item = i.value();
         QVariantMap obl;
-        obl.insert ( "name", item.name );
-        if ( !item.nameI18n.isEmpty() ) {
-            obl.insert ( "nameI18n", item.nameI18n );
-        }
-        if ( !item.type.isEmpty() ) {
-            obl.insert ( "type", item.type );
-        }
-        if ( !item.ra.isEmpty() ) {
-            obl.insert ( "ra", item.ra );
-        }
-        if ( !item.dec.isEmpty() ) {
-            obl.insert ( "dec", item.dec );
-        }
-        if ( !item.magnitude.isEmpty() ) {
-            obl.insert ( "magnitude", item.magnitude );
-        }
-        if ( !item.constellation.isEmpty() ) {
-            obl.insert ( "constellation", item.constellation );
-        }
-        if ( !item.jd.isEmpty() ) {
-            obl.insert ( "jd", item.jd );
-        }
-        if ( !item.location.isEmpty() ) {
-            obl.insert ( "location", item.location );
-        }
-        if ( item.fov > 0.0 ) {
-            obl.insert ( "fov", item.fov );
-        }
-        //TODO: check if thi IF is useful
-        if ( item.isVisibleMarker ) {
-            obl.insert ( "isVisibleMarker", item.isVisibleMarker );
-        }
-
-        observingListDataList.insert ( i.key(), obl );
+        QString objectName = item.name;
+        obl.insert ( "designation", objectName );
+        listOfObjects.push_back ( obl );
     }
 
+    observingListDataList.insert ( "objects", listOfObjects );
+    observingListDataList.insert ( "sorting", sorting );
+
     QVariantMap oblList;
-    oblList.insert ( ui->nameOfListLineEdit->text(), observingListDataList );
+    QString oblListUuid = QUuid::createUuid().toString();
+    oblList.insert ( oblListUuid, observingListDataList );
+    QVariantMap allOblList;
+    allOblList.insert ( "observingLists", oblList );
+    allOblList.insert ( "shortName", "Observing lists for Stellarium" );
+    allOblList.insert ( "version", QString ( fileVersion ) );
 
     //Convert the tree to JSON
-    StelJsonParser::write ( oblList, &jsonFile );
+    StelJsonParser::write ( allOblList, &jsonFile );
     jsonFile.flush();
     jsonFile.close();
 
@@ -414,8 +416,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 */
 void ObsListCreateEditDialog::obsListSaveButtonPressed()
 {
-    // generat the uuid of the list
-    const QString uuidList = QUuid::createUuid().toString();
+    saveObservedObject();
 }
 
 /*
@@ -429,10 +430,53 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 
 
 /*
+ * Slot for obsListCreationEditionTreeView header
+*/
+void ObsListCreateEditDialog::headerClicked ( int index )
+{
+    qDebug() << "Index de la colonne: " << index ;
+    switch ( index ) {
+    case ColumnName:
+        sorting = "name";
+        break;
+    case ColumnType:
+        sorting = "type";
+        break;
+    case ColumnRa:
+        sorting = "right ascension";
+        break;
+    case ColumnDec:
+        sorting = "declination";
+        break;
+    case ColumnMagnitude:
+        sorting = "magnitude";
+        break;
+    case ColumnConstellation:
+        sorting = "constellation";
+        break;
+    default:
+        sorting = "";
+        break;
+    }
+    qDebug() << "Sorting = " << sorting;
+
+
+}
+
+
+
+/*
  * Load the observing liste in case of edit mode
 */
 void ObsListCreateEditDialog::loadObservingList()
 {
+    QVariantMap map;
+    QFile jsonFile ( jsonFileName );
+    if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
+        qWarning() << "[BObservingList] cannot open" << QDir::toNativeSeparators ( jsonFileName );
+
+    } else {
+    }
 }
 
 
