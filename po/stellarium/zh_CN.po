@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-02 00:02+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -3324,15 +3324,51 @@ msgid "Field of View"
 msgstr "视场"
 
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to"
-msgstr "将视场设置为"
+msgid "Set FOV to 180°"
+msgstr "将视场设置为180°"
 
-#: src/core/StelMovementMgr.cpp:239
+#: src/core/StelMovementMgr.cpp:212
+msgid "Set FOV to 90°"
+msgstr "将视场设置为90°"
+
+#: src/core/StelMovementMgr.cpp:213
+msgid "Set FOV to 60°"
+msgstr "将视场设置为60°"
+
+#: src/core/StelMovementMgr.cpp:214
+msgid "Set FOV to 45°"
+msgstr "将视场设置为45°"
+
+#: src/core/StelMovementMgr.cpp:215
+msgid "Set FOV to 20°"
+msgstr "将视场设置为20°"
+
+#: src/core/StelMovementMgr.cpp:216
+msgid "Set FOV to 10°"
+msgstr "将视场设置为10°"
+
+#: src/core/StelMovementMgr.cpp:217
+msgid "Set FOV to 5°"
+msgstr "将视场设置为5°"
+
+#: src/core/StelMovementMgr.cpp:218
+msgid "Set FOV to 2°"
+msgstr "将视场设置为2°"
+
+#: src/core/StelMovementMgr.cpp:219
+msgid "Set FOV to 1°"
+msgstr "将视场设置为1°"
+
+#: src/core/StelMovementMgr.cpp:220
+msgid "Set FOV to 0.5°"
+msgstr "将视场设置为0.5°"
+
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "赤道仪"
 
-#: src/core/StelMovementMgr.cpp:241
+#: src/core/StelMovementMgr.cpp:240
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "经纬仪"
@@ -4248,83 +4284,83 @@ msgstr "窗口"
 msgid "Quit"
 msgstr "退出"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Speed up the script execution rate"
 msgstr "加快脚本运行速度"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Slow down the script execution rate"
 msgstr "减慢脚本运行速度"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Set the normal script execution rate"
 msgstr "恢复正常脚本运行速度"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Stop script execution"
 msgstr "停止运行脚本"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Pause script execution"
 msgstr "暂停运行脚本"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Resume script execution"
 msgstr "恢复运行脚本"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:238
 msgid "Script console window"
 msgstr "脚本控制台窗口"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Help window"
 msgstr "说明"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Configuration window"
 msgstr "设置"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
 msgid "Search window"
 msgstr "搜索"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
 msgstr "星空及显示"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:245
 msgid "Date/time window"
 msgstr "日期/时间"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:246
 msgid "Location window"
 msgstr "所在地点"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Shortcuts window"
 msgstr "快捷键窗口"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Astronomical calculations window"
 msgstr "天文计算"
 
-#: src/gui/StelGui.cpp:247 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "复制选中天体的信息到剪贴板"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:256
 msgid "Auto hide horizontal button bar"
 msgstr "自动隐藏水平工具栏"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:257
 msgid "Auto hide vertical button bar"
 msgstr "自动隐藏垂直工具栏"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:260
 msgid "Toggle visibility of GUI"
 msgstr "显示/隐藏工具栏"
 
@@ -4374,7 +4410,7 @@ msgstr "仿真速度"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "flight"
-msgstr ""
+msgstr "飞行"
 
 #: src/gui/StelGuiItems.cpp:805
 msgid "planetocentric distance"
@@ -4720,47 +4756,47 @@ msgstr "可以通过手动删除文件夹 %1 来移除此地景。"
 #: src/gui/ScriptConsole.cpp:80
 msgctxt "command"
 msgid "selected text as script"
-msgstr ""
+msgstr "所选文字作为脚本"
 
 #: src/gui/ScriptConsole.cpp:81
 msgctxt "command"
 msgid "remove screen text"
-msgstr ""
+msgstr "清除屏幕文本"
 
 #: src/gui/ScriptConsole.cpp:82
 msgctxt "command"
 msgid "remove screen images"
-msgstr ""
+msgstr "清除屏幕图像"
 
 #: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "remove screen markers"
-msgstr ""
+msgstr "清除屏幕标识"
 
 #: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "clear map: natural"
-msgstr ""
+msgstr "纯净画面：自然"
 
 #: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "clear map: starchart"
-msgstr ""
+msgstr "纯净画面：星图"
 
 #: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "clear map: deepspace"
-msgstr ""
+msgstr "纯净画面：深空"
 
 #: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "clear map: galactic"
-msgstr ""
+msgstr "纯净画面：银道坐标"
 
 #: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: supergalactic"
-msgstr ""
+msgstr "纯净画面：超星系坐标"
 
 #: src/gui/ScriptConsole.cpp:162
 msgid "Stellarium Script Files"
@@ -4776,11 +4812,11 @@ msgstr "保存脚本"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Clear script"
-msgstr ""
+msgstr "清理脚本"
 
 #: src/gui/ScriptConsole.cpp:201
 msgid "Are you sure?"
-msgstr ""
+msgstr "你确信吗？"
 
 #: src/gui/ScriptConsole.cpp:294
 msgid "Select Script Include Directory"
@@ -6030,7 +6066,7 @@ msgstr "人造天体"
 
 #: src/translations.h:116
 msgid "landing site"
-msgstr ""
+msgstr "着陆点"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -6846,7 +6882,7 @@ msgstr "有趣的变星"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:465
 msgid "Almagest"
-msgstr ""
+msgstr "天文学大成"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:467
@@ -9837,7 +9873,7 @@ msgstr "黄道网格颜色 (J2000.0)"
 #: src/ui_viewDialog.h:3070 src/ui_viewDialog.h:3084 src/ui_viewDialog.h:3154
 #: src/ui_viewDialog.h:3163 src/ui_viewDialog.h:3171 src/ui_viewDialog.h:3195
 msgid "Show partitions"
-msgstr ""
+msgstr "显示刻度线"
 
 #: src/ui_viewDialog.h:2988
 msgid "Color of equator (of date)"
@@ -9982,11 +10018,11 @@ msgstr "天极 (当前)"
 
 #: src/ui_viewDialog.h:3113
 msgid "The line thickness for circle partitions"
-msgstr ""
+msgstr "大圆上刻度线的线宽"
 
 #: src/ui_viewDialog.h:3115
 msgid "Partition thickness"
-msgstr ""
+msgstr "刻度线线宽"
 
 #: src/ui_viewDialog.h:3117
 msgid "Color of cardinal points"
@@ -10163,7 +10199,7 @@ msgstr "显示de Vaucouleurs的超星系坐标(1976)，由附近星系的分布�
 #: src/ui_viewDialog.h:3273 src/ui_viewDialog.h:3277 src/ui_viewDialog.h:3281
 #: src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3289 src/ui_viewDialog.h:3293
 msgid "Label partitions"
-msgstr ""
+msgstr "显示刻度值"
 
 #: src/ui_viewDialog.h:3251
 msgid "Equator (J2000)"
@@ -11232,7 +11268,7 @@ msgstr "使用 SSC 处理器预处理脚本"
 
 #: src/ui_scriptConsole.h:403
 msgid "Execute:"
-msgstr ""
+msgstr "执行："
 
 #: src/ui_scriptConsole.h:408
 msgid "run script"
@@ -16061,21 +16097,21 @@ msgstr "更新频率（天）："
 msgid "[next update info]"
 msgstr "[下次更新的信息]"
 
-#: plugins/NavStars/src/NavStars.cpp:57 plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:124
 msgid "Navigational Stars"
 msgstr "导航星"
 
-#: plugins/NavStars/src/NavStars.cpp:60
+#: plugins/NavStars/src/NavStars.cpp:59
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "此插件标记选定的一组导航星"
 
-#: plugins/NavStars/src/NavStars.cpp:125
+#: plugins/NavStars/src/NavStars.cpp:124
 msgid "Mark the navigational stars"
 msgstr "标记导航星"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:314
+#: plugins/NavStars/src/NavStars.cpp:313
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -16087,15 +16123,15 @@ msgstr ""
 " Star Finder</em> 和 <em>Identifier</em>这样的导航工具中。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:320
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
 "French title is <em>%1</em>) published by the French Bureau des Longitudes."
-msgstr ""
+msgstr "法国经度管理局出版的法国航海年历（法文：<em>%1</em>）列出的81颗恒星。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:326
+#: plugins/NavStars/src/NavStars.cpp:325
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -16103,100 +16139,100 @@ msgid ""
 msgstr "在俄罗斯航海天文历（俄文： <em>%1</em>）中列出的160颗恒星。"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:332
+#: plugins/NavStars/src/NavStars.cpp:331
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
 "German title is <em>%1</em>) published by the Federal Maritime and "
 "Hydrographic Agency of Germany."
-msgstr ""
+msgstr "德国联邦海洋与水文局出版的德国航海年鉴（德文：<em>%1</em>）中列出的80颗恒星。"
 
-#: plugins/NavStars/src/NavStars.cpp:521
+#: plugins/NavStars/src/NavStars.cpp:520
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
-msgstr ""
+msgstr "上边"
 
-#: plugins/NavStars/src/NavStars.cpp:522
+#: plugins/NavStars/src/NavStars.cpp:521
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
-msgstr ""
+msgstr "下边"
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:566
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:537 plugins/NavStars/src/NavStars.cpp:565
+#: plugins/NavStars/src/NavStars.cpp:571
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
-msgstr ""
+msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:539 plugins/NavStars/src/NavStars.cpp:569
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
-msgstr ""
+msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:541 plugins/NavStars/src/NavStars.cpp:575
 msgctxt "Local Hour Angle"
 msgid "LHA"
-msgstr ""
+msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:545
+#: plugins/NavStars/src/NavStars.cpp:544
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
-msgstr ""
+msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:548
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
-msgstr ""
+msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:551
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
-msgstr ""
+msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:554
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
-msgstr ""
+msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:561
+#: plugins/NavStars/src/NavStars.cpp:560
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
-msgstr ""
+msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:564
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
-msgstr ""
+msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:567
 msgctxt "Local Hour Angle"
 msgid "LMST"
-msgstr ""
+msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:573
 msgctxt "Declination"
 msgid "DEC"
-msgstr ""
+msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:577
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
-msgstr ""
+msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:579
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
-msgstr ""
+msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:581
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
-msgstr ""
+msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:584
+#: plugins/NavStars/src/NavStars.cpp:583
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
-msgstr ""
+msgstr "Zn"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:151
@@ -16216,7 +16252,7 @@ msgstr "俄国"
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
 msgid "German"
-msgstr ""
+msgstr "德国"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
 msgid "Navigational Stars Plug-in"
@@ -16226,26 +16262,26 @@ msgstr "导航星插件"
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
-msgstr ""
+msgstr "可以通过“信息 &gt; 附加坐标(插件)”显示附加信息字段"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
 msgid "These fields are:"
-msgstr ""
+msgstr "这些对话框有："
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
-msgstr ""
+msgstr "GHA%1: 白羊座第一点的格林威治时角。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
 msgid "SHA: Sidereal Hour Angle of the navigation star."
-msgstr ""
+msgstr "SHA: 导航星的恒星时角。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
-msgstr ""
+msgstr "LHA: 观测者所在点与导航星间的地方时角。"
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
@@ -16254,7 +16290,7 @@ msgstr ""
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
-msgstr ""
+msgstr "GP: GHA/DEC: 以格林尼治时角和赤纬表示导航星基点位置。"
 
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
@@ -16263,7 +16299,7 @@ msgstr ""
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
-msgstr ""
+msgstr "AP: LAT/LON: 以经纬度表示观测者假定位置。"
 
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
@@ -16272,68 +16308,68 @@ msgstr ""
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
-msgstr ""
+msgstr "Hc/Zn: 从观测者假定位置计算出的导航星高度和方位角"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:212
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
-msgstr ""
+msgstr "用户有两种不同的视图选项，由“以列表形式显示信息”选择。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:216
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
-msgstr ""
+msgstr "当选择“列表”时，字段更接近航海年历格式"
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:220
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
-msgstr ""
+msgstr "Ho: 用六分仪模拟观测导航星高度。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:222
 msgid "LMST: Local mean sidereal time."
-msgstr ""
+msgstr "LMST: 地方平恒星时。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
 msgid "SHA: Sidereal Hour Angle of navigation star."
-msgstr ""
+msgstr "SHA: 导航星的恒星时角。"
 
 #. TRANSLATORS: celestial coordinate system, declination.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
 msgid "DEC: The navigation star's declination."
-msgstr ""
+msgstr "DEC: 导航线的赤纬。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:226
 msgid "GHA: The navigation star's Greenwich Hour Angle."
-msgstr ""
+msgstr "GHA: 的航星的格林威治时角。"
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
 msgid "LAT: The observer's geodetic latitude."
-msgstr ""
+msgstr "LAT: 观测者的地理纬度。"
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
 msgid "LON: The observer's geodetic longitude."
-msgstr ""
+msgstr "LON: 观测者的地理经度。"
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
 msgid "Hc: The AP calculated height (altitude) of navigation star."
-msgstr ""
+msgstr "Hc: 假定位置计算出的导航星高度。"
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:235
 msgid "Zn: The AP calculated azimuth of navigation star."
-msgstr ""
+msgstr "Zn: 假定位置计算出的导航星方位角。"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:239
 msgid "For further information please refer to the Stellarium User Guide."
-msgstr ""
+msgstr "更多信息请参阅Stellarium用户指南。"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:233
 #: plugins/NavStars/src/ui_navStarsWindow.h:249
@@ -16367,19 +16403,19 @@ msgstr "启动时显示"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:243
 msgid "Only highlight when visible"
-msgstr ""
+msgstr "只在可见时高亮显示"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:244
 msgid "Only show extra information for marked Navigation Stars"
-msgstr ""
+msgstr "只显示有标识的导航星的附加信息"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:245
 msgid "Show information as a tabulated list"
-msgstr ""
+msgstr "以列表形式显示信息"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:246
 msgid "Use upper limb for Sun and Moon"
-msgstr ""
+msgstr "对太阳和月球使用上边"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:144
 msgid "Bright Novae"

@@ -91,7 +91,7 @@ public:
 	//! @param side which side of the object to draw the label, values N, S, E, W, NE, NW, SE, SW, C (C is centred on the object)
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
 	//! @param style determines how the label is drawn
-	//! @param enclosureSize determines the size of the enclosure for styles Box and Circle
+	//! @param enclosureSize used to determine the size of the enclosure for the former styles Box and Circle. These have been removed, and this parameter should not be written.
 	// TBD: Apparently styles Box and Circle have been removed?
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
@@ -112,7 +112,7 @@ private:
 	QString labelSide;
 	double labelDistance;
 	SkyLabel::Style labelStyle;
-	double labelEnclosureSize;
+	double labelEnclosureSize; // TODO: Remove this useless parameter?
 };
 
 //! @class HorizonLabel
@@ -217,8 +217,8 @@ SkyLabel::Style SkyLabel::stringToStyle(const QString& s)
 // SkyLabel class //
 ////////////////////
 SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font,
-                   Vec3f color, QString side, double distance, SkyLabel::Style style,
-                   double enclosureSize)
+		   Vec3f color, QString side, double distance, SkyLabel::Style style,
+		   double enclosureSize)
 	: StelLabel(text, font, color),
 	  labelObject(bindObject),
 	  labelSide(side),
@@ -279,18 +279,18 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	}
 	else
 	{
-		float shift = 4.f + labelObject->getAngularSize(core)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
+		float shift = 4.f + static_cast<float>(labelObject->getAngularSize(core))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
 		// use the object size
-		xOffset *= shift;
-		yOffset *= shift;
+		xOffset *= static_cast<double>(shift);
+		yOffset *= static_cast<double>(shift);
 	}
 
 	double jxOffset(0.);
 	double jyOffset(0.); 
 	if (hJustify == 'r')
-		jxOffset = sPainter.getFontMetrics().width(labelText);
+		jxOffset = sPainter.getFontMetrics().boundingRect(labelText).width();
 	else if (hJustify == 'c')
-		jxOffset = sPainter.getFontMetrics().width(labelText) / 2.;
+		jxOffset = sPainter.getFontMetrics().boundingRect(labelText).width() / 2.;
 
 	if (vJustify == 't')
 		jyOffset = sPainter.getFontMetrics().height();
@@ -298,7 +298,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 		jyOffset = sPainter.getFontMetrics().height() / 2.;
 
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
-	sPainter.drawText(labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
+	sPainter.drawText(static_cast<float>(labelXY[0]+xOffset-jxOffset), static_cast<float>(labelXY[1]+yOffset-jyOffset), labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
 	{
@@ -308,8 +308,8 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 		Vec3d objXY;
 		sPainter.getProjector()->project(objectPos,objXY);
 
-		double lineEndX = labelXY[0]+xOffset;
-		double lineEndY = labelXY[1]+yOffset;
+		float lineEndX = static_cast<float>(labelXY[0]+xOffset);
+		float lineEndY = static_cast<float>(labelXY[1]+yOffset);
 
 		if (vJustify == 'b')
 			lineEndY -= 5;
@@ -321,9 +321,9 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 		else if (hJustify == 'r')
 			lineEndX += 5;
 				
-		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+		sPainter.setColor(labelColor, labelFader.getInterstate());
 		
-		sPainter.drawLine2d(lineEndX,lineEndY,objXY[0], objXY[1]);
+		sPainter.drawLine2d(lineEndX,lineEndY,static_cast<float>(objXY[0]), static_cast<float>(objXY[1]));
 	}
 
 	return true;
@@ -335,7 +335,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 HorizonLabel::HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color)
 	: StelLabel(text, font, color)
 {
-	StelUtils::spheToRect((180.0f-az)*M_PI/180.0, alt*M_PI/180.0, altaz);
+	StelUtils::spheToRect((180.0f-az)*M_PI_180f, alt*M_PI_180f, altaz);
 }
 
 HorizonLabel::~HorizonLabel()
@@ -467,8 +467,21 @@ int LabelMgr::labelObject(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
+	return labelObject(text, objectName, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, style, autoDelete, autoDeleteTimeoutMs);
+}
+int LabelMgr::labelObject(const QString& text,
+			  const QString& objectName,
+			  bool visible,
+			  float fontSize,
+			  const Vec3f& fontColor,
+			  const QString& side,
+			  double labelDistance,
+			  const QString& style,
+			  bool autoDelete,
+			  int autoDeleteTimeoutMs)
+{
 	QFont font;
-	font.setPixelSize(fontSize);
+	font.setPixelSize(static_cast<int>(fontSize));
 	StelObjectP obj = GETSTELMODULE(StelObjectMgr)->searchByName(objectName);
 	if (!obj)
 	{
@@ -476,7 +489,7 @@ int LabelMgr::labelObject(const QString& text,
 		return -1;
 	}
 	
-	StelLabel* l = new SkyLabel(text, obj, font, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, SkyLabel::stringToStyle(style));
+	StelLabel* l = new SkyLabel(text, obj, font, fontColor, side, labelDistance, SkyLabel::stringToStyle(style));
 	if (l==Q_NULLPTR)
 		return -1;
 
@@ -497,9 +510,20 @@ int LabelMgr::labelHorizon(const QString& text,
 		bool autoDelete,
 		int autoDeleteTimeoutMs)
 {
+	return labelHorizon(text, az, alt, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), autoDelete, autoDeleteTimeoutMs);
+}
+int LabelMgr::labelHorizon(const QString& text,
+		float az,
+		float alt,
+		bool visible,
+		float fontSize,
+		const Vec3f& fontColor,
+		bool autoDelete,
+		int autoDeleteTimeoutMs)
+{
 	QFont font;
-	font.setPixelSize(fontSize);
-	HorizonLabel* l = new HorizonLabel(text, az, alt, font, StelUtils::htmlColorToVec3f(fontColor));
+	font.setPixelSize(static_cast<int>(fontSize));
+	HorizonLabel* l = new HorizonLabel(text, az, alt, font, fontColor);
 	if (l==Q_NULLPTR)
 		return -1;
 
@@ -520,9 +544,20 @@ int LabelMgr::labelScreen(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
+	return labelScreen(text, x, y, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), autoDelete, autoDeleteTimeoutMs);
+}
+int LabelMgr::labelScreen(const QString& text,
+			  int x,
+			  int y,
+			  bool visible,
+			  float fontSize,
+			  const Vec3f& fontColor,
+			  bool autoDelete,
+			  int autoDeleteTimeoutMs)
+{
 	QFont font;
-	font.setPixelSize(fontSize);
-	ScreenLabel* l = new ScreenLabel(text, x, y, font, StelUtils::htmlColorToVec3f(fontColor));
+	font.setPixelSize(static_cast<int>(fontSize));
+	ScreenLabel* l = new ScreenLabel(text, x, y, font, fontColor);
 	if (l==Q_NULLPTR)
 		return -1;
 
