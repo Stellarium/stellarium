@@ -58,7 +58,7 @@ private:
     };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
-    std::string selectedObservingList;
+    std::string selectedObservingListUuid;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();

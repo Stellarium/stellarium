@@ -43,15 +43,6 @@ ObsListCreateEditDialog::ObsListCreateEditDialog ( string listUuid )
 {
     listUuid_ = listUuid;
 
-    if ( listUuid_.size() == 0 ) {
-        // case of creation mode
-        isCreationMode = true;
-    } else {
-        // case of edit mode
-        isCreationMode = false;
-        loadObservingList();
-    }
-
     ui = new Ui_obsListCreateEditDialogForm();
     core = StelApp::getInstance().getCore();
     objectMgr = GETSTELMODULE ( StelObjectMgr );
@@ -120,6 +111,16 @@ void ObsListCreateEditDialog::createDialogContent()
     QHeaderView * header = ui->obsListCreationEditionTreeView->header();
     connect ( header, SIGNAL ( sectionClicked ( int ) ), this, SLOT ( headerClicked ( int ) ) );
 
+    if ( listUuid_.size() == 0 ) {
+        // case of creation mode
+        isCreationMode = true;
+        ui->stelWindowTitle->setText ( "Observing list creation mode" );
+    } else {
+        // case of edit mode
+        isCreationMode = false;
+        ui->stelWindowTitle->setText ( "Observing list modification mode" );
+        loadObservingList();
+    }
 }
 
 /*
@@ -308,6 +309,16 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
     }
 }
 
+/*
+ * Slot for button obsListRemoveObjectButton
+*/
+void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed()
+{
+    int number = ui->obsListCreationEditionTreeView->currentIndex().row();
+    QString uuid = obsListListModel->index ( number, ColumnUUID ).data().toString();
+    obsListListModel->removeRow ( number );
+    observingListItemCollection.remove ( uuid );
+}
 
 /*
  * Save observed object into json file
@@ -322,78 +333,82 @@ void ObsListCreateEditDialog::saveObservedObject()
     }
 
     QFile jsonFile ( observingListJsonPath );
-    if ( !jsonFile.open ( QFile::WriteOnly|QFile::Text ) ) {
-        qWarning() << "[ObservingList] observing list can not be saved. A file can not be open for writing:"
+    if ( !jsonFile.open ( QIODevice::ReadWrite|QIODevice::Text|QIODevice::ExistingOnly ) ) {
+        qWarning() << "[ObservingList] observing list can not be saved. A file can not be open for reading and writing:"
                    << QDir::toNativeSeparators ( observingListJsonPath );
         return;
     }
 
-    QVariantMap observingListDataList;
+    try {
 
-    // Description
-    QString description = ui->descriptionLineEdit->text();
-    observingListDataList.insert ( "description", description );
+        QVariantMap mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+        QVariantMap allListsMap = mapFromJsonFile.value ( "observingList" ).toMap();
 
-    // Julian day
-    QString JDString = "";
-    double JD = core->getJD();
-    JDString = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
-    observingListDataList.insert ( "jd", JDString );
 
-    // Location
-    QString Location = "";
-    StelLocation loc = core->getCurrentLocation();
-    if ( loc.name.isEmpty() ) {
-        Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
-    } else {
-        Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+        QVariantMap observingListDataList;
+
+        // Description
+        QString description = ui->descriptionLineEdit->text();
+        observingListDataList.insert ( "description", description );
+
+        // Julian day
+        QString JDString = "";
+        double JD = core->getJD();
+        JDString = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+        observingListDataList.insert ( "jd", JDString );
+
+        // Location
+        QString Location = "";
+        StelLocation loc = core->getCurrentLocation();
+        if ( loc.name.isEmpty() ) {
+            Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+        } else {
+            Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+        }
+        observingListDataList.insert ( "location", Location );
+
+        // Name of the liste
+        QString name = ui->nameOfListLineEdit->text();
+        observingListDataList.insert ( "name", name );
+
+        /// List of objects
+        QVariantList listOfObjects;
+        QHashIterator<QString, observingListItem> i ( observingListItemCollection );
+        while ( i.hasNext() ) {
+            i.next();
+
+            observingListItem item = i.value();
+            QVariantMap obl;
+            QString objectName = item.name;
+            obl.insert ( "designation", objectName );
+            listOfObjects.push_back ( obl );
+        }
+
+        observingListDataList.insert ( "objects", listOfObjects );
+        observingListDataList.insert ( "sorting", sorting );
+
+        //QVariantMap oblList;
+        QString oblListUuid = QUuid::createUuid().toString();
+        //oblList.insert ( oblListUuid, observingListDataList );
+        allListsMap.insert ( oblListUuid, observingListDataList );
+        //QVariantMap allOblList;
+        //allOblList.insert ( "observingLists", oblList );
+        //allOblList.insert ( "shortName", "Observing lists for Stellarium" );
+        //allOblList.insert ( "version", QString ( fileVersion ) );
+        mapFromJsonFile.insert ( "observingLists", allListsMap );
+
+        //Convert the tree to JSON
+        //StelJsonParser::write ( allOblList, &jsonFile );
+        StelJsonParser::write ( mapFromJsonFile, &jsonFile );
+        jsonFile.flush();
+        jsonFile.close();
+
+    } catch ( std::runtime_error &e ) {
+        qDebug() << "[ObservingList] File format is wrong! Error: " << e.what();
+        return;
     }
-    observingListDataList.insert ( "location", Location );
-
-    // Name of the liste
-    QString name = ui->nameOfListLineEdit->text();
-    observingListDataList.insert ( "name", name );
-
-    /// List of objects
-    QVariantList listOfObjects;
-    QHashIterator<QString, observingListItem> i ( observingListItemCollection );
-    while ( i.hasNext() ) {
-        i.next();
-
-        observingListItem item = i.value();
-        QVariantMap obl;
-        QString objectName = item.name;
-        obl.insert ( "designation", objectName );
-        listOfObjects.push_back ( obl );
-    }
-
-    observingListDataList.insert ( "objects", listOfObjects );
-    observingListDataList.insert ( "sorting", sorting );
-
-    QVariantMap oblList;
-    QString oblListUuid = QUuid::createUuid().toString();
-    oblList.insert ( oblListUuid, observingListDataList );
-    QVariantMap allOblList;
-    allOblList.insert ( "observingLists", oblList );
-    allOblList.insert ( "shortName", "Observing lists for Stellarium" );
-    allOblList.insert ( "version", QString ( fileVersion ) );
-
-    //Convert the tree to JSON
-    StelJsonParser::write ( allOblList, &jsonFile );
-    jsonFile.flush();
-    jsonFile.close();
-
-
 }
 
-
-/*
- * Slot for button obsListRemoveObjectButton
-*/
-void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed()
-{
-    //TODO
-}
 
 /*
  * Slot for button obsListExportListButton
@@ -471,11 +486,138 @@ void ObsListCreateEditDialog::headerClicked ( int index )
 void ObsListCreateEditDialog::loadObservingList()
 {
     QVariantMap map;
-    QFile jsonFile ( jsonFileName );
+    QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
-        qWarning() << "[BObservingList] cannot open" << QDir::toNativeSeparators ( jsonFileName );
+        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( jsonFileName );
 
     } else {
+        try {
+            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            jsonFile.close();
+
+            observingListItemCollection.clear();
+            //obsListListModel->clear();
+            const QString keyUuid = QString::fromStdString ( listUuid_ );
+            QVariantMap observingListMap = map.value ( "observingLists" ).toMap().value ( keyUuid ).toMap();
+            //QVariantMap observingListMap = observingListsMap.value ( keyUuid ).toMap();
+            QVariantList listOfObjects;
+
+            QString listeName = observingListMap.value ( "name" ).value<QString>();
+            ui->nameOfListLineEdit->setText ( listeName );
+            QString listDescription = observingListMap.value ( "description" ).value<QString>();
+            ui->descriptionLineEdit->setText ( listDescription );
+
+            if ( observingListMap.value ( "objects" ).canConvert<QVariantList>() ) {
+                QVariant data = observingListMap.value ( "objects" );
+                listOfObjects = data.value<QVariantList>();
+            } else {
+                qCritical() << "[ObservingList] conversion error";
+                return;
+            }
+
+            for ( QVariant object: listOfObjects ) {
+                QVariantMap objectMap;
+                if ( object.canConvert<QVariantMap>() ) {
+                    objectMap = object.value<QVariantMap>();
+                    QString objectName = objectMap.value ( "designation" ).value<QString>();
+
+                    if ( objectMgr->findAndSelect ( objectName ) ) {
+                        const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
+                        if ( !selectedObject.isEmpty() ) {
+
+                            int lastRow = obsListListModel->rowCount();
+                            QString objectUuid = QUuid::createUuid().toString();
+                            QString objectNameI18n = selectedObject[0]->getNameI18n();
+                            QString objectRaStr = "", objectDecStr = "";
+                            bool visibleFlag = false;
+                            double fov = -1.0;
+
+                            QString objectType = selectedObject[0]->getType();
+
+                            float ra, dec;
+                            StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
+                            objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
+                            objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
+                            if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
+                                visibleFlag = true;
+                            }
+
+                            float objectMagnitude = selectedObject[0]->getVMagnitude ( core );
+                            QString objectMagnitudeStr = QString::number ( objectMagnitude );
+
+                            QVariantMap objectMap = selectedObject[0]->getInfoMap ( core );
+                            QVariant objectConstellationVariant = objectMap["iauConstellation"];
+                            QString objectConstellation ( "unknown" );
+                            if ( objectConstellationVariant.canConvert<QString>() ) {
+                                objectConstellation = objectConstellationVariant.value<QString>();
+                            }
+
+                            QString JDs = "";
+                            double JD = core->getJD();
+
+                            JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+
+                            QString Location = "";
+                            StelLocation loc = core->getCurrentLocation();
+                            if ( loc.name.isEmpty() ) {
+                                Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+                            } else {
+                                Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+                            }
+
+                            addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
+
+                            observingListItem item;
+                            item.name = objectName;
+                            item.nameI18n = objectNameI18n;
+                            if ( !objectType.isEmpty() ) {
+                                item.type = objectType;
+                            }
+                            if ( !objectRaStr.isEmpty() ) {
+                                item.ra = objectRaStr;
+                            }
+                            if ( !objectDecStr.isEmpty() ) {
+                                item.dec = objectDecStr;
+                            }
+                            if ( !objectMagnitudeStr.isEmpty() ) {
+                                item.magnitude = objectMagnitudeStr;
+                            }
+                            if ( !objectConstellation.isEmpty() ) {
+                                item.constellation = objectConstellation;
+                            }
+                            if ( !JDs.isEmpty() ) {
+                                item.jd = JDs;
+                            }
+                            if ( !Location.isEmpty() ) {
+                                item.location = Location;
+                            }
+                            if ( !visibleFlag ) {
+                                item.isVisibleMarker = visibleFlag;
+                            }
+                            if ( fov > 0.0 ) {
+                                item.fov = fov;
+                            }
+
+                            observingListItemCollection.insert ( objectUuid,item );
+
+                        } else {
+                            qWarning() << "selected object is empty !";
+                        }
+
+                    } else {
+                        qWarning() << "Object: " << objectName << " not found !" ;
+                    }
+                } else {
+                    qCritical() << "[ObservingList] conversion error";
+                    return;
+                }
+
+            }
+
+        } catch ( std::runtime_error &e ) {
+            qWarning() << "[Bookmarks] File format is wrong! Error: " << e.what();
+            return;
+        }
     }
 }
 
