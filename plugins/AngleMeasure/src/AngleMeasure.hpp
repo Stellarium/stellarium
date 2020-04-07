@@ -200,7 +200,6 @@ private:
 	void calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angleEquatorial);
 	//! return a nicely formatted angle string.
 	//! @arg angle in radians
-	//QString formatAngleString(bool horizontal) const;
 	QString formatAngleString(double angle) const;
 	QString calculatePositionAngle(const Vec3d p1, const Vec3d p2) const;
 	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
@@ -210,8 +209,6 @@ private:
 	// GUI
 	AngleMeasureDialog* configDialog;
 };
-
-
 
 #include <QObject>
 #include "StelPluginInterface.hpp"
@@ -229,4 +226,3 @@ public:
 };
 
 #endif /*ANGLEMEASURE_HPP*/
-

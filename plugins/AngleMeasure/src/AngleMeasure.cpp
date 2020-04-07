@@ -422,37 +422,6 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Ve
 	angle = start.angle(end);
 }
 
-//QString AngleMeasure::formatAngleString(bool horizontal) const
-//{
-//	unsigned int d, m;
-//	double s;
-//	bool sign;
-//
-//	if (withDecimalDegree)
-//	{
-//		if (horizontal)
-//			StelUtils::radToDecDeg(angleHorizontal, sign, s);
-//		else
-//			StelUtils::radToDecDeg(angleEquatorial, sign, s);
-//
-//		if (flagUseDmsFormat)
-//			return QString("%1d").arg(s, 0, 'f', 5);
-//		else
-//			return QString("%1%2").arg(s, 0, 'f', 5).arg(QChar(0x00B0));
-//	}
-//	else
-//	{
-//		if (horizontal)
-//			StelUtils::radToDms(angleHorizontal, sign, d, m, s);
-//		else
-//			StelUtils::radToDms(angleEquatorial, sign, d, m, s);
-//		if (flagUseDmsFormat)
-//			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
-//		else
-//			return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
-//	}
-//}
-
 QString AngleMeasure::formatAngleString(double angle) const
 {
 	unsigned int d, m;
