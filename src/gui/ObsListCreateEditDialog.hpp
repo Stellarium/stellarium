@@ -26,30 +26,16 @@
 #include <string>
 
 #include "StelDialog.hpp"
+#include "ObservingListCommon.hpp"
 
 class Ui_obsListCreateEditDialogForm;
-
-struct observingListItem {
-    QString name;
-    QString nameI18n;
-    QString type;
-    QString ra;
-    QString dec;
-    QString magnitude;
-    QString constellation;
-    QString jd;
-    QString location;
-    double fov;
-    bool isVisibleMarker;
-};
-Q_DECLARE_METATYPE(observingListItem)
 
 class ObsListCreateEditDialog : public StelDialog
 {
     Q_OBJECT
 
 public:
-    static ObsListCreateEditDialog * Instance (std::string listUuid );
+    static ObsListCreateEditDialog * Instance ( std::string listUuid );
     static void kill();
 
     //! Notify that the application style changed
@@ -65,34 +51,19 @@ private:
     //! To know if the dialog is open in creation mode or editionn mode
     // if true we are in creation mode otherwise in edition mode
     bool isCreationMode;
-    enum ObsListColumns {
-        ColumnUUID,	//! UUID of object
-        ColumnName,	//! Name or designation of object
-        ColumnNameI18n,	//! Localized name of object
-        ColumnType, //! Type of the object
-        ColumnRa,	//! Right ascencion of the object
-        ColumnDec,	//! Declination of the object
-        ColumnMagnitude,	//! Magnitude of the object
-        ColumnConstellation, //! Constellation in which the object is located
-        ColumnJD, //! Date in julian day
-        ColumnLocation, //! Location where the object is observed
-        ColumnCount	//! Total number of columns
-    };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     class StelObjectMgr* objectMgr;
     std::string listUuid_;
-    static constexpr char const * jsonFileName = "observingList.json";
-    static constexpr char const * fileVersion = "1.0";
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
-    
+
     //! Sorting of the list ex: right ascencion
     QString sorting;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
-    
+
     //! Add row in the obsListListModel
     //! @param number row number
     //! @param uuid id of the record
@@ -102,16 +73,16 @@ private:
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
-    void addModelRow(int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation);
-    
+    void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+
     //! Save the object informations into json file
     void saveObservedObject();
-    
+
     //! Load the observing liste in case of edit mode
     void loadObservingList();
 
     //Private constructor and destructor
-    ObsListCreateEditDialog (std::string listUuid);
+    ObsListCreateEditDialog ( std::string listUuid );
     virtual ~ObsListCreateEditDialog();
 
 
@@ -124,7 +95,7 @@ private slots:
     void obsListImportListButtonPresssed();
     void obsListSaveButtonPressed();
     void obsListExitButtonPressed();
-    void headerClicked(int index);
+    void headerClicked ( int index );
 
 signals:
     //To notified that the exit button is clicked

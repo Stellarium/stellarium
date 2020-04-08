@@ -143,6 +143,23 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutCheckBox">
+           <item>
+            <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+             <property name="toolTip">
+              <string>Set the list as default</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Set the list as default</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayoutButtons_1">
            <property name="topMargin">
             <number>0</number>

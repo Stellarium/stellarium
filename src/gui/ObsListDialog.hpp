@@ -26,6 +26,7 @@
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "ObsListCreateEditDialog.hpp"
+#include "ObservingListCommon.hpp"
 
 class Ui_obsListDialogForm;
 
@@ -46,26 +47,36 @@ protected:
     virtual void createDialogContent();
 
 private:
-    enum ObsListColumns {
-        ColumnUUID,	//! UUID of object
-        ColumnName,	//! Name or designation of object
-        ColumnType, //! Type of the object
-        ColumnRa,	//! Right ascencion of object
-        ColumnDec,	//! Declination of object
-        ColumnMagnitude,	//! Magnitude of object
-        ColumnConstellation, //! Constellation of object
-        ColumnCount	//! Total number of columns
-    };
     QStandardItemModel * obsListListModel;
     class StelCore* core;
+    class StelObjectMgr* objectMgr;
     std::string selectedObservingListUuid;
+    QString observingListJsonPath;
+    QHash<QString, observingListItem> observingListItemCollection;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
-    
-    void invokeObsListCreateEditDialog(std::string listUuid);
+
+    void invokeObsListCreateEditDialog ( std::string listUuid );
 
     ObsListCreateEditDialog * createEditDialog_instance;
+
+    //! Add row in the obsListListModel
+    //! @param number row number
+    //! @param uuid id of the record
+    //! @param name name or the designation of the object
+    //! @param type type of the object
+    //! @param ra right ascencion of the object
+    //! @param dec declination of the object
+    //! @param magnitude magnitude of the object
+    //! @param constellation constellation in which the object is located
+    void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+
+    //! Load the selected observing list
+    void loadSelectedObservingList(QString listUuid);
+    
+    //! Load the lists names for populate the combo box
+    void loadListsName();
 
 
 public slots:
