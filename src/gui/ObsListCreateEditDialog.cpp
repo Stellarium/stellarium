@@ -150,7 +150,7 @@ void ObsListCreateEditDialog::setObservingListHeaderNames()
     const QStringList headerStrings = {
         "UUID", // Hided column
         q_ ( "Object name" ),
-        q_ ( "Object Name I18N" ),
+        q_ ( "Object Name I18N" ), // Hided column
         q_ ( "Type" ),
         q_ ( "Right ascencion" ),
         q_ ( "Declination" ),

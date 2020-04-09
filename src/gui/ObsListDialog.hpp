@@ -50,9 +50,11 @@ private:
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     class StelObjectMgr* objectMgr;
+    class LabelMgr* labelMgr;
     std::string selectedObservingListUuid;
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
+    QList<int> highlightLabelIDs;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
@@ -73,7 +75,7 @@ private:
     void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
 
     //! Load the selected observing list
-    void loadSelectedObservingList(QString listUuid);
+    void loadObservingList(QString listUuid);
     
     //! Load the lists names for populate the combo box
     void loadListsName();
@@ -88,6 +90,13 @@ private slots:
     void obsListNewListButtonPressed();
     void obsListEditButtonPressed();
     void obsListCreateEditDialogClosed();
+    void obsListExitButtonPressed();
+    
+    //! Method called when a list name is selected in the combobox
+    void loadSelectedObservingList(int selectedIndex );
+    
+    //! Select and go to object
+    void selectAndGoToObject(QModelIndex index);
 
 };
 

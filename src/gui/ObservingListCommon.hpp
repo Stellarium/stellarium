@@ -52,6 +52,7 @@ enum ObsListColumns {
 static constexpr char const * JSON_FILE_NAME = "observingList.json";
 static constexpr char const * FILE_VERSION = "1.0";
 
+static constexpr char const * KEY_DEFAULT_LIST_UUID = "defaultListUuid";
 static constexpr char const * KEY_OBSERVING_LISTS = "observingLists";
 static constexpr char const * KEY_NAME = "name";
 static constexpr char const * KEY_JD = "jd";
