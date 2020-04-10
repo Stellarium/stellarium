@@ -325,8 +325,8 @@ void ScriptConsole::rowColumnChanged()
 	// TRANSLATORS: The first letter of word "Column"
 	QString column = qc_("C", "text cursor");
 	ui->rowColumnLabel->setText(QString("%1:%2 %3:%4")
-				    .arg(row).arg(ui->scriptEdit->textCursor().blockNumber())
-				    .arg(column).arg(ui->scriptEdit->textCursor().columnNumber()));
+				    .arg(row).arg(ui->scriptEdit->textCursor().blockNumber() + 1)
+				    .arg(column).arg(ui->scriptEdit->textCursor().columnNumber() + 1));
 }
 
 const QString ScriptConsole::getFileMask()
