@@ -58,6 +58,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagForcedTwinkle(false),
 	twinkleAmount(0.0),
 	flagDrawBigStarHalo(true),
+	flagStarSpiky(false),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -90,6 +91,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagForcedTwinkle(conf->value("stars/flag_forced_twinkle",false).toBool());
 	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
+	flagStarSpiky=(conf->value("stars/flag_star_spiky", false).toBool()); // too early to use the set method here!
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -145,6 +147,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 		unsigned char* elem = &textureCoordArray[i*6*2];
 		memcpy(elem, texElems, 12);
 	}
+	texImgHalo=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
+	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
 }
 
 StelSkyDrawer::~StelSkyDrawer()
@@ -164,7 +168,9 @@ void StelSkyDrawer::init()
 	initializeOpenGLFunctions();
 
 	// Load star texture no mipmap:
-	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
+	//texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
+	//texHaloRayed = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
+	texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");	
 	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
@@ -525,9 +531,9 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	}
 
 	// Now draw the halo according the object brightness
-	bool save = flagStarTwinkle;
+	const bool saveTwinkle = flagStarTwinkle;
 	flagStarTwinkle = false;
-	bool saveP = flagForcedTwinkle;
+	const bool saveForcedTwinkle = flagForcedTwinkle;
 	flagForcedTwinkle = false;
 
 	RCMag rcm;
@@ -584,8 +590,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		drawPointSource(painter, v, rcm, color);
 		postDrawPointSource(painter);
 	}
-	flagStarTwinkle=save;
-	flagForcedTwinkle=saveP;
+	flagStarTwinkle=saveTwinkle;
+	flagForcedTwinkle=saveForcedTwinkle;
 }
 
 float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
@@ -671,24 +677,27 @@ void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 	if(bortleScaleIndex!=bIndex)
 	{
 		// Associate the Bortle index (1 to 9) to inScale value
-		if (bIndex<1)
+		if ((bIndex<1) || (bIndex>9))
 		{
 			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-			bIndex = 1;
 		}
-		if (bIndex>9)
-		{
-			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-			bIndex = 9;
-		}
-
-		bortleScaleIndex = bIndex;
+		bortleScaleIndex = qBound(1, bIndex, 9);
 		emit bortleScaleIndexChanged(bortleScaleIndex);
 		// GZ: I moved this block to update()
 		// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 		// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 		// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
 		// setInputScale(bortleToInScale[bIndex-1]);
+	}
+}
+
+void StelSkyDrawer::setFlagStarSpiky(bool b)
+{
+	if (b!=flagStarSpiky)
+	{
+		flagStarSpiky=b;
+		texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
+		emit flagStarSpikyChanged(flagStarSpiky);
 	}
 }
 

@@ -693,7 +693,7 @@ void Satellites::loadSettings()
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 
 	// iconic mode
-	setFlagIconicMode(conf->value("iconic_mode_enabled", true).toBool());
+	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
 	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
 
 	conf->endGroup();

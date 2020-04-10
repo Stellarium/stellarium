@@ -27,6 +27,7 @@
 #include "StelOpenGL.hpp"
 
 #include <QObject>
+#include <QImage>
 
 class StelToneReproducer;
 class StelCore;
@@ -55,6 +56,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
 	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
+	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -221,6 +223,11 @@ public slots:
 	//! Get flag for drawing a halo around bright stars.
 	bool getFlagDrawBigStarHalo() const {return flagDrawBigStarHalo;}
 
+	//! Set flag to draw stars with rays
+	void setFlagStarSpiky(bool b);
+	//! Get whether to draw stars with rays
+	bool getFlagStarSpiky() const {return flagStarSpiky;}
+
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
@@ -319,6 +326,8 @@ signals:
 	void bortleScaleIndexChanged(int index);
 	//! Emitted when flag to draw big halo around stars changed
 	void flagDrawBigStarHaloChanged(bool b);
+	//! Emitted on change of star texture
+	void flagStarSpikyChanged(bool b);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -404,6 +413,7 @@ private:
 	bool flagForcedTwinkle;
 	double twinkleAmount;
 	bool flagDrawBigStarHalo;
+	bool flagStarSpiky;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
@@ -444,6 +454,8 @@ private:
 	double customPlanetMagLimit;
 
 	//! Little halo texture
+	QImage texImgHalo;
+	QImage texImgHaloSpiky;
 	StelTextureSP texHalo;
 
 	//! Load B-V conversion parameters from config file
