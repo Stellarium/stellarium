@@ -77,7 +77,7 @@ private:
     //! Load the selected observing list
     void loadObservingList(QString listUuid);
     
-    //! Load the lists names for populate the combo box
+    //! Load the lists names for populate the combo box and get the default list uuid
     void loadListsName();
 
 

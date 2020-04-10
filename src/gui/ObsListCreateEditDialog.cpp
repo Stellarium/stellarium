@@ -371,7 +371,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         QString name = ui->nameOfListLineEdit->text();
         observingListDataList.insert ( QString ( KEY_NAME ), name );
 
-        /// List of objects
+        // List of objects
         QVariantList listOfObjects;
         QHashIterator<QString, observingListItem> i ( observingListItemCollection );
         while ( i.hasNext() ) {
@@ -387,9 +387,21 @@ void ObsListCreateEditDialog::saveObservedObject()
         observingListDataList.insert ( QString ( KEY_OBJECTS ), listOfObjects );
         observingListDataList.insert ( QString ( KEY_SORTING ), sorting );
 
-        QString oblListUuid = QUuid::createUuid().toString();
+        QString oblListUuid;
+        if ( isCreationMode ) {
+            oblListUuid = QUuid::createUuid().toString();
+        } else {
+            oblListUuid = QString::fromStdString ( listUuid_ );
+        }
+
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
+        
+        if(ui->obsListDefaultListCheckBox->isChecked()){
+            mapFromJsonFile.insert(KEY_DEFAULT_LIST_UUID, oblListUuid);
+        } else {
+            mapFromJsonFile.insert(KEY_DEFAULT_LIST_UUID, "");
+        }
 
 
         jsonFile.resize ( 0 );

@@ -49,6 +49,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
     createEditDialog_instance = Q_NULLPTR;
+
 }
 
 
@@ -286,7 +287,7 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
 
 
 /*
- * Load the lists names for populate the combo box
+ * Load the lists names for populate the combo box and get the default list uuid
 */
 void ObsListDialog::loadListsName()
 {
@@ -300,6 +301,10 @@ void ObsListDialog::loadListsName()
 
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             jsonFile.close();
+
+            // Get the default list uuid
+            QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
+
             QVariantMap observingListsMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
 
             QMap<QString, QVariant>::iterator i;
@@ -311,9 +316,13 @@ void ObsListDialog::loadListsName()
                     QVariantMap data = var.value<QVariantMap>();
                     QString listName = data.value ( KEY_NAME ).value<QString>();
                     ui->obsListComboBox->addItem ( listName, listUuid );
+
+                    int index = ui->obsListComboBox->findText ( listName );
+                    if ( ( index != -1 ) && ( defaultListUuid == listUuid ) ) {
+                        ui->obsListComboBox->setCurrentIndex ( index );
+                        loadObservingList ( listUuid );
+                    }
                 }
-
-
             }
 
         } catch ( std::runtime_error &e ) {
@@ -457,6 +466,8 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                 }
 
             }
+
+            objectMgr->unSelect();
 
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
