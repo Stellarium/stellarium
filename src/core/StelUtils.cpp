@@ -1145,7 +1145,15 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 	int h = static_cast<int>(hours);
 	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
 	if (lowprecision)
-		return QString("%1h%2m").arg(h).arg(qRound(minutes), 2, 10, QChar('0'));
+	{
+		int m = qRound(minutes);
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
+		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+	}
 	else
 	{
 		int m = static_cast<int>(minutes);

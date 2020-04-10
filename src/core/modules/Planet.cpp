@@ -410,7 +410,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const double distanceAu = getJ2000EquatorialPos(core).length();
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	if (flags&Name)
 	{
