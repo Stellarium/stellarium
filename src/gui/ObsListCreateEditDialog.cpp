@@ -22,6 +22,7 @@
 #include <QDir>
 #include <QDateTime>
 #include <QDebug>
+#include <QFileDialog>
 
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -396,11 +397,11 @@ void ObsListCreateEditDialog::saveObservedObject()
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
-        
-        if(ui->obsListDefaultListCheckBox->isChecked()){
-            mapFromJsonFile.insert(KEY_DEFAULT_LIST_UUID, oblListUuid);
+
+        if ( ui->obsListDefaultListCheckBox->isChecked() ) {
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
         } else {
-            mapFromJsonFile.insert(KEY_DEFAULT_LIST_UUID, "");
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
         }
 
 
@@ -421,7 +422,17 @@ void ObsListCreateEditDialog::saveObservedObject()
 */
 void ObsListCreateEditDialog::obsListExportListButtonPressed()
 {
-    //TODO
+    QString originalobservingListJsonPath = observingListJsonPath;
+
+    QString filter = "JSON (*.json)";
+    observingListJsonPath = QFileDialog::getSaveFileName ( Q_NULLPTR,
+                            q_ ( "Export observing list as..." ),
+                            QDir::homePath() + "/" + JSON_FILE_NAME,
+                            filter );
+
+    saveObservedObject();
+
+    observingListJsonPath = originalobservingListJsonPath;
 }
 
 /*
@@ -429,9 +440,43 @@ void ObsListCreateEditDialog::obsListExportListButtonPressed()
 */
 void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 {
-    //TODO
-}
+    QString originalobservingListJsonPath = observingListJsonPath;
 
+    QString filter = "JSON (*.json)";
+    observingListJsonPath = QFileDialog::getOpenFileName ( Q_NULLPTR, q_ ( "Import observing list" ), QDir::homePath(), filter );
+
+
+    QVariantMap map;
+    QFile jsonFile ( observingListJsonPath );
+    if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
+        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
+
+    } else {
+        try {
+            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            jsonFile.close();
+            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+
+            if ( observingListMap.size() ==1 ) {
+                QMap<QString, QVariant>::const_iterator i;
+                listUuid_ = i.value().toString().toStdString();
+            } else {
+                //TODO define error message
+                return;
+            }
+
+        } catch ( std::runtime_error &e ) {
+            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            return;
+        }
+
+
+        loadObservingList();
+
+        observingListJsonPath = originalobservingListJsonPath;
+        saveObservedObject();
+    }
+}
 /*
  * Slot for button obsListSaveButton
 */

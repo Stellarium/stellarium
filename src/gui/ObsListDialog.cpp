@@ -264,13 +264,11 @@ void ObsListDialog::obsListNewListButtonPressed()
 */
 void ObsListDialog::obsListEditButtonPressed()
 {
-    //TODO: delete after - only for debug
-    selectedObservingListUuid = "{c93719b6-7489-4403-8f4b-b898498c17f2}";
 
     if ( !selectedObservingListUuid.empty() ) {
         invokeObsListCreateEditDialog ( selectedObservingListUuid );
     } else {
-        qWarning() << "The selected observing list name is empty";
+        qWarning() << "The selected observing list uuid is empty";
     }
 }
 
@@ -568,6 +566,7 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
     qDebug() << "Selected index: " << selectedIndex;
 
     QString listUuid = ui->obsListComboBox->itemData ( selectedIndex ).toString();
+    selectedObservingListUuid = listUuid.toStdString();
     loadObservingList ( listUuid );
 
 }
