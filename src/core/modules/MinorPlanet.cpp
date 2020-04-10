@@ -279,7 +279,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	// Second test avoids crash when observer is on spaceship
-	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
+	// Third test for avoid jerking an animation of movement
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver() && qAbs(core->getTimeRate())<0.01)
 	{
 		Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;
