@@ -743,18 +743,24 @@ void TestConversions::testHoursToHMSStrLowPrecision()
 	data << "0h00m"	<< 0.004124;
 	data << "0h01m"	<< 0.009185;
 	data << "4h00m"	<< 3.999722;
+	data << "13h00m"	<< 12.9997;
 	data << "24h00m"	<< 23.999736;
 
 	while (data.count() >= 2)
 	{
 		QString expectedHMS = data.takeFirst().toString();
-		double hours = data.takeFirst().toDouble();
+		double hours = data.takeFirst().toDouble();		
 		QString hms = StelUtils::hoursToHmsStr(hours, true);
+		QString hmsF = StelUtils::hoursToHmsStr(static_cast<float>(hours), true);
 		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1h = %2 (expected %3)")
 										.arg(QString::number(hours, 'f', 6))
 										.arg(hms)
 										.arg(expectedHMS)));
-	}
+		QVERIFY2(expectedHMS==hmsF, qPrintable(QString("%1h = %2 (expected %3)")
+										.arg(QString::number(hours, 'f', 6))
+										.arg(hmsF)
+										.arg(expectedHMS)));
+	}	
 }
 
 void TestConversions::testRadToHMSStr()
