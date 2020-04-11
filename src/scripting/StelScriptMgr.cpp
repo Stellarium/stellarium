@@ -397,25 +397,19 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	return runPreprocessedScript(preprocessedScript,fileName);
 }
 
-bool StelScriptMgr::runScriptDirect(const QString &scriptCode, const QString& includePath)
+bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scriptCode, const QString& includePath)
 {
-	if(includePath.isNull())
-		return runPreprocessedScript(scriptCode, "<Direct script input>");
-	else
-	{
-		QString path = includePath;
-		if(includePath.isEmpty())
-			path = QStringLiteral("scripts");
-
-		QString processed;
-		bool ok = preprocessScript(scriptCode,processed, path);
-		if(ok)
-			return runPreprocessedScript(processed, "<Direct script input>");
-		return false;
-	}
+	QString path = includePath.isNull() ? QString(".") : includePath;
+	if( path.isEmpty() )
+		path = QStringLiteral("scripts");
+	QString processed;
+	bool ok = preprocessScript( scriptId, scriptCode, processed, path);
+	if(ok)
+		return runPreprocessedScript(processed, "<Direct script input>");
+	return false;
 }
 
-bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, const QString &includePath)
+bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;
 
@@ -448,7 +442,7 @@ bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, cons
 
 	bool ok = false;
 	if (fileName.endsWith(".ssc"))
-		ok = preprocessScript(fic, script, scriptDir);
+		ok = preprocessFile(absPath, fic, script, scriptDir);
 	if (!ok)
 	{
 		return false;
@@ -539,7 +533,9 @@ void StelScriptMgr::scriptEnded()
 {
 	if (engine->hasUncaughtException())
 	{
-		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString()).arg(engine->uncaughtExceptionLineNumber());
+		int outputPos = engine->uncaughtExceptionLineNumber();
+		QString realPos = lookup( outputPos );
+		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString()).arg(realPos);
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 	}
@@ -570,63 +566,89 @@ bool StelScriptMgr::strToBool(const QString& str)
 	return QVariant(str).toBool();
 }
 
-bool StelScriptMgr::preprocessScript(const QString &input, QString &output, const QString &scriptDir)
+
+bool StelScriptMgr::preprocessFile(const QString fileName, QFile &input, QString& output, const QString& scriptDir)
+{
+	QString aText = QString::fromUtf8(input.readAll());
+	return preprocessScript( fileName, aText, output, scriptDir );
+}
+
+bool StelScriptMgr::preprocessScript(const QString fileName, const QString &input, QString &output, const QString &scriptDir)
+{
+	// The one and only top-level call for expand.
+	scriptFileName = fileName;
+	num2loc = QMap<int,QPair<QString,int>>();
+	outline = 0;
+        bool result = expand( fileName, input, output, scriptDir );
+        return result;
+}
+	
+bool StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir)
 {
 	QStringList lines = input.split("\n");
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
+	int curline = 0;
 	for (const auto& line : lines)
 	{
+		curline++;
 		if (includeRe.exactMatch(line))
 		{
-			QString fileName = includeRe.capturedTexts().at(1);
-			QString path;
+			QString incName = includeRe.capturedTexts().at(1);
+			QString incPath;
 
 			// Search for the include file.  Rules are:
-			// 1. If path is absolute, just use that
-			// 2. If path is relative, look in scriptDir + included filename
-			// 3. If path is relative (undefined), look in standard scripts directory + included filename
-			if (QFileInfo(fileName).isAbsolute())
-				path = fileName;
+			// 1. If incPath is absolute, just use that
+			// 2. If incPath is relative, look in scriptDir + included filename
+			// 3. If incPath is relative (undefined), look in standard scripts directory + included filename
+			if (QFileInfo(incName).isAbsolute())
+				incPath = incName;
 			else
 			{
-				path = StelFileMgr::findFile(scriptDir + "/" + fileName);
-				if (path.isEmpty())
+				incPath = StelFileMgr::findFile(scriptDir + "/" + incName);
+				if (incPath.isEmpty())
 				{
 					qWarning() << "WARNING: file not found! Let's check standard scripts directory...";
 
 					// OK, file is not exists in relative path; Let's check standard scripts directory
-					path = StelFileMgr::findFile("scripts/" + fileName);
+					incPath = StelFileMgr::findFile("scripts/" + incName);
 
-					if (path.isEmpty())
+					if (incPath.isEmpty())
 					{
-						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(fileName))));
-						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(fileName);
+						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName))));
+						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(incName);
 						return false;
 					}
 				}
 			}
-
-			QFile fic(path);
+			// Write the include line as a comment. It is end of a range.
+			output += "// " + line + "\n";
+			outline++;
+			num2loc.insert( outline, QPair<QString,int>(fileName, curline) );
+			QFile fic(incPath);
 			bool ok = fic.open(QIODevice::ReadOnly);
 			if (ok)
 			{
-				qWarning() << "script include: " << QDir::toNativeSeparators(path);
-				preprocessScript(fic, output, scriptDir);
+				qWarning() << "script include: " << QDir::toNativeSeparators(incPath);
+				QString aText = QString::fromUtf8(fic.readAll());
+				expand( incPath, aText, output, scriptDir);
+                                fic.close();
 			}
 			else
 			{
-				emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(fileName))));
-				qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(fileName);
+				emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
+				qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
 				return false;
 			}
 		}
 		else
 		{
-			output += line;
-			output += '\n';
+			output += line + '\n';
+			outline++;
 		}
 	}
+	num2loc.insert( outline, QPair<QString,int>(fileName, curline) );
 
+	// Do we need this any more? (WL, 2020-04-10)
 	if (qApp->property("verbose")==true)
 	{
 		// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
@@ -642,11 +664,25 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 	return true;
 }
 
-
-bool StelScriptMgr::preprocessScript(QFile &input, QString& output, const QString& scriptDir)
+QString StelScriptMgr::lookup( int outputPos )
 {
-	QString s = QString::fromUtf8(input.readAll());
-	return preprocessScript(s, output, scriptDir);
+	// Error beyond the last line?
+	if (outputPos > outline)
+		outputPos = outline;
+
+	QMap<int,QPair<QString,int>>::const_iterator i = num2loc.lowerBound( outputPos );
+	int outputEnd = i.key();
+	QString path = i.value().first;
+	int inputEnd = i.value().second;
+	int inputPos = outputPos - outputEnd + inputEnd;
+	// qDebug() << outputPos << " maps to " << path << ":" << inputPos;
+	QString msg;
+	if (path.isEmpty())
+		msg = QString( "%1" ).arg(inputPos);
+	else
+		msg = QString( "%1:%2" ).arg(path).arg(inputPos);
+
+	return msg;
 }
 
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 

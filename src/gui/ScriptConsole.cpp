@@ -201,7 +201,7 @@ void ScriptConsole::clearButtonPressed()
 		if (QMessageBox::question(Q_NULLPTR, q_("Clear script"), q_("Are you sure?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 		{
 			ui->scriptEdit->clear();
-			scriptFileName.clear(); // OK, it's a new file!
+			scriptFileName = ""; // OK, it's a new file!
 		}
 	}
 	else if (ui->tabs->currentIndex() == 1)
@@ -219,7 +219,7 @@ void ScriptConsole::preprocessScript()
 	if (sender() == ui->preprocessSSCButton)
 	{
 		qDebug() << "[ScriptConsole] Preprocessing with SSC proprocessor";
-		StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text());
 	}
 	else
 		qWarning() << "[ScriptConsole] WARNING - unknown preprocessor type";
@@ -234,7 +234,7 @@ void ScriptConsole::runScript()
 	ui->logBrowser->clear();
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
+	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(scriptFileName, ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script");
 		qWarning() << "[ScriptConsole] " + msg;
@@ -313,7 +313,7 @@ void ScriptConsole::quickRun(int idx)
 	if (!scriptText.isEmpty())
 	{
 		appendLogLine(QString("Running: %1").arg(scriptText));
-		StelApp::getInstance().getScriptMgr().runScriptDirect(scriptText);
+		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText);
 		ui->quickrunCombo->setCurrentIndex(0);
 	}
 }
