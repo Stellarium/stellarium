@@ -42,6 +42,16 @@ msgid ""
 "translations. To create this sky culture we used the English translation by "
 "Toomer (1984)."
 msgstr ""
+"Esta antigua cultura estelar griega se basa en el Almagesto, una "
+"recopilación de conocimientos astronómicos de ex astrónomos que incluye "
+"resultados de observaciones y astronomía matemática. Compuesto por Claudio "
+"Ptolomeo, utilizando observaciones antiguas, así como las suyas, fue escrito"
+" en griego, publicado en el siglo II y siguió siendo el principal trabajo "
+"astronómico durante los siguientes 1500 años. Originalmente fue escrito con "
+"el título <i>Mathematike Syntaxis</i>, en griego antiguo. El nombre "
+"<i>Almagesto</i>, que significa \"El más grande [Libro]\", fue desarrollado "
+"a partir de traducciones árabes. Para crear esta cultura del cielo, usamos "
+"la traducción al inglés de Toomer (1984)."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:15
@@ -58,6 +68,19 @@ msgid ""
 "preserved). The scale starts with the brightest star with the magnitude of "
 "1, going down to magnitude of 6, for the faintest stars visible."
 msgstr ""
+"El Almagesto consta de 13 secciones, llamadas libros. En el séptimo y octavo"
+" libro, Ptolomeo enumeró un total de 1022 estrellas en 48 constelaciones "
+"(entre las cuales se encuentran alrededor de 5 objetos similares a "
+"estrellas, como cúmulos de estrellas globulares). Es una tabla de "
+"coordenadas de las estrellas con una descripción de su posición en la "
+"constelación (como \"estrella en el codo de X, longitud, latitud, "
+"magnitud\"). Con respecto a la precesión, Ptolomeo utilizó coordenadas "
+"eclípticas. Como uno de los primeros de su tiempo, Ptolomeo incluyó la "
+"magnitud, una escala cuantitativa de brillo estelar, probablemente adoptada "
+"de Hipparchus (lo cual no es seguro porque el catálogo de Hipparchus no está"
+" preservado). La escala comienza con la estrella más brillante con la "
+"magnitud de 1, bajando a la magnitud de 6, para las estrellas más débiles "
+"visibles."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:28
@@ -75,17 +98,32 @@ msgid ""
 "updates to the epoch of the respective globemaker could be applied by a "
 "simple subtraction of the value for ecliptic longitude."
 msgstr ""
+"Para el cálculo de las posiciones de los planetas, Ptolomeo utilizó un "
+"modelo geocéntrico (que está permitido porque el observador siempre está en "
+"la Tierra) y, por lo tanto, contribuyó a la creencia científica de que el "
+"modelo heliocéntrico de Aristarch no era necesario. Sin embargo, para el "
+"catálogo de estrellas del <i>Almagesto</i> esto no importa en absoluto "
+"porque un catálogo de estrellas representa siempre una especie de inventario"
+" de los puntos fijos en el cielo y el objetivo proclamado de Ptolomeo del "
+"catálogo es proporcionar una lista para hacer un globo celeste ( ver Alm., "
+"VIII, 3). Consciente de la precesión, quiere facilitar el negocio de los "
+"futuros fabricantes de globos terráqueos mediante el uso de coordenadas "
+"eclípticas: la precesión, tal como la conoce Ptolomeo, cambia todas las "
+"estrellas paralelas a la eclíptica, por lo tanto, las actualizaciones de la "
+"época del fabricante de globos terráqueo podrían aplicarse mediante una "
+"simple resta del valor para longitud eclíptica."
 
 #. type: Content of: <h2>
 #: ../../skycultures/almagest/description.en.utf8:41
 msgid "How this sky culture was made"
-msgstr ""
+msgstr "Cómo se hizo esta cultura estelar"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:43
 msgid ""
 "The process can be described as sketched here with the example of Corvus:"
 msgstr ""
+"El proceso se puede describir como esbozado aquí con el ejemplo de Corvus:"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:45
@@ -98,6 +136,13 @@ msgid ""
 "the rear wing. From the star in the breast another line goes to the "
 "&quot;foot of the raven&quot;, the star &beta; Crv."
 msgstr ""
+"En la constelación de Corvus (Cuervo), &alfa; Crv es la estrella en la "
+"\"cabeza del cuervo\". Está conectada con la \"estrella en el cuello\" "
+"&epsilon; Crv. Este está conectada con \"la estrella en el pecho\" &zeta; "
+"Crv. Desde allí, dos líneas van a la punta de las alas. &gamma; Crv es la "
+"estrella en el ala avanzada y &delta; Crv la estrella en el ala trasera. "
+"Desde la estrella en el seno otra línea va al \"pie del cuervo\", la "
+"estrella &beta; Crv."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:54
@@ -106,6 +151,9 @@ msgid ""
 "reconnected the stars according to the descriptions in the table presented "
 "in the <i>Almagest</i>."
 msgstr ""
+"Después de identificar las estrellas en función de sus coordenadas y "
+"nombres, volvimos a conectar las estrellas según las descripciones en la "
+"tabla presentada en el <i>Almagesto</i>."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:58
@@ -117,6 +165,11 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"Los nombres de las estrellas y los nombres de los objetos del cielo profundo"
+" se basan únicamente en el Almagesto. P.ej. Ptolomeo usa el nombre "
+"\"&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (La antorcha)\""
+" para Aldebarán en su otro trabajo, el <i>Tetrabiblos</i>, pero esto no se "
+"implementa en esta cultura del cielo porque no aparece en el Almagesto."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:64
@@ -125,36 +178,39 @@ msgid ""
 "its English translation (column 2 and 3) and denotes our uncertainties in "
 "the reconstruction (column 6)."
 msgstr ""
+"La siguiente tabla muestra el nombre original de la constelación en griego y"
+" su traducción al inglés (columnas 2 y 3) y denota nuestras incertidumbres "
+"en la reconstrucción (columna 6)."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:70
 msgid "<b>Abbreviation</b>"
-msgstr ""
+msgstr "<b>Abreviatura</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:71
 msgid "<b>\tOriginal name</b>"
-msgstr ""
+msgstr "<b>\tNombre original</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:72
 msgid "<b>\tTranslation</b>\t\t\t(direct)"
-msgstr ""
+msgstr "<b>\tTraducción</b>\t\t\t(directa)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:73
 msgid "<b>\tIAU (Latin) name</b>"
-msgstr ""
+msgstr "<b>\tNombre UAI (latino)</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:74
 msgid "<b>hints to constellation</b>"
-msgstr ""
+msgstr "<b>claves de la constelación</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:75
 msgid "<b>freedom of art</b>"
-msgstr ""
+msgstr "<b>libertad de arte</b>"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:78
@@ -169,22 +225,24 @@ msgid ""
 "&Mu;&iota;&kappa;&rho;&#942; "
 "&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 msgstr ""
+"&Mu;&iota;&kappa;&rho;&#942; "
+"&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:81
 msgid "Small \tBear"
-msgstr ""
+msgstr "Oso \tPequeño"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:82
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Ursa Minor"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:83
 #: ../../skycultures/almagest/description.en.utf8:94
 msgid "like IAU constellation"
-msgstr ""
+msgstr "como la constelación de UAI"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:87
@@ -199,11 +257,13 @@ msgid ""
 "&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; "
 "&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 msgstr ""
+"&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; "
+"&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:92
 msgid "Great Bear"
-msgstr ""
+msgstr "Gran Oso"
 
 #. type: Content of: <h3>
 #: ../../skycultures/almagest/description.en.utf8:93
@@ -215,22 +275,22 @@ msgstr "Osa Mayor"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:98
 msgid "Dra"
-msgstr ""
+msgstr "Dra"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:99
 msgid "&Delta;&rho;&#940;&kappa;&omega;&nu;"
-msgstr ""
+msgstr "&Delta;&rho;&#940;&kappa;&omega;&nu;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:100
 msgid "Dragon"
-msgstr ""
+msgstr "Dragón"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:101
 msgid "Draco"
-msgstr ""
+msgstr "Draco"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:102
@@ -238,31 +298,33 @@ msgid ""
 "all triangles or squares are vertebra or parts of the body; line at the head"
 " is the tongue"
 msgstr ""
+"todos los triángulos o cuadrados son vértebras o partes del cuerpo; la línea"
+" en la cabeza es la lengua"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:107
 msgid "Cep"
-msgstr ""
+msgstr "Cep"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:108
 msgid "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
-msgstr ""
+msgstr "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:109
 msgid "Kepheus"
-msgstr ""
+msgstr "Cefeo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:110
 msgid "Cepheus"
-msgstr ""
+msgstr "Cefeo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:111
 msgid "king, upside down"
-msgstr ""
+msgstr "rey, al revés"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:112
@@ -270,6 +332,8 @@ msgid ""
 "three head stars are tiara; &beta; seen as part of the belt, although "
 "Almagest says beneath belt"
 msgstr ""
+"tres estrellas principales son tiara, &beta; vistas como parte del cinturón,"
+" aunque el Almagesto dice debajo del cinturón"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:117
@@ -281,27 +345,27 @@ msgstr "Boo"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:118
 msgid "&Beta;&omicron;&#974;&tau;&eta;&sigmaf;"
-msgstr ""
+msgstr "&Beta;&omicron;&#974;&tau;&eta;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:119
 msgid "Ploughman"
-msgstr ""
+msgstr "Arador"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:120
 msgid "Bo&ouml;tes"
-msgstr ""
+msgstr "Bo&ouml;tes"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:121
 msgid "has a shepherd's staff in his hand (&omega;)"
-msgstr ""
+msgstr "tiene un bastón de pastor en la mano (&omega;)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:122
 msgid "star HIP 72582 added as neck star"
-msgstr ""
+msgstr "Estrella HIP 72582 añadida como estrella del cuello"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:125
@@ -313,37 +377,37 @@ msgstr "CrB"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:126
 msgid "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:127
 msgid "Crown"
-msgstr ""
+msgstr "Corona"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:128
 msgid "Corona Borealis"
-msgstr ""
+msgstr "Corona Borealis"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:129
 msgid "like IAU constellation; no details for lines in \tthe text"
-msgstr ""
+msgstr "como la constelación de UAI; sin detalles para líneas en \tel texto"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:133
 msgid "Her"
-msgstr ""
+msgstr "Her"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:134
 msgid "&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;"
-msgstr ""
+msgstr "&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:135
 msgid "Kneeler"
-msgstr ""
+msgstr "Reclinatorio"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:136
@@ -355,11 +419,12 @@ msgstr "Hércules"
 #: ../../skycultures/almagest/description.en.utf8:137
 msgid "one of the foot stars is top of staff of Bootes"
 msgstr ""
+"una de las estrellas del pie es la parte superior del personal de Bootes"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:138
 msgid "star HIP 82764 added as neck star"
-msgstr ""
+msgstr "estrella HIP 82764 añadida como estrella del cuello"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:141
@@ -371,12 +436,12 @@ msgstr "Lyr"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:142
 msgid "&Lambda;&#973;&rho;&alpha;"
-msgstr ""
+msgstr "&Lambda;&#973;&rho;&alpha;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:143
 msgid "Lyre"
-msgstr ""
+msgstr "Lyre"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:144
@@ -394,12 +459,12 @@ msgstr "Cyg"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:150
 msgid "&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;"
-msgstr ""
+msgstr "&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:151
 msgid "Bird"
-msgstr ""
+msgstr "Pájaro"
 
 #. type: Content of: <p><font><em><font>
 #: ../../skycultures/almagest/description.en.utf8:152
@@ -410,12 +475,12 @@ msgstr "Cygnus"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:153
 msgid "swan with legs"
-msgstr ""
+msgstr "cisne con patas"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:154
 msgid "Tips of wings connected with tail,"
-msgstr ""
+msgstr "Puntas de alas conectadas con cola,"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:157
@@ -427,27 +492,27 @@ msgstr "Cas"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:158
 msgid "&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;"
-msgstr ""
+msgstr "&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:159
 msgid "Kassiepeia"
-msgstr ""
+msgstr "Kassiepeia"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:160
 msgid "Cassiopeia"
-msgstr ""
+msgstr "Cassiopeia"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:161
 msgid "Queen sitting on a throne"
-msgstr ""
+msgstr "Reina sentada en el trono"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:162
 msgid "to avoid confusion we did not draw the throne"
-msgstr ""
+msgstr "para evitar confusión no dibujamos el trono"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:165
@@ -459,13 +524,13 @@ msgstr "Per"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:166
 msgid "&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;"
-msgstr ""
+msgstr "&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:167
 #: ../../skycultures/almagest/description.en.utf8:168
 msgid "Perseus"
-msgstr ""
+msgstr "Perseo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:169
@@ -473,6 +538,8 @@ msgid ""
 "Double star cluster NGC 869 and NGC 884 as Deep Sky Object -&gt; one of the "
 "stars in the cluster was used for drawing"
 msgstr ""
+"El cúmulo estelar doble NGC 869 y NGC 884 como Objetos del Espacio Profundo "
+"-&gt; una de las estrellas en el cúmulo fue usada para el dibujo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:171
@@ -480,36 +547,40 @@ msgid ""
 "one of the stars in Gorgon-head is added to make the head look more "
 "spherical;"
 msgstr ""
+"se añade una de las estrellas en la cabeza de Gorgon para hacer que la "
+"cabeza se vea más esférica;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:175
 msgid "Aur"
-msgstr ""
+msgstr "Aur"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:176
 msgid "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:177
 msgid "Charioteer"
-msgstr ""
+msgstr "Auriga"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:178
 msgid "Auriga"
-msgstr ""
+msgstr "Auriga"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:179
 msgid "wears long garment; garment limited through shoulders and hem"
-msgstr ""
+msgstr "usa ropa larga; prenda limitada por los hombros y el dobladillo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:180
 msgid "o Aur added as neck star; 1 Aur added as hem star"
 msgstr ""
+"o Aur añadida como estrella del cuello; 1 Aur añadida como estrella del "
+"dobladillo"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:183
@@ -520,37 +591,37 @@ msgstr "Oph"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:184
 msgid "&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:185
 msgid "Serpent Bearer"
-msgstr ""
+msgstr "Portador de la serpiente"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:186
 msgid "Ophiuchus"
-msgstr ""
+msgstr "Ofiuco"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:187
 msgid "has serpent in his hand"
-msgstr ""
+msgstr "tiene una serpiente en su mano"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:188
 msgid "a star added as neck star;"
-msgstr ""
+msgstr "una estrella añadida como estrella del cuello"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:191
 msgid "Ser"
-msgstr ""
+msgstr "Ser"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:192
 msgid "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
-msgstr ""
+msgstr "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:193
@@ -4452,7 +4523,7 @@ msgstr ""
 #. type: Content of: <ul><li>
 #: ../../skycultures/belarusian/description.en.utf8:20
 msgid "The Ploughman"
-msgstr "El Labrador"
+msgstr "El Arador"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/belarusian/description.en.utf8:21
@@ -20672,7 +20743,7 @@ msgstr "<sup>ESTRELLA</sup><i>KALBU</i>(Perro) (del <sup>DIOS</sup>Gula)"
 #: ../../skycultures/mulapin/description.en.utf8:210
 #: ../../skycultures/seleucid/description.en.utf8:155
 msgid "in Her"
-msgstr "en su"
+msgstr "en Her"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/mulapin/description.en.utf8:214

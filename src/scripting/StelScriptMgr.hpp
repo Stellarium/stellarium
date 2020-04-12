@@ -252,8 +252,8 @@ private:
 	//Script engine agent
 	StelScriptEngineAgent *agent;
 
-    // Map line numbers of output to <path>:<line>
-    int outline;
+	// Map line numbers of output to <path>:<line>
+	int outline;
 	QMap<int,QPair<QString,int>> num2loc;
 	QString lookup( int outline );
 };
