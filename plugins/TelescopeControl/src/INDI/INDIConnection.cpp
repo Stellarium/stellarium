@@ -53,6 +53,22 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 		return;
 	}
 
+	// Make sure the TRACK member of switch ON_COORD_SET is set
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("ON_COORD_SET");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		return;
+	}
+	// Note that confusingly there is a SLEW switch member as well that will move but not track.
+	// TODO: Figure out if there is to be support for it
+	ISwitch *track = IUFindSwitch(switchVector, "TRACK");
+	if (track->s == ISS_OFF)
+	{
+		track->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+
 	INumberVectorProperty *property = Q_NULLPTR;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
@@ -64,6 +80,53 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	property->np[0].value = coords.RA;
 	property->np[1].value = coords.DEC;
 	sendNewNumber(property);
+}
+
+void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope)
+		return;
+
+	if (!mTelescope->isConnected())
+	{
+		qDebug() << "Error: Telescope not connected";
+		return;
+	}
+
+	// Make sure the SYNC member of switch ON_COORD_SET is set
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("ON_COORD_SET");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		return;
+	}
+
+	ISwitch *sync = IUFindSwitch(switchVector, "SYNC");
+	if (sync->s == ISS_OFF)
+	{
+		sync->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+
+	INumberVectorProperty *property = Q_NULLPTR;
+	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+	if (!property)
+	{
+		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
+		return;
+	}
+
+	property->np[0].value = coords.RA;
+	property->np[1].value = coords.DEC;
+	sendNewNumber(property);
+
+	// And now unset SYNC switch member to revert to default state/behavior
+	if (sync->s == ISS_ON)
+	{
+		sync->s = ISS_OFF;
+		sendNewSwitch(switchVector);
+	}
 }
 
 bool INDIConnection::isDeviceConnected() const
