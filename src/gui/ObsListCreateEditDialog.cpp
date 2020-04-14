@@ -329,22 +329,26 @@ void ObsListCreateEditDialog::saveObservedObject()
 
     QString listName = ui->nameOfListLineEdit->text();
     if ( observingListJsonPath.isEmpty() || listName.isEmpty() ) {
-        qWarning() << "[ObservingList] Error saving observing list";
+        qWarning() << "[ObservingList Creation/Edition] Error saving observing list";
         return;
     }
 
     QFile jsonFile ( observingListJsonPath );
-    if ( !jsonFile.open ( QIODevice::ReadWrite|QIODevice::Text|QIODevice::ExistingOnly ) ) {
-        qWarning() << "[ObservingList] observing list can not be saved. A file can not be open for reading and writing:"
+    if ( !jsonFile.open ( QIODevice::ReadWrite|QIODevice::Text ) ) {
+        qWarning() << "[ObservingList Creation/Edition] observing list can not be saved. A file can not be open for reading and writing:"
                    << QDir::toNativeSeparators ( observingListJsonPath );
         return;
     }
 
     try {
 
-        QVariantMap mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-        QVariantMap allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+        QVariantMap mapFromJsonFile;
+        QVariantMap allListsMap;
 
+        if ( jsonFile.size() > 0 ) {
+            mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+        }
 
         QVariantMap observingListDataList;
 
@@ -394,16 +398,15 @@ void ObsListCreateEditDialog::saveObservedObject()
         } else {
             oblListUuid = QString::fromStdString ( listUuid_ );
         }
-
-        allListsMap.insert ( oblListUuid, observingListDataList );
-        mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
-
+        
         if ( ui->obsListDefaultListCheckBox->isChecked() ) {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
         } else {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
         }
 
+        allListsMap.insert ( oblListUuid, observingListDataList );
+        mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
 
         jsonFile.resize ( 0 );
         StelJsonParser::write ( mapFromJsonFile, &jsonFile );
@@ -411,7 +414,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         jsonFile.close();
 
     } catch ( std::runtime_error &e ) {
-        qCritical() << "[ObservingList] File format is wrong! Error: " << e.what();
+        qCritical() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
         return;
     }
 }
@@ -449,7 +452,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
     QVariantMap map;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
-        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
+        qWarning() << "[ObservingList Creation/Edition] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
 
     } else {
         try {
@@ -466,7 +469,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
             }
 
         } catch ( std::runtime_error &e ) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
             return;
         }
 
@@ -500,25 +503,27 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 */
 void ObsListCreateEditDialog::headerClicked ( int index )
 {
+    //TODO: delete after tests
     qDebug() << "Index de la colonne: " << index ;
+
     switch ( index ) {
     case ColumnName:
-        sorting = "name";
+        sorting = QString ( SORTING_BY_NAME );
         break;
     case ColumnType:
-        sorting = "type";
+        sorting = QString ( SORTING_BY_TYPE );
         break;
     case ColumnRa:
-        sorting = "right ascension";
+        sorting = QString ( SORTING_BY_RA );
         break;
     case ColumnDec:
-        sorting = "declination";
+        sorting = QString ( SORTING_BY_DEC );
         break;
     case ColumnMagnitude:
-        sorting = "magnitude";
+        sorting = QString ( SORTING_BY_MAGNITUDE );
         break;
     case ColumnConstellation:
-        sorting = "constellation";
+        sorting = QString ( SORTING_BY_CONSTTELLATION );;
         break;
     default:
         sorting = "";
@@ -539,7 +544,7 @@ void ObsListCreateEditDialog::loadObservingList()
     QVariantMap map;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
-        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
+        qWarning() << "[ObservingList Creation/Edition] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
 
     } else {
         try {
@@ -560,7 +565,7 @@ void ObsListCreateEditDialog::loadObservingList()
                 QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
                 listOfObjects = data.value<QVariantList>();
             } else {
-                qCritical() << "[ObservingList] conversion error";
+                qCritical() << "[ObservingList Creation/Edition] conversion error";
                 return;
             }
 
@@ -650,21 +655,21 @@ void ObsListCreateEditDialog::loadObservingList()
                             observingListItemCollection.insert ( objectUuid,item );
 
                         } else {
-                            qWarning() << "[ObservingList] selected object is empty !";
+                            qWarning() << "[ObservingList Creation/Edition] selected object is empty !";
                         }
 
                     } else {
-                        qWarning() << "[ObservingList] object: " << objectName << " not found !" ;
+                        qWarning() << "[ObservingList Creation/Edition] object: " << objectName << " not found !" ;
                     }
                 } else {
-                    qCritical() << "[ObservingList] conversion error";
+                    qCritical() << "[ObservingList Creation/Edition] conversion error";
                     return;
                 }
 
             }
 
         } catch ( std::runtime_error &e ) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
             return;
         }
     }

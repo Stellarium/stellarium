@@ -62,5 +62,12 @@ static constexpr char const * KEY_DESIGNATION = "designation";
 static constexpr char const * KEY_SORTING = "sorting";
 static constexpr char const * KEY_LOCATION = "location";
 
+static constexpr char const * SORTING_BY_NAME = "name";
+static constexpr char const * SORTING_BY_TYPE = "type";
+static constexpr char const * SORTING_BY_RA = "right ascension";
+static constexpr char const * SORTING_BY_DEC = "declination";
+static constexpr char const * SORTING_BY_MAGNITUDE = "magnitude";
+static constexpr char const * SORTING_BY_CONSTTELLATION = "constellation";
+
 
 #endif // OBSLISTDIALOG_H

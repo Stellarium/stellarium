@@ -75,6 +75,7 @@ private:
     void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
 
     //! Load the selected observing list
+    //! @param listUuid the uuid of the list
     void loadObservingList ( QString listUuid );
 
     //! Load the lists names for populate the combo box and get the default list uuid
@@ -93,9 +94,11 @@ private slots:
     void obsListExitButtonPressed();
 
     //! Method called when a list name is selected in the combobox
+    //! @param selectedIndex the index of the list name in the combo box
     void loadSelectedObservingList ( int selectedIndex );
 
     //! Select and go to object
+    //! @param index the QModelIndex of the list
     void selectAndGoToObject ( QModelIndex index );
 
 };
