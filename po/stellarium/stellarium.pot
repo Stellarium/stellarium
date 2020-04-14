@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-09 22:04+0700\n"
+"POT-Creation-Date: 2020-04-14 08:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -543,17 +543,17 @@ msgstr ""
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:645
-#: src/core/modules/MinorPlanet.cpp:337
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:646
+#: src/core/modules/MinorPlanet.cpp:338
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:492
-#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:648
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:649
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/MinorPlanet.cpp:247
-#: src/core/modules/MinorPlanet.cpp:337 src/core/modules/Comet.cpp:190
-#: src/core/modules/Comet.cpp:335 src/gui/StelGuiItems.cpp:805
+#: src/core/modules/MinorPlanet.cpp:338 src/core/modules/Comet.cpp:190
+#: src/core/modules/Comet.cpp:336 src/gui/StelGuiItems.cpp:805
 #: src/gui/AstroCalcDialog.cpp:5673 plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:366
 msgctxt "distance"
@@ -1835,140 +1835,140 @@ msgstr ""
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:580
-#: src/core/modules/MinorPlanet.cpp:299 src/core/modules/MinorPlanet.cpp:300
-#: src/core/modules/Comet.cpp:262 src/core/modules/Comet.cpp:263
+#: src/core/modules/Planet.cpp:580 src/core/modules/Planet.cpp:581
+#: src/core/modules/MinorPlanet.cpp:300 src/core/modules/MinorPlanet.cpp:301
+#: src/core/modules/Comet.cpp:263 src/core/modules/Comet.cpp:264
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/MinorPlanet.cpp:299
-#: src/core/modules/Comet.cpp:262 src/core/modules/StarWrapper.cpp:285
+#: src/core/modules/Planet.cpp:580 src/core/modules/MinorPlanet.cpp:300
+#: src/core/modules/Comet.cpp:263 src/core/modules/StarWrapper.cpp:285
 msgctxt "into the direction of"
 msgid "towards"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:613
+#: src/core/modules/Planet.cpp:614
 msgid "with rings"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:630 src/core/modules/MinorPlanet.cpp:321
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:322
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:640 src/core/modules/MinorPlanet.cpp:331
+#: src/core/modules/Planet.cpp:641 src/core/modules/MinorPlanet.cpp:332
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:647
+#: src/core/modules/Planet.cpp:648
 msgid "Equatorial diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:667 src/core/modules/MinorPlanet.cpp:356
+#: src/core/modules/Planet.cpp:668 src/core/modules/MinorPlanet.cpp:357
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:5770
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:671 src/core/modules/MinorPlanet.cpp:360
-#: src/core/modules/Comet.cpp:273
+#: src/core/modules/Planet.cpp:672 src/core/modules/MinorPlanet.cpp:361
+#: src/core/modules/Comet.cpp:274
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:676
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:678
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:682
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:693 src/core/modules/MinorPlanet.cpp:368
-#: src/core/modules/Comet.cpp:281
+#: src/core/modules/Planet.cpp:694 src/core/modules/MinorPlanet.cpp:369
+#: src/core/modules/Comet.cpp:282
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:713 src/core/modules/MinorPlanet.cpp:386
-#: src/core/modules/Comet.cpp:299 src/gui/AstroCalcDialog.cpp:3007
+#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
+#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:3007
 #: src/gui/AstroCalcDialog.cpp:3065 plugins/Satellites/src/Satellite.cpp:378
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
-#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:2997
+#: src/core/modules/Planet.cpp:715 src/core/modules/MinorPlanet.cpp:388
+#: src/core/modules/Comet.cpp:301 src/gui/AstroCalcDialog.cpp:2997
 #: src/gui/AstroCalcDialog.cpp:3055
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:715
+#: src/core/modules/Planet.cpp:716
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:716
+#: src/core/modules/Planet.cpp:717
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:737
+#: src/core/modules/Planet.cpp:738
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:739
+#: src/core/modules/Planet.cpp:740
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:741
+#: src/core/modules/Planet.cpp:742
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:743
+#: src/core/modules/Planet.cpp:744
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:745
+#: src/core/modules/Planet.cpp:746
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:747
+#: src/core/modules/Planet.cpp:748
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:749
+#: src/core/modules/Planet.cpp:750
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:751
+#: src/core/modules/Planet.cpp:752
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:772
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:782
+#: src/core/modules/Planet.cpp:783
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:787
+#: src/core/modules/Planet.cpp:788
 msgid "Eclipse magnitude"
 msgstr ""
 
@@ -1978,12 +1978,12 @@ msgid "Provisional designation: %1"
 msgstr ""
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:347
+#: src/core/modules/MinorPlanet.cpp:348
 msgid "Tholen spectral type"
 msgstr ""
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:353
+#: src/core/modules/MinorPlanet.cpp:354
 msgid "SMASSII spectral type"
 msgstr ""
 
@@ -1997,19 +1997,19 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:307
+#: src/core/modules/Comet.cpp:308
 msgid "Coma diameter (estimate)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:329
+#: src/core/modules/Comet.cpp:330
 msgid "Gas tail length (estimate)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:335
+#: src/core/modules/Comet.cpp:336
 msgid "Core diameter"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:585 src/core/StelProjectorClasses.cpp:418
+#: src/core/modules/Comet.cpp:586 src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
 msgstr ""
 
@@ -4636,92 +4636,96 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:80
+#: src/gui/ScriptConsole.cpp:82
 msgctxt "command"
 msgid "selected text as script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:81
+#: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "remove screen text"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "remove screen images"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:83
+#: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen markers"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:84
+#: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "clear map: natural"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:85
+#: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "clear map: starchart"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:86
+#: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: deepspace"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:87
+#: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
 msgid "clear map: galactic"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:88
+#: src/gui/ScriptConsole.cpp:90
 msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:162
-msgid "Stellarium Script Files"
+#: src/gui/ScriptConsole.cpp:165 src/gui/ScriptConsole.cpp:237
+msgid "Caution!"
 msgstr ""
 
 #: src/gui/ScriptConsole.cpp:165
+msgid "Are you sure you want to load script without saving changes?"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:179
+msgid "Stellarium Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:182
 msgid "Load Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:184
+#: src/gui/ScriptConsole.cpp:207
 msgid "Save Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Clear script"
+#: src/gui/ScriptConsole.cpp:237
+msgid "Are you sure you want to clear script?"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Are you sure?"
-msgstr ""
-
-#: src/gui/ScriptConsole.cpp:294
+#: src/gui/ScriptConsole.cpp:334
 msgid "Select Script Include Directory"
 msgstr ""
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:324
+#: src/gui/ScriptConsole.cpp:366
 msgctxt "text cursor"
 msgid "R"
 msgstr ""
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:326
+#: src/gui/ScriptConsole.cpp:368
 msgctxt "text cursor"
 msgid "C"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:334
+#: src/gui/ScriptConsole.cpp:384
 msgid "Stellarium Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:336
+#: src/gui/ScriptConsole.cpp:386
 msgid "Include File"
 msgstr ""
 
@@ -8933,7 +8937,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:416
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:413
 msgid "Log"
 msgstr ""
 
@@ -10937,7 +10941,7 @@ msgstr ""
 msgid "Custom size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:419
+#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
 msgstr ""
 
@@ -11058,51 +11062,51 @@ msgstr ""
 msgid "Get the recent GRS measurement"
 msgstr ""
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:380
 msgid "Script console"
 msgstr ""
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:383
 msgid "load script from file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:387
 msgid "save script to file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:394
+#: src/ui_scriptConsole.h:391
 msgid "clear"
 msgstr ""
 
-#: src/ui_scriptConsole.h:398
+#: src/ui_scriptConsole.h:395
 msgid "pre-process script using SSC preprocessor"
 msgstr ""
 
-#: src/ui_scriptConsole.h:403
+#: src/ui_scriptConsole.h:400
 msgid "Execute:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:408
+#: src/ui_scriptConsole.h:405
 msgid "run script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:412
+#: src/ui_scriptConsole.h:409
 msgid "stop script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:415
+#: src/ui_scriptConsole.h:412
 msgid "Script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:417
+#: src/ui_scriptConsole.h:414
 msgid "Output"
 msgstr ""
 
-#: src/ui_scriptConsole.h:418
+#: src/ui_scriptConsole.h:415
 msgid "Load scripts from the User Directory by default"
 msgstr ""
 
-#: src/ui_scriptConsole.h:420 plugins/Satellites/src/ui_satellitesDialog.h:814
+#: src/ui_scriptConsole.h:417 plugins/Satellites/src/ui_satellitesDialog.h:814
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -11112,15 +11116,19 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/ui_scriptConsole.h:422
+#: src/ui_scriptConsole.h:419
 msgid "Cursor position"
 msgstr ""
 
-#: src/ui_scriptConsole.h:424
+#: src/ui_scriptConsole.h:421
+msgid "R:0 C:0"
+msgstr ""
+
+#: src/ui_scriptConsole.h:422
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:425
+#: src/ui_scriptConsole.h:423
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "..."
 msgstr ""

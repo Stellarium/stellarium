@@ -43,6 +43,7 @@ private slots:
 	void testHMSToHours();
 	void testHMSStringToHours();
 	void testHoursToHMSStr();
+	void testHoursToHMSStrLowPrecision();
 	void testRadToHMSStr();
 	void testRadToDecDegStr();
 	void testVec3fToHtmlColor();

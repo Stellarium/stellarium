@@ -520,28 +520,16 @@
         <item>
          <widget class="QLabel" name="rowColumnLabel">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Cursor position</string>
           </property>
           <property name="text">
-           <string notr="true">R:0 C:0</string>
+           <string>R:0 C:0</string>
           </property>
          </widget>
         </item>
