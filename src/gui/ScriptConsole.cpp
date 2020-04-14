@@ -45,6 +45,8 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	, useUserDir(false)
 	, hideWindowAtScriptRun(false)
 	, scriptFileName("")
+	, isNew(true)
+	, dirty(false)
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -99,6 +101,7 @@ void ScriptConsole::createDialogContent()
 	populateQuickRunList();
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
+	connect(ui->scriptEdit, SIGNAL(textChanged()), this, SLOT(setDirty()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
@@ -114,6 +117,12 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
 	ui->tabs->setCurrentIndex(0);
+
+	// get decent indentation
+	QFont font = ui->scriptEdit->font();
+	QFontMetrics fontMetrics = QFontMetrics(font);
+	int width = fontMetrics.width("0");
+	ui->scriptEdit->setTabStopWidth(4*width); // 4 characters
 	ui->scriptEdit->setFocus();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -127,6 +136,7 @@ void ScriptConsole::createDialogContent()
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->quickrunLabel->setStyleSheet(style);
+	dirty = false;
 }
 
 void ScriptConsole::setFlagUserDir(bool b)
@@ -149,6 +159,13 @@ void ScriptConsole::setFlagHideWindow(bool b)
 
 void ScriptConsole::loadScript()
 {
+	if (dirty)
+	{
+		// We are loaded and dirty: don't just overwrite!
+		if (QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+			return;
+	}
+	
 	QString openDir;
 	if (getFlagUserDir())
 	{
@@ -162,11 +179,15 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	scriptFileName = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+	QString aFile = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+	if (aFile.isNull())
+		return;
+	scriptFileName = aFile;
 	QFile file(scriptFileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
+		dirty = false;
 		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName));
 		file.close();
 	}
@@ -180,8 +201,20 @@ void ScriptConsole::saveScript()
 		saveDir = StelFileMgr::getUserDir();
 
 	QString defaultFilter("(*.ssc)");
-	if (scriptFileName.isEmpty()) // Let's ask file name, when file is new and overwrite him in other case
-		scriptFileName = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+	// Let's ask file name, when file is new and overwrite him in other case	
+	if (scriptFileName.isEmpty())
+	{
+		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+		if (aFile.isNull())
+			return;
+		scriptFileName = aFile;
+	}
+	else
+	{
+		// skip save
+		if (!dirty)
+			return;
+	}
 	QFile file(scriptFileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
@@ -189,6 +222,7 @@ void ScriptConsole::saveScript()
 		out.setCodec("UTF-8");
 		out << ui->scriptEdit->toPlainText();
 		file.close();
+		dirty = false;
 	}
 	else
 		qWarning() << "[ScriptConsole] ERROR - cannot write script file";
@@ -198,10 +232,15 @@ void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
 	{
-		if (QMessageBox::question(Q_NULLPTR, q_("Clear script"), q_("Are you sure?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+		bool doClear = false;
+		if (dirty)
+			doClear = QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
+
+		if (doClear)
 		{
 			ui->scriptEdit->clear();
 			scriptFileName = ""; // OK, it's a new file!
+			dirty = false;
 		}
 	}
 	else if (ui->tabs->currentIndex() == 1)
@@ -225,6 +264,8 @@ void ScriptConsole::preprocessScript()
 		qWarning() << "[ScriptConsole] WARNING - unknown preprocessor type";
 
 	ui->scriptEdit->setPlainText(dest);
+	scriptFileName = ""; // OK, it's a new file!
+	dirty = true;
 	ui->tabs->setCurrentIndex(0);
 }
 
@@ -288,10 +329,11 @@ void ScriptConsole::appendOutputLine(const QString& s)
 	}
 }
 
-
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts"));
+	QString aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	if (!aDir.isNull())
+		ui->includeEdit->setText(aDir);
 }
 
 void ScriptConsole::quickRun(int idx)
@@ -325,8 +367,16 @@ void ScriptConsole::rowColumnChanged()
 	// TRANSLATORS: The first letter of word "Column"
 	QString column = qc_("C", "text cursor");
 	ui->rowColumnLabel->setText(QString("%1:%2 %3:%4")
-				    .arg(row).arg(ui->scriptEdit->textCursor().blockNumber() + 1)
-				    .arg(column).arg(ui->scriptEdit->textCursor().columnNumber() + 1));
+				    .arg(row).arg(ui->scriptEdit->textCursor().blockNumber())
+				    .arg(column).arg(ui->scriptEdit->textCursor().columnNumber()));
+}
+
+void ScriptConsole::setDirty()
+{
+	if (isNew)
+		isNew = false;
+	else
+		dirty = true;
 }
 
 const QString ScriptConsole::getFileMask()
@@ -337,3 +387,4 @@ const QString ScriptConsole::getFileMask()
 	filter.append(" (*.inc)");
 	return  filter;
 }
+

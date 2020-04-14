@@ -579,12 +579,12 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 	scriptFileName = fileName;
 	num2loc = QMap<int,QPair<QString,int>>();
 	outline = 0;
-        bool result = expand( fileName, input, output, scriptDir );
-        return result;
+	includeSet.clear();
+	bool result = expand( fileName, input, output, scriptDir );
+	return result;
 }
 	
-bool StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir)
-{
+bool StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir){
 	QStringList lines = input.split("\n");
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
@@ -623,21 +623,26 @@ bool StelScriptMgr::expand(const QString fileName, const QString &input, QString
 			// Write the include line as a comment. It is end of a range.
 			output += "// " + line + "\n";
 			outline++;
-			num2loc.insert( outline, QPair<QString,int>(fileName, curline) );
-			QFile fic(incPath);
-			bool ok = fic.open(QIODevice::ReadOnly);
-			if (ok)
+
+			if( ! includeSet.contains(incPath) )
 			{
-				qWarning() << "script include: " << QDir::toNativeSeparators(incPath);
-				QString aText = QString::fromUtf8(fic.readAll());
-				expand( incPath, aText, output, scriptDir);
-                                fic.close();
-			}
-			else
-			{
-				emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
-				qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
-				return false;
+				includeSet.insert(incPath);
+				num2loc.insert( outline, QPair<QString,int>(fileName, curline) );
+				QFile fic(incPath);
+				bool ok = fic.open(QIODevice::ReadOnly);
+				if (ok)
+				{
+					qWarning() << "script include: " << QDir::toNativeSeparators(incPath);
+					QString aText = QString::fromUtf8(fic.readAll());
+					expand( incPath, aText, output, scriptDir);
+					fic.close();
+				}
+				else
+				{
+					emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
+					qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
+					return false;
+				}
 			}
 		}
 		else
@@ -702,3 +707,4 @@ void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int 
 		QCoreApplication::processEvents();
 	}
 }
+

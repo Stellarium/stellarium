@@ -27,6 +27,7 @@
 #include <QTimer>
 #include <QMap>
 #include <QPair>
+#include <QSet>
 
 class StelMainScriptAPI;
 class StelScriptEngineAgent;
@@ -256,6 +257,10 @@ private:
 	int outline;
 	QMap<int,QPair<QString,int>> num2loc;
 	QString lookup( int outline );
+
+	// Registry for include files
+	QSet<QString> includeSet;
 };
 
 #endif // STELSCRIPTMGR_HPP
+
