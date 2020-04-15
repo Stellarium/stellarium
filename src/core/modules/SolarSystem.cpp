@@ -2214,7 +2214,7 @@ void SolarSystem::setLabelsColor(const Vec3f& c)
 	}
 }
 
-const Vec3f& SolarSystem::getLabelsColor(void) const
+Vec3f SolarSystem::getLabelsColor(void) const
 {
 	return Planet::getLabelColor();
 }

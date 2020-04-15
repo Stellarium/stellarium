@@ -372,7 +372,7 @@ void CustomObjectMgr::setMarkersColor(const Vec3f& c)
 	CustomObject::markerColor = c;
 }
 
-const Vec3f& CustomObjectMgr::getMarkersColor(void) const
+Vec3f CustomObjectMgr::getMarkersColor(void) const
 {
 	return CustomObject::markerColor;
 }

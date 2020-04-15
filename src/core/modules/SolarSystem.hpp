@@ -518,7 +518,7 @@ public slots:
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	//! @return current color
-	const Vec3f& getLabelsColor(void) const;
+	Vec3f getLabelsColor(void) const;
 
 	//! Set the color used to draw solar system object orbit lines.
 	//! @param c The color of the solar system object orbit lines (R,G,B)

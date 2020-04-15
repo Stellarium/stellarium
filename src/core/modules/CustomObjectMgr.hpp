@@ -139,7 +139,7 @@ public slots:
 	void setMarkersColor(const Vec3f& c);
 	//! Get the current color used to draw custom object markers.
 	//! @return current color
-	const Vec3f& getMarkersColor(void) const;
+	Vec3f getMarkersColor(void) const;
 
 	//! Set the size of custom object markers.
 	//! @param c The size of the custom object markers
