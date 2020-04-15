@@ -398,12 +398,15 @@ void ObsListCreateEditDialog::saveObservedObject()
         } else {
             oblListUuid = QString::fromStdString ( listUuid_ );
         }
-        
+
         if ( ui->obsListDefaultListCheckBox->isChecked() ) {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
         } else {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
         }
+
+        mapFromJsonFile.insert ( KEY_VERSION, "1.0" );
+        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing lists for Stellarium" );
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
@@ -667,6 +670,8 @@ void ObsListCreateEditDialog::loadObservingList()
                 }
 
             }
+
+            objectMgr->unSelect();
 
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();

@@ -49,6 +49,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
     createEditDialog_instance = Q_NULLPTR;
+    defaultListUuid_ = "";
 
 }
 
@@ -108,10 +109,11 @@ void ObsListDialog::createDialogContent()
     ui->obsListClearHighlightButton->setEnabled ( false );
 
     QFile jsonFile ( observingListJsonPath );
-    if(jsonFile.exists()){
+    if ( jsonFile.exists() ) {
         loadListsName();
+        loadDefaultList();
     }
-    
+
 }
 
 /*
@@ -303,6 +305,7 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
 */
 void ObsListDialog::loadListsName()
 {
+
     QVariantMap map;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
@@ -313,6 +316,10 @@ void ObsListDialog::loadListsName()
 
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             jsonFile.close();
+
+            // init combo box
+            ui->obsListComboBox->clear();
+            ui->obsListComboBox->addItem ( "" );
 
             // Get the default list uuid
             QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
@@ -328,12 +335,8 @@ void ObsListDialog::loadListsName()
                     QVariantMap data = var.value<QVariantMap>();
                     QString listName = data.value ( KEY_NAME ).value<QString>();
                     ui->obsListComboBox->addItem ( listName, listUuid );
-
-                    int index = ui->obsListComboBox->findText ( listName );
-                    if ( ( index != -1 ) && ( defaultListUuid == listUuid ) ) {
-                        ui->obsListComboBox->setCurrentIndex ( index );
-                        ui->obsListEditListButton->setEnabled ( true );
-                        loadObservingList ( listUuid );
+                    if ( defaultListUuid == listUuid ) {
+                        defaultListUuid_ = defaultListUuid;
                     }
                 }
             }
@@ -343,6 +346,23 @@ void ObsListDialog::loadListsName()
             return;
         }
 
+    }
+}
+
+
+/*
+ * Load the default list
+*/
+void ObsListDialog::loadDefaultList()
+{
+    if ( defaultListUuid_ != "" ) {
+        int index = ui->obsListComboBox->findData ( defaultListUuid_ );
+        if ( index != -1 ) {
+            ui->obsListComboBox->setCurrentIndex ( index );
+            ui->obsListEditListButton->setEnabled ( true );
+            selectedObservingListUuid = defaultListUuid_.toStdString();
+            loadObservingList ( defaultListUuid_ );
+        }
     }
 }
 
@@ -592,19 +612,20 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
     // TODO: delete after tests
     qDebug() << "Selected index: " << selectedIndex;
 
-    if ( selectedIndex != 0 ) {
+    if ( selectedIndex > 0 ) {
         ui->obsListEditListButton->setEnabled ( true );
         QString listUuid = ui->obsListComboBox->itemData ( selectedIndex ).toString();
         selectedObservingListUuid = listUuid.toStdString();
         loadObservingList ( listUuid );
     } else {
+        selectedObservingListUuid = "";
         // Button obsListEditListButton, obsListHighlightAllButton and
         // obsListClearHighlightButtonmust be disable if no list is selected
         ui->obsListEditListButton->setEnabled ( false );
         ui->obsListHighlightAllButton->setEnabled ( false );
         ui->obsListClearHighlightButton->setEnabled ( false );
         // Clear list description
-        ui->obsListDescriptionTextEdit->setPlainText ("");
+        ui->obsListDescriptionTextEdit->setPlainText ( "" );
         // Clear model
         obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
         qWarning() << "[ObservingList] No list selected !";
@@ -627,9 +648,17 @@ void ObsListDialog::obsListExitButtonPressed()
 */
 void ObsListDialog::obsListCreateEditDialogClosed()
 {
-    // We must reload the list of list name in case of creation of a new list
+    // We must reload the list of list name
     loadListsName();
-    
+    //TODO: delete after tests
+    qDebug() << "obsListCreateEditDialogClosed() -> selectedObservingListUuid = " << QString::fromStdString ( selectedObservingListUuid );
+    int index = ui->obsListComboBox->findData ( QString::fromStdString ( selectedObservingListUuid ) ) ;
+    if ( index != -1 ) {
+        ui->obsListComboBox->setCurrentIndex ( index );
+        loadSelectedObservingList ( index );
+    }
+
+
     ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;
 }

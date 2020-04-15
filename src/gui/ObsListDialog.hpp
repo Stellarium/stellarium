@@ -55,6 +55,7 @@ private:
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
     QList<int> highlightLabelIDs;
+    QString defaultListUuid_;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
@@ -80,6 +81,9 @@ private:
 
     //! Load the lists names for populate the combo box and get the default list uuid
     void loadListsName();
+    
+    //! Load the default list
+    void loadDefaultList();
 
 
 public slots:

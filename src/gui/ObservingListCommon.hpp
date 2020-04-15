@@ -61,6 +61,8 @@ static constexpr char const * KEY_OBJECTS = "objects";
 static constexpr char const * KEY_DESIGNATION = "designation";
 static constexpr char const * KEY_SORTING = "sorting";
 static constexpr char const * KEY_LOCATION = "location";
+static constexpr char const * KEY_VERSION = "version";
+static constexpr char const * KEY_SHORT_NAME = "shortName";
 
 static constexpr char const * SORTING_BY_NAME = "name";
 static constexpr char const * SORTING_BY_TYPE = "type";
