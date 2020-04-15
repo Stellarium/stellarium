@@ -119,7 +119,7 @@ void HighlightMgr::setColor(const Vec3f& c)
 	hightlightColor = c;
 }
 
-const Vec3f& HighlightMgr::getColor(void) const
+Vec3f HighlightMgr::getColor(void) const
 {
 	return hightlightColor;
 }

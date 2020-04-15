@@ -78,7 +78,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
-	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi, Gion Kunz";
+	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi, Gion Kunz, Petr Kubánek";
 	info.contact = STELLARIUM_URL;
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;

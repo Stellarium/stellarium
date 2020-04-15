@@ -45,6 +45,7 @@ public:
 
 	Coordinates position() const;
 	void setPosition(Coordinates coords);
+	void syncPosition(Coordinates coords);
 	bool isDeviceConnected() const;
 	const QStringList devices() const;
 	void moveNorth(int speed);

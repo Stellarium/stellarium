@@ -130,8 +130,11 @@ void ScriptConsole::createDialogContent()
 	ui->useUserDirCheckBox->setChecked(useUserDir);
 	hideWindowAtScriptRun = conf->value("gui/flag_scripts_hide_window", false).toBool();
 	ui->closeWindowAtScriptRunCheckbox->setChecked(hideWindowAtScriptRun);
+	clearOutput = conf->value("gui/flag_scripts_clear_output", false).toBool();
+	ui->clearOutputCheckbox->setChecked(clearOutput);
 	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
 	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
+	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
 
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
@@ -154,6 +157,15 @@ void ScriptConsole::setFlagHideWindow(bool b)
 	{
 		hideWindowAtScriptRun = b;
 		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_hide_window", b);
+	}
+}
+
+void ScriptConsole::setFlagClearOutput(bool b)
+{
+	if (b!=clearOutput)
+	{
+		clearOutput = b;
+		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_clear_output", b);
 	}
 }
 
@@ -273,7 +285,9 @@ void ScriptConsole::runScript()
 {
 	ui->tabs->setCurrentIndex(1);
 	ui->logBrowser->clear();
-
+	if( clearOutput )
+		ui->outputBrowser->clear();
+	
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
 	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(scriptFileName, ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
 	{

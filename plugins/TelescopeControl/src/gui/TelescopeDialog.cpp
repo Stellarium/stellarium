@@ -263,13 +263,14 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
 	aboutPage += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_VERSION + "</td></tr>";
 	aboutPage += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_LICENSE + "</td></tr>";
-	aboutPage += "<tr><td rowspan=4><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
-	aboutPage += "<tr><td>Michael Heinz</td></tr>";
+	aboutPage += "<tr><td rowspan=6><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td>Gion Kunz &lt;gion.kunz@gmail.com&gt; (" + q_("ASCOM Telescope Client") + ")</td></tr>";
-	aboutPage += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
-	aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
-	aboutPage += "<tr><td></td><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
+	aboutPage += "<tr><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt; (" + q_("INDI Telescope Client") + ")</td></tr>";
+	aboutPage += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td>Michael Heinz</td></tr>";
+	aboutPage += "<tr><td>Alexandros Kosiaris</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
