@@ -55,6 +55,7 @@ private slots:
 
 	void setFlagUserDir(bool b);
 	void setFlagHideWindow(bool b);
+	void setFlagClearOutput(bool b);
 	void populateQuickRunList();
 	
 protected:
@@ -68,6 +69,7 @@ private:
 	StelScriptSyntaxHighlighter* highlighter;
 	bool useUserDir;
 	bool hideWindowAtScriptRun;
+	bool clearOutput;
 
 	// The script editor FSM has four states: dirty (t/f), file name.
 	// Input events are: buttons load, save, clear and keyboard input.
