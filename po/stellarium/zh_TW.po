@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-09 22:04+0700\n"
+"POT-Creation-Date: 2020-04-15 09:07+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -40,7 +40,7 @@ msgstr "自訂標記"
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
 #: src/core/modules/StarWrapper.cpp:221 src/gui/AstroCalcDialog.cpp:811
 #: src/ui_configurationDialog.h:1618 plugins/Satellites/src/Satellite.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
 #: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:280
@@ -550,17 +550,17 @@ msgstr "地質學名詞"
 msgid "Linear size"
 msgstr "線性尺寸"
 
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:645
-#: src/core/modules/MinorPlanet.cpp:337
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:646
+#: src/core/modules/MinorPlanet.cpp:338
 msgid "Diameter"
 msgstr "直徑"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:492
-#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:648
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:649
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/MinorPlanet.cpp:247
-#: src/core/modules/MinorPlanet.cpp:337 src/core/modules/Comet.cpp:190
-#: src/core/modules/Comet.cpp:335 src/gui/StelGuiItems.cpp:805
+#: src/core/modules/MinorPlanet.cpp:338 src/core/modules/Comet.cpp:190
+#: src/core/modules/Comet.cpp:336 src/gui/StelGuiItems.cpp:805
 #: src/gui/AstroCalcDialog.cpp:5673 plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:366
 msgctxt "distance"
@@ -1855,140 +1855,140 @@ msgstr "日心速度"
 msgid "Equatorial rotation velocity"
 msgstr "赤道轉速"
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:580
-#: src/core/modules/MinorPlanet.cpp:299 src/core/modules/MinorPlanet.cpp:300
-#: src/core/modules/Comet.cpp:262 src/core/modules/Comet.cpp:263
+#: src/core/modules/Planet.cpp:580 src/core/modules/Planet.cpp:581
+#: src/core/modules/MinorPlanet.cpp:300 src/core/modules/MinorPlanet.cpp:301
+#: src/core/modules/Comet.cpp:263 src/core/modules/Comet.cpp:264
 msgid "Hourly motion"
 msgstr "每小時移動"
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/MinorPlanet.cpp:299
-#: src/core/modules/Comet.cpp:262 src/core/modules/StarWrapper.cpp:285
+#: src/core/modules/Planet.cpp:580 src/core/modules/MinorPlanet.cpp:300
+#: src/core/modules/Comet.cpp:263 src/core/modules/StarWrapper.cpp:285
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "朝向"
 
-#: src/core/modules/Planet.cpp:613
+#: src/core/modules/Planet.cpp:614
 msgid "with rings"
 msgstr "含光環"
 
-#: src/core/modules/Planet.cpp:630 src/core/modules/MinorPlanet.cpp:321
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:322
 msgid "scaled up to"
 msgstr "縮放至"
 
-#: src/core/modules/Planet.cpp:640 src/core/modules/MinorPlanet.cpp:331
+#: src/core/modules/Planet.cpp:641 src/core/modules/MinorPlanet.cpp:332
 msgid "Apparent diameter"
 msgstr "視直徑"
 
-#: src/core/modules/Planet.cpp:647
+#: src/core/modules/Planet.cpp:648
 msgid "Equatorial diameter"
 msgstr "赤道直徑"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:667 src/core/modules/MinorPlanet.cpp:356
+#: src/core/modules/Planet.cpp:668 src/core/modules/MinorPlanet.cpp:357
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:5770
 msgctxt "duration"
 msgid "days"
 msgstr "天"
 
-#: src/core/modules/Planet.cpp:671 src/core/modules/MinorPlanet.cpp:360
-#: src/core/modules/Comet.cpp:273
+#: src/core/modules/Planet.cpp:672 src/core/modules/MinorPlanet.cpp:361
+#: src/core/modules/Comet.cpp:274
 msgid "Sidereal period"
 msgstr "恆星周期"
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:676
 msgid "Sidereal day"
 msgstr "恆星日"
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:678
 msgid "Mean solar day"
 msgstr "平太陽日"
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:682
 msgid "The period of rotation is chaotic"
 msgstr "旋轉週期是不規則的"
 
-#: src/core/modules/Planet.cpp:693 src/core/modules/MinorPlanet.cpp:368
-#: src/core/modules/Comet.cpp:281
+#: src/core/modules/Planet.cpp:694 src/core/modules/MinorPlanet.cpp:369
+#: src/core/modules/Comet.cpp:282
 msgid "Synodic period"
 msgstr "朔望周期"
 
-#: src/core/modules/Planet.cpp:713 src/core/modules/MinorPlanet.cpp:386
-#: src/core/modules/Comet.cpp:299 src/gui/AstroCalcDialog.cpp:3007
+#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
+#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:3007
 #: src/gui/AstroCalcDialog.cpp:3065 plugins/Satellites/src/Satellite.cpp:378
 msgid "Phase angle"
 msgstr "相位角"
 
-#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
-#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:2997
+#: src/core/modules/Planet.cpp:715 src/core/modules/MinorPlanet.cpp:388
+#: src/core/modules/Comet.cpp:301 src/gui/AstroCalcDialog.cpp:2997
 #: src/gui/AstroCalcDialog.cpp:3055
 msgid "Elongation"
 msgstr "角距"
 
-#: src/core/modules/Planet.cpp:715
+#: src/core/modules/Planet.cpp:716
 msgid "Illuminated"
 msgstr "被照明的"
 
-#: src/core/modules/Planet.cpp:716
+#: src/core/modules/Planet.cpp:717
 msgid "Albedo"
 msgstr "反照率"
 
-#: src/core/modules/Planet.cpp:737
+#: src/core/modules/Planet.cpp:738
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:739
+#: src/core/modules/Planet.cpp:740
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "眉月"
 
-#: src/core/modules/Planet.cpp:741
+#: src/core/modules/Planet.cpp:742
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:743
+#: src/core/modules/Planet.cpp:744
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:745
+#: src/core/modules/Planet.cpp:746
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "滿月"
 
-#: src/core/modules/Planet.cpp:747
+#: src/core/modules/Planet.cpp:748
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "虧凸月"
 
-#: src/core/modules/Planet.cpp:749
+#: src/core/modules/Planet.cpp:750
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:751
+#: src/core/modules/Planet.cpp:752
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "殘月"
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "Moon age"
 msgstr "月齡"
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "days old"
 msgstr "天"
 
-#: src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:772
 msgid "Position angle of bright limb"
 msgstr "亮邊緣的方位角"
 
-#: src/core/modules/Planet.cpp:782
+#: src/core/modules/Planet.cpp:783
 msgid "Eclipse obscuration"
 msgstr "食的遮蔽率"
 
-#: src/core/modules/Planet.cpp:787
+#: src/core/modules/Planet.cpp:788
 msgid "Eclipse magnitude"
 msgstr "食分"
 
@@ -1998,12 +1998,12 @@ msgid "Provisional designation: %1"
 msgstr "臨時編號: %1"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:347
+#: src/core/modules/MinorPlanet.cpp:348
 msgid "Tholen spectral type"
 msgstr "Tholen 光譜類型"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:353
+#: src/core/modules/MinorPlanet.cpp:354
 msgid "SMASSII spectral type"
 msgstr "SMASSII 光譜類型"
 
@@ -2017,19 +2017,19 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "周期"
 
-#: src/core/modules/Comet.cpp:307
+#: src/core/modules/Comet.cpp:308
 msgid "Coma diameter (estimate)"
 msgstr "(估計)彗髮直徑"
 
-#: src/core/modules/Comet.cpp:329
+#: src/core/modules/Comet.cpp:330
 msgid "Gas tail length (estimate)"
 msgstr "(估計)彗尾長度"
 
-#: src/core/modules/Comet.cpp:335
+#: src/core/modules/Comet.cpp:336
 msgid "Core diameter"
 msgstr "核心直徑"
 
-#: src/core/modules/Comet.cpp:585 src/core/StelProjectorClasses.cpp:418
+#: src/core/modules/Comet.cpp:586 src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
 msgstr "正射"
 
@@ -4193,66 +4193,66 @@ msgstr "{Google 網上論壇} - 和其他愛好者討論 Stellarium。"
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr "{開放集體 Open Collective} - 捐助 Stellarium 開發團隊"
 
-#: src/gui/HelpDialog.cpp:426
+#: src/gui/HelpDialog.cpp:427
 msgid "Developers"
 msgstr "開發團隊"
 
-#: src/gui/HelpDialog.cpp:427
+#: src/gui/HelpDialog.cpp:428
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "計畫協調與開發指導者: %1"
 
-#: src/gui/HelpDialog.cpp:428 src/gui/HelpDialog.cpp:434
+#: src/gui/HelpDialog.cpp:429 src/gui/HelpDialog.cpp:435
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "視覺與其他設計: %1"
 
-#: src/gui/HelpDialog.cpp:429 src/gui/HelpDialog.cpp:430
-#: src/gui/HelpDialog.cpp:431 src/gui/HelpDialog.cpp:436
-#: src/gui/HelpDialog.cpp:437 src/gui/HelpDialog.cpp:438
-#: src/gui/HelpDialog.cpp:439 src/gui/HelpDialog.cpp:440
-#: src/gui/HelpDialog.cpp:441 src/gui/HelpDialog.cpp:442
-#: src/gui/HelpDialog.cpp:443 src/gui/HelpDialog.cpp:444
-#: src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:430 src/gui/HelpDialog.cpp:431
+#: src/gui/HelpDialog.cpp:432 src/gui/HelpDialog.cpp:437
+#: src/gui/HelpDialog.cpp:438 src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:440 src/gui/HelpDialog.cpp:441
+#: src/gui/HelpDialog.cpp:442 src/gui/HelpDialog.cpp:443
+#: src/gui/HelpDialog.cpp:444 src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:446
 #, qt-format
 msgid "Developer: %1"
 msgstr "開發者: %1"
 
-#: src/gui/HelpDialog.cpp:432
+#: src/gui/HelpDialog.cpp:433
 msgid "Former Developers"
 msgstr "前開發者"
 
-#: src/gui/HelpDialog.cpp:433
+#: src/gui/HelpDialog.cpp:434
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "有好幾位開發者曾經做出重大的貢獻; 雖然他們現在已較少投入。 他們的貢獻對這個計畫產生了很大的助力:"
 
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:436
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "說明文件撰寫: %1"
 
-#: src/gui/HelpDialog.cpp:446 src/gui/HelpDialog.cpp:447
+#: src/gui/HelpDialog.cpp:447 src/gui/HelpDialog.cpp:448
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX 開發: %1"
 
-#: src/gui/HelpDialog.cpp:448
+#: src/gui/HelpDialog.cpp:449
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "連續性整合: %1"
 
-#: src/gui/HelpDialog.cpp:449
+#: src/gui/HelpDialog.cpp:450
 #, qt-format
 msgid "Tester: %1"
 msgstr "測試者: %1"
 
-#: src/gui/HelpDialog.cpp:450
+#: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:503
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:201
@@ -4261,7 +4261,7 @@ msgstr "測試者: %1"
 msgid "Contributors"
 msgstr "貢獻者"
 
-#: src/gui/HelpDialog.cpp:451
+#: src/gui/HelpDialog.cpp:452
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -4745,92 +4745,96 @@ msgstr "您已安裝另一個使用相同 ID (%1) 的地景"
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "您可以刪除以下資料夾以手動移除地景: %1"
 
-#: src/gui/ScriptConsole.cpp:80
+#: src/gui/ScriptConsole.cpp:82
 msgctxt "command"
 msgid "selected text as script"
 msgstr "選取的文字當作腳本"
 
-#: src/gui/ScriptConsole.cpp:81
+#: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "remove screen text"
 msgstr "移除螢幕的文字"
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "remove screen images"
 msgstr "移除螢幕的影像"
 
-#: src/gui/ScriptConsole.cpp:83
+#: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen markers"
 msgstr "移除螢幕的標記"
 
-#: src/gui/ScriptConsole.cpp:84
+#: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "clear map: natural"
 msgstr "純淨畫面: 原始自然模式"
 
-#: src/gui/ScriptConsole.cpp:85
+#: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "clear map: starchart"
 msgstr "純淨畫面: 星圖模式"
 
-#: src/gui/ScriptConsole.cpp:86
+#: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: deepspace"
 msgstr "純淨畫面: 深空模式"
 
-#: src/gui/ScriptConsole.cpp:87
+#: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
 msgid "clear map: galactic"
 msgstr "純淨畫面: 銀道座標模式"
 
-#: src/gui/ScriptConsole.cpp:88
+#: src/gui/ScriptConsole.cpp:90
 msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "純淨畫面: 超星系座標模式"
 
-#: src/gui/ScriptConsole.cpp:162
+#: src/gui/ScriptConsole.cpp:177 src/gui/ScriptConsole.cpp:249
+msgid "Caution!"
+msgstr "警告！"
+
+#: src/gui/ScriptConsole.cpp:177
+msgid "Are you sure you want to load script without saving changes?"
+msgstr "您確定要載入腳本而不先儲存所作的變更嗎？"
+
+#: src/gui/ScriptConsole.cpp:191
 msgid "Stellarium Script Files"
 msgstr "Stellarium 腳本檔案"
 
-#: src/gui/ScriptConsole.cpp:165
+#: src/gui/ScriptConsole.cpp:194
 msgid "Load Script"
 msgstr "載入腳本(Script)"
 
-#: src/gui/ScriptConsole.cpp:184
+#: src/gui/ScriptConsole.cpp:219
 msgid "Save Script"
 msgstr "儲存腳本(Script)"
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Clear script"
-msgstr "清空腳本"
+#: src/gui/ScriptConsole.cpp:249
+msgid "Are you sure you want to clear script?"
+msgstr "您確定要清除腳本嗎？"
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Are you sure?"
-msgstr "確定要執行？"
-
-#: src/gui/ScriptConsole.cpp:294
+#: src/gui/ScriptConsole.cpp:348
 msgid "Select Script Include Directory"
 msgstr "選取腳本(Script)包含路徑"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:324
+#: src/gui/ScriptConsole.cpp:380
 msgctxt "text cursor"
 msgid "R"
 msgstr "列"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:326
+#: src/gui/ScriptConsole.cpp:382
 msgctxt "text cursor"
 msgid "C"
 msgstr "欄"
 
-#: src/gui/ScriptConsole.cpp:334
+#: src/gui/ScriptConsole.cpp:398
 msgid "Stellarium Script"
 msgstr "Stellarium 腳本檔"
 
-#: src/gui/ScriptConsole.cpp:336
+#: src/gui/ScriptConsole.cpp:400
 msgid "Include File"
 msgstr "包含檔案"
 
@@ -4988,7 +4992,7 @@ msgstr "此刻約為 %1"
 #: src/gui/AstroCalcDialog.cpp:756 src/gui/AstroCalcDialog.cpp:1333
 #: src/gui/AstroCalcDialog.cpp:1766 src/gui/AstroCalcDialog.cpp:5053
 #: src/ui_configurationDialog.h:1624
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:196
@@ -9120,7 +9124,7 @@ msgstr "說明"
 msgid "About"
 msgstr "關於"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:416
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:419
 msgid "Log"
 msgstr "紀錄"
 
@@ -9477,11 +9481,11 @@ msgstr "絕對大小:"
 
 #: src/ui_viewDialog.h:2765
 msgid "Show stars with pointed rays"
-msgstr ""
+msgstr "使用尖刺芒狀的方式來顯示恆星"
 
 #: src/ui_viewDialog.h:2767
 msgid "Spiky stars"
-msgstr ""
+msgstr "星芒"
 
 #: src/ui_viewDialog.h:2768 src/ui_viewDialog.h:3385
 msgid "Sky"
@@ -11126,7 +11130,7 @@ msgstr "反轉彩色"
 msgid "Custom size"
 msgstr "自訂大小"
 
-#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:419
+#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:422
 msgid "Close window when script runs"
 msgstr "腳本(Script) 執行時關閉視窗"
 
@@ -11249,51 +11253,55 @@ msgstr "日期和時間(UTC):"
 msgid "Get the recent GRS measurement"
 msgstr "取得大紅斑(GRS)最近的觀測值"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:386
 msgid "Script console"
 msgstr "腳本(script)主控台"
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:389
 msgid "load script from file"
 msgstr "從檔案載入腳本(script)"
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:393
 msgid "save script to file"
 msgstr "將腳本(script)存入檔案"
 
-#: src/ui_scriptConsole.h:394
+#: src/ui_scriptConsole.h:397
 msgid "clear"
 msgstr "清除"
 
-#: src/ui_scriptConsole.h:398
+#: src/ui_scriptConsole.h:401
 msgid "pre-process script using SSC preprocessor"
 msgstr "使用 SCC 預處理器來預先處理腳本(script)"
 
-#: src/ui_scriptConsole.h:403
+#: src/ui_scriptConsole.h:406
 msgid "Execute:"
 msgstr "執行:"
 
-#: src/ui_scriptConsole.h:408
+#: src/ui_scriptConsole.h:411
 msgid "run script"
 msgstr "執行腳本(script)"
 
-#: src/ui_scriptConsole.h:412
+#: src/ui_scriptConsole.h:415
 msgid "stop script"
 msgstr "停止腳本(script)"
 
-#: src/ui_scriptConsole.h:415
+#: src/ui_scriptConsole.h:418
 msgid "Script"
 msgstr "腳本(Script)"
 
-#: src/ui_scriptConsole.h:417
+#: src/ui_scriptConsole.h:420
 msgid "Output"
 msgstr "輸出"
 
-#: src/ui_scriptConsole.h:418
+#: src/ui_scriptConsole.h:421
 msgid "Load scripts from the User Directory by default"
 msgstr "預設是從使用者資料夾載入腳本"
 
-#: src/ui_scriptConsole.h:420 plugins/Satellites/src/ui_satellitesDialog.h:814
+#: src/ui_scriptConsole.h:423
+msgid "Clear output before script runs"
+msgstr "在腳本執行前先清空輸出"
+
+#: src/ui_scriptConsole.h:424 plugins/Satellites/src/ui_satellitesDialog.h:814
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -11303,15 +11311,19 @@ msgstr "預設是從使用者資料夾載入腳本"
 msgid "Settings"
 msgstr "設置"
 
-#: src/ui_scriptConsole.h:422
+#: src/ui_scriptConsole.h:426
 msgid "Cursor position"
 msgstr "游標位置"
 
-#: src/ui_scriptConsole.h:424
+#: src/ui_scriptConsole.h:428
+msgid "R:0 C:0"
+msgstr "列:0 欄:0"
+
+#: src/ui_scriptConsole.h:429
 msgid "Include dir:"
 msgstr "包含目錄:"
 
-#: src/ui_scriptConsole.h:425
+#: src/ui_scriptConsole.h:430
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "..."
 msgstr "..."
@@ -12210,7 +12222,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:242
@@ -12230,7 +12242,7 @@ msgstr "連結"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
@@ -12253,7 +12265,7 @@ msgstr "您可以在 Github 網站上獲得我們的支援，發表時請確認�
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:532
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
@@ -12274,7 +12286,7 @@ msgstr "若您仍有疑問，您可在 {此處取得解答}。"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
@@ -12295,7 +12307,7 @@ msgstr "錯誤報告和功能需求可以點擊 {此處} 進行 。"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/Oculars/src/gui/OcularDialog.cpp:536
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
@@ -12334,12 +12346,12 @@ msgstr "顯示包含方位角"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:305
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
 msgid "Text"
-msgstr ""
+msgstr "文字"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:307
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:318
 msgid "Line"
-msgstr ""
+msgstr "連線"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:308
 msgid "Show in Horizontal Coordinates"
@@ -14418,25 +14430,29 @@ msgstr "停止"
 msgid "Telescope Control plug-in"
 msgstr "望遠鏡控制外掛程式"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Plug-in and GUI programming"
 msgstr "外掛與圖形使用介面程式"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "ASCOM Telescope Client"
 msgstr "ASCOM 望遠鏡客戶端"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "RTS2 support"
 msgstr "RTS2 支援"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+msgid "INDI Telescope Client"
+msgstr "INDI 望遠鏡客戶端"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr "這個外掛程式是重複使用以下基於GNU通用公共授權條款下的許多程式碼:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -14445,17 +14461,17 @@ msgstr ""
 "Telescope，TelescopeDummy，TelescopeTcp，和 Stellarium原程式的　TelescopeMgr 物件(即 "
 "Stellarium 最初望遠鏡控制功能的客戶端)；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "望遠鏡伺服器核心程式碼(基於LGPL授權許可)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr "TelescopeServerLx200 望遠鏡伺服器核心程式碼(最初基於LGPL授權許可)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -14464,7 +14480,7 @@ msgstr ""
 "所有上述的客戶端、伺服器核心和 LX200  伺服器，以及 Stellarium 望遠鏡控制(透過TCP/IP)網路協議的作者是 <b>Johannes"
 " Gajdosik</b>"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -14472,94 +14488,94 @@ msgstr ""
 "<b>Michael Heinz</b> 所寫的 TelescopeServerNexStar 望遠鏡伺服器核心程式碼(最初是基於 "
 "TelescopeServerLx200 的 LGPL 授權許可)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
 msgstr "INDI 由 <b>Alessandro Siniscalchi</b>"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
 msgstr "關於這個外掛程式更完整和最新的文件可以在 Stellarium Wiki 網站的 {望遠鏡控制} 頁面取得。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid "Contents"
 msgstr "目錄"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "Abilities and limitations"
 msgstr "功能與限制"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The original telescope control feature"
 msgstr "最初的望遠鏡控制功能"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid "Using this plug-in"
 msgstr "使用此外掛程式"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid "Main window ('Telescopes')"
 msgstr "主視窗(「望遠鏡」)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid "Telescope configuration window"
 msgstr "望遠鏡設定視窗"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid "Connection type"
 msgstr "連接類型"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Telescope properties"
 msgstr "望遠鏡特性"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "Device settings"
 msgstr "裝置設置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "Connection settings"
 msgstr "連接設置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
 msgid "Field of view indicators"
 msgstr "視野指示器"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:444
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
 msgid "'Slew telescope to' window"
 msgstr "「轉動望遠鏡至」視窗"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "Telescope commands"
 msgstr "望遠鏡指令"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
 msgid "Supported devices"
 msgstr "支援的裝置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Virtual telescope"
 msgstr "虛擬望遠鏡"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands"
 " to the device and to receive its current position. It cannot issue any "
@@ -14570,26 +14586,26 @@ msgstr ""
 "這個外掛程式僅允許 Stellarium 傳送「<b>轉動(slew)</b>」 (「前往(go "
 "to)」)指令給裝置和取得它目前的位置資訊，它不能發出任何其他的指令，因此使用者必須注意到鏡身可能撞到鏡架的問題和其他類似情況。(要中止這個轉動，您可以啟動轉到另一個安全位置的轉動)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr "截至目前的版本，這個外掛程式不允許追蹤人造衛星，而且並不是非常適合於月球或行星觀測。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr "警告：Stellarium不會阻止你的望遠鏡旋轉後指向太陽。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr "請勿在沒有適當的濾鏡保護下將您的望遠鏡指向太陽，望遠鏡聚焦後的強烈光芒將會讓您的眼睛或是您的設備造成不可挽回的傷害。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause"
 " your telescope to point at the sun on its way to the given destination, so "
@@ -14597,23 +14613,23 @@ msgid ""
 "before sunset without appropriate protection."
 msgstr "即使您不是故意的，在白天轉動望遠鏡至某目標時有可能會在轉動途中指向太陽，所以強烈建議您在未做適當的保護下，避免在日落前使用望遠鏡控制功能。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:475
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:509
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:510
 msgid "Back to top"
 msgstr "回到頂部"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
@@ -14622,40 +14638,40 @@ msgstr ""
 "從 Stellarium 0.10.5 版開始，最初的望遠鏡控制功能已經移除，所以沒有啟動這個外掛程式就沒有辦法透過 Stellarium "
 "來控制望遠鏡。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr "一般而言有二種方式透過這個外掛程式來控制望遠鏡，分別依據以下情形 :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "DIRECT CONNECTION"
 msgstr "直接連接"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
 msgstr "一台 {這個外掛程式所支援的裝置} 透過連接線接到運行 Stellarium 的電腦。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid "INDIRECT CONNECTION"
 msgstr "間接連接"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid ""
 "A device is connected to the same computer but it is driven by a {stand-"
 "alone telescope server program}"
 msgstr "一台連接到相同的電腦，但是是透過 {獨立的望遠鏡伺服器程式}，"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "or a {third-party application} <b>that can 'talk' to Stellarium</b>;"
 msgstr "或是<b>可以與 Stellarium 「溝通」</b>的 {第三方應用程式} ；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -14666,13 +14682,13 @@ msgstr ""
 "獨立的望遠鏡伺服器之一，或是第三方應用程式。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
 msgstr "大部分舊式望遠鏡使用連接線接到 {序列埠} (RS-232)，新式的使用USB(通用序列匯流排)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -14681,13 +14697,13 @@ msgstr ""
 "在 Linux 與 Mac OSX 都是相同地由這個外掛程式控制。然而在 Windows 上，如果這台望遠鏡或連接線沒有提供驅動程式，那麼連接這台 "
 "USB 裝置可能需要一個「虛擬串列埠」軟體。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr "像這樣的軟體會建立一個虛擬(「假」)的 COM 埠來對應真實的 USB 埠好讓您能使用這個外掛程式。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
@@ -14695,17 +14711,17 @@ msgid ""
 msgstr ""
 "在這三種作業系統中，如果電腦沒有古老的串列埠而且您的望遠鏡僅能連接到串列埠，那麼您可能需要一個串列埠轉 USB (RS-232-to-USB)的轉接器。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr "望遠鏡安裝(設置地理座標，進行校准等)應在望遠鏡連接到 Stellarium 之前完成。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid "The plug-in's main window can be opened:"
 msgstr "這個外掛程式的主視窗可以經由以下方式開啟:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -14715,61 +14731,61 @@ msgstr ""
 "的設定視窗(按下<b>F2</b>或是左邊工具列對應的按鈕來開啟)下，點選「外掛程式」，再點選該頁籤下的「望遠鏡控制」後，點選設定按鈕。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 msgid ""
 "By pressing the 'Configure telescopes...' button in the {'Slew to' window} "
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr "在 {「轉動至」的視窗}（按下鍵盤的<b>Ctrl+0</b>或是底部工具列對應的按鈕）中，按下「設定望遠鏡...」按鈕。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr "<b>望遠鏡</b>頁籤下顯示已經被安裝的望遠鏡列表。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr "編號 (<b>#</b>) 欄位顯示用來控制這台望遠鏡的編號。例如，望遠鏡#2的快速鍵是Ctrl+2。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or"
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr "<b>狀態</b>欄位標示連線是否已經運作。不幸的是，在某些情況下，當沒有工作連接存在時會顯示「已連接」。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr "<b>類型</b>欄位標示連接的種類:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid "<b>virtual</b> means a {virtual telescope};"
 msgstr "<b>虛擬</b> 表示 {虛擬望遠鏡};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
 msgstr "<b>本機, Stellarium</b> 表示直接連接到望遠鏡 ({詳見上面});"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr "<b>本機, 介接</b> 表示間接連接到同一台電腦的另外一個程式;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr "<b>遠端, 未知</b> 表示透過網路間接連接到遠端電腦。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify"
 " the configuration of an existing connection, select it in the list and "
@@ -14779,45 +14795,45 @@ msgstr ""
 "要建立新的望遠鏡連線，請按<b>增加</b>按鈕。要修改現有連接的設定配置，請在列表中選取它，然後按下<b>設定</b>按鈕。這二種情況下都會打開望遠鏡設定視窗。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
 msgstr "最上方的欄位表示二種連接類型的選取( 詳見{上述})"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:583
 msgid "Telescope controlled by:"
 msgstr "望遠鏡控制方式:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr "<b>Stellarium, 直接透過序列埠連接</b> 是直接的狀況"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr "<b>介接軟體或是遠端電腦</b> 是間接的狀況"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
 msgstr "<b>無，就只是模擬一台(一個移動標線)</b> 是一個 {虛擬望遠鏡}  (無連接)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr "<b>名稱</b> 會顯示在螢幕上望遠鏡標線旁邊的標籤。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr "<b>連接延遲</b>: 如果螢幕上望遠鏡標線的移動不是很平順，您可以增加或減少這個數值。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -14827,258 +14843,258 @@ msgstr ""
 "<b>座標系統</b>: 某些 Celestron "
 "望遠鏡的韌體更新後會使用當日二分點(EOD，又叫做JNow)來解讀接收到的資料，需要的話可以選擇強制使用那個系統。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
 msgstr "<b>啟動時開始(連接)</b>: 勾取這個選項如果您想要Stellarium在啟動後立即嘗試連接到望遠鏡。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr "另外啟動望遠鏡連線的方式是您需要打開主視窗，選取望遠鏡後點擊「啟動/連接」按鈕。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr "這個欄位只有在直接連接時才能運作（詳見 {上述}）。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr "<b>序列埠</b> 設置望遠鏡連接所使用的序列埠。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "有下拉式選單提供某些預設數值:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "Windows系統，序列埠從 COM1 到 COM10(譯註:COM3);"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr ""
 "Linux系統，序列埠從 /dev/ttyS0 到 /dev/ttyS3 另外 USB 埠從 /dev/ttyUSB0 到 /dev/ttyUSB3;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr "Mac OS X系統，當它以特殊方式命名序列埠時，選單列表會是空白的。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr "如果您使用 USB 線連接，您望遠鏡的預設連接序列埠通常不會出現在建議的選單列表中"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr "在 Mac OS X 中想要顯示所有有效序列埠名稱，請開啟一個終端機(terminal)然後輸入:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr "這將會列出所有裝置，您的序列埠的完整名稱應該會在列表中的某處(例如: 「/dev/cu.usbserial-FTDFZVMK」 )"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr "<b>裝置模型</b>: 詳見下述 {支援的裝置} 。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr "此處的二個欄位是關於透過網路 ({TCP/IP}) 的通訊。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
 msgstr "僅在間接連接時才需要進行適當修正 (詳見{上述}) 。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
 "<b>主機</b> 可以是主機的名稱或是它的 {IPv4} 位址，例如 127.0.0.1。預設值 「localhost」 意思是指「本電腦」。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
 msgstr "<b>連接埠</b> 表示用來通訊的連接埠，預設的數值是依望遠鏡的編號而定，其數值範圍從10001到10009。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 msgid "Both values are ignored for DIRECT connections."
 msgstr "在直接連接時這二個欄位的數值會被忽略。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr "間接連接時，僅在您要嘗試透過網路遠端連線時才需要修改預設的主機名稱。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr "這此情形下，它應該是用來實際操作望遠鏡的軟體所在的那台電腦名稱或是 IP 位址。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr "表示不同視野範圍的一系列圓可以被加入在望遠鏡標記旁。這是在<strong>望遠鏡模擬</strong>外掛程式加入之前所遺留的。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr "在望遠鏡設定視窗中，點擊「使用介面設置」"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr "勾取「使用視野標示器」選項，然後在下方的欄位輸入一串用逗號分隔的數字。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid "The values are interpreted as degrees of arc."
 msgstr "這些數值將被解讀為圓弧大小的度數。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
 msgstr "這個可以用來搭配組合 {虛擬望遠鏡} 來顯示一個具有 Telrad 同心圓的移動標線。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr "「轉動望遠鏡至」視窗可透過按 <b>Ctrl+0</b> 組合鍵或是下方工具列的對應按鈕來開啟。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the"
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
 "Decimal degrees), a drop-down list and two buttons."
 msgstr "它包含二個輸入天球座標的欄位，喜好格式(時-分-秒，度-分-秒，或是十進位度數)的單選按鍵，一個下拉式選單和二個按鍵。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr "下拉式選單包含目前所有連接裝置的名稱。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr "如果沒有裝置連接，他將會保留空白，而且「轉動」按鈕將會失效。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr "點擊<b>轉動</b>按鈕轉動選取的裝置朝向選取的座標組合。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
 msgstr "可檢視下面關於 {鍵盤指令} 章節得知其他操控裝置的相關方式。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
 msgstr "點擊 <b>設定望遠鏡...</b> 按鈕來開啟外掛程式的 {主視窗} 。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr "<b>提示:</b> 在「轉動」視窗中，有下底線的字元表示按下「Alt + 下底線字元」 可以被用來取代滑鼠點擊。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr "例如：按下 <b>Alt+S</b> 組合鍵等效於點擊「轉動」按鈕，按下 <b>Alt+E</b> 切換到十進位制的度數等。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "Sending commands"
 msgstr "傳送指令"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position"
 " in the sky."
 msgstr "一旦望遠鏡成功啟動(連接)，Stellarium 會顯示一個附有望遠鏡名稱標籤的圓形標線標示它目前指向天空的位置。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected"
 " with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr "這個標線就像 Stellarium 其他的物件一樣，它可以透過滑鼠選取，可以被追蹤，而且可以在搜尋視窗中以一個天體的方式顯示。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr "<b>將裝置朝向某個天體:</b> 選取一個天體(例如: 一顆恆星)然後按住 <b>Ctrl</b>  鍵後再點擊裝置的編號。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 msgid "For example, Ctrl+1 for telescope #1."
 msgstr "例如: Ctrl+1 操控望遠鏡 #1。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
 msgstr "這將會轉動望遠鏡朝向選取的天體。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr "<b>將裝置朝向視野的中心:</b> 按住 <b>Alt</b>  鍵後再點擊裝置的編號。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 msgid "For example, Alt+1 for telescope #1."
 msgstr "舉例來說, Alt+1 對應於望遠鏡 #1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "這將會轉動裝置朝向目前觀看畫面的中心位置。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr "如果您在發送指令後移動螢幕的視野，望遠鏡的目標不會改變除非您又發送其他的指令。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
 msgstr "<b>將裝置朝向某組給定座標:</b> 使用 {「轉動至」視窗}  (按下<b>Ctrl+0</b>組合鍵) ."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
 msgid ""
 "All devices listed in the {'Device model' list} are convenience definitions "
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
@@ -15087,45 +15103,45 @@ msgstr ""
 "在 {「裝置模型」列表} 中的所列出的裝置是利用二個內建介面，Meade LX200 ( Meade Autostar 控制器) 介面和 "
 "Celestron NexStar 介面，所作的便利定義。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid "The device list contains the following:"
 msgstr "裝置列表包含如下:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Any device using the NexStar interface."
 msgstr "任何使用 NexStar 介面的裝置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr "一個由 Losmandy 所製造的電腦化望遠鏡架台(Meade LX-200/Autostar 介面)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "任何使用 LX-200/Autostar 介面的裝置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr "Meade ETX-70 望遠鏡配置 #494 Autostar 控制器和 #506 連接線組合。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr "根據測試者回報，它有點慢，所以它的「%1連接延遲%2」預設設置會從0.5秒更換為1.5秒。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr "適用於使用 Sky-Watcher SynScan AZ GoTo 架台的一些望遠鏡。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -15135,11 +15151,11 @@ msgstr ""
 "<b>SynScan</b> 也是使用在 Sky-Watcher GoTo 架台的其他手動控制器名稱，而且只要使用 SynScan "
 "控制器版本3.0或以後的都可以被這個外掛程式支援，它似乎使用 NexStar 的通訊協定。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr "Argo Navis 是一個由 Wildcard Innovations 所製的數位望遠鏡電腦，"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
@@ -15147,13 +15163,13 @@ msgid ""
 msgstr ""
 "他是一個先進的數位設置環能將一個普通的望遠鏡(例如dobsonian)變成一個「推動」型望遠鏡(一台使用電腦尋找目標和用人力轉動本體的望遠鏡)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
 msgstr "記得不要忘記將它設置為 Meade 相容性模式並將傳輸波特率設定為 9600B。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the"
@@ -15165,30 +15181,30 @@ msgstr ""
 "」，他將會顯示一個望遠鏡標線，就好像其他透過這個外掛程式控制的真實望遠鏡所呈現的標線一般。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr "參考上面關於  {視野指示器} 所述的可能的實際應用 (模擬 Telrad 環)"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:507
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "{Stellarium's original telescope control feature}."
 msgstr "這個功能相當於 {Stellarium 原本的望遠鏡控制功能} 下的「假」望遠鏡類型。"
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:527
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:529
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
 msgid "Status"
 msgstr "狀態"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:546
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:547
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -15201,7 +15217,7 @@ msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:553
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:554
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an"
@@ -15210,80 +15226,80 @@ msgstr "沒有可用的裝置模型說明。 Stellarium 將無法獨自控制望
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:558
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:559
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "點擊 「%1」按鈕來設置新的望遠鏡連接。"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:573
 msgid "local, Stellarium"
 msgstr "本機, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:576
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:577
 msgid "local, external"
 msgstr "本機, 介接"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:580
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:581
 msgid "remote, unknown"
 msgstr "遠端, 未知"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:584
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:585
 msgid "virtual"
 msgstr "虛擬"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:588
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:589
 msgid "remote, RTS2"
 msgstr "遠端，RTS2"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:592
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:593
 msgid "remote, INDI/INDIGO"
 msgstr "遠端，INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:596
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:597
 msgid "local, ASCOM"
 msgstr "本機, ASCOM"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "Start"
 msgstr "啟動"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Start the selected local telescope"
 msgstr "啟動被選取的本機望遠鏡"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1024
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Stop"
 msgstr "停止"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
 msgid "Stop the selected local telescope"
 msgstr "停止被選取的本機望遠鏡"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1030
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1031
 msgid "Connect"
 msgstr "連接"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1031
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1032
 msgid "Connect to the selected telescope"
 msgstr "連接被選取的望遠鏡"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1036
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1037
 msgid "Disconnect"
 msgstr "斷線"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1037
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1038
 msgid "Disconnect from the selected telescope"
 msgstr "中斷與被選取的望遠鏡連線"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1057
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1058
 msgid "Select a directory"
 msgstr "選取目錄"
 

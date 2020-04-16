@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-09 22:04+0700\n"
+"POT-Creation-Date: 2020-04-15 09:07+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -39,7 +39,7 @@ msgstr "পছন্দসই বিন্দু"
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
 #: src/core/modules/StarWrapper.cpp:221 src/gui/AstroCalcDialog.cpp:811
 #: src/ui_configurationDialog.h:1618 plugins/Satellites/src/Satellite.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
 #: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:280
@@ -549,17 +549,17 @@ msgstr "ভূতাত্ত্বিক নাম"
 msgid "Linear size"
 msgstr "আকার"
 
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:645
-#: src/core/modules/MinorPlanet.cpp:337
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:646
+#: src/core/modules/MinorPlanet.cpp:338
 msgid "Diameter"
 msgstr "ব্যাস"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:492
-#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:648
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:649
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/MinorPlanet.cpp:247
-#: src/core/modules/MinorPlanet.cpp:337 src/core/modules/Comet.cpp:190
-#: src/core/modules/Comet.cpp:335 src/gui/StelGuiItems.cpp:805
+#: src/core/modules/MinorPlanet.cpp:338 src/core/modules/Comet.cpp:190
+#: src/core/modules/Comet.cpp:336 src/gui/StelGuiItems.cpp:805
 #: src/gui/AstroCalcDialog.cpp:5673 plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:366
 msgctxt "distance"
@@ -1855,140 +1855,140 @@ msgstr "সূর্য সাপেক্ষে গতিবেগ"
 msgid "Equatorial rotation velocity"
 msgstr "নিরক্ষীয় ঘুর্ণন বেগ"
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:580
-#: src/core/modules/MinorPlanet.cpp:299 src/core/modules/MinorPlanet.cpp:300
-#: src/core/modules/Comet.cpp:262 src/core/modules/Comet.cpp:263
+#: src/core/modules/Planet.cpp:580 src/core/modules/Planet.cpp:581
+#: src/core/modules/MinorPlanet.cpp:300 src/core/modules/MinorPlanet.cpp:301
+#: src/core/modules/Comet.cpp:263 src/core/modules/Comet.cpp:264
 msgid "Hourly motion"
 msgstr "ঘন্টা প্রতি সরণ"
 
-#: src/core/modules/Planet.cpp:579 src/core/modules/MinorPlanet.cpp:299
-#: src/core/modules/Comet.cpp:262 src/core/modules/StarWrapper.cpp:285
+#: src/core/modules/Planet.cpp:580 src/core/modules/MinorPlanet.cpp:300
+#: src/core/modules/Comet.cpp:263 src/core/modules/StarWrapper.cpp:285
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "হয়ে"
 
-#: src/core/modules/Planet.cpp:613
+#: src/core/modules/Planet.cpp:614
 msgid "with rings"
 msgstr "বলয় সহ"
 
-#: src/core/modules/Planet.cpp:630 src/core/modules/MinorPlanet.cpp:321
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:322
 msgid "scaled up to"
 msgstr "বিবর্ধিত হয়ে"
 
-#: src/core/modules/Planet.cpp:640 src/core/modules/MinorPlanet.cpp:331
+#: src/core/modules/Planet.cpp:641 src/core/modules/MinorPlanet.cpp:332
 msgid "Apparent diameter"
 msgstr "আপাত ব্যাস"
 
-#: src/core/modules/Planet.cpp:647
+#: src/core/modules/Planet.cpp:648
 msgid "Equatorial diameter"
 msgstr "নিরক্ষীয় ব্যাস"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:667 src/core/modules/MinorPlanet.cpp:356
+#: src/core/modules/Planet.cpp:668 src/core/modules/MinorPlanet.cpp:357
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:5770
 msgctxt "duration"
 msgid "days"
 msgstr "দিন"
 
-#: src/core/modules/Planet.cpp:671 src/core/modules/MinorPlanet.cpp:360
-#: src/core/modules/Comet.cpp:273
+#: src/core/modules/Planet.cpp:672 src/core/modules/MinorPlanet.cpp:361
+#: src/core/modules/Comet.cpp:274
 msgid "Sidereal period"
 msgstr "বার্ষিক গতি"
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:676
 msgid "Sidereal day"
 msgstr "দিন (আহ্নিক গতি অনুসারে)"
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:678
 msgid "Mean solar day"
 msgstr "গড় সৌরদিন"
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:682
 msgid "The period of rotation is chaotic"
 msgstr "আবর্তন কাল খুব অনিয়মিত"
 
-#: src/core/modules/Planet.cpp:693 src/core/modules/MinorPlanet.cpp:368
-#: src/core/modules/Comet.cpp:281
+#: src/core/modules/Planet.cpp:694 src/core/modules/MinorPlanet.cpp:369
+#: src/core/modules/Comet.cpp:282
 msgid "Synodic period"
 msgstr "সংযোগ অবকাশ"
 
-#: src/core/modules/Planet.cpp:713 src/core/modules/MinorPlanet.cpp:386
-#: src/core/modules/Comet.cpp:299 src/gui/AstroCalcDialog.cpp:3007
+#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
+#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:3007
 #: src/gui/AstroCalcDialog.cpp:3065 plugins/Satellites/src/Satellite.cpp:378
 msgid "Phase angle"
 msgstr "কলার কৌণিক অবস্থান"
 
-#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
-#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:2997
+#: src/core/modules/Planet.cpp:715 src/core/modules/MinorPlanet.cpp:388
+#: src/core/modules/Comet.cpp:301 src/gui/AstroCalcDialog.cpp:2997
 #: src/gui/AstroCalcDialog.cpp:3055
 msgid "Elongation"
 msgstr "দ্রাঘন"
 
-#: src/core/modules/Planet.cpp:715
+#: src/core/modules/Planet.cpp:716
 msgid "Illuminated"
 msgstr "দৃশ্যমান অংশ"
 
-#: src/core/modules/Planet.cpp:716
+#: src/core/modules/Planet.cpp:717
 msgid "Albedo"
 msgstr "প্রতিফলনানুপাত"
 
-#: src/core/modules/Planet.cpp:737
+#: src/core/modules/Planet.cpp:738
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "অমাবস্যা"
 
-#: src/core/modules/Planet.cpp:739
+#: src/core/modules/Planet.cpp:740
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "কৃষ্ণপক্ষ দ্বিতীয়ার্ধ"
 
-#: src/core/modules/Planet.cpp:741
+#: src/core/modules/Planet.cpp:742
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "কৃষ্ণপক্ষ অষ্টমী"
 
-#: src/core/modules/Planet.cpp:743
+#: src/core/modules/Planet.cpp:744
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "কৃষ্ণপক্ষ প্রথমার্ধ"
 
-#: src/core/modules/Planet.cpp:745
+#: src/core/modules/Planet.cpp:746
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "পূর্ণিমা"
 
-#: src/core/modules/Planet.cpp:747
+#: src/core/modules/Planet.cpp:748
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "শুক্লপক্ষ প্রথমার্ধ"
 
-#: src/core/modules/Planet.cpp:749
+#: src/core/modules/Planet.cpp:750
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "শুক্লপক্ষ অষ্টমী"
 
-#: src/core/modules/Planet.cpp:751
+#: src/core/modules/Planet.cpp:752
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "শুক্লপক্ষ দ্বিতীয়ার্ধ"
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "Moon age"
 msgstr "অমাবশ্যা থেকে"
 
-#: src/core/modules/Planet.cpp:759
+#: src/core/modules/Planet.cpp:760
 msgid "days old"
 msgstr "দিন"
 
-#: src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:772
 msgid "Position angle of bright limb"
 msgstr "সূর্য সাপেক্ষে কলার অবস্থান"
 
-#: src/core/modules/Planet.cpp:782
+#: src/core/modules/Planet.cpp:783
 msgid "Eclipse obscuration"
 msgstr "গ্রাস"
 
-#: src/core/modules/Planet.cpp:787
+#: src/core/modules/Planet.cpp:788
 msgid "Eclipse magnitude"
 msgstr "গ্রহণের পরিমান"
 
@@ -1998,12 +1998,12 @@ msgid "Provisional designation: %1"
 msgstr "প্রারম্ভিক অস্থায়ী নাম : %1"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:347
+#: src/core/modules/MinorPlanet.cpp:348
 msgid "Tholen spectral type"
 msgstr "থোলেন বর্নালী"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:353
+#: src/core/modules/MinorPlanet.cpp:354
 msgid "SMASSII spectral type"
 msgstr "স্ম্যাসি বর্নালী"
 
@@ -2017,19 +2017,19 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "পর্যায়ক্রমিক"
 
-#: src/core/modules/Comet.cpp:307
+#: src/core/modules/Comet.cpp:308
 msgid "Coma diameter (estimate)"
 msgstr "ধূমকেতুর মাথার ব্যাস (মোটামুটি)"
 
-#: src/core/modules/Comet.cpp:329
+#: src/core/modules/Comet.cpp:330
 msgid "Gas tail length (estimate)"
 msgstr "গ্যাস লেজের দৈর্ঘ্য (মোটামুটি)"
 
-#: src/core/modules/Comet.cpp:335
+#: src/core/modules/Comet.cpp:336
 msgid "Core diameter"
 msgstr "কেন্দ্রের ব্যাস"
 
-#: src/core/modules/Comet.cpp:585 src/core/StelProjectorClasses.cpp:418
+#: src/core/modules/Comet.cpp:586 src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
 msgstr "লম্বন (Orthographic)"
 
@@ -4265,36 +4265,36 @@ msgstr "{Google Groups} - অন্যান্য ব্যবহারকা�
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr "{অর্থ সাহায্য} - স্টেলারিয়াম প্রস্তুতকারক দলকে অর্থ সাহায্য"
 
-#: src/gui/HelpDialog.cpp:426
+#: src/gui/HelpDialog.cpp:427
 msgid "Developers"
 msgstr "প্রস্তুতকারকবৃন্দ"
 
-#: src/gui/HelpDialog.cpp:427
+#: src/gui/HelpDialog.cpp:428
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "প্রকল্প সমন্বয়কারী এবং মূখ্য প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:428 src/gui/HelpDialog.cpp:434
+#: src/gui/HelpDialog.cpp:429 src/gui/HelpDialog.cpp:435
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "গ্রাফিক্স/অন্যান্য পরিকল্পক : %1"
 
-#: src/gui/HelpDialog.cpp:429 src/gui/HelpDialog.cpp:430
-#: src/gui/HelpDialog.cpp:431 src/gui/HelpDialog.cpp:436
-#: src/gui/HelpDialog.cpp:437 src/gui/HelpDialog.cpp:438
-#: src/gui/HelpDialog.cpp:439 src/gui/HelpDialog.cpp:440
-#: src/gui/HelpDialog.cpp:441 src/gui/HelpDialog.cpp:442
-#: src/gui/HelpDialog.cpp:443 src/gui/HelpDialog.cpp:444
-#: src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:430 src/gui/HelpDialog.cpp:431
+#: src/gui/HelpDialog.cpp:432 src/gui/HelpDialog.cpp:437
+#: src/gui/HelpDialog.cpp:438 src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:440 src/gui/HelpDialog.cpp:441
+#: src/gui/HelpDialog.cpp:442 src/gui/HelpDialog.cpp:443
+#: src/gui/HelpDialog.cpp:444 src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:446
 #, qt-format
 msgid "Developer: %1"
 msgstr "প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:432
+#: src/gui/HelpDialog.cpp:433
 msgid "Former Developers"
 msgstr "প্রাক্তন প্রস্তুতকারকবৃন্দ"
 
-#: src/gui/HelpDialog.cpp:433
+#: src/gui/HelpDialog.cpp:434
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -4302,31 +4302,31 @@ msgstr ""
 "বিভিন্ন ব্যক্তিরা এখানে তাঁদের গুরুত্বপূর্ণ অবদান রেখেছেন যদিও বর্তমানে "
 "তাঁদের অনেকে আর সক্রিয় নন । তবে তাঁদের কাজ এই প্রকল্পে আমূল পরিবর্তন এনেছে ।"
 
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:436
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "নথি লেখক/প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:446 src/gui/HelpDialog.cpp:447
+#: src/gui/HelpDialog.cpp:447 src/gui/HelpDialog.cpp:448
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:448
+#: src/gui/HelpDialog.cpp:449
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "নিরবিচ্ছিন্ন সাহায্য : %1"
 
-#: src/gui/HelpDialog.cpp:449
+#: src/gui/HelpDialog.cpp:450
 #, qt-format
 msgid "Tester: %1"
 msgstr "পরীক্ষক : %1"
 
-#: src/gui/HelpDialog.cpp:450
+#: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:503
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:201
@@ -4335,7 +4335,7 @@ msgstr "পরীক্ষক : %1"
 msgid "Contributors"
 msgstr "অবদানকারী"
 
-#: src/gui/HelpDialog.cpp:451
+#: src/gui/HelpDialog.cpp:452
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -4831,92 +4831,96 @@ msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 "%1 নামক ডিরেক্টরিগুলি মুছে দিয়ে আপনি এটিকে হাতেনাতে মুছে ফেলতে পারেন ।"
 
-#: src/gui/ScriptConsole.cpp:80
+#: src/gui/ScriptConsole.cpp:82
 msgctxt "command"
 msgid "selected text as script"
 msgstr "লেখাটির নির্বাচিত অংশ কার্যলিপি হিসাবে চালান"
 
-#: src/gui/ScriptConsole.cpp:81
+#: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "remove screen text"
 msgstr "স্ক্রীনে কার্যলিপির ধারালেখা মুছে দিন"
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "remove screen images"
 msgstr "স্ক্রীনে কার্যলিপি সৃষ্ট ছবি মুছে দিন"
 
-#: src/gui/ScriptConsole.cpp:83
+#: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen markers"
 msgstr "স্ক্রীনে কার্যলিপি সৃষ্ট নির্দেশক মুছে দিন"
 
-#: src/gui/ScriptConsole.cpp:84
+#: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "clear map: natural"
 msgstr "স্বাভাবিক দৃশ্য চালু করুন"
 
-#: src/gui/ScriptConsole.cpp:85
+#: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "clear map: starchart"
 msgstr "নক্ষত্র মানচিত্র দৃশ্য চালু করুন"
 
-#: src/gui/ScriptConsole.cpp:86
+#: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: deepspace"
 msgstr "মহাকাশ দৃশ্য চালু করুন"
 
-#: src/gui/ScriptConsole.cpp:87
+#: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
 msgid "clear map: galactic"
 msgstr "ছায়াপথীয় দৃশ্য চালু করুন"
 
-#: src/gui/ScriptConsole.cpp:88
+#: src/gui/ScriptConsole.cpp:90
 msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "নক্ষত্রলোকীয় দৃশ্য চালু করুন"
 
-#: src/gui/ScriptConsole.cpp:162
+#: src/gui/ScriptConsole.cpp:177 src/gui/ScriptConsole.cpp:249
+msgid "Caution!"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:177
+msgid "Are you sure you want to load script without saving changes?"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:191
 msgid "Stellarium Script Files"
 msgstr "কার্যলিপি ফাইল"
 
-#: src/gui/ScriptConsole.cpp:165
+#: src/gui/ScriptConsole.cpp:194
 msgid "Load Script"
 msgstr "কার্যলিপি আমদানি করুন"
 
-#: src/gui/ScriptConsole.cpp:184
+#: src/gui/ScriptConsole.cpp:219
 msgid "Save Script"
 msgstr "কার্যলিপি সঞ্চয় করুন"
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Clear script"
-msgstr "কার্যলিপিটি মুছে ফেলুন"
+#: src/gui/ScriptConsole.cpp:249
+msgid "Are you sure you want to clear script?"
+msgstr ""
 
-#: src/gui/ScriptConsole.cpp:201
-msgid "Are you sure?"
-msgstr "আপনি কি নিশ্চিত ?"
-
-#: src/gui/ScriptConsole.cpp:294
+#: src/gui/ScriptConsole.cpp:348
 msgid "Select Script Include Directory"
 msgstr "কার্যলিপি সঞ্চয় ফোল্ডার বাছুন"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:324
+#: src/gui/ScriptConsole.cpp:380
 msgctxt "text cursor"
 msgid "R"
 msgstr "লাইন"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:326
+#: src/gui/ScriptConsole.cpp:382
 msgctxt "text cursor"
 msgid "C"
 msgstr "বর্ণ"
 
-#: src/gui/ScriptConsole.cpp:334
+#: src/gui/ScriptConsole.cpp:398
 msgid "Stellarium Script"
 msgstr "কার্যলিপি ফাইল"
 
-#: src/gui/ScriptConsole.cpp:336
+#: src/gui/ScriptConsole.cpp:400
 msgid "Include File"
 msgstr "অন্তর্ভুক্তি ফাইল"
 
@@ -5074,7 +5078,7 @@ msgstr "এখন প্রায় %1"
 #: src/gui/AstroCalcDialog.cpp:756 src/gui/AstroCalcDialog.cpp:1333
 #: src/gui/AstroCalcDialog.cpp:1766 src/gui/AstroCalcDialog.cpp:5053
 #: src/ui_configurationDialog.h:1624
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:196
@@ -9250,7 +9254,7 @@ msgstr "সহায়িকা"
 msgid "About"
 msgstr "বিবরণ"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:416
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:419
 msgid "Log"
 msgstr "কার্যবিবরণী"
 
@@ -11312,7 +11316,7 @@ msgstr "রং বিপরীত করে সংরক্ষণ"
 msgid "Custom size"
 msgstr "পছন্দসই আকার"
 
-#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:419
+#: src/ui_configurationDialog.h:1868 src/ui_scriptConsole.h:422
 msgid "Close window when script runs"
 msgstr "কার্যলিপি সঞ্চালনের সময় উইন্ডো বন্ধ করা হবে"
 
@@ -11440,51 +11444,55 @@ msgstr "তারিখ ও সময় (প্রমান সময়) :"
 msgid "Get the recent GRS measurement"
 msgstr "বৃহস্পতির লাল ছোপের সাম্প্রতিক তথ্য জানুন"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:386
 msgid "Script console"
 msgstr "কার্যলিপি কনসোল"
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:389
 msgid "load script from file"
 msgstr "একটি কার্যলিপি খুলে দেখুন"
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:393
 msgid "save script to file"
 msgstr "কার্যলিপিটি সংরক্ষন করুন"
 
-#: src/ui_scriptConsole.h:394
+#: src/ui_scriptConsole.h:397
 msgid "clear"
 msgstr "মুছুন"
 
-#: src/ui_scriptConsole.h:398
+#: src/ui_scriptConsole.h:401
 msgid "pre-process script using SSC preprocessor"
 msgstr "SSC preprocessor এর সাহায্যে কার্যলিপি গোছগাছ করুন"
 
-#: src/ui_scriptConsole.h:403
+#: src/ui_scriptConsole.h:406
 msgid "Execute:"
 msgstr "সম্পাদন করুন :"
 
-#: src/ui_scriptConsole.h:408
+#: src/ui_scriptConsole.h:411
 msgid "run script"
 msgstr "কার্যলিপিটি চালান"
 
-#: src/ui_scriptConsole.h:412
+#: src/ui_scriptConsole.h:415
 msgid "stop script"
 msgstr "কার্যলিপিটি থামান"
 
-#: src/ui_scriptConsole.h:415
+#: src/ui_scriptConsole.h:418
 msgid "Script"
 msgstr "কার্যলিপি"
 
-#: src/ui_scriptConsole.h:417
+#: src/ui_scriptConsole.h:420
 msgid "Output"
 msgstr "ফলাফল"
 
-#: src/ui_scriptConsole.h:418
+#: src/ui_scriptConsole.h:421
 msgid "Load scripts from the User Directory by default"
 msgstr "পছন্দসই স্থান থেকে সাধারণ ভাবে কার্যলিপি আমদানি করুন"
 
-#: src/ui_scriptConsole.h:420 plugins/Satellites/src/ui_satellitesDialog.h:814
+#: src/ui_scriptConsole.h:423
+msgid "Clear output before script runs"
+msgstr ""
+
+#: src/ui_scriptConsole.h:424 plugins/Satellites/src/ui_satellitesDialog.h:814
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -11494,15 +11502,19 @@ msgstr "পছন্দসই স্থান থেকে সাধারণ �
 msgid "Settings"
 msgstr "রূপরেখা বিন্যাস"
 
-#: src/ui_scriptConsole.h:422
+#: src/ui_scriptConsole.h:426
 msgid "Cursor position"
 msgstr "কার্সারটির অবস্থান"
 
-#: src/ui_scriptConsole.h:424
+#: src/ui_scriptConsole.h:428
+msgid "R:0 C:0"
+msgstr ""
+
+#: src/ui_scriptConsole.h:429
 msgid "Include dir:"
 msgstr "অন্তর্ভুক্ত স্থান :"
 
-#: src/ui_scriptConsole.h:425
+#: src/ui_scriptConsole.h:430
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "..."
 msgstr "..."
@@ -12417,7 +12429,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:242
@@ -12437,7 +12449,7 @@ msgstr "বিবিধ"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
@@ -12462,7 +12474,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:532
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
@@ -12483,7 +12495,7 @@ msgstr "যে কোনো রকমের জিজ্ঞাসার জন�
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
@@ -12504,7 +12516,7 @@ msgstr "সমস্যা কিংবা নতুন বৈশিষ্ট্
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/Oculars/src/gui/OcularDialog.cpp:536
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
@@ -14689,19 +14701,23 @@ msgstr "নিষ্ক্রিয়"
 msgid "Telescope Control plug-in"
 msgstr "দূরবীন নিয়ন্ত্রণ করার সরঞ্জাম"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Plug-in and GUI programming"
 msgstr "সরঞ্জাম ও গ্রাফিক্যাল প্রোগ্রামিং"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "ASCOM Telescope Client"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "RTS2 support"
 msgstr "রিমোট সিস্টেম (২য়) সমর্থিত"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+msgid "INDI Telescope Client"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
@@ -14709,7 +14725,7 @@ msgstr ""
 "এই সরঞ্জামটিতে GNU সাধারণ সর্বজনীন অনুমতি অনুযায়ী তৈরী বহু কোড ব্যবহার করা "
 "হয়েছে । যেমন :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -14718,11 +14734,11 @@ msgstr ""
 "স্টেলারিয়ামের কোডের (মূল দূরবীন নিয়ন্ত্রক সরঞ্জামের ক্লায়েন্ট অংশ) "
 "Telescope, TelescopeDummy, TelescopeTcp এবং TelescopeMgr ক্লাসগুলি;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "দূরবীন সার্ভারের মূল কোড (LGPL এর আওতায় অনুমোদন প্রাপ্ত)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
@@ -14730,7 +14746,7 @@ msgstr ""
 "TelescopeServerLx200 দূরবীন সার্ভারের মূল কোড (মূলত LGPL এর আওতায় অনুমোদন "
 "প্রাপ্ত)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -14740,7 +14756,7 @@ msgstr ""
 "ব্যবহৃত দূরবীন নিয়ন্ত্রন নেটওয়ার্ক প্রোটোকল (TCP/IP দ্বারা) গুলির "
 "প্রস্তুতকারক <b>Johannes Gajdosik</b> ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -14749,12 +14765,12 @@ msgstr ""
 "(মূলত LGPL এর আওতায় অনুমোদন প্রাপ্ত এবং TelescopeServerLx200 এর উপর ভিত্তি "
 "করে তৈরী) ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
 msgstr "INDI সাপোর্ট তৈরী করেছেন <b>Alessandro Siniscalchi</b>"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
@@ -14762,83 +14778,83 @@ msgstr ""
 "সম্পূর্ন বিশদ তথ্যের জন্য স্টেলারিয়াম উইকি তে গিয়ে {দূরবীন নিয়ন্ত্রণ} "
 "সরঞ্জাম সংক্রান্ত পাতাটি দেখুন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid "Contents"
 msgstr "# সূচী"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "Abilities and limitations"
 msgstr "# উপযোগিতা এবং সীমাবদ্ধতা"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The original telescope control feature"
 msgstr "# আদি দূরবীন নিয়ন্ত্রন সরঞ্জামের বৈশিষ্ট্যাবলী"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid "Using this plug-in"
 msgstr "# ব্যবহার পদ্ধতি"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid "Main window ('Telescopes')"
 msgstr "# মূল বিভাগ ('দূরবীন')"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid "Telescope configuration window"
 msgstr "# দূরবীনের রূপরেখা বিন্যাস বিভাগ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid "Connection type"
 msgstr "* সংযোগের ধরন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Telescope properties"
 msgstr "* দূরবীনের বৈশিষ্টাবলী"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "Device settings"
 msgstr "* দূরবীন বিন্যাস"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "Connection settings"
 msgstr "* সংযোগ বিন্যাস"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
 msgid "Field of view indicators"
 msgstr "* দৃষ্টিক্ষেত্র নির্দেশক"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:444
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
 msgid "'Slew telescope to' window"
 msgstr "# দূরবীন ঘোরানো বিভাগ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "Telescope commands"
 msgstr "# দূরবীন নিযন্ত্রণের আদেশসমূহ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
 msgid "Supported devices"
 msgstr "# সমর্থিত দূরবীনসমূহ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Virtual telescope"
 msgstr "# কৃত্রিম দূরবীন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands"
 " to the device and to receive its current position. It cannot issue any "
@@ -14851,7 +14867,7 @@ msgstr ""
 "আলম্ব বিভ্রাট বা ঐরকম কোনো সমস্যা দেখা দেওয়ার ব্যাপারে ব্যবহারকারীদের অবহিত "
 "করা হচ্ছে । (একটি ঘোরানো নির্দেশ বাতিল করতে নতুন একটি ঘোরানোর নির্দেশ দিন ।)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
@@ -14859,14 +14875,14 @@ msgstr ""
 "এই সংস্করণ কোনো জ্যোতিষ্ককে অনুসরণের সুবিধা প্রদান করে না । তাই এটি চাঁদ বা "
 "গ্রহের পর্যবেক্ষণের জন্য যথাযথ নয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
 "সাবধান : স্টেলারিয়াম আপনাকে সূর্যের দিকে তাক করা থেকে আটকাতে সক্ষম নয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
@@ -14875,7 +14891,7 @@ msgstr ""
 "আপনার দুরবীনটিকে উপযুক্ত সৌর আচ্ছাদন ছাড়া সূর্যের দিকে তাক করবেন না । এতে "
 "আপনার চোখ ও উপকরণের পাকাপাকি ক্ষতি হতে পারে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause"
 " your telescope to point at the sun on its way to the given destination, so "
@@ -14886,23 +14902,23 @@ msgstr ""
 "। তাই সূর্য ডোবার আগে এই সরঞ্জামটি যথাযথ সতর্কতা ছাড়া ব্যবহার না করার "
 "পরামর্শ দেওয়া হচ্ছে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:475
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:509
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:510
 msgid "Back to top"
 msgstr "উপরে ফিরে যান"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
@@ -14912,19 +14928,19 @@ msgstr ""
 " দেওয়া হয়েছে । তাই এই সরঞ্জাম ছাড়া স্টীলারিয়ামের সাহায্যে কোনোভাবেই দূরবীন "
 "নিয়ন্ত্রণ সম্ভব নয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
 "পরিস্থিতি অনুযায়ী দুভাবে এই সরঞ্জাম ব্যবহারে দূরবীন নিয়ন্ত্রণ করা যায় :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "DIRECT CONNECTION"
 msgstr "প্রত্যক্ষ সংযোগ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
@@ -14932,12 +14948,12 @@ msgstr ""
 "স্টেলারিয়াম চালু আছে এমন একটি সিস্টেমের সাথে {দূরবীনটি} একটি তারের সাথে "
 "সংযুক্ত আছে;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid "INDIRECT CONNECTION"
 msgstr "পরোক্ষ সংযোগ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid ""
 "A device is connected to the same computer but it is driven by a {stand-"
 "alone telescope server program}"
@@ -14946,12 +14962,12 @@ msgstr ""
 "একটি {নিজস্ব সার্ভার} "
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "or a {third-party application} <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
 "কিংবা স্টেলারিয়াম সমর্থিত {অন্য কোনো অ্যাপ্লিকেশান} দ্বারা নিয়ন্ত্রিত হচ্ছে;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -14963,7 +14979,7 @@ msgstr ""
 "অ্যাপ্লিকেশনের সাহায্যে যা স্টেলারিয়ামের 'নির্দেশ' বুঝতে পারে;"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
@@ -14971,7 +14987,7 @@ msgstr ""
 "বেশিরভাগ পুরান দূরবীনগুলি সংযোগের জন্য {serial port} (RS-232) আবশ্যিক হলেও "
 "নতুন মডেলগুলি USB (Universal Serial Bus) দিয়ে সংযুক্ত করা যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -14981,7 +14997,7 @@ msgstr ""
 "WINDOWS এর ক্ষেত্রে USB সংযোগের জন্য 'ভার্চুয়াল সিরিয়াল পোর্ট' সফটওয়ারের "
 "প্রয়োজন যদি না এটি প্রদত্ত তার বা দুরবীনের সাথে সরবরাহ করা না থাকে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
@@ -14989,7 +15005,7 @@ msgstr ""
 "এই সরঞ্জামের ব্যবহারের জন্য এই ধরনের সফ্টওয়্যার আাসল USB পোর্টের অনুরূপ একটি"
 " কৃত্রিম ('নকল') COM পোর্ট তৈরি করে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
@@ -14999,7 +15015,7 @@ msgstr ""
 "দূরবীনটিও কেবল মাত্র যদি সিরিয়াল পোর্টেই যুক্ত করা যায়, তাহলে একটি serial-"
 "to-USB (RS-232-to-USB) রূপান্তরকের প্রয়োজন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
@@ -15007,11 +15023,11 @@ msgstr ""
 "দূরবীনটিকে সংযুক্ত করার আগেই বিভিন্ন দূরবীন বিন্যাস (স্থান, অ্যালাইনমেন্ট "
 "ইত্যাদি) ঠিক করে রাখতে হবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid "The plug-in's main window can be opened:"
 msgstr "মূল বিভাগে যেতে হলে :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -15021,7 +15037,7 @@ msgstr ""
 "চেপে খুলতে হয়) 'সরঞ্জাম' বিভাগের 'ব্যবহার পদ্ধতি' বোতামে ক্লিক করতে হবে ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 msgid ""
 "By pressing the 'Configure telescopes...' button in the {'Slew to' window} "
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
@@ -15030,13 +15046,13 @@ msgstr ""
 "{দূরবীন ঘোরানো বিভাগে} (<b>Ctrl+0</b> বা নীচের টুলবারের যথাযথ বেতাম চেপে "
 "খুলতে হয়) 'দূরবীন বিন্যাস করুন ...' বোতামে চাপ দিতে হবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr "<b>দূরবীন সমূহ</b> বিভাগে উপলব্ধ দূরবীনগুলি দেখতে পাবেন :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
@@ -15044,7 +15060,7 @@ msgstr ""
 "নম্বর (<b>#</b>) স্তম্ভে দেখানো নম্বরটির সাহায্যে ঐ দূরবীনটি ব্যবহার করা যায়"
 " । যেমন - ঝটকরে দূরবীন #2 ব্যবহারের জন্য Ctrl+2 চাপতে হবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or"
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
@@ -15054,17 +15070,17 @@ msgstr ""
 " দূর্ভাগ্যবশত কিছু ক্ষেত্রে দূরবীন সংযুক্ত না থাকা সত্তেও সেটিকে 'সংযুক্ত' "
 "দেখায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr "<b>ধরণ</b> স্তম্ভে সংযোগের ধরণ সম্পর্কে জানা যায় :"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid "<b>virtual</b> means a {virtual telescope};"
 msgstr "<b>কৃত্রিম</b> অর্থাৎ শুধুমাত্র একটি {চলমান নিশানা};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
@@ -15072,7 +15088,7 @@ msgstr ""
 "<b>স্থানীয়, স্টেলারিয়াম</b> অর্থাৎ সরাসরি স্টেলারিয়াম দ্বারা নিয়ন্ত্রিত "
 "(উপরে {দেখুন});"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
@@ -15080,7 +15096,7 @@ msgstr ""
 "<b>স্থানীয়, বাহ্যিক</b> অর্থাৎ ঐ কম্পিউটারে চলছে অন্য একটি প্রোগ্রামের "
 "সাহায্যে দূরবীনের সাথে পরোক্ষ ভাবে সংযুক্ত;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
@@ -15088,7 +15104,7 @@ msgstr ""
 "<b>দূরবর্তী, অজানা</b> অর্থাৎ নেটওয়ার্কের সাহায্যে দূরবর্তী সিস্টেমের সাথে "
 "সংযুক্ত ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify"
 " the configuration of an existing connection, select it in the list and "
@@ -15100,7 +15116,7 @@ msgstr ""
 "করুন । দুক্ষেত্রেই দূরবীন বিন্যাস উইন্ডো খুলে যাবে ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
@@ -15108,23 +15124,23 @@ msgstr ""
 "সবার প্রথমে দুধরনের সংয়োগ ( {উপরে} দেখুন) দ্বারা নিয়ন্ত্রিত দূরবীনের তালিকা "
 "আছে :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:583
 msgid "Telescope controlled by:"
 msgstr "দূরবীনটির নিয়ন্ত্রক :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
 "<b>স্টেলারিয়াম, সরাসরি একটি সিরিয়াল পোর্টের দ্বারা</b> বা প্রত্যক্ষ সংযোগ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
 "<b>বাহ্যিক অ্যাপ্লিকেশান অথবা কোনো দূরবর্তী কম্পিউটার</b> বা পরোক্ষ সংযোগ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
@@ -15132,13 +15148,13 @@ msgstr ""
 "<b>কিছুই না, অনুকরণ মাত্র (একটি চলমান লক্ষ্যবৃত্ত)</b> বা {কৃত্রিম দূরবীন} "
 "(কোনো সংযোগ দরকার নেই)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr "<b>নাম</b> যা নিশানার পাশে দেখানো হবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
@@ -15146,7 +15162,7 @@ msgstr ""
 "<b>সংযোগ বিলম্ব</b> : যদি নিশানার চলন অসম গতিতে হয়, তাহলে এর মান কমিয়ে বা "
 "বাড়িয়ে তা ঠিক করা যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -15158,7 +15174,7 @@ msgstr ""
 "নামেও পরিচিত) প্রাপ্ত স্থানাঙ্ক বুঝতে সক্ষম । সেক্ষেত্রে এটি ব্যবহার করা "
 "যেতে পারে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
@@ -15166,7 +15182,7 @@ msgstr ""
 "<b>শুরু হওয়ার সময় সক্রিয় / সংযোগ স্থাপন</b> : স্টেলারিয়াম চালুর সাথে সাথেই "
 "দূরবীন সংযুক্ত করতে চাইলে এটিতে টিক মারুন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
@@ -15175,23 +15191,23 @@ msgstr ""
 "বোতামে ক্লিক করুন ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr "প্রত্যক্ষ সংযোগের ক্ষেত্রে এই অংশটি সক্রিয় থাকে ({উপরে} দেখুন) ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr "<b>সিরিয়াল পোর্ট</b> যা দিয়ে দূরবীনটি সংযুক্ত করা হয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "এখানে আগে থেকেই কিছু সিরিয়াল পোর্টের মানের প্রস্তাব দেওয়া থাকে :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "Windows এর ক্ষেত্র সিরিয়াল পোর্টগুলি COM1 থেকে COM10 পর্যন্ত হয়;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
@@ -15199,23 +15215,23 @@ msgstr ""
 "Linux এর ক্ষেত্র সিরিয়াল পোর্টগুলি /dev/ttyS0 থেকে /dev/ttyS3 এবং USB "
 "পোর্টগুলি /dev/ttyUSB0 থেকে /dev/ttyUSB3 পর্যন্ত হয়;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr "Mac OS X এ পোর্টের নামগুলি অদ্ভুত হওয়ার কারণে তালিকাটি ফাঁকা থাকে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr "যদি আপনি USB তার ব্যবহার করেন তাহলে কোনো প্রস্তাব খুঁজে পাবেন না ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr "Mac OS X এ বৈধ সিরিয়াল পোর্ট জানতে হলে টার্মিনাল খুলে লিখুন :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
@@ -15224,25 +15240,25 @@ msgstr ""
 ".usbserial-FTDFZVMK') ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr "<b> দূরবীনের ধরন :</b> {সমর্থিত দূরবীন} গুলির তালিকা নিচে দেওয়া আছে ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr ""
 "এখানে সার্ভারের সাথে যোগাযোগ সংক্রান্ত তথ্য ({TCP/IP}) সম্পাদনা করতে হয় ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
 msgstr "পরোক্ষ সংয়োগের ({উপরে} দেখুন) ক্ষেত্রে এই তথ্য আবশ্যিক ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
@@ -15251,7 +15267,7 @@ msgstr ""
 "'127.0.0.1' হতে হবে । এটির নাম 'localhost' হিসাবে প্রথম থেকে ঠিক করা থাকে, "
 "যার অর্থ হল 'এই কম্পিউটার' ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
@@ -15260,11 +15276,11 @@ msgstr ""
 "সংযুক্ত দূরবীন সংখ্যার উপর নির্ভর করে এবং এর মান ১০০০১ থেকে ১০০০৯ এর মধ্যে "
 "হয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 msgid "Both values are ignored for DIRECT connections."
 msgstr "প্রত্যক্ষ সংযোগের ক্ষেত্রে এগুলি কোনো কাজে লাগে না ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
@@ -15272,7 +15288,7 @@ msgstr ""
 "পরোক্ষ সংযোগের ক্ষেত্রে দূরবর্তী কম্পিউটারের সাথে সংযোগের জন্যই কেবল "
 "সঞ্চালকের প্রস্তাবিত নামের পরিবর্তনের প্রয়োজন হয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
@@ -15280,7 +15296,7 @@ msgstr ""
 "এক্ষেত্রে মানগুলি হবে সেই কম্পিউটারের নাম বা IP যাতে দূরবীনটিকে নিয়ন্ত্রণ "
 "করার কোনো পোগ্রাম চালানো আছে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
@@ -15290,12 +15306,12 @@ msgstr ""
 " এটি <strong>দূরবীন অনুকরণ</strong> সরঞ্জামের আগের সময়ের গুরুত্বপূর্ণ "
 "বৈশিষ্টের একটি নিদর্শন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr "প্রথমে দূরবীন বিন্যাস উইন্ডোর 'ব্যবহৃত প্রেক্ষাপট' অংশে যান ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
@@ -15303,12 +15319,12 @@ msgstr ""
 "এরপর 'দৃষ্টিক্ষেত্র নির্দেশক সূচক ব্যবহার' এ টিক মারুন ও নিচের বাক্সে "
 "পছন্দসই দৃষ্টিক্ষেত্রগুলি কমা কমা দিয়ে লিখুন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid "The values are interpreted as degrees of arc."
 msgstr "এর মান ডিগ্রিতে পরিমাপ করা হয় ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
@@ -15316,7 +15332,7 @@ msgstr ""
 "{কৃত্রিম দূরবীনের} ক্ষেত্রে একটি নির্দিষ্ট আকারের পছন্দসই চলমান বৃত্ত দেখায় "
 "।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
@@ -15324,7 +15340,7 @@ msgstr ""
 "'দূরবীনটিকে ঘোরান' উইন্ডোটি <b>Ctrl+0</b> চেপে বা নিচের টুলবারের যথাযথ "
 "বোতামে ক্লিক করে খোলা যায়"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the"
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
@@ -15334,40 +15350,40 @@ msgstr ""
 "ঘন্টা-মিনিট-সেকেন্ড, ডিগ্রি-মিনিট-সেকেন্ড কিংবা দশমিক যুক্ত ডিগ্রিতে লিখতে "
 "হয়) । এছাড়া এখানে একটি তালিকা ও দুটি নির্দেশ বোতাম আছে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr "তালিকাটিতে সংযুক্ত দূরবীনগুলি দেখা যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
 "কোনো দূরবীন সংযুক্ত না থাকলে এখনে কিছু থাকে না । অংশটি পুরো ফাঁকা থাকে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr "<b>ঘোরান</b> বোতামটি ক্লিক করে দূরবীনটিকে নির্দিষ্ট অংশে ঘোরানো যায় ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
 msgstr "চট জলদি ব্যবহারের উপায়গুলি জানতে নিচের {নির্দেশ পাঠানো} অংশটি দেখুন ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
 msgstr ""
 "<b>রূপরেখা বিন্যাস</b> বোতামে ক্লিক করে {দূরবীন বিন্যাস} বিভাগে যাওয়া যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
@@ -15375,7 +15391,7 @@ msgstr ""
 "<b>টোটকা :</b> দূরবীনটিকে ঘোরান উইন্ডোতে বোতামে ক্লিক না করে তার বদলে 'Alt +"
 " নিচে দাগ দেওয়া বর্ণ' চেপেও কাজটি সম্পূর্ণ করা যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
@@ -15383,11 +15399,11 @@ msgstr ""
 "যেমন - <b>Alt+ন</b> চেপে দূরবীন ঘোরানো যায়, আবার <b>Alt+দ</b> চেপে দশমিক "
 "যুক্ত ডিগ্রির ব্যবহার চালু করা যায় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "Sending commands"
 msgstr "# নির্দেশ পাঠানো"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position"
@@ -15396,7 +15412,7 @@ msgstr ""
 "দূরবীনটি সফলভাবে ষংযুক্ত হয়ে গেলে স্টেলারিয়াম প্রদত্ত স্থানাঙ্কে নাম সহ "
 "নিশানাটিকে সাথে সাথে দেখিয়ে দেয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected"
 " with the mouse, it can be tracked and it appears as an object in the "
@@ -15405,7 +15421,7 @@ msgstr ""
 "নিশানাটি আকাশে একটি বস্তুর মতই আচরণ করে । এটিকে মাউস দিয়ে নির্বাচন করা যায়, "
 "অনুসরণ করা যায় । এমনকি অনুসন্ধান বাক্সেও এটিকে খোঁজা সম্ভব ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
@@ -15413,15 +15429,15 @@ msgstr ""
 "<b>কোনো জ্যোতিষ্কের দিকে তাক করতে হলে :</b> প্রথমে সেটিকে নির্বাচন করুন, "
 "তারপর <b>Ctrl</b> চেপে যে দূরবীনটিকে ঘোরাতে চান তার নম্বরটি চাপুন ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 msgid "For example, Ctrl+1 for telescope #1."
 msgstr "যেমন - দূরবীন #1 এর জন্য Ctrl+1 ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
 msgstr "এভাবে দূরবীনের মুখ নির্বাচিত বস্তুর দিকে ঘুরে যাবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
@@ -15429,16 +15445,16 @@ msgstr ""
 "<b>দৃশ্যপটের মাঝখানে তাক করতে হলে :</b> <b>Alt</b> সহযোগে দূরবীন নম্বরটি "
 "চাপতে হবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 msgid "For example, Alt+1 for telescope #1."
 msgstr "যেমন - দূরবীন #1 এর জন্য Alt+1 ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "এভাবে দূরবীনের মুখ দৃশ্যপটের মাঝখানে ঘুরে যাবে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
@@ -15447,7 +15463,7 @@ msgstr ""
 "ঘুরে যাবে না যতক্ষন না নতুন করে তা করার নির্দেশ দেওয়া হচ্ছে ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
@@ -15456,7 +15472,7 @@ msgstr ""
 "(<b>Ctrl+0</b> চাপুন) যান ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
 msgid ""
 "All devices listed in the {'Device model' list} are convenience definitions "
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
@@ -15465,15 +15481,15 @@ msgstr ""
 "{'দূরবীন তালিকায়'} থাকা দূরবীনগুলি মূলত দুধরনের নিয়ন্ত্রণ ব্যবস্থা দ্বারা "
 "পরিচালিত হয় : Meade LX200 (Meade Autostar নিয়ন্ত্রক) এবং Celestron NexStar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid "The device list contains the following:"
 msgstr "তালিকাতে থাকা দূরবীনগুলি হল :"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Any device using the NexStar interface."
 msgstr "NexStar ব্যবস্থা ব্যবহার করে এমন যে কোনো যন্ত্র ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
@@ -15481,12 +15497,12 @@ msgstr ""
 "এটি Losmandy (Meade LX-200/Autostar ব্যবস্থা) উদ্ভাবিত কম্পিউটার নিয়ন্ত্রিত "
 "বিচলন বা আলম্ব ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "LX-200/Autostar ব্যবস্থা ব্যবহার করে এমন যে কোনো যন্ত্র ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
@@ -15494,7 +15510,7 @@ msgstr ""
 "#494 Autostar নিয়ন্ত্রক এবং #506 সংযোগ তার সমেত Meade ETX-70 দূরবীন  ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
@@ -15503,14 +15519,14 @@ msgstr ""
 "পরীক্ষকের কথা অনুযায়ী এটি একটু ধীর গতিতে কাজ করে, তাই এক্ষেত্রে %1'সংযোগ "
 "বিলম্ব'%2 ০.৫ সেকেন্ডের বদলে ১.৫ সেকেন্ড করা আছে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 "অনেক দূরবীনের ক্ষেত্রে Sky-Watcher SynScan AZ GoTo বিচলন বা আলম্ব ব্যবহার "
 "করা হয় ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -15522,13 +15538,13 @@ msgstr ""
 "ব্যবহার করে এমন যে কোনো বিচলন বা আলম্ব ব্যবহার করতে সরঞ্জামটি সক্ষম, কারণ "
 "সেক্ষেত্রে এটি NexStar protocol ব্যবহার করে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 "Wildcard Innovations উদ্ভাবিত Argo Navis হল একটি 'ডিজিটাল কম্পিউটার দূরবীন' "
 "।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
@@ -15538,7 +15554,7 @@ msgstr ""
 "দূরবীন) একটি 'ঠেলা' (একটি দূরবীন যা হাতদিয়ে ঘোরাতে হলেও নিশানা নির্ধারণের "
 "জন্য সেটি কম্পিউটার ব্যবহার করে) দূরবীনে পরিনত করে ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
@@ -15546,7 +15562,7 @@ msgstr ""
 "তবে baud rate বা সংকেত প্রেরণ গতি 9600B ও নিয়ন্ত্রন ব্যবস্থা Meade "
 "compatibility নির্বাচন করতে ভুলবেন না ।"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the"
@@ -15560,7 +15576,7 @@ msgstr ""
 "নির্দেশ পাঠানো যায় ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
@@ -15568,7 +15584,7 @@ msgstr ""
 "ব্যবহার পরিস্থিতি সম্পর্কে আরও জানতে {দৃষ্টিক্ষেত্র নির্দেশক} অংশটি দেখুন ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:507
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "{Stellarium's original telescope control feature}."
@@ -15577,16 +15593,16 @@ msgstr ""
 "ব্যবহার করার মত ।"
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:527
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:529
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
 msgid "Status"
 msgstr "পরিস্থিতি"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:546
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:547
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -15600,7 +15616,7 @@ msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:553
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:554
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an"
@@ -15612,80 +15628,80 @@ msgstr ""
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:558
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:559
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "একটি নতুন কোনো দূরবীণ নিয়ন্ত্রন করতে \"%1\" এ ক্লিক করুন ।"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:573
 msgid "local, Stellarium"
 msgstr "স্থানীয়, প্রত্যক্ষ"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:576
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:577
 msgid "local, external"
 msgstr "স্থানীয়, পরোক্ষ"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:580
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:581
 msgid "remote, unknown"
 msgstr "দূরবর্তী, অজানা"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:584
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:585
 msgid "virtual"
 msgstr "নকল"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:588
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:589
 msgid "remote, RTS2"
 msgstr "দূরসঞ্চালন, RTS2"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:592
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:593
 msgid "remote, INDI/INDIGO"
 msgstr ""
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:596
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:597
 msgid "local, ASCOM"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "Start"
 msgstr "সক্রিয় করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Start the selected local telescope"
 msgstr "নির্বাচিত স্থানীয় দূরবীনটি সক্রিয় করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1024
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Stop"
 msgstr "থামান"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
 msgid "Stop the selected local telescope"
 msgstr "নির্বাচিত স্থানীয় দূরবীনটি নিষ্ক্রিয় করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1030
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1031
 msgid "Connect"
 msgstr "সংযোগ স্থাপন করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1031
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1032
 msgid "Connect to the selected telescope"
 msgstr "নির্বাচিত দূরবীন সাথে সংযোগ স্থাপন করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1036
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1037
 msgid "Disconnect"
 msgstr "সংযোগ বিচ্ছিন্ন করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1037
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1038
 msgid "Disconnect from the selected telescope"
 msgstr "নির্বাচিত দূরবীন সাথে সংযোগ বিচ্ছিন্ন করুন"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1057
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1058
 msgid "Select a directory"
 msgstr "একটি স্থান নির্বাচন করুন"
 
