@@ -553,6 +553,12 @@ void ObsListCreateEditDialog::loadObservingList()
         try {
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             jsonFile.close();
+            
+            // Get the default list uuid
+            QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
+            if(defaultListUuid.toStdString() == listUuid_){
+                ui->obsListDefaultListCheckBox->setChecked(true);
+            }
 
             observingListItemCollection.clear();
             const QString keyUuid = QString::fromStdString ( listUuid_ );
