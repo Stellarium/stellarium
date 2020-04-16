@@ -313,26 +313,33 @@ namespace StelUtils
 		*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
 	}
 
-	//! Convert a string longitude, latitude, RA or Declination angle
+	//! Convert a string longitude, latitude, RA or declination angle
 	//! to radians.
-	//! @param str the angle in format something like these:
-	//! - +53d  51'21.6"
-	//! - +53d51'21.6"
-	//! - -1d  10'31.8"
-	//! - +46d6'31"
-	//! - 50D46'0"N
-	//! - 123D47'59"W
-	//! - 123.567 N
-	//! - 123.567W
-	//! - -123.567
-	//! - 12h 14m 6s
-	//! The degree separator may be a degree symbol (\\xBA) in addition
-	//! to a 'd' or 'D'.
-	//! @return the angle in radians.
-	//! Latitude: North are positive, South are negative.
+	//! @param str the angle in a format according to:
+	//!   angle ::= [sign¹] ( real [degs | mins | secs]
+    //!                     | [integer degs] ( [integer mins] real secs
+	//!                                       | real mins )
+	//!                     ) [cardinal¹]            
+	//!   sign ::= + | -
+	//!   digit := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	//!   integer ::= digit [digits]
+	//!   real ::= integer [. integer]
+	//!   degs ::= d | h² | U+00B0 | U+00BA³
+	//!   mins ::= m | '
+	//!   secs ::= s | "
+	//!   cardinal ::= N² | S² | E | W
+	//!   ¹) A cardinal point overrides any sign. N and E result in a positive,
+	//!      W and S in a negative angle.
+	//!   ²) The use of the cardinal points N and S together with the hour sign
+	//!      'H' or 'h' is forbidden.
+	//!   ³) The MASCULINE ORDINAL INDICATOR U+00BA is accepted, considering
+	//!      Spanish QWERTY keyboards.
+	//! The string is parsed without regarding to case, except that, after a
+	//! single real, a solitary 's' indicates seconds whereas an 'S' indicates South.
+    //! It is highly recommended to use lower case for hdms and upper case for NSEW.
+	//! Latitude: North is positive, South is negative.
 	//! Longitude: East is positive, West is negative.
-	//! Note: if there is a N, S, E or W suffix, any leading + or -
-	//! characters are ignored.
+	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
 	//! Check if a number is a power of 2.
