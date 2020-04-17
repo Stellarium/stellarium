@@ -513,8 +513,8 @@ double getDecAngle(const QString& str)
 		double d = 0;
 		double m = 0;
 		double s = 0;
-		ushort hd = caps.at(5).at(0).toLower().unicode();
-		QString pointStr = caps.at(9).toUpper();
+		ushort hd = caps.at(5).isEmpty() ? 'd' : caps.at(5).toLower().at(0).unicode();
+		QString pointStr = caps.at(9).toUpper() + " ";
         if( caps.at(7) != "" ){
 			// [dh, degs], [m] and s entries at 4, 5, 6, 7
 			d = caps.at(4).toDouble();
