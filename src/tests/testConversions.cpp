@@ -589,6 +589,17 @@ void TestConversions::testRadToDD()
 	}
 }
 
+// Utilities for defining the expected value in the test below
+double a(double d, double m, double s){
+	int sign = d < 0 || m < 0 || s < 0 ? -1 : 1;
+	double deg = std::abs(d) + std::abs(m)/60 + std::abs(s)/3600;
+	return deg/180*M_PI*sign;
+}
+
+double h(double d, double m, double s){
+	return a(d,m,s)*15;
+}
+
 void TestConversions::testStringCoordinateToRad()
 {
     #define LIM (M_PI/(180.*3600000)) // 1 marcsec
