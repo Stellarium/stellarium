@@ -341,7 +341,6 @@ ELSE()
      ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
-
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
@@ -355,10 +354,13 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
+    ADD_DEFINITIONS(-DENABLE_TESTING)
     FIND_PACKAGE(Qt5Test REQUIRED)
+    MESSAGE(STATUS "Unit tests support: enabled")
+ELSE(ENABLE_TESTING)
+    MESSAGE(STATUS "Unit tests support: disabled")
 ENDIF(ENABLE_TESTING)
 
 ########### User Guide ###############
