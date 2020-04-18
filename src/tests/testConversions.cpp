@@ -589,43 +589,112 @@ void TestConversions::testRadToDD()
 	}
 }
 
+// Utilities for defining the expected value in the test below
+double a(double d, double m, double s){
+	int sign = d < 0 || m < 0 || s < 0 ? -1 : 1;
+	double deg = std::abs(d) + std::abs(m)/60 + std::abs(s)/3600;
+	return deg/180*M_PI*sign;
+}
+
+double h(double d, double m, double s){
+	return a(d,m,s)*15;
+}
+
 void TestConversions::testStringCoordinateToRad()
 {
+    #define LIM (M_PI/(180.*3600000)) // 1 marcsec
 	QVariantList data;
+    // legacy
+	data << "+0d0m0s"	    << 0. << "legacy";
+   	data << "+30d0m0s"	    << M_PI/6. << "legacy";
+	data << "+45d0m0s"	    << M_PI/4. << "legacy";
+	data << "+90d0m0s"	    << M_PI/2. << "legacy";
+	data << "+80d25m10s"	<< a(80,25,10) << "legacy";
+	data << "+400d0m5s"	    << a(400,0,5) << "legacy";
+	data << "-30d0m50s"	    << a(-30,0,50) << "legacy";
+	data << "123.567 N"	    << a(123.567,0,0) << "legacy";
+	data << "123.567 S"	    << a(-123.567,0,0) << "legacy";
+	data << "123.567 W"	    << a(-123.567,0,0) << "legacy";
+	data << "+46d6'31\""	<< a(46,6,31) << "legacy";
+	data << "12h0m0s"	    << M_PI << "legacy";
+	data << "6h0m0s"	    << M_PI/2. << "legacy";
+	data << "10h30m0s"	    << h(10,30,0) << "legacy";
+	data << "+80°25'10\""	<< a(80,25,10) << "legacy";
+	data << "-45d0m0s"	    << -M_PI/4. << "legacy";
+	data << "-80°25'10\""	<< a(-80,25,10) << "legacy";
+	data << "-80r25m10s"	<< -0.0 << "legacy";
+	// fail
+	data << "-10.5°1.5'1\"" << -0.0 << "fraction not last";
+	data << "1.2.3°4.5'1\"" << -0.0 << "more than one decimal point";
+	data << "1h2m3sN" <<       -0.0 << "h-N/S-conflict";
+	data << "2x3m4s" <<        -0.0 << "invalid degrees marker";
+	data << "2d3n4s" <<        -0.0 << "invalid minutes marker";
+	data << "2d3m4m" <<        -0.0 << "invalid seconds marker";
+	data << "-" <<             -0.0 << "no digit";
+	data << "W" <<             -0.0 << "no digit";
+	// pass
+	data << "1d1m1s"      << a(1,1,1) << "d-m-s lowercase";
+	data << "2D2M2S"      << a(2,2,2) << "d-m-s uppercase";
+	data << "1h1m1s"      << h(1,1,1) << "h-m-s lowercase";
+	data << "2H2M2S"      << h(2,2,2) << "h-m-s uppercase";
+	data << "10m10.5s"    << a(0,10,10.5) << "m-s << omit degrees";
+	data << "20d20.5s"    << a(20,0,20.5) << "d-s << omit minutes";
+	data << "30d30.5m"    << a(30,30.5,0) << "d-m << omit seconds";
+	data << "40.5d"       << a(40.5,0,0)  << "d << omit minutes and seconds";
+	data << "50.5m"       << a(0,50.5,0)  << "m << omit degrees-seconds";
+	data << "60.5s"       << a(0,0,60.5)  << "s << omit degrees-minutes";
+	data << "30d30.5m"    << a(30,30.5,0) << "d-m << omit seconds";
+	data << "-4d4m4s"     << a(-4,4,4) <<   "minus sign on degrees";
+	data << "-5m5s"       << a(0,-5,5) <<   "minus sign on minutes";
+	data << "-6s"         << a(0,0,-6) <<   "minus sign on seconds";
+	data << "+4d4m4s"     << a(+4,4,4) <<   "plus sign on degrees";
+	data << "+5m5s"       << a(0,+5,5) <<   "plus sign on minutes";
+	data << "+6S"         << a(-6,0,0) <<   "S(outh) overrides '+'";
+	data << "+6sS"        << a(0,0,-6) <<   "seconds only, S is negative";
+	data << "2d3ms"       << a(-2,3,0)   << "d,m with s(outh)";
+	data << "10d10mN"     << a(+10,10,0) << "N is positive";
+	data << "20d20mE"     << a(+20,20,0) << "E is positive";
+	data << "10d10mS"     << a(-10,10,0) << "S is negative";
+	data << "20d20mW"     << a(-20,20,0) << "W is negative";
+	data << "-10d10mN"    << a(+10,10,0) << "N is positive << overrules negative sign";
+	data << "-20d20mE"    << a(+20,20,0) << "E is positive, overrules negative sign";
+	data << "+10d10mS"    << a(-10,10,0) << "S is negative, overrules positive sign";
+	data << "+20d20mW"    << a(-20,20,0) << "W is negative, overrules positive sign";
+	data << "1°1'1\""     << a(1,1,1) << "degree sign-'-\"";
+	data << "2º2'2\""     << a(2,2,2) << "masculine ordinal indicator-'-\"";
+	data << "  1d1m1s"    << a(1,1,1) << "leading spaces";
+	data << "1  h1m1s"    << h(1,1,1) << "embedded spaces";
+	data << "1h  1m1s"    << h(1,1,1) << "embedded spaces";
+	data << "1d1  m1s"    << a(1,1,1) << "embedded spaces";
+	data << "1d1m  1s"    << a(1,1,1) << "embedded spaces";
+	data << "1d1m1  s"    << a(1,1,1) << "embedded spaces";
+	data << "1d1m1s  "    << a(1,1,1) << "trailing spaces";
+	data << "4d 4m 4s"    << a(4,4,4) << "systematic spacing";
+	data << "5 d 5 m 5 s" << a(5,5,5) << "maximum spacing";
+	data << "123.567dN"   << a( 123.567, 0, 0) << "degrees North";
+	data << "123.567dS"   << a(-123.567, 0, 0) << "degrees South";
+	data << "123.567°E"   << a( 123.567, 0, 0) << "degrees East";
+	data << "123.567°W"   << a(-123.567, 0, 0) << "degrees West";
+	data << "+400d0m5s"   << a(400, 0, 5) << ">360°";
 
-	data << "+0d0m0s"	<< 0.;
-	data << "+30d0m0s"	<< M_PI/6.;
-	data << "+45d0m0s"	<< M_PI/4.;
-	data << "+90d0m0s"	<< M_PI/2.;
-	data << "+80d25m10s"	<< 1.404;
-	data << "+400d0m5s"	<< 6.981;
-	data << "-30d0m50s"	<< -0.5235;
-	data << "123.567 N"	<< 2.1567;
-	data << "123.567 S"	<< -2.1567;
-	data << "123.567 W"	<< -2.1567;
-	data << "+46d6'31\""	<< 0.8047;
-	data << "12h0m0s"	        << M_PI;
-	data << "6h0m0s"	        << M_PI/2.;
-	data << "10h30m0s"	<< 2.749;
-	data << "+80°25'10\""	<< 1.404;
-	data << "-45d0m0s"	<< -M_PI/4.;
-	data << "-80°25'10\""	<< -1.404;
-	data << "-80r25m10s"	<< -0.0;
-
-	while (data.count()>=2)
+	while (data.count()>=3)
 	{
-		QString coordinate;
+		QString coordinate, explain;
 		double angle, expectedValue;
-
 		coordinate	= data.takeFirst().toString();
-		expectedValue	= data.takeFirst().toDouble();
+		expectedValue = data.takeFirst().toDouble();
+		explain = data.takeFirst().toString();
 		angle = StelUtils::getDecAngle(coordinate);
 
-		QVERIFY2(qAbs(angle-expectedValue)<=1e-3, qPrintable(QString("%1 = %2 radians (expected %3 radians)")
-									    .arg(coordinate)
-									    .arg(QString::number(angle, 'f', 5))
-									    .arg(QString::number(expectedValue, 'f', 5))));
+		QVERIFY2(std::abs((angle) - (expectedValue)) < LIM,
+				 qPrintable(QString("%1 = %2 radians (expected %3 radians) - %4")
+							.arg(coordinate)
+							.arg(QString::number(angle))
+							.arg(QString::number(expectedValue))
+							.arg(explain)) );
+
 	}
+	#undef LIM
 }
 
 void TestConversions::testHMSToHours()

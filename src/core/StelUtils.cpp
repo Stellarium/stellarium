@@ -486,49 +486,122 @@ Vec3f htmlColorToVec3f(const QString& c)
 
 double getDecAngle(const QString& str)
 {
-	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
-	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])?\\s*$"); // Decimal
-	QRegExp re3("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?"); // DMS like +121°33'38.28"
-
-	if (re1.exactMatch(str))
-	{
-		bool neg = (re1.capturedTexts().at(1) == "-");
-		double d = re1.capturedTexts().at(2).toDouble();
-		double m = re1.capturedTexts().at(4).toDouble();
-		double s = re1.capturedTexts().at(5).toDouble();
-		if (re1.capturedTexts().at(3).toUpper() == "H")
-		{
-			d *= 15;
-			m *= 15;
-			s *= 15;
+	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
+				"(?:"                                 // either
+		          "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
+				  "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
+                "|"                                   // or
+ 				  "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
+                  "(?:"                                   // either
+		            "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
+		            "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
+		          "|"                                     // or
+		            "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
+		          ")"                                     // end
+                ")"                                   // end
+                "\\s*([NSEW]?)",                      // [point] (9)
+				Qt::CaseInsensitive);
+	if( rex.exactMatch(str) ){
+		QStringList caps = rex.capturedTexts();
+#if 0
+		std::cout << "reg exp: ";
+		for( int i = 1; i <= rex.captureCount() ; ++i ){
+			std::cout << i << "=\"" << caps.at(i).toStdString() << "\" ";
 		}
-		QString cardinal = re1.capturedTexts().at(7);
-		double deg = d + (m/60) + (s/3600);
-		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
-			deg *= -1.;
-		return (deg * 2 * M_PI / 360.);
-	}
-	else if (re2.exactMatch(str))
-	{
-		bool neg = (re2.capturedTexts().at(1) == "-");
-		double deg = re2.capturedTexts().at(2).toDouble();
-		QString cardinal = re2.capturedTexts().at(4);
-		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
-			deg *= -1.;
-		return (deg * 2 * M_PI / 360.);
-	}
-	else if (re3.exactMatch(str))
-	{
-		double deg = re3.capturedTexts()[1].toDouble();
-		double min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toDouble();
-		double sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toDouble();
-		double r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0.)
-			r *= -1.;
-		return (r * 2 * M_PI / 360.);
+		std::cout << std::endl;
+#endif
+		double d = 0;
+		double m = 0;
+		double s = 0;
+		ushort hd = caps.at(5).isEmpty() ? 'd' : caps.at(5).toLower().at(0).unicode();
+		QString pointStr = caps.at(9).toUpper() + " ";
+        if( caps.at(7) != "" ){
+			// [dh, degs], [m] and s entries at 4, 5, 6, 7
+			d = caps.at(4).toDouble();
+			m = caps.at(6).toDouble();
+			s = caps.at(7).toDouble();
+        } else if( caps.at(8) != "" ){
+			// [dh, degs] and m entries at 4, 5, 8
+			d = caps.at(4).toDouble();
+			m = caps.at(8).toDouble();
+		} else if( caps.at(2) != "" ){
+			// some value at 2, dh|m|s at 3
+            double x = caps.at(2).toDouble();
+		    QString sS = caps.at(3) + caps.at(9);
+			switch( sS.length() ){
+            case 0:
+				// degrees, no point
+				hd = 'd';
+				break;
+			case 1:
+				// NnSEeWw is point for degrees, "dhms°..." distinguish dhms
+				if( QString("NnSEeWw").contains(sS.at(0)) ){
+					pointStr = sS.toUpper();
+					hd = 'd';
+				} else {
+                    hd = sS.toLower().at(0).unicode();
+				}
+				break;
+			case 2:
+				// hdms selected by 1st char, NSEW by 2nd
+				hd = sS.at(0).toLower().unicode();
+				pointStr = sS.right(1).toUpper();
+				break;
+			}
+			switch( hd ){
+            case 'h': case 'd': case 0x00B0: case 0x00BA:
+                d = x;
+                break;
+            case 'm': case '\'':
+                m = x;
+                break;
+            case 's': case '"':
+                s = x;
+                break;
+			default:
+				qDebug() << "internal error, hd = " << hd;
+            }		   
+		} else {
+			qDebug() << "getDecAngle failed to parse angle string: " << str;
+			return -0.0;
+		}
+
+		// General sign handling: group 1 or overruled by point
+		int sgn = caps.at(1) == "-" ? -1 : 1;
+		bool isNS = false;
+        switch( pointStr.at(0).unicode() ){
+		case 'N':
+			sgn = 1;
+			isNS = 1;
+			break;
+		case 'S':
+			sgn = -1;
+			isNS = 1;
+			break;
+        case 'E':
+			sgn = 1;
+			break;
+        case 'W':
+			sgn = -1;
+			break;
+		default:  // OK, there is no NSEW.
+			break;
+		}
+
+		int h2d = 1;
+		if( hd == 'h' ){
+			// Sanity check - h and N/S not accepted together
+			if( isNS  ){
+				qDebug() << "getDecAngle does not accept ...H...N/S: " << str;
+				return -0.0;
+			}
+			h2d = 15;
+		}
+		double deg = (d + (m/60) + (s/3600))*h2d*sgn;
+		return deg * 2 * M_PI / 360.;
 	}
 
-	qDebug() << "getDecAngle failed to parse angle string:" << str;
+	qDebug() << "getDecAngle failed to parse angle string: " << str;
 	return -0.0;
 }
 
