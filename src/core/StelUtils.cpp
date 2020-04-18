@@ -489,9 +489,9 @@ double getDecAngle(const QString& str)
 	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
 				"(?:"                                 // either
 		          "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
-				  "([dh\u00B0\u00BAms]?)"                // [dhms] (3)
+				  "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
                 "|"                                   // or
- 				  "(?:(\\d+)\\s*([hHdD\u00B0\u00BA])\\s*)?" // [int degs] ... (4) (5)
+ 				  "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
                   "(?:"                                   // either
 		            "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
 		            "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
