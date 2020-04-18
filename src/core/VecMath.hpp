@@ -19,7 +19,7 @@
 
 // Template vector and matrix library.
 // Use OpenGL compatible ordering ie. you can pass a matrix or vector to
-// openGL functions without changes in the ordering
+// OpenGL functions without changes in the ordering
 
 #ifndef VECMATH_HPP
 #define VECMATH_HPP
@@ -40,48 +40,48 @@ typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
 
 //! @typedef Vec3d
-//! A 3d vector of doubles compatible with openGL.
+//! A 3d vector of doubles compatible with OpenGL.
 typedef Vector3<double>	Vec3d;
 
 //! @typedef Vec3f
-//! A 3d vector of floats compatible with openGL.
+//! A 3d vector of floats compatible with OpenGL.
 typedef Vector3<float>	Vec3f;
 
 //! @typedef Vec3i
-//! A 3d vector of ints compatible with openGL.
+//! A 3d vector of ints compatible with OpenGL.
 typedef Vector3<int>	Vec3i;
 
 //! @typedef Vec4d
-//! A 4d vector of doubles compatible with openGL.
+//! A 4d vector of doubles compatible with OpenGL.
 typedef Vector4<double>	Vec4d;
 
 //! @typedef Vec4f
-//! A 4d vector of floats compatible with openGL.
+//! A 4d vector of floats compatible with OpenGL.
 typedef Vector4<float>	Vec4f;
 
 //! @typedef Vec4i
-//! A 4d vector of ints compatible with openGL.
+//! A 4d vector of ints compatible with OpenGL.
 typedef Vector4<int>	Vec4i;
 
 //! @typedef Mat4d
-//! A 4x4 matrix of doubles compatible with openGL.
+//! A 4x4 matrix of doubles compatible with OpenGL.
 typedef Matrix4<double>	Mat4d;
 
 //! @typedef Mat4f
-//! A 4x4 matrix of floats compatible with openGL.
+//! A 4x4 matrix of floats compatible with OpenGL.
 typedef Matrix4<float>	Mat4f;
 
 //! @typedef Mat3d
-//! A 3x3 matrix of doubles compatible with openGL.
+//! A 3x3 matrix of doubles compatible with OpenGL.
 typedef Matrix3<double> Mat3d;
 
 //! @typedef Mat3f
-//! A 3x3 matrix of floats compatible with openGL.
+//! A 3x3 matrix of floats compatible with OpenGL.
 typedef Matrix3<float> Mat3f;
 
 
 //! @class Vector2
-//! A templatized 2d vector compatible with openGL.
+//! A templatized 2d vector compatible with OpenGL.
 //! Use Vec2d or Vec2f typdef for vectors of double and float respectively.
 template<class T> class Vector2
 {
@@ -97,6 +97,10 @@ public:
 	//! Uses default primitive type conversion
 	template <class T2> inline explicit Vector2(const Vector2<T2>&);
 	inline Vector2(T, T);
+	//! Constructor from QString
+	inline explicit Vector2(QString s);
+	//! Constructor from QStringList
+	inline explicit Vector2(QStringList s);
 
 	//! Assignment from array
 	//! @warning Does not check array size, make sure it has at least 2 elements
@@ -150,14 +154,17 @@ public:
 	inline T lengthSquared() const;
 	inline void normalize();
 
-	T v[2];
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	//! Compact comma-separated string without brackets and spaces
+	inline QString toStr() const;
 
-	QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	T v[2];
 };
 
 
 //! @class Vector3
-//! A templatized 3d vector compatible with openGL.
+//! A templatized 3d vector compatible with OpenGL.
 //! Use Vec3d or Vec3f typdef for vectors of double and float respectively.
 template<class T> class Vector3
 {
@@ -170,6 +177,10 @@ public:
 	//! @warning Does not check array size, make sure it has at least 3 elements
 	inline explicit Vector3(const T*);
 	inline Vector3(T, T, T);
+	//! Constructor from QString
+	inline explicit Vector3(QString s);
+	//! Constructor from QStringList
+	inline explicit Vector3(QStringList s);
 
 	//inline Vector3& operator=(const Vector3&);
 
@@ -229,15 +240,20 @@ public:
 	inline Vec3f toVec3f() const;
 	inline Vec3d toVec3d() const;
 
-	T v[3];		// The 3 values
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
+	//! Compact comma-separated string without brackets and spaces
+	inline QString toStr() const;
+	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
+	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1
+	inline QString toHtmlColor() const;
 
-	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
-	QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
+	T v[3];		// The 3 values
 };
 
 
 //! @class Vector4
-//! A templatized 4d vector compatible with openGL.
+//! A templatized 4d vector compatible with OpenGL.
 //! Use Vec4d or Vec4f typdef for vectors of double and float respectively.
 template<class T> class Vector4
 {
@@ -249,6 +265,9 @@ public:
 	//! Explicit conversion constructor from an array
 	//! @warning Does not check array size, make sure it has at least 4 elements
 	inline explicit Vector4(const T*);
+	//! Explicit conversion constructor from another Vec4 of any type.
+	//! Uses default primitive type conversion
+	template <class T2> inline explicit Vector4(const Vector4<T2>&);
 	//! Creates an Vector4 with xyz set to the given Vector3, and w set to 1.0
 	inline Vector4(const Vector3<T>&);
 	//! Creates an Vector4 with xyz set to the given values, and w set to 1.0
@@ -256,6 +275,11 @@ public:
 	//! Creates an Vector4 with xyz set to the given Vector3, and given last value as w
 	inline Vector4(const Vector3<T>&, T);
 	inline Vector4(T, T, T, T);
+	//! Constructor from QString
+	inline explicit Vector4(QString s);
+	//! Constructor from QStringList
+	inline explicit Vector4(QStringList s);
+
 
 	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
@@ -291,13 +315,17 @@ public:
 	inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
-	QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+	//! Compact comma-separated string without brackets and spaces
+	inline QString toStr() const;
 
 	T v[4];		// The 4 values
 };
 
 //! @class Matrix3
-//! A templatized column-major 3x3 matrix compatible with openGL (mostly for NormalMatrix calculation).
+//! A templatized column-major 3x3 matrix compatible with OpenGL (mostly for NormalMatrix calculation).
 //! Use Mat3d or Mat3f typedef for matrices of doubles and floats respectively.
 template<class T> class Matrix3
 {
@@ -345,7 +373,7 @@ public:
 };
 
 //! @class Matrix4
-//! A templatized column-major 4x4 matrix compatible with openGL.
+//! A templatized column-major 4x4 matrix compatible with OpenGL.
 //! Use Mat4d or Mat4f typdef for matrices of doubles and floats respectively.
 template<class T> class Matrix4
 {
@@ -463,6 +491,26 @@ template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
 }
+
+// Obtains a Vec2i/Vec2f/Vec2d from a stringlist with the form x,y  (use C++11 type delegating constructors)
+template<> Vec2i::Vector2(QStringList s) : Vector2{s.value(0, "0").toInt(),s.value(1, "0").toInt()}
+{
+	if (s.size()!=2)
+		qWarning() << "Vec2i from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec2f::Vector2(QStringList s) : Vector2{s.value(0, "0.").toFloat(),s.value(1, "0.").toFloat()}
+{
+	if (s.size()!=2)
+		qWarning() << "Vec2f from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec2d::Vector2(QStringList s) : Vector2{s.value(0, "0.").toDouble(),s.value(1, "0.").toDouble()}
+{
+	if (s.size()!=2)
+		qWarning() << "Vec2d from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+
+// Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
+template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
 
 
 template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
@@ -622,6 +670,23 @@ template<class T> void Vector2<T>::normalize()
 	v[1] *= s;
 }
 
+template<> QString Vec2i::toStr() const
+{
+	return QString("%1,%2").arg(v[0]).arg(v[1]);
+}
+template<> QString Vec2f::toStr() const
+{
+	return QString("%1,%2")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6);
+}
+template<> QString Vec2d::toStr() const
+{
+	return QString("%1,%2")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10);
+}
+
 // template<class T>
 // std::ostream& operator<<(std::ostream &o,const Vector2<T> &v) {
 //   return o << '[' << v[0] << ',' << v[1] << ']';
@@ -655,6 +720,26 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 {
 	v[0]=x; v[1]=y; v[2]=z;
 }
+
+// Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
+template<> Vec3i::Vector3(QStringList s) : Vector3{s.value(0, "0").toInt(),s.value(1, "0").toInt(),s.value(2, "0").toInt()}
+{
+	if (s.size()!=3)
+		qWarning() << "Vec3i from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec3f::Vector3(QStringList s) : Vector3{s.value(0, "0.").toFloat(),s.value(1, "0.").toFloat(),s.value(2, "0.").toFloat()}
+{
+	if (s.size()!=3)
+		qWarning() << "Vec3f from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec3d::Vector3(QStringList s) : Vector3{s.value(0, "0.").toDouble(),s.value(1, "0.").toDouble(),s.value(2, "0.").toDouble()}
+{
+	if (s.size()!=3)
+		qWarning() << "Vec3d from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+
+// Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
+template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
 
 //template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
 //{
@@ -852,6 +937,46 @@ template<class T> T Vector3<T>::longitude() const
 	return std::atan2(v[1],v[0]);
 }
 
+template<> QString Vec3i::toStr() const
+{
+	return QString("%1,%2,%3").arg(v[0]).arg(v[1]).arg(v[2]);
+}
+template<> QString Vec3f::toStr() const
+{
+	return QString("%1,%2,%3")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6)
+			.arg(static_cast<double>(v[2]),0,'f',6);
+}
+template<> QString Vec3d::toStr() const
+{
+	return QString("%1,%2,%3")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10)
+			.arg(v[2],0,'f',10);
+}
+
+template<> QString Vec3i::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, v[0]), 2, 16, QChar('0'))
+		.arg(qMin(255, v[1]), 2, 16, QChar('0'))
+		.arg(qMin(255, v[2]), 2, 16, QChar('0'));
+}
+template<> QString Vec3f::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
+}
+template<> QString Vec3d::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
+}
 
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
@@ -865,6 +990,11 @@ template<class T> Vector4<T>::Vector4(T x)
 template<class T> Vector4<T>::Vector4(const T* x)
 {
 	v[0]=x[0]; v[1]=x[1]; v[2]=x[2]; v[3]=x[3];
+}
+
+template <class T> template <class T2> Vector4<T>::Vector4(const Vector4<T2>& other)
+{
+	v[0]=other[0]; v[1]=other[1]; v[2]=other[2]; v[3]=other[3];
 }
 
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
@@ -886,6 +1016,26 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 {
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
 }
+
+// Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
+template<> Vec4i::Vector4(QStringList s) : Vector4{s.value(0, "0").toInt(),s.value(1, "0").toInt(),s.value(2, "0").toInt(),s.value(3, "0").toInt()}
+{
+	if (s.size()!=4)
+		qWarning() << "Vec4i from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec4f::Vector4(QStringList s) : Vector4{s.value(0, "0.").toFloat(),s.value(1, "0.").toFloat(),s.value(2, "0.").toFloat(),s.value(3, "0.").toFloat()}
+{
+	if (s.size()!=4)
+		qWarning() << "Vec4f from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+template<> Vec4d::Vector4(QStringList s) : Vector4{s.value(0, "0.").toDouble(),s.value(1, "0.").toDouble(),s.value(2, "0.").toDouble(),s.value(3, "0.").toDouble()}
+{
+	if (s.size()!=4)
+		qWarning() << "Vec4d from StringList of unexpected length" << s.size() << ":" << s.join("/");
+}
+
+// Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w"
+template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
 
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
 {
@@ -1018,6 +1168,26 @@ std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ',' << v[3] << ']';
 }*/
 
+template<> QString Vec4i::toStr() const
+{
+	return QString("%1,%2,%3,%4").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);
+}
+template<> QString Vec4f::toStr() const
+{
+	return QString("%1,%2,%3,%4")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6)
+			.arg(static_cast<double>(v[2]),0,'f',6)
+			.arg(static_cast<double>(v[3]),0,'f',6);
+}
+template<> QString Vec4d::toStr() const
+{
+	return QString("%1,%2,%3,%4")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10)
+			.arg(v[2],0,'f',10)
+			.arg(v[3],0,'f',10);
+}
 
 ////////////////////////// Matrix3 class methods ///////////////////////////////
 
