@@ -386,22 +386,6 @@ double dmsStrToRad(const QString& s)
 	return rad;
 }
 
-// Obtains a Vec3f from a string with the form x,y,z
-// DEPRECATED: Use Vec3f(s) directly
-Vec3f strToVec3f(const QStringList& s)
-{
-	if (s.size()<3)
-		 return Vec3f(0.f,0.f,0.f);
-
-	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
-}
-
-// DEPRECATED: Use Vec3f(s) directly
-Vec3f strToVec3f(const QString& s)
-{
-	return strToVec3f(s.split(","));
-}
-
 double getDecAngle(const QString& str)
 {
 	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)

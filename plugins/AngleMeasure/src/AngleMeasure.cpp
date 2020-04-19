@@ -593,10 +593,10 @@ void AngleMeasure::loadSettings()
 {
 	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
 	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
-	equatorialTextColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
-	equatorialLineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
-	horizontalTextColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color_horizontal", "0.9,0.6,0.4").toString());
-	horizontalLineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color_horizontal", "0.9,0.6,0.4").toString());
+	equatorialTextColor = Vec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	equatorialLineColor = Vec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
+	horizontalTextColor = Vec3f(conf->value("AngleMeasure/text_color_horizontal", "0.9,0.6,0.4").toString());
+	horizontalLineColor = Vec3f(conf->value("AngleMeasure/line_color_horizontal", "0.9,0.6,0.4").toString());
 	showEquatorialPA(conf->value("AngleMeasure/show_position_angle", false).toBool());
 	showHorizontalPA(conf->value("AngleMeasure/show_position_angle_horizontal", false).toBool());
 	showEquatorial(conf->value("AngleMeasure/show_equatorial", true).toBool());

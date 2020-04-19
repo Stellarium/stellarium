@@ -21,7 +21,6 @@
 #include "AsterismMgr.hpp"
 #include "Asterism.hpp"
 #include "StarMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
@@ -83,9 +82,9 @@ void AsterismMgr::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
-	setLinesColor(StelUtils::strToVec3f(conf->value("color/asterism_lines_color", defaultColor).toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value("color/asterism_names_color", defaultColor).toString()));
-	setRayHelpersColor(StelUtils::strToVec3f(conf->value("color/rayhelper_lines_color", defaultColor).toString()));
+	setLinesColor(Vec3f(conf->value("color/asterism_lines_color", defaultColor).toString()));
+	setLabelsColor(Vec3f(conf->value("color/asterism_names_color", defaultColor).toString()));
+	setRayHelpersColor(Vec3f(conf->value("color/rayhelper_lines_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);

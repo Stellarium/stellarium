@@ -48,7 +48,6 @@
 #include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -554,7 +553,7 @@ void TextUserInterface::loadConfiguration(void)
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
 	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
-	color = StelUtils::strToVec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 }
 
 /*************************************************************************

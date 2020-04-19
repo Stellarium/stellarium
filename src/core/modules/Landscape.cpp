@@ -144,11 +144,11 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 					landscapeIni.value("landscape/polygonal_horizon_inverted", "false").toBool()
 					);
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
-		horizonPolygonLineColor=StelUtils::strToVec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
+		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
 	// we must get label color, this is global. (No sense to make that per-landscape!)
 	QSettings *config = StelApp::getInstance().getSettings();
-	labelColor=StelUtils::strToVec3f(config->value("landscape/label_color", "0.2,0.8,0.2").toString());
+	labelColor=Vec3f(config->value("landscape/label_color", "0.2,0.8,0.2").toString());
 	fontSize=config->value("landscape/label_font_size", 18).toInt();
 	loadLabels(landscapeId);
 }
@@ -861,7 +861,7 @@ void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& land
 		validLandscape = false;
 		return;
 	}
-	groundColor=StelUtils::strToVec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
+	groundColor=Vec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
 	validLandscape = true;  // assume ok...
 	//qDebug() << "PolygonalLandscape" << landscapeId << "loaded, mem size:" << getMemorySize();
 }
@@ -1115,7 +1115,7 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	       landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
 	       landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
 	       landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat(),
-	       StelUtils::strToVec3f(landscapeIni.value("landscape/bottom_cap_color", "-1.0,0.0,0.0").toString()));
+	       Vec3f(landscapeIni.value("landscape/bottom_cap_color", "-1.0,0.0,0.0").toString()));
 	//qDebug() << "SphericalLandscape" << landscapeId << "loaded, mem size:" << memorySize;
 }
 

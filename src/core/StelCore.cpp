@@ -205,7 +205,7 @@ void StelCore::init()
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
 	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toDouble());
 	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toDouble());
-	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()).toVec3d());
+	setDeltaTCustomEquationCoefficients(Vec3d(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();

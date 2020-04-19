@@ -579,9 +579,9 @@ void Oculars::init()
 
 		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
-		textColor=StelUtils::strToVec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
-		lineColor=StelUtils::strToVec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
-		telradFOV=StelUtils::strToVec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
+		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
+		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
+		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();

@@ -1121,13 +1121,7 @@ void TestConversions::testStrToVec3f()
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
 		Vec3f srcVec	= Vec3f(v1, v2, v3);
-		Vec3f dstVec	= StelUtils::strToVec3f(vec); // DEPRECATED
-
-		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(vec)
-							   .arg(dstVec.toString())
-							   .arg(srcVec.toString())));
-		dstVec	= Vec3f(vec); // NEW SYNTAX
+		Vec3f dstVec	= Vec3f(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(vec)

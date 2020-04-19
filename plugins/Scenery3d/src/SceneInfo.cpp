@@ -259,7 +259,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	if (ini.contains("start_az_alt_fov"))
 	{
 		qCDebug(sceneInfo) << "scenery3d.ini: setting initial dir/fov.";
-		info.lookAt_fov=StelUtils::strToVec3f(ini.value("start_az_alt_fov").toString());
+		info.lookAt_fov=Vec3f(ini.value("start_az_alt_fov").toString());
 		info.lookAt_fov[0]=180.0f-info.lookAt_fov[0]; // fix azimuth
 	}
 	else

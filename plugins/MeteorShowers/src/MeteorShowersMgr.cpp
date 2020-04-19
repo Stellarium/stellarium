@@ -154,13 +154,13 @@ void MeteorShowersMgr::loadConfig()
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setShowEnableButton(m_conf->value(MS_CONFIG_PREFIX + "/show_enable_button", true).toBool());
 	setShowSearchButton(m_conf->value(MS_CONFIG_PREFIX + "/show_search_button", true).toBool());
-	Vec3f color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString());
+	Vec3f color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorARG(color);
-	color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString());
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorARC(color);
-	color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorIR(color);
 	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());	

@@ -205,29 +205,29 @@ void SolarSystem::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
-	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
-	setMajorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/major_planet_orbits_color", "0.7,0.2,0.2").toString()));
-	setMoonsOrbitsColor(StelUtils::strToVec3f(conf->value("color/moon_orbits_color", "0.7,0.2,0.2").toString()));
-	setMinorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/minor_planet_orbits_color", "0.7,0.5,0.5").toString()));
-	setDwarfPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/dwarf_planet_orbits_color", "0.7,0.5,0.5").toString()));
-	setCubewanosOrbitsColor(StelUtils::strToVec3f(conf->value("color/cubewano_orbits_color", "0.7,0.5,0.5").toString()));
-	setPlutinosOrbitsColor(StelUtils::strToVec3f(conf->value("color/plutino_orbits_color", "0.7,0.5,0.5").toString()));
-	setScatteredDiskObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sdo_orbits_color", "0.7,0.5,0.5").toString()));
-	setOortCloudObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
-	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
-	setSednoidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sednoid_orbits_color", "0.7,0.5,0.5").toString()));
-	setInterstellarOrbitsColor(StelUtils::strToVec3f(conf->value("color/interstellar_orbits_color", "1.0,0.6,1.0").toString()));
-	setMercuryOrbitColor(StelUtils::strToVec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
-	setVenusOrbitColor(StelUtils::strToVec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
-	setEarthOrbitColor(StelUtils::strToVec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
-	setMarsOrbitColor(StelUtils::strToVec3f(conf->value("color/mars_orbit_color", "0.8,0.4,0.1").toString()));
-	setJupiterOrbitColor(StelUtils::strToVec3f(conf->value("color/jupiter_orbit_color", "1.0,0.6,0.0").toString()));
-	setSaturnOrbitColor(StelUtils::strToVec3f(conf->value("color/saturn_orbit_color", "1.0,0.8,0.0").toString()));
-	setUranusOrbitColor(StelUtils::strToVec3f(conf->value("color/uranus_orbit_color", "0.0,0.7,1.0").toString()));
-	setNeptuneOrbitColor(StelUtils::strToVec3f(conf->value("color/neptune_orbit_color", "0.0,0.3,1.0").toString()));
-	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
-	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+	setLabelsColor(                    Vec3f(conf->value("color/planet_names_color", defaultColor).toString()));
+	setOrbitsColor(                    Vec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
+	setMajorPlanetsOrbitsColor(        Vec3f(conf->value("color/major_planet_orbits_color", "0.7,0.2,0.2").toString()));
+	setMoonsOrbitsColor(               Vec3f(conf->value("color/moon_orbits_color", "0.7,0.2,0.2").toString()));
+	setMinorPlanetsOrbitsColor(        Vec3f(conf->value("color/minor_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setDwarfPlanetsOrbitsColor(        Vec3f(conf->value("color/dwarf_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setCubewanosOrbitsColor(           Vec3f(conf->value("color/cubewano_orbits_color", "0.7,0.5,0.5").toString()));
+	setPlutinosOrbitsColor(            Vec3f(conf->value("color/plutino_orbits_color", "0.7,0.5,0.5").toString()));
+	setScatteredDiskObjectsOrbitsColor(Vec3f(conf->value("color/sdo_orbits_color", "0.7,0.5,0.5").toString()));
+	setOortCloudObjectsOrbitsColor(    Vec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
+	setCometsOrbitsColor(              Vec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
+	setSednoidsOrbitsColor(            Vec3f(conf->value("color/sednoid_orbits_color", "0.7,0.5,0.5").toString()));
+	setInterstellarOrbitsColor(        Vec3f(conf->value("color/interstellar_orbits_color", "1.0,0.6,1.0").toString()));
+	setMercuryOrbitColor(              Vec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
+	setVenusOrbitColor(                Vec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
+	setEarthOrbitColor(                Vec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
+	setMarsOrbitColor(                 Vec3f(conf->value("color/mars_orbit_color", "0.8,0.4,0.1").toString()));
+	setJupiterOrbitColor(              Vec3f(conf->value("color/jupiter_orbit_color", "1.0,0.6,0.0").toString()));
+	setSaturnOrbitColor(               Vec3f(conf->value("color/saturn_orbit_color", "1.0,0.8,0.0").toString()));
+	setUranusOrbitColor(               Vec3f(conf->value("color/uranus_orbit_color", "0.0,0.7,1.0").toString()));
+	setNeptuneOrbitColor(              Vec3f(conf->value("color/neptune_orbit_color", "0.0,0.3,1.0").toString()));
+	setTrailsColor(                    Vec3f(conf->value("color/object_trails_color", defaultColor).toString()));
+	setPointerColor(                   Vec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	// Ephemeris stuff
 	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
@@ -239,13 +239,13 @@ void SolarSystem::init()
 	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
 	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
 	setFlagEphemerisScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
-	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
-	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisVenusMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
-	setEphemerisMarsMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
-	setEphemerisJupiterMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
-	setEphemerisSaturnMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
+	setEphemerisGenericMarkerColor( Vec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
+	setEphemerisSelectedMarkerColor(Vec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
+	setEphemerisMercuryMarkerColor( Vec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
+	setEphemerisVenusMarkerColor(   Vec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
+	setEphemerisMarsMarkerColor(    Vec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
+	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
+	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
 	recreateTrails();
 
@@ -897,7 +897,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (bV<99.f)
 				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // FIXME why 0.75? color should probably have at least 1 element==1.
 			else
-				color = StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
+				color = Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
 
 			const bool hidden = pd.value(secname+"/hidden", false).toBool();
 			const QString normalMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
@@ -945,7 +945,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			newP = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
-					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+					      Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					      pd.value(secname+"/albedo", 0.075f).toFloat(), // assume very dark surface
 					      pd.value(secname+"/roughness",0.9f).toFloat(),
 					      pd.value(secname+"/outgas_intensity",0.1f).toFloat(),
@@ -984,7 +984,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			newP = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
-					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+					       Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/tex_map", "nomap.png").toString(),

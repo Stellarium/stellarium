@@ -579,7 +579,7 @@ void Quasars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
 	setFlagUseQuasarMarkers(conf->value("flag_use_markers", false).toBool());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
+	setMarkerColor(Vec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 

@@ -154,7 +154,7 @@ void StelMovementMgr::init()
 	//           -1/0   ->180   SOUTH is bottom
 	//            0/-1  -> 90   EAST is bottom
 	//            0/1   ->270   WEST is bottom
-	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos", "1,0,0").toString());
+	Vec3f tmp(conf->value("navigation/init_view_pos", "1,0,0").toString());
 	//qDebug() << "initViewPos" << tmp[0] << "/" << tmp[1] << "/" << tmp[2];
 	if (tmp[2]>=1)
 	{

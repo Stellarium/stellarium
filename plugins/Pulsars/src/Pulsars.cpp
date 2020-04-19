@@ -621,8 +621,8 @@ void Pulsars::readSettingsFromConfig(void)
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
 	setFilteredMode(conf->value("filter_enabled", false).toBool());
 	setFilterValue(conf->value("filter_value", 150.f).toFloat());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
-	setGlitchColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
+	setMarkerColor(Vec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
+	setGlitchColor(Vec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
