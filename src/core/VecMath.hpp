@@ -28,6 +28,7 @@
 #include <limits>
 #include <QString>
 #include <QMatrix4x4>
+#include <QColor>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -254,6 +255,8 @@ public:
 	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
 	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1
 	inline QString toHtmlColor() const;
+	//! Convert to a QColor.
+	inline QColor toQColor() const;
 
 	T v[3];		// The 3 values
 };
@@ -754,18 +757,15 @@ template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
 	if (re.exactMatch(s))
 	{
-		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
-		v[0] = i;
-		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
-		v[1] = i;
-		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
-		v[2] = i;
+		v[0] = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		v[1] = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		v[2] = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
 	}
 	else
 	{
-		v[0] = 0.;
-		v[1] = 0.;
-		v[2] = 0.;
+		v[0] = 0;
+		v[1] = 0;
+		v[2] = 0;
 	}
 	return *this;
 }
@@ -1046,6 +1046,25 @@ template<> QString Vec3d::toHtmlColor() const
 		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
 		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
 		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
+}
+
+template<> QColor Vec3i::toQColor() const
+{
+	return QColor(v[0], v[1], v[2]);
+}
+
+template<> QColor Vec3f::toQColor() const
+{
+	QColor col;
+	col.setRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]));
+	return col;
+}
+
+template<> QColor Vec3d::toQColor() const
+{
+	QColor col;
+	col.setRgbF(v[0], v[1], v[2]);
+	return col;
 }
 
 ////////////////////////// Vector4 class methods ///////////////////////////////
