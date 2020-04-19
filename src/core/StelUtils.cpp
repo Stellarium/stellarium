@@ -402,14 +402,6 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
-QString vec3fToStr(const Vec3f &v)
-{
-	return QString("%1,%2,%3")
-		.arg(static_cast<double>(v[0]),0,'f',6)
-		.arg(static_cast<double>(v[1]),0,'f',6)
-		.arg(static_cast<double>(v[2]),0,'f',6);
-}
-
 double getDecAngle(const QString& str)
 {
 	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)

@@ -723,8 +723,8 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
 	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
-	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getHabitableColor()));
-	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor()));
+	conf->setValue("habitable_exoplanet_marker_color", getHabitableColor().toStr());
+	conf->setValue("exoplanet_marker_color", getMarkerColor().toStr());
 	conf->setValue("temperature_scale", getCurrentTemperatureScaleKey());
 
 	conf->endGroup();

@@ -200,9 +200,6 @@ namespace StelUtils
 	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
 
-	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
-	QString vec3fToStr(const Vec3f& v);
-
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian

@@ -642,8 +642,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("filter_value", QString::number(getFilterValue(), 'f', 2));
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
-	conf->setValue("glitch_color", StelUtils::vec3fToStr(getGlitchColor()));
+	conf->setValue("marker_color", getMarkerColor().toStr());
+	conf->setValue("glitch_color", getGlitchColor().toStr());
 
 	conf->endGroup();
 }

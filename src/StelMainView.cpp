@@ -1682,7 +1682,7 @@ void StelMainView::glContextDoneCurrent()
 void StelMainView::setSkyBackgroundColor(Vec3f color)
 {
 	rootItem->setSkyBackgroundColor(color);
-	StelApp::getInstance().getSettings()->setValue("color/sky_background_color", StelUtils::vec3fToStr(color));
+	StelApp::getInstance().getSettings()->setValue("color/sky_background_color", color.toStr());
 	emit skyBackgroundColorChanged(color);
 }
 

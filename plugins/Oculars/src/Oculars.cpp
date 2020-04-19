@@ -317,8 +317,8 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
-	settings->setValue("text_color", StelUtils::vec3fToStr(textColor));
-	settings->setValue("line_color", StelUtils::vec3fToStr(lineColor));	
+	settings->setValue("text_color", textColor.toStr());
+	settings->setValue("line_color", lineColor.toStr());
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));

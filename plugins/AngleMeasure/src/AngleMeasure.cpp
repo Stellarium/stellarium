@@ -523,7 +523,7 @@ void AngleMeasure::setEquatorialTextColor(Vec3f color)
 	if (equatorialTextColor != color)
 	{
 		equatorialTextColor = color;
-		conf->setValue("AngleMeasure/text_color", StelUtils::vec3fToStr(color));
+		conf->setValue("AngleMeasure/text_color", color.toStr());
 		emit equatorialTextColorChanged(color);
 	}
 }
@@ -532,7 +532,7 @@ void AngleMeasure::setEquatorialLineColor(Vec3f color)
 	if (equatorialLineColor != color)
 	{
 		equatorialLineColor = color;
-		conf->setValue("AngleMeasure/line_color", StelUtils::vec3fToStr(color));
+		conf->setValue("AngleMeasure/line_color", color.toStr());
 		emit equatorialLineColorChanged(color);
 	}
 }
@@ -541,7 +541,7 @@ void AngleMeasure::setHorizontalTextColor(Vec3f color)
 	if (horizontalTextColor != color)
 	{
 		horizontalTextColor = color;
-		conf->setValue("AngleMeasure/text_color_horizontal", StelUtils::vec3fToStr(color));
+		conf->setValue("AngleMeasure/text_color_horizontal", color.toStr());
 		emit horizontalTextColorChanged(color);
 	}
 }
@@ -550,7 +550,7 @@ void AngleMeasure::setHorizontalLineColor(Vec3f color)
 	if (horizontalLineColor != color)
 	{
 		horizontalLineColor = color;
-		conf->setValue("AngleMeasure/line_color_horizontal", StelUtils::vec3fToStr(color));
+		conf->setValue("AngleMeasure/line_color_horizontal", color.toStr());
 		emit horizontalLineColorChanged(color);
 	}
 }

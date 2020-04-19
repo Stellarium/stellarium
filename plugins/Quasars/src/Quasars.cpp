@@ -597,7 +597,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", getFlagShowQuasarsButton());
 	conf->setValue("flag_use_markers", getFlagUseQuasarMarkers());
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
+	conf->setValue("marker_color", getMarkerColor().toStr());
 
 	conf->endGroup();
 }

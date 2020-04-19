@@ -273,7 +273,7 @@ void NavStars::saveConfiguration(void)
 	conf->beginGroup("NavigationalStars");
 
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
-	conf->setValue("marker_color", StelUtils::vec3fToStr(markerColor));
+	conf->setValue("marker_color", markerColor.toStr());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("highlight_when_visible", highlightWhenVisible);
 	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
