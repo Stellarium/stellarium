@@ -649,9 +649,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", StelUtils::vec3fToHtmlColor(getReticleColor()));
-	settings->setValue("color_telescope_labels", StelUtils::vec3fToHtmlColor(getLabelColor()));
-	settings->setValue("color_telescope_circles", StelUtils::vec3fToHtmlColor(getCircleColor()));
+	settings->setValue("color_telescope_reticles", getReticleColor().toHtmlColor());
+	settings->setValue("color_telescope_labels", getLabelColor().toHtmlColor());
+	settings->setValue("color_telescope_circles", getCircleColor().toHtmlColor());
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);

@@ -735,14 +735,14 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		if (StelApp::getInstance().getFlagOverwriteInfoColor())
 		{
 			// make info text more readable...
-			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/info_text_color", "1.0,1.0,1.0").toString());
+			color = Vec3f(StelApp::getInstance().getSettings()->value("color/info_text_color", "1.0,1.0,1.0").toString());
 		}
 		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
 		{
 			// make info text more readable when atmosphere enabled at daylight.
-			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());
+			color = Vec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());
 		}
-		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
+		str.prepend(QString("<font color=%1>").arg(color.toHtmlColor()));
 		str.append(QString("</font>"));
 	}
 }

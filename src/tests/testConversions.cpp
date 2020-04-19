@@ -904,7 +904,7 @@ void TestConversions::testVec3fToHtmlColor()
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
 		Vec3f srcColor	= Vec3f(v1, v2, v3);
-		QString cColor	= StelUtils::vec3fToHtmlColor(srcColor).toUpper();
+		QString cColor	= srcColor.toHtmlColor().toUpper();
 
 		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(srcColor.toString())
@@ -949,7 +949,7 @@ void TestConversions::testStrToVec2f()
 	data << "1,0" << 1.f << 0.f;
 	data << "0,1" << 0.f << 1.f;
 	data << "0,0" << 0.f << 0.f;
-	data << "0"    << 0.f << 0.f;
+	data << "0"   << 0.f << 0.f; // may cause warning
 
 	while (data.count()>=3)
 	{
@@ -957,7 +957,7 @@ void TestConversions::testStrToVec2f()
 		float v1	= data.takeFirst().toFloat();
 		float v2	= data.takeFirst().toFloat();
 		Vec2f srcVec	= Vec2f(v1, v2);
-		Vec2f dstVec	= StelUtils::strToVec2f(vec);
+		Vec2f dstVec	= Vec2f(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(vec)
@@ -981,7 +981,7 @@ void TestConversions::testVec2fToStr()
 		float v1	= data.takeFirst().toFloat();
 		float v2	= data.takeFirst().toFloat();
 		Vec2f srcVec	= Vec2f(v1, v2);
-		QString dstVec	= StelUtils::vec2fToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(srcVec.toString())
@@ -998,8 +998,8 @@ void TestConversions::testStrToVec3f()
 	data << "1,0,1" << 1.f << 0.f << 1.f;
 	data << "0,1,0" << 0.f << 1.f << 0.f;
 	data << "0,0,0" << 0.f << 0.f << 0.f;
-	data << "0,0"    << 0.f << 0.f << 0.f;
-	data << "0"       << 0.f << 0.f << 0.f;
+	data << "0,0"   << 0.f << 0.f << 0.f; // may cause warning
+	data << "0"     << 0.f << 0.f << 0.f; // may cause warning
 
 	while (data.count()>=4)
 	{
@@ -1008,7 +1008,13 @@ void TestConversions::testStrToVec3f()
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
 		Vec3f srcVec	= Vec3f(v1, v2, v3);
-		Vec3f dstVec	= StelUtils::strToVec3f(vec);
+		Vec3f dstVec	= StelUtils::strToVec3f(vec); // DEPRECATED
+
+		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(vec)
+							   .arg(dstVec.toString())
+							   .arg(srcVec.toString())));
+		dstVec	= Vec3f(vec); // NEW SYNTAX
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(vec)
@@ -1033,7 +1039,8 @@ void TestConversions::testVec3fToStr()
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
 		Vec3f srcVec	= Vec3f(v1, v2, v3);
-		QString dstVec	= StelUtils::vec3fToStr(srcVec);
+		//QString dstVec	= StelUtils::vec3fToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(srcVec.toString())
@@ -1050,9 +1057,9 @@ void TestConversions::testStrToVec4d()
 	data << "1,0,1,0" << 1. << 0. << 1. << 0.;
 	data << "0,1,0,1" << 0. << 1. << 0. << 1.;
 	data << "0,0,0,0" << 0. << 0. << 0. << 0.;
-	data << "0,0,0"    << 0. << 0. << 0. << 0.;
-	data << "0,0"       << 0. << 0. << 0. << 0.;
-	data << "0"          << 0. << 0. << 0. << 0.;
+	data << "0,0,0"   << 0. << 0. << 0. << 0.; // may cause warning
+	data << "0,0"     << 0. << 0. << 0. << 0.; // may cause warning
+	data << "0"       << 0. << 0. << 0. << 0.; // may cause warning
 
 	while (data.count()>=5)
 	{
@@ -1062,7 +1069,7 @@ void TestConversions::testStrToVec4d()
 		double v3	= data.takeFirst().toDouble();
 		double v4	= data.takeFirst().toDouble();
 		Vec4d srcVec	= Vec4d(v1, v2, v3, v4);
-		Vec4d dstVec	= StelUtils::strToVec4d(vec);
+		Vec4d dstVec	= Vec4d(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(vec)
@@ -1088,7 +1095,7 @@ void TestConversions::testVec4dToStr()
 		double v3	= data.takeFirst().toDouble();
 		double v4	= data.takeFirst().toDouble();
 		Vec4d srcVec	= Vec4d(v1, v2, v3, v4);
-		QString dstVec	= StelUtils::vec4dToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(srcVec.toString())

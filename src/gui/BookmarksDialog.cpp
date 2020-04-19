@@ -264,7 +264,7 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 	clearHighlightsButtonPressed(); // Enable fool protection
 	int fontSize = StelApp::getInstance().getScreenFontSize();
 	HighlightMgr* hlMgr = GETSTELMODULE(HighlightMgr);
-	QString color = StelUtils::vec3fToHtmlColor(hlMgr->getColor());
+	QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
 	for (auto bm : bookmarksCollection)

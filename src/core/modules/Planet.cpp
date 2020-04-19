@@ -1898,7 +1898,7 @@ bool Planet::initShader()
 
 	QSettings* settings = StelApp::getInstance().getSettings();
 	settings->sync();
-	shadowPolyOffset = StelUtils::strToVec2f(settings->value("astro/planet_shadow_polygonoffset", StelUtils::vec2fToStr(Vec2f(0.0f, 0.0f))).toString());
+	shadowPolyOffset = Vec2f(settings->value("astro/planet_shadow_polygonoffset", Vec2f(0.0f, 0.0f).toStr()).toString());
 	//qDebug()<<"Shadow poly offset"<<shadowPolyOffset;
 
 	// Shader text is loaded from file

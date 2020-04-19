@@ -97,9 +97,9 @@ public:
 	//! Uses default primitive type conversion
 	template <class T2> inline explicit Vector2(const Vector2<T2>&);
 	inline Vector2(T, T);
-	//! Constructor from QString
+	//! Constructor from a comma-separated QString like "2,4" or "2.1,4.2"
 	inline explicit Vector2(QString s);
-	//! Constructor from QStringList
+	//! Constructor from a QStringList like { "2", "4" } or { "2.1", "4.2", "6.3" }
 	inline explicit Vector2(QStringList s);
 
 	//! Assignment from array
@@ -156,7 +156,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
-	//! Compact comma-separated string without brackets and spaces
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
 	inline QString toStr() const;
 
 	T v[2];
@@ -177,9 +178,9 @@ public:
 	//! @warning Does not check array size, make sure it has at least 3 elements
 	inline explicit Vector3(const T*);
 	inline Vector3(T, T, T);
-	//! Constructor from QString
+	//! Constructor from a comma-separated QString like "2,4,6" or "2.1,4.2,6.3"
 	inline explicit Vector3(QString s);
-	//! Constructor from QStringList
+	//! Constructor from a QStringList like { "2", "4", "6" } or { "2.1", "4.2", "6.3" }
 	inline explicit Vector3(QStringList s);
 
 	//inline Vector3& operator=(const Vector3&);
@@ -242,7 +243,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
-	//! Compact comma-separated string without brackets and spaces
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
 	inline QString toStr() const;
 	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
 	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1
@@ -275,9 +277,9 @@ public:
 	//! Creates an Vector4 with xyz set to the given Vector3, and given last value as w
 	inline Vector4(const Vector3<T>&, T);
 	inline Vector4(T, T, T, T);
-	//! Constructor from QString
+	//! Constructor from a comma-separated QString like "2,4,6,8" or "2.1,4.2,6.3,8.4"
 	inline explicit Vector4(QString s);
-	//! Constructor from QStringList
+	//! Constructor from a QStringList like { "2", "4", "6", "8" } or { "2.1", "4.2", "6.3", "8.4" }
 	inline explicit Vector4(QStringList s);
 
 
@@ -318,7 +320,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
-	//! Compact comma-separated string without brackets and spaces
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
 	inline QString toStr() const;
 
 	T v[4];		// The 4 values

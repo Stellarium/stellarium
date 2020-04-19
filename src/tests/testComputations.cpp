@@ -401,15 +401,15 @@ void TestComputations::testVector2Operators()
 
 	while (data.count() >= 8)
 	{
-		firstF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		secondF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		firstF		= Vec2f(data.takeFirst().toString());
+		secondF	= Vec2f(data.takeFirst().toString());
 		vecF		= firstF;
 		expected	= data.takeFirst().toBool();
-		sumF	= StelUtils::strToVec2f(data.takeFirst().toString());
-		diffF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		mulF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		smF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		cwmF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		sumF	= Vec2f(data.takeFirst().toString());
+		diffF		= Vec2f(data.takeFirst().toString());
+		mulF		= Vec2f(data.takeFirst().toString());
+		smF		= Vec2f(data.takeFirst().toString());
+		cwmF	= Vec2f(data.takeFirst().toString());
 
 		firstD.set((double)firstF[0], (double)firstF[1]);
 		vecD		= firstD;
