@@ -312,8 +312,7 @@ void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyNam
 	toolButton->setProperty("iniName", iniName);
 	toolButton->setProperty("moduleName", moduleName);
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
-	Vec3d vColor = prop->getValue().value<Vec3f>().toVec3d();
-	QColor color=QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor color=prop->getValue().value<Vec3f>().toQColor();
 	// Use style sheet to create a nice button :)
 	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
 	toolButton->setFixedSize(QSize(18, 18));
@@ -346,7 +345,7 @@ void StelDialog::askColor()
 		return;
 	}
 	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
-	QColor color = QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor color = vColor.toQColor();
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{

@@ -435,7 +435,7 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
 	Vec4f textColor(qMin(1.0f, 1.25f*color[0]), qMin(1.0f, 1.25f*color[1]), qMin(1.0f, 1.25f*color[2]), fader.getInterstate());
-	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
+	sPainter.setColor(color, fader.getInterstate());
 
 	sPainter.setFont(font);
 	ViewportEdgeIntersectCallbackData userData(&sPainter);

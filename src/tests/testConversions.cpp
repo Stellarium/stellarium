@@ -1054,6 +1054,88 @@ void TestConversions::testVec3dSetFromHtmlColor()
 	}
 }
 
+void TestConversions::testVec3iQColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 255 << 255 << 255;
+	data << "#FF0000" << 255 << 0 << 0;
+	data << "#00FF00" << 0 << 255 << 0;
+	data << "#0000FF" << 0 << 0 << 255;
+	data << "#999999" << 153 << 153 << 153;
+	data << "#666666" << 102 << 102 << 102;
+
+	while (data.count()>=4)
+	{
+		QString colorStr= data.takeFirst().toString();
+		int v1	= data.takeFirst().toInt();
+		int v2	= data.takeFirst().toInt();
+		int v3	= data.takeFirst().toInt();
+		Vec3i expected	= Vec3i(v1, v2, v3);
+		Vec3i v3icolor	= Vec3i().setFromHtmlColor(colorStr);
+		QString qcolStr  = v3icolor.toQColor().name(QColor::HexRgb).toUpper();
+
+		QVERIFY2(qcolStr == colorStr,
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
+								    .arg(qcolStr)
+								    .arg(expected.toHtmlColor())));
+	}
+}
+void TestConversions::testVec3fQColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 1.f << 1.f << 1.f;
+	data << "#FF0000" << 1.f << 0.f << 0.f;
+	data << "#00FF00" << 0.f << 1.f << 0.f;
+	data << "#0000FF" << 0.f << 0.f << 1.f;
+	data << "#999999" << .6f << .6f << .6f;
+	data << "#666666" << .4f << .4f << .4f;
+
+	while (data.count()>=4)
+	{
+		QString colorStr= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f expected	= Vec3f(v1, v2, v3);
+		Vec3f v3fcolor	= Vec3f().setFromHtmlColor(colorStr);
+		QString qcolStr  = v3fcolor.toQColor().name(QColor::HexRgb).toUpper();
+
+		QVERIFY2(qcolStr == colorStr,
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
+								    .arg(qcolStr)
+								    .arg(expected.toHtmlColor())));
+	}
+}
+void TestConversions::testVec3dQColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 1. << 1. << 1.;
+	data << "#FF0000" << 1. << 0. << 0.;
+	data << "#00FF00" << 0. << 1. << 0.;
+	data << "#0000FF" << 0. << 0. << 1.;
+	data << "#999999" << .6 << .6 << .6;
+	data << "#666666" << .4 << .4 << .4;
+
+	while (data.count()>=4)
+	{
+		QString colorStr= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d expected	= Vec3d(v1, v2, v3);
+		Vec3d v3dcolor	= Vec3d().setFromHtmlColor(colorStr);
+		QString qcolStr  = v3dcolor.toQColor().name(QColor::HexRgb).toUpper();
+
+		QVERIFY2(qcolStr == colorStr,
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
+								    .arg(qcolStr)
+								    .arg(expected.toHtmlColor())));
+	}
+}
+
 void TestConversions::testStrToVec2f()
 {
 	QVariantList data;

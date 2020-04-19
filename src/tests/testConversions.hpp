@@ -52,6 +52,9 @@ private slots:
 	void testVec3iSetFromHtmlColor();
 	void testVec3fSetFromHtmlColor();
 	void testVec3dSetFromHtmlColor();
+	void testVec3iQColor();
+	void testVec3fQColor();
+	void testVec3dQColor();
 	void testStrToVec2f();
 	void testVec2fToStr();
 	void testStrToVec3f();

@@ -183,6 +183,8 @@ public:
 	inline explicit Vector3(QString s);
 	//! Constructor from a QStringList like { "2", "4", "6" } or { "2.1", "4.2", "6.3" }
 	inline explicit Vector3(QStringList s);
+	//! Constructor from a QColor
+	inline explicit Vector3(QColor c);
 
 	//inline Vector3& operator=(const Vector3&);
 
@@ -289,7 +291,8 @@ public:
 	inline explicit Vector4(QString s);
 	//! Constructor from a QStringList like { "2", "4", "6", "8" } or { "2.1", "4.2", "6.3", "8.4" }
 	inline explicit Vector4(QStringList s);
-
+	//! Constructor from a QColor
+	inline explicit Vector4(QColor c);
 
 	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
@@ -331,6 +334,8 @@ public:
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
 	inline QString toStr() const;
+	//! Convert to a QColor.
+	inline QColor toQColor() const;
 
 	T v[4];		// The 4 values
 };
@@ -752,6 +757,10 @@ template<> Vec3d::Vector3(QStringList s) : Vector3{s.value(0, "0.").toDouble(),s
 // Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
 template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
 
+template<> Vec3i::Vector3(QColor c) : Vector3{c.red(), c.green(), c.blue()}{}
+template<> Vec3f::Vector3(QColor c) : Vector3{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF())}{}
+template<> Vec3d::Vector3(QColor c) : Vector3{c.redF(), c.greenF(), c.blueF()}{}
+
 template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 {
 	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
@@ -1055,16 +1064,12 @@ template<> QColor Vec3i::toQColor() const
 
 template<> QColor Vec3f::toQColor() const
 {
-	QColor col;
-	col.setRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]));
-	return col;
+	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]));
 }
 
 template<> QColor Vec3d::toQColor() const
 {
-	QColor col;
-	col.setRgbF(v[0], v[1], v[2]);
-	return col;
+	return QColor::fromRgbF(v[0], v[1], v[2]);
 }
 
 ////////////////////////// Vector4 class methods ///////////////////////////////
@@ -1125,6 +1130,10 @@ template<> Vec4d::Vector4(QStringList s) : Vector4{s.value(0, "0.").toDouble(),s
 
 // Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w"
 template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
+
+template<> Vec4i::Vector4(QColor c) : Vector4{c.red(), c.green(), c.blue(), c.alpha()}{}
+template<> Vec4f::Vector4(QColor c) : Vector4{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF()), static_cast<float>(c.alphaF())}{}
+template<> Vec4d::Vector4(QColor c) : Vector4{c.redF(), c.greenF(), c.blueF(), c.alphaF()}{}
 
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
 {
@@ -1278,6 +1287,20 @@ template<> QString Vec4d::toStr() const
 			.arg(v[3],0,'f',10);
 }
 
+template<> QColor Vec4i::toQColor() const
+{
+	return QColor(v[0], v[1], v[2], v[3]);
+}
+
+template<> QColor Vec4f::toQColor() const
+{
+	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]), static_cast<qreal>(v[3]));
+}
+
+template<> QColor Vec4d::toQColor() const
+{
+	return QColor::fromRgbF(v[0], v[1], v[2], v[3]);
+}
 ////////////////////////// Matrix3 class methods ///////////////////////////////
 
 template<class T> Matrix3<T>::Matrix3() {}
