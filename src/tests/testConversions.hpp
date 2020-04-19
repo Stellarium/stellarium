@@ -46,8 +46,12 @@ private slots:
 	void testHoursToHMSStrLowPrecision();
 	void testRadToHMSStr();
 	void testRadToDecDegStr();
+	void testVec3iToHtmlColor();
 	void testVec3fToHtmlColor();
-	void testHtmlColorToVec3f();
+	void testVec3dToHtmlColor();
+	void testVec3iSetFromHtmlColor();
+	void testVec3fSetFromHtmlColor();
+	void testVec3dSetFromHtmlColor();
 	void testStrToVec2f();
 	void testVec2fToStr();
 	void testStrToVec3f();

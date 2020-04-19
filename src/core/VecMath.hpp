@@ -82,7 +82,7 @@ typedef Matrix3<float> Mat3f;
 
 //! @class Vector2
 //! A templatized 2d vector compatible with OpenGL.
-//! Use Vec2d or Vec2f typdef for vectors of double and float respectively.
+//! Use Vec2i for integer and Vec2d or Vec2f typedef for vectors of double and float respectively.
 template<class T> class Vector2
 {
 public:
@@ -166,7 +166,7 @@ public:
 
 //! @class Vector3
 //! A templatized 3d vector compatible with OpenGL.
-//! Use Vec3d or Vec3f typdef for vectors of double and float respectively.
+//! Use Vec3i for integer and Vec3d or Vec3f typedef for vectors of double and float respectively.
 template<class T> class Vector3
 {
 public:
@@ -190,6 +190,11 @@ public:
 	inline Vector3& operator=(const T*);
 	//template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
+
+	//! Assign from HTML color
+	//! The Vec3i type will have values 0...255
+	//! Vec3f and Vec3d will have [0...[1
+	inline Vector3 setFromHtmlColor(QString s);
 
 	inline bool operator==(const Vector3<T>&) const;
 	inline bool operator!=(const Vector3<T>&) const;
@@ -256,7 +261,7 @@ public:
 
 //! @class Vector4
 //! A templatized 4d vector compatible with OpenGL.
-//! Use Vec4d or Vec4f typdef for vectors of double and float respectively.
+//! Use Vec4i for integer and Vec4d or Vec4f typedef for vectors of double and float respectively.
 template<class T> class Vector4
 {
 public:
@@ -744,6 +749,68 @@ template<> Vec3d::Vector3(QStringList s) : Vector3{s.value(0, "0.").toDouble(),s
 // Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
 template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
 
+template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
+{
+	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	if (re.exactMatch(s))
+	{
+		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		v[0] = i;
+		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		v[1] = i;
+		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		v[2] = i;
+	}
+	else
+	{
+		v[0] = 0.;
+		v[1] = 0.;
+		v[2] = 0.;
+	}
+	return *this;
+}
+
+template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
+{
+	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	if (re.exactMatch(s))
+	{
+		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		v[0] = static_cast<float>(i) / 255.f;
+		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		v[1] = static_cast<float>(i) / 255.f;
+		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		v[2] = static_cast<float>(i) / 255.f;
+	}
+	else
+	{
+		v[0] = 0.f;
+		v[1] = 0.f;
+		v[2] = 0.f;
+	}
+	return *this;
+}
+
+template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
+{
+	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	if (re.exactMatch(s))
+	{
+		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		v[0] = static_cast<double>(i) / 255.;
+		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		v[1] = static_cast<double>(i) / 255.;
+		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		v[2] = static_cast<double>(i) / 255.;
+	}
+	else
+	{
+		v[0] = 0.;
+		v[1] = 0.;
+		v[2] = 0.;
+	}
+	return *this;
+}
 //template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
 //{
 //	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];

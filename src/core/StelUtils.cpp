@@ -410,29 +410,6 @@ QString vec3fToStr(const Vec3f &v)
 		.arg(static_cast<double>(v[2]),0,'f',6);
 }
 
-Vec3f htmlColorToVec3f(const QString& c)
-{
-	Vec3f v;
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(c))
-	{
-		bool ok;
-		int i = re.cap(1).toInt(&ok, 16);
-		v[0] = static_cast<float>(i) / 255.f;
-		i = re.cap(2).toInt(&ok, 16);
-		v[1] = static_cast<float>(i) / 255.f;
-		i = re.cap(3).toInt(&ok, 16);
-		v[2] = static_cast<float>(i) / 255.f;
-	}
-	else
-	{
-		v[0] = 0.;
-		v[1] = 0.;
-		v[2] = 0.;
-	}
-	return v;
-}
-
 double getDecAngle(const QString& str)
 {
 	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)

@@ -884,6 +884,35 @@ void TestConversions::testRadToDecDegStr()
 	}
 }
 
+void TestConversions::testVec3iToHtmlColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 255 << 255 << 255;
+	data << "#FF0000" << 255 << 0 << 0;
+	data << "#00FF00" << 0 << 255 << 0;
+	data << "#0000FF" << 0 << 0 << 255;
+	data << "#999999" << 153 << 153 << 153;
+	data << "#666666" << 102 << 102 << 102;
+	data << "#000000" << 0 << 0 << 0;
+	data << "#000000" << 0 << 0 << 0;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		int v1	= data.takeFirst().toInt();
+		int v2	= data.takeFirst().toInt();
+		int v3	= data.takeFirst().toInt();
+		Vec3i srcColor	= Vec3i(v1, v2, v3);
+		QString cColor	= srcColor.toHtmlColor().toUpper();
+
+		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcColor.toString())
+							   .arg(cColor)
+							   .arg(color)));
+	}
+}
+
 void TestConversions::testVec3fToHtmlColor()
 {
 	QVariantList data;
@@ -912,8 +941,64 @@ void TestConversions::testVec3fToHtmlColor()
 							   .arg(color)));
 	}
 }
+void TestConversions::testVec3dToHtmlColor()
+{
+	QVariantList data;
 
-void TestConversions::testHtmlColorToVec3f()
+	data << "#FFFFFF" << 1. << 1. << 1.;
+	data << "#FF0000" << 1. << 0. << 0.;
+	data << "#00FF00" << 0. << 1. << 0.;
+	data << "#0000FF" << 0. << 0. << 1.;
+	data << "#999999" << .6 << .6 << .6;
+	data << "#666666" << .4 << .4 << .4;
+	data << "#000000" << 0. << 0. << 0.;
+	data << "#000000" << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d srcColor	= Vec3d(v1, v2, v3);
+		QString cColor	= srcColor.toHtmlColor().toUpper();
+
+		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcColor.toString())
+							   .arg(cColor)
+							   .arg(color)));
+	}
+}
+
+void TestConversions::testVec3iSetFromHtmlColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 255 << 255 << 255;
+	data << "#FF0000" << 255 << 0 << 0;
+	data << "#00FF00" << 0 << 255 << 0;
+	data << "#0000FF" << 0 << 0 << 255;
+	data << "#999999" << 153 << 153 << 153;
+	data << "#666666" << 102 << 102 << 102;
+	data << "#000"    << 0 << 0 << 0;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		int v1	= data.takeFirst().toInt();
+		int v2	= data.takeFirst().toInt();
+		int v3	= data.takeFirst().toInt();
+		Vec3i expected	= Vec3i(v1, v2, v3);
+		Vec3i v3icolor	= Vec3i().setFromHtmlColor(color);
+
+		QVERIFY2(v3icolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(color)
+							   .arg(v3icolor.toString())
+							   .arg(expected.toString())));
+	}
+}
+
+void TestConversions::testVec3fSetFromHtmlColor()
 {
 	QVariantList data;
 
@@ -932,11 +1017,39 @@ void TestConversions::testHtmlColorToVec3f()
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
 		Vec3f expected	= Vec3f(v1, v2, v3);
-		Vec3f v3fcolor	= StelUtils::htmlColorToVec3f(color);
+		Vec3f v3fcolor	= Vec3f().setFromHtmlColor(color);
 
 		QVERIFY2(v3fcolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
 							   .arg(color)
 							   .arg(v3fcolor.toString())
+							   .arg(expected.toString())));
+	}
+}
+
+void TestConversions::testVec3dSetFromHtmlColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 1. << 1. << 1.;
+	data << "#FF0000" << 1. << 0. << 0.;
+	data << "#00FF00" << 0. << 1. << 0.;
+	data << "#0000FF" << 0. << 0. << 1.;
+	data << "#999999" << .6 << .6 << .6;
+	data << "#666666" << .4 << .4 << .4;
+	data << "#000"    << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d expected	= Vec3d(v1, v2, v3);
+		Vec3d v3dcolor	= Vec3d().setFromHtmlColor(color);
+
+		QVERIFY2(v3dcolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(color)
+							   .arg(v3dcolor.toString())
 							   .arg(expected.toString())));
 	}
 }

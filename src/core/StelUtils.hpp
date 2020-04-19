@@ -203,10 +203,6 @@ namespace StelUtils
 	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
 	QString vec3fToStr(const Vec3f& v);
 
-	//! Converts a color in HTML notation to a Vec3f.
-	//! @param c The HTML spec color string
-	Vec3f htmlColorToVec3f(const QString& c);
-
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
