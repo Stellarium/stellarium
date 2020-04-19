@@ -652,11 +652,11 @@ static float parseAngle(const QString& s, bool* ok)
 	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
 	if (reg.exactMatch(s))
 	{
-		float deg = reg.capturedTexts()[1].toFloat(ok);
+		float deg = reg.cap(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
 		if (!*ok) return 0;
 		return deg + min / 60 + sec / 3600;
 	}
@@ -677,11 +677,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.capturedTexts()[1].trimmed(), &ok);
+		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.capturedTexts()[2].trimmed(), &ok);
+		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.capturedTexts()[3].trimmed().toInt(&ok);
+		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
@@ -693,11 +693,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
+		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
+		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.capturedTexts()[1].trimmed();
+		ret.name = reg.cap(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}

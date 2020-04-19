@@ -52,7 +52,7 @@ bool ASCOMSupport::isASCOMSupported()
 	QRegExp versionRx("^([^\\.]*)\\.([^\\.]*)$");
 	if (versionRx.exactMatch(version))
 	{
-		majorVersion = versionRx.capturedTexts().at(1).trimmed();
+		majorVersion = versionRx.cap(1).trimmed();
 	}
 
 	// Check ASCOM Platform version to be 6 or greater

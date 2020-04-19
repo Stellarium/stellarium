@@ -161,15 +161,15 @@ void NomenclatureMgr::loadNomenclature()
 			else
 			{
 				// Read the planet name
-				planet	= recRx.capturedTexts().at(1).trimmed();
+				planet	= recRx.cap(1).trimmed();
 				// Read the ID of feature
-				featureId	= recRx.capturedTexts().at(2).toInt();
+				featureId	= recRx.cap(2).toInt();
 				// Read the name of feature and context
-				ctxt		= recRx.capturedTexts().at(3).trimmed();
+				ctxt		= recRx.cap(3).trimmed();
 				if (ctxRx.exactMatch(ctxt))
 				{
-					name = ctxRx.capturedTexts().at(1).trimmed();
-					context = ctxRx.capturedTexts().at(2).trimmed();
+					name = ctxRx.cap(1).trimmed();
+					context = ctxRx.cap(2).trimmed();
 				}
 				else
 				{
@@ -177,14 +177,14 @@ void NomenclatureMgr::loadNomenclature()
 					context = "";
 				}
 				// Read the type of feature
-				QString ntypecode	= recRx.capturedTexts().at(4).trimmed();
+				QString ntypecode	= recRx.cap(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
-				latitude	= recRx.capturedTexts().at(5).toFloat();
+				latitude	= recRx.cap(5).toFloat();
 				// Read the longitude of feature
-				longitude	= recRx.capturedTexts().at(6).toFloat();
+				longitude	= recRx.cap(6).toFloat();
 				// Read the size of feature
-				size		= recRx.capturedTexts().at(7).toFloat();
+				size		= recRx.cap(7).toFloat();
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{

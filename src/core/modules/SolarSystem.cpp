@@ -388,8 +388,8 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		}
 		else
 		{
-			planetId = recRx.capturedTexts().at(1).trimmed();
-			nativeName = recRx.capturedTexts().at(3).trimmed(); // Use translatable text
+			planetId = recRx.cap(1).trimmed();
+			nativeName = recRx.cap(3).trimmed(); // Use translatable text
 			planetNativeNamesMap[planetId] = nativeName;
 			readOk++;
 		}

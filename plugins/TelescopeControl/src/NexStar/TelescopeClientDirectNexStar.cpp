@@ -52,8 +52,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	if (paramRx.exactMatch(parameters))
 	{
 		// This QRegExp only matches valid integers
-		serialDeviceName = paramRx.capturedTexts().at(1).trimmed();
-		time_delay       = paramRx.capturedTexts().at(2).toInt();
+		serialDeviceName = paramRx.cap(1).trimmed();
+		time_delay       = paramRx.cap(2).toInt();
 	}
 	else
 	{

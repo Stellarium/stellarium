@@ -58,8 +58,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	QString url;
 	if (paramRx.exactMatch(params))
 	{
-		refresh_delay = paramRx.capturedTexts().at(1).toInt() / 1000; // convert microseconds to milliseconds
-		url           = paramRx.capturedTexts().at(2).trimmed();
+		refresh_delay = paramRx.cap(1).toInt() / 1000; // convert microseconds to milliseconds
+		url           = paramRx.cap(2).trimmed();
 	}
 	else
 	{

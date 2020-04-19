@@ -747,14 +747,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int hip = recordRx.capturedTexts().at(1).toInt(&ok);
+			int hip = recordRx.cap(1).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
+					   << " - failed to convert " << recordRx.cap(1) << "to a number";
 				continue;
 			}
-			QString englishCommonName = recordRx.capturedTexts().at(2).trimmed();
+			QString englishCommonName = recordRx.cap(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -789,7 +789,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				commonNamesIndex[englishNameCap] = hip;
 			}
 
-			QString reference = recordRx.capturedTexts().at(3).trimmed();
+			QString reference = recordRx.cap(3).trimmed();
 			if (!reference.isEmpty())
 			{
 				if (referenceMap.find(hip)!=referenceMap.end())
@@ -1376,14 +1376,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
-		return searchHP(rx.capturedTexts().at(2).toInt());
+		return searchHP(rx.cap(2).toInt());
 	}
 
 	// Search by SAO number if it's an SAO formatted number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
+		auto sao = saoStarsIndex.find(rx2.cap(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
@@ -1392,7 +1392,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
+		auto hd = hdStarsIndex.find(rx3.cap(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
@@ -1401,7 +1401,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
+		auto hr = hrStarsIndex.find(rx4.cap(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
@@ -1465,14 +1465,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
-		return searchHP(rx.capturedTexts().at(2).toInt());
+		return searchHP(rx.cap(2).toInt());
 	}
 
 	// Search by SAO number if it's an SAO formated number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
+		auto sao = saoStarsIndex.find(rx2.cap(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
@@ -1481,7 +1481,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
+		auto hd = hdStarsIndex.find(rx3.cap(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
@@ -1490,7 +1490,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
+		auto hr = hrStarsIndex.find(rx4.cap(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
@@ -1675,7 +1675,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (hpRx.exactMatch(objw))
 	{
 		bool ok;
-		int hpNum = hpRx.capturedTexts().at(2).toInt(&ok);
+		int hpNum = hpRx.cap(2).toInt(&ok);
 		if (ok)
 		{
 			StelObjectP s = searchHP(hpNum);
@@ -1692,8 +1692,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (saoRx.exactMatch(objw))
 	{
-		bool ok;
-		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
+		int saoNum = saoRx.cap(2).toInt();
 		auto sao = saoStarsIndex.find(saoNum);
 		if (sao!=saoStarsIndex.end())
 		{
@@ -1711,8 +1710,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (hdRx.exactMatch(objw))
 	{
-		bool ok;
-		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
+		int hdNum = hdRx.cap(2).toInt();
 		auto hd = hdStarsIndex.find(hdNum);
 		if (hd!=hdStarsIndex.end())
 		{
@@ -1730,8 +1728,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (hrRx.exactMatch(objw))
 	{
-		bool ok;
-		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
+		int hrNum = hrRx.cap(2).toInt();
 		auto hr = hrStarsIndex.find(hrNum);
 		if (hr!=hrStarsIndex.end())
 		{

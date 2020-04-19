@@ -37,9 +37,9 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 	int port = 0;
 	if (paramRx.exactMatch(params))
 	{
-		host = paramRx.capturedTexts().at(1).trimmed();
-		port = paramRx.capturedTexts().at(2).toInt();
-		mDevice = paramRx.capturedTexts().at(3).trimmed();
+		host = paramRx.cap(1).trimmed();
+		port = paramRx.cap(2).toInt();
+		mDevice = paramRx.cap(3).trimmed();
 	}
 
 	mConnection.setServer(host.toStdString().c_str(), port);

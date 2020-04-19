@@ -436,16 +436,16 @@ void AsterismMgr::loadNames(const QString& namesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the asterism exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				ctxt = recRx.capturedTexts().at(2);
+				ctxt = recRx.cap(2);
 				if (ctxRx.exactMatch(ctxt))
 				{
-					aster->englishName = ctxRx.capturedTexts().at(1);
-					aster->context = ctxRx.capturedTexts().at(2);
+					aster->englishName = ctxRx.cap(1);
+					aster->context = ctxRx.cap(2);
 				}
 				else
 				{

@@ -53,8 +53,8 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 	QRegExp paramRx("^([^:]*):([^:]*)$");
 	if (paramRx.exactMatch(params))
 	{
-		mAscomDeviceId = paramRx.capturedTexts().at(1).trimmed();
-		mAscomUseDeviceEqCoordType = paramRx.capturedTexts().at(2).trimmed() == "true";
+		mAscomDeviceId = paramRx.cap(1).trimmed();
+		mAscomUseDeviceEqCoordType = paramRx.cap(2).trimmed() == "true";
 	}
 
 	qDebug() << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;

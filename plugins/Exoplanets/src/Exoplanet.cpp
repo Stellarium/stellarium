@@ -534,9 +534,9 @@ QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 	QRegExp dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
 	if (dataRx.exactMatch(ptype))
 	{
-		QString spectral = dataRx.capturedTexts().at(1).trimmed();
-		QString zone = dataRx.capturedTexts().at(2).trimmed();
-		QString size = dataRx.capturedTexts().at(3).trimmed();
+		QString spectral = dataRx.cap(1).trimmed();
+		QString zone = dataRx.cap(2).trimmed();
+		QString size = dataRx.cap(3).trimmed();
 
 		result = QString("%1-%2 %3")
 				.arg(spectral)

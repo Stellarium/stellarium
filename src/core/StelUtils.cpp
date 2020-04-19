@@ -96,10 +96,9 @@ double hmsStrToHours(const QString& s)
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
 	if (!reg.exactMatch(s))
 		return 0.;
-	QStringList list = reg.capturedTexts();
-	uint hrs = list[1].toUInt();
-	uint min = list[2].toUInt();
-	int sec = list[3].toInt();
+	uint hrs = reg.cap(1).toUInt();
+	uint min = reg.cap(2).toUInt();
+	int sec = reg.cap(3).toInt();
 
 	return hmsToHours(hrs, min, sec);
 }
@@ -375,11 +374,10 @@ double dmsStrToRad(const QString& s)
 	QRegExp reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
 	if (!reg.exactMatch(s))
 		return 0;
-	QStringList list = reg.capturedTexts();
-	bool sign = (list[1] == "-");
-	int deg = list[2].toInt();
-	uint min = list[3].toUInt();
-	int sec = list[4].toInt();
+	bool sign = (reg.cap(1) == "-");
+	int deg = reg.cap(2).toInt();
+	uint min = reg.cap(3).toUInt();
+	int sec = reg.cap(4).toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
 	if (sign)
@@ -468,11 +466,11 @@ Vec3f htmlColorToVec3f(const QString& c)
 	if (re.exactMatch(c))
 	{
 		bool ok;
-		int i = re.capturedTexts().at(1).toInt(&ok, 16);
+		int i = re.cap(1).toInt(&ok, 16);
 		v[0] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(2).toInt(&ok, 16);
+		i = re.cap(2).toInt(&ok, 16);
 		v[1] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(3).toInt(&ok, 16);
+		i = re.cap(3).toInt(&ok, 16);
 		v[2] = static_cast<float>(i) / 255.f;
 	}
 	else
@@ -1195,17 +1193,17 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	{
 		bool error = false;
 		bool ok;
-		*y = finalRe.capturedTexts().at(1).toInt(&ok);
+		*y = finalRe.cap(1).toInt(&ok);
 		error = error || !ok;
-		*m = finalRe.capturedTexts().at(2).toInt(&ok);
+		*m = finalRe.cap(2).toInt(&ok);
 		error = error || !ok;
-		*d = finalRe.capturedTexts().at(3).toInt(&ok);
+		*d = finalRe.cap(3).toInt(&ok);
 		error = error || !ok;
-		*h = finalRe.capturedTexts().at(4).toInt(&ok);
+		*h = finalRe.cap(4).toInt(&ok);
 		error = error || !ok;
-		*min = finalRe.capturedTexts().at(5).toInt(&ok);
+		*min = finalRe.cap(5).toInt(&ok);
 		error = error || !ok;
-		*s = finalRe.capturedTexts().at(6).toFloat(&ok);
+		*s = finalRe.cap(6).toFloat(&ok);
 		error = error || !ok;
 		if (!error)
 			return true;

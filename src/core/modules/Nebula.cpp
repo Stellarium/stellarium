@@ -1066,7 +1066,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (GlClRx.exactMatch(m)) // Globular Clusters
 	{
-		switch(glclass.indexOf(GlClRx.capturedTexts().at(1).trimmed()))
+		switch(glclass.indexOf(GlClRx.cap(1).trimmed()))
 		{
 			case 0:
 				r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
@@ -1118,7 +1118,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		QStringList rtxt;
 		static const QStringList occlass = { "I", "II", "III", "IV"};
 		static const QStringList ocrich = { "p", "m", "r"};
-		switch(occlass.indexOf(OClRx.capturedTexts().at(1).trimmed()))
+		switch(occlass.indexOf(OClRx.cap(1).trimmed()))
 		{
 			case 0:
 				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
@@ -1136,7 +1136,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
 				break;
 		}
-		switch(OClRx.capturedTexts().at(2).toInt())
+		switch(OClRx.cap(2).toInt())
 		{
 			case 1:
 				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
@@ -1151,7 +1151,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 		}
-		switch(ocrich.indexOf(OClRx.capturedTexts().at(3).trimmed()))
+		switch(ocrich.indexOf(OClRx.cap(3).trimmed()))
 		{
 			case 0:
 				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
@@ -1166,7 +1166,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
 				break;
 		}
-		if (!OClRx.capturedTexts().at(4).trimmed().isEmpty())
+		if (!OClRx.cap(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
 		r = rtxt.join(",<br />");
@@ -1184,7 +1184,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		QStringList rtx;
 		static const QStringList rnclass = { "I", "II", "I-II", "II P", "P"};
 		static const QStringList rnbrightness = { "VBR", "VB", "BR", "M", "F", "VF", ":"};
-		switch(rnbrightness.indexOf(VdBRx.capturedTexts().at(2).trimmed()))
+		switch(rnbrightness.indexOf(VdBRx.cap(2).trimmed()))
 		{
 			case 0:
 			case 1:
@@ -1209,7 +1209,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("undocumented brightness of reflection nebulae", "Reflection Nebulae Brightness");
 				break;
 		}
-		switch(rnclass.indexOf(VdBRx.capturedTexts().at(1).trimmed()))
+		switch(rnclass.indexOf(VdBRx.cap(1).trimmed()))
 		{
 			case 0:
 				rtx << qc_("the illuminating star is embedded in the nebulosity", "Reflection Nebulae Classification");
@@ -1249,9 +1249,9 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (HIIRx.exactMatch(m)) // HII regions
 	{
-		const int form	= HIIRx.capturedTexts().at(1).toInt();
-		const int structure	= HIIRx.capturedTexts().at(2).toInt();
-		const int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		const int form	= HIIRx.cap(1).toInt();
+		const int structure	= HIIRx.cap(2).toInt();
+		const int brightness	= HIIRx.cap(3).toInt();
 		const QStringList formList={
 			q_("circular form"),
 			q_("elliptical form"),

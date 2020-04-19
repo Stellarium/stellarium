@@ -255,9 +255,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		
 	if (dmsRx.exactMatch(input))
 	{
-		double degree = dmsRx.capturedTexts().at(1).toDouble();
-		double minute = dmsRx.capturedTexts().at(3).toDouble();
-		double second = dmsRx.capturedTexts().at(6).toDouble();
+		double degree = dmsRx.cap(1).toDouble();
+		double minute = dmsRx.cap(3).toDouble();
+		double second = dmsRx.cap(6).toDouble();
 		if (degree > 360.0 || degree < -360.0)
 		{
 			*state = QValidator::Invalid;
@@ -281,9 +281,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (hmsRx.exactMatch(input))
 	{
-		double hour   = hmsRx.capturedTexts().at(1).toDouble();
-		double minute = hmsRx.capturedTexts().at(3).toDouble();
-		double second = hmsRx.capturedTexts().at(6).toDouble();
+		double hour   = hmsRx.cap(1).toDouble();
+		double minute = hmsRx.cap(3).toDouble();
+		double second = hmsRx.cap(6).toDouble();
 		if (hour >= 24.0 || hour < 0.0)
 		{
 			*state = QValidator::Invalid;
@@ -307,7 +307,7 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (decRx.exactMatch(input))
 	{
-		double dec = decRx.capturedTexts().at(1).toDouble();
+		double dec = decRx.cap(1).toDouble();
 		if (dec < 0.0 || dec > 360.0)
 		{
 			*state = QValidator::Invalid;

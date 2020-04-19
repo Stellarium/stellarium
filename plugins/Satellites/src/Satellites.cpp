@@ -386,7 +386,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	if (regExp.exactMatch(noradNumber))
 	{
-		QString numberString = regExp.capturedTexts().at(2);
+		QString numberString = regExp.cap(2);
 		
 		for (const auto& sat : satellites)
 		{
@@ -421,7 +421,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	if (regExp.exactMatch(objw))
 	{
-		QString numberString = regExp.capturedTexts().at(2);
+		QString numberString = regExp.cap(2);
 		bool ok;
 		/* int number = */ numberString.toInt(&ok);
 		if (ok)
@@ -765,7 +765,7 @@ const QString Satellites::readCatalogVersion()
 		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		if (vRx.exactMatch(creator))
 		{
-			jsonVersion = vRx.capturedTexts().at(1);
+			jsonVersion = vRx.cap(1);
 		}
 	}
 
@@ -1659,7 +1659,7 @@ void Satellites::parseTleFile(QFile& openFile,
 			if (statusRx.indexIn(line)>-1)
 			{
 				lastData.status = Satellite::StatusUnknown;
-				switch (codes.indexOf(statusRx.capturedTexts().at(1).toUpper()))
+				switch (codes.indexOf(statusRx.cap(1).toUpper()))
 				{
 					case 0:
 						lastData.status = Satellite::StatusOperational;

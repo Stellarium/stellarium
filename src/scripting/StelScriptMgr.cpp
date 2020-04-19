@@ -235,7 +235,7 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 		if (nameExp.exactMatch(line))
 		{
 			file.close();
-			return nameExp.capturedTexts().at(1).trimmed();
+			return nameExp.cap(1).trimmed();
 		}
 	}
 	file.close();
@@ -334,7 +334,7 @@ QString StelScriptMgr::getDescription(const QString& s) const
 		if (!inDesc && descExp.exactMatch(line))
 		{
 			inDesc = true;
-			desc = descExp.capturedTexts().at(1) + " ";
+			desc = descExp.cap(1) + " ";
 			desc.replace("\n","");
 		}
 		else if (inDesc)
@@ -344,7 +344,7 @@ QString StelScriptMgr::getDescription(const QString& s) const
 				d = "\n";
 			else if (descContExp.exactMatch(line))
 			{
-				d = descContExp.capturedTexts().at(1) + " ";
+				d = descContExp.cap(1) + " ";
 				d.replace("\n","");
 			}
 			else
@@ -593,7 +593,7 @@ bool StelScriptMgr::expand(const QString fileName, const QString &input, QString
 		curline++;
 		if (includeRe.exactMatch(line))
 		{
-			QString incName = includeRe.capturedTexts().at(1);
+			QString incName = includeRe.cap(1);
 			QString incPath;
 
 			// Search for the include file.  Rules are:

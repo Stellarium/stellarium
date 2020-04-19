@@ -782,19 +782,19 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
-		if (nowRe.capturedTexts().at(1)=="now")
+		if (nowRe.cap(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
 			jd = core->getJD();
 
-		if (nowRe.capturedTexts().at(8) == "sidereal")
+		if (nowRe.cap(8) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.capturedTexts().at(6);
+		QString unitString = nowRe.cap(6);
 		if (unitString == "seconds" || unitString == "second")
 			unit = dayLength / (24*3600.);
 		else if (unitString == "minutes" || unitString == "minute")
@@ -813,15 +813,15 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = yearLength;
 		else
 		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.cap(4);
 			unit = 0;
 		}
 
-		delta = nowRe.capturedTexts().at(4).toDouble();
+		delta = nowRe.cap(4).toDouble();
 
-		if (nowRe.capturedTexts().at(3) == "+")
+		if (nowRe.cap(3) == "+")
 			jd += (unit * delta);
-		else if (nowRe.capturedTexts().at(3) == "-")
+		else if (nowRe.cap(3) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}

@@ -732,8 +732,8 @@ NebulaP NebulaMgr::search(const QString& name)
 	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
-		QString cat = catNumRx.capturedTexts().at(1);
-		unsigned int num = catNumRx.capturedTexts().at(2).toUInt();
+		QString cat = catNumRx.cap(1);
+		unsigned int num = catNumRx.cap(2).toUInt();
 
 		//qWarning() << "[SEARCH]" << cat << num;
 
@@ -757,16 +757,16 @@ NebulaP NebulaMgr::search(const QString& name)
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
 	{
-		QString dcat = dCatNumRx.capturedTexts().at(1);
-		unsigned int dnum = dCatNumRx.capturedTexts().at(2).toUInt();
+		QString dcat = dCatNumRx.cap(1);
+		unsigned int dnum = dCatNumRx.cap(2).toUInt();
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
 	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
-		QString cat = sCatNumRx.capturedTexts().at(1);
-		QString num = sCatNumRx.capturedTexts().at(2).trimmed();
+		QString cat = sCatNumRx.cap(1);
+		QString num = sCatNumRx.cap(2).trimmed();
 
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
@@ -778,8 +778,8 @@ NebulaP NebulaMgr::search(const QString& name)
 	static QRegExp gCatNumRx("^(PN|SNR)\\s*G(.+)$");
 	if (gCatNumRx.exactMatch(uname))
 	{
-		QString cat = gCatNumRx.capturedTexts().at(1);
-		QString num = gCatNumRx.capturedTexts().at(2).trimmed();
+		QString cat = gCatNumRx.cap(1);
+		QString num = gCatNumRx.cap(2).trimmed();
 
 		if (cat == "PN") return searchPNG(num);
 		if (cat == "SNR") return searchSNRG(num);
@@ -1128,7 +1128,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		QRegExp version("ersion\\s+([\\d\\.]+)\\s+(\\w+)");
 		int vp = version.indexIn(record);
 		if (vp!=-1) // Version of catalog, a first line!
-			dsoOutStream << version.capturedTexts().at(1).trimmed() << version.capturedTexts().at(2).trimmed();
+			dsoOutStream << version.cap(1).trimmed() << version.cap(2).trimmed();
 
 		// skip comments
 		if (record.startsWith("//") || record.startsWith("#"))
@@ -1504,7 +1504,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		{
 			if (transRx.exactMatch(name))
 			{
-				QString propName = transRx.capturedTexts().at(1).trimmed();
+				QString propName = transRx.cap(1).trimmed();
 				QString currName = e->getEnglishName();
 				if (currName.isEmpty())
 					e->setProperName(propName);
@@ -1668,8 +1668,8 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 			}
 			else
 			{
-				dsoId = recRx.capturedTexts().at(1).trimmed();
-				nativeName = recRx.capturedTexts().at(2).trimmed(); // Use translatable text
+				dsoId = recRx.cap(1).trimmed();
+				nativeName = recRx.cap(2).trimmed(); // Use translatable text
 				NebulaP e = search(dsoId);
 				QString currentName = e->getEnglishName();
 				if (currentName.isEmpty()) // Set native name of DSO
@@ -1763,8 +1763,8 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
-		QString cat = catNumRx.capturedTexts().at(1);
-		unsigned int num = catNumRx.capturedTexts().at(2).toUInt();
+		QString cat = catNumRx.cap(1);
+		unsigned int num = catNumRx.cap(2).toUInt();
 		if (cat == "M") n = searchM(num);
 		if (cat == "NGC") n = searchNGC(num);
 		if (cat == "IC") n = searchIC(num);
@@ -1785,16 +1785,16 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
 	{
-		QString dcat = dCatNumRx.capturedTexts().at(1);
-		unsigned int dnum = dCatNumRx.capturedTexts().at(2).toUInt();
+		QString dcat = dCatNumRx.cap(1);
+		unsigned int dnum = dCatNumRx.cap(2).toUInt();
 
 		if (dcat == "SH") n = searchSh2(dnum);
 	}
 	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
-		QString cat = sCatNumRx.capturedTexts().at(1);
-		QString num = sCatNumRx.capturedTexts().at(2).trimmed();
+		QString cat = sCatNumRx.cap(1);
+		QString num = sCatNumRx.cap(2).trimmed();
 
 		if (cat == "CED") n = searchCed(num);
 		if (cat == "PK") n = searchPK(num);
@@ -1806,8 +1806,8 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	static QRegExp gCatNumRx("^(PN|SNR)\\s*G(.+)$");
 	if (gCatNumRx.exactMatch(uname))
 	{
-		QString cat = gCatNumRx.capturedTexts().at(1);
-		QString num = gCatNumRx.capturedTexts().at(2).trimmed();
+		QString cat = gCatNumRx.cap(1);
+		QString num = gCatNumRx.cap(2).trimmed();
 
 		if (cat == "PN") n = searchPNG(num);
 		if (cat == "SNR") n = searchSNRG(num);

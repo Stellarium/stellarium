@@ -778,17 +778,17 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->nativeName = recRx.capturedTexts().at(2);
-				ctxt = recRx.capturedTexts().at(3);
+				aster->nativeName = recRx.cap(2);
+				ctxt = recRx.cap(3);
 				if (ctxRx.exactMatch(ctxt))
 				{
-					aster->englishName = ctxRx.capturedTexts().at(1);
-					aster->context = ctxRx.capturedTexts().at(2);
+					aster->englishName = ctxRx.cap(1);
+					aster->context = ctxRx.cap(2);
 				}
 				else
 				{
@@ -879,13 +879,13 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->beginSeason = recRx.capturedTexts().at(2).toInt();
-				aster->endSeason = recRx.capturedTexts().at(3).toInt();
+				aster->beginSeason = recRx.cap(2).toInt();
+				aster->endSeason = recRx.cap(3).toInt();
 				readOk++;
 			}
 			else
