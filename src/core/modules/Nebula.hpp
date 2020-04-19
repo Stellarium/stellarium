@@ -67,11 +67,11 @@ public:
 		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
 		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
 		CatACO		= 0x00100000, //!< A Catalog of Rich Clusters of Galaxies (Abell+, 1989) (ACO)
-		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
-		CatAbell		= 0x00400000, //!< Abell Catalog of Planetary Nebulae (Abell, 1966) (Abell; PN A66)
-		CatESO		= 0x00800000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
-		CatVdBH		= 0x01000000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
-		CatDWB		= 0x02000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
+		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)		
+		CatESO		= 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
+		CatVdBH		= 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
+		CatDWB		= 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
+		CatOther		= 0x02000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -93,7 +93,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatAbell|CatESO|CatVdBH|CatDWB);
+	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatOther);
 	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
@@ -203,7 +203,7 @@ public:
 	void addNameAlias(QString name) { englishAliases.append(name); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, Abell, ESO)
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO)
 	//! @return a designation
 	QString getDSODesignation() const;
 
@@ -258,8 +258,7 @@ private:
 	unsigned int PGC_nb;		// PGC number (Catalog of galaxies)
 	unsigned int UGC_nb;		// UGC number (The Uppsala General Catalogue of Galaxies)
 	unsigned int Arp_nb;		// Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
-	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
-	unsigned int Abell_nb;		// Abell number (Abell Catalog of Planetary Nebulae (Abell, 1966))
+	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))	
 	unsigned int DWB_nb;		// DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;				// PK number (Catalogue of Galactic Planetary Nebulae)

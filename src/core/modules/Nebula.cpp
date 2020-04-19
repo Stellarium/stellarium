@@ -94,8 +94,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Arp_nb(0)
-	, VV_nb(0)	
-	, Abell_nb(0)
+	, VV_nb(0)		
 	, DWB_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
@@ -219,11 +218,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (!SNRG_nb.isEmpty())
 			catIds << QString("SNR G%1").arg(SNRG_nb);
 		if (!ACO_nb.isEmpty())
-			catIds << QString("ACO %1").arg(ACO_nb);
+			catIds << QString("Abell %1").arg(ACO_nb);
 		if (!HCG_nb.isEmpty())
-			catIds << QString("HCG %1").arg(HCG_nb);
-		if (Abell_nb > 0)
-			catIds << QString("Abell %1").arg(Abell_nb);
+			catIds << QString("HCG %1").arg(HCG_nb);		
 		if (!ESO_nb.isEmpty())
 			catIds << QString("ESO %1").arg(ESO_nb);
 		if (!VdBH_nb.isEmpty())
@@ -882,11 +879,9 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatSNRG && !SNRG_nb.isEmpty())
 		str = QString("SNR G%1").arg(SNRG_nb);
 	else if (catalogFilters&CatACO && !ACO_nb.isEmpty())
-		str = QString("ACO %1").arg(ACO_nb);
+		str = QString("Abell %1").arg(ACO_nb);
 	else if (catalogFilters&CatHCG && !HCG_nb.isEmpty())
-		str = QString("HCG %1").arg(HCG_nb);
-	else if (catalogFilters&CatAbell && Abell_nb > 0)
-		str = QString("Abell %1").arg(Abell_nb);
+		str = QString("HCG %1").arg(HCG_nb);	
 	else if (catalogFilters&CatESO && !ESO_nb.isEmpty())
 		str = QString("ESO %1").arg(ESO_nb);
 	else if (catalogFilters&CatVdBH && !VdBH_nb.isEmpty())
@@ -906,9 +901,9 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
-		>> HCG_nb >> Abell_nb >> ESO_nb >> VdBH_nb >> DWB_nb;
+		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb;
 
-	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + Abell_nb + DWB_nb;
+	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
 
@@ -1024,14 +1019,13 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatPNG)   && !(PNG_nb.isEmpty()))
 		|| ((catalogFilters&CatSNRG)  && !(SNRG_nb.isEmpty()))
 		|| ((catalogFilters&CatACO)   && (!ACO_nb.isEmpty()))
-		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))
-		|| ((catalogFilters&CatAbell) && (Abell_nb>0))
+		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))		
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0)))
 
 		// Special case: objects without ID from current catalogs
-		|| (withoutID);
+		|| ((catalogFilters&CatOther)   && withoutID);
 
 	return r;
 }

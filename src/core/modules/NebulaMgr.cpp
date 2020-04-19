@@ -53,7 +53,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.8";
+static const QString StellariumDSOCatalogVersion = "3.9";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -395,15 +395,15 @@ void NebulaMgr::init()
 	if (conf->value("flag_show_aco", false).toBool())
 		catalogFilters	|= Nebula::CatACO;
 	if (conf->value("flag_show_hcg", false).toBool())
-		catalogFilters	|= Nebula::CatHCG;
-	if (conf->value("flag_show_abell", false).toBool())
-		catalogFilters	|= Nebula::CatAbell;
+		catalogFilters	|= Nebula::CatHCG;	
 	if (conf->value("flag_show_eso", false).toBool())
 		catalogFilters	|= Nebula::CatESO;
 	if (conf->value("flag_show_vdbh", false).toBool())
 		catalogFilters	|= Nebula::CatVdBH;
 	if (conf->value("flag_show_dwb", false).toBool())
 		catalogFilters	|= Nebula::CatDWB;
+	if (conf->value("flag_show_other", true).toBool())
+		catalogFilters	|= Nebula::CatOther;
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
@@ -729,7 +729,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|ABELL|DWB)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -751,8 +751,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "PGC") return searchPGC(num);
 		if (cat == "UGC") return searchUGC(num);
 		if (cat == "ARP") return searchArp(num);
-		if (cat == "VV") return searchVV(num);
-		if (cat == "ABELL") return searchAbell(num);
+		if (cat == "VV") return searchVV(num);		
 		if (cat == "DWB") return searchDWB(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
@@ -763,7 +762,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(CED|PK|ACO|HCG|ESO|VDBH)\\s*(.+)$");
+	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = sCatNumRx.capturedTexts().at(1);
@@ -771,7 +770,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
-		if (cat == "ACO") return searchACO(num);
+		if (cat == "ACO" || cat == "ABELL") return searchACO(num);
 		if (cat == "HCG") return searchHCG(num);
 		if (cat == "ESO") return searchESO(num);
 		if (cat == "VDBH") return searchVdBH(num);
@@ -1047,14 +1046,6 @@ NebulaP NebulaMgr::searchHCG(QString HCG) const
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchAbell(unsigned int Abell) const
-{
-	for (const auto& n : dsoArray)
-		if (n->Abell_nb == Abell)
-			return n;
-	return NebulaP();
-}
-
 NebulaP NebulaMgr::searchESO(QString ESO) const
 {
 	for (const auto& n : dsoArray)
@@ -1121,7 +1112,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QDataStream dsoOutStream(&dsoOut);
 	dsoOutStream.setVersion(QDataStream::Qt_5_2);
 
-	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, Abell, DWB;
+	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, DWB;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
 	Nebula::NebulaType nType;
@@ -1188,11 +1179,10 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			PNG				= list.at(34).trimmed();	// PN G number
 			SNRG			= list.at(35).trimmed();	// SNR G number
 			ACO				= list.at(36).trimmed();	// ACO number
-			HCG				= list.at(37).trimmed();	// HCG number
-			Abell				= list.at(38).toInt();		// Abell number
-			ESO				= list.at(39).trimmed();	// ESO number
-			VdBH			= list.at(40).trimmed();	// VdBH number
-			DWB				= list.at(41).toInt();		// DWB number
+			HCG				= list.at(37).trimmed();	// HCG number			
+			ESO				= list.at(38).trimmed();	// ESO number
+			VdBH			= list.at(39).trimmed();	// VdBH number
+			DWB				= list.at(40).toInt();		// DWB number
 
 			if (decimal)
 			{
@@ -1325,7 +1315,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dsoOutStream << id << raRad << decRad << bMag << vMag << static_cast<unsigned int>(nType) << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
 				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
-				     << PNG << SNRG << ACO << HCG << Abell << ESO << VdBH << DWB;
+				     << PNG << SNRG << ACO << HCG << ESO << VdBH << DWB;
 		}
 	}
 	dsoIn.close();
@@ -1426,7 +1416,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		static const QStringList catalogs = {
 			"IC",    "M",   "C",  "CR",  "MEL",   "B", "SH2", "VDB", "RCW",  "LDN",
 			"LBN", "NGC", "PGC", "UGC",  "CED", "ARP",  "VV",  "PK", "PNG", "SNRG",
-			"ACO", "HCG", "A66", "ESO", "VDBH", "DWB"};
+			"ACO", "HCG", "ESO", "VDBH", "DWB"};
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1495,17 +1485,14 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 21:
 				e = searchHCG(cdes);
-				break;
-			case 22: // A66
-				e = searchAbell(nb);
-				break;
-			case 23:
+				break;			
+			case 22:
 				e = searchESO(cdes);
 				break;
-			case 24:
+			case 23:
 				e = searchVdBH(cdes);
 				break;
-			case 25:
+			case 24:
 				e = searchDWB(nb);
 				break;
 			default:
@@ -1773,7 +1760,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	NebulaP n;
 	QString uname = designation.toUpper();
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|ABELL|DWB)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -1792,8 +1779,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "PGC") n = searchPGC(num);
 		if (cat == "UGC") n = searchUGC(num);
 		if (cat == "ARP") n = searchArp(num);
-		if (cat == "VV") n = searchVV(num);
-		if (cat == "ABELL") n = searchAbell(num);
+		if (cat == "VV") n = searchVV(num);		
 		if (cat == "DWB") n = searchDWB(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
@@ -1804,7 +1790,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 
 		if (dcat == "SH") n = searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(CED|PK|ACO|HCG|ESO|VDBH)\\s*(.+)$");
+	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = sCatNumRx.capturedTexts().at(1);
@@ -1812,7 +1798,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 
 		if (cat == "CED") n = searchCed(num);
 		if (cat == "PK") n = searchPK(num);
-		if (cat == "ACO") n = searchACO(num);
+		if (cat == "ACO" || cat == "ABELL") n = searchACO(num);
 		if (cat == "HCG") n = searchHCG(num);
 		if (cat == "ESO") n = searchESO(num);
 		if (cat == "VDBH") n = searchVdBH(num);
@@ -2241,40 +2227,20 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by ACO objects number
-	if (objw.size()>=1 && objw.left(3)=="ACO")
+	// Search by ACO (Abell) objects number
+	if (objw.size()>=1 && (objw.left(5)=="ABELL" || objw.left(3)=="ACO"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->ACO_nb.isEmpty()) continue;
-			QString constw = QString("ACO%1").arg(n->ACO_nb.trimmed());
+			QString constw = QString("ABELL%1").arg(n->ACO_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("ACO %1").arg(n->ACO_nb.trimmed());
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw.toUpper())
-				result << constw;
-		}
-	}
-
-	// Search by Abell objects number
-	if (objw.size()>=1 && objw.left(5)=="ABELL")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (n->Abell_nb==0) continue;
-			QString constw = QString("Abell%1").arg(n->Abell_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw.toUpper())
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("Abell %1").arg(n->Abell_nb);
+			constw = QString("ABELL %1").arg(n->ACO_nb.trimmed());
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw.toUpper())
 				result << constw;
@@ -2511,27 +2477,23 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("SNR G%1").arg(n->SNRG_nb);
 			break;
-		case 120: // A Catalog of Rich Clusters of Galaxies by Abell et. al. (ACO)
+		case 120: // A Catalog of Rich Clusters of Galaxies by Abell et. al. (Abell (ACO))
 			for (const auto& n : getDeepSkyObjectsByType(objType))
-				result << QString("ACO %1").arg(n->ACO_nb);
+				result << QString("Abell %1").arg(n->ACO_nb);
 			break;
 		case 121: // Hickson Compact Group by Hickson et. al. (HCG)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("HCG %1").arg(n->HCG_nb);
 			break;
-		case 122: // Abell Catalog of Planetary Nebulae (Abell)
-			for (const auto& n : getDeepSkyObjectsByType(objType))
-				result << QString("Abell %1").arg(n->Abell_nb);
-			break;
-		case 123: // ESO/Uppsala Survey of the ESO(B) Atlas (ESO)
+		case 122: // ESO/Uppsala Survey of the ESO(B) Atlas (ESO)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("ESO %1").arg(n->ESO_nb);
 			break;
-		case 124: // Catalogue of southern stars embedded in nebulosity (VdBH)
+		case 123: // Catalogue of southern stars embedded in nebulosity (VdBH)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("VdBH %1").arg(n->VdBH_nb);
 			break;
-		case 125: // Catalogue and distances of optically visible H II regions (DWB)
+		case 124: // Catalogue and distances of optically visible H II regions (DWB)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("DWB %1").arg(n->DWB_nb);
 			break;
@@ -2614,11 +2576,9 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (n->UGC_nb > 0)
 						result << QString("UGC %1").arg(n->UGC_nb);
 					else if (!n->ACO_nb.isEmpty())
-						result << QString("ACO %1").arg(n->ACO_nb);
+						result << QString("Abell %1").arg(n->ACO_nb);
 					else if (!n->HCG_nb.isEmpty())
-						result << QString("HCG %1").arg(n->HCG_nb);
-					else if (n->Abell_nb>0)
-						result << QString("Abell %1").arg(n->Abell_nb);
+						result << QString("HCG %1").arg(n->HCG_nb);					
 					else if (!n->ESO_nb.isEmpty())
 						result << QString("ESO %1").arg(n->ESO_nb);
 					else if (!n->VdBH_nb.isEmpty())
@@ -2795,28 +2755,21 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 					dso.append(n);
 			}
 			break;
-		case 122: // Abell Catalog of Planetary Nebulae (Abell)
-			for (const auto& n : dsoArray)
-			{
-				if (n->Abell_nb>0)
-					dso.append(n);
-			}
-			break;
-		case 123: // ESO/Uppsala Survey of the ESO(B) Atlas (ESO)
+		case 122: // ESO/Uppsala Survey of the ESO(B) Atlas (ESO)
 			for (const auto& n : dsoArray)
 			{
 				if (!n->ESO_nb.isEmpty())
 					dso.append(n);
 			}
 			break;
-		case 124: // Catalogue of southern stars embedded in nebulosity (VdBH)
+		case 123: // Catalogue of southern stars embedded in nebulosity (VdBH)
 			for (const auto& n : dsoArray)
 			{
 				if (!n->VdBH_nb.isEmpty())
 					dso.append(n);
 			}
 			break;
-		case 125: // Catalogue and distances of optically visible H II regions (DWB)
+		case 124: // Catalogue and distances of optically visible H II regions (DWB)
 			for (const auto& n : dsoArray)
 			{
 				if (n->DWB_nb > 0)

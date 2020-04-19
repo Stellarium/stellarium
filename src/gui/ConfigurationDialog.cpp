@@ -841,11 +841,11 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_png",	  static_cast<bool>(cflags & Nebula::CatPNG));
 	conf->setValue("flag_show_snrg",  static_cast<bool>(cflags & Nebula::CatSNRG));
 	conf->setValue("flag_show_aco",	  static_cast<bool>(cflags & Nebula::CatACO));
-	conf->setValue("flag_show_hcg",	  static_cast<bool>(cflags & Nebula::CatHCG));
-	conf->setValue("flag_show_abell", static_cast<bool>(cflags & Nebula::CatAbell));
+	conf->setValue("flag_show_hcg",	  static_cast<bool>(cflags & Nebula::CatHCG));	
 	conf->setValue("flag_show_eso",	  static_cast<bool>(cflags & Nebula::CatESO));
 	conf->setValue("flag_show_vdbh",  static_cast<bool>(cflags & Nebula::CatVdBH));
 	conf->setValue("flag_show_dwb",	  static_cast<bool>(cflags & Nebula::CatDWB));
+	conf->setValue("flag_show_other",	  static_cast<bool>(cflags & Nebula::CatOther));
 	conf->endGroup();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();

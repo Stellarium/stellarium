@@ -956,8 +956,7 @@ private:
 	NebulaP searchPNG(QString PNG) const;
 	NebulaP searchSNRG(QString SNRG) const;
 	NebulaP searchACO(QString ACO) const;
-	NebulaP searchHCG(QString HCG) const;
-	NebulaP searchAbell(unsigned int Abell) const;
+	NebulaP searchHCG(QString HCG) const;	
 	NebulaP searchESO(QString ESO) const;
 	NebulaP searchVdBH(QString VdBH) const;
 	NebulaP searchDWB(unsigned int DWB) const;

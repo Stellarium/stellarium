@@ -671,15 +671,15 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 	if (ui->checkBoxACO->isChecked())
 		flags |= Nebula::CatACO;
 	if (ui->checkBoxHCG->isChecked())
-		flags |= Nebula::CatHCG;
-	if (ui->checkBoxAbell->isChecked())
-		flags |= Nebula::CatAbell;
+		flags |= Nebula::CatHCG;	
 	if (ui->checkBoxESO->isChecked())
 		flags |= Nebula::CatESO;
 	if (ui->checkBoxVdBH->isChecked())
 		flags |= Nebula::CatVdBH;
 	if (ui->checkBoxDWB->isChecked())
 		flags |= Nebula::CatDWB;
+	if (ui->checkBoxOther->isChecked())
+		flags |= Nebula::CatOther;
 
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
@@ -740,11 +740,11 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxPNG->setChecked(flags & Nebula::CatPNG);
 	ui->checkBoxSNRG->setChecked(flags & Nebula::CatSNRG);
 	ui->checkBoxACO->setChecked(flags & Nebula::CatACO);
-	ui->checkBoxHCG->setChecked(flags & Nebula::CatHCG);
-	ui->checkBoxAbell->setChecked(flags & Nebula::CatAbell);
+	ui->checkBoxHCG->setChecked(flags & Nebula::CatHCG);	
 	ui->checkBoxESO->setChecked(flags & Nebula::CatESO);
 	ui->checkBoxVdBH->setChecked(flags & Nebula::CatVdBH);
 	ui->checkBoxDWB->setChecked(flags & Nebula::CatDWB);
+	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()

@@ -428,9 +428,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A Catalog of Rich Clusters of Galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Hickson Compact Group");
-		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Abell Catalog of Planetary Nebulae");
+		N_("Hickson Compact Group");		
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("ESO/Uppsala Survey of the ESO(B) Atlas")
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

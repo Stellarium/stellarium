@@ -1875,19 +1875,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="1" column="7">
-              <widget class="QCheckBox" name="checkBoxAbell">
-               <property name="toolTip">
-                <string>Abell Catalog of Planetary Nebulae (Abell, 1966)</string>
-               </property>
-               <property name="text">
-                <string notr="true">Abell</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="2" column="5">
               <widget class="QCheckBox" name="checkBoxPK">
                <property name="toolTip">
@@ -1946,14 +1933,14 @@
                 <string>A Catalog of Rich Clusters of Galaxies (Abell+, 1989)</string>
                </property>
                <property name="text">
-                <string notr="true">ACO</string>
+                <string notr="true">Abell</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
                </attribute>
               </widget>
              </item>
-             <item row="0" column="8">
+             <item row="1" column="7">
               <widget class="QCheckBox" name="checkBoxVdBH">
                <property name="toolTip">
                 <string>Catalogue of southern stars embedded in nebulosity (Van den Bergh and Herbst, 1975)</string>
@@ -1966,13 +1953,23 @@
                </attribute>
               </widget>
              </item>
-             <item row="1" column="8">
+             <item row="0" column="8">
               <widget class="QCheckBox" name="checkBoxDWB">
                <property name="toolTip">
                 <string>Catalogue and distances of optically visible H II regions (Dickel+, 1969)</string>
                </property>
                <property name="text">
                 <string notr="true">DWB</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="8">
+              <widget class="QCheckBox" name="checkBoxOther">
+               <property name="text">
+                <string comment="other catalogs">Other</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
