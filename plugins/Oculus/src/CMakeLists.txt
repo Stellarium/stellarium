@@ -8,7 +8,7 @@ LINK_DIRECTORIES(/src)
 SET(Oculus_SRCS
      Oculus.hpp
      Oculus.cpp
-     ${OCULUS_SDK_PATH}/LibOVR/Src/OVR_CAPI_Util.cpp
+     ${OCULUS_SDK_PATH}/LibOVR/Shim/OVR_CAPI_Util.cpp
 )
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})

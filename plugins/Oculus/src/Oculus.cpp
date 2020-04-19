@@ -284,12 +284,12 @@ void Oculus::update(double deltaTime)
 
 void Oculus::render()
 {
-	ovrVector3f hmdToEyeViewOffset[2];
+	ovrPosef hmdToEyeViewOffset[2];
 	ovrHmdDesc hmd = ovr_GetHmdDesc(session);
 	for (int eye = 0; eye < 2; eye++)
 	{
 		ovrEyeRenderDesc eyeRenderDesc = ovr_GetRenderDesc(session, (ovrEyeType)eye, hmd.DefaultEyeFov[eye]);
-		hmdToEyeViewOffset[eye] = eyeRenderDesc.HmdToEyeOffset;
+		hmdToEyeViewOffset[eye] = eyeRenderDesc.HmdToEyePose;
 	}
 	double displayMidpointSeconds = ovr_GetPredictedDisplayTime(session, 0);
 	ovrTrackingState hmdState = ovr_GetTrackingState(session, displayMidpointSeconds, ovrTrue);
