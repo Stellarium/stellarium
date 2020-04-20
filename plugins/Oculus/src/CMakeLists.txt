@@ -1,0 +1,27 @@
+INCLUDE_DIRECTORIES(
+     .
+     ${CMAKE_BINARY_DIR}/plugins/Oculus/src
+)
+
+LINK_DIRECTORIES(/src)
+
+SET(Oculus_SRCS
+     Oculus.hpp
+     Oculus.cpp
+     ${OCULUS_SDK_PATH}/LibOVR/Shim/OVR_CAPI_Util.cpp
+)
+
+SET(extLinkerOption ${OPENGL_LIBRARIES})
+
+SET(OCULUS_SDK_PATH "" CACHE FILEPATH "Path to Oculus SDK")
+INCLUDE_DIRECTORIES(${OCULUS_SDK_PATH}/LibOVR/Include)
+
+ADD_LIBRARY(Oculus-static STATIC ${Oculus_SRCS})
+SET_TARGET_PROPERTIES(Oculus-static PROPERTIES OUTPUT_NAME "Oculus")
+
+TARGET_LINK_LIBRARIES(Oculus-static Qt5::Core Qt5::Widgets)
+TARGET_LINK_LIBRARIES(Oculus-static ${OCULUS_SDK_PATH}/LibOVR/Lib/Windows/x64/Release/VS2015/libOVR.lib ws2_32)
+
+SET_TARGET_PROPERTIES(Oculus-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Oculus-static)
+SET_TARGET_PROPERTIES(Oculus-static PROPERTIES FOLDER "plugins/Oculus")
