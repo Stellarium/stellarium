@@ -5,16 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Yuri Chornoivan <yurchor@ukr.net>, 2019
+# Yuri Chornoivan <yurchor@ukr.net>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-28 21:05+0700\n"
+"POT-Creation-Date: 2020-04-19 13:30+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2019\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2020\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Не вдалося отримати список ландшафтів"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:622
-#: index.html:679 tablet7in.html:727 tablet7in.html:787
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
+#: index.html:685 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-немає-"
 
@@ -375,119 +375,130 @@ msgstr "Мінорна зупинка"
 msgid "Current Planet:"
 msgstr "Поточна планета:"
 
-#: index.html:521 tablet7in.html:610
+#: index.html:447 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr ""
+"Каталог зірок південного неба, які вбудовано у туманності (Van den Bergh та "
+"інші, 1975)"
+
+#: index.html:502
+msgid "Objects without identifier"
+msgstr "Об'єкти без ідентифікатора"
+
+#: index.html:527 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "Яскраві туманності"
 
-#: index.html:522 tablet7in.html:611
+#: index.html:528 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "Темні туманності"
 
-#: index.html:523 tablet7in.html:612
+#: index.html:529 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "Планетарні туманності"
 
-#: index.html:532 tablet7in.html:621
+#: index.html:538 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Мітки і позначки"
 
-#: index.html:566 tablet7in.html:655
+#: index.html:572 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Показати освітлення"
 
-#: index.html:571 tablet7in.html:661
+#: index.html:577 tablet7in.html:667
 msgid "Current landscape"
 msgstr "Поточний ландшафт"
 
-#: index.html:583 tablet7in.html:674
+#: index.html:589 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "Показувати лінії із товщиною"
 
-#: index.html:588 tablet7in.html:679
+#: index.html:594 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "Показувати астеризми із товщиною"
 
-#: index.html:592 tablet7in.html:683
+#: index.html:598 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr "Показувати лінії променів із товщиною"
 
-#: index.html:600 tablet7in.html:693
+#: index.html:606 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "Показувати межі із товщиною"
 
-#: index.html:605 tablet7in.html:698
+#: index.html:611 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "Окремий вибір сузір’їв"
 
-#: index.html:609 tablet7in.html:702
+#: index.html:615 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "Поточна картина неба"
 
-#: index.html:622 tablet7in.html:727
+#: index.html:628 tablet7in.html:733
 msgid "Active script:"
 msgstr "Поточний сценарій:"
 
-#: index.html:623 tablet7in.html:728
+#: index.html:629 tablet7in.html:734
 msgid "Run selected script"
 msgstr "Виконати позначений сценарій"
 
-#: index.html:623 tablet7in.html:728
+#: index.html:629 tablet7in.html:734
 msgid "Stop current script"
 msgstr "Припинити виконання поточного сценарію"
 
-#: index.html:628 tablet7in.html:41 tablet7in.html:712
+#: index.html:634 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Дії"
 
-#: index.html:632 tablet7in.html:716
+#: index.html:638 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "Виконати/Перемкнути дію"
 
-#: index.html:643 tablet7in.html:751
+#: index.html:649 tablet7in.html:757
 msgid "Planet map"
 msgstr "Карта планети"
 
-#: index.html:644 tablet7in.html:752
+#: index.html:650 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Вказівник на карті планети"
 
-#: index.html:648 tablet7in.html:756
+#: index.html:654 tablet7in.html:762
 msgid "Type to search location"
 msgstr "Введіть щось, щоб знайти місце"
 
-#: index.html:677 tablet7in.html:785
+#: index.html:683 tablet7in.html:791
 msgid "Interaction"
 msgstr "Взаємодія"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:684 tablet7in.html:792
 msgid "Current scene:"
 msgstr "Поточна сцена:"
 
-#: index.html:681 tablet7in.html:789
+#: index.html:687 tablet7in.html:795
 msgid "View controls"
 msgstr "Керування переглядом"
 
-#: index.html:687 tablet7in.html:795
+#: index.html:693 tablet7in.html:801
 msgid "Movement controls"
 msgstr "Керування рухом"
 
-#: index.html:699 tablet7in.html:807
+#: index.html:705 tablet7in.html:813
 msgid "Torchlight"
 msgstr "Місцеве освітлення"
 
-#: index.html:706 tablet7in.html:814
+#: index.html:712 tablet7in.html:820
 msgid "Scene selection"
 msgstr "Вибір сцени"
 
-#: index.html:710 tablet7in.html:818
+#: index.html:716 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "Завантажити позначену сцену"
 
-#: index.html:734 tablet7in.html:843
+#: index.html:740 tablet7in.html:849
 msgid "No response from server"
 msgstr "Немає відповіді від сервера"
 
-#: index.html:735 tablet7in.html:844
+#: index.html:741 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Сервер не відповідає уже протягом %1 секунд. Stellarium ще працює?"
 
@@ -631,18 +642,18 @@ msgstr "Водолій"
 msgid "Pisces"
 msgstr "Риби"
 
-#: tablet7in.html:736
+#: tablet7in.html:742
 msgid "Favorites"
 msgstr "Вибране"
 
-#: tablet7in.html:738
+#: tablet7in.html:744
 msgid "Show 1"
 msgstr "Перший показ"
 
-#: tablet7in.html:739
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
 msgstr "Вилучити мітки і зображення"
 
-#: tablet7in.html:739
+#: tablet7in.html:745
 msgid "Cleanup Screen"
 msgstr "Очистити екран"
