@@ -28,6 +28,7 @@
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "Lens.hpp"
+#include "VecMath.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -86,6 +87,8 @@ private slots:
 	void initAboutText();
 	void setLabelsDescriptionText(bool state);
 	void updateTelradCustomFOV();	
+	void setTelradDefaultFOV();
+	void setupTelradFOVspins(Vec4f fov);
 
 private:
 	Oculars* plugin;

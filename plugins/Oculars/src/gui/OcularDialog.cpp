@@ -115,7 +115,7 @@ void OcularDialog::retranslate()
 void OcularDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 }
 
 void OcularDialog::deleteSelectedCCD()
@@ -304,7 +304,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
-	connectBoolProperty(ui->checkBoxTelradFOVCustom,	"Oculars.flagCustomFOVForTelrad");
+	//connectBoolProperty(ui->checkBoxTelradFOVCustom,	"Oculars.flagCustomFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
 	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox,	"Oculars.arrowButtonScale");
@@ -316,13 +316,13 @@ void OcularDialog::createDialogContent()
 	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
 	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
 
-	Vec3f fov = plugin->getCustomFOVForTelrad();
-	ui->doubleSpinBoxCustomFOVInner->setValue(static_cast<double>(fov[0]));
-	ui->doubleSpinBoxCustomFOVMiddle->setValue(static_cast<double>(fov[1]));
-	ui->doubleSpinBoxCustomFOVOuter->setValue(static_cast<double>(fov[2]));
-	connect(ui->doubleSpinBoxCustomFOVInner, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-	connect(ui->doubleSpinBoxCustomFOVMiddle, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-	connect(ui->doubleSpinBoxCustomFOVOuter, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+	setupTelradFOVspins(plugin->getTelradFOV());
+	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));
+	connect(ui->doubleSpinBoxTelradFOV1, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+	connect(ui->doubleSpinBoxTelradFOV2, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+	connect(ui->doubleSpinBoxTelradFOV3, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+	connect(ui->doubleSpinBoxTelradFOV4, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+	connect(ui->pushButtonRestoreTelradFOV, SIGNAL(clicked()), this, SLOT(setTelradDefaultFOV()));
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -454,13 +454,27 @@ void OcularDialog::createDialogContent()
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
 }
 
+void OcularDialog::setupTelradFOVspins(Vec4f fov)
+{
+	ui->doubleSpinBoxTelradFOV1->setValue(static_cast<double>(fov[0]));
+	ui->doubleSpinBoxTelradFOV2->setValue(static_cast<double>(fov[1]));
+	ui->doubleSpinBoxTelradFOV3->setValue(static_cast<double>(fov[2]));
+	ui->doubleSpinBoxTelradFOV4->setValue(static_cast<double>(fov[3]));
+}
+
 void OcularDialog::updateTelradCustomFOV()
 {
-	Vec3f fov;
-	fov[0] = static_cast<float>(ui->doubleSpinBoxCustomFOVInner->value());
-	fov[1] = static_cast<float>(ui->doubleSpinBoxCustomFOVMiddle->value());
-	fov[2] = static_cast<float>(ui->doubleSpinBoxCustomFOVOuter->value());
-	plugin->setCustomFOVForTelrad(fov);
+	Vec4f fov;
+	fov[0] = static_cast<float>(ui->doubleSpinBoxTelradFOV1->value());
+	fov[1] = static_cast<float>(ui->doubleSpinBoxTelradFOV2->value());
+	fov[2] = static_cast<float>(ui->doubleSpinBoxTelradFOV3->value());
+	fov[3] = static_cast<float>(ui->doubleSpinBoxTelradFOV4->value());
+	plugin->setTelradFOV(fov);
+}
+
+void OcularDialog::setTelradDefaultFOV()
+{
+	plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));
 }
 
 // We need particular refresh methods to see immediate feedback.

@@ -203,6 +203,10 @@ namespace StelUtils
 	Vec3f strToVec3f(const QStringList& s);
 	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
+	//! @deprecated Use the >> operator from Vec4f class (Will be removed in version 0.20)
+	Vec4f strToVec4f(const QStringList& s);
+	//! Reads a Vec4f from a string, separated by commas. Example: 1.0,2.0,3.0,4.0
+	Vec4f strToVec4f(const QString& s);
 	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
 	Vec4d strToVec4d(const QStringList& s);
 	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
@@ -212,6 +216,8 @@ namespace StelUtils
 	QString vec2fToStr(const Vec2f& v);
 	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
 	QString vec3fToStr(const Vec3f& v);
+	//! Converts a Vec4f to a string in the same format that can be read by strToVec4f
+	QString vec4fToStr(const Vec4f& v);
 	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
 	QString vec4dToStr(const Vec4d& v);
 

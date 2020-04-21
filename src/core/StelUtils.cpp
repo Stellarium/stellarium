@@ -413,6 +413,19 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
+Vec4f strToVec4f(const QStringList& s)
+{
+	if (s.size()<4)
+		 return Vec4f(0.f,0.f,0.f,0.f);
+
+	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
+}
+
+Vec4f strToVec4f(const QString& s)
+{
+	return strToVec4f(s.split(","));
+}
+
 Vec4d strToVec4d(const QStringList &s)
 {
 	if(s.size()<4)
@@ -439,6 +452,15 @@ QString vec3fToStr(const Vec3f &v)
 		.arg(static_cast<double>(v[0]),0,'f',6)
 		.arg(static_cast<double>(v[1]),0,'f',6)
 		.arg(static_cast<double>(v[2]),0,'f',6);
+}
+
+QString vec4fToStr(const Vec4f &v)
+{
+	return QString("%1,%2,%3,%4")
+		.arg(static_cast<double>(v[0]),0,'f',6)
+		.arg(static_cast<double>(v[1]),0,'f',6)
+		.arg(static_cast<double>(v[2]),0,'f',6)
+		.arg(static_cast<double>(v[3]),0,'f',6);
 }
 
 QString vec4dToStr(const Vec4d &v)

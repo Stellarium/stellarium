@@ -100,9 +100,8 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagSemiTransparency   READ getFlagUseSemiTransparency WRITE setFlagUseSemiTransparency NOTIFY flagUseSemiTransparencyChanged) 
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
-	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
-	Q_PROPERTY(bool flagCustomFOVForTelrad	READ getFlagCustomFOVForTelrad  WRITE setFlagCustomFOVForTelrad  NOTIFY flagCustomFOVForTelradChanged)
-	Q_PROPERTY(Vec3f customFOVForTelrad           READ getCustomFOVForTelrad         WRITE setCustomFOVForTelrad         NOTIFY customFOVForTelradChanged)
+	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
+	Q_PROPERTY(Vec4f telradFOV              READ getTelradFOV             WRITE setTelradFOV             NOTIFY telradFOVChanged)
 	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
@@ -206,8 +205,8 @@ public slots:
 	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
 
-	void setCustomFOVForTelrad(Vec3f fov);
-	Vec3f getCustomFOVForTelrad() const;
+	void setTelradFOV(Vec4f fov);
+	Vec4f getTelradFOV() const;
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
@@ -229,9 +228,6 @@ public slots:
 
 	void setFlagScalingFOVForTelrad(const bool b);
 	bool getFlagScalingFOVForTelrad(void) const;
-
-	void setFlagCustomFOVForTelrad(const bool b);
-	bool getFlagCustomFOVForTelrad(void) const;
 
 	void setFlagScalingFOVForCCD(const bool b);
 	bool getFlagScalingFOVForCCD(void) const;
@@ -293,7 +289,7 @@ signals:
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
 	void flagCustomFOVForTelradChanged(bool value);
-	void customFOVForTelradChanged(Vec3f fov);
+	void telradFOVChanged(Vec4f fov);
 	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void flagShowResolutionCriteriaChanged(bool value);
@@ -481,8 +477,7 @@ private:
 	bool flagShowContour;
 	bool flagShowCardinals;
 	bool flagAlignCrosshair;
-	Vec3f telradFOV;
-	Vec3f customTelradFOV;
+	Vec4f telradFOV;
 };
 
 
