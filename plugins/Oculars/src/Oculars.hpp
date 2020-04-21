@@ -101,6 +101,8 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
+	Q_PROPERTY(bool flagCustomFOVForTelrad	READ getFlagCustomFOVForTelrad  WRITE setFlagCustomFOVForTelrad  NOTIFY flagCustomFOVForTelradChanged)
+	Q_PROPERTY(Vec3f customFOVForTelrad           READ getCustomFOVForTelrad         WRITE setCustomFOVForTelrad         NOTIFY customFOVForTelradChanged)
 	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
@@ -132,7 +134,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
 	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {;}
+	virtual void update(double) Q_DECL_OVERRIDE {}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -200,8 +202,12 @@ public slots:
 
 	void setTextColor(Vec3f color) {textColor=color; emit textColorChanged(color);}
 	Vec3f getTextColor() const {return textColor;}
+
 	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
+
+	void setCustomFOVForTelrad(Vec3f fov);
+	Vec3f getCustomFOVForTelrad() const;
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
@@ -223,6 +229,9 @@ public slots:
 
 	void setFlagScalingFOVForTelrad(const bool b);
 	bool getFlagScalingFOVForTelrad(void) const;
+
+	void setFlagCustomFOVForTelrad(const bool b);
+	bool getFlagCustomFOVForTelrad(void) const;
 
 	void setFlagScalingFOVForCCD(const bool b);
 	bool getFlagScalingFOVForCCD(void) const;
@@ -283,6 +292,8 @@ signals:
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
+	void flagCustomFOVForTelradChanged(bool value);
+	void customFOVForTelradChanged(Vec3f fov);
 	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void flagShowResolutionCriteriaChanged(bool value);
@@ -460,6 +471,7 @@ private:
 	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
+	bool flagCustomFOVForTelrad;	//!< Flag used to track if we use custom FOV for Telrad
 	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
 	bool flagShowResolutionCriteria;
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
@@ -469,6 +481,8 @@ private:
 	bool flagShowContour;
 	bool flagShowCardinals;
 	bool flagAlignCrosshair;
+	Vec3f telradFOV;
+	Vec3f customTelradFOV;
 };
 
 

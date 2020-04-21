@@ -174,6 +174,7 @@ Oculars::Oculars()
 	, flagInitDirectionUsage(false)
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
+	, flagCustomFOVForTelrad(false)
 	, flagScalingFOVForCCD(true)
 	, flagShowResolutionCriteria(false)
 	, equatorialMountEnabledMain(false)
@@ -183,6 +184,8 @@ Oculars::Oculars()
 	, flagShowContour(false)
 	, flagShowCardinals(false)
 	, flagAlignCrosshair(false)
+	, telradFOV(0.5f,2.f,4.f)
+	, customTelradFOV(0.5f,2.f,4.f)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -316,7 +319,7 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
 	settings->setValue("text_color", StelUtils::vec3fToStr(textColor));
-	settings->setValue("line_color", StelUtils::vec3fToStr(lineColor));
+	settings->setValue("line_color", StelUtils::vec3fToStr(lineColor));	
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -579,6 +582,7 @@ void Oculars::init()
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 		textColor=StelUtils::strToVec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=StelUtils::strToVec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
+		customTelradFOV=StelUtils::strToVec3f(settings->value("telrad_custom_fov", "0.5,2.0,4.0").toString());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -593,6 +597,7 @@ void Oculars::init()
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
+		setFlagCustomFOVForTelrad(settings->value("use_telrad_custom_fov", false).toBool());		
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
@@ -1386,7 +1391,10 @@ void Oculars::toggleTelrad(bool show)
 			// NOTE: Added special zoom level for Telrad
 			// Seems problem was introduced with introducing StelProperty feature
 			if (flagScalingFOVForTelrad)
-				movementMgr->zoomTo(10.0);
+			{
+				float fov = qMax(telradFOV[0], qMax(telradFOV[1], telradFOV[2]));
+				movementMgr->zoomTo(static_cast<double>(fov)*2.);
+			}
 		}
 		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
 			movementMgr->zoomTo(movementMgr->getInitFov());
@@ -1728,9 +1736,9 @@ void Oculars::paintTelrad()
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
 		const float pixelsPerRad = projector->getPixelPerRadAtCenter(); // * params.devicePixelsPerPixel;
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (0.5f));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (2.0f));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (4.0f));
+		if (telradFOV[0]>0.f) painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (telradFOV[0]));
+		if (telradFOV[1]>0.f) painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (telradFOV[1]));
+		if (telradFOV[2]>0.f) painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (telradFOV[2]));
 	}
 }
 
@@ -2485,6 +2493,38 @@ void Oculars::setFlagScalingFOVForTelrad(const bool b)
 bool Oculars::getFlagScalingFOVForTelrad() const
 {
 	return  flagScalingFOVForTelrad;
+}
+
+void Oculars::setFlagCustomFOVForTelrad(const bool b)
+{
+	flagCustomFOVForTelrad = b;
+	if (b)
+		telradFOV = customTelradFOV;
+	else
+		telradFOV = Vec3f(0.5f, 2.f, 4.f);
+	settings->setValue("use_telrad_custom_fov", b);
+	settings->sync();
+	emit flagCustomFOVForTelradChanged(b);
+}
+
+bool Oculars::getFlagCustomFOVForTelrad() const
+{
+	return  flagCustomFOVForTelrad;
+}
+
+void Oculars::setCustomFOVForTelrad(Vec3f fov)
+{
+	customTelradFOV = fov;
+	if (getFlagCustomFOVForTelrad())
+		telradFOV = fov;
+	settings->setValue("telrad_custom_fov", StelUtils::vec3fToStr(fov));
+	settings->sync();
+	emit customFOVForTelradChanged(fov);	
+}
+
+Vec3f Oculars::getCustomFOVForTelrad() const
+{
+	return  customTelradFOV;
 }
 
 void Oculars::setFlagScalingFOVForCCD(const bool b)

@@ -85,6 +85,7 @@ protected:
 private slots:
 	void initAboutText();
 	void setLabelsDescriptionText(bool state);
+	void updateTelradCustomFOV();	
 
 private:
 	Oculars* plugin;

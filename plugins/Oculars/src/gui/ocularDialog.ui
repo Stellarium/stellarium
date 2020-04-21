@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>701</width>
+    <width>756</width>
     <height>601</height>
    </rect>
   </property>
@@ -625,17 +625,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxTelradFOVScaling">
-               <property name="text">
-                <string>Enable scaling FOV for Telrad</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
+             <item row="3" column="0">
               <spacer name="verticalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -647,6 +637,149 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxTelradFOVScaling">
+               <property name="text">
+                <string>Enable scaling FOV for Telrad</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxTelradFOVCustom">
+               <property name="text">
+                <string>Use custom FOV for Telrad</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="labelCustomFOV">
+                 <property name="toolTip">
+                  <string>Custom FOV circles for Telrad in degrees</string>
+                 </property>
+                 <property name="text">
+                  <string>FOV:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCustomFOVInner">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>FOV for inner circle in degrees</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>25.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCustomFOVMiddle">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>FOV for middle circle in degrees</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>25.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>2.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBoxCustomFOVOuter">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>FOV for outer circle in degrees</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>25.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1773,79 +1906,79 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-   <tabstop>checkBoxControlPanel</tabstop>
-   <tabstop>guiFontSizeSpinBox</tabstop>
-   <tabstop>checkBoxInitialFOV</tabstop>
-   <tabstop>checkBoxInitialDirection</tabstop>
-   <tabstop>checkBoxResolutionCriterion</tabstop>
-   <tabstop>checkBoxToolbarButton</tabstop>
-   <tabstop>arrowButtonScaleDoubleSpinBox</tabstop>
-   <tabstop>lineColorToolButton</tabstop>
-   <tabstop>textColorToolButton</tabstop>
-   <tabstop>checkBoxCCDFOVScaling</tabstop>
-   <tabstop>checkBoxDMSDegrees</tabstop>
-   <tabstop>checkBoxTypeOfMount</tabstop>
-   <tabstop>checkBoxShowCcdCropOverlay</tabstop>
-   <tabstop>guiCcdCropOverlaySizeSpinBox</tabstop>
-   <tabstop>requireSelectionCheckBox</tabstop>
-   <tabstop>scaleImageCircleCheckBox</tabstop>
-   <tabstop>limitStellarMagnitudeCheckBox</tabstop>
-   <tabstop>semiTransparencyCheckBox</tabstop>
-   <tabstop>hideGridsLinesCheckBox</tabstop>
-   <tabstop>contourCheckBox</tabstop>
-   <tabstop>cardinalsCheckBox</tabstop>
-   <tabstop>alignCrosshairCheckBox</tabstop>
-   <tabstop>checkBoxTelradFOVScaling</tabstop>
-   <tabstop>ocularName</tabstop>
-   <tabstop>ocularAFov</tabstop>
-   <tabstop>ocularFL</tabstop>
-   <tabstop>ocularFieldStop</tabstop>
-   <tabstop>binocularsCheckBox</tabstop>
-   <tabstop>permanentCrosshairCheckBox</tabstop>
-   <tabstop>ocularListView</tabstop>
-   <tabstop>addOcular</tabstop>
-   <tabstop>pushButtonMoveOcularUp</tabstop>
-   <tabstop>pushButtonMoveOcularDown</tabstop>
-   <tabstop>deleteOcular</tabstop>
-   <tabstop>lensName</tabstop>
-   <tabstop>lensMultiplier</tabstop>
-   <tabstop>lensListView</tabstop>
-   <tabstop>addLens</tabstop>
-   <tabstop>pushButtonMoveLensUp</tabstop>
-   <tabstop>pushButtonMoveLensDown</tabstop>
-   <tabstop>deleteLens</tabstop>
-   <tabstop>ccdName</tabstop>
-   <tabstop>ccdResX</tabstop>
-   <tabstop>ccdResY</tabstop>
-   <tabstop>ccdChipX</tabstop>
-   <tabstop>ccdChipY</tabstop>
-   <tabstop>ccdPixelX</tabstop>
-   <tabstop>ccdPixelY</tabstop>
-   <tabstop>ccdRotAngle</tabstop>
-   <tabstop>ccdBinningX</tabstop>
-   <tabstop>ccdBinningY</tabstop>
-   <tabstop>OAG_checkBox</tabstop>
-   <tabstop>OAGDist</tabstop>
-   <tabstop>OAGPrismH</tabstop>
-   <tabstop>OAGPrismW</tabstop>
-   <tabstop>OAGPrismPA</tabstop>
-   <tabstop>ccdListView</tabstop>
-   <tabstop>addCCD</tabstop>
-   <tabstop>pushButtonMoveSensorUp</tabstop>
-   <tabstop>pushButtonMoveSensorDown</tabstop>
-   <tabstop>deleteCCD</tabstop>
-   <tabstop>telescopeName</tabstop>
-   <tabstop>telescopeFL</tabstop>
-   <tabstop>telescopeDiameter</tabstop>
-   <tabstop>telescopeHFlip</tabstop>
-   <tabstop>telescopeVFlip</tabstop>
-   <tabstop>telescopeEQ</tabstop>
-   <tabstop>telescopeListView</tabstop>
-   <tabstop>addTelescope</tabstop>
-   <tabstop>pushButtonMoveTelescopeUp</tabstop>
-   <tabstop>pushButtonMoveTelescopeDown</tabstop>
-   <tabstop>deleteTelescope</tabstop>
-   <tabstop>textBrowser</tabstop>
+  <tabstop>checkBoxControlPanel</tabstop>
+  <tabstop>guiFontSizeSpinBox</tabstop>
+  <tabstop>checkBoxInitialFOV</tabstop>
+  <tabstop>checkBoxInitialDirection</tabstop>
+  <tabstop>checkBoxResolutionCriterion</tabstop>
+  <tabstop>checkBoxToolbarButton</tabstop>
+  <tabstop>arrowButtonScaleDoubleSpinBox</tabstop>
+  <tabstop>lineColorToolButton</tabstop>
+  <tabstop>textColorToolButton</tabstop>
+  <tabstop>checkBoxCCDFOVScaling</tabstop>
+  <tabstop>checkBoxDMSDegrees</tabstop>
+  <tabstop>checkBoxTypeOfMount</tabstop>
+  <tabstop>checkBoxShowCcdCropOverlay</tabstop>
+  <tabstop>guiCcdCropOverlaySizeSpinBox</tabstop>
+  <tabstop>requireSelectionCheckBox</tabstop>
+  <tabstop>scaleImageCircleCheckBox</tabstop>
+  <tabstop>limitStellarMagnitudeCheckBox</tabstop>
+  <tabstop>semiTransparencyCheckBox</tabstop>
+  <tabstop>hideGridsLinesCheckBox</tabstop>
+  <tabstop>contourCheckBox</tabstop>
+  <tabstop>cardinalsCheckBox</tabstop>
+  <tabstop>alignCrosshairCheckBox</tabstop>
+  <tabstop>checkBoxTelradFOVScaling</tabstop>
+  <tabstop>ocularName</tabstop>
+  <tabstop>ocularAFov</tabstop>
+  <tabstop>ocularFL</tabstop>
+  <tabstop>ocularFieldStop</tabstop>
+  <tabstop>binocularsCheckBox</tabstop>
+  <tabstop>permanentCrosshairCheckBox</tabstop>
+  <tabstop>ocularListView</tabstop>
+  <tabstop>addOcular</tabstop>
+  <tabstop>pushButtonMoveOcularUp</tabstop>
+  <tabstop>pushButtonMoveOcularDown</tabstop>
+  <tabstop>deleteOcular</tabstop>
+  <tabstop>lensName</tabstop>
+  <tabstop>lensMultiplier</tabstop>
+  <tabstop>lensListView</tabstop>
+  <tabstop>addLens</tabstop>
+  <tabstop>pushButtonMoveLensUp</tabstop>
+  <tabstop>pushButtonMoveLensDown</tabstop>
+  <tabstop>deleteLens</tabstop>
+  <tabstop>ccdName</tabstop>
+  <tabstop>ccdResX</tabstop>
+  <tabstop>ccdResY</tabstop>
+  <tabstop>ccdChipX</tabstop>
+  <tabstop>ccdChipY</tabstop>
+  <tabstop>ccdPixelX</tabstop>
+  <tabstop>ccdPixelY</tabstop>
+  <tabstop>ccdRotAngle</tabstop>
+  <tabstop>ccdBinningX</tabstop>
+  <tabstop>ccdBinningY</tabstop>
+  <tabstop>OAG_checkBox</tabstop>
+  <tabstop>OAGDist</tabstop>
+  <tabstop>OAGPrismH</tabstop>
+  <tabstop>OAGPrismW</tabstop>
+  <tabstop>OAGPrismPA</tabstop>
+  <tabstop>ccdListView</tabstop>
+  <tabstop>addCCD</tabstop>
+  <tabstop>pushButtonMoveSensorUp</tabstop>
+  <tabstop>pushButtonMoveSensorDown</tabstop>
+  <tabstop>deleteCCD</tabstop>
+  <tabstop>telescopeName</tabstop>
+  <tabstop>telescopeFL</tabstop>
+  <tabstop>telescopeDiameter</tabstop>
+  <tabstop>telescopeHFlip</tabstop>
+  <tabstop>telescopeVFlip</tabstop>
+  <tabstop>telescopeEQ</tabstop>
+  <tabstop>telescopeListView</tabstop>
+  <tabstop>addTelescope</tabstop>
+  <tabstop>pushButtonMoveTelescopeUp</tabstop>
+  <tabstop>pushButtonMoveTelescopeDown</tabstop>
+  <tabstop>deleteTelescope</tabstop>
+  <tabstop>textBrowser</tabstop>
  </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
