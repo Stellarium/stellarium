@@ -172,16 +172,6 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Set the color used to label bright stars.
-	//! @param c The color of the bright stars labels
-	//! @code
-	//! // example of usage in scripts
-	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
-	//! @endcode
-	void setLabelColor(const Vec3f& c) {labelColor = c;}
-	//! Get the current color used to label bright stars.
-	Vec3f getLabelColor(void) const {return labelColor;}
-
 	//! Set display flag for Stars.
 	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
 	//! Get display flag for Stars
@@ -493,7 +483,6 @@ private:
 	QFont starFont;
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
-	Vec3f labelColor;
 
 	StelTextureSP texPointer;		// The selection pointer texture
 

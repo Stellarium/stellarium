@@ -443,10 +443,6 @@ void StarMgr::init()
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
-	// Load colors from config file
-	QString defaultColor = conf->value("color/default_color").toString();
-	setLabelColor(StelUtils::strToVec3f(conf->value("color/star_label_color", defaultColor).toString()));
-
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
