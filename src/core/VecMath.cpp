@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-/*
+
 #include "VecMath.hpp"
 
 // Here are a few variant constructors which gcc cannot inline and therefore would cause link errors if included in the VecMath.hpp.
@@ -41,6 +41,24 @@ template<> Vec2d::Vector2(QStringList s) : Vector2{s.value(0, "0.").toDouble(),s
 
 // Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
 template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
+
+template<> QString Vec2i::toStr() const
+{
+	return QString("%1,%2").arg(v[0]).arg(v[1]);
+}
+template<> QString Vec2f::toStr() const
+{
+	return QString("%1,%2")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6);
+}
+template<> QString Vec2d::toStr() const
+{
+	return QString("%1,%2")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10);
+}
+
 
 
 // Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
@@ -127,6 +145,62 @@ template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
 	return *this;
 }
 
+template<> QString Vec3i::toStr() const
+{
+	return QString("%1,%2,%3").arg(v[0]).arg(v[1]).arg(v[2]);
+}
+template<> QString Vec3f::toStr() const
+{
+	return QString("%1,%2,%3")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6)
+			.arg(static_cast<double>(v[2]),0,'f',6);
+}
+template<> QString Vec3d::toStr() const
+{
+	return QString("%1,%2,%3")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10)
+			.arg(v[2],0,'f',10);
+}
+
+template<> QString Vec3i::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, v[0]), 2, 16, QChar('0'))
+		.arg(qMin(255, v[1]), 2, 16, QChar('0'))
+		.arg(qMin(255, v[2]), 2, 16, QChar('0'));
+}
+template<> QString Vec3f::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
+}
+template<> QString Vec3d::toHtmlColor() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
+}
+
+template<> QColor Vec3i::toQColor() const
+{
+	return QColor(v[0], v[1], v[2]);
+}
+
+template<> QColor Vec3f::toQColor() const
+{
+	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]));
+}
+
+template<> QColor Vec3d::toQColor() const
+{
+	return QColor::fromRgbF(v[0], v[1], v[2]);
+}
+
 
 // Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
 template<> Vec4i::Vector4(QStringList s) : Vector4{s.value(0, "0").toInt(),s.value(1, "0").toInt(),s.value(2, "0").toInt(),s.value(3, "0").toInt()}
@@ -151,4 +225,39 @@ template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
 template<> Vec4i::Vector4(QColor c) : Vector4{c.red(), c.green(), c.blue(), c.alpha()}{}
 template<> Vec4f::Vector4(QColor c) : Vector4{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF()), static_cast<float>(c.alphaF())}{}
 template<> Vec4d::Vector4(QColor c) : Vector4{c.redF(), c.greenF(), c.blueF(), c.alphaF()}{}
-*/
+
+template<> QString Vec4i::toStr() const
+{
+	return QString("%1,%2,%3,%4").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);
+}
+template<> QString Vec4f::toStr() const
+{
+	return QString("%1,%2,%3,%4")
+			.arg(static_cast<double>(v[0]),0,'f',6)
+			.arg(static_cast<double>(v[1]),0,'f',6)
+			.arg(static_cast<double>(v[2]),0,'f',6)
+			.arg(static_cast<double>(v[3]),0,'f',6);
+}
+template<> QString Vec4d::toStr() const
+{
+	return QString("%1,%2,%3,%4")
+			.arg(v[0],0,'f',10)
+			.arg(v[1],0,'f',10)
+			.arg(v[2],0,'f',10)
+			.arg(v[3],0,'f',10);
+}
+
+template<> QColor Vec4i::toQColor() const
+{
+	return QColor(v[0], v[1], v[2], v[3]);
+}
+
+template<> QColor Vec4f::toQColor() const
+{
+	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]), static_cast<qreal>(v[3]));
+}
+
+template<> QColor Vec4d::toQColor() const
+{
+	return QColor::fromRgbF(v[0], v[1], v[2], v[3]);
+}

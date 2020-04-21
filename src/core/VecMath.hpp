@@ -24,6 +24,7 @@
 #ifndef VECMATH_HPP
 #define VECMATH_HPP
 
+/*
 // forceinline from Wikipedia. gcc does not play nice
 #ifdef _MSC_VER
     #define forceinline __forceinline
@@ -38,6 +39,7 @@
 #else
     #define forceinline inline
 #endif
+*/
 
 #include <cmath>
 #include <limits>
@@ -114,9 +116,9 @@ public:
 	template <class T2> inline explicit Vector2(const Vector2<T2>&);
 	inline Vector2(T, T);
 	//! Constructor from a comma-separated QString like "2,4" or "2.1,4.2"
-	forceinline explicit Vector2(QString s);
+	explicit Vector2(QString s);
 	//! Constructor from a QStringList like { "2", "4" } or { "2.1", "4.2", "6.3" }
-	forceinline explicit Vector2(QStringList s);
+	explicit Vector2(QStringList s);
 
 	//! Assignment from array
 	//! @warning Does not check array size, make sure it has at least 2 elements
@@ -174,7 +176,7 @@ public:
 	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
-	forceinline QString toStr() const;
+	QString toStr() const;
 
 	T v[2];
 };
@@ -195,11 +197,11 @@ public:
 	inline explicit Vector3(const T*);
 	inline Vector3(T, T, T);
 	//! Constructor from a comma-separated QString like "2,4,6" or "2.1,4.2,6.3"
-	forceinline explicit Vector3(QString s);
+	explicit Vector3(QString s);
 	//! Constructor from a QStringList like { "2", "4", "6" } or { "2.1", "4.2", "6.3" }
-	forceinline explicit Vector3(QStringList s);
+	explicit Vector3(QStringList s);
 	//! Constructor from a QColor
-	forceinline explicit Vector3(QColor c);
+	explicit Vector3(QColor c);
 
 	//inline Vector3& operator=(const Vector3&);
 
@@ -212,7 +214,7 @@ public:
 	//! Assign from HTML color
 	//! The Vec3i type will have values 0...255
 	//! Vec3f and Vec3d will have [0...[1
-	forceinline Vector3 setFromHtmlColor(QString s);
+	Vector3 setFromHtmlColor(QString s);
 
 	inline bool operator==(const Vector3<T>&) const;
 	inline bool operator!=(const Vector3<T>&) const;
@@ -268,12 +270,12 @@ public:
 	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
-	forceinline QString toStr() const;
+	QString toStr() const;
 	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
 	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1
-	forceinline QString toHtmlColor() const;
+	QString toHtmlColor() const;
 	//! Convert to a QColor.
-	forceinline QColor toQColor() const;
+	QColor toQColor() const;
 
 	T v[3];		// The 3 values
 };
@@ -303,11 +305,11 @@ public:
 	inline Vector4(const Vector3<T>&, T);
 	inline Vector4(T, T, T, T);
 	//! Constructor from a comma-separated QString like "2,4,6,8" or "2.1,4.2,6.3,8.4"
-	forceinline explicit Vector4(QString s);
+	explicit Vector4(QString s);
 	//! Constructor from a QStringList like { "2", "4", "6", "8" } or { "2.1", "4.2", "6.3", "8.4" }
-	forceinline explicit Vector4(QStringList s);
+	explicit Vector4(QStringList s);
 	//! Constructor from a QColor
-	forceinline explicit Vector4(QColor c);
+	explicit Vector4(QColor c);
 
 	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
@@ -348,9 +350,9 @@ public:
 	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
-	forceinline QString toStr() const;
+	QString toStr() const;
 	//! Convert to a QColor.
-	forceinline QColor toQColor() const;
+	QColor toQColor() const;
 
 	T v[4];		// The 4 values
 };
@@ -523,6 +525,7 @@ template<class T> Vector2<T>::Vector2(T x, T y)
 	v[0]=x; v[1]=y;
 }
 
+/*
 // Obtains a Vec2i/Vec2f/Vec2d from a stringlist with the form x,y  (use C++11 type delegating constructors)
 template<> Vec2i::Vector2(QStringList s)
 {
@@ -548,7 +551,7 @@ template<> Vec2d::Vector2(QStringList s)
 
 // Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
 template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
-
+*/
 
 template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
 {
@@ -707,22 +710,6 @@ template<class T> void Vector2<T>::normalize()
 	v[1] *= s;
 }
 
-template<> QString Vec2i::toStr() const
-{
-	return QString("%1,%2").arg(v[0]).arg(v[1]);
-}
-template<> QString Vec2f::toStr() const
-{
-	return QString("%1,%2")
-			.arg(static_cast<double>(v[0]),0,'f',6)
-			.arg(static_cast<double>(v[1]),0,'f',6);
-}
-template<> QString Vec2d::toStr() const
-{
-	return QString("%1,%2")
-			.arg(v[0],0,'f',10)
-			.arg(v[1],0,'f',10);
-}
 
 // template<class T>
 // std::ostream& operator<<(std::ostream &o,const Vector2<T> &v) {
@@ -758,6 +745,7 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 	v[0]=x; v[1]=y; v[2]=z;
 }
 
+/*
 // Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
 template<> Vec3i::Vector3(QStringList s){
 	if (s.size()!=3)
@@ -857,6 +845,7 @@ template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
 	}
 	return *this;
 }
+*/
 //template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
 //{
 //	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
@@ -1053,61 +1042,6 @@ template<class T> T Vector3<T>::longitude() const
 	return std::atan2(v[1],v[0]);
 }
 
-template<> QString Vec3i::toStr() const
-{
-	return QString("%1,%2,%3").arg(v[0]).arg(v[1]).arg(v[2]);
-}
-template<> QString Vec3f::toStr() const
-{
-	return QString("%1,%2,%3")
-			.arg(static_cast<double>(v[0]),0,'f',6)
-			.arg(static_cast<double>(v[1]),0,'f',6)
-			.arg(static_cast<double>(v[2]),0,'f',6);
-}
-template<> QString Vec3d::toStr() const
-{
-	return QString("%1,%2,%3")
-			.arg(v[0],0,'f',10)
-			.arg(v[1],0,'f',10)
-			.arg(v[2],0,'f',10);
-}
-
-template<> QString Vec3i::toHtmlColor() const
-{
-	return QString("#%1%2%3")
-		.arg(qMin(255, v[0]), 2, 16, QChar('0'))
-		.arg(qMin(255, v[1]), 2, 16, QChar('0'))
-		.arg(qMin(255, v[2]), 2, 16, QChar('0'));
-}
-template<> QString Vec3f::toHtmlColor() const
-{
-	return QString("#%1%2%3")
-		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
-}
-template<> QString Vec3d::toHtmlColor() const
-{
-	return QString("#%1%2%3")
-		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
-}
-
-template<> QColor Vec3i::toQColor() const
-{
-	return QColor(v[0], v[1], v[2]);
-}
-
-template<> QColor Vec3f::toQColor() const
-{
-	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]));
-}
-
-template<> QColor Vec3d::toQColor() const
-{
-	return QColor::fromRgbF(v[0], v[1], v[2]);
-}
 
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
@@ -1148,6 +1082,7 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
 }
 
+/*
 // Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
 template<> Vec4i::Vector4(QStringList s)
 {
@@ -1195,6 +1130,8 @@ template<> Vec4d::Vector4(QColor c)
 {
 	v[0]=c.redF(); v[1]=c.greenF(); v[2]=c.blueF(); v[3]=c.alphaF();
 }
+*/
+
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
@@ -1326,41 +1263,6 @@ std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ',' << v[3] << ']';
 }*/
 
-template<> QString Vec4i::toStr() const
-{
-	return QString("%1,%2,%3,%4").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);
-}
-template<> QString Vec4f::toStr() const
-{
-	return QString("%1,%2,%3,%4")
-			.arg(static_cast<double>(v[0]),0,'f',6)
-			.arg(static_cast<double>(v[1]),0,'f',6)
-			.arg(static_cast<double>(v[2]),0,'f',6)
-			.arg(static_cast<double>(v[3]),0,'f',6);
-}
-template<> QString Vec4d::toStr() const
-{
-	return QString("%1,%2,%3,%4")
-			.arg(v[0],0,'f',10)
-			.arg(v[1],0,'f',10)
-			.arg(v[2],0,'f',10)
-			.arg(v[3],0,'f',10);
-}
-
-template<> QColor Vec4i::toQColor() const
-{
-	return QColor(v[0], v[1], v[2], v[3]);
-}
-
-template<> QColor Vec4f::toQColor() const
-{
-	return QColor::fromRgbF(static_cast<qreal>(v[0]), static_cast<qreal>(v[1]), static_cast<qreal>(v[2]), static_cast<qreal>(v[3]));
-}
-
-template<> QColor Vec4d::toQColor() const
-{
-	return QColor::fromRgbF(v[0], v[1], v[2], v[3]);
-}
 ////////////////////////// Matrix3 class methods ///////////////////////////////
 
 template<class T> Matrix3<T>::Matrix3() {}
