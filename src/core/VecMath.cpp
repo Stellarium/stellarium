@@ -41,11 +41,11 @@ template<> Vec2d::Vector2(QStringList s) : Vector2{s.value(0, "0.").toDouble(),s
 		qWarning() << "Vec2d from StringList of unexpected length" << s.size() << ":" << s.join("/");
 }
 
-// Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
-//template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{} // Does not work (?)
-template<> Vec2i::Vector2(QString s) : Vector2{s.split(",")}{}
-template<> Vec2f::Vector2(QString s) : Vector2{s.split(",")}{}
-template<> Vec2d::Vector2(QString s) : Vector2{s.split(",")}{}
+// Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y".  We must also force instances here.
+template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
+template Vector2<int>::Vector2(QString s);
+template Vector2<float>::Vector2(QString s);
+template Vector2<double>::Vector2(QString s);
 
 template<> QString Vec2i::toStr() const
 {
@@ -83,11 +83,11 @@ template<> Vec3d::Vector3(QStringList s) : Vector3{s.value(0, "0.").toDouble(),s
 		qWarning() << "Vec3d from StringList of unexpected length" << s.size() << ":" << s.join("/");
 }
 
-// Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
-//template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{} // Does not work (?)
-template<> Vec3i::Vector3(QString s) : Vector3{s.split(",")}{}
-template<> Vec3f::Vector3(QString s) : Vector3{s.split(",")}{}
-template<> Vec3d::Vector3(QString s) : Vector3{s.split(",")}{}
+// Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z". We must also force instances here.
+template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
+template Vector3<int>::Vector3(QString s);
+template Vector3<float>::Vector3(QString s);
+template Vector3<double>::Vector3(QString s);
 
 template<> Vec3i::Vector3(QColor c) : Vector3{c.red(), c.green(), c.blue()}{}
 template<> Vec3f::Vector3(QColor c) : Vector3{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF())}{}
@@ -228,12 +228,11 @@ template<> Vec4d::Vector4(QStringList s) : Vector4{s.value(0, "0.").toDouble(),s
 		qWarning() << "Vec4d from StringList of unexpected length" << s.size() << ":" << s.join("/");
 }
 
-// Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w"
-//template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{} // Does not work (?)
-template<> Vec4i::Vector4(QString s) : Vector4{s.split(",")}{}
-template<> Vec4f::Vector4(QString s) : Vector4{s.split(",")}{}
-template<> Vec4d::Vector4(QString s) : Vector4{s.split(",")}{}
-
+// Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w". We must also force instances here.
+template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
+template Vector4<int>::Vector4(QString s);
+template Vector4<float>::Vector4(QString s);
+template Vector4<double>::Vector4(QString s);
 
 template<> Vec4i::Vector4(QColor c) : Vector4{c.red(), c.green(), c.blue(), c.alpha()}{}
 template<> Vec4f::Vector4(QColor c) : Vector4{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF()), static_cast<float>(c.alphaF())}{}
