@@ -20,7 +20,9 @@
 
 #include "VecMath.hpp"
 
-// Here are a few variant constructors which gcc cannot inline and therefore would cause link errors if included in the VecMath.hpp.
+// Here are a few variant constructors and functions which gcc cannot inline and therefore would cause link errors if included in the VecMath.hpp.
+
+///// Vector2 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec2i/Vec2f/Vec2d from a stringlist with the form x,y  (use C++11 type delegating constructors)
 template<> Vec2i::Vector2(QStringList s) : Vector2{s.value(0, "0").toInt(),s.value(1, "0").toInt()}
@@ -40,7 +42,10 @@ template<> Vec2d::Vector2(QStringList s) : Vector2{s.value(0, "0.").toDouble(),s
 }
 
 // Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
-template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
+//template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{} // Does not work (?)
+template<> Vec2i::Vector2(QString s) : Vector2{s.split(",")}{}
+template<> Vec2f::Vector2(QString s) : Vector2{s.split(",")}{}
+template<> Vec2d::Vector2(QString s) : Vector2{s.split(",")}{}
 
 template<> QString Vec2i::toStr() const
 {
@@ -59,7 +64,7 @@ template<> QString Vec2d::toStr() const
 			.arg(v[1],0,'f',10);
 }
 
-
+///// Vector3 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
 template<> Vec3i::Vector3(QStringList s) : Vector3{s.value(0, "0").toInt(),s.value(1, "0").toInt(),s.value(2, "0").toInt()}
@@ -79,7 +84,10 @@ template<> Vec3d::Vector3(QStringList s) : Vector3{s.value(0, "0.").toDouble(),s
 }
 
 // Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
-template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
+//template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{} // Does not work (?)
+template<> Vec3i::Vector3(QString s) : Vector3{s.split(",")}{}
+template<> Vec3f::Vector3(QString s) : Vector3{s.split(",")}{}
+template<> Vec3d::Vector3(QString s) : Vector3{s.split(",")}{}
 
 template<> Vec3i::Vector3(QColor c) : Vector3{c.red(), c.green(), c.blue()}{}
 template<> Vec3f::Vector3(QColor c) : Vector3{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF())}{}
@@ -201,6 +209,7 @@ template<> QColor Vec3d::toQColor() const
 	return QColor::fromRgbF(v[0], v[1], v[2]);
 }
 
+///// Vector4 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
 template<> Vec4i::Vector4(QStringList s) : Vector4{s.value(0, "0").toInt(),s.value(1, "0").toInt(),s.value(2, "0").toInt(),s.value(3, "0").toInt()}
@@ -220,7 +229,11 @@ template<> Vec4d::Vector4(QStringList s) : Vector4{s.value(0, "0.").toDouble(),s
 }
 
 // Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w"
-template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
+//template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{} // Does not work (?)
+template<> Vec4i::Vector4(QString s) : Vector4{s.split(",")}{}
+template<> Vec4f::Vector4(QString s) : Vector4{s.split(",")}{}
+template<> Vec4d::Vector4(QString s) : Vector4{s.split(",")}{}
+
 
 template<> Vec4i::Vector4(QColor c) : Vector4{c.red(), c.green(), c.blue(), c.alpha()}{}
 template<> Vec4f::Vector4(QColor c) : Vector4{static_cast<float>(c.redF()), static_cast<float>(c.greenF()), static_cast<float>(c.blueF()), static_cast<float>(c.alphaF())}{}
