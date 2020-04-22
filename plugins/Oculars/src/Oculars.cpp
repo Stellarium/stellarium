@@ -2496,7 +2496,7 @@ bool Oculars::getFlagScalingFOVForTelrad() const
 void Oculars::setTelradFOV(Vec4f fov)
 {
 	telradFOV = fov;
-	settings->setValue("telrad_fov", StelUtils::vec4fToStr(fov));
+	settings->setValue("telrad_fov", fov.toStr());
 	settings->sync();
 	emit telradFOVChanged(fov);
 }

@@ -282,7 +282,7 @@ namespace StelUtils
 	//! to radians.
 	//! @param str the angle in a format according to:
 	//!   angle ::= [sign¹] ( real [degs | mins | secs]
-    //!                     | [integer degs] ( [integer mins] real secs
+	//!                     | [integer degs] ( [integer mins] real secs
 	//!                                       | real mins )
 	//!                     ) [cardinal¹]            
 	//!   sign ::= + | -
@@ -301,7 +301,7 @@ namespace StelUtils
 	//!      Spanish QWERTY keyboards.
 	//! The string is parsed without regarding to case, except that, after a
 	//! single real, a solitary 's' indicates seconds whereas an 'S' indicates South.
-    //! It is highly recommended to use lower case for hdms and upper case for NSEW.
+	//! It is highly recommended to use lower case for hdms and upper case for NSEW.
 	//! Latitude: North is positive, South is negative.
 	//! Longitude: East is positive, West is negative.
 	//! @return the angle in radians.
