@@ -24,22 +24,6 @@
 #ifndef VECMATH_HPP
 #define VECMATH_HPP
 
-/*
-// forceinline from Wikipedia. gcc does not play nice
-#ifdef _MSC_VER
-    #define forceinline __forceinline
-#elif defined(__GNUC__)
-    #define forceinline inline __attribute__((__always_inline__))
-#elif defined(__CLANG__)
-    #if __has_attribute(__always_inline__)
-	#define forceinline inline __attribute__((__always_inline__))
-    #else
-	#define forceinline inline
-    #endif
-#else
-    #define forceinline inline
-#endif
-*/
 
 #include <cmath>
 #include <limits>
@@ -525,34 +509,6 @@ template<class T> Vector2<T>::Vector2(T x, T y)
 	v[0]=x; v[1]=y;
 }
 
-/*
-// Obtains a Vec2i/Vec2f/Vec2d from a stringlist with the form x,y  (use C++11 type delegating constructors)
-template<> Vec2i::Vector2(QStringList s)
-{
-	if (s.size()!=2)
-		qWarning() << "Vec2i from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0").toInt();
-	v[1]=s.value(1, "0").toInt();
-}
-template<> Vec2f::Vector2(QStringList s)
-{
-	if (s.size()!=2)
-		qWarning() << "Vec2f from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toFloat();
-	v[1]=s.value(1, "0.").toFloat();
-}
-template<> Vec2d::Vector2(QStringList s)
-{
-	if (s.size()!=2)
-		qWarning() << "Vec2d from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toDouble();
-	v[1]=s.value(1, "0.").toDouble();
-}
-
-// Obtains a Vec2i/Vec2f/Vec2d from a string with the form "x,y"
-template<class T> Vector2<T>::Vector2(QString s) : Vector2{s.split(",")}{}
-*/
-
 template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
 {
 	v[0]=a[0]; v[1]=a[1];
@@ -744,119 +700,6 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 {
 	v[0]=x; v[1]=y; v[2]=z;
 }
-
-/*
-// Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
-template<> Vec3i::Vector3(QStringList s){
-	if (s.size()!=3)
-		qWarning() << "Vec3i from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0").toInt();
-	v[1]=s.value(1, "0").toInt();
-	v[2]=s.value(2, "0").toInt();
-}
-template<> Vec3f::Vector3(QStringList s){
-	if (s.size()!=3)
-		qWarning() << "Vec3f from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toFloat();
-	v[1]=s.value(1, "0.").toFloat();
-	v[2]=s.value(2, "0.").toFloat();
-}
-template<> Vec3d::Vector3(QStringList s){
-	if (s.size()!=3)
-		qWarning() << "Vec3d from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toDouble();
-	v[1]=s.value(1, "0.").toDouble();
-	v[2]=s.value(2, "0.").toDouble();
-}
-
-// Obtains a Vec3i/Vec3f/Vec3d from a string with the form "x,y,z"
-template<class T> Vector3<T>::Vector3(QString s) : Vector3{s.split(",")}{}
-
-template<> Vec3i::Vector3(QColor c)
-{
-	v[0]=c.red(); v[1]=c.green(); v[2]=c.blue();
-}
-template<> Vec3f::Vector3(QColor c)
-{
-	v[0]=static_cast<float>(c.redF());
-	v[1]=static_cast<float>(c.greenF());
-	v[2]=static_cast<float>(c.blueF());
-}
-template<> Vec3d::Vector3(QColor c)
-{
-	v[0]=c.redF(); v[1]=c.greenF(); v[2]=c.blueF();
-}
-template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
-{
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
-	{
-		v[0] = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
-		v[1] = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
-		v[2] = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
-	}
-	else
-	{
-		v[0] = 0;
-		v[1] = 0;
-		v[2] = 0;
-	}
-	return *this;
-}
-
-template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
-{
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
-	{
-		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
-		v[0] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
-		v[1] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
-		v[2] = static_cast<float>(i) / 255.f;
-	}
-	else
-	{
-		v[0] = 0.f;
-		v[1] = 0.f;
-		v[2] = 0.f;
-	}
-	return *this;
-}
-
-template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
-{
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
-	{
-		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
-		v[0] = static_cast<double>(i) / 255.;
-		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
-		v[1] = static_cast<double>(i) / 255.;
-		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
-		v[2] = static_cast<double>(i) / 255.;
-	}
-	else
-	{
-		v[0] = 0.;
-		v[1] = 0.;
-		v[2] = 0.;
-	}
-	return *this;
-}
-*/
-//template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
-//{
-//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-//	return *this;
-//}
-
-//template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
-//{
-//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
-//	return *this;
-//}
 
 template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
 {
@@ -1081,56 +924,6 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 {
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
 }
-
-/*
-// Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
-template<> Vec4i::Vector4(QStringList s)
-{
-	if (s.size()!=4)
-		qWarning() << "Vec4i from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0").toInt();
-	v[1]=s.value(1, "0").toInt();
-	v[2]=s.value(2, "0").toInt();
-	v[3]=s.value(3, "0").toInt();
-}
-template<> Vec4f::Vector4(QStringList s)
-{
-	if (s.size()!=4)
-		qWarning() << "Vec4f from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toFloat();
-	v[1]=s.value(1, "0.").toFloat();
-	v[2]=s.value(2, "0.").toFloat();
-	v[3]=s.value(3, "0.").toFloat();
-}
-template<> Vec4d::Vector4(QStringList s)
-{
-	if (s.size()!=4)
-		qWarning() << "Vec4d from StringList of unexpected length" << s.size() << ":" << s.join("/");
-	v[0]=s.value(0, "0.").toDouble();
-	v[1]=s.value(1, "0.").toDouble();
-	v[2]=s.value(2, "0.").toDouble();
-	v[3]=s.value(3, "0.").toDouble();
-}
-
-// Obtains a Vec4i/Vec4f/Vec4d from a string with the form "x,y,z,w"
-template<class T> Vector4<T>::Vector4(QString s) : Vector4{s.split(",")}{}
-
-template<> Vec4i::Vector4(QColor c)
-{
-	v[0]=c.red(); v[1]=c.green(); v[2]=c.blue(); v[3]=c.alpha();
-}
-template<> Vec4f::Vector4(QColor c)
-{
-	v[0]=static_cast<float>(c.redF());
-	v[1]=static_cast<float>(c.greenF());
-	v[2]=static_cast<float>(c.blueF());
-	v[3]=static_cast<float>(c.alphaF());
-}
-template<> Vec4d::Vector4(QColor c)
-{
-	v[0]=c.redF(); v[1]=c.greenF(); v[2]=c.blueF(); v[3]=c.alphaF();
-}
-*/
 
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
 {
