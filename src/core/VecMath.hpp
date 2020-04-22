@@ -701,6 +701,18 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 	v[0]=x; v[1]=y; v[2]=z;
 }
 
+//template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//	return *this;
+//}
+
+//template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
+//{
+//	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+//	return *this;
+//}
+
 template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
 {
 	v[0]=a[0]; v[1]=a[1]; v[2]=a[2];
