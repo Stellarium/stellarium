@@ -749,7 +749,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		QFont tmpFont = currentFont;
 		tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
 		painter.setFont(tmpFont);
-		painter.setPen(QColor(qRound(currentColor[0]*255), qRound(currentColor[1]*255), qRound(currentColor[2]*255), qRound(currentColor[3]*255)));
+		painter.setPen(currentColor.toQColor());
 		
 		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
 		xshift*=scaleRatio;

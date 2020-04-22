@@ -291,7 +291,7 @@ void Scenery3d::loadConfig()
 {
 	conf->beginGroup(S3D_CONFIG_PREFIX);
 
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
+	textColor = Vec3f(conf->value("text_color", "0.5,0.5,1").toString());
 	renderer->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",0).toInt()) );
 	renderer->setCubemapSize(conf->value("cubemap_size",2048).toInt());
 	renderer->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());

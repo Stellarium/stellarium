@@ -22,7 +22,7 @@
 #include "StelScriptSyntaxHighlighter.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
+#include "VecMath.hpp"
 
 #include <QtWidgets>
 #include <QString>
@@ -152,39 +152,34 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 
 void StelScriptSyntaxHighlighter::setFormats(void)
 {
-	Vec3f col;
+	QColor col;
 	QString defaultColor = "0.8,0.8,0.8";
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString section;
-
-	if (StelApp::getInstance().getVisionModeNight())
-		section = "night_color";
-	else
-		section = "color";
+	const QString section = StelApp::getInstance().getVisionModeNight() ? "night_color" : "color";
 
 	// comments
-	col = StelUtils::strToVec3f(conf->value(section + "/script_console_comment_color", defaultColor).toString());
-	commentFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	col = Vec3f(conf->value(section + "/script_console_comment_color", defaultColor).toString()).toQColor();
+	commentFormat.setForeground(col);
 
 	// ECMAscript reserved words
-	col = StelUtils::strToVec3f(conf->value(section + "/script_console_keyword_color", defaultColor).toString());
-	keywordFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	col = Vec3f(conf->value(section + "/script_console_keyword_color", defaultColor).toString()).toQColor();
+	keywordFormat.setForeground(col);
 	keywordFormat.setFontWeight(QFont::Bold);
 
 	// highlight object names which can be used in scripting
 	moduleFormat.setFontWeight(QFont::Bold);
-	col = StelUtils::strToVec3f(conf->value(section + "/script_console_module_color", defaultColor).toString());
-	moduleFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	col = Vec3f(conf->value(section + "/script_console_module_color", defaultColor).toString()).toQColor();
+	moduleFormat.setForeground(col);
 
 	// constants
 	constantFormat.setFontWeight(QFont::Bold);
-	col = StelUtils::strToVec3f(conf->value(section + "/script_console_constant_color", defaultColor).toString());
-	constantFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	col = Vec3f(conf->value(section + "/script_console_constant_color", defaultColor).toString()).toQColor();
+	constantFormat.setForeground(col);
 
 	// function calls
 	functionFormat.setFontItalic(true);
-	col = StelUtils::strToVec3f(conf->value(section + "/script_console_function_color", defaultColor).toString());
-	functionFormat.setForeground(QColor(col[0]*255, col[1]*255, col[2]*255));
+	col = Vec3f(conf->value(section + "/script_console_function_color", defaultColor).toString()).toQColor();
+	functionFormat.setForeground(col);
 }
 
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)

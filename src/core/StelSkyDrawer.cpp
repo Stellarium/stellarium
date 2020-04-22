@@ -26,7 +26,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelUtils.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #ifndef USE_OLD_QGLWIDGET
@@ -868,9 +867,9 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		{
 			Vec3f c;
 			if (s.size()==1)
-				c = StelUtils::strToVec3f(s[0]);
+				c = Vec3f(s[0]);
 			else
-				c =StelUtils::strToVec3f(s);
+				c =Vec3f(s);
 			color_map[bV] = Gamma(eye->getDisplayGamma(),c);
 		}
 	}

@@ -467,7 +467,7 @@ int LabelMgr::labelObject(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
-	return labelObject(text, objectName, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, style, autoDelete, autoDeleteTimeoutMs);
+	return labelObject(text, objectName, visible, fontSize, Vec3f().setFromHtmlColor(fontColor), side, labelDistance, style, autoDelete, autoDeleteTimeoutMs);
 }
 int LabelMgr::labelObject(const QString& text,
 			  const QString& objectName,
@@ -510,7 +510,7 @@ int LabelMgr::labelHorizon(const QString& text,
 		bool autoDelete,
 		int autoDeleteTimeoutMs)
 {
-	return labelHorizon(text, az, alt, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), autoDelete, autoDeleteTimeoutMs);
+	return labelHorizon(text, az, alt, visible, fontSize, Vec3f().setFromHtmlColor(fontColor), autoDelete, autoDeleteTimeoutMs);
 }
 int LabelMgr::labelHorizon(const QString& text,
 		float az,
@@ -544,7 +544,7 @@ int LabelMgr::labelScreen(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
-	return labelScreen(text, x, y, visible, fontSize, StelUtils::htmlColorToVec3f(fontColor), autoDelete, autoDeleteTimeoutMs);
+	return labelScreen(text, x, y, visible, fontSize, Vec3f().setFromHtmlColor(fontColor), autoDelete, autoDeleteTimeoutMs);
 }
 int LabelMgr::labelScreen(const QString& text,
 			  int x,

@@ -605,9 +605,9 @@ void TelescopeControl::loadConfiguration()
 #endif
 
 	//Load colours
-	setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
-	setLabelColor(StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
-	setCircleColor(StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
+	setReticleColor(Vec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+	setLabelColor(Vec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
+	setCircleColor(Vec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
 
 	//Load server executables flag and directory
 	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
@@ -649,9 +649,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", StelUtils::vec3fToHtmlColor(getReticleColor()));
-	settings->setValue("color_telescope_labels", StelUtils::vec3fToHtmlColor(getLabelColor()));
-	settings->setValue("color_telescope_circles", StelUtils::vec3fToHtmlColor(getCircleColor()));
+	settings->setValue("color_telescope_reticles", getReticleColor().toHtmlColor());
+	settings->setValue("color_telescope_labels", getLabelColor().toHtmlColor());
+	settings->setValue("color_telescope_circles", getCircleColor().toHtmlColor());
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);

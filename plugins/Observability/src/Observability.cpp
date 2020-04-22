@@ -1689,7 +1689,7 @@ void Observability::loadConfiguration()
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
 	font.setPixelSize(fontSize);
-	fontColor = StelUtils::strToVec3f(conf->value("font_color", "0,0.5,1").toString());
+	fontColor = Vec3f(conf->value("font_color", "0,0.5,1").toString());
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
 	show_Best_Night = conf->value("show_Best_Night", true).toBool();

@@ -93,6 +93,7 @@ SET(stellarium_lib_SRCS
      core/StelTranslator.cpp
      core/StelTranslator.hpp
      core/VecMath.hpp
+     core/VecMath.cpp
      core/StelJsonParser.hpp
      core/StelJsonParser.cpp
      core/SimbadSearcher.hpp

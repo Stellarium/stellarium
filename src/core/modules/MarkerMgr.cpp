@@ -383,7 +383,7 @@ int MarkerMgr::markerObject(const QString& objectName,
 		return -1;
 	}
 	
-	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 
@@ -412,7 +412,7 @@ int MarkerMgr::markerEquatorial(const QString& RA,
 	if (!j2000epoch)
 		pos = StelApp::getInstance().getCore()->equinoxEquToJ2000(pos);
 
-	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(pos, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 
@@ -436,7 +436,7 @@ int MarkerMgr::markerHorizon(const QString& az,
 	float dAzi	= static_cast<float>(StelUtils::getDecAngle(az)*M_180_PI);
 	float dAlt	= static_cast<float>(StelUtils::getDecAngle(alt)*M_180_PI);
 
-	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 

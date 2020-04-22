@@ -351,7 +351,7 @@ void PointerCoordinates::loadConfiguration(void)
 	conf->beginGroup("PointerCoordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
+	textColor = Vec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();	
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());

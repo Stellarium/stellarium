@@ -189,47 +189,6 @@ namespace StelUtils
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
-	//TODO these Vector-String converters should be removed, and missing functionality added to
-	//the VecMath classes and QVariant-based conversion
-
-	//! Reads a Vec2f from a string list
-	Vec2f strToVec2f(const QStringList& s);
-	//! Reads a Vec2f from a string, separated by commas. Example: 1.0,2.0
-	Vec2f strToVec2f(const QString& s);
-	//! Obtains a Vec3f from a string.
-	//! @param s the string describing the Vector with the form "x,y,z"
-	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
-	Vec3f strToVec3f(const QStringList& s);
-	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
-	Vec3f strToVec3f(const QString& s);
-	//! @deprecated Use the >> operator from Vec4f class (Will be removed in version 0.20)
-	Vec4f strToVec4f(const QStringList& s);
-	//! Reads a Vec4f from a string, separated by commas. Example: 1.0,2.0,3.0,4.0
-	Vec4f strToVec4f(const QString& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QStringList& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QString& s);
-
-	//! Converts a Vec2f to a string in the same format that can be read by strToVec2f
-	QString vec2fToStr(const Vec2f& v);
-	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
-	QString vec3fToStr(const Vec3f& v);
-	//! Converts a Vec4f to a string in the same format that can be read by strToVec4f
-	QString vec4fToStr(const Vec4f& v);
-	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
-	QString vec4dToStr(const Vec4d& v);
-
-	//! Converts a Vec3f to HTML color notation.
-	//! @param v The vector
-	//! @return The string in HTML color notation "#rrggbb".
-	QString vec3fToHtmlColor(const Vec3f& v);
-
-	//! Converts a color in HTML notation to a Vec3f.
-	//! @param c The HTML spec color string
-	Vec3f htmlColorToVec3f(const QString& c);
-
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
@@ -323,7 +282,7 @@ namespace StelUtils
 	//! to radians.
 	//! @param str the angle in a format according to:
 	//!   angle ::= [sign¹] ( real [degs | mins | secs]
-    //!                     | [integer degs] ( [integer mins] real secs
+	//!                     | [integer degs] ( [integer mins] real secs
 	//!                                       | real mins )
 	//!                     ) [cardinal¹]            
 	//!   sign ::= + | -
@@ -342,7 +301,7 @@ namespace StelUtils
 	//!      Spanish QWERTY keyboards.
 	//! The string is parsed without regarding to case, except that, after a
 	//! single real, a solitary 's' indicates seconds whereas an 'S' indicates South.
-    //! It is highly recommended to use lower case for hdms and upper case for NSEW.
+	//! It is highly recommended to use lower case for hdms and upper case for NSEW.
 	//! Latitude: North is positive, South is negative.
 	//! Longitude: East is positive, West is negative.
 	//! @return the angle in radians.

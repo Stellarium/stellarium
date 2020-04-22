@@ -193,7 +193,7 @@ void EquationOfTime::readSettingsFromConfig(void)
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
 	setFlagMsFormat(conf->value("flag_use_ms_format", true).toBool());
 	setFlagInvertedValue(conf->value("flag_use_inverted_value", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
+	textColor = Vec3f(conf->value("text_color", "0,0.5,1").toString());
 	setFontSize(conf->value("font_size", 20).toInt());
 	flagShowEOTButton = conf->value("flag_show_button", true).toBool();
 

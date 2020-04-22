@@ -878,7 +878,7 @@ void StelMainView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
-	setSkyBackgroundColor(StelUtils::strToVec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
+	setSkyBackgroundColor(Vec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
 	// plugins, because the gui creates the QActions needed by some plugins.
@@ -1682,7 +1682,7 @@ void StelMainView::glContextDoneCurrent()
 void StelMainView::setSkyBackgroundColor(Vec3f color)
 {
 	rootItem->setSkyBackgroundColor(color);
-	StelApp::getInstance().getSettings()->setValue("color/sky_background_color", StelUtils::vec3fToStr(color));
+	StelApp::getInstance().getSettings()->setValue("color/sky_background_color", color.toStr());
 	emit skyBackgroundColorChanged(color);
 }
 

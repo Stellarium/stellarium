@@ -435,7 +435,7 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
 	Vec4f textColor(qMin(1.0f, 1.25f*color[0]), qMin(1.0f, 1.25f*color[1]), qMin(1.0f, 1.25f*color[2]), fader.getInterstate());
-	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
+	sPainter.setColor(color, fader.getInterstate());
 
 	sPainter.setFont(font);
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
@@ -1596,39 +1596,39 @@ void GridLinesMgr::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	setColorEquatorGrid(StelUtils::strToVec3f(conf->value("color/equatorial_color", defaultColor).toString()));
-	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
-	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
-	setColorEclipticGrid(StelUtils::strToVec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
-	setColorGalacticGrid(StelUtils::strToVec3f(conf->value("color/galactic_color", defaultColor).toString()));
-	setColorSupergalacticGrid(StelUtils::strToVec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
-	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
-	setColorEquatorLine(StelUtils::strToVec3f(conf->value("color/equator_color", defaultColor).toString()));
-	setColorEquatorJ2000Line(StelUtils::strToVec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
-	setColorEclipticLine(StelUtils::strToVec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
-	setColorEclipticJ2000Line(StelUtils::strToVec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
-	setColorPrecessionCircles(StelUtils::strToVec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
-	setColorMeridianLine(StelUtils::strToVec3f(conf->value("color/meridian_color", defaultColor).toString()));
-	setColorHorizonLine(StelUtils::strToVec3f(conf->value("color/horizon_color", defaultColor).toString()));
-	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
-	setColorSupergalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
-	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
-	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
-	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
-	setColorCircumpolarCircles(StelUtils::strToVec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
-	setColorCelestialJ2000Poles(StelUtils::strToVec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
-	setColorCelestialPoles(StelUtils::strToVec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
-	setColorZenithNadir(StelUtils::strToVec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
-	setColorEclipticJ2000Poles(StelUtils::strToVec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
-	setColorEclipticPoles(StelUtils::strToVec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
-	setColorGalacticPoles(StelUtils::strToVec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
-	setColorSupergalacticPoles(StelUtils::strToVec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
-	setColorEquinoxJ2000Points(StelUtils::strToVec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
-	setColorEquinoxPoints(StelUtils::strToVec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
-	setColorSolsticeJ2000Points(StelUtils::strToVec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
-	setColorSolsticePoints(StelUtils::strToVec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
-	setColorAntisolarPoint(StelUtils::strToVec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
-	setColorApexPoints(StelUtils::strToVec3f(conf->value("color/apex_points_color", defaultColor).toString()));
+	setColorEquatorGrid(             Vec3f(conf->value("color/equatorial_color", defaultColor).toString()));
+	setColorEquatorJ2000Grid(        Vec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
+	setColorEclipticJ2000Grid(       Vec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
+	setColorEclipticGrid(            Vec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
+	setColorGalacticGrid(            Vec3f(conf->value("color/galactic_color", defaultColor).toString()));
+	setColorSupergalacticGrid(       Vec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
+	setColorAzimuthalGrid(           Vec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
+	setColorEquatorLine(             Vec3f(conf->value("color/equator_color", defaultColor).toString()));
+	setColorEquatorJ2000Line(        Vec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
+	setColorEclipticLine(            Vec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
+	setColorEclipticJ2000Line(       Vec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
+	setColorPrecessionCircles(       Vec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
+	setColorMeridianLine(            Vec3f(conf->value("color/meridian_color", defaultColor).toString()));
+	setColorHorizonLine(             Vec3f(conf->value("color/horizon_color", defaultColor).toString()));
+	setColorGalacticEquatorLine(     Vec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
+	setColorSupergalacticEquatorLine(Vec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
+	setColorLongitudeLine(           Vec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
+	setColorPrimeVerticalLine(       Vec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
+	setColorColureLines(             Vec3f(conf->value("color/colures_color", defaultColor).toString()));
+	setColorCircumpolarCircles(      Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+	setColorCelestialJ2000Poles(     Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
+	setColorCelestialPoles(          Vec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
+	setColorZenithNadir(             Vec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
+	setColorEclipticJ2000Poles(      Vec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
+	setColorEclipticPoles(           Vec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
+	setColorGalacticPoles(           Vec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
+	setColorSupergalacticPoles(      Vec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
+	setColorEquinoxJ2000Points(      Vec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
+	setColorEquinoxPoints(           Vec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
+	setColorSolsticeJ2000Points(     Vec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
+	setColorSolsticePoints(          Vec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
+	setColorAntisolarPoint(          Vec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
+	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));

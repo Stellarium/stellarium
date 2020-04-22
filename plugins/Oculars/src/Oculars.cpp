@@ -317,8 +317,8 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
-	settings->setValue("text_color", StelUtils::vec3fToStr(textColor));
-	settings->setValue("line_color", StelUtils::vec3fToStr(lineColor));	
+	settings->setValue("text_color", textColor.toStr());
+	settings->setValue("line_color", lineColor.toStr());
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -579,9 +579,9 @@ void Oculars::init()
 
 		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
-		textColor=StelUtils::strToVec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
-		lineColor=StelUtils::strToVec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
-		telradFOV=StelUtils::strToVec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
+		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
+		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
+		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -2496,7 +2496,7 @@ bool Oculars::getFlagScalingFOVForTelrad() const
 void Oculars::setTelradFOV(Vec4f fov)
 {
 	telradFOV = fov;
-	settings->setValue("telrad_fov", StelUtils::vec4fToStr(fov));
+	settings->setValue("telrad_fov", fov.toStr());
 	settings->sync();
 	emit telradFOVChanged(fov);
 }

@@ -507,25 +507,25 @@ void ArchaeoLines::restoreDefaultSettings()
 void ArchaeoLines::loadSettings()
 {
 	setLineWidth(conf->value("ArchaeoLines/line_thickness", 1).toInt());
-	setEquinoxColor(                StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
-	setSolsticesColor(              StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
-	setCrossquartersColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
-	setMajorStandstillColor(        StelUtils::strToVec3f(conf->value("ArchaeoLines/color_major_standstill",           "0.25,1.00,0.25").toString()));
-	setMinorStandstillColor(        StelUtils::strToVec3f(conf->value("ArchaeoLines/color_minor_standstill",           "0.20,0.75,0.20").toString()));
-	setZenithPassageColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_zenith_passage",             "0.75,0.75,0.75").toString()));
-	setNadirPassageColor(           StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",              "0.25,0.25,0.25").toString()));
-	setSelectedObjectColor(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object",            "1.00,1.00,1.00").toString()));
-	setSelectedObjectAzimuthColor(  StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_azimuth",    "1.00,1.00,1.00").toString()));
-	setSelectedObjectHourAngleColor(StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_hour_angle", "1.00,1.00,1.00").toString()));
-	setCurrentSunColor(             StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_sun",                "1.00,1.00,0.75").toString()));
-	setCurrentMoonColor(            StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_moon",               "0.50,1.00,0.50").toString()));
-	setCurrentPlanetColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_planet",             "0.25,0.80,1.00").toString()));
-	setGeographicLocation1Color(    StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_1",      "0.25,1.00,0.25").toString()));
-	setGeographicLocation2Color(    StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_2",      "0.25,0.25,1.00").toString()));
-	setCustomAzimuth1Color(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_1",           "0.25,1.00,0.25").toString()));
-	setCustomAzimuth2Color(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",           "0.25,0.50,0.75").toString()));
-	setCustomDeclination1Color(     StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_1",       "0.45,1.00,0.15").toString()));
-	setCustomDeclination2Color(     StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_2",       "0.45,0.50,0.65").toString()));
+	setEquinoxColor(                Vec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
+	setSolsticesColor(              Vec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
+	setCrossquartersColor(          Vec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
+	setMajorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_major_standstill",           "0.25,1.00,0.25").toString()));
+	setMinorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_minor_standstill",           "0.20,0.75,0.20").toString()));
+	setZenithPassageColor(          Vec3f(conf->value("ArchaeoLines/color_zenith_passage",             "0.75,0.75,0.75").toString()));
+	setNadirPassageColor(           Vec3f(conf->value("ArchaeoLines/color_nadir_passage",              "0.25,0.25,0.25").toString()));
+	setSelectedObjectColor(         Vec3f(conf->value("ArchaeoLines/color_selected_object",            "1.00,1.00,1.00").toString()));
+	setSelectedObjectAzimuthColor(  Vec3f(conf->value("ArchaeoLines/color_selected_object_azimuth",    "1.00,1.00,1.00").toString()));
+	setSelectedObjectHourAngleColor(Vec3f(conf->value("ArchaeoLines/color_selected_object_hour_angle", "1.00,1.00,1.00").toString()));
+	setCurrentSunColor(             Vec3f(conf->value("ArchaeoLines/color_current_sun",                "1.00,1.00,0.75").toString()));
+	setCurrentMoonColor(            Vec3f(conf->value("ArchaeoLines/color_current_moon",               "0.50,1.00,0.50").toString()));
+	setCurrentPlanetColor(          Vec3f(conf->value("ArchaeoLines/color_current_planet",             "0.25,0.80,1.00").toString()));
+	setGeographicLocation1Color(    Vec3f(conf->value("ArchaeoLines/color_geographic_location_1",      "0.25,1.00,0.25").toString()));
+	setGeographicLocation2Color(    Vec3f(conf->value("ArchaeoLines/color_geographic_location_2",      "0.25,0.25,1.00").toString()));
+	setCustomAzimuth1Color(         Vec3f(conf->value("ArchaeoLines/color_custom_azimuth_1",           "0.25,1.00,0.25").toString()));
+	setCustomAzimuth2Color(         Vec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",           "0.25,0.50,0.75").toString()));
+	setCustomDeclination1Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_1",       "0.45,1.00,0.15").toString()));
+	setCustomDeclination2Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_2",       "0.45,0.50,0.65").toString()));
 
 	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  39.826175).toDouble());
 	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   21.422476).toDouble());

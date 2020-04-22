@@ -64,7 +64,7 @@ void NomenclatureMgr::init()
 	NomenclatureItem::createNameLists();
 	loadNomenclature();
 
-	setColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
+	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
 	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 

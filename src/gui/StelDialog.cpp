@@ -174,7 +174,7 @@ void StelDialog::setVisible(bool v)
 			if ( (newX>=proxy->size().width()) || (newY>=proxy->size().height()) )
 			{
 				//qDebug() << confNameSize << ": resize to " << storedSizeString;
-				proxy->resize(qMax((qreal)newX, proxy->size().width()), qMax((qreal)newY, proxy->size().height()));
+				proxy->resize(qMax(static_cast<qreal>(newX), proxy->size().width()), qMax(static_cast<qreal>(newY), proxy->size().height()));
 			}
 			if(proxy->size().width() > maxSize.width() || proxy->size().height() > maxSize.height())
 			{
@@ -312,8 +312,7 @@ void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyNam
 	toolButton->setProperty("iniName", iniName);
 	toolButton->setProperty("moduleName", moduleName);
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
-	Vec3f vColor = prop->getValue().value<Vec3f>();
-	QColor color=QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor color=prop->getValue().value<Vec3f>().toQColor();
 	// Use style sheet to create a nice button :)
 	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
 	toolButton->setFixedSize(QSize(18, 18));
@@ -345,21 +344,21 @@ void StelDialog::askColor()
 		Q_ASSERT(0);
 		return;
 	}
-	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>();
-	QColor color = QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
+	QColor color = vColor.toQColor();
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
 		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
 		if (moduleName.isEmpty())
-			StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
+			StelApp::getInstance().getSettings()->setValue(iniName, vColor.toStr());
 		else
 		{
 			StelModule *module=StelApp::getInstance().getModuleMgr().getModule(moduleName);
 			QSettings *settings=module->getSettings();
 			Q_ASSERT(settings);
-			settings->setValue(iniName, StelUtils::vec3fToStr(vColor));
+			settings->setValue(iniName, vColor.toStr());
 		}
 		static_cast<QToolButton*>(QObject::sender())->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -583,7 +582,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 }
 void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
 {
-	double dVal = ((val - slider->minimum()) / (double)(slider->maximum() - slider->minimum())) * dRange + minValue;
+	double dVal = ((val - slider->minimum()) / static_cast<double>(slider->maximum() - slider->minimum())) * dRange + minValue;
 	prop->setValue(dVal);
 }
 
