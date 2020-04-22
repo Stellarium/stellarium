@@ -666,7 +666,6 @@ template<class T> void Vector2<T>::normalize()
 	v[1] *= s;
 }
 
-
 // template<class T>
 // std::ostream& operator<<(std::ostream &o,const Vector2<T> &v) {
 //   return o << '[' << v[0] << ',' << v[1] << ']';
