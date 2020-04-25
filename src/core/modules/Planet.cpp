@@ -554,8 +554,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	// Second test avoids crash when observer is on spaceship
-	// Third test for avoid jerking an animation of movement
-	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver() && qAbs(core->getTimeRate())<0.01)
+	// Third test for now avoids jerking animation of movement (GH#1041). TODO: better fix!
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver() && qAbs(core->getTimeRate())<=StelCore::JD_SECOND)
 	{
 		// Setting/resetting the time causes a significant slowdown due to time (JD) not being granular enough.
 		// We must sum up the runtime over successive runs and feed a time kick when summed time exceeds 1/5 s.
