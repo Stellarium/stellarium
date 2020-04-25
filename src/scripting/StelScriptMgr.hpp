@@ -72,6 +72,10 @@ public:
 	
 	//! Add all the StelModules into the script engine
 	void addModules();
+
+    //! Define JS classes Vec3f, Vec3d
+	static void defVecClasses(QScriptEngine *engine);
+					 
 public slots:
 	//! Returns a HTML description of the specified script.
 	//! Includes name, author, description...
