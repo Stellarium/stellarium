@@ -29,7 +29,8 @@
 
 QTEST_GUILESS_MAIN(TestJavaScripting)
 
-QString TestJavaScripting::runScript(QScriptEngine *engine, QString script ){
+QString TestJavaScripting::runScript(QScriptEngine *engine, QString script )
+{
 //	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
 	QScriptValue result = engine->evaluate(script);
 	if (engine->hasUncaughtException()) {

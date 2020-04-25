@@ -68,7 +68,8 @@ floating point numbers between 0 and 1. Color names correspond to the names
 defined in https://www.w3.org/TR/SVG11/types.htm.
 ***/
 
-QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine){
+QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
@@ -78,7 +79,8 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine){
             "b:" + bVal.toString() + "]";
 }
 
-QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine){
+QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
@@ -90,13 +92,15 @@ QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine){
 		.arg(qMin(255, int(bVal.toNumber() * 255)), 2, 16, QChar('0'));
 }
 
-void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c){
+void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
+{
 	c[0] = static_cast<float>(obj.property("r").toNumber());
 	c[1] = static_cast<float>(obj.property("g").toNumber());
 	c[2] = static_cast<float>(obj.property("b").toNumber());
 }
 
-QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c){
+QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
+{
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
@@ -108,24 +112,32 @@ QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c){
 
 // Constructor Vec3f
 // Three arguments are r, g, b. One argument is "#hhhhhh", or, perhaps, a color name.
-QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine){
+QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
+{
 	Vec3f c; 
-    switch( context->argumentCount() ){
+    switch( context->argumentCount() )
+	{
 	case 0:
 		// no color: black or white? Let's say: white, against a black sky.
 		c.set( 1, 1, 1 );
 		break;
 	case 1:
         // either '#hhhhhh' or a color name - let QColor do the work
-		if( context->argument(0).isString() ){
+		if( context->argument(0).isString() )
+		{
 			QColor qcol = QColor( context->argument(0).toString() );
-			if( qcol.isValid() ){
+			if( qcol.isValid() )
+			{
                 c.set( qcol.redF(), qcol.greenF(), qcol.blueF() );
 				break;
-			} else {
+			}
+			else
+			{
 				context->throwError( QString("Color: invalid color name") );
 			}
-		} else {
+		}
+		else
+		{
             // Let's hope: a Color/Vec3f object
 			return context->argument(0);
 		}
@@ -134,13 +146,15 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine){
 		// r, g, b: between 0 and 1.
         if( context->argument(0).isNumber() &&
 			context->argument(1).isNumber() && 
-			context->argument(2).isNumber() ){
+			context->argument(2).isNumber() )
+		{
     		c[0] = static_cast<float>(context->argument(0).toNumber());
 	    	c[1] = static_cast<float>(context->argument(1).toNumber());
 		    c[2] = static_cast<float>(context->argument(2).toNumber());
 			if( c[0] < 0 || 1 < c[0] ||
 				c[1] < 0 || 1 < c[1] ||
-				c[2] < 0 || 1 < c[2] ){
+				c[2] < 0 || 1 < c[2] )
+			{
 				context->throwError( QString("Color: RGB value out of range [0,1]") );
 			}
 		}	
@@ -172,7 +186,8 @@ by StelUtils::getDecAngle.
 ***/
 
 
-QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine){
+QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	QScriptValue xVal = that.property( "r", QScriptValue::ResolveLocal );
@@ -182,48 +197,56 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine){
 		         zVal.toString() + "]";
 }
 
-QScriptValue getX(QScriptContext* context, QScriptEngine *engine){
+QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
-QScriptValue getY(QScriptContext* context, QScriptEngine *engine){
+QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
-QScriptValue getZ(QScriptContext* context, QScriptEngine *engine){
+QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
 }
 
-QScriptValue setX(QScriptContext* context, QScriptEngine *engine){
+QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
 	return QScriptValue();
 }
-QScriptValue setY(QScriptContext* context, QScriptEngine *engine){
+QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
 	return QScriptValue();
 }
-QScriptValue setZ(QScriptContext* context, QScriptEngine *engine){
+QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
+{
 	std::ignore = engine;
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
 	return QScriptValue();
 }
 
-void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c){
+void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
+{
 	c[0] = static_cast<float>(obj.property("r").toNumber());
 	c[1] = static_cast<float>(obj.property("g").toNumber());
 	c[2] = static_cast<float>(obj.property("b").toNumber());
 }
 
-QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v){
+QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
+{
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(v[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(v[1])));
@@ -238,24 +261,32 @@ QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v){
 	return obj;
 }
 
-QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine){
+QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
+{
 	Vec3d c;
-	switch( context->argumentCount() ){
+	switch( context->argumentCount() )
+	{
     case 0:
 		c.set( 0, 0, 0 );
 		break;
 	case 2:
         // longitude, latitude - maybe string d/hms, maybe numeric degrees
         double lng;
-		if( context->argument(0).isString() ){
+		if( context->argument(0).isString() )
+		{
             lng = StelUtils::getDecAngle( context->argument(0).toString() );
-		} else {
+		}
+		else
+		{
 			lng = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
 		}
         double lat;
-		if( context->argument(0).isString() ){
+		if( context->argument(0).isString() )
+		{
             lat = StelUtils::getDecAngle( context->argument(0).toString() );
-		} else {
+		}
+		else
+		{
 			lat = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
 		}
 		StelUtils::spheToRect( lng, lat, c ); 
