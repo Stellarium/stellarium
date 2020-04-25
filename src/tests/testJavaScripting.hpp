@@ -30,10 +30,10 @@ class TestJavaScripting : public QObject
 Q_OBJECT
 private slots:
 	void initTestCase();
-    void testVec3fConstructor();
+	void testVec3fConstructor();
 	void testVec3fConstructorFail();
-    void testVec3dConstructor();
-    QString runScript(QScriptEngine *engine, QString script);
+	void testVec3dConstructor();
+	QString runScript(QScriptEngine *engine, QString script);
 	
 private:
 	QScriptEngine *engine;

@@ -602,9 +602,9 @@ double h(double d, double m, double s){
 
 void TestConversions::testStringCoordinateToRad()
 {
-    #define LIM (M_PI/(180.*3600000)) // 1 marcsec
+	#define LIM (M_PI/(180.*3600000)) // 1 marcsec
 	QVariantList data;
-    // legacy
+	// legacy
 	data << "+0d0m0s"	    << 0. << "legacy";
    	data << "+30d0m0s"	    << M_PI/6. << "legacy";
 	data << "+45d0m0s"	    << M_PI/4. << "legacy";
@@ -691,8 +691,7 @@ void TestConversions::testStringCoordinateToRad()
 							.arg(coordinate)
 							.arg(QString::number(angle))
 							.arg(QString::number(expectedValue))
-							.arg(explain)) );
-
+							.arg(explain)) );		
 	}
 	#undef LIM
 }
@@ -718,11 +717,11 @@ void TestConversions::testHMSToHours()
 
 	while (data.count() >= 4)
 	{
-		int h, m, s;
-		double expectedHours;
-		h = data.takeFirst().toInt();
-		m = data.takeFirst().toInt();
-		s = data.takeFirst().toInt();
+		unsigned int h, m;
+		double expectedHours, s;
+		h = data.takeFirst().toUInt();
+		m = data.takeFirst().toUInt();
+		s = data.takeFirst().toDouble();
 		expectedHours = data.takeFirst().toDouble();
 		double hours = StelUtils::hmsToHours(h, m, s);
 		QVERIFY2(qAbs(hours-expectedHours)<=ERROR_LIMIT, qPrintable(QString("%1h%2m%3s = %4h (expected %5h)")

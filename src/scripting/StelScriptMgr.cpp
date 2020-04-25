@@ -75,7 +75,7 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue gVal = that.property( "g", QScriptValue::ResolveLocal );
 	QScriptValue bVal = that.property( "b", QScriptValue::ResolveLocal );
-    return "[r:" + rVal.toString() + ", " + "g:" + gVal.toString() + ", " +
+	return "[r:" + rVal.toString() + ", " + "g:" + gVal.toString() + ", " +
             "b:" + bVal.toString() + "]";
 }
 
@@ -114,59 +114,58 @@ QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 // Three arguments are r, g, b. One argument is "#hhhhhh", or, perhaps, a color name.
 QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 {
-	Vec3f c; 
-    switch( context->argumentCount() )
+	Vec3f c;
+	switch( context->argumentCount() )
 	{
-	case 0:
-		// no color: black or white? Let's say: white, against a black sky.
-		c.set( 1, 1, 1 );
-		break;
-	case 1:
-        // either '#hhhhhh' or a color name - let QColor do the work
-		if( context->argument(0).isString() )
-		{
-			QColor qcol = QColor( context->argument(0).toString() );
-			if( qcol.isValid() )
+		case 0:
+			// no color: black or white? Let's say: white, against a black sky.
+			c.set( 1, 1, 1 );
+			break;
+		case 1:
+			// either '#hhhhhh' or a color name - let QColor do the work
+			if( context->argument(0).isString() )
 			{
-                c.set( qcol.redF(), qcol.greenF(), qcol.blueF() );
-				break;
+				QColor qcol = QColor( context->argument(0).toString() );
+				if( qcol.isValid() )
+				{
+					c.set( qcol.redF(), qcol.greenF(), qcol.blueF() );
+					break;
+				}
+				else
+					context->throwError( QString("Color: invalid color name") );
 			}
 			else
 			{
-				context->throwError( QString("Color: invalid color name") );
+				// Let's hope: a Color/Vec3f object
+				return context->argument(0);
 			}
-		}
-		else
-		{
-            // Let's hope: a Color/Vec3f object
-			return context->argument(0);
-		}
-        break;
-	case 3:
-		// r, g, b: between 0 and 1.
-        if( context->argument(0).isNumber() &&
-			context->argument(1).isNumber() && 
-			context->argument(2).isNumber() )
-		{
-    		c[0] = static_cast<float>(context->argument(0).toNumber());
-	    	c[1] = static_cast<float>(context->argument(1).toNumber());
-		    c[2] = static_cast<float>(context->argument(2).toNumber());
-			if( c[0] < 0 || 1 < c[0] ||
-				c[1] < 0 || 1 < c[1] ||
-				c[2] < 0 || 1 < c[2] )
+			break;
+		case 3:
+			// r, g, b: between 0 and 1.
+			if( context->argument(0).isNumber() &&
+			    context->argument(1).isNumber() &&
+			    context->argument(2).isNumber() )
 			{
-				context->throwError( QString("Color: RGB value out of range [0,1]") );
+				c[0] = static_cast<float>(context->argument(0).toNumber());
+				c[1] = static_cast<float>(context->argument(1).toNumber());
+				c[2] = static_cast<float>(context->argument(2).toNumber());
+				if( c[0] < 0 || 1 < c[0] ||
+				    c[1] < 0 || 1 < c[1] ||
+				    c[2] < 0 || 1 < c[2] )
+				{
+					context->throwError( QString("Color: RGB value out of range [0,1]") );
+				}
 			}
-		}	
-		break;
-	default:
-		context->throwError( QString("Color: invalid number of arguments") );
+			break;
+		default:
+			context->throwError( QString("Color: invalid number of arguments") );
 	}
 	return vec3fToScriptValue(engine, c);
 }
 
-QScriptValue createColor(QScriptContext* context, QScriptEngine *engine){
-    return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
+QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
+{
+	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
 }
 
 // 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d - 3d
@@ -193,7 +192,7 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 	QScriptValue xVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue yVal = that.property( "g", QScriptValue::ResolveLocal );
 	QScriptValue zVal = that.property( "b", QScriptValue::ResolveLocal );
-    return "[" + xVal.toString() + ", " + yVal.toString() + ", " +
+	return "[" + xVal.toString() + ", " + yVal.toString() + ", " +
 		         zVal.toString() + "]";
 }
 
@@ -266,38 +265,32 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 	Vec3d c;
 	switch( context->argumentCount() )
 	{
-    case 0:
-		c.set( 0, 0, 0 );
-		break;
-	case 2:
-        // longitude, latitude - maybe string d/hms, maybe numeric degrees
-        double lng;
-		if( context->argument(0).isString() )
-		{
-            lng = StelUtils::getDecAngle( context->argument(0).toString() );
-		}
-		else
-		{
-			lng = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
-		}
-        double lat;
-		if( context->argument(0).isString() )
-		{
-            lat = StelUtils::getDecAngle( context->argument(0).toString() );
-		}
-		else
-		{
-			lat = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
-		}
-		StelUtils::spheToRect( lng, lat, c ); 
-		break;
-	case 3:
-		c[0] = static_cast<double>(context->argument(0).toNumber());
-	    c[1] = static_cast<double>(context->argument(1).toNumber());
-	    c[2] = static_cast<double>(context->argument(2).toNumber());
-		break;
-	default:
-		context->throwError( QString("Vec3d: invalid number of arguments") );
+		case 0:
+			c.set( 0, 0, 0 );
+			break;
+		case 2:
+			// longitude, latitude - maybe string d/hms, maybe numeric degrees
+			double lng;
+			if( context->argument(0).isString() )
+				lng = StelUtils::getDecAngle( context->argument(0).toString() );
+			else
+				lng = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
+
+			double lat;
+			if ( context->argument(0).isString())
+				lat = StelUtils::getDecAngle( context->argument(0).toString() );
+			else
+				lat = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
+
+			StelUtils::spheToRect( lng, lat, c );
+			break;
+		case 3:
+			c[0] = static_cast<double>(context->argument(0).toNumber());
+			c[1] = static_cast<double>(context->argument(1).toNumber());
+			c[2] = static_cast<double>(context->argument(2).toNumber());
+			break;
+		default:
+			context->throwError( QString("Vec3d: invalid number of arguments") );
 	}
 	return vec3dToScriptValue(engine, c);
 }
@@ -323,7 +316,7 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	qScriptRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
 	QScriptValue ctorVec3f = engine->newFunction(createVec3f);
 	engine->globalObject().setProperty("Vec3f", ctorVec3f);
-    engine->globalObject().setProperty("Color", engine->newFunction(createColor));
+	engine->globalObject().setProperty("Color", engine->newFunction(createColor));
 
 	// Allow Vec3d management in scripts
 	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
@@ -341,7 +334,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	scriptImages->init();
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
-    defVecClasses(engine);
+	defVecClasses(engine);
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
