@@ -157,7 +157,7 @@ QLineEdit[collision="true"] {
 	color: red;
 }
 
-QTextEdit {
+QTextEdit, QPlainTextEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
 	padding: 0 8px;

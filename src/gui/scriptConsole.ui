@@ -395,7 +395,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="scriptEdit">
+           <widget class="QPlainTextEdit" name="scriptEdit">
             <property name="font">
              <font>
               <family>DejaVu Sans Mono</family>
@@ -409,7 +409,7 @@
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>
             <property name="lineWrapMode">
-             <enum>QTextEdit::NoWrap</enum>
+             <enum>QPlainTextEdit::NoWrap</enum>
             </property>
            </widget>
           </item>
