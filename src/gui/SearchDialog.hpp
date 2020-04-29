@@ -185,6 +185,9 @@ private slots:
 	//! Whether to use lock position when coordinates are used or not.
 	void enableLockPosition(bool enable);
 
+	//! Whether to show FOV center marker when coordinates are used or not.
+	void enableFOVCenterMarker(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
@@ -274,6 +277,8 @@ private:
 	bool useStartOfWords;
 	bool useLockPosition;
 	bool useSimbad;
+	bool useFOVCenterMarker;
+	bool fovCenterMarkerState;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;
 

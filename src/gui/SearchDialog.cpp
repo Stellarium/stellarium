@@ -27,6 +27,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planet.hpp"
+#include "GridLinesMgr.hpp"
 #include "CustomObjectMgr.hpp"
 
 #include "StelObjectMgr.hpp"
@@ -150,6 +151,8 @@ SearchDialog::SearchDialog(QObject* parent)
 	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
+	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
+	fovCenterMarkerState = GETSTELMODULE(GridLinesMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
@@ -407,6 +410,9 @@ void SearchDialog::createDialogContent()
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
 
+	connect(ui->checkBoxFOVCenterMarker, SIGNAL(clicked(bool)), this, SLOT(enableFOVCenterMarker(bool)));
+	ui->checkBoxFOVCenterMarker->setChecked(useFOVCenterMarker);
+
 	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
 	ui->checkBoxLockPosition->setChecked(useLockPosition);
 
@@ -438,10 +444,18 @@ void SearchDialog::createDialogContent()
 
 void SearchDialog::changeTab(int index)
 {
-	if (index==0) // First tab: Search
+	if (index==0) // Search Tab
 		ui->lineEditSearchSkyObject->setFocus();
 
-	if (index==3) // Fourth tab: Lists
+	if (index==2) // Position
+	{
+		if (useFOVCenterMarker)
+			GETSTELMODULE(GridLinesMgr)->setFlagFOVCenterMarker(true);
+	}
+	else
+		GETSTELMODULE(GridLinesMgr)->setFlagFOVCenterMarker(fovCenterMarkerState);
+
+	if (index==3) // Lists
 	{
 		updateListTab();
 		ui->searchInListLineEdit->setFocus();
@@ -523,6 +537,13 @@ void SearchDialog::enableLockPosition(bool enable)
 	conf->setValue("search/flag_lock_position", useLockPosition);
 }
 
+void SearchDialog::enableFOVCenterMarker(bool enable)
+{
+	useFOVCenterMarker = enable;
+	fovCenterMarkerState = GETSTELMODULE(GridLinesMgr)->getFlagFOVCenterMarker();
+	conf->setValue("search/flag_fov_center_marker", useFOVCenterMarker);
+}
+
 void SearchDialog::setSimpleStyle()
 {
 	ui->AxisXSpinBox->setVisible(false);
@@ -586,7 +607,8 @@ void SearchDialog::manualPositionChanged()
 			if (cx > 2.*M_PI)
 				cx -= 2.*M_PI;
 			StelUtils::spheToRect(cx, spinLat, pos);
-			pos = core->altAzToJ2000(pos);
+			pos = core->altAzToJ2000(pos, StelCore::RefractionOff);
+			core->setTimeRate(0.);
 
 			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{

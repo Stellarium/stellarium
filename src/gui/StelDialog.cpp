@@ -350,7 +350,7 @@ void StelDialog::askColor()
 	if (c.isValid())
 	{
 		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
-		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
+		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(Vec3f(c.redF(), c.greenF(), c.blueF())));
 		if (moduleName.isEmpty())
 			StelApp::getInstance().getSettings()->setValue(iniName, vColor.toStr());
 		else

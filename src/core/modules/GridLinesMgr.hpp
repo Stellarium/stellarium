@@ -161,6 +161,9 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool apexPointsDisplayed		READ getFlagApexPoints		WRITE setFlagApexPoints			NOTIFY apexPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f apexPointsColor		READ getColorApexPoints		WRITE setColorApexPoints		NOTIFY apexPointsColorChanged)
 
+	Q_PROPERTY(bool fovCenterMarkerDisplayed		READ getFlagFOVCenterMarker		WRITE setFlagFOVCenterMarker			NOTIFY fovCenterMarkerDisplayedChanged)
+	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker		WRITE setColorFOVCenterMarker		NOTIFY fovCenterMarkerColorChanged)
+
 	Q_PROPERTY(int lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
 	Q_PROPERTY(int partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 public:
@@ -764,6 +767,20 @@ public slots:
 	//! @endcode
 	void setColorApexPoints(const Vec3f& newColor);
 
+	//! Setter for displaying the FOV center marker
+	void setFlagFOVCenterMarker(const bool displayed);
+	//! Accessor for displaying FOV center marker.
+	bool getFlagFOVCenterMarker() const;
+	//! Get the current color of the FOV center marker.
+	Vec3f getColorFOVCenterMarker() const;
+	//! Set the color of the FOV center marker.
+	//! @param newColor The color of FOV center marker.
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFOVCenterMarker(const Vec3f& newColor);
+
 	//! Set the thickness of lines
 	//! @param thickness of line in pixels
 	void setLineThickness(const int thickness);
@@ -870,6 +887,8 @@ signals:
 	void antisolarPointColorChanged(const Vec3f & newColor) const;
 	void apexPointsDisplayedChanged(const bool displayed) const;
 	void apexPointsColorChanged(const Vec3f & newColor) const;
+	void fovCenterMarkerDisplayedChanged(const bool displayed) const;
+	void fovCenterMarkerColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -921,6 +940,7 @@ private:
 	SkyPoint * solsticePoints;		// Solstice points
 	SkyPoint * antisolarPoint;		// Antisolar point
 	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
+	SkyPoint * fovCenterMarker;
 };
 
 #endif // GRIDLINESMGR_HPP
