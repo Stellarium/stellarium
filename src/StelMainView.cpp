@@ -631,11 +631,12 @@ StelMainView::StelMainView(QSettings* settings)
 	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat();
 	// VSync control
-	bool vsdef = true;
 	#ifdef Q_OS_OSX
 	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
 	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
-	vsdef = false; // use vsync=false by default on macOS
+	const bool vsdef = false; // use vsync=false by default on macOS
+	#else
+	const bool vsdef = true;
 	#endif
 	if (configuration->value("video/vsync", vsdef).toBool())
 		glFormat.setSwapInterval(1);
@@ -724,18 +725,20 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	qDebug()<<"Default surface format: "<<fmt;
 
 	//if on an GLES build, do not set the format
-#ifndef QT_OPENGL_ES_2
-	// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
-	fmt.setRenderableType(QSurfaceFormat::OpenGL);
-	fmt.setMajorVersion(2);
-	fmt.setMinorVersion(1);
+	const QOpenGLContext::OpenGLModuleType openGLModuleType=QOpenGLContext::openGLModuleType();
+	if (openGLModuleType==QOpenGLContext::LibGL)
+	{
+		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
+		fmt.setRenderableType(QSurfaceFormat::OpenGL);
+		fmt.setMajorVersion(2);
+		fmt.setMinorVersion(1);
 
-	// The following is NOT needed (or even supported) when we request a 2.1 context
-	// The implementation may give us a newer context,
-	// but compatibility with 2.1 should be ensured automatically
-	//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-	//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
-#endif
+		// The following is NOT needed (or even supported) when we request a 2.1 context
+		// The implementation may give us a newer context,
+		// but compatibility with 2.1 should be ensured automatically
+		//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
+	}
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
