@@ -77,18 +77,18 @@ public:
 
 	enum TypeGroupFlags
 	{
-		TypeGalaxies		= 0x00000001, //!< Galaxies
-		TypeActiveGalaxies	= 0x00000002, //!< Different Active Galaxies
+		TypeGalaxies			= 0x00000001, //!< Galaxies
+		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
 		TypeOpenStarClusters	= 0x00000008, //!< Open Star Clusters
-		TypeGlobularStarClusters= 0x00000010, //!< Globular Star Clusters
+		TypeGlobularStarClusters	= 0x00000010, //!< Globular Star Clusters
 		TypeHydrogenRegions	= 0x00000020, //!< Hydrogen Regions
-		TypeBrightNebulae	= 0x00000040, //!< Bright Nebulae
+		TypeBrightNebulae		= 0x00000040, //!< Bright Nebulae
 		TypeDarkNebulae		= 0x00000080, //!< Dark Nebulae
 		TypePlanetaryNebulae	= 0x00000100, //!< Planetary Nebulae
 		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
-		TypeGalaxyClusters	= 0x00000400, //!< Galaxy Clusters
-		TypeOther		= 0x00000800  //!< Other objects
+		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
+		TypeOther				= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
@@ -99,16 +99,16 @@ public:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,	//!< m Galaxy
+		NebGx			= 0,		//!< Galaxy
 		NebAGx			= 1,  	//!< Active galaxy
-		NebRGx			= 2,	//!< m Radio galaxy
-		NebIGx			= 3,	//!< Interacting galaxy
-		NebQSO			= 4,	//!< Quasar
-		NebCl			= 5,	//!< Star cluster
-		NebOc			= 6,	//!< Open star cluster
-		NebGc			= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA			= 8,	//!< Stellar association
-		NebSC			= 9,	//!< Star cloud
+		NebRGx			= 2,		//!< m Radio galaxy
+		NebIGx			= 3,		//!< Interacting galaxy
+		NebQSO			= 4,		//!< Quasar
+		NebCl			= 5,		//!< Star cluster
+		NebOc			= 6,		//!< Open star cluster
+		NebGc			= 7,		//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA			= 8,		//!< Stellar association
+		NebSC			= 9,		//!< Star cloud
 		NebN			= 10,	//!< A nebula
 		NebPn			= 11,	//!< Planetary nebula
 		NebDn			= 12,	//!< Dark Nebula
@@ -133,7 +133,8 @@ public:
 		NebSNC			= 31, 	//!< Supernova Candidate
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
-		NebUnknown		= 34	//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebPartOfGx		= 34,	//!< Part of a Galaxy
+		NebUnknown		= 35		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();

@@ -500,7 +500,7 @@ QString Nebula::getI18nAliases() const
 
 float Nebula::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);	
+	Q_UNUSED(core)
 	return vMag;
 }
 
@@ -720,7 +720,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		case NebBLL:
 		case NebBLA:
 		case NebRGx:
-		case NebGxCl:
+		case NebGxCl:			
 			if (finalSize > 35.f)
 				Nebula::texGalaxyLarge->bind();
 			else
@@ -1343,5 +1343,6 @@ void Nebula::buildTypeStringMap()
 	Nebula::typeStringMap.insert( NebSNC    , q_("supernova candidate") );
 	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
 	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
+	Nebula::typeStringMap.insert( NebPartOfGx   , q_("part of a galaxy") );
 	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
 }

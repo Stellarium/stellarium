@@ -53,13 +53,13 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.9";
+static const QString StellariumDSOCatalogVersion = "3.10";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebUnknown, c); emit circlesColorChanged(c); }
 const Vec3f NebulaMgr::getCirclesColor(void) const {return Nebula::hintColorMap.value(Nebula::NebUnknown);}
-void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebGx, c); emit galaxiesColorChanged(c); }
+void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebGx, c); Nebula::hintColorMap.insert(Nebula::NebPartOfGx, c); emit galaxiesColorChanged(c); }
 const Vec3f NebulaMgr::getGalaxyColor(void) const {return Nebula::hintColorMap.value(Nebula::NebGx);}
 void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebRGx, c); emit radioGalaxiesColorChanged(c); }
 const Vec3f NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::hintColorMap.value(Nebula::NebRGx);}
@@ -1102,7 +1102,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QString record;
 	while (!dsoIn.atEnd())
 	{
-		dsoIn.readLine();
+		dsoIn.readLine();		
 		++totalRecords;
 	}
 
@@ -1132,7 +1132,10 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 		// skip comments
 		if (record.startsWith("//") || record.startsWith("#"))
+		{
+			--totalRecords;
 			continue;
+		}
 		++currentRecordNumber;
 
 		if (!record.isEmpty())
@@ -1304,6 +1307,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				{ "PA?" , Nebula::NebPPN  },
 				{ "BUB" , Nebula::NebISM  },
 				{ "CLG" , Nebula::NebGxCl },
+				{ "POG" , Nebula::NebPartOfGx },
 				{ "CGG" , Nebula::NebGxCl }};
 
 			nType=oTypesMap.value(oType.toUpper(), Nebula::NebUnknown);
