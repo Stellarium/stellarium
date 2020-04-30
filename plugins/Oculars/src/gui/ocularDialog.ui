@@ -518,13 +518,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBoxDMSDegrees">
-               <property name="text">
-                <string>Use degrees and minutes for FOV of CCD</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
@@ -535,26 +528,19 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="4" column="0">
               <layout class="QHBoxLayout" name="guiSensorPanelHorizontalLayout">
                <item>
-                <widget class="QCheckBox" name="checkBoxShowCcdCropOverlay">
-                 <property name="toolTip">
-                  <string>Enable a square overlay showing the effective size of a number of pixels.</string>
-                 </property>
-                 <property name="text">
-                  <string>Show sensor crop overlay</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="orientationHorizontalSpacer">
+                <spacer name="horizontalSpacer_2">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>22</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -565,18 +551,24 @@
                  <property name="text">
                   <string>Overlay size (px)</string>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="guiCcdCropOverlaySizeSpinBox">
+                <widget class="QSpinBox" name="guiCcdCropOverlayHSizeSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="maximumSize">
                   <size>
-                   <width>80</width>
+                   <width>70</width>
                    <height>16777215</height>
                   </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Horizontal size (width)</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -592,12 +584,73 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QSpinBox" name="guiCcdCropOverlayVSizeSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Vertical size (height)</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>6000</number>
+                 </property>
+                 <property name="value">
+                  <number>250</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="checkBoxCCDFOVScaling">
                <property name="text">
                 <string>Enable autozoom when switching CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxDMSDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxShowCcdCropOverlay">
+               <property name="toolTip">
+                <string>Enable a square overlay showing the effective size of a number of pixels.</string>
+               </property>
+               <property name="text">
+                <string>Show sensor crop overlay</string>
                </property>
               </widget>
              </item>
@@ -1930,8 +1983,7 @@
   <tabstop>checkBoxCCDFOVScaling</tabstop>
   <tabstop>checkBoxDMSDegrees</tabstop>
   <tabstop>checkBoxTypeOfMount</tabstop>
-  <tabstop>checkBoxShowCcdCropOverlay</tabstop>
-  <tabstop>guiCcdCropOverlaySizeSpinBox</tabstop>
+  <tabstop>guiCcdCropOverlayHSizeSpinBox</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
   <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>limitStellarMagnitudeCheckBox</tabstop>

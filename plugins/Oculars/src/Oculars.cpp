@@ -180,7 +180,8 @@ Oculars::Oculars()
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 	, flagShowCcdCropOverlay(false)
-	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
+	, ccdCropOverlayHSize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
+	, ccdCropOverlayVSize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 	, flagShowContour(false)
 	, flagShowCardinals(false)
 	, flagAlignCrosshair(false)
@@ -605,7 +606,8 @@ void Oculars::init()
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
-		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
+		setCcdCropOverlayHSize(settings->value("ccd_crop_overlay_hsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
+		setCcdCropOverlayVSize(settings->value("ccd_crop_overlay_vsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
 		setFlagShowCardinals(settings->value("show_ocular_cardinals", false).toBool());
 		setFlagAlignCrosshair(settings->value("align_crosshair", false).toBool());
@@ -1503,8 +1505,8 @@ void Oculars::paintCCDBounds()
 			const float height = params.viewportXywh[aspectIndex] * static_cast<float>(ccdYRatio * params.devicePixelsPerPixel);
 
 			// Calculate the size of the CCD crop overlay
-			const float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
-			const float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
+			const float overlayWidth = width * ccdCropOverlayHSize / ccd->resolutionX();
+			const float overlayHeight = height * ccdCropOverlayVSize / ccd->resolutionY();
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
@@ -1665,8 +1667,9 @@ void Oculars::paintCCDBounds()
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
 					{
 						// show the CCD crop overlay text
-						QString resolutionOverlayText = QString("%1%2 %3 %1%2")
-								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
+						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
+								.arg(QString::number(ccdCropOverlayHSize, 'd', 0))
+								.arg(QString::number(ccdCropOverlayVSize, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
 						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
@@ -2545,11 +2548,18 @@ bool Oculars::getFlagShowResolutionCriteria() const
 	return flagShowResolutionCriteria;
 }
 
-void Oculars::setCcdCropOverlaySize(int size) {
-	ccdCropOverlaySize = size;
-	settings->setValue("ccd_crop_overlay_size", size);
+void Oculars::setCcdCropOverlayHSize(int size) {
+	ccdCropOverlayHSize = size;
+	settings->setValue("ccd_crop_overlay_hsize", size);
 	settings->sync();
-	emit ccdCropOverlaySizeChanged(size);
+	emit ccdCropOverlayHSizeChanged(size);
+}
+
+void Oculars::setCcdCropOverlayVSize(int size) {
+	ccdCropOverlayVSize = size;
+	settings->setValue("ccd_crop_overlay_vsize", size);
+	settings->sync();
+	emit ccdCropOverlayVSizeChanged(size);
 }
 
 void Oculars::setFlagShowCcdCropOverlay(const bool b)

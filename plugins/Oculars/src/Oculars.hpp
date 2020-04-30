@@ -114,7 +114,9 @@ class Oculars : public StelModule
 	Q_PROPERTY(Vec3f lineColor             READ getLineColor               WRITE setLineColor               NOTIFY textColorChanged)
 
 	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay  NOTIFY flagShowCcdCropOverlayChanged)
-	Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY ccdCropOverlaySizeChanged)
+	//Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY ccdCropOverlaySizeChanged)
+	Q_PROPERTY(int ccdCropOverlayHSize      READ getCcdCropOverlayHSize      WRITE setCcdCropOverlayHSize      NOTIFY ccdCropOverlayHSizeChanged)
+	Q_PROPERTY(int ccdCropOverlayVSize      READ getCcdCropOverlayVSize      WRITE setCcdCropOverlayVSize      NOTIFY ccdCropOverlayVSizeChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -238,8 +240,11 @@ public slots:
 	void setFlagShowResolutionCriteria(const bool b);
 	bool getFlagShowResolutionCriteria(void) const;
 
-	void setCcdCropOverlaySize(int size);
-	int getCcdCropOverlaySize()const {return ccdCropOverlaySize;}
+	void setCcdCropOverlayHSize(int size);
+	int getCcdCropOverlayHSize()const {return ccdCropOverlayHSize;}
+
+	void setCcdCropOverlayVSize(int size);
+	int getCcdCropOverlayVSize()const {return ccdCropOverlayVSize;}
 
 	void setArrowButtonScale(const double val);
 	double getArrowButtonScale() const;
@@ -301,8 +306,9 @@ signals:
 	void flagDMSDegreesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
 	void flagShowOcularsButtonChanged(bool value);
-	void flagShowCcdCropOverlayChanged(bool value);
-	void ccdCropOverlaySizeChanged(int value);
+	void flagShowCcdCropOverlayChanged(bool value);	
+	void ccdCropOverlayHSizeChanged(int value);
+	void ccdCropOverlayVSizeChanged(int value);
 	void flagShowContourChanged(bool value);
 	void flagShowCardinalsChanged(bool value);
 	void flagAlignCrosshairChanged(bool value);
@@ -473,7 +479,8 @@ private:
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
 	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
-	int ccdCropOverlaySize;  //!< Holds the ccd crop overlay size
+	int ccdCropOverlayHSize;  //!< Holds the ccd crop overlay size
+	int ccdCropOverlayVSize;  //!< Holds the ccd crop overlay size
 	bool flagShowContour;
 	bool flagShowCardinals;
 	bool flagAlignCrosshair;
