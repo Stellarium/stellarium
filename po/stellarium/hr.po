@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-19 13:30+0700\n"
+"POT-Creation-Date: 2020-05-01 00:12+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2020\n"
 "Language-Team: Croatian (https://www.transifex.com/stellarium/teams/80998/hr/)\n"
@@ -36,7 +36,7 @@ msgstr "prilagođena oznaka"
 #: src/core/modules/Constellation.cpp:277
 #: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:257
 #: src/core/modules/Nebula.cpp:259 src/core/modules/Planet.cpp:447
-#: src/core/modules/MinorPlanet.cpp:188 src/core/modules/Comet.cpp:171
+#: src/core/modules/MinorPlanet.cpp:189 src/core/modules/Comet.cpp:172
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
 #: src/core/modules/StarWrapper.cpp:221 src/gui/AstroCalcDialog.cpp:811
 #: src/ui_configurationDialog.h:1618 plugins/Satellites/src/Satellite.cpp:300
@@ -56,29 +56,29 @@ msgstr "Oznaka"
 msgid "asterism"
 msgstr "asterizam"
 
-#: src/core/modules/AsterismMgr.cpp:96
-#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:460
-#: src/core/modules/GridLinesMgr.cpp:1637
+#: src/core/modules/AsterismMgr.cpp:95
+#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:455
+#: src/core/modules/GridLinesMgr.cpp:1660
 #: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:459
 #: src/core/modules/NebulaMgr.cpp:460 src/core/modules/SolarSystem.cpp:270
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:612 src/core/StelCore.cpp:257
+#: src/core/StelApp.cpp:616 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
 msgid "Display Options"
 msgstr "Mogućnosti prikaza"
 
-#: src/core/modules/AsterismMgr.cpp:97
+#: src/core/modules/AsterismMgr.cpp:96
 msgid "Asterism lines"
 msgstr "Linije asterizma"
 
-#: src/core/modules/AsterismMgr.cpp:98
+#: src/core/modules/AsterismMgr.cpp:97
 msgid "Asterism labels"
 msgstr "Oznake asterizma"
 
-#: src/core/modules/AsterismMgr.cpp:99
+#: src/core/modules/AsterismMgr.cpp:98
 msgid "Ray helpers"
 msgstr "Pomoćne linije"
 
@@ -87,7 +87,7 @@ msgid "constellation"
 msgstr "zviježđe"
 
 #: src/core/modules/ConstellationMgr.cpp:134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation lines"
 msgstr "Linije zviježđa"
 
@@ -96,12 +96,12 @@ msgid "Constellation art"
 msgstr "Umjetnički prikazi zviježđa"
 
 #: src/core/modules/ConstellationMgr.cpp:136
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Constellation labels"
 msgstr "Nazivi zviježđa"
 
 #: src/core/modules/ConstellationMgr.cpp:137
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Constellation boundaries"
 msgstr "Granice zviježđa"
 
@@ -121,156 +121,156 @@ msgstr "Odaberi sva zviježđa"
 msgid "Reload the sky culture"
 msgstr "Ponovno učitaj kulturu zviježđa"
 
-#: src/core/modules/StarMgr.cpp:461 src/ui_viewDialog.h:2753
+#: src/core/modules/StarMgr.cpp:456 src/ui_viewDialog.h:2765
 #: src/ui_dsoColorsDialog.h:542
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
 msgstr "Zvijezde"
 
-#: src/core/modules/StarMgr.cpp:462
+#: src/core/modules/StarMgr.cpp:457
 msgid "Stars labels"
 msgstr "Nazivi zvijezda"
 
-#: src/core/modules/StarMgr.cpp:464
+#: src/core/modules/StarMgr.cpp:459
 msgid "Increase the magnitude limit for stars"
 msgstr "Povećaj graničnu magnitudu za zvijezde"
 
-#: src/core/modules/StarMgr.cpp:465
+#: src/core/modules/StarMgr.cpp:460
 msgid "Reduce the magnitude limit for stars"
 msgstr "Smanji graničnu magnitudu za zvijezde"
 
-#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3291
+#: src/core/modules/GridLinesMgr.cpp:680 src/ui_viewDialog.h:3176
 msgid "Meridian"
 msgstr "Meridijan"
 
-#: src/core/modules/GridLinesMgr.cpp:683
+#: src/core/modules/GridLinesMgr.cpp:684
 msgid "Ecliptic of J2000.0"
 msgstr "Linija ekliptike J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:687
+#: src/core/modules/GridLinesMgr.cpp:688
 msgid "Ecliptic of Date"
 msgstr "Ekliptika na datum"
 
-#: src/core/modules/GridLinesMgr.cpp:691
+#: src/core/modules/GridLinesMgr.cpp:692
 msgid "Equator of J2000.0"
 msgstr "Ekvator J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:695
+#: src/core/modules/GridLinesMgr.cpp:696
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:700
+#: src/core/modules/GridLinesMgr.cpp:701
 msgid "Precession Circle"
 msgstr "Kružnica precesije"
 
-#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3275
+#: src/core/modules/GridLinesMgr.cpp:705 src/ui_viewDialog.h:3017
 msgid "Horizon"
 msgstr "Horizont"
 
-#: src/core/modules/GridLinesMgr.cpp:708
+#: src/core/modules/GridLinesMgr.cpp:709
 msgid "Galactic Equator"
 msgstr "Galaktički ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:712
+#: src/core/modules/GridLinesMgr.cpp:713
 msgid "Supergalactic Equator"
 msgstr "Supergalaktički ekvator"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3287
+#: src/core/modules/GridLinesMgr.cpp:718 src/ui_viewDialog.h:3310
 msgid "O./C. longitude"
 msgstr "Dužina Op./Konj. "
 
-#: src/core/modules/GridLinesMgr.cpp:721
-#: src/core/modules/GridLinesMgr.cpp:1656 src/ui_viewDialog.h:3295
+#: src/core/modules/GridLinesMgr.cpp:722
+#: src/core/modules/GridLinesMgr.cpp:1679 src/ui_viewDialog.h:3192
 msgid "Prime Vertical"
 msgstr "Prvi vertikal"
 
-#: src/core/modules/GridLinesMgr.cpp:725
+#: src/core/modules/GridLinesMgr.cpp:726
 msgid "Equinoctial Colure"
 msgstr "Ekvinocijski kolur"
 
-#: src/core/modules/GridLinesMgr.cpp:729
+#: src/core/modules/GridLinesMgr.cpp:730
 msgid "Solstitial Colure"
 msgstr "Solsticijski kolur"
 
-#: src/core/modules/GridLinesMgr.cpp:734
+#: src/core/modules/GridLinesMgr.cpp:735
 msgid "Circumpolar Circle"
 msgstr "Cirkumpolarna kružnica"
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1195
-#: src/core/modules/GridLinesMgr.cpp:1204
+#: src/core/modules/GridLinesMgr.cpp:1196
+#: src/core/modules/GridLinesMgr.cpp:1205
 msgid "NCP"
 msgstr "SNP"
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1197
-#: src/core/modules/GridLinesMgr.cpp:1206
+#: src/core/modules/GridLinesMgr.cpp:1198
+#: src/core/modules/GridLinesMgr.cpp:1207
 msgid "SCP"
 msgstr "JNP"
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:1213
+#: src/core/modules/GridLinesMgr.cpp:1214
 msgctxt "zenith"
 msgid "Z"
 msgstr "Z"
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:1215
+#: src/core/modules/GridLinesMgr.cpp:1216
 msgctxt "nadir"
 msgid "Z'"
 msgstr "Z'"
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1222
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1223
+#: src/core/modules/GridLinesMgr.cpp:1232
 msgid "NEP"
 msgstr "SPE"
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1224
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1225
+#: src/core/modules/GridLinesMgr.cpp:1234
 msgid "SEP"
 msgstr "JPE"
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "NGP"
 msgstr "SGP"
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1242
+#: src/core/modules/GridLinesMgr.cpp:1243
 msgid "SGP"
 msgstr "JGP"
 
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "NSGP"
 msgstr "SSGP"
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "SSGP"
 msgstr "JSGP"
 
 #. TRANSLATORS: Antisolar Point
-#: src/core/modules/GridLinesMgr.cpp:1286
+#: src/core/modules/GridLinesMgr.cpp:1287
 msgid "ASP"
 msgstr "AST"
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
-#: src/core/modules/GridLinesMgr.cpp:1293
+#: src/core/modules/GridLinesMgr.cpp:1294
 msgid "Apex"
 msgstr "Apeks"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
-#: src/core/modules/GridLinesMgr.cpp:1295
+#: src/core/modules/GridLinesMgr.cpp:1296
 msgid "Antapex"
 msgstr "Antiapeks"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1305 src/core/modules/Planet.cpp:536
-#: src/core/modules/MinorPlanet.cpp:262 src/core/modules/Comet.cpp:234
+#: src/core/modules/GridLinesMgr.cpp:1306 src/core/modules/Planet.cpp:536
+#: src/core/modules/MinorPlanet.cpp:263 src/core/modules/Comet.cpp:235
 #: src/gui/AstroCalcDialog.cpp:5753 plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:373
 #: plugins/MeteorShowers/src/MeteorShower.cpp:547
@@ -278,146 +278,150 @@ msgctxt "speed"
 msgid "km/s"
 msgstr "km/s"
 
-#: src/core/modules/GridLinesMgr.cpp:1638
+#: src/core/modules/GridLinesMgr.cpp:1661
 msgid "Grids and lines"
 msgstr "Mreže i linije"
 
-#: src/core/modules/GridLinesMgr.cpp:1639
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:343
+#: src/core/modules/GridLinesMgr.cpp:1662
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Ekvatorijalna mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1640 src/ui_viewDialog.h:3015
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
+#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Azimutska mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1641
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:358
+#: src/core/modules/GridLinesMgr.cpp:1664
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Linija ekliptike"
 
-#: src/core/modules/GridLinesMgr.cpp:1642
+#: src/core/modules/GridLinesMgr.cpp:1665
 msgid "Ecliptic J2000 line"
 msgstr "Linija J2000 ekliptike "
 
-#: src/core/modules/GridLinesMgr.cpp:1643
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: src/core/modules/GridLinesMgr.cpp:1666
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Linija ekvatora"
 
-#: src/core/modules/GridLinesMgr.cpp:1644
+#: src/core/modules/GridLinesMgr.cpp:1667
 msgid "Equator J2000 line"
 msgstr "Linija J2000 ekvatora "
 
-#: src/core/modules/GridLinesMgr.cpp:1645
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
+#: src/core/modules/GridLinesMgr.cpp:1668
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Linija meridijana"
 
-#: src/core/modules/GridLinesMgr.cpp:1646
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
+#: src/core/modules/GridLinesMgr.cpp:1669
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
 msgstr "Linija horizonta"
 
-#: src/core/modules/GridLinesMgr.cpp:1647
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: src/core/modules/GridLinesMgr.cpp:1670
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorijalna J2000 mreža "
 
-#: src/core/modules/GridLinesMgr.cpp:1648
+#: src/core/modules/GridLinesMgr.cpp:1671
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptička J2000 mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1649
+#: src/core/modules/GridLinesMgr.cpp:1672
 msgid "Ecliptic grid"
 msgstr "Ekliptička mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3242
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
+#: src/core/modules/GridLinesMgr.cpp:1673 src/ui_viewDialog.h:3275
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "Galaktička mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3279
+#: src/core/modules/GridLinesMgr.cpp:1674 src/ui_viewDialog.h:3300
 msgid "Galactic equator"
 msgstr "Galaktički ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:1652 src/ui_viewDialog.h:3255
+#: src/core/modules/GridLinesMgr.cpp:1675 src/ui_viewDialog.h:3226
 msgid "Supergalactic grid"
 msgstr "Supergalaktička mreža"
 
-#: src/core/modules/GridLinesMgr.cpp:1653 src/ui_viewDialog.h:3283
+#: src/core/modules/GridLinesMgr.cpp:1676 src/ui_viewDialog.h:3005
 msgid "Supergalactic equator"
 msgstr "Supergalaktički ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:1654
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
+#: src/core/modules/GridLinesMgr.cpp:1677
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Opposition/conjunction longitude line"
 msgstr "Linija dužine opozicije/konjukcije"
 
-#: src/core/modules/GridLinesMgr.cpp:1655
+#: src/core/modules/GridLinesMgr.cpp:1678
 msgid "Precession Circles"
 msgstr "Kružnice precesije"
 
-#: src/core/modules/GridLinesMgr.cpp:1657
+#: src/core/modules/GridLinesMgr.cpp:1680
 msgid "Colure Lines"
 msgstr "Linije kolura"
 
-#: src/core/modules/GridLinesMgr.cpp:1658
+#: src/core/modules/GridLinesMgr.cpp:1681
 msgid "Circumpolar Circles"
 msgstr "Cirkumpolarne kružnice"
 
-#: src/core/modules/GridLinesMgr.cpp:1659
+#: src/core/modules/GridLinesMgr.cpp:1682
 msgid "Celestial J2000 poles"
 msgstr "Nebeski J2000 polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1660
+#: src/core/modules/GridLinesMgr.cpp:1683
 msgid "Celestial poles"
 msgstr "Nebeski polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1661
+#: src/core/modules/GridLinesMgr.cpp:1684
 msgid "Zenith and nadir"
 msgstr "Zenit i nadir"
 
-#: src/core/modules/GridLinesMgr.cpp:1662
+#: src/core/modules/GridLinesMgr.cpp:1685
 msgid "Ecliptic J2000 poles"
 msgstr "Ekliptički J2000 polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1663
+#: src/core/modules/GridLinesMgr.cpp:1686
 msgid "Ecliptic poles"
 msgstr "Ekliptički polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1664 src/ui_viewDialog.h:3169
+#: src/core/modules/GridLinesMgr.cpp:1687 src/ui_viewDialog.h:3089
 msgid "Galactic poles"
 msgstr "Galaktički polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1665 src/ui_viewDialog.h:3030
+#: src/core/modules/GridLinesMgr.cpp:1688 src/ui_viewDialog.h:3088
 msgid "Supergalactic poles"
 msgstr "Supergalaktički polovi"
 
-#: src/core/modules/GridLinesMgr.cpp:1666
+#: src/core/modules/GridLinesMgr.cpp:1689
 msgid "Equinox J2000 points"
 msgstr "Točke ekvinocija J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1667
+#: src/core/modules/GridLinesMgr.cpp:1690
 msgid "Equinox points"
 msgstr "Točke ekvinocija"
 
-#: src/core/modules/GridLinesMgr.cpp:1668
+#: src/core/modules/GridLinesMgr.cpp:1691
 msgid "Solstice J2000 points"
 msgstr "Točke solsticija J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1669
+#: src/core/modules/GridLinesMgr.cpp:1692
 msgid "Solstice points"
 msgstr "Točke solsticija"
 
-#: src/core/modules/GridLinesMgr.cpp:1670 src/ui_viewDialog.h:2990
+#: src/core/modules/GridLinesMgr.cpp:1693 src/ui_viewDialog.h:3071
 msgid "Antisolar point"
 msgstr "Antisolarna točka"
 
-#: src/core/modules/GridLinesMgr.cpp:1671 src/ui_viewDialog.h:3235
+#: src/core/modules/GridLinesMgr.cpp:1694 src/ui_viewDialog.h:3123
 msgid "Apex points"
 msgstr "Točke apeksa"
+
+#: src/core/modules/GridLinesMgr.cpp:1695 src/ui_viewDialog.h:3319
+msgid "FOV Center marker"
+msgstr "Oznaka centra vidnog polja"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Atmosphere"
@@ -427,8 +431,8 @@ msgstr "Atmosfera"
 msgid "Fog"
 msgstr "Magla"
 
-#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3084
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
+#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3204
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "Strane svijeta"
 
@@ -460,9 +464,9 @@ msgstr "Smanji svjetlosno onečišćenje"
 msgid "Cyclic change in light pollution"
 msgstr "Ciklična promjena svjetlosnog onečišćenja"
 
-#: src/core/modules/LandscapeMgr.cpp:896 src/scripting/StelScriptMgr.cpp:260
+#: src/core/modules/LandscapeMgr.cpp:896 src/scripting/StelScriptMgr.cpp:461
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -485,7 +489,7 @@ msgid "m"
 msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:905 src/ui_locationDialogGui.h:483
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
 msgstr "Lokacija"
@@ -553,16 +557,16 @@ msgid "Linear size"
 msgstr "Linearna veličina"
 
 #: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:646
-#: src/core/modules/MinorPlanet.cpp:338
+#: src/core/modules/MinorPlanet.cpp:356
 msgid "Diameter"
 msgstr "Promjer"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:492
 #: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:649
-#: src/core/modules/MinorPlanet.cpp:224 src/core/modules/MinorPlanet.cpp:247
-#: src/core/modules/MinorPlanet.cpp:338 src/core/modules/Comet.cpp:190
-#: src/core/modules/Comet.cpp:336 src/gui/StelGuiItems.cpp:805
+#: src/core/modules/MinorPlanet.cpp:225 src/core/modules/MinorPlanet.cpp:248
+#: src/core/modules/MinorPlanet.cpp:356 src/core/modules/Comet.cpp:191
+#: src/core/modules/Comet.cpp:354 src/gui/StelGuiItems.cpp:805
 #: src/gui/AstroCalcDialog.cpp:5673 plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:366
 msgctxt "distance"
@@ -1274,7 +1278,7 @@ msgstr "Dodatni nazivi:"
 msgid "Additional catalog numbers: "
 msgstr "Dodatni kataloški brojevi:"
 
-#: src/core/modules/Nebula.cpp:269 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/Nebula.cpp:269 src/core/modules/MinorPlanet.cpp:214
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
@@ -1327,8 +1331,8 @@ msgid "ly"
 msgstr "sg"
 
 #: src/core/modules/Nebula.cpp:354 src/core/modules/Nebula.cpp:400
-#: src/core/modules/Planet.cpp:527 src/core/modules/MinorPlanet.cpp:256
-#: src/core/modules/Comet.cpp:228 src/core/modules/StarWrapper.cpp:269
+#: src/core/modules/Planet.cpp:527 src/core/modules/MinorPlanet.cpp:257
+#: src/core/modules/Comet.cpp:229 src/core/modules/StarWrapper.cpp:269
 #: src/core/modules/StarWrapper.cpp:271 src/gui/AstroCalcDialog.cpp:2992
 #: src/gui/AstroCalcDialog.cpp:3050 src/ui_configurationDialog.h:1655
 #: plugins/Supernovae/src/Supernova.cpp:165 plugins/Novae/src/Nova.cpp:167
@@ -1369,7 +1373,7 @@ msgctxt "parallax"
 msgid "mas"
 msgstr "mks"
 
-#: src/core/modules/Nebula.cpp:428 src/ui_searchDialogGui.h:860
+#: src/core/modules/Nebula.cpp:428 src/ui_searchDialogGui.h:866
 msgid "Morphological description"
 msgstr "Morfološki opis"
 
@@ -1802,6 +1806,10 @@ msgid "cluster of galaxies"
 msgstr "skup galaksija"
 
 #: src/core/modules/Nebula.cpp:1346
+msgid "part of a galaxy"
+msgstr "dio galaksije"
+
+#: src/core/modules/Nebula.cpp:1347
 msgid "object of unknown nature"
 msgstr "objekt nepoznate prirode"
 
@@ -1813,8 +1821,8 @@ msgstr "Objekti dubokog svemira"
 msgid "Toggle DSO type filter"
 msgstr "Uključi/isključi filter vrsta ODS-a"
 
-#: src/core/modules/Planet.cpp:457 src/core/modules/MinorPlanet.cpp:208
-#: src/core/modules/Comet.cpp:183 src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/Planet.cpp:457 src/core/modules/MinorPlanet.cpp:209
+#: src/core/modules/Comet.cpp:184 src/core/modules/StarWrapper.cpp:228
 #: plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
 msgstr "Apsolutna magnituda"
@@ -1830,8 +1838,8 @@ msgid "Ecliptical"
 msgstr "Ekliptičke"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:222
-#: src/core/modules/Comet.cpp:199 src/gui/AstroCalcDialog.cpp:796
+#: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:223
+#: src/core/modules/Comet.cpp:200 src/gui/AstroCalcDialog.cpp:796
 #: src/gui/AstroCalcDialog.cpp:1004 src/gui/AstroCalcDialog.cpp:1354
 #: src/gui/AstroCalcDialog.cpp:1391 src/gui/AstroCalcDialog.cpp:2960
 #: src/gui/AstroCalcDialog.cpp:5726 src/gui/AstroCalcDialog.cpp:5800
@@ -1846,14 +1854,14 @@ msgstr "AJ"
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:506 src/core/modules/Planet.cpp:524
-#: src/core/modules/MinorPlanet.cpp:236 src/core/modules/MinorPlanet.cpp:254
-#: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:5675
+#: src/core/modules/MinorPlanet.cpp:237 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Comet.cpp:193 src/gui/AstroCalcDialog.cpp:5675
 msgctxt "distance"
 msgid "M km"
 msgstr "mil. km"
 
-#: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:238
-#: src/core/modules/Comet.cpp:212
+#: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Comet.cpp:213
 msgid "Distance from Sun"
 msgstr "Udaljenost od Sunca"
 
@@ -1862,27 +1870,27 @@ msgstr "Udaljenost od Sunca"
 msgid "Light time"
 msgstr "Svjetlosno vrijeme"
 
-#: src/core/modules/Planet.cpp:543 src/core/modules/MinorPlanet.cpp:269
-#: src/core/modules/Comet.cpp:240
+#: src/core/modules/Planet.cpp:543 src/core/modules/MinorPlanet.cpp:270
+#: src/core/modules/Comet.cpp:241
 msgid "Orbital velocity"
 msgstr "Orbitalna brzina"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/MinorPlanet.cpp:272
+#: src/core/modules/Planet.cpp:546 src/core/modules/MinorPlanet.cpp:273
 msgid "Heliocentric velocity"
 msgstr "Heliocentrička brzina"
 
-#: src/core/modules/Planet.cpp:551 src/core/modules/MinorPlanet.cpp:277
+#: src/core/modules/Planet.cpp:551 src/core/modules/MinorPlanet.cpp:278
 msgid "Equatorial rotation velocity"
 msgstr "brzina rotacije na ekvatoru"
 
 #: src/core/modules/Planet.cpp:580 src/core/modules/Planet.cpp:581
-#: src/core/modules/MinorPlanet.cpp:300 src/core/modules/MinorPlanet.cpp:301
-#: src/core/modules/Comet.cpp:263 src/core/modules/Comet.cpp:264
+#: src/core/modules/MinorPlanet.cpp:306 src/core/modules/MinorPlanet.cpp:307
+#: src/core/modules/Comet.cpp:269 src/core/modules/Comet.cpp:270
 msgid "Hourly motion"
 msgstr "Satni pomak"
 
-#: src/core/modules/Planet.cpp:580 src/core/modules/MinorPlanet.cpp:300
-#: src/core/modules/Comet.cpp:263 src/core/modules/StarWrapper.cpp:285
+#: src/core/modules/Planet.cpp:580 src/core/modules/MinorPlanet.cpp:306
+#: src/core/modules/Comet.cpp:269 src/core/modules/StarWrapper.cpp:285
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "prema"
@@ -1891,11 +1899,11 @@ msgstr "prema"
 msgid "with rings"
 msgstr "s prstenovima"
 
-#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:322
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:340
 msgid "scaled up to"
 msgstr "uvećan do"
 
-#: src/core/modules/Planet.cpp:641 src/core/modules/MinorPlanet.cpp:332
+#: src/core/modules/Planet.cpp:641 src/core/modules/MinorPlanet.cpp:350
 msgid "Apparent diameter"
 msgstr "Prividni promjer"
 
@@ -1904,14 +1912,14 @@ msgid "Equatorial diameter"
 msgstr "Promjer ekvatora"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:668 src/core/modules/MinorPlanet.cpp:357
+#: src/core/modules/Planet.cpp:668 src/core/modules/MinorPlanet.cpp:375
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:5770
 msgctxt "duration"
 msgid "days"
 msgstr "dana"
 
-#: src/core/modules/Planet.cpp:672 src/core/modules/MinorPlanet.cpp:361
-#: src/core/modules/Comet.cpp:274
+#: src/core/modules/Planet.cpp:672 src/core/modules/MinorPlanet.cpp:379
+#: src/core/modules/Comet.cpp:292
 msgid "Sidereal period"
 msgstr "Siderički period"
 
@@ -1927,19 +1935,19 @@ msgstr "Srednji solarni dan"
 msgid "The period of rotation is chaotic"
 msgstr "Period rotacije je kaotičan"
 
-#: src/core/modules/Planet.cpp:694 src/core/modules/MinorPlanet.cpp:369
-#: src/core/modules/Comet.cpp:282
+#: src/core/modules/Planet.cpp:694 src/core/modules/MinorPlanet.cpp:387
+#: src/core/modules/Comet.cpp:300
 msgid "Synodic period"
 msgstr "Sinodički period"
 
-#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:387
-#: src/core/modules/Comet.cpp:300 src/gui/AstroCalcDialog.cpp:3007
+#: src/core/modules/Planet.cpp:714 src/core/modules/MinorPlanet.cpp:405
+#: src/core/modules/Comet.cpp:318 src/gui/AstroCalcDialog.cpp:3007
 #: src/gui/AstroCalcDialog.cpp:3065 plugins/Satellites/src/Satellite.cpp:378
 msgid "Phase angle"
 msgstr "Fazni pomak"
 
-#: src/core/modules/Planet.cpp:715 src/core/modules/MinorPlanet.cpp:388
-#: src/core/modules/Comet.cpp:301 src/gui/AstroCalcDialog.cpp:2997
+#: src/core/modules/Planet.cpp:715 src/core/modules/MinorPlanet.cpp:406
+#: src/core/modules/Comet.cpp:319 src/gui/AstroCalcDialog.cpp:2997
 #: src/gui/AstroCalcDialog.cpp:3055
 msgid "Elongation"
 msgstr "Elongacija"
@@ -2012,44 +2020,44 @@ msgstr "Zatamnjenje pomrčine"
 msgid "Eclipse magnitude"
 msgstr "Magnituda pomrčine"
 
-#: src/core/modules/MinorPlanet.cpp:181
+#: src/core/modules/MinorPlanet.cpp:182
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "privremena oznaka/naziv: %1"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:348
+#: src/core/modules/MinorPlanet.cpp:366
 msgid "Tholen spectral type"
 msgstr "Tholen-ov spektralni tip"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:354
+#: src/core/modules/MinorPlanet.cpp:372
 msgid "SMASSII spectral type"
 msgstr "SMASSII spektralni tip"
 
-#: src/core/modules/Comet.cpp:165
+#: src/core/modules/Comet.cpp:166
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "neperiodični"
 
-#: src/core/modules/Comet.cpp:169
+#: src/core/modules/Comet.cpp:170
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periodični"
 
-#: src/core/modules/Comet.cpp:308
+#: src/core/modules/Comet.cpp:326
 msgid "Coma diameter (estimate)"
 msgstr "Promjer kome (procjena)"
 
-#: src/core/modules/Comet.cpp:330
+#: src/core/modules/Comet.cpp:348
 msgid "Gas tail length (estimate)"
 msgstr "Dužina plinovitog repa (procjena)"
 
-#: src/core/modules/Comet.cpp:336
+#: src/core/modules/Comet.cpp:354
 msgid "Core diameter"
 msgstr "Promjer jezgre"
 
-#: src/core/modules/Comet.cpp:586 src/core/StelProjectorClasses.cpp:418
+#: src/core/modules/Comet.cpp:604 src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
 msgstr "Ortografska"
 
@@ -2060,17 +2068,17 @@ msgid "Planets"
 msgstr "Planeti"
 
 #: src/core/modules/SolarSystem.cpp:272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr "Nazivi planeta"
 
 #: src/core/modules/SolarSystem.cpp:273
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr "Orbite planeta"
 
 #: src/core/modules/SolarSystem.cpp:274
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr "Staze planeta"
 
@@ -2190,139 +2198,139 @@ msgstr "Digitized Sky Survey (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "Uključi/isključi Hierarchical Progressive Surveys (eksperimentalno) "
 
-#: src/core/StelApp.cpp:422
+#: src/core/StelApp.cpp:426
 msgid "Initializing textures..."
 msgstr "Inicijalizacija tekstura..."
 
-#: src/core/StelApp.cpp:426
+#: src/core/StelApp.cpp:430
 msgid "Initializing network access..."
 msgstr "Inicijalizacija mrežnog pristupa..."
 
-#: src/core/StelApp.cpp:431
+#: src/core/StelApp.cpp:435
 msgid "Initializing network disk cache..."
 msgstr "Inicijalizacija predmemorije mrežnog diska..."
 
-#: src/core/StelApp.cpp:445
+#: src/core/StelApp.cpp:449
 msgid "Initializing network proxy..."
 msgstr "Inicijalizacija proxy mreže..."
 
-#: src/core/StelApp.cpp:461
+#: src/core/StelApp.cpp:465
 msgid "Initializing Object Database..."
 msgstr "Inicijalizacija baze podataka objekata..."
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing locales..."
 msgstr "Pokretanje lokalnih datoteki..."
 
-#: src/core/StelApp.cpp:470
+#: src/core/StelApp.cpp:474
 msgid "Initializing HiPS survey..."
 msgstr "Inicijalizacija HiPS studije..."
 
-#: src/core/StelApp.cpp:476
+#: src/core/StelApp.cpp:480
 msgid "Initializing Solar System objects..."
 msgstr "Inicijalizacija objekata Sunčevog sustava..."
 
-#: src/core/StelApp.cpp:482
+#: src/core/StelApp.cpp:486
 msgid "Initializing planetary nomenclature..."
 msgstr "Inicijalizacija planetarne nomenklature..."
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:492
 msgid "Initializing stars..."
 msgstr "Inicijalizacija zvijezda..."
 
-#: src/core/StelApp.cpp:493
+#: src/core/StelApp.cpp:497
 msgid "Initializing core..."
 msgstr "inicijalizacija jezgre..."
 
-#: src/core/StelApp.cpp:497
+#: src/core/StelApp.cpp:501
 msgid "Initializing deep-sky objects..."
 msgstr "Inicijalizacija objekata dubokog svemira..."
 
-#: src/core/StelApp.cpp:503
+#: src/core/StelApp.cpp:507
 msgid "Initializing Milky Way..."
 msgstr "Inicijalizacija Mliječne staze..."
 
-#: src/core/StelApp.cpp:509
+#: src/core/StelApp.cpp:513
 msgid "Initializing zodiacal light..."
 msgstr "Inicijalizacija zodijačke svijetlosti"
 
-#: src/core/StelApp.cpp:515
+#: src/core/StelApp.cpp:519
 msgid "Initializing sky image layer..."
 msgstr "Inicijalizacija sloja s fotografijama neba..."
 
-#: src/core/StelApp.cpp:521
+#: src/core/StelApp.cpp:525
 msgid "Initializing TOAST surveys..."
 msgstr "Inicijalizacija TOAST studije..."
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing audio..."
 msgstr "Inicijalizacija audio..."
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:535
 msgid "Initializing video..."
 msgstr "Inicijalizacija video..."
 
-#: src/core/StelApp.cpp:537
+#: src/core/StelApp.cpp:541
 msgid "Initializing constellations..."
 msgstr "Inicijalizacija zviježđa..."
 
-#: src/core/StelApp.cpp:543
+#: src/core/StelApp.cpp:547
 msgid "Initializing asterisms..."
 msgstr "Inicijalizacija asterizama..."
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:553
 msgid "Initializing landscape..."
 msgstr "Inicijalizacija krajolika..."
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Initializing grid lines..."
 msgstr "Inicijalizacija linija mreža..."
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:564
 msgid "Initializing sporadic meteors..."
 msgstr "Inicijalizacija sporadičnih meteora..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing user labels..."
 msgstr "Inicijalizacija korisničkih naziva..."
 
-#: src/core/StelApp.cpp:571
+#: src/core/StelApp.cpp:575
 msgid "Initializing sky cultures..."
 msgstr "Inicijalizacija kultura zviježđa..."
 
-#: src/core/StelApp.cpp:575
+#: src/core/StelApp.cpp:579
 msgid "Initializing user markers..."
 msgstr "Inicijalizacija korisničkih oznaka..."
 
-#: src/core/StelApp.cpp:581
+#: src/core/StelApp.cpp:585
 msgid "Initializing custom objects..."
 msgstr "Inicijalizacija prilagođenih objekata..."
 
-#: src/core/StelApp.cpp:587
+#: src/core/StelApp.cpp:591
 msgid "Initializing highlights..."
 msgstr "Inicijalizacija istaknutih zanimljivosti..."
 
-#: src/core/StelApp.cpp:595
+#: src/core/StelApp.cpp:599
 msgid "Initializing scripting..."
 msgstr "Inicijalizacija skriptiranja..."
 
-#: src/core/StelApp.cpp:600
+#: src/core/StelApp.cpp:604
 msgid "Initializing color scheme..."
 msgstr "Inicijalizacija kolorne sheme..."
 
-#: src/core/StelApp.cpp:612
+#: src/core/StelApp.cpp:616
 msgid "Night mode"
 msgstr "Noćni način rada"
 
-#: src/core/StelApp.cpp:637
+#: src/core/StelApp.cpp:641
 msgid "Initializing SPOUT sender..."
 msgstr "Inicijalizacija SPOUT sender dodatka..."
 
-#: src/core/StelApp.cpp:647
+#: src/core/StelApp.cpp:651
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout sender opciju nije moguće kreirati. Pogledajte \"log\" za detalje."
 
-#: src/core/StelApp.cpp:673
+#: src/core/StelApp.cpp:677
 msgid "Loading plugin"
 msgstr "Učitavanje dodataka"
 
@@ -2331,7 +2339,7 @@ msgstr "Učitavanje dodataka"
 #: src/gui/AstroCalcDialog.cpp:1767 src/gui/AstroCalcDialog.cpp:3454
 #: src/gui/BookmarksDialog.cpp:119 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "Datum i vrijeme"
 
@@ -2572,11 +2580,11 @@ msgstr "Zrcali oko vertikalne osi"
 msgid "Flip scene vertically"
 msgstr "Zrcali oko horizontalne osi"
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2272
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Ispravljanje je onemogućeno. Koristite samo ako znate što radite!"
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2587,7 +2595,7 @@ msgstr ""
 "Henriksson u svom članku <em>Einsteinova teorija relativnosti potvrđena kroz"
 " drevne pomrčine Sunca</em> (%1). Više informacija %2 ovdje %3."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2278
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2596,7 +2604,7 @@ msgstr ""
 "Ovu empirijsku jednadžbu objavio je G. M. Clemence u članku <em>O sustavu "
 "astronomskih konstanti</em> (%1)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2281
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2609,7 +2617,7 @@ msgstr ""
 " <em>Astronomskim formulama za kalkulacije</em>. Usvojena je i u računalnom "
 "programu SunTracker Pro."
 
-#: src/core/StelCore.cpp:2279
+#: src/core/StelCore.cpp:2285
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2619,7 +2627,7 @@ msgstr ""
 "<em>Astronomskim Efemeridama</em> te u <em>Kanonu pomrčina Sunca</em> autora"
 " Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2283
+#: src/core/StelCore.cpp:2289
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2631,7 +2639,7 @@ msgstr ""
 "Krista. Isti je odnos implicitno usvojen u tablicama sizigija Goldstinea "
 "(1973)."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2293
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2642,7 +2650,7 @@ msgstr ""
 "članku<em>Ubrzanja Zemlje i Mjeseca iz ranih astronomskih promatranja</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2651,7 +2659,7 @@ msgstr ""
 "Ovu jednadžbu je objavio F. R. Stephenson u članku <em>Astronomska "
 "promatranja prije izuma teleskopa</em> (%1)."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2299
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2664,7 +2672,7 @@ msgstr ""
 "članku.<em>Polinomne aproksimacije za korekciju delta T E.T.-U.T. u "
 "razdoblju 1800-1975</em> (%1) prema podacima koje je objavio Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2302
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2674,7 +2682,7 @@ msgstr ""
 "programu i tablicama od -4000 do +2800</em> (1986)  te u računalnom "
 "planetarij programu RedShift."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2685,11 +2693,11 @@ msgstr ""
 "<em>Dugoročne promjene u rotaciji Zemlje - od 700. pr. Kr do 1980.</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2308
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Ovaj se algoritam koristi u računalnom planetarij programu Guide 7."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2311
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2699,7 +2707,7 @@ msgstr ""
 "Sunčevih pomrčina: 1986-2035</em> (1987) i  <em>Pedesetogodišnjem kanonu "
 "Lunarnih pomrčina: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2708,7 +2716,7 @@ msgstr ""
 "Ovu je formulu dobio K.M. Borkowski (%1) iz analize 31 zapisa pomrčina Sunca"
 " koji datiraju između 2137. i 1715. godine prije Krista."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2721,7 +2729,7 @@ msgstr ""
 "1800-1988</em> (%1) kako se podaci uklapaju u vrijednosti koje su dali "
 "Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2320
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2731,7 +2739,7 @@ msgstr ""
 "mjesečeve teorije ELP 2000-85  <em>Lunarnim tablicama i programima od od "
 "4000. pr. Kr do 8000. pos. Kr.</em> (1991)."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2742,7 +2750,7 @@ msgstr ""
 "<em>Dugoročne fluktuacije u rotaciji Zemlje - od 700. pr. Kr do 1990.</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2751,7 +2759,7 @@ msgstr ""
 "F. R. Stephenson je objavio ovu formulu u svojoj knjizi <em>Povijesne "
 "pomrčine i Zemljina rotacija</em> (%1)."
 
-#: src/core/StelCore.cpp:2323
+#: src/core/StelCore.cpp:2329
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2762,7 +2770,7 @@ msgstr ""
 "Chapront, Chapront-Touze & Francou (1997) za datume izvan perioda "
 "1620..2000."
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2771,7 +2779,7 @@ msgstr ""
 "JPL Solar System Dynamics Group pri NASA Jet Propulsion Laboratory koristi "
 "ovu formulu na svojim interaktivnim web stranicama %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2780,7 +2788,7 @@ msgstr ""
 "Ovaj su polinom objavili J. Meeus i L. Simons u članku <em>Aproksimacije "
 "polinoma Delta T, 1620-2000 </em> (%1)."
 
-#: src/core/StelCore.cpp:2332
+#: src/core/StelCore.cpp:2338
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2790,7 +2798,7 @@ msgstr ""
 "Personal Computer</em> (2000) pruža jednostavne podatke polinoma 3. reda "
 "koji se uklapaju u nedavnu prošlost"
 
-#: src/core/StelCore.cpp:2335
+#: src/core/StelCore.cpp:2341
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -2802,7 +2810,7 @@ msgstr ""
 "<em>Kalendarskim tablicama</em> (2002). Temeljene na Jean Meeus-"
 "ovom<em>Astronomski algoritmi</em> (1991)."
 
-#: src/core/StelCore.cpp:2338
+#: src/core/StelCore.cpp:2344
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2813,7 +2821,7 @@ msgstr ""
 "<em>Povijesne vrijednosti greške Zemljinog sata %1T i izračunavanje "
 "pomrčina</em> (%2) s dodatkom u (%3)."
 
-#: src/core/StelCore.cpp:2341
+#: src/core/StelCore.cpp:2347
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2826,7 +2834,7 @@ msgstr ""
 "kosinusom i kvadratnom funkcijom. Temelji se na mogućoj periodičnosti  prema"
 " opisu Stephensona (%2). Potražite više informacija %3 ovdje %4."
 
-#: src/core/StelCore.cpp:2344 src/core/StelCore.cpp:2347
+#: src/core/StelCore.cpp:2350 src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2842,15 +2850,15 @@ msgstr ""
 "se također koristi u programu SOLEX, prilikom izrade efemerida Sunca, "
 "Mjeseca i planeta."
 
-#: src/core/StelCore.cpp:2344
+#: src/core/StelCore.cpp:2350
 msgid "Used by default."
 msgstr "Koristi se prema zadanim postavkama."
 
-#: src/core/StelCore.cpp:2347
+#: src/core/StelCore.cpp:2353
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERZIJA SA ZAKRPOM BEZ DODATNIH MJESEČEVIH UBRZANJA."
 
-#: src/core/StelCore.cpp:2350
+#: src/core/StelCore.cpp:2356
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2861,7 +2869,7 @@ msgstr ""
 "objavljeno je u članku <em>Drevna pomračenja i datiranje pada Babilona</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2353
+#: src/core/StelCore.cpp:2359
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2872,7 +2880,7 @@ msgstr ""
 "Simons (2000), objavljeno je u članku <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) a revidirao ga je Sana Islam 2013. godine."
 
-#: src/core/StelCore.cpp:2356
+#: src/core/StelCore.cpp:2362
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2883,7 +2891,7 @@ msgstr ""
 "Mariam Sultana i Faheem Zaidia objavljena je u <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2359
+#: src/core/StelCore.cpp:2365
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2896,7 +2904,7 @@ msgstr ""
 "(%1). Izvan imenovanog raspona (po uzoru na vreteno) osigurava vrijednosti "
 "približne parabole."
 
-#: src/core/StelCore.cpp:2362
+#: src/core/StelCore.cpp:2368
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2906,7 +2914,7 @@ msgstr ""
 "Ovo rješenje G. Henrikssona objavljeno je u članku <em>Ubrzanje Mjeseca i "
 "svemira - masa Gravitona</em> (%1) na temelju C. Schochove formule (1931)."
 
-#: src/core/StelCore.cpp:2365
+#: src/core/StelCore.cpp:2371
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -2915,11 +2923,11 @@ msgstr ""
 "Ovo je kvadratna formula za izračun %1T s definiranim koeficijentima od "
 "strane korisnika."
 
-#: src/core/StelCore.cpp:2368 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2374 src/core/SimbadSearcher.cpp:173
 msgid "Error"
 msgstr "Greška"
 
-#: src/core/StelCore.cpp:2376
+#: src/core/StelCore.cpp:2382
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2928,17 +2936,17 @@ msgstr ""
 "Vrijednost rješenja %1 za %2 (sekularna akceleracija Mjeseca) zahtijeva "
 "prilagodbu, detalje potražite u uputama."
 
-#: src/core/StelCore.cpp:2419
+#: src/core/StelCore.cpp:2425
 msgid "with zero values outside this range"
 msgstr "s nultim vrijednostima izvan ovog raspona"
 
-#: src/core/StelCore.cpp:2422
+#: src/core/StelCore.cpp:2428
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "s tipičnom preciznošću od 1 sekunde i nultim vrijednostima izvan ovog "
 "raspona"
 
-#: src/core/StelCore.cpp:2425
+#: src/core/StelCore.cpp:2431
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2946,16 +2954,16 @@ msgstr ""
 "sa srednjom vrijednosti pogreške manjom od jedne sekunde, maks.  vrijednosti"
 " pogreške 1.9s i vrijednosti za granične godine izvan ovog raspona"
 
-#: src/core/StelCore.cpp:2432
+#: src/core/StelCore.cpp:2438
 msgid "with values for the limit years outside this range"
 msgstr "s vrijednostima za granične godine izvan ovog raspona"
 
-#: src/core/StelCore.cpp:2442
+#: src/core/StelCore.cpp:2448
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Valjani raspon upotrebe: između godina %1 i %2, %3."
 
-#: src/core/StelCore.cpp:2444
+#: src/core/StelCore.cpp:2450
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Valjani raspon upotrebe: između godina %1 i %2."
@@ -2976,7 +2984,7 @@ msgid ""
 msgstr ""
 "Perspektivna projekcija preslikava horizont i druge velike kružnice poput "
 "ekvatora, ekliptike, satnih linija itd. u ravne linije. Matematički naziv za"
-" ovu metodu projekcije je<i>gnomonička projekcija</i>."
+" ovu metodu projekcije je <i>gnomonička projekcija</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -3741,21 +3749,21 @@ msgstr "Studeni"
 msgid "Select screenshot directory"
 msgstr "Odaberite mapu za slike zaslona"
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1027
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Početno vidno polje: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1034
+#: src/gui/ConfigurationDialog.cpp:1035
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Početni smjer azimuta/visine pogleda: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1097
+#: src/gui/ConfigurationDialog.cpp:1098
 msgid "Acknowledgements"
 msgstr "Priznanja"
 
-#: src/gui/ConfigurationDialog.cpp:1099
+#: src/gui/ConfigurationDialog.cpp:1100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:186
@@ -3764,13 +3772,13 @@ msgstr "Priznanja"
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:1100
+#: src/gui/ConfigurationDialog.cpp:1101
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:1102 src/scripting/StelScriptMgr.cpp:270
+#: src/gui/ConfigurationDialog.cpp:1103 src/scripting/StelScriptMgr.cpp:471
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:706
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3790,9 +3798,9 @@ msgstr "Kontakt"
 msgid "Version"
 msgstr "Inačica"
 
-#: src/gui/ConfigurationDialog.cpp:1103 src/scripting/StelScriptMgr.cpp:265
+#: src/gui/ConfigurationDialog.cpp:1104 src/scripting/StelScriptMgr.cpp:466
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:707
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -3812,20 +3820,20 @@ msgstr "Inačica"
 msgid "License"
 msgstr "Licenca"
 
-#: src/gui/ConfigurationDialog.cpp:1107
+#: src/gui/ConfigurationDialog.cpp:1108
 msgctxt "license"
 msgid "unknown"
 msgstr "nepoznato"
 
-#: src/gui/ConfigurationDialog.cpp:1215
+#: src/gui/ConfigurationDialog.cpp:1216
 msgid "Running script: "
 msgstr "Skripta u izvođenju: "
 
-#: src/gui/ConfigurationDialog.cpp:1222
+#: src/gui/ConfigurationDialog.cpp:1223
 msgid "Running script: [none]"
 msgstr "Skripta u izvođenju: [nema]"
 
-#: src/gui/ConfigurationDialog.cpp:1287
+#: src/gui/ConfigurationDialog.cpp:1288
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3833,16 +3841,16 @@ msgstr ""
 "Dovršeno preuzimanje novih zvjezdanih kataloga!\n"
 "Ponovno pokrenite Stellarium za njihov prikaz."
 
-#: src/gui/ConfigurationDialog.cpp:1291
+#: src/gui/ConfigurationDialog.cpp:1292
 msgid "All available star catalogs have been installed."
 msgstr "Svi dostupni zvjezdani katalozi su instalirani."
 
-#: src/gui/ConfigurationDialog.cpp:1296
+#: src/gui/ConfigurationDialog.cpp:1297
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dohvati katalog %1 od %2"
 
-#: src/gui/ConfigurationDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:1304
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3851,7 +3859,7 @@ msgstr ""
 "Preuzimanje %1...\n"
 "(Možete zatvoriti ovaj prozor.)"
 
-#: src/gui/ConfigurationDialog.cpp:1310
+#: src/gui/ConfigurationDialog.cpp:1311
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3862,7 +3870,7 @@ msgstr ""
 "Broj zvijezda: %2 milijuna\n"
 "Raspon magnituda: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1356 src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1357 src/gui/ConfigurationDialog.cpp:1394
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3871,11 +3879,11 @@ msgstr ""
 "Greška pri preuzimanju %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1446
+#: src/gui/ConfigurationDialog.cpp:1447
 msgid "Verifying file integrity..."
 msgstr "Provjera cjelovitosti datoteke..."
 
-#: src/gui/ConfigurationDialog.cpp:1450
+#: src/gui/ConfigurationDialog.cpp:1451
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3884,207 +3892,207 @@ msgstr ""
 "Greška pri preuzmimanju %1:\n"
 "Datoteka je oštećena."
 
-#: src/gui/ConfigurationDialog.cpp:1499 src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1500 src/gui/ConfigurationDialog.cpp:1509
 msgid "Available"
 msgstr "Dostupno"
 
-#: src/gui/ConfigurationDialog.cpp:1501 src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1502 src/gui/ConfigurationDialog.cpp:1511
 msgid "Not Available"
 msgstr "Nedostupno"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1581
+#: src/gui/ConfigurationDialog.cpp:1582
 msgid "Algorithm of"
 msgstr "Algoritam"
 
-#: src/gui/ConfigurationDialog.cpp:1594
+#: src/gui/ConfigurationDialog.cpp:1595
 msgid "Without correction"
 msgstr "Bez korekcije"
 
-#: src/gui/ConfigurationDialog.cpp:1595
+#: src/gui/ConfigurationDialog.cpp:1596
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1596
+#: src/gui/ConfigurationDialog.cpp:1597
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1597
+#: src/gui/ConfigurationDialog.cpp:1598
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1598
+#: src/gui/ConfigurationDialog.cpp:1599
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomske efemeride (1960.)"
 
-#: src/gui/ConfigurationDialog.cpp:1599
+#: src/gui/ConfigurationDialog.cpp:1600
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1600
+#: src/gui/ConfigurationDialog.cpp:1601
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1601
+#: src/gui/ConfigurationDialog.cpp:1602
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1602
+#: src/gui/ConfigurationDialog.cpp:1603
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1603
+#: src/gui/ConfigurationDialog.cpp:1604
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1604
+#: src/gui/ConfigurationDialog.cpp:1605
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1605
+#: src/gui/ConfigurationDialog.cpp:1606
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1606
+#: src/gui/ConfigurationDialog.cpp:1607
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1607
+#: src/gui/ConfigurationDialog.cpp:1608
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1608
+#: src/gui/ConfigurationDialog.cpp:1609
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1609
+#: src/gui/ConfigurationDialog.cpp:1610
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1610
+#: src/gui/ConfigurationDialog.cpp:1611
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1611
+#: src/gui/ConfigurationDialog.cpp:1612
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1613
+#: src/gui/ConfigurationDialog.cpp:1614
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (sa Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1614
+#: src/gui/ConfigurationDialog.cpp:1615
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1615
+#: src/gui/ConfigurationDialog.cpp:1616
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1616
+#: src/gui/ConfigurationDialog.cpp:1617
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1617
+#: src/gui/ConfigurationDialog.cpp:1618
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1619
+#: src/gui/ConfigurationDialog.cpp:1620
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1622
+#: src/gui/ConfigurationDialog.cpp:1623
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) bez dodatnog ubrzanja mjeseca"
 
-#: src/gui/ConfigurationDialog.cpp:1624
+#: src/gui/ConfigurationDialog.cpp:1625
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1625
+#: src/gui/ConfigurationDialog.cpp:1626
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1626
+#: src/gui/ConfigurationDialog.cpp:1627
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1627
+#: src/gui/ConfigurationDialog.cpp:1628
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1628
+#: src/gui/ConfigurationDialog.cpp:1629
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1629
+#: src/gui/ConfigurationDialog.cpp:1630
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1630
+#: src/gui/ConfigurationDialog.cpp:1631
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1631
+#: src/gui/ConfigurationDialog.cpp:1632
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "prilagođena jednadžba za %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1679 src/gui/ConfigurationDialog.cpp:1716
+#: src/gui/ConfigurationDialog.cpp:1680 src/gui/ConfigurationDialog.cpp:1717
 #: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "Zadane vrijednosti sustava"
 
-#: src/gui/ConfigurationDialog.cpp:1680
+#: src/gui/ConfigurationDialog.cpp:1681
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "gggg-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1681
+#: src/gui/ConfigurationDialog.cpp:1682
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-gggg"
 
-#: src/gui/ConfigurationDialog.cpp:1682
+#: src/gui/ConfigurationDialog.cpp:1683
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-gggg"
 
-#: src/gui/ConfigurationDialog.cpp:1683
+#: src/gui/ConfigurationDialog.cpp:1684
 msgid "ww, yyyy-mm-dd"
 msgstr "tt,gggg-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:1684
+#: src/gui/ConfigurationDialog.cpp:1685
 msgid "ww, dd-mm-yyyy"
 msgstr "tt, dd-mm-gggg"
 
-#: src/gui/ConfigurationDialog.cpp:1685
+#: src/gui/ConfigurationDialog.cpp:1686
 msgid "ww, mm-dd-yyyy"
 msgstr "tt, mm-dd-gggg"
 
-#: src/gui/ConfigurationDialog.cpp:1717
+#: src/gui/ConfigurationDialog.cpp:1718
 msgid "12-hour format"
 msgstr "12-satni format"
 
-#: src/gui/ConfigurationDialog.cpp:1718
+#: src/gui/ConfigurationDialog.cpp:1719
 msgid "24-hour format"
 msgstr "24-satni format"
 
-#: src/gui/ConfigurationDialog.cpp:1744
+#: src/gui/ConfigurationDialog.cpp:1745
 msgctxt "disabled"
 msgid "None"
 msgstr "Nijedno"
 
-#: src/gui/ConfigurationDialog.cpp:1745
+#: src/gui/ConfigurationDialog.cpp:1746
 msgid "5/6/5 bits"
 msgstr "5/6/5 bitova"
 
-#: src/gui/ConfigurationDialog.cpp:1746
+#: src/gui/ConfigurationDialog.cpp:1747
 msgid "6/6/6 bits"
 msgstr "6/6/6 bitova"
 
-#: src/gui/ConfigurationDialog.cpp:1747
+#: src/gui/ConfigurationDialog.cpp:1748
 msgid "8/8/8 bits"
 msgstr "8/8/8 bitova"
 
-#: src/gui/ConfigurationDialog.cpp:1748
+#: src/gui/ConfigurationDialog.cpp:1749
 msgid "10/10/10 bits"
 msgstr "10/10/10 bitova"
 
@@ -4352,7 +4360,7 @@ msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4416,7 +4424,7 @@ msgstr "Pomoć"
 msgid "Configuration window"
 msgstr "Postavke"
 
-#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:770
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:776
 msgid "Search window"
 msgstr "Pretraživanje"
 
@@ -4537,73 +4545,73 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "Slika u sekundi"
 
-#: src/gui/ViewDialog.cpp:498
+#: src/gui/ViewDialog.cpp:500
 msgid "Loading ..."
 msgstr "Učitavam ..."
 
-#: src/gui/ViewDialog.cpp:551
+#: src/gui/ViewDialog.cpp:553
 msgid "properties"
 msgstr "svojstva"
 
-#: src/gui/ViewDialog.cpp:572
+#: src/gui/ViewDialog.cpp:574
 msgid "Deep Sky"
 msgstr "Duboki svemir"
 
-#: src/gui/ViewDialog.cpp:573
+#: src/gui/ViewDialog.cpp:575
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "Sunčev sustav"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:809
+#: src/gui/ViewDialog.cpp:811
 msgid "Excellent dark-sky site"
 msgstr "Prirodno nebo"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:811
+#: src/gui/ViewDialog.cpp:813
 msgid "Typical truly dark site"
 msgstr "Tipično tamno nebo"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:813
+#: src/gui/ViewDialog.cpp:815
 msgid "Rural sky"
 msgstr "Ruralno nebo"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:815
+#: src/gui/ViewDialog.cpp:817
 msgid "Rural/suburban transition"
 msgstr "Prijelaz ruralno/prigradsko"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:817
+#: src/gui/ViewDialog.cpp:819
 msgid "Suburban sky"
 msgstr "Prigradsko nebo"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:819
+#: src/gui/ViewDialog.cpp:821
 msgid "Bright suburban sky"
 msgstr "Svijetlo prigradsko nebo"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:821
+#: src/gui/ViewDialog.cpp:823
 msgid "Suburban/urban transition"
 msgstr "Prijelaz prigradsko/gradsko "
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:823
+#: src/gui/ViewDialog.cpp:825
 msgid "City sky"
 msgstr "Gradsko nebo"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:825
+#: src/gui/ViewDialog.cpp:827
 msgid "Inner-city sky"
 msgstr "Nebo nad gradskim središtem"
 
-#: src/gui/ViewDialog.cpp:839
+#: src/gui/ViewDialog.cpp:841
 msgid "The naked-eye limiting magnitude is"
 msgstr "Granična zvjezdana magnituda vidljiva golim okom"
 
-#: src/gui/ViewDialog.cpp:847
+#: src/gui/ViewDialog.cpp:849
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -4611,7 +4619,7 @@ msgstr ""
 "Koristi poligonalni 3D model za neke odabrane subplanetarne objekte (male "
 "mjesece, asteroide, komete) umjesto sferne aproksimacije"
 
-#: src/gui/ViewDialog.cpp:848
+#: src/gui/ViewDialog.cpp:850
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -4620,88 +4628,88 @@ msgstr ""
 "nekonveksnih objekata Sunčevog sustava . Moguća je smanjenje kvalitete "
 "penumbra sjene područja na nekim objektima."
 
-#: src/gui/ViewDialog.cpp:871
+#: src/gui/ViewDialog.cpp:873
 msgid "Abbreviated"
 msgstr "Skraćeno"
 
-#: src/gui/ViewDialog.cpp:872
+#: src/gui/ViewDialog.cpp:874
 msgid "Native"
 msgstr "Narodno"
 
-#: src/gui/ViewDialog.cpp:873
+#: src/gui/ViewDialog.cpp:875
 msgid "Translated"
 msgstr "Prevedeno"
 
-#: src/gui/ViewDialog.cpp:1045
+#: src/gui/ViewDialog.cpp:1047
 msgid "No shooting stars"
 msgstr "Bez padajućih zvijezdi"
 
-#: src/gui/ViewDialog.cpp:1047
+#: src/gui/ViewDialog.cpp:1049
 msgid "Normal rate"
 msgstr "Normalna učestalost"
 
-#: src/gui/ViewDialog.cpp:1049
+#: src/gui/ViewDialog.cpp:1051
 msgid "Standard Orionids rate"
 msgstr "Standardna učestalost Orionida"
 
-#: src/gui/ViewDialog.cpp:1051
+#: src/gui/ViewDialog.cpp:1053
 msgid "Standard Perseids rate"
 msgstr "Standarna učestalost Perzeida"
 
-#: src/gui/ViewDialog.cpp:1053
+#: src/gui/ViewDialog.cpp:1055
 msgid "Standard Geminids rate"
 msgstr "Standardna učestalost Geminida"
 
-#: src/gui/ViewDialog.cpp:1055
+#: src/gui/ViewDialog.cpp:1057
 msgid "Exceptional Perseid rate"
 msgstr "Izuzetna učestalost Perzeida"
 
-#: src/gui/ViewDialog.cpp:1057
+#: src/gui/ViewDialog.cpp:1059
 msgid "Meteor storm rate"
 msgstr "Učestalost kiše meteora"
 
-#: src/gui/ViewDialog.cpp:1059
+#: src/gui/ViewDialog.cpp:1061
 msgid "Exceptional Draconid rate"
 msgstr "Izuzetna učestalost Drakonida"
 
-#: src/gui/ViewDialog.cpp:1061
+#: src/gui/ViewDialog.cpp:1063
 msgid "Exceptional Leonid rate"
 msgstr "Izuzetna učestalost Leonida"
 
-#: src/gui/ViewDialog.cpp:1063
+#: src/gui/ViewDialog.cpp:1065
 msgid "Very high rate (1966 Leonids)"
 msgstr "Vrlo visoka učestalost (Leonidi 1966)"
 
-#: src/gui/ViewDialog.cpp:1065
+#: src/gui/ViewDialog.cpp:1067
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Najviša učestalost ikad (Leonidi 1833)"
 
-#: src/gui/ViewDialog.cpp:1128
+#: src/gui/ViewDialog.cpp:1130
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1129
+#: src/gui/ViewDialog.cpp:1131
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "Astronomski Almanah (1984)"
 
-#: src/gui/ViewDialog.cpp:1130
+#: src/gui/ViewDialog.cpp:1132
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Dodatak za objašnjenje (1992)"
 
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1133
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Dodatak za objašnjenje (2013)"
 
-#: src/gui/ViewDialog.cpp:1132
+#: src/gui/ViewDialog.cpp:1134
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Generički"
 
-#: src/gui/ViewDialog.cpp:1158
+#: src/gui/ViewDialog.cpp:1160
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4709,7 +4717,7 @@ msgstr ""
 "Algoritam je korišten u <em>Astronomskom almanahu</em> (1984. i kasnije) i "
 "daje V (instrumentalne) magnitude (navodno od D. L. Harrisa)."
 
-#: src/gui/ViewDialog.cpp:1161
+#: src/gui/ViewDialog.cpp:1163
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -4719,7 +4727,7 @@ msgstr ""
 "1877-1891  te je objavljen u <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1166
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -4727,7 +4735,7 @@ msgstr ""
 "Algoritam je objavljen u <em>Dodatku objašnjenja astronomskog almanaha</em> "
 "(1992)."
 
-#: src/gui/ViewDialog.cpp:1167
+#: src/gui/ViewDialog.cpp:1169
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -4735,7 +4743,7 @@ msgstr ""
 "Algoritam je objavljen u trećem izdanju časopisa <em>Dodatak objašnjenja "
 "astronomskog almanaha</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1172
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Prividna magnituda bazirana na faznom kutu i albedu."
 
@@ -4858,145 +4866,145 @@ msgstr "Krajolik sa istim imenom ili identifikatorom (%1) već postoji."
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Možete ručno ukloniti brisanjem sljedeće mape: %1"
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "selected text as script"
 msgstr "označeni tekst kao skriptu"
 
-#: src/gui/ScriptConsole.cpp:83
+#: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "remove screen text"
 msgstr "ukloni tekst na zaslonu"
 
-#: src/gui/ScriptConsole.cpp:84
+#: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen images"
 msgstr "ukloni slike na zaslonu"
 
-#: src/gui/ScriptConsole.cpp:85
+#: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "remove screen markers"
 msgstr "ukloni oznake na zaslonu"
 
-#: src/gui/ScriptConsole.cpp:86
+#: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "clear map: natural"
 msgstr "pročisti mapu neba: prirodno"
 
-#: src/gui/ScriptConsole.cpp:87
+#: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: starchart"
 msgstr "pročisti mapu neba: zvijezdana karta"
 
-#: src/gui/ScriptConsole.cpp:88
+#: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
 msgid "clear map: deepspace"
 msgstr "pročisti mapu neba: duboki svemir"
 
-#: src/gui/ScriptConsole.cpp:89
+#: src/gui/ScriptConsole.cpp:90
 msgctxt "command"
 msgid "clear map: galactic"
 msgstr "pročisti mapu neba: galaktička"
 
-#: src/gui/ScriptConsole.cpp:90
+#: src/gui/ScriptConsole.cpp:91
 msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "pročisti mapu neba: supergalaktička"
 
-#: src/gui/ScriptConsole.cpp:177 src/gui/ScriptConsole.cpp:249
+#: src/gui/ScriptConsole.cpp:178 src/gui/ScriptConsole.cpp:250
 msgid "Caution!"
 msgstr "Oprez!"
 
-#: src/gui/ScriptConsole.cpp:177
+#: src/gui/ScriptConsole.cpp:178
 msgid "Are you sure you want to load script without saving changes?"
 msgstr "Jeste li sigurni da želite učitati skriptu bez spremanja promjena?"
 
-#: src/gui/ScriptConsole.cpp:191
+#: src/gui/ScriptConsole.cpp:192
 msgid "Stellarium Script Files"
 msgstr "Stellarium datoteke skripta"
 
-#: src/gui/ScriptConsole.cpp:194
+#: src/gui/ScriptConsole.cpp:195
 msgid "Load Script"
 msgstr "Učitaj skriptu"
 
-#: src/gui/ScriptConsole.cpp:219
+#: src/gui/ScriptConsole.cpp:220
 msgid "Save Script"
 msgstr "Spremi skriptu"
 
-#: src/gui/ScriptConsole.cpp:249
+#: src/gui/ScriptConsole.cpp:250
 msgid "Are you sure you want to clear script?"
 msgstr "Jeste li sigurni da želite očistiti skriptu?"
 
-#: src/gui/ScriptConsole.cpp:348
+#: src/gui/ScriptConsole.cpp:349
 msgid "Select Script Include Directory"
 msgstr "Odaberi direktorij s uključenom skriptom"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:380
+#: src/gui/ScriptConsole.cpp:381
 msgctxt "text cursor"
 msgid "R"
 msgstr "R"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:382
+#: src/gui/ScriptConsole.cpp:383
 msgctxt "text cursor"
 msgid "C"
 msgstr "S"
 
-#: src/gui/ScriptConsole.cpp:398
+#: src/gui/ScriptConsole.cpp:399
 msgid "Stellarium Script"
 msgstr "Stellarium skripta"
 
-#: src/gui/ScriptConsole.cpp:400
+#: src/gui/ScriptConsole.cpp:401
 msgid "Include File"
 msgstr "Uključi datoteku"
 
-#: src/gui/SearchDialog.cpp:224
+#: src/gui/SearchDialog.cpp:227
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Ekvatorijalni (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:225
+#: src/gui/SearchDialog.cpp:228
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Ekvatorijalni"
 
-#: src/gui/SearchDialog.cpp:226
+#: src/gui/SearchDialog.cpp:229
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horizontalni"
 
-#: src/gui/SearchDialog.cpp:227
+#: src/gui/SearchDialog.cpp:230
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galaktički"
 
-#: src/gui/SearchDialog.cpp:228
+#: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Supergalaktički"
 
-#: src/gui/SearchDialog.cpp:229
+#: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Ekliptički"
 
-#: src/gui/SearchDialog.cpp:230
+#: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Ekliptički (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:258
+#: src/gui/SearchDialog.cpp:261
 msgid "Right ascension"
 msgstr "Rektascenzija"
 
-#: src/gui/SearchDialog.cpp:261 src/gui/AstroCalcDialog.cpp:3030
+#: src/gui/SearchDialog.cpp:264 src/gui/AstroCalcDialog.cpp:3030
 #: src/gui/AstroCalcDialog.cpp:3088
 msgid "Declination"
 msgstr "Deklinacija"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:269 src/gui/AstroCalcDialog.cpp:539
+#: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:539
 #: src/gui/AstroCalcDialog.cpp:721 src/gui/AstroCalcDialog.cpp:723
 #: src/gui/AstroCalcDialog.cpp:760 src/gui/AstroCalcDialog.cpp:1338
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1233
@@ -5005,7 +5013,7 @@ msgstr "Azimut"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:762
+#: src/gui/SearchDialog.cpp:275 src/gui/AstroCalcDialog.cpp:762
 #: src/gui/AstroCalcDialog.cpp:1340 src/gui/AstroCalcDialog.cpp:1769
 #: src/gui/AstroCalcDialog.cpp:2649 src/gui/AstroCalcDialog.cpp:3156
 #: src/gui/AstroCalcDialog.cpp:3434 src/gui/AstroCalcDialog.cpp:3436
@@ -5014,35 +5022,35 @@ msgstr "Azimut"
 msgid "Altitude"
 msgstr "Visina"
 
-#: src/gui/SearchDialog.cpp:283
+#: src/gui/SearchDialog.cpp:286
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:622
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:628
 msgid "Longitude"
 msgstr "Dužina"
 
-#: src/gui/SearchDialog.cpp:286
+#: src/gui/SearchDialog.cpp:289
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:623
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:629
 msgid "Latitude"
 msgstr "Širina"
 
-#: src/gui/SearchDialog.cpp:740
+#: src/gui/SearchDialog.cpp:762
 msgid "Simbad Lookup Error"
 msgstr "Greška u pretraživanju Simbad baze podataka"
 
-#: src/gui/SearchDialog.cpp:751
+#: src/gui/SearchDialog.cpp:773
 msgid "Simbad Lookup"
 msgstr "Pretraživanje Simbad baze podataka"
 
-#: src/gui/SearchDialog.cpp:963
+#: src/gui/SearchDialog.cpp:985
 msgid "University of Strasbourg (France)"
 msgstr "Sveučilište u Strasbourg-u (Francuska)"
 
-#: src/gui/SearchDialog.cpp:964
+#: src/gui/SearchDialog.cpp:986
 msgid "Harvard University (USA)"
 msgstr "Sveučilište Harvard (SAD)"
 
-#: src/gui/SearchDialog.cpp:1051
+#: src/gui/SearchDialog.cpp:1073
 msgid "Paste and Search"
 msgstr "Zalijepi i Traži"
 
@@ -5174,7 +5182,7 @@ msgstr "\"/god"
 msgid "S.B."
 msgstr "Povr. sjaj"
 
-#: src/gui/AstroCalcDialog.cpp:855 src/ui_viewDialog.h:3386
+#: src/gui/AstroCalcDialog.cpp:855 src/ui_viewDialog.h:3402
 msgid "Solar system objects"
 msgstr "Objekti Sunčevog sustava"
 
@@ -5514,7 +5522,7 @@ msgstr "Sjajne maglice  (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2346 src/gui/AstroCalcDialog.cpp:4982
-#: src/translations.h:337 src/ui_viewDialog.h:2941
+#: src/translations.h:337 src/ui_viewDialog.h:2953
 #: src/ui_dsoColorsDialog.h:585
 msgid "Dark nebulae"
 msgstr "Tamne maglice"
@@ -5805,24 +5813,24 @@ msgstr "U bilo koje doba noći"
 msgid "Bright stars"
 msgstr "Sjajne zvijezde"
 
-#: src/gui/AstroCalcDialog.cpp:4981 src/ui_viewDialog.h:2940
+#: src/gui/AstroCalcDialog.cpp:4981 src/ui_viewDialog.h:2952
 msgid "Bright nebulae"
 msgstr "Sjajne maglice"
 
-#: src/gui/AstroCalcDialog.cpp:4983 src/ui_viewDialog.h:2944
+#: src/gui/AstroCalcDialog.cpp:4983 src/ui_viewDialog.h:2956
 #: src/ui_dsoColorsDialog.h:554
 msgid "Galaxies"
 msgstr "Galaksije"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:4984 src/translations.h:329
-#: src/ui_viewDialog.h:2947 src/ui_dsoColorsDialog.h:568
+#: src/ui_viewDialog.h:2959 src/ui_dsoColorsDialog.h:568
 msgid "Open star clusters"
 msgstr "Otvoreni zvjezdani skupovi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:4993 src/translations.h:335
-#: src/ui_viewDialog.h:2939 src/ui_dsoColorsDialog.h:553
+#: src/ui_viewDialog.h:2951 src/ui_dsoColorsDialog.h:553
 msgid "Planetary nebulae"
 msgstr "Planetarne maglice"
 
@@ -5855,19 +5863,19 @@ msgstr "Potencijalni ostatak supernove"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5001 src/translations.h:363
-#: src/ui_viewDialog.h:2946 src/ui_dsoColorsDialog.h:540
+#: src/ui_viewDialog.h:2958 src/ui_dsoColorsDialog.h:540
 msgid "Supernova remnants"
 msgstr "Ostaci supernove"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5002 src/translations.h:391
-#: src/ui_viewDialog.h:2943 src/ui_dsoColorsDialog.h:558
+#: src/ui_viewDialog.h:2955 src/ui_dsoColorsDialog.h:558
 msgid "Clusters of galaxies"
 msgstr "Skupovi galaksija"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5004 src/translations.h:331
-#: src/ui_viewDialog.h:2949 src/ui_dsoColorsDialog.h:551
+#: src/ui_viewDialog.h:2961 src/ui_dsoColorsDialog.h:551
 msgid "Globular star clusters"
 msgstr "Kuglasti zvjezdani skupovi"
 
@@ -5941,7 +5949,7 @@ msgstr "Dan"
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "Promjena kutne udaljenosti između Mjeseca i odabranog objekta"
 
-#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:854
+#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:860
 msgid "Object"
 msgstr "Objekt"
 
@@ -5969,12 +5977,12 @@ msgstr "Datum i vrijeme u Julijanskom kalendaru"
 msgid "Date and Time in Gregorian calendar"
 msgstr "Datum i vrijeme u Gregorijanskom kalendaru"
 
-#: src/scripting/StelScriptMgr.cpp:170 src/ui_configurationDialog.h:1541
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
+#: src/scripting/StelScriptMgr.cpp:371 src/ui_configurationDialog.h:1541
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Skripte"
 
-#: src/scripting/StelScriptMgr.cpp:275
+#: src/scripting/StelScriptMgr.cpp:476
 msgid "Shortcut"
 msgstr "Prečac"
 
@@ -6751,7 +6759,7 @@ msgid "Reflection nebulae"
 msgstr "Refleksijske maglice"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:345 src/ui_viewDialog.h:2938
+#: src/translations.h:345 src/ui_viewDialog.h:2950
 #: src/ui_dsoColorsDialog.h:576
 msgid "Active galaxies"
 msgstr "Aktivne galaksije"
@@ -6762,7 +6770,7 @@ msgid "Radio galaxies"
 msgstr "Radiogalaksije"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:349 src/ui_viewDialog.h:2945
+#: src/translations.h:349 src/ui_viewDialog.h:2957
 #: src/ui_dsoColorsDialog.h:565
 msgid "Interacting galaxies"
 msgstr "Interaktivne galaksije"
@@ -6843,12 +6851,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Proto-planetarne maglice"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:393 src/ui_viewDialog.h:2901
+#: src/translations.h:393 src/ui_viewDialog.h:2913
 msgid "Messier Catalogue"
 msgstr "Messier katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:395 src/ui_viewDialog.h:2895
+#: src/translations.h:395 src/ui_viewDialog.h:2907
 msgid "Caldwell Catalogue"
 msgstr "Caldwell katalog"
 
@@ -7005,7 +7013,7 @@ msgstr "Arapska"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:469
 msgid "Arabic Moon Stations"
-msgstr "Arapske lunarne stanice"
+msgstr "Arapske Mjesečeve stanice"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:471
@@ -7030,17 +7038,17 @@ msgstr "Boorong"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:479
 msgid "Chinese"
-msgstr "Kineska"
+msgstr "Kineska tradicionalna"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:481
 msgid "Chinese Contemporary"
-msgstr "Suvremena kineska"
+msgstr "Kineska suvremena"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:483
 msgid "Chinese Medieval"
-msgstr "Srednjovjekovna kineska"
+msgstr "Kineska srednjovjekovna"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:485
@@ -7065,7 +7073,7 @@ msgstr "Indijsko Vedska"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:493
 msgid "Japanese Moon Stations"
-msgstr "Japanske lunarne stanice"
+msgstr "Japanske Mjesečeve stanice"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:495
@@ -7837,10 +7845,10 @@ msgstr "&Kopiraj"
 msgid "&Paste"
 msgstr "&Zalijepi"
 
-#: src/translations.h:739 plugins/Oculars/src/ui_ocularDialog.h:1339
-#: plugins/Oculars/src/ui_ocularDialog.h:1348
-#: plugins/Oculars/src/ui_ocularDialog.h:1354
-#: plugins/Oculars/src/ui_ocularDialog.h:1375
+#: src/translations.h:739 plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1462
+#: plugins/Oculars/src/ui_ocularDialog.h:1468
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Delete"
 msgstr "Izbriši"
 
@@ -9326,7 +9334,7 @@ msgid "Return to default location"
 msgstr "Vrati na zadanu lokaciju"
 
 #: src/ui_locationDialogGui.h:498
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Zemljopisna širina:"
 
@@ -9359,7 +9367,7 @@ msgstr ""
 "format, na primjer: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:509
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Dužina:"
 
@@ -9391,319 +9399,323 @@ msgstr "Država:"
 msgid "Enable daylight saving time"
 msgstr "Omogući ljetno računanje vremena"
 
-#: src/ui_searchDialogGui.h:769
+#: src/ui_searchDialogGui.h:775
 msgid "Find Object"
 msgstr "Pronađi objekt"
 
-#: src/ui_searchDialogGui.h:773 src/ui_searchDialogGui.h:777
+#: src/ui_searchDialogGui.h:779 src/ui_searchDialogGui.h:783
 msgid "Use tab key for select of found items"
 msgstr "Koristi TAB tipku za odabir pronađenih stavki"
 
-#: src/ui_searchDialogGui.h:782
+#: src/ui_searchDialogGui.h:788
 msgid "iota"
 msgstr "jota"
 
-#: src/ui_searchDialogGui.h:785
+#: src/ui_searchDialogGui.h:791
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:788
+#: src/ui_searchDialogGui.h:794
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:791
+#: src/ui_searchDialogGui.h:797
 msgid "gamma"
 msgstr "gama"
 
-#: src/ui_searchDialogGui.h:794
+#: src/ui_searchDialogGui.h:800
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:797
+#: src/ui_searchDialogGui.h:803
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:800
+#: src/ui_searchDialogGui.h:806
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:803
+#: src/ui_searchDialogGui.h:809
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:806
+#: src/ui_searchDialogGui.h:812
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:809
+#: src/ui_searchDialogGui.h:815
 msgid "kappa"
 msgstr "kapa"
 
-#: src/ui_searchDialogGui.h:812
+#: src/ui_searchDialogGui.h:818
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:815
+#: src/ui_searchDialogGui.h:821
 msgid "mu"
 msgstr "mi"
 
-#: src/ui_searchDialogGui.h:818
+#: src/ui_searchDialogGui.h:824
 msgid "nu"
 msgstr "ni"
 
-#: src/ui_searchDialogGui.h:821
+#: src/ui_searchDialogGui.h:827
 msgid "xi"
 msgstr "ksi"
 
-#: src/ui_searchDialogGui.h:824
+#: src/ui_searchDialogGui.h:830
 msgid "omicron"
 msgstr "omikron"
 
-#: src/ui_searchDialogGui.h:827
+#: src/ui_searchDialogGui.h:833
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:830
+#: src/ui_searchDialogGui.h:836
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:833
+#: src/ui_searchDialogGui.h:839
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:836
+#: src/ui_searchDialogGui.h:842
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:839
+#: src/ui_searchDialogGui.h:845
 msgid "upsilon"
 msgstr "ipsilon"
 
-#: src/ui_searchDialogGui.h:842
+#: src/ui_searchDialogGui.h:848
 msgid "phi"
 msgstr "fi"
 
-#: src/ui_searchDialogGui.h:845
+#: src/ui_searchDialogGui.h:851
 msgid "chi"
 msgstr "hi"
 
-#: src/ui_searchDialogGui.h:848
+#: src/ui_searchDialogGui.h:854
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:851
+#: src/ui_searchDialogGui.h:857
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:853
+#: src/ui_searchDialogGui.h:859
 msgid "Greek letters for Bayer designations"
 msgstr "Grčka slova za Bayerovo označavanje"
 
-#: src/ui_searchDialogGui.h:855
+#: src/ui_searchDialogGui.h:861
 msgid "Query SIMBAD about selected object"
 msgstr "Pošalji upit SIMBAD-u o odabranom objektu"
 
-#: src/ui_searchDialogGui.h:856
+#: src/ui_searchDialogGui.h:862
 msgid "All IDs"
 msgstr "Svi ID-i"
 
-#: src/ui_searchDialogGui.h:857
+#: src/ui_searchDialogGui.h:863
 msgid "Types"
 msgstr "Vrste"
 
-#: src/ui_searchDialogGui.h:858
+#: src/ui_searchDialogGui.h:864
 msgid "Spectral Class"
 msgstr "Spektralni razred"
 
-#: src/ui_searchDialogGui.h:862
+#: src/ui_searchDialogGui.h:868
 msgid "Morph. Descr."
 msgstr "Morfol. opis"
 
-#: src/ui_searchDialogGui.h:863
+#: src/ui_searchDialogGui.h:869
 msgid "Dimensions"
 msgstr "Dimenzije"
 
-#: src/ui_searchDialogGui.h:864
+#: src/ui_searchDialogGui.h:870
 msgid "Max. search radius"
 msgstr "Maks. radijus pretraživanja"
 
-#: src/ui_searchDialogGui.h:865
+#: src/ui_searchDialogGui.h:871
 msgid "arcseconds"
 msgstr "kutne sekunde"
 
-#: src/ui_searchDialogGui.h:866
+#: src/ui_searchDialogGui.h:872
 msgid "Max. results "
 msgstr "Maks. rezultati"
 
-#: src/ui_searchDialogGui.h:868
+#: src/ui_searchDialogGui.h:874
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 "Napomena: ovaj alat ne primjenjuje korekciju refrakcije za koordinate."
 
-#: src/ui_searchDialogGui.h:870
+#: src/ui_searchDialogGui.h:876
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:603
 msgid "Coordinate system:"
 msgstr "Koordinatni sustav:"
 
-#: src/ui_searchDialogGui.h:872
+#: src/ui_searchDialogGui.h:878
 msgid "Position"
 msgstr "Položaj"
 
-#: src/ui_searchDialogGui.h:874
+#: src/ui_searchDialogGui.h:880
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Neki objekti mogu biti pronađeni nakon aktivacije pripadajućih dodataka"
 
-#: src/ui_searchDialogGui.h:876
+#: src/ui_searchDialogGui.h:882
 msgid "names in English"
 msgstr "ENG nazivi"
 
-#: src/ui_searchDialogGui.h:877 src/ui_astroCalcDialog.h:1745
+#: src/ui_searchDialogGui.h:883 src/ui_astroCalcDialog.h:1745
 #: plugins/Satellites/src/ui_satellitesDialog.h:815
 msgid "Search in list..."
 msgstr "Pretraži na popisu..."
 
-#: src/ui_searchDialogGui.h:878
+#: src/ui_searchDialogGui.h:884
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Lists"
 msgstr "Popisi"
 
-#: src/ui_searchDialogGui.h:880
+#: src/ui_searchDialogGui.h:886
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "Koristi online astronomsku bazu podataka SIMBAD"
 
-#: src/ui_searchDialogGui.h:882
+#: src/ui_searchDialogGui.h:888
 msgid "Use SIMBAD"
 msgstr "Koristi SIMBAD"
 
-#: src/ui_searchDialogGui.h:883
+#: src/ui_searchDialogGui.h:889
 msgid "Server:"
 msgstr "Poslužitelj:"
 
-#: src/ui_searchDialogGui.h:884
+#: src/ui_searchDialogGui.h:890
 msgid "Search options"
 msgstr "Postavke pretraživanja"
 
-#: src/ui_searchDialogGui.h:885
+#: src/ui_searchDialogGui.h:891
 msgid "Use autofill only from the beginning of words"
 msgstr "Koristi automatski upis samo na početku riječi"
 
-#: src/ui_searchDialogGui.h:886
+#: src/ui_searchDialogGui.h:892
 msgid "Lock position when coordinates are used"
 msgstr "Zaključaj poziciju kad su koordinate u upotrebi"
 
-#: src/ui_searchDialogGui.h:887 src/ui_viewDialog.h:3304
-#: src/ui_viewDialog.h:3326 src/ui_configurationDialog.h:1866
+#: src/ui_searchDialogGui.h:893
+msgid "Show FOV center marker when position is search"
+msgstr "Prikaži oznaku centra vidnog polja u trenutku pretraživanja pozicije"
+
+#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3320
+#: src/ui_viewDialog.h:3342 src/ui_configurationDialog.h:1866
 #: src/ui_configurationDialog.h:1877
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "Postavke"
 
-#: src/ui_viewDialog.h:2749
+#: src/ui_viewDialog.h:2761
 msgid "View"
 msgstr "Pogled"
 
-#: src/ui_viewDialog.h:2751
+#: src/ui_viewDialog.h:2763
 msgid "Projection"
 msgstr "Projekcija"
 
-#: src/ui_viewDialog.h:2752
+#: src/ui_viewDialog.h:2764
 msgid "Vertical viewport offset"
 msgstr "Pomak vertikalnog pogleda"
 
-#: src/ui_viewDialog.h:2754 src/ui_viewDialog.h:2844 src/ui_viewDialog.h:2950
+#: src/ui_viewDialog.h:2766 src/ui_viewDialog.h:2856 src/ui_viewDialog.h:2962
 msgid "Labels and Markers"
 msgstr "Nazivi i oznake"
 
-#: src/ui_viewDialog.h:2755
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+#: src/ui_viewDialog.h:2767
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "Treperenje:"
 
-#: src/ui_viewDialog.h:2756
+#: src/ui_viewDialog.h:2768
 msgid "Use additional names of stars"
 msgstr "Koristi dodatne nazive za zvijezde"
 
-#: src/ui_viewDialog.h:2757
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+#: src/ui_viewDialog.h:2769
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "Relativna skala:"
 
-#: src/ui_viewDialog.h:2759
+#: src/ui_viewDialog.h:2771
 msgid "Limit the magnitude of stars"
 msgstr "Ograniči magnitudu zvijezda"
 
-#: src/ui_viewDialog.h:2761 src/ui_viewDialog.h:2856 src/ui_viewDialog.h:2962
+#: src/ui_viewDialog.h:2773 src/ui_viewDialog.h:2868 src/ui_viewDialog.h:2974
 msgid "Limit magnitude:"
 msgstr "Ograniči magnitudu:"
 
-#: src/ui_viewDialog.h:2762
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:269
+#: src/ui_viewDialog.h:2774
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "Apsolutna skala:"
 
-#: src/ui_viewDialog.h:2764
+#: src/ui_viewDialog.h:2776
 msgid "Show stars with pointed rays"
 msgstr "Prikaži zvijezde s oštrim zrakama"
 
-#: src/ui_viewDialog.h:2766
+#: src/ui_viewDialog.h:2778
 msgid "Spiky stars"
 msgstr "Bodljikave zvijezde"
 
-#: src/ui_viewDialog.h:2767 src/ui_viewDialog.h:3382
+#: src/ui_viewDialog.h:2779 src/ui_viewDialog.h:3398
 msgid "Sky"
 msgstr "Nebo"
 
-#: src/ui_viewDialog.h:2768
+#: src/ui_viewDialog.h:2780
 msgid "Milky Way brightness/saturation:"
 msgstr "Sjaj / Zasićenost Mliječne staze:"
 
-#: src/ui_viewDialog.h:2770
+#: src/ui_viewDialog.h:2782
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "Promjena zasićenja iz potpuno nezasićene (0,00) u zadanu (1,00) vrijednost."
 
-#: src/ui_viewDialog.h:2772
+#: src/ui_viewDialog.h:2784
 msgid "Atmosphere visualization"
 msgstr "Vizualizacija atmosfere"
 
-#: src/ui_viewDialog.h:2774
+#: src/ui_viewDialog.h:2786
 msgid "pressure, temperature, extinction coefficient"
 msgstr "tlak, temperatura, koeficijent ekstinkcije"
 
-#: src/ui_viewDialog.h:2776
+#: src/ui_viewDialog.h:2788
 msgid "Refraction/Extinction settings..."
 msgstr "Postavke Refrakcije/Ekstinkcije..."
 
-#: src/ui_viewDialog.h:2777
+#: src/ui_viewDialog.h:2789
 msgid "Zodiacal Light brightness:"
 msgstr "Sjaj Zodijačke svjetlosti "
 
-#: src/ui_viewDialog.h:2779
+#: src/ui_viewDialog.h:2791
 msgid "Settings for sporadic meteors"
 msgstr "Postavke za sporadične meteore"
 
-#: src/ui_viewDialog.h:2781
+#: src/ui_viewDialog.h:2793
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Zvijezde padalice:"
 
-#: src/ui_viewDialog.h:2784 src/ui_viewDialog.h:2787
+#: src/ui_viewDialog.h:2796 src/ui_viewDialog.h:2799
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "Zenitna satna frekvencija za sporadične meteore"
 
-#: src/ui_viewDialog.h:2789
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: src/ui_viewDialog.h:2801
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
 msgstr "Svjetlosno onečišćenje:"
 
-#: src/ui_viewDialog.h:2790 src/ui_astroCalcDialog.h:1649
+#: src/ui_viewDialog.h:2802 src/ui_astroCalcDialog.h:1649
 msgid "or"
 msgstr "ili"
 
-#: src/ui_viewDialog.h:2792
+#: src/ui_viewDialog.h:2804
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
@@ -9711,27 +9723,27 @@ msgstr ""
 "Koristi podatke svjetlosnog onečišćenja iz baze podataka lokacija i zanemari"
 " postavke za svjetlosno onečišćenje u lijevoj kučici"
 
-#: src/ui_viewDialog.h:2794
+#: src/ui_viewDialog.h:2806
 msgid "take from locations database"
 msgstr "Preuzmi iz baze podataka o lokacijama"
 
-#: src/ui_viewDialog.h:2796
+#: src/ui_viewDialog.h:2808
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Zatamni slabo vidljive zvijezde kada je jako svijetli objekt vidljiv "
 
-#: src/ui_viewDialog.h:2798
+#: src/ui_viewDialog.h:2810
 msgid "Dynamic eye adaptation"
 msgstr "Dinamička prilagodba oka"
 
-#: src/ui_viewDialog.h:2799
+#: src/ui_viewDialog.h:2811
 msgid "Solar System objects"
 msgstr "Objekti Sunčevog sustava"
 
-#: src/ui_viewDialog.h:2800
+#: src/ui_viewDialog.h:2812
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Sakrij nomenklature na nebeskom tijelu promatrača"
 
-#: src/ui_viewDialog.h:2802
+#: src/ui_viewDialog.h:2814
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -9739,11 +9751,11 @@ msgstr ""
 "Deaktivirajte ovu mogućnost ako želite vidjeti stazu za sva tijela Sunčevog "
 "sustava."
 
-#: src/ui_viewDialog.h:2804
+#: src/ui_viewDialog.h:2816
 msgid "Only for N latest selected objects:"
 msgstr "Samo za N najnovije odabrane objekte:"
 
-#: src/ui_viewDialog.h:2806
+#: src/ui_viewDialog.h:2818
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -9751,67 +9763,67 @@ msgstr ""
 "Deaktivirajte ovu mogućnost ako želite vidjeti orbitu odabranog planeta i "
 "njegovih mjeseca."
 
-#: src/ui_viewDialog.h:2808
+#: src/ui_viewDialog.h:2820
 msgid "Only orbit for selected object"
 msgstr "Samo orbitu odabranog objekta"
 
-#: src/ui_viewDialog.h:2809
+#: src/ui_viewDialog.h:2821
 msgid "Show orbits"
 msgstr "Prikaži orbite"
 
-#: src/ui_viewDialog.h:2811
+#: src/ui_viewDialog.h:2823
 msgid "Show orbit even if planet is off screen"
 msgstr "Prikaži orbitu i ako je planet izvan vidljivosti na zaslonu"
 
-#: src/ui_viewDialog.h:2813
+#: src/ui_viewDialog.h:2825
 msgid "permanently"
 msgstr "trajno"
 
-#: src/ui_viewDialog.h:2815
+#: src/ui_viewDialog.h:2827
 msgid "Configure colors of orbit lines"
 msgstr "Konfiguracija boja linija orbita"
 
-#: src/ui_viewDialog.h:2817
+#: src/ui_viewDialog.h:2829
 msgid "Colors..."
 msgstr "Boje..."
 
-#: src/ui_viewDialog.h:2821
+#: src/ui_viewDialog.h:2833
 msgid "Use more accurate 3D models (where available)"
 msgstr "Koristi preciznije 3D modele (ako su dostupni)"
 
-#: src/ui_viewDialog.h:2822
+#: src/ui_viewDialog.h:2834
 msgid "Planets magnitude algorithm:"
 msgstr "Algoritam magnitude planeta:"
 
-#: src/ui_viewDialog.h:2826
+#: src/ui_viewDialog.h:2838
 msgid "Simulate self-shadowing"
 msgstr "Simuliraj samosjenčanje"
 
-#: src/ui_viewDialog.h:2828
+#: src/ui_viewDialog.h:2840
 msgid "Color of trails"
 msgstr "Boja tragova"
 
-#: src/ui_viewDialog.h:2830
+#: src/ui_viewDialog.h:2842
 msgid "Show trails"
 msgstr "Prikaži tragove"
 
-#: src/ui_viewDialog.h:2831
+#: src/ui_viewDialog.h:2843
 msgid "Only orbits of major planets"
 msgstr "Samo orbite glavnih planeta"
 
-#: src/ui_viewDialog.h:2833
+#: src/ui_viewDialog.h:2845
 msgid "Color of nomenclature labels"
 msgstr "Boja oznaka nomenklature"
 
-#: src/ui_viewDialog.h:2837
+#: src/ui_viewDialog.h:2849
 msgid "Show hints and labels for planetary features"
 msgstr "Prikaži pomoćne oznake i nazive za planetarna obilježja"
 
-#: src/ui_viewDialog.h:2839
+#: src/ui_viewDialog.h:2851
 msgid "Show planetary nomenclature"
 msgstr "Prikaži planetarnu nomenklaturu"
 
-#: src/ui_viewDialog.h:2841
+#: src/ui_viewDialog.h:2853
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -9819,55 +9831,55 @@ msgstr ""
 "Aktivirajte ovu mogućnost kako biste simulirali efekt realne brzine "
 "svjetlosti (preporučeno)"
 
-#: src/ui_viewDialog.h:2843
+#: src/ui_viewDialog.h:2855
 msgid "Simulate light speed"
 msgstr "Simuliraj brzinu svjetlosti"
 
-#: src/ui_viewDialog.h:2846
+#: src/ui_viewDialog.h:2858
 msgid "Color of planet labels"
 msgstr "Boja naziva planeta"
 
-#: src/ui_viewDialog.h:2848
+#: src/ui_viewDialog.h:2860
 msgid "Scale minor bodies:"
 msgstr "Mjerilo manjih tijela:"
 
-#: src/ui_viewDialog.h:2849
+#: src/ui_viewDialog.h:2861
 msgid "Scale Moon:"
 msgstr "Mjerilo Mjeseca:"
 
-#: src/ui_viewDialog.h:2851
+#: src/ui_viewDialog.h:2863
 msgid "Scale factor"
 msgstr "Faktor povećanja"
 
-#: src/ui_viewDialog.h:2854
+#: src/ui_viewDialog.h:2866
 msgid "Limit the magnitude of solar system objects"
 msgstr "Ograniči magnitudu objekata Sunčevog sustava"
 
-#: src/ui_viewDialog.h:2857
+#: src/ui_viewDialog.h:2869
 msgid "Use custom settings of GRS:"
 msgstr "Koristi prilagođene postavke za GRS:"
 
-#: src/ui_viewDialog.h:2858
+#: src/ui_viewDialog.h:2870
 msgid "GRS details..."
 msgstr "GRS detalji..."
 
-#: src/ui_viewDialog.h:2859
+#: src/ui_viewDialog.h:2871
 msgid "Show planet markers"
 msgstr "Prikaži oznake planeta"
 
-#: src/ui_viewDialog.h:2860
+#: src/ui_viewDialog.h:2872
 msgid "Display objects from catalogs"
 msgstr "Prikaži objekte iz kataloga"
 
-#: src/ui_viewDialog.h:2862
+#: src/ui_viewDialog.h:2874
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hicksonova kompaktna skupina (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:2865
+#: src/ui_viewDialog.h:2877
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Katalog H II područja (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:2868
+#: src/ui_viewDialog.h:2880
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
@@ -9875,32 +9887,32 @@ msgstr ""
 "RCW katalog - katalog područja južne Mliječne Staze koja pokazuje Hα-"
 "zračenje (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:2871
+#: src/ui_viewDialog.h:2883
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr "Strasbourg-ESO Katalog galaktičkih planetarnih maglica (Acker+, 1992)"
 
-#: src/ui_viewDialog.h:2874
+#: src/ui_viewDialog.h:2886
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds katalog sjajnih maglica (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:2877
+#: src/ui_viewDialog.h:2889
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala Studija of the ESO(B) Atlas-a (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:2880
+#: src/ui_viewDialog.h:2892
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Katalog otvorenih skupova galaksija (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:2883
+#: src/ui_viewDialog.h:2895
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Katalog sjajnih difuznih galaktičkih maglica (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:2886
+#: src/ui_viewDialog.h:2898
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "Katalog galaktičkih ostataka supernove (Green, 2014)"
 
-#: src/ui_viewDialog.h:2889
+#: src/ui_viewDialog.h:2901
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -9908,51 +9920,51 @@ msgstr ""
 "Katalog zvjezdanih skupova prikazanih na Franklin-Adams tablici (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:2892
+#: src/ui_viewDialog.h:2904
 msgid "Principal Galaxy Catalog"
 msgstr "Katalog glavnih galaksija"
 
-#: src/ui_viewDialog.h:2898
+#: src/ui_viewDialog.h:2910
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Katalog refleksijskih maglica (Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:2904
+#: src/ui_viewDialog.h:2916
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds katalog tamnih maglica (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:2907
+#: src/ui_viewDialog.h:2919
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnardov katalog 349 tamnih objekata na nebu (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:2910
+#: src/ui_viewDialog.h:2922
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "Katalog interaktivnih galaksija (Vorontsov-Velyaminov+, 2001.)"
 
-#: src/ui_viewDialog.h:2913
+#: src/ui_viewDialog.h:2925
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Uppsala General katalog galaksija"
 
-#: src/ui_viewDialog.h:2916
+#: src/ui_viewDialog.h:2928
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "Katalog galaktičkih planetarnih maglica (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:2919
+#: src/ui_viewDialog.h:2931
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Indeks katalog maglica i zvjezdanih skupova"
 
-#: src/ui_viewDialog.h:2922
+#: src/ui_viewDialog.h:2934
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "NGC katalog maglica i zvjezdanih skupova"
 
-#: src/ui_viewDialog.h:2925
+#: src/ui_viewDialog.h:2937
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Atlas osebujnih galaksija (Arp, 1966.)"
 
-#: src/ui_viewDialog.h:2928
+#: src/ui_viewDialog.h:2940
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "Katalog bogatih skupova galaksija  (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:2931
+#: src/ui_viewDialog.h:2943
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (Van den Bergh and "
 "Herbst, 1975)"
@@ -9960,41 +9972,41 @@ msgstr ""
 "Katalog južnih zvijezda ukomponiranih u maglovitost  (Van den Bergh and "
 "Herbst, 1975.)"
 
-#: src/ui_viewDialog.h:2934
+#: src/ui_viewDialog.h:2946
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 "Katalog i udaljenosti optički vidljivih H II područja (Dickel+, 1969.)"
 
-#: src/ui_viewDialog.h:2936
+#: src/ui_viewDialog.h:2948
 msgctxt "other catalogs"
 msgid "Other"
-msgstr ""
+msgstr "Ostalo"
 
-#: src/ui_viewDialog.h:2937
+#: src/ui_viewDialog.h:2949
 msgid "Filter by type"
 msgstr "Filtriraj po tipu"
 
-#: src/ui_viewDialog.h:2942 src/ui_dsoColorsDialog.h:564
+#: src/ui_viewDialog.h:2954 src/ui_dsoColorsDialog.h:564
 msgid "Hydrogen regions"
 msgstr "Područja ioniziranog vodika"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2948 plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: src/ui_viewDialog.h:2960 plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Other"
 msgstr "Ostalo"
 
-#: src/ui_viewDialog.h:2952
+#: src/ui_viewDialog.h:2964
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Koristi pomoćne oznake koje su proporcionalne kutnoj veličini objekta "
 "dubokog svemira"
 
-#: src/ui_viewDialog.h:2954
+#: src/ui_viewDialog.h:2966
 msgid "Use proportional hints"
 msgstr "Koristi proporcionalne pomoćne oznake"
 
-#: src/ui_viewDialog.h:2956
+#: src/ui_viewDialog.h:2968
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -10002,17 +10014,17 @@ msgstr ""
 "Koristi površinski sjaj objekata dubokog svemira za razinu vidljivosti "
 "njihovih oznaka i naziva."
 
-#: src/ui_viewDialog.h:2958
+#: src/ui_viewDialog.h:2970
 msgid "Use surface brightness"
 msgstr "Upotrijebi površinski sjaj"
 
-#: src/ui_viewDialog.h:2960
+#: src/ui_viewDialog.h:2972
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Ograniči magnitudu (za promatrače bez instrumenata / s dvogledom) objekata "
 "dubokog svemira"
 
-#: src/ui_viewDialog.h:2964
+#: src/ui_viewDialog.h:2976
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -10020,66 +10032,121 @@ msgstr ""
 "Koristi službene oznake umjesto poznatih imena za nazive ispisane na "
 "zaslonu. "
 
-#: src/ui_viewDialog.h:2966
+#: src/ui_viewDialog.h:2978
 msgid "Use designations for screen labels"
 msgstr "Koristi službene oznake za nazive ispisane na zaslonu"
 
-#: src/ui_viewDialog.h:2967 plugins/Satellites/src/ui_satellitesDialog.h:786
+#: src/ui_viewDialog.h:2979 plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Labels"
 msgstr "Nazivi"
 
-#: src/ui_viewDialog.h:2968
+#: src/ui_viewDialog.h:2980
 msgid "Hints"
 msgstr "Pomoćne oznake"
 
-#: src/ui_viewDialog.h:2969
+#: src/ui_viewDialog.h:2981
 msgid "Configure colors of markers"
 msgstr "Konfiguracija boja oznaka"
 
-#: src/ui_viewDialog.h:2970
+#: src/ui_viewDialog.h:2982
 msgid "Use outlines for big deep-sky objects"
 msgstr "Koristi konture za veće objekte dubokog svemira"
 
-#: src/ui_viewDialog.h:2974
+#: src/ui_viewDialog.h:2986
 msgid "Limit angular size (arcmin):"
 msgstr "Ograniči kutnu veličinu (u kutnim minutama):"
 
-#: src/ui_viewDialog.h:2976
+#: src/ui_viewDialog.h:2988
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "Minimalna kutna veličina u kutnim minutama za vidljive ODS"
 
-#: src/ui_viewDialog.h:2979
+#: src/ui_viewDialog.h:2991
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Maksimalna kutna udaljenost u kutnim minutama za vidljive ODS"
 
-#: src/ui_viewDialog.h:2981
+#: src/ui_viewDialog.h:2993
 msgid "Use additional names of DSO"
 msgstr "Koristi dodatne nazive za ODS"
 
-#: src/ui_viewDialog.h:2982
+#: src/ui_viewDialog.h:2994
 msgid "Celestial Sphere"
 msgstr "Nebeska sfera"
 
-#: src/ui_viewDialog.h:2984
-msgid "Color of the ecliptical grid (J2000.0)"
-msgstr "Boja ekliptičke mreže (J2000.0)"
+#: src/ui_viewDialog.h:2996
+msgid "Show Prime (East-West) Vertical."
+msgstr "Prikaži prvi (istok-zapad) vertikal"
 
-#: src/ui_viewDialog.h:2987 src/ui_viewDialog.h:2992 src/ui_viewDialog.h:3024
-#: src/ui_viewDialog.h:3036 src/ui_viewDialog.h:3056 src/ui_viewDialog.h:3064
-#: src/ui_viewDialog.h:3078 src/ui_viewDialog.h:3092 src/ui_viewDialog.h:3162
-#: src/ui_viewDialog.h:3171 src/ui_viewDialog.h:3179 src/ui_viewDialog.h:3203
+#: src/ui_viewDialog.h:3000
+msgid "Color of the ecliptic poles (J2000.0)"
+msgstr "Boja ekliptičkih polova (J2000.0)"
+
+#: src/ui_viewDialog.h:3003 src/ui_viewDialog.h:3015 src/ui_viewDialog.h:3081
+#: src/ui_viewDialog.h:3147 src/ui_viewDialog.h:3151 src/ui_viewDialog.h:3166
+#: src/ui_viewDialog.h:3174 src/ui_viewDialog.h:3190 src/ui_viewDialog.h:3262
+#: src/ui_viewDialog.h:3294 src/ui_viewDialog.h:3298 src/ui_viewDialog.h:3308
+msgid "Label partitions"
+msgstr "Oznake skaliranja"
+
+#: src/ui_viewDialog.h:3007
+msgid "Color of the solstice points (J2000.0)"
+msgstr "Boja solsticijskih točaka (J2000.0)"
+
+#: src/ui_viewDialog.h:3011 src/ui_viewDialog.h:3032 src/ui_viewDialog.h:3042
+#: src/ui_viewDialog.h:3058 src/ui_viewDialog.h:3062 src/ui_viewDialog.h:3114
+#: src/ui_viewDialog.h:3137 src/ui_viewDialog.h:3162 src/ui_viewDialog.h:3170
+#: src/ui_viewDialog.h:3194 src/ui_viewDialog.h:3206 src/ui_viewDialog.h:3210
 msgid "Show partitions"
 msgstr "Prikaži skaliranje"
 
-#: src/ui_viewDialog.h:2996
-msgid "Color of equator (of date)"
-msgstr "Boja ekvatora (na datum)"
-
-#: src/ui_viewDialog.h:2999
+#: src/ui_viewDialog.h:3019
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Boja ekvatorijalne mreže (J2000.0)"
 
-#: src/ui_viewDialog.h:3002
+#: src/ui_viewDialog.h:3022
+msgid "Color of the ecliptical grid (J2000.0)"
+msgstr "Boja ekliptičke mreže (J2000.0)"
+
+#: src/ui_viewDialog.h:3025
+msgid "Color of ecliptic (J2000.0)"
+msgstr "Boja ekliptike (J2000.0)"
+
+#: src/ui_viewDialog.h:3028
+msgid "Show Galactic equator line."
+msgstr "Prikaži liniju galaktičkog ekvatora."
+
+#: src/ui_viewDialog.h:3036
+msgid "Color of circumpolar circles"
+msgstr "Boja cirkumpolarnih kružnica"
+
+#: src/ui_viewDialog.h:3039
+msgid "Color of the equinox points (J2000.0)"
+msgstr "Boja ekvinocijskih točaka (J2000.0)"
+
+#: src/ui_viewDialog.h:3046
+msgid "Color of the celestial poles (J2000.0)"
+msgstr "Boja nebeskih polova (J2000.0)"
+
+#: src/ui_viewDialog.h:3049
+msgid "Color of ecliptic poles (of date)"
+msgstr "Boja ekliptičkih polova (na datum)"
+
+#: src/ui_viewDialog.h:3052
+msgid "Color of the equatorial grid (of date)"
+msgstr "Boja ekvatorijalne mreže (na datum)"
+
+#: src/ui_viewDialog.h:3055
+msgid "Color of the galactic grid"
+msgstr "Boja galaktičke mreže"
+
+#: src/ui_viewDialog.h:3066
+msgid "Color of Prime Vertical"
+msgstr "Boja prvog vertikala"
+
+#: src/ui_viewDialog.h:3069
+msgid "Color of cardinal points"
+msgstr "Boja strana svijeta"
+
+#: src/ui_viewDialog.h:3073
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -10087,287 +10154,60 @@ msgstr ""
 "Opozicijska / konjukcijska linija dužine - linija ekliptičke dužine koja "
 "prolazi kroz oba ekliptička pola, Sunce i opozicijsku točku."
 
-#: src/ui_viewDialog.h:3006
-msgid ""
-"These circles delimit stars which stay always above (respectively below) the"
-" mathematical horizon."
-msgstr ""
-"Ove kružnice razgraničuju zvijezde koje ostaju iznad (odnosno ispod) "
-"matematičkog horizonta."
-
-#: src/ui_viewDialog.h:3008
-msgid "Circumpolar circles"
-msgstr "Cirkumpolarne kružnice"
-
-#: src/ui_viewDialog.h:3010
-msgid "Color of horizon"
-msgstr "Boja horizonta"
-
-#: src/ui_viewDialog.h:3013
-msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr "Visina i azimut (promatrano iz smjera sjevera prema istoku)"
-
-#: src/ui_viewDialog.h:3017
-msgid "The line thickness for grids and lines"
-msgstr "Debljina linija za mreže i linije"
-
-#: src/ui_viewDialog.h:3019
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
-msgid "Line thickness"
-msgstr "Debljina linije"
-
-#: src/ui_viewDialog.h:3021
-msgid "Color of the azimuthal grid"
-msgstr "Boja azimutske mreže"
-
-#: src/ui_viewDialog.h:3028
-msgid "Color of celestial poles (of date)"
-msgstr "Boja nebeskih polova (na datum)"
-
-#: src/ui_viewDialog.h:3032
+#: src/ui_viewDialog.h:3077
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
 "Prikaži ekvator de Vaucouleurs-ovih supergalaktičkih koordinata (1976)."
 
-#: src/ui_viewDialog.h:3040
-msgid "Color of supergalactic equator"
-msgstr "Boja supergalaktičkog ekvatora"
+#: src/ui_viewDialog.h:3083
+msgid "Precession circles"
+msgstr "Kružnice precesije"
 
-#: src/ui_viewDialog.h:3043
-msgid "Show meridian line."
-msgstr "Prikaži liniju meridijana."
-
-#: src/ui_viewDialog.h:3046
-msgid "Solstices (of date)"
-msgstr "Solsticiji (na datum)"
-
-#: src/ui_viewDialog.h:3048
-msgid "Color of the solstice points (J2000.0)"
-msgstr "Boja solsticijskih točaka (J2000.0)"
-
-#: src/ui_viewDialog.h:3052
-msgid "Color of antisolar point"
-msgstr "Boja antisolarne točke"
-
-#: src/ui_viewDialog.h:3060
-msgid "Show ecliptic poles of current date."
-msgstr "Prikaži ekliptičke polove trenutnog datuma."
-
-#: src/ui_viewDialog.h:3062
-msgid "Ecliptic poles (of date)"
-msgstr "Ekliptički polovi (na datum)"
-
-#: src/ui_viewDialog.h:3068
+#: src/ui_viewDialog.h:3085
 msgid "Color of galactic poles"
 msgstr "Boja galaktičkih polova"
 
-#: src/ui_viewDialog.h:3071
-msgid "Color of ecliptic (of date)"
-msgstr "Boja ekliptike (na datum)"
-
-#: src/ui_viewDialog.h:3074
-msgid "Show ecliptic line of current date."
-msgstr "Prikaži liniju ekliptike na trenutni datum."
-
-#: src/ui_viewDialog.h:3082
-msgid "Labels for the Cardinal and Ordinal directions."
-msgstr "Nazivi glavnih i sporednih strana svijeta."
-
-#: src/ui_viewDialog.h:3086
-msgid "Color of meridian"
-msgstr "Boja meridijana"
-
-#: src/ui_viewDialog.h:3089
-msgid "Color of the celestial poles (J2000.0)"
-msgstr "Boja nebeskih polova (J2000.0)"
-
-#: src/ui_viewDialog.h:3096
-msgid "Color of ecliptic (J2000.0)"
-msgstr "Boja ekliptike (J2000.0)"
-
-#: src/ui_viewDialog.h:3099
-msgid "Equatorial coordinates of J2000.0."
-msgstr "Ekvatorijalne koordinate J2000.0"
-
-#: src/ui_viewDialog.h:3101
-msgid "Equatorial grid (J2000)"
-msgstr "Ekvatorijalna mreža (J2000)"
-
-#: src/ui_viewDialog.h:3103
-msgid "Color of the opposition/conjunction longitude line"
-msgstr "Boja linije dužine opozicije/konjukcije"
-
-#: src/ui_viewDialog.h:3106
-msgid "Show celestial equator of current planet and date."
-msgstr "Prikaži nebeski ekvator trenutnog planeta i datuma."
-
-#: src/ui_viewDialog.h:3110
-msgid "Show mathematical horizon line."
-msgstr "Prikaži matematičku liniju horizonta."
-
-#: src/ui_viewDialog.h:3114
-msgid "Color of the equinox points (J2000.0)"
-msgstr "Boja ekvinocijskih točaka (J2000.0)"
-
-#: src/ui_viewDialog.h:3117
-msgid "Show celestial poles of current planet and date."
-msgstr "Prikaži nebeske polove trenutnog planeta i datuma."
-
-#: src/ui_viewDialog.h:3119
-msgid "Celestial poles (of date)"
-msgstr "Nebeski polovi (na datum)"
-
-#: src/ui_viewDialog.h:3121
-msgid "The line thickness for circle partitions"
-msgstr "Debljina skaliranja za kružne linije"
-
-#: src/ui_viewDialog.h:3123
-msgid "Partition thickness"
-msgstr "Debljina skaliranja"
-
-#: src/ui_viewDialog.h:3125
-msgid "Color of cardinal points"
-msgstr "Boja strana svijeta"
-
-#: src/ui_viewDialog.h:3128
-msgid "Color of the ecliptic poles (J2000.0)"
-msgstr "Boja ekliptičkih polova (J2000.0)"
-
-#: src/ui_viewDialog.h:3130
-msgid "Equinoxes (J2000)"
-msgstr "Ekvinociji (J2000)"
-
-#: src/ui_viewDialog.h:3132
-msgid "Show colures (great circles through poles and solstices/equinoxes)."
-msgstr ""
-"Prikaži kolure (velike kružnice koje prolaze polovima i "
-"solsticijima/ekvinocijima)."
-
-#: src/ui_viewDialog.h:3136
-msgid "Show Galactic equator line."
-msgstr "Prikaži liniju galaktičkog ekvatora."
-
-#: src/ui_viewDialog.h:3139
-msgid "Zenith and Nadir"
-msgstr "Zenit i Nadir"
-
-#: src/ui_viewDialog.h:3141
-msgid "Color of Prime Vertical"
-msgstr "Boja prvog vertikala"
-
-#: src/ui_viewDialog.h:3144
-msgid "Show celestial equator of J2000.0."
-msgstr "Prikaži nebeske polove J2000.0"
-
-#: src/ui_viewDialog.h:3148
-msgid "Color of galactic equator"
-msgstr "Boja galaktičkog ekvatora"
-
-#: src/ui_viewDialog.h:3151
-msgid ""
-"Instantaneous circles of earth's axis on its motion around ecliptical poles."
-" Displayed on Earth only."
-msgstr ""
-"Trenutne kružnice zemljine osi u njenom kretanju oko polova ekliptike. "
-"Prikazuje se samo na Zemlji."
-
-#: src/ui_viewDialog.h:3155
-msgid "Color of Apex and Antapex points"
-msgstr "Boja točaka apeksa i antiapeksa"
-
-#: src/ui_viewDialog.h:3158
-msgid "Show ecliptic poles of J2000.0"
-msgstr "Prikaži ekliptičke polove J2000.0"
-
-#: src/ui_viewDialog.h:3160
-msgid "Ecliptic poles (J2000)"
-msgstr "Ekliptički polovi (J2000)"
-
-#: src/ui_viewDialog.h:3166
-msgid "Color of the solstice points (of date)"
-msgstr "Boja solsticijskih točaka (na datum)"
-
-#: src/ui_viewDialog.h:3175
-msgid "Color of colures"
-msgstr "Boja kolura"
-
-#: src/ui_viewDialog.h:3177
+#: src/ui_viewDialog.h:3087
 msgid "Solstices (J2000)"
 msgstr "Solsticiji (J2000)"
 
-#: src/ui_viewDialog.h:3183
-msgid "Color of the equatorial grid (of date)"
-msgstr "Boja ekvatorijalne mreže (na datum)"
+#: src/ui_viewDialog.h:3090
+msgid "Zenith and Nadir"
+msgstr "Zenit i Nadir"
 
-#: src/ui_viewDialog.h:3186
-msgid "Color of precession circles"
-msgstr "Boja kružnica precesije"
+#: src/ui_viewDialog.h:3092
+msgid "Color of horizon"
+msgstr "Boja horizonta"
 
-#: src/ui_viewDialog.h:3189
-msgid "Color of Zenith and Nadir"
-msgstr "Boja zenita i nadira"
-
-#: src/ui_viewDialog.h:3192
-msgid "Show Prime (East-West) Vertical."
-msgstr "Prikaži prvi (istok-zapad) vertikal"
-
-#: src/ui_viewDialog.h:3196
-msgid "Color of ecliptic poles (of date)"
-msgstr "Boja ekliptičkih polova (na datum)"
-
-#: src/ui_viewDialog.h:3199
-msgid "Show celestial poles of J2000.0."
-msgstr "Prikaži nebeske polove J2000.0."
-
-#: src/ui_viewDialog.h:3201
-msgid "Celestial poles (J2000)"
-msgstr "Nebeski polovi (J2000)"
-
-#: src/ui_viewDialog.h:3207
-msgid "Ecliptical coordinates for J2000.0."
-msgstr "Ekliptičke koordinate J2000.0"
-
-#: src/ui_viewDialog.h:3209
-msgid "Ecliptic grid (J2000)"
-msgstr "Ekliptička mreža (J2000)"
-
-#: src/ui_viewDialog.h:3211
-msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr "Ekliptičke koordinate trenutnog datuma. Prikaz samo na Zemlji."
-
-#: src/ui_viewDialog.h:3213
-msgid "Ecliptic grid (of date)"
-msgstr "Ekliptička mreža (na datum)"
-
-#: src/ui_viewDialog.h:3215
-msgid "Color of the supergalactic grid"
-msgstr "Boja supergalaktičke mreže"
-
-#: src/ui_viewDialog.h:3217
-msgid "Equinoxes (of date)"
-msgstr "Ekvinociji (na datum)"
-
-#: src/ui_viewDialog.h:3219
-msgid "Color of supergalactic poles"
-msgstr "Boja supergalaktičkih polova"
-
-#: src/ui_viewDialog.h:3222
-msgid "Equatorial coordinates of current date and planet."
-msgstr "Ekvatorijalne koordinate trenutnog datuma i planeta"
-
-#: src/ui_viewDialog.h:3224
-msgid "Equatorial grid (of date)"
-msgstr "Ekvatorijalna mreža (na datum)"
-
-#: src/ui_viewDialog.h:3226
-msgid "Color of the galactic grid"
-msgstr "Boja galaktičke mreže"
-
-#: src/ui_viewDialog.h:3229
+#: src/ui_viewDialog.h:3095
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Prikaži liniju ekliptike J2000.0 (VSOP87A temeljna ploha)"
 
-#: src/ui_viewDialog.h:3233
+#: src/ui_viewDialog.h:3099
+msgid "Color of antisolar point"
+msgstr "Boja antisolarne točke"
+
+#: src/ui_viewDialog.h:3103
+msgid "Altitudes and azimuth (counted from North towards East)."
+msgstr "Visina i azimut (promatrano iz smjera sjevera prema istoku)"
+
+#: src/ui_viewDialog.h:3107
+msgid "Color of colures"
+msgstr "Boja kolura"
+
+#: src/ui_viewDialog.h:3110
+msgid "Ecliptical coordinates for J2000.0."
+msgstr "Ekliptičke koordinate J2000.0"
+
+#: src/ui_viewDialog.h:3112
+msgid "Ecliptic grid (J2000)"
+msgstr "Ekliptička mreža (J2000)"
+
+#: src/ui_viewDialog.h:3118
+msgid "Color of supergalactic poles"
+msgstr "Boja supergalaktičkih polova"
+
+#: src/ui_viewDialog.h:3121
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
@@ -10375,27 +10215,105 @@ msgstr ""
 "Apeks i antiapeks prikazuju smjer prema kojem se promatrani planet giba, "
 "odnosno udaljuje od."
 
-#: src/ui_viewDialog.h:3237
-msgid "Color of the equinox points (of date)"
-msgstr "Boja ekvinocijskih točaka (na datum)"
+#: src/ui_viewDialog.h:3125
+msgid "Show ecliptic line of current date."
+msgstr "Prikaži liniju ekliptike na trenutni datum."
 
-#: src/ui_viewDialog.h:3240
-msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Galaktičke koordinate, Sistem II (IAU 1958)."
+#: src/ui_viewDialog.h:3128
+msgid "Equinoxes (J2000)"
+msgstr "Ekvinociji (J2000)"
 
-#: src/ui_viewDialog.h:3244
+#: src/ui_viewDialog.h:3130
+msgid ""
+"These circles delimit stars which stay always above (respectively below) the"
+" mathematical horizon."
+msgstr ""
+"Ove kružnice razgraničuju zvijezde koje ostaju iznad (odnosno ispod) "
+"matematičkog horizonta."
+
+#: src/ui_viewDialog.h:3132
+msgid "Circumpolar circles"
+msgstr "Cirkumpolarne kružnice"
+
+#: src/ui_viewDialog.h:3134
+msgid "Color of Apex and Antapex points"
+msgstr "Boja točaka apeksa i antiapeksa"
+
+#: src/ui_viewDialog.h:3141
 msgid "Color of equator (J2000.0)"
 msgstr "Boja ekvatora (J2000.0)"
 
-#: src/ui_viewDialog.h:3247
-msgid "Color of circumpolar circles"
-msgstr "Boja cirkumpolarnih kružnica"
+#: src/ui_viewDialog.h:3144
+msgid "Color of equator (of date)"
+msgstr "Boja ekvatora (na datum)"
 
-#: src/ui_viewDialog.h:3250
-msgid "Color of the ecliptical grid (of date)"
-msgstr "Boja ekliptičke mreže (na datum)"
+#: src/ui_viewDialog.h:3149
+msgid "Ecliptic (of date)"
+msgstr "Ekliptika (na datum)"
 
-#: src/ui_viewDialog.h:3253
+#: src/ui_viewDialog.h:3153
+msgid "Colures"
+msgstr "Koluri"
+
+#: src/ui_viewDialog.h:3155
+msgid "Color of the supergalactic grid"
+msgstr "Boja supergalaktičke mreže"
+
+#: src/ui_viewDialog.h:3158
+msgid "Show celestial equator of current planet and date."
+msgstr "Prikaži nebeski ekvator trenutnog planeta i datuma."
+
+#: src/ui_viewDialog.h:3168
+msgid "Equator (of date)"
+msgstr "Ekvator (na datum)"
+
+#: src/ui_viewDialog.h:3178
+msgid "Show colures (great circles through poles and solstices/equinoxes)."
+msgstr ""
+"Prikaži kolure (velike kružnice koje prolaze polovima i "
+"solsticijima/ekvinocijima)."
+
+#: src/ui_viewDialog.h:3182
+msgid "Show celestial poles of J2000.0."
+msgstr "Prikaži nebeske polove J2000.0."
+
+#: src/ui_viewDialog.h:3184
+msgid "Celestial poles (J2000)"
+msgstr "Nebeski polovi (J2000)"
+
+#: src/ui_viewDialog.h:3186
+msgid "Show celestial equator of J2000.0."
+msgstr "Prikaži nebeske polove J2000.0"
+
+#: src/ui_viewDialog.h:3198
+msgid "Color of meridian"
+msgstr "Boja meridijana"
+
+#: src/ui_viewDialog.h:3200
+msgid "Solstices (of date)"
+msgstr "Solsticiji (na datum)"
+
+#: src/ui_viewDialog.h:3202
+msgid "Labels for the Cardinal and Ordinal directions."
+msgstr "Nazivi glavnih i sporednih strana svijeta."
+
+#: src/ui_viewDialog.h:3214
+msgid "Color of the equinox points (of date)"
+msgstr "Boja ekvinocijskih točaka (na datum)"
+
+#: src/ui_viewDialog.h:3217
+msgid ""
+"Instantaneous circles of earth's axis on its motion around ecliptical poles."
+" Displayed on Earth only."
+msgstr ""
+"Trenutne kružnice zemljine osi u njenom kretanju oko polova ekliptike. "
+"Prikazuje se samo na Zemlji."
+
+#: src/ui_viewDialog.h:3221
+msgid "Color of FOV center marker"
+msgstr "Boja oznake centra vidnog polja"
+
+#: src/ui_viewDialog.h:3224
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -10403,211 +10321,309 @@ msgstr ""
 "Prikaži ekvator de Vaucouleurs-ovih supergalaktičkih koordinata (1976), "
 "definiranih distribucijom obližnjih galaksija."
 
-#: src/ui_viewDialog.h:3257 src/ui_viewDialog.h:3261 src/ui_viewDialog.h:3265
-#: src/ui_viewDialog.h:3269 src/ui_viewDialog.h:3273 src/ui_viewDialog.h:3277
-#: src/ui_viewDialog.h:3281 src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3289
-#: src/ui_viewDialog.h:3293 src/ui_viewDialog.h:3297 src/ui_viewDialog.h:3301
-msgid "Label partitions"
-msgstr "Oznake skaliranja"
+#: src/ui_viewDialog.h:3228
+msgid "The line thickness for circle partitions"
+msgstr "Debljina skaliranja za kružne linije"
 
-#: src/ui_viewDialog.h:3259
-msgid "Equator (J2000)"
-msgstr "Ekvator (J2000)"
+#: src/ui_viewDialog.h:3230
+msgid "Partition thickness"
+msgstr "Debljina skaliranja"
 
-#: src/ui_viewDialog.h:3263
-msgid "Equator (of date)"
-msgstr "Ekvator (na datum)"
+#: src/ui_viewDialog.h:3232
+msgid "Show ecliptic poles of J2000.0"
+msgstr "Prikaži ekliptičke polove J2000.0"
 
-#: src/ui_viewDialog.h:3267
+#: src/ui_viewDialog.h:3234
+msgid "Ecliptic poles (J2000)"
+msgstr "Ekliptički polovi (J2000)"
+
+#: src/ui_viewDialog.h:3236
+msgid "Show meridian line."
+msgstr "Prikaži liniju meridijana."
+
+#: src/ui_viewDialog.h:3239
+msgid "Equinoxes (of date)"
+msgstr "Ekvinociji (na datum)"
+
+#: src/ui_viewDialog.h:3241
+msgid "The line thickness for grids and lines"
+msgstr "Debljina linija za mreže i linije"
+
+#: src/ui_viewDialog.h:3243
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
+msgid "Line thickness"
+msgstr "Debljina linije"
+
+#: src/ui_viewDialog.h:3245
+msgid "Color of the opposition/conjunction longitude line"
+msgstr "Boja linije dužine opozicije/konjukcije"
+
+#: src/ui_viewDialog.h:3248
+msgid "Color of ecliptic (of date)"
+msgstr "Boja ekliptike (na datum)"
+
+#: src/ui_viewDialog.h:3251
+msgid "Color of Zenith and Nadir"
+msgstr "Boja zenita i nadira"
+
+#: src/ui_viewDialog.h:3254
+msgid "Show mathematical horizon line."
+msgstr "Prikaži matematičku liniju horizonta."
+
+#: src/ui_viewDialog.h:3258
+msgid "Equatorial coordinates of current date and planet."
+msgstr "Ekvatorijalne koordinate trenutnog datuma i planeta"
+
+#: src/ui_viewDialog.h:3260
+msgid "Equatorial grid (of date)"
+msgstr "Ekvatorijalna mreža (na datum)"
+
+#: src/ui_viewDialog.h:3264
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptika (J2000)"
 
+#: src/ui_viewDialog.h:3266
+msgid "Color of galactic equator"
+msgstr "Boja galaktičkog ekvatora"
+
+#: src/ui_viewDialog.h:3269
+msgid "Equatorial coordinates of J2000.0."
+msgstr "Ekvatorijalne koordinate J2000.0"
+
 #: src/ui_viewDialog.h:3271
-msgid "Ecliptic (of date)"
-msgstr "Ekliptika (na datum)"
+msgid "Equatorial grid (J2000)"
+msgstr "Ekvatorijalna mreža (J2000)"
 
-#: src/ui_viewDialog.h:3299
-msgid "Colures"
-msgstr "Koluri"
+#: src/ui_viewDialog.h:3273
+msgid "Galactic Coordinates, System II (IAU 1958)."
+msgstr "Galaktičke koordinate, Sistem II (IAU 1958)."
 
-#: src/ui_viewDialog.h:3303
-msgid "Precession circles"
-msgstr "Kružnice precesije"
+#: src/ui_viewDialog.h:3277
+msgid "Show celestial poles of current planet and date."
+msgstr "Prikaži nebeske polove trenutnog planeta i datuma."
+
+#: src/ui_viewDialog.h:3279
+msgid "Celestial poles (of date)"
+msgstr "Nebeski polovi (na datum)"
+
+#: src/ui_viewDialog.h:3281
+msgid "Color of the solstice points (of date)"
+msgstr "Boja solsticijskih točaka (na datum)"
+
+#: src/ui_viewDialog.h:3285
+msgid "Color of celestial poles (of date)"
+msgstr "Boja nebeskih polova (na datum)"
+
+#: src/ui_viewDialog.h:3288
+msgid "Color of precession circles"
+msgstr "Boja kružnica precesije"
+
+#: src/ui_viewDialog.h:3291
+msgid "Color of the ecliptical grid (of date)"
+msgstr "Boja ekliptičke mreže (na datum)"
+
+#: src/ui_viewDialog.h:3296
+msgid "Equator (J2000)"
+msgstr "Ekvator (J2000)"
+
+#: src/ui_viewDialog.h:3302
+msgid "Color of the azimuthal grid"
+msgstr "Boja azimutske mreže"
 
 #: src/ui_viewDialog.h:3305
+msgid "Color of supergalactic equator"
+msgstr "Boja supergalaktičkog ekvatora"
+
+#: src/ui_viewDialog.h:3312
+msgid "Ecliptical coordinates for current date. Displayed on Earth only."
+msgstr "Ekliptičke koordinate trenutnog datuma. Prikaz samo na Zemlji."
+
+#: src/ui_viewDialog.h:3314
+msgid "Ecliptic grid (of date)"
+msgstr "Ekliptička mreža (na datum)"
+
+#: src/ui_viewDialog.h:3316
+msgid "Show ecliptic poles of current date."
+msgstr "Prikaži ekliptičke polove trenutnog datuma."
+
+#: src/ui_viewDialog.h:3318
+msgid "Ecliptic poles (of date)"
+msgstr "Ekliptički polovi (na datum)"
+
+#: src/ui_viewDialog.h:3321
 msgid "Show fog"
 msgstr "Prikaži maglu"
 
-#: src/ui_viewDialog.h:3306
+#: src/ui_viewDialog.h:3322
 msgid "Use associated planet and position"
 msgstr "Koristi pridruženi planet i položaj"
 
-#: src/ui_viewDialog.h:3307
+#: src/ui_viewDialog.h:3323
 msgid "Use this landscape as default"
 msgstr "Koristi ovaj krajolik kao zadani"
 
-#: src/ui_viewDialog.h:3308
+#: src/ui_viewDialog.h:3324
 msgid "Show ground"
 msgstr "Prikaži tlo"
 
-#: src/ui_viewDialog.h:3310
+#: src/ui_viewDialog.h:3326
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Koristi minimalnu osvjetljenost da bi ste ostavili krajolik vidljivim i u "
 "tami"
 
-#: src/ui_viewDialog.h:3312
+#: src/ui_viewDialog.h:3328
 msgid "Minimal brightness:"
 msgstr "Minimalna osvijetljenost:"
 
-#: src/ui_viewDialog.h:3314
+#: src/ui_viewDialog.h:3330
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Raspon vrijednosti 0..1 (krajolik je noću crn - krajolik je potpuno "
 "osvijetljen)"
 
-#: src/ui_viewDialog.h:3317
+#: src/ui_viewDialog.h:3333
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Koristite minimalnu osvijetljenost kako kao što je navedena u datoteci "
 "landscape.ini"
 
-#: src/ui_viewDialog.h:3319
+#: src/ui_viewDialog.h:3335
 msgid "from landscape, if given"
 msgstr "iz krajolika, ako je zadana"
 
-#: src/ui_viewDialog.h:3321
+#: src/ui_viewDialog.h:3337
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 "Prikaži sloj osvjetljenja (svijetli prozori, svjetlosno onečišćenje, itd.)"
 
-#: src/ui_viewDialog.h:3323
+#: src/ui_viewDialog.h:3339
 msgid "Show illumination "
 msgstr "Prikaži osvjetljenje"
 
-#: src/ui_viewDialog.h:3324
+#: src/ui_viewDialog.h:3340
 msgid "Show landscape labels"
 msgstr "Prikaži nazive krajolika"
 
-#: src/ui_viewDialog.h:3325
+#: src/ui_viewDialog.h:3341
 msgid "Add/remove landscapes..."
 msgstr "Dodaj/ukloni krajolike..."
 
-#: src/ui_viewDialog.h:3328
+#: src/ui_viewDialog.h:3344
 msgid "Use native names for planets from current culture"
 msgstr "Koristi izvorna imena planeta trenutno odabrane kulture"
 
-#: src/ui_viewDialog.h:3330
+#: src/ui_viewDialog.h:3346
 msgid "Use native names for planets"
 msgstr "Koristi izvorna imena planeta "
 
-#: src/ui_viewDialog.h:3332
+#: src/ui_viewDialog.h:3348
 msgid "Color of constellation names"
 msgstr "Boja naziva zviježđa"
 
-#: src/ui_viewDialog.h:3334
+#: src/ui_viewDialog.h:3350
 msgid "Show labels"
 msgstr "Prikaži nazive"
 
-#: src/ui_viewDialog.h:3336
+#: src/ui_viewDialog.h:3352
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "Odaberite želite li imena planeta skraćena, originalna ili prevedena"
 
-#: src/ui_viewDialog.h:3340
+#: src/ui_viewDialog.h:3356
 msgid "Color of asterism lines"
 msgstr "Boja linija asterizama"
 
-#: src/ui_viewDialog.h:3342
+#: src/ui_viewDialog.h:3358
 msgid "Show asterism lines"
 msgstr "Prikaži linije asterizama"
 
-#: src/ui_viewDialog.h:3344 src/ui_viewDialog.h:3354 src/ui_viewDialog.h:3361
-#: src/ui_viewDialog.h:3369
+#: src/ui_viewDialog.h:3360 src/ui_viewDialog.h:3370 src/ui_viewDialog.h:3377
+#: src/ui_viewDialog.h:3385
 msgid "Thickness of line in pixels"
 msgstr "Debljina linije u pikselima"
 
-#: src/ui_viewDialog.h:3347
+#: src/ui_viewDialog.h:3363
 msgid "Color of constellation boundaries"
 msgstr "Boja granica zviježđa"
 
-#: src/ui_viewDialog.h:3350
+#: src/ui_viewDialog.h:3366
 msgid "Show boundaries of constellations"
 msgstr "Prikaži granice zviježđa"
 
-#: src/ui_viewDialog.h:3352
+#: src/ui_viewDialog.h:3368
 msgid "Show boundaries"
 msgstr "Prikaži granice"
 
-#: src/ui_viewDialog.h:3357
+#: src/ui_viewDialog.h:3373
 msgid "Color of ray helpers"
 msgstr "Boja pomoćnih linija"
 
-#: src/ui_viewDialog.h:3359
+#: src/ui_viewDialog.h:3375
 msgid "Show ray helpers"
 msgstr "Prikaži pomoćne linije"
 
-#: src/ui_viewDialog.h:3363
+#: src/ui_viewDialog.h:3379
 msgid "Show art in brightness"
 msgstr "Prikaži umjetnički prikaz u osvijetljenosti"
 
-#: src/ui_viewDialog.h:3365
+#: src/ui_viewDialog.h:3381
 msgid "Color of constellation lines"
 msgstr "Boja linija zviježđa"
 
-#: src/ui_viewDialog.h:3367
+#: src/ui_viewDialog.h:3383
 msgid "Show constellation lines"
 msgstr "Prikaži linije zviježđa"
 
-#: src/ui_viewDialog.h:3371
+#: src/ui_viewDialog.h:3387
 msgid "Use this sky culture as default"
 msgstr "Koristi ovu kulturu zviježđa kao zadanu"
 
-#: src/ui_viewDialog.h:3373
+#: src/ui_viewDialog.h:3389
 msgid "Color of asterism names"
 msgstr "Boja naziva asterizama"
 
-#: src/ui_viewDialog.h:3375
+#: src/ui_viewDialog.h:3391
 msgid "Show asterism labels"
 msgstr "Prikaži oznake asterizama"
 
-#: src/ui_viewDialog.h:3376
+#: src/ui_viewDialog.h:3392
 msgid "Constellations font size"
 msgstr "Veličina fonta zviježđa"
 
-#: src/ui_viewDialog.h:3377
+#: src/ui_viewDialog.h:3393
 msgid "Asterisms font size"
 msgstr "Veličina fonta asterizama"
 
-#: src/ui_viewDialog.h:3384
+#: src/ui_viewDialog.h:3400
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "OSS"
 
-#: src/ui_viewDialog.h:3389
+#: src/ui_viewDialog.h:3405
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "ODS"
 
-#: src/ui_viewDialog.h:3391
+#: src/ui_viewDialog.h:3407
 msgid "Deep-Sky Objects"
 msgstr "Objekti dubokog svemira"
 
-#: src/ui_viewDialog.h:3394
+#: src/ui_viewDialog.h:3410
 msgid "Markings"
 msgstr "Oznake"
 
-#: src/ui_viewDialog.h:3396
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
+#: src/ui_viewDialog.h:3412
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Landscape"
 msgstr "Krajolik"
 
-#: src/ui_viewDialog.h:3398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
+#: src/ui_viewDialog.h:3414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "Kultura neba"
 
-#: src/ui_viewDialog.h:3400
+#: src/ui_viewDialog.h:3416
 msgid "Surveys"
 msgstr "Studije"
 
@@ -10780,7 +10796,7 @@ msgstr "Sve raspoložive"
 msgid "Display no information"
 msgstr "Ne prikazuj podatke"
 
-#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2338
+#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2347
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Ništa"
@@ -11075,7 +11091,7 @@ msgid "Use designations for celestial coordinate systems"
 msgstr "Upotrijebi oznake za nebeske koordinatne sustave"
 
 #: src/ui_configurationDialog.h:1734
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Početni datum i vrijeme"
 
@@ -11250,7 +11266,7 @@ msgstr ""
 "pogleda"
 
 #: src/ui_configurationDialog.h:1809
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:463
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatsko umanjivanje vraća na početni smjer pogleda"
 
@@ -11339,7 +11355,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1848
 msgid "Auto-enabling for the environment"
-msgstr "Automatsko postavljanje okoliša prema položaju"
+msgstr "Automatsko postavljanje krajolika prema položaju"
 
 #: src/ui_configurationDialog.h:1850 src/ui_configurationDialog.h:1853
 msgid "Hide other constellations when you click one"
@@ -12490,7 +12506,7 @@ msgstr ""
 "laboratorija. Proračunavali smo. Htjeli smo biti na Havajima."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:561
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12510,7 +12526,7 @@ msgid "Links"
 msgstr "Linkovi"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:529
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12535,7 +12551,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12556,7 +12572,7 @@ msgstr "Ukoliko imate pitanje, možete {ovdje dobiti odgovor}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12578,7 +12594,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12673,7 +12689,7 @@ msgid "Restore default settings"
 msgstr "Vrati zadane postavke"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
-#: plugins/Oculars/src/ui_ocularDialog.h:1383
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 #: plugins/Satellites/src/ui_satellitesDialog.h:873
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12694,22 +12710,22 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Opis"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:52
-#: plugins/CompassMarks/src/CompassMarks.cpp:96
+#: plugins/CompassMarks/src/CompassMarks.cpp:51
+#: plugins/CompassMarks/src/CompassMarks.cpp:95
 msgid "Compass Marks"
 msgstr "Oznake kompasa"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:55
+#: plugins/CompassMarks/src/CompassMarks.cpp:54
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Prikazuje oznake smjerova strana svijeta duž horizonta"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:96
+#: plugins/CompassMarks/src/CompassMarks.cpp:95
 msgid "Compass marks"
 msgstr "Oznake kompasa"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1414
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1421
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1270
+#: plugins/Oculars/src/ui_ocularDialog.h:1361
 msgid "Oculars"
 msgstr "Okulari"
 
@@ -12723,239 +12739,239 @@ msgstr ""
 "uvećanje i vidno polje.) Također može prikazati kadar senzora te prikaz kroz"
 " Telrad tražioc."
 
-#: plugins/Oculars/src/Oculars.cpp:907
+#: plugins/Oculars/src/Oculars.cpp:912
 msgid "Please select an object before switching to ocular view."
 msgstr "Molimo odaberite objekt prije prelaska na okularni pogled."
 
-#: plugins/Oculars/src/Oculars.cpp:1013
+#: plugins/Oculars/src/Oculars.cpp:1018
 msgid "&Previous ocular"
 msgstr "&Prethodni okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1014
+#: plugins/Oculars/src/Oculars.cpp:1019
 msgid "&Next ocular"
 msgstr "&Slijedeći okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1015
+#: plugins/Oculars/src/Oculars.cpp:1020
 msgid "Select &ocular"
 msgstr "Odaberi &okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1058
+#: plugins/Oculars/src/Oculars.cpp:1063
 msgid "Toggle &crosshair"
 msgstr "Ukluči/isključi &nitni križ"
 
-#: plugins/Oculars/src/Oculars.cpp:1068
+#: plugins/Oculars/src/Oculars.cpp:1073
 msgid "Configure &Oculars"
 msgstr "Konfiguracija &okulara"
 
-#: plugins/Oculars/src/Oculars.cpp:1077
+#: plugins/Oculars/src/Oculars.cpp:1082
 msgid "Toggle &CCD"
 msgstr "Uključi/isključi CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1085
+#: plugins/Oculars/src/Oculars.cpp:1090
 msgid "Toggle &Telrad"
 msgstr "Uključi/isključi &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1094
+#: plugins/Oculars/src/Oculars.cpp:1099
 msgid "&Previous CCD"
 msgstr "&Prethodni CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1095
+#: plugins/Oculars/src/Oculars.cpp:1100
 msgid "&Next CCD"
 msgstr "&Slijedeći CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1096
+#: plugins/Oculars/src/Oculars.cpp:1101
 msgid "&Select CCD"
 msgstr "&Odaberi CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1118
+#: plugins/Oculars/src/Oculars.cpp:1123
 msgid "&Rotate CCD"
 msgstr "&Rotiraj CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1140
+#: plugins/Oculars/src/Oculars.cpp:1145
 msgid "&Reset rotation"
 msgstr "&Resetiraj rotaciju"
 
-#: plugins/Oculars/src/Oculars.cpp:1415
-#: plugins/Oculars/src/ui_ocularDialog.h:1299
+#: plugins/Oculars/src/Oculars.cpp:1422
+#: plugins/Oculars/src/ui_ocularDialog.h:1390
 msgid "Ocular view"
 msgstr "Okularni pogled"
 
-#: plugins/Oculars/src/Oculars.cpp:1416
+#: plugins/Oculars/src/Oculars.cpp:1423
 msgid "Oculars popup menu"
 msgstr "Skočni menu za okulare"
 
-#: plugins/Oculars/src/Oculars.cpp:1417
+#: plugins/Oculars/src/Oculars.cpp:1424
 msgid "Show crosshairs"
 msgstr "Prikaži nitni križ"
 
-#: plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:1425
 msgid "Image sensor frame"
 msgstr "Okvir senzora slike"
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1426
 msgid "Telrad sight"
 msgstr "Pogled kroz Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1427
 msgid "Toggle Oculars configuration window"
 msgstr "Postavke za prebacivanje okulara"
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Toggle Oculars button bar"
 msgstr "Uključi/isključi traku s gumbima okulara"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Select next telescope"
 msgstr "Odaberi slijedeći teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1432
 msgid "Select previous telescope"
 msgstr "Odaberi prethodni teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1427
+#: plugins/Oculars/src/Oculars.cpp:1434
 msgid "Select next eyepiece"
 msgstr "Odaberi slijedeći okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1429
+#: plugins/Oculars/src/Oculars.cpp:1436
 msgid "Select previous eyepiece"
 msgstr "Odaberi prethodni okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1430
+#: plugins/Oculars/src/Oculars.cpp:1437
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "Rotiraj uzorak končanice na okularu u smjeru kazaljke na satu"
 
-#: plugins/Oculars/src/Oculars.cpp:1431
+#: plugins/Oculars/src/Oculars.cpp:1438
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 "Rotiraj uzorak končanice na okularu u smjeru suprotnom od kazaljke na satu"
 
-#: plugins/Oculars/src/Oculars.cpp:1636
+#: plugins/Oculars/src/Oculars.cpp:1643
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "RA/Dec (J2000.0) križa"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1647
+#: plugins/Oculars/src/Oculars.cpp:1654
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1665
+#: plugins/Oculars/src/Oculars.cpp:1673
 msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1889
+#: plugins/Oculars/src/Oculars.cpp:1898
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1891
+#: plugins/Oculars/src/Oculars.cpp:1900
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "Dvogled"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1911
+#: plugins/Oculars/src/Oculars.cpp:1920
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Žar. dulj. okulara: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1927
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Priv. vidno polje okulara: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1929
+#: plugins/Oculars/src/Oculars.cpp:1938
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "Leća #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1933
+#: plugins/Oculars/src/Oculars.cpp:1942
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Leća #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1938
+#: plugins/Oculars/src/Oculars.cpp:1947
 msgid "Lens: none"
 msgstr "Leća: nijedna"
 
-#: plugins/Oculars/src/Oculars.cpp:1953 plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:1962 plugins/Oculars/src/Oculars.cpp:2022
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1962
+#: plugins/Oculars/src/Oculars.cpp:1971
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Povećanje: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1969
+#: plugins/Oculars/src/Oculars.cpp:1978
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Izlazna pupila: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1976
+#: plugins/Oculars/src/Oculars.cpp:1985
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr "Vidno polje: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimenzije: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Senzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2005
+#: plugins/Oculars/src/Oculars.cpp:2014
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Senzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2018
+#: plugins/Oculars/src/Oculars.cpp:2027
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2334
+#: plugins/Oculars/src/Oculars.cpp:2343
 msgid "&Lens"
 msgstr "&Leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2335
+#: plugins/Oculars/src/Oculars.cpp:2344
 msgid "&Previous lens"
 msgstr "&Prethodna leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2336
+#: plugins/Oculars/src/Oculars.cpp:2345
 msgid "&Next lens"
 msgstr "&Slijedeća leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2366
+#: plugins/Oculars/src/Oculars.cpp:2375
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2367
+#: plugins/Oculars/src/Oculars.cpp:2376
 msgid "&Previous telescope"
 msgstr "&Prethodni teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2368
+#: plugins/Oculars/src/Oculars.cpp:2377
 msgid "&Next telescope"
 msgstr "&Slijedeći teleskop"
 
@@ -13158,53 +13174,53 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Vizualne rezolucija se temelji na svojstvu očiju i uvećanju"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:478
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid "tFOV:"
 msgstr "Pravo vidno polje:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:480
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 msgid "Magnification factor:"
 msgstr "Faktor povećanja:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:481
-#: plugins/Oculars/src/ui_ocularDialog.h:1380
+#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/ui_ocularDialog.h:1494
 msgid "Diameter:"
 msgstr "Promjer:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:485
-#: plugins/Oculars/src/ui_ocularDialog.h:1343
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
+#: plugins/Oculars/src/ui_ocularDialog.h:1457
 msgid "aFOV:"
 msgstr "Prividno vidno polje:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:486
-#: plugins/Oculars/src/ui_ocularDialog.h:1344
-#: plugins/Oculars/src/ui_ocularDialog.h:1381
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "Focal length:"
 msgstr "Žarišna duljina:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:487
-#: plugins/Oculars/src/ui_ocularDialog.h:1340
+#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Field stop:"
 msgstr "Otvor polja:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:499
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "Oculars Plug-in"
 msgstr "Dodatak za Okulare"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "Barlow lens feature"
 msgstr "Obilježje Barlow leće"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 msgid "Sensor crop overlay feature"
 msgstr "Značajka prikaza sloja okvira senzora"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 msgid "Overview"
 msgstr "Pregled"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:547
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13216,11 +13232,11 @@ msgstr ""
 "teleskopa, kao i CCD senzora. Pri prvom pokretanju aplikacije pojavit će se "
 "nekoliko primjera kako bi ste imali temelj za uređivanje."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Možete uvećati/umanjiti sliku koju vidite na zaslonu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -13228,7 +13244,7 @@ msgstr ""
 "Ova mogućnost je namijenjena da Vam pokaže bolju usporedbu između jedne "
 "kombinacije okulara/teleskopa naspram druge."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -13237,7 +13253,7 @@ msgstr ""
 "proizvest će dva različita izlazna otvora i time donekle izmijeniti i "
 "pogled."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:518
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -13245,7 +13261,7 @@ msgstr ""
 "Kompromis ove radnje je, u slučaju da je slika skalirana, veći dio zaslona "
 "može biti neiskorišten."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
@@ -13253,11 +13269,11 @@ msgstr ""
 "Zbog toga, preporučam da je pustite isključenu, osim ako mislite da imate "
 "potrebu iste."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "You can toggle a crosshair in the view."
 msgstr "Možete uključiti/isključiti nitni križ u pogledu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:554
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -13270,15 +13286,15 @@ msgstr ""
 "koncentrične kružnice od 0.5%1, 2.0%1, and 4.0%1, kako bi pomogla dočarati "
 "ono što bi ste vidjeli golim okom kroz Telrad (ili slični) tražioc."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:522
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Ukolko naiđete na bilo kakve poteškoće, molimo javite. Uživajte!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "Hot Keys"
 msgstr "Brze tipke"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -13286,15 +13302,15 @@ msgstr ""
 "Ključne veze dodataka mogu se uređivati u uređivanju prečaca na tipkovnici "
 "(F7)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1272
+#: plugins/Oculars/src/ui_ocularDialog.h:1363
 msgid "Interface"
 msgstr "Sučelje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1276
+#: plugins/Oculars/src/ui_ocularDialog.h:1367
 msgid "Arrow button scale (requires restart)"
 msgstr "Mjerilo gumba strelice (potrebno ponovno pokretanje)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1278
+#: plugins/Oculars/src/ui_ocularDialog.h:1369
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -13302,23 +13318,23 @@ msgstr ""
 "Označite ako želite da Vidno polje bude jednako onome prilikom pokretanja "
 "Stellarium-a."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1280
+#: plugins/Oculars/src/ui_ocularDialog.h:1371
 msgid "Restore FOV to initial values"
 msgstr "Vrati vidno polje na početne vrijednosti"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1281
+#: plugins/Oculars/src/ui_ocularDialog.h:1372
 msgid "Show resolution criteria"
 msgstr "Prikaži kriterij rezolucije"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1282
+#: plugins/Oculars/src/ui_ocularDialog.h:1373
 msgid "On-screen control panel"
 msgstr "Kontrolna ploča na zaslonu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1283
+#: plugins/Oculars/src/ui_ocularDialog.h:1374
 msgid "Font size"
 msgstr "Veličina fonta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1285
+#: plugins/Oculars/src/ui_ocularDialog.h:1376
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -13326,93 +13342,89 @@ msgstr ""
 "Označite ukoliko želite da postavke smjera budu jednake onima prilikom "
 "pokretanja Stellarium-a. "
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1287
+#: plugins/Oculars/src/ui_ocularDialog.h:1378
 msgid "Restore direction to initial values"
 msgstr "Vrati smjer na početne vrijednosti"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1289
+#: plugins/Oculars/src/ui_ocularDialog.h:1380
 msgid "Color for ocular circles and sensor frames"
 msgstr "Boja kružnica okulara i kadra senzora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1292
+#: plugins/Oculars/src/ui_ocularDialog.h:1383
 msgid "Line Color"
 msgstr "Boja linija"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1294
+#: plugins/Oculars/src/ui_ocularDialog.h:1385
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "Boja teksta koji se prikazuje u trenutku kad je GUI isključeno."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1297
+#: plugins/Oculars/src/ui_ocularDialog.h:1388
 msgid "Text Color"
 msgstr "Boja teksta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1298
+#: plugins/Oculars/src/ui_ocularDialog.h:1389
 msgid "Show oculars button on toolbar"
 msgstr "Prikaži gumb okulara na alatnoj traci"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1301
+#: plugins/Oculars/src/ui_ocularDialog.h:1392
 msgid "Show border circle"
 msgstr "Prikaži graničnu kružnicu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1303
+#: plugins/Oculars/src/ui_ocularDialog.h:1394
 msgid "Show FOV outline"
 msgstr "Prikaži konturu vidnog polja"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1304
+#: plugins/Oculars/src/ui_ocularDialog.h:1395
 msgid "Scale image circle"
 msgstr "Skaliraj kružnicu slike"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1305
+#: plugins/Oculars/src/ui_ocularDialog.h:1396
 msgid "Hide grids and lines when enabled"
 msgstr "Sakrij mreže i linije kad je omogućen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1306
+#: plugins/Oculars/src/ui_ocularDialog.h:1397
 msgid "Enable only if an object is selected"
 msgstr "Omogući samo ako je objekt odabran"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1308
+#: plugins/Oculars/src/ui_ocularDialog.h:1399
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
 "u okular načinu rada, dopusti određenu vidljivost izvan kružnice okulara"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1310
+#: plugins/Oculars/src/ui_ocularDialog.h:1401
 msgid "Use semi-transparent mask"
 msgstr "Koristi poluprozirnu masku"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1312
+#: plugins/Oculars/src/ui_ocularDialog.h:1403
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Prikaži glavne smjerove u ekvarorijalnom kordinatnom sustavu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1314
+#: plugins/Oculars/src/ui_ocularDialog.h:1405
 msgid "Show compass rose"
 msgstr "Prikaži kompasnu ružu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1316
+#: plugins/Oculars/src/ui_ocularDialog.h:1407
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "Primjeni granice magnituda zvijezde za različite otvore leće teleskopa "
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1318
+#: plugins/Oculars/src/ui_ocularDialog.h:1409
 msgid "Limit stellar magnitude"
 msgstr "Ograniči magnitudu zvijezda"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1320
+#: plugins/Oculars/src/ui_ocularDialog.h:1411
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Poravnaj nitni križ u ekvatorijalnim koordinatama"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1322
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Align crosshair"
 msgstr "Poravnaj nitni križ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1323
+#: plugins/Oculars/src/ui_ocularDialog.h:1414
 msgid "Sensor view"
 msgstr "Pogled sa senzora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1324
-msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Koristi stupnjeve i minute za vidno polje CCD-a"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1326
+#: plugins/Oculars/src/ui_ocularDialog.h:1416
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -13420,73 +13432,110 @@ msgstr ""
 "Omogući automatsku promjenu vrste montaže u postavkama teleskopa za "
 "horizontalnu orijentaciju CCD kadra"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1328
+#: plugins/Oculars/src/ui_ocularDialog.h:1418
 msgid "Enable automatic switch of mount type"
 msgstr "Omogući automatsku promjenu vrste montaže"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1330
+#: plugins/Oculars/src/ui_ocularDialog.h:1419
+msgid "Overlay size (px)"
+msgstr "Prikaz sloja (px)"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1421
+msgid "Horizontal size (width)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1424
+msgid "Vertical size (height)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1426
+msgid "Enable autozoom when switching CCD"
+msgstr "Omogući autozumiranje prilikom prelaska CCD"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr "Koristi stupnjeve i minute za vidno polje CCD-a"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
 msgstr "Omogući kvadratni prikaz efektivne veličine u broju piksela"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1332
+#: plugins/Oculars/src/ui_ocularDialog.h:1431
 msgid "Show sensor crop overlay"
 msgstr "Prikaži sloj okvira senzora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1333
-msgid "Overlay size (px)"
-msgstr "Prikaz sloja (px)"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1334
-msgid "Enable scaling FOV for CCD"
-msgstr "Omogući skaliranje vidnog polja za CCD"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1335
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid "Telrad view"
 msgstr "Pogled kroz Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1336
-msgid "Enable scaling FOV for Telrad"
-msgstr "Omogući skaliranje vidnog polja za Telrad"
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
+msgctxt "abbreviation"
+msgid "FOV:"
+msgstr "Vidno polje:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1337
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:227
+#: plugins/Oculars/src/ui_ocularDialog.h:1438
+msgid "FOV for circle 1 in degrees"
+msgstr "V.P. za kružnicu 1 u stupnjevima"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
+msgid "FOV for circle 2 in degrees"
+msgstr "V.P. za kružnicu 2 u stupnjevima"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
+msgid "FOV for circle 3 in degrees"
+msgstr "V.P. za kružnicu 3 u stupnjevima"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
+msgid "FOV for circle 4 in degrees"
+msgstr "V.P. za kružnicu 4 u stupnjevima"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
+msgid "Restore original Telrad FOV"
+msgstr "Vrati na izvorno Telrad vidno polje"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1450
+msgid "Enable autozoom when switching Telrad"
+msgstr "Omogući autozumiranje prilikom prelaska Telrad"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Opće"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1338
-#: plugins/Oculars/src/ui_ocularDialog.h:1347
-#: plugins/Oculars/src/ui_ocularDialog.h:1353
-#: plugins/Oculars/src/ui_ocularDialog.h:1374
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "Dodaj"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1341
+#: plugins/Oculars/src/ui_ocularDialog.h:1455
 msgid "Has permanent cross-hairs"
 msgstr "Ima permanentni nitni križ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1342
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Binoculars"
 msgstr "Dvogled"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1345
-#: plugins/Oculars/src/ui_ocularDialog.h:1349
-#: plugins/Oculars/src/ui_ocularDialog.h:1365
-#: plugins/Oculars/src/ui_ocularDialog.h:1376
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 #: plugins/Satellites/src/ui_satellitesDialog.h:837
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "Naziv:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1346
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Eyepieces"
 msgstr "Okulari"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1350
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -13494,97 +13543,105 @@ msgstr ""
 "Vrijednosti faktora povećanja >1 povećavaju žarišnu duljinu (Barlow leća). "
 "Vrijednosti faktor povećanja <1 smanjuju žarišnu duljinu (Sharpley leća)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1351
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Multiplier:"
 msgstr "Faktor povećanja:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1352
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid "Lenses"
 msgstr "Leće"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1355
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Resolution y (pixels):"
 msgstr "Rezolucija y (u pikselima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1356
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Pixel height (micron):"
 msgstr "Visina piksela (u mikronima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1358
+#: plugins/Oculars/src/ui_ocularDialog.h:1472
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr "Ovo je udaljenost od centra senzora slike do dna prizme"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1360
+#: plugins/Oculars/src/ui_ocularDialog.h:1474
 msgid "Prism/CCD distance (mm):"
 msgstr "Prizma/CCD udaljenost (u mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1361
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Off-Axis guider"
 msgstr "pomoćno \"Off-Axis\" tražilo"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1362
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Binning y:"
 msgstr "Binning y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1363
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Chip width (mm):"
 msgstr "Širina čipa (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1364
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Pixel width (micron):"
 msgstr "Širina piksela (u mikronima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1366
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
 msgid "Rotation Angle (degrees):"
 msgstr "Kut rotacije (u stupnjevima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1367
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Resolution x (pixels):"
 msgstr "Rezolucija x (u pikselima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1368
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
 msgid "Position angle (degrees):"
 msgstr "Položajni kut (u stupnjevima):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1369
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid "Prism/CCD height (mm):"
 msgstr "Prizma/CCD visina (u mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1370
+#: plugins/Oculars/src/ui_ocularDialog.h:1484
 msgid "Binning x:"
 msgstr "Binning x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1371
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Chip height (mm):"
 msgstr "Visina čipa (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1372
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Prism/CCD width (mm):"
 msgstr "Prizma/CCD širina (u mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1373
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Sensors"
 msgstr "Senzori"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1377
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Horizontal flip"
 msgstr "Horizontalno zrcaljenje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1378
+#: plugins/Oculars/src/ui_ocularDialog.h:1492
 msgid "Vertical flip"
 msgstr "Vertikalno zrcaljenje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1379
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Equatorial Mount"
 msgstr "Ekvatorijalna montaža"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1382
+#: plugins/Oculars/src/ui_ocularDialog.h:1496
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"
 msgstr "Teleskopi"
+
+#: plugins/Oculus/src/Oculus.cpp:174
+msgid "Oculus"
+msgstr "Oculus"
+
+#: plugins/Oculus/src/Oculus.cpp:177
+msgid "Support for Oculus Rift"
+msgstr "Podrška za Oculus Rift"
 
 #: plugins/Satellites/src/Satellites.cpp:72
 #: plugins/Satellites/src/Satellites.cpp:146
@@ -16122,11 +16179,11 @@ msgstr "Ukloni odabir"
 msgid "Clear list"
 msgstr "Očisti popis"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:88
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:87
 msgid "Text User Interface"
 msgstr "Tekstualno korisničko sučelje"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:91
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -16134,169 +16191,169 @@ msgstr ""
 "Implementacija tekstualnog korisničkog sučelja (TUI) serije 0.9.x korištenog"
 " u planetarijskim sustavima, u obliku dodatka."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
 msgstr "Visina:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:161
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Solar System body"
 msgstr "Tijelo Sunčevog sustava"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
 msgstr "Trenutni datum/vrijeme"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:181
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
 msgstr "Postavi vremensku zonu"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
 msgstr "Tipke za dane"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
 msgstr "Unaprijed zadani početni datum/vrijeme"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
 msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:192
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "preset"
 msgstr "unaprijed zadani"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
 msgstr "mmddgggg"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "ddmmyyyy"
 msgstr "ddmmgggg"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "yyyymmdd"
 msgstr "ggggmmdd"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
 msgstr "Format prikaza datuma"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
 msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
 msgstr "24h"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
 msgstr "Format prikaza vremena"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Sky Language"
 msgstr "Jezik neba"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "App Language"
 msgstr "Jezik aplikacije"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:258
 msgid "Show stars"
 msgstr "Prikaži zvijezde"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Colors"
 msgstr "Boje"
 
 #. TRANSLATORS: Refers to constellation art
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:303
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Art brightness:"
 msgstr "Jačina osvjetljenja umjetničkog prikaza"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:363
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Ecliptic line (J2000)"
 msgstr "Linija ekliptike (J2000)"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Nebula names"
 msgstr "Nazivi maglica"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:374
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Nebula hints"
 msgstr "Pomoćne oznake maglica"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:378
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Galaxy hints"
 msgstr "Pomoćne oznake za galaksije"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:381
 msgid "Dark nebulae hints"
 msgstr "Pomoćne oznake tamnih maglica"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:386
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Clusters hints"
 msgstr "Pomoćna oznaka za skupove"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:400
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Galactic equator line"
 msgstr "Linija galaktičkog ekvatora"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:411
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Sky Background (default: black)"
 msgstr "Pozadina neba (zadano:crna)"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Effects"
 msgstr "Efekti"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Setting landscape sets location"
 msgstr "Postavljanje krajolika postavlja i lokaciju"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Zoom duration:"
 msgstr "Trajanje zumiranja:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Milky Way intensity:"
 msgstr "Intezitet prikaza Mliječne staze"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Zodiacal light intensity:"
 msgstr "Intezitet Zodijačke svjetlosti:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:502
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:501
 msgid "Run local script"
 msgstr "Pokreni lokalnu skriptu"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:508
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:507
 msgid "Stop running script"
 msgstr "Zaustavi skriptu u izvođenju"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:523
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:518
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:522
 msgid "Administration"
 msgstr "Administracija"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:529
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:528
 msgid "Load default configuration"
 msgstr "Učitaj zadane postavke"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:530
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Save current configuration"
 msgstr "Spremi trenutne postavke"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:533
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:532
 msgid "Shut down"
 msgstr "Isključi"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:609
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:608
 msgid "[no TUI node]"
 msgstr "[nema TUI čvora]"
 
