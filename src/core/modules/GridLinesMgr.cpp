@@ -85,8 +85,7 @@ public:
 		SOLSTICES_J2000,
 		SOLSTICES_OF_DATE,
 		ANTISOLAR,
-		APEX,
-		FOVCENTER
+		APEX
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
@@ -1310,10 +1309,7 @@ void SkyPoint::updateLabel()
 				southernLabel += speedStr;
 			}
 			break;
-		}
-		case FOVCENTER:
-			frameType = StelCore::FrameEquinoxEqu;
-			break;
+		}		
 		default:
 			Q_ASSERT(0);
 	}
@@ -1417,24 +1413,7 @@ void SkyPoint::draw(StelCore *core) const
 				sPainter.drawText(-dir, southernLabel, 0, shift, shift, false);
 			}
 			break;
-		}
-		case FOVCENTER:
-		{
-			StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-			Vec2i centerScreen(prj->getViewportPosX() + prj->getViewportWidth() / 2, prj->getViewportPosY() + prj->getViewportHeight() / 2);
-			QPoint a, b;
-			QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]);
-			const int radius = qRound(10 * params.devicePixelsPerPixel);
-			sPainter.drawCircle(centerScreen[0], centerScreen[1], radius);
-			const int cross = qRound(15 * params.devicePixelsPerPixel);
-			a = transform.map(QPoint(0, -cross));
-			b = transform.map(QPoint(0, cross));
-			sPainter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-			a = transform.map(QPoint(-cross, 0));
-			b = transform.map(QPoint(cross, 0));
-			sPainter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-		}
-			break;
+		}		
 		default:
 			Q_ASSERT(0);
 	}
@@ -1482,8 +1461,7 @@ GridLinesMgr::GridLinesMgr()
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 	antisolarPoint = new SkyPoint(SkyPoint::ANTISOLAR);
-	apexPoints = new SkyPoint(SkyPoint::APEX);
-	fovCenterMarker = new SkyPoint(SkyPoint::FOVCENTER);
+	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
@@ -1526,8 +1504,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete solsticeJ2000Points;
 	delete solsticePoints;
 	delete antisolarPoint;
-	delete apexPoints;
-	delete fovCenterMarker;
+	delete apexPoints;	
 }
 
 /*************************************************************************
@@ -1610,7 +1587,6 @@ void GridLinesMgr::init()
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
-	setFlagFOVCenterMarker(conf->value("viewing/flag_fov_center_marker").toBool());
 
 	// Set the line thickness for grids and lines
 	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
@@ -1651,7 +1627,6 @@ void GridLinesMgr::init()
 	setColorSolsticePoints(          Vec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
 	setColorAntisolarPoint(          Vec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
 	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
-	setColorFOVCenterMarker(	Vec3f(conf->value("color/fov_center_marker_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
@@ -1691,8 +1666,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
 	addAction("actionShow_Antisolar_Point", displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
-	addAction("actionShow_Apex_Points", displayGroup, N_("Apex points"), "apexPointsDisplayed");
-	addAction("actionShow_FOV_Center_Marker", displayGroup, N_("FOV Center marker"), "fovCenterMarkerDisplayed");
+	addAction("actionShow_Apex_Points", displayGroup, N_("Apex points"), "apexPointsDisplayed");	
 }
 
 void GridLinesMgr::connectEarthFromSolarSystem()
@@ -1739,8 +1713,7 @@ void GridLinesMgr::update(double deltaTime)
 	solsticePoints->update(deltaTime);
 	antisolarPoint->update(deltaTime);
 	apexPoints->update(deltaTime);
-	apexPoints->updateLabel();
-	fovCenterMarker->update(deltaTime);
+	apexPoints->updateLabel();	
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -1792,8 +1765,7 @@ void GridLinesMgr::draw(StelCore* core)
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
-	apexPoints->draw(core);
-	fovCenterMarker->draw(core);
+	apexPoints->draw(core);	
 }
 
 void GridLinesMgr::updateLabels()
@@ -1826,8 +1798,7 @@ void GridLinesMgr::updateLabels()
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
 	antisolarPoint->updateLabel();
-	apexPoints->updateLabel();
-	fovCenterMarker->updateLabel();
+	apexPoints->updateLabel();	
 }
 
 //! Setter ("master switch") for displaying any grid/line.
@@ -1889,8 +1860,7 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 	setFlagSupergalacticPoles(displayed);
 	setFlagCelestialJ2000Poles(displayed);
 	setFlagSolsticeJ2000Points(displayed);
-	setFlagApexPoints(displayed);
-	setFlagFOVCenterMarker(displayed);
+	setFlagApexPoints(displayed);	
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -3038,32 +3008,6 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 	}
 }
 
-void GridLinesMgr::setFlagFOVCenterMarker(const bool displayed)
-{
-	if(displayed != fovCenterMarker->isDisplayed()) {
-		fovCenterMarker->setDisplayed(displayed);
-		emit fovCenterMarkerDisplayedChanged(displayed);
-	}
-}
-
-bool GridLinesMgr::getFlagFOVCenterMarker() const
-{
-	return fovCenterMarker->isDisplayed();
-}
-
-Vec3f GridLinesMgr::getColorFOVCenterMarker() const
-{
-	return fovCenterMarker->getColor();
-}
-
-void GridLinesMgr::setColorFOVCenterMarker(const Vec3f& newColor)
-{
-	if(newColor != fovCenterMarker->getColor()) {
-		fovCenterMarker->setColor(newColor);
-		emit fovCenterMarkerColorChanged(newColor);
-	}
-}
-
 void GridLinesMgr::setLineThickness(const int thickness)
 {
 	int lineThickness = equGrid->getLineThickness();
@@ -3178,6 +3122,5 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	equinoxPoints->setFontSize(pointFontSize);
 	solsticeJ2000Points->setFontSize(pointFontSize);
 	solsticePoints->setFontSize(pointFontSize);
-	apexPoints->setFontSize(pointFontSize);
-	fovCenterMarker->setFontSize(pointFontSize);
+	apexPoints->setFontSize(pointFontSize);	
 }

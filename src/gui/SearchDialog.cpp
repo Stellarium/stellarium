@@ -27,7 +27,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planet.hpp"
-#include "GridLinesMgr.hpp"
+#include "SpecialMarkersMgr.hpp"
 #include "CustomObjectMgr.hpp"
 
 #include "StelObjectMgr.hpp"
@@ -152,7 +152,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
-	fovCenterMarkerState = GETSTELMODULE(GridLinesMgr)->getFlagFOVCenterMarker();
+	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
@@ -450,10 +450,10 @@ void SearchDialog::changeTab(int index)
 	if (index==2) // Position
 	{
 		if (useFOVCenterMarker)
-			GETSTELMODULE(GridLinesMgr)->setFlagFOVCenterMarker(true);
+			GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(true);
 	}
 	else
-		GETSTELMODULE(GridLinesMgr)->setFlagFOVCenterMarker(fovCenterMarkerState);
+		GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(fovCenterMarkerState);
 
 	if (index==3) // Lists
 	{
@@ -540,7 +540,7 @@ void SearchDialog::enableLockPosition(bool enable)
 void SearchDialog::enableFOVCenterMarker(bool enable)
 {
 	useFOVCenterMarker = enable;
-	fovCenterMarkerState = GETSTELMODULE(GridLinesMgr)->getFlagFOVCenterMarker();
+	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	conf->setValue("search/flag_fov_center_marker", useFOVCenterMarker);
 }
 

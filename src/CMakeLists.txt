@@ -238,6 +238,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZodiacalLight.cpp
      core/modules/ZoneArray.hpp
      core/modules/ZoneData.hpp
+     core/modules/SpecialMarkersMgr.cpp
+     core/modules/SpecialMarkersMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp

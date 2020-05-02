@@ -56,6 +56,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
@@ -559,6 +560,11 @@ void StelApp::init(QSettings* conf)
 	GridLinesMgr* gridLines = new GridLinesMgr();
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
+	
+	SplashScreen::showMessage(q_("Initializing special markers..."));
+	SpecialMarkersMgr* specialMarkers = new SpecialMarkersMgr();
+	specialMarkers->init();
+	getModuleMgr().registerModule(specialMarkers);
 
 	// Sporadic Meteors
 	SplashScreen::showMessage(q_("Initializing sporadic meteors..."));

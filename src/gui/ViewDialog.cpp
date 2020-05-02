@@ -413,7 +413,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorSolsticePoints,		"GridLinesMgr.solsticePointsColor",		"color/solstice_points_color");
 	connectColorButton(ui->colorAntisolarPoint,		"GridLinesMgr.antisolarPointColor",		"color/antisolar_point_color");
 	connectColorButton(ui->colorApexPoints,			"GridLinesMgr.apexPointsColor",			"color/apex_points_color");
-	connectColorButton(ui->colorFOVCenterMarker,	"GridLinesMgr.fovCenterMarkerColor",		"color/fov_center_marker_color");
+	connectColorButton(ui->colorFOVCenterMarker,	"SpecialMarkersMgr.fovCenterMarkerColor",	"color/fov_center_marker_color");
 	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
 
 	// Projection

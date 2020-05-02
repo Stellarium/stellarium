@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-01 00:12+0700\n"
+"POT-Creation-Date: 2020-05-02 20:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,14 +52,16 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:95
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:455
-#: src/core/modules/GridLinesMgr.cpp:1660 src/core/modules/LandscapeMgr.cpp:479
+#: src/core/modules/GridLinesMgr.cpp:1635
+#: src/core/modules/SpecialMarkersMgr.cpp:149
+#: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:459
 #: src/core/modules/NebulaMgr.cpp:460 src/core/modules/SolarSystem.cpp:270
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:616 src/core/StelCore.cpp:257
+#: src/core/StelApp.cpp:622 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
-#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:825
 msgid "Display Options"
 msgstr ""
 
@@ -132,137 +134,137 @@ msgstr ""
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:680 src/ui_viewDialog.h:3176
+#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3176
 msgid "Meridian"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:684
+#: src/core/modules/GridLinesMgr.cpp:683
 msgid "Ecliptic of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:688
+#: src/core/modules/GridLinesMgr.cpp:687
 msgid "Ecliptic of Date"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:692
+#: src/core/modules/GridLinesMgr.cpp:691
 msgid "Equator of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:696
+#: src/core/modules/GridLinesMgr.cpp:695
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:701
+#: src/core/modules/GridLinesMgr.cpp:700
 msgid "Precession Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:705 src/ui_viewDialog.h:3017
+#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3017
 msgid "Horizon"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:709
+#: src/core/modules/GridLinesMgr.cpp:708
 msgid "Galactic Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:713
+#: src/core/modules/GridLinesMgr.cpp:712
 msgid "Supergalactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:718 src/ui_viewDialog.h:3310
+#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3310
 msgid "O./C. longitude"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:722 src/core/modules/GridLinesMgr.cpp:1679
+#: src/core/modules/GridLinesMgr.cpp:721 src/core/modules/GridLinesMgr.cpp:1654
 #: src/ui_viewDialog.h:3192
 msgid "Prime Vertical"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:726
+#: src/core/modules/GridLinesMgr.cpp:725
 msgid "Equinoctial Colure"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:730
+#: src/core/modules/GridLinesMgr.cpp:729
 msgid "Solstitial Colure"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:735
+#: src/core/modules/GridLinesMgr.cpp:734
 msgid "Circumpolar Circle"
 msgstr ""
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1196
-#: src/core/modules/GridLinesMgr.cpp:1205
+#: src/core/modules/GridLinesMgr.cpp:1195
+#: src/core/modules/GridLinesMgr.cpp:1204
 msgid "NCP"
 msgstr ""
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1198
-#: src/core/modules/GridLinesMgr.cpp:1207
+#: src/core/modules/GridLinesMgr.cpp:1197
+#: src/core/modules/GridLinesMgr.cpp:1206
 msgid "SCP"
 msgstr ""
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:1214
+#: src/core/modules/GridLinesMgr.cpp:1213
 msgctxt "zenith"
 msgid "Z"
 msgstr ""
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:1216
+#: src/core/modules/GridLinesMgr.cpp:1215
 msgctxt "nadir"
 msgid "Z'"
 msgstr ""
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1223
-#: src/core/modules/GridLinesMgr.cpp:1232
+#: src/core/modules/GridLinesMgr.cpp:1222
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "NEP"
 msgstr ""
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1225
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1224
+#: src/core/modules/GridLinesMgr.cpp:1233
 msgid "SEP"
 msgstr ""
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1240
 msgid "NGP"
 msgstr ""
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1243
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "SGP"
 msgstr ""
 
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1249
 msgid "NSGP"
 msgstr ""
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "SSGP"
 msgstr ""
 
 #. TRANSLATORS: Antisolar Point
-#: src/core/modules/GridLinesMgr.cpp:1287
+#: src/core/modules/GridLinesMgr.cpp:1286
 msgid "ASP"
 msgstr ""
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
-#: src/core/modules/GridLinesMgr.cpp:1294
+#: src/core/modules/GridLinesMgr.cpp:1293
 msgid "Apex"
 msgstr ""
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
-#: src/core/modules/GridLinesMgr.cpp:1296
+#: src/core/modules/GridLinesMgr.cpp:1295
 msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1306 src/core/modules/Planet.cpp:536
+#: src/core/modules/GridLinesMgr.cpp:1305 src/core/modules/Planet.cpp:536
 #: src/core/modules/MinorPlanet.cpp:263 src/core/modules/Comet.cpp:235
 #: src/gui/AstroCalcDialog.cpp:5753 plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:373
@@ -271,148 +273,148 @@ msgctxt "speed"
 msgid "km/s"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1661
+#: src/core/modules/GridLinesMgr.cpp:1636
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1662
+#: src/core/modules/GridLinesMgr.cpp:1637
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3105
+#: src/core/modules/GridLinesMgr.cpp:1638 src/ui_viewDialog.h:3105
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1664
+#: src/core/modules/GridLinesMgr.cpp:1639
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1665
+#: src/core/modules/GridLinesMgr.cpp:1640
 msgid "Ecliptic J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1666
+#: src/core/modules/GridLinesMgr.cpp:1641
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1667
+#: src/core/modules/GridLinesMgr.cpp:1642
 msgid "Equator J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1668
+#: src/core/modules/GridLinesMgr.cpp:1643
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1669
+#: src/core/modules/GridLinesMgr.cpp:1644
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1670
+#: src/core/modules/GridLinesMgr.cpp:1645
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1671
+#: src/core/modules/GridLinesMgr.cpp:1646
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1672
+#: src/core/modules/GridLinesMgr.cpp:1647
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1673 src/ui_viewDialog.h:3275
+#: src/core/modules/GridLinesMgr.cpp:1648 src/ui_viewDialog.h:3275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1674 src/ui_viewDialog.h:3300
+#: src/core/modules/GridLinesMgr.cpp:1649 src/ui_viewDialog.h:3300
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1675 src/ui_viewDialog.h:3226
+#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3226
 msgid "Supergalactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1676 src/ui_viewDialog.h:3005
+#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3005
 msgid "Supergalactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1677
+#: src/core/modules/GridLinesMgr.cpp:1652
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1678
+#: src/core/modules/GridLinesMgr.cpp:1653
 msgid "Precession Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1680
+#: src/core/modules/GridLinesMgr.cpp:1655
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1681
+#: src/core/modules/GridLinesMgr.cpp:1656
 msgid "Circumpolar Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1682
+#: src/core/modules/GridLinesMgr.cpp:1657
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1683
+#: src/core/modules/GridLinesMgr.cpp:1658
 msgid "Celestial poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1684
+#: src/core/modules/GridLinesMgr.cpp:1659
 msgid "Zenith and nadir"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1685
+#: src/core/modules/GridLinesMgr.cpp:1660
 msgid "Ecliptic J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1686
+#: src/core/modules/GridLinesMgr.cpp:1661
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1687 src/ui_viewDialog.h:3089
+#: src/core/modules/GridLinesMgr.cpp:1662 src/ui_viewDialog.h:3089
 msgid "Galactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1688 src/ui_viewDialog.h:3088
+#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3088
 msgid "Supergalactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1689
+#: src/core/modules/GridLinesMgr.cpp:1664
 msgid "Equinox J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1690
+#: src/core/modules/GridLinesMgr.cpp:1665
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1691
+#: src/core/modules/GridLinesMgr.cpp:1666
 msgid "Solstice J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1692
+#: src/core/modules/GridLinesMgr.cpp:1667
 msgid "Solstice points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1693 src/ui_viewDialog.h:3071
+#: src/core/modules/GridLinesMgr.cpp:1668 src/ui_viewDialog.h:3071
 msgid "Antisolar point"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1694 src/ui_viewDialog.h:3123
+#: src/core/modules/GridLinesMgr.cpp:1669 src/ui_viewDialog.h:3123
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1695 src/ui_viewDialog.h:3319
+#: src/core/modules/SpecialMarkersMgr.cpp:150 src/ui_viewDialog.h:3319
 msgid "FOV Center marker"
 msgstr ""
 
@@ -2158,139 +2160,143 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:426
+#: src/core/StelApp.cpp:427
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:430
+#: src/core/StelApp.cpp:431
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:435
+#: src/core/StelApp.cpp:436
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:449
+#: src/core/StelApp.cpp:450
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:465
+#: src/core/StelApp.cpp:466
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:470
+#: src/core/StelApp.cpp:471
 msgid "Initializing locales..."
 msgstr ""
 
-#: src/core/StelApp.cpp:474
+#: src/core/StelApp.cpp:475
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:480
+#: src/core/StelApp.cpp:481
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:486
+#: src/core/StelApp.cpp:487
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:493
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:497
+#: src/core/StelApp.cpp:498
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:502
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:507
+#: src/core/StelApp.cpp:508
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:513
+#: src/core/StelApp.cpp:514
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:519
+#: src/core/StelApp.cpp:520
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:525
+#: src/core/StelApp.cpp:526
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:532
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:535
+#: src/core/StelApp.cpp:536
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:541
+#: src/core/StelApp.cpp:542
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:547
+#: src/core/StelApp.cpp:548
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:553
+#: src/core/StelApp.cpp:554
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:558
+#: src/core/StelApp.cpp:559
 msgid "Initializing grid lines..."
 msgstr ""
 
 #: src/core/StelApp.cpp:564
-msgid "Initializing sporadic meteors..."
+msgid "Initializing special markers..."
 msgstr ""
 
 #: src/core/StelApp.cpp:570
+msgid "Initializing sporadic meteors..."
+msgstr ""
+
+#: src/core/StelApp.cpp:576
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:575
+#: src/core/StelApp.cpp:581
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:579
+#: src/core/StelApp.cpp:585
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:585
+#: src/core/StelApp.cpp:591
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:591
+#: src/core/StelApp.cpp:597
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:599
+#: src/core/StelApp.cpp:605
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:604
+#: src/core/StelApp.cpp:610
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:616
+#: src/core/StelApp.cpp:622
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:641
+#: src/core/StelApp.cpp:647
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:651
+#: src/core/StelApp.cpp:657
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:677
+#: src/core/StelApp.cpp:683
 msgid "Loading plugin"
 msgstr ""
 
@@ -3175,7 +3181,7 @@ msgid "References"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:191 src/gui/StelGui.cpp:226
-#: src/StelMainView.cpp:820 src/StelMainView.cpp:821
+#: src/StelMainView.cpp:823 src/StelMainView.cpp:824
 msgid "Miscellaneous"
 msgstr ""
 
@@ -5754,58 +5760,58 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-#: src/StelMainView.cpp:820
+#: src/StelMainView.cpp:823
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:821
+#: src/StelMainView.cpp:824
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:822
+#: src/StelMainView.cpp:825
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:984
+#: src/StelMainView.cpp:987
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:990
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:1029
+#: src/StelMainView.cpp:1032
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1080
+#: src/StelMainView.cpp:1083
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1140
+#: src/StelMainView.cpp:1143
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1181
+#: src/StelMainView.cpp:1184
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1290
+#: src/StelMainView.cpp:1293
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
