@@ -767,6 +767,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 	conf->setValue("viewing/flag_apex_points",			propMgr->getStelPropertyValue("GridLinesMgr.apexPointsDisplayed").toBool());
 	conf->setValue("viewing/flag_fov_center_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCenterMarkerDisplayed").toBool());
+	conf->setValue("viewing/flag_fov_circle_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircleMarkerDisplayed").toBool());
+	conf->setValue("viewing/size_fov_circle_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircleMarkerSize").toDouble(), 'f', 2));
 	conf->setValue("viewing/line_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 	conf->setValue("viewing/part_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.partThickness").toInt());
 

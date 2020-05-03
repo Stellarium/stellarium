@@ -28,8 +28,12 @@ class SpecialSkyMarker;
 class SpecialMarkersMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker	WRITE setFlagFOVCenterMarker	NOTIFY fovCenterMarkerDisplayedChanged)
+	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker		WRITE setFlagFOVCenterMarker		NOTIFY fovCenterMarkerDisplayedChanged)
 	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker	WRITE setColorFOVCenterMarker	NOTIFY fovCenterMarkerColorChanged)
+
+	Q_PROPERTY(bool fovCircleMarkerDisplayed	READ getFlagFOVCircleMarker		WRITE setFlagFOVCircleMarker		NOTIFY fovCircleMarkerDisplayedChanged)
+	Q_PROPERTY(double fovCircleMarkerSize		READ getFOVCircleMarkerSize		WRITE setFOVCircleMarkerSize		NOTIFY fovCircleMarkerSizeChanged)
+	Q_PROPERTY(Vec3f fovCircleMarkerColor		READ getColorFOVCircleMarker		WRITE setColorFOVCircleMarker		NOTIFY fovCircleMarkerColorChanged)
 
 public:
 	SpecialMarkersMgr();
@@ -76,12 +80,34 @@ public slots:
 	//! @endcode
 	void setColorFOVCenterMarker(const Vec3f& newColor);
 
+	//! Setter for displaying the circle FOV marker
+	void setFlagFOVCircleMarker(const bool displayed);
+	//! Accessor for displaying circle FOV marker.
+	bool getFlagFOVCircleMarker() const;
+	//! Setter for size of circle FOV marker
+	void setFOVCircleMarkerSize(const double size);
+	//! Accessor for get size of circle FOV marker.
+	double getFOVCircleMarkerSize() const;
+	//! Get the current color of the circle FOV marker.
+	Vec3f getColorFOVCircleMarker() const;
+	//! Set the color of the circle FOV marker.
+	//! @param newColor The color of circle FOV marker.
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFOVCircleMarker(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFOVCircleMarker(const Vec3f& newColor);
+
 signals:
 	void fovCenterMarkerDisplayedChanged(const bool displayed) const;
 	void fovCenterMarkerColorChanged(const Vec3f & newColor) const;
+	void fovCircleMarkerDisplayedChanged(const bool displayed) const;
+	void fovCircleMarkerSizeChanged(const double size) const;
+	void fovCircleMarkerColorChanged(const Vec3f & newColor) const;
 
 private:
 	SpecialSkyMarker * fovCenterMarker;
+	SpecialSkyMarker * fovCircleMarker;
 };
 
 #endif // SPECIALMARKERSMGR_HPP
