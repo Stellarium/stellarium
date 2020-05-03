@@ -519,10 +519,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "</h2>";
 	}
 
-	if (flags&Extra)
-	{
+	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("meteor shower"), mstdata) << "<br />";
-	}
+	
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
