@@ -240,7 +240,15 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 		loc.altitude = qRound(altitude);
 	if (!ssObj.isNull())
 		loc.planetName = ssObj->getEnglishName();
-	loc.name = name;
+
+	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+    if( cico.exactMatch( name ) )
+	{
+        loc.name = cico.cap(1);
+		loc.country = cico.cap(2);
+	} else {
+		loc.name = name;
+	}
 	core->moveObserverTo(loc, duration, duration);
 }
 
