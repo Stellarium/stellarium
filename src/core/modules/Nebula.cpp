@@ -1124,7 +1124,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		}
 	}
 
-	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*)\\.*");
+	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
 	idx = OClRx.indexIn(mTypeString);
 	if (idx>0)
 		m = mTypeString.mid(idx);
