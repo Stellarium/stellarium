@@ -336,7 +336,8 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar.
+	//!        in the status bar. Use "<city>, <country>" for
+	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
 	//!        planet will not be set.
