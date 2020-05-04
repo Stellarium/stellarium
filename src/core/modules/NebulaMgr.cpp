@@ -402,6 +402,12 @@ void NebulaMgr::init()
 		catalogFilters	|= Nebula::CatVdBH;
 	if (conf->value("flag_show_dwb", false).toBool())
 		catalogFilters	|= Nebula::CatDWB;
+	if (conf->value("flag_show_tr", false).toBool())
+		catalogFilters	|= Nebula::CatTr;
+	if (conf->value("flag_show_st", false).toBool())
+		catalogFilters	|= Nebula::CatSt;
+	if (conf->value("flag_show_ru", false).toBool())
+		catalogFilters	|= Nebula::CatRu;
 	if (conf->value("flag_show_other", true).toBool())
 		catalogFilters	|= Nebula::CatOther;
 	conf->endGroup();
@@ -729,7 +735,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.cap(1);
@@ -753,6 +759,9 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "ARP") return searchArp(num);
 		if (cat == "VV") return searchVV(num);		
 		if (cat == "DWB") return searchDWB(num);
+		if (cat == "TR" || cat == "TRUMPLER") return searchTr(num);
+		if (cat == "ST" || cat == "STOCK") return searchSt(num);
+		if (cat == "RU" || cat == "RUPRECHT") return searchRu(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -1070,6 +1079,30 @@ NebulaP NebulaMgr::searchDWB(unsigned int DWB) const
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchTr(unsigned int Tr) const
+{
+	for (const auto& n : dsoArray)
+		if (n->Tr_nb == Tr)
+			return n;
+	return NebulaP();
+}
+
+NebulaP NebulaMgr::searchSt(unsigned int St) const
+{
+	for (const auto& n : dsoArray)
+		if (n->St_nb == St)
+			return n;
+	return NebulaP();
+}
+
+NebulaP NebulaMgr::searchRu(unsigned int Ru) const
+{
+	for (const auto& n : dsoArray)
+		if (n->Ru_nb == Ru)
+			return n;
+	return NebulaP();
+}
+
 QString NebulaMgr::getLatestSelectedDSODesignation() const
 {
 	QString result = "";
@@ -1112,7 +1145,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QDataStream dsoOutStream(&dsoOut);
 	dsoOutStream.setVersion(QDataStream::Qt_5_2);
 
-	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, DWB;
+	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, DWB, Tr, St, Ru;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
 	Nebula::NebulaType nType;
@@ -1186,6 +1219,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			ESO				= list.at(38).trimmed();	// ESO number
 			VdBH			= list.at(39).trimmed();	// VdBH number
 			DWB				= list.at(40).toInt();		// DWB number
+			Tr				= list.at(41).toInt();		// Tr number
+			St				= list.at(42).toInt();		// St number
+			Ru				= list.at(43).toInt();		// Ru number
 
 			if (decimal)
 			{
@@ -1319,7 +1355,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dsoOutStream << id << raRad << decRad << bMag << vMag << static_cast<unsigned int>(nType) << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
 				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
-				     << PNG << SNRG << ACO << HCG << ESO << VdBH << DWB;
+				     << PNG << SNRG << ACO << HCG << ESO << VdBH << DWB << Tr << St << Ru;
 		}
 	}
 	dsoIn.close();
@@ -1420,7 +1456,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		static const QStringList catalogs = {
 			"IC",    "M",   "C",  "CR",  "MEL",   "B", "SH2", "VDB", "RCW",  "LDN",
 			"LBN", "NGC", "PGC", "UGC",  "CED", "ARP",  "VV",  "PK", "PNG", "SNRG",
-			"ACO", "HCG", "ESO", "VDBH", "DWB"};
+			"ACO", "HCG", "ESO", "VDBH", "DWB", "TR", "ST", "RU"};
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1498,6 +1534,15 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 24:
 				e = searchDWB(nb);
+				break;
+			case 25:
+				e = searchTr(nb);
+				break;
+			case 26:
+				e = searchSt(nb);
+				break;
+			case 27:
+				e = searchRu(nb);
 				break;
 			default:
 				e = searchDSO(nb);
@@ -1764,7 +1809,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	NebulaP n;
 	QString uname = designation.toUpper();
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.cap(1);
@@ -1785,6 +1830,9 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "ARP") n = searchArp(num);
 		if (cat == "VV") n = searchVV(num);		
 		if (cat == "DWB") n = searchDWB(num);
+		if (cat == "TR" || cat == "TRUMPLER") n = searchTr(num);
+		if (cat == "ST" || cat == "STOCK") n = searchSt(num);
+		if (cat == "RU" || cat == "RUPRECHT") n = searchRu(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -2331,6 +2379,66 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by Tr (Trumpler) objects number
+	if (objw.size()>=1 && (objw.left(8)=="TRUMPLER" || objw.left(2)=="TR"))
+	{
+		for (const auto& n : dsoArray)
+		{
+			if (n->Tr_nb==0) continue;
+			QString constw = QString("Tr%1").arg(n->Tr_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("Tr %1").arg(n->Tr_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
+	// Search by St (Stock) objects number
+	if (objw.size()>=1 && (objw.left(5)=="STOCK" || objw.left(2)=="ST"))
+	{
+		for (const auto& n : dsoArray)
+		{
+			if (n->St_nb==0) continue;
+			QString constw = QString("St%1").arg(n->St_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("St %1").arg(n->St_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
+	// Search by Ru (Ruprecht) objects number
+	if (objw.size()>=1 && (objw.left(8)=="RUPRECHT" || objw.left(2)=="RU"))
+	{
+		for (const auto& n : dsoArray)
+		{
+			if (n->Ru_nb==0) continue;
+			QString constw = QString("Ru%1").arg(n->Ru_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("Ru %1").arg(n->Ru_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
 	// Search by common names
 	for (const auto& n : dsoArray)
 	{
@@ -2501,6 +2609,18 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("DWB %1").arg(n->DWB_nb);
 			break;
+		case 125: // Trumpler Catalogue (Tr)
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Tr %1").arg(n->Tr_nb);
+			break;
+		case 126: // Stock Catalogue (St)
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("St %1").arg(n->St_nb);
+			break;
+		case 127: // Ruprecht Catalogue (Ru)
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Ru %1").arg(n->Ru_nb);
+			break;
 		case 150: // Dwarf galaxies [see NebulaList.hpp]
 		{
 			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
@@ -2589,6 +2709,12 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("VdBH %1").arg(n->VdBH_nb);
 					else if (n->DWB_nb>0)
 						result << QString("DWB %1").arg(n->DWB_nb);
+					else if (n->Tr_nb>0)
+						result << QString("Tr %1").arg(n->Tr_nb);
+					else if (n->St_nb>0)
+						result << QString("St %1").arg(n->St_nb);
+					else if (n->Ru_nb>0)
+						result << QString("Ru %1").arg(n->Ru_nb);
 				}
 			}
 			break;
@@ -2777,6 +2903,27 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 			for (const auto& n : dsoArray)
 			{
 				if (n->DWB_nb > 0)
+					dso.append(n);
+			}
+			break;
+		case 125: // Trumpler Catalogue (Tr)
+			for (const auto& n : dsoArray)
+			{
+				if (n->Tr_nb > 0)
+					dso.append(n);
+			}
+			break;
+		case 126: // Stock Catalogue (St)
+			for (const auto& n : dsoArray)
+			{
+				if (n->St_nb > 0)
+					dso.append(n);
+			}
+			break;
+		case 127: // Ruprecht Catalogue (Ru)
+			for (const auto& n : dsoArray)
+			{
+				if (n->Ru_nb > 0)
 					dso.append(n);
 			}
 			break;

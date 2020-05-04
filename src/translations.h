@@ -443,6 +443,12 @@ class Translations
 		N_("Jack Bennett's deep sky catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("James Dunlop's southern deep sky catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Trumpler Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Stock Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Ruprecht Catalogue");
 		
 		// =====================================================================
 		// List of stars types

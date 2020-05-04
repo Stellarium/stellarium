@@ -273,6 +273,9 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:122"] = "ESO/Uppsala Survey of the ESO(B) Atlas";
 		objModulesMap["NebulaMgr:123"] = "Catalogue of southern stars embedded in nebulosity";
 		objModulesMap["NebulaMgr:124"] = "Catalogue and distances of optically visible H II regions";
+		objModulesMap["NebulaMgr:125"] = "Trumpler Catalogue";
+		objModulesMap["NebulaMgr:126"] = "Stock Catalogue";
+		objModulesMap["NebulaMgr:127"] = "Ruprecht Catalogue";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 		objModulesMap["NebulaMgr:152"] = "Jack Bennett's deep sky catalogue";

@@ -683,6 +683,12 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 		flags |= Nebula::CatVdBH;
 	if (ui->checkBoxDWB->isChecked())
 		flags |= Nebula::CatDWB;
+	if (ui->checkBoxTr->isChecked())
+		flags |= Nebula::CatTr;
+	if (ui->checkBoxSt->isChecked())
+		flags |= Nebula::CatSt;
+	if (ui->checkBoxRu->isChecked())
+		flags |= Nebula::CatRu;
 	if (ui->checkBoxOther->isChecked())
 		flags |= Nebula::CatOther;
 
@@ -749,6 +755,9 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxESO->setChecked(flags & Nebula::CatESO);
 	ui->checkBoxVdBH->setChecked(flags & Nebula::CatVdBH);
 	ui->checkBoxDWB->setChecked(flags & Nebula::CatDWB);
+	ui->checkBoxTr->setChecked(flags & Nebula::CatTr);
+	ui->checkBoxSt->setChecked(flags & Nebula::CatSt);
+	ui->checkBoxRu->setChecked(flags & Nebula::CatRu);
 	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);
 }
 

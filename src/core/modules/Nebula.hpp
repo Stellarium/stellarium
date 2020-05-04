@@ -71,7 +71,10 @@ public:
 		CatESO		= 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
 		CatVdBH		= 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
 		CatDWB		= 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
-		CatOther		= 0x02000000  //!< without ID
+		CatTr			= 0x02000000, //!< Trumpler Catalogue (Tr)
+		CatSt		= 0x04000000, //!< Stock Catalogue (St)
+		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
+		CatOther		= 0x10000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -93,7 +96,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatOther);
+	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
 	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
@@ -204,7 +207,7 @@ public:
 	void addNameAlias(QString name) { englishAliases.append(name); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO)
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, VdBH, DWB, Tr, St, Ru)
 	//! @return a designation
 	QString getDSODesignation() const;
 
@@ -261,6 +264,9 @@ private:
 	unsigned int Arp_nb;		// Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
 	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))	
 	unsigned int DWB_nb;		// DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
+	unsigned int Tr_nb;			// Tr number (Trumpler Catalogue)
+	unsigned int St_nb;			// St number (Stock Catalogue)
+	unsigned int Ru_nb;			// Ru number (Ruprecht Catalogue)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;				// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
