@@ -232,7 +232,7 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);
+	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
@@ -240,15 +240,18 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 		loc.altitude = qRound(altitude);
 	if (!ssObj.isNull())
 		loc.planetName = ssObj->getEnglishName();
+	else
+		return; // Avoid crash when planet is not defined or not exist
 
 	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
-    if( cico.exactMatch( name ) )
+	if( cico.exactMatch( name ) )
 	{
-        loc.name = cico.cap(1);
+		loc.name = cico.cap(1);
 		loc.country = cico.cap(2);
-	} else {
-		loc.name = name;
 	}
+	else
+		loc.name = name;
+
 	core->moveObserverTo(loc, duration, duration);
 }
 
