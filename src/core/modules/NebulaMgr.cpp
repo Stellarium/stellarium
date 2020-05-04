@@ -2285,14 +2285,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->ACO_nb.isEmpty()) continue;
-			QString constw = QString("ABELL%1").arg(n->ACO_nb.trimmed());
+			QString constw = QString("Abell%1").arg(n->ACO_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("ABELL %1").arg(n->ACO_nb.trimmed());
+			constw = QString("Abell %1").arg(n->ACO_nb.trimmed());
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw.toUpper())
 				result << constw;
