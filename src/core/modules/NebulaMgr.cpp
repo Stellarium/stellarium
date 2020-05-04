@@ -50,6 +50,7 @@
 #include <QStringList>
 #include <QRegExp>
 #include <QDir>
+#include <QMessageBox>
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
@@ -1391,8 +1392,9 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 			qDebug() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version).arg(edition);
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
-				qDebug() << "WARNING: Mismatch the version of catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
 				++totalRecords;
+				qDebug() << "WARNING: Mismatch the version of catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
+				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1 %2").arg(q_("Mismatch the version of catalog - expected version of catalog is"), StellariumDSOCatalogVersion), QMessageBox::Yes);
 				break;
 			}
 		}

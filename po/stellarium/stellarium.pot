@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-05 01:10+0700\n"
+"POT-Creation-Date: 2020-05-05 02:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,8 +55,8 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1635
 #: src/core/modules/SpecialMarkersMgr.cpp:162
 #: src/core/modules/LandscapeMgr.cpp:479
-#: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:465
-#: src/core/modules/NebulaMgr.cpp:466 src/core/modules/SolarSystem.cpp:270
+#: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:466
+#: src/core/modules/NebulaMgr.cpp:467 src/core/modules/SolarSystem.cpp:270
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:622 src/core/StelCore.cpp:257
@@ -1779,12 +1779,20 @@ msgstr ""
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:465
+#: src/core/modules/NebulaMgr.cpp:466
 msgid "Deep-sky objects"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:466
+#: src/core/modules/NebulaMgr.cpp:467
 msgid "Toggle DSO type filter"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1397
+msgid "Attention!"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1397
+msgid "Mismatch the version of catalog - expected version of catalog is"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:457 src/core/modules/MinorPlanet.cpp:209
