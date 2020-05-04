@@ -83,6 +83,9 @@ follow catalogues\footnote{Abell Catalog of Planetary Nebulae has been added in 
 \item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{V0.18.2}
 \item[\textbf{VdBH}]  Catalogue of southern stars embedded in nebulosity~\citep{1975AJ.....80..208V}\newFeature{V0.19.2}
 \item[\textbf{DWB}]  Catalogue and distances of optically visible H II regions~\citep{1969A&A.....1..270D}\newFeature{V0.19.2}
+\item[\textbf{Tr}]  Trumpler Catalogue\newFeature{V0.20.2}
+\item[\textbf{St}]  Stock Catalogue\newFeature{V0.20.2}
+\item[\textbf{Ru}]  Ruprecht Catalogue\newFeature{V0.20.2}
 \end{description}
 
 \noindent Cross-index data for Stellarium's DSO Catalog is partially obtained from 
@@ -91,6 +94,8 @@ SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr
 and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
 
 \noindent Distances for some deep-sky objects obtained from \citetp{2008ApJ...689..194S}, \citetp{2007ApJ...670..363H}, \citetp{1995A&AS..113..325H} and \citetp{1996AJ....112.1487H}.
+
+\noindent Morphological class for many open clusters obtaunded from \citetp{1966BAICz..17...33R}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -147,6 +152,9 @@ fields with \emph{tab} char as delimiter:
 39 & string  & ESO identificator (ESO/Uppsala Survey of the ESO(B) Atlas)\\
 40 & string  & VdBH identificator (Catalogue of southern stars embedded in nebulosity)\\
 41 & integer & DWB identificator (Catalogue and distances of optically visible H II regions)\\
+42 & integer & Tr identificator (Trumpler Catalogue)\\
+43 & integer & St identificator (Stock Catalogue)\\
+44 & integer & Ru identificator (Ruprecht Catalogue)\\
 \bottomrule
 \end{longtable}
 
