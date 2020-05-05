@@ -398,7 +398,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Sharpless Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Van den Bergh Catalogue");
+		N_("van den Bergh Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -450,7 +450,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Ruprecht Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Van den Bergh-Hagen Catalogue");
+		N_("van den Bergh-Hagen Catalogue");
 		
 		// =====================================================================
 		// List of stars types
