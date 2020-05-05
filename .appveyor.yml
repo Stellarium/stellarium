@@ -16,7 +16,7 @@ environment:
     packaging: false
     suffix: Win64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: Win32
+    platform: x86
     qtver: 5.9
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
@@ -30,7 +30,7 @@ environment:
     packaging: true
     suffix: Win64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: Win32
+    platform: x86
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
@@ -60,7 +60,7 @@ after_test:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%platform%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%suffix%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
   - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
