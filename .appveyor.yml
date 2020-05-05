@@ -37,6 +37,7 @@ environment:
     packaging: true
     suffix: Win32 
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    cmake_args: -A x64
     platform: x64
     qtver: 5.12
     qtbin: msvc2017_64
@@ -44,7 +45,8 @@ environment:
     packaging: false
     suffix: Win64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    platform: x86
+    cmake_args: -A x86
+    platform: Win32
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 16 2019
@@ -60,8 +62,7 @@ before_build:
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%" == "Visual Studio 2019" ( cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" -A "%platform%" .. )
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%" != "Visual Studio 2019" ( cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" .. )
+  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
   
 
 build:
