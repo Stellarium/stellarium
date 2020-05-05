@@ -851,6 +851,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_tr",		static_cast<bool>(cflags & Nebula::CatTr));
 	conf->setValue("flag_show_st",		static_cast<bool>(cflags & Nebula::CatSt));
 	conf->setValue("flag_show_ru",		static_cast<bool>(cflags & Nebula::CatRu));
+	conf->setValue("flag_show_vdbha",	static_cast<bool>(cflags & Nebula::CatVdBHa));
 	conf->setValue("flag_show_other",	static_cast<bool>(cflags & Nebula::CatOther));
 	conf->endGroup();
 

@@ -99,6 +99,7 @@ Nebula::Nebula()
 	, Tr_nb(0)
 	, St_nb(0)
 	, Ru_nb(0)
+	, VdBHa_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
@@ -236,6 +237,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("St %1").arg(St_nb);
 		if (Ru_nb > 0)
 			catIds << QString("Ru %1").arg(Ru_nb);
+		if (VdBHa_nb > 0)
+			catIds << QString("VdB-Ha %1").arg(VdBHa_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -903,6 +906,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("St %1").arg(St_nb);
 	else if (catalogFilters&CatRu && Ru_nb > 0)
 		str = QString("Ru %1").arg(Ru_nb);
+	else if (catalogFilters&CatVdBHa && VdBHa_nb > 0)
+		str = QString("VdB-Ha %1").arg(VdBHa_nb);
 
 	return str;
 }
@@ -916,9 +921,9 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
-		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb >> Tr_nb >> St_nb >> Ru_nb;
+		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb >> Tr_nb >> St_nb >> Ru_nb >> VdBHa_nb;
 
-	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb;
+	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
 
@@ -1040,7 +1045,8 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
 		|| ((catalogFilters&CatTr)	   && (Tr_nb>0))
 		|| ((catalogFilters&CatSt)	   && (St_nb>0))
-		|| ((catalogFilters&CatRu	)   && (Ru_nb>0)))
+		|| ((catalogFilters&CatRu	)   && (Ru_nb>0))
+		|| ((catalogFilters&CatVdBHa)   && (VdBHa_nb>0)))
 
 		// Special case: objects without ID from current catalogs
 		|| ((catalogFilters&CatOther)   && withoutID);

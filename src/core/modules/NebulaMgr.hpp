@@ -963,6 +963,7 @@ private:
 	NebulaP searchTr(unsigned int Tr) const;
 	NebulaP searchSt(unsigned int St) const;
 	NebulaP searchRu(unsigned int Ru) const;
+	NebulaP searchVdBHa(unsigned int VdBHa) const;
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

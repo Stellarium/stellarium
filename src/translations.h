@@ -449,6 +449,8 @@ class Translations
 		N_("Stock Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Ruprecht Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh-Hagen Catalogue");
 		
 		// =====================================================================
 		// List of stars types

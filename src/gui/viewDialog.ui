@@ -2015,6 +2015,19 @@
                </attribute>
               </widget>
              </item>
+             <item row="1" column="9">
+              <widget class="QCheckBox" name="checkBoxVdBHa">
+               <property name="toolTip">
+                <string>Van den Bergh-Hagen Catalogue</string>
+               </property>
+               <property name="text">
+                <string notr="true">VdB-Ha</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>

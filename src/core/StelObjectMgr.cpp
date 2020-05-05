@@ -276,6 +276,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:125"] = "Trumpler Catalogue";
 		objModulesMap["NebulaMgr:126"] = "Stock Catalogue";
 		objModulesMap["NebulaMgr:127"] = "Ruprecht Catalogue";
+		objModulesMap["NebulaMgr:128"] = "Van den Bergh-Hagen Catalogue";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 		objModulesMap["NebulaMgr:152"] = "Jack Bennett's deep sky catalogue";

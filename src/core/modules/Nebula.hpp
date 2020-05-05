@@ -74,7 +74,8 @@ public:
 		CatTr			= 0x02000000, //!< Trumpler Catalogue (Tr)
 		CatSt		= 0x04000000, //!< Stock Catalogue (St)
 		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
-		CatOther		= 0x10000000  //!< without ID
+		CatVdBHa		= 0x10000000, //!< van den Bergh-Hagen Catalogue (VdB-Ha)
+		CatOther		= 0x20000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -267,6 +268,7 @@ private:
 	unsigned int Tr_nb;			// Tr number (Trumpler Catalogue)
 	unsigned int St_nb;			// St number (Stock Catalogue)
 	unsigned int Ru_nb;			// Ru number (Ruprecht Catalogue)
+	unsigned int VdBHa_nb;		// VdB-Ha number (van den Bergh-Hagen Catalogue)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;				// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
