@@ -2121,7 +2121,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
+	// Search by van den Bergh objects number (possible formats are "vdB31" or "vdB 31")
 	if (objw.size()>=1 && objw.left(3)=="VDB" && objw.left(6)!="VDB-HA" && objw.left(4)!="VDBH")
 	{
 		for (const auto& n : dsoArray)
@@ -2469,7 +2469,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by Van den Bergh-Hagen Catalogue objects number
+	// Search by van den Bergh-Hagen Catalogue objects number
 	if (objw.size()>=1 && objw.left(6)=="VDB-HA")
 	{
 		for (const auto& n : dsoArray)
@@ -2815,7 +2815,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 					dso.append(n);
 			}
 			break;
-		case 104: // Van den Bergh Catalogue
+		case 104: // van den Bergh Catalogue
 			for (const auto& n : dsoArray)
 			{
 				if (n->VdB_nb>0)
@@ -2983,7 +2983,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 					dso.append(n);
 			}
 			break;
-		case 128: // Van den Bergh-Hagen Catalogue (VdB-Ha)
+		case 128: // van den Bergh-Hagen Catalogue (VdB-Ha)
 			for (const auto& n : dsoArray)
 			{
 				if (n->VdBHa_nb > 0)
