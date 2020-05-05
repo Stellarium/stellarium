@@ -4798,6 +4798,15 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (ui->stackListWidget->row(current) == 0)
 		currentCelestialPositions();
 
+	// special case - ephemeris
+	if (ui->stackListWidget->row(current) == 1)
+	{
+		double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
+		QDateTime currentDT = StelUtils::jdToQDateTime(JD);
+		ui->dateFromDateTimeEdit->setDateTime(currentDT);
+		ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
+	}
+
 	// special case - transits
 	if (ui->stackListWidget->row(current) == 2)
 		setTransitCelestialBodyName();
