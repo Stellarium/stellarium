@@ -194,7 +194,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (Sh2_nb > 0)
 			catIds << QString("SH 2-%1").arg(Sh2_nb);
 		if (VdB_nb > 0)
-			catIds << QString("VdB %1").arg(VdB_nb);
+			catIds << QString("vdB %1").arg(VdB_nb);
 		if (RCW_nb > 0)
 			catIds << QString("RCW %1").arg(RCW_nb);
 		if (LDN_nb > 0)
@@ -228,7 +228,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (!ESO_nb.isEmpty())
 			catIds << QString("ESO %1").arg(ESO_nb);
 		if (!VdBH_nb.isEmpty())
-			catIds << QString("VdBH %1").arg(VdBH_nb);
+			catIds << QString("vdBH %1").arg(VdBH_nb);
 		if (DWB_nb > 0)
 			catIds << QString("DWB %1").arg(DWB_nb);
 		if (Tr_nb > 0)
@@ -238,7 +238,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (Ru_nb > 0)
 			catIds << QString("Ru %1").arg(Ru_nb);
 		if (VdBHa_nb > 0)
-			catIds << QString("VdB-Ha %1").arg(VdBHa_nb);
+			catIds << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -863,7 +863,7 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatSh2 && Sh2_nb>0)
 		str = QString("SH 2-%1").arg(Sh2_nb);
 	else if (catalogFilters&CatVdB && VdB_nb>0)
-		str = QString("VdB %1").arg(VdB_nb);
+		str = QString("vdB %1").arg(VdB_nb);
 	else if (catalogFilters&CatRCW && RCW_nb>0)
 		str = QString("RCW %1").arg(RCW_nb);
 	else if (catalogFilters&CatLDN && LDN_nb>0)
@@ -897,7 +897,7 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatESO && !ESO_nb.isEmpty())
 		str = QString("ESO %1").arg(ESO_nb);
 	else if (catalogFilters&CatVdBH && !VdBH_nb.isEmpty())
-		str = QString("VdBH %1").arg(VdBH_nb);
+		str = QString("vdBH %1").arg(VdBH_nb);
 	else if (catalogFilters&CatDWB && DWB_nb > 0)
 		str = QString("DWB %1").arg(DWB_nb);
 	else if (catalogFilters&CatTr && Tr_nb > 0)
@@ -907,7 +907,7 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatRu && Ru_nb > 0)
 		str = QString("Ru %1").arg(Ru_nb);
 	else if (catalogFilters&CatVdBHa && VdBHa_nb > 0)
-		str = QString("VdB-Ha %1").arg(VdBHa_nb);
+		str = QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	return str;
 }

@@ -2127,14 +2127,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdB_nb==0) continue;
-			QString constw = QString("VdB%1").arg(n->VdB_nb);
+			QString constw = QString("vdB%1").arg(n->VdB_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("VdB %1").arg(n->VdB_nb);
+			constw = QString("vdB %1").arg(n->VdB_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2369,14 +2369,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdBH_nb.isEmpty()) continue;
-			QString constw = QString("VdBH%1").arg(n->VdBH_nb.trimmed());
+			QString constw = QString("vdBH%1").arg(n->VdBH_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("VdBH %1").arg(n->VdBH_nb.trimmed());
+			constw = QString("vdBH %1").arg(n->VdBH_nb.trimmed());
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2475,14 +2475,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdBHa_nb==0) continue;
-			QString constw = QString("VdB-Ha%1").arg(n->VdBHa_nb);
+			QString constw = QString("vdB-Ha%1").arg(n->VdBHa_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("VdB-Ha %1").arg(n->VdBHa_nb);
+			constw = QString("vdB-Ha %1").arg(n->VdBHa_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2583,9 +2583,9 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("SH 2-%1").arg(n->Sh2_nb);
 			break;
-		case 104: // Van den Bergh Catalogue
+		case 104: // van den Bergh Catalogue
 			for (const auto& n : getDeepSkyObjectsByType(objType))
-				result << QString("VdB %1").arg(n->VdB_nb);
+				result << QString("vdB %1").arg(n->VdB_nb);
 			break;
 		case 105: // RCW Catalogue
 			for (const auto& n : getDeepSkyObjectsByType(objType))
@@ -2651,9 +2651,9 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("ESO %1").arg(n->ESO_nb);
 			break;
-		case 123: // Catalogue of southern stars embedded in nebulosity (VdBH)
+		case 123: // Catalogue of southern stars embedded in nebulosity (vdBH)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
-				result << QString("VdBH %1").arg(n->VdBH_nb);
+				result << QString("vdBH %1").arg(n->VdBH_nb);
 			break;
 		case 124: // Catalogue and distances of optically visible H II regions (DWB)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
@@ -2671,9 +2671,9 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("Ru %1").arg(n->Ru_nb);
 			break;
-		case 128: // Van den Bergh-Hagen Catalogue (VdB-Ha)
+		case 128: // van den Bergh-Hagen Catalogue (VdB-Ha)
 			for (const auto& n : getDeepSkyObjectsByType(objType))
-				result << QString("VdB-Ha %1").arg(n->VdBHa_nb);
+				result << QString("vdB-Ha %1").arg(n->VdBHa_nb);
 			break;
 		case 150: // Dwarf galaxies [see NebulaList.hpp]
 		{
@@ -2726,7 +2726,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (n->Sh2_nb>0)
 						result << QString("SH 2-%1").arg(n->Sh2_nb);
 					else if (n->VdB_nb>0)
-						result << QString("VdB %1").arg(n->VdB_nb);
+						result << QString("vdB %1").arg(n->VdB_nb);
 					else if (n->RCW_nb>0)
 						result << QString("RCW %1").arg(n->RCW_nb);
 					else if (n->LBN_nb>0)
@@ -2760,7 +2760,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (!n->ESO_nb.isEmpty())
 						result << QString("ESO %1").arg(n->ESO_nb);
 					else if (!n->VdBH_nb.isEmpty())
-						result << QString("VdBH %1").arg(n->VdBH_nb);
+						result << QString("vdBH %1").arg(n->VdBH_nb);
 					else if (n->DWB_nb>0)
 						result << QString("DWB %1").arg(n->DWB_nb);
 					else if (n->Tr_nb>0)
@@ -2770,7 +2770,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (n->Ru_nb>0)
 						result << QString("Ru %1").arg(n->Ru_nb);
 					else if (n->VdBHa_nb>0)
-						result << QString("VdB-Ha %1").arg(n->VdBHa_nb);
+						result << QString("vdB-Ha %1").arg(n->VdBHa_nb);
 				}
 			}
 			break;
