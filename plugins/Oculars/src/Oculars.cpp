@@ -818,6 +818,14 @@ void Oculars::updateLists()
 		if (flagShowCCD)
 			emit selectedCCDChanged(selectedCCDIndex);
 	}
+
+	if (lenses.isEmpty())
+		selectedLensIndex = -1;
+	else
+	{
+		if (selectedLensIndex >= lenses.count())
+			selectedLensIndex = lenses.count() - 1;
+	}
 }
 
 void Oculars::ccdRotationReset()
