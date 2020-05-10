@@ -557,6 +557,8 @@ float Nebula::getSelectPriority(const StelCore* core) const
 		lim=mLim - mag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+	else if (nType==NebRegion) // special case for regions
+		lim=3.0f;
 
 	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
 		selectPriority = -10.f;
@@ -658,6 +660,8 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 			lim=9.0f;
 		}
+		else if (nType==NebRegion) // special case for regions
+			lim=3.0f;
 	}
 
 	return lim;
