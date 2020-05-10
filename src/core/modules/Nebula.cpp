@@ -43,6 +43,7 @@ const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
 StelTextureSP Nebula::texCircle;
 StelTextureSP Nebula::texCircleLarge;
+StelTextureSP Nebula::texRegion;
 StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texGalaxyLarge;
 StelTextureSP Nebula::texOpenCluster;
@@ -717,10 +718,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional)
-	{
 		scaledSize = static_cast<float>(getAngularSize(Q_NULLPTR)) *M_PI_180f*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
-	}
-	const float finalSize=qMax(size, scaledSize);
+	float finalSize=qMax(size, scaledSize);
 
 	switch (nType)
 	{
@@ -788,6 +787,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 				Nebula::texOpenClusterWithNebulosityLarge->bind();
 			else
 				Nebula::texOpenClusterWithNebulosity->bind();
+			break;
+		case NebRegion:
+			finalSize = size*2.f;
+			Nebula::texRegion->bind();
 			break;
 		//case NebEMO:
 		//case NebStar:
@@ -1368,5 +1371,6 @@ void Nebula::buildTypeStringMap()
 	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
 	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
 	Nebula::typeStringMap.insert( NebPartOfGx   , q_("part of a galaxy") );
+	Nebula::typeStringMap.insert( NebRegion   , q_("region") );
 	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
 }

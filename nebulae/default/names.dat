@@ -17,6 +17,7 @@
 #   ST3: Aquila's Gems // Sky & Telescope, Vol. 136, N2, p.34-39 (August 2018)
 #   ST4: The Best Abell Planetary Nebulae // Sky & Telescope, p.98-102 (May 2002)
 #   ST5: Come the Night  // Sky & Telescope, p.54-56 (Nov 2019)
+#   ST6: Paddle the Milky Way's Dark River - Sky & Telescope; https://skyandtelescope.org/observing/a-trip-down-the-great-rift/
 #   NED: Named Galaxies; https://ned.ipac.caltech.edu/level5/CATALOGS/naga.html
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SIMBAD: 2000,A&AS,143,9, "The SIMBAD astronomical database", Wenger et al.; http://simbad.u-strasbg.fr/simbad/
@@ -591,8 +592,6 @@ NGC  6503            _("Lost in Space Galaxy") # B500, HT
 NGC  6514            _("Trifid Nebula") # WK, SIMBAD, DSW, TSS, BCH, SOG, WSO, PSA, CC, DN, CCG
 NGC  6520            _("Dead Man's Chest Cluster") # B500, HT
 NGC  6520            _("Castaway Cluster") # HT
-# Center of Baade's Window is NGC 6522
-NGC  6522            _("Baade's Window") # WP, SIMBAD
 NGC  6523            _("Lagoon Nebula") # BCH, SG, CC, DN, DAN, CCG
 NGC  6530            _("Herschel 36")
 NGC  6530            _("Hourglass Cluster")
@@ -1217,3 +1216,7 @@ ST   23              _("Pazmino's Cluster") # SBSX
      21              _("Sagittarius A West")
      21              _("Minispiral in Gal Center") # SIMBAD
      38              _("Dark Doodad Nebula") # WK, PSA, DN
+# Center of Baade's Window is NGC 6522
+     39              _("Baade's Window") # WP, SIMBAD
+     40              _("Funnel Cloud Nebula") # ST6
+     41              _("Northern Coalsack") # ST6

@@ -103,7 +103,7 @@ public:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,		//!< Galaxy
+		NebGx			= 0,		//!< m Galaxy
 		NebAGx			= 1,  	//!< Active galaxy
 		NebRGx			= 2,		//!< m Radio galaxy
 		NebIGx			= 3,		//!< Interacting galaxy
@@ -138,7 +138,8 @@ public:
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
 		NebPartOfGx		= 34,	//!< Part of a Galaxy
-		NebUnknown		= 35		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebRegion		= 35,	//!< Part of a Galaxy
+		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -208,7 +209,7 @@ public:
 	void addNameAlias(QString name) { englishAliases.append(name); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, VdBH, DWB, Tr, St, Ru)
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! @return a designation
 	QString getDSODesignation() const;
 
@@ -302,17 +303,18 @@ private:
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
+	static StelTextureSP texRegion;				// The symbolic dashed shape texture
 	static StelTextureSP texGalaxy;				// Type 0
 	static StelTextureSP texGalaxyLarge;			// Type 0_large
 	static StelTextureSP texOpenCluster;			// Type 1
 	static StelTextureSP texOpenClusterLarge;		// Type 1_large
-	static StelTextureSP texOpenClusterXLarge;		// Type 1_extralarge
+	static StelTextureSP texOpenClusterXLarge;	// Type 1_extralarge
 	static StelTextureSP texGlobularCluster;		// Type 2
-	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
+	static StelTextureSP texGlobularClusterLarge;	// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texDiffuseNebula;			// Type 4
-	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large
-	static StelTextureSP texDiffuseNebulaXLarge;		// Type 4_extralarge
+	static StelTextureSP texDiffuseNebula;		// Type 4
+	static StelTextureSP texDiffuseNebulaLarge;	// Type 4_large
+	static StelTextureSP texDiffuseNebulaXLarge;	// Type 4_extralarge
 	static StelTextureSP texDarkNebula;			// Type 5
 	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
 	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6

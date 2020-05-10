@@ -35,7 +35,7 @@ environment:
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: true
-    suffix: Win32 
+    suffix: Win32
 
 before_build:
   - set PUBLISH_BINARY=false
@@ -47,7 +47,6 @@ before_build:
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
   - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
-  
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln

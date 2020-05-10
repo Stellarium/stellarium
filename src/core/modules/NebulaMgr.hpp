@@ -139,6 +139,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setCirclesColor
 		   NOTIFY circlesColorChanged
 		   )
+	Q_PROPERTY(Vec3f regionsColor
+		   READ getRegionsColor
+		   WRITE setRegionsColor
+		   NOTIFY regionsColorChanged
+		   )
 	Q_PROPERTY(Vec3f galaxiesColor
 		   READ getGalaxyColor
 		   WRITE setGalaxyColor
@@ -402,6 +407,16 @@ public slots:
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f getCirclesColor(void) const;
+
+	//! Set the default color used to draw the region symbols (default dashed shape).
+	//! @param c The color of the region symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setRegionsColor(Vec3f(0.6,0.8,0.0));
+	//! @endcode
+	void setRegionsColor(const Vec3f& c);
+	//! Get current value of the region color.
+	const Vec3f getRegionsColor(void) const;
 
 	//! Set the color used to draw the galaxy symbols (ellipses).
 	//! @param c The color of the galaxy symbols
@@ -867,6 +882,7 @@ signals:
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void circlesColorChanged(const Vec3f & color) const;
+	void regionsColorChanged(const Vec3f & color) const;
 	void galaxiesColorChanged(const Vec3f & color) const;
 	void activeGalaxiesColorChanged(const Vec3f & color) const;
 	void radioGalaxiesColorChanged(const Vec3f & color) const;

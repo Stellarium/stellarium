@@ -60,6 +60,8 @@ void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit lab
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebUnknown, c); emit circlesColorChanged(c); }
 const Vec3f NebulaMgr::getCirclesColor(void) const {return Nebula::hintColorMap.value(Nebula::NebUnknown);}
+void NebulaMgr::setRegionsColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebRegion, c); emit regionsColorChanged(c); }
+const Vec3f NebulaMgr::getRegionsColor(void) const {return Nebula::hintColorMap.value(Nebula::NebRegion);}
 void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebGx, c); Nebula::hintColorMap.insert(Nebula::NebPartOfGx, c); emit galaxiesColorChanged(c); }
 const Vec3f NebulaMgr::getGalaxyColor(void) const {return Nebula::hintColorMap.value(Nebula::NebGx);}
 void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebRGx, c); emit radioGalaxiesColorChanged(c); }
@@ -151,6 +153,7 @@ NebulaMgr::~NebulaMgr()
 {
 	Nebula::texCircle = StelTextureSP();
 	Nebula::texCircleLarge = StelTextureSP();
+	Nebula::texRegion = StelTextureSP();
 	Nebula::texGalaxy = StelTextureSP();
 	Nebula::texGalaxyLarge = StelTextureSP();
 	Nebula::texOpenCluster = StelTextureSP();
@@ -190,7 +193,9 @@ void NebulaMgr::init()
 	// Load circle texture
 	Nebula::texCircle		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");
 	// Load circle texture for large DSO
-	Nebula::texCircleLarge		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_lrg.png");
+	Nebula::texCircleLarge	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_lrg.png");
+	// Load dashed shape texture
+	Nebula::texRegion		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_reg.png");
 	// Load ellipse texture
 	Nebula::texGalaxy		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");
 	// Load ellipse texture for large galaxies
@@ -299,8 +304,9 @@ void NebulaMgr::init()
 	}
 
 	// Set colors for markers
-	setLabelsColor( Vec3f(conf->value("color/dso_label_color", "0.2,0.6,0.7").toString()));
+	setLabelsColor(Vec3f(conf->value("color/dso_label_color", "0.2,0.6,0.7").toString()));
 	setCirclesColor(Vec3f(conf->value("color/dso_circle_color", "1.0,0.7,0.2").toString()));
+	setRegionsColor(Vec3f(conf->value("color/dso_region_color", "0.7,0.7,0.2").toString()));
 
 	QString defaultGalaxyColor = conf->value("color/dso_galaxy_color", "1.0,0.2,0.2").toString();
 	setGalaxyColor(           Vec3f(defaultGalaxyColor));
@@ -1353,11 +1359,17 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				{ "PSR" , Nebula::NebSNR  },
 				{ "HH"  , Nebula::NebISM  },
 				{ "V*"  , Nebula::NebStar },
+				{ "*IN"  , Nebula::NebCn },
+				{ "SN*"  , Nebula::NebStar },
 				{ "PA?" , Nebula::NebPPN  },
 				{ "BUB" , Nebula::NebISM  },
 				{ "CLG" , Nebula::NebGxCl },
-				{ "POG" , Nebula::NebPartOfGx },
-				{ "CGG" , Nebula::NebGxCl }};
+				{ "POG" , Nebula::NebPartOfGx },				
+				{ "CGG" , Nebula::NebGxCl },
+				{ "SCG" , Nebula::NebGxCl },
+				{ "REG" , Nebula::NebRegion },
+				{ "?" , Nebula::NebUnknown }
+			};
 
 			nType=oTypesMap.value(oType.toUpper(), Nebula::NebUnknown);
 			if (nType == Nebula::NebUnknown)
