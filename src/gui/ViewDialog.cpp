@@ -228,6 +228,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->planetLabelColor, "SolarSystem.labelsColor", "color/planet_names_color");
 	connectColorButton(ui->planetTrailsColor, "SolarSystem.trailsColor", "color/object_trails_color");
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
+	connectIntProperty(ui->planetTrailsThicknessSpinBox, "SolarSystem.trailsThickness");
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
 	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagTrails());

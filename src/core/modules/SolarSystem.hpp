@@ -68,6 +68,10 @@ class SolarSystem : public StelObjectModule
 		   READ getMaxTrailPoints
 		   WRITE setMaxTrailPoints
 		   NOTIFY maxTrailPointsChanged)
+	Q_PROPERTY(int trailsThickness
+		   READ getTrailsThickness
+		   WRITE setTrailsThickness
+		   NOTIFY trailsThicknessChanged)
 	Q_PROPERTY(bool flagHints // was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
 		   READ getFlagHints
 		   WRITE setFlagHints
@@ -457,6 +461,11 @@ public slots:
 	void setFlagTrails(bool b);
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
 	bool getFlagTrails() const;
+
+	//! Set thickness of trails.
+	void setTrailsThickness(int v);
+	//! Get thickness of trail.
+	int getTrailsThickness() const {return trailsThickness;}
 
 	//! Set maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
 	//! The trails are drawn for a maximum of 365 days and then fade out.
@@ -920,6 +929,7 @@ signals:
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void trailsDisplayedChanged(bool b);
+	void trailsThicknessChanged(int v);
 	void maxTrailPointsChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
@@ -1203,6 +1213,7 @@ private:
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
+	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;

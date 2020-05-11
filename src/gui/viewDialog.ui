@@ -1320,6 +1320,28 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QSpinBox" name="planetTrailsThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Trails thickness</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="5" column="0">

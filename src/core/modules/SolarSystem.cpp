@@ -81,6 +81,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
+	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
 	, ephemerisMarkersDisplayed(true)
@@ -249,8 +250,8 @@ void SolarSystem::init()
 	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
 	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
+	setTrailsThickness(conf->value("astro/object_trails_thickness", 1).toBool());
 	recreateTrails();
-
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
@@ -1185,7 +1186,11 @@ void SolarSystem::draw(StelCore* core)
 	{
 		StelPainter sPainter(core->getProjection2d());
 		allTrails->setOpacity(trailFader.getInterstate());
+		if (trailsThickness>1)
+			sPainter.setLineWidth(trailsThickness);
 		allTrails->draw(core, &sPainter);
+		if (trailsThickness>1)
+			sPainter.setLineWidth(1);
 	}
 
 	// Make some voodoo to determine when labels should be displayed
@@ -1632,6 +1637,16 @@ void SolarSystem::setMaxTrailPoints(int max)
 		allTrails->reset(max);
 		recreateTrails();
 		emit maxTrailPointsChanged(max);
+	}
+}
+
+void SolarSystem::setTrailsThickness(int v)
+{
+	if (trailsThickness != v)
+	{
+		trailsThickness = v;
+		recreateTrails();
+		emit trailsThicknessChanged(v);
 	}
 }
 
