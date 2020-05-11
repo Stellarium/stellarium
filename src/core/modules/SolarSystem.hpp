@@ -179,6 +179,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisLine
 		   NOTIFY ephemerisLineChanged
 		   )
+	Q_PROPERTY(int ephemerisLineThickness
+		   READ getEphemerisLineThickness
+		   WRITE setEphemerisLineThickness
+		   NOTIFY ephemerisLineThicknessChanged
+		   )
 	Q_PROPERTY(bool ephemerisSkippedData
 		   READ getFlagEphemerisSkipData
 		   WRITE setFlagEphemerisSkipData
@@ -938,6 +943,7 @@ signals:
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
@@ -1057,6 +1063,9 @@ private slots:
 
 	void setFlagEphemerisLine(bool b);
 	bool getFlagEphemerisLine() const;
+
+	void setEphemerisLineThickness(int v);
+	int getEphemerisLineThickness() const;
 
 	void setFlagEphemerisHorizontalCoordinates(bool b);
 	bool getFlagEphemerisHorizontalCoordinates() const;
@@ -1201,6 +1210,7 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
 	bool ephemerisSmartDatesDisplayed;

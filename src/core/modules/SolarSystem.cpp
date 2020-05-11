@@ -88,6 +88,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
 	, ephemerisLineDisplayed(false)
+	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisDataStep(1)
 	, ephemerisSmartDatesDisplayed(true)
@@ -235,6 +236,7 @@ void SolarSystem::init()
 	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
 	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
+	setEphemerisLineThickness(conf->value("astrocalc/ephemeris_line_thickness", 1).toInt());
 	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
 	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
 	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
@@ -1238,6 +1240,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		const bool showMagnitudes = getFlagEphemerisMagnitudes();
 		const bool showSkippedData = getFlagEphemerisSkipData();
 		const int dataStep = getEphemerisDataStep();
+		const int sizeCoeff = getEphemerisLineThickness() - 1;
 		QString info = "";
 		Vec3d win;
 		Vec3f colorMarker;
@@ -1261,6 +1264,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 				colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
 				size = baseSize;
 			}
+			size += sizeCoeff; //
 			sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
 			sPainter.setBlending(true, GL_ONE, GL_ONE);
 			texEphemerisMarker->bind();
@@ -1297,6 +1301,10 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 			prj = core->getProjection(StelCore::FrameJ2000);
 		StelPainter sPainter(prj);
 
+		int lineThickness = getEphemerisLineThickness();
+		if (lineThickness>1)
+			sPainter.setLineWidth(lineThickness); // set line thickness
+
 		if (size>=3)
 		{
 			Vec3f color;
@@ -1332,6 +1340,8 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 				sPainter.drawPath(vertexArray, colorArray);
 			}
 		}
+		if (lineThickness>1)
+			sPainter.setLineWidth(1); // restore line thickness
 	}
 }
 
@@ -2001,6 +2011,19 @@ void SolarSystem::setEphemerisDataStep(int step)
 int SolarSystem::getEphemerisDataStep() const
 {
 	return ephemerisDataStep;
+}
+
+void SolarSystem::setEphemerisLineThickness(int v)
+{
+	ephemerisLineThickness = v;
+	// automatic saving of the setting
+	conf->setValue("astrocalc/ephemeris_line_thickness", v);
+	emit ephemerisLineThicknessChanged(v);
+}
+
+int SolarSystem::getEphemerisLineThickness() const
+{
+	return ephemerisLineThickness;
 }
 
 void SolarSystem::setEphemerisGenericMarkerColor(const Vec3f& color)
