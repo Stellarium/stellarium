@@ -1647,6 +1647,8 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		{
 			outline.clear();
 			e = search(dso);
+			if (e.isNull()) // maybe this is inner number of DSO
+				e = searchDSO(dso.toUInt());
 
 			point.first  = RA;
 			point.second = DE;
