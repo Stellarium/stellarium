@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-05 19:38+0700\n"
+"POT-Creation-Date: 2020-05-11 18:54+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Sirish Kumar Tummala <sirishtummala@gmail.com>, 2019\n"
 "Language-Team: Telugu (https://www.transifex.com/stellarium/teams/80998/te/)\n"
@@ -32,8 +32,8 @@ msgstr "కస్టమ్ గుర్తింపు"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
 #: src/core/modules/Constellation.cpp:277
-#: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:269
-#: src/core/modules/Nebula.cpp:271 src/core/modules/Planet.cpp:447
+#: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:270
+#: src/core/modules/Nebula.cpp:272 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:189 src/core/modules/Comet.cpp:172
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:218
 #: src/core/modules/StarWrapper.cpp:221 src/gui/AstroCalcDialog.cpp:811
@@ -59,8 +59,8 @@ msgstr "నక్షత్ర సమూహం"
 #: src/core/modules/GridLinesMgr.cpp:1635
 #: src/core/modules/SpecialMarkersMgr.cpp:162
 #: src/core/modules/LandscapeMgr.cpp:479
-#: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:468
-#: src/core/modules/NebulaMgr.cpp:469 src/core/modules/SolarSystem.cpp:270
+#: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
+#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:273
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:622 src/core/StelCore.cpp:257
@@ -120,7 +120,7 @@ msgstr "రాశు లన్నిటినీ ఎంచుకో"
 msgid "Reload the sky culture"
 msgstr "ఖగోళ సంస్కృతిని మళ్ళీ లోడు చెయ్యి"
 
-#: src/core/modules/StarMgr.cpp:456 src/ui_viewDialog.h:2828
+#: src/core/modules/StarMgr.cpp:456 src/ui_viewDialog.h:2838
 #: src/ui_dsoColorsDialog.h:542
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
@@ -138,7 +138,7 @@ msgstr "నక్షత్రాల పరిమాణ పరిమితిన�
 msgid "Reduce the magnitude limit for stars"
 msgstr "నక్షత్రాల పరిమాణ పరిమితిని తగ్గించు"
 
-#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3251
+#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3264
 msgid "Meridian"
 msgstr "మధ్యాహ్న రేఖ"
 
@@ -162,7 +162,7 @@ msgstr "భూమధ్యరేఖ"
 msgid "Precession Circle"
 msgstr "ప్రిసెషన్ వృత్తం"
 
-#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3092
+#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3105
 msgid "Horizon"
 msgstr "దిగంతం"
 
@@ -175,12 +175,12 @@ msgid "Supergalactic Equator"
 msgstr "సూపర్ గాలక్టిక్ మధ్యరేఖ"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3385
+#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3398
 msgid "O./C. longitude"
 msgstr "O./C. రేఖాంశం"
 
 #: src/core/modules/GridLinesMgr.cpp:721
-#: src/core/modules/GridLinesMgr.cpp:1654 src/ui_viewDialog.h:3267
+#: src/core/modules/GridLinesMgr.cpp:1654 src/ui_viewDialog.h:3280
 msgid "Prime Vertical"
 msgstr "ప్రైమ్ వర్టికల్"
 
@@ -286,7 +286,7 @@ msgstr "అల్లికలు, లైన్లు"
 msgid "Equatorial grid"
 msgstr "భూమధ్యరేఖాత్మక అల్లిక"
 
-#: src/core/modules/GridLinesMgr.cpp:1638 src/ui_viewDialog.h:3180
+#: src/core/modules/GridLinesMgr.cpp:1638 src/ui_viewDialog.h:3193
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "దిక్కోణ అల్లిక"
@@ -332,20 +332,20 @@ msgstr "జ్యోతిశ్చక్ర జె2000 అల్లిక"
 msgid "Ecliptic grid"
 msgstr "జ్యోతిశ్చక్ర అల్లిక"
 
-#: src/core/modules/GridLinesMgr.cpp:1648 src/ui_viewDialog.h:3350
+#: src/core/modules/GridLinesMgr.cpp:1648 src/ui_viewDialog.h:3363
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "గాలక్టిక్ అల్లిక"
 
-#: src/core/modules/GridLinesMgr.cpp:1649 src/ui_viewDialog.h:3375
+#: src/core/modules/GridLinesMgr.cpp:1649 src/ui_viewDialog.h:3388
 msgid "Galactic equator"
 msgstr "గాలక్టిక్ మధ్యరేఖ"
 
-#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3301
+#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3314
 msgid "Supergalactic grid"
 msgstr "సూపర్ గాలక్టిక్ అల్లిక"
 
-#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3080
+#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3093
 msgid "Supergalactic equator"
 msgstr "సూపర్ గాలక్టిక్ మధ్యరేఖ"
 
@@ -386,11 +386,11 @@ msgstr "జ్యోతిశ్చక్ర జె2000 ధ్రువాలు
 msgid "Ecliptic poles"
 msgstr "జ్యోతిశ్చక్ర ధ్రువాలు"
 
-#: src/core/modules/GridLinesMgr.cpp:1662 src/ui_viewDialog.h:3164
+#: src/core/modules/GridLinesMgr.cpp:1662 src/ui_viewDialog.h:3177
 msgid "Galactic poles"
 msgstr "గాలక్టిక్ ధ్రువాలు"
 
-#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3163
+#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3176
 msgid "Supergalactic poles"
 msgstr "సూపర్ గాలక్టిక్ ధ్రువాలు"
 
@@ -410,19 +410,19 @@ msgstr "అయన జె2000 బిందువులు"
 msgid "Solstice points"
 msgstr "అయన బిందువులు"
 
-#: src/core/modules/GridLinesMgr.cpp:1668 src/ui_viewDialog.h:3146
+#: src/core/modules/GridLinesMgr.cpp:1668 src/ui_viewDialog.h:3159
 msgid "Antisolar point"
 msgstr "సౌరవ్యతిరేక బిందువు"
 
-#: src/core/modules/GridLinesMgr.cpp:1669 src/ui_viewDialog.h:3198
+#: src/core/modules/GridLinesMgr.cpp:1669 src/ui_viewDialog.h:3211
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:163 src/ui_viewDialog.h:3394
+#: src/core/modules/SpecialMarkersMgr.cpp:163 src/ui_viewDialog.h:3407
 msgid "FOV Center marker"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:164 src/ui_viewDialog.h:3398
+#: src/core/modules/SpecialMarkersMgr.cpp:164 src/ui_viewDialog.h:3411
 msgid "FOV circle marker"
 msgstr ""
 
@@ -434,7 +434,7 @@ msgstr "వాతావరణం"
 msgid "Fog"
 msgstr "పొగమంచు"
 
-#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3279
+#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3292
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "నలుదిక్కుల బిందువులు"
@@ -1247,87 +1247,87 @@ msgstr "రంగు చార లేదా పట్టీ."
 msgid "Nomenclature labels"
 msgstr "పరిభాష పేర్లు"
 
-#: src/core/modules/Nebula.cpp:140 src/core/modules/Nebula.cpp:154
+#: src/core/modules/Nebula.cpp:141 src/core/modules/Nebula.cpp:155
 #: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2981
 #: src/gui/AstroCalcDialog.cpp:3039 plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr "పరిమాణం"
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:143
 msgid "Opacity"
 msgstr "అపారదర్శకత"
 
-#: src/core/modules/Nebula.cpp:149 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:149 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:251
 msgid "by"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:149 src/core/StelObject.cpp:251
+#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr "వాయురాశులు"
 
-#: src/core/modules/Nebula.cpp:154 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:155 src/core/modules/StarWrapper.cpp:252
 msgid "Photometric system"
 msgstr "ఫోటోమెట్రిక్ సిస్టమ్"
 
-#: src/core/modules/Nebula.cpp:256 src/core/modules/Planet.cpp:435
+#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:435
 #: src/core/modules/StarWrapper.cpp:175
 msgid "Additional names: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:262 src/core/modules/Planet.cpp:442
+#: src/core/modules/Nebula.cpp:263 src/core/modules/Planet.cpp:442
 #: src/core/modules/StarWrapper.cpp:181
 msgid "Additional catalog numbers: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:281 src/core/modules/MinorPlanet.cpp:214
+#: src/core/modules/Nebula.cpp:282 src/core/modules/MinorPlanet.cpp:214
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "కలర్ ఇండెక్స్ (B-V)"
 
-#: src/core/modules/Nebula.cpp:286
+#: src/core/modules/Nebula.cpp:287
 msgid "Surface brightness"
 msgstr "ఉపరితల ప్రకాశము"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:288
 msgid "after extinction"
 msgstr "కాంతి శోషణ తరువాత"
 
-#: src/core/modules/Nebula.cpp:297 src/core/modules/Nebula.cpp:299
+#: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:300
 #: src/gui/AstroCalcDialog.cpp:949 src/gui/AstroCalcDialog.cpp:951
 msgctxt "magnitude"
 msgid "mag"
 msgstr "పరి"
 
-#: src/core/modules/Nebula.cpp:297 src/gui/AstroCalcDialog.cpp:949
+#: src/core/modules/Nebula.cpp:298 src/gui/AstroCalcDialog.cpp:949
 #: src/gui/AstroCalcDialog.cpp:955 src/gui/AstroCalcDialog.cpp:1006
 msgid "arcmin"
 msgstr "arcmin"
 
-#: src/core/modules/Nebula.cpp:299 src/gui/AstroCalcDialog.cpp:951
+#: src/core/modules/Nebula.cpp:300 src/gui/AstroCalcDialog.cpp:951
 msgid "arcsec"
 msgstr "arcsec"
 
-#: src/core/modules/Nebula.cpp:312
+#: src/core/modules/Nebula.cpp:313
 msgid "Contrast index"
 msgstr "కాంట్రాస్ట్ ఇండెక్స్"
 
-#: src/core/modules/Nebula.cpp:320 src/ui_configurationDialog.h:1628
+#: src/core/modules/Nebula.cpp:321 src/ui_configurationDialog.h:1628
 msgid "Size"
 msgstr "పరిమాణం"
 
-#: src/core/modules/Nebula.cpp:338
+#: src/core/modules/Nebula.cpp:339
 msgid "Orientation angle"
 msgstr "ఓరియెంటేషన్ కోణం"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:365 src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:366 src/core/modules/Nebula.cpp:379
 #: src/core/modules/StarWrapper.cpp:264
 #: plugins/Supernovae/src/Supernova.cpp:164 plugins/Novae/src/Nova.cpp:166
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:301
@@ -1335,7 +1335,7 @@ msgctxt "distance"
 msgid "ly"
 msgstr "ly"
 
-#: src/core/modules/Nebula.cpp:366 src/core/modules/Nebula.cpp:412
+#: src/core/modules/Nebula.cpp:367 src/core/modules/Nebula.cpp:413
 #: src/core/modules/Planet.cpp:527 src/core/modules/MinorPlanet.cpp:257
 #: src/core/modules/Comet.cpp:229 src/core/modules/StarWrapper.cpp:269
 #: src/core/modules/StarWrapper.cpp:271 src/gui/AstroCalcDialog.cpp:2992
@@ -1346,306 +1346,306 @@ msgid "Distance"
 msgstr "దూరం"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:376 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:377 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:389
+#: src/core/modules/Nebula.cpp:390
 msgctxt "distance"
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:398
+#: src/core/modules/Nebula.cpp:399
 msgctxt "distance"
 msgid "M ly"
 msgstr "M ly"
 
-#: src/core/modules/Nebula.cpp:427 plugins/Quasars/src/Quasar.cpp:155
+#: src/core/modules/Nebula.cpp:428 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
 msgstr "రెడ్‌షిఫ్ట్"
 
-#: src/core/modules/Nebula.cpp:437 src/core/modules/StarWrapper.cpp:293
+#: src/core/modules/Nebula.cpp:438 src/core/modules/StarWrapper.cpp:293
 msgid "Parallax"
 msgstr "పారలాక్స్"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:437 src/core/modules/StarWrapper.cpp:298
+#: src/core/modules/Nebula.cpp:438 src/core/modules/StarWrapper.cpp:298
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:440 src/ui_searchDialogGui.h:866
+#: src/core/modules/Nebula.cpp:441 src/ui_searchDialogGui.h:866
 msgid "Morphological description"
 msgstr "రూప నిర్మాణ వివరం"
 
-#: src/core/modules/Nebula.cpp:1096
+#: src/core/modules/Nebula.cpp:1103
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1106
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "కేంద్రం వద్ద ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1109
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "నక్షత్రాలతో బలమైన ఇన్నర్ కోర్"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1112
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "ఎగువ మధ్య స్థాయి గాఢత"
 
-#: src/core/modules/Nebula.cpp:1110
+#: src/core/modules/Nebula.cpp:1117
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "మధ్య స్థాయి గాఢత"
 
-#: src/core/modules/Nebula.cpp:1113
+#: src/core/modules/Nebula.cpp:1120
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ ఒకింత పలచబడే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1116
+#: src/core/modules/Nebula.cpp:1123
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ పలచబడే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1126
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "పలచగా ఉన్న నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1129
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ బాగా తక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1132
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ దాదాపుగా లేని నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1128
+#: src/core/modules/Nebula.cpp:1135
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "అక్షరబద్ధం కాని గాఢత తరగతి"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1155
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "కేంద్రం వద్ద బాగా ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1151
+#: src/core/modules/Nebula.cpp:1158
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "కేంద్రం వద్ద స్వల్ప నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1154
+#: src/core/modules/Nebula.cpp:1161
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "పెద్దగా కనిపించని నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1157
+#: src/core/modules/Nebula.cpp:1164
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1160
+#: src/core/modules/Nebula.cpp:1167
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "అక్షరబద్ధం కాని గాఢత తరగతి"
 
-#: src/core/modules/Nebula.cpp:1166
+#: src/core/modules/Nebula.cpp:1173
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "సమూహ సభ్యుల స్వల్ప ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1169
+#: src/core/modules/Nebula.cpp:1176
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "సమూహ సభ్యుల మధ్యస్థ ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1172
+#: src/core/modules/Nebula.cpp:1179
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "సమూహ సభ్యుల అధిక ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1175
+#: src/core/modules/Nebula.cpp:1182
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "అక్షరబద్ధం కాని సమూహ సభ్యుల ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1181
+#: src/core/modules/Nebula.cpp:1188
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "50 కంటే తక్కువ నక్షత్రాలతో కూడిన అల్ప సమూహం"
 
-#: src/core/modules/Nebula.cpp:1184
+#: src/core/modules/Nebula.cpp:1191
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "50-100 నక్షత్రాలతో కూడిన ఒక మాదిరి సంపన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1187
+#: src/core/modules/Nebula.cpp:1194
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "100 కంటే ఎక్కువ నక్షత్రాలతో కూడిన సంపన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1190
+#: src/core/modules/Nebula.cpp:1197
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "అక్షరబద్ధం కాని సభ్యులు గల తరగతి"
 
-#: src/core/modules/Nebula.cpp:1194
+#: src/core/modules/Nebula.cpp:1201
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "సమూహం నెబ్యులోసిటీ లోపల ఉంటుంది"
 
-#: src/core/modules/Nebula.cpp:1215
+#: src/core/modules/Nebula.cpp:1222
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "చాలా ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1218
+#: src/core/modules/Nebula.cpp:1225
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1221
+#: src/core/modules/Nebula.cpp:1228
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "మధ్యస్థ ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1224
+#: src/core/modules/Nebula.cpp:1231
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "బలహీన ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1227
+#: src/core/modules/Nebula.cpp:1234
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "బాగా బలహీన ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1230
+#: src/core/modules/Nebula.cpp:1237
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "అనిశ్చిత ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1233
+#: src/core/modules/Nebula.cpp:1240
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "ప్రకాశం అక్షరబద్ధం కాని పరావర్తన నెబ్యులాలు"
 
-#: src/core/modules/Nebula.cpp:1239
+#: src/core/modules/Nebula.cpp:1246
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "ప్రకాశిస్తున్న తార నెబ్యులోసిటీ లోపల ఇమిడి ఉంది"
 
-#: src/core/modules/Nebula.cpp:1242
+#: src/core/modules/Nebula.cpp:1249
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "తార, ప్రకాశిస్తున్న నెబ్యులోసిటీ బయట ఉంది"
 
-#: src/core/modules/Nebula.cpp:1245
+#: src/core/modules/Nebula.cpp:1252
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "తార ప్రకాశిస్తున్న నెబ్యులోసిటీ మూలన ఉంది"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1257
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "తార ప్రకాశిస్తున్న అసామాన్య నెబ్యులోసిటీ బయట ఉంది"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1256
+#: src/core/modules/Nebula.cpp:1263
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "ప్రకాశిస్తున్న అసామాన్య నెబ్యులోసిటీ"
 
-#: src/core/modules/Nebula.cpp:1260
+#: src/core/modules/Nebula.cpp:1267
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "అక్షరబద్ధం కాని పరావర్తన నెబ్యులాలు"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1287
 msgid "circular form"
 msgstr "వృత్తాకార రూపం"
 
-#: src/core/modules/Nebula.cpp:1281
+#: src/core/modules/Nebula.cpp:1288
 msgid "elliptical form"
 msgstr "దీర్ఘవృత్త రూపం"
 
-#: src/core/modules/Nebula.cpp:1282
+#: src/core/modules/Nebula.cpp:1289
 msgid "irregular form"
 msgstr "క్రమరహిత రూపం"
 
-#: src/core/modules/Nebula.cpp:1284
+#: src/core/modules/Nebula.cpp:1291
 msgid "amorphous structure"
 msgstr "నిరాకార ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1285
+#: src/core/modules/Nebula.cpp:1292
 msgid "conventional structure"
 msgstr "సాంప్రదాయిక ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1286
+#: src/core/modules/Nebula.cpp:1293
 msgid "filamentary structure"
 msgstr "ఫిలమెంటరీ ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1288
+#: src/core/modules/Nebula.cpp:1295
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "అత్యల్ప ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1289
+#: src/core/modules/Nebula.cpp:1296
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "ఒక మాదిరి ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1290
+#: src/core/modules/Nebula.cpp:1297
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "అత్యధిక ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1293
+#: src/core/modules/Nebula.cpp:1300
 msgid "undocumented form"
 msgstr "అక్షరబద్ధం కాని రూపం"
 
-#: src/core/modules/Nebula.cpp:1294
+#: src/core/modules/Nebula.cpp:1301
 msgid "undocumented structure"
 msgstr "అక్షరబద్ధం కాని ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1295
+#: src/core/modules/Nebula.cpp:1302
 msgid "undocumented brightness"
 msgstr "అక్షరబద్ధం కాని ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1307
+#: src/core/modules/Nebula.cpp:1314
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "అవశేషం, డొల్ల రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1317
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "అవశేషం, నిండు కేంద్రపు ('ప్లీరియన్ ') రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1320
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "అవశేషం ఓ మిశ్రమ (లేదా మిళిత) రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1323
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "అవశేషం, కొంత అనిశ్చితితో కూడిన డొల్ల రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1326
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -1654,7 +1654,7 @@ msgstr ""
 "అవశేషం, కొంత అనిశ్చితితో కూడిన నిండు కేంద్రపు ('ప్లీరియన్ ') రేడియో "
 "స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1322
+#: src/core/modules/Nebula.cpp:1329
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -1663,170 +1663,174 @@ msgstr ""
 "అవశేషం కొంత అనిశ్చితితో కూడిన ఓ మిశ్రమ (లేదా మిళిత) రేడియో స్ట్రక్చరును "
 "చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1337
 msgid "undocumented type"
 msgstr "అక్షర బద్ధం కాని రకం"
 
-#: src/core/modules/Nebula.cpp:1336
+#: src/core/modules/Nebula.cpp:1343
 msgid "galaxy"
 msgstr "నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1337
+#: src/core/modules/Nebula.cpp:1344
 msgid "active galaxy"
 msgstr "సచేతన నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1338
+#: src/core/modules/Nebula.cpp:1345
 msgid "radio galaxy"
 msgstr "రేడియో నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1339
+#: src/core/modules/Nebula.cpp:1346
 msgid "interacting galaxy"
 msgstr "స్పందిస్తున్న నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1340 plugins/Quasars/src/Quasar.cpp:128
+#: src/core/modules/Nebula.cpp:1347 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
 msgstr "క్వాసార్"
 
-#: src/core/modules/Nebula.cpp:1341
+#: src/core/modules/Nebula.cpp:1348
 msgid "star cluster"
 msgstr "నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1342
+#: src/core/modules/Nebula.cpp:1349
 msgid "open star cluster"
 msgstr "ఓపెన్ నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1343
+#: src/core/modules/Nebula.cpp:1350
 msgid "globular star cluster"
 msgstr "గోళాకార నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1344
+#: src/core/modules/Nebula.cpp:1351
 msgid "stellar association"
 msgstr "స్టెల్లార్ అసోసియేషన్"
 
-#: src/core/modules/Nebula.cpp:1345
+#: src/core/modules/Nebula.cpp:1352
 msgid "star cloud"
 msgstr "నక్షత్ర మేఘం"
 
-#: src/core/modules/Nebula.cpp:1346
+#: src/core/modules/Nebula.cpp:1353
 msgid "nebula"
 msgstr "నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1347
+#: src/core/modules/Nebula.cpp:1354
 msgid "planetary nebula"
 msgstr "గ్రహ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1348
+#: src/core/modules/Nebula.cpp:1355
 msgid "dark nebula"
 msgstr "అంధకార నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1349
+#: src/core/modules/Nebula.cpp:1356
 msgid "reflection nebula"
 msgstr "పరావర్తన నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1357
 msgid "bipolar nebula"
 msgstr "బైపోలార్ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1351
+#: src/core/modules/Nebula.cpp:1358
 msgid "emission nebula"
 msgstr "ఎమిషన్ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1352
+#: src/core/modules/Nebula.cpp:1359
 msgid "cluster associated with nebulosity"
 msgstr "నెబ్యులోసిటీతో ఉన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1353
+#: src/core/modules/Nebula.cpp:1360
 msgid "HII region"
 msgstr "HII ప్రాంతం"
 
-#: src/core/modules/Nebula.cpp:1354
+#: src/core/modules/Nebula.cpp:1361
 msgid "supernova remnant"
 msgstr "సూపర్‌నోవా అవశేషం"
 
-#: src/core/modules/Nebula.cpp:1355
+#: src/core/modules/Nebula.cpp:1362
 msgid "interstellar matter"
 msgstr "అంతర నక్షత్ర పదార్థం"
 
-#: src/core/modules/Nebula.cpp:1356
+#: src/core/modules/Nebula.cpp:1363
 msgid "emission object"
 msgstr "ఉద్గార వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1357
+#: src/core/modules/Nebula.cpp:1364
 msgid "BL Lac object"
 msgstr "BL Lac వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1358
+#: src/core/modules/Nebula.cpp:1365
 msgid "blazar"
 msgstr "బ్లాజార్"
 
-#: src/core/modules/Nebula.cpp:1359
+#: src/core/modules/Nebula.cpp:1366
 msgid "molecular cloud"
 msgstr "మోలిక్యులర్ మేఘం"
 
-#: src/core/modules/Nebula.cpp:1360
+#: src/core/modules/Nebula.cpp:1367
 msgid "young stellar object"
 msgstr "యువ స్టెల్లార్ వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1361
+#: src/core/modules/Nebula.cpp:1368
 msgid "possible quasar"
 msgstr "బహుశా క్వాసార్"
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1369
 msgid "possible planetary nebula"
 msgstr "బహుశా గ్రహ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1370
 msgid "protoplanetary nebula"
 msgstr "ఆదిమగ్రహ నెబ్యులా"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1364 src/core/modules/StarWrapper.cpp:54
+#: src/core/modules/Nebula.cpp:1371 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:211 src/gui/AstroCalcDialog.cpp:1078
 #: src/translations.h:54
 msgid "star"
 msgstr "నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1372
 msgid "symbiotic star"
 msgstr "సింబియోటిక్ నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1366
+#: src/core/modules/Nebula.cpp:1373
 msgid "emission-line star"
 msgstr "ఉద్గార-లైన్లు కలిగిన నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1374
 msgid "supernova candidate"
 msgstr "సూపర్‌నోవా అపేక్షి"
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1375
 msgid "supernova remnant candidate"
 msgstr "సూపర్‌నోవా అవశేష అపేక్షి"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1376
 msgid "cluster of galaxies"
 msgstr "నక్షత్ర మండలాల సమూహం"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1377
 msgid "part of a galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1378
+msgid "region"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1379
 msgid "object of unknown nature"
 msgstr "ఎలాంటిదో తెలియని వస్తువు"
 
-#: src/core/modules/NebulaMgr.cpp:468
+#: src/core/modules/NebulaMgr.cpp:474
 msgid "Deep-sky objects"
 msgstr "సుదూర ఖగోళ వస్తువులు"
 
-#: src/core/modules/NebulaMgr.cpp:469
+#: src/core/modules/NebulaMgr.cpp:475
 msgid "Toggle DSO type filter"
 msgstr "DSO రకం ఫిల్టరును టాగుల్ చెయ్యి"
 
-#: src/core/modules/NebulaMgr.cpp:1409
+#: src/core/modules/NebulaMgr.cpp:1421
 msgid "Attention!"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1409
+#: src/core/modules/NebulaMgr.cpp:1421
 msgid "Mismatch the version of catalog - expected version of catalog is"
 msgstr ""
 
@@ -2071,43 +2075,43 @@ msgid "Orthographic"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:271 src/gui/AstroCalcDialog.cpp:2331
+#: src/core/modules/SolarSystem.cpp:274 src/gui/AstroCalcDialog.cpp:2331
 #: src/gui/AstroCalcDialog.cpp:4988 src/translations.h:82
 msgid "Planets"
 msgstr "గ్రహాలు"
 
-#: src/core/modules/SolarSystem.cpp:272
+#: src/core/modules/SolarSystem.cpp:275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr "గ్రహాల పేర్లు"
 
-#: src/core/modules/SolarSystem.cpp:273
+#: src/core/modules/SolarSystem.cpp:276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr "గ్రహ కక్ష్యలు"
 
-#: src/core/modules/SolarSystem.cpp:274
+#: src/core/modules/SolarSystem.cpp:277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr "గ్రహాల జాడలు"
 
-#: src/core/modules/SolarSystem.cpp:276
+#: src/core/modules/SolarSystem.cpp:279
 msgid "Planet markers"
 msgstr "గ్రహాల గుర్తింపులు"
 
-#: src/core/modules/SolarSystem.cpp:277
+#: src/core/modules/SolarSystem.cpp:280
 msgid "Planet selection marker"
 msgstr "గ్రహాలను ఎంచుకునే గుర్తింపు"
 
-#: src/core/modules/SolarSystem.cpp:278
+#: src/core/modules/SolarSystem.cpp:281
 msgid "Enlarge Moon"
 msgstr "చంద్రుని పెంచి చూపు"
 
-#: src/core/modules/SolarSystem.cpp:279
+#: src/core/modules/SolarSystem.cpp:282
 msgid "Enlarge minor bodies"
 msgstr "చిన్న వస్తువులను పెంచి చూపు"
 
-#: src/core/modules/SolarSystem.cpp:280
+#: src/core/modules/SolarSystem.cpp:283
 msgid "Native planet names (from starlore)"
 msgstr "స్థానిక గ్రహ నామాలు (స్టార్‌లోర్ నుండి)"
 
@@ -4447,73 +4451,73 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "ఫ్రేమ్స్ పర్ సెకండ్"
 
-#: src/gui/ViewDialog.cpp:503
+#: src/gui/ViewDialog.cpp:504
 msgid "Loading ..."
 msgstr "లోడు చేస్తున్నాం ..."
 
-#: src/gui/ViewDialog.cpp:556
+#: src/gui/ViewDialog.cpp:557
 msgid "properties"
 msgstr "లక్షణాలు"
 
-#: src/gui/ViewDialog.cpp:577
+#: src/gui/ViewDialog.cpp:578
 msgid "Deep Sky"
 msgstr "సుదూర ఆకాశం"
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:579
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "సౌర కుటుంబం"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:826
+#: src/gui/ViewDialog.cpp:827
 msgid "Excellent dark-sky site"
 msgstr "బహు చక్కటి అంధకార ఆకాశ దృశ్యం"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:828
+#: src/gui/ViewDialog.cpp:829
 msgid "Typical truly dark site"
 msgstr "మామూలుగా ఉండే వాస్తవ అంధకార ఆకాశ దృశ్యం"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:830
+#: src/gui/ViewDialog.cpp:831
 msgid "Rural sky"
 msgstr "గ్రామీణ ఆకాశం"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:832
+#: src/gui/ViewDialog.cpp:833
 msgid "Rural/suburban transition"
 msgstr "గ్రామీణ/సబర్బన్ సంక్రమణం"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:834
+#: src/gui/ViewDialog.cpp:835
 msgid "Suburban sky"
 msgstr "సబర్బన్ ఆకాశం"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:836
+#: src/gui/ViewDialog.cpp:837
 msgid "Bright suburban sky"
 msgstr "కాంతిమయ సబర్బన్ ఆకాశం"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:838
+#: src/gui/ViewDialog.cpp:839
 msgid "Suburban/urban transition"
 msgstr "సబర్బన్/పట్టణ సంక్రమణం"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:840
+#: src/gui/ViewDialog.cpp:841
 msgid "City sky"
 msgstr "నగరాకాశం"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:842
+#: src/gui/ViewDialog.cpp:843
 msgid "Inner-city sky"
 msgstr "నగరాంతర్గత ఆకాశం"
 
-#: src/gui/ViewDialog.cpp:856
+#: src/gui/ViewDialog.cpp:857
 msgid "The naked-eye limiting magnitude is"
 msgstr "కంటికి కనబడే పరిమాణ పరిమితి"
 
-#: src/gui/ViewDialog.cpp:864
+#: src/gui/ViewDialog.cpp:865
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -4522,7 +4526,7 @@ msgstr ""
 "తోకచుక్కలు) కోసం స్ఫెరికల్ ఎప్రాక్సిమేషను కాకుండా బహుభుజీయ 3డి మోడలును "
 "వాడుతుంది"
 
-#: src/gui/ViewDialog.cpp:865
+#: src/gui/ViewDialog.cpp:866
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -4531,88 +4535,88 @@ msgstr ""
 "మ్యాప్qఉఒత్; వాడు. కొన్ని వస్తువుల విషయంలో నీడ యొక్క పెనంబ్రా నాణ్యత "
 "తగ్గవచ్చు."
 
-#: src/gui/ViewDialog.cpp:888
+#: src/gui/ViewDialog.cpp:889
 msgid "Abbreviated"
 msgstr "పొట్టిపేరు"
 
-#: src/gui/ViewDialog.cpp:889
+#: src/gui/ViewDialog.cpp:890
 msgid "Native"
 msgstr "నేటివ్"
 
-#: src/gui/ViewDialog.cpp:890
+#: src/gui/ViewDialog.cpp:891
 msgid "Translated"
 msgstr "అనువదించిన "
 
-#: src/gui/ViewDialog.cpp:1062
+#: src/gui/ViewDialog.cpp:1063
 msgid "No shooting stars"
 msgstr "షూటింగ్ స్టార్లొద్దు"
 
-#: src/gui/ViewDialog.cpp:1064
+#: src/gui/ViewDialog.cpp:1065
 msgid "Normal rate"
 msgstr "మామూలు రేటు"
 
-#: src/gui/ViewDialog.cpp:1066
+#: src/gui/ViewDialog.cpp:1067
 msgid "Standard Orionids rate"
 msgstr "సాధారణ ఓరియనిడ్ల రేటు"
 
-#: src/gui/ViewDialog.cpp:1068
+#: src/gui/ViewDialog.cpp:1069
 msgid "Standard Perseids rate"
 msgstr "సాధారణ పెర్సెయిడ్ల రేటు"
 
-#: src/gui/ViewDialog.cpp:1070
+#: src/gui/ViewDialog.cpp:1071
 msgid "Standard Geminids rate"
 msgstr "సాధారణ జెమినీడ్ల రేటు"
 
-#: src/gui/ViewDialog.cpp:1072
+#: src/gui/ViewDialog.cpp:1073
 msgid "Exceptional Perseid rate"
 msgstr "అసాధారణ పెర్సెయిడ్ల రేటు "
 
-#: src/gui/ViewDialog.cpp:1074
+#: src/gui/ViewDialog.cpp:1075
 msgid "Meteor storm rate"
 msgstr "ఉల్కాపాతపు రేటు "
 
-#: src/gui/ViewDialog.cpp:1076
+#: src/gui/ViewDialog.cpp:1077
 msgid "Exceptional Draconid rate"
 msgstr "అసాధారణ డ్రాకోనిడ్ల రేటు"
 
-#: src/gui/ViewDialog.cpp:1078
+#: src/gui/ViewDialog.cpp:1079
 msgid "Exceptional Leonid rate"
 msgstr "అసాధారణ లియోనిడ్ల రేటు"
 
-#: src/gui/ViewDialog.cpp:1080
+#: src/gui/ViewDialog.cpp:1081
 msgid "Very high rate (1966 Leonids)"
 msgstr "చాలా ఎక్కువ రేటు (1966 లియోనిడ్లు)"
 
-#: src/gui/ViewDialog.cpp:1082
+#: src/gui/ViewDialog.cpp:1083
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "అత్యంత అధిక రేటు (1833 లియోనిడ్లు)"
 
-#: src/gui/ViewDialog.cpp:1145
+#: src/gui/ViewDialog.cpp:1146
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "జి. ముల్లర్ (1893) "
 
-#: src/gui/ViewDialog.cpp:1146
+#: src/gui/ViewDialog.cpp:1147
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "ఏస్ట్రొనామికల్ ఆలమనాక్ (1984) "
 
-#: src/gui/ViewDialog.cpp:1147
+#: src/gui/ViewDialog.cpp:1148
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "వివరణాత్మక అనుబంధం (1992) "
 
-#: src/gui/ViewDialog.cpp:1148
+#: src/gui/ViewDialog.cpp:1149
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "వివరణాత్మక అనుబంధం (1992)"
 
-#: src/gui/ViewDialog.cpp:1149
+#: src/gui/ViewDialog.cpp:1150
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "జనరిక్"
 
-#: src/gui/ViewDialog.cpp:1175
+#: src/gui/ViewDialog.cpp:1176
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4620,7 +4624,7 @@ msgstr ""
 "ఈ అల్గారిథమును <em>ఏస్ట్రొనామికల్ ఆలమనాక్ </em> (1984, ఆ తరువాత)  వాడారు. "
 "అది V (ఇన్స్ట్రుమెంటల్) పరిమాణాన్ని (డి.ఎల్. హారిస్ ద్వారా) ఇస్తుంది."
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -4630,7 +4634,7 @@ msgstr ""
 "దీన్ని <em>ఎక్స్‌ప్లనేటరీ సప్లిమెంట్ టు ది ఏస్ట్రనామికల్ ఎఫిమెరిస్</em> "
 "(1961) లో ప్రచురించారు."
 
-#: src/gui/ViewDialog.cpp:1181
+#: src/gui/ViewDialog.cpp:1182
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -4638,7 +4642,7 @@ msgstr ""
 "ఈ అల్గారిథమును <em>ఎక్స్‌ప్లనేటరీ సప్లిమెంట్ టు ది ఏస్ట్రనామికల్ "
 "ఆల్మనాక్</em> (1992) లో ప్రచురించారు"
 
-#: src/gui/ViewDialog.cpp:1184
+#: src/gui/ViewDialog.cpp:1185
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -4646,7 +4650,7 @@ msgstr ""
 "ఈ అల్గారిథమును <em>ఎక్స్‌ప్లనేటరీ సప్లిమెంట్ టు ది ఏస్ట్రనామికల్ "
 "ఆల్మనాక్</em> (2013) యొక్క మూడవ కూర్పులో ప్రచురించారు."
 
-#: src/gui/ViewDialog.cpp:1187
+#: src/gui/ViewDialog.cpp:1188
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
@@ -5084,7 +5088,7 @@ msgstr "\"/yr"
 msgid "S.B."
 msgstr "S.B."
 
-#: src/gui/AstroCalcDialog.cpp:855 src/ui_viewDialog.h:3481
+#: src/gui/AstroCalcDialog.cpp:855 src/ui_viewDialog.h:3494
 msgid "Solar system objects"
 msgstr "సౌర కుటుంబ వస్తువులు"
 
@@ -5424,7 +5428,7 @@ msgstr "ప్రకాసవంతమైన నెబ్యులాలు (<%1
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2346 src/gui/AstroCalcDialog.cpp:4991
-#: src/translations.h:337 src/ui_viewDialog.h:3028
+#: src/translations.h:337 src/ui_viewDialog.h:3041
 #: src/ui_dsoColorsDialog.h:585
 msgid "Dark nebulae"
 msgstr "అంధకార నెబ్యులాలు"
@@ -5715,24 +5719,24 @@ msgstr "రాత్రి ఏ సమయంలోనైనా"
 msgid "Bright stars"
 msgstr "ప్రకాశవంతమైన నక్షత్రాలు"
 
-#: src/gui/AstroCalcDialog.cpp:4990 src/ui_viewDialog.h:3027
+#: src/gui/AstroCalcDialog.cpp:4990 src/ui_viewDialog.h:3040
 msgid "Bright nebulae"
 msgstr "ప్రకాశవంతమైన నెబ్యులాలు"
 
-#: src/gui/AstroCalcDialog.cpp:4992 src/ui_viewDialog.h:3031
+#: src/gui/AstroCalcDialog.cpp:4992 src/ui_viewDialog.h:3044
 #: src/ui_dsoColorsDialog.h:554
 msgid "Galaxies"
 msgstr "నక్ష్త్ర మండలాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:4993 src/translations.h:329
-#: src/ui_viewDialog.h:3034 src/ui_dsoColorsDialog.h:568
+#: src/ui_viewDialog.h:3047 src/ui_dsoColorsDialog.h:568
 msgid "Open star clusters"
 msgstr "ఓపెన్ నక్షత్ర సమూహాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5002 src/translations.h:335
-#: src/ui_viewDialog.h:3026 src/ui_dsoColorsDialog.h:553
+#: src/ui_viewDialog.h:3039 src/ui_dsoColorsDialog.h:553
 msgid "Planetary nebulae"
 msgstr "గ్రహ నెబ్యులాలు"
 
@@ -5765,19 +5769,19 @@ msgstr "సూపర్‌నోవా అవశేష అపేక్షిత�
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5010 src/translations.h:363
-#: src/ui_viewDialog.h:3033 src/ui_dsoColorsDialog.h:540
+#: src/ui_viewDialog.h:3046 src/ui_dsoColorsDialog.h:540
 msgid "Supernova remnants"
 msgstr "సూపర్‌నోవా అవశేషాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5011 src/translations.h:391
-#: src/ui_viewDialog.h:3030 src/ui_dsoColorsDialog.h:558
+#: src/ui_viewDialog.h:3043 src/ui_dsoColorsDialog.h:558
 msgid "Clusters of galaxies"
 msgstr "నక్షత్ర మండలాల సమూహాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5013 src/translations.h:331
-#: src/ui_viewDialog.h:3036 src/ui_dsoColorsDialog.h:551
+#: src/ui_viewDialog.h:3049 src/ui_dsoColorsDialog.h:551
 msgid "Globular star clusters"
 msgstr "గ్లోబ్యులర్ నక్షత్ర సమూహాలు"
 
@@ -6664,7 +6668,7 @@ msgid "Reflection nebulae"
 msgstr "పరావర్తన నెబ్యులాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:345 src/ui_viewDialog.h:3025
+#: src/translations.h:345 src/ui_viewDialog.h:3038
 #: src/ui_dsoColorsDialog.h:576
 msgid "Active galaxies"
 msgstr "చేతన నక్షత్ర మండలాలు"
@@ -6675,7 +6679,7 @@ msgid "Radio galaxies"
 msgstr "రేడియో నక్షత్ర మండలాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:349 src/ui_viewDialog.h:3032
+#: src/translations.h:349 src/ui_viewDialog.h:3045
 #: src/ui_dsoColorsDialog.h:565
 msgid "Interacting galaxies"
 msgstr "స్పందిస్తున్న నక్షత్ర మండలాలు"
@@ -6756,12 +6760,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "ఆదిమగ్రహ నెబ్యులాలు"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:393 src/ui_viewDialog.h:2937
+#: src/translations.h:393 src/ui_viewDialog.h:2950
 msgid "Messier Catalogue"
 msgstr "మెస్సియర్ క్యాటలాగు"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:395 src/ui_viewDialog.h:2955
+#: src/translations.h:395 src/ui_viewDialog.h:2968
 msgid "Caldwell Catalogue"
 msgstr "కాల్డ్‌వెల్ క్యాటలాగు"
 
@@ -6891,17 +6895,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "జేమ్స్ డన్‌లప్ లోతైన దక్షిణ అంతరిక్ష క్యాటలాగు"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:447 src/ui_viewDialog.h:2949
+#: src/translations.h:447 src/ui_viewDialog.h:2962
 msgid "Trumpler Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:449 src/ui_viewDialog.h:3019
+#: src/translations.h:449 src/ui_viewDialog.h:3032
 msgid "Stock Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:451 src/ui_viewDialog.h:3015
+#: src/translations.h:451 src/ui_viewDialog.h:3028
 msgid "Ruprecht Catalogue"
 msgstr ""
 
@@ -9536,156 +9540,156 @@ msgstr "కోఆర్డినేట్లు వాడినపుడు స�
 msgid "Show FOV center marker when position is search"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3399
-#: src/ui_viewDialog.h:3421 src/ui_configurationDialog.h:1866
+#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3412
+#: src/ui_viewDialog.h:3434 src/ui_configurationDialog.h:1866
 #: src/ui_configurationDialog.h:1877
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "వికల్పాలు"
 
-#: src/ui_viewDialog.h:2824
+#: src/ui_viewDialog.h:2834
 msgid "View"
 msgstr "దృశ్యం"
 
-#: src/ui_viewDialog.h:2826
+#: src/ui_viewDialog.h:2836
 msgid "Projection"
 msgstr "ప్రొజెక్షన్"
 
-#: src/ui_viewDialog.h:2827
+#: src/ui_viewDialog.h:2837
 msgid "Vertical viewport offset"
 msgstr "వర్టికల్ వ్యూపోర్ట్ ఆఫ్‌సెట్"
 
-#: src/ui_viewDialog.h:2829 src/ui_viewDialog.h:2919 src/ui_viewDialog.h:3037
+#: src/ui_viewDialog.h:2839 src/ui_viewDialog.h:2932 src/ui_viewDialog.h:3050
 msgid "Labels and Markers"
 msgstr "లేబుళ్ళు, మార్కర్లు"
 
-#: src/ui_viewDialog.h:2830
+#: src/ui_viewDialog.h:2840
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "ట్వింకిల్:"
 
-#: src/ui_viewDialog.h:2831
+#: src/ui_viewDialog.h:2841
 msgid "Use additional names of stars"
 msgstr "నక్షత్రాల అదనపు పేర్లను వాడు"
 
-#: src/ui_viewDialog.h:2832
+#: src/ui_viewDialog.h:2842
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "సాపేక్ష స్కేలు:"
 
-#: src/ui_viewDialog.h:2834
+#: src/ui_viewDialog.h:2844
 msgid "Limit the magnitude of stars"
 msgstr "నక్షత్రాల పరిమాణాన్ని పరిమితించు"
 
-#: src/ui_viewDialog.h:2836 src/ui_viewDialog.h:2931 src/ui_viewDialog.h:3049
+#: src/ui_viewDialog.h:2846 src/ui_viewDialog.h:2944 src/ui_viewDialog.h:3062
 msgid "Limit magnitude:"
 msgstr "పరిమాణాన్ని పరిమితించు:"
 
-#: src/ui_viewDialog.h:2837
+#: src/ui_viewDialog.h:2847
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "అబ్సల్యూట్ స్కేలు:"
 
-#: src/ui_viewDialog.h:2839
+#: src/ui_viewDialog.h:2849
 msgid "Show stars with pointed rays"
 msgstr ""
 
-#: src/ui_viewDialog.h:2841
+#: src/ui_viewDialog.h:2851
 msgid "Spiky stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:2842 src/ui_viewDialog.h:3477
+#: src/ui_viewDialog.h:2852 src/ui_viewDialog.h:3490
 msgid "Sky"
 msgstr "ఆకాశం"
 
-#: src/ui_viewDialog.h:2843
+#: src/ui_viewDialog.h:2853
 msgid "Milky Way brightness/saturation:"
 msgstr "పాలపుంత ప్రకాశత్వం/సంతృప్తత:"
 
-#: src/ui_viewDialog.h:2845
+#: src/ui_viewDialog.h:2855
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "సంతృప్తతను అసంతృప్తత (0.00) నుండి డిఫాల్టు (1.00) విలువకు మారుస్తున్నాం."
 
-#: src/ui_viewDialog.h:2847
+#: src/ui_viewDialog.h:2857
 msgid "Atmosphere visualization"
 msgstr "వాతావరణ దర్శనం"
 
-#: src/ui_viewDialog.h:2849
+#: src/ui_viewDialog.h:2859
 msgid "pressure, temperature, extinction coefficient"
 msgstr "పీడనం, ఉష్ణోగ్రత, కాంతిశోషణ గుణకం"
 
-#: src/ui_viewDialog.h:2851
+#: src/ui_viewDialog.h:2861
 msgid "Refraction/Extinction settings..."
 msgstr "వక్రీభవనం/కాంతిశోషణ సెట్టింగులు..."
 
-#: src/ui_viewDialog.h:2852
+#: src/ui_viewDialog.h:2862
 msgid "Zodiacal Light brightness:"
 msgstr "జోడియాకల్ కాంతి ప్రకాశత్వం:"
 
-#: src/ui_viewDialog.h:2854
+#: src/ui_viewDialog.h:2864
 msgid "Settings for sporadic meteors"
 msgstr "చెదురుమదురు ఉల్కల సెట్టింగులు"
 
-#: src/ui_viewDialog.h:2856
+#: src/ui_viewDialog.h:2866
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "ఉల్కా పాతం:"
 
-#: src/ui_viewDialog.h:2859 src/ui_viewDialog.h:2862
+#: src/ui_viewDialog.h:2869 src/ui_viewDialog.h:2872
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "చెదురుమదురు ఉల్కాల జెనితల్ హవర్లీ రేటు"
 
-#: src/ui_viewDialog.h:2864
+#: src/ui_viewDialog.h:2874
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
 msgstr "కాంతి కాలుష్యం:"
 
-#: src/ui_viewDialog.h:2865 src/ui_astroCalcDialog.h:1649
+#: src/ui_viewDialog.h:2875 src/ui_astroCalcDialog.h:1649
 msgid "or"
 msgstr "లేదా"
 
-#: src/ui_viewDialog.h:2867
+#: src/ui_viewDialog.h:2877
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
 msgstr ""
 
-#: src/ui_viewDialog.h:2869
+#: src/ui_viewDialog.h:2879
 msgid "take from locations database"
 msgstr ""
 
-#: src/ui_viewDialog.h:2871
+#: src/ui_viewDialog.h:2881
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "చాలా ప్రకాసవంతమైన వస్తువు కనిపిస్తున్నపుడు కాంతిహీన నక్షత్రాల కాంతిని "
 "మందగించు"
 
-#: src/ui_viewDialog.h:2873
+#: src/ui_viewDialog.h:2883
 msgid "Dynamic eye adaptation"
 msgstr "గతిశీలంగా దృష్టిని అనుకూలపరచు"
 
-#: src/ui_viewDialog.h:2874
+#: src/ui_viewDialog.h:2884
 msgid "Solar System objects"
 msgstr "సౌర కుటుంబ వస్తువులు"
 
-#: src/ui_viewDialog.h:2875
+#: src/ui_viewDialog.h:2885
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "పరిశీలకుడు ఉన్న వస్తువుపై నామకరణాలను దాచు"
 
-#: src/ui_viewDialog.h:2877
+#: src/ui_viewDialog.h:2887
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 "సౌర కుటుంబ వస్తువులన్నిYఇ జాడలను చూడాలనుకుంటే ఈ వికల్పాన్ని అచేతనం చెయ్యండి"
 
-#: src/ui_viewDialog.h:2879
+#: src/ui_viewDialog.h:2889
 msgid "Only for N latest selected objects:"
 msgstr ""
 
-#: src/ui_viewDialog.h:2881
+#: src/ui_viewDialog.h:2891
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -9693,67 +9697,71 @@ msgstr ""
 "ఎంచుకున్న గ్రహపు, దాన్నీ ఉపగ్రహాల కక్ష్యను చూడాలనుకుంటే ఈ వికల్పాన్ని అచేతనం"
 " చెయ్యండి"
 
-#: src/ui_viewDialog.h:2883
+#: src/ui_viewDialog.h:2893
 msgid "Only orbit for selected object"
 msgstr "ఎంచుకున్న వస్తువు కక్ష్య మాత్రమే"
 
-#: src/ui_viewDialog.h:2884
+#: src/ui_viewDialog.h:2894
 msgid "Show orbits"
 msgstr "కక్ష్యలను చూపించు"
 
-#: src/ui_viewDialog.h:2886
+#: src/ui_viewDialog.h:2896
 msgid "Show orbit even if planet is off screen"
 msgstr ""
 
-#: src/ui_viewDialog.h:2888
+#: src/ui_viewDialog.h:2898
 msgid "permanently"
 msgstr ""
 
-#: src/ui_viewDialog.h:2890
+#: src/ui_viewDialog.h:2900
 msgid "Configure colors of orbit lines"
 msgstr "కక్షయా రేఖల రంగులను కాన్ఫిగరు చెయ్యండి"
 
-#: src/ui_viewDialog.h:2892
+#: src/ui_viewDialog.h:2902
 msgid "Colors..."
 msgstr "రంగులు..."
 
-#: src/ui_viewDialog.h:2896
+#: src/ui_viewDialog.h:2906
 msgid "Use more accurate 3D models (where available)"
 msgstr "మరింత కచ్చితమైన 3D మోడళ్ళను వాడు (అందుబాటులో ఉన్నచోట్ల)"
 
-#: src/ui_viewDialog.h:2897
+#: src/ui_viewDialog.h:2907
 msgid "Planets magnitude algorithm:"
 msgstr "గ్రహాల పరిమాణ అల్గారిథమ్:"
 
-#: src/ui_viewDialog.h:2901
+#: src/ui_viewDialog.h:2911
 msgid "Simulate self-shadowing"
 msgstr "స్వీయ నీడలను సిమ్యులేట్ చెయ్యి"
 
-#: src/ui_viewDialog.h:2903
+#: src/ui_viewDialog.h:2913
 msgid "Color of trails"
 msgstr "జాడల రంగు"
 
-#: src/ui_viewDialog.h:2905
+#: src/ui_viewDialog.h:2915
 msgid "Show trails"
 msgstr "జాడలను చూపించు"
 
-#: src/ui_viewDialog.h:2906
+#: src/ui_viewDialog.h:2917
+msgid "Trails thickness"
+msgstr ""
+
+#: src/ui_viewDialog.h:2919
 msgid "Only orbits of major planets"
 msgstr "ముఖ్య గ్రహాల కక్ష్యలు మాత్రమే"
 
-#: src/ui_viewDialog.h:2908
+#: src/ui_viewDialog.h:2921
 msgid "Color of nomenclature labels"
 msgstr "పేర్ల రంగు"
 
-#: src/ui_viewDialog.h:2912
+#: src/ui_viewDialog.h:2925
 msgid "Show hints and labels for planetary features"
 msgstr "గ్రహ విశేషాలకు సూచనలు, లేబుళ్ళను చూపించు"
 
-#: src/ui_viewDialog.h:2914
+#: src/ui_viewDialog.h:2927
 msgid "Show planetary nomenclature"
 msgstr "గ్రహాల పేర్లను చూపించు"
 
-#: src/ui_viewDialog.h:2916
+#: src/ui_viewDialog.h:2929
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -9761,195 +9769,195 @@ msgstr ""
 "వాస్తవ కాంతి వేగపు ప్రభావాన్ని సిమ్యులేట్ చేసేందుకు ఈ వికల్పాన్ని చేతనం "
 "చెయ్యండి (చేస్తే మంచిది)"
 
-#: src/ui_viewDialog.h:2918
+#: src/ui_viewDialog.h:2931
 msgid "Simulate light speed"
 msgstr "కాంతి వేగాన్ని సిమ్యులేట్ చెయ్యి"
 
-#: src/ui_viewDialog.h:2921
+#: src/ui_viewDialog.h:2934
 msgid "Color of planet labels"
 msgstr "గ్రహాల లేబుళ్ళ రంగు"
 
-#: src/ui_viewDialog.h:2923
+#: src/ui_viewDialog.h:2936
 msgid "Scale minor bodies:"
 msgstr "చిన్న వస్తువులను స్కేలు చెయ్యి:"
 
-#: src/ui_viewDialog.h:2924
+#: src/ui_viewDialog.h:2937
 msgid "Scale Moon:"
 msgstr "చంద్రుడి స్కేలు:"
 
-#: src/ui_viewDialog.h:2926
+#: src/ui_viewDialog.h:2939
 msgid "Scale factor"
 msgstr "స్కేల్ ఫాక్టర్"
 
-#: src/ui_viewDialog.h:2929
+#: src/ui_viewDialog.h:2942
 msgid "Limit the magnitude of solar system objects"
 msgstr "సౌర కుటుంబ వస్తువుల పరిమాణాన్ని పరిమితించు"
 
-#: src/ui_viewDialog.h:2932
+#: src/ui_viewDialog.h:2945
 msgid "Use custom settings of GRS:"
 msgstr "GRS కు కస్టమ్ సెట్టింగులను వాడు:"
 
-#: src/ui_viewDialog.h:2933
+#: src/ui_viewDialog.h:2946
 msgid "GRS details..."
 msgstr "GRS వివరాలు..."
 
-#: src/ui_viewDialog.h:2934
+#: src/ui_viewDialog.h:2947
 msgid "Show planet markers"
 msgstr "గ్రహాల మార్కర్లను చూపించు"
 
-#: src/ui_viewDialog.h:2935
+#: src/ui_viewDialog.h:2948
 msgid "Display objects from catalogs"
 msgstr "క్యాటలాగుల నుండి వస్తువులను చూపించు"
 
-#: src/ui_viewDialog.h:2940
+#: src/ui_viewDialog.h:2953
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2943
+#: src/ui_viewDialog.h:2956
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2946
+#: src/ui_viewDialog.h:2959
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2952
+#: src/ui_viewDialog.h:2965
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2958
+#: src/ui_viewDialog.h:2971
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:2961
+#: src/ui_viewDialog.h:2974
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "హిక్సన్ కాంపాక్ట్ సమూహం (హిక్సన్+,1982)"
 
-#: src/ui_viewDialog.h:2964
+#: src/ui_viewDialog.h:2977
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2967
+#: src/ui_viewDialog.h:2980
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2970
+#: src/ui_viewDialog.h:2983
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:2973
+#: src/ui_viewDialog.h:2986
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2976
+#: src/ui_viewDialog.h:2989
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2979
+#: src/ui_viewDialog.h:2992
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2982
+#: src/ui_viewDialog.h:2995
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "HII ప్రాంతాల క్యాటలాగు (షార్ప్‌లెస్, 1959)"
 
-#: src/ui_viewDialog.h:2985
+#: src/ui_viewDialog.h:2998
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2988
+#: src/ui_viewDialog.h:3001
 msgid "Principal Galaxy Catalog"
 msgstr ""
 
-#: src/ui_viewDialog.h:2991
+#: src/ui_viewDialog.h:3004
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2994
+#: src/ui_viewDialog.h:3007
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2997
+#: src/ui_viewDialog.h:3010
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3000
+#: src/ui_viewDialog.h:3013
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3003
+#: src/ui_viewDialog.h:3016
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3006
+#: src/ui_viewDialog.h:3019
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3009
+#: src/ui_viewDialog.h:3022
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3012
+#: src/ui_viewDialog.h:3025
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:3017
+#: src/ui_viewDialog.h:3030
 msgctxt "other catalogs"
 msgid "Other"
 msgstr ""
 
-#: src/ui_viewDialog.h:3022
+#: src/ui_viewDialog.h:3035
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3024
+#: src/ui_viewDialog.h:3037
 msgid "Filter by type"
 msgstr ""
 
-#: src/ui_viewDialog.h:3029 src/ui_dsoColorsDialog.h:564
+#: src/ui_viewDialog.h:3042 src/ui_dsoColorsDialog.h:564
 msgid "Hydrogen regions"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3035 plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: src/ui_viewDialog.h:3048 plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Other"
 msgstr ""
 
-#: src/ui_viewDialog.h:3039
+#: src/ui_viewDialog.h:3052
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:3041
+#: src/ui_viewDialog.h:3054
 msgid "Use proportional hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:3043
+#: src/ui_viewDialog.h:3056
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
 
-#: src/ui_viewDialog.h:3045
+#: src/ui_viewDialog.h:3058
 msgid "Use surface brightness"
 msgstr "ఉపరితల ప్రకాశాన్ని వాడు"
 
-#: src/ui_viewDialog.h:3047
+#: src/ui_viewDialog.h:3060
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "సుదూరాకాశపు వస్తువుల పరిమణాన్ని పరిమితించు (ఉత్త కంటితో/బైనాక్యులర్లతో "
 "చూసేవారికి)."
 
-#: src/ui_viewDialog.h:3051
+#: src/ui_viewDialog.h:3064
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -9957,121 +9965,121 @@ msgstr ""
 "సుదూరాకాశపు వస్తువుల తెర చీటీలుగా వాటి సామాన్య నామాలను కాకుండా, వాటి హోదాలను"
 " చూపించు"
 
-#: src/ui_viewDialog.h:3053
+#: src/ui_viewDialog.h:3066
 msgid "Use designations for screen labels"
 msgstr "తెర చీటీలుగా హోదాలను వాడు"
 
-#: src/ui_viewDialog.h:3054 plugins/Satellites/src/ui_satellitesDialog.h:786
+#: src/ui_viewDialog.h:3067 plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Labels"
 msgstr "చీటీలు"
 
-#: src/ui_viewDialog.h:3055
+#: src/ui_viewDialog.h:3068
 msgid "Hints"
 msgstr "హింట్లు"
 
-#: src/ui_viewDialog.h:3056
+#: src/ui_viewDialog.h:3069
 msgid "Configure colors of markers"
 msgstr "సూచికల రంగులను కాన్ఫిగరు చెయ్యి"
 
-#: src/ui_viewDialog.h:3057
+#: src/ui_viewDialog.h:3070
 msgid "Use outlines for big deep-sky objects"
 msgstr "సుదూరాకాశపు పెద్ద వస్తువుల ఆకారరేఖను చూపించు"
 
-#: src/ui_viewDialog.h:3061
+#: src/ui_viewDialog.h:3074
 msgid "Limit angular size (arcmin):"
 msgstr "కోణీయ పరిమాణాన్ని పరిమితించు (arcmin):"
 
-#: src/ui_viewDialog.h:3063
+#: src/ui_viewDialog.h:3076
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "కనిపించే DSO ల కనిష్ఠ కోణీయ పరిమాణం, ఆర్క్‌మినిట్లలో"
 
-#: src/ui_viewDialog.h:3066
+#: src/ui_viewDialog.h:3079
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "కనిపించే DSO ల గరిష్ఠ కోణీయ పరిమాణం, ఆర్క్‌మినిట్లలో"
 
-#: src/ui_viewDialog.h:3068
+#: src/ui_viewDialog.h:3081
 msgid "Use additional names of DSO"
 msgstr "DSO ల అదనపు పేర్లను వాడు"
 
-#: src/ui_viewDialog.h:3069
+#: src/ui_viewDialog.h:3082
 msgid "Celestial Sphere"
 msgstr "ఖగోళ గోళం"
 
-#: src/ui_viewDialog.h:3071
+#: src/ui_viewDialog.h:3084
 msgid "Show Prime (East-West) Vertical."
 msgstr "ప్రైమ్ (తూర్పు-పడమర) వర్టికల్‌ను చూపించు."
 
-#: src/ui_viewDialog.h:3075
+#: src/ui_viewDialog.h:3088
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "జ్యోతిశ్చక ధ్రువాల (జె2000.0) రంగు"
 
-#: src/ui_viewDialog.h:3078 src/ui_viewDialog.h:3090 src/ui_viewDialog.h:3156
-#: src/ui_viewDialog.h:3222 src/ui_viewDialog.h:3226 src/ui_viewDialog.h:3241
-#: src/ui_viewDialog.h:3249 src/ui_viewDialog.h:3265 src/ui_viewDialog.h:3337
-#: src/ui_viewDialog.h:3369 src/ui_viewDialog.h:3373 src/ui_viewDialog.h:3383
+#: src/ui_viewDialog.h:3091 src/ui_viewDialog.h:3103 src/ui_viewDialog.h:3169
+#: src/ui_viewDialog.h:3235 src/ui_viewDialog.h:3239 src/ui_viewDialog.h:3254
+#: src/ui_viewDialog.h:3262 src/ui_viewDialog.h:3278 src/ui_viewDialog.h:3350
+#: src/ui_viewDialog.h:3382 src/ui_viewDialog.h:3386 src/ui_viewDialog.h:3396
 msgid "Label partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3082
+#: src/ui_viewDialog.h:3095
 msgid "Color of the solstice points (J2000.0)"
 msgstr "అయన బిందువుల రంగు (జె2000.0)"
 
-#: src/ui_viewDialog.h:3086 src/ui_viewDialog.h:3107 src/ui_viewDialog.h:3117
-#: src/ui_viewDialog.h:3133 src/ui_viewDialog.h:3137 src/ui_viewDialog.h:3189
-#: src/ui_viewDialog.h:3212 src/ui_viewDialog.h:3237 src/ui_viewDialog.h:3245
-#: src/ui_viewDialog.h:3269 src/ui_viewDialog.h:3281 src/ui_viewDialog.h:3285
+#: src/ui_viewDialog.h:3099 src/ui_viewDialog.h:3120 src/ui_viewDialog.h:3130
+#: src/ui_viewDialog.h:3146 src/ui_viewDialog.h:3150 src/ui_viewDialog.h:3202
+#: src/ui_viewDialog.h:3225 src/ui_viewDialog.h:3250 src/ui_viewDialog.h:3258
+#: src/ui_viewDialog.h:3282 src/ui_viewDialog.h:3294 src/ui_viewDialog.h:3298
 msgid "Show partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3094
+#: src/ui_viewDialog.h:3107
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "మధ్య రేఖ అల్లిక (జె2000.0) రంగు"
 
-#: src/ui_viewDialog.h:3097
+#: src/ui_viewDialog.h:3110
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "జ్యోతిశ్చక్ర అల్లిక (జె2000) రంగు"
 
-#: src/ui_viewDialog.h:3100
+#: src/ui_viewDialog.h:3113
 msgid "Color of ecliptic (J2000.0)"
 msgstr "జ్యోతిశ్చక్రపు రంగు (జె2000.0)"
 
-#: src/ui_viewDialog.h:3103
+#: src/ui_viewDialog.h:3116
 msgid "Show Galactic equator line."
 msgstr "గాలక్టిక్ మధ్యరేఖను చూపించు."
 
-#: src/ui_viewDialog.h:3111
+#: src/ui_viewDialog.h:3124
 msgid "Color of circumpolar circles"
 msgstr "పరిధ్రువ వృత్తాల రంగు"
 
-#: src/ui_viewDialog.h:3114
+#: src/ui_viewDialog.h:3127
 msgid "Color of the equinox points (J2000.0)"
 msgstr "విషువత్తు బిందువుల రంగు (జె2000.0)"
 
-#: src/ui_viewDialog.h:3121
+#: src/ui_viewDialog.h:3134
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "ఖగోళ ధ్రువాల (జె2000.0) రంగు"
 
-#: src/ui_viewDialog.h:3124
+#: src/ui_viewDialog.h:3137
 msgid "Color of ecliptic poles (of date)"
 msgstr "జ్యోతిశ్చక ధ్రువాల (ఆనాటి) రంగు"
 
-#: src/ui_viewDialog.h:3127
+#: src/ui_viewDialog.h:3140
 msgid "Color of the equatorial grid (of date)"
 msgstr "మధ్య రేఖ అల్లిక (ఆనాటి) రంగు"
 
-#: src/ui_viewDialog.h:3130
+#: src/ui_viewDialog.h:3143
 msgid "Color of the galactic grid"
 msgstr "గాలక్టిక్ అల్లిక"
 
-#: src/ui_viewDialog.h:3141
+#: src/ui_viewDialog.h:3154
 msgid "Color of Prime Vertical"
 msgstr "ప్రైమ్ వర్టికల్ రంగు"
 
-#: src/ui_viewDialog.h:3144
+#: src/ui_viewDialog.h:3157
 msgid "Color of cardinal points"
 msgstr "నాల్గు దిక్కుల రంగు"
 
-#: src/ui_viewDialog.h:3148
+#: src/ui_viewDialog.h:3161
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -10079,73 +10087,73 @@ msgstr ""
 "అపోజిషన్/కంజంక్షన్ రేఖాంశ రేఖ - రెండు జ్యోతిశ్చక్ర ధ్రువాలు, సూర్యుడు, "
 "అపోజిషన్ బిందువులన్నిటి గుండా పోయే జ్యోతిశ్చక్ర రేఖాంశ రేఖ."
 
-#: src/ui_viewDialog.h:3152
+#: src/ui_viewDialog.h:3165
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "డి వాకొల్యూర్ సూపర్‌గాలక్టిక్ కోఆర్డినేట్ల (1976) మధ్యరేఖను చూపించు"
 
-#: src/ui_viewDialog.h:3158
+#: src/ui_viewDialog.h:3171
 msgid "Precession circles"
 msgstr "ప్రిసెషన్ వృత్తాలు"
 
-#: src/ui_viewDialog.h:3160
+#: src/ui_viewDialog.h:3173
 msgid "Color of galactic poles"
 msgstr "గాలక్టిక్ ధ్రువాల రంగు"
 
-#: src/ui_viewDialog.h:3162
+#: src/ui_viewDialog.h:3175
 msgid "Solstices (J2000)"
 msgstr "అయనాలు (జె2000)"
 
-#: src/ui_viewDialog.h:3165
+#: src/ui_viewDialog.h:3178
 msgid "Zenith and Nadir"
 msgstr "ఊర్థ్వ అధో బిందువులు"
 
-#: src/ui_viewDialog.h:3167
+#: src/ui_viewDialog.h:3180
 msgid "Color of horizon"
 msgstr "దిగంతపు రంగు"
 
-#: src/ui_viewDialog.h:3170
+#: src/ui_viewDialog.h:3183
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "జె2000.0 యొక్క జ్యోతిశ్చక్రపు రేఖను చూపించు (VSOP87A ప్రాథమిక తలం)"
 
-#: src/ui_viewDialog.h:3174
+#: src/ui_viewDialog.h:3187
 msgid "Color of antisolar point"
 msgstr "యాంటీసోలార్ బిందువు రంగు"
 
-#: src/ui_viewDialog.h:3178
+#: src/ui_viewDialog.h:3191
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "ఆల్టిట్యూడ్లు, అజిముత్ (ఉత్తరం నుండి తూర్పు వైపు లెక్కిస్తాం)"
 
-#: src/ui_viewDialog.h:3182
+#: src/ui_viewDialog.h:3195
 msgid "Color of colures"
 msgstr "అయనాంత వృత్తాల రంగు"
 
-#: src/ui_viewDialog.h:3185
+#: src/ui_viewDialog.h:3198
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "జె2000 కు జ్యోతిశ్చక్ర కోఆర్డినేట్లు"
 
-#: src/ui_viewDialog.h:3187
+#: src/ui_viewDialog.h:3200
 msgid "Ecliptic grid (J2000)"
 msgstr "జ్యోతిశ్చక్ర అల్లిక (జె2000)"
 
-#: src/ui_viewDialog.h:3193
+#: src/ui_viewDialog.h:3206
 msgid "Color of supergalactic poles"
 msgstr "సూపర్‌గాలక్టిక్ ధ్రువాల రంగు"
 
-#: src/ui_viewDialog.h:3196
+#: src/ui_viewDialog.h:3209
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
 msgstr ""
 
-#: src/ui_viewDialog.h:3200
+#: src/ui_viewDialog.h:3213
 msgid "Show ecliptic line of current date."
 msgstr "వర్తమాన తేదీకి జ్యోతిశ్చక్ర రేఖను చూపించు."
 
-#: src/ui_viewDialog.h:3203
+#: src/ui_viewDialog.h:3216
 msgid "Equinoxes (J2000)"
 msgstr "విషువత్తులు (జె2000)"
 
-#: src/ui_viewDialog.h:3205
+#: src/ui_viewDialog.h:3218
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
@@ -10153,77 +10161,77 @@ msgstr ""
 "ఈ వృత్తాలు గణిత దిగంతనికి ఎల్లప్పుడూ పైన (వరుసగా కింద) ఉండే నక్షత్రాలను "
 "విడిగా చూపిస్తాయి"
 
-#: src/ui_viewDialog.h:3207
+#: src/ui_viewDialog.h:3220
 msgid "Circumpolar circles"
 msgstr "పరిధ్రువ వృత్తాలు"
 
-#: src/ui_viewDialog.h:3209
+#: src/ui_viewDialog.h:3222
 msgid "Color of Apex and Antapex points"
 msgstr ""
 
-#: src/ui_viewDialog.h:3216
+#: src/ui_viewDialog.h:3229
 msgid "Color of equator (J2000.0)"
 msgstr "మధ్యరేఖ రంగు (జె2000.0)"
 
-#: src/ui_viewDialog.h:3219
+#: src/ui_viewDialog.h:3232
 msgid "Color of equator (of date)"
 msgstr "మధ్యరేఖ రంగు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3224
+#: src/ui_viewDialog.h:3237
 msgid "Ecliptic (of date)"
 msgstr "జ్యోతిశ్చక్రం (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3228
+#: src/ui_viewDialog.h:3241
 msgid "Colures"
 msgstr "అయనాంత వృత్తాలు"
 
-#: src/ui_viewDialog.h:3230
+#: src/ui_viewDialog.h:3243
 msgid "Color of the supergalactic grid"
 msgstr "సూపర్‌గాలక్టిక్ అల్లిక రంగు"
 
-#: src/ui_viewDialog.h:3233
+#: src/ui_viewDialog.h:3246
 msgid "Show celestial equator of current planet and date."
 msgstr "వర్తమాన గ్రహానికి వర్తమాన తేదీకి ఖగోళ మధ్యరేఖను చూపించు"
 
-#: src/ui_viewDialog.h:3243
+#: src/ui_viewDialog.h:3256
 msgid "Equator (of date)"
 msgstr "మధ్యరేఖ (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3253
+#: src/ui_viewDialog.h:3266
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "అయనాంత వృత్తాలను చూపించు (ధ్రువాలు, అయనాలు/విష్వత్తుల గుండా పోయే మహా "
 "వృత్తాలు)."
 
-#: src/ui_viewDialog.h:3257
+#: src/ui_viewDialog.h:3270
 msgid "Show celestial poles of J2000.0."
 msgstr "జె2000.0 యొక్క ఖగోళ ధ్రువాలను చూపించు"
 
-#: src/ui_viewDialog.h:3259
+#: src/ui_viewDialog.h:3272
 msgid "Celestial poles (J2000)"
 msgstr "ఖగోళ ధ్రువాలు (జె2000)"
 
-#: src/ui_viewDialog.h:3261
+#: src/ui_viewDialog.h:3274
 msgid "Show celestial equator of J2000.0."
 msgstr "జె2000.0 యొక్క ఖగోళ మధ్యరేఖను చూపించు"
 
-#: src/ui_viewDialog.h:3273
+#: src/ui_viewDialog.h:3286
 msgid "Color of meridian"
 msgstr "మధ్యాహ్నరేఖ రంగు"
 
-#: src/ui_viewDialog.h:3275
+#: src/ui_viewDialog.h:3288
 msgid "Solstices (of date)"
 msgstr "అయనాలు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3277
+#: src/ui_viewDialog.h:3290
 msgid "Labels for the Cardinal and Ordinal directions."
 msgstr "నాలుగు దిక్కులు, నాలుగు మూలల చీటీలు"
 
-#: src/ui_viewDialog.h:3289
+#: src/ui_viewDialog.h:3302
 msgid "Color of the equinox points (of date)"
 msgstr "విషువత్తు బిందువుల రంగు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3292
+#: src/ui_viewDialog.h:3305
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -10231,11 +10239,11 @@ msgstr ""
 "జ్యోతిశ్చక్ర ధ్రువాల చుట్టూ చలించేటపుడు భూమి అక్షం గీసే క్షణిక వృత్తాలు "
 "(ఇన్‌స్టంటేనియస్ వృత్తాలు). భూమిపై మాత్రమే చూపిస్తాం."
 
-#: src/ui_viewDialog.h:3296
+#: src/ui_viewDialog.h:3309
 msgid "Color of FOV center marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:3299
+#: src/ui_viewDialog.h:3312
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -10243,310 +10251,310 @@ msgstr ""
 "దగ్గర్లోని నక్షత్ర మండలాల విస్తరణ నిర్వచించే డి వాకొల్యూర్ సూపర్‌గలక్టిక్ "
 "కోఆర్డినేట్లను (1976) చూపించు"
 
-#: src/ui_viewDialog.h:3303
+#: src/ui_viewDialog.h:3316
 msgid "The line thickness for circle partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3305
+#: src/ui_viewDialog.h:3318
 msgid "Partition thickness"
 msgstr ""
 
-#: src/ui_viewDialog.h:3307
+#: src/ui_viewDialog.h:3320
 msgid "Show ecliptic poles of J2000.0"
 msgstr "జె2000.0 యొక్క జ్యోతిశ్చక్ర ధ్రువాలను చూపించు"
 
-#: src/ui_viewDialog.h:3309
+#: src/ui_viewDialog.h:3322
 msgid "Ecliptic poles (J2000)"
 msgstr "జ్యోతిశ్చక్ర ధ్రువాలు (జె2000)"
 
-#: src/ui_viewDialog.h:3311
+#: src/ui_viewDialog.h:3324
 msgid "Show meridian line."
 msgstr "మధ్యాహ్నరేఖను చూపించు"
 
-#: src/ui_viewDialog.h:3314
+#: src/ui_viewDialog.h:3327
 msgid "Equinoxes (of date)"
 msgstr "విషువత్తులు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3316
+#: src/ui_viewDialog.h:3329
 msgid "The line thickness for grids and lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3318
+#: src/ui_viewDialog.h:3331
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
 msgid "Line thickness"
 msgstr ""
 
-#: src/ui_viewDialog.h:3320
+#: src/ui_viewDialog.h:3333
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "అపోజిషన్/కంజంక్షన్ రేఖాంశ రేఖ రంగు"
 
-#: src/ui_viewDialog.h:3323
+#: src/ui_viewDialog.h:3336
 msgid "Color of ecliptic (of date)"
 msgstr "జ్యోతిశ్చక్రపు రంగు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3326
+#: src/ui_viewDialog.h:3339
 msgid "Color of Zenith and Nadir"
 msgstr "ఊర్థ్వ, అధో బిందువుల రంగు"
 
-#: src/ui_viewDialog.h:3329
+#: src/ui_viewDialog.h:3342
 msgid "Show mathematical horizon line."
 msgstr "గణిత దిగంతపు రేఖను చూపించు."
 
-#: src/ui_viewDialog.h:3333
+#: src/ui_viewDialog.h:3346
 msgid "Equatorial coordinates of current date and planet."
 msgstr "వర్తమాన తేదీన, వర్తమాన గ్రహానికి మధ్యరేఖా కోఆర్డినేట్లు"
 
-#: src/ui_viewDialog.h:3335
+#: src/ui_viewDialog.h:3348
 msgid "Equatorial grid (of date)"
 msgstr "మధ్య రేఖ అల్లిక (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3339
+#: src/ui_viewDialog.h:3352
 msgid "Ecliptic (J2000)"
 msgstr "జ్యోతిశ్చక్రం (జె2000.0)"
 
-#: src/ui_viewDialog.h:3341
+#: src/ui_viewDialog.h:3354
 msgid "Color of galactic equator"
 msgstr "గాలక్టిక్ మధ్యరేఖ రంగు"
 
-#: src/ui_viewDialog.h:3344
+#: src/ui_viewDialog.h:3357
 msgid "Equatorial coordinates of J2000.0."
 msgstr "జె2000.0. యొక్క మధ్య రేఖా కోఆర్డినేట్లు"
 
-#: src/ui_viewDialog.h:3346
+#: src/ui_viewDialog.h:3359
 msgid "Equatorial grid (J2000)"
 msgstr "మధ్య రేఖ అల్లిక (జె2000.0)"
 
-#: src/ui_viewDialog.h:3348
+#: src/ui_viewDialog.h:3361
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "గాలక్టిక్ కోఆర్డినేట్లు, సిస్టమ్ II (IAU 1958)."
 
-#: src/ui_viewDialog.h:3352
+#: src/ui_viewDialog.h:3365
 msgid "Show celestial poles of current planet and date."
 msgstr "వర్తమాన గ్రహానికి, వర్తమాన తేదీకి ఖగోళ ధ్రువాలను చూపించు"
 
-#: src/ui_viewDialog.h:3354
+#: src/ui_viewDialog.h:3367
 msgid "Celestial poles (of date)"
 msgstr "ఖగోళ ధ్రువాలు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3356
+#: src/ui_viewDialog.h:3369
 msgid "Color of the solstice points (of date)"
 msgstr "అయన బిందువుల రంగు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3360
+#: src/ui_viewDialog.h:3373
 msgid "Color of celestial poles (of date)"
 msgstr "ఖగోళ ధ్రువాల (ఆనాటి) రంగు"
 
-#: src/ui_viewDialog.h:3363
+#: src/ui_viewDialog.h:3376
 msgid "Color of precession circles"
 msgstr "ప్రిసెషన్ వృత్తాల రంగు"
 
-#: src/ui_viewDialog.h:3366
+#: src/ui_viewDialog.h:3379
 msgid "Color of the ecliptical grid (of date)"
 msgstr "జ్యోతిశ్చక్ర అల్లిక (ఆనాటి) రంగు"
 
-#: src/ui_viewDialog.h:3371
+#: src/ui_viewDialog.h:3384
 msgid "Equator (J2000)"
 msgstr "మధ్యరేఖ (జె2000)"
 
-#: src/ui_viewDialog.h:3377
+#: src/ui_viewDialog.h:3390
 msgid "Color of the azimuthal grid"
 msgstr "అజిముతల్ అల్లిక రంగు"
 
-#: src/ui_viewDialog.h:3380
+#: src/ui_viewDialog.h:3393
 msgid "Color of supergalactic equator"
 msgstr "సూపర్‌గాలక్టిక్ మధ్యరేఖ రంగు"
 
-#: src/ui_viewDialog.h:3387
+#: src/ui_viewDialog.h:3400
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "వర్తమాన తేదీకి జ్యోతిశ్చక్ర కోఆర్డినేట్లు. భూమిపై మాత్రమే చూపిస్తాం."
 
-#: src/ui_viewDialog.h:3389
+#: src/ui_viewDialog.h:3402
 msgid "Ecliptic grid (of date)"
 msgstr "జ్యోతిశ్చక్ర అల్లిక (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3391
+#: src/ui_viewDialog.h:3404
 msgid "Show ecliptic poles of current date."
 msgstr "వర్తమాన తేదీ యొక్క జ్యోతిశ్చక్ర ధ్రువాలను చూపించు."
 
-#: src/ui_viewDialog.h:3393
+#: src/ui_viewDialog.h:3406
 msgid "Ecliptic poles (of date)"
 msgstr "జ్యోతిశ్చక్ర ధ్రువాలు (ఆనాటి)"
 
-#: src/ui_viewDialog.h:3396
+#: src/ui_viewDialog.h:3409
 msgid "Color of FOV circle marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:3400
+#: src/ui_viewDialog.h:3413
 msgid "Show fog"
 msgstr "పొగమంచును చూపించు"
 
-#: src/ui_viewDialog.h:3401
+#: src/ui_viewDialog.h:3414
 msgid "Use associated planet and position"
 msgstr "అనుబంధ గ్రహాన్ని, స్థానాన్నీ చూపించు"
 
-#: src/ui_viewDialog.h:3402
+#: src/ui_viewDialog.h:3415
 msgid "Use this landscape as default"
 msgstr "ఈ ల్యాండ్‌స్కేపును డిఫాల్టుగా వాడు"
 
-#: src/ui_viewDialog.h:3403
+#: src/ui_viewDialog.h:3416
 msgid "Show ground"
 msgstr "నేలను చూపించు"
 
-#: src/ui_viewDialog.h:3405
+#: src/ui_viewDialog.h:3418
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "చీకట్లో కూడా ల్యండ్‌స్కేపు కనబడేలా కనీస మాత్రపు కాంతిని వాడు"
 
-#: src/ui_viewDialog.h:3407
+#: src/ui_viewDialog.h:3420
 msgid "Minimal brightness:"
 msgstr "కనీసమాత్రపు ప్రకాశం:"
 
-#: src/ui_viewDialog.h:3409
+#: src/ui_viewDialog.h:3422
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "విలువ రేంజి 0..1 (రాత్రివేళ ల్యాండ్‌స్కేపు నల్లగ - ల్యాండ్‌స్కేపు పూర్తిగా "
 "ప్రకాశవంతం)"
 
-#: src/ui_viewDialog.h:3412
+#: src/ui_viewDialog.h:3425
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "landscape.ini లో చూపినట్లుగా కనీస ప్రకాశాన్ని వాడు"
 
-#: src/ui_viewDialog.h:3414
+#: src/ui_viewDialog.h:3427
 msgid "from landscape, if given"
 msgstr "ల్యాండ్‌స్కేపు నుండి, అందులో ఇచ్చి ఉంటే"
 
-#: src/ui_viewDialog.h:3416
+#: src/ui_viewDialog.h:3429
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "వెలుతురు పొరను చూపించు (ప్రకాశవంతమైన కిటికీలు, కాంతి కాలుష్యం, మొ.)"
 
-#: src/ui_viewDialog.h:3418
+#: src/ui_viewDialog.h:3431
 msgid "Show illumination "
 msgstr "వెలుతురును చూపించు"
 
-#: src/ui_viewDialog.h:3419
+#: src/ui_viewDialog.h:3432
 msgid "Show landscape labels"
 msgstr "ల్యాండ్‌స్కేపు చీటీలను చూపించు"
 
-#: src/ui_viewDialog.h:3420
+#: src/ui_viewDialog.h:3433
 msgid "Add/remove landscapes..."
 msgstr "ల్యాండ్‌స్కేపులను చేర్చు/తీసివెయ్యి"
 
-#: src/ui_viewDialog.h:3423
+#: src/ui_viewDialog.h:3436
 msgid "Use native names for planets from current culture"
 msgstr "వర్తమాన సంస్కృతి నుండి గ్రహాల స్థానీయ పేర్లను తీసుకో"
 
-#: src/ui_viewDialog.h:3425
+#: src/ui_viewDialog.h:3438
 msgid "Use native names for planets"
 msgstr "గ్రహాల స్థానీయ పేర్లను వాడు"
 
-#: src/ui_viewDialog.h:3427
+#: src/ui_viewDialog.h:3440
 msgid "Color of constellation names"
 msgstr "రాశుల పేర్ల రంగులు"
 
-#: src/ui_viewDialog.h:3429
+#: src/ui_viewDialog.h:3442
 msgid "Show labels"
 msgstr "చీటీలను చూపించు"
 
-#: src/ui_viewDialog.h:3431
+#: src/ui_viewDialog.h:3444
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "పేర్లు పొట్టిగానా, ఉన్నవి ఉన్నట్టుగానా, అనువాదాలు గానా - ఎలా కావాలో "
 "ఎంచుకోండి"
 
-#: src/ui_viewDialog.h:3435
+#: src/ui_viewDialog.h:3448
 msgid "Color of asterism lines"
 msgstr "ఏస్టెరిజమ్ రేఖలు"
 
-#: src/ui_viewDialog.h:3437
+#: src/ui_viewDialog.h:3450
 msgid "Show asterism lines"
 msgstr "ఏస్టెరిజమ్ రేఖలను చూపించు"
 
-#: src/ui_viewDialog.h:3439 src/ui_viewDialog.h:3449 src/ui_viewDialog.h:3456
-#: src/ui_viewDialog.h:3464
+#: src/ui_viewDialog.h:3452 src/ui_viewDialog.h:3462 src/ui_viewDialog.h:3469
+#: src/ui_viewDialog.h:3477
 msgid "Thickness of line in pixels"
 msgstr "రేఖ మందం పిక్సెళ్ళలో"
 
-#: src/ui_viewDialog.h:3442
+#: src/ui_viewDialog.h:3455
 msgid "Color of constellation boundaries"
 msgstr "రాశుల హద్దుల రంగు"
 
-#: src/ui_viewDialog.h:3445
+#: src/ui_viewDialog.h:3458
 msgid "Show boundaries of constellations"
 msgstr "రాశుల హద్దులను చూపించు"
 
-#: src/ui_viewDialog.h:3447
+#: src/ui_viewDialog.h:3460
 msgid "Show boundaries"
 msgstr "హద్దులను చూపించు"
 
-#: src/ui_viewDialog.h:3452
+#: src/ui_viewDialog.h:3465
 msgid "Color of ray helpers"
 msgstr "రే హెల్పర్ల రంగు"
 
-#: src/ui_viewDialog.h:3454
+#: src/ui_viewDialog.h:3467
 msgid "Show ray helpers"
 msgstr "రే హెల్పర్లను చూపించు"
 
-#: src/ui_viewDialog.h:3458
+#: src/ui_viewDialog.h:3471
 msgid "Show art in brightness"
 msgstr "కళను ప్రకాశంగా చూపించు"
 
-#: src/ui_viewDialog.h:3460
+#: src/ui_viewDialog.h:3473
 msgid "Color of constellation lines"
 msgstr "రాశుల రేఖల రంగు"
 
-#: src/ui_viewDialog.h:3462
+#: src/ui_viewDialog.h:3475
 msgid "Show constellation lines"
 msgstr "రాశుల రేఖలను చూపించు"
 
-#: src/ui_viewDialog.h:3466
+#: src/ui_viewDialog.h:3479
 msgid "Use this sky culture as default"
 msgstr "ఈ ఖగోళ సంస్కృతిని డిఫాల్టుగా వాడు"
 
-#: src/ui_viewDialog.h:3468
+#: src/ui_viewDialog.h:3481
 msgid "Color of asterism names"
 msgstr "ఏస్టెరిజమ్ పేర్ల రంగు"
 
-#: src/ui_viewDialog.h:3470
+#: src/ui_viewDialog.h:3483
 msgid "Show asterism labels"
 msgstr "ఏస్టెరిజమ్ చీటీలను చూపించు"
 
-#: src/ui_viewDialog.h:3471
+#: src/ui_viewDialog.h:3484
 msgid "Constellations font size"
 msgstr "రాశుల ఫాంట్ సైజు"
 
-#: src/ui_viewDialog.h:3472
+#: src/ui_viewDialog.h:3485
 msgid "Asterisms font size"
 msgstr "ఏస్టెరిజమ్ ఫాంట్ సైజు"
 
-#: src/ui_viewDialog.h:3479
+#: src/ui_viewDialog.h:3492
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "SSO"
 
-#: src/ui_viewDialog.h:3484
+#: src/ui_viewDialog.h:3497
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:3486
+#: src/ui_viewDialog.h:3499
 msgid "Deep-Sky Objects"
 msgstr "సుదూరాకాశపు వస్తువులు"
 
-#: src/ui_viewDialog.h:3489
+#: src/ui_viewDialog.h:3502
 msgid "Markings"
 msgstr "సుచికలు"
 
-#: src/ui_viewDialog.h:3491
+#: src/ui_viewDialog.h:3504
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Landscape"
 msgstr "ల్యాండ్‌స్కేపు"
 
-#: src/ui_viewDialog.h:3493
+#: src/ui_viewDialog.h:3506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "స్టార్‌లోర్"
 
-#: src/ui_viewDialog.h:3495
+#: src/ui_viewDialog.h:3508
 msgid "Surveys"
 msgstr "సర్వేలు"
 
@@ -10720,7 +10728,7 @@ msgstr "ఉన్నదంతా"
 msgid "Display no information"
 msgstr "సమాచారం దేన్నీ చూపించవద్దు"
 
-#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2347
+#: src/ui_configurationDialog.h:1596 plugins/Oculars/src/Oculars.cpp:2355
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr ""
@@ -11600,7 +11608,7 @@ msgstr "ప్రస్తుత ఖగోళ వస్తువుకు పర
 msgid "magnitudes"
 msgstr "పరిమాణాలు"
 
-#: src/ui_astroCalcDialog.h:1635 src/ui_astroCalcExtraEphemerisDialog.h:144
+#: src/ui_astroCalcDialog.h:1635 src/ui_astroCalcExtraEphemerisDialog.h:165
 msgid "Extra options for ephemeris visualization"
 msgstr ""
 
@@ -11905,20 +11913,24 @@ msgid ""
 "bodies"
 msgstr "ఎంచుకున్న ఖగోళ వస్తువుల మధ్య రేఖా, కోణీయ దూరాల మధ్య వచ్చిన మార్పు"
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:142
+#: src/ui_astroCalcExtraEphemerisDialog.h:163
 msgid "Extra options"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:145
+#: src/ui_astroCalcExtraEphemerisDialog.h:166
 msgid "Label each N steps, where N is"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:146
+#: src/ui_astroCalcExtraEphemerisDialog.h:167
 msgid "Use smart format for dates"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:147
+#: src/ui_astroCalcExtraEphemerisDialog.h:168
 msgid "Use small markers, when line is enabled"
+msgstr ""
+
+#: src/ui_astroCalcExtraEphemerisDialog.h:169
+msgid "Ephemeris line thickness:"
 msgstr ""
 
 #: src/ui_bookmarksDialog.h:207
@@ -12631,7 +12643,7 @@ msgstr "దిగంతంపై దిక్సూచి బేరింగు 
 msgid "Compass marks"
 msgstr "దిక్సూచి గుర్తులు"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1429
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1361
 msgid "Oculars"
@@ -12647,118 +12659,118 @@ msgstr ""
 "(పరిమాణం, దృశ్యపరిషిని మాత్రమే సిమ్యులేటు చేస్తుంది). సెన్సరు ఫ్రేమును, "
 "టెల్‌రాడ్ దృశ్యాన్నీ కూడా చూపించగలదు."
 
-#: plugins/Oculars/src/Oculars.cpp:912
+#: plugins/Oculars/src/Oculars.cpp:920
 msgid "Please select an object before switching to ocular view."
 msgstr "ఆక్యులర్ వ్యూకు వెళ్ళే ముందు ఒక వస్తువును ఎంచుకోండి."
 
-#: plugins/Oculars/src/Oculars.cpp:1018
+#: plugins/Oculars/src/Oculars.cpp:1026
 msgid "&Previous ocular"
 msgstr "&Previous ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1019
+#: plugins/Oculars/src/Oculars.cpp:1027
 msgid "&Next ocular"
 msgstr "&Next ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1020
+#: plugins/Oculars/src/Oculars.cpp:1028
 msgid "Select &ocular"
 msgstr "Select &ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1063
+#: plugins/Oculars/src/Oculars.cpp:1071
 msgid "Toggle &crosshair"
 msgstr "Toggle &crosshair"
 
-#: plugins/Oculars/src/Oculars.cpp:1073
+#: plugins/Oculars/src/Oculars.cpp:1081
 msgid "Configure &Oculars"
 msgstr "Configure &Oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1082
+#: plugins/Oculars/src/Oculars.cpp:1090
 msgid "Toggle &CCD"
 msgstr "Toggle &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1090
+#: plugins/Oculars/src/Oculars.cpp:1098
 msgid "Toggle &Telrad"
 msgstr "Toggle &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1099
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "&Previous CCD"
 msgstr "&Previous CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1100
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "&Next CCD"
 msgstr "&Next CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1101
+#: plugins/Oculars/src/Oculars.cpp:1109
 msgid "&Select CCD"
 msgstr "&Select CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1123
+#: plugins/Oculars/src/Oculars.cpp:1131
 msgid "&Rotate CCD"
 msgstr "&Rotate CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1145
+#: plugins/Oculars/src/Oculars.cpp:1153
 msgid "&Reset rotation"
 msgstr "&Reset rotation"
 
-#: plugins/Oculars/src/Oculars.cpp:1422
+#: plugins/Oculars/src/Oculars.cpp:1430
 #: plugins/Oculars/src/ui_ocularDialog.h:1390
 msgid "Ocular view"
 msgstr "అక్యులర్ వ్యూ"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Oculars popup menu"
 msgstr "ఆక్యులర్స్ పాపప్ మెనూ"
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1432
 msgid "Show crosshairs"
 msgstr "క్రాస్‌హెయిర్స్ ను చూపించు"
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1433
 msgid "Image sensor frame"
 msgstr "ఇమేజ్ సెన్సర్ ఫ్రేము"
 
-#: plugins/Oculars/src/Oculars.cpp:1426
+#: plugins/Oculars/src/Oculars.cpp:1434
 msgid "Telrad sight"
 msgstr "టెల్‌రాడ్ దృశ్యం"
 
-#: plugins/Oculars/src/Oculars.cpp:1427
+#: plugins/Oculars/src/Oculars.cpp:1435
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1428
+#: plugins/Oculars/src/Oculars.cpp:1436
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1430
+#: plugins/Oculars/src/Oculars.cpp:1438
 msgid "Select next telescope"
 msgstr "తరువతి టెలిస్కోపును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1432
+#: plugins/Oculars/src/Oculars.cpp:1440
 msgid "Select previous telescope"
 msgstr "గత టెలిస్కోపును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1442
 msgid "Select next eyepiece"
 msgstr "తరువతి ఐపీసును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1436
+#: plugins/Oculars/src/Oculars.cpp:1444
 msgid "Select previous eyepiece"
 msgstr "గత ఐపీసును ఎంచుకోండి"
 
-#: plugins/Oculars/src/Oculars.cpp:1437
+#: plugins/Oculars/src/Oculars.cpp:1445
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1438
+#: plugins/Oculars/src/Oculars.cpp:1446
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1643
+#: plugins/Oculars/src/Oculars.cpp:1651
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "క్రాస్ యొక్క RA/Dec (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1654
+#: plugins/Oculars/src/Oculars.cpp:1662
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
@@ -12787,121 +12799,121 @@ msgstr ""
 "&Previous telescope\n"
 "&Next telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1681
 msgctxt "pixel"
 msgid "px"
 msgstr "=\"`\"&A2478&\"`\""
 
-#: plugins/Oculars/src/Oculars.cpp:1898
+#: plugins/Oculars/src/Oculars.cpp:1906
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "ఆక్యులర్"
 
-#: plugins/Oculars/src/Oculars.cpp:1900
+#: plugins/Oculars/src/Oculars.cpp:1908
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "బైనాక్యులర్"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1928
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Ocular FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1927
+#: plugins/Oculars/src/Oculars.cpp:1935
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Ocular aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1938
+#: plugins/Oculars/src/Oculars.cpp:1946
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "లెన్స్ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1942
+#: plugins/Oculars/src/Oculars.cpp:1950
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "లెన్స్ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1947
+#: plugins/Oculars/src/Oculars.cpp:1955
 msgid "Lens: none"
 msgstr "లెన్స్: ఏదీలేదు"
 
-#: plugins/Oculars/src/Oculars.cpp:1962 plugins/Oculars/src/Oculars.cpp:2022
+#: plugins/Oculars/src/Oculars.cpp:1970 plugins/Oculars/src/Oculars.cpp:2030
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "టెలిస్కోపు #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1971
+#: plugins/Oculars/src/Oculars.cpp:1979
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 #, qt-format
 msgid "Magnification: %1"
 msgstr "సంవర్ధనం: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1978
+#: plugins/Oculars/src/Oculars.cpp:1986
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Exit pupil: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1985
+#: plugins/Oculars/src/Oculars.cpp:1993
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2006
+#: plugins/Oculars/src/Oculars.cpp:2014
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "కొలతలు: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2010
+#: plugins/Oculars/src/Oculars.cpp:2018
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "సెన్సరు #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2014
+#: plugins/Oculars/src/Oculars.cpp:2022
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "సెన్సరు #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2027
+#: plugins/Oculars/src/Oculars.cpp:2035
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "టెలిస్కోపు #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2343
+#: plugins/Oculars/src/Oculars.cpp:2351
 msgid "&Lens"
 msgstr "&Lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2344
+#: plugins/Oculars/src/Oculars.cpp:2352
 msgid "&Previous lens"
 msgstr "&Previous lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2345
+#: plugins/Oculars/src/Oculars.cpp:2353
 msgid "&Next lens"
 msgstr "&Next lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2375
+#: plugins/Oculars/src/Oculars.cpp:2383
 msgid "&Telescope"
 msgstr "&Telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2376
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Previous telescope"
 msgstr "&Previous telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2377
+#: plugins/Oculars/src/Oculars.cpp:2385
 msgid "&Next telescope"
 msgstr "&Next telescope"
 
@@ -19476,80 +19488,80 @@ msgstr ""
 msgid "Exoplanets is updated"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:767
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:768
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:768
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:769
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:769
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:770
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:770
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:771
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:771
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:772
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:772
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
 msgid "Angular Distance, arcsec"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774
 msgid "Effective temperature of host star, K"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
 msgid "Year of Discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
 msgid "Metallicity of host star"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
 msgid "V magnitude of host star, mag"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
 msgid "RA (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
 msgid "Dec (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
 msgid "Distance to star, pc"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
 msgid "Mass of host star, Msol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:782
 msgid "Radius of host star, Rsol"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:815
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:816
 msgctxt "temperature scale"
 msgid "Kelvin"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:817
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:818
 msgctxt "temperature scale"
 msgid "Celsius"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:819
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:820
 msgctxt "temperature scale"
 msgid "Fahrenheit"
 msgstr ""
