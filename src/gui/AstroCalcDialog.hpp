@@ -128,6 +128,7 @@ public:
 		WUTMagnitude,	//! magnitude
 		WUTRiseTime,		//! rise time
 		WUTTransitTime,	//! transit time
+		WUTMaxElevation,	//! max. elevation
 		WUTSetTime,		//! set time
 		WUTAngularSize,	//! angular size
 		WUTCount		//! total number of columns
@@ -349,7 +350,7 @@ private:
 	void adjustWUTColumns();
 
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
+	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString objectType);
@@ -596,6 +597,10 @@ private:
 		else if (column == AstroCalcDialog::WUTRiseTime || column == AstroCalcDialog::WUTTransitTime || column == AstroCalcDialog::WUTSetTime)
 		{
 			return StelUtils::hmsStrToHours(text(column).append("00s")) < StelUtils::hmsStrToHours(other.text(column).append("00s"));
+		}
+		else if (column == AstroCalcDialog::WUTMaxElevation || column == AstroCalcDialog::WUTAngularSize)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else
 		{
