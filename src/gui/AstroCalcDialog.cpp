@@ -5302,7 +5302,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 		initListWUT();
 		ui->wutMatchingObjectsTreeWidget->showColumn(WUTMagnitude);
-		ui->wutMatchingObjectsTreeWidget->showColumn(WUTAngularSize);		
+		ui->wutMatchingObjectsTreeWidget->showColumn(WUTAngularSize);
 		double UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 		objectsList.clear();
 		for (int i = 0; i < wutJDList.count(); i++)
@@ -5711,20 +5711,13 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
-							if (designation.isEmpty())
-								designation = object->getDesignation();
-
-							if (!objectsList.contains(designation) && !designation.isEmpty())
+							if (!objectsList.contains(designation))
 							{
-								starName = object->getNameI18n(); // Just re-use variable
-								if (starName.isEmpty())
-									starName = designation;
-
 								rts = object->getRTSTime(core);
 								core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
 								core->update(0);
 								StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-								fillWUTTable(starName, designation, mag, rts, alt, 0.0, withDecimalDegree);
+								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -5741,8 +5734,7 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
-
-							if (!objectsList.contains(designation) && !designation.isEmpty())
+							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core);
 								core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
