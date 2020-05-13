@@ -78,6 +78,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
 			{ "single",       StelSkyCulture::SINGLE},
 			{ "personal",     StelSkyCulture::PERSONAL},
+			{ "pseudomythological", StelSkyCulture::PSEUDOMYTHOLOGICAL },
 			{ "incomplete",   StelSkyCulture::INCOMPLETE},
 		};
 		StelSkyCulture::CLASSIFICATION classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
@@ -188,6 +189,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			color = "#ffff00"; // "yellow" area
 			classification = qc_("personal", "sky culture classification");
 			description = q_("This is a personally developed sky culture which is not founded in published historical or ethnological research. Stellarium may include it when it is 'pretty enough' without really approving its contents.");
+			break;
+		case StelSkyCulture::PSEUDOMYTHOLOGICAL:
+			color = "#ffff00"; // "yellow" area
+			classification = qc_("pseudomythological", "sky culture classification");
+			description = q_("This is a pseudomythological sky culture which is not related to real mythes and peoples. Stellarium may include it 'just for fun' when it is 'pretty enough'.");
 			break;
 		case StelSkyCulture::INCOMPLETE:
 			color = "#ff6633"; // "red" area
