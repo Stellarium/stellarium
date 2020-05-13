@@ -925,6 +925,10 @@ void TelescopeControl::loadTelescopes()
 		//Connect at startup
 		bool connectAtStartup = telescope.value("connect_at_startup", false).toBool();
 
+		// NOTE: Dirty fix a crash Stellarium when autoconnect is enabled for ASCOM device, but device is not attached
+		if (connectionType == ConnectionASCOM)
+			connectAtStartup = false;
+
 		//Validation: FOV circles
 		QVariantList parsedJsonCircles = telescope.value("circles").toList();
 		QList<double> internalCircles;
@@ -1087,7 +1091,9 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("delay", delay);
 	}
 
-	telescope.insert("connect_at_startup", connectAtStartup);
+	// NOTE: Dirty fix a crash Stellarium when autoconnect is enabled for ASCOM device, but device is not attached
+	if (connectionType != ConnectionASCOM)
+		telescope.insert("connect_at_startup", connectAtStartup);
 
 	if(!circles.isEmpty())
 	{
