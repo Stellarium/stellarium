@@ -215,6 +215,7 @@ const\_boundary\_color   				& \ccbox{0.3,0.1,0.1} &  constellation boundaries. 
 %% DSO
 dso\_label\_color                       & \ccbox{0.2,0.6,0.7} & deep-sky objects labels. \\%\midrule
 dso\_circle\_color                      & \ccbox{1.0,0.7,0.2} & deep-sky objects symbols, if not of the types below. \\%\midrule
+dso\_region\_color                      & \ccbox{0.7,0.7,0.2} & regions symbols. \\%\midrule
 dso\_galaxy\_color                      & \ccbox{1.0,0.2,0.2} & galaxies symbols. \\%\midrule
 dso\_radio\_galaxy\_color               & \ccbox{0.3,0.3,0.3} & radio galaxies symbols. \\%\midrule
 dso\_active\_galaxy\_color              & \ccbox{1.0,0.5,0.2} & active galaxies symbols. \\%\midrule
@@ -350,30 +351,36 @@ In this section you can fine-tune which of the deep-sky catalogs should be selec
 
 \begin{longtable}{l|l|l|p{90mm}}\toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-flag\_show\_ngc  & bool & true  & New General Catalogue (NGC). \\%\midrule
-flag\_show\_ic   & bool & true  & Index Catalogue (IC). \\%\midrule
-flag\_show\_m    & bool & true  & Messier Catalog (M). \\%\midrule
-flag\_show\_c    & bool & false & Caldwell Catalogue (C). \\%\midrule
-flag\_show\_b    & bool & false & Barnard Catalogue (B). \\%\midrule
-flag\_show\_sh2  & bool & false & Sharpless Catalogue (Sh-II). \\%\midrule
-flag\_show\_vdb  & bool & false & Van den Bergh Catalogue of reflection nebulae (VdB). \\%\midrule
-flag\_show\_rcw  & bool & false & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. \\%\midrule
-flag\_show\_lbn  & bool & false & Lynds' Catalogue of Bright Nebulae (LBN). \\%\midrule
-flag\_show\_ldn  & bool & false & Lynds' Catalogue of Dark Nebulae (LDN). \\%\midrule
-flag\_show\_cr   & bool & false & Collinder Catalogue (Cr). \\%\midrule
-flag\_show\_mel  & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\%\midrule
-flag\_show\_pgc  & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\%\midrule
-flag\_show\_ced  & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\%\midrule
-flag\_show\_ugc  & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\%\midrule
-flag\_show\_arp  & bool & false & Atlas of Peculiar Galaxies (Arp). \\%\midrule
-flag\_show\_vv   & bool & false & The Catalogue of Interacting Galaxies (VV). \\%\midrule
-flag\_show\_pk   & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\%\midrule
-flag\_show\_png  & bool & false & The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (PN G). \\%\midrule
-flag\_show\_snrg & bool & false & A catalogue of Galactic supernova remnants (SNR G). \\%\midrule
-flag\_show\_aco  & bool & false & A Catalog of Rich Clusters of Galaxies (ACO). \\%\midrule
-flag\_show\_hcg  & bool & false & A Hickson Compact Group (HCG). \\%\midrule
-flag\_show\_abell  & bool & false & Abell Catalog of Planetary Nebulae (Abell). \\%\midrule
-flag\_show\_eso  & bool & false & ESO/Uppsala Survey of the ESO(B) Atlas (ESO). \\\bottomrule
+flag\_show\_ngc   & bool & true  & New General Catalogue (NGC). \\%\midrule
+flag\_show\_ic    & bool & true  & Index Catalogue (IC). \\%\midrule
+flag\_show\_m     & bool & true  & Messier Catalog (M). \\%\midrule
+flag\_show\_c     & bool & false & Caldwell Catalogue (C). \\%\midrule
+flag\_show\_b     & bool & false & Barnard Catalogue (B). \\%\midrule
+flag\_show\_sh2   & bool & false & Sharpless Catalogue (SH2). \\%\midrule
+flag\_show\_vdb   & bool & false & Van den Bergh Catalogue of reflection nebulae (vdB). \\%\midrule
+flag\_show\_rcw   & bool & false & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way (RCW). \\%\midrule
+flag\_show\_lbn   & bool & false & Lynds' Catalogue of Bright Nebulae (LBN). \\%\midrule
+flag\_show\_ldn   & bool & false & Lynds' Catalogue of Dark Nebulae (LDN). \\%\midrule
+flag\_show\_cr    & bool & false & Collinder Catalogue (Cr or Collinder). \\%\midrule
+flag\_show\_mel   & bool & false & Melotte Catalogue of Deep Sky Objects (Mel or Melotte).  \\%\midrule
+flag\_show\_pgc   & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\%\midrule
+flag\_show\_ced   & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\%\midrule
+flag\_show\_ugc   & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\%\midrule
+flag\_show\_arp   & bool & false & Atlas of Peculiar Galaxies (Arp). \\%\midrule
+flag\_show\_vv    & bool & false & The Catalogue of Interacting Galaxies (VV). \\%\midrule
+flag\_show\_pk    & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\%\midrule
+flag\_show\_png   & bool & false & The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (PN G). \\%\midrule
+flag\_show\_snrg  & bool & false & A catalogue of Galactic supernova remnants (SNR G). \\%\midrule
+flag\_show\_aco   & bool & false & A Catalog of Rich Clusters of Galaxies (Abell or ACO). \\%\midrule
+flag\_show\_hcg   & bool & false & A Hickson Compact Group (HCG). \\%\midrule
+flag\_show\_eso   & bool & false & ESO/Uppsala Survey of the ESO(B) Atlas (ESO). \\%\midrule
+flag\_show\_vdbh  & bool & false & Catalogue of southern stars embedded in nebulosity (vdBH). \\%\midrule
+flag\_show\_dwb   & bool & false & Catalogue and distances of optically visible H II regions (DWB). \\%\midrule
+flag\_show\_tr    & bool & false & Trumpler Catalogue (Tr or Trumpler). \\%\midrule
+flag\_show\_st    & bool & false & Stock Catalogue (St or Stock). \\%\midrule
+flag\_show\_ru    & bool & false & Ruprecht Catalogue (Ru or Ruprecht). \\%\midrule
+flag\_show\_vdbha & bool & false & van den Bergh-Hagen Catalogue (vdB-Ha). \\%\midrule
+flag\_show\_other & bool & true & All objects without identifiers. \\\bottomrule
 \end{longtable}
 
 \subsection{\big[dso\_type\_filters\big]}

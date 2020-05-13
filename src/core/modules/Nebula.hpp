@@ -74,7 +74,7 @@ public:
 		CatTr			= 0x02000000, //!< Trumpler Catalogue (Tr)
 		CatSt		= 0x04000000, //!< Stock Catalogue (St)
 		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
-		CatVdBHa		= 0x10000000, //!< van den Bergh-Hagen Catalogue (VdB-Ha)
+		CatVdBHa		= 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
 		CatOther		= 0x20000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
