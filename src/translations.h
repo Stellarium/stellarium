@@ -484,6 +484,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
 		// TRANSLATORS: Name of the sky culture
+		N_("Catalan");
+		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese Contemporary");
