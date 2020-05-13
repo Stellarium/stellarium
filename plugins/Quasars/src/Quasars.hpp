@@ -180,6 +180,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get the list of all quasars.
+	const QList<QuasarP>& getAllQuasars() const {return QSO;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);

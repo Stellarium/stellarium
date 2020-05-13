@@ -187,6 +187,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get the list of all pulsars.
+	const QList<PulsarP>& getAllPulsars() const {return psr;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Pulsars::UpdateState state);

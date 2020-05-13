@@ -104,10 +104,7 @@ public:
 	//! Get the english name of pulsar
 	virtual QString getEnglishName(void) const;
 	//! Get the designation of pulsar
-	QString getDesignation(void) const
-	{
-		return designation;
-	}
+	QString getDesignation(void) const { return designation; }
 
 	void update(double deltaTime);
 

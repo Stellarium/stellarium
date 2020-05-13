@@ -148,7 +148,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
 	// Ra/Dec etc.

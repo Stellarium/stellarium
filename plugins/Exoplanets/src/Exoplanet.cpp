@@ -280,11 +280,11 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
 	}
 
-	if (flags&Magnitude && Vmag<99 && !distributionMode)
+	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
@@ -553,8 +553,13 @@ Vec3f Exoplanet::getInfoColor(void) const
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
-	return (distributionMode ? 4.f : (Vmag<99. ? static_cast<float>(Vmag) : 6.f));
+	Q_UNUSED(core)
+	return (distributionMode ? 4.f : (isVMagnitudeDefined() ? static_cast<float>(Vmag) : 6.f));
+}
+
+bool Exoplanet::isVMagnitudeDefined() const
+{
+	return Vmag<98.;
 }
 
 double Exoplanet::getAngularSize(const StelCore*) const

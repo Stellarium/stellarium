@@ -34,6 +34,7 @@
 #include "SolarSystem.hpp"
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 
@@ -273,6 +274,8 @@ private slots:
 	void selectWutObject(const QModelIndex& index);
 	void saveWutObjects();
 	void searchWutClear();
+	//! Populates the list of groups for WUT tool.
+	void populateWutGroups();
 
 	void updateAstroCalcData();
 
@@ -293,6 +296,7 @@ private:
 	class StelObjectMgr* objectMgr;
 	class StelLocaleMgr* localeMgr;
 	class StelMovementMgr* mvMgr;
+	class StelPropertyMgr* propMgr;
 	QStringListModel* wutModel;
 	QSortFilterProxyModel *proxyModel;
 	QSettings* conf;
@@ -340,9 +344,7 @@ private:
 	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
-	void populateTimeIntervalsList();
-	//! Populates the list of groups for WUT tool.
-	void populateWutGroups();	
+	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
 	void populateFunctionsList();
