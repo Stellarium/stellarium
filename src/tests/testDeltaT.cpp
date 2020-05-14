@@ -878,6 +878,36 @@ void TestDeltaT::testDeltaTByMeeusSimons()
 	}
 }
 
+void TestDeltaT::testDeltaTByMeeusSimonsGenericDates()
+{
+	// Valid range: 1620..2000
+
+	double year, expectedResult, acceptableError, JD;
+	int yout, mout, dout;
+	while(genericData.count() >= 3)
+	{
+		year = genericData.takeFirst().toDouble();
+		expectedResult = genericData.takeFirst().toDouble();
+		acceptableError = genericData.takeFirst().toDouble();
+
+		if (year>=1620. && year<2000.)
+		{
+			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
+			double result = StelUtils::getDeltaTByMeeusSimons(JD);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+								.arg(year)
+								.arg(result)
+								.arg(expectedResult)
+								.arg(actualError)
+								.arg(acceptableError)
+								.toUtf8());
+		}
+	}
+}
+
 void TestDeltaT::testDeltaTByKhalidSultanaZaidiWideDates()
 {
 	// test data and max. error taken from:
@@ -1219,6 +1249,96 @@ void TestDeltaT::testDeltaTByTuckermanGoldstine()
 							.arg(actualError)
 							.arg(acceptableError)
 							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByIslamSadiqQureshiGenericDates()
+{
+	// Valid range: 1620..2007
+
+	double year, expectedResult, acceptableError, JD;
+	int yout, mout, dout;
+	while(genericData.count() >= 3)
+	{
+		year = genericData.takeFirst().toDouble();
+		expectedResult = genericData.takeFirst().toDouble();
+		acceptableError = genericData.takeFirst().toDouble();
+
+		if (year>=1620. && year<2007.)
+		{
+			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
+			double result = StelUtils::getDeltaTByIslamSadiqQureshi(JD);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+								.arg(year)
+								.arg(result)
+								.arg(expectedResult)
+								.arg(actualError)
+								.arg(acceptableError)
+								.toUtf8());
+		}
+	}
+}
+
+void TestDeltaT::testDeltaTBySchmadelZech1988GenericDates()
+{
+	// Valid range: 1800..1988
+
+	double year, expectedResult, acceptableError, JD;
+	int yout, mout, dout;
+	while(genericData.count() >= 3)
+	{
+		year = genericData.takeFirst().toDouble();
+		expectedResult = genericData.takeFirst().toDouble();
+		acceptableError = genericData.takeFirst().toDouble();
+
+		if (year>=1800. && year<1988.)
+		{
+			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
+			double result = StelUtils::getDeltaTBySchmadelZech1988(JD);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+								.arg(year)
+								.arg(result)
+								.arg(expectedResult)
+								.arg(actualError)
+								.arg(acceptableError)
+								.toUtf8());
+		}
+	}
+}
+
+void TestDeltaT::testDeltaTByChaprontTouzeGenericDates()
+{
+	// Valid range: -390..1600
+
+	double year, expectedResult, acceptableError, JD;
+	int yout, mout, dout;
+	while(genericData.count() >= 3)
+	{
+		year = genericData.takeFirst().toDouble();
+		expectedResult = genericData.takeFirst().toDouble();
+		acceptableError = genericData.takeFirst().toDouble();
+
+		if (year>=-391. && year<1600.)
+		{
+			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
+			double result = StelUtils::getDeltaTByChaprontTouze(JD);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+								.arg(year)
+								.arg(result)
+								.arg(expectedResult)
+								.arg(actualError)
+								.arg(acceptableError)
+								.toUtf8());
+		}
 	}
 }
 
