@@ -380,7 +380,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 
 	#ifdef Q_OS_WIN
 	// NOTE: Dirty fix a crash Stellarium when autoconnect is enabled for ASCOM device, but device is not attached
-	else if (connectionType == ConnectionASCOM)
+	if (connectionType == ConnectionASCOM)
 	{
 		ui->checkBoxConnectAtStartup->setChecked(false);
 		ui->checkBoxConnectAtStartup->setEnabled(false);
