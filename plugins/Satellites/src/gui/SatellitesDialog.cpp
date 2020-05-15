@@ -96,7 +96,7 @@ void SatellitesDialog::retranslate()
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		populateAboutPage();
 		populateFilterMenu();
-		initListIridiumFlares();
+		initListIridiumFlares();		
 	}
 }
 
@@ -179,11 +179,12 @@ void SatellitesDialog::createDialogContent()
 
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
 	connect(selectionModel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-		     this, SLOT(updateSatelliteData()));
+		     this, SLOT(updateSatelliteData()));	
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(trackSatellite(QModelIndex)));
 
 	// Two-state input, three-state display
+	setRightSideToROMode();
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), ui->displayedCheckbox, SLOT(setChecked(bool)));
 	connect(ui->orbitCheckbox,     SIGNAL(clicked(bool)), ui->orbitCheckbox,     SLOT(setChecked(bool)));
 	connect(ui->userCheckBox,      SIGNAL(clicked(bool)), ui->userCheckBox,      SLOT(setChecked(bool)));
@@ -199,11 +200,11 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
 
-
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
 	connect(ui->groupFilterCombo,       SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
+	connect(ui->groupFilterCombo,       SIGNAL(currentIndexChanged(int)), this, SLOT(setRightSideToROMode()));
 	connect(ui->saveSatellitesButton,   SIGNAL(clicked()),                this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()),                this, SLOT(removeSatellites()));
 
@@ -492,6 +493,8 @@ void SatellitesDialog::filterListByGroup(int index)
 
 void SatellitesDialog::updateSatelliteData()
 {
+	setRightSideToRWMode();
+
 	// NOTE: This was probably going to be used for editing satellites?
 	satelliteModified = false;
 
@@ -1138,6 +1141,43 @@ void SatellitesDialog::setFlags()
 		QVariant value = QVariant::fromValue<SatFlags>(flags);
 		ui->satellitesList->model()->setData(index, value, SatFlagsRole);
 	}
+}
+
+// Right side of GUI should be read only and clean by default (for example group in left top corner is was changed at the moment)
+void SatellitesDialog::setRightSideToROMode()
+{
+	ui->displayedCheckbox->setEnabled(false);
+	ui->displayedCheckbox->setChecked(false);
+	ui->orbitCheckbox->setEnabled(false);
+	ui->orbitCheckbox->setChecked(false);
+	ui->userCheckBox->setEnabled(false);
+	ui->userCheckBox->setChecked(false);
+	ui->nameEdit->setEnabled(false);
+	ui->nameEdit->setText(QString());
+	ui->noradNumberEdit->setEnabled(false);
+	ui->noradNumberEdit->setText(QString());
+	ui->descriptionTextEdit->setEnabled(false);
+	ui->descriptionTextEdit->setText(QString());
+	ui->groupsListWidget->setEnabled(false);
+	ui->groupsListWidget->clear();
+	ui->tleFirstLineEdit->setEnabled(false);
+	ui->tleFirstLineEdit->setText(QString());
+	ui->tleSecondLineEdit->setEnabled(false);
+	ui->tleSecondLineEdit->setText(QString());
+}
+
+// The status of elements on right side of GUI may be changed when satellite is selected
+void SatellitesDialog::setRightSideToRWMode()
+{
+	ui->displayedCheckbox->setEnabled(true);
+	ui->orbitCheckbox->setEnabled(true);
+	ui->userCheckBox->setEnabled(true);
+	ui->nameEdit->setEnabled(true);
+	ui->noradNumberEdit->setEnabled(true);
+	ui->descriptionTextEdit->setEnabled(true);
+	ui->groupsListWidget->setEnabled(true);
+	ui->tleFirstLineEdit->setEnabled(true);
+	ui->tleSecondLineEdit->setEnabled(true);
 }
 
 void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
