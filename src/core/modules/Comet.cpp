@@ -172,7 +172,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getPlanetTypeString()), cometType) << "<br />";
 	}
 
-	oss << getMagnitudeInfoString(core, flags, alt_app, 1);
+	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 
 	if (flags&AbsoluteMagnitude)
 	{

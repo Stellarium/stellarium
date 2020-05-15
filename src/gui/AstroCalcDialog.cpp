@@ -5317,7 +5317,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5364,7 +5364,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						Nebula::NebulaType ntype = object->getDSOType();						
 						switch (categoryId)
 						{
@@ -5374,10 +5374,7 @@ void AstroCalcDialog::calculateWutObjects()
 								break;
 							case 3: // Dark nebulae
 								if (static_cast<bool>(tflags & Nebula::TypeDarkNebulae) && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO))
-								{
 									passByType = true;
-									mag = object->getVMagnitude(core);
-								}
 								break;
 							case 4: // Galaxies
 								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
@@ -5401,21 +5398,21 @@ void AstroCalcDialog::calculateWutObjects()
 								break;
 							case 20: // Supernova candidates
 							{
-								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
 									passByType = true;
 								break;
 							}
 							case 21: // Supernova remnant candidates
 							{
-								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
 									passByType = true;
 								break;
 							}
 							case 22: // Supernova remnants
 							{
-								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
 									passByType = true;
 								break;
@@ -5502,7 +5499,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 					for (const auto& object : allObjects)
 					{
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (object->getPlanetType() == pType && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
@@ -5538,7 +5535,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& dblStar : dblHipStars)
 					{
 						StelObjectP object = dblStar.firstKey();
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							// convert from arcseconds to degrees
@@ -5571,7 +5568,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5601,7 +5598,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5631,7 +5628,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableVisibilityAngularLimits(false);
 					for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
 					{
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5684,7 +5681,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableVisibilityAngularLimits(false);
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isVMagnitudeDefined() && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5707,7 +5704,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableVisibilityAngularLimits(false);
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -5730,7 +5727,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableVisibilityAngularLimits(false);
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
-						mag = object->getVMagnitudeWithExtinction(core);
+						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();

@@ -189,7 +189,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getPlanetTypeString())) << "<br />";
 	}
 
-	oss << getMagnitudeInfoString(core, flags, alt_app, 1);
+	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 
 	if (flags&AbsoluteMagnitude)
 	{
