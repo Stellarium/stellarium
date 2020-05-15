@@ -300,15 +300,12 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
 	}
 	
-	if ((flags & Magnitude) && (stdMag!=99.f))
+	if ((flags & Magnitude) && (stdMag<99.))
 	{
-		QString emag = "";
+		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2));
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
-
-		oss << QString("%1: <b>%2</b>%3").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
-
-
+			oss << QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		oss << "<br />";
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 		oss << myText << "<br/>";
 #endif
@@ -584,7 +581,7 @@ Vec3f Satellite::getInfoColor(void) const
 
 float Satellite::getVMagnitude(const StelCore* core) const
 {	
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	float vmag = 7.f; // Optimistic value of magnitude for artificial satellite without data for standard magnitude
 	if (iconicModeFlag)
 		vmag = 5.0;
