@@ -1164,6 +1164,14 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->tleFirstLineEdit->setText(QString());
 	ui->tleSecondLineEdit->setEnabled(false);
 	ui->tleSecondLineEdit->setText(QString());
+
+	// set default
+	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 }
 
 // The status of elements on right side of GUI may be changed when satellite is selected
