@@ -829,7 +829,8 @@ void SatellitesDialog::showUpdateCompleted(int updated,
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
 	//QTimer *timer = new QTimer(this); // FIXME: What's the point of this? --BM. GZ Indeed, never triggered. Remove?
-	//connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
+	//connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));	
+	populateFilterMenu();
 }
 
 void SatellitesDialog::saveEditedSource()

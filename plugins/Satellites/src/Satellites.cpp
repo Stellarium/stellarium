@@ -538,7 +538,8 @@ void Satellites::restoreDefaultSettings()
 	     << "1,http://www.celestrak.com/NORAD/elements/amateur.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/gps-ops.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/galileo.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/iridium.txt"
+	     << "http://www.celestrak.com/NORAD/elements/iridium.txt"
+	     << "http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt"
 	     << "http://www.celestrak.com/NORAD/elements/geo.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/stations.txt"
 	     << "http://www.celestrak.com/NORAD/elements/weather.txt"
@@ -556,7 +557,7 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/x-comm.txt"
 	     << "http://www.celestrak.com/NORAD/elements/other-comm.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/glo-ops.txt"
-	     << "http://www.celestrak.com/NORAD/elements/beidou.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/beidou.txt"
 	     << "http://www.celestrak.com/NORAD/elements/sbas.txt"
 	     << "http://www.celestrak.com/NORAD/elements/nnss.txt"
 	     << "http://www.celestrak.com/NORAD/elements/engineering.txt"
@@ -565,8 +566,11 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
 	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
 	     << "http://www.celestrak.com/NORAD/elements/other.txt"
-	     << "http://www.celestrak.com/NORAD/elements/starlink.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/starlink.txt"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
+	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
+	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
+	     << "http://www.celestrak.com/NORAD/elements/spire.txt"
 	     << "1,https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
 	saveTleSources(urls);
@@ -1014,13 +1018,95 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("stdMag", qsMagList[sid]);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
+	// Guess the group
+	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
+	QStringList satGroups;
+	if (groupList.isEmpty())
+	{
+		if (tleData.name.startsWith("STARLINK"))
+		{
+			 satGroups.append("starlink");
+			 satGroups.append("communications");
+		}
+		if (tleData.name.startsWith("IRIDIUM"))
+		{
+			QStringList d = tleData.name.split(" ");
+			if (d.at(1).toInt()>=100)
+				satGroups.append("iridium next");
+			else
+				satGroups.append("iridium");
+			satGroups.append("communications");
+		}
+		if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
+		{
+			satGroups.append("planet");
+			satGroups.append("earth resources");
+		}
+		if (tleData.name.startsWith("ONEWEB"))
+		{
+			satGroups.append("oneweb");
+			satGroups.append("communications");
+		}
+		if (tleData.name.startsWith("LEMUR"))
+		{
+			satGroups.append("spire");
+			satGroups.append("earth resources");
+		}
+		if (tleData.name.startsWith("GPS"))
+		{
+			satGroups.append("gps");
+			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("BEIDOU"))
+		{
+			satGroups.append("beidou");
+			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("COSMOS"))
+		{
+			satGroups.append("cosmos");
+			if (!tleData.name.contains("DEB"))
+			{
+				satGroups.append("glonass");
+				satGroups.append("navigation");
+			}
+			else
+				satGroups.append("debris");
+		}
+		if (tleData.name.startsWith("GSAT") && tleData.name.contains("PRN"))
+		{
+			satGroups.append("galileo");
+			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA"))
+		{
+			QStringList d = tleData.name.split(" ");
+			satGroups.append(d.at(0).toLower());
+			satGroups.append("communications");
+		}
+		if (tleData.name.contains(" DEB"))
+			satGroups.append("debris");
+		if (tleData.name.startsWith("SOYUZ-MS"))
+			satGroups.append("crewed");
+		if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
+			satGroups.append("resupply");
+	}
+	if (!satGroups.isEmpty())
+	{
+		satProperties.insert("groups", satGroups);
+		for (const auto& str : satGroups)
+		{
+			if (!getGroupIdList().contains(str))
+				addGroup(str);
+		}
+	}
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
 	{
 		qDebug() << "[Satellites] satellite added:" << tleData.id << tleData.name;
 		satellites.append(sat);
-		sat->setNew();
+		sat->setNew();		
 		return true;
 	}
 	return false;
@@ -2134,6 +2220,8 @@ void Satellites::translations()
 	N_("amateur");
 	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
 	N_("weather");
+	// TRANSLATORS: Satellite group: Earth Resources satellites
+	N_("earth resources");
 	// TRANSLATORS: Satellite group: Satellites in geostationary orbit
 	N_("geostationary");
 	// TRANSLATORS: Satellite group: Satellites that are no longer functioning
@@ -2142,17 +2230,49 @@ void Satellites::translations()
 	N_("gps");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 	N_("glonass");
+	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
+	N_("beidou");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 	N_("galileo");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 	N_("iridium");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
+	N_("iridium next");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
+	N_("starlink");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Planet constellation (FLOCK and SKYSAT satellites)
+	N_("planet");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
+	N_("spire");
+	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
+	N_("oneweb");
 	// TRANSLATORS: Satellite group: Space stations
 	N_("stations");
 	// TRANSLATORS: Satellite group: Education satellites
 	N_("education");
 	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 	N_("observatory");
-	
+	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
+	N_("intelsat");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
+	N_("globalstar");
+	// TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
+	N_("orbcomm");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
+	N_("gorizont");
+	// TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
+	N_("raduga");
+	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
+	N_("molniya");
+	// TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
+	N_("cosmos");
+	// TRANSLATORS: Satellite group: Debris of satellites
+	N_("debris");
+	// TRANSLATORS: Satellite group: Crewed satellites
+	N_("crewed");
+	// TRANSLATORS: Satellite group: Satellites of ISS resupply missions
+	N_("resupply");
+
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
