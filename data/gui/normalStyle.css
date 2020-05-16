@@ -495,7 +495,7 @@ QDateTimeEdit::up-button {
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
 	image: url(:/graphicGui/uieSpinup.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 97), stop: 1 rgb(70, 70, 70));
 }
 
 QSpinBox::down-button,
@@ -510,7 +510,37 @@ QDateTimeEdit::down-button {
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
 	image: url(:/graphicGui/uieSpindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(40, 40, 40));
+}
+
+QSpinBox::up-button:hover,
+QTimeEdit::up-button:hover,
+QDoubleSpinBox::up-button:hover,
+AngleSpinBox::up-button:hover,
+QDateTimeEdit::up-button:hover {
+	subcontrol-origin: border;
+	subcontrol-position: top right;
+	width: 20px;
+	border: 1px solid rgba(0, 0, 0, 0%);
+	border-top: 1px solid rgb(0, 0, 0);
+	border-right: 1px solid rgb(0, 0, 0);
+	image: url(:/graphicGui/uieSpinup.png);
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(87, 87, 77), stop: 1 rgb(70, 70, 70));
+}
+
+QSpinBox::down-button:hover,
+QTimeEdit::down-button:hover,
+QDoubleSpinBox::down-button:hover,
+AngleSpinBox::down-button:hover,
+QDateTimeEdit::down-button:hover {
+	subcontrol-origin: border;
+	subcontrol-position: bottom right;
+	width: 20px;
+	border: 1px solid rgba(0, 0, 0, 0%);
+	border-right: 1px solid rgb(0, 0, 0);
+	border-bottom: 1px solid rgb(0, 0, 0);
+	image: url(:/graphicGui/uieSpindown.png);
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(30, 30, 20));
 }
 
 QSpinBox::down-button:pressed,
