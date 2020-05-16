@@ -172,7 +172,6 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	return str;
 }
 
-
 QVariantMap Nova::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);

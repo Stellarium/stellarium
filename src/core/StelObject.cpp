@@ -242,15 +242,14 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 {
 	if (flags&Magnitude)
 	{
-		QString emag = "";
+		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI_180)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			const float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
-
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
-		QString str = QString("%1: <b>%2</b>%3<br />").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals), emag);
+		str +="<br />";
 		str += getExtraInfoStrings(Magnitude).join("");
 		return str;
 	}
