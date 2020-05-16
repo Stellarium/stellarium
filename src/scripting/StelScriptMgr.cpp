@@ -128,7 +128,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 				QColor qcol = QColor( context->argument(0).toString() );
 				if( qcol.isValid() )
 				{
-					c.set( qcol.redF(), qcol.greenF(), qcol.blueF() );
+					c.set( static_cast<float>(qcol.redF()), static_cast<float>(qcol.greenF()), static_cast<float>(qcol.blueF()) );
 					break;
 				}
 				else
@@ -239,9 +239,9 @@ QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 
 void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 {
-	c[0] = static_cast<float>(obj.property("r").toNumber());
-	c[1] = static_cast<float>(obj.property("g").toNumber());
-	c[2] = static_cast<float>(obj.property("b").toNumber());
+	c[0] = obj.property("r").toNumber();
+	c[1] = obj.property("g").toNumber();
+	c[2] = obj.property("b").toNumber();
 }
 
 QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
