@@ -76,12 +76,10 @@ public:
 				//! Typically nobody alive today shares the world view of these past cultures.
 				//! The description should provide some insight over sources and how data were retrieved and interpreted,
 				//! and should provide references to (optimally: peer-reviewed) published work.
-		SINGLE,		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
+		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
 				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
 				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.
-		PSEUDOMYTHOLOGICAL //! Pseudomythological skycultures may be complete but there not related to real mythes or peoples, like
-				//! Elvish star lore from books by J.R.R. Tolkien or something similar
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
 	};
 
 	//! English name
