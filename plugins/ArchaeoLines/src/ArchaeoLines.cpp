@@ -348,10 +348,11 @@ void ArchaeoLines::update(double deltaTime)
 	// compute parallax correction with Meeus 40.6. First, find H from h=0, then add corrections.
 
 	static const double b_over_a=0.99664719;
-	const double latRad=static_cast<double>(loc.latitude)*M_PI_180;
+	const bool useGeocentric = !core->getUseTopocentricCoordinates();
+	const double latRad=useGeocentric ? 0.0 : static_cast<double>(loc.latitude)*M_PI_180;
 	const double u=std::atan(b_over_a*std::tan(latRad));
-	const double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
-	const double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
+	const double rhoSinPhiP=useGeocentric ? 0. : b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
+	const double rhoCosPhiP=useGeocentric ? 1. :          std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
 
 	QVector<double> lunarDE(8), sinPi(8);
 	lunarDE[0]=(eps+lunarI)*M_PI/180.0; // min_distance=max_parallax
