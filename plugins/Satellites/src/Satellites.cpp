@@ -123,6 +123,9 @@ void Satellites::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(dirPath);
 		dataDir.setPath(dirPath);
 
+		// load standard magnitude for satellites
+		loadQSMagData();
+
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
 		{
@@ -135,8 +138,6 @@ void Satellites::init()
 
 		// absolute file name for inner catalog of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
-		// absolute file name for qs.mag file
-		qsMagFilePath = dataDir.absoluteFilePath("qs.mag");
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
@@ -179,11 +180,6 @@ void Satellites::init()
 	{
 		qDebug() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
-	}
-	
-	if(!QFileInfo(qsMagFilePath).exists())
-	{
-		restoreDefaultQSMagFile();
 	}
 
 	qDebug() << "[Satellites] loading catalog file:" << QDir::toNativeSeparators(catalogPath);
@@ -497,8 +493,7 @@ bool Satellites::configureGui(bool show)
 void Satellites::restoreDefaults(void)
 {
 	restoreDefaultSettings();
-	restoreDefaultCatalog();
-	restoreDefaultQSMagFile();
+	restoreDefaultCatalog();	
 	loadCatalog();
 	loadSettings();
 }
@@ -599,23 +594,6 @@ void Satellites::restoreDefaultCatalog()
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
-	}
-}
-
-void Satellites::restoreDefaultQSMagFile()
-{
-	QFile src(":/satellites/qs.mag");
-	if (!src.copy(qsMagFilePath))
-	{
-		qWarning() << "[Satellites] cannot copy qs.mag resource to " + QDir::toNativeSeparators(qsMagFilePath);
-	}
-	else
-	{
-		qDebug() << "[Satellites] copied default qs.mag to " << QDir::toNativeSeparators(qsMagFilePath);
-		// The resource is read only, and the new file inherits this...  make sure the new file
-		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(qsMagFilePath);
-		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 	}
 }
 
@@ -1529,8 +1507,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			updateSources[i].file = Q_NULLPTR;
 		}
 	}
-	updateSources.clear();	
-	parseQSMagFile(qsMagFilePath);
+	updateSources.clear();		
 	updateSatellites(newData);
 }
 
@@ -1585,8 +1562,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 			if (deleteFiles)
 				tleFile.remove();
 		}
-	}
-	parseQSMagFile(qsMagFilePath);
+	}	
 	updateSatellites(newTleSets);
 }
 
@@ -1827,27 +1803,19 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	return id;
 }
 
-void Satellites::parseQSMagFile(QString qsMagFile)
+void Satellites::loadQSMagData()
 {
 	// Description of file and some additional information you can find here:
 	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
 	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
-	if (qsMagFile.isEmpty())
-		return;
-
-	QFile qsmFile(qsMagFile);
-	if (!qsmFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "[Satellites] oops... cannot open " << QDir::toNativeSeparators(qsMagFile);
-		return;
-	}
-
+	QFile qsmFile(":/satellites/qs.mag");
 	qsMagList.clear();
+	qsmFile.open(QFile::ReadOnly);
 	while (!qsmFile.atEnd())
 	{
 		QString line = QString(qsmFile.readLine());
 		int id   = line.mid(0,5).trimmed().toInt();
-		QString smag = line.mid(33,4).trimmed();
+		QString smag = line.mid(33,4).trimmed();		
 		if (!smag.isEmpty())
 			qsMagList.insert(id, smag.toDouble());
 	}
@@ -1857,7 +1825,7 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 void Satellites::update(double deltaTime)
 {
 	// Separated because first test should be very fast.
-	if (!hintFader && hintFader.getInterstate() <= 0.)
+	if (!hintFader && hintFader.getInterstate() <= 0.f)
 		return;
 
 	StelCore *core = StelApp::getInstance().getCore();
@@ -1880,7 +1848,7 @@ void Satellites::update(double deltaTime)
 void Satellites::draw(StelCore* core)
 {
 	// Separated because first test should be very fast.
-	if (!hintFader && hintFader.getInterstate() <= 0.)
+	if (!hintFader && hintFader.getInterstate() <= 0.f)
 		return;
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit

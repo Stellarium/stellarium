@@ -354,9 +354,8 @@ public:
 
 	//! Reads qs.mag file and its parsing for getting id and standard magnitude
 	//! for satellites.
-	//! @note We are having permissions for use this file from Mike McCants.
-	//! @param name of file
-	void parseQSMagFile(QString qsMagFile);
+	//! @note We are having permissions for use this file from Mike McCants.	
+	void loadQSMagData();
 	
 	//! Get depth of prediction for Iridium flares
 	int getIridiumFlaresPredictionDepth(void) const { return iridiumFlaresPredictionDepth; }
@@ -527,8 +526,6 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
-	//! Replace the qs.mag file with the default one.
-	void restoreDefaultQSMagFile();
 
 	//! Checks valid range dates of life of satellites
 	bool isValidRangeDates(const StelCore* core) const;
@@ -559,8 +556,6 @@ private:
 	//! place.)
 	static void translations();
 
-	//! Path to the qs.mag file.
-	QString qsMagFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
