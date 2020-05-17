@@ -5069,6 +5069,8 @@ void AstroCalcDialog::populateWutGroups()
 		wutCategories.insert(q_("Bright nova stars"), 30);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
 		wutCategories.insert(q_("Bright supernova stars"), 31);
+	wutCategories.insert(q_("Blazars"), 32);
+	wutCategories.insert(q_("BL Lac objects"), 33);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5369,6 +5371,8 @@ void AstroCalcDialog::calculateWutObjects()
 				case 23:
 				case 25:
 				case 26:
+				case 32:
+				case 33:
 				{
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
@@ -5391,7 +5395,7 @@ void AstroCalcDialog::calculateWutObjects()
 									passByType = true;
 								break;
 							case 4: // Galaxies
-								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 5: // Open Star clusters
@@ -5440,7 +5444,15 @@ void AstroCalcDialog::calculateWutObjects()
 									passByType = true;
 								break;
 							case 26: // Regions
-								if (ntype == Nebula::NebRegion)
+								if (static_cast<bool>(tflags & Nebula::TypeOther) && ntype == Nebula::NebRegion)
+									passByType = true;
+								break;
+							case 32: // Blazars
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebBLA) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 33: // BL Lac objects
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebBLL) && mag <= magLimit)
 									passByType = true;
 								break;
 						}
@@ -5645,7 +5657,7 @@ void AstroCalcDialog::calculateWutObjects()
 						passByType = false;
 						mag = object->getVMagnitude(core);
 						Nebula::NebulaType ntype = object->getDSOType();
-						if (ntype == Nebula::NebQSO && mag <= magLimit && object->isAboveRealHorizon(core))
+						if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO) && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
