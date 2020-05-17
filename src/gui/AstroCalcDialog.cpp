@@ -433,33 +433,32 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
-	#ifdef USE_STATIC_PLUGIN_QUASARS
-	if (conf->value("plugins_load_at_startup/Quasars", false).toBool())
+	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
+	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));	
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
+	if (moduleMgr.isPluginLoaded("Quasars"))
 	{
+		#ifdef USE_STATIC_PLUGIN_QUASARS
 		Quasars* qsoMgr = GETSTELMODULE(Quasars);
-		connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-		//connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		#endif
 	}
-	#endif
-	#ifdef USE_STATIC_PLUGIN_PULSARS
-	if (conf->value("plugins_load_at_startup/Pulsars", false).toBool())
+	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
+		#ifdef USE_STATIC_PLUGIN_PULSARS
 		Pulsars* psrMgr = GETSTELMODULE(Pulsars);
 		connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
 		//connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		#endif
 	}
-	#endif
-	#ifdef USE_STATIC_PLUGIN_EXOPLANETS
-	if (conf->value("plugins_load_at_startup/Exoplanets", false).toBool())
+	if (moduleMgr.isPluginLoaded("Exoplanets"))
 	{
+		#ifdef USE_STATIC_PLUGIN_EXOPLANETS
 		Exoplanets* epMgr = GETSTELMODULE(Exoplanets);
 		connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
 		//connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		#endif
 	}
-	#endif
-
-	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
-	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));
 
 	currentCelestialPositions();
 
@@ -5020,6 +5019,7 @@ void AstroCalcDialog::populateTimeIntervalsList()
 void AstroCalcDialog::populateWutGroups()
 {
 	Q_ASSERT(ui->wutCategoryListWidget);
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
 
 	QListWidget* category = ui->wutCategoryListWidget;
 	category->blockSignals(true);
@@ -5052,20 +5052,15 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Interstellar objects"), 24);
 	wutCategories.insert(q_("Globular star clusters"), 25);
 	wutCategories.insert(q_("Regions"), 26);
-	if (propMgr->getProperty("Quasars.quasarsVisible")->getValue().toBool())
-		wutCategories.insert(q_("Quasars"), 27);
+	wutCategories.insert(q_("Quasars"), 27);
 	if (propMgr->getProperty("Pulsars.pulsarsVisible")->getValue().toBool())
 		wutCategories.insert(q_("Pulsars"), 28);
 	if (propMgr->getProperty("Exoplanets.showExoplanets")->getValue().toBool())
 		wutCategories.insert(q_("Exoplanetary systems"), 29);
-	#ifdef USE_STATIC_PLUGIN_NOVAE
-	if (conf->value("plugins_load_at_startup/Novae", false).toBool())
+	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), 30);
-	#endif
-	#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
-	if (conf->value("plugins_load_at_startup/Supernovae", false).toBool())
+	if (moduleMgr.isPluginLoaded("Supernovae"))
 		wutCategories.insert(q_("Bright supernova stars"), 31);
-	#endif
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5637,26 +5632,65 @@ void AstroCalcDialog::calculateWutObjects()
 					break;
 				case 27: // Quasars
 					enableVisibilityAngularLimits(false);
-					#ifdef USE_STATIC_PLUGIN_QUASARS					
-					for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
+					for (const auto& object : allDSO)
 					{
+						passByType = false;
 						mag = object->getVMagnitude(core);
-						if (mag <= magLimit && object->isAboveRealHorizon(core))
+						Nebula::NebulaType ntype = object->getDSOType();
+						if (ntype == Nebula::NebQSO && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation) && !designation.isEmpty())
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+								continue;
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core);
 								core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
 								core->update(0);
 								StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, withDecimalDegree);
+
+								if (d.isEmpty())
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+								else if (n.isEmpty())
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+								else
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+
 								objectsList.insert(designation);
 							}
 						}
 					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+
+					#ifdef USE_STATIC_PLUGIN_QUASARS
+					if (propMgr->getProperty("Quasars.quasarsVisible")->getValue().toBool())
+					{
+						for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
+						{
+							mag = object->getVMagnitude(core);
+							if (mag <= magLimit && object->isAboveRealHorizon(core))
+							{
+								designation = object->getEnglishName();
+								if (!objectsList.contains(designation) && !designation.isEmpty())
+								{
+									rts = object->getRTSTime(core);
+									core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
+									core->update(0);
+									StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
+									fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, withDecimalDegree);
+									objectsList.insert(designation);
+								}
+							}
+						}
+					}
 					#endif
+					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 28: // Pulsars
 					enableVisibilityAngularLimits(false);

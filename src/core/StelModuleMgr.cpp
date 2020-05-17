@@ -191,6 +191,14 @@ void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 	}
 }
 
+bool StelModuleMgr::isPluginLoaded(const QString &moduleID)
+{
+	if (pluginDescriptorList.contains(moduleID))
+		return pluginDescriptorList[moduleID].loaded;
+	else
+		return false;
+}
+
 /*************************************************************************
  Generate properly sorted calling lists for each action (e,g, draw, update)
  according to modules orders dependencies
