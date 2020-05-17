@@ -5053,10 +5053,18 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Globular star clusters"), 25);
 	wutCategories.insert(q_("Regions"), 26);
 	wutCategories.insert(q_("Quasars"), 27);
-	if (propMgr->getProperty("Pulsars.pulsarsVisible")->getValue().toBool())
-		wutCategories.insert(q_("Pulsars"), 28);
-	if (propMgr->getProperty("Exoplanets.showExoplanets")->getValue().toBool())
-		wutCategories.insert(q_("Exoplanetary systems"), 29);
+	if (moduleMgr.isPluginLoaded("Pulsars"))
+	{
+		// Add the category when pulsars is visible
+		if (propMgr->getProperty("Pulsars.pulsarsVisible")->getValue().toBool())
+			wutCategories.insert(q_("Pulsars"), 28);
+	}
+	if (moduleMgr.isPluginLoaded("Exoplanets"))
+	{
+		// Add the category when exoplanets is visible
+		if (propMgr->getProperty("Exoplanets.showExoplanets")->getValue().toBool())
+			wutCategories.insert(q_("Exoplanetary systems"), 29);
+	}
 	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), 30);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
@@ -5669,22 +5677,25 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 
 					#ifdef USE_STATIC_PLUGIN_QUASARS
-					if (propMgr->getProperty("Quasars.quasarsVisible")->getValue().toBool())
+					if (StelApp::getInstance().getModuleMgr().isPluginLoaded("Quasars"))
 					{
-						for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
+						if (propMgr->getProperty("Quasars.quasarsVisible")->getValue().toBool())
 						{
-							mag = object->getVMagnitude(core);
-							if (mag <= magLimit && object->isAboveRealHorizon(core))
+							for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
 							{
-								designation = object->getEnglishName();
-								if (!objectsList.contains(designation) && !designation.isEmpty())
+								mag = object->getVMagnitude(core);
+								if (mag <= magLimit && object->isAboveRealHorizon(core))
 								{
-									rts = object->getRTSTime(core);
-									core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
-									core->update(0);
-									StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-									fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, withDecimalDegree);
-									objectsList.insert(designation);
+									designation = object->getEnglishName();
+									if (!objectsList.contains(designation) && !designation.isEmpty())
+									{
+										rts = object->getRTSTime(core);
+										core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f) - UTCshift + 0.5);
+										core->update(0);
+										StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
+										fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, withDecimalDegree);
+										objectsList.insert(designation);
+									}
 								}
 							}
 						}

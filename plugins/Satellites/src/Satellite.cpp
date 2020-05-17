@@ -589,7 +589,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	if (!iconicModeFlag && visibility != gSatWrapper::VISIBLE)
 		vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 
-	if (stdMag!=99.)
+	if (stdMag<98.)
 	{
 		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
