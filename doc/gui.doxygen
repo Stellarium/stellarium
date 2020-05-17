@@ -27,31 +27,50 @@
 
 The GUI is based on Qt Widgets.
 
-Notes:
-
-- When making mistakes in the stylesheet (/data/normalStyle.css), errors may be
-  silent. Enable debug logging by adding a `~/.config/QtProject/qtlogging.ini`:
-
-    [Rules]
-    *.debug=true
-    qt.*.debug=false
-
 Relevant files:
 
-- 
+- Icons: <tt>data/gui/*.png</tt>
+- List of icons: <tt>data/gui/guiRes.qrc</tt>
+- Interface CSS: <tt>data/gui/normalStyle.css</tt>
+- SVG file with vector icons: <tt>data/gui/icons.svg</tt>
+- Qt UI files: <tt>src/gui/*.ui</tt>
+- SVG files with vector icons for plugins: <tt>plugins/.../icons.svg</tt>
+- Qt UI files for plugins: <tt>plugins/.../*.ui</tt>
 
-Important things to note when designing icons on Inkscape:
+The structure of widgets inside every window should be defined in @c *.ui files.
+But the style should be defined in @c normalStyle.css. The icon used for each
+icon is usually defined in @c *.ui files too.
+
+When making mistakes in the stylesheet (/data/normalStyle.css), errors may be
+silent. Enable debug logging by adding a `~/.config/QtProject/qtlogging.ini`:
+
+@code
+[Rules]
+*.debug=true
+qt.*.debug=false
+@endcode
+
+@section svg SVG vector icon designs
+
+Every icon was drawn with Inkscape in SVG, and then exported to PNG.
+
+There is a lot of documentation inside the <tt>data/gui/icons.svg</tt> SVG file
+itself, in the @c documentation layer.
+
+Notes:
 
 - When designing small icons it is very important to align the elements to a
   1px by 1px grid. Otherwise exported icons will look a little blurry because of
   antialiasing. This is not an Inkscape limitation, icons should be
   pixel-perfect.
 
-- For blurs and shadows we use the ? tool. Blurs in Inkscape are quite strange,
-  each blur element has a bounding box. It is important to make the bounding box
-  big enough so a cut is not visible. Also important to make the bounding box
-  small enough so the blur does not extend outside the icon (icons are located
-  one next to the other, blur can get into other icons!).
+- For blurs and shadows we use the *Filters -> Shadows and Glows -> Drop shadow*
+  tool. Blurs in Inkscape are quite strange, each blur element has a bounding
+  box. It is important to make the bounding box big enough so a cut is not
+  visible. Also important to make the bounding box small enough so the blur does
+  not extend outside the icon (icons are located one next to the other, blur can
+  get into other icons!). To adjust the bounding box use *Filters -> Filter
+  Editor -> Filter General Settings*.
 
 - Blurs in Inkscape have some kind of bug. Let's say that we want a blur with
   amount equal to 0.5 units, the result is different depending on the kind of
@@ -67,73 +86,19 @@ Important things to note when designing icons on Inkscape:
   blur*, even if you have only one element. This way, a blur of 0.5 units will
   have a consistent look across icons.
 
-Icon design:
+@section filenames Icon filenames:
 
-Colors of side panels icons:
-
-- Disabled: 6d6d6dff. Main color when disabled.
-- Enabled: ffffffff. Main color when enabled.
-- Disabled variation: cacacaff. Used when a single color is not enough to design
-  the icon. E.g. the atmosphere enable/disable icon.
-- Enabled variation: 8a8a8aff. Used when a single color is not enough to design
-  the icon. E.g. the atmosphere enable/disable icon.
-- Shadow: 000000ff. Every disabled icon has a shadow.
-- Glow: c3c3c3ff. Every enabled icon has a glow
-
-Colors of windows elements:
-
-- Checkboxes/buttons/spinners border: 242424ff
-- Disabled checkboxes/buttons/spinners border: 404040ff
-- Unselected checkboxes background (vertical gradient):
-  - Stop at 0: 8f8f8fff
-  - Stop at 0.08: 5a5a5aff
-  - Stop at 1: a0a0a0ff
-- Selected checkboxes background (vertical gradient):
-  - Stop at 0: feda77ff
-  - Stop at 0.08: d1aa5dff
-  - Stop at 1: fefebcff
-- Unselected radio buttons background (vertical gradient):
-  - Stop at 0: 4f4f4fff
-  - Stop at 1: b3b3b3ff
-- Selected radio buttons background (vertical gradient):
-  - Stop at 0: c89a3eff
-  - Stop at 1: fefeb3ff
-- Disabled checkboxes and radio buttons background (vertical gradient):
-  - Stop at 0: 808080ff
-  - Stop at 1: 909090ff
-
-- Buttons/spinners background (vertical gradient):
-  - Stop at 0: a0a0a0ff
-  - Stop at 1: 707070ff
-- Buttons/spinners text: 242424ff
-- Buttons/spinners icons:
-  - Stop at 0: 303030ff
-  - Stop at 1: 202020ff
-
-- Disabled buttons/spinners background (vertical gradient):
-  - Stop at 0: 808080ff
-  - Stop at 1: 909090ff
-- Disabled buttons/spinners text: 404040ff
-- Disabled buttons/spinners icons: 505050ff
-
-
-Icon filenames:
-
-Every kind of icon has a different prefix on the filename. E.g. bbtHelp-off.png
-and bbtSearch-on.png
+Every kind of icon has a different prefix on the filename. E.g.
+@c bbtHelp-off.png and @c bbtSearch-on.png
 
 - bbt: Left bar buttons, also named actions. Each one has an on and off state.
 - bt: Bottom bar buttons. Each one has an on and off state.
 - btbg: Backgrounds of bottom bar buttons.
-- tab: Buttons on window tabs. There is no off state because the buttons are
-  painted programatically in that case.
+- tab: Buttons on window tabs. A version for the selected and the unselected
+  tabs.
 - uibt: Images for classic UI buttons. Each one has a normal and a disabled
   state used when the button is greyed out.
 - uie: UI elements, things that go inside of UI windows like checkboxes.
 - misc: Some more misc images.
 
-
-
-
 */
-
