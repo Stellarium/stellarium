@@ -434,19 +434,28 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	#ifdef USE_STATIC_PLUGIN_QUASARS
-	Quasars* qsoMgr = GETSTELMODULE(Quasars);
-	connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-	//connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	if (conf->value("plugins_load_at_startup/Quasars", false).toBool())
+	{
+		Quasars* qsoMgr = GETSTELMODULE(Quasars);
+		connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
+		//connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	}
 	#endif
 	#ifdef USE_STATIC_PLUGIN_PULSARS
-	Pulsars* psrMgr = GETSTELMODULE(Pulsars);
-	connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-	//connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	if (conf->value("plugins_load_at_startup/Pulsars", false).toBool())
+	{
+		Pulsars* psrMgr = GETSTELMODULE(Pulsars);
+		connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
+		//connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	}
 	#endif
 	#ifdef USE_STATIC_PLUGIN_EXOPLANETS
-	Exoplanets* epMgr = GETSTELMODULE(Exoplanets);
-	connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-	//connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	if (conf->value("plugins_load_at_startup/Exoplanets", false).toBool())
+	{
+		Exoplanets* epMgr = GETSTELMODULE(Exoplanets);
+		connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
+		//connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+	}
 	#endif
 
 	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
@@ -5050,10 +5059,12 @@ void AstroCalcDialog::populateWutGroups()
 	if (propMgr->getProperty("Exoplanets.showExoplanets")->getValue().toBool())
 		wutCategories.insert(q_("Exoplanetary systems"), 29);
 	#ifdef USE_STATIC_PLUGIN_NOVAE
-	wutCategories.insert(q_("Bright nova stars"), 30);
+	if (conf->value("plugins_load_at_startup/Novae", false).toBool())
+		wutCategories.insert(q_("Bright nova stars"), 30);
 	#endif
 	#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
-	wutCategories.insert(q_("Bright supernova stars"), 31);
+	if (conf->value("plugins_load_at_startup/Supernovae", false).toBool())
+		wutCategories.insert(q_("Bright supernova stars"), 31);
 	#endif
 
 	category->clear();
@@ -5530,7 +5541,8 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular separation for visible double stars"));
 					ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular separation for visible double stars"));
 					ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular separation for visible double stars"));
-					initListWUT(true, true); // special case!
+					if (i==0)
+						initListWUT(true, true); // special case!
 
 					for (const auto& dblStar : dblHipStars)
 					{
@@ -5624,8 +5636,8 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 27: // Quasars
-					#ifdef USE_STATIC_PLUGIN_QUASARS
 					enableVisibilityAngularLimits(false);
+					#ifdef USE_STATIC_PLUGIN_QUASARS					
 					for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
 					{
 						mag = object->getVMagnitude(core);
@@ -5647,8 +5659,8 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 28: // Pulsars
-					#ifdef USE_STATIC_PLUGIN_PULSARS
 					enableVisibilityAngularLimits(false);
+					#ifdef USE_STATIC_PLUGIN_PULSARS					
 					for (const auto& object : GETSTELMODULE(Pulsars)->getAllPulsars())
 					{
 						if (object->isAboveRealHorizon(core))
@@ -5677,8 +5689,8 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 29: // Exoplanetary systems
-					#ifdef USE_STATIC_PLUGIN_EXOPLANETS
 					enableVisibilityAngularLimits(false);
+					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
 						mag = object->getVMagnitude(core);
@@ -5700,8 +5712,8 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 30: // Bright novae
-					#ifdef USE_STATIC_PLUGIN_NOVAE
 					enableVisibilityAngularLimits(false);
+					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
 						mag = object->getVMagnitude(core);
@@ -5723,8 +5735,8 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 31: // Bright supernovae
-					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
 					enableVisibilityAngularLimits(false);
+					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
 						mag = object->getVMagnitude(core);
