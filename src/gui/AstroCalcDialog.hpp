@@ -109,6 +109,7 @@ public:
 		PhenomenaObject2,			//! second object
 		PhenomenaMagnitude2,		//! magnitude of second object
 		PhenomenaSeparation,		//! angular separation
+		PhenomenaElevation,		//! elevation of first object
 		PhenomenaElongation,		//! elongation (from the Sun)
 		PhenomenaAngularDistance,	//! angular distance (from the Moon)
 		PhenomenaCount			//! total number of columns
@@ -350,6 +351,7 @@ private:
 	void populateFunctionsList();
 
 	void adjustWUTColumns();
+	void adjustPhenomenaColumns();
 
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
@@ -371,8 +373,8 @@ private:
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
-				   QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
+				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
+				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
 	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
@@ -541,7 +543,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::PhenomenaSeparation || column == AstroCalcDialog::PhenomenaElongation || column == AstroCalcDialog::PhenomenaAngularDistance)
+		if (column == AstroCalcDialog::PhenomenaSeparation || column == AstroCalcDialog::PhenomenaElevation || column == AstroCalcDialog::PhenomenaElongation || column == AstroCalcDialog::PhenomenaAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}

@@ -2409,6 +2409,7 @@ void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
 void AstroCalcDialog::cleanupPhenomena()
 {
 	ui->phenomenaTreeWidget->clear();
+	adjustPhenomenaColumns();
 }
 
 void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
@@ -3498,15 +3499,20 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	// TRANSLATORS: Magnitude of object 2
 	phenomenaHeader << q_("Mag. 2");
 	phenomenaHeader << q_("Separation");
+	phenomenaHeader << q_("Elevation");
 	phenomenaHeader << q_("Solar Elongation");
 	phenomenaHeader << q_("Lunar Elongation");
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
+	adjustPhenomenaColumns();
+}
 
+void AstroCalcDialog::adjustPhenomenaColumns()
+{
 	// adjust the column width
 	for (int i = 0; i < PhenomenaCount; ++i)
 	{
 		ui->phenomenaTreeWidget->resizeColumnToContents(i);
-	}	
+	}
 }
 
 void AstroCalcDialog::initListPhenomena()
@@ -3799,11 +3805,7 @@ void AstroCalcDialog::calculatePhenomena()
 	}
 
 	// adjust the column width
-	for (int i = 0; i < PhenomenaCount; ++i)
-	{
-		ui->phenomenaTreeWidget->resizeColumnToContents(i);
-	}
-
+	adjustPhenomenaColumns();
 	// sort-by-date
 	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);	
 }
@@ -3880,8 +3882,8 @@ void AstroCalcDialog::savePhenomena()
 }
 
 void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-					    QString secondObjectName, float secondObjectMagnitude, QString separation, QString elongation,
-					    QString angularDistance, QString elongTooltip, QString angDistTooltip)
+					    QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
+					    QString elongation, QString angularDistance, QString elongTooltip, QString angDistTooltip)
 {
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
@@ -3904,6 +3906,9 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setTextAlignment(PhenomenaMagnitude2, Qt::AlignRight);	
 	treeItem->setText(PhenomenaSeparation, separation);
 	treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
+	treeItem->setText(PhenomenaElevation, elevation);
+	treeItem->setTextAlignment(PhenomenaElevation, Qt::AlignRight);
+	treeItem->setToolTip(PhenomenaElevation, q_("Elevation of first object at moment of phenomena"));
 	treeItem->setText(PhenomenaElongation, elongation);
 	if (elongTooltip.isEmpty())
 		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
@@ -3926,6 +3931,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -4087,7 +4093,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			separationStr = dash;
 		}
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		QString elevationStr = dash;
+		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
+		if (withDecimalDegree)
+			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+		else
+			elevationStr = StelUtils::radToDmsPStr(alt, 2);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elevationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -4099,6 +4112,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -4157,7 +4171,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elongStr, angDistStr);
+		QString elevationStr = dash;
+		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
+		if (withDecimalDegree)
+			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+		else
+			elevationStr = StelUtils::radToDmsPStr(alt, 2);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 
@@ -4169,6 +4190,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -4281,7 +4303,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			magnitude = 99.f; // Let's hide obviously wrong data
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elongStr, angDistStr);
+		QString elevationStr = dash;
+		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
+		if (withDecimalDegree)
+			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+		else
+			elevationStr = StelUtils::radToDmsPStr(alt, 2);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 
@@ -5132,7 +5161,8 @@ void AstroCalcDialog::setWUTHeaderNames(const bool magnitude, const bool separat
 	}
 	wutHeader << qc_("Rise", "celestial event");
 	wutHeader << qc_("Transit", "celestial event; passage across a meridian");
-	wutHeader << qc_("Elev.", "elevation");
+	// TRANSLATORS: elevation
+	wutHeader << q_("Elev.");
 	wutHeader << qc_("Set", "celestial event");
 	if (separation)
 	{
