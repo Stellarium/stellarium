@@ -353,9 +353,9 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showAntisolarPointCheckBox,			"actionShow_Antisolar_Point");
 	connectCheckBox(ui->showApexPointsCheckBox,			"actionShow_Apex_Points");
 	connectCheckBox(ui->showFOVCenterMarkerCheckBox,		"actionShow_FOV_Center_Marker");
-	connectCheckBox(ui->showFOVCircleMarkerCheckBox,		"actionShow_FOV_Circle_Marker");
+	connectCheckBox(ui->showFOVCircularMarkerCheckBox,		"actionShow_FOV_Circular_Marker");
 	connectCheckBox(ui->showFOVRectangularMarkerCheckBox,	"actionShow_FOV_Rectangular_Marker");
-	connectDoubleProperty(ui->fovCircleMarkerSizeDoubleSpinBox, "SpecialMarkersMgr.fovCircleMarkerSize");
+	connectDoubleProperty(ui->fovCircularMarkerSizeDoubleSpinBox, "SpecialMarkersMgr.fovCircularMarkerSize");
 	connectDoubleProperty(ui->fovRectangularMarkerWidthDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerWidth");
 	connectDoubleProperty(ui->fovRectangularMarkerHeightDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerHeight");
 	connectDoubleProperty(ui->fovRectangularMarkerRotationAngleDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerRotationAngle");
@@ -421,7 +421,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorAntisolarPoint,			"GridLinesMgr.antisolarPointColor",			"color/antisolar_point_color");
 	connectColorButton(ui->colorApexPoints,				"GridLinesMgr.apexPointsColor",			"color/apex_points_color");
 	connectColorButton(ui->colorFOVCenterMarker,		"SpecialMarkersMgr.fovCenterMarkerColor",	"color/fov_center_marker_color");
-	connectColorButton(ui->colorFOVCircleMarker,			"SpecialMarkersMgr.fovCircleMarkerColor",		"color/fov_circle_marker_color");
+	connectColorButton(ui->colorFOVCircularMarker,		"SpecialMarkersMgr.fovCircularMarkerColor",	"color/fov_circular_marker_color");
 	connectColorButton(ui->colorFOVRectangularMarker,	"SpecialMarkersMgr.fovRectangularMarkerColor", "color/fov_rectangular_marker_color");
 	connectColorButton(ui->colorCardinalPoints,			"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
 

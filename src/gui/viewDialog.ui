@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>875</width>
+    <width>947</width>
     <height>567</height>
    </rect>
   </property>
@@ -2742,14 +2742,14 @@
                <item row="12" column="7">
                 <layout class="QHBoxLayout" name="horizontalLayout_22">
                  <item>
-                  <widget class="QCheckBox" name="showFOVCircleMarkerCheckBox">
+                  <widget class="QCheckBox" name="showFOVCircularMarkerCheckBox">
                    <property name="text">
-                    <string>FOV circle marker</string>
+                    <string>Circular marker of FOV</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="fovCircleMarkerSizeDoubleSpinBox">
+                  <widget class="QDoubleSpinBox" name="fovCircularMarkerSizeDoubleSpinBox">
                    <property name="maximumSize">
                     <size>
                      <width>65</width>
@@ -3069,7 +3069,7 @@
                 </widget>
                </item>
                <item row="12" column="6">
-                <widget class="QToolButton" name="colorFOVCircleMarker">
+                <widget class="QToolButton" name="colorFOVCircularMarker">
                  <property name="toolTip">
                   <string>Color of FOV circle marker</string>
                  </property>
@@ -3561,7 +3561,7 @@
                  <item>
                   <widget class="QCheckBox" name="showFOVRectangularMarkerCheckBox">
                    <property name="text">
-                    <string>FOV rectangular marker</string>
+                    <string>Rectangular marker of FOV</string>
                    </property>
                   </widget>
                  </item>

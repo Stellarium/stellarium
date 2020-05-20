@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-20 22:01+0700\n"
+"POT-Creation-Date: 2020-05-20 22:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 #: src/core/modules/AsterismMgr.cpp:95
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:455
 #: src/core/modules/GridLinesMgr.cpp:1635
-#: src/core/modules/SpecialMarkersMgr.cpp:206
+#: src/core/modules/SpecialMarkersMgr.cpp:217
 #: src/core/modules/LandscapeMgr.cpp:479
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:273
@@ -414,16 +414,16 @@ msgstr ""
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:207 src/ui_viewDialog.h:3437
+#: src/core/modules/SpecialMarkersMgr.cpp:218 src/ui_viewDialog.h:3437
 msgid "FOV Center marker"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:208 src/ui_viewDialog.h:3216
-msgid "FOV circle marker"
+#: src/core/modules/SpecialMarkersMgr.cpp:219 src/ui_viewDialog.h:3216
+msgid "Circular marker of FOV"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:209 src/ui_viewDialog.h:3471
-msgid "FOV rectangular marker"
+#: src/core/modules/SpecialMarkersMgr.cpp:220 src/ui_viewDialog.h:3471
+msgid "Rectangular marker of FOV"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:480

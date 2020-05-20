@@ -766,9 +766,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_solstice_points",			propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 	conf->setValue("viewing/flag_apex_points",			propMgr->getStelPropertyValue("GridLinesMgr.apexPointsDisplayed").toBool());
-	conf->setValue("viewing/flag_fov_center_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCenterMarkerDisplayed").toBool());
-	conf->setValue("viewing/flag_fov_circle_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircleMarkerDisplayed").toBool());
-	conf->setValue("viewing/size_fov_circle_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircleMarkerSize").toDouble(), 'f', 2));
+	conf->setValue("viewing/flag_fov_center_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircularMarkerDisplayed").toBool());
+	conf->setValue("viewing/flag_fov_circular_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircularMarkerDisplayed").toBool());
+	conf->setValue("viewing/size_fov_circular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircleMarkerSize").toDouble(), 'f', 2));
 	conf->setValue("viewing/flag_fov_rectangular_marker",	propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerDisplayed").toBool());
 	conf->setValue("viewing/width_fov_rectangular_marker",	QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerWidth").toDouble(), 'f', 2));
 	conf->setValue("viewing/height_fov_rectangular_marker",	QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerHeight").toDouble(), 'f', 2));
