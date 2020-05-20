@@ -243,7 +243,7 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
 	if (actionName==StelModule::ActionHandleMouseClicks)
 		return StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName)-1;
-	return 0;
+	return 0.;
 }
 
 void LandscapeMgr::update(double deltaTime)

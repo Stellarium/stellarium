@@ -354,7 +354,11 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showApexPointsCheckBox,			"actionShow_Apex_Points");
 	connectCheckBox(ui->showFOVCenterMarkerCheckBox,		"actionShow_FOV_Center_Marker");
 	connectCheckBox(ui->showFOVCircleMarkerCheckBox,		"actionShow_FOV_Circle_Marker");
+	connectCheckBox(ui->showFOVRectangularMarkerCheckBox,	"actionShow_FOV_Rectangular_Marker");
 	connectDoubleProperty(ui->fovCircleMarkerSizeDoubleSpinBox, "SpecialMarkersMgr.fovCircleMarkerSize");
+	connectDoubleProperty(ui->fovRectangularMarkerWidthDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerWidth");
+	connectDoubleProperty(ui->fovRectangularMarkerHeightDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerHeight");
+	connectDoubleProperty(ui->fovRectangularMarkerRotationAngleDoubleSpinBox, "SpecialMarkersMgr.fovRectangularMarkerRotationAngle");
 	// The thickness of lines
 	connectIntProperty(ui->lineThicknessSpinBox,				"GridLinesMgr.lineThickness");
 	connectIntProperty(ui->partThicknessSpinBox,				"GridLinesMgr.partThickness");
@@ -418,6 +422,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorApexPoints,				"GridLinesMgr.apexPointsColor",			"color/apex_points_color");
 	connectColorButton(ui->colorFOVCenterMarker,		"SpecialMarkersMgr.fovCenterMarkerColor",	"color/fov_center_marker_color");
 	connectColorButton(ui->colorFOVCircleMarker,			"SpecialMarkersMgr.fovCircleMarkerColor",		"color/fov_circle_marker_color");
+	connectColorButton(ui->colorFOVRectangularMarker,	"SpecialMarkersMgr.fovRectangularMarkerColor", "color/fov_rectangular_marker_color");
 	connectColorButton(ui->colorCardinalPoints,			"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
 
 	// Projection

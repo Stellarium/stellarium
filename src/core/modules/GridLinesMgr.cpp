@@ -1513,8 +1513,8 @@ GridLinesMgr::~GridLinesMgr()
 double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10;
-	return 0;
+		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.;
+	return 0.;
 }
 
 void GridLinesMgr::init()
