@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-20 15:21+0700\n"
+"POT-Creation-Date: 2020-05-20 15:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3264
+#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:3185
 msgid "Meridian"
 msgstr ""
 
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Precession Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3105
+#: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:3155
 msgid "Horizon"
 msgstr ""
 
@@ -171,12 +171,12 @@ msgid "Supergalactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3398
+#: src/core/modules/GridLinesMgr.cpp:717 src/ui_viewDialog.h:3364
 msgid "O./C. longitude"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:721 src/core/modules/GridLinesMgr.cpp:1654
-#: src/ui_viewDialog.h:3280
+#: src/ui_viewDialog.h:3287
 msgid "Prime Vertical"
 msgstr ""
 
@@ -282,7 +282,7 @@ msgstr ""
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1638 src/ui_viewDialog.h:3193
+#: src/core/modules/GridLinesMgr.cpp:1638 src/ui_viewDialog.h:3346
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr ""
@@ -328,20 +328,20 @@ msgstr ""
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1648 src/ui_viewDialog.h:3363
+#: src/core/modules/GridLinesMgr.cpp:1648 src/ui_viewDialog.h:3276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1649 src/ui_viewDialog.h:3388
+#: src/core/modules/GridLinesMgr.cpp:1649 src/ui_viewDialog.h:3255
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3314
+#: src/core/modules/GridLinesMgr.cpp:1650 src/ui_viewDialog.h:3411
 msgid "Supergalactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3093
+#: src/core/modules/GridLinesMgr.cpp:1651 src/ui_viewDialog.h:3113
 msgid "Supergalactic equator"
 msgstr ""
 
@@ -382,11 +382,11 @@ msgstr ""
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1662 src/ui_viewDialog.h:3177
+#: src/core/modules/GridLinesMgr.cpp:1662 src/ui_viewDialog.h:3352
 msgid "Galactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3176
+#: src/core/modules/GridLinesMgr.cpp:1663 src/ui_viewDialog.h:3083
 msgid "Supergalactic poles"
 msgstr ""
 
@@ -406,19 +406,19 @@ msgstr ""
 msgid "Solstice points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1668 src/ui_viewDialog.h:3159
+#: src/core/modules/GridLinesMgr.cpp:1668 src/ui_viewDialog.h:3241
 msgid "Antisolar point"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1669 src/ui_viewDialog.h:3211
+#: src/core/modules/GridLinesMgr.cpp:1669 src/ui_viewDialog.h:3395
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:163 src/ui_viewDialog.h:3407
+#: src/core/modules/SpecialMarkersMgr.cpp:163 src/ui_viewDialog.h:3384
 msgid "FOV Center marker"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:164 src/ui_viewDialog.h:3411
+#: src/core/modules/SpecialMarkersMgr.cpp:164 src/ui_viewDialog.h:3163
 msgid "FOV circle marker"
 msgstr ""
 
@@ -430,7 +430,7 @@ msgstr ""
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3292
+#: src/core/modules/LandscapeMgr.cpp:482 src/ui_viewDialog.h:3332
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr ""
@@ -4982,7 +4982,7 @@ msgstr ""
 msgid "S.B."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:894 src/ui_viewDialog.h:3494
+#: src/gui/AstroCalcDialog.cpp:894 src/ui_viewDialog.h:3497
 msgid "Solar system objects"
 msgstr ""
 
@@ -9328,8 +9328,8 @@ msgstr ""
 msgid "Show FOV center marker when position is search"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3412
-#: src/ui_viewDialog.h:3434 src/ui_configurationDialog.h:1866
+#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3415
+#: src/ui_viewDialog.h:3437 src/ui_configurationDialog.h:1866
 #: src/ui_configurationDialog.h:1877
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
@@ -9386,7 +9386,7 @@ msgstr ""
 msgid "Spiky stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:2852 src/ui_viewDialog.h:3490
+#: src/ui_viewDialog.h:2852 src/ui_viewDialog.h:3493
 msgid "Sky"
 msgstr ""
 
@@ -9780,542 +9780,546 @@ msgstr ""
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:3084
-msgid "Show Prime (East-West) Vertical."
+#: src/ui_viewDialog.h:3085 src/ui_viewDialog.h:3107 src/ui_viewDialog.h:3121
+#: src/ui_viewDialog.h:3135 src/ui_viewDialog.h:3139 src/ui_viewDialog.h:3172
+#: src/ui_viewDialog.h:3198 src/ui_viewDialog.h:3235 src/ui_viewDialog.h:3305
+#: src/ui_viewDialog.h:3312 src/ui_viewDialog.h:3370 src/ui_viewDialog.h:3401
+msgid "Show partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3088
-msgid "Color of the ecliptic poles (J2000.0)"
+#: src/ui_viewDialog.h:3089
+msgid "Show Galactic equator line."
 msgstr ""
 
-#: src/ui_viewDialog.h:3091 src/ui_viewDialog.h:3103 src/ui_viewDialog.h:3169
-#: src/ui_viewDialog.h:3235 src/ui_viewDialog.h:3239 src/ui_viewDialog.h:3254
-#: src/ui_viewDialog.h:3262 src/ui_viewDialog.h:3278 src/ui_viewDialog.h:3350
-#: src/ui_viewDialog.h:3382 src/ui_viewDialog.h:3386 src/ui_viewDialog.h:3396
+#: src/ui_viewDialog.h:3093 src/ui_viewDialog.h:3100 src/ui_viewDialog.h:3111
+#: src/ui_viewDialog.h:3153 src/ui_viewDialog.h:3157 src/ui_viewDialog.h:3179
+#: src/ui_viewDialog.h:3183 src/ui_viewDialog.h:3205 src/ui_viewDialog.h:3243
+#: src/ui_viewDialog.h:3253 src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3362
 msgid "Label partitions"
 msgstr ""
 
 #: src/ui_viewDialog.h:3095
-msgid "Color of the solstice points (J2000.0)"
+msgid "Equator (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3099 src/ui_viewDialog.h:3120 src/ui_viewDialog.h:3130
-#: src/ui_viewDialog.h:3146 src/ui_viewDialog.h:3150 src/ui_viewDialog.h:3202
-#: src/ui_viewDialog.h:3225 src/ui_viewDialog.h:3250 src/ui_viewDialog.h:3258
-#: src/ui_viewDialog.h:3282 src/ui_viewDialog.h:3294 src/ui_viewDialog.h:3298
-msgid "Show partitions"
+#: src/ui_viewDialog.h:3097
+msgid "Color of supergalactic equator"
 msgstr ""
 
-#: src/ui_viewDialog.h:3107
-msgid "Color of the equatorial grid (J2000.0)"
+#: src/ui_viewDialog.h:3102
+msgid "Colures"
 msgstr ""
 
-#: src/ui_viewDialog.h:3110
+#: src/ui_viewDialog.h:3104
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3113
-msgid "Color of ecliptic (J2000.0)"
+#: src/ui_viewDialog.h:3115
+msgid "Color of the equinox points (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3116
-msgid "Show Galactic equator line."
-msgstr ""
-
-#: src/ui_viewDialog.h:3124
-msgid "Color of circumpolar circles"
-msgstr ""
-
-#: src/ui_viewDialog.h:3127
-msgid "Color of the equinox points (J2000.0)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3134
-msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3137
-msgid "Color of ecliptic poles (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3140
-msgid "Color of the equatorial grid (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3143
+#: src/ui_viewDialog.h:3118
 msgid "Color of the galactic grid"
 msgstr ""
 
-#: src/ui_viewDialog.h:3154
-msgid "Color of Prime Vertical"
+#: src/ui_viewDialog.h:3125
+msgid "Color of equator (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3157
-msgid "Color of cardinal points"
+#: src/ui_viewDialog.h:3128
+msgid "Show celestial equator of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:3161
-msgid ""
-"Opposition/conjunction longitude line - the line of ecliptic longitude which "
-"passes through both ecliptic poles, the Sun and opposition point."
+#: src/ui_viewDialog.h:3132
+msgid "Color of ecliptic (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3165
-msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
+#: src/ui_viewDialog.h:3143
+msgid "Color of ecliptic (J2000.0)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3171
-msgid "Precession circles"
-msgstr ""
-
-#: src/ui_viewDialog.h:3173
+#: src/ui_viewDialog.h:3146
 msgid "Color of galactic poles"
 msgstr ""
 
-#: src/ui_viewDialog.h:3175
-msgid "Solstices (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3178
-msgid "Zenith and Nadir"
-msgstr ""
-
-#: src/ui_viewDialog.h:3180
-msgid "Color of horizon"
-msgstr ""
-
-#: src/ui_viewDialog.h:3183
+#: src/ui_viewDialog.h:3149
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
 
-#: src/ui_viewDialog.h:3187
-msgid "Color of antisolar point"
+#: src/ui_viewDialog.h:3159
+msgid "Equator (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3191
-msgid "Altitudes and azimuth (counted from North towards East)."
+#: src/ui_viewDialog.h:3161
+msgid "Color of the opposition/conjunction longitude line"
 msgstr ""
 
-#: src/ui_viewDialog.h:3195
-msgid "Color of colures"
+#: src/ui_viewDialog.h:3165
+msgid "Field of view in degrees"
 msgstr ""
 
-#: src/ui_viewDialog.h:3198
-msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
-
-#: src/ui_viewDialog.h:3200
-msgid "Ecliptic grid (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3206
-msgid "Color of supergalactic poles"
-msgstr ""
-
-#: src/ui_viewDialog.h:3209
-msgid ""
-"Apex and Antapex indicate where the observer's planet is heading to or "
-"receding from, respectively."
-msgstr ""
-
-#: src/ui_viewDialog.h:3213
+#: src/ui_viewDialog.h:3168
 msgid "Show ecliptic line of current date."
 msgstr ""
 
+#: src/ui_viewDialog.h:3176
+msgid "Color of colures"
+msgstr ""
+
+#: src/ui_viewDialog.h:3181
+msgid "Precession circles"
+msgstr ""
+
+#: src/ui_viewDialog.h:3187
+msgid "Color of FOV center marker"
+msgstr ""
+
+#: src/ui_viewDialog.h:3190
+msgid "Show celestial equator of current planet and date."
+msgstr ""
+
+#: src/ui_viewDialog.h:3194
+msgid "Ecliptical coordinates for J2000.0."
+msgstr ""
+
+#: src/ui_viewDialog.h:3196
+msgid "Ecliptic grid (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3202
+msgid "Color of Apex and Antapex points"
+msgstr ""
+
+#: src/ui_viewDialog.h:3207
+msgid "Ecliptic (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3209
+msgid "Color of cardinal points"
+msgstr ""
+
+#: src/ui_viewDialog.h:3212
+msgid "Equatorial coordinates of J2000.0."
+msgstr ""
+
+#: src/ui_viewDialog.h:3214
+msgid "Equatorial grid (J2000)"
+msgstr ""
+
 #: src/ui_viewDialog.h:3216
+msgid "Color of circumpolar circles"
+msgstr ""
+
+#: src/ui_viewDialog.h:3219
+msgid "Color of galactic equator"
+msgstr ""
+
+#: src/ui_viewDialog.h:3222
+msgid "The line thickness for circle partitions"
+msgstr ""
+
+#: src/ui_viewDialog.h:3224
+msgid "Partition thickness"
+msgstr ""
+
+#: src/ui_viewDialog.h:3226
+msgid "Color of the solstice points (J2000.0)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3229
+msgid "Equinoxes (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3230
+msgid "Zenith and Nadir"
+msgstr ""
+
+#: src/ui_viewDialog.h:3232
+msgid "Color of precession circles"
+msgstr ""
+
+#: src/ui_viewDialog.h:3239
+msgid "Color of ecliptic poles (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3245
+msgid "Ecliptic (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3247
+msgid "Color of the celestial poles (J2000.0)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3250
+msgid "Color of meridian"
+msgstr ""
+
+#: src/ui_viewDialog.h:3257
+msgid "Color of FOV circle marker"
+msgstr ""
+
+#: src/ui_viewDialog.h:3260
+msgid "Color of equator (J2000.0)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3262
 msgid "Equinoxes (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3218
+#: src/ui_viewDialog.h:3264
+msgid "Color of the azimuthal grid"
+msgstr ""
+
+#: src/ui_viewDialog.h:3267
+msgid "Color of the supergalactic grid"
+msgstr ""
+
+#: src/ui_viewDialog.h:3270
+msgid "Equatorial coordinates of current date and planet."
+msgstr ""
+
+#: src/ui_viewDialog.h:3272
+msgid "Equatorial grid (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3274
+msgid "Galactic Coordinates, System II (IAU 1958)."
+msgstr ""
+
+#: src/ui_viewDialog.h:3278
+msgid "Show celestial poles of current planet and date."
+msgstr ""
+
+#: src/ui_viewDialog.h:3280
+msgid "Celestial poles (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3282
+msgid "Color of the equatorial grid (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3289
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
 
-#: src/ui_viewDialog.h:3220
+#: src/ui_viewDialog.h:3291
 msgid "Circumpolar circles"
 msgstr ""
 
-#: src/ui_viewDialog.h:3222
-msgid "Color of Apex and Antapex points"
-msgstr ""
-
-#: src/ui_viewDialog.h:3229
-msgid "Color of equator (J2000.0)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3232
-msgid "Color of equator (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3237
-msgid "Ecliptic (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3241
-msgid "Colures"
-msgstr ""
-
-#: src/ui_viewDialog.h:3243
-msgid "Color of the supergalactic grid"
-msgstr ""
-
-#: src/ui_viewDialog.h:3246
-msgid "Show celestial equator of current planet and date."
-msgstr ""
-
-#: src/ui_viewDialog.h:3256
-msgid "Equator (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3266
+#: src/ui_viewDialog.h:3293
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 
-#: src/ui_viewDialog.h:3270
+#: src/ui_viewDialog.h:3297
+msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
+msgstr ""
+
+#: src/ui_viewDialog.h:3301
 msgid "Show celestial poles of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:3272
+#: src/ui_viewDialog.h:3303
 msgid "Celestial poles (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3274
-msgid "Show celestial equator of J2000.0."
+#: src/ui_viewDialog.h:3309
+msgid "Color of the equinox points (J2000.0)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3286
-msgid "Color of meridian"
+#: src/ui_viewDialog.h:3316
+msgid "Color of supergalactic poles"
 msgstr ""
 
-#: src/ui_viewDialog.h:3288
-msgid "Solstices (of date)"
+#: src/ui_viewDialog.h:3319
+msgid "The line thickness for grids and lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3290
+#: src/ui_viewDialog.h:3321
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
+msgid "Line thickness"
+msgstr ""
+
+#: src/ui_viewDialog.h:3323
+msgid "Color of the solstice points (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3327
+msgid "Color of Prime Vertical"
+msgstr ""
+
+#: src/ui_viewDialog.h:3330
 msgid "Labels for the Cardinal and Ordinal directions."
 msgstr ""
 
-#: src/ui_viewDialog.h:3302
-msgid "Color of the equinox points (of date)"
+#: src/ui_viewDialog.h:3334
+msgid "Show ecliptic poles of J2000.0"
 msgstr ""
 
-#: src/ui_viewDialog.h:3305
+#: src/ui_viewDialog.h:3336
+msgid "Ecliptic poles (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3338
+msgid "Color of the equatorial grid (J2000.0)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3341
+msgid "Color of horizon"
+msgstr ""
+
+#: src/ui_viewDialog.h:3344
+msgid "Altitudes and azimuth (counted from North towards East)."
+msgstr ""
+
+#: src/ui_viewDialog.h:3347
+msgid "Solstices (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3349
+msgid "Show Prime (East-West) Vertical."
+msgstr ""
+
+#: src/ui_viewDialog.h:3354
+msgid "Color of celestial poles (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3357
+msgid "Show ecliptic poles of current date."
+msgstr ""
+
+#: src/ui_viewDialog.h:3359
+msgid "Ecliptic poles (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3360
+msgid "Solstices (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3366
+msgid "Show mathematical horizon line."
+msgstr ""
+
+#: src/ui_viewDialog.h:3374
+msgid "Ecliptical coordinates for current date. Displayed on Earth only."
+msgstr ""
+
+#: src/ui_viewDialog.h:3376
+msgid "Ecliptic grid (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3378
+msgid "Color of the ecliptical grid (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3381
+msgid "Color of antisolar point"
+msgstr ""
+
+#: src/ui_viewDialog.h:3386
+msgid "Show meridian line."
+msgstr ""
+
+#: src/ui_viewDialog.h:3390
+msgid "Color of the ecliptic poles (J2000.0)"
+msgstr ""
+
+#: src/ui_viewDialog.h:3393
+msgid ""
+"Apex and Antapex indicate where the observer's planet is heading to or "
+"receding from, respectively."
+msgstr ""
+
+#: src/ui_viewDialog.h:3397
+msgid ""
+"Opposition/conjunction longitude line - the line of ecliptic longitude which "
+"passes through both ecliptic poles, the Sun and opposition point."
+msgstr ""
+
+#: src/ui_viewDialog.h:3405
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:3309
-msgid "Color of FOV center marker"
-msgstr ""
-
-#: src/ui_viewDialog.h:3312
+#: src/ui_viewDialog.h:3409
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
 
-#: src/ui_viewDialog.h:3316
-msgid "The line thickness for circle partitions"
-msgstr ""
-
-#: src/ui_viewDialog.h:3318
-msgid "Partition thickness"
-msgstr ""
-
-#: src/ui_viewDialog.h:3320
-msgid "Show ecliptic poles of J2000.0"
-msgstr ""
-
-#: src/ui_viewDialog.h:3322
-msgid "Ecliptic poles (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3324
-msgid "Show meridian line."
-msgstr ""
-
-#: src/ui_viewDialog.h:3327
-msgid "Equinoxes (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3329
-msgid "The line thickness for grids and lines"
-msgstr ""
-
-#: src/ui_viewDialog.h:3331
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:615
-msgid "Line thickness"
-msgstr ""
-
-#: src/ui_viewDialog.h:3333
-msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
-
-#: src/ui_viewDialog.h:3336
-msgid "Color of ecliptic (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3339
+#: src/ui_viewDialog.h:3413
 msgid "Color of Zenith and Nadir"
 msgstr ""
 
-#: src/ui_viewDialog.h:3342
-msgid "Show mathematical horizon line."
-msgstr ""
-
-#: src/ui_viewDialog.h:3346
-msgid "Equatorial coordinates of current date and planet."
-msgstr ""
-
-#: src/ui_viewDialog.h:3348
-msgid "Equatorial grid (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3352
-msgid "Ecliptic (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3354
-msgid "Color of galactic equator"
-msgstr ""
-
-#: src/ui_viewDialog.h:3357
-msgid "Equatorial coordinates of J2000.0."
-msgstr ""
-
-#: src/ui_viewDialog.h:3359
-msgid "Equatorial grid (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3361
-msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
-
-#: src/ui_viewDialog.h:3365
-msgid "Show celestial poles of current planet and date."
-msgstr ""
-
-#: src/ui_viewDialog.h:3367
-msgid "Celestial poles (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3369
-msgid "Color of the solstice points (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3373
-msgid "Color of celestial poles (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3376
-msgid "Color of precession circles"
-msgstr ""
-
-#: src/ui_viewDialog.h:3379
-msgid "Color of the ecliptical grid (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3384
-msgid "Equator (J2000)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3390
-msgid "Color of the azimuthal grid"
-msgstr ""
-
-#: src/ui_viewDialog.h:3393
-msgid "Color of supergalactic equator"
-msgstr ""
-
-#: src/ui_viewDialog.h:3400
-msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
-
-#: src/ui_viewDialog.h:3402
-msgid "Ecliptic grid (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3404
-msgid "Show ecliptic poles of current date."
-msgstr ""
-
-#: src/ui_viewDialog.h:3406
-msgid "Ecliptic poles (of date)"
-msgstr ""
-
-#: src/ui_viewDialog.h:3409
-msgid "Color of FOV circle marker"
-msgstr ""
-
-#: src/ui_viewDialog.h:3413
+#: src/ui_viewDialog.h:3416
 msgid "Show fog"
 msgstr ""
 
-#: src/ui_viewDialog.h:3414
+#: src/ui_viewDialog.h:3417
 msgid "Use associated planet and position"
 msgstr ""
 
-#: src/ui_viewDialog.h:3415
+#: src/ui_viewDialog.h:3418
 msgid "Use this landscape as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:3416
+#: src/ui_viewDialog.h:3419
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:3418
+#: src/ui_viewDialog.h:3421
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 
-#: src/ui_viewDialog.h:3420
+#: src/ui_viewDialog.h:3423
 msgid "Minimal brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:3422
+#: src/ui_viewDialog.h:3425
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3425
+#: src/ui_viewDialog.h:3428
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 
-#: src/ui_viewDialog.h:3427
+#: src/ui_viewDialog.h:3430
 msgid "from landscape, if given"
 msgstr ""
 
-#: src/ui_viewDialog.h:3429
+#: src/ui_viewDialog.h:3432
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3431
+#: src/ui_viewDialog.h:3434
 msgid "Show illumination "
 msgstr ""
 
-#: src/ui_viewDialog.h:3432
+#: src/ui_viewDialog.h:3435
 msgid "Show landscape labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3433
+#: src/ui_viewDialog.h:3436
 msgid "Add/remove landscapes..."
 msgstr ""
 
-#: src/ui_viewDialog.h:3436
+#: src/ui_viewDialog.h:3439
 msgid "Use native names for planets from current culture"
 msgstr ""
 
-#: src/ui_viewDialog.h:3438
+#: src/ui_viewDialog.h:3441
 msgid "Use native names for planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:3440
+#: src/ui_viewDialog.h:3443
 msgid "Color of constellation names"
 msgstr ""
 
-#: src/ui_viewDialog.h:3442
+#: src/ui_viewDialog.h:3445
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3444
+#: src/ui_viewDialog.h:3447
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 
-#: src/ui_viewDialog.h:3448
+#: src/ui_viewDialog.h:3451
 msgid "Color of asterism lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3450
+#: src/ui_viewDialog.h:3453
 msgid "Show asterism lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3452 src/ui_viewDialog.h:3462 src/ui_viewDialog.h:3469
-#: src/ui_viewDialog.h:3477
+#: src/ui_viewDialog.h:3455 src/ui_viewDialog.h:3465 src/ui_viewDialog.h:3472
+#: src/ui_viewDialog.h:3480
 msgid "Thickness of line in pixels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3455
+#: src/ui_viewDialog.h:3458
 msgid "Color of constellation boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:3458
+#: src/ui_viewDialog.h:3461
 msgid "Show boundaries of constellations"
 msgstr ""
 
-#: src/ui_viewDialog.h:3460
+#: src/ui_viewDialog.h:3463
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:3465
+#: src/ui_viewDialog.h:3468
 msgid "Color of ray helpers"
 msgstr ""
 
-#: src/ui_viewDialog.h:3467
+#: src/ui_viewDialog.h:3470
 msgid "Show ray helpers"
 msgstr ""
 
-#: src/ui_viewDialog.h:3471
+#: src/ui_viewDialog.h:3474
 msgid "Show art in brightness"
 msgstr ""
 
-#: src/ui_viewDialog.h:3473
+#: src/ui_viewDialog.h:3476
 msgid "Color of constellation lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3475
+#: src/ui_viewDialog.h:3478
 msgid "Show constellation lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3479
+#: src/ui_viewDialog.h:3482
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:3481
+#: src/ui_viewDialog.h:3484
 msgid "Color of asterism names"
 msgstr ""
 
-#: src/ui_viewDialog.h:3483
+#: src/ui_viewDialog.h:3486
 msgid "Show asterism labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3484
+#: src/ui_viewDialog.h:3487
 msgid "Constellations font size"
 msgstr ""
 
-#: src/ui_viewDialog.h:3485
+#: src/ui_viewDialog.h:3488
 msgid "Asterisms font size"
 msgstr ""
 
-#: src/ui_viewDialog.h:3492
+#: src/ui_viewDialog.h:3495
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr ""
 
-#: src/ui_viewDialog.h:3497
+#: src/ui_viewDialog.h:3500
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr ""
 
-#: src/ui_viewDialog.h:3499
+#: src/ui_viewDialog.h:3502
 msgid "Deep-Sky Objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:3502
+#: src/ui_viewDialog.h:3505
 msgid "Markings"
 msgstr ""
 
-#: src/ui_viewDialog.h:3504
+#: src/ui_viewDialog.h:3507
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Landscape"
 msgstr ""
 
-#: src/ui_viewDialog.h:3506
+#: src/ui_viewDialog.h:3509
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr ""
 
-#: src/ui_viewDialog.h:3508
+#: src/ui_viewDialog.h:3511
 msgid "Surveys"
 msgstr ""
 
