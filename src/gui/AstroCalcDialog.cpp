@@ -5423,7 +5423,7 @@ void AstroCalcDialog::calculateWutObjects()
 									passByType = true;
 								break;
 							case 4: // Galaxies
-								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 5: // Open Star clusters
