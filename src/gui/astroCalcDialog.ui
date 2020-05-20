@@ -207,7 +207,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-PlanetPos.png</normalon>
+           <normalon>:/graphicGui/tabPlanetPos.png</normalon>
+           <selectedon>:/graphicGui/tabPlanetPos-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -220,7 +221,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Ephemeris.png</normalon>
+           <normalon>:/graphicGui/tabEphemeris.png</normalon>
+           <selectedon>:/graphicGui/tabEphemeris-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -230,7 +232,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Transit.png</normalon>
+           <normalon>:/graphicGui/tabTransit.png</normalon>
+           <selectedon>:/graphicGui/tabTransit-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -240,7 +243,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Phenomena.png</normalon>
+           <normalon>:/graphicGui/tabPhenomena.png</normalon>
+           <selectedon>:/graphicGui/tabPhenomena-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -250,7 +254,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-AltVsTime.png</normalon>
+           <normalon>:/graphicGui/tabGraphs.png</normalon>
+           <selectedon>:/graphicGui/tabGraphs-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -263,7 +268,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-WhatsUp.png</normalon>
+           <normalon>:/graphicGui/tabWhatsUp.png</normalon>
+           <selectedon>:/graphicGui/tabWhatsUp-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -276,7 +282,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-PC.png</normalon>
+           <normalon>:/graphicGui/tabPC.png</normalon>
+           <selectedon>:/graphicGui/tabPC-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -487,7 +494,8 @@
               </property>
               <property name="icon">
                <iconset resource="../../data/gui/guiRes.qrc">
-                <normaloff>:/graphicGui/8-off-settings.png</normaloff>:/graphicGui/8-off-settings.png</iconset>
+                <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
               </property>
              </widget>
             </item>

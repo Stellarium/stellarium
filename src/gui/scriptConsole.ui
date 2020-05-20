@@ -184,7 +184,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+            <normaloff>:/graphicGui/uibtFolder.png</normaloff>:/graphicGui/uibtFolder.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+O</string>
@@ -213,7 +213,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+            <normaloff>:/graphicGui/uibtSave.png</normaloff>:/graphicGui/uibtSave.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+S</string>
@@ -242,7 +242,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/closeButton.png</normaloff>:/graphicGui/closeButton.png</iconset>
+            <normaloff>:/graphicGui/uibtDelete.png</normaloff>:/graphicGui/uibtDelete.png</iconset>
           </property>
          </widget>
         </item>
@@ -262,7 +262,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
+            <normaloff>:/graphicGui/uibtProcess.png</normaloff>:/graphicGui/uibtProcess.png</iconset>
           </property>
          </widget>
         </item>
@@ -331,7 +331,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
+           <normaloff>:/graphicGui/uibtStart.png</normaloff>
+           <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+Return</string>
@@ -363,7 +364,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
+           <normaloff>:/graphicGui/uibtStop.png</normaloff>
+           <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
           </property>
          </widget>
         </item>

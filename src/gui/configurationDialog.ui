@@ -213,7 +213,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-main.png</normalon>
+           <normalon>:/graphicGui/tabMain.png</normalon>
+           <selectedon>:/graphicGui/tabMain-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -226,7 +227,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-info.png</normalon>
+           <normalon>:/graphicGui/tabInfo.png</normalon>
+           <selectedon>:/graphicGui/tabInfo-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -239,7 +241,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-extras.png</normalon>
+           <normalon>:/graphicGui/tabExtras.png</normalon>
+           <selectedon>:/graphicGui/tabExtras-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -249,7 +252,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-time.png</normalon>
+           <normalon>:/graphicGui/tabTime.png</normalon>
+           <selectedon>:/graphicGui/tabTime-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -259,7 +263,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-tools.png</normalon>
+           <normalon>:/graphicGui/tabTools.png</normalon>
+           <selectedon>:/graphicGui/tabTools-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -269,7 +274,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
+           <normalon>:/graphicGui/tabScripts.png</normalon>
+           <selectedon>:/graphicGui/tabScripts-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -279,7 +285,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-plugins.png</normalon>
+           <normalon>:/graphicGui/tabPlugins.png</normalon>
+           <selectedon>:/graphicGui/tabPlugins-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -1225,7 +1232,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../data/gui/guiRes.qrc">
-                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+                 <normaloff>:/graphicGui/uibtDownload.png</normaloff>:/graphicGui/uibtDownload.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -2159,6 +2166,11 @@
                  <property name="text">
                   <string/>
                  </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -2368,8 +2380,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/gui/guiRes.qrc">
-                     <normaloff>:/graphicGui/btScriptRun-on.png</normaloff>
-                     <disabledoff>:/graphicGui/btScriptRun-off.png</disabledoff>:/graphicGui/btScriptRun-on.png</iconset>
+                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -2386,8 +2398,8 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../data/gui/guiRes.qrc">
-                     <normaloff>:/graphicGui/btScriptStop-on.png</normaloff>
-                     <disabledoff>:/graphicGui/btScriptStop-off.png</disabledoff>:/graphicGui/btScriptStop-on.png</iconset>
+                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
                    </property>
                   </widget>
                  </item>

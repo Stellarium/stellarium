@@ -332,8 +332,6 @@ void ShortcutsDialog::createDialogContent()
 	//test.append(QChar(0x267C));
 	//test.append(QChar(0x21BA)); // Counter-clockwise
 	//test.append(QChar(0x2221)); // Angle sign
-	ui->primaryBackspaceButton->setText(backspaceChar);
-	ui->altBackspaceButton->setText(backspaceChar);
 
 	updateTreeData();
 }

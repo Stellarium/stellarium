@@ -427,7 +427,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListView(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
-	QAction *clearAction = ui->searchInListLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
+	QAction *clearAction = ui->searchInListLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
 	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchListClear()));
 	updateListTab();
 

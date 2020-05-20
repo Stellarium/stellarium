@@ -353,7 +353,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	if (loc.planetName=="Earth")
 	{
 		// Special case for earth, we don't want to see the clouds
-		pixmap = QPixmap(":/graphicGui/world.png");
+		pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
 	}
 	else
 	{

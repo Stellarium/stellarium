@@ -593,8 +593,10 @@
              <property name="toolTip">
               <string>Add more satellites</string>
              </property>
-             <property name="text">
-              <string notr="true">Add</string>
+             <property name="icon">
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/uibtAdd.png</normaloff>
+               <disabledoff>:/graphicGui/uibtAdd-disabled.png</disabledoff>:/graphicGui/uibtAdd.png</iconset>
              </property>
             </widget>
            </item>
@@ -609,8 +611,10 @@
              <property name="toolTip">
               <string>Remove the selected satellites</string>
              </property>
-             <property name="text">
-              <string notr="true">Remove</string>
+             <property name="icon">
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/uibtRemove.png</normaloff>
+               <disabledoff>:/graphicGui/uibtRemove-disabled.png</disabledoff>:/graphicGui/uibtRemove.png</iconset>
              </property>
             </widget>
            </item>
@@ -690,7 +694,12 @@
               <string>Save changes</string>
              </property>
              <property name="text">
-              <string notr="true">Save</string>
+              <string notr="true"/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/uibtSave.png</normaloff>
+               <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
              </property>
             </widget>
            </item>
@@ -919,8 +928,10 @@
            <property name="toolTip">
             <string>Add new source</string>
            </property>
-           <property name="text">
-            <string notr="true">Add</string>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtAdd.png</normaloff>
+             <disabledoff>:/graphicGui/uibtAdd-disabled.png</disabledoff>:/graphicGui/uibtAdd.png</iconset>
            </property>
           </widget>
          </item>
@@ -929,8 +940,10 @@
            <property name="toolTip">
             <string>Remove selected source</string>
            </property>
-           <property name="text">
-            <string notr="true">Remove</string>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtRemove.png</normaloff>
+             <disabledoff>:/graphicGui/uibtRemove-disabled.png</disabledoff>:/graphicGui/uibtRemove.png</iconset>
            </property>
           </widget>
          </item>
@@ -1088,7 +1101,9 @@
   <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>checkBoxAutoAdd</sender>

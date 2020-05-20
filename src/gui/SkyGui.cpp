@@ -234,10 +234,10 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
 	buttonBar = new BottomStelBar(this,
-				      QPixmap(":/graphicGui/btbg-left.png"),
-				      QPixmap(":/graphicGui/btbg-right.png"),
-				      QPixmap(":/graphicGui/btbg-middle.png"),
-				      QPixmap(":/graphicGui/btbg-single.png"));
+				      QPixmap(":/graphicGui/btbgLeft.png"),
+				      QPixmap(":/graphicGui/btbgRight.png"),
+				      QPixmap(":/graphicGui/btbgMiddle.png"),
+				      QPixmap(":/graphicGui/btbgSingle.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
@@ -265,11 +265,11 @@ void SkyGui::init(StelGui* astelGui)
 
 	// Create the 2 auto hide buttons in the bottom left corner
 	autoHidebts = new CornerButtons(this);
-	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
-	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
+	QPixmap pxmapOn = QPixmap(":/graphicGui/miscHorAutoHide-on.png");
+	QPixmap pxmapOff = QPixmap(":/graphicGui/miscHorAutoHide-off.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
-	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
-	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
+	pxmapOn = QPixmap(":/graphicGui/miscVertAutoHide-on.png");
+	pxmapOff = QPixmap(":/graphicGui/miscVertAutoHide-off.png");
 	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideVerticalButtonBar", true);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
@@ -294,7 +294,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
