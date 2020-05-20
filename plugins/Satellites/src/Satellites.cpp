@@ -1043,13 +1043,11 @@ bool Satellites::add(const TleData& tleData)
 		if (tleData.name.startsWith("COSMOS"))
 		{
 			satGroups.append("cosmos");
-			if (!tleData.name.contains("DEB"))
+			if (tleData.name.contains("("))
 			{
 				satGroups.append("glonass");
 				satGroups.append("navigation");
 			}
-			else
-				satGroups.append("debris");
 		}
 		if (tleData.name.startsWith("GSAT") && tleData.name.contains("PRN"))
 		{
@@ -1058,9 +1056,13 @@ bool Satellites::add(const TleData& tleData)
 		}
 		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA"))
 		{
-			QStringList d = tleData.name.split(" ");
-			satGroups.append(d.at(0).toLower());
+			QString satName = tleData.name.split(" ").at(0).toLower();
+			if (satName.contains("-"))
+				satName = satName.split("-").at(0);
+			satGroups.append(satName);
 			satGroups.append("communications");
+			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT"))
+				satGroups.append("geostationary");
 		}
 		if (tleData.name.contains(" DEB"))
 			satGroups.append("debris");
