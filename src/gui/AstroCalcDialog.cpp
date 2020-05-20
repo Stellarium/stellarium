@@ -5081,7 +5081,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Interstellar objects"), 24);
 	wutCategories.insert(q_("Globular star clusters"), 25);
 	wutCategories.insert(q_("Regions"), 26);
-	wutCategories.insert(q_("Quasars"), 27);
+	wutCategories.insert(q_("Active galaxies"), 27);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
@@ -5097,9 +5097,8 @@ void AstroCalcDialog::populateWutGroups()
 	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), 30);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
-		wutCategories.insert(q_("Bright supernova stars"), 31);
-	wutCategories.insert(q_("Blazars"), 32);
-	wutCategories.insert(q_("BL Lac objects"), 33);
+		wutCategories.insert(q_("Bright supernova stars"), 31);	
+	wutCategories.insert(q_("Interacting galaxies"), 32);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5401,8 +5400,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 23:
 				case 25:
 				case 26:
-				case 32:
-				case 33:
+				case 32:				
 				{
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
@@ -5425,7 +5423,7 @@ void AstroCalcDialog::calculateWutObjects()
 									passByType = true;
 								break;
 							case 4: // Galaxies
-								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebIGx) && mag <= magLimit)
+								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx) && mag <= magLimit)
 									passByType = true;
 								break;
 							case 5: // Open Star clusters
@@ -5477,12 +5475,8 @@ void AstroCalcDialog::calculateWutObjects()
 								if (static_cast<bool>(tflags & Nebula::TypeOther) && ntype == Nebula::NebRegion)
 									passByType = true;
 								break;
-							case 32: // Blazars
-								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebBLA) && mag <= magLimit)
-									passByType = true;
-								break;
-							case 33: // BL Lac objects
-								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebBLL) && mag <= magLimit)
+							case 32: // Interacting Galaxies
+								if (static_cast<bool>(tflags & Nebula::TypeInteractingGalaxies) && (ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
 						}
@@ -5680,14 +5674,14 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
-				case 27: // Quasars
+				case 27: // Active galazies
 					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
 						mag = object->getVMagnitude(core);
 						Nebula::NebulaType ntype = object->getDSOType();
-						if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO) && mag <= magLimit && object->isAboveRealHorizon(core))
+						if (static_cast<bool>(tflags & Nebula::TypeActiveGalaxies) && (ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebBLA || ntype == Nebula::NebBLL) && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
