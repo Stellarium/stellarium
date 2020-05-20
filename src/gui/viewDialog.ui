@@ -3071,7 +3071,7 @@
                <item row="12" column="6">
                 <widget class="QToolButton" name="colorFOVCircularMarker">
                  <property name="toolTip">
-                  <string>Color of FOV circle marker</string>
+                  <string>Color of circular marker of FOV</string>
                  </property>
                 </widget>
                </item>
@@ -3552,7 +3552,7 @@
                <item row="12" column="2">
                 <widget class="QToolButton" name="colorFOVRectangularMarker">
                  <property name="toolTip">
-                  <string>Color of FOV rectangle marker</string>
+                  <string>Color of rectangular marker of FOV</string>
                  </property>
                 </widget>
                </item>
@@ -3574,7 +3574,7 @@
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>Width of rectangle</string>
+                    <string>Width of rectangle, in degrees</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3602,7 +3602,7 @@
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>Height of rectangle</string>
+                    <string>Height of rectangle, in degrees</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3630,7 +3630,7 @@
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>Rotation angle of rectangle</string>
+                    <string>Rotation angle of rectangle, in degrees</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
