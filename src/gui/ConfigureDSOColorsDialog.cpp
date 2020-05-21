@@ -91,4 +91,5 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connectColorButton(ui->colorDSOSupernovaCandidates,        "NebulaMgr.supernovaCandidatesColor",        "color/dso_supernova_candidate_color");
 	connectColorButton(ui->colorDSOSupernovaRemnantCandidates, "NebulaMgr.supernovaRemnantCandidatesColor", "color/dso_supernova_remnant_cand_color");
 	connectColorButton(ui->colorDSOGalaxyClusters,             "NebulaMgr.galaxyClustersColor",             "color/dso_galaxy_cluster_color");
+	connectColorButton(ui->colorDSORegions,             "NebulaMgr.regionsColor",             "color/dso_regions_color");
 }

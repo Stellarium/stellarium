@@ -5081,7 +5081,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Clusters of galaxies"), 23);
 	wutCategories.insert(q_("Interstellar objects"), 24);
 	wutCategories.insert(q_("Globular star clusters"), 25);
-	wutCategories.insert(q_("Regions"), 26);
+	wutCategories.insert(q_("Regions of the sky"), 26);
 	wutCategories.insert(q_("Active galaxies"), 27);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{

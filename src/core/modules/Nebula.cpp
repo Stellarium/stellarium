@@ -1377,6 +1377,6 @@ void Nebula::buildTypeStringMap()
 	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
 	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
 	Nebula::typeStringMap.insert( NebPartOfGx   , q_("part of a galaxy") );
-	Nebula::typeStringMap.insert( NebRegion   , q_("region") );
+	Nebula::typeStringMap.insert( NebRegion   , q_("region of the sky") );
 	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
 }

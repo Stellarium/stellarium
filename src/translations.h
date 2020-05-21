@@ -389,6 +389,8 @@ class Translations
 		N_("Emission-line stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Clusters of galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Regions of the sky");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

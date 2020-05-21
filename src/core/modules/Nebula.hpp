@@ -138,7 +138,7 @@ public:
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
 		NebPartOfGx		= 34,	//!< Part of a Galaxy
-		NebRegion		= 35,	//!< Part of a Galaxy
+		NebRegion		= 35,	//!< Region of the sky
 		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 

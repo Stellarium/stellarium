@@ -247,7 +247,8 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:30"] = "Emission-line stars";
 		objModulesMap["NebulaMgr:31"] = "Supernova candidates";
 		objModulesMap["NebulaMgr:32"] = "Supernova remnant candidates";
-		objModulesMap["NebulaMgr:33"] = "Clusters of galaxies";
+		objModulesMap["NebulaMgr:33"] = "Clusters of galaxies";		
+		objModulesMap["NebulaMgr:35"] = "Regions of the sky";
 		objModulesMap["NebulaMgr:100"] = "Messier Catalogue";
 		objModulesMap["NebulaMgr:101"] = "Caldwell Catalogue";
 		objModulesMap["NebulaMgr:102"] = "Barnard Catalogue";
