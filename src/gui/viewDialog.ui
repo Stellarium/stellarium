@@ -2743,8 +2743,11 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_22">
                  <item>
                   <widget class="QCheckBox" name="showFOVCircularMarkerCheckBox">
+                   <property name="toolTip">
+                    <string>Show circular marker of FOV</string>
+                   </property>
                    <property name="text">
-                    <string>Circular marker of FOV</string>
+                    <string>Circular FOV</string>
                    </property>
                   </widget>
                  </item>
@@ -3458,8 +3461,11 @@
                </item>
                <item row="12" column="1">
                 <widget class="QCheckBox" name="showFOVCenterMarkerCheckBox">
+                 <property name="toolTip">
+                  <string>Show marker of center of FOV</string>
+                 </property>
                  <property name="text">
-                  <string>FOV Center marker</string>
+                  <string>Center of FOV</string>
                  </property>
                 </widget>
                </item>
@@ -3560,8 +3566,11 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
                   <widget class="QCheckBox" name="showFOVRectangularMarkerCheckBox">
+                   <property name="toolTip">
+                    <string>Show rectangular marker of FOV</string>
+                   </property>
                    <property name="text">
-                    <string>Rectangular marker of FOV</string>
+                    <string>Rectangular FOV</string>
                    </property>
                   </widget>
                  </item>
