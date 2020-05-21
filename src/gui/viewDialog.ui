@@ -2744,7 +2744,7 @@
                  <item>
                   <widget class="QCheckBox" name="showFOVCircularMarkerCheckBox">
                    <property name="toolTip">
-                    <string>Show circular marker of FOV</string>
+                    <string>Show circular marker of field of view (FOV)</string>
                    </property>
                    <property name="text">
                     <string>Circular FOV</string>
@@ -2837,7 +2837,7 @@
                <item row="12" column="0">
                 <widget class="QToolButton" name="colorFOVCenterMarker">
                  <property name="toolTip">
-                  <string>Color of FOV center marker</string>
+                  <string>Color of marker of center of FOV</string>
                  </property>
                 </widget>
                </item>
@@ -3462,7 +3462,7 @@
                <item row="12" column="1">
                 <widget class="QCheckBox" name="showFOVCenterMarkerCheckBox">
                  <property name="toolTip">
-                  <string>Show marker of center of FOV</string>
+                  <string>Show marker of center for field of view (FOV)</string>
                  </property>
                  <property name="text">
                   <string>Center of FOV</string>
@@ -3567,7 +3567,7 @@
                  <item>
                   <widget class="QCheckBox" name="showFOVRectangularMarkerCheckBox">
                    <property name="toolTip">
-                    <string>Show rectangular marker of FOV</string>
+                    <string>Show rectangular marker of field of view (FOV)</string>
                    </property>
                    <property name="text">
                     <string>Rectangular FOV</string>
