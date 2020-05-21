@@ -942,7 +942,10 @@ void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA,
 	treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 	treeItem->setText(CColumnDec, Dec);
 	treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-	treeItem->setText(CColumnMagnitude, QString::number(magnitude, 'f', 2));
+	if (magnitude>90.f)
+		treeItem->setText(CColumnMagnitude, dash);
+	else
+		treeItem->setText(CColumnMagnitude, QString::number(magnitude, 'f', 2));
 	treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 	treeItem->setText(CColumnAngularSize, angularSize);
 	treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
@@ -991,6 +994,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
 		}
 		float magOp;
+		bool passByBrightness;
 		QString dsoName;
 		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
 		// Deep-sky objects
@@ -1002,7 +1006,15 @@ void AstroCalcDialog::currentCelestialPositions()
 			else
 				magOp = obj->getVMagnitudeWithExtinction(core);
 
-			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && magOp <= mag && obj->isAboveRealHorizon(core))
+			if (celTypeId==35) // Regions of the sky
+			{
+				passByBrightness = true;
+				magOp = 99.f;
+			}
+			else
+				passByBrightness = (magOp <= mag);
+
+			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && passByBrightness && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
 					coordinates = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
