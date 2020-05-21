@@ -43,6 +43,7 @@ QToolTip {
 
 QTextEdit,
 QPlainTextEdit,
+QListWidget,
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0;
@@ -54,6 +55,7 @@ QLineEdit {
 }
 
 QTextEdit:disabled,
+QListWidget:disabled,
 QLineEdit:disabled {
 	background: rgb(90, 90, 90);
 }
