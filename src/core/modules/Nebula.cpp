@@ -300,9 +300,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
 		}
 
-		if (getSurfaceBrightness(core)<99)
+		if (getSurfaceBrightness(core)<99.f)
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99) // Don't show extincted surface brightness much below horizon where model is meaningless.
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
 											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
@@ -537,6 +537,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	float lim = mag;
 	float mLim = 15.0f;
 
+	if (nType==NebRegion) // special case for regions
+		mag = 3.f;
+
 	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
 		return selectPriority+mLim;
 
@@ -557,10 +560,8 @@ float Nebula::getSelectPriority(const StelCore* core) const
 		lim=mLim - mag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
-	else if (nType==NebRegion) // special case for regions
-		lim=3.0f;
 
-	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
+	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0 || nType==NebRegion) // High priority for big DSO (with outlines) or regions
 		selectPriority = -10.f;
 	else
 		selectPriority -= 5.f;
@@ -637,7 +638,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 90.f) lim = mLim + 1.f;
+		if (lim > 90.f) lim = mLim + 1.f;		
 	}
 	else
 	{
@@ -659,10 +660,11 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
 		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 			lim=9.0f;
-		}
-		else if (nType==NebRegion) // special case for regions
-			lim=3.0f;
+		}		
 	}
+
+	if (nType==NebRegion) // special case for regions
+		lim=3.0f;
 
 	return lim;
 }
