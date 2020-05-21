@@ -767,25 +767,30 @@ void StelMainScriptAPI::saveOutputAs(const QString &filename)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
+	QString tdt = dt.trimmed();
 	StelCore *core = StelApp::getInstance().getCore();
-	if (dt == "now")
+	if (tdt == "now")
 		return StelUtils::getJDFromSystem();
 	
 	bool ok;
 	double jd;
 	if (spec=="local")
 	{
-		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(dt, &ok);
+		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(tdt, &ok);
 	}
 	else
 	{
-		jd = StelUtils::getJulianDayFromISO8601String(dt, &ok);
+		jd = StelUtils::getJulianDayFromISO8601String(tdt, &ok);
 	}
 	if (ok)
 		return jd;
-	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|sol|sols|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
-	if (nowRe.exactMatch(dt))
+
+	QRegExp nowRe("(now)?"
+				  "\\s*([-+])"
+                  "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
+				  "\\s*(second|minute|hour|day|sol|week|month|year)s?"
+				  "(?:\\s+(sidereal))?");
+	if (nowRe.exactMatch(tdt))
 	{
 		double delta;
 		double unit;
@@ -798,29 +803,29 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		else
 			jd = core->getJD();
 
-		if (nowRe.cap(8) == "sidereal")
+		if (nowRe.cap(5) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.cap(6);
-		if (unitString == "seconds" || unitString == "second")
+		QString unitString = nowRe.cap(4);
+		if ( unitString == "second")
 			unit = dayLength / (24*3600.);
-		else if (unitString == "minutes" || unitString == "minute")
+		else if (unitString == "minute")
 			unit = dayLength / (24*60.);
-		else if (unitString == "hours" || unitString == "hour")
+		else if (unitString == "hour")
 			unit = dayLength / (24.);
-		else if (unitString == "days" || unitString == "day")
+		else if (unitString == "day")
 			unit = dayLength;
-		else if (unitString == "sols" || unitString == "sol")
+		else if (unitString == "sol")
 			unit = core->getCurrentPlanet()->getMeanSolarDay();
-		else if (unitString == "weeks" || unitString == "week")
+		else if (unitString == "week")
 			unit = dayLength * 7.;
-		else if (unitString == "months" || unitString == "month")
+		else if (unitString == "month")
 			unit = monthLength;
-		else if (unitString == "years" || unitString == "year")
+		else if (unitString == "year")
 			unit = yearLength;
 		else
 		{
@@ -828,11 +833,11 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = 0;
 		}
 
-		delta = nowRe.cap(4).toDouble();
+		delta = nowRe.cap(3).toDouble();
 
-		if (nowRe.cap(3) == "+")
+		if (nowRe.cap(2) == "+")
 			jd += (unit * delta);
-		else if (nowRe.cap(3) == "-")
+		else if (nowRe.cap(2) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}

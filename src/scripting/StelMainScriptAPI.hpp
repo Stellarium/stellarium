@@ -60,31 +60,29 @@ public slots:
 	//! @return the Modified Julian Day
 	static double getMJDay();
 
-	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	//! @param dateStr the date string to use.  Formats:
-	//! - ISO, e.g. "2008-03-24T13:21:01"
-	//! - "now" (set sim time to real time)
-	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
-	//!   units: seconds, minutes, hours, days, sols, weeks, months, years.
-	//!   You may also append " sidereal" to use sidereal days and so on.
-	//!   You can also use "now" at the start.  For example:
-	//!   "now + 3 hours sidereal"
-	//! @note you must use the plural all the time, even when the number
-	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! @note when sidereal time is used, the length of time for
-	//! each unit is dependent on the current planet.  By contrast
-	//! when sidereal time is not specified (i.e. solar time is used)
-	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used. Defaults to "utc".
-	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
-	//! Defaults to "true".
-	//! @note for fully compatibles behavior of this function with the version 0.11.4
-	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! Sets Stellarium's date using an absolute or relative value.
+	//! @param dateStr Defines the date or offset to use. Possible formats:
+	//! - Date and time according to ISO 8601, without time zone, e.g., "2008-03-24T13:21:01"
+	//! - Use "now" to set Stellarium's time to the system's (presumably) real time.
+	//! - Specify an offset in the form <sign><value><unit> to set the date relative to its
+	//!   current value. <unit> may be one of second, minute, hour, day, sol, week, month,
+	//!   year, with a plural 's' optionally appended, e.g., "+3.25 days", " - 1 year".
+	//! - Use "now" followed by an offset to set the date relative to the system's
+	//!   current value, e.g., "now+1hour".
+	//! - You may append "sidereal" to use units derived from the length of a sidereal day,
+	//!   e.g., "now +2days sidereal".
+	//! @note When sidereal time is used, the length of time for each unit is dependent on
+	//! the current planet.  By contrast, when sidereal time is not specified (i.e., solar
+	//! time is used) the value is conventional so that 1 day means 1 Earth Solar day.
+	//! @param spec May be "local" or "utc". Only has an effect when
+	//! an ISO format string is used. Defaults to "utc".
+	//! @param dateIsDT set to \a true indicates that the given date is formulated in
+	//! Dynamical Time, i.e. with DeltaT added.
+	//! @note For fully compatible behaviour of this function with versions 0.11.4
+	//! or earlier you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
-	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
-	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
-	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
+	//! @note Starting with version 0.13.2 all relative dates are set without DeltaT correction.
+	//! @note Starting with version 0.14.0 the Boolean argument has a different meaning and default!
 	static void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
