@@ -1136,3 +1136,9 @@ void StelApp::setAppFont(QFont font)
 	QGuiApplication::setFont(font);
 	emit fontChanged(font);
 }
+
+QString StelApp::getVersion() const
+{
+	QStringList ver = StelUtils::getApplicationVersion().split(".");
+	return QString("%1.%2.%3").arg(ver[0]).arg(ver[1]).arg(ver[2]);
+}

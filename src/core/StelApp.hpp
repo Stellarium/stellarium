@@ -77,6 +77,8 @@ class StelApp : public QObject
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
+	Q_PROPERTY(QString version READ getVersion)
+
 public:
 	friend class StelAppGraphicsWidget;
 	friend class StelRootItem;
@@ -335,6 +337,8 @@ private:
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
 	void applyRenderBuffer(quint32 drawFbo=0);
+
+	QString getVersion() const;
 
 	// The StelApp singleton
 	static StelApp* singleton;
