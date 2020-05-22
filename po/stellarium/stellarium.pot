@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-22 00:29+0700\n"
+"POT-Creation-Date: 2020-05-22 19:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13633,98 +13633,103 @@ msgid "Sun reflection angle"
 msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:492
 msgctxt "unknown date"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:394
 msgctxt "at time"
 msgid "at"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:395
+#: plugins/Satellites/src/Satellite.cpp:396
 msgid "Last updated TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:404
+#: plugins/Satellites/src/Satellite.cpp:397
+msgid "Epoch of the TLE"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:406
 msgid "Group"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:404
+#: plugins/Satellites/src/Satellite.cpp:406
 msgid "Groups"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:409
+#: plugins/Satellites/src/Satellite.cpp:411
 msgid "Operational status"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:416
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:419
+#: plugins/Satellites/src/Satellite.cpp:421
 msgid "The satellite is visible."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:422
+#: plugins/Satellites/src/Satellite.cpp:424
 msgid "The satellite is eclipsed."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:425
+#: plugins/Satellites/src/Satellite.cpp:427
 msgid "The satellite is not visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:435
 msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:452 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:454 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:455
+#: plugins/Satellites/src/Satellite.cpp:457
 msgctxt "frequency"
 msgid "kHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:772
+#: plugins/Satellites/src/Satellite.cpp:796
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:797
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:774
+#: plugins/Satellites/src/Satellite.cpp:798
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:775
+#: plugins/Satellites/src/Satellite.cpp:799
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:776
+#: plugins/Satellites/src/Satellite.cpp:800
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:777
+#: plugins/Satellites/src/Satellite.cpp:801
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:778
+#: plugins/Satellites/src/Satellite.cpp:802
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:780
+#: plugins/Satellites/src/Satellite.cpp:804
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""

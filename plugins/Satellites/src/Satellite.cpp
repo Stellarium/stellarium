@@ -388,11 +388,13 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		else
 		{
 			QDate sd = lastUpdated.date();
+			double hours = lastUpdated.time().hour() + lastUpdated.time().minute()/60. + lastUpdated.time().second()/3600.;
 			updDate = QString("%1 %2 %3 %4 %5").arg(sd.day())
 					.arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
-					.arg(qc_("at","at time")).arg(lastUpdated.time().toString("hh:mm:ss"));
+					.arg(qc_("at","at time")).arg(StelUtils::hoursToHmsStr(hours, true));
 		}
 		oss << QString("%1: %2").arg(q_("Last updated TLE"), updDate) << "<br />";
+		oss << QString("%1: %2").arg(q_("Epoch of the TLE"), calculateEpochFromLine1(tleElements.first.data())) << "<br />";
 
 		// Groups of the artificial satellites
 		QStringList groupList;
@@ -472,6 +474,28 @@ Vec2d Satellite::calculatePerigeeApogeeFromLine2(QString tle) const
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
 	return Vec2d(semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius, semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius);
+}
+
+// Calculate epoch of TLE
+QString Satellite::calculateEpochFromLine1(QString tle) const
+{
+	QString epochStr;
+	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
+	int year = tle.left(20).right(2).toInt();
+	if (year>=0 && year<57)
+		year += 2000;
+	else
+		year += 1900;
+	const double dayOfYear = tle.left(32).right(12).toDouble();
+	QDate epoch = QDate(year, 1, 1).addDays(dayOfYear - 1);
+	if (!epoch.isValid())
+		epochStr = qc_("unknown", "unknown date");
+	else
+		epochStr = QString("%1 %2 %3, %4 UTC").arg(epoch.day())
+				.arg(StelLocaleMgr::longGenitiveMonthName(epoch.month())).arg(year)
+				.arg(StelUtils::hoursToHmsStr(24.*(dayOfYear-static_cast<int>(dayOfYear)), true));
+
+	return epochStr;
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const

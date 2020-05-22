@@ -223,6 +223,8 @@ private:
 	float calculateOrbitSegmentIntensity(int segNum);
 	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
 
+	QString calculateEpochFromLine1(QString tle) const;
+
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
 	//! Should not be confused with the pedicted visibility of the 
