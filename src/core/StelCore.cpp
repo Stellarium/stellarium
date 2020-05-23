@@ -1190,6 +1190,8 @@ void StelCore::setObserver(StelObserver *obs)
 {
 	delete position;
 	position = obs;
+	if (!getUseCustomTimeZone() && obs->getCurrentLocation().ianaTimeZone.length()>0)
+		setCurrentTimeZone(obs->getCurrentLocation().ianaTimeZone);
 }
 
 // Smoothly move the observer to the given location

@@ -527,7 +527,7 @@ void Scenery3d::loadSceneCompleted()
 
 	//move to the location specified by the scene
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
+	const bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
 	lmgr->setFlagLandscapeSetsLocation(true);
 	lmgr->setCurrentLandscapeName(info.landscapeName, 0.); // took a second, implicitly.
 	// Switched to immediate landscape loading: Else,

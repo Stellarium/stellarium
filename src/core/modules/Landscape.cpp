@@ -112,8 +112,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.landscapeKey = name;
 
 		QString tzString=landscapeIni.value("location/timezone", "").toString();
-		if ((tzString.length() > 0) && StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tzString))
-			location.ianaTimeZone=tzString;
+		if ((tzString.length() > 0))
+			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
 		defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
 		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".

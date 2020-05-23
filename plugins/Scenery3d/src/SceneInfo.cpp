@@ -26,6 +26,7 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelLocationMgr.hpp"
 #include "VecMath.hpp"
 
 #include <QDebug>
@@ -167,6 +168,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 			info.location->country = ini.value("country").toString();
 		if (ini.contains("state"))
 			info.location->state = ini.value("state").toString();
+		info.location->ianaTimeZone = StelLocationMgr::sanitizeTimezoneStringFromLocationDB(ini.value("timezone", "LMST").toString());
 
 		info.location->landscapeKey = info.landscapeName;
 		ini.endGroup();

@@ -2651,7 +2651,7 @@ void SolarSystem::reloadPlanets()
 	// Save observer location (fix for LP bug # 969211)
 	// TODO: This can probably be done better with a better understanding of StelObserver --BM
 	StelCore* core = StelApp::getInstance().getCore();
-	StelLocation loc = core->getCurrentLocation();
+	const StelLocation loc = core->getCurrentLocation();
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 
 	// Whether any planet are selected? Save the current selection...

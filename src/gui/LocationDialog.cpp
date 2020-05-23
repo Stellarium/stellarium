@@ -213,7 +213,7 @@ void LocationDialog::populateTooltips()
 // Update the widget to make sure it is synchrone if the location is changed programmatically
 void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 {
-	if (!dialog->isVisible())
+	if (!dialog)
 		return;
 
 	StelCore* stelCore = StelApp::getInstance().getCore();
