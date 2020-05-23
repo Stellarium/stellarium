@@ -70,6 +70,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::HourAngle;
 		if (conf->value("flag_show_altaz", false).toBool())
 			infoTextFilters |= StelObject::AltAzi;
+		if (conf->value("flag_show_elongation", false).toBool())
+			infoTextFilters |= StelObject::Elongation;
 		if (conf->value("flag_show_distance", false).toBool())
 			infoTextFilters |= StelObject::Distance;
 		if (conf->value("flag_show_velocity", false).toBool())

@@ -62,6 +62,7 @@
 #include <QDir>
 #include <QDesktopWidget>
 #include <QImageWriter>
+#include <QScreen>
 
 //! Simple helper extension class which can guarantee int inputs in a useful range.
 class MinMaxIntValidator: public QIntValidator
@@ -310,16 +311,16 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
 	connectBoolProperty(ui->showQuitButtonCheckBox,			"StelGui.flagShowQuitButton");
-	connectBoolProperty(ui->showFlipButtonsCheckbox,			"StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,		"StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,		"StelGui.flagShowNebulaBackgroundButton");
-	connectBoolProperty(ui->showBookmarksButtonCheckBox,	"StelGui.flagShowBookmarksButton");
+	connectBoolProperty(ui->showBookmarksButtonCheckBox,		"StelGui.flagShowBookmarksButton");
 	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
-	connectBoolProperty(ui->showGalacticGridButtonCheckBox,	"StelGui.flagShowGalacticGridButton");
-	connectBoolProperty(ui->showEclipticGridButtonCheckBox,	"StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
+	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
 	connectBoolProperty(ui->showHipsButtonCheckBox,			"StelGui.flagShowHiPSButton");
 	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
-	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,	"StelGui.flagShowGotoSelectedObjectButton");
-	connectBoolProperty(ui->showNightmodeButtonCheckBox,	"StelGui.flagShowNightmodeButton");
+	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,		"StelGui.flagShowGotoSelectedObjectButton");
+	connectBoolProperty(ui->showNightmodeButtonCheckBox,		"StelGui.flagShowNightmodeButton");
 	connectBoolProperty(ui->showFullscreenButtonCheckBox,		"StelGui.flagShowFullscreenButton");
 
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
@@ -331,9 +332,9 @@ void ConfigurationDialog::createDialogContent()
 
 	connectBoolProperty(ui->mouseTimeoutCheckbox,			"MainView.flagCursorTimeout");
 	connectDoubleProperty(ui->mouseTimeoutSpinBox,			"MainView.cursorTimeout");
-	connectBoolProperty(ui->useButtonsBackgroundCheckBox,	"StelGui.flagUseButtonsBackground");
+	connectBoolProperty(ui->useButtonsBackgroundCheckBox,		"StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox,		"StelMovementMgr.flagIndicationMountMode");
-	connectBoolProperty(ui->kineticScrollingCheckBox,			"StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->kineticScrollingCheckBox,		"StelGui.flagUseKineticScrolling");
 	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,		"StelGui.flagEnableFocusOnDaySpinner");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
@@ -522,7 +523,7 @@ void ConfigurationDialog::setSphericMirror(bool b)
 
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	gui->setInfoTextFilters(StelObject::InfoStringGroup(Q_NULLPTR));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
 	updateSelectedInfoCheckBoxes();
 }
 
@@ -545,7 +546,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (!ui->customSelectedInfoRadio->isChecked())
 		ui->customSelectedInfoRadio->setChecked(true);
 	
-	StelObject::InfoStringGroup flags(Q_NULLPTR);
+	StelObject::InfoStringGroup flags(StelObject::None);
 
 	if (ui->checkBoxName->isChecked())
 		flags |= StelObject::Name;
@@ -579,6 +580,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::SupergalacticCoord;
 	if (ui->checkBoxOtherCoords->isChecked())
 		flags |= StelObject::OtherCoord;
+	if (ui->checkBoxElongation->isChecked())
+		flags |= StelObject::Elongation;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::ObjectType;
 	if (ui->checkBoxEclipticCoordsJ2000->isChecked())
@@ -926,6 +929,7 @@ void ConfigurationDialog::saveAllSettings()
 		conf->setValue("flag_show_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
 		conf->setValue("flag_show_altaz",		static_cast<bool>(flags & StelObject::AltAzi));
+		conf->setValue("flag_show_elongation",		static_cast<bool>(flags & StelObject::Elongation));
 		conf->setValue("flag_show_distance",		static_cast<bool>(flags & StelObject::Distance));
 		conf->setValue("flag_show_velocity",		static_cast<bool>(flags & StelObject::Velocity));
 		conf->setValue("flag_show_propermotion",	static_cast<bool>(flags & StelObject::ProperMotion));
@@ -1016,7 +1020,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
 	if (!StelMainView::getInstance().isFullScreen())
 	{
-		QRect screenGeom = QApplication::desktop()->screenGeometry(screenNum);
+		QRect screenGeom = QGuiApplication::screens().at(screenNum)->geometry();
+
 		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
@@ -1542,6 +1547,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 	ui->checkBoxSupergalacticCoordinates->setChecked(flags & StelObject::SupergalacticCoord);
 	ui->checkBoxOtherCoords->setChecked(flags & StelObject::OtherCoord);
+	ui->checkBoxElongation->setChecked(flags & StelObject::Elongation);
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
 	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);

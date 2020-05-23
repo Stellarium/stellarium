@@ -140,40 +140,11 @@ void Comet::translateName(const StelTranslator &translator)
 	nameI18 = translator.qtranslate(englishName, "comet");
 }
 
-QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
+QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
 {
-	//Mostly copied from Planet::getInfoString():
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
-	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	Q_UNUSED(az_app);
-
-	if (flags&Name)
-	{
-		oss << "<h2>";
-		oss << getNameI18n();  // UI translation can differ from sky translation
-		oss.setRealNumberNotation(QTextStream::FixedNotation);
-		oss.setRealNumberPrecision(1);
-		if (sphereScale != 1.)
-			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-		oss << "</h2>";
-	}
-
-	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
-	{
-		QString cometType = qc_("non-periodic", "type of comet");
-		if (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() != 1.0)
-		{
-			// Parabolic and hyperbolic comets don't have semi-major axis of the orbit. We have comet with elliptic orbit.
-			cometType = qc_("periodic", "type of comet");
-		}
-		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getPlanetTypeString()), cometType) << "<br />";
-	}
-
-	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-
 	if (flags&AbsoluteMagnitude)
 	{
 		//TODO: Make sure absolute magnitude is a sane value
@@ -181,145 +152,27 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		//value. (Using radius/albedo doesn't make any sense for comets.)
 		// Note that slope parameter can be <0 (down to -2?), so -10 is now used for "uninitialized"
 		if (slopeParameter >= -9.9f)
-			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2<br/>").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2);
 	}
 
+	return str;
+}
 
-	oss << getCommonInfoString(core, flags);
-
+QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &flags) const
+{
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
 	QString Mkm = qc_("M km", "distance");
-	QString distAU, distKM;
-	if (flags&Distance)
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	QString str;
+	QTextStream oss(&str);
+
+	if (flags&Size)
 	{
-		const double hdistanceAu = getHeliocentricEclipticPos().length();
-		const double hdistanceKm = AU * hdistanceAu;
-		// TRANSLATORS: Unit of measure for distance - astronomical unit
-		QString au = qc_("AU", "distance, astronomical unit");
-		bool useKM = true;
-		if (hdistanceAu < 0.1)
-		{
-			distAU = QString::number(hdistanceAu, 'f', 6);
-			distKM = QString::number(hdistanceKm, 'f', 3);
-		}
-		else
-		{
-			distAU = QString::number(hdistanceAu, 'f', 3);
-			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
-			useKM = false;
-		}
-		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
-
-		const double distanceAu = getJ2000EquatorialPos(core).length();
-		const double distanceKm = AU * distanceAu;
-		if (distanceAu < 0.1)
-		{
-			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);
-			useKM = true;
-		}
-		else
-		{
-			distAU = QString::number(distanceAu, 'f', 3);
-			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
-			useKM = false;
-		}
-		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
+		// Given the very irregular shape, other terminology like "equatorial radius" do not make much sense.
+		oss << QString("%1: %2 %3<br/>").arg(q_("Core diameter"), QString::number(AU * 2.0 * getEquatorialRadius(), 'f', 1) , qc_("km", "distance"));
 	}
-
-	if (flags&Velocity)
-	{
-		// TRANSLATORS: Unit of measure for speed - kilometers per second
-		QString kms = qc_("km/s", "speed");
-
-		const Vec3d orbitalVel=getEclipticVelocity();
-		const double orbVel=orbitalVel.length();
-		if (orbVel>0.)
-		{ // AU/d * km/AU /24
-			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
-		}
-	}
-
-	// Second test avoids crash when observer is on spaceship
-	// Third test for now avoids jerking animation of movement (GH#1041). TODO: better fix!
-	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver() && qAbs(core->getTimeRate())<=StelCore::JD_SECOND)
-	{
-		// Setting/resetting the time causes a significant slowdown due to time (JD) not being granular enough.
-		// We must sum up the runtime over successive runs and feed a time kick when summed time exceeds 1/5 s.
-		Vec3d equPos=getEquinoxEquatorialPos(core);
-		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
-		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
-		const bool isRealTime=core1->getIsTimeNow() && core1->getRealTimeSpeed();
-		const double timeRate=core1->getTimeRate();
-		QElapsedTimer timer; // we need something better than ms resolution!
-		static qint64 timerSum=0;
-		timer.start();
-		const double currentJD=core1->getJD();
-		core1->setJD(currentJD-StelCore::JD_HOUR);
-		core1->update(0);
-		Vec3d equPosPrev=getEquinoxEquatorialPos(core1);
-		const double deltaEq=equPos.angle(equPosPrev);
-		double dec_equPrev, ra_equPrev;
-		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
-		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
-		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5").arg(q_("Hourly motion"), StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0)) << "<br/>";
-		oss << QString("%1: d&alpha;=%2 d&delta;=%3").arg(q_("Hourly motion"), StelUtils::radToDmsStr(ra_equ-ra_equPrev), StelUtils::radToDmsStr(dec_equ-dec_equPrev)) << "<br/>";
-
-		if (isRealTime)
-			core1->setJD(StelUtils::getJDFromSystem());
-		else
-		{
-			// add the time "lost" by this and the next update(0).
-			timerSum+=3*timer.nsecsElapsed(); //  The factor 3 is a rough assumption. Somewhat more than 2 seems required.
-			qint64 dsToFeed=timerSum/50000000; // units of 2 deciseconds, 2e8 ns
-			timerSum-=dsToFeed*50000000;
-			core1->setJD(currentJD+static_cast<double>(dsToFeed)*0.25*timeRate); // Use 0.25 as fine-tuning factor
-		}
-		core1->update(0);
-	}
-
-	if (flags&Extra)
-	{
-		// If semi-major axis not zero then calculate and display orbital period for comet in days
-		const double siderealPeriod = getSiderealPeriod();
-		if (siderealPeriod>0.0)
-		{
-			// Sidereal (orbital) period for comets in Julian years (symbol: a)
-			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
-		}
-
-		const double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
-		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
-		{
-			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
-			// Synodic period for comets in Julian years (symbol: a)
-			oss << QString("%1: %2 a").arg(q_("Synodic period"), QString::number(sp/365.25, 'f', 3)) << "<br />";
-		}
-
-		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-		const double elongation = getElongation(observerHelioPos);
-
-		QString pha, elo;
-		if (withDecimalDegree)
-		{
-			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
-			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
-		}
-		else
-		{
-			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
-			elo = StelUtils::radToDmsStr(elongation, true);
-		}
-
-		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
-		oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
-	}
-
-
 	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
@@ -342,21 +195,20 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			tailDeg = StelUtils::radToDmsStr(atan(tail/distanceKm));
 		}
 		if (coma>1e6)
-			oss << QString("%1: %2 %3 (%4)").arg(comaEst, QString::number(coma*1e-6, 'G', 3), Mkm, comaDeg) << "<br />";
+			oss << QString("%1: %2 %3 (%4)<br/>").arg(comaEst, QString::number(coma*1e-6, 'G', 3), Mkm, comaDeg);
 		else
-			oss << QString("%1: %2 %3 (%4)").arg(comaEst, QString::number(coma, 'f', 0), km, comaDeg) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Gas tail length (estimate)"), QString::number(tail*1e-6, 'G', 3), Mkm, tailDeg) << "<br />";
+			oss << QString("%1: %2 %3 (%4)<br/>").arg(comaEst, QString::number(coma, 'f', 0), km, comaDeg);
+		oss << QString("%1: %2 %3 (%4)<br/>").arg(q_("Gas tail length (estimate)"), QString::number(tail*1e-6, 'G', 3), Mkm, tailDeg);
 	}
-
-	if (flags&Size)
-	{
-		// Given the very irregular shape, other terminology like "equatorial radius" do not make much sense.
-		oss << QString("%1: %2 %3").arg(q_("Core diameter"), QString::number(AU * 2.0 * getEquatorialRadius(), 'f', 1) , qc_("km", "distance")) << "<br />";
-	}
-
-	postProcessInfoString(str, flags);
-
 	return str;
+}
+
+// Nothing interesting?
+QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+
+	return QString();
 }
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
