@@ -153,8 +153,9 @@ void StelDialog::setVisible(bool v)
 			if (newY <-0)
 				newY = 0;
 			proxy->setPos(newX, newY);
-			proxy->setWindowFrameMargins(2,0,2,2);
+			// Invisible frame around the window to make resizing easier
 			// (this also changes the bounding rectangle size)
+			proxy->setWindowFrameMargins(7,0,7,7);
 
 			// Retrieve stored panel sizes, scale panel up if it was stored larger than default.
 			QString confNameSize="DialogSizes/" + dialogName;
