@@ -443,8 +443,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	const double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app)
 

@@ -389,21 +389,22 @@ double dmsStrToRad(const QString& s)
 double getDecAngle(const QString& str)
 {
 	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
-				"(?:"                                 // either
-		          "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
-				  "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
-                "|"                                   // or
- 				  "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
-                  "(?:"                                   // either
-		            "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
-		            "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
-		          "|"                                     // or
-		            "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
-		          ")"                                     // end
-                ")"                                   // end
-                "\\s*([NSEW]?)",                      // [point] (9)
-				Qt::CaseInsensitive);
-	if( rex.exactMatch(str) ){
+		    "(?:"                                 // either
+		    "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
+		    "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
+		    "|"                                   // or
+		    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
+		    "(?:"                                   // either
+		    "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
+		    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
+		    "|"                                     // or
+		    "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
+		    ")"                                     // end
+		    ")"                                   // end
+		    "\\s*([NSEW]?)",                      // [point] (9)
+		    Qt::CaseInsensitive);
+	if( rex.exactMatch(str) )
+	{
 		QStringList caps = rex.capturedTexts();
 #if 0
 		std::cout << "reg exp: ";
@@ -417,53 +418,68 @@ double getDecAngle(const QString& str)
 		double s = 0;
 		ushort hd = caps.at(5).isEmpty() ? 'd' : caps.at(5).toLower().at(0).unicode();
 		QString pointStr = caps.at(9).toUpper() + " ";
-        if( caps.at(7) != "" ){
+		if( caps.at(7) != "" )
+		{
 			// [dh, degs], [m] and s entries at 4, 5, 6, 7
 			d = caps.at(4).toDouble();
 			m = caps.at(6).toDouble();
 			s = caps.at(7).toDouble();
-        } else if( caps.at(8) != "" ){
+		}
+		else if( caps.at(8) != "" )
+		{
 			// [dh, degs] and m entries at 4, 5, 8
 			d = caps.at(4).toDouble();
 			m = caps.at(8).toDouble();
-		} else if( caps.at(2) != "" ){
+		}
+		else if( caps.at(2) != "" )
+		{
 			// some value at 2, dh|m|s at 3
-            double x = caps.at(2).toDouble();
-		    QString sS = caps.at(3) + caps.at(9);
-			switch( sS.length() ){
-            case 0:
-				// degrees, no point
-				hd = 'd';
-				break;
-			case 1:
-				// NnSEeWw is point for degrees, "dhms°..." distinguish dhms
-				if( QString("NnSEeWw").contains(sS.at(0)) ){
-					pointStr = sS.toUpper();
+			double x = caps.at(2).toDouble();
+			QString sS = caps.at(3) + caps.at(9);
+			switch( sS.length() )
+			{
+				case 0:
+					// degrees, no point
 					hd = 'd';
-				} else {
-                    hd = sS.toLower().at(0).unicode();
-				}
-				break;
-			case 2:
-				// hdms selected by 1st char, NSEW by 2nd
-				hd = sS.at(0).toLower().unicode();
-				pointStr = sS.right(1).toUpper();
-				break;
+					break;
+				case 1:
+					// NnSEeWw is point for degrees, "dhms°..." distinguish dhms
+					if( QString("NnSEeWw").contains(sS.at(0)) )
+					{
+						pointStr = sS.toUpper();
+						hd = 'd';
+					}
+					else
+						hd = sS.toLower().at(0).unicode();
+					break;
+				case 2:
+					// hdms selected by 1st char, NSEW by 2nd
+					hd = sS.at(0).toLower().unicode();
+					pointStr = sS.right(1).toUpper();
+					break;
 			}
-			switch( hd ){
-            case 'h': case 'd': case 0x00B0: case 0x00BA:
-                d = x;
-                break;
-            case 'm': case '\'':
-                m = x;
-                break;
-            case 's': case '"':
-                s = x;
-                break;
-			default:
-				qDebug() << "internal error, hd = " << hd;
-            }		   
-		} else {
+			switch( hd )
+			{
+				case 'h':
+				case 'd':
+				case 0x00B0:
+				case 0x00BA:
+					d = x;
+					break;
+				case 'm':
+				case '\'':
+					m = x;
+					break;
+				case 's':
+				case '"':
+					s = x;
+					break;
+				default:
+					qDebug() << "internal error, hd = " << hd;
+			}
+		}
+		else
+		{
 			qDebug() << "getDecAngle failed to parse angle string: " << str;
 			return -0.0;
 		}
@@ -471,29 +487,32 @@ double getDecAngle(const QString& str)
 		// General sign handling: group 1 or overruled by point
 		int sgn = caps.at(1) == "-" ? -1 : 1;
 		bool isNS = false;
-        switch( pointStr.at(0).unicode() ){
-		case 'N':
-			sgn = 1;
-			isNS = 1;
-			break;
-		case 'S':
-			sgn = -1;
-			isNS = 1;
-			break;
-        case 'E':
-			sgn = 1;
-			break;
-        case 'W':
-			sgn = -1;
-			break;
-		default:  // OK, there is no NSEW.
-			break;
+		switch( pointStr.at(0).unicode() )
+		{
+			case 'N':
+				sgn = 1;
+				isNS = 1;
+				break;
+			case 'S':
+				sgn = -1;
+				isNS = 1;
+				break;
+			case 'E':
+				sgn = 1;
+				break;
+			case 'W':
+				sgn = -1;
+				break;
+			default:  // OK, there is no NSEW.
+				break;
 		}
 
 		int h2d = 1;
-		if( hd == 'h' ){
+		if( hd == 'h' )
+		{
 			// Sanity check - h and N/S not accepted together
-			if( isNS  ){
+			if( isNS  )
+			{
 				qDebug() << "getDecAngle does not accept ...H...N/S: " << str;
 				return -0.0;
 			}

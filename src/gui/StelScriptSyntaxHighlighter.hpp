@@ -49,10 +49,10 @@ private:
 	QVector<HighlightingRule> highlightingRules;
 
 	QRegExp alertPat;
-    QRegExp identPat;
+	QRegExp identPat;
 	QRegExp functionPat;
-    QRegExp multiLineStartPat;
-    QString multiLineEnd;
+	QRegExp multiLineStartPat;
+	QString multiLineEnd;
 
 	QSet<QString> keywords;
 	QSet<QString> predefineds;

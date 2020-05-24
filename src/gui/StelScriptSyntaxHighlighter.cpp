@@ -60,7 +60,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		"default", "delete", "do", "else",    // export, extends
 		"finally", "for", "function", "if",	  // import
 		"in", "instanceof", "new", "return",  // super
-        "switch", "this", "throw", "try",
+		"switch", "this", "throw", "try",
 		"typeof", "var", "void", "while", "with" };
 
 	// ECMAscript predefined stuff (more in 2015)
@@ -69,28 +69,28 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		"false", "null", "true",              // constants
 		"undefined", "Infinity", "NaN",       // properties
 		"arguments", "get", "set",            // identifiers
-        "Array", "Boolean", "Date",           // types
+		"Array", "Boolean", "Date",           // types
 		"Function", "Math", "Number",
 		"Object", "RegExp", "String", 
 		"Error", "EvalError", "RangeError",   // errors
-        "ReferenceError", "SyntaxError",
+		"ReferenceError", "SyntaxError",
 		"TypeError", "URIError" };
 
 	// Highlight object names which can be used in scripting.
-    StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-    for( auto* m : mmgr->getAllModules() )
-    {
-        locateFunctions( m->metaObject(), m->objectName() );
+	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
+	for( auto* m : mmgr->getAllModules() )
+	{
+		locateFunctions( m->metaObject(), m->objectName() );
 	}
 
 	// Special case #1: StelMainScriptAPI calls must be done on global "core"
 	// StelScriptMgr has private StelMainScriptAPI* mainAPI
 	locateFunctions( StelApp::getInstance().getScriptMgr().getMetaOfStelMainScriptAPI(), "core" );
 
-    // Special case #2: StelSkyDrawer
+	// Special case #2: StelSkyDrawer
 	locateFunctions( StelApp::getInstance().getCore()->getSkyDrawer()->metaObject(), "StelSkyDrawer" );
-	
-    // Identifier pattern
+
+	// Identifier pattern
 	identPat = QRegExp("^\\b[A-Za-z_][A-Za-z_0-9]*\\b");
 
 	// Function call
@@ -98,32 +98,32 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 
 	// A pattern to find a spot that warrants investigation.
 	alertPat = QRegExp( "[\"'/\\w_]" );
-	
-    // multi-line commment start and end strings
+
+	// multi-line commment start and end strings
 	multiLineStartPat = QRegExp( "^/\\*" );
-    multiLineEnd = "*/";
+	multiLineEnd = "*/";
 	
 	// Collect simple rules into highlightingRules. They
 	// are well distinguished by their initial character.
-    HighlightingRule rule;
+	HighlightingRule rule;
 
 	// decimal and hexadecimal numeric constants
 	rule.pattern = QRegExp("^\\b("
-						   "\\d+(?:\\.\\d+)?(?:[eE][+-]?(\\d+))?"
-						   "|"
-						   "0[xX][0-9a-fA-F]+"
-						   ")\\b");
+			       "\\d+(?:\\.\\d+)?(?:[eE][+-]?(\\d+))?"
+			       "|"
+			       "0[xX][0-9a-fA-F]+"
+			       ")\\b");
 	rule.format = &literalFormat;
 	highlightingRules.append(rule);
 	
 	// String literals, both ways, and regular expression 
 	rule.pattern = QRegExp("^("
-						   "\"[^\"\\\\]*(\\\\.[^\"\\\\]*)*\""
-						   "|"
-                           "'[^'\\\\]*(\\\\.[^'\\\\]*)*'"
-                           "|"
-						   "/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/" // Negative lookahead!
-						   ")" );
+			       "\"[^\"\\\\]*(\\\\.[^\"\\\\]*)*\""
+			       "|"
+			       "'[^'\\\\]*(\\\\.[^'\\\\]*)*'"
+			       "|"
+			       "/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/" // Negative lookahead!
+			       ")" );
 	rule.format = &literalFormat;
 	highlightingRules.append(rule);
 
@@ -149,7 +149,7 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 	keywordFormat.setForeground(col);
 	keywordFormat.setFontWeight(QFont::Bold);
 
-    // predefined names 
+	// predefined names
 	QString predefDefault = "0.7,0.0,0.7";
 	col = Vec3f(conf->value(section + "/script_console_predefined_color", predefDefault).toString()).toQColor();
 	predefFormat.setForeground(col);
@@ -186,9 +186,9 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 	QSet<QString> methods = QSet<QString>();
 	
 	// look for closing multiline comment
-    if( previousBlockState() == 1 )
+	if( previousBlockState() == 1 )
 	{
-        startIndex = text.indexOf( multiLineEnd );
+		startIndex = text.indexOf( multiLineEnd );
 		if( startIndex == -1 )
 		{
 			setCurrentBlockState( 1 );
@@ -204,31 +204,31 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 	for( int iOff = startIndex; iOff < text.length(); iOff += mLen )
 	{
 		// Skip to an interesting offset.
-        iOff = alertPat.indexIn( text, iOff );
-        if( iOff == -1 ) break;
+		iOff = alertPat.indexIn( text, iOff );
+		if( iOff == -1 ) break;
 
- 		mLen = 1;
-        // function call
+		mLen = 1;
+		// function call
 		if( iOff == functionPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
 		{
-            QString ident = functionPat.cap();
+			QString ident = functionPat.cap();
 			mLen = functionPat.matchedLength();
 			if( ! methods.isEmpty() )
 			{
 				setFormat( iOff, mLen, methods.contains( ident ) ? methodFormat : noMethFormat );
 				methods = QSet<QString>();
 			} else {
-                setFormat( iOff, mLen, functionFormat );
+				setFormat( iOff, mLen, functionFormat );
 			}
 			continue;
 		}
-		
-        // Identifier: keyword, predefined, or stellarium module
+
+		// Identifier: keyword, predefined, or stellarium module
 		if( iOff == identPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
 		{
-            QString ident = identPat.cap();
+			QString ident = identPat.cap();
 			mLen = identPat.matchedLength();
-            if( keywords.contains( ident ) )
+			if( keywords.contains( ident ) )
 			{
 				setFormat( iOff, mLen, keywordFormat );
 			}
@@ -247,15 +247,15 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 		// Multiline comment
 		if( iOff == multiLineStartPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
 		{
-            mLen = multiLineStartPat.matchedLength();		
-            // skip to end
+			mLen = multiLineStartPat.matchedLength();
+			// skip to end
 			startIndex = text.indexOf( multiLineEnd, iOff + mLen );
 			if( startIndex == -1 )
 			{
-			    setCurrentBlockState( 1 );
+				setCurrentBlockState( 1 );
 				setFormat( iOff, text.length() - iOff, commentFormat );
-			    return;
-		    }
+				return;
+			}
 			mLen = startIndex - iOff  + multiLineEnd.length();
 			setFormat( iOff, mLen, commentFormat );
 			continue;
@@ -267,7 +267,7 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 			if( iOff == rule.pattern.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
 			{
 				mLen = rule.pattern.matchedLength();
-     		    setFormat( iOff, mLen, *(rule.format) );
+				setFormat( iOff, mLen, *(rule.format) );
 				break;
 			}
 		}

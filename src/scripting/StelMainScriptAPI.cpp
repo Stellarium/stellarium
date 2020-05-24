@@ -775,21 +775,18 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	bool ok;
 	double jd;
 	if (spec=="local")
-	{
 		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(tdt, &ok);
-	}
 	else
-	{
 		jd = StelUtils::getJulianDayFromISO8601String(tdt, &ok);
-	}
+
 	if (ok)
 		return jd;
 
 	QRegExp nowRe("(now)?"
-				  "\\s*([-+])"
-                  "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
-				  "\\s*(second|minute|hour|day|sol|week|month|year)s?"
-				  "(?:\\s+(sidereal))?");
+		      "\\s*([-+])"
+		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
+		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"
+		      "(?:\\s+(sidereal))?");
 	if (nowRe.exactMatch(tdt))
 	{
 		double delta;
@@ -846,7 +843,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
-void StelMainScriptAPI::wait(double t) {
+void StelMainScriptAPI::wait(double t)
+{
 	QEventLoop loop;
 	QTimer::singleShot(qRound(1000*t), &loop, SLOT(quit()));
 	loop.exec();
