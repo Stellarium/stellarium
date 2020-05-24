@@ -29,7 +29,9 @@
 #include <QPair>
 #include <QSet>
 
-class StelMainScriptAPI;
+// class StelMainScriptAPI;
+#include "StelMainScriptAPI.hpp"
+
 class StelScriptEngineAgent;
 class QScriptEngine;
 
@@ -75,7 +77,10 @@ public:
 
     //! Define JS classes Vec3f, Vec3d
 	static void defVecClasses(QScriptEngine *engine);
-					 
+
+    //! Permit access to StelScriptMainAPI's methods
+	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
+
 public slots:
 	//! Returns a HTML description of the specified script.
 	//! Includes name, author, description...
