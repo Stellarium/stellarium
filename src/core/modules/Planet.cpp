@@ -407,11 +407,8 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	QString str;
 	QTextStream oss(&str);
 	oss << "<h2>";
-	if (englishName=="Pluto")
-	{
-		// We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
+	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
-	}
 	oss << getNameI18n();  // UI translation can differ from sky translation
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
@@ -475,19 +472,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), q_(getPlanetTypeString()), cometType);
 		}
-		else
-		{
-			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), q_(getPlanetTypeString()));
-		}
-
+		else		
+			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), q_(getPlanetTypeString()));		
 	}
 
-	if (flags&Magnitude && !fuzzyEquals(getVMagnitude(core), std::numeric_limits<float>::infinity()))
-	{
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
 	if (flags&Magnitude)
+	{
+		if (!fuzzyEquals(getVMagnitude(core), std::numeric_limits<float>::infinity()))
+			oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 		oss << getExtraInfoStrings(Magnitude).join("");
+	}
 
 	if (flags&AbsoluteMagnitude)
 	{
@@ -623,7 +617,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2<br/>").arg(q_("Position angle of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0)));
 		}
 	}
-
 
 	if (flags&Distance)
 	{
@@ -901,9 +894,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		}
 
 		if (englishName != "Sun")
-		{
 			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3));
-		}
 
 		if (englishName=="Sun")
 		{
