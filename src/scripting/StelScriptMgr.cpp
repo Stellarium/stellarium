@@ -604,7 +604,8 @@ bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scrip
 	if( path.isEmpty() )
 		path = QStringLiteral("scripts");
 	QString processed;
-	bool ok = preprocessScript( scriptId, scriptCode, processed, path);
+	int errLoc;
+	bool ok = preprocessScript( scriptId, scriptCode, processed, path, errLoc );
 	if(ok)
 		return runPreprocessedScript(processed, "<Direct script input>");
 	return false;
@@ -771,21 +772,27 @@ bool StelScriptMgr::strToBool(const QString& str)
 bool StelScriptMgr::preprocessFile(const QString fileName, QFile &input, QString& output, const QString& scriptDir)
 {
 	QString aText = QString::fromUtf8(input.readAll());
-	return preprocessScript( fileName, aText, output, scriptDir );
+	int errLoc;
+	return preprocessScript( fileName, aText, output, scriptDir, errLoc );
 }
 
-bool StelScriptMgr::preprocessScript(const QString fileName, const QString &input, QString &output, const QString &scriptDir)
+bool StelScriptMgr::preprocessScript(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc )
 {
 	// The one and only top-level call for expand.
 	scriptFileName = fileName;
 	num2loc = QMap<int,QPair<QString,int>>();
 	outline = 0;
 	includeSet.clear();
-	bool result = expand( fileName, input, output, scriptDir );
-	return result;
+	errLoc = -1;
+	expand( fileName, input, output, scriptDir, errLoc );
+	if( errLoc == -1 ){
+		return false;
+	} else {
+		return true;
+	}
 }
 	
-bool StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir){
+void StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc){
 	QStringList lines = input.split("\n");
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
@@ -817,7 +824,10 @@ bool StelScriptMgr::expand(const QString fileName, const QString &input, QString
 					{
 						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName))));
 						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(incName);
-						return false;
+						if( errLoc == -1 ) errLoc = output.length();
+						output += line + "\n";
+						outline++;
+						continue;
 					}
 				}
 			}
@@ -835,14 +845,17 @@ bool StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				{
 					qWarning() << "script include: " << QDir::toNativeSeparators(incPath);
 					QString aText = QString::fromUtf8(fic.readAll());
-					expand( incPath, aText, output, scriptDir);
+					expand( incPath, aText, output, scriptDir, errLoc );
 					fic.close();
 				}
 				else
 				{
 					emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
 					qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
-					return false;
+				   	if( errLoc == -1 ) errLoc = output.length();
+					output += line + "\n";
+					outline++;
+					continue;
 				}
 			}
 		}
@@ -867,7 +880,7 @@ bool StelScriptMgr::expand(const QString fileName, const QString &input, QString
 			lineIdx++;
 		}
 	}
-	return true;
+	return;
 }
 
 QString StelScriptMgr::lookup( int outputPos )

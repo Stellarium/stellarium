@@ -69,7 +69,7 @@ public:
 	//! if the command line option --verbose has been given,
 	//! this dumps the preprocessed script with line numbers attached to log.
 	//! This helps to understand the line number given by the usual error message.
-	bool preprocessScript(const QString fileName, const QString& input, QString& output, const QString& scriptDir);
+	bool preprocessScript(const QString fileName, const QString& input, QString& output, const QString& scriptDir, int &errLoc);
 	bool preprocessFile(const QString fileName, QFile &input, QString& output, const QString& scriptDir);
 	
 	//! Add all the StelModules into the script engine
@@ -239,7 +239,7 @@ private:
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 	// The recursive preprocessing workhorse.
-        bool expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir);
+	void expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc);
 
 	//! Generate one StelAction per script.
 	//! The name of the action is of the form: "actionScript/<script-path>"

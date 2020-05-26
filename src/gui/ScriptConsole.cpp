@@ -268,10 +268,11 @@ void ScriptConsole::preprocessScript()
 	QString dest;
 	QString src = ui->scriptEdit->toPlainText();
 
+	int errLoc = 0;
 	if (sender() == ui->preprocessSSCButton)
 	{
 		qDebug() << "[ScriptConsole] Preprocessing with SSC proprocessor";
-		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text());
+		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text(), errLoc );
 	}
 	else
 		qWarning() << "[ScriptConsole] WARNING - unknown preprocessor type";
@@ -279,7 +280,10 @@ void ScriptConsole::preprocessScript()
 	ui->scriptEdit->setPlainText(dest);
 	scriptFileName = ""; // OK, it's a new file!
 	dirty = true;
-	ui->tabs->setCurrentIndex(0);
+	ui->tabs->setCurrentIndex( 0 );
+	QTextCursor tc = ui->scriptEdit->textCursor();
+	tc.setPosition( errLoc );
+	ui->scriptEdit->setTextCursor( tc );
 }
 
 void ScriptConsole::runScript()

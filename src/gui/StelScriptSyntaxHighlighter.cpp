@@ -94,7 +94,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	identPat = QRegExp("^\\b[A-Za-z_][A-Za-z_0-9]*\\b");
 
 	// Function call
-	functionPat = QRegExp("\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()");
+	functionPat = QRegExp("^\\s*\\(");
 
 	// A pattern to find a spot that warrants investigation.
 	alertPat = QRegExp( "[\"'/\\w_]" );
@@ -122,7 +122,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 			       "|"
 			       "'[^'\\\\]*(\\\\.[^'\\\\]*)*'"
 			       "|"
-			       "/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/" // Negative lookahead!
+			       "/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/[a-z]*" // Negative lookahead!
 			       ")" );
 	rule.format = &literalFormat;
 	highlightingRules.append(rule);
@@ -207,23 +207,8 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 		iOff = alertPat.indexIn( text, iOff );
 		if( iOff == -1 ) break;
 
-		mLen = 1;
-		// function call
-		if( iOff == functionPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
-		{
-			QString ident = functionPat.cap();
-			mLen = functionPat.matchedLength();
-			if( ! methods.isEmpty() )
-			{
-				setFormat( iOff, mLen, methods.contains( ident ) ? methodFormat : noMethFormat );
-				methods = QSet<QString>();
-			} else {
-				setFormat( iOff, mLen, functionFormat );
-			}
-			continue;
-		}
-
-		// Identifier: keyword, predefined, or stellarium module
+ 		mLen = 1;
+        // Identifier: keyword, predefined, stellarium module or method call
 		if( iOff == identPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
 		{
 			QString ident = identPat.cap();
@@ -231,17 +216,31 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 			if( keywords.contains( ident ) )
 			{
 				setFormat( iOff, mLen, keywordFormat );
+				continue;
 			}
 			else if( predefineds.contains( ident ) )
 			{
 				setFormat( iOff, mLen, predefFormat );
+				continue;
 			}
 			else if( mod2funcs.contains( ident ) )
 			{
 				methods = mod2funcs.value( ident );
 				setFormat( iOff, mLen, moduleFormat );
+				continue;
 			}
-  		    continue;
+		    if( iOff + mLen == functionPat.indexIn( text, iOff + mLen, QRegExp::CaretAtOffset ) )
+			{
+				if( ! methods.isEmpty() )
+				{
+					setFormat( iOff, mLen, methods.contains( ident ) ? methodFormat : noMethFormat );
+					methods = QSet<QString>();
+				} else {
+					setFormat( iOff, mLen, functionFormat );
+				}
+				mLen += functionPat.matchedLength();
+  		        continue;
+			}
 		}
 
 		// Multiline comment
