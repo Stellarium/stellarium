@@ -297,7 +297,7 @@ void ConstellationMgr::deselectConstellations(void)
 		}
 
 		// If any constellation is selected at the moment, then let's do not touch to it!
-		if (omgr->getWasSelected())
+		if (omgr->getWasSelected() && selected.size()>0)
 			selected.pop_back();
 
 		// Let's hide all previously selected constellations
@@ -307,17 +307,15 @@ void ConstellationMgr::deselectConstellations(void)
 			constellation->setFlagLabels(false);
 			constellation->setFlagArt(false);
 			constellation->setFlagBoundaries(false);
-		}
-		selected.clear();
+		}		
 	}
 	else
 	{
 		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 		if (!newSelectedConst.empty())
 			omgr->unSelect();
-
-		selected.clear();
 	}
+	selected.clear();
 }
 
 void ConstellationMgr::selectAllConstellations()
