@@ -281,9 +281,11 @@ void ScriptConsole::preprocessScript()
 	scriptFileName = ""; // OK, it's a new file!
 	dirty = true;
 	ui->tabs->setCurrentIndex( 0 );
-	QTextCursor tc = ui->scriptEdit->textCursor();
-	tc.setPosition( errLoc );
-	ui->scriptEdit->setTextCursor( tc );
+	if( errLoc != -1 ){
+		QTextCursor tc = ui->scriptEdit->textCursor();
+		tc.setPosition( errLoc );
+		ui->scriptEdit->setTextCursor( tc );
+	}
 }
 
 void ScriptConsole::runScript()
@@ -294,11 +296,17 @@ void ScriptConsole::runScript()
 		ui->outputBrowser->clear();
 	
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(scriptFileName, ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
+	int errLoc = 0;
+	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(scriptFileName, ui->scriptEdit->toPlainText(), errLoc, ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script");
 		qWarning() << "[ScriptConsole] " + msg;
 		appendLogLine(msg);
+		if( errLoc != -1 ){
+			QTextCursor tc = ui->scriptEdit->textCursor();
+			tc.setPosition( errLoc );
+			ui->scriptEdit->setTextCursor( tc );
+		}
 		return;
 	}
 }
@@ -374,7 +382,8 @@ void ScriptConsole::quickRun(int idx)
 	if (!scriptText.isEmpty())
 	{
 		appendLogLine(QString("Running: %1").arg(scriptText));
-		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText);
+		int errLoc;
+		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText, errLoc );
 		ui->quickrunCombo->setCurrentIndex(0);
 	}
 }

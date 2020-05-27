@@ -598,13 +598,12 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	return runPreprocessedScript(preprocessedScript,fileName);
 }
 
-bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scriptCode, const QString& includePath)
+bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scriptCode, int &errLoc, const QString& includePath)
 {
 	QString path = includePath.isNull() ? QString(".") : includePath;
 	if( path.isEmpty() )
 		path = QStringLiteral("scripts");
 	QString processed;
-	int errLoc;
 	bool ok = preprocessScript( scriptId, scriptCode, processed, path, errLoc );
 	if(ok)
 		return runPreprocessedScript(processed, "<Direct script input>");
@@ -785,7 +784,7 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 	includeSet.clear();
 	errLoc = -1;
 	expand( fileName, input, output, scriptDir, errLoc );
-	if( errLoc == -1 ){
+	if( errLoc != -1 ){
 		return false;
 	} else {
 		return true;
@@ -815,6 +814,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				incPath = StelFileMgr::findFile(scriptDir + "/" + incName);
 				if (incPath.isEmpty())
 				{
+					QString fail = scriptDir + "/" + incName;
 					qWarning() << "WARNING: file not found! Let's check standard scripts directory...";
 
 					// OK, file is not exists in relative path; Let's check standard scripts directory
@@ -822,10 +822,11 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 
 					if (incPath.isEmpty())
 					{
+						fail += " or scripts/" + incName;
 						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName))));
 						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(incName);
 						if( errLoc == -1 ) errLoc = output.length();
-						output += line + "\n";
+						output += line + " // <<< " + fail + " not found\n";
 						outline++;
 						continue;
 					}
@@ -853,7 +854,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 					emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
 					qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
 				   	if( errLoc == -1 ) errLoc = output.length();
-					output += line + "\n";
+					output += line + " // <<< " + incPath + ": cannot open\n";
 					outline++;
 					continue;
 				}

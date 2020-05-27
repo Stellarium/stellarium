@@ -153,10 +153,11 @@ public slots:
 	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
 	//! @param scriptId path name, if available, or something helpful
 	//! @param scriptCode The script to execute
+	//! @param errLoc offset of erroneous include line, or -1
 	//! @param includePath If a null string (the default), no pre-processing is done. If an empty string, the default
 	//! script directories are used (script/ in both user and install directory). Otherwise, the given directory is used.
 	//! @return false if the named script code could not be prepared or run, true otherwise
-	bool runScriptDirect(const QString scriptId, const QString& scriptCode, const QString &includePath = QString());
+	bool runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
 
 	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
 	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.
