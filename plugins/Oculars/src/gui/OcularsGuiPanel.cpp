@@ -822,6 +822,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("Y scale"), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit));
 		fieldCcdVScale->setToolTip(q_("Vertical scale"));
 
+		prevTelescopeButton->setVisible(true);
+		nextTelescopeButton->setVisible(true);
+		fieldTelescopeName->setVisible(true);
+
 		fieldMagnification->setVisible(false);
 		fieldExitPupil->setVisible(false);
 		fieldFov->setVisible(false);
