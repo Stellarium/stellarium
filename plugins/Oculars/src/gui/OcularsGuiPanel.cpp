@@ -830,7 +830,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldExitPupil->setVisible(false);
 		fieldFov->setVisible(false);
 	}
-	else if (ocularsPlugin->flagShowOculars)
+
+	if (ocularsPlugin->flagShowOculars)
 	{
 		//We need the current ocular
 		int index = ocularsPlugin->selectedOcularIndex;
@@ -896,17 +897,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldExitPupil->setVisible(true);
 		else
 			fieldExitPupil->setVisible(false);
-	}
-	else
-	{
-		prevTelescopeButton->setVisible(true);
-		nextTelescopeButton->setVisible(true);
-		fieldTelescopeName->setVisible(true);
-
-		fieldMagnification->setVisible(false);
-		fieldFov->setVisible(false);
-		fieldExitPupil->setVisible(false);
-	}
+	}	
 
 	double diameter = telescope->diameter();
 	if (diameter>0.0 && ocularsPlugin->getFlagShowResolutionCriteria())
