@@ -8,20 +8,6 @@ skip_branch_with_pr: true
 # environment variables
 environment:
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: x64
-    qtver: 5.9
-    qtbin: msvc2015_64
-    msvcname: Visual Studio 14 2015 Win64
-    packaging: false
-    suffix: Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: Win32
-    qtver: 5.9
-    qtbin: msvc2015
-    msvcname: Visual Studio 14 2015
-    packaging: false
-    suffix: Win32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: x64
     qtver: 5.12
@@ -36,17 +22,47 @@ environment:
     msvcname: Visual Studio 15 2017
     packaging: true
     suffix: Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: x64
+    qtver: 5.9
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015 Win64
+    packaging: false
+    suffix: Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: Win32
+    qtver: 5.9
+    qtbin: msvc2015
+    msvcname: Visual Studio 14 2015
+    packaging: false
+    suffix: Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: x64
+    qtver: 5.14
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win64
+    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: Win32
+    qtver: 5.14
+    qtbin: msvc2017
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win32 
+    cmake_args: -A x86
 
 before_build:
   - set PUBLISH_BINARY=false
-  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set OPENSSLPATH=C:\OpenSSL-%suffix%\bin;C:\OpenSSL-v111-%suffix%\bin
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%OPENSSLPATH%;%PATH%
   - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" ..
+  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
