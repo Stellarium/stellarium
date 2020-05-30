@@ -645,6 +645,36 @@ void TestDeltaT::testDeltaTByStephenson1997WideDates()
 	}
 }
 
+void TestDeltaT::testDeltaTByStephenson1997GenericDates()
+{
+	// Valid range: -500..1600
+
+	double year, expectedResult, acceptableError, JD;
+	int yout, mout, dout;
+	while(genericData.count() >= 3)
+	{
+		year = genericData.takeFirst().toDouble();
+		expectedResult = genericData.takeFirst().toDouble();
+		acceptableError = genericData.takeFirst().toDouble();
+
+		if (year>=-501. && year<1600.)
+		{
+			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
+			double result = StelUtils::getDeltaTByStephenson1997(JD);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+								.arg(year)
+								.arg(result)
+								.arg(expectedResult)
+								.arg(actualError)
+								.arg(acceptableError)
+								.toUtf8());
+		}
+	}
+}
+
 void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
 {
 	// test data from
@@ -665,7 +695,7 @@ void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
 	data <<     0 << 10580 << 260;
 	data <<   100 <<  9600 << 240;
 	/*
-	data <<   200 <<  8640 << 210;
+	data <<   200 <<  8640 << 210;	
 	data <<   300 <<  7680 << 180;
 	data <<   400 <<  6700 << 160;
 	data <<   500 <<  5710 << 140;

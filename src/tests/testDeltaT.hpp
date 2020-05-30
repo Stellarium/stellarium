@@ -31,15 +31,16 @@ class TestDeltaT : public QObject
 
 private slots:
 	void initTestCase();
-	void testDeltaTByEspenakMeeus();	
+	void testDeltaTByEspenakMeeus();
 	void testDeltaTByChaprontMeeus();
 	void testDeltaTByChaprontMeeusWideDates();
 	void testDeltaTByMorrisonStephenson1982WideDates();	
 	void testDeltaTByStephensonMorrison1984WideDates();	
-	void testDeltaTByStephensonMorrison1995WideDates();
-	void testDeltaTByStephensonMorrison2004WideDates();
+	void testDeltaTByStephensonMorrison1995WideDates();	
+	void testDeltaTByStephensonMorrison2004WideDates();	
 	void testDeltaTByStephensonMorrisonHohenkerk2016GenericDates();
 	void testDeltaTByStephenson1997WideDates();
+	void testDeltaTByStephenson1997GenericDates();
 	void testDeltaTByMeeusSimons();
 	void testDeltaTByMeeusSimonsGenericDates();
 	void testDeltaTByKhalidSultanaZaidiWideDates();
