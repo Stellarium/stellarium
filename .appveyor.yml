@@ -51,7 +51,7 @@ environment:
     msvcname: Visual Studio 16 2019
     packaging: false
     suffix: Win32 
-    cmake_args: -A x86
+    cmake_args: -A Win32
 
 before_build:
   - set PUBLISH_BINARY=false
