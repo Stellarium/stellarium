@@ -261,14 +261,35 @@ public slots:
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
 
-	//! Viewing direction function : true move, false stop.
-	void turnRight(bool);
-	void turnLeft(bool);
-	void turnUp(bool);
-	void turnDown(bool);
+	//! Turn direction of view to right
+	//! @param s - true move, false stop
+	//! @code
+	//! // You can use the following code to slightly turn direction of view to right:
+	//! StelMovementMgr.turnRight(true);
+	//! core.wait(2);
+	//! StelMovementMgr.turnRight(false);
+	//! @endcode
+	//! @note We recommend use StelMovementMgr.turnRight() command together with core.wait() command to avoid unwanted constant rotation to right
+	void turnRight(bool s);
+	//! Turn direction of view to left
+	//! @param s - true move, false stop
+	//! @code
+	//! // You can use the following code to slightly turn direction of view to left:
+	//! StelMovementMgr.turnLeft(true);
+	//! core.wait(2);
+	//! StelMovementMgr.turnLeft(false);
+	//! @endcode
+	//! @note We recommend use StelMovementMgr.turnLeft() command together with core.wait() command to avoid unwanted constant rotation to left
+	void turnLeft(bool s);
+	//! Turn direction of view to up (up to zenith)
+	//! @param s - true move, false stop
+	void turnUp(bool s);
+	//! Turn direction of view to down (up to nadir)
+	//! @param s - true move, false stop
+	void turnDown(bool s);
 	void moveSlow(bool b) {flagMoveSlow=b;}
-	void zoomIn(bool);
-	void zoomOut(bool);
+	void zoomIn(bool s);
+	void zoomOut(bool s);
 
 	//! Look immediately towards East.
 	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn eastern horizon to screen bottom.
