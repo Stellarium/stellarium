@@ -250,6 +250,7 @@ void SolarSystem::init()
 	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
 	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
+	setOrbitsThickness(conf->value("astro/object_orbits_thickness", 1).toBool());
 	setTrailsThickness(conf->value("astro/object_trails_thickness", 1).toBool());
 	recreateTrails();
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
@@ -2749,6 +2750,18 @@ bool SolarSystem::getFlagPermanentOrbits() const
 {
 	return Planet::permanentDrawingOrbits;
 }
+
+void SolarSystem::setOrbitsThickness(int v)
+{
+	Planet::orbitsThickness=v;
+	emit orbitsThicknessChanged(v);
+}
+
+int SolarSystem::getOrbitsThickness() const
+{
+	return Planet::orbitsThickness;
+}
+
 
 void SolarSystem::setFlagCustomGrsSettings(bool b)
 {

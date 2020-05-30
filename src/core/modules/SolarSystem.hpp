@@ -389,6 +389,12 @@ class SolarSystem : public StelObjectModule
 		   WRITE setApparentMagnitudeAlgorithmOnEarth
 		   NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
 
+	Q_PROPERTY(int orbitsThickness
+		   READ getOrbitsThickness
+		   WRITE setOrbitsThickness
+		   NOTIFY orbitsThicknessChanged
+		   )
+
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -923,6 +929,9 @@ public slots:
 	void setFlagPermanentOrbits(bool b);
 	bool getFlagPermanentOrbits() const;
 
+	void setOrbitsThickness(int v);
+	int getOrbitsThickness() const;
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
@@ -930,6 +939,7 @@ signals:
 	void flagHintsChanged(bool b);
 	void trailsDisplayedChanged(bool b);
 	void trailsThicknessChanged(int v);
+	void orbitsThicknessChanged(int v);
 	void maxTrailPointsChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);

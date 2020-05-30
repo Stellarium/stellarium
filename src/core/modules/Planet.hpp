@@ -622,6 +622,8 @@ protected:
 	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
+	static int orbitsThickness;
+
 private:
 	QString iauMoonNumber;
 

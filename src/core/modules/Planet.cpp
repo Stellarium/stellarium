@@ -96,6 +96,8 @@ double Planet::customGrsJD = 2456901.5;
 double Planet::customGrsDrift = 15.;
 int Planet::customGrsLongitude = 216;
 
+int Planet::orbitsThickness = 1;
+
 QOpenGLShaderProgram* Planet::planetShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=Q_NULLPTR;
@@ -3468,6 +3470,8 @@ void Planet::drawOrbit(const StelCore* core)
 	QVarLengthArray<float, 1024> vertexArray;
 
 	sPainter.enableClientStates(true, false, false);
+	if (orbitsThickness>1)
+		sPainter.setLineWidth(orbitsThickness);
 
 	for (int n=0; n<=nbIter; ++n)
 	{
@@ -3490,6 +3494,8 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
 	}
 	sPainter.enableClientStates(false);
+	if (orbitsThickness>1)
+		sPainter.setLineWidth(1);
 }
 
 void Planet::update(int deltaTime)

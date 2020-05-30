@@ -680,6 +680,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets_hints",			propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
 	conf->setValue("astro/flag_planets_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("astro/flag_permanent_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
+	conf->setValue("astro/object_orbits_thickness",			propMgr->getStelPropertyValue("SolarSystem.orbitsThickness").toInt());
+	conf->setValue("astro/object_trails_thickness",			propMgr->getStelPropertyValue("SolarSystem.trailsThickness").toInt());
 	conf->setValue("viewing/flag_isolated_trails",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
 	conf->setValue("viewing/number_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.numberIsolatedTrails").toInt());
 	conf->setValue("viewing/max_trail_points",			propMgr->getStelPropertyValue("SolarSystem.maxTrailPoints").toInt());
