@@ -840,6 +840,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("stdMag") && qsMagList.contains(sid))
 			satData["stdMag"] = qsMagList[sid];
 
+		if (!satData.contains("rcs") && rcsList.contains(sid))
+			satData["rcs"] = rcsList[sid];
+
 		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
 		{
@@ -879,8 +882,11 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["infoColor"].toList() == defHintCol)
 			satMap.remove("infoColor");
 
-		if (satMap["stdMag"].toFloat() == 99.f)
+		if (satMap["stdMag"].toFloat() > 98.f)
 			satMap.remove("stdMag");
+
+		if (satMap["rcs"].toFloat() < 0.f)
+			satMap.remove("rcs");
 
 		if (satMap["status"].toInt() == Satellite::StatusUnknown)
 			satMap.remove("status");
@@ -994,6 +1000,8 @@ bool Satellites::add(const TleData& tleData)
 	int sid = tleData.id.toInt();
 	if (qsMagList.contains(sid))
 		satProperties.insert("stdMag", qsMagList[sid]);
+	if (rcsList.contains(sid))
+		satProperties.insert("rcs", rcsList[sid]);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 	// Guess the group
@@ -1630,6 +1638,8 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			int sid = id.toInt();
 			if (qsMagList.contains(sid))
 				sat->stdMag = qsMagList[sid];
+			if (rcsList.contains(sid))
+				sat->RCS = rcsList[sid];
 		}
 		else
 		{
@@ -1810,8 +1820,8 @@ void Satellites::loadQSMagData()
 	// Description of file and some additional information you can find here:
 	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
 	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
-	QFile qsmFile(":/satellites/qs.mag");
-	qsMagList.clear();
+	QFile qsmFile(":/satellites/qs.mag");	
+	qsMagList.clear();	
 	qsmFile.open(QFile::ReadOnly);
 	while (!qsmFile.atEnd())
 	{
@@ -1819,9 +1829,22 @@ void Satellites::loadQSMagData()
 		int id   = line.mid(0,5).trimmed().toInt();
 		QString smag = line.mid(33,4).trimmed();		
 		if (!smag.isEmpty())
-			qsMagList.insert(id, smag.toDouble());
+			qsMagList.insert(id, smag.toDouble());		
 	}
 	qsmFile.close();
+
+	QFile rcsFile(":/satellites/rcs");
+	rcsList.clear();
+	rcsFile.open(QFile::ReadOnly);
+	while (!rcsFile.atEnd())
+	{
+		QString line = QString(rcsFile.readLine());
+		int id   = line.mid(0,5).trimmed().toInt();
+		QString srcs = line.mid(5,5).trimmed();
+		if (!srcs.isEmpty())
+			rcsList.insert(id, srcs.toDouble());
+	}
+	rcsFile.close();
 }
 
 void Satellites::update(double deltaTime)
@@ -2043,7 +2066,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 	IridiumFlaresPredictionList predictions;
 
-// create a lіst of Iridiums
+	// create a lіst of Iridiums
 	QMap<SatelliteP,SatDataStruct> iridiums;
 	SatDataStruct sds;
 	double nextJD = predictionJD + 1./24;
@@ -2071,13 +2094,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 			sds.nextJD = predictionJD + t;
 			iridiums.insert(sat, sds);
-			//qDebug() << sat->getEnglishName() << ": "
-			//		 << sds.altitude
-			//		 << sds.azimuth
-			//		 << sds.angleToSun
-			//		 << sds.v
-			//		 << StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
-			//			;
 			if (nextJD>sds.nextJD)
 				nextJD = sds.nextJD;
 		}
@@ -2125,16 +2141,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 					}
 				}
 
-/*				qDebug() << QString::asprintf("%20s  alt:%6.1f  az:%6.1f  sun:%6.1f  v:%6.1f",
-											 i.key()->getEnglishName().toStdString(),
-											 i.value().altitude*180/M_PI,
-											 i.value().azimuth*180/M_PI,
-											 i.value().angleToSun,
-											 v
-											 )
-						 <<  StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
-							 ;
-*/
 				Vec3d pos = i.key()->getAltAzPosApparent(pcore);
 
 				i.value().v = flareFound ?  17 : v; // block extra report

@@ -567,7 +567,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 
-	QHash<int, double> qsMagList;
+	QHash<int, double> qsMagList, rcsList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -

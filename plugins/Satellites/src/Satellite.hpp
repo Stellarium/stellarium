@@ -258,6 +258,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	double RCS;
 	//! Operational status code
 	int status;
 	//! Contains the J2000 position.
@@ -299,10 +300,6 @@ private:
 	Vec3d	velocity;
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
-
-#ifdef IRIDIUM_SAT_TEXT_DEBUG
-	static QString myText;
-#endif
 
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
