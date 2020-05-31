@@ -132,6 +132,9 @@ public:
 
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
+	Vec3d j2000ToMountFrame(const Vec3d& v) const;
+	Vec3d mountFrameToJ2000(const Vec3d& v) const;
+
 public slots:
 	// UNUSED!
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -266,7 +269,7 @@ public slots:
 	//! @code
 	//! // You can use the following code to slightly turn direction of view to right:
 	//! StelMovementMgr.turnRight(true);
-	//! core.wait(2);
+	//! core.wait(0.75);
 	//! StelMovementMgr.turnRight(false);
 	//! @endcode
 	//! @note We recommend use StelMovementMgr.turnRight() command together with core.wait() command to avoid unwanted constant rotation to right
@@ -276,7 +279,7 @@ public slots:
 	//! @code
 	//! // You can use the following code to slightly turn direction of view to left:
 	//! StelMovementMgr.turnLeft(true);
-	//! core.wait(2);
+	//! core.wait(0.75);
 	//! StelMovementMgr.turnLeft(false);
 	//! @endcode
 	//! @note We recommend use StelMovementMgr.turnLeft() command together with core.wait() command to avoid unwanted constant rotation to left
@@ -344,9 +347,7 @@ signals:
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
 	void flagIndicationMountModeChanged(bool b);
-
 	void flagAutoZoomOutResetsDirectionChanged(bool b);
-
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
@@ -368,10 +369,6 @@ private slots:
 	void setFOV2Deg();
 	void setFOV1Deg();
 	void setFOV05Deg();
-
-public:
-	Vec3d j2000ToMountFrame(const Vec3d& v) const;
-	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
 private:
 	double currentFov; // The current FOV in degrees
