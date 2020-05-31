@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-31 11:28+0700\n"
+"POT-Creation-Date: 2020-05-31 12:43+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -487,6 +487,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:902 src/gui/StelGuiItems.cpp:775
+#: plugins/Satellites/src/Satellite.cpp:393
 msgctxt "distance"
 msgid "m"
 msgstr ""
@@ -13645,11 +13646,6 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:393
 msgid "Radar cross-section (RCS)"
-msgstr ""
-
-#: plugins/Satellites/src/Satellite.cpp:393
-msgctxt "meter"
-msgid "m"
 msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:402
