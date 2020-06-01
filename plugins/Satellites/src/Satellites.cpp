@@ -1002,6 +1002,9 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("stdMag", qsMagList[sid]);
 	if (rcsList.contains(sid))
 		satProperties.insert("rcs", rcsList[sid]);
+	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
+	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+		satProperties.insert("rcs", 22.68); // Starlink's solar array is 8.1 x 2.8 metres.
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 	// Guess the group
@@ -1640,6 +1643,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->stdMag = qsMagList[sid];
 			if (rcsList.contains(sid))
 				sat->RCS = rcsList[sid];
+			// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
+			if (!rcsList.contains(sid) && sat->name.startsWith("STARLINK"))
+				sat->RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
 		}
 		else
 		{

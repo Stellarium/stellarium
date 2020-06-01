@@ -297,7 +297,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
 	}
 	
-	if ((flags & Magnitude) && (stdMag<99. || RCS>-1.))
+	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2));
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -613,7 +613,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	{
 		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
-		if (stdMag<98.)
+		if (stdMag<99.)
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
 			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
@@ -703,7 +703,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 
 			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
 		}
-		else if (RCS>-1.) // OK, artificial satellite has RCS value and no standard magnitude
+		else if (RCS>0.) // OK, artificial satellite has RCS value and no standard magnitude
 		{
 			// Let's try calculate approx. magnitude from RCS value (see DOI: 10.1117/12.2014623)
 			double albedo = 0.2;
