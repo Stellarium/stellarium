@@ -352,10 +352,10 @@ public:
 	//! @param[in] line The second line from the TLE
 	static QString getSatIdFromLine2(const QString& line);
 
-	//! Reads qs.mag file and its parsing for getting id and standard magnitude
+	//! Reads qs.mag and rcs files and its parsing for getting id,  standard magnitude and RCS values
 	//! for satellites.
 	//! @note We are having permissions for use this file from Mike McCants.	
-	void loadQSMagData();
+	void loadExtraData();
 	
 	//! Get depth of prediction for Iridium flares
 	int getIridiumFlaresPredictionDepth(void) const { return iridiumFlaresPredictionDepth; }

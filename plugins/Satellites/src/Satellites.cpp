@@ -123,8 +123,8 @@ void Satellites::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(dirPath);
 		dataDir.setPath(dirPath);
 
-		// load standard magnitude for satellites
-		loadQSMagData();
+		// load standard magnitudes and RCS data for satellites
+		loadExtraData();
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
@@ -1815,7 +1815,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	return id;
 }
 
-void Satellites::loadQSMagData()
+void Satellites::loadExtraData()
 {
 	// Description of file and some additional information you can find here:
 	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
