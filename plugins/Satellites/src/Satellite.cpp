@@ -297,7 +297,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
 	}
 	
-	if ((flags & Magnitude) && (stdMag<99.))
+	if ((flags & Magnitude) && (stdMag<99. || RCS>-1.))
 	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2));
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -609,17 +609,18 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	if (!iconicModeFlag && visibility != gSatWrapper::VISIBLE)
 		vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 
-	if (stdMag<98.)
+	if (visibility==gSatWrapper::VISIBLE)
 	{
 		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
-		if (visibility==gSatWrapper::VISIBLE)
+		if (stdMag<98.)
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
 			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
 			double fracil = calculateIlluminatedFraction();
 			if (fracil==0)
 				fracil = 0.000001;
+
 			if (pSatWrapper && name.startsWith("IRIDIUM"))
 			{
 				Vec3d Sun3d = pSatWrapper->getSunECIPos();
@@ -689,28 +690,32 @@ float Satellite::getVMagnitude(const StelCore* core) const
 				// very simple flare model
 				double iridiumFlare = 100;
 				if (sunReflAngle<0.5)
-				{
 					iridiumFlare = -8.92 + sunReflAngle*6;
-				}
-				else
-				if (sunReflAngle<0.7)
-				{
+				else	if (sunReflAngle<0.7)
 					iridiumFlare = -5.92 + (sunReflAngle-0.5)*10;
-				}
-					else
-				{
+				else
 					iridiumFlare = -3.92 + (sunReflAngle-0.7)*5;
-				}
 
 				 vmag = qMin(stdMag, iridiumFlare);
 			}
 			else // not Iridium
-			{
-				sunReflAngle = -1;
 				vmag = stdMag;
-			}
 
 			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
+		}
+		else if (RCS>-1.) // OK, artificial satellite has RCS value and no standard magnitude
+		{
+			// Let's try calculate approx. magnitude from RCS value (see DOI: 10.1117/12.2014623)
+			double albedo = 0.2;
+			if (0.436<=phaseAngle && phaseAngle<1.745)
+				albedo = (((((3.1765*phaseAngle - 22.0968)*phaseAngle + 62.182)*phaseAngle - 90.0993)*phaseAngle + 70.3031)*phaseAngle - 27.9227)*phaseAngle + 4.7373;
+			else if (1.745<=phaseAngle && phaseAngle<=2.618)
+				albedo = ((0.510905*phaseAngle - 2.72607)*phaseAngle + 4.96646)*phaseAngle - 3.02085;
+
+			double rm = range*1000.;
+			double fdiff = (std::sin(phaseAngle) + (M_PI - phaseAngle)*std::cos(phaseAngle))*(2.*albedo*RCS)/(3.* M_PI * M_PI * rm * rm);
+
+			vmag = -26.74 - 2.5*std::log10(fdiff);
 		}
 	}
 	return vmag;
