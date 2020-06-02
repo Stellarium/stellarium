@@ -1184,7 +1184,8 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				double deltaEps, deltaPsi;
 				getNutationAngles(JDE, &deltaPsi, &deltaEps);
 				//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
-				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps);
+				// TODO: Note: A zrotation by -deltaPsi rotation was suggested in email conversation with German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This may be closer to ExplanSup3rd, 6.41.
+				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(-deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps); // eq.21 in Hilton et al. has a positive deltaPsi rotation. We must check that again, later.
 				rotLocalToParent=rotLocalToParent*nut2000B;
 			}
 		}
