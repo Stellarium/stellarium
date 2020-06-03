@@ -197,6 +197,8 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
+	, flagPolyLineDisplayedOnly(false)
+	, polyLineThickness(1)
 	, flagLandscapeUseMinimalBrightness(false)
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
@@ -417,8 +419,8 @@ void LandscapeMgr::draw(StelCore* core)
 
 	// Draw the landscape
 	if (oldLandscape)
-		oldLandscape->draw(core);
-	landscape->draw(core);
+		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
+	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
 	cardinalsPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
@@ -432,6 +434,20 @@ void LandscapeMgr::draw(StelCore* core)
 	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
 	QPainter painter(&device);
 }
+
+// Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
+void LandscapeMgr::drawPolylineOnly(StelCore* core)
+{
+	// Draw the landscape
+	if (oldLandscape && oldLandscape->hasLandscapePolygon())
+		oldLandscape->draw(core, true);
+	if (landscape->hasLandscapePolygon())
+		landscape->draw(core, true);
+
+	// Draw the cardinal points
+	cardinalsPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+}
+
 
 void LandscapeMgr::init()
 {

@@ -439,8 +439,7 @@ for changing the general appearance of the main sky view and projections. Some h
   for more information.
 \end{description}
 
-\newpage
-Some hightlights of stars field:
+\noindent Some hightlights of the stars field:
 \begin{description}
 \item[Absolute scale] is the size of stars as rendered by
   Stellarium. If you increase this value, all stars will appear larger
@@ -464,7 +463,7 @@ Some hightlights of stars field:
   more labels will also appear as you zoom in.
 \end{description}
 
-Projection field: Selecting items in this list changes the
+\noindent Projection field: Selecting items in this list changes the
   projection method which Stellarium uses to draw the sky~\citep{Snyder:MapProjections}. Options are:
 
 \begin{description}
@@ -553,15 +552,27 @@ refraction (see section~\ref{sec:phenomena:Refraction}), and the
 opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
 (see section~\ref{sec:phenomena:Extinction}).
 
-
-\subsection{The Deep-Sky Objects (DSO) Tab}
-\label{sec:gui:view:dso}
-
-\begin{figure}[htbp]
+% Put these 3 on 1 page.
+\begin{figure}[p]
 \centering\includegraphics[width=0.75\textwidth]{view_dialog_dso_tab.png}
 \caption{View Settings Window: DSO Tab}
 \label{fig:gui:view:dso}
 \end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_markings_tab.png}
+\caption{View Settings Window: Markings Tab}
+\label{fig:gui:view:markings}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_landscape_tab.png}
+\caption{View Settings Window: Landscape Tab}
+\label{fig:gui:view:landscape}
+\end{figure}
+
+\subsection{The Deep-Sky Objects (DSO) Tab}
+\label{sec:gui:view:dso}
 
 \indexterm{Deep-sky objects} or DSO are extended objects which are
 external to the solar system, and are not point sources like stars.
@@ -584,12 +595,6 @@ and how to extend it with your own photographs.
 \subsection{The Markings Tab}
 \label{sec:gui:view:markings}
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{view_dialog_markings_tab.png}
-\caption{View Settings Window: Markings Tab}
-\label{fig:gui:view:markings}
-\end{figure}
-
 \noindent The Markings tab of the View window
 (Fig.~\ref{fig:gui:view:markings}) controls plot various grids and
 lines on celestial sphere. Colors for grids, lines and points can be
@@ -602,12 +607,6 @@ flags need an explicit saving of the settings (see section
 
 \subsection{The Landscape Tab}
 \label{sec:gui:view:landscape}
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{view_dialog_landscape_tab.png}
-\caption{View Settings Window: Landscape Tab}
-\label{fig:gui:view:landscape}
-\end{figure}
 
 The Landscape tab of the View window
 (Fig.~\ref{fig:gui:view:landscape}) controls the landscape graphics
@@ -625,29 +624,34 @@ The controls at the bottom right of the window operate as follows:
 
 \begin{description}
 \item[Show ground] This turns on and off landscape rendering (same
-  as the button \guibutton{0.6}{bt_ground.png} in the main tool-bar).
-\item[Show\_fog] This turns on and off rendering of a band of
-  fog/haze along the horizon, when available in this landscape.
-\item[Use associated planet and position] When enabled, selecting a
-  new landscape will automatically update the observer location.
+  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
+\item[Use associated planet and position] When enabled, selecting a
+  new landscape will automatically update the observer location.
+  Use this if the landscape is not just decoration, but a true
+  representation of a particular site you wish to visit in the simulation.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option.
+\item[Show fog] This turns on and off rendering of a band of
+  fog/haze along the horizon, when available in this landscape.
+\item[Show illumination] to reflect the ugly developments of our
+  civilisation, landscapes can be configured with a layer of light
+  pollution, e.g., streetlamps, bright windows, or the sky glow of a
+  nearby city. This layer, if present, will be mixed in when it is
+  dark enough.
 \item[Minimal brightness] Use some minimal brightness
   setting. Moonless night on very dark locations may appear too dark
   on your screen. You may want to configure some minimal brightness
   here.
 \item[from landscape, if given] Landscape authors may decide to
   provide such a minimal brightness value in the \file{landscape.ini}
-  file.
-\item[Show landscape labels] Landscapes can be configured with a
-  gazetteer of interesting points, e.g., mountain peaks, which can be
-  labeled with this option.
-\item[Show illumination] to reflect the ugly developments of our
-  civilisation, landscapes can be configured with a layer of light
-  pollution, e.g., streetlamps, bright windows, or the sky glow of a
-  nearby city. This layer, if present, will be mixed in when it is
-  dark enough.
+  file. 
+\item[Draw only polygon]\newFeature{v0.20.2} If a polygonal horizon line has been
+  defined for the landscape, only draw this. 
+\item[Polygonal line thickness]\newFeature{v0.20.2} Set line width for the polygonal line.
 \end{description}
 
 \noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
@@ -689,7 +693,8 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show asterism lines\ldots] Activate display of asterism stick figures   
   (like the shortcut \keys{Alt+A}), and you can configure asterism line thickness here.\newFeature{v0.16.0}
 \item[Show ray helpers\ldots] Activate display of special navigational lines which 
- connect stars often from different constellations (like the shortcut \keys{Alt+R}), and you can configure thickness of those lines here.\newFeature{v0.17.0}
+  connect stars often from different constellations (like the shortcut \keys{Alt+R}),
+  and you can configure thickness of those lines here.\newFeature{v0.17.0}
 \item[Show boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Western'' skycultures.
@@ -764,33 +769,33 @@ surveys automatically map on the proper body.
 \section{The Object Search Window}
 \label{sec:gui:search}
 
-\begin{figure}[h]
+\begin{figure}[p]
 \centering\includegraphics[width=0.68\textwidth]{search_dialog.png}
 \caption{The Search Window: Objects}
 \label{fig:gui:search}
 \end{figure}
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.68\textwidth]{search_dialog_simbad.png}
+\begin{figure}[p]
+\centering\includegraphics[width=0.68\textwidth,trim=0 30 0 0,clip]{search_dialog_simbad.png}
 \caption{The Search Window: SIMBAD}
 \label{fig:gui:search:simbad}
 \end{figure}
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.68\textwidth]{search_dialog_position.png}
+\begin{figure}[p]
+\centering\includegraphics[width=0.68\textwidth,trim=0 40 0 0,clip]{search_dialog_position.png}
 \caption{The Search Window: Positions}
 \label{fig:gui:search:position}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.68\textwidth]{search_dialog_list.png}
 \caption{The Search Window: Lists}
 \label{fig:gui:search:lists}
 \end{figure}
 
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.68\textwidth]{search_dialog_option.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.68\textwidth,trim=0 50 0 0,clip]{search_dialog_option.png}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
@@ -819,8 +824,14 @@ Mimas. We can either press \key{\tab} a few times to highlight Mimas
 and then hit \key{\return}, or we can continue to type the name until
 it is the first/only object in the list.
 
-The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a convenient way to fetch and show a set of information for selected object from astronomical database SIMBAD\cite{2000A&AS..143....9W}.
-
+The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a
+convenient way to fetch and show a set of information for selected
+object from the astronomical database
+SIMBAD~\citep{2000A&AS..143....9W}.  If some object is only visible in
+a survey or DSS background (see section~\ref{ch:surveys}) and not in
+Stellarium's catalogs, you can also set a custom marker (see
+sectin~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
+what's known about this''.
 
 The Position tab (Fig.~\ref{fig:gui:search:position}) provides a convenient way to enter a set
 of coordinates.
@@ -860,7 +871,7 @@ You may also export the list of positions into an XLSX or CSV file.
 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_positions_tab.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Celestial positions}
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
@@ -878,13 +889,13 @@ Dates and/or magnitudes will show near position markers when \emph{Show dates} a
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.87\textwidth]{astrocalc_dialog_ephemeris_tab.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_extra.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
 \caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
 \label{fig:gui:AstroCalc:Ephemeris:Extra}
 \end{figure}
@@ -897,13 +908,13 @@ or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and enable display markers for all naked-eye visible planets.
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
 \caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
 \label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
 \caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
 \label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
 \end{figure}
@@ -915,13 +926,13 @@ This \newFeature{v0.19.3} tab allows you to compute transits of selected celesti
 
 You may also export the list of transits into an XLSX or CSV file.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_transits_tab.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
 \label{fig:gui:AstroCalc:Transits}
 \end{figure}
 
-\newpage
+%\newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
@@ -933,8 +944,8 @@ additional to exist phenomena. For all Solar system bodies, except the moons, we
 
 You can export the calculated phenomena into an XLSX or CSV file.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_phenomena_tab.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_phenomena_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Phenomena}
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
@@ -951,6 +962,23 @@ Four columns in the table may be helpful for planning observation of phenomena:
 \subsection{The Graphs Tab}
 \label{sec:gui:AstroCalc:Graphs}
 
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_altvstime.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Altitude vs.\ Time}
+\label{fig:gui:AstroCalc:Graphs:AltVsTime}
+\end{figure}
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_azivstime.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Azimuth vs.\ Time}
+\label{fig:gui:AstroCalc:Graphs:AziVsTime}
+\end{figure}
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_me.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Monthly Elevation}
+\label{fig:gui:AstroCalc:Graphs:ME}
+\end{figure}
+
+
 This tab\newFeature{v0.18.3} provides on several sub-tabs
 \newFeature{v0.19.0} graphs which are helpful for monthly observation
 planning of deep-sky objects and analysis of changes between objects
@@ -961,15 +989,8 @@ or changes of their positions.
   
 On this subtab (the first subtab and default view in the Graphs tab) you can compute the geometrical altitude of the currently selected object 
 on the currently set date and draw it as a graph (Fig.~\ref{fig:gui:AstroCalc:Graphs:AltVsTime}).
-    
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_altvstime.png}
-\caption{Astronomical Calculations (AstroCalc): Graphs / Altitude vs.\ Time}
-\label{fig:gui:AstroCalc:Graphs:AltVsTime}
-\end{figure}
 
 Optional graphs for the Sun (with lines for civil, nautical and astronomical twilight) and the Moon (dashed) are also available.
-
 
 \subsubsection{The ``Azimuth vs.\ Time'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:AziVsTime}
@@ -977,20 +998,8 @@ Optional graphs for the Sun (with lines for civil, nautical and astronomical twi
 On this subtab \newFeature{v0.19.1} you can compute the geometrical azimuth of the currently selected object 
 on the currently set date and draw it as a graph (Fig.~\ref{fig:gui:AstroCalc:Graphs:AziVsTime}).
     
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_azivstime.png}
-\caption{Astronomical Calculations (AstroCalc): Graphs / Azimuth vs.\ Time}
-\label{fig:gui:AstroCalc:Graphs:AziVsTime}
-\end{figure}
-
 \subsubsection{The ``Monthly Elevation'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:ME}
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_me.png}
-\caption{Astronomical Calculations (AstroCalc): Graphs / Monthly Elevation}
-\label{fig:gui:AstroCalc:Graphs:ME}
-\end{figure}
 
 This subtab \newFeature{v0.18.0} can show a ``Monthly Elevation'' graph for the current year at the selected time.
 This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:AstroCalc:Graphs:ME}).
@@ -998,8 +1007,8 @@ This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:Ast
 \subsubsection{The ``Graphs'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:Graphs}
     
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_graphs.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_graphs.png}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs:Graphs}
 \end{figure}
@@ -1027,8 +1036,8 @@ This tool may be very helpful for educational and statistics purposes.%
 \subsubsection{The ``Lunar Distance'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:LD}
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_ad.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_ad.png}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Distance}
 \label{fig:gui:AstroCalc:Graphs:LD}
 \end{figure}
@@ -1047,8 +1056,8 @@ The ``What's Up Tonight'' (WUT) tool\newFeature{v0.16.0}%
 	\footnote{This tool has been partially ported from the \program{KStars} planetarium: \url{https://edu.kde.org/kstars/}}
  displays a list of objects that will be visible at night for the current date and location.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_wut_tab.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_wut_tab.png}
 \caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT)}
 \label{fig:gui:AstroCalc:WUT}
 \end{figure}
@@ -1080,8 +1089,8 @@ The ``Planetary Calculator'' (PC) tool\newFeature{v0.17.0} has been added after 
 It computes the relations between two Solar system bodies for the current date and location --- linear and angular distances, 
 orbital resonances and orbital velocities.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_tab.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Data Tab}
 \label{fig:gui:AstroCalc:PC:Data}
 \end{figure}
@@ -1092,21 +1101,20 @@ you may see the change in the linear and angular distances between
 selected celestial bodies over a range of 600 days (centered on the
 current date) as graphs.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_graphs_tab.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_graphs_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Graphs Tab}
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
+\newpage
 
-
-   
-\section{Help Window}
+\section{The Help Window}
 \label{sec:gui:help}
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering\includegraphics[width=0.6\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
