@@ -914,6 +914,91 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				}
 			}
 		}
+
+		if (englishName == "Moon" && onEarth)
+		{
+			// Show magnitude of lunar eclipse
+			// Use geocentric coordinates
+			StelCore* core1 = StelApp::getInstance().getCore();
+			const bool useTopocentric = core1->getUseTopocentricCoordinates();
+			core1->setUseTopocentricCoordinates(false);
+			core1->update(0);
+
+			double ra_equ, dec_equ, raSun, deSun, raShadow, deShadow, raMoon, deMoon, raDiff;
+			StelUtils::rectToSphe(&ra_equ, &dec_equ, getEquinoxEquatorialPos(core1));
+			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+
+			// R.A. of Earth's shadow
+			raShadow = (raSun / M_PI_180)+180.;
+			if (raShadow < 0.) raShadow += 360.;
+			// Dec. of Earth's shadow
+			deShadow = -(deSun / M_PI_180);
+			// R.A. of the Moon
+			raMoon = (ra_equ / M_PI_180);
+			if (raMoon < 0.) raMoon += 360.;
+			// Dec. of the Moon
+			deMoon = (dec_equ / M_PI_180);
+
+			raDiff = raMoon - raShadow;
+			if (raDiff < 0.) raDiff += 360.;
+
+			if (raDiff < 3. || raDiff > 357.)
+			{
+				double sdistanceAu, mdistanceKm, mdistanceER, sHP, sSD, mHP, mSD;
+				sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
+				mdistanceKm = getEquinoxEquatorialPos(core1).length() * AU;
+				// Moon's distance in Earth's radius
+				mdistanceER = mdistanceKm / 6378.14;
+
+				// Sun's horizontal parallax
+				sHP = 3600. * (asin(6378.14 / (AU * sdistanceAu))) / M_PI_180;
+				// Sun's semi-diameter
+				sSD = 959.64 / sdistanceAu;
+
+				// Moon's horizontal parallax
+				mHP = 3600. * asin(1. / mdistanceER) / M_PI_180;
+				// Moon's semi-diameter
+				mSD = 3600. * (asin(0.2725076 / mdistanceER) / M_PI_180);
+
+				// Bessellian elements
+				// ref: Explanatory supplement to the astronomical ephemeris
+				// and the American ephemeris and nautical almanac (1961)
+				double p1, f1, f2, x, y, L1, L2, m, pMag, uMag;
+
+				p1 = (1. + 1. / 85. - 1. / 594.) * mHP;
+				// Danjon's method - used in French almanac and NASA web site.
+				// It's the enlargment of Earth's shadows due to Earth's atmosphere
+				// and correction for Earth's oblateness at latitude 45 deg.
+				// ref: Five Millennium Catalog of Lunar Eclipses: -1999 to +3000 (Fred Espenak, NASA)
+				// Note: Astronomical Almanac using different value which create a bit larger shadows.
+
+				f1 = p1 + sSD + sHP; // radius of umbra at the distance of the Moon
+				f2 = p1 - sSD + sHP; // radius of penumbra at the distance of the Moon
+
+				x = cos(deMoon * M_PI_180) * sin((raMoon - raShadow) * M_PI_180);
+				x = 3600. * (asin(x)) / M_PI_180;
+				y = cos(deShadow * M_PI_180) * sin(deMoon * M_PI_180);
+				y = y - sin(deShadow * M_PI_180) * cos(deMoon * M_PI_180) * cos((raMoon - raShadow) * M_PI_180);
+				y = 3600. * (asin(y)) / M_PI_180;
+				L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+				L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+				m = sqrt(x * x + y * y);
+				pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
+				uMag = (L2 - m) / (2. * mSD); // umbral magnitude
+
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+
+				if (pMag > 1.e-6)
+				{
+					oss << QString("%1: %2").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag, 'f', 5)) << "<br />";
+					if (uMag > 1.e-6)
+					{
+						oss << QString("%1: %2").arg(q_("Umbral eclipse magnitude")).arg(QString::number(uMag, 'f', 5)) << "<br />";
+					}
+				}
+			}
+		}
 	}
 	return str;
 }
