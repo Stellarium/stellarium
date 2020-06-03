@@ -96,7 +96,7 @@ public slots:
 	//! \endcode
 	virtual void retranslate() = 0;
 	//! On the first call with "true" populates the window contents.
-	void setVisible(bool);
+	virtual void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
 	void close();
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()

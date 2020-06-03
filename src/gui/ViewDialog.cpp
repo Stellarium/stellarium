@@ -253,11 +253,9 @@ void ViewDialog::createDialogContent()
 	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
-	// TODO: put under Properties system!
-	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
-	ui->customGrsSettingsCheckBox->setChecked(grsFlag);
-	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
-	ui->pushButtonGrsDetails->setEnabled(grsFlag);
+	connectBoolProperty(ui->customGrsSettingsCheckBox, "SolarSystem.flagCustomGrsSettings");
+	ui->pushButtonGrsDetails->setEnabled(ssmgr->getFlagCustomGrsSettings());
+	connect(ssmgr, SIGNAL(flagCustomGrsSettingsChanged(bool)), ui->pushButtonGrsDetails, SLOT(setEnabled(bool)));
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Shooting stars section
@@ -788,14 +786,6 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
 	ui->checkBoxGalaxyClustersType->setChecked(flags & Nebula::TypeGalaxyClusters);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
-}
-
-void ViewDialog::setFlagCustomGrsSettings(bool b)
-{
-	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
-	ui->pushButtonGrsDetails->setEnabled(b);
-	if (!b && greatRedSpotDialog!=Q_NULLPTR)
-		greatRedSpotDialog->setVisible(false);
 }
 
 // 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
