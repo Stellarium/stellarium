@@ -986,9 +986,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
 				uMag = (L2 - m) / (2. * mSD); // umbral magnitude
 
-				core1->setUseTopocentricCoordinates(useTopocentric);
-				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
-
 				if (pMag > 1.e-6)
 				{
 					oss << QString("%1: %2").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag, 'f', 5)) << "<br />";
@@ -998,7 +995,9 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 					}
 				}
 			}
-		}
+			core1->setUseTopocentricCoordinates(useTopocentric);
+			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+		}		
 	}
 	return str;
 }
