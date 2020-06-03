@@ -54,7 +54,7 @@ private slots:
 
 	void updateTorchStrength(float val);
 	void updateTorchRange(float val);
-	void updateLazyDrawingInterval(float val);
+	void updateLazyDrawingInterval(double val);
 	void updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality);
 	void updateSecondDominantFaceEnabled();
 
