@@ -3722,7 +3722,7 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="4">
+          <item row="0" column="0" rowspan="5">
            <widget class="QListWidget" name="landscapesListWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -3783,6 +3783,22 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>37</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Add/remove landscapes...</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QGroupBox" name="landscapeOptionsGroupBox">
             <property name="sizePolicy">
@@ -3810,31 +3826,10 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="showFogCheckBox">
-               <property name="text">
-                <string>Show fog</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
               <widget class="QCheckBox" name="landscapePositionCheckBox">
                <property name="text">
                 <string>Use associated planet and position</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
-               <property name="text">
-                <string>Use this landscape as default</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="showGroundCheckBox">
-               <property name="text">
-                <string>Show ground</string>
                </property>
               </widget>
              </item>
@@ -3877,19 +3872,6 @@
                </item>
               </layout>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Use minimal brightness as may be specified in landscape.ini</string>
-               </property>
-               <property name="text">
-                <string>from landscape, if given</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
                <property name="toolTip">
@@ -3903,6 +3885,40 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Use minimal brightness as may be specified in landscape.ini</string>
+               </property>
+               <property name="text">
+                <string>from landscape, if given</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="showFogCheckBox">
+               <property name="text">
+                <string>Show fog</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="showGroundCheckBox">
+               <property name="text">
+                <string>Show ground</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
+               <property name="text">
+                <string>Use this landscape as default</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="1">
               <widget class="QCheckBox" name="landscapeLabelsCheckBox">
                <property name="text">
@@ -3910,23 +3926,44 @@
                </property>
               </widget>
              </item>
+             <item row="5" column="1">
+              <layout class="QHBoxLayout" name="landscapePolylineHorizontalLayout">
+               <item>
+                <widget class="QLabel" name="landscapePolylineThicknessLabel">
+                 <property name="text">
+                  <string>Polygon line thickness</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="landscapePolylineThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="landscapePolylineCheckBox">
+               <property name="toolTip">
+                <string>Draw horizon polyline if one is defined.</string>
+               </property>
+               <property name="text">
+                <string>Draw only polygon</string>
+               </property>
+              </widget>
+             </item>
             </layout>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>37</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
-            </property>
-            <property name="text">
-             <string>Add/remove landscapes...</string>
-            </property>
            </widget>
           </item>
          </layout>

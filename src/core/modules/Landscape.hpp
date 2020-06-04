@@ -79,11 +79,12 @@ public:
 
 	//! Return approximate memory footprint in bytes (required for cache cost estimate in LandscapeMgr)
 	//! The returned value is only approximate, content of QStrings and other small containers like the horizon polygon are not put in in detail.
-	//! However, texture image sizes must be computed in subclasses.
+	//! However, texture image sizes must be computed and added in subclasses.
 	//! The value returned is a sum of RAM and texture memory requirements.
-	virtual unsigned int getMemorySize() const {return sizeof(Landscape);}
+	unsigned int getMemorySize() const {return memorySize;}
 
-	virtual void draw(StelCore* core) = 0;
+	//! Draw the landscape. If onlyPolygon, only draw the landscape polygon, if one is defined. If no polygon is defined, the
+	virtual void draw(StelCore* core, bool onlyPolygon) = 0;
 	void update(double deltaTime)
 	{
 		landFader.update(static_cast<int>(deltaTime*1000));
@@ -184,6 +185,7 @@ public:
 	
 	//! Load descriptive labels from optional file gazetteer.LANG.utf8.
 	void loadLabels(const QString& landscapeId);
+	bool hasLandscapePolygon() const {return !horizonPolygon.isNull();}
 
 protected:
 	//! Load attributes common to all landscapes
@@ -247,6 +249,7 @@ protected:
 	QList<LandscapeLabel> landscapeLabels;
 	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
 	Vec3f labelColor; //! Color for the landscape labels.
+	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 };
 
 //! @class LandscapeOldStyle
@@ -268,12 +271,11 @@ class LandscapeOldStyle : public Landscape
 {
 public:
 	LandscapeOldStyle(float radius = 2.0f);
-	virtual ~LandscapeOldStyle();
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual unsigned int getMemorySize() const {return memorySize;}
-	virtual void draw(StelCore* core);
+	virtual ~LandscapeOldStyle() Q_DECL_OVERRIDE;
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
 	//void create(bool _fullpath, QMap<QString, QString> param); // still not implemented
-	virtual float getOpacity(Vec3d azalt) const;
+	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
 protected:
 	typedef struct
 	{
@@ -310,11 +312,10 @@ private:
 	{
 		StelVertexArray arr;
 		StelTextureSP tex;
-		bool light; // GZ NEW: true if texture is self-lighting.
+		bool light; // true if texture is self-lighting.
 	};
 
 	QList<LOSSide> precomputedSides;
-	unsigned int memorySize;
 };
 
 /////////////////////////////////////////////////////////
@@ -330,11 +331,10 @@ class LandscapePolygonal : public Landscape
 {
 public:
 	LandscapePolygonal(float radius = 1.f);
-	virtual ~LandscapePolygonal();
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual unsigned int getMemorySize() const {return sizeof(LandscapePolygonal);}
-	virtual void draw(StelCore* core);
-	virtual float getOpacity(Vec3d azalt) const;
+	virtual ~LandscapePolygonal() Q_DECL_OVERRIDE;
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
@@ -350,13 +350,12 @@ class LandscapeFisheye : public Landscape
 {
 public:
 	LandscapeFisheye(float radius = 1.f);
-	virtual ~LandscapeFisheye();
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual unsigned int getMemorySize() const {return memorySize;}
-	virtual void draw(StelCore* core);
+	virtual ~LandscapeFisheye() Q_DECL_OVERRIDE;
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
-	virtual float getOpacity(Vec3d azalt) const;
+	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
 	//! create a fisheye landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the fisheye texture
@@ -375,7 +374,6 @@ private:
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for sampling.
 
 	float texFov;
-	unsigned int memorySize;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -392,14 +390,13 @@ class LandscapeSpherical : public Landscape
 {
 public:
 	LandscapeSpherical(float radius = 1.f);
-	virtual ~LandscapeSpherical();
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual unsigned int getMemorySize() const {return memorySize;}
-	virtual void draw(StelCore* core);
+	virtual ~LandscapeSpherical() Q_DECL_OVERRIDE;
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
 	//! @retval alpha (0=fully transparent, 1=fully opaque. Trees, leaves, glass etc may have intermediate values.)
-	virtual float getOpacity(Vec3d azalt) const;
+	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
 	//! create a spherical landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture
@@ -434,7 +431,6 @@ private:
 	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for opacity sampling.
 	Vec3f bottomCapColor;      //!< The bottomCap, if specified, will be drawn in this color
-	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 };
 
 #endif // LANDSCAPE_HPP

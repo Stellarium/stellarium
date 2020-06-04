@@ -59,6 +59,7 @@ Scenery3d::Scenery3d() :
 	cleanedUp(false),
 	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
+	forceHorizonPolyline(false),
 	loadCancel(false),
 	progressBar(Q_NULLPTR),
 	currentLoadScene(),
@@ -224,6 +225,9 @@ void Scenery3d::draw(StelCore* core)
 		renderer->draw(core,*currentScene);
 	}
 
+	if (forceHorizonPolyline)
+		GETSTELMODULE(LandscapeMgr)->drawPolylineOnly(core); // Allow a check with background line.
+
 	//the message is always drawn
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -308,6 +312,8 @@ void Scenery3d::loadConfig()
 	renderer->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	renderer->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
 	renderer->setLocationInfoEnabled(conf->value("flag_location_info", false).toBool());
+
+	forceHorizonPolyline = conf->value("force_landscape_polyline", false).toBool();
 
 	bool v1 = conf->value("flag_lazy_dominantface",false).toBool();
 	bool v2 = conf->value("flag_lazy_seconddominantface",true).toBool();
@@ -839,6 +845,23 @@ void Scenery3d::setEnableLocationInfo(const bool enableLocationInfo)
 	}
 }
 
+void Scenery3d::setForceHorizonPolyline(const bool forcePolyline)
+{
+	if(forcePolyline != getForceHorizonPolyline())
+	{
+		forceHorizonPolyline=forcePolyline;
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/force_landscape_polyline",forcePolyline);
+
+		emit forceHorizonPolylineChanged(forcePolyline);
+	}
+}
+
+bool Scenery3d::getForceHorizonPolyline() const
+{
+	return forceHorizonPolyline;
+}
+
 bool Scenery3d::getEnableTorchLight() const
 {
 	return renderer->getTorchEnabled();
@@ -1115,7 +1138,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	info.license = SCENERY3D_PLUGIN_LICENSE;
 	info.displayedName = N_("3D Sceneries");
 	info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("<p>3D foreground renderer. Walk around, find and avoid obstructions in your garden, "
 			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.</p>"
 			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "

@@ -64,11 +64,6 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void setFlagCustomGrsSettings(bool b);	
-	//! Update the widget to make sure it is synchrone if a value was changed programmatically
-	//! This function should be called repeatidly with e.g. a timer
-	// NO LONGER NEEDED!
-	//void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();

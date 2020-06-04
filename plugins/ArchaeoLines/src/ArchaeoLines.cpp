@@ -336,8 +336,8 @@ void ArchaeoLines::update(double deltaTime)
 	if (fabs(newJDE-lastJDE) > 10.0) // enough to compute this every 10 days?
 	{
 		static const double invSqrt2=1.0/std::sqrt(2.0);
-		static const double epsRad=ssystem->getEarth()->getRotObliquity(newJDE);
-		static const double xqDec=asin(sin(epsRad)*invSqrt2)*180.0/M_PI;
+		double epsRad=ssystem->getEarth()->getRotObliquity(newJDE);
+		double xqDec=asin(sin(epsRad)*invSqrt2)*180.0/M_PI;
 		eps= epsRad*180.0/M_PI;
 		northernSolsticeLine->setDefiningAngle(eps);
 		southernSolsticeLine->setDefiningAngle(-eps);
