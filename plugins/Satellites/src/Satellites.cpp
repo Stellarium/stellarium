@@ -1828,29 +1828,33 @@ void Satellites::loadExtraData()
 	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
-	qsmFile.open(QFile::ReadOnly);
-	while (!qsmFile.atEnd())
+	if (qsmFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(qsmFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString smag = line.mid(33,4).trimmed();		
-		if (!smag.isEmpty())
-			qsMagList.insert(id, smag.toDouble());		
+		while (!qsmFile.atEnd())
+		{
+			QString line = QString(qsmFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString smag = line.mid(33,4).trimmed();
+			if (!smag.isEmpty())
+				qsMagList.insert(id, smag.toDouble());
+		}
+		qsmFile.close();
 	}
-	qsmFile.close();
 
 	QFile rcsFile(":/satellites/rcs");
 	rcsList.clear();
-	rcsFile.open(QFile::ReadOnly);
-	while (!rcsFile.atEnd())
+	if (rcsFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(rcsFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString srcs = line.mid(5,5).trimmed();
-		if (!srcs.isEmpty())
-			rcsList.insert(id, srcs.toDouble());
+		while (!rcsFile.atEnd())
+		{
+			QString line = QString(rcsFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString srcs = line.mid(5,5).trimmed();
+			if (!srcs.isEmpty())
+				rcsList.insert(id, srcs.toDouble());
+		}
+		rcsFile.close();
 	}
-	rcsFile.close();
 }
 
 void Satellites::update(double deltaTime)
