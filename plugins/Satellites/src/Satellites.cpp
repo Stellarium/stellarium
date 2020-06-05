@@ -562,6 +562,7 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
 	     << "http://www.celestrak.com/NORAD/elements/other.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/starlink.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
 	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
 	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
