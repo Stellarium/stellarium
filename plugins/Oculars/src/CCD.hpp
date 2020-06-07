@@ -92,6 +92,7 @@ public:
 	  */
 	double getActualFOVx(Telescope *telescope, Lens *lens) const;
 	double getActualFOVy(Telescope *telescope, Lens *lens) const;
+	double getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const;
 	double getInnerOAGRadius(Telescope *telescope, Lens *lens) const;
 	double getOuterOAGRadius(Telescope *telescope, Lens *lens) const;
 	double getOAGActualFOVx(Telescope *telescope, Lens *lens) const;

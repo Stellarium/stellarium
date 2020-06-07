@@ -168,6 +168,7 @@ Oculars::Oculars()
 	, guiPanelFontSize(12)
 	, textColor(0.)
 	, lineColor(0.)
+	, focuserColor(0.)
 	, actualFOV(0.)
 	, initialFOV(0.)
 	, flagInitFOVUsage(false)
@@ -186,6 +187,10 @@ Oculars::Oculars()
 	, flagShowCardinals(false)
 	, flagAlignCrosshair(false)
 	, telradFOV(0.5f,2.f,4.f)
+	, flagShowFocuserOverlay(false)
+	, flagUseSmallFocuserOverlay(false)
+	, flagUseMediumFocuserOverlay(true)
+	, flagUseLargeFocuserOverlay(true)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -320,6 +325,7 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
+	settings->setValue("focuser_color", focuserColor.toStr());
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -583,6 +589,7 @@ void Oculars::init()
 		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
 		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
+		focuserColor=Vec3f(settings->value("focuser_color", "0.0,0.67,1.0").toString());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -611,6 +618,10 @@ void Oculars::init()
 		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
 		setFlagShowCardinals(settings->value("show_ocular_cardinals", false).toBool());
 		setFlagAlignCrosshair(settings->value("align_crosshair", false).toBool());
+		setFlagShowFocuserOverlay(settings->value("show_focuser_overlay", false).toBool());
+		setFlagUseSmallFocuserOverlay(settings->value("use_small_focuser_overlay", false).toBool());
+		setFlagUseMediumFocuserOverlay(settings->value("use_medium_focuser_overlay", true).toBool());
+		setFlagUseLargeFocuserOverlay(settings->value("use_large_focuser_overlay", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1684,6 +1695,17 @@ void Oculars::paintCCDBounds()
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}
+
+				if (getFlagShowFocuserOverlay())
+				{
+					painter.setColor(focuserColor);
+					if (getFlagUseSmallFocuserOverlay())
+						painter.drawCircle(centerScreen[0], centerScreen[1], qRound(params.viewportXywh[aspectIndex] * (0.5*ccd->getFocuserFOV(telescope, lens, 1.25)/ screenFOV) * params.devicePixelsPerPixel));
+					if (getFlagUseMediumFocuserOverlay())
+						painter.drawCircle(centerScreen[0], centerScreen[1], qRound(params.viewportXywh[aspectIndex] * (0.5*ccd->getFocuserFOV(telescope, lens, 2.)/ screenFOV) * params.devicePixelsPerPixel));
+					if (getFlagUseLargeFocuserOverlay())
+						painter.drawCircle(centerScreen[0], centerScreen[1], qRound(params.viewportXywh[aspectIndex] * (0.5*ccd->getFocuserFOV(telescope, lens, 3.3)/ screenFOV) * params.devicePixelsPerPixel));
+				}
 			}
 		}
 	}
@@ -2581,6 +2603,58 @@ void Oculars::setFlagShowCcdCropOverlay(const bool b)
 bool Oculars::getFlagShowCcdCropOverlay(void) const
 {
 	return flagShowCcdCropOverlay;
+}
+
+void Oculars::setFlagShowFocuserOverlay(const bool b)
+{
+	flagShowFocuserOverlay = b;
+	settings->setValue("show_focuser_overlay", b);
+	settings->sync();
+	emit flagShowFocuserOverlayChanged(b);
+}
+
+bool Oculars::getFlagShowFocuserOverlay(void) const
+{
+	return flagShowFocuserOverlay;
+}
+
+void Oculars::setFlagUseSmallFocuserOverlay(const bool b)
+{
+	flagUseSmallFocuserOverlay = b;
+	settings->setValue("use_small_focuser_overlay", b);
+	settings->sync();
+	emit flagUseSmallFocuserOverlayChanged(b);
+}
+
+bool Oculars::getFlagUseSmallFocuserOverlay(void) const
+{
+	return flagUseSmallFocuserOverlay;
+}
+
+void Oculars::setFlagUseMediumFocuserOverlay(const bool b)
+{
+	flagUseMediumFocuserOverlay = b;
+	settings->setValue("use_medium_focuser_overlay", b);
+	settings->sync();
+	emit flagUseMediumFocuserOverlayChanged(b);
+}
+
+bool Oculars::getFlagUseMediumFocuserOverlay(void) const
+{
+	return flagUseMediumFocuserOverlay;
+}
+
+void Oculars::setFlagUseLargeFocuserOverlay(const bool b)
+{
+	flagUseLargeFocuserOverlay = b;
+	settings->setValue("use_large_focuser_overlay", b);
+	settings->sync();
+	emit flagUseLargeFocuserOverlayChanged(b);
+}
+
+bool Oculars::getFlagUseLargeFocuserOverlay(void) const
+{
+	return flagUseLargeFocuserOverlay;
 }
 
 void Oculars::setFlagShowContour(const bool b)

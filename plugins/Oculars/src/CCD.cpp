@@ -287,6 +287,13 @@ double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 	return fovY;
 }
 
+double CCD::getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const
+{
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
+	double fov = RADIAN_TO_DEGREES * 2 * qAtan((focuserSize*25.4) /(2.0 * telescope->focalLength() * lens_multipler));
+	return fov;
+}
+
 void CCD::writeToSettings(QSettings * settings, const int index)
 {
 	QString prefix = "ccd/" + QVariant(index).toString() + "/";

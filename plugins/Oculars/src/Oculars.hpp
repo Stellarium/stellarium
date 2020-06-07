@@ -118,6 +118,12 @@ class Oculars : public StelModule
 	Q_PROPERTY(int ccdCropOverlayHSize      READ getCcdCropOverlayHSize      WRITE setCcdCropOverlayHSize      NOTIFY ccdCropOverlayHSizeChanged)
 	Q_PROPERTY(int ccdCropOverlayVSize      READ getCcdCropOverlayVSize      WRITE setCcdCropOverlayVSize      NOTIFY ccdCropOverlayVSizeChanged)
 
+	Q_PROPERTY(bool flagShowFocuserOverlay		READ getFlagShowFocuserOverlay		WRITE setFlagShowFocuserOverlay		NOTIFY flagShowFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseSmallFocuserOverlay		READ getFlagUseSmallFocuserOverlay	WRITE setFlagUseSmallFocuserOverlay	NOTIFY flagUseSmallFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseMediumFocuserOverlay	READ getFlagUseMediumFocuserOverlay	WRITE setFlagUseMediumFocuserOverlay	NOTIFY flagUseMediumFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseLargeFocuserOverlay		READ getFlagUseLargeFocuserOverlay	WRITE setFlagUseLargeFocuserOverlay	NOTIFY flagUseLargeFocuserOverlayChanged)
+	Q_PROPERTY(Vec3f focuserColor READ getFocuserColor WRITE setFocuserColor NOTIFY focuserColorChanged)
+
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
 	friend class OcularsGuiPanel;
@@ -207,6 +213,9 @@ public slots:
 	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
 
+	void setFocuserColor(Vec3f color) { focuserColor=color; emit focuserColorChanged(color);}
+	Vec3f getFocuserColor() const {return focuserColor;}
+
 	void setTelradFOV(Vec4f fov);
 	Vec4f getTelradFOV() const;
 
@@ -275,6 +284,18 @@ public slots:
 	void setFlagAlignCrosshair(const bool b);
 	bool getFlagAlignCrosshair(void) const;
 
+	void setFlagShowFocuserOverlay(const bool b);
+	bool getFlagShowFocuserOverlay(void) const;
+
+	void setFlagUseSmallFocuserOverlay(const bool b);
+	bool getFlagUseSmallFocuserOverlay(void) const;
+
+	void setFlagUseMediumFocuserOverlay(const bool b);
+	bool getFlagUseMediumFocuserOverlay(void) const;
+
+	void setFlagUseLargeFocuserOverlay(const bool b);
+	bool getFlagUseLargeFocuserOverlay(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -290,6 +311,7 @@ signals:
 	void guiPanelFontSizeChanged(int value);
 	void textColorChanged(Vec3f color);
 	void lineColorChanged(Vec3f color);
+	void focuserColorChanged(Vec3f color);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
@@ -312,6 +334,10 @@ signals:
 	void flagShowContourChanged(bool value);
 	void flagShowCardinalsChanged(bool value);
 	void flagAlignCrosshairChanged(bool value);
+	void flagShowFocuserOverlayChanged(bool value);
+	void flagUseSmallFocuserOverlayChanged(bool value);
+	void flagUseMediumFocuserOverlayChanged(bool value);
+	void flagUseLargeFocuserOverlayChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -462,6 +488,7 @@ private:
 	int guiPanelFontSize;
 	Vec3f textColor;
 	Vec3f lineColor;
+	Vec3f focuserColor;
 
 	//Reticle
 	StelTextureSP reticleTexture;
@@ -485,6 +512,10 @@ private:
 	bool flagShowCardinals;
 	bool flagAlignCrosshair;
 	Vec4f telradFOV;
+	bool flagShowFocuserOverlay;  //!< Flag used to track if the focuser crop overlay should be shown.
+	bool flagUseSmallFocuserOverlay;  //!< Flag used to track if the small-sized focuser (1.25") overlay should be shown.
+	bool flagUseMediumFocuserOverlay; //!< Flag used to track if the medium-sized focuser (2.0") overlay should be shown.
+	bool flagUseLargeFocuserOverlay; //!< Flag used to track if the large-sized focuser (3.3") overlay should be shown.
 };
 
 
