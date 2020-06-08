@@ -909,6 +909,27 @@ void StelMainView::init()
 		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleKeys);
 	}
 #endif
+
+	// Let's check conflicts for keyboard shortcuts...
+	if (configuration->childGroups().contains("shortcuts"))
+	{
+		QStringList defSC =  actionMgr->getShortcutsList();
+		QStringList shortcuts, conflicts;
+		QStringList::const_iterator strIterator;
+		configuration->beginGroup("shortcuts");
+		QStringList keys = conf->allKeys();
+		for (strIterator = keys.constBegin(); strIterator != keys.constEnd(); ++strIterator)
+			shortcuts << conf->value((*strIterator).toLocal8Bit().constData()).toString().split(" ", QString::SkipEmptyParts);
+		configuration->endGroup();
+		shortcuts.removeAll("\"\"");
+		for (strIterator = shortcuts.constBegin(); strIterator != shortcuts.constEnd(); ++strIterator)
+		{
+			if (defSC.contains((*strIterator).toLocal8Bit().constData()))
+				conflicts << (*strIterator).toLocal8Bit().constData();
+		}
+		if (!conflicts.isEmpty())
+			QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1: %2").arg(q_("Shortcuts have conflicts! Please press F7 after startup of planetarium and check follow problematic shortcuts"), conflicts.join("; ")), QMessageBox::Ok);
+	}
 }
 
 void StelMainView::updateNightModeProperty(bool b)

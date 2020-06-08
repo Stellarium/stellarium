@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-07 22:28+0700\n"
+"POT-Creation-Date: 2020-06-09 01:02+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1793,7 +1793,7 @@ msgstr ""
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1421
+#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:931
 msgid "Attention!"
 msgstr ""
 
@@ -5833,46 +5833,52 @@ msgstr ""
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:931
+msgid ""
+"Shortcuts have conflicts! Please press F7 after startup of planetarium and "
+"check follow problematic shortcuts"
+msgstr ""
+
+#: src/StelMainView.cpp:1008
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:990
+#: src/StelMainView.cpp:1011
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:1032
+#: src/StelMainView.cpp:1053
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1083
+#: src/StelMainView.cpp:1104
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1143
+#: src/StelMainView.cpp:1164
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1184
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1293
+#: src/StelMainView.cpp:1314
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
