@@ -915,6 +915,125 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 		}
 
+		if (englishName == "Sun" && onEarth)
+		{
+			// Solar eclipse information
+			// Use geocentric coordinates
+			StelCore* core1 = StelApp::getInstance().getCore();
+			const bool useTopocentric = core1->getUseTopocentricCoordinates();
+			core1->setUseTopocentricCoordinates(false);
+			core1->update(0);
+
+			double raSun, deSun, raMoon, deMoon, raDiff;
+			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+			StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
+
+			// R.A. of the Sun
+			raSun = raSun / M_PI_180;
+			if (raSun < 0.) raSun += 360.;
+			// Dec. of the Sun
+			deSun = deSun / M_PI_180;
+			// R.A. of the Moon
+			raMoon = (raMoon / M_PI_180);
+			if (raMoon < 0.) raMoon += 360.;
+			// Dec. of the Moon
+			deMoon = (deMoon / M_PI_180);
+
+			raDiff = raMoon - raSun;
+			if (raDiff < 0.) raDiff += 360.;
+
+			if (raDiff < 3. || raDiff > 357.)
+			{
+				double sdistanceAu, mdistanceKm, mdistanceER;
+				sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
+				mdistanceKm = ssystem->getMoon()->getEquinoxEquatorialPos(core1).length() * AU;
+				// Moon's distance in Earth's radius
+				mdistanceER = mdistanceKm / 6378.14;
+
+				// Besselian elements
+				// based on Explanatory supplement to the astronomical ephemeris
+				// and the American ephemeris and nautical almanac (1961)
+				double rss, a, b, d, x, y, z, gast, mu, f1, f2, tf1, tf2, L1, L2;
+
+				const double SunEarth = 109.1227; // ratio of Sun-Earth radius 696000/6378.14
+
+				rss = sdistanceAu * 23454.78; // 23454.78 comes from 149597870.8/6378.14
+				b = mdistanceER / rss;
+				a = raSun - ((b * cos(deMoon * M_PI_180) * (raMoon - raSun)) / ((1 - b) * cos(deSun * M_PI_180)));
+				d = deSun - (b * (deMoon - deSun) / (1 - b));
+
+				x = cos(deMoon * M_PI_180) * sin((raMoon - a) * M_PI_180);
+				x = mdistanceER * x;
+				y = cos(d * M_PI_180) * sin(deMoon * M_PI_180);
+				y = y - cos(deMoon * M_PI_180) * sin(d * M_PI_180) * cos((raMoon - a) * M_PI_180);
+				y = mdistanceER * y;
+				z = sin(deMoon * M_PI_180) * sin(d * M_PI_180);
+				z = z + cos(deMoon * M_PI_180) * cos(d * M_PI_180) * cos((raMoon - a) * M_PI_180);
+				z = mdistanceER * z;
+				f1 = asin((SunEarth + 0.2725076) / (rss * (1 - b)));
+				tf1 = tan(f1);
+				f2 = asin((SunEarth - 0.272281) / (rss * (1 - b)));
+				tf2 = tan(f2);
+				L1 = z * tf1 + (0.2725076 / cos(f1));
+				L2 = z * tf2 - (0.272281 / cos(f2));
+
+				gast = (get_apparent_sidereal_time(core1->getJD(), core1->getJDE()));
+				mu = gast - a;
+
+				// Find point of center line
+				double cd, rho1, y1, xi, eta1, sd1, cd1, rho2, sd, sd1d2, cd1d2, p, zeta1, zeta, sd2, theta,
+				  lon, sfn1, cfn1, c, lat;
+				cd = cos(d * M_PI_180);
+				rho1 = sqrt(1 - 0.00669454 * cd * cd);
+				y1 = y / rho1;
+				xi = x;
+				eta1 = y1;
+				sd = sin(d * M_PI_180);
+				sd1 = sd / rho1;
+				cd1 = sqrt(1 - 0.00669454) * cd / rho1;
+				rho2 = sqrt(1 - 0.00669454 * sd * sd);
+				sd1d2 = 0.00669454 * sd * cd / (rho1 * rho2);
+				cd1d2 = sqrt(1 - sd1d2 * sd1d2);
+				p = 1 - x * x - y1 * y1;
+				if (p > 0)
+				{
+					zeta1 = sqrt(p);
+					zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
+					sd2 = sd * 1.0033641 / rho2;
+					L2 = L2 - zeta * tf2;
+					b = -y * sd + zeta * cos(d * M_PI_180);
+					theta = atan2(xi, b) / M_PI_180;
+					if (theta < 0) theta += 360;
+					if (mu > 360) mu -= 360;
+					lon = mu - theta;
+					if (lon < -180) lon += 360;
+					if (lon > 180) lon -= 360;
+					lon = -lon; // + East, - West
+					sfn1 = eta1 * cd1 + zeta1 * sd1;
+					cfn1 = sqrt(1 - sfn1 * sfn1);
+					c = sfn1 / cfn1;
+					lat = 1.0033641 * c;
+					lat = atan(lat) / M_PI_180;
+
+					// Diameter ratio - tell us what kind of eclipse
+					L1 = L1 - zeta * tf1;
+					double mag = L1 / (L1 + L2);
+					double dratio = 1 + (mag - 1) * 2.;
+					oss << QString("%1: %2%3/%4%5")
+							 .arg(q_("Center of solar eclipse (Lat./Long.)"))
+							 .arg(lat, 5, 'f', 4)
+							 .arg(QChar(0x00B0))
+							 .arg(lon, 5, 'f', 4)
+							 .arg(QChar(0x00B0));
+					oss << "<br/>";
+					oss << QString("%1: %2").arg(q_("Moon/Sun diameter ratio at center line")).arg(QString::number(dratio, 'f', 4))
+						<< "<br />";
+				}
+			}
+			core1->setUseTopocentricCoordinates(useTopocentric);
+			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+		}
+
 		if (englishName == "Moon" && onEarth)
 		{
 			// Show magnitude of lunar eclipse
