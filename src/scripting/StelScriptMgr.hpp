@@ -23,8 +23,8 @@
 #include <QObject>
 #include <QStringList>
 #include <QFile>
-#include <QTime>
 #include <QTimer>
+#include <QEventLoop>
 #include <QMap>
 #include <QPair>
 #include <QSet>
@@ -80,6 +80,9 @@ public:
 
     //! Permit access to StelScriptMainAPI's methods
 	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
+
+    //! Accessor to QEventLoop
+    QEventLoop* getWaitEventLoop(){ return waitEventLoop; }
 
 public slots:
 	//! Returns a HTML description of the specified script.
@@ -258,6 +261,9 @@ private:
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
 
+	//! The QEventLoop for wait and waitFor
+    QEventLoop* waitEventLoop;
+	
 	QString scriptFileName;
 	
 	//Script engine agent
