@@ -43,6 +43,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -845,9 +846,13 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 void StelMainScriptAPI::wait(double t)
 {
-	QEventLoop loop;
-	QTimer::singleShot(qRound(1000*t), &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -865,9 +870,13 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 		qDebug() << "waitFor() called, but negative interval (time exceeded before starting timer). Not waiting!";
 		return;
 	}
-	QEventLoop loop;
-	QTimer::singleShot(interval, &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(interval, loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 

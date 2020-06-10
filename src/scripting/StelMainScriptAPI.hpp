@@ -810,7 +810,7 @@ public slots:
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	static void wait(double t);
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -820,7 +820,7 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use, format like "2012-06-06T4:44:00" or "-1428-03-04T22:23:45"
 	//! @param spec "local" or "utc"
-	static void waitFor(const QString& dt, const QString& spec="utc");
+	void waitFor(const QString& dt, const QString& spec="utc");
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
