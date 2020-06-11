@@ -220,7 +220,7 @@ void TelescopeControl::init()
 			toolbarButton =	new StelButton(Q_NULLPTR,
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}

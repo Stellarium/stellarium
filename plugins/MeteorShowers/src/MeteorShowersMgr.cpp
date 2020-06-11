@@ -485,7 +485,7 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 			StelButton* enablePlugin = new StelButton(Q_NULLPTR,
 								  QPixmap(":/MeteorShowers/btMS-on.png"),
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
-								  QPixmap(":/graphicGui/glow32x32.png"),
+								  QPixmap(":/graphicGui/miscGlow32x32.png"),
 								  "actionShow_MeteorShowers");
 			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
 		}
@@ -518,7 +518,7 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 			StelButton* searchMS = new StelButton(Q_NULLPTR,
 							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
 							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
-							      QPixmap(":/graphicGui/glow32x32.png"),
+							      QPixmap(":/graphicGui/miscGlow32x32.png"),
 							      "actionShow_MeteorShowers_search_dialog");
 			gui->getButtonBar()->addButton(searchMS, "065-pluginsGroup");
 		}

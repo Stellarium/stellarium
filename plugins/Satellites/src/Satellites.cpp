@@ -156,7 +156,7 @@ void Satellites::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Satellite_Hints");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}

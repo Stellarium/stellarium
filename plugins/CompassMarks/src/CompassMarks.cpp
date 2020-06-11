@@ -100,7 +100,7 @@ void CompassMarks::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/compassMarks/bt_compass_on.png"),
 						       QPixmap(":/compassMarks/bt_compass_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Compass_Marks");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");			
 		}
