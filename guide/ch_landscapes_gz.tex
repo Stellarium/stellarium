@@ -1547,6 +1547,30 @@ already be saturated.
 
 The possibilities seem limited only by your time and skills!
 
+\section{Packing}
+\label{sec:landscapes:Packing}
+
+For easy distribution, you should place all required files and some
+file usually named \file{README.txt} which may contain some
+background or extended license information into one directory and
+create a \file{ZIP} archive. Then you can install it directly in
+the running program (see section \ref{sec:gui:view:landscape}).
+
+
+\section{Troubleshooting}
+\label{sec:landscapes:Troubleshooting}
+
+If something does not work as described and Stellarium does not show
+your landscape as expected but maybe just a bright magenta-colored
+box, don't panic.  Double and triple-check the entries in
+\file{landscape.ini}. \newFeature{v0.20.2} Make sure the texture is in
+PNG format and the file name is correct. Check the logfile for error
+messages. If the image is too large, it will be re-scaled on loading,
+but it is more efficient to keep images as small as required. Only few
+systems can use textures larger than $16384\times16384$~Pixels. If you
+need high resolution, use the \texttt{old\_style} type (see section
+\ref{sec:landscapes:oldStyle}).
+
 \section{Other recommended software}
 \label{sec:landscapes:otherSoftware}
 

@@ -576,7 +576,7 @@ void Oculars::init()
 		}
 		selectedLensIndex=settings->value("lens_index", -1).toInt(); // Lens is not selected by default!
 
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
+		pxmapGlow = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 
@@ -772,11 +772,17 @@ void Oculars::retranslateGui()
 void Oculars::updateOcularReticle(void)
 {
 	reticleRotation = 0.0;
-	StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
-	//Load OpenGL textures
-	StelTexture::StelTextureParams params;
-	params.generateMipmaps = true;
-	reticleTexture = manager.createTexture(oculars[selectedOcularIndex]->reticlePath(), params);
+	QString reticleTexturePath=oculars[selectedOcularIndex]->reticlePath();
+	if (reticleTexturePath.length()==0)
+		reticleTexture=StelTextureSP();
+	else
+	{
+		StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
+		//Load OpenGL textures
+		StelTexture::StelTextureParams params;
+		params.generateMipmaps = true;
+		reticleTexture = manager.createTexture(reticleTexturePath, params);
+	}
 }
 
 /* ****************************************************************************************************************** */

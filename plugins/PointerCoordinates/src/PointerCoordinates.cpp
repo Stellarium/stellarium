@@ -392,7 +392,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
 							       "actionShow_MousePointer_Coordinates");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");

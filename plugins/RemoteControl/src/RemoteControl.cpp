@@ -162,7 +162,7 @@ void RemoteControl::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/RemoteControl/resources/bt_remote_on.png"),
 						       QPixmap(":/RemoteControl/resources/bt_remote_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Remote_Control");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
