@@ -369,8 +369,8 @@ void SatellitesImportDialog::populateList()
 		if (existingIDs.contains(i.key()))
 			continue;
 		
-		TleData tle = i.value();
-		QStandardItem* newItem = new QStandardItem(tle.name);
+		TleData tle = i.value();		
+		QStandardItem* newItem = new QStandardItem(QString("%1 (NORAD %2)").arg(tle.name, tle.id));
 		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
 		newItem->setData(tle.id, Qt::UserRole);
