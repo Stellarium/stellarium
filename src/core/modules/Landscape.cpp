@@ -762,7 +762,6 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 {
 	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
-	if (sidesImages[0]->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
@@ -801,6 +800,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
 	Q_ASSERT(currentSide<static_cast<int>(nbSideTexs));
+	if (sidesImages[currentSide]->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
 	int x= static_cast<int>(sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
 			* sidesImages[currentSide]->width(); // pixel X from left.
 
