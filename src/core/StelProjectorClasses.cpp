@@ -653,6 +653,58 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 )";
 }
 
+
+QString StelProjectorCylinderFill::getNameI18() const
+{
+	return q_("Cylinder fill");
+}
+
+QString StelProjectorCylinderFill::getDescriptionI18() const
+{
+	return q_("The full name of this projection mode is <i>plate carr&eacute;e</i>  (French, for 'flat square'). With this projection all parallels are equally spaced.");
+}
+
+bool StelProjectorCylinderFill::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
+	const float alpha = std::atan2(v[0],-v[2]);
+	const float delta = std::asin(v[1]/r);
+	v[0] = alpha*static_cast<float>(widthStretch);
+	v[1] = delta;
+	v[2] = r;
+	return rval;
+}
+
+bool StelProjectorCylinderFill::backward(Vec3d &v) const
+{
+	v[0] /= static_cast<double>(widthStretch);
+	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
+	const double cd = std::cos(v[1]);
+	const double alpha=v[0];
+	v[2] = - cd * std::cos(alpha);
+	v[0] = cd * std::sin(alpha);
+	v[1] = std::sin(v[1]);
+	return rval;
+}
+
+float StelProjectorCylinderFill::fovToViewScalingFactor(float fov) const
+{
+	return fov;
+}
+
+float StelProjectorCylinderFill::viewScalingFactorToFov(float vsf) const
+{
+	return vsf;
+}
+
+float StelProjectorCylinderFill::deltaZoom(float fov) const
+{
+	return fov;
+}
+
+
+
 QString StelProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");

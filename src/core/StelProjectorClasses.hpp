@@ -159,6 +159,35 @@ protected:
 	}
 };
 
+// A variant which fills the viewport with a plate carree, regardless of screen dimensions.
+class StelProjectorCylinderFill : public StelProjectorCylinder
+{
+public:
+	StelProjectorCylinderFill(ModelViewTranformP func) : StelProjectorCylinder(func) {;}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	virtual float getMaxFov() const {return 180.f;} // vertical fov always max 180.
+	bool forward(Vec3f &win) const;
+	bool backward(Vec3d &v) const;
+	float fovToViewScalingFactor(float fov) const;
+	float viewScalingFactorToFov(float vsf) const;
+	float deltaZoom(float fov) const;
+protected:
+	//virtual bool hasDiscontinuity() const {return true;}
+	//virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	//{
+	//	return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
+	//}
+	//virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	//{
+	//	static const SphericalCap cap1(1,0,0);
+	//	static const SphericalCap cap2(-1,0,0);
+	//	static const SphericalCap cap3(0,0,-1);
+	//	SphericalCap cap(capN, capD);
+	//	return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
+	//}
+};
+
 class StelProjectorMercator : public StelProjector
 {
 public:
