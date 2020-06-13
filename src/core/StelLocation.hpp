@@ -85,6 +85,9 @@ public:
 	//! Compute great-circle distance between two locations
 	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
 
+	//! Compute great-circle distance in kilometers between two locations
+	static float distanceKm(const float long1, const float lat1, const float long2, const float lat2);
+
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
 

@@ -155,3 +155,27 @@ float StelLocation::distanceDegrees(const float long1, const float lat1, const f
 			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
 			  std::cos((long1-long2)*DEGREES) ) / DEGREES;
 }
+
+// Compute great-circle distance in kilometers between two locations
+// J. Meeus "Astronomical Algorithms" (2nd ed. 1998) p.85.
+float StelLocation::distanceKm(const float long1, const float lat1, const float long2, const float lat2)
+{
+	const float DEGREES = M_PIf / 180.0f;
+	float f = (lat1 + lat2) * DEGREES / 2.0f;
+	float g = (lat1 - lat2) * DEGREES / 2.0f;
+	float lambda = (long1 - long2) * DEGREES / 2.0f;
+	float s = std::sin(g) * std::sin(g) * std::cos(lambda) * std::cos(lambda);
+	s += std::cos(f) * std::cos(f) * std::sin(lambda) * std::sin(lambda);
+	float c = std::cos(g) * std::cos(g) * std::cos(lambda) * std::cos(lambda);
+	c += std::sin(f) * std::sin(f) * std::sin(lambda) * std::sin(lambda);
+	float omega = std::atan(std::sqrt(s / c));
+	float r = std::sqrt(s * c) / omega;
+	float h1 = (3.0f * r - 1.0f) / (2.0f * c);
+	float h2 = (3.0f * r + 1.0f) / (2.0f * s);
+	// IERS 2010 : Earth flattening = 1/298.25642
+	// Earth's equatorial radius = 6378.1366
+	float distance = 1.0f + h1 * std::sin(f) * std::sin(f) * std::cos(g) * std::cos(g) / 298.25642f;
+	distance -= h2 * std::cos(f) * std::cos(f) * std::sin(g) * std::sin(g) / 298.25642f;
+	distance = distance * 2.0f * omega * 6378.1366;
+	return distance;
+}

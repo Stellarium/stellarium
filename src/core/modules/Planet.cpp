@@ -849,10 +849,11 @@ class SolarEclipse
 private:
 	double raSun = 0, deSun = 0, sdistanceAu = 0, raMoon = 0, deMoon = 0, mdistanceER = 0, gast = 0;
 	double rss = 0, a = 0, b = 0, d = 0, x = 0, y = 0, z = 0, mu = 0, f1 = 0, f2 = 0, tf1 = 0, tf2 = 0;
-	double L1 = 0, L2 = 0, lat = 0, lon = 0, mag = 0, cd = 0, rho1 = 0;
+	double L1 = 0, L2 = 0, lon = 0, mag = 0, cd = 0, rho1 = 0;
 	double y1 = 0, xi = 0, eta1 = 0, sd1 = 0, cd1 = 0, rho2 = 0, sd = 0, sd1d2 = 0, cd1d2 = 0;
 	double zeta1 = 0, zeta = 0, sd2 = 0, theta = 0, sfn1 = 0, cfn1 = 0;
 	const double SunEarth = 109.12278; // ratio of Sun-Earth radius 696000/6378.1366
+	double lat = 99; // initialize an impossible latitude to indicate no central eclipse
 
 public:
 	Vec3d point(const StelCore* core1)
@@ -861,37 +862,29 @@ public:
 		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 
-		// R.A. of the Sun
-		raSun = raSun / M_PI_180;
-		if (raSun < 0.) raSun += 360.;
-		// Dec. of the Sun
-		deSun = deSun / M_PI_180;
-		// R.A. of the Moon
-		raMoon = (raMoon / M_PI_180);
-		if (raMoon < 0.) raMoon += 360.;
-		// Dec. of the Moon
-		deMoon = (deMoon / M_PI_180);
-
 		sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
 		// Moon's distance in Earth's radius
 		mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core1).length() * AU / 6378.1366;
 		// Greenwich Apparent Sidereal Time
 		gast = (get_apparent_sidereal_time(core1->getJD(), core1->getJDE()));
 
+		if (raSun < 0.) raSun += M_PI * 2.;
+		if (raMoon < 0.) raMoon += M_PI * 2.;
+
 		// Besselian elements
 		// based on Explanatory supplement to the astronomical ephemeris
 		// and the American ephemeris and nautical almanac (1961)
 		rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
 		b = mdistanceER / rss;
-		a = raSun - ((b * cos(deMoon * M_PI_180) * (raMoon - raSun)) / ((1 - b) * cos(deSun * M_PI_180)));
+		a = raSun - ((b * cos(deMoon) * (raMoon - raSun)) / ((1 - b) * cos(deSun)));
 		d = deSun - (b * (deMoon - deSun) / (1 - b));
-		x = cos(deMoon * M_PI_180) * sin((raMoon - a) * M_PI_180);
+		x = cos(deMoon) * sin((raMoon - a));
 		x = mdistanceER * x;
-		y = cos(d * M_PI_180) * sin(deMoon * M_PI_180);
-		y = y - cos(deMoon * M_PI_180) * sin(d * M_PI_180) * cos((raMoon - a) * M_PI_180);
+		y = cos(d) * sin(deMoon);
+		y = y - cos(deMoon) * sin(d) * cos((raMoon - a));
 		y = mdistanceER * y;
-		z = sin(deMoon * M_PI_180) * sin(d * M_PI_180);
-		z = z + cos(deMoon * M_PI_180) * cos(d * M_PI_180) * cos((raMoon - a) * M_PI_180);
+		z = sin(deMoon) * sin(d);
+		z = z + cos(deMoon) * cos(d) * cos((raMoon - a));
 		z = mdistanceER * z;
 		// parameters of the shadow cone
 		f1 = asin((SunEarth + 0.272488) / (rss * (1 - b)));
@@ -900,24 +893,22 @@ public:
 		tf2 = tan(f2);
 		L1 = z * tf1 + (0.272488 / cos(f1));
 		L2 = z * tf2 - (0.272281 / cos(f2));
-		mu = gast - a;
+		mu = gast - a / M_PI_180;
 
 		// Find Lat./Long. of center line on Earth's surface
-		cd = cos(d * M_PI_180);
+		cd = cos(d);
 		rho1 = sqrt(1 - 0.00669398 * cd * cd);
 		// e^2 = 0.00669398 : Earth flattening parameter
 		// IERS 2010 : f = 298.25642 : e^2 = 2f-f^2
 		y1 = y / rho1;
 		xi = x;
 		eta1 = y1;
-		sd = sin(d * M_PI_180);
+		sd = sin(d);
 		sd1 = sd / rho1;
 		cd1 = sqrt(1 - 0.00669398) * cd / rho1;
 		rho2 = sqrt(1 - 0.00669398 * sd * sd);
 		sd1d2 = 0.00669398 * sd * cd / (rho1 * rho2);
 		cd1d2 = sqrt(1 - sd1d2 * sd1d2);
-
-		lat = 99; // return impossible latitude to indicate no central eclipse
 
 		if ((1 - x * x - y1 * y1) > 0)
 		{
@@ -925,7 +916,7 @@ public:
 			zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
 			sd2 = sd * 1.0033641 / rho2;
 			L2 = L2 - zeta * tf2;
-			b = -y * sd + zeta * cos(d * M_PI_180);
+			b = -y * sd + zeta * cd;
 			theta = atan2(xi, b) / M_PI_180;
 			if (theta < 0) theta += 360;
 			if (mu > 360) mu -= 360;
@@ -938,8 +929,8 @@ public:
 			lat = 1.0033641 * sfn1 / cfn1;
 			lat = atan(lat) / M_PI_180;
 			L1 = L1 - zeta * tf1;
-			// Magnitude of eclipse - tell us what kind of central eclipse
-			// annular if less than 1.0
+			// Magnitude of eclipse
+			// mag < 1 = annular
 			mag = L1 / (L1 + L2);
 		}
 		return Vec3d(lat, lon, mag);
@@ -1059,12 +1050,23 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 							 .arg(pos[0], 5, 'f', 4)
 							 .arg(QChar(0x00B0))
 							 .arg(pos[1], 5, 'f', 4)
-							 .arg(QChar(0x00B0));
+							 .arg(QChar(0x00B0)) << "<br/>";
+
+					StelLocation loc = core->getCurrentLocation();
+					// distance between center point and current location
+					float distance = StelLocation::distanceKm(loc.longitude, loc.latitude, pos[1], pos[0]);
+
+					oss << QString("%1: %2 %3")
+							 .arg(q_("Distance from current location"))
+							 .arg(QString::number(distance, 'f', 1))
+							 .arg(q_("km")) << "<br/>";
+
+					oss << QString("%1: %2 ")
+							 .arg(q_("Magnitude of central eclipse"))
+							 .arg(QString::number(pos[2], 'f', 4));
+					if (pos[2] < 1.0) oss << QString(q_("(annular)"));
+					else oss << QString(q_("(total)"));
 					oss << "<br/>";
-					oss << QString("%1: %2")
-							 .arg(q_("Magnitude at center line"))
-							 .arg(QString::number(pos[2], 'f', 4))
-						<< "<br />";
 				}
 			}
 			core1->setUseTopocentricCoordinates(useTopocentric);
