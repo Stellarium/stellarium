@@ -20,6 +20,10 @@
 #include "StelLocationMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelApp.hpp"
+#include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include <QTimeZone>
 #include <QStringList>
 
@@ -150,8 +154,33 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 // Compute great-circle distance between two locations
 float StelLocation::distanceDegrees(const float long1, const float lat1, const float long2, const float lat2)
 {
-	const float DEGREES=M_PIf/180.0f;
+	static const float DEGREES=M_PIf/180.0f;
 	return std::acos( std::sin(lat1*DEGREES)*std::sin(lat2*DEGREES) +
 			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
 			  std::cos((long1-long2)*DEGREES) ) / DEGREES;
+}
+double StelLocation::distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2)
+{
+	static const double DEGREES=M_PI/180.0;
+	const double f = 1.0 - planet->getOneMinusOblateness(); // flattening
+	const double a = planet->getEquatorialRadius()*AU;
+
+	const double F = (lat1+lat2)*0.5*DEGREES;
+	const double G = (lat1-lat2)*0.5*DEGREES;
+	const double L = (long1-long2)*0.5*DEGREES;
+
+	const double sinG=sin(G), cosG=cos(G), sinF=sin(F), cosF=cos(F), sinL=sin(L), cosL=cos(L);
+	const double S  = sinG*sinG*cosL*cosL+cosF*cosF*sinL*sinL;
+	const double C  = cosG*cosG*cosL*cosL+sinF*sinF*sinL*sinL;
+	const double om = atan(sqrt(S/C));
+	const double R  = sqrt(S*C)/om;
+	const double D  = 2.*om*a;
+	const double H1 = (3.0*R-1.0)/(2.0*C);
+	const double H2 = (3.0*R+1.0)/(2.0*S);
+	return D*(1.0+f*(H1*sinF*sinF*cosG*cosG-H2*cosF*cosF*sinG*sinG));
+}
+double StelLocation::distanceKm(const double otherLong, const double otherLat) const
+{
+	PlanetP planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
+	return distanceKm(planet.data(), static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
 }
