@@ -267,6 +267,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	QString str;
 	QTextStream oss(&str);
 	QString degree = QChar(0x00B0);
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	
 	if (flags & Name)
 	{
@@ -308,7 +309,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags & Extra)
+	if (flags&Distance)
 	{
 		QString km = qc_("km", "distance");
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
@@ -321,7 +322,22 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
 		       .arg(qRound(pa[0])).arg(km)
 		       .arg(qRound(pa[1])).arg(km)
-		<< "<br/>";		
+		<< "<br/>";
+	}
+
+	if (flags&Size && RCS>0.)
+	{
+		const double angularSize = getAngularSize(core)*M_PI_180;
+		QString sizeStr = "";
+		if (withDecimalDegree)
+			sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+		else
+			sizeStr = StelUtils::radToDmsPStr(angularSize, 2);
+		oss << QString("%1: %2").arg(q_("Approx. angular size"), sizeStr) << "<br />";
+	}
+
+	if (flags & Extra)
+	{
 		double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 		if (orbitalPeriod>0.0)
 		{
@@ -743,7 +759,15 @@ QString Satellite::getOperationalStatus() const
 
 double Satellite::getAngularSize(const StelCore*) const
 {
-	return 0.00001;
+	if (RCS>0.)
+	{
+		double size = std::sqrt(4*RCS/M_PI); // Let's use spherical satellites
+		if (isISS)
+			size = 109.; // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
+		return 2.* std::atan(size/(2000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("size" in meters, "range" in kilometers, so, 2000 is equal 1000*2)
+	}
+	else
+		return 0.00001;
 }
 
 void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
@@ -779,14 +803,19 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height <= 150.0)
+		if (height < 80.0)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite when the computed height is 150km. (We can assume bogus at 250km or so...)
+			// the satellite when the computed height is 80km.
+			// Low Earth Orbit (LEO):
+			// A geocentric orbit with an altitude much less than the Earth's radius.
+			// Satellites in this orbit are between 80 and 2000 kilometers above
+			// the Earth's surface.
+			// Source: https://www.nasa.gov/directorates/heo/scan/definitions/glossary/index.html#L
 			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			displayed = false; // It shouldn't be displayed!
@@ -893,8 +922,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
-	// NOTE: Should we use the real angular size of ISS here (we do not have linear size of ISS within catalog for calculation the angular size)?
-	int screenSizeISS = static_cast<int>((0.0167*M_PI/180.)*painter.getProjector()->getPixelPerRadAtCenter()); // Set screen size of ISS (1 arcmin)
+	int screenSizeISS = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))

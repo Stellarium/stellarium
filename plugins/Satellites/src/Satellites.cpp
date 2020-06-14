@@ -156,7 +156,7 @@ void Satellites::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Satellite_Hints");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
@@ -560,8 +560,8 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/geodetic.txt"
 	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
 	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/other.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/starlink.txt"
+	     << "http://www.celestrak.com/NORAD/elements/other.txt"	     
+	     << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
 	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
 	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
@@ -1828,29 +1828,33 @@ void Satellites::loadExtraData()
 	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
-	qsmFile.open(QFile::ReadOnly);
-	while (!qsmFile.atEnd())
+	if (qsmFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(qsmFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString smag = line.mid(33,4).trimmed();		
-		if (!smag.isEmpty())
-			qsMagList.insert(id, smag.toDouble());		
+		while (!qsmFile.atEnd())
+		{
+			QString line = QString(qsmFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString smag = line.mid(33,4).trimmed();
+			if (!smag.isEmpty())
+				qsMagList.insert(id, smag.toDouble());
+		}
+		qsmFile.close();
 	}
-	qsmFile.close();
 
 	QFile rcsFile(":/satellites/rcs");
 	rcsList.clear();
-	rcsFile.open(QFile::ReadOnly);
-	while (!rcsFile.atEnd())
+	if (rcsFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(rcsFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString srcs = line.mid(5,5).trimmed();
-		if (!srcs.isEmpty())
-			rcsList.insert(id, srcs.toDouble());
+		while (!rcsFile.atEnd())
+		{
+			QString line = QString(rcsFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString srcs = line.mid(5,5).trimmed();
+			if (!srcs.isEmpty())
+				rcsList.insert(id, srcs.toDouble());
+		}
+		rcsFile.close();
 	}
-	rcsFile.close();
 }
 
 void Satellites::update(double deltaTime)

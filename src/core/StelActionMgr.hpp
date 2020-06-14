@@ -170,6 +170,7 @@ public:
 	QList<StelAction*> getActionList(const QString& group) const;
 	//! Returns all registered StelActions
 	QList<StelAction*> getActionList() const;
+	QStringList getShortcutsList() const;
 
 	//! Save current shortcuts to file.
 	void saveShortcuts();

@@ -231,7 +231,7 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_Off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_EquationOfTime");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");

@@ -41,6 +41,9 @@ public:
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
+	//! @note If filename is invalid, this creates a fuchsia-colored (magenta) replacement texture to signify "great error".
+	//!       Create an empty StelTextureSP yourself if you have no valid filename.
+	//! @note If image is larger than maximum allowed texture size, it will be automatically rescaled to fit and a warning printed to the logfile.
 	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
 
 	//! Create a texture from a QImage.
@@ -82,6 +85,7 @@ private:
 	QMutex mutex;
 	TexCache textureCache;
 	IdMap idMap;
+	GLint maxTexSize; // Useful to avoid loading too large textures
 };
 
 

@@ -783,7 +783,7 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/Exoplanets/btExoplanets-on.png"),
 							       QPixmap(":/Exoplanets/btExoplanets-off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
 							       "actionShow_Exoplanets");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");

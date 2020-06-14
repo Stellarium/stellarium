@@ -327,6 +327,7 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
+	waitEventLoop = new QEventLoop();
 	engine = new QScriptEngine(this);
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
@@ -654,6 +655,15 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 
 void StelScriptMgr::stopScript()
 {
+	// Hack abusing stopScript for two different stops: it
+	// will be called again after exit from the timer loop
+	// which we kill here if it is running.
+    if( waitEventLoop->isRunning() )
+	{
+		waitEventLoop->exit( 1 );
+		return;
+	}
+	
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
@@ -667,7 +677,7 @@ void StelScriptMgr::stopScript()
 		//qDebug() << msg;
 		engine->abortEvaluation();
 	}
-	scriptEnded();
+	// "Script finished..." is emitted after return from engine->evaluate().
 }
 
 void StelScriptMgr::setScriptRate(double r)

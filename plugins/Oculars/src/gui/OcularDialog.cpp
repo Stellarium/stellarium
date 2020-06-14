@@ -316,6 +316,11 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
 	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
 	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
+	connectColorButton(ui->focuserColorToolButton,       "Oculars.focuserColor", "focuser_color", "Oculars");
+	connectBoolProperty(ui->checkBoxShowFocuserOverlay,	"Oculars.flagShowFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseSmallFocuser,		"Oculars.flagUseSmallFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseMediumFocuser,	"Oculars.flagUseMediumFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseLargeFocuser,		"Oculars.flagUseLargeFocuserOverlay");
 
 	setupTelradFOVspins(plugin->getTelradFOV());
 	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));

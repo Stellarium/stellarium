@@ -266,7 +266,7 @@ void ArchaeoLines::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_ArchaeoLines");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}

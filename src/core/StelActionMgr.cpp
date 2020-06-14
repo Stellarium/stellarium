@@ -37,20 +37,20 @@ StelAction::StelAction(const QString& actionId,
 		       const QString& text,
 		       const QString& primaryKey,
 		       const QString& altKey,
-		       bool global):
-	QObject(StelApp::getInstance().getStelActionManager()),
-	group(groupId),
-	text(text),
-	global(global),
-	keySequence(primaryKey),
-	altKeySequence(altKey),
-	defaultKeySequence(primaryKey),
-	defaultAltKeySequence(altKey),
-	target(Q_NULLPTR),
-	boolProperty(Q_NULLPTR)
-      #ifndef USE_QUICKVIEW
-      ,qAction(Q_NULLPTR)
-      #endif
+		       bool global)
+	: QObject(StelApp::getInstance().getStelActionManager())
+	, group(groupId)
+	, text(text)
+	, global(global)
+	, keySequence(primaryKey)
+	, altKeySequence(altKey)
+	, defaultKeySequence(primaryKey)
+	, defaultAltKeySequence(altKey)
+	, target(Q_NULLPTR)
+	, boolProperty(Q_NULLPTR)
+#ifndef USE_QUICKVIEW
+	, qAction(Q_NULLPTR)
+#endif
 {
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
@@ -60,11 +60,11 @@ StelAction::StelAction(const QString& actionId,
 	{
 		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", QString::SkipEmptyParts);
 		if (shortcuts.size() > 2)
-			qWarning() << actionId << ": does not support more than two shortcuts per action";
+			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
 		if (shortcuts.size() > 1)
-			setAltShortcut(shortcuts[1]);
-	}	
+			setAltShortcut(shortcuts[1]);		
+	}
 #ifndef USE_QUICKVIEW
 	QWidget* mainView = &StelMainView::getInstance();
 	qAction = new QAction(this);
@@ -265,6 +265,22 @@ QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 QList<StelAction*> StelActionMgr::getActionList() const
 {
 	return findChildren<StelAction*>();
+}
+
+QStringList StelActionMgr::getShortcutsList() const
+{
+	QStringList shortcuts;
+	QString shortcut;
+	for (const auto* action : getActionList())
+	{
+		shortcut = action->getShortcut().toString();
+		if (!shortcut.isEmpty())
+			shortcuts.append(shortcut);
+		shortcut = action->getAltShortcut().toString();
+		if (!shortcut.isEmpty())
+			shortcuts.append(shortcut);
+	}
+	return shortcuts;
 }
 
 void StelActionMgr::saveShortcuts()

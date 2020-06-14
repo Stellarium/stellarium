@@ -135,7 +135,7 @@ void NavStars::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/NavStars/btNavStars-on.png"),
 						       QPixmap(":/NavStars/btNavStars-off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_NavStars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");

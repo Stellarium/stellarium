@@ -169,7 +169,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core) const;
-	virtual double getAngularSize(const StelCore* core) const;
+	//! Get angular size, degrees
+	virtual double getAngularSize(const StelCore*) const;
 	virtual QString getNameI18n(void) const;
 	virtual QString getEnglishName(void) const
 	{
