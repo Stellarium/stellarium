@@ -1054,12 +1054,19 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 					StelLocation loc = core->getCurrentLocation();
 					// distance between center point and current location
-					float distance = StelLocation::distanceKm(loc.longitude, loc.latitude, pos[1], pos[0]);
+					PlanetP Earth = GETSTELMODULE(SolarSystem)->getEarth();
+					Planet* myEarth;
+					myEarth = Earth.data();
+					double distance = StelLocation::distanceKm(myEarth, loc.longitude, loc.latitude, pos[1], pos[0]);
+					double azimuth = StelLocation::GetAzimuthForLocation(loc.longitude, loc.latitude, pos[1], pos[0]);
+					if (azimuth < 0) azimuth += 360.;
 
-					oss << QString("%1: %2 %3")
-							 .arg(q_("Distance from current location"))
+					oss << QString("%1 %2 %3 %4%5")
+							 .arg(q_("Shadow center point is"))
 							 .arg(QString::number(distance, 'f', 1))
-							 .arg(q_("km")) << "<br/>";
+							 .arg(q_("km towards azimuth"))
+							 .arg(QString::number(azimuth, 'f', 1))
+							 .arg(QChar(0x00B0)) << "<br/>";
 
 					oss << QString("%1: %2 ")
 							 .arg(q_("Magnitude of central eclipse"))

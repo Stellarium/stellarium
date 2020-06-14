@@ -20,6 +20,10 @@
 #include "StelLocationMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelApp.hpp"
+#include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include <QTimeZone>
 #include <QStringList>
 
@@ -150,32 +154,44 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 // Compute great-circle distance between two locations
 float StelLocation::distanceDegrees(const float long1, const float lat1, const float long2, const float lat2)
 {
-	const float DEGREES=M_PIf/180.0f;
+	static const float DEGREES=M_PIf/180.0f;
 	return std::acos( std::sin(lat1*DEGREES)*std::sin(lat2*DEGREES) +
 			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
 			  std::cos((long1-long2)*DEGREES) ) / DEGREES;
 }
-
-// Compute great-circle distance in kilometers between two locations
-// J. Meeus "Astronomical Algorithms" (2nd ed. 1998) p.85.
-float StelLocation::distanceKm(const float long1, const float lat1, const float long2, const float lat2)
+double StelLocation::distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2)
 {
-	const float DEGREES = M_PIf / 180.0f;
-	float f = (lat1 + lat2) * DEGREES / 2.0f;
-	float g = (lat1 - lat2) * DEGREES / 2.0f;
-	float lambda = (long1 - long2) * DEGREES / 2.0f;
-	float s = std::sin(g) * std::sin(g) * std::cos(lambda) * std::cos(lambda);
-	s += std::cos(f) * std::cos(f) * std::sin(lambda) * std::sin(lambda);
-	float c = std::cos(g) * std::cos(g) * std::cos(lambda) * std::cos(lambda);
-	c += std::sin(f) * std::sin(f) * std::sin(lambda) * std::sin(lambda);
-	float omega = std::atan(std::sqrt(s / c));
-	float r = std::sqrt(s * c) / omega;
-	float h1 = (3.0f * r - 1.0f) / (2.0f * c);
-	float h2 = (3.0f * r + 1.0f) / (2.0f * s);
-	// IERS 2010 : Earth flattening = 1/298.25642
-	// Earth's equatorial radius = 6378.1366
-	float distance = 1.0f + h1 * std::sin(f) * std::sin(f) * std::cos(g) * std::cos(g) / 298.25642f;
-	distance -= h2 * std::cos(f) * std::cos(f) * std::sin(g) * std::sin(g) / 298.25642f;
-	distance = distance * 2.0f * omega * 6378.1366;
-	return distance;
+	static const double DEGREES=M_PI/180.0;
+	const double f = 1.0 - planet->getOneMinusOblateness(); // flattening
+	const double a = planet->getEquatorialRadius()*AU;
+
+	const double F = (lat1+lat2)*0.5*DEGREES;
+	const double G = (lat1-lat2)*0.5*DEGREES;
+	const double L = (long1-long2)*0.5*DEGREES;
+
+	const double sinG=sin(G), cosG=cos(G), sinF=sin(F), cosF=cos(F), sinL=sin(L), cosL=cos(L);
+	const double S  = sinG*sinG*cosL*cosL+cosF*cosF*sinL*sinL;
+	const double C  = cosG*cosG*cosL*cosL+sinF*sinF*sinL*sinL;
+	const double om = atan(sqrt(S/C));
+	const double R  = sqrt(S*C)/om;
+	const double D  = 2.*om*a;
+	const double H1 = (3.0*R-1.0)/(2.0*C);
+	const double H2 = (3.0*R+1.0)/(2.0*S);
+	return D*(1.0+f*(H1*sinF*sinF*cosG*cosG-H2*cosF*cosF*sinG*sinG));
+}
+double StelLocation::distanceKm(const double otherLong, const double otherLat) const
+{
+	PlanetP planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
+	return distanceKm(planet.data(), static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
+}
+
+double StelLocation::GetAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
+{
+	longObs *= (M_PI / 180.0);
+	latObs *= (M_PI / 180.0);
+	longTarget *= (M_PI / 180.0);
+	latTarget *= (M_PI / 180.0);
+
+	return (180.0 / M_PI) * atan2(sin(longTarget - longObs),
+			 cos(latObs) * tan(latTarget) - sin(latObs) * cos(longTarget - longObs));
 }
