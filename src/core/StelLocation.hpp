@@ -99,6 +99,8 @@ public:
 	//! arguments given in decimal degrees
 	//! Source: Jean Meeus, Astronomical Algorithms, 2nd edition, ch.11.
 	static double distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2);
+	//! Compute azimuth (from North) towards Target.
+	static double GetAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
