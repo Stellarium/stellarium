@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-03 23:51+0700\n"
+"POT-Creation-Date: 2020-06-16 10:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Masa Noda, 2020\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -41,7 +41,7 @@ msgstr "任意マーカー"
 #: src/core/modules/Planet.cpp:478 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:218 src/core/modules/StarWrapper.cpp:221
 #: src/gui/AstroCalcDialog.cpp:851 src/ui_configurationDialog.h:1653
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
@@ -273,9 +273,9 @@ msgstr "反向点"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1305 src/core/modules/Planet.cpp:674
-#: src/core/modules/Planet.cpp:863 src/gui/AstroCalcDialog.cpp:6085
-#: plugins/Satellites/src/Satellite.cpp:317
-#: plugins/Satellites/src/Satellite.cpp:364
+#: src/core/modules/Planet.cpp:956 src/gui/AstroCalcDialog.cpp:6085
+#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:380
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
@@ -475,9 +475,9 @@ msgstr "光害を減らす"
 msgid "Cyclic change in light pollution"
 msgstr "光害のサイクル変化"
 
-#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:461
+#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -495,7 +495,7 @@ msgstr "作者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:409
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -575,8 +575,8 @@ msgstr "直径"
 #: src/core/modules/Planet.cpp:655 src/core/modules/Planet.cpp:753
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
 #: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6005
-#: plugins/Satellites/src/Satellite.cpp:313
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:314
+#: plugins/Satellites/src/Satellite.cpp:373
 msgctxt "distance"
 msgid "km"
 msgstr "km"
@@ -1814,7 +1814,7 @@ msgstr "星雲・星団(DSO)"
 msgid "Toggle DSO type filter"
 msgstr "表示する星雲・星団をチェック"
 
-#: src/core/modules/NebulaMgr.cpp:1421
+#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:931
 msgid "Attention!"
 msgstr "注意してください！"
 
@@ -1959,70 +1959,96 @@ msgstr "視直径"
 msgid "Equatorial diameter"
 msgstr "赤道直径"
 
-#: src/core/modules/Planet.cpp:792 src/core/modules/Planet.cpp:800
+#: src/core/modules/Planet.cpp:791 src/core/modules/Planet.cpp:799
 #: src/gui/AstroCalcDialog.cpp:3050 src/gui/AstroCalcDialog.cpp:3108
 #: src/ui_configurationDialog.h:1681
 msgid "Elongation"
 msgstr "離角"
 
-#: src/core/modules/Planet.cpp:793 src/core/modules/Planet.cpp:801
+#: src/core/modules/Planet.cpp:792 src/core/modules/Planet.cpp:800
 #: src/gui/AstroCalcDialog.cpp:3060 src/gui/AstroCalcDialog.cpp:3118
-#: plugins/Satellites/src/Satellite.cpp:369
+#: plugins/Satellites/src/Satellite.cpp:385
 msgid "Phase angle"
 msgstr "位相角"
 
-#: src/core/modules/Planet.cpp:795 src/core/modules/Planet.cpp:803
+#: src/core/modules/Planet.cpp:794 src/core/modules/Planet.cpp:802
 msgid "Illuminated"
 msgstr "照度"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:821 src/core/modules/Planet.cpp:871
+#: src/core/modules/Planet.cpp:820 src/core/modules/Planet.cpp:964
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:6102
 msgctxt "duration"
 msgid "days"
 msgstr "日"
 
-#: src/core/modules/Planet.cpp:830
+#: src/core/modules/Planet.cpp:829
 msgid "Sidereal period"
 msgstr "公転周期"
 
-#: src/core/modules/Planet.cpp:839
+#: src/core/modules/Planet.cpp:838
 msgid "Synodic period"
 msgstr "会合周期"
 
-#: src/core/modules/Planet.cpp:880
+#: src/core/modules/Planet.cpp:973
 msgid "Sidereal day"
 msgstr "自転周期"
 
-#: src/core/modules/Planet.cpp:882
+#: src/core/modules/Planet.cpp:975
 msgid "Mean solar day"
 msgstr "天体上の1日"
 
-#: src/core/modules/Planet.cpp:888
+#: src/core/modules/Planet.cpp:981
 msgid "The period of rotation is chaotic"
 msgstr "自転周期は不規則"
 
-#: src/core/modules/Planet.cpp:894
+#: src/core/modules/Planet.cpp:987
 msgid "Equatorial rotation velocity"
 msgstr "自転速度(赤道上)"
 
-#: src/core/modules/Planet.cpp:899
+#: src/core/modules/Planet.cpp:992
 msgid "Albedo"
 msgstr "アルベド"
 
-#: src/core/modules/Planet.cpp:908
+#: src/core/modules/Planet.cpp:1001
 msgid "Eclipse obscuration"
 msgstr "食の割合"
 
-#: src/core/modules/Planet.cpp:913
+#: src/core/modules/Planet.cpp:1010
 msgid "Eclipse magnitude"
 msgstr "食分"
 
-#: src/core/modules/Planet.cpp:994
+#: src/core/modules/Planet.cpp:1043
+msgid "Center of solar eclipse (Lat./Long.)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1056
+msgid "Shadow center point is"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1058
+msgid "km towards azimuth"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1062
+msgid "Magnitude of central eclipse"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1065
+msgctxt "type of solar eclipse"
+msgid "(annular)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1067
+msgctxt "type of solar eclipse"
+msgid "(total)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1150
 msgid "Penumbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:997
+#: src/core/modules/Planet.cpp:1153
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
@@ -3682,9 +3708,9 @@ msgstr "作者"
 msgid "Contact"
 msgstr "連絡先"
 
-#: src/gui/ConfigurationDialog.cpp:1120 src/scripting/StelScriptMgr.cpp:471
+#: src/gui/ConfigurationDialog.cpp:1120 src/scripting/StelScriptMgr.cpp:472
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:533
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:704
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3704,9 +3730,9 @@ msgstr "連絡先"
 msgid "Version"
 msgstr "バージョン"
 
-#: src/gui/ConfigurationDialog.cpp:1121 src/scripting/StelScriptMgr.cpp:466
+#: src/gui/ConfigurationDialog.cpp:1121 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:705
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -4256,7 +4282,7 @@ msgstr "テスター: %1"
 
 #: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4904,7 +4930,7 @@ msgstr "方位角"
 #: src/gui/AstroCalcDialog.cpp:1392 src/gui/AstroCalcDialog.cpp:1821
 #: src/gui/AstroCalcDialog.cpp:2702 src/gui/AstroCalcDialog.cpp:3209
 #: src/gui/AstroCalcDialog.cpp:3487 src/gui/AstroCalcDialog.cpp:3489
-#: plugins/Satellites/src/Satellite.cpp:319
+#: plugins/Satellites/src/Satellite.cpp:320
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1276
 msgid "Altitude"
 msgstr "高度"
@@ -5912,12 +5938,12 @@ msgstr "ユリウス日での日時"
 msgid "Date and Time in Gregorian calendar"
 msgstr "グレゴリオ暦での日時"
 
-#: src/scripting/StelScriptMgr.cpp:371 src/ui_configurationDialog.h:1559
+#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1559
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "スクリプト"
 
-#: src/scripting/StelScriptMgr.cpp:476
+#: src/scripting/StelScriptMgr.cpp:477
 msgid "Shortcut"
 msgstr "ショートカット"
 
@@ -5933,7 +5959,13 @@ msgstr "シェーダーを再描画(開発者向け)"
 msgid "Full-screen mode"
 msgstr "全画面表示"
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:931
+msgid ""
+"Shortcuts have conflicts! Please press F7 after startup of planetarium and "
+"check follow problematic shortcuts"
+msgstr ""
+
+#: src/StelMainView.cpp:1008
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -5941,12 +5973,12 @@ msgstr ""
 "OpenGLのバージョンが古いです。グラフィックボードやドライバーをアップデートするか、--angle-mode( --mesa-"
 "mode)のオプションを使って下さい。"
 
-#: src/StelMainView.cpp:990
+#: src/StelMainView.cpp:1011
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGLのバージョンが古いです。グラフィックボードやドライバーをアップデートして下さい。"
 
-#: src/StelMainView.cpp:1032
+#: src/StelMainView.cpp:1053
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5954,7 +5986,7 @@ msgstr ""
 "DirectX / OpenGL ESサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1083
+#: src/StelMainView.cpp:1104
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5962,7 +5994,7 @@ msgstr ""
 "OpenGL/Mesa サブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1143
+#: src/StelMainView.cpp:1164
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5970,7 +6002,7 @@ msgstr ""
 "OpenGLサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1184
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5978,7 +6010,7 @@ msgstr ""
 "OpenGL ESサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1293
+#: src/StelMainView.cpp:1314
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ステラリウム %1"
@@ -6026,7 +6058,7 @@ msgstr "北西"
 #. TRANSLATORS: Type of object
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet
 #. constellation (FLOCK and SKYSAT satellites)
-#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2226
+#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2230
 msgid "planet"
 msgstr "惑星"
 
@@ -7745,10 +7777,10 @@ msgstr "コピー(&C)"
 msgid "&Paste"
 msgstr "ペースト(&P)"
 
-#: src/translations.h:749 plugins/Oculars/src/ui_ocularDialog.h:1456
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
-#: plugins/Oculars/src/ui_ocularDialog.h:1492
+#: src/translations.h:749 plugins/Oculars/src/ui_ocularDialog.h:1522
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Delete"
 msgstr "削除"
 
@@ -10712,7 +10744,7 @@ msgstr "可能なものすべて"
 msgid "Display no information"
 msgstr "情報を表示しない"
 
-#: src/ui_configurationDialog.h:1614 plugins/Oculars/src/Oculars.cpp:2355
+#: src/ui_configurationDialog.h:1614 plugins/Oculars/src/Oculars.cpp:2383
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "なし"
@@ -12382,7 +12414,7 @@ msgstr ""
 " 私たちはハワイにいたいと願いました。"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12402,7 +12434,7 @@ msgid "Links"
 msgstr "リンク"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12425,7 +12457,7 @@ msgstr "サポートはGithubで行っています。投稿時には題名に\"%
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:565
+#: plugins/Oculars/src/gui/OcularDialog.cpp:570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12446,7 +12478,7 @@ msgstr "質問は{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:567
+#: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12467,7 +12499,7 @@ msgstr "バグの報告やリクエストは{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12560,7 +12592,7 @@ msgid "Restore default settings"
 msgstr "デフォルトの設定に戻す"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 #: plugins/Satellites/src/ui_satellitesDialog.h:883
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:439
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12594,9 +12626,9 @@ msgstr "地平線に沿って方位を表示します"
 msgid "Compass marks"
 msgstr "方位磁針のマーク"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1429
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1446
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1364
+#: plugins/Oculars/src/ui_ocularDialog.h:1425
 msgid "Oculars"
 msgstr "望遠鏡視野"
 
@@ -12607,238 +12639,238 @@ msgid ""
 "frame and a Telrad sight."
 msgstr "望遠鏡から見た星空を表示します。ただし等級と視野以外のシミュレーションはありません。またセンサーの視野やテルラドの照準も表示できます。"
 
-#: plugins/Oculars/src/Oculars.cpp:920
+#: plugins/Oculars/src/Oculars.cpp:937
 msgid "Please select an object before switching to ocular view."
 msgstr "先に天体を選択して下さい。"
 
-#: plugins/Oculars/src/Oculars.cpp:1026
+#: plugins/Oculars/src/Oculars.cpp:1043
 msgid "&Previous ocular"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1027
+#: plugins/Oculars/src/Oculars.cpp:1044
 msgid "&Next ocular"
 msgstr "次へ(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1028
+#: plugins/Oculars/src/Oculars.cpp:1045
 msgid "Select &ocular"
 msgstr "接眼レンズ(&O)"
 
-#: plugins/Oculars/src/Oculars.cpp:1071
+#: plugins/Oculars/src/Oculars.cpp:1088
 msgid "Toggle &crosshair"
 msgstr "十時線(&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1081
+#: plugins/Oculars/src/Oculars.cpp:1098
 msgid "Configure &Oculars"
 msgstr "望遠鏡視野設定(&O)"
 
-#: plugins/Oculars/src/Oculars.cpp:1090
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "Toggle &CCD"
 msgstr "&CCD視野"
 
-#: plugins/Oculars/src/Oculars.cpp:1098
+#: plugins/Oculars/src/Oculars.cpp:1115
 msgid "Toggle &Telrad"
 msgstr "テルラド(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1107
+#: plugins/Oculars/src/Oculars.cpp:1124
 msgid "&Previous CCD"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1108
+#: plugins/Oculars/src/Oculars.cpp:1125
 msgid "&Next CCD"
 msgstr "次へ(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1109
+#: plugins/Oculars/src/Oculars.cpp:1126
 msgid "&Select CCD"
 msgstr "CCD選択(&S)"
 
-#: plugins/Oculars/src/Oculars.cpp:1131
+#: plugins/Oculars/src/Oculars.cpp:1148
 msgid "&Rotate CCD"
 msgstr "回転(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1153
+#: plugins/Oculars/src/Oculars.cpp:1170
 msgid "&Reset rotation"
 msgstr "回転リセット(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1430
-#: plugins/Oculars/src/ui_ocularDialog.h:1393
+#: plugins/Oculars/src/Oculars.cpp:1447
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Ocular view"
 msgstr "望遠鏡視野"
 
-#: plugins/Oculars/src/Oculars.cpp:1431
+#: plugins/Oculars/src/Oculars.cpp:1448
 msgid "Oculars popup menu"
 msgstr "ポップアップメニュー"
 
-#: plugins/Oculars/src/Oculars.cpp:1432
+#: plugins/Oculars/src/Oculars.cpp:1449
 msgid "Show crosshairs"
 msgstr "十字線を表示"
 
-#: plugins/Oculars/src/Oculars.cpp:1433
+#: plugins/Oculars/src/Oculars.cpp:1450
 msgid "Image sensor frame"
 msgstr "CCD(センサー)のフレームを表示"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1451
 msgid "Telrad sight"
 msgstr "テルラドの表示"
 
-#: plugins/Oculars/src/Oculars.cpp:1435
+#: plugins/Oculars/src/Oculars.cpp:1452
 msgid "Toggle Oculars configuration window"
 msgstr "望遠鏡視野の設定ウィンドウの表示/非表示"
 
-#: plugins/Oculars/src/Oculars.cpp:1436
+#: plugins/Oculars/src/Oculars.cpp:1453
 msgid "Toggle Oculars button bar"
 msgstr "望遠鏡視野ボタン"
 
-#: plugins/Oculars/src/Oculars.cpp:1438
+#: plugins/Oculars/src/Oculars.cpp:1455
 msgid "Select next telescope"
 msgstr "次の望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1440
+#: plugins/Oculars/src/Oculars.cpp:1457
 msgid "Select previous telescope"
 msgstr "前の望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1442
+#: plugins/Oculars/src/Oculars.cpp:1459
 msgid "Select next eyepiece"
 msgstr "次のアイピース"
 
-#: plugins/Oculars/src/Oculars.cpp:1444
+#: plugins/Oculars/src/Oculars.cpp:1461
 msgid "Select previous eyepiece"
 msgstr "前のアイピース"
 
-#: plugins/Oculars/src/Oculars.cpp:1445
+#: plugins/Oculars/src/Oculars.cpp:1462
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "アイピースのレチクルパターンを時計回りに回転"
 
-#: plugins/Oculars/src/Oculars.cpp:1446
+#: plugins/Oculars/src/Oculars.cpp:1463
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "アイピースのレチクルパターンを反時計回りに回転"
 
-#: plugins/Oculars/src/Oculars.cpp:1651
+#: plugins/Oculars/src/Oculars.cpp:1668
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "赤経/赤緯線 (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1662
+#: plugins/Oculars/src/Oculars.cpp:1679
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1681
+#: plugins/Oculars/src/Oculars.cpp:1698
 msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1906
+#: plugins/Oculars/src/Oculars.cpp:1934
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr "接眼レンズ"
 
-#: plugins/Oculars/src/Oculars.cpp:1908
+#: plugins/Oculars/src/Oculars.cpp:1936
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr "双眼鏡"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1928
+#: plugins/Oculars/src/Oculars.cpp:1956
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "焦点距離: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1935
+#: plugins/Oculars/src/Oculars.cpp:1963
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "みかけの視野角: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1946
+#: plugins/Oculars/src/Oculars.cpp:1974
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "補正レンズ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1978
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "補正レンズ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1955
+#: plugins/Oculars/src/Oculars.cpp:1983
 msgid "Lens: none"
 msgstr "補正レンズ: なし"
 
-#: plugins/Oculars/src/Oculars.cpp:1970 plugins/Oculars/src/Oculars.cpp:2030
+#: plugins/Oculars/src/Oculars.cpp:1998 plugins/Oculars/src/Oculars.cpp:2058
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
+#: plugins/Oculars/src/Oculars.cpp:2007
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:869
 #, qt-format
 msgid "Magnification: %1"
 msgstr "倍率: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:2014
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "射出瞳径: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:2021
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 #, qt-format
 msgid "FOV: %1"
 msgstr "視野角: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2014
+#: plugins/Oculars/src/Oculars.cpp:2042
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "実視野(縦x横): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2018
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "センサー(CCD) #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2022
+#: plugins/Oculars/src/Oculars.cpp:2050
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "センサー(CCD) #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/Oculars.cpp:2063
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2351
+#: plugins/Oculars/src/Oculars.cpp:2379
 msgid "&Lens"
 msgstr "補正レンズ(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2352
+#: plugins/Oculars/src/Oculars.cpp:2380
 msgid "&Previous lens"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2353
+#: plugins/Oculars/src/Oculars.cpp:2381
 msgid "&Next lens"
 msgstr "次へ(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2383
+#: plugins/Oculars/src/Oculars.cpp:2411
 msgid "&Telescope"
 msgstr "望遠鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2384
+#: plugins/Oculars/src/Oculars.cpp:2412
 msgid "&Previous telescope"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2385
+#: plugins/Oculars/src/Oculars.cpp:2413
 msgid "&Next telescope"
 msgstr "次へ(&N)"
 
@@ -13038,53 +13070,53 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "裸眼の分解能は目の特性と倍率に基づいています"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "tFOV:"
 msgstr "実視野角:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 msgid "Magnification factor:"
 msgstr "双眼鏡倍率:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Diameter:"
 msgstr "口径:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:518
-#: plugins/Oculars/src/ui_ocularDialog.h:1460
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "aFOV:"
 msgstr "みかけの視野角:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:519
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
-#: plugins/Oculars/src/ui_ocularDialog.h:1498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Focal length:"
 msgstr "焦点距離:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "Oculars Plug-in"
 msgstr "望遠鏡視野プラグイン"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Barlow lens feature"
 msgstr "バローレンズの特徴"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Sensor crop overlay feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:545
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Overview"
 msgstr "概要"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13093,39 +13125,39 @@ msgid ""
 msgstr ""
 "このプラグインは接眼レンズを通して見るものをシミュレーションすることを目的としています。この設定ダイアログを使用して、接眼レンズや望遠鏡、CCDセンサーを追加、変更、または削除できます。プラグインを初めて実行する時にいくつかのサンプルが読み込まれ、すぐ使い始めることができます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "You can choose to scale the image you see on the screen."
 msgstr "画面に表示される画像を拡大/縮小することができます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
+#: plugins/Oculars/src/gui/OcularDialog.cpp:554
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "これは、ある接眼レンズと望遠鏡の組み合わせが他の組み合わせとどのようになるかをより良く比較するためのものです。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr "同じ接眼レンズを使用しても、焦点距離の違う2つの望遠鏡では射出瞳径が異なり、眺めが多少変化します。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "画像の拡大/縮小とのトレードオフで画面の大部分が無駄になる可能性があります。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
 msgstr "だから必要と感じない限り、オフにしておくことをお勧めします。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "You can toggle a crosshair in the view."
 msgstr "十字線の表示が可能です。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -13135,338 +13167,350 @@ msgid ""
 msgstr ""
 "テルラドの表示も可能です。これはアイピースの視野をオンにしていない場合にのみ実行できます。これは0.5%1、2.0%1、4.0%1の3つの同心円を描き、テルラド(または類似の)ファインダーを通じた肉眼での天体探索を助けます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "何か問題を見つけた時は教えて下さい。エンジョイ!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 msgid "Hot Keys"
 msgstr "ショートカット"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "このプラグインのショートカットは、キーボードショートカットの編集(F7)で編集出来ます。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1366
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
 msgid "Interface"
 msgstr "インターフェイス"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1370
+#: plugins/Oculars/src/ui_ocularDialog.h:1431
 msgid "Arrow button scale (requires restart)"
 msgstr "矢印ボタンの大きさ(再起動が必要)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1372
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "視野角を起動時に戻したい場合はチェックする。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1374
+#: plugins/Oculars/src/ui_ocularDialog.h:1435
 msgid "Restore FOV to initial values"
 msgstr "視野角を初期値に戻す"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1375
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
 msgid "Show resolution criteria"
 msgstr "分解能基準を表示する"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1376
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "On-screen control panel"
 msgstr "コントロールパネルを表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1377
+#: plugins/Oculars/src/ui_ocularDialog.h:1438
 msgid "Font size"
 msgstr "フォント・サイズ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1379
+#: plugins/Oculars/src/ui_ocularDialog.h:1440
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr "視野の方向を起動時に戻したい場合はチェックする。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1381
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Restore direction to initial values"
 msgstr "視野の方向を初期値に戻す"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1383
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
 msgid "Color for ocular circles and sensor frames"
 msgstr "視野円とセンサー枠の色"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1386
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "Line Color"
 msgstr "線の色"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1388
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "グラフィック・ユーザー・インターフェイスがオフの時の文字の色"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1391
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Text Color"
 msgstr "文字の色"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1392
+#: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "Show oculars button on toolbar"
 msgstr "望遠鏡視野のボタンをツールバーに表示する"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1395
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Show border circle"
 msgstr "境界円の表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1397
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Show FOV outline"
 msgstr "視野枠の表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1398
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Scale image circle"
 msgstr "イメージ・サークルはみかけの視野角に比例"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1399
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Hide grids and lines when enabled"
 msgstr "可能なら座標線などの線を消す"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1400
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
 msgid "Enable only if an object is selected"
 msgstr "天体が選択さてれいる時だけ利用可"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1402
+#: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "アイピースの視野の外側も半透明で表示する。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1404
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Use semi-transparent mask"
 msgstr "半透明マスクを使用する"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1406
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "赤道座標系で方位を表示する"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1408
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Show compass rose"
 msgstr "コンパスローズの表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1410
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "望遠鏡の口径ごとに限界等級を適用"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1412
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid "Limit stellar magnitude"
 msgstr "限界等級"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1414
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "十字線は赤道座標系に添って表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1416
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Align crosshair"
 msgstr "十字線は天の東西南北の向き"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1417
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Sensor view"
 msgstr "CCD視野"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
+msgid ""
+"Enable a square overlay showing the effective size of a number of pixels."
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
+msgid "Show sensor crop overlay"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1484
+msgid "Color for focuser overlay line"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
+msgid "Show focuser overlay"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1421
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Enable automatic switch of mount type"
 msgstr "架台別にCCDの向きを自動設定"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1422
-msgid "Overlay size (px)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
-msgid "Horizontal size (width)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1427
-msgid "Vertical size (height)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Enable autozoom when switching CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1492
+msgid "Overlay size (px)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1494
+msgid "Horizontal size (width)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
+msgid "Vertical size (height)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCDの実視野は角度の分で表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-msgid ""
-"Enable a square overlay showing the effective size of a number of pixels."
+#: plugins/Oculars/src/ui_ocularDialog.h:1500
+msgid "Use size of focuser:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
-msgid "Show sensor crop overlay"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1435
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "Telrad view"
 msgstr "テルラド視野"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "FOV for circle 1 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1444
+#: plugins/Oculars/src/ui_ocularDialog.h:1510
 msgid "FOV for circle 2 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1447
+#: plugins/Oculars/src/ui_ocularDialog.h:1513
 msgid "FOV for circle 3 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1450
+#: plugins/Oculars/src/ui_ocularDialog.h:1516
 msgid "FOV for circle 4 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Restore original Telrad FOV"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1519
 msgid "Enable autozoom when switching Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1454
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "一般"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
-#: plugins/Oculars/src/ui_ocularDialog.h:1464
-#: plugins/Oculars/src/ui_ocularDialog.h:1470
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1521
+#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 msgid "Add"
 msgstr "追加"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1524
 msgid "Has permanent cross-hairs"
 msgstr "十字線を常に表示"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid "Binoculars"
 msgstr "双眼鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1462
-#: plugins/Oculars/src/ui_ocularDialog.h:1466
-#: plugins/Oculars/src/ui_ocularDialog.h:1482
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 #: plugins/Satellites/src/ui_satellitesDialog.h:847
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "名前:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Eyepieces"
 msgstr "アイピース"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 "倍率が1より大きければ焦点距離を伸ばすバローレンズ(Barlow lens)、1より小さければ焦点距離を縮めるレデューサー(reducer) 。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1468
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "Multiplier:"
 msgstr "倍率:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
 msgid "Lenses"
 msgstr "補正レンズ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1472
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
 msgid "Resolution y (pixels):"
 msgstr "y方向解像度(ピクセル):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
 msgid "Pixel height (micron):"
 msgstr "y方向画素ピッチ(μm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr "これは、イメージングセンサー(CCD)の中心からプリズムの下端までの距離です"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Prism/CCD distance (mm):"
 msgstr "プリズム/CCDの距離(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1478
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
 msgid "Off-Axis guider"
 msgstr "オフアックス・ガイド"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Binning y:"
 msgstr "y方向ビニング:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1480
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Chip width (mm):"
 msgstr "チップの幅(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Pixel width (micron):"
 msgstr "x方向画素ピッチ(μm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Rotation Angle (degrees):"
 msgstr "回転角(度):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Resolution x (pixels):"
 msgstr "x方向解像度(ピクセル):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Position angle (degrees):"
 msgstr "位置角(度):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid "Prism/CCD height (mm):"
 msgstr "プリズム/CCDの高さ(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 msgid "Binning x:"
 msgstr "x方向ビニング:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Chip height (mm):"
 msgstr "チップの高さ(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Prism/CCD width (mm):"
 msgstr "プリズム/CCDの幅(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Sensors"
 msgstr "CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Horizontal flip"
 msgstr "左右反転"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Vertical flip"
 msgstr "上下反転"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1496
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Equatorial Mount"
 msgstr "赤道儀"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:416
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Telescopes"
@@ -13510,447 +13554,451 @@ msgid ""
 msgstr "古いsatellites.jsonファイルとは互換性がありません - デフォルトファイルを使用します"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2194
+#: plugins/Satellites/src/Satellites.cpp:2198
 msgid "visual"
 msgstr "可視衛星"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2196
+#: plugins/Satellites/src/Satellites.cpp:2200
 msgid "scientific"
 msgstr "科学衛星"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2198
+#: plugins/Satellites/src/Satellites.cpp:2202
 msgid "communications"
 msgstr "通信衛星"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2200
+#: plugins/Satellites/src/Satellites.cpp:2204
 msgid "navigation"
 msgstr "航法衛星"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2202
+#: plugins/Satellites/src/Satellites.cpp:2206
 msgid "amateur"
 msgstr "アマチュア無線衛星"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2204
+#: plugins/Satellites/src/Satellites.cpp:2208
 msgid "weather"
 msgstr "気象衛星"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2206
+#: plugins/Satellites/src/Satellites.cpp:2210
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2208
+#: plugins/Satellites/src/Satellites.cpp:2212
 msgid "geostationary"
 msgstr "測地衛星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2210
+#: plugins/Satellites/src/Satellites.cpp:2214
 msgid "non-operational"
 msgstr "実験衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2212
+#: plugins/Satellites/src/Satellites.cpp:2216
 msgid "gps"
 msgstr "GPS衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2214
+#: plugins/Satellites/src/Satellites.cpp:2218
 msgid "glonass"
 msgstr "GLONASS衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2216
+#: plugins/Satellites/src/Satellites.cpp:2220
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2218
+#: plugins/Satellites/src/Satellites.cpp:2222
 msgid "galileo"
 msgstr "ガリレオ衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2220
+#: plugins/Satellites/src/Satellites.cpp:2224
 msgid "iridium"
 msgstr "イリジウム衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2222
+#: plugins/Satellites/src/Satellites.cpp:2226
 msgid "iridium next"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2224
+#: plugins/Satellites/src/Satellites.cpp:2228
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2228
+#: plugins/Satellites/src/Satellites.cpp:2232
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2230
+#: plugins/Satellites/src/Satellites.cpp:2234
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2232
+#: plugins/Satellites/src/Satellites.cpp:2236
 msgid "stations"
 msgstr "宇宙ステーション"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2234
+#: plugins/Satellites/src/Satellites.cpp:2238
 msgid "education"
 msgstr "教育衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2236
+#: plugins/Satellites/src/Satellites.cpp:2240
 msgid "observatory"
 msgstr "観測衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2238
+#: plugins/Satellites/src/Satellites.cpp:2242
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2240
+#: plugins/Satellites/src/Satellites.cpp:2244
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2242
+#: plugins/Satellites/src/Satellites.cpp:2246
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2244
+#: plugins/Satellites/src/Satellites.cpp:2248
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2246
+#: plugins/Satellites/src/Satellites.cpp:2250
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2248
+#: plugins/Satellites/src/Satellites.cpp:2252
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2250
+#: plugins/Satellites/src/Satellites.cpp:2254
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2252
+#: plugins/Satellites/src/Satellites.cpp:2256
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2254
+#: plugins/Satellites/src/Satellites.cpp:2258
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2256
+#: plugins/Satellites/src/Satellites.cpp:2260
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2261
+#: plugins/Satellites/src/Satellites.cpp:2265
 msgid "The Hubble Space Telescope"
 msgstr "ハッブル宇宙望遠鏡"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2263
+#: plugins/Satellites/src/Satellites.cpp:2267
 msgid "The International Space Station"
 msgstr "国際宇宙ステーション"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2265
+#: plugins/Satellites/src/Satellites.cpp:2269
 msgid "China's first space station"
 msgstr "中国第1宇宙ステーション"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2267
+#: plugins/Satellites/src/Satellites.cpp:2271
 msgid "The russian space radio telescope RadioAstron"
 msgstr "ロシア宇宙電波望遠鏡ラジオアストロン"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2269
+#: plugins/Satellites/src/Satellites.cpp:2273
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "インテグラル"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2271
+#: plugins/Satellites/src/Satellites.cpp:2275
 msgid "The Gamma-Ray Observatory"
 msgstr "ガンマ線観測衛星"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2273
+#: plugins/Satellites/src/Satellites.cpp:2277
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2275
+#: plugins/Satellites/src/Satellites.cpp:2279
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2277
+#: plugins/Satellites/src/Satellites.cpp:2281
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2281
+#: plugins/Satellites/src/Satellites.cpp:2285
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2287
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2289
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2291
 msgid "The Chandra X-ray Observatory"
 msgstr "チャンドラX線観測衛星"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2295
 msgid "ISS (ZARYA)"
 msgstr "ISS(ザーリャ)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2297
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2299
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2301
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2303
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2305
 msgid "TIANGONG 1"
 msgstr "天宮1号"
 
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:291
 msgid "International Designator"
 msgstr "国際標識"
 
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 msgid "artificial satellite"
 msgstr "人工衛星"
 
-#: plugins/Satellites/src/Satellite.cpp:302
+#: plugins/Satellites/src/Satellite.cpp:303
 msgid "Approx. magnitude"
 msgstr "概算の光度"
 
-#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:305
 msgid "extincted to"
 msgstr "減光後"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:316
 msgid "Range"
 msgstr "観測者からの距離"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:317
+#: plugins/Satellites/src/Satellite.cpp:318
 msgid "Range rate"
 msgstr "距離の変化率"
 
-#: plugins/Satellites/src/Satellite.cpp:321
+#: plugins/Satellites/src/Satellite.cpp:322
 msgid "Perigee/apogee altitudes"
 msgstr "近地点高度/遠地点高度"
 
+#: plugins/Satellites/src/Satellite.cpp:336
+msgid "Approx. angular size"
+msgstr ""
+
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:329
+#: plugins/Satellites/src/Satellite.cpp:345
 msgctxt "frequency"
 msgid "rpd"
 msgstr "周/日"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:347
 msgctxt "period"
 msgid "min"
 msgstr "分"
 
-#: plugins/Satellites/src/Satellite.cpp:333
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "Orbital period"
 msgstr "軌道周期"
 
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:355
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Inclination"
 msgstr "軌道傾斜角"
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:359
 msgid "SubPoint (Lat./Long.)"
 msgstr "サブポイント (緯度/経度)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:373
 msgid "TEME coordinates"
 msgstr "TEME座標位置"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:364
+#: plugins/Satellites/src/Satellite.cpp:380
 msgid "TEME velocity"
 msgstr "TEME座標速度"
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:389
 msgid "Sun reflection angle"
 msgstr "太陽光の反射角度"
 
-#: plugins/Satellites/src/Satellite.cpp:381
-#: plugins/Satellites/src/Satellite.cpp:488
+#: plugins/Satellites/src/Satellite.cpp:397
+#: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "不明"
 
-#: plugins/Satellites/src/Satellite.cpp:388
+#: plugins/Satellites/src/Satellite.cpp:404
 msgctxt "at time"
 msgid "at"
 msgstr "時刻"
 
-#: plugins/Satellites/src/Satellite.cpp:390
+#: plugins/Satellites/src/Satellite.cpp:406
 msgid "Last updated TLE"
 msgstr "TLEの最終更新"
 
-#: plugins/Satellites/src/Satellite.cpp:391
+#: plugins/Satellites/src/Satellite.cpp:407
 msgid "Epoch of the TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:409
 msgid "Radar cross-section (RCS)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "Group"
 msgstr "衛星の種類"
 
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "Groups"
 msgstr "衛星の種類"
 
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:423
 msgid "Operational status"
 msgstr "運用状態"
 
-#: plugins/Satellites/src/Satellite.cpp:414
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "The satellite and the observer are in sunlight."
 msgstr "衛星、観測者ともに昼光下(光学観測不可)。"
 
-#: plugins/Satellites/src/Satellite.cpp:417
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "The satellite is visible."
 msgstr "光学観測可能。"
 
-#: plugins/Satellites/src/Satellite.cpp:420
+#: plugins/Satellites/src/Satellite.cpp:436
 msgid "The satellite is eclipsed."
 msgstr "地球の影に入っている(光学観測不可)。"
 
-#: plugins/Satellites/src/Satellite.cpp:423
+#: plugins/Satellites/src/Satellite.cpp:439
 msgid "The satellite is not visible"
 msgstr "地平線下(観測不可能)"
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:447
 msgid "Radio communication"
 msgstr "電波通信"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:450 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:466 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:453
+#: plugins/Satellites/src/Satellite.cpp:469
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:733
+#: plugins/Satellites/src/Satellite.cpp:749
 msgctxt "operational status"
 msgid "operational"
 msgstr "運用中"
 
-#: plugins/Satellites/src/Satellite.cpp:734
+#: plugins/Satellites/src/Satellite.cpp:750
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "運用終了"
 
-#: plugins/Satellites/src/Satellite.cpp:735
+#: plugins/Satellites/src/Satellite.cpp:751
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "部分的に運用中"
 
-#: plugins/Satellites/src/Satellite.cpp:736
+#: plugins/Satellites/src/Satellite.cpp:752
 msgctxt "operational status"
 msgid "standby"
 msgstr "準備中"
 
-#: plugins/Satellites/src/Satellite.cpp:737
+#: plugins/Satellites/src/Satellite.cpp:753
 msgctxt "operational status"
 msgid "spare"
 msgstr "予備機"
 
-#: plugins/Satellites/src/Satellite.cpp:738
+#: plugins/Satellites/src/Satellite.cpp:754
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "運用延長"
 
-#: plugins/Satellites/src/Satellite.cpp:739
+#: plugins/Satellites/src/Satellite.cpp:755
 msgctxt "operational status"
 msgid "decayed"
 msgstr "老朽化"
 
-#: plugins/Satellites/src/Satellite.cpp:741
+#: plugins/Satellites/src/Satellite.cpp:757
 msgctxt "operational status"
 msgid "unknown"
 msgstr "不明"
@@ -18218,8 +18266,8 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid ""
 "Naron is one of the names given to the Neretva river in Herzegovina (and "
-"partly in Croatia) in antiquity orginating with the Celts who called it Nera"
-" Etwa which means the Flowing Divinity."
+"partly in Croatia) in antiquity originating with the Celts who called it "
+"Nera Etwa which means the Flowing Divinity."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
@@ -19201,7 +19249,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:452
 msgid ""
 "Rosalía de Castro was a significant figure of Galician culture and prominent"
-" Spanish writer, whose pioneeting work often referenced the night and "
+" Spanish writer, whose pioneering work often referenced the night and "
 "celestial objects."
 msgstr ""
 

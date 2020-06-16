@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-03 23:51+0700\n"
+"POT-Creation-Date: 2020-06-16 10:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Đinh Công Thắng <dinhthang1205@gmail.com>, 2018\n"
 "Language-Team: Vietnamese (https://www.transifex.com/stellarium/teams/80998/vi/)\n"
@@ -39,7 +39,7 @@ msgstr "đánh dấu tùy chỉnh"
 #: src/core/modules/Planet.cpp:478 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:218 src/core/modules/StarWrapper.cpp:221
 #: src/gui/AstroCalcDialog.cpp:851 src/ui_configurationDialog.h:1653
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
@@ -271,9 +271,9 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1305 src/core/modules/Planet.cpp:674
-#: src/core/modules/Planet.cpp:863 src/gui/AstroCalcDialog.cpp:6085
-#: plugins/Satellites/src/Satellite.cpp:317
-#: plugins/Satellites/src/Satellite.cpp:364
+#: src/core/modules/Planet.cpp:956 src/gui/AstroCalcDialog.cpp:6085
+#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:380
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
@@ -473,9 +473,9 @@ msgstr "Giảm ô nhiễm ánh sáng"
 msgid "Cyclic change in light pollution"
 msgstr "Sự thay đổi ô nhiễm ánh sáng theo chu kỳ"
 
-#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:461
+#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -493,7 +493,7 @@ msgstr "Tác giả"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:409
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -573,8 +573,8 @@ msgstr "Đường kính"
 #: src/core/modules/Planet.cpp:655 src/core/modules/Planet.cpp:753
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
 #: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6005
-#: plugins/Satellites/src/Satellite.cpp:313
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:314
+#: plugins/Satellites/src/Satellite.cpp:373
 msgctxt "distance"
 msgid "km"
 msgstr "km"
@@ -1812,7 +1812,7 @@ msgstr "Vật thể xa"
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1421
+#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:931
 msgid "Attention!"
 msgstr ""
 
@@ -1957,70 +1957,96 @@ msgstr ""
 msgid "Equatorial diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:792 src/core/modules/Planet.cpp:800
+#: src/core/modules/Planet.cpp:791 src/core/modules/Planet.cpp:799
 #: src/gui/AstroCalcDialog.cpp:3050 src/gui/AstroCalcDialog.cpp:3108
 #: src/ui_configurationDialog.h:1681
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:793 src/core/modules/Planet.cpp:801
+#: src/core/modules/Planet.cpp:792 src/core/modules/Planet.cpp:800
 #: src/gui/AstroCalcDialog.cpp:3060 src/gui/AstroCalcDialog.cpp:3118
-#: plugins/Satellites/src/Satellite.cpp:369
+#: plugins/Satellites/src/Satellite.cpp:385
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:795 src/core/modules/Planet.cpp:803
+#: src/core/modules/Planet.cpp:794 src/core/modules/Planet.cpp:802
 msgid "Illuminated"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:821 src/core/modules/Planet.cpp:871
+#: src/core/modules/Planet.cpp:820 src/core/modules/Planet.cpp:964
 #: src/core/modules/StarWrapper.cpp:305 src/gui/AstroCalcDialog.cpp:6102
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:830
+#: src/core/modules/Planet.cpp:829
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:839
+#: src/core/modules/Planet.cpp:838
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:880
+#: src/core/modules/Planet.cpp:973
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:882
+#: src/core/modules/Planet.cpp:975
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:888
+#: src/core/modules/Planet.cpp:981
 msgid "The period of rotation is chaotic"
 msgstr "Chu kỳ quay hỗn độn"
 
-#: src/core/modules/Planet.cpp:894
+#: src/core/modules/Planet.cpp:987
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:899
+#: src/core/modules/Planet.cpp:992
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:908
+#: src/core/modules/Planet.cpp:1001
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:913
+#: src/core/modules/Planet.cpp:1010
 msgid "Eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:994
+#: src/core/modules/Planet.cpp:1043
+msgid "Center of solar eclipse (Lat./Long.)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1056
+msgid "Shadow center point is"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1058
+msgid "km towards azimuth"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1062
+msgid "Magnitude of central eclipse"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1065
+msgctxt "type of solar eclipse"
+msgid "(annular)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1067
+msgctxt "type of solar eclipse"
+msgid "(total)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1150
 msgid "Penumbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:997
+#: src/core/modules/Planet.cpp:1153
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
@@ -3736,9 +3762,9 @@ msgstr "Các tác giả"
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: src/gui/ConfigurationDialog.cpp:1120 src/scripting/StelScriptMgr.cpp:471
+#: src/gui/ConfigurationDialog.cpp:1120 src/scripting/StelScriptMgr.cpp:472
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:533
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:704
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3758,9 +3784,9 @@ msgstr "Liên hệ"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: src/gui/ConfigurationDialog.cpp:1121 src/scripting/StelScriptMgr.cpp:466
+#: src/gui/ConfigurationDialog.cpp:1121 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:705
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -4317,7 +4343,7 @@ msgstr "Người thử nghiệm: %1"
 
 #: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4959,7 +4985,7 @@ msgstr "Góc phương vị"
 #: src/gui/AstroCalcDialog.cpp:1392 src/gui/AstroCalcDialog.cpp:1821
 #: src/gui/AstroCalcDialog.cpp:2702 src/gui/AstroCalcDialog.cpp:3209
 #: src/gui/AstroCalcDialog.cpp:3487 src/gui/AstroCalcDialog.cpp:3489
-#: plugins/Satellites/src/Satellite.cpp:319
+#: plugins/Satellites/src/Satellite.cpp:320
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1276
 msgid "Altitude"
 msgstr "Độ cao"
@@ -5967,12 +5993,12 @@ msgstr ""
 msgid "Date and Time in Gregorian calendar"
 msgstr "Ngày và giờ trong lịch Gregorian"
 
-#: src/scripting/StelScriptMgr.cpp:371 src/ui_configurationDialog.h:1559
+#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1559
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Nguyên bản"
 
-#: src/scripting/StelScriptMgr.cpp:476
+#: src/scripting/StelScriptMgr.cpp:477
 msgid "Shortcut"
 msgstr "Lối tắt"
 
@@ -5988,7 +6014,13 @@ msgstr ""
 msgid "Full-screen mode"
 msgstr "Toàn màn hình"
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:931
+msgid ""
+"Shortcuts have conflicts! Please press F7 after startup of planetarium and "
+"check follow problematic shortcuts"
+msgstr ""
+
+#: src/StelMainView.cpp:1008
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -5996,13 +6028,13 @@ msgstr ""
 "Không đủ phiên bản OpenGL. Vui lòng cập nhật trình điều khiển, phần cứng đồ "
 "họa, hoặc sử dụng tùy chọn --chế độ-góc (hoặc --chế độ-đỉnh bằng)."
 
-#: src/StelMainView.cpp:990
+#: src/StelMainView.cpp:1011
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Không đủ phiên bản OpenGL. Vui lòng cập nhật drivers, hoặc phần cứng đồ họa."
 
-#: src/StelMainView.cpp:1032
+#: src/StelMainView.cpp:1053
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6011,7 +6043,7 @@ msgstr ""
 "tiết. Bỏ qua và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục "
 "ở chế độ hạ thấp không?"
 
-#: src/StelMainView.cpp:1083
+#: src/StelMainView.cpp:1104
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6020,7 +6052,7 @@ msgstr ""
 " qua và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ"
 " xuống cấp không?"
 
-#: src/StelMainView.cpp:1143
+#: src/StelMainView.cpp:1164
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6029,7 +6061,7 @@ msgstr ""
 "và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ "
 "xuống cấp không?"
 
-#: src/StelMainView.cpp:1184
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6038,7 +6070,7 @@ msgstr ""
 "và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ "
 "xuống cấp không?"
 
-#: src/StelMainView.cpp:1293
+#: src/StelMainView.cpp:1314
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -6086,7 +6118,7 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet
 #. constellation (FLOCK and SKYSAT satellites)
-#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2226
+#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2230
 msgid "planet"
 msgstr "Hành tinh"
 
@@ -7837,10 +7869,10 @@ msgstr "&Sao chép"
 msgid "&Paste"
 msgstr "&Dán"
 
-#: src/translations.h:749 plugins/Oculars/src/ui_ocularDialog.h:1456
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
-#: plugins/Oculars/src/ui_ocularDialog.h:1492
+#: src/translations.h:749 plugins/Oculars/src/ui_ocularDialog.h:1522
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Delete"
 msgstr "Xóa"
 
@@ -10837,7 +10869,7 @@ msgstr "Tất cả có sẵn"
 msgid "Display no information"
 msgstr "Hiển thị không có thông tin"
 
-#: src/ui_configurationDialog.h:1614 plugins/Oculars/src/Oculars.cpp:2355
+#: src/ui_configurationDialog.h:1614 plugins/Oculars/src/Oculars.cpp:2383
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Không"
@@ -12535,7 +12567,7 @@ msgstr ""
 "tôi tính toán. Chúng tôi mong ước chúng tôi thì ở Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12555,7 +12587,7 @@ msgid "Links"
 msgstr "Liên kết"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12578,7 +12610,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:565
+#: plugins/Oculars/src/gui/OcularDialog.cpp:570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12599,7 +12631,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:567
+#: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12620,7 +12652,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12713,7 +12745,7 @@ msgid "Restore default settings"
 msgstr "Khôi phục cài đặt mặc định"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 #: plugins/Satellites/src/ui_satellitesDialog.h:883
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:439
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -12747,9 +12779,9 @@ msgstr "Hiển thị la bàn mang nhãn hiệu dọc theo đường chân trời
 msgid "Compass marks"
 msgstr "Đánh dấu la bàn"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1429
+#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1446
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
-#: plugins/Oculars/src/ui_ocularDialog.h:1364
+#: plugins/Oculars/src/ui_ocularDialog.h:1425
 msgid "Oculars"
 msgstr "Trực quan"
 
@@ -12763,238 +12795,238 @@ msgstr ""
 " đại và trường nhìn là mô phỏng). Nó cũng có thể hiển thị một khung hình cảm"
 " biến và một cảnh Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:920
+#: plugins/Oculars/src/Oculars.cpp:937
 msgid "Please select an object before switching to ocular view."
 msgstr "Vui lòng chọn một đối tượng trước khi chuyển sang xem bằng mắt"
 
-#: plugins/Oculars/src/Oculars.cpp:1026
+#: plugins/Oculars/src/Oculars.cpp:1043
 msgid "&Previous ocular"
 msgstr "&Trực quan trước đó"
 
-#: plugins/Oculars/src/Oculars.cpp:1027
+#: plugins/Oculars/src/Oculars.cpp:1044
 msgid "&Next ocular"
 msgstr "&Trực quan kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:1028
+#: plugins/Oculars/src/Oculars.cpp:1045
 msgid "Select &ocular"
 msgstr "Chọn &trực quan"
 
-#: plugins/Oculars/src/Oculars.cpp:1071
+#: plugins/Oculars/src/Oculars.cpp:1088
 msgid "Toggle &crosshair"
 msgstr "Chuyển đổi &khung nhắm"
 
-#: plugins/Oculars/src/Oculars.cpp:1081
+#: plugins/Oculars/src/Oculars.cpp:1098
 msgid "Configure &Oculars"
 msgstr "Cấu hình &Trực quan"
 
-#: plugins/Oculars/src/Oculars.cpp:1090
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "Toggle &CCD"
 msgstr "Chuyển đổi &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1098
+#: plugins/Oculars/src/Oculars.cpp:1115
 msgid "Toggle &Telrad"
 msgstr "Chuyển đổi &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1107
+#: plugins/Oculars/src/Oculars.cpp:1124
 msgid "&Previous CCD"
 msgstr "& CCD trước"
 
-#: plugins/Oculars/src/Oculars.cpp:1108
+#: plugins/Oculars/src/Oculars.cpp:1125
 msgid "&Next CCD"
 msgstr "&CCD kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:1109
+#: plugins/Oculars/src/Oculars.cpp:1126
 msgid "&Select CCD"
 msgstr "&chọn CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1131
+#: plugins/Oculars/src/Oculars.cpp:1148
 msgid "&Rotate CCD"
 msgstr "&xoay CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1153
+#: plugins/Oculars/src/Oculars.cpp:1170
 msgid "&Reset rotation"
 msgstr "&Cài đặt lại sự xoay"
 
-#: plugins/Oculars/src/Oculars.cpp:1430
-#: plugins/Oculars/src/ui_ocularDialog.h:1393
+#: plugins/Oculars/src/Oculars.cpp:1447
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Ocular view"
 msgstr "Xem bằng mắt"
 
-#: plugins/Oculars/src/Oculars.cpp:1431
+#: plugins/Oculars/src/Oculars.cpp:1448
 msgid "Oculars popup menu"
 msgstr "Trình đơn tự động Trực quan"
 
-#: plugins/Oculars/src/Oculars.cpp:1432
+#: plugins/Oculars/src/Oculars.cpp:1449
 msgid "Show crosshairs"
 msgstr "Hiển thị khung ngắm"
 
-#: plugins/Oculars/src/Oculars.cpp:1433
+#: plugins/Oculars/src/Oculars.cpp:1450
 msgid "Image sensor frame"
 msgstr "Khung hình ảnh cảm biến"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1451
 msgid "Telrad sight"
 msgstr "Tầm nhìn Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1435
+#: plugins/Oculars/src/Oculars.cpp:1452
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1436
+#: plugins/Oculars/src/Oculars.cpp:1453
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1438
+#: plugins/Oculars/src/Oculars.cpp:1455
 msgid "Select next telescope"
 msgstr "Chọn kính thiên văn kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:1440
+#: plugins/Oculars/src/Oculars.cpp:1457
 msgid "Select previous telescope"
 msgstr "Chọn kính thiên văn trước"
 
-#: plugins/Oculars/src/Oculars.cpp:1442
+#: plugins/Oculars/src/Oculars.cpp:1459
 msgid "Select next eyepiece"
 msgstr "Chọn kính mắt kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:1444
+#: plugins/Oculars/src/Oculars.cpp:1461
 msgid "Select previous eyepiece"
 msgstr "Chọn kính mắt kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:1445
+#: plugins/Oculars/src/Oculars.cpp:1462
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1446
+#: plugins/Oculars/src/Oculars.cpp:1463
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1651
+#: plugins/Oculars/src/Oculars.cpp:1668
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Xích kinh/Xích vĩ (J2000.0) của việc đi ngang qua"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1662
+#: plugins/Oculars/src/Oculars.cpp:1679
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1681
+#: plugins/Oculars/src/Oculars.cpp:1698
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1906
+#: plugins/Oculars/src/Oculars.cpp:1934
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1908
+#: plugins/Oculars/src/Oculars.cpp:1936
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1928
+#: plugins/Oculars/src/Oculars.cpp:1956
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Tiêu cự trực quan: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1935
+#: plugins/Oculars/src/Oculars.cpp:1963
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Trường nhìn biểu kiến Trực quan: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1946
+#: plugins/Oculars/src/Oculars.cpp:1974
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Lens #%1"
 msgstr "Thấu kính #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1978
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Thấu kính #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1955
+#: plugins/Oculars/src/Oculars.cpp:1983
 msgid "Lens: none"
 msgstr "Ống kính: không"
 
-#: plugins/Oculars/src/Oculars.cpp:1970 plugins/Oculars/src/Oculars.cpp:2030
+#: plugins/Oculars/src/Oculars.cpp:1998 plugins/Oculars/src/Oculars.cpp:2058
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:770
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Kính thiên văn #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
+#: plugins/Oculars/src/Oculars.cpp:2007
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:869
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Độ phóng đại: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:2014
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Độ mở thị kính: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:2021
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 #, qt-format
 msgid "FOV: %1"
 msgstr "Trường nhìn: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2014
+#: plugins/Oculars/src/Oculars.cpp:2042
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Kích thước: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2018
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:663
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Cảm biến #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2022
+#: plugins/Oculars/src/Oculars.cpp:2050
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Cảm biến #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/Oculars.cpp:2063
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:774
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Kính thiên văn #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2351
+#: plugins/Oculars/src/Oculars.cpp:2379
 msgid "&Lens"
 msgstr "&Ống kính"
 
-#: plugins/Oculars/src/Oculars.cpp:2352
+#: plugins/Oculars/src/Oculars.cpp:2380
 msgid "&Previous lens"
 msgstr "&Ống kính trước"
 
-#: plugins/Oculars/src/Oculars.cpp:2353
+#: plugins/Oculars/src/Oculars.cpp:2381
 msgid "&Next lens"
 msgstr "&Ống kính kế tiếp"
 
-#: plugins/Oculars/src/Oculars.cpp:2383
+#: plugins/Oculars/src/Oculars.cpp:2411
 msgid "&Telescope"
 msgstr "&Kính thiên văn"
 
-#: plugins/Oculars/src/Oculars.cpp:2384
+#: plugins/Oculars/src/Oculars.cpp:2412
 msgid "&Previous telescope"
 msgstr "&Kính thiên văn trước"
 
-#: plugins/Oculars/src/Oculars.cpp:2385
+#: plugins/Oculars/src/Oculars.cpp:2413
 msgid "&Next telescope"
 msgstr "&Kính thiên van kế tiếp"
 
@@ -13200,53 +13232,53 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "tFOV:"
 msgstr "Trường nhìn thực"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 msgid "Magnification factor:"
 msgstr "Hệ số phóng đại:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Diameter:"
 msgstr "Đường kính:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:518
-#: plugins/Oculars/src/ui_ocularDialog.h:1460
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "aFOV:"
 msgstr "Trường nhìn biểu kiến:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:519
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
-#: plugins/Oculars/src/ui_ocularDialog.h:1498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Focal length:"
 msgstr "Tiêu cự:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "Field stop:"
 msgstr "Phạm vi dừng:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "Oculars Plug-in"
 msgstr "Trình cắm Trực quan"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Barlow lens feature"
 msgstr "Tính năng ống kính Barlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Sensor crop overlay feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:545
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Overview"
 msgstr "Tổng quan"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13258,11 +13290,11 @@ msgstr ""
 "kính thiên văn, tốt như cảm biến CCD. Lần đầu tiên bạn chạy ứng dụng sẽ đưa "
 "đến một vài mẫu để có được sự bắt đầu của bạn."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Bạn có thể chọn tỉ lệ hình ảnh mà bạn nhìn thấy trên màn hình."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
+#: plugins/Oculars/src/gui/OcularDialog.cpp:554
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -13270,7 +13302,7 @@ msgstr ""
 "Điều này được dự định để cho bạn thấy một so sánh tốt hơn về những gì một "
 "thị kính / kính thiên văn kết hợp sẽ như thế nào khi so sánh với nhau."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -13279,7 +13311,7 @@ msgstr ""
 "khác nhau sẽ cho ra hai độ mở thị kính khác nhau, thay đổi phần nào ánh "
 "nhìn."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -13287,7 +13319,7 @@ msgstr ""
 "Sự đánh đổi của điều này là đây, với hình ảnh thu nhỏ, một phần lớn của màn "
 "hình có thể bị lãng phí."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
@@ -13295,11 +13327,11 @@ msgstr ""
 "Vì vậy, tôi khuyên bạn nên bỏ nó đi, trừ khi bạn cảm thấy có một nhu cầu về "
 "nó."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "You can toggle a crosshair in the view."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -13312,30 +13344,30 @@ msgstr ""
 "của 0.5%1, 2.0%1, và 4.0%1, giúp bạn thấy những gì mà bạn mong đợi để nhìn "
 "thấy với mắt thường thông qua ống nhắm Telrad (hoặc tương tự)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "Nếu bạn tìm thấy bất kí vấn đề nào, vui lòng cho tôi biết. Hãy thưởng thức!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 msgid "Hot Keys"
 msgstr "Phím nóng"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1366
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
 msgid "Interface"
 msgstr "Giao diện"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1370
+#: plugins/Oculars/src/ui_ocularDialog.h:1431
 msgid "Arrow button scale (requires restart)"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1372
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -13343,219 +13375,231 @@ msgstr ""
 "Đánh dấu nó nếu bạn muốn giá trị trường nhìn giống như ban đầu của "
 "Stellarium"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1374
+#: plugins/Oculars/src/ui_ocularDialog.h:1435
 msgid "Restore FOV to initial values"
 msgstr "Khôi phục trường nhìn lại giá trị ban đầu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1375
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
 msgid "Show resolution criteria"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1376
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "On-screen control panel"
 msgstr "Bảng điều khiển hiện trên màn hình"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1377
+#: plugins/Oculars/src/ui_ocularDialog.h:1438
 msgid "Font size"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1379
+#: plugins/Oculars/src/ui_ocularDialog.h:1440
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1381
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Restore direction to initial values"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1383
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
 msgid "Color for ocular circles and sensor frames"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1386
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "Line Color"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1388
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1391
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Text Color"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1392
+#: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "Show oculars button on toolbar"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1395
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Show border circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1397
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Show FOV outline"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1398
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Scale image circle"
 msgstr "Tỉ lệ vòng tròng hình ảnh"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1399
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Hide grids and lines when enabled"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1400
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
 msgid "Enable only if an object is selected"
 msgstr "Chỉ cho phép một đối tượng được chọn"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1402
+#: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1404
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Use semi-transparent mask"
 msgstr "Sử dụng màn che nửa trong suốt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1406
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1408
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Show compass rose"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1410
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "Áp dụng giới hạn độ sáng của sao cho các khẩu độ khác nhau của kính thiên "
 "văn"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1412
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid "Limit stellar magnitude"
 msgstr "Giới hạn độ sáng sao"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1414
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1416
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Align crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1417
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Sensor view"
 msgstr "Xem cảm biến"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
+msgid ""
+"Enable a square overlay showing the effective size of a number of pixels."
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
+msgid "Show sensor crop overlay"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1484
+msgid "Color for focuser overlay line"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
+msgid "Show focuser overlay"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1421
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Enable automatic switch of mount type"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1422
-msgid "Overlay size (px)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
-msgid "Horizontal size (width)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1427
-msgid "Vertical size (height)"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Enable autozoom when switching CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1492
+msgid "Overlay size (px)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1494
+msgid "Horizontal size (width)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
+msgid "Vertical size (height)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Sử dụng độ và phút cho trường nhìn của CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-msgid ""
-"Enable a square overlay showing the effective size of a number of pixels."
+#: plugins/Oculars/src/ui_ocularDialog.h:1500
+msgid "Use size of focuser:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
-msgid "Show sensor crop overlay"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1435
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "Telrad view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "FOV for circle 1 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1444
+#: plugins/Oculars/src/ui_ocularDialog.h:1510
 msgid "FOV for circle 2 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1447
+#: plugins/Oculars/src/ui_ocularDialog.h:1513
 msgid "FOV for circle 3 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1450
+#: plugins/Oculars/src/ui_ocularDialog.h:1516
 msgid "FOV for circle 4 in degrees"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Restore original Telrad FOV"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1519
 msgid "Enable autozoom when switching Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1454
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Tổng quát"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
-#: plugins/Oculars/src/ui_ocularDialog.h:1464
-#: plugins/Oculars/src/ui_ocularDialog.h:1470
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1521
+#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 msgid "Add"
 msgstr "Thêm"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1524
 msgid "Has permanent cross-hairs"
 msgstr "Có khung nhìn cố định"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid "Binoculars"
 msgstr "Ống nhòm"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1462
-#: plugins/Oculars/src/ui_ocularDialog.h:1466
-#: plugins/Oculars/src/ui_ocularDialog.h:1482
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 #: plugins/Satellites/src/ui_satellitesDialog.h:847
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "Tên:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Eyepieces"
 msgstr "Mắt kính"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -13563,93 +13607,93 @@ msgstr ""
 "Giá trị của hệ số nhân >1 làm tăng chiều dài tiêu cự (ống kính Barlow). Giá "
 "trị của hệ số nhân <1 làm giảm chiều dài tiêu cự (ống kính Shapely)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1468
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "Multiplier:"
 msgstr "Hệ số nhân"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
 msgid "Lenses"
 msgstr "Thấu kính"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1472
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
 msgid "Resolution y (pixels):"
 msgstr "Độ phân giải y (pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
 msgid "Pixel height (micron):"
 msgstr "Chiều cao pixel (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Prism/CCD distance (mm):"
 msgstr "Khoảng cách lăng kính/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1478
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
 msgid "Off-Axis guider"
 msgstr "Bộ điều hướng ngoài trục"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Binning y:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1480
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Chip width (mm):"
 msgstr "Chiều rộng Chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Pixel width (micron):"
 msgstr "Chiều rộng pixel (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Rotation Angle (degrees):"
 msgstr "Góc xoay (độ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Resolution x (pixels):"
 msgstr "Độ phân giải x (pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Position angle (degrees):"
 msgstr "Vị trí góc (độ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid "Prism/CCD height (mm):"
 msgstr "Chiều cao lăng kính/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 msgid "Binning x:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Chip height (mm):"
 msgstr "Chiều cao Chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Prism/CCD width (mm):"
 msgstr "Chiều rộng lăng kính/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Sensors"
 msgstr "Cảm biến"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Horizontal flip"
 msgstr "Lật ngang"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Vertical flip"
 msgstr "Lật dọc"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1496
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Equatorial Mount"
 msgstr "Đỉnh Xích đạo"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:416
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Telescopes"
@@ -13697,447 +13741,451 @@ msgstr ""
 " tin mặc định"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2194
+#: plugins/Satellites/src/Satellites.cpp:2198
 msgid "visual"
 msgstr "Có thể nhìn thấy"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2196
+#: plugins/Satellites/src/Satellites.cpp:2200
 msgid "scientific"
 msgstr "Khoa học"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2198
+#: plugins/Satellites/src/Satellites.cpp:2202
 msgid "communications"
 msgstr "Viễn thông"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2200
+#: plugins/Satellites/src/Satellites.cpp:2204
 msgid "navigation"
 msgstr "Điều hướng"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2202
+#: plugins/Satellites/src/Satellites.cpp:2206
 msgid "amateur"
 msgstr "Nghiệp dư"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2204
+#: plugins/Satellites/src/Satellites.cpp:2208
 msgid "weather"
 msgstr "Thời tiết"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2206
+#: plugins/Satellites/src/Satellites.cpp:2210
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2208
+#: plugins/Satellites/src/Satellites.cpp:2212
 msgid "geostationary"
 msgstr "Địa tĩnh"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2210
+#: plugins/Satellites/src/Satellites.cpp:2214
 msgid "non-operational"
 msgstr "Không hoạt động"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2212
+#: plugins/Satellites/src/Satellites.cpp:2216
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2214
+#: plugins/Satellites/src/Satellites.cpp:2218
 msgid "glonass"
 msgstr "Hệ thống vệ tinh định vị toàn cầu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2216
+#: plugins/Satellites/src/Satellites.cpp:2220
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2218
+#: plugins/Satellites/src/Satellites.cpp:2222
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2220
+#: plugins/Satellites/src/Satellites.cpp:2224
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2222
+#: plugins/Satellites/src/Satellites.cpp:2226
 msgid "iridium next"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2224
+#: plugins/Satellites/src/Satellites.cpp:2228
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2228
+#: plugins/Satellites/src/Satellites.cpp:2232
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2230
+#: plugins/Satellites/src/Satellites.cpp:2234
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2232
+#: plugins/Satellites/src/Satellites.cpp:2236
 msgid "stations"
 msgstr "trạm không gian"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2234
+#: plugins/Satellites/src/Satellites.cpp:2238
 msgid "education"
 msgstr "giáo dục"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2236
+#: plugins/Satellites/src/Satellites.cpp:2240
 msgid "observatory"
 msgstr "trạm quan sát"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2238
+#: plugins/Satellites/src/Satellites.cpp:2242
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2240
+#: plugins/Satellites/src/Satellites.cpp:2244
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2242
+#: plugins/Satellites/src/Satellites.cpp:2246
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2244
+#: plugins/Satellites/src/Satellites.cpp:2248
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2246
+#: plugins/Satellites/src/Satellites.cpp:2250
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2248
+#: plugins/Satellites/src/Satellites.cpp:2252
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2250
+#: plugins/Satellites/src/Satellites.cpp:2254
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2252
+#: plugins/Satellites/src/Satellites.cpp:2256
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2254
+#: plugins/Satellites/src/Satellites.cpp:2258
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2256
+#: plugins/Satellites/src/Satellites.cpp:2260
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2261
+#: plugins/Satellites/src/Satellites.cpp:2265
 msgid "The Hubble Space Telescope"
 msgstr "Kính viễn vọng không gian Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2263
+#: plugins/Satellites/src/Satellites.cpp:2267
 msgid "The International Space Station"
 msgstr "Trạm vũ trụ quốc tế"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2265
+#: plugins/Satellites/src/Satellites.cpp:2269
 msgid "China's first space station"
 msgstr "Trạm không gian đầu tiên của Trung Quốc"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2267
+#: plugins/Satellites/src/Satellites.cpp:2271
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2269
+#: plugins/Satellites/src/Satellites.cpp:2273
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2271
+#: plugins/Satellites/src/Satellites.cpp:2275
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2273
+#: plugins/Satellites/src/Satellites.cpp:2277
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2275
+#: plugins/Satellites/src/Satellites.cpp:2279
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2277
+#: plugins/Satellites/src/Satellites.cpp:2281
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2281
+#: plugins/Satellites/src/Satellites.cpp:2285
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2287
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2289
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2291
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2295
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2297
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2299
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2301
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2303
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2305
 msgid "TIANGONG 1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:291
 msgid "International Designator"
 msgstr "Chỉ định quốc tế"
 
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 msgid "artificial satellite"
 msgstr "Vệ tinh nhân tạo"
 
-#: plugins/Satellites/src/Satellite.cpp:302
+#: plugins/Satellites/src/Satellite.cpp:303
 msgid "Approx. magnitude"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:305
 msgid "extincted to"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:316
 msgid "Range"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:317
+#: plugins/Satellites/src/Satellite.cpp:318
 msgid "Range rate"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:321
+#: plugins/Satellites/src/Satellite.cpp:322
 msgid "Perigee/apogee altitudes"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:336
+msgid "Approx. angular size"
 msgstr ""
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:329
+#: plugins/Satellites/src/Satellite.cpp:345
 msgctxt "frequency"
 msgid "rpd"
 msgstr ""
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:347
 msgctxt "period"
 msgid "min"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:333
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "Orbital period"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:355
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Inclination"
 msgstr "Độ nghiêng"
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:359
 msgid "SubPoint (Lat./Long.)"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:373
 msgid "TEME coordinates"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:364
+#: plugins/Satellites/src/Satellite.cpp:380
 msgid "TEME velocity"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:389
 msgid "Sun reflection angle"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:381
-#: plugins/Satellites/src/Satellite.cpp:488
+#: plugins/Satellites/src/Satellite.cpp:397
+#: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "unknown date"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:388
+#: plugins/Satellites/src/Satellite.cpp:404
 msgctxt "at time"
 msgid "at"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:390
+#: plugins/Satellites/src/Satellite.cpp:406
 msgid "Last updated TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:391
+#: plugins/Satellites/src/Satellite.cpp:407
 msgid "Epoch of the TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:409
 msgid "Radar cross-section (RCS)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "Group"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "Groups"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:423
 msgid "Operational status"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:414
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "The satellite and the observer are in sunlight."
 msgstr "Vệ tinh và người quan sát thì trong ánh nắng mặt trời"
 
-#: plugins/Satellites/src/Satellite.cpp:417
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "The satellite is visible."
 msgstr "Vệ tinh thì nhìn thấy được"
 
-#: plugins/Satellites/src/Satellite.cpp:420
+#: plugins/Satellites/src/Satellite.cpp:436
 msgid "The satellite is eclipsed."
 msgstr "Vệ tinh bị che khuất"
 
-#: plugins/Satellites/src/Satellite.cpp:423
+#: plugins/Satellites/src/Satellite.cpp:439
 msgid "The satellite is not visible"
 msgstr "Vệ tinh không thể nhìn thấy"
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:447
 msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:450 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:466 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:453
+#: plugins/Satellites/src/Satellite.cpp:469
 msgctxt "frequency"
 msgid "kHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:733
+#: plugins/Satellites/src/Satellite.cpp:749
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:734
+#: plugins/Satellites/src/Satellite.cpp:750
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:735
+#: plugins/Satellites/src/Satellite.cpp:751
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:736
+#: plugins/Satellites/src/Satellite.cpp:752
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:737
+#: plugins/Satellites/src/Satellite.cpp:753
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:738
+#: plugins/Satellites/src/Satellite.cpp:754
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:739
+#: plugins/Satellites/src/Satellite.cpp:755
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:741
+#: plugins/Satellites/src/Satellite.cpp:757
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
@@ -18698,8 +18746,8 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid ""
 "Naron is one of the names given to the Neretva river in Herzegovina (and "
-"partly in Croatia) in antiquity orginating with the Celts who called it Nera"
-" Etwa which means the Flowing Divinity."
+"partly in Croatia) in antiquity originating with the Celts who called it "
+"Nera Etwa which means the Flowing Divinity."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
@@ -19681,7 +19729,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:452
 msgid ""
 "Rosalía de Castro was a significant figure of Galician culture and prominent"
-" Spanish writer, whose pioneeting work often referenced the night and "
+" Spanish writer, whose pioneering work often referenced the night and "
 "celestial objects."
 msgstr ""
 
