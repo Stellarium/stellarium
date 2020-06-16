@@ -479,13 +479,13 @@ void SolarSystem::loadPlanets()
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
 	{
-		qWarning() << "ERROR while loading ssystem_major.ini (unable to find data/ssystem_major.ini): " << endl;
+		qWarning() << "ERROR while loading ssystem_major.ini (unable to find data/ssystem_major.ini): " << StelUtils::getEndLineChar();
 		return;
 	}
 
 	if (!loadPlanets(solarSystemFile))
 	{
-		qWarning() << "ERROR while loading ssystem_major.ini: " << endl;
+		qWarning() << "ERROR while loading ssystem_major.ini: " << StelUtils::getEndLineChar();
 		return;
 	}
 
@@ -493,7 +493,7 @@ void SolarSystem::loadPlanets()
 	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem_minor.ini");
 	if (solarSystemFiles.isEmpty())
 	{
-		qWarning() << "ERROR while loading ssystem_minor.ini (unable to find data/ssystem_minor.ini): " << endl;
+		qWarning() << "ERROR while loading ssystem_minor.ini (unable to find data/ssystem_minor.ini): " << StelUtils::getEndLineChar();
 		return;
 	}
 
@@ -1043,8 +1043,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			rotObliquity = (M_PI_2f - de);
 			rotAscNode = (ra + M_PI_2f);
 
-			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << endl;
-			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
+			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << StelUtils::getEndLineChar();
+			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << StelUtils::getEndLineChar();
 		}
 
 		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.

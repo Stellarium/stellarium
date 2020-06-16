@@ -30,6 +30,7 @@
 #include "Lx200Command.hpp"
 #include "common/LogFile.hpp"
 #include "StelCore.hpp"
+#include "StelUtils.hpp"
 
 #include <QRegExp>
 #include <QStringList>
@@ -183,7 +184,7 @@ void TelescopeClientDirectLx200::communicationResetReceived(void)
 	next_pos_time = -0x8000000000000000LL;
 	
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::communicationResetReceived" << endl;
+	*log_file << Now() << "TelescopeClientDirectLx200::communicationResetReceived" << StelUtils::getEndLineChar();
 #endif
 
 	if (answers_received)
@@ -210,7 +211,7 @@ void TelescopeClientDirectLx200::raReceived(unsigned int ra_int)
 	answers_received = true;
 	last_ra = ra_int;
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::raReceived: " << ra_int << endl;
+	*log_file << Now() << "TelescopeClientDirectLx200::raReceived: " << ra_int << StelUtils::getEndLineChar();
 #endif
 }
 
@@ -220,7 +221,7 @@ void TelescopeClientDirectLx200::decReceived(unsigned int dec_int)
 {
 	answers_received = true;
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::decReceived: " << dec_int << endl;
+	*log_file << Now() << "TelescopeClientDirectLx200::decReceived: " << dec_int << StelUtils::getEndLineChar();
 #endif
 	const int lx200_status = 0;
 	sendPosition(last_ra, static_cast<int>(dec_int), lx200_status);

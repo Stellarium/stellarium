@@ -919,7 +919,13 @@ void StelMainView::init()
 		configuration->beginGroup("shortcuts");
 		QStringList keys = conf->allKeys();
 		for (strIterator = keys.constBegin(); strIterator != keys.constEnd(); ++strIterator)
+		{
+			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+			shortcuts << conf->value((*strIterator).toLocal8Bit().constData()).toString().split(" ", Qt::SkipEmptyParts);
+			#else
 			shortcuts << conf->value((*strIterator).toLocal8Bit().constData()).toString().split(" ", QString::SkipEmptyParts);
+			#endif
+		}
 		configuration->endGroup();
 		shortcuts.removeAll("\"\"");
 		for (strIterator = shortcuts.constBegin(); strIterator != shortcuts.constEnd(); ++strIterator)

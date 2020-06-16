@@ -437,8 +437,12 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		bool ok = true;
 		//make sure only spaces are the separator
 		QString line = stream.readLine().simplified();
-		//split line by space
+		//split line by space		
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QVector<QStringRef> splits = line.splitRef(' ',Qt::SkipEmptyParts);
+		#else
 		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
+		#endif
 		if(!splits.isEmpty())
 		{
 			const QStringRef& cmd = splits.at(0);
@@ -736,7 +740,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 		QString line = stream.readLine().trimmed();
 
 		//split line by whitespace
-		QVector<QStringRef> splits = line.splitRef(separator,QString::SkipEmptyParts);
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QVector<QStringRef> splits = line.splitRef(separator, Qt::SkipEmptyParts);
+		#else
+		QVector<QStringRef> splits = line.splitRef(separator, QString::SkipEmptyParts);
+		#endif
 		if(!splits.isEmpty())
 		{
 			const QStringRef& cmd = splits.at(0);

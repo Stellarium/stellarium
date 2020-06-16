@@ -634,7 +634,11 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 	if (moduleId.contains(":"))
 	{
 		subSet = true;
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		list = moduleId.split(":", Qt::SkipEmptyParts);
+		#else
 		list = moduleId.split(":", QString::SkipEmptyParts);
+		#endif
 		objModule = list.at(0);
 		objType = list.at(1);
 	}

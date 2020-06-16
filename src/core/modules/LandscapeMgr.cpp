@@ -631,7 +631,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	}
 	else
 	{
-		qWarning() << "Can't find a landscape with name=" << name << endl;
+		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
 }
@@ -1314,7 +1314,7 @@ bool LandscapeMgr::removeLandscape(const QString landscapeID)
 		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID
 				   << "could not be removed. "
 				   << "Some files were deleted, but not all."
-				   << endl
+				   << StelUtils::getEndLineChar()
 				   << "LandscapeMgr: You can delete manually" << QDir::cleanPath(landscapeDir.filePath(landscapeID));
 		emit errorRemoveManually(QDir::cleanPath(landscapeDir.filePath(landscapeID)));
 		return false;

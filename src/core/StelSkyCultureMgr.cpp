@@ -305,7 +305,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 			if (commentRx.exactMatch(record))
 				continue;
 
+			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+			QStringList ref = record.split(QRegExp("\\|"), Qt::KeepEmptyParts);
+			#else
 			QStringList ref = record.split(QRegExp("\\|"), QString::KeepEmptyParts);
+			#endif
 			// 1 - URID; 2 - Reference; 3 - URL (optional)
 			if (ref.at(2).isEmpty())
 				reference.append(QString("<li>%1</li>").arg(ref.at(1)));

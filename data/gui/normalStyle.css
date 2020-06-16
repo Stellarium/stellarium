@@ -324,8 +324,8 @@ QPushButton {
 }
 
 QPushButton:disabled {
-	color: rgb(61, 61, 61);
-	border: 1px solid rgba(61, 61, 61);
+        color: rgb(61, 61, 61);
+        border: 1px solid rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
 }
 
@@ -605,8 +605,8 @@ QSpinBox:disabled,
 QDoubleSpinBox:disabled,
 AngleSpinBox:disabled,
 QDateTimeEdit:disabled {
-	border: 1px solid rgba(31, 31, 31);
-	color: rgba(61, 61, 61);
+        border: 1px solid rgb(31, 31, 31);
+        color: rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
 }
 
@@ -624,8 +624,8 @@ QDoubleSpinBox::up-button:disabled,
 AngleSpinBox::up-button:disabled,
 QDateTimeEdit::up-button:disabled {
 	background: rgb(75, 75, 75);
-	border-top: 1px solid rgba(31, 31, 31);
-	border-right: 1px solid rgba(31, 31, 31);
+        border-top: 1px solid rgb(31, 31, 31);
+        border-right: 1px solid rgb(31, 31, 31);
 }
 
 QSpinBox::down-button:disabled,
@@ -634,8 +634,8 @@ QDoubleSpinBox::down-button:disabled,
 AngleSpinBox::down-button:disabled,
 QDateTimeEdit::down-button:disabled {
 	background: rgb(70, 70, 70);
-	border-bottom: 1px solid rgba(31, 31, 31);
-	border-right: 1px solid rgba(31, 31, 31);
+        border-bottom: 1px solid rgb(31, 31, 31);
+        border-right: 1px solid rgb(31, 31, 31);
 }
 
 /*
@@ -780,7 +780,7 @@ QSlider::groove:horizontal:disabled {
 
 QSlider::handle:horizontal:disabled {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
-	border: 1px solid rgba(64, 64, 64);
+        border: 1px solid rgb(64, 64, 64);
 }
 
 /**************************************************************************************************************

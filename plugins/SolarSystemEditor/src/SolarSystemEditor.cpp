@@ -238,7 +238,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile() const
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
 			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
-			         << endl << "Please remove the file manually.";
+				 << StelUtils::getEndLineChar() << "Please remove the file manually.";
 			return false;
 		}
 	}
@@ -1044,10 +1044,10 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			if (name.isEmpty())
 				continue;
 
-			output << endl << QString("[%1]").arg(sectionName) << endl;
+			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (auto key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;

@@ -1304,7 +1304,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
-		//qDebug() << endl << "search border(" << it->first << "):";
+		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
 			z->searchAround(core, zone,v,f,result);

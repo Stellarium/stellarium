@@ -945,7 +945,11 @@ QString SearchDialog::substituteGreek(const QString& keyString)
 		return getGreekLetterByName(keyString);
 	else
 	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QStringList nameComponents = keyString.split(" ", Qt::SkipEmptyParts);
+		#else
 		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
+		#endif
 		if(!nameComponents.empty())
 			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
 		return nameComponents.join(" ");

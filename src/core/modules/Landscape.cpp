@@ -78,7 +78,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	if (name.isEmpty())
 	{
 		qWarning() << "No valid landscape definition (no name) found for landscape ID "
-			<< landscapeId << ". No landscape in use." << endl;
+			<< landscapeId << ". No landscape in use." << StelUtils::getEndLineChar();
 		validLandscape = false;
 		return;
 	}

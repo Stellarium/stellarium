@@ -1812,7 +1812,11 @@ void Satellites::parseTleFile(QFile& openFile,
 
 QString Satellites::getSatIdFromLine2(const QString& line)
 {
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QString id = line.split(' ',  Qt::SkipEmptyParts).at(1).trimmed();
+	#else
 	QString id = line.split(' ',  QString::SkipEmptyParts).at(1).trimmed();
+	#endif
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.

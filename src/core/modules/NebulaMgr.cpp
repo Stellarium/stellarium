@@ -1191,7 +1191,11 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 		if (!record.isEmpty())
 		{
+			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+			QStringList list=record.split("\t", Qt::KeepEmptyParts);
+			#else
 			QStringList list=record.split("\t", QString::KeepEmptyParts);
+			#endif
 
 			id				= list.at(0).toInt();		// ID (inner identification number)
 			ra				= list.at(1).trimmed();

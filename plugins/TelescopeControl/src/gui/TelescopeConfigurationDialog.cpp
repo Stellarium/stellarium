@@ -489,7 +489,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	QStringList circleStrings;
 	if (ui->checkBoxCircles->isChecked() && !(rawCircles.isEmpty()))
 	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		circleStrings = rawCircles.simplified().remove(' ').split(',', Qt::SkipEmptyParts);
+		#else
 		circleStrings = rawCircles.simplified().remove(' ').split(',', QString::SkipEmptyParts);
+		#endif
 		circleStrings.removeDuplicates();
 		circleStrings.sort();
 

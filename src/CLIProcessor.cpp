@@ -24,13 +24,13 @@
 #include <QSettings>
 #include <QDateTime>
 #include <QDebug>
-#include <iostream>
 
 #include <QGuiApplication>
 #include <QStandardPaths>
 #include <QDir>
 
 #include <cstdio>
+#include <iostream>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
