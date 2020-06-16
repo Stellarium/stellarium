@@ -769,7 +769,6 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 	if ((flags&Elongation) && (englishName!="Sun") && (core->getCurrentPlanet()->englishName!="Sun"))
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
-
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
@@ -856,17 +855,17 @@ private:
 	double lat = 99; // initialize an impossible latitude to indicate no central eclipse
 
 public:
-	Vec3d point(const StelCore* core1)
+	Vec3d point(const StelCore* score)
 	{
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
-		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
+		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(score));
+		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(score));
 
-		sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
+		sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(score).length();
 		// Moon's distance in Earth's radius
-		mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core1).length() * AU / 6378.1366;
+		mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(score).length() * AU / 6378.1366;
 		// Greenwich Apparent Sidereal Time
-		gast = (get_apparent_sidereal_time(core1->getJD(), core1->getJDE()));
+		gast = (get_apparent_sidereal_time(score->getJD(), score->getJDE()));
 
 		if (raSun < 0.) raSun += M_PI * 2.;
 		if (raMoon < 0.) raMoon += M_PI * 2.;
@@ -945,6 +944,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	if (flags&Extra)
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const double angularSize = 2.*getAngularSize(core)*M_PI_180;
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
@@ -998,86 +998,79 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
-				oss << QString("%1: %2%").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2)) << "<br />";
+				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2));
 				PlanetP obj = eclObj.second;
 				if (onEarth && obj == ssystem->getMoon())
 				{
 					const double eclipseMagnitude =
-					  (0.5 * angularSize
-						+ (obj->getAngularSize(core) * M_PI_180) / obj->getInfoMap(core)["scale"].toDouble()
-						- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
-					  / angularSize;
-					oss << QString("%1: %2")
-							 .arg(q_("Eclipse magnitude"))
-							 .arg(QString::number(eclipseMagnitude, 'f', 3))
-						<< "<br />";
+							(0.5 * angularSize
+							 + (obj->getAngularSize(core) * M_PI_180) / obj->getInfoMap(core)["scale"].toDouble()
+							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
+							/ angularSize;
+					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3));
 				}
 			}
-		}
 
-		if (englishName == "Sun" && onEarth)
-		{
-			// Solar eclipse information
-			// Use geocentric coordinates
-			StelCore* core1 = StelApp::getInstance().getCore();
-			const bool useTopocentric = core1->getUseTopocentricCoordinates();
-			core1->setUseTopocentricCoordinates(false);
-			core1->update(0);
-
-			double raSun, deSun, raMoon, deMoon;
-			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
-			StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
-
-			// R.A. of the Sun
-			raSun = raSun / M_PI_180;
-			if (raSun < 0.) raSun += 360.;
-			// R.A. of the Moon
-			raMoon = (raMoon / M_PI_180);
-			if (raMoon < 0.) raMoon += 360.;
-
-			double raDiff = raMoon - raSun;
-			if (raDiff < 0.) raDiff += 360.;
-
-			if (raDiff < 3. || raDiff > 357.)
+			if (onEarth)
 			{
-				SolarEclipse center;
-				Vec3d pos = center.point(core1);
+				// Solar eclipse information
+				// Use geocentric coordinates
+				StelCore* core1 = StelApp::getInstance().getCore();
+				const bool useTopocentric = core1->getUseTopocentricCoordinates();
+				core1->setUseTopocentricCoordinates(false);
+				core1->update(0);
 
-				if (pos[0] < 90.) // only display when shadow axis is touching Earth
+				double raSun, deSun, raMoon, deMoon;
+				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
+
+				// R.A. of the Sun
+				raSun = raSun / M_PI_180;
+				if (raSun < 0.) raSun += 360.;
+				// R.A. of the Moon
+				raMoon = (raMoon / M_PI_180);
+				if (raMoon < 0.) raMoon += 360.;
+
+				double raDiff = raMoon - raSun;
+				if (raDiff < 0.) raDiff += 360.;
+				if (raDiff < 3. || raDiff > 357.)
 				{
-					oss << QString("%1: %2%3/%4%5")
-							 .arg(q_("Center of solar eclipse (Lat./Long.)"))
-							 .arg(pos[0], 5, 'f', 4)
-							 .arg(QChar(0x00B0))
-							 .arg(pos[1], 5, 'f', 4)
-							 .arg(QChar(0x00B0)) << "<br/>";
+					SolarEclipse center;
+					Vec3d pos = center.point(core1);
 
-					StelLocation loc = core->getCurrentLocation();
-					// distance between center point and current location
-					PlanetP Earth = GETSTELMODULE(SolarSystem)->getEarth();
-					Planet* myEarth;
-					myEarth = Earth.data();
-					double distance = StelLocation::distanceKm(myEarth, loc.longitude, loc.latitude, pos[1], pos[0]);
-					double azimuth = StelLocation::GetAzimuthForLocation(loc.longitude, loc.latitude, pos[1], pos[0]);
-					if (azimuth < 0) azimuth += 360.;
+					if (pos[0] < 90.) // only display when shadow axis is touching Earth
+					{
+						QString info = q_("Center of solar eclipse (Lat./Long.)");
+						if (withDecimalDegree)
+							oss << QString("%1: %2%3/%4%5<br />").arg(info).arg(pos[0], 5, 'f', 4).arg(QChar(0x00B0)).arg(pos[1], 5, 'f', 4).arg(QChar(0x00B0));
+						else
+							oss << QString("%1: %2/%3<br />").arg(info).arg(StelUtils::decDegToDmsStr(pos[0])).arg(StelUtils::decDegToDmsStr(pos[1]));
+						StelLocation loc = core->getCurrentLocation();
+						// distance between center point and current location
+						Planet* myEarth = earth.data();
+						double distance = StelLocation::distanceKm(myEarth, loc.longitude, loc.latitude, pos[1], pos[0]);
+						double azimuth = StelLocation::GetAzimuthForLocation(loc.longitude, loc.latitude, pos[1], pos[0]);
+						if (azimuth < 0) azimuth += 360.;
 
-					oss << QString("%1 %2 %3 %4%5")
-							 .arg(q_("Shadow center point is"))
-							 .arg(QString::number(distance, 'f', 1))
-							 .arg(q_("km towards azimuth"))
-							 .arg(QString::number(azimuth, 'f', 1))
-							 .arg(QChar(0x00B0)) << "<br/>";
-
-					oss << QString("%1: %2 ")
-							 .arg(q_("Magnitude of central eclipse"))
-							 .arg(QString::number(pos[2], 'f', 4));
-					if (pos[2] < 1.0) oss << QString(q_("(annular)"));
-					else oss << QString(q_("(total)"));
-					oss << "<br/>";
+						oss << QString("%1 %2 %3 %4%5")
+								 .arg(q_("Shadow center point is"))
+								 .arg(QString::number(distance, 'f', 1))
+								 .arg(q_("km towards azimuth"))
+								 .arg(QString::number(azimuth, 'f', 1))
+								 .arg(QChar(0x00B0)) << "<br/>";
+						oss << QString("%1: %2 ")
+								 .arg(q_("Magnitude of central eclipse"))
+								 .arg(QString::number(pos[2], 'f', 3));
+						if (pos[2] < 1.0)
+							oss << QString(qc_("(annular)","type of solar eclipse"));
+						else
+							oss << QString(qc_("(total)","type of solar eclipse"));
+						oss << "<br/>";
+					}
 				}
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 			}
-			core1->setUseTopocentricCoordinates(useTopocentric);
-			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 		}
 
 		if (englishName == "Moon" && onEarth)
