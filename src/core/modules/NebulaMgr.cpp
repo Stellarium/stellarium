@@ -1168,13 +1168,10 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
 	Nebula::NebulaType nType;
 
-	int currentLineNumber = 0;	// what input line we are on
-	int currentRecordNumber = 0;	// what record number we are on
 	int readOk = 0;				// how many records weree rad without problems
 	while (!dsoIn.atEnd())
 	{
 		record = QString::fromUtf8(dsoIn.readLine());
-		++currentLineNumber;
 
 		QRegExp version("ersion\\s+([\\d\\.]+)\\s+(\\w+)");
 		int vp = version.indexIn(record);
@@ -1186,8 +1183,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		{
 			--totalRecords;
 			continue;
-		}
-		++currentRecordNumber;
+		}		
 
 		if (!record.isEmpty())
 		{
