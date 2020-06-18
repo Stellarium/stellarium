@@ -442,7 +442,7 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 {
 	int x = 0, y = 0;
-	float coeff = 1.5;
+	static const float coeff = 1.5;
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, text);
 	switch(getCurrentCoordinatesPlace())
@@ -461,7 +461,7 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 		}
 		case RightBottomCorner:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() - 10*coeff);
+			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
 			y = fs.height();
 			break;
 		}
