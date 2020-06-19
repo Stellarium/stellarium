@@ -467,6 +467,7 @@ void BookmarksDialog::importBookmarks()
 	bookmarksJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), QDir::homePath(), filter);
 
 	loadBookmarks();
+	ui->bookmarksTreeView->hideColumn(ColumnUUID);
 
 	bookmarksJsonPath = originalBookmarksFile;
 	saveBookmarks();
