@@ -135,8 +135,9 @@ void ShortcutsDialog::initEditors()
 		ui->primaryShortcutEdit->setEnabled(false);
 		ui->altShortcutEdit->setEnabled(false);
 		ui->applyButton->setEnabled(false);
-		ui->primaryShortcutEdit->clear();
-		ui->altShortcutEdit->clear();
+		// https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
+		ui->primaryShortcutEdit->setText("");
+		ui->altShortcutEdit->setText("");
 	}
 	polish();
 }

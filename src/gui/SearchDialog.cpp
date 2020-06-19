@@ -839,7 +839,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 			if (!newSelected.empty())
 			{
 				close();
-				ui->lineEditSearchSkyObject->clear();
+				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 				ui->completionLabel->clearValues();
 				// Can't point to home planet
 				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
@@ -905,7 +905,7 @@ void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 
 void SearchDialog::searchListClear()
 {
-	ui->searchInListLineEdit->clear();	
+	ui->searchInListLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
@@ -1010,7 +1010,7 @@ void SearchDialog::updateListView(int index)
 {
 	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
-	ui->searchInListLineEdit->clear();
+	ui->searchInListLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->objectsListView->blockSignals(true);
 	ui->objectsListView->reset();
 	listModel->setStringList(objectMgr->listAllModuleObjects(moduleId, englishNames));
@@ -1081,7 +1081,8 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 
 void SearchDialog::pasteAndGo()
 {
-	ui->lineEditSearchSkyObject->clear(); // clear current text
+	// https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
+	ui->lineEditSearchSkyObject->setText(""); // clear current text
 	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
 	gotoObject(); // go to first finded object
 }

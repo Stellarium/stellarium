@@ -557,7 +557,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	ui->citySearchLineEdit->clear();	
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 }
 
 // Called when the planet name is changed by hand
@@ -597,7 +597,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
-		ui->citySearchLineEdit->clear();
+		ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 		ui->citySearchLineEdit->setFocus();
 		stelCore->moveObserverTo(loc, 0., 0.);
 	}
@@ -680,7 +680,7 @@ void LocationDialog::reportEdit()
 void LocationDialog::addCurrentLocationToList()
 {
 	const StelLocation& loc = locationFromFields();
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
@@ -858,7 +858,7 @@ void LocationDialog::resetGPSbuttonLabel()
 void LocationDialog::resetLocationList()
 {
 	//reset search before setting model, prevents unnecessary search in full list
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
 	proxyModel->setSourceModel(allModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
@@ -874,6 +874,6 @@ void LocationDialog::filterSitesByCountry()
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
 }
