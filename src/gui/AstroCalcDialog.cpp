@@ -1446,6 +1446,7 @@ void AstroCalcDialog::generateEphemeris()
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
+	DisplayedPositionIndex = -1; // deselect an ephemeris marker
 	initListEphemeris();
 
 	if (currentPlanet.isEmpty()) // avoid crash
