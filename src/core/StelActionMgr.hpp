@@ -162,6 +162,7 @@ public:
 						  const QString& shortcut="", const QString& altShortcut="",
 						  bool global=false);
 	StelAction* findAction(const QString& id);
+	StelAction* findActionFromShortcut(const QString& shortcut);
 	bool pushKey(int key, bool global=false);
 
 	//! Returns a list of all current StelAction groups

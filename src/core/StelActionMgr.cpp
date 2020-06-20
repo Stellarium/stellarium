@@ -217,6 +217,17 @@ StelAction* StelActionMgr::findAction(const QString& id)
 	return findChild<StelAction*>(id);
 }
 
+StelAction* StelActionMgr::findActionFromShortcut(const QString& shortcut)
+{
+	StelAction* ret=Q_NULLPTR;
+	for (auto* action : findChildren<StelAction*>())
+	{
+		if ((action->getShortcut().toString()==shortcut) || (action->getAltShortcut().toString()==shortcut))
+			ret=action;
+	}
+	return ret;
+}
+
 bool StelActionMgr::pushKey(int key, bool global)
 {
 	if (!actionsEnabled)

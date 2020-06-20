@@ -799,19 +799,17 @@ void StelMainView::init()
 
 	gui = new StelGui();
 
-	QSettings* conf = configuration;
-
 	// Should be check of requirements disabled? -- NO! This is intentional here, and does no harm.
-	if (conf->value("main/check_requirements", true).toBool())
+	if (configuration->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
-		processOpenGLdiagnosticsAndWarnings(conf, QOpenGLContext::currentContext());
+		processOpenGLdiagnosticsAndWarnings(configuration, QOpenGLContext::currentContext());
 	}
 
 	//create and initialize main app
 	stelApp = new StelApp(this);
 	stelApp->setGui(gui);
-	stelApp->init(conf);
+	stelApp->init(configuration);
 	//setup StelOpenGLArray global state
 	StelOpenGLArray::initGL();
 	//this makes sure the app knows how large the window is
@@ -836,7 +834,7 @@ void StelMainView::init()
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QDesktopWidget *desktop = QApplication::desktop();
-	int screen = conf->value("video/screen_number", 0).toInt();
+	int screen = configuration->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= desktop->screenCount())
 	{
 		qWarning() << "WARNING: screen" << screen << "not found";
@@ -844,10 +842,10 @@ void StelMainView::init()
 	}
 	QRect screenGeom = desktop->screenGeometry(screen);
 
-	QSize size = QSize(conf->value("video/screen_w", screenGeom.width()).toInt(),
-		     conf->value("video/screen_h", screenGeom.height()).toInt());
+	QSize size = QSize(configuration->value("video/screen_w", screenGeom.width()).toInt(),
+		     configuration->value("video/screen_h", screenGeom.height()).toInt());
 
-	bool fullscreen = conf->value("video/fullscreen", true).toBool();
+	bool fullscreen = configuration->value("video/fullscreen", true).toBool();
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
 	resize(size);
@@ -865,22 +863,22 @@ void StelMainView::init()
 	else
 	{
 		setFullScreen(false);
-		int x = conf->value("video/screen_x", 0).toInt();
-		int y = conf->value("video/screen_y", 0).toInt();
+		int x = configuration->value("video/screen_x", 0).toInt();
+		int y = configuration->value("video/screen_y", 0).toInt();
 		move(x + screenGeom.x(), y + screenGeom.y());
 	}
 
-	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
-	screenShotFormat = conf->value("main/screenshot_format", "png").toString();
+	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
+	screenShotFormat = configuration->value("main/screenshot_format", "png").toString();
 #ifndef USE_OLD_QGLWIDGET
-	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
-	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toInt();
-	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toInt();
+	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
+	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
+	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
 #endif
-	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
-	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toDouble());
-	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
-	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
+	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
+	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
+	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
+	setMinFps(configuration->value("video/minimum_fps",10000.f).toFloat());
 	setSkyBackgroundColor(Vec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
@@ -910,31 +908,51 @@ void StelMainView::init()
 	}
 #endif
 
-	// Let's check conflicts for keyboard shortcuts...
+	// check conflicts for keyboard shortcuts...
 	if (configuration->childGroups().contains("shortcuts"))
 	{
-		QStringList defSC =  actionMgr->getShortcutsList();
-		QStringList shortcuts, conflicts;
-		QStringList::const_iterator strIterator;
+		QStringList defaultShortcuts =  actionMgr->getShortcutsList();
+		QStringList conflicts;
 		configuration->beginGroup("shortcuts");
-		QStringList keys = conf->allKeys();
-		for (strIterator = keys.constBegin(); strIterator != keys.constEnd(); ++strIterator)
+		QStringList cstActionNames = configuration->allKeys();
+		QMultiMap<QString, QString> cstActionsMap; // It is possible we have a very messed-up setup with duplicates
+		for (QStringList::const_iterator cstActionName = cstActionNames.constBegin(); cstActionName != cstActionNames.constEnd(); ++cstActionName)
 		{
 			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-			shortcuts << conf->value((*strIterator).toLocal8Bit().constData()).toString().split(" ", Qt::SkipEmptyParts);
+			QStringList singleCustomActionShortcuts = configuration->value((*cstActionName).toLocal8Bit().constData()).toString().split(" ", Qt::SkipEmptyParts);
 			#else
-			shortcuts << conf->value((*strIterator).toLocal8Bit().constData()).toString().split(" ", QString::SkipEmptyParts);
+			QStringList singleCustomActionShortcuts = configuration->value((*cstActionName).toLocal8Bit().constData()).toString().split(" ", QString::SkipEmptyParts);
 			#endif
+			singleCustomActionShortcuts.removeAll("\"\"");
+
+			// Add 1-2 entries per action
+			for (QStringList::const_iterator cstActionShortcut = singleCustomActionShortcuts.constBegin(); cstActionShortcut != singleCustomActionShortcuts.constEnd(); ++cstActionShortcut)
+				if (strcmp( (*cstActionShortcut).toLocal8Bit().constData(), "") )
+					cstActionsMap.insert((*cstActionShortcut), (*cstActionName));
+		}
+		// Now we have a QMultiMap with (customShortcut, actionName). It may contain multiple keys!
+		QStringList allMapKeys=cstActionsMap.keys();
+		QStringList uniqueMapKeys=cstActionsMap.uniqueKeys();
+		for (auto key : uniqueMapKeys)
+			allMapKeys.removeOne(key);
+		conflicts << allMapKeys; // Add the remaining (duplicate) keys
+
+		// Check every shortcut from the Map that it is not assigned to its own correct action
+		for (QMultiMap<QString, QString>::const_iterator it=cstActionsMap.constBegin(); it != cstActionsMap.constEnd(); ++it)
+		{
+			QString customKey(it.key());
+			QString actionName=cstActionsMap.value(it.key());
+			StelAction *action = actionMgr->findAction(actionName);
+			if (action && defaultShortcuts.contains(customKey) && actionMgr->findActionFromShortcut(customKey)->getId()!=action->getId())
+				conflicts << customKey;
 		}
 		configuration->endGroup();
-		shortcuts.removeAll("\"\"");
-		for (strIterator = shortcuts.constBegin(); strIterator != shortcuts.constEnd(); ++strIterator)
-		{
-			if (defSC.contains((*strIterator).toLocal8Bit().constData()))
-				conflicts << (*strIterator).toLocal8Bit().constData();
-		}
+
 		if (!conflicts.isEmpty())
-			QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1: %2").arg(q_("Shortcuts have conflicts! Please press F7 after startup of planetarium and check follow problematic shortcuts"), conflicts.join("; ")), QMessageBox::Ok);
+		{
+			QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1: %2").arg(q_("Shortcuts have conflicts! Please press F7 after program startup and check following multiple assignments"), conflicts.join("; ")), QMessageBox::Ok);
+			qWarning() << "Attention! Conflicting keyboard shortcut assignments found. Please resolve:" << conflicts.join("; "); // Repeat in logfile for later retrieval.
+		}
 	}
 }
 
