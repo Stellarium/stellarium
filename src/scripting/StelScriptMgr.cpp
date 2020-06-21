@@ -269,7 +269,7 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 			c.set( 0, 0, 0 );
 			break;
 		case 2:
-			// longitude, latitude - maybe string d/hms, maybe numeric degrees
+			// longitude/azimuth, latitude/altitude - maybe string dms, maybe numeric degrees
 			double lng;
 			if( context->argument(0).isString() )
 				lng = StelUtils::getDecAngle( context->argument(0).toString() );
@@ -277,10 +277,10 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 				lng = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
 
 			double lat;
-			if ( context->argument(0).isString())
-				lat = StelUtils::getDecAngle( context->argument(0).toString() );
+			if ( context->argument(1).isString())
+				lat = StelUtils::getDecAngle( context->argument(1).toString() );
 			else
-				lat = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
+				lat = static_cast<double>(context->argument(1).toNumber())*M_PI_180;
 
 			StelUtils::spheToRect( lng, lat, c );
 			break;
