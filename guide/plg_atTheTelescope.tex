@@ -408,17 +408,6 @@ key, and the telescope will be guided to the object.
 
 Multiple telescopes may be controlled simultaneously. 
 
-% %TODO Details?
-% 
-% The control interface uses the Meade or the Celestron protocol and
-% most telescopes use either one or the other so many different brands
-% of telescopes can be controlled. There is a third party Telescope
-% control system going under the name of ASCOM\index{ASCOM}. They provide an
-% interface to stellarium and then translate the control into many other
-% forms (see section~\ref{sec:plugins:StellariumScope}).
-% 
-%% GZ Taken from the plugins help page, only slightly reformatted.
-
 \paragraph{WARNING}\emph{Stellarium cannot prevent your
 telescope from being pointed at the Sun. It is up to you to ensure
 proper filtering and safety measures are applied!}
@@ -893,21 +882,27 @@ the Configure Telescope dialog.
 %\newpage
 \section{StellariumScope}
 \label{sec:plugins:StellariumScope}
-\program{StellariumScope} is a free add-on that enables you to control your telescope with Stellarium. 
+\program{StellariumScope} is a free add-on that enables you to control your ASCOM enabled telescope with Stellarium. 
 
 Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. There's no need to 
   use StellariumScope in order to use your ASCOM telescopes with Stellarium anymore. We are 
   encouraging our users to switch to the native ASCOM option going forward and the use of
-  StellariumScope is most likely not recommended in the future.
+  StellariumScope is most likely not recommended in the future, unless you need particular features.
 
-\begin{figure}[htp]
-\begin{center}
-\includegraphics[width=0.85\linewidth]{StellariumScopeFullWindow.jpg}
-\end{center}
-\caption{\program{StellariumScope} interface}
-\label{fig:StellariumScopeFullWindow}
-\end{figure}
+% \begin{figure}[htp]
+% \begin{center}
+% \includegraphics[width=0.85\linewidth]{StellariumScopeFullWindow.jpg}
+% \end{center}
+% \caption{\program{StellariumScope} interface}
+% \label{fig:StellariumScopeFullWindow}
+% \end{figure}
 
+
+The original \program{StellariumScope} program was designed and implemented by Scott of ByteArts
+% and is still available for download\footnote{\url{http://www.bytearts.com/stellarium/}}.
+but is no longer available. 
+It is now maintained by and available for download from Welsh Dragon Computing
+\footnote{\url{http://welshdragoncomputing.ca/x/index.php/home/stellariumscope/about-stellariumscope}}.
 
 \paragraph{Features}
 \begin{itemize}
@@ -919,22 +914,13 @@ Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. Th
   control computer that hosts the telescope driver.
 \item The installation program will automatically install the
   documentation, but the link to the documentation is provided
-  by developer\footnote{\program{StellariumScope} User's Guide --- \url{http://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2015.10.24.pdf}} so you can read it before installation.
-\item There are earlier releases still available on the downloads page on
-  Welsh Dragon Computing site.
+  by the developer\footnote{\program{StellariumScope} User's Guide --- \url{http://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2016.03.05.pdf}} so you can read it before installation.
 \end{itemize}
 
-The original \program{StellariumScope} program was designed and implemented by
-Scott of ByteArts and is still available for
-download\footnote{\url{http://www.bytearts.com/stellarium/}}. If you
-have difficulties with the releases available on the Welsh Dragon
-Computing
-site\footnote{\url{http://welshdragoncomputing.ca/x/index.php/home/stellariumscope/about-stellariumscope}},
-you may want to consider using the original version.
+%Figure~\ref{fig:StellariumScopeFullWindow} shows the interface and
+%some of the options.
 
-
-Figure~\ref{fig:StellariumScopeFullWindow} shows the interface and
-some of the options.  Use this application (like all software that
+Use this application (like all software that
 controls your mount) with supervision of your mount's movements.
 
 \section{Other telescope servers and Stellarium}

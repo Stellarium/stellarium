@@ -516,6 +516,18 @@ introducing the completely automated image processing pipeline. It is
 also possible that if plate solving fails in the fully automated
 script, you could continue, using this  manual process:
 
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-1.jpg}
+\caption{Online plate solving}
+\label{fig:dso:adding_images:manual:plate-solving}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-2.png}
+\caption{Python processing. If you just leave a space after \texttt{python WCS\_corners.py},
+you can drag and drop your \file{wcs.fits} file into Windows' Anaconda Prompt window.}
+\label{fig:dso:adding_images:manual:python}
+\end{figure}
+
 \begin{description}
 \item[Plate Solve]\mbox{}
   \begin{itemize}
@@ -554,19 +566,7 @@ script, you could continue, using this  manual process:
   View your image in Stellarium (and adjust \texttt{maxBrightness} in \file{textures.json} if needed)
 \end{description}
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.9\textwidth]{dso-add-1.jpg}
-\caption{Online plate solving}
-\label{fig:dso:adding_images:manual:plate-solving}
-\end{figure}
-\begin{figure}[htbp]
-\centering\includegraphics[width=\textwidth]{dso-add-2.png}
-\caption{Python processing. If you just leave a space after \texttt{python WCS\_corners.py},
-you can drag and drop your \file{wcs.fits} file into Windows' Anaconda Prompt window.}
-\label{fig:dso:adding_images:manual:python}
-\end{figure}
-
-\newpage
+%\newpage
 Some additional information you should be aware of:
 \begin{itemize}
 \item Images in Stellarium are NOT tied to an object, just placed on the sky by \texttt{worldCoords}
