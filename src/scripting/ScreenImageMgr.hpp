@@ -46,8 +46,8 @@ public:
 	//! @param filename the partial path of the file to load.  This will be searched for in the
 	//! scripts directory using StelFileMgr.
 	//! @param x the screen x-position for the texture (in pixels), measured from the left side of the screen.
-	//! @param y the screen x-position for the texture (in pixels), measured from the bottom of the screen.
-	//! @param show the initial displayed status of the image (false == hidden).
+	//! @param y the screen x-position for the texture (in pixels), measured from the top of the screen.
+	//! @param show the initial display status of the image (false == hidden).
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
 	//!        Note that this also controls the final resolution of the image! Scale smaller that 1 leads to reduced resolution,
 	//!        larger than 1 of course creates upsampling artifacts. The scaling that happens after loading is a simple stretch of this loaded pixmap.
@@ -66,7 +66,7 @@ public:
 	//! Show or hide the image (it will fade in/out)
 	//! @param b if true, the image will be shown, else it will be hidden
 	virtual void setFlagShow(bool b);
-	//! Get the displayed status of the image
+	//! Get the display status of the image
 	virtual bool getFlagShow(void) const;
 
 	//! Set the image alpha for when it is in full "on" (after fade in).
@@ -146,7 +146,7 @@ public slots:
 	//! @param filename the partial path of the file to load.  This will be searched
 	//!        for using StelFileMgr, with "scripts/" prefixed to the filename.
 	//! @param x The x-coordinate for the image (0 = left of screen)
-	//! @param y The y-coordinate for the image (0 = bottom of screen)
+	//! @param y The y-coordinate for the image (0 = top of screen)
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
 	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (opacity) value for the image (range 0.0=transparent to 1.0=opaque)
@@ -169,10 +169,10 @@ public slots:
 	//! @param show the new visible state to set.
 	void showImage(const QString& id, bool show);
 	//! @param id the ID for the desired image.
-	//! @return width (unscaled!) in pixels.
+	//! @return the currently scaled width, in pixels.
 	int getImageWidth(const QString& id) const;
 	//! @param id the ID for the desired image.
-	//! @return height (unscaled!) in pixels.
+	//! @return the currently scaled height in pixels.
 	int getImageHeight(const QString& id) const;
 
 	//! Set the x and y scale for the specified image, relative to size given at load time.
