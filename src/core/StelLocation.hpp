@@ -47,6 +47,10 @@ public:
 	//! arguments given in decimal degrees
 	double distanceKm(const double otherLong, const double otherLat) const;
 
+	//! Compute azimuth towards Target. All angles (args and result) are in degrees.
+	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
+	double getAzimuthForLocation(double longTarget, double latTarget) const;
+
 	//! Location/city name
 	QString name;
 	//! English country name or empty string
@@ -99,8 +103,9 @@ public:
 	//! arguments given in decimal degrees
 	//! Source: Jean Meeus, Astronomical Algorithms, 2nd edition, ch.11.
 	static double distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2);
-	//! Compute azimuth (from North) towards Target.
-	static double GetAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
+	//! Compute azimuth from Obs towards Target. All angles (args and result) are in degrees.
+	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
+	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;

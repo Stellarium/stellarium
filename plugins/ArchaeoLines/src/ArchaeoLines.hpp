@@ -134,7 +134,7 @@ public slots:
 	void setFontSize(const int newSize){font.setPixelSize(newSize);}
 	//! To be connected to StelApp font size. newSize will be enlarged by 1.
 	void setFontSizeFromApp(const int newSize){font.setPixelSize(newSize+1);}
-	//! reset declination/azimuth angle (degrees) of this arc.
+	//! reset declination/azimuth angle (degrees) of this arc. Any azimuth angles MUST be given counted from north.
 	void setDefiningAngle(const double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
 	//! Re-translates the label.
@@ -227,20 +227,18 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(int lineWidth    READ getLineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
 public:
 	ArchaeoLines();
-	virtual ~ArchaeoLines();
+	virtual ~ArchaeoLines() Q_DECL_OVERRIDE;
 	
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(class QKeyEvent* event){event->setAccepted(false);}
-	virtual bool configureGui(bool show=true);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual void handleKeys(class QKeyEvent* event) Q_DECL_OVERRIDE {event->setAccepted(false);}
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 	//////////////////////////////////////////////////////////////////////////
-
-	//bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -311,7 +309,6 @@ signals:
 
 public slots:
 	void enableArchaeoLines(bool b);
-	//void useDmsFormat(bool b);
 
 	bool isEnabled() const {return flagShowArchaeoLines;}
 	bool isEquinoxDisplayed() const {return flagShowEquinox;}
@@ -333,7 +330,6 @@ public slots:
 	bool isCustomAzimuth2Displayed() const {return flagShowCustomAzimuth2;}
 	bool isCustomDeclination1Displayed() const {return flagShowCustomDeclination1;}
 	bool isCustomDeclination2Displayed() const {return flagShowCustomDeclination2;}
-
 
 	void showEquinox(bool b);
 	void showSolstices(bool b);
@@ -435,21 +431,13 @@ public slots:
 	int getLineWidth() const {return lineWidth;}
 	void setLineWidth(int width);
 
-
-
-
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
 	void updateObserverLocation(const StelLocation &loc);
-	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
-	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
-	static double getAzimuthForLocation(float longObs, float latObs, double longTarget, double latTarget);
 
 private:
 	QFont font;
 	bool flagShowArchaeoLines;
-	//bool withDecimalDegree;
-	//bool flagUseDmsFormat;
 	LinearFader lineFader;
 	int lineWidth;
 
@@ -548,9 +536,9 @@ class ArchaeoLinesStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule()    const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*ARCHAEOLINES_HPP*/

@@ -57,7 +57,7 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 	info.id = "ArchaeoLines";
 	info.displayedName = N_("ArchaeoLines");
 	info.authors = "Georg Zotti";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("A tool for archaeo-/ethnoastronomical alignment studies");
 	info.version = ARCHAEOLINES_PLUGIN_VERSION;
 	info.license = ARCHAEOLINES_PLUGIN_LICENSE;
@@ -66,8 +66,6 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 
 ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
-	//, withDecimalDegree(false)
-	//, flagUseDmsFormat(false)
 	, lineWidth(1)
 	, flagShowEquinox(false)
 	, flagShowSolstices(false)
@@ -509,6 +507,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
+	const bool azFromSouth=StelApp::getInstance().getFlagSouthAzimuthUsage();
 	setLineWidth(conf->value("ArchaeoLines/line_thickness", 1).toInt());
 	setEquinoxColor(                Vec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
 	setSolsticesColor(              Vec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
@@ -535,8 +534,12 @@ void ArchaeoLines::loadSettings()
 	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  35.235774).toDouble());
 	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   31.778087).toDouble());
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation1Longitude, geographicLocation1Latitude));
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation2Longitude, geographicLocation2Latitude));
+	double azi=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (azFromSouth) azi+=180.0;
+	geographicLocation1Line->setDefiningAngle(azi);
+	azi = loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (azFromSouth) azi+=180.0;
+	geographicLocation2Line->setDefiningAngle(azi);
 	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
 	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
 
@@ -827,7 +830,10 @@ void ArchaeoLines::setGeographicLocation1Longitude(double lng)
 	conf->setValue("ArchaeoLines/geographic_location_1_longitude", lng);
 	geographicLocation1Longitude=lng;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
 void ArchaeoLines::setGeographicLocation1Latitude(double lat)
@@ -835,7 +841,10 @@ void ArchaeoLines::setGeographicLocation1Latitude(double lat)
 	conf->setValue("ArchaeoLines/geographic_location_1_latitude", lat);
 	geographicLocation1Latitude=lat;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
 void ArchaeoLines::setGeographicLocation1Label(QString label)
@@ -849,7 +858,10 @@ void ArchaeoLines::setGeographicLocation2Longitude(double lng)
 	conf->setValue("ArchaeoLines/geographic_location_2_longitude", lng);
 	geographicLocation2Longitude=lng;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
 void ArchaeoLines::setGeographicLocation2Latitude(double lat)
@@ -857,7 +869,10 @@ void ArchaeoLines::setGeographicLocation2Latitude(double lat)
 	conf->setValue("ArchaeoLines/geographic_location_2_latitude", lat);
 	geographicLocation2Latitude=lat;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
 void ArchaeoLines::setGeographicLocation2Label(QString label)
@@ -869,8 +884,8 @@ void ArchaeoLines::setGeographicLocation2Label(QString label)
 
 void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 {
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	geographicLocation1Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude));
+	geographicLocation2Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude));
 }
 
 
@@ -1193,20 +1208,6 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 			Q_ASSERT(0);
 			return "ArchaeoLines::getLineLabel(): Error!";
 	}
-}
-
-double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
-{
-	longObs    *= (M_PI/180.0);
-	latObs     *= (M_PI/180.0);
-	longTarget *= (M_PI/180.0);
-	latTarget  *= (M_PI/180.0);
-
-	return (180.0/M_PI) * atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
-}
-double ArchaeoLines::getAzimuthForLocation(float longObs, float latObs, double longTarget, double latTarget)
-{
-	return getAzimuthForLocation(static_cast<double>(longObs), static_cast<double>(latObs), longTarget, latTarget);
 }
 
 // callback stuff shamelessly taken from GridLinesMgr. Changes: Text MUST be filled, can also be empty for no label!

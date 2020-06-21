@@ -1009,15 +1009,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 
-				// R.A. of the Sun
-				raSun = raSun / M_PI_180;
-				if (raSun < 0.) raSun += 360.;
-				// R.A. of the Moon
-				raMoon = (raMoon / M_PI_180);
-				if (raMoon < 0.) raMoon += 360.;
-
-				double raDiff = raMoon - raSun;
-				if (raDiff < 0.) raDiff += 360.;
+				double raDiff = StelUtils::fmodpos((raMoon - raSun)/M_PI_180, 360.0);
 				if (raDiff < 3. || raDiff > 357.)
 				{
 					SolarEclipse center;
@@ -1032,10 +1024,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 							oss << QString("%1: %2/%3<br />").arg(info).arg(StelUtils::decDegToDmsStr(pos[0])).arg(StelUtils::decDegToDmsStr(pos[1]));
 						StelLocation loc = core->getCurrentLocation();
 						// distance between center point and current location
-						Planet* myEarth = earth.data();
-						double distance = StelLocation::distanceKm(myEarth, loc.longitude, loc.latitude, pos[1], pos[0]);
-						double azimuth = StelLocation::GetAzimuthForLocation(loc.longitude, loc.latitude, pos[1], pos[0]);
-						if (azimuth < 0) azimuth += 360.;
+						double distance = loc.distanceKm(pos[1], pos[0]);
+						double azimuth = loc.getAzimuthForLocation(pos[1], pos[0]);
 
 						oss << QString("%1 %2 %3 %4%5")
 								 .arg(q_("Shadow center point is"))

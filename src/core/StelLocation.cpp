@@ -185,14 +185,20 @@ double StelLocation::distanceKm(const double otherLong, const double otherLat) c
 	return distanceKm(planet.data(), static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
 }
 
-double StelLocation::GetAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
+double StelLocation::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
 {
-	longObs *= (M_PI / 180.0);
-	latObs *= (M_PI / 180.0);
-	longTarget *= (M_PI / 180.0);
-	latTarget *= (M_PI / 180.0);
+	longObs    *= (M_PI/180.0);
+	latObs     *= (M_PI/180.0);
+	longTarget *= (M_PI/180.0);
+	latTarget  *= (M_PI/180.0);
 
-	return (180.0 / M_PI)
-		   * atan2(sin(longTarget - longObs),
-			 cos(latObs) * tan(latTarget) - sin(latObs) * cos(longTarget - longObs));
+	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az += M_PI;
+	return StelUtils::fmodpos((180.0/M_PI) * az, 360.0);
+}
+
+double StelLocation::getAzimuthForLocation(double longTarget, double latTarget) const
+{
+	return getAzimuthForLocation(static_cast<double>(longitude), static_cast<double>(latitude), longTarget, latTarget);
 }
