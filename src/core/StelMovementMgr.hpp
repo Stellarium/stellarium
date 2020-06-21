@@ -210,7 +210,7 @@ public slots:
     //! @note core::moveToRaDecJ2000 provides a simpler signature for the same function.
     //! @note Objects of class Vec3d are 3-dimensional vectors in a rectangular coordinate system. For
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
-	//!       celestial equator. You may use a constructor defining three components (x,y,z) or the
+	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
 	//!       format with just two angles, e.g., Vec3d("0h","0d").
 	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
@@ -247,7 +247,7 @@ public slots:
 	//! Set the initial Field Of View in degree.
 	void setInitFov(double fov);
 
-	//! Return the inital viewing direction in altazimuthal coordinates.
+	//! Return the initial viewing direction in altazimuthal coordinates.
 	//! See StelMovementMgr::moveToAltAzi for an explanation of the return value.
 	const Vec3d getInitViewingDirection() const {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
