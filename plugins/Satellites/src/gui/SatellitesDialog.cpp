@@ -67,7 +67,9 @@ SatellitesDialog::SatellitesDialog()
 	, delimiter(", ")	
 {
 	ui = new Ui_satellitesDialog;
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	iridiumFlaresHeader.clear();
+#endif
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -96,7 +98,9 @@ void SatellitesDialog::retranslate()
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		populateAboutPage();
 		populateFilterMenu();
-		initListIridiumFlares();		
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
+		initListIridiumFlares();
+#endif
 	}
 }
 
@@ -104,6 +108,9 @@ void SatellitesDialog::retranslate()
 void SatellitesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+#if(SATELLITES_PLUGIN_IRIDIUM == 0)
+	ui->tabs->removeTab(ui->tabs->indexOf(ui->iridiumTab));
+#endif
 	ui->tabs->setCurrentIndex(0);
 	ui->labelAutoAdd->setVisible(false);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -224,12 +231,14 @@ void SatellitesDialog::createDialogContent()
 	populateFilterMenu();
 	populateSourcesList();
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	initListIridiumFlares();
 	ui->flaresPredictionDepthSpinBox->setValue(plugin->getIridiumFlaresPredictionDepth());
 	connect(ui->flaresPredictionDepthSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setIridiumFlaresPredictionDepth(int)));
 	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
+#endif
 }
 
 void SatellitesDialog::askSatMarkerColor()
@@ -347,104 +356,6 @@ void SatellitesDialog::descriptionTextChanged()
 void SatellitesDialog::searchSatellitesClear()
 {
 	ui->lineEditSearch->clear();
-}
-
-void SatellitesDialog::savePredictedIridiumFlares()
-{
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save predicted Iridium flares as..."),
-							QDir::homePath() + "/iridium_flares.xlsx",
-							filter,
-							&defaultFilter);
-
-	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
-	int columns = iridiumFlaresHeader.size();
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-	{
-		QFile predictedIridiumFlares(filePath);
-		if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
-		{
-			qWarning() << "[Satellites]: Unable to open file"
-					  << QDir::toNativeSeparators(filePath);
-			return;
-		}
-
-		QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
-		predictedIridiumFlaresList.setCodec("UTF-8");
-
-		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << StelUtils::getEndLineChar();
-
-		for (int i = 0; i < count; i++)
-		{
-			int columns = iridiumFlaresHeader.size();
-			for (int j=0; j<columns; j++)
-			{
-				predictedIridiumFlaresList << ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j);
-				if (j<columns-1)
-					predictedIridiumFlaresList << delimiter;
-				else
-					predictedIridiumFlaresList << StelUtils::getEndLineChar();
-			}
-		}
-		predictedIridiumFlares.close();
-	}
-	else
-	{
-		int *width;
-		width = new int[columns];
-		QString sData;
-		int w;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Predicted Iridium flares"), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = iridiumFlaresHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -589,11 +500,11 @@ void SatellitesDialog::updateSatelliteData()
 	}
 
 	// colorize the colorpicker button
-	buttonMarkerColor.setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
+	buttonMarkerColor=mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
-	buttonOrbitColor.setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
+	buttonOrbitColor=oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
 	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
-	buttonInfoColor.setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
+	buttonInfoColor=iColor.toQColor(); // .setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
 	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
@@ -706,7 +617,11 @@ void SatellitesDialog::populateAboutPage()
 	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
 	html += "<tr><td rowspan=4><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
+#if (SATELLITES_PLUGIN_IRIDIUM == 1)
 	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt; (" + q_("Iridium flares") + ")</td></tr>";
+#else
+	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt;</td></tr>";
+#endif
 	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr></table>";
 
@@ -1267,6 +1182,7 @@ void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 	ui->descriptionTextEdit->blockSignals(!enabled);
 }
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 void SatellitesDialog::setIridiumFlaresHeaderNames()
 {
 	iridiumFlaresHeader.clear();
@@ -1346,3 +1262,102 @@ void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
 		}
 	}
 }
+
+void SatellitesDialog::savePredictedIridiumFlares()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save predicted Iridium flares as..."),
+							QDir::homePath() + "/iridium_flares.xlsx",
+							filter,
+							&defaultFilter);
+
+	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
+	int columns = iridiumFlaresHeader.size();
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+	{
+		QFile predictedIridiumFlares(filePath);
+		if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
+		{
+			qWarning() << "[Satellites]: Unable to open file"
+					  << QDir::toNativeSeparators(filePath);
+			return;
+		}
+
+		QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
+		predictedIridiumFlaresList.setCodec("UTF-8");
+
+		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << StelUtils::getEndLineChar();
+
+		for (int i = 0; i < count; i++)
+		{
+			int columns = iridiumFlaresHeader.size();
+			for (int j=0; j<columns; j++)
+			{
+				predictedIridiumFlaresList << ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j);
+				if (j<columns-1)
+					predictedIridiumFlaresList << delimiter;
+				else
+					predictedIridiumFlaresList << StelUtils::getEndLineChar();
+			}
+		}
+		predictedIridiumFlares.close();
+	}
+	else
+	{
+		int *width;
+		width = new int[columns];
+		QString sData;
+		int w;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(q_("Predicted Iridium flares"), AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = iridiumFlaresHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+#endif

@@ -125,6 +125,7 @@ struct TleSource
 //! @ingroup satellites
 typedef QList<TleSource> TleSourceList;
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 struct IridiumFlaresPrediction
 {
 	QString datetime;
@@ -135,6 +136,7 @@ struct IridiumFlaresPrediction
 };
 
 typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
+#endif
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.
@@ -357,10 +359,12 @@ public:
 	//! @note We are having permissions for use this file from Mike McCants.	
 	void loadExtraData();
 	
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Get depth of prediction for Iridium flares
 	int getIridiumFlaresPredictionDepth(void) const { return iridiumFlaresPredictionDepth; }
 
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
+#endif
 
 signals:
 	void flagHintsVisibleChanged(bool b);
@@ -493,9 +497,11 @@ public slots:
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Set depth of prediction for Iridium flares
 	//! @param depth in days
 	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
+#endif
 
 private slots:
 	//! Update satellites visibility on wide range of dates changes - by month or year
@@ -625,8 +631,9 @@ private:
 	QList<int> messageIDs;
 	//@}
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
-
+#endif
 	// GUI
 	SatellitesDialog* configDialog;
 

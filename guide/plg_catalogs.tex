@@ -1144,30 +1144,6 @@ grouping. A satellite may also not belong to any group at all.
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 \end{description}
 
-\subsection{Iridium Flares prediction}
-\label{sec:plugins:Satellites:IridiumFlares}
-
-The Satellite plugin could predict Iridium flares for the current
-location up to 2 weeks in the future from the current moment. The
-calculations of visual magnitude based on standard magnitude,
-orientation of satellite and places an observer and Sun. Of course all
-predictions could be saved in the CSV file.
-%(Figure~\ref{fig:plugins:Satellites:IridiumFlares}).
-
-The generation of satellites with highly reflective antennae which
-caused predictable flares have been de-orbited by early 2020 and
-replaced by models with different geometry which do not cause these
-bright spectacles. A few defunct satellites are still in orbit, but
-their orientation is no longer predictable, so that any remaining
-results in the ``Iridium flares'' dialog will likely be not usable,
-and the function will soon be removed.
-
-%\begin{figure}[htbp]
-%\centering\includegraphics[width=0.58\textwidth]{satellites_plugin_iridium_flares.png}
-%\caption{Prediction of Iridium flares in the Satellites plugin.}
-%\label{fig:plugins:Satellites:IridiumFlares}
-%\end{figure}
-
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
 
@@ -1240,6 +1216,19 @@ file.
 \item[Space Track]\footnote{\url{http://www.space-track.org/}} the definitive source, requires signup, operated by
   United States Department of Defense
 \end{description}
+
+\subsection{Iridium Flares prediction?}
+\label{sec:plugins:Satellites:IridiumFlares}
+
+In earlier versions the Satellite plugin could predict Iridium flares for the current
+location up to 2 weeks in the future from the current moment.
+
+The generation of satellites with highly reflective antennae which
+caused predictable flares have been de-orbited by end of 2019 and
+replaced by models with different geometry which do not cause these
+bright spectacles. \newFeature{v0.20.2} A few defunct satellites are still in orbit, but
+their orientation is no longer predictable, therefore the 
+``Iridium flares'' dialog has been removed.
 
 %%% Local Variables: 
 %%% mode: latex

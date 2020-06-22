@@ -92,7 +92,9 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
+	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
+	#endif
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -167,7 +169,7 @@ void Satellites::init()
 		return;
 	}
 
-	// If the json file does not already exist, create it from the resource in the QT resource
+	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogPath).exists())
 	{
 		if (!checkJsonFileFormat() || readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
@@ -184,7 +186,7 @@ void Satellites::init()
 
 	qDebug() << "[Satellites] loading catalog file:" << QDir::toNativeSeparators(catalogPath);
 
-	// create satellites according to content os satellites.json file
+	// create satellites according to content of satellites.json file
 	loadCatalog();
 
 	// Set up download manager and the update schedule
@@ -659,7 +661,9 @@ void Satellites::loadSettings()
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	iridiumFlaresPredictionDepth = conf->value("flares_prediction_depth", 7).toInt();
+#endif
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
@@ -693,7 +697,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("auto_add_enabled", autoAddEnabled);
 	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	conf->setValue("flares_prediction_depth", iridiumFlaresPredictionDepth);
+#endif
 
 	// Get a font for labels
 	conf->setValue("hint_font_size", labelFont.pixelSize());
@@ -1934,13 +1940,13 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setBlending(true);
 
 		// Size on screen
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		double size = obj->getAngularSize(core)*M_PI/180.*static_cast<double>(prj->getPixelPerRadAtCenter());
+		size += 12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime());
 		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]-size/2), 20, 90);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), 20, 0);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), 20, -90);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), 20, -180);
 	}
 }
 
@@ -1983,6 +1989,7 @@ bool Satellites::isValidRangeDates(const StelCore *core) const
 		return true;
 }
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 #ifdef _OLD_IRIDIUM_PREDICTIONS
 IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 {
@@ -2192,6 +2199,8 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 	return predictions;
 }
+#endif
+// close SATELLITES_PLUGIN_IRIDIUM
 #endif
 
 void Satellites::translations()

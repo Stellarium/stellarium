@@ -65,8 +65,10 @@ Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
 
+#if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
 //double Satellite::timeShift = 0.;
+#endif
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	: initialized(false)
@@ -199,7 +201,7 @@ Satellite::~Satellite()
 double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places
-	return floor(n * pow(10., dp) + .5) / pow(10., dp);
+	return floor(static_cast<double>(n) * pow(10., dp) + .5) / pow(10., dp);
 }
 
 QString Satellite::getNameI18n() const
@@ -384,6 +386,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				StelUtils::radToDmsStr(phaseAngle, true);
 		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
 
+#if (SATELLITES_PLUGIN_IRIDIUM == 1)
 		if (sunReflAngle>0)
 		{  // Iridium
 			oss << QString("%1: %2%3").arg(q_("Sun reflection angle"))
@@ -391,7 +394,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(degree);
 			oss << "<br />";
 		}
-
+#endif
 		QString updDate;
 		if (!lastUpdated.isValid())
 			updDate = qc_("unknown", "unknown date");
@@ -544,10 +547,12 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 	map.insert("perigee-altitude", pa[0]);
 	map.insert("apogee-altitude", pa[0]);
+#if (SATELLITES_PLUGIN_IRIDIUM == 1)
 	if (sunReflAngle>0.)
 	{  // Iridium
 		map.insert("sun-reflection-angle", sunReflAngle);
 	}
+#endif
 	map.insert("operational-status", getOperationalStatus());
 	map.insert("phase-angle", phaseAngle);
 	map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
@@ -627,7 +632,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 
 	if (visibility==gSatWrapper::VISIBLE)
 	{
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 		sunReflAngle = -1.;
+#endif
 		// OK, artificial satellite has value for standard magnitude
 		if (stdMag<99.)
 		{
@@ -637,6 +644,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			if (fracil==0)
 				fracil = 0.000001;
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 			if (pSatWrapper && name.startsWith("IRIDIUM"))
 			{
 				Vec3d Sun3d = pSatWrapper->getSunECIPos();
@@ -715,9 +723,10 @@ float Satellite::getVMagnitude(const StelCore* core) const
 				 vmag = qMin(stdMag, iridiumFlare);
 			}
 			else // not Iridium
+#endif
 				vmag = stdMag;
 
-			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
+			vmag = static_cast<float>(vmag - 15.75 + 2.5 * std::log10(range * range / fracil));
 		}
 		else if (RCS>0.) // OK, artificial satellite has RCS value and no standard magnitude
 		{
@@ -731,7 +740,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			double rm = range*1000.;
 			double fdiff = (std::sin(phaseAngle) + (M_PI - phaseAngle)*std::cos(phaseAngle))*(2.*albedo*RCS)/(3.* M_PI * M_PI * rm * rm);
 
-			vmag = -26.74 - 2.5*std::log10(fdiff);
+			vmag = static_cast<float>(-26.74 - 2.5*std::log10(fdiff));
 		}
 	}
 	return vmag;
@@ -740,7 +749,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 // Calculate illumination fraction of artifical satellite
 float Satellite::calculateIlluminatedFraction() const
 {
-	return (1.f + cos(phaseAngle))*0.5f;
+	return (1.f + cos(static_cast<float>(phaseAngle)))*0.5f;
 }
 
 QString Satellite::getOperationalStatus() const
@@ -933,7 +942,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			StelSkyDrawer* sd = core->getSkyDrawer();
 
 			RCMag rcMag;
-			Vec3f color = Vec3f(1.f,1.f,1.f);
+			Vec3f color(1.f,1.f,1.f);
 
 			//StelProjectorP origP = painter.getProjector(); // Save projector state
 			//painter.setProjector(prj);
@@ -943,7 +952,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (mag <= sd->getLimitMagnitude())
 			{
 				sd->computeRCMag(mag, &rcMag);
-				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color*hintBrightness, true);
+				sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
 			}
 			sd->postDrawPointSource(&painter);
 
@@ -969,22 +978,17 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				painter.drawSprite2dMode(XYZ, qMin(screenSizeISS, 15));
 			}
 		}
-		else
+		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
-			const bool visible = (hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? false : true;
+			Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
+			painter.setColor(drawColor*hintBrightness, hintBrightness);
 
-			if (visible)
-			{
-				Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
-				painter.setColor(drawColor*hintBrightness, hintBrightness);
+			if (showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-				if (showLabels)
-					painter.drawText(XYZ, name, 0, 10, 10, false);
-
-				painter.setBlending(true, GL_ONE, GL_ONE);
-				hintTexture->bind();
-				painter.drawSprite2dMode(XYZ, 11);
-			}
+			painter.setBlending(true, GL_ONE, GL_ONE);
+			hintTexture->bind();
+			painter.drawSprite2dMode(XYZ, 11);
 		}
 	}
 
@@ -1016,7 +1020,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		{
 			vertexArray.append(position);
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
-			colorArray.append(Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i)));
+			colorArray.append(Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i)));
 		}
 	}
 	painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)

@@ -66,8 +66,7 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 		case Qt::ForegroundRole:
 			if (coloredNames)
 			{
-				const Vec3f& c = sat->hintColor;
-				return QBrush(QColor::fromRgbF(c[0],c[1],c[2]));
+				return QBrush(sat->hintColor.toQColor());
 			}
 			else
 				break;
@@ -118,8 +117,6 @@ bool SatellitesListModel::setData(const QModelIndex& index,
 		default:
 			return false;
 	}
-	
-	return false;
 }
 
 int SatellitesListModel::rowCount(const QModelIndex& parent) const

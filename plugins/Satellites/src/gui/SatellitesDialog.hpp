@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _SATELLITESDIALOG_HPP
-#define _SATELLITESDIALOG_HPP
+#ifndef SATELLITESDIALOG_HPP
+#define SATELLITESDIALOG_HPP
 
 #include <QObject>
 #include <QModelIndex>
@@ -47,6 +47,7 @@ class SatellitesDialog : public StelDialog
 	Q_OBJECT
 
 public:
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Defines the number and the order of the columns in the Iridium Flares table
 	//! @enum IridiumFlaresColumns
 	enum IridiumFlaresColumns {
@@ -57,6 +58,7 @@ public:
 		IridiumFlaresSatellite,	//! satellite name
 		IridiumFlaresCount	//! total number of columns
 	};
+#endif
 
 	SatellitesDialog();
 	~SatellitesDialog();
@@ -108,9 +110,11 @@ private slots:
 	void trackSatellite(const QModelIndex & index);
 	void updateTLEs(void);
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	void predictIridiumFlares();
 	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
 	void savePredictedIridiumFlares();
+#endif
 
 	void searchSatellitesClear();
 
@@ -146,12 +150,14 @@ private:
 	//! Applies the changes in the group selector to the selected satellites.
 	void setGroups();
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Update header names for Iridium flares table
 	void setIridiumFlaresHeaderNames();
 
 	//! Init header and list of Iridium flares
 	void initListIridiumFlares();
-	
+#endif
+
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
 	
@@ -165,12 +171,15 @@ private:
 	Qt::ItemDataRole checkStateRole;
 
 	QString delimiter;
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	QStringList iridiumFlaresHeader;
+#endif
 
 	// colorpickerbutton's color
 	QColor buttonMarkerColor, buttonOrbitColor, buttonInfoColor;
 };
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
 class SatPIFTreeWidgetItem : public QTreeWidgetItem
 {
@@ -195,5 +204,6 @@ private:
 		}
 	}
 };
+#endif
 
-#endif // _SATELLITESDIALOG_HPP
+#endif // SATELLITESDIALOG_HPP

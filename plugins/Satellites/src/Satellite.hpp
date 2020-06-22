@@ -304,9 +304,10 @@ private:
 
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED
-
+#endif
 	Vec3f    infoColor;
 	//Satellite Orbit Draw
 	Vec3f    orbitColor;
