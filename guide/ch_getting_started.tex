@@ -85,17 +85,10 @@ An archive of all available versions is available at \url{https://github.com/Ste
 
 \begin{enumerate}
 \item
-  Locate the \file{Stellarium-\StelVersion.dmg} file in
-  Finder and double click on it or open it using the Disk Utility
-  application. Now, a new disk appears on your desktop and Stellarium is
-  in it.
+  Locate the \file{Stellarium-\StelVersion.zip} file in
+  Finder and double click on it to unpack Stellarium from archive.
 \item
-  Open the new disk and please take a moment to read the \file{ReadMe} file.
-  Then drag \file{Stellarium} to the Applications folder.
-\item
-  Note: You should copy Stellarium to the Applications folder before
-  running it --- some users have reported problems running it directly
-  from the disk image (\file{.dmg}).
+  Drag \file{Stellarium} to the Applications folder.
 \end{enumerate}
 
 \subsection{Linux}
@@ -105,7 +98,7 @@ Check if your distribution has a package for Stellarium already --- if
 so you're probably best off using it. If not, you can download and build
 the source.
 
-For Ubuntu we provide a package repository with the latest stable
+For Ubuntu Linux we provide a package repository with the latest stable
 releases. Open a terminal and type:
 
 \begin{commands}
@@ -114,11 +107,13 @@ sudo apt-get update
 sudo apt-get install stellarium
 \end{commands}
 
-You can also download and run our AppImage package for 64-bit linuxes (we do not
-provide an AppImage for old 32-bit systems):
+You can also download and run our \emph{AppImage} package for 64-bit linuxes (we do not
+provide an \emph{AppImage} for old 32-bit systems):
 \file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible
 conflicts due to architectural features of AppImage, please remove
 the stellarium package which you have installed from the repository.
+
+Similar to an \emph{AppImage} packages you may use \emph{flat}\footnote{\url{https://flathub.org/apps/details/org.stellarium.Stellarium}} and \emph{snap}\footnote{\url{https://https://snapcraft.io/stellarium-daily}} packages also.
 
 \subsubsection{Raspberry Pi 2/3/4}
 These tiny ARM-based computers are very popular for small and energy-efficient applications like controlling push-to Dobsonians. 
