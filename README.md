@@ -14,7 +14,7 @@
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
 
-[www.stellarium.org](http://www.stellarium.org)
+[www.stellarium.org](https://www.stellarium.org)
 
 ## Installation Instructions & Quick Start
 
@@ -38,4 +38,4 @@ This project exists thanks to all the people who contribute! List of contributor
 
 ## Our backers & sponsors
 
-Thank you to all [our backers and sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)! 🙏 Become a [backer](https://opencollective.com/stellarium#backer) or [sponsor](https://opencollective.com/stellarium#sponsor).
+Thank you to all [our backers and sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)!  Become a [backer](https://opencollective.com/stellarium#backer) or [sponsor](https://opencollective.com/stellarium#sponsor).
