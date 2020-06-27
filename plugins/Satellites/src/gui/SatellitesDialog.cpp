@@ -1138,8 +1138,12 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 	if (!sat->orbitValid)
 		return;
 
-	// Turn on Satellite rendering if it is not already on
-	sat->displayed = true;
+	// Turn on Satellite rendering if it is not already on	
+	if (!ui->displayedCheckbox->isChecked())
+	{
+		ui->displayedCheckbox->setChecked(true);
+		setFlags(); // sync GUI and model
+	}
 
 	// If Satellites are not currently displayed, make them visible.
 	if (!SatellitesMgr->getFlagHintsVisible())
