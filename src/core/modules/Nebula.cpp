@@ -135,26 +135,41 @@ Nebula::~Nebula()
 QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
 {
 	QString res;
-	if (vMag < 50.f && flags&Magnitude)
+	const float mmag = qMin(vMag, bMag);
+	if (mmag < 50.f && flags&Magnitude)
 	{
 		QString emag = "";
+		QString fsys = "";
+		bool bmag = false;
+		float mag = getVMagnitude(core);
+		float mage = getVMagnitudeWithExtinction(core);
+		bool hasAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 		QString tmag = q_("Magnitude");
 		if (nType == NebDn)
 			tmag = q_("Opacity");
 
-		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		if (bMag < 50.f && vMag > 50.f)
+		{
+			fsys = QString("(%1 B").arg(q_("photometric passband"));
+			if (hasAtmosphere)
+				fsys.append(";");
+			else
+				fsys.append(")");
+			mag = getBMagnitude(core);
+			mage = getBMagnitudeWithExtinction(core);
+			bmag = true;
+		}
+
+		if (nType != NebDn && hasAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
-
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			emag = QString("%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(mage, 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			if (!bmag)
+				emag = QString("(%1").arg(emag);
 		}
-		res = QString("%1: <b>%2</b>%3<br />").arg(tmag, QString::number(getVMagnitude(core), 'f', decimals), emag);
+		res = QString("%1: <b>%2</b> %3 %4<br />").arg(tmag, QString::number(mag, 'f', decimals), fsys, emag);
 	}
-	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
-		res.append(QString("%1: <b>%2</b> (%3: B)<br />").arg(q_("Magnitude"), QString::number(bMag, 'f', decimals), q_("Photometric system")));
-	// TODO: Extinction for B magnitude? Or show B magnitude in addition to valid V magnitude?
-
 	res += getExtraInfoStrings(Magnitude).join("");
 	return res;
 }
@@ -310,7 +325,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
 
-			oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
+			if (getContrastIndex(core)<99.f)
+				oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
 		}
 	}
 
@@ -517,6 +533,23 @@ float Nebula::getVMagnitude(const StelCore* core) const
 	return vMag;
 }
 
+float Nebula::getBMagnitude(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return bMag;
+}
+
+float Nebula::getBMagnitudeWithExtinction(const StelCore* core) const
+{
+	Vec3d altAzPos = getAltAzPosGeometric(core);
+	altAzPos.normalize();
+	float mag = getBMagnitude(core);
+	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		core->getSkyDrawer()->getExtinction().forward(altAzPos, &mag);
+	return mag;
+}
+
 double Nebula::getAngularSize(const StelCore *) const
 {
 	float size = majorAxisSize;
@@ -533,7 +566,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	if (!nebMgr->getFlagHints())
 		return selectPriority+3.f;
 
-	float mag = getVMagnitude(core);
+	float mag = qMin(getVMagnitude(core), getBMagnitude(core));
 	float lim = mag;
 	float mLim = 15.0f;
 
@@ -582,9 +615,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 {
 	const float sq = (arcsec ? 3600.f*3600.f : 3600.f); // arcsec^2 or arcmin^2
-	float mag = getVMagnitude(core);
-	if (bMag < 90.f && mag > 90.f)
-		mag = bMag;
+	const float mag = qMin(getVMagnitude(core), getBMagnitude(core));
 	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
 		return mag + 2.5f*log10f(getSurfaceArea()*sq);
 	else
@@ -594,7 +625,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcsec) const
 {
 	const float sq = (arcsec ? 3600.f*3600.f : 3600.f); // arcsec^2 or arcmin^2
-	const float mag=getVMagnitudeWithExtinction(core);
+	const float mag = qMin(getVMagnitudeWithExtinction(core), getBMagnitudeWithExtinction(core));
 	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
 		return mag + 2.5f*log10f(getSurfaceArea()*sq);
 	else
@@ -612,7 +643,11 @@ float Nebula::getContrastIndex(const StelCore* core) const
 	// Compute an extended object's contrast index
 	// Source: Clark, R.N., 1990. Appendix E in Visual Astronomy of the Deep Sky, Cambridge University Press and Sky Publishing.
 	// URL: http://www.clarkvision.com/visastro/appendix-e.html
-	return -0.4f * (getSurfaceBrightnessWithExtinction(core, true) - B_mpsas);
+	const float emag = getSurfaceBrightnessWithExtinction(core, true);
+	if (emag<99.f)
+		return -0.4f * (emag - B_mpsas);
+	else
+		return 99.f;
 }
 
 float Nebula::getSurfaceArea(void) const
