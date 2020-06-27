@@ -342,6 +342,10 @@ QPushButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
+QPushButton:checked {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
+}
+
 
 /*
  * QCheckBox
