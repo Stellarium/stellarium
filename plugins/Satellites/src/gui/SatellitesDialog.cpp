@@ -140,6 +140,7 @@ void SatellitesDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxAutoAdd,         "Satellites.autoAddEnabled");
 	connectBoolProperty(ui->checkBoxAutoRemove,      "Satellites.autoRemoveEnabled");
 	connectIntProperty(ui->updateFrequencySpinBox,   "Satellites.updateFrequencyHours");
+	ui->jumpToSourcesButton->setEnabled(ui->checkBoxAutoAdd);
 	connect(ui->updateButton,            SIGNAL(clicked()),         this,   SLOT(updateTLEs()));
 	connect(ui->jumpToSourcesButton,     SIGNAL(clicked()),         this,   SLOT(jumpToSourcesTab()));
 	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(showUpdateState(Satellites::UpdateState)));
@@ -1137,8 +1138,12 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 	if (!sat->orbitValid)
 		return;
 
-	// Turn on Satellite rendering if it is not already on
-	sat->displayed = true;
+	// Turn on Satellite rendering if it is not already on	
+	if (!ui->displayedCheckbox->isChecked())
+	{
+		ui->displayedCheckbox->setChecked(true);
+		setFlags(); // sync GUI and model
+	}
 
 	// If Satellites are not currently displayed, make them visible.
 	if (!SatellitesMgr->getFlagHintsVisible())

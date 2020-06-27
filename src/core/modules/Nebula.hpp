@@ -201,6 +201,13 @@ public:
 	//! Compute an extended object's contrast index
 	float getContrastIndex(const StelCore* core) const;
 
+	//! Return object's B magnitude as seen from observer, without including extinction.
+	virtual float getBMagnitude(const StelCore* core) const;
+
+	//! Return object's B magnitude as seen from observer including extinction.
+	//! Extinction obviously only if atmosphere=on.
+	float getBMagnitudeWithExtinction(const StelCore* core) const;
+
 	//! Get the surface area.
 	//! @return surface area in square degrees.
 	float getSurfaceArea(void) const;
