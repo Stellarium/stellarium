@@ -72,7 +72,7 @@ double Satellite::sunReflAngle = 180.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	: initialized(false)
-	, displayed(true)
+	, displayed(false)
 	, orbitDisplayed(false)
 	, userDefined(false)
 	, newlyAdded(false)
