@@ -140,6 +140,7 @@ void SatellitesDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxAutoAdd,         "Satellites.autoAddEnabled");
 	connectBoolProperty(ui->checkBoxAutoRemove,      "Satellites.autoRemoveEnabled");
 	connectIntProperty(ui->updateFrequencySpinBox,   "Satellites.updateFrequencyHours");
+	ui->jumpToSourcesButton->setEnabled(ui->checkBoxAutoAdd);
 	connect(ui->updateButton,            SIGNAL(clicked()),         this,   SLOT(updateTLEs()));
 	connect(ui->jumpToSourcesButton,     SIGNAL(clicked()),         this,   SLOT(jumpToSourcesTab()));
 	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(showUpdateState(Satellites::UpdateState)));
