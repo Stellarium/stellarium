@@ -344,9 +344,9 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.14
+    # macOS 10.15
     - os: osx
-      osx_image: xcode11.4
+      osx_image: xcode12
       addons:
         homebrew:
           packages:
