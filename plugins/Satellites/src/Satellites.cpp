@@ -78,6 +78,11 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
+// WARNING! Update also the version number in resources/satellites.json,
+// otherwise the local copy of that file will be overwritten every time
+// Stellarium starts. (Less of a problem if it manages to get one update.)
+QString Satellites::SatellitesCatalogVersion = "0.12.0";
+
 Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
@@ -172,7 +177,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogPath).exists())
 	{
-		if (!checkJsonFileFormat() || readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
+		if (!checkJsonFileFormat() || readCatalogVersion() != SatellitesCatalogVersion)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultCatalog();
@@ -747,14 +752,19 @@ const QString Satellites::readCatalogVersion()
 		return jsonVersion;
 	}
 
-	if (map.contains("creator"))
+	if (map.contains("version"))
+	{
+		QString version = map.value("version").toString();
+		QRegExp vRx("(\\d+\\.\\d+\\.\\d+)");
+		if (vRx.exactMatch(version))
+			jsonVersion = vRx.cap(1);
+	}
+	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
 		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		if (vRx.exactMatch(creator))
-		{
 			jsonVersion = vRx.cap(1);
-		}
 	}
 
 	//qDebug() << "[Satellites] catalog version from file:" << jsonVersion;
@@ -853,8 +863,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (sat->initialized)
 		{
 			satellites.append(sat);
-			groups.unite(sat->groups);
-			numReadOk++;
+			groups.unite(sat->groups);			
 		}
 	}
 	std::sort(satellites.begin(), satellites.end());
@@ -871,7 +880,8 @@ QVariantMap Satellites::createDataMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
+	map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
+	map["version"] = QString("%1").arg(SatellitesCatalogVersion);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;

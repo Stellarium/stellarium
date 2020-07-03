@@ -637,6 +637,8 @@ private:
 	// GUI
 	SatellitesDialog* configDialog;
 
+	static QString SatellitesCatalogVersion;
+
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
 	//! if the last update was longer than updateFrequencyHours ago then the update is

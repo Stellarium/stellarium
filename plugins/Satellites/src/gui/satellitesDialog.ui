@@ -761,6 +761,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QLabel" name="labelStdMagnitude">
+             <property name="toolTip">
+              <string>The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.</string>
+             </property>
              <property name="text">
               <string>Standard magnitude:</string>
              </property>
