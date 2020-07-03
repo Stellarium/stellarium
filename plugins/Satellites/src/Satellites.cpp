@@ -822,7 +822,6 @@ QVariantMap Satellites::loadDataMap(QString path)
 
 void Satellites::setDataMap(const QVariantMap& map)
 {
-	int numReadOk = 0;
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 

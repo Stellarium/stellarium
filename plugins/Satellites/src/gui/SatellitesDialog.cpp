@@ -96,10 +96,10 @@ void SatellitesDialog::retranslate()
 {
 	if (dialog)
 	{
-		ui->retranslateUi(dialog);
-		ui->labelSqMeters->setText(QString("%1<sup>2</sup>").arg(qc_("m","distance")));
+		ui->retranslateUi(dialog);		
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		populateAboutPage();
+		populateInfo();
 		populateFilterMenu();
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 		initListIridiumFlares();
@@ -231,8 +231,7 @@ void SatellitesDialog::createDialogContent()
 
 	// About tab
 	populateAboutPage();
-
-	ui->labelSqMeters->setText(QString("%1<sup>2</sup>").arg(qc_("m","distance")));
+	populateInfo();
 	populateFilterMenu();
 	populateSourcesList();
 
@@ -379,6 +378,12 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatNew);
 	else if (groupId == "[orbiterror]")
 		filterModel->setSecondaryFilters(QString(), SatError);
+	else if (groupId == "[smallsize]")
+		filterModel->setSecondaryFilters(QString(), SatSmallSize);
+	else if (groupId == "[mediumsize]")
+		filterModel->setSecondaryFilters(QString(), SatMediumSize);
+	else if (groupId == "[largesize]")
+		filterModel->setSecondaryFilters(QString(), SatLargeSize);
 	else
 	{
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
@@ -897,6 +902,9 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
+	ui->groupFilterCombo->insertItem(0, q_("[small satellites]"), QVariant("[smallsize]"));
+	ui->groupFilterCombo->insertItem(0, q_("[medium satellites]"), QVariant("[mediumsize]"));
+	ui->groupFilterCombo->insertItem(0, q_("[large satellites]"), QVariant("[largesize]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection
@@ -909,6 +917,13 @@ void SatellitesDialog::populateFilterMenu()
 	}
 	ui->groupFilterCombo->setCurrentIndex(index);
 	ui->groupFilterCombo->blockSignals(false);
+}
+
+void SatellitesDialog::populateInfo()
+{
+	ui->labelRCS->setText(QString("%1, %2<sup>2</sup>:").arg(q_("RCS"), qc_("m","distance")));
+	ui->labelRCS->setToolTip(QString("<p>%1</p>").arg(q_("Radar cross-section (RCS) is a measure of how detectable an object is with a radar. A larger RCS indicates that an object is more easily detected.")));
+	ui->labelStdMagnitude->setToolTip(QString("<p>%1</p>").arg(q_("The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.")));
 }
 
 void SatellitesDialog::populateSourcesList()

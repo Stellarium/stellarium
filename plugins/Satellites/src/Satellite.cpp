@@ -871,6 +871,12 @@ SatFlags Satellite::getFlags() const
 		flags |= SatNew;
 	if (!orbitValid)
 		flags |= SatError;
+	if (RCS>0. && RCS <= 0.1)
+		flags |= SatSmallSize;
+	if (RCS>0.1 && RCS <= 1.0)
+		flags |= SatMediumSize;
+	if (RCS>1.0)
+		flags |= SatLargeSize;
 	return flags;
 }
 

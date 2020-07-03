@@ -67,13 +67,16 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags = 0x0,
-	SatDisplayed = 0x1,
-	SatNotDisplayed = 0x2,
-	SatUser = 0x4,
-	SatOrbit = 0x8,
-	SatNew = 0x10,
-	SatError = 0x20
+	SatNoFlags		= 0x000,
+	SatDisplayed		= 0x001,
+	SatNotDisplayed	= 0x002,
+	SatUser			= 0x004,
+	SatOrbit			= 0x008,
+	SatNew			= 0x010,
+	SatError			= 0x020,
+	SatSmallSize		= 0x040,
+	SatMediumSize		= 0x080,
+	SatLargeSize		= 0x100
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)

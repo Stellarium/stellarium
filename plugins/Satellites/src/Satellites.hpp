@@ -486,8 +486,6 @@ public slots:
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
 
-
-
 	void recalculateOrbitLines(void);
 
 	//! Display a message on the screen for a few seconds.

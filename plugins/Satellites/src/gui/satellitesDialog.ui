@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>491</height>
+    <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -761,9 +761,6 @@
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QLabel" name="labelStdMagnitude">
-             <property name="toolTip">
-              <string>The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.</string>
-             </property>
              <property name="text">
               <string>Standard magnitude:</string>
              </property>
@@ -781,11 +778,8 @@
            </item>
            <item>
             <widget class="QLabel" name="labelRCS">
-             <property name="toolTip">
-              <string>Radar cross-section (RCS) value</string>
-             </property>
              <property name="text">
-              <string>RCS:</string>
+              <string notr="true" extracomment="Radar cross-section">RCS:</string>
              </property>
             </widget>
            </item>
@@ -796,13 +790,6 @@
              </property>
              <property name="readOnly">
               <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="labelSqMeters">
-             <property name="text">
-              <string notr="true">m2</string>
              </property>
             </widget>
            </item>
