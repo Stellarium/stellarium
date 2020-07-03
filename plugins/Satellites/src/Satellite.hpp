@@ -51,6 +51,8 @@ typedef struct
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
 	SatDescriptionRole,
+	SatStdMagnitudeRole,
+	SatRCSRole,
 	SatFlagsRole,
 	SatGroupsRole,
 	FirstLineRole,

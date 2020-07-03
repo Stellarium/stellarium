@@ -57,6 +57,8 @@
 #include "external/qxlsx/xlsxworkbook.h"
 using namespace QXlsx;
 
+const QString SatellitesDialog::dash = QChar(0x2014);
+
 SatellitesDialog::SatellitesDialog()
 	: StelDialog("Satellites")
 	, satelliteModified(false)
@@ -95,6 +97,7 @@ void SatellitesDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		ui->labelSqMeters->setText(QString("%1<sup>2</sup>").arg(qc_("m","distance")));
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		populateAboutPage();
 		populateFilterMenu();
@@ -229,6 +232,7 @@ void SatellitesDialog::createDialogContent()
 	// About tab
 	populateAboutPage();
 
+	ui->labelSqMeters->setText(QString("%1<sup>2</sup>").arg(qc_("m","distance")));
 	populateFilterMenu();
 	populateSourcesList();
 
@@ -423,10 +427,12 @@ void SatellitesDialog::updateSatelliteData()
 
 	if (selection.count() > 1)
 	{
-		ui->nameEdit->clear();
-		ui->noradNumberEdit->clear();
-		ui->tleFirstLineEdit->clear();
-		ui->tleSecondLineEdit->clear();
+		ui->nameEdit->setText(QString());
+		ui->noradNumberEdit->setText(QString());
+		ui->tleFirstLineEdit->setText(QString());
+		ui->tleSecondLineEdit->setText(QString());
+		ui->stdMagnitudeLineEdit->setText(QString());
+		ui->rcsLineEdit->setText(QString());
 
 		// get color of first selected item and test against all other selections
 		{
@@ -440,9 +446,9 @@ void SatellitesDialog::updateSatelliteData()
 
 			for (int i = 1; i < selection.size(); i++)
 			{
-				const QModelIndex& index = selection.at(i);
+				const QModelIndex& idx = selection.at(i);
 
-				id = index.data(Qt::UserRole).toString();
+				id = idx.data(Qt::UserRole).toString();
 				sat = SatellitesMgr->getById(id);
 
 				// test for more than one color in the selection.
@@ -466,9 +472,9 @@ void SatellitesDialog::updateSatelliteData()
 			{
 				for (int i = 1; i < selection.size(); i++)
 				{
-					const QModelIndex& index = selection.at(i);
+					const QModelIndex& idx = selection.at(i);
 
-					if (descText != index.data(SatDescriptionRole).toString())
+					if (descText != idx.data(SatDescriptionRole).toString())
 					{
 						descText.clear();
 						break;
@@ -482,15 +488,24 @@ void SatellitesDialog::updateSatelliteData()
 	else
 	{
 		QModelIndex& index = selection.first();
+		float stdMagnitude = index.data(SatStdMagnitudeRole).toFloat();
+		QString stdMagString = dash;
+		if (stdMagnitude<99.f)
+			stdMagString = QString::number(stdMagnitude, 'f', 2);
+		float rcs = index.data(SatRCSRole).toFloat();
+		QString rcsString = dash;
+		if (rcs > 0.f)
+			rcsString = QString::number(rcs, 'f', 3);
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
+		ui->stdMagnitudeLineEdit->setText(stdMagString);
+		ui->rcsLineEdit->setText(rcsString);
 		ui->tleFirstLineEdit->setText(index.data(FirstLineRole).toString());
 		ui->tleFirstLineEdit->setCursorPosition(0);
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
-		ui->tleSecondLineEdit->setCursorPosition(0);
-		
+		ui->tleSecondLineEdit->setCursorPosition(0);		
 		
 		// get color of the one selected sat
 		QString id = index.data(Qt::UserRole).toString();
@@ -1076,6 +1091,10 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->tleFirstLineEdit->setText(QString());
 	ui->tleSecondLineEdit->setEnabled(false);
 	ui->tleSecondLineEdit->setText(QString());
+	ui->stdMagnitudeLineEdit->setEnabled(false);
+	ui->stdMagnitudeLineEdit->setText(QString());
+	ui->rcsLineEdit->setEnabled(false);
+	ui->rcsLineEdit->setText(QString());
 
 	// set default
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
@@ -1098,6 +1117,8 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->groupsListWidget->setEnabled(true);
 	ui->tleFirstLineEdit->setEnabled(true);
 	ui->tleSecondLineEdit->setEnabled(true);
+	ui->stdMagnitudeLineEdit->setEnabled(true);
+	ui->rcsLineEdit->setEnabled(true);
 }
 
 void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)

@@ -177,6 +177,8 @@ private:
 
 	// colorpickerbutton's color
 	QColor buttonMarkerColor, buttonOrbitColor, buttonInfoColor;
+
+	static const QString dash;
 };
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)

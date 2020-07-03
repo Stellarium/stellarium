@@ -61,34 +61,30 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 	switch (role)
 	{
 		case Qt::DisplayRole:
-			return (sat->name);
-			
+			return (sat->name);			
 		case Qt::ForegroundRole:
 			if (coloredNames)
 			{
 				return QBrush(sat->hintColor.toQColor());
 			}
 			else
-				break;
-			
+				break;			
 		case Qt::UserRole:
-			return (sat->id);
-			
+			return (sat->id);			
 		case SatDescriptionRole:
 			return (sat->description);
-			
+		case SatStdMagnitudeRole:
+			return (sat->stdMag);
+		case SatRCSRole:
+			return (sat->RCS);
 		case SatFlagsRole:
-			return (QVariant::fromValue<SatFlags>(sat->getFlags()));
-			
+			return (QVariant::fromValue<SatFlags>(sat->getFlags()));			
 		case SatGroupsRole:
-			return (QVariant::fromValue<GroupSet>(sat->groups));
-			
+			return (QVariant::fromValue<GroupSet>(sat->groups));			
 		case FirstLineRole:
-			return (sat->tleElements.first);
-			
+			return (sat->tleElements.first);			
 		case SecondLineRole:
-			return (sat->tleElements.second);
-			
+			return (sat->tleElements.second);			
 		default:
 			break;
 	}
