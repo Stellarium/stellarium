@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-22 00:46+0700\n"
+"POT-Creation-Date: 2020-07-03 20:47+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Sirish Kumar Tummala <sirishtummala@gmail.com>, 2019\n"
 "Language-Team: Telugu (https://www.transifex.com/stellarium/teams/80998/te/)\n"
@@ -32,12 +32,12 @@ msgstr "కస్టమ్ గుర్తింపు"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
 #: src/core/modules/Constellation.cpp:277
-#: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:270
-#: src/core/modules/Nebula.cpp:272 src/core/modules/Planet.cpp:475
+#: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:285
+#: src/core/modules/Nebula.cpp:287 src/core/modules/Planet.cpp:475
 #: src/core/modules/Planet.cpp:478 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:218 src/core/modules/StarWrapper.cpp:221
 #: src/gui/AstroCalcDialog.cpp:851 src/ui_configurationDialog.h:1653
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:300
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:145 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:184
@@ -270,8 +270,8 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1305 src/core/modules/Planet.cpp:659
 #: src/core/modules/Planet.cpp:941 src/gui/AstroCalcDialog.cpp:6086
-#: plugins/Satellites/src/Satellite.cpp:318
-#: plugins/Satellites/src/Satellite.cpp:380
+#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:382
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
@@ -491,7 +491,8 @@ msgstr "కర్త"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
-#: plugins/Satellites/src/Satellite.cpp:409
+#: plugins/Satellites/src/Satellite.cpp:412
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -576,8 +577,8 @@ msgstr "వ్యాసం"
 #: src/core/modules/Planet.cpp:640 src/core/modules/Planet.cpp:738
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
 #: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6006
-#: plugins/Satellites/src/Satellite.cpp:314
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:316
+#: plugins/Satellites/src/Satellite.cpp:375
 msgctxt "distance"
 msgid "km"
 msgstr "km"
@@ -1250,87 +1251,87 @@ msgstr "రంగు చార లేదా పట్టీ."
 msgid "Nomenclature labels"
 msgstr "పరిభాష పేర్లు"
 
-#: src/core/modules/Nebula.cpp:141 src/core/modules/Nebula.cpp:155
-#: src/core/StelObject.cpp:238 src/gui/AstroCalcDialog.cpp:3035
-#: src/gui/AstroCalcDialog.cpp:3093 plugins/Supernovae/src/Supernova.cpp:127
+#: src/core/modules/Nebula.cpp:147 src/core/StelObject.cpp:238
+#: src/gui/AstroCalcDialog.cpp:3035 src/gui/AstroCalcDialog.cpp:3093
+#: plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr "పరిమాణం"
 
-#: src/core/modules/Nebula.cpp:143
+#: src/core/modules/Nebula.cpp:149
 msgid "Opacity"
 msgstr "అపారదర్శకత"
 
-#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:243
+#: src/core/modules/Nebula.cpp:153
+msgid "photometric passband"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:167 src/core/StelObject.cpp:243
 msgid "reduced to"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:243
+#: src/core/modules/Nebula.cpp:167 src/core/StelObject.cpp:243
 msgid "by"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:150 src/core/StelObject.cpp:243
+#: src/core/modules/Nebula.cpp:167 src/core/StelObject.cpp:243
 msgid "Airmasses"
 msgstr "వాయురాశులు"
 
-#: src/core/modules/Nebula.cpp:155 src/core/modules/StarWrapper.cpp:252
-msgid "Photometric system"
-msgstr "ఫోటోమెట్రిక్ సిస్టమ్"
-
-#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:455
+#: src/core/modules/Nebula.cpp:272 src/core/modules/Planet.cpp:455
 #: src/core/modules/StarWrapper.cpp:175
 msgid "Additional names: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:263 src/core/modules/Planet.cpp:462
+#: src/core/modules/Nebula.cpp:278 src/core/modules/Planet.cpp:462
 #: src/core/modules/StarWrapper.cpp:181
 msgid "Additional catalog numbers: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:282 src/core/modules/MinorPlanet.cpp:186
+#: src/core/modules/Nebula.cpp:297 src/core/modules/MinorPlanet.cpp:186
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "కలర్ ఇండెక్స్ (B-V)"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:302
 msgid "Surface brightness"
 msgstr "ఉపరితల ప్రకాశము"
 
-#: src/core/modules/Nebula.cpp:288
+#: src/core/modules/Nebula.cpp:303
 msgid "after extinction"
 msgstr "కాంతి శోషణ తరువాత"
 
-#: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:300
+#: src/core/modules/Nebula.cpp:313 src/core/modules/Nebula.cpp:315
 #: src/gui/AstroCalcDialog.cpp:992 src/gui/AstroCalcDialog.cpp:994
 msgctxt "magnitude"
 msgid "mag"
 msgstr "పరి"
 
-#: src/core/modules/Nebula.cpp:298 src/gui/AstroCalcDialog.cpp:992
+#: src/core/modules/Nebula.cpp:313 src/gui/AstroCalcDialog.cpp:992
 #: src/gui/AstroCalcDialog.cpp:999 src/gui/AstroCalcDialog.cpp:1058
 msgid "arcmin"
 msgstr "arcmin"
 
-#: src/core/modules/Nebula.cpp:300 src/gui/AstroCalcDialog.cpp:994
+#: src/core/modules/Nebula.cpp:315 src/gui/AstroCalcDialog.cpp:994
 msgid "arcsec"
 msgstr "arcsec"
 
-#: src/core/modules/Nebula.cpp:313
+#: src/core/modules/Nebula.cpp:329
 msgid "Contrast index"
 msgstr "కాంట్రాస్ట్ ఇండెక్స్"
 
-#: src/core/modules/Nebula.cpp:321 src/ui_configurationDialog.h:1666
+#: src/core/modules/Nebula.cpp:337 src/ui_configurationDialog.h:1666
 msgid "Size"
 msgstr "పరిమాణం"
 
-#: src/core/modules/Nebula.cpp:339
+#: src/core/modules/Nebula.cpp:355
 msgid "Orientation angle"
 msgstr "ఓరియెంటేషన్ కోణం"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:366 src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:382 src/core/modules/Nebula.cpp:395
 #: src/core/modules/StarWrapper.cpp:264
 #: plugins/Supernovae/src/Supernova.cpp:164 plugins/Novae/src/Nova.cpp:166
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:301
@@ -1338,7 +1339,7 @@ msgctxt "distance"
 msgid "ly"
 msgstr "ly"
 
-#: src/core/modules/Nebula.cpp:367 src/core/modules/Nebula.cpp:413
+#: src/core/modules/Nebula.cpp:383 src/core/modules/Nebula.cpp:429
 #: src/core/modules/Planet.cpp:650 src/core/modules/StarWrapper.cpp:269
 #: src/core/modules/StarWrapper.cpp:271 src/gui/AstroCalcDialog.cpp:3046
 #: src/gui/AstroCalcDialog.cpp:3104 src/ui_configurationDialog.h:1638
@@ -1348,306 +1349,306 @@ msgid "Distance"
 msgstr "దూరం"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:377 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:393 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:406
 msgctxt "distance"
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:415
 msgctxt "distance"
 msgid "M ly"
 msgstr "M ly"
 
-#: src/core/modules/Nebula.cpp:428 plugins/Quasars/src/Quasar.cpp:155
+#: src/core/modules/Nebula.cpp:444 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
 msgstr "రెడ్‌షిఫ్ట్"
 
-#: src/core/modules/Nebula.cpp:438 src/core/modules/StarWrapper.cpp:293
+#: src/core/modules/Nebula.cpp:454 src/core/modules/StarWrapper.cpp:293
 msgid "Parallax"
 msgstr "పారలాక్స్"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:438 src/core/modules/StarWrapper.cpp:298
+#: src/core/modules/Nebula.cpp:454 src/core/modules/StarWrapper.cpp:298
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:441 src/ui_searchDialogGui.h:866
+#: src/core/modules/Nebula.cpp:457 src/ui_searchDialogGui.h:866
 msgid "Morphological description"
 msgstr "రూప నిర్మాణ వివరం"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1140
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1143
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "కేంద్రం వద్ద ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1111
+#: src/core/modules/Nebula.cpp:1146
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "నక్షత్రాలతో బలమైన ఇన్నర్ కోర్"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1149
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "ఎగువ మధ్య స్థాయి గాఢత"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "మధ్య స్థాయి గాఢత"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1157
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ ఒకింత పలచబడే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ పలచబడే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1128
+#: src/core/modules/Nebula.cpp:1163
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "పలచగా ఉన్న నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1131
+#: src/core/modules/Nebula.cpp:1166
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ బాగా తక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1134
+#: src/core/modules/Nebula.cpp:1169
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "కేంద్రం వైపు వెళ్ళేకొద్దీ దాదాపుగా లేని నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1137
+#: src/core/modules/Nebula.cpp:1172
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "అక్షరబద్ధం కాని గాఢత తరగతి"
 
-#: src/core/modules/Nebula.cpp:1157
+#: src/core/modules/Nebula.cpp:1192
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "కేంద్రం వద్ద బాగా ఎక్కువగా ఉండే నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1160
+#: src/core/modules/Nebula.cpp:1195
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "కేంద్రం వద్ద స్వల్ప నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1163
+#: src/core/modules/Nebula.cpp:1198
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "పెద్దగా కనిపించని నక్షత్రాల గాఢత"
 
-#: src/core/modules/Nebula.cpp:1166
+#: src/core/modules/Nebula.cpp:1201
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1169
+#: src/core/modules/Nebula.cpp:1204
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "అక్షరబద్ధం కాని గాఢత తరగతి"
 
-#: src/core/modules/Nebula.cpp:1175
+#: src/core/modules/Nebula.cpp:1210
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "సమూహ సభ్యుల స్వల్ప ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1178
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "సమూహ సభ్యుల మధ్యస్థ ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1181
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "సమూహ సభ్యుల అధిక ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1184
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "అక్షరబద్ధం కాని సమూహ సభ్యుల ప్రకాశపు పరిధి"
 
-#: src/core/modules/Nebula.cpp:1190
+#: src/core/modules/Nebula.cpp:1225
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "50 కంటే తక్కువ నక్షత్రాలతో కూడిన అల్ప సమూహం"
 
-#: src/core/modules/Nebula.cpp:1193
+#: src/core/modules/Nebula.cpp:1228
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "50-100 నక్షత్రాలతో కూడిన ఒక మాదిరి సంపన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1196
+#: src/core/modules/Nebula.cpp:1231
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "100 కంటే ఎక్కువ నక్షత్రాలతో కూడిన సంపన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1199
+#: src/core/modules/Nebula.cpp:1234
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "అక్షరబద్ధం కాని సభ్యులు గల తరగతి"
 
-#: src/core/modules/Nebula.cpp:1203
+#: src/core/modules/Nebula.cpp:1238
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "సమూహం నెబ్యులోసిటీ లోపల ఉంటుంది"
 
-#: src/core/modules/Nebula.cpp:1224
+#: src/core/modules/Nebula.cpp:1259
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "చాలా ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1227
+#: src/core/modules/Nebula.cpp:1262
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1230
+#: src/core/modules/Nebula.cpp:1265
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "మధ్యస్థ ప్రకాశవంతం"
 
-#: src/core/modules/Nebula.cpp:1233
+#: src/core/modules/Nebula.cpp:1268
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "బలహీన ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1236
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "బాగా బలహీన ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1239
+#: src/core/modules/Nebula.cpp:1274
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "అనిశ్చిత ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1242
+#: src/core/modules/Nebula.cpp:1277
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "ప్రకాశం అక్షరబద్ధం కాని పరావర్తన నెబ్యులాలు"
 
-#: src/core/modules/Nebula.cpp:1248
+#: src/core/modules/Nebula.cpp:1283
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "ప్రకాశిస్తున్న తార నెబ్యులోసిటీ లోపల ఇమిడి ఉంది"
 
-#: src/core/modules/Nebula.cpp:1251
+#: src/core/modules/Nebula.cpp:1286
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "తార, ప్రకాశిస్తున్న నెబ్యులోసిటీ బయట ఉంది"
 
-#: src/core/modules/Nebula.cpp:1254
+#: src/core/modules/Nebula.cpp:1289
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "తార ప్రకాశిస్తున్న నెబ్యులోసిటీ మూలన ఉంది"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1294
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "తార ప్రకాశిస్తున్న అసామాన్య నెబ్యులోసిటీ బయట ఉంది"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1300
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "ప్రకాశిస్తున్న అసామాన్య నెబ్యులోసిటీ"
 
-#: src/core/modules/Nebula.cpp:1269
+#: src/core/modules/Nebula.cpp:1304
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "అక్షరబద్ధం కాని పరావర్తన నెబ్యులాలు"
 
-#: src/core/modules/Nebula.cpp:1289
+#: src/core/modules/Nebula.cpp:1324
 msgid "circular form"
 msgstr "వృత్తాకార రూపం"
 
-#: src/core/modules/Nebula.cpp:1290
+#: src/core/modules/Nebula.cpp:1325
 msgid "elliptical form"
 msgstr "దీర్ఘవృత్త రూపం"
 
-#: src/core/modules/Nebula.cpp:1291
+#: src/core/modules/Nebula.cpp:1326
 msgid "irregular form"
 msgstr "క్రమరహిత రూపం"
 
-#: src/core/modules/Nebula.cpp:1293
+#: src/core/modules/Nebula.cpp:1328
 msgid "amorphous structure"
 msgstr "నిరాకార ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1294
+#: src/core/modules/Nebula.cpp:1329
 msgid "conventional structure"
 msgstr "సాంప్రదాయిక ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1295
+#: src/core/modules/Nebula.cpp:1330
 msgid "filamentary structure"
 msgstr "ఫిలమెంటరీ ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1297
+#: src/core/modules/Nebula.cpp:1332
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "అత్యల్ప ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1298
+#: src/core/modules/Nebula.cpp:1333
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "ఒక మాదిరి ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1299
+#: src/core/modules/Nebula.cpp:1334
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "అత్యధిక ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1302
+#: src/core/modules/Nebula.cpp:1337
 msgid "undocumented form"
 msgstr "అక్షరబద్ధం కాని రూపం"
 
-#: src/core/modules/Nebula.cpp:1303
+#: src/core/modules/Nebula.cpp:1338
 msgid "undocumented structure"
 msgstr "అక్షరబద్ధం కాని ఆకృతి"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1339
 msgid "undocumented brightness"
 msgstr "అక్షరబద్ధం కాని ప్రకాశం"
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1351
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "అవశేషం, డొల్ల రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1354
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "అవశేషం, నిండు కేంద్రపు ('ప్లీరియన్ ') రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1322
+#: src/core/modules/Nebula.cpp:1357
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "అవశేషం ఓ మిశ్రమ (లేదా మిళిత) రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1325
+#: src/core/modules/Nebula.cpp:1360
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "అవశేషం, కొంత అనిశ్చితితో కూడిన డొల్ల రేడియో స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1328
+#: src/core/modules/Nebula.cpp:1363
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -1656,7 +1657,7 @@ msgstr ""
 "అవశేషం, కొంత అనిశ్చితితో కూడిన నిండు కేంద్రపు ('ప్లీరియన్ ') రేడియో "
 "స్ట్రక్చరును చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1331
+#: src/core/modules/Nebula.cpp:1366
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -1665,158 +1666,158 @@ msgstr ""
 "అవశేషం కొంత అనిశ్చితితో కూడిన ఓ మిశ్రమ (లేదా మిళిత) రేడియో స్ట్రక్చరును "
 "చూపిస్తుంది"
 
-#: src/core/modules/Nebula.cpp:1339
+#: src/core/modules/Nebula.cpp:1374
 msgid "undocumented type"
 msgstr "అక్షర బద్ధం కాని రకం"
 
-#: src/core/modules/Nebula.cpp:1345
+#: src/core/modules/Nebula.cpp:1380
 msgid "galaxy"
 msgstr "నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1346
+#: src/core/modules/Nebula.cpp:1381
 msgid "active galaxy"
 msgstr "సచేతన నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1347
+#: src/core/modules/Nebula.cpp:1382
 msgid "radio galaxy"
 msgstr "రేడియో నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1348
+#: src/core/modules/Nebula.cpp:1383
 msgid "interacting galaxy"
 msgstr "స్పందిస్తున్న నక్షత్ర మండలం"
 
-#: src/core/modules/Nebula.cpp:1349 plugins/Quasars/src/Quasar.cpp:128
+#: src/core/modules/Nebula.cpp:1384 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
 msgstr "క్వాసార్"
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1385
 msgid "star cluster"
 msgstr "నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1351
+#: src/core/modules/Nebula.cpp:1386
 msgid "open star cluster"
 msgstr "ఓపెన్ నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1352
+#: src/core/modules/Nebula.cpp:1387
 msgid "globular star cluster"
 msgstr "గోళాకార నక్షత్ర సమూహం"
 
-#: src/core/modules/Nebula.cpp:1353
+#: src/core/modules/Nebula.cpp:1388
 msgid "stellar association"
 msgstr "స్టెల్లార్ అసోసియేషన్"
 
-#: src/core/modules/Nebula.cpp:1354
+#: src/core/modules/Nebula.cpp:1389
 msgid "star cloud"
 msgstr "నక్షత్ర మేఘం"
 
-#: src/core/modules/Nebula.cpp:1355
+#: src/core/modules/Nebula.cpp:1390
 msgid "nebula"
 msgstr "నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1356
+#: src/core/modules/Nebula.cpp:1391
 msgid "planetary nebula"
 msgstr "గ్రహ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1357
+#: src/core/modules/Nebula.cpp:1392
 msgid "dark nebula"
 msgstr "అంధకార నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1358
+#: src/core/modules/Nebula.cpp:1393
 msgid "reflection nebula"
 msgstr "పరావర్తన నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1359
+#: src/core/modules/Nebula.cpp:1394
 msgid "bipolar nebula"
 msgstr "బైపోలార్ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1360
+#: src/core/modules/Nebula.cpp:1395
 msgid "emission nebula"
 msgstr "ఎమిషన్ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1361
+#: src/core/modules/Nebula.cpp:1396
 msgid "cluster associated with nebulosity"
 msgstr "నెబ్యులోసిటీతో ఉన్న సమూహం"
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1397
 msgid "HII region"
 msgstr "HII ప్రాంతం"
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1398
 msgid "supernova remnant"
 msgstr "సూపర్‌నోవా అవశేషం"
 
-#: src/core/modules/Nebula.cpp:1364
+#: src/core/modules/Nebula.cpp:1399
 msgid "interstellar matter"
 msgstr "అంతర నక్షత్ర పదార్థం"
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1400
 msgid "emission object"
 msgstr "ఉద్గార వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1366
+#: src/core/modules/Nebula.cpp:1401
 msgid "BL Lac object"
 msgstr "BL Lac వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1402
 msgid "blazar"
 msgstr "బ్లాజార్"
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1403
 msgid "molecular cloud"
 msgstr "మోలిక్యులర్ మేఘం"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1404
 msgid "young stellar object"
 msgstr "యువ స్టెల్లార్ వస్తువు"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1405
 msgid "possible quasar"
 msgstr "బహుశా క్వాసార్"
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1406
 msgid "possible planetary nebula"
 msgstr "బహుశా గ్రహ నెబ్యులా"
 
-#: src/core/modules/Nebula.cpp:1372
+#: src/core/modules/Nebula.cpp:1407
 msgid "protoplanetary nebula"
 msgstr "ఆదిమగ్రహ నెబ్యులా"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1373 src/core/modules/StarWrapper.cpp:54
+#: src/core/modules/Nebula.cpp:1408 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:211 src/gui/AstroCalcDialog.cpp:1130
 #: src/translations.h:54
 msgid "star"
 msgstr "నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1374
+#: src/core/modules/Nebula.cpp:1409
 msgid "symbiotic star"
 msgstr "సింబియోటిక్ నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1375
+#: src/core/modules/Nebula.cpp:1410
 msgid "emission-line star"
 msgstr "ఉద్గార-లైన్లు కలిగిన నక్షత్రం"
 
-#: src/core/modules/Nebula.cpp:1376
+#: src/core/modules/Nebula.cpp:1411
 msgid "supernova candidate"
 msgstr "సూపర్‌నోవా అపేక్షి"
 
-#: src/core/modules/Nebula.cpp:1377
+#: src/core/modules/Nebula.cpp:1412
 msgid "supernova remnant candidate"
 msgstr "సూపర్‌నోవా అవశేష అపేక్షి"
 
-#: src/core/modules/Nebula.cpp:1378
+#: src/core/modules/Nebula.cpp:1413
 msgid "cluster of galaxies"
 msgstr "నక్షత్ర మండలాల సమూహం"
 
-#: src/core/modules/Nebula.cpp:1379
+#: src/core/modules/Nebula.cpp:1414
 msgid "part of a galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1380
+#: src/core/modules/Nebula.cpp:1415
 msgid "region of the sky"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1381
+#: src/core/modules/Nebula.cpp:1416
 msgid "object of unknown nature"
 msgstr "ఎలాంటిదో తెలియని వస్తువు"
 
@@ -1981,7 +1982,7 @@ msgstr "సాగతీత"
 
 #: src/core/modules/Planet.cpp:777 src/core/modules/Planet.cpp:785
 #: src/gui/AstroCalcDialog.cpp:3061 src/gui/AstroCalcDialog.cpp:3119
-#: plugins/Satellites/src/Satellite.cpp:385
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "Phase angle"
 msgstr "ఫేస్ కోణం"
 
@@ -2169,6 +2170,10 @@ msgstr "జమిలి నక్షత్రం"
 #: src/core/modules/StarWrapper.cpp:252
 msgid "Magnitude range"
 msgstr "పరిమాణ పరిధి"
+
+#: src/core/modules/StarWrapper.cpp:252
+msgid "Photometric system"
+msgstr "ఫోటోమెట్రిక్ సిస్టమ్"
 
 #: src/core/modules/StarWrapper.cpp:283
 msgid "Proper motion"
@@ -3704,7 +3709,7 @@ msgid "Acknowledgements"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1117
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:706
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:638
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:186
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
@@ -3719,7 +3724,7 @@ msgstr "సంప్రదించండి"
 #: src/gui/ConfigurationDialog.cpp:1120 src/scripting/StelScriptMgr.cpp:472
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:538
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:704
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:636
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
@@ -3741,7 +3746,7 @@ msgstr "వెర్షన్"
 #: src/gui/ConfigurationDialog.cpp:1121 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:539
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:705
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:637
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
@@ -4290,7 +4295,7 @@ msgstr "టెస్టర్: %1"
 #: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:541
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:640
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
@@ -4377,7 +4382,7 @@ msgstr "షార్ట్‌కట్ల విండో"
 msgid "Astronomical calculations window"
 msgstr "ఖగోళ లెక్కింపుల విండో"
 
-#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:205
+#: src/gui/StelGui.cpp:249 src/ui_bookmarksDialog.h:206
 msgid "Bookmarks"
 msgstr "బుక్‌మార్కులు"
 
@@ -4936,7 +4941,7 @@ msgstr "డిక్లనేషన్"
 #: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:579
 #: src/gui/AstroCalcDialog.cpp:761 src/gui/AstroCalcDialog.cpp:763
 #: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:1390
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1234
 msgid "Azimuth"
 msgstr "అజిముత్"
 
@@ -4946,8 +4951,8 @@ msgstr "అజిముత్"
 #: src/gui/AstroCalcDialog.cpp:1392 src/gui/AstroCalcDialog.cpp:1822
 #: src/gui/AstroCalcDialog.cpp:2703 src/gui/AstroCalcDialog.cpp:3210
 #: src/gui/AstroCalcDialog.cpp:3488 src/gui/AstroCalcDialog.cpp:3490
-#: plugins/Satellites/src/Satellite.cpp:320
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1276
+#: plugins/Satellites/src/Satellite.cpp:322
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1233
 msgid "Altitude"
 msgstr "ఆల్టిట్యూడ్"
 
@@ -5155,14 +5160,14 @@ msgstr "అధిక ప్రాపర్ చలనం గల నక్షత�
 #: src/gui/AstroCalcDialog.cpp:1248 src/gui/AstroCalcDialog.cpp:1741
 #: src/gui/AstroCalcDialog.cpp:2018 src/gui/AstroCalcDialog.cpp:3829
 #: src/gui/AstroCalcDialog.cpp:5891
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:354
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1309
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
 #: src/gui/AstroCalcDialog.cpp:1250 src/gui/AstroCalcDialog.cpp:1743
 #: src/gui/AstroCalcDialog.cpp:2020 src/gui/AstroCalcDialog.cpp:3831
 #: src/gui/AstroCalcDialog.cpp:5893
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:356
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1311
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Comma delimited)"
 
@@ -5575,7 +5580,7 @@ msgstr ""
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3079 src/gui/AstroCalcDialog.cpp:3137
 #: src/gui/AstroCalcDialog.cpp:3251
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -5938,7 +5943,7 @@ msgstr "స్థానికీకరించిన పేరు"
 msgid "Location of observer"
 msgstr "పరిశీలకుని స్థానం"
 
-#: src/gui/BookmarksDialog.cpp:467 src/ui_bookmarksDialog.h:216
+#: src/gui/BookmarksDialog.cpp:467 src/ui_bookmarksDialog.h:217
 msgid "Import bookmarks"
 msgstr "బుక్‌మార్కుల దిగుమతి"
 
@@ -6079,7 +6084,7 @@ msgstr "NW"
 #. TRANSLATORS: Type of object
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet
 #. constellation (FLOCK and SKYSAT satellites)
-#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2234
+#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2252
 msgid "planet"
 msgstr "గ్రహం"
 
@@ -9570,7 +9575,7 @@ msgid "names in English"
 msgstr "ఇంగ్లీషులో పేర్లు"
 
 #: src/ui_searchDialogGui.h:883 src/ui_astroCalcDialog.h:1753
-#: plugins/Satellites/src/ui_satellitesDialog.h:825
+#: plugins/Satellites/src/ui_satellitesDialog.h:860
 msgid "Search in list..."
 msgstr "జాబితాలో వెతుకు..."
 
@@ -10040,7 +10045,7 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "తెర చీటీలుగా హోదాలను వాడు"
 
-#: src/ui_viewDialog.h:3168 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: src/ui_viewDialog.h:3168 plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Labels"
 msgstr "చీటీలు"
 
@@ -10711,7 +10716,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "గ్రాఫికల్ యూజర్ ఇంటర్‌ఫేసుకు అదనపు సెట్టింగులు"
 
 #: src/ui_configurationDialog.h:1555
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1231
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "సమయం"
@@ -11619,7 +11624,7 @@ msgstr ""
 msgid "Clear output before script runs"
 msgstr ""
 
-#: src/ui_scriptConsole.h:426 plugins/Satellites/src/ui_satellitesDialog.h:824
+#: src/ui_scriptConsole.h:426 plugins/Satellites/src/ui_satellitesDialog.h:859
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -11751,7 +11756,7 @@ msgid "Save ephemeris"
 msgstr "ఎఫెమెరిస్‌ను భద్రపరుచు"
 
 #: src/ui_astroCalcDialog.h:1649 src/ui_astroCalcDialog.h:1701
-#: plugins/Satellites/src/ui_satellitesDialog.h:878
+#: plugins/Satellites/src/ui_satellitesDialog.h:914
 msgid "Calculations require time, please be patient"
 msgstr "లెక్కించడానికి సమయం పడుతుంది, ఓపిక పట్టండి"
 
@@ -12063,43 +12068,43 @@ msgstr ""
 msgid "Ephemeris line thickness:"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:207
+#: src/ui_bookmarksDialog.h:208
 msgid "Add date and time"
 msgstr "తేదీ, సమయం ఇవ్వండి"
 
-#: src/ui_bookmarksDialog.h:208
+#: src/ui_bookmarksDialog.h:209
 msgid "Add location"
 msgstr "స్థలం ఇవ్వండి"
 
-#: src/ui_bookmarksDialog.h:210
+#: src/ui_bookmarksDialog.h:211
 msgid "Add selected object to bookmarks"
 msgstr "ఎంచుకున్న వస్తువును బుక్‌మార్కులకు చేర్చు"
 
-#: src/ui_bookmarksDialog.h:212
+#: src/ui_bookmarksDialog.h:213
 msgid "&Add bookmark"
 msgstr "&Add bookmark"
 
-#: src/ui_bookmarksDialog.h:213
+#: src/ui_bookmarksDialog.h:214
 msgid "&Remove bookmark"
 msgstr "&Remove bookmark"
 
-#: src/ui_bookmarksDialog.h:214
+#: src/ui_bookmarksDialog.h:215
 msgid "Clear bookmarks"
 msgstr "బుక్‌మార్కులను తుడిచివేయి"
 
-#: src/ui_bookmarksDialog.h:215
+#: src/ui_bookmarksDialog.h:216
 msgid "&Go to..."
 msgstr "&Go to..."
 
-#: src/ui_bookmarksDialog.h:217
+#: src/ui_bookmarksDialog.h:218
 msgid "Export bookmarks"
 msgstr "బుక్‌మార్కులను ఎగుమతి చేయి"
 
-#: src/ui_bookmarksDialog.h:218
+#: src/ui_bookmarksDialog.h:219
 msgid "Clear the highlights"
 msgstr "హైలైట్లను తుడిచివేయి"
 
-#: src/ui_bookmarksDialog.h:219
+#: src/ui_bookmarksDialog.h:220
 msgid "Highlight bookmarks"
 msgstr "బుక్‌మార్కులను హైలైటు చెయ్యి"
 
@@ -12563,7 +12568,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:683
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
@@ -12583,7 +12588,7 @@ msgstr "లింకులు"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:567
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
@@ -12608,7 +12613,7 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:570
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:687
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
@@ -12629,7 +12634,7 @@ msgstr "మీకు సందేహాలేమైనా ఉంటే, {ఇక�
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Oculars/src/gui/OcularDialog.cpp:572
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
@@ -12650,7 +12655,7 @@ msgstr "బగ్ రిపోర్టులు, కొత్త అంశా�
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/Oculars/src/gui/OcularDialog.cpp:574
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
@@ -12727,7 +12732,7 @@ msgid "Use dms format for angles"
 msgstr "కోణాలకు dms అకృతిని వాడు"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:321
-#: plugins/Satellites/src/ui_satellitesDialog.h:822
+#: plugins/Satellites/src/ui_satellitesDialog.h:857
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:308
@@ -12744,7 +12749,7 @@ msgstr "తిరిగి డిఫాల్టు సెట్టింగు�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
 #: plugins/Oculars/src/ui_ocularDialog.h:1566
-#: plugins/Satellites/src/ui_satellitesDialog.h:883
+#: plugins/Satellites/src/ui_satellitesDialog.h:919
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:439
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -13605,7 +13610,7 @@ msgstr "బైనాక్యులర్లు"
 #: plugins/Oculars/src/ui_ocularDialog.h:1532
 #: plugins/Oculars/src/ui_ocularDialog.h:1548
 #: plugins/Oculars/src/ui_ocularDialog.h:1559
-#: plugins/Satellites/src/ui_satellitesDialog.h:847
+#: plugins/Satellites/src/ui_satellitesDialog.h:882
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -13724,8 +13729,8 @@ msgid "Support for Oculus Rift"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:72
-#: plugins/Satellites/src/Satellites.cpp:147
-#: plugins/Satellites/src/ui_satellitesDialog.h:864
+#: plugins/Satellites/src/Satellites.cpp:154
+#: plugins/Satellites/src/ui_satellitesDialog.h:900
 msgid "Satellites"
 msgstr "ఉపగ్రహాలు"
 
@@ -13736,236 +13741,236 @@ msgid ""
 msgstr ""
 "భూకక్ష్య లోని కృత్రిమ ఉపగ్రహాల స్థానాల అంచనా NORAD TLE డేటా పై ఆధారపడినది."
 
-#: plugins/Satellites/src/Satellites.cpp:148
+#: plugins/Satellites/src/Satellites.cpp:155
 msgid "Satellite hints"
 msgstr "ఉపగ్రహాల హింట్లు"
 
-#: plugins/Satellites/src/Satellites.cpp:149
+#: plugins/Satellites/src/Satellites.cpp:156
 msgid "Satellite labels"
 msgstr "ఉపగ్రహాల చీటీలు"
 
-#: plugins/Satellites/src/Satellites.cpp:150
+#: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellites configuration window"
 msgstr "ఉపగ్రహాల కాన్ఫిగరేషన్ విండో"
 
-#: plugins/Satellites/src/Satellites.cpp:175
+#: plugins/Satellites/src/Satellites.cpp:182
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 "పాత satellites.json ఫైలు ప్రస్తుతం పనికిరాదు - డిఫాల్టు ఫైలును వాడుతున్నాం"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2202
+#: plugins/Satellites/src/Satellites.cpp:2220
 msgid "visual"
 msgstr "దృశ్య"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2204
+#: plugins/Satellites/src/Satellites.cpp:2222
 msgid "scientific"
 msgstr "శాస్త్రీయ"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2206
+#: plugins/Satellites/src/Satellites.cpp:2224
 msgid "communications"
 msgstr "ప్రసారం"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2208
+#: plugins/Satellites/src/Satellites.cpp:2226
 msgid "navigation"
 msgstr "నేవిగేషన్"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2210
+#: plugins/Satellites/src/Satellites.cpp:2228
 msgid "amateur"
 msgstr "ఔత్సాహిక"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2212
+#: plugins/Satellites/src/Satellites.cpp:2230
 msgid "weather"
 msgstr "వాతావరణం"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2214
+#: plugins/Satellites/src/Satellites.cpp:2232
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2216
+#: plugins/Satellites/src/Satellites.cpp:2234
 msgid "geostationary"
 msgstr "భూస్థిర"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2218
+#: plugins/Satellites/src/Satellites.cpp:2236
 msgid "non-operational"
 msgstr "పనిలో లేని"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2220
+#: plugins/Satellites/src/Satellites.cpp:2238
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2222
+#: plugins/Satellites/src/Satellites.cpp:2240
 msgid "glonass"
 msgstr "గ్లోనాస్"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2224
+#: plugins/Satellites/src/Satellites.cpp:2242
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2226
+#: plugins/Satellites/src/Satellites.cpp:2244
 msgid "galileo"
 msgstr "గెలీలియో"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2228
+#: plugins/Satellites/src/Satellites.cpp:2246
 msgid "iridium"
 msgstr "ఇరిడియమ్"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2230
+#: plugins/Satellites/src/Satellites.cpp:2248
 msgid "iridium next"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2232
+#: plugins/Satellites/src/Satellites.cpp:2250
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2236
+#: plugins/Satellites/src/Satellites.cpp:2254
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2238
+#: plugins/Satellites/src/Satellites.cpp:2256
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2240
+#: plugins/Satellites/src/Satellites.cpp:2258
 msgid "stations"
 msgstr "నెలవులు"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2242
+#: plugins/Satellites/src/Satellites.cpp:2260
 msgid "education"
 msgstr "విద్య"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2244
+#: plugins/Satellites/src/Satellites.cpp:2262
 msgid "observatory"
 msgstr "వేధశాల"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2246
+#: plugins/Satellites/src/Satellites.cpp:2264
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2248
+#: plugins/Satellites/src/Satellites.cpp:2266
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2250
+#: plugins/Satellites/src/Satellites.cpp:2268
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2252
+#: plugins/Satellites/src/Satellites.cpp:2270
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2254
+#: plugins/Satellites/src/Satellites.cpp:2272
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2256
+#: plugins/Satellites/src/Satellites.cpp:2274
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2258
+#: plugins/Satellites/src/Satellites.cpp:2276
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2260
+#: plugins/Satellites/src/Satellites.cpp:2278
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2262
+#: plugins/Satellites/src/Satellites.cpp:2280
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2264
+#: plugins/Satellites/src/Satellites.cpp:2282
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2269
+#: plugins/Satellites/src/Satellites.cpp:2287
 msgid "The Hubble Space Telescope"
 msgstr "హబుల్ స్పేస్ టెలిస్కోపు"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2271
+#: plugins/Satellites/src/Satellites.cpp:2289
 msgid "The International Space Station"
 msgstr "అంతర్జాతీయ అంతరిక్ష కేంద్రం"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2273
+#: plugins/Satellites/src/Satellites.cpp:2291
 msgid "China's first space station"
 msgstr "చైనా మొదటి అంతరిక్ష కేంద్రం"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2275
+#: plugins/Satellites/src/Satellites.cpp:2293
 msgid "The russian space radio telescope RadioAstron"
 msgstr "రష్యా అంతరిక్ష రేడియో టెలిస్కోపు, రేడియోఏస్ట్రాన్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2277
+#: plugins/Satellites/src/Satellites.cpp:2295
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "అంతర్జాతీయ గామా-రే ఏస్ట్రోఫిజిక్స్ లాబొరేటరీ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2279
+#: plugins/Satellites/src/Satellites.cpp:2297
 msgid "The Gamma-Ray Observatory"
 msgstr "గామా-రే వేధశాల"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2281
+#: plugins/Satellites/src/Satellites.cpp:2299
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "ది మైక్ర్రోవేరియబిలిటీ అండ్ ఆసిలేషన్స్ ఆఫ్ స్టార్స్ టెలిస్కోప్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2301
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "ఇంటెర్‌ఫేస్ రీజియన్ ఇమేజింగ్ స్పెక్ట్రోగ్రాఫ్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2303
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -13974,279 +13979,270 @@ msgstr ""
 "ఎట్మాస్ఫియర్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2307
 msgid "The Dark Matter Particle Explorer"
 msgstr "ది డార్క్ మ్యాటర్ పార్టికిల్ ఎక్స్ప్లోరర్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2309
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "ఆఋక్‌సెకండ్ స్పేస్ టెలిస్కోప్ ఎనేబ్లింగ్ రీసెర్చ్ ఇన్ ఏస్ట్రోఫిజిక్స్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2311
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "రూవెన్ రమాటీ హై ఎనర్జీ సోలార్ స్పెక్ట్రోస్కోపిక్ ఇమేజర్"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2313
 msgid "The Chandra X-ray Observatory"
 msgstr "ది చంద్ర X-రే అబ్సర్వేటరీ"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2317
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2319
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2321
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2305
+#: plugins/Satellites/src/Satellites.cpp:2323
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2325
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2327
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "International Designator"
 msgstr "అంతర్జాతీయ నామకరణదారు"
 
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:300
 msgid "artificial satellite"
 msgstr "కృత్రిమ ఉపగ్రహం"
 
-#: plugins/Satellites/src/Satellite.cpp:303
+#: plugins/Satellites/src/Satellite.cpp:305
 msgid "Approx. magnitude"
 msgstr "సుమారు పరిమాణం"
 
-#: plugins/Satellites/src/Satellite.cpp:305
+#: plugins/Satellites/src/Satellite.cpp:307
 msgid "extincted to"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:316
+#: plugins/Satellites/src/Satellite.cpp:318
 msgid "Range"
 msgstr "రేంజి"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:320
 msgid "Range rate"
 msgstr "రేంజి రేటు"
 
-#: plugins/Satellites/src/Satellite.cpp:322
+#: plugins/Satellites/src/Satellite.cpp:324
 msgid "Perigee/apogee altitudes"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:336
+#: plugins/Satellites/src/Satellite.cpp:338
 msgid "Approx. angular size"
 msgstr ""
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:347
 msgctxt "frequency"
 msgid "rpd"
 msgstr "rpd"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:349
+#: plugins/Satellites/src/Satellite.cpp:351
 msgid "Orbital period"
 msgstr "కక్ష్యాసమయం"
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:357
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Inclination"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:359
+#: plugins/Satellites/src/Satellite.cpp:361
 msgid "SubPoint (Lat./Long.)"
 msgstr "సబ్‌పాయింటు (అక్షాం./రేఖా.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:375
 msgid "TEME coordinates"
 msgstr "TEME కోఆర్డినేట్లు"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:380
+#: plugins/Satellites/src/Satellite.cpp:382
 msgid "TEME velocity"
 msgstr "TEME వేగం"
 
-#: plugins/Satellites/src/Satellite.cpp:389
+#: plugins/Satellites/src/Satellite.cpp:392
 msgid "Sun reflection angle"
 msgstr "సూర్యుడి పరావర్తన కోణం"
 
-#: plugins/Satellites/src/Satellite.cpp:397
-#: plugins/Satellites/src/Satellite.cpp:504
+#: plugins/Satellites/src/Satellite.cpp:400
+#: plugins/Satellites/src/Satellite.cpp:507
 msgctxt "unknown date"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:404
+#: plugins/Satellites/src/Satellite.cpp:407
 msgctxt "at time"
 msgid "at"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:406
+#: plugins/Satellites/src/Satellite.cpp:409
 msgid "Last updated TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:410
 msgid "Epoch of the TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:409
+#: plugins/Satellites/src/Satellite.cpp:412
 msgid "Radar cross-section (RCS)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:418
+#: plugins/Satellites/src/Satellite.cpp:421
 msgid "Group"
 msgstr "గుంపు"
 
-#: plugins/Satellites/src/Satellite.cpp:418
+#: plugins/Satellites/src/Satellite.cpp:421
 msgid "Groups"
 msgstr "గుంపులు"
 
-#: plugins/Satellites/src/Satellite.cpp:423
+#: plugins/Satellites/src/Satellite.cpp:426
 msgid "Operational status"
 msgstr "పనిచేసే స్థితి"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "The satellite and the observer are in sunlight."
 msgstr "ఉపగ్రహం, పరిశీలకుడు ఎండలో ఉన్నారు."
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:436
 msgid "The satellite is visible."
 msgstr "ఉపగ్రహం కనిపిస్తోంది."
 
-#: plugins/Satellites/src/Satellite.cpp:436
+#: plugins/Satellites/src/Satellite.cpp:439
 msgid "The satellite is eclipsed."
 msgstr "ఉపగ్రహం గ్రహణంలో ఉంది."
 
-#: plugins/Satellites/src/Satellite.cpp:439
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "The satellite is not visible"
 msgstr "ఉపగ్రహం కనిపించడం లేదు"
 
-#: plugins/Satellites/src/Satellite.cpp:447
+#: plugins/Satellites/src/Satellite.cpp:450
 msgid "Radio communication"
 msgstr "రేడియో కమ్యూనికేషన్"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:466 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:469 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:469
+#: plugins/Satellites/src/Satellite.cpp:472
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:749
+#: plugins/Satellites/src/Satellite.cpp:758
 msgctxt "operational status"
 msgid "operational"
 msgstr "పనిలో ఉంది"
 
-#: plugins/Satellites/src/Satellite.cpp:750
+#: plugins/Satellites/src/Satellite.cpp:759
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "పనిలో లేదు"
 
-#: plugins/Satellites/src/Satellite.cpp:751
+#: plugins/Satellites/src/Satellite.cpp:760
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "పాక్షికంగా పనిలో ఉంది"
 
-#: plugins/Satellites/src/Satellite.cpp:752
+#: plugins/Satellites/src/Satellite.cpp:761
 msgctxt "operational status"
 msgid "standby"
 msgstr "స్టాండ్‌బై"
 
-#: plugins/Satellites/src/Satellite.cpp:753
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "spare"
 msgstr "స్పేరు"
 
-#: plugins/Satellites/src/Satellite.cpp:754
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "పొడిగించిన మిషన్"
 
-#: plugins/Satellites/src/Satellite.cpp:755
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "decayed"
 msgstr "నశించింది"
 
-#: plugins/Satellites/src/Satellite.cpp:757
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "unknown"
 msgstr "తెలియని"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
-msgid "Save predicted Iridium flares as..."
-msgstr "అపేక్షించిన ఇరిడియమ్ జ్వాలలను ఇలా భద్రపరచు..."
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
-msgid "Predicted Iridium flares"
-msgstr "అపేక్షించిన ఇరిడియమ్ జ్వాలలు"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:703
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:635
 msgid "Stellarium Satellites Plugin"
 msgstr "స్టెల్లేరియమ్ ఉపగ్రహాల ప్లగిన్"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:709
-#: plugins/Satellites/src/ui_satellitesDialog.h:882
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:642
+#: plugins/Satellites/src/ui_satellitesDialog.h:918
 msgid "Iridium flares"
 msgstr "ఇరిడియమ్ జ్వాలలు"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:649
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "ఉపగ్రహాల ప్లగిన్, భూకక్ష్యలోని కృత్రిమ ఉపగ్రహాల స్థానాలను ఊహిస్తుంది"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
 msgid "Notes for users"
 msgstr "వాడుకరులకు గమనికలు"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -14255,7 +14251,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -14263,30 +14259,30 @@ msgid ""
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
 msgid "TLE data updates"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:733
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:669
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -14294,39 +14290,39 @@ msgid ""
 "(see %1 for an example)."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:673
 msgid "Adding new satellites"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:738
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:739
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:741
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 msgid "Technical notes"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input. "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -14334,12 +14330,12 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:772
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -14348,7 +14344,7 @@ msgstr ""
 msgid "Next update"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -14357,8 +14353,8 @@ msgstr ""
 msgid "Internet updates disabled"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:779
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:739
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -14372,7 +14368,7 @@ msgstr ""
 msgid "Updating now..."
 msgstr "తాజాకరిస్తున్నాం..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -14382,7 +14378,7 @@ msgid "< 1 minute"
 msgstr "< 1 నిముషం"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -14393,7 +14389,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -14402,22 +14398,22 @@ msgstr "m"
 msgid "Update error"
 msgstr "తాజాకరణ లోపం"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:755
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "%1/%2 ఉపగ్రహాన్ని(లను) తాజాకరించాం; %3 చేర్చాం; %4 తీసివేసాం"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "%1/%2 ఉపగ్రహాన్ని(లను) తాజాకరించాం; %3 చేర్చాం; %4 మిస్సింగు"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid "[new source]"
 msgstr "[కొత్త వనరు]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:935
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:871
+#: plugins/Satellites/src/ui_satellitesDialog.h:828
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:205
@@ -14432,7 +14428,7 @@ msgstr "[కొత్త వనరు]"
 msgid "Update now"
 msgstr "తాజాకరించు"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:937
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:873
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14441,42 +14437,79 @@ msgstr "తాజాకరించు"
 msgid "Update from files"
 msgstr "ఫైళ్ళ నుండి తాజాకరించు"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:965
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:901
 msgid "[orbit calculation error]"
 msgstr "[కక్ష్య లెకింపు లోపం]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:966
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:902
 msgid "[all newly added]"
 msgstr "[కొత్తవి అన్నిటినీ చేర్చాం]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:967
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:903
 msgid "[all not displayed]"
 msgstr "[అన్నిటినీ చూపించ్లేదు]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:968
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "[all displayed]"
 msgstr "[అన్నీ చూపించాం]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:969
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:905
+msgid "[small satellites]"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:906
+msgid "[medium satellites]"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:907
+msgid "[large satellites]"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:908
 msgid "[all]"
 msgstr "[అన్నీ]"
 
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
+msgid "RCS"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:925
+msgid ""
+"Radar cross-section (RCS) is a measure of how detectable an object is with a"
+" radar. A larger RCS indicates that an object is more easily detected."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:926
+msgid ""
+"The standard magnitude of a satellite is defined as its apparent magnitude "
+"when at half-phase and at a distance 1000 km from the observer."
+msgstr ""
+
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1011
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:957
 msgid "New group..."
 msgstr "కొత్త గుంపు..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1254
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1210
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1232
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1278
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1235
 msgid "Satellite"
 msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+msgid "Save predicted Iridium flares as..."
+msgstr "అపేక్షించిన ఇరిడియమ్ జ్వాలలను ఇలా భద్రపరచు..."
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1360
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1362
+msgid "Predicted Iridium flares"
+msgstr "అపేక్షించిన ఇరిడియమ్ జ్వాలలు"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Downloading data..."
@@ -14516,20 +14549,20 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:786
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:821
+#: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:789
+#: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Updates"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:825
 msgid "Update satellite data from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:292
@@ -14538,66 +14571,66 @@ msgstr ""
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:827
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:794
+#: plugins/Satellites/src/ui_satellitesDialog.h:829
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:795
+#: plugins/Satellites/src/ui_satellitesDialog.h:830
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:797
+#: plugins/Satellites/src/ui_satellitesDialog.h:832
 msgid "Label font size (pixels):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:798
+#: plugins/Satellites/src/ui_satellitesDialog.h:833
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:800
-#: plugins/Satellites/src/ui_satellitesDialog.h:806
+#: plugins/Satellites/src/ui_satellitesDialog.h:835
+#: plugins/Satellites/src/ui_satellitesDialog.h:841
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:803
-#: plugins/Satellites/src/ui_satellitesDialog.h:814
+#: plugins/Satellites/src/ui_satellitesDialog.h:838
+#: plugins/Satellites/src/ui_satellitesDialog.h:849
 msgid "Duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:808
+#: plugins/Satellites/src/ui_satellitesDialog.h:843
 msgid "Number of  segments:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:810
-#: plugins/Satellites/src/ui_satellitesDialog.h:818
+#: plugins/Satellites/src/ui_satellitesDialog.h:845
+#: plugins/Satellites/src/ui_satellitesDialog.h:853
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:812
+#: plugins/Satellites/src/ui_satellitesDialog.h:847
 msgid "Fade length:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:816
+#: plugins/Satellites/src/ui_satellitesDialog.h:851
 msgid "Segment length (s):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:820
+#: plugins/Satellites/src/ui_satellitesDialog.h:855
 msgid "Show artificial satellites as markers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:821
+#: plugins/Satellites/src/ui_satellitesDialog.h:856
 msgid "Hide invisible artificial satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:823
+#: plugins/Satellites/src/ui_satellitesDialog.h:858
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:309
@@ -14609,108 +14642,112 @@ msgstr ""
 msgid "Save settings as default"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:827
+#: plugins/Satellites/src/ui_satellitesDialog.h:862
 msgid "Double-click a satellite to start tracking it."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:830
+#: plugins/Satellites/src/ui_satellitesDialog.h:865
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:833
+#: plugins/Satellites/src/ui_satellitesDialog.h:868
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:836
+#: plugins/Satellites/src/ui_satellitesDialog.h:871
 msgid "Change markers color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:839
+#: plugins/Satellites/src/ui_satellitesDialog.h:874
 msgid "Change orbits color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:842
+#: plugins/Satellites/src/ui_satellitesDialog.h:877
 msgid "Change info color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:845
+#: plugins/Satellites/src/ui_satellitesDialog.h:880
 msgid "Save changes"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:848
+#: plugins/Satellites/src/ui_satellitesDialog.h:883
 msgid "Catalog number:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:850
+#: plugins/Satellites/src/ui_satellitesDialog.h:884
+msgid "Standard magnitude:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:886
 msgid "Display the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:852
+#: plugins/Satellites/src/ui_satellitesDialog.h:888
 msgid "Displayed"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:854
+#: plugins/Satellites/src/ui_satellitesDialog.h:890
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:856
+#: plugins/Satellites/src/ui_satellitesDialog.h:892
 msgid "Orbit"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:858
+#: plugins/Satellites/src/ui_satellitesDialog.h:894
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:860
+#: plugins/Satellites/src/ui_satellitesDialog.h:896
 msgid "Do not update"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:861
+#: plugins/Satellites/src/ui_satellitesDialog.h:897
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:862
+#: plugins/Satellites/src/ui_satellitesDialog.h:898
 msgid "Groups:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:863
+#: plugins/Satellites/src/ui_satellitesDialog.h:899
 msgid "TLE set:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:865
+#: plugins/Satellites/src/ui_satellitesDialog.h:901
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:867
+#: plugins/Satellites/src/ui_satellitesDialog.h:903
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:870
+#: plugins/Satellites/src/ui_satellitesDialog.h:906
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:873
+#: plugins/Satellites/src/ui_satellitesDialog.h:909
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:875
+#: plugins/Satellites/src/ui_satellitesDialog.h:911
 msgid "Sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:876
+#: plugins/Satellites/src/ui_satellitesDialog.h:912
 msgid "Flare prediction (days):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:880
+#: plugins/Satellites/src/ui_satellitesDialog.h:916
 msgid "Predict Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:881
+#: plugins/Satellites/src/ui_satellitesDialog.h:917
 msgid "Save predictions..."
 msgstr ""
 
