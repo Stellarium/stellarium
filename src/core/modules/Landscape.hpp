@@ -175,6 +175,7 @@ public:
 	virtual float getOpacity(Vec3d azalt) const { Q_ASSERT(0); return (azalt[2]<0 ? 1.0f : 0.0f); }
 	//! The list of azimuths (counted from True North towards East) and altitudes can come in various formats. We read the first two elements, which can be of formats:
 	enum horizonListMode {
+		invalid        =-1,
 		azDeg_altDeg   = 0, //! azimuth[degrees] altitude[degrees]
 		azDeg_zdDeg    = 1, //! azimuth[degrees] zenithDistance[degrees]
 		azRad_altRad   = 2, //! azimuth[radians] altitude[radians]

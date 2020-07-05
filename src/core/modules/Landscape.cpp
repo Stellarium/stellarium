@@ -136,7 +136,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	sinMinAltitudeLimit = std::sin(M_PI_180 * landscapeIni.value("landscape/minimal_altitude", -2.0).toDouble());
 
 	// This is now optional for all classes, for mixing with a photo horizon:
-	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
+	// they may have different offsets, like a south-centered pano and a grid-aligned polygon.
 	// In case they are aligned, we can use one value angle_rotatez, or define the polygon rotation individually.
 	if (landscapeIni.contains("landscape/polygonal_horizon_list"))
 	{
@@ -221,7 +221,9 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 				az=(200.0f  - list.at(0).toFloat())*M_PIf/200.f    - polyAngleRotateZ*M_PI_180f;
 				alt=(100.0f-list.at(1).toFloat())*M_PIf/200.f;
 				break;
-			default: qWarning() << "invalid coordMode while reading horizon line.";
+			case invalid:
+				qWarning() << "invalid polygonal_horizon_list_mode while reading horizon line.";
+				return;
 		}
 
 		StelUtils::spheToRect(az, alt, point);
@@ -663,7 +665,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		}
 	}
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -899,7 +901,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
 	}
 
-	if (horizonPolygonLineColor != Vec3f(0.f))
+	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))
 	{
 		sPainter.setLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
@@ -1037,7 +1039,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 	}
 
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -1057,8 +1059,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 
 float LandscapeFisheye::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
-	if (mapImage->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
@@ -1252,10 +1253,9 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 			sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), true, true, illumTexTop, illumTexBottom);
 		}
 	}
-	//qDebug() << "before drawing line";
 
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -1279,8 +1279,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 //! @retval alpha (0..1), where 0=fully transparent.
 float LandscapeSpherical::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
-	if (mapImage->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
