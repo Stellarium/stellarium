@@ -1017,7 +1017,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	//Rest of points
 	for (int i=1; i<size; i++)
 	{
-		position = core->altAzToJ2000(orbitPoints[i].toVec3d());
+		position = core->altAzToJ2000(orbitPoints[i].toVec3d(), StelCore::RefractionOff);
 		position.normalize();
 		if (prj->project(position, onscreen)) // check position on the screen
 		{
