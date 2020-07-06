@@ -675,9 +675,9 @@ void Satellites::loadSettings()
 
 	// orbit drawing params
 	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
-	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
+	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 180).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
-	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
+	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 5).toInt();
 
 	Satellite::invisibleSatelliteColor = Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
 
