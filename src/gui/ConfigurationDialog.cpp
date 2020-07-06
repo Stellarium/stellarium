@@ -336,6 +336,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->indicationMountModeCheckBox,		"StelMovementMgr.flagIndicationMountMode");
 	connectBoolProperty(ui->kineticScrollingCheckBox,		"StelGui.flagUseKineticScrolling");
 	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,		"StelGui.flagEnableFocusOnDaySpinner");
+	connectColorButton(ui->overwriteTextColorButton,		"StelApp.overwriteInfoColor",	"color/info_text_color");
+	connectColorButton(ui->daylightTextColorButton,			"StelApp.daylightInfoColor",	"color/daylight_text_color");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");

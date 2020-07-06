@@ -255,6 +255,8 @@ StelApp::StelApp(StelMainView *parent)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
+	, overwriteInfoColor(Vec3f(1.f))
+	, daylightInfoColor(Vec3f(0.f))
 	#ifdef ENABLE_SPOUT
 	, spoutSender(Q_NULLPTR)
 	#endif
@@ -625,7 +627,9 @@ void StelApp::init(QSettings* conf)
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
-	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());
+	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
+	setOverwriteInfoColor(Vec3f(confSettings->value("color/info_text_color", "1.0,1.0,1.0").toString()));
+	setDaylightInfoColor(Vec3f(confSettings->value("color/daylight_text_color", "0.0,0.0,0.0").toString()));
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
@@ -981,6 +985,34 @@ void StelApp::setFlagUseCCSDesignation(bool b)
 		flagUseCCSDesignation = b;
 		emit flagUseCCSDesignationChanged(b);
 	}
+}
+
+void StelApp::setOverwriteInfoColor(const Vec3f& color)
+{
+	if (color != overwriteInfoColor)
+	{
+		overwriteInfoColor = color;
+		emit overwriteInfoColorChanged(color);
+	}
+}
+
+Vec3f StelApp::getOverwriteInfoColor() const
+{
+	return overwriteInfoColor;
+}
+
+void StelApp::setDaylightInfoColor(const Vec3f& color)
+{
+	if (color != daylightInfoColor)
+	{
+		daylightInfoColor = color;
+		emit daylightInfoColorChanged(color);
+	}
+}
+
+Vec3f StelApp::getDaylightInfoColor() const
+{
+	return daylightInfoColor;
 }
 
 // Update translations and font for sky everywhere in the program
