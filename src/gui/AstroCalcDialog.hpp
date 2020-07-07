@@ -62,57 +62,59 @@ public:
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
-		CColumnName,			//! name of object
-		CColumnRA,			//! right ascension
-		CColumnDec,			//! declination
-		CColumnMagnitude,		//! magnitude
-		CColumnAngularSize,	//! angular size
-		CColumnExtra,			//! extra data (surface brightness, separation, period, etc.)
+		CColumnName,            //! name of object
+		CColumnRA,              //! right ascension
+		CColumnDec,             //! declination
+		CColumnMagnitude,       //! magnitude
+		CColumnAngularSize,     //! angular size
+		CColumnExtra,           //! extra data (surface brightness, separation, period, etc.)
 		CColumnTransit,		//! time of transit
-		CColumnType,			//! type of object
-		CColumnCount			//! total number of columns
+		CColumnMaxElevation,    //! max. elevation
+		CColumnElongation,      //! elongation (from the Sun)
+		CColumnType,            //! type of object
+		CColumnCount            //! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
-		EphemerisCOName,		//! name of celestial object
-		EphemerisDate,		//! date and time of ephemeris		
-		EphemerisRA,			//! right ascension
-		EphemerisDec,			//! declination
-		EphemerisMagnitude,	//! magnitude
-		EphemerisPhase,		//! phase
-		EphemerisDistance,		//! distance
-		EphemerisElongation,	//! elongation
-		EphemerisCount		//! total number of columns
+		EphemerisCOName,        //! name of celestial object
+		EphemerisDate,          //! date and time of ephemeris
+		EphemerisRA,            //! right ascension
+		EphemerisDec,           //! declination
+		EphemerisMagnitude,     //! magnitude
+		EphemerisPhase,         //! phase
+		EphemerisDistance,      //! distance
+		EphemerisElongation,    //! elongation
+		EphemerisCount          //! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the transit table
 	//! @enum TransitColumns
 	enum TransitColumns {
-		TransitCOName,		//! name of celestial object
-		TransitDate,			//! date and time of transit
-		TransitAltitude,			//! altitude
-		TransitMagnitude,		//! magnitude
-		TransitElongation,		//! elongation (from the Sun)
-		TransitAngularDistance,	//! angular distance (from the Moon)
-		TransitCount			//! total number of columns
+		TransitCOName,          //! name of celestial object
+		TransitDate,            //! date and time of transit
+		TransitAltitude,        //! altitude
+		TransitMagnitude,       //! magnitude
+		TransitElongation,      //! elongation (from the Sun)
+		TransitAngularDistance, //! angular distance (from the Moon)
+		TransitCount            //! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the phenomena table
 	//! @enum PhenomenaColumns
 	enum PhenomenaColumns {
-		PhenomenaType,			//! type of phenomena
-		PhenomenaDate,			//! date and time of ephemeris
-		PhenomenaObject1,			//! first object
-		PhenomenaMagnitude1,		//! magnitude of first object
-		PhenomenaObject2,			//! second object
-		PhenomenaMagnitude2,		//! magnitude of second object
-		PhenomenaSeparation,		//! angular separation
-		PhenomenaElevation,		//! elevation of first object
-		PhenomenaElongation,		//! elongation (from the Sun)
-		PhenomenaAngularDistance,	//! angular distance (from the Moon)
-		PhenomenaCount			//! total number of columns
+		PhenomenaType,          //! type of phenomena
+		PhenomenaDate,          //! date and time of ephemeris
+		PhenomenaObject1,       //! first object
+		PhenomenaMagnitude1,    //! magnitude of first object
+		PhenomenaObject2,       //! second object
+		PhenomenaMagnitude2,    //! magnitude of second object
+		PhenomenaSeparation,    //! angular separation
+		PhenomenaElevation,     //! elevation of first object
+		PhenomenaElongation,    //! elongation (from the Sun)
+		PhenomenaAngularDistance, //! angular distance (from the Moon)
+		PhenomenaCount          //! total number of columns
 	};
 
 	enum PhenomenaTypeIndex {
@@ -126,29 +128,29 @@ public:
 	//! Defines the number and the order of the columns in the WUT tool
 	//! @enum WUTColumns
 	enum WUTColumns {
-		WUTObjectName,	//! object name
-		WUTMagnitude,	//! magnitude
-		WUTRiseTime,		//! rise time
-		WUTTransitTime,	//! transit time
-		WUTMaxElevation,	//! max. elevation
-		WUTSetTime,		//! set time
-		WUTAngularSize,	//! angular size
-		WUTCount		//! total number of columns
+		WUTObjectName,          //! object name
+		WUTMagnitude,           //! magnitude
+		WUTRiseTime,            //! rise time
+		WUTTransitTime,         //! transit time
+		WUTMaxElevation,        //! max. elevation
+		WUTSetTime,             //! set time
+		WUTAngularSize,         //! angular size
+		WUTCount                //! total number of columns
 	};
 
 	//! Defines the type of graphs
 	//! @enum GraphsTypes
 	enum GraphsTypes {
-		GraphMagnitudeVsTime		= 1,
-		GraphPhaseVsTime			= 2,
-		GraphDistanceVsTime		= 3,
-		GraphElongationVsTime		= 4,
-		GraphAngularSizeVsTime		= 5,
-		GraphPhaseAngleVsTime		= 6,
-		GraphHDistanceVsTime		= 7,
-		GraphTransitAltitudeVsTime	= 8,
-		GraphRightAscensionVsTime	= 9,
-		GraphDeclinationVsTime		= 10
+		GraphMagnitudeVsTime        =  1,
+		GraphPhaseVsTime            =  2,
+		GraphDistanceVsTime         =  3,
+		GraphElongationVsTime       =  4,
+		GraphAngularSizeVsTime      =  5,
+		GraphPhaseAngleVsTime       =  6,
+		GraphHDistanceVsTime        =  7,
+		GraphTransitAltitudeVsTime  =  8,
+		GraphRightAscensionVsTime   =  9,
+		GraphDeclinationVsTime      = 10
 	};
 
 	AstroCalcDialog(QObject* parent);
@@ -349,7 +351,9 @@ private:
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
 	void populateFunctionsList();
+	double computeMaxElevation(StelObjectP obj);
 
+	void adjustCelestialPositionsColumns();
 	void adjustWUTColumns();
 	void adjustPhenomenaColumns();
 
@@ -357,7 +361,8 @@ private:
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
-					QString extraDataToolTip, QString transitTime, QString objectType);
+					QString extraDataToolTip, QString transitTime, QString maxElevation,
+					QString sElongation, QString objectType);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
@@ -444,7 +449,7 @@ private:
 			else
 				return text(column).toLower() < other.text(column).toLower();
 		}
-		else if (column == AstroCalcDialog::CColumnRA || column == AstroCalcDialog::CColumnDec)
+		else if (column == AstroCalcDialog::CColumnRA || column == AstroCalcDialog::CColumnDec || column == AstroCalcDialog::CColumnMaxElevation || column == AstroCalcDialog::CColumnElongation)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
