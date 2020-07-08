@@ -407,6 +407,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 			break;
+		case ProjectionCylinderFill:
+			prj = StelProjectorP(new StelProjectorCylinderFill(modelViewTransform));
+			break;
 		case ProjectionMercator:
 			prj = StelProjectorP(new StelProjectorMercator(modelViewTransform));
 			break;
