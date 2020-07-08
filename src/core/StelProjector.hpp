@@ -126,7 +126,7 @@ public:
 			, devicePixelsPerPixel(1)
 			, widthStretch(1) {}
 
-		Vector4<int> viewportXywh;       //! posX, posY, width, height
+		Vec4i viewportXywh;              //! posX, posY, width, height
 		float fov;                       //! FOV in degrees
 		bool gravityLabels;              //! the flag to use gravity labels or not
 		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
@@ -145,7 +145,7 @@ public:
 	virtual ~StelProjector() {}
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods which must be reimplemented by all instance of StelProjector
+	// Methods which must be reimplemented by all subclasses of StelProjector
 	//! Get a human-readable name for this projection type
 	virtual QString getNameI18() const = 0;
 	//! Get a human-readable short description for this projection type

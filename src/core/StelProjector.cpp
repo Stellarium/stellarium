@@ -152,19 +152,14 @@ void StelProjector::init(const StelProjectorParams& params)
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
 	viewportCenterOffset = params.viewportCenterOffset;
-	viewportXywh = params.viewportXywh;
-	viewportXywh[0] *= devicePixelsPerPixel;
-	viewportXywh[1] *= devicePixelsPerPixel;
-	viewportXywh[2] *= devicePixelsPerPixel;
-	viewportXywh[3] *= devicePixelsPerPixel;
-	viewportCenter = params.viewportCenter;
-	viewportCenter *= devicePixelsPerPixel;
+	viewportXywh = params.viewportXywh * static_cast<int>(devicePixelsPerPixel);
+	viewportCenter = params.viewportCenter * devicePixelsPerPixel;
 	gravityLabels = params.gravityLabels;
 	defaultAngleForGravityText = params.defaultAngleForGravityText;
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
-	pixelPerRad = 0.5f * static_cast<float>(viewportFovDiameter) / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI)/360.f));
+	pixelPerRad = 0.5f * static_cast<float>(viewportFovDiameter) / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI/360.)));
 	widthStretch = params.widthStretch;
 	computeBoundingCap();
 }
