@@ -481,7 +481,10 @@ private:
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov=qBound(minFov, f, maxFov);
+		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
+			currentFov=180.0;
+		else
+			currentFov=qBound(minFov, f, maxFov);
 	}
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
