@@ -3660,7 +3660,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 0: // All Solar system objects
 			for (const auto& object : allObjects)
 			{
-				if (object->getPlanetType() != Planet::isUNDEFINED)
+				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isObserver)
 					objects.append(object);
 			}
 			break;
@@ -3801,16 +3801,10 @@ void AstroCalcDialog::calculatePhenomena()
 	if (planet)
 	{
 		double currentJD = core->getJD();   // save current JD
-		double currentJDE = core->getJDE(); // save current JDE
 		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
 		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
-
-		// Calculate the limits on coordinates for speed-up of calculations
-		double coordsLimit = std::abs(core->getCurrentPlanet()->getRotObliquity(currentJDE)) + std::abs(planet->getRotObliquity(currentJDE)) + 0.026;
-		coordsLimit += separation * M_PI / 180.;
-		double ra, dec;
 
 		if (obj2Type == -1)
 		{
@@ -3846,14 +3840,9 @@ void AstroCalcDialog::calculatePhenomena()
 			// Stars
 			for (auto& obj : star)
 			{
-				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
-				// Add limits on coordinates for speed-up calculations
-				if (dec <= coordsLimit && dec >= -coordsLimit)
-				{
-					// conjunction
-					StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj, PhenomenaTypeIndex::Conjuction);
-				}
+				// conjunction
+				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj, PhenomenaTypeIndex::Conjuction);
 			}
 		}
 		else
@@ -3861,14 +3850,9 @@ void AstroCalcDialog::calculatePhenomena()
 			// Deep-sky objects
 			for (auto& obj : dso)
 			{
-				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
-				// Add limits on coordinates for speed-up calculations
-				if (dec <= coordsLimit && dec >= -coordsLimit)
-				{
-					// conjunction
-					StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj);
-				}
+				// conjunction
+				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj);
 			}
 		}
 
@@ -4413,9 +4397,13 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	else if (objects.contains("Ceres",Qt::CaseInsensitive) || objects.contains("Juno",Qt::CaseInsensitive) || objects.contains("Pallas",Qt::CaseInsensitive) || objects.contains("Vesta",Qt::CaseInsensitive))
 		limit = 45.28125;
 	else if (objects.contains("Mars",Qt::CaseInsensitive))
-		limit = 5.;
+		limit = 5.;	
 	else if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
 		limit = 2.5;
+	else if (objects.contains("Earth",Qt::CaseInsensitive))
+		limit = 1.;
+	else if (objects.contains("C/",Qt::CaseInsensitive) || objects.contains("P/",Qt::CaseInsensitive))
+		limit = 0.5;
 	else if (objects.contains("Moon", Qt::CaseInsensitive) || objects.contains("Sun", Qt::CaseInsensitive))
 		limit = 0.25;
 
