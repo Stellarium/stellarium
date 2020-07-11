@@ -183,8 +183,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			}
 		}
 
-		bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
-		bool locationFlag = ui->locationCheckBox->isChecked();
+		const bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
+		const bool locationFlag = ui->locationCheckBox->isChecked();
 
 		QString JDs = "";
 		double JD = -1.;
@@ -318,14 +318,17 @@ void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
 
 void BookmarksDialog::goToBookmark(QString uuid)
 {
+	const bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
+	const bool locationFlag = ui->locationCheckBox->isChecked();
+
 	if (!uuid.isEmpty())
 	{
 		bookmark bm = bookmarksCollection.value(uuid);
-		if (!bm.jd.isEmpty())
+		if (!bm.jd.isEmpty() && dateTimeFlag)
 		{
 			core->setJD(bm.jd.toDouble());
 		}
-		if (!bm.location.isEmpty())
+		if (!bm.location.isEmpty() && locationFlag)
 		{
 			StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 			core->moveObserverTo(locationMgr->locationForString(bm.location));
