@@ -178,7 +178,7 @@ public:
 
 	//! Get a new instance of projector using the given modelview transformation.
 	//! If not specified the projection used is the one currently used as default.
-	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
+	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=static_cast<ProjectionType>(1000)) const;
 
 	//! Get the current tone reproducer used in the core.
 	StelToneReproducer* getToneReproducer(){return toneReproducer;}
@@ -750,6 +750,8 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! This signal is emitted when the date has changed.
 	void dateChanged();
+	//! This signal is emitted when the date has changed in a way that planet trails or similar things should better be reset.
+	void dateChangedForTrails();
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
 	//! This signal is emitted when the date has changed by one year.

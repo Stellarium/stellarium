@@ -236,6 +236,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setLabelsColor
 		   NOTIFY labelsColorChanged
 		   )
+	Q_PROPERTY(Vec3f pointerColor
+		   READ getPointerColor
+		   WRITE setPointerColor
+		   NOTIFY pointerColorChanged
+		   )
 	Q_PROPERTY(Vec3f trailsColor
 		   READ getTrailsColor
 		   WRITE setTrailsColor
@@ -766,10 +771,10 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setTrailsColor(const Vec3f& c) {trailColor=c;}
+	void setTrailsColor(const Vec3f& c) {if (c!=trailsColor) { trailsColor=c; emit trailsColorChanged(c);}}
 	//! Get the current color used to draw planet trails lines.
 	//! @return current color
-	Vec3f getTrailsColor() const {return trailColor;}
+	Vec3f getTrailsColor() const {return trailsColor;}
 
 	//! Set the color used to draw planet pointers.
 	//! @param c The color of the planet pointers
@@ -777,7 +782,7 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setPointerColor(const Vec3f& c) {pointerColor=c;}
+	void setPointerColor(const Vec3f& c) {if (c!=pointerColor) {pointerColor=c; emit pointerColorChanged(c);}}
 	//! Get the current color used to draw planet pointers.
 	//! @return current color
 	Vec3f getPointerColor() const {return pointerColor;}
@@ -974,6 +979,7 @@ signals:
 	void customGrsJDChanged(double JD);
 
 	void labelsColorChanged(const Vec3f & color) const;
+	void pointerColorChanged(const Vec3f & color) const;
 	void trailsColorChanged(const Vec3f & color) const;
 	void orbitsColorChanged(const Vec3f & color) const;
 	void nomenclatureColorChanged(const Vec3f & color) const;
@@ -1247,7 +1253,7 @@ private:
 	class TrailGroup* allTrails;
 	QSettings* conf;
 	LinearFader trailFader;
-	Vec3f trailColor;
+	Vec3f trailsColor;
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;

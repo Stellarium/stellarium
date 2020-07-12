@@ -1060,9 +1060,13 @@ qint64 StelCore::getMilliSecondsOfLastJDUpdate() const
 
 void StelCore::setJD(double newJD)
 {
+	// A limit of "more than 5 days" is arbitrary, but seems to work well to recreate trails.
+	const bool trailsInvalid=fabs(newJD-JD.first)>=5.1;
 	JD.first=newJD;
 	JD.second=computeDeltaT(newJD);	
 	resetSync();
+	if (trailsInvalid)
+		emit dateChangedForTrails();
 }
 
 double StelCore::getJD() const

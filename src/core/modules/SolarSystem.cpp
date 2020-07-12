@@ -270,6 +270,7 @@ void SolarSystem::init()
 	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
 	StelCore *core = app->getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
+	connect(core, SIGNAL(dateChangedForTrails()), this, SLOT(recreateTrails()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -314,14 +315,16 @@ void SolarSystem::recreateTrails()
 			limit = cnt;
 		for (unsigned long i=0; i<limit; i++)
 		{
-			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(selectedSSO[cnt - i - 1]), &trailColor);
+			if (selectedSSO[cnt - i - 1]->getPlanetType() != Planet::isObserver)
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(selectedSSO[cnt - i - 1]), &trailsColor);
 		}
 	}
 	else
 	{
 		for (const auto& p : getSun()->satellites)
 		{
-			allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
+			if (p->getPlanetType() != Planet::isObserver)
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailsColor);
 		}
 		// Add moons of current planet
 		StelCore *core=StelApp::getInstance().getCore();
@@ -330,7 +333,8 @@ void SolarSystem::recreateTrails()
 		{
 			const QSharedPointer<Planet> planet=obs->getHomePlanet();
 			for (const auto& m : planet->satellites)
-				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailColor);
+				if (m->getPlanetType() != Planet::isObserver)
+					allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailsColor);
 		}
 	}
 }
@@ -1646,7 +1650,6 @@ void SolarSystem::setTrailsThickness(int v)
 	if (trailsThickness != v)
 	{
 		trailsThickness = v;
-		recreateTrails();
 		emit trailsThicknessChanged(v);
 	}
 }
