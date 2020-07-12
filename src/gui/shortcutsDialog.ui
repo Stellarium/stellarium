@@ -152,16 +152,13 @@
         <property name="allColumnsShowFocus">
          <bool>true</bool>
         </property>
-        <attribute name="headerDefaultSectionSize">
-         <number>200</number>
-        </attribute>
         <attribute name="headerMinimumSectionSize">
          <number>100</number>
         </attribute>
-        <attribute name="headerShowSortIndicator" stdset="0">
-         <bool>true</bool>
+        <attribute name="headerDefaultSectionSize">
+         <number>200</number>
         </attribute>
-        <attribute name="headerStretchLastSection">
+        <attribute name="headerShowSortIndicator" stdset="0">
          <bool>true</bool>
         </attribute>
        </widget>

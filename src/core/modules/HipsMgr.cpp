@@ -146,7 +146,7 @@ void HipsMgr::init()
 		hasVisibleSurvey = false;
 	}
 
-	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
+	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys"), "flagShow", "Ctrl+Alt+D");
 
 	// Start loading the sources only after stellarium has time to set up the proxy.
 	// We only do it if we actually have a visible survey.  Otherwise it's

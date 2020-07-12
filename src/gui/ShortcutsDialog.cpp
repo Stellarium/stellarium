@@ -293,7 +293,7 @@ void ShortcutsDialog::createDialogContent()
 	ui->shortcutsTreeView->setModel(filterModel);
 	ui->shortcutsTreeView->header()->setSectionsMovable(false);
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
-	
+
 	// Kinetic scrolling
 	kineticScrollingList << ui->shortcutsTreeView;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -335,10 +335,6 @@ void ShortcutsDialog::createDialogContent()
 	//test.append(QChar(0x2221)); // Angle sign
 
 	updateTreeData();
-}
-
-void ShortcutsDialog::updateText()
-{
 }
 
 void ShortcutsDialog::polish()
@@ -476,7 +472,9 @@ void ShortcutsDialog::updateTreeData()
 			updateShortcutsItem(action);
 		}
 	}
-	updateText();
+	// ajust columns
+	for(int i=0; i<3; i++)
+		ui->shortcutsTreeView->resizeColumnToContents(i);
 }
 
 bool ShortcutsDialog::itemIsEditable(QStandardItem *item)
@@ -496,8 +494,6 @@ void ShortcutsDialog::setModelHeader()
 {
 	// Warning! The latter two strings are reused elsewhere in the GUI.
 	QStringList headerLabels;
-	headerLabels << q_("Action")
-	             << q_("Primary shortcut")
-	             << q_("Alternative shortcut");
+	headerLabels << q_("Action") << q_("Primary shortcut") << q_("Alternative shortcut");
 	mainModel->setHorizontalHeaderLabels(headerLabels);
 }
