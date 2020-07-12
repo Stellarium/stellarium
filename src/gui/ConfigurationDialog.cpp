@@ -246,6 +246,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), core, SLOT(setInitTodayTime(QTime)));
 	ui->fixedDateTimeEdit->setMinimumDate(QDate(100,1,1));
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime()));
+	ui->fixedDateTimeEdit->setDisplayFormat("dd.MM.yyyy HH:mm");
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
 	// TODO: convert to properties
