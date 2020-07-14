@@ -187,7 +187,7 @@ public:
 	QSettings* getSettings() const {return confSettings;}
 
 	//! Return the currently used style
-	const QString getCurrentStelStyle() const {return "color";}
+	const QString getCurrentStelStyle() const {return "default";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);

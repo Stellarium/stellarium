@@ -358,6 +358,11 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 	StelApp::getInstance().getGui()->setVisible(b);
 }
 
+void StelMainScriptAPI::setGuiStyle(const QString& cssFileName)
+{
+	emit StelApp::getInstance().colorSchemeChanged(cssFileName);
+}
+
 void StelMainScriptAPI::setMinFps(float m)
 {
 	StelMainView::getInstance().setMinFps(m);

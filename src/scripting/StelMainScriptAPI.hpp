@@ -459,6 +459,11 @@ public slots:
 	//! @param b if true, show the GUI, if false, hide the GUI.
 	static void setGuiVisible(bool b);
 
+	//! Use a custom CSS for the GUI. This is a very advanced feature, designing CSS is an art.
+	//! To use properly, make a private copy of normalStyle.css and edit style, but leave structure as-is.
+	//! The special name "color" can be used to reset everything to defaults.
+	static void setGuiStyle(const QString& cssFileName);
+
 	//! Set the minimum frames per second.  Usually this minimum will
 	//! be switched to after there are no user events for some seconds
 	//! to save power.  However, if can be useful to set this to a high

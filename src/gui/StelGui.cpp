@@ -445,30 +445,32 @@ void StelGui::reloadStyle()
 }
 
 //! Load color scheme from the given ini file and section name
-void StelGui::setStelStyle(const QString& section)
+//! section "color" is the code name of the default style. Any other name is interpreted as CSS filename.
+void StelGui::setStelStyle(const QString& style)
 {
-	if (currentStelStyle.confSectionName!=section)
+	qDebug() << "StelGUI::setStelStyle: section=" << style;
+	// Load the style sheets
+	currentStelStyle.confSectionName = "color"; // The only meaningful name. We no longer support custom color sections, this is a relict from the old night mode.
+
+	QString qtStyleFileName = (style=="default" ? ":/graphicGui/normalStyle.css" : StelFileMgr::findFile(style+".css"));
+	QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
+
+	// Load Qt style sheet
+	QFile styleFile(qtStyleFileName);
+	if(styleFile.open(QIODevice::ReadOnly))
 	{
-		// Load the style sheets
-		currentStelStyle.confSectionName = section;
+		qDebug() << "Loading Style file" << styleFile.fileName();
+		currentStelStyle.qtStyleSheet = styleFile.readAll();
+		styleFile.close();
+	}
+	else
+		qDebug() << "Cannot find style file" << qtStyleFileName;
 
-		QString qtStyleFileName = ":/graphicGui/normalStyle.css";
-		QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
-
-		// Load Qt style sheet
-		QFile styleFile(qtStyleFileName);
-		if(styleFile.open(QIODevice::ReadOnly))
-		{
-			currentStelStyle.qtStyleSheet = styleFile.readAll();
-			styleFile.close();
-		}
-
-		QFile htmlStyleFile(htmlStyleFileName);
-		if(htmlStyleFile.open(QIODevice::ReadOnly))
-		{
-			currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
-			htmlStyleFile.close();
-		}
+	QFile htmlStyleFile(htmlStyleFileName);
+	if(htmlStyleFile.open(QIODevice::ReadOnly))
+	{
+		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+		htmlStyleFile.close();
 	}
 	
 	locationDialog->styleChanged();

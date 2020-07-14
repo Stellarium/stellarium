@@ -93,8 +93,8 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
-	//! Load a Qt style sheet to define the widgets style
-	void loadStyle(const QString& fileName);
+	// ! Load a Qt style sheet to define the widgets style
+	//void loadStyle(const QString& fileName);
 	
 	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar() const;
@@ -120,7 +120,7 @@ public:
 
 	virtual bool getVisible() const Q_DECL_OVERRIDE;
 
-	virtual bool getAstroCalcVisible() const;
+	bool getAstroCalcVisible() const;
 
 	virtual bool isCurrentlyUsed() const Q_DECL_OVERRIDE;
 	
@@ -304,7 +304,7 @@ private slots:
 	void scriptStopped();
 #endif
 	//! Load color scheme from the given ini file and section name
-	virtual void setStelStyle(const QString& section) Q_DECL_OVERRIDE;
+	virtual void setStelStyle(const QString& style) Q_DECL_OVERRIDE Q_DECL_FINAL;
 	void quit();	
 	void updateI18n();
 	void copySelectedObjectInfo(void);
