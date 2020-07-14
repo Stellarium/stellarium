@@ -114,6 +114,11 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool primeVerticalPartsLabeled	READ getFlagPrimeVerticalLabeled WRITE setFlagPrimeVerticalLabeled	NOTIFY primeVerticalPartsLabeledChanged)
 	Q_PROPERTY(Vec3f primeVerticalLineColor		READ getColorPrimeVerticalLine	 WRITE setColorPrimeVerticalLine	NOTIFY primeVerticalLineColorChanged)
 
+	Q_PROPERTY(bool currentVerticalLineDisplayed	READ getFlagCurrentVerticalLine	   WRITE setFlagCurrentVerticalLine	NOTIFY currentVerticalLineDisplayedChanged)
+	Q_PROPERTY(bool currentVerticalPartsDisplayed	READ getFlagCurrentVerticalParts   WRITE setFlagCurrentVerticalParts	NOTIFY currentVerticalPartsDisplayedChanged)
+	Q_PROPERTY(bool currentVerticalPartsLabeled	READ getFlagCurrentVerticalLabeled WRITE setFlagCurrentVerticalLabeled	NOTIFY currentVerticalPartsLabeledChanged)
+	Q_PROPERTY(Vec3f currentVerticalLineColor	READ getColorCurrentVerticalLine   WRITE setColorCurrentVerticalLine	NOTIFY currentVerticalLineColorChanged)
+
 	Q_PROPERTY(bool colureLinesDisplayed		READ getFlagColureLines		WRITE setFlagColureLines		NOTIFY colureLinesDisplayedChanged)
 	Q_PROPERTY(bool colurePartsDisplayed		READ getFlagColureParts		WRITE setFlagColureParts		NOTIFY colurePartsDisplayedChanged)
 	Q_PROPERTY(bool colurePartsLabeled		READ getFlagColureLabeled	WRITE setFlagColureLabeled		NOTIFY colurePartsLabeledChanged)
@@ -546,6 +551,28 @@ public slots:
 	//! @endcode
 	void setColorPrimeVerticalLine(const Vec3f& newColor);
 
+	//! Setter for displaying the Current Vertical Line.
+	void setFlagCurrentVerticalLine(const bool displayed);
+	//! Accessor for displaying Current Vertical Line.
+	bool getFlagCurrentVerticalLine() const;
+	//! Setter for displaying the Current Vertical Line partitions.
+	void setFlagCurrentVerticalParts(const bool displayed);
+	//! Accessor for displaying Current Vertical Line partitions.
+	bool getFlagCurrentVerticalParts() const;
+	//! Setter for displaying the Current Vertical Line partition labels.
+	void setFlagCurrentVerticalLabeled(const bool displayed);
+	//! Accessor for displaying Current Vertical Line partition labels.
+	bool getFlagCurrentVerticalLabeled() const;
+	//! Get the current color of the Current Vertical Line.
+	Vec3f getColorCurrentVerticalLine() const;
+	//! Set the color of the Current Vertical Line.
+	//! @param newColor The color of the Current Vertical line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorCurrentVerticalLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCurrentVerticalLine(const Vec3f& newColor);
+
 	//! Setter for displaying the Colure Lines.
 	void setFlagColureLines(const bool displayed);
 	//! Accessor for displaying the Colure Lines.
@@ -838,6 +865,10 @@ signals:
 	void primeVerticalPartsDisplayedChanged(const bool displayed) const;
 	void primeVerticalPartsLabeledChanged(const bool displayed) const;
 	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
+	void currentVerticalLineDisplayedChanged(const bool displayed) const;
+	void currentVerticalPartsDisplayedChanged(const bool displayed) const;
+	void currentVerticalPartsLabeledChanged(const bool displayed) const;
+	void currentVerticalLineColorChanged(const Vec3f & newColor) const;
 	void colureLinesDisplayedChanged(const bool displayed) const;
 	void colurePartsDisplayedChanged(const bool displayed) const;
 	void colurePartsLabeledChanged(const bool displayed) const;
@@ -904,6 +935,7 @@ private:
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
 	SkyLine * primeVerticalLine;		// Prime Vertical line
+	SkyLine * currentVerticalLine;		// Vertical line for azimuth of display center. Most useful if altitudes labeled.
 	SkyLine * colureLine_1;			// First Colure line (0/12h)
 	SkyLine * colureLine_2;			// Second Colure line (6/18h)
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle

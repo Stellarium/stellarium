@@ -131,6 +131,7 @@ public:
 		SUPERGALACTICEQUATOR,
 		LONGITUDE,
 		PRIME_VERTICAL,
+		CURRENT_VERTICAL,
 		COLURE_1,
 		COLURE_2,
 		CIRCUMPOLARCIRCLE_N,
@@ -719,6 +720,10 @@ void SkyLine::updateLabel()
 		case PRIME_VERTICAL:
 			frameType=StelCore::FrameAltAz;
 			label = q_("Prime Vertical");
+			break;
+		case CURRENT_VERTICAL:
+			frameType=StelCore::FrameAltAz;
+			label = q_("Current Vertical");
 			break;
 		case COLURE_1:
 			frameType=StelCore::FrameEquinoxEqu;
@@ -1445,6 +1450,7 @@ GridLinesMgr::GridLinesMgr()
 	supergalacticEquatorLine = new SkyLine(SkyLine::SUPERGALACTICEQUATOR);
 	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
 	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
+	currentVerticalLine = new SkyLine(SkyLine::CURRENT_VERTICAL);
 	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
@@ -1488,6 +1494,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete supergalacticEquatorLine;
 	delete longitudeLine;
 	delete primeVerticalLine;
+	delete currentVerticalLine;
 	delete colureLine_1;
 	delete colureLine_2;
 	delete circumpolarCircleN;
@@ -1570,6 +1577,9 @@ void GridLinesMgr::init()
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagPrimeVerticalParts(conf->value("viewing/flag_prime_vertical_parts").toBool());
 	setFlagPrimeVerticalLabeled(conf->value("viewing/flag_prime_vertical_labels").toBool());
+	setFlagCurrentVerticalLine(conf->value("viewing/flag_current_vertical_line").toBool());
+	setFlagCurrentVerticalParts(conf->value("viewing/flag_current_vertical_parts").toBool());
+	setFlagCurrentVerticalLabeled(conf->value("viewing/flag_current_vertical_labels").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
 	setFlagColureParts(conf->value("viewing/flag_colure_parts").toBool());
 	setFlagColureLabeled(conf->value("viewing/flag_colure_labels").toBool());
@@ -1612,6 +1622,7 @@ void GridLinesMgr::init()
 	setColorSupergalacticEquatorLine(Vec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
 	setColorLongitudeLine(           Vec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(       Vec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
+	setColorCurrentVerticalLine(     Vec3f(conf->value("color/current_vertical_color", defaultColor).toString()));
 	setColorColureLines(             Vec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(      Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
 	setColorCelestialJ2000Poles(     Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
@@ -1652,6 +1663,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
 	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
+	addAction("actionShow_Current_Vertical_Line", displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
 	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
 	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
 	addAction("actionShow_Celestial_J2000_Poles", displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
@@ -1696,6 +1708,7 @@ void GridLinesMgr::update(double deltaTime)
 	supergalacticEquatorLine->update(deltaTime);
 	longitudeLine->update(deltaTime);
 	primeVerticalLine->update(deltaTime);
+	currentVerticalLine->update(deltaTime);
 	colureLine_1->update(deltaTime);
 	colureLine_2->update(deltaTime);
 	circumpolarCircleN->update(deltaTime);
@@ -1755,6 +1768,7 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
+	currentVerticalLine->draw(core);
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
 	celestialJ2000Poles->draw(core);
@@ -1782,6 +1796,7 @@ void GridLinesMgr::updateLabels()
 	supergalacticEquatorLine->updateLabel();
 	longitudeLine->updateLabel();
 	primeVerticalLine->updateLabel();
+	currentVerticalLine->updateLabel();
 	colureLine_1->updateLabel();
 	colureLine_2->updateLabel();
 	circumpolarCircleN->updateLabel();
@@ -1840,6 +1855,7 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 	setFlagEclipticJ2000Line(displayed);
 	setFlagPrecessionCircles(displayed);
 	setFlagPrimeVerticalLine(displayed);
+	setFlagCurrentVerticalLine(displayed);
 	setFlagCircumpolarCircles(displayed);
 	setFlagGalacticEquatorLine(displayed);
 	setFlagSupergalacticEquatorLine(displayed);
@@ -2601,6 +2617,57 @@ void GridLinesMgr::setColorPrimeVerticalLine(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Current Vertical Line
+void GridLinesMgr::setFlagCurrentVerticalLine(const bool displayed)
+{
+	if(displayed != currentVerticalLine->isDisplayed()) {
+		currentVerticalLine->setDisplayed(displayed);
+		emit  currentVerticalLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line
+bool GridLinesMgr::getFlagCurrentVerticalLine() const
+{
+	return currentVerticalLine->isDisplayed();
+}
+//! Set flag for displaying Current Vertical Line partitions
+void GridLinesMgr::setFlagCurrentVerticalParts(const bool displayed)
+{
+	if(displayed != currentVerticalLine->showsPartitions()) {
+		currentVerticalLine->setPartitions(displayed);
+		emit  currentVerticalPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line partitions
+bool GridLinesMgr::getFlagCurrentVerticalParts() const
+{
+	return currentVerticalLine->showsPartitions();
+}
+//! Set flag for displaying Current Vertical Line partitions
+void GridLinesMgr::setFlagCurrentVerticalLabeled(const bool displayed)
+{
+	if(displayed != currentVerticalLine->isLabeled()) {
+		currentVerticalLine->setLabeled(displayed);
+		emit  currentVerticalPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line partitions
+bool GridLinesMgr::getFlagCurrentVerticalLabeled() const
+{
+	return currentVerticalLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorCurrentVerticalLine() const
+{
+	return currentVerticalLine->getColor();
+}
+void GridLinesMgr::setColorCurrentVerticalLine(const Vec3f& newColor)
+{
+	if(newColor != currentVerticalLine->getColor()) {
+		currentVerticalLine->setColor(newColor);
+		emit currentVerticalLineColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying Colure Lines
 void GridLinesMgr::setFlagColureLines(const bool displayed)
 {
@@ -3035,6 +3102,7 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		galacticEquatorLine->setLineThickness(lineThickness);
 		supergalacticEquatorLine->setLineThickness(lineThickness);
 		primeVerticalLine->setLineThickness(lineThickness);
+		currentVerticalLine->setLineThickness(lineThickness);
 		colureLine_1->setLineThickness(lineThickness);
 		colureLine_2->setLineThickness(lineThickness);
 		circumpolarCircleN->setLineThickness(lineThickness);
@@ -3068,6 +3136,7 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		 galacticEquatorLine->setPartThickness(partThickness);
 		 supergalacticEquatorLine->setPartThickness(partThickness);
 		 primeVerticalLine->setPartThickness(partThickness);
+		 currentVerticalLine->setPartThickness(partThickness);
 		 colureLine_1->setPartThickness(partThickness);
 		 colureLine_2->setPartThickness(partThickness);
 		 //circumpolarCircleN->setPartThickness(partThickness);
@@ -3107,6 +3176,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	galacticEquatorLine->setFontSize(lineFontSize);
 	supergalacticEquatorLine->setFontSize(lineFontSize);
 	primeVerticalLine->setFontSize(lineFontSize);
+	currentVerticalLine->setFontSize(lineFontSize);
 	colureLine_1->setFontSize(lineFontSize);
 	colureLine_2->setFontSize(lineFontSize);
 	circumpolarCircleN->setFontSize(lineFontSize);
