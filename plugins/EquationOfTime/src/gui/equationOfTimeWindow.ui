@@ -250,6 +250,13 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
+             <widget class="QToolButton" name="textColorButton">
+              <property name="toolTip">
+               <string>Color of text</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="labelFontSize">
               <property name="text">
                <string>Font size:</string>
