@@ -46,6 +46,19 @@ QString Star1::getNameI18n(void) const
 	return QString();
 }
 
+QString Star1::getDesignation() const
+{
+	if (getHip())
+	{
+		const QString sciName = StarMgr::getSciName(getHip());
+		if (!sciName.isEmpty()) return sciName;
+		const QString varSciName = StarMgr::getGcvsName(getHip());
+		if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;
+		return QString("HIP %1").arg(getHip());
+	}
+	return QString();
+}
+
 int Star1::hasComponentID(void) const
 {
 	if (getComponentIds())

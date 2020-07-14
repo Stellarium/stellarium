@@ -137,6 +137,7 @@ public:
 	float getBV(void) const {return IndexToBV(getBVIndex());}
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
+	QString getDesignation(void) const;
 	int hasComponentID(void) const;
 	void print(void) const;
 };
@@ -213,6 +214,7 @@ public:
 	}
 	float getBV(void) const {return IndexToBV(getBVIndex());}
 	QString getNameI18n(void) const {return QString();}
+	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
 	bool hasName() const {return false;}
 	void print(void) const;
@@ -271,6 +273,7 @@ public:
 	}
 	float getBV() const {return IndexToBV(getBVIndex());}
 	QString getNameI18n() const {return QString();}
+	QString getDesignation() const {return QString();}
 	int hasComponentID() const {return 0;}
 	bool hasName() const {return false;}
 	void print();
