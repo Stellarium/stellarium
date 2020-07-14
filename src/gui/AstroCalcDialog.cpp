@@ -272,6 +272,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->rtsToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->eclipseFromYearSpinBox->setValue(currentDT.date().year());
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
+	//ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
@@ -582,28 +583,28 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 
 	// Let's improve visibility of the text
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->celestialPositionsTimeLabel->setStyleSheet(style);
-	ui->hecPositionsTimeLabel->setStyleSheet(style);
-	ui->graphsFirstLabel->setStyleSheet(style);	
-	ui->graphsSecondLabel->setStyleSheet(style);	
-	ui->graphsDurationLabel->setStyleSheet(style);
-	ui->graphsMonthsLabel->setStyleSheet(style);
-	ui->graphsStepLabel->setStyleSheet(style);
-	ui->lunarElongationNote->setStyleSheet(style);
-	ui->lunarElongationLimitLabel->setStyleSheet(style);
-	ui->graphsNoteLabel->setStyleSheet(style);
-	ui->rtsNotificationLabel->setStyleSheet(style);
-	ui->gammaNoteLabel->setStyleSheet(style);
-	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
-	ui->UncertaintiesNoteLabel->setStyleSheet(style);
-	ui->transitNoteLabel->setStyleSheet(style);
-	style = "QCheckBox { color: rgb(238, 238, 238); }";
-	ui->sunAltitudeCheckBox->setStyleSheet(style);
-	ui->moonAltitudeCheckBox->setStyleSheet(style);
-	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
-	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
-	ui->hecSelectedMinorPlanetsCheckBox->setStyleSheet(style);
+//	QString style = "QLabel { color: rgb(238, 238, 238); }";
+//	ui->celestialPositionsTimeLabel->setStyleSheet(style);
+//	ui->hecPositionsTimeLabel->setStyleSheet(style);
+//	ui->graphsFirstLabel->setStyleSheet(style);
+//	ui->graphsSecondLabel->setStyleSheet(style);
+//	ui->graphsDurationLabel->setStyleSheet(style);
+//	ui->graphsMonthsLabel->setStyleSheet(style);
+//	ui->graphsStepLabel->setStyleSheet(style);
+//	ui->lunarElongationNote->setStyleSheet(style);
+//	ui->lunarElongationLimitLabel->setStyleSheet(style);
+//	ui->graphsNoteLabel->setStyleSheet(style);
+//	ui->rtsNotificationLabel->setStyleSheet(style);
+//	ui->gammaNoteLabel->setStyleSheet(style);
+//	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
+//	ui->UncertaintiesNoteLabel->setStyleSheet(style);
+//	ui->transitNoteLabel->setStyleSheet(style);
+//	style = "QCheckBox { color: rgb(238, 238, 238); }";
+//	ui->sunAltitudeCheckBox->setStyleSheet(style);
+//	ui->moonAltitudeCheckBox->setStyleSheet(style);
+//	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
+//	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+//	ui->hecSelectedMinorPlanetsCheckBox->setStyleSheet(style);
 
 	// chartview exports:
 	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });

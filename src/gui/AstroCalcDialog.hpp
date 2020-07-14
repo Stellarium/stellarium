@@ -268,7 +268,7 @@ public:
 
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() Q_DECL_OVERRIDE;
 		
 signals:
 	//! This signal is emitted when the graph day changed.

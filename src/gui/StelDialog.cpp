@@ -54,6 +54,7 @@ StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
 	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(handleColorSchemeChanged()));
 }
 
 StelDialog::~StelDialog()
@@ -209,6 +210,11 @@ void StelDialog::handleFontChanged()
 		if (gui)
 			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	}
+}
+
+void StelDialog::handleColorSchemeChanged()
+{
+	handleFontChanged();
 }
 
 void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)

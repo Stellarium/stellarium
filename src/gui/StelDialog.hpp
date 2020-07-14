@@ -223,6 +223,8 @@ protected slots:
 	void enableKineticScrolling(bool b);
 	//! connect from StelApp to handle font and font size changes.
 	void handleFontChanged();
+	//! connect from StelApp to handle CSS style changes
+	void handleColorSchemeChanged();
 
 	virtual void updateNightModeProperty(bool n);
 };
