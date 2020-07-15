@@ -33,6 +33,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "precession.h"
 
 #include <set>
@@ -723,7 +724,7 @@ void SkyLine::updateLabel()
 			break;
 		case CURRENT_VERTICAL:
 			frameType=StelCore::FrameAltAz;
-			label = q_("Current Vertical");
+			label = q_("Altitude");
 			break;
 		case COLURE_1:
 			frameType=StelCore::FrameEquinoxEqu;
@@ -969,6 +970,15 @@ void SkyLine::draw(StelCore *core) const
 		sphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
+	else if (line_type==CURRENT_VERTICAL)
+	{
+		Vec3d coordJ2000=GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+		Vec3d coordAltAz=core->j2000ToAltAz(coordJ2000, StelCore::RefractionAuto);
+		double alt, az;
+		StelUtils::rectToSphe(&az, &alt, coordAltAz);
+		sphericalCap.n.set(sin(-az), cos(-az), 0.);
+		fpt.set(0,0,1);
+	}
 	else if (line_type==LONGITUDE)
 	{
 		Vec3d coord;		
@@ -980,7 +990,7 @@ void SkyLine::draw(StelCore *core) const
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 
 		StelUtils::spheToRect(lambdaJDE + M_PI_2, 0., coord);
-		sphericalCap.n.set(coord[0],coord[1],coord[2]);
+		sphericalCap.n=coord;
 		fpt.set(0,0,1);
 	}
 
@@ -1003,7 +1013,7 @@ void SkyLine::draw(StelCore *core) const
 			part0.set(0,1,0);
 			partAxis.set(0,0,1);
 		}
-		else if (line_type==LONGITUDE)
+		else if ((line_type==LONGITUDE) || (line_type==CURRENT_VERTICAL))
 		{
 			partAxis=sphericalCap.n ^ part0;
 		}
@@ -1014,7 +1024,7 @@ void SkyLine::draw(StelCore *core) const
 		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
 		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
-		for (int i=0; i<360; ++i)
+		for (int i=0; i<(line_type==CURRENT_VERTICAL ? 180 : 360); ++i)
 		{
 			if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 			{
@@ -1090,6 +1100,11 @@ void SkyLine::draw(StelCore *core) const
 								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
 							}
 							break;
+						case CURRENT_VERTICAL:
+							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							value=90-i;
+							shiftx = 3.0f;
+							break;
 						case LONGITUDE:
 							value=( i<180 ? 90-i : i-270 );
 							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
@@ -1134,6 +1149,37 @@ void SkyLine::draw(StelCore *core) const
 
 
 	Vec3d p1, p2;
+	if (line_type==CURRENT_VERTICAL)
+	{
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
+		{
+			if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
+				|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
+			{
+				// The current vertical (screen centerline) is fully included in the viewport, draw it in 2 sub-arcs to avoid length > 180.
+				const Mat4d& rotLon90 = Mat4d::rotation(sphericalCap.n, 90.*M_PI_180);
+				Vec3d rotFpt=fpt;
+				rotFpt.transfo4d(rotLon90);
+				Vec3d rotFpt2=rotFpt;
+				rotFpt2.transfo4d(rotLon90);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			}
+		}
+		else
+		{
+			Vec3d middlePoint = p1+p2;
+			middlePoint.normalize();
+			if (!viewPortSphericalCap.contains(middlePoint))
+				middlePoint*=-1.;
+
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		}
+
+	}
+	else {
 	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 	{
 		if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
@@ -1160,6 +1206,7 @@ void SkyLine::draw(StelCore *core) const
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+	}
 	}
 
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
@@ -1644,41 +1691,41 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
-	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
-	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
-	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
-	addAction("actionShow_Ecliptic_J2000_Line", displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
-	addAction("actionShow_Equator_Line", displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
-	addAction("actionShow_Equator_J2000_Line", displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
-	addAction("actionShow_Meridian_Line", displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
-	addAction("actionShow_Horizon_Line", displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
-	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");	
-	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
-	addAction("actionShow_Supergalactic_Grid", displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
+	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
+	addAction("actionShow_Equatorial_Grid",            displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
+	addAction("actionShow_Azimuthal_Grid",             displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
+	addAction("actionShow_Ecliptic_Line",              displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
+	addAction("actionShow_Ecliptic_J2000_Line",        displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
+	addAction("actionShow_Equator_Line",               displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
+	addAction("actionShow_Equator_J2000_Line",         displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
+	addAction("actionShow_Meridian_Line",              displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
+	addAction("actionShow_Horizon_Line",               displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
+	addAction("actionShow_Equatorial_J2000_Grid",      displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Grid",        displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_Grid",              displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
+	addAction("actionShow_Galactic_Grid",              displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Equator_Line",      displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
+	addAction("actionShow_Supergalactic_Grid",         displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
 	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
-	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
-	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
-	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
-	addAction("actionShow_Current_Vertical_Line", displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
-	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
-	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
-	addAction("actionShow_Celestial_J2000_Poles", displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
-	addAction("actionShow_Celestial_Poles", displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
-	addAction("actionShow_Zenith_Nadir", displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Poles", displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
-	addAction("actionShow_Ecliptic_Poles", displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
-	addAction("actionShow_Galactic_Poles", displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
-	addAction("actionShow_Supergalactic_Poles", displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
-	addAction("actionShow_Equinox_J2000_Points", displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
-	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
-	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
-	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
-	addAction("actionShow_Antisolar_Point", displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
-	addAction("actionShow_Apex_Points", displayGroup, N_("Apex points"), "apexPointsDisplayed");	
+	addAction("actionShow_Longitude_Line",             displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
+	addAction("actionShow_Precession_Circles",         displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
+	addAction("actionShow_Prime_Vertical_Line",        displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
+	addAction("actionShow_Current_Vertical_Line",      displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
+	addAction("actionShow_Colure_Lines",               displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
+	addAction("actionShow_Circumpolar_Circles",        displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Celestial_J2000_Poles",      displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
+	addAction("actionShow_Celestial_Poles",            displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
+	addAction("actionShow_Zenith_Nadir",               displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Poles",       displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
+	addAction("actionShow_Ecliptic_Poles",             displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
+	addAction("actionShow_Galactic_Poles",             displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
+	addAction("actionShow_Supergalactic_Poles",        displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
+	addAction("actionShow_Equinox_J2000_Points",       displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
+	addAction("actionShow_Equinox_Points",             displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
+	addAction("actionShow_Solstice_J2000_Points",      displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
+	addAction("actionShow_Solstice_Points",            displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+	addAction("actionShow_Antisolar_Point",            displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
+	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
 }
 
 void GridLinesMgr::connectEarthFromSolarSystem()
