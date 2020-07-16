@@ -466,7 +466,6 @@ void ShortcutsDialog::restoreDefaultShortcuts()
 	{
 		actionMgr->restoreDefaultShortcut(action);
 		updateShortcutsItem(action);
-		actionMgr->saveShortcuts();
 		// nothing to apply until edits' content changes
 		ui->applyButton->setEnabled(false);
 		ui->restoreDefaultsButton->setEnabled(true);

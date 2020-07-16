@@ -341,8 +341,6 @@ void StelActionMgr::restoreDefaultShortcut(StelAction* action)
 	saveShortcuts();
 }
 
-
-
 void StelActionMgr::onStelActionToggled(bool val)
 {
 	StelAction* action = qobject_cast<StelAction*>(sender());
