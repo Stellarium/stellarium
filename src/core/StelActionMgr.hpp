@@ -177,6 +177,7 @@ public:
 	void saveShortcuts();
 	//! Restore the default shortcuts combinations
 	void restoreDefaultShortcuts();
+	void restoreDefaultShortcut(StelAction* action);
 
 signals:
 	//! Emitted when any action registered with this StelActionMgr is toggled

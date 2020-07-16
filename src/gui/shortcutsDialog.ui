@@ -191,36 +191,10 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="ShortcutLineEdit" name="primaryShortcutEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="altLabel">
            <property name="text">
             <string extracomment="Reused from the view widget!">Alternative shortcut</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="ShortcutLineEdit" name="altShortcutEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="altBackspaceButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="icon">
-            <iconset resource="../../data/gui/guiRes.qrc">
-             <normaloff>:/graphicGui/uibtBackspace.png</normaloff>
-             <disabledoff>:/graphicGui/uibtBackspace-disabled.png</disabledoff>:/graphicGui/uibtBackspace.png</iconset>
            </property>
           </widget>
          </item>
@@ -238,6 +212,9 @@
          </item>
          <item row="2" column="3">
           <widget class="QPushButton" name="restoreDefaultsButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Restore Defaults</string>
            </property>
@@ -250,6 +227,45 @@
            </property>
            <property name="text">
             <string>Apply</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QPushButton" name="altBackspaceButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="icon">
+            <iconset resource="../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtBackspace.png</normaloff>
+             <disabledoff>:/graphicGui/uibtBackspace-disabled.png</disabledoff>:/graphicGui/uibtBackspace.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="ShortcutLineEdit" name="primaryShortcutEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="ShortcutLineEdit" name="altShortcutEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4" rowspan="2">
+          <widget class="QPushButton" name="restoreAllDefaultsButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Restore All Defaults</string>
            </property>
           </widget>
          </item>

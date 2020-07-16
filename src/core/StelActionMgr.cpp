@@ -333,6 +333,16 @@ void StelActionMgr::restoreDefaultShortcuts()
 	saveShortcuts();
 }
 
+void StelActionMgr::restoreDefaultShortcut(StelAction* action)
+{
+	action->keySequence = action->defaultKeySequence;
+	action->altKeySequence = action->defaultAltKeySequence;
+	emit action->changed();
+	saveShortcuts();
+}
+
+
+
 void StelActionMgr::onStelActionToggled(bool val)
 {
 	StelAction* action = qobject_cast<StelAction*>(sender());

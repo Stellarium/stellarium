@@ -123,6 +123,7 @@ void ShortcutsDialog::initEditors()
 		// current item is shortcut, not group (group items aren't selectable)
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
+		ui->restoreDefaultsButton->setEnabled(true);
 		// fill editors with item's shortcuts
 		QVariant data = mainModel->data(index.sibling(index.row(), 1));
 		ui->primaryShortcutEdit->setContents(data.value<QKeySequence>());
@@ -135,6 +136,7 @@ void ShortcutsDialog::initEditors()
 		ui->primaryShortcutEdit->setEnabled(false);
 		ui->altShortcutEdit->setEnabled(false);
 		ui->applyButton->setEnabled(false);
+		ui->restoreDefaultsButton->setEnabled(false);
 		// https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 		ui->primaryShortcutEdit->setText("");
 		ui->altShortcutEdit->setText("");
@@ -196,10 +198,9 @@ void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 	if (!collisionItems.isEmpty())
 	{
 		drawCollisions();
-		ui->applyButton->setEnabled(false);
+		ui->applyButton->setEnabled(false);		
 		// scrolling to first collision item
-		QModelIndex first =
-		        filterModel->mapFromSource(collisionItems.first()->index());
+		QModelIndex first = filterModel->mapFromSource(collisionItems.first()->index());
 		ui->shortcutsTreeView->scrollTo(first);
 		currentEdit->setProperty("collision", true);
 	}
@@ -227,20 +228,17 @@ void ShortcutsDialog::handleChanges()
 		ui->altBackspaceButton->setEnabled(!editor->isEmpty());
 	}
 	// updating apply button
-	QModelIndex index =
-	        filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
+	QModelIndex index = filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
 	if (!index.isValid() ||
-	    (isPrimary &&
-	     editor->text() == mainModel->data(index.sibling(index.row(), 1))) ||
-	    (!isPrimary &&
-	     editor->text() == mainModel->data(index.sibling(index.row(), 2))))
+	    (isPrimary && editor->text() == mainModel->data(index.sibling(index.row(), 1))) ||
+	    (!isPrimary && editor->text() == mainModel->data(index.sibling(index.row(), 2))))
 	{
 		// nothing to apply
-		ui->applyButton->setEnabled(false);
+		ui->applyButton->setEnabled(false);		
 	}
 	else
 	{
-		ui->applyButton->setEnabled(true);
+		ui->applyButton->setEnabled(true);		
 	}
 	handleCollisions(editor);
 	polish();
@@ -249,8 +247,7 @@ void ShortcutsDialog::handleChanges()
 void ShortcutsDialog::applyChanges()
 {
 	// get ids stored in tree
-	QModelIndex index =
-	        filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
+	QModelIndex index = filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
 	if (!index.isValid())
 		return;
 	index = index.sibling(index.row(), 0);
@@ -267,6 +264,7 @@ void ShortcutsDialog::applyChanges()
 
 	// nothing to apply until edits' content changes
 	ui->applyButton->setEnabled(false);
+	ui->restoreDefaultsButton->setEnabled(true);
 }
 
 void ShortcutsDialog::switchToEditors(const QModelIndex& index)
@@ -304,14 +302,10 @@ void ShortcutsDialog::createDialogContent()
 	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->shortcutsTreeView->selectionModel(),
-	        SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-	        this,
-	        SLOT(initEditors()));
-	connect(ui->shortcutsTreeView,
-	        SIGNAL(activated(QModelIndex)),
-	        this,
-	        SLOT(switchToEditors(QModelIndex)));
+	connect(ui->shortcutsTreeView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+		this, SLOT(initEditors()));
+	connect(ui->shortcutsTreeView, SIGNAL(activated(QModelIndex)),
+		this, SLOT(switchToEditors(QModelIndex)));
 	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)),
 	        filterModel, SLOT(setFilterFixedString(QString)));
 	
@@ -319,6 +313,7 @@ void ShortcutsDialog::createDialogContent()
 	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
 	// restore defaults button logic
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaultShortcuts()));
+	connect(ui->restoreAllDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreAllDefaultShortcuts()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
 	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
 	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
@@ -376,9 +371,7 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 
 	QModelIndex index = filterModel->mapFromSource(groupItem->index());
 	ui->shortcutsTreeView->expand(index);
-	ui->shortcutsTreeView->setFirstColumnSpanned(index.row(),
-	                                             QModelIndex(),
-	                                             true);
+	ui->shortcutsTreeView->setFirstColumnSpanned(index.row(), QModelIndex(), true);
 	ui->shortcutsTreeView->setRowHidden(index.row(), QModelIndex(), false);
 	
 	return groupItem;
@@ -450,12 +443,34 @@ void ShortcutsDialog::updateShortcutsItem(StelAction *action,
 	                   action->getAltShortcut(), Qt::DisplayRole);
 }
 
-void ShortcutsDialog::restoreDefaultShortcuts()
+void ShortcutsDialog::restoreAllDefaultShortcuts()
 {
 	resetModel();
 	actionMgr->restoreDefaultShortcuts();
 	updateTreeData();
 	initEditors();
+}
+
+void ShortcutsDialog::restoreDefaultShortcuts()
+{
+	// get ids stored in tree
+	QModelIndex index = filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
+	if (!index.isValid())
+		return;
+	index = index.sibling(index.row(), 0);
+	QStandardItem* currentItem = mainModel->itemFromIndex(index);
+	QString actionId = currentItem->data(Qt::UserRole).toString();
+
+	StelAction* action = actionMgr->findAction(actionId);
+	if (action)
+	{
+		actionMgr->restoreDefaultShortcut(action);
+		updateShortcutsItem(action);
+		actionMgr->saveShortcuts();
+		// nothing to apply until edits' content changes
+		ui->applyButton->setEnabled(false);
+		ui->restoreDefaultsButton->setEnabled(true);
+	}
 }
 
 void ShortcutsDialog::updateTreeData()
