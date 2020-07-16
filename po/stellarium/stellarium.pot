@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-07-15 00:10+0700\n"
+"POT-Creation-Date: 2020-07-17 01:36+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 #: src/core/modules/SpecialMarkersMgr.cpp:217
 #: src/core/modules/LandscapeMgr.cpp:495
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
-#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:274
+#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:275
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:624 src/core/StelCore.cpp:257
@@ -477,7 +477,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
@@ -2064,43 +2064,43 @@ msgid "Orthographic"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:275 src/gui/AstroCalcDialog.cpp:2474
+#: src/core/modules/SolarSystem.cpp:276 src/gui/AstroCalcDialog.cpp:2474
 #: src/gui/AstroCalcDialog.cpp:5149 src/translations.h:82
 msgid "Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:276
+#: src/core/modules/SolarSystem.cpp:277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:277
+#: src/core/modules/SolarSystem.cpp:278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:278
+#: src/core/modules/SolarSystem.cpp:279
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:280
+#: src/core/modules/SolarSystem.cpp:281
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:281
+#: src/core/modules/SolarSystem.cpp:282
 msgid "Planet selection marker"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:282
+#: src/core/modules/SolarSystem.cpp:283
 msgid "Enlarge Moon"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:283
+#: src/core/modules/SolarSystem.cpp:284
 msgid "Enlarge minor bodies"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:284
+#: src/core/modules/SolarSystem.cpp:285
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -2590,11 +2590,11 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/core/StelCore.cpp:2274
+#: src/core/StelCore.cpp:2278
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:2277
+#: src/core/StelCore.cpp:2281
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2602,14 +2602,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2280
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2283
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2618,14 +2618,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2291
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2291
+#: src/core/StelCore.cpp:2295
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2633,7 +2633,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2295
+#: src/core/StelCore.cpp:2299
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2641,14 +2641,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2298
+#: src/core/StelCore.cpp:2302
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2301
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2657,14 +2657,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2308
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2311
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2672,25 +2672,25 @@ msgid ""
 "D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2314
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2317
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2316
+#: src/core/StelCore.cpp:2320
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2319
+#: src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2699,14 +2699,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2326
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2325
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2714,42 +2714,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2328
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2335
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2334
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2337
+#: src/core/StelCore.cpp:2341
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2340
+#: src/core/StelCore.cpp:2344
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2343
+#: src/core/StelCore.cpp:2347
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -2757,7 +2757,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2346
+#: src/core/StelCore.cpp:2350
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2765,7 +2765,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2349
+#: src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2774,7 +2774,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2352 src/core/StelCore.cpp:2355
+#: src/core/StelCore.cpp:2356 src/core/StelCore.cpp:2359
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2784,15 +2784,15 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2352
+#: src/core/StelCore.cpp:2356
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:2355
+#: src/core/StelCore.cpp:2359
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2358
+#: src/core/StelCore.cpp:2362
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2800,7 +2800,7 @@ msgid ""
 "em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2361
+#: src/core/StelCore.cpp:2365
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2808,7 +2808,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2364
+#: src/core/StelCore.cpp:2368
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2816,7 +2816,7 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2367
+#: src/core/StelCore.cpp:2371
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2825,7 +2825,7 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2370
+#: src/core/StelCore.cpp:2374
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2833,48 +2833,48 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2373
+#: src/core/StelCore.cpp:2377
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2376 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2380 src/core/SimbadSearcher.cpp:173
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:2384
+#: src/core/StelCore.cpp:2388
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2427
+#: src/core/StelCore.cpp:2431
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2430
+#: src/core/StelCore.cpp:2434
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2433
+#: src/core/StelCore.cpp:2437
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2440
+#: src/core/StelCore.cpp:2444
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2450
+#: src/core/StelCore.cpp:2454
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2452
+#: src/core/StelCore.cpp:2456
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -3663,7 +3663,7 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
@@ -3685,7 +3685,7 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:147
@@ -4882,15 +4882,15 @@ msgstr ""
 msgid "Paste and Search"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:497
+#: src/gui/ShortcutsDialog.cpp:513
 msgid "Action"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:497 src/ui_shortcutsDialog.h:201
+#: src/gui/ShortcutsDialog.cpp:513 src/ui_shortcutsDialog.h:213
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:497 src/ui_shortcutsDialog.h:202
+#: src/gui/ShortcutsDialog.cpp:513 src/ui_shortcutsDialog.h:214
 msgid "Alternative shortcut"
 msgstr ""
 
@@ -10568,7 +10568,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1621
 #: plugins/NavStars/src/ui_navStarsWindow.h:248
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
 msgstr ""
@@ -10579,7 +10579,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1625
 #: plugins/NavStars/src/ui_navStarsWindow.h:247
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
 msgstr ""
@@ -11246,16 +11246,20 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:199
+#: src/ui_shortcutsDialog.h:211
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:203
+#: src/ui_shortcutsDialog.h:215
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:204
+#: src/ui_shortcutsDialog.h:216
 msgid "Apply"
+msgstr ""
+
+#: src/ui_shortcutsDialog.h:217
+msgid "Restore All Defaults"
 msgstr ""
 
 #: src/ui_atmosphereDialog.h:177
@@ -12272,7 +12276,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
@@ -12292,7 +12296,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:157
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:96
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 #, qt-format
@@ -12315,7 +12319,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:214
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
@@ -12336,7 +12340,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:162
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:103
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:187
@@ -12357,7 +12361,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:164
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:103
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:105
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:145
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
@@ -12451,7 +12455,7 @@ msgstr ""
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
@@ -16564,7 +16568,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:301
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:337
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 msgid "Enable display at startup"
 msgstr ""
 
@@ -19895,14 +19899,14 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:219
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:235
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:237
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
 msgid "Equation of Time"
 msgstr ""
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:93
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 msgid "This plugin shows the solution of the equation of time."
 msgstr ""
 
@@ -19916,11 +19920,11 @@ msgctxt "time"
 msgid "s"
 msgstr ""
 
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 msgid "Equation of Time plug-in"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:238
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 msgid ""
 "The equation of time describes the discrepancy between two kinds of solar "
 "time. These are apparent solar time, which directly tracks the motion of the "
@@ -19933,19 +19937,23 @@ msgid ""
 "first check its sign usage."
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
 msgid "Show plug-ins button on toolbar"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:241
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
 msgid "Use minutes and seconds"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:249
 msgid "Change sign of equation"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:251
+msgid "Color of text"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
 msgid "Font size:"
 msgstr ""
