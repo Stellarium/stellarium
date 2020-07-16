@@ -466,9 +466,11 @@ void ShortcutsDialog::restoreDefaultShortcuts()
 	{
 		actionMgr->restoreDefaultShortcut(action);
 		updateShortcutsItem(action);
+		ui->primaryShortcutEdit->setText(action->getShortcut().toString());
+		ui->altShortcutEdit->setText(action->getAltShortcut().toString());
 		// nothing to apply until edits' content changes
 		ui->applyButton->setEnabled(false);
-		ui->restoreDefaultsButton->setEnabled(true);
+		ui->restoreDefaultsButton->setEnabled(false);
 	}
 }
 
