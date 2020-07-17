@@ -364,18 +364,16 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdName,       0);
 	ccdMapper->addMapping(ui->ccdChipY,      1);
 	ccdMapper->addMapping(ui->ccdChipX,      2);
-	ccdMapper->addMapping(ui->ccdPixelY,     3);
-	ccdMapper->addMapping(ui->ccdPixelX,     4);
-	ccdMapper->addMapping(ui->ccdResX,       5);
-	ccdMapper->addMapping(ui->ccdResY,       6);
-	ccdMapper->addMapping(ui->ccdRotAngle,   7);
-	ccdMapper->addMapping(ui->ccdBinningX,   8);
-	ccdMapper->addMapping(ui->ccdBinningY,   9);
-	ccdMapper->addMapping(ui->OAG_checkBox, 10);
-	ccdMapper->addMapping(ui->OAGPrismH,    11);
-	ccdMapper->addMapping(ui->OAGPrismW,    12);
-	ccdMapper->addMapping(ui->OAGDist,      13);
-	ccdMapper->addMapping(ui->OAGPrismPA,   14);
+	ccdMapper->addMapping(ui->ccdResX,       3);
+	ccdMapper->addMapping(ui->ccdResY,       4);
+	ccdMapper->addMapping(ui->ccdRotAngle,   5);
+	ccdMapper->addMapping(ui->ccdBinningX,   6);
+	ccdMapper->addMapping(ui->ccdBinningY,   7);
+	ccdMapper->addMapping(ui->OAG_checkBox, 8);
+	ccdMapper->addMapping(ui->OAGPrismH,    9);
+	ccdMapper->addMapping(ui->OAGPrismW,    10);
+	ccdMapper->addMapping(ui->OAGDist,      11);
+	ccdMapper->addMapping(ui->OAGPrismPA,   12);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -385,8 +383,6 @@ void OcularDialog::createDialogContent()
 
 	connect(ui->ccdChipY,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdChipX,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-	connect(ui->ccdPixelY,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-	connect(ui->ccdPixelX,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdResX,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdResY,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
