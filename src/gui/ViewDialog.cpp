@@ -483,9 +483,9 @@ void ViewDialog::createDialogContent()
 static QString getHipsType(const HipsSurveyP hips)
 {
 	QJsonObject properties = hips->property("properties").toJsonObject();
-	if (!properties.contains("type") && !properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive))
+	if (!hips->isPlanetarySurvey())
 		return "dss";
-	if (properties["type"].toString() == "planet") // || properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive))
+	if (properties["type"].toString() == "planet") // TODO: switch to use hips->isPlanetarySurvey() and multiple surveys for Solar system bodies
 		return "sol";
 	return "other";
 }

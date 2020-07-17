@@ -99,6 +99,13 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 		if (properties.contains("hips_frame"))
 			hipsFrame = properties["hips_frame"].toString();
 
+		QStringList DSSSurveys;
+		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
+		if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive) && !(properties["creator_did"].toString().contains("moon", Qt::CaseInsensitive)) && !(properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive)))
+			planetarySurvey = false;
+		else
+			planetarySurvey = true;
+
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -112,16 +119,6 @@ HipsSurvey::~HipsSurvey()
 bool HipsSurvey::isVisible() const
 {
 	return static_cast<bool>(fader);
-}
-
-bool HipsSurvey::isPlanetarySurvey() const
-{
-	QStringList DSSSurveys;
-	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
-	if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive))
-		return false;
-	else
-		return true;
 }
 
 void HipsSurvey::setVisible(bool value)

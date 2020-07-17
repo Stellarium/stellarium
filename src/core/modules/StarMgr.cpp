@@ -1369,40 +1369,6 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by HP number if it's an HP formatted number
-	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx.exactMatch(objw))
-	{
-		return searchHP(rx.cap(2).toInt());
-	}
-
-	// Search by SAO number if it's an SAO formatted number
-	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx2.exactMatch(objw))
-	{
-		auto sao = saoStarsIndex.find(rx2.cap(2).toInt());
-		if (sao!=saoStarsIndex.end())
-			return searchHP(sao.value());
-	}
-
-	// Search by HD number if it's an HD formatted number
-	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx3.exactMatch(objw))
-	{
-		auto hd = hdStarsIndex.find(rx3.cap(2).toInt());
-		if (hd!=hdStarsIndex.end())
-			return searchHP(hd.value());
-	}
-
-	// Search by HR number if it's an HR formatted number
-	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx4.exactMatch(objw))
-	{
-		auto hr = hrStarsIndex.find(rx4.cap(2).toInt());
-		if (hr!=hrStarsIndex.end())
-			return searchHP(hr.value());
-	}
-
 	// Search by I18n common name
 	auto it = commonNamesIndexI18n.find(objw);
 	if (it!=commonNamesIndexI18n.end())
@@ -1420,37 +1386,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	// Search by sci name
-	auto it2 = sciNamesIndexI18n.find(objw);
-	if (it2!=sciNamesIndexI18n.end())
-	{
-		return searchHP(it2.value());
-	}
-
-
-	// Search by additional sci name
-	auto it3 = sciAdditionalNamesIndexI18n.find(objw);
-	if (it3!=sciAdditionalNamesIndexI18n.end())
-	{
-		return searchHP(it3.value());
-	}
-
-
-	// Search by GCVS name
-	auto it4 = varStarsIndexI18n.find(objw);
-	if (it4!=varStarsIndexI18n.end())
-	{
-		return searchHP(it4.value());
-	}
-
-	// Search by WDS name
-	auto wdsIt = wdsStarsIndexI18n.find(objw);
-	if (wdsIt!=wdsStarsIndexI18n.end())
-	{
-		return searchHP(wdsIt.value());
-	}
-
-	return StelObjectP();
+	return searchByName(objw);
 }
 
 
@@ -1521,6 +1457,20 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
 		return searchHP(it3.value());
+	}
+
+	// Search by GCVS name
+	auto it4 = varStarsIndexI18n.find(objw);
+	if (it4!=varStarsIndexI18n.end())
+	{
+		return searchHP(it4.value());
+	}
+
+	// Search by WDS name
+	auto wdsIt = wdsStarsIndexI18n.find(objw);
+	if (wdsIt!=wdsStarsIndexI18n.end())
+	{
+		return searchHP(wdsIt.value());
 	}
 
 	return StelObjectP();
