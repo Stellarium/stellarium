@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-07-17 18:08+0700\n"
+"POT-Creation-Date: 2020-07-18 23:23+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:275
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
-#: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:149
+#: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:624 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:823
@@ -2200,7 +2200,7 @@ msgstr ""
 msgid "Digitized Sky Survey (TOAST)"
 msgstr ""
 
-#: src/core/modules/HipsMgr.cpp:149
+#: src/core/modules/HipsMgr.cpp:151
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr ""
 
@@ -4886,11 +4886,13 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:513 src/ui_shortcutsDialog.h:213
+#: src/gui/ShortcutsDialog.cpp:513
+msgctxt "column name"
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:513 src/ui_shortcutsDialog.h:214
+#: src/gui/ShortcutsDialog.cpp:513
+msgctxt "column name"
 msgid "Alternative shortcut"
 msgstr ""
 
@@ -11248,6 +11250,14 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:211
 msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: src/ui_shortcutsDialog.h:213
+msgid "Primary shortcut"
+msgstr ""
+
+#: src/ui_shortcutsDialog.h:214
+msgid "Alternative shortcut"
 msgstr ""
 
 #: src/ui_shortcutsDialog.h:215

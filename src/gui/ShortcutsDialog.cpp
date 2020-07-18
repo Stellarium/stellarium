@@ -510,6 +510,6 @@ void ShortcutsDialog::setModelHeader()
 {
 	// Warning! The latter two strings are reused elsewhere in the GUI.
 	QStringList headerLabels;
-	headerLabels << q_("Action") << q_("Primary shortcut") << q_("Alternative shortcut");
+	headerLabels << q_("Action") << qc_("Primary shortcut","column name") << qc_("Alternative shortcut","column name");
 	mainModel->setHorizontalHeaderLabels(headerLabels);
 }
