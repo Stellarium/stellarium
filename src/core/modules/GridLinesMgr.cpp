@@ -766,6 +766,7 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.setFont(font);
 	userData.textColor = Vec4f(color, fader.getInterstate());
 	userData.text = label;
+	double alt=0, az=0; // Required only for CURRENT_VERTICAL line. Will contain alt/az of view.
 	/////////////////////////////////////////////////
 	// Draw the line
 
@@ -974,7 +975,6 @@ void SkyLine::draw(StelCore *core) const
 	{
 		Vec3d coordJ2000=GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 		Vec3d coordAltAz=core->j2000ToAltAz(coordJ2000, StelCore::RefractionAuto);
-		double alt, az;
 		StelUtils::rectToSphe(&az, &alt, coordAltAz);
 		sphericalCap.n.set(sin(-az), cos(-az), 0.);
 		fpt.set(0,0,1);
@@ -1024,119 +1024,131 @@ void SkyLine::draw(StelCore *core) const
 		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
 		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
-		for (int i=0; i<(line_type==CURRENT_VERTICAL ? 180 : 360); ++i)
+		// Limit altitude marks to the displayed range
+		int i_min= 0;
+		int i_max=(line_type==CURRENT_VERTICAL ? 181 : 360);
+		if ((line_type==CURRENT_VERTICAL) && (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
 		{
-			if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
-			{
-				sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			if (alt<0) i_min=static_cast<int>(-alt*M_180_PI);
+			if (alt>0) i_max-=static_cast<int>(alt*M_180_PI);
+		}
 
-				if (showLabel)
+		for (int i=0; i<i_max; ++i)
+		{
+			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL)){
+
+				if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 				{
-					// we must adapt (rotate) some labels to observers on the southern hemisphere.
-					const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
-					int value=i;
-					float extraTextAngle=0.f;
-					// shiftx/y is OK for equator, horizon, ecliptic.
-					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
-					float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
-					QString unit("°");
-					QString label;
-					switch (line_type) {
-						case EQUATOR_J2000:
-						case EQUATOR_OF_DATE:
-							if (!StelApp::getInstance().getFlagShowDecimalDegrees())
-							{
-								value /= 15;
-								unit="h";
-							}
-							extraTextAngle = southernHemi ? -90.f : 90.f;
-							if (southernHemi) shifty*=-0.25f;
-							break;
-						case HORIZON:
-							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
-							extraTextAngle=90.f;
-							break;
-						case MERIDIAN:
-						case COLURE_1: // Equinoctial Colure
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							if (i<90) // South..Nadir | ARI0..CSP
-							{
-								value=-i;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else if (i>270) // Zenith..South | CNP..ARI0
-							{
-								value=360-i;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else // Nadir..North..Zenith | CSP..Equator:12h..CNP
-							{
-								value=i-180;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
-							}
-							break;
-						case PRIME_VERTICAL:
-						case COLURE_2: // Solstitial Colure
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
-							{
-								value=i;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
-							{
-								value=180-i;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
-							}
-							else // Nadir..East | CSP..Equator:6h
-							{
-								value=i-360;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							break;
-						case CURRENT_VERTICAL:
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							value=90-i;
-							shiftx = 3.0f;
-							break;
-						case LONGITUDE:
-							value=( i<180 ? 90-i : i-270 );
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
-							break;
-						case GALACTICEQUATOR:
-						case SUPERGALACTICEQUATOR:
-							extraTextAngle = 90.f;
-							break;
-						default:
-							extraTextAngle = southernHemi ? -90.f : 90.f;
-							if (southernHemi) shifty*=-0.25f;
-							break;
-					}
-					label = QString("%1%2").arg(value).arg(unit);
-					Vec3d screenPosTgt, screenPosTgtL;
-					prj->project(part30, screenPosTgt);
-					prj->project(part30l, screenPosTgtL);
-					double dx=screenPosTgtL[0]-screenPosTgt[0];
-					double dy=screenPosTgtL[1]-screenPosTgt[1];
-					float textAngle=static_cast<float>(atan2(dy,dx));
-					sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
-				}
-			}
+					sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-			else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
-				sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
-				sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
-				sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						// we must adapt (rotate) some labels to observers on the southern hemisphere.
+						const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
+						int value=i;
+						float extraTextAngle=0.f;
+						// shiftx/y is OK for equator, horizon, ecliptic.
+						float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
+						float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
+						QString unit("°");
+						QString label;
+						switch (line_type) {
+							case EQUATOR_J2000:
+							case EQUATOR_OF_DATE:
+								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+								{
+									value /= 15;
+									unit="h";
+								}
+								extraTextAngle = southernHemi ? -90.f : 90.f;
+								if (southernHemi) shifty*=-0.25f;
+								break;
+							case HORIZON:
+								value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
+								extraTextAngle=90.f;
+								break;
+							case MERIDIAN:
+							case COLURE_1: // Equinoctial Colure
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								if (i<90) // South..Nadir | ARI0..CSP
+								{
+									value=-i;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else if (i>270) // Zenith..South | CNP..ARI0
+								{
+									value=360-i;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else // Nadir..North..Zenith | CSP..Equator:12h..CNP
+								{
+									value=i-180;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+								}
+								break;
+							case PRIME_VERTICAL:
+							case COLURE_2: // Solstitial Colure
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
+								{
+									value=i;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
+								{
+									value=180-i;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+								}
+								else // Nadir..East | CSP..Equator:6h
+								{
+									value=i-360;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								break;
+							case CURRENT_VERTICAL:
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								value=90-i;
+								shiftx = 3.0f;
+								break;
+							case LONGITUDE:
+								value=( i<180 ? 90-i : i-270 );
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
+								break;
+							case GALACTICEQUATOR:
+							case SUPERGALACTICEQUATOR:
+								extraTextAngle = 90.f;
+								break;
+							default:
+								extraTextAngle = southernHemi ? -90.f : 90.f;
+								if (southernHemi) shifty*=-0.25f;
+								break;
+						}
+						label = QString("%1%2").arg(value).arg(unit);
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(part30, screenPosTgt);
+						prj->project(part30l, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
+					}
+				}
+
+				else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
+					sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
+					sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
+					sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			}
 			part0.transfo4d(rotZ1);
 			part1.transfo4d(rotZ1);
 			part5.transfo4d(rotZ1);
@@ -1147,23 +1159,72 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.setLineWidth(lineThickness);
 	}
 
-
 	Vec3d p1, p2;
 	if (line_type==CURRENT_VERTICAL)
 	{
+		// The usual handling should always projects this circle into a straight line. However, with some projections we see ugly artifacts. Better handle this line specially.
+		Vec3f zenith(0.,0.,1.), nadir(0.,0.,-1.);
+		switch (core->getCurrentProjectionType())
+		{
+			case StelCore::ProjectionOrthographic:
+				StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2), zenith);
+				StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2), nadir);
+				break;
+			case StelCore::ProjectionEqualArea:
+				if (alt*M_180_PI<-89.0) StelUtils::spheToRect(az,  89.5*M_PI_180, zenith);
+				if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, nadir);
+				break;
+			case StelCore::ProjectionHammer:
+			case StelCore::ProjectionSinusoidal:
+			case StelCore::ProjectionMercator:
+			case StelCore::ProjectionMiller:
+			case StelCore::ProjectionCylinder:
+				StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2)-0.05*M_PI_180, zenith);
+				StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2)+0.05*M_PI_180, nadir);
+				break;
+			default:
+				break;
+		}
+		Vec3f zenithPrj, nadirPrj;
+		const bool zenithValid= prj->project(zenith, zenithPrj);
+		const bool nadirValid = prj->project(nadir, nadirPrj);
+		// Using projected x/y causes some horizontal jitter around horizontal views in Hammer...Cylinder. I see no other way than to use center of viewport.
+		// TODO: This may cause issues when somebody shifts viewport X sideways.
+		const StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
+		float vpCtrX=static_cast<float>(params.viewportCenter[0]);
+		switch (core->getCurrentProjectionType())
+		{
+			case StelCore::ProjectionPerspective:
+			case StelCore::ProjectionStereographic:
+			case StelCore::ProjectionHammer:
+			case StelCore::ProjectionMercator:
+				sPainter.drawLine2d(vpCtrX, zenithValid ? zenithPrj[1] : params.viewportXywh[3], vpCtrX, nadirValid ? nadirPrj[1] : 0); // avoid various problems with zenith/nadir
+				break;
+			case StelCore::ProjectionSinusoidal:
+			case StelCore::ProjectionMiller:
+			case StelCore::ProjectionCylinder:
+				sPainter.drawLine2d(vpCtrX, zenithPrj[1], vpCtrX, nadirPrj[1]); // avoid jitter with zenith/nadir when view near horizon.
+				break;
+			default:
+				sPainter.drawLine2d(zenithPrj[0], zenithPrj[1], nadirPrj[0], nadirPrj[1]);
+				break;
+		}
+	}
+	else {
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 		{
 			if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
-				|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
+					|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
 			{
-				// The current vertical (screen centerline) is fully included in the viewport, draw it in 2 sub-arcs to avoid length > 180.
-				const Mat4d& rotLon90 = Mat4d::rotation(sphericalCap.n, 90.*M_PI_180);
+				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
 				Vec3d rotFpt=fpt;
-				rotFpt.transfo4d(rotLon90);
+				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
-				rotFpt2.transfo4d(rotLon90);
+				rotFpt2.transfo4d(rotLon120);
 				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			}
 		}
 		else
@@ -1177,36 +1238,6 @@ void SkyLine::draw(StelCore *core) const
 			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 		}
-
-	}
-	else {
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
-	{
-		if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
-			|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
-		{
-			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
-			Vec3d rotFpt=fpt;
-			rotFpt.transfo4d(rotLon120);
-			Vec3d rotFpt2=rotFpt;
-			rotFpt2.transfo4d(rotLon120);
-			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-		}
-	}
-	else
-	{
-		Vec3d middlePoint = p1+p2;
-		middlePoint.normalize();
-		if (!viewPortSphericalCap.contains(middlePoint))
-			middlePoint*=-1.;
-
-		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-	}
 	}
 
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
