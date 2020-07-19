@@ -91,6 +91,9 @@ private slots:
 	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
 
+	void populateOrbitsControls(bool flag);
+	void populateTrailsControls(bool flag);
+
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();

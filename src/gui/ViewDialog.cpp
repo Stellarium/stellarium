@@ -201,14 +201,14 @@ void ViewDialog::createDialogContent()
 	// Planets section
 	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
-	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");	
+	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
-	ui->planetIsolatedOrbitCheckBox->setEnabled(ssmgr->getFlagOrbits());
-	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetIsolatedOrbitCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
 	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
-	ui->planetOrbitOnlyCheckBox->setEnabled(ssmgr->getFlagPlanetsOrbitsOnly());
-	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetOrbitOnlyCheckBox, SLOT(setEnabled(bool)));	
+	connectIntProperty(ui->planetOrbitsThicknessSpinBox, "SolarSystem.orbitsThickness");
+	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
+	populateOrbitsControls(ssmgr->getFlagOrbits());
+	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)), this, SLOT(populateOrbitsControls(bool)));
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
 	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
 	connectBoolProperty(ui->planetShowObjSelfShadowsCheckBox, "SolarSystem.flagShowObjSelfShadows");
@@ -222,21 +222,17 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->minorBodyScaleFactor,"SolarSystem.minorBodyScale");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
-	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
-	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
+	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);	
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	connectColorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor", "color/planet_nomenclature_color");
 	connectColorButton(ui->planetLabelColor, "SolarSystem.labelsColor", "color/planet_names_color");
 	connectColorButton(ui->planetTrailsColor, "SolarSystem.trailsColor", "color/object_trails_color");
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
-	connectIntProperty(ui->planetTrailsThicknessSpinBox, "SolarSystem.trailsThickness");
-	connectIntProperty(ui->planetOrbitsThicknessSpinBox, "SolarSystem.orbitsThickness");
+	connectIntProperty(ui->planetTrailsThicknessSpinBox, "SolarSystem.trailsThickness");	
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
-	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagTrails());
-	ui->planetIsolatedTrailsSpinBox->setEnabled(ssmgr->getFlagTrails());
-	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)),ui->planetIsolatedTrailsCheckBox, SLOT(setEnabled(bool)));
-	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)),ui->planetIsolatedTrailsSpinBox, SLOT(setEnabled(bool)));
+	populateTrailsControls(ssmgr->getFlagTrails());
+	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
 	ui->hidePlanetNomenclatureCheckBox->setEnabled(mnmgr->property("nomenclatureDisplayed").toBool());
@@ -477,6 +473,22 @@ void ViewDialog::createDialogContent()
 	updateHips();
 
 	updateTabBarListWidgetWidth();
+}
+
+void ViewDialog::populateOrbitsControls(bool flag)
+{
+	ui->planetIsolatedOrbitCheckBox->setEnabled(flag);
+	ui->planetOrbitOnlyCheckBox->setEnabled(flag);
+	ui->planetOrbitPermanentCheckBox->setEnabled(flag);
+	ui->planetOrbitsThicknessSpinBox->setEnabled(flag);
+	ui->pushButtonOrbitColors->setEnabled(flag);
+}
+
+void ViewDialog::populateTrailsControls(bool flag)
+{
+	ui->planetIsolatedTrailsCheckBox->setEnabled(flag);
+	ui->planetIsolatedTrailsSpinBox->setEnabled(flag);
+	ui->planetTrailsThicknessSpinBox->setEnabled(flag);
 }
 
 // Heuristic function to decide in which group to put a survey.
