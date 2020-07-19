@@ -1027,7 +1027,8 @@ void SkyLine::draw(StelCore *core) const
 		// Limit altitude marks to the displayed range
 		int i_min= 0;
 		int i_max=(line_type==CURRENT_VERTICAL ? 181 : 360);
-		if ((line_type==CURRENT_VERTICAL) && (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
+		if ((line_type==CURRENT_VERTICAL) && (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal) &&
+		    (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
 		{
 			if (alt<0) i_min=static_cast<int>(-alt*M_180_PI);
 			if (alt>0) i_max-=static_cast<int>(alt*M_180_PI);
@@ -1163,52 +1164,37 @@ void SkyLine::draw(StelCore *core) const
 	if (line_type==CURRENT_VERTICAL)
 	{
 		// The usual handling should always projects this circle into a straight line. However, with some projections we see ugly artifacts. Better handle this line specially.
-		Vec3f zenith(0.,0.,1.), nadir(0.,0.,-1.);
-		switch (core->getCurrentProjectionType())
+		p1.set(0.,0.,1.);
+		p2.set(0.,0.,-1.);
+		Vec3d pHori;
+		StelUtils::spheToRect(az, 0., pHori);
+		if (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal)
 		{
-			case StelCore::ProjectionOrthographic:
-				StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2), zenith);
-				StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2), nadir);
-				break;
-			case StelCore::ProjectionEqualArea:
-				if (alt*M_180_PI<-89.0) StelUtils::spheToRect(az,  89.5*M_PI_180, zenith);
-				if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, nadir);
-				break;
-			case StelCore::ProjectionHammer:
-			case StelCore::ProjectionSinusoidal:
-			case StelCore::ProjectionMercator:
-			case StelCore::ProjectionMiller:
-			case StelCore::ProjectionCylinder:
-				StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2)-0.05*M_PI_180, zenith);
-				StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2)+0.05*M_PI_180, nadir);
-				break;
-			default:
-				break;
+			switch (core->getCurrentProjectionType())
+			{
+				case StelCore::ProjectionOrthographic:
+					StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2), p1);
+					StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2), p2);
+					break;
+				case StelCore::ProjectionEqualArea:
+					if (alt*M_180_PI<-89.0) StelUtils::spheToRect(az,  89.5*M_PI_180, p1);
+					if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, p2);
+					break;
+				case StelCore::ProjectionHammer:
+				case StelCore::ProjectionSinusoidal:
+				case StelCore::ProjectionMercator:
+				case StelCore::ProjectionMiller:
+				case StelCore::ProjectionCylinder:
+					StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2)-0.05*M_PI_180, p1);
+					StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2)+0.05*M_PI_180, p2);
+					break;
+				default:
+					break;
+			}
 		}
-		Vec3f zenithPrj, nadirPrj;
-		const bool zenithValid= prj->project(zenith, zenithPrj);
-		const bool nadirValid = prj->project(nadir, nadirPrj);
-		// Using projected x/y causes some horizontal jitter around horizontal views in Hammer...Cylinder. I see no other way than to use center of viewport.
-		// TODO: This may cause issues when somebody shifts viewport X sideways.
-		const StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
-		float vpCtrX=static_cast<float>(params.viewportCenter[0]);
-		switch (core->getCurrentProjectionType())
-		{
-			case StelCore::ProjectionPerspective:
-			case StelCore::ProjectionStereographic:
-			case StelCore::ProjectionHammer:
-			case StelCore::ProjectionMercator:
-				sPainter.drawLine2d(vpCtrX, zenithValid ? zenithPrj[1] : params.viewportXywh[3], vpCtrX, nadirValid ? nadirPrj[1] : 0); // avoid various problems with zenith/nadir
-				break;
-			case StelCore::ProjectionSinusoidal:
-			case StelCore::ProjectionMiller:
-			case StelCore::ProjectionCylinder:
-				sPainter.drawLine2d(vpCtrX, zenithPrj[1], vpCtrX, nadirPrj[1]); // avoid jitter with zenith/nadir when view near horizon.
-				break;
-			default:
-				sPainter.drawLine2d(zenithPrj[0], zenithPrj[1], nadirPrj[0], nadirPrj[1]);
-				break;
-		}
+		// Now draw through a middle point.
+		sPainter.drawGreatCircleArc(p1, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
 	else {
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
