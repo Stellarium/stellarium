@@ -225,7 +225,7 @@ namespace StelUtils
 		v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -235,7 +235,7 @@ namespace StelUtils
 		*lng = atan2(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -246,7 +246,7 @@ namespace StelUtils
 	}
 
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -256,7 +256,7 @@ namespace StelUtils
 		*lng = atan2f(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
