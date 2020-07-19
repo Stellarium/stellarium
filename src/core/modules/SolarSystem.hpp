@@ -937,6 +937,9 @@ public slots:
 	void setOrbitsThickness(int v);
 	int getOrbitsThickness() const;
 
+	//! Reset and recreate trails
+	void recreateTrails();
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
@@ -1139,8 +1142,6 @@ private slots:
 	void onNewSurvey(HipsSurveyP survey);
 
 	void fillEphemerisDates();
-	//! Reset and recreate trails
-	void recreateTrails();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given

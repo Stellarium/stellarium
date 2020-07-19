@@ -750,7 +750,8 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! This signal is emitted when the date has changed.
 	void dateChanged();
-	//! This signal is emitted when the date has changed in a way that planet trails or similar things should better be reset.
+	//! This signal can be emitted when e.g. the date has changed in a way that planet trails or similar things should better be reset.
+	//! TODO: Currently the signal is not used. Think of the proper way to apply it.
 	void dateChangedForTrails();
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
