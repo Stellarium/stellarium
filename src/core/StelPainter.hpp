@@ -126,7 +126,7 @@ public:
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
+	//! Each time the great circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=Q_NULLPTR, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=Q_NULLPTR, void* userData=Q_NULLPTR);
@@ -165,10 +165,10 @@ public:
 	void drawPoint2d(float x, float y);
 
 	//! Draw a line between the 2 points.
-	//! @param x1 x position of point 1 in the viewport in pixels.
-	//! @param y1 y position of point 1 in the viewport in pixels.
-	//! @param x2 x position of point 2 in the viewport in pixels.
-	//! @param y2 y position of point 2 in the viewport in pixels.
+	//! @param x1 x position of point 1 in the viewport in pixels. 0 is at left.
+	//! @param y1 y position of point 1 in the viewport in pixels. 0 is at bottom.
+	//! @param x2 x position of point 2 in the viewport in pixels. 0 is at left.
+	//! @param y2 y position of point 2 in the viewport in pixels. 0 is at bottom.
 	void drawLine2d(float x1, float y1, float x2, float y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.

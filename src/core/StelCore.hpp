@@ -89,15 +89,15 @@ public:
 	//! Available projection types. A value of 1000 indicates the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,	//!< Perspective projection
+		ProjectionPerspective,		//!< Perspective projection
 		ProjectionStereographic,	//!< Stereographic projection
 		ProjectionFisheye,		//!< Fisheye projection
-		ProjectionOrthographic,	//!< Orthographic projection
+		ProjectionOrthographic,		//!< Orthographic projection
 		ProjectionEqualArea,		//!< Equal Area projection
 		ProjectionHammer,		//!< Hammer-Aitoff projection
 		ProjectionSinusoidal,		//!< Sinusoidal projection
 		ProjectionMercator,		//!< Mercator projection
-		ProjectionMiller,			//!< Miller cylindrical projection
+		ProjectionMiller,		//!< Miller cylindrical projection
 		ProjectionCylinder,		//!< Cylinder projection
 	};
 
@@ -214,7 +214,7 @@ public:
 	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 
-	//! Get the current set of parameters to use when creating a new StelProjector.
+	//! Get the current set of parameters.
 	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const;
 	//! Set the set of parameters to use when creating a new StelProjector.
 	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams);

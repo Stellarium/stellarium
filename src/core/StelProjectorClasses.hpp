@@ -26,46 +26,46 @@ class StelProjectorPerspective : public StelProjector
 {
 public:
 	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 120.f;}
-	bool forward(Vec3f &v) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 120.f;}
+	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
 };
 
 class StelProjectorEqualArea : public StelProjector
 {
 public:
 	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 360.f;}
-	bool forward(Vec3f &v) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 360.f;}
+	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE{return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const  Q_DECL_OVERRIDE {return false;}
 };
 
 class StelProjectorStereographic : public StelProjector
 {
 public:
 	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 235.f;}
-	virtual void project(int n, const Vec3d* in, Vec3f* out)
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const  Q_DECL_OVERRIDE {return 235.f;}
+	virtual void project(int n, const Vec3d* in, Vec3f* out) Q_DECL_OVERRIDE
 	{
 		Vec3d v;
 		for (int i = 0; i < n; ++i, ++out)
@@ -80,43 +80,43 @@ public:
 		}
 	}
 
-	bool forward(Vec3f &v) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
 };
 
 class StelProjectorFisheye : public StelProjector
 {
 public:
 	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 180.00001f;}
-	bool forward(Vec3f &v) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.0f;}
+	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
 };
 
 class StelProjectorHammer : public StelProjector
 {
 public:
 	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 360.f;}
-	virtual void project(int n, const Vec3d* in, Vec3f* out)
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 185.f;}
+	virtual void project(int n, const Vec3d* in, Vec3f* out) Q_DECL_OVERRIDE
 	{
 		Vec3d v;
 		for (int i = 0; i < n; ++i)
@@ -130,15 +130,15 @@ public:
 			out[i][2] = (out[i][2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar);
 		}
 	}
-	bool forward(Vec3f &v) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -152,21 +152,21 @@ class StelProjectorCylinder : public StelProjector
 {
 public:
 	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 200.f;} // slight overshoot
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
 	}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -180,21 +180,21 @@ class StelProjectorMercator : public StelProjector
 {
 public:
 	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
 	}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -208,58 +208,58 @@ class StelProjectorOrthographic : public StelProjector
 {
 public:
 	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 179.9999f;}
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 179.9999f;}
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
 };
 
 class StelProjectorSinusoidal : public StelProjectorCylinder
 {
 public:
 	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 };
 
 class StelProjectorMiller : public StelProjectorMercator
 {
 public:
 	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // or 180?
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 };
 
 class StelProjector2d : public StelProjector
 {
 public:
 	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {;}
-	virtual QString getNameI18() const;
-	virtual QString getDescriptionI18() const;
-	virtual float getMaxFov() const {return 360.f;}
-	bool forward(Vec3f &win) const;
-	bool backward(Vec3d &v) const;
-	float fovToViewScalingFactor(float fov) const;
-	float viewScalingFactorToFov(float vsf) const;
-	float deltaZoom(float fov) const;
+	virtual QString getNameI18() const Q_DECL_OVERRIDE;
+	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.f;}
+	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
+	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
+	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
+	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
+	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 protected:
-	virtual bool hasDiscontinuity() const {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {Q_ASSERT(0); return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {Q_ASSERT(0); return false;}
-	virtual void computeBoundingCap() {;}
+	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
+	virtual void computeBoundingCap() Q_DECL_OVERRIDE {;}
 };
 
 #endif // STELPROJECTIONS_HPP

@@ -33,6 +33,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "precession.h"
 
 #include <set>
@@ -131,6 +132,7 @@ public:
 		SUPERGALACTICEQUATOR,
 		LONGITUDE,
 		PRIME_VERTICAL,
+		CURRENT_VERTICAL,
 		COLURE_1,
 		COLURE_2,
 		CIRCUMPOLARCIRCLE_N,
@@ -720,6 +722,10 @@ void SkyLine::updateLabel()
 			frameType=StelCore::FrameAltAz;
 			label = q_("Prime Vertical");
 			break;
+		case CURRENT_VERTICAL:
+			frameType=StelCore::FrameAltAz;
+			label = q_("Altitude");
+			break;
 		case COLURE_1:
 			frameType=StelCore::FrameEquinoxEqu;
 			label = q_("Equinoctial Colure");
@@ -760,6 +766,7 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.setFont(font);
 	userData.textColor = Vec4f(color, fader.getInterstate());
 	userData.text = label;
+	double alt=0, az=0; // Required only for CURRENT_VERTICAL line. Will contain alt/az of view.
 	/////////////////////////////////////////////////
 	// Draw the line
 
@@ -964,6 +971,14 @@ void SkyLine::draw(StelCore *core) const
 		sphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
+	else if (line_type==CURRENT_VERTICAL)
+	{
+		Vec3d coordJ2000=GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+		Vec3d coordAltAz=core->j2000ToAltAz(coordJ2000, StelCore::RefractionAuto);
+		StelUtils::rectToSphe(&az, &alt, coordAltAz);
+		sphericalCap.n.set(sin(-az), cos(-az), 0.);
+		fpt.set(0,0,1);
+	}
 	else if (line_type==LONGITUDE)
 	{
 		Vec3d coord;		
@@ -975,7 +990,7 @@ void SkyLine::draw(StelCore *core) const
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 
 		StelUtils::spheToRect(lambdaJDE + M_PI_2, 0., coord);
-		sphericalCap.n.set(coord[0],coord[1],coord[2]);
+		sphericalCap.n=coord;
 		fpt.set(0,0,1);
 	}
 
@@ -998,7 +1013,7 @@ void SkyLine::draw(StelCore *core) const
 			part0.set(0,1,0);
 			partAxis.set(0,0,1);
 		}
-		else if (line_type==LONGITUDE)
+		else if ((line_type==LONGITUDE) || (line_type==CURRENT_VERTICAL))
 		{
 			partAxis=sphericalCap.n ^ part0;
 		}
@@ -1009,114 +1024,133 @@ void SkyLine::draw(StelCore *core) const
 		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
 		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
-		for (int i=0; i<360; ++i)
+		// Limit altitude marks to the displayed range
+		int i_min= 0;
+		int i_max=(line_type==CURRENT_VERTICAL ? 181 : 360);
+		if ((line_type==CURRENT_VERTICAL) && (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal) &&
+		    (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
 		{
-			if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
-			{
-				sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			// Avoid marks creeping sideways
+			if (alt<= 2*M_PI_180) i_min =static_cast<int>(-alt*M_180_PI)+2;
+			if (alt>=-2*M_PI_180) i_max-=static_cast<int>( alt*M_180_PI)+2;
+		}
 
-				if (showLabel)
+		for (int i=0; i<i_max; ++i)
+		{
+			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL)){
+
+				if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 				{
-					// we must adapt (rotate) some labels to observers on the southern hemisphere.
-					const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
-					int value=i;
-					float extraTextAngle=0.f;
-					// shiftx/y is OK for equator, horizon, ecliptic.
-					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
-					float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
-					QString unit("°");
-					QString label;
-					switch (line_type) {
-						case EQUATOR_J2000:
-						case EQUATOR_OF_DATE:
-							if (!StelApp::getInstance().getFlagShowDecimalDegrees())
-							{
-								value /= 15;
-								unit="h";
-							}
-							extraTextAngle = southernHemi ? -90.f : 90.f;
-							if (southernHemi) shifty*=-0.25f;
-							break;
-						case HORIZON:
-							value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
-							extraTextAngle=90.f;
-							break;
-						case MERIDIAN:
-						case COLURE_1: // Equinoctial Colure
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							if (i<90) // South..Nadir | ARI0..CSP
-							{
-								value=-i;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else if (i>270) // Zenith..South | CNP..ARI0
-							{
-								value=360-i;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else // Nadir..North..Zenith | CSP..Equator:12h..CNP
-							{
-								value=i-180;
-								extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
-								shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
-							}
-							break;
-						case PRIME_VERTICAL:
-						case COLURE_2: // Solstitial Colure
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
-							{
-								value=i;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
-							{
-								value=180-i;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
-							}
-							else // Nadir..East | CSP..Equator:6h
-							{
-								value=i-360;
-								extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
-								shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							}
-							break;
-						case LONGITUDE:
-							value=( i<180 ? 90-i : i-270 );
-							shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-							shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-							extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
-							break;
-						case GALACTICEQUATOR:
-						case SUPERGALACTICEQUATOR:
-							extraTextAngle = 90.f;
-							break;
-						default:
-							extraTextAngle = southernHemi ? -90.f : 90.f;
-							if (southernHemi) shifty*=-0.25f;
-							break;
-					}
-					label = QString("%1%2").arg(value).arg(unit);
-					Vec3d screenPosTgt, screenPosTgtL;
-					prj->project(part30, screenPosTgt);
-					prj->project(part30l, screenPosTgtL);
-					double dx=screenPosTgtL[0]-screenPosTgt[0];
-					double dy=screenPosTgtL[1]-screenPosTgt[1];
-					float textAngle=static_cast<float>(atan2(dy,dx));
-					sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
-				}
-			}
+					sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-			else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
-				sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
-				sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-			else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
-				sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					if (showLabel)
+					{
+						// we must adapt (rotate) some labels to observers on the southern hemisphere.
+						const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
+						int value=i;
+						float extraTextAngle=0.f;
+						// shiftx/y is OK for equator, horizon, ecliptic.
+						float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) * 0.5f;
+						float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
+						QString unit("°");
+						QString label;
+						switch (line_type) {
+							case EQUATOR_J2000:
+							case EQUATOR_OF_DATE:
+								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+								{
+									value /= 15;
+									unit="h";
+								}
+								extraTextAngle = southernHemi ? -90.f : 90.f;
+								if (southernHemi) shifty*=-0.25f;
+								break;
+							case HORIZON:
+								value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
+								extraTextAngle=90.f;
+								break;
+							case MERIDIAN:
+							case COLURE_1: // Equinoctial Colure
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								if (i<90) // South..Nadir | ARI0..CSP
+								{
+									value=-i;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else if (i>270) // Zenith..South | CNP..ARI0
+								{
+									value=360-i;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else // Nadir..North..Zenith | CSP..Equator:12h..CNP
+								{
+									value=i-180;
+									extraTextAngle = (line_type==COLURE_1 && southernHemi) ? 180.f : 0.f;
+									shiftx = (line_type==COLURE_1 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+								}
+								break;
+							case PRIME_VERTICAL:
+							case COLURE_2: // Solstitial Colure
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								if (i<90) // East..Zenith | Equator:6h..SummerSolstice..CNP
+								{
+									value=i;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								else if (i<270) // Zenith..West..Nadir | CNP..WinterSolstice..CSP
+								{
+									value=180-i;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 180.f : 0.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f : 3.f;
+								}
+								else // Nadir..East | CSP..Equator:6h
+								{
+									value=i-360;
+									extraTextAngle = (line_type==COLURE_2 && southernHemi) ? 0.f : 180.f;
+									shiftx = (line_type==COLURE_2 && southernHemi) ? 3.f : - static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								}
+								break;
+							case CURRENT_VERTICAL:
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								value=90-i;
+								shiftx = 3.0f;
+								break;
+							case LONGITUDE:
+								value=( i<180 ? 90-i : i-270 );
+								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+								shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
+								break;
+							case GALACTICEQUATOR:
+							case SUPERGALACTICEQUATOR:
+								extraTextAngle = 90.f;
+								break;
+							default:
+								extraTextAngle = southernHemi ? -90.f : 90.f;
+								if (southernHemi) shifty*=-0.25f;
+								break;
+						}
+						label = QString("%1%2").arg(value).arg(unit);
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(part30, screenPosTgt);
+						prj->project(part30l, screenPosTgtL);
+						double dx=screenPosTgtL[0]-screenPosTgt[0];
+						double dy=screenPosTgtL[1]-screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy,dx));
+						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
+					}
+				}
+
+				else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
+					sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
+					sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
+					sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+			}
 			part0.transfo4d(rotZ1);
 			part1.transfo4d(rotZ1);
 			part5.transfo4d(rotZ1);
@@ -1127,34 +1161,70 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.setLineWidth(lineThickness);
 	}
 
-
 	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
+	if (line_type==CURRENT_VERTICAL)
 	{
-		if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
-			|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
+		// The usual handling should always projects this circle into a straight line. However, with some projections we see ugly artifacts. Better handle this line specially.
+		p1.set(0.,0.,1.);
+		p2.set(0.,0.,-1.);
+		Vec3d pHori;
+		StelUtils::spheToRect(az, 0., pHori);
+		if (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal)
 		{
-			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
-			Vec3d rotFpt=fpt;
-			rotFpt.transfo4d(rotLon120);
-			Vec3d rotFpt2=rotFpt;
-			rotFpt2.transfo4d(rotLon120);
-			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			switch (core->getCurrentProjectionType())
+			{
+				case StelCore::ProjectionOrthographic:
+					StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2), p1);
+					StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2), p2);
+					break;
+				case StelCore::ProjectionEqualArea:
+					if (alt*M_180_PI<-89.0) StelUtils::spheToRect(az,  89.5*M_PI_180, p1);
+					if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, p2);
+					break;
+				case StelCore::ProjectionHammer:
+				case StelCore::ProjectionSinusoidal:
+				case StelCore::ProjectionMercator:
+				case StelCore::ProjectionMiller:
+				case StelCore::ProjectionCylinder:
+					StelUtils::spheToRect(az, qMin(M_PI_2, alt+M_PI_2)-0.05*M_PI_180, p1);
+					StelUtils::spheToRect(az, qMax(-M_PI_2, alt-M_PI_2)+0.05*M_PI_180, p2);
+					break;
+				default:
+					break;
+			}
 		}
+		// Now draw through a middle point.
+		sPainter.drawGreatCircleArc(p1, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
-	else
-	{
-		Vec3d middlePoint = p1+p2;
-		middlePoint.normalize();
-		if (!viewPortSphericalCap.contains(middlePoint))
-			middlePoint*=-1.;
+	else {
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
+		{
+			if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
+					|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
+			{
+				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
+				Vec3d rotFpt=fpt;
+				rotFpt.transfo4d(rotLon120);
+				Vec3d rotFpt2=rotFpt;
+				rotFpt2.transfo4d(rotLon120);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			}
+		}
+		else
+		{
+			Vec3d middlePoint = p1+p2;
+			middlePoint.normalize();
+			if (!viewPortSphericalCap.contains(middlePoint))
+				middlePoint*=-1.;
 
-		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		}
 	}
 
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
@@ -1445,6 +1515,7 @@ GridLinesMgr::GridLinesMgr()
 	supergalacticEquatorLine = new SkyLine(SkyLine::SUPERGALACTICEQUATOR);
 	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
 	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
+	currentVerticalLine = new SkyLine(SkyLine::CURRENT_VERTICAL);
 	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
@@ -1488,6 +1559,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete supergalacticEquatorLine;
 	delete longitudeLine;
 	delete primeVerticalLine;
+	delete currentVerticalLine;
 	delete colureLine_1;
 	delete colureLine_2;
 	delete circumpolarCircleN;
@@ -1570,6 +1642,9 @@ void GridLinesMgr::init()
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagPrimeVerticalParts(conf->value("viewing/flag_prime_vertical_parts").toBool());
 	setFlagPrimeVerticalLabeled(conf->value("viewing/flag_prime_vertical_labels").toBool());
+	setFlagCurrentVerticalLine(conf->value("viewing/flag_current_vertical_line").toBool());
+	setFlagCurrentVerticalParts(conf->value("viewing/flag_current_vertical_parts").toBool());
+	setFlagCurrentVerticalLabeled(conf->value("viewing/flag_current_vertical_labels").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
 	setFlagColureParts(conf->value("viewing/flag_colure_parts").toBool());
 	setFlagColureLabeled(conf->value("viewing/flag_colure_labels").toBool());
@@ -1612,6 +1687,7 @@ void GridLinesMgr::init()
 	setColorSupergalacticEquatorLine(Vec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
 	setColorLongitudeLine(           Vec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(       Vec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
+	setColorCurrentVerticalLine(     Vec3f(conf->value("color/current_vertical_color", defaultColor).toString()));
 	setColorColureLines(             Vec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(      Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
 	setColorCelestialJ2000Poles(     Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
@@ -1633,40 +1709,41 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
-	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
-	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
-	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
-	addAction("actionShow_Ecliptic_J2000_Line", displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
-	addAction("actionShow_Equator_Line", displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
-	addAction("actionShow_Equator_J2000_Line", displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
-	addAction("actionShow_Meridian_Line", displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
-	addAction("actionShow_Horizon_Line", displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
-	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");	
-	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
-	addAction("actionShow_Supergalactic_Grid", displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
+	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
+	addAction("actionShow_Equatorial_Grid",            displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
+	addAction("actionShow_Azimuthal_Grid",             displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
+	addAction("actionShow_Ecliptic_Line",              displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
+	addAction("actionShow_Ecliptic_J2000_Line",        displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
+	addAction("actionShow_Equator_Line",               displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
+	addAction("actionShow_Equator_J2000_Line",         displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
+	addAction("actionShow_Meridian_Line",              displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
+	addAction("actionShow_Horizon_Line",               displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
+	addAction("actionShow_Equatorial_J2000_Grid",      displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Grid",        displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_Grid",              displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
+	addAction("actionShow_Galactic_Grid",              displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Equator_Line",      displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
+	addAction("actionShow_Supergalactic_Grid",         displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
 	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
-	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
-	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
-	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
-	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
-	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
-	addAction("actionShow_Celestial_J2000_Poles", displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
-	addAction("actionShow_Celestial_Poles", displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
-	addAction("actionShow_Zenith_Nadir", displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Poles", displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
-	addAction("actionShow_Ecliptic_Poles", displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
-	addAction("actionShow_Galactic_Poles", displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
-	addAction("actionShow_Supergalactic_Poles", displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
-	addAction("actionShow_Equinox_J2000_Points", displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
-	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
-	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
-	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
-	addAction("actionShow_Antisolar_Point", displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
-	addAction("actionShow_Apex_Points", displayGroup, N_("Apex points"), "apexPointsDisplayed");	
+	addAction("actionShow_Longitude_Line",             displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
+	addAction("actionShow_Precession_Circles",         displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
+	addAction("actionShow_Prime_Vertical_Line",        displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
+	addAction("actionShow_Current_Vertical_Line",      displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
+	addAction("actionShow_Colure_Lines",               displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
+	addAction("actionShow_Circumpolar_Circles",        displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Celestial_J2000_Poles",      displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
+	addAction("actionShow_Celestial_Poles",            displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
+	addAction("actionShow_Zenith_Nadir",               displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Poles",       displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
+	addAction("actionShow_Ecliptic_Poles",             displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
+	addAction("actionShow_Galactic_Poles",             displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
+	addAction("actionShow_Supergalactic_Poles",        displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
+	addAction("actionShow_Equinox_J2000_Points",       displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
+	addAction("actionShow_Equinox_Points",             displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
+	addAction("actionShow_Solstice_J2000_Points",      displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
+	addAction("actionShow_Solstice_Points",            displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+	addAction("actionShow_Antisolar_Point",            displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
+	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
 }
 
 void GridLinesMgr::connectEarthFromSolarSystem()
@@ -1696,6 +1773,7 @@ void GridLinesMgr::update(double deltaTime)
 	supergalacticEquatorLine->update(deltaTime);
 	longitudeLine->update(deltaTime);
 	primeVerticalLine->update(deltaTime);
+	currentVerticalLine->update(deltaTime);
 	colureLine_1->update(deltaTime);
 	colureLine_2->update(deltaTime);
 	circumpolarCircleN->update(deltaTime);
@@ -1755,6 +1833,7 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
+	currentVerticalLine->draw(core);
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
 	celestialJ2000Poles->draw(core);
@@ -1782,6 +1861,7 @@ void GridLinesMgr::updateLabels()
 	supergalacticEquatorLine->updateLabel();
 	longitudeLine->updateLabel();
 	primeVerticalLine->updateLabel();
+	currentVerticalLine->updateLabel();
 	colureLine_1->updateLabel();
 	colureLine_2->updateLabel();
 	circumpolarCircleN->updateLabel();
@@ -1840,6 +1920,7 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 	setFlagEclipticJ2000Line(displayed);
 	setFlagPrecessionCircles(displayed);
 	setFlagPrimeVerticalLine(displayed);
+	setFlagCurrentVerticalLine(displayed);
 	setFlagCircumpolarCircles(displayed);
 	setFlagGalacticEquatorLine(displayed);
 	setFlagSupergalacticEquatorLine(displayed);
@@ -2601,6 +2682,57 @@ void GridLinesMgr::setColorPrimeVerticalLine(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Current Vertical Line
+void GridLinesMgr::setFlagCurrentVerticalLine(const bool displayed)
+{
+	if(displayed != currentVerticalLine->isDisplayed()) {
+		currentVerticalLine->setDisplayed(displayed);
+		emit  currentVerticalLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line
+bool GridLinesMgr::getFlagCurrentVerticalLine() const
+{
+	return currentVerticalLine->isDisplayed();
+}
+//! Set flag for displaying Current Vertical Line partitions
+void GridLinesMgr::setFlagCurrentVerticalParts(const bool displayed)
+{
+	if(displayed != currentVerticalLine->showsPartitions()) {
+		currentVerticalLine->setPartitions(displayed);
+		emit  currentVerticalPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line partitions
+bool GridLinesMgr::getFlagCurrentVerticalParts() const
+{
+	return currentVerticalLine->showsPartitions();
+}
+//! Set flag for displaying Current Vertical Line partitions
+void GridLinesMgr::setFlagCurrentVerticalLabeled(const bool displayed)
+{
+	if(displayed != currentVerticalLine->isLabeled()) {
+		currentVerticalLine->setLabeled(displayed);
+		emit  currentVerticalPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Current Vertical Line partitions
+bool GridLinesMgr::getFlagCurrentVerticalLabeled() const
+{
+	return currentVerticalLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorCurrentVerticalLine() const
+{
+	return currentVerticalLine->getColor();
+}
+void GridLinesMgr::setColorCurrentVerticalLine(const Vec3f& newColor)
+{
+	if(newColor != currentVerticalLine->getColor()) {
+		currentVerticalLine->setColor(newColor);
+		emit currentVerticalLineColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying Colure Lines
 void GridLinesMgr::setFlagColureLines(const bool displayed)
 {
@@ -3035,6 +3167,7 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		galacticEquatorLine->setLineThickness(lineThickness);
 		supergalacticEquatorLine->setLineThickness(lineThickness);
 		primeVerticalLine->setLineThickness(lineThickness);
+		currentVerticalLine->setLineThickness(lineThickness);
 		colureLine_1->setLineThickness(lineThickness);
 		colureLine_2->setLineThickness(lineThickness);
 		circumpolarCircleN->setLineThickness(lineThickness);
@@ -3068,6 +3201,7 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		 galacticEquatorLine->setPartThickness(partThickness);
 		 supergalacticEquatorLine->setPartThickness(partThickness);
 		 primeVerticalLine->setPartThickness(partThickness);
+		 currentVerticalLine->setPartThickness(partThickness);
 		 colureLine_1->setPartThickness(partThickness);
 		 colureLine_2->setPartThickness(partThickness);
 		 //circumpolarCircleN->setPartThickness(partThickness);
@@ -3107,6 +3241,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	galacticEquatorLine->setFontSize(lineFontSize);
 	supergalacticEquatorLine->setFontSize(lineFontSize);
 	primeVerticalLine->setFontSize(lineFontSize);
+	currentVerticalLine->setFontSize(lineFontSize);
 	colureLine_1->setFontSize(lineFontSize);
 	colureLine_2->setFontSize(lineFontSize);
 	circumpolarCircleN->setFontSize(lineFontSize);
