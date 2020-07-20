@@ -1030,8 +1030,9 @@ void SkyLine::draw(StelCore *core) const
 		if ((line_type==CURRENT_VERTICAL) && (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal) &&
 		    (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
 		{
-			if (alt<0) i_min=static_cast<int>(-alt*M_180_PI);
-			if (alt>0) i_max-=static_cast<int>(alt*M_180_PI);
+			// Avoid marks creeping sideways
+			if (alt<= 2*M_PI_180) i_min =static_cast<int>(-alt*M_180_PI)+2;
+			if (alt>=-2*M_PI_180) i_max-=static_cast<int>( alt*M_180_PI)+2;
 		}
 
 		for (int i=0; i<i_max; ++i)
