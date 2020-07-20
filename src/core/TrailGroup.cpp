@@ -67,17 +67,21 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 // Add 1 point to all the curves at current time and remove too old points
 void TrailGroup::update()
 {
-	times.append(static_cast<float>(core->getJDE()));
-	for (auto& trail : allTrails)
+	float newJDE=static_cast<float>(core->getJDE());
+	if (fabsf(times.last()-newJDE) > 0.000001f)
 	{
-		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
-	}
-	if (fabs(static_cast<float>(core->getJDE())-times.at(0))>timeExtent || times.length()>maxPoints)
-	{
-		times.pop_front();
+		times.append(newJDE);
 		for (auto& trail : allTrails)
 		{
-			trail.posHistory.pop_front();
+			trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
+		}
+		if (fabs(static_cast<float>(core->getJDE())-times.at(0))>timeExtent || times.length()>maxPoints)
+		{
+			times.pop_front();
+			for (auto& trail : allTrails)
+			{
+				trail.posHistory.pop_front();
+			}
 		}
 	}
 }
