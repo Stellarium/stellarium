@@ -552,7 +552,7 @@
               <item>
                <widget class="QToolButton" name="genericMarkerColor">
                 <property name="toolTip">
-                 <string>Color of generic ephemeris marker</string>
+                 <string>Color of ephemeris marker for first celestial body</string>
                 </property>
                 <property name="text">
                  <string notr="true"/>
@@ -562,7 +562,7 @@
               <item>
                <widget class="QToolButton" name="secondaryMarkerColor">
                 <property name="toolTip">
-                 <string>Color of generic ephemeris marker for secondary celestial body</string>
+                 <string>Color of ephemeris marker for second celestial body</string>
                 </property>
                 <property name="text">
                  <string notr="true"/>
@@ -733,7 +733,7 @@
               <item>
                <widget class="QPushButton" name="pushButtonCustomStepsDialog">
                 <property name="toolTip">
-                 <string>Custom time steps for ephemeris visualization</string>
+                 <string>Custom time step for ephemeris visualization</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../data/gui/guiRes.qrc">
@@ -757,6 +757,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="celestialBodyComboBox">
+              <property name="toolTip">
+               <string>First celestial body</string>
+              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
@@ -780,6 +783,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="secondaryCelestialBodyComboBox">
+              <property name="toolTip">
+               <string>Second celestial body</string>
+              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
