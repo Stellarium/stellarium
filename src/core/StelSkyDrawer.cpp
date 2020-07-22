@@ -102,23 +102,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
 
-	bool ok=true;
-
-	setBortleScaleIndex(conf->value("stars/init_bortle_scale",3).toInt(&ok));
-	if (!ok)
-		setBortleScaleIndex(3);
-
-	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
-	if (!ok)
-		setRelativeStarScale(1.0);
-
-	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toDouble(&ok));
-	if (!ok)
-		setAbsoluteStarScale(1.0);
-
-	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.13).toDouble(&ok));
-	if (!ok)
-		setExtinctionCoefficient(0.2);
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale", 3).toInt());
+	setRelativeStarScale(conf->value("stars/relative_scale", 1.0).toDouble());
+	setAbsoluteStarScale(conf->value("stars/absolute_scale", 1.0).toDouble());
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient", 0.13).toDouble());
 
 	const QString extinctionMode = conf->value("astro/extinction_mode_below_horizon", "zero").toString();
 	// zero by default
@@ -127,13 +114,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	else if (extinctionMode=="max")
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
 
-	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
-	if (!ok)
-		setAtmosphereTemperature(15.0);
-
-	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
-	if (!ok)
-		setAtmospherePressure(1013.0);
+	setAtmosphereTemperature(conf->value("landscape/temperature_C", 15.0).toDouble());
+	setAtmospherePressure(conf->value("landscape/pressure_mbar", 1013.0).toDouble());
 
 	// Initialize buffers for use by gl vertex array	
 	
@@ -332,7 +314,7 @@ float StelSkyDrawer::pointSourceMagToLnLuminance(float mag) const
 	return -0.92103f*(mag + 12.12331f) + lnfovFactor;
 }
 
-float StelSkyDrawer::pointSourceLuminanceToMag(float lum)
+float StelSkyDrawer::pointSourceLuminanceToMag(float lum) const
 {
 	return (std::log(lum) - lnfovFactor)/-0.92103f - 12.12331f;
 }
@@ -593,7 +575,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	flagForcedTwinkle=saveForcedTwinkle;
 }
 
-float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
+float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius) const
 {
 	const float saveLum = eye->getWorldAdaptationLuminance();	// save
 
@@ -712,7 +694,7 @@ float StelSkyDrawer::getNELMFromBortleScale(int idx)
 	return nelms[idx-1];
 }
 
-// New colors
+// colors for B-V display
 Vec3f StelSkyDrawer::colorTable[128] = {
 	Vec3f(0.602745f,0.713725f,1.000000f),
 	Vec3f(0.604902f,0.715294f,1.000000f),

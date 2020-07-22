@@ -1894,6 +1894,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				else
 					result << star.firstKey()->getNameI18n();
 			}
+			break;
 		}
 		default:
 		{
