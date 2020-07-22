@@ -106,7 +106,8 @@ ConfigurationDialog::~ConfigurationDialog()
 
 void ConfigurationDialog::retranslate()
 {
-	if (dialog) {
+	if (dialog)
+	{
 		ui->retranslateUi(dialog);
 
 		//Initial FOV and direction on the "Main" page
@@ -288,6 +289,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 
 	// Delta-T
+	ui->pushButtonCustomDeltaTEquationDialog->setFixedSize(QSize(26, 26));
 	populateDeltaTAlgorithmsList();	
 	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)

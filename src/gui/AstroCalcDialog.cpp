@@ -59,6 +59,7 @@
 
 #include "AstroCalcDialog.hpp"
 #include "AstroCalcExtraEphemerisDialog.hpp"
+#include "AstroCalcCustomStepsDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
 #include "external/qcustomplot/qcustomplot.h"
@@ -102,6 +103,7 @@ const QString AstroCalcDialog::delimiter(", ");
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
 	, extraEphemerisDialog(Q_NULLPTR)
+	, customStepsDialog(Q_NULLPTR)
 	, wutModel(Q_NULLPTR)
 	, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
@@ -163,6 +165,7 @@ AstroCalcDialog::~AstroCalcDialog()
 	}
 	delete ui;
 	delete extraEphemerisDialog;
+	delete customStepsDialog;
 }
 
 void AstroCalcDialog::retranslate()
@@ -280,6 +283,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitToDateEdit->setMinimumDate(min);
 	ui->transitToDateEdit->setToolTip(validDates);
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
+	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
@@ -503,6 +507,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
 
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
+	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
 
 	updateTabBarListWidgetWidth();
 
@@ -533,6 +538,14 @@ void AstroCalcDialog::showExtraEphemerisDialog()
 		extraEphemerisDialog = new AstroCalcExtraEphemerisDialog();
 
 	extraEphemerisDialog->setVisible(true);
+}
+
+void AstroCalcDialog::showCustomStepsDialog()
+{
+	if (customStepsDialog == Q_NULLPTR)
+		customStepsDialog = new AstroCalcCustomStepsDialog();
+
+	customStepsDialog->setVisible(true);
 }
 
 void AstroCalcDialog::searchWutClear()
@@ -1557,6 +1570,9 @@ void AstroCalcDialog::generateEphemeris()
 	}
 	switch (ui->ephemerisStepComboBox->currentData().toInt())
 	{
+		case 0: // custom time step
+			currentStep = getCustomTimeStep();
+			break;
 		case 1:
 			currentStep = 10. * StelCore::JD_MINUTE;
 			break;
@@ -1638,10 +1654,10 @@ void AstroCalcDialog::generateEphemeris()
 		case 27:
 			currentStep = siderealYear*solarDay;
 			break;
-		case 28:
+		case 28: // 1 Julian year
 			currentStep = 365.25*solarDay;
 			break;
-		case 29:
+		case 29: // 1 Gaussian year
 			currentStep = 365.2568983*solarDay;
 			break;
 		case 30: // 1 synodic month
@@ -1824,6 +1840,69 @@ void AstroCalcDialog::generateEphemeris()
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
 
 	emit solarSystem->requestEphemerisVisualization();
+}
+
+double AstroCalcDialog::getCustomTimeStep()
+{
+	double timeUnit = 1.0, solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	{
+		if (cplanet==solarSystem->getEarth())
+			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
+		else
+			solarDay = cplanet->getMeanSolarDay();
+		siderealDay = cplanet->getSiderealDay();
+		siderealYear = cplanet->getSiderealPeriod();
+	}
+	int timeStep = conf->value("astrocalc/custom_time_step", "1").toInt();
+	// NOTE: Sync units with AstroCalcCustomStepsDialog::populateUnitMeasurementsList()!
+	switch(conf->value("astrocalc/custom_time_step_unit", "3").toInt())
+	{
+		case 1: // minutes
+			timeUnit = StelCore::JD_MINUTE;
+			break;
+		case 2: // hours
+			timeUnit = StelCore::JD_HOUR;
+			break;
+		case 3: // solar days
+			timeUnit = solarDay;
+			break;
+		case 4: // sidereal days
+			timeUnit = siderealDay;
+			break;
+		case 5: // Julian days
+			timeUnit = StelCore::JD_DAY;
+			break;
+		case 6: // synodic months
+			timeUnit = 29.530588853*solarDay;
+			break;
+		case 7: // draconic months
+			timeUnit = 27.212220817*solarDay;
+			break;
+		case 8: // mean tropical months
+			timeUnit = 27.321582241*solarDay;
+			break;
+		case 9: // anomalistic months
+			timeUnit = 27.554549878*solarDay;
+			break;
+		case 10: // sidereal years
+			timeUnit = siderealYear;
+			break;
+		case 11: // Julian years
+			timeUnit = 365.25*solarDay;
+			break;
+		case 12: // Gaussian years
+			timeUnit = 365.2568983*solarDay;
+			break;
+		case 13: // Anomalistic years
+			timeUnit = 365.259636*solarDay;
+			break;
+		case 14: // 1 saros (223 synodic months)
+			timeUnit = 6585.321314219*solarDay;
+			break;
+	}
+	return timeStep*timeUnit;
 }
 
 void AstroCalcDialog::saveEphemeris()
@@ -2358,6 +2437,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("1 anomalistic month"), "33");
 	steps->addItem(q_("1 anomalistic year"), "34");
 	steps->addItem(q_("1 saros"), "35");
+	steps->addItem(q_("custom interval"), "0");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -2367,6 +2447,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	}
 	steps->setCurrentIndex(index);
 	steps->blockSignals(false);
+	enableCustomEphemerisTimeStepButton();
 }
 
 void AstroCalcDialog::saveEphemerisTimeStep(int index)
@@ -2374,6 +2455,7 @@ void AstroCalcDialog::saveEphemerisTimeStep(int index)
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
 	conf->setValue("astrocalc/ephemeris_time_step", steps->itemData(index).toInt());
+	enableCustomEphemerisTimeStepButton();
 }
 
 void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)
@@ -2398,6 +2480,15 @@ void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 	ui->celestialBodyComboBox->setEnabled(!flag);
 	conf->setValue("astrocalc/ephemeris_nakedeye_planets", flag);
 	reGenerateEphemeris();
+}
+
+void AstroCalcDialog::enableCustomEphemerisTimeStepButton()
+{
+	Q_ASSERT(ui->ephemerisStepComboBox);
+	if (ui->ephemerisStepComboBox->currentData(Qt::UserRole).toInt()==0)
+		ui->pushButtonCustomStepsDialog->setEnabled(true);
+	else
+		ui->pushButtonCustomStepsDialog->setEnabled(false);
 }
 
 void AstroCalcDialog::populatePlanetList()

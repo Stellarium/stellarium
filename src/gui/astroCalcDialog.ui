@@ -153,13 +153,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>75</height>
+          <height>74</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>75</height>
+          <height>74</height>
          </size>
         </property>
         <property name="focusPolicy">
@@ -486,6 +486,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonExtraEphemerisDialog">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Extra options for ephemeris visualization</string>
               </property>
@@ -615,6 +621,18 @@
                 </property>
                 <property name="insertPolicy">
                  <enum>QComboBox::NoInsert</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonCustomStepsDialog">
+                <property name="toolTip">
+                 <string>Custom time steps for ephemeris visualization</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../data/gui/guiRes.qrc">
+                  <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+                  <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
                 </property>
                </widget>
               </item>

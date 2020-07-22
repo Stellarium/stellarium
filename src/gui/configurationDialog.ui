@@ -150,13 +150,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>75</height>
+          <height>74</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>75</height>
+          <height>74</height>
          </size>
         </property>
         <property name="focusPolicy">
@@ -1688,8 +1688,10 @@
                     <property name="toolTip">
                      <string>Edit equation</string>
                     </property>
-                    <property name="text">
-                     <string notr="true">...</string>
+                    <property name="icon">
+                     <iconset resource="../../data/gui/guiRes.qrc">
+                      <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                      <disabledoff>:/graphicGui/uibtSettings.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                     </property>
                    </widget>
                   </item>

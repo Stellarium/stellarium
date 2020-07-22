@@ -43,6 +43,7 @@ class QListWidgetItem;
 class QSortFilterProxyModel;
 class QStringListModel;
 class AstroCalcExtraEphemerisDialog;
+class AstroCalcCustomStepsDialog;
 
 struct Ephemeris
 {
@@ -289,9 +290,11 @@ private slots:
 	void updateSolarSystemData();
 
 	void showExtraEphemerisDialog();
+	void showCustomStepsDialog();
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
+	class AstroCalcCustomStepsDialog* customStepsDialog;
 	class StelCore* core;
 	class SolarSystem* solarSystem;
 	class NebulaMgr* dsoMgr;
@@ -356,6 +359,9 @@ private:
 	void adjustCelestialPositionsColumns();
 	void adjustWUTColumns();
 	void adjustPhenomenaColumns();
+
+	void enableCustomEphemerisTimeStepButton();
+	double getCustomTimeStep();
 
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
