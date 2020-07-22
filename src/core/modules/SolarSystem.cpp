@@ -92,9 +92,11 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisDataStep(1)
+	, ephemerisDataLimit(1)
 	, ephemerisSmartDatesDisplayed(true)
 	, ephemerisScaleMarkersDisplayed(false)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
+	, ephemerisSecondaryMarkerColor(Vec3f(0.7f, 0.7f, 1.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
 	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisVenusMarkerColor(Vec3f(1.0f, 1.0f, 1.0f))
@@ -239,10 +241,11 @@ void SolarSystem::init()
 	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
 	setEphemerisLineThickness(conf->value("astrocalc/ephemeris_line_thickness", 1).toInt());
 	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
-	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
+	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());	
 	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
 	setFlagEphemerisScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
 	setEphemerisGenericMarkerColor( Vec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
+	setEphemerisSecondaryMarkerColor( Vec3f(conf->value("color/ephemeris_secondary_marker_color", "0.7,0.7,1.0").toString()));
 	setEphemerisSelectedMarkerColor(Vec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
 	setEphemerisMercuryMarkerColor( Vec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
 	setEphemerisVenusMarkerColor(   Vec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
@@ -1226,6 +1229,7 @@ Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 	// Sync index with AstroCalcDialog::generateEphemeris(). If required, switch to using a QMap.
 	const QList<Vec3f> colors={
 		ephemerisGenericMarkerColor,
+		ephemerisSecondaryMarkerColor,
 		ephemerisMercuryMarkerColor,
 		ephemerisVenusMarkerColor,
 		ephemerisMarsMarkerColor,
@@ -1316,41 +1320,24 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 		if (lineThickness>1)
 			sPainter.setLineWidth(lineThickness); // set line thickness
 
-		if (size>=3)
+		Vec3f color;
+		QVector<Vec3d> vertexArray;
+		QVector<Vec4f> colorArray;
+		const int limit = getEphemerisDataLimit();
+		const int nsize = static_cast<int>(size/limit);
+		vertexArray.resize(nsize);
+		colorArray.resize(nsize);
+		for (int j=0; j<limit; j++)
 		{
-			Vec3f color;
-			QVector<Vec3d> vertexArray;
-			QVector<Vec4f> colorArray;
-			if (AstroCalcDialog::EphemerisList[0].colorIndex!=AstroCalcDialog::EphemerisList[size-1].colorIndex)
+			for (int i =0; i < nsize; i++)
 			{
-				// Oops... the color of first 3 items are different - looks like we got 5 planets on sky!
-				const int nsize = static_cast<int>(size/5);
-				vertexArray.resize(nsize);
-				colorArray.resize(nsize);
-				for (int j=0; j<5; j++)
-				{
-					for (int i =0; i < nsize; i++)
-					{
-						color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
-						colorArray[i].set(color[0], color[1], color[2], 1.f);
-						vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
-					}
-					sPainter.drawPath(vertexArray, colorArray);
-				}
+				color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
+				colorArray[i].set(color[0], color[1], color[2], 1.f);
+				vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
 			}
-			else
-			{
-				vertexArray.resize(size);
-				colorArray.resize(size);
-				for (int i =0; i < size; i++)
-				{
-					color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
-					colorArray[i].set(color[0], color[1], color[2], 1.f);
-					vertexArray[i]=AstroCalcDialog::EphemerisList[i].coord;
-				}
-				sPainter.drawPath(vertexArray, colorArray);
-			}
+			sPainter.drawPath(vertexArray, colorArray);
 		}
+
 		if (lineThickness>1)
 			sPainter.setLineWidth(1); // restore line thickness
 	}
@@ -2035,6 +2022,17 @@ int SolarSystem::getEphemerisDataStep() const
 	return ephemerisDataStep;
 }
 
+void SolarSystem::setEphemerisDataLimit(int limit)
+{
+	ephemerisDataLimit = limit;
+	emit ephemerisDataLimitChanged(limit);
+}
+
+int SolarSystem::getEphemerisDataLimit() const
+{
+	return ephemerisDataLimit;
+}
+
 void SolarSystem::setEphemerisLineThickness(int v)
 {
 	ephemerisLineThickness = v;
@@ -2060,6 +2058,20 @@ void SolarSystem::setEphemerisGenericMarkerColor(const Vec3f& color)
 Vec3f SolarSystem::getEphemerisGenericMarkerColor() const
 {
 	return ephemerisGenericMarkerColor;
+}
+
+void SolarSystem::setEphemerisSecondaryMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisSecondaryMarkerColor)
+	{
+		ephemerisSecondaryMarkerColor = color;
+		emit ephemerisSecondaryMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisSecondaryMarkerColor() const
+{
+	return ephemerisSecondaryMarkerColor;
 }
 
 void SolarSystem::setEphemerisSelectedMarkerColor(const Vec3f& color)

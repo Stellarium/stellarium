@@ -520,8 +520,114 @@
             </item>
             <item>
              <widget class="QCheckBox" name="ephemerisHorizontalCoordinatesCheckBox">
-              <property name="text">
+              <property name="toolTip">
                <string>Use horizontal coordinates</string>
+              </property>
+              <property name="text">
+               <string extracomment="horizonal coordinates">H.C.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_26">
+              <property name="leftMargin">
+               <number>8</number>
+              </property>
+              <property name="rightMargin">
+               <number>8</number>
+              </property>
+              <item>
+               <widget class="QToolButton" name="genericMarkerColor">
+                <property name="toolTip">
+                 <string>Color of generic ephemeris marker</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="secondaryMarkerColor">
+                <property name="toolTip">
+                 <string>Color of generic ephemeris marker for secondary celestial body</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="selectedMarkerColor">
+                <property name="toolTip">
+                 <string>Color of selected ephemeris marker</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QToolButton" name="mercuryMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mercury's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="venusMarkerColor">
+              <property name="toolTip">
+               <string>Color of Venus' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="marsMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mars' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="jupiterMarkerColor">
+              <property name="toolTip">
+               <string>Color of Jupiter's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="saturnMarkerColor">
+              <property name="toolTip">
+               <string>Color of Saturn's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
               </property>
              </widget>
             </item>
@@ -666,6 +772,23 @@
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="labelAnd">
+              <property name="text">
+               <string>and</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="secondaryCelestialBodyComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="labelOr">
               <property name="text">
                <string>or</string>
@@ -694,86 +817,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_26">
-              <property name="leftMargin">
-               <number>8</number>
-              </property>
-              <property name="rightMargin">
-               <number>8</number>
-              </property>
-              <item>
-               <widget class="QToolButton" name="genericMarkerColor">
-                <property name="toolTip">
-                 <string>Color of generic ephemeris marker</string>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="selectedMarkerColor">
-                <property name="toolTip">
-                 <string>Color of selected ephemeris marker</string>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QToolButton" name="mercuryMarkerColor">
-              <property name="toolTip">
-               <string>Color of Mercury's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="venusMarkerColor">
-              <property name="toolTip">
-               <string>Color of Venus' ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="marsMarkerColor">
-              <property name="toolTip">
-               <string>Color of Mars' ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="jupiterMarkerColor">
-              <property name="toolTip">
-               <string>Color of Jupiter's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="saturnMarkerColor">
-              <property name="toolTip">
-               <string>Color of Saturn's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
             </item>
            </layout>
           </item>

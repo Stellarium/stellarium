@@ -202,6 +202,7 @@ private slots:
 	void setTransitCelestialBodyName();
 
 	void saveEphemerisCelestialBody(int index);
+	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);

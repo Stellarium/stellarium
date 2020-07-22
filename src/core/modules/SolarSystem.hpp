@@ -198,6 +198,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setEphemerisDataStep
 		   NOTIFY ephemerisDataStepChanged
 		   )
+	Q_PROPERTY(int ephemerisDataLimit
+		   READ getEphemerisDataLimit
+		   WRITE setEphemerisDataLimit
+		   NOTIFY ephemerisDataLimitChanged
+		   )
 	Q_PROPERTY(bool ephemerisSmartDates
 		   READ getFlagEphemerisSmartDates
 		   WRITE setFlagEphemerisSmartDates
@@ -350,6 +355,11 @@ class SolarSystem : public StelObjectModule
 		   READ getEphemerisGenericMarkerColor
 		   WRITE setEphemerisGenericMarkerColor
 		   NOTIFY ephemerisGenericMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisSecondaryMarkerColor
+		   READ getEphemerisSecondaryMarkerColor
+		   WRITE setEphemerisSecondaryMarkerColor
+		   NOTIFY ephemerisSecondaryMarkerColorChanged
 		   )
 	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor
 		   READ getEphemerisSelectedMarkerColor
@@ -974,6 +984,7 @@ signals:
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
+	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
@@ -1006,6 +1017,7 @@ signals:
 	void uranusOrbitColorChanged(const Vec3f & color) const;
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
 	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
@@ -1117,8 +1129,14 @@ private slots:
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
+	void setEphemerisDataLimit(int limit);
+	int getEphemerisDataLimit() const;
+
 	void setEphemerisGenericMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisGenericMarkerColor(void) const;
+
+	void setEphemerisSecondaryMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisSecondaryMarkerColor(void) const;
 
 	void setEphemerisSelectedMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSelectedMarkerColor(void) const;
@@ -1241,9 +1259,11 @@ private:
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
+	int ephemerisDataLimit;
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
+	Vec3f ephemerisSecondaryMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
 	Vec3f ephemerisVenusMarkerColor;

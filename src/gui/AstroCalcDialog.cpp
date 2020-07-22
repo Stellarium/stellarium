@@ -320,8 +320,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
+	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
 
 	connectColorButton(ui->genericMarkerColor, "SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
+	connectColorButton(ui->secondaryMarkerColor, "SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
 	connectColorButton(ui->selectedMarkerColor, "SolarSystem.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
 	connectColorButton(ui->mercuryMarkerColor, "SolarSystem.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
 	connectColorButton(ui->venusMarkerColor, "SolarSystem.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
@@ -1540,6 +1542,7 @@ void AstroCalcDialog::generateEphemeris()
 	double ra, dec;
 	Vec3d observerHelioPos, pos;
 	QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
+	QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
 	QString distanceInfo = q_("Planetocentric distance");
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
@@ -1704,37 +1707,51 @@ void AstroCalcDialog::generateEphemeris()
 	QList<PlanetP> celestialObjects;
 	celestialObjects.clear();
 
+	int n = 1;
 	if (allNakedEyePlanets)
 	{
 		QStringList planets;
 		planets << "Mercury" << "Venus" << "Mars" << "Jupiter" << "Saturn";
 		for (auto planet: planets)
 			celestialObjects.append(solarSystem->searchByEnglishName(planet));
-		EphemerisList.reserve(elements*planets.count());
+		n = planets.count();
+	}
+	else if (secondaryPlanet!="none")
+	{
+		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
+		celestialObjects.append(solarSystem->searchByEnglishName(secondaryPlanet));
+		n = 2;
 	}
 	else
-	{
-		EphemerisList.reserve(elements);
 		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
-	}
+
+	EphemerisList.reserve(elements*n);
+	propMgr->setStelPropertyValue("SolarSystem.ephemerisDataLimit", n);
 
 	for (auto obj: celestialObjects)
 	{
 		englishName = obj->getEnglishName();
 		nameI18n = obj->getNameI18n();
 
-		if (allNakedEyePlanets&& cplanet==solarSystem->getEarth())
+		if (allNakedEyePlanets && cplanet==solarSystem->getEarth())
 		{
 			if (englishName.contains("Mercury", Qt::CaseInsensitive))
-				colorIndex = 1;
-			else if (englishName.contains("Venus", Qt::CaseInsensitive))
 				colorIndex = 2;
-			else if (englishName.contains("Mars", Qt::CaseInsensitive))
+			else if (englishName.contains("Venus", Qt::CaseInsensitive))
 				colorIndex = 3;
-			else if (englishName.contains("Jupiter", Qt::CaseInsensitive))
+			else if (englishName.contains("Mars", Qt::CaseInsensitive))
 				colorIndex = 4;
-			else if (englishName.contains("Saturn", Qt::CaseInsensitive))
+			else if (englishName.contains("Jupiter", Qt::CaseInsensitive))
 				colorIndex = 5;
+			else if (englishName.contains("Saturn", Qt::CaseInsensitive))
+				colorIndex = 6;
+			else
+				colorIndex = 0;
+		}
+		else if (secondaryPlanet!="none")
+		{
+			if (secondaryPlanet==englishName)
+				colorIndex = 1;
 			else
 				colorIndex = 0;
 		}
@@ -2256,11 +2273,13 @@ void AstroCalcDialog::saveTransits()
 void AstroCalcDialog::populateCelestialBodyList()
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
+	Q_ASSERT(ui->secondaryCelestialBodyComboBox);
 	Q_ASSERT(ui->graphsCelestialBodyComboBox);
 	Q_ASSERT(ui->firstCelestialBodyComboBox);
 	Q_ASSERT(ui->secondCelestialBodyComboBox);
 
 	QComboBox* planets = ui->celestialBodyComboBox;
+	QComboBox* planets2 = ui->secondaryCelestialBodyComboBox;
 	QComboBox* graphsp = ui->graphsCelestialBodyComboBox;
 	QComboBox* firstCB = ui->firstCelestialBodyComboBox;
 	QComboBox* secondCB = ui->secondCelestialBodyComboBox;
@@ -2272,6 +2291,11 @@ void AstroCalcDialog::populateCelestialBodyList()
 	int indexP = planets->currentIndex();
 	QVariant selectedPlanetId = planets->itemData(indexP);
 	planets->clear();
+
+	planets2->blockSignals(true);
+	int indexP2 = planets2->currentIndex();
+	QVariant selectedPlanet2Id = planets2->itemData(indexP2);
+	planets2->clear();
 
 	graphsp->blockSignals(true);
 	int indexG = graphsp->currentIndex();
@@ -2298,15 +2322,22 @@ void AstroCalcDialog::populateCelestialBodyList()
 			{
 				// Let's exclude moons from list of celestial body for ephemeris tool (except the moons of current planet)
 				if (p->getPlanetType()==Planet::isMoon && p->getParent()==core->getCurrentPlanet())
+				{
 					planets->addItem(p->getNameI18n(), p->getEnglishName());
+					planets2->addItem(p->getNameI18n(), p->getEnglishName());
+				}
 				if (p->getPlanetType()!=Planet::isMoon)
+				{
 					planets->addItem(p->getNameI18n(), p->getEnglishName());
+					planets2->addItem(p->getNameI18n(), p->getEnglishName());
+				}
 				graphsp->addItem(p->getNameI18n(), p->getEnglishName());
 			}
 			firstCB->addItem(p->getNameI18n(), p->getEnglishName());
 			secondCB->addItem(p->getNameI18n(), p->getEnglishName());
 		}
 	}
+	planets2->addItem(dash, "none");
 	// Restore the selection
 	indexP = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexP < 0)
@@ -2317,6 +2348,17 @@ void AstroCalcDialog::populateCelestialBodyList()
 	}
 	planets->setCurrentIndex(indexP);
 	planets->model()->sort(0);
+
+	// Restore the selection
+	indexP2 = planets2->findData(selectedPlanet2Id, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexP2 < 0)
+	{
+		indexP2 = planets2->findData(conf->value("astrocalc/ephemeris_second_celestial_body", "none").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexP2<0)
+			indexP2 = 0;
+	}
+	planets2->setCurrentIndex(indexP2);
+	planets2->model()->sort(0);
 
 	indexG = graphsp->findData(selectedGraphsPId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexG < 0)
@@ -2349,6 +2391,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	secondCB->model()->sort(0);
 
 	planets->blockSignals(false);
+	planets2->blockSignals(false);
 	graphsp->blockSignals(false);
 	firstCB->blockSignals(false);
 	secondCB->blockSignals(false);
@@ -2359,6 +2402,13 @@ void AstroCalcDialog::saveEphemerisCelestialBody(int index)
 	Q_ASSERT(ui->celestialBodyComboBox);
 	QComboBox* planets = ui->celestialBodyComboBox;
 	conf->setValue("astrocalc/ephemeris_celestial_body", planets->itemData(index).toString());
+}
+
+void AstroCalcDialog::saveEphemerisSecondaryCelestialBody(int index)
+{
+	Q_ASSERT(ui->secondaryCelestialBodyComboBox);
+	QComboBox* planets = ui->secondaryCelestialBodyComboBox;
+	conf->setValue("astrocalc/ephemeris_second_celestial_body", planets->itemData(index).toString());
 }
 
 void AstroCalcDialog::saveGraphsCelestialBody(int index)
@@ -2464,12 +2514,14 @@ void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)
 	if (core->getCurrentPlanet()==solarSystem->getEarth())
 	{
 		ui->celestialBodyComboBox->setEnabled(!nep);
+		ui->secondaryCelestialBodyComboBox->setEnabled(!nep);
 		ui->allNakedEyePlanetsCheckBox->setChecked(nep);
 		ui->allNakedEyePlanetsCheckBox->setEnabled(true);
 	}
 	else
 	{
 		ui->celestialBodyComboBox->setEnabled(true);
+		ui->secondaryCelestialBodyComboBox->setEnabled(true);
 		ui->allNakedEyePlanetsCheckBox->setChecked(false);
 		ui->allNakedEyePlanetsCheckBox->setEnabled(false);
 	}
@@ -2478,6 +2530,7 @@ void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)
 void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 {
 	ui->celestialBodyComboBox->setEnabled(!flag);
+	ui->secondaryCelestialBodyComboBox->setEnabled(!flag);
 	conf->setValue("astrocalc/ephemeris_nakedeye_planets", flag);
 	reGenerateEphemeris();
 }
