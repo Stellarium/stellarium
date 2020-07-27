@@ -789,5 +789,9 @@ class Translations
 		N_("&Select All");
 		N_("&Step up");
 		N_("Step &down");
+		N_("&Rename");
+		N_("&Delete");
+		N_("&New Folder");
+		N_("Show &hidden files");
 	}
 };
