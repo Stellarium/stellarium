@@ -598,8 +598,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
 		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
-		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
-		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
+		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.		
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
