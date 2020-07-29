@@ -152,11 +152,11 @@ $ cmake ../..
 $ make -jN
 ```
 
-Instead of N in -j pass a number of CPU cores you want to use during
+Instead of `N` in `-j` pass a number of CPU cores you want to use during
 a build.
 
 If you have Qt5 installed using official Qt installer, then pass parameter
-CMAKE_PREFIX_PATH to cmake call used to configure Stellarium, e.g.
+`CMAKE_PREFIX_PATH` to cmake call used to configure Stellarium, e.g.
 
 ```
 $ cmake -DCMAKE_PREFIX_PATH=/opt/Qt5 ../..
@@ -203,21 +203,42 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_REMOTESYNC         | bool   | ON      | Enable building the Remote Sync plugin
 
 Notes:
- \* /usr/local on Unix-like systems, c:\Program Files or c:\Program Files (x86)
+ \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
    on Windows depending on OS type (32 or 64 bit) and build configuration.
 
 ## Packaging
 
 OK, you are builded the source code and now you may want to install executable file into your operating system or create a package for distribution.
 
-To install executable file into directory, defined in parameter CMAKE_INSTALL_PREFIX, run:
+To install executable file into directory, defined in parameter `CMAKE_INSTALL_PREFIX`, run:
 
 ```
 $ sudo make install
 ```
+### Linux specifics
+
+To create a source package (TGZ) on linux you need run:
+```
+make package_source
+```
+
+To create a binary package (TGZ) on linux you need run:
+```
+make package
+```
+
+After building of TGZ binary package you may create a DEB or RPM package also: 
+```
+cpack -G DEB
+``` 
+or 
+```
+cpack -G RPM
+```
+
 ### macOS specifics
 
-**IMPORTANT**: you should delete or move aside the old Stellarium.app before each new build:
+**IMPORTANT**: you should delete or move aside the old `Stellarium.app` before each new build:
 ```
 $ rm -r Stellarium.app
 ```
@@ -241,15 +262,12 @@ $ hdiutil create -format UDZO -srcfolder Stellarium Stellarium.dmg
 Make groups various tasks as "targets". Starting make without any arguments causes make to build the default target - in our case, building Stellarium, its tests, the localization files, etc.
  Target          | Description
 -----------------|----------------------------------------------------------------------------------------------------
-| install        | Installation of all binaries and related files to the directory determined by CMAKE_INSTALL_PREFIX
+| install        | Installation of all binaries and related files to the directory determined by `CMAKE_INSTALL_PREFIX`
 | test           | Launch the suite of test executables
 | apidoc         | Generate an API documentation
 | package_source | Create a source package for distributions
-| package        | Create a binary packages for distributions on linux/UNIX*
+| package        | Create a binary packages for distributions on linux/UNIX
 | installer      | Create a binary packages for distributions on Windows
-
-Notes:
- \* After building of TGZ binary package you may create a DEB or RPM package: cpack -G DEB or cpack -G RPM.
 
 Thanks!
 
