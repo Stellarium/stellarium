@@ -13,7 +13,7 @@ It is also possible to get the "in development" source code using Git.
 This may contain new features which have been implemented since the last 
 release of Stellarium, so it's often more fun.
 
-*Warning:* Git versions of the Stellarium source code are work in progress, 
+**Warning:** Git versions of the Stellarium source code are work in progress, 
 and as such may produce an unstable program, may not work at all, or may 
 not even compile.
 
@@ -58,23 +58,41 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 sudo yum install cmake gcc graphviz doxygen gettext git qtbase5-dev qt5-qttools-devel.x86_64 qt5-qtscript-devel.x86_64 qt5-qtdeclarative-devel.x86_64 qt5-qtmultimedia-devel.x86_64 qt5-qtserialport-devel.x86_64 qt5-qtlocation-devel.x86_64
 ```
 
+#### Linux with outdated Qt
+
+Stellarium tracks the recent Qt releases fairly closely and as such many Linux distribution repositories do not contain an up-to-date enough version for building Stellarium. In the case of Ubuntu, the ''backports'' repository is often good enough, but there may be a need to install it "outside" your package manager. Here's how.
+
+The Qt development team provides binary installers. If you want to build Qt yourself from source, this is fine but it will take a ''long'' time. We recommend the following procedure for manually installing the latest Qt (required: 5.7 or above at the moment):
+- Download the Linux/X11 package from [qt.io](http://www.qt.io/download-open-source/). Choose 32/64 bit as appropriate.
+- Install it to `/opt/Qt5`
+- When you want to build Stellarium, execute these commands to set up the environment so that the new Qt is used (for 64-bit package):
+```
+export QTDIR=/opt/Qt5/5.12.2/gcc_64
+export PATH=$QTDIR/bin:$PATH
+export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+```
+- After installation, you should write a script which sets `LD_LIBRARY_PATH` and then calls Stellarium:
+```
+#!/bin/sh
+export QTDIR=/opt/Qt5/5.12.2/gcc_64
+export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+./stellarium
+```
+
 #### MacOS
 
-Install the latest version of [Apple's Developer Tools](https://developer.apple.com/xcode/). Install [Homebrew](https://brew.sh/). 
-
-Install required packages:
-
+- Install the latest version of [Apple's Developer Tools](https://developer.apple.com/xcode/). 
+- Install [Homebrew](https://brew.sh/). 
+- Install required packages:
 ```
 $ brew install cmake git gettext
 $ brew link gettext --force
 ```
-
-Install latest Qt:
+- Install latest Qt:
 ```
 $ brew install qt
 ```
-
-Add Qt to your PATH environment variable, adding to your `.bash_profile` file the following line:
+- Add Qt to your PATH environment variable, adding to your `.bash_profile` file the following line:
 ```
 export PATH=/usr/local/opt/qt/bin:$PATH
 ```
