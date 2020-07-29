@@ -55,7 +55,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 #### Fedora / CentOS
 
 ```
-sudo yum install cmake gcc graphviz doxygen gettext git qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtmultimedia-devel qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel
+sudo yum install cmake gcc graphviz doxygen gettext git qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel
 ```
 
 #### Linux with outdated Qt
