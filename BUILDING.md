@@ -23,6 +23,13 @@ If you plan to develop Stellarium, it is highly recommended to utilize
 an IDE. You can use any IDE of your choice, but QtCreator is recommended 
 as more suited for Qt development.
 
+Inside QtCreator, you open the `CMakeLists.txt` inside Stellarium's source 
+directory. Default settings create a debug build with all useful plugins. 
+In the Projects tab (button in vertical left bar), you should at least 
+configure Debug and Release builds.
+
+Do not forget to load the [Code Style File](https://stellarium.org/files/ide/stellarium-ide.xml) ([TAR.GZ](https://stellarium.org/files/ide/stellarium-ide.xml.tgz)) in Extras/Settings/C++/Coding style.
+
 ## Prerequisite Packages
 
 To build and develop Stellarium, several packages may be required from 
@@ -38,6 +45,7 @@ your distribution. Here's a list.
 
 ### Optional dependencies
 
+- [Git](https://git-scm.com) -- required for obtaining latest changes in source code
 - [gettext](https://www.gnu.org/software/gettext/) -- required for developers for extract of lines for translation
 - [Doxygen](http://doxygen.org/) -- if you want to build the API documentation you will need this
 - [Graphviz](http://www.graphviz.org/) -- required to build the API documentation and include fancy class diagrams
@@ -63,7 +71,7 @@ sudo yum install cmake gcc graphviz doxygen gettext git qt5-base-devel qt5-qttoo
 Stellarium tracks the recent Qt releases fairly closely and as such many Linux distribution repositories do not contain an up-to-date enough version for building Stellarium. In the case of Ubuntu, the ''backports'' repository is often good enough, but there may be a need to install it "outside" your package manager. Here's how.
 
 The Qt development team provides binary installers. If you want to build Qt yourself from source, this is fine but it will take a ''long'' time. We recommend the following procedure for manually installing the latest Qt (required: 5.7 or above at the moment):
-- Download the Linux/X11 package from [qt.io](http://www.qt.io/download-open-source/). Choose 32/64 bit as appropriate.
+- Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit as appropriate.
 - Install it to `/opt/Qt5`
 - When you want to build Stellarium, execute these commands to set up the environment so that the new Qt is used (for 64-bit package):
 ```
@@ -102,6 +110,18 @@ You may using the distribution from the Qt Company to install the [latest stable
 export PATH=~/Qt/5.12/clang_64/bin:$PATH
 ```
 
+#### Windows
+
+- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" -- e.g. Professional) from Microsoft website
+- To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
+- You can get latest version of Qt from website of [Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.9 or later.  You must select Qt Script and msvc2017 among so many checkboxes.
+
+After installing all required libraries and tools you should configure the build environment.
+
+Add `C:\Qt\Qt5.9.9` to `PATH` variable - you should add string `C:\Qt\Qt5.9.9\msvc2017;C:\Qt\Qt5.9.9\msvc2017\bin` for 32-bit or `C:\Qt\Qt5.9.9\msvc2017_64;C:\Qt\Qt5.9.9\msvc2017_64\bin` for 64-bit to `PATH` variable.
+
+**Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
+
 ## Getting the source code
 
 We recommend using a copy of our git repository to build your own installation 
@@ -120,7 +140,7 @@ Do this command in a terminal (if you prefer, you might use arK or some other gr
 ```
 $ tar zxf stellarium-0.20.2.tar.gz
 ```
-You should now have a directory <code>stellarium-0.20.2</code> with the source code in it.
+You should now have a directory `stellarium-0.20.2` with the source code in it.
 
 ### Clone project from GitHub
 
@@ -131,6 +151,16 @@ https://git-scm.com/ and then execute the following commands:
 $ git clone https://github.com/Stellarium/stellarium.git
 $ cd stellarium
 ```
+### Download source code from GitHub
+
+You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from GitHub by web.
+
+#### Windows specifics
+
+On Windows save the file (`master.zip` or `stellarium-0.20.2.tar.gz`) to the `C:/Devel` directory as example. You will need 
+a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
+The root of the source tree will be `C:/Devel/stellarium` for simplicity.
+
 ## Building
 
 OK, assuming you've collected all the necessary libraries, here's
@@ -146,13 +176,23 @@ $ make -jN
 
 ### On macOS
 ```
-$ mkdir -p build/macos
-$ cd build/macos
+$ mkdir -p build/macosx
+$ cd build/macosx
 $ cmake ../.. 
 $ make -jN
 ```
 
-Instead of `N` in `-j` pass a number of CPU cores you want to use during
+### On Windows
+```
+$ md build
+$ cd build
+$ md msvc
+$ cd msvc
+$ cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-bin -G "Visual Studio 15 2017 Win64" ../..
+$ cmake --build . --  /maxcpucount:N /nologo
+```
+
+Instead of `N` in `-j` (`N` in `/maxcpucount`) pass a number of CPU cores you want to use during
 a build.
 
 If you have Qt5 installed using official Qt installer, then pass parameter
@@ -256,6 +296,18 @@ To create the DMG file (Apple Disk Image) run:
 $ mkdir Stellarium
 $ cp -r Stellarium.app Stellarium
 $ hdiutil create -format UDZO -srcfolder Stellarium Stellarium.dmg
+```
+### Windows specifics
+
+To create a Windows installer you need to have installed [Inno Setup](http://www.jrsoftware.org/).
+
+If you have followed the all above procedures the current build will generate the necessary `stellarium.iss` file in `C:\Devel\stellarium\builds\msvc`.
+
+Double click on it, then from the menu bar "build-compile". It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder `installers`. So you can find in `C:\Devel\stellarium\stellarium\installers`
+
+Or you can use cmake command for create an installer:
+```
+$ cmake --build c:\devel\stellarium\build\msvc --target stellarium-installer
 ```
 
 ### Supported make targets
