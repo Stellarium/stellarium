@@ -38,18 +38,18 @@ your distribution. Here's a list.
 ### Required dependencies
 
 - A C++ compiler able to compile C++11 code ([GCC](https://gcc.gnu.org/) 4.8.1 or later, Clang 3.3 or later, MSVC 2015 or later)
-- [CMake](http://www.cmake.org/) 2.8.12 or later -- buildsystem used by many open source projects
+- [CMake](http://www.cmake.org/) 2.8.12 or later --- buildsystem used by many open source projects
 - [Qt Framework](http://www.qt.io/) 5.7.0 or later
-- [OpenGL](https://www.opengl.org/) -- graphics library
-- [Zlib](http://www.zlib.net) -- compression library
+- [OpenGL](https://www.opengl.org/) --- graphics library
+- [Zlib](http://www.zlib.net) --- compression library
 
 ### Optional dependencies
 
-- [Git](https://git-scm.com) -- required for obtaining latest changes in source code
-- [gettext](https://www.gnu.org/software/gettext/) -- required for developers for extract of lines for translation
-- [Doxygen](http://doxygen.org/) -- if you want to build the API documentation you will need this
-- [Graphviz](http://www.graphviz.org/) -- required to build the API documentation and include fancy class diagrams
-- [libgps](https://gpsd.gitlab.io/gpsd/index.html) -- if you want to build Stellarium with GPS support
+- [Git](https://git-scm.com) --- required for obtaining latest changes in source code
+- [gettext](https://www.gnu.org/software/gettext/) --- required for developers for extract of lines for translation
+- [Doxygen](http://doxygen.org/) --- if you want to build the API documentation you will need this
+- [Graphviz](http://www.graphviz.org/) --- required to build the API documentation and include fancy class diagrams
+- [libgps](https://gpsd.gitlab.io/gpsd/index.html) --- if you want to build Stellarium with GPS support
 
 ### Installing these packages
 
@@ -112,7 +112,7 @@ export PATH=~/Qt/5.12/clang_64/bin:$PATH
 
 #### Windows
 
-- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" -- e.g. Professional) from Microsoft website
+- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" --- e.g. Professional) from Microsoft website
 - To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
 - You can get latest version of Qt from website of [Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.9 or later.  You must select Qt Script and msvc2017 among so many checkboxes.
 
