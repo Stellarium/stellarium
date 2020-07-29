@@ -219,21 +219,21 @@ $ sudo make install
 
 To create a source package (TGZ) on linux you need run:
 ```
-make package_source
+$ make package_source
 ```
 
 To create a binary package (TGZ) on linux you need run:
 ```
-make package
+$ make package
 ```
 
 After building of TGZ binary package you may create a DEB or RPM package also: 
 ```
-cpack -G DEB
+$ cpack -G DEB
 ``` 
 or 
 ```
-cpack -G RPM
+$ cpack -G RPM
 ```
 
 ### macOS specifics
