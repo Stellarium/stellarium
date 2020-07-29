@@ -40,7 +40,49 @@ your distribution. Here's a list.
 
 - [gettext](https://www.gnu.org/software/gettext/) -- required for developers for extract of lines for translation
 - [Doxygen](http://doxygen.org/) -- if you want to build the API documentation you will need this
-- [Graphviz](http://www.graphviz.org/) -- required to build the API documentation and include fancy class diagrams.
+- [Graphviz](http://www.graphviz.org/) -- required to build the API documentation and include fancy class diagrams
+- [libgps](https://gpsd.gitlab.io/gpsd/index.html) -- if you want to build Stellarium with GPS support
+
+### Installing these packages
+
+To install all of these, use the following commands:
+
+#### Debian / Ubuntu
+
+```
+sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ graphviz doxygen gettext git qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins
+```
+#### Fedora / CentOS
+
+```
+sudo yum install cmake gcc graphviz doxygen gettext git qtbase5-dev qt5-qttools-devel.x86_64 qt5-qtscript-devel.x86_64 qt5-qtdeclarative-devel.x86_64 qt5-qtmultimedia-devel.x86_64 qt5-qtserialport-devel.x86_64 qt5-qtlocation-devel.x86_64
+```
+
+#### MacOS
+
+Install the latest version of [Apple's Developer Tools](https://developer.apple.com/xcode/). Install [Homebrew](https://brew.sh/). 
+
+Install required packages:
+
+```
+$ brew install cmake git gettext
+$ brew link gettext --force
+```
+
+Install latest Qt:
+```
+$ brew install qt
+```
+
+Add Qt to your PATH environment variable, adding to your `.bash_profile` file the following line:
+```
+export PATH=/usr/local/opt/qt/bin:$PATH
+```
+
+You may using the distribution from the Qt Company to install the [latest stable version](https://www.qt.io/download-qt-installer) of Qt. In this case adding Qt to your PATH environment variable will to adding to your `.bash_profile` file the following line (for example we installed Qt 5.12.2):
+```
+export PATH=~/Qt/5.12/clang_64/bin:$PATH
+```
 
 ## Getting the source code
 
@@ -68,21 +110,30 @@ To create the copy install git from your OS distribution repository or from
 https://git-scm.com/ and then execute the following commands:
 
 ```
-git clone https://github.com/Stellarium/stellarium.git
-cd stellarium
+$ git clone https://github.com/Stellarium/stellarium.git
+$ cd stellarium
 ```
 ## Building
 
 OK, assuming you've collected all the necessary libraries, here's
-what you need to do to build and run Stellarium on linux:
+what you need to do to build and run Stellarium:
 
+### On Linux
 ```
-mkdir -p build/unix
-cd build/unix
-cmake -DCMAKE_INSTALL_PREFIX=/opt/stellarium ../.. 
-make -jN
-sudo make install
+$ mkdir -p build/unix
+$ cd build/unix
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/stellarium ../.. 
+$ make -jN
 ```
+
+### On macOS
+```
+$ mkdir -p build/macos
+$ cd build/macos
+$ cmake ../.. 
+$ make -jN
+```
+
 Instead of N in -j pass a number of CPU cores you want to use during
 a build.
 
@@ -90,7 +141,7 @@ If you have Qt5 installed using official Qt installer, then pass parameter
 CMAKE_PREFIX_PATH to cmake call used to configure Stellarium, e.g.
 
 ```
-cmake -DCMAKE_PREFIX_PATH=/opt/Qt5 ../..
+$ cmake -DCMAKE_PREFIX_PATH=/opt/Qt5 ../..
 ```
 
 You can keep your copy up-to-date by typing `git pull --rebase` in ~/stellarium. 
@@ -136,6 +187,36 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 Notes:
  \* /usr/local on Unix-like systems, c:\Program Files or c:\Program Files (x86)
    on Windows depending on OS type (32 or 64 bit) and build configuration.
+
+## Packaging
+
+OK, you are builded the source code and now you may want to install executable file into your operating system or create a package for distribution.
+
+To install executable file into directory, defined in parameter CMAKE_INSTALL_PREFIX, run:
+
+```
+$ sudo make install
+```
+### macOS specifics
+
+**IMPORTANT**: you should delete or move aside the old Stellarium.app before each new build:
+```
+$ rm -r Stellarium.app
+```
+
+Then build the macOS application:
+```
+$ make install
+```
+
+You'll find now an application `Stellarium.app` with the correct icon in the build directory.
+
+To create the DMG file (Apple Disk Image) run:
+```
+$ mkdir Stellarium
+$ cp -r Stellarium.app Stellarium
+$ hdiutil create -format UDZO -srcfolder Stellarium Stellarium.dmg
+```
 
 ### Supported make targets
 
