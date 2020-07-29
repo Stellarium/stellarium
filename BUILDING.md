@@ -175,7 +175,8 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_PREFIX_PATH             | path   |         | Additional path to look for libraries
 | CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
-| ENABLE_GPS                    | bool   | ON      | Enable GPS support.
+| ENABLE_GPS                    | bool   | ON      | Enable GPS support
+| ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library
 | ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
 | ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
 | ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
