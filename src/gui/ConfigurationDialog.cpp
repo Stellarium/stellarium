@@ -229,6 +229,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
 	
 	// Navigation tab
@@ -601,8 +602,100 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::RTSTime;
 
 	gui->setInfoTextFilters(flags);
+	// overwrite custom selected info settings
+	saveCustomSelectedInfo();
 }
 
+void ConfigurationDialog::setCustomSelectedInfo()
+{
+	StelObject::InfoStringGroup flags(StelObject::None);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	if (conf->value("custom_selected_info/flag_show_name", false).toBool())
+		flags |= StelObject::Name;
+	if (conf->value("custom_selected_info/flag_show_catalognumber", false).toBool())
+		flags |= StelObject::CatalogNumber;
+	if (conf->value("custom_selected_info/flag_show_magnitude", false).toBool())
+		flags |= StelObject::Magnitude;
+	if (conf->value("custom_selected_info/flag_show_absolutemagnitude", false).toBool())
+		flags |= StelObject::AbsoluteMagnitude;
+	if (conf->value("custom_selected_info/flag_show_radecj2000", false).toBool())
+		flags |= StelObject::RaDecJ2000;
+	if (conf->value("custom_selected_info/flag_show_radecofdate", false).toBool())
+		flags |= StelObject::RaDecOfDate;
+	if (conf->value("custom_selected_info/flag_show_hourangle", false).toBool())
+		flags |= StelObject::HourAngle;
+	if (conf->value("custom_selected_info/flag_show_altaz", false).toBool())
+		flags |= StelObject::AltAzi;
+	if (conf->value("custom_selected_info/flag_show_elongation", false).toBool())
+		flags |= StelObject::Elongation;
+	if (conf->value("custom_selected_info/flag_show_distance", false).toBool())
+		flags |= StelObject::Distance;
+	if (conf->value("custom_selected_info/flag_show_velocity", false).toBool())
+		flags |= StelObject::Velocity;
+	if (conf->value("custom_selected_info/flag_show_propermotion", false).toBool())
+		flags |= StelObject::ProperMotion;
+	if (conf->value("custom_selected_info/flag_show_size", false).toBool())
+		flags |= StelObject::Size;
+	if (conf->value("custom_selected_info/flag_show_extra", false).toBool())
+		flags |= StelObject::Extra;
+	if (conf->value("custom_selected_info/flag_show_galcoord", false).toBool())
+		flags |= StelObject::GalacticCoord;
+	if (conf->value("custom_selected_info/flag_show_supergalcoord", false).toBool())
+		flags |= StelObject::SupergalacticCoord;
+	if (conf->value("custom_selected_info/flag_show_othercoord", false).toBool())
+		flags |= StelObject::OtherCoord;
+	if (conf->value("custom_selected_info/flag_show_type", false).toBool())
+		flags |= StelObject::ObjectType;
+	if (conf->value("custom_selected_info/flag_show_eclcoordofdate", false).toBool())
+		flags |= StelObject::EclipticCoordOfDate;
+	if (conf->value("custom_selected_info/flag_show_eclcoordj2000", false).toBool())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (conf->value("custom_selected_info/flag_show_constellation", false).toBool())
+		flags |= StelObject::IAUConstellation;
+	if (conf->value("custom_selected_info/flag_show_sidereal_time", false).toBool())
+		flags |= StelObject::SiderealTime;
+	if (conf->value("custom_selected_info/flag_show_rts_time", false).toBool())
+		flags |= StelObject::RTSTime;
+
+	gui->setInfoTextFilters(flags);
+	updateSelectedInfoCheckBoxes();
+}
+
+void ConfigurationDialog::saveCustomSelectedInfo()
+{
+	// configuration dialog / selected object info tab
+	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->beginGroup("custom_selected_info");
+	conf->setValue("flag_show_name",			static_cast<bool>(flags & StelObject::Name));
+	conf->setValue("flag_show_catalognumber",	static_cast<bool>(flags & StelObject::CatalogNumber));
+	conf->setValue("flag_show_magnitude",		static_cast<bool>(flags & StelObject::Magnitude));
+	conf->setValue("flag_show_absolutemagnitude",	static_cast<bool>(flags & StelObject::AbsoluteMagnitude));
+	conf->setValue("flag_show_radecj2000",		static_cast<bool>(flags & StelObject::RaDecJ2000));
+	conf->setValue("flag_show_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
+	conf->setValue("flag_show_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
+	conf->setValue("flag_show_altaz",			static_cast<bool>(flags & StelObject::AltAzi));
+	conf->setValue("flag_show_elongation",		static_cast<bool>(flags & StelObject::Elongation));
+	conf->setValue("flag_show_distance",		static_cast<bool>(flags & StelObject::Distance));
+	conf->setValue("flag_show_velocity",			static_cast<bool>(flags & StelObject::Velocity));
+	conf->setValue("flag_show_propermotion",	static_cast<bool>(flags & StelObject::ProperMotion));
+	conf->setValue("flag_show_size",			static_cast<bool>(flags & StelObject::Size));
+	conf->setValue("flag_show_extra",			static_cast<bool>(flags & StelObject::Extra));
+	conf->setValue("flag_show_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
+	conf->setValue("flag_show_supergalcoord",	static_cast<bool>(flags & StelObject::SupergalacticCoord));
+	conf->setValue("flag_show_othercoord",		static_cast<bool>(flags & StelObject::OtherCoord));
+	conf->setValue("flag_show_type",			static_cast<bool>(flags & StelObject::ObjectType));
+	conf->setValue("flag_show_eclcoordofdate",	static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
+	conf->setValue("flag_show_eclcoordj2000",	static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
+	conf->setValue("flag_show_constellation",	static_cast<bool>(flags & StelObject::IAUConstellation));
+	conf->setValue("flag_show_sidereal_time",	static_cast<bool>(flags & StelObject::SiderealTime));
+	conf->setValue("flag_show_rts_time",		static_cast<bool>(flags & StelObject::RTSTime));
+	conf->endGroup();
+}
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
@@ -930,32 +1023,7 @@ void ConfigurationDialog::saveAllSettings()
 	else
 	{
 		conf->setValue("gui/selected_object_info", "custom");
-		
-		conf->beginGroup("custom_selected_info");
-		conf->setValue("flag_show_name",		static_cast<bool>(flags & StelObject::Name));
-		conf->setValue("flag_show_catalognumber",	static_cast<bool>(flags & StelObject::CatalogNumber));
-		conf->setValue("flag_show_magnitude",		static_cast<bool>(flags & StelObject::Magnitude));
-		conf->setValue("flag_show_absolutemagnitude",	static_cast<bool>(flags & StelObject::AbsoluteMagnitude));
-		conf->setValue("flag_show_radecj2000",		static_cast<bool>(flags & StelObject::RaDecJ2000));
-		conf->setValue("flag_show_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
-		conf->setValue("flag_show_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
-		conf->setValue("flag_show_altaz",		static_cast<bool>(flags & StelObject::AltAzi));
-		conf->setValue("flag_show_elongation",		static_cast<bool>(flags & StelObject::Elongation));
-		conf->setValue("flag_show_distance",		static_cast<bool>(flags & StelObject::Distance));
-		conf->setValue("flag_show_velocity",		static_cast<bool>(flags & StelObject::Velocity));
-		conf->setValue("flag_show_propermotion",	static_cast<bool>(flags & StelObject::ProperMotion));
-		conf->setValue("flag_show_size",		static_cast<bool>(flags & StelObject::Size));
-		conf->setValue("flag_show_extra",		static_cast<bool>(flags & StelObject::Extra));
-		conf->setValue("flag_show_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
-		conf->setValue("flag_show_supergalcoord",	static_cast<bool>(flags & StelObject::SupergalacticCoord));
-		conf->setValue("flag_show_othercoord",		static_cast<bool>(flags & StelObject::OtherCoord));
-		conf->setValue("flag_show_type",		static_cast<bool>(flags & StelObject::ObjectType));
-		conf->setValue("flag_show_eclcoordofdate",	static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
-		conf->setValue("flag_show_eclcoordj2000",	static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
-		conf->setValue("flag_show_constellation",	static_cast<bool>(flags & StelObject::IAUConstellation));
-		conf->setValue("flag_show_sidereal_time",	static_cast<bool>(flags & StelObject::SiderealTime));
-		conf->setValue("flag_show_rts_time",		static_cast<bool>(flags & StelObject::RTSTime));
-		conf->endGroup();
+		saveCustomSelectedInfo();
 	}
 
 	// toolbar auto-hide status
