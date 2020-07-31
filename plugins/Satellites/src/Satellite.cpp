@@ -937,51 +937,49 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=timeRateLimit)
 		return;
 
-	int screenSizeISS = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
 		if (!iconicModeFlag)
 		{
-			const float mag = getVMagnitude(core);
+			const float magSat = getVMagnitude(core);
 			StelSkyDrawer* sd = core->getSkyDrawer();
 
 			RCMag rcMag;
 			Vec3f color(1.f,1.f,1.f);
 
-			//StelProjectorP origP = painter.getProjector(); // Save projector state
-			//painter.setProjector(prj);
-
 			// Draw the satellite
 			sd->preDrawPointSource(&painter);
-			if (mag <= sd->getLimitMagnitude())
+			if (magSat <= sd->getLimitMagnitude())
 			{
-				sd->computeRCMag(mag, &rcMag);
+				sd->computeRCMag(magSat, &rcMag);
 				sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
 			}
 			sd->postDrawPointSource(&painter);
 
-			float txtMag = mag;
+			float txtMag = magSat;
 			if (visibility != gSatWrapper::VISIBLE)
 			{
-				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
+				txtMag = magSat - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
 				painter.setColor(invisibleSatelliteColor, hintBrightness);
 			}
 			else
 				painter.setColor(color, hintBrightness);
 
+			// Special case: crossing of the satellite of the Moon or the Sun
+			int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
+			if (screenSizeSat>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core)))
+			{
+				painter.setColor(0.f,0.f,0.f,1.f);
+				painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+				hintTexture->bind();
+				painter.drawSprite2dMode(XYZ, qMin(screenSizeSat, 15));
+			}
+
 			// Draw the label of the satellite when it enabled
 			if (txtMag <= sd->getLimitMagnitude() && showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-			// Special case: crossing of the ISS of the Moon or the Sun
-			if (isISS && screenSizeISS>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core)))
-			{
-				painter.setColor(0.f,0.f,0.f,1.f);
-				painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-				hintTexture->bind(); // NOTE: Should we use real ISS texture here?
-				painter.drawSprite2dMode(XYZ, qMin(screenSizeISS, 15));
-			}
 		}
 		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
