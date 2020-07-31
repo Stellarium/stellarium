@@ -210,14 +210,13 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
-	connect(ui->groupFilterCombo,       SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
-	connect(ui->groupFilterCombo,       SIGNAL(currentIndexChanged(int)), this, SLOT(setRightSideToROMode()));
-	connect(ui->saveSatellitesButton,   SIGNAL(clicked()),                this, SLOT(saveSatellites()));
-	connect(ui->removeSatellitesButton, SIGNAL(clicked()),                this, SLOT(removeSatellites()));
+	connect(ui->groupFilterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
+	connect(ui->groupFilterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setRightSideToROMode()));
 
 	importWindow = new SatellitesImportDialog();
-	connect(ui->addSatellitesButton, SIGNAL(clicked()), importWindow, SLOT(setVisible()));
-	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this, SLOT(addSatellites(TleDataList)));
+	connect(ui->addSatellitesButton, SIGNAL(clicked()),            importWindow, SLOT(setVisible()));
+	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this,         SLOT(addSatellites(TleDataList)));
+	connect(ui->removeSatellitesButton, SIGNAL(clicked()),         this,         SLOT(removeSatellites()));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -260,7 +259,6 @@ void SatellitesDialog::askSatMarkerColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-
 		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
@@ -268,10 +266,10 @@ void SatellitesDialog::askSatMarkerColor()
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->hintColor = vColor;
 		}
-
 		// colorize the button
 		buttonMarkerColor = c;
 		ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+		saveSatellites();
 	}
 }
 
@@ -289,7 +287,6 @@ void SatellitesDialog::askSatOrbitColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-
 		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
@@ -297,10 +294,10 @@ void SatellitesDialog::askSatOrbitColor()
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->orbitColor = vColor;
 		}
-
 		// colorize the button
 		buttonOrbitColor = c;
 		ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+		saveSatellites();
 	}
 }
 
@@ -318,7 +315,6 @@ void SatellitesDialog::askSatInfoColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-
 		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
@@ -326,10 +322,10 @@ void SatellitesDialog::askSatInfoColor()
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->infoColor = vColor;
 		}
-
 		// colorize the button
 		buttonInfoColor = c;
 		ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
+		saveSatellites();
 	}
 }
 
@@ -356,6 +352,7 @@ void SatellitesDialog::descriptionTextChanged()
 			sat->description = newdesc;
 		}
 	}
+	saveSatellites();
 }
 
 void SatellitesDialog::searchSatellitesClear()
@@ -386,9 +383,7 @@ void SatellitesDialog::filterListByGroup(int index)
 	else if (groupId == "[largesize]")
 		filterModel->setSecondaryFilters(QString(), SatLargeSize);
 	else
-	{
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
-	}
 
 	if (ui->satellitesList->model()->rowCount() <= 0)
 		return;
@@ -396,14 +391,9 @@ void SatellitesDialog::filterListByGroup(int index)
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
 	QModelIndex first;
 	if (selectionModel->hasSelection())
-	{
 		first = selectionModel->selectedRows().first();
-	}
-	else
-	{
-		// Scroll to the top
+	else // Scroll to the top
 		first = ui->satellitesList->model()->index(0, 0);
-	}
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
 }
@@ -993,6 +983,7 @@ void SatellitesDialog::setGroups()
 		QVariant newGroups = QVariant::fromValue<GroupSet>(groups);
 		ui->satellitesList->model()->setData(index, newGroups, SatGroupsRole);
 	}
+	saveSatellites();
 }
 
 void SatellitesDialog::saveSettings(void)
@@ -1084,6 +1075,7 @@ void SatellitesDialog::setFlags()
 		QVariant value = QVariant::fromValue<SatFlags>(flags);
 		ui->satellitesList->model()->setData(index, value, SatFlagsRole);
 	}
+	saveSatellites();
 }
 
 // Right side of GUI should be read only and clean by default (for example group in left top corner is was changed at the moment)

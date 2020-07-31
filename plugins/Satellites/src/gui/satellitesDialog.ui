@@ -684,28 +684,17 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="saveSatellitesButton">
-             <property name="enabled">
-              <bool>true</bool>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
              </property>
-             <property name="toolTip">
-              <string>Save changes</string>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../../../data/gui/guiRes.qrc">
-               <normaloff>:/graphicGui/uibtSave.png</normaloff>
-               <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
-             </property>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -1134,7 +1123,6 @@
   <tabstop>addSatellitesButton</tabstop>
   <tabstop>removeSatellitesButton</tabstop>
   <tabstop>satMarkerColorPickerButton</tabstop>
-  <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>
   <tabstop>addSourceButton</tabstop>
