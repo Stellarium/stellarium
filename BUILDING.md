@@ -9,19 +9,19 @@ packaging system. Building source code that is released in this way
 should give you a working copy of Stellarium which is functionally 
 identical to the binaries for that release.
 
-It is also possible to get the "in development" source code using Git. 
-This may contain new features which have been implemented since the last 
+It is also possible to get the source code "in development" using Git. 
+This may contain new features or bugfixes which have been implemented since the last 
 release of Stellarium, so it's often more fun.
 
 **Warning:** Git versions of the Stellarium source code are work in progress, 
 and as such may produce an unstable program, may not work at all, or may 
-not even compile.
+(rarely) not even compile.
 
 ## Integrated Development Environment (IDE)
 
 If you plan to develop Stellarium, it is highly recommended to utilize 
 an IDE. You can use any IDE of your choice, but QtCreator is recommended 
-as more suited for Qt development.
+as best suited for Qt development.
 
 Inside QtCreator, you open the `CMakeLists.txt` inside Stellarium's source 
 directory. Default settings create a debug build with all useful plugins. 
@@ -49,7 +49,7 @@ your distribution. Here's a list.
 - [gettext](https://www.gnu.org/software/gettext/) - required for developers for extract of lines for translation
 - [Doxygen](http://doxygen.org/) - if you want to build the API documentation you will need this
 - [Graphviz](http://www.graphviz.org/) - required to build the API documentation and include fancy class diagrams
-- [libgps](https://gpsd.gitlab.io/gpsd/index.html) - if you want to build Stellarium with GPS support
+- [libgps](https://gpsd.gitlab.io/gpsd/index.html) - if you want to build Stellarium with GPS support (Linux/macOS only)
 
 ### Installing these packages
 
@@ -58,12 +58,19 @@ To install all of these, use the following commands:
 #### Debian / Ubuntu
 
 ```
-sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ graphviz doxygen gettext git qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins
+sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
+                 graphviz doxygen gettext git \
+                 qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
+                 qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev \
+                 libgps-dev libqt5positioning5 libqt5positioning5-plugins
 ```
+
 #### Fedora / CentOS
 
 ```
-sudo yum install cmake gcc graphviz doxygen gettext git qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel
+sudo yum install cmake gcc graphviz doxygen gettext git \
+                 qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
+                 qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel
 ```
 
 #### Linux with outdated Qt
@@ -112,13 +119,13 @@ export PATH=~/Qt/5.12/clang_64/bin:$PATH
 
 #### Windows
 
-- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" - e.g. Professional) from Microsoft website
+- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" - e.g. Professional) from Microsoft Website. Qt5.15 requires MSVC2019.
 - To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
-- You can get latest version of Qt from website of [Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.9 or later.  You must select Qt Script and msvc2017 among so many checkboxes.
+- Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.9 or later.  You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
-Add `C:\Qt\Qt5.9.9` to `PATH` variable - you should add string `C:\Qt\Qt5.9.9\msvc2017;C:\Qt\Qt5.9.9\msvc2017\bin` for 32-bit or `C:\Qt\Qt5.9.9\msvc2017_64;C:\Qt\Qt5.9.9\msvc2017_64\bin` for 64-bit to `PATH` variable.
+Add `C:\Qt\Qt5.9.9` to your `PATH` variable - you should add string `C:\Qt\Qt5.9.9\msvc2017;C:\Qt\Qt5.9.9\msvc2017\bin` for 32-bit or `C:\Qt\Qt5.9.9\msvc2017_64;C:\Qt\Qt5.9.9\msvc2017_64\bin` for 64-bit to `PATH` variable.
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
 
@@ -142,6 +149,7 @@ $ tar zxf stellarium-0.20.2.tar.gz
 ```
 You should now have a directory `stellarium-0.20.2` with the source code in it.
 
+
 ### Clone project from GitHub
 
 To create the copy install git from your OS distribution repository or from 
@@ -151,6 +159,7 @@ https://git-scm.com/ and then execute the following commands:
 $ git clone https://github.com/Stellarium/stellarium.git
 $ cd stellarium
 ```
+
 ### Download source code from GitHub
 
 You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from GitHub by web.
@@ -163,7 +172,7 @@ The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
 ## Building
 
-OK, assuming you've collected all the necessary libraries, here's
+Assuming you have collected all the necessary libraries, here's
 what you need to do to build and run Stellarium:
 
 ### On Linux
@@ -202,6 +211,8 @@ If you have Qt5 installed using official Qt installer, then pass parameter
 $ cmake -DCMAKE_PREFIX_PATH=/opt/Qt5 ../..
 ```
 
+When you are using QtCreator IDE, build directories are created by the IDE. It appears that on Windows, a directory name is proposed, but you have to create it manually. 
+
 You can keep your copy up-to-date by typing `git pull --rebase` in ~/stellarium. 
 Feel free to send patches to our mailing list stellarium@googlegroups.com
 
@@ -216,7 +227,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
-| ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library
+| ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
 | ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
 | ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
 | ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
@@ -249,13 +260,14 @@ Notes:
 
 ## Packaging
 
-OK, you are builded the source code and now you may want to install executable file into your operating system or create a package for distribution.
+OK, you have built the program from source code and now you may want to install the executable file into your operating system or create a package for distribution.
 
-To install executable file into directory, defined in parameter `CMAKE_INSTALL_PREFIX`, run:
+To install the executable file (with necessary libraries and data files) into the directory defined in parameter `CMAKE_INSTALL_PREFIX`, run:
 
 ```
 $ sudo make install
 ```
+
 ### Linux specifics
 
 To create a source package (TGZ) on linux you need run:
@@ -297,13 +309,14 @@ $ mkdir Stellarium
 $ cp -r Stellarium.app Stellarium
 $ hdiutil create -format UDZO -srcfolder Stellarium Stellarium.dmg
 ```
+
 ### Windows specifics
 
 To create a Windows installer you need to have installed [Inno Setup](http://www.jrsoftware.org/).
 
-If you have followed the all above procedures the current build will generate the necessary `stellarium.iss` file in `C:\Devel\stellarium\builds\msvc`.
+If you have followed all the above procedures the current build will generate the necessary `stellarium.iss` file in `C:\Devel\stellarium\builds\msvc`.
 
-Double click on it, then from the menu bar "build-compile". It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder `installers`. So you can find in `C:\Devel\stellarium\stellarium\installers`
+Double click on it, then from the menu bar "build-compile". It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder `installers`. So you can find it in `C:\Devel\stellarium\stellarium\installers`
 
 Or you can use cmake command for create an installer:
 ```
