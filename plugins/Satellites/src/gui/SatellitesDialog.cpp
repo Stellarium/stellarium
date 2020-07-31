@@ -136,6 +136,16 @@ void SatellitesDialog::createDialogContent()
 	ui->satOrbitColorPickerButton->setText(QChar(0x2740)); // Florette symbol
 	ui->satInfoColorPickerButton->setText(QChar(0x2740)); // Florette symbol
 
+	// Set size of buttons
+	QSize bs = QSize(26, 26);
+	ui->addSatellitesButton->setFixedSize(bs);
+	ui->removeSatellitesButton->setFixedSize(bs);
+	ui->satMarkerColorPickerButton->setFixedSize(bs);
+	ui->satOrbitColorPickerButton->setFixedSize(bs);
+	ui->satInfoColorPickerButton->setFixedSize(bs);
+	ui->addSourceButton->setFixedSize(bs);
+	ui->deleteSourceButton->setFixedSize(bs);
+
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
 	// turn is triggered by setting any of these values. Because
