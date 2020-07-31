@@ -101,6 +101,7 @@ void SatellitesDialog::retranslate()
 		populateAboutPage();
 		populateInfo();
 		populateFilterMenu();
+		updateSatelliteData();
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 		initListIridiumFlares();
 #endif

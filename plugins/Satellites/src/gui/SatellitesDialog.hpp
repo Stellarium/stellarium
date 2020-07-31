@@ -141,7 +141,7 @@ private:
 	void populateFilterMenu();
 	//! Populates the list of sources on the Sources tab.
 	void populateSourcesList();	
-	void populateInfo();
+	void populateInfo();	
 	//! Add the special "New group..." editable item to the group selector.
 	//! Unlike the other items, which can only be checked/unchecked, this one
 	//! can be edited. Saving the edit will add a new group with the specified
