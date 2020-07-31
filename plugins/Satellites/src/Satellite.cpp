@@ -942,44 +942,55 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	{
 		if (!iconicModeFlag)
 		{
-			const float magSat = getVMagnitude(core);
-			StelSkyDrawer* sd = core->getSkyDrawer();
-
-			RCMag rcMag;
 			Vec3f color(1.f,1.f,1.f);
-
-			// Draw the satellite
-			sd->preDrawPointSource(&painter);
-			if (magSat <= sd->getLimitMagnitude())
-			{
-				sd->computeRCMag(magSat, &rcMag);
-				sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
-			}
-			sd->postDrawPointSource(&painter);
-
-			float txtMag = magSat;
-			if (visibility != gSatWrapper::VISIBLE)
-			{
-				txtMag = magSat - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-				painter.setColor(invisibleSatelliteColor, hintBrightness);
-			}
-			else
-				painter.setColor(color, hintBrightness);
-
 			// Special case: crossing of the satellite of the Moon or the Sun
-			int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
-			if (screenSizeSat>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core)))
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
 			{
 				painter.setColor(0.f,0.f,0.f,1.f);
-				painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-				hintTexture->bind();
-				painter.drawSprite2dMode(XYZ, qMin(screenSizeSat, 15));
+				int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
+				if (screenSizeSat>0)
+				{
+					painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+					hintTexture->bind();
+					painter.drawSprite2dMode(XYZ, qMin(screenSizeSat, 15));
+				}
+
+				if (showLabels)
+				{
+					if (!core->isBrightDaylight()) // crossing of the Moon
+						painter.setColor(color, hintBrightness);
+					painter.drawText(XYZ, name, 0, 10, 10, false);
+				}
 			}
+			else
+			{
+				const float magSat = getVMagnitude(core);
+				StelSkyDrawer* sd = core->getSkyDrawer();
+				RCMag rcMag;
 
-			// Draw the label of the satellite when it enabled
-			if (txtMag <= sd->getLimitMagnitude() && showLabels)
-				painter.drawText(XYZ, name, 0, 10, 10, false);
+				// Draw the satellite
+				sd->preDrawPointSource(&painter);
+				if (magSat <= sd->getLimitMagnitude())
+				{
+					sd->computeRCMag(magSat, &rcMag);
+					sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
+				}
+				sd->postDrawPointSource(&painter);
 
+				float txtMag = magSat;
+				if (visibility != gSatWrapper::VISIBLE)
+				{
+					txtMag = magSat - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
+					painter.setColor(invisibleSatelliteColor, hintBrightness);
+				}
+				else
+					painter.setColor(color, hintBrightness);
+
+				// Draw the label of the satellite when it enabled
+				if (txtMag <= sd->getLimitMagnitude() && showLabels)
+					painter.drawText(XYZ, name, 0, 10, 10, false);
+
+			}
 		}
 		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
