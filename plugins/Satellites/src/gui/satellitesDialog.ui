@@ -650,7 +650,7 @@
               <string>Change markers color for selected satellites</string>
              </property>
              <property name="text">
-              <string notr="true">Marker Color</string>
+              <string>Marker Color</string>
              </property>
             </widget>
            </item>
@@ -666,7 +666,7 @@
               <string>Change orbits color for selected satellites</string>
              </property>
              <property name="text">
-              <string notr="true">Orbit Color</string>
+              <string>Orbit Color</string>
              </property>
             </widget>
            </item>
@@ -947,6 +947,9 @@
           <widget class="QLineEdit" name="sourceEdit">
            <property name="toolTip">
             <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhUrlCharactersOnly</set>
            </property>
           </widget>
          </item>

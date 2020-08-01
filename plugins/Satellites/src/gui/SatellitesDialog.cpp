@@ -131,13 +131,13 @@ void SatellitesDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
-	// Set symbols on buttons
-	ui->satMarkerColorPickerButton->setText(QChar(0x2740)); // Florette symbol
-	ui->satOrbitColorPickerButton->setText(QChar(0x2740)); // Florette symbol
-	ui->satInfoColorPickerButton->setText(QChar(0x2740)); // Florette symbol
+	// Remove any test from "color buttons"
+	ui->satMarkerColorPickerButton->setText("");
+	ui->satOrbitColorPickerButton->setText("");
+	ui->satInfoColorPickerButton->setText("");
 
 	// Set size of buttons
-	QSize bs = QSize(22, 22);
+	QSize bs = QSize(26, 26);
 	ui->addSatellitesButton->setFixedSize(bs);
 	ui->removeSatellitesButton->setFixedSize(bs);
 	ui->satMarkerColorPickerButton->setFixedSize(bs);
