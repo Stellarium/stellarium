@@ -258,6 +258,24 @@ Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
    on Windows depending on OS type (32 or 64 bit) and build configuration.
 
+## Code testing
+
+There are several test programs in the repository. To build them, define `-DENABLE_TESTING=ON` (or `-DENABLE_TESTING=1`), or configure cmake in QtCreator's Projects tab.
+
+Then configure a Debug build and select a test... application to be executed.
+
+Please try to test your changes before committing to master. Our automated [Travis](https://travis-ci.org/github/Stellarium/stellarium) and 
+[AppVeyor](https://ci.appveyor.com/project/alex-w/stellarium) builds will signal failure when tests don't complete.
+
+To execute all unit tests in terminal please run:
+```
+$ make test
+```
+or 
+```
+$ ctest --output-on-failure
+```
+
 ## Packaging
 
 OK, you have built the program from source code and now you may want to install the executable file into your operating system or create a package for distribution.
