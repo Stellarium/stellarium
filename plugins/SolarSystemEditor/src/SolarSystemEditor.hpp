@@ -63,24 +63,24 @@ class SolarSystemEditor : public StelModule
 
 public:
 	SolarSystemEditor();
-	virtual ~SolarSystemEditor();
+	virtual ~SolarSystemEditor() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from the StelModule class
 	//! called when the plug-in is loaded.
 	//! All initializations should be done here.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 	//! called before the plug-in is un-loaded.
 	//! Useful for stopping processes, unloading textures, etc.
-	virtual void deinit(){}
+	virtual void deinit() Q_DECL_OVERRIDE {}
 	//! Does nothing.
-	virtual void update(double deltaTime){Q_UNUSED(deltaTime)}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {Q_UNUSED(deltaTime)}
 	//! draws on the view port.
 	//! Dialog windows don't need explicit drawing, it's done automatically.
-	virtual void draw(StelCore * core){Q_UNUSED(core)}
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void draw(StelCore * core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! called when the "configure" button in the "Plugins" tab is pressed
-	virtual bool configureGui(bool show);
+	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 	
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format

@@ -205,7 +205,7 @@ void SolarSystemManagerWindow::replaceConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
 	ssEditor->replaceSolarSystemConfigurationFileWith(filePath);
 }
 
@@ -213,7 +213,7 @@ void SolarSystemManagerWindow::addConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
 	ssEditor->addFromSolarSystemConfigurationFile(filePath);
 }
 

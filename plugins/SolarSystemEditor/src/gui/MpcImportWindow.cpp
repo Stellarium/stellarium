@@ -542,11 +542,11 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived >>= 10;
+			bytesTotal    >>= 10;
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	downloadProgressBar->setValue(currentValue);

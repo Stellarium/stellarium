@@ -610,8 +610,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double slopeParameter = mpcParser.cap(16).toDouble(&ok);
 	result.insert("slope_parameter", slopeParameter);
 
-	double radius = 5; //Fictitious default assumption
-	result.insert("radius", radius);
+	result.insert("radius", 5); //Fictitious default assumption
 	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
 	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.

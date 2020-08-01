@@ -1064,7 +1064,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			rotObliquity,
 			rotAscNode,
 			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
-			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
+			pd.value(secname+"/orbit_good", pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()).toDouble()); // this is given in days...
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
