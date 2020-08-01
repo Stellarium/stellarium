@@ -1140,6 +1140,7 @@ void SatellitesDialog::setFlags()
 // Right side of GUI should be read only and clean by default (for example group in left top corner is was changed at the moment)
 void SatellitesDialog::setRightSideToROMode()
 {
+	ui->removeSatellitesButton->setEnabled(false);
 	ui->displayedCheckbox->setEnabled(false);
 	ui->displayedCheckbox->setChecked(false);
 	ui->orbitCheckbox->setEnabled(false);
@@ -1186,6 +1187,7 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->tleSecondLineEdit->setEnabled(true);
 	ui->stdMagnitudeLineEdit->setEnabled(true);
 	ui->rcsLineEdit->setEnabled(true);
+	ui->removeSatellitesButton->setEnabled(true);
 }
 
 void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
@@ -1272,7 +1274,7 @@ void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 	ui->displayedCheckbox->blockSignals(!enabled);
 	ui->orbitCheckbox->blockSignals(!enabled);
 	ui->userCheckBox->blockSignals(!enabled);
-	ui->descriptionTextEdit->blockSignals(!enabled);
+	ui->descriptionTextEdit->blockSignals(!enabled);	
 }
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
