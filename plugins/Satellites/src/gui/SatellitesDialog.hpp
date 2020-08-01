@@ -90,9 +90,11 @@ private slots:
 	//! @name Sources Tab 
 	//@{
 	void saveEditedSource();
+	void updateButtonsProperties();
 	void saveSourceList(void);
 	void deleteSourceRow(void);
 	void addSourceRow(void);
+	void editSourceRow(void);
 	//! Toggle between modes in the Sources list.
 	//! If automatic adding is enabled, items in the list become checkable.
 	void toggleCheckableSources();

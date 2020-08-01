@@ -29,6 +29,7 @@
 #include <QTabWidget>
 #include <QAction>
 #include <QColorDialog>
+#include <QMessageBox>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -115,8 +116,7 @@ void SatellitesDialog::createDialogContent()
 #if(SATELLITES_PLUGIN_IRIDIUM == 0)
 	ui->tabs->removeTab(ui->tabs->indexOf(ui->iridiumTab));
 #endif
-	ui->tabs->setCurrentIndex(0);
-	ui->labelAutoAdd->setVisible(false);
+	ui->tabs->setCurrentIndex(0);	
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -137,7 +137,7 @@ void SatellitesDialog::createDialogContent()
 	ui->satInfoColorPickerButton->setText(QChar(0x2740)); // Florette symbol
 
 	// Set size of buttons
-	QSize bs = QSize(26, 26);
+	QSize bs = QSize(22, 22);
 	ui->addSatellitesButton->setFixedSize(bs);
 	ui->removeSatellitesButton->setFixedSize(bs);
 	ui->satMarkerColorPickerButton->setFixedSize(bs);
@@ -145,6 +145,8 @@ void SatellitesDialog::createDialogContent()
 	ui->satInfoColorPickerButton->setFixedSize(bs);
 	ui->addSourceButton->setFixedSize(bs);
 	ui->deleteSourceButton->setFixedSize(bs);
+	ui->editSourceButton->setFixedSize(bs);
+	ui->saveSourceButton->setFixedSize(bs);
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -229,15 +231,22 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()),         this,         SLOT(removeSatellites()));
 
 	// Sources tab
-	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
-	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),      this,           SLOT(saveSourceList()));
-	connect(ui->sourceEdit, SIGNAL(editingFinished()),                  this,           SLOT(saveEditedSource()));
-	connect(ui->deleteSourceButton, SIGNAL(clicked()),         this, SLOT(deleteSourceRow()));
-	connect(ui->addSourceButton,    SIGNAL(clicked()),         this, SLOT(addSourceRow()));
-	connect(plugin,                 SIGNAL(settingsChanged()), this, SLOT(toggleCheckableSources()));
-
+	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
+	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),		this,	SLOT(saveSourceList()));
+	connect(ui->sourceList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	this,	SLOT(editSourceRow()));
+	//FIXME: pressing Enter cause a call of addSourceRow() method...
+	//connect(ui->sourceEdit, SIGNAL(returnPressed()),	this,	SLOT(saveEditedSource()));
+	connect(ui->deleteSourceButton, SIGNAL(clicked()),	this, SLOT(deleteSourceRow()));
+	connect(ui->addSourceButton, SIGNAL(clicked()),	this, SLOT(addSourceRow()));
+	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
+	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
+	connect(plugin, SIGNAL(settingsChanged()), this, SLOT(toggleCheckableSources()));
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
+	ui->editSourceButton->setEnabled(false);
+	ui->deleteSourceButton->setEnabled(false);
+	ui->saveSourceButton->setEnabled(false);
+	ui->sourceEdit->setEnabled(false);
 
 	// About tab
 	populateAboutPage();
@@ -253,6 +262,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 #endif
+
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->labelAutoAdd->setStyleSheet(style);
 }
 
 void SatellitesDialog::askSatMarkerColor()
@@ -768,16 +780,18 @@ void SatellitesDialog::showUpdateCompleted(int updated,
 void SatellitesDialog::saveEditedSource()
 {
 	// don't update the currently selected item in the source list if the text is empty or not a valid URL.
-	QString u = ui->sourceEdit->text();
+	QString u = ui->sourceEdit->text().trimmed();
 	if (u.isEmpty() || u=="")
 	{
-		qDebug() << "SatellitesDialog::sourceEditingDone empty string - not saving";
+		qDebug() << "SatellitesDialog::saveEditedSource empty string - not saving";
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Empty string - not saving"), QMessageBox::Ok);
 		return;
 	}
 
 	if (!QUrl(u).isValid() || !u.contains("://"))
 	{
-		qDebug() << "SatellitesDialog::sourceEditingDone invalid URL - not saving : " << u;
+		qDebug() << "SatellitesDialog::saveEditedSource invalid URL - not saving : " << u;
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Invalid URL - not saving"), QMessageBox::Ok);
 		return;
 	}
 
@@ -790,7 +804,10 @@ void SatellitesDialog::saveEditedSource()
 		QListWidgetItem* i = new QListWidgetItem(u, ui->sourceList);
 		i->setData(checkStateRole, Qt::Unchecked);
 		i->setSelected(true);
+		ui->sourceList->setCurrentItem(i);
 	}
+	updateButtonsProperties();
+	ui->sourceEdit->setText("");
 }
 
 void SatellitesDialog::saveSourceList(void)
@@ -808,19 +825,52 @@ void SatellitesDialog::saveSourceList(void)
 
 void SatellitesDialog::deleteSourceRow(void)
 {
-	ui->sourceEdit->clear();
+	ui->sourceEdit->setText("");
 	if (ui->sourceList->currentItem())
 		delete ui->sourceList->currentItem();
 
+	updateButtonsProperties();
 	saveSourceList();
+}
+
+void SatellitesDialog::editSourceRow(void)
+{
+	ui->addSourceButton->setEnabled(false);
+	ui->editSourceButton->setEnabled(false);
+	ui->deleteSourceButton->setEnabled(false);
+	ui->saveSourceButton->setEnabled(true);
+	if (ui->sourceList->currentItem())
+	{
+		ui->sourceEdit->setEnabled(true);
+		ui->sourceEdit->setText(ui->sourceList->currentItem()->text());
+		ui->sourceEdit->selectAll();
+		ui->sourceEdit->setFocus();
+	}
 }
 
 void SatellitesDialog::addSourceRow(void)
 {
-	ui->sourceList->setCurrentItem(Q_NULLPTR);
+	ui->addSourceButton->setEnabled(false);
+	ui->editSourceButton->setEnabled(false);
+	ui->deleteSourceButton->setEnabled(false);
+	ui->saveSourceButton->setEnabled(true);
+	ui->sourceEdit->setEnabled(true);
 	ui->sourceEdit->setText(q_("[new source]"));
 	ui->sourceEdit->selectAll();
 	ui->sourceEdit->setFocus();
+	ui->sourceList->blockSignals(true);
+	ui->sourceList->setCurrentItem(Q_NULLPTR);
+	ui->sourceList->blockSignals(false);
+}
+
+void SatellitesDialog::updateButtonsProperties()
+{
+	ui->addSourceButton->setEnabled(true);
+	ui->editSourceButton->setEnabled(true);
+	ui->deleteSourceButton->setEnabled(true);
+	ui->saveSourceButton->setEnabled(false);
+	ui->sourceEdit->setEnabled(false);
+	ui->sourceEdit->setText("");
 }
 
 void SatellitesDialog::toggleCheckableSources()
@@ -848,7 +898,6 @@ void SatellitesDialog::toggleCheckableSources()
 		}
 	}
 	ui->sourceList->blockSignals(false);
-
 	checkStateRole = enabled ? Qt::CheckStateRole : Qt::UserRole;
 }
 
