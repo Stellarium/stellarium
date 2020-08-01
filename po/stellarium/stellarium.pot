@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-01 16:19+0700\n"
+"POT-Creation-Date: 2020-08-01 17:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10668,7 +10668,7 @@ msgid "Default options"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1620
-msgid "Save View"
+msgid "Save view"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1622
@@ -10678,9 +10678,18 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:1624
+#: plugins/Satellites/src/ui_satellitesDialog.h:875
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/NavStars/src/ui_navStarsWindow.h:248
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/Novae/src/ui_novaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:309
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:350
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:269
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Save settings"
 msgstr ""
 
@@ -10689,9 +10698,18 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1628
+#: plugins/Satellites/src/ui_satellitesDialog.h:874
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/NavStars/src/ui_navStarsWindow.h:247
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/Novae/src/ui_novaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:308
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:349
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:268
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Restore defaults"
 msgstr ""
 
@@ -11496,7 +11514,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:351
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+#: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Settings"
 msgstr ""
 
@@ -12574,15 +12592,6 @@ msgid "Use dms format for angles"
 msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:321
-#: plugins/Satellites/src/ui_satellitesDialog.h:874
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Novae/src/ui_novaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:308
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:349
-#: plugins/RemoteControl/src/ui_remoteControlDialog.h:268
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
-#: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:646
@@ -12602,7 +12611,7 @@ msgstr ""
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:281
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
-#: plugins/Observability/src/ui_ObservabilityDialog.h:360
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
@@ -14396,18 +14405,6 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:870
 msgid "Segment length (s):"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:875
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Novae/src/ui_novaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:309
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:350
-#: plugins/RemoteControl/src/ui_remoteControlDialog.h:269
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
-#: plugins/Observability/src/ui_ObservabilityDialog.h:358
-msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:879
@@ -19991,59 +19988,59 @@ msgstr ""
 msgid "Horizon altitude: %1 deg."
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/Observability/src/ui_ObservabilityDialog.h:327
 msgid "Observability Configuration"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/Observability/src/ui_ObservabilityDialog.h:328
 msgid "Observability Plug-in Configuration"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+#: plugins/Observability/src/ui_ObservabilityDialog.h:330
 msgid "Font color and size"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+#: plugins/Observability/src/ui_ObservabilityDialog.h:331
 msgid "Red"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+#: plugins/Observability/src/ui_ObservabilityDialog.h:332
 msgid "Green"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+#: plugins/Observability/src/ui_ObservabilityDialog.h:333
 msgid "Blue"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+#: plugins/Observability/src/ui_ObservabilityDialog.h:334
 msgid "Font Size"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+#: plugins/Observability/src/ui_ObservabilityDialog.h:335
 msgid "Observing conditions"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+#: plugins/Observability/src/ui_ObservabilityDialog.h:336
 msgid "Showing options"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+#: plugins/Observability/src/ui_ObservabilityDialog.h:337
 msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+#: plugins/Observability/src/ui_ObservabilityDialog.h:338
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:354
+#: plugins/Observability/src/ui_ObservabilityDialog.h:339
 msgid "Date of largest separation to the Sun"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:355
+#: plugins/Observability/src/ui_ObservabilityDialog.h:340
 msgid "Nights with the source above horizon"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+#: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Dates of previous and next Full Moon"
 msgstr ""
 
