@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-01 17:18+0700\n"
+"POT-Creation-Date: 2020-08-01 17:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10698,7 +10698,9 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1628
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:321
 #: plugins/Satellites/src/ui_satellitesDialog.h:874
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:266
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/NavStars/src/ui_navStarsWindow.h:247
 #: plugins/Novae/src/ui_novaeDialog.h:241
@@ -10709,7 +10711,9 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
 msgid "Restore defaults"
 msgstr ""
 
@@ -12589,13 +12593,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:320
 msgid "Use dms format for angles"
-msgstr ""
-
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:321
-#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:646
-msgid "Restore default settings"
 msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
@@ -16259,10 +16256,6 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:265
 msgid "You can also reset all changes and return to the default configuration:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:266
-msgid "Reset to defaults"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:267
@@ -21903,6 +21896,10 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:645
 msgid "Custom Declination 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:646
+msgid "Restore default settings"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:647
