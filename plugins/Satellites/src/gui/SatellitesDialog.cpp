@@ -406,14 +406,14 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatLargeSize);
 	else if (groupId == "[LEO]")
 		filterModel->setSecondaryFilters(QString(), SatLEO);
-	else if (groupId == "[GEO]")
-		filterModel->setSecondaryFilters(QString(), SatGEO);
+	else if (groupId == "[GSO]")
+		filterModel->setSecondaryFilters(QString(), SatGSO);
 	else if (groupId == "[MEO]")
 		filterModel->setSecondaryFilters(QString(), SatMEO);
 	else if (groupId == "[HEO]")
 		filterModel->setSecondaryFilters(QString(), SatHEO);
-	else if (groupId == "[HGEO]")
-		filterModel->setSecondaryFilters(QString(), SatHGEO);
+	else if (groupId == "[HGSO]")
+		filterModel->setSecondaryFilters(QString(), SatHGSO);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -684,6 +684,15 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>" + resetSettingsText + "</li>";
 	html += "<li>" + q_("The value of perigee and apogee altitudes compute for mean Earth radius.") + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
+	html += "</ul></p>";
+
+	// Definitions are obtained from Roscosmos documents
+	html += "<h3>" + q_("Altitude classifications for geocentric orbits") + "</h3><p><ul>";
+	html += "<li>" + q_("Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400 km, inclination of orbits in range 0-180 degrees and eccentricity below 0.25.") + "</li>";
+	html += "<li>" + q_("Medium Earth orbit (MEO): geocentric orbits ranging in altitude of apogee at least 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below 0.25 and period at least 1100 minutes.") + "</li>";
+	html += "<li>" + q_("Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with inclination of orbits below 25 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes (orbits around Earth matching Earth's sidereal rotation period). ") + "</li>";
+	html += "<li>" + q_("Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity at least 0.25 and period below 14000 minutes.") + "</li>";
+	html += "<li>" + q_("High geosynchronous orbit (HGSO): geocentric orbits above the altitude of geosynchronous orbit: inclination of orbits in range 25-180 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes") + "</li>";
 	html += "</ul></p>";
 
 	// TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -968,13 +977,13 @@ void SatellitesDialog::populateFilterMenu()
 	// TRANSLATORS: LEO = Low Earth orbit
 	ui->groupFilterCombo->insertItem(0, q_("[LEO satellites]"), QVariant("[LEO]"));
 	// TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-	ui->groupFilterCombo->insertItem(0, q_("[GEO satellites]"), QVariant("[GEO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[GEO/GSO satellites]"), QVariant("[GSO]"));
 	// TRANSLATORS: MEO = Medium Earth orbit
 	ui->groupFilterCombo->insertItem(0, q_("[MEO satellites]"), QVariant("[MEO]"));
 	// TRANSLATORS: HEO = Highly elliptical orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
-	ui->groupFilterCombo->insertItem(0, q_("[HGEO satellites]"), QVariant("[HGEO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection

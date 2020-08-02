@@ -890,13 +890,13 @@ SatFlags Satellite::getFlags() const
 	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]<4400.)
 		flags |= SatLEO;
 	if (orb[0] < 0.25 && orb[1]<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
-		flags |= SatGEO;
+		flags |= SatGSO;
 	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]>=4400. && orbitalPeriod<1100.)
 		flags |= SatMEO;
 	if (orb[0] >= 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[0]<=70000. && orbitalPeriod<=14000.)
 		flags |= SatHEO;
 	if (orb[0] < 0.25 && (orb[1]>=25. && orb[1]<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
-		flags |= SatHGEO;
+		flags |= SatHGSO;
 	return flags;
 }
 

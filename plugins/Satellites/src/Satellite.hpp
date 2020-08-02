@@ -78,10 +78,10 @@ enum SatFlag
 	SatMediumSize		= 0x0080,
 	SatLargeSize		= 0x0100,
 	SatLEO			= 0x0200,
-	SatGEO			= 0x0400,
-	SatMEO			= 0x0800,
+	SatMEO			= 0x0400,
+	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
-	SatHGEO			= 0x2000
+	SatHGSO			= 0x2000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
