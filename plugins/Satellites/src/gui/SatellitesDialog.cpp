@@ -689,10 +689,10 @@ void SatellitesDialog::populateAboutPage()
 	// Definitions are obtained from Roscosmos documents
 	html += "<h3>" + q_("Altitude classifications for geocentric orbits") + "</h3><p><ul>";
 	html += "<li>" + q_("Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400 km, inclination of orbits in range 0-180 degrees and eccentricity below 0.25.") + "</li>";
-	html += "<li>" + q_("Medium Earth orbit (MEO): geocentric orbits ranging in altitude of apogee at least 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below 0.25 and period at least 1100 minutes.") + "</li>";
+	html += "<li>" + q_("Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below 0.25 and period at least 1100 minutes.") + "</li>";
 	html += "<li>" + q_("Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with inclination of orbits below 25 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes (orbits around Earth matching Earth's sidereal rotation period). ") + "</li>";
 	html += "<li>" + q_("Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity at least 0.25 and period below 14000 minutes.") + "</li>";
-	html += "<li>" + q_("High geosynchronous orbit (HGSO): geocentric orbits above the altitude of geosynchronous orbit: inclination of orbits in range 25-180 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes") + "</li>";
+	html += "<li>" + q_("High geosynchronous orbit (HGSO): geocentric orbits above the altitude of geosynchronous orbit: inclination of orbits in range 25-180 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes.") + "</li>";
 	html += "</ul></p>";
 
 	// TRANSLATORS: Title of a section in the About tab of the Satellites window
