@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-02 21:15+0700\n"
+"POT-Creation-Date: 2020-08-02 22:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9468,7 +9468,7 @@ msgid "names in English"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:883 src/ui_astroCalcDialog.h:1807
-#: plugins/Satellites/src/ui_satellitesDialog.h:876
+#: plugins/Satellites/src/ui_satellitesDialog.h:878
 msgid "Search in list..."
 msgstr ""
 
@@ -9930,7 +9930,7 @@ msgid ""
 "screen labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3196 plugins/Satellites/src/ui_satellitesDialog.h:847
+#: src/ui_viewDialog.h:3196 plugins/Satellites/src/ui_satellitesDialog.h:849
 msgid "Labels"
 msgstr ""
 
@@ -10678,7 +10678,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:1624
-#: plugins/Satellites/src/ui_satellitesDialog.h:874
+#: plugins/Satellites/src/ui_satellitesDialog.h:876
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/NavStars/src/ui_navStarsWindow.h:248
 #: plugins/Novae/src/ui_novaeDialog.h:242
@@ -10699,7 +10699,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1628
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:321
-#: plugins/Satellites/src/ui_satellitesDialog.h:873
+#: plugins/Satellites/src/ui_satellitesDialog.h:875
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:266
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/NavStars/src/ui_navStarsWindow.h:247
@@ -11512,7 +11512,7 @@ msgstr ""
 msgid "Clear output before script runs"
 msgstr ""
 
-#: src/ui_scriptConsole.h:426 plugins/Satellites/src/ui_satellitesDialog.h:875
+#: src/ui_scriptConsole.h:426 plugins/Satellites/src/ui_satellitesDialog.h:877
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -14187,7 +14187,7 @@ msgid "[new source]"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
-#: plugins/Satellites/src/ui_satellitesDialog.h:846
+#: plugins/Satellites/src/ui_satellitesDialog.h:848
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:205
@@ -14348,36 +14348,36 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:837
-#: plugins/Satellites/src/ui_satellitesDialog.h:838
+#: plugins/Satellites/src/ui_satellitesDialog.h:839
+#: plugins/Satellites/src/ui_satellitesDialog.h:840
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:840
+#: plugins/Satellites/src/ui_satellitesDialog.h:842
 msgid "Updates"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:841
+#: plugins/Satellites/src/ui_satellitesDialog.h:843
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:842
+#: plugins/Satellites/src/ui_satellitesDialog.h:844
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:843
+#: plugins/Satellites/src/ui_satellitesDialog.h:845
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:844
+#: plugins/Satellites/src/ui_satellitesDialog.h:846
 msgid "Update satellite data from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:845
+#: plugins/Satellites/src/ui_satellitesDialog.h:847
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:292
@@ -14386,75 +14386,67 @@ msgstr ""
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:848
+#: plugins/Satellites/src/ui_satellitesDialog.h:850
 msgid "Label font size (pixels):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:849
+#: plugins/Satellites/src/ui_satellitesDialog.h:851
 msgid "Show satellites as markers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:850
+#: plugins/Satellites/src/ui_satellitesDialog.h:852
 msgid "Hide invisible artificial satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:851
+#: plugins/Satellites/src/ui_satellitesDialog.h:853
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:853
-#: plugins/Satellites/src/ui_satellitesDialog.h:859
+#: plugins/Satellites/src/ui_satellitesDialog.h:855
+#: plugins/Satellites/src/ui_satellitesDialog.h:861
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:856
-#: plugins/Satellites/src/ui_satellitesDialog.h:867
+#: plugins/Satellites/src/ui_satellitesDialog.h:858
+#: plugins/Satellites/src/ui_satellitesDialog.h:869
 msgid "Duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:861
+#: plugins/Satellites/src/ui_satellitesDialog.h:863
 msgid "Number of  segments:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:863
-#: plugins/Satellites/src/ui_satellitesDialog.h:871
+#: plugins/Satellites/src/ui_satellitesDialog.h:865
+#: plugins/Satellites/src/ui_satellitesDialog.h:873
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:865
+#: plugins/Satellites/src/ui_satellitesDialog.h:867
 msgid "Fade length:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:869
+#: plugins/Satellites/src/ui_satellitesDialog.h:871
 msgid "Segment length (s):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:878
+#: plugins/Satellites/src/ui_satellitesDialog.h:880
 msgid "Double-click a satellite to start tracking it."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:881
+#: plugins/Satellites/src/ui_satellitesDialog.h:883
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:884
+#: plugins/Satellites/src/ui_satellitesDialog.h:886
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:887
+#: plugins/Satellites/src/ui_satellitesDialog.h:889
 msgid "Change markers color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:889
-msgid "Marker Color"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:891
+#: plugins/Satellites/src/ui_satellitesDialog.h:892
 msgid "Change orbits color for selected satellites"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:893
-msgid "Orbit Color"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:895
