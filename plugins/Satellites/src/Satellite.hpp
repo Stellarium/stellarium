@@ -67,16 +67,21 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags		= 0x000,
-	SatDisplayed		= 0x001,
-	SatNotDisplayed	= 0x002,
-	SatUser			= 0x004,
-	SatOrbit			= 0x008,
-	SatNew			= 0x010,
-	SatError			= 0x020,
-	SatSmallSize		= 0x040,
-	SatMediumSize		= 0x080,
-	SatLargeSize		= 0x100
+	SatNoFlags		= 0x0000,
+	SatDisplayed		= 0x0001,
+	SatNotDisplayed	= 0x0002,
+	SatUser			= 0x0004,
+	SatOrbit			= 0x0008,
+	SatNew			= 0x0010,
+	SatError			= 0x0020,
+	SatSmallSize		= 0x0040,
+	SatMediumSize		= 0x0080,
+	SatLargeSize		= 0x0100,
+	SatLEO			= 0x0200,
+	SatGEO			= 0x0400,
+	SatMEO			= 0x0800,
+	SatHEO			= 0x1000,
+	SatHGEO			= 0x2000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -228,7 +233,7 @@ private:
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
 	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
-
+	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
 	QString calculateEpochFromLine1(QString tle) const;
 
 	bool initialized;

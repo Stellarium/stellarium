@@ -404,6 +404,16 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatMediumSize);
 	else if (groupId == "[largesize]")
 		filterModel->setSecondaryFilters(QString(), SatLargeSize);
+	else if (groupId == "[LEO]")
+		filterModel->setSecondaryFilters(QString(), SatLEO);
+	else if (groupId == "[GEO]")
+		filterModel->setSecondaryFilters(QString(), SatGEO);
+	else if (groupId == "[MEO]")
+		filterModel->setSecondaryFilters(QString(), SatMEO);
+	else if (groupId == "[HEO]")
+		filterModel->setSecondaryFilters(QString(), SatHEO);
+	else if (groupId == "[HGEO]")
+		filterModel->setSecondaryFilters(QString(), SatHGEO);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -955,6 +965,16 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[small satellites]"), QVariant("[smallsize]"));
 	ui->groupFilterCombo->insertItem(0, q_("[medium satellites]"), QVariant("[mediumsize]"));
 	ui->groupFilterCombo->insertItem(0, q_("[large satellites]"), QVariant("[largesize]"));
+	// TRANSLATORS: LEO = Low Earth orbit
+	ui->groupFilterCombo->insertItem(0, q_("[LEO satellites]"), QVariant("[LEO]"));
+	// TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
+	ui->groupFilterCombo->insertItem(0, q_("[GEO satellites]"), QVariant("[GEO]"));
+	// TRANSLATORS: MEO = Medium Earth orbit
+	ui->groupFilterCombo->insertItem(0, q_("[MEO satellites]"), QVariant("[MEO]"));
+	// TRANSLATORS: HEO = Highly elliptical orbit
+	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
+	// TRANSLATORS: HGEO = High geosynchronous orbit
+	ui->groupFilterCombo->insertItem(0, q_("[HGEO satellites]"), QVariant("[HGEO]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection

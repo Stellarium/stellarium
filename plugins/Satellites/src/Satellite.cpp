@@ -491,6 +491,13 @@ Vec2d Satellite::calculatePerigeeApogeeFromLine2(QString tle) const
 	return Vec2d(semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius, semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius);
 }
 
+Vec2d Satellite::getEccentricityInclinationFromLine2(QString tle) const
+{
+	const double inclination = QString(tle.left(16).right(8)).toDouble();
+	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	return Vec2d(eccentricity, inclination);
+}
+
 // Calculate epoch of TLE
 QString Satellite::calculateEpochFromLine1(QString tle) const
 {
@@ -859,6 +866,9 @@ SatFlags Satellite::getFlags() const
 {
 	// There's also a faster, but less readable way: treating them as uint.
 	SatFlags flags;
+	Vec2d orb = getEccentricityInclinationFromLine2(tleElements.second.data());
+	Vec2d apd = calculatePerigeeApogeeFromLine2(tleElements.second.data());
+	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 	if (displayed)
 		flags |= SatDisplayed;
 	else
@@ -877,6 +887,16 @@ SatFlags Satellite::getFlags() const
 		flags |= SatMediumSize;
 	if (RCS>1.0)
 		flags |= SatLargeSize;
+	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]<4400.)
+		flags |= SatLEO;
+	if (orb[0] < 0.25 && orb[1]<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+		flags |= SatGEO;
+	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]>=4400. && orbitalPeriod<1100.)
+		flags |= SatMEO;
+	if (orb[0] >= 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[0]<=70000. && orbitalPeriod<=14000.)
+		flags |= SatHEO;
+	if (orb[0] < 0.25 && (orb[1]>=25. && orb[1]<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+		flags |= SatHGEO;
 	return flags;
 }
 
