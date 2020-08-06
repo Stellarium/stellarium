@@ -175,6 +175,7 @@ void SolarSystem::init()
 	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
+	setFlagDrawMoonHalo(conf->value("viewing/flag_draw_moon_halo", true).toBool());
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
 	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
 	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
@@ -2756,6 +2757,17 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return Planet::getApparentMagnitudeAlgorithmString();
+}
+
+void SolarSystem::setFlagDrawMoonHalo(bool b)
+{
+	Planet::drawMoonHalo=b;
+	emit flagDrawMoonHaloChanged(b);
+}
+
+bool SolarSystem::getFlagDrawMoonHalo() const
+{
+	return Planet::drawMoonHalo;
 }
 
 void SolarSystem::setFlagPermanentOrbits(bool b)

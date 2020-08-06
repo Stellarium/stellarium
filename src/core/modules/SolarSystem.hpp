@@ -410,6 +410,11 @@ class SolarSystem : public StelObjectModule
 		   NOTIFY orbitsThicknessChanged
 		   )
 
+	Q_PROPERTY(bool flagDrawMoonHalo
+		   READ getFlagDrawMoonHalo
+		   WRITE setFlagDrawMoonHalo
+		   NOTIFY flagDrawMoonHaloChanged)
+
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -947,6 +952,9 @@ public slots:
 	void setOrbitsThickness(int v);
 	int getOrbitsThickness() const;
 
+	void setFlagDrawMoonHalo(bool b);
+	bool getFlagDrawMoonHalo() const;
+
 	//! Reset and recreate trails
 	void recreateTrails();
 
@@ -955,6 +963,7 @@ signals:
 	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void flagDrawMoonHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
 	void trailsThicknessChanged(int v);
 	void orbitsThicknessChanged(int v);

@@ -614,6 +614,7 @@ protected:
 	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+	static bool drawMoonHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
 

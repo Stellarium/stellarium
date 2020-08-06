@@ -88,6 +88,7 @@ Vec3f Planet::orbitNeptuneColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
+bool Planet::drawMoonHalo = true;
 bool Planet::permanentDrawingOrbits = false;
 Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
@@ -2689,6 +2690,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (angle<=asize)
 			allowDrawHalo = false;
 	}
+
+	if (this==ssm->getMoon() && !drawMoonHalo)
+		allowDrawHalo = false;
 
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
