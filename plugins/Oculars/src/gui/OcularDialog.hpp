@@ -74,13 +74,13 @@ public slots:
 
 	// Mini-methods required to immediately update display
 	void updateOcular();
-	void selectOcular(const QModelIndex & index);
+	void selectOcular(const QModelIndex);
 	void updateLens();
-	void selectLens(const QModelIndex & index);
+	void selectLens(const QModelIndex);
 	void updateCCD();
-	void selectCCD(const QModelIndex & index);
+	void selectCCD(const QModelIndex);
 	void updateTelescope();
-	void selectTelescope(const QModelIndex & index);
+	void selectTelescope(const QModelIndex);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

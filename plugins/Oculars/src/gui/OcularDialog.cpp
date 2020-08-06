@@ -494,9 +494,8 @@ void OcularDialog::updateOcular()
 	plugin->selectOcularAtIndex(plugin->getSelectedOcularIndex());
 }
 
-void OcularDialog::selectOcular(const QModelIndex & index)
+void OcularDialog::selectOcular(const QModelIndex)
 {
-	Q_UNUSED(index)
 	plugin->selectOcularAtIndex(ocularMapper->currentIndex());
 	plugin->updateLists();
 }
@@ -507,9 +506,8 @@ void OcularDialog::updateLens()
 	plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
 }
 
-void OcularDialog::selectLens(const QModelIndex & index)
+void OcularDialog::selectLens(const QModelIndex)
 {
-	Q_UNUSED(index)
 	plugin->selectLensAtIndex(lensMapper->currentIndex());
 	plugin->updateLists();
 }
@@ -520,9 +518,8 @@ void OcularDialog::updateCCD()
 	plugin->selectCCDAtIndex(plugin->getSelectedCCDIndex());
 }
 
-void OcularDialog::selectCCD(const QModelIndex & index)
+void OcularDialog::selectCCD(const QModelIndex)
 {
-	Q_UNUSED(index)
 	plugin->selectCCDAtIndex(ccdMapper->currentIndex());
 	plugin->updateLists();
 }
@@ -533,9 +530,8 @@ void OcularDialog::updateTelescope()
 	plugin->selectTelescopeAtIndex(plugin->getSelectedTelescopeIndex());
 }
 
-void OcularDialog::selectTelescope(const QModelIndex & index)
+void OcularDialog::selectTelescope(const QModelIndex)
 {
-	Q_UNUSED(index)
 	plugin->selectTelescopeAtIndex(telescopeMapper->currentIndex());
 	plugin->updateLists();
 }
