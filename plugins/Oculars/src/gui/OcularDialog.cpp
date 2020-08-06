@@ -309,6 +309,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
 	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox,	"Oculars.arrowButtonScale");
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,	"Oculars.flagShowCcdCropOverlay");
+	connectBoolProperty(ui->checkBoxShowCcdCropOverlayPixelGrid,	"Oculars.flagShowCcdCropOverlayPixelGrid");
 	connectIntProperty(ui->guiCcdCropOverlayHSizeSpinBox,	"Oculars.ccdCropOverlayHSize");
 	connectIntProperty(ui->guiCcdCropOverlayVSizeSpinBox,	"Oculars.ccdCropOverlayVSize");
 	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");

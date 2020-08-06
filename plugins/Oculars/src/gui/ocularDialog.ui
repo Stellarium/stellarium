@@ -669,6 +669,29 @@
                  </property>
                 </spacer>
                </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxShowCcdCropOverlayPixelGrid">
+                 <property name="toolTip">
+                   <string>Enable Full Grid of sensor binned pixels.</string>
+                 </property>
+                 <property name="text">
+                   <string>Show pixel grid</string>
+                 </property>
+                </widget>
+               </item>
+                <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </item>
              <item row="1" column="0">
@@ -681,7 +704,7 @@
              <item row="6" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
-                <spacer name="horizontalSpacer_4">
+                <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -725,7 +748,7 @@
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_5">
+                <spacer name="horizontalSpacer_6">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>

@@ -114,6 +114,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(Vec3f lineColor             READ getLineColor               WRITE setLineColor               NOTIFY textColorChanged)
 
 	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay  NOTIFY flagShowCcdCropOverlayChanged)
+	Q_PROPERTY(bool flagShowCcdCropOverlayPixelGrid READ getFlagShowCcdCropOverlayPixelGrid WRITE setFlagShowCcdCropOverlayPixelGrid NOTIFY flagShowCcdCropOverlayPixelGridChanged)
 	//Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY ccdCropOverlaySizeChanged)
 	Q_PROPERTY(int ccdCropOverlayHSize      READ getCcdCropOverlayHSize      WRITE setCcdCropOverlayHSize      NOTIFY ccdCropOverlayHSizeChanged)
 	Q_PROPERTY(int ccdCropOverlayVSize      READ getCcdCropOverlayVSize      WRITE setCcdCropOverlayVSize      NOTIFY ccdCropOverlayVSizeChanged)
@@ -275,6 +276,9 @@ public slots:
 	void setFlagShowCcdCropOverlay(const bool b);
 	bool getFlagShowCcdCropOverlay(void) const;
 
+	void setFlagShowCcdCropOverlayPixelGrid(const bool b);
+	bool getFlagShowCcdCropOverlayPixelGrid(void) const;
+
 	void setFlagShowContour(const bool b);
 	bool getFlagShowContour(void) const;
 
@@ -331,6 +335,7 @@ signals:
 	void flagShowCcdCropOverlayChanged(bool value);	
 	void ccdCropOverlayHSizeChanged(int value);
 	void ccdCropOverlayVSizeChanged(int value);
+	void flagShowCcdCropOverlayPixelGridChanged(bool value);
 	void flagShowContourChanged(bool value);
 	void flagShowCardinalsChanged(bool value);
 	void flagAlignCrosshairChanged(bool value);
@@ -506,6 +511,7 @@ private:
 	bool equatorialMountEnabledMain;  //!< Keep track of mount used in main program.
 	double reticleRotation;
 	bool flagShowCcdCropOverlay;  // !< Flag used to track if the ccd crop overlay should be shown.
+	bool flagShowCcdCropOverlayPixelGrid;  // !< Flag used to track if the ccd full grid overlay should be shown.
 	int ccdCropOverlayHSize;  //!< Holds the ccd crop overlay size
 	int ccdCropOverlayVSize;  //!< Holds the ccd crop overlay size
 	bool flagShowContour;
