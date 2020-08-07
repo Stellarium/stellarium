@@ -1667,11 +1667,11 @@ void Oculars::paintCCDBounds()
 				{
 					// draw cross at center
 					int cross = static_cast<int>(width>height ? height/50.f : width/50.f);
-					a = transform.map(QPoint(0, -cross));
-					b = transform.map(QPoint(0, cross));
+					a = transform.map(QPoint(-cross, -cross));
+					b = transform.map(QPoint(cross, cross));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-					a = transform.map(QPoint(-cross, 0));
-					b = transform.map(QPoint(cross, 0));
+					a = transform.map(QPoint(-cross, cross));
+					b = transform.map(QPoint(cross, -cross));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// calculate coordinates of the center and show it
 					Vec3d centerPosition;
