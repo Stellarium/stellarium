@@ -121,6 +121,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldOcularAfov = new QGraphicsTextItem(ocularControls);
 	fieldCcdName = new QGraphicsTextItem(ccdControls);
 	fieldCcdDimensions = new QGraphicsTextItem(ccdControls);
+	fieldCcdBinning = new QGraphicsTextItem(ccdControls);
 	fieldCcdHScale = new QGraphicsTextItem(ccdControls);
 	fieldCcdVScale = new QGraphicsTextItem(ccdControls);
 	fieldCcdRotation = new QGraphicsTextItem(ccdControls);
@@ -151,6 +152,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldOcularAfov->setTextWidth(maxWidth);
 	fieldCcdName->setTextWidth(maxWidth);
 	fieldCcdDimensions->setTextWidth(maxWidth);
+	fieldCcdBinning->setTextWidth(maxWidth);
 	fieldCcdHScale->setTextWidth(maxWidth);
 	fieldCcdVScale->setTextWidth(maxWidth);
 	fieldCcdRotation->setTextWidth(maxWidth);
@@ -423,6 +425,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 	delete fieldOcularAfov; fieldOcularAfov = Q_NULLPTR;
 	delete fieldCcdName; fieldCcdName = Q_NULLPTR;
 	delete fieldCcdDimensions; fieldCcdDimensions = Q_NULLPTR;
+	delete fieldCcdBinning; fieldCcdBinning = Q_NULLPTR;
 	delete fieldCcdHScale; fieldCcdHScale = Q_NULLPTR;
 	delete fieldCcdVScale; fieldCcdVScale = Q_NULLPTR;
 	delete fieldCcdRotation; fieldCcdRotation = Q_NULLPTR;
@@ -705,7 +708,12 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
-	widgetHeight += fieldCcdDimensions->boundingRect().height();
+	widgetHeight += fieldCcdDimensions->boundingRect().height();	
+	QString binningLabel = QString("%1: %2 %4 %3").arg(q_("Binning")).arg(ccd->binningX()).arg(ccd->binningY()).arg(QChar(0x00D7));
+	fieldCcdBinning->setPlainText(binningLabel);
+	fieldCcdBinning->setPos(posX, posY);
+	posY += fieldCcdBinning->boundingRect().height();
+	widgetHeight += fieldCcdBinning->boundingRect().height();
 	//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 	QString unit = q_("\"/px");
 	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
@@ -814,6 +822,9 @@ void OcularsGuiPanel::updateTelescopeControls()
 		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
 		fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
+
+		QString binningLabel = QString("%1: %2 %4 %3").arg(q_("Binning")).arg(ccd->binningX()).arg(ccd->binningY()).arg(QChar(0x00D7));
+		fieldCcdBinning->setPlainText(binningLabel);
 
 		//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 		QString unit = q_("\"/px");
@@ -1106,6 +1117,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldOcularAfov);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
+	Q_ASSERT(fieldCcdBinning);
 	Q_ASSERT(fieldCcdHScale);
 	Q_ASSERT(fieldCcdVScale);
 	Q_ASSERT(fieldCcdRotation);
@@ -1126,6 +1138,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldOcularAfov->setDefaultTextColor(color);
 	fieldCcdName->setDefaultTextColor(color);
 	fieldCcdDimensions->setDefaultTextColor(color);
+	fieldCcdBinning->setDefaultTextColor(color);
 	fieldCcdHScale->setDefaultTextColor(color);
 	fieldCcdVScale->setDefaultTextColor(color);
 	fieldCcdRotation->setDefaultTextColor(color);
@@ -1149,6 +1162,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldOcularAfov);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
+	Q_ASSERT(fieldCcdBinning);
 	Q_ASSERT(fieldCcdHScale);
 	Q_ASSERT(fieldCcdVScale);
 	Q_ASSERT(fieldCcdRotation);
@@ -1169,6 +1183,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldOcularAfov->setFont(font);
 	fieldCcdName->setFont(font);
 	fieldCcdDimensions->setFont(font);
+	fieldCcdBinning->setFont(font);
 	fieldCcdHScale->setFont(font);
 	fieldCcdVScale->setFont(font);
 	fieldCcdRotation->setFont(font);

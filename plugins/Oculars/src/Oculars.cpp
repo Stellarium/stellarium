@@ -1918,12 +1918,12 @@ void Oculars::paintText(const StelCore* core)
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
-	QString widthString = "MMMMMMMMMMMMMMMMMMM";
+	QString widthString = "MMMMMMMMMMMMMMMMMMMMM";
 	const double insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-	int xPosition = qRound(projectorParams.viewportCenter[0] - insetFromRHS);
-	int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 40);
+	int xPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[2] - insetFromRHS);
+	int yPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[3] - yPositionOffset - 20);
 	const int lineHeight = painter.getFontMetrics().height();
 
 	// The Ocular
@@ -2026,7 +2026,7 @@ void Oculars::paintText(const StelCore* core)
 	// The CCD
 	if (flagShowCCD && ccd!=Q_NULLPTR)
 	{
-		QString ccdSensorLabel, ccdInfoLabel;
+		QString ccdSensorLabel, ccdInfoLabel, ccdBinningInfo;
 		QString name = "";
 		QString telescopeName = "";
 		double fovX = 0.0;
@@ -2040,6 +2040,7 @@ void Oculars::paintText(const StelCore* core)
 		}
 
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
+		ccdBinningInfo = QString("%1: %2 %4 %3").arg(q_("Binning")).arg(ccd->binningX()).arg(ccd->binningY()).arg(QChar(0x00D7));
 		
 		if (name.isEmpty())
 		{
@@ -2067,6 +2068,8 @@ void Oculars::paintText(const StelCore* core)
 		painter.drawText(xPosition, yPosition, ccdSensorLabel);
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, ccdInfoLabel);
+		yPosition-=lineHeight;
+		painter.drawText(xPosition, yPosition, ccdBinningInfo);
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
