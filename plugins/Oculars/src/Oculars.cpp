@@ -1607,15 +1607,18 @@ void Oculars::paintCCDBounds()
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					
 					//Tool to show full CCD grid overlay
-					if(flagShowCcdCropOverlayPixelGrid) {
+					if(flagShowCcdCropOverlayPixelGrid)
+					{
 						//vertical lines
-						for (int l =1 ; l< actualCropOverlayX/ccd->binningX(); l++ ){
+						for (int l =1 ; l< actualCropOverlayX/ccd->binningX(); l++ )
+						{
 							a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(-overlayHeight*0.5f)));
 							b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(overlayHeight*0.5f)));
 							painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 						}
 						//horizontal lines
-						for (int l =1 ; l< actualCropOverlayY/ccd->binningY(); l++ ){
+						for (int l =1 ; l< actualCropOverlayY/ccd->binningY(); l++ )
+						{
 							a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
 							b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
 							painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
