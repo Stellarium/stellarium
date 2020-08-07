@@ -190,8 +190,8 @@ private slots:
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
-	void saveEphemeris();
-	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
+	void saveEphemeris();	
+	void onChangedEphemerisPosition();
 	void reGenerateEphemeris();
 
 	//! Calculating the transits for selected celestial body and fill the list.
