@@ -181,6 +181,7 @@ Oculars::Oculars()
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 	, flagShowCcdCropOverlay(false)
+	, flagShowCcdCropOverlayPixelGrid(false)
 	, ccdCropOverlayHSize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 	, ccdCropOverlayVSize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 	, flagShowContour(false)
@@ -613,6 +614,7 @@ void Oculars::init()
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
+		setFlagShowCcdCropOverlayPixelGrid(settings-> value("ccd_crop_overlay_pixel_grid",false).toBool());
 		setCcdCropOverlayHSize(settings->value("ccd_crop_overlay_hsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 		setCcdCropOverlayVSize(settings->value("ccd_crop_overlay_vsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 		setFlagShowContour(settings->value("show_ocular_contour", false).toBool());
@@ -1529,9 +1531,16 @@ void Oculars::paintCCDBounds()
 			const float width = params.viewportXywh[aspectIndex] * static_cast<float>(ccdXRatio * params.devicePixelsPerPixel);
 			const float height = params.viewportXywh[aspectIndex] * static_cast<float>(ccdYRatio * params.devicePixelsPerPixel);
 
+			// Get Crop size taking into account the binning rounded to the lower limit and limiting it to sensor size
+			const float actualCropOverlayX = (std::min(ccd->resolutionX(), ccdCropOverlayHSize) / ccd->binningX()) * ccd->binningX();
+			const float actualCropOverlayY = (std::min(ccd->resolutionY(), ccdCropOverlayVSize)  / ccd->binningY()) * ccd->binningY();
 			// Calculate the size of the CCD crop overlay
-			const float overlayWidth = width * ccdCropOverlayHSize / ccd->resolutionX();
-			const float overlayHeight = height * ccdCropOverlayVSize / ccd->resolutionY();
+			const float overlayWidth = width * actualCropOverlayX / ccd->resolutionX();
+			const float overlayHeight = height * actualCropOverlayY / ccd->resolutionY();
+
+			//calculate the size of a pixel in the image
+			float pixelProjectedWidth = width /ccd->resolutionX() * ccd->binningX();
+			float pixelProjectedHeight = height /ccd->resolutionY()* ccd->binningY();
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
@@ -1596,8 +1605,26 @@ void Oculars::paintCCDBounds()
 					a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
 					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					
+					//Tool to show full CCD grid overlay
+					if(flagShowCcdCropOverlayPixelGrid)
+					{
+						//vertical lines
+						for (int l =1 ; l< actualCropOverlayX/ccd->binningX(); l++ )
+						{
+							a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(-overlayHeight*0.5f)));
+							b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(overlayHeight*0.5f)));
+							painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+						}
+						//horizontal lines
+						for (int l =1 ; l< actualCropOverlayY/ccd->binningY(); l++ )
+						{
+							a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
+							b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
+							painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+						}
+					}
 				}
-
 				if(ccd->hasOAG())
 				{
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
@@ -1693,8 +1720,8 @@ void Oculars::paintCCDBounds()
 					{
 						// show the CCD crop overlay text
 						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
-								.arg(QString::number(ccdCropOverlayHSize, 'd', 0))
-								.arg(QString::number(ccdCropOverlayVSize, 'd', 0))
+								.arg(QString::number(actualCropOverlayX, 'd', 0))
+								.arg(QString::number(actualCropOverlayY, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
 						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
@@ -2613,6 +2640,20 @@ bool Oculars::getFlagShowCcdCropOverlay(void) const
 {
 	return flagShowCcdCropOverlay;
 }
+
+void Oculars::setFlagShowCcdCropOverlayPixelGrid(const bool b)
+{
+	flagShowCcdCropOverlayPixelGrid = b;
+	settings->setValue("ccd_crop_overlay_pixel_grid", b);
+	settings->sync();
+	emit flagShowCcdCropOverlayPixelGridChanged(b);
+}
+
+bool Oculars::getFlagShowCcdCropOverlayPixelGrid(void) const
+{
+	return flagShowCcdCropOverlayPixelGrid;
+}
+
 
 void Oculars::setFlagShowFocuserOverlay(const bool b)
 {
