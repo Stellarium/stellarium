@@ -363,6 +363,7 @@ private:
 
 	void enableCustomEphemerisTimeStepButton();
 	double getCustomTimeStep();
+	void reGenerateEphemeris(bool withSelection);
 
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);

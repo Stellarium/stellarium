@@ -1531,8 +1531,21 @@ void AstroCalcDialog::initListEphemeris()
 
 void AstroCalcDialog::reGenerateEphemeris()
 {
+	reGenerateEphemeris(true);
+}
+
+void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
+{
 	if (EphemerisList.size() > 0)
+	{
+		int row = ui->ephemerisTreeWidget->currentIndex().row();
 		generateEphemeris(); // Update list of ephemeris
+		if (row>0 && withSelection)
+		{
+			ui->ephemerisTreeWidget->setCurrentItem(ui->ephemerisTreeWidget->topLevelItem(row), 0, QItemSelectionModel::Select | QItemSelectionModel::Rows);
+			ui->ephemerisTreeWidget->setFocus();
+		}
+	}
 	else
 		initListEphemeris(); // Just update headers
 }
@@ -2532,7 +2545,7 @@ void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 	ui->celestialBodyComboBox->setEnabled(!flag);
 	ui->secondaryCelestialBodyComboBox->setEnabled(!flag);
 	conf->setValue("astrocalc/ephemeris_nakedeye_planets", flag);
-	reGenerateEphemeris();
+	reGenerateEphemeris(false);
 }
 
 void AstroCalcDialog::enableCustomEphemerisTimeStepButton()
