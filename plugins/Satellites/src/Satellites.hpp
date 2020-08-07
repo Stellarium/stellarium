@@ -585,8 +585,7 @@ private:
 	//! @name Bottom toolbar button
 	//@{
 	StelButton* toolbarButton;	
-	//@}
-	// FIXME: Possible bug with the Solar System recreated by the SSEditor.
+	//@}	
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
 	QFont labelFont;

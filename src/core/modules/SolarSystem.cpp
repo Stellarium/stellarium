@@ -908,7 +908,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			Vec3f color = Vec3f(1.f, 1.f, 1.f);
 			const float bV = pd.value(secname+"/color_index_bv", 99.f).toFloat();
 			if (bV<99.f)
-				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // FIXME why 0.75? color should probably have at least 1 element==1.
+				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			else
 				color = Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
 
