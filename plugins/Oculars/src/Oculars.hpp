@@ -351,6 +351,8 @@ private slots:
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void updateOcularReticle(void);
+	void togglePixelGrid();
+	void toggleCropOverlay();
 
 private:
 	//! Set up the Qt actions needed to activate the plugin.
