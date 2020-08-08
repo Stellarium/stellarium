@@ -32,6 +32,7 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelActionMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 #include "../plugins/Satellites/src/Satellites.hpp"
@@ -511,6 +512,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
 
+	StelApp *app = &StelApp::getInstance();
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populateCelestialNames(QString)));
+
 	updateTabBarListWidgetWidth();
 
 	// Let's improve visibility of the text
@@ -532,6 +536,12 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+}
+
+void AstroCalcDialog::populateCelestialNames(QString)
+{
+	populateCelestialBodyList();
+	populatePlanetList();
 }
 
 void AstroCalcDialog::showExtraEphemerisDialog()

@@ -289,7 +289,7 @@ private slots:
 	void changeGraphsTab(int index);
 
 	void updateSolarSystemData();
-
+	void populateCelestialNames(QString);
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
