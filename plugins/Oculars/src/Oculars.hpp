@@ -353,6 +353,7 @@ private slots:
 	void updateOcularReticle(void);
 	void togglePixelGrid();
 	void toggleCropOverlay();
+	void toggleFocuserOverlay();
 
 private:
 	//! Set up the Qt actions needed to activate the plugin.
