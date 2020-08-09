@@ -885,16 +885,17 @@ void ViewDialog::populateToolTips()
 void ViewDialog::populateLists()
 {
 	// Fill the culture list widget from the available list
+	StelApp& app = StelApp::getInstance();
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
-	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->addItems(app.getSkyCultureMgr().getSkyCultureListI18());
+	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
 
 	// populate language printing combo. (taken from DeltaT combo)
-	StelModule* cmgr = StelApp::getInstance().getModule("ConstellationMgr");
+	StelModule* cmgr = app.getModule("ConstellationMgr");
 	Q_ASSERT(cmgr);
 	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
 	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
@@ -912,9 +913,8 @@ void ViewDialog::populateLists()
 	cultureNamesStyleComboBox->setCurrentIndex(index);
 	cultureNamesStyleComboBox->blockSignals(false);
 
-	const StelCore* core = StelApp::getInstance().getCore();	
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
+	const StelCore* core = app.getCore();
+	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 
 	// Fill the projection list
 	l = ui->projectionListWidget;
@@ -929,13 +929,13 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	if (gui)
 		ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
+	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());	
 
 	// Fill the landscape list
 	l = ui->landscapesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
+	StelModule* lmgr = app.getModule("LandscapeMgr");
 	QStringList landscapeList = lmgr->property("allLandscapeNames").toStringList();
 	for (const auto& landscapeName : landscapeList)
 	{
@@ -960,8 +960,8 @@ void ViewDialog::populateLists()
 
 	ui->landscapeTextBrowser->setSearchPaths(searchPaths);
 	if (gui)
-		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());
+		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));	
+	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());	
 	updateDefaultLandscape();
 }
 
@@ -987,7 +987,7 @@ void ViewDialog::updateSkyCultureText()
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	if (gui)
 		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->skyCultureTextBrowser->setHtml(html);
+	ui->skyCultureTextBrowser->setHtml(html);	
 }
 
 void ViewDialog::changeProjection(const QString& projectionNameI18n)
