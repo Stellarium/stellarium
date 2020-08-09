@@ -1724,8 +1724,15 @@ void Oculars::paintCCDBounds()
 								.arg(QString::number(actualCropOverlayY, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
-						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
+						a = transform.map(QPoint(qRound(-overlayWidth*0.5f), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
+						{
+							//we only show the message if crop is smaller than sensor anyway (ratioLimitCrop). so only binning cause adjustment message to be chown
+							QString adjustedCropText = qc_("Adjusted for binning", "abbreviated in the plugin");
+							b = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(adjustedCropText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
+							painter.drawText(b.x(), b.y(), adjustedCropText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+						}
 					}
 				}
 
