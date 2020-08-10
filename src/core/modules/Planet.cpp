@@ -1378,8 +1378,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	// We have to call with both to correct this for earth with the new model.
 	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
 
-	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane),
-	// not solar equator...
+	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane), not solar equator...
 	if (parent)
 	{
 		// We can inject a proper precession plus even nutation matrix in this stage, if available.
@@ -1403,8 +1402,8 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				double deltaEps, deltaPsi;
 				getNutationAngles(JDE, &deltaPsi, &deltaEps);
 				//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
-				// TODO: Note: A zrotation by -deltaPsi rotation was suggested in email conversation with German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This may be closer to ExplanSup3rd, 6.41.
-				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(-deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps); // eq.21 in Hilton et al. has a positive deltaPsi rotation. We must check that again, later.
+				// Note: The sign for zrotation(-deltaPsi) was suggested by email by German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This is then also ExplanSup3rd, 6.41.
+				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(-deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps); // eq.21 in Hilton et al. wrongly had a positive deltaPsi rotation.
 				rotLocalToParent=rotLocalToParent*nut2000B;
 			}
 		}
