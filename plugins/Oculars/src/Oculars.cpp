@@ -1609,17 +1609,17 @@ void Oculars::paintCCDBounds()
 					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					
-					//Tool to show full CCD grid overlay
-					if(flagShowCcdCropOverlayPixelGrid)
+					// Tool to show full CCD grid overlay
+					if (flagShowCcdCropOverlayPixelGrid)
 					{
-						//vertical lines
+						// vertical lines
 						for (int l =1 ; l< actualCropOverlayX/ccd->binningX(); l++ )
 						{
 							a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(-overlayHeight*0.5f)));
 							b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(overlayHeight*0.5f)));
 							painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 						}
-						//horizontal lines
+						// horizontal lines
 						for (int l =1 ; l< actualCropOverlayY/ccd->binningY(); l++ )
 						{
 							a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
@@ -1668,13 +1668,13 @@ void Oculars::paintCCDBounds()
 				const double ratioLimitCrop = 0.75;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
-					// draw cross at center
-					int cross = static_cast<int>(width>height ? height/50.f : width/50.f);
-					a = transform.map(QPoint(0, -cross));
-					b = transform.map(QPoint(0, cross));
+					// draw cross at center					
+					const int cross = qRound(10 * params.devicePixelsPerPixel); // use permanent size of cross (10px)
+					a = transform.map(QPoint(-cross, -cross));
+					b = transform.map(QPoint(cross, cross));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-					a = transform.map(QPoint(-cross, 0));
-					b = transform.map(QPoint(cross, 0));
+					a = transform.map(QPoint(-cross, cross));
+					b = transform.map(QPoint(cross, -cross));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// calculate coordinates of the center and show it
 					Vec3d centerPosition;
@@ -1727,7 +1727,9 @@ void Oculars::paintCCDBounds()
 								.arg(QString::number(actualCropOverlayY, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
-						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
+						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
+							resolutionOverlayText.append(" [*]");
+						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));						
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}

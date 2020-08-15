@@ -576,22 +576,28 @@ void OcularDialog::initAboutText()
 	html += "<tr><td>Dhia Moakhar (" + q_("Pixel grid feature") + ")</td></tr>";
 	html += "</table>";
 
-	//Overview
+	// Overview
 	html += "<h3>" + q_("Overview") + "</h3>";
 
 	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.") + "</p>";
 	html += "<p>" + q_("You can choose to scale the image you see on the screen.") + " ";
-	html +=         q_("This is intended to show you a better comparison of what one eyepiece/telescope combination will be like when compared to another.") + " ";
-	html +=         q_("The same eyepiece in two different telescopes of differing focal length will produce two different exit pupils, changing the view somewhat.") + " ";
-	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
-	html +=         q_("Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
+	html +=                q_("This is intended to show you a better comparison of what one eyepiece/telescope combination will be like when compared to another.") + " ";
+	html +=                q_("The same eyepiece in two different telescopes of differing focal length will produce two different exit pupils, changing the view somewhat.") + " ";
+	html +=                q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
+	html +=                q_("Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
-	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
-	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
+	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
+	html += "<p>" + q_("If you find any issues, please let me know. Enjoy!") + "</p>";
 
-	//Keys
+	// Keys
 	html += "<h3>" + q_("Hot Keys") + "</h3>";
 	html += "<p>" + q_("The plug-in's key bindings can be edited in the Keyboard shortcuts editor (F7).") + "</p>";
+
+	// Notes
+	html += "<h3>" + q_("Notes") + "</h3>";
+	html += "<p>" + q_("The sensor view has a feature to show sensor crop overlay with information about size of crop, but in some cases size of this rectangle may be adjusted by binning feature (e.g. cropping size 100px will be adjusted to 99px by binning 3).") + " ";
+	html +=                q_("Information about size of crop overlay, which was adjusted by binning, will be marked by %1.").arg("[*]") + " ";
+	html +=                q_("Of course this mark may be visible in other reasons also: the crop size is larger than sensor size.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Oculars plugin") + "</p>";

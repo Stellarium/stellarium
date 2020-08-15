@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-08 21:58+0700\n"
+"POT-Creation-Date: 2020-08-15 12:28+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4490,15 +4490,15 @@ msgid ""
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:906
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:907
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:908
 msgid "Translated"
 msgstr ""
 
@@ -10760,7 +10760,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2416
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr ""
@@ -12442,7 +12442,7 @@ msgid ""
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12462,7 +12462,7 @@ msgid "Links"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -12485,7 +12485,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -12506,7 +12506,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -12527,7 +12527,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -12785,122 +12785,122 @@ msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1968
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1988
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:1995
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:2015
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2028 plugins/Oculars/src/Oculars.cpp:2089
+#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2037
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2053
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2073
+#: plugins/Oculars/src/Oculars.cpp:2075
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2081
+#: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2094
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2444
+#: plugins/Oculars/src/Oculars.cpp:2446
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2447
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2448
 msgid "&Next telescope"
 msgstr ""
 
@@ -13193,13 +13193,13 @@ msgstr ""
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
+"turned on the Ocular view. This feature draws three concentric circles of "
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know.  Enjoy!"
+msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
@@ -13210,6 +13210,34 @@ msgstr ""
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Notes"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+msgid ""
+"The sensor view has a feature to show sensor crop overlay with information "
+"about size of crop, but in some cases size of this rectangle may be adjusted "
+"by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"binning 3)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#, qt-format
+msgid ""
+"Information about size of crop overlay, which was adjusted by binning, will "
+"be marked by %1."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+msgid ""
+"Of course this mark may be visible in other reasons also: the crop size is "
+"larger than sensor size."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
@@ -13974,42 +14002,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:772
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:774
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:775
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:776
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:777
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:778
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:780
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
@@ -17093,12 +17121,6 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:348
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
-
-#: plugins/Pulsars/src/Pulsar.cpp:288
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Notes"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:376
