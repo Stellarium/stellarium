@@ -707,10 +707,14 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>" + q_("Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the 'add' button.") + "</li></ol>";
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
-	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
-	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6). ");
+	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
+	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6).") + " ";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += QString(q_("See %1this document%2 for details.")).arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>") + "</p>";
+	html += QString(q_("See %1this document%2 for details.")).arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>") + " ";
+	html +=              q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += QString(q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found %1here%2.")).arg("<a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">").arg("</a>") + " ";
+	html +=              q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Satellites plugin") + "</p>";
