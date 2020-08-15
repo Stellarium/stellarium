@@ -642,8 +642,13 @@ float Satellite::getVMagnitude(const StelCore* core) const
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 		sunReflAngle = -1.;
 #endif
-		// OK, artificial satellite has value for standard magnitude
-		if (stdMag<99.)
+		if (pSatWrapper && name.startsWith("STARLINK"))
+		{
+			// Calculation of approx. visual magnitude for Starlink satellites
+			// described here: http://www.satobs.org/seesat/Aug-2020/0079.html
+			vmag = static_cast<float>(5.93 + 5 * std::log10 ( range / 1000 ));
+		}
+		else if (stdMag<99.) // OK, artificial satellite has value for standard magnitude
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
 			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
