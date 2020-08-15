@@ -647,6 +647,8 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			// Calculation of approx. visual magnitude for Starlink satellites
 			// described here: http://www.satobs.org/seesat/Aug-2020/0079.html
 			vmag = static_cast<float>(5.93 + 5 * std::log10 ( range / 1000 ));
+			if (name.contains("DARKSAT", Qt::CaseInsensitive)) // See https://arxiv.org/abs/2006.08422
+				vmag *= 0.78;
 		}
 		else if (stdMag<99.) // OK, artificial satellite has value for standard magnitude
 		{
