@@ -332,11 +332,6 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList NomenclatureMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	return StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
-}
-
 QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

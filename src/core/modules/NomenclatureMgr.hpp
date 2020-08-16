@@ -51,16 +51,16 @@ class NomenclatureMgr : public StelObjectModule
 
 public:
 	NomenclatureMgr();
-	virtual ~NomenclatureMgr();
+	virtual ~NomenclatureMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double)  Q_DECL_OVERRIDE{;}
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -69,28 +69,29 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for nomenclatures.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the NomenclatureItems located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive localized NomenclatureItem name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive english NomenclatureItem name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Geological features"; }
-	virtual QString getStelObjectType() const { return NomenclatureItem::NOMENCLATURE_TYPE; }
+	// As long as there is nothing else implemented, we use StelObjectModule::listMatchingObjects()
+	// Find and return the list of at most maxNbItem objects auto-completing the passed object name.
+	// @param objPrefix the case insensitive first letters of the searched object
+	// @param maxNbItem the maximum number of returned object names
+	// @param useStartOfWords the autofill mode for returned objects names
+	// @return a list of matching object name by order of relevance, or an empty list if nothing match
+	//virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Geological features"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return NomenclatureItem::NOMENCLATURE_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

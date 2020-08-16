@@ -172,8 +172,8 @@ QString NomenclatureItem::getNameI18n() const
 
 QString NomenclatureItem::getEnglishName() const
 {
-	if (getNomenclatureType()==niCrater)
-		return QString("%1 (%2, %4)").arg(englishName, getNomenclatureTypeLatinString(nType), getPlanet()->getEnglishName());
+	if (nType==niCrater)
+		return QString("%1 (%2, %3)").arg(englishName, getNomenclatureTypeLatinString(nType), getPlanet()->getEnglishName());
 	else
 		return QString("%1 (%2)").arg(englishName, getPlanet()->getEnglishName());
 }
