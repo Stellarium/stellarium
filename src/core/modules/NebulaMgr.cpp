@@ -821,7 +821,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
-			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
+			qWarning() << "ERROR convert catalogue, because source data set does not exist for " << setName;
 	}
 
 	if (dsoCatalogPath.isEmpty())
@@ -1417,8 +1417,9 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
-				qDebug() << "WARNING: Mismatch the version of DSO catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
-				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1 %2").arg(q_("Mismatch the version of DSO catalog - expected version of catalog is"), StellariumDSOCatalogVersion), QMessageBox::Ok);
+				qDebug() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
+				qDebug() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
+				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),  q_("Found"), version, q_("Expected"), StellariumDSOCatalogVersion, q_("See Logfile for instructions.")), QMessageBox::Ok);
 				break;
 			}
 		}
