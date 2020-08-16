@@ -165,17 +165,17 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 QString NomenclatureItem::getNameI18n() const
 {
 	if (nType==niCrater)
-		return QString("%1 (%2)").arg(nameI18n, getNomenclatureTypeString(nType));
+		return QString("%1 (%2, %3)").arg(nameI18n, getNomenclatureTypeString(nType), getPlanet()->getNameI18n());
 	else
-		return nameI18n;
+		return QString("%1 (%2)").arg(nameI18n, getPlanet()->getNameI18n());
 }
 
 QString NomenclatureItem::getEnglishName() const
 {
 	if (getNomenclatureType()==niCrater)
-		return QString("%1 (%2)").arg(englishName, getNomenclatureTypeLatinString(nType));
+		return QString("%1 (%2, %4)").arg(englishName, getNomenclatureTypeLatinString(nType), getPlanet()->getEnglishName());
 	else
-		return englishName;
+		return QString("%1 (%2)").arg(englishName, getPlanet()->getEnglishName());
 }
 
 void NomenclatureItem::translateName(const StelTranslator& trans)
