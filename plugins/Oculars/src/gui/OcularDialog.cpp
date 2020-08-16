@@ -329,7 +329,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->doubleSpinBoxTelradFOV2, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
 	connect(ui->doubleSpinBoxTelradFOV3, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
 	connect(ui->doubleSpinBoxTelradFOV4, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-	connect(ui->pushButtonRestoreTelradFOV, SIGNAL(clicked()), this, SLOT(setTelradDefaultFOV()));
+	connect(ui->pushButtonRestoreTelradFOV, &QPushButton::clicked, this, [=] () { plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));} );
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -481,11 +481,6 @@ void OcularDialog::updateTelradCustomFOV()
 	fov[2] = static_cast<float>(ui->doubleSpinBoxTelradFOV3->value());
 	fov[3] = static_cast<float>(ui->doubleSpinBoxTelradFOV4->value());
 	plugin->setTelradFOV(fov);
-}
-
-void OcularDialog::setTelradDefaultFOV()
-{
-	plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));
 }
 
 // We need particular refresh methods to see immediate feedback.

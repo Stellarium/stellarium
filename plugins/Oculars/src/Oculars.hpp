@@ -42,7 +42,6 @@ class QMenu;
 class QMouseEvent;
 class QPixmap;
 class QSettings;
-class QSignalMapper;
 QT_END_NAMESPACE
 
 class StelButton;
@@ -464,12 +463,6 @@ private:
 	bool flagRayHelpersLinesMain;      //!< keep track of ray helpers display while possibly suppressing their display.
 	bool flipVertMain;               //!< keep track of screen flip in main program
 	bool flipHorzMain;               //!< keep track of screen flip in main program
-
-	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD.
-	QSignalMapper * ccdsSignalMapper;         //!< Used to determine which CCD was selected from the popup navigator.
-	QSignalMapper * ocularsSignalMapper;      //!< Used to determine which ocular was selected from the popup navigator.
-	QSignalMapper * telescopesSignalMapper;   //!< Used to determine which telescope was selected from the popup navigator.
-	QSignalMapper * lensesSignalMapper;       //!< Used to determine which lens was selected from the popup navigator
 
 	// for toolbar button
 	QPixmap * pxmapGlow;
