@@ -1417,8 +1417,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
-				qDebug() << "WARNING: Mismatch the version of catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
-				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1 %2").arg(q_("Mismatch the version of catalog - expected version of catalog is"), StellariumDSOCatalogVersion), QMessageBox::Ok);
+				qDebug() << "WARNING: Mismatch the version of DSO catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
+				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1 %2").arg(q_("Mismatch the version of DSO catalog - expected version of catalog is"), StellariumDSOCatalogVersion), QMessageBox::Ok);
 				break;
 			}
 		}
