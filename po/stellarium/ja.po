@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-08 21:58+0700\n"
+"POT-Creation-Date: 2020-08-16 21:28+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: tommy <tmhrozw@gmail.com>, 2020\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -196,7 +196,7 @@ msgstr "東西線"
 #: src/gui/AstroCalcDialog.cpp:3465 src/gui/AstroCalcDialog.cpp:3743
 #: src/gui/AstroCalcDialog.cpp:3745 src/ui_viewDialog.h:3308
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
 msgid "Altitude"
 msgstr "高度"
 
@@ -512,7 +512,7 @@ msgstr "作者"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:412
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -1831,13 +1831,26 @@ msgstr "星雲・星団(DSO)"
 msgid "Toggle DSO type filter"
 msgstr "表示する星雲・星団をチェック"
 
-#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:953
+#: src/core/modules/NebulaMgr.cpp:1422 src/StelMainView.cpp:953
 msgid "Attention!"
 msgstr "注意してください！"
 
-#: src/core/modules/NebulaMgr.cpp:1421
-msgid "Mismatch the version of catalog - expected version of catalog is"
-msgstr "カタログのバージョンが違います。最新のカタログのバージョンは"
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "DSO catalog version mismatch"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422 src/core/SimbadSearcher.cpp:175
+#: src/core/SimbadSearcher.cpp:177
+msgid "Found"
+msgstr "見つかりました"
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "Expected"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "See Logfile for instructions."
+msgstr ""
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:228 plugins/Quasars/src/Quasar.cpp:140
@@ -3436,10 +3449,6 @@ msgstr "問い合わせ中"
 msgid "Not found"
 msgstr "見つかりません"
 
-#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
-msgid "Found"
-msgstr "見つかりました"
-
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:310
 msgctxt "solar time"
@@ -4568,15 +4577,15 @@ msgid ""
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr "「シャドウマップ」を使用して、非凸型太陽系天体のセルフシャドウをシミュレーションします。一部の天体の半陰影の質が低下する場合があります。"
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:906
 msgid "Abbreviated"
 msgstr "略号"
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:907
 msgid "Native"
 msgstr "英名"
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:908
 msgid "Translated"
 msgstr "和名"
 
@@ -4945,7 +4954,7 @@ msgstr "赤緯"
 #: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:619
 #: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:803
 #: src/gui/AstroCalcDialog.cpp:840 src/gui/AstroCalcDialog.cpp:1503
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1319
 msgid "Azimuth"
 msgstr "方位角"
 
@@ -5205,14 +5214,14 @@ msgstr "固有運動の大きい恒星"
 #: src/gui/AstroCalcDialog.cpp:1361 src/gui/AstroCalcDialog.cpp:1948
 #: src/gui/AstroCalcDialog.cpp:2225 src/gui/AstroCalcDialog.cpp:4068
 #: src/gui/AstroCalcDialog.cpp:6109
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1392
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "XMLファイル"
 
 #: src/gui/AstroCalcDialog.cpp:1363 src/gui/AstroCalcDialog.cpp:1950
 #: src/gui/AstroCalcDialog.cpp:2227 src/gui/AstroCalcDialog.cpp:4070
 #: src/gui/AstroCalcDialog.cpp:6111
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1396
 msgid "CSV (Comma delimited)"
 msgstr "CSVファイル(カンマ区切り)"
 
@@ -5624,7 +5633,7 @@ msgstr "赤経"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3334 src/gui/AstroCalcDialog.cpp:3392
 #: src/gui/AstroCalcDialog.cpp:3506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -9857,11 +9866,11 @@ msgstr "光行差を計算"
 
 #: src/ui_viewDialog.h:3044
 msgid "Toggle drawing halo around the Moon"
-msgstr ""
+msgstr "月のまわりのハロの表示/非表示"
 
 #: src/ui_viewDialog.h:3046
 msgid "Show Moon's halo"
-msgstr ""
+msgstr "月のハロを表示する"
 
 #: src/ui_viewDialog.h:3047
 msgid "Only orbits of major planets"
@@ -10153,7 +10162,7 @@ msgstr "天球"
 #: src/ui_viewDialog.h:3433 src/ui_viewDialog.h:3445 src/ui_viewDialog.h:3513
 #: src/ui_viewDialog.h:3553
 msgid "Label partitions"
-msgstr "パーティション名"
+msgstr "目盛の値"
 
 #: src/ui_viewDialog.h:3234
 msgid "Equator (of date)"
@@ -10169,11 +10178,11 @@ msgstr "線の太さ"
 
 #: src/ui_viewDialog.h:3240
 msgid "The line thickness for circle partitions"
-msgstr "円で区切る時の線の太さ"
+msgstr "目盛の線の太さ"
 
 #: src/ui_viewDialog.h:3242
 msgid "partitions"
-msgstr ""
+msgstr "目盛"
 
 #: src/ui_viewDialog.h:3244
 msgid "Color of cardinal points"
@@ -10189,7 +10198,7 @@ msgstr "分至経線の色"
 #: src/ui_viewDialog.h:3421 src/ui_viewDialog.h:3452 src/ui_viewDialog.h:3474
 #: src/ui_viewDialog.h:3524
 msgid "Show partitions"
-msgstr "パーティションの表示"
+msgstr "目盛の表示"
 
 #: src/ui_viewDialog.h:3254
 msgid "Color of ecliptic (J2000.0)"
@@ -10238,7 +10247,7 @@ msgstr "東西線の色"
 #: src/ui_viewDialog.h:3302
 msgid ""
 "Show a vertical line (with optional altitude marks) in the screen center."
-msgstr ""
+msgstr "画面中央に垂直線(高度目盛のオプション)を表示します。"
 
 #: src/ui_viewDialog.h:3314
 msgid "Color of ecliptic poles (of date)"
@@ -10778,7 +10787,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "グラフィカル・ユーザー・インターフェイスの追加設定"
 
 #: src/ui_configurationDialog.h:1589
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "時刻"
@@ -10850,7 +10859,7 @@ msgstr "デフォルトオプション"
 
 #: src/ui_configurationDialog.h:1620
 msgid "Save view"
-msgstr ""
+msgstr "表示オプションを保存"
 
 #: src/ui_configurationDialog.h:1622
 msgid ""
@@ -10935,7 +10944,7 @@ msgstr "可能なものすべて"
 msgid "Display no information"
 msgstr "情報を表示しない"
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2416
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "なし"
@@ -11451,7 +11460,7 @@ msgstr "ディザリング"
 
 #: src/ui_configurationDialog.h:1900
 msgid "Info text color for overwrite"
-msgstr ""
+msgstr "天体情報の文字色"
 
 #: src/ui_configurationDialog.h:1903
 msgid "Set one color for text in info panel for all objects"
@@ -12622,8 +12631,8 @@ msgstr ""
 " 私たちはハワイにいたいと願いました。"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
@@ -12642,8 +12651,8 @@ msgid "Links"
 msgstr "リンク"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
@@ -12665,8 +12674,8 @@ msgstr "サポートはGithubで行っています。投稿時には題名に\"%
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
@@ -12686,8 +12695,8 @@ msgstr "質問は{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
@@ -12707,8 +12716,8 @@ msgstr "バグの報告やリクエストは{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
@@ -12965,122 +12974,122 @@ msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr "接眼レンズ"
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1968
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr "双眼鏡"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1988
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "焦点距離: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:1995
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "みかけの視野角: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr "補正レンズ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "補正レンズ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:2015
 msgid "Lens: none"
 msgstr "補正レンズ: なし"
 
-#: plugins/Oculars/src/Oculars.cpp:2028 plugins/Oculars/src/Oculars.cpp:2089
+#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2037
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Magnification: %1"
 msgstr "倍率: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "射出瞳径: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2053
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 #, qt-format
 msgid "FOV: %1"
 msgstr "視野角: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "実視野(縦x横): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2073
+#: plugins/Oculars/src/Oculars.cpp:2075
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr "センサー(CCD) #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2081
+#: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "センサー(CCD) #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2094
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Lens"
 msgstr "補正レンズ(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Previous lens"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Next lens"
 msgstr "次へ(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2444
+#: plugins/Oculars/src/Oculars.cpp:2446
 msgid "&Telescope"
 msgstr "望遠鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2447
 msgid "&Previous telescope"
 msgstr "前へ(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2448
 msgid "&Next telescope"
 msgstr "次へ(&N)"
 
@@ -13375,15 +13384,14 @@ msgstr "十字線の表示が可能です。"
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
+"turned on the Ocular view. This feature draws three concentric circles of "
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"テルラドの表示も可能です。これはアイピースの視野をオンにしていない場合にのみ実行できます。これは0.5%1、2.0%1、4.0%1の3つの同心円を描き、テルラド(または類似の)ファインダーを通じた肉眼での天体探索を助けます。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "何か問題を見つけた時は教えて下さい。エンジョイ!"
+msgid "If you find any issues, please let me know. Enjoy!"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Hot Keys"
@@ -13394,6 +13402,34 @@ msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "このプラグインのショートカットは、キーボードショートカットの編集(F7)で編集出来ます。"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Notes"
+msgstr "備考"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+msgid ""
+"The sensor view has a feature to show sensor crop overlay with information "
+"about size of crop, but in some cases size of this rectangle may be adjusted"
+" by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"binning 3)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#, qt-format
+msgid ""
+"Information about size of crop overlay, which was adjusted by binning, will "
+"be marked by %1."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+msgid ""
+"Of course this mark may be visible in other reasons also: the crop size is "
+"larger than sensor size."
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
 msgid "Interface"
@@ -13801,7 +13837,7 @@ msgstr "気象衛星"
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #: plugins/Satellites/src/Satellites.cpp:2232
 msgid "earth resources"
-msgstr ""
+msgstr "地球資源衛星"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:2234
@@ -13829,7 +13865,7 @@ msgstr "GLONASS衛星"
 #. constellation (BeiDou Navigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:2242
 msgid "beidou"
-msgstr ""
+msgstr "北斗衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
@@ -13847,25 +13883,25 @@ msgstr "イリジウム衛星"
 #. constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2248
 msgid "iridium next"
-msgstr ""
+msgstr "イリジウム・ネクスト衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2250
 msgid "starlink"
-msgstr ""
+msgstr "スターリンク衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
 #: plugins/Satellites/src/Satellites.cpp:2254
 msgid "spire"
-msgstr ""
+msgstr "Spire衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2256
 msgid "oneweb"
-msgstr ""
+msgstr "ワンウェブ衛星"
 
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:2258
@@ -13887,56 +13923,56 @@ msgstr "観測衛星"
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2264
 msgid "intelsat"
-msgstr ""
+msgstr "インテルサット"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2266
 msgid "globalstar"
-msgstr ""
+msgstr "グローバルスター"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2268
 msgid "orbcomm"
-msgstr ""
+msgstr "オーブコム"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2270
 msgid "gorizont"
-msgstr ""
+msgstr "ゴリゾント"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
 #: plugins/Satellites/src/Satellites.cpp:2272
 msgid "raduga"
-msgstr ""
+msgstr "ラドゥガ(Raduga)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2274
 msgid "molniya"
-msgstr ""
+msgstr "モルニヤ"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
 #: plugins/Satellites/src/Satellites.cpp:2276
 msgid "cosmos"
-msgstr ""
+msgstr "コスモス"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
 #: plugins/Satellites/src/Satellites.cpp:2278
 msgid "debris"
-msgstr ""
+msgstr "スペースデブリ(宇宙ゴミ)"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
 #: plugins/Satellites/src/Satellites.cpp:2280
 msgid "crewed"
-msgstr ""
+msgstr "有人衛星"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
 #: plugins/Satellites/src/Satellites.cpp:2282
 msgid "resupply"
-msgstr ""
+msgstr "補給衛星"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:2287
@@ -14068,7 +14104,7 @@ msgstr "近地点高度/遠地点高度"
 
 #: plugins/Satellites/src/Satellite.cpp:338
 msgid "Approx. angular size"
-msgstr ""
+msgstr "だいたいの大きさ(角度)"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
@@ -14129,11 +14165,11 @@ msgstr "TLEの最終更新"
 
 #: plugins/Satellites/src/Satellite.cpp:410
 msgid "Epoch of the TLE"
-msgstr ""
+msgstr "TLEの元期"
 
 #: plugins/Satellites/src/Satellite.cpp:412
 msgid "Radar cross-section (RCS)"
-msgstr ""
+msgstr "レーダー反射断面積(RCS)"
 
 #: plugins/Satellites/src/Satellite.cpp:421
 msgid "Group"
@@ -14178,42 +14214,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:772
 msgctxt "operational status"
 msgid "operational"
 msgstr "運用中"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "運用終了"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:774
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "部分的に運用中"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:775
 msgctxt "operational status"
 msgid "standby"
 msgstr "準備中"
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:776
 msgctxt "operational status"
 msgid "spare"
 msgstr "予備機"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:777
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "運用延長"
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:778
 msgctxt "operational status"
 msgid "decayed"
 msgstr "老朽化"
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:780
 msgctxt "operational status"
 msgid "unknown"
 msgstr "不明"
@@ -14281,21 +14317,21 @@ msgstr "人工衛星プラグインはまだ開発中です。 一部の機能�
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:690
 msgid "Altitude classifications for geocentric orbits"
-msgstr ""
+msgstr "軌道高度による分類"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
 "0.25."
-msgstr ""
+msgstr "低軌道(LEO):遠地点高度4400 km未満、軌道傾斜角0から180度、離心率0.25未満の地心軌道。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
 "0.25 and period at least 1100 minutes."
-msgstr ""
+msgstr "中軌道(MEO):遠地点高度4,400km以上、軌道傾斜角0から180度、離心率0.25未満、周期1,100分以上の地心軌道。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
 msgid ""
@@ -14304,6 +14340,8 @@ msgid ""
 "in range 1100-2000 minutes (orbits around Earth matching Earth's sidereal "
 "rotation period). "
 msgstr ""
+"対地同期軌道(GSO)と静止軌道(GEO)は、軌道傾斜角25度未満、離心率0.25未満、周期が1,100分から2,000分(地球の恒星自転周期に一致する地球周りの軌道)です。"
+" "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 msgid ""
@@ -14311,6 +14349,7 @@ msgid ""
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
 "at least 0.25 and period below 14000 minutes."
 msgstr ""
+"長楕円軌道(HEO):近地点高度70,000km未満、軌道傾斜角0から180度、離心率0.25以上、周期が1,4000分未満の地球中心軌道。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 msgid ""
@@ -14318,6 +14357,7 @@ msgid ""
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
 "eccentricity below 0.25 and period in range 1100-2000 minutes."
 msgstr ""
+"高対地同期軌道(HGSO):対地同期軌道より高い高度の地球中心軌道:軌道傾斜角25度から180度、離心率0.25以下、周期1,100分から2,000分。"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
@@ -14371,25 +14411,39 @@ msgstr "テクニカルノート"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
-" as the input. "
-msgstr "NORADのTLEデータを使用し、SGP4法とSDP4法を使用して位置を計算します。 "
+" as the input."
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
-"the revised Spacetrack Report #3 (including Spacetrack Report #6). "
+"the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
-"軌道計算プログラムは、revised Spacetrack Report#3(Spacetrack "
-"Report#6を含む)に従いホセ・ルイス・カナレス(Jose Luis Canales)がコーディングしました。"
 
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
-#. link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+msgid ""
+"To calculate an approximate visual magnitude of satellites we use data from "
+"Mike McCants' database (with permissions) of the radar cross-section (RCS) "
+"and standard magnitudes."
+msgstr ""
+
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
-#, qt-format
-msgid "See %1this document%2 for details."
-msgstr "詳細は%1こちら%2。"
+msgid ""
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
+msgid ""
+"We use a spherical shape of satellite to calculate an approximate visual "
+"magnitude from RCS values."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+msgid "For modeling Starlink magnitudes we use Anthony Mallama's formula"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -14398,7 +14452,7 @@ msgstr "詳細は%1こちら%2。"
 msgid "Next update"
 msgstr "次回の更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -14407,8 +14461,8 @@ msgstr "次回の更新"
 msgid "Internet updates disabled"
 msgstr "更新出来ませんでした"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -14422,7 +14476,7 @@ msgstr "更新出来ませんでした"
 msgid "Updating now..."
 msgstr "更新中..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:752
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -14432,7 +14486,7 @@ msgid "< 1 minute"
 msgstr "1分以内"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:759
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -14443,7 +14497,7 @@ msgctxt "time"
 msgid "m"
 msgstr "分"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -14452,34 +14506,34 @@ msgstr "分"
 msgid "Update error"
 msgstr "更新失敗"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "更新衛星数  %1/%2 ;  追加 %3; 削除 %4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新衛星数  %1/%2 ;  追加 %3; ミス %4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Warning!"
-msgstr ""
+msgstr "警告!"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Empty string - not saving"
-msgstr ""
+msgstr "文字列が空です。保存しませんでした。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Invalid URL - not saving"
-msgstr ""
+msgstr "無効なURLです。保存しませんでした。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:879
 msgid "[new source]"
 msgstr "[新しい更新元]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -14495,7 +14549,7 @@ msgstr "[新しい更新元]"
 msgid "Update now"
 msgstr "すぐに更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14504,102 +14558,103 @@ msgstr "すぐに更新"
 msgid "Update from files"
 msgstr "ファイルから更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:970
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
 msgid "[orbit calculation error]"
 msgstr "[軌道計算できなかった衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
 msgid "[all newly added]"
 msgstr "[追加された衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
 msgid "[all not displayed]"
 msgstr "[表示されない衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
 msgid "[all displayed]"
 msgstr "[表示される衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
-msgid "[small satellites]"
-msgstr ""
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
-msgid "[medium satellites]"
-msgstr ""
-
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
+msgid "[small satellites]"
+msgstr "[小型衛星]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
+msgid "[medium satellites]"
+msgstr "[中型衛星]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
 msgid "[large satellites]"
-msgstr ""
+msgstr "[大型衛星]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
 msgid "[LEO satellites]"
-msgstr ""
+msgstr "[低軌道(LEO)衛星]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
 msgid "[GEO/GSO satellites]"
-msgstr ""
+msgstr "[対地同期軌道(GSO)/静止軌道(GEO)衛星]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
 msgid "[MEO satellites]"
-msgstr ""
+msgstr "[中軌道(MEO)衛星]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
 msgid "[HEO satellites]"
-msgstr ""
+msgstr "[長楕円軌道(HEO)衛星]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
 msgid "[HGSO satellites]"
-msgstr ""
+msgstr "[高対地同期軌道(HGSO)衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
 msgid "[all]"
 msgstr "[全て]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "RCS"
-msgstr ""
+msgstr "RCS"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1004
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1006
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
+"レーダー反射断面積(RCS)は物体がレーダーでどの程度検出できるかを示す尺度です。RCSが大きいほど、物体の検出が容易であることを示します。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
-msgstr ""
+msgstr "人工衛星の標準等級は、観測者から1000 kmの距離にある半位相での見かけの等級として定義されます。"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgid "New group..."
 msgstr "衛星種類の追加..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1295
 msgid "Select TLE Update File"
 msgstr "アップデート・ファイルの選択"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
 msgid "Brightness"
 msgstr "明るさ"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1320
 msgid "Satellite"
 msgstr "人工衛星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1400
 msgid "Save predicted Iridium flares as..."
 msgstr "イリジウム・フレア予報を保存..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1443
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1445
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1447
 msgid "Predicted Iridium flares"
 msgstr "イリジウム・フレア予報"
 
@@ -14685,7 +14740,7 @@ msgstr "フォントの大きさ(ピクセル):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:851
 msgid "Show satellites as markers"
-msgstr ""
+msgstr "衛星をマーカーで表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:852
 msgid "Hide invisible artificial satellites"
@@ -14752,7 +14807,7 @@ msgstr "衛星番号:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:899
 msgid "Standard magnitude:"
-msgstr ""
+msgstr "標準等級:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:901
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -14803,11 +14858,11 @@ msgstr "配布元の追加"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:924
 msgid "Edit selected source"
-msgstr ""
+msgstr "選択した配布元の編集"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:927
 msgid "Save source"
-msgstr ""
+msgstr "配布元の保存"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:930
 msgid "Remove selected source"
@@ -17347,12 +17402,6 @@ msgstr "平均フラックス密度"
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
-
-#: plugins/Pulsars/src/Pulsar.cpp:288
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Notes"
-msgstr "備考"
 
 #: plugins/Pulsars/src/Pulsar.cpp:376
 msgid ""

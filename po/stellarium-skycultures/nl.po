@@ -9,15 +9,16 @@
 # Gerard Prins <gejepe@manquehue.net>, 2018
 # CC KK <kogacarlo@gmail.com>, 2020
 # Harry Mensch, 2020
+# alex d, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-22 00:46+0700\n"
+"POT-Creation-Date: 2020-08-15 09:58+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
-"Last-Translator: Harry Mensch, 2020\n"
+"Last-Translator: alex d, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,7 +120,7 @@ msgstr "Europa"
 #: skycultures/translations.fab:59
 msgctxt "moon"
 msgid "Ganymede"
-msgstr "Ganymede"
+msgstr "Ganymedes"
 
 #. TRANSLATORS: Moon of Jupiter (JIV)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Callisto_(moon)
@@ -322,7 +323,7 @@ msgstr "Atlas"
 #: skycultures/translations.fab:148
 msgctxt "moon"
 msgid "Prometheus"
-msgstr "Promedeus"
+msgstr "Prometheus"
 
 #. TRANSLATORS: Moon of Saturn (SXVII)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pandora_(moon)
@@ -693,7 +694,7 @@ msgstr "Larissa"
 #: skycultures/translations.fab:314
 msgctxt "minor planet"
 msgid "Prometheus"
-msgstr "Promedeus"
+msgstr "Prometheus"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/1810_Epimetheus
@@ -4019,12 +4020,12 @@ msgstr "Paradijsvogel"
 #: skycultures/translations.fab:1880
 msgctxt "Genitive name of constellation"
 msgid "Aquarii"
-msgstr "Arend"
+msgstr "Waterman"
 
 #: skycultures/translations.fab:1881
 msgctxt "Genitive name of constellation"
 msgid "Aquilae"
-msgstr "Waterman"
+msgstr "Arend"
 
 #: skycultures/translations.fab:1882
 msgctxt "Genitive name of constellation"
@@ -5112,7 +5113,7 @@ msgstr "Dubbele wigcluster"
 
 #: nebulae/default/names.dat:262 nebulae/default/names.dat:265
 #: nebulae/default/names.dat:267 nebulae/default/names.dat:269
-#: nebulae/default/names.dat:936 nebulae/default/names.dat:1203
+#: nebulae/default/names.dat:936 nebulae/default/names.dat:1205
 msgid "Rosette Nebula"
 msgstr "Rosettenevel"
 
@@ -6452,7 +6453,7 @@ msgstr "Spookcluster"
 
 #: nebulae/default/names.dat:653
 msgid "The Summer Rose Star"
-msgstr "De zomer roos ster"
+msgstr "De zomerroos ster"
 
 #: nebulae/default/names.dat:654
 msgid "Hole in a Cluster"
@@ -6935,7 +6936,7 @@ msgstr "Gemini A"
 msgid "Papillon"
 msgstr "Papillon"
 
-#: nebulae/default/names.dat:789 nebulae/default/names.dat:1204
+#: nebulae/default/names.dat:789 nebulae/default/names.dat:1206
 msgid "γ Cyg Nebula"
 msgstr "γ Cyg nevel"
 
@@ -7114,13 +7115,13 @@ msgstr "Reservewielnevel"
 
 #: nebulae/default/names.dat:836
 msgid "Southern Integral Sign"
-msgstr "Zuidelijk integraal signaal"
+msgstr "Zuidelijk integraalteken"
 
 #: nebulae/default/names.dat:839
 msgid "Hourglass Region"
 msgstr "Zandloper regio"
 
-#: nebulae/default/names.dat:840 nebulae/default/names.dat:1225
+#: nebulae/default/names.dat:840 nebulae/default/names.dat:1227
 msgid "Small Sagittarius Star Cloud"
 msgstr "Kleine Sagittarius sterwolk"
 
@@ -7315,7 +7316,7 @@ msgstr "Antares cluster"
 
 #: nebulae/default/names.dat:897
 msgid "Coathanger"
-msgstr "Kerenhanger"
+msgstr "Kleerhanger"
 
 #: nebulae/default/names.dat:898
 msgid "Al Sufi's Cluster"
@@ -7365,7 +7366,7 @@ msgstr "Groene ringnevel"
 msgid "Little Cocoon Nebula"
 msgstr "Kleine coconnevel"
 
-#: nebulae/default/names.dat:912 nebulae/default/names.dat:1228
+#: nebulae/default/names.dat:912 nebulae/default/names.dat:1230
 msgid "Cygnus Star Cloud"
 msgstr "Cygnus ster wolk"
 
@@ -7708,7 +7709,7 @@ msgstr "Argo onregelmatig dwergsterrenstelsel"
 
 #: nebulae/default/names.dat:1007
 msgid "Integral Sign Galaxy"
-msgstr "Integraal sterrenstelsel"
+msgstr "Integraalteken sterrenstelsel"
 
 #: nebulae/default/names.dat:1008
 msgid "Phoenix Galaxy"
@@ -8060,7 +8061,7 @@ msgstr ""
 msgid "Spiderweb Galaxy"
 msgstr ""
 
-#: nebulae/default/names.dat:1102 nebulae/default/names.dat:1206
+#: nebulae/default/names.dat:1102 nebulae/default/names.dat:1208
 msgid "Boomerang Nebula"
 msgstr "Boomerangnevel"
 
@@ -8427,114 +8428,122 @@ msgid "Puppis A"
 msgstr "Puppis A"
 
 #: nebulae/default/names.dat:1198
-msgid "Vela Junior"
-msgstr "Vela junior"
+msgid "Vela SNR"
+msgstr ""
 
 #: nebulae/default/names.dat:1199
-msgid "Frying Pan"
+msgid "Vela XYZ"
 msgstr ""
 
 #: nebulae/default/names.dat:1200
-msgid "Lupus Loop"
-msgstr ""
+msgid "Vela Junior"
+msgstr "Vela junior"
 
 #: nebulae/default/names.dat:1201
-msgid "Tornado Nebula"
+msgid "Frying Pan"
 msgstr ""
 
 #: nebulae/default/names.dat:1202
+msgid "Lupus Loop"
+msgstr ""
+
+#: nebulae/default/names.dat:1203
+msgid "Tornado Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:1204
 msgid "Square Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:1205
+#: nebulae/default/names.dat:1207
 msgid "Inverted Horseshoe Nebula"
 msgstr "Geïnverteerde Paardenhoefnevel"
 
-#: nebulae/default/names.dat:1207
+#: nebulae/default/names.dat:1209
 msgid "Propeller Nebula"
 msgstr "Propellernevel"
 
-#: nebulae/default/names.dat:1208
+#: nebulae/default/names.dat:1210
 msgid "Pazmino's Cluster"
 msgstr "Pazmino's cluster"
 
-#: nebulae/default/names.dat:1209
+#: nebulae/default/names.dat:1211
 msgid "Calabash Nebula"
 msgstr "Kalebasnevel"
 
-#: nebulae/default/names.dat:1210
+#: nebulae/default/names.dat:1212
 msgid "Rotten Egg Nebula"
 msgstr "Rotte ei nevel"
 
-#: nebulae/default/names.dat:1211
+#: nebulae/default/names.dat:1213
 msgid "Frosty Leo Nebula"
 msgstr "IJzige leeuwnevel"
 
-#: nebulae/default/names.dat:1212
+#: nebulae/default/names.dat:1214
 msgid "Gomez's Hamburger"
 msgstr "Gomez zijn hamburger"
 
-#: nebulae/default/names.dat:1213
+#: nebulae/default/names.dat:1215
 msgid "Gomez Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:1214
+#: nebulae/default/names.dat:1216
 msgid "Footprint Nebula"
 msgstr "Voetafdruknevel"
 
-#: nebulae/default/names.dat:1215
+#: nebulae/default/names.dat:1217
 msgid "Minkowski's Footprint"
 msgstr "Minkowski's voetafdruk"
 
-#: nebulae/default/names.dat:1216
+#: nebulae/default/names.dat:1218
 msgid "Sagittarius A West"
 msgstr "Sagittarius A west"
 
-#: nebulae/default/names.dat:1217
+#: nebulae/default/names.dat:1219
 msgid "Minispiral in Gal Center"
 msgstr "Minispiraal in het Gal centrum"
 
-#: nebulae/default/names.dat:1218
+#: nebulae/default/names.dat:1220
 msgid "Dark Doodad Nebula"
 msgstr "Donkere Doodadnevel"
 
-#: nebulae/default/names.dat:1220
+#: nebulae/default/names.dat:1222
 msgid "Baade's Window"
 msgstr "Baade's venster"
 
-#: nebulae/default/names.dat:1221
+#: nebulae/default/names.dat:1223
 msgid "Funnel Cloud Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:1222
+#: nebulae/default/names.dat:1224
 msgid "Northern Coalsack"
 msgstr ""
 
-#: nebulae/default/names.dat:1223
+#: nebulae/default/names.dat:1225
 msgid "The Great Rift"
 msgstr ""
 
-#: nebulae/default/names.dat:1224
+#: nebulae/default/names.dat:1226
 msgid "Scutum Star Cloud"
 msgstr ""
 
-#: nebulae/default/names.dat:1226
+#: nebulae/default/names.dat:1228
 msgid "Patchy unnamed cloud"
 msgstr ""
 
-#: nebulae/default/names.dat:1227
+#: nebulae/default/names.dat:1229
 msgid "Large Sagittarius Star Cloud"
 msgstr ""
 
-#: nebulae/default/names.dat:1229
+#: nebulae/default/names.dat:1231
 msgid "Dark Horse Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:1230
+#: nebulae/default/names.dat:1232
 msgid "Prancing Horse Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:1231
+#: nebulae/default/names.dat:1233
 msgid "Norma Star Cloud"
 msgstr ""
 
@@ -8591,7 +8600,7 @@ msgstr "Wagenmenner"
 
 #: skycultures/almagest/constellation_names.eng.fab:13
 msgid "Serpent Bearer"
-msgstr ""
+msgstr "Slangendrager"
 
 #: skycultures/almagest/constellation_names.eng.fab:14
 #: skycultures/maya/constellation_names.eng.fab:7
@@ -8866,31 +8875,31 @@ msgstr ""
 
 #: skycultures/almagest/planet_names.fab:1
 msgid "Zeus/Dios (Jupiter)"
-msgstr ""
+msgstr "Zeus/Dios (Jupiter)"
 
 #: skycultures/almagest/planet_names.fab:2
 msgid "Aphrodite (Venus)"
-msgstr ""
+msgstr "Aphrodite (Venus)"
 
 #: skycultures/almagest/planet_names.fab:3
 msgid "Ares (Mars)"
-msgstr ""
+msgstr "Ares (Mars)"
 
 #: skycultures/almagest/planet_names.fab:4
 msgid "Kronos (Saturn)"
-msgstr ""
+msgstr "Kronos (Saturnus)"
 
 #: skycultures/almagest/planet_names.fab:5
 msgid "Hermes (Mercury)"
-msgstr ""
+msgstr "Hermes (Mercurius)"
 
 #: skycultures/almagest/planet_names.fab:6
 msgid "Helios (Sun)"
-msgstr ""
+msgstr "Helios (zon)"
 
 #: skycultures/almagest/planet_names.fab:7
 msgid "Selene (Moon)"
-msgstr ""
+msgstr "Selene (Maan)"
 
 #: skycultures/almagest/planet_names.fab:8
 msgid "Uranus (1781)"
@@ -9675,7 +9684,7 @@ msgstr "Al-suha"
 
 #: skycultures/arabic/star_names.fab:99
 msgid "Leader-daughter of the bier"
-msgstr "Leider-dochter van het draagbaar"
+msgstr "Leider-dochter van het lijkbaar"
 
 #: skycultures/arabic/star_names.fab:100
 msgid "Single one of the lance-bearer"
@@ -9806,7 +9815,7 @@ msgstr "De stekel"
 
 #: skycultures/arabic/star_names.fab:131
 msgid "Second one of the bier daughters"
-msgstr "De tweede van de draagbaar dochters"
+msgstr "De tweede dochter van de lijkbaar"
 
 #: skycultures/arabic/star_names.fab:132
 msgid "The raised tail"
@@ -10174,7 +10183,7 @@ msgstr "Vierde geluksster van de tenten"
 
 #: skycultures/arabic/star_names.fab:224
 msgid "Third one of the bier daughters"
-msgstr "De derde van de draagbaar dochters"
+msgstr "De derde dochter van de lijkbaar"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:1
 msgid "The Two signs"
@@ -12520,7 +12529,7 @@ msgstr "Meester van constructies (in Mansion Benen)"
 #: skycultures/chinese/constellation_names.eng.fab:294
 #: skycultures/chinese_medieval/constellation_names.eng.fab:27
 msgid "Administrative Center"
-msgstr "Administratiefcentrum"
+msgstr "Administratief centrum"
 
 #: skycultures/chinese/constellation_names.eng.fab:295
 #: skycultures/chinese_medieval/constellation_names.eng.fab:273
@@ -12568,7 +12577,7 @@ msgstr "Poel van harmonie"
 #: skycultures/chinese_contemporary/star_names.fab:291
 #: skycultures/chinese_medieval/constellation_names.eng.fab:33
 msgid "Prime Minister"
-msgstr "Primier"
+msgstr "Premier"
 
 #: skycultures/chinese/constellation_names.eng.fab:304
 msgid "Little Dipper"
@@ -14034,62 +14043,62 @@ msgstr "Eunuch toegevoegd XIX"
 #: skycultures/chinese/star_names.fab:323
 #: skycultures/chinese_contemporary/star_names.fab:346
 msgid "Administrative Center II"
-msgstr "Administratiefcentrum II"
+msgstr "Administratief centrum II"
 
 #: skycultures/chinese/star_names.fab:324
 #: skycultures/chinese_contemporary/star_names.fab:347
 msgid "Administrative Center III"
-msgstr "Administratiefcentrum III"
+msgstr "Administratief centrum III"
 
 #: skycultures/chinese/star_names.fab:325
 #: skycultures/chinese_contemporary/star_names.fab:348
 msgid "Administrative Center IV"
-msgstr "Administratiefcentrum IV"
+msgstr "Administratief centrum IV"
 
 #: skycultures/chinese/star_names.fab:326
 #: skycultures/chinese_contemporary/star_names.fab:349
 msgid "Administrative Center V"
-msgstr "Administratiefcentrum V"
+msgstr "Administratief centrum V"
 
 #: skycultures/chinese/star_names.fab:327
 #: skycultures/chinese_contemporary/star_names.fab:350
 msgid "Administrative Center VI"
-msgstr "Administratiefcentrum VI"
+msgstr "Administratief centrum VI"
 
 #: skycultures/chinese/star_names.fab:328
 #: skycultures/chinese_contemporary/star_names.fab:351
 msgid "Administrative Center Added I"
-msgstr "Administratiefcentrum toegevoegd I"
+msgstr "Administratief centrum toegevoegd I"
 
 #: skycultures/chinese/star_names.fab:329
 #: skycultures/chinese_contemporary/star_names.fab:352
 msgid "Administrative Center Added II"
-msgstr "Administratiefcentrum toegevoegd II"
+msgstr "Administratief centrum toegevoegd II"
 
 #: skycultures/chinese/star_names.fab:330
 #: skycultures/chinese_contemporary/star_names.fab:353
 msgid "Administrative Center Added III"
-msgstr "Administratiefcentrum toegevoegd III"
+msgstr "Administratief centrum toegevoegd III"
 
 #: skycultures/chinese/star_names.fab:331
 #: skycultures/chinese_contemporary/star_names.fab:354
 msgid "Administrative Center Added IV"
-msgstr "Administratiefcentrum toegevoegd IV"
+msgstr "Administratief centrum toegevoegd IV"
 
 #: skycultures/chinese/star_names.fab:332
 #: skycultures/chinese_contemporary/star_names.fab:355
 msgid "Administrative Center Added V"
-msgstr "Administratiefcentrum toegevoegd V"
+msgstr "Administratief centrum toegevoegd V"
 
 #: skycultures/chinese/star_names.fab:333
 #: skycultures/chinese_contemporary/star_names.fab:356
 msgid "Administrative Center Added VI"
-msgstr "Administratiefcentrum toegevoegd VI"
+msgstr "Administratief centrum toegevoegd VI"
 
 #: skycultures/chinese/star_names.fab:334
 #: skycultures/chinese_contemporary/star_names.fab:357
 msgid "Administrative Center Added VII"
-msgstr "Administratiefcentrum toegevoegd VII"
+msgstr "Administratief centrum toegevoegd VII"
 
 #: skycultures/chinese/star_names.fab:337
 #: skycultures/chinese_contemporary/star_names.fab:360
@@ -46373,7 +46382,7 @@ msgstr "Zetelvlaggen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:288
 msgctxt "asterism"
 msgid "Administrative Center"
-msgstr "Administratiefcentrum"
+msgstr "Administratief centrum"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:289
 msgctxt "asterism"
@@ -46418,7 +46427,7 @@ msgstr "Poel van harmonie"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:297
 msgctxt "asterism"
 msgid "Prime Minister"
-msgstr "Primier"
+msgstr "Premier"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:298
 #: skycultures/western/asterism_names.eng.fab:27
@@ -46617,7 +46626,7 @@ msgstr "Patriarchale clan"
 #: skycultures/western_hlad/constellation_names.eng.fab:1
 #: skycultures/western_SnT/constellation_names.eng.fab:5
 msgid "Aquila"
-msgstr "Aquila"
+msgstr "Arend"
 
 #: skycultures/chinese_contemporary/constellation_names.eng.fab:2
 #: skycultures/western/constellation_names.eng.fab:2
@@ -47300,7 +47309,7 @@ msgstr "Maagd"
 #: skycultures/western_hlad/constellation_names.eng.fab:89
 #: skycultures/western_SnT/constellation_names.eng.fab:85
 msgid "Vela"
-msgstr "Nevels"
+msgstr "Zeilen"
 
 #: skycultures/chinese_contemporary/star_names.fab:4
 #: skycultures/romanian/star_names.fab:137
@@ -47672,7 +47681,7 @@ msgstr "Fu/Donkere lans"
 
 #: skycultures/chinese_medieval/star_names.fab:78
 msgid "Xiang/Prime Minister"
-msgstr "Xiang/Primier"
+msgstr "Xiang/Premier"
 
 #: skycultures/chinese_medieval/star_names.fab:81
 msgid "Taiyangshou/Guard of the Sun"
@@ -48698,7 +48707,7 @@ msgstr "Horus die twee landen bindt (Jupiter)"
 #. Bull of Heaven)
 #: skycultures/egyptian/planet_names.fab:14
 msgid "Horus, the Bull of Heaven (Saturn)"
-msgstr "Horus, de stier van de haven (Saturnus)"
+msgstr "Horus, de stier van de hemel (Saturnus)"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
 msgid "The Canoe Bailer of Makali`i"
@@ -49916,7 +49925,7 @@ msgstr "Gebroken mortel"
 
 #: skycultures/korean/constellation_names.eng.fab:85
 msgid "Climbing Serpent"
-msgstr "Serpent beklimming"
+msgstr "Klimmende slang"
 
 #: skycultures/korean/constellation_names.eng.fab:86
 msgid "Palace of Emperor"
@@ -50433,7 +50442,7 @@ msgstr "Hemelse keuken"
 
 #: skycultures/korean/constellation_names.eng.fab:236
 msgid "North Pole"
-msgstr "Noortpool"
+msgstr "Noordpool"
 
 #: skycultures/korean/constellation_names.eng.fab:237
 msgid "Wound Lodge"
@@ -53195,11 +53204,11 @@ msgstr "Drie Marias"
 
 #: skycultures/sardinian/star_names.fab:1
 msgid "Steel Star"
-msgstr "Staal ster"
+msgstr "Stalen ster"
 
 #: skycultures/sardinian/star_names.fab:2
 msgid "The Seven Brother's Driver"
-msgstr "De zeven broers bestuurder"
+msgstr "De bestuurder van de zeven broers "
 
 #: skycultures/sardinian/star_names.fab:3
 msgid "Polar Star"
@@ -53271,7 +53280,7 @@ msgstr "De zwaluw"
 
 #: skycultures/seleucid/constellation_names.eng.fab:31
 msgid "The Stars, The Seven Gods"
-msgstr "De steren, de zeven Goden"
+msgstr "De sterren, de zeven Goden"
 
 #: skycultures/seleucid/constellation_names.eng.fab:35
 msgid "Lulal and Latarak"
@@ -53423,7 +53432,7 @@ msgstr "De kleine ster die 4 el achter de koning ligt"
 
 #: skycultures/seleucid/star_names.fab:42
 msgid "The Rump of the Lion"
-msgstr "Het staartstuk van de leeuw"
+msgstr "Het achterdeel van de leeuw"
 
 #: skycultures/seleucid/star_names.fab:43
 msgid "The rear foot of the Lion"
@@ -53540,7 +53549,7 @@ msgstr "de hand van Ninmah die op de knoop ligt"
 #: skycultures/seleucid/star_names.fab:75
 #: skycultures/seleucid/star_names.fab:76
 msgid "the two stars in the rump of the Lion"
-msgstr "de twee sterren in het staartstuk van de leeuw"
+msgstr "de twee sterren in het achterdeel van de leeuw"
 
 #: skycultures/seleucid/star_names.fab:77
 msgid "the tail of the Raven"
@@ -53706,7 +53715,7 @@ msgstr "Puma of jaguar"
 
 #: skycultures/tukano/constellation_names.eng.fab:6
 msgid "Group of Stars"
-msgstr "Sterren groep"
+msgstr "Groep sterren"
 
 #: skycultures/tukano/constellation_names.eng.fab:7
 msgid "A kind of grill to cook fish"
@@ -53787,7 +53796,7 @@ msgstr "Aarde oven"
 
 #: skycultures/vanuatu_netwar/constellation_names.eng.fab:10
 msgid "Ashes"
-msgstr "Ashes"
+msgstr "Asse"
 
 #: skycultures/vanuatu_netwar/star_names.fab:1
 msgid "Kapaumeta"
@@ -53803,7 +53812,7 @@ msgstr "Mawuk"
 
 #: skycultures/vanuatu_netwar/planet_names.fab:3
 msgid "Fétukai (on morning sky), Kéwita (on evening sky)"
-msgstr "Fétukai (aan de ochtend hemel), Kéwita (aan de avond hemel)"
+msgstr "Fétukai (aan de ochtendhemel), Kéwita (aan de avondhemel)"
 
 #: skycultures/vanuatu_netwar/planet_names.fab:4
 msgid "Karatéi"
@@ -53833,28 +53842,28 @@ msgstr "Grote diamant"
 #: skycultures/western/asterism_names.eng.fab:3
 msgctxt "asterism"
 msgid "Spring Triangle"
-msgstr "Lente driehoek"
+msgstr "Lentedriehoek"
 
 #: skycultures/western/asterism_names.eng.fab:4
 #: skycultures/western_rey/asterism_names.eng.fab:19
 msgctxt "asterism"
 msgid "Summer Triangle"
-msgstr "Zomer driehoek"
+msgstr "Zomerdriehoek"
 
 #: skycultures/western/asterism_names.eng.fab:5
 msgctxt "asterism"
 msgid "Great Square of Pegasus"
-msgstr "Groot plein van Pegasus"
+msgstr "Vierkant van Pegasus (herftsvierkant)"
 
 #: skycultures/western/asterism_names.eng.fab:6
 msgctxt "asterism"
 msgid "Winter Triangle"
-msgstr "Winter driehoek"
+msgstr "Winterdriehoek"
 
 #: skycultures/western/asterism_names.eng.fab:7
 msgctxt "asterism"
 msgid "Winter Hexagon (Winter Circle)"
-msgstr "Winter Hexagon (Winter cirkel)"
+msgstr "Winterzeshoek (Winter cirkel)"
 
 #: skycultures/western/asterism_names.eng.fab:8
 msgctxt "asterism"
@@ -53899,7 +53908,7 @@ msgstr "Zeil"
 #: skycultures/western/asterism_names.eng.fab:17
 msgctxt "asterism"
 msgid "Coathanger"
-msgstr "Kerenhanger"
+msgstr "Kleerhanger"
 
 #: skycultures/western/asterism_names.eng.fab:18
 msgctxt "asterism"
@@ -53909,7 +53918,7 @@ msgstr "Mini-Cassiopeia"
 #: skycultures/western/asterism_names.eng.fab:19
 msgctxt "asterism"
 msgid "Job's Coffin"
-msgstr "Jobs lijkkist"
+msgstr "Job's doodskist"
 
 #: skycultures/western/asterism_names.eng.fab:20
 msgctxt "asterism"
@@ -53919,17 +53928,17 @@ msgstr "V van stier"
 #: skycultures/western/asterism_names.eng.fab:21
 msgctxt "asterism"
 msgid "Triangulum Minus"
-msgstr "Triangulum Minus"
+msgstr "Kleine driehoek"
 
 #: skycultures/western/asterism_names.eng.fab:22
 msgctxt "asterism"
 msgid "Ptolemy's Triangle"
-msgstr "Ptolemy's driehoek"
+msgstr "Driehoek van Ptolemaeus"
 
 #: skycultures/western/asterism_names.eng.fab:23
 msgctxt "asterism"
 msgid "Bier"
-msgstr "Bier"
+msgstr "Lijkbaar"
 
 #: skycultures/western/asterism_names.eng.fab:24
 msgctxt "asterism"
@@ -53954,7 +53963,7 @@ msgstr "De aanwijzers"
 #: skycultures/western/asterism_names.eng.fab:30
 msgctxt "asterism"
 msgid "Dragon Head (Lozenge)"
-msgstr "Drakenkop (Lozenge)"
+msgstr "Drakenkop (Lozenge, Ruit)"
 
 #: skycultures/western/asterism_names.eng.fab:31
 msgctxt "asterism"
@@ -53964,17 +53973,17 @@ msgstr "Hoofd van Medusa Gorgon"
 #: skycultures/western/asterism_names.eng.fab:32
 msgctxt "asterism"
 msgid "Goatlings (Kids)"
-msgstr "Goatlings (Kinderen)"
+msgstr "Kleine geitjes"
 
 #: skycultures/western/asterism_names.eng.fab:33
 msgctxt "asterism"
 msgid "The Y in Aquarius (The Urn or Water Jar)"
-msgstr "De Y in Waterman (De urn of de waterkruik)"
+msgstr "De Y in Waterman (urn, waterkruik)"
 
 #: skycultures/western/asterism_names.eng.fab:34
 msgctxt "asterism"
 msgid "Orion's Belt"
-msgstr "Orions riem"
+msgstr "Gordel van Orion (Driekoningen, Jacobsstaf)"
 
 #: skycultures/western/asterism_names.eng.fab:35
 msgctxt "asterism"
@@ -54030,17 +54039,17 @@ msgstr "Egyptisch kruis"
 #: skycultures/western_rey/asterism_names.eng.fab:21
 msgctxt "asterism"
 msgid "False Cross"
-msgstr "Vals kruis"
+msgstr "Vals zuiderkruis"
 
 #: skycultures/western/asterism_names.eng.fab:47
 msgctxt "asterism"
 msgid "Diamond Cross"
-msgstr "Diamant kruis"
+msgstr "Diamantkruis"
 
 #: skycultures/western/asterism_names.eng.fab:48
 msgctxt "asterism"
 msgid "Circlet"
-msgstr "Circelt"
+msgstr "Cirkeltje"
 
 #: skycultures/western/asterism_names.eng.fab:49
 msgctxt "asterism"
@@ -54086,7 +54095,7 @@ msgstr "Het trapezium"
 #: skycultures/western/asterism_names.eng.fab:58
 msgctxt "asterism"
 msgid "The Three Patriarchs"
-msgstr "De drie Patriarchen"
+msgstr "De drie Patriarchen (Drie wijzen)"
 
 #: skycultures/western/asterism_names.eng.fab:59
 msgctxt "asterism"
@@ -54096,12 +54105,12 @@ msgstr "De noordelijke vlieg"
 #: skycultures/western/asterism_names.eng.fab:61
 msgctxt "asterism"
 msgid "Davis' Dog"
-msgstr "Davis zijn hond"
+msgstr "Hond van Davis"
 
 #: skycultures/western/asterism_names.eng.fab:62
 msgctxt "asterism"
 msgid "Honores Friderici (Frederick's Glory)"
-msgstr "Honores Friderici (Fredericks glorie)"
+msgstr "Honores Friderici (Frederiks glorie)"
 
 #: skycultures/western/asterism_names.eng.fab:63
 msgctxt "asterism"
@@ -54146,7 +54155,7 @@ msgstr "Mini-Cassiopeia (Kemble 2)"
 #: skycultures/western/asterism_names.eng.fab:72
 msgctxt "asterism"
 msgid "Napoleon's Hat"
-msgstr "Napoleons hoed"
+msgstr "Hoed van Napoleon"
 
 #: skycultures/western/asterism_names.eng.fab:73
 msgctxt "asterism"
@@ -56880,7 +56889,7 @@ msgstr "poot"
 
 #: skycultures/western_rey/constellation_names.eng.fab:23
 msgid "rump"
-msgstr "achterwerk"
+msgstr "achterdeel"
 
 #: skycultures/western_rey/constellation_names.eng.fab:31
 #: skycultures/western_rey/constellation_names.eng.fab:98
@@ -56915,7 +56924,7 @@ msgstr "Hoeksteen"
 #: skycultures/western_rey/constellation_names.eng.fab:45
 #: skycultures/western_rey/constellation_names.eng.fab:75
 msgid "club"
-msgstr "club"
+msgstr "knuppel"
 
 #: skycultures/western_rey/constellation_names.eng.fab:49
 msgid "the chain"
@@ -56962,7 +56971,7 @@ msgstr "arm"
 
 #: skycultures/western_rey/constellation_names.eng.fab:107
 msgid "cat's eyes"
-msgstr "katten ogen"
+msgstr "katteogen"
 
 #: skycultures/western_rey/constellation_names.eng.fab:108
 msgid "claws"
@@ -56995,19 +57004,19 @@ msgstr "Westerse vis"
 
 #: skycultures/western_rey/constellation_names.eng.fab:145
 msgid "figurehead"
-msgstr "vingerhoed"
+msgstr "boegbeeld"
 
 #: skycultures/western_rey/constellation_names.eng.fab:147
 msgid "transom"
-msgstr "dwarsbalk"
+msgstr "spiegel"
 
 #: skycultures/western_rey/constellation_names.eng.fab:169
 msgid "front legs"
-msgstr "voorbenen"
+msgstr "voorpoten"
 
 #: skycultures/western_rey/constellation_names.eng.fab:170
 msgid "hind legs"
-msgstr "achterbenen"
+msgstr "achterpoten"
 
 #: skycultures/western_rey/constellation_names.eng.fab:176
 msgid "ears"
@@ -57029,7 +57038,7 @@ msgstr "Steelpan"
 #: skycultures/western_rey/asterism_names.eng.fab:10
 msgctxt "asterism"
 msgid "Virgin's Diamond"
-msgstr "Diamant van de maagd"
+msgstr "Ruit van de maagd"
 
 #: skycultures/western_rey/asterism_names.eng.fab:12
 msgctxt "asterism"
@@ -57044,7 +57053,7 @@ msgstr "Grote zeshoek"
 #: skycultures/western_rey/asterism_names.eng.fab:16
 msgctxt "asterism"
 msgid "Serpent's tail"
-msgstr "Slandenstaart"
+msgstr "Slangenstaart"
 
 #: skycultures/western_rey/asterism_names.eng.fab:17
 msgctxt "asterism"
@@ -57105,7 +57114,7 @@ msgstr "Lacaille 8760"
 
 #: skycultures/western_SnT/star_names.fab:218
 msgid "Herschel's Garnet Star"
-msgstr "Herschels granaat ster"
+msgstr "Granaatster"
 
 #: skycultures/western_SnT/star_names.fab:227
 msgid "Krueger 60"

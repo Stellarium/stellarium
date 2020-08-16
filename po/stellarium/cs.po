@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-08 21:58+0700\n"
+"POT-Creation-Date: 2020-08-16 21:28+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -194,7 +194,7 @@ msgstr "První vertikál"
 #: src/gui/AstroCalcDialog.cpp:3465 src/gui/AstroCalcDialog.cpp:3743
 #: src/gui/AstroCalcDialog.cpp:3745 src/ui_viewDialog.h:3308
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
 msgid "Altitude"
 msgstr "Výška"
 
@@ -510,7 +510,7 @@ msgstr "Autor"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:412
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -1842,13 +1842,26 @@ msgstr "Objekty vzdáleného vesmíru"
 msgid "Toggle DSO type filter"
 msgstr "Vypnout/zapnout mlhovinový filtr"
 
-#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:953
+#: src/core/modules/NebulaMgr.cpp:1422 src/StelMainView.cpp:953
 msgid "Attention!"
 msgstr "Pozor!"
 
-#: src/core/modules/NebulaMgr.cpp:1421
-msgid "Mismatch the version of catalog - expected version of catalog is"
-msgstr "Neshoda ve verzi katalogu - očekávaná verze katalogu je"
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "DSO catalog version mismatch"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422 src/core/SimbadSearcher.cpp:175
+#: src/core/SimbadSearcher.cpp:177
+msgid "Found"
+msgstr "Nalezeno"
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "Expected"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "See Logfile for instructions."
+msgstr ""
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:228 plugins/Quasars/src/Quasar.cpp:140
@@ -3539,10 +3552,6 @@ msgstr "Dotazování"
 msgid "Not found"
 msgstr "Nenalezeno"
 
-#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
-msgid "Found"
-msgstr "Nalezeno"
-
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:310
 msgctxt "solar time"
@@ -4685,15 +4694,15 @@ msgstr ""
 "nekonvexních objektů ve sluneční soustavě. U některých objektů může být "
 "snížena kvalita simulace polostínu."
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:906
 msgid "Abbreviated"
 msgstr "Zkrácené"
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:907
 msgid "Native"
 msgstr "Nativní"
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:908
 msgid "Translated"
 msgstr "Přeložené"
 
@@ -5065,7 +5074,7 @@ msgstr "Deklinace"
 #: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:619
 #: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:803
 #: src/gui/AstroCalcDialog.cpp:840 src/gui/AstroCalcDialog.cpp:1503
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1319
 msgid "Azimuth"
 msgstr "Azimut"
 
@@ -5325,14 +5334,14 @@ msgstr "hvězda s velkým vlastním pohybem"
 #: src/gui/AstroCalcDialog.cpp:1361 src/gui/AstroCalcDialog.cpp:1948
 #: src/gui/AstroCalcDialog.cpp:2225 src/gui/AstroCalcDialog.cpp:4068
 #: src/gui/AstroCalcDialog.cpp:6109
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1392
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Sešit Microsoft Excel Open XML"
 
 #: src/gui/AstroCalcDialog.cpp:1363 src/gui/AstroCalcDialog.cpp:1950
 #: src/gui/AstroCalcDialog.cpp:2227 src/gui/AstroCalcDialog.cpp:4070
 #: src/gui/AstroCalcDialog.cpp:6111
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1396
 msgid "CSV (Comma delimited)"
 msgstr "CSV (oddělené čárkami)"
 
@@ -5744,7 +5753,7 @@ msgstr "Rektascenze"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3334 src/gui/AstroCalcDialog.cpp:3392
 #: src/gui/AstroCalcDialog.cpp:3506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -10988,7 +10997,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Další nastavení pro grafické uživatelské rozhraní"
 
 #: src/ui_configurationDialog.h:1589
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Čas"
@@ -11154,7 +11163,7 @@ msgstr "Vše dostupné"
 msgid "Display no information"
 msgstr "Nezobrazovat žádné informace"
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2416
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Nic"
@@ -12887,8 +12896,8 @@ msgstr ""
 "Počítali jsme. Chtěli jsme, aby jsme byli na Havaji."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
@@ -12907,8 +12916,8 @@ msgid "Links"
 msgstr "Odkazy"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
@@ -12932,8 +12941,8 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
@@ -12953,8 +12962,8 @@ msgstr "Pokud máte otázku, můžete {dostat odpověď zde}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
@@ -12974,8 +12983,8 @@ msgstr "Hlášení chyb a požadavky na další funkce můžete učinit {zde}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
@@ -13237,122 +13246,122 @@ msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr "Okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1968
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr "Binokulár"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1988
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "OV okuláru: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:1995
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "zZP okuláru: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr "Čočka #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Čočka #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:2015
 msgid "Lens: none"
 msgstr "Čočka: žádná"
 
-#: plugins/Oculars/src/Oculars.cpp:2028 plugins/Oculars/src/Oculars.cpp:2089
+#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Dalekohled #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2037
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Zvětšení: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Výstupní pupila: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2053
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 #, qt-format
 msgid "FOV: %1"
 msgstr "Zorné pole: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Rozměry: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2073
+#: plugins/Oculars/src/Oculars.cpp:2075
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Senzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2081
+#: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Senzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2094
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Dalekohled #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Lens"
 msgstr "Č&očka"
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Previous lens"
 msgstr "&Předchozí čočka"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Next lens"
 msgstr "&Další čočka"
 
-#: plugins/Oculars/src/Oculars.cpp:2444
+#: plugins/Oculars/src/Oculars.cpp:2446
 msgid "&Telescope"
 msgstr "&Dalekohled"
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2447
 msgid "&Previous telescope"
 msgstr "&Předchozí dalekohled"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2448
 msgid "&Next telescope"
 msgstr "&Následující dalekohled"
 
@@ -13660,18 +13669,14 @@ msgstr "Můžete vypnout/zapnout záměrný kříž v zorném poli."
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
+"turned on the Ocular view. This feature draws three concentric circles of "
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Můžete zapnout hledáček Telrad; to můžete provést pouze, když jste nezapnuli"
-" zobrazení okuláru. Tato funkce vykresluje tři soustředné kružnice na 0.5%1,"
-" 2.0%1 a 4.0%1, což Vám pomůže zjistit, co uvidíte pouhým okem skrz hledáček"
-" Telrad (nebo podobný)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "Pokud narazíte na jakékoliv problémy, prosím dejte nám vědět."
+msgid "If you find any issues, please let me know. Enjoy!"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Hot Keys"
@@ -13684,6 +13689,34 @@ msgid ""
 msgstr ""
 "Klávesové zkratky zásuvného modulu lze editovat v editoru klávesových "
 "zkratek (F7)."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Notes"
+msgstr "Poznámky"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+msgid ""
+"The sensor view has a feature to show sensor crop overlay with information "
+"about size of crop, but in some cases size of this rectangle may be adjusted"
+" by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"binning 3)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#, qt-format
+msgid ""
+"Information about size of crop overlay, which was adjusted by binning, will "
+"be marked by %1."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+msgid ""
+"Of course this mark may be visible in other reasons also: the crop size is "
+"larger than sensor size."
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
 msgid "Interface"
@@ -14483,42 +14516,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:772
 msgctxt "operational status"
 msgid "operational"
 msgstr "funkční"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "nefunkční"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:774
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "částečně funkční"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:775
 msgctxt "operational status"
 msgid "standby"
 msgstr "v pohotovosti"
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:776
 msgctxt "operational status"
 msgid "spare"
 msgstr "rezervní"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:777
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "rozšířená mise"
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:778
 msgctxt "operational status"
 msgid "decayed"
 msgstr "rozpadlý"
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:780
 msgctxt "operational status"
 msgid "unknown"
 msgstr "neznámý"
@@ -14696,27 +14729,39 @@ msgstr "Technické poznámky"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
-" as the input. "
+" as the input."
 msgstr ""
-"Pozice jsou vypočítávány pomocí metod SGP4 a SDP4 za pomoc vstupních dat "
-"NORAD TLE. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
-"the revised Spacetrack Report #3 (including Spacetrack Report #6). "
+"the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
-"Kód oběžných výpočtů napsal Jose Luis Canales podle revidovaného hlášení "
-"Spacetrack #3 (zahrnuto je i hlášení Spacetrack #6). "
 
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
-#. link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+msgid ""
+"To calculate an approximate visual magnitude of satellites we use data from "
+"Mike McCants' database (with permissions) of the radar cross-section (RCS) "
+"and standard magnitudes."
+msgstr ""
+
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
-#, qt-format
-msgid "See %1this document%2 for details."
-msgstr "Viz %1 tento dokument %2 pro podrobnosti."
+msgid ""
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
+msgid ""
+"We use a spherical shape of satellite to calculate an approximate visual "
+"magnitude from RCS values."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+msgid "For modeling Starlink magnitudes we use Anthony Mallama's formula"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -14725,7 +14770,7 @@ msgstr "Viz %1 tento dokument %2 pro podrobnosti."
 msgid "Next update"
 msgstr "Příští aktualizace"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -14734,8 +14779,8 @@ msgstr "Příští aktualizace"
 msgid "Internet updates disabled"
 msgstr "Aktualizace přes internet zakázány"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -14749,7 +14794,7 @@ msgstr "Aktualizace přes internet zakázány"
 msgid "Updating now..."
 msgstr "Probíhá aktualizace..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:752
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -14759,7 +14804,7 @@ msgid "< 1 minute"
 msgstr "< 1 minuta"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:759
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -14770,7 +14815,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -14779,34 +14824,34 @@ msgstr "m"
 msgid "Update error"
 msgstr "Chyba aktualizace"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "Aktualizováno %1/%2 družic; %3 přidáno; %4 odstraněno"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Aktualizováno %1/%2 družic; %3 přidáno; %4 chybí"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Warning!"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Empty string - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Invalid URL - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:879
 msgid "[new source]"
 msgstr "[nový zdroj]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -14822,7 +14867,7 @@ msgstr "[nový zdroj]"
 msgid "Update now"
 msgstr "Aktualizovat nyni"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14831,102 +14876,102 @@ msgstr "Aktualizovat nyni"
 msgid "Update from files"
 msgstr "Aktualizovat ze souborů"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:970
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
 msgid "[orbit calculation error]"
 msgstr "[chyba výpočtu oběžné dráhy]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
 msgid "[all newly added]"
 msgstr "[všechny nově přidané]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
 msgid "[all not displayed]"
 msgstr "[všechny nezobrazené]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
 msgid "[all displayed]"
 msgstr "[všechny zobrazené]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
 msgid "[small satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 msgid "[medium satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
 msgid "[large satellites]"
 msgstr ""
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
 msgid "[all]"
 msgstr "[všechny]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "RCS"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1004
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1006
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgid "New group..."
 msgstr "Nová skupina..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1295
 msgid "Select TLE Update File"
 msgstr "Vyberte aktualizační soubor TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
 msgid "Brightness"
 msgstr "Jasnost"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1320
 msgid "Satellite"
 msgstr "Družice"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1400
 msgid "Save predicted Iridium flares as..."
 msgstr "Uložit předpovězené záblesky Iridií jako..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1443
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1445
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1447
 msgid "Predicted Iridium flares"
 msgstr "Předpovězené záblesky Iridií"
 
@@ -17944,12 +17989,6 @@ msgstr "Časově způměrovaná hustota toku na"
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
-
-#: plugins/Pulsars/src/Pulsar.cpp:288
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Notes"
-msgstr "Poznámky"
 
 #: plugins/Pulsars/src/Pulsar.cpp:376
 msgid ""

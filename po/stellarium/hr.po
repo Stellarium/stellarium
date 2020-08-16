@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-08 21:58+0700\n"
+"POT-Creation-Date: 2020-08-16 21:28+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2020\n"
 "Language-Team: Croatian (https://www.transifex.com/stellarium/teams/80998/hr/)\n"
@@ -194,7 +194,7 @@ msgstr "Prvi vertikal"
 #: src/gui/AstroCalcDialog.cpp:3465 src/gui/AstroCalcDialog.cpp:3743
 #: src/gui/AstroCalcDialog.cpp:3745 src/ui_viewDialog.h:3308
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
 msgid "Altitude"
 msgstr "Visina"
 
@@ -510,7 +510,7 @@ msgstr "Autor"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:412
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -1849,13 +1849,26 @@ msgstr "Objekti dubokog svemira"
 msgid "Toggle DSO type filter"
 msgstr "Uključi/isključi filter vrsta ODS-a"
 
-#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:953
+#: src/core/modules/NebulaMgr.cpp:1422 src/StelMainView.cpp:953
 msgid "Attention!"
 msgstr "Pažnja!"
 
-#: src/core/modules/NebulaMgr.cpp:1421
-msgid "Mismatch the version of catalog - expected version of catalog is"
-msgstr "Nepodudaranje verzije kataloga - očekivana verzija kataloga je"
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "DSO catalog version mismatch"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422 src/core/SimbadSearcher.cpp:175
+#: src/core/SimbadSearcher.cpp:177
+msgid "Found"
+msgstr "Pronađeno"
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "Expected"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "See Logfile for instructions."
+msgstr ""
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:228 plugins/Quasars/src/Quasar.cpp:140
@@ -3548,10 +3561,6 @@ msgstr "Slanje upita"
 msgid "Not found"
 msgstr "Nije pronađeno"
 
-#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
-msgid "Found"
-msgstr "Pronađeno"
-
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:310
 msgctxt "solar time"
@@ -4697,15 +4706,15 @@ msgstr ""
 "nekonveksnih objekata Sunčevog sustava . Moguća je smanjenje kvalitete "
 "penumbra sjene područja na nekim objektima."
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:906
 msgid "Abbreviated"
 msgstr "Skraćeno"
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:907
 msgid "Native"
 msgstr "Narodno"
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:908
 msgid "Translated"
 msgstr "Prevedeno"
 
@@ -5076,7 +5085,7 @@ msgstr "Deklinacija"
 #: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:619
 #: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:803
 #: src/gui/AstroCalcDialog.cpp:840 src/gui/AstroCalcDialog.cpp:1503
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1319
 msgid "Azimuth"
 msgstr "Azimut"
 
@@ -5336,14 +5345,14 @@ msgstr "zvijezda sa velikim vlastitim gibanjem"
 #: src/gui/AstroCalcDialog.cpp:1361 src/gui/AstroCalcDialog.cpp:1948
 #: src/gui/AstroCalcDialog.cpp:2225 src/gui/AstroCalcDialog.cpp:4068
 #: src/gui/AstroCalcDialog.cpp:6109
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1392
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
 #: src/gui/AstroCalcDialog.cpp:1363 src/gui/AstroCalcDialog.cpp:1950
 #: src/gui/AstroCalcDialog.cpp:2227 src/gui/AstroCalcDialog.cpp:4070
 #: src/gui/AstroCalcDialog.cpp:6111
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1396
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Comma delimited)"
 
@@ -5755,7 +5764,7 @@ msgstr "Rektascenzija"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3334 src/gui/AstroCalcDialog.cpp:3392
 #: src/gui/AstroCalcDialog.cpp:3506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -10052,7 +10061,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3046
 msgid "Show Moon's halo"
-msgstr ""
+msgstr "Prikaži Mjesečev halo"
 
 #: src/ui_viewDialog.h:3047
 msgid "Only orbits of major planets"
@@ -11011,7 +11020,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Dodatne postavke grafičkog korisničkog sučelja"
 
 #: src/ui_configurationDialog.h:1589
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Vrijeme"
@@ -11088,7 +11097,7 @@ msgstr "Zadane opcije"
 
 #: src/ui_configurationDialog.h:1620
 msgid "Save view"
-msgstr ""
+msgstr "Spremi pogled"
 
 #: src/ui_configurationDialog.h:1622
 msgid ""
@@ -11176,7 +11185,7 @@ msgstr "Sve raspoložive"
 msgid "Display no information"
 msgstr "Ne prikazuj podatke"
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2416
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Ništa"
@@ -12914,8 +12923,8 @@ msgstr ""
 "laboratorija. Proračunavali smo. Htjeli smo biti na Havajima."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
@@ -12934,8 +12943,8 @@ msgid "Links"
 msgstr "Linkovi"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
@@ -12959,8 +12968,8 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
@@ -12980,8 +12989,8 @@ msgstr "Ukoliko imate pitanje, možete {ovdje dobiti odgovor}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
@@ -13002,8 +13011,8 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
@@ -13266,122 +13275,122 @@ msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr "Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1968
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr "Dvogled"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1988
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Žar. dulj. okulara: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:1995
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Priv. vidno polje okulara: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr "Leća #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Leća #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:2015
 msgid "Lens: none"
 msgstr "Leća: nijedna"
 
-#: plugins/Oculars/src/Oculars.cpp:2028 plugins/Oculars/src/Oculars.cpp:2089
+#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2037
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Povećanje: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Izlazna pupila: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2053
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 #, qt-format
 msgid "FOV: %1"
 msgstr "Vidno polje: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimenzije: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2073
+#: plugins/Oculars/src/Oculars.cpp:2075
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Senzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2081
+#: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Senzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2094
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Lens"
 msgstr "&Leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Previous lens"
 msgstr "&Prethodna leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Next lens"
 msgstr "&Slijedeća leća"
 
-#: plugins/Oculars/src/Oculars.cpp:2444
+#: plugins/Oculars/src/Oculars.cpp:2446
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2447
 msgid "&Previous telescope"
 msgstr "&Prethodni teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2448
 msgid "&Next telescope"
 msgstr "&Slijedeći teleskop"
 
@@ -13691,18 +13700,14 @@ msgstr "Možete uključiti/isključiti nitni križ u pogledu."
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
+"turned on the Ocular view. This feature draws three concentric circles of "
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Možete uključiti/isključiti Telrad tražioc; ova radnja je moguća samo u "
-"slučaju kad Okularni pogled nije uključen. Ova mogućnost iscrtava tri "
-"koncentrične kružnice od 0.5%1, 2.0%1, and 4.0%1, kako bi pomogla dočarati "
-"ono što bi ste vidjeli golim okom kroz Telrad (ili slični) tražioc."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "Ukolko naiđete na bilo kakve poteškoće, molimo javite. Uživajte!"
+msgid "If you find any issues, please let me know. Enjoy!"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Hot Keys"
@@ -13715,6 +13720,34 @@ msgid ""
 msgstr ""
 "Ključne veze dodataka mogu se uređivati u uređivanju prečaca na tipkovnici "
 "(F7)."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Notes"
+msgstr "Napomene"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+msgid ""
+"The sensor view has a feature to show sensor crop overlay with information "
+"about size of crop, but in some cases size of this rectangle may be adjusted"
+" by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"binning 3)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#, qt-format
+msgid ""
+"Information about size of crop overlay, which was adjusted by binning, will "
+"be marked by %1."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+msgid ""
+"Of course this mark may be visible in other reasons also: the crop size is "
+"larger than sensor size."
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
 msgid "Interface"
@@ -14514,42 +14547,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:772
 msgctxt "operational status"
 msgid "operational"
 msgstr "u upotrebi"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "izvan upotrebe"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:774
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "djelomično u upotrebi"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:775
 msgctxt "operational status"
 msgid "standby"
 msgstr "u pripravnosti"
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:776
 msgctxt "operational status"
 msgid "spare"
 msgstr "rezervni"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:777
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "u produženoj misiji"
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:778
 msgctxt "operational status"
 msgid "decayed"
 msgstr "u raspadu"
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:780
 msgctxt "operational status"
 msgid "unknown"
 msgstr "nepoznati"
@@ -14661,6 +14694,9 @@ msgid ""
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
 "at least 0.25 and period below 14000 minutes."
 msgstr ""
+"Visoka ekliptička orbita (HEO): geocentrične orbite s visinama perigeja "
+"ispod 70000 km, inklinacijom orbite u rasponu od 0-180 stupnjeva, "
+"ekcentriteto od najmanje 0.25 i periodom ispod 14000 minuta."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 msgid ""
@@ -14668,6 +14704,9 @@ msgid ""
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
 "eccentricity below 0.25 and period in range 1100-2000 minutes."
 msgstr ""
+"Visoka geosinkrona orbita (HGSO): geocentrične orbite iznad visine "
+"geosinkrone orbit: visina orbite u rasponu od 25-180 stupnjeva, "
+"ekscentričnost ispod 0.25 te period raspona 1100-2000 minuta."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
@@ -14731,27 +14770,39 @@ msgstr "Tehničke napomene"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
-" as the input. "
+" as the input."
 msgstr ""
-"Pozicije su proračunate koristeći se SGP4 & SDP4 metodama, koristeći NORAD "
-"TLE podatke kao ulazne."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
-"the revised Spacetrack Report #3 (including Spacetrack Report #6). "
+"the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
-"Kod za proračunavanje orbita je napisao Jose Luis Canales prema revidiranom "
-"Spacetrack izvješću #3 (uključujući Spacetrack izvješće #6). "
 
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
-#. link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+msgid ""
+"To calculate an approximate visual magnitude of satellites we use data from "
+"Mike McCants' database (with permissions) of the radar cross-section (RCS) "
+"and standard magnitudes."
+msgstr ""
+
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
-#, qt-format
-msgid "See %1this document%2 for details."
-msgstr "Pogledajte %1 ovaj dokument %2 za detalje."
+msgid ""
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
+msgid ""
+"We use a spherical shape of satellite to calculate an approximate visual "
+"magnitude from RCS values."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+msgid "For modeling Starlink magnitudes we use Anthony Mallama's formula"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -14760,7 +14811,7 @@ msgstr "Pogledajte %1 ovaj dokument %2 za detalje."
 msgid "Next update"
 msgstr "Slijedeće ažuriranje"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -14769,8 +14820,8 @@ msgstr "Slijedeće ažuriranje"
 msgid "Internet updates disabled"
 msgstr "Internet ažuriranja su onemogućena"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -14784,7 +14835,7 @@ msgstr "Internet ažuriranja su onemogućena"
 msgid "Updating now..."
 msgstr "Ažuriranje u tijeku..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:752
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -14794,7 +14845,7 @@ msgid "< 1 minute"
 msgstr "< 1 minuta"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:759
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -14805,7 +14856,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -14814,34 +14865,34 @@ msgstr "m"
 msgid "Update error"
 msgstr "Greška u ažuriranju"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "Ažurirani %1/%2 satelit(i); %3 dodano; %4 uklonjeno"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Ažurirani %1/%2 satelit(i); %3 dodano; %4 nedostaje"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Warning!"
-msgstr ""
+msgstr "Upozorenje!"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Empty string - not saving"
-msgstr ""
+msgstr "Prazni niz - nije moguće spremiti"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Invalid URL - not saving"
-msgstr ""
+msgstr "Nepravilna URL adresa - nije moguće spremiti"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:879
 msgid "[new source]"
 msgstr "[novi izvor]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -14857,7 +14908,7 @@ msgstr "[novi izvor]"
 msgid "Update now"
 msgstr "Ažuriraj odmah"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14866,68 +14917,68 @@ msgstr "Ažuriraj odmah"
 msgid "Update from files"
 msgstr "Ažuriranje iz datoteke"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:970
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
 msgid "[orbit calculation error]"
 msgstr "[greška u proračunu orbite]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
 msgid "[all newly added]"
 msgstr "[svi novo dodani]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
 msgid "[all not displayed]"
 msgstr "[svi ne prikazani]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
 msgid "[all displayed]"
 msgstr "[svi prikazani]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
 msgid "[small satellites]"
 msgstr "[mali sateliti]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 msgid "[medium satellites]"
 msgstr "[srednji sateliti]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
 msgid "[large satellites]"
 msgstr "[veliki sateliti]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
 msgid "[all]"
 msgstr "[svi]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "RCS"
 msgstr "RCS"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1004
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1006
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
@@ -14935,7 +14986,7 @@ msgstr ""
 " \n"
 "Radarski poprečni presjek (RCS) je mjera prepoznatljivosti objekta s radarom.  Veći RCS ukazuje na to da se objekt lakše otkriva."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -14944,28 +14995,28 @@ msgstr ""
 "polovice faze te na 1000 km udaljenosti od promatrača."
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgid "New group..."
 msgstr "Nova grupa..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1295
 msgid "Select TLE Update File"
 msgstr "Odaberi TLE datoteku za ažuriranje"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
 msgid "Brightness"
 msgstr "Sjaj"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1320
 msgid "Satellite"
 msgstr "Satelit"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1400
 msgid "Save predicted Iridium flares as..."
 msgstr "Spremi predviđene bljeskove Iridium-a kao..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1443
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1445
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1447
 msgid "Predicted Iridium flares"
 msgstr "Predviđeni bljeskovi Iridiuma"
 
@@ -15057,7 +15108,7 @@ msgstr "Veličina fonta naziva (u pixelima):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:851
 msgid "Show satellites as markers"
-msgstr ""
+msgstr "Prikaži satelite kao oznake"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:852
 msgid "Hide invisible artificial satellites"
@@ -15178,11 +15229,11 @@ msgstr "Dodaj novi izvor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:924
 msgid "Edit selected source"
-msgstr ""
+msgstr "Uredi odabrani izvor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:927
 msgid "Save source"
-msgstr ""
+msgstr "Spremi izvor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:930
 msgid "Remove selected source"
@@ -18005,12 +18056,6 @@ msgstr "Srednja vrijednost gustoće toka polja kroz vrijeme"
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
-
-#: plugins/Pulsars/src/Pulsar.cpp:288
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Notes"
-msgstr "Napomene"
 
 #: plugins/Pulsars/src/Pulsar.cpp:376
 msgid ""

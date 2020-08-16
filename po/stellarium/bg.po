@@ -9,15 +9,16 @@
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
 # Petko Kirilov <kirilovpetko@gmail.com>, 2019
 # Alexander Shopov <ash@kambanaria.org>, 2019
+# Georgi Georgiev <georgiev_1994@abv.bg>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-08 21:58+0700\n"
+"POT-Creation-Date: 2020-08-16 21:28+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2019\n"
+"Last-Translator: Georgi Georgiev <georgiev_1994@abv.bg>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -181,7 +182,7 @@ msgstr "Свръхгалактичен екватор"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:719 src/ui_viewDialog.h:3329
 msgid "O./C. longitude"
-msgstr "Дължина оп./съед."
+msgstr "Дължина на оп./съед."
 
 #: src/core/modules/GridLinesMgr.cpp:723
 #: src/core/modules/GridLinesMgr.cpp:1730 src/ui_viewDialog.h:3447
@@ -196,7 +197,7 @@ msgstr "Основен вертикал"
 #: src/gui/AstroCalcDialog.cpp:3465 src/gui/AstroCalcDialog.cpp:3743
 #: src/gui/AstroCalcDialog.cpp:3745 src/ui_viewDialog.h:3308
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
 msgid "Altitude"
 msgstr "Височина"
 
@@ -216,57 +217,57 @@ msgstr "Кръг на постоянна видимост"
 #: src/core/modules/GridLinesMgr.cpp:1265
 #: src/core/modules/GridLinesMgr.cpp:1274
 msgid "NCP"
-msgstr "P"
+msgstr "СНБ"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:1267
 #: src/core/modules/GridLinesMgr.cpp:1276
 msgid "SCP"
-msgstr "P′"
+msgstr "ЮНБ"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:1283
 msgctxt "zenith"
 msgid "Z"
-msgstr "Z"
+msgstr "З"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:1285
 msgctxt "nadir"
 msgid "Z'"
-msgstr "Z′"
+msgstr "Н"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:1292
 #: src/core/modules/GridLinesMgr.cpp:1301
 msgid "NEP"
-msgstr "Π"
+msgstr "СЕП"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:1294
 #: src/core/modules/GridLinesMgr.cpp:1303
 msgid "SEP"
-msgstr "Π′"
+msgstr "ЮЕП"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1310
 msgid "NGP"
-msgstr "G"
+msgstr "СГП"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1312
 msgid "SGP"
-msgstr "G′"
+msgstr "ЮГП"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1319
 msgid "NSGP"
-msgstr "SG"
+msgstr "ССП"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1321
 msgid "SSGP"
-msgstr "SG′"
+msgstr "ЮСП"
 
 #. TRANSLATORS: Antisolar Point
 #: src/core/modules/GridLinesMgr.cpp:1356
@@ -276,12 +277,12 @@ msgstr "ПЗТ"
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1363
 msgid "Apex"
-msgstr "Апекс"
+msgstr "Връхна точка"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
 #: src/core/modules/GridLinesMgr.cpp:1365
 msgid "Antapex"
-msgstr "Антиапекс"
+msgstr "Надир"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1375 src/core/modules/Planet.cpp:660
@@ -291,7 +292,7 @@ msgstr "Антиапекс"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
-msgstr "km/s"
+msgstr "км/с"
 
 #: src/core/modules/GridLinesMgr.cpp:1712
 msgid "Grids and lines"
@@ -305,7 +306,7 @@ msgstr "Екваториална мрежа"
 #: src/core/modules/GridLinesMgr.cpp:1714 src/ui_viewDialog.h:3268
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
-msgstr "Азимутна мрежа"
+msgstr "Азимутална мрежа"
 
 #: src/core/modules/GridLinesMgr.cpp:1715
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
@@ -376,7 +377,7 @@ msgstr "Кръгове на прецесия"
 
 #: src/core/modules/GridLinesMgr.cpp:1731
 msgid "Current Vertical"
-msgstr ""
+msgstr "Текущ вертикал"
 
 #: src/core/modules/GridLinesMgr.cpp:1732
 msgid "Colure Lines"
@@ -432,11 +433,11 @@ msgstr "Точки на слънцестоене"
 
 #: src/core/modules/GridLinesMgr.cpp:1745 src/ui_viewDialog.h:3372
 msgid "Antisolar point"
-msgstr "Противозвездна точка"
+msgstr "Антисоларна точка"
 
 #: src/core/modules/GridLinesMgr.cpp:1746 src/ui_viewDialog.h:3480
 msgid "Apex points"
-msgstr "Точки на апекса"
+msgstr "Върхови точки"
 
 #: src/core/modules/SpecialMarkersMgr.cpp:218
 msgid "FOV Center marker"
@@ -512,10 +513,10 @@ msgstr "Автор"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:918 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:412
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgctxt "distance"
 msgid "m"
-msgstr "m"
+msgstr "м"
 
 #: src/core/modules/LandscapeMgr.cpp:921 src/ui_locationDialogGui.h:484
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
@@ -527,7 +528,7 @@ msgstr "Местоположение"
 #: src/core/modules/LandscapeMgr.cpp:942
 msgctxt "pressure"
 msgid "hPa"
-msgstr "hPa"
+msgstr "хПа"
 
 #: src/core/modules/LandscapeMgr.cpp:952
 msgid "extinction coefficient"
@@ -552,30 +553,30 @@ msgstr "недокументиран релеф"
 
 #: src/core/modules/NomenclatureItem.cpp:129
 msgid "Undocumented landform type."
-msgstr "Недокументиран вид образувания"
+msgstr "Недокументиран тип образувание"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:133
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr "Море, площи с ниско албедо без значение за геологията"
+msgstr "\"Море\", площи с ниско албедо без значение за геологията."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:138
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr "Езеро или малка, тъмна равнина с резки граници"
+msgstr "\"Езеро\" или малка, тъмна равнина с резки граници."
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
 #: src/core/modules/NomenclatureItem.cpp:141
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
-"Море, голяма площ от тъмни материали, счита се, че са пълни с течни "
+"\"Море\", голяма площ от тъмни материали, счита се, че са пълни с течни "
 "въглеводороди"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:144
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
-msgstr "Заливи в морета и езера от течни въглеводороди"
+msgstr "\"Заливи\" в морета и езера от течни въглеводороди."
 
 #: src/core/modules/NomenclatureItem.cpp:206
 msgid "geologic term"
@@ -598,11 +599,11 @@ msgstr "Диаметър"
 #: plugins/Satellites/src/Satellite.cpp:375
 msgctxt "distance"
 msgid "km"
-msgstr "km"
+msgstr "км"
 
 #: src/core/modules/NomenclatureItem.cpp:225
 msgid "Planetographic long./lat."
-msgstr "Планетографски дълж./шир."
+msgstr "Планетографска дълж./шир."
 
 #: src/core/modules/NomenclatureItem.cpp:226
 msgid "Celestial body"
@@ -616,7 +617,7 @@ msgstr "Описание на релеф"
 #: src/core/modules/NomenclatureItem.cpp:386
 msgctxt "landform"
 msgid "albedo feature"
-msgstr "отражателен белег"
+msgstr "отразителен белег"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:388
@@ -695,7 +696,7 @@ msgstr "ярко петно"
 #: src/core/modules/NomenclatureItem.cpp:412
 msgctxt "landform"
 msgid "farrum"
-msgstr "лавов купол"
+msgstr "купол от лава"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:414
@@ -890,7 +891,7 @@ msgstr "сателитна форма"
 #: src/core/modules/NomenclatureItem.cpp:474
 msgctxt "landform"
 msgid "saxum"
-msgstr ""
+msgstr "камък"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:476
@@ -969,83 +970,83 @@ msgstr "място на кацане"
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:502
 msgid "Geographic area distinguished by amount of reflected light."
-msgstr "Географска област с различаващо се албедо"
+msgstr "Географска област с различаващо се албедо."
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:504
 msgid "Arc-shaped feature."
-msgstr "Дъговидна форма"
+msgstr "Дъговидна форма."
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:506
 msgid "Radial-patterned feature."
-msgstr "Форма с белези от радиален център към периферията"
+msgstr "Форма с белези от радиален център към периферията."
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:508
 msgid "Chain of craters."
-msgstr "Верига от кратери"
+msgstr "Верига от кратери."
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:510
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
-msgstr "Падини със стръмни граници в групи"
+msgstr "Падини със стръмни граници в групи."
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:512
 msgid "Distinctive area of broken terrain."
-msgstr "Характерен накъсан релеф"
+msgstr "Характерен накъсан релеф."
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:514
 msgid "A deep, elongated, steep-sided depression."
-msgstr "Дълга, дълбока падина със стръмни граници"
+msgstr "Дълга, дълбока падина със стръмни граници."
 
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:516
 msgid "Small hills or knobs."
-msgstr "Малък хълм или възвишение"
+msgstr "Малък хълм или възвишение."
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:518
 msgid "Ovoid-shaped feature."
-msgstr "Вид обла форма"
+msgstr "Вид обла форма."
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:520
 msgid "A circular depression."
-msgstr "Кръгла падина"
+msgstr "Кръгла падина."
 
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:522
 msgid "Ridge."
-msgstr "Хребет"
+msgstr "Хребет."
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:524
 msgid "Active volcanic center."
-msgstr "Активен вулканичен център"
+msgstr "Активен вулканичен център."
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:526
 msgid "Bright spot."
-msgstr "Ярко петно"
+msgstr "Ярко петно."
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:528
 msgid "Pancake-like structure, or a row of such structures."
-msgstr "Палачинкообразна форма, сама или редица от няколко такива"
+msgstr "Палачинкообразна форма, сама или редица от няколко такива."
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:530
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr "Много нисък, нагънат хребет"
+msgstr "Много нисък, нагънат хребет."
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:532
 msgid "Flow terrain."
-msgstr "Терен в резултат от поток"
+msgstr "Терен в резултат от поток."
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:534
@@ -1062,7 +1063,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:538
 msgid "Long, narrow depression."
-msgstr "Дълга, тясна падина"
+msgstr "Дълга, тясна падина."
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:540
@@ -1071,105 +1072,106 @@ msgid ""
 "liquid area (sea or lake)."
 msgstr ""
 "Остров, изолирана суша, която е почти или изцяло обградена от течна област "
-"(море или езеро)"
+"(море или езеро)."
 
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:542
 msgid "Landslide."
-msgstr "Свлачище"
+msgstr "Свлачище."
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:544
 msgid "Complex of intersecting valleys or ridges."
-msgstr "Форма, съставена от пресичащи се долини или хребети"
+msgstr "Форма, съставена от пресичащи се долини или хребети."
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:546
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
-"Низини с неправилна форма, изглеждащи като коритата на пресъхнали езера"
+"Низини с неправилна форма, изглеждащи като коритата на пресъхнали езера."
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:548
 msgid "'Lake' or small plain."
-msgstr "Езеро или малка равнина"
+msgstr "\"Езеро\" или малка равнина."
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:550
 msgid "Cryptic ringed feature."
-msgstr "Загадъчни, пръстеновидни форми"
+msgstr "Загадъчни, пръстеновидни форми."
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:552
 msgid "Small dark spot."
-msgstr "Малко, тъмно петно"
+msgstr "Малко, тъмно петно."
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:554
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr "Тъмна или светла, нагъната или права следа"
+msgstr "Тъмна или светла, нагъната или права следа."
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:556
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr "Плата със заоблени или приличащи на езици краища"
+msgstr "Плата със заоблени или приличащи на езици краища."
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:558
 msgid "Dark spot, may be irregular"
-msgstr "Тъмно петно с възможно неправилна форма"
+msgstr "Тъмно петно, вероятно с неправилна форма"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:560
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
-"Море, сравнително гладка равнина с ниско албедо и сравнително голяма площ"
+"\"Море\", сравнително гладка равнина с ниско албедо и сравнително голяма "
+"площ."
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:562
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr "Възвишение с плоско било, оградено със стръмни склонове"
+msgstr "Възвишение с плоско било, оградено със стръмни склонове."
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:564
 msgid "Mountain."
-msgstr "Планина"
+msgstr "Планина."
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:566
 msgid "A very large dark area."
-msgstr "Много голяма, тъмна област"
+msgstr "Много голяма, тъмна област."
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:568
 msgid "'Swamp'; small plain."
-msgstr "Блато, малка равнина"
+msgstr "\"Блато\", малка равнина."
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr "Необичан кратер или кратер със сложна форма и ръбове като раковина"
+msgstr "Необичан кратер или кратер със сложна форма и ръбове като раковина."
 
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:572
 msgid "Low plain."
-msgstr "Ниска равнина"
+msgstr "Ниска равнина."
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:574
 msgid "Plateau or high plain."
-msgstr "Висока равнина или плато"
+msgstr "Висока равнина или плато."
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:576
 msgid "Cryo-volcanic feature."
-msgstr "Форма в резултат на крио-вулканична дейност"
+msgstr "Форма в резултат на крио-вулканична дейност."
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:578
 msgid "'Cape'; headland promontoria."
-msgstr "Нос, издаване на някаква форма"
+msgstr "\"Нос\", издадена форма."
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:580
@@ -1178,89 +1180,89 @@ msgid ""
 "areas, or a broad geographic region."
 msgstr ""
 "Голяма площ с различно албедо или контраст спрямо околността или просто "
-"голям географски район"
+"голям географски район."
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:582
 msgid "Reticular (netlike) pattern."
-msgstr "Мрежеста форма"
+msgstr "Ретикулярна (мрежеста) форма."
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:584
 msgid "Fissure."
-msgstr "Цепнатина"
+msgstr "Цепнатина."
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:586
 msgid "Scarp."
-msgstr "Стръмен склон, ескарп"
+msgstr "Стръмен склон."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:588
 msgid "A feature that shares the name of an associated feature."
-msgstr "Форма, която споделя името на друга свързана с нея форма"
+msgstr "Форма, която споделя името на друга свързана с нея форма."
 
 #. TRANSLATORS: Description for landform 'saxum'
 #: src/core/modules/NomenclatureItem.cpp:590
 msgid "Boulder or rock."
-msgstr ""
+msgstr "Камък или скала."
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:592
 msgid "Lobate or irregular scarp."
-msgstr "Склон с изпъкнали неравности"
+msgstr "Склон с изпъкнали неравности."
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:594
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr "Криволичеща форма с изпъкнал и вдлъбнат релеф по протежението си"
+msgstr "Криволичеща форма с изпъкнал и вдлъбнат релеф по протежението си."
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:596
 msgid "'Bay'; small plain."
-msgstr "Залив, малка равнина"
+msgstr "\"Залив\", малка равнина."
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:598
 msgid "Subparallel furrows and ridges."
-msgstr "Донякъде паралелни бразди и хребети"
+msgstr "Почти паралелни бразди и хребети."
 
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:600
 msgid "Extensive land mass."
-msgstr "Обширна земна маса"
+msgstr "Обширна земна маса."
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:602
 msgid "Tile-like, polygonal terrain."
-msgstr "Терен с многоъгълни, плочковидни форми"
+msgstr "Терен с многоъгълни, плочковидни форми."
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:604
 msgid "Small domical mountain or hill."
-msgstr "Малка куполообразна планина или хълм"
+msgstr "Малка куполообразна планина или хълм."
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:606
 msgid "Dunes."
-msgstr "Дюни"
+msgstr "Дюни."
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:608
 msgid "Valley."
-msgstr "Долина"
+msgstr "Долина."
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:610
 msgid "Extensive plain."
-msgstr "Обширна равнина"
+msgstr "Обширна равнина."
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:612
 msgid "A streak or stripe of color."
-msgstr "Ивица, полоса с определен цвят"
+msgstr "Ивица с определен цвят."
 
 #: src/core/modules/NomenclatureMgr.cpp:78
 msgid "Nomenclature labels"
@@ -1278,11 +1280,11 @@ msgstr "Непрозрачност"
 
 #: src/core/modules/Nebula.cpp:153
 msgid "photometric passband"
-msgstr ""
+msgstr "фотометрична пропускателна лента"
 
 #: src/core/modules/Nebula.cpp:167 src/core/StelObject.cpp:243
 msgid "reduced to"
-msgstr "намален до"
+msgstr "намалена до"
 
 #: src/core/modules/Nebula.cpp:167 src/core/StelObject.cpp:243
 msgid "by"
@@ -1295,12 +1297,12 @@ msgstr "Въздушни маси"
 #: src/core/modules/Nebula.cpp:272 src/core/modules/Planet.cpp:456
 #: src/core/modules/StarWrapper.cpp:175
 msgid "Additional names: "
-msgstr ""
+msgstr "Допълнителни имена: "
 
 #: src/core/modules/Nebula.cpp:278 src/core/modules/Planet.cpp:463
 #: src/core/modules/StarWrapper.cpp:181
 msgid "Additional catalog numbers: "
-msgstr ""
+msgstr "Допълнителни каталогови номера: "
 
 #: src/core/modules/Nebula.cpp:297 src/core/modules/MinorPlanet.cpp:186
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:234
@@ -1352,7 +1354,7 @@ msgstr "Ъгъл на ориентация"
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:301
 msgctxt "distance"
 msgid "ly"
-msgstr "ly"
+msgstr "сг"
 
 #: src/core/modules/Nebula.cpp:383 src/core/modules/Nebula.cpp:429
 #: src/core/modules/Planet.cpp:651 src/core/modules/StarWrapper.cpp:269
@@ -1367,19 +1369,19 @@ msgstr "Разстояние"
 #: src/core/modules/Nebula.cpp:393 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
-msgstr "kpc"
+msgstr "кпс"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:406
 msgctxt "distance"
 msgid "Mpc"
-msgstr "Mpc"
+msgstr "Мпс"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:415
 msgctxt "distance"
 msgid "M ly"
-msgstr "10⁶ ly"
+msgstr "10⁶ сг"
 
 #: src/core/modules/Nebula.cpp:444 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
@@ -1394,7 +1396,7 @@ msgstr "Паралакс"
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
-msgstr "mas"
+msgstr "мдс"
 
 #: src/core/modules/Nebula.cpp:457 src/ui_searchDialogGui.h:866
 msgid "Morphological description"
@@ -1403,17 +1405,17 @@ msgstr "Морфологично описание"
 #: src/core/modules/Nebula.cpp:1140
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr "най-висока концентрация на звезди към центъра"
+msgstr "висока концентрация на звезди към центъра"
 
 #: src/core/modules/Nebula.cpp:1143
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr "доста висока концентрация на звезди към центъра"
+msgstr "гъста концентрация на звезди към центъра"
 
 #: src/core/modules/Nebula.cpp:1146
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr "висока концентрация на звезди навътре"
+msgstr "голямо вътрешно ядро от звезди"
 
 #: src/core/modules/Nebula.cpp:1149
 msgctxt "Shapley-Sawyer Concentration Class"
@@ -1843,12 +1845,25 @@ msgstr "Обекти от дълбокото небе"
 msgid "Toggle DSO type filter"
 msgstr "Превключване на филтър за обектите от дълбокото небе"
 
-#: src/core/modules/NebulaMgr.cpp:1421 src/StelMainView.cpp:953
+#: src/core/modules/NebulaMgr.cpp:1422 src/StelMainView.cpp:953
 msgid "Attention!"
+msgstr "Внимание!"
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "DSO catalog version mismatch"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1421
-msgid "Mismatch the version of catalog - expected version of catalog is"
+#: src/core/modules/NebulaMgr.cpp:1422 src/core/SimbadSearcher.cpp:175
+#: src/core/SimbadSearcher.cpp:177
+msgid "Found"
+msgstr "Открито"
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "Expected"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:1422
+msgid "See Logfile for instructions."
 msgstr ""
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
@@ -1945,7 +1960,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:6494 plugins/Exoplanets/src/Exoplanet.cpp:331
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr "AU"
+msgstr "АЕ"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
@@ -1953,11 +1968,11 @@ msgstr "AU"
 #: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6226
 msgctxt "distance"
 msgid "M km"
-msgstr "10⁶ km"
+msgstr "10⁶ км"
 
 #: src/core/modules/Planet.cpp:633
 msgid "Distance from Sun"
-msgstr "Разстояние от слънцето"
+msgstr "Разстояние от Слънцето"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
 #: src/core/modules/Planet.cpp:653
@@ -3050,7 +3065,7 @@ msgstr "Допустим диапазон: между година %1 и %2."
 
 #: src/core/StelProjector.cpp:134
 msgid "Maximum FOV: "
-msgstr "Максимален зрителен ъгъл (FOV): "
+msgstr "Максимално зрително поле: "
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
@@ -3556,10 +3571,6 @@ msgstr "Запитване"
 #: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
 msgid "Not found"
 msgstr "Не са намерени съвпадения"
-
-#: src/core/SimbadSearcher.cpp:175 src/core/SimbadSearcher.cpp:177
-msgid "Found"
-msgstr "Открито"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:310
@@ -4704,15 +4715,15 @@ msgstr ""
 "Слънчевата система чрез текстури на сенките. Това може да влоши качеството "
 "на полусенките на някои обекти."
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:906
 msgid "Abbreviated"
 msgstr "Съкратени"
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:907
 msgid "Native"
 msgstr "Местни"
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:908
 msgid "Translated"
 msgstr "Преведени"
 
@@ -5086,7 +5097,7 @@ msgstr "Деклинация"
 #: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:619
 #: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:803
 #: src/gui/AstroCalcDialog.cpp:840 src/gui/AstroCalcDialog.cpp:1503
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1319
 msgid "Azimuth"
 msgstr "Азимут"
 
@@ -5346,14 +5357,14 @@ msgstr "звезда с високо собствено движение"
 #: src/gui/AstroCalcDialog.cpp:1361 src/gui/AstroCalcDialog.cpp:1948
 #: src/gui/AstroCalcDialog.cpp:2225 src/gui/AstroCalcDialog.cpp:4068
 #: src/gui/AstroCalcDialog.cpp:6109
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1392
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Eлектронна таблица на Microsoft Excel — Open XML"
 
 #: src/gui/AstroCalcDialog.cpp:1363 src/gui/AstroCalcDialog.cpp:1950
 #: src/gui/AstroCalcDialog.cpp:2227 src/gui/AstroCalcDialog.cpp:4070
 #: src/gui/AstroCalcDialog.cpp:6111
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1394
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1396
 msgid "CSV (Comma delimited)"
 msgstr "CSV (разделител „,“)"
 
@@ -5765,7 +5776,7 @@ msgstr ""
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:3334 src/gui/AstroCalcDialog.cpp:3392
 #: src/gui/AstroCalcDialog.cpp:3506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:181
@@ -11006,7 +11017,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Допълнителни настройки на потребителския интерфейс"
 
 #: src/ui_configurationDialog.h:1589
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1316
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Време"
@@ -11140,7 +11151,7 @@ msgid ""
 " for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
-"Запазване или само на текущия зрителен ъгъл и посока на изгледа, или на "
+"Запазване или само на текущщото зрително поле и посока на изгледа, или на "
 "всички опции за следващото стартиране на Stellarium. Възстановяването на "
 "оригиналните настройки изисква рестартиране на програмата."
 
@@ -11172,7 +11183,7 @@ msgstr "Цялата налична"
 msgid "Display no information"
 msgstr "Не показва информация"
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2416
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Никаква"
@@ -12905,8 +12916,8 @@ msgstr ""
 "другия ѝ край. Измервахме. Изчислявахме. Мечтаехме да сме в Хавай."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
@@ -12925,8 +12936,8 @@ msgid "Links"
 msgstr "Връзки"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
@@ -12950,8 +12961,8 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
@@ -12971,8 +12982,8 @@ msgstr "{Тук може да получите отговор} на вашите
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
@@ -12993,8 +13004,8 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
@@ -13254,122 +13265,122 @@ msgctxt "pixel"
 msgid "px"
 msgstr "пикс."
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 msgid "Ocular"
 msgstr "Окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1968
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
 msgid "Binocular"
 msgstr "Бинокъл"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1988
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР на окуляра: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:1995
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "aFOV на окуляра: %1"
+msgstr "вЗП на окуляра: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
 msgstr "Леща № %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/Oculars.cpp:2010
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Леща № %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:2015
 msgid "Lens: none"
 msgstr "Леща: без"
 
-#: plugins/Oculars/src/Oculars.cpp:2028 plugins/Oculars/src/Oculars.cpp:2089
+#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп № %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2037
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2046
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Изходна зеница: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2053
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 #, qt-format
 msgid "FOV: %1"
-msgstr "Зрит. ъгъл: %1"
+msgstr "ЗП: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размери: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2073
+#: plugins/Oculars/src/Oculars.cpp:2075
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сензор № %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2081
+#: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сензор № %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2094
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп № %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Lens"
 msgstr "&L: леща"
 
-#: plugins/Oculars/src/Oculars.cpp:2413
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Previous lens"
 msgstr "&P: предишна леща"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Next lens"
 msgstr "&N: следваща леща"
 
-#: plugins/Oculars/src/Oculars.cpp:2444
+#: plugins/Oculars/src/Oculars.cpp:2446
 msgid "&Telescope"
 msgstr "&T: телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2445
+#: plugins/Oculars/src/Oculars.cpp:2447
 msgid "&Previous telescope"
 msgstr "&P: предишен телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2448
 msgid "&Next telescope"
 msgstr "&N: следващ телескоп"
 
@@ -13573,7 +13584,7 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:545
 msgid "tFOV:"
-msgstr "Истинско зрително поле:"
+msgstr "иЗП:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:547
@@ -13588,7 +13599,7 @@ msgstr "Диаметър:"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:552
 #: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "aFOV:"
-msgstr "Видимо зрително поле:"
+msgstr "вЗП:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:553
 #: plugins/Oculars/src/ui_ocularDialog.h:1508
@@ -13675,18 +13686,14 @@ msgstr ""
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
+"turned on the Ocular view. This feature draws three concentric circles of "
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Можете да превключите прицел Telrad, но само ако не сте включили изглед за "
-"окуляр. Така се изобразяват три концентрични кръга в центъра на екрана с "
-"ъглови размери 0,5%1, 2,0%1, и 4,0%1, което показва изгледа с през прицел "
-"Telrad (или подобен)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "Ако имате проблеми с приставката, молим да ги докладвате."
+msgid "If you find any issues, please let me know. Enjoy!"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Hot Keys"
@@ -13699,6 +13706,34 @@ msgid ""
 msgstr ""
 "Клавишните комбинации на приставката може да се променят в редактора за това"
 " (F7)."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Notes"
+msgstr "Записки"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+msgid ""
+"The sensor view has a feature to show sensor crop overlay with information "
+"about size of crop, but in some cases size of this rectangle may be adjusted"
+" by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"binning 3)."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#, qt-format
+msgid ""
+"Information about size of crop overlay, which was adjusted by binning, will "
+"be marked by %1."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+msgid ""
+"Of course this mark may be visible in other reasons also: the crop size is "
+"larger than sensor size."
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
 msgid "Interface"
@@ -13713,8 +13748,7 @@ msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr ""
-"Когато е избрано, зрителното поле се връща към това, с което Stellarium "
-"стартира."
+"Когато е избрано, зрителното поле се връща към стандартните настройки."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1412
 msgid "Restore FOV to initial values"
@@ -14496,42 +14530,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:772
 msgctxt "operational status"
 msgid "operational"
 msgstr "работещ"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "неработещ"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:774
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "частично работещ"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:775
 msgctxt "operational status"
 msgid "standby"
 msgstr "в готовност"
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:776
 msgctxt "operational status"
 msgid "spare"
 msgstr "резервен"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:777
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "разширена мисия"
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:778
 msgctxt "operational status"
 msgid "decayed"
 msgstr "разпадащ се"
 
-#: plugins/Satellites/src/Satellite.cpp:773
+#: plugins/Satellites/src/Satellite.cpp:780
 msgctxt "operational status"
 msgid "unknown"
 msgstr "неизвестен"
@@ -14713,28 +14747,39 @@ msgstr "Технически забележки"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
-" as the input. "
+" as the input."
 msgstr ""
-"Позициите се изчисляват по методите SGP4 и SDP4, използвайки данни във "
-"форма̀та TLE на NORAD за изходни данни. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
-"the revised Spacetrack Report #3 (including Spacetrack Report #6). "
+"the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
-"Кодът за изчисляване на орбитите е написан от Хосе Луи Каналес (Jose Luis "
-"Canales) въз основа на ревизирания Spacetrack Report #3 (включително "
-"Spacetrack Report #6). "
 
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
-#. link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+msgid ""
+"To calculate an approximate visual magnitude of satellites we use data from "
+"Mike McCants' database (with permissions) of the radar cross-section (RCS) "
+"and standard magnitudes."
+msgstr ""
+
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
-#, qt-format
-msgid "See %1this document%2 for details."
-msgstr "Вижте %1този документ%2 за подробности."
+msgid ""
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
+msgid ""
+"We use a spherical shape of satellite to calculate an approximate visual "
+"magnitude from RCS values."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
+msgid "For modeling Starlink magnitudes we use Anthony Mallama's formula"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -14743,7 +14788,7 @@ msgstr "Вижте %1този документ%2 за подробности."
 msgid "Next update"
 msgstr "Следващо обновяване"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
@@ -14752,8 +14797,8 @@ msgstr "Следващо обновяване"
 msgid "Internet updates disabled"
 msgstr "Обновяването по Интернет е изключено"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:220
 #: plugins/Novae/src/gui/NovaeDialog.cpp:170
@@ -14767,7 +14812,7 @@ msgstr "Обновяването по Интернет е изключено"
 msgid "Updating now..."
 msgstr "Тече обновяване…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:752
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -14777,7 +14822,7 @@ msgid "< 1 minute"
 msgstr "< 1 минута"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:757
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:759
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
@@ -14788,7 +14833,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 #: plugins/Novae/src/gui/NovaeDialog.cpp:219
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:241
@@ -14797,34 +14842,34 @@ msgstr "m"
 msgid "Update error"
 msgstr "Грешка при обновяване"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "Обновени %1/%2 спътници; %3 — добавени; %4 — премахнати"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Обновени %1/%2 спътници; %3 — добавени; %4 — липсват"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Warning!"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Empty string - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid "Invalid URL - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:879
 msgid "[new source]"
 msgstr "[нов източник]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -14840,7 +14885,7 @@ msgstr "[нов източник]"
 msgid "Update now"
 msgstr "Обновяване сега"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14849,102 +14894,102 @@ msgstr "Обновяване сега"
 msgid "Update from files"
 msgstr "Обновяване от файлове"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:970
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
 msgid "[orbit calculation error]"
 msgstr "[грешка при изчисляване]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
 msgid "[all newly added]"
 msgstr "[всички новодобавени]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:972
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
 msgid "[all not displayed]"
 msgstr "[всички непоказвани]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:973
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
 msgid "[all displayed]"
 msgstr "[всички показвани]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:974
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
 msgid "[small satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 msgid "[medium satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
 msgid "[large satellites]"
 msgstr ""
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:978
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:980
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
 msgid "[all]"
 msgstr "[всички]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "RCS"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1004
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1006
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgid "New group..."
 msgstr "Нова група…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1295
 msgid "Select TLE Update File"
 msgstr "Избор на файл с TLE за обновяване"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1317
 msgid "Brightness"
 msgstr "Яркост"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1320
 msgid "Satellite"
 msgstr "Спътник"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1400
 msgid "Save predicted Iridium flares as..."
 msgstr "Запазване на изчислените проблясвания от спътници Iridium като…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1443
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1445
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1447
 msgid "Predicted Iridium flares"
 msgstr "Изчислени проблясвания от спътници Iridium"
 
@@ -17948,12 +17993,6 @@ msgstr "Усреднена по време плътност на потока п
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
-
-#: plugins/Pulsars/src/Pulsar.cpp:288
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Notes"
-msgstr "Записки"
 
 #: plugins/Pulsars/src/Pulsar.cpp:376
 msgid ""
@@ -22643,9 +22682,9 @@ msgid ""
 " which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
-"Когато е изключено, засенчената област се изчислява с перспективна проекция."
-" При големи зрителни ъгли (FOV) това може да доведе до изчезването на някои "
-"от сенките, но се изчислява много бързо."
+"Когато е изключено, засенчената област се изчислява с перспективна проекция,"
+" в резултат на което, при големи зрителни полета това може да доведе до "
+"изчезването на сенките, но е много по-бързо!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:273
 msgid ""
