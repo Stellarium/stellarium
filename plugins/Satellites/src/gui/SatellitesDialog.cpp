@@ -716,7 +716,7 @@ void SatellitesDialog::populateAboutPage()
 	html += QString(q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found %1here%2.")).arg("<a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">").arg("</a>") + " ";
 	html +=              q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += QString(q_("For modeling Starlink magnitudes we use Anthony Mallama's %1formula%2.")).arg("<a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">").arg("</a>") + "</p>";
+	html += QString(q_("For modeling Starlink magnitudes we use %1Anthony Mallama's formula%2.")).arg("<a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Satellites plugin") + "</p>";
