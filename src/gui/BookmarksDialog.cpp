@@ -49,7 +49,7 @@ BookmarksDialog::BookmarksDialog(QObject *parent)
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	labelMgr = GETSTELMODULE(LabelMgr);
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
-	bookmarksJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/bookmarks.json";
+	bookmarksJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/bookmarks.json";
 }
 
 BookmarksDialog::~BookmarksDialog()
@@ -168,7 +168,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 
 		if (name.isEmpty() || selected[0]->getType()=="CustomObject")
 		{
-			float ra, dec;
+			double ra, dec;
 			StelUtils::rectToSphe(&ra, &dec, selected[0]->getJ2000EquatorialPos(core));
 			raStr = StelUtils::radToHmsStr(ra, false).trimmed();
 			decStr = StelUtils::radToDmsStr(dec, false).trimmed();
@@ -370,13 +370,13 @@ void BookmarksDialog::goToBookmark(QString uuid)
 
 				Vec3d winpos;
 				prj->project(pos, winpos);
-				float xpos = winpos[0];
-				float ypos = winpos[1];
-				float best_object_value = 1000.f;
+				double xpos = winpos[0];
+				double ypos = winpos[1];
+				double best_object_value = 1000.;
 				for (const auto& obj : candidates)
 				{
 					prj->project(obj->getJ2000EquatorialPos(core), winpos);
-					float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
+					double distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 					if (distance < best_object_value)
 					{
 						best_object_value = distance;
