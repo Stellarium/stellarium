@@ -1134,17 +1134,16 @@ void Oculars::displayPopupMenu()
 			popup->addMenu(submenu);
 			
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
-			QAction* rotateAction = Q_NULLPTR;
-			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0), [=](){rotateCCD(-90);});
-			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0), [=](){rotateCCD(-45);});
-			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0), [=](){rotateCCD(-15);});
-			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0),  [=](){rotateCCD(-5);});
-			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0),  [=](){rotateCCD(-1);});
-			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0),  [=](){rotateCCD(1);});
-			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0),  [=](){rotateCCD(5);});
-			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0), [=](){rotateCCD(15);});
-			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0), [=](){rotateCCD(45);});
-			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0), [=](){rotateCCD(90);});
+			submenu->addAction(QString("&1: -90") + QChar(0x00B0), [=](){rotateCCD(-90);});
+			submenu->addAction(QString("&2: -45") + QChar(0x00B0), [=](){rotateCCD(-45);});
+			submenu->addAction(QString("&3: -15") + QChar(0x00B0), [=](){rotateCCD(-15);});
+			submenu->addAction(QString("&4: -5") + QChar(0x00B0),  [=](){rotateCCD(-5);});
+			submenu->addAction(QString("&5: -1") + QChar(0x00B0),  [=](){rotateCCD(-1);});
+			submenu->addAction(QString("&6: +1") + QChar(0x00B0),  [=](){rotateCCD(1);});
+			submenu->addAction(QString("&7: +5") + QChar(0x00B0),  [=](){rotateCCD(5);});
+			submenu->addAction(QString("&8: +15") + QChar(0x00B0), [=](){rotateCCD(15);});
+			submenu->addAction(QString("&9: +45") + QChar(0x00B0), [=](){rotateCCD(45);});
+			submenu->addAction(QString("&0: +90") + QChar(0x00B0), [=](){rotateCCD(90);});
 
 			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);			
