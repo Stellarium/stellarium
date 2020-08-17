@@ -890,11 +890,12 @@ QLineEdit#lineEditSearchSkyObject {
 	color: rgb(255, 255, 255);
 }
 
-QFrame#completionLabel {
+QListView#searchListView {
 	font-size: 108%;
 	padding-left: 20px;
 	padding-right: 15px;
 	border: none;
+	background: transparent;
 }
 
 QFrame#greekLettersFrame {

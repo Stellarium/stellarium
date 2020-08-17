@@ -1,29 +1,32 @@
-/*
+﻿/*
  * Stellarium
  * Copyright (C) 2008 Guillaume Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
- 
+
 #ifndef SEARCHDIALOG_HPP
 #define SEARCHDIALOG_HPP
 
 #include <QObject>
-#include <QLabel>
+#include <QStringListModel>
+#include <QStandardItemModel>
+#include <QFont>
 #include <QMap>
 #include <QHash>
+#include <QDialog>
 #include "StelDialog.hpp"
 #include "VecMath.hpp"
 
@@ -40,23 +43,39 @@ struct stringLengthCompare
 	}
 };
 
-//! @class CompletionLabel
+struct recentObjectSearches
+{
+	int maxSize = 20;
+	QStringList recentList;
+};
+Q_DECLARE_METATYPE(recentObjectSearches)
+
+//! @class CompletionListModel
 //! Display a list of results matching the search string, and allow to
 //! tab through those selections.
-class CompletionLabel : public QLabel
+class CompletionListModel : public QStringListModel
 {
 	Q_OBJECT
 
 public:
-	CompletionLabel(QWidget* parent=Q_NULLPTR);
-	~CompletionLabel();
+	CompletionListModel(QObject* parent=Q_NULLPTR);
+	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
+	~CompletionListModel();
 
 	QString getSelected(void) const;
-	void setValues(const QStringList&);
+	void setValues(const QStringList&, const QStringList&);
 	bool isEmpty() const {return values.isEmpty();}
 	void appendValues(const QStringList&);
+	void appendRecentValues(const QStringList&);
 	void clearValues();
-	
+
+	QStringList getValues(void) { return values; };
+	QStringList getRecentValues(void) { return recentValues; };
+	int getSelectedIdx() { return selectedIdx; }
+
+	// Bold recent objects
+	QVariant data(const QModelIndex &index, int role) const;
+
 public slots:
 	void selectNext();
 	void selectPrevious();
@@ -66,6 +85,7 @@ private:
 	void updateText();
 	int selectedIdx;
 	QStringList values;
+	QStringList recentValues;
 };
 
 QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
@@ -105,7 +125,6 @@ public:
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
 
-
 	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
 	//! with the actual Greek unicode characters.
 	static QString substituteGreek(const QString& keyString);
@@ -124,6 +143,7 @@ signals:
 	void simbadGetsMorphoChanged(bool b);
 	void simbadGetsTypesChanged(bool b);
 	void simbadGetsDimsChanged(bool b);
+
 
 public slots:
 	void retranslate();
@@ -149,6 +169,11 @@ public slots:
 	void populateCoordinateSystemsList();
 	void populateCoordinateAxis();
 
+	//! Returns current max size of recent search list
+	int  getRecentSearchSize () const { return recentObjectSearchesData.maxSize;}
+	//! Called when user wants to change recent search list size
+	void setRecentSearchSize(int maxSize);
+
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -164,14 +189,14 @@ private slots:
 	void onSimbadStatusChanged();
 	//! Called when the user changed the input text
 	void onSearchTextChanged(const QString& text);
-	
+
 	void gotoObject();
 	void gotoObject(const QString& nameI18n);
 	// for going from list views
 	void gotoObject(const QModelIndex &modelIndex);
 
 	void searchListClear();
-	
+
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
 
@@ -221,6 +246,12 @@ private slots:
 	void setSimbadGetsMorpho(bool b);
 	void setSimbadGetsTypes(bool b);
 	void setSimbadGetsDims(bool b);
+
+	//! Update recent list's max size
+	void recentSearchSizeEditingFinished();
+
+	//! Clear recent list's data
+	void recentSearchClearDataClicked();
 
 private:
 	class SearchDialogStaticData
@@ -279,7 +310,7 @@ private:
 	bool useSimbad;
 	bool useFOVCenterMarker;
 	bool fovCenterMarkerState;
-	//! URL of the server used for SIMBAD queries. 
+	//! URL of the server used for SIMBAD queries.
 	QString simbadServerUrl;
 
 	//! Properties for SIMBAD position query
@@ -296,8 +327,45 @@ private:
 	// The current coordinate system
 	CoordinateSystem currentCoordinateSystem;
 
+	// Properties for "recent object searches"
+	CompletionListModel* searchListModel;
+	recentObjectSearches recentObjectSearchesData;
+	QString recentObjectSearchesJsonPath;
+
+	//! Add to list: called from gotoObject(const QString& nameI18n)
+	void updateRecentSearchList(const QString &nameI18n);
+
+	//! Get data from previous session
+	void loadRecentSearches();
+	//! Save to file after each search
+	void saveRecentSearches();
+	//! Shrink list if needed
+	void adjustRecentList(int maxSize);
+	//! Display search per user preference
+	void adjustMatchesResult(QStringList &allMatches,
+				 QStringList& recentMatches,
+				 QStringList& matches,
+				 int maxNbItem);
+	//! Update searches result display and reset selectedIdx = 0
+	void resetSearchResultDisplay(QStringList allMatches,
+				      QStringList recentMatches);
+	//! Decide if push button should be enabled
+	void setPushButtonGotoSearch();
+	//! Default maxNbItem when matching objects
+	int defaultMaxSize = 20;
+	//! Enable if recent list size is greater than 0
+	void setRecentSearchClearDataPushButton();
+
 public:
 	static QString extSearchText;
+
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
+	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object names by order of recent searches, or an empty list if nothing match
+	QStringList listMatchingRecentObjects(const QString& objPrefix,
+					      int maxNbItem=20,
+					      bool useStartOfWords=false) const;
 };
 
 #endif // _SEARCHDIALOG_HPP
