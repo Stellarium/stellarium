@@ -70,7 +70,7 @@ defined in https://www.w3.org/TR/SVG11/types.htm.
 
 QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue gVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -81,7 +81,7 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue gVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -187,7 +187,7 @@ by StelUtils::getDecAngle.
 
 QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue xVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue yVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -198,40 +198,40 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
 QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
 QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
 }
 
 QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
 	return QScriptValue();
 }
 QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
 	return QScriptValue();
 }
 QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
 	return QScriptValue();
@@ -368,10 +368,12 @@ void StelScriptMgr::initActions()
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
-		StelAction* action = actionMgr->addAction(
-					actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
+		StelAction* action = actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
 		mapper->setMapping(action, script);
+		// TODO: If all goes well, this should be enough. Currently, we have an unresolved symbol
+		//actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()), this,[=](){this->runScript(script);}, shortcut);
 	}
+	// TODO: Remove this.
 	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
 }
 
@@ -917,9 +919,8 @@ QString StelScriptMgr::lookup( int outputPos )
 
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
 	: QScriptEngineAgent(engine)
-{
-	isPaused = false;
-}
+	, isPaused(false)
+	{}
 
 void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int columnNumber)
 {
