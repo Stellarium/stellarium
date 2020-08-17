@@ -132,7 +132,7 @@ void StelAction::trigger()
 		//This should still call the target slot first before all other registered slots
 		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
 		//This enables the slot to find out the StelAction that was triggered using sender(),
-		//and enables use of QSignalMapper or similar constructs
+		//and enables use of QSignalMapper (obsolete), Lambda functions or similar constructs
 		emit triggered();
 	}
 }
@@ -179,6 +179,18 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	emit changed();
 }
 
+template<typename Functor>
+void StelAction::connectToObject(QObject* obj, Functor functor)
+{
+	//let Qt handle invoking the functor when the StelAction is triggered
+	int signalIndex = metaObject()->indexOfSignal("triggered()");
+	connect(this,metaObject()->method(signalIndex),obj,functor, Qt::AutoConnection);
+	//connect(this,SIGNAL(triggered()),obj,functor, Qt::AutoConnection);
+
+	emit changed();
+}
+
+
 void StelAction::propertyChanged(bool value)
 {
 	emit toggled(value);
@@ -211,6 +223,19 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 	action->connectToObject(target, slot);
 	return action;
 }
+
+//template<typename Functor>
+//typename std::enable_if<!std::is_same<const char*, Functor>::value, StelAction *>::type
+//StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
+//			 QObject *object, Functor functor,
+//			 const QString& shortcut, const QString& altShortcut,
+//			 bool global)
+//{
+//	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
+//	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
+//	action->connectToObject(object, std::move(functor));
+//	return action;
+//}
 
 StelAction* StelActionMgr::findAction(const QString& id)
 {
