@@ -908,33 +908,40 @@ and Stellarium will center on that object.
 \subsection{The Options tab}
 \label{sec:gui:SearchWindow:Options}
 The Options tab (Fig.~\ref{fig:gui:search:options}) provides a few settings to fine-tune your search experience.
-When the name of an object to find is typed in the object
-window and you are connected to the internet and ``Extend search'' is
-ticked, Stellarium will search the SIMBAD on-line  data bases for its
-coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press return.
+
+\begin{description}
+\item[Use SIMBAD]
+When the name of an object to find is typed in the Object
+tab and you are connected to the internet and ``Use SIMBAD'' is
+ticked, Stellarium will search the SIMBAD on-line databases for its
+coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press \key{\return}.
 Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
+    \begin{description}
+    \item[Server:] for server selection
+    \end{description}
+\end{description}
 
 \begin{description}
 \item[Search Options] group allows for changes in the search result behaviour.
         \begin{description}
-        \item[Use autofill only from the beginning of words]- searches for object names
-        that begins with the same letters as your input. Example provided in section~\ref{sec:gui:SearchWindow:Object}.
-        \item[Lock position when coordinates are used] %% TODO: EXPLAIN?
-        \item[Show FOV center marker when position is search]%% TODO: EXPLAIN HOW?
+        \item[Use autofill only from the beginning of words] when checked, will
+        search for object names that begins with the same letters as your input.
+        Example provided in section~\ref{sec:gui:SearchWindow:Object}.
+        \item[Lock position when coordinates are used]
+        \item[Show FOV center marker when position is search]
         \end{description}
 
         \begin{description}
-        \item[Recent Searches]- allows modification to your recent search data\newFeature{v0.20.3}
-        Changes will automatically update the search results displayed in the Object tab.
+        \item[Recent Searches]group allows modification to your recent search data\newFeature{v0.20.3}.
+        Any changes here will automatically update the search results displayed in the Object tab.
         Example provided in section~\ref{sec:gui:SearchWindow:Object}.
                 \begin{description}
                 \item[Max recent searches to display] amount of\newFeature{v0.20.3}
-                \emph{recent searches} that can appear in the search result.
+                \emph{recent searches} that can appear in the search result
                 \item[\key{Clear Search History}] button
-                deletes your recent search history\newFeature{v0.20.3}. If there are no recent searches saved,
-                the button will deactivate (greyed out).
+                deletes your recent search history\newFeature{v0.20.3}
                 \end{description}
         \end{description}
 \end{description}

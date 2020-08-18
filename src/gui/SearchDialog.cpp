@@ -511,12 +511,10 @@ void SearchDialog::createDialogContent()
 
 void SearchDialog::changeTab(int index)
 {
-	QString changeTabText = ui->tabWidget->tabText(index);
-
-	if (changeTabText == "Object") // Search Tab
+	if (index==0) // Search Tab
 		ui->lineEditSearchSkyObject->setFocus();
 
-	if (changeTabText=="Position") // Position
+	if (index==2) // Position
 	{
 		if (useFOVCenterMarker)
 			GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(true);
@@ -524,7 +522,7 @@ void SearchDialog::changeTab(int index)
 	else
 		GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(fovCenterMarkerState);
 
-	if (changeTabText=="Lists") // Lists
+	if (index==3) // Lists
 	{
 		updateListTab();
 		ui->searchInListLineEdit->setFocus();
