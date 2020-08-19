@@ -766,13 +766,19 @@ Deep sky surveys will be rendered aligned with the sky view, while solar system
 surveys automatically map on the proper body.
 
 
-\section{The Object Search Window}
+\section{The Search Window}
 \label{sec:gui:search}
 
 \begin{figure}[p]
 \centering\includegraphics[width=0.68\textwidth]{search_dialog.png}
-\caption{The Search Window: Objects}
+\caption{The Search Window: Object}
 \label{fig:gui:search}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_recent_result.png}
+\caption{The Search Window: Object (Recent Searches)}
+\label{fig:gui:search:recentSearches}
 \end{figure}
 
 \begin{figure}[p]
@@ -783,7 +789,7 @@ surveys automatically map on the proper body.
 
 \begin{figure}[p]
 \centering\includegraphics[width=0.68\textwidth,trim=0 40 0 0,clip]{search_dialog_position.png}
-\caption{The Search Window: Positions}
+\caption{The Search Window: Position}
 \label{fig:gui:search:position}
 \end{figure}
 
@@ -795,66 +801,155 @@ surveys automatically map on the proper body.
 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.68\textwidth,trim=0 50 0 0,clip]{search_dialog_option.png}
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_option.png}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
 
-The Object Search window provides a convenient way to locate objects
+\subsection{The Object tab}
+\label{sec:gui:SearchWindow:Object}
+The Object tab of the Search window provides a convenient way to locate objects
 in the sky. Simply type in the name of an object to find, and press
 \key{\return}. Stellarium will point you at that object in the sky.
 
 As you type, Stellarium will make a list of objects which contains 
 what you have typed so far. The first of the list of matching objects
-will be highlighted. If you press the \key{\tab} key, the selection will change
-to the next item in the list. Hitting the \key{\return} key will center on the
-currently highlighted object and close the search dialog.
+will be highlighted. If you press the \key{\tab} or \key{\arrowkeydown} key,
+the selection will change to the next item in the list.
+Pressing the \key{\arrowkeyup} key will bring you to the previous item.
+Hitting the \key{\return} key will center on the
+currently highlighted object and close the Search window.
 
-For example, suppose we want to locate Saturn's moon Mimas. 
+For example, suppose we want to locate Saturn's moon Mimas (SI).
+Open the Search window (\guibutton[0.5]{2.5}{btd_find.png}, \key{F3}, or \key{Ctrl+F}).
 Type the first letter of the name, \emph{m}, to see a list
-of objects whose name contains \emph{m}: Hau\emph{m}ea, \emph{M}iranda, U\emph{m}briel, \ldots 
+of objects whose name contains \emph{m}:
+\begin{center}
+\begin{tabular}{l}
+        \emph{M}iranda (UV)\\
+        Psa\emph{m}athe (NX)\\
+        U\emph{m}briel (UII)\\
+        \ldots\\
+\end{tabular}
+\end{center}
 
 You may want at this point to have Stellarium rather propose object
 names with start with the string you enter. Do that in the Options tab
-of this panel. Now repeat searching (delete, and re-enter \emph{m} to start
-over). Now the list is shorter and contains only objects which start
-with \emph{m}: \emph{M}aia, \emph{M}ars, \ldots The first item in this list, Maia, is
-highlighted. Pressing \key{\return} now would go to Maia, but we want
-Mimas. We can either press \key{\tab} a few times to highlight Mimas
+of this panel (see section~\ref{sec:gui:SearchWindow:Options}).
+The search result should update automatically\newFeature{v0.20.3}
+when you nagivate back to the Object tab.
+Now the list is shorter and contains only objects which start
+with \emph{m}:
+\begin{center}
+\begin{tabular}{l}
+        \emph{M}ago\\
+        \emph{M}aia\\
+        \emph{M}ars\\
+        \ldots\\
+\end{tabular}
+\end{center}
+
+The first item in this list, Mago, is
+highlighted. Pressing \key{\return} now would go to Mago, but we want
+Mimas (SI). We can either press \key{\tab} or \key{\arrowkeydown} a few times to highlight Mimas (SI)
 and then hit \key{\return}, or we can continue to type the name until
 it is the first/only object in the list.
 
+After you searched for an object, the next time the Search window opens,\newFeature{v0.20.3}
+your most recently searched object(s)
+will automatically appear in the search result of the Object tab.
+For instance, continuing with our example, re-open the Search window's Object tab.
+Mimas (SI) should already be populated and highlighted:
+\begin{center}
+\begin{tabular}{l}
+        \textbf{\emph{M}imas (SI)}\\
+\end{tabular}
+\end{center}
+
+The Object tab's search result will now prioritized your most recent searches
+(which will be bolded).\newFeature{v0.20.3}
+To modify the search results, see section~\ref{sec:gui:SearchWindow:Options}.
+From our earlier example, re-enter \emph{m} into the Object tab.
+Doing so will generate a slightly different list than before.
+In this case, Mimas (SI) will appear first, depicted in Figure~\ref{fig:gui:search:recentSearches}:
+\begin{center}
+\begin{tabular}{l}
+        \textbf{\emph{M}imas (SI)}\\
+        \emph{M}ago\\
+        \emph{M}aia\\
+        \emph{M}ars\\
+        \ldots\\
+\end{tabular}
+\end{center}
+
+\subsection{The SIMBAD tab}
+\label{sec:gui:SearchWindow:SIMBAD}
 The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a
 convenient way to fetch and show a set of information for selected
 object from the astronomical database
 SIMBAD~\citep{2000A&AS..143....9W}.  If some object is only visible in
 a survey or DSS background (see section~\ref{ch:surveys}) and not in
 Stellarium's catalogs, you can also set a custom marker (see
-sectin~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
+section~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
 what's known about this''.
 
+\subsection{The Position tab}
+\label{sec:gui:SearchWindow:Position}
 The Position tab (Fig.~\ref{fig:gui:search:position}) provides a convenient way to enter a set
 of coordinates.
 
-The List Search tab (Fig.~\ref{fig:gui:search:options}) allows selection of an object from predefined
+\subsection{The Lists tab}
+\label{sec:gui:SearchWindow:Lists}
+The Lists tab (Fig.~\ref{fig:gui:search:lists}) allows selection of an object from predefined
 sets.  The number of choices is governed by the loaded DSO catalogs and plug-ins. 
 Scroll down the first window to select the type. Click on the name
 and Stellarium will center on that object.
 
+\subsection{The Options tab}
+\label{sec:gui:SearchWindow:Options}
 The Options tab (Fig.~\ref{fig:gui:search:options}) provides a few settings to fine-tune your search experience.
-When the name of an object to find is typed in the object
-window and you are connected to the internet and ``Extend search'' is
-ticked, Stellarium will search the SIMBAD on-line  data bases for its
-coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press return.
+
+\begin{description}
+\item[Use SIMBAD]
+When the name of an object to find is typed in the Object
+tab and you are connected to the internet and ``Use SIMBAD'' is
+ticked, Stellarium will search the SIMBAD on-line databases for its
+coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press \key{\return}.
 Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
+    \begin{description}
+    \item[Server:] for server selection
+    \end{description}
+\end{description}
 
+\begin{description}
+\item[Search Options] group allows for changes in the search result behaviour.
+        \begin{description}
+        \item[Use autofill only from the beginning of words] when checked, will
+        search for object names that begins with the same letters as your input.
+        Example provided in section~\ref{sec:gui:SearchWindow:Object}.
+        \item[Lock position when coordinates are used]
+        \item[Show FOV center marker when position is search]
+        \end{description}
+
+        \begin{description}
+        \item[Recent Searches]group allows modification to your recent search data\newFeature{v0.20.3}.
+        Any changes here will automatically update the search results displayed in the Object tab.
+        Example provided in section~\ref{sec:gui:SearchWindow:Object}.
+                \begin{description}
+                \item[Max recent searches to display] amount of\newFeature{v0.20.3}
+                \emph{recent searches} that can appear in the search result
+                \item[\key{Clear Search History}] button
+                deletes your recent search history\newFeature{v0.20.3}
+                \end{description}
+        \end{description}
+\end{description}
 
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-This window \newFeature{v0.15.0} provides advanced functionality, some of which is still in an experimental phase. 
+This window \newFeature{v0.15.0} provides advanced functionality, some of which is still in an experimental phase.
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
