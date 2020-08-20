@@ -324,7 +324,6 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
 }
 
-
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
 	waitEventLoop = new QEventLoop();
@@ -363,20 +362,14 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	QSignalMapper* mapper = new QSignalMapper(this);
 	for (const auto& script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
-		StelAction* action = actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
-		mapper->setMapping(action, script);
-		// TODO: If all goes well, this should be enough. Currently, we have an unresolved symbol
-		//actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()), this,[=](){this->runScript(script);}, shortcut);
+		actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()),
+				     this, [this, script] { runScript(script); }, shortcut);
 	}
-	// TODO: Remove this.
-	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
 }
-
 
 StelScriptMgr::~StelScriptMgr()
 {
