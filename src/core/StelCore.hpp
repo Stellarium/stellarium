@@ -775,6 +775,7 @@ signals:
 	void flagGravityLabelsChanged(bool gravity);
 	//! Emitted when button "Save settings" is pushed
 	void configurationDataSaved();
+	void updateSearchLists();
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device

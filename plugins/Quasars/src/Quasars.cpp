@@ -855,5 +855,6 @@ void Quasars::setFlagShowQuasars(bool b)
 	{
 		flagShowQuasars=b;
 		emit flagQuasarsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }

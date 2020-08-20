@@ -862,6 +862,7 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 	{
 		flagShowExoplanets=b;
 		emit flagExoplanetsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 

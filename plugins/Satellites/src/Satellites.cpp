@@ -1287,6 +1287,7 @@ void Satellites::setFlagHintsVisible(bool b)
 		hintFader = b;
 		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
 		emit flagHintsVisibleChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 

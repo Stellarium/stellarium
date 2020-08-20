@@ -469,7 +469,9 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
 	// Set the focus directly on the line editDe	if (ui->tabWidget->currentIndex()==0)
-		ui->lineEditSearchSkyObject->setFocus();
+	ui->lineEditSearchSkyObject->setFocus();
+
+	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->simbadStatusLabel->setStyleSheet(style);

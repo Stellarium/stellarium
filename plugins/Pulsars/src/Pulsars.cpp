@@ -933,5 +933,6 @@ void Pulsars::setFlagShowPulsars(bool b)
 	{
 		flagShowPulsars=b;
 		emit flagPulsarsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
