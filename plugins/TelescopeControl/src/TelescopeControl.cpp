@@ -57,7 +57,6 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
-#include <QSignalMapper>
 
 #include <QDebug>
 
@@ -160,11 +159,6 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
-		QSignalMapper* slewObj = new QSignalMapper(this);
-		QSignalMapper* syncObj = new QSignalMapper(this);
-		QSignalMapper* slewDir = new QSignalMapper(this);
-		QSignalMapper* abortSlew = new QSignalMapper(this);
-
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
@@ -176,36 +170,27 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			StelAction* actionSlewObj = addAction(name, section, text, slewObj, "map()", shortcut);
-			slewObj->setMapping(actionSlewObj, i);
+			addAction(name, section, text, this, [=](){slewTelescopeToSelectedObject(i);}, shortcut);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			StelAction* actionSlewDir = addAction(name, section, text, slewDir, "map()", shortcut);
-			slewDir->setMapping(actionSlewDir, i);
+			addAction(name, section, text, this, [=](){slewTelescopeToViewDirection(i);}, shortcut);
 
 			// "Sync to object" commands
 			name = syncActionId.arg(i);
 			shortcut = QString("Ctrl+Shift+%1").arg(i);
 			text = q_("Sync telescope #%1 position to selected object").arg(i);
-			StelAction* actionSyncObj = addAction(name, section, text, syncObj, "map()", shortcut);
-			syncObj->setMapping(actionSyncObj, i);
+			addAction(name, section, text, this, [=](){syncTelescopeWithSelectedObject(i);}, shortcut);
 
 			// "Abort Slew" commands
 			name = abortSlewActionId.arg(i);
 			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
-			StelAction* actionAbortSlew = addAction(name, section, text, abortSlew, "map()", shortcut);
-			abortSlew->setMapping(actionAbortSlew, i);
+			addAction(name, section, text, this, [=](){abortTelescopeSlew(i);}, shortcut);
 		}
-		connect(slewObj, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToSelectedObject(int)));
-		connect(syncObj, SIGNAL(mapped(int)), this, SLOT(syncTelescopeWithSelectedObject(int)));
-		connect(slewDir, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToViewDirection(int)));
-		connect(abortSlew, SIGNAL(mapped(int)), this, SLOT(abortTelescopeSlew(int)));
-		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-				this, SLOT(translateActionDescriptions()));
+		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();

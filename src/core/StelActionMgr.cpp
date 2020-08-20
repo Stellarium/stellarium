@@ -132,7 +132,7 @@ void StelAction::trigger()
 		//This should still call the target slot first before all other registered slots
 		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
 		//This enables the slot to find out the StelAction that was triggered using sender(),
-		//and enables use of QSignalMapper or similar constructs
+		//and enables use of QSignalMapper (obsolete), Lambda functions or similar constructs
 		emit triggered();
 	}
 }
@@ -209,6 +209,17 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
 	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
 	action->connectToObject(target, slot);
+	return action;
+}
+
+
+StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
+				      QObject* context, std::function<void()> lambda,
+				      const QString& shortcut, const QString& altShortcut,
+				      bool global)
+{
+	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
+	connect(action, &StelAction::triggered, context, lambda);
 	return action;
 }
 
