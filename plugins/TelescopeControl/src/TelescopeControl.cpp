@@ -189,7 +189,6 @@ void TelescopeControl::init()
 			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
 			addAction(name, section, text, this, [=](){abortTelescopeSlew(i);}, shortcut);
-
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 

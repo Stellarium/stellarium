@@ -185,7 +185,6 @@ protected:
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
 						QObject* contextObject, std::function<void()> lambda,
 						const QString& shortcut="", const QString& altShortcut="");
-
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
