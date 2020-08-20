@@ -111,20 +111,6 @@ private:
 	//! case the action is made not checkable, or have the signature `func(bool)` and in that case the action
 	//! is made checkable.  When linked to a property the action is always made checkable.
 	void connectToObject(QObject* target, const char* slot);
-	//! Connect the action to a Lambda function
-	//! @param obj a "context object". functor will not be called if object does not exist (e.g. has been deleted).
-	//! @param functor A void Lambda function.  This can trigger actions, but the action is never checkable.
-	//!
-	template<typename Functor>
-	void connectToObject(QObject* obj, Functor functor);
-//	{
-//		//let Qt handle invoking the functor when the StelAction is triggered
-////		int signalIndex = metaObject()->indexOfSignal("triggered()");
-////		connect(this,metaObject()->method(signalIndex),obj,functor);
-//		connect(this,SIGNAL(triggered()),obj,functor, Qt::AutoConnection);
-//
-//		emit changed();
-//	}
 
 	QString group;
 	QString text;
@@ -172,32 +158,23 @@ public:
 	//! @param altShortcut Alternative shortcut
 	//! @param global determines QAction shortcut context (not necessary anymore?)
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-						  QObject* target, const char* slot,
-						  const QString& shortcut="", const QString& altShortcut="",
-						  bool global=false);
+			      QObject* target, const char* slot,
+			      const QString& shortcut="", const QString& altShortcut="",
+			      bool global=false);
 
 	//! Create and add a new StelAction, connected to an object slot.
 	//! @param id Global identifier.
 	//! @param groupId Group identifier.
 	//! @param text Short human-readable description in English.
-	//! @param object a reference object. When this is deleted, the Lambda functor will not be called.
-	//! @param functor a void function (Lambda). This can call slots and other functions.
+	//! @param context a reference object. When this is deleted, the Lambda function will not be called.
+	//! @param lambda a void function (Lambda). This can call slots and other functions.
 	//! @param shortcut Default shortcut/key combination for this action
 	//! @param altShortcut Alternative shortcut
 	//! @param global determines QAction shortcut context (not necessary anymore?)
-	// N.B. This template declaration formed after Qt5.13's qmenu.h
-	template<typename Functor>
-	inline typename std::enable_if<!std::is_same<const char*, Functor>::value, StelAction *>::type
-	addAction(const QString& id, const QString& groupId, const QString& text,
-					     QObject *object, Functor functor,
-					     const QString& shortcut, const QString& altShortcut="",
-					     bool global=false)
-{
-	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
-	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
-	action->connectToObject(object, std::move(functor));
-	return action;
-}
+	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+			      QObject* context,  std::function<void()> lambda,
+			      const QString& shortcut="", const QString& altShortcut="",
+			      bool global=false);
 
 	StelAction* findAction(const QString& id);
 	StelAction* findActionFromShortcut(const QString& shortcut);
