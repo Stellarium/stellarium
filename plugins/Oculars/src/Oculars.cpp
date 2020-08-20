@@ -927,7 +927,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 			int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-			int xPosition = qRound(projectorParams.viewportCenter[0] - 0.5 * metrics.width(labelText));
+			int xPosition = qRound(projectorParams.viewportCenter[0] - 0.5 * metrics.boundingRect(labelText).width());
 			int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 0.5 * metrics.height());
 			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
@@ -1680,11 +1680,11 @@ void Oculars::paintCCDBounds()
 							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
 							.arg(unit)
 							.arg(QChar(0x00D7));
-					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(scales)*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(scales).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Rotation angle of visible field of view for CCD (red rectangle)
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
-					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().width(angle)*params.devicePixelsPerPixel), qRound(height*0.5f + 5.f)));
+					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(angle).width()*params.devicePixelsPerPixel), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), angle, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1697,7 +1697,7 @@ void Oculars::paintCCDBounds()
 								.arg(QChar(0x00D7));
 						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 							resolutionOverlayText.append(" [*]");
-						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().width(resolutionOverlayText)*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));						
+						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().boundingRect(resolutionOverlayText).width()*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}
@@ -1919,7 +1919,7 @@ void Oculars::paintText(const StelCore* core)
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
 	QString widthString = "MMMMMMMMMMMMMMMMMMMMM";
-	const double insetFromRHS = painter.getFontMetrics().width(widthString);
+	const double insetFromRHS = painter.getFontMetrics().boundingRect(widthString).width();
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
 	int xPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[2] - insetFromRHS);
