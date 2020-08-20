@@ -168,6 +168,7 @@ public slots:
 	void setCoordinateSystem(int csID);
 	void populateCoordinateSystemsList();
 	void populateCoordinateAxis();
+	void populateRecentSearch();
 
 	//! Returns current max size of recent search list
 	int  getRecentSearchSize () const { return recentObjectSearchesData.maxSize;}

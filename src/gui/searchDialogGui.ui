@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>831</width>
-    <height>465</height>
+    <width>505</width>
+    <height>416</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1028,10 +1028,7 @@
       <attribute name="title">
        <string>Options</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>0</number>
-       </property>
+      <layout class="QGridLayout" name="gridLayout_6">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -1044,7 +1041,65 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QGroupBox" name="searchOptions">
+         <property name="title">
+          <string>Search options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBoxUseStartOfWords">
+            <property name="text">
+             <string>Use autofill only from the beginning of words</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxLockPosition">
+            <property name="text">
+             <string>Lock position when coordinates are used</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxFOVCenterMarker">
+            <property name="text">
+             <string>Show FOV center marker when position is search</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="2">
         <widget class="QGroupBox" name="simbadGroupBox">
          <property name="toolTip">
           <string>Use on-line astronomical database SIMBAD</string>
@@ -1062,6 +1117,18 @@
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
@@ -1101,51 +1168,25 @@
          </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QGroupBox" name="searchOptions">
+       <item row="2" column="0" colspan="2">
+        <widget class="QGroupBox" name="recentSearches">
          <property name="title">
-          <string>Search options</string>
+          <string>Recent Searches</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QCheckBox" name="checkBoxUseStartOfWords">
-            <property name="text">
-             <string>Use autofill only from the beginning of words</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxLockPosition">
-            <property name="text">
-             <string>Lock position when coordinates are used</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxFOVCenterMarker">
-            <property name="text">
-             <string>Show FOV center marker when position is search</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Recent Searches:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QLabel" name="recentSearchSizeLabel">
@@ -1159,7 +1200,7 @@
                <number>-1</number>
               </property>
               <property name="text">
-               <string>Max recent searches to display:</string>
+               <string>Max items to display:</string>
               </property>
              </widget>
             </item>
@@ -1216,33 +1257,19 @@
               </property>
              </spacer>
             </item>
+            <item>
+             <widget class="QPushButton" name="recentSearchClearDataPushButton">
+              <property name="toolTip">
+               <string extracomment="Deletes all recent search object data"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/uibtDelete.png</normaloff>
+                <disabledoff>:/graphicGui/uibtDelete-disabled.png</disabledoff>:/graphicGui/uibtDelete.png</iconset>
+              </property>
+             </widget>
+            </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QPushButton" name="recentSearchClearDataPushButton">
-            <property name="toolTip">
-             <string extracomment="Deletes all recent search object data"/>
-            </property>
-            <property name="text">
-             <string>Clear Search History</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
@@ -1272,6 +1299,8 @@
   <tabstop>AxisXSpinBox</tabstop>
   <tabstop>AxisYSpinBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

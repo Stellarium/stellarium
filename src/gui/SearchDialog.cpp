@@ -222,6 +222,7 @@ void SearchDialog::retranslate()
 		populateSimbadServerList();
 		populateCoordinateSystemsList();
 		populateCoordinateAxis();
+		populateRecentSearch();
 		updateListTab();
 	}
 }
@@ -423,9 +424,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connectBoolProperty(ui->simbadGroupBox, "SearchDialog.useSimbad");
-	//connect(ui->simbadGroupBox, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
-	//ui->simbadGroupBox->setChecked(useSimbad);
+	connectBoolProperty(ui->simbadGroupBox, "SearchDialog.useSimbad");	
 	connectIntProperty(ui->searchRadiusSpinBox,    "SearchDialog.simbadDist");
 	connectIntProperty(ui->resultsSpinBox,         "SearchDialog.simbadCount");
 	connectBoolProperty(ui->allIDsCheckBox,        "SearchDialog.simbadGetIds");
@@ -494,18 +493,23 @@ void SearchDialog::createDialogContent()
 	// Update max size of "recent object searches"
 	connect(ui->recentSearchSizeSpinBox, SIGNAL(editingFinished()),
 		this, SLOT(recentSearchSizeEditingFinished()));
-
-
-	// Tooltip for recentSearchSizeSpinBox
-	QString toolTipComment = QString("Default: %1 | Range: %2 - %3 searches")
-			.arg(defaultMaxSize)
-			.arg(ui->recentSearchSizeSpinBox->minimum())
-			.arg(ui->recentSearchSizeSpinBox->maximum());
-	ui->recentSearchSizeSpinBox->setToolTip(toolTipComment);
-
 	// Clear data from recent search object
 	connect(ui->recentSearchClearDataPushButton, SIGNAL(clicked()),
 		this, SLOT(recentSearchClearDataClicked()));
+	populateRecentSearch();
+}
+
+void SearchDialog::populateRecentSearch()
+{
+	// Tooltip for recentSearchSizeSpinBox
+	QString toolTipComment = QString("%1: %2 | %3: %4 - %5 %6")
+			.arg(qc_("Default", "search tool"))
+			.arg(defaultMaxSize)
+			.arg(qc_("Range", "search tool"))
+			.arg(ui->recentSearchSizeSpinBox->minimum())
+			.arg(ui->recentSearchSizeSpinBox->maximum())
+			.arg(qc_("searches", "search tool"));
+	ui->recentSearchSizeSpinBox->setToolTip(toolTipComment);
 	setRecentSearchClearDataPushButton();
 }
 
@@ -539,7 +543,8 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	useSimbad = enable;
 	conf->setValue("search/flag_search_online", useSimbad);
 	if (dialog && ui->simbadStatusLabel) ui->simbadStatusLabel->clear();
-	if (dialog && ui->simbadCooStatusLabel) ui->simbadCooStatusLabel->clear();
+	if (dialog && ui->simbadCooStatusLabel) ui->simbadCooStatusLabel->clear();	
+	if (dialog && ui->simbadTab) ui->simbadTab->setEnabled(enable);
 	emit simbadUseChanged(enable);
 }
 
@@ -620,14 +625,11 @@ void SearchDialog::recentSearchClearDataClicked()
 void SearchDialog::setRecentSearchClearDataPushButton()
 {
 	// Enable clear button if recent list is greater than 0
-	bool toEnable;
-	toEnable = recentObjectSearchesData.recentList.size() > 0;
+	bool toEnable = recentObjectSearchesData.recentList.size() > 0;
 	ui->recentSearchClearDataPushButton->setEnabled(toEnable);
-
 	// Tool tip depends on recent list size
 	QString toolTipText;
-	toolTipText = toEnable ? "Delete all search objects data"
-			       : "No data to delete";
+	toolTipText = toEnable ? q_("Clear search history: delete all search objects data") : q_("Clear search history: no data to delete");
 	ui->recentSearchClearDataPushButton->setToolTip(toolTipText);
 }
 
