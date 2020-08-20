@@ -301,6 +301,15 @@ void MeteorShowersMgr::checkForUpdates()
 	}
 }
 
+void MeteorShowersMgr::actionEnablePlugin(const bool &b)
+{
+	if (m_enablePlugin != b)
+	{
+		m_enablePlugin = b;
+		emit enablePluginChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
+	}
+}
 
 void MeteorShowersMgr::deleteDownloadProgressBar()
 {
