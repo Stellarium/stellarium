@@ -68,7 +68,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
-        - COVERAGE=true
+        - COVERAGE=false
         - REPQT=true
 
     - os: linux
