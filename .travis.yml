@@ -39,7 +39,7 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: bionic
+      dist: focal
       addons:
         apt:
           packages:
@@ -73,7 +73,7 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: bionic
+      dist: focal
       addons:
         apt:
           packages:
@@ -106,7 +106,7 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: focal
+      dist: bionic
       addons:
         apt:
           packages:
@@ -140,7 +140,7 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: focal
+      dist: bionic
       addons:
         apt:
           packages:
