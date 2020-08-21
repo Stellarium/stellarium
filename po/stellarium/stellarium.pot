@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-20 07:59+0700\n"
+"POT-Creation-Date: 2020-08-21 09:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -483,7 +483,7 @@ msgstr ""
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:462
+#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
@@ -3314,56 +3314,21 @@ msgstr ""
 msgid "Look towards South Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:210
+#: src/core/StelMovementMgr.cpp:209
 msgid "Field of View"
 msgstr ""
 
+#. TRANSLATORS: Full phrase is "Set FOV to XX degrees"
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to 180°"
+msgid "Set FOV to"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:212
-msgid "Set FOV to 90°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:213
-msgid "Set FOV to 60°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:214
-msgid "Set FOV to 45°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:215
-msgid "Set FOV to 20°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:216
-msgid "Set FOV to 10°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:217
-msgid "Set FOV to 5°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:218
-msgid "Set FOV to 2°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:219
-msgid "Set FOV to 1°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:220
-msgid "Set FOV to 0.5°"
-msgstr ""
-
-#: src/core/StelMovementMgr.cpp:238
+#: src/core/StelMovementMgr.cpp:235
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:240
+#: src/core/StelMovementMgr.cpp:237
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr ""
@@ -3677,7 +3642,7 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1198 src/scripting/StelScriptMgr.cpp:472
+#: src/gui/ConfigurationDialog.cpp:1198 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:659
@@ -3699,7 +3664,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1199 src/scripting/StelScriptMgr.cpp:467
+#: src/gui/ConfigurationDialog.cpp:1199 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:563
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
@@ -4880,46 +4845,46 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:506
+#: src/gui/SearchDialog.cpp:508
 msgctxt "search tool"
 msgid "Default"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:508
+#: src/gui/SearchDialog.cpp:510
 msgctxt "search tool"
 msgid "Range"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:511
+#: src/gui/SearchDialog.cpp:513
 msgctxt "search tool"
 msgid "searches"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:632
+#: src/gui/SearchDialog.cpp:634
 msgid "Clear search history: delete all search objects data"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:632
+#: src/gui/SearchDialog.cpp:634
 msgid "Clear search history: no data to delete"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1155
+#: src/gui/SearchDialog.cpp:1157
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1165
+#: src/gui/SearchDialog.cpp:1167
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1391
+#: src/gui/SearchDialog.cpp:1393
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1392
+#: src/gui/SearchDialog.cpp:1394
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1486
+#: src/gui/SearchDialog.cpp:1488
 msgid "Paste and Search"
 msgstr ""
 
@@ -6000,12 +5965,12 @@ msgstr ""
 msgid "Date and Time in Gregorian calendar"
 msgstr ""
 
-#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1593
+#: src/scripting/StelScriptMgr.cpp:369 src/ui_configurationDialog.h:1593
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr ""
 
-#: src/scripting/StelScriptMgr.cpp:477
+#: src/scripting/StelScriptMgr.cpp:472
 msgid "Shortcut"
 msgstr ""
 
@@ -6113,7 +6078,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet constellation (FLOCK and SKYSAT satellites)
-#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2252
+#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2253
 msgid "planet"
 msgstr ""
 
@@ -9946,7 +9911,7 @@ msgid "Hydrogen regions"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3192 plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: src/ui_viewDialog.h:3192 plugins/Exoplanets/src/Exoplanets.cpp:1054
 msgid "Other"
 msgstr ""
 
@@ -13654,254 +13619,254 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2220
+#: plugins/Satellites/src/Satellites.cpp:2221
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2222
+#: plugins/Satellites/src/Satellites.cpp:2223
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2224
+#: plugins/Satellites/src/Satellites.cpp:2225
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2226
+#: plugins/Satellites/src/Satellites.cpp:2227
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2228
+#: plugins/Satellites/src/Satellites.cpp:2229
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2230
+#: plugins/Satellites/src/Satellites.cpp:2231
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2232
+#: plugins/Satellites/src/Satellites.cpp:2233
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2234
+#: plugins/Satellites/src/Satellites.cpp:2235
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2236
+#: plugins/Satellites/src/Satellites.cpp:2237
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2238
+#: plugins/Satellites/src/Satellites.cpp:2239
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2240
+#: plugins/Satellites/src/Satellites.cpp:2241
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2242
+#: plugins/Satellites/src/Satellites.cpp:2243
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2244
+#: plugins/Satellites/src/Satellites.cpp:2245
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2246
+#: plugins/Satellites/src/Satellites.cpp:2247
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2248
+#: plugins/Satellites/src/Satellites.cpp:2249
 msgid "iridium next"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2250
+#: plugins/Satellites/src/Satellites.cpp:2251
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2254
+#: plugins/Satellites/src/Satellites.cpp:2255
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2256
+#: plugins/Satellites/src/Satellites.cpp:2257
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2258
+#: plugins/Satellites/src/Satellites.cpp:2259
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2260
+#: plugins/Satellites/src/Satellites.cpp:2261
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2262
+#: plugins/Satellites/src/Satellites.cpp:2263
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
-#: plugins/Satellites/src/Satellites.cpp:2264
+#: plugins/Satellites/src/Satellites.cpp:2265
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
-#: plugins/Satellites/src/Satellites.cpp:2266
+#: plugins/Satellites/src/Satellites.cpp:2267
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
-#: plugins/Satellites/src/Satellites.cpp:2268
+#: plugins/Satellites/src/Satellites.cpp:2269
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
-#: plugins/Satellites/src/Satellites.cpp:2270
+#: plugins/Satellites/src/Satellites.cpp:2271
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2272
+#: plugins/Satellites/src/Satellites.cpp:2273
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
-#: plugins/Satellites/src/Satellites.cpp:2274
+#: plugins/Satellites/src/Satellites.cpp:2275
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2276
+#: plugins/Satellites/src/Satellites.cpp:2277
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2278
+#: plugins/Satellites/src/Satellites.cpp:2279
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2280
+#: plugins/Satellites/src/Satellites.cpp:2281
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2282
+#: plugins/Satellites/src/Satellites.cpp:2283
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2288
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2290
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2292
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2294
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2296
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2298
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2311
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2313
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2317
+#: plugins/Satellites/src/Satellites.cpp:2318
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2319
+#: plugins/Satellites/src/Satellites.cpp:2320
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2321
+#: plugins/Satellites/src/Satellites.cpp:2322
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2323
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2325
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2327
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -14733,88 +14698,88 @@ msgstr ""
 msgid "Discard"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:80
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:171
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:214
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:79
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
 msgid "Telescope Control"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:83
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:82
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:247
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:172
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:232
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:185
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:255
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:240
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:192
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:184
 #, qt-format
 msgid "Sync telescope #%1 position to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:251
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:259
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:190
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:236
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:244
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:214
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1779
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1764
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1781
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1766
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1783
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1785
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1787
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1772
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1789
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1774
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1791
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1776
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1793
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1778
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -17661,82 +17626,82 @@ msgid "Exoplanets configuration window"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1023
+#: plugins/Exoplanets/src/Exoplanets.cpp:1024
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1025
+#: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1027
+#: plugins/Exoplanets/src/Exoplanets.cpp:1028
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1030
+#: plugins/Exoplanets/src/Exoplanets.cpp:1031
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1032
+#: plugins/Exoplanets/src/Exoplanets.cpp:1033
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1034
+#: plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1037
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1039
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1041
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1043
+#: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Primary Transit"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1045
+#: plugins/Exoplanets/src/Exoplanets.cpp:1046
 msgid "Microlensing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1047
+#: plugins/Exoplanets/src/Exoplanets.cpp:1048
 msgid "Radial Velocity"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1049
+#: plugins/Exoplanets/src/Exoplanets.cpp:1050
 msgid "Imaging"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1052
 msgid "Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1055
+#: plugins/Exoplanets/src/Exoplanets.cpp:1056
 msgid "Astrometry"
 msgstr ""
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgid "TTV"
 msgstr ""
 
@@ -20288,7 +20253,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:649
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:658
 msgid "Meteor Showers"
 msgstr ""
 
@@ -20314,13 +20279,13 @@ msgstr ""
 msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:652
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:661
 msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:654
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:663
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

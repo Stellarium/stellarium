@@ -205,19 +205,16 @@ void StelMovementMgr::init()
 	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
 	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
 	// Field of view
-	// The feature was moved from FOV plugin
-	// TODO: Switch to use C++/Qt lambda's
-	QString fovGroup = N_("Field of View");	
-	addAction("actionSet_FOV_180deg",	 fovGroup, N_("Set FOV to 180°"), "setFOV180Deg()", "Ctrl+Alt+1");
-	addAction("actionSet_FOV_90deg",   fovGroup,	 N_("Set FOV to 90°"),   "setFOV90Deg()",   "Ctrl+Alt+2");
-	addAction("actionSet_FOV_60deg",   fovGroup, N_("Set FOV to 60°"),   "setFOV60Deg()",   "Ctrl+Alt+3");
-	addAction("actionSet_FOV_45deg",   fovGroup, N_("Set FOV to 45°"),   "setFOV45Deg()",   "Ctrl+Alt+4");
-	addAction("actionSet_FOV_20deg",   fovGroup, N_("Set FOV to 20°"),   "setFOV20Deg()",   "Ctrl+Alt+5");
-	addAction("actionSet_FOV_10deg",   fovGroup, N_("Set FOV to 10°"),   "setFOV10Deg()",   "Ctrl+Alt+6");
-	addAction("actionSet_FOV_5deg",     fovGroup, N_("Set FOV to 5°"),     "setFOV5Deg()",     "Ctrl+Alt+7");
-	addAction("actionSet_FOV_2deg",     fovGroup, N_("Set FOV to 2°"),     "setFOV2Deg()",     "Ctrl+Alt+8");
-	addAction("actionSet_FOV_1deg",     fovGroup, N_("Set FOV to 1°"),     "setFOV1Deg()",     "Ctrl+Alt+9");
-	addAction("actionSet_FOV_0_5deg", fovGroup, N_("Set FOV to 0.5°"),  "setFOV05Deg()",   "Ctrl+Alt+0");
+	// The feature was moved from FOV plugin	
+	QString tfov, fovGroup = N_("Field of View");
+	// TRANSLATORS: Full phrase is "Set FOV to XX degrees"
+	QString fovText = N_("Set FOV to");
+	QList<float> fov = { 0.5f, 180.f, 90.f, 60.f, 45.f, 20.f, 10.f, 5.f, 2.f, 1.f };
+	for (int i = 0; i < fov.size(); ++i) {
+		float cfov = fov.at(i);
+		(cfov<1.f) ? tfov = QString::number(cfov, 'f', 1) : tfov = QString::number(cfov, 'f', 0);
+		addAction(QString("actionSet_FOV_%1deg").arg(tfov.replace(".","_")), fovGroup, QString("%1 %2%3").arg(fovText, tfov, QChar(0x00B0)), this, [=](){setFOVDeg(cfov);}, QString("Ctrl+Alt+%1").arg(i));
+	}
 	// Remove all FOV settings
 	conf->beginGroup("FOV");
 	conf->remove("");
@@ -921,54 +918,9 @@ void StelMovementMgr::lookTowardsSCP(void)
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::setFOV180Deg()
+void StelMovementMgr::setFOVDeg(float fov)
 {
-	zoomTo(180., 1.f);
-}
-
-void StelMovementMgr::setFOV90Deg()
-{
-	zoomTo(90., 1.f);
-}
-
-void StelMovementMgr::setFOV60Deg()
-{
-	zoomTo(60., 1.f);
-}
-
-void StelMovementMgr::setFOV45Deg()
-{
-	zoomTo(45., 1.f);
-}
-
-void StelMovementMgr::setFOV20Deg()
-{
-	zoomTo(20., 1.f);
-}
-
-void StelMovementMgr::setFOV10Deg()
-{
-	zoomTo(10., 1.f);
-}
-
-void StelMovementMgr::setFOV5Deg()
-{
-	zoomTo(5., 1.f);
-}
-
-void StelMovementMgr::setFOV2Deg()
-{
-	zoomTo(2., 1.f);
-}
-
-void StelMovementMgr::setFOV1Deg()
-{
-	zoomTo(1., 1.f);
-}
-
-void StelMovementMgr::setFOV05Deg()
-{
-	zoomTo(0.5, 1.f);
+	zoomTo(fov, 1.f);
 }
 
 // Increment/decrement smoothly the vision field and position

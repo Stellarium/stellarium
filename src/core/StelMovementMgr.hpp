@@ -410,16 +410,7 @@ private slots:
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
 
-	void setFOV180Deg();
-	void setFOV90Deg();
-	void setFOV60Deg();
-	void setFOV45Deg();
-	void setFOV20Deg();
-	void setFOV10Deg();
-	void setFOV5Deg();
-	void setFOV2Deg();
-	void setFOV1Deg();
-	void setFOV05Deg();
+	void setFOVDeg(float fov);
 
 private:
 	double currentFov; // The current FOV in degrees
