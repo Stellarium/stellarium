@@ -58,11 +58,7 @@ StelAction::StelAction(const QString& actionId,
 	QString cfgOpt = "shortcuts/" + actionId;
 	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", Qt::SkipEmptyParts);
-		#else
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", QString::SkipEmptyParts);
-		#endif
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(" "); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
@@ -320,12 +316,12 @@ void StelActionMgr::saveShortcuts()
 		    action->altKeySequence == action->defaultAltKeySequence)
 			continue;
 		QString seq = action->keySequence.toString().replace(" ", "");
+		if (seq.isEmpty()) // Let's allow remove shortcuts
+			seq = "\"\"";
 		if (action->altKeySequence != action->defaultAltKeySequence)
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		if (action->altKeySequence.toString()=="")
-			seq += " \"\"";
-		if (seq.isEmpty()) // Let's allow remove shortcuts
-			seq = "\"\"";
+			seq += " \"\"";		
 		conf->setValue(action->objectName(), seq);
 	}
 	conf->endGroup();
