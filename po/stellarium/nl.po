@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-16 21:28+0700\n"
+"POT-Creation-Date: 2020-08-21 09:22+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: alex d, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
@@ -31,11 +31,11 @@ msgstr ""
 
 #: src/core/modules/CustomObject.cpp:84
 msgid "custom object"
-msgstr "aangepast object"
+msgstr "eigen object"
 
 #: src/core/modules/CustomObject.cpp:86
 msgid "custom marker"
-msgstr "aangepaste markering"
+msgstr "eigen markering"
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
@@ -194,7 +194,7 @@ msgstr "Primaire verticaal"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/core/modules/GridLinesMgr.cpp:727 src/gui/SearchDialog.cpp:275
+#: src/core/modules/GridLinesMgr.cpp:727 src/gui/SearchDialog.cpp:313
 #: src/gui/AstroCalcDialog.cpp:842 src/gui/AstroCalcDialog.cpp:1505
 #: src/gui/AstroCalcDialog.cpp:2029 src/gui/AstroCalcDialog.cpp:2958
 #: src/gui/AstroCalcDialog.cpp:3465 src/gui/AstroCalcDialog.cpp:3743
@@ -473,11 +473,11 @@ msgstr "Grond"
 
 #: src/core/modules/LandscapeMgr.cpp:500
 msgid "Landscape illumination"
-msgstr "Landschapverlichting"
+msgstr "Landschapsverlichting"
 
 #: src/core/modules/LandscapeMgr.cpp:501
 msgid "Landscape labels"
-msgstr "Landschaplabels"
+msgstr "Landschapslabels"
 
 #: src/core/modules/LandscapeMgr.cpp:502
 msgid "Light pollution data from locations database"
@@ -495,9 +495,9 @@ msgstr "Lichtvervuiling verlagen"
 msgid "Cyclic change in light pollution"
 msgstr "Cyclische wijziging in lichtvervuiling"
 
-#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:462
+#: src/core/modules/LandscapeMgr.cpp:912 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -1408,7 +1408,7 @@ msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
 
-#: src/core/modules/Nebula.cpp:457 src/ui_searchDialogGui.h:866
+#: src/core/modules/Nebula.cpp:457 src/ui_searchDialogGui.h:918
 msgid "Morphological description"
 msgstr "Morfologische beschrijving"
 
@@ -1862,7 +1862,7 @@ msgstr "Opgelet!"
 
 #: src/core/modules/NebulaMgr.cpp:1422
 msgid "DSO catalog version mismatch"
-msgstr ""
+msgstr "Versie van de DSO catalogus is niet juist"
 
 #: src/core/modules/NebulaMgr.cpp:1422 src/core/SimbadSearcher.cpp:175
 #: src/core/SimbadSearcher.cpp:177
@@ -1871,11 +1871,11 @@ msgstr "Gevonden"
 
 #: src/core/modules/NebulaMgr.cpp:1422
 msgid "Expected"
-msgstr ""
+msgstr "Verwacht"
 
 #: src/core/modules/NebulaMgr.cpp:1422
 msgid "See Logfile for instructions."
-msgstr ""
+msgstr "Zie logbestand voor instructies."
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:228 plugins/Quasars/src/Quasar.cpp:140
@@ -2028,7 +2028,7 @@ msgstr "Fasehoek"
 
 #: src/core/modules/Planet.cpp:780 src/core/modules/Planet.cpp:788
 msgid "Illuminated"
-msgstr "Onregelmatig"
+msgstr "Verlicht"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:806 src/core/modules/Planet.cpp:950
@@ -2181,7 +2181,7 @@ msgstr "Mini lichamen vergroten"
 
 #: src/core/modules/SolarSystem.cpp:290
 msgid "Native planet names (from starlore)"
-msgstr "Inheemse planeetnamen (uit Verhalen over sterren)"
+msgstr "Inheemse planeetnamen (uit hemelculturen)"
 
 #: src/core/modules/StarWrapper.cpp:192
 msgid "eruptive variable star"
@@ -2393,7 +2393,7 @@ msgstr "Gebruiker markeringen initialiseren..."
 
 #: src/core/StelApp.cpp:593
 msgid "Initializing custom objects..."
-msgstr "Aangepaste objecten initialiseren..."
+msgstr "Eigen objecten initialiseren..."
 
 #: src/core/StelApp.cpp:599
 msgid "Initializing highlights..."
@@ -3506,56 +3506,21 @@ msgstr "Naar de noordelijke hemelpool kijken"
 msgid "Look towards South Celestial pole"
 msgstr "Naar de zuidelijke hemelpool kijken"
 
-#: src/core/StelMovementMgr.cpp:210
+#: src/core/StelMovementMgr.cpp:209
 msgid "Field of View"
 msgstr "Gezichtsveld"
 
+#. TRANSLATORS: Full phrase is "Set FOV to XX degrees"
 #: src/core/StelMovementMgr.cpp:211
-msgid "Set FOV to 180°"
-msgstr "FOV naar 180°"
+msgid "Set FOV to"
+msgstr "FOV instellen op "
 
-#: src/core/StelMovementMgr.cpp:212
-msgid "Set FOV to 90°"
-msgstr "FOV naar 90°"
-
-#: src/core/StelMovementMgr.cpp:213
-msgid "Set FOV to 60°"
-msgstr "FOV naar 60°"
-
-#: src/core/StelMovementMgr.cpp:214
-msgid "Set FOV to 45°"
-msgstr "FOV naar 45°"
-
-#: src/core/StelMovementMgr.cpp:215
-msgid "Set FOV to 20°"
-msgstr "FOV naar 20°"
-
-#: src/core/StelMovementMgr.cpp:216
-msgid "Set FOV to 10°"
-msgstr "FOV naar 10°"
-
-#: src/core/StelMovementMgr.cpp:217
-msgid "Set FOV to 5°"
-msgstr "FOV naar 5°"
-
-#: src/core/StelMovementMgr.cpp:218
-msgid "Set FOV to 2°"
-msgstr "FOV naar 2°"
-
-#: src/core/StelMovementMgr.cpp:219
-msgid "Set FOV to 1°"
-msgstr "FOV naar 1°"
-
-#: src/core/StelMovementMgr.cpp:220
-msgid "Set FOV to 0.5°"
-msgstr "FOV naar 0.5°"
-
-#: src/core/StelMovementMgr.cpp:238
+#: src/core/StelMovementMgr.cpp:235
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Equatoriale montering"
 
-#: src/core/StelMovementMgr.cpp:240
+#: src/core/StelMovementMgr.cpp:237
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Alt-azimut montering"
@@ -3869,9 +3834,9 @@ msgstr "Auteurs"
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:1198 src/scripting/StelScriptMgr.cpp:472
+#: src/gui/ConfigurationDialog.cpp:1198 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:567
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:659
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
@@ -3891,9 +3856,9 @@ msgstr "Contact"
 msgid "Version"
 msgstr "Versie"
 
-#: src/gui/ConfigurationDialog.cpp:1199 src/scripting/StelScriptMgr.cpp:467
+#: src/gui/ConfigurationDialog.cpp:1199 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:568
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
@@ -4304,7 +4269,7 @@ msgstr "Klik-rechts"
 
 #: src/gui/HelpDialog.cpp:280
 msgid "Add custom marker"
-msgstr "Aangepaste markering toevoegen"
+msgstr "Eigen markering toevoegen"
 
 #: src/gui/HelpDialog.cpp:281
 msgid "Shift & left click"
@@ -4320,7 +4285,7 @@ msgstr "Shift & klik-rechts"
 
 #: src/gui/HelpDialog.cpp:286
 msgid "Delete all custom markers"
-msgstr "Alle aangepaste markeringen verwijderen"
+msgstr "Alle eigen markeringen verwijderen"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Shift & Alt & right click"
@@ -4451,7 +4416,7 @@ msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:451
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:570
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -4515,9 +4480,9 @@ msgstr "Help venster"
 msgid "Configuration window"
 msgstr "Configuratie"
 
-#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:776
+#: src/gui/StelGui.cpp:243 src/ui_searchDialogGui.h:832
 msgid "Search window"
-msgstr "Zoeken"
+msgstr "Zoekvenster"
 
 #: src/gui/StelGui.cpp:244
 msgid "Sky and viewing options window"
@@ -5055,87 +5020,111 @@ msgstr "Stellarium script"
 msgid "Include File"
 msgstr "Inclusief bestand"
 
-#: src/gui/SearchDialog.cpp:227
+#: src/gui/SearchDialog.cpp:265
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Equatoriaal (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:228
+#: src/gui/SearchDialog.cpp:266
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Equatoriaal"
 
-#: src/gui/SearchDialog.cpp:229
+#: src/gui/SearchDialog.cpp:267
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: src/gui/SearchDialog.cpp:230
+#: src/gui/SearchDialog.cpp:268
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galactisch"
 
-#: src/gui/SearchDialog.cpp:231
+#: src/gui/SearchDialog.cpp:269
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Supergalactisch"
 
-#: src/gui/SearchDialog.cpp:232
+#: src/gui/SearchDialog.cpp:270
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Ecliptica"
 
-#: src/gui/SearchDialog.cpp:233
+#: src/gui/SearchDialog.cpp:271
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Ecliptica (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:261
+#: src/gui/SearchDialog.cpp:299
 msgid "Right ascension"
 msgstr "Rechte klimming"
 
-#: src/gui/SearchDialog.cpp:264 src/gui/AstroCalcDialog.cpp:3339
+#: src/gui/SearchDialog.cpp:302 src/gui/AstroCalcDialog.cpp:3339
 #: src/gui/AstroCalcDialog.cpp:3397
 msgid "Declination"
 msgstr "Declinatie"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:272 src/gui/AstroCalcDialog.cpp:619
+#: src/gui/SearchDialog.cpp:310 src/gui/AstroCalcDialog.cpp:619
 #: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:803
 #: src/gui/AstroCalcDialog.cpp:840 src/gui/AstroCalcDialog.cpp:1503
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1319
 msgid "Azimuth"
 msgstr "Azimut"
 
-#: src/gui/SearchDialog.cpp:286
+#: src/gui/SearchDialog.cpp:324
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:622
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:628
 msgid "Longitude"
 msgstr "Lengtegraad"
 
-#: src/gui/SearchDialog.cpp:289
+#: src/gui/SearchDialog.cpp:327
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:623
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:629
 msgid "Latitude"
 msgstr "Breedtegraad"
 
-#: src/gui/SearchDialog.cpp:762
+#: src/gui/SearchDialog.cpp:508
+msgctxt "search tool"
+msgid "Default"
+msgstr "Standaard"
+
+#: src/gui/SearchDialog.cpp:510
+msgctxt "search tool"
+msgid "Range"
+msgstr "Bereik"
+
+#: src/gui/SearchDialog.cpp:513
+msgctxt "search tool"
+msgid "searches"
+msgstr "zoekacties"
+
+#: src/gui/SearchDialog.cpp:634
+msgid "Clear search history: delete all search objects data"
+msgstr ""
+"Zoekgeschiedenis verwijderen: verwijder alle data van gezochte objecten"
+
+#: src/gui/SearchDialog.cpp:634
+msgid "Clear search history: no data to delete"
+msgstr "Zoekgeschiedenis verwijderen: zoekgeschiedenis is al leeg"
+
+#: src/gui/SearchDialog.cpp:1157
 msgid "Simbad Lookup Error"
 msgstr "Simbad zoekfout"
 
-#: src/gui/SearchDialog.cpp:773
+#: src/gui/SearchDialog.cpp:1167
 msgid "Simbad Lookup"
 msgstr "Simbad zoeken"
 
-#: src/gui/SearchDialog.cpp:989
+#: src/gui/SearchDialog.cpp:1393
 msgid "University of Strasbourg (France)"
 msgstr "Universiteit van Straatsburg (Frankrijk)"
 
-#: src/gui/SearchDialog.cpp:990
+#: src/gui/SearchDialog.cpp:1394
 msgid "Harvard University (USA)"
 msgstr "Harvard Universiteit (VS)"
 
-#: src/gui/SearchDialog.cpp:1077
+#: src/gui/SearchDialog.cpp:1488
 msgid "Paste and Search"
 msgstr "Plakken en zoeken"
 
@@ -5202,7 +5191,7 @@ msgstr "Fenomenen opschonen"
 
 #: src/gui/AstroCalcDialog.cpp:154 src/ui_astroCalcDialog.h:1740
 msgid "Calculate transits"
-msgstr "Doorgang berekenen"
+msgstr "Doorgangen berekenen"
 
 #: src/gui/AstroCalcDialog.cpp:155 src/ui_astroCalcDialog.h:1738
 msgid "Cleanup transits"
@@ -6200,7 +6189,7 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "saros"
 
-#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:860
+#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:912
 msgid "Object"
 msgstr "Object"
 
@@ -6228,12 +6217,12 @@ msgstr "Datum en tijd in de Juliaanse kalender"
 msgid "Date and Time in Gregorian calendar"
 msgstr "Datum en tijd in de Gregoriaanse kalender"
 
-#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1593
+#: src/scripting/StelScriptMgr.cpp:369 src/ui_configurationDialog.h:1593
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Scripts"
 
-#: src/scripting/StelScriptMgr.cpp:477
+#: src/scripting/StelScriptMgr.cpp:472
 msgid "Shortcut"
 msgstr "Sneltoets"
 
@@ -6351,7 +6340,7 @@ msgstr "NW"
 #. TRANSLATORS: Type of object
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet
 #. constellation (FLOCK and SKYSAT satellites)
-#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2252
+#: src/translations.h:56 plugins/Satellites/src/Satellites.cpp:2253
 msgid "planet"
 msgstr "planeet"
 
@@ -6428,7 +6417,7 @@ msgstr "Sterrenbeelden"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:106
 msgid "Custom Objects"
-msgstr "Aangepaste objecten"
+msgstr "Eigen objecten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:108
@@ -7892,12 +7881,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
-"Phobos loopt voor op Mars en 'transits' (overgang) de zon, passeert het en "
-"maakt vervolgens rechtsomkeer terug naar de zon en 'transits' het "
-"gedeeltelijk weer (alleen te zien op het zuidelijk halfrond van Deimos). Dan"
-" wordt de zon volledig verduisterd door Mars terwijl Phobos 'transits' in de"
-" duisternis tussen Mars en Deimos. Wanneer Phobos zich van Mars verwijderd "
-"is het nog steeds verduisterd door de Mars schaduw, om later op te lichten."
+"Phobos loopt voor op Mars en voor de zon, passeert het en maakt vervolgens "
+"rechtsomkeer voor een volgende gedeeltelijke zonsovergang (alleen te zien op"
+" het zuidelijk halfrond van Deimos). Dan wordt de zon volledig verduisterd "
+"door Mars terwijl Phobos zich voortbeweegt in de duisternis tussen Mars en "
+"Deimos. Wanneer Phobos zich van Mars verwijdert is het nog steeds "
+"verduisterd door de Marsschaduw, om later op te lichten."
 
 #: src/translations.h:713
 msgid ""
@@ -9489,7 +9478,7 @@ msgstr "Oeganda"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
 msgid "US Minor Outlying Islands"
-msgstr "US kleinere afgelegen eilanden"
+msgstr "Kleine afgelegen eilanden van de VS"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
@@ -9702,215 +9691,223 @@ msgstr "Land:"
 msgid "Enable daylight saving time"
 msgstr "Daglichttijd opslaan inschakelen"
 
-#: src/ui_searchDialogGui.h:775
+#: src/ui_searchDialogGui.h:828
 msgid "Find Object"
 msgstr "Object zoeken"
 
-#: src/ui_searchDialogGui.h:779 src/ui_searchDialogGui.h:783
+#: src/ui_searchDialogGui.h:835
 msgid "Use tab key for select of found items"
 msgstr "Gebruik de tab-toets om gevonden items te selecteren"
 
-#: src/ui_searchDialogGui.h:788
+#: src/ui_searchDialogGui.h:840
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:791
+#: src/ui_searchDialogGui.h:843
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:794
+#: src/ui_searchDialogGui.h:846
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:797
+#: src/ui_searchDialogGui.h:849
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:800
+#: src/ui_searchDialogGui.h:852
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:803
+#: src/ui_searchDialogGui.h:855
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:806
+#: src/ui_searchDialogGui.h:858
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:809
+#: src/ui_searchDialogGui.h:861
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:812
+#: src/ui_searchDialogGui.h:864
 msgid "theta"
 msgstr "theta"
 
-#: src/ui_searchDialogGui.h:815
+#: src/ui_searchDialogGui.h:867
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:818
+#: src/ui_searchDialogGui.h:870
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:821
+#: src/ui_searchDialogGui.h:873
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:824
+#: src/ui_searchDialogGui.h:876
 msgid "nu"
 msgstr "nu"
 
-#: src/ui_searchDialogGui.h:827
+#: src/ui_searchDialogGui.h:879
 msgid "xi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:830
+#: src/ui_searchDialogGui.h:882
 msgid "omicron"
 msgstr "omicron"
 
-#: src/ui_searchDialogGui.h:833
+#: src/ui_searchDialogGui.h:885
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:836
+#: src/ui_searchDialogGui.h:888
 msgid "rho"
 msgstr "rho"
 
-#: src/ui_searchDialogGui.h:839
+#: src/ui_searchDialogGui.h:891
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:842
+#: src/ui_searchDialogGui.h:894
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:845
+#: src/ui_searchDialogGui.h:897
 msgid "upsilon"
 msgstr "ypsilon"
 
-#: src/ui_searchDialogGui.h:848
+#: src/ui_searchDialogGui.h:900
 msgid "phi"
 msgstr "phi"
 
-#: src/ui_searchDialogGui.h:851
+#: src/ui_searchDialogGui.h:903
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:854
+#: src/ui_searchDialogGui.h:906
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:857
+#: src/ui_searchDialogGui.h:909
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:859
+#: src/ui_searchDialogGui.h:911
 msgid "Greek letters for Bayer designations"
 msgstr "Griekse letters voor Bayer benamingen"
 
-#: src/ui_searchDialogGui.h:861
+#: src/ui_searchDialogGui.h:913
 msgid "Query SIMBAD about selected object"
 msgstr "Vraag SIMBAD over geselecteerd object"
 
-#: src/ui_searchDialogGui.h:862
+#: src/ui_searchDialogGui.h:914
 msgid "All IDs"
 msgstr "Alle IDs"
 
-#: src/ui_searchDialogGui.h:863
+#: src/ui_searchDialogGui.h:915
 msgid "Types"
 msgstr "Typen"
 
-#: src/ui_searchDialogGui.h:864
+#: src/ui_searchDialogGui.h:916
 msgid "Spectral Class"
 msgstr "Spectraalklasse"
 
-#: src/ui_searchDialogGui.h:868
+#: src/ui_searchDialogGui.h:920
 msgid "Morph. Descr."
 msgstr "Morf. omschr."
 
-#: src/ui_searchDialogGui.h:869
+#: src/ui_searchDialogGui.h:921
 msgid "Dimensions"
 msgstr "Afmetingen"
 
-#: src/ui_searchDialogGui.h:870
+#: src/ui_searchDialogGui.h:922
 msgid "Max. search radius"
 msgstr "Maximale zoekradius"
 
-#: src/ui_searchDialogGui.h:871
+#: src/ui_searchDialogGui.h:923
 msgid "arcseconds"
-msgstr "boogsecondes"
+msgstr "boogseconden"
 
-#: src/ui_searchDialogGui.h:872
+#: src/ui_searchDialogGui.h:924
 msgid "Max. results "
 msgstr "Max. resultaten "
 
-#: src/ui_searchDialogGui.h:874
+#: src/ui_searchDialogGui.h:926
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 "Opmerking: dit hulpmiddel past de brekingscorrectie voor coördinaten niet "
 "toe."
 
-#: src/ui_searchDialogGui.h:876
+#: src/ui_searchDialogGui.h:928
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:603
 msgid "Coordinate system:"
-msgstr "Coördinaten systeem:"
+msgstr "Coördinatensysteem:"
 
-#: src/ui_searchDialogGui.h:878
+#: src/ui_searchDialogGui.h:930
 msgid "Position"
 msgstr "Positie"
 
-#: src/ui_searchDialogGui.h:880
+#: src/ui_searchDialogGui.h:932
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Sommige objecten kunnen na activering van respectievelijke plug-ins worden "
 "gevonden"
 
-#: src/ui_searchDialogGui.h:882
+#: src/ui_searchDialogGui.h:934
 msgid "names in English"
 msgstr "namen in Engels"
 
-#: src/ui_searchDialogGui.h:883 src/ui_astroCalcDialog.h:1807
+#: src/ui_searchDialogGui.h:935 src/ui_astroCalcDialog.h:1807
 #: plugins/Satellites/src/ui_satellitesDialog.h:878
 msgid "Search in list..."
 msgstr "Zoeken in lijst..."
 
-#: src/ui_searchDialogGui.h:884
+#: src/ui_searchDialogGui.h:936
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Lists"
 msgstr "Lijsten"
 
-#: src/ui_searchDialogGui.h:886
-msgid "Use on-line astronomical database SIMBAD"
-msgstr "Gebruik de online astronomische database SIMBAD"
-
-#: src/ui_searchDialogGui.h:888
-msgid "Use SIMBAD"
-msgstr "Gebruik SIMBAD"
-
-#: src/ui_searchDialogGui.h:889
-msgid "Server:"
-msgstr "Server:"
-
-#: src/ui_searchDialogGui.h:890
+#: src/ui_searchDialogGui.h:937
 msgid "Search options"
-msgstr "Zoek opties"
+msgstr "Zoekopties"
 
-#: src/ui_searchDialogGui.h:891
+#: src/ui_searchDialogGui.h:938
 msgid "Use autofill only from the beginning of words"
 msgstr "Gebruik automatisch aanvullen vanaf het begin van woorden"
 
-#: src/ui_searchDialogGui.h:892
+#: src/ui_searchDialogGui.h:939
 msgid "Lock position when coordinates are used"
 msgstr "Positie vergrendelen wanneer coördinaten worden gebruikt"
 
-#: src/ui_searchDialogGui.h:893
+#: src/ui_searchDialogGui.h:940
 msgid "Show FOV center marker when position is search"
 msgstr "De FOV midden markering tonen wanneer de positie wordt gezocht "
 
-#: src/ui_searchDialogGui.h:894 src/ui_viewDialog.h:3598
+#: src/ui_searchDialogGui.h:942
+msgid "Use on-line astronomical database SIMBAD"
+msgstr "Gebruik de online astronomische database SIMBAD"
+
+#: src/ui_searchDialogGui.h:944
+msgid "Use SIMBAD"
+msgstr "Gebruik SIMBAD"
+
+#: src/ui_searchDialogGui.h:945
+msgid "Server:"
+msgstr "Server:"
+
+#: src/ui_searchDialogGui.h:946
+msgid "Recent Searches"
+msgstr "Recente zoekacties"
+
+#: src/ui_searchDialogGui.h:950
+msgid "Max items to display:"
+msgstr "Aantal te onthouden zoekacties:"
+
+#: src/ui_searchDialogGui.h:954 src/ui_viewDialog.h:3598
 #: src/ui_viewDialog.h:3624 src/ui_configurationDialog.h:1929
 #: src/ui_configurationDialog.h:1940
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:437
@@ -10074,7 +10071,7 @@ msgstr "Planeten magnitude algoritme:"
 
 #: src/ui_viewDialog.h:3033
 msgid "Use more accurate 3D models (where available)"
-msgstr "Gebruik meer accurate 3D modellen (waar aanbevolen)"
+msgstr "Gebruik meer accurate 3D modellen (waar beschikbaar)"
 
 #: src/ui_viewDialog.h:3035
 msgid "Limit the magnitude of solar system objects"
@@ -10333,7 +10330,7 @@ msgid "Hydrogen regions"
 msgstr "Waterstofregio's"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3192 plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: src/ui_viewDialog.h:3192 plugins/Exoplanets/src/Exoplanets.cpp:1054
 msgid "Other"
 msgstr "Overige"
 
@@ -10485,7 +10482,7 @@ msgstr "Kleur van ecliptica polen (J2000.0)"
 
 #: src/ui_viewDialog.h:3283
 msgid "Ecliptical coordinates for J2000.0."
-msgstr "Ecliptica coördinaten voor J2000.0."
+msgstr "Ecliptische coördinaten voor J2000.0."
 
 #: src/ui_viewDialog.h:3285
 msgid "Ecliptic grid (J2000)"
@@ -10665,7 +10662,7 @@ msgstr "Kleur van galactische polen"
 #: src/ui_viewDialog.h:3470
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
-"Ecliptica coördinaten van de huidige datum. Wordt allen op aarde "
+"Ecliptische coördinaten van de huidige datum. Wordt allen op aarde "
 "weergegeven."
 
 #: src/ui_viewDialog.h:3472
@@ -10685,7 +10682,7 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"Oppositie/conjunctie lengtegraad lijn - de ecliptica lengtegraad lijn die "
+"Oppositie/conjunctie lengtegraad lijn - de ecliptische lengtegraad lijn die "
 "door beide ecliptica polen gaat, de zon en oppositie punt."
 
 #: src/ui_viewDialog.h:3486
@@ -10812,7 +10809,7 @@ msgstr "Kleur van de cirkelvormige markering van het FOV"
 
 #: src/ui_viewDialog.h:3575
 msgid "Show circular marker of field of view (FOV)"
-msgstr "Cirkelvormig gezichtsveld van het beeld tonen (FOC)"
+msgstr "Cirkelvormig gezichtsveld (FOV) van het beeld tonen"
 
 #: src/ui_viewDialog.h:3577
 msgid "Circular FOV"
@@ -11029,7 +11026,7 @@ msgstr "Landschap"
 #: src/ui_viewDialog.h:3696
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
-msgstr "Verhalen over sterren"
+msgstr "Hemelculturen"
 
 #: src/ui_viewDialog.h:3698
 msgid "Surveys"
@@ -11068,7 +11065,7 @@ msgstr "Tijd"
 
 #: src/ui_configurationDialog.h:1591
 msgid "Tools"
-msgstr "Tools"
+msgstr "Opties"
 
 #: src/ui_configurationDialog.h:1595
 msgid "Plugins"
@@ -11227,7 +11224,7 @@ msgstr "Alle beschikbaar"
 msgid "Display no information"
 msgstr "Geen informatie tonen"
 
-#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2418
+#: src/ui_configurationDialog.h:1648 plugins/Oculars/src/Oculars.cpp:2386
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Geen"
@@ -11255,11 +11252,11 @@ msgstr "Uurhoek/declinatie"
 
 #: src/ui_configurationDialog.h:1659
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr "Ecliptica coördinaten, equinox van datum (alleen voor de aarde)"
+msgstr "Ecliptische coördinaten, equinox van datum (alleen voor de aarde)"
 
 #: src/ui_configurationDialog.h:1661
 msgid "Ecliptic coordinates (of date)"
-msgstr "Ecliptica coördinaten (van datum)"
+msgstr "Ecliptische coördinaten (van datum)"
 
 #: src/ui_configurationDialog.h:1663
 msgid "Equatorial coordinates, equinox of J2000.0"
@@ -11279,11 +11276,11 @@ msgstr "Supergalactische coördinaten"
 
 #: src/ui_configurationDialog.h:1669
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr "Ecliptica coördinaten, equinox J2000.0"
+msgstr "Ecliptische coördinaten, equinox J2000.0"
 
 #: src/ui_configurationDialog.h:1671
 msgid "Ecliptic coordinates (J2000)"
-msgstr "Ecliptica coördinaten (J2000)"
+msgstr "Ecliptische coördinaten (J2000)"
 
 #: src/ui_configurationDialog.h:1673
 msgid "Velocity"
@@ -12083,7 +12080,7 @@ msgstr "Posities opslaan"
 
 #: src/ui_astroCalcDialog.h:1658 src/ui_astroCalcDialog.h:1804
 msgid "Show objects brighter than magnitude:"
-msgstr "Objecten weergeven helderde dan magnitude:"
+msgstr "Objecten weergeven helderder dan magnitude:"
 
 #: src/ui_astroCalcDialog.h:1660
 msgid "List of objects above horizon"
@@ -12458,7 +12455,7 @@ msgstr "Efemeriden lijndikte"
 
 #: src/ui_astroCalcCustomStepsDialog.h:151
 msgid "Custom interval"
-msgstr "Aangepaste interval"
+msgstr "Aangepast interval"
 
 #: src/ui_astroCalcCustomStepsDialog.h:155
 msgid "Unit of measurement:"
@@ -12965,7 +12962,7 @@ msgstr ""
 "in Hawaii waren."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:602
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -12985,7 +12982,7 @@ msgid "Links"
 msgstr "Koppelingen"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:603
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -13010,7 +13007,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -13031,7 +13028,7 @@ msgstr "Als je een vraag heeft, kun je {hier antwoord krijgen}"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:604
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -13052,7 +13049,7 @@ msgstr "Foutmeldingen en functie-aanvragen kun je {hier} doen."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -13165,13 +13162,13 @@ msgstr "Peilingsstreken van het kompas langs de horizon weergeven"
 msgid "Compass marks"
 msgstr "Kompasstreken"
 
-#: plugins/Oculars/src/Oculars.cpp:85 plugins/Oculars/src/Oculars.cpp:1448
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:184
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:183
 #: plugins/Oculars/src/ui_ocularDialog.h:1402
 msgid "Oculars"
 msgstr "Oculairs"
 
-#: plugins/Oculars/src/Oculars.cpp:88
+#: plugins/Oculars/src/Oculars.cpp:87
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -13181,522 +13178,522 @@ msgstr ""
 "vergroting en gezichtsveld worden gesimuleerd.) Het kan ook een sensorframe "
 "en een Telrad beeld weergeven."
 
-#: plugins/Oculars/src/Oculars.cpp:939
+#: plugins/Oculars/src/Oculars.cpp:927
 msgid "Please select an object before switching to ocular view."
 msgstr "Selecteer een object vóór het overschakelen naar het oculairbeeld."
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1033
 msgid "&Previous ocular"
 msgstr "&Vorig oculair"
 
-#: plugins/Oculars/src/Oculars.cpp:1046
+#: plugins/Oculars/src/Oculars.cpp:1034
 msgid "&Next ocular"
 msgstr "Vol&gend oculair"
 
-#: plugins/Oculars/src/Oculars.cpp:1047
+#: plugins/Oculars/src/Oculars.cpp:1035
 msgid "Select &ocular"
 msgstr "&Oculair selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1090
+#: plugins/Oculars/src/Oculars.cpp:1077
 msgid "Toggle &crosshair"
 msgstr "&Kruisdraad in-/uitschakelen"
 
-#: plugins/Oculars/src/Oculars.cpp:1100
+#: plugins/Oculars/src/Oculars.cpp:1087
 msgid "Configure &Oculars"
 msgstr "&Oculairs configureren"
 
-#: plugins/Oculars/src/Oculars.cpp:1109
+#: plugins/Oculars/src/Oculars.cpp:1096
 msgid "Toggle &CCD"
 msgstr "&CCD in-/uitschakelen"
 
-#: plugins/Oculars/src/Oculars.cpp:1117
+#: plugins/Oculars/src/Oculars.cpp:1104
 msgid "Toggle &Telrad"
 msgstr "&Telrad in-/uitschakelen"
 
-#: plugins/Oculars/src/Oculars.cpp:1126
+#: plugins/Oculars/src/Oculars.cpp:1113
 msgid "&Previous CCD"
 msgstr "&Vorige CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1127
+#: plugins/Oculars/src/Oculars.cpp:1114
 msgid "&Next CCD"
 msgstr "&Volgend CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1128
+#: plugins/Oculars/src/Oculars.cpp:1115
 msgid "&Select CCD"
 msgstr "CCD &selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1150
+#: plugins/Oculars/src/Oculars.cpp:1136
 msgid "&Rotate CCD"
 msgstr "CCD &roteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1172
+#: plugins/Oculars/src/Oculars.cpp:1148
 msgid "&Reset rotation"
 msgstr "&Rotatie resetten"
 
-#: plugins/Oculars/src/Oculars.cpp:1449
+#: plugins/Oculars/src/Oculars.cpp:1425
 #: plugins/Oculars/src/ui_ocularDialog.h:1431
 msgid "Ocular view"
 msgstr "Oculairbeeld"
 
-#: plugins/Oculars/src/Oculars.cpp:1450
+#: plugins/Oculars/src/Oculars.cpp:1426
 msgid "Oculars popup menu"
 msgstr "Oculairs pop-up menu"
 
-#: plugins/Oculars/src/Oculars.cpp:1451
+#: plugins/Oculars/src/Oculars.cpp:1427
 msgid "Show crosshairs"
 msgstr "Kruisdraad weergeven"
 
-#: plugins/Oculars/src/Oculars.cpp:1452
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Image sensor frame"
 msgstr "Sensorframe afbeelding"
 
-#: plugins/Oculars/src/Oculars.cpp:1453
+#: plugins/Oculars/src/Oculars.cpp:1429
 msgid "Telrad sight"
 msgstr "Telradbeeld"
 
-#: plugins/Oculars/src/Oculars.cpp:1454
+#: plugins/Oculars/src/Oculars.cpp:1430
 msgid "Toggle Oculars configuration window"
 msgstr "Oculairsconfiguratiescherm schakelen"
 
-#: plugins/Oculars/src/Oculars.cpp:1455
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Toggle Oculars button bar"
 msgstr "Oculairknoppenbalk schakelen"
 
-#: plugins/Oculars/src/Oculars.cpp:1457
+#: plugins/Oculars/src/Oculars.cpp:1433
 msgid "Select next telescope"
 msgstr "Volgende telescoop selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1459
+#: plugins/Oculars/src/Oculars.cpp:1435
 msgid "Select previous telescope"
 msgstr "Vorige telescoop selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1461
+#: plugins/Oculars/src/Oculars.cpp:1437
 msgid "Select next eyepiece"
 msgstr "Volgend oculair selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1463
+#: plugins/Oculars/src/Oculars.cpp:1439
 msgid "Select previous eyepiece"
 msgstr "Vorig oculair selecteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1464
+#: plugins/Oculars/src/Oculars.cpp:1440
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "Kruisdraadpatroon van het oculair met de klok mee roteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1465
+#: plugins/Oculars/src/Oculars.cpp:1441
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "Kruisdraadpatroon van het oculair tegen de klok in roteren"
 
-#: plugins/Oculars/src/Oculars.cpp:1466
+#: plugins/Oculars/src/Oculars.cpp:1442
 msgid "Toggle sensor crop overlay"
 msgstr "Sensor bijsnijden"
 
-#: plugins/Oculars/src/Oculars.cpp:1467
+#: plugins/Oculars/src/Oculars.cpp:1443
 msgid "Toggle sensor pixel grid"
 msgstr "Sensor pixelraster"
 
-#: plugins/Oculars/src/Oculars.cpp:1468
+#: plugins/Oculars/src/Oculars.cpp:1444
 msgid "Toggle focuser overlay"
 msgstr "Focuser"
 
-#: plugins/Oculars/src/Oculars.cpp:1698
+#: plugins/Oculars/src/Oculars.cpp:1666
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "RA/Dec (J2000.0) van kruis"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1709
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:718
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/Oculars.cpp:1677
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1728
+#: plugins/Oculars/src/Oculars.cpp:1696
 msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1966
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
+#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
 msgid "Ocular"
 msgstr "Oculair"
 
-#: plugins/Oculars/src/Oculars.cpp:1968
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
+#: plugins/Oculars/src/Oculars.cpp:1936
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:507
 msgid "Binocular"
 msgstr "Verrekijker"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1988
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
+#: plugins/Oculars/src/Oculars.cpp:1956
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Brandpuntsafstand oculair: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1995
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/Oculars.cpp:1963
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:559
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Schijnbare gezichtsveld oculair: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2006
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/Oculars.cpp:1974
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:589
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lens #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2010
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
+#: plugins/Oculars/src/Oculars.cpp:1978
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lens #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2015
+#: plugins/Oculars/src/Oculars.cpp:1983
 msgid "Lens: none"
 msgstr "Lens: geen"
 
-#: plugins/Oculars/src/Oculars.cpp:2030 plugins/Oculars/src/Oculars.cpp:2091
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
+#: plugins/Oculars/src/Oculars.cpp:1998 plugins/Oculars/src/Oculars.cpp:2059
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:769
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescoop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2039
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
+#: plugins/Oculars/src/Oculars.cpp:2007
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:871
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Vergroting: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2046
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
+#: plugins/Oculars/src/Oculars.cpp:2014
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:882
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Uittredepupil: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2053
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
+#: plugins/Oculars/src/Oculars.cpp:2021
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
 #, qt-format
 msgid "FOV: %1"
 msgstr "Gezichtsveld: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2074
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
+#: plugins/Oculars/src/Oculars.cpp:2042
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:813
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Afmetingen: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2075
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/Oculars.cpp:2043
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 msgid "Binning"
 msgstr "Binning"
 
-#: plugins/Oculars/src/Oculars.cpp:2079
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
+#: plugins/Oculars/src/Oculars.cpp:2047
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2083
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:670
+#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2096
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
+#: plugins/Oculars/src/Oculars.cpp:2064
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescoop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2414
+#: plugins/Oculars/src/Oculars.cpp:2382
 msgid "&Lens"
 msgstr "&Lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2415
+#: plugins/Oculars/src/Oculars.cpp:2383
 msgid "&Previous lens"
 msgstr "&Vorige lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2416
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Next lens"
 msgstr "&Volgende lens"
 
-#: plugins/Oculars/src/Oculars.cpp:2446
+#: plugins/Oculars/src/Oculars.cpp:2413
 msgid "&Telescope"
 msgstr "&Telescoop"
 
-#: plugins/Oculars/src/Oculars.cpp:2447
+#: plugins/Oculars/src/Oculars.cpp:2414
 msgid "&Previous telescope"
 msgstr "&Vorige telescoop"
 
-#: plugins/Oculars/src/Oculars.cpp:2448
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Next telescope"
 msgstr "&Volgende telescoop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:185
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:184
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Previous ocular"
 msgstr "Vorig oculair"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:185
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Next ocular"
 msgstr "Volgend oculair"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Previous lens"
 msgstr "Vorige lens"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
 msgid "Next lens"
 msgstr "Volgende lens"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:231
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
 msgid "Previous CCD frame"
 msgstr "Vorig CCD frame"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:237
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:236
 msgid "Next CCD frame"
 msgstr "Volgend CCD frame"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:243
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:242
 msgid "Previous telescope"
 msgstr "Vorige telescoop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:248
 msgid "Next telescope"
 msgstr "Volgende telescoop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:313
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
 msgid "Reset the sensor frame rotation"
 msgstr "Sensorframe rotatie terugzetten"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:274
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:273
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Sensorframe 15 graden tegen de klok in roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:286
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Sensorframe 5 graden tegen de klok in roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Sensorframe 1 graad tegen de klok in roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:351
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Sensorframe 15 graden met de klok mee roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:339
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:338
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Sensorframe 5 graden met de klok mee roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:326
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:325
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Sensorframe 1 graad met de klok mee roteren"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:561
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 msgid "Effective focal length of the ocular"
 msgstr "Effectieve focale lengte van het oculair"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
 msgid "Apparent field of view of the ocular"
 msgstr "Schijnbare gezichtsveld van het oculair"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Vergroting: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:600
 msgid "Lens: None"
 msgstr "Lens: Geen"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 msgid "Multiplicity: N/A"
 msgstr "Vergroting: N.v.t."
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:605
 msgid "Focal length of eyepiece"
 msgstr "Brandpuntsafstand van het oculair"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
 msgid "Dimensions field of view"
 msgstr "Afmetingen gezichtsveld"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "X scale"
 msgstr "X schaal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 msgid "Horizontal scale"
 msgstr "Horizontale schaal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
 msgid "Y scale"
 msgstr "Y schaal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:725
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Vertical scale"
 msgstr "Verticale schaal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:722
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Rotatie: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
 msgid "Magnification provided by these binoculars"
 msgstr "Vergroting bij deze verrekijkers"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
 msgid "Actual field of view provided by these binoculars"
 msgstr "Feitelijke gezichtsveld bij deze verrekijker"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:863
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:854
 msgid "Exit pupil provided by these binoculars"
 msgstr "Uittredepupil van deze verrekijkers"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:871
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Vergroting met deze oculair/lens/telescoop combinatie"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:872
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:863
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "Feitelijke gezichtsveld met deze oculair/lens/telescoop combinatie"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:873
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "Uittredepupil van deze oculair/lens/telescoop combinatie"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:916
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:907
 msgid "Rayleigh criterion"
 msgstr "Rayleigh-criterium"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
 msgid "The Rayleigh resolution criterion"
 msgstr "Het Rayleigh resolutie criterium"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:923
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:914
 msgid "Dawes' limit"
 msgstr "Limiet van Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:916
 msgid "Dawes' resolution criterion"
 msgstr "Resolutie criterium Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid "Abbe's limit"
 msgstr "Abbe's limiet"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:932
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:923
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Abbe’s diffractie resolutie limiet"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Sparrow's limit"
 msgstr "Sparrow's limiet"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:939
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 msgid "Sparrow's resolution limit"
 msgstr "Sparrow's resolutie limiet"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:965
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:956
 msgid "Visual resolution"
 msgstr "Visuele resolutie"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:967
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:958
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Visuele resolutie is gebaseerd op oogeigenschappen en vergroting"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:545
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "tFOV:"
 msgstr "tFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Magnification factor:"
 msgstr "Vergrotingsfactor:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:543
 #: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Diameter:"
 msgstr "Diameter:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:547
 #: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 #: plugins/Oculars/src/ui_ocularDialog.h:1508
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Focal length:"
 msgstr "Brandpuntsafstand:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid "Field stop:"
 msgstr "Veldstop:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:566
+#: plugins/Oculars/src/gui/OcularDialog.cpp:561
 msgid "Oculars Plug-in"
 msgstr "Oculairs plug-in"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:574
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 msgid "Barlow lens feature"
 msgstr "Barlow lens functie"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:575
+#: plugins/Oculars/src/gui/OcularDialog.cpp:570
 msgid "Sensor crop overlay feature"
 msgstr "Sensor bijsnij functie"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:576
+#: plugins/Oculars/src/gui/OcularDialog.cpp:571
 msgid "Pixel grid feature"
 msgstr "Pixel raster"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:580
+#: plugins/Oculars/src/gui/OcularDialog.cpp:575
 msgid "Overview"
 msgstr "Overzicht"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:582
+#: plugins/Oculars/src/gui/OcularDialog.cpp:577
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
-"will populate some samples to get your started."
+"will populate some samples to get you started."
 msgstr ""
 "Deze plug-in is bedoeld om te simuleren wat u ziet door een oculair. Deze "
 "configuratie dialoog kan worden gebruikt om oculairs, telescopen en CCD-"
 "sensoren toe te voegen, te wijzigen of te verwijderen,. De eerste keer dat u"
 " de plugin gebruikt, krijgt u enkele voorbeelden om aan de slag te gaan."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:583
+#: plugins/Oculars/src/gui/OcularDialog.cpp:578
 msgid "You can choose to scale the image you see on the screen."
 msgstr "U kunt de schaal kiezen voor de afbeelding die u op het scherm ziet."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:584
+#: plugins/Oculars/src/gui/OcularDialog.cpp:579
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -13704,7 +13701,7 @@ msgstr ""
 "Dit is bedoeld om oculair/telescoop combinaties onderling te kunnen "
 "vergelijken."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:580
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -13713,7 +13710,7 @@ msgstr ""
 "brandpuntafstanden zal verschillende uittredepupillen produceren, waardoor "
 "het beeld enigszins veranderd."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+#: plugins/Oculars/src/gui/OcularDialog.cpp:581
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -13721,19 +13718,19 @@ msgstr ""
 "De nadeel hiervan kan zijn dat, met de afbeelding geschaald, een groot deel "
 "van het scherm niet wordt gebruikt."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:587
+#: plugins/Oculars/src/gui/OcularDialog.cpp:582
 msgid ""
-"Therefore I recommend that you leave it off, unless you feel you have a need"
-" of it."
+"Therefore we recommend that you leave it off, unless you feel you have a "
+"need for it."
 msgstr ""
 "Daarom is mijn aanbeveling laat het uit, tenzij u gevoel hebt dat u het "
 "nodig hebt."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:588
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "You can toggle a crosshair in the view."
 msgstr "U kunt een vizier weergeven."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:589
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -13741,16 +13738,29 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"U kunt een Telrad zoeker voorschakelen; dit kan alleen als het oculairbeeld "
+"is uitgeschakeld. Deze functie tekent drie concentrische cirkels van 0.5%1, "
+"2.0%1, en 4.0%1 en helpt u te zien wat u verwacht te zien met het blote oog "
+"door de Telrad (of soortgelijke) zoeker."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
-msgid "If you find any issues, please let me know. Enjoy!"
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+msgid ""
+"You can adjust the diameters or even add a fourth circle if you have a "
+"different finder, or revert to the Telrad standard sizes."
 msgstr ""
+"U kunt de diameter aanpassen en zelfs een vierde cirkel toevoegen als u een "
+"andere andere Telrad zoeker heeft of teruggaan naar de Telrad standaard "
+"groottes.  "
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+msgid "If you find any issues, please let me know. Enjoy!"
+msgstr "Als u een probleem tegen komt, laat het mij weten. Succes!"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:589
 msgid "Hot Keys"
 msgstr "Sneltoetsen"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:590
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -13758,33 +13768,39 @@ msgstr ""
 "De plug-in toets koppelingen kunnen worden bewerkt in de "
 "toetsenbordsneltoetsen bewerker (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:597
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 #: plugins/Pulsars/src/Pulsar.cpp:288
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:486
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid "Notes"
 msgstr "Notities"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
 msgid ""
-"The sensor view has a feature to show sensor crop overlay with information "
-"about size of crop, but in some cases size of this rectangle may be adjusted"
-" by binning feature (e.g. cropping size 100px will be adjusted to 99px by "
+"The sensor view has a feature to show a sensor crop overlay with information"
+" about the crop size. The size of this rectangle may be adjusted when "
+"binning is active (e.g. crop size of 100px will be adjusted to 99px by "
 "binning 3)."
 msgstr ""
+"De sensorweergave heeft een functie om een sensoruitsnede-overlay weer te "
+"geven met informatie over de uitsnede. De grootte van deze rechthoek kan "
+"worden aangepast wanneer binning actief is (bijv. de uitsnedegrootte van "
+"100px wordt aangepast naar 99px door 3 binning)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:595
 #, qt-format
 msgid ""
-"Information about size of crop overlay, which was adjusted by binning, will "
-"be marked by %1."
+"In this case, information about crop size overlay will be marked by %1."
 msgstr ""
+"In dit geval wordt informatie over de uitsnedegrootte overlay gemarkeerd bij"
+" %1"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:596
 msgid ""
-"Of course this mark may be visible in other reasons also: the crop size is "
-"larger than sensor size."
+"This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
+"Deze markering wordt ook weergegeven als de uitsnede groter is dan de "
+"sensorgrootte."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1404
 msgid "Interface"
@@ -13950,7 +13966,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Enable automatic switch of mount type"
-msgstr "Automatisch wisselen van mnteringstype inschakelen"
+msgstr "Automatisch wisselen van monteringstype inschakelen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Overlay size (px)"
@@ -13983,19 +13999,19 @@ msgstr "FOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "FOV for circle 1 in degrees"
-msgstr "FOV voor cirkel van 1 graad"
+msgstr "FOV voor cirkel 1 in graden"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "FOV for circle 2 in degrees"
-msgstr "FOV voor cirkel van 2 graden"
+msgstr "FOV voor cirkel 2 in graden"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1494
 msgid "FOV for circle 3 in degrees"
-msgstr "FOV voor cirkel van 3 graden"
+msgstr "FOV voor cirkel 3 in graden"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "FOV for circle 4 in degrees"
-msgstr "FOV voor cirkel van 4 graden"
+msgstr "FOV voor cirkel 4 in graden"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Restore original Telrad FOV"
@@ -14025,7 +14041,7 @@ msgstr "Heeft permanente kruisdraden"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid "Binoculars"
-msgstr "Verrekijkers"
+msgstr "Verrekijker"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1509
 #: plugins/Oculars/src/ui_ocularDialog.h:1513
@@ -14177,217 +14193,217 @@ msgstr ""
 "bestand word gebruikt"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2220
+#: plugins/Satellites/src/Satellites.cpp:2221
 msgid "visual"
 msgstr "zichtbaar"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2222
+#: plugins/Satellites/src/Satellites.cpp:2223
 msgid "scientific"
 msgstr "wetenschappelijk"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2224
+#: plugins/Satellites/src/Satellites.cpp:2225
 msgid "communications"
 msgstr "communicaties"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2226
+#: plugins/Satellites/src/Satellites.cpp:2227
 msgid "navigation"
 msgstr "navigatie"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2228
+#: plugins/Satellites/src/Satellites.cpp:2229
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2230
+#: plugins/Satellites/src/Satellites.cpp:2231
 msgid "weather"
 msgstr "weer"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2232
+#: plugins/Satellites/src/Satellites.cpp:2233
 msgid "earth resources"
 msgstr "aardonderzoek"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2234
+#: plugins/Satellites/src/Satellites.cpp:2235
 msgid "geostationary"
 msgstr "geostationair"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2236
+#: plugins/Satellites/src/Satellites.cpp:2237
 msgid "non-operational"
 msgstr "niet-operationeel"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2238
+#: plugins/Satellites/src/Satellites.cpp:2239
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2240
+#: plugins/Satellites/src/Satellites.cpp:2241
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2242
+#: plugins/Satellites/src/Satellites.cpp:2243
 msgid "beidou"
 msgstr "beidou"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2244
+#: plugins/Satellites/src/Satellites.cpp:2245
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2246
+#: plugins/Satellites/src/Satellites.cpp:2247
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2248
+#: plugins/Satellites/src/Satellites.cpp:2249
 msgid "iridium next"
 msgstr "iridium next"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2250
+#: plugins/Satellites/src/Satellites.cpp:2251
 msgid "starlink"
 msgstr "Starlink"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2254
+#: plugins/Satellites/src/Satellites.cpp:2255
 msgid "spire"
 msgstr "spire"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2256
+#: plugins/Satellites/src/Satellites.cpp:2257
 msgid "oneweb"
 msgstr "oneweb"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2258
+#: plugins/Satellites/src/Satellites.cpp:2259
 msgid "stations"
 msgstr "stations"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2260
+#: plugins/Satellites/src/Satellites.cpp:2261
 msgid "education"
 msgstr "educatie"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2262
+#: plugins/Satellites/src/Satellites.cpp:2263
 msgid "observatory"
 msgstr "observatorium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2264
+#: plugins/Satellites/src/Satellites.cpp:2265
 msgid "intelsat"
 msgstr "intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2266
+#: plugins/Satellites/src/Satellites.cpp:2267
 msgid "globalstar"
 msgstr "globalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2268
+#: plugins/Satellites/src/Satellites.cpp:2269
 msgid "orbcomm"
 msgstr "orbcomm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2270
+#: plugins/Satellites/src/Satellites.cpp:2271
 msgid "gorizont"
 msgstr "gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2272
+#: plugins/Satellites/src/Satellites.cpp:2273
 msgid "raduga"
 msgstr "raduga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2274
+#: plugins/Satellites/src/Satellites.cpp:2275
 msgid "molniya"
 msgstr "molniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2276
+#: plugins/Satellites/src/Satellites.cpp:2277
 msgid "cosmos"
 msgstr "cosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2278
+#: plugins/Satellites/src/Satellites.cpp:2279
 msgid "debris"
 msgstr "puin"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2280
+#: plugins/Satellites/src/Satellites.cpp:2281
 msgid "crewed"
 msgstr "bemand"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2282
+#: plugins/Satellites/src/Satellites.cpp:2283
 msgid "resupply"
 msgstr "herbevoorrading"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2288
 msgid "The Hubble Space Telescope"
 msgstr "De Hubble Space Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2290
 msgid "The International Space Station"
 msgstr "Het Internationaal Ruimtestation"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2292
 msgid "China's first space station"
 msgstr "China's eerste ruimtestation"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2294
 msgid "The russian space radio telescope RadioAstron"
 msgstr "De Russische ruimteradiotelescoop RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2296
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "Internationaal Gamma-Ray Astrophysics Laboratorium"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2298
 msgid "The Gamma-Ray Observatory"
 msgstr "Het Gamma-Ray Observatorium"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "De microvariatibiliteit en oscillaties van de sterren telescoop"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "De Interface Regio Imaging Spectrograph"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -14396,53 +14412,53 @@ msgstr ""
 "de atmosfeer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "The Dark Matter Particle Explorer"
 msgstr "De Dark Matter Particle Explorer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "Arcsecond Space Telescope Enabling Research in Astrophysics"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2311
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2313
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "The Chandra X-ray Observatory"
 msgstr "Het Chandra X-ray Observatory"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2317
+#: plugins/Satellites/src/Satellites.cpp:2318
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2319
+#: plugins/Satellites/src/Satellites.cpp:2320
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2321
+#: plugins/Satellites/src/Satellites.cpp:2322
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2323
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2325
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "INTEGRAL"
 msgstr "INTEGRAAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2327
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
@@ -14823,12 +14839,16 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
 msgstr ""
+"Posities worden berekend met behulp van de SGP4- en SDP4-methoden, met NORAD"
+" TLE-gegevens als invoer."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
+"De baanberekeningscode is geschreven door Jose Luis Canales volgens de "
+"herziene Spacetrack Report #3 (inclusief Spacetrack Report #6)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
 msgid ""
@@ -14836,22 +14856,31 @@ msgid ""
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
 "and standard magnitudes."
 msgstr ""
+"Om een geschatte visuele magnitude van satellieten te berekenen, gebruiken "
+"we gegevens uit de database van Mike McCants (met machtigingen) van de "
+"radardwarsdoorsnede (RCS) en de standaard magnitudes."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:713
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
 msgstr ""
+"Formules om de geschatte visuele magnitude van satellieten te berekenen uit "
+"de standaard magnitude kan worden gevonden op de Mike McCants website "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
+"We gebruiken een bolvormige satelliet om een geschatte visuele magnitude te "
+"berekenen op basis van RCS-waarden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:715
 msgid "For modeling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
+"Om Starlink magnitudes te modelleren gebruiken we formules van Anthony "
+"Mallama"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
@@ -15339,13 +15368,13 @@ msgstr "Markeer er een"
 msgid "Discard"
 msgstr "Niet gebruiken"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:80
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:171
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:214
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:79
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
 msgid "Telescope Control"
 msgstr "Telescoopbesturing"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:83
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:82
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a"
 " computerized mount (a \"GoTo telescope\")."
@@ -15354,38 +15383,38 @@ msgstr ""
 " aan een telescoop op een computergestuurde montering (een \"Ga naar "
 "telescoop\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:247
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:172
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:232
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Beweeg telescoop #%1 naar het geselecteerde object"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:185
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:255
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:240
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 "Beweeg telescoop #%1 naar het punt dat momenteel in het middel van het beeld"
 " is"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:192
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:184
 #, qt-format
 msgid "Sync telescope #%1 position to selected object"
 msgstr "Synchroniseer telescoop #%1 naar geselecteerd object"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:251
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:259
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:190
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:236
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:244
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
 msgstr "Laatste zwenkcommando voor telescoop #%1 afbreken"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:214
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:199
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Beweeg een telescoop naar een gegeven verzameling van coördinaten"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1779
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1764
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
@@ -15394,12 +15423,12 @@ msgstr ""
 "controller."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1781
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1766
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr "Elke telescoop of telescoopmontering compatibel met de Meade LX200."
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1783
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
@@ -15407,25 +15436,25 @@ msgstr ""
 "Meade's ETX70 met de #494 Autostar controller en de #506 connector kabelset."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1785
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
 msgid "Losmandy's G-11 telescope mount."
 msgstr "Losmandy's G-11 telescoopmontering"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1787
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1772
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr "Wildcard Innovaties Argo Navis DTC in Meade LX200 emulatie modus."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1789
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1774
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 "Elke telescoop of telescoopmontering compatibel met de Celestron NexStar."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1791
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1776
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
@@ -15434,7 +15463,7 @@ msgstr ""
 " controller."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1793
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1778
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -17209,8 +17238,9 @@ msgid ""
 msgstr ""
 "U kunt komeet en asteroïde gegevens importeren geformatteerd in het "
 "exportformat van het IAU's Minor Planet Center (%1). U kunt bestanden "
-"importeren met lijsten van objecten, download zulke lijsten van het Internet"
-" of zoek online naar Minor Planet and Comet Ephemeris Service (MPES)."
+"importeren met lijsten van objecten, zulke lijsten van het Internet "
+"downloaden of online zoeken in de Minor Planet and Comet Ephemeris Service "
+"(MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
@@ -17325,9 +17355,9 @@ msgid ""
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start,"
 " you can delete manually that file from:"
 msgstr ""
-"Deze plug-in bewerkt een aangepast zonnestelselconfiguratie bestand voor de "
-"kleine lichamen. Als er iets fout gaat en Stellarium vast loopt en/of niet "
-"meer start, kunt u het bestand handmatig verwijder uit:"
+"Deze plug-in bewerkt een persoonlijk zonnestelselconfiguratie bestand voor "
+"de kleine lichamen. Als er iets fout gaat en Stellarium vast loopt en/of "
+"niet meer start, kunt u het bestand handmatig verwijder uit:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:265
 msgid ""
@@ -17345,7 +17375,7 @@ msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"U kunt een back-up kopie aanmaken van uw aangepaste zonnestelsel "
+"U kunt een back-up kopie aanmaken van uw eigen zonnestelsel "
 "configuratiebestand op een geschikt locatie, of vervangen door zo'n kopie."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:269
@@ -17694,7 +17724,7 @@ msgstr "Deze velden zijn:"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
-msgstr "GHA%1: De Greenwich uurhoek van het eerste punt van Ram."
+msgstr "GHA%1: De Greenwich uurhoek van het lentepunt."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
 msgid "SHA: Sidereal Hour Angle of the navigation star."
@@ -18649,82 +18679,82 @@ msgid "Exoplanets configuration window"
 msgstr "Exoplaneten configuratievenster"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1023
+#: plugins/Exoplanets/src/Exoplanets.cpp:1024
 msgid "Hot"
 msgstr "Heet"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1025
+#: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Warm"
 msgstr "Warm"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1027
+#: plugins/Exoplanets/src/Exoplanets.cpp:1028
 msgid "Cold"
 msgstr "Koud"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1030
+#: plugins/Exoplanets/src/Exoplanets.cpp:1031
 msgid "Miniterran"
 msgstr "Miniterran"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1032
+#: plugins/Exoplanets/src/Exoplanets.cpp:1033
 msgid "Subterran"
 msgstr "Subterran"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1034
+#: plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "Terran"
 msgstr "Terran"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1037
 msgid "Superterran"
 msgstr "Superterran"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1039
 msgid "Jovian"
 msgstr "Jovian"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1041
 msgid "Neptunian"
 msgstr "Neptunian"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1043
+#: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Primary Transit"
 msgstr "Primaire doorrgang"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1045
+#: plugins/Exoplanets/src/Exoplanets.cpp:1046
 msgid "Microlensing"
 msgstr "Microlensing"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1047
+#: plugins/Exoplanets/src/Exoplanets.cpp:1048
 msgid "Radial Velocity"
 msgstr "Radiale snelheid"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1049
+#: plugins/Exoplanets/src/Exoplanets.cpp:1050
 msgid "Imaging"
 msgstr "Afbeelding"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1052
 msgid "Pulsar"
 msgstr "Pulsar"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1055
+#: plugins/Exoplanets/src/Exoplanets.cpp:1056
 msgid "Astrometry"
 msgstr "Astrometrie"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgid "TTV"
 msgstr "TTV"
 
@@ -21648,7 +21678,7 @@ msgid ""
 msgstr ""
 "Plug-in die de waarneembaarheid analyseert van de geselecteerde bron (of het"
 " schermcentrum, als er geen bron is geselecteerd). De plug-in kan weergeven "
-"de opkomst, overgang en ondergang tijden, evenals het beste tijdvak van het "
+"de opkomst, doorgang en ondergang tijden, evenals het beste tijdvak van het "
 "jaar (d.w.z., grootste hoek separatie van de zon), het datumbereik wanneer "
 "de bron zich boven de zon bevindt in een donkere nacht, en de datums van "
 "acronychale en kosmische opkomst/ondergang.<br>Efemeriden van het "
@@ -21970,7 +22000,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "De huidige meteoorzwermen catalogus is ongeldig!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:649
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:658
 msgid "Meteor Showers"
 msgstr "Meteoorzwermen"
 
@@ -21996,7 +22026,7 @@ msgstr "Zoekvenster weergeven"
 msgid "Using the default Meteor Showers catalog."
 msgstr "De standaard meteoozwermen catalogus gebruiken."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:652
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:661
 msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
@@ -22004,7 +22034,7 @@ msgstr ""
 "Deze plug-in is gemaakt in de 2015 campagne van het ESA Summer of Code in "
 "Space programma."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:654
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:663
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -22773,7 +22803,7 @@ msgstr "Toets voor het in-/uitschakelen van de plug-in weergeven"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr "Toets om het zoekpaneel te openen weergeven"
+msgstr "Toets weergeven om het zoekpaneel te openen"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -22939,11 +22969,11 @@ msgstr "Rechte klimming/declinatie"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Ecliptic Longitude/Latitude"
-msgstr "Ecliptica lengte-/breedtegraad"
+msgstr "Ecliptische lengte-/breedtegraad"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "Ecliptica lengte-/breedtegraad (J2000.0)"
+msgstr "Ecliptische lengte-/breedtegraad (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Altitude/Azimuth"
@@ -23329,7 +23359,7 @@ msgid ""
 " which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
-"Indien uitgeschakeld, het geschaduwde gebied wordt volgens de perspectief "
+"Indien uitgeschakeld, wordt het geschaduwde gebied volgens de perspectief "
 "projectie berekend, wat ontbrekende schaduwen kan veroorzaken bij hoge "
 "gezichtsveld waarde, maar is een stuk sneller!"
 
