@@ -304,8 +304,8 @@ private:
 	class StelLocaleMgr* localeMgr;
 	class StelMovementMgr* mvMgr;
 	class StelPropertyMgr* propMgr;
-	QStringListModel* wutModel;
-	QSortFilterProxyModel *proxyModel;
+	//QStringListModel* wutModel;
+	//QSortFilterProxyModel *proxyModel;
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;

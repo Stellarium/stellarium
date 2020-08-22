@@ -105,8 +105,8 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
 	, extraEphemerisDialog(Q_NULLPTR)
 	, customStepsDialog(Q_NULLPTR)
-	, wutModel(Q_NULLPTR)
-	, proxyModel(Q_NULLPTR)
+	//, wutModel(Q_NULLPTR)
+	//, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
 	, plotAltVsTime(false)	
 	, plotAltVsTimeSun(false)
@@ -6075,8 +6075,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 		core->setJD(JD);
 		adjustWUTColumns();
-		objectsList.clear();
-		ui->wutMatchingObjectsTreeWidget->sortItems(WUTObjectName, Qt::AscendingOrder);
+		objectsList.clear();		
 	}
 }
 
