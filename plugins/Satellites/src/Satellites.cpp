@@ -41,6 +41,7 @@
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
+#include "StelActionMgr.hpp"
 
 #include "external/qtcompress/qzipreader.h"
 
@@ -154,7 +155,7 @@ void Satellites::init()
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");		
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -212,16 +213,61 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingGroups()));
 	
 	// let sat symbols stay on-screen even if highly unprecise over time 
 	//connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
 	//connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
+
+	bindingGroups();
 }
 
 void Satellites::updateSatellitesVisibility()
 {
 	if (getFlagHintsVisible())
 		setFlagHintsVisible(false);
+}
+
+void Satellites::bindingGroups()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	QStringList groups = getGroupIdList();
+	QString satGroup = N_("Satellites");
+	QString showSatGroup = q_("Show satellites from the group");
+	QString hideSatGroup = q_("Hide satellites from the group");
+	QStringList::const_iterator constIterator;
+	for (constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
+	{
+		QString groupId = (*constIterator).toLocal8Bit().constData();
+		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
+		QString actionShowDescription = QString("%1 \"%2\"").arg(showSatGroup, q_(groupId));
+		StelAction* actionShow = actionMgr->findAction(actionShowName);
+		if (actionShow!=Q_NULLPTR)
+			actionMgr->findAction(actionShowName)->setText(actionShowDescription);
+		else
+			addAction(actionShowName, satGroup, actionShowDescription, this, [=](){setSatGroupVisible(groupId, true);});
+
+		QString actionHideName = QString("actionHide_Satellite_Group_%1").arg(groupId);
+		QString actionHideDescription = QString("%1 \"%2\"").arg(hideSatGroup, q_(groupId));
+		StelAction* actionHide = actionMgr->findAction(actionHideName);
+		if (actionHide!=Q_NULLPTR)
+			actionMgr->findAction(actionHideName)->setText(actionHideDescription);
+		else
+			addAction(actionHideName, satGroup, actionHideDescription, this, [=](){setSatGroupVisible(groupId, false);});
+	}
+}
+
+void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
+{
+	for (const auto& sat : satellites)
+	{
+		if (sat->initialized && sat->groups.toList().contains(groupId))
+		{
+			SatFlags flags = sat->getFlags();
+			visible ? flags |= SatDisplayed : flags &= ~SatDisplayed;
+			sat->setFlags(flags);
+		}
+	}
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)

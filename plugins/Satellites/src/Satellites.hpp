@@ -159,7 +159,6 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
-
 	
 public:
 	//! @enum UpdateState
@@ -506,6 +505,7 @@ private slots:
 	void updateSatellitesVisibility();
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }
+	void bindingGroups();
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -553,6 +553,8 @@ private:
 	//! Check format of the catalog of satellites
 	//! @return valid boolean, e.g. "true"
 	bool checkJsonFileFormat();
+
+	void setSatGroupVisible(const QString& groupId, bool visible);
 	
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
