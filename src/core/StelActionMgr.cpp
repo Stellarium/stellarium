@@ -322,7 +322,7 @@ void StelActionMgr::saveShortcuts()
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		if (action->altKeySequence.toString()=="")
 			seq += " \"\"";		
-		conf->setValue(action->objectName(), seq);
+		conf->setValue(action->objectName(), seq.replace("\\s+"," "));
 	}
 	conf->endGroup();
 	// Apparently shortcuts was changed
