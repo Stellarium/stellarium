@@ -411,6 +411,7 @@ private slots:
 	void handleViewportOffsetMovement(qreal value);
 
 	void setFOVDeg(float fov);
+	void bindingFOVActions();
 
 private:
 	double currentFov; // The current FOV in degrees
