@@ -5365,6 +5365,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Messier objects"), 34);
 	wutCategories.insert(q_("NGC/IC objects"), 35);
 	wutCategories.insert(q_("Caldwell objects"), 36);
+	wutCategories.insert(q_("Herschel 400 objects"), 37);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -6089,6 +6090,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 34:
 				case 35:
 				case 36:
+				case 37:
 				{
 					QList<NebulaP> catDSO;
 					switch (categoryId)
@@ -6102,6 +6104,9 @@ void AstroCalcDialog::calculateWutObjects()
 							break;
 						case 36: // Caldwell objects
 							catDSO = dsoMgr->getDeepSkyObjectsByType("101");
+							break;
+						case 37: // Herschel 400 objects
+							catDSO = dsoMgr->getDeepSkyObjectsByType("151");
 							break;
 					}
 
