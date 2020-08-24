@@ -955,6 +955,7 @@ void AstroCalcDialog::populateCelestialCategoryList()
 				category->addItem(q_(it.value()), QString::number(kn + 168)); // AstroCalc IDs: 170, 171, 172
 		}
 	}
+	category->addItem(q_("Deep-sky objects"), "169");
 	category->addItem(q_("Solar system objects"), "200");
 	category->addItem(q_("Solar system objects: comets"), "201");
 	category->addItem(q_("Solar system objects: minor bodies"), "202");
@@ -1072,7 +1073,11 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString dsoName;
 		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
 		// Deep-sky objects
-		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
+		QList<NebulaP> celestialObjects;
+		if (celTypeId==169)
+			celestialObjects = dsoMgr->getAllDeepSkyObjects().toList();
+		else
+			celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		for (const auto& obj : celestialObjects)
 		{
 			if (celTypeId == 12 || celTypeId == 102 || celTypeId == 111) // opacity cannot be extincted
@@ -1080,7 +1085,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			else
 				magOp = obj->getVMagnitudeWithExtinction(core);
 
-			if (celTypeId==35) // Regions of the sky
+			if (celTypeId==35 || (celTypeId==169 && obj->getDSOType()==Nebula::NebDn)) // Regions of the sky
 			{
 				passByBrightness = true;
 				magOp = 99.f;
@@ -5356,6 +5361,10 @@ void AstroCalcDialog::populateWutGroups()
 	if (moduleMgr.isPluginLoaded("Supernovae"))
 		wutCategories.insert(q_("Bright supernova stars"), 31);	
 	wutCategories.insert(q_("Interacting galaxies"), 32);
+	wutCategories.insert(q_("Deep-sky objects"), 33);
+	wutCategories.insert(q_("Messier objects"), 34);
+	wutCategories.insert(q_("NGC/IC objects"), 35);
+	wutCategories.insert(q_("Caldwell objects"), 36);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5654,7 +5663,8 @@ void AstroCalcDialog::calculateWutObjects()
 				case 23:
 				case 25:
 				case 26:
-				case 32:				
+				case 32:
+				case 33:
 				{
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
@@ -5732,6 +5742,12 @@ void AstroCalcDialog::calculateWutObjects()
 							case 32: // Interacting Galaxies
 								if (static_cast<bool>(tflags & Nebula::TypeInteractingGalaxies) && (ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
+								break;
+							case 33: // Deep-sky objets
+								if (mag <= magLimit)
+									passByType = true;
+								if (ntype == Nebula::NebDn)
+									mag = 99.f;
 								break;
 						}
 
@@ -6070,6 +6086,58 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					#endif
 					break;
+				case 34:
+				case 35:
+				case 36:
+				{
+					QList<NebulaP> catDSO;
+					switch (categoryId)
+					{
+						case 34: // Messier objects
+							catDSO = dsoMgr->getDeepSkyObjectsByType("100");
+							break;
+						case 35: // NGC/IC objects
+							catDSO = dsoMgr->getDeepSkyObjectsByType("108");
+							catDSO = dsoMgr->getDeepSkyObjectsByType("109");
+							break;
+						case 36: // Caldwell objects
+							catDSO = dsoMgr->getDeepSkyObjectsByType("101");
+							break;
+					}
+
+					for (const auto& object : catDSO)
+					{
+						mag = object->getVMagnitude(core);
+						if (mag <= magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+								continue;
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
+							{
+								rts = object->getRTSTime(core);
+								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+
+								if (d.isEmpty())
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+								else if (n.isEmpty())
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+								else
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularSize(core), withDecimalDegree);
+
+								objectsList.insert(designation);
+							}
+						}
+					}
+					break;
+				}
 			}
 		}
 
