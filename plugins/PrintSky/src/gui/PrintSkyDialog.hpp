@@ -53,7 +53,7 @@ public slots:
 	//! Print report direct to printer
 	void printSky();
 	//! Read the printer parameters and run the output option selected (Print/Preview)
-	void executePrinterOutputOption();
+	void executePrinterOutputOption(bool previewOnly);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -71,8 +71,7 @@ private:
 	bool stelGuiVisible;
 
 	//! Printing options
-	bool outputPreview;
-	QString printableTime(double time, double shift); // DEPRECATED
+	QString printableTime(double time, double shift); // DEPRECATED. -- NO LONGER USED.
 	QString printableRTSTime(double decimalHours);
 
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);

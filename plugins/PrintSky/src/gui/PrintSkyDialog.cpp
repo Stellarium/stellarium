@@ -42,8 +42,7 @@
 
 
 
-PrintSkyDialog::PrintSkyDialog() :
-	outputPreview(false)
+PrintSkyDialog::PrintSkyDialog()
 {
 	ui = new Ui_printskyDialogForm;
 }
@@ -120,7 +119,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	QPainter painter(printer);
 
 	QImage img;
-	// TODO: Decide whether custom screenshot size should be obeyed or ignored.
+	// TODO: Decide whether custom screenshot size should be obeyed or ignored. Maybe screenshot size must be matched to magnitude scale
 	if (!StelMainView::getInstance().getScreenshot(img, StelMainView::getInstance().getFlagUseCustomScreenshotSize(), plugin->getInvertColors(), false))
 	{
 		qWarning() << "PrintSky: screenshot retrieval failed. Aborting report.";
@@ -183,18 +182,14 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					.arg(lmgr->getPrintableDateLocal(jd))
 					.arg(lmgr->getPrintableTimeLocal(jd))
 					.arg(lmgr->getPrintableTimeZoneLocal(jd));
-
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*2, 0, 0), Qt::AlignLeft, datetime);
 
-		QString str;
-		QTextStream wos(&str);
-		wos << q_("FOV: ") << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
-		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*3, 0, 0), Qt::AlignLeft, *wos.string());
+		QString fov = QString("%1: %2%3").arg(q_("Vertical field of view")).arg(QString::number(core->getMovementMgr()->getCurrentFov(), 'f', 1)).arg(QChar(0x00B0));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*3, 0, 0), Qt::AlignLeft, fov);
 
-		painter.drawText(surfaceData.adjusted(surfaceData.width()-(15*fontsize), 0, 0, 0), Qt::AlignLeft, q_("Magnitude"));
-
+		// Magnitude scale
+		painter.drawText(surfaceData.adjusted(surfaceData.width()-(12*fontsize), 0, 0, 0), Qt::AlignLeft, q_("Magnitude"));
 		QList< QPair<float,float> > listPairsMagnitudesRadius=getListMagnitudeRadius(core);
-
 		int xPos=-(12*fontsize), yPos=lineSpacing+10;
 		for (int i=0; i<listPairsMagnitudesRadius.count(); ++i)
 		{
@@ -212,7 +207,51 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 			}
 		}
 
-		// TODO: twilight info, lunar phase or similar general information?
+		// Twilight table. TODO: Make a nice table from these badly structured lines.
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		PlanetP sun=ssmgr->getSun();
+		PlanetP moon=ssmgr->getMoon();
+		Vec3f sunRTS=sun->getRTSTime(core);
+		Vec3f civilTwilight=sun->getRTSTime(core, -6.);
+		Vec3f nauticalTwilight=sun->getRTSTime(core, -12.);
+		Vec3f astronomicalTwilight=sun->getRTSTime(core, -18.);
+		Vec3f moonRTS=moon->getRTSTime(core);
+		QString rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
+				.arg(q_("Sunrise"))
+				.arg(printableRTSTime(sunRTS[0]))
+				.arg(q_("Transit"))
+				.arg(printableRTSTime(sunRTS[1]))
+				.arg(q_("Sunset"))
+				.arg(printableRTSTime(sunRTS[2]));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*5, 0, 0), Qt::AlignLeft, rtsStr);
+		QString twilightStr = QString("%1 %2: %3 -- %4: %5")
+				.arg(q_("Civil Twilight")).arg(q_("Begin"))
+				.arg(printableRTSTime(civilTwilight[0]))
+				.arg(q_("End"))
+				.arg(printableRTSTime(civilTwilight[2]));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*6, 0, 0), Qt::AlignLeft, twilightStr);
+		twilightStr = QString("%1 %2: %3 -- %4: %5")
+				.arg(q_("Nautical Twilight")).arg(q_("Begin"))
+				.arg(printableRTSTime(nauticalTwilight[0]))
+				.arg(q_("End"))
+				.arg(printableRTSTime(nauticalTwilight[2]));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*7, 0, 0), Qt::AlignLeft, twilightStr);
+		twilightStr = QString("%1 %2: %3 -- %4: %5")
+				.arg(q_("Astronomical Twilight")).arg(q_("Begin"))
+				.arg(printableRTSTime(astronomicalTwilight[0]))
+				.arg(q_("End"))
+				.arg(printableRTSTime(astronomicalTwilight[2]));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*8, 0, 0), Qt::AlignLeft, twilightStr);
+		rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
+				.arg(q_("Moonrise"))
+				.arg(printableRTSTime(moonRTS[0]))
+				.arg(q_("Transit"))
+				.arg(printableRTSTime(moonRTS[1]))
+				.arg(q_("Moonset"))
+				.arg(printableRTSTime(moonRTS[2]));
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*9, 0, 0), Qt::AlignLeft, rtsStr);
+
+		// TODO: lunar phase or similar general information?
 		// TODO: active meteor showers (check plugin state, get info)
 	}
 
@@ -229,7 +268,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		//painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)),
 		//		 ,
 		//		 QTextOption());
-		info.print(printer);
+		info.print(printer); // NOT THIS -- DOES NOT WORK
 	}
 
 	// Print solar system ephemerides
@@ -324,9 +363,7 @@ void PrintSkyDialog::previewSky()
 	gui->setVisible(false);
 	dialog->setVisible(false);
 
-	outputPreview = true;
-
-	QTimer::singleShot(50, this, SLOT(executePrinterOutputOption()));
+	QTimer::singleShot(50, this, [=](){executePrinterOutputOption(true);});
 }
 
 // Print report direct to printer
@@ -337,13 +374,11 @@ void PrintSkyDialog::printSky()
 	gui->setVisible(false);
 	dialog->setVisible(false);
 
-	outputPreview=false;
-
-	QTimer::singleShot(50, this, SLOT(executePrinterOutputOption()));
+	QTimer::singleShot(50, this, [=](){executePrinterOutputOption(false);});
 }
 
 // Read the printer parameters and run the output option selected (Print/Preview)
-void PrintSkyDialog::executePrinterOutputOption()
+void PrintSkyDialog::executePrinterOutputOption(bool previewOnly)
 {
 	PrintSky *plugin=GETSTELMODULE(PrintSky);
 
@@ -353,7 +388,7 @@ void PrintSkyDialog::executePrinterOutputOption()
 	printer.setDocName("STELLARIUM REPORT");
 	printer.setOrientation(plugin->getOrientationPortrait() ? QPrinter::Portrait : QPrinter::Landscape);
 
-	if (outputPreview)
+	if (previewOnly)
 	{
 		QPrintPreviewDialog printPreviewDialog(&printer);
 		connect(&printPreviewDialog, SIGNAL(paintRequested(QPrinter *)), this, SLOT(printDataSky(QPrinter *)));
