@@ -36,6 +36,7 @@
 #include "StelMovementMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "Orbit.hpp"
 
 
 
@@ -100,7 +101,9 @@ void PrintSkyDialog::createDialogContent()
 	connectBoolProperty(ui->limitMagnitudeCheckBox,         "PrintSky.flagLimitMagnitude");
 	connectDoubleProperty(ui->limitMagnitudeDoubleSpinBox,  "PrintSky.limitMagnitude");
 
-	connect(ui->limitMagnitudeCheckBox, SIGNAL(checked()), ui->limitMagnitudeDoubleSpinBox, SLOT(enabled())); // FIXME: correct handling!
+	// Disable magnitude limit spinbox if magnitude limit is disabled.
+	ui->limitMagnitudeDoubleSpinBox->setEnabled(GETSTELMODULE(PrintSky)->getFlagLimitMagnitude());
+	connect(GETSTELMODULE(PrintSky), SIGNAL(flagLimitMagnitudeChanged(bool)), ui->limitMagnitudeDoubleSpinBox, SLOT(setEnabled(bool)));
 
 	//Initialize the style
 	updateStyle();
@@ -241,6 +244,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 			PlanetP p=ssmgr->searchByEnglishName(englishName);
 			if (p.data()->isHidden()) // exclude observers etc.
 				continue;
+			if ((p.data()->getPlanetType()==Planet::isComet) && !static_cast<KeplerOrbit*>(p.data()->getOrbit())->objectDateValid(jd)) // exclude comets far from perihel
+				continue;
 			double dec, ra;
 			StelUtils::rectToSphe(&ra,&dec, p->getEquinoxEquatorialPos(core));
 			double standardAltitude=-0.5667;
@@ -253,7 +258,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 			const double cosH=(std::sin(standardAltitude)-(std::sin(geographicLatitude)*std::sin(dec)))/(std::cos(geographicLatitude)*std::cos(dec));
 
 			if ((!plugin->getFlagLimitMagnitude() || p->getVMagnitude(core) <= static_cast<float>(plugin->getLimitMagnitude()))
-					&& englishName!=location.planetName && cosH>=-1. && cosH<=1.) // FIXME: This excludes circumpolar objects!
+					&& englishName!=location.planetName
+					&& cosH>=-1. && cosH<=1.) // FIXME: This excludes circumpolar objects!
 			{
 				const int ratioWidth=static_cast<int>(300.*static_cast<double>(fontsize)/45.);
 				if (doHeader)
