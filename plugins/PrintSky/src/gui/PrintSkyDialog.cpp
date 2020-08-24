@@ -94,8 +94,13 @@ void PrintSkyDialog::createDialogContent()
 	connectBoolProperty(ui->invertColorsCheckBox,           "PrintSky.invertColors");
 	connectBoolProperty(ui->scaleToFitCheckBox,             "PrintSky.scaleToFit");
 	connectBoolProperty(ui->printDataCheckBox,              "PrintSky.printData");
+	connectBoolProperty(ui->selectedObjectCheckBox,         "PrintSky.flagPrintObjectInfo");
 	connectBoolProperty(ui->printSSEphemeridesCheckBox,     "PrintSky.printSSEphemerides");
 	connectBoolProperty(ui->orientationPortraitRadioButton, "PrintSky.orientationPortrait");
+	connectBoolProperty(ui->limitMagnitudeCheckBox,         "PrintSky.flagLimitMagnitude");
+	connectDoubleProperty(ui->limitMagnitudeDoubleSpinBox,  "PrintSky.limitMagnitude");
+
+	connect(ui->limitMagnitudeCheckBox, SIGNAL(checked()), ui->limitMagnitudeDoubleSpinBox, SLOT(enabled())); // FIXME: correct handling!
 
 	//Initialize the style
 	updateStyle();
@@ -132,7 +137,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	font.setPixelSize(fontsize);
 	painter.setFont(font);
 	//int lineSpacing=fontsize+8;
-	const int lineSpacing=fontsize*1.25;
+	const int lineSpacing=fontsize*5/4;
 
 	//qDebug() << "PrintSky: printer debugging information:";
 	//qDebug() << "Current printer resolution:" << printer->resolution();
@@ -151,8 +156,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 		painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)), Qt::AlignCenter, q_("CHART INFORMATION"));
 
-		QString printLatitude=StelUtils::radToDmsStr((std::fabs(location.latitude)/180.)*M_PI);
-		QString printLongitude=StelUtils::radToDmsStr((std::fabs(location.longitude)/180.)*M_PI);
+		QString printLatitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.latitude))/180.)*M_PI);
+		QString printLongitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.longitude))/180.)*M_PI);
 
 		QString locationStr = QString("%1: %2,\t%3,\t%4;\t%5\t%6\t%7%8")
 							 .arg(q_("Location"))
@@ -188,8 +193,9 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		int xPos=-(12*fontsize), yPos=lineSpacing+10;
 		for (int i=0; i<listPairsMagnitudesRadius.count(); ++i)
 		{
-			painter.drawText(surfaceData.adjusted(surfaceData.width()+xPos, yPos, 0, 0), Qt::AlignLeft, QString("%1").arg(listPairsMagnitudesRadius.at(i).first));
-			painter.setBrush(Qt::SolidPattern);
+			painter.drawText(surfaceData.adjusted(surfaceData.width()+xPos, yPos, 0, 0), Qt::AlignLeft, QString("%1").arg(listPairsMagnitudesRadius.at(i).first, 2));
+			//painter.setBrush(Qt::SolidPattern);
+			painter.setBrush(Qt::RadialGradientPattern); // FIXME: Attempt to make diffuse stars. Maybe replace by Qt:TexturePattern and setTexture()?
 			painter.drawEllipse(QPoint(surfaceData.left() + surfaceData.width() + xPos - 40, surfaceData.top() + yPos + (fontsize/2)),
 									  static_cast<int>(std::ceil(listPairsMagnitudesRadius.at(i).second)),
 									  static_cast<int>(std::ceil(listPairsMagnitudesRadius.at(i).second)));
@@ -200,6 +206,16 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				yPos=lineSpacing+10;
 			}
 		}
+
+		// TODO: twilight info, lunar phase or similar general information?
+		// TODO: active meteor showers (check plugin state, get info)
+	}
+
+
+	// Print selected object information
+	if (plugin->getFlagPrintObjectInfo()) // AND SOMETHING IS SELECTED...
+	{
+		// TODO: print selected object info
 	}
 
 	// Print solar system ephemerides
@@ -207,8 +223,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	{
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 
-		const double geographicLongitude=-location.longitude*M_PI/180.;
-		const double geographicLatitude=location.latitude*M_PI/180.;
+		const double geographicLongitude=-static_cast<double>(location.longitude)*M_PI/180.;
+		const double geographicLatitude=static_cast<double>(location.latitude)*M_PI/180.;
 
 		PlanetP pHome=ssmgr->searchByEnglishName(location.planetName);
 		//double standardSideralTime=pHome->getSiderealTime(((int) jd)+0.5)*M_PI/180.;
@@ -234,14 +250,15 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				standardAltitude=0.125;
 			standardAltitude*=M_PI/180.;
 
-			double cosH=(std::sin(standardAltitude)-(std::sin(geographicLatitude)*std::sin(dec)))/(std::cos(geographicLatitude)*std::cos(dec));
+			const double cosH=(std::sin(standardAltitude)-(std::sin(geographicLatitude)*std::sin(dec)))/(std::cos(geographicLatitude)*std::cos(dec));
 
-			if (englishName!=location.planetName && cosH>=-1. && cosH<=1.)
+			if ((!plugin->getFlagLimitMagnitude() || p->getVMagnitude(core) <= static_cast<float>(plugin->getLimitMagnitude()))
+					&& englishName!=location.planetName && cosH>=-1. && cosH<=1.) // FIXME: This excludes circumpolar objects!
 			{
 				const int ratioWidth=static_cast<int>(300.*static_cast<double>(fontsize)/45.);
 				if (doHeader)
 				{
-					int xPos=printer->pageRect().left()-0.5*ratioWidth;
+					int xPos=printer->pageRect().left()-ratioWidth/2;
 					yPos=70+(lineSpacing)*2;
 					printer->newPage();
 					painter.drawText(QRect(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
@@ -256,18 +273,19 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Transit"));
 					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Setting"));
 					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("Dist.(AU)"));
-					painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("Ap.Mag."));
+					painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("App.Mag."));
 					yPos+=(lineSpacing)*1.25;
 					doHeader=false;
 				}
 
+				// FIXME: replace those by meanwhile existing methods
 				const double angleH=std::acos(cosH);
 				const double transit=fmod(((ra+geographicLongitude-standardSiderealTime)/(2*M_PI))+1., 1.);
 				const double rising =fmod(transit-angleH/(2*M_PI) +1., 1.);
 				const double setting=fmod(transit+angleH/(2*M_PI) +1., 1.);
 				const double shift = core->getUTCOffset(jd);
 				oddLine=!oddLine;
-				int xPos=printer->pageRect().left()-0.5*ratioWidth;
+				int xPos=printer->pageRect().left()-ratioWidth/2;
 
 				painter.setPen(Qt::NoPen);
 				painter.setBrush(oddLine? Qt::white: Qt::lightGray);

@@ -37,8 +37,8 @@ class PrintSkyDialog : public StelDialog // PrintSky
 
 public:
 	PrintSkyDialog();
-	virtual ~PrintSkyDialog();
-	virtual void retranslate();
+	virtual ~PrintSkyDialog() Q_DECL_OVERRIDE;
+	virtual void retranslate() Q_DECL_OVERRIDE;
 	void updateStyle();
 
 	//! Notify that the application style changed
@@ -57,7 +57,7 @@ public slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_printskyDialogForm* ui;
 
 private slots:

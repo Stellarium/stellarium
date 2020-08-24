@@ -205,37 +205,25 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0" colspan="2">
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QCheckBox" name="invertColorsCheckBox">
-                 <property name="text">
-                  <string>Invert colors</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="scaleToFitCheckBox">
-                 <property name="text">
-                  <string>Scale to fit</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="printDataCheckBox">
-                 <property name="text">
-                  <string>Print scene information</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="printSSEphemeridesCheckBox">
-                 <property name="text">
-                  <string>Print Solar System ephemerides</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="2" column="0" colspan="3">
+              <widget class="QFrame" name="buttonsFrame">
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QPushButton" name="previewSkyPushButton">
+                  <property name="text">
+                   <string>Preview</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="printSkyPushButton">
+                  <property name="text">
+                   <string>Print</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </item>
              <item row="0" column="2">
               <widget class="QGroupBox" name="orientationGroupBox">
@@ -275,25 +263,77 @@
                </layout>
               </widget>
              </item>
-             <item row="1" column="0" colspan="3">
-              <widget class="QFrame" name="buttonsFrame">
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <widget class="QPushButton" name="previewSkyPushButton">
-                  <property name="text">
-                   <string>Preview</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="printSkyPushButton">
-                  <property name="text">
-                   <string>Print</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+             <item row="0" column="0" colspan="2">
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QCheckBox" name="invertColorsCheckBox">
+                 <property name="text">
+                  <string>Invert colors</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="scaleToFitCheckBox">
+                 <property name="text">
+                  <string>Scale to fit</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="printDataCheckBox">
+                 <property name="text">
+                  <string>Print scene information</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="selectedObjectCheckBox">
+                 <property name="text">
+                  <string>Print selected object information</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="printSSEphemeridesCheckBox">
+                 <property name="text">
+                  <string>Print Solar System ephemerides</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="magLimit_horizontalLayout">
+                 <item>
+                  <widget class="QCheckBox" name="limitMagnitudeCheckBox">
+                   <property name="toolTip">
+                    <string>Don't show data for objects dimmer than...</string>
+                   </property>
+                   <property name="text">
+                    <string>Limit magnitude</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="limitMagnitudeDoubleSpinBox">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-3.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>25.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -321,11 +361,9 @@
           <item row="1" column="0">
            <widget class="QLabel" name="labelAbout">
             <property name="text">
-             <string>This plugin allows the user to preview and print the current screen and some aditional data as the current location, the screen time adding the GMT difference, and also a relation radius magnitude as a field reference.
+             <string>This plugin allows the user to preview and print the current view and some aditional data as the current location, the screen time adding the GMT difference, and also a radius/magnitude scale as a field reference.
 
-In a optional second page you can get some Solar System ephemerides.
-
-Use Ctrl+Alt+P to open the print window.</string>
+In a optional second page you can get some Solar System ephemerides.</string>
             </property>
             <property name="textFormat">
              <enum>Qt::AutoText</enum>
@@ -354,7 +392,7 @@ Use Ctrl+Alt+P to open the print window.</string>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Author: &lt;a href=&quot;mailto:maslarocaxica@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Pep Pujols&lt;/span&gt;&lt;/a&gt; (with fixes by Bogdan Marinov, and ports to Qt5 by Georg Zotti)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Author: &lt;a href=&quot;mailto:maslarocaxica@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Pep Pujols&lt;/span&gt;&lt;/a&gt; (with fixes by Bogdan Marinov, and port to Qt5 by Georg Zotti)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>

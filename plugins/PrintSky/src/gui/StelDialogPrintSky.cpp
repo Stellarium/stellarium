@@ -37,6 +37,9 @@ class CustomProxy : public QGraphicsProxyWidget
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
 		void paintWindowFrame(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 		{
+			Q_UNUSED(painter)
+			Q_UNUSED(option)
+			Q_UNUSED(widget)
 /*			QStyleOptionTitleBar bar;
 			initStyleOption(&bar);
 			bar.subControls = QStyle::SC_TitleBarCloseButton;
@@ -104,7 +107,7 @@ void StelDialogPrintSky::setVisible(bool v)
 		QRectF bound = proxy->boundingRect();
 
 		// centre with dialog according to current window size.
-		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
+		proxy->setPos(static_cast<int>((screenSize.width()-bound.width())/2), static_cast<int>((screenSize.height()-bound.height())/2));
 		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);

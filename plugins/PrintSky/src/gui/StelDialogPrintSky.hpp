@@ -31,7 +31,7 @@ class StelDialogPrintSky : public QObject
 	Q_OBJECT
 public:
 	StelDialogPrintSky();
-	virtual ~StelDialogPrintSky();
+	virtual ~StelDialogPrintSky() Q_DECL_OVERRIDE;
 	//! Retranslate the content of the dialog
 	virtual void languageChanged()=0;
 

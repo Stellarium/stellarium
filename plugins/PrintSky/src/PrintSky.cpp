@@ -22,7 +22,7 @@ StelPluginInfo PrintSkyStelPluginInterface::getPluginInfo() const
 	info.id = "PrintSky";
 	info.displayedName =  N_("Print Sky");
 	info.authors = "Pep Pujols, Georg Zotti";
-	info.contact = "maslarocaxica@gmail.com";
+	info.contact = STELLARIUM_URL; // "maslarocaxica@gmail.com";
 	info.description = N_("Provides a report printing option");
 	info.version = PRINTSKY_PLUGIN_VERSION;
 	info.license = PRINTSKY_PLUGIN_LICENSE;
@@ -33,7 +33,10 @@ PrintSky::PrintSky() :
 	invertColors(false),
 	scaleToFit(false),
 	printData(true),
-	printSSEphemerides(true)
+	printSSEphemerides(true),
+	flagPrintObjectInfo(true),
+	flagLimitMagnitude(false),
+	limitMagnitude(20.0)
 {
 	conf = StelApp::getInstance().getSettings();
 	setObjectName("PrintSky");
@@ -59,6 +62,9 @@ void PrintSky::init()
 	orientationPortrait=conf->value("flag_portrait_orientation", true).toBool();
 	printData=conf->value("flag_print_data", true).toBool();
 	printSSEphemerides=conf->value("flag_print_ephemerides", true).toBool();
+	flagPrintObjectInfo=conf->value("flag_print_selected_object_info", true).toBool();
+	flagLimitMagnitude=conf->value("flag_limit_magnitude", false).toBool();
+	limitMagnitude=conf->value("limit_magnitude", 20.0).toDouble();
 	conf->endGroup();
 }
 
@@ -93,7 +99,7 @@ bool PrintSky::configureGui(bool show)
 	return true;
 }
 
-/* ********************************************************************* */
+/* **** PROPERTY SETTERS ***************************************************************** */
 void PrintSky::setInvertColors(bool state)
 {
 	if (state != invertColors)
@@ -104,7 +110,6 @@ void PrintSky::setInvertColors(bool state)
 	}
 }
 
-/* ********************************************************************* */
 void PrintSky::setScaleToFit(bool state)
 {
 	if (state != scaleToFit)
@@ -115,7 +120,6 @@ void PrintSky::setScaleToFit(bool state)
 	}
 }
 
-/* ********************************************************************* */
 void PrintSky::setOrientationPortrait(bool state)
 {
 	if (state != orientationPortrait)
@@ -126,7 +130,6 @@ void PrintSky::setOrientationPortrait(bool state)
 	}
 }
 
-/* ********************************************************************* */
 void PrintSky::setPrintData(bool state)
 {
 	if (state != printData)
@@ -137,7 +140,16 @@ void PrintSky::setPrintData(bool state)
 	}
 }
 
-/* ********************************************************************* */
+void PrintSky::setFlagPrintObjectInfo(bool state)
+{
+	if (state != flagPrintObjectInfo)
+	{
+		flagPrintObjectInfo=state;
+		conf->setValue("PrintSky/flag_print_selected_object_info", state);
+		emit(flagPrintObjectInfoChanged(state));
+	}
+}
+
 void PrintSky::setPrintSSEphemerides(bool state)
 {
 	if (state != printSSEphemerides)
@@ -145,5 +157,25 @@ void PrintSky::setPrintSSEphemerides(bool state)
 		printSSEphemerides=state;
 		conf->setValue("PrintSky/flag_print_ephemerides", state);
 		emit(printSSEphemeridesChanged(state));
+	}
+}
+
+void PrintSky::setFlagLimitMagnitude(bool state)
+{
+	if (state != flagLimitMagnitude)
+	{
+		flagLimitMagnitude=state;
+		conf->setValue("PrintSky/flag_limit_magnitude", state);
+		emit(flagLimitMagnitudeChanged(state));
+	}
+}
+
+void PrintSky::setLimitMagnitude(double mag)
+{
+	if (!fuzzyEquals(mag, limitMagnitude))
+	{
+		limitMagnitude=mag;
+		conf->setValue("PrintSky/limit_magnitude", mag);
+		emit(limitMagnitudeChanged(mag));
 	}
 }

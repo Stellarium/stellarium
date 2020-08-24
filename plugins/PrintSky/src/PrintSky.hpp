@@ -31,28 +31,34 @@ class PrintSky : public StelModule
 	Q_PROPERTY(bool invertColors        READ getInvertColors        WRITE setInvertColors        NOTIFY invertColorsChanged)
 	Q_PROPERTY(bool scaleToFit          READ getScaleToFit          WRITE setScaleToFit          NOTIFY scaleToFitChanged)
 	Q_PROPERTY(bool printData           READ getPrintData           WRITE setPrintData           NOTIFY printDataChanged)
+	Q_PROPERTY(bool flagPrintObjectInfo READ getFlagPrintObjectInfo WRITE setFlagPrintObjectInfo NOTIFY flagPrintObjectInfoChanged)
 	Q_PROPERTY(bool printSSEphemerides  READ getPrintSSEphemerides  WRITE setPrintSSEphemerides  NOTIFY printSSEphemeridesChanged)
+	Q_PROPERTY(bool flagLimitMagnitude  READ getFlagLimitMagnitude  WRITE setFlagLimitMagnitude  NOTIFY flagLimitMagnitudeChanged)
+	Q_PROPERTY(double limitMagnitude    READ getLimitMagnitude      WRITE setLimitMagnitude      NOTIFY limitMagnitudeChanged)
 	Q_PROPERTY(bool orientationPortrait READ getOrientationPortrait WRITE setOrientationPortrait NOTIFY orientationChanged)
 
 public:
 	 PrintSky();
-	virtual ~PrintSky();
+	virtual ~PrintSky() Q_DECL_OVERRIDE;
 
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual bool configureGui(bool show=true);
-	virtual void update(double) {}
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {}
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 signals:
 	void invertColorsChanged(bool state);
 	void scaleToFitChanged(bool state);
 	void orientationChanged(bool state);
 	void printDataChanged(bool state);
+	void flagPrintObjectInfoChanged(bool state);
 	void printSSEphemeridesChanged(bool state);
+	void flagLimitMagnitudeChanged(bool state);
+	void limitMagnitudeChanged(double mag);
 
 public slots:
 
@@ -63,12 +69,19 @@ public slots:
 	void setScaleToFit(bool state);
 	void setOrientationPortrait(bool state);
 	void setPrintData(bool state);
+	void setFlagPrintObjectInfo(bool state);
 	void setPrintSSEphemerides(bool state);
+	void setFlagLimitMagnitude(bool state);
+	void setLimitMagnitude(double mag);
+
 	bool getInvertColors() const { return invertColors;}
 	bool getScaleToFit() const { return scaleToFit;}
 	bool getOrientationPortrait() const { return orientationPortrait;}
 	bool getPrintData() const { return printData;}
+	bool getFlagPrintObjectInfo() const { return flagPrintObjectInfo;}
 	bool getPrintSSEphemerides() const { return printSSEphemerides;}
+	bool getFlagLimitMagnitude() const {return flagLimitMagnitude;}
+	double getLimitMagnitude() const {return limitMagnitude;}
 
 
 private slots:
@@ -76,6 +89,9 @@ private slots:
 private:
 	//Printing options
 	bool invertColors, scaleToFit, printData, printSSEphemerides, orientationPortrait; // true for Portrait paper, false for Landscape
+	bool flagPrintObjectInfo;  // print data for selected object
+	bool flagLimitMagnitude;   // limit objects in epmeris list to objects brighter than...
+	double limitMagnitude;     // limit magnitude for the ephemeris list
 
 	PrintSkyDialog *printskyDialog;
 	QSettings* conf;
