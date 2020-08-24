@@ -23,6 +23,7 @@
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
 #include <QDebug>
+#include <QTextDocument>
 
 #include "PrintSky.hpp"
 #include "StelApp.hpp"
@@ -37,6 +38,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "Orbit.hpp"
+#include "StelObjectMgr.hpp"
 
 
 
@@ -214,11 +216,20 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		// TODO: active meteor showers (check plugin state, get info)
 	}
 
-
 	// Print selected object information
-	if (plugin->getFlagPrintObjectInfo()) // AND SOMETHING IS SELECTED...
+	if (plugin->getFlagPrintObjectInfo() && GETSTELMODULE(StelObjectMgr)->getWasSelected())
 	{
+
+		QTextDocument info(GETSTELMODULE(StelObjectMgr)->getSelectedObject().at(0)->getInfoString(core).toHtmlEscaped());
+
+		int posY=img.height()+lineSpacing;
+		QRect surfaceData(printer->pageRect().left(), posY, printer->pageRect().width(), printer->pageRect().height()-posY);
+
 		// TODO: print selected object info
+		//painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)),
+		//		 ,
+		//		 QTextOption());
+		info.print(printer);
 	}
 
 	// Print solar system ephemerides
@@ -226,12 +237,9 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	{
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 
-		const double geographicLongitude=-static_cast<double>(location.longitude)*M_PI/180.;
-		const double geographicLatitude=static_cast<double>(location.latitude)*M_PI/180.;
-
 		PlanetP pHome=ssmgr->searchByEnglishName(location.planetName);
 		//double standardSideralTime=pHome->getSiderealTime(((int) jd)+0.5)*M_PI/180.;
-		const double standardSiderealTime=pHome->getSiderealTime(floor(jd)+0.5, floor(jd)+0.5)*M_PI/180.;
+		//const double standardSiderealTime=pHome->getSiderealTime(floor(jd)+0.5, floor(jd)+0.5)*M_PI/180.;
 
 		QStringList allBodiesNames=ssmgr->getAllPlanetEnglishNames();
 		allBodiesNames.sort(); // FIXME: Add a function to sort by hierarchy.
@@ -248,18 +256,11 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				continue;
 			double dec, ra;
 			StelUtils::rectToSphe(&ra,&dec, p->getEquinoxEquatorialPos(core));
-			double standardAltitude=-0.5667;
-			if (englishName=="Sun")
-				standardAltitude=-0.8333;
-			if (englishName=="Moon")
-				standardAltitude=0.125;
-			standardAltitude*=M_PI/180.;
 
-			const double cosH=(std::sin(standardAltitude)-(std::sin(geographicLatitude)*std::sin(dec)))/(std::cos(geographicLatitude)*std::cos(dec));
+			Vec4d RTS=p.data()->getRTSTime(core);
 
 			if ((!plugin->getFlagLimitMagnitude() || p->getVMagnitude(core) <= static_cast<float>(plugin->getLimitMagnitude()))
-					&& englishName!=location.planetName
-					&& cosH>=-1. && cosH<=1.) // FIXME: This excludes circumpolar objects!
+					&& englishName!=location.planetName)
 			{
 				const int ratioWidth=static_cast<int>(300.*static_cast<double>(fontsize)/45.);
 				if (doHeader)
@@ -284,12 +285,9 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					doHeader=false;
 				}
 
-				// FIXME: replace those by meanwhile existing methods
-				const double angleH=std::acos(cosH);
-				const double transit=fmod(((ra+geographicLongitude-standardSiderealTime)/(2*M_PI))+1., 1.);
-				const double rising =fmod(transit-angleH/(2*M_PI) +1., 1.);
-				const double setting=fmod(transit+angleH/(2*M_PI) +1., 1.);
-				const double shift = core->getUTCOffset(jd);
+				const double transit=RTS[1];
+				const double rising =RTS[0];
+				const double setting=RTS[2];
 				oddLine=!oddLine;
 				int xPos=printer->pageRect().left()-ratioWidth/2;
 
@@ -301,11 +299,11 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				painter.drawText(QRect(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignLeft,   QString(" %1").arg(q_(englishName)));
 				painter.drawText(QRect(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToHmsStr(ra)));
 				painter.drawText(QRect(xPos+=1.1*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToDmsStr(dec)));
-				painter.drawText(QRect(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableTime(rising, shift)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableTime(transit, shift)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableTime(setting, shift)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(p->getDistance(), 0, 'f', 5));
-				painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 3));
+				painter.drawText(QRect(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(rising)));
+				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(transit)));
+				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(setting)));
+				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(p->getDistance(), 0, 'f', 3));
+				painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 1));
 
 				yPos+=lineSpacing;
 				if (yPos+((lineSpacing)*4)>=printer->pageRect().top()+printer->pageRect().height())
@@ -386,6 +384,17 @@ QString PrintSkyDialog::printableTime(double time, double shift)
 	time=fmod(time+shift/24.+1., 1.); // should ensure 0..1
 	QTime tm(0,0);
 	tm=tm.addSecs(static_cast<int>(time*86400.));
+	return tm.toString("HH:mm");
+}
+
+// time is given as hours, 0..24. -100 means never rises/sets, 100 is circumpolar
+QString PrintSkyDialog::printableRTSTime(double decimalHours)
+{
+	if (fabs(decimalHours)>99.)
+		return q_("never");
+	decimalHours=fmod(decimalHours+24., 24.); // should ensure 0..24
+	QTime tm(0,0);
+	tm=tm.addSecs(static_cast<int>(decimalHours*3600.));
 	return tm.toString("HH:mm");
 }
 

@@ -72,7 +72,9 @@ private:
 
 	//! Printing options
 	bool outputPreview;
-	QString printableTime(double time, double shift);
+	QString printableTime(double time, double shift); // DEPRECATED
+	QString printableRTSTime(double decimalHours);
+
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
 };
 
