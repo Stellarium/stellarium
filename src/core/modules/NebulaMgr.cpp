@@ -402,7 +402,7 @@ void NebulaMgr::init()
 	if (conf->value("flag_show_aco", false).toBool())
 		catalogFilters	|= Nebula::CatACO;
 	if (conf->value("flag_show_hcg", false).toBool())
-		catalogFilters	|= Nebula::CatHCG;	
+		catalogFilters	|= Nebula::CatHCG;
 	if (conf->value("flag_show_eso", false).toBool())
 		catalogFilters	|= Nebula::CatESO;
 	if (conf->value("flag_show_vdbh", false).toBool())
@@ -497,7 +497,7 @@ struct DrawNebulaFuncObject
 			mag = n->bMag;
 
 		StelSkyDrawer *drawer = core->getSkyDrawer();
-		// filter out DSOs which are too dim to be seen (e.g. for bino observers)		
+		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
 			return;
 
@@ -767,7 +767,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "PGC") return searchPGC(num);
 		if (cat == "UGC") return searchUGC(num);
 		if (cat == "ARP") return searchArp(num);
-		if (cat == "VV") return searchVV(num);		
+		if (cat == "VV") return searchVV(num);
 		if (cat == "DWB") return searchDWB(num);
 		if (cat == "TR" || cat == "TRUMPLER") return searchTr(num);
 		if (cat == "ST" || cat == "STOCK") return searchSt(num);
@@ -1136,6 +1136,21 @@ QString NebulaMgr::getLatestSelectedDSODesignation() const
 	return result;
 }
 
+QString NebulaMgr::getLatestSelectedDSODesignationWIC() const
+{
+	QString result = "";
+
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
+	if (!selected.empty())
+	{
+		for (const auto& n : dsoArray)
+			if (n==selected[0])
+				result = n->getDSODesignationWIC(); // Get designation for latest selected DSO
+	}
+
+	return result;
+}
+
 void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
 {
 	QFile dsoIn(in);
@@ -1153,7 +1168,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QString record;
 	while (!dsoIn.atEnd())
 	{
-		dsoIn.readLine();		
+		dsoIn.readLine();
 		++totalRecords;
 	}
 
@@ -1183,7 +1198,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		{
 			--totalRecords;
 			continue;
-		}		
+		}
 
 		if (!record.isEmpty())
 		{
@@ -1233,7 +1248,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			PNG				= list.at(34).trimmed();	// PN G number
 			SNRG			= list.at(35).trimmed();	// SNR G number
 			ACO				= list.at(36).trimmed();	// ACO number
-			HCG				= list.at(37).trimmed();	// HCG number			
+			HCG				= list.at(37).trimmed();	// HCG number
 			ESO				= list.at(38).trimmed();	// ESO number
 			VdBH			= list.at(39).trimmed();	// VdBH number
 			DWB				= list.at(40).toInt();		// DWB number
@@ -1364,7 +1379,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				{ "PA?" , Nebula::NebPPN  },
 				{ "BUB" , Nebula::NebISM  },
 				{ "CLG" , Nebula::NebGxCl },
-				{ "POG" , Nebula::NebPartOfGx },				
+				{ "POG" , Nebula::NebPartOfGx },
 				{ "CGG" , Nebula::NebGxCl },
 				{ "SCG" , Nebula::NebGxCl },
 				{ "REG" , Nebula::NebRegion },
@@ -1552,7 +1567,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 21:
 				e = searchHCG(cdes);
-				break;			
+				break;
 			case 22:
 				e = searchESO(cdes);
 				break;
@@ -1688,7 +1703,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		}
 	}
 	dsoOutlineFile.close();
-	qDebug() << "Loaded" << readOk << "DSO outline records successfully";	
+	qDebug() << "Loaded" << readOk << "DSO outline records successfully";
 	return true;
 }
 
@@ -1844,7 +1859,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT|VDB-HA)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
-		QString cat = catNumRx.cap(1);		
+		QString cat = catNumRx.cap(1);
 		unsigned int num = catNumRx.cap(2).toUInt();
 		if (cat == "M") n = searchM(num);
 		if (cat == "NGC") n = searchNGC(num);
@@ -1861,7 +1876,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "PGC") n = searchPGC(num);
 		if (cat == "UGC") n = searchUGC(num);
 		if (cat == "ARP") n = searchArp(num);
-		if (cat == "VV") n = searchVV(num);		
+		if (cat == "VV") n = searchVV(num);
 		if (cat == "DWB") n = searchDWB(num);
 		if (cat == "TR" || cat == "TRUMPLER") n = searchTr(num);
 		if (cat == "ST" || cat == "STOCK") n = searchSt(num);
@@ -2771,7 +2786,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (!n->ACO_nb.isEmpty())
 						result << QString("Abell %1").arg(n->ACO_nb);
 					else if (!n->HCG_nb.isEmpty())
-						result << QString("HCG %1").arg(n->HCG_nb);					
+						result << QString("HCG %1").arg(n->HCG_nb);
 					else if (!n->ESO_nb.isEmpty())
 						result << QString("ESO %1").arg(n->ESO_nb);
 					else if (!n->VdBH_nb.isEmpty())

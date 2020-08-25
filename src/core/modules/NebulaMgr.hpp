@@ -382,6 +382,10 @@ public:
 	//! @note using for bookmarks feature as example
 	//! @return a designation
 	QString getLatestSelectedDSODesignation() const;
+	//! Get designation for latest selected DSO with priority and ignorance of availability of catalogs
+	//! @note using for bookmarks feature as example
+	//! @return a designation
+	QString getLatestSelectedDSODesignationWIC() const;
 
 	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }

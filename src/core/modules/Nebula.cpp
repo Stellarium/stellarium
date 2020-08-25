@@ -956,6 +956,72 @@ QString Nebula::getDSODesignation() const
 	return str;
 }
 
+QString Nebula::getDSODesignationWIC() const
+{
+	QString str = "";
+	// Get designation for DSO with priority as given here.
+	if (M_nb>0)
+		str = QString("M %1").arg(M_nb);
+	else if (C_nb>0)
+		str = QString("C %1").arg(C_nb);
+	else if (NGC_nb>0)
+		str = QString("NGC %1").arg(NGC_nb);
+	else if (IC_nb>0)
+		str = QString("IC %1").arg(IC_nb);
+	else if (B_nb>0)
+		str = QString("B %1").arg(B_nb);
+	else if (Sh2_nb>0)
+		str = QString("SH 2-%1").arg(Sh2_nb);
+	else if (VdB_nb>0)
+		str = QString("vdB %1").arg(VdB_nb);
+	else if (RCW_nb>0)
+		str = QString("RCW %1").arg(RCW_nb);
+	else if (LDN_nb>0)
+		str = QString("LDN %1").arg(LDN_nb);
+	else if (LBN_nb > 0)
+		str = QString("LBN %1").arg(LBN_nb);
+	else if (Cr_nb > 0)
+		str = QString("Cr %1").arg(Cr_nb);
+	else if (Mel_nb > 0)
+		str = QString("Mel %1").arg(Mel_nb);
+	else if (PGC_nb > 0)
+		str = QString("PGC %1").arg(PGC_nb);
+	else if (UGC_nb > 0)
+		str = QString("UGC %1").arg(UGC_nb);
+	else if (!Ced_nb.isEmpty())
+		str = QString("Ced %1").arg(Ced_nb);
+	else if (Arp_nb > 0)
+		str = QString("Arp %1").arg(Arp_nb);
+	else if (VV_nb > 0)
+		str = QString("VV %1").arg(VV_nb);
+	else if (!PK_nb.isEmpty())
+		str = QString("PK %1").arg(PK_nb);
+	else if (!PNG_nb.isEmpty())
+		str = QString("PN G%1").arg(PNG_nb);
+	else if (!SNRG_nb.isEmpty())
+		str = QString("SNR G%1").arg(SNRG_nb);
+	else if (!ACO_nb.isEmpty())
+		str = QString("Abell %1").arg(ACO_nb);
+	else if (!HCG_nb.isEmpty())
+		str = QString("HCG %1").arg(HCG_nb);
+	else if (!ESO_nb.isEmpty())
+		str = QString("ESO %1").arg(ESO_nb);
+	else if (!VdBH_nb.isEmpty())
+		str = QString("vdBH %1").arg(VdBH_nb);
+	else if (DWB_nb > 0)
+		str = QString("DWB %1").arg(DWB_nb);
+	else if (Tr_nb > 0)
+		str = QString("Tr %1").arg(Tr_nb);
+	else if (St_nb > 0)
+		str = QString("St %1").arg(St_nb);
+	else if (Ru_nb > 0)
+		str = QString("Ru %1").arg(Ru_nb);
+	else if (VdBHa_nb > 0)
+		str = QString("vdB-Ha %1").arg(VdBHa_nb);
+
+	return str;
+}
+
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;

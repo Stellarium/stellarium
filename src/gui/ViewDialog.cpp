@@ -786,7 +786,7 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxSt->setChecked(flags & Nebula::CatSt);
 	ui->checkBoxRu->setChecked(flags & Nebula::CatRu);
 	ui->checkBoxVdBHa->setChecked(flags & Nebula::CatVdBHa);
-	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);
+	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);	
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()

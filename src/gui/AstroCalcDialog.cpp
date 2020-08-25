@@ -754,7 +754,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		{
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
+			{
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				if (name.isEmpty())
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			}
 
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
@@ -2217,7 +2221,11 @@ void AstroCalcDialog::setTransitCelestialBodyName()
 		{
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
+			{
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				if (name.isEmpty())
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			}
 			if (otype == "Star" || otype=="Pulsar")
 				name = selectedObject->getID();
 		}
@@ -2864,7 +2872,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		{
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
+			{
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				if (name.isEmpty())
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			}
 
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
@@ -3613,7 +3625,11 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		{
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
+			{
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				if (name.isEmpty())
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			}
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
@@ -4418,6 +4434,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString commonName = object2->getNameI18n();
 		if (commonName.isEmpty())
 			commonName = object2->getDSODesignation();
+		if (commonName.isEmpty())
+			commonName = object2->getDSODesignationWIC();
 
 		QString separationStr = dash;
 		float magnitude = object2->getVMagnitude(core);
@@ -5757,6 +5775,8 @@ void AstroCalcDialog::calculateWutObjects()
 						if (passByType && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
+							if (d.isEmpty())
+								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
 							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
@@ -5947,6 +5967,8 @@ void AstroCalcDialog::calculateWutObjects()
 						if (static_cast<bool>(tflags & Nebula::TypeActiveGalaxies) && (ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebBLA || ntype == Nebula::NebBLL) && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
+							if (d.isEmpty())
+								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
 							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
@@ -6118,6 +6140,8 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
+							if (d.isEmpty())
+								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
 							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
@@ -6690,7 +6714,11 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		{
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
+			{
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				if (name.isEmpty())
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			}
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
