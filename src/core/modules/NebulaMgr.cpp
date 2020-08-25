@@ -743,67 +743,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (testName==uname) return n;
 	}
 
-	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT|VDB-HA)\\s*(\\d+)$");
-	if (catNumRx.exactMatch(uname))
-	{
-		QString cat = catNumRx.cap(1);
-		unsigned int num = catNumRx.cap(2).toUInt();
-
-		//qWarning() << "[SEARCH]" << cat << num;
-
-		if (cat == "M") return searchM(num);
-		if (cat == "NGC") return searchNGC(num);
-		if (cat == "IC") return searchIC(num);
-		if (cat == "C") return searchC(num);
-		if (cat == "B") return searchB(num);
-		if (cat == "VDB-HA") return searchVdBHa(num);
-		if (cat == "VDB") return searchVdB(num);
-		if (cat == "RCW") return searchRCW(num);
-		if (cat == "LDN") return searchLDN(num);
-		if (cat == "LBN") return searchLBN(num);
-		if (cat == "CR") return searchCr(num);
-		if (cat == "MEL") return searchMel(num);
-		if (cat == "PGC") return searchPGC(num);
-		if (cat == "UGC") return searchUGC(num);
-		if (cat == "ARP") return searchArp(num);
-		if (cat == "VV") return searchVV(num);
-		if (cat == "DWB") return searchDWB(num);
-		if (cat == "TR" || cat == "TRUMPLER") return searchTr(num);
-		if (cat == "ST" || cat == "STOCK") return searchSt(num);
-		if (cat == "RU" || cat == "RUPRECHT") return searchRu(num);
-	}
-	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
-	if (dCatNumRx.exactMatch(uname))
-	{
-		QString dcat = dCatNumRx.cap(1);
-		unsigned int dnum = dCatNumRx.cap(2).toUInt();
-
-		if (dcat == "SH") return searchSh2(dnum);
-	}
-	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
-	if (sCatNumRx.exactMatch(uname))
-	{
-		QString cat = sCatNumRx.cap(1);
-		QString num = sCatNumRx.cap(2).trimmed();
-
-		if (cat == "CED") return searchCed(num);
-		if (cat == "PK") return searchPK(num);
-		if (cat == "ACO" || cat == "ABELL") return searchACO(num);
-		if (cat == "HCG") return searchHCG(num);
-		if (cat == "ESO") return searchESO(num);
-		if (cat == "VDBH") return searchVdBH(num);
-	}
-	static QRegExp gCatNumRx("^(PN|SNR)\\s*G(.+)$");
-	if (gCatNumRx.exactMatch(uname))
-	{
-		QString cat = gCatNumRx.cap(1);
-		QString num = gCatNumRx.cap(2).trimmed();
-
-		if (cat == "PN") return searchPNG(num);
-		if (cat == "SNR") return searchSNRG(num);
-	}
-	return NebulaP();
+	return searchByDesignation(uname);
 }
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
@@ -1815,7 +1755,8 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by designation
-	return searchByDesignation(objw);
+	NebulaP n = searchByDesignation(objw);
+	return qSharedPointerCast<StelObject>(n);
 }
 
 
@@ -1846,12 +1787,13 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by designation
-	return searchByDesignation(objw);
+	NebulaP n = searchByDesignation(objw);
+	return qSharedPointerCast<StelObject>(n);
 }
 
 //! Return the matching Nebula object's pointer if exists or Q_NULLPTR
 //! TODO Decide whether empty StelObjectP or Q_NULLPTR is the better return type and select the same for both.
-StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
+NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 {
 	NebulaP n;
 	QString uname = designation.toUpper();
@@ -1913,10 +1855,7 @@ StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "SNR") n = searchSNRG(num);
 	}
 
-	if (n.isNull())
-		return StelObjectP();
-	else
-		return qSharedPointerCast<StelObject>(n);
+	return n;
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name
@@ -2586,14 +2525,8 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						else
 							result << n->getNameI18n();
 					}
-					else if (n->NGC_nb>0)
-						result << QString("NGC %1").arg(n->NGC_nb);
-					else if (n->IC_nb>0)
-						result << QString("IC %1").arg(n->IC_nb);
-					else if (n->M_nb>0)
-						result << QString("M %1").arg(n->M_nb);
-					else if (n->C_nb>0)
-						result << QString("C %1").arg(n->C_nb);
+					else
+						result << n->getDSODesignationWIC();
 				}
 			}
 			break;
@@ -2743,64 +2676,8 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						else
 							result << n->getNameI18n();
 					}
-					else if (n->NGC_nb>0)
-						result << QString("NGC %1").arg(n->NGC_nb);
-					else if (n->IC_nb>0)
-						result << QString("IC %1").arg(n->IC_nb);
-					else if (n->M_nb>0)
-						result << QString("M %1").arg(n->M_nb);
-					else if (n->C_nb>0)
-						result << QString("C %1").arg(n->C_nb);
-					else if (n->B_nb>0)
-						result << QString("B %1").arg(n->B_nb);
-					else if (n->Sh2_nb>0)
-						result << QString("SH 2-%1").arg(n->Sh2_nb);
-					else if (n->VdB_nb>0)
-						result << QString("vdB %1").arg(n->VdB_nb);
-					else if (n->RCW_nb>0)
-						result << QString("RCW %1").arg(n->RCW_nb);
-					else if (n->LBN_nb>0)
-						result << QString("LBN %1").arg(n->LBN_nb);
-					else if (n->LDN_nb>0)
-						result << QString("LDN %1").arg(n->LDN_nb);
-					else if (n->Cr_nb>0)
-						result << QString("Cr %1").arg(n->Cr_nb);
-					else if (n->Mel_nb>0)
-						result << QString("Mel %1").arg(n->Mel_nb);
-					else if (!n->Ced_nb.isEmpty())
-						result << QString("Ced %1").arg(n->Ced_nb);
-					else if (n->Arp_nb>0)
-						result << QString("Arp %1").arg(n->Arp_nb);
-					else if (n->VV_nb>0)
-						result << QString("VV %1").arg(n->VV_nb);
-					else if (!n->PK_nb.isEmpty())
-						result << QString("PK %1").arg(n->PK_nb);
-					else if (!n->PNG_nb.isEmpty())
-						result << QString("PN G%1").arg(n->PNG_nb);
-					else if (!n->SNRG_nb.isEmpty())
-						result << QString("SNR G%1").arg(n->SNRG_nb);
-					else if (n->PGC_nb>0)
-						result << QString("PGC %1").arg(n->PGC_nb);
-					else if (n->UGC_nb > 0)
-						result << QString("UGC %1").arg(n->UGC_nb);
-					else if (!n->ACO_nb.isEmpty())
-						result << QString("Abell %1").arg(n->ACO_nb);
-					else if (!n->HCG_nb.isEmpty())
-						result << QString("HCG %1").arg(n->HCG_nb);
-					else if (!n->ESO_nb.isEmpty())
-						result << QString("ESO %1").arg(n->ESO_nb);
-					else if (!n->VdBH_nb.isEmpty())
-						result << QString("vdBH %1").arg(n->VdBH_nb);
-					else if (n->DWB_nb>0)
-						result << QString("DWB %1").arg(n->DWB_nb);
-					else if (n->Tr_nb>0)
-						result << QString("Tr %1").arg(n->Tr_nb);
-					else if (n->St_nb>0)
-						result << QString("St %1").arg(n->St_nb);
-					else if (n->Ru_nb>0)
-						result << QString("Ru %1").arg(n->Ru_nb);
-					else if (n->VdBHa_nb>0)
-						result << QString("vdB-Ha %1").arg(n->VdBHa_nb);
+					else
+						result << n->getDSODesignationWIC();
 				}
 			}
 			break;
