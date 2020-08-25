@@ -252,6 +252,8 @@ void AstroCalcDialog::createDialogContent()
 	prepareDistanceAxesAndGraph();
 	prepareAngularDistanceAxesAndGraph();
 
+	ui->genericMarkerColor->setText("1");
+	ui->secondaryMarkerColor->setText("2");
 	ui->mercuryMarkerColor->setText(QChar(0x263F));
 	ui->venusMarkerColor->setText(QChar(0x2640));
 	ui->marsMarkerColor->setText(QChar(0x2642));
