@@ -126,6 +126,7 @@ Nebula::Nebula()
 	, nType()
 {
 	outlineSegments.clear();
+	designations.clear();
 }
 
 Nebula::~Nebula()
@@ -195,71 +196,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 
 	if (flags&CatalogNumber)
-	{
-		QStringList catIds;
-		if (M_nb > 0)
-			catIds << QString("M %1").arg(M_nb);
-		if (C_nb > 0)
-			catIds << QString("C %1").arg(C_nb);
-		if (NGC_nb > 0)
-			catIds << QString("NGC %1").arg(NGC_nb);
-		if (IC_nb > 0)
-			catIds << QString("IC %1").arg(IC_nb);		
-		if (B_nb > 0)
-			catIds << QString("B %1").arg(B_nb);
-		if (Sh2_nb > 0)
-			catIds << QString("SH 2-%1").arg(Sh2_nb);
-		if (VdB_nb > 0)
-			catIds << QString("vdB %1").arg(VdB_nb);
-		if (RCW_nb > 0)
-			catIds << QString("RCW %1").arg(RCW_nb);
-		if (LDN_nb > 0)
-			catIds << QString("LDN %1").arg(LDN_nb);
-		if (LBN_nb > 0)
-			catIds << QString("LBN %1").arg(LBN_nb);
-		if (Cr_nb > 0)
-			catIds << QString("Cr %1").arg(Cr_nb);
-		if (Mel_nb > 0)
-			catIds << QString("Mel %1").arg(Mel_nb);
-		if (PGC_nb > 0)
-			catIds << QString("PGC %1").arg(PGC_nb);
-		if (UGC_nb > 0)
-			catIds << QString("UGC %1").arg(UGC_nb);
-		if (!Ced_nb.isEmpty())
-			catIds << QString("Ced %1").arg(Ced_nb);
-		if (Arp_nb > 0)
-			catIds << QString("Arp %1").arg(Arp_nb);
-		if (VV_nb > 0)
-			catIds << QString("VV %1").arg(VV_nb);
-		if (!PK_nb.isEmpty())
-			catIds << QString("PK %1").arg(PK_nb);
-		if (!PNG_nb.isEmpty())
-			catIds << QString("PN G%1").arg(PNG_nb);
-		if (!SNRG_nb.isEmpty())
-			catIds << QString("SNR G%1").arg(SNRG_nb);
-		if (!ACO_nb.isEmpty())
-			catIds << QString("Abell %1").arg(ACO_nb);
-		if (!HCG_nb.isEmpty())
-			catIds << QString("HCG %1").arg(HCG_nb);		
-		if (!ESO_nb.isEmpty())
-			catIds << QString("ESO %1").arg(ESO_nb);
-		if (!VdBH_nb.isEmpty())
-			catIds << QString("vdBH %1").arg(VdBH_nb);
-		if (DWB_nb > 0)
-			catIds << QString("DWB %1").arg(DWB_nb);
-		if (Tr_nb > 0)
-			catIds << QString("Tr %1").arg(Tr_nb);
-		if (St_nb > 0)
-			catIds << QString("St %1").arg(St_nb);
-		if (Ru_nb > 0)
-			catIds << QString("Ru %1").arg(Ru_nb);
-		if (VdBHa_nb > 0)
-			catIds << QString("vdB-Ha %1").arg(VdBHa_nb);
-
-		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
+	{	
+		if (!nameI18.isEmpty() && !withoutID && flags&Name)
 			oss << "<br>";
 
-		oss << catIds.join(" - ");
+		oss << designations.join(" - ");
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -958,68 +899,10 @@ QString Nebula::getDSODesignation() const
 
 QString Nebula::getDSODesignationWIC() const
 {
-	QString str = "";
-	// Get designation for DSO with priority as given here.
-	if (M_nb>0)
-		str = QString("M %1").arg(M_nb);
-	else if (C_nb>0)
-		str = QString("C %1").arg(C_nb);
-	else if (NGC_nb>0)
-		str = QString("NGC %1").arg(NGC_nb);
-	else if (IC_nb>0)
-		str = QString("IC %1").arg(IC_nb);
-	else if (B_nb>0)
-		str = QString("B %1").arg(B_nb);
-	else if (Sh2_nb>0)
-		str = QString("SH 2-%1").arg(Sh2_nb);
-	else if (VdB_nb>0)
-		str = QString("vdB %1").arg(VdB_nb);
-	else if (RCW_nb>0)
-		str = QString("RCW %1").arg(RCW_nb);
-	else if (LDN_nb>0)
-		str = QString("LDN %1").arg(LDN_nb);
-	else if (LBN_nb > 0)
-		str = QString("LBN %1").arg(LBN_nb);
-	else if (Cr_nb > 0)
-		str = QString("Cr %1").arg(Cr_nb);
-	else if (Mel_nb > 0)
-		str = QString("Mel %1").arg(Mel_nb);
-	else if (PGC_nb > 0)
-		str = QString("PGC %1").arg(PGC_nb);
-	else if (UGC_nb > 0)
-		str = QString("UGC %1").arg(UGC_nb);
-	else if (!Ced_nb.isEmpty())
-		str = QString("Ced %1").arg(Ced_nb);
-	else if (Arp_nb > 0)
-		str = QString("Arp %1").arg(Arp_nb);
-	else if (VV_nb > 0)
-		str = QString("VV %1").arg(VV_nb);
-	else if (!PK_nb.isEmpty())
-		str = QString("PK %1").arg(PK_nb);
-	else if (!PNG_nb.isEmpty())
-		str = QString("PN G%1").arg(PNG_nb);
-	else if (!SNRG_nb.isEmpty())
-		str = QString("SNR G%1").arg(SNRG_nb);
-	else if (!ACO_nb.isEmpty())
-		str = QString("Abell %1").arg(ACO_nb);
-	else if (!HCG_nb.isEmpty())
-		str = QString("HCG %1").arg(HCG_nb);
-	else if (!ESO_nb.isEmpty())
-		str = QString("ESO %1").arg(ESO_nb);
-	else if (!VdBH_nb.isEmpty())
-		str = QString("vdBH %1").arg(VdBH_nb);
-	else if (DWB_nb > 0)
-		str = QString("DWB %1").arg(DWB_nb);
-	else if (Tr_nb > 0)
-		str = QString("Tr %1").arg(Tr_nb);
-	else if (St_nb > 0)
-		str = QString("St %1").arg(St_nb);
-	else if (Ru_nb > 0)
-		str = QString("Ru %1").arg(Ru_nb);
-	else if (VdBHa_nb > 0)
-		str = QString("vdB-Ha %1").arg(VdBHa_nb);
-
-	return str;
+	if (!withoutID)
+		return designations.first();
+	else
+		return QString();
 }
 
 void Nebula::readDSO(QDataStream &in)
@@ -1036,6 +919,65 @@ void Nebula::readDSO(QDataStream &in)
 	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
+
+	if (M_nb > 0)
+		designations << QString("M %1").arg(M_nb);
+	if (C_nb > 0)
+		designations << QString("C %1").arg(C_nb);
+	if (NGC_nb > 0)
+		designations << QString("NGC %1").arg(NGC_nb);
+	if (IC_nb > 0)
+		designations << QString("IC %1").arg(IC_nb);
+	if (B_nb > 0)
+		designations << QString("B %1").arg(B_nb);
+	if (Sh2_nb > 0)
+		designations << QString("SH 2-%1").arg(Sh2_nb);
+	if (VdB_nb > 0)
+		designations << QString("vdB %1").arg(VdB_nb);
+	if (RCW_nb > 0)
+		designations << QString("RCW %1").arg(RCW_nb);
+	if (LDN_nb > 0)
+		designations << QString("LDN %1").arg(LDN_nb);
+	if (LBN_nb > 0)
+		designations << QString("LBN %1").arg(LBN_nb);
+	if (Cr_nb > 0)
+		designations << QString("Cr %1").arg(Cr_nb);
+	if (Mel_nb > 0)
+		designations << QString("Mel %1").arg(Mel_nb);
+	if (PGC_nb > 0)
+		designations << QString("PGC %1").arg(PGC_nb);
+	if (UGC_nb > 0)
+		designations << QString("UGC %1").arg(UGC_nb);
+	if (!Ced_nb.isEmpty())
+		designations << QString("Ced %1").arg(Ced_nb);
+	if (Arp_nb > 0)
+		designations << QString("Arp %1").arg(Arp_nb);
+	if (VV_nb > 0)
+		designations << QString("VV %1").arg(VV_nb);
+	if (!PK_nb.isEmpty())
+		designations << QString("PK %1").arg(PK_nb);
+	if (!PNG_nb.isEmpty())
+		designations << QString("PN G%1").arg(PNG_nb);
+	if (!SNRG_nb.isEmpty())
+		designations << QString("SNR G%1").arg(SNRG_nb);
+	if (!ACO_nb.isEmpty())
+		designations << QString("Abell %1").arg(ACO_nb);
+	if (!HCG_nb.isEmpty())
+		designations << QString("HCG %1").arg(HCG_nb);
+	if (!ESO_nb.isEmpty())
+		designations << QString("ESO %1").arg(ESO_nb);
+	if (!VdBH_nb.isEmpty())
+		designations << QString("vdBH %1").arg(VdBH_nb);
+	if (DWB_nb > 0)
+		designations << QString("DWB %1").arg(DWB_nb);
+	if (Tr_nb > 0)
+		designations << QString("Tr %1").arg(Tr_nb);
+	if (St_nb > 0)
+		designations << QString("St %1").arg(St_nb);
+	if (Ru_nb > 0)
+		designations << QString("Ru %1").arg(Ru_nb);
+	if (VdBHa_nb > 0)
+		designations << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);
