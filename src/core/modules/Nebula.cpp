@@ -920,64 +920,35 @@ void Nebula::readDSO(QDataStream &in)
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
 
-	if (M_nb > 0)
-		designations << QString("M %1").arg(M_nb);
-	if (C_nb > 0)
-		designations << QString("C %1").arg(C_nb);
-	if (NGC_nb > 0)
-		designations << QString("NGC %1").arg(NGC_nb);
-	if (IC_nb > 0)
-		designations << QString("IC %1").arg(IC_nb);
-	if (B_nb > 0)
-		designations << QString("B %1").arg(B_nb);
-	if (Sh2_nb > 0)
-		designations << QString("SH 2-%1").arg(Sh2_nb);
-	if (VdB_nb > 0)
-		designations << QString("vdB %1").arg(VdB_nb);
-	if (RCW_nb > 0)
-		designations << QString("RCW %1").arg(RCW_nb);
-	if (LDN_nb > 0)
-		designations << QString("LDN %1").arg(LDN_nb);
-	if (LBN_nb > 0)
-		designations << QString("LBN %1").arg(LBN_nb);
-	if (Cr_nb > 0)
-		designations << QString("Cr %1").arg(Cr_nb);
-	if (Mel_nb > 0)
-		designations << QString("Mel %1").arg(Mel_nb);
-	if (PGC_nb > 0)
-		designations << QString("PGC %1").arg(PGC_nb);
-	if (UGC_nb > 0)
-		designations << QString("UGC %1").arg(UGC_nb);
-	if (!Ced_nb.isEmpty())
-		designations << QString("Ced %1").arg(Ced_nb);
-	if (Arp_nb > 0)
-		designations << QString("Arp %1").arg(Arp_nb);
-	if (VV_nb > 0)
-		designations << QString("VV %1").arg(VV_nb);
-	if (!PK_nb.isEmpty())
-		designations << QString("PK %1").arg(PK_nb);
-	if (!PNG_nb.isEmpty())
-		designations << QString("PN G%1").arg(PNG_nb);
-	if (!SNRG_nb.isEmpty())
-		designations << QString("SNR G%1").arg(SNRG_nb);
-	if (!ACO_nb.isEmpty())
-		designations << QString("Abell %1").arg(ACO_nb);
-	if (!HCG_nb.isEmpty())
-		designations << QString("HCG %1").arg(HCG_nb);
-	if (!ESO_nb.isEmpty())
-		designations << QString("ESO %1").arg(ESO_nb);
-	if (!VdBH_nb.isEmpty())
-		designations << QString("vdBH %1").arg(VdBH_nb);
-	if (DWB_nb > 0)
-		designations << QString("DWB %1").arg(DWB_nb);
-	if (Tr_nb > 0)
-		designations << QString("Tr %1").arg(Tr_nb);
-	if (St_nb > 0)
-		designations << QString("St %1").arg(St_nb);
-	if (Ru_nb > 0)
-		designations << QString("Ru %1").arg(Ru_nb);
-	if (VdBHa_nb > 0)
-		designations << QString("vdB-Ha %1").arg(VdBHa_nb);
+	if (M_nb > 0) designations << QString("M %1").arg(M_nb);
+	if (C_nb > 0)  designations << QString("C %1").arg(C_nb);
+	if (NGC_nb > 0) designations << QString("NGC %1").arg(NGC_nb);
+	if (IC_nb > 0) designations << QString("IC %1").arg(IC_nb);
+	if (B_nb > 0) designations << QString("B %1").arg(B_nb);
+	if (Sh2_nb > 0) designations << QString("SH 2-%1").arg(Sh2_nb);
+	if (VdB_nb > 0) designations << QString("vdB %1").arg(VdB_nb);
+	if (RCW_nb > 0) designations << QString("RCW %1").arg(RCW_nb);
+	if (LDN_nb > 0) designations << QString("LDN %1").arg(LDN_nb);
+	if (LBN_nb > 0) designations << QString("LBN %1").arg(LBN_nb);
+	if (Cr_nb > 0) designations << QString("Cr %1").arg(Cr_nb);
+	if (Mel_nb > 0) designations << QString("Mel %1").arg(Mel_nb);
+	if (PGC_nb > 0) designations << QString("PGC %1").arg(PGC_nb);
+	if (UGC_nb > 0) designations << QString("UGC %1").arg(UGC_nb);
+	if (!Ced_nb.isEmpty()) designations << QString("Ced %1").arg(Ced_nb);
+	if (Arp_nb > 0) designations << QString("Arp %1").arg(Arp_nb);
+	if (VV_nb > 0) designations << QString("VV %1").arg(VV_nb);
+	if (!PK_nb.isEmpty()) designations << QString("PK %1").arg(PK_nb);
+	if (!PNG_nb.isEmpty()) designations << QString("PN G%1").arg(PNG_nb);
+	if (!SNRG_nb.isEmpty()) designations << QString("SNR G%1").arg(SNRG_nb);
+	if (!ACO_nb.isEmpty()) designations << QString("Abell %1").arg(ACO_nb);
+	if (!HCG_nb.isEmpty()) designations << QString("HCG %1").arg(HCG_nb);
+	if (!ESO_nb.isEmpty()) designations << QString("ESO %1").arg(ESO_nb);
+	if (!VdBH_nb.isEmpty()) designations << QString("vdBH %1").arg(VdBH_nb);
+	if (DWB_nb > 0) designations << QString("DWB %1").arg(DWB_nb);
+	if (Tr_nb > 0) designations << QString("Tr %1").arg(Tr_nb);
+	if (St_nb > 0) designations << QString("St %1").arg(St_nb);
+	if (Ru_nb > 0) designations << QString("Ru %1").arg(Ru_nb);
+	if (VdBHa_nb > 0) designations << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);
