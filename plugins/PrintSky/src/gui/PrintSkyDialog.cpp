@@ -143,14 +143,15 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	//int lineSpacing=fontsize+8;
 	const int lineSpacing=fontsize*5/4;
 
-	//qDebug() << "PrintSky: printer debugging information:";
-	//qDebug() << "Current printer resolution:" << printer->resolution();
-	//qDebug() << "Supported printer resolutions:" << printer->supportedResolutions();
-	//qDebug() << "Page size (size index, 0-30)" << printer->paperSize();
-	////For the paper size index, see http://doc.qt.nokia.com/qprinter.html#PaperSize-enum
-	//qDebug() << "Font Pixel Size:" << font.pixelSize();
-	//qDebug() << "Paper Rect: "<< printer->paperRect();
-	//qDebug() << "Page Rect: "<< printer->pageRect();
+	qDebug() << "PrintSky: printer debugging information:";
+	qDebug() << "Current printer name:" << printer->printerName();
+	qDebug() << "Current printer resolution:" << printer->resolution();
+	qDebug() << "Supported printer resolutions:" << printer->supportedResolutions();
+	qDebug() << "Page size (size index, 0-30)" << printer->paperSize();
+	//For the paper size index, see http://doc.qt.nokia.com/qprinter.html#PaperSize-enum
+	qDebug() << "Font Pixel Size:" << font.pixelSize();
+	qDebug() << "Paper Rect: "<< printer->paperRect();
+	qDebug() << "Page Rect: "<< printer->pageRect();
 
 	if (plugin->getPrintData())
 	{
