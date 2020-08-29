@@ -595,9 +595,7 @@ void MpcImportWindow::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
@@ -766,13 +764,9 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	request.setHeader(QNetworkRequest::ContentTypeHeader,
-	                  "application/x-www-form-urlencoded");//Is this really necessary?
-	request.setHeader(QNetworkRequest::ContentLengthHeader,
-	                  url.query(QUrl::FullyEncoded).length());
-	#if QT_VERSION >= 0x050600
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded"); //Is this really necessary?
+	request.setHeader(QNetworkRequest::ContentLengthHeader, url.query(QUrl::FullyEncoded).length());
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	

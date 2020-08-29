@@ -157,9 +157,7 @@ int main(int argc, char **argv)
 
 	// Support high DPI pixmaps and fonts
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 6, 0))
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-	#endif
 
 	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
