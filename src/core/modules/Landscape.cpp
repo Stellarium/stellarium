@@ -143,8 +143,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		createPolygonalHorizon(
 					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
-					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString(),
-					landscapeIni.value("landscape/polygonal_horizon_inverted", "false").toBool()
+					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString()
 					);
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
@@ -156,7 +155,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	loadLabels(landscapeId);
 }
 
-void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode , const bool polygonInverted)
+void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
 
@@ -227,16 +226,8 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		if (polygonInverted)
-		{
-			if (horiPoints.at(0) != point)
-				horiPoints.prepend(point);
-		}
-		else
-		{
-			if (horiPoints.last() != point)
-				horiPoints.append(point);
-		}
+		if (horiPoints.last() != point)
+			horiPoints.append(point);
 	}
 	file.close();
 	//horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
@@ -245,14 +236,19 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	//for (int i=0; i<horiPoints.count(); ++i)
 	//	qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
 	AllSkySphericalRegion allskyRegion;
-	SphericalPolygon aboveHorizonPolygon;
-	aboveHorizonPolygon.setContour(horiPoints);
+	SphericalPolygon aboveHorizonPolygon(horiPoints);
 	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
-	if (polygonInverted)
+
+	// If this now contains the zenith, invert the solution:
+	if (horizonPolygon->contains(Vec3d(0.,0.,1.)))
 	{
+		//qDebug() << "Must invert polygon vector!";
+		std::reverse(horiPoints.begin(), horiPoints.end());
+		AllSkySphericalRegion allskyRegion;
+		SphericalPolygon aboveHorizonPolygon(horiPoints);
+		horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
 		AllSkySphericalRegion allskyRegion2;
 		horizonPolygon = allskyRegion2.getSubtraction(horizonPolygon);
-		//horizonPolygon=&aboveHorizonPolygon;
 	}
 }
 
