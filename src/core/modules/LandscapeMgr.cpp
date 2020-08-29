@@ -453,39 +453,51 @@ void LandscapeMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
+	StelApp *app = &StelApp::getInstance();
+	Q_ASSERT(app);
 
 	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
 	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
 
-	atmosphere = new Atmosphere();
-	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
-	setCurrentLandscapeID(defaultLandscapeID);
-	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
-	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
-	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
-	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
-	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
-	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
-	cardinalsPoints = new Cardinals();
-	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
+	// SET SIMPLE PROPERTIES FIRST, before loading the landscape (Loading may already make use of them! GH#1237)
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
+	setFlagEnvironmentAutoEnable(conf->value("viewing/flag_environment_auto_enable",true).toBool());
 	// Set minimal brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toDouble());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
-	setFlagEnvironmentAutoEnable(conf->value("viewing/flag_environment_auto_enable",true).toBool());
+
+	atmosphere = new Atmosphere();
+	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
+	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
+	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+
+	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
+
+	// We must make sure to allow auto location or command-line location even if landscape usually should set location.
+	StelCore *core = StelApp::getInstance().getCore();
+	const bool setLocationFromIPorCLI=((conf->value("init_location/location", "auto").toString() == "auto") || (core->getCurrentLocation().state=="CLI"));
+	const bool shouldThenSetLocation=getFlagLandscapeSetsLocation();
+	if (setLocationFromIPorCLI) setFlagLandscapeSetsLocation(false);
+	setCurrentLandscapeID(defaultLandscapeID);
+	setFlagLandscapeSetsLocation(shouldThenSetLocation);
+	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
+	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
+	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
+	cardinalsPoints = new Cardinals();
+	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
 
-	StelApp *app = &StelApp::getInstance();
 	currentPlanetName = app->getCore()->getCurrentLocation().planetName;
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
+	Q_ASSERT(drawer);
 	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
 	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));

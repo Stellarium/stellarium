@@ -266,7 +266,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		qApp->setProperty("onetime_startup_script", startupScript);
 	}
 
-	if (fov>0.0) confSettings->setValue("navigation/init_fov", fov);
+	if (fov>0.0f) confSettings->setValue("navigation/init_fov", fov);
 	if (!projectionType.isEmpty()) confSettings->setValue("projection/type", projectionType);
 	if (!screenshotDir.isEmpty())
 	{

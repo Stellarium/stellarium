@@ -720,6 +720,7 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
 	conf->endGroup();
 	conf->remove("location_run_once");
+	ret.state="CLI"; // flag this location with a marker for handling in LandscapeMgr::init(). state is not displayed anywhere, so I expect no issues from that.
 	return ret;
 }
 
