@@ -183,12 +183,6 @@ void StelDialog::setVisible(bool v)
 			}
 			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
 
-			// The caching is buggy on all platforms with Qt 4.5.2
-			// Disabled on mac for the moment (https://github.com/Stellarium/stellarium/issues/393)
-			#ifndef Q_OS_MAC
-			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
-			#endif
-
 			proxy->setZValue(100);
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		}
