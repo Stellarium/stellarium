@@ -979,7 +979,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			//g,k magnitude system
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
-			const float slope = qBound(-1.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 20.0f);
+			const float slope = qBound(-5.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 30.0f);
 			if (magnitude > -99)
 			{
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);

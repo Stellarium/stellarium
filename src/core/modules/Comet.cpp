@@ -121,10 +121,10 @@ Comet::~Comet()
 
 void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if (slope <= -1.f || slope > 20.0f)
+	if ((slope < -1.f) || (slope > 20.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 20)";
+		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Possibly invalid slope parameter value:" << slope <<  "(should be between -1 and 20)";
 		return;
 	}
 
