@@ -167,7 +167,7 @@ int main(int argc, char **argv)
 	// Support high DPI pixmaps and fonts
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-	if (argList.contains("--scale-gui"))
+	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
 		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
 
 	#if defined(Q_OS_MAC)
