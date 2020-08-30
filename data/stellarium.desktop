@@ -252,7 +252,7 @@ Comment[zh_HK]=星象館
 Comment[zh_TW]=星象儀
 Keywords=astronomy;planetarium;
 MimeType=application/x-stellarium-script;
-Actions=Window;Fullscreen;Debugmode;
+Actions=Window;Fullscreen;Debugmode;Scale;
 
 [Desktop Action Window]
 Name=Open in window
@@ -274,6 +274,7 @@ Name[de]=Im Fenster öffnen
 Name[el]=Άνοιξε σε παράθυρο
 Name[en_CA]=Open in window
 Name[en_GB]=Open in window
+Name[eo]=Malfermi en fenestro
 Name[es]=Abrir en ventana
 Name[et]=Ava aknas
 Name[eu]=Ireki leihoan
@@ -346,6 +347,7 @@ Name[de]=Im Vollbildmodus öffnen
 Name[el]=Άνοιγμα σε πλήρη οθόνη
 Name[en_CA]=Open in fullscreen
 Name[en_GB]=Open in fullscreen
+Name[eo]=Malfermi tutekrane
 Name[es]=Abrir en pantalla completa
 Name[et]=Ava täisekraanil
 Name[eu]=Ireki pantaila osoan
@@ -469,3 +471,7 @@ Name[zh_CN]=在调试模式下打开
 Name[zh_HK]=開啟測試模式
 Name[zh_TW]=以除錯模式開啟
 Exec=stellarium --dump-opengl-details
+
+[Desktop Action Scale]
+Name=Open in scale 200%
+Exec=stellarium --scale-gui 2.0
