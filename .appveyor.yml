@@ -8,20 +8,38 @@ skip_branch_with_pr: true
 # environment variables
 environment:
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: x64
     qtver: 5.12
     qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
+    msvcname: Visual Studio 16 2019
     packaging: true
     suffix: Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: Win32
     qtver: 5.12
     qtbin: msvc2017
-    msvcname: Visual Studio 15 2017
+    msvcname: Visual Studio 16 2019
     packaging: true
-    suffix: Win32
+    suffix: Win32 
+    cmake_args: -A Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: x64
+    qtver: 5.15
+    qtbin: msvc2019_64
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win64
+    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: Win32
+    qtver: 5.15
+    qtbin: msvc2019
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win32 
+    cmake_args: -A Win32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: x64
     qtver: 5.9
@@ -29,6 +47,20 @@ environment:
     msvcname: Visual Studio 14 2015 Win64
     packaging: false
     suffix: Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.12
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+    packaging: false
+    suffix: Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: Win32
+    qtver: 5.12
+    qtbin: msvc2017
+    msvcname: Visual Studio 15 2017
+    packaging: false
+    suffix: Win32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     platform: Win32
     qtver: 5.9
@@ -36,22 +68,6 @@ environment:
     msvcname: Visual Studio 14 2015
     packaging: false
     suffix: Win32
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    platform: x64
-    qtver: 5.14
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 16 2019
-    packaging: false
-    suffix: Win64
-    cmake_args: -A x64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    platform: Win32
-    qtver: 5.14
-    qtbin: msvc2017
-    msvcname: Visual Studio 16 2019
-    packaging: false
-    suffix: Win32 
-    cmake_args: -A Win32
 
 before_build:
   - set PUBLISH_BINARY=false
