@@ -25,7 +25,7 @@ environment:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: x64
     qtver: 5.14
-    qtbin: msvc2019_64
+    qtbin: msvc2017_64
     msvcname: Visual Studio 16 2019
     packaging: false
     suffix: Win64
@@ -33,7 +33,7 @@ environment:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: Win32
     qtver: 5.14
-    qtbin: msvc2019
+    qtbin: msvc2017
     msvcname: Visual Studio 16 2019
     packaging: false
     suffix: Win32 
