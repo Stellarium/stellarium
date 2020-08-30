@@ -38,20 +38,22 @@ environment:
     packaging: false
     suffix: Win32 
     cmake_args: -A Win32
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: x64
-    qtver: 5.9
-    qtbin: msvc2015_64
-    msvcname: Visual Studio 14 2015 Win64
+    qtver: 5.12
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 16 2019
     packaging: false
     suffix: Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     platform: Win32
-    qtver: 5.9
-    qtbin: msvc2015
-    msvcname: Visual Studio 14 2015
+    qtver: 5.12
+    qtbin: msvc2017
+    msvcname: Visual Studio 16 2019
     packaging: false
-    suffix: Win32
+    suffix: Win32 
+    cmake_args: -A Win32
 
 before_build:
   - set PUBLISH_BINARY=false
