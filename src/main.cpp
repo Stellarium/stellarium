@@ -131,8 +131,8 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-    Q_INIT_RESOURCE(mainRes);
-    Q_INIT_RESOURCE(guiRes);
+	Q_INIT_RESOURCE(mainRes);
+	Q_INIT_RESOURCE(guiRes);
 
 #ifdef Q_OS_WIN
 	// Fix for the speeding system clock bug on systems that use ACPI

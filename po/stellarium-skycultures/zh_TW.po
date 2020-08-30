@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-08-15 09:58+0700\n"
+"POT-Creation-Date: 2020-08-23 16:51+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -9484,6 +9484,7 @@ msgstr "南天閃亮之星的報幕員"
 
 #: skycultures/arabic/star_names.fab:49 skycultures/romanian/star_names.fab:65
 #: skycultures/western/star_names.fab:504
+#: skycultures/western_hlad/star_names.fab:64
 #: skycultures/western_SnT/star_names.fab:64
 msgid "Tejat"
 msgstr "井宿一 (Tejat)"
@@ -9692,6 +9693,7 @@ msgstr "單個長矛搬運工"
 #: skycultures/arabic/star_names.fab:101
 #: skycultures/romanian/star_names.fab:132
 #: skycultures/western/star_names.fab:248
+#: skycultures/western_hlad/star_names.fab:137
 #: skycultures/western_SnT/star_names.fab:137
 msgid "Hadar"
 msgstr "馬腹一 (Hadar)"
@@ -47333,6 +47335,7 @@ msgstr "Luyten 星"
 #: skycultures/chinese_contemporary/star_names.fab:8
 #: skycultures/romanian/star_names.fab:176
 #: skycultures/western/star_names.fab:669
+#: skycultures/western_hlad/star_names.fab:184
 #: skycultures/western_SnT/star_names.fab:184
 msgid "Barnard's Star"
 msgstr "巴納德 (Barnard) 星"
@@ -47371,6 +47374,7 @@ msgstr "Blaze 星"
 
 #: skycultures/chinese_contemporary/star_names.fab:15
 #: skycultures/western/star_names.fab:604
+#: skycultures/western_hlad/star_names.fab:44
 #: skycultures/western_SnT/star_names.fab:44
 msgid "Hind's Crimson Star"
 msgstr "Hind 深紅星"
@@ -47397,6 +47401,7 @@ msgstr "紅寶石星"
 
 #: skycultures/chinese_contemporary/star_names.fab:20
 #: skycultures/western/star_names.fab:1016
+#: skycultures/western_hlad/star_names.fab:105
 #: skycultures/western_SnT/star_names.fab:105
 msgid "Lalande 21185"
 msgstr "拉蘭德 (Lalande) 21185"
@@ -48653,6 +48658,7 @@ msgstr "水的星星"
 #: skycultures/romanian/star_names.fab:80
 #: skycultures/western/star_names.fab:186
 #: skycultures/western_rey/star_names.fab:32
+#: skycultures/western_hlad/star_names.fab:77
 #: skycultures/western_SnT/star_names.fab:77
 msgid "Procyon"
 msgstr "南河三 (Procyon)"
@@ -48660,6 +48666,7 @@ msgstr "南河三 (Procyon)"
 #: skycultures/egyptian/star_names.fab:2
 #: skycultures/western/star_names.fab:165
 #: skycultures/western_rey/star_names.fab:36
+#: skycultures/western_hlad/star_names.fab:68
 #: skycultures/western_SnT/star_names.fab:68
 msgid "Sirius"
 msgstr "天狼 (Sirius)"
@@ -48953,6 +48960,7 @@ msgstr "‘Ekekeukolokolo"
 #: skycultures/hawaiian_starlines/star_names.fab:51
 #: skycultures/romanian/star_names.fab:48
 #: skycultures/western/star_names.fab:687
+#: skycultures/western_hlad/star_names.fab:48
 #: skycultures/western_SnT/star_names.fab:48
 msgid "Bellatrix"
 msgstr "參宿五 (Bellatrix)"
@@ -48960,6 +48968,7 @@ msgstr "參宿五 (Bellatrix)"
 #: skycultures/hawaiian_starlines/star_names.fab:52
 #: skycultures/romanian/star_names.fab:56
 #: skycultures/western/star_names.fab:691
+#: skycultures/western_hlad/star_names.fab:56
 #: skycultures/western_SnT/star_names.fab:56
 msgid "Alnitak"
 msgstr "參宿一 (Alnitak)"
@@ -48967,6 +48976,7 @@ msgstr "參宿一 (Alnitak)"
 #: skycultures/hawaiian_starlines/star_names.fab:53
 #: skycultures/romanian/star_names.fab:54
 #: skycultures/western/star_names.fab:690
+#: skycultures/western_hlad/star_names.fab:54
 #: skycultures/western_SnT/star_names.fab:54
 msgid "Alnilam"
 msgstr "參宿二 (Alnilam)"
@@ -48974,6 +48984,7 @@ msgstr "參宿二 (Alnilam)"
 #: skycultures/hawaiian_starlines/star_names.fab:54
 #: skycultures/romanian/star_names.fab:51
 #: skycultures/western/star_names.fab:689
+#: skycultures/western_hlad/star_names.fab:51
 #: skycultures/western_SnT/star_names.fab:51
 msgid "Mintaka"
 msgstr "參宿三 (Mintaka)"
@@ -51841,12 +51852,14 @@ msgid "The Boars"
 msgstr "野豬"
 
 #: skycultures/romanian/star_names.fab:1 skycultures/western/star_names.fab:3
+#: skycultures/western_hlad/star_names.fab:1
 #: skycultures/western_SnT/star_names.fab:1
 msgid "Alpheratz"
 msgstr "壁宿二 (Alpheratz)"
 
 #: skycultures/romanian/star_names.fab:2
 #: skycultures/western/star_names.fab:223
+#: skycultures/western_hlad/star_names.fab:2
 #: skycultures/western_SnT/star_names.fab:2
 msgid "Caph"
 msgstr "王良一 (Caph)"
@@ -51854,12 +51867,14 @@ msgstr "王良一 (Caph)"
 #: skycultures/romanian/star_names.fab:3
 #: skycultures/western/star_names.fab:721
 #: skycultures/western/star_names.fab:742
+#: skycultures/western_hlad/star_names.fab:3
 #: skycultures/western_SnT/star_names.fab:3
 msgid "Algenib"
 msgstr "壁宿一 (Algenib)"
 
 #: skycultures/romanian/star_names.fab:4
 #: skycultures/western/star_names.fab:762
+#: skycultures/western_hlad/star_names.fab:4
 #: skycultures/western_SnT/star_names.fab:4
 msgid "Ankaa"
 msgstr "火鳥六 (Ankaa)"
@@ -51879,17 +51894,20 @@ msgid "Van Maanen 2"
 msgstr "范馬南星"
 
 #: skycultures/romanian/star_names.fab:8 skycultures/western/star_names.fab:5
+#: skycultures/western_hlad/star_names.fab:7
 #: skycultures/western_SnT/star_names.fab:7
 msgid "Mirach"
 msgstr "奎宿九 (Mirach)"
 
 #: skycultures/romanian/star_names.fab:9 skycultures/western/star_names.fab:9
+#: skycultures/western_hlad/star_names.fab:8
 #: skycultures/western_SnT/star_names.fab:8
 msgid "Adhil"
 msgstr "天大將軍增一 (Adhil)"
 
 #: skycultures/romanian/star_names.fab:10
 #: skycultures/western/star_names.fab:224
+#: skycultures/western_hlad/star_names.fab:9
 #: skycultures/western_SnT/star_names.fab:9
 msgid "Ruchbah"
 msgstr "閣道三 (Ruchbah)"
@@ -51897,18 +51915,21 @@ msgstr "閣道三 (Ruchbah)"
 #: skycultures/romanian/star_names.fab:11
 #: skycultures/western/star_names.fab:454
 #: skycultures/western_rey/star_names.fab:53
+#: skycultures/western_hlad/star_names.fab:10
 #: skycultures/western_SnT/star_names.fab:10
 msgid "Achernar"
 msgstr "水委一 (Achernar)"
 
 #: skycultures/romanian/star_names.fab:12
 #: skycultures/western/star_names.fab:281
+#: skycultures/western_hlad/star_names.fab:11
 #: skycultures/western_SnT/star_names.fab:11
 msgid "Baten Kaitos"
 msgstr "天倉四 (Baten Kaitos)"
 
 #: skycultures/romanian/star_names.fab:13
 #: skycultures/western/star_names.fab:955
+#: skycultures/western_hlad/star_names.fab:12
 #: skycultures/western_SnT/star_names.fab:12
 msgid "Mothallah"
 msgstr "婁宿增六 (Mothallah)"
@@ -51920,12 +51941,14 @@ msgstr "婁宿二 (Mesarthim)"
 
 #: skycultures/romanian/star_names.fab:15
 #: skycultures/western/star_names.fab:68
+#: skycultures/western_hlad/star_names.fab:14
 #: skycultures/western_SnT/star_names.fab:14
 msgid "Sheratan"
 msgstr "婁宿一 (Sheratan)"
 
 #: skycultures/romanian/star_names.fab:16
 #: skycultures/western/star_names.fab:774
+#: skycultures/western_hlad/star_names.fab:15
 #: skycultures/western_SnT/star_names.fab:15
 msgid "Alrescha"
 msgstr "外屏七 (Alrescha)"
@@ -51936,6 +51959,7 @@ msgstr "天大將軍一 (Almaak)"
 
 #: skycultures/romanian/star_names.fab:18
 #: skycultures/western/star_names.fab:67
+#: skycultures/western_hlad/star_names.fab:17
 #: skycultures/western_SnT/star_names.fab:17
 msgid "Hamal"
 msgstr "婁宿三 (Hamal)"
@@ -51943,6 +51967,7 @@ msgstr "婁宿三 (Hamal)"
 #: skycultures/romanian/star_names.fab:19
 #: skycultures/western/star_names.fab:282
 #: skycultures/western_rey/star_names.fab:48
+#: skycultures/western_hlad/star_names.fab:18
 #: skycultures/western_SnT/star_names.fab:18
 msgid "Mira"
 msgstr "蒭藁增二 (Mira)"
@@ -51953,12 +51978,14 @@ msgstr "勾陳一 (天空的還願光)"
 
 #: skycultures/romanian/star_names.fab:21
 #: skycultures/western/star_names.fab:459
+#: skycultures/western_hlad/star_names.fab:20
 #: skycultures/western_SnT/star_names.fab:20
 msgid "Azha"
 msgstr "天苑六 (Azha)"
 
 #: skycultures/romanian/star_names.fab:22
 #: skycultures/western/star_names.fab:460
+#: skycultures/western_hlad/star_names.fab:21
 #: skycultures/western_SnT/star_names.fab:21
 msgid "Acamar"
 msgstr "天園六 (Acamar)"
@@ -51966,6 +51993,7 @@ msgstr "天園六 (Acamar)"
 #: skycultures/romanian/star_names.fab:23
 #: skycultures/western/star_names.fab:278
 #: skycultures/western/star_names.fab:292
+#: skycultures/western_hlad/star_names.fab:22
 #: skycultures/western_SnT/star_names.fab:22
 msgid "Menkar"
 msgstr "天囷一 (Menkar)"
@@ -51973,18 +52001,21 @@ msgstr "天囷一 (Menkar)"
 #: skycultures/romanian/star_names.fab:24
 #: skycultures/western/star_names.fab:745
 #: skycultures/western_rey/star_names.fab:24
+#: skycultures/western_hlad/star_names.fab:23
 #: skycultures/western_SnT/star_names.fab:23
 msgid "Algol"
 msgstr "大陵五 (Algol)"
 
 #: skycultures/romanian/star_names.fab:25
 #: skycultures/western/star_names.fab:70
+#: skycultures/western_hlad/star_names.fab:24
 #: skycultures/western_SnT/star_names.fab:24
 msgid "Botein"
 msgstr "天陰四 (Botein)"
 
 #: skycultures/romanian/star_names.fab:26
 #: skycultures/western/star_names.fab:458
+#: skycultures/western_hlad/star_names.fab:25
 #: skycultures/western_SnT/star_names.fab:25
 msgid "Zibal"
 msgstr "天苑五 (Zibal)"
@@ -51996,30 +52027,35 @@ msgstr "天船三 (Mirphak)"
 #: skycultures/romanian/star_names.fab:28
 #: skycultures/western/star_names.fab:749
 #: skycultures/western/star_names.fab:752
+#: skycultures/western_hlad/star_names.fab:27
 #: skycultures/western_SnT/star_names.fab:27
 msgid "Atik"
 msgstr "卷舌四 (Atik)"
 
 #: skycultures/romanian/star_names.fab:29
 #: skycultures/western/star_names.fab:929
+#: skycultures/western_hlad/star_names.fab:28
 #: skycultures/western_SnT/star_names.fab:28
 msgid "Celaeno"
 msgstr "昴宿增六 (Celaeno)"
 
 #: skycultures/romanian/star_names.fab:30
 #: skycultures/western/star_names.fab:930
+#: skycultures/western_hlad/star_names.fab:29
 #: skycultures/western_SnT/star_names.fab:29
 msgid "Electra"
 msgstr "昴宿一 (Electra)"
 
 #: skycultures/romanian/star_names.fab:31
 #: skycultures/western/star_names.fab:931
+#: skycultures/western_hlad/star_names.fab:30
 #: skycultures/western_SnT/star_names.fab:30
 msgid "Taygeta"
 msgstr "昴宿二 (Taygeta)"
 
 #: skycultures/romanian/star_names.fab:32
 #: skycultures/western/star_names.fab:932
+#: skycultures/western_hlad/star_names.fab:31
 #: skycultures/western_SnT/star_names.fab:31
 msgid "Maia"
 msgstr "昴宿四 (Maia)"
@@ -52031,54 +52067,63 @@ msgstr "昴宿三 (Asterope)"
 
 #: skycultures/romanian/star_names.fab:34
 #: skycultures/western/star_names.fab:935
+#: skycultures/western_hlad/star_names.fab:33
 #: skycultures/western_SnT/star_names.fab:33
 msgid "Merope"
 msgstr "昴宿五 (Merope)"
 
 #: skycultures/romanian/star_names.fab:35
 #: skycultures/western/star_names.fab:928
+#: skycultures/western_hlad/star_names.fab:34
 #: skycultures/western_SnT/star_names.fab:34
 msgid "Alcyone"
 msgstr "昴宿六 (Alcyone)"
 
 #: skycultures/romanian/star_names.fab:36
 #: skycultures/western/star_names.fab:936
+#: skycultures/western_hlad/star_names.fab:35
 #: skycultures/western_SnT/star_names.fab:35
 msgid "Atlas"
 msgstr "昴宿七 (Atlas)"
 
 #: skycultures/romanian/star_names.fab:37
 #: skycultures/western/star_names.fab:937
+#: skycultures/western_hlad/star_names.fab:36
 #: skycultures/western_SnT/star_names.fab:36
 msgid "Pleione"
 msgstr "昴宿增十二 (Pleione)"
 
 #: skycultures/romanian/star_names.fab:38
 #: skycultures/western/star_names.fab:457
+#: skycultures/western_hlad/star_names.fab:37
 #: skycultures/western_SnT/star_names.fab:37
 msgid "Zaurak"
 msgstr "天苑一 (Zaurak)"
 
 #: skycultures/romanian/star_names.fab:39
 #: skycultures/western/star_names.fab:748
+#: skycultures/western_hlad/star_names.fab:38
 #: skycultures/western_SnT/star_names.fab:38
 msgid "Menkib"
 msgstr "卷舌三 (Menkib)"
 
 #: skycultures/romanian/star_names.fab:40
 #: skycultures/western/star_names.fab:462
+#: skycultures/western_hlad/star_names.fab:39
 #: skycultures/western_SnT/star_names.fab:39
 msgid "Beid"
 msgstr "九州殊口二 (Beid)"
 
 #: skycultures/romanian/star_names.fab:41
 #: skycultures/western/star_names.fab:463
+#: skycultures/western_hlad/star_names.fab:40
 #: skycultures/western_SnT/star_names.fab:40
 msgid "Keid"
 msgstr "九州殊口增七 (keid)"
 
 #: skycultures/romanian/star_names.fab:42
 #: skycultures/western/star_names.fab:926
+#: skycultures/western_hlad/star_names.fab:42
 #: skycultures/western_SnT/star_names.fab:42
 msgid "Ain"
 msgstr "畢宿一 (Ain)"
@@ -52089,6 +52134,7 @@ msgstr "畢宿五 (豬的亮星(鬧鐘))"
 
 #: skycultures/romanian/star_names.fab:44
 #: skycultures/western/star_names.fab:455
+#: skycultures/western_hlad/star_names.fab:45
 #: skycultures/western_SnT/star_names.fab:45
 msgid "Cursa"
 msgstr "玉井三 (Cursa)"
@@ -52096,6 +52142,7 @@ msgstr "玉井三 (Cursa)"
 #: skycultures/romanian/star_names.fab:46
 #: skycultures/western/star_names.fab:685
 #: skycultures/western_rey/star_names.fab:35
+#: skycultures/western_hlad/star_names.fab:46
 #: skycultures/western_SnT/star_names.fab:46
 msgid "Rigel"
 msgstr "參宿七 (Rigel)"
@@ -52103,6 +52150,7 @@ msgstr "參宿七 (Rigel)"
 #: skycultures/romanian/star_names.fab:47
 #: skycultures/western/star_names.fab:83
 #: skycultures/western_rey/star_names.fab:31
+#: skycultures/western_hlad/star_names.fab:47
 #: skycultures/western_SnT/star_names.fab:47
 msgid "Capella"
 msgstr "五車二 (Capella)"
@@ -52113,36 +52161,42 @@ msgstr "五車五 (Alnath)"
 
 #: skycultures/romanian/star_names.fab:50
 #: skycultures/western/star_names.fab:603
+#: skycultures/western_hlad/star_names.fab:50
 #: skycultures/western_SnT/star_names.fab:50
 msgid "Nihal"
 msgstr "廁二 (Nihal)"
 
 #: skycultures/romanian/star_names.fab:52
 #: skycultures/western/star_names.fab:601
+#: skycultures/western_hlad/star_names.fab:52
 #: skycultures/western_SnT/star_names.fab:52
 msgid "Arneb"
 msgstr "廁一 (Arneb)"
 
 #: skycultures/romanian/star_names.fab:53
 #: skycultures/western/star_names.fab:693
+#: skycultures/western_hlad/star_names.fab:53
 #: skycultures/western_SnT/star_names.fab:53
 msgid "Meissa"
 msgstr "觜宿一 (Meissa)"
 
 #: skycultures/romanian/star_names.fab:55
 #: skycultures/western/star_names.fab:314
+#: skycultures/western_hlad/star_names.fab:55
 #: skycultures/western_SnT/star_names.fab:55
 msgid "Phact"
 msgstr "丈人一 (Phact)"
 
 #: skycultures/romanian/star_names.fab:57
 #: skycultures/western/star_names.fab:692
+#: skycultures/western_hlad/star_names.fab:57
 #: skycultures/western_SnT/star_names.fab:57
 msgid "Saiph"
 msgstr "參宿六 (Saiph)"
 
 #: skycultures/romanian/star_names.fab:58
 #: skycultures/western/star_names.fab:317
+#: skycultures/western_hlad/star_names.fab:58
 #: skycultures/western_SnT/star_names.fab:58
 msgid "Wazn"
 msgstr "子二 (Wazn)"
@@ -52150,24 +52204,28 @@ msgstr "子二 (Wazn)"
 #: skycultures/romanian/star_names.fab:59
 #: skycultures/western/star_names.fab:680
 #: skycultures/western_rey/star_names.fab:34
+#: skycultures/western_hlad/star_names.fab:59
 #: skycultures/western_SnT/star_names.fab:59
 msgid "Betelgeuse"
 msgstr "參宿四 (Betelgeuse)"
 
 #: skycultures/romanian/star_names.fab:60
 #: skycultures/western/star_names.fab:86
+#: skycultures/western_hlad/star_names.fab:60
 #: skycultures/western_SnT/star_names.fab:60
 msgid "Menkalinan"
 msgstr "五車三 (Menkalinan)"
 
 #: skycultures/romanian/star_names.fab:61
 #: skycultures/western/star_names.fab:501
+#: skycultures/western_hlad/star_names.fab:61
 #: skycultures/western_SnT/star_names.fab:61
 msgid "Propus"
 msgstr "鉞 (Propus)"
 
 #: skycultures/romanian/star_names.fab:63
 #: skycultures/western/star_names.fab:178
+#: skycultures/western_hlad/star_names.fab:62
 #: skycultures/western_SnT/star_names.fab:62
 msgid "Furud"
 msgstr "孫增一 (Furud)"
@@ -52175,6 +52233,7 @@ msgstr "孫增一 (Furud)"
 #: skycultures/romanian/star_names.fab:64
 #: skycultures/western/star_names.fab:168
 #: skycultures/western/star_names.fab:684
+#: skycultures/western_hlad/star_names.fab:63
 #: skycultures/western_SnT/star_names.fab:63
 msgid "Mirzam"
 msgstr "軍市一 (Mirzam)"
@@ -52182,18 +52241,21 @@ msgstr "軍市一 (Mirzam)"
 #: skycultures/romanian/star_names.fab:66
 #: skycultures/western/star_names.fab:210
 #: skycultures/western_rey/star_names.fab:52
+#: skycultures/western_hlad/star_names.fab:65
 #: skycultures/western_SnT/star_names.fab:65
 msgid "Canopus"
 msgstr "老人 (Canopus)"
 
 #: skycultures/romanian/star_names.fab:67
 #: skycultures/western/star_names.fab:494
+#: skycultures/western_hlad/star_names.fab:66
 #: skycultures/western_SnT/star_names.fab:66
 msgid "Alhena"
 msgstr "井宿三 (Alhena)"
 
 #: skycultures/romanian/star_names.fab:68
 #: skycultures/western/star_names.fab:497
+#: skycultures/western_hlad/star_names.fab:67
 #: skycultures/western_SnT/star_names.fab:67
 msgid "Mebsuta"
 msgstr "井宿五 (Mebsuta)"
@@ -52205,24 +52267,28 @@ msgstr "天狼星 (晨星)"
 
 #: skycultures/romanian/star_names.fab:70
 #: skycultures/western/star_names.fab:176
+#: skycultures/western_hlad/star_names.fab:69
 #: skycultures/western_SnT/star_names.fab:69
 msgid "Adhara"
 msgstr "弧矢七 (Adhara)"
 
 #: skycultures/romanian/star_names.fab:71
 #: skycultures/western/star_names.fab:171
+#: skycultures/western_hlad/star_names.fab:70
 #: skycultures/western_SnT/star_names.fab:70
 msgid "Muliphein"
 msgstr "天狼增四 (Muliphein)"
 
 #: skycultures/romanian/star_names.fab:72
 #: skycultures/western/star_names.fab:500
+#: skycultures/western_hlad/star_names.fab:71
 #: skycultures/western_SnT/star_names.fab:71
 msgid "Mekbuda"
 msgstr "井宿七 (Mekbuda)"
 
 #: skycultures/romanian/star_names.fab:73
 #: skycultures/western/star_names.fab:174
+#: skycultures/western_hlad/star_names.fab:72
 #: skycultures/western_SnT/star_names.fab:72
 msgid "Wezen"
 msgstr "弧矢一 (Wezen)"
@@ -52234,18 +52300,21 @@ msgstr "Bernes 135"
 
 #: skycultures/romanian/star_names.fab:75
 #: skycultures/western/star_names.fab:496
+#: skycultures/western_hlad/star_names.fab:73
 #: skycultures/western_SnT/star_names.fab:73
 msgid "Wasat"
 msgstr "天罇二 (Wasat)"
 
 #: skycultures/romanian/star_names.fab:76
 #: skycultures/western/star_names.fab:179
+#: skycultures/western_hlad/star_names.fab:74
 #: skycultures/western_SnT/star_names.fab:74
 msgid "Aludra"
 msgstr "弧矢二 (Aludra)"
 
 #: skycultures/romanian/star_names.fab:77
 #: skycultures/western/star_names.fab:189
+#: skycultures/western_hlad/star_names.fab:75
 #: skycultures/western_SnT/star_names.fab:75
 msgid "Gomeisa"
 msgstr "南河二 (Gomeisa)"
@@ -52260,54 +52329,63 @@ msgstr "北河三 (Remus)"
 
 #: skycultures/romanian/star_names.fab:82
 #: skycultures/western/star_names.fab:801
+#: skycultures/western_hlad/star_names.fab:79
 #: skycultures/western_SnT/star_names.fab:79
 msgid "Naos"
 msgstr "弧矢增二十二 (Naos)"
 
 #: skycultures/romanian/star_names.fab:83
 #: skycultures/western/star_names.fab:1040
+#: skycultures/western_hlad/star_names.fab:81
 #: skycultures/western_SnT/star_names.fab:81
 msgid "Regor"
 msgstr "天社一 (Regor)"
 
 #: skycultures/romanian/star_names.fab:84
 #: skycultures/western/star_names.fab:147
+#: skycultures/western_hlad/star_names.fab:82
 #: skycultures/western_SnT/star_names.fab:82
 msgid "Tegmine"
 msgstr "水位四 (Tegmine)"
 
 #: skycultures/romanian/star_names.fab:85
 #: skycultures/western/star_names.fab:213
+#: skycultures/western_hlad/star_names.fab:83
 #: skycultures/western_SnT/star_names.fab:83
 msgid "Avior"
 msgstr "海石一 (Avior)"
 
 #: skycultures/romanian/star_names.fab:86
 #: skycultures/western/star_names.fab:987
+#: skycultures/western_hlad/star_names.fab:84
 #: skycultures/western_SnT/star_names.fab:84
 msgid "Muscida"
 msgstr "內階一 (Muscida)"
 
 #: skycultures/romanian/star_names.fab:87
 #: skycultures/western/star_names.fab:145
+#: skycultures/western_hlad/star_names.fab:85
 #: skycultures/western_SnT/star_names.fab:85
 msgid "Asellus Borealis"
 msgstr "鬼宿三 (Asellus Borealis)"
 
 #: skycultures/romanian/star_names.fab:88
 #: skycultures/western/star_names.fab:146
+#: skycultures/western_hlad/star_names.fab:86
 #: skycultures/western_SnT/star_names.fab:86
 msgid "Asellus Australis"
 msgstr "鬼宿四 (Asellus Australis)"
 
 #: skycultures/romanian/star_names.fab:89
 #: skycultures/western/star_names.fab:143
+#: skycultures/western_hlad/star_names.fab:87
 #: skycultures/western_SnT/star_names.fab:87
 msgid "Acubens"
 msgstr "柳宿增三 (Acubens)"
 
 #: skycultures/romanian/star_names.fab:90
 #: skycultures/western/star_names.fab:980
+#: skycultures/western_hlad/star_names.fab:88
 #: skycultures/western_SnT/star_names.fab:88
 msgid "Talitha"
 msgstr "上台一[三台一] (Talitha)"
@@ -52315,18 +52393,21 @@ msgstr "上台一[三台一] (Talitha)"
 #: skycultures/romanian/star_names.fab:91
 #: skycultures/western/star_names.fab:1042
 #: skycultures/western/star_names.fab:1045
+#: skycultures/western_hlad/star_names.fab:90
 #: skycultures/western_SnT/star_names.fab:90
 msgid "Suhail"
 msgstr "天記 (Suhail)"
 
 #: skycultures/romanian/star_names.fab:92
 #: skycultures/western/star_names.fab:212
+#: skycultures/western_hlad/star_names.fab:91
 #: skycultures/western_SnT/star_names.fab:91
 msgid "Miaplacidus"
 msgstr "南船五 (Miaplacidus)"
 
 #: skycultures/romanian/star_names.fab:93
 #: skycultures/western/star_names.fab:214
+#: skycultures/western_hlad/star_names.fab:92
 #: skycultures/western_SnT/star_names.fab:92
 msgid "Aspidiske"
 msgstr "海石二 (Aspidiske)"
@@ -52334,24 +52415,28 @@ msgstr "海石二 (Aspidiske)"
 #: skycultures/romanian/star_names.fab:94
 #: skycultures/western/star_names.fab:537
 #: skycultures/western_rey/star_names.fab:38
+#: skycultures/western_hlad/star_names.fab:94
 #: skycultures/western_SnT/star_names.fab:94
 msgid "Alphard"
 msgstr "星宿一 (Alphard)"
 
 #: skycultures/romanian/star_names.fab:95
 #: skycultures/western/star_names.fab:581
+#: skycultures/western_hlad/star_names.fab:95
 #: skycultures/western_SnT/star_names.fab:95
 msgid "Alterf"
 msgstr "軒轅八 (Alterf)"
 
 #: skycultures/romanian/star_names.fab:96
 #: skycultures/western/star_names.fab:585
+#: skycultures/western_hlad/star_names.fab:96
 #: skycultures/western_SnT/star_names.fab:96
 msgid "Subra"
 msgstr "軒轅十五 (Subra)"
 
 #: skycultures/romanian/star_names.fab:97
 #: skycultures/western/star_names.fab:582
+#: skycultures/western_hlad/star_names.fab:97
 #: skycultures/western_SnT/star_names.fab:97
 msgid "Rasalas"
 msgstr "軒轅十 (Rasalas)"
@@ -52359,78 +52444,91 @@ msgstr "軒轅十 (Rasalas)"
 #: skycultures/romanian/star_names.fab:98
 #: skycultures/western/star_names.fab:563
 #: skycultures/western_rey/star_names.fab:12
+#: skycultures/western_hlad/star_names.fab:98
 #: skycultures/western_SnT/star_names.fab:98
 msgid "Regulus"
 msgstr "軒轅十四 (Regulus)"
 
 #: skycultures/romanian/star_names.fab:99
 #: skycultures/western/star_names.fab:575
+#: skycultures/western_hlad/star_names.fab:99
 #: skycultures/western_SnT/star_names.fab:99
 msgid "Adhafera"
 msgstr "軒轅十一 (Adhafera)"
 
 #: skycultures/romanian/star_names.fab:100
 #: skycultures/western/star_names.fab:983
+#: skycultures/western_hlad/star_names.fab:100
 #: skycultures/western_SnT/star_names.fab:100
 msgid "Tania Borealis"
 msgstr "中台一[三台三] (Tania Borealis)"
 
 #: skycultures/romanian/star_names.fab:101
 #: skycultures/western/star_names.fab:569
+#: skycultures/western_hlad/star_names.fab:101
 #: skycultures/western_SnT/star_names.fab:101
 msgid "Algieba"
 msgstr "軒轅十二 (Algieba)"
 
 #: skycultures/romanian/star_names.fab:102
 #: skycultures/western/star_names.fab:984
+#: skycultures/western_hlad/star_names.fab:102
 #: skycultures/western_SnT/star_names.fab:102
 msgid "Tania Australis"
 msgstr "中台二[三台四] (Tania Australis)"
 
 #: skycultures/romanian/star_names.fab:103
 #: skycultures/western/star_names.fab:351
+#: skycultures/western_hlad/star_names.fab:103
 #: skycultures/western_SnT/star_names.fab:103
 msgid "Alkes"
 msgstr "翼宿一 (Alkes)"
 
 #: skycultures/romanian/star_names.fab:104
 #: skycultures/western/star_names.fab:969
+#: skycultures/western_hlad/star_names.fab:104
 #: skycultures/western_SnT/star_names.fab:104
 msgid "Merak"
 msgstr "天璇[北斗二] (Merak)"
 
 #: skycultures/romanian/star_names.fab:105
 #: skycultures/western/star_names.fab:965
+#: skycultures/western_hlad/star_names.fab:106
 #: skycultures/western_SnT/star_names.fab:106
 msgid "Dubhe"
 msgstr "天樞[北斗一] (Dubhe)"
 
 #: skycultures/romanian/star_names.fab:106
 #: skycultures/western/star_names.fab:571
+#: skycultures/western_hlad/star_names.fab:107
 #: skycultures/western_SnT/star_names.fab:107
 msgid "Zosma"
 msgstr "西上相[太微右垣五] (Zosma)"
 
 #: skycultures/romanian/star_names.fab:107
 #: skycultures/western/star_names.fab:577
+#: skycultures/western_hlad/star_names.fab:108
 #: skycultures/western_SnT/star_names.fab:108
 msgid "Chertan"
 msgstr "西次相[太微右垣四] (Chertan)"
 
 #: skycultures/romanian/star_names.fab:108
 #: skycultures/western/star_names.fab:986
+#: skycultures/western_hlad/star_names.fab:109
 #: skycultures/western_SnT/star_names.fab:109
 msgid "Alula Australis"
 msgstr "下台二[三台六] (Alula Australis)"
 
 #: skycultures/romanian/star_names.fab:109
 #: skycultures/western/star_names.fab:985
+#: skycultures/western_hlad/star_names.fab:110
 #: skycultures/western_SnT/star_names.fab:110
 msgid "Alula Borealis"
 msgstr "下台一[三台五] (Alula Borealis)"
 
 #: skycultures/romanian/star_names.fab:110
 #: skycultures/western/star_names.fab:414
+#: skycultures/western_hlad/star_names.fab:111
 #: skycultures/western_SnT/star_names.fab:111
 msgid "Giausar"
 msgstr "上輔 (Giausar)"
@@ -52438,12 +52536,14 @@ msgstr "上輔 (Giausar)"
 #: skycultures/romanian/star_names.fab:111
 #: skycultures/western/star_names.fab:567
 #: skycultures/western_rey/star_names.fab:13
+#: skycultures/western_hlad/star_names.fab:112
 #: skycultures/western_SnT/star_names.fab:112
 msgid "Denebola"
 msgstr "五帝座一 (Denebola)"
 
 #: skycultures/romanian/star_names.fab:112
 #: skycultures/western/star_names.fab:1054
+#: skycultures/western_hlad/star_names.fab:113
 #: skycultures/western_SnT/star_names.fab:113
 msgid "Zavijava"
 msgstr "右執法 (Zavijava)"
@@ -52455,12 +52555,14 @@ msgstr "Phad"
 
 #: skycultures/romanian/star_names.fab:114
 #: skycultures/western/star_names.fab:341
+#: skycultures/western_hlad/star_names.fab:116
 #: skycultures/western_SnT/star_names.fab:116
 msgid "Alchiba"
 msgstr "右轄 (Alchiba)"
 
 #: skycultures/romanian/star_names.fab:115
 #: skycultures/western/star_names.fab:974
+#: skycultures/western_hlad/star_names.fab:118
 #: skycultures/western_SnT/star_names.fab:118
 msgid "Megrez"
 msgstr "天權[北斗四] (Megrez)"
@@ -52469,12 +52571,14 @@ msgstr "天權[北斗四] (Megrez)"
 #: skycultures/romanian/star_names.fab:203
 #: skycultures/western/star_names.fab:344
 #: skycultures/western/star_names.fab:374
+#: skycultures/western_hlad/star_names.fab:119
 #: skycultures/western_SnT/star_names.fab:119
 msgid "Gienah"
 msgstr "軫宿一 (Gienah)"
 
 #: skycultures/romanian/star_names.fab:117
 #: skycultures/western/star_names.fab:1063
+#: skycultures/western_hlad/star_names.fab:120
 #: skycultures/western_SnT/star_names.fab:120
 msgid "Zaniah"
 msgstr "左執法[太微左垣一] (Zaniah)"
@@ -52482,42 +52586,49 @@ msgstr "左執法[太微左垣一] (Zaniah)"
 #: skycultures/romanian/star_names.fab:118
 #: skycultures/western/star_names.fab:357
 #: skycultures/western_rey/star_names.fab:55
+#: skycultures/western_hlad/star_names.fab:121
 #: skycultures/western_SnT/star_names.fab:121
 msgid "Acrux"
 msgstr "十字架二 (Acrux)"
 
 #: skycultures/romanian/star_names.fab:119
 #: skycultures/western/star_names.fab:347
+#: skycultures/western_hlad/star_names.fab:122
 #: skycultures/western_SnT/star_names.fab:122
 msgid "Algorab"
 msgstr "軫宿三 (Algorab)"
 
 #: skycultures/romanian/star_names.fab:120
 #: skycultures/western/star_names.fab:360
+#: skycultures/western_hlad/star_names.fab:123
 #: skycultures/western_SnT/star_names.fab:123
 msgid "Gacrux"
 msgstr "十字架一 (Gacrux)"
 
 #: skycultures/romanian/star_names.fab:121
 #: skycultures/western/star_names.fab:161
+#: skycultures/western_hlad/star_names.fab:124
 #: skycultures/western_SnT/star_names.fab:124
 msgid "Chara"
 msgstr "常陳四 (Chara)"
 
 #: skycultures/romanian/star_names.fab:122
 #: skycultures/western/star_names.fab:1058
+#: skycultures/western_hlad/star_names.fab:126
 #: skycultures/western_SnT/star_names.fab:126
 msgid "Porrima"
 msgstr "東上相[太微左垣二] (Porrima)"
 
 #: skycultures/romanian/star_names.fab:123
 #: skycultures/western/star_names.fab:358
+#: skycultures/western_hlad/star_names.fab:127
 #: skycultures/western_SnT/star_names.fab:127
 msgid "Mimosa"
 msgstr "十字架三 (Mimosa)"
 
 #: skycultures/romanian/star_names.fab:124
 #: skycultures/western/star_names.fab:976
+#: skycultures/western_hlad/star_names.fab:128
 #: skycultures/western_SnT/star_names.fab:128
 msgid "Alioth"
 msgstr "玉衡[北斗五] (Alioth)"
@@ -52525,12 +52636,14 @@ msgstr "玉衡[北斗五] (Alioth)"
 #: skycultures/romanian/star_names.fab:125
 #: skycultures/western/star_names.fab:160
 #: skycultures/western_rey/star_names.fab:14
+#: skycultures/western_hlad/star_names.fab:129
 #: skycultures/western_SnT/star_names.fab:129
 msgid "Cor Caroli"
 msgstr "常陳一 (Cor Caroli)"
 
 #: skycultures/romanian/star_names.fab:126
 #: skycultures/western/star_names.fab:1061
+#: skycultures/western_hlad/star_names.fab:130
 #: skycultures/western_SnT/star_names.fab:130
 msgid "Vindemiatrix"
 msgstr "東次將[太微左垣四] (Vindemiatrix)"
@@ -52538,6 +52651,7 @@ msgstr "東次將[太微左垣四] (Vindemiatrix)"
 #: skycultures/romanian/star_names.fab:127
 #: skycultures/western/star_names.fab:977
 #: skycultures/western_rey/star_names.fab:7
+#: skycultures/western_hlad/star_names.fab:131
 #: skycultures/western_SnT/star_names.fab:131
 msgid "Mizar"
 msgstr "開陽[北斗六] (Mizar)"
@@ -52545,6 +52659,7 @@ msgstr "開陽[北斗六] (Mizar)"
 #: skycultures/romanian/star_names.fab:128
 #: skycultures/western/star_names.fab:1052
 #: skycultures/western_rey/star_names.fab:40
+#: skycultures/western_hlad/star_names.fab:132
 #: skycultures/western_SnT/star_names.fab:132
 msgid "Spica"
 msgstr "角宿一 (Spica)"
@@ -52555,12 +52670,14 @@ msgstr "輔 (小母狗)"
 
 #: skycultures/romanian/star_names.fab:130
 #: skycultures/western/star_names.fab:978
+#: skycultures/western_hlad/star_names.fab:134
 #: skycultures/western_SnT/star_names.fab:134
 msgid "Alkaid"
 msgstr "搖光[北斗七] (Alkaid)"
 
 #: skycultures/romanian/star_names.fab:131
 #: skycultures/western/star_names.fab:123
+#: skycultures/western_hlad/star_names.fab:135
 #: skycultures/western_SnT/star_names.fab:135
 msgid "Muphrid"
 msgstr "右攝提一 (Muphrid)"
@@ -52568,12 +52685,14 @@ msgstr "右攝提一 (Muphrid)"
 #: skycultures/romanian/star_names.fab:133
 #: skycultures/western/star_names.fab:401
 #: skycultures/western_rey/star_names.fab:10
+#: skycultures/western_hlad/star_names.fab:138
 #: skycultures/western_SnT/star_names.fab:138
 msgid "Thuban"
 msgstr "右樞[紫微右垣一] (Thuban)"
 
 #: skycultures/romanian/star_names.fab:134
 #: skycultures/western/star_names.fab:253
+#: skycultures/western_hlad/star_names.fab:139
 #: skycultures/western_SnT/star_names.fab:139
 msgid "Menkent"
 msgstr "庫樓三 (Menkent)"
@@ -52581,18 +52700,21 @@ msgstr "庫樓三 (Menkent)"
 #: skycultures/romanian/star_names.fab:135
 #: skycultures/western/star_names.fab:115
 #: skycultures/western_rey/star_names.fab:16
+#: skycultures/western_hlad/star_names.fab:140
 #: skycultures/western_SnT/star_names.fab:140
 msgid "Arcturus"
 msgstr "大角 (Arcturus)"
 
 #: skycultures/romanian/star_names.fab:136
 #: skycultures/western/star_names.fab:1064
+#: skycultures/western_hlad/star_names.fab:141
 #: skycultures/western_SnT/star_names.fab:141
 msgid "Syrma"
 msgstr "亢宿二 (Syrma)"
 
 #: skycultures/romanian/star_names.fab:138
 #: skycultures/western/star_names.fab:117
+#: skycultures/western_hlad/star_names.fab:144
 #: skycultures/western_SnT/star_names.fab:144
 msgid "Seginus"
 msgstr "招搖 (Seginus)"
@@ -52603,12 +52725,14 @@ msgstr "南門二 (Rigil Kent)"
 
 #: skycultures/romanian/star_names.fab:140
 #: skycultures/western/star_names.fab:120
+#: skycultures/western_hlad/star_names.fab:146
 #: skycultures/western_SnT/star_names.fab:146
 msgid "Izar"
 msgstr "梗河一 (Izar)"
 
 #: skycultures/romanian/star_names.fab:141
 #: skycultures/western/star_names.fab:128
+#: skycultures/western_hlad/star_names.fab:147
 #: skycultures/western_SnT/star_names.fab:147
 msgid "Merga"
 msgstr "元戈增二 (Merga)"
@@ -52620,42 +52744,49 @@ msgstr "帝[北極二] (Kocab)"
 #: skycultures/romanian/star_names.fab:143
 #: skycultures/western/star_names.fab:610
 #: skycultures/western/star_names.fab:614
+#: skycultures/western_hlad/star_names.fab:149
 #: skycultures/western_SnT/star_names.fab:149
 msgid "Zubenelgenubi"
 msgstr "Zubenelgenubi"
 
 #: skycultures/romanian/star_names.fab:144
 #: skycultures/western/star_names.fab:116
+#: skycultures/western_hlad/star_names.fab:151
 #: skycultures/western_SnT/star_names.fab:151
 msgid "Nekkar"
 msgstr "七公增五 (Nekkar)"
 
 #: skycultures/romanian/star_names.fab:145
 #: skycultures/western/star_names.fab:615
+#: skycultures/western_hlad/star_names.fab:152
 #: skycultures/western_SnT/star_names.fab:152
 msgid "Zubeneschamali"
 msgstr "氐宿四 (Zubeneschamali)"
 
 #: skycultures/romanian/star_names.fab:146
 #: skycultures/western/star_names.fab:1030
+#: skycultures/western_hlad/star_names.fab:153
 #: skycultures/western_SnT/star_names.fab:153
 msgid "Pherkad"
 msgstr "太子[北極一] (Pherkad)"
 
 #: skycultures/romanian/star_names.fab:147
 #: skycultures/western/star_names.fab:124
+#: skycultures/western_hlad/star_names.fab:154
 #: skycultures/western_SnT/star_names.fab:154
 msgid "Alkalurops"
 msgstr "七公六 (Alkalurops)"
 
 #: skycultures/romanian/star_names.fab:148
 #: skycultures/western/star_names.fab:412
+#: skycultures/western_hlad/star_names.fab:155
 #: skycultures/western_SnT/star_names.fab:155
 msgid "Edasich"
 msgstr "左樞[紫微左垣一] (Edasich)"
 
 #: skycultures/romanian/star_names.fab:149
 #: skycultures/western/star_names.fab:336
+#: skycultures/western_hlad/star_names.fab:156
 #: skycultures/western_SnT/star_names.fab:156
 msgid "Nusakan"
 msgstr "貫索三 (Nusakan)"
@@ -52667,12 +52798,14 @@ msgstr "Alphekka"
 
 #: skycultures/romanian/star_names.fab:151
 #: skycultures/western/star_names.fab:904
+#: skycultures/western_hlad/star_names.fab:158
 #: skycultures/western_SnT/star_names.fab:158
 msgid "Unukalhai"
 msgstr "蜀[天市右垣七] (Unukalhai)"
 
 #: skycultures/romanian/star_names.fab:152
 #: skycultures/western/star_names.fab:867
+#: skycultures/western_hlad/star_names.fab:160
 #: skycultures/western_SnT/star_names.fab:160
 msgid "Dschubba"
 msgstr "房宿三 (Dschubba)"
@@ -52684,18 +52817,21 @@ msgstr "房宿四 (Acrab)"
 
 #: skycultures/romanian/star_names.fab:154
 #: skycultures/western/star_names.fab:527
+#: skycultures/western_hlad/star_names.fab:162
 #: skycultures/western_SnT/star_names.fab:162
 msgid "Marsic"
 msgstr "晉[天市右垣三] (Marsic)"
 
 #: skycultures/romanian/star_names.fab:155
 #: skycultures/western/star_names.fab:663
+#: skycultures/western_hlad/star_names.fab:163
 #: skycultures/western_SnT/star_names.fab:163
 msgid "Yed Prior"
 msgstr "梁[天市右垣九] (Yed Prior)"
 
 #: skycultures/romanian/star_names.fab:156
 #: skycultures/western/star_names.fab:665
+#: skycultures/western_hlad/star_names.fab:164
 #: skycultures/western_SnT/star_names.fab:164
 msgid "Yed Posterior"
 msgstr "楚[天市右垣十] (Yed Posterior)"
@@ -52703,12 +52839,14 @@ msgstr "楚[天市右垣十] (Yed Posterior)"
 #: skycultures/romanian/star_names.fab:157
 #: skycultures/western/star_names.fab:874
 #: skycultures/western/star_names.fab:877
+#: skycultures/western_hlad/star_names.fab:165
 #: skycultures/western_SnT/star_names.fab:165
 msgid "Al Niyat"
 msgstr "Al Niyat"
 
 #: skycultures/romanian/star_names.fab:158
 #: skycultures/western/star_names.fab:531
+#: skycultures/western_hlad/star_names.fab:166
 #: skycultures/western_SnT/star_names.fab:166
 msgid "Cujam"
 msgstr "斗一 (Cujam)"
@@ -52716,12 +52854,14 @@ msgstr "斗一 (Cujam)"
 #: skycultures/romanian/star_names.fab:159
 #: skycultures/western/star_names.fab:860
 #: skycultures/western_rey/star_names.fab:42
+#: skycultures/western_hlad/star_names.fab:167
 #: skycultures/western_SnT/star_names.fab:167
 msgid "Antares"
 msgstr "心宿二 (Antares)"
 
 #: skycultures/romanian/star_names.fab:160
 #: skycultures/western/star_names.fab:524
+#: skycultures/western_hlad/star_names.fab:168
 #: skycultures/western_SnT/star_names.fab:168
 msgid "Kornephoros"
 msgstr "河中[天市右垣一] (Kornephoros)"
@@ -52729,66 +52869,77 @@ msgstr "河中[天市右垣一] (Kornephoros)"
 #: skycultures/romanian/star_names.fab:161
 #: skycultures/western/star_names.fab:528
 #: skycultures/western/star_names.fab:667
+#: skycultures/western_hlad/star_names.fab:169
 #: skycultures/western_SnT/star_names.fab:169
 msgid "Marfik"
 msgstr "列肆二 (Marfik)"
 
 #: skycultures/romanian/star_names.fab:162
 #: skycultures/western/star_names.fab:960
+#: skycultures/western_hlad/star_names.fab:170
 #: skycultures/western_SnT/star_names.fab:170
 msgid "Atria"
 msgstr "三角形三 (Atria)"
 
 #: skycultures/romanian/star_names.fab:163
 #: skycultures/western/star_names.fab:417
+#: skycultures/western_hlad/star_names.fab:171
 #: skycultures/western_SnT/star_names.fab:171
 msgid "Alrakis"
 msgstr "天棓增九 (Alrakis)"
 
 #: skycultures/romanian/star_names.fab:164
 #: skycultures/western/star_names.fab:666
+#: skycultures/western_hlad/star_names.fab:172
 #: skycultures/western_SnT/star_names.fab:172
 msgid "Sabik"
 msgstr "宋[天市左垣十一] (Sabik)"
 
 #: skycultures/romanian/star_names.fab:165
 #: skycultures/western/star_names.fab:522
+#: skycultures/western_hlad/star_names.fab:173
 #: skycultures/western_SnT/star_names.fab:173
 msgid "Rasalgethi"
 msgstr "帝座 (Rasalgethi)"
 
 #: skycultures/romanian/star_names.fab:166
 #: skycultures/western/star_names.fab:404
+#: skycultures/western_hlad/star_names.fab:174
 #: skycultures/western_SnT/star_names.fab:174
 msgid "Rastaban"
 msgstr "天棓三 (Rastaban)"
 
 #: skycultures/romanian/star_names.fab:167
 #: skycultures/western/star_names.fab:529
+#: skycultures/western_hlad/star_names.fab:175
 #: skycultures/western_SnT/star_names.fab:175
 msgid "Maasym"
 msgstr "趙[天市左垣二] (Maasym)"
 
 #: skycultures/romanian/star_names.fab:168
 #: skycultures/western/star_names.fab:878
+#: skycultures/western_hlad/star_names.fab:176
 #: skycultures/western_SnT/star_names.fab:176
 msgid "Lesath"
 msgstr "尾宿九 (Lesath)"
 
 #: skycultures/romanian/star_names.fab:169
 #: skycultures/western/star_names.fab:1033
+#: skycultures/western_hlad/star_names.fab:177
 #: skycultures/western_SnT/star_names.fab:177
 msgid "Yildun"
 msgstr "勾陳二 (Yildun)"
 
 #: skycultures/romanian/star_names.fab:170
 #: skycultures/western/star_names.fab:871
+#: skycultures/western_hlad/star_names.fab:178
 #: skycultures/western_SnT/star_names.fab:178
 msgid "Shaula"
 msgstr "尾宿八 (Shaula)"
 
 #: skycultures/romanian/star_names.fab:171
 #: skycultures/western/star_names.fab:659
+#: skycultures/western_hlad/star_names.fab:179
 #: skycultures/western_SnT/star_names.fab:179
 msgid "Rasalhague"
 msgstr "候 (Rasalhague)"
@@ -52797,18 +52948,21 @@ msgstr "候 (Rasalhague)"
 #: skycultures/western/star_names.fab:870
 #: skycultures/western/star_names.fab:883
 #: skycultures/western/star_names.fab:886
+#: skycultures/western_hlad/star_names.fab:180
 #: skycultures/western_SnT/star_names.fab:180
 msgid "Girtab"
 msgstr "尾宿六 (Girtab)"
 
 #: skycultures/romanian/star_names.fab:173
 #: skycultures/western/star_names.fab:661
+#: skycultures/western_hlad/star_names.fab:181
 #: skycultures/western_SnT/star_names.fab:181
 msgid "Cebalrai"
 msgstr "宗正一 (Cebalrai)"
 
 #: skycultures/romanian/star_names.fab:174
 #: skycultures/western/star_names.fab:420
+#: skycultures/western_hlad/star_names.fab:182
 #: skycultures/western_SnT/star_names.fab:182
 msgid "Grumium"
 msgstr "天棓一 (Grumium)"
@@ -52820,24 +52974,28 @@ msgstr "Etamin"
 
 #: skycultures/romanian/star_names.fab:177
 #: skycultures/western/star_names.fab:820
+#: skycultures/western_hlad/star_names.fab:185
 #: skycultures/western_SnT/star_names.fab:185
 msgid "Alnasl"
 msgstr "箕宿一 (Alnasl)"
 
 #: skycultures/romanian/star_names.fab:178
 #: skycultures/western/star_names.fab:825
+#: skycultures/western_hlad/star_names.fab:186
 #: skycultures/western_SnT/star_names.fab:186
 msgid "Kaus Media"
 msgstr "箕宿二 (Kaus Media)"
 
 #: skycultures/romanian/star_names.fab:179
 #: skycultures/western/star_names.fab:829
+#: skycultures/western_hlad/star_names.fab:187
 #: skycultures/western_SnT/star_names.fab:187
 msgid "Kaus Australis"
 msgstr "箕宿三 (Kaus Australis)"
 
 #: skycultures/romanian/star_names.fab:180
 #: skycultures/western/star_names.fab:831
+#: skycultures/western_hlad/star_names.fab:188
 #: skycultures/western_SnT/star_names.fab:188
 msgid "Kaus Borealis"
 msgstr "斗宿二 (Kaus Borealis)"
@@ -52848,36 +53006,42 @@ msgstr "織女一 (The Shepherd (星之女王))"
 
 #: skycultures/romanian/star_names.fab:182
 #: skycultures/western/star_names.fab:637
+#: skycultures/western_hlad/star_names.fab:190
 #: skycultures/western_SnT/star_names.fab:190
 msgid "Sheliak"
 msgstr "漸台二 (Sheliak)"
 
 #: skycultures/romanian/star_names.fab:183
 #: skycultures/western/star_names.fab:833
+#: skycultures/western_hlad/star_names.fab:191
 #: skycultures/western_SnT/star_names.fab:191
 msgid "Nunki"
 msgstr "斗宿四 (Nunki)"
 
 #: skycultures/romanian/star_names.fab:184
 #: skycultures/western/star_names.fab:908
+#: skycultures/western_hlad/star_names.fab:192
 #: skycultures/western_SnT/star_names.fab:192
 msgid "Alya"
 msgstr "徐[天市左垣七] (Alya)"
 
 #: skycultures/romanian/star_names.fab:185
 #: skycultures/western/star_names.fab:638
+#: skycultures/western_hlad/star_names.fab:193
 #: skycultures/western_SnT/star_names.fab:193
 msgid "Sulafat"
 msgstr "漸台三 (Sulafat)"
 
 #: skycultures/romanian/star_names.fab:186
 #: skycultures/western/star_names.fab:830
+#: skycultures/western_hlad/star_names.fab:194
 #: skycultures/western_SnT/star_names.fab:194
 msgid "Ascella"
 msgstr "斗宿六 (Ascella)"
 
 #: skycultures/romanian/star_names.fab:187
 #: skycultures/western/star_names.fab:409
+#: skycultures/western_hlad/star_names.fab:195
 #: skycultures/western_SnT/star_names.fab:195
 msgid "Altais"
 msgstr "天廚一 (Altais)"
@@ -52885,12 +53049,14 @@ msgstr "天廚一 (Altais)"
 #: skycultures/romanian/star_names.fab:188
 #: skycultures/western/star_names.fab:818
 #: skycultures/western/star_names.fab:846
+#: skycultures/western_hlad/star_names.fab:196
 #: skycultures/western_SnT/star_names.fab:196
 msgid "Arkab"
 msgstr "Arkab"
 
 #: skycultures/romanian/star_names.fab:189
 #: skycultures/western/star_names.fab:815
+#: skycultures/western_hlad/star_names.fab:197
 #: skycultures/western_SnT/star_names.fab:197
 msgid "Rukbat"
 msgstr "天淵三 (Rukbat)"
@@ -52898,18 +53064,21 @@ msgstr "天淵三 (Rukbat)"
 #: skycultures/romanian/star_names.fab:190
 #: skycultures/western/star_names.fab:369
 #: skycultures/western_rey/star_names.fab:19
+#: skycultures/western_hlad/star_names.fab:198
 #: skycultures/western_SnT/star_names.fab:198
 msgid "Albireo"
 msgstr "輦道增七 (Albireo)"
 
 #: skycultures/romanian/star_names.fab:192
 #: skycultures/western/star_names.fab:812
+#: skycultures/western_hlad/star_names.fab:199
 #: skycultures/western_SnT/star_names.fab:199
 msgid "Sham"
 msgstr "左旗一 (Sham)"
 
 #: skycultures/romanian/star_names.fab:193
 #: skycultures/western/star_names.fab:45
+#: skycultures/western_hlad/star_names.fab:200
 #: skycultures/western_SnT/star_names.fab:200
 msgid "Tarazed"
 msgstr "河鼓三 (Tarazed)"
@@ -52917,48 +53086,56 @@ msgstr "河鼓三 (Tarazed)"
 #: skycultures/romanian/star_names.fab:194
 #: skycultures/western/star_names.fab:43
 #: skycultures/western_rey/star_names.fab:44
+#: skycultures/western_hlad/star_names.fab:201
 #: skycultures/western_SnT/star_names.fab:201
 msgid "Altair"
 msgstr "河鼓二 (Altair)"
 
 #: skycultures/romanian/star_names.fab:195
 #: skycultures/western/star_names.fab:44
+#: skycultures/western_hlad/star_names.fab:202
 #: skycultures/western_SnT/star_names.fab:202
 msgid "Alshain"
 msgstr "河鼓一 (Alshain)"
 
 #: skycultures/romanian/star_names.fab:196
 #: skycultures/western/star_names.fab:197
+#: skycultures/western_hlad/star_names.fab:203
 #: skycultures/western_SnT/star_names.fab:203
 msgid "Algedi"
 msgstr "牛宿二 (Algedi)"
 
 #: skycultures/romanian/star_names.fab:197
 #: skycultures/western/star_names.fab:201
+#: skycultures/western_hlad/star_names.fab:204
 #: skycultures/western_SnT/star_names.fab:204
 msgid "Dabih"
 msgstr "牛宿一 (Dabih)"
 
 #: skycultures/romanian/star_names.fab:198
 #: skycultures/western/star_names.fab:370
+#: skycultures/western_hlad/star_names.fab:205
 #: skycultures/western_SnT/star_names.fab:205
 msgid "Sadr"
 msgstr "天津一 (Sadr)"
 
 #: skycultures/romanian/star_names.fab:199
 #: skycultures/western/star_names.fab:714
+#: skycultures/western_hlad/star_names.fab:206
 #: skycultures/western_SnT/star_names.fab:206
 msgid "Peacock"
 msgstr "孔雀十一 (Peacock)"
 
 #: skycultures/romanian/star_names.fab:200
 #: skycultures/western/star_names.fab:393
+#: skycultures/western_hlad/star_names.fab:207
 #: skycultures/western_SnT/star_names.fab:207
 msgid "Rotanev"
 msgstr "瓠瓜四 (Rotanev)"
 
 #: skycultures/romanian/star_names.fab:201
 #: skycultures/western/star_names.fab:391
+#: skycultures/western_hlad/star_names.fab:208
 #: skycultures/western_SnT/star_names.fab:208
 msgid "Sualocin"
 msgstr "瓠瓜一 (Sualocin)"
@@ -52966,48 +53143,56 @@ msgstr "瓠瓜一 (Sualocin)"
 #: skycultures/romanian/star_names.fab:202
 #: skycultures/western/star_names.fab:365
 #: skycultures/western_rey/star_names.fab:20
+#: skycultures/western_hlad/star_names.fab:209
 #: skycultures/western_SnT/star_names.fab:209
 msgid "Deneb"
 msgstr "天津四 (Deneb)"
 
 #: skycultures/romanian/star_names.fab:204
 #: skycultures/western/star_names.fab:26
+#: skycultures/western_hlad/star_names.fab:210
 #: skycultures/western_SnT/star_names.fab:210
 msgid "Albali"
 msgstr "女宿一 (Albali)"
 
 #: skycultures/romanian/star_names.fab:205
 #: skycultures/western/star_names.fab:452
+#: skycultures/western_hlad/star_names.fab:211
 #: skycultures/western_SnT/star_names.fab:211
 msgid "Kitalpha"
 msgstr "虛宿二 (Kitalpha)"
 
 #: skycultures/romanian/star_names.fab:206
 #: skycultures/western/star_names.fab:260
+#: skycultures/western_hlad/star_names.fab:213
 #: skycultures/western_SnT/star_names.fab:213
 msgid "Alderamin"
 msgstr "天鉤五 (Alderamin)"
 
 #: skycultures/romanian/star_names.fab:207
 #: skycultures/western/star_names.fab:261
+#: skycultures/western_hlad/star_names.fab:214
 #: skycultures/western_SnT/star_names.fab:214
 msgid "Alfirk"
 msgstr "上衛增一 (Alfirk)"
 
 #: skycultures/romanian/star_names.fab:208
 #: skycultures/western/star_names.fab:22
+#: skycultures/western_hlad/star_names.fab:215
 #: skycultures/western_SnT/star_names.fab:215
 msgid "Sadalsuud"
 msgstr "虛宿一 (Sadalsuud)"
 
 #: skycultures/romanian/star_names.fab:209
 #: skycultures/western/star_names.fab:204
+#: skycultures/western_hlad/star_names.fab:216
 #: skycultures/western_SnT/star_names.fab:216
 msgid "Nashira"
 msgstr "壘壁陣三 (Nashira)"
 
 #: skycultures/romanian/star_names.fab:210
 #: skycultures/western/star_names.fab:376
+#: skycultures/western_hlad/star_names.fab:217
 #: skycultures/western_SnT/star_names.fab:217
 msgid "Azelfafage"
 msgstr "螣蛇四 (Azelfafage)"
@@ -53019,24 +53204,28 @@ msgstr "造父四 (The Garnet Star)"
 
 #: skycultures/romanian/star_names.fab:212
 #: skycultures/western/star_names.fab:722
+#: skycultures/western_hlad/star_names.fab:219
 #: skycultures/western_SnT/star_names.fab:219
 msgid "Enif"
 msgstr "危宿三 (Enif)"
 
 #: skycultures/romanian/star_names.fab:213
 #: skycultures/western/star_names.fab:205
+#: skycultures/western_hlad/star_names.fab:220
 #: skycultures/western_SnT/star_names.fab:220
 msgid "Deneb Algedi"
 msgstr "壘壁陣四 (Deneb Algedi)"
 
 #: skycultures/romanian/star_names.fab:214
 #: skycultures/western/star_names.fab:267
+#: skycultures/western_hlad/star_names.fab:221
 #: skycultures/western_SnT/star_names.fab:221
 msgid "Kurhah"
 msgstr "天鉤六 (Kurhah)"
 
 #: skycultures/romanian/star_names.fab:215
 #: skycultures/western/star_names.fab:20
+#: skycultures/western_hlad/star_names.fab:222
 #: skycultures/western_SnT/star_names.fab:222
 msgid "Sadalmelik"
 msgstr "危宿一 (Sadalmelik)"
@@ -53044,24 +53233,28 @@ msgstr "危宿一 (Sadalmelik)"
 #: skycultures/romanian/star_names.fab:216
 #: skycultures/western/star_names.fab:251
 #: skycultures/western/star_names.fab:512
+#: skycultures/western_hlad/star_names.fab:136
 #: skycultures/western_SnT/star_names.fab:136
 msgid "Alnair"
 msgstr "鶴一 (Alnair)"
 
 #: skycultures/romanian/star_names.fab:217
 #: skycultures/western/star_names.fab:728
+#: skycultures/western_hlad/star_names.fab:224
 #: skycultures/western_SnT/star_names.fab:224
 msgid "Biham"
 msgstr "危宿二 (Biham)"
 
 #: skycultures/romanian/star_names.fab:218
 #: skycultures/western/star_names.fab:27
+#: skycultures/western_hlad/star_names.fab:225
 #: skycultures/western_SnT/star_names.fab:225
 msgid "Ancha"
 msgstr "泣二 (Ancha)"
 
 #: skycultures/romanian/star_names.fab:219
 #: skycultures/western/star_names.fab:24
+#: skycultures/western_hlad/star_names.fab:226
 #: skycultures/western_SnT/star_names.fab:226
 msgid "Sadachbia"
 msgstr "墳墓二 (Sadachbia)"
@@ -53073,6 +53266,7 @@ msgstr "Kruger 60"
 
 #: skycultures/romanian/star_names.fab:221
 #: skycultures/western/star_names.fab:28
+#: skycultures/western_hlad/star_names.fab:228
 #: skycultures/western_SnT/star_names.fab:228
 msgid "Situla"
 msgstr "虛梁三 (Situla)"
@@ -53083,18 +53277,21 @@ msgstr "雷電一 (Homan)"
 
 #: skycultures/romanian/star_names.fab:223
 #: skycultures/western/star_names.fab:727
+#: skycultures/western_hlad/star_names.fab:230
 #: skycultures/western_SnT/star_names.fab:230
 msgid "Matar"
 msgstr "離宮四 (Matar)"
 
 #: skycultures/romanian/star_names.fab:225
 #: skycultures/western/star_names.fab:729
+#: skycultures/western_hlad/star_names.fab:231
 #: skycultures/western_SnT/star_names.fab:231
 msgid "Sadalbari"
 msgstr "離宮二 (Sadalbari)"
 
 #: skycultures/romanian/star_names.fab:226
 #: skycultures/western/star_names.fab:25
+#: skycultures/western_hlad/star_names.fab:232
 #: skycultures/western_SnT/star_names.fab:232
 msgid "Skat"
 msgstr "羽林軍二十六 (Skat)"
@@ -53102,12 +53299,14 @@ msgstr "羽林軍二十六 (Skat)"
 #: skycultures/romanian/star_names.fab:227
 #: skycultures/western/star_names.fab:794
 #: skycultures/western_rey/star_names.fab:46
+#: skycultures/western_hlad/star_names.fab:233
 #: skycultures/western_SnT/star_names.fab:233
 msgid "Fomalhaut"
 msgstr "北落師門 (Fomalhaut)"
 
 #: skycultures/romanian/star_names.fab:228
 #: skycultures/western/star_names.fab:719
+#: skycultures/western_hlad/star_names.fab:234
 #: skycultures/western_SnT/star_names.fab:234
 msgid "Scheat"
 msgstr "室宿二 (Scheat)"
@@ -53115,12 +53314,14 @@ msgstr "室宿二 (Scheat)"
 #: skycultures/romanian/star_names.fab:229
 #: skycultures/western/star_names.fab:716
 #: skycultures/western/star_names.fab:1044
+#: skycultures/western_hlad/star_names.fab:235
 #: skycultures/western_SnT/star_names.fab:235
 msgid "Markab"
 msgstr "室宿一 (Markab)"
 
 #: skycultures/romanian/star_names.fab:230
 #: skycultures/western/star_names.fab:262
+#: skycultures/western_hlad/star_names.fab:237
 #: skycultures/western_SnT/star_names.fab:237
 msgid "Errai"
 msgstr "少衛增八 (Errai)"
@@ -54187,6 +54388,7 @@ msgid "Sirrah"
 msgstr "壁宿二 (Sirrah)"
 
 #: skycultures/western/star_names.fab:6
+#: skycultures/western_hlad/star_names.fab:16
 #: skycultures/western_SnT/star_names.fab:16
 msgid "Almach"
 msgstr "天大將軍一 (Almach)"
@@ -54654,6 +54856,7 @@ msgstr "Suhel"
 
 #: skycultures/western/star_names.fab:215
 #: skycultures/western/star_names.fab:803
+#: skycultures/western_hlad/star_names.fab:80
 #: skycultures/western_SnT/star_names.fab:80
 msgid "Tureis"
 msgstr "弧矢增三十二 (Tureis)"
@@ -54726,6 +54929,7 @@ msgid "Pearce's Star"
 msgstr "皮爾斯 Pearce 星"
 
 #: skycultures/western/star_names.fab:241
+#: skycultures/western_hlad/star_names.fab:145
 #: skycultures/western_SnT/star_names.fab:145
 msgid "Rigil Kentaurus"
 msgstr "南門二 (Rigil Kentaurus)"
@@ -54744,6 +54948,7 @@ msgid "Bungula"
 msgstr "Bungula"
 
 #: skycultures/western/star_names.fab:247
+#: skycultures/western_hlad/star_names.fab:143
 #: skycultures/western_SnT/star_names.fab:143
 msgid "Proxima Centauri"
 msgstr "Proxima Centauri"
@@ -54753,6 +54958,7 @@ msgid "Agena"
 msgstr "Agena"
 
 #: skycultures/western/star_names.fab:250
+#: skycultures/western_hlad/star_names.fab:125
 #: skycultures/western_SnT/star_names.fab:125
 msgid "Muhlifain"
 msgstr "庫樓七 (Muhlifain)"
@@ -54811,6 +55017,7 @@ msgstr "少衛[紫微左垣七] (Al Aghnam II)"
 
 #: skycultures/western/star_names.fab:280
 #: skycultures/western/star_names.fab:291
+#: skycultures/western_hlad/star_names.fab:6
 #: skycultures/western_SnT/star_names.fab:6
 msgid "Deneb Kaitos"
 msgstr "Deneb Kaitos"
@@ -54960,6 +55167,7 @@ msgid "Alfecca Meridiana"
 msgstr "鱉六 (Alfecca Meridiana)"
 
 #: skycultures/western/star_names.fab:331
+#: skycultures/western_hlad/star_names.fab:157
 #: skycultures/western_SnT/star_names.fab:157
 msgid "Alphecca"
 msgstr "貫索四 (Alphecca)"
@@ -55142,6 +55350,7 @@ msgid "Alwaid"
 msgstr "Alwaid"
 
 #: skycultures/western/star_names.fab:406
+#: skycultures/western_hlad/star_names.fab:183
 #: skycultures/western_SnT/star_names.fab:183
 msgid "Eltanin"
 msgstr "天棓四 (Eltanin)"
@@ -55295,6 +55504,7 @@ msgstr "天苑增三 (Dalim)"
 
 #: skycultures/western/star_names.fab:464
 #: skycultures/western/star_names.fab:467
+#: skycultures/western_hlad/star_names.fab:41
 #: skycultures/western_SnT/star_names.fab:41
 msgid "Theemin"
 msgstr "天園十二 (Theemin)"
@@ -55362,6 +55572,7 @@ msgstr "Fornacis"
 
 #: skycultures/western/star_names.fab:490
 #: skycultures/western_rey/star_names.fab:29
+#: skycultures/western_hlad/star_names.fab:76
 #: skycultures/western_SnT/star_names.fab:76
 msgid "Castor"
 msgstr "北河二 (Castor)"
@@ -55372,6 +55583,7 @@ msgstr "Apollo"
 
 #: skycultures/western/star_names.fab:492
 #: skycultures/western_rey/star_names.fab:30
+#: skycultures/western_hlad/star_names.fab:78
 #: skycultures/western_SnT/star_names.fab:78
 msgid "Pollux"
 msgstr "北河三 (Pollux)"
@@ -55421,6 +55633,7 @@ msgid "Jishui"
 msgstr "北河增二 (Jishui)"
 
 #: skycultures/western/star_names.fab:513
+#: skycultures/western_hlad/star_names.fab:223
 #: skycultures/western_SnT/star_names.fab:223
 msgid "Al Na'ir"
 msgstr "Al Na'ir"
@@ -55736,6 +55949,7 @@ msgstr "座旗二 (Dolones X)"
 
 #: skycultures/western/star_names.fab:634
 #: skycultures/western_rey/star_names.fab:21
+#: skycultures/western_hlad/star_names.fab:189
 #: skycultures/western_SnT/star_names.fab:189
 msgid "Vega"
 msgstr "織女一 (Vega)"
@@ -55942,6 +56156,7 @@ msgid "Fumalfaras"
 msgstr "Fumalfaras"
 
 #: skycultures/western/star_names.fab:726
+#: skycultures/western_hlad/star_names.fab:229
 #: skycultures/western_SnT/star_names.fab:229
 msgid "Homam"
 msgstr "雷電一 (Homam)"
@@ -55983,6 +56198,7 @@ msgid "Alkarab"
 msgstr "離宮六 (Alkarab)"
 
 #: skycultures/western/star_names.fab:741
+#: skycultures/western_hlad/star_names.fab:26
 #: skycultures/western_SnT/star_names.fab:26
 msgid "Mirfak"
 msgstr "天船三 (Mirfak)"
@@ -56289,6 +56505,7 @@ msgid "Kalb al Akrab"
 msgstr "Kalb al Akrab"
 
 #: skycultures/western/star_names.fab:865
+#: skycultures/western_hlad/star_names.fab:161
 #: skycultures/western_SnT/star_names.fab:161
 msgid "Graffias"
 msgstr "Graffias"
@@ -56427,6 +56644,7 @@ msgstr "周增八 Gudja"
 
 #: skycultures/western/star_names.fab:920
 #: skycultures/western_rey/star_names.fab:27
+#: skycultures/western_hlad/star_names.fab:43
 #: skycultures/western_SnT/star_names.fab:43
 msgid "Aldebaran"
 msgstr "畢宿五 (Aldebaran)"
@@ -56440,6 +56658,7 @@ msgid "Parilicium"
 msgstr "Parilicium"
 
 #: skycultures/western/star_names.fab:923
+#: skycultures/western_hlad/star_names.fab:49
 #: skycultures/western_SnT/star_names.fab:49
 msgid "Elnath"
 msgstr "五車五 (Elnath)"
@@ -56541,6 +56760,7 @@ msgid "Dubh"
 msgstr "Dubh"
 
 #: skycultures/western/star_names.fab:971
+#: skycultures/western_hlad/star_names.fab:115
 #: skycultures/western_SnT/star_names.fab:115
 msgid "Phecda"
 msgstr "天璣[北斗三] (Phecda)"
@@ -56567,11 +56787,13 @@ msgstr "Dnoces"
 
 #: skycultures/western/star_names.fab:988
 #: skycultures/western_rey/star_names.fab:8
+#: skycultures/western_hlad/star_names.fab:133
 #: skycultures/western_SnT/star_names.fab:133
 msgid "Alcor"
 msgstr "輔 (Alcor)"
 
 #: skycultures/western/star_names.fab:989
+#: skycultures/western_hlad/star_names.fab:114
 #: skycultures/western_SnT/star_names.fab:114
 msgid "Groombridge 1830"
 msgstr "Groombridge 1830"
@@ -56673,6 +56895,7 @@ msgid "Alhaud VII"
 msgstr "文昌三 (Alhaud VII)"
 
 #: skycultures/western/star_names.fab:1022
+#: skycultures/western_hlad/star_names.fab:19
 #: skycultures/western_SnT/star_names.fab:19
 msgid "Polaris"
 msgstr "勾陳一[北極星] (Polaris)"
@@ -56703,6 +56926,7 @@ msgstr "Mismar"
 
 #: skycultures/western/star_names.fab:1029
 #: skycultures/western_rey/star_names.fab:6
+#: skycultures/western_hlad/star_names.fab:148
 #: skycultures/western_SnT/star_names.fab:148
 msgid "Kochab"
 msgstr "帝[北極二] (Kochab)"
@@ -56740,6 +56964,7 @@ msgid "Suhail al Muhlif"
 msgstr "Suhail al Muhlif"
 
 #: skycultures/western/star_names.fab:1043
+#: skycultures/western_hlad/star_names.fab:93
 #: skycultures/western_SnT/star_names.fab:93
 msgid "Markeb"
 msgstr "天社五 (Markeb)"
@@ -57071,50 +57296,62 @@ msgstr "南門二"
 msgid "Beta Centauri"
 msgstr "馬腹一"
 
+#: skycultures/western_hlad/star_names.fab:5
 #: skycultures/western_SnT/star_names.fab:5
 msgid "Schedar"
 msgstr "王良四 Schedar"
 
+#: skycultures/western_hlad/star_names.fab:13
 #: skycultures/western_SnT/star_names.fab:13
 msgid "Mesartim"
 msgstr "婁宿二 Mesartim"
 
+#: skycultures/western_hlad/star_names.fab:32
 #: skycultures/western_SnT/star_names.fab:32
 msgid "Sterope"
 msgstr "昴宿三 Sterope"
 
+#: skycultures/western_hlad/star_names.fab:89
 #: skycultures/western_SnT/star_names.fab:89
 msgid "Vela X-1"
 msgstr "船帆座 X-1"
 
+#: skycultures/western_hlad/star_names.fab:117
 #: skycultures/western_SnT/star_names.fab:117
 msgid "Rmk 14"
 msgstr "Rmk 14"
 
+#: skycultures/western_hlad/star_names.fab:142
 #: skycultures/western_SnT/star_names.fab:142
 msgid "V1002"
 msgstr "V1002"
 
+#: skycultures/western_hlad/star_names.fab:150
 #: skycultures/western_SnT/star_names.fab:150
 msgid "H N 28"
 msgstr "H N 28"
 
+#: skycultures/western_hlad/star_names.fab:159
 #: skycultures/western_SnT/star_names.fab:159
 msgid "T = Blaze Star"
 msgstr "T = Blaze 星"
 
+#: skycultures/western_hlad/star_names.fab:212
 #: skycultures/western_SnT/star_names.fab:212
 msgid "Lacaille 8760"
 msgstr "拉卡伊 Lacaille 8760"
 
+#: skycultures/western_hlad/star_names.fab:218
 #: skycultures/western_SnT/star_names.fab:218
 msgid "Herschel's Garnet Star"
 msgstr "赫歇爾的石榴石星"
 
+#: skycultures/western_hlad/star_names.fab:227
 #: skycultures/western_SnT/star_names.fab:227
 msgid "Krueger 60"
 msgstr "Krueger 60"
 
+#: skycultures/western_hlad/star_names.fab:236
 #: skycultures/western_SnT/star_names.fab:236
 msgid "Bradley 3077"
 msgstr "布萊得雷 3077"
