@@ -80,7 +80,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--projection-type       : Specify projection type, e.g. stereographic\n"
 		          << "--restore-defaults      : Delete existing config.ini and use defaults\n"
 		          << "--multires-image        : With filename / URL argument, specify a\n"
-		          << "                          multi-resolution image to load\n";
+			  << "                          multi-resolution image to load\n"
 #ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
@@ -93,6 +93,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
 			  #endif
 #endif
+			  << " \n";
 		exit(0);
 	}
 
