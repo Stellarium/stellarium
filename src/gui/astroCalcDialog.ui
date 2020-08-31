@@ -1138,17 +1138,14 @@
             </item>
             <item>
              <widget class="AngleSpinBox" name="allowedSeparationSpinBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="minimumSize">
                <size>
-                <width>115</width>
+                <width>120</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -1955,6 +1952,19 @@
              </widget>
             </item>
             <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="AngleSpinBox" name="wutAngularSizeLimitMinSpinBox">
               <property name="enabled">
                <bool>true</bool>
@@ -1963,12 +1973,6 @@
                <size>
                 <width>120</width>
                 <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>120</width>
-                <height>16777215</height>
                </size>
               </property>
               <property name="toolTip">
@@ -1988,12 +1992,6 @@
                <size>
                 <width>120</width>
                 <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>120</width>
-                <height>16777215</height>
                </size>
               </property>
               <property name="toolTip">
