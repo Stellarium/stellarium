@@ -539,7 +539,7 @@ void OcularsGuiPanel::updateOcularControls()
 	posY += fieldOcularName->boundingRect().height();
 	widgetHeight += fieldOcularName->boundingRect().height();
 
-
+	buttonCrosshairs->setEnabled(!ocular->hasPermanentCrosshair());
 	if (ocular->isBinoculars())
 	{
 		fieldOcularFl->setVisible(false);
