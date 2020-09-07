@@ -975,7 +975,7 @@ PGC  2906            _("Baade's Galaxy A") # NED
 PGC  2907            _("Baade's Galaxy B") # NED
 PGC  3589            _("Sculptor Dwarf Galaxy") # NED, DWH, PSA, SIMBAD
 PGC  3589            _("Sculptor System") # BCH
-PGC  3589            _("Reticulum System") # SIMBAD
+
 PGC  3792            _("Pisces Dwarf Galaxy") # NED, SIMBAD
 PGC  3792            _("Pisces I") # NED, SIMBAD
 PGC  3853            _("Shapley-Ames 1") # NED
@@ -1176,6 +1176,12 @@ ESO  86-9            _("Hodge 4") # SIMBAD
 ESO  118-31          _("Sersic Cluster") # SIMBAD
 ESO  118-31          _("Reticulum Cluster") # SIMBAD
 ESO  118-31          _("Reticulum Dwarf Galaxy") # SIMBAD
+# Note: SIMBAD has an error to designation for the Reticulum system!
+# See references:
+# http://articles.adsabs.harvard.edu/pdf/1976ApJ...208..932D
+# http://articles.adsabs.harvard.edu/pdf/1991PASP..103.1279K
+# http://articles.adsabs.harvard.edu/pdf/1992AJ....103.1166W
+ESO  118-31          _("Reticulum System") # SIMBAD
 ESO  120-8           _("E2 Cluster") # SIMBAD
 ESO  129-25          _("Padova 2") # SIMBAD
 ESO  138-29          _("Sacred Mushroom") # SIMBAD
