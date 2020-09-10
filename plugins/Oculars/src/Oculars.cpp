@@ -2171,6 +2171,7 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagEnableMouseNavigation(true);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScaleMain);
+	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
 
 	// Set the screen display
 	core->setFlipHorz(flipHorzMain);
