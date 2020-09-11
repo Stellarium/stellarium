@@ -90,12 +90,9 @@ public:
 	//! @param color choose a color for the label
 	//! @param side which side of the object to draw the label, values N, S, E, W, NE, NW, SE, SW, C (C is centred on the object)
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
-	//! @param style determines how the label is drawn
-	//! @param enclosureSize used to determine the size of the enclosure for the former styles Box and Circle. These have been removed, and this parameter should not be written.
-	// TBD: Apparently styles Box and Circle have been removed?
+	//! @param style determines how the label is drawn	
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
-			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
-	double enclosureSize=0.0);
+			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly);
 
 	virtual ~SkyLabel();
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
@@ -111,8 +108,7 @@ private:
 	StelObjectP labelObject;
 	QString labelSide;
 	double labelDistance;
-	SkyLabel::Style labelStyle;
-	double labelEnclosureSize; // TODO: Remove this useless parameter?
+	SkyLabel::Style labelStyle;	
 };
 
 //! @class HorizonLabel
@@ -135,6 +131,31 @@ public:
 	virtual bool draw(StelCore* core, StelPainter& sPainter);
 private:
 	Vec3d altaz; // the vector to the coordinates
+};
+
+//! @class EquatorialLabel
+//! Used to create user labels which are bound to equatorial coordinates.
+class EquatorialLabel : public StelLabel
+{
+public:
+	//! Constructor of a EquatorialJ2000Label which is to be displayed on an equatorial position.
+	//! @param text the text for the label
+	//! @param ra the R.A., hours
+	//! @param dec the declination, degrees
+	//! @param font the font to use
+	//! @param color the color for the label
+	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
+	EquatorialLabel(const QString& text, const float ra, const float dec, const QFont& font, const Vec3f& color, QString side="NE", double distance=-1.0, bool j2000epoch=true);
+	virtual ~EquatorialLabel();
+
+	//! draw the label on the screen
+	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
+private:
+	Vec3d equPos; // the vector to the coordinates
+	QString labelSide;
+	double labelDistance;
 };
 
 
@@ -217,14 +238,12 @@ SkyLabel::Style SkyLabel::stringToStyle(const QString& s)
 // SkyLabel class //
 ////////////////////
 SkyLabel::SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font,
-		   Vec3f color, QString side, double distance, SkyLabel::Style style,
-		   double enclosureSize)
+		   Vec3f color, QString side, double distance, SkyLabel::Style style)
 	: StelLabel(text, font, color),
 	  labelObject(bindObject),
 	  labelSide(side),
 	  labelDistance(distance),
-	  labelStyle(style),
-	  labelEnclosureSize(enclosureSize)
+	  labelStyle(style)
 {
 }
 
@@ -353,6 +372,88 @@ bool HorizonLabel::draw(StelCore *core, StelPainter& sPainter)
 	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	sPainter.setProjector(altazProjector);
 	sPainter.drawText(altaz, labelText, 0, 0, 0, false);
+	sPainter.setProjector(keepProj);
+	return true;
+}
+
+///////////////////////
+// EquatorialLabel class //
+///////////////////////
+EquatorialLabel::EquatorialLabel(const QString& text, const float ra, const float dec, const QFont& font, const Vec3f& color, QString side, double distance, bool j2000epoch)
+	: StelLabel(text, font, color),
+	labelSide(side),
+	labelDistance(distance)
+{
+	StelUtils::spheToRect(ra, dec, equPos);
+	if (!j2000epoch)
+		equPos = StelApp::getInstance().getCore()->equinoxEquToJ2000(equPos);
+}
+
+EquatorialLabel::~EquatorialLabel()
+{
+}
+
+bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
+{
+	if (labelFader.getInterstate() <= 0.f)
+		return false;
+
+	Vec3d labelXY;
+	// Compute 2D pos and return if outside screen
+	if (!sPainter.getProjector()->project(equPos, labelXY))
+		return false;
+
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setFont(labelFont);
+
+	double xOffset(0.);
+	double yOffset(0.);
+	char hJustify = 'c';
+	char vJustify = 'c';
+	if (labelSide.toUpper().contains("N"))
+	{
+		yOffset = 1.0;
+		vJustify = 'b'; // bottom justify text
+	}
+	else if (labelSide.toUpper().contains("S"))
+	{
+		yOffset = -1.0;
+		vJustify = 't'; // top justufy text
+	}
+
+	if (labelSide.toUpper().contains("E"))
+	{
+		xOffset = 1.0;
+		hJustify = 'l'; // right justify text
+	}
+	else if (labelSide.toUpper().contains("W"))
+	{
+		xOffset = -1.0;
+		hJustify = 'r'; // left justify text
+	}
+
+	if (labelDistance >= 0.0)
+	{
+		xOffset *= labelDistance;
+		yOffset *= labelDistance;
+	}
+
+	double jxOffset(0.);
+	double jyOffset(0.);
+	if (hJustify == 'r')
+		jxOffset = sPainter.getFontMetrics().boundingRect(labelText).width();
+	else if (hJustify == 'c')
+		jxOffset = sPainter.getFontMetrics().boundingRect(labelText).width() / 2.;
+
+	if (vJustify == 't')
+		jyOffset = sPainter.getFontMetrics().height();
+	else if (vJustify == 'c')
+		jyOffset = sPainter.getFontMetrics().height() / 2.;
+
+	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
+	StelProjectorP altazProjector=core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
+	sPainter.setProjector(altazProjector);
+	sPainter.drawText(static_cast<float>(labelXY[0]+xOffset-jxOffset), static_cast<float>(labelXY[1]+yOffset-jyOffset), labelText, 0, 0, 0, false);
 	sPainter.setProjector(keepProj);
 	return true;
 }
@@ -524,6 +625,48 @@ int LabelMgr::labelHorizon(const QString& text,
 	QFont font;
 	font.setPixelSize(static_cast<int>(fontSize));
 	HorizonLabel* l = new HorizonLabel(text, az, alt, font, fontColor);
+	if (l==Q_NULLPTR)
+		return -1;
+
+	if (visible)
+		l->setFlagShow(true);
+
+	l->autoDelete = autoDelete;
+
+	return appendLabel(l, autoDeleteTimeoutMs);
+}
+
+int LabelMgr::labelEquatorial(const QString& text,
+		const QString& ra,
+		const QString& dec,
+		bool visible,
+		float fontSize,
+		const QString& fontColor,
+		const QString &side,
+		double labelDistance,
+		bool autoDelete,
+		int autoDeleteTimeoutMs,
+		bool j2000epoch)
+{
+	return labelEquatorial(text, ra, dec, visible, fontSize, Vec3f().setFromHtmlColor(fontColor), side, labelDistance, autoDelete, autoDeleteTimeoutMs, j2000epoch);
+}
+int LabelMgr::labelEquatorial(const QString& text,
+		const QString& ra,
+		const QString& dec,
+		bool visible,
+		float fontSize,
+		const Vec3f& fontColor,
+		const QString &side,
+		double labelDistance,
+		bool autoDelete,
+		int autoDeleteTimeoutMs,
+		bool j2000epoch)
+{
+	QFont font;
+	font.setPixelSize(static_cast<int>(fontSize));
+	double dRA	= StelUtils::getDecAngle(ra);
+	double dDec	= StelUtils::getDecAngle(dec);
+	EquatorialLabel* l = new EquatorialLabel(text, dRA, dDec, font, fontColor, side, labelDistance, j2000epoch);
 	if (l==Q_NULLPTR)
 		return -1;
 

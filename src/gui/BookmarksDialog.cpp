@@ -270,6 +270,7 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 	for (auto bm : bookmarksCollection)
 	{
 		QString name	= bm.name;
+		QString nameI18n = bm.nameI18n.isEmpty() ? name : bm.nameI18n; // seems this is designation
 		QString raStr	= bm.ra.trimmed();
 		QString decStr	= bm.dec.trimmed();
 
@@ -293,7 +294,13 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 
 		objectMgr->unSelect();
 		// Add labels for named highlights (name in top right corner)
-		highlightLabelIDs.append(labelMgr->labelObject(name, name, true, fontSize, color, "NE", distance));
+		int objIdx = labelMgr->labelObject(nameI18n, name, true, fontSize, color, "NE", distance);
+		if (objIdx==-1 && name.contains("marker", Qt::CaseInsensitive)) // marker is not created yet!
+		{
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, pos, false); // let's add invisible marker to allow selection
+			objIdx = labelMgr->labelObject(nameI18n, nameI18n, true, fontSize, color, "NE", distance);
+		}
+		highlightLabelIDs.append(objIdx);
 	}
 
 	hlMgr->fillHighlightList(highlights);
