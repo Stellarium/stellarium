@@ -91,15 +91,26 @@ void RemoteControlDialog::createDialogContent()
 	ui->portNumberSpinBox->setValue(rc->getPort());
 	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
 
+	ui->enableCorsCheckbox->setChecked(rc->getFlagEnableCors());
+	connect(ui->enableCorsCheckbox, SIGNAL(toggled(bool)), rc, SLOT(setFlagEnableCors(bool)));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), ui->enableCorsCheckbox, SLOT(setChecked(bool)));
+
+	ui->corsOriginEdit->setEnabled(rc->getFlagEnableCors());
+	ui->corsOriginEdit->setText(rc->getCorsOrigin());
+
+	connect(rc,SIGNAL(flagEnableCorsChanged(bool)),ui->corsOriginEdit,SLOT(setEnabled(bool)));
+	connect(ui->corsOriginEdit, SIGNAL(textChanged(QString)), rc, SLOT(setCorsOrigin(QString)));
+
 	ui->restartPanel->setVisible(false);
 	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(corsOriginChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
 
 	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));	
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rc, SLOT(restoreDefaultSettings()));
 
 	setAboutHtml();

@@ -1,6 +1,6 @@
 //
 // Author: Alexander Wolf
-// Version: 1.0
+// Version: 1.1
 // License: Public Domain
 // Name: Saturnian analemma
 // Description: A demonstration of the analemma - the path of the Sun across the sky during the year on Saturn.
@@ -16,6 +16,7 @@ core.setGuiVisible(false);
 label = LabelMgr.labelScreen(tr("Saturnian analemma"), 20, 20, false, 30, color);
 LabelMgr.setLabelShow(label, true);
 core.wait(1);
+core.setTimeRate(1);
 core.clear("natural");
 core.setObserverLocation(0, 40, 1, 1, "", "Saturn");
 core.setDate("2019-06-26T13:23:30", "UTC");

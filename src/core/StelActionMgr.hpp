@@ -158,10 +158,26 @@ public:
 	//! @param altShortcut Alternative shortcut
 	//! @param global determines QAction shortcut context (not necessary anymore?)
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-						  QObject* target, const char* slot,
-						  const QString& shortcut="", const QString& altShortcut="",
-						  bool global=false);
+			      QObject* target, const char* slot,
+			      const QString& shortcut="", const QString& altShortcut="",
+			      bool global=false);
+
+	//! Create and add a new StelAction, connected to an object slot.
+	//! @param id Global identifier.
+	//! @param groupId Group identifier.
+	//! @param text Short human-readable description in English.
+	//! @param context a reference object. When this is deleted, the Lambda function will not be called.
+	//! @param lambda a void function (Lambda). This can call slots and other functions.
+	//! @param shortcut Default shortcut/key combination for this action
+	//! @param altShortcut Alternative shortcut
+	//! @param global determines QAction shortcut context (not necessary anymore?)
+	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+			      QObject* context,  std::function<void()> lambda,
+			      const QString& shortcut="", const QString& altShortcut="",
+			      bool global=false);
+
 	StelAction* findAction(const QString& id);
+	StelAction* findActionFromShortcut(const QString& shortcut);
 	bool pushKey(int key, bool global=false);
 
 	//! Returns a list of all current StelAction groups
@@ -170,11 +186,13 @@ public:
 	QList<StelAction*> getActionList(const QString& group) const;
 	//! Returns all registered StelActions
 	QList<StelAction*> getActionList() const;
+	QStringList getShortcutsList() const;
 
 	//! Save current shortcuts to file.
 	void saveShortcuts();
 	//! Restore the default shortcuts combinations
 	void restoreDefaultShortcuts();
+	void restoreDefaultShortcut(StelAction* action);
 
 signals:
 	//! Emitted when any action registered with this StelActionMgr is toggled

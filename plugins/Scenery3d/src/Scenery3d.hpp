@@ -74,52 +74,53 @@ class Scenery3d : public StelModule
 	Q_OBJECT
 
 	// toggle to switch it off completely.
-	Q_PROPERTY(bool enableScene  READ getEnableScene WRITE setEnableScene NOTIFY enableSceneChanged)
-	Q_PROPERTY(bool enablePixelLighting READ getEnablePixelLighting WRITE setEnablePixelLighting NOTIFY enablePixelLightingChanged)
-	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
-	Q_PROPERTY(bool useSimpleShadows READ getUseSimpleShadows WRITE setUseSimpleShadows NOTIFY useSimpleShadowsChanged)
-	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
+	Q_PROPERTY(bool enableScene                  READ getEnableScene            WRITE setEnableScene           NOTIFY enableSceneChanged)
+	Q_PROPERTY(bool enablePixelLighting          READ getEnablePixelLighting    WRITE setEnablePixelLighting   NOTIFY enablePixelLightingChanged)
+	Q_PROPERTY(bool enableShadows                READ getEnableShadows          WRITE setEnableShadows         NOTIFY enableShadowsChanged)
+	Q_PROPERTY(bool useSimpleShadows             READ getUseSimpleShadows       WRITE setUseSimpleShadows      NOTIFY useSimpleShadowsChanged)
+	Q_PROPERTY(bool enableBumps                  READ getEnableBumps            WRITE setEnableBumps           NOTIFY enableBumpsChanged)
 	Q_PROPERTY(S3DEnum::ShadowFilterQuality shadowFilterQuality READ getShadowFilterQuality WRITE setShadowFilterQuality NOTIFY shadowFilterQualityChanged)
-	Q_PROPERTY(bool enablePCSS READ getEnablePCSS WRITE setEnablePCSS NOTIFY enablePCSSChanged)
-	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode NOTIFY cubemappingModeChanged)
-	Q_PROPERTY(bool useFullCubemapShadows READ getUseFullCubemapShadows WRITE setUseFullCubemapShadows NOTIFY useFullCubemapShadowsChanged)
-	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
-	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
-	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
-	Q_PROPERTY(float torchStrength READ getTorchStrength WRITE setTorchStrength NOTIFY torchStrengthChanged)
-	Q_PROPERTY(float torchRange READ getTorchRange WRITE setTorchRange NOTIFY torchRangeChanged)
-	Q_PROPERTY(bool enableLazyDrawing READ getEnableLazyDrawing WRITE setEnableLazyDrawing NOTIFY enableLazyDrawingChanged)
-	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
-	Q_PROPERTY(bool onlyDominantFaceWhenMoving READ getOnlyDominantFaceWhenMoving WRITE setOnlyDominantFaceWhenMoving NOTIFY onlyDominantFaceWhenMovingChanged)
-	Q_PROPERTY(bool secondDominantFaceWhenMoving READ getSecondDominantFaceWhenMoving WRITE setSecondDominantFaceWhenMoving NOTIFY secondDominantFaceWhenMovingChanged)
-	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
-	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
-	Q_PROPERTY(QString currentSceneID READ getCurrentSceneID NOTIFY currentSceneIDChanged STORED false)
-	Q_PROPERTY(QString loadingSceneID READ getLoadingSceneID NOTIFY loadingSceneIDChanged STORED false)
+	Q_PROPERTY(bool enablePCSS                   READ getEnablePCSS             WRITE setEnablePCSS            NOTIFY enablePCSSChanged)
+	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode       NOTIFY cubemappingModeChanged)
+	Q_PROPERTY(bool useFullCubemapShadows        READ getUseFullCubemapShadows  WRITE setUseFullCubemapShadows NOTIFY useFullCubemapShadowsChanged)
+	Q_PROPERTY(bool enableDebugInfo              READ getEnableDebugInfo        WRITE setEnableDebugInfo       NOTIFY enableDebugInfoChanged)
+	Q_PROPERTY(bool enableLocationInfo           READ getEnableLocationInfo     WRITE setEnableLocationInfo    NOTIFY enableLocationInfoChanged)
+	Q_PROPERTY(bool forceHorizonPolyline         READ getForceHorizonPolyline   WRITE setForceHorizonPolyline  NOTIFY forceHorizonPolylineChanged)
+	Q_PROPERTY(bool enableTorchLight             READ getEnableTorchLight       WRITE setEnableTorchLight      NOTIFY enableTorchLightChanged)
+	Q_PROPERTY(float torchStrength               READ getTorchStrength          WRITE setTorchStrength         NOTIFY torchStrengthChanged)
+	Q_PROPERTY(float torchRange                  READ getTorchRange             WRITE setTorchRange            NOTIFY torchRangeChanged)
+	Q_PROPERTY(bool enableLazyDrawing            READ getEnableLazyDrawing      WRITE setEnableLazyDrawing     NOTIFY enableLazyDrawingChanged)
+	Q_PROPERTY(double lazyDrawingInterval        READ getLazyDrawingInterval    WRITE setLazyDrawingInterval   NOTIFY lazyDrawingIntervalChanged)
+	Q_PROPERTY(bool onlyDominantFaceWhenMoving   READ getOnlyDominantFaceWhenMoving    WRITE setOnlyDominantFaceWhenMoving   NOTIFY onlyDominantFaceWhenMovingChanged)
+	Q_PROPERTY(bool secondDominantFaceWhenMoving READ getSecondDominantFaceWhenMoving  WRITE setSecondDominantFaceWhenMoving NOTIFY secondDominantFaceWhenMovingChanged)
+	Q_PROPERTY(uint cubemapSize                  READ getCubemapSize            WRITE setCubemapSize   NOTIFY cubemapSizeChanged)
+	Q_PROPERTY(uint shadowmapSize                READ getShadowmapSize          WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
+	Q_PROPERTY(QString currentSceneID            READ getCurrentSceneID         NOTIFY currentSceneIDChanged STORED false)
+	Q_PROPERTY(QString loadingSceneID            READ getLoadingSceneID         NOTIFY loadingSceneIDChanged STORED false)
 
 	//these properties are only valid after init() has been called
-	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported)
-	Q_PROPERTY(bool areShadowsSupported READ getAreShadowsSupported)
-	Q_PROPERTY(bool isShadowFilteringSupported READ getIsShadowFilteringSupported)
-	Q_PROPERTY(bool isANGLE READ getIsANGLE)
-	Q_PROPERTY(uint maximumFramebufferSize READ getMaximumFramebufferSize)
+	Q_PROPERTY(bool isGeometryShaderSupported    READ getIsGeometryShaderSupported)
+	Q_PROPERTY(bool areShadowsSupported          READ getAreShadowsSupported)
+	Q_PROPERTY(bool isShadowFilteringSupported   READ getIsShadowFilteringSupported)
+	Q_PROPERTY(bool isANGLE                      READ getIsANGLE)
+	Q_PROPERTY(uint maximumFramebufferSize       READ getMaximumFramebufferSize)
 
 public:
     Scenery3d();
-    virtual ~Scenery3d();
+    virtual ~Scenery3d() Q_DECL_OVERRIDE;
 
     //StelModule members
-    virtual void init();
-    virtual void deinit();
-    virtual void draw(StelCore* core);
-    virtual void update(double deltaTime);
-    virtual double getCallOrder(StelModuleActionName actionName) const;
-    virtual bool configureGui(bool show);
+    virtual void init() Q_DECL_OVERRIDE;
+    virtual void deinit() Q_DECL_OVERRIDE;
+    virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+    virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+    virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+    virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
     //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
     //! To allow fine control, zoom in.
     //! If you release Ctrl key while pressing cursor key, movement will continue.
-    virtual void handleKeys(QKeyEvent* e);
+    virtual void handleKeys(QKeyEvent* e) Q_DECL_OVERRIDE;
 
     //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
     void updateProgress(const QString& str, int val, int min, int max) const;
@@ -135,6 +136,7 @@ signals:
     void useFullCubemapShadowsChanged(const bool val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
+    void forceHorizonPolylineChanged(const bool val);
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
     void torchRangeChanged(const float val);
@@ -216,6 +218,12 @@ public slots:
     //! Set to true to show the current standing positin as text on screen.
     void setEnableLocationInfo(const bool enableLocationInfo);
     bool getEnableLocationInfo() const;
+
+    //! Set the overdrawing of a landscape (horizon) polygon after the 3D scenery.
+    //! This shows the difference (error) between our planar (tangential plane) modelling and effects of earth curvature.
+    //! The landscape has to include such a polygon, of course.
+    void setForceHorizonPolyline(const bool forcePolyline);
+    bool getForceHorizonPolyline() const;
 
     //! Set to true to add an additional light source centered at the current position, useful in night scenes.
     void setEnableTorchLight(const bool enableTorchLight);
@@ -335,6 +343,7 @@ private:
     Vec3f textColor;
     QFont font;
     QString currentMessage;
+    bool forceHorizonPolyline; // if true, the LandscapeMgr is called after scene rendering to repeat rendering the landscape polygon, if one has been defined in the current Landscape.
 
     volatile bool loadCancel;
     StelProgressController* progressBar;

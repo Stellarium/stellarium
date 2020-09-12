@@ -131,7 +131,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
@@ -242,7 +242,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		}
 		else
 		{
-			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			RCMag rcMag;
 
 			sd->preDrawPointSource(&painter);

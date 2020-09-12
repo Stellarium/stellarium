@@ -183,7 +183,6 @@ dso_nebula_color                    = 0.1,1.0,0.1
 dso_dark_nebula_color               = 0.3,0.3,0.3
 dso_cluster_color                   = 1.0,1.0,0.1
 
-star_label_color                    = 0.4,0.3,0.5
 planet_names_color                  = 0.5,0.5,0.7
 planet_orbits_color                 = 0.7,0.2,0.2
 planet_pointers_color               = 1.0,0.3,0.3

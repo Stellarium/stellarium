@@ -44,7 +44,7 @@ bool ShortcutLineEdit::isEmpty() const
 void ShortcutLineEdit::clear()
 {
 	keys.clear();
-	QLineEdit::clear();
+	QLineEdit::setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	emit contentsChanged();
 }
 

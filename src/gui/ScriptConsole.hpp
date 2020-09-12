@@ -51,8 +51,12 @@ private slots:
 	void includeBrowse();
 	void quickRun(int idx);
 	void rowColumnChanged();
+	void setDirty();
 
 	void setFlagUserDir(bool b);
+	void setFlagHideWindow(bool b);
+	void setFlagClearOutput(bool b);
+	void populateQuickRunList();
 	
 protected:
 	Ui_scriptConsoleForm* ui;
@@ -64,8 +68,26 @@ private:
 	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
 	bool useUserDir;
+	bool hideWindowAtScriptRun;
+	bool clearOutput;
+
+	// The script editor FSM has four states: dirty (t/f), file name.
+	// Input events are: buttons load, save, clear and keyboard input.
+	// Actions are ld/sv: a file, fn: set file name, cb: clear buffer
+	// and pre: preprocessing.
+	//           load     kbd  save       cb        pre
+	// 1: f/-   2|ld      3|-  2|sv,fn    1|cb      3: t/-
+	// 2: f/fn  2|ld      4|-  3|no-op    1|cb      3: t/-
+	// 3: t/-   Y: 2|ld   3|-  2|sv,fn    Y: 1|cb   3: t/-
+	//          N: 3|--                   N: 3|-
+	// 4: t/fn  Y: 2|ld   4|-  2|sv       Y: 1|cb   3: t/-
+	//  	    N: 4|--                   N: 4|-
+	QString scriptFileName;
+	bool isNew;
+	bool dirty;
 
 	bool getFlagUserDir() { return useUserDir; }
 };
 
 #endif // _SCRIPTCONSOLE_HPP
+

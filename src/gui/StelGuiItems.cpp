@@ -427,9 +427,14 @@ void BottomStelBar::setFontSizeFromApp(int size)
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
-	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
-	if (skyGui)
-		skyGui->updateBarsPos();
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
 }
 
 //! connect from StelApp to resize fonts on the fly.
@@ -440,9 +445,14 @@ void BottomStelBar::setFont(QFont font)
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
-	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
-	if (skyGui)
-		skyGui->updateBarsPos();
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
 }
 
 BottomStelBar::~BottomStelBar()
@@ -757,8 +767,13 @@ void BottomStelBar::updateText(bool updatePos)
 			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 		else
 		{
-			//TRANSLATORS: Unit of measure for distance - meter
-			newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+			if (loc->name.contains("->")) // a spaceship
+				newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
+			else
+			{
+				//TRANSLATORS: Unit of measure for distance - meter
+				newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+			}
 		}
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
@@ -791,7 +806,10 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			rho = q_("planetocentric observer");
 
-		location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
+		if (newLocation.contains("->")) // a spaceship
+			location->setToolTip(QString());
+		else
+			location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));

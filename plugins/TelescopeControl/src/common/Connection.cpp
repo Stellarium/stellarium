@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Connection.hpp"
 #include "Server.hpp"
 #include "LogFile.hpp"
+#include "StelUtils.hpp"
 
 using namespace std;
 
@@ -136,7 +137,7 @@ void Connection::performWriting(void)
 		if (ERRNO != EINTR && ERRNO != EAGAIN)
 		{
 			*log_file << Now() << "Connection::performWriting: writeNonblocking failed: "
-			                   << STRERROR(ERRNO) << endl;
+					   << STRERROR(ERRNO) << StelUtils::getEndLineChar();
 		hangup();
 		}
 	}
@@ -150,7 +151,7 @@ void Connection::performWriting(void)
 			                   << rc << "; ";
 			for (int i = 0; i < rc; i++)
 				*log_file << write_buff[i];
-			*log_file << endl;
+			*log_file << StelUtils::getEndLineChar();
 		}
 	#endif
 		if (rc >= to_write)
@@ -176,13 +177,13 @@ void Connection::performReading(void)
 		if (ERRNO == ECONNRESET)
 		{
 			*log_file << Now() << "Connection::performReading: "
-			                      "client has closed the connection" << endl;
+					      "client has closed the connection" << StelUtils::getEndLineChar();
 			hangup();
 		} 
 		else if (ERRNO != EINTR && ERRNO != EAGAIN)
 		{
 			*log_file << Now() << "Connection::performReading: readNonblocking failed: "
-			                   << STRERROR(ERRNO) << endl;
+					   << STRERROR(ERRNO) << StelUtils::getEndLineChar();
 			hangup();
 		}
 	} 
@@ -191,7 +192,7 @@ void Connection::performReading(void)
 		if (isTcpConnection())
 		{
 			*log_file << Now() << "Connection::performReading: "
-			                      "client has closed the connection" << endl;
+					      "client has closed the connection" << StelUtils::getEndLineChar();
 			hangup();
 		}
 	}
@@ -204,7 +205,7 @@ void Connection::performReading(void)
 			                   << rc << "; ";
 			for (int i = 0; i < rc; i++)
 				*log_file << read_buff_end[i];
-			*log_file << endl;
+			*log_file << StelUtils::getEndLineChar();
 		}
 	#endif
 	
@@ -214,13 +215,13 @@ void Connection::performReading(void)
 		if (p >= read_buff_end)
 		{
 			// everything handled
-			//*log_file << Now() << "Connection::performReading: everything handled" << endl;
+			//*log_file << Now() << "Connection::performReading: everything handled" << StelUtils::getEndLineChar();
 			read_buff_end = read_buff;
 		}
 		else if (p > read_buff)
 		{
 			//*log_file << Now() << "Connection::performReading: partly handled: "
-			//          << (p-read_buff) << endl;
+			//          << (p-read_buff) << StelUtils::getEndLineChar();
 			// partly handled
 			memmove(read_buff, p, static_cast<size_t>(read_buff_end - p));
 			read_buff_end -= (p - read_buff);
@@ -237,7 +238,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 		if (size > static_cast<int>(sizeof(read_buff)) || size < 4)
 		{
 			*log_file << Now() << "Connection::dataReceived: "
-		                              "bad packet size: " << size << endl;
+					      "bad packet size: " << size << StelUtils::getEndLineChar();
 			hangup();
 			return;
 		}
@@ -257,7 +258,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 				if (size < 12)
 				{
 					*log_file << Now() << "Connection::dataReceived: "
-					                      "type 0: bad packet size: " << size << endl;
+							      "type 0: bad packet size: " << size << StelUtils::getEndLineChar();
 					hangup();
 					return;
 				}
@@ -284,7 +285,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 				#ifdef DEBUG5
 				*log_file << Now() << "Connection::dataReceived: "
 				                   << PrintRaDec(ra_int, dec_int)
-				                   << endl;
+						   << StelUtils::getEndLineChar();
 				#endif
 				
 				server.gotoReceived(ra_int, dec_int);
@@ -297,7 +298,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 				          << "Connection::dataReceived: "
 				             "ignoring unknown packet, type: "
 				          << type
-				          << endl;
+					  << StelUtils::getEndLineChar();
 			break;
 		}
 		
@@ -312,7 +313,7 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 	#ifdef DEBUG5
 		*log_file << Now() << "Connection::sendPosition: "
 		                   << PrintRaDec(ra_int, dec_int)
-		                   << endl;
+				   << StelUtils::getEndLineChar();
 	#endif
 	if (write_buff_end - write_buff + 24 < static_cast<int>(sizeof(write_buff)))
 	{
@@ -352,7 +353,7 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 		{
 			*log_file << Now() << "Connection::sendPosition: "
 			                      "communication is too slow, I will ignore this command"
-			                   << endl;
+					   << StelUtils::getEndLineChar();
 		}
 	}
 }

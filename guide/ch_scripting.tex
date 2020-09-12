@@ -2,6 +2,8 @@
 \chapter{Scripting}
 \label{ch:scripting}
 
+\sectionauthor*{Alexander Wolf, with additions by Wolfgang Laun}
+
 \section{Introduction}
 \label{sec:scripting:introduction}
 
@@ -45,12 +47,51 @@ with the \command{output()} command.  You can call all public slots
 which are documented in the scripting API documentation\footnote{
 \url{http://www.stellarium.org/doc/\StelSeries/scripting.html}}.
 
-\section{Script Console}
+% Section 2020-03-26 by Wolfgang Laun
+\section{The Script Console}
 \label{sec:scripting:console}
-It is possible to open, edit run and save scripts using the script
-console window. To toggle the script console, press \key{F12}. The
-script console also provides an output window in which script
-debugging output is visible. 
+It is possible to load, edit, run and save scripts using the script
+console window. To toggle the script console, press \key{F12}.  
+
+\subsection{The Tabs in the Console}
+
+The three tabs ``Script'', ``Log'' and ``Output'' each provide a text
+field. In the ``Script'' text field you can edit a script,
+which can be loaded from and saved to a file, and executed. The ``Log''
+text field receives all errors and other messages resulting from the
+script's execution; the ``Output'' text field will show the results of
+\texttt{core.output()} function calls. 
+
+\subsection{The Menu Bar}
+
+The menu bar contains buttons for loading and saving a script. A file
+dialog is shown for selecting the file. The ``clear'' button lets you
+clear the contents of the text field in the currently selected tab.
+The drop-down menu ``Execute:'' offers a selection of menu entries, mainly
+intended to let you restore the sky to a clean state. The entry
+``selected text as script'' executes selected text in the ``Script'' text
+field. Entries ``remove screen text'', ``remove screen images'' and 
+``remove screen markers'' remove labels, images and markers, respectively,
+that may have been shown on the screen. Each of the ``clear map'' entries
+results in a call to \texttt{core.clear()}, using one of the arguments
+``natural'', ``starchart'', ``deepspace'', ``galactic'' or ``supergalactic''.
+These calls reset Stellarium's state, resulting in a basic state
+of the display and providing a clean starting point for another run of
+your script.
+
+The button SSC runs the Stellarium Script Preprocessor with the script in the text
+field as input and produces an output by recursively inserting all
+included scripts into the text.
+\emph{This output replaces the contents of the Script text field.}
+
+\subsection{German Keyboards}
+
+There is a glitch in the keyboard module of the underlying system that
+is responsible for keyboard handling. It affects users of Windows and
+Linux systems with a German, and probably also other international
+keyboards: The key combinations \key{AltGr+8} and \key{AltGr+9} cannot
+be used for typing \verb+[+ and \verb+]+. You need to work around by
+copy-pasting these two characters.
 
 \section{Includes}
 \label{sec:scripting:includes}

@@ -388,11 +388,7 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		return;
 	}
 
-	int p = static_cast<int>(100.f*tot/(tot+toBeLoaded));
-	if (p>100)
-		p=100;
-	if (p<0)
-		p=0;
+	const int p = qBound(0, static_cast<int>(100.f*tot/(tot+toBeLoaded)), 100);
 	if (p==100 || p==0)
 	{
 		if (loadingState==true)

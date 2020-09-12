@@ -119,7 +119,6 @@ void ObservabilityDialog::createDialogContent()
 	        this, SLOT(updateControls()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        plugin, SLOT(saveConfiguration()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();

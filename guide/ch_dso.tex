@@ -55,7 +55,7 @@ gzip -nc catalog.pack > catalog.dat
 \end{commands}
 
 Stellarium DSO Catalog contains data and supports the designations for
-follow catalogues:
+follow catalogues\footnote{Abell Catalog of Planetary Nebulae has been added in v0.18.2 and removed in v0.20.1}:
 
 \begin{description}[align=right,labelwidth=2cm]
 \item[\textbf{NGC}]  New General Catalogue 
@@ -64,7 +64,7 @@ follow catalogues:
 \item[\textbf{C}] Caldwell Catalogue 
 \item[\textbf{B}] Barnard Catalogue~\citep{1927cdos.book.....B} 
 \item[\textbf{SH2}] Sharpless Catalogue~\citep{1959ApJS....4..257S} 
-\item[\textbf{VdB}] Van den Bergh Catalogue of reflection nebulae~\citep{1966AJ.....71..990V} 
+\item[\textbf{vdB}] van den Bergh Catalogue of reflection nebulae~\citep{1966AJ.....71..990V} 
 \item[\textbf{RCW}]  A catalogue of H$\alpha$-emission regions in the southern Milky Way~\citep{1960MNRAS.121..103R} 
 \item[\textbf{LDN}]  Lynds' Catalogue of Dark Nebulae~\citep{1962ApJS....7....1L} 
 \item[\textbf{LBN}]  Lynds' Catalogue of Bright Nebulae~\citep{1965ApJS...12..163L} 
@@ -78,12 +78,15 @@ follow catalogues:
 \item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\citep{2001A&A...378..843K}\newFeature{V0.16.0}
 \item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae~\citep{1992secg.book.....A}\newFeature{V0.16.1}
 \item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\citep{2014yCat.7272....0G}\newFeature{V0.16.1}
-\item[\textbf{ACO}]  A Catalog of Rich Clusters of Galaxies~\citep{1989ApJS...70....1A}\newFeature{V0.16.1}
+\item[\textbf{Abell}]  A Catalog of Rich Clusters of Galaxies~\citep{1989ApJS...70....1A}\newFeature{V0.16.1}
 \item[\textbf{HCG}]  Atlas of compact groups of galaxies~\citep{1993ApL....29....1H}\newFeature{V0.18.0}
-\item[\textbf{Abell}]  Abell Catalog of Planetary Nebulae~\citep{1966ApJ...144..259A}\newFeature{V0.18.2}
 \item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{V0.18.2}
-\item[\textbf{VdBH}]  Catalogue of southern stars embedded in nebulosity~\citep{1975AJ.....80..208V}\newFeature{V0.19.2}
+\item[\textbf{vdBH}]  Catalogue of southern stars embedded in nebulosity~\citep{1975AJ.....80..208V}\newFeature{V0.19.2}
 \item[\textbf{DWB}]  Catalogue and distances of optically visible H II regions~\citep{1969A&A.....1..270D}\newFeature{V0.19.2}
+\item[\textbf{Tr}]  Trumpler Catalogue\newFeature{V0.20.2}
+\item[\textbf{St}]  Stock Catalogue\newFeature{V0.20.2}
+\item[\textbf{Ru}]  Ruprecht Catalogue\newFeature{V0.20.2}
+\item[\textbf{vdB-Ha}]  van den Bergh-Hagen Catalogue~\citep{1975AJ.....80...11V}\newFeature{V0.20.2}
 \end{description}
 
 \noindent Cross-index data for Stellarium's DSO Catalog is partially obtained from 
@@ -92,6 +95,8 @@ SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr
 and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
 
 \noindent Distances for some deep-sky objects obtained from \citetp{2008ApJ...689..194S}, \citetp{2007ApJ...670..363H}, \citetp{1995A&AS..113..325H} and \citetp{1996AJ....112.1487H}.
+
+\noindent Morphological class for many open clusters obtaunded from \citetp{1966BAICz..17...33R}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -129,7 +134,7 @@ fields with \emph{tab} char as delimiter:
 20 & integer & C number (Caldwell Catalogue)\\
 21 & integer & B number (Barnard Catalogue)\\
 22 & integer & SH2 number (Sharpless Catalogue)\\
-23 & integer & VdB number (van den Bergh Catalogue of reflection nebulae)\\
+23 & integer & vdB number (van den Bergh Catalogue of reflection nebulae)\\
 24 & integer & RCW number (A catalogue of H$\alpha$-emission regions in the southern Milky Way)\\
 25 & integer & LDN number (Lynds' Catalogue of Dark Nebulae)\\
 26 & integer & LBN number (Lynds' Catalogue of Bright Nebulae)\\
@@ -143,12 +148,15 @@ fields with \emph{tab} char as delimiter:
 34 & string  & PK identificator (Catalogue of Galactic Planetary Nebulae)\\
 35 & string  & PN G identificator (The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae)\\
 36 & string  & SNR G identificator (A catalogue of Galactic supernova remnants)\\
-37 & string  & ACO identificator (A Catalog of Rich Clusters of Galaxies)\\
+37 & string  & Abell identificator (A Catalog of Rich Clusters of Galaxies)\\
 38 & string  & HCG identificator (Atlas of compact groups of galaxies)\\
-39 & string  & Abell identificator (Abell Catalog of Planetary Nebulae)\\
-40 & string  & ESO identificator (ESO/Uppsala Survey of the ESO(B) Atlas)\\
-41 & string  & VdBH identificator (Catalogue of southern stars embedded in nebulosity)\\
-42 & integer & DWB identificator (Catalogue and distances of optically visible H II regions)\\
+39 & string  & ESO identificator (ESO/Uppsala Survey of the ESO(B) Atlas)\\
+40 & string  & vdBH identificator (Catalogue of southern stars embedded in nebulosity)\\
+41 & integer & DWB identificator (Catalogue and distances of optically visible H II regions)\\
+42 & integer & Tr identificator (Trumpler Catalogue)\\
+43 & integer & St identificator (Stock Catalogue)\\
+44 & integer & Ru identificator (Ruprecht Catalogue)\\
+45 & indeger & vdB-Ha identificator (Uniform survey of clusters in the Southern Milky Way --- van den Bergh-Hagen Catalogue)\\
 \bottomrule
 \end{longtable}
 
@@ -508,6 +516,18 @@ introducing the completely automated image processing pipeline. It is
 also possible that if plate solving fails in the fully automated
 script, you could continue, using this  manual process:
 
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-1.jpg}
+\caption{Online plate solving}
+\label{fig:dso:adding_images:manual:plate-solving}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{dso-add-2.png}
+\caption{Python processing. If you just leave a space after \texttt{python WCS\_corners.py},
+you can drag and drop your \file{wcs.fits} file into Windows' Anaconda Prompt window.}
+\label{fig:dso:adding_images:manual:python}
+\end{figure}
+
 \begin{description}
 \item[Plate Solve]\mbox{}
   \begin{itemize}
@@ -546,19 +566,7 @@ script, you could continue, using this  manual process:
   View your image in Stellarium (and adjust \texttt{maxBrightness} in \file{textures.json} if needed)
 \end{description}
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.9\textwidth]{dso-add-1.jpg}
-\caption{Online plate solving}
-\label{fig:dso:adding_images:manual:plate-solving}
-\end{figure}
-\begin{figure}[htbp]
-\centering\includegraphics[width=\textwidth]{dso-add-2.png}
-\caption{Python processing. If you just leave a space after \texttt{python WCS\_corners.py},
-you can drag and drop your \file{wcs.fits} file into Windows' Anaconda Prompt window.}
-\label{fig:dso:adding_images:manual:python}
-\end{figure}
-
-\newpage
+%\newpage
 Some additional information you should be aware of:
 \begin{itemize}
 \item Images in Stellarium are NOT tied to an object, just placed on the sky by \texttt{worldCoords}

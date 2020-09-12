@@ -240,9 +240,10 @@ Where:
   elements, e.g.\ stars, are not drawn below this altitude to increase
   performance. Under certain circumstances you may want to specify
   something else here. (since v0.14.0)
-\item[\var{polygonal\_horizon\_inverted}] (optional, default=false) In
-  rare cases like horizon lines for high mountain peaks with many
-  negative horizon values this should be set to true. (since v0.15.0)
+\item[\var{polygonal\_horizon\_inverted}] (optional, default=false;
+  only required in v0.15.0--0.20.2) In rare cases like horizon lines
+  for high mountain peaks with many negative horizon values this
+  should be set to true.
 \end{description}
 
 \subsubsection{Artificial Polygonal Panoramas}
@@ -1546,6 +1547,20 @@ glow mostly towards the city of Vienna, where long-time exposures may
 already be saturated.
 
 The possibilities seem limited only by your time and skills!
+
+\section{Troubleshooting}
+\label{sec:landscapes:Troubleshooting}
+
+If something does not work as described and Stellarium does not show
+your landscape as expected but maybe just a bright magenta-colored
+box, don't panic.  Double and triple-check the entries in
+\file{landscape.ini}. \newFeature{v0.20.2} Make sure the texture is in
+PNG format and the file name is correct. Check the logfile for error
+messages. If the image is too large, it will be re-scaled on loading,
+but it is more efficient to keep images as small as required. Only few
+systems can use textures larger than $16384\times16384$~Pixels. If you
+need high resolution, use the \texttt{old\_style} type (see section
+\ref{sec:landscapes:oldStyle}).
 
 \section{Other recommended software}
 \label{sec:landscapes:otherSoftware}

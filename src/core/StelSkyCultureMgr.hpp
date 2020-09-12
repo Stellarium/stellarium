@@ -79,7 +79,7 @@ public:
 		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
 				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
 				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
 	};
 
 	//! English name
@@ -88,9 +88,9 @@ public:
 	QString author;
 	//! The license
 	QString license;
-	//! Type of the boundaries (-1=none;0=generic;1=own)
+	//! Type of the boundaries (enum)
 	BOUNDARIES boundaries;
-	//! Classification of sky culture (1=scientific;2=traditional;3=single;4=personal)
+	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
 };
 
@@ -159,6 +159,9 @@ public slots:
 
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
+
+	//! @return a localized HTML description of the references for the current sky culture
+	QString getCurrentSkyCultureHtmlReferences() const;
 
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display

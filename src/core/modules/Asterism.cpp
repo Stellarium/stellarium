@@ -62,14 +62,10 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
-	QString abb;
-	istr >> abb >> typeOfAsterism >> numberOfSegments;
+	// We allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
+	istr >> abbreviation >> typeOfAsterism >> numberOfSegments;
 	if (istr.status()!=QTextStream::Ok)
 		return false;
-
-	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	//abbreviation = abb.toUpper();
-	abbreviation=abb;
 
 	StelCore *core = StelApp::getInstance().getCore();
 	asterism = new StelObjectP[numberOfSegments*2];
@@ -84,8 +80,6 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				istr >> HP;
 				if(HP == 0)
 				{
-					// TODO: why is this delete commented?
-					// delete[] asterism;
 					return false;
 				}
 				asterism[i]=starMgr->searchHP(static_cast<int>(HP));

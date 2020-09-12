@@ -24,6 +24,7 @@
 #include "tests/testSiderealTime.hpp"
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include "Orbit.hpp"
 
 QTEST_GUILESS_MAIN(TestSiderealTime)
 
@@ -144,7 +145,7 @@ void TestSiderealTime::testSiderealPeriodComputations()
 	{
 		double distance = data.takeFirst().toDouble();
 		double exPeriod = data.takeFirst().toDouble();
-		double period = StelUtils::calculateSiderealPeriod(distance);
+		double period = KeplerOrbit::calculateSiderealPeriod(distance, 1.);
 
 		QVERIFY2(qAbs(period-exPeriod)<=acceptableError, qPrintable(QString("Sidereal period is %1 days for %2 AU (expected %3 days)")
 									.arg(QString::number(period, 'f', 6))

@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "SerialPort.hpp"
 #include "LogFile.hpp"
+#include "StelUtils.hpp"
 
 #ifndef Q_OS_WIN
 #include <unistd.h>
@@ -44,7 +45,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-		                      "CreateFile() failed: " << GetLastError() << endl;
+				      "CreateFile() failed: " << GetLastError() << StelUtils::getEndLineChar();
 	}
 	else
 	{
@@ -57,14 +58,14 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 		if (!SetCommTimeouts(handle, &timeouts))
 		{
 			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-			                      "SetCommTimeouts() failed: " << GetLastError() << endl;
+					      "SetCommTimeouts() failed: " << GetLastError() << StelUtils::getEndLineChar();
 		}
 		else
 		{
 			if (!GetCommState(handle, &dcb_original))
 			{
 				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				                      "GetCommState() failed: " << GetLastError() << endl;
+						      "GetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
 			}
 			else
 			{
@@ -74,14 +75,14 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				if (!BuildCommDCB("9600,n,8,1", &dcb))
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-						              "BuildCommDCB() failed: " << GetLastError() << endl;
+							      "BuildCommDCB() failed: " << GetLastError() << StelUtils::getEndLineChar();
 				}
 				else
 				{
 					if (!SetCommState(handle,&dcb))
 					{
 						*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-							              "SetCommState() failed: " << GetLastError() << endl;
+								      "SetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
 					}
 					else
 					{
@@ -99,21 +100,21 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	if (fd < 0)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-		                      "open() failed: " << strerror(errno) << endl;
+				      "open() failed: " << strerror(errno) << StelUtils::getEndLineChar();
 	}
 	else
 	{
 		if (SETNONBLOCK(fd) < 0)
 		{
 			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-			                      "fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO) << endl;
+					      "fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO) << StelUtils::getEndLineChar();
 		}
 		else
 		{
 			if (tcgetattr(fd,&termios_original) < 0)
 			{
 				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				                      "tcgetattr failed: " << strerror(errno) << endl;
+						      "tcgetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
 			}
 			else
 			{
@@ -130,7 +131,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				if (tcsetattr(fd,TCSAFLUSH,&termios_new) < 0)
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-					                      "tcsetattr failed: " << strerror(errno) << endl;
+							      "tcsetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
 				}
 				else
 				{

@@ -1,185 +1,204 @@
 <RCC>
     <qresource prefix="/graphicGui">
-        <file>tabicon-time.png</file>
-        <file>tabicon-extras.png</file>
-        <file>tabicon-surveys.png</file>
-        <file>tabicon-AstroCalc-AltVsTime-active.png</file>
-        <file>tabicon-AstroCalc-AltVsTime.png</file>
-        <file>tabicon-AstroCalc-Eclipses-active.png</file>
-        <file>tabicon-AstroCalc-Eclipses.png</file>
-        <file>tabicon-AstroCalc-Ephemeris-active.png</file>
-        <file>tabicon-AstroCalc-Ephemeris.png</file>
-        <file>tabicon-AstroCalc-Phenomena-active.png</file>
-        <file>tabicon-AstroCalc-Phenomena.png</file>
-        <file>tabicon-AstroCalc-PlanetPos-active.png</file>
-        <file>tabicon-AstroCalc-PlanetPos.png</file>
-        <file>tabicon-AstroCalc-CelPos.png</file>
-        <file>tabicon-AstroCalc-WhatsUp-active.png</file>
-        <file>tabicon-AstroCalc-WhatsUp.png</file>
-        <file>tabicon-AstroCalc-Graphs-active.png</file>
-        <file>tabicon-AstroCalc-Graphs.png</file>
-        <file>tabicon-AstroCalc-PC-active.png</file>
-        <file>tabicon-AstroCalc-PC.png</file>
-        <file>btBookmarksA-off.png</file>
-        <file>btBookmarksA-on.png</file>
-        <file>btBookmarksB-off.png</file>
-        <file>btBookmarksB-on.png</file>
-        <file>tabicon-scripts.png</file>
-        <file>btScriptStop-off.png</file>
-        <file>btScriptStop-on.png</file>
-        <file>btScriptRun-on.png</file>
-        <file>btScriptRun-off.png</file>
-        <file>folder.png</file>
-        <file>nv_folder.png</file>
-        <file>spindown-pressed.png</file>
-        <file>spinleft-pressed.png</file>
-        <file>spinright-pressed.png</file>
-        <file>spinup-pressed.png</file>
-        <file>tabicon-tools.png</file>
-        <file>tabicon-navigation.png</file>
-        <file>tabicon-main.png</file>
-        <file>map-pointeur.png</file>
-        <file>tabicon-info.png</file>
-        <file>tabicon-help.png</file>
-        <file>filesave.png</file>
-        <file>tabicon-landscape-active.png</file>
-        <file>tabicon-markings-active.png</file>
-        <file>searchBoxBackground.png</file>
-        <file>nv_searchBoxBackground.png</file>
-        <file>searchButtonImage.png</file>
-        <file>nv_searchButtonImage.png</file>
-        <file>tabicon-sky-active.png</file>
-        <file>tabicon-starlore-active.png</file>
-        <file>btFlipHorizontal-off.png</file>
-        <file>tabicon-landscape.png</file>
-        <file>tabicon-images.png</file>
-        <file>tabicon-logs.png</file>
-        <file>tabicon-starlore.png</file>
-        <file>tabicon-sky.png</file>
-        <file>tabicon-deep-sky.png</file>
-        <file>tabicon-markings.png</file>
-        <file>btFlipHorizontal-on.png</file>
-        <file>btFlipVertical-off.png</file>
-        <file>btFlipVertical-on.png</file>
-        <file>nv_checkbox-checked.png</file>
-        <file>closeButton.png</file>
-        <file>closeButton-hover.png</file>
-        <file>nv_closeButton.png</file>
-        <file>nv_closeButton-hover.png</file>
-        <file>nv_checkbox-unchecked.png</file>
-        <file>nv_radio-checked.png</file>
-        <file>nv_radio-unchecked.png</file>
-        <file>nv_resize.png</file>
-        <file>nv_spindown.png</file>
-        <file>nv_spinleft.png</file>
-        <file>nv_spinright.png</file>
-        <file>nv_spinup.png</file>
-        <file>btFullScreen-on.png</file>
-        <file>btFullScreen-off.png</file>
-        <file>btbg-left.png</file>
-        <file>btbg-middle.png</file>
-        <file>btbg-right.png</file>
-        <file>btbg-single.png</file>
-        <file>1-off-time.png</file>
-        <file>1-on-time.png</file>
-        <file>2-off-location.png</file>
-        <file>2-on-location.png</file>
-        <file>3-off-sky.png</file>
-        <file>3-on-sky.png</file>
-        <file>4-off-skylore.png</file>
-        <file>4-on-skylore.png</file>
-        <file>5-off-labels.png</file>
-        <file>5-on-labels.png</file>
-        <file>6-off-search.png</file>
-        <file>6-on-search.png</file>
-        <file>7-off-plugins.png</file>
-        <file>7-on-plugins.png</file>
-        <file>8-off-settings.png</file>
-        <file>8-on-settings.png</file>
-        <file>9-off-help.png</file>
-        <file>9-on-help.png</file>
-        <file>11-off-AstroCalc.png</file>
-        <file>11-on-AstroCalc.png</file>
+        <file>bbtAstroCalc-off.png</file>
+        <file>bbtAstroCalc-on.png</file>
+        <file>bbtHelp-off.png</file>
+        <file>bbtHelp-on.png</file>
+        <file>bbtLocation-off.png</file>
+        <file>bbtLocation-on.png</file>
+        <file>bbtSearch-off.png</file>
+        <file>bbtSearch-on.png</file>
+        <file>bbtSettings-off.png</file>
+        <file>bbtSettings-on.png</file>
+        <file>bbtSky-off.png</file>
+        <file>bbtSky-on.png</file>
+        <file>bbtTime-off.png</file>
+        <file>bbtTime-on.png</file>
+        <file>btAsterismLabels-off.png</file>
+        <file>btAsterismLabels-on.png</file>
+        <file>btAsterismLines-off.png</file>
+        <file>btAsterismLines-on.png</file>
         <file>btAtmosphere-off.png</file>
         <file>btAtmosphere-on.png</file>
-        <file>btCardinalPoints-off.png</file>
-        <file>btAzimuthalGrid-on.png</file>
         <file>btAzimuthalGrid-off.png</file>
+        <file>btAzimuthalGrid-on.png</file>
+        <file>btbgLeft.png</file>
+        <file>btbgMiddle.png</file>
+        <file>btbgRight.png</file>
+        <file>btbgSingle.png</file>
+        <file>btBookmarks-off.png</file>
+        <file>btBookmarks-on.png</file>
+        <file>btCardinalPoints-off.png</file>
         <file>btCardinalPoints-on.png</file>
         <file>btConstellationArt-off.png</file>
         <file>btConstellationArt-on.png</file>
-        <file>btConstellationLabels-off.png</file>
-        <file>btConstellationLabels-on.png</file>
         <file>btConstellationBoundaries-off.png</file>
         <file>btConstellationBoundaries-on.png</file>
+        <file>btConstellationLabels-off.png</file>
+        <file>btConstellationLabels-on.png</file>
         <file>btConstellationLines-off.png</file>
         <file>btConstellationLines-on.png</file>
-        <file>btAsterismLines-off.png</file>
-        <file>btAsterismLines-on.png</file>
-        <file>btAsterismLabels-off.png</file>
-        <file>btAsterismLabels-on.png</file>
         <file>btDSS-off.png</file>
         <file>btDSS-on.png</file>
-        <file>btToastSurvey-off.png</file>
-        <file>btToastSurvey-on.png</file>
-        <file>btEquatorialGrid-off.png</file>
-        <file>btEquatorialGrid-on.png</file>
         <file>btEclipticGrid-off.png</file>
         <file>btEclipticGrid-on.png</file>
+        <file>btEquatorialGrid-off.png</file>
+        <file>btEquatorialGrid-on.png</file>
         <file>btEquatorialJ2000Grid-off.png</file>
         <file>btEquatorialJ2000Grid-on.png</file>
-        <file>btGalacticGrid-off.png</file>
-        <file>btGalacticGrid-on.png</file>
         <file>btEquatorialMount-off.png</file>
         <file>btEquatorialMount-on.png</file>
+        <file>btFlipHorizontal-off.png</file>
+        <file>btFlipHorizontal-on.png</file>
+        <file>btFlipVertical-off.png</file>
+        <file>btFlipVertical-on.png</file>
+        <file>btFullScreen-off.png</file>
+        <file>btFullScreen-on.png</file>
+        <file>btGalacticGrid-off.png</file>
+        <file>btGalacticGrid-on.png</file>
         <file>btGotoSelectedObject-off.png</file>
         <file>btGotoSelectedObject-on.png</file>
         <file>btGround-off.png</file>
         <file>btGround-on.png</file>
+        <file>btHIPS-off.png</file>
+        <file>btHIPS-on.png</file>
+        <file>btNebulaeBackground-off.png</file>
+        <file>btNebulaeBackground-on.png</file>
         <file>btNebula-off.png</file>
         <file>btNebula-on.png</file>
         <file>btNightView-off.png</file>
         <file>btNightView-on.png</file>
+        <file>btPlanets-off.png</file>
+        <file>btPlanets-on.png</file>
         <file>btQuit.png</file>
         <file>btTimeForward-off.png</file>
         <file>btTimeForward-on.png</file>
         <file>btTimeNow-off.png</file>
         <file>btTimeNow-on.png</file>
+        <file>btTimePause-on.png</file>
         <file>btTimeRealtime-off.png</file>
         <file>btTimeRealtime-on.png</file>
-        <file>nv_btTimeRealtime-off.png</file>
         <file>btTimeRewind-off.png</file>
         <file>btTimeRewind-on.png</file>
-        <file>btTimePause-on.png</file>
-        <file>btPlanets-off.png</file>
-        <file>btPlanets-on.png</file>
-        <file>checkbox-checked.png</file>
-        <file>checkbox-unchecked.png</file>
-        <file>glow.png</file>
-        <file>glow32x32.png</file>
-        <file>radio-checked.png</file>
-        <file>radio-unchecked.png</file>
-        <file>resize.png</file>
-        <file>spindown.png</file>
-        <file>spinup.png</file>
-        <file>spinright.png</file>
-        <file>spinleft.png</file>
-        <file>VerticalAutoHideOff.png</file>
-        <file>HorizontalAutoHideOn.png</file>
-        <file>HorizontalAutoHideOff.png</file>
-        <file>VerticalAutoHideOn.png</file>
-        <file>world.png</file>
+        <file>miscGlow32x32.png</file>
+        <file>miscGlow.png</file>
+        <file>miscHorAutoHide-off.png</file>
+        <file>miscHorAutoHide-on.png</file>
+        <file>miscVertAutoHide-off.png</file>
+        <file>miscVertAutoHide-on.png</file>
+        <file>miscWorldMap.png</file>
         <file>normalHtml.css</file>
         <file>normalStyle.css</file>
-        <file>tabicon-plugins.png</file>
-        <file>nv_filesave.png</file>
-        <file>backspace.png</file>
-        <file>checkbox-partial.png</file>
-        <file>nv_checkbox-partial.png</file>
-        <file>tabicon-AstroCalc-MonthlyElevation-active.png</file>
-        <file>tabicon-AstroCalc-MonthlyElevation.png</file>
-        <file>btSurveys-off.png</file>
-        <file>btSurveys-on.png</file>
-        <file>backspace-white.png</file>
+        <file>tabDSO.png</file>
+        <file>tabDSO-selected.png</file>
+        <file>tabEclipses.png</file>
+        <file>tabEclipses-selected.png</file>
+        <file>tabEphemeris.png</file>
+        <file>tabEphemeris-selected.png</file>
+        <file>tabExtras.png</file>
+        <file>tabExtras-selected.png</file>
+        <file>tabGraphs.png</file>
+        <file>tabGraphs-selected.png</file>
+        <file>tabHelp.png</file>
+        <file>tabHelp-selected.png</file>
+        <file>tabInfo.png</file>
+        <file>tabInfo-selected.png</file>
+        <file>tabLandscape.png</file>
+        <file>tabLandscape-selected.png</file>
+        <file>tabLogs.png</file>
+        <file>tabLogs-selected.png</file>
+        <file>tabMain.png</file>
+        <file>tabMain-selected.png</file>
+        <file>tabMarkings.png</file>
+        <file>tabMarkings-selected.png</file>
+        <file>tabPC.png</file>
+        <file>tabPC-selected.png</file>
+        <file>tabPhenomena.png</file>
+        <file>tabPhenomena-selected.png</file>
+        <file>tabPlanetPos.png</file>
+        <file>tabPlanetPos-selected.png</file>
+        <file>tabPlugins.png</file>
+        <file>tabPlugins-selected.png</file>
+        <file>tabScripts.png</file>
+        <file>tabScripts-selected.png</file>
+        <file>tabSky.png</file>
+        <file>tabSky-selected.png</file>
+        <file>tabSSO.png</file>
+        <file>tabSSO-selected.png</file>
+        <file>tabStarlore.png</file>
+        <file>tabStarlore-selected.png</file>
+        <file>tabSurveys.png</file>
+        <file>tabSurveys-selected.png</file>
+        <file>tabTime.png</file>
+        <file>tabTime-selected.png</file>
+        <file>tabTools.png</file>
+        <file>tabTools-selected.png</file>
+        <file>tabTransit.png</file>
+        <file>tabTransit-selected.png</file>
+        <file>tabWhatsUp.png</file>
+        <file>tabWhatsUp-selected.png</file>
+        <file>uibtAdd-disabled.png</file>
+        <file>uibtAdd.png</file>
+        <file>uibtBackspace-disabled.png</file>
+        <file>uibtBackspace.png</file>
+        <file>uibtClose-disabled.png</file>
+        <file>uibtClose.png</file>
+        <file>uibtCreate-disabled.png</file>
+        <file>uibtCreate.png</file>
+        <file>uibtDelete-disabled.png</file>
+        <file>uibtDelete.png</file>
+        <file>uibtDown-disabled.png</file>
+        <file>uibtDown.png</file>
+        <file>uibtDownload-disabled.png</file>
+        <file>uibtDownload.png</file>
+        <file>uibtEdit-disabled.png</file>
+        <file>uibtEdit.png</file>
+        <file>uibtFolder-disabled.png</file>
+        <file>uibtFolder.png</file>
+        <file>uibtProcess-disabled.png</file>
+        <file>uibtProcess.png</file>
+        <file>uibtRemove-disabled.png</file>
+        <file>uibtRemove.png</file>
+        <file>uibtSave-disabled.png</file>
+        <file>uibtSave.png</file>
+        <file>uibtSearch-disabled.png</file>
+        <file>uibtSearch.png</file>
+        <file>uibtSettings.png</file>
+        <file>uibtSettings-disabled.png</file>
+        <file>uibtStart-disabled.png</file>
+        <file>uibtStart.png</file>
+        <file>uibtStop-disabled.png</file>
+        <file>uibtStop.png</file>
+        <file>uibtUp-disabled.png</file>
+        <file>uibtUp.png</file>
+        <file>uibtTime.png</file>
+        <file>uieBackspaceInputButton.png</file>
+        <file>uieCheckbox-checked.png</file>
+        <file>uieCheckbox-checked-disabled.png</file>
+        <file>uieCheckbox-checked-hover.png</file>
+        <file>uieCheckbox-partial.png</file>
+        <file>uieCheckbox-partial-disabled.png</file>
+        <file>uieCheckbox-partial-hover.png</file>
+        <file>uieCheckbox-unchecked.png</file>
+        <file>uieCheckbox-unchecked-disabled.png</file>
+        <file>uieCheckbox-unchecked-hover.png</file>
+        <file>uieCloseButton-hover.png</file>
+        <file>uieCloseButton.png</file>
+        <file>uieMapPointer.png</file>
+        <file>uieRadio-checked.png</file>
+        <file>uieRadio-checked-disabled.png</file>
+        <file>uieRadio-checked-hover.png</file>
+        <file>uieRadio-unchecked.png</file>
+        <file>uieRadio-unchecked-disabled.png</file>
+        <file>uieRadio-unchecked-hover.png</file>
+        <file>uieSearchBoxBackground.png</file>
+        <file>uieSpindown.png</file>
+        <file>uieSpindown-pressed.png</file>
+        <file>uieSpinleft.png</file>
+        <file>uieSpinleft-pressed.png</file>
+        <file>uieSpinright.png</file>
+        <file>uieSpinright-pressed.png</file>
+        <file>uieSpinup.png</file>
+        <file>uieSpinup-pressed.png</file>
     </qresource>
 </RCC>

@@ -172,8 +172,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		QString name = pulsarName.isEmpty() ? QString("<h2>%1</h2>").arg(getDesignation()) : QString("<h2>%1 (%2)</h2>").arg(getNameI18n()).arg(getDesignation());
-		oss << name;
+		oss << "<h2>";
+		if (!getNameI18n().isEmpty())
+			oss << getNameI18n() << "< br />";
+		oss << getDesignation() << "</h2>";
 	}
 
 	if (flags&ObjectType)

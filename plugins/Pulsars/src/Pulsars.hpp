@@ -187,6 +187,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get the list of all pulsars.
+	const QList<PulsarP>& getAllPulsars() const {return psr;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Pulsars::UpdateState state);
@@ -354,6 +357,8 @@ private slots:
 	void downloadComplete(QNetworkReply * reply);
 
 	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveSettingsToConfig(); }
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");

@@ -112,7 +112,11 @@ void StelLogger::init(const QString& logFilePath)
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList pciLines = pciData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<pciLines.size(); i++)
 	{
 		if(pciLines.at(i).contains("VGA compatible controller"))
@@ -199,7 +203,11 @@ void StelLogger::init(const QString& logFilePath)
 	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList systemLines = systemData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
 		if(systemLines.at(i).contains("Model"))
@@ -229,7 +237,11 @@ void StelLogger::init(const QString& logFilePath)
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	#else
+	QStringList dmesgLines = dmesgData.split('\n', Qt::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<dmesgLines.size(); i++)
 	{
 		if (dmesgLines.at(i).contains("memory"))
@@ -301,53 +313,26 @@ void StelLogger::writeLog(QString msg)
 
 QString StelLogger::getMsvcVersionString(int ver)
 {
-	QString version;
-	switch(ver)
-	{
-		case 1310:
-			version = "MSVC++ 7.1 (Visual Studio 2003)";
-			break;
-		case 1400:
-			version = "MSVC++ 8.0 (Visual Studio 2005)";
-			break;
-		case 1500:
-			version = "MSVC++ 9.0 (Visual Studio 2008)";
-			break;
-		case 1600:
-			version = "MSVC++ 10.0 (Visual Studio 2010)";
-			break;
-		case 1700:
-			version = "MSVC++ 11.0 (Visual Studio 2012)";
-			break;
-		case 1800:
-			version = "MSVC++ 12.0 (Visual Studio 2013)";
-			break;
-		case 1900:
-			version = "MSVC++ 14.0 (Visual Studio 2015)";
-			break;
-		case 1910:
-			version = "MSVC++ 15.0 (Visual Studio 2017 RTW)";
-			break;
-		case 1911:
-			version = "MSVC++ 15.3 (Visual Studio 2017)";
-			break;
-		case 1912:
-			version = "MSVC++ 15.5 (Visual Studio 2017)";
-			break;
-		case 1913:
-			version = "MSVC++ 15.6 (Visual Studio 2017)";
-			break;
-		case 1914:
-			version = "MSVC++ 15.7 (Visual Studio 2017)";
-			break;
-		case 1915:
-			version = "MSVC++ 15.8 (Visual Studio 2017)";
-			break;
-		case 1916:
-			version = "MSVC++ 15.9 (Visual Studio 2017)";
-			break;
-		default:
-			version = "unknown MSVC++ version";
-	}
-	return version;
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
+	const QMap<int, QString> map = {
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"     },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"     },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"     },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"    },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"    },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"    },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"    },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"},
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"    },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"    },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"    },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"    },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"    },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"    },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"},
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"    },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"    },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"    },
+	};
+	return map.value(ver, "unknown MSVC++ version");
 }

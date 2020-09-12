@@ -31,6 +31,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "SolarSystem.hpp"
+#include "Orbit.hpp"
 
 #include <QDate>
 #include <QDebug>
@@ -118,7 +119,10 @@ void SolarSystemEditor::init()
 	{
 		//Make sure that a user ssystem_minor.ini actually exists
 		if (!cloneSolarSystemConfigurationFile())
+		{
+			qWarning() << "SolarSystemEditor: Cannot copy ssystem_minor.ini to user data directory. Plugin will not work.";
 			return;
+		}
 
 		mainWindow = new SolarSystemManagerWindow();
 	}
@@ -190,7 +194,7 @@ bool SolarSystemEditor::configureGui(bool show)
 void SolarSystemEditor::updateI18n()
 {
 	//The Solar System MUST be translated before updating the window
-	//TODO: Remove this if/when you merge this module in the Solar System module
+	//NOTE: Remove this if/when you merge this module in the Solar System module
 	solarSystem->updateI18n();
 }
 
@@ -234,7 +238,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile() const
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
 			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
-			         << endl << "Please remove the file manually.";
+				 << StelUtils::getEndLineChar() << "Please remove the file manually.";
 			return false;
 		}
 	}
@@ -543,9 +547,10 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
 	result.insert("type", "comet");
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func", "comet_orbit");
+	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -573,7 +578,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
 	result.insert("orbit_PericenterDistance", perihelionDistance);
 
-	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
+	double eccentricity = mpcParser.cap(8).toDouble(&ok);//NOT degrees, but without dimension.
 	result.insert("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
@@ -589,11 +594,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	if (eccentricity < 1.0)
 	{
 		// Heafner, Fundamental Ephemeris Computations, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
-		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day (0.01720209895 is Gaussian gravitational constant (symbol k))
+		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
-		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
-		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
+		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.		
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
@@ -605,8 +610,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double slopeParameter = mpcParser.cap(16).toDouble(&ok);
 	result.insert("slope_parameter", slopeParameter);
 
-	double radius = 5; //Fictitious default assumption
-	result.insert("radius", radius);
+	result.insert("radius", 5); //Fictitious default assumption
 	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
 	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
@@ -726,9 +730,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun");	 // 0.16: omit obvious default.
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func","comet_orbit");
+	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
@@ -828,7 +833,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
+		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)
@@ -839,14 +844,14 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		objectType = "cubewano";
 
 	// Calculate perihelion
-	float r = (1 - eccentricity)*semiMajorAxis;
+	const double q = (1 - eccentricity)*semiMajorAxis;
 
 	// Scattered disc objects
-	if (r > 35)
+	if (q > 35)
 		objectType = "scattered disc object";
 
 	// Sednoids [https://en.wikipedia.org/wiki/Planet_Nine]
-	if (r > 30 && semiMajorAxis > 250)
+	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
 	//Radius and albedo
@@ -911,8 +916,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
 QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const
@@ -965,8 +968,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
@@ -1041,10 +1042,10 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			if (name.isEmpty())
 				continue;
 
-			output << endl << QString("[%1]").arg(sectionName) << endl;
+			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (auto key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;
@@ -1103,27 +1104,27 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//TODO: Move to constructor?
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
-	// ell_orbit is used for moons (distances in km) while comet_orbit is used for minor bodies around the sun.
-	QStringList orbitalElementsKeys;
-	orbitalElementsKeys << "coord_func"
-			<< "orbit_ArgOfPericenter"
-			<< "orbit_AscendingNode"
-			<< "orbit_Eccentricity"
-			<< "orbit_Epoch"
+	// ell_orbit is used for moons (distances in km) while kepler_orbit (comet_orbit) is used for minor bodies around the sun.
+	static const QStringList orbitalElementsKeys = {
+		"coord_func",
+		"orbit_ArgOfPericenter",
+		"orbit_AscendingNode",
+		"orbit_Eccentricity",
+		"orbit_Epoch",
 // GZ It seems to have been an error to include these.  They might simply be updated without prior deletion.
-//			<< "orbit_good"
-//			<< "dust_lengthfactor"
-//			<< "dust_brightnessfactor"
-//			<< "dust_widthfactor"
-			<< "orbit_Inclination"
-			<< "orbit_LongOfPericenter"
-			<< "orbit_MeanAnomaly"
-			<< "orbit_MeanLongitude"
-			<< "orbit_MeanMotion"
-			<< "orbit_PericenterDistance"
-			<< "orbit_Period"
-			<< "orbit_SemiMajorAxis"
-			<< "orbit_TimeAtPericenter";
+//		"orbit_good",
+//		"dust_lengthfactor",
+//		"dust_brightnessfactor",
+//		"dust_widthfactor",
+		"orbit_Inclination",
+		"orbit_LongOfPericenter",
+		"orbit_MeanAnomaly",
+		"orbit_MeanLongitude",
+		"orbit_MeanMotion",
+		"orbit_PericenterDistance",
+		"orbit_Period",
+		"orbit_SemiMajorAxis",
+		"orbit_TimeAtPericenter"};
 
 	qDebug() << "Updating objects...";
 	for (auto object : objectList)
@@ -1189,7 +1190,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
-			// GZ This seems completely useless now. Type of orbit will not change as it is always comet_orbit.
+			// GZ This seems completely useless now. Type of orbit will not change as it is always kepler_orbit.
 			for (auto key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);

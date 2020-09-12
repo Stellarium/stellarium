@@ -158,7 +158,7 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
         return 0.9 + 0.1*(t * t * (3.0 - 2.0 * t));
     }
     else
-    return ON;
+    return clamp(ON, 0.0, 1.0);
 }
 #endif
 
@@ -228,7 +228,7 @@ void main()
                 else if( d <= r - R ) // fully inside umbra
                 {
 #ifdef IS_MOON
-                    illumination = (d / (r - R)) * 0.6; // prepare texture coordinate!
+                    illumination = (d / (r - R)) * 0.6; // prepare texture coordinate. 0.6=umbra edge.
 #else
                     illumination = 0.0;
 #endif

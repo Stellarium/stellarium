@@ -64,11 +64,6 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void setFlagCustomGrsSettings(bool b);	
-	//! Update the widget to make sure it is synchrone if a value was changed programmatically
-	//! This function should be called repeatidly with e.g. a timer
-	// NO LONGER NEEDED!
-	//void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
@@ -95,6 +90,9 @@ private slots:
 	void updateHips();
 	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
+
+	void populateOrbitsControls(bool flag);
+	void populateTrailsControls(bool flag);
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

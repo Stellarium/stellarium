@@ -125,6 +125,7 @@ struct TleSource
 //! @ingroup satellites
 typedef QList<TleSource> TleSourceList;
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 struct IridiumFlaresPrediction
 {
 	QString datetime;
@@ -135,6 +136,7 @@ struct IridiumFlaresPrediction
 };
 
 typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
+#endif
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.
@@ -144,29 +146,19 @@ typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool hintsVisible
-	           READ getFlagHints
-		   WRITE setFlagHints
-		   NOTIFY hintsVisibleChanged)
-	Q_PROPERTY(bool labelsVisible
-	           READ getFlagLabels
-		   WRITE setFlagLabels
-		   NOTIFY labelsVisibleChanged)
-	Q_PROPERTY(bool autoAddEnabled
-	           READ isAutoAddEnabled
-	           WRITE enableAutoAdd
-	           NOTIFY settingsChanged)
-	Q_PROPERTY(bool autoRemoveEnabled
-	           READ isAutoRemoveEnabled
-	           WRITE enableAutoRemove
-	           NOTIFY settingsChanged)
-	Q_PROPERTY(bool realisticMode
-		   READ getFlagRealisticMode
-		   WRITE setFlagRelisticMode)
-	Q_PROPERTY(bool flagOrbitLines
-		   READ getFlagOrbitLines
-		   WRITE setFlagOrbitLines
-		   NOTIFY flagOrbitLinesChanged)
+	Q_PROPERTY(bool flagHintsVisible         READ getFlagHintsVisible         WRITE setFlagHintsVisible         NOTIFY flagHintsVisibleChanged)
+	Q_PROPERTY(bool flagLabelsVisible        READ getFlagLabelsVisible        WRITE setFlagLabelsVisible        NOTIFY flagLabelsVisibleChanged)
+	Q_PROPERTY(int  labelFontSize            READ getLabelFontSize            WRITE setLabelFontSize            NOTIFY labelFontSizeChanged)
+	Q_PROPERTY(bool autoAddEnabled           READ isAutoAddEnabled            WRITE setAutoAddEnabled           NOTIFY autoAddEnabledChanged)
+	Q_PROPERTY(bool autoRemoveEnabled        READ isAutoRemoveEnabled         WRITE setAutoRemoveEnabled        NOTIFY autoRemoveEnabledChanged)
+	Q_PROPERTY(bool flagIconicMode           READ getFlagIconicMode           WRITE setFlagIconicMode           NOTIFY flagIconicModeChanged)
+	Q_PROPERTY(bool flagHideInvisible        READ getFlagHideInvisible        WRITE setFlagHideInvisible        NOTIFY flagHideInvisibleChanged)
+	Q_PROPERTY(bool flagOrbitLines           READ getFlagOrbitLines           WRITE setFlagOrbitLines           NOTIFY flagOrbitLinesChanged)
+	Q_PROPERTY(bool updatesEnabled           READ getUpdatesEnabled           WRITE setUpdatesEnabled           NOTIFY updatesEnabledChanged)
+	Q_PROPERTY(int  updateFrequencyHours     READ getUpdateFrequencyHours     WRITE setUpdateFrequencyHours     NOTIFY updateFrequencyHoursChanged)
+	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
+	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
+	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
 	
 public:
 	//! @enum UpdateState
@@ -257,7 +249,7 @@ public:
 	void loadSettings();
 
 	//! Save the plugin's settings to the main configuration file.
-	void saveSettings();
+	void saveSettingsToConfig();
 
 	//! Get the groups used in the currently loaded satellite collection.
 	//! See @ref groups for details. Use getGroupIdList() if you need a list.
@@ -288,10 +280,6 @@ public:
 	//! Remove the selected satellites.
 	//! The changes are not saved to file.
 	void remove(const QStringList& idList);
-
-	//! get whether or not the plugin will try to update TLE data from the internet
-	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) const {return updatesEnabled;}
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) const {return lastUpdate;}
@@ -361,31 +349,36 @@ public:
 	                         TleDataHash& tleList,
 				 bool addFlagValue = false);
 
-	//! Reads qs.mag file and its parsing for getting id and standard magnitude
-	//! for satellites.
-	//! @note We are having permissions for use this file from Mike McCants.
-	//! @param name of file
-	void parseQSMagFile(QString qsMagFile);
-	
-	bool getFlagHints() const {return hintFader;}
-	//! get the label font size.
-	//! @return the pixel size of the font
-	int getLabelFontSize() const {return labelFont.pixelSize();}
-	bool getFlagLabels() const;
-	bool getFlagRealisticMode() const;
-	bool getFlagHideInvisibleSatellites() const;
-	bool isAutoAddEnabled() const { return autoAddEnabled; }
-	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
+	//! Insert a three line TLE into the hash array.
+	//! @param[in] line The second line from the TLE
+	static QString getSatIdFromLine2(const QString& line);
 
+	//! Reads qs.mag and rcs files and its parsing for getting id,  standard magnitude and RCS values
+	//! for satellites.
+	//! @note We are having permissions for use this file from Mike McCants.	
+	void loadExtraData();
+	
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Get depth of prediction for Iridium flares
 	int getIridiumFlaresPredictionDepth(void) const { return iridiumFlaresPredictionDepth; }
 
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
+#endif
 
 signals:
-	void hintsVisibleChanged(bool b);
-	void labelsVisibleChanged(bool b);
+	void flagHintsVisibleChanged(bool b);
+	void flagLabelsVisibleChanged(bool b);
+	void labelFontSizeChanged(int s);
 	void flagOrbitLinesChanged(bool b);
+	void flagIconicModeChanged(bool b);
+	void flagHideInvisibleChanged(bool b);
+	void updatesEnabledChanged(bool b);
+	void updateFrequencyHoursChanged(int i);
+	void autoAddEnabledChanged(bool b);
+	void autoRemoveEnabledChanged(bool b);
+	void orbitLineSegmentsChanged(int i);
+	void orbitLineFadeSegmentsChanged(int i);
+	void orbitLineSegmentDurationChanged(int i);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -407,34 +400,44 @@ signals:
 	void tleUpdateComplete(int updated, int total, int added, int missing);
 
 public slots:
-	// FIXME: Put back the getter functions - for scripts? --BM
-	
+	//! get whether or not the plugin will try to update TLE data from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled(void) const {return updatesEnabled;}
 	//! Set whether the plugin will try to download updates from the Internet.
 	//! Emits settingsChanged() if the value changes.
 	//! @param b if true, updates will be enabled, else they will be disabled.
-	void enableInternetUpdates(bool enabled = true);
+	void setUpdatesEnabled(bool enabled);
 	
+	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	//! Emits settingsChanged() if the value changes.
-	void enableAutoAdd(bool enabled = true);
+	void setAutoAddEnabled(bool enabled);
 	
+	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
 	//! Emits settingsChanged() if the value changes.
-	void enableAutoRemove(bool enabled = true);
+	void setAutoRemoveEnabled(bool enabled);
 	
-	//! Set whether satellite position hints (icons) should be displayed.
+	//! Set whether satellite position hints (icons or star-like dot) should be displayed.
 	//! Note that hint visibility also applies to satellite labels.
 	//! Emits settingsChanged() if the value changes.
-	void setFlagHints(bool b);
-	
+	void setFlagHintsVisible(bool b);
+	bool getFlagHintsVisible() const {return hintFader;}
+
 	//! Set whether text labels should be displayed next to satellite hints.
 	//! Emits settingsChanged() if the value changes.
 	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
-	void setFlagLabels(bool b);
+	void setFlagLabelsVisible(bool b);
+	bool getFlagLabelsVisible() const;
 
 	//! Emits settingsChanged() if the value changes.
-	void setFlagRelisticMode(bool b);
+	void setFlagIconicMode(bool b);
+	bool getFlagIconicMode() const;
 
-	void setFlagHideInvisibleSatellites(bool b);
+	bool getFlagHideInvisible() const;
+	void setFlagHideInvisible(bool b);
 	
+	//! get the label font size.
+	//! @return the pixel size of the font
+	int getLabelFontSize() const {return labelFont.pixelSize();}
 	//! set the label font size.
 	//! @param size the pixel size of the font
 	//! Emits settingsChanged() if the value changes.
@@ -467,6 +470,21 @@ public slots:
 	//! Get the current status of the orbit line rendering flag.
 	bool getFlagOrbitLines() const;
 
+	//! return number of segments for orbit lines
+	int getOrbitLineSegments() const {return Satellite::orbitLineSegments;}
+	//! set number of segments for orbit lines
+	void setOrbitLineSegments(int s);
+
+	//! return number of fading segments at end of orbit
+	int getOrbitLineFadeSegments() const {return Satellite::orbitLineFadeSegments;}
+	//! set number of fading segments at end of orbit
+	void setOrbitLineFadeSegments(int s);
+
+	//! return duration of a single segments
+	int getOrbitLineSegmentDuration() const {return Satellite::orbitLineSegmentDuration;}
+	//! set duration of a single segments
+	void setOrbitLineSegmentDuration(int s);
+
 	void recalculateOrbitLines(void);
 
 	//! Display a message on the screen for a few seconds.
@@ -476,13 +494,18 @@ public slots:
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Set depth of prediction for Iridium flares
 	//! @param depth in days
 	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
+#endif
 
 private slots:
 	//! Update satellites visibility on wide range of dates changes - by month or year
 	void updateSatellitesVisibility();
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
+	void bindingGroups();
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -507,8 +530,6 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
-	//! Replace the qs.mag file with the default one.
-	void restoreDefaultQSMagFile();
 
 	//! Checks valid range dates of life of satellites
 	bool isValidRangeDates(const StelCore* core) const;
@@ -532,6 +553,8 @@ private:
 	//! Check format of the catalog of satellites
 	//! @return valid boolean, e.g. "true"
 	bool checkJsonFileFormat();
+
+	void setSatGroupVisible(const QString& groupId, bool visible);
 	
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
@@ -539,8 +562,6 @@ private:
 	//! place.)
 	static void translations();
 
-	//! Path to the qs.mag file.
-	QString qsMagFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -552,7 +573,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 
-	QHash<QString, double> qsMagList;
+	QHash<int, double> qsMagList, rcsList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
@@ -566,11 +587,9 @@ private:
 	//! @name Bottom toolbar button
 	//@{
 	StelButton* toolbarButton;	
-	//@}
-	// FIXME: Possible bug with the Solar System recreated by the SSEditor.
+	//@}	
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
-	Vec3f defaultOrbitColor;
 	QFont labelFont;
 	
 	//! @name Updater module
@@ -611,10 +630,13 @@ private:
 	QList<int> messageIDs;
 	//@}
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
-
+#endif
 	// GUI
 	SatellitesDialog* configDialog;
+
+	static QString SatellitesCatalogVersion;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

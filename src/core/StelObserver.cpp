@@ -50,7 +50,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, true, "artificial"),
+		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, false, "artificial"),
 		dest(Q_NULLPTR), orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
@@ -168,9 +168,6 @@ void ArtificialPlanet::computeAverage(double f1)
 	// rotation offset
 	re.offset = static_cast<float>(f1*static_cast<double>(re.offset) + f2*static_cast<double>(dest->getRotationElements().offset));
 }
-
-
-
 
 StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {

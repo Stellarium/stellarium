@@ -93,6 +93,7 @@ SET(stellarium_lib_SRCS
      core/StelTranslator.cpp
      core/StelTranslator.hpp
      core/VecMath.hpp
+     core/VecMath.cpp
      core/StelJsonParser.hpp
      core/StelJsonParser.cpp
      core/SimbadSearcher.hpp
@@ -237,6 +238,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZodiacalLight.cpp
      core/modules/ZoneArray.hpp
      core/modules/ZoneData.hpp
+     core/modules/SpecialMarkersMgr.cpp
+     core/modules/SpecialMarkersMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp
@@ -335,6 +338,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
+          gui/AstroCalcCustomStepsDialog.hpp
+          gui/AstroCalcCustomStepsDialog.cpp
           gui/BookmarksDialog.hpp
           gui/BookmarksDialog.cpp
           gui/StelDialog.hpp
@@ -356,6 +361,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
+          gui/astroCalcCustomStepsDialog.ui
           gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
@@ -670,6 +676,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testComputations testComputations)
     SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testComparisons_SRCS
+        tests/testComparisons.hpp
+        tests/testComparisons.cpp
+    )
+    ADD_EXECUTABLE(testComparisons ${tests_testComparisons_SRCS})
+    TARGET_LINK_LIBRARIES(testComparisons ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testComparisons)
+    ADD_TEST(testComparisons testComparisons)
+    SET_TARGET_PROPERTIES(testComparisons PROPERTIES FOLDER "src/tests")
+
+
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
         tests/testExtinction.cpp
@@ -720,6 +737,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testJavaScripting_SRCS
+        tests/testJavaScripting.hpp
+        tests/testJavaScripting.cpp
+    )
+    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testJavaScripting)
+    ADD_TEST(testJavaScripting testJavaScripting)
+    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp
         tests/testStelProjector.cpp

@@ -90,11 +90,11 @@ public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
-		Updating,		//!< Update in progress
+		Updating,				//!< Update in progress
 		CompleteNoUpdates,	//!< Update completed, there we no updates
-		CompleteUpdates,	//!< Update completed, there were updates
-		DownloadError,		//!< Error during download phase
-		OtherError		//!< Other error
+		CompleteUpdates,		//!< Update completed, there were updates
+		DownloadError,			//!< Error during download phase
+		OtherError				//!< Other error
 	};
 	//! @enum TemperatureScale
 	//! Available temperature scales
@@ -102,7 +102,7 @@ public:
 	{
 		Kelvin		= 0,
 		Celsius		= 1,
-		Fahrenheit		= 2
+		Fahrenheit	= 2
 	};
 	
 	Exoplanets();
@@ -228,6 +228,9 @@ public:
 				return EPEccentricityAll;
 		}
 	}
+
+	//! Get the list of all exoplanetary systems.
+	const QList<ExoplanetP>& getAllExoplanetarySystems() const {return ep;}
 
 signals:
 	//! @param state the new update state.
@@ -438,7 +441,9 @@ private slots:
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
-	void reloadCatalog(void);	
+	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveConfiguration(); }
 };
 
 

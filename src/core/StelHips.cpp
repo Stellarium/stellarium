@@ -70,6 +70,7 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
+	planetarySurvey(false),
 	tiles(1000),
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
@@ -99,6 +100,13 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 		if (properties.contains("hips_frame"))
 			hipsFrame = properties["hips_frame"].toString();
 
+		QStringList DSSSurveys;
+		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
+		if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive) && !(properties["creator_did"].toString().contains("moon", Qt::CaseInsensitive)) && !(properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive)))
+			planetarySurvey = false;
+		else
+			planetarySurvey = true;
+
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -112,16 +120,6 @@ HipsSurvey::~HipsSurvey()
 bool HipsSurvey::isVisible() const
 {
 	return static_cast<bool>(fader);
-}
-
-bool HipsSurvey::isPlanetarySurvey() const
-{
-	QStringList DSSSurveys;
-	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
-	if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive))
-		return false;
-	else
-		return true;
 }
 
 void HipsSurvey::setVisible(bool value)
@@ -224,7 +222,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	int drawOrder = qRound(ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth))));
+	int drawOrder = qRound(ceil(log2(px / (4.0 * std::sqrt(2.0) * tileWidth))));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
 
@@ -273,18 +271,18 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		QString ext = getExt(properties["hips_tile_format"].toString());
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
 		tile->texture = texMgr.createTextureThread(path.url(), StelTexture::StelTextureParams(true), false);
-		tiles.insert(uid, tile);
 
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = static_cast<int>(sqrt(12 * (1 << (2 * order))));
+			int nbw = static_cast<int>(std::sqrt(12 * (1 << (2 * order))));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
+		tiles.insert(uid, tile);
 	}
 	return tile;
 }

@@ -81,6 +81,7 @@ public:
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
 	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeAbortSlew() {};
 
 	//!
 	//! \brief move

@@ -76,15 +76,15 @@ Supernova::~Supernova()
 
 QVariantMap Supernova::getMap(void) const
 {
-	QVariantMap map;
-	map["designation"] = designation;
-	map["sntype"] = sntype;
-	map["maxMagnitude"] = maxMagnitude;
-	map["peakJD"] = peakJD;
-	map["snra"] = snra;
-	map["snde"] = snde;
-	map["note"] = note;
-	map["distance"] = distance;
+	const QVariantMap map = {
+	{"designation", designation},
+	{"sntype", sntype},
+	{"maxMagnitude", maxMagnitude},
+	{"peakJD", peakJD},
+	{"snra", snra},
+	{"snde", snde},
+	{"note", note},
+	{"distance", distance}};
 
 	return map;
 }
@@ -123,7 +123,10 @@ QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoString
 		if (getVMagnitude(core) <= maglimit)
 			res = StelObject::getMagnitudeInfoString(core, flags, alt_app, decimals);
 		else
+		{
 			res = QString("%1: <b>--</b><br />").arg(q_("Magnitude"));
+			res += getExtraInfoStrings(Magnitude).join("");
+		}
 	}
 	return res;
 }
@@ -145,7 +148,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
 	// Ra/Dec etc.

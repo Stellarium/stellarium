@@ -85,7 +85,7 @@ private:
 	StelTranslator* rcTranslator;
 };
 
-RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), templateMutex(QMutex::Recursive)
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex(QMutex::Recursive)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -137,11 +137,23 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_PLUGIN_VERSION
 	response.setHeader("Server",SERVER_HEADER);
 
+	if(QString::compare(request.getMethod(),"OPTIONS",Qt::CaseInsensitive)==0) {
+		handleCorsPreflightRequest(request,response);
+		return;
+	}
+
 	//try to support keep-alive connections
 	if(QString::compare(request.getHeader("Connection"),"keep-alive",Qt::CaseInsensitive)==0)
 		response.setHeader("Connection","keep-alive");
 	else
 		response.setHeader("Connection","close");
+
+	if(enableCors)
+	{
+		response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+		response.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, HEAD, OPTIONS");
+		response.setHeader("Vary","Origin");
+	}
 
 	if(usePassword)
 	{
@@ -216,6 +228,17 @@ void RequestHandler::setPassword(const QString &pw)
 	passwordReply = "Basic " + arr.toBase64();
 }
 
+void RequestHandler::setEnableCors(bool v)
+{
+	enableCors = v;
+}
+
+void RequestHandler::setCorsOrigin(const QString &origin)
+{
+	corsOrigin = origin;
+}
+
+
 void RequestHandler::refreshTemplates()
 {
 	//multiple threads can potentially enter here,
@@ -268,4 +291,13 @@ void RequestHandler::refreshTemplates()
 	{
 		qWarning()<<"[RemoteControl] "<<transFileList.fileName()<<" could not be opened, can not automatically translate files with StelTranslator!";
 	}
+}
+
+void RequestHandler::handleCorsPreflightRequest(HttpRequest &request, HttpResponse &response) {
+	response.setStatus(204,"No Content");
+	response.setHeader("Access-Control-Allow-Origin",corsOrigin.toUtf8());
+	response.setHeader("Access-Control-Allow-Methods","GET, POST");
+	response.setHeader("Access-Control-Allow-Headers",request.getHeader("Access-Control-Request-Headers"));
+	response.setHeader("Access-Control-Max-Age","0");
+	response.setHeader("Vary","Origin");
 }

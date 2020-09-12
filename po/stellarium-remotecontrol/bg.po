@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Alexander Shopov <ash@kambanaria.org>, 2019
+# Georgi Georgiev <georgiev_1994@abv.bg>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-10-21 21:25+0700\n"
+"POT-Creation-Date: 2020-06-22 00:46+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2019\n"
+"Last-Translator: Georgi Georgiev <georgiev_1994@abv.bg>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Списъкът с пейзажи не може да бъде получен"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:622
-#: index.html:679 tablet7in.html:727 tablet7in.html:787
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
+#: index.html:685 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-няма-"
 
@@ -336,11 +337,11 @@ msgstr "Следи на планетите"
 
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
-msgstr "Следа само на избраната планета"
+msgstr "Следа само от избраната планета"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
-msgstr "Метеори"
+msgstr "Падащи звезди"
 
 #: index.html:323 tablet7in.html:410
 msgid "ZHR:"
@@ -374,125 +375,138 @@ msgstr "Малко луностоене"
 msgid "Current Planet:"
 msgstr "Текуща планета:"
 
-#: index.html:521 tablet7in.html:610
+#: index.html:429 tablet7in.html:524
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr "Каталог на отражателните мъглявини (Van den Bergh, 1966)"
+
+#: index.html:447 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr "Каталог на южните звезди свързани с мъглявини (van den Bergh+, 1975)"
+
+#: index.html:502
+msgid "Objects without identifier"
+msgstr "Обекти без идентификатор"
+
+#: index.html:527 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "Ярки мъглявини"
 
-#: index.html:522 tablet7in.html:611
+#: index.html:528 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "Тъмни мъглявини"
 
-#: index.html:523 tablet7in.html:612
+#: index.html:529 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "Планетарни мъглявини"
 
-#: index.html:532 tablet7in.html:621
+#: index.html:538 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Етикети и маркери"
 
-#: index.html:566 tablet7in.html:655
+#: index.html:572 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Осветление"
 
-#: index.html:571 tablet7in.html:661
+#: index.html:577 tablet7in.html:667
 msgid "Current landscape"
 msgstr "Текущ пейзаж"
 
-#: index.html:583 tablet7in.html:674
+#: index.html:589 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "Дебели линии"
 
-#: index.html:588 tablet7in.html:679
+#: index.html:594 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "Дебели линии на астеризмите"
 
-#: index.html:592 tablet7in.html:683
+#: index.html:598 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr "Насочващи лъчи с дебелина"
 
-#: index.html:600 tablet7in.html:693
+#: index.html:606 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "Граници с дебелина"
 
-#: index.html:605 tablet7in.html:698
+#: index.html:611 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "Отдѐлен избор на съзвездия"
 
-#: index.html:609 tablet7in.html:702
+#: index.html:615 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "Текуща небесна култура"
 
-#: index.html:622 tablet7in.html:727
+#: index.html:628 tablet7in.html:733
 msgid "Active script:"
 msgstr "Изпълняван скрипт:"
 
-#: index.html:623 tablet7in.html:728
+#: index.html:629 tablet7in.html:734
 msgid "Run selected script"
 msgstr "Изпълнение на избрания скрипт"
 
-#: index.html:623 tablet7in.html:728
+#: index.html:629 tablet7in.html:734
 msgid "Stop current script"
 msgstr "Спиране на текущия скрипт"
 
-#: index.html:628 tablet7in.html:41 tablet7in.html:712
+#: index.html:634 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Действия"
 
-#: index.html:632 tablet7in.html:716
+#: index.html:638 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "Изпълнение/превключване на действия"
 
-#: index.html:643 tablet7in.html:751
+#: index.html:649 tablet7in.html:757
 msgid "Planet map"
 msgstr "Карта на планета"
 
-#: index.html:644 tablet7in.html:752
+#: index.html:650 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Маркер на карта на планета"
 
-#: index.html:648 tablet7in.html:756
+#: index.html:654 tablet7in.html:762
 msgid "Type to search location"
-msgstr "Започнете за изписвате местоположение и то ще бъде потърсено"
+msgstr "Започнете да изписвате местоположението и то ще бъде потърсено"
 
-#: index.html:677 tablet7in.html:785
+#: index.html:683 tablet7in.html:791
 msgid "Interaction"
 msgstr "Взаимодействие"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:684 tablet7in.html:792
 msgid "Current scene:"
 msgstr "Текуща сцена:"
 
-#: index.html:681 tablet7in.html:789
+#: index.html:687 tablet7in.html:795
 msgid "View controls"
 msgstr "Управление на изгледа"
 
-#: index.html:687 tablet7in.html:795
+#: index.html:693 tablet7in.html:801
 msgid "Movement controls"
 msgstr "Управление на движението"
 
-#: index.html:699 tablet7in.html:807
+#: index.html:705 tablet7in.html:813
 msgid "Torchlight"
-msgstr "Челник"
+msgstr "Факелно осветление"
 
-#: index.html:706 tablet7in.html:814
+#: index.html:712 tablet7in.html:820
 msgid "Scene selection"
 msgstr "Избор на сцена"
 
-#: index.html:710 tablet7in.html:818
+#: index.html:716 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "Избор на избраната сцена"
 
-#: index.html:734 tablet7in.html:843
+#: index.html:740 tablet7in.html:849
 msgid "No response from server"
 msgstr "Сървърът не отговаря"
 
-#: index.html:735 tablet7in.html:844
+#: index.html:741 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "От %1 секунди сървърът не отговаря. Stellarium работи ли все още?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr "Интервал време"
+msgstr "Времеви интервал"
 
 #: tablet7in.html:37
 msgid "Grids"
@@ -500,7 +514,7 @@ msgstr "Координатни системи"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr "Нагоре/наляво"
+msgstr "Нагоре/Наляво"
 
 #: tablet7in.html:97
 msgid "Up"
@@ -508,7 +522,7 @@ msgstr "Нагоре"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr "Нагоре/надясно"
+msgstr "Нагоре/Надясно"
 
 #: tablet7in.html:97
 msgid "Left"
@@ -528,7 +542,7 @@ msgstr "Надясно"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr "Надолу/наляво"
+msgstr "Надолу/Наляво"
 
 #: tablet7in.html:97
 msgid "Down"
@@ -536,7 +550,7 @@ msgstr "Надолу"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr "Надолу/надясно"
+msgstr "Надолу/Надясно"
 
 #: tablet7in.html:266
 msgid "Sirius"
@@ -568,7 +582,7 @@ msgstr "Галактиката Андромеда"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr "Галактичен куп Херкулес"
+msgstr "Звезден куп Херкулес"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
@@ -630,18 +644,18 @@ msgstr "Водолей"
 msgid "Pisces"
 msgstr "Риби"
 
-#: tablet7in.html:736
+#: tablet7in.html:742
 msgid "Favorites"
 msgstr "Любими"
 
-#: tablet7in.html:738
+#: tablet7in.html:744
 msgid "Show 1"
 msgstr "Шоу 1"
 
-#: tablet7in.html:739
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
 msgstr "Без етикети и изображения"
 
-#: tablet7in.html:739
+#: tablet7in.html:745
 msgid "Cleanup Screen"
 msgstr "Изчистване на екрана"

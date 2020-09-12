@@ -185,11 +185,13 @@ void RemoteSync::init()
 		qCDebug(remoteSync)<<"Connecting to server from command line";
 		connectToServer();
 	}
+
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 }
 
 void RemoteSync::update(double deltaTime)
 {
-	Q_UNUSED(deltaTime);
+	Q_UNUSED(deltaTime)
 	if(server)
 	{
 		//pass update on to server, client does not need this

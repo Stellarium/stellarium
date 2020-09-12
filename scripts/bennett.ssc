@@ -2,7 +2,7 @@
 // Name: The Jack Bennett Catalog
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.2
+// Version: 1.3
 // Description: The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.
 //
 
@@ -53,7 +53,7 @@ LabelMgr.setLabelShow(id, false);
 LabelMgr.setLabelShow(cnt, false);
 LabelMgr.deleteLabel(id);
 LabelMgr.deleteLabel(cnt);
-var dss = core.isDSSModeEnabled();
+var dss = ToastMgr.getFlagShow();
 
 for (i=0; i<objlist.length; i++)
 {
@@ -64,15 +64,15 @@ for (i=0; i<objlist.length; i++)
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.autoZoomIn(2);
 	core.wait(1);
-	core.setDSSMode(true);
+	ToastMgr.setFlagShow(true);
 	core.wait(9);
 
 	LabelMgr.setLabelShow(id, false);
 	StelMovementMgr.zoomTo(30, 5);
 	core.wait(3);
-	core.setDSSMode(false);
+	ToastMgr.setFlagShow(false);
 	core.wait(5);
 }
 core.clear("natural");
-core.setDSSMode(dss);
+ToastMgr.setFlagShow(dss);
 core.goHome();

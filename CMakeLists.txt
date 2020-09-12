@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 IF(POLICY CMP0054)
@@ -18,7 +18,7 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 19)
+SET(STELLARIUM_MINOR 20)
 SET(STELLARIUM_PATCH 2)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
@@ -38,8 +38,8 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# currently Qt 5.6/5.9 is recommended
-SET(MINIMAL_QT_VERSION "5.4.0")
+# currently Qt 5.9/5.12 is recommended
+SET(MINIMAL_QT_VERSION "5.7.0")
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -56,14 +56,15 @@ SET(MIN_WIN_VERSION "0x0601")
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Show platform info
-MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
+MESSAGE(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      IF(CMAKE_COMPILER_IS_GNUCXX)
@@ -116,6 +117,20 @@ ENDIF()
 IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
+ENDIF()
+
+# Add ASan (AddressSanitizer) build options if necessary
+# Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
+IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+ENDIF()
+
+# Add UBSan (UndefinedBehaviorSanitizer) build options if necessary
+# Details: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+IF(${CMAKE_BUILD_TYPE} MATCHES "UBSan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -g")
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -326,7 +341,6 @@ ELSE()
      ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
-
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
@@ -340,10 +354,13 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
+    ADD_DEFINITIONS(-DENABLE_TESTING)
     FIND_PACKAGE(Qt5Test REQUIRED)
+    MESSAGE(STATUS "Unit tests support: enabled")
+ELSE(ENABLE_TESTING)
+    MESSAGE(STATUS "Unit tests support: disabled")
 ENDIF(ENABLE_TESTING)
 
 ########### User Guide ###############
@@ -378,6 +395,7 @@ ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
 ADD_PLUGIN(Oculars 1)
+ADD_PLUGIN(Oculus 0)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
@@ -393,6 +411,7 @@ ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
@@ -443,11 +462,11 @@ IF(WIN32)
           IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
                MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
                SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()          
+          ENDIF()
           IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
                SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
           ENDIF()
-     ELSE()     
+     ELSE()
           # Try found OpenSSL 1.1.x DLL's on Windows (newest Qt)
           IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
                FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1.dll)
@@ -612,7 +631,7 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
           ENDIF()
      ELSE()
-          STRING(TIMESTAMP TODAY "%j.%H%M")
+          STRING(TIMESTAMP TODAY "%j%H%M")
           SET(PACKAGE_VERSION "${VERSION}.${TODAY}")
           ADD_DEFINITIONS(-DGIT_COMMITS="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="unknown")
@@ -687,6 +706,9 @@ IF(WIN32)
                SET(ISS_STELLARIUM_STUFF "${ISS_STELLARIUM_STUFF}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\"; DestName: \"Spout_licence.txt\"; Flags: ignoreversion")
           ENDIF()
           SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode2K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=2048.2048\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode4K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=4096.4096\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode8K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=8192.8192\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
      ELSE()
           SET(ISS_SPOUT "; Spout support is disabled")
      ENDIF(ENABLE_SPOUT)

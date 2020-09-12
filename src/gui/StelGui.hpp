@@ -73,6 +73,7 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowAsterismLabelsButton READ getFlagShowAsterismLabelsButton WRITE setFlagShowAsterismLabelsButton NOTIFY flagShowAsterismLabelsButtonChanged )
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagUseKineticScrolling READ getFlagUseKineticScrolling WRITE setFlagUseKineticScrolling NOTIFY flagUseKineticScrollingChanged)
+	Q_PROPERTY(bool flagEnableFocusOnDaySpinner READ getFlagEnableFocusOnDaySpinner WRITE setFlagEnableFocusOnDaySpinner NOTIFY flagEnableFocusOnDaySpinnerChanged)
 
 public:
 	friend class ViewDialog;
@@ -134,6 +135,11 @@ public slots:
 	void setFlagUseKineticScrolling(bool b);
 	//! Get the state of the flag for kinetic scrolling
 	bool getFlagUseKineticScrolling() const { return flagUseKineticScrolling; }
+
+	//! Set the state of the flag for enable focus on day spinner in Date and Time dialog
+	void setFlagEnableFocusOnDaySpinner(bool b);
+	//! Get the state of the flag for enable focus on day spinner in Date and Time dialog
+	bool getFlagEnableFocusOnDaySpinner() const { return flagEnableFocusOnDaySpinner; }
 
 	//! Define whether the button for exit should be visible
 	void setFlagShowQuitButton(bool b);
@@ -248,6 +254,7 @@ signals:
 	void autoHideVerticalButtonBarChanged(bool b);
 	void flagUseButtonsBackgroundChanged(bool b);
 	void flagUseKineticScrollingChanged(bool b);
+	void flagEnableFocusOnDaySpinnerChanged(bool b);
 	void flagShowQuitButtonChanged(bool b);
 	void flagShowFlipButtonsChanged(bool b);
 	void flagShowNebulaBackgroundButtonChanged(bool b);
@@ -280,12 +287,16 @@ private:
 	//! convenience method to find an action in the StelActionMgr.
 	StelAction* getAction(const QString& actionName) const;
 
+	void addButtonOnBottomBar(QString buttonName, QString actionName, QString groupName);
+	void addButtonOnLeftBar(QString buttonName, QString actionName);
+
 	QGraphicsWidget* topLevelGraphicsWidget;
 
 	class SkyGui* skyGui;
 
 	bool flagUseButtonsBackground;
 	bool flagUseKineticScrolling;
+	bool flagEnableFocusOnDaySpinner;
 
 	StelButton* buttonTimeRewind;
 	StelButton* buttonTimeRealTimeSpeed;

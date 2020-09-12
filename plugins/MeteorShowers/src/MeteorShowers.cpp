@@ -236,7 +236,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	for (const auto& ms : m_meteorShowers)
 	{
 		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
-		if (!ms->enabled() || !matchObjectName(name, objPrefix, useStartOfWords))
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			continue;
 		}

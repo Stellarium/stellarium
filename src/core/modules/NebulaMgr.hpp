@@ -139,6 +139,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setCirclesColor
 		   NOTIFY circlesColorChanged
 		   )
+	Q_PROPERTY(Vec3f regionsColor
+		   READ getRegionsColor
+		   WRITE setRegionsColor
+		   NOTIFY regionsColorChanged
+		   )
 	Q_PROPERTY(Vec3f galaxiesColor
 		   READ getGalaxyColor
 		   WRITE setGalaxyColor
@@ -352,10 +357,6 @@ public:
 	//! @param name The case in-sensitive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Return the matching nebula if exists or Q_NULLPTR.
-	//! @param name The case in-sensitive designation of deep-sky object
-	virtual StelObjectP searchByDesignation(const QString& designation) const;
-
 	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
@@ -377,6 +378,10 @@ public:
 	//! @note using for bookmarks feature as example
 	//! @return a designation
 	QString getLatestSelectedDSODesignation() const;
+	//! Get designation for latest selected DSO with priority and ignorance of availability of catalogs
+	//! @note using for bookmarks feature as example
+	//! @return a designation
+	QString getLatestSelectedDSODesignationWIC() const;
 
 	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
@@ -402,6 +407,16 @@ public slots:
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f getCirclesColor(void) const;
+
+	//! Set the default color used to draw the region symbols (default dashed shape).
+	//! @param c The color of the region symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setRegionsColor(Vec3f(0.6,0.8,0.0));
+	//! @endcode
+	void setRegionsColor(const Vec3f& c);
+	//! Get current value of the region color.
+	const Vec3f getRegionsColor(void) const;
 
 	//! Set the color used to draw the galaxy symbols (ellipses).
 	//! @param c The color of the galaxy symbols
@@ -867,6 +882,7 @@ signals:
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void circlesColorChanged(const Vec3f & color) const;
+	void regionsColorChanged(const Vec3f & color) const;
 	void galaxiesColorChanged(const Vec3f & color) const;
 	void activeGalaxiesColorChanged(const Vec3f & color) const;
 	void radioGalaxiesColorChanged(const Vec3f & color) const;
@@ -956,11 +972,17 @@ private:
 	NebulaP searchPNG(QString PNG) const;
 	NebulaP searchSNRG(QString SNRG) const;
 	NebulaP searchACO(QString ACO) const;
-	NebulaP searchHCG(QString HCG) const;
-	NebulaP searchAbell(unsigned int Abell) const;
+	NebulaP searchHCG(QString HCG) const;	
 	NebulaP searchESO(QString ESO) const;
 	NebulaP searchVdBH(QString VdBH) const;
 	NebulaP searchDWB(unsigned int DWB) const;
+	NebulaP searchTr(unsigned int Tr) const;
+	NebulaP searchSt(unsigned int St) const;
+	NebulaP searchRu(unsigned int Ru) const;
+	NebulaP searchVdBHa(unsigned int VdBHa) const;
+	//! Return the matching nebula if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive designation of deep-sky object
+	NebulaP searchByDesignation(const QString& designation) const;
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

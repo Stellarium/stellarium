@@ -122,7 +122,7 @@ void CustomObjectMgr::init()
 
 	customObjects.clear();
 
-	setMarkersColor(StelUtils::strToVec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
+	setMarkersColor(Vec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
@@ -157,6 +157,8 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 
 		if (isVisible)
 			countMarkers++;
+
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 
@@ -200,12 +202,14 @@ void CustomObjectMgr::removeCustomObjects()
 	customObjects.clear();
 	//This marker count can be set to 0 because there will be no markers left and a duplicate will be impossible
 	countMarkers = 0;
+	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 {
 	setSelected("");
 	customObjects.removeOne(obj);
+	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(QString englishName)
@@ -216,7 +220,7 @@ void CustomObjectMgr::removeCustomObject(QString englishName)
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
 			customObjects.removeOne(cObj);
-	}
+	}	
 }
 
 void CustomObjectMgr::draw(StelCore* core)
@@ -372,7 +376,7 @@ void CustomObjectMgr::setMarkersColor(const Vec3f& c)
 	CustomObject::markerColor = c;
 }
 
-const Vec3f& CustomObjectMgr::getMarkersColor(void) const
+Vec3f CustomObjectMgr::getMarkersColor(void) const
 {
 	return CustomObject::markerColor;
 }

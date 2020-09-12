@@ -57,7 +57,7 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 	info.id = "ArchaeoLines";
 	info.displayedName = N_("ArchaeoLines");
 	info.authors = "Georg Zotti";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("A tool for archaeo-/ethnoastronomical alignment studies");
 	info.version = ARCHAEOLINES_PLUGIN_VERSION;
 	info.license = ARCHAEOLINES_PLUGIN_LICENSE;
@@ -66,8 +66,7 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 
 ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
-	//, withDecimalDegree(false)
-	//, flagUseDmsFormat(false)
+	, lineWidth(1)
 	, flagShowEquinox(false)
 	, flagShowSolstices(false)
 	, flagShowCrossquarters(false)
@@ -265,7 +264,7 @@ void ArchaeoLines::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_ArchaeoLines");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
@@ -334,12 +333,14 @@ void ArchaeoLines::update(double deltaTime)
 	double newJDE=core->getJDE();
 	if (fabs(newJDE-lastJDE) > 10.0) // enough to compute this every 10 days?
 	{
-		eps= ssystem->getEarth()->getRotObliquity(newJDE) *180.0/M_PI;
 		static const double invSqrt2=1.0/std::sqrt(2.0);
+		double epsRad=ssystem->getEarth()->getRotObliquity(newJDE);
+		double xqDec=asin(sin(epsRad)*invSqrt2)*180.0/M_PI;
+		eps= epsRad*180.0/M_PI;
 		northernSolsticeLine->setDefiningAngle(eps);
 		southernSolsticeLine->setDefiningAngle(-eps);
-		northernCrossquarterLine->setDefiningAngle( eps*invSqrt2);
-		southernCrossquarterLine->setDefiningAngle(-eps*invSqrt2);
+		northernCrossquarterLine->setDefiningAngle( xqDec);
+		southernCrossquarterLine->setDefiningAngle(-xqDec);
 		lastJDE=newJDE;
 	}
 	StelLocation loc=core->getCurrentLocation();
@@ -347,10 +348,11 @@ void ArchaeoLines::update(double deltaTime)
 	// compute parallax correction with Meeus 40.6. First, find H from h=0, then add corrections.
 
 	static const double b_over_a=0.99664719;
-	const double latRad=static_cast<double>(loc.latitude)*M_PI_180;
+	const bool useGeocentric = !core->getUseTopocentricCoordinates();
+	const double latRad=useGeocentric ? 0.0 : static_cast<double>(loc.latitude)*M_PI_180;
 	const double u=std::atan(b_over_a*std::tan(latRad));
-	const double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
-	const double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
+	const double rhoSinPhiP=useGeocentric ? 0. : b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
+	const double rhoCosPhiP=useGeocentric ? 1. :          std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
 
 	QVector<double> lunarDE(8), sinPi(8);
 	lunarDE[0]=(eps+lunarI)*M_PI/180.0; // min_distance=max_parallax
@@ -505,33 +507,39 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	setEquinoxColor(                StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
-	setSolsticesColor(              StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
-	setCrossquartersColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
-	setMajorStandstillColor(        StelUtils::strToVec3f(conf->value("ArchaeoLines/color_major_standstill",           "0.25,1.00,0.25").toString()));
-	setMinorStandstillColor(        StelUtils::strToVec3f(conf->value("ArchaeoLines/color_minor_standstill",           "0.20,0.75,0.20").toString()));
-	setZenithPassageColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_zenith_passage",             "0.75,0.75,0.75").toString()));
-	setNadirPassageColor(           StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",              "0.25,0.25,0.25").toString()));
-	setSelectedObjectColor(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object",            "1.00,1.00,1.00").toString()));
-	setSelectedObjectAzimuthColor(  StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_azimuth",    "1.00,1.00,1.00").toString()));
-	setSelectedObjectHourAngleColor(StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_hour_angle", "1.00,1.00,1.00").toString()));
-	setCurrentSunColor(             StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_sun",                "1.00,1.00,0.75").toString()));
-	setCurrentMoonColor(            StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_moon",               "0.50,1.00,0.50").toString()));
-	setCurrentPlanetColor(          StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_planet",             "0.25,0.80,1.00").toString()));
-	setGeographicLocation1Color(    StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_1",      "0.25,1.00,0.25").toString()));
-	setGeographicLocation2Color(    StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_2",      "0.25,0.25,1.00").toString()));
-	setCustomAzimuth1Color(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_1",           "0.25,1.00,0.25").toString()));
-	setCustomAzimuth2Color(         StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",           "0.25,0.50,0.75").toString()));
-	setCustomDeclination1Color(     StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_1",       "0.45,1.00,0.15").toString()));
-	setCustomDeclination2Color(     StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_2",       "0.45,0.50,0.65").toString()));
+	const bool azFromSouth=StelApp::getInstance().getFlagSouthAzimuthUsage();
+	setLineWidth(conf->value("ArchaeoLines/line_thickness", 1).toInt());
+	setEquinoxColor(                Vec3f(conf->value("ArchaeoLines/color_equinox",                    "1.00,1.00,0.50").toString()));
+	setSolsticesColor(              Vec3f(conf->value("ArchaeoLines/color_solstices",                  "1.00,0.15,0.15").toString()));
+	setCrossquartersColor(          Vec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
+	setMajorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_major_standstill",           "0.25,1.00,0.25").toString()));
+	setMinorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_minor_standstill",           "0.20,0.75,0.20").toString()));
+	setZenithPassageColor(          Vec3f(conf->value("ArchaeoLines/color_zenith_passage",             "0.75,0.75,0.75").toString()));
+	setNadirPassageColor(           Vec3f(conf->value("ArchaeoLines/color_nadir_passage",              "0.25,0.25,0.25").toString()));
+	setSelectedObjectColor(         Vec3f(conf->value("ArchaeoLines/color_selected_object",            "1.00,1.00,1.00").toString()));
+	setSelectedObjectAzimuthColor(  Vec3f(conf->value("ArchaeoLines/color_selected_object_azimuth",    "1.00,1.00,1.00").toString()));
+	setSelectedObjectHourAngleColor(Vec3f(conf->value("ArchaeoLines/color_selected_object_hour_angle", "1.00,1.00,1.00").toString()));
+	setCurrentSunColor(             Vec3f(conf->value("ArchaeoLines/color_current_sun",                "1.00,1.00,0.75").toString()));
+	setCurrentMoonColor(            Vec3f(conf->value("ArchaeoLines/color_current_moon",               "0.50,1.00,0.50").toString()));
+	setCurrentPlanetColor(          Vec3f(conf->value("ArchaeoLines/color_current_planet",             "0.25,0.80,1.00").toString()));
+	setGeographicLocation1Color(    Vec3f(conf->value("ArchaeoLines/color_geographic_location_1",      "0.25,1.00,0.25").toString()));
+	setGeographicLocation2Color(    Vec3f(conf->value("ArchaeoLines/color_geographic_location_2",      "0.25,0.25,1.00").toString()));
+	setCustomAzimuth1Color(         Vec3f(conf->value("ArchaeoLines/color_custom_azimuth_1",           "0.25,1.00,0.25").toString()));
+	setCustomAzimuth2Color(         Vec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",           "0.25,0.50,0.75").toString()));
+	setCustomDeclination1Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_1",       "0.45,1.00,0.15").toString()));
+	setCustomDeclination2Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_2",       "0.45,0.50,0.65").toString()));
 
 	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  39.826175).toDouble());
 	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   21.422476).toDouble());
 	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  35.235774).toDouble());
 	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   31.778087).toDouble());
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation1Longitude, geographicLocation1Latitude));
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation2Longitude, geographicLocation2Latitude));
+	double azi=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (azFromSouth) azi+=180.0;
+	geographicLocation1Line->setDefiningAngle(azi);
+	azi = loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (azFromSouth) azi+=180.0;
+	geographicLocation2Line->setDefiningAngle(azi);
 	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
 	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
 
@@ -572,6 +580,16 @@ void ArchaeoLines::loadSettings()
 	showCustomDeclination2(conf->value("ArchaeoLines/show_custom_declination_2", false).toBool());
 
 	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
+}
+
+void ArchaeoLines::setLineWidth(int width)
+{
+	if (width!=lineWidth)
+	{
+		lineWidth=qBound(1, width, 8); // Force some sensible limit
+		conf->setValue("ArchaeoLines/line_thickness", lineWidth);
+		emit lineWidthChanged(lineWidth);
+	}
 }
 
 void ArchaeoLines::showEquinox(bool b)
@@ -812,7 +830,10 @@ void ArchaeoLines::setGeographicLocation1Longitude(double lng)
 	conf->setValue("ArchaeoLines/geographic_location_1_longitude", lng);
 	geographicLocation1Longitude=lng;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
 void ArchaeoLines::setGeographicLocation1Latitude(double lat)
@@ -820,7 +841,10 @@ void ArchaeoLines::setGeographicLocation1Latitude(double lat)
 	conf->setValue("ArchaeoLines/geographic_location_1_latitude", lat);
 	geographicLocation1Latitude=lat;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
 void ArchaeoLines::setGeographicLocation1Label(QString label)
@@ -834,7 +858,10 @@ void ArchaeoLines::setGeographicLocation2Longitude(double lng)
 	conf->setValue("ArchaeoLines/geographic_location_2_longitude", lng);
 	geographicLocation2Longitude=lng;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
 void ArchaeoLines::setGeographicLocation2Latitude(double lat)
@@ -842,7 +869,10 @@ void ArchaeoLines::setGeographicLocation2Latitude(double lat)
 	conf->setValue("ArchaeoLines/geographic_location_2_latitude", lat);
 	geographicLocation2Latitude=lat;
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	double az=loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		az+=180.0;
+	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
 void ArchaeoLines::setGeographicLocation2Label(QString label)
@@ -854,14 +884,14 @@ void ArchaeoLines::setGeographicLocation2Label(QString label)
 
 void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 {
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	geographicLocation1Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude));
+	geographicLocation2Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude));
 }
 
 
 void ArchaeoLines::setCustomAzimuth1(double az)
 {
-	if (az!=customAzimuth1Line->getDefiningAngle())
+	if (!qFuzzyCompare(az, customAzimuth1Line->getDefiningAngle()))
 	{
 		customAzimuth1Line->setDefiningAngle(az);
 		conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
@@ -870,7 +900,7 @@ void ArchaeoLines::setCustomAzimuth1(double az)
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
-	if (az!=customAzimuth1Line->getDefiningAngle())
+	if (!qFuzzyCompare(az, customAzimuth1Line->getDefiningAngle()))
 	{
 		customAzimuth2Line->setDefiningAngle(az);
 		conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
@@ -891,7 +921,7 @@ void ArchaeoLines::setCustomAzimuth2Label(QString label)
 }
 void ArchaeoLines::setCustomDeclination1(double dec)
 {
-	if (dec!=customDeclination1Line->getDefiningAngle())
+	if (!qFuzzyCompare(dec, customDeclination1Line->getDefiningAngle()))
 	{
 		customDeclination1Line->setDefiningAngle(dec);
 		conf->setValue("ArchaeoLines/custom_declination_1_angle", dec);
@@ -900,7 +930,7 @@ void ArchaeoLines::setCustomDeclination1(double dec)
 }
 void ArchaeoLines::setCustomDeclination2(double dec)
 {
-	if (dec!=customDeclination1Line->getDefiningAngle())
+	if (!qFuzzyCompare(dec, customDeclination1Line->getDefiningAngle()))
 	{
 		customDeclination2Line->setDefiningAngle(dec);
 		conf->setValue("ArchaeoLines/custom_declination_2_angle", dec);
@@ -1180,20 +1210,6 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 	}
 }
 
-double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
-{
-	longObs    *= (M_PI/180.0);
-	latObs     *= (M_PI/180.0);
-	longTarget *= (M_PI/180.0);
-	latTarget  *= (M_PI/180.0);
-
-	return (180.0/M_PI) * atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
-}
-double ArchaeoLines::getAzimuthForLocation(float longObs, float latObs, double longTarget, double latTarget)
-{
-	return getAzimuthForLocation(static_cast<double>(longObs), static_cast<double>(latObs), longTarget, latTarget);
-}
-
 // callback stuff shamelessly taken from GridLinesMgr. Changes: Text MUST be filled, can also be empty for no label!
 struct ALViewportEdgeIntersectCallbackData
 {
@@ -1336,6 +1352,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
+	const float oldLineWidth=sPainter.getLineWidth();
+	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth());
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
@@ -1368,7 +1386,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				//sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
-				return;
+				//return;
 //			}
 //			//else
 //			//	return;
@@ -1395,53 +1413,55 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	}
 	/////////////////////////////////////////////////
 	// Else draw small circles (declinations). (Technically, Equator is one, but ok...)
-
-	// Draw the line
-	const double lat=definingAngle*M_PI/180.0;
-	SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
-	const Vec3d rotCenter(0,0,declinationCap.d);
-
-	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+	else
 	{
-		if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
-			|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+		// Draw the line
+		const double lat=definingAngle*M_PI/180.0;
+		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+		const Vec3d rotCenter(0,0,declinationCap.d);
+
+		Vec3d p1, p2;
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
 		{
-			// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			Vec3d pt1;
-			Vec3d pt2;
-			Vec3d pt3;
-			const double lon1=0.0;
-			const double lon2=120.0*M_PI/180.0;
-			const double lon3=240.0*M_PI/180.0;
-			StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
-			StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
-			StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+			if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+					|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+			{
+				// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				Vec3d pt1;
+				Vec3d pt2;
+				Vec3d pt3;
+				const double lon1=0.0;
+				const double lon2=120.0*M_PI/180.0;
+				const double lon3=240.0*M_PI/180.0;
+				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
 
-			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
+			}
 		}
+		else
+		{
+			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+			middlePoint.normalize();
+			middlePoint*=(p1-rotCenter).length();
+			middlePoint+=rotCenter;
+			if (!viewPortSphericalCap.contains(middlePoint))
+			{
+				middlePoint-=rotCenter;
+				middlePoint*=-1.;
+				middlePoint+=rotCenter;
+			}
 
-		sPainter.setLineSmooth(false);
-		sPainter.setBlending(false);
-		return;
+			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
+		}
 	}
-	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
-	middlePoint.normalize();
-	middlePoint*=(p1-rotCenter).length();
-	middlePoint+=rotCenter;
-	if (!viewPortSphericalCap.contains(middlePoint))
-	{
-		middlePoint-=rotCenter;
-		middlePoint*=-1.;
-		middlePoint+=rotCenter;
-	}
 
-	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
-	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
-
+	sPainter.setLineWidth(oldLineWidth); // restore
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
 }
@@ -1456,7 +1476,7 @@ void ArchaeoLine::setColor(const Vec3f& c)
 }
 void ArchaeoLine::setDefiningAngle(const double angle)
 {
-	if (angle != definingAngle)
+	if (!qFuzzyCompare(angle, definingAngle))
 	{
 		definingAngle=angle;
 		emit definingAngleChanged(angle);

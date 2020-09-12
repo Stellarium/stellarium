@@ -56,6 +56,7 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connectIntProperty(ui->dataStepSpinBox, "SolarSystem.ephemerisDataStep");
 	connectBoolProperty(ui->smartDatesCheckBox, "SolarSystem.ephemerisSmartDates");
 	connectBoolProperty(ui->scaleMarkersCheckBox, "SolarSystem.ephemerisScaleMarkersDisplayed");
+	connectIntProperty(ui->lineThicknessSpinBox, "SolarSystem.ephemerisLineThickness");
 }
 
 void AstroCalcExtraEphemerisDialog::setVisible(bool v)

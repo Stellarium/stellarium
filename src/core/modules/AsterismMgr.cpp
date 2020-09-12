@@ -21,7 +21,6 @@
 #include "AsterismMgr.hpp"
 #include "Asterism.hpp"
 #include "StarMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
@@ -83,9 +82,9 @@ void AsterismMgr::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
-	setLinesColor(StelUtils::strToVec3f(conf->value("color/asterism_lines_color", defaultColor).toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value("color/asterism_names_color", defaultColor).toString()));
-	setRayHelpersColor(StelUtils::strToVec3f(conf->value("color/rayhelper_lines_color", defaultColor).toString()));
+	setLinesColor(Vec3f(conf->value("color/asterism_lines_color", defaultColor).toString()));
+	setLabelsColor(Vec3f(conf->value("color/asterism_names_color", defaultColor).toString()));
+	setRayHelpersColor(Vec3f(conf->value("color/rayhelper_lines_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -436,16 +435,16 @@ void AsterismMgr::loadNames(const QString& namesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the asterism exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				ctxt = recRx.capturedTexts().at(2);
+				ctxt = recRx.cap(2);
 				if (ctxRx.exactMatch(ctxt))
 				{
-					aster->englishName = ctxRx.capturedTexts().at(1);
-					aster->context = ctxRx.capturedTexts().at(2);
+					aster->englishName = ctxRx.cap(1);
+					aster->context = ctxRx.cap(2);
 				}
 				else
 				{

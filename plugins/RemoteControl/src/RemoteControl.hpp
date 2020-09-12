@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
- 
+
 #ifndef REMOTECONTROL_HPP
 #define REMOTECONTROL_HPP
 
@@ -59,10 +59,14 @@ class RemoteControl : public StelModule
 		   READ getFlagUsePassword
 		   WRITE setFlagUsePassword
 		   NOTIFY flagUsePasswordChanged)
+	Q_PROPERTY(bool enableCors
+		   READ getFlagEnableCors
+		   WRITE setFlagEnableCors
+		   NOTIFY flagEnableCorsChanged)
 public:
 	RemoteControl();
 	virtual ~RemoteControl();
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
@@ -79,8 +83,10 @@ public:
 	bool getFlagEnabled() const {return enabled;}
 	bool getFlagAutoStart() const { return autoStart; }
 	bool getFlagUsePassword() const { return usePassword; }
+	bool getFlagEnableCors() const { return enableCors; }
 
 	QString getPassword() const { return password; }
+	QString getCorsOrigin() const { return corsOrigin; }
 	int getPort() const {return port; }
 
 public slots:
@@ -96,6 +102,14 @@ public slots:
 	//! The password is required by RequestHandler for all HTTP requests.
 	//! Basic HTTP auth is used, without a user name.
 	void setPassword(const QString& password);
+
+	//! If true, Access-Control-Allow-Origin header will be appended to responses.
+	void setFlagEnableCors(bool b);
+
+	//! Sets the CORS origin that is optionally enabled with setFlagEnableCors().
+	void setCorsOrigin(const QString& corsOrigin);
+
+
 	//! Sets the port where the server listens. Must be done before startServer() is called,
 	//! or restart the server to use the new setting.
 	void setPort(const int port);
@@ -129,9 +143,11 @@ signals:
 	void flagEnabledChanged(bool val);
 	void flagAutoStartChanged(bool val);
 	void flagUsePasswordChanged(bool val);
+	void flagEnableCorsChanged(bool val);
 
 	void portChanged(int val);
 	void passwordChanged(const QString& val);
+	void corsOriginChanged(const QString& val);
 
 
 private:
@@ -144,6 +160,8 @@ private:
 	bool autoStart;
 	bool usePassword;
 	QString password;
+	bool enableCors;
+	QString corsOrigin;
 
 	int port;
 	int minThreads;

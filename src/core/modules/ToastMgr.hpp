@@ -42,10 +42,6 @@ public:
 public slots:
 	void setFlagShow(bool displayed);
 	bool getFlagShow(void) const;
-	//! @deprecated Will be removed in version 0.20. Use setFlagShow() instead.
-	void setFlagSurveyShow(bool displayed);
-	//! @deprecated Will be removed in version 0.20. Use getFlagShow() instead.
-	bool getFlagSurveyShow(void) const;
 
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;

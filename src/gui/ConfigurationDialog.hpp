@@ -76,10 +76,12 @@ private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
+	void saveCustomSelectedInfo();
 
 	void updateCurrentLanguage();
 	void updateCurrentSkyLanguage();

@@ -102,7 +102,9 @@ void DummyDialog::setVisible(bool v)
 		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainView::getInstance().scene()->addItem(proxy);
-		proxy->setWindowFrameMargins(2,0,2,2);
+		// Invisible frame around the window to make resizing easier
+		// (this also changes the bounding rectangle size)
+		proxy->setWindowFrameMargins(7,0,7,7);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); 
 		proxy->setZValue(100);
 		StelMainView::getInstance().scene()->setActiveWindow(proxy);

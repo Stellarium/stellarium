@@ -118,10 +118,13 @@ public:
 	double getPhaseAngle() const;
 	//! Get orbital period in minutes
 	double getOrbitalPeriod() const;
+	//! Get orbital inclination in degrees
+	double getOrbitalInclination() const;
+	//! Get perigee/apogee altitudes in kilometers for equatorial radius of Earth
+	Vec2d getPerigeeApogeeAltitudes() const;
 	static gTime getEpoch() { return epoch; }
 
-//private:
-        // Operation calcObserverECIPosition
+	// Operation calcObserverECIPosition
 	//! @brief This operation computes the observer ECI coordinates in Geocentric
 	//! Equatorial Coordinate System (IJK) for the ai_epoch time.
         //! This position can be asumed as observer position in TEME framework without an appreciable error.

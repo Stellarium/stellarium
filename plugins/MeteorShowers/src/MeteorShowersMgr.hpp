@@ -281,6 +281,8 @@ private slots:
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
 	void locationChanged(const StelLocation &location);
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings();
 
 private:
 	MeteorShowers* m_meteorShowers;
@@ -321,7 +323,7 @@ private:
 	class StelProgressController* m_progressBar;
 
 	void createActions();
-	void loadConfig();
+	void loadConfig();	
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
 
@@ -330,7 +332,7 @@ private:
 
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
-	void actionEnablePlugin(const bool& b) { if (m_enablePlugin != b) { m_enablePlugin = b; emit enablePluginChanged(b);} }
+	void actionEnablePlugin(const bool& b);
 };
 
 #include <QObject>

@@ -43,6 +43,7 @@ const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
 StelTextureSP Nebula::texCircle;
 StelTextureSP Nebula::texCircleLarge;
+StelTextureSP Nebula::texRegion;
 StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texGalaxyLarge;
 StelTextureSP Nebula::texOpenCluster;
@@ -63,41 +64,8 @@ bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
 float Nebula::hintsBrightness = 0.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
-Vec3f Nebula::circleColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::galaxyColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::radioGalaxyColor = Vec3f(0.3f,0.3f,0.3f);
-Vec3f Nebula::activeGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
-Vec3f Nebula::quasarColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::nebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::planetaryNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::reflectionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::bipolarNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::emissionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::darkNebulaColor = Vec3f(0.3f,0.3f,0.3f);
-Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::interstellarMatterColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::clusterWithNebulosityColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::clusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::openClusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::globularClusterColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::stellarAssociationColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::starCloudColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::emissionObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::blLacObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::blazarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::molecularCloudColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::youngStellarObjectColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
-Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::symbioticStarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::emissionLineStarColor = Vec3f(1.0f,1.0f,0.1f);
-Vec3f Nebula::supernovaCandidateColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::supernovaRemnantCandidateColor = Vec3f(0.1f,1.0f,0.1f);
-Vec3f Nebula::galaxyClusterColor = Vec3f(0.8f,0.8f,0.5f);
+QMap<Nebula::NebulaType, Vec3f>Nebula::hintColorMap;
+QMap<Nebula::NebulaType, QString> Nebula::typeStringMap;
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(Q_NULLPTR);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -127,9 +95,12 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Arp_nb(0)
-	, VV_nb(0)	
-	, Abell_nb(0)
+	, VV_nb(0)		
 	, DWB_nb(0)
+	, Tr_nb(0)
+	, St_nb(0)
+	, Ru_nb(0)
+	, VdBHa_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
@@ -155,6 +126,7 @@ Nebula::Nebula()
 	, nType()
 {
 	outlineSegments.clear();
+	designations.clear();
 }
 
 Nebula::~Nebula()
@@ -164,26 +136,42 @@ Nebula::~Nebula()
 QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
 {
 	QString res;
-	if (vMag < 50.f && flags&Magnitude)
+	const float mmag = qMin(vMag, bMag);
+	if (mmag < 50.f && flags&Magnitude)
 	{
 		QString emag = "";
+		QString fsys = "";
+		bool bmag = false;
+		float mag = getVMagnitude(core);
+		float mage = getVMagnitudeWithExtinction(core);
+		bool hasAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 		QString tmag = q_("Magnitude");
 		if (nType == NebDn)
 			tmag = q_("Opacity");
 
-		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		if (bMag < 50.f && vMag > 50.f)
+		{
+			fsys = QString("(%1 B").arg(q_("photometric passband"));
+			if (hasAtmosphere)
+				fsys.append(";");
+			else
+				fsys.append(")");
+			mag = getBMagnitude(core);
+			mage = getBMagnitudeWithExtinction(core);
+			bmag = true;
+		}
+
+		if (nType != NebDn && hasAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
-
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			emag = QString("%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(mage, 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			if (!bmag)
+				emag = QString("(%1").arg(emag);
 		}
-		res = QString("%1: <b>%2</b>%3<br />").arg(tmag, QString::number(getVMagnitude(core), 'f', decimals), emag);
+		res = QString("%1: <b>%2</b> %3 %4<br />").arg(tmag, QString::number(mag, 'f', decimals), fsys, emag);
 	}
-	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
-		res.append(QString("%1: <b>%2</b> (%3: B)<br />").arg(q_("Magnitude"), QString::number(bMag, 'f', decimals), q_("Photometric system")));
-	// TODO: Extinction for B magnitude? Or show B magnitude in addition to valid V magnitude?
-
+	res += getExtraInfoStrings(Magnitude).join("");
 	return res;
 }
 
@@ -194,7 +182,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	double az_app, alt_app;
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
@@ -208,69 +196,28 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 
 	if (flags&CatalogNumber)
-	{
-		QStringList catIds;
-		if (M_nb > 0)
-			catIds << QString("M %1").arg(M_nb);
-		if (C_nb > 0)
-			catIds << QString("C %1").arg(C_nb);
-		if (NGC_nb > 0)
-			catIds << QString("NGC %1").arg(NGC_nb);
-		if (IC_nb > 0)
-			catIds << QString("IC %1").arg(IC_nb);		
-		if (B_nb > 0)
-			catIds << QString("B %1").arg(B_nb);
-		if (Sh2_nb > 0)
-			catIds << QString("SH 2-%1").arg(Sh2_nb);
-		if (VdB_nb > 0)
-			catIds << QString("VdB %1").arg(VdB_nb);
-		if (RCW_nb > 0)
-			catIds << QString("RCW %1").arg(RCW_nb);
-		if (LDN_nb > 0)
-			catIds << QString("LDN %1").arg(LDN_nb);
-		if (LBN_nb > 0)
-			catIds << QString("LBN %1").arg(LBN_nb);
-		if (Cr_nb > 0)
-			catIds << QString("Cr %1").arg(Cr_nb);
-		if (Mel_nb > 0)
-			catIds << QString("Mel %1").arg(Mel_nb);
-		if (PGC_nb > 0)
-			catIds << QString("PGC %1").arg(PGC_nb);
-		if (UGC_nb > 0)
-			catIds << QString("UGC %1").arg(UGC_nb);
-		if (!Ced_nb.isEmpty())
-			catIds << QString("Ced %1").arg(Ced_nb);
-		if (Arp_nb > 0)
-			catIds << QString("Arp %1").arg(Arp_nb);
-		if (VV_nb > 0)
-			catIds << QString("VV %1").arg(VV_nb);
-		if (!PK_nb.isEmpty())
-			catIds << QString("PK %1").arg(PK_nb);
-		if (!PNG_nb.isEmpty())
-			catIds << QString("PN G%1").arg(PNG_nb);
-		if (!SNRG_nb.isEmpty())
-			catIds << QString("SNR G%1").arg(SNRG_nb);
-		if (!ACO_nb.isEmpty())
-			catIds << QString("ACO %1").arg(ACO_nb);
-		if (!HCG_nb.isEmpty())
-			catIds << QString("HCG %1").arg(HCG_nb);
-		if (Abell_nb > 0)
-			catIds << QString("Abell %1").arg(Abell_nb);
-		if (!ESO_nb.isEmpty())
-			catIds << QString("ESO %1").arg(ESO_nb);
-		if (!VdBH_nb.isEmpty())
-			catIds << QString("VdBH %1").arg(VdBH_nb);
-		if (DWB_nb > 0)
-			catIds << QString("DWB %1").arg(DWB_nb);
-
-		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
+	{	
+		if (!nameI18.isEmpty() && !withoutID && flags&Name)
 			oss << "<br>";
 
-		oss << catIds.join(" - ");
+		oss << designations.join(" - ");
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
+
+	if (flags&Name)
+	{
+		QStringList extraNames=getExtraInfoStrings(Name);
+		if (extraNames.length()>0)
+			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
+	}
+	if (flags&CatalogNumber)
+	{
+		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+		if (extraCat.length()>0)
+			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
+	}
 
 	if (flags&ObjectType)
 	{
@@ -279,6 +226,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getTypeString()) << "<br>";
 		else
 			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getTypeString(), mt) << "<br>";
+		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
 	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
@@ -308,9 +256,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
 		}
 
-		if (getSurfaceBrightness(core)<99)
+		if (getSurfaceBrightness(core)<99.f)
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99) // Don't show extincted surface brightness much below horizon where model is meaningless.
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
 											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
@@ -318,7 +266,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
 
-			oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
+			if (getContrastIndex(core)<99.f)
+				oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
 		}
 	}
 
@@ -347,6 +296,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br />";
 		}
 	}
+	if (flags&Size)
+		oss << getExtraInfoStrings(Size).join("");
 
 	if (flags&Distance)
 	{
@@ -418,6 +369,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";
 		}
+		oss << getExtraInfoStrings(Distance).join("");
 	}
 
 	if (flags&Extra)
@@ -518,8 +470,25 @@ QString Nebula::getI18nAliases() const
 
 float Nebula::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);	
+	Q_UNUSED(core)
 	return vMag;
+}
+
+float Nebula::getBMagnitude(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return bMag;
+}
+
+float Nebula::getBMagnitudeWithExtinction(const StelCore* core) const
+{
+	Vec3d altAzPos = getAltAzPosGeometric(core);
+	altAzPos.normalize();
+	float mag = getBMagnitude(core);
+	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		core->getSkyDrawer()->getExtinction().forward(altAzPos, &mag);
+	return mag;
 }
 
 double Nebula::getAngularSize(const StelCore *) const
@@ -538,9 +507,12 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	if (!nebMgr->getFlagHints())
 		return selectPriority+3.f;
 
-	float mag = getVMagnitude(core);
+	float mag = qMin(getVMagnitude(core), getBMagnitude(core));
 	float lim = mag;
 	float mLim = 15.0f;
+
+	if (nType==NebRegion) // special case for regions
+		mag = 3.f;
 
 	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
 		return selectPriority+mLim;
@@ -563,7 +535,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
+	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0 || nType==NebRegion) // High priority for big DSO (with outlines) or regions
 		selectPriority = -10.f;
 	else
 		selectPriority -= 5.f;
@@ -583,25 +555,20 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 {
-	float mag = getVMagnitude(core);
-	float sq = 3600.f; // arcmin^2
-	if (arcsec)
-		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
-	if (bMag < 90.f && mag > 90.f)
-		mag = bMag;
+	const float sq = (arcsec ? 3600.f*3600.f : 3600.f); // arcsec^2 or arcmin^2
+	const float mag = qMin(getVMagnitude(core), getBMagnitude(core));
 	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
-		return mag + 2.5f*log10(getSurfaceArea()*sq);
+		return mag + 2.5f*log10f(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
 
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcsec) const
 {
-	float sq = 3600.f; // arcmin^2
-	if (arcsec)
-		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
-	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0.f && nType!=NebDn)
-		return getVMagnitudeWithExtinction(core) + 2.5f*log10(getSurfaceArea()*sq);
+	const float sq = (arcsec ? 3600.f*3600.f : 3600.f); // arcsec^2 or arcmin^2
+	const float mag = qMin(getVMagnitudeWithExtinction(core), getBMagnitudeWithExtinction(core));
+	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
+		return mag + 2.5f*log10f(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
@@ -617,7 +584,11 @@ float Nebula::getContrastIndex(const StelCore* core) const
 	// Compute an extended object's contrast index
 	// Source: Clark, R.N., 1990. Appendix E in Visual Astronomy of the Deep Sky, Cambridge University Press and Sky Publishing.
 	// URL: http://www.clarkvision.com/visastro/appendix-e.html
-	return -0.4f * (getSurfaceBrightnessWithExtinction(core, true) - B_mpsas);
+	const float emag = getSurfaceBrightnessWithExtinction(core, true);
+	if (emag<99.f)
+		return -0.4f * (emag - B_mpsas);
+	else
+		return 99.f;
 }
 
 float Nebula::getSurfaceArea(void) const
@@ -628,79 +599,9 @@ float Nebula::getSurfaceArea(void) const
 		return M_PIf*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
 }
 
-Vec3f Nebula::getHintColor(void) const
+Vec3f Nebula::getHintColor(Nebula::NebulaType nType)
 {
-	switch (nType)
-	{
-		case NebGx:
-			return galaxyColor;
-		case NebIGx:
-			return interactingGalaxyColor;
-		case NebAGx:
-			return activeGalaxyColor;
-		case NebQSO:
-			return quasarColor;
-		case NebPossQSO:
-			return possibleQuasarColor;
-		case NebBLL:
-			return blLacObjectColor;
-		case NebBLA:
-			return blazarColor;
-		case NebRGx:
-			return radioGalaxyColor;
-		case NebOc:
-			return openClusterColor;
-		case NebSA:
-			return stellarAssociationColor;
-		case NebSC:
-			return starCloudColor;
-		case NebCl:
-			return clusterColor;
-		case NebGc:
-			return globularClusterColor;
-		case NebN:
-			return nebulaColor;
-		case NebHII:
-			return hydrogenRegionColor;
-		case NebMolCld:
-			return molecularCloudColor;
-		case NebYSO:
-			return youngStellarObjectColor;
-		case NebRn:
-			return reflectionNebulaColor;
-		case NebSNR:
-			return supernovaRemnantColor;
-		case NebBn:
-			return bipolarNebulaColor;
-		case NebEn:
-			return emissionNebulaColor;
-		case NebPn:
-			return planetaryNebulaColor;
-		case NebPossPN:
-			return possiblePlanetaryNebulaColor;
-		case NebPPN:
-			return protoplanetaryNebulaColor;
-		case NebDn:
-			return darkNebulaColor;
-		case NebCn:
-			return clusterWithNebulosityColor;
-		case NebEMO:
-			return emissionObjectColor;
-		case NebStar:
-			return starColor;
-		case NebSymbioticStar:
-			return symbioticStarColor;
-		case NebEmissionLineStar:
-			return emissionLineStarColor;
-		case NebSNC:
-			return supernovaCandidateColor;
-		case NebSNRC:
-			return supernovaRemnantCandidateColor;
-		case NebGxCl:
-			return galaxyClusterColor;
-		default:
-			return circleColor;
-	}
+	return hintColorMap.value(nType, hintColorMap.value(NebUnknown));
 }
 
 float Nebula::getVisibilityLevelByMagnitude(void) const
@@ -713,7 +614,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 90.f) lim = mLim + 1.f;
+		if (lim > 90.f) lim = mLim + 1.f;		
 	}
 	else
 	{
@@ -735,8 +636,11 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
 		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 			lim=9.0f;
-		}
+		}		
 	}
+
+	if (nType==NebRegion) // special case for regions
+		lim=3.0f;
 
 	return lim;
 }
@@ -744,7 +648,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 {
 	size_t segments = outlineSegments.size();
-	Vec3f color = getHintColor();
+	Vec3f color = getHintColor(nType);
 
 	// tune limits for outlines
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
@@ -791,15 +695,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (getVisibilityLevelByMagnitude()>maxMagHints)
 		return;
 
-	Vec3f color = getHintColor();
+	Vec3f color = getHintColor(nType);
 
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional)
-	{
 		scaledSize = static_cast<float>(getAngularSize(Q_NULLPTR)) *M_PI_180f*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
-	}
-	const float finalSize=qMax(size, scaledSize);
+	float finalSize=qMax(size, scaledSize);
 
 	switch (nType)
 	{
@@ -811,7 +713,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		case NebBLL:
 		case NebBLA:
 		case NebRGx:
-		case NebGxCl:
+		case NebGxCl:			
 			if (finalSize > 35.f)
 				Nebula::texGalaxyLarge->bind();
 			else
@@ -867,6 +769,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 				Nebula::texOpenClusterWithNebulosityLarge->bind();
 			else
 				Nebula::texOpenClusterWithNebulosity->bind();
+			break;
+		case NebRegion:
+			finalSize = size*2.f;
+			Nebula::texRegion->bind();
 			break;
 		//case NebEMO:
 		//case NebStar:
@@ -942,7 +848,7 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatSh2 && Sh2_nb>0)
 		str = QString("SH 2-%1").arg(Sh2_nb);
 	else if (catalogFilters&CatVdB && VdB_nb>0)
-		str = QString("VdB %1").arg(VdB_nb);
+		str = QString("vdB %1").arg(VdB_nb);
 	else if (catalogFilters&CatRCW && RCW_nb>0)
 		str = QString("RCW %1").arg(RCW_nb);
 	else if (catalogFilters&CatLDN && LDN_nb>0)
@@ -970,19 +876,33 @@ QString Nebula::getDSODesignation() const
 	else if (catalogFilters&CatSNRG && !SNRG_nb.isEmpty())
 		str = QString("SNR G%1").arg(SNRG_nb);
 	else if (catalogFilters&CatACO && !ACO_nb.isEmpty())
-		str = QString("ACO %1").arg(ACO_nb);
+		str = QString("Abell %1").arg(ACO_nb);
 	else if (catalogFilters&CatHCG && !HCG_nb.isEmpty())
-		str = QString("HCG %1").arg(HCG_nb);
-	else if (catalogFilters&CatAbell && Abell_nb > 0)
-		str = QString("Abell %1").arg(Abell_nb);
+		str = QString("HCG %1").arg(HCG_nb);	
 	else if (catalogFilters&CatESO && !ESO_nb.isEmpty())
 		str = QString("ESO %1").arg(ESO_nb);
 	else if (catalogFilters&CatVdBH && !VdBH_nb.isEmpty())
-		str = QString("VdBH %1").arg(VdBH_nb);
+		str = QString("vdBH %1").arg(VdBH_nb);
 	else if (catalogFilters&CatDWB && DWB_nb > 0)
 		str = QString("DWB %1").arg(DWB_nb);
+	else if (catalogFilters&CatTr && Tr_nb > 0)
+		str = QString("Tr %1").arg(Tr_nb);
+	else if (catalogFilters&CatSt && St_nb > 0)
+		str = QString("St %1").arg(St_nb);
+	else if (catalogFilters&CatRu && Ru_nb > 0)
+		str = QString("Ru %1").arg(Ru_nb);
+	else if (catalogFilters&CatVdBHa && VdBHa_nb > 0)
+		str = QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	return str;
+}
+
+QString Nebula::getDSODesignationWIC() const
+{
+	if (!withoutID)
+		return designations.first();
+	else
+		return QString();
 }
 
 void Nebula::readDSO(QDataStream &in)
@@ -994,11 +914,41 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
-		>> HCG_nb >> Abell_nb >> ESO_nb >> VdBH_nb >> DWB_nb;
+		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb >> Tr_nb >> St_nb >> Ru_nb >> VdBHa_nb;
 
-	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + Abell_nb + DWB_nb;
+	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
+
+	if (M_nb > 0) designations << QString("M %1").arg(M_nb);
+	if (C_nb > 0)  designations << QString("C %1").arg(C_nb);
+	if (NGC_nb > 0) designations << QString("NGC %1").arg(NGC_nb);
+	if (IC_nb > 0) designations << QString("IC %1").arg(IC_nb);
+	if (B_nb > 0) designations << QString("B %1").arg(B_nb);
+	if (Sh2_nb > 0) designations << QString("SH 2-%1").arg(Sh2_nb);
+	if (VdB_nb > 0) designations << QString("vdB %1").arg(VdB_nb);
+	if (RCW_nb > 0) designations << QString("RCW %1").arg(RCW_nb);
+	if (LDN_nb > 0) designations << QString("LDN %1").arg(LDN_nb);
+	if (LBN_nb > 0) designations << QString("LBN %1").arg(LBN_nb);
+	if (Cr_nb > 0) designations << QString("Cr %1").arg(Cr_nb);
+	if (Mel_nb > 0) designations << QString("Mel %1").arg(Mel_nb);
+	if (PGC_nb > 0) designations << QString("PGC %1").arg(PGC_nb);
+	if (UGC_nb > 0) designations << QString("UGC %1").arg(UGC_nb);
+	if (!Ced_nb.isEmpty()) designations << QString("Ced %1").arg(Ced_nb);
+	if (Arp_nb > 0) designations << QString("Arp %1").arg(Arp_nb);
+	if (VV_nb > 0) designations << QString("VV %1").arg(VV_nb);
+	if (!PK_nb.isEmpty()) designations << QString("PK %1").arg(PK_nb);
+	if (!PNG_nb.isEmpty()) designations << QString("PN G%1").arg(PNG_nb);
+	if (!SNRG_nb.isEmpty()) designations << QString("SNR G%1").arg(SNRG_nb);
+	if (!ACO_nb.isEmpty()) designations << QString("Abell %1").arg(ACO_nb);
+	if (!HCG_nb.isEmpty()) designations << QString("HCG %1").arg(HCG_nb);
+	if (!ESO_nb.isEmpty()) designations << QString("ESO %1").arg(ESO_nb);
+	if (!VdBH_nb.isEmpty()) designations << QString("vdBH %1").arg(VdBH_nb);
+	if (DWB_nb > 0) designations << QString("DWB %1").arg(DWB_nb);
+	if (Tr_nb > 0) designations << QString("Tr %1").arg(Tr_nb);
+	if (St_nb > 0) designations << QString("St %1").arg(St_nb);
+	if (Ru_nb > 0) designations << QString("Ru %1").arg(Ru_nb);
+	if (VdBHa_nb > 0) designations << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);
@@ -1011,7 +961,6 @@ bool Nebula::objectInDisplayedType() const
 	if (!flagUseTypeFilters)
 		return true;
 
-	bool r = false;
 	int cntype = -1;
 	switch (nType)
 	{
@@ -1073,95 +1022,57 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 12;
 			break;
 	}
-	if (typeFilters&TypeGalaxies && cntype==0)
-		r = true;
-	else if (typeFilters&TypeActiveGalaxies && cntype==1)
-		r = true;
-	else if (typeFilters&TypeInteractingGalaxies && cntype==2)
-		r = true;
-	else if (typeFilters&TypeOpenStarClusters && cntype==3)
-		r = true;
-	else if (typeFilters&TypeGlobularStarClusters && cntype==11)
-		r = true;
-	else if (typeFilters&TypeHydrogenRegions && cntype==4)
-		r = true;
-	else if (typeFilters&TypeBrightNebulae && cntype==5)
-		r = true;
-	else if (typeFilters&TypeDarkNebulae && cntype==6)
-		r = true;
-	else if (typeFilters&TypePlanetaryNebulae && cntype==7)
-		r = true;
-	else if (typeFilters&TypeSupernovaRemnants && cntype==8)
-		r = true;
-	else if (typeFilters&TypeOpenStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
-		r = true;
-	else if (typeFilters&TypeGalaxyClusters && cntype==10)
-		r = true;
-	else if (typeFilters&TypeOther && cntype==12)
-		r = true;
+	bool r = ( (typeFilters&TypeGalaxies             && cntype==0)
+		|| (typeFilters&TypeActiveGalaxies       && cntype==1)
+		|| (typeFilters&TypeInteractingGalaxies  && cntype==2)
+		|| (typeFilters&TypeOpenStarClusters     && cntype==3)
+		|| (typeFilters&TypeGlobularStarClusters && cntype==11)
+		|| (typeFilters&TypeHydrogenRegions      && cntype==4)
+		|| (typeFilters&TypeBrightNebulae        && cntype==5)
+		|| (typeFilters&TypeDarkNebulae          && cntype==6)
+		|| (typeFilters&TypePlanetaryNebulae     && cntype==7)
+		|| (typeFilters&TypeSupernovaRemnants    && cntype==8)
+		|| (typeFilters&TypeOpenStarClusters     && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+		|| (typeFilters&TypeGalaxyClusters       && cntype==10)
+		|| (typeFilters&TypeOther                && cntype==12));
 
 	return r;
 }
 
 bool Nebula::objectInDisplayedCatalog() const
 {
-	bool r = false;
-	if ((catalogFilters&CatM) && (M_nb>0))
-		r = true;
-	else if ((catalogFilters&CatC) && (C_nb>0))
-		r = true;
-	else if ((catalogFilters&CatNGC) && (NGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatIC) && (IC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatB) && (B_nb>0))
-		r = true;
-	else if ((catalogFilters&CatSh2) && (Sh2_nb>0))
-		r = true;
-	else if ((catalogFilters&CatVdB) && (VdB_nb>0))
-		r = true;
-	else if ((catalogFilters&CatRCW) && (RCW_nb>0))
-		r = true;
-	else if ((catalogFilters&CatLDN) && (LDN_nb>0))
-		r = true;
-	else if ((catalogFilters&CatLBN) && (LBN_nb>0))
-		r = true;
-	else if ((catalogFilters&CatCr) && (Cr_nb>0))
-		r = true;
-	else if ((catalogFilters&CatMel) && (Mel_nb>0))
-		r = true;
-	else if ((catalogFilters&CatPGC) && (PGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatUGC) && (UGC_nb>0))
-		r = true;
-	else if ((catalogFilters&CatCed) && !(Ced_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatArp) && (Arp_nb>0))
-		r = true;
-	else if ((catalogFilters&CatVV) && (VV_nb>0))
-		r = true;
-	else if ((catalogFilters&CatPK) && !(PK_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatPNG) && !(PNG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatSNRG) && !(SNRG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatHCG) && (!HCG_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatAbell) && (Abell_nb>0))
-		r = true;
-	else if ((catalogFilters&CatESO) && (!ESO_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatVdBH) && (!VdBH_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&CatDWB) && (DWB_nb>0))
-		r = true;
+	bool r = ( ((catalogFilters&CatM)     && (M_nb>0))
+		|| ((catalogFilters&CatC)     && (C_nb>0))
+		|| ((catalogFilters&CatNGC)   && (NGC_nb>0))
+		|| ((catalogFilters&CatIC)    && (IC_nb>0))
+		|| ((catalogFilters&CatB)     && (B_nb>0))
+		|| ((catalogFilters&CatSh2)   && (Sh2_nb>0))
+		|| ((catalogFilters&CatVdB)   && (VdB_nb>0))
+		|| ((catalogFilters&CatRCW)   && (RCW_nb>0))
+		|| ((catalogFilters&CatLDN)   && (LDN_nb>0))
+		|| ((catalogFilters&CatLBN)   && (LBN_nb>0))
+		|| ((catalogFilters&CatCr)    && (Cr_nb>0))
+		|| ((catalogFilters&CatMel)   && (Mel_nb>0))
+		|| ((catalogFilters&CatPGC)   && (PGC_nb>0))
+		|| ((catalogFilters&CatUGC)   && (UGC_nb>0))
+		|| ((catalogFilters&CatCed)   && !(Ced_nb.isEmpty()))
+		|| ((catalogFilters&CatArp)   && (Arp_nb>0))
+		|| ((catalogFilters&CatVV)    && (VV_nb>0))
+		|| ((catalogFilters&CatPK)    && !(PK_nb.isEmpty()))
+		|| ((catalogFilters&CatPNG)   && !(PNG_nb.isEmpty()))
+		|| ((catalogFilters&CatSNRG)  && !(SNRG_nb.isEmpty()))
+		|| ((catalogFilters&CatACO)   && (!ACO_nb.isEmpty()))
+		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))		
+		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
+		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
+		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
+		|| ((catalogFilters&CatTr)	   && (Tr_nb>0))
+		|| ((catalogFilters&CatSt)	   && (St_nb>0))
+		|| ((catalogFilters&CatRu	)   && (Ru_nb>0))
+		|| ((catalogFilters&CatVdBHa)   && (VdBHa_nb>0)))
 
-	// Special case: objects without ID from current catalogs
-	if (withoutID)
-		r = true;
+		// Special case: objects without ID from current catalogs
+		|| ((catalogFilters&CatOther)   && withoutID);
 
 	return r;
 }
@@ -1198,12 +1109,11 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	else
 		m = mTypeString;
 
-	QStringList glclass;
-	glclass << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX" << "X" << "XI" << "XII";
+	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
 
 	if (GlClRx.exactMatch(m)) // Globular Clusters
 	{
-		switch(glclass.indexOf(GlClRx.capturedTexts().at(1).trimmed()))
+		switch(glclass.indexOf(GlClRx.cap(1).trimmed()))
 		{
 			case 0:
 				r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
@@ -1243,7 +1153,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		}
 	}
 
-	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*)\\.*");
+	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
 	idx = OClRx.indexIn(mTypeString);
 	if (idx>0)
 		m = mTypeString.mid(idx);
@@ -1252,10 +1162,10 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (OClRx.exactMatch(m)) // Open Clusters
 	{
-		QStringList occlass, ocrich, rtxt;
-		occlass << "I" << "II" << "III" << "IV";
-		ocrich << "p" << "m" << "r";
-		switch(occlass.indexOf(OClRx.capturedTexts().at(1).trimmed()))
+		QStringList rtxt;
+		static const QStringList occlass = { "I", "II", "III", "IV"};
+		static const QStringList ocrich = { "p", "m", "r"};
+		switch(occlass.indexOf(OClRx.cap(1).trimmed()))
 		{
 			case 0:
 				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
@@ -1273,7 +1183,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
 				break;
 		}
-		switch(OClRx.capturedTexts().at(2).toInt())
+		switch(OClRx.cap(2).toInt())
 		{
 			case 1:
 				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
@@ -1288,7 +1198,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 		}
-		switch(ocrich.indexOf(OClRx.capturedTexts().at(3).trimmed()))
+		switch(ocrich.indexOf(OClRx.cap(3).trimmed()))
 		{
 			case 0:
 				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
@@ -1303,7 +1213,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
 				break;
 		}
-		if (!OClRx.capturedTexts().at(4).trimmed().isEmpty())
+		if (!OClRx.cap(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
 		r = rtxt.join(",<br />");
@@ -1318,10 +1228,10 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (VdBRx.exactMatch(m)) // Reflection Nebulae
 	{
-		QStringList rnclass, rnbrightness, rtx;
-		rnclass << "I" << "II" << "I-II" << "II P" << "P";
-		rnbrightness << "VBR" << "VB" << "BR" << "M" << "F" << "VF" << ":";
-		switch(rnbrightness.indexOf(VdBRx.capturedTexts().at(2).trimmed()))
+		QStringList rtx;
+		static const QStringList rnclass = { "I", "II", "I-II", "II P", "P"};
+		static const QStringList rnbrightness = { "VBR", "VB", "BR", "M", "F", "VF", ":"};
+		switch(rnbrightness.indexOf(VdBRx.cap(2).trimmed()))
 		{
 			case 0:
 			case 1:
@@ -1346,7 +1256,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("undocumented brightness of reflection nebulae", "Reflection Nebulae Brightness");
 				break;
 		}
-		switch(rnclass.indexOf(VdBRx.capturedTexts().at(1).trimmed()))
+		switch(rnclass.indexOf(VdBRx.cap(1).trimmed()))
 		{
 			case 0:
 				rtx << qc_("the illuminating star is embedded in the nebulosity", "Reflection Nebulae Classification");
@@ -1386,55 +1296,27 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (HIIRx.exactMatch(m)) // HII regions
 	{
-		int form	= HIIRx.capturedTexts().at(1).toInt();
-		int structure	= HIIRx.capturedTexts().at(2).toInt();
-		int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		const int form	= HIIRx.cap(1).toInt();
+		const int structure	= HIIRx.cap(2).toInt();
+		const int brightness	= HIIRx.cap(3).toInt();
+		const QStringList formList={
+			q_("circular form"),
+			q_("elliptical form"),
+			q_("irregular form")};
+		const QStringList structureList={
+			q_("amorphous structure"),
+			q_("conventional structure"),
+			q_("filamentary structure")};
+		const QStringList brightnessList={
+			qc_("faintest", "HII region brightness"),
+			qc_("moderate brightness", "HII region brightness"),
+			qc_("brightest", "HII region brightness")};
+
 		QStringList morph;
-		switch(form)
-		{
-			case 1:
-				morph << q_("circular form");
-				break;
-			case 2:
-				morph << q_("elliptical form");
-				break;
-			case 3:
-				morph << q_("irregular form");
-				break;
-			default:
-				morph << q_("undocumented form");
-				break;
-		}
-		switch(structure)
-		{
-			case 1:
-				morph << q_("amorphous structure");
-				break;
-			case 2:
-				morph << q_("conventional structure");
-				break;
-			case 3:
-				morph << q_("filamentary structure");
-				break;
-			default:
-				morph << q_("undocumented structure");
-				break;
-		}
-		switch(brightness)
-		{
-			case 1:
-				morph << qc_("faintest", "HII region brightness");
-				break;
-			case 2:
-				morph << qc_("moderate brightness", "HII region brightness");
-				break;
-			case 3:
-				morph << qc_("brightest", "HII region brightness");
-				break;
-			default:
-				morph << q_("undocumented brightness");
-				break;
-		}
+		morph << formList.value(form-1, q_("undocumented form"));
+		morph << structureList.value(structure-1, q_("undocumented structure"));
+		morph << brightnessList.value(brightness-1, q_("undocumented brightness"));
+
 		r = morph.join(",<br />");
 	}
 
@@ -1466,81 +1348,49 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	return r;
 }
 
-QString Nebula::getTypeString(void) const
+QString Nebula::getTypeString(Nebula::NebulaType nType)
 {
-	switch(nType)
-	{
-		case NebGx:
-			return q_("galaxy");
-		case NebAGx:
-			return q_("active galaxy");
-		case NebRGx:
-			return q_("radio galaxy");
-		case NebIGx:
-			return q_("interacting galaxy");
-		case NebQSO:
-			return q_("quasar");
-		case NebCl:
-			return q_("star cluster");
-		case NebOc:
-			return q_("open star cluster");
-		case NebGc:
-			return q_("globular star cluster");
-		case NebN:
-			return q_("nebula");
-		case NebPn:
-			return q_("planetary nebula");
-		case NebDn:
-			return q_("dark nebula");
-		case NebCn:
-			return q_("cluster associated with nebulosity");
-		case NebBn:
-			return q_("bipolar nebula");
-		case NebEn:
-			return q_("emission nebula");
-		case NebHII:
-			return q_("HII region");
-		case NebRn:
-			return q_("reflection nebula");
-		case NebSNR:
-			return q_("supernova remnant");
-		case NebSNC:
-			return q_("supernova candidate");
-		case NebSNRC:
-			return q_("supernova remnant candidate");
-		case NebSA:
-			return q_("stellar association");
-		case NebSC:
-			return q_("star cloud");
-		case NebISM:
-			return q_("interstellar matter");
-		case NebEMO:
-			return q_("emission object");
-		case NebBLL:
-			return q_("BL Lac object");
-		case NebBLA:
-			return q_("blazar");
-		case NebMolCld:
-			return q_("molecular cloud");
-		case NebYSO:
-			return q_("young stellar object");
-		case NebPossQSO:
-			return q_("possible quasar");
-		case NebPossPN:
-			return q_("possible planetary nebula");
-		case NebPPN:
-			return q_("protoplanetary nebula");
-		case NebStar:
-			return q_("star");
-		case NebSymbioticStar:
-			return q_("symbiotic star");
-		case NebEmissionLineStar:
-			return q_("emission-line star");
-		case NebGxCl:
-			return q_("cluster of galaxies");
-		case NebUnknown:
-			return q_("object of unknown nature");
-		default:
-			return q_("undocumented type");
-	}
+	return typeStringMap.value(nType, q_("undocumented type"));
+}
+
+void Nebula::buildTypeStringMap()
+{
+	Nebula::typeStringMap.clear();
+	Nebula::typeStringMap.insert( NebGx     , q_("galaxy") );
+	Nebula::typeStringMap.insert( NebAGx    , q_("active galaxy") );
+	Nebula::typeStringMap.insert( NebRGx    , q_("radio galaxy") );
+	Nebula::typeStringMap.insert( NebIGx    , q_("interacting galaxy") );
+	Nebula::typeStringMap.insert( NebQSO    , q_("quasar") );
+	Nebula::typeStringMap.insert( NebCl     , q_("star cluster") );
+	Nebula::typeStringMap.insert( NebOc     , q_("open star cluster") );
+	Nebula::typeStringMap.insert( NebGc     , q_("globular star cluster") );
+	Nebula::typeStringMap.insert( NebSA     , q_("stellar association") );
+	Nebula::typeStringMap.insert( NebSC     , q_("star cloud") );
+	Nebula::typeStringMap.insert( NebN      , q_("nebula") );
+	Nebula::typeStringMap.insert( NebPn     , q_("planetary nebula") );
+	Nebula::typeStringMap.insert( NebDn     , q_("dark nebula") );
+	Nebula::typeStringMap.insert( NebRn     , q_("reflection nebula") );
+	Nebula::typeStringMap.insert( NebBn     , q_("bipolar nebula") );
+	Nebula::typeStringMap.insert( NebEn     , q_("emission nebula") );
+	Nebula::typeStringMap.insert( NebCn     , q_("cluster associated with nebulosity") );
+	Nebula::typeStringMap.insert( NebHII    , q_("HII region") );
+	Nebula::typeStringMap.insert( NebSNR    , q_("supernova remnant") );
+	Nebula::typeStringMap.insert( NebISM    , q_("interstellar matter") );
+	Nebula::typeStringMap.insert( NebEMO    , q_("emission object") );
+	Nebula::typeStringMap.insert( NebBLL    , q_("BL Lac object") );
+	Nebula::typeStringMap.insert( NebBLA    , q_("blazar") );
+	Nebula::typeStringMap.insert( NebMolCld , q_("molecular cloud") );
+	Nebula::typeStringMap.insert( NebYSO    , q_("young stellar object") );
+	Nebula::typeStringMap.insert( NebPossQSO, q_("possible quasar") );
+	Nebula::typeStringMap.insert( NebPossPN , q_("possible planetary nebula") );
+	Nebula::typeStringMap.insert( NebPPN    , q_("protoplanetary nebula") );
+	Nebula::typeStringMap.insert( NebStar   , q_("star") );
+	Nebula::typeStringMap.insert( NebSymbioticStar   , q_("symbiotic star") );
+	Nebula::typeStringMap.insert( NebEmissionLineStar, q_("emission-line star") );
+	Nebula::typeStringMap.insert( NebSNC    , q_("supernova candidate") );
+	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
+	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
+	Nebula::typeStringMap.insert( NebPartOfGx   , q_("part of a galaxy") );
+	Nebula::typeStringMap.insert( NebRegion   , q_("region of the sky") );
+	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
 }

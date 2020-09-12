@@ -22,10 +22,10 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-MapLabel::MapLabel(QWidget *parent) : QLabel(parent), locCursor(":/graphicGui/map-pointeur.png")
+MapLabel::MapLabel(QWidget *parent) : QLabel(parent), locCursor(":/graphicGui/uieMapPointer.png")
 {
 	/*cursor = new QLabel(this);
-	cursor->setPixmap(QPixmap(":/graphicGui/map-pointeur.png"));
+	cursor->setPixmap(QPixmap(":/graphicGui/uieMapPointer.png"));
 	cursor->resize(cursor->pixmap()->size());
 	cursor->show();*/
 }

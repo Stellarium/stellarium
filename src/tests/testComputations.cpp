@@ -283,7 +283,7 @@ void TestComputations::testSpheToRectTransformations()
 		latitudeF1		=float(latitude);
 		longitudeF2	=float(longitude);
 		latitudeF2		=float(latitude);
-		eVec3f	= StelUtils::strToVec3f(data.takeFirst().toString());
+		eVec3f	= Vec3f(data.takeFirst().toString());
 		eVec3d	= eVec3f.toVec3d();
 
 		StelUtils::spheToRect(longitudeF1*M_PI_180f, latitudeF1*M_PI_180f, rVec3f);
@@ -332,7 +332,7 @@ void TestComputations::testRectToSpheTransformations()
 	{
 		longitudeE	= data.takeFirst().toFloat();
 		latitudeE		= data.takeFirst().toFloat();
-		rVec3f		= StelUtils::strToVec3f(data.takeFirst().toString());
+		rVec3f		= Vec3f(data.takeFirst().toString());
 		rVec3d		= rVec3f.toVec3d();
 
 		StelUtils::rectToSphe(&longitude, &latitude, rVec3f);
@@ -401,15 +401,15 @@ void TestComputations::testVector2Operators()
 
 	while (data.count() >= 8)
 	{
-		firstF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		secondF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		firstF		= Vec2f(data.takeFirst().toString());
+		secondF	= Vec2f(data.takeFirst().toString());
 		vecF		= firstF;
 		expected	= data.takeFirst().toBool();
-		sumF	= StelUtils::strToVec2f(data.takeFirst().toString());
-		diffF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		mulF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		smF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		cwmF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		sumF	= Vec2f(data.takeFirst().toString());
+		diffF		= Vec2f(data.takeFirst().toString());
+		mulF		= Vec2f(data.takeFirst().toString());
+		smF		= Vec2f(data.takeFirst().toString());
+		cwmF	= Vec2f(data.takeFirst().toString());
 
 		firstD.set((double)firstF[0], (double)firstF[1]);
 		vecD		= firstD;
@@ -573,12 +573,12 @@ void TestComputations::testVector3Operators()
 
 	while (data.count() >= 7)
 	{
-		firstF		= StelUtils::strToVec3f(data.takeFirst().toString());
-		secondF	= StelUtils::strToVec3f(data.takeFirst().toString());
+		firstF		= Vec3f(data.takeFirst().toString());
+		secondF	= Vec3f(data.takeFirst().toString());
 		expected	= data.takeFirst().toBool();
-		sumF	= StelUtils::strToVec3f(data.takeFirst().toString());
-		diffF		= StelUtils::strToVec3f(data.takeFirst().toString());
-		smF		= StelUtils::strToVec3f(data.takeFirst().toString());
+		sumF	= Vec3f(data.takeFirst().toString());
+		diffF		= Vec3f(data.takeFirst().toString());
+		smF		= Vec3f(data.takeFirst().toString());
 
 		firstD	= firstF.toVec3d();
 		secondD	= secondF.toVec3d();

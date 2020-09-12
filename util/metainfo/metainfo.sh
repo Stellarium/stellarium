@@ -45,3 +45,10 @@ fi
 # cleanup
 rm -rf $tmpdir
 rm $tmpxmlfile
+
+# update list of releases
+./update_releases_appdata.pl
+
+# format (pretty print)
+xmllint --format --output $metainfo_file $metainfo_file
+

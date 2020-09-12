@@ -171,6 +171,9 @@ public:
 	//! Get count of novae from catalog
 	int getCountNovae(void) const {return NovaCnt;}
 
+	//! Get the list of all bright novae.
+	const QList<NovaP>& getAllBrightNovae() const {return nova;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Novae::UpdateState state);
@@ -260,6 +263,9 @@ private slots:
 
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
+
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 };
 
 #include <QObject>

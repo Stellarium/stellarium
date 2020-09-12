@@ -102,10 +102,10 @@ public slots:
 	void setColor(const Vec3f& c);
 	//! Get the current color used to draw of the highlight markers.
 	//! @return current color
-	const Vec3f& getColor(void) const;
+	Vec3f getColor(void) const;
 
 	//! Set the size of highlight markers.
-	//! @param c The size of the highlight markers
+	//! @param size The size of the highlight markers
 	//! @code
 	//! // example of usage in scripts
 	//! HighlightMgr.setMarkersSize(13.f);

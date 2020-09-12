@@ -43,6 +43,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -232,7 +233,7 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);
+	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
@@ -240,7 +241,18 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 		loc.altitude = qRound(altitude);
 	if (!ssObj.isNull())
 		loc.planetName = ssObj->getEnglishName();
-	loc.name = name;
+	else
+		return; // Avoid crash when planet is not defined or not exist
+
+	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+	if( cico.exactMatch( name ) )
+	{
+		loc.name = cico.cap(1);
+		loc.country = cico.cap(2);
+	}
+	else
+		loc.name = name;
+
 	core->moveObserverTo(loc, duration, duration);
 }
 
@@ -756,25 +768,27 @@ void StelMainScriptAPI::saveOutputAs(const QString &filename)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
+	QString tdt = dt.trimmed();
 	StelCore *core = StelApp::getInstance().getCore();
-	if (dt == "now")
+	if (tdt == "now")
 		return StelUtils::getJDFromSystem();
 	
 	bool ok;
 	double jd;
 	if (spec=="local")
-	{
-		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(dt, &ok);
-	}
+		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(tdt, &ok);
 	else
-	{
-		jd = StelUtils::getJulianDayFromISO8601String(dt, &ok);
-	}
+		jd = StelUtils::getJulianDayFromISO8601String(tdt, &ok);
+
 	if (ok)
 		return jd;
-	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|sol|sols|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
-	if (nowRe.exactMatch(dt))
+
+	QRegExp nowRe("(now)?"
+		      "\\s*([-+])"
+		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
+		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"
+		      "(?:\\s+(sidereal))?");
+	if (nowRe.exactMatch(tdt))
 	{
 		double delta;
 		double unit;
@@ -782,46 +796,46 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
-		if (nowRe.capturedTexts().at(1)=="now")
+		if (nowRe.cap(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
 			jd = core->getJD();
 
-		if (nowRe.capturedTexts().at(8) == "sidereal")
+		if (nowRe.cap(5) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.capturedTexts().at(6);
-		if (unitString == "seconds" || unitString == "second")
+		QString unitString = nowRe.cap(4);
+		if ( unitString == "second")
 			unit = dayLength / (24*3600.);
-		else if (unitString == "minutes" || unitString == "minute")
+		else if (unitString == "minute")
 			unit = dayLength / (24*60.);
-		else if (unitString == "hours" || unitString == "hour")
+		else if (unitString == "hour")
 			unit = dayLength / (24.);
-		else if (unitString == "days" || unitString == "day")
+		else if (unitString == "day")
 			unit = dayLength;
-		else if (unitString == "sols" || unitString == "sol")
+		else if (unitString == "sol")
 			unit = core->getCurrentPlanet()->getMeanSolarDay();
-		else if (unitString == "weeks" || unitString == "week")
+		else if (unitString == "week")
 			unit = dayLength * 7.;
-		else if (unitString == "months" || unitString == "month")
+		else if (unitString == "month")
 			unit = monthLength;
-		else if (unitString == "years" || unitString == "year")
+		else if (unitString == "year")
 			unit = yearLength;
 		else
 		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.cap(4);
 			unit = 0;
 		}
 
-		delta = nowRe.capturedTexts().at(4).toDouble();
+		delta = nowRe.cap(3).toDouble();
 
-		if (nowRe.capturedTexts().at(3) == "+")
+		if (nowRe.cap(2) == "+")
 			jd += (unit * delta);
-		else if (nowRe.capturedTexts().at(3) == "-")
+		else if (nowRe.cap(2) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}
@@ -830,10 +844,15 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
-void StelMainScriptAPI::wait(double t) {
-	QEventLoop loop;
-	QTimer::singleShot(qRound(1000*t), &loop, SLOT(quit()));
-	loop.exec();
+void StelMainScriptAPI::wait(double t)
+{
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -851,9 +870,13 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 		qDebug() << "waitFor() called, but negative interval (time exceeded before starting timer). Not waiting!";
 		return;
 	}
-	QEventLoop loop;
-	QTimer::singleShot(interval, &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(interval, loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 
@@ -911,28 +934,26 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 	}
 
 	StelObjectP obj = omgr->getSelectedObject()[0];
-	if (replace)
-		obj->setExtraInfoString(str);
-	else
-		obj->addToExtraInfoString(str);
+	if (obj)
+	{
+		if (replace)
+			obj->setExtraInfoString(StelObject::Script, str);
+		else
+			obj->addToExtraInfoString(StelObject::Script, str);
+	}
 }
 
 
 
 void StelMainScriptAPI::clear(const QString& state)
 {
-	int stateInt = 0;
-	if (state.toLower() == "natural")
-		stateInt = 1;
-	else if (state.toLower() == "starchart")
-		stateInt = 2;
-	else if (state.toLower() == "deepspace")
-		stateInt = 3;
-	else if (state.toLower() == "galactic")
-		stateInt = 4;
-	else if (state.toLower() == "supergalactic")
-		stateInt = 5;
-
+	static const QMap<QString, int>stateMap={
+		{ "natural",   1},
+		{ "starchart", 2},
+		{ "deepspace", 3},
+		{ "galactic",  4},
+		{ "supergalactic", 5 }};
+	const int stateInt = stateMap.value(state.toLower(), 0);
 	if (stateInt == 0)
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
@@ -952,7 +973,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
-		// Hide artificial satellites through StelProperties to avoid crash if plugin was did't loaded
+		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
 		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
 		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
 		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
@@ -1236,48 +1257,6 @@ void StelMainScriptAPI::goHome()
 	emit(requestSetHomePosition());
 }
 
-void StelMainScriptAPI::setMilkyWayVisible(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use MilkyWay.setFlagShow() instead.";
-	GETSTELMODULE(MilkyWay)->setFlagShow(b);
-}
-
-void StelMainScriptAPI::setMilkyWayIntensity(double i)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.setIntensity() instead.";
-	GETSTELMODULE(MilkyWay)->setIntensity(i);
-}
-
-double StelMainScriptAPI::getMilkyWayIntensity()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.getMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.getIntensity() instead.";
-	return GETSTELMODULE(MilkyWay)->getIntensity();
-}
-
-void StelMainScriptAPI::setZodiacalLightVisible(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setZodiacalLightVisible() is deprecated and will soon be removed. Use ZodiacalLight.setFlagShow() instead.";
-	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
-}
-
-void StelMainScriptAPI::setZodiacalLightIntensity(double i)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.setIntensity() instead.";
-	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
-}
-
-double StelMainScriptAPI::getZodiacalLightIntensity()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.getZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.getIntensity() instead.";
-	return GETSTELMODULE(ZodiacalLight)->getIntensity();
-}
-
 int StelMainScriptAPI::getBortleScaleIndex()
 {
 	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
@@ -1304,20 +1283,6 @@ double StelMainScriptAPI::refraction(double altitude, bool apparent)
 		refraction.forward(pos);
 	}
 	return asin(pos[2])*M_180_PI;
-}
-
-void StelMainScriptAPI::setDSSMode(bool b)
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.setDSSMode() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
-	GETSTELMODULE(ToastMgr)->setFlagShow(b);
-}
-
-bool StelMainScriptAPI::isDSSModeEnabled()
-{
-	// TODO: This method should be removed in version 0.20
-	qWarning() << "WARNING: core.isDSSModeEnabled() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
-	return GETSTELMODULE(ToastMgr)->getFlagShow();
 }
 
 QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
@@ -1369,7 +1334,7 @@ QString StelMainScriptAPI::getPlatformName(void)
 		os = "NetBSD";
 	else if (os.contains("OpenBSD", Qt::CaseInsensitive))
 		os = "OpenBSD";
-	else if (os.contains("linux", Qt::CaseInsensitive))
+	else if (os.contains("linux", Qt::CaseInsensitive) || QSysInfo::kernelType().contains("linux", Qt::CaseInsensitive))
 		os = "Linux";
 	else if (os.contains("windows", Qt::CaseInsensitive) || os.contains("winrt", Qt::CaseInsensitive))
 		os = "Windows";

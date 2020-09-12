@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>697</width>
-    <height>422</height>
+    <width>743</width>
+    <height>428</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -51,7 +51,7 @@
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -153,13 +153,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>72</height>
+          <height>74</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>72</height>
+          <height>74</height>
          </size>
         </property>
         <property name="focusPolicy">
@@ -179,8 +179,8 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>48</width>
-          <height>48</height>
+          <width>50</width>
+          <height>50</height>
          </size>
         </property>
         <property name="flow">
@@ -207,7 +207,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-PlanetPos.png</normalon>
+           <normalon>:/graphicGui/tabPlanetPos.png</normalon>
+           <selectedon>:/graphicGui/tabPlanetPos-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -220,7 +221,19 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Ephemeris.png</normalon>
+           <normalon>:/graphicGui/tabEphemeris.png</normalon>
+           <selectedon>:/graphicGui/tabEphemeris-selected.png</selectedon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Transits</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabTransit.png</normalon>
+           <selectedon>:/graphicGui/tabTransit-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -230,7 +243,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Phenomena.png</normalon>
+           <normalon>:/graphicGui/tabPhenomena.png</normalon>
+           <selectedon>:/graphicGui/tabPhenomena-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -240,7 +254,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-AltVsTime.png</normalon>
+           <normalon>:/graphicGui/tabGraphs.png</normalon>
+           <selectedon>:/graphicGui/tabGraphs-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -253,7 +268,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-WhatsUp.png</normalon>
+           <normalon>:/graphicGui/tabWhatsUp.png</normalon>
+           <selectedon>:/graphicGui/tabWhatsUp-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -266,7 +282,8 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-PC.png</normalon>
+           <normalon>:/graphicGui/tabPC.png</normalon>
+           <selectedon>:/graphicGui/tabPC-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -469,6 +486,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonExtraEphemerisDialog">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Extra options for ephemeris visualization</string>
               </property>
@@ -477,7 +500,8 @@
               </property>
               <property name="icon">
                <iconset resource="../../data/gui/guiRes.qrc">
-                <normaloff>:/graphicGui/8-off-settings.png</normaloff>:/graphicGui/8-off-settings.png</iconset>
+                <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
               </property>
              </widget>
             </item>
@@ -496,8 +520,114 @@
             </item>
             <item>
              <widget class="QCheckBox" name="ephemerisHorizontalCoordinatesCheckBox">
-              <property name="text">
+              <property name="toolTip">
                <string>Use horizontal coordinates</string>
+              </property>
+              <property name="text">
+               <string comment="horizonal coordinates">H.C.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_26">
+              <property name="leftMargin">
+               <number>8</number>
+              </property>
+              <property name="rightMargin">
+               <number>8</number>
+              </property>
+              <item>
+               <widget class="QToolButton" name="genericMarkerColor">
+                <property name="toolTip">
+                 <string>Color of ephemeris marker for first celestial body</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="secondaryMarkerColor">
+                <property name="toolTip">
+                 <string>Color of ephemeris marker for second celestial body</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="selectedMarkerColor">
+                <property name="toolTip">
+                 <string>Color of selected ephemeris marker</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QToolButton" name="mercuryMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mercury's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="venusMarkerColor">
+              <property name="toolTip">
+               <string>Color of Venus' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="marsMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mars' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="jupiterMarkerColor">
+              <property name="toolTip">
+               <string>Color of Jupiter's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="saturnMarkerColor">
+              <property name="toolTip">
+               <string>Color of Saturn's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
               </property>
              </widget>
             </item>
@@ -600,6 +730,18 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonCustomStepsDialog">
+                <property name="toolTip">
+                 <string>Custom time step for ephemeris visualization</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../data/gui/guiRes.qrc">
+                  <normaloff>:/graphicGui/uibtTime.png</normaloff>
+                  <disabledoff>:/graphicGui/uibtTime.png</disabledoff>:/graphicGui/uibtTime.png</iconset>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
            </layout>
@@ -615,6 +757,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="celestialBodyComboBox">
+              <property name="toolTip">
+               <string>First celestial body</string>
+              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
@@ -623,6 +768,26 @@
               </property>
               <property name="currentIndex">
                <number>-1</number>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelAnd">
+              <property name="text">
+               <string>and</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="secondaryCelestialBodyComboBox">
+              <property name="toolTip">
+               <string>Second celestial body</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
@@ -659,97 +824,39 @@
               </property>
              </spacer>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_26">
-              <property name="leftMargin">
-               <number>8</number>
-              </property>
-              <property name="rightMargin">
-               <number>8</number>
-              </property>
-              <item>
-               <widget class="QToolButton" name="genericMarkerColor">
-                <property name="toolTip">
-                 <string>Color of generic ephemeris marker</string>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="selectedMarkerColor">
-                <property name="toolTip">
-                 <string>Color of selected ephemeris marker</string>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QToolButton" name="mercuryMarkerColor">
-              <property name="toolTip">
-               <string>Color of Mercury's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="venusMarkerColor">
-              <property name="toolTip">
-               <string>Color of Venus' ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="marsMarkerColor">
-              <property name="toolTip">
-               <string>Color of Mars' ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="jupiterMarkerColor">
-              <property name="toolTip">
-               <string>Color of Jupiter's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="saturnMarkerColor">
-              <property name="toolTip">
-               <string>Color of Saturn's ephemeris marker</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
          </layout>
         </widget>
         <widget class="QWidget" name="stackedWidgetPage3">
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="3" column="0" colspan="2">
-           <widget class="QTreeWidget" name="phenomenaTreeWidget">
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
+         <layout class="QGridLayout" name="gridLayout_16">
+          <item row="4" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_30">
+            <item>
+             <widget class="QPushButton" name="transitsCleanupButton">
+              <property name="text">
+               <string>Cleanup transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsSaveButton">
+              <property name="text">
+               <string>Save transits</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="transitsCalculateButton">
+              <property name="text">
+               <string>Calculate transits</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QTreeWidget" name="transitTreeWidget">
             <property name="rootIsDecorated">
              <bool>false</bool>
             </property>
@@ -768,22 +875,123 @@
             <property name="columnCount">
              <number>0</number>
             </property>
+            <attribute name="headerShowSortIndicator" stdset="0">
+             <bool>true</bool>
+            </attribute>
            </widget>
           </item>
-          <item row="2" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_31">
             <item>
-             <widget class="QLabel" name="allowedSeparationLabel">
-              <property name="text">
-               <string>Maximum allowed separation:</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_34">
+              <item>
+               <widget class="QLabel" name="transitCelestialBodyLabel">
+                <property name="text">
+                 <string>Celestial object:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="transitCelestialBodyNameLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
-             <widget class="AngleSpinBox" name="allowedSeparationSpinBox"/>
+             <layout class="QHBoxLayout" name="horizontalLayout_35">
+              <item>
+               <widget class="QLabel" name="transitFromLabel">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="transitFromDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_32">
+              <item>
+               <widget class="QLabel" name="transitToLabel">
+                <property name="text">
+                 <string>To:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="transitToDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="transitHeaderLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Table of approximate transits for selected celestial object</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="transitNotificationLabel">
+            <property name="text">
+             <string>Note: artificial satellites and unnamed stars are excluded from calculation</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage4">
+         <layout class="QGridLayout" name="gridLayout_4">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <property name="rightMargin">
@@ -810,13 +1018,6 @@
              </widget>
             </item>
            </layout>
-          </item>
-          <item row="2" column="1">
-           <widget class="QCheckBox" name="phenomenaOppositionCheckBox">
-            <property name="text">
-             <string>Calculate oppositions</string>
-            </property>
-           </widget>
           </item>
           <item row="0" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -878,6 +1079,79 @@
            </layout>
           </item>
           <item row="4" column="0" colspan="2">
+           <widget class="QTreeWidget" name="phenomenaTreeWidget">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="rootIsDecorated">
+             <bool>false</bool>
+            </property>
+            <property name="uniformRowHeights">
+             <bool>true</bool>
+            </property>
+            <property name="itemsExpandable">
+             <bool>false</bool>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="expandsOnDoubleClick">
+             <bool>false</bool>
+            </property>
+            <property name="columnCount">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="phenomenFromLabel">
+              <property name="text">
+               <string>From:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="phenomenFromDateEdit">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
+              <property name="displayFormat">
+               <string notr="true">yyyy.MM.dd</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="allowedSeparationLabel">
+              <property name="text">
+               <string>Maximum allowed separation:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="AngleSpinBox" name="allowedSeparationSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
              <widget class="QPushButton" name="phenomenaCleanupButton">
@@ -905,33 +1179,47 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_27">
             <item>
-             <widget class="QLabel" name="phenomenFromLabel">
+             <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>From:</string>
+               <string>Calculate:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="phenomenFromDateEdit">
-              <property name="wrapping">
-               <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string notr="true">yyyy.MM.dd</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
+             <widget class="QCheckBox" name="phenomenaOppositionCheckBox">
+              <property name="text">
+               <string>oppositions</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="phenomenaPerihelionAphelionCheckBox">
+              <property name="text">
+               <string>perihelion and aphelion</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage4">
+        <widget class="QWidget" name="stackedWidgetPage5">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="2" column="0">
            <widget class="QTabWidget" name="tabWidgetGraphs">
@@ -1268,12 +1556,42 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Graphs on the current year</string>
+                 <string>Graphs since January 1st of the current year</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
                 </property>
                </widget>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="graphsSecondComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="1" column="0" colspan="2">
                <widget class="QCustomPlot" name="graphsPlot" native="true">
@@ -1315,63 +1633,93 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_23">
+              <item row="3" column="0" colspan="2">
+               <layout class="QHBoxLayout" name="horizontalLayout_28">
                 <item>
-                 <widget class="QLabel" name="graphsSecondLabel">
-                  <property name="text">
-                   <string>Second graph:</string>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_24">
+                  <item>
+                   <widget class="QLabel" name="graphsCelestialBodyLabel">
+                    <property name="text">
+                     <string>Celestial body:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="graphsCelestialBodyComboBox">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="graphsSecondComboBox">
+                 <layout class="QHBoxLayout" name="horizontalLayout_29">
+                  <item>
+                   <widget class="QLabel" name="graphsDurationLabel">
+                    <property name="toolTip">
+                     <string>How many years to display</string>
+                    </property>
+                    <property name="text">
+                     <string>Duration:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="graphsDurationSpinBox">
+                    <property name="toolTip">
+                     <string>How many years to display</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>30</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="graphsYearsLabel">
+                    <property name="text">
+                     <string comment="duration">years</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="drawGraphsPushButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item row="3" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_24">
-                <item>
-                 <widget class="QLabel" name="graphsCelestialBodyLabel">
                   <property name="text">
-                   <string>Celestial body:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="graphsCelestialBodyComboBox">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <string>Draw graphs</string>
                   </property>
                  </widget>
                 </item>
                </layout>
-              </item>
-              <item row="3" column="1">
-               <widget class="QPushButton" name="drawGraphsPushButton">
-                <property name="text">
-                 <string>Draw graphs</string>
-                </property>
-               </widget>
               </item>
              </layout>
             </widget>
@@ -1471,7 +1819,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage5">
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -1604,6 +1952,19 @@
              </widget>
             </item>
             <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="AngleSpinBox" name="wutAngularSizeLimitMinSpinBox">
               <property name="enabled">
                <bool>true</bool>
@@ -1612,12 +1973,6 @@
                <size>
                 <width>120</width>
                 <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>120</width>
-                <height>16777215</height>
                </size>
               </property>
               <property name="toolTip">
@@ -1639,12 +1994,6 @@
                 <height>0</height>
                </size>
               </property>
-              <property name="maximumSize">
-               <size>
-                <width>120</width>
-                <height>16777215</height>
-               </size>
-              </property>
               <property name="toolTip">
                <string>Maximum angular size for visible celestial objects</string>
               </property>
@@ -1657,7 +2006,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">

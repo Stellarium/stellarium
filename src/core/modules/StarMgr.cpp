@@ -26,7 +26,6 @@
 #include "StelObject.hpp"
 #include "StelTexture.hpp"
 
-#include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
@@ -70,6 +69,7 @@ static const int StarCatalogFormatVersion = 12;
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 bool StarMgr::flagAdditionalStarNames = true;
+bool StarMgr::flagDesignations = false;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
 QHash<int,QString> StarMgr::additionalNamesMap;
@@ -441,11 +441,8 @@ void StarMgr::init()
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
+	setDesignationUsage(conf->value("astro/flag_star_designation_usage", false).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
-
-	// Load colors from config file
-	QString defaultColor = conf->value("color/default_color").toString();
-	setLabelColor(StelUtils::strToVec3f(conf->value("color/star_label_color", defaultColor).toString()));
 
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
@@ -483,7 +480,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		sPainter.setBlending(true);
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getAnimationTime()*40.);
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);
 	}
 }
 
@@ -541,7 +538,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			}
 			else
 			{
-				md5Hash.addData((const char*)cat, cat_sz);
+				md5Hash.addData(reinterpret_cast<const char*>(cat), cat_sz);
 				file.unmap(cat);
 			}
 			file.close();
@@ -672,7 +669,7 @@ void StarMgr::populateHipparcosLists()
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
 				QMap<StelObjectP, float> sa;
-				sa[so] = getGcvsPeriod(s->getHip());
+				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
 			}
 			if (!getWdsName(s->getHip()).isEmpty())
@@ -747,14 +744,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int hip = recordRx.capturedTexts().at(1).toInt(&ok);
+			int hip = recordRx.cap(1).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
+					   << " - failed to convert " << recordRx.cap(1) << "to a number";
 				continue;
 			}
-			QString englishCommonName = recordRx.capturedTexts().at(2).trimmed();
+			QString englishCommonName = recordRx.cap(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -789,7 +786,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				commonNamesIndex[englishNameCap] = hip;
 			}
 
-			QString reference = recordRx.capturedTexts().at(3).trimmed();
+			QString reference = recordRx.cap(3).trimmed();
 			if (!reference.isEmpty())
 			{
 				if (referenceMap.find(hip)!=referenceMap.end())
@@ -1220,11 +1217,11 @@ void StarMgr::draw(StelCore* core)
 		}
 		lastMaxSearchLevel = z->level;
 
-		unsigned int maxMagStarName = 0;
+		int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
 			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;
@@ -1232,9 +1229,9 @@ void StarMgr::draw(StelCore* core)
 		int zone;
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps);
 	}
 	exit_loop:
 
@@ -1309,7 +1306,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
-		//qDebug() << endl << "search border(" << it->first << "):";
+		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
 			z->searchAround(core, zone,v,f,result);
@@ -1372,40 +1369,6 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by HP number if it's an HP formatted number
-	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx.exactMatch(objw))
-	{
-		return searchHP(rx.capturedTexts().at(2).toInt());
-	}
-
-	// Search by SAO number if it's an SAO formatted number
-	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx2.exactMatch(objw))
-	{
-		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
-		if (sao!=saoStarsIndex.end())
-			return searchHP(sao.value());
-	}
-
-	// Search by HD number if it's an HD formatted number
-	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx3.exactMatch(objw))
-	{
-		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
-		if (hd!=hdStarsIndex.end())
-			return searchHP(hd.value());
-	}
-
-	// Search by HR number if it's an HR formatted number
-	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx4.exactMatch(objw))
-	{
-		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
-		if (hr!=hrStarsIndex.end())
-			return searchHP(hr.value());
-	}
-
 	// Search by I18n common name
 	auto it = commonNamesIndexI18n.find(objw);
 	if (it!=commonNamesIndexI18n.end())
@@ -1423,37 +1386,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	// Search by sci name
-	auto it2 = sciNamesIndexI18n.find(objw);
-	if (it2!=sciNamesIndexI18n.end())
-	{
-		return searchHP(it2.value());
-	}
-
-
-	// Search by additional sci name
-	auto it3 = sciAdditionalNamesIndexI18n.find(objw);
-	if (it3!=sciAdditionalNamesIndexI18n.end())
-	{
-		return searchHP(it3.value());
-	}
-
-
-	// Search by GCVS name
-	auto it4 = varStarsIndexI18n.find(objw);
-	if (it4!=varStarsIndexI18n.end())
-	{
-		return searchHP(it4.value());
-	}
-
-	// Search by WDS name
-	auto wdsIt = wdsStarsIndexI18n.find(objw);
-	if (wdsIt!=wdsStarsIndexI18n.end())
-	{
-		return searchHP(wdsIt.value());
-	}
-
-	return StelObjectP();
+	return searchByName(objw);
 }
 
 
@@ -1465,14 +1398,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
-		return searchHP(rx.capturedTexts().at(2).toInt());
+		return searchHP(rx.cap(2).toInt());
 	}
 
 	// Search by SAO number if it's an SAO formated number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
+		auto sao = saoStarsIndex.find(rx2.cap(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
@@ -1481,7 +1414,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
+		auto hd = hdStarsIndex.find(rx3.cap(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
@@ -1490,7 +1423,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
+		auto hr = hrStarsIndex.find(rx4.cap(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
@@ -1524,6 +1457,20 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
 		return searchHP(it3.value());
+	}
+
+	// Search by GCVS name
+	auto it4 = varStarsIndexI18n.find(objw);
+	if (it4!=varStarsIndexI18n.end())
+	{
+		return searchHP(it4.value());
+	}
+
+	// Search by WDS name
+	auto wdsIt = wdsStarsIndexI18n.find(objw);
+	if (wdsIt!=wdsStarsIndexI18n.end())
+	{
+		return searchHP(wdsIt.value());
 	}
 
 	return StelObjectP();
@@ -1675,7 +1622,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (hpRx.exactMatch(objw))
 	{
 		bool ok;
-		int hpNum = hpRx.capturedTexts().at(2).toInt(&ok);
+		int hpNum = hpRx.cap(2).toInt(&ok);
 		if (ok)
 		{
 			StelObjectP s = searchHP(hpNum);
@@ -1692,8 +1639,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (saoRx.exactMatch(objw))
 	{
-		bool ok;
-		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
+		int saoNum = saoRx.cap(2).toInt();
 		auto sao = saoStarsIndex.find(saoNum);
 		if (sao!=saoStarsIndex.end())
 		{
@@ -1711,8 +1657,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (hdRx.exactMatch(objw))
 	{
-		bool ok;
-		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
+		int hdNum = hdRx.cap(2).toInt();
 		auto hd = hdStarsIndex.find(hdNum);
 		if (hd!=hdStarsIndex.end())
 		{
@@ -1730,8 +1675,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (hrRx.exactMatch(objw))
 	{
-		bool ok;
-		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
+		int hrNum = hrRx.cap(2).toInt();
 		auto hr = hrStarsIndex.find(hrNum);
 		if (hr!=hrStarsIndex.end())
 		{
@@ -1869,17 +1813,17 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	{
 		case 0: // Interesting double stars
 		{
-			QStringList doubleStars;
-			doubleStars  << "Asterope" << "Atlas" << "77 Tau" << "δ1 Tau" << "V1016 Ori"
-				     << "42 Ori" << "ι Ori" << "ζ Crv" << "Mizar" << "Zubenelgenubi"
-				     << "ω1 Sco" << "λ Sco" << "μ1 Sco" << "ζ1 Sco" << "ε1 Lyr" << "δ1 Lyr"
-				     << "ν1 Sgr" << "ο1 Cyg" << "ο2 Cyg" << "Algedi" << "Albireo" << "Rigel"
-				     << "Almaak" << "ξ Boo" << "Rasalgethi" << "T Dra" << "Kuma" << "70 Oph"
-				     << "Castor" << "ζ Her" << "Keid" << "Mesarthim" << "Porrima" << "Algieba"
-				     << "β Mon" << "Izar" << "44 Boo" << "Acrab" << "Tegmine" << "φ2 Cnc"
-				     << "Regulus" << "Cor Caroli" << "ι Cas" << "ε Ari" << "Markeb" << "γ1 Del"
-				     << "Bessel's Star" << "55 Aqr" << "σ Cas" << "Achird" << "Polaris" << "36 Oph"
-				     << "65 UMa" << "σ2 UMa" << "55 Cnc" << "16 Cyg" << "HIP 28393" << "HIP 84709";
+			static const QStringList doubleStars = {
+				"Asterope", "Atlas", "77 Tau", "δ1 Tau", "V1016 Ori",
+				"42 Ori", "ι Ori", "ζ Crv", "Mizar", "Zubenelgenubi",
+				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "δ1 Lyr",
+				"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "Algedi", "Albireo", "Rigel",
+				"Almaak", "ξ Boo", "Rasalgethi", "T Dra", "Kuma", "70 Oph",
+				"Castor", "ζ Her", "Keid", "Mesarthim", "Porrima", "Algieba",
+				"β Mon", "Izar", "44 Boo", "Acrab", "Tegmine", "φ2 Cnc",
+				"Regulus", "Cor Caroli", "ι Cas", "ε Ari", "Markeb", "γ1 Del",
+				"Bessel's Star", "55 Aqr", "σ Cas", "Achird", "Polaris", "36 Oph",
+				"65 UMa", "σ2 UMa", "55 Cnc", "16 Cyg", "HIP 28393", "HIP 84709"};
 			if (inEnglish)
 			{
 				result = doubleStars;
@@ -1895,17 +1839,17 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 1: // Interesting variable stars
 		{
-			QStringList variableStars;
-			variableStars << "δ Cep" << "Algol" << "Mira" << "λ Tau" << "Sheliak" << "ζ Gem" << "μ Cep"
-				      << "Rasalgethi" << "η Gem" << "η Aql" << "γ Cas" << "Betelgeuse" << "R And"
-				      << "U Ant" << "θ Aps" << "R Aql" << "V Aql" << "R Aqr" << "ε Aur" << "R Aur"
-				      << "AE Aur" << "W Boo" << "VZ Cam" << "l Car" << "γ Cas" << "WZ Cas"
-				      << "S Cen" << "Proxima" << "T Cep" << "U Cep" << "R CMa" << "VY CMa"
-				      << "S Cnc" << "Alphekka" << "R CrB" << "T CrB" << "U CrB" << "R Cru"
-				      << "SU Cyg" << "EU Del" << "β Dor" << "R Gem" << "30 Her" << "68 Her"
-				      << "R Hor" << "Hind's Crimson Star" << "R Leo" << "RR Lyr" << "U Mon"
-				      << "Mintaka" << "VV Ori" << "κ Pav" << "β Peg" << "Enif" << "ζ Phe" << "R Sct"
-				      << "U Sgr" << "RY Sgr" << "W UMa" << "Polaris";
+			static const QStringList variableStars = {
+				"δ Cep", "Algol", "Mira", "λ Tau", "Sheliak", "ζ Gem", "μ Cep",
+				"Rasalgethi", "η Gem", "η Aql", "γ Cas", "Betelgeuse", "R And",
+				"U Ant", "θ Aps", "R Aql", "V Aql", "R Aqr", "ε Aur", "R Aur",
+				"AE Aur", "W Boo", "VZ Cam", "l Car", "γ Cas", "WZ Cas",
+				"S Cen", "Proxima", "T Cep", "U Cep", "R CMa", "VY CMa",
+				"S Cnc", "Alphekka", "R CrB", "T CrB", "U CrB", "R Cru",
+				"SU Cyg", "EU Del", "β Dor", "R Gem", "30 Her", "68 Her",
+				"R Hor", "Hind's Crimson Star", "R Leo", "RR Lyr", "U Mon",
+				"Mintaka", "VV Ori", "κ Pav", "β Peg", "Enif", "ζ Phe", "R Sct",
+				"U Sgr", "RY Sgr", "W UMa", "Polaris"};
 			if (inEnglish)
 			{
 				result = variableStars;
@@ -1950,6 +1894,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				else
 					result << star.firstKey()->getNameI18n();
 			}
+			break;
 		}
 		default:
 		{

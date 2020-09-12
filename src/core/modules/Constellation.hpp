@@ -80,7 +80,7 @@ private:
 	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
-	//! @return false if can't parse record, else true.
+	//! @return false if can't parse record (invalid result!), else true.
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name

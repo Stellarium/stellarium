@@ -162,6 +162,34 @@ void TestVecMath::testVec2Math()
 	QVERIFY2(vd==vtd, "Assignment with Vec2d failed"); // should work
 	vd.set(10.,12.);
 	QVERIFY(vd/2.==Vec2d(5.,6.));
+
+	QStringList li={"4", "234"};
+	vi=Vec2i(li);
+	QVERIFY2(vi == Vec2i(4, 234), QString("List %1 = %2 or %3 but %4").arg(li.join("/")).arg(vi.toStr()).arg(vi.toString()).arg("Vec2i(4,234)").toUtf8());
+	vi=Vec2i("4,234");
+	QVERIFY(vi == Vec2i(4, 234));
+	vi=Vec2i("4,6");
+	QVERIFY(vi == Vec2i(4, 6));
+	vi=Vec2i("4,4");
+	QVERIFY(vi == Vec2i(4, 4));
+
+	QStringList lf={"0.4", "0.234"};
+	vf=Vec2f(lf);
+	QVERIFY(vf == Vec2f(0.4f, 0.234f));
+	vf=Vec2f(QString("0.4,0.234"));
+	QVERIFY(vf == Vec2f(0.4f, 0.234f));
+	vf=Vec2f(QString("0.4"));
+	QVERIFY(vf == Vec2f(0.4f, 0.f));
+
+	QStringList ld={"0.4", "0.234"};
+	vd=Vec2d(ld);
+	QVERIFY(vd == Vec2d(0.4, 0.234));
+	vd=Vec2d(QString("0.4,0.234"));
+	QVERIFY(vd == Vec2d(0.4, 0.234));
+	vd=Vec2d(QString("0.4"));
+	QVERIFY(vd == Vec2d(0.4, 0.));
+	vd=Vec2d(QString("0.4,"));
+	QVERIFY(vd == Vec2d(0.4, 0.));
 }
 
 void TestVecMath::testVec3Math()
@@ -293,6 +321,32 @@ void TestVecMath::testVec3Math()
 	QVERIFY2(vd==vtd, "Initialize from vector failed!");
 	vd = Vec3d(2.);
 	QVERIFY(vd.fuzzyEquals(Vec3d(2.), ERROR_LIMIT));
+
+	QStringList li={"4", "2", "1"};
+	vi=Vec3i(li);
+	QVERIFY(vi == Vec3i(4, 2, 1));
+	vi=Vec3i(QString("4,2,1"));
+	QVERIFY(vi == Vec3i(4, 2, 1));
+	vi=Vec3i(QString("421"));
+	QVERIFY(vi == Vec3i(421, 0, 0));
+	vi=Vec3i(QString("42,1,"));
+	QVERIFY(vi == Vec3i(42, 1, 0));
+	vi=Vec3i(QString("42,1"));
+	QVERIFY(vi == Vec3i(42, 1, 0));
+
+	QStringList lf={"0.4", "0.2"}; // Too short list, still works
+	vf=Vec3f(lf);
+	QVERIFY(vf == Vec3f(0.4f, 0.2f, 0.0f));
+	vf=Vec3f(QString("0.4,0.2,0.1"));
+	QVERIFY(vf == Vec3f(0.4f, 0.2f, 0.1f));
+
+	vd=Vec3d(li);
+	QVERIFY(vd == Vec3d(4.0, 2.0, 1.0));
+	QStringList ld={"0.4", "0.2", "0.1"};
+	vd=Vec3d(ld);
+	QVERIFY(vd == Vec3d(0.4, 0.2, 0.1));
+	vd=Vec3d(QString("0.4,0.2,0.1"));
+	QVERIFY(vd == Vec3d(0.4, 0.2, 0.1));
 }
 
 void TestVecMath::testVec4Math()
@@ -386,6 +440,30 @@ void TestVecMath::testVec4Math()
 	vd.set(2.,2.,2.,2.);
 	QVERIFY(qAbs(vd.length()-4.) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vd.lengthSquared()-16.) <= ERROR_LIMIT);
+
+	QStringList li={"8", "4", "2", "1"};
+	vi=Vec4i(li);
+	QVERIFY(vi == Vec4i(8, 4, 2, 1));
+	vi=Vec4i(QString("8,4,2,1"));
+	QVERIFY(vi == Vec4i(8, 4, 2, 1));
+	vi=Vec4i(QString("8,4,2"));   // Short list, works with warning
+	QVERIFY(vi == Vec4i(8, 4, 2, 0));
+
+	QStringList lf={"0.8", "0.4", "0.2", "0.1"};
+	vf=Vec4f(lf);
+	QVERIFY(vf == Vec4f(0.8f, 0.4f, 0.2f, 0.1f));
+	vf=Vec4f(QString("0.8,0.4,0.2,0.1"));
+	QVERIFY(vf == Vec4f(0.8f, 0.4f, 0.2f, 0.1f));
+	vf=Vec4f(QString("0.8,0.4,0.2"));  // Short list, works with warning
+	QVERIFY(vf == Vec4f(0.8f, 0.4f, 0.2f, 0.0f));
+
+	QStringList ld={"0.8", "0.4", "0.2", "0.1"};
+	vd=Vec4d(ld);
+	QVERIFY(vd == Vec4d(0.8, 0.4, 0.2, 0.1));
+	vd=Vec4d(QString("0.8,0.4,0.2,0.1"));
+	QVERIFY(vd == Vec4d(0.8, 0.4, 0.2, 0.1));
+	vd=Vec4d(QString("0.8,0.4,0.2"));  // Short list, works with warning
+	QVERIFY(vd == Vec4d(0.8, 0.4, 0.2, 0.0));
 }
 
 

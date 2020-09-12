@@ -205,7 +205,7 @@ void StelCore::init()
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
 	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toDouble());
 	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toDouble());
-	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()).toVec3d());
+	setDeltaTCustomEquationCoefficients(Vec3d(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -699,6 +699,12 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+void StelCore::setMatAltAzModelView(const Mat4d& mat)
+{
+	matAltAzModelView = mat;
+	invertMatAltAzModelView = matAltAzModelView.inverse();
+}
+
 Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
@@ -1128,8 +1134,8 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-				loc.planetName = pl->getEnglishName();
-				loc.name = "-";
+				loc.planetName = pl->getEnglishName();				
+				loc.name = "landing site";
 				loc.state = "";
 
 				// Let's try guess name of location...
@@ -1184,6 +1190,8 @@ void StelCore::setObserver(StelObserver *obs)
 {
 	delete position;
 	position = obs;
+	if (!getUseCustomTimeZone() && obs->getCurrentLocation().ianaTimeZone.length()>0)
+		setCurrentTimeZone(obs->getCurrentLocation().ianaTimeZone);
 }
 
 // Smoothly move the observer to the given location
@@ -1198,7 +1206,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			// Avoid using a temporary location name to create another temporary one (otherwise it looks like loc1 -> loc2 -> loc3 etc..)
 			curLoc.name = ".";
 		}
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);		
 		setObserver(newObs);
 		newObs->update(0);
 	}
@@ -1747,7 +1755,7 @@ void StelCore::addSiderealDays(double d)
 	setJD(getJD() + d);
 }
 
-// Get the sidereal time shifted by the observer longitude
+// Get the sidereal time of the prime meridian (i.e. Rotation Angle) shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
@@ -1950,7 +1958,7 @@ double StelCore::computeDeltaT(const double JD)
 		deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 		int year, month, day;
 		StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-		double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100.;
+		double u = (StelUtils::yearFraction(year,month,day)-getDeltaTCustomYear())/100.;
 		DeltaT = deltaTCustomEquationCoeff[0] + u*(deltaTCustomEquationCoeff[1] + u*deltaTCustomEquationCoeff[2]);
 	}
 
@@ -2456,14 +2464,14 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
-	if (propMgr->getStelPropertyValue("Oculars.enableOcular").toBool())
+	if (propMgr->getStelPropertyValue("Oculars.enableOcular", true).toBool())
 		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
 		return false;
 	if (!getSkyDrawer()->getFlagHasAtmosphere())
 		return false;
-	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
+	if (ssys->getEclipseFactor(this).first<=0.01) // Total solar eclipse
 		return false;
 
 	// immediately decide upon sky background brightness...

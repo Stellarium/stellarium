@@ -44,7 +44,11 @@ typedef QSharedPointer<Planet> PlanetP;
 
 //! @class SolarSystem
 //! This StelObjectModule derivative is used to model SolarSystem bodies.
-//! This includes the Major Planets, Minor Planets and Comets.
+//! This includes the Major Planets (class Planet), Minor Planets (class MinorPlanet) and Comets (class Comet).
+// GZ's documentation attempt, early 2017.
+//! This class and the handling of solar system data has seen many changes, and unfortunately, not much has been consistently documented.
+//! The following is a reverse-engineered analysis.
+//!
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
@@ -60,6 +64,14 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagTrails
 		   WRITE setFlagTrails
 		   NOTIFY trailsDisplayedChanged)
+	Q_PROPERTY(int maxTrailPoints
+		   READ getMaxTrailPoints
+		   WRITE setMaxTrailPoints
+		   NOTIFY maxTrailPointsChanged)
+	Q_PROPERTY(int trailsThickness
+		   READ getTrailsThickness
+		   WRITE setTrailsThickness
+		   NOTIFY trailsThicknessChanged)
 	Q_PROPERTY(bool flagHints // was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
 		   READ getFlagHints
 		   WRITE setFlagHints
@@ -171,6 +183,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisLine
 		   NOTIFY ephemerisLineChanged
 		   )
+	Q_PROPERTY(int ephemerisLineThickness
+		   READ getEphemerisLineThickness
+		   WRITE setEphemerisLineThickness
+		   NOTIFY ephemerisLineThicknessChanged
+		   )
 	Q_PROPERTY(bool ephemerisSkippedData
 		   READ getFlagEphemerisSkipData
 		   WRITE setFlagEphemerisSkipData
@@ -180,6 +197,11 @@ class SolarSystem : public StelObjectModule
 		   READ getEphemerisDataStep
 		   WRITE setEphemerisDataStep
 		   NOTIFY ephemerisDataStepChanged
+		   )
+	Q_PROPERTY(int ephemerisDataLimit
+		   READ getEphemerisDataLimit
+		   WRITE setEphemerisDataLimit
+		   NOTIFY ephemerisDataLimitChanged
 		   )
 	Q_PROPERTY(bool ephemerisSmartDates
 		   READ getFlagEphemerisSmartDates
@@ -218,6 +240,11 @@ class SolarSystem : public StelObjectModule
 		   READ getLabelsColor
 		   WRITE setLabelsColor
 		   NOTIFY labelsColorChanged
+		   )
+	Q_PROPERTY(Vec3f pointerColor
+		   READ getPointerColor
+		   WRITE setPointerColor
+		   NOTIFY pointerColorChanged
 		   )
 	Q_PROPERTY(Vec3f trailsColor
 		   READ getTrailsColor
@@ -329,6 +356,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setEphemerisGenericMarkerColor
 		   NOTIFY ephemerisGenericMarkerColorChanged
 		   )
+	Q_PROPERTY(Vec3f ephemerisSecondaryMarkerColor
+		   READ getEphemerisSecondaryMarkerColor
+		   WRITE setEphemerisSecondaryMarkerColor
+		   NOTIFY ephemerisSecondaryMarkerColorChanged
+		   )
 	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor
 		   READ getEphemerisSelectedMarkerColor
 		   WRITE setEphemerisSelectedMarkerColor
@@ -371,6 +403,17 @@ class SolarSystem : public StelObjectModule
 		   READ getApparentMagnitudeAlgorithmOnEarth
 		   WRITE setApparentMagnitudeAlgorithmOnEarth
 		   NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
+
+	Q_PROPERTY(int orbitsThickness
+		   READ getOrbitsThickness
+		   WRITE setOrbitsThickness
+		   NOTIFY orbitsThicknessChanged
+		   )
+
+	Q_PROPERTY(bool flagDrawMoonHalo
+		   READ getFlagDrawMoonHalo
+		   WRITE setFlagDrawMoonHalo
+		   NOTIFY flagDrawMoonHaloChanged)
 
 public:
 	SolarSystem();
@@ -445,6 +488,19 @@ public slots:
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
 	bool getFlagTrails() const;
 
+	//! Set thickness of trails.
+	void setTrailsThickness(int v);
+	//! Get thickness of trail.
+	int getTrailsThickness() const {return trailsThickness;}
+
+	//! Set maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
+	//! The trails are drawn for a maximum of 365 days and then fade out.
+	//! If drawing many trails slows down the application, you can set a new maximum trail step length.
+	//! Note that the fadeout may require more points or a decent simulation speed.
+	void setMaxTrailPoints(int max);
+	//! Get maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
+	int getMaxTrailPoints() const {return maxTrailPoints;}
+
 	//! Set flag which determines if planet hints are drawn or hidden along labels
 	void setFlagHints(bool b);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
@@ -502,7 +558,7 @@ public slots:
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	//! @return current color
-	const Vec3f& getLabelsColor(void) const;
+	Vec3f getLabelsColor(void) const;
 
 	//! Set the color used to draw solar system object orbit lines.
 	//! @param c The color of the solar system object orbit lines (R,G,B)
@@ -730,10 +786,10 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setTrailsColor(const Vec3f& c) {trailColor=c;}
+	void setTrailsColor(const Vec3f& c) {if (c!=trailsColor) { trailsColor=c; emit trailsColorChanged(c);}}
 	//! Get the current color used to draw planet trails lines.
 	//! @return current color
-	Vec3f getTrailsColor() const {return trailColor;}
+	Vec3f getTrailsColor() const {return trailsColor;}
 
 	//! Set the color used to draw planet pointers.
 	//! @param c The color of the planet pointers
@@ -741,7 +797,7 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setPointerColor(const Vec3f& c) {pointerColor=c;}
+	void setPointerColor(const Vec3f& c) {if (c!=pointerColor) {pointerColor=c; emit pointerColorChanged(c);}}
 	//! Get the current color used to draw planet pointers.
 	//! @return current color
 	Vec3f getPointerColor() const {return pointerColor;}
@@ -812,13 +868,16 @@ public slots:
 	//! @li O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
 	//! @li Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
 	//! @li Sean E. Urban and P. Kenneth Seidelmann "Explanatory Supplement to the Astronomical Almanac" (3rd edition, 2013)
+	//! It is interesting to note that Meeus in his discussion of "Harris" states that Harris did not give new values.
+	//! The book indeed mentions a few values for the inner planets citing Danjon, but different from those then listed by Meeus.
+	//! Therefore it must be assumed that the "Harris" values are misnomed, and are the least certain set.
 	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = ExpSup2013
 	//! @param algorithm the case in-sensitive algorithm name
 	//! @note: The structure of algorithms is almost identical, just the numbers are different!
 	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
 	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
 
-	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	//! Get the algorithm used for computation of apparent magnitudes for planets in case observer on the Earth
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
@@ -890,12 +949,25 @@ public slots:
 	void setFlagPermanentOrbits(bool b);
 	bool getFlagPermanentOrbits() const;
 
+	void setOrbitsThickness(int v);
+	int getOrbitsThickness() const;
+
+	void setFlagDrawMoonHalo(bool b);
+	bool getFlagDrawMoonHalo() const;
+
+	//! Reset and recreate trails
+	void recreateTrails();
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void flagDrawMoonHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
+	void trailsThicknessChanged(int v);
+	void orbitsThicknessChanged(int v);
+	void maxTrailPointsChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
 	void flagTranslatedNamesChanged(bool b);
@@ -918,8 +990,10 @@ signals:
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisDataStepChanged(int s);
+	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
@@ -928,6 +1002,7 @@ signals:
 	void customGrsJDChanged(double JD);
 
 	void labelsColorChanged(const Vec3f & color) const;
+	void pointerColorChanged(const Vec3f & color) const;
 	void trailsColorChanged(const Vec3f & color) const;
 	void orbitsColorChanged(const Vec3f & color) const;
 	void nomenclatureColorChanged(const Vec3f & color) const;
@@ -951,6 +1026,7 @@ signals:
 	void uranusOrbitColorChanged(const Vec3f & color) const;
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
 	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
@@ -1001,8 +1077,9 @@ public:
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
 	bool removeMinorPlanet(QString name);
 
-	//! Determines relative amount of sun visible from the observer's position.
-	double getEclipseFactor(const StelCore *core) const;
+	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
+	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
@@ -1037,6 +1114,9 @@ private slots:
 	void setFlagEphemerisLine(bool b);
 	bool getFlagEphemerisLine() const;
 
+	void setEphemerisLineThickness(int v);
+	int getEphemerisLineThickness() const;
+
 	void setFlagEphemerisHorizontalCoordinates(bool b);
 	bool getFlagEphemerisHorizontalCoordinates() const;
 
@@ -1058,8 +1138,14 @@ private slots:
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
+	void setEphemerisDataLimit(int limit);
+	int getEphemerisDataLimit() const;
+
 	void setEphemerisGenericMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisGenericMarkerColor(void) const;
+
+	void setEphemerisSecondaryMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisSecondaryMarkerColor(void) const;
 
 	void setEphemerisSelectedMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSelectedMarkerColor(void) const;
@@ -1114,13 +1200,11 @@ private:
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
 
-	void recreateTrails();
-
 	Vec3f getEphemerisMarkerColor(int index) const;
 
 	//! Calculate a color of Solar system bodies
 	//! @param bV value of B-V color index
-	unsigned char BvToColorIndex(float bV);
+	static unsigned char BvToColorIndex(double bV);
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
@@ -1172,6 +1256,8 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
+	int maxTrailPoints;                         // limit trails to a manageable size.
+	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;
@@ -1179,11 +1265,14 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	int ephemerisDataStep;
+	int ephemerisDataLimit;
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
+	Vec3f ephemerisSecondaryMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
 	Vec3f ephemerisVenusMarkerColor;
@@ -1194,7 +1283,7 @@ private:
 	class TrailGroup* allTrails;
 	QSettings* conf;
 	LinearFader trailFader;
-	Vec3f trailColor;
+	Vec3f trailsColor;
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;

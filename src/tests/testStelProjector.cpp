@@ -214,7 +214,7 @@ void TestStelProjector::testStelProjectorFisheye()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorFisheye(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 180.f;
+	float expectedFov = 360.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
@@ -275,7 +275,7 @@ void TestStelProjector::testStelProjectorHammer()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorHammer(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 360.f;
+	float expectedFov = 185.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
@@ -334,7 +334,7 @@ void TestStelProjector::testStelProjectorCylinder()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 175.f * 4.f/3.f;
+	float expectedFov = 200.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
@@ -393,7 +393,7 @@ void TestStelProjector::testStelProjectorMercator()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorMercator(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 175.f * 4.f/3.f;
+	float expectedFov = 270.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
@@ -511,7 +511,7 @@ void TestStelProjector::testStelProjectorSinusoidal()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorSinusoidal(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 175.f * 4.f/3.f;
+	float expectedFov = 200.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
@@ -572,7 +572,7 @@ void TestStelProjector::testStelProjectorMiller()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorMiller(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 175.f * 4.f/3.f;
+	float expectedFov = 270.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))

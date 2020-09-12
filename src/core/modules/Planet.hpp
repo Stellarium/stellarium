@@ -33,7 +33,7 @@
 
 // The callback type for the external position computation function
 // arguments are JDE, position[3], velocity[3].
-// The last variable is the userData pointer.
+// The last variable is the userData pointer, which is Q_NULLPTR for Planets, but used in derived classes. E.g. points to the KeplerOrbit for Comets.
 typedef void (*posFuncType)(double, double*, double*, void*);
 
 typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double xyzdot[3]);
@@ -42,6 +42,8 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double 
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 360
 
+class Orbit;
+class KeplerOrbit;
 class StelFont;
 class StelPainter;
 class StelTranslator;
@@ -73,7 +75,7 @@ public:
 	double siderealPeriod;		// sidereal period (Planet year or a moon's sidereal month) [earth days]
 };
 
-// Class to manage rings for planets like saturn
+// Class to manage rings for planets like Saturn
 class Ring
 {
 public:
@@ -149,7 +151,7 @@ public:
 	       const QString& normalMapName,
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
-	       void* anOrbitPtr,
+	       Orbit *anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden,
@@ -175,6 +177,7 @@ public:
 	//! - Size
 	//! - PlainText
 	//! - Extra: Heliocentric Ecliptical Coordinates & Observer-planetocentric Ecliptical Coordinates, Phase, illumination, phase angle & elongation from the Sun
+	//! @note subclasses should prefer to override only the component infostrings getInfoString...(), not this method!
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
@@ -239,7 +242,7 @@ public:
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
-	//! Get duration of mean solar day
+	//! Get duration of mean solar day, in earth days.
 	double getMeanSolarDay(void) const;
 	//! Get albedo
 	double getAlbedo(void) const { return static_cast<double>(albedo); }
@@ -247,6 +250,7 @@ public:
 	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
+	Orbit* getOrbit() const {return orbitPtr;}
 
 	void setNativeName(QString planet) { nativeName = planet; }
 
@@ -278,6 +282,7 @@ public:
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
+	// For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
 
@@ -290,13 +295,13 @@ public:
 	//! This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
-	//! Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
-	//! Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
-	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
+	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
-	//! Get the planet phase [0=dark..1=full] for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the planet phase (illuminated fraction of the planet disk, [0=dark..1=full]) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
@@ -307,9 +312,12 @@ public:
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
 	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
 
-	//! Return the heliocentric transformation for local coordinate
-	Vec3d getHeliocentricPos(Vec3d) const;
-
+	//! Return the heliocentric transformation for local (parentocentric) coordinate
+	//! @arg p planetocentric rectangular ecliptical coordinate (J2000)
+	//! @return heliocentric rectangular ecliptical coordinates (J2000)
+	Vec3d getHeliocentricPos(Vec3d p) const;
+	//! Propagate the heliocentric coordinates to parentocentric coordinates
+	//! @arg pos heliocentric rectangular ecliptical coordinate (J2000)
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
@@ -318,8 +326,9 @@ public:
 	//! Get the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
 	Vec3d getHeliocentricEclipticVelocity() const;
 
-	//! Compute the distance to the given position in heliocentric coordinates (in AU)
+	//! Compute and return the distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	double computeDistance(const Vec3d& obsHelioPos);
+	//! Return the last computed distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	double getDistance(void) const {return distance;}
 
 	void setRings(Ring* r) {rings = r;}
@@ -451,6 +460,21 @@ public:
 	QVector<const Planet*> getCandidatesForShadow() const;
 	
 protected:
+	// These components for getInfoString() can be overridden in subclasses
+	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Extra information to be displayed after the magnitude strings
+	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Size information to be displayed
+	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Return elongation and phase angle when flags=Elongation
+	virtual QString getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const;
+	//! Return sidereal and synodic periods when flags=Extra
+	virtual QString getInfoStringPeriods(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Extra information to be displayed at the end
+	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
+
+protected:
 	struct PlanetOBJModel
 	{
 		PlanetOBJModel();
@@ -526,13 +550,13 @@ protected:
 	RotationElements re;             // Rotation param
 	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
-	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) around the parent body.
+	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
 					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
 					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
-	Vec3f screenPos;                 // Used to store temporarily the 2D position on screen
+	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
@@ -543,10 +567,11 @@ protected:
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
-	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
-	// Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
-	float axisRotation;              // Rotation angle of the Planet on its axis.
-	// For Earth, this should be Greenwich Mean Sidereal Time GMST.
+	Mat4d rotLocalToParent;          // GZ2015: undocumented.
+					 // Apparently this is the axis orientation with respect to the parent body.
+					 // For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
+					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
@@ -564,7 +589,9 @@ protected:
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
-	void* orbitPtr;               // this is always used with an Orbit object.
+	Orbit* orbitPtr;		// Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
+					// For an "observer", it is GimbalOrbit.
+					// For the major planets, it is Q_NULLPTR.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
@@ -587,6 +614,7 @@ protected:
 	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+	static bool drawMoonHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
 
@@ -594,6 +622,8 @@ protected:
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
 	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
+
+	static int orbitsThickness;
 
 private:
 	QString iauMoonNumber;

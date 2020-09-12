@@ -27,6 +27,7 @@
 #include "StelOpenGL.hpp"
 
 #include <QObject>
+#include <QImage>
 
 class StelToneReproducer;
 class StelCore;
@@ -55,6 +56,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
 	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
+	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -95,13 +97,13 @@ public:
 	//! @param sPainter the StelPainter to use for drawing.
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
-	//! @param bV the source B-V index
+	//! @param bVindex the source B-V index (into the private colorTable. This is not the astronomical B-V value.)
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, unsigned int bV, bool checkInScreen=false, float twinkleFactor=1.0f)
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, int bVindex, bool checkInScreen=false, float twinkleFactor=1.0f)
 	{
-		return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen, twinkleFactor);
+		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor);
 	}
 
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f);
@@ -152,7 +154,7 @@ public:
 	}
 
 	//! Convert quantized B-V index to RGB colors
-	static inline const Vec3f& indexToColor(unsigned char bV)
+	static inline const Vec3f& indexToColor(int bV)
 	{
 		return colorTable[bV];
 	}
@@ -192,7 +194,7 @@ public slots:
 	//! Get the current Bortle scale index
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	int getBortleScaleIndex() const {return bortleScaleIndex;}
-	//! Get the average NELM for current Bortle scale index:
+	//! Get the average Naked-Eye Limiting Magnitude (NELM) for current Bortle scale index:
 	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
 	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
 	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
@@ -203,7 +205,7 @@ public slots:
 	//! Class 8 = NELM 4.1-4.5; average NELM is 4.3
 	//! Class 9 = NELM 4.0
 	float getNELMFromBortleScale() const;
-	//! Get the average NELM for given Bortle scale index [1..9]
+	//! Get the average Naked-Eye Limiting Magnitude (NELM) for given Bortle scale index [1..9]
 	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
 	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
 	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
@@ -220,6 +222,11 @@ public slots:
 	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
 	//! Get flag for drawing a halo around bright stars.
 	bool getFlagDrawBigStarHalo() const {return flagDrawBigStarHalo;}
+
+	//! Set flag to draw stars with rays
+	void setFlagStarSpiky(bool b);
+	//! Get whether to draw stars with rays
+	bool getFlagStarSpiky() const {return flagStarSpiky;}
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -319,6 +326,8 @@ signals:
 	void bortleScaleIndexChanged(int index);
 	//! Emitted when flag to draw big halo around stars changed
 	void flagDrawBigStarHaloChanged(bool b);
+	//! Emitted on change of star texture
+	void flagStarSpikyChanged(bool b);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -382,7 +391,7 @@ private:
 	//! Compute the V magnitude for a point source with the given luminance for the current FOV
 	//! @param lum the luminance in cd/m^2
 	//! @return V magnitude of the point source
-	float pointSourceLuminanceToMag(float lum);
+	float pointSourceLuminanceToMag(float lum) const;
 
 	//! Compute the log of the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source
@@ -391,7 +400,7 @@ private:
 
 	//! Find the world adaptation luminance to use so that a point source of magnitude mag
 	//! is displayed with a halo of size targetRadius
-	float findWorldLumForMag(float mag, float targetRadius);
+	float findWorldLumForMag(float mag, float targetRadius) const;
 
 	StelCore* core;
 	StelToneReproducer* eye;
@@ -404,6 +413,7 @@ private:
 	bool flagForcedTwinkle;
 	double twinkleAmount;
 	bool flagDrawBigStarHalo;
+	bool flagStarSpiky;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
@@ -444,6 +454,8 @@ private:
 	double customPlanetMagLimit;
 
 	//! Little halo texture
+	QImage texImgHalo;
+	QImage texImgHaloSpiky;
 	StelTextureSP texHalo;
 
 	//! Load B-V conversion parameters from config file

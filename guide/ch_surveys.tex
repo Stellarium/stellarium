@@ -39,13 +39,15 @@ As of v0.18.0, by default Stellarium tries to load HiPS from two sources:
 \url{http://alaskybis.unistra.fr/hipslist} and
 \url{https://data.stellarium.org/surveys/hipslist}.
 This can be changed with the hips/sources options in the configuration
-file (see also section~\ref{sec:config.ini:hips}).  For example:
+file (see also section~\ref{sec:config.ini:hips}).  For example, you can add your
+own private HiPS surveys by running a local webserver and adding:
 
 \begin{configfile}
 [hips]
-sources/size = 1
-sources/1/url = "https://myownhips/hipslist"
-
+sources/1/url = http://alaskybis.unistra.fr/hipslist
+sources/2/url = https://data.stellarium.org/surveys/hipslist
+sources/3/url = http://localhost/Stellarium/hips/hipslist
+sources/size  = 3
 \end{configfile}
 
 \section{Solar system HiPS survey}
@@ -114,8 +116,8 @@ toast_survey_levels=10
 On Linux, with the files stored in \file{/usr/local/share/Stellarium/StelDSS}, the same section could look like
 \begin{configfile}
 [astro]
-toast_survey_directory =/usr/local/share/Stellarium/StelDSS
-toast_survey_host=localhost:
+toast_survey_directory =usr/local/share/Stellarium/StelDSS
+toast_survey_host=/
 toast_survey_levels=10
 \end{configfile}
 

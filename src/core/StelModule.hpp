@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include <functional>
 
 // Predeclaration
 class StelCore;
@@ -67,6 +68,10 @@ public:
 	//! Called before the module will be delete, and before the openGL context is suppressed.
 	//! Deinitialize all openGL texture in this method.
 	virtual void deinit() {;}
+
+	//! Return module-specific settings. This can be useful mostly by plugins which may want to keep their settings to their own files.
+	//! The default implementation returns a null pointer!
+	virtual QSettings *getSettings() {return Q_NULLPTR;}
 
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
@@ -168,6 +173,18 @@ protected:
 	                            const QString& shortcut="", const QString& altShortcut="") {
 		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
 	}
+
+	//! convenience methods to add an action (call to Lambda functor) to the StelActionMgr object.
+	//! @param id unique identifier. Should be called actionMy_Action. (i.e., start with "action" and then "Capitalize_Underscore" style.)
+	//! @param groupId string to be used in the Help menu. The action will be listed in this group.
+	//! @param text short translatable description what the action does.
+	//! @param contextObject The lambda will only be called if this object exists. Use "this" in most cases.
+	//! @param lambda a C++11 Lambda function.
+	//! @param shortcut default shortcut. Can be reconfigured.
+	//! @param altShortcut default alternative shortcut. Can be reconfigured.
+	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+						QObject* contextObject, std::function<void()> lambda,
+						const QString& shortcut="", const QString& altShortcut="");
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)

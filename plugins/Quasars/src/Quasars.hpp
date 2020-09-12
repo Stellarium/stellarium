@@ -180,6 +180,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get the list of all quasars.
+	const QList<QuasarP>& getAllQuasars() const {return QSO;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -320,6 +323,8 @@ private slots:
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
 	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveSettingsToConfig(); }
 };
 
 

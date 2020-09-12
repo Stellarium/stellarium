@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
+    <width>535</width>
     <height>393</height>
    </rect>
   </property>
@@ -374,6 +374,29 @@
            </property>
           </widget>
          </item>
+         <item row="6" column="2">
+          <widget class="QSpinBox" name="lineWidthSpinBox">
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QLabel" name="lineWidthLabel">
+           <property name="text">
+            <string>Line thickness</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -400,7 +423,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Restore default settings</string>
+            <string>Restore defaults</string>
            </property>
           </widget>
          </item>
@@ -558,6 +581,9 @@
          </item>
          <item row="4" column="1">
           <widget class="QCheckBox" name="customAzimuth1CheckBox">
+           <property name="toolTip">
+            <string>Always counted from North</string>
+           </property>
            <property name="text">
             <string>Custom Azimuth 1</string>
            </property>
@@ -586,6 +612,9 @@
          </item>
          <item row="5" column="1">
           <widget class="QCheckBox" name="customAzimuth2CheckBox">
+           <property name="toolTip">
+            <string>Always counted from North</string>
+           </property>
            <property name="text">
             <string>Custom Azimuth 2</string>
            </property>

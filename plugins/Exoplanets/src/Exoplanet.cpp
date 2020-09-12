@@ -90,8 +90,6 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
-	EPCount=0;
-	PHEPCount=0;
 	eccentricityList.clear();
 	semiAxisList.clear();
 	massList.clear();
@@ -282,11 +280,11 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
 	}
 
-	if (flags&Magnitude && Vmag<99 && !distributionMode)
+	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
@@ -536,9 +534,9 @@ QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 	QRegExp dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
 	if (dataRx.exactMatch(ptype))
 	{
-		QString spectral = dataRx.capturedTexts().at(1).trimmed();
-		QString zone = dataRx.capturedTexts().at(2).trimmed();
-		QString size = dataRx.capturedTexts().at(3).trimmed();
+		QString spectral = dataRx.cap(1).trimmed();
+		QString zone = dataRx.cap(2).trimmed();
+		QString size = dataRx.cap(3).trimmed();
 
 		result = QString("%1-%2 %3")
 				.arg(spectral)
@@ -555,15 +553,13 @@ Vec3f Exoplanet::getInfoColor(void) const
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
-	if (distributionMode)
-	{
-		return 4.f;
-	}
-	else
-	{
-		return (Vmag<99. ? static_cast<float>(Vmag) : 6.f);
-	}
+	Q_UNUSED(core)
+	return (distributionMode ? 4.f : (isVMagnitudeDefined() ? static_cast<float>(Vmag) : 6.f));
+}
+
+bool Exoplanet::isVMagnitudeDefined() const
+{
+	return Vmag<98.;
 }
 
 double Exoplanet::getAngularSize(const StelCore*) const

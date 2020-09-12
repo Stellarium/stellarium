@@ -58,8 +58,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	QString url;
 	if (paramRx.exactMatch(params))
 	{
-		refresh_delay = paramRx.capturedTexts().at(1).toInt() / 1000; // convert microseconds to milliseconds
-		url           = paramRx.capturedTexts().at(2).trimmed();
+		refresh_delay = paramRx.cap(1).toInt() / 1000; // convert microseconds to milliseconds
+		url           = paramRx.cap(2).trimmed();
 	}
 	else
 	{
@@ -320,11 +320,11 @@ void TelescopeClientJsonRts2::setReadOnly(bool readonly)
 	{
 		if (telReadonly)
 		{
-			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_readonly", "1,0,0").toString()));
+			telescopeManager->setReticleColor(Vec3f(settings->value("color_telescope_readonly", "1,0,0").toString()));
 		}
 		else
 		{
-			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+			telescopeManager->setReticleColor(Vec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
 		}
 	}
 }

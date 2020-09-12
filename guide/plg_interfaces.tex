@@ -395,7 +395,8 @@ The plugin shows the locally detected address, but depending on your network or
 if you need external access you might need to use a different one 
 --- contact your network administrator if you need help with that.
 
-\noindent The access to the remote control may optionally be restricted with a simple 
+\subsubsection{Password}
+The access to the remote control may optionally be restricted with a simple 
 password.
 
 \textbf{Warning:} \emph{currently no network encryption is used, meaning that 
@@ -405,6 +406,16 @@ plugin should generally be restricted, except if countermeasures such as VPN
 usage are taken! If you are in a home network using NAT (network access 
 translation), this should be enough for basic security except if port 
 forwarding or a DMZ is configured.}
+
+\subsubsection{CORS}
+The Web API also supports Cross-Origin Resource Sharing (CORS). By enabling CORS,
+compatible websites and web apps can be used to control your Stellarium server.
+
+Enable CORS by checking the ``Enable CORS for the following origin'' option in the
+configuration dialog. Then, enter the URL of the website you'd like to use to control
+Stellarium -- e.g.\ \url{https://telescopius.com}. Specify ``*'' to let any website
+take control. Do this at your own risk.
+
 
 \subsection{Remote Control Web Interface}
 \label{sec:plugins:RemoteControl:webinterface}

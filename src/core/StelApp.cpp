@@ -56,6 +56,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
@@ -124,6 +125,10 @@ Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
 Q_IMPORT_PLUGIN(OcularsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_OCULUS
+Q_IMPORT_PLUGIN(OculusStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
 Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
 #endif
@@ -182,6 +187,10 @@ Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_REMOTESYNC
 Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_VTS
+Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 #endif
 
 // Initialize static variables
@@ -246,6 +255,8 @@ StelApp::StelApp(StelMainView *parent)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
+	, overwriteInfoColor(Vec3f(1.f))
+	, daylightInfoColor(Vec3f(0.f))
 	#ifdef ENABLE_SPOUT
 	, spoutSender(Q_NULLPTR)
 	#endif
@@ -551,6 +562,11 @@ void StelApp::init(QSettings* conf)
 	GridLinesMgr* gridLines = new GridLinesMgr();
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
+	
+	SplashScreen::showMessage(q_("Initializing special markers..."));
+	SpecialMarkersMgr* specialMarkers = new SpecialMarkersMgr();
+	specialMarkers->init();
+	getModuleMgr().registerModule(specialMarkers);
 
 	// Sporadic Meteors
 	SplashScreen::showMessage(q_("Initializing sporadic meteors..."));
@@ -611,7 +627,9 @@ void StelApp::init(QSettings* conf)
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
-	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());
+	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
+	setOverwriteInfoColor(Vec3f(confSettings->value("color/info_text_color", "1.0,1.0,1.0").toString()));
+	setDaylightInfoColor(Vec3f(confSettings->value("color/daylight_text_color", "0.0,0.0,0.0").toString()));
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
@@ -969,6 +987,34 @@ void StelApp::setFlagUseCCSDesignation(bool b)
 	}
 }
 
+void StelApp::setOverwriteInfoColor(const Vec3f& color)
+{
+	if (color != overwriteInfoColor)
+	{
+		overwriteInfoColor = color;
+		emit overwriteInfoColorChanged(color);
+	}
+}
+
+Vec3f StelApp::getOverwriteInfoColor() const
+{
+	return overwriteInfoColor;
+}
+
+void StelApp::setDaylightInfoColor(const Vec3f& color)
+{
+	if (color != daylightInfoColor)
+	{
+		daylightInfoColor = color;
+		emit daylightInfoColorChanged(color);
+	}
+}
+
+Vec3f StelApp::getDaylightInfoColor() const
+{
+	return daylightInfoColor;
+}
+
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
 {
@@ -1043,6 +1089,11 @@ void StelApp::setViewportEffect(const QString& name)
 	}
 	if (name == "none") return;
 
+	if (!core)
+	{
+		qDebug() << "No core to set viewport effect";
+		return;
+	}
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	int w = params.viewportXywh[2];
 	int h = params.viewportXywh[3];
@@ -1116,4 +1167,10 @@ void StelApp::setAppFont(QFont font)
 	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 	QGuiApplication::setFont(font);
 	emit fontChanged(font);
+}
+
+QString StelApp::getVersion() const
+{
+	QStringList ver = StelUtils::getApplicationVersion().split(".");
+	return QString("%1.%2.%3").arg(ver[0]).arg(ver[1]).arg(ver[2]);
 }

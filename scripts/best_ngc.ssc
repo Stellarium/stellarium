@@ -2,7 +2,7 @@
 // Name: Best objects in the New General Catalog
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.2
+// Version: 1.3
 // Description: This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC achievement award.
 //
 
@@ -32,7 +32,7 @@ LabelMgr.setLabelShow(id, false);
 LabelMgr.setLabelShow(cnt, false);
 LabelMgr.deleteLabel(id);
 LabelMgr.deleteLabel(cnt);
-var dss = core.isDSSModeEnabled();
+var dss = ToastMgr.getFlagShow();
 
 for (i=0; i<objlist.length; i++)
 {
@@ -44,15 +44,15 @@ for (i=0; i<objlist.length; i++)
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.autoZoomIn(2);
 	core.wait(1);
-	core.setDSSMode(true);
+	ToastMgr.setFlagShow(true);
 	core.wait(9);
 	
 	LabelMgr.setLabelShow(n, false);
 	StelMovementMgr.zoomTo(30, 5);
 	core.wait(3);
-	core.setDSSMode(false);
+	ToastMgr.setFlagShow(false);
 	core.wait(5);
 }
 core.clear("natural");
-core.setDSSMode(dss);
+ToastMgr.setFlagShow(dss);
 core.goHome();

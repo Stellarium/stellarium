@@ -181,16 +181,16 @@ Returns the current view direction, as a JSON object of format:
 
 Without the optional <tt>coord</tt>, all versions are returned. The returned values are 3D vectors. 
 <table>
-<tr><td>x=</td><td>cos(&delta;)*cos(&alpha;)</td><tr>
-<tr><td>y=</td><td>cos(&delta;)*sin(&alpha;)</td><tr>
-<tr><td>z=</td><td>sin(&delta;)             </td><tr>
+<tr><td>x=</td><td>cos(&delta;)*cos(&alpha;)</td></tr>
+<tr><td>y=</td><td>cos(&delta;)*sin(&alpha;)</td></tr>
+<tr><td>z=</td><td>sin(&delta;)             </td></tr>
 </table>
 
 For the vector in <tt>altAz</tt> system, the actually returned values are based on an azimuth Az' counted from South (x=1) towards East (y=1), Az'=180-Az.
 <table>
-<tr><td>x=</td><td>cos(alt)*cos(Az')</td><tr>
-<tr><td>y=</td><td>cos(alt)*sin(Az')</td><tr>
-<tr><td>z=</td><td>sin(alt)         </td><tr>
+<tr><td>x=</td><td>cos(alt)*cos(Az')</td></tr>
+<tr><td>y=</td><td>cos(alt)*sin(Az')</td></tr>
+<tr><td>z=</td><td>sin(alt)         </td></tr>
 </table>
 
 If the optional parameter <tt>ref</tt> is given, it governs refraction setting and it applies to the <tt>jNow</tt> output only. 

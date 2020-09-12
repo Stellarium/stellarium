@@ -219,6 +219,8 @@ In this file,
   Stellarium open and click on the star in Stellarium while editing
   this file.
 \end{description}
+Anything after the last star number is currently ignored.
+Comments can be given in lines starting with \texttt{\#} signs. Empty lines are ignored.
 
 \section{Constellation Boundaries}
 \label{sec:skycultures:boundaries}
@@ -321,7 +323,7 @@ As example to help in orientation in the sky the additional lines between conste
 Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help rays are listed in
 \file{asterism\_names.eng.fab}. This file consists of 2 simple columns:
 Abbreviation (or just a serial number) and English
-name of asterism. The writing \texttt{\_("name")} allows automatic
+name of asterism. The writing \texttt{\_("name", "asterism")} allows automatic, context sensitive
 translation of the English strings to other languages. These strings
 will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) marking a comment sign, 
 some reference information can be added in comment lines, like ``List found at \ldots''.

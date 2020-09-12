@@ -85,20 +85,20 @@ Nova::~Nova()
 
 QVariantMap Nova::getMap(void) const
 {
-	QVariantMap map;
-	map["designation"] = designation;
-	map["name"] = novaName;
-	map["type"] = novaType;
-	map["maxMagnitude"] = maxMagnitude;
-	map["minMagnitude"] = minMagnitude;
-	map["peakJD"] = peakJD;
-	map["m2"] = m2;
-	map["m3"] = m3;
-	map["m6"] = m6;
-	map["m9"] = m9;
-	map["RA"] = RA;
-	map["Dec"] = Dec;	
-	map["distance"] = distance;
+	const QVariantMap map = {
+	{"designation", designation},
+	{"name", novaName},
+	{"type", novaType},
+	{"maxMagnitude", maxMagnitude},
+	{"minMagnitude", minMagnitude},
+	{"peakJD", peakJD},
+	{"m2", m2},
+	{"m3", m3},
+	{"m6", m6},
+	{"m9", m9},
+	{"RA", RA},
+	{"Dec", Dec},
+	{"distance", distance}};
 
 	return map;
 }
@@ -115,7 +115,7 @@ QString Nova::getNameI18n() const
 	QRegExp nn("^Nova\\s+(\\w+|\\w+\\s+\\w+)\\s+(\\d+|\\d+\\s+#\\d+)$");
 	QString nameI18n = novaName;
 	if (nn.exactMatch(novaName))
-		nameI18n = QString("%1 %2 %3").arg(trans.qtranslate("Nova", "Nova template"), trans.qtranslate(nn.capturedTexts().at(1).trimmed(), "Genitive name of constellation"), nn.capturedTexts().at(2).trimmed());
+		nameI18n = QString("%1 %2 %3").arg(trans.qtranslate("Nova", "Nova template"), trans.qtranslate(nn.cap(1).trimmed(), "Genitive name of constellation"), nn.cap(2).trimmed());
 	else
 		nameI18n = trans.qtranslate(novaName);
 
@@ -150,7 +150,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	{
 		double az_app, alt_app;
 		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
+		Q_UNUSED(az_app)
 		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
 
@@ -171,7 +171,6 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	postProcessInfoString(str, flags);
 	return str;
 }
-
 
 QVariantMap Nova::getInfoMap(const StelCore *core) const
 {

@@ -41,19 +41,13 @@ whether your System is properly identified. Note that it does not check whether 
 
 These instructions are based on Ubuntu. Find out and add the changes required for your System.
 
-Unfortunately, Ubuntu 14.04's TeXlive is a bit outdated. It is recommended to *not* install these packages:
+Ubuntu 14.04's TeXlive is a bit outdated. Install TeXlive directly. See https://www.tug.org/texlive/quickinstall.html
 
-```
-sudo apt-get install texlive-full biber make 
-```
-
-but rather install TeXlive directly. See https://www.tug.org/texlive/quickinstall.html
-
-On Ubuntu 18.04 and 19.04 the following should work (it uses less filespace than the commands shown above), 
+On Ubuntu 18.04 and later the following should work: 
 
 ```
 sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
-texlive-latex-extra texlive-pictures biber make
+texlive-latex-extra texlive-pictures texlive-fonts-recommended biber make
 ```
 
 
@@ -79,7 +73,7 @@ make SUG
 You will find guide.pdf (full resolution) and the compressed version, SUG.pdf.
 
 
-##Building the HTML Guide
+## Building the HTML Guide
 
 Because of differences in the toolchains we must clean the stuff created with the PDF version.
 
@@ -105,7 +99,7 @@ The Stellarium Online Guide currently is a set of HTML pages cut at the chapter 
 ### State
 From what we know already: 
 
-`htlatex` does not create HTML from the TeX files, but it creates a classical DVI file which is then further processesd by the HTML creation process `ht4lt`. Therefore it seems useful to make sure a classical dvi file can be created. I added a dvi target for this. 
+`htlatex` does not create HTML from the TeX files, but it creates a classical DVI file which is then further processed by the HTML creation process `ht4lt`. Therefore it seems useful to make sure a classical dvi file can be created. I added a dvi target for this. 
 
 ### Detect the processor
 
@@ -226,9 +220,9 @@ sudo fmtutil-sys --all
 
 Very odd: It seems section labels must not contain the name ":config". Or we have far too many labels. This seems to be a problem in the chapters with many tables. I had to reduce the number of valid labels.  Else: stack size exceeded. 
 
-#Help Wanted!
+# Help Wanted!
 
-If you have some experience with tex4ht to create a pleasing online version of Stellarium's User Guide, please feel free to put in your TeXnical wisdom. Discuss with the team what kind of format is most useful. Apparently a frameset is possible but requires some extra work in the configuration. "The LaTeX Web Companion" will be your best friend, it is surprising how little in-depth information is available online.
+If you have some experience with tex4ht to create a pleasing online version of Stellarium's User Guide, please feel free to contribute your TeXnical wisdom. Discuss with the team what kind of format is most useful. Apparently a frameset is possible but requires some extra work in the configuration. (And it is pretty 90ies-ish. But what's wrong with that? Do something better then.) "The LaTeX Web Companion" will be your best friend, it is surprising how little in-depth information is available online.
 
 Some info is in 
 

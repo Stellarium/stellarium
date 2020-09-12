@@ -2,7 +2,7 @@
 // Name: Skybox Tiles
 // License: Public Domain
 // Author: Georg Zotti
-// Version: 2.10
+// Version: 2.11
 // Shortcut: Ctrl+D,B
 // Description: Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments.
 // Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME.
@@ -27,6 +27,7 @@
 // V2.9 2018-06-21  We can read an environment variable STEL_SKYBOX_DIR now which is the path to storage. Likewise, names/directories can be changed by other environment variables.
 //                  You need to enable storing to absolute paths in the [scripts] section of config.ini.
 // V2.10 2018-07-29 Include diameters on Sun and Moon.
+// V2.11 2020-04-06 Viewport now set by StelViewportMgr (Fix deprecated/obsolete API use.)
 
 // Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
 DIR=core.getEnv("STEL_SKYBOX_DIR");
@@ -66,7 +67,7 @@ oldAz=core.getViewAzimuthAngle();
 
 // Make sure to use the right projection:
 core.setProjectionMode("ProjectionPerspective");
-core.setViewportOffset(0, 0);
+StelMovementMgr.moveViewport(0, 0, 0);
 
 // Hide lower/left button bars. Note that you must hide other GUI panels manually.
 core.setGuiVisible(false);
@@ -138,6 +139,7 @@ core.wait(SHOT_WAIT);
 core.setGuiVisible(true);
 
 // Write some info about sun, moon and Venus to use as directional light sources in Unity or other applications.
+// Do not change these strings - consuming programs rely on them!
 core.output("Stellarium Skybox lighting data:");
 core.output("Vertical FoV: "      + SHOT_VFOV);
 core.output("Horizontal FoV: "    + 2*Math.atan(Math.tan(SHOT_VFOV/2*Math.PI/180)* core.getScreenWidth()/core.getScreenHeight()) * 180/Math.PI);

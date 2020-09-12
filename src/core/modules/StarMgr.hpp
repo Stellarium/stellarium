@@ -114,6 +114,11 @@ class StarMgr : public StelObjectModule
 		   WRITE setFlagAdditionalNames
 		   NOTIFY flagAdditionalNamesDisplayedChanged
 		   )
+	Q_PROPERTY(bool flagDesignationLabels
+		   READ getDesignationUsage
+		   WRITE setDesignationUsage
+		   NOTIFY designationUsageChanged
+		   )
 
 public:
 	StarMgr(void);
@@ -172,16 +177,6 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Set the color used to label bright stars.
-	//! @param c The color of the bright stars labels
-	//! @code
-	//! // example of usage in scripts
-	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
-	//! @endcode
-	void setLabelColor(const Vec3f& c) {labelColor = c;}
-	//! Get the current color used to label bright stars.
-	Vec3f getLabelColor(void) const {return labelColor;}
-
 	//! Set display flag for Stars.
 	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
 	//! Get display flag for Stars
@@ -206,6 +201,11 @@ public slots:
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
 	static bool getFlagSciNames(void) {return flagSciNames;}
+
+	//! Set flag for usage designations of stars for their labels instead common names.
+	void setDesignationUsage(const bool flag) { if(flagDesignations!=flag){ flagDesignations=flag; emit designationUsageChanged(flag);}}
+	//! Get flag for usage designations of stars for their labels instead common names.
+	bool getDesignationUsage(void) {return flagDesignations; }
 
 	//! Show additional star names.
 	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
@@ -371,12 +371,15 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();
+	//! decrease artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void reduceStarsMagnitudeLimit();
 
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
+	void designationUsageChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
 	void labelsAmountChanged(float a);
 
@@ -491,7 +494,7 @@ private:
 	QFont starFont;
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
-	Vec3f labelColor;
+	static bool flagDesignations;
 
 	StelTextureSP texPointer;		// The selection pointer texture
 

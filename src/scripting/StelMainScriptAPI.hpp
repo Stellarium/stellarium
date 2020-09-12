@@ -60,31 +60,29 @@ public slots:
 	//! @return the Modified Julian Day
 	static double getMJDay();
 
-	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	//! @param dateStr the date string to use.  Formats:
-	//! - ISO, e.g. "2008-03-24T13:21:01"
-	//! - "now" (set sim time to real time)
-	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
-	//!   units: seconds, minutes, hours, days, sols, weeks, months, years.
-	//!   You may also append " sidereal" to use sidereal days and so on.
-	//!   You can also use "now" at the start.  For example:
-	//!   "now + 3 hours sidereal"
-	//! @note you must use the plural all the time, even when the number
-	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! @note when sidereal time is used, the length of time for
-	//! each unit is dependent on the current planet.  By contrast
-	//! when sidereal time is not specified (i.e. solar time is used)
-	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used. Defaults to "utc".
-	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
-	//! Defaults to "true".
-	//! @note for fully compatibles behavior of this function with the version 0.11.4
-	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! Sets Stellarium's date using an absolute or relative value.
+	//! @param dateStr Defines the date or offset to use. Possible formats:
+	//! - Date and time according to ISO 8601, without time zone, e.g., "2008-03-24T13:21:01"
+	//! - Use "now" to set Stellarium's time to the system's (presumably) real time.
+	//! - Specify an offset in the form <sign><value><unit> to set the date relative to its
+	//!   current value. <unit> may be one of second, minute, hour, day, sol, week, month,
+	//!   year, with a plural 's' optionally appended, e.g., "+3.25 days", " - 1 year".
+	//! - Use "now" followed by an offset to set the date relative to the system's
+	//!   current value, e.g., "now+1hour".
+	//! - You may append "sidereal" to use units derived from the length of a sidereal day,
+	//!   e.g., "now +2days sidereal".
+	//! @note When sidereal time is used, the length of time for each unit is dependent on
+	//! the current planet.  By contrast, when sidereal time is not specified (i.e., solar
+	//! time is used) the value is conventional so that 1 day means 1 Earth Solar day.
+	//! @param spec May be "local" or "utc". Only has an effect when
+	//! an ISO format string is used. Defaults to "utc".
+	//! @param dateIsDT set to \a true indicates that the given date is formulated in
+	//! Dynamical Time, i.e. with DeltaT added.
+	//! @note For fully compatible behaviour of this function with versions 0.11.4
+	//! or earlier you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
-	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
-	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
-	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
+	//! @note Starting with version 0.13.2 all relative dates are set without DeltaT correction.
+	//! @note Starting with version 0.14.0 the Boolean argument has a different meaning and default!
 	static void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -336,7 +334,8 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar.
+	//!        in the status bar. Use "<city>, <country>" for
+	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
 	//!        planet will not be set.
@@ -811,7 +810,7 @@ public slots:
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	static void wait(double t);
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -821,7 +820,7 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use, format like "2012-06-06T4:44:00" or "-1428-03-04T22:23:45"
 	//! @param spec "local" or "utc"
-	static void waitFor(const QString& dt, const QString& spec="utc");
+	void waitFor(const QString& dt, const QString& spec="utc");
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
@@ -846,51 +845,7 @@ public slots:
 	//! @return The current status of media playback support.
 	static bool isMediaPlaybackSupported(void);
 
-	//
-	// DEPRECATED METHODS
-	//
-
-	//! Show or hide the Milky Way.
-	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setFlagShow(b) instead.
-	static void setMilkyWayVisible(bool b);
-
-	//! Set Milky Way intensity.
-	//! @param i value of intensity for the Milky Way
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setIntensity(i) instead.
-	static void setMilkyWayIntensity(double i);
-
-	//! Get Milky Way intensity.
-	//! @return value of Milky Way intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.getIntensity() instead.
-	static double getMilkyWayIntensity();
-
-	//! Show or hide the Zodiacal Light.
-	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setFlagShow(b) instead.
-	static void setZodiacalLightVisible(bool b);
-
-	//! Set Zodiacal Light intensity.
-	//! @param i value of intensity for the Zodiacal Light
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setIntensity(i) instead.
-	static void setZodiacalLightIntensity(double i);
-
-	//! Get Zodiacal Light intensity.
-	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.getIntensity() instead.
-	static double getZodiacalLightIntensity();
-
-	//! Show or hide the DSS (photorealistic sky).
-	//! @param b if true, show the DSS, if false, hide the DSS layer.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.setFlagShow(b) instead.
-	static void setDSSMode(bool b);
-	//! Get the current status of DSS mode.
-	//! @return The current status of DSS mode.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.getFlagShow() instead.
-	static bool isDSSModeEnabled();
-
 signals:
-
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,
 							 double c3, double c4,

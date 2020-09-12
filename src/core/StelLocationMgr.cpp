@@ -131,7 +131,11 @@ void LibGPSLookupHelper::query()
 //				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
+#if GPSD_API_MAJOR_VERSION < 9
 			if (newdata->online==0.0) // no device?
+#else
+			if (newdata->online.tv_sec == 0 && newdata->online.tv_nsec == 0) // no device?
+#endif
 			{
 				// This can happen when unplugging the GPS while running Stellarium,
 				// or running gpsd with no GPS receiver.
@@ -158,7 +162,11 @@ void LibGPSLookupHelper::query()
 				//qDebug() << "newdata->online=" << newdata->online;
 				qDebug() << "Solution from " << newdata->satellites_used << "out of " << newdata->satellites_visible << " visible Satellites.";
 				dop_t dop=newdata->dop;
+#if GPSD_API_MAJOR_VERSION < 9
 				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altitude;
+#else
+				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altHAE;
+#endif
 				qDebug() << "Dilution of Precision:";
 				qDebug() << " - xdop:" << dop.xdop << "ydop:" << dop.ydop;
 				qDebug() << " - pdop:" << dop.pdop << "hdop:" << dop.hdop;
@@ -183,7 +191,11 @@ void LibGPSLookupHelper::query()
 			}
 			else
 			{
+#if GPSD_API_MAJOR_VERSION < 9
 				loc.altitude=static_cast<int>(newdata->fix.altitude);
+#else
+				loc.altitude=static_cast<int>(newdata->fix.altHAE);
+#endif
 				if (verbose)
 				{
 					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
@@ -640,11 +652,11 @@ static float parseAngle(const QString& s, bool* ok)
 	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
 	if (reg.exactMatch(s))
 	{
-		float deg = reg.capturedTexts()[1].toFloat(ok);
+		float deg = reg.cap(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
 		if (!*ok) return 0;
 		return deg + min / 60 + sec / 3600;
 	}
@@ -665,11 +677,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.capturedTexts()[1].trimmed(), &ok);
+		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.capturedTexts()[2].trimmed(), &ok);
+		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.capturedTexts()[3].trimmed().toInt(&ok);
+		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
@@ -681,11 +693,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
+		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
+		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.capturedTexts()[1].trimmed();
+		ret.name = reg.cap(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}
@@ -708,6 +720,7 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
 	conf->endGroup();
 	conf->remove("location_run_once");
+	ret.state="CLI"; // flag this location with a marker for handling in LandscapeMgr::init(). state is not displayed anywhere, so I expect no issues from that.
 	return ret;
 }
 

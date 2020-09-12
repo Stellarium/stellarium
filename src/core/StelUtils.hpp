@@ -84,6 +84,15 @@ namespace StelUtils
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
+	inline const QString getEndLineChar() {
+		#ifdef Q_OS_WIN
+		const QString stelEndl="\r\n";
+		#else
+		const QString stelEndl="\n";
+		#endif
+		return stelEndl;
+	}
+
 	//! Convert hours, minutes, seconds to decimal hours
 	inline double hmsToHours(const unsigned int h, const unsigned int m, const double s){
 		return static_cast<double>(h)+static_cast<double>(m)/60.+s/3600.;
@@ -154,7 +163,7 @@ namespace StelUtils
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! @param angle input angle in radian	
-	//! @param decimal output decimal second value
+	//! @param decimal output second value with decimal fraction
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
@@ -179,41 +188,6 @@ namespace StelUtils
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
-
-	//TODO these Vector-String converters should be removed, and missing functionality added to
-	//the VecMath classes and QVariant-based conversion
-
-	//! Reads a Vec2f from a string list
-	Vec2f strToVec2f(const QStringList& s);
-	//! Reads a Vec2f from a string, separated by commas. Example: 1.0,2.0
-	Vec2f strToVec2f(const QString& s);
-	//! Obtains a Vec3f from a string.
-	//! @param s the string describing the Vector with the form "x,y,z"
-	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
-	Vec3f strToVec3f(const QStringList& s);
-	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
-	Vec3f strToVec3f(const QString& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QStringList& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QString& s);
-
-	// Converts a Vec2f to a string in the same format that can be read by strToVec2f
-	QString vec2fToStr(const Vec2f& v);
-	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
-	QString vec3fToStr(const Vec3f& v);
-	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
-	QString vec4dToStr(const Vec4d& v);
-
-	//! Converts a Vec3f to HTML color notation.
-	//! @param v The vector
-	//! @return The string in HTML color notation "#rrggbb".
-	QString vec3fToHtmlColor(const Vec3f& v);
-
-	//! Converts a color in HTML notation to a Vec3f.
-	//! @param c The HTML spec color string
-	Vec3f htmlColorToVec3f(const QString& c);
 
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
@@ -251,7 +225,7 @@ namespace StelUtils
 		v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -261,7 +235,7 @@ namespace StelUtils
 		*lng = atan2(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -272,7 +246,7 @@ namespace StelUtils
 	}
 
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -282,7 +256,7 @@ namespace StelUtils
 		*lng = atan2f(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -304,26 +278,33 @@ namespace StelUtils
 		*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
 	}
 
-	//! Convert a string longitude, latitude, RA or Declination angle
+	//! Convert a string longitude, latitude, RA or declination angle
 	//! to radians.
-	//! @param str the angle in format something like these:
-	//! - +53d  51'21.6"
-	//! - +53d51'21.6"
-	//! - -1d  10'31.8"
-	//! - +46d6'31"
-	//! - 50D46'0"N
-	//! - 123D47'59"W
-	//! - 123.567 N
-	//! - 123.567W
-	//! - -123.567
-	//! - 12h 14m 6s
-	//! The degree separator may be a degree symbol (\\xBA) in addition
-	//! to a 'd' or 'D'.
-	//! @return the angle in radians.
-	//! Latitude: North are positive, South are negative.
+	//! @param str the angle in a format according to:
+	//!   angle ::= [sign¹] ( real [degs | mins | secs]
+	//!                     | [integer degs] ( [integer mins] real secs
+	//!                                       | real mins )
+	//!                     ) [cardinal¹]            
+	//!   sign ::= + | -
+	//!   digit := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	//!   integer ::= digit [digits]
+	//!   real ::= integer [. integer]
+	//!   degs ::= d | h² | U+00B0 | U+00BA³
+	//!   mins ::= m | '
+	//!   secs ::= s | "
+	//!   cardinal ::= N² | S² | E | W
+	//!   ¹) A cardinal point overrides any sign. N and E result in a positive,
+	//!      W and S in a negative angle.
+	//!   ²) The use of the cardinal points N and S together with the hour sign
+	//!      'H' or 'h' is forbidden.
+	//!   ³) The MASCULINE ORDINAL INDICATOR U+00BA is accepted, considering
+	//!      Spanish QWERTY keyboards.
+	//! The string is parsed without regarding to case, except that, after a
+	//! single real, a solitary 's' indicates seconds whereas an 'S' indicates South.
+	//! It is highly recommended to use lower case for hdms and upper case for NSEW.
+	//! Latitude: North is positive, South is negative.
 	//! Longitude: East is positive, West is negative.
-	//! Note: if there is a N, S, E or W suffix, any leading + or -
-	//! characters are ignored.
+	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
 	//! Check if a number is a power of 2.
@@ -396,8 +377,8 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){
-		return static_cast<int>(floor(fmod(JD+1.5, 7)));
+	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
+		return static_cast<int>(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -473,25 +454,12 @@ namespace StelUtils
 				1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
 	}
 
-	//! Get a night mode version of a color.  That is find the brightness of a color and set that in the
-	//! red channel only
-	/* FIXME: abandoned code?
-	inline Vec3f getNightColor(const Vec3f& dayColor)
-	{
-		float max = 0.0;
-		for(int i=0; i<3; i++)
-		{
-			max = dayColor[i] > max ? dayColor[i] : max;
-		}
-		return Vec3f(max, 0, 0);
-	}
-	*/
-
-	//! Calculate and return sidereal period in days from semi-major axis (in AU)
-	double calculateSiderealPeriod(const double SemiMajorAxis);
+	// Calculate and return sidereal period in days from semi-major axis (in AU)
+	//double calculateSiderealPeriod(const double SemiMajorAxis);  MOVED TO Orbit.h
 
 	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
+	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
@@ -801,7 +769,7 @@ namespace StelUtils
 		return (T(0) < val) - (val < T(0));
 	}
 	
-	//! Compute cosines and sines around a circle which is split in "segments" parts.
+	//! Compute cosines and sines around a circle which is split in "slices" parts.
 	//! Values are stored in the global static array cos_sin_theta.
 	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
 	//! @param slices number of partitions (elsewhere called "segments") for the circle
@@ -821,13 +789,6 @@ namespace StelUtils
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
-
-	//! Compute date in decimal year format
-	//! @param year
-	//! @param month
-	//! @param day
-	//! @return decimal year
-	double getDecYear(const int year, const int month, const int day);
 
 	//! Calculate fixed days (R.D.) from Gregorian date
 	//! @param year
@@ -897,6 +858,12 @@ namespace StelUtils
 		T K=J-H;
 
 		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
+	}
+
+	//! Interval test. This checks whether @param value is within [@param low, @param high]
+	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
+	{
+	    return !(value < low) && !(high < value);
 	}
 
 

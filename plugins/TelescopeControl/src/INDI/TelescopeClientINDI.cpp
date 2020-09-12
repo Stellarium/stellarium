@@ -37,9 +37,9 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 	int port = 0;
 	if (paramRx.exactMatch(params))
 	{
-		host = paramRx.capturedTexts().at(1).trimmed();
-		port = paramRx.capturedTexts().at(2).toInt();
-		mDevice = paramRx.capturedTexts().at(3).trimmed();
+		host = paramRx.cap(1).trimmed();
+		port = paramRx.cap(2).toInt();
+		mDevice = paramRx.cap(3).trimmed();
 	}
 
 	mConnection.setServer(host.toStdString().c_str(), port);
@@ -85,14 +85,35 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 	positionJNow.RA = longitudeRad;
 	positionJNow.DEC = latitudeRad;
 
+	// unpark telescope before slewing!
+	// TODO: Add commands and buttons for park/unpark telescope for all telescopes
+	mConnection.unParkTelescope();
 	mConnection.setPosition(positionJNow);
 }
 
 void TelescopeClientINDI::telescopeSync(const Vec3d &positionJ2000, StelObjectP selectObject)
 {
 	Q_UNUSED(selectObject)
-	Q_UNUSED(positionJ2000)
-	return;
+	const StelCore* core = StelApp::getInstance().getCore();
+	Vec3d posRectJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
+	Vec3d posJ2000;
+	StelUtils::rectToSphe(&posJ2000[0], &posJ2000[1], posRectJNow);
+
+	if (posJ2000[0] < 0.0)
+		posJ2000[0] += 2*M_PI;
+
+	double longitudeRad = posJ2000[0] * 12.0 / M_PI;
+	double latitudeRad = posJ2000[1] * 180.0 / M_PI;
+
+
+	INDIConnection::Coordinates positionJNow = mConnection.position();
+	positionJNow.RA = longitudeRad;
+	positionJNow.DEC = latitudeRad;
+
+	// unpark telescope before slewing!
+	// TODO: Add commands and buttons for park/unpark telescope for all telescopes
+	mConnection.unParkTelescope();
+	mConnection.syncPosition(positionJNow);
 }
 
 bool TelescopeClientINDI::isConnected() const

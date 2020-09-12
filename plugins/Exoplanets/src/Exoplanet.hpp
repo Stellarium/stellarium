@@ -114,6 +114,8 @@ public:
 	//! Get the english name
 	virtual QString getEnglishName(void) const;
 
+	bool isVMagnitudeDefined() const;
+
 	QString getDesignation(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
 	QStringList getExoplanetsNamesI18n(void) const;
@@ -210,7 +212,7 @@ private:
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
 
-	// FIXME: Document the purpose of these lists?
+	// Lists with various data for fast creating a diagrams of relations
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
 		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
 		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;

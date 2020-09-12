@@ -71,6 +71,7 @@ private slots:
 	void mjdChanged(double nmjd);
 	//! handle timer-triggered update
 	void onTimerTimeout(void);
+	void setFlagEnableFocus(bool b);
 
 private:
 	StelCore* core;
@@ -90,6 +91,8 @@ private:
 	int oldyear;
 	int oldmonth;
 	int oldday;
+
+	bool enableFocus;
 };
 
 #endif // DATETIMEDIALOG_HPP

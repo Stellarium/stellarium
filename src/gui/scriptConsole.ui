@@ -184,7 +184,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+            <normaloff>:/graphicGui/uibtFolder.png</normaloff>:/graphicGui/uibtFolder.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+O</string>
@@ -213,7 +213,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+            <normaloff>:/graphicGui/uibtSave.png</normaloff>:/graphicGui/uibtSave.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+S</string>
@@ -242,7 +242,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/closeButton.png</normaloff>:/graphicGui/closeButton.png</iconset>
+            <normaloff>:/graphicGui/uibtDelete.png</normaloff>:/graphicGui/uibtDelete.png</iconset>
           </property>
          </widget>
         </item>
@@ -262,7 +262,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
+            <normaloff>:/graphicGui/uibtProcess.png</normaloff>:/graphicGui/uibtProcess.png</iconset>
           </property>
          </widget>
         </item>
@@ -280,11 +280,34 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="quickrunCombo">
+         <widget class="QLabel" name="quickrunLabel">
           <property name="toolTip">
-           <string>quickly load and run a utility script</string>
+           <string/>
+          </property>
+          <property name="text">
+           <string>Execute:</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="quickrunCombo">
+          <property name="toolTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QPushButton" name="runButton">
@@ -308,7 +331,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
+           <normaloff>:/graphicGui/uibtStart.png</normaloff>
+           <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+Return</string>
@@ -340,7 +364,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
+           <normaloff>:/graphicGui/uibtStop.png</normaloff>
+           <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
           </property>
          </widget>
         </item>
@@ -372,7 +397,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="scriptEdit">
+           <widget class="QPlainTextEdit" name="scriptEdit">
             <property name="font">
              <font>
               <family>DejaVu Sans Mono</family>
@@ -386,7 +411,7 @@
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>
             <property name="lineWrapMode">
-             <enum>QTextEdit::NoWrap</enum>
+             <enum>QPlainTextEdit::NoWrap</enum>
             </property>
            </widget>
           </item>
@@ -463,6 +488,20 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox">
+            <property name="text">
+             <string>Close window when script runs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="clearOutputCheckbox">
+            <property name="text">
+             <string>Clear output before script runs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -490,28 +529,16 @@
         <item>
          <widget class="QLabel" name="rowColumnLabel">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Cursor position</string>
           </property>
           <property name="text">
-           <string notr="true">R:0 C:0</string>
+           <string>R:0 C:0</string>
           </property>
          </widget>
         </item>

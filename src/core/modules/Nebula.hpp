@@ -55,7 +55,7 @@ public:
 		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
 		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
 		CatRCW		= 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
-		CatVdB		= 0x00000200, //!< Van den Bergh Catalogue of reflection nebulae (VdB)
+		CatVdB		= 0x00000200, //!< van den Bergh Catalogue of reflection nebulae (vdB)
 		CatCr		= 0x00000400, //!< Collinder Catalogue (Cr or Col)
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
@@ -67,11 +67,15 @@ public:
 		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
 		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
 		CatACO		= 0x00100000, //!< A Catalog of Rich Clusters of Galaxies (Abell+, 1989) (ACO)
-		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
-		CatAbell		= 0x00400000, //!< Abell Catalog of Planetary Nebulae (Abell, 1966) (Abell; PN A66)
-		CatESO		= 0x00800000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
-		CatVdBH		= 0x01000000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
-		CatDWB		= 0x02000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
+		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)		
+		CatESO		= 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
+		CatVdBH		= 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (vdBH)
+		CatDWB		= 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
+		CatTr			= 0x02000000, //!< Trumpler Catalogue (Tr)
+		CatSt		= 0x04000000, //!< Stock Catalogue (St)
+		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
+		CatVdBHa		= 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
+		CatOther		= 0x20000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -88,20 +92,20 @@ public:
 		TypePlanetaryNebulae	= 0x00000100, //!< Planetary Nebulae
 		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
 		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
-		TypeOther			= 0x00000800  //!< Other objects
+		TypeOther				= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatAbell|CatESO|CatVdBH|CatDWB);
+	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
 	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,		//!< Galaxy
+		NebGx			= 0,		//!< m Galaxy
 		NebAGx			= 1,  	//!< Active galaxy
-		NebRGx			= 2,		//!< Radio galaxy
+		NebRGx			= 2,		//!< m Radio galaxy
 		NebIGx			= 3,		//!< Interacting galaxy
 		NebQSO			= 4,		//!< Quasar
 		NebCl			= 5,		//!< Star cluster
@@ -133,7 +137,9 @@ public:
 		NebSNC			= 31, 	//!< Supernova Candidate
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
-		NebUnknown		= 34		//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebPartOfGx		= 34,	//!< Part of a Galaxy
+		NebRegion		= 35,	//!< Region of the sky
+		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -177,11 +183,12 @@ public:
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
-	void setCircleColor(const Vec3f& v) {circleColor = v;}
+	// void setCircleColor(const Vec3f& v) {hintColorMap.insert(NebUnknown, v);}
 
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
-	QString getTypeString() const;
+	QString getTypeString() const {return getTypeString(nType);}
+	static QString getTypeString(Nebula::NebulaType nType);
 
 	NebulaType getDSOType() const {return nType;}
 
@@ -194,6 +201,13 @@ public:
 	//! Compute an extended object's contrast index
 	float getContrastIndex(const StelCore* core) const;
 
+	//! Return object's B magnitude as seen from observer, without including extinction.
+	virtual float getBMagnitude(const StelCore* core) const;
+
+	//! Return object's B magnitude as seen from observer including extinction.
+	//! Extinction obviously only if atmosphere=on.
+	float getBMagnitudeWithExtinction(const StelCore* core) const;
+
 	//! Get the surface area.
 	//! @return surface area in square degrees.
 	float getSurfaceArea(void) const;
@@ -202,9 +216,12 @@ public:
 	void addNameAlias(QString name) { englishAliases.append(name); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, Abell, ESO)
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! @return a designation
 	QString getDSODesignation() const;
+	//! Get designation for DSO with priority and ignorance of availability of catalogs
+	//! @return a designation
+	QString getDSODesignationWIC() const;
 
 	bool objectInDisplayedCatalog() const;
 
@@ -234,7 +251,7 @@ private:
 
 	bool objectInDisplayedType() const;
 
-	Vec3f getHintColor() const;
+	static Vec3f getHintColor(Nebula::NebulaType nType);
 	float getVisibilityLevelByMagnitude() const;
 
 	//! Get the printable description of morphological nebula type.
@@ -248,7 +265,7 @@ private:
 	unsigned int C_nb;			// Caldwell Catalog number
 	unsigned int B_nb;			// Barnard Catalog number (Dark Nebulae)
 	unsigned int Sh2_nb;		// Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
-	unsigned int VdB_nb;		// Van den Bergh Catalog number (Catalogue of Reflection Nebulae (Van den Bergh, 1966))
+	unsigned int VdB_nb;		// van den Bergh Catalog number (Catalogue of Reflection Nebulae (van den Bergh, 1966))
 	unsigned int RCW_nb;		// RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
 	unsigned int LDN_nb;		// LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
 	unsigned int LBN_nb;		// LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
@@ -257,9 +274,12 @@ private:
 	unsigned int PGC_nb;		// PGC number (Catalog of galaxies)
 	unsigned int UGC_nb;		// UGC number (The Uppsala General Catalogue of Galaxies)
 	unsigned int Arp_nb;		// Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
-	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
-	unsigned int Abell_nb;		// Abell number (Abell Catalog of Planetary Nebulae (Abell, 1966))
+	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))	
 	unsigned int DWB_nb;		// DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
+	unsigned int Tr_nb;			// Tr number (Trumpler Catalogue)
+	unsigned int St_nb;			// St number (Stock Catalogue)
+	unsigned int Ru_nb;			// Ru number (Ruprecht Catalogue)
+	unsigned int VdBHa_nb;		// vdB-Ha number (van den Bergh-Hagen Catalogue)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;				// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
@@ -290,13 +310,15 @@ private:
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
+	QStringList designations;
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
+	static StelTextureSP texRegion;				// The symbolic dashed shape texture
 	static StelTextureSP texGalaxy;				// Type 0
-	static StelTextureSP texGalaxyLarge;		// Type 0_large
-	static StelTextureSP texOpenCluster;		// Type 1
-	static StelTextureSP texOpenClusterLarge;	// Type 1_large
+	static StelTextureSP texGalaxyLarge;			// Type 0_large
+	static StelTextureSP texOpenCluster;			// Type 1
+	static StelTextureSP texOpenClusterLarge;		// Type 1_large
 	static StelTextureSP texOpenClusterXLarge;	// Type 1_extralarge
 	static StelTextureSP texGlobularCluster;		// Type 2
 	static StelTextureSP texGlobularClusterLarge;	// Type 2_large
@@ -310,42 +332,10 @@ private:
 	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
-	static Vec3f labelColor;					// The color of labels
-	static Vec3f circleColor;					// The color of the symbolic circle texture (default marker; NebUnknown)
-	static Vec3f galaxyColor;					// The color of galaxy marker texture (NebGx)
-	static Vec3f radioGalaxyColor;				// The color of radio galaxy marker texture (NebRGx)
-	static Vec3f activeGalaxyColor;				// The color of active galaxy marker texture (NebAGx)
-	static Vec3f interactingGalaxyColor;			// The color of interacting galaxy marker texture (NebIGx)
-	static Vec3f quasarColor;					// The color of quasar marker texture (NebQSO)
-	static Vec3f nebulaColor;					// The color of nebula marker texture (NebN)
-	static Vec3f planetaryNebulaColor;			// The color of planetary nebula marker texture (NebPn)
-	static Vec3f reflectionNebulaColor;			// The color of reflection nebula marker texture (NebRn)
-	static Vec3f bipolarNebulaColor;			// The color of bipolar nebula marker texture (NebBn)
-	static Vec3f emissionNebulaColor;			// The color of emission nebula marker texture (NebEn)
-	static Vec3f darkNebulaColor;				// The color of dark nebula marker texture (NebDn)
-	static Vec3f hydrogenRegionColor;			// The color of hydrogen region marker texture (NebHII)
-	static Vec3f supernovaRemnantColor;		// The color of supernova remnant marker texture (NebSNR)
-	static Vec3f interstellarMatterColor;			// The color of interstellar matter marker texture (NebISM)
-	static Vec3f clusterWithNebulosityColor;		// The color of cluster associated with nebulosity marker texture (NebCn)
-	static Vec3f clusterColor;					// The color of star cluster marker texture (NebCl)
-	static Vec3f openClusterColor;				// The color of open star cluster marker texture (NebOc)
-	static Vec3f globularClusterColor;			// The color of globular star cluster marker texture (NebGc)
-	static Vec3f stellarAssociationColor;			// The color of stellar association marker texture (NebSA)
-	static Vec3f starCloudColor;				// The color of star cloud marker texture (NebSC)
-	static Vec3f emissionObjectColor;			// The color of emission object marker texture (NebEMO)
-	static Vec3f blLacObjectColor;				// The color of BL Lac object marker texture (NebBLL)
-	static Vec3f blazarColor;					// The color of blazar marker texture (NebBLA)
-	static Vec3f molecularCloudColor;			// The color of molecular cloud marker texture (NebMolCld)
-	static Vec3f youngStellarObjectColor;		// The color of Young Stellar Object marker texture (NebYSO)
-	static Vec3f possibleQuasarColor;			// The color of possible quasar marker texture (NebPossQSO)
-	static Vec3f possiblePlanetaryNebulaColor;	// The color of possible planetary nebula marker texture (NebPossPN)
-	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
-	static Vec3f starColor;					// The color of star marker texture (NebStar)
-	static Vec3f symbioticStarColor;			// The color of symbiotic star marker texture (NebSymbioticStar)
-	static Vec3f emissionLineStarColor;			// The color of emission-line star marker texture (NebEmissionLineStar)
-	static Vec3f supernovaCandidateColor;		// The color of supermova candidate marker texture (NebSNC)
-	static Vec3f supernovaRemnantCandidateColor;	// The color of supermova remnant candidate marker texture (NebSNRC)
-	static Vec3f galaxyClusterColor;				// The color of galaxy cluster marker texture (NebGxCl)
+	static Vec3f labelColor;				// The color of labels
+	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
+	static QMap<Nebula::NebulaType, QString> typeStringMap; // map that keeps type strings for NebulaType. Must be retranslated on language change.
+	static void buildTypeStringMap();			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
