@@ -2178,7 +2178,7 @@ msgstr "Vergrote maan"
 
 #: src/core/modules/SolarSystem.cpp:289
 msgid "Enlarge minor bodies"
-msgstr "Mini lichamen vergroten"
+msgstr "Kleinere hemellichamen vergroten"
 
 #: src/core/modules/SolarSystem.cpp:290
 msgid "Native planet names (from starlore)"
@@ -5203,7 +5203,7 @@ msgstr "Gregoriaanse datums. Geldige reeks:"
 
 #: src/gui/AstroCalcDialog.cpp:351
 msgid "Valid range"
-msgstr ""
+msgstr "Geldig bereik:"
 
 #: src/gui/AstroCalcDialog.cpp:621 src/gui/AstroCalcDialog.cpp:808
 #: src/gui/AstroCalcDialog.cpp:810 src/gui/AstroCalcDialog.cpp:2978
@@ -5315,7 +5315,7 @@ msgstr "Zonnestelsel objecten: kometen"
 
 #: src/gui/AstroCalcDialog.cpp:968 src/gui/AstroCalcDialog.cpp:2678
 msgid "Solar system objects: minor bodies"
-msgstr "Zonnestelsel objecten: kleine objecten"
+msgstr "Zonnestelsel objecten: kleinere hemellichamen"
 
 #: src/gui/AstroCalcDialog.cpp:969
 msgid "Solar system objects: planets"
@@ -6055,19 +6055,19 @@ msgstr "Interactief sterrenstelsels"
 
 #: src/gui/AstroCalcDialog.cpp:5397
 msgid "Messier objects"
-msgstr ""
+msgstr "Messier objecten"
 
 #: src/gui/AstroCalcDialog.cpp:5398
 msgid "NGC/IC objects"
-msgstr ""
+msgstr "NGC/IC objecten"
 
 #: src/gui/AstroCalcDialog.cpp:5399
 msgid "Caldwell objects"
-msgstr ""
+msgstr "Caldwell objecten"
 
 #: src/gui/AstroCalcDialog.cpp:5400
 msgid "Herschel 400 objects"
-msgstr ""
+msgstr "Herschel 400 objecten"
 
 #. TRANSLATORS: angular size
 #: src/gui/AstroCalcDialog.cpp:5473
@@ -10100,7 +10100,7 @@ msgstr "De magnitude van zonnestelsel objecten begrenzen"
 
 #: src/ui_viewDialog.h:3038
 msgid "Scale minor bodies:"
-msgstr "Mini hemellichamen schalen:"
+msgstr "Kleinere hemellichamen schalen:"
 
 #: src/ui_viewDialog.h:3040
 msgid ""
@@ -12393,7 +12393,7 @@ msgstr "Objecten weergeven die zichtbaar zijn:"
 
 #: src/ui_astroCalcDialog.h:1806
 msgid "Matching objects:"
-msgstr "Gelijke objecten:"
+msgstr "Gevonden:"
 
 #: src/ui_astroCalcDialog.h:1808
 msgid "Save list of objects"
@@ -12401,7 +12401,7 @@ msgstr "Objectenlijst opslaan"
 
 #: src/ui_astroCalcDialog.h:1809
 msgid "Select a category:"
-msgstr "Een categorie selecteren:"
+msgstr "Kies een categorie:"
 
 #: src/ui_astroCalcDialog.h:1820
 msgid "First celestial body:"
@@ -14216,11 +14216,11 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:236
 msgid "Show satellites from the group"
-msgstr ""
+msgstr "Toon satellieten uit groep"
 
 #: plugins/Satellites/src/Satellites.cpp:237
 msgid "Hide satellites from the group"
-msgstr ""
+msgstr "Verberg satellieten uit groep"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:2267
@@ -17274,7 +17274,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr "Kleine zonnestelsellichamen opslaan als..."
+msgstr "Kleinere zonnestelsellichamen opslaan als..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:206
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:214
@@ -17283,7 +17283,8 @@ msgstr "Configuratie bestanden"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:208
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr "Selecteer een bestand om de kleine zonnestelsellichamen te vervangen"
+msgstr ""
+"Selecteer een bestand om de kleinere zonnestelsellichamen te vervangen"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:216
 msgid "Select a file to add the Solar System minor bodies"
@@ -17386,8 +17387,8 @@ msgid ""
 " you can delete manually that file from:"
 msgstr ""
 "Deze plug-in bewerkt een persoonlijk zonnestelselconfiguratie bestand voor "
-"de kleine lichamen. Als er iets fout gaat en Stellarium vast loopt en/of "
-"niet meer start, kunt u het bestand handmatig verwijder uit:"
+"de kleinere hemellichamen. Als er iets fout gaat en Stellarium vast loopt "
+"en/of niet meer start, kunt u het bestand handmatig verwijder uit:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:265
 msgid ""

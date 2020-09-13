@@ -9,7 +9,7 @@
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
 # Petko Kirilov <kirilovpetko@gmail.com>, 2019
 # Alexander Shopov <ash@kambanaria.org>, 2019
-# Georgi Georgiev <georgiev_1994@abv.bg>, 2020
+# Georgi Georgiev, 2020
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2020-08-31 00:28+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Georgi Georgiev <georgiev_1994@abv.bg>, 2020\n"
+"Last-Translator: Georgi Georgiev, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1622,7 +1622,7 @@ msgstr "нишковидна структура"
 #: src/core/modules/Nebula.cpp:1311
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr "бледа"
+msgstr "много бледа"
 
 #: src/core/modules/Nebula.cpp:1312
 msgctxt "HII region brightness"
@@ -1867,7 +1867,7 @@ msgstr "Очаквана"
 
 #: src/core/modules/NebulaMgr.cpp:1377
 msgid "See Logfile for instructions."
-msgstr ""
+msgstr "Вижте регистрационния файл за инструкции."
 
 #: src/core/modules/Planet.cpp:431 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:228 plugins/Quasars/src/Quasar.cpp:140
@@ -1921,7 +1921,7 @@ msgstr "Първа четвърт"
 #: src/core/modules/Planet.cpp:577
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr "Наближаваща пълнолуние"
+msgstr "Растяща Луна"
 
 #: src/core/modules/Planet.cpp:579
 msgctxt "Moon phase"
@@ -1931,7 +1931,7 @@ msgstr "Пълнолуние"
 #: src/core/modules/Planet.cpp:581
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr "След пълнолуние"
+msgstr "Намаляваща Луна"
 
 #: src/core/modules/Planet.cpp:583
 msgctxt "Moon phase"
@@ -1945,7 +1945,7 @@ msgstr "Намалящ полумесец"
 
 #: src/core/modules/Planet.cpp:593
 msgid "Moon age"
-msgstr "Възраст (ден от цикъла) на Луната"
+msgstr "Възраст на лунния цикъл"
 
 #: src/core/modules/Planet.cpp:593
 msgid "days old"
@@ -1953,7 +1953,7 @@ msgstr "дни"
 
 #: src/core/modules/Planet.cpp:605
 msgid "Position angle of bright limb"
-msgstr ""
+msgstr "Позиционен ъгъл на лунния ръб"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:614 src/gui/AstroCalcDialog.cpp:883
@@ -1980,7 +1980,7 @@ msgstr "Разстояние от Слънцето"
 #. TRANSLATORS: Distance measured in terms of the speed of light
 #: src/core/modules/Planet.cpp:653
 msgid "Light time"
-msgstr ""
+msgstr "Светлинно време"
 
 #: src/core/modules/Planet.cpp:667
 msgid "Orbital velocity"
@@ -2047,7 +2047,7 @@ msgstr "Среден слънчев ден"
 
 #: src/core/modules/Planet.cpp:967
 msgid "The period of rotation is chaotic"
-msgstr "Хаотичен период на завъртане"
+msgstr "Периода на завъртане е хаотичен"
 
 #: src/core/modules/Planet.cpp:973
 msgid "Equatorial rotation velocity"
@@ -2063,23 +2063,23 @@ msgstr "Покритие на затъмнение"
 
 #: src/core/modules/Planet.cpp:996
 msgid "Eclipse magnitude"
-msgstr "Магнитуд на затъмнение"
+msgstr "Величина на затъмнение"
 
 #: src/core/modules/Planet.cpp:1021
 msgid "Center of solar eclipse (Lat./Long.)"
-msgstr ""
+msgstr "Център на слънчевото затъмнение (Шир./Дълж.)"
 
 #: src/core/modules/Planet.cpp:1032
 msgid "Shadow center point is"
-msgstr ""
+msgstr "Централната точка на сянката е"
 
 #: src/core/modules/Planet.cpp:1034
 msgid "km towards azimuth"
-msgstr ""
+msgstr "км към азимут"
 
 #: src/core/modules/Planet.cpp:1038
 msgid "Magnitude of central eclipse"
-msgstr ""
+msgstr "Величина на централното затъмнение"
 
 #: src/core/modules/Planet.cpp:1041
 msgctxt "type of solar eclipse"
@@ -2218,7 +2218,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr "мил. дъг. сек./год."
+msgstr "мдс/г"
 
 #: src/core/modules/StarWrapper.cpp:286
 msgid "Proper motions by axes"

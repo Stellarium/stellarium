@@ -3888,7 +3888,7 @@ msgstr "星历表（1960）"
 
 #: src/gui/ConfigurationDialog.cpp:1696
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
+msgstr "塔克曼（1962, 1964）和戈德斯坦（1973）"
 
 #: src/gui/ConfigurationDialog.cpp:1697
 msgid "Muller & Stephenson (1975)"
@@ -13458,7 +13458,8 @@ msgid ""
 "binning is active (e.g. crop size of 100px will be adjusted to 99px by "
 "binning 3)."
 msgstr ""
-"传感器视图具有显示传感器裁切叠加层的功能，其中包含裁切大小的信息。合并处于活动状态时，可以调整此矩形的大小（例如，合并3将把100px的裁切大小调整为99px）。"
+"传感器视图具有显示传感器裁切叠加层的功能，其中包含裁切大小的信息。合并处于活动状态时，可以调整此矩形的大小（例如，binning "
+"3将把100px的裁切大小调整为99px）。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:595
 #, qt-format
@@ -13748,7 +13749,7 @@ msgstr "横向分辨率（像素）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1524
 msgid "Prism/CCD height (mm):"
-msgstr "棱镜/ CCD高度（mm）："
+msgstr "棱镜/ CCD高度（毫米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid ""
@@ -13758,7 +13759,7 @@ msgstr "这是从图像传感器中心到棱镜底部的距离"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1528
 msgid "Prism/CCD distance (mm):"
-msgstr "棱镜/ CCD距离（mm）："
+msgstr "棱镜/ CCD距离（毫米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Rotation Angle (degrees):"
@@ -13770,7 +13771,7 @@ msgstr "合并(Binning) y:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Prism/CCD width (mm):"
-msgstr "棱镜/ CCD宽度（mm）："
+msgstr "棱镜/ CCD宽度（毫米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Chip height (mm):"
@@ -16598,7 +16599,8 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
-"可以导入使用国际天文学联合会(IAU)小行星中心(MPC)的输出格式的彗星与小行星数据(%1)。可以导入列表文件，从互联网下载这种的列表或是使用在线的小行星和彗星星历服务(MPES)进行检索。"
+"可以导入以IAU小行星中心以MPC格式输出的彗星和小行星数据 (%1)。 "
+"可以导入列表文件，可以从互联网下载此类列表，或使用在线的小行星和彗星星历表服务（MPES）进行搜索。"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
@@ -16651,7 +16653,7 @@ msgstr "书签名："
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "A file containing a list of objects"
-msgstr "从包含天体列表的文件导入"
+msgstr "从包含天体列表的文件"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Get orbital elements"
@@ -18542,7 +18544,7 @@ msgstr ""
 msgid ""
 "Nosaxa means spring in the Moqoit language. The word comes from a "
 "combination of nosahuec, which means renew, and ñaaxa, which means year."
-msgstr ""
+msgstr "Nosaxa在Moqoit语中的意思是春天。这个词由nosahuec和naaxa组合而成，nosahuec表示更新，naaxa表示年份。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
