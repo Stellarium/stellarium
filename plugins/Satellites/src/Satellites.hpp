@@ -45,12 +45,12 @@ class SatellitesListModel;
 
 /*! @defgroup satellites Satellites Plug-in
 @{
-The %Satellites plugin displays the positions of artifical satellites in Earth
-orbit based on a catalog of orbital data.
+The %Satellites plugin displays the positions of artificial satellites in Earth
+orbit based on a catalogue of orbital data.
 
 The Satellites class is the main class of the plug-in. It manages a collection
 of Satellite objects and takes care of loading, saving and updating the
-satellite catalog. It allows automatic updates from online sources and manages
+satellite catalogue. It allows automatic updates from online sources and manages
 a list of update file URLs.
 
 To calculate satellite positions, the plugin uses an implementation of
@@ -63,19 +63,19 @@ the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
 Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
 for presentation purposes.
 
-In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
+In the <b>Satellite Catalogue</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
 
 <i>Grouping</i>
 
 A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
 
-Group names are arbitrary strings defined in the <b>Satellite Catalog</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
+Group names are arbitrary strings defined in the <b>Satellite Catalogue</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
 
-By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
+By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalogue.
 
-<b>Satellite Catalog</b>
+<b>Satellite Catalogue</b>
 
-The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
+The satellite catalogue is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "satellites.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
@@ -91,7 +91,7 @@ file.
 //! @ingroup satellites
 struct TleData
 {
-	//! NORAD catalog number, as extracted from the TLE set.
+	//! NORAD catalogue number, as extracted from the TLE set.
 	QString id;
 	//! Human readable name, as extracted from the TLE title line.
 	QString name;
@@ -234,7 +234,7 @@ public:
 	virtual QString getName() const { return "Satellites"; }
 	virtual QString getStelObjectType() const { return Satellite::SATELLITE_TYPE; }
 
-	//! Implment this to tell the main Stellarium GUi that there is a GUI element to configure this
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin. 
 	virtual bool configureGui(bool show=true);
 
@@ -314,7 +314,7 @@ public:
 	void saveTleSources(const QStringList& urls);
 	
 	//! Reads update file(s) in celestrak's .txt format, and updates
-	//! the TLE elements for exisiting satellites from them.
+	//! the TLE elements for existing satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
 	//! as it calls updateSatellites().
 	//! See updateFromOnlineSources() for the other kind of update operation.
@@ -325,11 +325,11 @@ public:
 	
 	//! Updates the loaded satellite collection from the provided data.
 	//! Worker function called by updateFromFiles() and saveDownloadedUpdate().
-	//! (Respecitvely, user-initiated update from file(s) and user- or auto-
+	//! (Respectively, user-initiated update from file(s) and user- or auto-
 	//! initiated update from online source(s).)
 	//! Emits updateStateChanged() and tleUpdateComplete().
 	//! @note Instead of splitting this method off updateFromFiles() and passing
-	//! the auto-add flag through data structures, another possiblity was to
+	//! the auto-add flag through data structures, another possibility was to
 	//! modify updateFromFiles to use the same prefix trick (adding "1,"
 	//! to file paths). I decided against it because I thought it would be more
 	//! complex. :) --BM
@@ -449,11 +449,11 @@ public slots:
 	
 	//! Start an Internet update.
 	//! This method starts the process of an Internet update: it tries to
-	//! download TLE lists from online recources and then use them to 
+	//! download TLE lists from online resources and then use them to
 	//! update the orbital data (and names, etc.) of the included satellites.
 	//! This only initialized the download. The rest of the work is done by
 	//! saveDownloadedUpdate() and updateSatellites().
-	//! Update sources are described in updateUrls (see for accessor details).
+	//! Update sources are described in updateUrls (see for accessors details).
 	//! If autoAddEnabled is true when this function is called, new satellites
 	//! in the chosen update sources will be added during the update. 
 	//! If autoRemoveEnabled is true when this function is called, any existing

@@ -281,14 +281,14 @@ void SatellitesDialog::askSatMarkerColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colorize all selected satellites
+		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->hintColor = vColor;
 		}
-		// colorize the button
+		// colourize the button
 		buttonMarkerColor = c;
 		ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 		saveSatellites();
@@ -309,14 +309,14 @@ void SatellitesDialog::askSatOrbitColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colorize all selected satellites
+		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->orbitColor = vColor;
 		}
-		// colorize the button
+		// colourize the button
 		buttonOrbitColor = c;
 		ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
 		saveSatellites();
@@ -337,14 +337,14 @@ void SatellitesDialog::askSatInfoColor()
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colorize all selected satellites
+		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->infoColor = vColor;
 		}
-		// colorize the button
+		// colourize the button
 		buttonInfoColor = c;
 		ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 		saveSatellites();
@@ -543,7 +543,7 @@ void SatellitesDialog::updateSatelliteData()
 		iColor = sat->infoColor;
 	}
 
-	// colorize the colorpicker button
+	// colourize the colorpicker button
 	buttonMarkerColor=mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 	buttonOrbitColor=oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
@@ -712,7 +712,7 @@ void SatellitesDialog::populateAboutPage()
 	html +=               q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
 	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">[**]</a>. ";
 	html +=               q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
-	html +=               q_("For modeling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
+	html +=               q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Satellites plugin") + "</p>";

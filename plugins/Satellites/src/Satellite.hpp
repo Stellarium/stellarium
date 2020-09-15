@@ -95,7 +95,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! Details about the satellite are passed with a JSON-representation structure
 //! that contains a <b>Satellite Catalog</b> entry.
 //! 
-//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc.)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 //! @ingroup satellites
 class Satellite : public StelObject
@@ -297,7 +297,7 @@ private:
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
-	//! Mask controlling which info display flags should be honored.
+	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
 

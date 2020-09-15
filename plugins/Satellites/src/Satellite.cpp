@@ -49,7 +49,7 @@
 
 const QString Satellite::SATELLITE_TYPE = QStringLiteral("Satellite");
 
-// static data members - will be initialised in the Satallites class (the StelObjectMgr)
+// static data members - will be initialised in the Satellites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
 bool Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.f;
@@ -276,7 +276,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << "<h2>" << getNameI18n() << "</h2>";
 		if (!description.isEmpty())
 		{
-			// Let's convert possibile \n chars into <br/> in description of satellite
+			// Let's convert possible \n chars into <br/> in description of satellite
 			oss << q_(description).replace("\n", "<br/>") << "<br/>";
 		}
 	}
@@ -760,7 +760,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	return vmag;
 }
 
-// Calculate illumination fraction of artifical satellite
+// Calculate illumination fraction of artificial satellite
 float Satellite::calculateIlluminatedFraction() const
 {
 	return (1.f + cos(static_cast<float>(phaseAngle)))*0.5f;
@@ -770,7 +770,7 @@ QString Satellite::getOperationalStatus() const
 {
 	const QMap<int,QString>map={
 		{ StatusOperational,          qc_("operational", "operational status")},
-		{ StatusNonoperational,       qc_("nonoperational", "operational status")},
+		{ StatusNonoperational,       qc_("non-operational", "operational status")},
 		{ StatusPartiallyOperational, qc_("partially operational", "operational status")},
 		{ StatusStandby,              qc_("standby", "operational status")},
 		{ StatusSpare,                qc_("spare", "operational status")},
@@ -787,7 +787,7 @@ double Satellite::getAngularSize(const StelCore*) const
 		double size = std::sqrt(4*RCS/M_PI); // Let's use spherical satellites
 		if (isISS)
 			size = 109.; // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
-		return 2.* std::atan(size/(2000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("size" in meters, "range" in kilometers, so, 2000 is equal 1000*2)
+		return 2.* std::atan(size/(2000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("size" in meters, "range" in kilometres, so, 2000 is equal 1000*2)
 	}
 	else
 		return 0.00001;
@@ -836,7 +836,7 @@ void Satellite::update(double)
 			// the satellite when the computed height is 80km.
 			// Low Earth Orbit (LEO):
 			// A geocentric orbit with an altitude much less than the Earth's radius.
-			// Satellites in this orbit are between 80 and 2000 kilometers above
+			// Satellites in this orbit are between 80 and 2000 kilometres above
 			// the Earth's surface.
 			// Source: https://www.nasa.gov/directorates/heo/scan/definitions/glossary/index.html#L
 			qWarning() << "Satellite has invalid orbit:" << name << id;
@@ -1087,7 +1087,7 @@ void Satellite::computeOrbitPoints()
 	gTime lastEpochComp(lastEpochCompForOrbit);	
 	int diffSlots;
 
-	if (orbitPoints.isEmpty())//Setup orbitPoins
+	if (orbitPoints.isEmpty())//Setup orbitPoints
 	{
 		epochTm  = epoch - orbitSpan;
 

@@ -137,14 +137,14 @@ void Satellites::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
 		{
-			//qDebug() << "Stellites: created section in config file.";
+			//qDebug() << "Satellites: created section in config file.";
 			restoreDefaultSettings();
 		}
 
 		// populate settings from main config file.
 		loadSettings();
 
-		// absolute file name for inner catalog of the satellites
+		// absolute file name for inner catalogue of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
 
 		// Load and find resources used in the plugin
@@ -190,7 +190,7 @@ void Satellites::init()
 		restoreDefaultCatalog();
 	}
 
-	qDebug() << "[Satellites] loading catalog file:" << QDir::toNativeSeparators(catalogPath);
+	qDebug() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
 
 	// create satellites according to content of satellites.json file
 	loadCatalog();
@@ -214,10 +214,6 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingGroups()));
-	
-	// let sat symbols stay on-screen even if highly unprecise over time 
-	//connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
-	//connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
 
 	bindingGroups();
 }
@@ -289,14 +285,14 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Satellites] WARNING: unable to remove old catalog file!";
+				qWarning() << "[Satellites] WARNING: unable to remove old catalogue file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Satellites] WARNING: failed to back up catalog file as"
+		qWarning() << "[Satellites] WARNING: failed to back up catalogue file as"
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
@@ -431,7 +427,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
-	// If the search string is a catalog number...
+	// If the search string is a catalogue number...
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	if (regExp.exactMatch(noradNumber))
 	{
@@ -658,7 +654,7 @@ void Satellites::loadSettings()
 	// Load update sources list...
 	updateUrls.clear();
 	
-	// Backward compatibility: try to detect and read an old-stlye array.
+	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
 	QRegExp keyRE("^tle_url\\d+$");
@@ -671,7 +667,7 @@ void Satellites::loadSettings()
 			conf->remove(key); // Delete old-style keys
 			if (url.isEmpty())
 				continue;
-			// NOTE: This URL is also hardcoded in restoreDefaultSettings().
+			// NOTE: This URL is also hard-coded in restoreDefaultSettings().
 			if (url == "http://celestrak.com/NORAD/elements/visual.txt")
 				url.prepend("1,"); // Same as in the new default configuration
 			urls << url;
@@ -813,7 +809,7 @@ const QString Satellites::readCatalogVersion()
 			jsonVersion = vRx.cap(1);
 	}
 
-	//qDebug() << "[Satellites] catalog version from file:" << jsonVersion;
+	//qDebug() << "[Satellites] catalogue version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -1429,7 +1425,7 @@ void Satellites::updateFromOnlineSources()
 
 	// Setting lastUpdate should be done only when the update is finished. -BM
 
-	// TODO: Perhaps tie the emptyness of updateUrls to updatesEnabled... --BM
+	// TODO: Perhaps tie the emptiness of updateUrls to updatesEnabled... --BM
 	if (updateUrls.isEmpty())
 	{
 		qWarning() << "[Satellites] update failed."
@@ -1463,7 +1459,7 @@ void Satellites::updateFromOnlineSources()
 		source.addNew = false;
 		if (url.startsWith("1,"))
 		{
-			// Also prevents inconsistent behavior if the user toggles the flag
+			// Also prevents inconsistent behaviour if the user toggles the flag
 			// while an update is in progress.
 			source.addNew = autoAddEnabled;
 			url.remove(0, 2);
@@ -1834,7 +1830,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				}
 			}
 
-			//TODO: We need to think of some kind of ecaping these
+			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
 			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
@@ -1847,7 +1843,7 @@ void Satellites::parseTleFile(QFile& openFile,
 			else if (QRegExp("^2 .*").exactMatch(line))
 			{
 				lastData.second = line;
-				// The Satellite Catalog Number is the second number
+				// The Satellite Catalogue Number is the second number
 				// on the second line.
 				QString id = getSatIdFromLine2(line);
 				if (id.isEmpty()) {
