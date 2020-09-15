@@ -110,14 +110,45 @@ void PrintSkyDialog::createDialogContent()
 	updateStyle();
 }
 
-//! Draw contents report
+void PrintSkyDialog::printFooter(QPrinter * printer, QPainter *painter, int pageNumber)
+{
+	const double jd=StelUtils::getJDFromSystem();
+	QString stelVersion = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
+	StelLocaleMgr lMgr=StelApp::getInstance().getLocaleMgr();
+
+	QString footerDate=QString("%1 %2 (%3)").arg(lMgr.getPrintableDateLocal(jd)).arg(lMgr.getPrintableTimeLocal(jd)).arg(lMgr.getPrintableTimeZoneLocal(jd));
+	QString footerText=QString("%1 %2 %3 %4").arg(q_("Created on")).arg(footerDate).arg(q_("by")).arg(stelVersion);
+
+	const QPageLayout pageLayout=printer->pageLayout();
+	const QRectF fullRect=pageLayout.fullRect();
+	const qreal marginLeft=pageLayout.margins().left();
+	const qreal marginRight=pageLayout.margins().right();
+	const int fontSize=painter->fontInfo().pointSize();
+	const qreal yPos=fullRect.height()-4*fontSize;
+
+	qDebug() << "printFooter of page " << pageNumber << "at x:" << marginLeft << " y: " << yPos << "in fontsize" << fontSize;
+
+	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignLeft, footerText);
+	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignRight, QString("%1 %2").arg(q_("Page")).arg(QString::number(pageNumber)));
+}
+
+// Draw contents report
+// We must first analyze the preset page layout (user may set margins!) and printer resolution, then create a fitting screenshot!
 void PrintSkyDialog::printDataSky(QPrinter * printer)
 {
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocation location=core->getCurrentLocation();
+	const double jd = core->getJD();
+
 	PrintSky *plugin=GETSTELMODULE(PrintSky);
 	Q_ASSERT(plugin);
 	QPainter painter(printer);
+	const QPageLayout pageLayout=printer->pageLayout();
+	int pageNumber=1; // will be printed in the bottom
+	printFooter(printer, &painter, pageNumber);
 
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	// (1) TITLE PAGE
 	QImage img;
 	// TODO: Decide whether custom screenshot size should be obeyed or ignored. Maybe screenshot size must be matched to magnitude scale
 	if (!StelMainView::getInstance().getScreenshot(img, StelMainView::getInstance().getFlagUseCustomScreenshotSize(), plugin->getInvertColors(), false))
@@ -133,11 +164,9 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	const int imageXPos=(printer->pageRect().width()-img.width())/2;
 	painter.drawImage(imageXPos, 0, img);
 
-	StelCore* core = StelApp::getInstance().getCore();
-	StelLocation location=core->getCurrentLocation();
-	const double jd = core->getJD();
 
-	const int fontsize = static_cast<int>(printer->pageRect().width())/60;
+	//const int fontsize = static_cast<int>(printer->pageRect().width())/60;
+	const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/75;
 	font.setPixelSize(fontsize);
 	painter.setFont(font);
 	//int lineSpacing=fontsize+8;
@@ -145,16 +174,22 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 	qDebug() << "PrintSky: printer debugging information:";
 	qDebug() << "Current printer name:" << printer->printerName();
+	qDebug() << "Page layout:" << pageLayout;
+	qDebug() << "Page margins (mm):" << pageLayout.margins(QPageLayout::Unit::Millimeter);
+	//qDebug() << "Current print mode:" << printer.get
+	//printer->setResolution(printer->supportedResolutions())
 	qDebug() << "Current printer resolution:" << printer->resolution();
 	qDebug() << "Supported printer resolutions:" << printer->supportedResolutions();
 	qDebug() << "Page size (size index, 0-30)" << printer->paperSize();
 	//For the paper size index, see http://doc.qt.nokia.com/qprinter.html#PaperSize-enum
 	qDebug() << "Font Pixel Size:" << font.pixelSize();
-	qDebug() << "Paper Rect: "<< printer->paperRect();
-	qDebug() << "Page Rect: "<< printer->pageRect();
+	qDebug() << "Paper Rect (by obsolete functions): "<< printer->paperRect();
+	qDebug() << "Page Rect (by obsolete functions): "<< printer->pageRect();
 
-	if (plugin->getPrintData())
+
+	if (plugin->getPrintData()) // (1a) Basic info below image.
 	{
+		qDebug() << "PrintSky: Basic info";
 		int posY=img.height()+lineSpacing;
 
 		QRect surfaceData(printer->pageRect().left(), posY, printer->pageRect().width(), printer->pageRect().height()-posY);
@@ -195,8 +230,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		for (int i=0; i<listPairsMagnitudesRadius.count(); ++i)
 		{
 			painter.drawText(surfaceData.adjusted(surfaceData.width()+xPos, yPos, 0, 0), Qt::AlignLeft, QString("%1").arg(listPairsMagnitudesRadius.at(i).first, 2));
-			//painter.setBrush(Qt::SolidPattern);
-			painter.setBrush(Qt::RadialGradientPattern); // FIXME: Attempt to make diffuse stars. Maybe replace by Qt:TexturePattern and setTexture()?
+			painter.setBrush(Qt::SolidPattern);
+			//painter.setBrush(Qt::RadialGradientPattern); // FIXME: Attempt to make diffuse stars. Maybe replace by Qt:TexturePattern and setTexture()?
 			painter.drawEllipse(QPoint(surfaceData.left() + surfaceData.width() + xPos - 40, surfaceData.top() + yPos + (fontsize/2)),
 									  static_cast<int>(std::ceil(listPairsMagnitudesRadius.at(i).second)),
 									  static_cast<int>(std::ceil(listPairsMagnitudesRadius.at(i).second)));
@@ -217,48 +252,56 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		Vec3f nauticalTwilight=sun->getRTSTime(core, -12.);
 		Vec3f astronomicalTwilight=sun->getRTSTime(core, -18.);
 		Vec3f moonRTS=moon->getRTSTime(core);
+
 		QString rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
 				.arg(q_("Sunrise"))
-				.arg(printableRTSTime(sunRTS[0]))
+				.arg(printableRTSTime(static_cast<double>(sunRTS[0])))
 				.arg(q_("Transit"))
-				.arg(printableRTSTime(sunRTS[1]))
+				.arg(printableRTSTime(static_cast<double>(sunRTS[1])))
 				.arg(q_("Sunset"))
-				.arg(printableRTSTime(sunRTS[2]));
+				.arg(printableRTSTime(static_cast<double>(sunRTS[2])));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*5, 0, 0), Qt::AlignLeft, rtsStr);
 		QString twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Civil Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(civilTwilight[0]))
+				.arg(printableRTSTime(static_cast<double>(civilTwilight[0])))
 				.arg(q_("End"))
-				.arg(printableRTSTime(civilTwilight[2]));
+				.arg(printableRTSTime(static_cast<double>(civilTwilight[2])));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*6, 0, 0), Qt::AlignLeft, twilightStr);
 		twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Nautical Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(nauticalTwilight[0]))
+				.arg(printableRTSTime(static_cast<double>(nauticalTwilight[0])))
 				.arg(q_("End"))
-				.arg(printableRTSTime(nauticalTwilight[2]));
+				.arg(printableRTSTime(static_cast<double>(nauticalTwilight[2])));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*7, 0, 0), Qt::AlignLeft, twilightStr);
 		twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Astronomical Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(astronomicalTwilight[0]))
+				.arg(printableRTSTime(static_cast<double>(astronomicalTwilight[0])))
 				.arg(q_("End"))
-				.arg(printableRTSTime(astronomicalTwilight[2]));
+				.arg(printableRTSTime(static_cast<double>(astronomicalTwilight[2])));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*8, 0, 0), Qt::AlignLeft, twilightStr);
 		rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
 				.arg(q_("Moonrise"))
-				.arg(printableRTSTime(moonRTS[0]))
+				.arg(printableRTSTime(static_cast<double>(moonRTS[0])))
 				.arg(q_("Transit"))
-				.arg(printableRTSTime(moonRTS[1]))
+				.arg(printableRTSTime(static_cast<double>(moonRTS[1])))
 				.arg(q_("Moonset"))
-				.arg(printableRTSTime(moonRTS[2]));
+				.arg(printableRTSTime(static_cast<double>(moonRTS[2])));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*9, 0, 0), Qt::AlignLeft, rtsStr);
 
 		// TODO: lunar phase or similar general information?
 		// TODO: active meteor showers (check plugin state, get info)
+		printFooter(printer, &painter, pageNumber);
+		qDebug() << "RTS7";
+
 	}
 
-	// Print selected object information
+	// (2) Print selected object information
 	if (plugin->getFlagPrintObjectInfo() && GETSTELMODULE(StelObjectMgr)->getWasSelected())
 	{
+		qDebug() << "PrintSky: Selected Object Information";
+
+		printer->newPage();
+		pageNumber++;
 
 		QTextDocument info(GETSTELMODULE(StelObjectMgr)->getSelectedObject().at(0)->getInfoString(core).toHtmlEscaped());
 
@@ -272,9 +315,10 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		info.print(printer); // NOT THIS -- DOES NOT WORK
 	}
 
-	// Print solar system ephemerides
+	// (3) Print solar system ephemerides, starting on a new page
 	if (plugin->getPrintSSEphemerides())
 	{
+		qDebug() << "PrintSky: Ephemerides";
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 
 		PlanetP pHome=ssmgr->searchByEnglishName(location.planetName);
@@ -306,11 +350,14 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				if (doHeader)
 				{
 					int xPos=printer->pageRect().left()-ratioWidth/2;
-					yPos=70+(lineSpacing)*2;
+					yPos=70+lineSpacing*2;
 					printer->newPage();
+					pageNumber++;
+					printFooter(printer, &painter, pageNumber);
+
 					painter.drawText(QRect(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
 
-					yPos+=(lineSpacing);
+					yPos+=lineSpacing;
 
 					painter.drawText(QRect(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Name"));
 					painter.drawText(QRect(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("RA"));
@@ -321,13 +368,13 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Setting"));
 					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("Dist.(AU)"));
 					painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("App.Mag."));
-					yPos+=(lineSpacing)*1.25;
+					yPos+=lineSpacing*1.25;
 					doHeader=false;
 				}
 
-				const double transit=RTS[1];
-				const double rising =RTS[0];
-				const double setting=RTS[2];
+				const double transit=static_cast<double>(RTS[1]);
+				const double rising =static_cast<double>(RTS[0]);
+				const double setting=static_cast<double>(RTS[2]);
 				oddLine=!oddLine;
 				int xPos=printer->pageRect().left()-ratioWidth/2;
 
@@ -348,7 +395,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				yPos+=lineSpacing;
 				if (yPos+((lineSpacing)*4)>=printer->pageRect().top()+printer->pageRect().height())
 				{
-				    doHeader=true;
+					doHeader=true;
 				}
 			    }
 		}
@@ -383,7 +430,7 @@ void PrintSkyDialog::executePrinterOutputOption(bool previewOnly)
 {
 	PrintSky *plugin=GETSTELMODULE(PrintSky);
 
-	//QPrinter printer(QPrinter::HighResolution);
+	//QPrinter printer(QPrinter::HighResolution); // 1200dpi?!
 	QPrinter printer(QPrinter::ScreenResolution);
 	printer.setResolution(300);
 	printer.setDocName("STELLARIUM REPORT");

@@ -64,6 +64,8 @@ private slots:
 	//! Draw contents report
 	//! @param printer the paint device to paint on a print
 	void printDataSky(QPrinter * printer);
+	//! Print a running footer with date, Stellarium version number, page number and icon.
+	void printFooter(QPrinter * printer, QPainter *painter, int pageNumber);
 
 private:
 	QFont font;
