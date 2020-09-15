@@ -139,20 +139,20 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	wutHeader.clear();
 	transitHeader.clear();
 
-	// Allow assign shortkeys
+	// Allow assign short-keys
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 	QString actionsGroup = N_("Astronomical calculations");
 	//actionsMgr->addAction("actionRun_AstroCalc_SavePositions", actionsGroup, N_("Save positions"), this, "saveCelestialPositions()", "");
 	actionsMgr->addAction("actionRun_AstroCalc_UpdatePositions", actionsGroup, N_("Update positions"), this, "currentCelestialPositions()", "");
 	//actionsMgr->addAction("actionRun_AstroCalc_SaveEphemeris", actionsGroup, N_("Save ephemeris"), this, "saveEphemeris()", "");
 	actionsMgr->addAction("actionRun_AstroCalc_CalculateEphemeris", actionsGroup, N_("Calculate ephemeris"), this, "generateEphemeris()", "");
-	actionsMgr->addAction("actionRun_AstroCalc_CleanupEphemeris", actionsGroup, N_("Cleanup ephemerides"), this, "cleanupEphemeris()", "");
+	actionsMgr->addAction("actionRun_AstroCalc_CleanupEphemeris", actionsGroup, N_("Clean-up ephemeris"), this, "cleanupEphemeris()", "");
 	//actionsMgr->addAction("actionRun_AstroCalc_SavePhenomena", actionsGroup, N_("Save phenomena"), this, "savePhenomena()", "");
 	actionsMgr->addAction("actionRun_AstroCalc_CalculatePhenomena", actionsGroup, N_("Calculate phenomena"), this, "calculatePhenomena()", "");
-	actionsMgr->addAction("actionRun_AstroCalc_CleanupPhenomena", actionsGroup, N_("Cleanup of phenomena"), this, "cleanupPhenomena()", "");
+	actionsMgr->addAction("actionRun_AstroCalc_CleanupPhenomena", actionsGroup, N_("Clean-up of phenomena"), this, "cleanupPhenomena()", "");
 	//actionsMgr->addAction("actionRun_AstroCalc_SaveTransits", actionsGroup, N_("Save transits"), this, "saveTransits()", "");
 	actionsMgr->addAction("actionRun_AstroCalc_CalculateTransits", actionsGroup, N_("Calculate transits"), this, "generateTransits()", "");
-	actionsMgr->addAction("actionRun_AstroCalc_CleanupTransits", actionsGroup, N_("Cleanup transits"), this, "cleanupTransits()", "");
+	actionsMgr->addAction("actionRun_AstroCalc_CleanupTransits", actionsGroup, N_("Clean-up transits"), this, "cleanupTransits()", "");
 	//actionsMgr->addAction("actionRun_AstroCalc_SaveWUTObjects", actionsGroup, N_("WUT: save list of objects"), this, "saveWutObjects()", "");
 }
 
@@ -865,11 +865,11 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		// TRANSLATORS: magnitude
 		positionsHeader << q_("Mag.");
 	}
-	// TRANSLATORS: angular size, arcminutes
+	// TRANSLATORS: angular size, arc-minutes
 	positionsHeader << QString("%1, '").arg(q_("A.S."));
 	if (celType == 170)
 	{
-		// TRANSLATORS: separation, arcseconds
+		// TRANSLATORS: separation, arc-seconds
 		positionsHeader << QString("%1, \"").arg(q_("Sep."));
 	}
 	else if (celType == 171)
@@ -884,8 +884,8 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	}
 	else if (celType == 172)
 	{
-		// TRANSLATORS: proper motion, arcsecond per year
-		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("\"/yr", "arcsecond per year"));
+		// TRANSLATORS: proper motion, arc-second per year
+		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("\"/yr", "arc-second per year"));
 	}
 	else
 	{
@@ -1071,14 +1071,14 @@ void AstroCalcDialog::currentCelestialPositions()
 		}
 		else
 		{
-			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
+			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-min"));
 			if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
-				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
+				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-sec"));
 		}
 		float magOp;
 		bool passByBrightness;
 		QString dsoName;
-		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
+		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arc-min"));
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects;
 		if (celTypeId==169)
@@ -1120,7 +1120,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (extra.toFloat() > 90.f)
 					extra = dash;
 
-				// Convert to arcminutes the average angular size of deep-sky object
+				// Convert to arc-minutes the average angular size of deep-sky object
 				angularSize = QString::number(obj->getAngularSize(core) * 120., 'f', 3);
 				if (angularSize.toFloat() < 0.01f)
 					angularSize = dash;
@@ -1154,7 +1154,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			distanceInfo = q_("Topocentric distance");
 		QString distanceUM = qc_("AU", "distance, astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
-		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arc-min"));
 		Vec3d pos;
 		bool passByType;
 
@@ -1209,7 +1209,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
-				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				// Convert to arc-seconds the angular size of Solar system object (with rings, if any)
 				angularSize = QString::number(planet->getAngularSize(core) * 120., 'f', 4);
 				if (angularSize.toFloat() < 1e-4f || planet->getPlanetType() == Planet::isComet)
 					angularSize = dash;
@@ -1280,7 +1280,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (celTypeId == 170) // double stars
 				{
 					wdsSep = star.value(obj);
-					extra = QString::number(wdsSep, 'f', 3); // arcseconds
+					extra = QString::number(wdsSep, 'f', 3); // arc-seconds
 					sToolTip = StelUtils::decDegToDmsStr(wdsSep / 3600.f);
 				}
 				else if (celTypeId == 171) // variable stars
@@ -1963,8 +1963,8 @@ void AstroCalcDialog::saveEphemeris()
 	filter.append(" (*.csv)");
 	QString defaultFilter("(*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated ephemerides as..."),
-							QDir::homePath() + "/ephemerides.xlsx",
+							q_("Save calculated ephemeris as..."),
+							QDir::homePath() + "/ephemeris.xlsx",
 							filter,
 							&defaultFilter);
 
@@ -1981,7 +1981,7 @@ void AstroCalcDialog::saveEphemeris()
 		int w;
 
 		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Ephemerides"));
+		xlsx.setDocumentProperty("title", q_("Ephemeris"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
 		xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString(), AbstractSheet::ST_WorkSheet);
 
@@ -2607,7 +2607,7 @@ void AstroCalcDialog::populatePlanetList()
 		if (planet->getPlanetType() == Planet::isMoon && planet->getEnglishName() != cpName && planet->getParent() == core->getCurrentPlanet())
 			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
 	}
-	// special case: selected dwarf and minot planets
+	// special case: selected dwarf and minor planets
 	planets.clear();
 	planets.append(solarSystem->searchByEnglishName("Pluto"));
 	planets.append(solarSystem->searchByEnglishName("Ceres"));
@@ -3295,8 +3295,8 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	{
 		if (ssObj->getJ2000EquatorialPos(core).length() < 0.1)
 		{
-			// TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system,
-			// equal to one million metres)
+			// TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in the metric system,
+			// equal to one million meters)
 			distMU = q_("Mm");
 		}
 		if ((ssObj->getAngularSize(core) * 360. / M_PI) < 1.) asMU = QString("\"");
@@ -4290,7 +4290,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		{
 			phenomenType = q_("Eclipse");
 		}
-		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjuction for inner planet
+		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjunction for inner planet
 		{
 			double dcp = planet->getHeliocentricEclipticPos().length();
 			double dp;
@@ -4521,7 +4521,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		{
 			phenomenType = q_("Eclipse");
 		}
-		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjuction for inner planet
+		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjunction for inner planet
 		{
 			double dcp = (planet->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
 			double dp;
@@ -5890,7 +5890,7 @@ void AstroCalcDialog::calculateWutObjects()
 						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
-							// convert from arcseconds to degrees
+							// convert from arc-seconds to degrees
 							if ((angularSizeLimit) && (!StelUtils::isWithin(static_cast<double>(dblStar.value(object))/3600.0, angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
@@ -6332,7 +6332,7 @@ void AstroCalcDialog::computePlanetaryData()
 	const double distanceKm = AU * distanceAu;
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
-	// TRANSLATORS: Unit of measure for distance - milliones kilometers
+	// TRANSLATORS: Unit of measure for distance - millions kilometers
 	QString Mkm = qc_("M km", "distance");
 	QString distAU, distKM;
 	const bool useKM = (distanceAu < 0.1);

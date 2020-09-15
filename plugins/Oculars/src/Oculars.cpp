@@ -1673,7 +1673,7 @@ void Oculars::paintCCDBounds()
 					a = transform.map(QPoint(qRound(-width*0.5f), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
-					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+					//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 					QString unit = q_("\"/px");
 					QString scales = QString("%1%3 %4 %2%3")
 							.arg(QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4))

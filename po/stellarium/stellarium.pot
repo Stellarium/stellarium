@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-16 00:32+0700\n"
+"POT-Creation-Date: 2020-09-16 00:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1294,11 +1294,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:254 src/gui/AstroCalcDialog.cpp:1074
 #: src/gui/AstroCalcDialog.cpp:1081 src/gui/AstroCalcDialog.cpp:1157
-msgid "arcmin"
+msgid "arc-min"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:256 src/gui/AstroCalcDialog.cpp:1076
-msgid "arcsec"
+msgid "arc-sec"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:270
@@ -1930,6 +1930,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
+#. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:630 src/core/modules/Planet.cpp:648
 #: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6336
 msgctxt "distance"
@@ -3626,7 +3627,8 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1193
-msgid "Acknowledgements"
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+msgid "Acknowledgments"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1195
@@ -4527,7 +4529,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:1152
 msgctxt "magnitude algorithm"
-msgid "Astronomical Almanach (1984)"
+msgid "Astronomical Almanac (1984)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1153
@@ -4936,24 +4938,24 @@ msgstr ""
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:149 src/ui_astroCalcDialog.h:1714
-msgid "Cleanup ephemerides"
+#: src/gui/AstroCalcDialog.cpp:149
+msgid "Clean-up ephemeris"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:151 src/ui_astroCalcDialog.h:1759
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:152 src/ui_astroCalcDialog.h:1754
-msgid "Cleanup of phenomena"
+#: src/gui/AstroCalcDialog.cpp:152
+msgid "Clean-up of phenomena"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:154 src/ui_astroCalcDialog.h:1742
 msgid "Calculate transits"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:155 src/ui_astroCalcDialog.h:1740
-msgid "Cleanup transits"
+#: src/gui/AstroCalcDialog.cpp:155
+msgid "Clean-up transits"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:276
@@ -5013,12 +5015,12 @@ msgstr ""
 msgid "Mag."
 msgstr ""
 
-#. TRANSLATORS: angular size, arcminutes
+#. TRANSLATORS: angular size, arc-minutes
 #: src/gui/AstroCalcDialog.cpp:869
 msgid "A.S."
 msgstr ""
 
-#. TRANSLATORS: separation, arcseconds
+#. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
 #: src/gui/AstroCalcDialog.cpp:873 src/gui/AstroCalcDialog.cpp:5468
 msgid "Sep."
@@ -5039,13 +5041,13 @@ msgstr ""
 msgid "Dist."
 msgstr ""
 
-#. TRANSLATORS: proper motion, arcsecond per year
+#. TRANSLATORS: proper motion, arc-second per year
 #: src/gui/AstroCalcDialog.cpp:888
 msgid "P.M."
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:888
-msgctxt "arcsecond per year"
+msgctxt "arc-second per year"
 msgid "\"/yr"
 msgstr ""
 
@@ -5142,11 +5144,11 @@ msgid "Phase"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1966
-msgid "Save calculated ephemerides as..."
+msgid "Save calculated ephemeris as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1984
-msgid "Ephemerides"
+#: src/gui/AstroCalcDialog.cpp:1984 src/ui_astroCalcDialog.h:1635
+msgid "Ephemeris"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:2044 src/gui/AstroCalcDialog.cpp:3797
@@ -5496,8 +5498,8 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system,
-#. equal to one million metres)
+#. TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in the metric system,
+#. equal to one million meters)
 #: src/gui/AstroCalcDialog.cpp:3300
 msgid "Mm"
 msgstr ""
@@ -11581,10 +11583,6 @@ msgstr ""
 msgid "Celestial bodies above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1635
-msgid "Ephemeris"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:1641 src/ui_astroCalcDialog.h:1802
 #: src/ui_astroCalcDialog.h:1836
 msgid "Graphs"
@@ -11698,6 +11696,10 @@ msgstr ""
 msgid "Color of Saturn's ephemeris marker"
 msgstr ""
 
+#: src/ui_astroCalcDialog.h:1714
+msgid "Cleanup ephemerides"
+msgstr ""
+
 #: src/ui_astroCalcDialog.h:1715
 msgid "Save ephemeris"
 msgstr ""
@@ -11753,6 +11755,10 @@ msgstr ""
 msgid "all naked-eye planets"
 msgstr ""
 
+#: src/ui_astroCalcDialog.h:1740
+msgid "Cleanup transits"
+msgstr ""
+
 #: src/ui_astroCalcDialog.h:1741
 msgid "Save transits"
 msgstr ""
@@ -11776,6 +11782,10 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1753
 msgid "Maximum allowed separation:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1754
+msgid "Cleanup of phenomena"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1755
@@ -12799,7 +12809,7 @@ msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
-#. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+#. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1677
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
@@ -16546,10 +16556,6 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
-msgid "Acknowledgments"
-msgstr ""
-
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid ""
@@ -19707,7 +19713,7 @@ msgid "Orbital Period, days"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
-msgid "Angular Distance, arcsec"
+msgid "Angular Distance, arc-sec"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774

@@ -705,7 +705,7 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdBinning->setPos(posX, posY);
 	posY += fieldCcdBinning->boundingRect().height();
 	widgetHeight += fieldCcdBinning->boundingRect().height();
-	//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+	//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 	QString unit = q_("\"/px");
 	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
 	fieldCcdHScale->setToolTip(q_("Horizontal scale"));
@@ -817,7 +817,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		QString binningLabel = QString("%1: %2 %4 %3").arg(q_("Binning")).arg(ccd->binningX()).arg(ccd->binningY()).arg(QChar(0x00D7));
 		fieldCcdBinning->setPlainText(binningLabel);
 
-		//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
 		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
 		fieldCcdHScale->setToolTip(q_("Horizontal scale"));

@@ -770,7 +770,7 @@ void ExoplanetsDialog::populateDiagramsList()
 	{ q_("Planetary Mass, Mjup"),          2},
 	{ q_("Planetary Radius, Rjup"),        3},
 	{ q_("Orbital Period, days"),          4},
-	{ q_("Angular Distance, arcsec"),      5},
+	{ q_("Angular Distance, arc-sec"),      5},
 	{ q_("Effective temperature of host star, K"), 6},
 	{ q_("Year of Discovery"),             7},
 	{ q_("Metallicity of host star"),      8},

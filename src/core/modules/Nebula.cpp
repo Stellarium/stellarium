@@ -251,9 +251,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
-			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
+			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-min"));
 			if (flagUseArcsecSurfaceBrightness)
-				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
+				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-sec"));
 		}
 
 		if (getSurfaceBrightness(core)<99.f)

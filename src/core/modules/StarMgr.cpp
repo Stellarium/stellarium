@@ -656,7 +656,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
-	const int pmLimit = 1; // arcsecond per year!
+	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -719,7 +719,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	// Allow empty and comment lines where first char (after optional blanks) is #
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
-	// use a QRegExp to extract the fields. with whitespace padding permitted
+	// use a QRegExp to extract the fields. with white-space padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"

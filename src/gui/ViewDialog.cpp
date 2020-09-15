@@ -1149,7 +1149,7 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user data.
 	algorithms->addItem(qc_("G. Mueller (1893)", "magnitude algorithm"), Planet::Mueller_1893);
-	algorithms->addItem(qc_("Astronomical Almanach (1984)", "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
+	algorithms->addItem(qc_("Astronomical Almanac (1984)", "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
 	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::ExplanatorySupplement_1992);
 	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::ExplanatorySupplement_2013);
 	algorithms->addItem(qc_("Generic", "magnitude algorithm"), Planet::Generic);
