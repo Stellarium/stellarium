@@ -638,12 +638,12 @@ void Satellites::restoreDefaultCatalog()
 	{
 		qDebug() << "[Satellites] copied default satellites.json to " << QDir::toNativeSeparators(catalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
-		// is writable by the Stellarium process so that updates can be done.
+		// is writeable by the Stellarium process so that updates can be done.
 		QFile dest(catalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 
 		// Make sure that in the case where an online update has previously been done, but
-		// the json file has been manually removed, that an update is schreduled in a timely
+		// the json file has been manually removed, that an update is scheduled in a timely
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
@@ -925,7 +925,10 @@ QVariantMap Satellites::createDataMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
+	// FIXME: Since v0.21 uncomment this line:
+	// map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
+	// and remove this line:
+	map["creator"] = QString("Satellites plugin version %1").arg(SatellitesCatalogVersion);
 	map["version"] = QString("%1").arg(SatellitesCatalogVersion);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
@@ -1126,15 +1129,17 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("galileo");
 			satGroups.append("navigation");
 		}
-		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA"))
+		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
 		{
 			QString satName = tleData.name.split(" ").at(0).toLower();
 			if (satName.contains("-"))
 				satName = satName.split("-").at(0);
 			satGroups.append(satName);
 			satGroups.append("communications");
-			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT"))
+			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT") || satName.startsWith("DIRECTV") || satName.startsWith("CHINASAT") || satName.startsWith("YAMAL"))
 				satGroups.append("geostationary");
+			if (satName.startsWith("INTELSAT") || satName.startsWith("DIRECTV") || satName.startsWith("YAMAL"))
+				satGroups.append("tv");
 		}
 		if (tleData.name.contains(" DEB"))
 			satGroups.append("debris");
@@ -2327,6 +2332,12 @@ void Satellites::translations()
 	N_("crewed");
 	// TRANSLATORS: Satellite group: Satellites of ISS resupply missions
 	N_("resupply");
+	// TRANSLATORS: Satellite group: are known to broadcast TV signals
+	N_("tv");
+	// TRANSLATORS: Satellite group: military satellites
+	N_("military");
+	// TRANSLATORS: Satellite group: geodetic satellites
+	N_("geodetic");
 
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
