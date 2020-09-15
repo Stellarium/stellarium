@@ -71,10 +71,7 @@ private slots:
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	//void setLightPollutionSpinBoxStatus();
-	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
-
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);

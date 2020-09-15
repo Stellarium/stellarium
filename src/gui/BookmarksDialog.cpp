@@ -160,7 +160,11 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		QString name	 = selected[0]->getEnglishName();
 		QString nameI18n = selected[0]->getNameI18n();
 		if (selected[0]->getType()=="Nebula")
+		{
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+			if (name.isEmpty()) // Region or nebulae without designation
+				name = selected[0]->getEnglishName();
+		}
 
 		QString raStr = "", decStr = "";
 		bool visibleFlag = false;

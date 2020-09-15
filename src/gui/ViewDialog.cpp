@@ -184,13 +184,8 @@ void ViewDialog::createDialogContent()
 	Q_ASSERT(lmgr);
 	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(drawer);
-	// TODO: In trunk, populateLightPollution has been added, while socis15 has setLightPollutionSpinBoxStatus.
-	// TODO: Decide which is better?
-	// The trunk version also sets value of the spinbox, this seems more complete.
-	//setLightPollutionSpinBoxStatus();
 	populateLightPollution();
 	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
-	//connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
 	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
 	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
@@ -828,12 +823,6 @@ void ViewDialog::populateLightPollution()
 	ui->lightPollutionSpinBox->setValue(bIdx);
 	setBortleScaleToolTip(bIdx);
 }
-//// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
-//void ViewDialog::setLightPollutionSpinBoxStatus()
-//{
-//	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-//	ui->lightPollutionSpinBox->setEnabled(!lmgr->property("flagUseLightPollutionFromDatabase").toBool());
-//}
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
