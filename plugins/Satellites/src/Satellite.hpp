@@ -32,7 +32,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 #include "gSatWrapper.hpp"
-
+#include "SolarSystem.hpp"
 
 class StelPainter;
 class StelLocation;
@@ -51,6 +51,8 @@ typedef struct
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
 	SatDescriptionRole,
+	SatStdMagnitudeRole,
+	SatRCSRole,
 	SatFlagsRole,
 	SatGroupsRole,
 	FirstLineRole,
@@ -65,13 +67,21 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags = 0x0,
-	SatDisplayed = 0x1,
-	SatNotDisplayed = 0x2,
-	SatUser = 0x4,
-	SatOrbit = 0x8,
-	SatNew = 0x10,
-	SatError = 0x20
+	SatNoFlags		= 0x0000,
+	SatDisplayed		= 0x0001,
+	SatNotDisplayed	= 0x0002,
+	SatUser			= 0x0004,
+	SatOrbit			= 0x0008,
+	SatNew			= 0x0010,
+	SatError			= 0x0020,
+	SatSmallSize		= 0x0040,
+	SatMediumSize		= 0x0080,
+	SatLargeSize		= 0x0100,
+	SatLEO			= 0x0200,
+	SatMEO			= 0x0400,
+	SatGSO			= 0x0800,
+	SatHEO			= 0x1000,
+	SatHGSO			= 0x2000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -85,7 +95,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! Details about the satellite are passed with a JSON-representation structure
 //! that contains a <b>Satellite Catalog</b> entry.
 //! 
-//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc.)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 //! @ingroup satellites
 class Satellite : public StelObject
@@ -102,13 +112,13 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational		= 2,
+		StatusNonoperational	= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission		= 6,
+		StatusExtendedMission	= 6,
 		StatusDecayed			= 7,
-		StatusUnknown			= 0
+		StatusUnknown		= 0
 	};
 
 	//! \param identifier unique identifier (currently the Catalog Number)
@@ -151,6 +161,10 @@ public:
 	//! - height (height in km)
 	//! - subpoint-lat (latitude of subpoint, decimal degrees)
 	//! - subpoint-long (longitude of subpoint, decimal degrees)
+	//! - inclination (decimal degrees)
+	//! - period (minutes)
+	//! - perigee-altitude (height in km)
+	//! - apogee-altitude (height in km)
 	//! - TEME-km-X
 	//! - TEME-km-Y
 	//! - TEME-km-Z
@@ -165,7 +179,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core) const;
-	virtual double getAngularSize(const StelCore* core) const;
+	//! Get angular size, degrees
+	virtual double getAngularSize(const StelCore*) const;
 	virtual QString getNameI18n(void) const;
 	virtual QString getEnglishName(void) const
 	{
@@ -217,8 +232,10 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
+	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
+	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
+	QString calculateEpochFromLine1(QString tle) const;
 
-private:
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
 	//! Should not be confused with the pedicted visibility of the 
@@ -252,6 +269,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	double RCS;
 	//! Operational status code
 	int status;
 	//! Contains the J2000 position.
@@ -265,6 +283,10 @@ private:
 	GroupSet groups;
 	QDateTime lastUpdated;
 
+	bool isISS;
+	PlanetP moon;
+	PlanetP sun;
+
 	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
@@ -273,9 +295,9 @@ private:
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
-	static bool  realisticModeFlag;
+	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
-	//! Mask controlling which info display flags should be honored.
+	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
 
@@ -290,17 +312,14 @@ private:
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
 
-#ifdef IRIDIUM_SAT_TEXT_DEBUG
-	static QString myText;
-#endif
-
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED
-
+#endif
+	Vec3f    infoColor;
 	//Satellite Orbit Draw
-	QFont     font;
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days

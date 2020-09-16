@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>358</height>
+    <width>666</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -146,7 +146,7 @@
       </attribute>
       <layout class="QFormLayout" name="formLayout">
        <item row="7" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="labelPortNumber">
          <property name="text">
           <string>Port Number:</string>
          </property>
@@ -155,7 +155,7 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="15" column="0">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -168,7 +168,7 @@
          </property>
         </spacer>
        </item>
-       <item row="15" column="0" colspan="2">
+       <item row="16" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QPushButton" name="restoreDefaultsButton">
@@ -179,7 +179,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Restore default settings</string>
+            <string>Restore defaults</string>
            </property>
           </widget>
          </item>
@@ -192,7 +192,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Save settings as default</string>
+            <string>Save settings</string>
            </property>
           </widget>
          </item>
@@ -206,7 +206,7 @@
         </widget>
        </item>
        <item row="9" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labelPassword">
          <property name="text">
           <string>Password</string>
          </property>
@@ -219,7 +219,7 @@
         <widget class="QLineEdit" name="passwordEdit"/>
        </item>
        <item row="10" column="0" colspan="2">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="labelNote">
          <property name="font">
           <font>
            <italic>true</italic>
@@ -240,7 +240,24 @@
          </property>
         </widget>
        </item>
+       <item row="11" column="0">
+        <widget class="QCheckBox" name="enableCorsCheckbox">
+         <property name="text">
+          <string>Enable CORS for the following origin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QLineEdit" name="corsOriginEdit"/>
+       </item>
        <item row="12" column="0" colspan="2">
+        <widget class="QLabel" name="labelCors">
+         <property name="text">
+          <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify &quot;*&quot; to let any website take control - do this at your own risk.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0" colspan="2">
         <widget class="QWidget" name="restartPanel" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>

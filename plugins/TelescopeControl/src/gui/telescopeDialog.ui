@@ -7,26 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>350</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+   <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>530</width>
-    <height>350</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>800</width>
-    <height>600</height>
-   </size>
   </property>
   <layout class="QVBoxLayout" name="verticalLayoutTelescopeDialog">
    <property name="spacing">
@@ -64,7 +52,7 @@
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>30</height>
+       <height>25</height>
       </size>
      </property>
      <property name="focusPolicy">
@@ -153,16 +141,10 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>10</height>
-      </size>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -301,31 +283,21 @@
              </property>
              <item>
               <widget class="QPushButton" name="pushButtonChangeStatus">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="minimumSize">
                 <size>
                  <width>0</width>
                  <height>24</height>
                 </size>
                </property>
-               <property name="text">
-                <string>Start</string>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                 <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonConfigure">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -338,19 +310,15 @@
                <property name="layoutDirection">
                 <enum>Qt::RightToLeft</enum>
                </property>
-               <property name="text">
-                <string>Configure</string>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                 <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonAdd">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -363,8 +331,10 @@
                <property name="layoutDirection">
                 <enum>Qt::RightToLeft</enum>
                </property>
-               <property name="text">
-                <string>Add</string>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtCreate.png</normaloff>
+                 <disabledoff>:/graphicGui/uibtCreate-disabled.png</disabledoff>:/graphicGui/uibtCreate.png</iconset>
                </property>
               </widget>
              </item>
@@ -372,12 +342,6 @@
               <widget class="QPushButton" name="pushButtonRemove">
                <property name="enabled">
                 <bool>true</bool>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
@@ -388,10 +352,25 @@
                <property name="toolTip">
                 <string>Remove the selected telescope</string>
                </property>
-               <property name="text">
-                <string>Remove</string>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtDelete.png</normaloff>
+                 <disabledoff>:/graphicGui/uibtDelete-disabled.png</disabledoff>:/graphicGui/uibtDelete.png</iconset>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -433,12 +412,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QGroupBox" name="groupBoxGUI">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="title">
           <string>GUI</string>
          </property>
@@ -623,6 +596,11 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+                 <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+               </property>
               </widget>
              </item>
             </layout>
@@ -638,8 +616,8 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>314</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
         </spacer>
@@ -716,6 +694,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -1027,7 +1027,6 @@ bool Detector::CaptureComplete(DetectorDevice *targetDevice)
 bool Detector::uploadFile(DetectorDevice *targetDevice, const void *fitsData, size_t totalBytes, bool sendCapture,
                            bool saveCapture, int blobIndex)
 {
-
     DEBUGF(Logger::DBG_DEBUG, "Uploading file. Ext: %s, Size: %d, sendCapture? %s, saveCapture? %s",
            targetDevice->getCaptureExtension(), totalBytes, sendCapture ? "Yes" : "No", saveCapture ? "Yes" : "No");
 

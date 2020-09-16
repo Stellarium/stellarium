@@ -21,7 +21,7 @@
 #define TESTEPHEMERIS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestEphemeris : public QObject
 {

@@ -79,20 +79,22 @@ private slots:
 
 private:
 	enum BookmarksColumns {
-		ColumnUUID,		//! UUID of bookmark
-		ColumnName,		//! name or designation of object
+		ColumnUUID,	//! UUID of bookmark
+		ColumnName,	//! name or designation of object
 		ColumnNameI18n,	//! Localized name of object
-		ColumnDate,		//! date and time (optional)
+		ColumnDate,	//! date and time (optional)
 		ColumnLocation,	//! location (optional)
-		ColumnCount		//! total number of columns
+		ColumnCount	//! total number of columns
 	};
 	QStandardItemModel * bookmarksListModel;
 
 	class StelCore* core;
 	class StelObjectMgr* objectMgr;
+	class LabelMgr* labelMgr;
 
 	QString bookmarksJsonPath;
 	QHash<QString, bookmark> bookmarksCollection;
+	QList<int> highlightLabelIDs;
 
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
@@ -100,7 +102,7 @@ private:
 	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
 	void loadBookmarks();
-	void saveBookmarks();
+	void saveBookmarks() const;
 	void goToBookmark(QString uuid);
 };
 

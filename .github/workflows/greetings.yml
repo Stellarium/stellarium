@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Thanks for adding your first issue to Stellarium. If you have questions, please do not hesitate to contact us.'
+        pr-message: 'Thanks for adding your first pull request to Stellarium. If you have questions, please do not hesitate to contact us.'

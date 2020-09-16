@@ -1,7 +1,7 @@
 // Author: Qam1
 // Name: Earth and other Planets from Ceres
 // License: Public Domain
-// Version: 10.0
+// Version: 10.1
 // Description: Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-2200
 
 // Made on Stellarium 0.16.1
@@ -49,7 +49,7 @@ LabelMgr.deleteAllLabels();
 long = -73.6;
 lat = 20.1;
 
-core.setObserverLocation(long, lat, 20, 1, "", "(1) Ceres");
+core.setObserverLocation(long, lat, 20, 1, "", "Ceres");
 
 
 spd = spd * 4;
@@ -2609,7 +2609,7 @@ oland =  LandscapeMgr.getFlagLandscape();
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagLandscape(false);
 
-core.setObserverLocation(long, lat, 20, 1, "", "(1) Ceres");
+core.setObserverLocation(long, lat, 20, 1, "", "Ceres");
 
 core.setDate("1590-10-13T05:11:00", "utc");
 
@@ -3082,7 +3082,7 @@ woes = "W";
 
 core.setDate(id[i], "utc");
 
-core.setObserverLocation(il[i], lat, 20, 0, "", "(1) Ceres");
+core.setObserverLocation(il[i], lat, 20, 0, "", "Ceres");
 
 
 // again
@@ -3345,7 +3345,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 core.wait(0.1);
 
-SunData = core.getObjectPosition("Sun");
+SunData = core.getObjectInfo("Sun");
 
 sunx = SunData["altitude"];
 

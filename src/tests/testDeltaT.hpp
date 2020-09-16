@@ -21,21 +21,42 @@
 #define TESTDELTAT_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 #include <QVector>
 #include <QString>
 
 class TestDeltaT : public QObject
 {
-Q_OBJECT
+	Q_OBJECT
+
 private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
 	void testDeltaTByChaprontMeeus();
 	void testDeltaTByChaprontMeeusWideDates();
-	void testDeltaTByMorrisonStephenson1982WideDates();
-	void testDeltaTByStephensonMorrison1984WideDates();
-
+	void testDeltaTByMorrisonStephenson1982WideDates();	
+	void testDeltaTByStephensonMorrison1984WideDates();	
+	void testDeltaTByStephensonMorrison1995WideDates();	
+	void testDeltaTByStephensonMorrison2004WideDates();	
+	void testDeltaTByStephensonMorrisonHohenkerk2016GenericDates();
+	void testDeltaTByStephenson1997WideDates();
+	void testDeltaTByStephenson1997GenericDates();
+	void testDeltaTByMeeusSimons();
+	void testDeltaTByMeeusSimonsGenericDates();
+	void testDeltaTByKhalidSultanaZaidiWideDates();
+	void testDeltaTByMontenbruckPfleger();
+	void testDeltaTByReingoldDershowitzWideDates();
+	void testDeltaTByJPLHorizons();
+	void testDeltaTByBorkowski();
+	void testDeltaTByIAU();
+	void testDeltaTByAstronomicalEphemeris();
+	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTByIslamSadiqQureshiGenericDates();
+	void testDeltaTBySchmadelZech1988GenericDates();
+	void testDeltaTByChaprontTouzeGenericDates();
+	void testDeltaTStandardError();
+private:
+	QVariantList genericData;
 };
 
 #endif // _TESTDELTAT_HPP

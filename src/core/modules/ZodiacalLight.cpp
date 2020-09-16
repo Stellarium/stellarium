@@ -43,16 +43,18 @@
 
 // Class which manages the displaying of the Zodiacal Light
 ZodiacalLight::ZodiacalLight()
-	: color(1.f, 1.f, 1.f)
+	: propMgr(Q_NULLPTR)
+	, color(1.f, 1.f, 1.f)
 	, intensity(1.)
-	, intensityFovScale(1.0f)
-	, intensityMinFov(0.25f) // when zooming in further, Z.L. is no longer visible.
-	, intensityMaxFov(2.5f) // when zooming out further, Z.L. is fully visible (when enabled).
+	, intensityFovScale(1.0)
+	, intensityMinFov(0.25) // when zooming in further, Z.L. is no longer visible.
+	, intensityMaxFov(2.5) // when zooming out further, Z.L. is fully visible (when enabled).
 	, lastJD(-1.0E6)
 	, vertexArray()
 {
 	setObjectName("ZodiacalLight");
 	fader = new LinearFader();
+	propMgr=StelApp::getInstance().getStelPropertyManager();
 }
 
 ZodiacalLight::~ZodiacalLight()
@@ -73,9 +75,9 @@ void ZodiacalLight::init()
 	// The data hole around the sun has been filled by useful values.
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
-	setIntensity(conf->value("astro/zodiacal_light_intensity",1.f).toFloat());
+	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,60,30,1, true)); // 6x6 degree quads
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,60,30,1, true)); // 6x6 degree quads
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(color);
 
@@ -89,16 +91,16 @@ void ZodiacalLight::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
 }
 
-void ZodiacalLight::handleLocationChanged(StelLocation loc)
+void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
 {
 	// This just forces update() to re-compute longitude.
-	Q_UNUSED(loc);
+	Q_UNUSED(loc)
 	lastJD=-1e12;
 }
 
 void ZodiacalLight::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	fader->update(static_cast<int>(deltaTime*1000));
 	if (!fader->getInterstate()  || (getIntensity()<0.01) )
 		return;
 
@@ -111,7 +113,7 @@ void ZodiacalLight::update(double deltaTime)
 	if (! QString("Earth Moon").contains(core->getCurrentLocation().planetName)) return;
 
 	double currentJD=core->getJD();
-	if (qAbs(currentJD - lastJD) > 0.25f) // should be enough to update position every 6 hours.
+	if (qAbs(currentJD - lastJD) > 0.25) // should be enough to update position every 6 hours.
 	{
 		// Allowed locations are only Earth or Moon. For Earth, we can compute ZL along ecliptic of date.
 		// For the Moon, we can only show ZL along J2000 ecliptic.
@@ -170,7 +172,7 @@ bool ZodiacalLight::getFlagShow() const
 
 void ZodiacalLight::draw(StelCore* core)
 {
-	if (!fader->getInterstate()  || (getIntensity()<0.01) )
+	if ((fader->getInterstate() == 0.f) || (getIntensity()<0.01) || !(propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool()))
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
@@ -210,7 +212,7 @@ void ZodiacalLight::draw(StelCore* core)
 	//qDebug() << "aLum=" << aLum;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
-	c*=aLum*intensity*intensityFovScale;
+	c*=aLum*static_cast<float>(intensity*intensityFovScale);
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
@@ -237,14 +239,14 @@ void ZodiacalLight::draw(StelCore* core)
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
 			Vec3d eclPos=vertexArray->vertex.at(i);
-			Q_ASSERT(fabs(eclPos.lengthSquared()-1.0) < 0.001f);
+			Q_ASSERT(fabs(eclPos.lengthSquared()-1.0) < 0.001);
 			double ecLon, ecLat, ra, dec;
 			StelUtils::rectToSphe(&ecLon, &ecLat, eclPos);
 			StelUtils::eclToEqu(ecLon, ecLat, epsDate, &ra, &dec);
 			Vec3d eqPos;
 			StelUtils::spheToRect(ra, dec, eqPos);
 			Vec3d vertAltAz=core->equinoxEquToAltAz(eqPos, StelCore::RefractionOn);
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001f);
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);

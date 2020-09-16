@@ -57,8 +57,8 @@ struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
 class DECLSPEC HttpListener : public QTcpServer {
     Q_OBJECT
     Q_DISABLE_COPY(HttpListener)
-public:
 
+public:
     /**
       Constructor.
       Creates a connection pool and starts listening on the configured host and port.
@@ -84,12 +84,10 @@ public:
     void close();
 
 protected:
-
     /** Serves new incoming connection requests */
     void incomingConnection(tSocketDescriptor socketDescriptor);
 
 private:
-
     /** Configuration settings for the HTTP server */
     HttpListenerSettings settings;
 
@@ -100,14 +98,12 @@ private:
     HttpConnectionHandlerPool* pool;
 
 signals:
-
     /**
       Sent to the connection handler to process a new incoming connection.
       @param socketDescriptor references the accepted connection.
     */
 
     void handleConnection(tSocketDescriptor socketDescriptor);
-
 };
 
 #endif // HTTPLISTENER_H

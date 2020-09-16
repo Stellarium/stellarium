@@ -107,6 +107,7 @@ private:
 	QGraphicsTextItem* fieldOcularAfov;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
+	QGraphicsTextItem* fieldCcdBinning;
 	QGraphicsTextItem* fieldCcdHScale;
 	QGraphicsTextItem* fieldCcdVScale;
 	QGraphicsTextItem* fieldCcdRotation;

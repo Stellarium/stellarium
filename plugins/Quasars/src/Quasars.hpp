@@ -74,6 +74,10 @@ class Quasars : public StelObjectModule
 		   WRITE setFlagShowQuasars
 		   NOTIFY flagQuasarsVisibilityChanged
 		   )
+	Q_PROPERTY(Vec3f quasarsColor
+		   READ getMarkerColor
+		   WRITE setMarkerColor
+		   NOTIFY quasarsColorChanged)
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -98,22 +102,24 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for quasars.
 	//! @param limitFov the field of view around the position v in which to search for quasars.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the quasars located inside the limitFov circle around position v.
+	//! @return a list containing the quasars located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
-	//! @param nameI18n The case in-sensistive satellite name
+	//! Return the matching Quasar object's pointer if exists or Q_NULLPTR.
+	//! @param nameI18n The case in-sensitive localized quasar name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! Return the matching Quasar if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive english quasar name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Return the matching Quasar if exists or Q_NULLPTR.
+	//! @param id The quasar id
 	virtual StelObjectP searchByID(const QString &id) const
 	{
 		return qSharedPointerCast<StelObject>(getByID(id));
@@ -174,6 +180,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get the list of all quasars.
+	const QList<QuasarP>& getAllQuasars() const {return QSO;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -182,6 +191,7 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagQuasarsVisibilityChanged(bool b);
+	void quasarsColorChanged(Vec3f);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the
@@ -228,6 +238,8 @@ public slots:
 	//! @endcode
 	void setMarkerColor(const Vec3f& c);
 
+	//! Connect this to StelApp font size.
+	void setFontSize(int s){font.setPixelSize(s);}
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -311,6 +323,8 @@ private slots:
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
 	void reloadCatalog(void);
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveSettingsToConfig(); }
 };
 
 

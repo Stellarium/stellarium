@@ -329,9 +329,11 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
-							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a text file"), directories[0]);
+	QString filter = q_("Plain Text File");
+	filter.append(" (*.txt);;");
+	filter.append(q_("All Files"));
+	filter.append(" (*.*)");
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file"), QDir::homePath(), filter);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -540,11 +542,11 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived >>= 10;
+			bytesTotal    >>= 10;
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	downloadProgressBar->setValue(currentValue);
@@ -593,9 +595,7 @@ void MpcImportWindow::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
@@ -764,13 +764,9 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	request.setHeader(QNetworkRequest::ContentTypeHeader,
-	                  "application/x-www-form-urlencoded");//Is this really necessary?
-	request.setHeader(QNetworkRequest::ContentLengthHeader,
-	                  url.query(QUrl::FullyEncoded).length());
-	#if QT_VERSION >= 0x050600
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded"); //Is this really necessary?
+	request.setHeader(QNetworkRequest::ContentLengthHeader, url.query(QUrl::FullyEncoded).length());
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
@@ -865,8 +861,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegExp cometProvisionalDesignation("[PCDX]/");
-		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QRegExp cometProvisionalDesignation("[PCDXI]/");
+		QRegExp cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
 		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
@@ -1032,6 +1028,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", "https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
 	int start = 0;
@@ -1053,6 +1050,7 @@ void MpcImportWindow::loadBookmarks()
 	}
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
+	bookmarks[MpcComets].insert("Gideon van Buitenen: comets","http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
 
 	//Try to save them to a file
 	saveBookmarks();

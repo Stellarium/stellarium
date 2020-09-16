@@ -54,10 +54,13 @@ core.wait(...);
 
 - The public slots for each of the following classes are available in the
   scripting engine via an object with the same name as the corresponding class:
+   - AsterismMgr
    - ConstellationMgr
    - CustomObjectMgr
+   - HighlightMgr
    - GridLinesMgr
    - LabelMgr
+   - MarkerMgr
    - LandscapeMgr
    - SporadicMeteorMgr
    - NebulaMgr
@@ -68,9 +71,9 @@ core.wait(...);
    - StelAudioMgr
    - StelVideoMgr
    - StelMovementMgr
-   - StelSkyCultureMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
+   - SpecialMarkersMgr
    - MilkyWay
    - ZodiacalLight
    .

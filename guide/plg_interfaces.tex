@@ -150,58 +150,6 @@ text\_color                & R,G,B & Font color for the displayed solution of th
 font\_size                 & int   & Font size for the displayed solution of the equation of time \\\bottomrule
 \end{tabularx}
 
-
-
-\newpage
-
-\section{Field of View Plugin}
-\label{sec:plugins:FieldOfView}
-
-\begin{figure}[ht]\centering
-\includegraphics[trim=0 55 0 0,clip,width=.65\textwidth]{FOV-plugin.jpg}
-\caption{Configuration dialog of Field of View plugin}
-\label{fig:plugins:FieldOfView}
-\end{figure}
-
-\noindent By default Stellarium uses smooth zooming via mouse wheel or
-keyboard shortcuts. Some users may want stepwise zooming to fixed
-values for field of view like in the \program{Cartes du
-  Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
-  \url{http://www.ap-i.net/skychart/en/start}} planetarium program,
-and this plugin provides this feature. You can edit values and use the
-keyboard for quick-setting of FOV. All values in degrees.
-
-%\section{Using the Field of View plugin}
-%\label{sec:plugins:FieldOfView:using}
-
-\begin{enumerate}
-\item Enable the tool by configuring it to ``Load at startup''.
-\item Press shortkeys for quick changes of FOV.
-\end{enumerate}
-
-\subsection{Section \big[FOV\big] in config.ini file}
-%\label{sec:plugins:FieldOfView:configuration}
-
-You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}) or edit
-\file{config.ini} file by yourself for changes of the settings for the
-Field of View plugin -- just make it carefully!
-
-\begin{center}
-\begin{tabular}{l|l|r|l}\toprule
-\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\%\midrule
-fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\%\midrule
-fov\_quick\_2  & float & 90 & Value of FOV for the shortcut \key{\ctrl+\Alt+2} \\%\midrule
-fov\_quick\_3  & float & 60 & Value of FOV for the shortcut \key{\ctrl+\Alt+3} \\%\midrule
-fov\_quick\_4  & float & 45 & Value of FOV for the shortcut \key{\ctrl+\Alt+4} \\%\midrule
-fov\_quick\_5  & float & 20 & Value of FOV for the shortcut \key{\ctrl+\Alt+5} \\%\midrule
-fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \\%\midrule
-fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\%\midrule
-fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\%\midrule
-fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \\\bottomrule
-\end{tabular}
-\end{center}
-
 \newpage
 
 \section{Pointer Coordinates Plugin}
@@ -447,7 +395,8 @@ The plugin shows the locally detected address, but depending on your network or
 if you need external access you might need to use a different one 
 --- contact your network administrator if you need help with that.
 
-\noindent The access to the remote control may optionally be restricted with a simple 
+\subsubsection{Password}
+The access to the remote control may optionally be restricted with a simple 
 password.
 
 \textbf{Warning:} \emph{currently no network encryption is used, meaning that 
@@ -457,6 +406,16 @@ plugin should generally be restricted, except if countermeasures such as VPN
 usage are taken! If you are in a home network using NAT (network access 
 translation), this should be enough for basic security except if port 
 forwarding or a DMZ is configured.}
+
+\subsubsection{CORS}
+The Web API also supports Cross-Origin Resource Sharing (CORS). By enabling CORS,
+compatible websites and web apps can be used to control your Stellarium server.
+
+Enable CORS by checking the ``Enable CORS for the following origin'' option in the
+configuration dialog. Then, enter the URL of the website you'd like to use to control
+Stellarium -- e.g.\ \url{https://telescopius.com}. Specify ``*'' to let any website
+take control. Do this at your own risk.
+
 
 \subsection{Remote Control Web Interface}
 \label{sec:plugins:RemoteControl:webinterface}
@@ -527,16 +486,18 @@ Control API, customize the web interface or access the API through another
 program, further information can be found in the plugin's 
 developer documentation\footnote{\url{http://stellarium.org/doc/head/remoteControlDoc.html}}.
 
-This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
+\subsection{Acknowledgements}
 
+This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
+\emph{ESA Summer of Code in Space}\footnote{\url{http://sophia.estec.esa.int/socis/}} programme. 
+
+If you are using this plugin in your scientific publications, please cite \citet{Zotti-etal:SEAC2016}.
 
 \newpage
 \section{Remote Sync Plugin}
 \label{sec:plugin:RemoteSync}
 
-\newFeature{0.16.0}%
-The Remote Sync plugin enables setups which connect several instances of
+The Remote Sync plugin\newFeature{v0.16.0} enables setups which connect several instances of
 Stellarium running on a network. This may be useful in installations where one
 presenter wants to allow a larger audience to follow the actions on several
 dim screens (e.g., when you need to avoid a projector's bright light in a 
@@ -647,13 +608,13 @@ but the general structure of property names like
 \subsection*{Author and Acknowledgements}
 
 This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns of the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
+\emph{ESA Summer of Code in Space}\footnote{\url{http://sophia.estec.esa.int/socis/}} programme. 
 
 % \newpage
 % \section{D-Bus Interface}
 % \label{sec:plugin:DBus}
 % 
-% [This may come as user documentation from SoCiS2018/19 (?) work]
+% [This may come as user documentation from SoCiS2020 (?) work]
 
 
 \newpage

@@ -250,6 +250,13 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
+             <widget class="QToolButton" name="textColorButton">
+              <property name="toolTip">
+               <string>Color of text</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="labelFontSize">
               <property name="text">
                <string>Font size:</string>
@@ -274,16 +281,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="pushButtonSave">
+             <widget class="QPushButton" name="pushButtonReset">
               <property name="text">
-               <string>Save settings</string>
+               <string>Restore defaults</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonReset">
+             <widget class="QPushButton" name="pushButtonSave">
               <property name="text">
-               <string>Restore defaults</string>
+               <string>Save settings</string>
               </property>
              </widget>
             </item>

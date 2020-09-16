@@ -46,6 +46,7 @@ public:
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
+		None			= 0x00000000, //!< Show Nothing
 		Name			= 0x00000001, //!< An object's name
 		CatalogNumber		= 0x00000002, //!< Catalog numbers
 		Magnitude		= 0x00000004, //!< Magnitude related data
@@ -53,36 +54,36 @@ public:
 		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
 		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
 		Distance		= 0x00000040, //!< Info about an object's distance
-		Size			= 0x00000080, //!< Info about an object's size
-		Velocity                = 0x00000100, //!< Info about object's velocity
-		Extra			= 0x00000200, //!< Derived class-specific extra fields
-		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
-		GalacticCoord		= 0x00001000, //!< The galactic position
-		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
-		ObjectType		= 0x00004000, //!< The type of the object (star, planet, etc.)
-		EclipticCoordJ2000	= 0x00008000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
-		EclipticCoordOfDate	= 0x00010000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00020000, //!< Three-letter constellation code (And, Boo, Cas, ...)
-		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
-		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
-		NoFont			= 0x00100000,
-		PlainText		= 0x00200000, //!< Strip HTML tags from output
-// TODO GZ
-//		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
-//		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
-
-
+		Elongation		= 0x00000080, //!< Info about elongation, phase angle etc. Most useful for Planets, but possible for all objects.
+		Size			= 0x00000100, //!< Info about an object's size
+		Velocity		= 0x00000200, //!< Info about object's velocity
+		ProperMotion		= 0x00000400, //!< Annual proper motion (for stars) or hourly motion (for Planets)
+		Extra			= 0x00000800, //!< Derived class-specific extra fields
+		HourAngle		= 0x00001000, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00002000, //!< The absolute magnitude
+		GalacticCoord		= 0x00004000, //!< The galactic position
+		SupergalacticCoord	= 0x00008000, //!< The supergalactic position
+		OtherCoord		= 0x00010000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
+		ObjectType		= 0x00020000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000	= 0x00040000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate	= 0x00080000, //!< The ecliptic position (of date)
+		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
+		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
+		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x01000000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		NoFont			= 0x02000000,
+		PlainText		= 0x04000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
-									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
-									   GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
+	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
+									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() {}
 
@@ -116,6 +117,12 @@ public:
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
+	//! - hourAngle-dd : hour angle in decimal degrees
+	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - iauConstellation : 3-letter abbreviation of IAU constellation (string)
+	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
@@ -207,6 +214,9 @@ public:
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
+	//! Get parallactic angle, which is the deviation between zenith angle and north angle. [radians]
+	float getParallacticAngle(const StelCore* core) const;
+
 	//! Checking position an object above mathematical horizon for current location.
 	//! @return true if object an above mathematical horizon
 	bool isAboveHorizon(const StelCore* core) const;
@@ -232,7 +242,7 @@ public:
 	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
-	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
+	virtual Vec3f getInfoColor() const {return Vec3f(1.f,1.f,1.f);}
 
 	//! Return the best FOV in degree to use for a close view of the object
 	virtual double getCloseViewFov(const StelCore*) const {return 10.;}
@@ -246,9 +256,34 @@ public:
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
-protected:
+public slots:
+	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! Hard-set this string group to a single str, or delete all messages when str==""
+	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
+	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
+	//! Add str to the extra string. This should be preferrable over hard setting.
+	//! Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
+	//! Additional coordinates not fitting into one of the predefined coordinate sets should be flagged with OtherCoords,
+	//! and must be adapted to table or non-table layout as required.
+	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
+	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
+	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
+	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
+	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
+	//! Remove the extraInfoStrings with the given flags.
+	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
+	//! After display, InfoPanel::setTextFromObjects() auto-clears the strings of the selected object using the AllInfo constant.
+	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
+	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
+	//! The behaviour of DebugAid texts depends on the use case.
+	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
+protected:
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	//! FIXME: We should split this and provide shorter virtual methods for various parts of the InfoString.
+	//! The ExtraInfoStrings should be placed per flag, where they best fit.
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Format the magnitude info string for the object
@@ -258,13 +293,21 @@ protected:
 	//! @param decimals significant digits after the comma.
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
 
-	//! Apply post processing on the info string
+	//! Apply post processing on the info string.
+	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 private:
 	//! Compute time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
 	Vec3f computeRTSTime(StelCore* core) const;
+
+	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
+	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
+	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.
+	//! This string map gets cleared by InfoPanel::setTextFromObjects(), with the exception of strings with Script or DebugAid flags,
+	//! which have been injected by scripts or for debugging (take care of those yourself!).
+	QMultiMap<InfoStringGroup, QString> extraInfoStrings;
 
 	static int stelObjectPMetaTypeID;
 };

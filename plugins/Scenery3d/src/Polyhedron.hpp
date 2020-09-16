@@ -70,9 +70,9 @@ private:
 	//! Adds the vertex if it's unique
 	void addUniqueVert(const Vec3f &v);
 	//! Intersect for extrude()
-	void intersect(const Line &l, const Vec3f &min, const Vec3f &max, QVector<Vec3f> &vertices);
+	static void intersect(const Line &l, const Vec3f &min, const Vec3f &max, QVector<Vec3f> &vertices);
 	//! Clip for extrude()
-	bool clip(float p, float q, float &u1, float &u2) const;
+	static bool clip(float p, float q, float &u1, float &u2);
 };
 
 #endif

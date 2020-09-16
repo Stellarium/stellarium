@@ -70,10 +70,10 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.id = "Pulsars";
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("This plugin plots the position of various pulsars, with object information about each one.");
 	info.version = PULSARS_PLUGIN_VERSION;
-	info.version = PULSARS_PLUGIN_LICENSE;
+	info.license = PULSARS_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -100,7 +100,8 @@ Pulsars::Pulsars()
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -157,7 +158,7 @@ void Pulsars::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
+		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
 		if (jsonCatalogPath.isEmpty())
 			return;
 
@@ -166,9 +167,9 @@ void Pulsars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
+		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 
-		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
 		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
 
@@ -209,6 +210,7 @@ void Pulsars::init()
 	updateTimer->start();
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -233,7 +235,6 @@ void Pulsars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
@@ -268,7 +269,7 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& pulsar : psr)
@@ -277,7 +278,7 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 		{
 			equPos = pulsar->XYZ;
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(pulsar));
 			}
@@ -506,7 +507,6 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 		PulsarP pulsar(new Pulsar(psrData));
 		if (pulsar->initialized)
 			psr.append(pulsar);
-
 	}
 }
 
@@ -621,8 +621,8 @@ void Pulsars::readSettingsFromConfig(void)
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
 	setFilteredMode(conf->value("filter_enabled", false).toBool());
 	setFilterValue(conf->value("filter_value", 150.f).toFloat());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()), true);
-	setMarkerColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()), false);
+	setMarkerColor(Vec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
+	setGlitchColor(Vec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
@@ -642,8 +642,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("filter_value", QString::number(getFilterValue(), 'f', 2));
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
-	conf->setValue("glitch_color", StelUtils::vec3fToStr(getMarkerColor(false)));
+	conf->setValue("marker_color", getMarkerColor().toStr());
+	conf->setValue("glitch_color", getGlitchColor().toStr());
 
 	conf->endGroup();
 }
@@ -651,7 +651,7 @@ void Pulsars::saveSettingsToConfig(void)
 int Pulsars::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Pulsars::checkForUpdate(void)
@@ -667,9 +667,6 @@ void Pulsars::updateJSON(void)
 		qWarning() << "[Pulsars] Already updating...  will not start again current update is complete.";
 		return;
 	}
-
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 
 	qDebug() << "[Pulsars] Updating pulsars catalog...";
 	startDownload(updateUrl);
@@ -704,9 +701,7 @@ void Pulsars::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -727,11 +722,11 @@ void Pulsars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
@@ -744,23 +739,6 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[Pulsars] The query has been redirected to" << redirectUrl.toString();
-		updateUrl = redirectUrl.toString();
-		conf->setValue("Pulsars/url", updateUrl);
-		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -790,6 +768,9 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Pulsars::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -843,7 +824,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 	flagShowPulsarsButton = b;
 }
 
-bool Pulsars::getDisplayMode()
+bool Pulsars::getDisplayMode() const
 {
 	return Pulsar::distributionMode;
 }
@@ -853,7 +834,7 @@ void Pulsars::setDisplayMode(bool b)
 	Pulsar::distributionMode=b;
 }
 
-bool Pulsars::getGlitchFlag()
+bool Pulsars::getGlitchFlag() const
 {
 	return Pulsar::glitchFlag;
 }
@@ -863,7 +844,7 @@ void Pulsars::setGlitchFlag(bool b)
 	Pulsar::glitchFlag=b;
 }
 
-bool Pulsars::getFilteredMode()
+bool Pulsars::getFilteredMode() const
 {
 	return Pulsar::filteredMode;
 }
@@ -873,7 +854,7 @@ void Pulsars::setFilteredMode(bool b)
 	Pulsar::filteredMode=b;
 }
 
-float Pulsars::getFilterValue()
+float Pulsars::getFilterValue() const
 {
 	return Pulsar::filterValue;
 }
@@ -883,21 +864,26 @@ void Pulsars::setFilterValue(float v)
 	Pulsar::filterValue=v;
 }
 
-Vec3f Pulsars::getMarkerColor(bool mtype)
+Vec3f Pulsars::getMarkerColor() const
 {
-	Vec3f c = Pulsar::glitchColor;
-	if (mtype)
-		c = Pulsar::markerColor;
-
-	return c;
+	return Pulsar::markerColor;
 }
 
-void Pulsars::setMarkerColor(const Vec3f &c, bool mtype)
+void Pulsars::setMarkerColor(const Vec3f &c)
 {
-	if (mtype)
-		Pulsar::markerColor = c;
-	else
-		Pulsar::glitchColor = c;
+	Pulsar::markerColor = c;
+	emit markerColorChanged(c);
+}
+
+Vec3f Pulsars::getGlitchColor() const
+{
+	return Pulsar::glitchColor;
+}
+
+void Pulsars::setGlitchColor(const Vec3f &c)
+{
+	Pulsar::glitchColor = c;
+	emit glitchColorChanged(c);
 }
 
 void Pulsars::reloadCatalog(void)
@@ -928,5 +914,6 @@ void Pulsars::setFlagShowPulsars(bool b)
 	{
 		flagShowPulsars=b;
 		emit flagPulsarsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }

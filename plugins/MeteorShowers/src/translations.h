@@ -154,6 +154,8 @@ class MSTranslations
 		// TRANSLATORS: Name of meteor shower
 		N_("Sextantids");
 		// TRANSLATORS: Name of meteor shower
+		N_("Daytime Sextantids");
+		// TRANSLATORS: Name of meteor shower
 		N_("November Orionids");
 		// TRANSLATORS: Name of meteor shower
 		N_("August Caelids");

@@ -24,13 +24,13 @@
 #include <QSettings>
 #include <QDateTime>
 #include <QDebug>
-#include <iostream>
 
 #include <QGuiApplication>
 #include <QStandardPaths>
 #include <QDir>
 
-#include <stdio.h>
+#include <cstdio>
+#include <iostream>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -59,25 +59,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
 			  << "                          May help for certain driver configurations. Mac?\n"
 			  << "--fix-text (or -t)      : May fix text rendering problems\n"
-			#ifdef Q_OS_WIN
-			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
-			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
-			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
-			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
-			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
-			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
-			#endif
+			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"
 			  << "                          and want to send a bug report\n"
 			  << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			  << "                          the full screen setting in the config file\n"
-			#ifdef Q_OS_WIN
-			#ifdef ENABLE_SPOUT
-			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
-			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
-			#endif
-			#endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
 			  << "--startup-script        : Specify name of startup script\n"
 			  << "--home-planet           : Specify observer planet (English name)\n"
@@ -93,31 +80,39 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--projection-type       : Specify projection type, e.g. stereographic\n"
 		          << "--restore-defaults      : Delete existing config.ini and use defaults\n"
 		          << "--multires-image        : With filename / URL argument, specify a\n"
-		          << "                          multi-resolution image to load\n";
+			  << "                          multi-resolution image to load\n"
+#ifdef Q_OS_WIN
+			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
+			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
+			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
+			  #ifdef ENABLE_SPOUT
+			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
+			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
+			  #endif
+#endif
+			  << " \n";
 		exit(0);
 	}
 
 	if (argsGetOption(argList, "", "--verbose"))
-	{
 		qApp->setProperty("verbose", true);
-	}
+
 	if (argsGetOption(argList, "-C", "--compat33"))
-	{
 		qApp->setProperty("onetime_compat33", true);
-	}
+
 	if (argsGetOption(argList, "-t", "--fix-text"))
-	{
 		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
-	}
+
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
-	{
 		qApp->setProperty("onetime_mesa_mode", true);
-	}
+
 	if (argsGetOption(argList, "-a", "--angle-mode"))
-	{
 		qApp->setProperty("onetime_angle_mode", true);
-	}
+
 	if (argsGetOption(argList, "-9", "--angle-d3d9"))
 	{
 		qputenv("QT_ANGLE_PLATFORM", "d3d9");
@@ -134,9 +129,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
-	{
 		qApp->setProperty("onetime_mesa_mode", true);
-	}
+
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
@@ -266,7 +260,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		qApp->setProperty("onetime_startup_script", startupScript);
 	}
 
-	if (fov>0.0) confSettings->setValue("navigation/init_fov", fov);
+	if (fov>0.0f) confSettings->setValue("navigation/init_fov", fov);
 	if (!projectionType.isEmpty()) confSettings->setValue("projection/type", projectionType);
 	if (!screenshotDir.isEmpty())
 	{
@@ -310,7 +304,6 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	if (!spoutName.isEmpty())
 		qApp->setProperty("spoutName", spoutName);
 #endif
-
 }
 
 

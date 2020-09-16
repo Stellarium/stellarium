@@ -1,6 +1,6 @@
 ########### install files ###############
 
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/scripts
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/scripts
         FILES_MATCHING PATTERN "*.ssc"
         PATTERN "*.inc"
         PATTERN "CMakeFiles" EXCLUDE

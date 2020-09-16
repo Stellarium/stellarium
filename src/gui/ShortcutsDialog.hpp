@@ -83,6 +83,7 @@ public slots:
 	//! if no item is specified, search for it in tree, if no items found, create new item
 	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = Q_NULLPTR);
 	void restoreDefaultShortcuts();
+	void restoreAllDefaultShortcuts();
 	void updateTreeData();
 
 protected:
@@ -92,10 +93,6 @@ protected:
 private:
 	//! checks whether given item can be changed by editors.
 	static bool itemIsEditable(QStandardItem *item);
-	//! Concatenate the header, key codes and footer to build
-	//! up the help text.
-	//! @todo FIXME: This does nothing? 
-	void updateText();
 
 	//! Apply style changes.
 	//! See http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
@@ -104,7 +101,7 @@ private:
 	QStandardItem* updateGroup(const QString& group);
 
 	//! search for first appearence of item with requested data.
-	QStandardItem* findItemByData(QVariant value, int role, int column = 0);
+	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
 	//! pointer to mgr, for not getting it from stelapp every time.
 	class StelActionMgr* actionMgr;

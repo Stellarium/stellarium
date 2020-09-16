@@ -23,11 +23,9 @@
 #include "StelDialog.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
-
 #include <QString>
 
 class Ui_angleMeasureDialog;
-class AngleMeasure;
 
 //! Main window of the Angle Measure plug-in.
 //! @ingroup angleMeasure
@@ -47,13 +45,8 @@ protected:
 
 private:
 	Ui_angleMeasureDialog* ui;
-	AngleMeasure* am;
 
 	void setAboutHtml();
-
-private slots:	
-	void resetAngleMeasureSettings();
 };
-
 
 #endif /* ANGLEMEASUREDIALOG_HPP */

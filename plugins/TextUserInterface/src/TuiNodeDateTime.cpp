@@ -144,6 +144,7 @@ QString TuiNodeDateTime::getDisplayText() const
 				break;
 			case 5:
 				formatString = ":  %1-%2-%3 %4:%5:>%6< UTC"; //Second
+				break;
 			default:
 				break;
 		}

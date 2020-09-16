@@ -1,0 +1,40 @@
+//
+// Name: Planet Objects Tour
+// License: Public Domain
+// Author: C. Gaudion, Alchymylab
+// Version: 1.0
+// Description: A tour of the Solar System planets
+
+// load data array in inc file
+
+include("common_objects.inc");
+
+
+LandscapeMgr.setFlagCardinalsPoints(false);
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.wait(2);
+
+defaultWait = 10;
+
+LabelMgr.labelScreen("The Solar System - A Tour of the Planets",200,200,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.deleteAllLabels();
+
+for (i=0; i<planets.length; i++)
+{
+	objName = planets[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(defaultWait);
+	
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(defaultWait);
+
+}
+
+LabelMgr.labelScreen("The Solar System - A Tour of the Planets",200,200,true,30,"#ff0000");
+core.wait(defaultWait);
+LabelMgr.deleteAllLabels();

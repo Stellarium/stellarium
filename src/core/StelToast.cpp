@@ -159,7 +159,6 @@ void ToastTile::prepareDraw(Vec3f color)
 			Vec3f thisColor=Vec3f(color[0]*extinctionFactor, color[1]*extinctionFactor, color[2]*extinctionFactor);
 			colorArray.append(thisColor);
 		}
-
 	}
 	else
 	{
@@ -282,9 +281,9 @@ void ToastSurvey::draw(StelPainter* sPainter)
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 360 / 2**L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
-	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+	const double anglePerPixel = 1./static_cast<double>(sPainter->getProjector()->getPixelPerRadAtCenter())*M_180_PI;
 	const double maxAngle = anglePerPixel * getTilesSize();
-	int maxVisibleLevel = (int)(log2(360. / maxAngle));
+	int maxVisibleLevel = static_cast<int>(log2(360. / maxAngle));
 
 	// Lazily creation of the grid and root tile.
 	if (!grid) grid = new ToastGrid(maxLevel);

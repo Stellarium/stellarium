@@ -34,6 +34,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <math.h>
 #include <assert.h>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
+
 /* Interval threshold (days) for re-computing these values. with 1, compute only 1/day:  */
 #define PRECESSION_EPOCH_THRESHOLD 1.0
 /* Interval threshold (days) for re-computing nutation values. with 1/24, compute only every hour  */
@@ -113,11 +117,12 @@ static const double p_epsVals[10][5]=
 
 // compute angles for the series we are in fact using.
 // jde: date JD_TT
-// 
+//
 void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
 {
 	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
+		c_lastJDE=jde;
 		double T=(jde-2451545.0)* (1.0/36525.0); // Julian centuries from J2000.0
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
@@ -180,6 +185,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 {
 	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
+		c_lastJDE=jde;
 		double T=(jde-2451545.0)* (1.0/36525.0);
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
@@ -384,7 +390,7 @@ static double c_jdeLastNut=-1e-100;
 //! @note The model promises mas accuracy in the present era but gives no comment on long-time effects. Given that nutation was discovered in the early 18th century,
 //! it seems wise to set the returned values to zero before 1500 and after 2500. To avoid a jump, a linear fade-in/fade-out is applied within 100 days before 1500 and after 2500.
 void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
-{	
+{
 // 1.1.1500
 #define NUT_BEGIN 2268932.5
 // 1.1.2500
@@ -412,7 +418,7 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 		// F5 : Omega = mean longitude of the ascending node of the lunar orbit
 		double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
 
-		double deltaEps=0.0, deltaPsi=0.0;
+		double deltaEps=0.0, deltaPsi=0.0; // lgtm [cpp/declaration-hides-parameter]
 		int i;
 		for (i=0; i<78; ++i)
 		{

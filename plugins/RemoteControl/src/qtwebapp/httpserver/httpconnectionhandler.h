@@ -75,7 +75,6 @@ class DECLSPEC HttpConnectionHandler : public QThread {
     Q_DISABLE_COPY(HttpConnectionHandler)
 
 public:
-
     /**
       Constructor.
       @param settings Configuration settings of the HTTP webserver
@@ -94,7 +93,6 @@ public:
     void setBusy();
 
 private:
-
     /** Configuration settings */
     HttpConnectionHandlerSettings settings;
 
@@ -123,7 +121,6 @@ private:
     void createSocket();
 
 public slots:
-
     /**
       Received from from the listener, when the handler shall start processing a new connection.
       @param socketDescriptor references the accepted connection.
@@ -131,7 +128,6 @@ public slots:
     void handleConnection(tSocketDescriptor socketDescriptor);
 
 private slots:
-
     /** Received from the socket when a read-timeout occured */
     void readTimeout();
 
@@ -140,7 +136,6 @@ private slots:
 
     /** Received from the socket when a connection has been closed */
     void disconnected();
-
 };
 
 #endif // HTTPCONNECTIONHANDLER_H
