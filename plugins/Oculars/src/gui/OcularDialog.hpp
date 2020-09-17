@@ -92,6 +92,7 @@ private slots:
 	void setLabelsDescriptionText(bool state);
 	void updateTelradCustomFOV();	
 	void setupTelradFOVspins(Vec4f fov);
+	void updateGuiOptions();
 
 private:
 	Oculars* plugin;

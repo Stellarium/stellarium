@@ -103,7 +103,7 @@ Oculars::Oculars()
 	, selectedTelescopeIndex(-1)
 	, selectedLensIndex(-1)
 	, selectedCCDRotationAngle(0.0)
-	, arrowButtonScale(1.5)
+	, arrowButtonScale(150)
 	, flagShowCCD(false)
 	, flagShowOculars(false)
 	, flagShowCrosshairs(false)
@@ -133,6 +133,7 @@ Oculars::Oculars()
 	, flagGuiPanelEnabled(false)
 	, flagDMSDegrees(false)
 	, flagSemiTransparency(false)
+	, transparencyMask(85)
 	, flagHideGridsLines(false)
 	, flagGridLinesDisplayedMain(true)
 	, flagConstellationLinesMain(true)
@@ -590,12 +591,17 @@ void Oculars::init()
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+		setTransparencyMask(settings->value("transparency_mask", 85).toInt());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
-		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
+		// TODO: Remove this conversion tool in version 0.21 or 0.22
+		if (settings->value("arrow_scale").toDouble()<100.) // convert old value and type
+			setArrowButtonScale(static_cast<int>(settings->value("arrow_scale", 1.5).toDouble()*100.));
+		else
+			setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
@@ -1812,7 +1818,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	float alpha = 1.f;
 	if (getFlagUseSemiTransparency())
-		alpha = 0.85f;
+		alpha = getTransparencyMask()*0.01f;
 
 	painter.setColor(0.f,0.f,0.f,alpha);
 
@@ -2573,6 +2579,19 @@ bool Oculars::getFlagUseSemiTransparency() const
 	return flagSemiTransparency;
 }
 
+void Oculars::setTransparencyMask(const int v)
+{
+	transparencyMask = v;
+	settings->setValue("transparency_mask", v);
+	settings->sync();
+	emit transparencyMaskChanged(v);
+}
+
+int Oculars::getTransparencyMask() const
+{
+	return transparencyMask;
+}
+
 void Oculars::setFlagShowResolutionCriteria(const bool b)
 {
 	flagShowResolutionCriteria = b;
@@ -2718,7 +2737,7 @@ bool Oculars::getFlagAlignCrosshair(void) const
 	return flagAlignCrosshair;
 }
 
-void Oculars::setArrowButtonScale(const double val)
+void Oculars::setArrowButtonScale(const int val)
 {
 	arrowButtonScale = val;
 	settings->setValue("arrow_scale", val);
@@ -2726,7 +2745,7 @@ void Oculars::setArrowButtonScale(const double val)
 	emit arrowButtonScaleChanged(val);
 }
 
-double Oculars::getArrowButtonScale() const
+int Oculars::getArrowButtonScale() const
 {
 	return arrowButtonScale;
 }

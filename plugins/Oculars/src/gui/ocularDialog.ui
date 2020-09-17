@@ -218,27 +218,31 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
-                 <property name="maximumSize">
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
                   <size>
-                   <width>80</width>
-                   <height>16777215</height>
+                   <width>40</width>
+                   <height>20</height>
                   </size>
                  </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="arrowButtonScaleSpinBox">
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">%</string>
+                 </property>
                  <property name="minimum">
-                  <double>1.000000000000000</double>
+                  <number>100</number>
                  </property>
                  <property name="maximum">
-                  <double>2.500000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.050000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.500000000000000</double>
+                  <number>250</number>
                  </property>
                 </widget>
                </item>
@@ -285,8 +289,11 @@
                </item>
                <item>
                 <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="toolTip">
+                  <string>Font size of text on on-screen control panel</string>
+                 </property>
                  <property name="text">
-                  <string>Font size</string>
+                  <string>...font size</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -300,6 +307,9 @@
                    <width>50</width>
                    <height>16777215</height>
                   </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Font size of text on on-screen control panel</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -419,16 +429,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="contourCheckBox">
-               <property name="toolTip">
-                <string>Show border circle</string>
-               </property>
-               <property name="text">
-                <string>Show FOV outline</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
               <widget class="QCheckBox" name="scaleImageCircleCheckBox">
                <property name="text">
@@ -436,7 +436,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="hideGridsLinesCheckBox">
                <property name="text">
                 <string>Hide grids and lines when enabled</string>
@@ -450,36 +450,13 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="semiTransparencyCheckBox">
-               <property name="toolTip">
-                <string>In ocular mode, allow some visibility outside ocular circle.</string>
-               </property>
-               <property name="text">
-                <string>Use semi-transparent mask</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>0</width>
-                 <height>5</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
              <item row="8" column="0">
-              <widget class="QCheckBox" name="cardinalsCheckBox">
+              <widget class="QCheckBox" name="contourCheckBox">
                <property name="toolTip">
-                <string>Show cardinal directions in equatorial coordinate system</string>
+                <string>Show border circle</string>
                </property>
                <property name="text">
-                <string>Show compass rose</string>
+                <string>Show FOV outline</string>
                </property>
               </widget>
              </item>
@@ -493,7 +470,30 @@
                </property>
               </widget>
              </item>
+             <item row="11" column="0">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>5</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item row="9" column="0">
+              <widget class="QCheckBox" name="cardinalsCheckBox">
+               <property name="toolTip">
+                <string>Show cardinal directions in equatorial coordinate system</string>
+               </property>
+               <property name="text">
+                <string>Show compass rose</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
               <widget class="QCheckBox" name="alignCrosshairCheckBox">
                <property name="toolTip">
                 <string>Align the crosshair in equatorial coordinate system</string>
@@ -502,6 +502,55 @@
                 <string>Align crosshair</string>
                </property>
               </widget>
+             </item>
+             <item row="4" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QCheckBox" name="semiTransparencyCheckBox">
+                 <property name="toolTip">
+                  <string>In ocular mode, allow some visibility outside ocular circle.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use semi-transparent mask</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="transparencySpinBox">
+                 <property name="toolTip">
+                  <string>Value of transparency of semi-transparent mask</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">%</string>
+                 </property>
+                 <property name="minimum">
+                  <number>10</number>
+                 </property>
+                 <property name="maximum">
+                  <number>90</number>
+                 </property>
+                 <property name="value">
+                  <number>85</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -575,7 +624,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="label">
+                <widget class="QLabel" name="labelFocuserOverlay">
                  <property name="text">
                   <string>Use size of focuser:</string>
                  </property>
@@ -784,7 +833,7 @@
                   <string comment="abbreviation">FOV:</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -2034,7 +2083,7 @@
   <tabstop>checkBoxInitialDirection</tabstop>
   <tabstop>checkBoxResolutionCriterion</tabstop>
   <tabstop>checkBoxToolbarButton</tabstop>
-  <tabstop>arrowButtonScaleDoubleSpinBox</tabstop>
+  <tabstop>arrowButtonScaleSpinBox</tabstop>
   <tabstop>lineColorToolButton</tabstop>
   <tabstop>textColorToolButton</tabstop>
   <tabstop>checkBoxCCDFOVScaling</tabstop>
@@ -2049,7 +2098,6 @@
   <tabstop>requireSelectionCheckBox</tabstop>
   <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>limitStellarMagnitudeCheckBox</tabstop>
-  <tabstop>semiTransparencyCheckBox</tabstop>
   <tabstop>hideGridsLinesCheckBox</tabstop>
   <tabstop>contourCheckBox</tabstop>
   <tabstop>cardinalsCheckBox</tabstop>

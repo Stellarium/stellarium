@@ -97,6 +97,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagHideGridsLines     READ getFlagHideGridsLines      WRITE setFlagHideGridsLines      NOTIFY flagHideGridsLinesChanged)
 	Q_PROPERTY(bool flagScaleImageCircle   READ getFlagScaleImageCircle    WRITE setFlagScaleImageCircle    NOTIFY flagScaleImageCircleChanged)// flag scale image circle scaleImageCirclCheckBox
 	Q_PROPERTY(bool flagSemiTransparency   READ getFlagUseSemiTransparency WRITE setFlagUseSemiTransparency NOTIFY flagUseSemiTransparencyChanged) 
+	Q_PROPERTY(int transparencyMask        READ getTransparencyMask        WRITE setTransparencyMask        NOTIFY transparencyMaskChanged)
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
@@ -107,7 +108,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagShowCardinals		READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
 	Q_PROPERTY(bool flagAlignCrosshair		READ getFlagAlignCrosshair   WRITE setFlagAlignCrosshair   NOTIFY flagAlignCrosshairChanged)
 
-	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
+	Q_PROPERTY(int arrowButtonScale        READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
 	Q_PROPERTY(Vec3f textColor             READ getTextColor               WRITE setTextColor               NOTIFY textColorChanged)
 	Q_PROPERTY(Vec3f lineColor             READ getLineColor               WRITE setLineColor               NOTIFY textColorChanged)
@@ -246,6 +247,9 @@ public slots:
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
+	void setTransparencyMask(const int v);
+	int getTransparencyMask(void) const;
+
 	void setFlagShowResolutionCriteria(const bool b);
 	bool getFlagShowResolutionCriteria(void) const;
 
@@ -255,8 +259,8 @@ public slots:
 	void setCcdCropOverlayVSize(int size);
 	int getCcdCropOverlayVSize()const {return ccdCropOverlayVSize;}
 
-	void setArrowButtonScale(const double val);
-	double getArrowButtonScale() const;
+	void setArrowButtonScale(const int val);
+	int getArrowButtonScale() const;
 
 	void setFlagHideGridsLines(const bool b);
 	bool getFlagHideGridsLines(void) const;
@@ -322,8 +326,9 @@ signals:
 	void telradFOVChanged(Vec4f fov);
 	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
+	void transparencyMaskChanged(int value);
 	void flagShowResolutionCriteriaChanged(bool value);
-	void arrowButtonScaleChanged(double value);
+	void arrowButtonScaleChanged(int value);
 	void flagInitDirectionUsageChanged(bool value);
 	void flagInitFOVUsageChanged(bool value);
 	void flagRequireSelectionChanged(bool value);
@@ -418,7 +423,7 @@ private:
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
-	double arrowButtonScale;        //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
+	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
 	bool flagShowCCD;		//!< flag used to track if we are in CCD mode.
@@ -455,6 +460,7 @@ private:
 	bool flagGuiPanelEnabled;        //!< Display the GUI control panel
 	bool flagDMSDegrees;             //!< Use decimal degrees in CCD frame display
 	bool flagSemiTransparency;       //!< Draw the area outside the ocular circle not black but let some stars through.
+	int transparencyMask;		 //!< Value of transparency for semi-transparent mask
 	bool flagHideGridsLines;         //!< Switch off all grids and lines of GridMgr while in Ocular view
 	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flagConstellationLinesMain; //!< keep track of constellation display while possibly suppressing their display.

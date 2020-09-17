@@ -301,13 +301,14 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->hideGridsLinesCheckBox,		"Oculars.flagHideGridsLines");
 	connectBoolProperty(ui->scaleImageCircleCheckBox,	"Oculars.flagScaleImageCircle");
 	connectBoolProperty(ui->semiTransparencyCheckBox,	"Oculars.flagSemiTransparency");
+	connectIntProperty(ui->transparencySpinBox,	        "Oculars.transparencyMask");
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
 	//connectBoolProperty(ui->checkBoxTelradFOVCustom,	"Oculars.flagCustomFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
-	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox,	"Oculars.arrowButtonScale");
+	connectIntProperty(ui->arrowButtonScaleSpinBox,	        "Oculars.arrowButtonScale");
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,	"Oculars.flagShowCcdCropOverlay");
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlayPixelGrid,	"Oculars.flagShowCcdCropOverlayPixelGrid");
 	connectIntProperty(ui->guiCcdCropOverlayHSizeSpinBox,	"Oculars.ccdCropOverlayHSize");
@@ -463,6 +464,11 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
 
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
+	connect(ui->checkBoxControlPanel, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	updateGuiOptions();
 }
 
 void OcularDialog::setupTelradFOVspins(Vec4f fov)
@@ -612,3 +618,25 @@ void OcularDialog::initAboutText()
 
 	ui->textBrowser->setHtml(html);
 }
+
+void OcularDialog::updateGuiOptions()
+{
+	bool flag = ui->checkBoxControlPanel->isChecked();
+	ui->guiFontSizeLabel->setEnabled(flag);
+	ui->guiFontSizeSpinBox->setEnabled(flag);
+
+	ui->transparencySpinBox->setEnabled(ui->semiTransparencyCheckBox->isChecked());
+
+	flag = ui->checkBoxShowFocuserOverlay->isChecked();
+	ui->labelFocuserOverlay->setEnabled(flag);
+	ui->checkBoxUseSmallFocuser->setEnabled(flag);
+	ui->checkBoxUseMediumFocuser->setEnabled(flag);
+	ui->checkBoxUseLargeFocuser->setEnabled(flag);
+
+	flag = ui->checkBoxShowCcdCropOverlay->isChecked();
+	ui->guiCcdCropOverlaySizeLabel->setEnabled(flag);
+	ui->guiCcdCropOverlayHSizeSpinBox->setEnabled(flag);
+	ui->guiCcdCropOverlayVSizeSpinBox->setEnabled(flag);
+	ui->checkBoxShowCcdCropOverlayPixelGrid->setEnabled(flag);
+}
+
