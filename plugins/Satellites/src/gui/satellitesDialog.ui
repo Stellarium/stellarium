@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>655</width>
+    <width>663</width>
     <height>527</height>
    </rect>
   </property>
@@ -208,7 +208,7 @@
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="suffix">
-                 <string comment="time unit" extracomment="TRANSLATORS: = &quot;hours&quot;"> h</string>
+                 <string comment="time unit"> h</string>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -548,7 +548,7 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <property name="suffix">
-             <string comment="time unit" extracomment="TRANSLATORS: = &quot;seconds&quot;"> s</string>
+             <string comment="time unit"> s</string>
             </property>
             <property name="minimum">
              <number>1</number>
