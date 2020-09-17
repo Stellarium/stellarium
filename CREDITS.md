@@ -346,7 +346,7 @@
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 	     the terms of the Creative Commons Attribution Share-Alike
 	     license.
-	4.15 Images of NGC6543, NGC7317, NGC7319, NGC7320
+	4.15 Images of NGC7317, NGC7319, NGC7320
 	     from Andrey Kuznetsov, Kepler Observatory
 	     http://kepler-observatorium.ru
 	     License: Creative Commons Attribution 3.0 Unported
@@ -443,14 +443,14 @@
 	4.41 Images of M61, M64, M65, M66, M91, M99, M100, NGC613, NGC772, NGC918, NGC1042, NGC1360, NGC1398,
 	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2282, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
 	     NGC3242, NGC3750, NGC4170, NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
-	     NGC5216, NGC5248, NGC5426, NGC5466, NGC6302, NGC6522, NGC6563, NGC6781, NGC6894, NGC7000,
-	     NGC7354, SH2-136, UGC3697, Abell31, Abell33, Abell39, Cassiopeia A, LBN438, Wild's Triplet
+	     NGC5216, NGC5248, NGC5426, NGC5466, NGC6302, NGC6522, NGC6543, NGC6563, NGC6781, NGC6894, NGC7000,
+	     NGC7354, NGC7822, SH2-136, UGC3697, Abell31, Abell33, Abell39, Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC908, NGC936, NGC1232, NGC1313, NGC1316,
 	     NGC1792, NGC1978, NGC2207, NGC2736, NGC3199, NGC3699, NGC3766, NGC3532, NGC4945, NGC5128, NGC5189,
-	     NGC6362, NGC6537, NGC6744, NGC6752, NGC6769, NGC6822, NGC7793
+	     NGC6362, NGC6537, NGC6752, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -573,9 +573,8 @@
 	     from Cristina Cellini
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 4.0 International
-	4.73 Images of NGC7822
-	     from Davide De Martin & the ESA/ESO/NASA Photoshop FITS Liberator
-	     https://www.spacetelescope.org/
+	4.73 Images of NGC6744
+	     from Zhuokai Liu, Jiang Yuhang
 	     License: Creative Commons Attribution 4.0 International 
 	4.74 Images of NGC2170, SH2-1, SH2-240
 	     from Rogelio Bernal Andreo
