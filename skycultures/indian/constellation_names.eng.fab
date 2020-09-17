@@ -31,38 +31,39 @@
 #################
 # We show Nakṣatra-s associated with a single star as a star, rather than as a constellation.
 # From @gzotti: "if some Nakshatras may receive sky art, all Nakshatras should be coded as constellations. When we do the change mentioned above, those will then be separated (or just marked inside the constellation file). ... We may highlight the 1-star constellation in later editions e.g. by a circle." 
+# The Nakṣatra here are ordered by ecliptic longitude.
 
 Aśv	"Aśvinī"	_("Divine physician twins")
 Bhar	"Bharanī"	_("Bearer")
 Kṛt	"Kṛttikā"	_("Cutter")
 Roh	"Rohiṇī"	_("Red")
+# Provenance for art - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted elsewhere in this doc). 
+Mṛg	"Mṛgaśiras"	_("Deer's head")
 Ārd	"Ārdrā"	_("Wet")
 PVas	"Punarvasū"	_("Wealth-restorer")
 Puṣ	"Puṣya"	_("Nourisher")
+# Associated with the snakes, as per taittirIya bhrAhmaNa.
+Aśl	"Aśleṣa"	_("Embrace")
 Magh	"Maghā"	_("Bountiful")
 # E. फल् to bear fruit, Unādi aff. उनन् and गुक् aug.
 PPhā	"Pūrva phālgunī"	_("Former Fruitful")
 UPhā	"Uttara phālgunī"	_("Latter Fruitful")
-Viś	"Viśākhā"	_("Well branched")
+Hasta	"Hasta"	_("Hand")
+Chitr	"Chitrā"	_("Spectacular")
+Svā	"Svātī"	_("Svātī")
 Anur	"Anurādhā"	_("Following Rādhā")
+Viś	"Viśākhā"	_("Well branched")
 Jyeṣ	"Jyeṣṭhā"	_("Elder")
+Mūl	"Mūla"	_("Root")
 PAṣ	"Pūrva aṣāḍhā"	_("Former invincible one")
 UAṣ	"Uttara aṣāḍhā"	_("Latter invincible one")
-Dhani	"Dhaniṣṭhā"	_("Wealthiest")
-# Provenance for art - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted elsewhere in this doc). 
-Mṛg	"Mṛgaśiras"	_("Deer's head")
-# Associated with the snakes, as per taittirIya bhrAhmaNa.
-Aśl	"Aśleṣa"	_("Embrace")
-Hasta	"Hasta"	_("Hand")
-Mūl	"Mūla"	_("Root")
+Abh	"Abhijit"	_("The invincible one")
 Śra	"Śravaṇa"	_("Ear")
+Dhani	"Dhaniṣṭhā"	_("Wealthiest")
+Śata	"Śatabhiṣak"	_("Hundred cures")	
 PBhā	"Pūrva bhādrapada"	_("The first of the blessed feet")
 UBhā	"Uttara bhādrapada"	_("The second of the blessed feet")
-Chitr	"Chitrā"	_("Spectacular")
-Svā	"Svātī"	_("Svātī")	
-Śata	"Śatabhiṣak"	_("Hundred cures")	
 Rev	"Revatī"	_("The prosperous one")	
-Abh	"Abhijit"	_("The invincible one")
 
 #################
 # Some Rāśis
@@ -93,7 +94,7 @@ Shim	"Shiṁśumāra"	_("Dolphin")
 # A famous IkShvAku king, placed there by vishvAmitra.
 Tri	"Trishanku"	_("King Trishanku")
 # Provenance for the below: Apte dictionary, purana-s.
-ṛkṣa	"ṛkṣa"	_("Ursa Major")
+R̥kṣa	"R̥kṣa"	_("Ursa Major")
 # Provenance - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted above). Amarakosha says:  मृगशीर्षं मृगशिरस्तस्मिन्नेवाग्रहायणी। इल्वलास् तच्छिरोदेशे तारका निवसन्ति याः॥. Some modern dictionaries thence identify iNvakA-s with the head of Orion, but given its identification with the arrow, it is more likely to be Orion's belt as illustrated by Tilak. 
 Inv	"Invakā"	_("Arrow")
 # Provenance for the below: Purana-s and kAvya-s.
@@ -101,4 +102,4 @@ Sapt	"Saptarṣi"	_("7 Sages")
 # Provenance: kaumAra nakShatra or khachakra nyAsa.
 śara	"śaravaṇa"	_("Reed forest")
 # Secondary references: https://manasataramgini.wordpress.com/2003/08/17/rohinis-cart/
-sāra	"Sārathi"	_("Charioteer")
+Sāra	"Sārathi"	_("Charioteer")
