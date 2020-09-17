@@ -285,7 +285,6 @@ void OcularDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -469,6 +468,12 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	updateGuiOptions();
+
+	// add degree char into input boxes of FOV for Telrad
+	ui->doubleSpinBoxTelradFOV1->setSuffix(QChar(0x00B0));
+	ui->doubleSpinBoxTelradFOV2->setSuffix(QChar(0x00B0));
+	ui->doubleSpinBoxTelradFOV3->setSuffix(QChar(0x00B0));
+	ui->doubleSpinBoxTelradFOV4->setSuffix(QChar(0x00B0));
 }
 
 void OcularDialog::setupTelradFOVspins(Vec4f fov)

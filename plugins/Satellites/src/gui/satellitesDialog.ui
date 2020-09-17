@@ -207,9 +207,6 @@
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="suffix">
-                 <string comment="time unit"> h</string>
-                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -547,9 +544,6 @@
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
-            <property name="suffix">
-             <string comment="time unit"> s</string>
-            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -581,12 +575,12 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="labelSegmentLength">
             <property name="toolTip">
              <string>Duration of a single segment</string>
             </property>
             <property name="text">
-             <string extracomment="TRANSLATORS: = &quot;duration&quot;">Segment length:</string>
+             <string>Segment length:</string>
             </property>
            </widget>
           </item>

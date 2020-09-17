@@ -187,6 +187,8 @@ void ExoplanetsDialog::setAboutHtml(void)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
+	// TRANSLATORS: duration
+	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
 }
 
 void ExoplanetsDialog::setInfoHtml(void)

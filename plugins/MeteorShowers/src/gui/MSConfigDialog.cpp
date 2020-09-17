@@ -326,4 +326,6 @@ void MSConfigDialog::setAboutHtml()
 	html += "</ul></p></body></html>";
 
 	m_ui->about->setHtml(html);
+	// TRANSLATORS: duration
+	m_ui->updateFrequency->setSuffix(qc_(" h","time unit"));
 }
