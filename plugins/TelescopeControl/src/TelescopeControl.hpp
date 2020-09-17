@@ -107,7 +107,7 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5,
-	  bool useStartOfWords = false, bool inEnglish = false) const;
+						bool useStartOfWords = false, bool inEnglish = false) const;
 	// empty as its not celestial objects
 	virtual QStringList listAllObjects(bool) const { return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
@@ -141,17 +141,17 @@ public:
 	//! @param portSerial must be a valid serial port name for the particular platform, e.g. "COM1" for
 	//! Microsoft Windows of "/dev/ttyS0" for Linux
 	bool addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox,
-	  QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY,
-	  bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(),
-	  QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
-	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
-	  bool ascomUseDeviceEqCoordType = true);
+				QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY,
+				bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(),
+				QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
+				QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
+				bool ascomUseDeviceEqCoordType = true);
 	//! Retrieves a telescope description. Returns false if the slot is empty. Returns empty serverName and
 	//! portSerial if the description contains no server.
 	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox,
-	  QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles,
-	  QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username,
-	  QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId, bool& ascomUseDeviceEqCoordType);
+				QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles,
+				QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username,
+				QString& rts2Password, int& rts2Refresh, QString& ascomDeviceId, bool& ascomUseDeviceEqCoordType);
 	//! Removes info from the tree. Should it include stopTelescopeAtSlot()?
 	bool removeTelescopeAtSlot(int slot);
 
@@ -396,10 +396,10 @@ private:
 	//! A wrapper for TelescopeClient::create(). Used internally by loadTelescopes() and
 	//! startTelescopeAtSlot(). Does not perform any validation on its arguments.
 	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox,
-	  QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(),
-	  QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
-	  QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
-	  bool ascomUseDeviceEqCoordType = true);
+			       QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(),
+			       QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(),
+			       QString rts2Password = QString(), int rts2Refresh = -1, QString ascomDeviceId = QString(""),
+			       bool ascomUseDeviceEqCoordType = true);
 
 	//! Returns true if the TelescopeClient at this slot has been stopped successfully or doesn't exist
 	bool stopClientAtSlot(int slot);
