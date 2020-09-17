@@ -228,8 +228,8 @@ void StelMovementMgr::bindingFOVActions()
 	{
 		float cfov = fov.at(i);
 		(cfov<1.f) ? tfov = QString::number(cfov, 'f', 1) : tfov = QString::number(cfov, 'f', 0);
-		QString actionName = QString("actionSet_FOV_%1deg").arg(tfov.replace(".","_"));
-		QString actionDescription = QString("%1 %2%3").arg(fovText, tfov, QChar(0x00B0));
+		QString actionName = QString("actionSet_FOV_%1deg").arg(tfov).replace(".","_");
+		QString actionDescription = QString("%1 %2%3").arg(fovText, tfov, QChar(0x00B0));		
 		StelAction* action = actionMgr->findAction(actionName);
 		if (action!=Q_NULLPTR)
 			actionMgr->findAction(actionName)->setText(actionDescription);
