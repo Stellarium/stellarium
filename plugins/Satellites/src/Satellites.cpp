@@ -562,6 +562,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("invisible_satellite_color", "0.2,0.2,0.2");
+	conf->setValue("transit_satellite_color", "0.0,0.0,0.0");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", false);
@@ -720,9 +721,8 @@ void Satellites::loadSettings()
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 180).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 5).toInt();
-
-	Satellite::invisibleSatelliteColor = Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
-
+	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
+	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 
 	// iconic mode
@@ -765,6 +765,28 @@ void Satellites::saveSettingsToConfig()
 	
 	// Update sources...
 	saveTleSources(updateUrls);
+}
+
+Vec3f Satellites::getInvisibleSatelliteColor() const
+{
+	return Satellite::invisibleSatelliteColor;
+}
+
+void Satellites::setInvisibleSatelliteColor(const Vec3f &c)
+{
+	Satellite::invisibleSatelliteColor = c;
+	emit invisibleSatelliteColorChanged(c);
+}
+
+Vec3f Satellites::getTransitSatelliteColor() const
+{
+	return Satellite::transitSatelliteColor;
+}
+
+void Satellites::setTransitSatelliteColor(const Vec3f &c)
+{
+	Satellite::transitSatelliteColor = c;
+	emit transitSatelliteColorChanged(c);
 }
 
 void Satellites::loadCatalog()

@@ -62,7 +62,7 @@ bool Satellite::orbitLinesFlag = true;
 bool Satellite::iconicModeFlag = false;
 bool Satellite::hideInvisibleSatellitesFlag = false;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
-
+Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
@@ -973,7 +973,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			// Special case: crossing of the satellite of the Moon or the Sun
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
 			{
-				painter.setColor(0.f,0.f,0.f,1.f);
+				painter.setColor(transitSatelliteColor, 1.f);
 				int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
 				if (screenSizeSat>0)
 				{

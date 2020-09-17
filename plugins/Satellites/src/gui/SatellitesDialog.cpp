@@ -146,7 +146,7 @@ void SatellitesDialog::createDialogContent()
 	ui->addSourceButton->setFixedSize(bs);
 	ui->deleteSourceButton->setFixedSize(bs);
 	ui->editSourceButton->setFixedSize(bs);
-	ui->saveSourceButton->setFixedSize(bs);
+	ui->saveSourceButton->setFixedSize(bs);	
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -175,6 +175,10 @@ void SatellitesDialog::createDialogContent()
 	// Settings tab / realistic mode group
 	connectBoolProperty(ui->iconicGroup,             "Satellites.flagIconicMode");
 	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
+
+	// Settings tab / colors group
+	connectColorButton(ui->invisibleColorButton, "Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
+	connectColorButton(ui->transitColorButton,   "Satellites.transitSatelliteColor",   "Satellites/transit_satellite_color");
 
 	// Settings tab - populate all values
 	updateSettingsPage();

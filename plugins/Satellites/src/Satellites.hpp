@@ -159,6 +159,8 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
+	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	
 public:
 	//! @enum UpdateState
@@ -379,6 +381,8 @@ signals:
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
+	void invisibleSatelliteColorChanged(Vec3f);
+	void transitSatelliteColorChanged(Vec3f);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -434,6 +438,18 @@ public slots:
 
 	bool getFlagHideInvisible() const;
 	void setFlagHideInvisible(bool b);
+
+	//! Get color for invisible satellites
+	//! @return color
+	Vec3f getInvisibleSatelliteColor() const;
+	//! Set color for invisible satellites
+	void setInvisibleSatelliteColor(const Vec3f& c);
+
+	//! Get color for satellites in transit through the Sun or the Moon (color of markers)
+	//! @return color
+	Vec3f getTransitSatelliteColor() const;
+	//! Set color for satellites in transit through the Sun or the Moon (color of markers)
+	void setTransitSatelliteColor(const Vec3f& c);
 	
 	//! get the label font size.
 	//! @return the pixel size of the font

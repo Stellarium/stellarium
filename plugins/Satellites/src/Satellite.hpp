@@ -300,6 +300,7 @@ private:
 	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
+	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
 
