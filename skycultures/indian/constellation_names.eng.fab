@@ -1,9 +1,10 @@
-# Note from the user guide at https://launchpadlibrarian.net/330148407/stellarium_user_guide-0.16.0-1.pdf:
+#################
+## Note from the user guide at https://github.com/Stellarium/stellarium/releases/download/v0.19.3/stellarium_user_guide-0.19.3-1.pdf :
 #
 # The native constellations are listed in constellation_names.eng.fab. It consists of 3 simple
-# columns: Abbreviation(or just a serial number), native name, and english translation. The writing
-# _("name") allows automatic translation of the English strings to other languages. These strings
-# will be used as constellation labels.
+# columns: Abbreviation(or just a serial number), native name, and english translation. 
+# The writing _("name") allows automatic translation of the English strings to other languages. These strings will be used as constellation labels.
+#
 # The first column (abbreviation) in the Western sky culture provides the canonical 3-letter
 # abbreviation for constellations as used by the International Astronomical Union. Such abbreviations
 # may not be available for the skyculture you are working with, so you must invent your own. These
@@ -19,49 +20,100 @@
 # If your skyculture is not a variant of the generally known Western skyculture, please include an
 # English translation to the name given in the native language. Else translators will not be able to
 # translate the name
+#################
 
-# We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
+# For the column 1: An abbreviation for the constellation. (The "abbreviated" mode should allow to use short unique markers, without filling the screen with text. In scientific context, the 88 IAU constellations are abbreviated with 3 characters, which is just enough to remember the constellation.)
+# For the column 2: We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
+# For column 3: We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below. There are multiple rich mythologies and symbolisms associated with constellations and stars - it wouldn't do to rely on one to the exclusion of others during translation. Hence we stick to etymological translations.
 
-## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
+#################
+# Nakshatra-s.
+#################
+# We show Nakṣatra-s associated with a single star as a star, rather than as a constellation.
+# From @gzotti: "if some Nakshatras may receive sky art, all Nakshatras should be coded as constellations. When we do the change mentioned above, those will then be separated (or just marked inside the constellation file). ... We may highlight the 1-star constellation in later editions e.g. by a circle." 
+# The Nakṣatra here are ordered by ecliptic longitude.
 
-# TRANSLATORS: Horse headed twin son of The Sun
-N01	"Aśvinī"		_("Twin physicians of Gods")
-# TRANSLATORS: Bearer of life
-N02	"Bharanī"		_("She who bears")
-# TRANSLATORS: kartiikeya - Son of Lord Shiva
-N03	"Kṛittikā"		_("Nurses of kartiikeya")
-# TRANSLATORS: Deer avatar of Uṣa or Dwan
-N04	"Rohiṇī"		_("The spirited one")
-# TRANSLATORS: Deer avatar of King Prajapati
-N05	"Mṛgaśirā"		_("The deer's head")
-# TRANSLATORS: Rudra, Lord Shiva
-N06	"Ārdrā"			_("The moist one")
-N07	"Punarvasu"		_("The restorers of goods")
-N08	"Puṣyā"			_("The nourisher")
-N09	"Aśleṣā"		_("The embrace")
-N10	"Maghā"			_("The bountiful one")
-# TRANSLATORS: phālgun - Red
-N11	"Pūrba phālgunī"	_("The former red one")
-# TRANSLATORS: phālgun - Red
-N12	"Uttara phālgunī"	_("The latter red one")
-N13	"Hasta"			_("The hand")
-N14	"Chitrā"		_("The bright one")
-N15	"Svātī"			_("The honest one")
-# TRANSLATORS: One of the best friend of Radha
-N16	"Viśākhā"		_("The gifted one")
-# TRANSLATORS: Radha - companion of Lord Krishna
-N17	"Anurādhā"		_("Followers of Radha")
-N18	"Jyeṣṭhā"		_("The eldest one")
-# TRANSLATORS: Origin
-N19	"Mulā"			_("The root")
-# TRANSLATORS: āṣāṛā - Roar
-N20	"Pūrba āṣāṛā"		_("The former undefeated one")
-# TRANSLATORS: āṣāṛā - Roar
-N21	"Uttara āṣāṛā"		_("The latter undefeated one")
-N22	"Śrabaṇā"		_("The Ear")
-N23	"Dhaniṣṭhā"		_("The most famous one")
-N24	"Śatabhiṣā"		_("hundred cures")
-N25	"Pūrba bhādrapada"	_("The first of the blessed feet")
-N26	"Uttara bhādrapada"	_("The second of the blessed feet")
-N27	"Revatī"		_("The prosperous one")
-N28	"Abhijit"		_("The invincible one")
+# kalpadruma: अश्वः अश्वरूपं विद्यते यस्याः । अश्व + इन् + ङीप् । Ancient synonymous name: अश्वयुक्. Associated with अध्विनौ/ ashvinas, the twin Gods.
+Aśv	"Aśvinī"	_("With Horses")
+# kalpadruma: भरण + गौरादित्वात् ङीष् । Associated with Yama, bearer of departed souls.
+Bhar	"Bharanī"	_("Bearer")
+# kalpadruma: कृन्तति उग्रत्वात् ।
+Kṛt	"Kṛttikā"	_("Cutter")
+# kalpadruma: रुह् + इनन् । गौरादित्वात् ङीष् ।
+Roh	"Rohiṇī"	_("Climber")
+# Provenance for art - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted elsewhere in this doc). 
+Mṛg	"Mṛgaśiras"	_("Deer's head")
+Ārd	"Ārdrā"	_("Moist")
+PVas	"Punarvasū"	_("Wealth-restorer")
+Puṣ	"Puṣya"	_("Nourisher")
+# Associated with the snakes, as per taittirIya bhrAhmaNa.
+Aśl	"Aśleṣa"	_("Embrace")
+# kalpadruma and vAchaspatyam - मह् (वृद्धौ, त्विषि, पूजायाम्) + घः । हस्य घत्वम् ।. 
+Magh	"Maghā"	_("Bountiful")
+# Multiple dictionaries: E. फल् to bear fruit, Unādi aff. उनन् and गुक् aug.
+PPhā	"Pūrva phālgunī"	_("Former Fruitful")
+UPhā	"Uttara phālgunī"	_("Latter Fruitful")
+Hasta	"Hasta"	_("Hand")
+Chitr	"Chitrā"	_("Spectacular")
+# Kalpadruma: स्वेनैव अततीति. 
+Svā	"Svātī"	_("Self mover")
+Anur	"Anurādhā"	_("Following Rādhā")
+Viś	"Viśākhā"	_("Well branched")
+Jyeṣ	"Jyeṣṭhā"	_("Elder")
+Mūl	"Mūla"	_("Root")
+# vAchaspatyam: अ/आ + सह—क्त
+PAṣ	"Pūrvāṣāḍhā"	_("Former invincible one")
+UAṣ	"Uttarāṣāḍhā"	_("Latter invincible one")
+# अभि + जि + क्विप् ।
+Abh	"Abhijit"	_("Victorious")
+Śra	"Śravaṇa"	_("Ear")
+# Ancient name: श्रविष्ठा, or "most famous".
+Dhani	"Dhaniṣṭhā"	_("Wealthiest")
+# vAchaspatyam: शतं भिषज इव ताराः यत्र ।
+Śata	"Śatabhiṣak"	_("Hundred cures")	
+# Ancient name: प्रोष्ठपद
+PBhā	"Pūrva bhādrapada"	_("The first of the blessed feet")
+UBhā	"Uttara bhādrapada"	_("The second of the blessed feet")
+# Ultimately from रेव (प्लुतौ व्रजे).
+Rev	"Revatī"	_("Leaper")	
+
+#################
+# Some Rāśis
+#################
+# For simplicity in mapping prexisting constellation art, we use some codes from the western skyculture.
+# Where the latin and sanskrit match, we follow the instruction from the manual: "please use the canonical Latin names, they have all been translated already."
+Meṣa	"Meṣa Rāśi"	_("Aries")
+Vṛṣa	"Vṛṣa Rāśi"	_("Taurus")
+Mith	"Mithuna Rāśi"	_("Gemini")
+Kark	"Karkaṭa Rāśi"	_("Cancer")
+Simh	"Simha Rāśi"	_("Leo")
+Kany	"Kanyā Rāśi"	_("Virgo")
+Tulā	"Tulā Rāśi"	_("Libra")
+Vṛśc	"Vṛścikā Rāśi"	_("Scorpius")
+Dhan	"Dhanur Rāśi"	_("Bow")
+Makr	"Makara Rāśi"	_("Crocodile")
+Kumbh	"Kumbha Rāśi"	_("Aquarius")
+Mīna	"Mīna Rāśi"	_("Pisces")
+#################
+# Other constellations.
+#################
+# Please include provenance citations for the constellations you add.
+# Where the latin and sanskrit match, we follow the instruction from the manual: "please use the canonical Latin names, they have all been translated already."
+# Provenance of the below: Orion by BG Tilak citing Rg Veda. But we omit it due to collision with Mṛgavyādha.
+# Śvā	"Canis Major"	_("Canis Major")
+# Provenance for the below: Aitareya AryaNyaka: तम् अभ्यायत्याविध्यत्, स विद्ध ऊर्ध्व उदप्र(प्ल)वत । तम् एतम् मृग इत्य् आचक्षते । य उ एव मृगव्याधः स उ एव स, या रोहित् सा रोहिणी, यो एवेषुस् त्रिकाण्डा स एवेषुस् त्रिकाण्डा । तद् वा इदम् प्रजापते रेतः सिक्तम् अधावत्, तत् सरो ऽभवत् (=आकाशगङ्गा)।
+MṛVy	"Mṛgavyādha"	_("Deer Hunter")
+# Provenance for the below: TaittirIya AraNyakam - https://archive.org/stream/Anandashram_Samskrita_Granthavali_Anandashram_Sanskrit_Series/ASS_036_Taittiriya_Aranyakam_With_Sayana_Bhashya_Part_1_-_Babasastri_Phadke_1898#page/n161/mode/2up
+Shim	"Shiṁśumāra"	_("Dolphin")
+# A famous IkShvAku king, placed there by vishvAmitra.
+Tri	"Trishanku"	_("King Trishanku")
+# Provenance for the below: Apte dictionary, purana-s.
+R̥kṣa	"R̥kṣa"	_("Ursa Major")
+# Provenance - BG Tilak's book (The Orion; or, Researches into the Antiquity of the Vedas), veda-s (eg. Aitareya AraNyaka quoted above). Amarakosha says:  मृगशीर्षं मृगशिरस्तस्मिन्नेवाग्रहायणी। इल्वलास् तच्छिरोदेशे तारका निवसन्ति याः॥. Some modern dictionaries thence identify iNvakA-s with the head of Orion, but given its identification with the arrow, it is more likely to be Orion's belt as illustrated by Tilak. 
+Inv	"Invakā"	_("Arrow")
+# Provenance for the below: Purana-s and kAvya-s.
+Sapt	"Saptarṣi"	_("7 Sages")
+# Provenance: kaumAra nakShatra or khachakra nyAsa.
+Śara	"Śaravaṇa"	_("Reed forest")
+# Secondary references: https://manasataramgini.wordpress.com/2003/08/17/rohinis-cart/
+Sāra	"Sārathi"	_("Charioteer")
