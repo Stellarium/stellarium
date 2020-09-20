@@ -112,7 +112,9 @@ Oculars::Oculars()
 	, flagCardinalPointsMain(false)
 	, flagAdaptationMain(false)
 	, flagLimitStarsMain(false)
+	, flagAutoLimitMagnitude(false)
 	, magLimitStarsMain(0.0)
+	, magLimitStarsOcularsManual(0.0)
 	, flagLimitDSOsMain(false)
 	, magLimitDSOsMain(0.0)
 	, flagLimitPlanetsMain(false)
@@ -128,7 +130,6 @@ Oculars::Oculars()
 	, milkyWaySaturation(1.0)
 	, maxEyepieceAngle(0.0)
 	, flagRequireSelection(true)
-	, flagLimitMagnitude(false)
 	, flagScaleImageCircle(true)
 	, flagGuiPanelEnabled(false)
 	, flagDMSDegrees(false)
@@ -188,6 +189,7 @@ Oculars::Oculars()
 	, flagUseMediumFocuserOverlay(true)
 	, flagUseLargeFocuserOverlay(true)
 {
+	setObjectName("Oculars");
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
@@ -196,8 +198,6 @@ Oculars::Oculars()
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
 	lenses = QList<Lens *> ();
-	
-	setObjectName("Oculars");
 
 #ifdef Q_OS_MAC
 	qt_set_sequence_auto_mnemonic(true);
@@ -313,6 +313,7 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
+	settings->setValue("limit_stellar_magnitude_manual", QString::number(magLimitStarsOcularsManual, 'f', 2));
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
 	settings->setValue("focuser_color", focuserColor.toStr());
@@ -587,7 +588,8 @@ void Oculars::init()
 
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
-		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
+		setFlagAutoLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
+		magLimitStarsOcularsManual=settings->value("limit_stellar_magnitude_manual", 20.).toDouble();
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
@@ -652,7 +654,7 @@ void Oculars::determineMaxEyepieceAngle()
 			}
 		}
 	}
-	// insure it is not zero
+	// ensure it is not zero
 	if (maxEyepieceAngle == 0.0)
 	{
 		maxEyepieceAngle = 1.0;
@@ -1816,10 +1818,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(reticleRotation));
 	}
 
-	float alpha = 1.f;
-	if (getFlagUseSemiTransparency())
-		alpha = getTransparencyMask()*0.01f;
-
+	const float alpha = getFlagUseSemiTransparency() ? getTransparencyMask()*0.01f : 1.f;
 	painter.setColor(0.f,0.f,0.f,alpha);
 
 	GLfloat outerRadius = static_cast<GLfloat>(params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel);
@@ -1871,7 +1870,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 	if (getFlagShowCardinals())
 	{
 		// Compute polar angle for cardinals and show it
-		double polarAngle = 0;
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		Vec3d CPos;
 		Vector2<qreal> cpos = projector->getViewportCenter();
@@ -1880,7 +1878,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		CPrel[2]*=0.2;
 		Vec3d crel;
 		projector->project(CPrel, crel);
-		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+		double polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
 		if (CPos[2] > 0)
 			polarAngle += 90.0;
 		else
@@ -2164,12 +2162,14 @@ void Oculars::unzoomOcular()
 	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
 	skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsMain);
 	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
-	skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
 	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
-	// restore values, but keep current to enable toggling
+	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+	// restore values, but keep current to enable toggling.
+	if (!getFlagAutoLimitMagnitude()) magLimitStarsOcularsManual=skyDrawer->getCustomStarMagnitudeLimit();
 	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
 	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+	skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
 	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 	movementManager->setFlagTracking(false);
@@ -2332,25 +2332,26 @@ void Oculars::zoomOcular()
 	absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
 	skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
 
-	// Limit stars and DSOs	if enabled and it's telescope + eyepiece combination
-	if (getFlagLimitMagnitude())
+	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
+	// or just use the custom oculars mode value.
+	if (getFlagAutoLimitMagnitude() || skyDrawer->getFlagStarMagnitudeLimit() )
 	{
-		// Simplified calculation of the penetrating power of the telescope
-		double diameter = 0.;
-		if (ocular->isBinoculars())
-			diameter = ocular->fieldStop();
+		double limitMag=magLimitStarsOcularsManual;
+		if (getFlagAutoLimitMagnitude())
+		{
+			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
+			limitMag = computeLimitMagnitude(ocular, telescope);
+			// TODO: Is it really good to apply the star formula to DSO?
+			skyDrawer->setFlagNebulaMagnitudeLimit(true);
+			skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
+		}
 		else
-			diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
-		
-		// A better formula for telescopic limiting magnitudes?
-		// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
-		// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
-		double limitMag = 4.5 + 4.4*std::log10(diameter);
-
+		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
+			// Therefore we need a temporary connection.
+			connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+		}
 		skyDrawer->setFlagStarMagnitudeLimit(true);
-		skyDrawer->setFlagNebulaMagnitudeLimit(true);
 		skyDrawer->setCustomStarMagnitudeLimit(limitMag);
-		skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
 	}
 
 	actualFOV = ocular->actualFOV(telescope, lens);
@@ -2469,17 +2470,30 @@ bool Oculars::getFlagRequireSelection() const
 	return flagRequireSelection;
 }
 
-void Oculars::setFlagLimitMagnitude(const bool b)
+void Oculars::setFlagAutoLimitMagnitude(const bool b)
 {
-	flagLimitMagnitude = b;
+	flagAutoLimitMagnitude = b;
 	settings->setValue("limit_stellar_magnitude", b);
 	settings->sync();
-	emit flagLimitMagnitudeChanged(b);
+	emit flagAutoLimitMagnitudeChanged(b);
 }
 
-bool Oculars::getFlagLimitMagnitude() const
+bool Oculars::getFlagAutoLimitMagnitude() const
 {
-	return flagLimitMagnitude;
+	return flagAutoLimitMagnitude;
+}
+
+void Oculars::setMagLimitStarsOcularsManual(double mag)
+{
+	magLimitStarsOcularsManual = mag;
+	settings->setValue("limit_stellar_magnitude", mag);
+	settings->sync();
+	// This is no property, no need to emit a signal.
+}
+
+double Oculars::getMagLimitStarsOcularsManual()
+{
+	return magLimitStarsOcularsManual;
 }
 
 void Oculars::setFlagInitFovUsage(const bool b)
@@ -2877,4 +2891,19 @@ void Oculars::togglePixelGrid()
 void Oculars::toggleFocuserOverlay()
 {
 	setFlagShowFocuserOverlay(!getFlagShowFocuserOverlay());
+}
+
+double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
+{
+	// Simplified calculation of the penetrating power of the telescope
+	double diameter = 0.;
+	if (ocular->isBinoculars())
+		diameter = ocular->fieldStop();
+	else
+		diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.1; // Avoid a potential call of null pointer, and a log(0) error.
+
+	// A better formula for telescopic limiting magnitudes?
+	// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+	// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+	return 4.5 + 4.4*std::log10(diameter);
 }

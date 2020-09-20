@@ -463,10 +463,10 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
                <property name="toolTip">
-                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+                <string>Apply limit for stellar magnitude based on telescope aperture</string>
                </property>
                <property name="text">
-                <string>Limit stellar magnitude</string>
+                <string>Auto-limit stellar magnitude</string>
                </property>
               </widget>
              </item>
