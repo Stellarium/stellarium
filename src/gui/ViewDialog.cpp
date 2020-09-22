@@ -869,6 +869,12 @@ void ViewDialog::populateToolTips()
 {
 	ui->planetUseObjModelsCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Uses a polygonal 3D model for some selected subplanetary objects (small moons, asteroids, comets) instead of a spherical approximation")));
 	ui->planetShowObjSelfShadowsCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar system objects. May reduce shadow penumbra quality on some objects.")));
+
+	QString degree = QChar(0x00B0);
+	ui->fovCircularMarkerSizeDoubleSpinBox->setSuffix(degree);
+	ui->fovRectangularMarkerHeightDoubleSpinBox->setSuffix(degree);
+	ui->fovRectangularMarkerWidthDoubleSpinBox->setSuffix(degree);
+	ui->fovRectangularMarkerRotationAngleDoubleSpinBox->setSuffix(degree);
 }
 
 void ViewDialog::populateLists()

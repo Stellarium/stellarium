@@ -625,13 +625,13 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"eccentricity": orbit's eccentricity,
 		"inclination": orbit's inclination (degree),
 		"angleDistance": angle distance from star 
-		                 (arcseconds),
+						(arcseconds),
 		"discovered": exoplanet discovered year,
 		"detectionMethod": "exoplanet detection method",
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-		                habitability of the exoplanet,
+						habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -644,13 +644,13 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"eccentricity": orbit's eccentricity,
 		"inclination": orbit's inclination (degree),
 		"angleDistance": angle distance from star 
-		                 (arcseconds),
+						(arcseconds),
 		"discovered": exoplanet discovered year,
 		"detectionMethod": "exoplanet detection method",
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-		                habitability of the exoplanet,
+						habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -1118,11 +1118,10 @@ the regular search dialog (\key{F3}). Note that at any given time, most
 Satellites will be below the horizon.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.58\textwidth]{satellites_plugin_configuration.png}
+\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_configuration.png}
 \caption{Configuration of the Satellites plugin.}
-%\label{fig:plugins:Satellites:Configuration}
+\label{fig:plugins:Satellites:Configuration}
 \end{figure}
-
 
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
@@ -1143,6 +1142,13 @@ grouping. A satellite may also not belong to any group at all.
 
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 \end{description}
+
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_satellites.png}
+	\caption{Configuration of the Satellites plugin --- satellites properties.}
+	\label{fig:plugins:Satellites:Configuration:Satellites}
+\end{figure}
+
 
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
@@ -1206,8 +1212,13 @@ You can edit the tags for a satellite, modify the description and comms data, an
 The plug-in's configuration data is stored in Stellarium's main configuration
 file.
 
-
 \subsection{Sources for TLE data}
+
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_sources.png}
+	\caption{Configuration of the Satellites plugin --- sources for TLE data.}
+	\label{fig:plugins:Satellites:Configuration:Sources}
+\end{figure}
 
 \begin{description}
 \item[Celestrak]\footnote{\url{http://celestrak.com/NORAD/elements/}} used as default update source, it also has TLE lists
@@ -1217,20 +1228,20 @@ file.
   United States Department of Defense
 \end{description}
 
-\subsection{Iridium Flares prediction?}
-\label{sec:plugins:Satellites:IridiumFlares}
-
-Some satellites can cause ``flares'' when reflective surfaces divert sunlight towards the observer.
-
-In earlier versions the Satellite plugin could predict ``Iridium flares'' for the current
-location up to 2 weeks in the future from the current moment.
-
-The generation of satellites with highly reflective antennae which
-caused predictable flares has been de-orbited by end of 2019 and
-replaced by models with different geometry which do not cause these
-bright spectacles. \newFeature{v0.20.2} A few defunct satellites are still in orbit, but
-their orientations and flare events are no longer predictable, therefore the
-``Iridium flares'' dialog has been removed.
+%\subsection{Iridium Flares prediction?}
+%\label{sec:plugins:Satellites:IridiumFlares}
+%
+%Some satellites can cause ``flares'' when reflective surfaces divert sunlight towards the observer.
+%
+%In earlier versions the Satellite plugin could predict ``Iridium flares'' for the current
+%location up to 2 weeks in the future from the current moment.
+%
+%The generation of satellites with highly reflective antennae which
+%caused predictable flares has been de-orbited by end of 2019 and
+%replaced by models with different geometry which do not cause these
+%bright spectacles. \newFeature{v0.20.2} A few defunct satellites are still in orbit, but
+%their orientations and flare events are no longer predictable, therefore the
+%``Iridium flares'' dialog has been removed.
 
 %%% Local Variables: 
 %%% mode: latex

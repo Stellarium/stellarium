@@ -991,6 +991,9 @@
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
+                   <property name="suffix">
+                    <string notr="true">%</string>
+                   </property>
                    <property name="decimals">
                     <number>0</number>
                    </property>
@@ -999,19 +1002,6 @@
                    </property>
                    <property name="maximum">
                     <double>50.000000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="percentLabel">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string notr="true">%</string>
                    </property>
                   </widget>
                  </item>
@@ -1116,7 +1106,7 @@
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>Trails thickness</string>
+                  <string>Trails thickness in pixels</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1469,7 +1459,7 @@
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>Orbits thickness</string>
+                  <string>Orbits thickness in pixels</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2603,12 +2593,15 @@
                   <widget class="QSpinBox" name="lineThicknessSpinBox">
                    <property name="maximumSize">
                     <size>
-                     <width>40</width>
+                     <width>50</width>
                      <height>16777215</height>
                     </size>
                    </property>
+                   <property name="toolTip">
+                    <string>Thickness of line in pixels</string>
+                   </property>
                    <property name="alignment">
-                    <set>Qt::AlignCenter</set>
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="minimum">
                     <number>1</number>
@@ -2638,12 +2631,15 @@
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>40</width>
+                     <width>50</width>
                      <height>16777215</height>
                     </size>
                    </property>
+                   <property name="toolTip">
+                    <string>Thickness of partitions in pixels</string>
+                   </property>
                    <property name="alignment">
-                    <set>Qt::AlignCenter</set>
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="minimum">
                     <number>1</number>
@@ -3623,7 +3619,7 @@
                   <widget class="QDoubleSpinBox" name="fovCircularMarkerSizeDoubleSpinBox">
                    <property name="maximumSize">
                     <size>
-                     <width>70</width>
+                     <width>75</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -3675,7 +3671,7 @@
                   <widget class="QDoubleSpinBox" name="fovRectangularMarkerWidthDoubleSpinBox">
                    <property name="maximumSize">
                     <size>
-                     <width>70</width>
+                     <width>75</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -3689,7 +3685,7 @@
                     <double>0.100000000000000</double>
                    </property>
                    <property name="maximum">
-                    <double>180.00000000000000</double>
+                    <double>180.000000000000000</double>
                    </property>
                    <property name="singleStep">
                     <double>0.100000000000000</double>
@@ -3703,7 +3699,7 @@
                   <widget class="QDoubleSpinBox" name="fovRectangularMarkerHeightDoubleSpinBox">
                    <property name="maximumSize">
                     <size>
-                     <width>70</width>
+                     <width>75</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -3717,7 +3713,7 @@
                     <double>0.100000000000000</double>
                    </property>
                    <property name="maximum">
-                    <double>180.00000000000000</double>
+                    <double>180.000000000000000</double>
                    </property>
                    <property name="singleStep">
                     <double>0.100000000000000</double>
@@ -3731,7 +3727,7 @@
                   <widget class="QDoubleSpinBox" name="fovRectangularMarkerRotationAngleDoubleSpinBox">
                    <property name="maximumSize">
                     <size>
-                     <width>70</width>
+                     <width>75</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -4008,9 +4004,15 @@
                 <widget class="QSpinBox" name="landscapePolylineThicknessSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>50</width>
                    <height>16777215</height>
                   </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
                   <number>1</number>
@@ -4338,7 +4340,7 @@
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>50</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -4798,12 +4800,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

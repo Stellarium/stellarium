@@ -330,6 +330,11 @@ void ShortcutsDialog::createDialogContent()
 	//test.append(QChar(0x2221)); // Angle sign
 
 	updateTreeData();
+
+	// Let's improve visibility of the text
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->primaryLabel->setStyleSheet(style);
+	ui->altLabel->setStyleSheet(style);
 }
 
 void ShortcutsDialog::polish()
