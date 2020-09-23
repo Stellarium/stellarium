@@ -41,6 +41,7 @@
 #include <QScroller>
 #include <QToolButton>
 #include <QColorDialog>
+#include <QMessageBox>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
@@ -299,6 +300,11 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
 
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
+}
+
+bool StelDialog::askConfirmation()
+{
+	return (QMessageBox::warning(Q_NULLPTR, q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes);
 }
 
 void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)

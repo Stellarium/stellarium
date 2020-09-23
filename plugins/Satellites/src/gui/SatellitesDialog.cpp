@@ -933,12 +933,17 @@ void SatellitesDialog::toggleCheckableSources()
 
 void SatellitesDialog::restoreDefaults(void)
 {
-	qDebug() << "Satellites::restoreDefaults";
-	GETSTELMODULE(Satellites)->restoreDefaults();
-	GETSTELMODULE(Satellites)->loadSettings();
-	updateSettingsPage();
-	populateFilterMenu();
-	populateSourcesList();
+	if (askConfirmation())
+	{
+		qDebug() << "[Satellites] restore defaults...";
+		GETSTELMODULE(Satellites)->restoreDefaults();
+		GETSTELMODULE(Satellites)->loadSettings();
+		updateSettingsPage();
+		populateFilterMenu();
+		populateSourcesList();
+	}
+	else
+		qDebug() << "[Satellites] restore defaults is canceled...";
 }
 
 void SatellitesDialog::updateSettingsPage()

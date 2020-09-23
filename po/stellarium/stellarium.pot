@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-24 00:22+0700\n"
+"POT-Creation-Date: 2020-09-24 02:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:3486 src/gui/AstroCalcDialog.cpp:3768
 #: src/gui/AstroCalcDialog.cpp:3770 src/ui_viewDialog.h:3307
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1343
 msgid "Altitude"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgid "Cyclic change in light pollution"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:924 src/scripting/StelScriptMgr.cpp:457
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:575
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
@@ -504,7 +504,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:930 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:412
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1014
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1019
 msgctxt "distance"
 msgid "m"
 msgstr ""
@@ -1811,7 +1811,8 @@ msgstr ""
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1377 src/StelMainView.cpp:949
+#: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:307
+#: src/StelMainView.cpp:949
 msgid "Attention!"
 msgstr ""
 
@@ -3634,9 +3635,9 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1195
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:186
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:192
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
 msgstr ""
 
@@ -3645,18 +3646,18 @@ msgid "Contact"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1198 src/scripting/StelScriptMgr.cpp:467
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Oculars/src/gui/OcularDialog.cpp:573
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:184
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
@@ -3667,18 +3668,18 @@ msgid "Version"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1199 src/scripting/StelScriptMgr.cpp:462
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:669
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:185
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:191
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
@@ -4204,13 +4205,13 @@ msgid "Tester: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:449
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:576
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:672
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:201
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:223
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 msgid "Contributors"
@@ -4386,6 +4387,10 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:868
 msgid "Frames per second"
+msgstr ""
+
+#: src/gui/StelDialog.cpp:307
+msgid "Are you sure? This will delete your customized data."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:523
@@ -4831,7 +4836,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:310 src/gui/AstroCalcDialog.cpp:622
 #: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:810
 #: src/gui/AstroCalcDialog.cpp:847 src/gui/AstroCalcDialog.cpp:1515
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1339
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1344
 msgid "Azimuth"
 msgstr ""
 
@@ -5118,14 +5123,14 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1373 src/gui/AstroCalcDialog.cpp:1960
 #: src/gui/AstroCalcDialog.cpp:2241 src/gui/AstroCalcDialog.cpp:4102
 #: src/gui/AstroCalcDialog.cpp:6219
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1414
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1419
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1375 src/gui/AstroCalcDialog.cpp:1962
 #: src/gui/AstroCalcDialog.cpp:2243 src/gui/AstroCalcDialog.cpp:4104
 #: src/gui/AstroCalcDialog.cpp:6221
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1421
 msgid "CSV (Comma delimited)"
 msgstr ""
 
@@ -10636,7 +10641,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1589
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1336
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1341
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Time"
 msgstr ""
@@ -10813,7 +10818,7 @@ msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1657
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:215
 msgid "Hour angle/Declination"
 msgstr ""
 
@@ -12463,25 +12468,25 @@ msgstr ""
 msgid "PA="
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 msgid "Angle Measure Plug-in"
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 msgid ""
 "Start and end points in horizontal mode can be linked to the rotating sky, "
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -12490,18 +12495,18 @@ msgid ""
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
 #: plugins/Oculars/src/gui/OcularDialog.cpp:609
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:242
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:165
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
@@ -12510,18 +12515,18 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
 #: plugins/Oculars/src/gui/OcularDialog.cpp:610
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:249
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:157
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:168
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:222
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
@@ -12533,18 +12538,18 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:114
 #: plugins/Oculars/src/gui/OcularDialog.cpp:613
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:730
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:141
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:214
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:171
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:225
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
@@ -12554,18 +12559,18 @@ msgid "If you have a question, you can {get an answer here}."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:116
 #: plugins/Oculars/src/gui/OcularDialog.cpp:615
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 #: plugins/Novae/src/gui/NovaeDialog.cpp:145
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:162
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:227
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:103
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
@@ -12575,18 +12580,18 @@ msgid "Bug reports and feature requests can be made {here}."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:617
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:164
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:229
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:105
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
@@ -14393,7 +14398,7 @@ msgstr ""
 msgid "[new source]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:951
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:956
 #: plugins/Satellites/src/ui_satellitesDialog.h:953
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:244
@@ -14409,7 +14414,7 @@ msgstr ""
 msgid "Update now"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:953
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:958
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14418,93 +14423,93 @@ msgstr ""
 msgid "Update from files"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:981
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
 msgid "[orbit calculation error]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:982
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
 msgid "[all newly added]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:983
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:984
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:985
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:990
 msgid "[small satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:986
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
 msgid "[medium satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
 msgid "[large satellites]"
 msgstr ""
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:994
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:996
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1002
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
 msgid "[all]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1014
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1019
 msgid "RCS"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1015
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a "
 "radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1016
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1018
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1023
 msgctxt "time unit"
 msgid " s"
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1025
 #: plugins/Satellites/src/ui_satellitesDialog.h:983
 msgid "Segment length:"
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1022
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1027
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:330
 msgctxt "time unit"
@@ -14512,28 +14517,28 @@ msgid " h"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1053
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1058
 msgid "New group..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1320
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1337
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1342
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1340
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1345
 msgid "Satellite"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1420
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1425
 msgid "Save predicted Iridium flares as..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1465
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1467
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1470
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1472
 msgid "Predicted Iridium flares"
 msgstr ""
 
@@ -16703,7 +16708,7 @@ msgid "Navigational Stars"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:190
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:196
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 
@@ -16834,130 +16839,130 @@ msgid "Zn"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:151
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
 msgid "Anglo-American"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:159
 msgid "French"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:155
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:161
 msgid "Russian"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:163
 msgid "German"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:183
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:189
 msgid "Navigational Stars Plug-in"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:194
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:204
 msgid "These fields are:"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:201
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:207
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:202
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:227
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:208
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers often use "sub-point" which is the geodetic location of a point where the star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:204
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:210
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point close by where the observer knows themselves to be. For example, from dead reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:206
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:212
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the Nautical Almanac where "height" is altitude. Likewise, Zn is computed azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:208
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:214
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:212
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:218
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:216
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:222
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The "
 "Nautical Almanac</em> format:"
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:220
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:226
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:222
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:228
 msgid "LMST: Local mean sidereal time."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:223
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr ""
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
 msgid "DEC: The navigation star's declination."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:226
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:232
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:229
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:235
 msgid "LAT: The observer's geodetic latitude."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:231
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:237
 msgid "LON: The observer's geodetic longitude."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:233
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:239
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:235
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:241
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:239
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:245
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 
@@ -17412,54 +17417,54 @@ msgstr ""
 msgid "Remote control"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:147
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:142
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:153
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:145
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:147
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
 msgid "Publications"
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:148
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:167
 msgid "Further information can be found in the {developer documentation}."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:203
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:214
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:208
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:219
 msgid "Not active."
 msgstr ""
 
@@ -17539,98 +17544,98 @@ msgid ""
 "in Space programme."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:118
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
 #, qt-format
 msgid "ERROR: %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:135
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Start server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Connect to server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:143
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 msgid "Not running"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:148
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:159
 msgid "Stop server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:153
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
 #, qt-format
 msgid "Running as server on port %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:183
 msgid "Cancel connecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:180
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
 msgid "Disconnecting..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid "Disconnect from server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Remote Sync Plug-in"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
 msgid "See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:246
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:257
 msgid "Server Name"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:254
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:265
 msgid "Server not active."
 msgstr ""
 
@@ -19764,80 +19769,80 @@ msgstr ""
 msgid "Exoplanets is updated"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:770
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:771
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:772
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:773
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:774
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:775
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
 msgid "Angular Distance, arc-sec"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:776
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
 msgid "Effective temperature of host star, K"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:777
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:782
 msgid "Year of Discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:778
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:783
 msgid "Metallicity of host star"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:779
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:784
 msgid "V magnitude of host star, mag"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:780
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:785
 msgid "RA (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:781
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:786
 msgid "Dec (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:782
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:787
 msgid "Distance to star, pc"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:783
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:788
 msgid "Mass of host star, Msol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:784
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:789
 msgid "Radius of host star, Rsol"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:818
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:823
 msgctxt "temperature scale"
 msgid "Kelvin"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:820
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:825
 msgctxt "temperature scale"
 msgid "Celsius"
 msgstr ""
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:822
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:827
 msgctxt "temperature scale"
 msgid "Fahrenheit"
 msgstr ""
@@ -21243,55 +21248,55 @@ msgstr ""
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:188
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:189
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:190
 msgid "The right bottom corner of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:191
 msgid "Near mouse cursor"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:186
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:192
 msgid "Custom position"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
 msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
 msgid "Right ascension/Declination"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:216
 msgid "Ecliptic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:217
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:218
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:219
 msgid "Galactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:220
 msgid "Supergalactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:244
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:250
 msgid "Coordinates of custom position:"
 msgstr ""
 

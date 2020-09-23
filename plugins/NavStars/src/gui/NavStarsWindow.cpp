@@ -102,7 +102,13 @@ void NavStarsWindow::saveSettings()
 
 void NavStarsWindow::resetSettings()
 {
-	ns->restoreDefaultConfiguration();
+	if (askConfirmation())
+	{
+		qDebug() << "[NavStars] restore defaults...";
+		ns->restoreDefaultConfiguration();
+	}
+	else
+		qDebug() << "[NavStars] restore defaults is canceled...";
 }
 
 void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)

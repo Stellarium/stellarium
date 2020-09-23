@@ -202,13 +202,19 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 
 void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 {
-	al->restoreDefaultSettings();
-	ui->geographicLocation1LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation1));
-	ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
-	ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
-	ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
-	ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
-	ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
+	if (askConfirmation())
+	{
+		qDebug() << "[ArchaeoLines] restore defaults...";
+		al->restoreDefaultSettings();
+		ui->geographicLocation1LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation1));
+		ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
+		ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
+		ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
+		ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
+		ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
+	}
+	else
+		qDebug() << "[ArchaeoLines] restore defaults is canceled...";
 }
 
 // Notes/Observations by GZ in 2015-04 with Qt5.4.0/MinGW on Windows7SP1.

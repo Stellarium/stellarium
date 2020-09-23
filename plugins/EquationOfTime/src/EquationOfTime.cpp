@@ -85,7 +85,7 @@ void EquationOfTime::init()
 	StelApp &app = StelApp::getInstance();
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
-		qDebug() << "EquationOfTime: no EquationOfTime section exists in main config file - creating with defaults";
+		qDebug() << "[EquationOfTime] no EquationOfTime section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
