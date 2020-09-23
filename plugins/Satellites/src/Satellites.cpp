@@ -213,9 +213,19 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingGroups()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
 
 	bindingGroups();
+}
+
+void Satellites::translateData()
+{
+	bindingGroups();
+	for (const auto& sat : satellites)
+	{
+		if (sat->initialized)
+			sat->recomputeEpochTLE();
+	}
 }
 
 void Satellites::updateSatellitesVisibility()
@@ -1109,10 +1119,7 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("communications");
 		}
 		if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
-		{
-			satGroups.append("planet");
 			satGroups.append("earth resources");
-		}
 		if (tleData.name.startsWith("ONEWEB"))
 		{
 			satGroups.append("oneweb");
@@ -2317,9 +2324,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
 	N_("iridium next");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-	N_("starlink");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Planet constellation (FLOCK and SKYSAT satellites)
-	N_("planet");
+	N_("starlink");	
 	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
 	N_("spire");
 	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)

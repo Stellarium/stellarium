@@ -73,10 +73,14 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 			return (sat->id);			
 		case SatDescriptionRole:
 			return (sat->description);
+		case SatCosparIDRole:
+			return (sat->internationalDesignator);
 		case SatStdMagnitudeRole:
 			return (sat->stdMag);
 		case SatRCSRole:
 			return (sat->RCS);
+		case SatTLEEpochRole:
+			return (sat->tleEpoch);
 		case SatFlagsRole:
 			return (QVariant::fromValue<SatFlags>(sat->getFlags()));			
 		case SatGroupsRole:

@@ -407,7 +407,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 					.arg(qc_("at","at time")).arg(StelUtils::hoursToHmsStr(hours, true));
 		}
 		oss << QString("%1: %2").arg(q_("Last updated TLE"), updDate) << "<br />";
-		oss << QString("%1: %2").arg(q_("Epoch of the TLE"), calculateEpochFromLine1(tleElements.first.data())) << "<br />";
+		oss << QString("%1: %2").arg(q_("Epoch of the TLE"), tleEpoch) << "<br />";
 		if (RCS>0.)
 			oss << QString("%1: %2 %3<sup>2</sup>").arg(q_("Radar cross-section (RCS)")).arg(QString::number(RCS, 'f', 3)).arg(qc_("m","distance")) << "<br />";
 
@@ -499,7 +499,7 @@ Vec2d Satellite::getEccentricityInclinationFromLine2(QString tle) const
 }
 
 // Calculate epoch of TLE
-QString Satellite::calculateEpochFromLine1(QString tle) const
+void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
 	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
@@ -517,7 +517,7 @@ QString Satellite::calculateEpochFromLine1(QString tle) const
 				.arg(StelLocaleMgr::longGenitiveMonthName(epoch.month())).arg(year)
 				.arg(StelUtils::hoursToHmsStr(24.*(dayOfYear-static_cast<int>(dayOfYear)), true));
 
-	return epochStr;
+	tleEpoch = epochStr;
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
@@ -528,6 +528,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("catalog", id);
 	map.insert("tle1", tleElements.first.data());
 	map.insert("tle2", tleElements.second.data());
+	map.insert("tle-epoch", tleEpoch);
 
 	if (!internationalDesignator.isEmpty())
 		map.insert("international-designator", internationalDesignator);
@@ -812,6 +813,12 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	visibilityPoints.clear();
 	
 	parseInternationalDesignator(tle1);
+	calculateEpochFromLine1(tle1);
+}
+
+void Satellite::recomputeEpochTLE()
+{
+	calculateEpochFromLine1(tleElements.first.data());
 }
 
 void Satellite::update(double)
@@ -919,9 +926,9 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 {
 	Q_ASSERT(!tle1.isEmpty());
 	
-	// The designator is encoded as columns 10-17 on the first line.
-	QString rawString = tle1.mid(9, 6);
-	//TODO: Use a regular expression?
+	// The designator is encoded in chunk 3 on the first line.
+	QStringList tleData = tle1.split(" ");
+	QString rawString = tleData.at(2);
 	bool ok;
 	int year = rawString.left(2).toInt(&ok);
 	if (!rawString.isEmpty() && ok)
@@ -931,13 +938,12 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 			year += 2000;
 		else
 			year += 1900;
-		internationalDesignator = QString::number(year) + "-" + rawString.right(4);
+		internationalDesignator = QString::number(year) + "-" + rawString.mid(2);
 	}
 	else
 		year = 1957;
 	
-	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);
-	//qDebug() << rawString << internationalDesignator << year;
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);	
 }
 
 bool Satellite::operator <(const Satellite& another) const

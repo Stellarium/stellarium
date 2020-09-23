@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>663</width>
-    <height>495</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -862,6 +862,9 @@
           <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
            <item>
             <widget class="QLabel" name="labelCatalogNumber">
+             <property name="toolTip">
+              <string>The Satellite Catalog Number (also known as NORAD (North American Aerospace Defense) Catalog Number, NORAD ID)</string>
+             </property>
              <property name="text">
               <string>Catalog number:</string>
              </property>
@@ -872,6 +875,32 @@
            </item>
            <item>
             <widget class="QLineEdit" name="noradNumberEdit">
+             <property name="toolTip">
+              <string>The Satellite Catalog Number (also known as NORAD (North American Aerospace Defense) Catalog Number, NORAD ID)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelCosparNumber">
+             <property name="toolTip">
+              <string>The International Designator, also known as COSPAR ID</string>
+             </property>
+             <property name="text">
+              <string>I.D.:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="cosparNumberEdit">
+             <property name="toolTip">
+              <string>The International Designator, also known as COSPAR ID</string>
+             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -1049,6 +1078,30 @@
              </property>
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QLabel" name="labelTleEpoch">
+             <property name="text">
+              <string>Epoch of the TLE:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelTleEpochData">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string notr="true"/>
              </property>
             </widget>
            </item>

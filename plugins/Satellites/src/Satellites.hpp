@@ -520,8 +520,8 @@ private slots:
 	//! Update satellites visibility on wide range of dates changes - by month or year
 	void updateSatellitesVisibility();
 	//! Call when button "Save settings" in main GUI are pressed
-	void saveSettings() { saveSettingsToConfig(); }
-	void bindingGroups();
+	void saveSettings() { saveSettingsToConfig(); }	
+	void translateData();
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -572,6 +572,7 @@ private:
 
 	void setSatGroupVisible(const QString& groupId, bool visible);
 	
+	void bindingGroups();
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
 	//! keyboard action descriptions. (It's better for them to be in a single
