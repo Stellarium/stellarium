@@ -114,6 +114,7 @@ Oculars::Oculars()
 	, flagLimitStarsMain(false)
 	, flagAutoLimitMagnitude(false)
 	, magLimitStarsMain(0.0)
+	, flagMagLimitStarsOcularsManual(false)
 	, magLimitStarsOcularsManual(0.0)
 	, flagLimitDSOsMain(false)
 	, magLimitDSOsMain(0.0)
@@ -302,6 +303,15 @@ void Oculars::deinit()
 	}
 	else if (flagShowOculars)
 	{
+		qDebug() << "Oculars::deinit() .. restoring skyDrawer values while ocular view is active";
+
+		if (!getFlagAutoLimitMagnitude())
+		{
+			flagMagLimitStarsOcularsManual=skyDrawer->getFlagStarMagnitudeLimit();
+			magLimitStarsOcularsManual=skyDrawer->getCustomStarMagnitudeLimit();
+		}
+		skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
+		skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
 		// Retrieve and restore star scales
 		relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
 		absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
@@ -314,6 +324,7 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
 	settings->setValue("limit_stellar_magnitude_manual", QString::number(magLimitStarsOcularsManual, 'f', 2));
+	settings->setValue("flag_limit_stellar_magnitude_manual", flagMagLimitStarsOcularsManual);
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
 	settings->setValue("focuser_color", focuserColor.toStr());
@@ -590,6 +601,8 @@ void Oculars::init()
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
 		setFlagAutoLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		magLimitStarsOcularsManual=settings->value("limit_stellar_magnitude_manual", 20.).toDouble();
+		flagMagLimitStarsOcularsManual=settings->value("flag_limit_stellar_magnitude_manual", false).toBool();
+		connect(this, SIGNAL(flagAutoLimitMagnitudeChanged(bool)), this, SLOT(handleAutoLimitToggle(bool))); // only after first initialisation!
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
@@ -634,6 +647,9 @@ void Oculars::init()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
+	StelCore *core = StelApp::getInstance().getCore();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 }
 
 /* ****************************************************************************************************************** */
@@ -2158,20 +2174,24 @@ void Oculars::unzoomOcular()
 		toggleLines(true);
 
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturation);
-	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
+	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+	// restore values, but keep current to enable toggling.
+	if (!getFlagAutoLimitMagnitude())
+	{
+		flagMagLimitStarsOcularsManual=skyDrawer->getFlagStarMagnitudeLimit();
+		magLimitStarsOcularsManual=skyDrawer->getCustomStarMagnitudeLimit();
+	}
+	skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
 	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
+	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
+	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
 	skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsMain);
 	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
 	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
-	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
-	// restore values, but keep current to enable toggling.
-	if (!getFlagAutoLimitMagnitude()) magLimitStarsOcularsManual=skyDrawer->getCustomStarMagnitudeLimit();
-	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
-	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
-	skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
-	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
-	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -2334,9 +2354,12 @@ void Oculars::zoomOcular()
 
 	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
 	// or just use the custom oculars mode value.
-	if (getFlagAutoLimitMagnitude() || skyDrawer->getFlagStarMagnitudeLimit() )
+
+	// TODO: set lim. mag without also activating flag it if it should not be activated.
+
+	double limitMag=magLimitStarsOcularsManual;
+	if (getFlagAutoLimitMagnitude() || flagMagLimitStarsOcularsManual )
 	{
-		double limitMag=magLimitStarsOcularsManual;
 		if (getFlagAutoLimitMagnitude())
 		{
 			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
@@ -2351,8 +2374,8 @@ void Oculars::zoomOcular()
 			connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
 		}
 		skyDrawer->setFlagStarMagnitudeLimit(true);
-		skyDrawer->setCustomStarMagnitudeLimit(limitMag);
 	}
+	skyDrawer->setCustomStarMagnitudeLimit(limitMag);
 
 	actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
@@ -2486,12 +2509,12 @@ bool Oculars::getFlagAutoLimitMagnitude() const
 void Oculars::setMagLimitStarsOcularsManual(double mag)
 {
 	magLimitStarsOcularsManual = mag;
-	settings->setValue("limit_stellar_magnitude", mag);
+	settings->setValue("limit_stellar_magnitude_manual", mag);
 	settings->sync();
 	// This is no property, no need to emit a signal.
 }
 
-double Oculars::getMagLimitStarsOcularsManual()
+double Oculars::getMagLimitStarsOcularsManual() const
 {
 	return magLimitStarsOcularsManual;
 }
@@ -2906,4 +2929,51 @@ double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
 	// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
 	// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
 	return 4.5 + 4.4*std::log10(diameter);
+}
+
+void Oculars::handleAutoLimitToggle(bool on)
+{
+	if (!flagShowOculars)
+		return;
+
+	// When we are in Oculars mode, we must toggle between the auto limit and manual limit. Logic taken from zoomOcular()/unzoomOcular()
+	StelCore *core = StelApp::getInstance().getCore();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	if (on)
+	{
+		Ocular * ocular = oculars[selectedOcularIndex];
+		Telescope * telescope = Q_NULLPTR;
+		// Only consider flip is we're not binoculars
+		if (!ocular->isBinoculars())
+		{
+			telescope = telescopes[selectedTelescopeIndex];
+		}
+		disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
+		double limitMag = computeLimitMagnitude(ocular, telescope);
+		// TODO: Is it really good to apply the star formula to DSO?
+		skyDrawer->setFlagNebulaMagnitudeLimit(true);
+		skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
+		skyDrawer->setFlagStarMagnitudeLimit(true);
+		skyDrawer->setCustomStarMagnitudeLimit(limitMag);
+	}
+	else
+	{
+		connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+		skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsOcularsManual);
+		skyDrawer->setFlagStarMagnitudeLimit(flagMagLimitStarsOcularsManual);
+	}
+}
+
+// Handle switching the main program's star limitation flag
+void Oculars::handleStarMagLimitToggle(bool on)
+{
+	if (!flagShowOculars)
+		return;
+
+	flagMagLimitStarsOcularsManual=on;
+	// It only makes sense to switch off the auto-limit when we switch off the limit.
+	if (!on)
+	{
+		setFlagAutoLimitMagnitude(false);
+	}
 }

@@ -230,7 +230,7 @@ public slots:
 	bool getFlagAutoLimitMagnitude(void) const;
 
 	void setMagLimitStarsOcularsManual(double mag);
-	double getMagLimitStarsOcularsManual();
+	double getMagLimitStarsOcularsManual() const;
 
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
@@ -361,16 +361,18 @@ private slots:
 	void togglePixelGrid();
 	void toggleCropOverlay();
 	void toggleFocuserOverlay();
+	void handleAutoLimitToggle(bool on);	//!< do a few activities in the background.
+	void handleStarMagLimitToggle(bool on); //!< Handle switching the main program's star limitation flag
 
 private:
+	//! Compute the limiting magnitude for a telescope
+	static double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
+
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
 
 	//! Returns TRUE if at least one bincular is defined.
 	bool isBinocularDefined();
-
-	//! Compute the limiting magnitude for a telescope
-	double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
 
 	//! Renders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
 	void paintCCDBounds();
@@ -446,9 +448,11 @@ private:
 					//!< If false, the manual limitation flag from the main program takes over (cached in flagLimitStarsMain),
 					//!< but with a dedicated value magLimitStarsOcularsManual for ocular mode.
 	double magLimitStarsMain;       //!< Value of limited magnitude for stars
+	bool flagMagLimitStarsOcularsManual; //!< Track whether a manual star magnitude limit should be activated when Oculars view is selected.
+						//!< This is required to set the manual limitation flag in SkyDrawer.
 	double magLimitStarsOcularsManual;       //!< Value of limited magnitude for stars in oculars mode, when not auto-defined with flagAutoLimitMagnitude
-	bool flagLimitDSOsMain;	        //!< Flag to track limit magnitude for DSOs
-	double magLimitDSOsMain;	        //!< Value of limited magnitude for DSOs
+	bool flagLimitDSOsMain;		//!< Flag to track limit magnitude for DSOs
+	double magLimitDSOsMain;	//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
 	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
