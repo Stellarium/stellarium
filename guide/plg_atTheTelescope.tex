@@ -163,7 +163,7 @@ To show this, let us use the M37 cluster as target. Through a pair of Celestron 
 \label{fig:plugins:Oculars:Usage:Ocular:M37C1400}
 \end{figure}
 
-Very nice indeed! So for this target, the C1400 is going to be the best bet. However, if my target was the Pleiades, the C1400 with that eyepiece would not be good -- the 80EDF would do much better!
+Very nice indeed! So for this target, the C1400 is going to be the best bet. However, if my target was the Pleiades, the C1400 with that eyepiece would not be good --- the 80EDF would do much better!
 
 When an eyepiece is active, the popup menu again changes.  
 With a non-binocular eyepiece selected, you also have the ability to select a particular eyepiece or telescope.
@@ -172,7 +172,7 @@ Changing the eyepiece to a non-binocular will again allow the telescope to be se
 Also notice that when your mouse cursor is very near the right hand border of the screen, the popup menu's sub-menus display to the left, not the right.
 
 \subsubsection{Star Scales}
-\newFeature{v0.16.0}As you know from section~\ref{sec:gui:view:sky}, the number and relative size of stars of various magnitudes 
+As you know\newFeature{v0.16.0} from section~\ref{sec:gui:view:sky}, the number and relative size of stars of various magnitudes 
 can be adjusted to your personal preferences in the view settings window to approximate the appearance of the stars as seen by the naked eye. 
 Some observers prefer to have a simulated ocular view with very small, or more, stars, quite different from what Stellarium usually shows. 
 The Oculars plugin therefore keeps two additional sets of scaling values for ocular views and CCD views, which are activated 
@@ -196,14 +196,13 @@ The first option allows you to define the general behaviour of the plugin.
 The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view}, \emph{Sensor view} and \emph{Telrad view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
 
 \begin{figure}[ht]\centering
-  \includegraphics[width=0.75\textwidth]{oculars_gui_general.png}
-  % TODO: UPDATE IMAGE FOR 0.20.0
+\includegraphics[width=0.75\textwidth]{oculars_gui_general.png}
 \caption{General tab of the Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:General}
 \end{figure}
 
 \begin{description}
-\item[Interface:] this group of options allows to change behaviour of the plugin in general.
+\item[Interface:] this group of options allows to change behavior of the plugin in general.
  \begin{description}
    \item[On-screen control panel:] show an additional GUI panel in the top-right corner of the screen to allow switching features of the plugin (in addition to the popup window).
    \item[Restore FOV to initial values] and
@@ -216,28 +215,33 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
    \item[Line Color] Select \newFeature{v0.20.0} color for ocular and sensor outlines and their labels.
    \item[Text Color] Select \newFeature{v0.20.0} color for screen messages which are shown only when the on-screen control panel is not shown.
  \end{description}
-\item[Ocular view] is a group of options that allows to change the plugin's behaviour in visual observation mode.
+\item[Ocular view] is a group of options that allows to change the plugin's behavior in visual observation mode.
  \begin{description}
    \item[Enable only if an object is selected] -- uncheck this option if you want to use the visual observation mode when no object is selected.
    \item[Limit stellar magnitude] allows to hide faint stars, which are invisible for the selected combination of eyepiece, lens and telescope.
-   \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
    \item[Scale image circle] option allows you to define whether or not to scale the images based on apparent FOV. When deactivated, the image circle will fill your screen. 
          In general, we recommend you not select this, unless you have a need to, because it can really reduce the image size on the screen. 
 		 It can however be very useful in comparing two eyepieces. 
 		 If you set this option, the  on-screen image will be scaled based on the eyepieces and telescopes you define. 
 		 See section \ref{sec:sec:plugins:Oculars:ScalingTheEyepieceView} for information on what scaling means, and why you might want to use it.
-   \item[Use semi-transparent mask:] uncheck this option if you want to see visible field of view as in real telescope.
+   \item[Use semi-transparent mask] uncheck this option if you want to see visible field of view as in real telescope. Since version 0.20.3 you may define level of transparency for mask\newFeature{v0.20.3}.
+   \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
+   \item[Show FOV outline] option\newFeature{v0.19.3} enables drawing the border of the eyepiece's FOV and it may be helpful in combination with a semi-transparent mask.
+   \item[Show compass rose] option\newFeature{v0.19.3} enables drawing cardinal directions in the equatorial coordinate system.
+   \item[Align crosshair] option\newFeature{v0.19.3} enables alignment of the cross-hair according to the equatorial coordinate system.
  \end{description}
-\item[Sensor view] is group of options allows to change behaviour of the plugin for photographic observations mode.
+\item[Sensor view] is group of options allows to change behavior of the plugin for photographic observations mode.
  \begin{description}
    \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
    \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
-   \item[Show sensor crop overlay] option\newFeature{v0.19.0} toggle drawing a crop box within the CCD frame.
+   \item[Show sensor crop overlay] option\newFeature{v0.19.0} toggle drawing a crop box within the CCD frame. In version 0.20.3\newFeature{v0.20.3} we added the ability drawing pixel grid within crop overlay especially for astrophotographers.
+   \item[Show focuser overlay] option\newFeature{v0.20.2} allows drawing a circle of mask, which is obtained by the telescope's focuser. We added masks of 3 common modern focusers to allow users check the visible aberrations in the FOV of the telescope.
  \end{description}
-\item[Telrad view] is a group\newFeature{v0.19.0} of options which allows to change behaviour of the plugin for Telrad mode.
+\item[Telrad view] is a group\newFeature{v0.19.0} of options which allows to change behavior of the plugin for Telrad mode.
  \begin{description}
  \item[Enable scaling FOV for Telrad] option allows you to define whether or not to scale the Telrad circles to half of apparent FOV.
    When activated, the Telrad circles will fill your screen. 
+ \item[FOV:] --- since version 0.20.2\newFeature{v0.20.2} you may define up to 4 circles to show specific FOV in the sky.
  \end{description}
 \end{description}
 
@@ -263,8 +267,8 @@ The fields on this tab are:
 \begin{description}
 \item[Name] -- a free-text description of the eye piece. You could modify this to match your personal descriptions of eyepieces.
 \item[aFOV] -- apparent field of view in degrees.
-\item[Focal Length] -- eyepiece focal length in mm.
-\item[Field Stop] -- the field stop of the eyepiece in mm. This is used to calculate the true field of view of an eyepiece. If you do not know what it is just leave it the default zero. Not all manufacturers provide this value; TeleVue is one that does.
+\item[Focal Length] -- eyepiece focal length in \mm.
+\item[Field Stop] -- the field stop of the eyepiece in \mm. This is used to calculate the true field of view of an eyepiece. If you do not know what it is just leave it the default zero. Not all manufacturers provide this value; TeleVue is one that does.
 \item[Binoculars] -- selecting this checkbox tells the system that this eyepiece is binoculars or finders; this means that this eyepiece can be used without defining a telescope.
 \item[Has permanent cross-hairs] -- selecting this checkbox tells the system that this eyepiece or binocular (finder) has also simple cross-hairs\footnote{The Oculars plugin supports eyepieces with reticle patterns -- both special eyepieces are available in the default list of eyepieces, and the option \emph{Has permanent cross-hairs} is not related to those eyepieces.}.
 \end{description}
@@ -272,7 +276,7 @@ When Binoculars are described, the relevant fields change to
 \begin{description}
 \item[tFOV] -- true field of view in degrees.
 \item[Magnification factor] -- the magnification of the binocular.
-\item[Diameter] -- the diameter of the binocular objective in mm.
+\item[Diameter] -- the diameter of the binocular objective in \mm.
 \end{description}
 
 
@@ -288,9 +292,9 @@ This is the tab used to enter your own lenses (see figure \ref{fig:plugins:Ocula
 
 The fields on this tab are:
 \begin{description}
-\item[Name] -- a free-text description of the lense. You could modify this to match your personal descriptions of lenses.
-\item[Multiplier] -- a factor larger than 1 expands the focal length, and lenses with this type are named Barlow lense; 
-                     a factor less   than 1 reduces the focal length, and lenses with this type are named Shapley lense or focus reducer.
+\item[Name] -- a free-text description of the lens. You could modify this to match your personal descriptions of lenses.
+\item[Multiplier] -- a factor larger than 1 expands the focal length, and lenses with this type are named Barlow lens; 
+                     a factor less   than 1 reduces the focal length, and lenses with this type are named Shapley lens or focus reducer.
 \end{description}
 
 \paragraph{Sensors}
@@ -310,24 +314,22 @@ The fields on this tab are:
 \item[Name] -- A free-text description of the sensor.
 \item[Resolution x] -- the width of the sensor in pixels.
 \item[Resolution y] -- the height of the sensor in pixels.
-\item[Chip width] -- the width of the sensor in mm.
-\item[Chip height] -- the height of the sensor in mm.
-\item[Pixel width] -- the width of an individual pixel, in \um.
-\item[Pixel height] -- the height of an individual pixel, in \um.
+\item[Chip width] -- the width of the sensor in \mm.
+\item[Chip height] -- the height of the sensor in \mm.
 \item[Rotation Angle] -- the rotation angle of the sensor, in degrees.
 \item[Binning x] -- the binning factor for the width of the sensor.
 \item[Binning y] -- the binning factor for the height of the sensor.
 \item[Off-Axis guider] -- selecting this checkbox tells the system that this sensor has support an off-axis guider also.
-\item[Prism/CCD distance] -- distance between center of prism/CCD of Off-Axis Guider and optical axis of telescope in mm.
-\item[Prism/CCD width] -- the width of the prism/CCD of Off-Axis Guider in mm.
-\item[Prism/CCD height] -- the height of the prism/CCD of Off-Axis Guider in mm.
+\item[Prism/CCD distance] -- distance between center of prism/CCD of Off-Axis Guider and optical axis of telescope in \mm.
+\item[Prism/CCD width] -- the width of the prism/CCD of Off-Axis Guider in \mm.
+\item[Prism/CCD height] -- the height of the prism/CCD of Off-Axis Guider in \mm.
 \item[Position Angle] -- the position angle of the prism/CCD of Off-Axis Guider, in degrees.
 \end{description}
 
 \noindent The resolution is easy to find: these are simply the image dimensions of a (non-binned) frame. 
 The chip size and pixel size may be more difficult, but the manual, or searching the Internet, should turn up these values.  
 For a ``full-frame'' DSLR, this should be close to 36x24\mm, while APS-C should be around 22.5x15\mm. 
-Pixel size is simply image size divided by resolution. Some cameras may have unsquare pixels.
+Some cameras may have unsquare pixels.
 
 \paragraph{Telescopes}
 
@@ -342,8 +344,8 @@ This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Ocu
 
 \begin{description}
 \item[Name] -- A free-text description of the telescope. 
-\item[Focal Length] -- telescope focal length in mm.
-\item[Diameter] -- telescope diameter (aperture) in mm.
+\item[Focal Length] -- telescope focal length in \mm.
+\item[Diameter] -- telescope diameter (aperture) in \mm.
 \item[Horizontal flip] -- if the view through this telescope should flip horizontally.
 \item[Vertical flip] -- if the view through this telescope should flip vertically.
 \item[Equatorial Mount] -- select it if this telescope has an equatorial mount.
@@ -401,7 +403,7 @@ So in this example, if you had an 8" telescope, you would want to use the 17\mm\
 \section{TelescopeControl Plugin}
 \label{sec:plugins:TelescopeControl}
 
-This plugin provides a simple control mechanism for motorised
+This plugin provides a simple control mechanism for motorized
 telescope mounts. The user selects an object (i.e.\ by clicking on
 something -- a planet, a star etc.) and presses the telescope go-to
 key, and the telescope will be guided to the object.
