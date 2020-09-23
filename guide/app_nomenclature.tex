@@ -6,7 +6,7 @@
 \chapter{Planetary nomenclature}
 \label{ch:Nomenclature}
 
-\newFeature{v0.17.0} Planetary nomenclature, like terrestrial nomenclature, 
+Planetary nomenclature\newFeature{v0.17.0}, like terrestrial nomenclature, 
 is a system of uniquely identifying features on the surface of a planet or 
 natural satellite so that the features can be easily located, described, and discussed. 
 Since the invention of the telescope, astronomers have given names to the surface 
@@ -46,6 +46,7 @@ File \file{data/nomenclature.fab} is a plain text file in UTF-8 encoding and has
 \item One item per line;
 \item Each item contains seven elements with white space (``space'' or ``tab'' character) as delimiter.
 \end{itemize}
+File \file{data/nomenclature.dat} is a zipped \file{data/nomenclature.fab} file and used to minimize loading the data and reduce size of the installation package.
 
 \begin{center}
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
@@ -213,6 +214,7 @@ Rupes, rupēs          & RU & Scarp\\\midrule
 Satellite Feature     & SF & A feature that shares the name of an associated feature. 
                              For example, on the Moon the craters referred to as ``Lettered Craters'' 
 							 are classified in the gazetteer as ``Satellite Features''\\%\midrule   
+Saxum, saxa           & SA & Boulder or rock\\%\midrule
 Scopulus, scopuli     & SC & Lobate or irregular scarp\\%\midrule
 Serpens, serpentes    & SE & Sinuous feature with segments of positive and negative relief along its length\\%\midrule
 Sinus, sinūs          & SI & ``Bay''; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons\\%\midrule

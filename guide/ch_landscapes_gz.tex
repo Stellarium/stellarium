@@ -156,14 +156,14 @@ panel. If they are missing, the parameters do not change to defaults.
   if absent.) Extinction coefficient (mag/airmass) for this site.
 \item[\var{atmospheric\_temperature}] (optional, no change if absent.)
   Surface air temperature (Degrees Celsius). Used for refraction. Set
-  to -1000 to explicitly declare "no change".
+  to -1000 to explicitly declare ``no change''.
 \item[\var{atmospheric\_pressure}] (optional, no change if absent.)
-  Surface air pressure (mbar; would be 1013 for "normal" sea-level
-  conditions). Used for refraction. Set to -2 to declare "no change",
+  Surface air pressure (mbar; would be 1013 for ``normal'' sea-level
+  conditions). Used for refraction. Set to -2 to declare ``no change'',
   or -1 to compute from altitude.
 \item[\var{display\_fog}] (optional, -1/0/1, default=-1) You may want
   to preconfigure setting 0 for a landscape on the Moon. Set -1 to
-  declare "no change".
+  declare ``no change''.
 \end{description}
 
 
@@ -952,7 +952,7 @@ increasingly hard to avoid.
 
 \paragraph{Using Straight Edges as Guides}
 If the panorama contains straight lines like vertical edges of
-buildings, these can be used to automatically get a correctly levelled
+buildings, these can be used to automatically get a correctly leveled
 horizon: Vertical lines are mapped to vertical lines in
 equirectangular panos! In the \menu{Control Points} tab, select the image
 with the vertical edge in both subframes, and mark points on the
@@ -977,9 +977,9 @@ rings should be linked mostly to their respective upper photos, but
 not necessarily to the  images to its sides. The resulting panorama will then
 show a good horizon line, while stitching artifacts in a grassy or
 otherwise only decorative ground will usually be acceptable and can,
-if needed, be camouflaged in postprocessing.
+if needed, be camouflaged in post-processing.
 
-This optimisation and editing of control points is likely a longish
+This optimization and editing of control points is likely a longish
 iterative process, and these are the late night hours where you will
 finally wish you had used a panorama head\ldots
 
@@ -1000,7 +1000,7 @@ area, or use the crop settings to define rectangular areas to use.
 \label{sec:landscapes:Exposure}
 In the \menu{Photos} tab, select \button{Photometric parameters} on the right
 side. The EV column lists the \emph{Exposure Value}. If you see disbalance
-here and in the preview window, you can run a photometric optimisation
+here and in the preview window, you can run a photometric optimization
 with the lowest button on the \menu{Photos} tab. Simply select Low dynamic
 range and press \button{Calculate}. The preview should now show a seamless
 image. If all else fails, you can edit the EV values directly.
@@ -1009,9 +1009,9 @@ Advanced photographers may want to correct exposures in their RAW
 images before creating JPG or TIF images to combine with
 \program{Hugin}. This unfortunately may create exposure disbalance
 because the EXIF tags may not be adjusted accordingly, so based on
-different exposure/f-stop conbinations \program{Hugin} may think it
+different exposure/f-stop combinations \program{Hugin} may think it
 has to re-balance the values. In these cases, don't run the
-photometric optimiser. Some image exposure values have to be changed
+photometric optimizer. Some image exposure values have to be changed
 manually, and the effect supervised in the preview window. Usually the
 smooth blending in the subprogam \program{enblend} called by
 \program{Hugin} will hide remaining differences.
@@ -1022,7 +1022,7 @@ smooth blending in the subprogam \program{enblend} called by
 \label{sec:landscapes:stitching}
 
 When you are happy with the panorama in the preview window and the
-matchpoints promise a good fit, it is time to finally create the
+match-points promise a good fit, it is time to finally create the
 panorama image. \program{Hugin} can create a large number of different
 projections which all have their application. For Stellarium, we can
 only use the equirectangular projection. You still have 2 options:
@@ -1049,7 +1049,7 @@ and photos taken with a wide-angle lens. Increasing this size will
 most likely not lead to higher optical resolution!  The panorama width
 which you can most usefully create depends on the resolution of the
 source images (which leads to the result given by \program{Hugin}) and on your
-needs. If you need arcminute resolution, you would aim for
+needs. If you need arc-minute resolution, you would aim for
 $360\times60=21600$ pixels, which cannot be loaded into graphics
 memory in a single piece, i.e., is too large for Stellarium, and must
 be configured as \var{old\_style} landscape. In this case, 10 or 11 tiles of
@@ -1130,7 +1130,7 @@ A few important commands:
 \end{description}
 
 
-The most obvious postprocessing need for our panorama is making the sky
+The most obvious post-processing need for our panorama is making the sky
 transparent. The optimal tool usually is the ``Fuzzy Select'', which
 is equivalent to the ``Magic Wand'' tool in \program{Photoshop}. Simply mark the
 sky, and then delete it. The checkerboard background indicates
@@ -1373,18 +1373,18 @@ the right side. Now you see ``Yaw'', ``Pitch'' and ``Roll'' values of
 camera-to-world orientation listed in the photos list. It should now
 be possible, by changing the values \emph{only for the anchor image}
 and re-optimizing, to come to a panorama with only minimal error. In
-the process, start with Optimising \menu{Positions> incremental from
-  anchor}, then go for view and barrel optimisation, and so on. Always
+the process, start with Optimizing \menu{Positions> incremental from
+  anchor}, then go for view and barrel optimization, and so on. Always
 try to remove foreground match points which have large error and are irrelevant
 for the task to match the horizon. Those are especially cross-matches
-of horizon and subhorizon rows of images. Only vertically and
+of horizon and sub-horizon rows of images. Only vertically and
 horizontally adjacent images should be required to match. For handheld
 panoramas, also links between adjacent images in the non-horizontal rows are usually
 too erroneous to be useful, just remove these match points. Use the
 \menu{Layout} tab in the Fast Panorama Preview to see the relations
 between images (Fig.~\ref{fig:FastPanoPreview}): Red lines have big
 errors, green lines are good, thin gray lines indicate possible
-overlap without specified match points. After each optimisation step,
+overlap without specified match points. After each optimization step,
 export a new pano image, load as layer in \program{GIMP}, and check
 again.
 
@@ -1392,7 +1392,7 @@ again.
   \centering
     \includegraphics[width=\textwidth]{FastPreview.png}
     \caption{\program{Hugin}'s Fast Panorama Preview can be used to check which
-      images are connected to its neighbours. Most important are good
+      images are connected to its neighbors. Most important are good
       matches along the horizon, the images in the lower rows are
       clearly less important. If captured on a tripod, they should
       still match. }
@@ -1424,13 +1424,13 @@ achieve a match to fit your needs.
 
 In case you have taken photographs in several rings but without a panorama tripod, you may have to
 first align only the horizontal images (deselect the lower images to
-exclude from optimisation), and when the horizon ring is aligned
-perfectly, deactivate further optimisation in \program{Hugin} for those photos
-while ``attaching'' (optimising) the lower photos. In \program{Hugin}'s \menu{Photos} tab,
-select \menu{Optimise> Geometric> Custom Parameters}. This opens an
-extra tab \menu{Optimiser}, where you can fine-tune your needs: Switch
+exclude from optimization), and when the horizon ring is aligned
+perfectly, deactivate further optimization in \program{Hugin} for those photos
+while ``attaching'' (optimizing) the lower photos. In \program{Hugin}'s \menu{Photos} tab,
+select \menu{Optimize> Geometric> Custom Parameters}. This opens an
+extra tab \menu{Optimizer}, where you can fine-tune your needs: Switch
 off all variables for the photos in the horizon ring, and make sure
-the lower photos fit in the preview after optimisation.
+the lower photos fit in the preview after optimization.
 
 It may even help to define that the lower rows have been taken with a
 different Lens, so the field of view and distortion settings of the
@@ -1478,7 +1478,7 @@ azimuth.  In this case, don't run the optimizer, but you can
 immediately set an output resolution and stitch
 (see~\ref{sec:landscapes:stitching}). To get rid of the image
 decorations (compass etc), apply masks\footnote{There is a wide
-  overlap in the images to allow generous trimming.}. Postprocessing
+  overlap in the images to allow generous trimming.}. Post-processing
 steps are the same as for photo-panoramas: make sky invisible, crop,
 etc.
 
@@ -1575,7 +1575,7 @@ image manipulation and other tasks on Windows.
 \program{IrfanView} is a free image viewer for Windows with many
 options. It can show almost any image format, including several camera
 RAW formats, in windowed and full-screen mode. It is definitely
-preferrable over any image viewer built into Windows. Unfortunately
+preferable over any image viewer built into Windows. Unfortunately
 however, it has no panorama viewer function!
 
 \subsection{FSPViewer}
