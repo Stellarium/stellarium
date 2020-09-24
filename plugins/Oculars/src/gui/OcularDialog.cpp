@@ -592,7 +592,7 @@ void OcularDialog::initAboutText()
 	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
 	html +=         q_("Therefore we recommend that you leave it off, unless you feel you have a need for it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
-	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
+	html += "<p>" + QString(q_("You can toggle a Telrad finder. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
 	html +=         q_("You can adjust the diameters or even add a fourth circle if you have a different finder, or revert to the Telrad standard sizes.") + "</p>";
 	html += "<p>" + q_("If you find any issues, please let me know. Enjoy!") + "</p>";
 
