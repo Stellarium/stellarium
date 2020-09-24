@@ -120,42 +120,55 @@ void OcularDialog::closeWindow()
 
 void OcularDialog::deleteSelectedCCD()
 {
-	ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
-	plugin->updateLists();
+	if (askConfirmation())
+	{
+		ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
+		ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+		plugin->updateLists();
+	}
 }
 
 void OcularDialog::deleteSelectedOcular()
 {
-	if (ocularTableModel->rowCount() == 1) {
-		qDebug() << "Cannot delete the last entry.";
-	} else {
-		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
-		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
-		plugin->updateLists();
+	if (askConfirmation())
+	{
+		if (ocularTableModel->rowCount() == 1) {
+			qDebug() << "Cannot delete the last entry.";
+		} else {
+			ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
+			ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+			plugin->updateLists();
+		}
 	}
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
-	if (telescopeTableModel->rowCount() == 1) {
-		qDebug() << "Cannot delete the last entry.";
-	} else {
-		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
-		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
-		plugin->updateLists();
+	if (askConfirmation())
+	{
+		if (telescopeTableModel->rowCount() == 1) {
+			qDebug() << "Cannot delete the last entry.";
+		} else {
+			telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
+			ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+			plugin->updateLists();
+		}
 	}
 }
 
 void OcularDialog::deleteSelectedLens()
 {
-    if (lensTableModel->rowCount() > 0) {
-	lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
-	if (lensTableModel->rowCount() > 0) {
-	    ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
-        }
-        plugin->updateLists();
-    }
+	if (askConfirmation())
+	{
+		if (lensTableModel->rowCount() > 0)
+		{
+			lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
+			if (lensTableModel->rowCount() > 0)
+				ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+
+			plugin->updateLists();
+		}
+	}
 }
 
 void OcularDialog::insertNewCCD()

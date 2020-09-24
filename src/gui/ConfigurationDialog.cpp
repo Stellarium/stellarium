@@ -1132,14 +1132,20 @@ void ConfigurationDialog::updateConfigLabels()
 
 void ConfigurationDialog::setDefaultViewOptions()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
+	if (askConfirmation())
+	{
+		qDebug() << "Restore defaults...";
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
 
-	conf->setValue("main/restore_defaults", true);
-	// reset all stored panel locations
-	conf->beginGroup("DialogPositions");
-	conf->remove("");
-	conf->endGroup();
+		conf->setValue("main/restore_defaults", true);
+		// reset all stored panel locations
+		conf->beginGroup("DialogPositions");
+		conf->remove("");
+		conf->endGroup();
+	}
+	else
+		qDebug() << "Restore defaults is canceled...";
 }
 
 void ConfigurationDialog::populatePluginsList()

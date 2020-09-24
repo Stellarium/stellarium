@@ -450,10 +450,16 @@ void ShortcutsDialog::updateShortcutsItem(StelAction *action,
 
 void ShortcutsDialog::restoreAllDefaultShortcuts()
 {
-	resetModel();
-	actionMgr->restoreDefaultShortcuts();
-	updateTreeData();
-	initEditors();
+	if (askConfirmation())
+	{
+		qDebug() << "[Shortcuts] restore defaults...";
+		resetModel();
+		actionMgr->restoreDefaultShortcuts();
+		updateTreeData();
+		initEditors();
+	}
+	else
+		qDebug() << "[Shortcuts] restore defaults is canceled...";
 }
 
 void ShortcutsDialog::restoreDefaultShortcuts()

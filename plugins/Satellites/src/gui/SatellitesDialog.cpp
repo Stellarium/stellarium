@@ -855,12 +855,15 @@ void SatellitesDialog::saveSourceList(void)
 
 void SatellitesDialog::deleteSourceRow(void)
 {
-	ui->sourceEdit->setText("");
-	if (ui->sourceList->currentItem())
-		delete ui->sourceList->currentItem();
+	if (askConfirmation())
+	{
+		ui->sourceEdit->setText("");
+		if (ui->sourceList->currentItem())
+			delete ui->sourceList->currentItem();
 
-	updateButtonsProperties();
-	saveSourceList();
+		updateButtonsProperties();
+		saveSourceList();
+	}
 }
 
 void SatellitesDialog::editSourceRow(void)
@@ -1141,18 +1144,21 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 
 void SatellitesDialog::removeSatellites()
 {
-	QStringList idList;
-	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	QModelIndexList selectedIndexes = selectionModel->selectedRows();
-	for (const auto& index : selectedIndexes)
+	if (askConfirmation())
 	{
-		QString id = index.data(Qt::UserRole).toString();
-		idList.append(id);
-	}
-	if (!idList.isEmpty())
-	{
-		GETSTELMODULE(Satellites)->remove(idList);
-		saveSatellites();
+		QStringList idList;
+		QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+		QModelIndexList selectedIndexes = selectionModel->selectedRows();
+		for (const auto& index : selectedIndexes)
+		{
+			QString id = index.data(Qt::UserRole).toString();
+			idList.append(id);
+		}
+		if (!idList.isEmpty())
+		{
+			GETSTELMODULE(Satellites)->remove(idList);
+			saveSatellites();
+		}
 	}
 }
 
