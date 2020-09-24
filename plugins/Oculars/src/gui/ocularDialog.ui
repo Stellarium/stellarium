@@ -431,6 +431,9 @@
              </property>
              <item row="2" column="0">
               <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="toolTip">
+                <string>Show FOV circles relative to the apparent FOV of the widest-angle ocular</string>
+               </property>
                <property name="text">
                 <string>Scale image circle</string>
                </property>
@@ -531,7 +534,7 @@
                <item>
                 <widget class="QSpinBox" name="transparencySpinBox">
                  <property name="toolTip">
-                  <string>Value of transparency of semi-transparent mask</string>
+                  <string>Opacity of semi-transparent mask</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
