@@ -27,7 +27,6 @@ viewport_effect                     = none
 [projection]
 type                                = ProjectionStereographic
 viewportMask                        = none
-flag_use_gl_point_sprite            = false
 flip_horz                           = false
 flip_vert                           = false
 
