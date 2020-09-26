@@ -107,13 +107,7 @@ sudo apt-get update
 sudo apt-get install stellarium
 \end{commands}
 
-You can also download and run our \emph{AppImage} package for 64-bit linuxes (we do not
-provide an \emph{AppImage} for old 32-bit systems):
-\file{Stellarium-\StelVersion-x86\_64.AppImage}. To avoid possible
-conflicts due to architectural features of AppImage, please remove
-the stellarium package which you have installed from the repository.
-
-Similar to an \emph{AppImage} packages you may use \emph{flat}\footnote{\url{https://flathub.org/apps/details/org.stellarium.Stellarium}} and \emph{snap}\footnote{\url{https://snapcraft.io/stellarium-daily}} packages also.
+You can also download and run universal binary packages for linux systems:  \emph{flat}\footnote{\url{https://flathub.org/apps/details/org.stellarium.Stellarium}} or \emph{snap}\footnote{\url{https://snapcraft.io/stellarium-daily}}.
 
 \subsubsection{Raspberry Pi 2/3/4}
 These tiny ARM-based computers are very popular for small and energy-efficient applications like controlling push-to Dobsonians. 
@@ -195,6 +189,8 @@ logfile. Please see section~\ref{sec:LogFile} where this
 file is located on your system. This file is \emph{essential} in case when
 you feel you need to report a problem with your system which has not
 been found before.
+
+Since version 0.20.2 we added few pop-up windows with information about possible troubles or warnings to allow those messages more visible for users.
 
 If you don't succeed in running Stellarium, please see the online
 forum\footnote{\url{https://github.com/Stellarium/stellarium}}.  It includes

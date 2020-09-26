@@ -651,10 +651,15 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 
 void ExoplanetsDialog::restoreDefaults(void)
 {
-	qDebug() << "[Exoplanets] Restore defaults...";
-	ep->restoreDefaults();
-	ep->loadConfiguration();
-	updateGuiFromSettings();
+	if (askConfirmation())
+	{
+		qDebug() << "[Exoplanets] restore defaults...";
+		ep->restoreDefaults();
+		ep->loadConfiguration();
+		updateGuiFromSettings();
+	}
+	else
+		qDebug() << "[Exoplanets] restore defaults is canceled...";
 }
 
 void ExoplanetsDialog::updateGuiFromSettings(void)

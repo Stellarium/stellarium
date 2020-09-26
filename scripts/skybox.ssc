@@ -28,6 +28,7 @@
 //                  You need to enable storing to absolute paths in the [scripts] section of config.ini.
 // V2.10 2018-07-29 Include diameters on Sun and Moon.
 // V2.11 2020-04-06 Viewport now set by StelViewportMgr (Fix deprecated/obsolete API use.)
+// V2.12 2020-09-20 Suppress current vertical line.
 
 // Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
 DIR=core.getEnv("STEL_SKYBOX_DIR");
@@ -64,6 +65,8 @@ core.setTimeRate(0.0);
 // Keep view direction for restore after sky box tile creation.
 oldAlt=core.getViewAltitudeAngle();
 oldAz=core.getViewAzimuthAngle();
+oldVerticalLineVisible=GridlinesMgr.getFlagCurrentVerticalLine();
+GridlinesMgr.setFlagCurrentVerticalLine(false);
 
 // Make sure to use the right projection:
 core.setProjectionMode("ProjectionPerspective");
@@ -178,6 +181,7 @@ core.saveOutputAs(OUTPUT_DATA);
 // Reset atmosphere auto brightness computation.
 LandscapeMgr.setAtmosphereAverageLuminance(-1.0);
 
+GridlinesMgr.setFlagCurrentVerticalLine(oldVerticalLineVisible);
 core.moveToAltAzi(oldAlt, oldAz, 0);
 core.setTimeRate(oldTimeRate);
 

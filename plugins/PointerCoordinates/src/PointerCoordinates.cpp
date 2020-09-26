@@ -92,7 +92,7 @@ void PointerCoordinates::init()
 {
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		qDebug() << "[PointerCoordinates] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
 
@@ -410,7 +410,7 @@ void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
 	if (coordPlace<0)
 	{
-		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
 		coordPlace = TopRight;
 	}
 	setCurrentCoordinatesPlace(coordPlace);
@@ -428,7 +428,7 @@ void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
 		coordSystem = RaDecJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
-    <height>460</height>
+    <width>486</width>
+    <height>461</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -239,34 +239,34 @@
            </widget>
           </item>
           <item>
-            <widget class="QCheckBox" name="highlightWhenVisible">
-              <property name="text">
-                <string>Only highlight when visible</string>
-              </property>
-            </widget>
+           <widget class="QCheckBox" name="highlightWhenVisible">
+            <property name="text">
+             <string>Only highlight when visible</string>
+            </property>
+           </widget>
           </item>
           <item>
-            <widget class="QCheckBox" name="limitInfoToNavStars">
-              <property name="text">
-                <string>Only show extra information for marked Navigation Stars</string>
-              </property>
-            </widget>
+           <widget class="QCheckBox" name="limitInfoToNavStars">
+            <property name="text">
+             <string>Only show extra information for marked Navigation Stars</string>
+            </property>
+           </widget>
           </item>
-           <item>
-             <widget class="QCheckBox" name="tabulatedDisplay">
-               <property name="text">
-                 <string>Show information as a tabulated list</string>
-               </property>
-             </widget>
-           </item> 
           <item>
-            <widget class="QCheckBox" name="upperLimb">
-              <property name="text">
-                <string>Use upper limb for Sun and Moon</string>
-              </property>
-            </widget>
-           </item>
-           <item>
+           <widget class="QCheckBox" name="tabulatedDisplay">
+            <property name="text">
+             <string>Show information as a tabulated list</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="upperLimb">
+            <property name="text">
+             <string>Use upper limb for Sun and Moon</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -287,6 +287,22 @@
                <string>Restore defaults</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonSave">

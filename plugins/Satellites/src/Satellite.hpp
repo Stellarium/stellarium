@@ -50,9 +50,11 @@ typedef struct
 //! @ingroup satellites
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
+	SatCosparIDRole,
 	SatDescriptionRole,
 	SatStdMagnitudeRole,
 	SatRCSRole,
+	SatTLEEpochRole,
 	SatFlagsRole,
 	SatGroupsRole,
 	FirstLineRole,
@@ -211,10 +213,6 @@ public:
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);
 	
-	//! Parse TLE line to extract International Designator and launch year.
-	//! Sets #internationalDesignator and #jdLaunchYearJan1.
-	void parseInternationalDesignator(const QString& tle1);
-	
 	//! Needed for sorting lists (if this ever happens...).
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
@@ -225,6 +223,8 @@ public:
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
 
+	void recomputeEpochTLE();
+
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -234,7 +234,10 @@ private:
 	float calculateOrbitSegmentIntensity(int segNum);
 	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
 	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
-	QString calculateEpochFromLine1(QString tle) const;
+	//! Parse TLE line to extract International Designator and launch year.
+	//! Sets #internationalDesignator and #jdLaunchYearJan1.
+	void parseInternationalDesignator(const QString& tle1);
+	void calculateEpochFromLine1(QString tle);
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
@@ -262,6 +265,8 @@ private:
 	QString description;
 	//! International Designator / COSPAR designation / NSSDC ID.
 	QString internationalDesignator;
+	//! Epoch of the TLE
+	QString tleEpoch;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().

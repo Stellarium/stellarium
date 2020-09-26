@@ -181,11 +181,17 @@ protected:
 	//! to the required datatype, the application will crash
 	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
 
+	bool askConfirmation();
+
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
+
+	//! A list of widgets where kinetic scrolling can be activated or deactivated
+	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
+	QList<QWidget *> kineticScrollingList;
 
 protected slots:
 	//! To be called by a connected QToolButton with a color background.
@@ -195,12 +201,6 @@ protected slots:
 	void enableKineticScrolling(bool b);
 	//! connect from StelApp to handle font and font size changes.
 	void handleFontChanged();
-
-
-protected:
-	//! A list of widgets where kinetic scrolling can be activated or deactivated
-	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
-	QList<QWidget *> kineticScrollingList;
 
 private slots:
 	void updateNightModeProperty();

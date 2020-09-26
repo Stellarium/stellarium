@@ -470,6 +470,27 @@
 			"RA": "21h25m28s",
 			"DE": "-81d38m28s"
 		},
+		"2M1059-21":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 66.95,
+				"period": 690.0,
+				"semiAxis": 0.8,
+				"eccentricity": 0.146,
+				"inclination": 32.9,
+				"discovered": 2020,
+				"detectionMethod": "Astrometry",
+				"planetName": "b"
+			}
+			],
+			"distance": 31.81,
+			"stype": "L2",
+			"smass": 0.81,
+			"RA": "10h59m51s",
+			"DE": "-21d13m9s"
+		},
 		"2MASS J11193254 AB":
 		{
 			"exoplanets":
@@ -1121,6 +1142,30 @@
 			"RA": "16h11m31s",
 			"DE": "-18d38m25s"
 		},
+		"AU Mic":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.18,
+				"radius": 0.375,
+				"period": 8.46321,
+				"semiAxis": 0.066,
+				"eccentricity": 0.1,
+				"discovered": 0,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 9.79,
+			"stype": "M1V",
+			"smass": 0.5,
+			"Vmag": 8.6,
+			"sradius": 0.75,
+			"effectiveTemp": 3700.0,
+			"RA": "20h45m10s",
+			"DE": "-31d20m27s"
+		},
 		"BD+03 2562":
 		{
 			"exoplanets":
@@ -1511,13 +1556,21 @@
 			"exoplanets":
 			[
 			{
-				"period": 1667.0,
-				"semiAxis": 2.28,
+				"period": 1634.0,
+				"semiAxis": 2.36,
 				"eccentricity": 0.05,
 				"angleDistance": 0.091575,
 				"discovered": 2010,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
+			},
+			{
+				"period": 74.2,
+				"semiAxis": 0.3,
+				"eccentricity": 0.4,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
 			}
 			],
 			"distance": 27.3,
@@ -1576,6 +1629,30 @@
 			"effectiveTemp": 3278.0,
 			"RA": "17h57m49s",
 			"DE": "4d41m36s"
+		},
+		"CD Cet":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.01244,
+				"period": 2.2907,
+				"semiAxis": 0.0185,
+				"inclination": 87.48,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 8.609,
+			"stype": "M5.0",
+			"smass": 0.161,
+			"smetal": 0.13,
+			"Vmag": 12.0,
+			"sradius": 0.175,
+			"effectiveTemp": 3130.0,
+			"RA": "3h13m23s",
+			"DE": "4d46m29s"
 		},
 		"CD-35 2722":
 		{
@@ -2692,9 +2769,10 @@
 			"exoplanets":
 			[
 			{
+				"period": 1450.0,
 				"semiAxis": 1.148,
 				"discovered": 2013,
-				"detectionMethod": "Radial Velocity",
+				"detectionMethod": "Timing",
 				"planetName": "b"
 			}
 			],
@@ -2766,6 +2844,24 @@
 			"RA": "12h6m31.8s",
 			"DE": "-5d49m38.6s"
 		},
+		"EPIC 201170410":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.09341,
+				"period": 6.7987,
+				"semiAxis": 0.0349,
+				"eccentricity": 0.0,
+				"inclination": 89.0,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"RA": "11h20m34s",
+			"DE": "-4d48m25s"
+		},
 		"EPIC 201295312":
 		{
 			"exoplanets":
@@ -2810,6 +2906,24 @@
 			"effectiveTemp": 3720.0,
 			"RA": "12h15m14.2s",
 			"DE": "2d1m15.4s"
+		},
+		"EPIC 201757695":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.08101,
+				"period": 2.0478,
+				"semiAxis": 0.0296,
+				"eccentricity": 0.0,
+				"inclination": 89.28,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"RA": "11h35m45s",
+			"DE": "4d36m59s"
 		},
 		"EPIC 203826436":
 		{
@@ -2949,28 +3063,32 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.181,
-				"period": 1.291563,
-				"semiAxis": 0.0188,
+				"radius": 0.1749,
+				"period": 1.29151,
+				"semiAxis": 0.019,
+				"eccentricity": 0.06,
+				"inclination": 88.36,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			},
 			{
-				"radius": 0.173,
-				"period": 5.44425,
-				"semiAxis": 0.0491,
+				"radius": 0.1811,
+				"period": 5.44482,
+				"semiAxis": 0.0451,
+				"eccentricity": 0.15,
+				"inclination": 89.49,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
 			}
 			],
 			"distance": 100.0,
-			"stype": "M1.0V",
-			"smass": 0.532,
+			"stype": "M1.V",
+			"smass": 0.582,
 			"smetal": -0.22,
-			"sradius": 0.513,
-			"effectiveTemp": 3676.0,
+			"sradius": 0.492,
+			"effectiveTemp": 3842.0,
 			"RA": "8h55m25.3s",
 			"DE": "10d28m8.7s"
 		},
@@ -3160,19 +3278,22 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.109,
+				"radius": 0.1142,
 				"period": 2.219315,
 				"semiAxis": 0.0288,
+				"eccentricity": 0.21,
+				"inclination": 86.39,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			}
 			],
 			"distance": 74.0,
-			"smass": 0.644,
+			"stype": "M0V",
+			"smass": 0.621,
 			"smetal": 0.37,
-			"sradius": 0.612,
-			"effectiveTemp": 3903.0,
+			"sradius": 0.625,
+			"effectiveTemp": 3963.0,
 			"RA": "8h25m54.3s",
 			"DE": "20d21m34.4s"
 		},
@@ -3205,19 +3326,22 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.237,
-				"period": 30.9542,
-				"semiAxis": 0.1641,
+				"radius": 0.2364,
+				"period": 30.95676,
+				"semiAxis": 0.167,
+				"eccentricity": 0.06,
+				"inclination": 89.79,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			}
 			],
-			"distance": 156.0,
-			"smass": 0.615,
+			"distance": 162.0,
+			"stype": "M0V",
+			"smass": 0.649,
 			"smetal": -0.02,
-			"sradius": 0.592,
-			"effectiveTemp": 3880.0,
+			"sradius": 0.571,
+			"effectiveTemp": 4076.0,
 			"RA": "8h57m46.6s",
 			"DE": "21d27m12.7s"
 		},
@@ -3655,46 +3779,29 @@
 			"RA": "10h42m23s",
 			"DE": "4d26m29s"
 		},
-		"EPIC 249622103":
+		"EPIC 249631677":
 		{
 			"exoplanets":
 			[
 			{
-				"radius": 0.12472,
-				"period": 2.46746,
-				"semiAxis": 0.03317,
-				"inclination": 88.79,
-				"discovered": 2018,
+				"radius": 0.0848,
+				"period": 3.1443189,
+				"semiAxis": 0.0234,
+				"inclination": 88.74,
+				"discovered": 2020,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
-			},
-			{
-				"radius": 0.1191,
-				"semiAxis": 0.06687,
-				"inclination": 88.95,
-				"discovered": 2018,
-				"detectionMethod": "Primary Transit",
-				"planetName": "c"
-			},
-			{
-				"radius": 0.2355,
-				"period": 24.3662,
-				"semiAxis": 0.1527,
-				"inclination": 89.35,
-				"discovered": 2018,
-				"detectionMethod": "Primary Transit",
-				"planetName": "d"
 			}
 			],
-			"distance": 69.0,
-			"stype": "K3",
-			"smass": 0.8,
-			"smetal": 0.07,
-			"Vmag": 10.7,
-			"sradius": 0.745,
-			"effectiveTemp": 4950.0,
-			"RA": "15h21m55s",
-			"DE": "-20d13m54s"
+			"distance": 56.8,
+			"stype": "M3.5",
+			"smass": 0.174,
+			"smetal": -0.24,
+			"Vmag": 18.0,
+			"sradius": 0.196,
+			"effectiveTemp": 3300.0,
+			"RA": "15h12m5s",
+			"DE": "-20d6m31s"
 		},
 		"EPIC 249801827":
 		{
@@ -3844,9 +3951,9 @@
 			"exoplanets":
 			[
 			{
-				"mass": 3.0,
+				"mass": 0.208,
 				"period": 320000.0,
-				"semiAxis": 115.0,
+				"semiAxis": 117.0,
 				"eccentricity": 0.11,
 				"angleDistance": 14.92731,
 				"discovered": 2008,
@@ -4322,6 +4429,33 @@
 			"RA": "4h53m49.9s",
 			"DE": "-17d46m24.2s"
 		},
+		"GJ 2056":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 69.971,
+				"semiAxis": 0.283,
+				"eccentricity": 0.72,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			},
+			{
+				"period": 2982.394,
+				"semiAxis": 3.453,
+				"eccentricity": 0.81,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 28.47,
+			"stype": "M0",
+			"Vmag": 10.4,
+			"RA": "7h12m5s",
+			"DE": "-24d53m31s"
+		},
 		"GJ 229":
 		{
 			"exoplanets":
@@ -4385,9 +4519,11 @@
 			"exoplanets":
 			[
 			{
+				"mass": 0.00922,
 				"period": 18.64,
-				"semiAxis": 0.09,
-				"eccentricity": 0.03,
+				"semiAxis": 0.091,
+				"eccentricity": 0.1,
+				"inclination": 80.0,
 				"discovered": 2017,
 				"detectionMethod": "Radial Velocity",
 				"pclass": "M-Warm Terran",
@@ -4398,25 +4534,31 @@
 				"planetName": "b"
 			},
 			{
+				"mass": 0.00374,
 				"period": 4.72322,
 				"semiAxis": 0.036,
-				"eccentricity": 0.12,
+				"eccentricity": 0.17,
+				"inclination": 80.0,
 				"discovered": 2017,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
 			},
 			{
+				"mass": 0.03448,
 				"period": 413.9,
 				"semiAxis": 0.712,
-				"eccentricity": 0.17,
+				"eccentricity": 0.0,
+				"inclination": 80.0,
 				"discovered": 2019,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "d"
 			},
 			{
+				"mass": 0.0297,
 				"period": 542.0,
 				"semiAxis": 0.849,
-				"eccentricity": 0.03,
+				"eccentricity": 0.0,
+				"inclination": 80.0,
 				"discovered": 2019,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "e"
@@ -4877,6 +5019,39 @@
 			"RA": "17h16m1s",
 			"DE": "11d3m30s"
 		},
+		"GJ 414 A":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.2632,
+				"period": 50.817,
+				"semiAxis": 0.24,
+				"eccentricity": 0.48,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			},
+			{
+				"radius": 0.7833,
+				"period": 748.3,
+				"semiAxis": 1.43,
+				"eccentricity": 0.093,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 11.893,
+			"stype": "K7V",
+			"smass": 0.65,
+			"smetal": 0.24,
+			"Vmag": 8.9,
+			"sradius": 0.68,
+			"effectiveTemp": 4120.0,
+			"RA": "11h11m5s",
+			"DE": "30d26m46s"
+		},
 		"GJ 422":
 		{
 			"exoplanets":
@@ -4995,6 +5170,25 @@
 			"effectiveTemp": 3684.0,
 			"RA": "11h42m10.9s",
 			"DE": "26d42m23s"
+		},
+		"GJ 480":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 9.567,
+				"semiAxis": 0.068,
+				"eccentricity": 0.1,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 14.24,
+			"stype": "M3.5",
+			"Vmag": 11.5,
+			"RA": "12h38m52s",
+			"DE": "11d41m46s"
 		},
 		"GJ 504":
 		{
@@ -5372,6 +5566,14 @@
 				"discovered": 2014,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
+			},
+			{
+				"period": 727.562,
+				"semiAxis": 1.165,
+				"eccentricity": 0.4,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
 			}
 			],
 			"distance": 4.5,
@@ -5612,6 +5814,61 @@
 			"RA": "22h53m13s",
 			"DE": "-14d15m12.9s"
 		},
+		"GJ 887":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 9.252,
+				"semiAxis": 0.068,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			},
+			{
+				"period": 21.789,
+				"semiAxis": 0.12,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 3.2871,
+			"stype": "M1V",
+			"smass": 0.489,
+			"smetal": -0.06,
+			"Vmag": 7.34,
+			"sradius": 0.4712,
+			"effectiveTemp": 3688.0,
+			"RA": "23h5m52s",
+			"DE": "-35d51m11s"
+		},
+		"GJ 9066":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 241.883,
+				"semiAxis": 403.0,
+				"eccentricity": 0.18,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			},
+			{
+				"period": 767.887,
+				"semiAxis": 0.87,
+				"eccentricity": 0.33,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 4.4716,
+			"stype": "M4.5",
+			"RA": "2h0m13s",
+			"DE": "13d3m7s"
+		},
 		"GJ 96":
 		{
 			"exoplanets":
@@ -5638,10 +5895,10 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0258,
-				"radius": 0.146,
-				"period": 1.2089819,
-				"semiAxis": 0.0211,
+				"mass": 0.01532,
+				"radius": 0.13641,
+				"period": 1.2089765,
+				"semiAxis": 0.01866,
 				"eccentricity": 0.0,
 				"inclination": 85.8,
 				"discovered": 2017,
@@ -5649,20 +5906,20 @@
 				"planetName": "b"
 			},
 			{
-				"mass": 0.0079,
-				"radius": 0.115,
+				"mass": 0.00604,
+				"radius": 0.107,
 				"period": 3.648086,
-				"semiAxis": 0.044,
+				"semiAxis": 0.03896,
 				"inclination": 87.8,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
 			},
 			{
-				"mass": 0.012,
-				"radius": 0.186,
-				"period": 6.201472,
-				"semiAxis": 0.0627,
+				"mass": 0.01076,
+				"radius": 0.17441,
+				"period": 6.20183,
+				"semiAxis": 0.0555,
 				"eccentricity": 0.0,
 				"inclination": 87.39,
 				"discovered": 2017,
@@ -5704,9 +5961,9 @@
 			"exoplanets":
 			[
 			{
-				"mass": 21.5,
+				"mass": 0.013,
 				"radius": 1.8,
-				"semiAxis": 103.0,
+				"semiAxis": 32.0,
 				"angleDistance": 0.735714,
 				"discovered": 2005,
 				"detectionMethod": "Imaging",
@@ -5916,9 +6173,11 @@
 				"planetName": "b"
 			},
 			{
-				"period": 3407.0,
+				"mass": 2.3,
+				"period": 3397.0,
 				"semiAxis": 4.13,
-				"eccentricity": 0.601,
+				"eccentricity": 0.604,
+				"inclination": 135.7,
 				"discovered": 2018,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
@@ -7293,6 +7552,56 @@
 			"RA": "18h48m58s",
 			"DE": "10d35m50s"
 		},
+		"HAT-P-58":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.372,
+				"radius": 1.332,
+				"period": 4.013837,
+				"semiAxis": 0.04994,
+				"eccentricity": 0.073,
+				"inclination": 85.64,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 519.0,
+			"smass": 1.031,
+			"smetal": 0.12,
+			"Vmag": 13.0,
+			"sradius": 1.53,
+			"effectiveTemp": 5931.0,
+			"RA": "4h35m23s",
+			"DE": "56d52m6s"
+		},
+		"HAT-P-59":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.54,
+				"radius": 1.123,
+				"period": 4.1419771,
+				"semiAxis": 0.05064,
+				"eccentricity": 0.03,
+				"inclination": 85.18,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 267.3,
+			"smass": 1.0,
+			"smetal": 0.217,
+			"Vmag": 11.8,
+			"sradius": 1.1,
+			"effectiveTemp": 5678.0,
+			"RA": "19h29m50s",
+			"DE": "62d31m45s"
+		},
 		"HAT-P-6":
 		{
 			"exoplanets":
@@ -7321,6 +7630,127 @@
 			"starProperName": "Sterrennacht",
 			"RA": "23h39m5.9s",
 			"DE": "42d27m57.9s"
+		},
+		"HAT-P-60":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.574,
+				"radius": 1.631,
+				"period": 4.7947813,
+				"semiAxis": 0.06277,
+				"eccentricity": 0.25,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 235.4,
+			"smass": 1.435,
+			"smetal": 0.037,
+			"Vmag": 9.7,
+			"sradius": 2.197,
+			"effectiveTemp": 6212.0,
+			"RA": "1h53m8s",
+			"DE": "52d3m14s"
+		},
+		"HAT-P-61":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.057,
+				"radius": 0.899,
+				"period": 1.90231289,
+				"semiAxis": 0.0301,
+				"inclination": 83.62,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 343.2,
+			"smass": 1.004,
+			"smetal": 0.194,
+			"Vmag": 13.2,
+			"sradius": 0.938,
+			"effectiveTemp": 5587.0,
+			"RA": "5h1m55s",
+			"DE": "50d7m53s"
+		},
+		"HAT-P-62":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.761,
+				"radius": 1.073,
+				"period": 2.6453235,
+				"semiAxis": 0.03772,
+				"eccentricity": 0.1,
+				"inclination": 87.93,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 353.1,
+			"smass": 1.023,
+			"smetal": 0.414,
+			"sradius": 1.17,
+			"effectiveTemp": 5629.0,
+			"RA": "4h58m1s",
+			"DE": "48d18m4s"
+		},
+		"HAT-P-63":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.614,
+				"radius": 1.119,
+				"period": 3.377728,
+				"semiAxis": 0.04294,
+				"eccentricity": 0.069,
+				"inclination": 88.45,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 408.0,
+			"smass": 0.925,
+			"smetal": 0.251,
+			"Vmag": 13.7,
+			"sradius": 0.9661,
+			"effectiveTemp": 5400.0,
+			"RA": "17h58m17s",
+			"DE": "5d45m41s"
+		},
+		"HAT-P-64":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.58,
+				"radius": 1.703,
+				"period": 4.007232,
+				"semiAxis": 0.05387,
+				"inclination": 88.01,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 635.0,
+			"smass": 1.298,
+			"smetal": -0.113,
+			"Vmag": 12.8,
+			"sradius": 1.735,
+			"effectiveTemp": 6457.0,
+			"RA": "4h35m54s",
+			"DE": "2d25m53s"
 		},
 		"HAT-P-65":
 		{
@@ -7433,7 +7863,7 @@
 				"period": 2.204735471,
 				"semiAxis": 0.0379,
 				"eccentricity": 0.0,
-				"inclination": 84.1,
+				"inclination": 81.1,
 				"angleDistance": 0.000118,
 				"discovered": 2008,
 				"detectionMethod": "Primary Transit",
@@ -8290,6 +8720,56 @@
 			"effectiveTemp": 5970.0,
 			"RA": "19h25m54.8s",
 			"DE": "-23d12m10s"
+		},
+		"HATS-37A":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.099,
+				"radius": 0.606,
+				"period": 4.3315366,
+				"semiAxis": 0.04913,
+				"eccentricity": 0.345,
+				"inclination": 89.33,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 211.1,
+			"smass": 0.843,
+			"smetal": 0.051,
+			"Vmag": 12.27,
+			"sradius": 0.877,
+			"effectiveTemp": 5326.0,
+			"RA": "13h19m12s",
+			"DE": "-22d59m13s"
+		},
+		"HATS-38":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.074,
+				"radius": 0.614,
+				"period": 4.375021,
+				"semiAxis": 0.05036,
+				"eccentricity": 0.122,
+				"inclination": 87.21,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 347.7,
+			"smass": 0.89,
+			"smetal": -0.102,
+			"Vmag": 12.4,
+			"sradius": 1.105,
+			"effectiveTemp": 5732.0,
+			"RA": "10h17m5s",
+			"DE": "-25d16m35s"
 		},
 		"HATS-39":
 		{
@@ -9839,10 +10319,10 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0396,
-				"radius": 0.218,
-				"period": 9.5521,
-				"semiAxis": 0.09012,
+				"mass": 0.0334,
+				"radius": 0.214,
+				"period": 9.55288,
+				"semiAxis": 0.0924,
 				"eccentricity": 0.3,
 				"inclination": 88.4,
 				"discovered": 2017,
@@ -9850,10 +10330,10 @@
 				"planetName": "b"
 			},
 			{
-				"mass": 0.0478,
-				"radius": 0.352,
-				"period": 21.0576,
-				"semiAxis": 0.1526,
+				"mass": 0.039,
+				"radius": 0.395926,
+				"period": 21.05653,
+				"semiAxis": 0.1565,
 				"eccentricity": 0.23,
 				"inclination": 89.42,
 				"discovered": 2017,
@@ -10530,7 +11010,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 79.0,
+				"mass": 20.0,
 				"semiAxis": 80.0,
 				"angleDistance": 0.772947,
 				"discovered": 2012,
@@ -11508,27 +11988,33 @@
 			"exoplanets":
 			[
 			{
-				"period": 11.577,
-				"semiAxis": 0.0933,
-				"eccentricity": 0.18,
+				"mass": 0.01454,
+				"radius": 0.13222,
+				"period": 11.57779,
+				"semiAxis": 0.0969,
+				"eccentricity": 0.079,
+				"inclination": 88.86,
 				"angleDistance": 0.006304,
 				"discovered": 2011,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
 			},
 			{
-				"period": 27.582,
-				"semiAxis": 0.1665,
-				"eccentricity": 0.16,
+				"mass": 0.03552,
+				"radius": 0.183854,
+				"period": 27.5909,
+				"semiAxis": 0.1729,
+				"eccentricity": 0.037,
+				"inclination": 88.658,
 				"angleDistance": 0.01125,
 				"discovered": 2011,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
 			},
 			{
-				"period": 106.72,
-				"semiAxis": 0.411,
-				"eccentricity": 0.43,
+				"period": 107.63,
+				"semiAxis": 0.4285,
+				"eccentricity": 0.075,
 				"angleDistance": 0.02777,
 				"discovered": 2011,
 				"detectionMethod": "Radial Velocity",
@@ -13331,21 +13817,29 @@
 			"exoplanets":
 			[
 			{
-				"period": 1201.1,
-				"semiAxis": 2.115,
-				"eccentricity": 0.126,
+				"period": 1207.0,
+				"semiAxis": 2.16,
+				"eccentricity": 0.08,
 				"angleDistance": 0.096215,
 				"discovered": 2006,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
 			},
 			{
-				"period": 75.765,
-				"semiAxis": 0.3351,
-				"eccentricity": 0.22,
+				"period": 75.74,
+				"semiAxis": 0.341,
+				"eccentricity": 0.12,
 				"discovered": 2016,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
+			},
+			{
+				"period": 12.458,
+				"semiAxis": 0.103,
+				"eccentricity": 0.12,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "d"
 			}
 			],
 			"distance": 22.13,
@@ -14724,10 +15218,10 @@
 			[
 			{
 				"mass": 2.88,
-				"radius": 1.936,
+				"radius": 1.84,
 				"period": 1.4811235,
 				"semiAxis": 0.03368,
-				"inclination": 86.79,
+				"inclination": 87.2,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
@@ -18114,6 +18608,7 @@
 				"planetName": "b"
 			},
 			{
+				"radius": 0.16184,
 				"period": 6.584,
 				"semiAxis": 0.0733,
 				"eccentricity": 0.057,
@@ -18122,14 +18617,16 @@
 				"planetName": "c"
 			},
 			{
+				"radius": 1.393,
 				"period": 2.882,
 				"semiAxis": 0.0422,
 				"eccentricity": 0.07,
-				"discovered": 2019,
+				"discovered": 2020,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "d"
 			},
 			{
+				"radius": 1.471,
 				"period": 5.516,
 				"semiAxis": 0.0651,
 				"eccentricity": 0.07,
@@ -18955,11 +19452,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 60.2,
-				"period": 13835.67,
+				"mass": 66.6,
+				"period": 12090.0,
 				"semiAxis": 16.4,
-				"eccentricity": 0.74,
-				"inclination": 66.8,
+				"eccentricity": 0.734,
+				"inclination": 50.0,
 				"discovered": 2016,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
@@ -19412,6 +19909,39 @@
 			"effectiveTemp": 4666.0,
 			"RA": "7h45m17.9s",
 			"DE": "28d1m33.9s"
+		},
+		"HD 63433":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1918,
+				"period": 7.10793,
+				"semiAxis": 0.719,
+				"eccentricity": 0.0,
+				"inclination": 89.38,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"radius": 0.2382,
+				"period": 20.5453,
+				"semiAxis": 0.1458,
+				"eccentricity": 0.0,
+				"inclination": 89.147,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			}
+			],
+			"distance": 22.42,
+			"smass": 0.99,
+			"Vmag": 7.0,
+			"sradius": 0.912,
+			"effectiveTemp": 5640.0,
+			"RA": "7h49m55s",
+			"DE": "27d21m48s"
 		},
 		"HD 63454":
 		{
@@ -20368,6 +20898,27 @@
 			"RA": "9h28m40s",
 			"DE": "45d36m5s"
 		},
+		"HD 81817":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 1047.1,
+				"semiAxis": 3.3,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 269.0,
+			"smass": 4.3,
+			"smetal": -0.17,
+			"Vmag": 4.4,
+			"sradius": 83.8,
+			"effectiveTemp": 4140.0,
+			"RA": "9h37m5s",
+			"DE": "81d18m35s"
+		},
 		"HD 82886":
 		{
 			"exoplanets":
@@ -20638,9 +21189,9 @@
 			"exoplanets":
 			[
 			{
-				"period": 1534.0,
-				"semiAxis": 2.6,
-				"eccentricity": 0.73,
+				"period": 1628.0,
+				"semiAxis": 2.73,
+				"eccentricity": 0.059,
 				"angleDistance": 0.061205,
 				"discovered": 2010,
 				"detectionMethod": "Radial Velocity",
@@ -21397,12 +21948,12 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.02375,
+				"mass": 0.02457,
 				"radius": 0.20047,
-				"period": 9.4903,
+				"period": 9.489295,
 				"semiAxis": 0.08,
-				"eccentricity": 0.078,
-				"inclination": 89.14,
+				"eccentricity": 0.03,
+				"inclination": 89.6,
 				"angleDistance": 0.003777,
 				"discovered": 2010,
 				"detectionMethod": "Primary Transit",
@@ -21589,6 +22140,60 @@
 			"RA": "11h28m29.9s",
 			"DE": "43d58m0s"
 		},
+		"HD108236":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.14149,
+				"period": 3.79523,
+				"semiAxis": 0.0469,
+				"eccentricity": 0.2,
+				"inclination": 87.88,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"radius": 0.1845,
+				"period": 6.2037,
+				"semiAxis": 0.651,
+				"eccentricity": 0.18,
+				"inclination": 88.72,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			},
+			{
+				"radius": 0.2427,
+				"period": 14.17555,
+				"semiAxis": 0.1131,
+				"eccentricity": 0.17,
+				"inclination": 89.22,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "d"
+			},
+			{
+				"radius": 3.12,
+				"period": 19.5917,
+				"semiAxis": 0.14,
+				"eccentricity": 0.2,
+				"inclination": 89.32,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "e"
+			}
+			],
+			"distance": 64.6,
+			"smass": 0.853,
+			"smetal": -0.3,
+			"Vmag": 9.2,
+			"sradius": 0.894,
+			"effectiveTemp": 5720.0,
+			"RA": "12h26m17.7s",
+			"DE": "-51d21m46.9s"
+		},
 		"HII 1348":
 		{
 			"exoplanets":
@@ -21628,6 +22233,24 @@
 			"effectiveTemp": 4780.0,
 			"RA": "21h26m23s",
 			"DE": "-37d49m46s"
+		},
+		"HIP 107772":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 55.19,
+				"semiAxis": 0.243,
+				"eccentricity": 0.18,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 23.66,
+			"stype": "M0V",
+			"RA": "21h49m59.9s",
+			"DE": "-41d14m42s"
 		},
 		"HIP 107773":
 		{
@@ -21849,6 +22472,33 @@
 			"RA": "7h36m8s",
 			"DE": "-3d6m39s"
 		},
+		"HIP 38594":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 60.722,
+				"semiAxis": 0.256,
+				"eccentricity": 0.17,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			},
+			{
+				"period": 3477.8,
+				"semiAxis": 3.805,
+				"eccentricity": 0.16,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 17.798,
+			"stype": "M0",
+			"Vmag": 9.7,
+			"RA": "7h54m11s",
+			"DE": "-25d18m11s"
+		},
 		"HIP 38939 A":
 		{
 			"exoplanets":
@@ -21927,6 +22577,43 @@
 			"effectiveTemp": 6199.0,
 			"RA": "8h26m28s",
 			"DE": "10d4m49s"
+		},
+		"HIP 4845":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 34.15,
+				"semiAxis": 0.176,
+				"eccentricity": 0.25,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 21.11,
+			"stype": "M0V",
+			"RA": "1h2m21s",
+			"DE": "-10d25m26s"
+		},
+		"HIP 49714":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 17.818,
+				"semiAxis": 0.112,
+				"eccentricity": 0.5,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "b"
+			}
+			],
+			"distance": 10.533,
+			"stype": "M0.5V",
+			"Vmag": 9.2,
+			"RA": "9h56m9s",
+			"DE": "62d47m18s"
 		},
 		"HIP 5158":
 		{
@@ -22205,6 +22892,28 @@
 			"RA": "0h0m45s",
 			"DE": "-54d49m51s"
 		},
+		"HIP 67522":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.8984,
+				"period": 6.959503,
+				"eccentricity": 0.059,
+				"inclination": 89.34,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 127.27,
+			"smass": 1.22,
+			"Vmag": 9.9,
+			"sradius": 1.38,
+			"effectiveTemp": 56.75,
+			"RA": "13h50m6s",
+			"DE": "-40d50m9s"
+		},
 		"HIP 67537":
 		{
 			"exoplanets":
@@ -22399,6 +23108,25 @@
 			"effectiveTemp": 4850.0,
 			"RA": "15h18m17s",
 			"DE": "-41d25m14s"
+		},
+		"HIP 75056":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 25.0,
+				"radius": 2.0,
+				"period": 47500.0,
+				"semiAxis": 30.0,
+				"eccentricity": 0.5,
+				"discovered": 2020,
+				"detectionMethod": "Imaging",
+				"planetName": "b"
+			}
+			],
+			"stype": "A2V",
+			"RA": "15h20m13s",
+			"DE": "-34d55m32s"
 		},
 		"HIP 75458":
 		{
@@ -22902,7 +23630,7 @@
 			"RA": "14h33m18s",
 			"DE": "10d11m23s"
 		},
-		"KOI 1783":
+		"KOI-1783":
 		{
 			"exoplanets":
 			[
@@ -23132,6 +23860,73 @@
 			"RA": "13h49m23.8s",
 			"DE": "-12d17m4.1s"
 		},
+		"K2-116":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.0616,
+				"period": 4.65541,
+				"semiAxis": 0.048,
+				"eccentricity": 0.06,
+				"inclination": 89.09,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"stype": "K7V",
+			"smass": 0.695,
+			"sradius": 0.669,
+			"effectiveTemp": 4348.0,
+			"RA": "22h24m36.3s",
+			"DE": "-11d34m43.2s"
+		},
+		"K2-118":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.2266,
+				"period": 50.92092,
+				"semiAxis": 0.245,
+				"eccentricity": 0.2,
+				"inclination": 89.5,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 324.0,
+			"stype": "K3V",
+			"smass": 0.756,
+			"sradius": 0.735,
+			"effectiveTemp": 4726.0,
+			"RA": "8h48m30.4s",
+			"DE": "15d39m21.5s"
+		},
+		"K2-119":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.2043,
+				"period": 7.72858,
+				"semiAxis": 0.07,
+				"eccentricity": 0.07,
+				"inclination": 89.4,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"stype": "K5V",
+			"smass": 0.763,
+			"sradius": 0.679,
+			"effectiveTemp": 4753.0,
+			"RA": "8h48m2.3s",
+			"DE": "16d54m6.7s"
+		},
 		"K2-12":
 		{
 			"exoplanets":
@@ -23153,15 +23948,60 @@
 			"RA": "11h32m46s",
 			"DE": "2d14m41.5s"
 		},
+		"K2-120":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1793,
+				"period": 9.56274,
+				"semiAxis": 0.078,
+				"eccentricity": 0.14,
+				"inclination": 89.57,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"stype": "M0V",
+			"smass": 0.695,
+			"sradius": 0.667,
+			"effectiveTemp": 4350.0,
+			"RA": "8h48m34.3s",
+			"DE": "17d11m26.4s"
+		},
+		"K2-121":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.8136,
+				"period": 5.18575,
+				"semiAxis": 0.052,
+				"eccentricity": 0.22,
+				"inclination": 87.25,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"stype": "K5V",
+			"smass": 0.712,
+			"sradius": 0.768,
+			"effectiveTemp": 4471.0,
+			"RA": "8h27m44.8s",
+			"DE": "17d34m45.8s"
+		},
 		"K2-124":
 		{
 			"exoplanets":
 			[
 			{
 				"mass": 0.033,
-				"radius": 0.259,
+				"radius": 0.2355,
 				"period": 6.413651,
 				"semiAxis": 0.049,
+				"eccentricity": 0.08,
 				"inclination": 89.03,
 				"discovered": 2016,
 				"detectionMethod": "Primary Transit",
@@ -23169,11 +24009,127 @@
 			}
 			],
 			"distance": 140.4,
-			"smass": 0.39,
-			"sradius": 0.388,
-			"effectiveTemp": 3570.0,
+			"stype": "M3V",
+			"smass": 0.436,
+			"sradius": 0.344,
+			"effectiveTemp": 3561.0,
 			"RA": "8h54m34s",
 			"DE": "23d7m58s"
+		},
+		"K2-125":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1945,
+				"period": 21.75026,
+				"semiAxis": 0.121,
+				"eccentricity": 0.08,
+				"inclination": 89.72,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 124.59,
+			"stype": "M2V",
+			"smass": 0.495,
+			"sradius": 0.402,
+			"effectiveTemp": 3654.0,
+			"RA": "13h36m34.1s",
+			"DE": "-14d56m51.3s"
+		},
+		"K2-126":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1642,
+				"period": 7.38707,
+				"semiAxis": 0.066,
+				"eccentricity": 0.06,
+				"inclination": 89.4,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 103.25,
+			"stype": "K7V",
+			"smass": 0.697,
+			"sradius": 0.621,
+			"effectiveTemp": 4368.0,
+			"RA": "13h34m11.1s",
+			"DE": "-13d34m36.9s"
+		},
+		"K2-127":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.7726,
+				"period": 3.58816,
+				"semiAxis": 0.041,
+				"eccentricity": 0.12,
+				"inclination": 87.22,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 724.37,
+			"stype": "K3V",
+			"smass": 0.7,
+			"sradius": 0.677,
+			"effectiveTemp": 4388.0,
+			"RA": "13h48m18.8s",
+			"DE": "-11d35m20.3s"
+		},
+		"K2-128":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1267,
+				"period": 5.67582,
+				"semiAxis": 0.056,
+				"eccentricity": 0.23,
+				"inclination": 87.4,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 115.01,
+			"stype": "K4V",
+			"smass": 0.711,
+			"sradius": 0.778,
+			"effectiveTemp": 4470.0,
+			"RA": "13h37m45s",
+			"DE": "13d37m45s"
+		},
+		"K2-129":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.0928,
+				"period": 8.23949,
+				"semiAxis": 0.057,
+				"eccentricity": 0.13,
+				"inclination": 89.21,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 27.82,
+			"stype": "M3V",
+			"smass": 0.36,
+			"sradius": 0.36,
+			"effectiveTemp": 3459.0,
+			"RA": "19h16m35.5s",
+			"DE": "-25d38m41.9s"
 		},
 		"K2-13":
 		{
@@ -23195,6 +24151,28 @@
 			"effectiveTemp": 5698.0,
 			"RA": "11h20m37.3s",
 			"DE": "2d30m9.7s"
+		},
+		"K2-130":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.1115,
+				"period": 2.49412,
+				"semiAxis": 0.032,
+				"eccentricity": 0.17,
+				"inclination": 86.53,
+				"discovered": 2017,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"stype": "K5V",
+			"smass": 0.711,
+			"sradius": 0.731,
+			"effectiveTemp": 4470.0,
+			"RA": "19h21m4.8s",
+			"DE": "-19d41m26.9s"
 		},
 		"K2-136 A":
 		{
@@ -23554,7 +24532,7 @@
 				"radius": 0.11687,
 				"period": 8.050722,
 				"semiAxis": 0.06231,
-				"eccentricity": 89.81,
+				"inclination": 89.81,
 				"discovered": 2019,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
@@ -23617,10 +24595,10 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.02807,
-				"radius": 0.2114,
-				"period": 32.939623,
-				"semiAxis": 0.1429,
+				"mass": 0.02715,
+				"radius": 0.24186,
+				"period": 32.944,
+				"semiAxis": 0.1591,
 				"eccentricity": 0.2,
 				"inclination": 89.5785,
 				"discovered": 2015,
@@ -23630,6 +24608,14 @@
 				"flux": 108,
 				"ESI": 72,
 				"planetName": "b"
+			},
+			{
+				"period": 8.962,
+				"semiAxis": 0.067,
+				"eccentricity": 0.2,
+				"discovered": 2017,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
 			}
 			],
 			"distance": 34.0,
@@ -23872,6 +24858,51 @@
 			"RA": "19h16m22s",
 			"DE": "-15d46m16s"
 		},
+		"K2-233":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0104,
+				"radius": 0.11982,
+				"period": 2.4675,
+				"semiAxis": 0.03308,
+				"eccentricity": 0.079,
+				"inclination": 89.3,
+				"discovered": 2018,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"radius": 0.1191,
+				"semiAxis": 0.06687,
+				"inclination": 88.95,
+				"discovered": 2018,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			},
+			{
+				"mass": 0.0261,
+				"radius": 0.2355,
+				"period": 24.3645,
+				"semiAxis": 0.15224,
+				"eccentricity": 0.062,
+				"inclination": 89.6,
+				"discovered": 2018,
+				"detectionMethod": "Primary Transit",
+				"planetName": "d"
+			}
+			],
+			"distance": 67.64,
+			"stype": "K3",
+			"smass": 0.79,
+			"smetal": -0.09,
+			"Vmag": 10.0,
+			"sradius": 0.71,
+			"effectiveTemp": 5033.0,
+			"RA": "15h21m55s",
+			"DE": "-20d13m54s"
+		},
 		"K2-237":
 		{
 			"exoplanets":
@@ -23964,10 +24995,11 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.307719,
-				"period": 3.48456322,
-				"eccentricity": 0.27,
-				"inclination": 88.164,
+				"mass": 0.0771,
+				"radius": 0.3069,
+				"period": 3.48456408,
+				"eccentricity": 0.428,
+				"inclination": 87.16,
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
@@ -24182,6 +25214,31 @@
 			"effectiveTemp": 3214.0,
 			"RA": "22h22m29.8s",
 			"DE": "-7d57m19.5s"
+		},
+		"K2-280":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.1167,
+				"radius": 0.6691,
+				"period": 19.89256,
+				"semiAxis": 0.1461,
+				"eccentricity": 0.35,
+				"inclination": 89.4,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 391.5,
+			"smass": 1.03,
+			"smetal": 0.33,
+			"Vmag": 12.5,
+			"sradius": 1.28,
+			"effectiveTemp": 5500.0,
+			"RA": "19h26m23s",
+			"DE": "-22d14m52s"
 		},
 		"K2-285":
 		{
@@ -24486,6 +25543,21 @@
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
+			},
+			{
+				"mass": 0.0088,
+				"radius": 0.135,
+				"period": 44.55646,
+				"semiAxis": 0.2086,
+				"eccentricity": 0.045,
+				"inclination": 89.79,
+				"discovered": 2015,
+				"detectionMethod": "Primary Transit",
+				"pclass": "M-Warm Superterran",
+				"EqTemp": 283,
+				"flux": 151,
+				"ESI": 80,
+				"planetName": "d"
 			}
 			],
 			"distance": 42.0,
@@ -24576,40 +25648,45 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0664,
-				"radius": 0.4425,
-				"period": 8.99213,
-				"semiAxis": 0.08035,
-				"eccentricity": 0.21,
+				"mass": 0.047,
+				"radius": 0.47275,
+				"period": 8.992,
+				"semiAxis": 0.0795,
+				"eccentricity": 0.03,
 				"inclination": 89.0,
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			},
 			{
-				"mass": 0.0381,
-				"radius": 0.2444,
-				"period": 20.66186,
-				"semiAxis": 0.1399,
-				"inclination": 88.23,
+				"mass": 0.0255,
+				"radius": 0.2796,
+				"period": 20.66093,
+				"semiAxis": 0.13843,
+				"eccentricity": 0.049,
+				"inclination": 89.4,
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
 			},
 			{
-				"mass": 0.11,
-				"radius": 0.2917,
-				"period": 31.7142,
-				"semiAxis": 0.1862,
-				"inclination": 88.4,
+				"mass": 0.0211,
+				"radius": 0.31082,
+				"period": 31.717,
+				"semiAxis": 0.1842,
+				"eccentricity": 0.05,
+				"inclination": 89.4,
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "d"
 			},
 			{
-				"radius": 0.0901,
-				"period": 4.34882,
-				"semiAxis": 0.04951,
+				"mass": 0.0066,
+				"radius": 0.1079,
+				"period": 4.34934,
+				"semiAxis": 0.049,
+				"eccentricity": 0.043,
+				"inclination": 89.0,
 				"discovered": 2019,
 				"detectionMethod": "Primary Transit",
 				"planetName": "e"
@@ -24741,17 +25818,23 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.1383,
+				"mass": 0.023,
+				"radius": 0.1374,
 				"period": 4.01593,
-				"semiAxis": 0.0506,
-				"inclination": 87.28,
+				"semiAxis": 0.04994,
+				"eccentricity": 0.197,
+				"inclination": 88.36,
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			},
 			{
-				"radius": 0.216,
+				"mass": 0.0261,
+				"radius": 0.2043,
 				"period": 10.56103,
+				"semiAxis": 0.09514,
+				"eccentricity": 0.161,
+				"inclination": 87.68,
 				"discovered": 2016,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
@@ -25030,6 +26113,64 @@
 			"RA": "11h8m22.5s",
 			"DE": "-1d3m56.7s"
 		},
+		"K2-72":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.0964,
+				"period": 5.577212,
+				"semiAxis": 0.04,
+				"eccentricity": 0.11,
+				"inclination": 89.15,
+				"discovered": 2016,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"radius": 0.1035,
+				"period": 15.189034,
+				"semiAxis": 0.078,
+				"eccentricity": 0.11,
+				"inclination": 89.54,
+				"discovered": 2016,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			},
+			{
+				"radius": 0.0901,
+				"period": 7.76,
+				"semiAxis": 0.05,
+				"eccentricity": 0.11,
+				"inclination": 89.26,
+				"discovered": 2016,
+				"detectionMethod": "Primary Transit",
+				"planetName": "d"
+			},
+			{
+				"radius": 0.1151,
+				"period": 24.159,
+				"semiAxis": 0.106,
+				"eccentricity": 0.11,
+				"inclination": 89.68,
+				"discovered": 2016,
+				"detectionMethod": "Primary Transit",
+				"pclass": "M-Warm Terran",
+				"EqTemp": 262,
+				"flux": 112,
+				"ESI": 91,
+				"conservative": true,
+				"planetName": "e"
+			}
+			],
+			"distance": 65.56,
+			"smass": 0.271,
+			"sradius": 0.331,
+			"effectiveTemp": 3360.0,
+			"hasHP": true,
+			"RA": "22h18m29s",
+			"DE": "9d36m45s"
+		},
 		"K2-77":
 		{
 			"exoplanets":
@@ -25281,7 +26422,7 @@
 			[
 			{
 				"mass": 0.195,
-				"radius": 1.37,
+				"radius": 1.3,
 				"period": 4.736529,
 				"semiAxis": 0.06229,
 				"eccentricity": 0.0,
@@ -25748,28 +26889,7 @@
 			"RA": "19h9m33.4s",
 			"DE": "46d59m4.1s"
 		},
-		"KIC 10024862":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.49,
-				"period": 567.0445,
-				"inclination": 89.868,
-				"discovered": 2015,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"smass": 1.07,
-			"smetal": 0.07,
-			"Vmag": 16.4,
-			"sradius": 1.11,
-			"effectiveTemp": 6616.0,
-			"RA": "19h47m13s",
-			"DE": "46d56m4s"
-		},
-		"KIC 10255705 	":
+		"KIC 10255705":
 		{
 			"exoplanets":
 			[
@@ -26118,6 +27238,21 @@
 			"RA": "19h16m39s",
 			"DE": "46d25m18s"
 		},
+		"KMT-2016-BLG-0212":
+		{
+			"exoplanets":
+			[
+			{
+				"discovered": 2018,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 6000.0,
+			"smass": 0.5,
+			"RA": "7h53m45.4s",
+			"DE": "-29d5m12.8s"
+		},
 		"KMT-2016-BLG-1107":
 		{
 			"exoplanets":
@@ -26203,6 +27338,40 @@
 			"RA": "17h52m27s",
 			"DE": "-29d23m4s"
 		},
+		"KMT-2016-BLG-2364":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 3.93,
+				"semiAxis": 2.63,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 6440.0,
+			"smass": 0.5,
+			"RA": "17h42m52s",
+			"DE": "-27d26m8s"
+		},
+		"KMT-2016-BLG-2397":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 2.42,
+				"semiAxis": 2.83,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 5009.0,
+			"smass": 0.62,
+			"RA": "17h44m51s",
+			"DE": "-23d12m5s"
+		},
 		"KMT-2017-BLG-0165L":
 		{
 			"exoplanets":
@@ -26270,6 +27439,23 @@
 			"smass": 1.06,
 			"RA": "17h37m53s",
 			"DE": "-27d59m5s"
+		},
+		"KMT-2018-BLG-0748":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.19,
+				"semiAxis": 0.62,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 7300.0,
+			"smass": 0.087,
+			"RA": "17h51m30s",
+			"DE": "-30d38m47s"
 		},
 		"KMT-2018-BLG-1292":
 		{
@@ -26450,7 +27636,7 @@
 				"inclination": 89.221,
 				"discovered": 2014,
 				"detectionMethod": "Primary Transit",
-				"planetName": "a"
+				"planetName": "b"
 			}
 			],
 			"distance": 1070.0,
@@ -26511,69 +27697,6 @@
 			"effectiveTemp": 3813.0,
 			"RA": "19h40m28s",
 			"DE": "39d16m27s"
-		},
-		"KOI-5833":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.31,
-				"period": 440.167,
-				"inclination": 89.57,
-				"discovered": 2015,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"smass": 0.98,
-			"smetal": -0.46,
-			"Vmag": 13.4,
-			"sradius": 1.0,
-			"effectiveTemp": 6277.0,
-			"RA": "19h6m22s",
-			"DE": "48d13m13s"
-		},
-		"KOI-5929":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.37,
-				"period": 466.0001,
-				"inclination": 89.947,
-				"discovered": 2015,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"smass": 0.86,
-			"smetal": -0.14,
-			"Vmag": 15.2,
-			"sradius": 0.82,
-			"effectiveTemp": 5830.0,
-			"RA": "19h35m28s",
-			"DE": "49d48m1s"
-		},
-		"KOI-682":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.88,
-				"period": 562.70945,
-				"inclination": 89.851,
-				"discovered": 2015,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"smass": 1.02,
-			"smetal": 0.34,
-			"Vmag": 14.2,
-			"sradius": 1.17,
-			"effectiveTemp": 5589.0,
-			"RA": "19h40m48s",
-			"DE": "43d16m10s"
 		},
 		"KOI-771":
 		{
@@ -26637,7 +27760,7 @@
 				"planetName": "b"
 			},
 			{
-				"mass": 17.2,
+				"mass": 0.0541,
 				"radius": 0.2097,
 				"period": 45.294301,
 				"semiAxis": 0.241,
@@ -27883,9 +29006,9 @@
 				"planetName": "b"
 			},
 			{
-				"mass": 0.014,
-				"radius": 0.117,
-				"period": 7.125939,
+				"mass": 0.01447,
+				"radius": 0.1169,
+				"period": 7.1262,
 				"semiAxis": 0.072,
 				"discovered": 2014,
 				"detectionMethod": "Primary Transit",
@@ -35302,16 +36425,6 @@
 				"discovered": 2016,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
-			},
-			{
-				"radius": 0.3711,
-				"period": 505.45,
-				"semiAxis": 1.15,
-				"eccentricity": 0.0,
-				"inclination": 89.94,
-				"discovered": 2013,
-				"detectionMethod": "Primary Transit",
-				"planetName": "c"
 			}
 			],
 			"distance": 669.0,
@@ -35802,8 +36915,8 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.00021,
-				"radius": 0.052,
+				"mass": 0.000588,
+				"radius": 0.06254,
 				"period": 10.31320643,
 				"semiAxis": 0.0746,
 				"eccentricity": 0.0,
@@ -35813,8 +36926,8 @@
 				"planetName": "b"
 			},
 			{
-				"mass": 0.00318,
-				"radius": 0.144,
+				"mass": 0.0164,
+				"radius": 0.149,
 				"period": 13.78164,
 				"eccentricity": 0.05,
 				"discovered": 2014,
@@ -35822,7 +36935,8 @@
 				"planetName": "c"
 			},
 			{
-				"radius": 0.1436,
+				"mass": 0.00368,
+				"radius": 0.1499,
 				"period": 23.08933,
 				"eccentricity": 0.024,
 				"discovered": 2014,
@@ -35830,10 +36944,12 @@
 				"planetName": "d"
 			}
 			],
+			"distance": 74.3,
 			"stype": "M1 V",
-			"smass": 0.57,
-			"sradius": 0.53,
-			"effectiveTemp": 4079.0,
+			"smass": 0.551,
+			"smetal": -0.127,
+			"sradius": 0.582,
+			"effectiveTemp": 3933.0,
 			"RA": "19h21m31.5s",
 			"DE": "43d17m34.7s"
 		},
@@ -41094,6 +42210,13 @@
 				"discovered": 2014,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
+			},
+			{
+				"mass": 0.157,
+				"period": 28.5,
+				"discovered": 2020,
+				"detectionMethod": "TTV",
+				"planetName": "d"
 			}
 			],
 			"smetal": -0.361,
@@ -42226,6 +43349,13 @@
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
+			},
+			{
+				"radius": 0.0946,
+				"period": 19.5,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
 			}
 			],
 			"stype": "M5V",
@@ -42476,6 +43606,36 @@
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
+			},
+			{
+				"mass": 0.01023,
+				"radius": 0.1294,
+				"period": 0.4466,
+				"semiAxis": 0.0107,
+				"eccentricity": 0.0,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"mass": 0.0201,
+				"radius": 0.259,
+				"period": 10.778853,
+				"semiAxis": 0.0888,
+				"eccentricity": 0.0,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			},
+			{
+				"mass": 0.0076,
+				"radius": 0.207,
+				"period": 16.37159,
+				"semiAxis": 0.1174,
+				"eccentricity": 0.0,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "d"
 			}
 			],
 			"smass": 1.447,
@@ -46015,9 +47175,9 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.00875,
+				"mass": 0.01611,
 				"radius": 0.248,
-				"period": 12.2829,
+				"period": 12.2796,
 				"semiAxis": 0.085,
 				"discovered": 2012,
 				"detectionMethod": "Primary Transit",
@@ -50611,7 +51771,6 @@
 			"exoplanets":
 			[
 			{
-				"mass": 3.461,
 				"radius": 0.02543,
 				"period": 7.4175,
 				"semiAxis": 0.083,
@@ -51369,6 +52528,92 @@
 			"effectiveTemp": 4700.0,
 			"RA": "19h14m3s",
 			"DE": "51d9m45s"
+		},
+		"KOI-341":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.011,
+				"radius": 0.1526,
+				"period": 4.7,
+				"discovered": 2014,
+				"detectionMethod": "TTV",
+				"planetName": "b"
+			},
+			{
+				"mass": 0.0941,
+				"radius": 0.2685,
+				"period": 7.171,
+				"discovered": 2014,
+				"detectionMethod": "TTV",
+				"planetName": "c"
+			}
+			],
+			"distance": 418.44,
+			"smass": 0.95,
+			"smetal": 0.05,
+			"sradius": 0.881,
+			"effectiveTemp": 5567.0,
+			"RA": "19h51m50.7s",
+			"DE": "48d14m39.7s"
+		},
+		"KOI-1194":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.3772,
+				"radius": 0.1079,
+				"period": 4.176,
+				"discovered": 2014,
+				"detectionMethod": "TTV",
+				"planetName": "b"
+			}
+			],
+			"distance": 538.39,
+			"smass": 0.67,
+			"sradius": 0.643,
+			"RA": "19h35m13s",
+			"DE": "38d38m20.8s"
+		},
+		"KOI-1860":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.1831,
+				"radius": 0.2213,
+				"period": 6.319,
+				"discovered": 2014,
+				"detectionMethod": "TTV",
+				"planetName": "b"
+			}
+			],
+			"distance": 704.76,
+			"smass": 1.0,
+			"sradius": 1.075,
+			"RA": "19h26m13.6s",
+			"DE": "39d13m8.2s"
+		},
+		"KOI-2113":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0346,
+				"radius": 0.2061,
+				"period": 12.33090437,
+				"discovered": 2014,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 999.47,
+			"smass": 0.9,
+			"sradius": 0.806,
+			"RA": "19h35m17.8s",
+			"DE": "42d46m46.8s"
 		},
 		"Kepler-418":
 		{
@@ -52245,6 +53490,15 @@
 				"discovered": 2015,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
+			},
+			{
+				"mass": 22.0,
+				"period": 2500.0,
+				"semiAxis": 4.2,
+				"eccentricity": 0.65,
+				"discovered": 2017,
+				"detectionMethod": "TTV",
+				"planetName": "c"
 			}
 			],
 			"distance": 426.0,
@@ -52346,6 +53600,35 @@
 			"effectiveTemp": 6152.0,
 			"RA": "19h41m56.7s",
 			"DE": "51d0m48.6s"
+		},
+		"Kepler-452":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.145,
+				"period": 384.843,
+				"semiAxis": 1.046,
+				"eccentricity": 0.035,
+				"inclination": 89.806,
+				"discovered": 2015,
+				"detectionMethod": "Primary Transit",
+				"pclass": "G-Warm Superterran",
+				"EqTemp": 262,
+				"flux": 111,
+				"ESI": 83,
+				"planetName": "b"
+			}
+			],
+			"stype": "G2",
+			"smass": 1.037,
+			"smetal": 0.21,
+			"Vmag": 13.7,
+			"sradius": 1.11,
+			"effectiveTemp": 5757.0,
+			"hasHP": true,
+			"RA": "19h44m0.8s",
+			"DE": "44d16m39.2s"
 		},
 		"Kepler-453 A":
 		{
@@ -52767,26 +54050,6 @@
 			"effectiveTemp": 5498.0,
 			"RA": "19h15m36.5s",
 			"DE": "49d22m13.7s"
-		},
-		"Kepler-469":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 1.597,
-				"period": 33.80367628,
-				"discovered": 2016,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"distance": 714.0,
-			"smass": 1.14,
-			"smetal": 0.14,
-			"sradius": 1.53,
-			"effectiveTemp": 5892.0,
-			"RA": "19h49m54.2s",
-			"DE": "41d6m51.4s"
 		},
 		"Kepler-47 A":
 		{
@@ -53283,15 +54546,17 @@
 			"exoplanets":
 			[
 			{
-				"radius": 0.24,
-				"period": 7.2037945,
+				"mass": 0.016015,
+				"radius": 0.2097,
+				"period": 7.204,
 				"discovered": 2012,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			},
 			{
-				"radius": 0.23,
-				"period": 10.9129343,
+				"mass": 0.01032,
+				"radius": 0.1838,
+				"period": 10.9123,
 				"discovered": 2012,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
@@ -53635,26 +54900,6 @@
 			"effectiveTemp": 6125.0,
 			"RA": "19h24m19.2s",
 			"DE": "43d51m36.7s"
-		},
-		"Kepler-503":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.559,
-				"period": 7.25844721,
-				"discovered": 2016,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"distance": 888.0,
-			"smass": 1.01,
-			"smetal": 0.09,
-			"sradius": 1.01,
-			"effectiveTemp": 5754.0,
-			"RA": "19h22m32.7s",
-			"DE": "38d42m27.6s"
 		},
 		"Kepler-504 A":
 		{
@@ -55282,26 +56527,27 @@
 			"exoplanets":
 			[
 			{
-				"mass": 18.86,
-				"radius": 0.2,
+				"mass": 0.07278,
+				"radius": 0.1677,
 				"period": 5.7293196,
 				"discovered": 2012,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
 			},
 			{
-				"mass": 6.95,
-				"radius": 0.14,
+				"mass": 0.01787,
+				"radius": 0.124,
 				"period": 11.6092567,
 				"discovered": 2012,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"
 			}
 			],
-			"smass": 0.83,
+			"smass": 0.884,
+			"smetal": -0.04,
 			"Vmag": 15.5,
-			"sradius": 0.73,
-			"effectiveTemp": 5145.0,
+			"sradius": 0.791,
+			"effectiveTemp": 5324.0,
 			"RA": "19h34m34s",
 			"DE": "44d39m24.8s"
 		},
@@ -62802,14 +64048,6 @@
 				"discovered": 2013,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
-			},
-			{
-				"period": 1431.0,
-				"semiAxis": 2.464,
-				"eccentricity": 0.432,
-				"discovered": 2019,
-				"detectionMethod": "Radial Velocity",
-				"planetName": "d"
 			}
 			],
 			"distance": 385.0,
@@ -64994,6 +66232,28 @@
 			"RA": "19h13m29.4s",
 			"DE": "47d56m0.8s"
 		},
+		"Kepler-97":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.01104,
+				"radius": 0.13097,
+				"period": 2.586638081,
+				"discovered": 2014,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 405.58,
+			"stype": "G0V",
+			"smass": 0.94,
+			"smetal": -0.2,
+			"sradius": 0.98,
+			"effectiveTemp": 5779.0,
+			"RA": "19h9m18.3s",
+			"DE": "48d40m24.3s"
+		},
 		"Kepler-970":
 		{
 			"exoplanets":
@@ -65394,6 +66654,27 @@
 			"RA": "18h46m19.8s",
 			"DE": "47d14m1s"
 		},
+		"Kepler-99":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.01935,
+				"radius": 0.1348,
+				"period": 4.603575314,
+				"discovered": 2014,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 209.62,
+			"smass": 0.79,
+			"smetal": 0.18,
+			"sradius": 0.73,
+			"effectiveTemp": 4782.0,
+			"RA": "19h49m24.9s",
+			"DE": "41d18m0.2s"
+		},
 		"Kepler-990":
 		{
 			"exoplanets":
@@ -65694,11 +66975,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0209,
-				"radius": 0.128,
-				"period": 24.73712,
-				"semiAxis": 0.0875,
-				"eccentricity": 0.29,
+				"mass": 0.02196,
+				"radius": 0.15407,
+				"period": 24.736,
+				"semiAxis": 0.0936,
+				"eccentricity": 0.06,
 				"inclination": 89.912,
 				"discovered": 2017,
 				"detectionMethod": "Primary Transit",
@@ -65713,7 +66994,7 @@
 				"radius": 0.11437,
 				"period": 3.777931,
 				"semiAxis": 0.02675,
-				"eccentricity": 0.0,
+				"eccentricity": 0.31,
 				"inclination": 89.92,
 				"discovered": 2018,
 				"detectionMethod": "Primary Transit",
@@ -66433,16 +67714,16 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.9,
-				"semiAxis": 0.85,
+				"mass": 1.71,
+				"semiAxis": 3.9,
 				"angleDistance": 0.000142,
 				"discovered": 2008,
 				"detectionMethod": "Microlensing",
 				"planetName": "b"
 			}
 			],
-			"distance": 6000.0,
-			"smass": 0.35,
+			"distance": 6890.0,
+			"smass": 0.69,
 			"RA": "18h9m42s",
 			"DE": "-29d13m27s"
 		},
@@ -66505,7 +67786,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.157,
+				"mass": 0.208,
 				"semiAxis": 2.0,
 				"angleDistance": 0.000328,
 				"discovered": 2010,
@@ -66943,6 +68224,30 @@
 			"effectiveTemp": 4400.0,
 			"RA": "6h7m29s",
 			"DE": "-25d35m42s"
+		},
+		"NGTS-11":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.37,
+				"radius": 0.823,
+				"period": 35.455285,
+				"semiAxis": 0.2,
+				"eccentricity": 0.11,
+				"inclination": 89.12,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 191.5,
+			"smass": 0.862,
+			"smetal": 0.22,
+			"sradius": 0.832,
+			"effectiveTemp": 5050.0,
+			"RA": "1h34m5s",
+			"DE": "-14d25m9s"
 		},
 		"NGTS-2":
 		{
@@ -67396,6 +68701,23 @@
 			"smass": 0.51,
 			"RA": "17h52m34.9s",
 			"DE": "-30d5m16s"
+		},
+		"OGLE-2006-BLG-284":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.453,
+				"semiAxis": 2.2,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 4000.0,
+			"smass": 0.45,
+			"RA": "17h58m38s",
+			"DE": "-29d8m12s"
 		},
 		"OGLE-2007-BLG-349L (AB)":
 		{
@@ -68004,6 +69326,23 @@
 			"RA": "17h57m46s",
 			"DE": "-32d28m20s"
 		},
+		"OGLE-2015-BLG-1649":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 2.54,
+				"semiAxis": 2.07,
+				"discovered": 2019,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 4230.0,
+			"smass": 0.34,
+			"RA": "18h4m49s",
+			"DE": "-32d37m59s"
+		},
 		"OGLE-2015-BLG-1670L":
 		{
 			"exoplanets":
@@ -68037,6 +69376,23 @@
 			"smass": 0.077,
 			"RA": "17h55m12s",
 			"DE": "-28d51m46s"
+		},
+		"OGLE-2016-BLG-0263L":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 4.1,
+				"semiAxis": 6.5,
+				"discovered": 2017,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 6500.0,
+			"smass": 0.13,
+			"RA": "17h59m34.9s",
+			"DE": "-31d49m7s"
 		},
 		"OGLE-2016-BLG-0613L (AB)":
 		{
@@ -68209,6 +69565,72 @@
 			"RA": "17h51m53s",
 			"DE": "-29d16m17s"
 		},
+		"OGLE-2017-BLG-0373L":
+		{
+			"exoplanets":
+			[
+			{
+				"discovered": 2018,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 5900.0,
+			"smass": 0.25,
+			"RA": "17h57m19s",
+			"DE": "-31d57m6.2s"
+		},
+		"OGLE-2017-BLG-0406":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.41,
+				"semiAxis": 3.5,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 5200.0,
+			"smass": 0.56,
+			"RA": "17h56m0s",
+			"DE": "-29d51m47s"
+		},
+		"OGLE-2017-BLG-0482":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 9.0,
+				"semiAxis": 1.8,
+				"discovered": 2018,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 5800.0,
+			"smass": 0.2,
+			"RA": "17h56m11.7s",
+			"DE": "-30d31m42.1s"
+		},
+		"OGLE-2017-BLG-0604":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.51,
+				"semiAxis": 4.06,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 3950.0,
+			"smass": 0.7,
+			"RA": "17h51m34s",
+			"DE": "-30d56m48s"
+		},
 		"OGLE-2017-BLG-1140L":
 		{
 			"exoplanets":
@@ -68226,6 +69648,23 @@
 			"smass": 0.214,
 			"RA": "17h47m32s",
 			"DE": "-24d31m22s"
+		},
+		"OGLE-2017-BLG-1375":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 10.33,
+				"semiAxis": 2.97,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 3790.0,
+			"smass": 0.77,
+			"RA": "17h56m37s",
+			"DE": "-30d18m41s"
 		},
 		"OGLE-2017-BLG-1434L":
 		{
@@ -68331,6 +69770,23 @@
 			"Vmag": 14.0,
 			"RA": "8h42m47s",
 			"DE": "-29d50m9s"
+		},
+		"OGLE-2018-BLG-1269L":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.69,
+				"semiAxis": 4.61,
+				"discovered": 2020,
+				"detectionMethod": "Microlensing",
+				"planetName": "b"
+			}
+			],
+			"distance": 2560.0,
+			"smass": 1.13,
+			"RA": "17h58m46s",
+			"DE": "-27d37m5s"
 		},
 		"OGLE-2018-BLG-1700L":
 		{
@@ -68891,7 +70347,7 @@
 				"planetName": "b"
 			}
 			],
-			"distance": 3.5,
+			"distance": 3500.0,
 			"stype": "PSR",
 			"smass": 1.7,
 			"RA": "15h44m4.1s",
@@ -68971,31 +70427,6 @@
 			"smass": 1.35,
 			"RA": "22h41m42s",
 			"DE": "-52d36m36s"
-		},
-		"PTFO 8-8695":
-		{
-			"exoplanets":
-			[
-			{
-				"mass": 5.6,
-				"radius": 0.36,
-				"period": 0.448413,
-				"semiAxis": 0.008333,
-				"inclination": 78.4,
-				"angleDistance": 2.5e-05,
-				"discovered": 2012,
-				"detectionMethod": "Primary Transit",
-				"planetName": "b"
-			}
-			],
-			"distance": 330.0,
-			"stype": "M3 PMS",
-			"smass": 0.39,
-			"Vmag": 16.26,
-			"sradius": 0.45,
-			"effectiveTemp": 3740.0,
-			"RA": "5h25m7.9s",
-			"DE": "1d34m23.9s"
 		},
 		"PZ Tel":
 		{
@@ -69090,9 +70521,9 @@
 			"exoplanets":
 			[
 			{
-				"period": 11.185,
-				"semiAxis": 0.048,
-				"eccentricity": 0.0,
+				"period": 11.218,
+				"semiAxis": 0.049,
+				"eccentricity": 0.1,
 				"discovered": 2016,
 				"detectionMethod": "Radial Velocity",
 				"pclass": "M-Warm Terran",
@@ -69103,9 +70534,11 @@
 				"planetName": "b"
 			},
 			{
-				"period": 1894.0,
+				"mass": 0.03,
+				"period": 1928.0,
 				"semiAxis": 1.48,
 				"eccentricity": 0.0,
+				"inclination": 133.0,
 				"discovered": 2019,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
@@ -69752,6 +71185,31 @@
 			"RA": "19h5m30.2s",
 			"DE": "-41d26m15.4s"
 		},
+		"TOI-1235":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0186,
+				"radius": 0.15113,
+				"period": 3.444717,
+				"semiAxis": 0.03826,
+				"inclination": 88.9,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 39.68,
+			"stype": "M0.5V",
+			"smass": 0.63,
+			"smetal": 0.33,
+			"Vmag": 11.0,
+			"sradius": 0.619,
+			"effectiveTemp": 3997.0,
+			"RA": "10h8m52s",
+			"DE": "69d16m36s"
+		},
 		"TOI-125":
 		{
 			"exoplanets":
@@ -69799,6 +71257,43 @@
 			"RA": "1h34m22.4s",
 			"DE": "-66d40m34.8s"
 		},
+		"TOI-1266":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.05,
+				"radius": 0.2114,
+				"period": 10.894843,
+				"semiAxis": 0.0736,
+				"eccentricity": 0.09,
+				"inclination": 89.5,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"mass": 6.4,
+				"radius": 1.56,
+				"period": 18.80151,
+				"semiAxis": 0.1058,
+				"eccentricity": 0.04,
+				"inclination": 89.3,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			}
+			],
+			"distance": 36.05,
+			"stype": "M2",
+			"smass": 0.45,
+			"smetal": -0.05,
+			"Vmag": 13.0,
+			"sradius": 0.42,
+			"effectiveTemp": 3600.0,
+			"RA": "13h11m59s",
+			"DE": "65d50m1s"
+		},
 		"TOI-132":
 		{
 			"exoplanets":
@@ -69830,8 +71325,12 @@
 			"exoplanets":
 			[
 			{
-				"radius": 1.606,
-				"period": 71.4,
+				"mass": 30.2,
+				"radius": 0.5986,
+				"period": 95.141,
+				"semiAxis": 0.4491,
+				"eccentricity": 0.093,
+				"inclination": 89.22,
 				"discovered": 2020,
 				"detectionMethod": "Primary Transit",
 				"planetName": "a"
@@ -69968,6 +71467,57 @@
 			"effectiveTemp": 5880.0,
 			"RA": "1h7m7s",
 			"DE": "-75d11m56s"
+		},
+		"TOI-1728":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.08426,
+				"radius": 0.4505,
+				"period": 3.49151,
+				"semiAxis": 0.0391,
+				"eccentricity": 0.057,
+				"inclination": 88.31,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 60.8,
+			"smass": 0.646,
+			"smetal": 0.25,
+			"Vmag": 12.4,
+			"sradius": 0.6243,
+			"effectiveTemp": 3980.0,
+			"RA": "8h2m27s",
+			"DE": "64d47m49s"
+		},
+		"TOI-1899":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.66,
+				"radius": 1.37,
+				"period": 29.02,
+				"semiAxis": 0.1587,
+				"eccentricity": 0.118,
+				"inclination": 89.77,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 128.4,
+			"stype": "M0",
+			"smass": 0.627,
+			"smetal": 0.31,
+			"Vmag": 15.0,
+			"sradius": 0.607,
+			"effectiveTemp": 3841.0,
+			"RA": "19h57m42s",
+			"DE": "40d8m36s"
 		},
 		"TOI-216":
 		{
@@ -70134,6 +71684,53 @@
 			"RA": "2h27m28.3s",
 			"DE": "-27d38m6.6s"
 		},
+		"TOI-421":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.05107,
+				"radius": 0.4612,
+				"period": 16.06815,
+				"semiAxis": 0.1182,
+				"inclination": 88.3,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"mass": 0.02218,
+				"radius": 0.2427,
+				"period": 5.19676,
+				"semiAxis": 0.0557,
+				"inclination": 85.6,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			}
+			],
+			"RA": "5h27m25s",
+			"DE": "-14d16m37s"
+		},
+		"TOI-481":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.53,
+				"radius": 0.99,
+				"period": 10.33111,
+				"semiAxis": 0.097,
+				"eccentricity": 0.153,
+				"inclination": 89.2,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"RA": "7h22m3s",
+			"DE": "-57d23m6s"
+		},
 		"TOI-503":
 		{
 			"exoplanets":
@@ -70255,6 +71852,90 @@
 			"RA": "6h28m23s",
 			"DE": "-65d34m46s"
 		},
+		"TOI-717":
+		{
+			"exoplanets":
+			[
+			{
+				"period": 0.5079,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"Vmag": 11.4,
+			"effectiveTemp": 3427.0,
+			"RA": "9h51m57s",
+			"DE": "2d7m1s"
+		},
+		"TOI-763":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0308,
+				"radius": 0.2034,
+				"period": 5.6057,
+				"semiAxis": 0.06,
+				"eccentricity": 0.04,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"mass": 0.02932,
+				"radius": 0.2346,
+				"period": 12.2737,
+				"semiAxis": 0.1,
+				"eccentricity": 0.04,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			}
+			],
+			"distance": 95.39,
+			"smass": 0.917,
+			"smetal": 0.01,
+			"sradius": 0.897,
+			"effectiveTemp": 5450.0,
+			"RA": "12h57m52s",
+			"DE": "-39d45m28s"
+		},
+		"TOI-776":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.01466,
+				"radius": 0.1633,
+				"period": 8.24664,
+				"semiAxis": 0.0652,
+				"inclination": 89.65,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"mass": 0.0192,
+				"radius": 0.1838,
+				"period": 15.6653,
+				"semiAxis": 0.1,
+				"inclination": 89.51,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "c"
+			}
+			],
+			"distance": 27.19,
+			"stype": "M1V",
+			"smass": 0.544,
+			"smetal": -0.2,
+			"Vmag": 11.5,
+			"sradius": 0.538,
+			"effectiveTemp": 3709.0,
+			"RA": "11h54m18s",
+			"DE": "-37d33m10s"
+		},
 		"TOI-813":
 		{
 			"exoplanets":
@@ -70279,6 +71960,31 @@
 			"effectiveTemp": 5907.0,
 			"RA": "4h50m47s",
 			"DE": "-60d54m20s"
+		},
+		"TOI-824":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.058104,
+				"radius": 0.26104,
+				"period": 1.392978,
+				"semiAxis": 0.02177,
+				"inclination": 83.65,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 63.71,
+			"stype": "K4V",
+			"smass": 0.69,
+			"smetal": -0.15,
+			"Vmag": 11.1,
+			"sradius": 0.68,
+			"effectiveTemp": 4616.0,
+			"RA": "14h48m40s",
+			"DE": "-57d35m20s"
 		},
 		"TOI-849":
 		{
@@ -70305,6 +72011,25 @@
 			"effectiveTemp": 5375.3,
 			"RA": "1h54m51.7s",
 			"DE": "-29d25m18.1s"
+		},
+		"TOI-892":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.95,
+				"radius": 1.07,
+				"period": 10.62656,
+				"semiAxis": 0.092,
+				"eccentricity": 0.125,
+				"inclination": 82.9,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"RA": "5h46m57s",
+			"DE": "-11d14m7s"
 		},
 		"TOI-905":
 		{
@@ -70443,6 +72168,28 @@
 			"RA": "23h6m29s",
 			"DE": "-5d2m29s"
 		},
+		"TVLM 513-46546":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.38,
+				"period": 220.0,
+				"semiAxis": 0.3,
+				"eccentricity": 0.0,
+				"inclination": 71.0,
+				"discovered": 2020,
+				"detectionMethod": "Astrometry",
+				"planetName": "b"
+			}
+			],
+			"distance": 10.706,
+			"stype": "M8.5V",
+			"smass": 0.08,
+			"Vmag": 15.09,
+			"RA": "15h1m8s",
+			"DE": "22d50m2s"
+		},
 		"TWA 5 A (AB)":
 		{
 			"exoplanets":
@@ -70519,6 +72266,13 @@
 				"discovered": 2020,
 				"detectionMethod": "Imaging",
 				"planetName": "b"
+			},
+			{
+				"mass": 6.0,
+				"semiAxis": 320.0,
+				"discovered": 2020,
+				"detectionMethod": "Imaging",
+				"planetName": "c"
 			}
 			],
 			"distance": 94.6,
@@ -71033,36 +72787,12 @@
 			"RA": "13h12m46.4s",
 			"DE": "-23d21m31.8s"
 		},
-		"V830 Tau":
-		{
-			"exoplanets":
-			[
-			{
-				"mass": 0.77,
-				"period": 4.93,
-				"semiAxis": 0.057,
-				"eccentricity": 0.0,
-				"inclination": 55.0,
-				"discovered": 2016,
-				"detectionMethod": "Radial Velocity",
-				"planetName": "b"
-			}
-			],
-			"distance": 131.0,
-			"stype": "M0",
-			"smass": 1.0,
-			"Vmag": 12.1,
-			"sradius": 2.0,
-			"effectiveTemp": 4250.0,
-			"RA": "4h33m10s",
-			"DE": "24d33m43s"
-		},
 		"VHS 1256-1257 ":
 		{
 			"exoplanets":
 			[
 			{
-				"mass": 11.2,
+				"mass": 19.0,
 				"semiAxis": 102.0,
 				"discovered": 2015,
 				"detectionMethod": "Imaging",
@@ -71595,7 +73325,7 @@
 				"mass": 1.47,
 				"radius": 1.9,
 				"period": 1.0914203,
-				"semiAxis": 0.0234,
+				"semiAxis": 0.02344,
 				"eccentricity": 0.0,
 				"inclination": 83.37,
 				"angleDistance": 5.4e-05,
@@ -72369,6 +74099,39 @@
 			"RA": "23h56m45.9s",
 			"DE": "-22d9m11.3s"
 		},
+		"WASP-148":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.29,
+				"radius": 0.72,
+				"period": 8.80381,
+				"semiAxis": 0.0845,
+				"eccentricity": 0.22,
+				"inclination": 89.8,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			},
+			{
+				"period": 34.516,
+				"semiAxis": 0.21,
+				"eccentricity": 0.359,
+				"discovered": 2020,
+				"detectionMethod": "Radial Velocity",
+				"planetName": "c"
+			}
+			],
+			"distance": 248.1,
+			"smass": 1.0,
+			"smetal": 0.11,
+			"Vmag": 12.0,
+			"sradius": 1.03,
+			"effectiveTemp": 5460.0,
+			"RA": "16h56m31s",
+			"DE": "44d18m9s"
+		},
 		"WASP-15":
 		{
 			"exoplanets":
@@ -72397,6 +74160,31 @@
 			"starProperName": "Nyamien",
 			"RA": "13h55m43s",
 			"DE": "-32d9m34.9s"
+		},
+		"WASP-150":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 8.46,
+				"radius": 1.07,
+				"period": 5.644207,
+				"semiAxis": 0.0694,
+				"eccentricity": 0.3775,
+				"inclination": 84.01,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 536.0,
+			"smass": 1.346,
+			"smetal": 0.2,
+			"Vmag": 12.0,
+			"sradius": 1.706,
+			"effectiveTemp": 6093.0,
+			"RA": "17h37m3s",
+			"DE": "53d1m16s"
 		},
 		"WASP-151":
 		{
@@ -72972,6 +74760,31 @@
 			"effectiveTemp": 6229.0,
 			"RA": "11h5m17s",
 			"DE": "-34d7m20s"
+		},
+		"WASP-176":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.855,
+				"radius": 1.505,
+				"period": 3.899052,
+				"semiAxis": 0.0535,
+				"eccentricity": 0.0,
+				"inclination": 86.7,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 578.0,
+			"smass": 1.27,
+			"smetal": 0.215,
+			"Vmag": 12.0,
+			"sradius": 1.945,
+			"effectiveTemp": 5902.0,
+			"RA": "20h54m45s",
+			"DE": "9d10m45s"
 		},
 		"WASP-177":
 		{
@@ -73654,7 +75467,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 2.1,
+				"mass": 2.8,
 				"radius": 1.603,
 				"period": 1.21986967,
 				"semiAxis": 0.02558,
@@ -73841,12 +75654,12 @@
 			"exoplanets":
 			[
 			{
-				"mass": 1.237,
-				"radius": 1.395,
-				"period": 1.33823187,
+				"mass": 1.1974,
+				"radius": 1.3846,
+				"period": 1.338231602,
 				"semiAxis": 0.02312,
-				"eccentricity": 0.0,
-				"inclination": 88.8,
+				"eccentricity": 0.0053,
+				"inclination": 88.87,
 				"angleDistance": 7.7e-05,
 				"discovered": 2007,
 				"detectionMethod": "Primary Transit",
@@ -74772,11 +76585,11 @@
 			[
 			{
 				"mass": 0.826,
-				"radius": 1.404,
-				"period": 2.1377445,
+				"radius": 1.248,
+				"period": 2.13775138,
 				"semiAxis": 0.03443,
-				"eccentricity": 0.0,
-				"inclination": 79.86,
+				"eccentricity": 0.88,
+				"inclination": 80.32,
 				"discovered": 2014,
 				"detectionMethod": "Primary Transit",
 				"planetName": "b"
@@ -75530,6 +77343,22 @@
 			"RA": "8h40m13.3s",
 			"DE": "18d43m26.3s"
 		},
+		"WD 1032+011":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 70.0,
+				"period": 0.091558961,
+				"inclination": 87.5,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"RA": "10h34m49s",
+			"DE": "0d52m1s"
+		},
 		"WD 1145+017":
 		{
 			"exoplanets":
@@ -75572,15 +77401,15 @@
 			"exoplanets":
 			[
 			{
-				"mass": 61.0,
+				"mass": 9.0,
 				"discovered": 2018,
 				"detectionMethod": "Imaging",
 				"planetName": "b"
 			}
 			],
-			"distance": 33.0,
+			"distance": 16.7,
 			"stype": "sdL5",
-			"smass": 0.069,
+			"smass": 0.011,
 			"RA": "13h55m3s",
 			"DE": "-82d58m38s"
 		},
@@ -75717,6 +77546,54 @@
 			"effectiveTemp": 5000.0,
 			"RA": "19h34m56s",
 			"DE": "36d48m56s"
+		},
+		"Wendelstein-1":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.59,
+				"radius": 1.0,
+				"period": 2.663416,
+				"semiAxis": 0.0282,
+				"eccentricity": 0.012,
+				"inclination": 86.12,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 304.0,
+			"smass": 0.65,
+			"Vmag": 16.0,
+			"sradius": 0.61,
+			"effectiveTemp": 4125.0,
+			"RA": "19h56m12s",
+			"DE": "17d34m12s"
+		},
+		"Wendelstein-2":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.73,
+				"radius": 1.0,
+				"period": 1.7522239,
+				"semiAxis": 0.0234,
+				"eccentricity": 0.193,
+				"inclination": 87.87,
+				"discovered": 2020,
+				"detectionMethod": "Primary Transit",
+				"planetName": "b"
+			}
+			],
+			"distance": 575.0,
+			"smass": 0.73,
+			"Vmag": 17.0,
+			"sradius": 0.66,
+			"effectiveTemp": 4667.0,
+			"RA": "19h51m10s",
+			"DE": "16d54m45s"
 		},
 		"Wolf 1061":
 		{
@@ -76262,23 +78139,24 @@
 			"exoplanets":
 			[
 			{
-				"mass": 12.7,
+				"mass": 11.7,
 				"radius": 1.65,
-				"period": 8191.0,
-				"semiAxis": 9.68,
-				"eccentricity": 0.15,
-				"inclination": 88.824,
+				"period": 7707.0,
+				"semiAxis": 9.2,
+				"eccentricity": 0.029,
+				"inclination": 88.88,
 				"angleDistance": 0.440415,
 				"discovered": 2008,
 				"detectionMethod": "Imaging",
 				"planetName": "b"
 			},
 			{
-				"mass": 9.37,
-				"period": 1238.0,
-				"semiAxis": 2.72,
-				"eccentricity": 0.248,
-				"inclination": 97.86,
+				"mass": 8.2,
+				"radius": 1.2,
+				"period": 1227.0,
+				"semiAxis": 2.71,
+				"eccentricity": 0.2,
+				"inclination": 89.17,
 				"discovered": 2019,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "c"
@@ -76788,20 +78666,23 @@
 			"exoplanets":
 			[
 			{
-				"period": 2091.2,
-				"semiAxis": 3.22,
-				"eccentricity": 0.639,
+				"mass": 13.01,
+				"period": 2089.11,
+				"semiAxis": 3.308,
+				"eccentricity": 0.645,
+				"inclination": 49.9,
 				"angleDistance": 0.179039,
 				"discovered": 2001,
 				"detectionMethod": "Radial Velocity",
 				"planetName": "b"
 			},
 			{
-				"mass": 0.01422,
-				"radius": 0.1838,
-				"period": 6.26834,
+				"mass": 0.01517,
+				"radius": 0.16719,
+				"period": 6.26784,
 				"semiAxis": 0.06702,
-				"inclination": 87.31,
+				"eccentricity": 0.15,
+				"inclination": 87.553,
 				"discovered": 2018,
 				"detectionMethod": "Primary Transit",
 				"planetName": "c"

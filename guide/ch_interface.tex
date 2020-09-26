@@ -305,15 +305,17 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. See section~\ref{sec:starlore:singleConstellations} for details.
-\item[Auto-enabling for the atmosphere] When changing planet during
+\item[Auto-enabling for the environment] When changing planet during
   location change, atmosphere will be switched as required.
 \item[Dithering] options to allow select better simulation of sky on different hardware.
 \item[Auto zoom out returns to initial direction of view] When enabled,
-  this option changes the behaviour of the zoom out key
+  this option changes the behavior of the zoom out key
   \key{\textbackslash{}} so that it resets the initial direction of view in
   addition to the field of view.
 \item[Enable keyboard navigation]
 \item[Enable mouse navigation]
+\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the color settings for each celestial object and enable one color for text on the info panel for all celestial objects. By default Stellarium uses white color for this option, but you may re-define it through color chooser\newFeature{v0.20.3}.
+\item[Set keyboard focus to day input] --- you may use this option to force set focus on the day input field in Date and Time dialog. Important note: the focus in the sky will be lost when you open Date and Time dialog with enabling of this option.
 
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
@@ -328,10 +330,11 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
   mouse cursor should disappear from view when not moved.
+\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the color of text on the info panel at daylight to increase a contrast of the text. By default planetarium use black color.
 \item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
-  dialogs can either be moved on sidebar handles (with this switch
-  disabled) or by dragging the text itself (enabled), as it is known
-  from touch-enabled devices like smartphones. 
+dialogs can either be moved on sidebar handles (with this switch
+disabled) or by dragging the text itself (enabled), as it is known
+from touch-enabled devices like smartphones. 
 \end{description}
 
 \paragraph{Font size and font selection} \newFeature{v0.18.3} You can change the font sizes for on-screen
@@ -425,21 +428,21 @@ which are not available via the main toolbar.
 \end{figure}
 
 The Sky tab of the View window (Fig.~\ref{fig:gui:view:sky}) contains settings
-for changing the general appearance of the main sky view and projections. Some hightlights of sky field:
+for changing the general appearance of the main sky view and projections. Some highlights of sky field:
 \begin{description}
 \item[Dynamic eye adaptation] When enabled this feature reduces the
   brightness of faint objects when a bright object is in the field of
   view. This simulates how the eye can be dazzled by a bright object
   such as the moon, making it harder to see faint stars and galaxies.
 \item[Light pollution] In urban and suburban areas, the sky is
-  brightned by terrestrial light pollution reflected in the atmophere.
+  brightened by terrestrial light pollution reflected in the atmosphere.
   Stellarium simulates light pollution and is calibrated to the
   \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
   a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
   for more information.
 \end{description}
 
-\noindent Some hightlights of the stars field:
+\noindent Some highlights of the stars field:
 \begin{description}
 \item[Absolute scale] is the size of stars as rendered by
   Stellarium. If you increase this value, all stars will appear larger
@@ -461,6 +464,7 @@ for changing the general appearance of the main sky view and projections. Some h
   labels displayed for stars. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
+\item[Use designations for screen labels] --- when this option is enabled you will see in the sky only designations of the stars instead of their common names.
 \end{description}
 
 \noindent Projection field: Selecting items in this list changes the
@@ -481,7 +485,7 @@ for changing the general appearance of the main sky view and projections. Some h
   \item[Fish-Eye] Stellarium draws the sky using \emph{azimuthal
     equidistant projection}. In fish-eye projection, straight lines
     become curves when they appear a large angular distance from the
-    centre of the field of view (like the distortions seen with very
+    center of the field of view (like the distortions seen with very
     wide angle camera lenses). This is more pronounced as the user zooms
     out. The maximum field of view in this mode is 180\degree.
   \item[Orthographic] Orthographic projection is related to
@@ -578,8 +582,8 @@ opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass}
 external to the solar system, and are not point sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
-comes with a catalogue of over 90,000 extended objects containing
-the combined data from many catalogues, with 200 images.  
+comes with a catalog of over 90,000 extended objects containing
+the combined data from many catalogs, with 500+ images.  
 
 The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
 catalogs or which object types you are interested in. This selection 
@@ -953,6 +957,12 @@ The Astronomical Calculations window shows six tabs with different functionality
 
 In version 0.18.3 \newFeature{v0.18.3} we added exporting the data to XLSX files in addition to CSV files.
 
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Celestial positions}
+	\label{fig:gui:AstroCalc:Positions}
+\end{figure}
+
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
@@ -962,18 +972,23 @@ lists of celestial objects above the horizon at the simulated time, filtered by 
 Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
 You may also export the list of positions into an XLSX or CSV file.
 
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Celestial positions}
-\label{fig:gui:AstroCalc:Positions}
-\end{figure}
-
 \subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
 
 Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
 The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
+
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
+	\label{fig:gui:AstroCalc:Ephemeris}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
+	\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
+	\label{fig:gui:AstroCalc:Ephemeris:Extra}
+\end{figure}
 
 When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
@@ -982,15 +997,21 @@ Dates and/or magnitudes will show near position markers when \emph{Show dates} a
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
-\label{fig:gui:AstroCalc:Ephemeris}
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
+	\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
+	\label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
-\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
-\label{fig:gui:AstroCalc:Ephemeris:Extra}
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
+	\caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
+	\label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
+\end{figure}
+
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_asteroids.png}
+	\caption{Astronomical Calculations (AstroCalc): Two asteroids nearby to one place}
+	\label{fig:gui:AstroCalc:Ephemeris:Asteroids}
 \end{figure}
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
@@ -1000,30 +1021,20 @@ or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
 Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and enable display markers for all naked-eye visible planets.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
-\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
-\label{fig:gui:AstroCalc:Ephemeris:Analemma}
-\end{figure}
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
-\caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
-\label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
-\end{figure}
+Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of two objects in same time and define custom time step for ephemeris (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
 \subsection{The Transits Tab}
 \label{sec:gui:AstroCalc:Transits}
 
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
+	\label{fig:gui:AstroCalc:Transits}
+\end{figure}
+
 This \newFeature{v0.19.3} tab allows you to compute transits of selected celestial object (except unnamed stars and artificial satellites) for specific date range. The tool is proposed for planning observations and he suggest the best time and conditions for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
 
 You may also export the list of transits into an XLSX or CSV file.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
-\label{fig:gui:AstroCalc:Transits}
-\end{figure}
 
 %\newpage
 \subsection{The Phenomena Tab}
@@ -1219,7 +1230,7 @@ a browse of the information in this window.
 
 \subsection{The About Tab}
 \label{sec:gui:help:about}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.6\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
@@ -1230,7 +1241,7 @@ Since version 0.18.3 \newFeature{0.18.3} this tab has tool to check for updates 
 
 \subsection{The Log Tab}
 \label{sec:gui:help:log}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.6\textwidth]{help_dialog_log.png}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
@@ -1245,7 +1256,7 @@ find in your user directory (see~\ref{sec:Directories}).
 \label{sec:gui:help:hotkeys}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{hotkeys_dialog.png}
+\centering\includegraphics[width=0.8\textwidth]{hotkeys_dialog.png}
 \caption{Keyboard Shortcuts}
 \label{fig:gui:hotkeys}
 \end{figure}

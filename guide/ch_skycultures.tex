@@ -8,12 +8,12 @@
 \chapterauthor*{Georg Zotti, with additions by Alexander Wolf}
 
 Stellarium comes with a nice set of skycultures. For ethnographers or
-historians of science it may be a worthwile consideration to
+historians of science it may be a worthwhile consideration to
 illustrate the sky culture of the people they are studying. It is not
 very hard to do so, but depending on your data, may require some
 skills in image processing. 
 
-Some features regarding translation and multilinguality have evolved
+Some features regarding translation and multilingual have evolved
 over the years, and not all skycultures currently included in
 Stellarium adhere to the standards described in the following
 sections. Skycultures will also see continuous development in the
@@ -86,7 +86,7 @@ In order to have translated texts we have files
 ISO~639-1 language code, or its extension which contains language and
 country code, like \file{pt\_BR} for Brazilian Portuguese. A minimum
 skyculture must contain the file \file{description.en.utf8}, this is
-\texttt{en=english} text with optional HTML tags for sections, tables,
+\texttt{en=English} text with optional HTML tags for sections, tables,
 etc. You can also have embedded images in the HTML (your book cover?
 Views of sacred landscapes/buildings/artwork/\ldots?), just make them
 PNG format please. The length of the description texts is not limited,
@@ -107,13 +107,13 @@ be relevant.
 
 The native constellations are listed in
 \file{constellation\_names.eng.fab}. It consists of 3 simple columns:
-Abbreviation (or just a serial number), native name, and english
+Abbreviation (or just a serial number), native name, and English
 translation. The writing \texttt{\_("name")} allows automatic
 translation of the English strings to other languages. These strings
 will be used as constellation labels.
 
-You can \newFeature{0.19.2} add a reference comment after each
-3-column entry. Just add a whitespace, and then a comma-separated list
+You can \newFeature{v0.19.2} add a reference comment after each
+3-column entry. Just add a white-space, and then a comma-separated list
 of numerical references to the books listed in \file{reference.fab}.
 
 The first column (abbreviation) in the Western sky culture provides
@@ -143,12 +143,12 @@ the name. See a good example in the Mongolian skyculture.
 \section{Star Names}
 \label{sec:skycultures:starnames}
 
-The file \file{star\_names.fab} contains a list of HIP catalogue
+The file \file{star\_names.fab} contains a list of HIP catalog
 numbers and common names for those stars. Each line of the file
 contains one record of two fields (separated by the pipe character
 (\texttt{|})) or three fields (the first pair is separated by the 
 pipe character (\texttt{|}) and the last one separated by the space 
-character). The first field is the Hipparcos catalogue number of the
+character). The first field is the Hipparcos catalog number of the
 star, the second is the common name of the star in a format that enables
 translation support, the third is an optional list of references (see \ref{sec:skycultures:references})  
 to the source of the information about this name, e.g:
@@ -172,7 +172,7 @@ the planets. Each line of the file contains one record of 3 fields,
 separated by the white space or tab character. The first field is the
 English name of the planet, the second is the native name of the
 planet (can be in the native language, but please for maximum
-utability use an english transliteration) and the third is the
+utability use an English transliteration) and the third is the
 translatable version of the native name of the planet (translated into
 English). Here is an example from the Egyptian skyculture:
 
@@ -270,7 +270,7 @@ where
 
 In case the artwork is only available in a certain projection (e.g.,
 an all-sky map), or is otherwise heavily distorted so that the match
-is not satisfactory, you may have to reproject the image somehow. For
+is not satisfactory, you may have to re-project the image somehow. For
 aligning, you should switch Stellarium to Stereographic projection for
 optimal results.
 
@@ -328,7 +328,7 @@ translation of the English strings to other languages. These strings
 will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) marking a comment sign, 
 some reference information can be added in comment lines, like ``List found at \ldots''.
 Also, you can \newFeature{0.19.2} again add a reference comment after each
-2-column entry. Just add a whitespace, and then a comma-separated list
+2-column entry. Just add a white-space, and then a comma-separated list
 of numerical references to the books listed in \file{reference.fab}.
 Collecting sources and giving such references 
 is always a good idea. Some later versions of Stellarium may use and display this information.
@@ -359,7 +359,7 @@ In this file,
 
 If you are willing to let other users enjoy the result of your hard
 work (and we certainly hope you do!), when you are done, please write
-a note in the Forum or at Github. We will decide about acceptability
+a note in the Forum or at GitHub. We will decide about acceptability
 and classification, and may ask for better descriptions for the
 benefit of our users.
 

@@ -164,7 +164,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEditSearch"/>
+       <widget class="QLineEdit" name="lineEditSearch">
+        <property name="placeholderText">
+         <string>Search action...</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QFrame" name="editFrame">

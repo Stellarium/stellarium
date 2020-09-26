@@ -461,10 +461,12 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		ui->nameEdit->setText(QString());
 		ui->noradNumberEdit->setText(QString());
+		ui->cosparNumberEdit->setText(QString());
 		ui->tleFirstLineEdit->setText(QString());
 		ui->tleSecondLineEdit->setText(QString());
 		ui->stdMagnitudeLineEdit->setText(QString());
 		ui->rcsLineEdit->setText(QString());
+		ui->labelTleEpochData->setText(QString());
 
 		// get color of first selected item and test against all other selections
 		{
@@ -530,6 +532,7 @@ void SatellitesDialog::updateSatelliteData()
 			rcsString = QString::number(rcs, 'f', 3);
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
+		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
 		ui->stdMagnitudeLineEdit->setText(stdMagString);
@@ -537,8 +540,9 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleFirstLineEdit->setText(index.data(FirstLineRole).toString());
 		ui->tleFirstLineEdit->setCursorPosition(0);
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
-		ui->tleSecondLineEdit->setCursorPosition(0);		
-		
+		ui->tleSecondLineEdit->setCursorPosition(0);
+		ui->labelTleEpochData->setText(index.data(SatTLEEpochRole).toString());
+
 		// get color of the one selected sat
 		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = SatellitesMgr->getById(id);
@@ -631,6 +635,7 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		QListWidgetItem* item = new QListWidgetItem(q_(group),
 							    ui->groupsListWidget);
+		item->setToolTip(q_(group));
 		item->setData(Qt::UserRole, group);
 		Qt::CheckState state = Qt::Unchecked;
 		if (groupsUsedByAll.contains(group))
@@ -850,12 +855,15 @@ void SatellitesDialog::saveSourceList(void)
 
 void SatellitesDialog::deleteSourceRow(void)
 {
-	ui->sourceEdit->setText("");
-	if (ui->sourceList->currentItem())
-		delete ui->sourceList->currentItem();
+	if (askConfirmation())
+	{
+		ui->sourceEdit->setText("");
+		if (ui->sourceList->currentItem())
+			delete ui->sourceList->currentItem();
 
-	updateButtonsProperties();
-	saveSourceList();
+		updateButtonsProperties();
+		saveSourceList();
+	}
 }
 
 void SatellitesDialog::editSourceRow(void)
@@ -928,12 +936,17 @@ void SatellitesDialog::toggleCheckableSources()
 
 void SatellitesDialog::restoreDefaults(void)
 {
-	qDebug() << "Satellites::restoreDefaults";
-	GETSTELMODULE(Satellites)->restoreDefaults();
-	GETSTELMODULE(Satellites)->loadSettings();
-	updateSettingsPage();
-	populateFilterMenu();
-	populateSourcesList();
+	if (askConfirmation())
+	{
+		qDebug() << "[Satellites] restore defaults...";
+		GETSTELMODULE(Satellites)->restoreDefaults();
+		GETSTELMODULE(Satellites)->loadSettings();
+		updateSettingsPage();
+		populateFilterMenu();
+		populateSourcesList();
+	}
+	else
+		qDebug() << "[Satellites] restore defaults is canceled...";
 }
 
 void SatellitesDialog::updateSettingsPage()
@@ -1131,18 +1144,21 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 
 void SatellitesDialog::removeSatellites()
 {
-	QStringList idList;
-	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	QModelIndexList selectedIndexes = selectionModel->selectedRows();
-	for (const auto& index : selectedIndexes)
+	if (askConfirmation())
 	{
-		QString id = index.data(Qt::UserRole).toString();
-		idList.append(id);
-	}
-	if (!idList.isEmpty())
-	{
-		GETSTELMODULE(Satellites)->remove(idList);
-		saveSatellites();
+		QStringList idList;
+		QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+		QModelIndexList selectedIndexes = selectionModel->selectedRows();
+		for (const auto& index : selectedIndexes)
+		{
+			QString id = index.data(Qt::UserRole).toString();
+			idList.append(id);
+		}
+		if (!idList.isEmpty())
+		{
+			GETSTELMODULE(Satellites)->remove(idList);
+			saveSatellites();
+		}
 	}
 }
 
@@ -1192,6 +1208,8 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->nameEdit->setText(QString());
 	ui->noradNumberEdit->setEnabled(false);
 	ui->noradNumberEdit->setText(QString());
+	ui->cosparNumberEdit->setEnabled(false);
+	ui->cosparNumberEdit->setText(QString());
 	ui->descriptionTextEdit->setEnabled(false);
 	ui->descriptionTextEdit->setText(QString());
 	ui->groupsListWidget->setEnabled(false);
@@ -1200,6 +1218,7 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->tleFirstLineEdit->setText(QString());
 	ui->tleSecondLineEdit->setEnabled(false);
 	ui->tleSecondLineEdit->setText(QString());
+	ui->labelTleEpochData->setText(QString());
 	ui->stdMagnitudeLineEdit->setEnabled(false);
 	ui->stdMagnitudeLineEdit->setText(QString());
 	ui->rcsLineEdit->setEnabled(false);
@@ -1222,6 +1241,7 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->userCheckBox->setEnabled(true);
 	ui->nameEdit->setEnabled(true);
 	ui->noradNumberEdit->setEnabled(true);
+	ui->cosparNumberEdit->setEnabled(true);
 	ui->descriptionTextEdit->setEnabled(true);
 	ui->groupsListWidget->setEnabled(true);
 	ui->tleFirstLineEdit->setEnabled(true);
@@ -1243,6 +1263,7 @@ void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
 		item->setCheckState(Qt::Checked);
 		QString groupId = item->text().trimmed();
 		item->setData(Qt::UserRole, groupId);
+		item->setToolTip(q_(groupId));
 		QFont font = item->font();
 		font.setItalic(false);
 		item->setFont(font);
