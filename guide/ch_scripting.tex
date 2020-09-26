@@ -151,13 +151,16 @@ planet Mars (Fig.~\ref{fig:Mars2005}).
 \end{figure}
 
 \subsection{Script header}
-Any ``complex'' script should contain a few lines in the first part 
-of the file, which contains important data for humans --- the 
-name of the script and its description --- and some rules for 
-Stellarium. You can even assign default shortcuts in the script header, 
-but make sure you assign a key not used elsewhere! The description 
-may cover several lines (until the end of the commented header) 
-and should therefore be the last entry of the header.
+Any ``complex'' script should contain a few lines in the first part of
+the file, which contains important data for humans --- the name of the
+script and its description --- and some rules for Stellarium. You can
+even assign default shortcuts in the script header, but make sure you
+assign a key not used elsewhere! The shortcuts are read during startup
+from all scripts in the \file{scripts} subdirectories of both program
+and user data directories (see section
+\ref{sec:FilesAndDirectories:DirectoryStructure}).  The description
+may cover several lines (until the end of the commented header) and
+should therefore be the last entry of the header.
 
 \begin{script}
 //
