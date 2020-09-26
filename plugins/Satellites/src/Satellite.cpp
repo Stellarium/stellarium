@@ -1029,11 +1029,13 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		{
 			Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
 			painter.setColor(drawColor*hintBrightness, hintBrightness);
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
+				painter.setColor(transitSatelliteColor, 1.f);
 
 			if (showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-			painter.setBlending(true, GL_ONE, GL_ONE);
+			painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 			hintTexture->bind();
 			painter.drawSprite2dMode(XYZ, 11);
 		}
