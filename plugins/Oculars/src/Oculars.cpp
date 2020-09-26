@@ -172,7 +172,6 @@ Oculars::Oculars()
 	, flagInitDirectionUsage(false)
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
-	, flagCustomFOVForTelrad(false)
 	, flagScalingFOVForCCD(true)
 	, flagShowResolutionCriteria(false)
 	, equatorialMountEnabledMain(false)
@@ -293,6 +292,8 @@ void Oculars::deinit()
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+	disconnect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 	if (flagShowCCD)
 	{
 		// Retrieve and restore star scales
@@ -2166,6 +2167,7 @@ void Oculars::validateAndLoadIniFile()
 
 void Oculars::unzoomOcular()
 {
+	Q_ASSERT(flagShowOculars == false);
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();	
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2301,6 +2303,7 @@ void Oculars::toggleLines(bool visible)
 
 void Oculars::zoomOcular()
 {
+	Q_ASSERT(flagShowOculars == true);
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();

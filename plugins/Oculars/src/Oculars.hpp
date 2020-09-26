@@ -325,7 +325,6 @@ signals:
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
-	void flagCustomFOVForTelradChanged(bool value);
 	void telradFOVChanged(Vec4f fov);
 	void flagScalingFOVForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
@@ -522,7 +521,6 @@ private:
 	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
-	bool flagCustomFOVForTelrad;	//!< Flag used to track if we use custom FOV for Telrad --- FIXME: Currently unused.
 	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
 	bool flagShowResolutionCriteria;	//!< Show various criteria for angular resolution based on telescope/ocular
 	bool equatorialMountEnabledMain;	//!< Keep track of mount used in main program.
