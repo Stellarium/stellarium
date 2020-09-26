@@ -431,6 +431,9 @@
              </property>
              <item row="2" column="0">
               <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="toolTip">
+                <string>Show FOV circles relative to the apparent FOV of the widest-angle ocular</string>
+               </property>
                <property name="text">
                 <string>Scale image circle</string>
                </property>
@@ -463,10 +466,10 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
                <property name="toolTip">
-                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+                <string>Apply limit for stellar magnitude based on telescope aperture</string>
                </property>
                <property name="text">
-                <string>Limit stellar magnitude</string>
+                <string>Auto-limit stellar magnitude</string>
                </property>
               </widget>
              </item>
@@ -531,7 +534,7 @@
                <item>
                 <widget class="QSpinBox" name="transparencySpinBox">
                  <property name="toolTip">
-                  <string>Value of transparency of semi-transparent mask</string>
+                  <string>Opacity of semi-transparent mask</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -851,6 +854,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
                  </property>
@@ -884,6 +890,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
                  </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
@@ -919,6 +928,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
                  </property>
@@ -953,8 +965,11 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="maximum">
-                  <double>28.000000000000000</double>
+                  <double>30.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>

@@ -218,7 +218,13 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
 \item[Ocular view] is a group of options that allows to change the plugin's behavior in visual observation mode.
  \begin{description}
    \item[Enable only if an object is selected] -- uncheck this option if you want to use the visual observation mode when no object is selected.
-   \item[Limit stellar magnitude] allows to hide faint stars, which are invisible for the selected combination of eyepiece, lens and telescope.
+   \item[Auto-limit stellar magnitude] sets the magnitude limitation
+     for stars based on telescope diameter. When disabled, the main
+     program's setting applies (see section
+     \ref{sec:gui:view:sky}). \newFeature{v0.20.3} Note that two manual limits for ocular
+     view and main program are handled, and switching between ocular
+     and main view also switches those values.
+   \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
    \item[Scale image circle] option allows you to define whether or not to scale the images based on apparent FOV. When deactivated, the image circle will fill your screen. 
          In general, we recommend you not select this, unless you have a need to, because it can really reduce the image size on the screen. 
 		 It can however be very useful in comparing two eyepieces. 

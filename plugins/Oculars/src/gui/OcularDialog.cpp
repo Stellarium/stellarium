@@ -309,7 +309,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxInitialDirection,	"Oculars.flagInitDirectionUsage");
 	connectBoolProperty(ui->checkBoxResolutionCriterion,	"Oculars.flagShowResolutionCriteria");
 	connectBoolProperty(ui->requireSelectionCheckBox,	"Oculars.flagRequireSelection");
-	connectBoolProperty(ui->limitStellarMagnitudeCheckBox,	"Oculars.flagLimitMagnitude");
+	connectBoolProperty(ui->limitStellarMagnitudeCheckBox,	"Oculars.flagAutoLimitMagnitude");
 	connectBoolProperty(ui->hideGridsLinesCheckBox,		"Oculars.flagHideGridsLines");
 	connectBoolProperty(ui->scaleImageCircleCheckBox,	"Oculars.flagScaleImageCircle");
 	connectBoolProperty(ui->semiTransparencyCheckBox,	"Oculars.flagSemiTransparency");
@@ -317,7 +317,6 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
-	//connectBoolProperty(ui->checkBoxTelradFOVCustom,	"Oculars.flagCustomFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
 	connectIntProperty(ui->arrowButtonScaleSpinBox,	        "Oculars.arrowButtonScale");
@@ -330,11 +329,11 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
 	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
 	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
-	connectColorButton(ui->focuserColorToolButton,       "Oculars.focuserColor", "focuser_color", "Oculars");
+	connectColorButton(ui->focuserColorToolButton,		"Oculars.focuserColor", "focuser_color", "Oculars");
 	connectBoolProperty(ui->checkBoxShowFocuserOverlay,	"Oculars.flagShowFocuserOverlay");
-	connectBoolProperty(ui->checkBoxUseSmallFocuser,		"Oculars.flagUseSmallFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseSmallFocuser,	"Oculars.flagUseSmallFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseMediumFocuser,	"Oculars.flagUseMediumFocuserOverlay");
-	connectBoolProperty(ui->checkBoxUseLargeFocuser,		"Oculars.flagUseLargeFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseLargeFocuser,	"Oculars.flagUseLargeFocuserOverlay");
 
 	setupTelradFOVspins(plugin->getTelradFOV());
 	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));
@@ -481,12 +480,6 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	updateGuiOptions();
-
-	// add degree char into input boxes of FOV for Telrad
-	ui->doubleSpinBoxTelradFOV1->setSuffix(QChar(0x00B0));
-	ui->doubleSpinBoxTelradFOV2->setSuffix(QChar(0x00B0));
-	ui->doubleSpinBoxTelradFOV3->setSuffix(QChar(0x00B0));
-	ui->doubleSpinBoxTelradFOV4->setSuffix(QChar(0x00B0));
 }
 
 void OcularDialog::setupTelradFOVspins(Vec4f fov)
@@ -499,11 +492,10 @@ void OcularDialog::setupTelradFOVspins(Vec4f fov)
 
 void OcularDialog::updateTelradCustomFOV()
 {
-	Vec4f fov;
-	fov[0] = static_cast<float>(ui->doubleSpinBoxTelradFOV1->value());
-	fov[1] = static_cast<float>(ui->doubleSpinBoxTelradFOV2->value());
-	fov[2] = static_cast<float>(ui->doubleSpinBoxTelradFOV3->value());
-	fov[3] = static_cast<float>(ui->doubleSpinBoxTelradFOV4->value());
+	Vec4f fov(static_cast<float>(ui->doubleSpinBoxTelradFOV1->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV2->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV3->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV4->value()));
 	plugin->setTelradFOV(fov);
 }
 
@@ -605,7 +597,7 @@ void OcularDialog::initAboutText()
 	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
 	html +=         q_("Therefore we recommend that you leave it off, unless you feel you have a need for it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
-	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
+	html += "<p>" + QString(q_("You can toggle a Telrad finder. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
 	html +=         q_("You can adjust the diameters or even add a fourth circle if you have a different finder, or revert to the Telrad standard sizes.") + "</p>";
 	html += "<p>" + q_("If you find any issues, please let me know. Enjoy!") + "</p>";
 
