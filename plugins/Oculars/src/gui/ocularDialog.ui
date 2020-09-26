@@ -854,6 +854,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
                  </property>
@@ -887,6 +890,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
                  </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
@@ -922,6 +928,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="minimum">
                   <double>0.000000000000000</double>
                  </property>
@@ -956,8 +965,11 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
                  <property name="maximum">
-                  <double>28.000000000000000</double>
+                  <double>30.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
