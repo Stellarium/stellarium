@@ -402,7 +402,7 @@ void HelpDialog::updateAboutText(void) const
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	// Note: this legal notice is not suitable for traslation
+	// Note: this legal notice is not suitable for translation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";

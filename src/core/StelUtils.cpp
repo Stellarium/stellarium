@@ -50,8 +50,8 @@ QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
-#elif defined(GIT_COMMITS)
-	return QString("%1.%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_COMMITS).arg(GIT_BRANCH);
+#elif defined(GIT_REVISION)
+	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_REVISION).arg(GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
