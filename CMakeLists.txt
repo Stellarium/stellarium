@@ -64,7 +64,6 @@ SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activat
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
-MESSAGE(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      IF(CMAKE_COMPILER_IS_GNUCXX)
@@ -121,7 +120,7 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()
 ENDIF()
-MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION}")
+MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
