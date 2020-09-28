@@ -39,7 +39,7 @@ public slots:
 	void setVisible(bool);
 
 	void populateUnitMeasurementsList();
-	void saveTimeStep(int value);
+	void saveTimeStep(double value);
 	void saveUnitMeasurement(int index);
 
 private:

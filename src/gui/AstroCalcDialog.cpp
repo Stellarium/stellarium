@@ -1905,9 +1905,9 @@ double AstroCalcDialog::getCustomTimeStep()
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}
-	int timeStep = conf->value("astrocalc/custom_time_step", "1").toInt();
+	double timeStep = conf->value("astrocalc/custom_time_step", 1.0).toDouble();
 	// NOTE: Sync units with AstroCalcCustomStepsDialog::populateUnitMeasurementsList()!
-	switch(conf->value("astrocalc/custom_time_step_unit", "3").toInt())
+	switch(conf->value("astrocalc/custom_time_step_unit", 3).toInt())
 	{
 		case 1: // minutes
 			timeUnit = StelCore::JD_MINUTE;

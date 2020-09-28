@@ -55,8 +55,8 @@ void AstroCalcCustomStepsDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	ui->timeStepSpinBox->setValue(conf->value("astrocalc/custom_time_step", "1").toInt());
-	connect(ui->timeStepSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveTimeStep(int)));
+	ui->timeStepDoubleSpinBox->setValue(conf->value("astrocalc/custom_time_step", 1.0).toDouble());
+	connect(ui->timeStepDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveTimeStep(double)));
 
 	populateUnitMeasurementsList();
 	connect(ui->unitMeasurementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveUnitMeasurement(int)));
@@ -107,7 +107,7 @@ void AstroCalcCustomStepsDialog::saveUnitMeasurement(int index)
 	conf->setValue("astrocalc/custom_time_step_unit", category->itemData(index).toInt());
 }
 
-void AstroCalcCustomStepsDialog::saveTimeStep(int value)
+void AstroCalcCustomStepsDialog::saveTimeStep(double value)
 {
 	conf->setValue("astrocalc/custom_time_step", value);
 }

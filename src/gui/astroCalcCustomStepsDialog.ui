@@ -155,15 +155,21 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="timeStepSpinBox">
+         <widget class="QDoubleSpinBox" name="timeStepDoubleSpinBox">
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
+          <property name="decimals">
+           <number>6</number>
+          </property>
           <property name="minimum">
-           <number>1</number>
+           <double>0.000001000000000</double>
           </property>
           <property name="maximum">
-           <number>10000</number>
+           <double>999999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>3.000000000000000</double>
           </property>
          </widget>
         </item>
