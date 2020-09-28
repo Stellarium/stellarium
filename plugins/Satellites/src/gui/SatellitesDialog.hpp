@@ -83,6 +83,7 @@ private slots:
 	//! "@em the current" and "@em a selected" item - a selection can contain
 	//! multiple items.)
 	void updateSatelliteData();
+	void updateSatelliteAndSaveData();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);

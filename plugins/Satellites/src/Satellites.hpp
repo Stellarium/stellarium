@@ -46,11 +46,11 @@ class SatellitesListModel;
 /*! @defgroup satellites Satellites Plug-in
 @{
 The %Satellites plugin displays the positions of artificial satellites in Earth
-orbit based on a catalogue of orbital data.
+orbit based on a catalog of orbital data.
 
 The Satellites class is the main class of the plug-in. It manages a collection
 of Satellite objects and takes care of loading, saving and updating the
-satellite catalogue. It allows automatic updates from online sources and manages
+satellite catalog. It allows automatic updates from online sources and manages
 a list of update file URLs.
 
 To calculate satellite positions, the plugin uses an implementation of
@@ -63,19 +63,19 @@ the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
 Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
 for presentation purposes.
 
-In the <b>Satellite Catalogue</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
+In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
 
 <i>Grouping</i>
 
 A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
 
-Group names are arbitrary strings defined in the <b>Satellite Catalogue</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
+Group names are arbitrary strings defined in the <b>Satellite Catalog</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
 
-By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalogue.
+By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 
-<b>Satellite Catalogue</b>
+<b>Satellite Catalog</b>
 
-The satellite catalogue is stored on the disk in [JSON](http://www.json.org/)
+The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "satellites.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
@@ -91,7 +91,7 @@ file.
 //! @ingroup satellites
 struct TleData
 {
-	//! NORAD catalogue number, as extracted from the TLE set.
+	//! NORAD catalog number, as extracted from the TLE set.
 	QString id;
 	//! Human readable name, as extracted from the TLE title line.
 	QString name;
@@ -402,6 +402,8 @@ signals:
 	//! @param missing the number of satellites that were not found in the
 	//! update source(s) (and were removed, if autoRemoveEnabled is set).
 	void tleUpdateComplete(int updated, int total, int added, int missing);
+
+	void satGroupVisibleChanged();
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet

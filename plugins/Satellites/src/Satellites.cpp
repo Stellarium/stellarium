@@ -274,6 +274,7 @@ void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
 			sat->setFlags(flags);
 		}
 	}
+	emit satGroupVisibleChanged();
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)

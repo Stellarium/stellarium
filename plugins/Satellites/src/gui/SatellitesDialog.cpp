@@ -244,6 +244,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()),	this, SLOT(addSourceRow()));
 	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
 	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
+	connect(plugin, SIGNAL(satGroupVisibleChanged()), this, SLOT(updateSatelliteAndSaveData()));
 	connect(plugin, SIGNAL(settingsChanged()), this, SLOT(toggleCheckableSources()));
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
@@ -432,6 +433,12 @@ void SatellitesDialog::filterListByGroup(int index)
 		first = ui->satellitesList->model()->index(0, 0);
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
+}
+
+void SatellitesDialog::updateSatelliteAndSaveData()
+{
+	updateSatelliteData(); // update properties of selected satellite in the GUI
+	saveSatellites(); // enforcement saving properties of satellites
 }
 
 void SatellitesDialog::updateSatelliteData()
