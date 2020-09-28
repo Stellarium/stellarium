@@ -78,7 +78,7 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 {
 	int nextKey = e->key();
 	if ( keys.count() > 3 || // too long shortcut
-	     nextKey == Qt::Key_Control || // dont count modifier keys
+	     nextKey == Qt::Key_Control || // don't count modifier keys
 	     nextKey == Qt::Key_Shift ||
 	     nextKey == Qt::Key_Meta ||
 	     nextKey == Qt::Key_Alt )

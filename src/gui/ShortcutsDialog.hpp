@@ -58,7 +58,7 @@ public:
 	ShortcutsDialog(QObject* parent);
 	~ShortcutsDialog();
 
-	//! higlight items that have collisions with current lineEdits' state according to css.
+	//! highlight items that have collisions with current lineEdits' state according to CSS.
 	//! Note: previous collisions aren't redrawn.
 	void drawCollisions();
 
@@ -66,7 +66,7 @@ public slots:
 	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
 	void retranslate();
-	//! ititialize editors state when current item changed.
+	//! initialize editors state when current item changed.
 	void initEditors();
 	//! checks whether one QKeySequence is prefix of another.
 	bool prefixMatchKeySequence(const QKeySequence &ks1, const QKeySequence &ks2);
@@ -77,7 +77,7 @@ public slots:
 	void handleChanges();
 	//! called when apply button clicked.
 	void applyChanges();
-	//! called by doubleclick; if click is on editable item, switch to editors
+	//! called by double-click; if click is on editable item, switch to editors
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
@@ -100,10 +100,10 @@ private:
 
 	QStandardItem* updateGroup(const QString& group);
 
-	//! search for first appearence of item with requested data.
+	//! search for first appearance of item with requested data.
 	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
-	//! pointer to mgr, for not getting it from stelapp every time.
+	//! pointer to mgr, for not getting it from StelApp every time.
 	class StelActionMgr* actionMgr;
 
 	//! list for storing collisions items, so we can easy restore their colors.

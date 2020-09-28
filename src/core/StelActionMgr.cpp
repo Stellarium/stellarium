@@ -58,7 +58,7 @@ StelAction::StelAction(const QString& actionId,
 	QString cfgOpt = "shortcuts/" + actionId;
 	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" "); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(QRegExp("\\s+")); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
@@ -103,7 +103,7 @@ QString StelAction::getText() const
 void StelAction::setChecked(bool value)
 {
 	Q_ASSERT(boolProperty);
-	if (value == isChecked()) //dont do anything if value would not change
+	if (value == isChecked()) //don't do anything if value would not change
 		return;
 
 	boolProperty->setValue(value);
@@ -165,7 +165,7 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	if (slotIndex<0) qWarning()<<"[StelAction]"<<getId()<<"cannot connect to slot"<<slot<<"of object"<<obj << "- EXIT!";
 #endif
 	Q_ASSERT(slotIndex>=0);
-	// connect to a parameterless slot.
+	// connect to a parameter-less slot.
 	this->slot = obj->metaObject()->method(slotIndex);
 	Q_ASSERT(this->slot.parameterCount() == 0);
 	//let Qt handle invoking the slot when the StelAction is triggered
@@ -322,7 +322,7 @@ void StelActionMgr::saveShortcuts()
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		if (action->altKeySequence.toString()=="")
 			seq += " \"\"";		
-		conf->setValue(action->objectName(), seq.replace("\\s+"," "));
+		conf->setValue(action->objectName(), seq.replace(QRegExp("\\s+")," "));
 	}
 	conf->endGroup();
 	// Apparently shortcuts was changed
