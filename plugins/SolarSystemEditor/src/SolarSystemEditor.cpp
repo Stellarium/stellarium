@@ -395,6 +395,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	}
 }
 
+// all **minor** bodies
 QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString filePath) const
 {
 	if (!QFile::exists(filePath))
@@ -970,6 +971,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 	}
 }
 
+// append new, but (oddly) also updates existing objects (by removing and then appending)
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
 	qDebug() << "appendToSolarSystemConfigurationFile begin ... ";
@@ -985,9 +987,10 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		return false;
 	}
 
+	// load all existing minor bodies
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 
-	//Remove duplicates (identified by name, not by section name)
+	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, StelIniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{

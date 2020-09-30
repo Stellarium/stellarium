@@ -269,6 +269,7 @@ void MpcImportWindow::addObjects()
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
 
+	// collect all new candidates that were selected by the user into `approvedForAddition`
 	QList<SsoElements> approvedForAddition;
 	for (int i = 0; i < candidatesForAddition.count(); i++)
 	{
@@ -277,6 +278,10 @@ void MpcImportWindow::addObjects()
 			approvedForAddition.append(candidatesForAddition.at(i));
 	}
 
+	//qDebug() << "Approved for addition:" << approvedForAddition;
+
+	// collect all existing candidates that were selected by the use into `approvedForUpdate`r
+	// if the user opted to overwrite, those candidates are added to `approvedForAddition` instead
 	bool overwrite = ui->radioButtonOverwrite->isChecked();
 	QList<SsoElements> approvedForUpdate;
 	for (int j = 0; j < candidatesForUpdate.count(); j++)
@@ -284,6 +289,7 @@ void MpcImportWindow::addObjects()
 		QString name = candidatesForUpdate.at(j).value("name").toString();
 		if (checkedObjectsNames.contains(name))
 		{
+			// XXX: odd... if "overwrite" is false, data is overwritten anyway.
 			if (overwrite)
 			{
 				approvedForAddition.append(candidatesForUpdate.at(j));
@@ -295,9 +301,14 @@ void MpcImportWindow::addObjects()
 		}
 	}
 
-	//Write to file
+	//qDebug() << "Approved for updates:" << approvedForUpdate;
+
+	// append *** + update *** the approvedForAddition candidates to custom solar system config
 	ssoManager->appendToSolarSystemConfigurationFile(approvedForAddition);
 
+	// if instead "update existing objects" was selected, update existing candidates from `approvedForUpdate` in custom solar system config
+	// update name, MPC number, orbital elements
+	// if the user asked more to update, include type (asteroid, comet, plutino, cubewano, ...) and magnitude parameters
 	if (ui->radioButtonUpdate->isChecked())
 	{
 		SolarSystemEditor::UpdateFlags flags(SolarSystemEditor::UpdateNameAndNumber | SolarSystemEditor::UpdateOrbitalElements);
@@ -351,6 +362,7 @@ void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 {
 	candidatesForAddition.clear();
+	// FIXME? candidatesForUpdate.clear() ?
 
 	//Get a list of the current objects
 	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();

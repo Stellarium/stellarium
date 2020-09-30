@@ -52,8 +52,14 @@ protected:
 
 private slots:
 	//! \todo Find a way to suggest a default file name (select directory instead of file?)
+
+	// export the user's ssystem_minor file
 	void copyConfiguration();
+
+	// import a ssystem_minor file
 	void replaceConfiguration();
+
+	// append new data, and update existing data
 	void addConfiguration();
 
 	void populateSolarSystemList();
