@@ -70,6 +70,8 @@ private slots:
 	void newImportManual();
 	void resetImportManual(bool);
 
+	void resetSSOdefaults();
+
 private:
 	MpcImportWindow* mpcImportWindow;
 	ManualImportWindow * manualImportWindow;
