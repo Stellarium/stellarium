@@ -128,6 +128,9 @@ public slots:
 	void setTabulatedDisplay(bool b) { tabulatedDisplay=b; }
 	bool getTabulatedDisplay(void) const { return tabulatedDisplay; }
 
+	void setShowExtraDecimals(bool b) { NavStarsCalculator::useExtraDecimals=b; }
+	bool getShowExtraDecimals(void) const { return NavStarsCalculator::useExtraDecimals; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{

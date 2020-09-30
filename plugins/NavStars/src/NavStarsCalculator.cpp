@@ -25,6 +25,8 @@ using std::cos;
 using std::asin;
 using std::acos;
 
+bool NavStarsCalculator::useExtraDecimals = false;
+
 #ifdef _DEBUG
 static void examineCalc(NavStarsCalculator& calc);
 #endif 
@@ -101,7 +103,7 @@ QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString
 	md += (s / 60.);
 	rval += (sign ? pos : neg)
 		+ QString::number(d, 'f', 0) + QString("&deg;")
-		+ QString::number(md, 'f', 1) + "'";
+		+ QString::number(md, 'f', useExtraDecimals ? 4 : 1) + "'";
 #ifdef _DEBUG
 	// An easier to use display when working with Google Earth, 
 	// Google Maps, custom software tools, etc. Keep everything
@@ -151,8 +153,3 @@ QMap<QString, QString> NavStarsCalculator::printable()
 	rval["znPrintable"] = znPrintable();
 	return rval;
 }
-
-
-
-
-

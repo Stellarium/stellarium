@@ -267,6 +267,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="showExtraDecimals">
+            <property name="text">
+             <string>Show extra decimals in info</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
