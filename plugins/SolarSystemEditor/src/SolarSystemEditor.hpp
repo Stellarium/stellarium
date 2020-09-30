@@ -164,10 +164,10 @@ public:
 
 	//! Flags to control the updateSolarSystemConfigurationFile() function.
 	enum UpdateFlag {
-		UpdateNameAndNumber = 0x01,//!< Update the name and minor planet number, if any.
-		UpdateType = 0x02, //!< Update objects that lack the "type" parameter
-		UpdateOrbitalElements = 0x04, //!< Update the orbital elements, including the orbit function.
-		UpdateMagnitudeParameters = 0x08 //!< Update the values in the two parameter system, or add them if they are missing and the type allows.
+		UpdateNameAndNumber = 0x01,		//!< Update the name and minor planet number, if any.
+		UpdateType = 0x02, 			//!< Update objects that lack the "type" parameter
+		UpdateOrbitalElements = 0x04, 		//!< Update the orbital elements, including the orbit function.
+		UpdateMagnitudeParameters = 0x08 	//!< Update the values in the two parameter system, or add them if they are missing and the type allows.
 	};
 	Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 

@@ -273,9 +273,10 @@ void MpcImportWindow::addObjects()
 	QList<SsoElements> approvedForAddition;
 	for (int i = 0; i < candidatesForAddition.count(); i++)
 	{
-		QString name = candidatesForAddition.at(i).value("name").toString();
+		auto candidate = candidatesForAddition.at(i);
+		QString name = candidate.value("name").toString();
 		if (checkedObjectsNames.contains(name))
-			approvedForAddition.append(candidatesForAddition.at(i));
+			approvedForAddition.append(candidate);
 	}
 
 	//qDebug() << "Approved for addition:" << approvedForAddition;
@@ -286,17 +287,18 @@ void MpcImportWindow::addObjects()
 	QList<SsoElements> approvedForUpdate;
 	for (int j = 0; j < candidatesForUpdate.count(); j++)
 	{
-		QString name = candidatesForUpdate.at(j).value("name").toString();
+		auto candidate = candidatesForUpdate.at(j);
+		QString name = candidate.value("name").toString();
 		if (checkedObjectsNames.contains(name))
 		{
 			// XXX: odd... if "overwrite" is false, data is overwritten anyway.
 			if (overwrite)
 			{
-				approvedForAddition.append(candidatesForUpdate.at(j));
+				approvedForAddition.append(candidate);
 			}
 			else
 			{
-				approvedForUpdate.append(candidatesForUpdate.at(j));
+				approvedForUpdate.append(candidate);
 			}
 		}
 	}
@@ -309,10 +311,13 @@ void MpcImportWindow::addObjects()
 	// if instead "update existing objects" was selected, update existing candidates from `approvedForUpdate` in custom solar system config
 	// update name, MPC number, orbital elements
 	// if the user asked more to update, include type (asteroid, comet, plutino, cubewano, ...) and magnitude parameters
-	if (ui->radioButtonUpdate->isChecked())
+	bool update = ui->radioButtonUpdate->isChecked();
+	// ASSERT(update != overwrite);
+	if (update) 
 	{
 		SolarSystemEditor::UpdateFlags flags(SolarSystemEditor::UpdateNameAndNumber | SolarSystemEditor::UpdateOrbitalElements);
-		if (!ui->checkBoxOnlyOrbitalElements->isChecked())
+		bool onlyorbital = ui->checkBoxOnlyOrbitalElements->isChecked();
+		if (!onlyorbital)
 		{
 			flags |= SolarSystemEditor::UpdateType;
 			flags |= SolarSystemEditor::UpdateMagnitudeParameters;

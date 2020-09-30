@@ -75,8 +75,8 @@ SolarSystemEditor::SolarSystemEditor():
 	//I really hope that the file manager is instantiated before this
 	// GZ new: Not sure whether this should be major or minor here.
 	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_minor.ini").absoluteFilePath();
-	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 	majorSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_major.ini").absoluteFilePath();
+	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 }
 
 SolarSystemEditor::~SolarSystemEditor()
@@ -107,7 +107,7 @@ void SolarSystemEditor::init()
 	if (QFile::exists(majorSolarSystemFilePath))
 	{
 		//defaultSsoIdentifiers.unite(listAllLoadedObjectsInFile(majorSolarSystemFilePath));
-		defaultSsoIdentifiers=listAllLoadedObjectsInFile(majorSolarSystemFilePath);
+		defaultSsoIdentifiers = listAllLoadedObjectsInFile(majorSolarSystemFilePath);
 	}
 	else
 	{
@@ -352,11 +352,11 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
 		for (auto group : newData.childGroups())
 		{
-			QString fixedGroupName=fixGroupName(group);
+			QString fixedGroupName = fixGroupName(group);
 			newData.beginGroup(group);
 			qDebug() << "  Group: " << group << "for object " << newData.value("name");
 			qDebug() << "   ";
-			QStringList minorChildGroups=minorBodies.childGroups();
+			QStringList minorChildGroups = minorBodies.childGroups();
 			if (minorChildGroups.contains(fixedGroupName))
 			{
 				qDebug() << "This group " << fixedGroupName << "already exists. Updating values";
@@ -365,7 +365,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 				qDebug() << "This group " << fixedGroupName << "does not yet exist. Adding values";
 
 			minorBodies.beginGroup(fixedGroupName);
-			QStringList newKeys=newData.allKeys(); // limited to the group!
+			QStringList newKeys = newData.allKeys(); // limited to the group!
 			for (auto key : newKeys)
 			{
 				minorBodies.setValue(key, newData.value(key));
@@ -406,12 +406,12 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
+	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	for (auto group : groups)
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
-		if (planetNames.contains(name))
+		if (minorBodies.contains(name))
 		{
 			loadedObjects.insert(name, group);
 		}
@@ -1218,6 +1218,8 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 				else
 				{
 					//TODO: Do what, log a message?
+					qDebug() << "Warning: cannot update magnitude for type " << type;
+
 				}
 			}
 		}
