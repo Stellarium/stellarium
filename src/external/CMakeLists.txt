@@ -70,19 +70,6 @@ target_include_directories(zlib_stel PUBLIC zlib)
 set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
-set(qtcompress_SRCS
-    qtcompress/qzip.cpp
-    qtcompress/qzipreader.h
-    qtcompress/qzipwriter.h
-    )
-add_library(qtcompress_stel STATIC EXCLUDE_FROM_ALL ${qtcompress_SRCS})
-target_include_directories(qtcompress_stel PUBLIC qtcompress)
-#this can use the system zlib, or our zlib
-target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
-#turn off automoc, not needed here
-set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
-SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
-
 # QCustomPlot should not be unbundled, because upstream uses GPL 3, and
 # Stellarium uses GPL 2. Author of QCustomPlot has agreed for GPL 2+ for this.
 set(qcustomplot_SRCS

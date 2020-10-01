@@ -647,6 +647,35 @@ if(QXlsx_ADDED)
     target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
 endif()
 
+CPMFindPackage(NAME Qt5Compress
+    # Version from 13 May 2018
+    URL https://github.com/nezticle/qtcompress/archive/23f8831826cd72aedf99fc3699148b6c994fd677.zip
+    URL_HASH SHA256=82d03b9bfed767e3a13d2be7346d55c24ce218b0f0f6247eaafd7689be18ef57
+    DOWNLOAD_ONLY yes)
+if(Qt5Compress_ADDED)
+    function(PatchQtCompress filename)
+        file(READ ${Qt5Compress_SOURCE_DIR}/src/compress/${filename} CONTENT)
+        string(REGEX REPLACE "#include <qtcompressglobal.h>" ""
+            CONTENT "${CONTENT}")
+        string(REGEX REPLACE "QTCOMPRESS_EXPORT" ""
+            CONTENT "${CONTENT}")
+        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/${filename}
+            CONTENT "${CONTENT}")
+    endfunction()
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
+    PatchQtCompress("qzipreader.h")
+    PatchQtCompress("qzipwriter.h")
+    PatchQtCompress("qzip.cpp")
+    add_library(Qt5Compress STATIC EXCLUDE_FROM_ALL
+        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/qzip.cpp)
+    target_include_directories(Qt5Compress PUBLIC
+        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
+    target_link_libraries(Qt5Compress Qt5::Core ${ZLIB_LIBRARIES})
+    #turn off automoc, not needed here
+    set_target_properties(Qt5Compress PROPERTIES AUTOMOC 0)
+    add_library(Qt5::Compress ALIAS Qt5Compress)
+endif()
+
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
      IF(APPLE)
