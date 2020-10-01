@@ -632,6 +632,21 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
+CPMFindPackage(NAME QXlsx
+    URL https://github.com/QtExcel/QXlsx/archive/v1.3.55.2.zip
+    URL_HASH SHA256=8b08e5af85e4262a421ff1fd4b516d8479eed0562dda0e9812984d0cf67cb90b
+    DOWNLOAD_ONLY yes)
+if(QXlsx_ADDED)
+    # MSVC has issues with __declspec linkage, so add the library manually
+    # instead of using one defined in QXlsx's CMakeLists.txt
+    file(GLOB_RECURSE QXLSX_FILES
+        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
+        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
+    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
+    target_link_libraries(QXlsx PUBLIC Qt5::Core Qt5::Gui Qt5::GuiPrivate)
+    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+endif()
+
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
      IF(APPLE)
