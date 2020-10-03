@@ -30,6 +30,25 @@ result="${result##*/}"
 
 if [ $result = 'appimage' ]
 then
+    # Stage 1: Check required packages
+    ait=$(whereis appimagetool | sed 's/appimagetool://i')
+    if [ -z $ait ]
+    then
+	# Install appimagetool AppImage
+	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+	sudo chmod +x /usr/local/bin/appimagetool
+    fi
+
+    builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
+    if [ -z $builder ]
+    then
+	# Installing dependencies
+	sudo apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+	# Installing latest tagged release
+	sudo pip3 install appimage-builder
+    fi
+
+    # Stage 2: Build an AppImage package
     ROOT=../..
     mkdir -p ${ROOT}/builds/appimage
     cd ${ROOT}/builds/appimage
