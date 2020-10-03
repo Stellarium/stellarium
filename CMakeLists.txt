@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 INCLUDE(cmake/CPM.cmake)
 
@@ -464,7 +464,8 @@ ELSE()
      MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
+# If QXlsx is bundled, it requires Qt5::GuiPrivate
+FIND_PACKAGE(Qt5Gui REQUIRED Private)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 # required for qcustomplot external dependency
