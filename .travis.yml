@@ -214,7 +214,6 @@ matrix:
 
     - os: linux
       arch: arm64-graviton2
-      virt: lxd
       dist: bionic
       addons:
         apt:
