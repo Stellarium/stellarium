@@ -2,7 +2,7 @@
 <!-- Copyright 2019 Stellarium team -->
 <component type="desktop-application">
   <id>org.stellarium.Stellarium</id>
-  <launchable type="desktop-id">stellarium.desktop</launchable>
+  <launchable type="desktop-id">org.stellarium.Stellarium.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Stellarium</name>
@@ -463,22 +463,21 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://www.stellarium.org/img/screenshots/0.10-constellation-art-on.jpg</image>
+      <image>http://www.stellarium.org/img/screenshots/0.10-constellation-art-on.jpg</image>
     </screenshot>
     <screenshot>
-      <image>https://stellarium.org/img/screenshots/0.10-from-mars.jpg</image>
+      <image>http://stellarium.org/img/screenshots/0.10-from-mars.jpg</image>
     </screenshot>
     <screenshot>
-      <image>https://stellarium.org/img/screenshots/0.10-planets.jpg</image>
+      <image>http://stellarium.org/img/screenshots/0.10-planets.jpg</image>
     </screenshot>
     <screenshot>
-      <image>https://stellarium.org/img/screenshots/0.10-constellations.jpg</image>
+      <image>http://stellarium.org/img/screenshots/0.10-constellations.jpg</image>
     </screenshot>
     <screenshot>
-      <image>https://stellarium.org/img/screenshots/0.10-orion-nebula.jpg</image>
+      <image>http://stellarium.org/img/screenshots/0.10-orion-nebula.jpg</image>
     </screenshot>
   </screenshots>
-  <content_rating type="oars-1.1"/>
   <provides>
     <binary>stellarium</binary>
   </provides>

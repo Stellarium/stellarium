@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# This is tool to extract change log data and update stellarium.appdata.xml file
+# This is tool to extract change log data and update *.appdata.xml file
 #
 # Copyright (c) 2020 Alexander Wolf
 #
@@ -27,7 +27,7 @@ use strict;
 use XML::DOM;
 
 my $CHLF	= "../../ChangeLog";
-my $XML		= "../../data/stellarium.appdata.xml";
+my $XML		= "../../data/org.stellarium.Stellarium.appdata.xml";
 
 open(CHL, "<$CHLF");
 my @changelog = <CHL>;

@@ -7,7 +7,7 @@
 ROOT=../..
 ASMETAINFOITS=./as-metainfo.its
 podir=${ROOT}/po/stellarium-metainfo
-metainfo_file=${ROOT}/data/stellarium.appdata.xml
+metainfo_file=${ROOT}/data/org.stellarium.Stellarium.appdata.xml
 
 # first, strip translation from project metadata file
 tmpxmlfile=$(mktemp)
