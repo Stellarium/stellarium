@@ -633,6 +633,9 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
+# TODO: switch to something like vcpkg or conan, and plain find_package,
+# without the fallback of cmake downloading the dep itself.
+# But some libraries are not available there yet.
 CPMFindPackage(NAME QXlsx
     URL https://github.com/QtExcel/QXlsx/archive/v1.3.55.2.zip
     URL_HASH SHA256=8b08e5af85e4262a421ff1fd4b516d8479eed0562dda0e9812984d0cf67cb90b
