@@ -12,25 +12,6 @@ matrix:
   include:
     - os: linux
       arch: amd64
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - gcc-4.8
-            - g++-4.8
-            - libgps-dev
-            - libpulse-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-         - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
-         - TRANSLATE=false
-         - COVERAGE=false
-         - REPQT=false
-
-    - os: linux
-      arch: amd64
       dist: bionic
       addons:
         apt:
@@ -61,7 +42,7 @@ matrix:
           project:
             name: "Stellarium/stellarium"
             description: "A realistic, real-time 3D simulation of the night sky."
-          build_command_prepend: cov-configure --comptype gcc --compiler gcc-7.5 --template && cmake -DENABLE_TESTING=1 ..
+          build_command_prepend: cov-configure --comptype gcc --compiler gcc-7 --template && cmake -DENABLE_TESTING=1 ..
           build_command: make -j5
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
@@ -69,7 +50,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=true
         - COVERAGE=true
-        - REPQT=true
 
     - os: linux
       arch: amd64
@@ -102,7 +82,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: amd64
@@ -136,7 +115,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: amd64
@@ -169,7 +147,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: arm64
@@ -202,7 +179,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: arm64
@@ -235,7 +211,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: ppc64le
@@ -268,7 +243,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: ppc64le
@@ -301,7 +275,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: s390x
@@ -334,7 +307,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     - os: linux
       arch: s390x
@@ -367,7 +339,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
-        - REPQT=true
 
     # macOS 10.13 
     - os: osx
@@ -434,15 +405,6 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  # Linux
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$REPQT" == false ]]; then
-      mkdir qt5;
-      wget -q -O qt5.zip https://github.com/Stellarium/stellarium-data/releases/download/qt-5.9/qt5.zip;
-      unzip -qq qt5.zip -d qt5;
-      export PATH=`pwd`/qt5/bin:$PATH;
-      export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      export PYTHONWARNINGS="ignore:A true SSLContext object is not available,ignore:An HTTPS request has been made";
-    fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
