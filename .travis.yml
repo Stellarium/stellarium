@@ -23,23 +23,15 @@ matrix:
             - libgl1-mesa-dev
             - xvfb
           update: true
-        coverity_scan:
-          project:
-            name: "Stellarium/stellarium"
-            description: "A realistic, real-time 3D simulation of the night sky."
-          build_command_prepend: cov-configure --comptype gcc --compiler gcc-4.8 --template && cmake -DENABLE_TESTING=1 ..
-          build_command: make -j5
-          branch_pattern: coverity_scan
-          notification_email: stellarium@googlegroups.com
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
-         - TRANSLATE=true
+         - TRANSLATE=false
          - COVERAGE=false
          - REPQT=false
 
     - os: linux
       arch: amd64
-      dist: focal
+      dist: bionic
       addons:
         apt:
           packages:
@@ -65,15 +57,23 @@ matrix:
             - xvfb
             - lcov
           update: true
+        coverity_scan:
+          project:
+            name: "Stellarium/stellarium"
+            description: "A realistic, real-time 3D simulation of the night sky."
+          build_command_prepend: cov-configure --comptype gcc --compiler gcc-7.5 --template && cmake -DENABLE_TESTING=1 ..
+          build_command: make -j5
+          branch_pattern: coverity_scan
+          notification_email: stellarium@googlegroups.com
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
-        - TRANSLATE=false
-        - COVERAGE=false
+        - TRANSLATE=true
+        - COVERAGE=true
         - REPQT=true
 
     - os: linux
       arch: amd64
-      dist: focal
+      dist: bionic
       addons:
         apt:
           packages:
@@ -106,7 +106,7 @@ matrix:
 
     - os: linux
       arch: amd64
-      dist: bionic
+      dist: focal
       addons:
         apt:
           packages:
@@ -135,12 +135,12 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
-        - COVERAGE=true
+        - COVERAGE=false
         - REPQT=true
 
     - os: linux
       arch: amd64
-      dist: bionic
+      dist: focal
       addons:
         apt:
           packages:
