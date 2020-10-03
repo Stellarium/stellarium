@@ -553,7 +553,10 @@ ENDIF()
 IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
      MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
      SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+ELSE()
+     MESSAGE(STATUS "Building an OpenGL build")
 ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
