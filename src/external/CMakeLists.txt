@@ -83,6 +83,8 @@ target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
 set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
 
+# QCustomPlot should not be unbundled, because upstream uses GPL 3, and
+# Stellarium uses GPL 2. Author of QCustomPlot has agreed for GPL 2+ for this.
 set(qcustomplot_SRCS
     qcustomplot/qcustomplot.cpp
     qcustomplot/qcustomplot.h
