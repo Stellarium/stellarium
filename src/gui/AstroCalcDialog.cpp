@@ -6120,7 +6120,7 @@ void AstroCalcDialog::calculateWutObjects()
 							break;
 						case 35: // NGC/IC objects
 							catDSO = dsoMgr->getDeepSkyObjectsByType("108");
-							catDSO = dsoMgr->getDeepSkyObjectsByType("109");
+							catDSO.append(dsoMgr->getDeepSkyObjectsByType("109"));
 							break;
 						case 36: // Caldwell objects
 							catDSO = dsoMgr->getDeepSkyObjectsByType("101");
