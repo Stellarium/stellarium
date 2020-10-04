@@ -2788,7 +2788,8 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 			s += ds;
 		}
 		unsigned short int offset = i*(slices+1)*2;
-		for (j = 2u;j<slices*2u+2u;j+=2u)
+		unsigned long int limit = slices*2u+2u;
+		for (j = 2u;j<limit;j+=2u)
 		{
 			model->indiceArr << offset+j-2u << offset+j-1u << offset+j;
 			model->indiceArr << offset+j << offset+j-1u << offset+j+1u;
