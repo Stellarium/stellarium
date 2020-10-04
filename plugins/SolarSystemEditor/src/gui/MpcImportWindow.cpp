@@ -367,7 +367,7 @@ void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 {
 	candidatesForAddition.clear();
-	// FIXME? candidatesForUpdate.clear() ?
+	candidatesForUpdate.clear();
 
 	//Get a list of the current objects
 	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
