@@ -485,6 +485,8 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString key = line.section("=", 0, 0).trimmed();
 		QString value = line.section("=", 1, -1).trimmed();
 		if (key == "hips_service_url") url = value;
+		// special case: https://github.com/Stellarium/stellarium/issues/1276
+		if (url.contains("data.stellarium.org/surveys/dss")) continue;
 		if (key == "hips_release_date")
 		{
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
