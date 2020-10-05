@@ -138,6 +138,9 @@ private slots:
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
 
+	// Esp. for signals from StelSkyCultureMgr
+	void populatePlanetList(QString) { populatePlanetList(); }
+
 #ifdef ENABLE_GPS
 	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.
 	//! The easiest and cleanest way to get GPS coordinates from a Linux device is via GPSD.

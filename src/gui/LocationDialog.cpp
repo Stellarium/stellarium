@@ -31,6 +31,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -88,7 +89,9 @@ void LocationDialog::createDialogContent()
 	ui->mapLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 	ui->mapLabel->setScaledContents(false);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
