@@ -565,9 +565,10 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float sa = std::sin(alpha);
 	float y0 = static_cast<float>(radius);
 	float x0 = 0.0f;
+	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -588,7 +589,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -596,7 +597,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				const float tx1 = tx0 + d_tx;
 				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-				for (unsigned short int k=0u;k<=static_cast<unsigned short int>(stacks*2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u);
+				for (unsigned short int k=0u;k<=limit;k+=2u)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
@@ -613,7 +615,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					ty0 += d_ty;
 				}
 				unsigned short int offset = j*(stacks+1u)*2u;
-				for (unsigned short int k = 2;k<static_cast<unsigned short int>(stacks*2u+2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u+2u);
+				for (unsigned short int k = 2;k<limit;k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;
