@@ -213,6 +213,12 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>")
 			.arg(q_("Earth Similarity Index (ESI)"))
 			.arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Conservative Sample"))
+			.arg(q_("Planets in the habitable zone with a radius less 1.5 Earth radii or a minimum mass less 5 Earth masses. These are the best candidates for planets that might be rocky and support surface liquid water. They are also known as warm terrans."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Optimistic Sample"))
+			.arg(q_("Planets in the habitable zone with a radius between 1.5 to 2.5 Earth radii or between 5 to 10 Earth masses. These are planets that are less likely to be rocky or support surface liquid water. Some might be mini-Neptunes instead. They are also known as warm superterrans."));
 	html += "<h2>" + q_("Proper names") + "</h2>";
 	html += "<p>" + q_("In December 2015 and in December 2019, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3<sup>1</sup></li>").arg(trans.qtranslate("Veritate"), "14 And", q_("From the latin <em>Veritas</em>, truth. The ablative form means <em>where there is truth</em>."));
