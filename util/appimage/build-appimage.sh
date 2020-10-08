@@ -50,9 +50,9 @@ then
 
     # Stage 2: Build an AppImage package
     ROOT=../..
+    rm -rf ${ROOT}/builds/appimage
     mkdir -p ${ROOT}/builds/appimage
     cd ${ROOT}/builds/appimage
-    rm -rf *
 
     dtag=$(git describe --abbrev=0 | sed 's/v//i')
     rtag=$(git describe --tags | sed 's/v//i')
