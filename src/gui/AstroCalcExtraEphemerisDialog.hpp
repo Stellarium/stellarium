@@ -38,6 +38,9 @@ public slots:
 	void retranslate();
 	void setVisible(bool);
 
+private slots:
+	void setOptionStatus();
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent();

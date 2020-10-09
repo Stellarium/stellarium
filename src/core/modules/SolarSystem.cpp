@@ -91,6 +91,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisLineDisplayed(false)
 	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
+	, ephemerisSkipMarkersDisplayed(false)
 	, ephemerisDataStep(1)
 	, ephemerisDataLimit(1)
 	, ephemerisSmartDatesDisplayed(true)
@@ -242,6 +243,7 @@ void SolarSystem::init()
 	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
 	setEphemerisLineThickness(conf->value("astrocalc/ephemeris_line_thickness", 1).toInt());
 	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
+	setFlagEphemerisSkipMarkers(conf->value("astrocalc/flag_ephemeris_skip_markers", false).toBool());
 	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());	
 	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
 	setFlagEphemerisScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
@@ -296,6 +298,7 @@ void SolarSystem::init()
 	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisDataStepChanged(int)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
 }
 
@@ -1255,6 +1258,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		const bool showDates = getFlagEphemerisDates();
 		const bool showMagnitudes = getFlagEphemerisMagnitudes();
 		const bool showSkippedData = getFlagEphemerisSkipData();
+		const bool skipMarkers = getFlagEphemerisSkipMarkers();
 		const int dataStep = getEphemerisDataStep();
 		const int sizeCoeff = getEphemerisLineThickness() - 1;
 		QString info = "";
@@ -1284,6 +1288,11 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
 			sPainter.setBlending(true, GL_ONE, GL_ONE);
 			texEphemerisMarker->bind();
+			if (skipMarkers)
+			{
+				if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
+					continue;
+			}
 			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
 
 			if (showDates || showMagnitudes)
@@ -1978,6 +1987,21 @@ void SolarSystem::setFlagEphemerisSkipData(bool b)
 bool SolarSystem::getFlagEphemerisSkipData() const
 {
 	return ephemerisSkipDataDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisSkipMarkers(bool b)
+{
+	if (b!=ephemerisSkipMarkersDisplayed)
+	{
+		ephemerisSkipMarkersDisplayed=b;
+		conf->setValue("astrocalc/flag_ephemeris_skip_markers", b); // Immediate saving of state
+		emit ephemerisSkipMarkersChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisSkipMarkers() const
+{
+	return ephemerisSkipMarkersDisplayed;
 }
 
 void SolarSystem::setFlagEphemerisSmartDates(bool b)
