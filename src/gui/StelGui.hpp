@@ -79,12 +79,12 @@ public:
 	friend class ViewDialog;
 	
 	StelGui();
-	virtual ~StelGui();
+	virtual ~StelGui() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget);
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget) Q_DECL_OVERRIDE;
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
@@ -112,18 +112,18 @@ public:
 #endif
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
-	virtual void forceRefreshGui();
+	virtual void forceRefreshGui() Q_DECL_OVERRIDE;
 	
-	virtual void setVisible(bool b);
+	virtual void setVisible(bool b) Q_DECL_OVERRIDE;
 
-	virtual bool getVisible() const;
+	virtual bool getVisible() const Q_DECL_OVERRIDE;
 
 	virtual bool getAstroCalcVisible() const;
 
-	virtual bool isCurrentlyUsed() const;
+	virtual bool isCurrentlyUsed() const Q_DECL_OVERRIDE;
 	
-	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
-	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
+	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) Q_DECL_OVERRIDE;
+	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const Q_DECL_OVERRIDE;
 
 public slots:
 	//! Set the state of the flag of usage background for GUI buttons
@@ -278,7 +278,7 @@ private slots:
 	void scriptStopped();
 #endif
 	//! Load color scheme from the given ini file and section name
-	void setStelStyle(const QString& section);
+	virtual void setStelStyle(const QString& section) Q_DECL_OVERRIDE;
 	void quit();	
 	void updateI18n();
 	void copySelectedObjectInfo(void);

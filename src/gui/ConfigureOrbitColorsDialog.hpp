@@ -31,17 +31,17 @@ class ConfigureOrbitColorsDialog : public StelDialog
 
 public:
 	ConfigureOrbitColorsDialog();
-	virtual ~ConfigureOrbitColorsDialog();
+	virtual ~ConfigureOrbitColorsDialog() Q_DECL_OVERRIDE;
 
 public slots:
-        void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void setColorStyle();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_ConfigureOrbitColorsDialogForm *ui;
 };
 

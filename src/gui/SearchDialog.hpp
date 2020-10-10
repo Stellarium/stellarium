@@ -60,7 +60,7 @@ class CompletionListModel : public QStringListModel
 public:
 	CompletionListModel(QObject* parent=Q_NULLPTR);
 	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
-	~CompletionListModel();
+	~CompletionListModel() Q_DECL_OVERRIDE;
 
 	QString getSelected(void) const;
 	void setValues(const QStringList&, const QStringList&);
@@ -69,12 +69,12 @@ public:
 	void appendRecentValues(const QStringList&);
 	void clearValues();
 
-	QStringList getValues(void) { return values; };
-	QStringList getRecentValues(void) { return recentValues; };
+	QStringList getValues(void) { return values; }
+	QStringList getRecentValues(void) { return recentValues; }
 	int getSelectedIdx() { return selectedIdx; }
 
 	// Bold recent objects
-	QVariant data(const QModelIndex &index, int role) const;
+	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 
 public slots:
 	void selectNext();
@@ -120,10 +120,10 @@ public:
 	};
 
 	SearchDialog(QObject* parent);
-	virtual ~SearchDialog();
+	virtual ~SearchDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
 	void styleChanged();
-	bool eventFilter(QObject *object, QEvent *event);
+	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
 	//! with the actual Greek unicode characters.
@@ -146,7 +146,7 @@ signals:
 
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
@@ -178,7 +178,7 @@ public slots:
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private slots:
 	void greekLetterClicked();

@@ -37,7 +37,7 @@ public:
 	void setFormats(void);
 
 protected:
-	void highlightBlock(const QString &text);
+	virtual void highlightBlock(const QString &text) Q_DECL_OVERRIDE;
 
 private:
 	void locateFunctions( const QMetaObject* metaObject, QString scriptName );

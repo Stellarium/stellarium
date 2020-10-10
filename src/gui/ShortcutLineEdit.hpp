@@ -58,9 +58,9 @@ signals:
 	void contentsChanged();
 
 protected:
-	void keyPressEvent(QKeyEvent *e);
-	void focusInEvent(QFocusEvent *e);
-	void focusOutEvent(QFocusEvent *e);
+	virtual void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
+	virtual void focusInEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
+	virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
 
 private:
 	//! transform modifiers to int.

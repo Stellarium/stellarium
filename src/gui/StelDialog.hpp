@@ -78,7 +78,7 @@ class StelDialog : public QObject
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
 	StelDialog(QString dialogName="Default", QObject* parent=Q_NULLPTR);
-	virtual ~StelDialog();
+	virtual ~StelDialog() Q_DECL_OVERRIDE;
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;

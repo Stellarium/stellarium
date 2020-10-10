@@ -54,8 +54,8 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	void setOpacity(double opacity);
 private:
 	mutable double lastOpacity;
@@ -139,7 +139,7 @@ signals:
 public slots:
 	//! set whether the button is checked
 	void setChecked(int b);
-	void setChecked(bool b) { setChecked((int)b); }
+	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
 
 protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -184,9 +184,9 @@ class LeftStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
-	~LeftStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	~LeftStelBar() Q_DECL_OVERRIDE;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
@@ -207,9 +207,9 @@ class BottomStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
-	virtual ~BottomStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	virtual ~BottomStelBar() Q_DECL_OVERRIDE;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	QRectF boundingRectNoHelpLabel() const;
 
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
