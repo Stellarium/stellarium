@@ -42,7 +42,6 @@ void AstroCalcExtraEphemerisDialog::retranslate()
 	}
 }
 
-
 void AstroCalcExtraEphemerisDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -64,14 +63,7 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	setOptionStatus();
 }
 
-void AstroCalcExtraEphemerisDialog::setVisible(bool v)
-{
-	StelDialog::setVisible(v);
-}
-
 void AstroCalcExtraEphemerisDialog::setOptionStatus()
 {
 	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
 }
-
-

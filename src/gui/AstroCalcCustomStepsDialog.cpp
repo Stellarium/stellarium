@@ -111,10 +111,3 @@ void AstroCalcCustomStepsDialog::saveTimeStep(double value)
 {
 	conf->setValue("astrocalc/custom_time_step", value);
 }
-
-void AstroCalcCustomStepsDialog::setVisible(bool v)
-{
-	StelDialog::setVisible(v);
-}
-
-

@@ -155,7 +155,7 @@ public:
 	};
 
 	AstroCalcDialog(QObject* parent);
-	virtual ~AstroCalcDialog();
+	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
 
 	//! Notify that the application style changed
 	void styleChanged();
@@ -165,7 +165,7 @@ public:
 
 
 public slots:
-        void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 		
 signals:
 	//! This signal is emitted when the graph day changed.
@@ -173,7 +173,7 @@ signals:
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
         Ui_astroCalcDialogForm *ui;
 
 private slots:
