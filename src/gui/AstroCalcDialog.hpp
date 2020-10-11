@@ -311,6 +311,7 @@ private:
 	QHash<QString,int> wutCategories;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
+	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
 
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();

@@ -480,6 +480,10 @@ void BookmarksDialog::importBookmarks()
 	QString filter = "JSON (*.json)";
 	bookmarksJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), QDir::homePath(), filter);
 
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
+	bookmarksListModel->clear();
+	setBookmarksHeaderNames();
+
 	loadBookmarks();
 	ui->bookmarksTreeView->hideColumn(ColumnUUID);
 

@@ -33,6 +33,7 @@
 #include "Nebula.hpp"
 #include "StelActionMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelJsonParser.hpp"
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 #include "../plugins/Satellites/src/Satellites.hpp"
@@ -6203,7 +6204,9 @@ void AstroCalcDialog::saveWutObjects()
 	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
 	filter.append(" (*.xlsx);;");
 	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
+	filter.append(" (*.csv);;");
+	filter.append(q_("JSON (Stellarium bookmarks)"));
+	filter.append(" (*.json)");
 	QString defaultFilter("(*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save list of objects as..."),
@@ -6213,6 +6216,8 @@ void AstroCalcDialog::saveWutObjects()
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->wutMatchingObjectsTreeWidget, wutHeader);
+	else if (defaultFilter.contains(".json", Qt::CaseInsensitive))
+		saveTableAsBookmarks(filePath, ui->wutMatchingObjectsTreeWidget);
 	else
 	{
 		int count = ui->wutMatchingObjectsTreeWidget->topLevelItemCount();
@@ -6768,7 +6773,7 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 	QFile table(fileName);
 	if (!table.open(QFile::WriteOnly | QFile::Truncate))
 	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(fileName);
+		qWarning() << "[AstroCalc] Unable to open file" << QDir::toNativeSeparators(fileName);
 		return;
 	}
 
@@ -6802,5 +6807,37 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 	}
 
 	table.close();
+}
+
+void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget* tWidget)
+{
+	int count = tWidget->topLevelItemCount();
+
+	QFile bookmarksFile(fileName);
+	if (!bookmarksFile.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "[AstroCalc] Unable to open file" << QDir::toNativeSeparators(fileName);
+		return;
+	}
+
+	QVariantMap bookmarksDataList;
+	double fov = GETSTELMODULE(StelMovementMgr)->getCurrentFov();
+	for (int i = 0; i < count; i++)
+	{
+		QString uuid = QUuid::createUuid().toString();
+		QVariantMap bm;
+		bm.insert("name", tWidget->topLevelItem(i)->data(0, Qt::UserRole).toString());
+		bm.insert("nameI18n", tWidget->topLevelItem(i)->data(0, Qt::DisplayRole).toString());
+		bm.insert("fov", fov);
+		bookmarksDataList.insert(uuid, bm);
+	}
+
+	QVariantMap bmList;
+	bmList.insert("bookmarks", bookmarksDataList);
+
+	//Convert the tree to JSON
+	StelJsonParser::write(bmList, &bookmarksFile);
+	bookmarksFile.flush();
+	bookmarksFile.close();
 }
 
