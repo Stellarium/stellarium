@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-10-08 20:23+0700\n"
+"POT-Creation-Date: 2020-10-11 15:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 #: src/core/modules/SpecialMarkersMgr.cpp:217
 #: src/core/modules/LandscapeMgr.cpp:507
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
-#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:279
+#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:281
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:624 src/core/StelCore.cpp:257
@@ -2096,47 +2096,47 @@ msgid "Orthographic"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:280 src/gui/AstroCalcDialog.cpp:2639
+#: src/core/modules/SolarSystem.cpp:282 src/gui/AstroCalcDialog.cpp:2639
 #: src/gui/AstroCalcDialog.cpp:5335 src/translations.h:82
 msgid "Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:281
+#: src/core/modules/SolarSystem.cpp:283
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:282
+#: src/core/modules/SolarSystem.cpp:284
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:283
+#: src/core/modules/SolarSystem.cpp:285
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:284
+#: src/core/modules/SolarSystem.cpp:286
 msgid "Planet trails reset"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:286
+#: src/core/modules/SolarSystem.cpp:288
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:287
+#: src/core/modules/SolarSystem.cpp:289
 msgid "Planet selection marker"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:288
+#: src/core/modules/SolarSystem.cpp:290
 msgid "Enlarge Moon"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:289
+#: src/core/modules/SolarSystem.cpp:291
 msgid "Enlarge minor bodies"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:290
+#: src/core/modules/SolarSystem.cpp:292
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -11643,7 +11643,7 @@ msgstr ""
 msgid "magnitudes"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1683 src/ui_astroCalcExtraEphemerisDialog.h:177
+#: src/ui_astroCalcDialog.h:1683 src/ui_astroCalcExtraEphemerisDialog.h:194
 msgid "Extra options for ephemeris visualization"
 msgstr ""
 
@@ -11963,27 +11963,31 @@ msgid ""
 "bodies"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:175
+#: src/ui_astroCalcExtraEphemerisDialog.h:192
 msgid "Extra options"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:178
+#: src/ui_astroCalcExtraEphemerisDialog.h:195
 msgid "Label each N steps, where N is"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:179
+#: src/ui_astroCalcExtraEphemerisDialog.h:196
+msgid "Skip draw the unlabelled markers also"
+msgstr ""
+
+#: src/ui_astroCalcExtraEphemerisDialog.h:197
 msgid "Use smart format for dates"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:180
+#: src/ui_astroCalcExtraEphemerisDialog.h:198
 msgid "Use small markers, when line is enabled"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:181
+#: src/ui_astroCalcExtraEphemerisDialog.h:199
 msgid "Ephemeris line thickness:"
 msgstr ""
 
-#: src/ui_astroCalcExtraEphemerisDialog.h:182
+#: src/ui_astroCalcExtraEphemerisDialog.h:200
 #: plugins/Satellites/src/ui_satellitesDialog.h:958
 msgctxt "pixels"
 msgid "px"
