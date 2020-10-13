@@ -76,6 +76,7 @@ void StelDialog::setVisible(bool v)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());		
 		QSize screenSize = StelMainView::getInstance().size();
+		// If dialog size is very large and we move to a computer with much smaller screen, this should create the dialog with reasonable better size.
 		QSize maxSize = 0.95*screenSize;
 		if (dialog)
 		{
@@ -94,13 +95,6 @@ void StelDialog::setVisible(bool v)
 				newPos.setY(screenSize.height() - dialog->size().height());
 			if (newPos != dialog->pos())
 				proxy->setPos(newPos);
-			QSizeF newSize = proxy->size();
-			if (newSize.width() >= maxSize.width())
-				newSize.setWidth(maxSize.width());
-			if (newSize.height() >= maxSize.height())
-				newSize.setHeight(maxSize.height());
-			if(newSize != dialog->size())
-				proxy->resize(newSize);
 		}
 		else
 		{
