@@ -67,11 +67,6 @@ void BookmarksDialog::retranslate()
 	}
 }
 
-void BookmarksDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 void BookmarksDialog::createDialogContent()
 {
 	ui->setupUi(dialog);

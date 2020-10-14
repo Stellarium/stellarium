@@ -36,7 +36,7 @@ public:
 	LocationDialog(QObject* parent);
 	virtual ~LocationDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;

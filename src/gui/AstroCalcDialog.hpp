@@ -157,9 +157,6 @@ public:
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
 
-	//! Notify that the application style changed
-	void styleChanged();
-
 	static QVector<Ephemeris> EphemerisList;
 	static int DisplayedPositionIndex;
 

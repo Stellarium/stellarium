@@ -80,6 +80,9 @@ public:
 	StelDialog(QString dialogName="Default", QObject* parent=Q_NULLPTR);
 	virtual ~StelDialog() Q_DECL_OVERRIDE;
 
+	//! Notify that the application style changed
+	virtual void styleChanged();
+
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
 
@@ -98,7 +101,7 @@ public slots:
 	//! On the first call with "true" populates the window contents.
 	virtual void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
-	void close();
+	virtual void close();
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
 	void handleMovedTo(QPoint newPos);
 	//! Stores dialog sizes into config.ini; should be connected from the proxy.

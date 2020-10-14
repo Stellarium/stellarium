@@ -137,11 +137,6 @@ void ConfigurationDialog::retranslate()
 	}
 }
 
-void ConfigurationDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);

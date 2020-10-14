@@ -121,8 +121,6 @@ public:
 
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog() Q_DECL_OVERRIDE;
-	//! Notify that the application style changed
-	void styleChanged();
 	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)

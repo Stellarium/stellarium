@@ -36,15 +36,11 @@ public:
 	double newJd();
 	bool valid(int y, int m, int d, int h, int min, int s);
 	bool validJd(double jday);	
-	//! Notify that the application style changed
-	void styleChanged();
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void close() Q_DECL_OVERRIDE;
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
-
-	void close();
-
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

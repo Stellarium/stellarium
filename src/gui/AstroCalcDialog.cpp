@@ -186,11 +186,6 @@ void AstroCalcDialog::retranslate()
 	}
 }
 
-void AstroCalcDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 void AstroCalcDialog::createDialogContent()
 {
 	ui->setupUi(dialog);

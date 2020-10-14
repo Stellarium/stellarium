@@ -65,6 +65,11 @@ void StelDialog::close()
 	setVisible(false);
 }
 
+void StelDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 bool StelDialog::visible() const
 {
 	return dialog!=Q_NULLPTR && dialog->isVisible();

@@ -227,11 +227,6 @@ void SearchDialog::retranslate()
 	}
 }
 
-void SearchDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));

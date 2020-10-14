@@ -52,9 +52,6 @@ public:
 	BookmarksDialog(QObject* parent);
 	virtual ~BookmarksDialog() Q_DECL_OVERRIDE;
 
-	//! Notify that the application style changed
-	void styleChanged();
-
 public slots:
 	void retranslate() Q_DECL_OVERRIDE;
 

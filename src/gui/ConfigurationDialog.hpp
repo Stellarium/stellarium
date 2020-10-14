@@ -39,8 +39,6 @@ class ConfigurationDialog : public StelDialog
 public:
 	ConfigurationDialog(StelGui* agui, QObject* parent);
 	virtual ~ConfigurationDialog() Q_DECL_OVERRIDE;
-	//! Notify that the application style changed
-	void styleChanged();
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
