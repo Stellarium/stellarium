@@ -4338,9 +4338,15 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="maximumSize">
                   <size>
-                   <width>50</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
