@@ -1553,22 +1553,6 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="0" column="0" colspan="2">
-               <widget class="QLabel" name="graphsLabel">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Graphs since January 1st of the current year</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_23">
                 <item>
@@ -1581,7 +1565,7 @@
                 <item>
                  <widget class="QComboBox" name="graphsSecondComboBox">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -1621,7 +1605,7 @@
                 <item>
                  <widget class="QComboBox" name="graphsFirstComboBox">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -1641,27 +1625,6 @@
               </item>
               <item row="3" column="0" colspan="2">
                <layout class="QHBoxLayout" name="horizontalLayout_28">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_24">
-                  <item>
-                   <widget class="QLabel" name="graphsCelestialBodyLabel">
-                    <property name="text">
-                     <string>Celestial body:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="graphsCelestialBodyComboBox">
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <property name="insertPolicy">
-                     <enum>QComboBox::NoInsert</enum>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_29">
                   <item>
@@ -1722,6 +1685,45 @@
                   </property>
                   <property name="text">
                    <string>Draw graphs</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <layout class="QHBoxLayout" name="horizontalLayout_24">
+                <item>
+                 <widget class="QLabel" name="graphsCelestialBodyLabel">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Graphs since January 1st of the current year for celestial body:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="graphsCelestialBodyComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
                   </property>
                  </widget>
                 </item>
