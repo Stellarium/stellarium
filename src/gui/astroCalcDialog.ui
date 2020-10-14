@@ -294,7 +294,7 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="stackedWidgetPage1">
+        <widget class="QWidget" name="stackedWidget_Positions">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -405,7 +405,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage2">
+        <widget class="QWidget" name="stackedWidget_Ephems">
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
@@ -828,7 +828,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage3">
+        <widget class="QWidget" name="stackedWidget_Transits">
          <layout class="QGridLayout" name="gridLayout_16">
           <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_30">
@@ -990,7 +990,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage4">
+        <widget class="QWidget" name="stackedWidget_Phenomena">
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -1225,7 +1225,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage5">
+        <widget class="QWidget" name="stackedWidget_Graphs">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="2" column="0">
            <widget class="QTabWidget" name="tabWidgetGraphs">
@@ -1825,7 +1825,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidget_WUT">
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -1841,6 +1841,12 @@
             </item>
             <item>
              <widget class="QDoubleSpinBox" name="wutMagnitudeDoubleSpinBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>70</width>
@@ -1975,6 +1981,12 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1994,6 +2006,12 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -2012,7 +2030,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage7">
+        <widget class="QWidget" name="stackedWidget_PC">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
