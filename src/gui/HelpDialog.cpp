@@ -51,6 +51,8 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
@@ -108,9 +110,12 @@ void HelpDialog::createDialogContent()
 
 
 	// Help page
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	updateHelpText();
+	setKeyButtonState(mmgr->getFlagEnableMoveKeys());
 	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
+	connect(mmgr, SIGNAL(flagEnableMoveKeysChanged(bool)), this, SLOT(setKeyButtonState(bool)));
 
 	// About page
 	updateAboutText();
@@ -127,6 +132,11 @@ void HelpDialog::createDialogContent()
 	connect(this, SIGNAL(checkUpdatesComplete(void)), this, SLOT(updateAboutText()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+}
+
+void HelpDialog::setKeyButtonState(bool state)
+{
+	ui->editShortcutsButton->setEnabled(state);
 }
 
 void HelpDialog::checkUpdates()

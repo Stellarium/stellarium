@@ -89,6 +89,7 @@ private slots:
 
 	void checkUpdates(void);
 	void downloadComplete(QNetworkReply * reply);
+	void setKeyButtonState(bool state);
 };
 
 #endif /*_HELPDIALOG_HPP*/

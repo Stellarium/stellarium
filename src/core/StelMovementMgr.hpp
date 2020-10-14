@@ -64,6 +64,14 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMoveKeys
+		   READ getFlagEnableMoveKeys
+		   WRITE setFlagEnableMoveKeys
+		   NOTIFY flagEnableMoveKeysChanged)
+	Q_PROPERTY(bool flagEnableZoomKeys
+		   READ getFlagEnableZoomKeys
+		   WRITE setFlagEnableZoomKeys
+		   NOTIFY flagEnableZoomKeysChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -175,12 +183,12 @@ public slots:
 	//! Get whether keys can control zoom
 	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
 	//! Set whether keys can control zoom
-	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b;}
+	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b; emit flagEnableZoomKeysChanged(b);}
 
 	//! Get whether keys can control movement
 	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
 	//! Set whether keys can control movement
-	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}
+	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b; emit flagEnableMoveKeysChanged(b); }
 
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
@@ -207,8 +215,8 @@ public slots:
 	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	//! mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 	//! @endcode
-    //! @note core::moveToRaDecJ2000 provides a simpler signature for the same function.
-    //! @note Objects of class Vec3d are 3-dimensional vectors in a rectangular coordinate system. For
+	//! @note core::moveToRaDecJ2000 provides a simpler signature for the same function.
+	//! @note Objects of class Vec3d are 3-dimensional vectors in a rectangular coordinate system. For
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
 	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
 	//!       format with just two angles, e.g., Vec3d("0h","0d").
@@ -291,7 +299,7 @@ public slots:
 	//! core.wait(0.42);
 	//! StelMovementMgr.turnRight(false);
 	//! @endcode
-    //! @note Use StelMovementMgr.panView for precise control of view movements.
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnRight(bool s);
 
 	//! With true, starts turning the direction of view to the left, with an unspecified speed, and according to the
@@ -306,7 +314,7 @@ public slots:
 	//! core.wait(0.42);
 	//! StelMovementMgr.turnLeft(false);
 	//! @endcode
-    //! @note Use StelMovementMgr.panView for precise control of view movements.
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnLeft(bool s);
 
 	//! With true, starts moving the direction of the view up, with an unspecified speed, and according to the
@@ -402,6 +410,8 @@ signals:
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
+	void flagEnableMoveKeysChanged(bool b);
+	void flagEnableZoomKeysChanged(bool b);
 
 private slots:
 	//! Called when the selected object changes.

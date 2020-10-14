@@ -246,10 +246,10 @@ void ConfigurationDialog::createDialogContent()
 	ui->fixedDateTimeEdit->setDisplayFormat("dd.MM.yyyy HH:mm");
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
-	// TODO: convert to properties
-	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
-	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
-	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
+	bool state = (mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
+	ui->enableKeysNavigationCheckBox->setChecked(state);
+	ui->editShortcutsPushButton->setEnabled(state);
+	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), this, SLOT(setKeyNavigationState(bool)));
 	connectBoolProperty(ui->enableMouseNavigationCheckBox,  "StelMovementMgr.flagEnableMouseNavigation");
 
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
@@ -415,6 +415,14 @@ void ConfigurationDialog::createDialogContent()
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
+}
+
+void ConfigurationDialog::setKeyNavigationState(bool state)
+{
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	mvmgr->setFlagEnableMoveKeys(state);
+	mvmgr->setFlagEnableZoomKeys(state);
+	ui->editShortcutsPushButton->setEnabled(state);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()

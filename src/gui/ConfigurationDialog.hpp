@@ -164,6 +164,7 @@ private slots:
 	void handleFontBoxWritingSystem(int index);
 	void populateScreenshotFileformatsCombo();
 
+	void setKeyNavigationState(bool state);
 
 private:
 	StelGui* gui;
