@@ -2408,13 +2408,8 @@ void AstroCalcDialog::updateGraphsDuration(int duration)
 
 void AstroCalcDialog::populateEphemerisTimeStepsList()
 {
-	Q_ASSERT(ui->ephemerisStepComboBox);
-
-	QComboBox* steps = ui->ephemerisStepComboBox;
-	steps->blockSignals(true);
-	int index = steps->currentIndex();
-	QVariant selectedStepId = steps->itemData(index);
-	const QMap<QString, QString>itemsMap={
+	typedef QPair<QString, QString> itemPairs;
+	const QList<itemPairs> items = {
 		{q_("1 minute"), "38"}, {q_("10 minutes"), "1"}, {q_("30 minutes"), "2"}, {q_("1 hour"), "3"}, {q_("6 hours"), "4"}, {q_("12 hours"), "5"},
 		{q_("1 solar day"), "6"}, {q_("5 solar days"), "7"}, {q_("10 solar days"), "8"}, {q_("15 solar days"), "9"}, {q_("30 solar days"), "10"},
 		{q_("60 solar days"), "11"}, {q_("100 solar days"), "24"},{q_("500 solar days"), "37"},{q_("1 sidereal day"), "18"},{q_("5 sidereal days"), "19"},
@@ -2424,12 +2419,15 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("1 Gaussian year"), "29"},{q_("1 synodic month"), "30"},{q_("1 draconic month"), "31"},{q_("1 mean tropical month"), "32"},
 		{q_("1 anomalistic month"), "33"},{q_("1 anomalistic year"), "34"},{q_("1 saros"), "35"},{q_("custom interval"), "0"}
 	};
-	QMapIterator<QString, QString> i(itemsMap);
+	Q_ASSERT(ui->ephemerisStepComboBox);
+	QComboBox* steps = ui->ephemerisStepComboBox;
+	steps->blockSignals(true);
 	steps->clear();
-	while (i.hasNext())
+	int index = steps->currentIndex();
+	QVariant selectedStepId = steps->itemData(index);	
+	for (const auto& f : items)
 	{
-		i.next();
-		steps->addItem(i.key(), i.value());
+		steps->addItem(f.first, f.second);
 	}
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
