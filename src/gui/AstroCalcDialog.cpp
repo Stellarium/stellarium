@@ -5390,11 +5390,11 @@ void AstroCalcDialog::initListWUT(const bool magnitude, const bool separation)
 	ui->wutMatchingObjectsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
 }
 
-void AstroCalcDialog::enableVisibilityAngularLimits(bool visible)
+void AstroCalcDialog::enableAngularLimits(bool enable)
 {
-	ui->wutAngularSizeLimitCheckBox->setVisible(visible);
-	ui->wutAngularSizeLimitMinSpinBox->setVisible(visible);
-	ui->wutAngularSizeLimitMaxSpinBox->setVisible(visible);
+	ui->wutAngularSizeLimitCheckBox->setEnabled(enable);
+	ui->wutAngularSizeLimitMinSpinBox->setEnabled(enable);
+	ui->wutAngularSizeLimitMaxSpinBox->setEnabled(enable);
 }
 
 void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees)
@@ -5479,7 +5479,7 @@ void AstroCalcDialog::calculateWutObjects()
 		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
 
-		enableVisibilityAngularLimits(true);
+		enableAngularLimits(true);
 
 		// Direct calculate sunrise/sunset
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -5548,7 +5548,7 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case 1: // Bright stars
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -5594,7 +5594,7 @@ void AstroCalcDialog::calculateWutObjects()
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
 					if (categoryId==18 || categoryId==19 || categoryId==20)
-						enableVisibilityAngularLimits(false);
+						enableAngularLimits(false);
 
 					for (const auto& object : allDSO)
 					{
@@ -5806,7 +5806,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 16: // Bright variable stars
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
@@ -5834,7 +5834,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 17: // Bright stars with high proper motion
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -5862,7 +5862,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 27: // Active galaxies
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
@@ -5925,7 +5925,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 28: // Pulsars
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					#ifdef USE_STATIC_PLUGIN_PULSARS					
 					for (const auto& object : GETSTELMODULE(Pulsars)->getAllPulsars())
 					{
@@ -5953,7 +5953,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 29: // Exoplanetary systems
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
@@ -5974,7 +5974,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 30: // Bright novae
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
@@ -5995,7 +5995,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 31: // Bright supernovae
-					enableVisibilityAngularLimits(false);
+					enableAngularLimits(false);
 					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{

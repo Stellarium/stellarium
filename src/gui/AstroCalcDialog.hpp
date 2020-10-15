@@ -411,7 +411,7 @@ private:
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
 
-	void enableVisibilityAngularLimits(bool visible);
+	void enableAngularLimits(bool enable);
 
 	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
 	void setClickedTime(double posx);
