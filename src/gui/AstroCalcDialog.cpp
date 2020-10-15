@@ -5462,7 +5462,7 @@ void AstroCalcDialog::calculateWutObjects()
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
-		bool passByType, visible;
+		bool passByType, visible, state = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		const double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
@@ -5478,8 +5478,6 @@ void AstroCalcDialog::calculateWutObjects()
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
-
-		enableAngularLimits(true);
 
 		// Direct calculate sunrise/sunset
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -5548,7 +5546,7 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case 1: // Bright stars
-					enableAngularLimits(false);
+					state = false;
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -5594,7 +5592,7 @@ void AstroCalcDialog::calculateWutObjects()
 					if (categoryId==3)
 						initListWUT(false, false); // special case!
 					if (categoryId==18 || categoryId==19 || categoryId==20)
-						enableAngularLimits(false);
+						state = false;
 
 					for (const auto& object : allDSO)
 					{
@@ -5806,7 +5804,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 16: // Bright variable stars
-					enableAngularLimits(false);
+					state = false;
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
@@ -5834,7 +5832,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 17: // Bright stars with high proper motion
-					enableAngularLimits(false);
+					state = false;
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -5862,7 +5860,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 27: // Active galaxies
-					enableAngularLimits(false);
+					state = false;
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
@@ -5925,7 +5923,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case 28: // Pulsars
-					enableAngularLimits(false);
+					state = false;
 					#ifdef USE_STATIC_PLUGIN_PULSARS					
 					for (const auto& object : GETSTELMODULE(Pulsars)->getAllPulsars())
 					{
@@ -5953,7 +5951,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 29: // Exoplanetary systems
-					enableAngularLimits(false);
+					state = false;
 					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
@@ -5974,7 +5972,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 30: // Bright novae
-					enableAngularLimits(false);
+					state = false;
 					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
@@ -5995,7 +5993,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case 31: // Bright supernovae
-					enableAngularLimits(false);
+					state = false;
 					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
@@ -6076,6 +6074,7 @@ void AstroCalcDialog::calculateWutObjects()
 			}
 		}
 
+		enableAngularLimits(state);
 		core->setJD(JD);
 		adjustWUTColumns();
 		objectsList.clear();		
