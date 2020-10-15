@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>947</width>
-    <height>584</height>
+    <width>927</width>
+    <height>573</height>
    </rect>
   </property>
   <property name="font">
@@ -299,6 +299,9 @@
                 <spacer name="horizontalSpacer_11">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1527,6 +1530,9 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonGrsDetails">
+                 <property name="toolTip">
+                  <string>GRS details...</string>
+                 </property>
                  <property name="text">
                   <string>GRS details...</string>
                  </property>
@@ -3787,34 +3793,6 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="5">
-           <widget class="QListWidget" name="landscapesListWidget">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>220</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>120</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QTextBrowser" name="landscapeTextBrowser">
             <property name="enabled">
@@ -3845,6 +3823,34 @@
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" rowspan="5">
+           <widget class="QListWidget" name="landscapesListWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>220</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
            </widget>
           </item>
@@ -3891,12 +3897,104 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
+             <item row="5" column="1">
+              <layout class="QHBoxLayout" name="landscapePolylineHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="landscapePolylineCheckBox">
+                 <property name="toolTip">
+                  <string>Draw horizon polyline if one is defined.</string>
+                 </property>
+                 <property name="text">
+                  <string>Draw only polygon</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="landscapePolylineThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="1">
               <widget class="QCheckBox" name="landscapePositionCheckBox">
+               <property name="toolTip">
+                <string>Set the planet and position as it specified in landscape.ini</string>
+               </property>
                <property name="text">
-                <string>Use associated planet and position</string>
+                <string>Position from landscape</string>
                </property>
               </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
+               <property name="text">
+                <string>Show landscape labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="toolTip">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
+               <property name="text">
+                <string>Show illumination </string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_25">
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Use minimal brightness as may be specified in landscape.ini</string>
+                 </property>
+                 <property name="text">
+                  <string>from landscape, if given</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="4" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -3937,32 +4035,6 @@
                </item>
               </layout>
              </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
-               <property name="toolTip">
-                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
-               </property>
-               <property name="text">
-                <string>Show illumination </string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Use minimal brightness as may be specified in landscape.ini</string>
-               </property>
-               <property name="text">
-                <string>from landscape, if given</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="showFogCheckBox">
                <property name="text">
@@ -3970,67 +4042,17 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="showGroundCheckBox">
                <property name="text">
                 <string>Show ground</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="1" column="0" colspan="2">
               <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
                <property name="text">
                 <string>Use this landscape as default</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
-               <property name="text">
-                <string>Show landscape labels</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <layout class="QHBoxLayout" name="landscapePolylineHorizontalLayout">
-               <item>
-                <widget class="QLabel" name="landscapePolylineThicknessLabel">
-                 <property name="text">
-                  <string>Polygon line thickness</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="landscapePolylineThicknessSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="landscapePolylineCheckBox">
-               <property name="toolTip">
-                <string>Draw horizon polyline if one is defined.</string>
-               </property>
-               <property name="text">
-                <string>Draw only polygon</string>
                </property>
               </widget>
              </item>
@@ -4180,20 +4202,13 @@
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
                 <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
                   <string>Select if you want names abbreviated, original or translated</string>
                  </property>
@@ -4340,7 +4355,7 @@
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>50</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -4396,13 +4411,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
-               <property name="text">
-                <string>Use this sky culture as default</string>
-               </property>
-              </widget>
              </item>
              <item row="4" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_asterismLabels">
@@ -4487,6 +4495,13 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
+               <property name="text">
+                <string>Use this sky culture as default</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -4769,15 +4784,10 @@
   <tabstop>page_landscape</tabstop>
   <tabstop>landscapesListWidget</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
-  <tabstop>showGroundCheckBox</tabstop>
-  <tabstop>landscapePositionCheckBox</tabstop>
-  <tabstop>showFogCheckBox</tabstop>
   <tabstop>landscapeBrightnessCheckBox</tabstop>
   <tabstop>landscapeBrightnessSpinBox</tabstop>
-  <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
   <tabstop>landscapeLabelsCheckBox</tabstop>
   <tabstop>landscapeIlluminationCheckBox</tabstop>
-  <tabstop>localLandscapeBrightnessCheckBox</tabstop>
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>page_starlore</tabstop>
   <tabstop>culturesListWidget</tabstop>
@@ -4800,12 +4810,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
