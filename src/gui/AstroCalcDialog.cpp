@@ -2414,47 +2414,23 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->blockSignals(true);
 	int index = steps->currentIndex();
 	QVariant selectedStepId = steps->itemData(index);
-
+	const QMap<QString, QString>itemsMap={
+		{q_("1 minute"), "38"}, {q_("10 minutes"), "1"}, {q_("30 minutes"), "2"}, {q_("1 hour"), "3"}, {q_("6 hours"), "4"}, {q_("12 hours"), "5"},
+		{q_("1 solar day"), "6"}, {q_("5 solar days"), "7"}, {q_("10 solar days"), "8"}, {q_("15 solar days"), "9"}, {q_("30 solar days"), "10"},
+		{q_("60 solar days"), "11"}, {q_("100 solar days"), "24"},{q_("500 solar days"), "37"},{q_("1 sidereal day"), "18"},{q_("5 sidereal days"), "19"},
+		{q_("10 sidereal days"), "20"},{q_("15 sidereal days"), "21"},{q_("30 sidereal days"), "22"},{q_("60 sidereal days"), "23"},{q_("100 sidereal days"), "25"},
+		{q_("500 sidereal days"), "36"},{q_("1 sidereal year"), "27"},{q_("1 Julian day"), "12"},{q_("5 Julian days"), "13"},{q_("10 Julian days"), "14"},
+		{q_("15 Julian days"), "15"},{q_("30 Julian days"), "16"},{q_("60 Julian days"), "17"},{q_("100 Julian days"), "26"},{q_("1 Julian year"), "28"},
+		{q_("1 Gaussian year"), "29"},{q_("1 synodic month"), "30"},{q_("1 draconic month"), "31"},{q_("1 mean tropical month"), "32"},
+		{q_("1 anomalistic month"), "33"},{q_("1 anomalistic year"), "34"},{q_("1 saros"), "35"},{q_("custom interval"), "0"}
+	};
+	QMapIterator<QString, QString> i(itemsMap);
 	steps->clear();
-	steps->addItem(q_("1 minute"), "38");
-	steps->addItem(q_("10 minutes"), "1");
-	steps->addItem(q_("30 minutes"), "2");
-	steps->addItem(q_("1 hour"), "3");
-	steps->addItem(q_("6 hours"), "4");
-	steps->addItem(q_("12 hours"), "5");
-	steps->addItem(q_("1 solar day"), "6");
-	steps->addItem(q_("5 solar days"), "7");
-	steps->addItem(q_("10 solar days"), "8");
-	steps->addItem(q_("15 solar days"), "9");
-	steps->addItem(q_("30 solar days"), "10");
-	steps->addItem(q_("60 solar days"), "11");
-	steps->addItem(q_("100 solar days"), "24");
-	steps->addItem(q_("500 solar days"), "37");
-	steps->addItem(q_("1 sidereal day"), "18");
-	steps->addItem(q_("5 sidereal days"), "19");
-	steps->addItem(q_("10 sidereal days"), "20");
-	steps->addItem(q_("15 sidereal days"), "21");
-	steps->addItem(q_("30 sidereal days"), "22");
-	steps->addItem(q_("60 sidereal days"), "23");
-	steps->addItem(q_("100 sidereal days"), "25");
-	steps->addItem(q_("500 sidereal days"), "36");
-	steps->addItem(q_("1 sidereal year"), "27");
-	steps->addItem(q_("1 Julian day"), "12");
-	steps->addItem(q_("5 Julian days"), "13");
-	steps->addItem(q_("10 Julian days"), "14");
-	steps->addItem(q_("15 Julian days"), "15");
-	steps->addItem(q_("30 Julian days"), "16");
-	steps->addItem(q_("60 Julian days"), "17");
-	steps->addItem(q_("100 Julian days"), "26");
-	steps->addItem(q_("1 Julian year"), "28");
-	steps->addItem(q_("1 Gaussian year"), "29");
-	steps->addItem(q_("1 synodic month"), "30");
-	steps->addItem(q_("1 draconic month"), "31");
-	steps->addItem(q_("1 mean tropical month"), "32");
-	steps->addItem(q_("1 anomalistic month"), "33");
-	steps->addItem(q_("1 anomalistic year"), "34");
-	steps->addItem(q_("1 saros"), "35");
-	steps->addItem(q_("custom interval"), "0");
+	while (i.hasNext())
+	{
+		i.next();
+		steps->addItem(i.key(), i.value());
+	}
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -2579,33 +2555,23 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	QVariant selectedGroupId = groups->itemData(index);
 
 	QString brLimit = QString::number(brightLimit, 'f', 1);
+	const QMap<QString, QString>itemsMap={
+		{q_("Latest selected object"), "-1"}, {q_("Solar system"), "0"}, {q_("Planets"), "1"}, {q_("Asteroids"), "2"}, {q_("Plutinos"), "3"}, {q_("Comets"), "4"},
+		{q_("Dwarf planets"), "5"},{q_("Cubewanos"), "6"},{q_("Scattered disc objects"), "7"},{q_("Oort cloud objects"), "8"},{q_("Sednoids"), "9"},
+		{q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "10"},{q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "11"},
+		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "12"},{q_("Bright star clusters (<%1 mag)").arg(brLimit), "13"},
+		{q_("Planetary nebulae (<%1 mag)").arg(brLimit), "14"},{q_("Bright nebulae (<%1 mag)").arg(brLimit), "15"},{q_("Dark nebulae"), "16"},
+		{q_("Bright galaxies (<%1 mag)").arg(brLimit), "17"},{q_("Symbiotic stars"), "18"},{q_("Emission-line stars"), "19"},{q_("Interstellar objects"), "20"},
+		{q_("Planets and Sun"), "21"},{q_("Sun, planets and moons"), "22"},{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23"},
+		{q_("Solar system objects: minor bodies"), "24"}
+	};
+	QMapIterator<QString, QString> i(itemsMap);
 	groups->clear();
-	groups->addItem(q_("Latest selected object"), "-1");
-	groups->addItem(q_("Solar system"), "0");
-	groups->addItem(q_("Planets"), "1");
-	groups->addItem(q_("Asteroids"), "2");
-	groups->addItem(q_("Plutinos"), "3");
-	groups->addItem(q_("Comets"), "4");
-	groups->addItem(q_("Dwarf planets"), "5");
-	groups->addItem(q_("Cubewanos"), "6");
-	groups->addItem(q_("Scattered disc objects"), "7");
-	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Sednoids"), "9");
-	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "10");
-	groups->addItem(q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "11");
-	groups->addItem(q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "12");
-	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "13");
-	groups->addItem(q_("Planetary nebulae (<%1 mag)").arg(brLimit), "14");
-	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "15");
-	groups->addItem(q_("Dark nebulae"), "16");
-	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
-	groups->addItem(q_("Symbiotic stars"), "18");
-	groups->addItem(q_("Emission-line stars"), "19");
-	groups->addItem(q_("Interstellar objects"), "20");
-	groups->addItem(q_("Planets and Sun"), "21");
-	groups->addItem(q_("Sun, planets and moons"), "22");
-	groups->addItem(q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23");
-	groups->addItem(q_("Solar system objects: minor bodies"), "24");
+	while (i.hasNext())
+	{
+		i.next();
+		groups->addItem(i.key(), i.value());
+	}
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
