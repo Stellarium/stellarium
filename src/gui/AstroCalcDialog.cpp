@@ -504,8 +504,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->altVsTimeLabel->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);
-	ui->graphsFirstLabel->setStyleSheet(style);
-	ui->graphsCelestialBodyLabel->setStyleSheet(style);
+	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
@@ -3180,7 +3179,6 @@ void AstroCalcDialog::populateFunctionsList()
 
 void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 {
-	QString xAxisStr = q_("Date");
 	QString distMU = qc_("AU", "distance, astronomical unit");
 	QString asMU = QString("'");
 
@@ -3322,8 +3320,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	QColor axisColorR(Qt::yellow);
 	QPen axisPenR(axisColorR, 1);
 
-	ui->graphsPlot->setLocale(QLocale(localeMgr->getAppLanguage()));
-	ui->graphsPlot->xAxis->setLabel(xAxisStr);
+	ui->graphsPlot->setLocale(QLocale(localeMgr->getAppLanguage()));	
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
 
@@ -3453,7 +3450,7 @@ void AstroCalcDialog::saveMonthlyElevationPositiveLimit(int limit)
 
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
-	ui->monthlyElevationCelestialObjectLabel->setText("");
+	ui->monthlyElevationGraph->setToolTip("");
 
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
@@ -3532,7 +3529,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
 		ui->monthlyElevationGraph->graph(0)->setName(name);
 		ui->monthlyElevationGraph->replot();
-		ui->monthlyElevationCelestialObjectLabel->setText(name);
+		ui->monthlyElevationGraph->setToolTip(name);
 	}
 
 	// clean up the data when selection is removed
@@ -6500,7 +6497,7 @@ void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
 void AstroCalcDialog::drawAngularDistanceGraph()
 {
 	QString label = q_("Change of angular distance between the Moon and selected object");
-	ui->angularDistanceLabel->setText(label);
+	ui->angularDistancePlot->setToolTip(label);
 
 	// special case - plot the graph when tab is visible
 	//..
@@ -6571,7 +6568,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
-		ui->angularDistanceLabel->setText(QString("%1 (%2)").arg(label, name));
+		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();
 
