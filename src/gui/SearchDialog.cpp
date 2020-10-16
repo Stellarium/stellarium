@@ -194,12 +194,13 @@ SearchDialog::SearchDialog(QObject* parent)
 	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
 	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
 
+	shiftPressed = false;
+
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();
 
 	// Find recent object search data file
-	recentObjectSearchesJsonPath = StelFileMgr::findFile("data",
-							     (StelFileMgr::Flags)(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
+	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
 }
 
 SearchDialog::~SearchDialog()
@@ -360,8 +361,7 @@ void SearchDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
-		     this, SLOT(onSearchTextChanged(const QString&)));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
@@ -384,11 +384,8 @@ void SearchDialog::createDialogContent()
 	populateCoordinateSystemsList();
 	populateCoordinateAxis();
 	int idx = ui->coordinateSystemComboBox->findData(getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
-	{
-		// Use equatorialJ2000 as default
+	if (idx==-1) // Use equatorialJ2000 as default
 		idx = ui->coordinateSystemComboBox->findData(QVariant("equatorialJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
-	}
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
@@ -430,11 +427,8 @@ void SearchDialog::createDialogContent()
 
 	populateSimbadServerList();
 	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
-	{
-		// Use University of Strasbourg as default
+	if (idx==-1) // Use University of Strasbourg as default
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
-	}
 	ui->serverListComboBox->setCurrentIndex(idx);
 	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
 
@@ -481,18 +475,14 @@ void SearchDialog::createDialogContent()
 	searchListModel->setStringList(searchListModel->getValues());
 
 	// Auto display recent searches
-	QStringList recentMatches = listMatchingRecentObjects("",
-							      recentObjectSearchesData.maxSize,
-							      useStartOfWords);
+	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
 	resetSearchResultDisplay(recentMatches, recentMatches);
 	setPushButtonGotoSearch();
 
 	// Update max size of "recent object searches"
-	connect(ui->recentSearchSizeSpinBox, SIGNAL(editingFinished()),
-		this, SLOT(recentSearchSizeEditingFinished()));
+	connect(ui->recentSearchSizeSpinBox, SIGNAL(editingFinished()), this, SLOT(recentSearchSizeEditingFinished()));
 	// Clear data from recent search object
-	connect(ui->recentSearchClearDataPushButton, SIGNAL(clicked()),
-		this, SLOT(recentSearchClearDataClicked()));
+	connect(ui->recentSearchClearDataPushButton, SIGNAL(clicked()), this, SLOT(recentSearchClearDataClicked()));
 	populateRecentSearch();
 }
 
@@ -682,7 +672,8 @@ void SearchDialog::manualPositionChanged()
 	aimUp=mvmgr->getViewUpVectorJ2000();
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 
-	switch (getCurrentCoordinateSystem()) {
+	switch (getCurrentCoordinateSystem())
+	{
 		case equatorialJ2000:
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
@@ -867,20 +858,14 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	}
 
 	// Goto object when clicking in list
-	connect(ui->searchListView, SIGNAL(clicked(const QModelIndex&)),
-		this, SLOT(gotoObject(const QModelIndex&)),
-		Qt::UniqueConnection);
-	connect(ui->searchListView, SIGNAL(activated(const QModelIndex&)),
-		this, SLOT(gotoObject(const QModelIndex&)),
-		Qt::UniqueConnection);
+	connect(ui->searchListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
+	connect(ui->searchListView, SIGNAL(activated(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
 }
 
 void SearchDialog::updateRecentSearchList(const QString &nameI18n)
 {
 	if(nameI18n.isEmpty())
-	{
 		return;
-	}
 
 	// Prepend & remove duplicates
 	recentObjectSearchesData.recentList.prepend(nameI18n);
@@ -1048,16 +1033,12 @@ void SearchDialog::saveRecentSearches()
 	jsonFile.close();
 }
 
-QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix,
-						    int maxNbItem,
-						    bool useStartOfWords) const
+QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
 	if(maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	// For all recent objects:
 	for (int i = 0; i < recentObjectSearchesData.recentList.size(); i++)
@@ -1108,20 +1089,14 @@ void SearchDialog::onSimbadStatusChanged()
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
 		info = QString("%1: %2").arg(q_("Simbad Lookup Error")).arg(simbadReply->getErrorString());
-		if (index==1)
-			ui->simbadCooStatusLabel->setText(info);
-		else
-			ui->simbadStatusLabel->setText(info);
+		index==1 ? ui->simbadCooStatusLabel->setText(info) : ui->simbadStatusLabel->setText(info);
 		setPushButtonGotoSearch();
 		ui->simbadCooResultsTextBrowser->clear();
 	}
 	else
 	{
 		info = QString("%1: %2").arg(q_("Simbad Lookup")).arg(simbadReply->getCurrentStatusString());
-		if (index==1)
-			ui->simbadCooStatusLabel->setText(info);
-		else
-			ui->simbadStatusLabel->setText(info);
+		index==1 ? ui->simbadCooStatusLabel->setText(info) : ui->simbadStatusLabel->setText(info);
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
@@ -1155,14 +1130,17 @@ void SearchDialog::greekLetterClicked()
 {
 	QPushButton *sender = reinterpret_cast<QPushButton *>(this->sender());
 	QLineEdit* sso = ui->lineEditSearchSkyObject;
-	if (sender) {
+	QString text;
+	if (sender)
+	{
+		shiftPressed ? text = sender->text().toUpper() : text = sender->text();
 		if (flagHasSelectedText)
 		{
-			sso->setText(sender->text());
+			sso->setText(text);
 			flagHasSelectedText = false;
 		}
 		else
-			sso->setText(sso->text() + sender->text());
+			sso->setText(sso->text() + text);
 	}
 	sso->setFocus();
 }
@@ -1199,9 +1177,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 					mvmgr->setFlagTracking(true);
 				}
 				else
-				{
 					GETSTELMODULE(StelObjectMgr)->unSelect();
-				}
 			}
 		}
 		else
@@ -1220,9 +1196,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 					mvmgr->setFlagTracking(true);
 				}
 				else
-				{
 					GETSTELMODULE(StelObjectMgr)->unSelect();
-				}
 			}
 		}
 	}
@@ -1241,9 +1215,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 				mvmgr->setFlagTracking(true);
 			}
 			else
-			{
 				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
 		}
 	}
 	simbadResults.clear();
@@ -1261,6 +1233,17 @@ void SearchDialog::searchListClear()
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
 {
+	if (event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+
+		if (keyEvent->key() == Qt::Key_Shift)
+		{
+			shiftPressed = true;
+			event->accept();
+			return true;
+		}
+	}
 	if (event->type() == QEvent::KeyRelease)
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -1280,6 +1263,12 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 			int row = searchListModel->getSelectedIdx();
 			ui->searchListView->scrollTo(searchListModel->index(row));
 			ui->searchListView->setCurrentIndex(searchListModel->index(row));
+			event->accept();
+			return true;
+		}
+		if (keyEvent->key() == Qt::Key_Shift)
+		{
+			shiftPressed = false;
 			event->accept();
 			return true;
 		}
@@ -1362,11 +1351,7 @@ void SearchDialog::setRecentSearchSize(int maxSize)
 
 void SearchDialog::selectSimbadServer(int index)
 {
-	if (index < 0)
-		simbadServerUrl = DEF_SIMBAD_URL;
-	else
-		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
-
+	index < 0 ? simbadServerUrl = DEF_SIMBAD_URL : simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
 	conf->setValue("search/simbad_server_url", simbadServerUrl);
 }
 
@@ -1381,9 +1366,8 @@ void SearchDialog::updateListView(int index)
 	proxyModel->setSourceModel(listModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->objectsListView->blockSignals(false);
-	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)),
-		this, SLOT(gotoObject(const QModelIndex&)),
-		Qt::UniqueConnection); //bugfix: prevent multiple connections, which seems to have happened before
+	//bugfix: prevent multiple connections, which seems to have happened before
+	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
 }
 
 void SearchDialog::updateListTab()
@@ -1397,24 +1381,17 @@ void SearchDialog::updateListTab()
 		selectedObjectId = objects->itemData(index, Qt::UserRole);
 
 	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
-	{
-		// hide "names in English" checkbox
-		ui->searchInEnglishCheckBox->hide();
-	}
+		ui->searchInEnglishCheckBox->hide(); // hide "names in English" checkbox
 	else
-	{
 		ui->searchInEnglishCheckBox->show();
-	}
 	objects->blockSignals(true);
 	objects->clear();
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (auto it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
+		// List of objects is not empty, let's add name of module or section!
 		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
-		{
-			// List of objects is not empty, let's add name of module or section!
 			objects->addItem(q_(it.value()), QVariant(it.key()));
-		}
 	}
 	index = objects->findData(selectedObjectId, Qt::UserRole, Qt::MatchCaseSensitive);
 	objects->setCurrentIndex(index);

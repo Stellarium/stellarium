@@ -321,6 +321,8 @@ private:
 	bool simbadGetTypes;  //!< get object types
 	bool simbadGetDims;   //!< get dimensions
 
+	bool shiftPressed;   //!< follow Shift button status
+
 	void populateSimbadServerList();
 
 	// The current coordinate system
