@@ -428,7 +428,7 @@ skip_render:
 		}
 	}
 	// Restore the painter color.
-	sPainter->setColor(color[0], color[1], color[2], color[3]);
+	sPainter->setColor(color);
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,

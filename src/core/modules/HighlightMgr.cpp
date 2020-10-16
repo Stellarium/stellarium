@@ -157,7 +157,7 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 			if (!painter.getProjector()->project(hlObj, screenpos))
 				continue;
 
-			painter.setColor(hightlightColor[0], hightlightColor[1], hightlightColor[2]);
+			painter.setColor(hightlightColor);
 			texPointer->bind();
 			painter.setBlending(true);
 			painter.drawSprite2dMode(screenpos[0], screenpos[1], markerSize, StelApp::getInstance().getTotalRunTime()*40.f);

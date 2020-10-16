@@ -1394,9 +1394,8 @@ void SkyPoint::draw(StelCore *core) const
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
-	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());	
-	Vec4f textColor(color[0], color[1], color[2], 0);
-	textColor[3]=fader.getInterstate();
+	sPainter.setColor(color, fader.getInterstate());
+	Vec4f textColor(color, fader.getInterstate());
 
 	sPainter.setFont(font);
 	/////////////////////////////////////////////////

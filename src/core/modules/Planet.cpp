@@ -3202,7 +3202,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 
 	// Restore painter state.
 	painter->setProjector(core->getProjection(transfo));
-	painter->setColor(color[0], color[1], color[2], color[3]);
+	painter->setColor(color);
 }
 
 Planet::PlanetOBJModel* Planet::loadObjModel() const

@@ -219,7 +219,7 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	markerTexture->bind();
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+	sPainter.setColor(markerColor, markerFader.getInterstate());
 	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 
 	return true;
@@ -289,7 +289,7 @@ bool HorizonMarker::draw(StelCore *core, StelPainter& sPainter)
 	sPainter.getProjector()->project(altaz, xyPos);
 	markerTexture->bind();
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+	sPainter.setColor(markerColor, markerFader.getInterstate());
 	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 	sPainter.setProjector(keepProj);
 	return true;

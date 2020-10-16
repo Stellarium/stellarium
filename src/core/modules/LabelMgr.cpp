@@ -316,7 +316,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	else if (vJustify == 'c')
 		jyOffset = sPainter.getFontMetrics().height() / 2.;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.drawText(static_cast<float>(labelXY[0]+xOffset-jxOffset), static_cast<float>(labelXY[1]+yOffset-jyOffset), labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
@@ -366,7 +366,7 @@ bool HorizonLabel::draw(StelCore *core, StelPainter& sPainter)
 	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
 	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -403,7 +403,7 @@ bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
 	if (!sPainter.getProjector()->project(equPos, labelXY))
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 
 	double xOffset(0.);
@@ -478,7 +478,7 @@ bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 	sPainter.drawText(screenX, screenY, labelText, 0, 0, 0, false);
 	return true;

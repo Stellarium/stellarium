@@ -432,14 +432,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	// If the rmag is big, draw a big halo
 	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
+		float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f));
 		float rmag = 150.f;
-		if (cmag>1.f)
-			cmag = 1.f;
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		sPainter->setColor(color*cmag);
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
@@ -501,12 +499,10 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.f)
-			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		float cmag = (rmag>=pixRadius*3.f+100.f) ? 1.f : qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		painter->setColor(color*cmag);
 		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}

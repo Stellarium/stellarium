@@ -486,8 +486,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
 
-		Vec3f c(obj->getInfoColor());
-		sPainter.setColor(c[0], c[1], c[2]);
+		sPainter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);

@@ -118,7 +118,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sSouth;
 	if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sNorth;
 
-	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
+	sPainter.setColor(color,fader.getInterstate());
 	sPainter.setBlending(true);
 
 	Vec3f pos;

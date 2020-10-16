@@ -140,14 +140,14 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 		if (lineFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 	}
 	else
 	{
 		if (rayHelperFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(rayHelperColor[0], rayHelperColor[1], rayHelperColor[2], rayHelperFader.getInterstate());
+		sPainter.setColor(rayHelperColor, rayHelperFader.getInterstate());
 	}
 
 	Vec3d star1;
@@ -171,7 +171,7 @@ void Asterism::drawName(StelPainter& sPainter) const
 		return;
 
 	QString name = getNameI18n();
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
 
