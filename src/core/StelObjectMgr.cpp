@@ -488,8 +488,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	for (const auto* m : objectsModules)
 		candidates += m->searchAround(v, fov_around, core);
 
-	// GZ 2014-08-17: This should be exactly the sky's limit magnitude (or even more, but not less!), else visible stars cannot be clicked.
-	float limitMag = core->getSkyDrawer()->getLimitMagnitude(); // -2.f;
+	// This should be exactly the sky's limit magnitude, else visible stars cannot be clicked, or suppressed stars can be found.
+	const float limitMag = core->getSkyDrawer()->getFlagStarMagnitudeLimit() ?
+				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
+				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
 	for (const auto& obj : candidates)
 	{
