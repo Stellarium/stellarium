@@ -71,8 +71,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 		
 	designation  = map.value("designation").toString();
-	starProperName = map.value("starProperName").toString();
-	// TODO: get rid of RA, DE and show data reverse-computed from XYZ later?
+	starProperName = map.value("starProperName").toString();	
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	StelUtils::spheToRect(RA, DE, XYZ);	

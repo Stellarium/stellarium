@@ -456,12 +456,9 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	}
 	else if(flagShowOculars)
 	{
-		//TODO: this is broke in Stellarium.
 		// The ocular is displayed, but no object is selected.  So don't track the stars.  We may have locked
 		// the position of the screen if the movement keys were used.  so call this to be on the safe side.
-		movementManager->setFlagLockEquPos(false);
-		// Do we need to set this?
-		// movementManager->setFlagTracking(false);
+		movementManager->setFlagLockEquPos(false);		
 	}
 	event->setAccepted(false);
 }

@@ -954,7 +954,7 @@ QVariantMap Satellites::createDataMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	// FIXME: Since v0.21 uncomment this line:
+	// TODO: Since v0.21 uncomment this line:
 	// map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
 	// and remove this line:
 	map["creator"] = QString("Satellites plugin version %1").arg(SatellitesCatalogVersion);
@@ -2407,6 +2407,12 @@ void Satellites::translations()
 	N_("INTEGRAL");
 	// TRANSLATORS: China's first space station name
 	N_("TIANGONG 1");
+
+	// Satellites visibility
+	N_("The satellite and the observer are in sunlight");
+	N_("The satellite is visible");
+	N_("The satellite is eclipsed");
+	N_("The satellite is not visible");
 
 #endif
 }

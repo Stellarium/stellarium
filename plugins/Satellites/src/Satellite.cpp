@@ -186,6 +186,14 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
+	// Please sync text in Satellites.cpp file after adding new types
+	visibilityDescription={
+		{ gSatWrapper::RADAR_SUN, "The satellite and the observer are in sunlight" },
+		{ gSatWrapper::VISIBLE, "The satellite is visible" },
+		{ gSatWrapper::RADAR_NIGHT, "The satellite is eclipsed" },
+		{ gSatWrapper::NOT_VISIBLE, "The satellite is not visible" }
+	};
+
 	update(0.);
 }
 
@@ -424,26 +432,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (status!=StatusUnknown)
 			oss << QString("%1: %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
-
-		//Visibility: Full text
-		//TODO: Move to a more prominent place.
-		switch (visibility)
-		{
-			case gSatWrapper::RADAR_SUN:
-				oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
-				break;
-			case gSatWrapper::VISIBLE:
-				oss << q_("The satellite is visible.") << "<br/>";
-				break;
-			case gSatWrapper::RADAR_NIGHT:
-				oss << q_("The satellite is eclipsed.") << "<br/>";
-				break;
-			case gSatWrapper::NOT_VISIBLE:
-				oss << q_("The satellite is not visible") << "<br/>";
-				break;
-			default:
-				break;
-		}
+		//Visibility: Full text		
+		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
 		if (comms.size() > 0)
 		{
@@ -565,27 +555,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("phase-angle", phaseAngle);
 	map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
 	map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
-
-	//TODO: Move to a more prominent place.
-	QString visibilityState;
-	switch (visibility)
-	{
-		case gSatWrapper::RADAR_SUN:
-			visibilityState = "The satellite and the observer are in sunlight.";
-			break;
-		case gSatWrapper::VISIBLE:
-			visibilityState =  "The satellite is visible.";
-			break;
-		case gSatWrapper::RADAR_NIGHT:
-			visibilityState =  "The satellite is eclipsed.";
-			break;
-		case gSatWrapper::NOT_VISIBLE:
-			visibilityState =  "The satellite is not visible.";
-			break;
-		default:
-			break;
-	}
-	map.insert("visibility", visibilityState);
+	map.insert("visibility", visibilityDescription.value(visibility, ""));
 	if (comms.size() > 0)
 	{
 		for (const auto& c : comms)

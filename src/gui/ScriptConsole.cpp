@@ -366,8 +366,7 @@ void ScriptConsole::includeBrowse()
 void ScriptConsole::quickRun(int idx)
 {
 	if (idx==0)
-		return;
-	// TODO: Switch to unique keys?
+		return;	
 	static const QMap<int, QString>map = {
 		{2, "LabelMgr.deleteAllLabels();\n"},
 		{3, "ScreenImageMgr.deleteAllImages();\n"},
