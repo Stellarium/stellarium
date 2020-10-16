@@ -341,13 +341,9 @@ private:
 	//! Shrink list if needed
 	void adjustRecentList(int maxSize);
 	//! Display search per user preference
-	void adjustMatchesResult(QStringList &allMatches,
-				 QStringList& recentMatches,
-				 QStringList& matches,
-				 int maxNbItem);
+	void adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem);
 	//! Update searches result display and reset selectedIdx = 0
-	void resetSearchResultDisplay(QStringList allMatches,
-				      QStringList recentMatches);
+	void resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches);
 	//! Decide if push button should be enabled
 	void setPushButtonGotoSearch();
 	//! Default maxNbItem when matching objects
@@ -362,9 +358,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of recent searches, or an empty list if nothing match
-	QStringList listMatchingRecentObjects(const QString& objPrefix,
-					      int maxNbItem=20,
-					      bool useStartOfWords=false) const;
+	QStringList listMatchingRecentObjects(const QString& objPrefix, int maxNbItem=20, bool useStartOfWords=false) const;
 };
 
 #endif // _SEARCHDIALOG_HPP

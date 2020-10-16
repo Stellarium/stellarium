@@ -776,12 +776,11 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	clearSimbadText(StelModule::ReplaceSelection);
 	// This block needs to go before the trimmedText.isEmpty() or the SIMBAD result does not
 	// get properly cleared.
-	if (useSimbad) {
-		if (simbadReply) {
-			disconnect(simbadReply,
-				   SIGNAL(statusChanged()),
-				   this,
-				   SLOT(onSimbadStatusChanged()));
+	if (useSimbad)
+	{
+		if (simbadReply)
+		{
+			disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 			delete simbadReply;
 			simbadReply=Q_NULLPTR;
 		}
@@ -790,21 +789,22 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 	// Use to adjust matches to be within range of maxNbItem
 	int maxNbItem;
-	QString trimmedText = text.trimmed().toLower();
-	if (trimmedText.isEmpty()) {
+	QString trimmedText = text.trimmed();
+	if (trimmedText.isEmpty())
+	{
 		searchListModel->clearValues();
 
 		maxNbItem = recentObjectSearchesData.maxSize;
 		// Auto display recent searches
-		QStringList recentMatches = listMatchingRecentObjects(trimmedText,
-								      maxNbItem,
-								      useStartOfWords);
+		QStringList recentMatches = listMatchingRecentObjects(trimmedText, maxNbItem, useStartOfWords);
 		resetSearchResultDisplay(recentMatches, recentMatches);
 
 		ui->simbadStatusLabel->setText("");
 		ui->simbadCooStatusLabel->setText("");
 		setPushButtonGotoSearch();
-	} else {
+	}
+	else
+	{
 		if (useSimbad)
 		{
 			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 4);
@@ -829,51 +829,28 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 			// Get recent matches
 			// trimmedText
-			recentMatches = listMatchingRecentObjects(trimmedText,
-								  trimmedTextMaxNbItem,
-								  useStartOfWords);
-
+			recentMatches = listMatchingRecentObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
 			// greekText
-			recentMatches += listMatchingRecentObjects(greekText,
-								   (greekTextMaxMbItem - recentMatches.size()),
-								   useStartOfWords);
+			recentMatches += listMatchingRecentObjects(greekText, (greekTextMaxMbItem - recentMatches.size()), useStartOfWords);
 
 			// Get rest of matches
 			// trimmedText
-			matches = objectMgr->listMatchingObjects(trimmedText,
-								 trimmedTextMaxNbItem,
-								 useStartOfWords,
-								 false);
-			matches += objectMgr->listMatchingObjects(trimmedText,
-								  trimmedTextMaxNbItem,
-								  useStartOfWords,
-								  true);
+			matches = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords, true);
 			// greekText
-			matches += objectMgr->listMatchingObjects(greekText,
-								  (greekTextMaxMbItem - matches.size()),
-								  useStartOfWords,
-								  false);
-			matches += objectMgr->listMatchingObjects(greekText,
-								  (greekTextMaxMbItem - matches.size()),
-						  useStartOfWords, true);
+			matches += objectMgr->listMatchingObjects(greekText, (greekTextMaxMbItem - matches.size()), useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(greekText, (greekTextMaxMbItem - matches.size()), useStartOfWords, true);
 		}
 		else
 		{
 			trimmedTextMaxNbItem = 13;
 
 			// Get recent matches
-			recentMatches = listMatchingRecentObjects(trimmedText,
-								  trimmedTextMaxNbItem,
-								  useStartOfWords);
+			recentMatches = listMatchingRecentObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
 
 			// Get rest of matches
-			matches  = objectMgr->listMatchingObjects(trimmedText,
-								  trimmedTextMaxNbItem,
-								  useStartOfWords,
-								  false);
-			matches += objectMgr->listMatchingObjects(trimmedText,
-								  trimmedTextMaxNbItem,
-								  useStartOfWords, true);
+			matches  = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords, true);
 		}
 		// Check in case either number changes since they were
 		// hard coded
@@ -912,9 +889,7 @@ void SearchDialog::updateRecentSearchList(const QString &nameI18n)
 	adjustRecentList(recentObjectSearchesData.maxSize);
 
 	// Auto display recent searches
-	QStringList recentMatches = listMatchingRecentObjects("",
-							      recentObjectSearchesData.maxSize,
-							      useStartOfWords);
+	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
 	resetSearchResultDisplay(recentMatches, recentMatches);
 }
 
@@ -931,11 +906,7 @@ void SearchDialog::adjustRecentList(int maxSize)
 	// "allowed" size (to retain data in case the user switches from
 	// high to low size)
 	if( recentObjectSearchesData.recentList.size() > spinBoxMaxSize)
-	{
-		recentObjectSearchesData.recentList =
-				recentObjectSearchesData.recentList.mid(0,
-									spinBoxMaxSize);
-	}
+		recentObjectSearchesData.recentList = recentObjectSearchesData.recentList.mid(0, spinBoxMaxSize);
 }
 
 void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem)
@@ -1000,15 +971,9 @@ void SearchDialog::setPushButtonGotoSearch()
 {
 	// Empty search and empty recently search object list
 	if (searchListModel->isEmpty() && (recentObjectSearchesData.recentList.size() == 0))
-	{
-		// Do not enable search button
-		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
-	}
+		ui->pushButtonGotoSearchSkyObject->setEnabled(false); // Do not enable search button
 	else
-	{
-		// Do enable search  button
-		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
-	}
+		ui->pushButtonGotoSearchSkyObject->setEnabled(true); // Do enable search  button
 }
 
 void SearchDialog::loadRecentSearches()
@@ -1037,8 +1002,7 @@ void SearchDialog::loadRecentSearches()
 			// Get user's maxSize data (if possible)
 			readMaxSize = recentSearchData.value("maxSize").toInt();
 			 // Non-negative size only
-			recentObjectSearchesData.maxSize = (readMaxSize >= 0) ?
-						readMaxSize : recentObjectSearchesData.maxSize;
+			recentObjectSearchesData.maxSize = (readMaxSize >= 0) ? readMaxSize : recentObjectSearchesData.maxSize;
 
 			// Update dialog size to match user's preference
 			ui->recentSearchSizeSpinBox->setValue(recentObjectSearchesData.maxSize);
@@ -1098,20 +1062,14 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix,
 	// For all recent objects:
 	for (int i = 0; i < recentObjectSearchesData.recentList.size(); i++)
 	{
-		bool toAppend = useStartOfWords ? recentObjectSearchesData.recentList[i].startsWith(objPrefix,
-												    Qt::CaseInsensitive)
-						: recentObjectSearchesData.recentList[i].contains(objPrefix,
-												  Qt::CaseInsensitive);
+		bool toAppend = useStartOfWords ? recentObjectSearchesData.recentList[i].startsWith(objPrefix, Qt::CaseInsensitive)
+						: recentObjectSearchesData.recentList[i].contains(objPrefix, Qt::CaseInsensitive);
 
 		if(toAppend)
-		{
 			result.append(recentObjectSearchesData.recentList[i]);
-		}
 
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 	return result;
 }
@@ -1358,7 +1316,7 @@ QString SearchDialog::substituteGreek(const QString& keyString)
 QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
 {
 	if(staticData.greekLetters.contains(potentialGreekLetterName))
-		return staticData.greekLetters[potentialGreekLetterName.toLower()];
+		return staticData.greekLetters[potentialGreekLetterName];
 
 	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
 	// any trailing digit.
@@ -1368,7 +1326,7 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
 		QString name = potentialGreekLetterName.left(lastCharacterIndex);
 		if(staticData.greekLetters.contains(name))
-			return staticData.greekLetters[name.toLower()] + digit;
+			return staticData.greekLetters[name] + digit;
 	}
 
 	return potentialGreekLetterName;
