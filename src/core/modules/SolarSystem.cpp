@@ -1263,7 +1263,8 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	const int sizeCoeff = getEphemerisLineThickness() - 1;
 	QString info = "";
 	Vec3d win;
-	Vec3f colorMarker;
+	Vec3f markerColor;
+	bool isComet=false;
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
@@ -1274,26 +1275,35 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
+		isComet=AstroCalcDialog::EphemerisList[i].colorIndex == 7; // HACK. Make sure this index value remains.
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
-			colorMarker = getEphemerisSelectedMarkerColor();
+			markerColor = getEphemerisSelectedMarkerColor();
 			size = 6.f;
 		}
 		else
 		{
-			colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
+			markerColor = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
 			size = baseSize;
 		}
+		if (isComet) size += 16.f;
 		size += sizeCoeff; //
-		sPainter.setColor(colorMarker);
+		sPainter.setColor(markerColor);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
-		texEphemerisMarker->bind();
+		if (isComet)
+			texEphemerisCometMarker->bind();
+		else
+			texEphemerisMarker->bind();
 		if (skipMarkers)
 		{
 			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 				continue;
 		}
-		sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
+		Vec3d win;
+		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
+			sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 180.f+AstroCalcDialog::EphemerisList[i].solarAngle*M_180_PIf);
+		//drawSprite2dMode(float x, float y, float radius, float rotation);
+		//sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
 
 		if (showDates || showMagnitudes)
 		{
@@ -1343,7 +1353,7 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 		for (int i =0; i < nsize; i++)
 		{
 			color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
-			colorArray[i].set(color[0], color[1], color[2], 1.f);
+			colorArray[i]=Vec4f(color, 1.0f);
 			vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
 		}
 		sPainter.drawPath(vertexArray, colorArray);

@@ -121,9 +121,35 @@ GLuint Planet::shadowFBO = 0;
 #endif
 GLuint Planet::shadowTex = 0;
 
+const QMap<Planet::PlanetType, QString> Planet::pTypeMap = // Maps type to english name.
+{
+	{Planet::isStar,	"star"},
+	{Planet::isPlanet,	"planet"},
+	{Planet::isMoon,	"moon"},
+	{Planet::isObserver,	"observer"},
+	{Planet::isArtificial,	"artificial"},
+	{Planet::isAsteroid,	"asteroid"},
+	{Planet::isPlutino,	"plutino"},
+	{Planet::isComet,	"comet"},
+	{Planet::isDwarfPlanet,	"dwarf planet"},
+	{Planet::isCubewano,	"cubewano"},
+	{Planet::isSDO,		"scattered disc object"},
+	{Planet::isOCO,		"Oort cloud object"},
+	{Planet::isSednoid,	"sednoid"},
+	{Planet::isInterstellar,"interstellar object"},
+	{Planet::isUNDEFINED,	"UNDEFINED"} // something must be broken before we ever see this!
+};
 
-QMap<Planet::PlanetType, QString> Planet::pTypeMap;
-QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
+const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
+{
+	{Planet::ExplanatorySupplement_2013,	"ExpSup2013"},
+	{Planet::ExplanatorySupplement_1992,	"ExpSup1992"},
+	{Planet::Mueller_1893,			"Mueller1893"},
+	{Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"},
+	{Planet::Generic,			"Generic"},
+	{Planet::UndefinedAlgorithm,		""}
+};
+
 Planet::ApparentMagnitudeAlgorithm Planet::vMagAlgorithm;
 
 
@@ -235,8 +261,6 @@ Planet::Planet(const QString& englishName,
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
-	// 0.16: Ensure type is always given!
-	// AW: I've commented the code to the allow flying on spaceship (implemented as an artificial planet)!
 	if (pType==Planet::isUNDEFINED)
 	{
 		qCritical() << "Planet " << englishName << "has no type. Please edit one of ssystem_major.ini or ssystem_minor.ini to ensure operation.";
@@ -279,42 +303,10 @@ Planet::Planet(const QString& englishName,
 	}
 }
 
-// called in SolarSystem::init() before first planet is created. Loads pTypeMap.
+// called in SolarSystem::init() before first planet is created. May initialize static variables.
 void Planet::init()
 {
-	if (pTypeMap.count() > 0 )
-	{
-		// This should never happen. But it's uncritical.
-		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
-		pTypeMap.clear();
-	}
-	pTypeMap.insert(Planet::isStar,		"star");
-	pTypeMap.insert(Planet::isPlanet,	"planet");
-	pTypeMap.insert(Planet::isMoon,		"moon");
-	pTypeMap.insert(Planet::isObserver,	"observer");
-	pTypeMap.insert(Planet::isArtificial,	"artificial");
-	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
-	pTypeMap.insert(Planet::isPlutino,	"plutino");
-	pTypeMap.insert(Planet::isComet,	"comet");
-	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
-	pTypeMap.insert(Planet::isCubewano,	"cubewano");
-	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
-	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
-	pTypeMap.insert(Planet::isSednoid,	"sednoid");
-	pTypeMap.insert(Planet::isInterstellar,	"interstellar object");
-	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
-
-	if (vMagAlgorithmMap.count() > 0)
-	{
-		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
-		vMagAlgorithmMap.clear();
-	}
-	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_2013,	"ExpSup2013");
-	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_1992,	"ExpSup1992");
-	vMagAlgorithmMap.insert(Planet::Mueller_1893,			"Mueller1893"); // better name
-	vMagAlgorithmMap.insert(Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"); // consistent name
-	vMagAlgorithmMap.insert(Planet::Generic,			"Generic");
-	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm,		"");
+	// Nothing for now.
 }
 
 Planet::~Planet()
@@ -1642,6 +1634,15 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
 	return 0.5f * static_cast<float>(qAbs(1. + cos_chi));
+}
+
+float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
+{
+	float ra0, de0, ra, de, dra;
+	StelUtils::rectToSphe(&ra0, &de0, sunPos);
+	StelUtils::rectToSphe(&ra, &de, objPos);
+	dra=ra0-ra;
+	return atan2f(cos(de0)*sin(dra), sin(de0)*cos(de) - cos(de0)*sin(de)*cos(dra));
 }
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)

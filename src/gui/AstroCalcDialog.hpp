@@ -52,6 +52,7 @@ struct Ephemeris
 	double objDate;
 	QString objDateStr;
 	float magnitude;
+	float solarAngle; // in J2000 coordinates, polar angle towards the sun. Usable e.g. to indicate the direction towards the sun, or rotate a comet tail icon away from it.
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
