@@ -134,6 +134,7 @@ SolarSystem::~SolarSystem()
 	Planet::texEarthShadow.clear();
 
 	texEphemerisMarker.clear();
+	texEphemerisCometMarker.clear();
 	texPointer.clear();
 
 	delete allTrails;
@@ -268,6 +269,7 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
+	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	
 	StelApp *app = &StelApp::getInstance();
@@ -443,10 +445,8 @@ void SolarSystem::drawPointer(const StelCore* core)
 		if (!prj->project(pos, screenpos))
 			return;
 
-
 		StelPainter sPainter(prj);
-		Vec3f color = getPointerColor();
-		sPainter.setColor(color[0],color[1],color[2]);
+		sPainter.setColor(getPointerColor());
 
 		double size = obj->getAngularSize(core)*M_PI_180*prj->getPixelPerRadAtCenter()*2.;
 		
@@ -1245,71 +1245,70 @@ Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 {
 	const int fsize = AstroCalcDialog::EphemerisList.count();
-	if (fsize>0) // The array of data is not empty - good news!
+	if (fsize==0) return;
+
+	StelProjectorP prj;
+	if (getFlagEphemerisHorizontalCoordinates())
+		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	else
+		prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+
+	float size, shift, baseSize = 4.f;
+	const bool showDates = getFlagEphemerisDates();
+	const bool showMagnitudes = getFlagEphemerisMagnitudes();
+	const bool showSkippedData = getFlagEphemerisSkipData();
+	const bool skipMarkers = getFlagEphemerisSkipMarkers();
+	const int dataStep = getEphemerisDataStep();
+	const int sizeCoeff = getEphemerisLineThickness() - 1;
+	QString info = "";
+	Vec3d win;
+	Vec3f colorMarker;
+
+	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
+		baseSize = 3.f; // The line lies through center of marker
+
+	for (int i =0; i < fsize; i++)
 	{
-		StelProjectorP prj;
-		if (getFlagEphemerisHorizontalCoordinates())
-			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		else
-			prj = core->getProjection(StelCore::FrameJ2000);
-		StelPainter sPainter(prj);
+		// Check visibility of pointer
+		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
+			continue;
 
-		float size, shift, baseSize = 4.f;
-		const bool showDates = getFlagEphemerisDates();
-		const bool showMagnitudes = getFlagEphemerisMagnitudes();
-		const bool showSkippedData = getFlagEphemerisSkipData();
-		const bool skipMarkers = getFlagEphemerisSkipMarkers();
-		const int dataStep = getEphemerisDataStep();
-		const int sizeCoeff = getEphemerisLineThickness() - 1;
-		QString info = "";
-		Vec3d win;
-		Vec3f colorMarker;
-
-		if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
-			baseSize = 3.f; // The line lies through center of marker
-
-		for (int i =0; i < fsize; i++)
+		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
-			// Check visibility of pointer
-			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
+			colorMarker = getEphemerisSelectedMarkerColor();
+			size = 6.f;
+		}
+		else
+		{
+			colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
+			size = baseSize;
+		}
+		size += sizeCoeff; //
+		sPainter.setColor(colorMarker);
+		sPainter.setBlending(true, GL_ONE, GL_ONE);
+		texEphemerisMarker->bind();
+		if (skipMarkers)
+		{
+			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
+				continue;
+		}
+		sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
+
+		if (showDates || showMagnitudes)
+		{
+			if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 				continue;
 
-			if (i == AstroCalcDialog::DisplayedPositionIndex)
-			{
-				colorMarker = getEphemerisSelectedMarkerColor();
-				size = 6.f;
-			}
-			else
-			{
-				colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
-				size = baseSize;
-			}
-			size += sizeCoeff; //
-			sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
-			sPainter.setBlending(true, GL_ONE, GL_ONE);
-			texEphemerisMarker->bind();
-			if (skipMarkers)
-			{
-				if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
-					continue;
-			}
-			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
+			shift = 3.f + size/1.6f;
+			if (showDates && showMagnitudes)
+				info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisList[i].objDateStr, QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2));
+			if (showDates && !showMagnitudes)
+				info = AstroCalcDialog::EphemerisList[i].objDateStr;
+			if (!showDates && showMagnitudes)
+				info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
 
-			if (showDates || showMagnitudes)
-			{
-				if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
-					continue;
-
-				shift = 3.f + size/1.6f;
-				if (showDates && showMagnitudes)
-					info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisList[i].objDateStr, QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2));
-				if (showDates && !showMagnitudes)
-					info = AstroCalcDialog::EphemerisList[i].objDateStr;
-				if (!showDates && showMagnitudes)
-					info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
-
-				sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);				
-			}
+			sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 		}
 	}
 }
@@ -1317,116 +1316,116 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 void SolarSystem::drawEphemerisLine(const StelCore *core)
 {
 	const int size = AstroCalcDialog::EphemerisList.count();
-	if (size>0) // The array of data is not empty - good news!
+	if (size==0) return;
+
+	// The array of data is not empty - good news!
+	StelProjectorP prj;
+	if (getFlagEphemerisHorizontalCoordinates())
+		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	else
+		prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+
+	const float oldLineThickness=sPainter.getLineWidth();
+	const float lineThickness = getEphemerisLineThickness();
+	if (!fuzzyEquals(lineThickness, oldLineThickness))
+		sPainter.setLineWidth(lineThickness);
+
+	Vec3f color;
+	QVector<Vec3d> vertexArray;
+	QVector<Vec4f> colorArray;
+	const int limit = getEphemerisDataLimit();
+	const int nsize = static_cast<int>(size/limit);
+	vertexArray.resize(nsize);
+	colorArray.resize(nsize);
+	for (int j=0; j<limit; j++)
 	{
-		StelProjectorP prj;
-		if (getFlagEphemerisHorizontalCoordinates())
-			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		else
-			prj = core->getProjection(StelCore::FrameJ2000);
-		StelPainter sPainter(prj);
-
-		int lineThickness = getEphemerisLineThickness();
-		if (lineThickness>1)
-			sPainter.setLineWidth(lineThickness); // set line thickness
-
-		Vec3f color;
-		QVector<Vec3d> vertexArray;
-		QVector<Vec4f> colorArray;
-		const int limit = getEphemerisDataLimit();
-		const int nsize = static_cast<int>(size/limit);
-		vertexArray.resize(nsize);
-		colorArray.resize(nsize);
-		for (int j=0; j<limit; j++)
+		for (int i =0; i < nsize; i++)
 		{
-			for (int i =0; i < nsize; i++)
-			{
-				color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
-				colorArray[i].set(color[0], color[1], color[2], 1.f);
-				vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
-			}
-			sPainter.drawPath(vertexArray, colorArray);
+			color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
+			colorArray[i].set(color[0], color[1], color[2], 1.f);
+			vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
 		}
-
-		if (lineThickness>1)
-			sPainter.setLineWidth(1); // restore line thickness
+		sPainter.drawPath(vertexArray, colorArray);
 	}
+
+	if (!fuzzyEquals(lineThickness, oldLineThickness))
+		sPainter.setLineWidth(oldLineThickness); // restore line thickness
 }
 
 void SolarSystem::fillEphemerisDates()
 {
 	const int fsize = AstroCalcDialog::EphemerisList.count();
-	if (fsize>0) // The array of data is not empty - good news!
+	if (fsize==0) return;
+
+	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	const bool showSmartDates = getFlagEphemerisSmartDates();
+	double JD = AstroCalcDialog::EphemerisList.first().objDate;
+	bool withTime = (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-JD<1.0));
+
+	int fYear, fMonth, fDay, sYear, sMonth, sDay, h, m, s;
+	QString info;
+	const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*0.041666666666;
+	StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
+	bool sFlag = true;
+	sYear = fYear;
+	sMonth = fMonth;
+	sDay = fDay;
+	const bool showSkippedData = getFlagEphemerisSkipData();
+	const int dataStep = getEphemerisDataStep();
+
+	for (int i = 0; i < fsize; i++)
 	{
-		StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-		const bool showSmartDates = getFlagEphemerisSmartDates();
-		double JD = AstroCalcDialog::EphemerisList.first().objDate;
-		bool withTime = (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-JD<1.0));
-
-		int fYear, fMonth, fDay, sYear, sMonth, sDay, h, m, s;
-		QString info;
-		const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*0.041666666666;
+		JD = AstroCalcDialog::EphemerisList[i].objDate;
 		StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
-		bool sFlag = true;
-		sYear = fYear;
-		sMonth = fMonth;
-		sDay = fDay;
-		const bool showSkippedData = getFlagEphemerisSkipData();
-		const int dataStep = getEphemerisDataStep();
 
-		for (int i = 0; i < fsize; i++)
+		if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
+			continue;
+
+		if (showSmartDates)
 		{
-			JD = AstroCalcDialog::EphemerisList[i].objDate;
-			StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
+			if (sFlag)
+				info = QString("%1").arg(fYear);
 
-			if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
-				continue;
+			if (info.isEmpty() && !sFlag && fYear!=sYear)
+				info = QString("%1").arg(fYear);
 
-			if (showSmartDates)
-			{
-				if (sFlag)
-					info = QString("%1").arg(fYear);
+			if (!info.isEmpty())
+				info.append(QString("/%1").arg(localeMgr->romanMonthName(fMonth)));
+			else if (fMonth!=sMonth)
+				info = QString("%1").arg(localeMgr->romanMonthName(fMonth));
 
-				if (info.isEmpty() && !sFlag && fYear!=sYear)
-					info = QString("%1").arg(fYear);
-
-				if (!info.isEmpty())
-					info.append(QString("/%1").arg(localeMgr->romanMonthName(fMonth)));
-				else if (fMonth!=sMonth)
-					info = QString("%1").arg(localeMgr->romanMonthName(fMonth));
-
-				if (!info.isEmpty())
-					info.append(QString("/%1").arg(fDay));
-				else
-					info = QString("%1").arg(fDay);
-
-				if (withTime) // very short step
-				{
-					if (fDay==sDay && !sFlag)
-						info.clear();
-
-					StelUtils::getTimeFromJulianDay(JD+shift, &h, &m, &s);
-					if (!info.isEmpty())
-						info.append(QString(" %1:%2").arg(h).arg(m));
-					else
-						info = QString("%1:%2").arg(h).arg(m);
-				}
-
-				AstroCalcDialog::EphemerisList[i].objDateStr = info;
-				info.clear();
-				sYear = fYear;
-				sMonth = fMonth;
-				sDay = fDay;
-				sFlag = false;
-			}
+			if (!info.isEmpty())
+				info.append(QString("/%1").arg(fDay));
 			else
+				info = QString("%1").arg(fDay);
+
+			if (withTime) // very short step
 			{
-				// OK, let's use standard formats for date and time (as defined for whole planetarium)
-				if (withTime)
-					AstroCalcDialog::EphemerisList[i].objDateStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+				if (fDay==sDay && !sFlag)
+					info.clear();
+
+				StelUtils::getTimeFromJulianDay(JD+shift, &h, &m, &s);
+				if (!info.isEmpty())
+					info.append(QString(" %1:%2").arg(h).arg(m));
 				else
-					AstroCalcDialog::EphemerisList[i].objDateStr = localeMgr->getPrintableDateLocal(JD);
+					info = QString("%1:%2").arg(h).arg(m);
 			}
+
+			AstroCalcDialog::EphemerisList[i].objDateStr = info;
+			info.clear();
+			sYear = fYear;
+			sMonth = fMonth;
+			sDay = fDay;
+			sFlag = false;
+		}
+		else
+		{
+			// OK, let's use standard formats for date and time (as defined for whole planetarium)
+			if (withTime)
+				AstroCalcDialog::EphemerisList[i].objDateStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+			else
+				AstroCalcDialog::EphemerisList[i].objDateStr = localeMgr->getPrintableDateLocal(JD);
 		}
 	}
 }

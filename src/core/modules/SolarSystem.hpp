@@ -831,39 +831,51 @@ private slots:
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
 
+	// TODO: minimal documentation
 	void setFlagEphemerisMarkers(bool b);
 	bool getFlagEphemerisMarkers() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisLine(bool b);
 	bool getFlagEphemerisLine() const;
 
+	// TODO: minimal documentation
 	void setEphemerisLineThickness(int v);
 	int getEphemerisLineThickness() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisHorizontalCoordinates(bool b);
 	bool getFlagEphemerisHorizontalCoordinates() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisDates(bool b);
 	bool getFlagEphemerisDates() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisMagnitudes(bool b);
 	bool getFlagEphemerisMagnitudes() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisSkipData(bool b);
 	bool getFlagEphemerisSkipData() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisSkipMarkers(bool b);
 	bool getFlagEphemerisSkipMarkers() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisSmartDates(bool b);
 	bool getFlagEphemerisSmartDates() const;
 
+	// TODO: minimal documentation
 	void setFlagEphemerisScaleMarkers(bool b);
 	bool getFlagEphemerisScaleMarkers() const;
 
+	// TODO: minimal documentation
 	void setEphemerisDataStep(int step);
 	int getEphemerisDataStep() const;
 
+	// TODO: minimal documentation
 	void setEphemerisDataLimit(int limit);
 	int getEphemerisDataLimit() const;
 
@@ -894,6 +906,8 @@ private slots:
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
 
+	// TODO: Document!
+	// Assumes data... to exist, adds (other columns) into the ephemeris list.
 	void fillEphemerisDates();
 
 private:
@@ -975,6 +989,7 @@ private:
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
 	StelTextureSP texEphemerisMarker;
+	StelTextureSP texEphemerisCometMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -994,8 +1009,8 @@ private:
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;
-	int ephemerisDataStep;
-	int ephemerisDataLimit;
+	int ephemerisDataStep;				// TODO: EXPLAIN?
+	int ephemerisDataLimit;				// TODO: EXPLAIN?
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
