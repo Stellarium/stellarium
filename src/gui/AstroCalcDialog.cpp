@@ -1569,7 +1569,6 @@ void AstroCalcDialog::generateEphemeris()
 		return;
 
 	int idxRow = 0, colorIndex = 0;
-	double currentStep;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();		
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
@@ -1581,129 +1580,48 @@ void AstroCalcDialog::generateEphemeris()
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}
-	switch (ui->ephemerisStepComboBox->currentData().toInt())
-	{
-		case 0: // custom time step
-			currentStep = getCustomTimeStep();
-			break;
-		case 1:
-			currentStep = 10. * StelCore::JD_MINUTE;
-			break;
-		case 2:
-			currentStep = 30. * StelCore::JD_MINUTE;
-			break;
-		case 3:
-			currentStep = StelCore::JD_HOUR;
-			break;
-		case 4:
-			currentStep = 6. * StelCore::JD_HOUR;
-			break;
-		case 5:
-			currentStep = 12. * StelCore::JD_HOUR;
-			break;
-		case 6:
-			currentStep = solarDay;
-			break;
-		case 7:
-			currentStep = 5. * solarDay;
-			break;
-		case 8:
-			currentStep = 10. * solarDay;
-			break;
-		case 9:
-			currentStep = 15. * solarDay;
-			break;
-		case 10:
-			currentStep = 30. * solarDay;
-			break;
-		case 11:
-			currentStep = 60. * solarDay;
-			break;
-		case 12:
-			currentStep = StelCore::JD_DAY;
-			break;
-		case 13:
-			currentStep = 5. * StelCore::JD_DAY;
-			break;
-		case 14:
-			currentStep = 10. * StelCore::JD_DAY;
-			break;
-		case 15:
-			currentStep = 15. * StelCore::JD_DAY;
-			break;
-		case 16:
-			currentStep = 30. * StelCore::JD_DAY;
-			break;
-		case 17:
-			currentStep = 60. * StelCore::JD_DAY;
-			break;
-		case 18:
-			currentStep = siderealDay;
-			break;
-		case 19:
-			currentStep = 5. * siderealDay;
-			break;
-		case 20:
-			currentStep = 10. * siderealDay;
-			break;
-		case 21:
-			currentStep = 15. * siderealDay;
-			break;
-		case 22:
-			currentStep = 30. * siderealDay;
-			break;
-		case 23:
-			currentStep = 60. * siderealDay;
-			break;
-		case 24:
-			currentStep = 100. * solarDay;
-			break;
-		case 25:
-			currentStep = 100. * siderealDay;
-			break;
-		case 26:
-			currentStep = 100. * StelCore::JD_DAY;
-			break;
-		case 27:
-			currentStep = siderealYear*solarDay;
-			break;
-		case 28: // 1 Julian year
-			currentStep = 365.25*solarDay;
-			break;
-		case 29: // 1 Gaussian year
-			currentStep = 365.2568983*solarDay;
-			break;
-		case 30: // 1 synodic month
-			currentStep = 29.530588853*solarDay;
-			break;
-		case 31: // 1 draconic month
-			currentStep = 27.212220817*solarDay;
-			break;
-		case 32: // 1 mean tropical month
-			currentStep = 27.321582241*solarDay;
-			break;
-		case 33: // 1 anomalistic month
-			currentStep = 27.554549878*solarDay;
-			break;
-		case 34: // 1 anomalistic year
-			currentStep = 365.259636*solarDay;
-			break;
-		case 35: // 1 saros (223 synodic months)
-			currentStep = 6585.321314219*solarDay;
-			break;
-		case 36:
-			currentStep = 500. * siderealDay;
-			break;
-		case 37:
-			currentStep = 500. * solarDay;
-			break;
-		case 38:
-			currentStep = StelCore::JD_MINUTE;
-			break;
-		default:
-			currentStep = solarDay;
-			break;
-	}
+	const QMap<int, double>timeStepMap = {
+		{ 0, getCustomTimeStep() },		// custom time step
+		{ 1, 10. * StelCore::JD_MINUTE },
+		{ 2, 30. * StelCore::JD_MINUTE },
+		{ 3, StelCore::JD_HOUR },
+		{ 4, 6. * StelCore::JD_HOUR },
+		{ 5, 12. * StelCore::JD_HOUR },
+		{ 6, solarDay },
+		{ 7, 5. * solarDay },
+		{ 8, 10. * solarDay },
+		{ 9, 15. * solarDay },
+		{10, 30. * solarDay },
+		{11, 60. * solarDay },
+		{12, StelCore::JD_DAY },
+		{13, 5. * StelCore::JD_DAY },
+		{14, 10. * StelCore::JD_DAY },
+		{15, 15. * StelCore::JD_DAY },
+		{16, 30. * StelCore::JD_DAY },
+		{17, 60. * StelCore::JD_DAY },
+		{18, siderealDay },
+		{19, 5. * siderealDay },
+		{20, 10. * siderealDay },
+		{21, 15. * siderealDay },
+		{22, 30. * siderealDay },
+		{23, 60. * siderealDay },
+		{24, 100. * solarDay },
+		{25, 100. * siderealDay },
+		{26, 100. * StelCore::JD_DAY },
+		{27, siderealYear*solarDay },
+		{28, 365.25*solarDay },			// 1 Julian year
+		{29, 365.2568983*solarDay },		// 1 Gaussian year
+		{30, 29.530588853*solarDay },	// 1 synodic month
+		{31, 27.212220817*solarDay },	// 1 draconic month
+		{32, 27.321582241*solarDay },	// 1 mean tropical month
+		{33, 27.554549878*solarDay },	// 1 anomalistic month
+		{34, 365.259636*solarDay },		// 1 anomalistic year
+		{35, 6585.321314219*solarDay },	// 1 saros (223 synodic months)
+		{36, 500. * siderealDay },
+		{37, 500. * solarDay },
+		{38, StelCore::JD_MINUTE }
+	};
+	double currentStep = timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
 
 	const double currentJD = core->getJD(); // save current JD
 	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());	
