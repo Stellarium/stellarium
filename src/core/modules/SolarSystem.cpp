@@ -1275,6 +1275,8 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
+		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
+		QString debugStr; // Used temporarily for development
 		isComet=AstroCalcDialog::EphemerisList[i].colorIndex == 7; // HACK. Make sure this index value remains.
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
@@ -1301,9 +1303,21 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		}
 		Vec3d win;
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
-			sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 180.f+AstroCalcDialog::EphemerisList[i].solarAngle*M_180_PIf);
-		//drawSprite2dMode(float x, float y, float radius, float rotation);
-		//sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
+		{
+			if (isComet)
+			{
+				// compute solarAngle in screen space.
+				Vec3d sunWin;
+				prj->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
+				// TODO: In some projections, we may need to test result and flip/mirror the angle, or deal with wrap-around effects.
+				// E.g., in cylindrical mode, the comet icon will flip as soon as the corresponding sun position wraps around the screen edge.
+				solarAngle=M_180_PIf*static_cast<float>(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
+				// This will show projected positions and angles usable in labels.
+				debugStr = QString("Sun: %1/%2 Obj: %3/%4 -->%5").arg(QString::number(sunWin[0]), QString::number(sunWin[1]), QString::number(win[0]), QString::number(win[1]), QString::number(solarAngle));
+			}
+			//sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 180.f+AstroCalcDialog::EphemerisList[i].solarAngle*M_180_PIf);
+			sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 270.f-solarAngle);
+		}
 
 		if (showDates || showMagnitudes)
 		{
@@ -1318,6 +1332,8 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			if (!showDates && showMagnitudes)
 				info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
 
+			// Activate for debug labels.
+			//info=debugStr;
 			sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 		}
 	}
