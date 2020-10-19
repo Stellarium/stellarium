@@ -12,7 +12,8 @@
 # Song Li <boltomli@gmail.com>, 2018
 # Allen Zhong <zbl3041992@gmail.com>, 2019
 # 殳玮 孙 <itun@qq.com>, 2020
-# 
+# Ray <ray@isrc.iscas.ac.cn>, 2020
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -7899,180 +7900,186 @@ msgid ""
 msgstr ""
 "2020年3月20日的梅西叶马拉松。脚本的数据取自高兴的观测记录：http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:744
+#: src/translations.h:741
+msgid ""
+"Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments. Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME. A data file is also written, you can set its name with environment variable OUTPUT_DATA. Please read the script to understand how to apply it to your projects."
+msgstr ""
+"从当前场景中创建北、东、南、西、上、下六个方向的瓦片（tile），这些瓦片后续可以应用在 Unity3D 之类 3D 环境里充当天空立方体。瓦片文件的保存目录和文件名可以通过环境变量 STEL_SKYBOX_DIR 和 STEL_SKYBOX_BASENAME 来设置。此脚本也会将输出内容写入到一个 data 文件里，你可以通过设置环境变量 OUTPUT_DATA 来配置这个文件的名称。想要了解如何在你的项目中应用 data 文件，请阅读这个脚本的源代码。"
+
+#: src/translations.h:745
 msgid "&Undo"
 msgstr "撤销(&U)"
 
-#: src/translations.h:745
+#: src/translations.h:746
 msgid "&Redo"
 msgstr "重做(&R)"
 
-#: src/translations.h:746
+#: src/translations.h:747
 msgid "Cu&t"
 msgstr "剪切(&T)"
 
-#: src/translations.h:747
+#: src/translations.h:748
 msgid "&Copy"
 msgstr "复制(&C)"
 
-#: src/translations.h:748
+#: src/translations.h:749
 msgid "&Paste"
 msgstr "粘贴(&P)"
 
-#: src/translations.h:749 plugins/Oculars/src/ui_ocularDialog.h:1543
+#: src/translations.h:750 plugins/Oculars/src/ui_ocularDialog.h:1543
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
 #: plugins/Oculars/src/ui_ocularDialog.h:1558
 #: plugins/Oculars/src/ui_ocularDialog.h:1577
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:750
+#: src/translations.h:751
 msgid "Select All"
 msgstr "全选"
 
-#: src/translations.h:751
+#: src/translations.h:752
 msgid "Look in:"
 msgstr "浏览:"
 
-#: src/translations.h:752
+#: src/translations.h:753
 msgid "Directory:"
 msgstr "目录："
 
-#: src/translations.h:753
+#: src/translations.h:754
 msgid "Folder"
 msgstr "文件夹"
 
-#: src/translations.h:754
+#: src/translations.h:755
 msgid "&Choose"
 msgstr "选择(&C)"
 
-#: src/translations.h:755 src/ui_configurationDialog.h:1801
+#: src/translations.h:756 src/ui_configurationDialog.h:1801
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:647
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:756
+#: src/translations.h:757
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: src/translations.h:757
+#: src/translations.h:758
 msgid "Files of type:"
 msgstr "文件类型："
 
-#: src/translations.h:758
+#: src/translations.h:759
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:759
+#: src/translations.h:760
 msgid "Directories"
 msgstr "目录"
 
-#: src/translations.h:760
+#: src/translations.h:761
 msgid "Computer"
 msgstr "计算机"
 
-#: src/translations.h:761
+#: src/translations.h:762
 msgid "&Open"
 msgstr "打开(&O)"
 
-#: src/translations.h:762
+#: src/translations.h:763
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/translations.h:763
+#: src/translations.h:764
 msgid "File &name:"
 msgstr "文件名(&F):"
 
-#: src/translations.h:764
+#: src/translations.h:765
 msgid "Copy &Link Location"
 msgstr "复制链接地址(&L)"
 
-#: src/translations.h:765
+#: src/translations.h:766
 msgid "Abort"
 msgstr "取消"
 
-#: src/translations.h:766
+#: src/translations.h:767
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/translations.h:767
+#: src/translations.h:768
 msgid "&Basic colors"
 msgstr "简单颜色(&B)"
 
-#: src/translations.h:768
+#: src/translations.h:769
 msgid "&Pick Screen Color"
 msgstr "选择颜色(&P)"
 
-#: src/translations.h:769
+#: src/translations.h:770
 msgid "&Custom colors"
 msgstr "自定义颜色(&C)"
 
-#: src/translations.h:770
+#: src/translations.h:771
 msgid "&Add to Custom Colors"
 msgstr "添加到自定义颜色(&A)"
 
-#: src/translations.h:771
+#: src/translations.h:772
 msgid "Hu&e:"
 msgstr "色调(&E):"
 
-#: src/translations.h:772
+#: src/translations.h:773
 msgid "&Sat:"
 msgstr "饱和度(&S):"
 
-#: src/translations.h:773
+#: src/translations.h:774
 msgid "&Val:"
 msgstr "明度(&V):"
 
-#: src/translations.h:774
+#: src/translations.h:775
 msgid "&Red:"
 msgstr "红(&R):"
 
-#: src/translations.h:775
+#: src/translations.h:776
 msgid "&Green:"
 msgstr "绿(&G):"
 
-#: src/translations.h:776
+#: src/translations.h:777
 msgid "Bl&ue:"
 msgstr "蓝(&U):"
 
-#: src/translations.h:777
+#: src/translations.h:778
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: src/translations.h:778
+#: src/translations.h:779
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "光标在%1, %2 按ESC取消"
 
-#: src/translations.h:779
+#: src/translations.h:780
 msgid "Back"
 msgstr "后退"
 
-#: src/translations.h:780
+#: src/translations.h:781
 msgid "Forward"
 msgstr "前进"
 
-#: src/translations.h:781
+#: src/translations.h:782
 msgid "Parent Directory"
 msgstr "上级目录"
 
-#: src/translations.h:782
+#: src/translations.h:783
 msgid "Create New Folder"
 msgstr "创建新文件夹"
 
-#: src/translations.h:783
+#: src/translations.h:784
 msgid "List View"
 msgstr "列表视图"
 
-#: src/translations.h:784
+#: src/translations.h:785
 msgid "Detail View"
 msgstr "详细视图"
 
-#: src/translations.h:785
+#: src/translations.h:786
 msgid "Recent Places"
 msgstr "最近的位置"
 
-#: src/translations.h:786
+#: src/translations.h:787
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8081,39 +8088,39 @@ msgstr ""
 "%1 已经存在。\n"
 "想替换它吗?"
 
-#: src/translations.h:787
+#: src/translations.h:788
 msgid "&Yes"
 msgstr "是(&Y)"
 
-#: src/translations.h:788
+#: src/translations.h:789
 msgid "&No"
 msgstr "否(&N)"
 
-#: src/translations.h:789
+#: src/translations.h:790
 msgid "&Select All"
 msgstr "全选(&S)"
 
-#: src/translations.h:790
+#: src/translations.h:791
 msgid "&Step up"
 msgstr "增加(&S)"
 
-#: src/translations.h:791
+#: src/translations.h:792
 msgid "Step &down"
 msgstr "减少(&D)"
 
-#: src/translations.h:792
+#: src/translations.h:793
 msgid "&Rename"
 msgstr "&重命名"
 
-#: src/translations.h:793
+#: src/translations.h:794
 msgid "&Delete"
 msgstr "&删除"
 
-#: src/translations.h:794
+#: src/translations.h:795
 msgid "&New Folder"
 msgstr "&新文件夹"
 
-#: src/translations.h:795
+#: src/translations.h:796
 msgid "Show &hidden files"
 msgstr "显示&隐藏文件"
 
