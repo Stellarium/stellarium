@@ -2,7 +2,7 @@
 # Copyright (C) YEAR Stellarium's team
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # Haomin Jin <986394140@qq.com>, 2017
@@ -22650,3 +22650,15 @@ msgstr "Vts"
 #: plugins/Vts/src/Vts.cpp:155
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "允许使用Stellarium作为法国国家空间研究中心(CNES) VTS的插件。"
+
+#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:48
+msgid "Extra Calendar"
+msgstr "附加日历"
+
+#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:51
+msgid "Display various calendars. Currently support Chinese Lunisolar (1900-2100)."
+msgstr "显示多种日历。目前支持中国农历（1900-2100）。"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:146
+msgid "Chinese Calendar"
+msgstr "中国农历"
