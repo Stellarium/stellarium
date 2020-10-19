@@ -299,25 +299,43 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 		// Allow empty and comment lines where first char (after optional blanks) is #
 		QRegExp commentRx("^(\\s*#.*|\\s*)$");
 		reference = QString("<h3>%1</h3><ul>").arg(q_("References"));
+		int totalRecords=0;
+		int readOk=0;
+		int lineNumber=0;
 		while(!refFile.atEnd())
 		{
 			record = QString::fromUtf8(refFile.readLine()).trimmed();
+			lineNumber++;
 			if (commentRx.exactMatch(record))
 				continue;
 
+			totalRecords++;
 			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 			QStringList ref = record.split(QRegExp("\\|"), Qt::KeepEmptyParts);
 			#else
 			QStringList ref = record.split(QRegExp("\\|"), QString::KeepEmptyParts);
 			#endif
 			// 1 - URID; 2 - Reference; 3 - URL (optional)
-			if (ref.at(2).isEmpty())
+			if (ref.count()<2)
+				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in references file" << QDir::toNativeSeparators(referencePath);
+			else if (ref.count()<3)
+			{
+				qWarning() << "WARNING - record at line" << lineNumber << "in references file" << QDir::toNativeSeparators(referencePath) << " has wrong format (RefID: " << ref.at(0) << ")! Let's use fallback mode...";
 				reference.append(QString("<li>%1</li>").arg(ref.at(1)));
+				readOk++;
+			}
 			else
-				reference.append(QString("<li><a href='%2' class='external text' rel='nofollow'>%1</a></li>").arg(ref.at(1), ref.at(2)));
+			{
+				if (ref.at(2).isEmpty())
+					reference.append(QString("<li>%1</li>").arg(ref.at(1)));
+				else
+					reference.append(QString("<li><a href='%2' class='external text' rel='nofollow'>%1</a></li>").arg(ref.at(1), ref.at(2)));
+				readOk++;
+			}
 		}
 		refFile.close();
 		reference.append("</ul>");
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "references";
 	}
 	return reference;
 }
