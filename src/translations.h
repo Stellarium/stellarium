@@ -738,7 +738,8 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Saturn.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Uranus.");
 		N_("Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm");
-		
+		N_("Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments. Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME. A data file is also written, you can set its name with environment variable OUTPUT_DATA. Please read the script to understand how to apply it to your projects.");
+
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
