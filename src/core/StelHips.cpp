@@ -71,7 +71,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
 	planetarySurvey(false),
-	tiles(1000),
+	tiles(1000 * 512 * 512), // Cache max cost in pixels (enough for 1000 512x512 tiles).
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
@@ -282,7 +282,8 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
-		tiles.insert(uid, tile);
+		int tileWidth = getPropertyInt("hips_tile_width", 512);
+		tiles.insert(uid, tile, tileWidth * tileWidth);
 	}
 	return tile;
 }
