@@ -98,7 +98,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
-			hipsFrame = properties["hips_frame"].toString();
+			hipsFrame = properties["hips_frame"].toString().toLower();
 
 		QStringList DSSSurveys;
 		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
