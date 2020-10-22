@@ -3,9 +3,9 @@
 
 typedef struct Gregorian
 {
-				int day;
-				int month;
-				int year;
+	int day;
+	int month;
+	int year;
 } Gregorian;
 
 #endif /* GREGORIAN_HPP */
