@@ -22656,9 +22656,319 @@ msgid "Extra Calendar"
 msgstr "附加日历"
 
 #: plugins/ExtraCalendar/src/ExtraCalendar.cpp:51
-msgid "Display various calendars. Currently support Chinese calendar (1900-2100)."
-msgstr "显示多种日历。目前支持中国农历（1900-2100）。"
+msgid "Display various calendars. Currently support Chinese calendar (1901-2100)."
+msgstr "显示多种日历。目前支持中国农历（1901-2100）。"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:130
+msgctxt "day"
+msgid "01"
+msgstr "初一"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:131
+msgctxt "day"
+msgid "02"
+msgstr "初二"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:132
+msgctxt "day"
+msgid "03"
+msgstr "初三"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:133
+msgctxt "day"
+msgid "04"
+msgstr "初四"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:134
+msgctxt "day"
+msgid "05"
+msgstr "初五"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:135
+msgctxt "day"
+msgid "06"
+msgstr "初六"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:136
+msgctxt "day"
+msgid "07"
+msgstr "初七"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:137
+msgctxt "day"
+msgid "08"
+msgstr "初八"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:138
+msgctxt "day"
+msgid "09"
+msgstr "初九"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:139
+msgctxt "day"
+msgid "10"
+msgstr "初十"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:140
+msgctxt "day"
+msgid "11"
+msgstr "十一"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:141
+msgctxt "day"
+msgid "12"
+msgstr "十二"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:142
+msgctxt "day"
+msgid "13"
+msgstr "十三"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:143
+msgctxt "day"
+msgid "14"
+msgstr "十四"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:144
+msgctxt "day"
+msgid "15"
+msgstr "十五"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:145
+msgctxt "day"
+msgid "16"
+msgstr "十六"
 
 #: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:146
+msgctxt "day"
+msgid "17"
+msgstr "十七"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:147
+msgctxt "day"
+msgid "18"
+msgstr "十八"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:148
+msgctxt "day"
+msgid "19"
+msgstr "十九"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:149
+msgctxt "day"
+msgid "20"
+msgstr "二十"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:150
+msgctxt "day"
+msgid "21"
+msgstr "廿一"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:151
+msgctxt "day"
+msgid "22"
+msgstr "廿二"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:152
+msgctxt "day"
+msgid "23"
+msgstr "廿三"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:153
+msgctxt "day"
+msgid "24"
+msgstr "廿四"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:154
+msgctxt "day"
+msgid "25"
+msgstr "廿五"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:155
+msgctxt "day"
+msgid "26"
+msgstr "廿六"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:156
+msgctxt "day"
+msgid "27"
+msgstr "廿七"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:157
+msgctxt "day"
+msgid "28"
+msgstr "廿八"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:158
+msgctxt "day"
+msgid "29"
+msgstr "廿九"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:159
+msgctxt "day"
+msgid "30"
+msgstr "三十"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:163
+msgctxt "month"
+msgid "01"
+msgstr "正"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:164
+msgctxt "month"
+msgid "02"
+msgstr "二"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:165
+msgctxt "month"
+msgid "03"
+msgstr "三"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:166
+msgctxt "month"
+msgid "04"
+msgstr "四"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:167
+msgctxt "month"
+msgid "05"
+msgstr "五"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:168
+msgctxt "month"
+msgid "06"
+msgstr "六"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:169
+msgctxt "month"
+msgid "07"
+msgstr "七"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:170
+msgctxt "month"
+msgid "08"
+msgstr "八"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:171
+msgctxt "month"
+msgid "09"
+msgstr "九"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:172
+msgctxt "month"
+msgid "10"
+msgstr "十"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:173
+msgctxt "month"
+msgid "11"
+msgstr "十一"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:174
+msgctxt "month"
+msgid "12"
+msgstr "腊"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:178
+msgid "Geng"
+msgstr "庚"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:179
+msgid "Xin"
+msgstr "辛"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:180
+msgid "Ren"
+msgstr "壬"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:181
+msgid "Gui"
+msgstr "癸"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:182
+msgid "Jia"
+msgstr "甲"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:183
+msgid "Yi"
+msgstr "乙"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:184
+msgid "Bing"
+msgstr "丙"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:185
+msgid "Ding"
+msgstr "丁"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:186
+msgid "Wu"
+msgstr "戊"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:187
+msgid "Ji"
+msgstr "己"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:191
+msgid "-zi year of the Mouse"
+msgstr "子鼠年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:192
+msgid "-chou year of the Ox"
+msgstr "丑牛年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:193
+msgid "-yin year of the Tiger"
+msgstr "寅虎年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:194
+msgid "-mao year of the Rabbit"
+msgstr "卯兔年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:195
+msgid "-chen year of the Dragon"
+msgstr "辰龙年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:196
+msgid "-si year of the Snake"
+msgstr "巳蛇年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:197
+msgid "-wu year of the Horse"
+msgstr "午马年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:198
+msgid "-wei year of the Goat"
+msgstr "未羊年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:199
+msgid "-shen year of the Monkey"
+msgstr "申猴年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:200
+msgid "-you year of the Rooster"
+msgstr "酉鸡年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:201
+msgid "-xu year of the Dog"
+msgstr "戌狗年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:202
+msgid "-hai year of the Pig"
+msgstr "亥猪年"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:205
 msgid "Chinese Calendar"
 msgstr "中国农历"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:210
+msgid "Only support years from 1901 to 2100"
+msgstr "只支持 1901-2100 之间的年份"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:218
+msgid "[Leap]"
+msgstr "闰"
+
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:220
+msgid "-"
+msgstr "月"

@@ -9,28 +9,6 @@
 #include <QString>
 #include <QDebug>
 
-static const char* days[] =
-{
-	"初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",
-	"十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
-	"廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"
-};
-
-static const char* months[] =
-{
-	"正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"
-};
-
-static const char* zodiacX[] =
-{
-	"庚", "辛", "壬", "癸", "甲", "乙", "丙", "丁", "戊", "己"
-};
-
-static const char* zodiacY[] =
-{
-	"子", "丑", "寅", "卯", "辰", "巳", "无", "为", "申", "酉", "戌", "亥"
-};
-
 static int chineseMonthDays[] =
 {
 	0x75f, 0x1694, 0x16aa, 0x4ad5, 0xab6, 0xc4b7, 0x4ae, 0xa56, 0xb52a, 0x1d2a, 0xd54, 0x75aa,
@@ -148,22 +126,98 @@ ChineseCalendar getChineseCalendarFromGregorian(Gregorian g)
 
 QString getChineseCalendarDateString(Gregorian* g)
 {
+	QString days[] = {
+		qc_("01", "day"),
+		qc_("02", "day"),
+		qc_("03", "day"),
+		qc_("04", "day"),
+		qc_("05", "day"),
+		qc_("06", "day"),
+		qc_("07", "day"),
+		qc_("08", "day"),
+		qc_("09", "day"),
+		qc_("10", "day"),
+		qc_("11", "day"),
+		qc_("12", "day"),
+		qc_("13", "day"),
+		qc_("14", "day"),
+		qc_("15", "day"),
+		qc_("16", "day"),
+		qc_("17", "day"),
+		qc_("18", "day"),
+		qc_("19", "day"),
+		qc_("20", "day"),
+		qc_("21", "day"),
+		qc_("22", "day"),
+		qc_("23", "day"),
+		qc_("24", "day"),
+		qc_("25", "day"),
+		qc_("26", "day"),
+		qc_("27", "day"),
+		qc_("28", "day"),
+		qc_("29", "day"),
+		qc_("30", "day")
+	};
+
+	QString months[] = {
+		qc_("01", "month"),
+		qc_("02", "month"),
+		qc_("03", "month"),
+		qc_("04", "month"),
+		qc_("05", "month"),
+		qc_("06", "month"),
+		qc_("07", "month"),
+		qc_("08", "month"),
+		qc_("09", "month"),
+		qc_("10", "month"),
+		qc_("11", "month"),
+		qc_("12", "month")
+	};
+
+	QString zodiacX[] = {
+		q_("Geng"),
+		q_("Xin"),
+		q_("Ren"),
+		q_("Gui"),
+		q_("Jia"),
+		q_("Yi"),
+		q_("Bing"),
+		q_("Ding"),
+		q_("Wu"),
+		q_("Ji")
+	};
+
+	QString zodiacY[] = {
+		q_("-zi year of the Mouse"),
+		q_("-chou year of the Ox"),
+		q_("-yin year of the Tiger"),
+		q_("-mao year of the Rabbit"),
+		q_("-chen year of the Dragon"),
+		q_("-si year of the Snake"),
+		q_("-wu year of the Horse"),
+		q_("-wei year of the Goat"),
+		q_("-shen year of the Monkey"),
+		q_("-you year of the Rooster"),
+		q_("-xu year of the Dog"),
+		q_("-hai year of the Pig")
+	};
+
 	QString calendarName(q_("Chinese Calendar"));
 
-	if (g->year < 1901 || g->year > 2099)
+	if (g->year < 1901 || g->year > 2100)
 	{
-		qDebug() << "Chinese calendar only supports years between 1900 and 2100.";
-		return q_("");
+		qDebug() << "Chinese calendar only supports years between 1901 and 2100.";
+		return q_("[%1] %2").arg(calendarName, q_("Only support years from 1901 to 2100"));
 	}
 
 	ChineseCalendar c = getChineseCalendarFromGregorian(*g);
 
-	// We do not need to display Chinese Calendar in languages other than Chinese.
-	return q_("[%1] %2%3年%4%5月%6").arg(
+	// English: 2020-10-21 Geng-zi year of the Mouse, Chinese: 2020年九月初五 庚子鼠年
+	return q_("[%1] %2%3%4%5 %6").arg(
 		calendarName,
-		zodiacX[(c.year - 1900) % 10],
-		zodiacY[(c.year - 1900) % 12],
-		c.isleap ? "闰" : "",
+		c.isleap ? q_("[Leap]") : "",
 		months[c.month - 1],
-		days[c.day - 1]);
+		qc_("-", "month"),
+		days[c.day - 1],
+		zodiacX[(c.year - 1900) % 10] + zodiacY[(c.year - 1900) % 12]);
 }

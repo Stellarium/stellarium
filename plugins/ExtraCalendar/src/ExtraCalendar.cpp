@@ -50,7 +50,7 @@ StelPluginInfo ExtraCalendarStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Extra Calendar");
 	info.authors = "Ray Wang";
 	info.contact = "ray.hackmylife@gmail.com";
-	info.description = N_("Display various calendars. Currently support Chinese calendar (1900-2100).");
+	info.description = N_("Display various calendars. Currently support Chinese calendar (1901-2100).");
 	info.version = EXTRACALENDAR_PLUGIN_VERSION;
 	info.license = EXTRACALENDAR_PLUGIN_LICENSE;
 	return info;
@@ -120,7 +120,7 @@ void ExtraCalendar::draw(StelCore* core)
 	painter.setFont(font);
 	// Draw text at the bottom-right corner
 	painter.drawText(
-   	gui->getSkyGui()->getSkyGuiWidth() * 1.8 - fs.width(),
+   	gui->getSkyGui()->getSkyGuiWidth() * 2 - fs.width() * 2 - 20,
     140,
 		text);
 
