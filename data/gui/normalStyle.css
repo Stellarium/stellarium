@@ -205,12 +205,12 @@ QFrame#TitleBar {
 }
 
 QPushButton#closeStelWindow {
-	border: 0;
-	background: none;
+        border: 1px solid rgb(41, 47, 50); /* Qt 5.15 regression: QBushButton without borders does not respond to clicks */
+        background: none;
 	background-image: url(:/graphicGui/uieCloseButton.png);
 }
 
-QPushButton:hover#closeStelWindow {
+QPushButton:hover#closeStelWindow {        
 	background-image: url(:/graphicGui/uieCloseButton-hover.png);
 }
 
