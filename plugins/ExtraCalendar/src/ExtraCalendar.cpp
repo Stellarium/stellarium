@@ -50,7 +50,7 @@ StelPluginInfo ExtraCalendarStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Extra Calendar");
 	info.authors = "Ray Wang";
 	info.contact = "ray.hackmylife@gmail.com";
-	info.description = N_("Display various calendars. Currently support Chinese calendar (1901-2100).");
+	info.description = N_("Display various calendars. Currently support Chinese calendar.");
 	info.version = EXTRACALENDAR_PLUGIN_VERSION;
 	info.license = EXTRACALENDAR_PLUGIN_LICENSE;
 	return info;

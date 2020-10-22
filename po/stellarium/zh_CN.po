@@ -22651,13 +22651,13 @@ msgstr "Vts"
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "允许使用Stellarium作为法国国家空间研究中心(CNES) VTS的插件。"
 
-#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:48
+#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:50
 msgid "Extra Calendar"
 msgstr "附加日历"
 
-#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:51
-msgid "Display various calendars. Currently support Chinese calendar (1901-2100)."
-msgstr "显示多种日历。目前支持中国农历（1901-2100）。"
+#: plugins/ExtraCalendar/src/ExtraCalendar.cpp:53
+msgid "Display various calendars. Currently support Chinese calendar."
+msgstr "显示多种日历。目前支持中国农历。"
 
 #: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:130
 msgctxt "day"
@@ -22961,9 +22961,9 @@ msgstr "亥猪年"
 msgid "Chinese Calendar"
 msgstr "中国农历"
 
-#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:210
-msgid "Only support years from 1901 to 2100"
-msgstr "只支持 1901-2100 之间的年份"
+#: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:209
+msgid "[%1] Only support years from %2 to %3"
+msgstr "[%1] 只支持 %2-%3 之间的年份"
 
 #: plugins/ExtraCalendar/src/Calendars/Chinese.cpp:218
 msgid "[Leap]"

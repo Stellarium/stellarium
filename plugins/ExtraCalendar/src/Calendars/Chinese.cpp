@@ -204,10 +204,12 @@ QString getChineseCalendarDateString(Gregorian* g)
 
 	QString calendarName(q_("Chinese Calendar"));
 
-	if (g->year < 1901 || g->year > 2100)
+	if (g->year < SUPPORT_YEAR_MIN || g->year > SUPPORT_YEAR_MAX)
 	{
-		qDebug() << "Chinese calendar only supports years between 1901 and 2100.";
-		return q_("[%1] %2").arg(calendarName, q_("Only support years from 1901 to 2100"));
+		QString msg = q_("[%1] Only support years from %2 to %3")
+			.arg(calendarName, QString::number(SUPPORT_YEAR_MIN), QString::number(SUPPORT_YEAR_MAX));
+		qDebug() << msg;
+		return msg;
 	}
 
 	ChineseCalendar c = getChineseCalendarFromGregorian(*g);
