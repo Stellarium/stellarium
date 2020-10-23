@@ -35,6 +35,7 @@
 #include <QString>
 #include <QDebug>
 #include <QStringList>
+#include <QSettings>
 
 StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
 {
@@ -61,6 +62,10 @@ void StelObjectMgr::init()
 	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
 	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
 }
 
 void StelObjectMgr::nextTransit()
