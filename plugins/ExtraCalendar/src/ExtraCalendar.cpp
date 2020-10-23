@@ -119,10 +119,7 @@ void ExtraCalendar::draw(StelCore* core)
 	painter.setColor(1,1,1,1);
 	painter.setFont(font);
 	// Draw text at the bottom-right corner
-	painter.drawText(
-   	gui->getSkyGui()->getSkyGuiWidth() * 2 - fs.width() * 2 - 20,
-    140,
-		text);
+	painter.drawText(gui->getSkyGui()->getSkyGuiWidth() * 2 - fs.width() * 2 - 20, 140, text);
 
 	delete g;
 }
