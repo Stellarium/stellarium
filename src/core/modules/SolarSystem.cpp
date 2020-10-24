@@ -1264,7 +1264,6 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	QString info = "";
 	Vec3d win;
 	Vec3f markerColor;
-	bool isComet=false;
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
@@ -1277,7 +1276,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		QString debugStr; // Used temporarily for development
-		isComet=AstroCalcDialog::EphemerisList[i].colorIndex == 7; // HACK. Make sure this index value remains.
+		const bool isComet=AstroCalcDialog::EphemerisList[i].isComet;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
 			markerColor = getEphemerisSelectedMarkerColor();
