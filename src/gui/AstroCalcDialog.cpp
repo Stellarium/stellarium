@@ -253,7 +253,7 @@ void AstroCalcDialog::createDialogContent()
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
 	//QDate min = QDate(1600, 1, 1);
-	QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
+	const QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
 	QString validDates = QString("%1 1600/1/1 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
 	ui->dateFromDateTimeEdit->setMinimumDate(minDate);
 	ui->dateFromDateTimeEdit->setToolTip(validDates);
