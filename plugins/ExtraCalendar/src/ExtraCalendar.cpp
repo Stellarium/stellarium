@@ -119,10 +119,10 @@ void ExtraCalendar::draw(StelCore* core)
 	painter.setColor(1,1,1,1);
 	painter.setFont(font);
 
-  // Get screen device pixels per pixel to be compatible with retina/non-retina display
-  StelApp &app = StelApp::getInstance();
-  qreal dppp = app.getDevicePixelsPerPixel();
-  // Draw text at the bottom-right corner
+	// Get screen device pixels per pixel to be compatible with retina/non-retina display
+	StelApp &app = StelApp::getInstance();
+	qreal dppp = app.getDevicePixelsPerPixel();
+	// Draw text at the bottom-right corner
 	painter.drawText((gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 20) * dppp, 70 * dppp, text);
 
 	delete g;
