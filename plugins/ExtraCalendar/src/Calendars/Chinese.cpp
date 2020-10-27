@@ -208,7 +208,6 @@ QString getChineseCalendarDateString(Gregorian* g)
 	{
 		QString msg = q_("[%1] Only support years from %2 to %3")
 			.arg(calendarName, QString::number(SUPPORT_YEAR_MIN), QString::number(SUPPORT_YEAR_MAX));
-		qDebug() << msg;
 		return msg;
 	}
 
