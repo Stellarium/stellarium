@@ -48,10 +48,12 @@ class AstroCalcCustomStepsDialog;
 struct Ephemeris
 {
 	Vec3d coord;
+	Vec3d sunCoord; // We need that to compute comet tail icon directions in projected screen space.
 	int colorIndex;
 	double objDate;
 	QString objDateStr;
 	float magnitude;
+	bool isComet;
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
@@ -363,7 +365,12 @@ private:
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
 
-	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
+	//! Format RA/Dec or Az/Alt coordinates into nice strings.
+	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
+	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
+	//! @arg decimalDegrees use decimal format, not DMS/HMS
+	//! @return QPair(lngStr, latStr) formatted output strings
+	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
@@ -371,15 +378,20 @@ private:
 					QString sElongation, QString objectType);
 
 	//! Calculation conjunctions and oppositions.
-	//! @note Ported from KStars, should be improved, because this feature calculate
+	//! @note Ported from KStars, should be improved, because this feature calculates
 	//! angular separation ("conjunction" defined as equality of right ascension
-	//! of two body) and current solution is not accurate and slow.	
+	//! of two bodies), and current solution is not accurate and slow.
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode);
+	// TODO: Doc?
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
+	// TODO: Doc?
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
+	// TODO: Doc?
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
+	// TODO: Doc?
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode);
+	// TODO: Doc?
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);

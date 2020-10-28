@@ -159,7 +159,7 @@ public:
 	       bool hasHalo,
 	       const QString &pTypeStr);
 
-	virtual ~Planet();
+	virtual ~Planet() Q_DECL_OVERRIDE;
 
 	//! Initializes static vars. Must be called before creating first planet.
 	// Currently ensured by SolarSystem::init()
@@ -181,7 +181,7 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
 	//! - distance
 	//! - phase (result of getPhase)
@@ -198,22 +198,22 @@ public:
 	//! - scale
 	//! - eclipse-obscuration (for Sun only)
 	//! - eclipse-magnitude (for Sun only)
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual double getCloseViewFov(const StelCore* core) const;
-	virtual double getSatellitesFov(const StelCore* core) const;
-	virtual double getParentSatellitesFov(const StelCore* core) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	virtual float getSelectPriority(const StelCore* core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual QString getType(void) const {return PLANET_TYPE;}
-	virtual QString getID(void) const { return englishName; }
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual QString getEnglishName(void) const;
-	virtual QString getNameI18n(void) const;
+	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
+	virtual double getCloseViewFov(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getParentSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
+	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
-	virtual double getAngularSize(const StelCore* core) const;
+	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
@@ -303,6 +303,12 @@ public:
 	double getSpheroidAngularSize(const StelCore* core) const;
 	//! Get the planet phase (illuminated fraction of the planet disk, [0=dark..1=full]) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
+	//! Get the position angle of the illuminated limb of a planet
+	//! The result depends on the arguments' coordinate system which must be identical.
+	//! E.g. if both are equatorial for equinox of date or J2000, the angle is zero when the bright limb is towards the north of the disk.
+	//! An angle of 90° indicates a bright limb on the eastern limb, like an old moon.
+	//! Source: Meeus, Astr.Algorithms (2nd ed.), 48.5.
+	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
@@ -612,8 +618,8 @@ protected:
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
-	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
-	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;

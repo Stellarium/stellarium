@@ -183,6 +183,14 @@ void AstroCalcDialog::retranslate()
 		// Hack to shrink the tabs to optimal size after language change
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
+		// TODO: make a new private function and call that here and in createDialogContent?
+		QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
+		ui->dateFromDateTimeEdit->setToolTip(validDates);
+		ui->dateToDateTimeEdit->setToolTip(validDates);
+		ui->phenomenFromDateEdit->setToolTip(validDates);
+		ui->phenomenToDateEdit->setToolTip(validDates);
+		ui->transitFromDateEdit->setToolTip(validDates);
+		ui->transitToDateEdit->setToolTip(validDates);
 	}
 }
 
@@ -250,21 +258,21 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
-	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
+	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
-	QDate min = QDate(1600, 1, 1);
-	QString validDates = QString("%1 1600/1/1 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
-	ui->dateFromDateTimeEdit->setMinimumDate(min);
+	const QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
+	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
+	ui->dateFromDateTimeEdit->setMinimumDate(minDate);
 	ui->dateFromDateTimeEdit->setToolTip(validDates);
-	ui->dateToDateTimeEdit->setMinimumDate(min);
+	ui->dateToDateTimeEdit->setMinimumDate(minDate);
 	ui->dateToDateTimeEdit->setToolTip(validDates);
-	ui->phenomenFromDateEdit->setMinimumDate(min);
+	ui->phenomenFromDateEdit->setMinimumDate(minDate);
 	ui->phenomenFromDateEdit->setToolTip(validDates);
-	ui->phenomenToDateEdit->setMinimumDate(min);	
+	ui->phenomenToDateEdit->setMinimumDate(minDate);
 	ui->phenomenToDateEdit->setToolTip(validDates);
-	ui->transitFromDateEdit->setMinimumDate(min);
+	ui->transitFromDateEdit->setMinimumDate(minDate);
 	ui->transitFromDateEdit->setToolTip(validDates);
-	ui->transitToDateEdit->setMinimumDate(min);
+	ui->transitToDateEdit->setMinimumDate(minDate);
 	ui->transitToDateEdit->setToolTip(validDates);
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
@@ -1018,7 +1026,7 @@ void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA,
 void AstroCalcDialog::currentCelestialPositions()
 {
 	QString extra, angularSize, sTransit, sMaxElevation, celObjName = "", celObjId = "", elongStr = "";
-	QPair<QString, QString> coordinates;
+	QPair<QString, QString> coordStrings;
 
 	initListCelestialPositions();
 
@@ -1081,10 +1089,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && passByBrightness && obj->isAboveRealHorizon(core))
 			{
-				if (horizon)
-					coordinates = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
-				else
-					coordinates = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
+				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
 
 				celObjName = obj->getNameI18n();
 				celObjId = obj->getDSODesignation();
@@ -1122,7 +1127,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
 
-				fillCelestialPositionTable(dsoName, coordinates.first, coordinates.second, magOp, angularSize, asToolTip, extra, mu, sTransit, sMaxElevation, elongStr, q_(obj->getTypeString()));
+				fillCelestialPositionTable(dsoName, coordStrings.first, coordStrings.second, magOp, angularSize, asToolTip, extra, mu, sTransit, sMaxElevation, elongStr, q_(obj->getTypeString()));
 			}
 		}
 	}
@@ -1182,9 +1187,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				pos = planet->getJ2000EquatorialPos(core);
 
 				if (horizon)
-					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
@@ -1216,7 +1221,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				else
 					elongStr = dash;
 
-				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1252,9 +1257,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (obj->getVMagnitudeWithExtinction(core) <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-					coordinates = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-					coordinates = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
 
 				if (celTypeId == 170) // double stars
 				{
@@ -1294,7 +1299,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (commonName.isEmpty())
 					commonName = obj->getID();
 
-				fillCelestialPositionTable(commonName, coordinates.first, coordinates.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, sType);
+				fillCelestialPositionTable(commonName, coordStrings.first, coordStrings.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, sType);
 			}
 		}
 	}
@@ -1304,47 +1309,43 @@ void AstroCalcDialog::currentCelestialPositions()
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
 }
 
-QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees)
+QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees)
 {
-	double ra, dec;
-	QString raStr, decStr;
-	StelUtils::rectToSphe(&ra, &dec, coord);
-	if (horizon)
+	double lng, lat;
+	QString lngStr, latStr;
+	StelUtils::rectToSphe(&lng, &lat, coord);
+	if (horizontal)
 	{
-		double direction = 3.; // N is zero, E is 90 degrees
-		if (southAzimuth)
-			direction = 2.;
-		ra = direction * M_PI - ra;
-		if (ra > M_PI * 2)
-			ra -= M_PI * 2;
+		// Azimuth is counted in reverse sense. N is zero, E is 90 degrees
+		lng = (southAzimuth ? 2. : 3.) * M_PI - lng;
+		if (lng > M_PI * 2)
+			lng -= M_PI * 2;
 		if (decimalDegrees)
 		{
-			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-			decStr = StelUtils::radToDecDegStr(dec, 5);
+			lngStr = StelUtils::radToDecDegStr(lng, 5, false, true);
+			latStr = StelUtils::radToDecDegStr(lat, 5);
 		}
 		else
 		{
-			raStr = StelUtils::radToDmsStr(ra, true);
-			decStr = StelUtils::radToDmsStr(dec, true);
+			lngStr = StelUtils::radToDmsStr(lng, true);
+			latStr = StelUtils::radToDmsStr(lat, true);
 		}
 	}
 	else
 	{
 		if (decimalDegrees)
 		{
-			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-			decStr = StelUtils::radToDecDegStr(dec, 5);
+			lngStr = StelUtils::radToDecDegStr(lng, 5, false, true);
+			latStr = StelUtils::radToDecDegStr(lat, 5);
 		}
 		else
 		{
-			raStr = StelUtils::radToHmsStr(ra);
-			decStr = StelUtils::radToDmsStr(dec, true);
+			lngStr = StelUtils::radToHmsStr(lng);
+			latStr = StelUtils::radToDmsStr(lat, true);
 		}
 	}
 
-	QPair<QString, QString> r(raStr, decStr);
-
-	return r;
+	return QPair<QString, QString> (lngStr, latStr);
 }
 
 void AstroCalcDialog::saveCelestialPositions()
@@ -1483,12 +1484,12 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
 
 void AstroCalcDialog::setEphemerisHeaderNames()
 {
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	const bool horizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 
 	ephemerisHeader.clear();
 	ephemerisHeader << q_("Name");
 	ephemerisHeader << q_("Date and Time");	
-	if (horizon)
+	if (horizontalCoords)
 	{
 		// TRANSLATORS: azimuth
 		ephemerisHeader << q_("Azimuth");
@@ -1551,14 +1552,13 @@ void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 
 void AstroCalcDialog::generateEphemeris()
 {
-	double ra, dec;
-	Vec3d observerHelioPos, pos;
+	Vec3d observerHelioPos, pos, sunPos;
 	const QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
 	const QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
 	const QString distanceInfo = (core->getUseTopocentricCoordinates() ? q_("Topocentric distance") : q_("Planetocentric distance"));
 	const QString distanceUM = qc_("AU", "distance, astronomical unit");
-	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
-	const bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	QString englishName, nameI18n, elongStr = "", phaseStr = "";
+	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
@@ -1570,7 +1570,8 @@ void AstroCalcDialog::generateEphemeris()
 
 	int idxRow = 0, colorIndex = 0;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
-	const PlanetP& cplanet = core->getCurrentPlanet();		
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	const PlanetP& sun = solarSystem->getSun();
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		if (cplanet==solarSystem->getEarth())
@@ -1691,49 +1692,27 @@ void AstroCalcDialog::generateEphemeris()
 			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
-			if (horizon)
+			if (useHorizontalCoords)
 			{
 				pos = obj->getAltAzPosAuto(core);
-				StelUtils::rectToSphe(&ra, &dec, pos);
-				double direction = 3.; // N is zero, E is 90 degrees
-				if (useSouthAzimuth)
-					direction = 2.;
-				ra = fmod(direction * M_PI - ra, M_PI * 2);
-				if (withDecimalDegree)
-				{
-					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-					decStr = StelUtils::radToDecDegStr(dec, 5);
-				}
-				else
-				{
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
-				}
+				sunPos = sun->getAltAzPosAuto(core);
 			}
 			else
 			{
 				pos = obj->getJ2000EquatorialPos(core);
-				StelUtils::rectToSphe(&ra, &dec, pos);
-				if (withDecimalDegree)
-				{
-					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-					decStr = StelUtils::radToDecDegStr(dec, 5);
-				}
-				else
-				{
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
-				}
+				sunPos = sun->getJ2000EquatorialPos(core);
 			}
+			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegree);
 
 			Ephemeris item;
 			item.coord = pos;
+			item.sunCoord = sunPos;
 			item.colorIndex = colorIndex;			
 			item.objDate = JD;
 			item.magnitude = obj->getVMagnitudeWithExtinction(core);
+			item.isComet = obj->getPlanetType()==Planet::isComet;
 			EphemerisList.append(item);
 
-			StelUtils::rectToSphe(&ra, &dec, pos);
 			observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			if (phaseStr != dash)
 				phaseStr = QString("%1%").arg(QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2));
@@ -1751,10 +1730,10 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setData(EphemerisCOName, Qt::UserRole, englishName);
 			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
 			treeItem->setData(EphemerisDate, Qt::UserRole, JD);
-			treeItem->setText(EphemerisRA, raStr);
+			treeItem->setText(EphemerisRA, coordStrings.first);
 			treeItem->setData(EphemerisRA, Qt::UserRole, idxRow);
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
-			treeItem->setText(EphemerisDec, decStr);
+			treeItem->setText(EphemerisDec, coordStrings.second);
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
 			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
@@ -3482,7 +3461,7 @@ void AstroCalcDialog::aziTimeClick(QMouseEvent* event)
 	double	x = ui->aziVsTimePlot->xAxis->pixelToCoord(event->pos().x());
 	double	y = ui->aziVsTimePlot->yAxis->pixelToCoord(event->pos().y());
 
-	if (ui->aziVsTimePlot->xAxis->range().contains(x) && y > ui->aziVsTimePlot->yAxis->range().contains(y))
+	if (ui->aziVsTimePlot->xAxis->range().contains(x) && ui->aziVsTimePlot->yAxis->range().contains(y))
 	{
 		setClickedTime(x);
 	}
@@ -4395,6 +4374,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 		limit = 5.;
 	else if (objects.indexOf(mp)>=0)
 		limit = 10.;
+	// TODO: Consider using 30 days as max stepwidth? Else planet loops cannot be followed.
 	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
 		limit = 90.5625;
 	else if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive) || objects.contains("Pluto",Qt::CaseInsensitive))
@@ -4707,7 +4687,7 @@ bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, Pla
 		return false;
 
 	prevRA = findRightAscension(JD, object);
-	step = -step / 2.;
+	step /= -2.;
 
 	while (true)
 	{
@@ -4742,12 +4722,12 @@ bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, Pla
 		if (retrograde)
 		{
 			if (RA<prevRA)
-				step = -step / 2.0;
+				step /= -2.0;
 		}
 		else
 		{
 			if (RA>prevRA)
-				step = -step / 2.0;
+				step /= -2.0;
 		}
 		prevRA = RA;
 
@@ -4870,7 +4850,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 		return false;
 
 	prevDist = findHeliocentricDistance(JD, object1);
-	step = -step / 2.;
+	step /= -2.;
 
 	while (true)
 	{
@@ -4902,12 +4882,12 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 		if (minimal)
 		{
 			if (dist>prevDist)
-				step = -step / 2.0;
+				step /= -2.0;
 		}
 		else
 		{
 			if (dist<prevDist)
-				step = -step / 2.0;
+				step /= -2.0;
 		}
 		prevDist = dist;
 
@@ -6588,4 +6568,3 @@ void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget*
 	bookmarksFile.flush();
 	bookmarksFile.close();
 }
-
