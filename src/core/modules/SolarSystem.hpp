@@ -831,52 +831,64 @@ private slots:
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
 
-	// TODO: minimal documentation
+	//! Set flag which enabled the showing of ephemeris markers or not
 	void setFlagEphemerisMarkers(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris markers or not
 	bool getFlagEphemerisMarkers() const;
 
-	// TODO: minimal documentation
+	//! Set flag which enabled the showing of ephemeris line between markers or not
 	void setFlagEphemerisLine(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris line between markers or not
 	bool getFlagEphemerisLine() const;
 
-	// TODO: minimal documentation
+	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
+	//! Get the thickness of ephemeris line
 	int getEphemerisLineThickness() const;
 
-	// TODO: minimal documentation
+	//! Set flag which enabled the showing of ephemeris markers in horizontal coordinates or not
 	void setFlagEphemerisHorizontalCoordinates(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris markers in horizontal coordinates or not
 	bool getFlagEphemerisHorizontalCoordinates() const;
 
-	// TODO: minimal documentation
+	//! Set flag which enable the showing the date near ephemeris markers or not
 	void setFlagEphemerisDates(bool b);
+	//! Get the current value of the flag which enable the showing the date near ephemeris markers or not
 	bool getFlagEphemerisDates() const;
 
-	// TODO: minimal documentation
+	//! Set flag which enable the showing the magnitude near ephemeris markers or not
 	void setFlagEphemerisMagnitudes(bool b);
+	//! Get the current value of the flag which enable the showing the magnitude near ephemeris markers or not
 	bool getFlagEphemerisMagnitudes() const;
 
-	// TODO: minimal documentation
+	//! Set flag which allow skipping dates near ephemeris markers
 	void setFlagEphemerisSkipData(bool b);
+	//! Get the current value of the flag which allow skipping dates near ephemeris markers
 	bool getFlagEphemerisSkipData() const;
 
-	// TODO: minimal documentation
+	//! Set flag which allow skipping the ephemeris markers without dates
 	void setFlagEphemerisSkipMarkers(bool b);
+	//! Get the current value of the flag which allow skipping the ephemeris markers without dates
 	bool getFlagEphemerisSkipMarkers() const;
 
-	// TODO: minimal documentation
+	//! Set flag which allow using smart format for dates near ephemeris markers
 	void setFlagEphemerisSmartDates(bool b);
+	//! Get the current value of the flag which allow using smart format for dates near ephemeris markers
 	bool getFlagEphemerisSmartDates() const;
 
-	// TODO: minimal documentation
+	//! Set flag which allow scaling the ephemeris markers
 	void setFlagEphemerisScaleMarkers(bool b);
+	//! Get the current value of the flag which allow scaling the ephemeris markers
 	bool getFlagEphemerisScaleMarkers() const;
 
-	// TODO: minimal documentation
+	//! Set the step of skip for date of ephemeris markers (and markers if it enabled)
 	void setEphemerisDataStep(int step);
+	//! Get the step of skip for date of ephemeris markers
 	int getEphemerisDataStep() const;
 
-	// TODO: minimal documentation
+	//! Set the limit for data: we computed ephemeris for 1, 2 or 5 celestial bodies
 	void setEphemerisDataLimit(int limit);
+	//! Get the limit of the data (how many celestial bodies was in computing of ephemeris)
 	int getEphemerisDataLimit() const;
 
 	void setEphemerisGenericMarkerColor(const Vec3f& c);
@@ -906,8 +918,7 @@ private slots:
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
 
-	// TODO: Document!
-	// Assumes data... to exist, adds (other columns) into the ephemeris list.
+	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
 
 private:
@@ -1009,8 +1020,8 @@ private:
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;
-	int ephemerisDataStep;				// TODO: EXPLAIN?
-	int ephemerisDataLimit;				// TODO: EXPLAIN?
+	int ephemerisDataStep;				// How many days skip for dates near ephemeris markers (and the markers if it enabled)
+	int ephemerisDataLimit;				// Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
