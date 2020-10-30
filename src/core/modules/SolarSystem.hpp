@@ -80,19 +80,6 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
 	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
 	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
-	// Ephemeris-related properties
-	Q_PROPERTY(bool ephemerisMarkersDisplayed	READ getFlagEphemerisMarkers		WRITE setFlagEphemerisMarkers		NOTIFY ephemerisMarkersChanged)
-	Q_PROPERTY(bool ephemerisHorizontalCoordinates	READ getFlagEphemerisHorizontalCoordinates	WRITE setFlagEphemerisHorizontalCoordinates	NOTIFY ephemerisHorizontalCoordinatesChanged)
-	Q_PROPERTY(bool ephemerisDatesDisplayed		READ getFlagEphemerisDates		WRITE setFlagEphemerisDates		NOTIFY ephemerisDatesChanged)
-	Q_PROPERTY(bool ephemerisMagnitudesDisplayed	READ getFlagEphemerisMagnitudes		WRITE setFlagEphemerisMagnitudes	NOTIFY ephemerisMagnitudesChanged)
-	Q_PROPERTY(bool ephemerisLineDisplayed		READ getFlagEphemerisLine		WRITE setFlagEphemerisLine		NOTIFY ephemerisLineChanged)
-	Q_PROPERTY(int ephemerisLineThickness		READ getEphemerisLineThickness		WRITE setEphemerisLineThickness		NOTIFY ephemerisLineThicknessChanged)
-	Q_PROPERTY(bool ephemerisSkippedData		READ getFlagEphemerisSkipData		WRITE setFlagEphemerisSkipData		NOTIFY ephemerisSkipDataChanged)
-	Q_PROPERTY(bool ephemerisSkippedMarkers		READ getFlagEphemerisSkipMarkers	WRITE setFlagEphemerisSkipMarkers	NOTIFY ephemerisSkipMarkersChanged)
-	Q_PROPERTY(int ephemerisDataStep		READ getEphemerisDataStep		WRITE setEphemerisDataStep		NOTIFY ephemerisDataStepChanged)
-	Q_PROPERTY(int ephemerisDataLimit		READ getEphemerisDataLimit		WRITE setEphemerisDataLimit		NOTIFY ephemerisDataLimitChanged)
-	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
-	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
 	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
@@ -122,15 +109,6 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(Vec3f saturnOrbitColor		READ getSaturnOrbitColor		WRITE setSaturnOrbitColor		NOTIFY saturnOrbitColorChanged)
 	Q_PROPERTY(Vec3f uranusOrbitColor		READ getUranusOrbitColor		WRITE setUranusOrbitColor		NOTIFY uranusOrbitColorChanged)
 	Q_PROPERTY(Vec3f neptuneOrbitColor		READ getNeptuneOrbitColor		WRITE setNeptuneOrbitColor		NOTIFY neptuneOrbitColorChanged)
-	// Ephemeris-related properties
-	Q_PROPERTY(Vec3f ephemerisGenericMarkerColor	READ getEphemerisGenericMarkerColor	WRITE setEphemerisGenericMarkerColor	NOTIFY ephemerisGenericMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisSecondaryMarkerColor	READ getEphemerisSecondaryMarkerColor	WRITE setEphemerisSecondaryMarkerColor	NOTIFY ephemerisSecondaryMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor	READ getEphemerisSelectedMarkerColor	WRITE setEphemerisSelectedMarkerColor	NOTIFY ephemerisSelectedMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisMercuryMarkerColor	READ getEphemerisMercuryMarkerColor	WRITE setEphemerisMercuryMarkerColor	NOTIFY ephemerisMercuryMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisVenusMarkerColor	READ getEphemerisVenusMarkerColor	WRITE setEphemerisVenusMarkerColor	NOTIFY ephemerisVenusMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisMarsMarkerColor	READ getEphemerisMarsMarkerColor	WRITE setEphemerisMarsMarkerColor	NOTIFY ephemerisMarsMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisJupiterMarkerColor	READ getEphemerisJupiterMarkerColor	WRITE setEphemerisJupiterMarkerColor	NOTIFY ephemerisJupiterMarkerColorChanged)
-	Q_PROPERTY(Vec3f ephemerisSaturnMarkerColor	READ getEphemerisSaturnMarkerColor	WRITE setEphemerisSaturnMarkerColor	NOTIFY ephemerisSaturnMarkerColorChanged)
 	// Color style
 	Q_PROPERTY(QString orbitColorStyle		READ getOrbitColorStyle			WRITE setOrbitColorStyle		NOTIFY orbitColorStyleChanged)
 	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth	READ getApparentMagnitudeAlgorithmOnEarth	WRITE setApparentMagnitudeAlgorithmOnEarth	NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
@@ -706,19 +684,7 @@ signals:
 	void moonScaleChanged(double f);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
-	void labelsAmountChanged(double f);
-	void ephemerisMarkersChanged(bool b);
-	void ephemerisHorizontalCoordinatesChanged(bool b);
-	void ephemerisDatesChanged(bool b);
-	void ephemerisMagnitudesChanged(bool b);
-	void ephemerisLineChanged(bool b);
-	void ephemerisLineThicknessChanged(int v);
-	void ephemerisSkipDataChanged(bool b);
-	void ephemerisSkipMarkersChanged(bool b);
-	void ephemerisDataStepChanged(int s);
-	void ephemerisDataLimitChanged(int s);
-	void ephemerisSmartDatesChanged(bool b);
-	void ephemerisScaleMarkersChanged(bool b);
+	void labelsAmountChanged(double f);	
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -748,20 +714,11 @@ signals:
 	void saturnOrbitColorChanged(const Vec3f & color) const;
 	void uranusOrbitColorChanged(const Vec3f & color) const;
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
-	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMarsMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisJupiterMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSaturnMarkerColorChanged(const Vec3f & color) const;
 
 	void orbitColorStyleChanged(QString style) const;
 	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
 
-	void solarSystemDataReloaded();
-	void requestEphemerisVisualization();
+	void solarSystemDataReloaded();	
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -831,95 +788,8 @@ private slots:
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
 
-	//! Set flag which enabled the showing of ephemeris markers or not
-	void setFlagEphemerisMarkers(bool b);
-	//! Get the current value of the flag which enabled the showing of ephemeris markers or not
-	bool getFlagEphemerisMarkers() const;
-
-	//! Set flag which enabled the showing of ephemeris line between markers or not
-	void setFlagEphemerisLine(bool b);
-	//! Get the current value of the flag which enabled the showing of ephemeris line between markers or not
-	bool getFlagEphemerisLine() const;
-
-	//! Set the thickness of ephemeris line
-	void setEphemerisLineThickness(int v);
-	//! Get the thickness of ephemeris line
-	int getEphemerisLineThickness() const;
-
-	//! Set flag which enabled the showing of ephemeris markers in horizontal coordinates or not
-	void setFlagEphemerisHorizontalCoordinates(bool b);
-	//! Get the current value of the flag which enabled the showing of ephemeris markers in horizontal coordinates or not
-	bool getFlagEphemerisHorizontalCoordinates() const;
-
-	//! Set flag which enable the showing the date near ephemeris markers or not
-	void setFlagEphemerisDates(bool b);
-	//! Get the current value of the flag which enable the showing the date near ephemeris markers or not
-	bool getFlagEphemerisDates() const;
-
-	//! Set flag which enable the showing the magnitude near ephemeris markers or not
-	void setFlagEphemerisMagnitudes(bool b);
-	//! Get the current value of the flag which enable the showing the magnitude near ephemeris markers or not
-	bool getFlagEphemerisMagnitudes() const;
-
-	//! Set flag which allow skipping dates near ephemeris markers
-	void setFlagEphemerisSkipData(bool b);
-	//! Get the current value of the flag which allow skipping dates near ephemeris markers
-	bool getFlagEphemerisSkipData() const;
-
-	//! Set flag which allow skipping the ephemeris markers without dates
-	void setFlagEphemerisSkipMarkers(bool b);
-	//! Get the current value of the flag which allow skipping the ephemeris markers without dates
-	bool getFlagEphemerisSkipMarkers() const;
-
-	//! Set flag which allow using smart format for dates near ephemeris markers
-	void setFlagEphemerisSmartDates(bool b);
-	//! Get the current value of the flag which allow using smart format for dates near ephemeris markers
-	bool getFlagEphemerisSmartDates() const;
-
-	//! Set flag which allow scaling the ephemeris markers
-	void setFlagEphemerisScaleMarkers(bool b);
-	//! Get the current value of the flag which allow scaling the ephemeris markers
-	bool getFlagEphemerisScaleMarkers() const;
-
-	//! Set the step of skip for date of ephemeris markers (and markers if it enabled)
-	void setEphemerisDataStep(int step);
-	//! Get the step of skip for date of ephemeris markers
-	int getEphemerisDataStep() const;
-
-	//! Set the limit for data: we computed ephemeris for 1, 2 or 5 celestial bodies
-	void setEphemerisDataLimit(int limit);
-	//! Get the limit of the data (how many celestial bodies was in computing of ephemeris)
-	int getEphemerisDataLimit() const;
-
-	void setEphemerisGenericMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisGenericMarkerColor(void) const;
-
-	void setEphemerisSecondaryMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisSecondaryMarkerColor(void) const;
-
-	void setEphemerisSelectedMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisSelectedMarkerColor(void) const;
-
-	void setEphemerisMercuryMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisMercuryMarkerColor(void) const;
-
-	void setEphemerisVenusMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisVenusMarkerColor(void) const;
-
-	void setEphemerisMarsMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisMarsMarkerColor(void) const;
-
-	void setEphemerisJupiterMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisJupiterMarkerColor(void) const;
-
-	void setEphemerisSaturnMarkerColor(const Vec3f& c);
-	Vec3f getEphemerisSaturnMarkerColor(void) const;
-
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
-
-	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
-	void fillEphemerisDates();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -936,12 +806,6 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
-	//! Draw a nice markers for ephemeris of objects.
-	void drawEphemerisMarkers(const StelCore* core);
-
-	//! Draw a line, who connected markers for ephemeris of objects.
-	void drawEphemerisLine(const StelCore* core);
-
 	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
 	//! Solar System configuration files in the file paths, falling back if a
@@ -950,8 +814,6 @@ private:
 
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
-
-	Vec3f getEphemerisMarkerColor(int index) const;
 
 	//! Calculate a color of Solar system bodies
 	//! @param bV value of B-V color index
@@ -999,8 +861,6 @@ private:
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
-	StelTextureSP texEphemerisMarker;
-	StelTextureSP texEphemerisCometMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1012,26 +872,6 @@ private:
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
-	bool ephemerisMarkersDisplayed;
-	bool ephemerisDatesDisplayed;
-	bool ephemerisMagnitudesDisplayed;
-	bool ephemerisHorizontalCoordinates;
-	bool ephemerisLineDisplayed;
-	int ephemerisLineThickness;
-	bool ephemerisSkipDataDisplayed;
-	bool ephemerisSkipMarkersDisplayed;
-	int ephemerisDataStep;				// How many days skip for dates near ephemeris markers (and the markers if it enabled)
-	int ephemerisDataLimit;				// Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
-	bool ephemerisSmartDatesDisplayed;
-	bool ephemerisScaleMarkersDisplayed;
-	Vec3f ephemerisGenericMarkerColor;
-	Vec3f ephemerisSecondaryMarkerColor;
-	Vec3f ephemerisSelectedMarkerColor;
-	Vec3f ephemerisMercuryMarkerColor;
-	Vec3f ephemerisVenusMarkerColor;
-	Vec3f ephemerisMarsMarkerColor;
-	Vec3f ephemerisJupiterMarkerColor;
-	Vec3f ephemerisSaturnMarkerColor;
 
 	class TrailGroup* allTrails;
 	QSettings* conf;

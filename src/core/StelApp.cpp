@@ -57,6 +57,7 @@
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
 #include "SpecialMarkersMgr.hpp"
+#include "EphemerisMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
@@ -600,6 +601,12 @@ void StelApp::init(QSettings* conf)
 	HighlightMgr* hlMgr = new HighlightMgr();
 	hlMgr->init();
 	getModuleMgr().registerModule(hlMgr);
+
+        // Init ephemeris visualizer
+	SplashScreen::showMessage(q_("Initializing ephemeris visualizer..."));
+	EphemerisMgr* ephemeris = new EphemerisMgr();
+	ephemeris->init();
+	getModuleMgr().registerModule(ephemeris);
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
