@@ -24,6 +24,8 @@
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
+#include "StelPainter.hpp"
+#include "StelCore.hpp"
 
 //! @class EphemerisMgr
 //! The EphemerisMgr controls the visualization of ephemeris
@@ -193,10 +195,10 @@ private:
 	QSettings* conf;
 
 	//! Draw a nice markers for ephemeris of objects.
-	void drawMarkers(const StelCore* core);
+	void drawMarkers(StelPainter* painter);
 
 	//! Draw a line, who connected markers for ephemeris of objects.
-	void drawLine(const StelCore* core);
+	void drawLine(StelPainter* painter);
 
 	Vec3f getMarkerColor(int index) const;
 

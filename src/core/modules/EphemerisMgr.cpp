@@ -25,9 +25,7 @@
 #include "SolarSystem.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelCore.hpp"
 #include "StelObserver.hpp"
-#include "StelPainter.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -59,6 +57,8 @@ EphemerisMgr::EphemerisMgr()
 	, saturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 {
 	setObjectName("EphemerisMgr");
+	conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
 }
 
 EphemerisMgr::~EphemerisMgr()
@@ -79,9 +79,6 @@ double EphemerisMgr::getCallOrder(StelModuleActionName actionName) const
 
 void EphemerisMgr::init()
 {
-	conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-
 	// Ephemeris stuff
 	setFlagMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
 	setFlagDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
@@ -121,12 +118,21 @@ void EphemerisMgr::update(double deltaTime)
 
 void EphemerisMgr::draw(StelCore* core)
 {
-	// AstroCalcDialog
+	if (AstroCalcDialog::EphemerisList.count()==0)
+		return;
+
+	StelProjectorP prj;
+	if (getFlagHorizontalCoordinates())
+		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	else
+		prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+
 	if (getFlagMarkers())
-		drawMarkers(core);
+		drawMarkers(&sPainter);
 
 	if (getFlagLine())
-		drawLine(core);
+		drawLine(&sPainter);
 }
 
 Vec3f EphemerisMgr::getMarkerColor(int index) const
@@ -143,18 +149,9 @@ Vec3f EphemerisMgr::getMarkerColor(int index) const
 	return colors.value(index, genericMarkerColor);
 }
 
-void EphemerisMgr::drawMarkers(const StelCore *core)
+void EphemerisMgr::drawMarkers(StelPainter *painter)
 {
 	const int fsize = AstroCalcDialog::EphemerisList.count();
-	if (fsize==0) return;
-
-	StelProjectorP prj;
-	if (getFlagHorizontalCoordinates())
-		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	else
-		prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-
 	float size, shift, baseSize = 4.f;
 	const bool showDates = getFlagDates();
 	const bool showMagnitudes = getFlagMagnitudes();
@@ -172,7 +169,7 @@ void EphemerisMgr::drawMarkers(const StelCore *core)
 	for (int i =0; i < fsize; i++)
 	{
 		// Check visibility of pointer
-		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
+		if (!(painter->getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
 		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
@@ -190,8 +187,8 @@ void EphemerisMgr::drawMarkers(const StelCore *core)
 		}
 		if (isComet) size += 16.f;
 		size += sizeCoeff; //
-		sPainter.setColor(markerColor);
-		sPainter.setBlending(true, GL_ONE, GL_ONE);
+		painter->setColor(markerColor);
+		painter->setBlending(true, GL_ONE, GL_ONE);
 		if (isComet)
 			texCometMarker->bind();
 		else
@@ -202,21 +199,20 @@ void EphemerisMgr::drawMarkers(const StelCore *core)
 				continue;
 		}
 		Vec3d win;
-		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
+		if (painter->getProjector()->project(AstroCalcDialog::EphemerisList[i].coord, win))
 		{
 			if (isComet)
 			{
 				// compute solarAngle in screen space.
 				Vec3d sunWin;
-				prj->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
+				painter->getProjector()->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
 				// TODO: In some projections, we may need to test result and flip/mirror the angle, or deal with wrap-around effects.
 				// E.g., in cylindrical mode, the comet icon will flip as soon as the corresponding sun position wraps around the screen edge.
 				solarAngle=M_180_PIf*static_cast<float>(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
 				// This will show projected positions and angles usable in labels.
 				debugStr = QString("Sun: %1/%2 Obj: %3/%4 -->%5").arg(QString::number(sunWin[0]), QString::number(sunWin[1]), QString::number(win[0]), QString::number(win[1]), QString::number(solarAngle));
 			}
-			//sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 180.f+AstroCalcDialog::EphemerisList[i].solarAngle*M_180_PIf);
-			sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 270.f-solarAngle);
+			painter->drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), size, 270.f-solarAngle);
 		}
 
 		if (showDates || showMagnitudes)
@@ -234,28 +230,18 @@ void EphemerisMgr::drawMarkers(const StelCore *core)
 
 			// Activate for debug labels.
 			//info=debugStr;
-			sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
+			painter->drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 		}
 	}
 }
 
-void EphemerisMgr::drawLine(const StelCore *core)
+void EphemerisMgr::drawLine(StelPainter *painter)
 {
 	const int size = AstroCalcDialog::EphemerisList.count();
-	if (size==0) return;
-
-	// The array of data is not empty - good news!
-	StelProjectorP prj;
-	if (getFlagHorizontalCoordinates())
-		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	else
-		prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-
-	const float oldLineThickness=sPainter.getLineWidth();
+	const float oldLineThickness=painter->getLineWidth();
 	const float lineThickness = getLineThickness();
 	if (!fuzzyEquals(lineThickness, oldLineThickness))
-		sPainter.setLineWidth(lineThickness);
+		painter->setLineWidth(lineThickness);
 
 	Vec3f color;
 	QVector<Vec3d> vertexArray;
@@ -272,11 +258,11 @@ void EphemerisMgr::drawLine(const StelCore *core)
 			colorArray[i]=Vec4f(color, 1.0f);
 			vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
 		}
-		sPainter.drawPath(vertexArray, colorArray);
+		painter->drawPath(vertexArray, colorArray);
 	}
 
 	if (!fuzzyEquals(lineThickness, oldLineThickness))
-		sPainter.setLineWidth(oldLineThickness); // restore line thickness
+		painter->setLineWidth(oldLineThickness); // restore line thickness
 }
 
 void EphemerisMgr::fillDates()
