@@ -160,12 +160,13 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 
 void SolarSystemManagerWindow::resetSSOdefaults()
 {
-	if (!askConfirmation()) 
+	if (askConfirmation()) 
 	{
-		qDebug() << "reset cancelled";
-		return;
+		qDebug() << "permission to reset SSO to defaults...";
+		ssEditor->resetSolarSystemToDefault();
 	}
-	ssEditor->resetSolarSystemToDefault();
+	else
+		qDebug() << "SSO reset cancelled";
 }
 
 void SolarSystemManagerWindow::populateSolarSystemList()
