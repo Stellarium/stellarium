@@ -165,10 +165,10 @@ public:
 
 	//! Flags to control the updateSolarSystemConfigurationFile() function.
 	enum UpdateFlag {
-		UpdateNameAndNumber = 0x01,		//!< Update the name and minor planet number, if any.
-		UpdateType = 0x02, 			//!< Update objects that lack the "type" parameter
-		UpdateOrbitalElements = 0x04, 		//!< Update the orbital elements, including the orbit function.
-		UpdateMagnitudeParameters = 0x08 	//!< Update the values in the two parameter system, or add them if they are missing and the type allows.
+		UpdateNameAndNumber 		= 0x01,	//!< Update the name and minor planet number, if any.
+		UpdateType 			= 0x02,	//!< Update objects that lack the "type" parameter
+		UpdateOrbitalElements 		= 0x04,	//!< Update the orbital elements, including the orbit function.
+		UpdateMagnitudeParameters 	= 0x08 	//!< Update the values in the two parameter system, or add them if they are missing and the type allows.
 	};
 	Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 
@@ -243,10 +243,9 @@ private:
 	//! Initialized in init().
 	QHash<QString,QString> defaultSsoIdentifiers;
 
-	//! Gets the names of the objects listed in a ssystem.ini-formatted file.
+	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
 	//! defaultSsoNames.
-	//! Does not check if the file exists.
 	QHash<QString,QString> listAllLoadedObjectsInFile(QString filePath) const;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.

@@ -395,7 +395,6 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	}
 }
 
-// all **minor** bodies
 QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString filePath) const
 {
 	if (!QFile::exists(filePath))
