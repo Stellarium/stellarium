@@ -297,11 +297,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 
-	connectBoolProperty(ui->ephemerisShowLineCheckBox, "EphemerisMgr.ephemerisLineDisplayed");
-	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "EphemerisMgr.ephemerisMarkersDisplayed");
-	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "EphemerisMgr.ephemerisDatesDisplayed");
-	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "EphemerisMgr.ephemerisMagnitudesDisplayed");
-	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "EphemerisMgr.ephemerisHorizontalCoordinates");
+	connectBoolProperty(ui->ephemerisShowLineCheckBox, "EphemerisMgr.lineDisplayed");
+	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "EphemerisMgr.markersDisplayed");
+	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "EphemerisMgr.datesDisplayed");
+	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "EphemerisMgr.magnitudesDisplayed");
+	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "EphemerisMgr.horizontalCoordinates");
 	initListEphemeris();
 	initEphemerisFlagNakedEyePlanets();
 	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
@@ -315,14 +315,14 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
 
-	connectColorButton(ui->genericMarkerColor, "EphemerisMgr.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
-	connectColorButton(ui->secondaryMarkerColor, "EphemerisMgr.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
-	connectColorButton(ui->selectedMarkerColor, "EphemerisMgr.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
-	connectColorButton(ui->mercuryMarkerColor, "EphemerisMgr.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
-	connectColorButton(ui->venusMarkerColor, "EphemerisMgr.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
-	connectColorButton(ui->marsMarkerColor, "EphemerisMgr.ephemerisMarsMarkerColor", "color/ephemeris_mars_marker_color");
-	connectColorButton(ui->jupiterMarkerColor, "EphemerisMgr.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
-	connectColorButton(ui->saturnMarkerColor, "EphemerisMgr.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
+	connectColorButton(ui->genericMarkerColor, "EphemerisMgr.genericMarkerColor", "color/ephemeris_generic_marker_color");
+	connectColorButton(ui->secondaryMarkerColor, "EphemerisMgr.secondaryMarkerColor", "color/ephemeris_secondary_marker_color");
+	connectColorButton(ui->selectedMarkerColor, "EphemerisMgr.selectedMarkerColor", "color/ephemeris_selected_marker_color");
+	connectColorButton(ui->mercuryMarkerColor, "EphemerisMgr.mercuryMarkerColor", "color/ephemeris_mercury_marker_color");
+	connectColorButton(ui->venusMarkerColor, "EphemerisMgr.venusMarkerColor", "color/ephemeris_venus_marker_color");
+	connectColorButton(ui->marsMarkerColor, "EphemerisMgr.marsMarkerColor", "color/ephemeris_mars_marker_color");
+	connectColorButton(ui->jupiterMarkerColor, "EphemerisMgr.jupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
+	connectColorButton(ui->saturnMarkerColor, "EphemerisMgr.saturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
 	initListTransit();
 	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
@@ -1655,7 +1655,7 @@ void AstroCalcDialog::generateEphemeris()
 		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
 
 	EphemerisList.reserve(elements*n);
-	propMgr->setStelPropertyValue("EphemerisMgr.ephemerisDataLimit", n);
+	propMgr->setStelPropertyValue("EphemerisMgr.dataLimit", n);
 
 	for (auto obj: celestialObjects)
 	{
@@ -1760,7 +1760,7 @@ void AstroCalcDialog::generateEphemeris()
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
 
-	emit GETSTELMODULE(EphemerisMgr)->requestEphemerisVisualization();
+	emit GETSTELMODULE(EphemerisMgr)->requestVisualization();
 }
 
 double AstroCalcDialog::getCustomTimeStep()

@@ -37,34 +37,34 @@
 #include <QSettings>
 
 EphemerisMgr::EphemerisMgr()
-	: ephemerisMarkersDisplayed(true)
-	, ephemerisDatesDisplayed(false)
-	, ephemerisMagnitudesDisplayed(false)
-	, ephemerisHorizontalCoordinates(false)
-	, ephemerisLineDisplayed(false)
-	, ephemerisLineThickness(1)
-	, ephemerisSkipDataDisplayed(false)
-	, ephemerisSkipMarkersDisplayed(false)
-	, ephemerisDataStep(1)
-	, ephemerisDataLimit(1)
-	, ephemerisSmartDatesDisplayed(true)
-	, ephemerisScaleMarkersDisplayed(false)
-	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
-	, ephemerisSecondaryMarkerColor(Vec3f(0.7f, 0.7f, 1.0f))
-	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
-	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
-	, ephemerisVenusMarkerColor(Vec3f(1.0f, 1.0f, 1.0f))
-	, ephemerisMarsMarkerColor(Vec3f(1.0f, 0.0f, 0.0f))
-	, ephemerisJupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
-	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
+	: markersDisplayed(true)
+	, datesDisplayed(false)
+	, magnitudesDisplayed(false)
+	, horizontalCoordinates(false)
+	, lineDisplayed(false)
+	, lineThickness(1)
+	, skipDataDisplayed(false)
+	, skipMarkersDisplayed(false)
+	, dataStep(1)
+	, dataLimit(1)
+	, smartDatesDisplayed(true)
+	, scaleMarkersDisplayed(false)
+	, genericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
+	, secondaryMarkerColor(Vec3f(0.7f, 0.7f, 1.0f))
+	, selectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
+	, mercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
+	, venusMarkerColor(Vec3f(1.0f, 1.0f, 1.0f))
+	, marsMarkerColor(Vec3f(1.0f, 0.0f, 0.0f))
+	, jupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
+	, saturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 {
 	setObjectName("EphemerisMgr");
 }
 
 EphemerisMgr::~EphemerisMgr()
 {
-	texEphemerisMarker.clear();
-	texEphemerisCometMarker.clear();
+	texGenericMarker.clear();
+	texCometMarker.clear();
 }
 
 /*************************************************************************
@@ -83,35 +83,35 @@ void EphemerisMgr::init()
 	Q_ASSERT(conf);
 
 	// Ephemeris stuff
-	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
-	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
-	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
-	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
-	setFlagEphemerisLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
-	setEphemerisLineThickness(conf->value("astrocalc/ephemeris_line_thickness", 1).toInt());
-	setFlagEphemerisSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
-	setFlagEphemerisSkipMarkers(conf->value("astrocalc/flag_ephemeris_skip_markers", false).toBool());
-	setEphemerisDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
-	setFlagEphemerisSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
-	setFlagEphemerisScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
-	setEphemerisGenericMarkerColor( Vec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisSecondaryMarkerColor( Vec3f(conf->value("color/ephemeris_secondary_marker_color", "0.7,0.7,1.0").toString()));
-	setEphemerisSelectedMarkerColor(Vec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
-	setEphemerisMercuryMarkerColor( Vec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisVenusMarkerColor(   Vec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
-	setEphemerisMarsMarkerColor(    Vec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
-	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
-	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
+	setFlagMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
+	setFlagDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
+	setFlagMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
+	setFlagHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
+	setFlagLine(conf->value("astrocalc/flag_ephemeris_line", false).toBool());
+	setLineThickness(conf->value("astrocalc/ephemeris_line_thickness", 1).toInt());
+	setFlagSkipData(conf->value("astrocalc/flag_ephemeris_skip_data", false).toBool());
+	setFlagSkipMarkers(conf->value("astrocalc/flag_ephemeris_skip_markers", false).toBool());
+	setDataStep(conf->value("astrocalc/ephemeris_data_step", 1).toInt());
+	setFlagSmartDates(conf->value("astrocalc/flag_ephemeris_smart_dates", true).toBool());
+	setFlagScaleMarkers(conf->value("astrocalc/flag_ephemeris_scale_markers", false).toBool());
+	setGenericMarkerColor( Vec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
+	setSecondaryMarkerColor( Vec3f(conf->value("color/ephemeris_secondary_marker_color", "0.7,0.7,1.0").toString()));
+	setSelectedMarkerColor(Vec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
+	setMercuryMarkerColor( Vec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
+	setVenusMarkerColor(   Vec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
+	setMarsMarkerColor(    Vec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
+	setJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
+	setSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
-	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
-	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
+	texGenericMarker	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
+	texCometMarker		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 
 	// Fill ephemeris dates
-	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisDataStepChanged(int)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(requestVisualization()), this, SLOT(fillDates()));
+	connect(this, SIGNAL(dataStepChanged(int)), this, SLOT(fillDates()));
+	connect(this, SIGNAL(skipDataChanged(bool)), this, SLOT(fillDates()));
+	connect(this, SIGNAL(skipMarkersChanged(bool)), this, SLOT(fillDates()));
+	connect(this, SIGNAL(smartDatesChanged(bool)), this, SLOT(fillDates()));
 }
 
 void EphemerisMgr::update(double deltaTime)
@@ -122,51 +122,51 @@ void EphemerisMgr::update(double deltaTime)
 void EphemerisMgr::draw(StelCore* core)
 {
 	// AstroCalcDialog
-	if (getFlagEphemerisMarkers())
-		drawEphemerisMarkers(core);
+	if (getFlagMarkers())
+		drawMarkers(core);
 
-	if (getFlagEphemerisLine())
-		drawEphemerisLine(core);
+	if (getFlagLine())
+		drawLine(core);
 }
 
-Vec3f EphemerisMgr::getEphemerisMarkerColor(int index) const
+Vec3f EphemerisMgr::getMarkerColor(int index) const
 {
 	// Sync index with AstroCalcDialog::generateEphemeris(). If required, switch to using a QMap.
 	const QList<Vec3f> colors={
-		ephemerisGenericMarkerColor,
-		ephemerisSecondaryMarkerColor,
-		ephemerisMercuryMarkerColor,
-		ephemerisVenusMarkerColor,
-		ephemerisMarsMarkerColor,
-		ephemerisJupiterMarkerColor,
-		ephemerisSaturnMarkerColor};
-	return colors.value(index, ephemerisGenericMarkerColor);
+		genericMarkerColor,
+		secondaryMarkerColor,
+		mercuryMarkerColor,
+		venusMarkerColor,
+		marsMarkerColor,
+		jupiterMarkerColor,
+		saturnMarkerColor};
+	return colors.value(index, genericMarkerColor);
 }
 
-void EphemerisMgr::drawEphemerisMarkers(const StelCore *core)
+void EphemerisMgr::drawMarkers(const StelCore *core)
 {
 	const int fsize = AstroCalcDialog::EphemerisList.count();
 	if (fsize==0) return;
 
 	StelProjectorP prj;
-	if (getFlagEphemerisHorizontalCoordinates())
+	if (getFlagHorizontalCoordinates())
 		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	else
 		prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
 	float size, shift, baseSize = 4.f;
-	const bool showDates = getFlagEphemerisDates();
-	const bool showMagnitudes = getFlagEphemerisMagnitudes();
-	const bool showSkippedData = getFlagEphemerisSkipData();
-	const bool skipMarkers = getFlagEphemerisSkipMarkers();
-	const int dataStep = getEphemerisDataStep();
-	const int sizeCoeff = getEphemerisLineThickness() - 1;
+	const bool showDates = getFlagDates();
+	const bool showMagnitudes = getFlagMagnitudes();
+	const bool showSkippedData = getFlagSkipData();
+	const bool skipMarkers = getFlagSkipMarkers();
+	const int dataStep = getDataStep();
+	const int sizeCoeff = getLineThickness() - 1;
 	QString info = "";
 	Vec3d win;
 	Vec3f markerColor;
 
-	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
+	if (getFlagLine() && getFlagScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
 
 	for (int i =0; i < fsize; i++)
@@ -180,12 +180,12 @@ void EphemerisMgr::drawEphemerisMarkers(const StelCore *core)
 		const bool isComet=AstroCalcDialog::EphemerisList[i].isComet;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
-			markerColor = getEphemerisSelectedMarkerColor();
+			markerColor = getSelectedMarkerColor();
 			size = 6.f;
 		}
 		else
 		{
-			markerColor = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
+			markerColor = getMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
 			size = baseSize;
 		}
 		if (isComet) size += 16.f;
@@ -193,9 +193,9 @@ void EphemerisMgr::drawEphemerisMarkers(const StelCore *core)
 		sPainter.setColor(markerColor);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
 		if (isComet)
-			texEphemerisCometMarker->bind();
+			texCometMarker->bind();
 		else
-			texEphemerisMarker->bind();
+			texGenericMarker->bind();
 		if (skipMarkers)
 		{
 			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
@@ -239,28 +239,28 @@ void EphemerisMgr::drawEphemerisMarkers(const StelCore *core)
 	}
 }
 
-void EphemerisMgr::drawEphemerisLine(const StelCore *core)
+void EphemerisMgr::drawLine(const StelCore *core)
 {
 	const int size = AstroCalcDialog::EphemerisList.count();
 	if (size==0) return;
 
 	// The array of data is not empty - good news!
 	StelProjectorP prj;
-	if (getFlagEphemerisHorizontalCoordinates())
+	if (getFlagHorizontalCoordinates())
 		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	else
 		prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
 	const float oldLineThickness=sPainter.getLineWidth();
-	const float lineThickness = getEphemerisLineThickness();
+	const float lineThickness = getLineThickness();
 	if (!fuzzyEquals(lineThickness, oldLineThickness))
 		sPainter.setLineWidth(lineThickness);
 
 	Vec3f color;
 	QVector<Vec3d> vertexArray;
 	QVector<Vec4f> colorArray;
-	const int limit = getEphemerisDataLimit();
+	const int limit = getDataLimit();
 	const int nsize = static_cast<int>(size/limit);
 	vertexArray.resize(nsize);
 	colorArray.resize(nsize);
@@ -268,7 +268,7 @@ void EphemerisMgr::drawEphemerisLine(const StelCore *core)
 	{
 		for (int i =0; i < nsize; i++)
 		{
-			color = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
+			color = getMarkerColor(AstroCalcDialog::EphemerisList[i + j*nsize].colorIndex);
 			colorArray[i]=Vec4f(color, 1.0f);
 			vertexArray[i]=AstroCalcDialog::EphemerisList[i + j*nsize].coord;
 		}
@@ -279,13 +279,13 @@ void EphemerisMgr::drawEphemerisLine(const StelCore *core)
 		sPainter.setLineWidth(oldLineThickness); // restore line thickness
 }
 
-void EphemerisMgr::fillEphemerisDates()
+void EphemerisMgr::fillDates()
 {
 	const int fsize = AstroCalcDialog::EphemerisList.count();
 	if (fsize==0) return;
 
 	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-	const bool showSmartDates = getFlagEphemerisSmartDates();
+	const bool showSmartDates = getFlagSmartDates();
 	double JD = AstroCalcDialog::EphemerisList.first().objDate;
 	bool withTime = (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-JD<1.0));
 
@@ -297,8 +297,8 @@ void EphemerisMgr::fillEphemerisDates()
 	sYear = fYear;
 	sMonth = fMonth;
 	sDay = fDay;
-	const bool showSkippedData = getFlagEphemerisSkipData();
-	const int dataStep = getEphemerisDataStep();
+	const bool showSkippedData = getFlagSkipData();
+	const int dataStep = getDataStep();
 
 	for (int i = 0; i < fsize; i++)
 	{
@@ -356,286 +356,286 @@ void EphemerisMgr::fillEphemerisDates()
 	}
 }
 
-void EphemerisMgr::setFlagEphemerisMarkers(bool b)
+void EphemerisMgr::setFlagMarkers(bool b)
 {
-	if (b!=ephemerisMarkersDisplayed)
+	if (b!=markersDisplayed)
 	{
-		ephemerisMarkersDisplayed=b;
+		markersDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_markers", b); // Immediate saving of state
-		emit ephemerisMarkersChanged(b);
+		emit markersDisplayedChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisMarkers() const
+bool EphemerisMgr::getFlagMarkers() const
 {
-	return ephemerisMarkersDisplayed;
+	return markersDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisLine(bool b)
+void EphemerisMgr::setFlagLine(bool b)
 {
-	if (b!=ephemerisLineDisplayed)
+	if (b!=lineDisplayed)
 	{
-		ephemerisLineDisplayed=b;
+		lineDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_line", b); // Immediate saving of state
-		emit ephemerisLineChanged(b);
+		emit lineDisplayedChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisLine() const
+bool EphemerisMgr::getFlagLine() const
 {
-	return ephemerisLineDisplayed;
+	return lineDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisHorizontalCoordinates(bool b)
+void EphemerisMgr::setFlagHorizontalCoordinates(bool b)
 {
-	if (b!=ephemerisHorizontalCoordinates)
+	if (b!=horizontalCoordinates)
 	{
-		ephemerisHorizontalCoordinates=b;
+		horizontalCoordinates=b;
 		conf->setValue("astrocalc/flag_ephemeris_horizontal", b); // Immediate saving of state
-		emit ephemerisHorizontalCoordinatesChanged(b);
+		emit horizontalCoordinatesChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisHorizontalCoordinates() const
+bool EphemerisMgr::getFlagHorizontalCoordinates() const
 {
-	return ephemerisHorizontalCoordinates;
+	return horizontalCoordinates;
 }
 
-void EphemerisMgr::setFlagEphemerisDates(bool b)
+void EphemerisMgr::setFlagDates(bool b)
 {
-	if (b!=ephemerisDatesDisplayed)
+	if (b!=datesDisplayed)
 	{
-		ephemerisDatesDisplayed=b;
+		datesDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_dates", b); // Immediate saving of state
-		emit ephemerisDatesChanged(b);
+		emit datesDisplayedChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisDates() const
+bool EphemerisMgr::getFlagDates() const
 {
-	return ephemerisDatesDisplayed;
+	return datesDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisMagnitudes(bool b)
+void EphemerisMgr::setFlagMagnitudes(bool b)
 {
-	if (b!=ephemerisMagnitudesDisplayed)
+	if (b!=magnitudesDisplayed)
 	{
-		ephemerisMagnitudesDisplayed=b;
+		magnitudesDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_magnitudes", b); // Immediate saving of state
-		emit ephemerisMagnitudesChanged(b);
+		emit magnitudesDisplayedChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisMagnitudes() const
+bool EphemerisMgr::getFlagMagnitudes() const
 {
-	return ephemerisMagnitudesDisplayed;
+	return magnitudesDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisSkipData(bool b)
+void EphemerisMgr::setFlagSkipData(bool b)
 {
-	if (b!=ephemerisSkipDataDisplayed)
+	if (b!=skipDataDisplayed)
 	{
-		ephemerisSkipDataDisplayed=b;
+		skipDataDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_skip_data", b); // Immediate saving of state
-		emit ephemerisSkipDataChanged(b);
+		emit skipDataChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisSkipData() const
+bool EphemerisMgr::getFlagSkipData() const
 {
-	return ephemerisSkipDataDisplayed;
+	return skipDataDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisSkipMarkers(bool b)
+void EphemerisMgr::setFlagSkipMarkers(bool b)
 {
-	if (b!=ephemerisSkipMarkersDisplayed)
+	if (b!=skipMarkersDisplayed)
 	{
-		ephemerisSkipMarkersDisplayed=b;
+		skipMarkersDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_skip_markers", b); // Immediate saving of state
-		emit ephemerisSkipMarkersChanged(b);
+		emit skipMarkersChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisSkipMarkers() const
+bool EphemerisMgr::getFlagSkipMarkers() const
 {
-	return ephemerisSkipMarkersDisplayed;
+	return skipMarkersDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisSmartDates(bool b)
+void EphemerisMgr::setFlagSmartDates(bool b)
 {
-	if (b!=ephemerisSmartDatesDisplayed)
+	if (b!=smartDatesDisplayed)
 	{
-		ephemerisSmartDatesDisplayed=b;
+		smartDatesDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_smart_dates", b); // Immediate saving of state
-		emit ephemerisSmartDatesChanged(b);
+		emit smartDatesChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisSmartDates() const
+bool EphemerisMgr::getFlagSmartDates() const
 {
-	return ephemerisSmartDatesDisplayed;
+	return smartDatesDisplayed;
 }
 
-void EphemerisMgr::setFlagEphemerisScaleMarkers(bool b)
+void EphemerisMgr::setFlagScaleMarkers(bool b)
 {
-	if (b!=ephemerisScaleMarkersDisplayed)
+	if (b!=scaleMarkersDisplayed)
 	{
-		ephemerisScaleMarkersDisplayed=b;
+		scaleMarkersDisplayed=b;
 		conf->setValue("astrocalc/flag_ephemeris_scale_markers", b); // Immediate saving of state
-		emit ephemerisScaleMarkersChanged(b);
+		emit scaleMarkersChanged(b);
 	}
 }
 
-bool EphemerisMgr::getFlagEphemerisScaleMarkers() const
+bool EphemerisMgr::getFlagScaleMarkers() const
 {
-	return ephemerisScaleMarkersDisplayed;
+	return scaleMarkersDisplayed;
 }
 
-void EphemerisMgr::setEphemerisDataStep(int step)
+void EphemerisMgr::setDataStep(int step)
 {
-	ephemerisDataStep = step;
+	dataStep = step;
 	// automatic saving of the setting
 	conf->setValue("astrocalc/ephemeris_data_step", step);
-	emit ephemerisDataStepChanged(step);
+	emit dataStepChanged(step);
 }
 
-int EphemerisMgr::getEphemerisDataStep() const
+int EphemerisMgr::getDataStep() const
 {
-	return ephemerisDataStep;
+	return dataStep;
 }
 
-void EphemerisMgr::setEphemerisDataLimit(int limit)
+void EphemerisMgr::setDataLimit(int limit)
 {
-	ephemerisDataLimit = limit;
-	emit ephemerisDataLimitChanged(limit);
+	dataLimit = limit;
+	emit dataLimitChanged(limit);
 }
 
-int EphemerisMgr::getEphemerisDataLimit() const
+int EphemerisMgr::getDataLimit() const
 {
-	return ephemerisDataLimit;
+	return dataLimit;
 }
 
-void EphemerisMgr::setEphemerisLineThickness(int v)
+void EphemerisMgr::setLineThickness(int v)
 {
-	ephemerisLineThickness = v;
+	lineThickness = v;
 	// automatic saving of the setting
 	conf->setValue("astrocalc/ephemeris_line_thickness", v);
-	emit ephemerisLineThicknessChanged(v);
+	emit lineThicknessChanged(v);
 }
 
-int EphemerisMgr::getEphemerisLineThickness() const
+int EphemerisMgr::getLineThickness() const
 {
-	return ephemerisLineThickness;
+	return lineThickness;
 }
 
-void EphemerisMgr::setEphemerisGenericMarkerColor(const Vec3f& color)
+void EphemerisMgr::setGenericMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisGenericMarkerColor)
+	if (color!=genericMarkerColor)
 	{
-		ephemerisGenericMarkerColor = color;
-		emit ephemerisGenericMarkerColorChanged(color);
+		genericMarkerColor = color;
+		emit genericMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisGenericMarkerColor() const
+Vec3f EphemerisMgr::getGenericMarkerColor() const
 {
-	return ephemerisGenericMarkerColor;
+	return genericMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisSecondaryMarkerColor(const Vec3f& color)
+void EphemerisMgr::setSecondaryMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisSecondaryMarkerColor)
+	if (color!=secondaryMarkerColor)
 	{
-		ephemerisSecondaryMarkerColor = color;
-		emit ephemerisSecondaryMarkerColorChanged(color);
+		secondaryMarkerColor = color;
+		emit secondaryMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisSecondaryMarkerColor() const
+Vec3f EphemerisMgr::getSecondaryMarkerColor() const
 {
-	return ephemerisSecondaryMarkerColor;
+	return secondaryMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisSelectedMarkerColor(const Vec3f& color)
+void EphemerisMgr::setSelectedMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisSelectedMarkerColor)
+	if (color!=selectedMarkerColor)
 	{
-		ephemerisSelectedMarkerColor = color;
-		emit ephemerisSelectedMarkerColorChanged(color);
+		selectedMarkerColor = color;
+		emit selectedMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisSelectedMarkerColor() const
+Vec3f EphemerisMgr::getSelectedMarkerColor() const
 {
-	return ephemerisSelectedMarkerColor;
+	return selectedMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisMercuryMarkerColor(const Vec3f& color)
+void EphemerisMgr::setMercuryMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisMercuryMarkerColor)
+	if (color!=mercuryMarkerColor)
 	{
-		ephemerisMercuryMarkerColor = color;
-		emit ephemerisMercuryMarkerColorChanged(color);
+		mercuryMarkerColor = color;
+		emit mercuryMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisMercuryMarkerColor() const
+Vec3f EphemerisMgr::getMercuryMarkerColor() const
 {
-	return ephemerisMercuryMarkerColor;
+	return mercuryMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisVenusMarkerColor(const Vec3f& color)
+void EphemerisMgr::setVenusMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisVenusMarkerColor)
+	if (color!=venusMarkerColor)
 	{
-		ephemerisVenusMarkerColor = color;
-		emit ephemerisVenusMarkerColorChanged(color);
+		venusMarkerColor = color;
+		emit venusMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisVenusMarkerColor() const
+Vec3f EphemerisMgr::getVenusMarkerColor() const
 {
-	return ephemerisVenusMarkerColor;
+	return venusMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisMarsMarkerColor(const Vec3f& color)
+void EphemerisMgr::setMarsMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisMarsMarkerColor)
+	if (color!=marsMarkerColor)
 	{
-		ephemerisMarsMarkerColor = color;
-		emit ephemerisMarsMarkerColorChanged(color);
+		marsMarkerColor = color;
+		emit marsMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisMarsMarkerColor() const
+Vec3f EphemerisMgr::getMarsMarkerColor() const
 {
-	return ephemerisMarsMarkerColor;
+	return marsMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisJupiterMarkerColor(const Vec3f& color)
+void EphemerisMgr::setJupiterMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisJupiterMarkerColor)
+	if (color!=jupiterMarkerColor)
 	{
-		ephemerisJupiterMarkerColor = color;
-		emit ephemerisJupiterMarkerColorChanged(color);
+		jupiterMarkerColor = color;
+		emit jupiterMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisJupiterMarkerColor() const
+Vec3f EphemerisMgr::getJupiterMarkerColor() const
 {
-	return ephemerisJupiterMarkerColor;
+	return jupiterMarkerColor;
 }
 
-void EphemerisMgr::setEphemerisSaturnMarkerColor(const Vec3f& color)
+void EphemerisMgr::setSaturnMarkerColor(const Vec3f& color)
 {
-	if (color!=ephemerisSaturnMarkerColor)
+	if (color!=saturnMarkerColor)
 	{
-		ephemerisSaturnMarkerColor = color;
-		emit ephemerisSaturnMarkerColorChanged(color);
+		saturnMarkerColor = color;
+		emit saturnMarkerColorChanged(color);
 	}
 }
 
-Vec3f EphemerisMgr::getEphemerisSaturnMarkerColor() const
+Vec3f EphemerisMgr::getSaturnMarkerColor() const
 {
-	return ephemerisSaturnMarkerColor;
+	return saturnMarkerColor;
 }

@@ -53,12 +53,12 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
 
-	connectBoolProperty(ui->skipDataCheckBox,	"EphemerisMgr.ephemerisSkippedData");
-	connectBoolProperty(ui->skipMarkersCheckBox,	"EphemerisMgr.ephemerisSkippedMarkers");
-	connectIntProperty(ui->dataStepSpinBox,		"EphemerisMgr.ephemerisDataStep");
-	connectBoolProperty(ui->smartDatesCheckBox,	"EphemerisMgr.ephemerisSmartDates");
-	connectBoolProperty(ui->scaleMarkersCheckBox,	"EphemerisMgr.ephemerisScaleMarkersDisplayed");
-	connectIntProperty(ui->lineThicknessSpinBox,	"EphemerisMgr.ephemerisLineThickness");
+	connectBoolProperty(ui->skipDataCheckBox,	"EphemerisMgr.skippedData");
+	connectBoolProperty(ui->skipMarkersCheckBox,	"EphemerisMgr.skippedMarkers");
+	connectIntProperty(ui->dataStepSpinBox,		"EphemerisMgr.dataStep");
+	connectBoolProperty(ui->smartDatesCheckBox,	"EphemerisMgr.smartDates");
+	connectBoolProperty(ui->scaleMarkersCheckBox,	"EphemerisMgr.scaleMarkersDisplayed");
+	connectIntProperty(ui->lineThicknessSpinBox,	"EphemerisMgr.lineThickness");
 
 	setOptionStatus();
 }
