@@ -138,6 +138,7 @@ public:
 	bool appendToSolarSystemConfigurationFile(SsoElements object);
 
 	//! Adds new entries at the end of the user solar system configuration file.
+	//! XXX Also updates existing objects (by removing and then appending)
 	//! This function writes directly to the file. QSettings was not used, as:
 	//!  - Using QSettings with QSettings::IniFormat causes the list in the
 	//!    "color" field (e.g. "1.0, 1.0, 1.0") to be wrapped in double quotation
@@ -174,7 +175,7 @@ public:
 	//! Updates entries in the user solar system configuration file.
 	//! \param objects a list of data for already existing objects (non-existing ones are skipped);
 	//! \param flags flags controlling what is being updated. See UpdateFlag.
-	//! \returns false if the operation has failed completely for some reason.
+	//! \returns false if the operation has failed for some reason.
 	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
 
 	//! Returns the names of the objects listed in the default ssystem_major.ini.

@@ -255,7 +255,7 @@ void MpcImportWindow::addObjects()
 
 	QList<QString> checkedObjectsNames;
 
-	//Extract the marked objects
+	// Collect names of marked objects
 	//TODO: Something smarter?
 	for (int row = 0; row < candidateObjectsModel->rowCount(); row++)
 	{
@@ -269,7 +269,7 @@ void MpcImportWindow::addObjects()
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
 
-	// collect all new candidates that were selected by the user into `approvedForAddition`
+	// collect from candidatesForAddition all candidates that were selected by the user into `approvedForAddition` ...
 	QList<SsoElements> approvedForAddition;
 	for (int i = 0; i < candidatesForAddition.count(); i++)
 	{
@@ -281,7 +281,7 @@ void MpcImportWindow::addObjects()
 
 	//qDebug() << "Approved for addition:" << approvedForAddition;
 
-	// collect all existing candidates that were selected by the use into `approvedForUpdate`r
+	// collect all new (!!!) candidates that were selected by the user into `approvedForUpdate`
 	// if the user opted to overwrite, those candidates are added to `approvedForAddition` instead
 	bool overwrite = ui->radioButtonOverwrite->isChecked();
 	QList<SsoElements> approvedForUpdate;
@@ -366,14 +366,14 @@ void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 
 void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 {
-	candidatesForAddition.clear();
-	candidatesForUpdate.clear();
+	candidatesForAddition.clear();	// new objects
+	candidatesForUpdate.clear();	// existing objects
 
 	//Get a list of the current objects
 	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
 	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
-	//Separating the objects into visual groups in the list
+	//Separate the objects into visual groups in the list
 	//int newDefaultSsoIndex = 0;
 	int newLoadedSsoIndex = 0;
 	int newNovelSsoIndex = 0;
@@ -423,6 +423,8 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 //			newNovelSsoIndex++;
 //		}
 //		else
+
+		// identify existing (mark italic) and new objects
 		if (loadedSsoIdentifiers.contains(name))
 		{
 			//Duplicate of another existing object

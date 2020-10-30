@@ -971,7 +971,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 	}
 }
 
-// append new, but (oddly) also updates existing objects (by removing and then appending)
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
 	qDebug() << "appendToSolarSystemConfigurationFile begin ... ";
@@ -990,13 +989,14 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	// load all existing minor bodies
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 
-	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, StelIniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
 		qDebug() << "Error opening ssystem_minor.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
+	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
 	for (auto object : objectList)
 	{
 		QString name = object.value("name").toString();
@@ -1102,6 +1102,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
 	QStringList existingSections = solarSystem.childGroups();
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 	//TODO: Move to constructor?
