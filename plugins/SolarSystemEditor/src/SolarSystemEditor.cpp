@@ -1217,8 +1217,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 				}
 				else
 				{
-					//TODO: Do what, log a message?
-					qDebug() << "Warning: cannot update magnitude for type " << type;
+					qWarning() << "cannot update magnitude for type " << type;
 				}
 			}
 		}
