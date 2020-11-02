@@ -321,21 +321,28 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always nonnegative.
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always positive.
+	//! Integer modulo where the result is always positive.
+	inline int amod(const int a, const int b){
+		int ret = a % b;
+		if(ret <= 0)
+			ret+=b;
+		return ret;
+	}
+	//! Double modulo where the result is always nonnegative.
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always positive.
+	//! Float modulo where the result is always nonnegative.
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
@@ -378,7 +385,7 @@ namespace StelUtils
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
 	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
-		return static_cast<int>(floor(d));
+		return std::lround(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
