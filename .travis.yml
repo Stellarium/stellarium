@@ -216,6 +216,7 @@ matrix:
       arch: arm64-graviton2
       dist: focal
       group: edge
+      virt: lxd
       addons:
         apt:
           packages:
