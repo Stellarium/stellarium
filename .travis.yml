@@ -216,7 +216,6 @@ matrix:
       arch: arm64-graviton2
       dist: focal
       group: edge
-      virt: vm
       addons:
         apt:
           packages:
@@ -240,7 +239,6 @@ matrix:
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
-            - cmake
           update: true
       env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
