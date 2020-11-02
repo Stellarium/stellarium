@@ -254,28 +254,28 @@
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QDoubleSpinBox" name="gregorianDaySpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="gregorianDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="minimum">
-            <double>1.000000000000000</double>
+            <number>1</number>
            </property>
            <property name="maximum">
-            <double>31.000000000000000</double>
+            <number>31</number>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QDoubleSpinBox" name="gregorianMonthSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="gregorianMonthSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="minimum">
-            <double>1.000000000000000</double>
+            <number>1</number>
            </property>
            <property name="maximum">
-            <double>12.000000000000000</double>
+            <number>12</number>
            </property>
           </widget>
          </item>
@@ -301,18 +301,15 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QDoubleSpinBox" name="gregorianYearSpinBox">
-           <property name="decimals">
-            <number>0</number>
-           </property>
+          <widget class="QSpinBox" name="gregorianYearSpinBox">
            <property name="minimum">
-            <double>-100000.000000000000000</double>
+            <number>-100000</number>
            </property>
            <property name="maximum">
-            <double>100000.000000000000000</double>
+            <number>100000</number>
            </property>
            <property name="value">
-            <double>2000.000000000000000</double>
+            <number>2000</number>
            </property>
           </widget>
          </item>
@@ -338,9 +335,12 @@
           </widget>
          </item>
          <item row="2" column="7">
-          <widget class="QDoubleSpinBox" name="gregorianSecondSpinBox">
+          <widget class="QSpinBox" name="gregorianSecondSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
            <property name="maximum">
-            <double>60.000000000000000</double>
+            <number>60</number>
            </property>
           </widget>
          </item>
@@ -352,12 +352,12 @@
           </widget>
          </item>
          <item row="2" column="6">
-          <widget class="QDoubleSpinBox" name="gregorianMinuteSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="gregorianMinuteSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="maximum">
-            <double>59.000000000000000</double>
+            <number>59</number>
            </property>
           </widget>
          </item>
@@ -369,12 +369,12 @@
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QDoubleSpinBox" name="gregorianHourSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="gregorianHourSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="maximum">
-            <double>23.000000000000000</double>
+            <number>23</number>
            </property>
           </widget>
          </item>
@@ -386,7 +386,17 @@
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QSpinBox" name="isoWeekSpinBox"/>
+          <widget class="QSpinBox" name="isoWeekSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>53</number>
+           </property>
+          </widget>
          </item>
          <item row="3" column="4">
           <widget class="QComboBox" name="isoWeekdayComboBox"/>
@@ -399,44 +409,41 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QDoubleSpinBox" name="julianYearSpinBox">
-           <property name="decimals">
-            <number>0</number>
-           </property>
+          <widget class="QSpinBox" name="julianYearSpinBox">
            <property name="minimum">
-            <double>-100000.000000000000000</double>
+            <number>-100000</number>
            </property>
            <property name="maximum">
-            <double>100000.000000000000000</double>
+            <number>100000</number>
            </property>
            <property name="value">
-            <double>2000.000000000000000</double>
+            <number>2000</number>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QDoubleSpinBox" name="julianMonthSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="julianMonthSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="minimum">
-            <double>1.000000000000000</double>
+            <number>1</number>
            </property>
            <property name="maximum">
-            <double>12.000000000000000</double>
+            <number>12</number>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QDoubleSpinBox" name="julianDaySpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="julianDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="minimum">
-            <double>1.000000000000000</double>
+            <number>1</number>
            </property>
            <property name="maximum">
-            <double>31.000000000000000</double>
+            <number>31</number>
            </property>
           </widget>
          </item>
@@ -457,29 +464,32 @@
           </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QDoubleSpinBox" name="julianHourSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="julianHourSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="maximum">
-            <double>23.000000000000000</double>
+            <number>23</number>
            </property>
           </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QDoubleSpinBox" name="julianMinuteSpinBox">
-           <property name="decimals">
-            <number>0</number>
+          <widget class="QSpinBox" name="julianMinuteSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
            <property name="maximum">
-            <double>59.000000000000000</double>
+            <number>59</number>
            </property>
           </widget>
          </item>
          <item row="1" column="7">
-          <widget class="QDoubleSpinBox" name="julianSecondSpinBox">
+          <widget class="QSpinBox" name="julianSecondSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
            <property name="maximum">
-            <double>60.000000000000000</double>
+            <number>60</number>
            </property>
           </widget>
          </item>
@@ -502,13 +512,229 @@
      </widget>
      <widget class="QWidget" name="chineseTab">
       <attribute name="title">
-       <string>Seite</string>
+       <string>Chinese</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout"/>
      </widget>
      <widget class="QWidget" name="mesoamericaTab">
       <attribute name="title">
-       <string>Seite</string>
+       <string>Mesoamerica</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="4">
+          <widget class="QLabel" name="labelUinal">
+           <property name="text">
+            <string>Uinal</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="baktunSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QSpinBox" name="tunSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QSpinBox" name="uinalSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>17</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="labelTun">
+           <property name="text">
+            <string>Tun</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QSpinBox" name="katunSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QSpinBox" name="kinSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="labelKatun">
+           <property name="text">
+            <string>Katun</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="labelBaktun">
+           <property name="text">
+            <string>Baktun</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelLongCount">
+           <property name="text">
+            <string>Long Count</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="labelKin">
+           <property name="text">
+            <string>Kin</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelHaab">
+           <property name="text">
+            <string>Haab</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelTzolkin">
+           <property name="text">
+            <string>Tzolkin</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="haabMonthSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QSpinBox" name="haabDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>19</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QSpinBox" name="tzolkinNumberSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>13</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QSpinBox" name="tzolkinNameSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLineEdit" name="haabLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLineEdit" name="tzolkinLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacerMesoamerica">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">

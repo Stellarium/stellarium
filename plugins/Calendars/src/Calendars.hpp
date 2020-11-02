@@ -103,7 +103,7 @@ public slots:
 	void showISO(bool b);			//!< activate display of ISO Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
-	bool isMayaLongCountDisplayed() const;		//!< display Maya Long Count?
+	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
 	void showMayaLongCount(bool b);		//!< activate display of Maya Long Count
 	bool isMayaHaabDisplayed() const;	//!< display Maya Haab?
 	void showMayaHaab(bool b);		//!< activate display of Maya Haab

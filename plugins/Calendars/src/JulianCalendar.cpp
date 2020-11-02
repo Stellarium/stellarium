@@ -139,13 +139,13 @@ void JulianCalendar::setJD(double JD)
 QStringList JulianCalendar::getPartStrings()
 {
 	QStringList list;
-	list << QString::number(std::lround(parts.at(0)));
-	list << QString::number(std::lround(parts.at(1)));
-	list << QString::number(std::lround(parts.at(2)));
+	list << QString::number(parts.at(0));
+	list << QString::number(parts.at(1));
+	list << QString::number(parts.at(2));
 	list << weekday(JD);
-	list << QString::number(parts.at(3), 'f', 0);
-	list << QString::number(parts.at(4), 'f', 0);
-	list << QString::number(parts.at(5), 'f', 2);
+	list << QString::number(parts.at(3));
+	list << QString::number(parts.at(4));
+	list << QString::number(parts.at(5));
 
 	return list;
 }
@@ -159,7 +159,7 @@ QString JulianCalendar::getFormattedDateString()
 			.arg(str.at(3)) // weekday
 			.arg(str.at(0)) // year
 			.arg(str.at(1)) // month, numerical
-			.arg(monthNames.value(std::lround(parts.at(1)))) // month, name
+			.arg(monthNames.value(parts.at(1))) // month, name
 			.arg(str.at(2)) // day
 			.arg(str.at(4)) // hour
 			.arg(str.at(5)) // minute
@@ -172,16 +172,16 @@ QString JulianCalendar::getFormattedDateString()
 // Year-Month[1...12]-Day[1...31]-Hour-Minute-Second
 // Algorithm from "Numerical Recipes in C, 2nd Ed." (1992), pp. 11-12
 // This has been taken from StelUtils, but is always Julian Calendar
-void JulianCalendar::setParts(QVector<double> parts)
+void JulianCalendar::setParts(QVector<int> parts)
 {
 	this->parts=parts;
 
-	const int y=std::lround(parts.at(0));
-	const int m=std::lround(parts.at(1));
-	const int d=std::lround(parts.at(2));
-	const int h=std::lround(parts.at(3));
-	const int min=std::lround(parts.at(4));
-	const double s=parts.at(5);
+	const int y=parts.at(0);
+	const int m=parts.at(1);
+	const int d=parts.at(2);
+	const int h=parts.at(3);
+	const int min=parts.at(4);
+	const int s=parts.at(5);
 
 	//static const long IGREG2 = 15+31L*(10+12L*1582);
 	const double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;

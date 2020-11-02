@@ -29,6 +29,9 @@
 
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
+#include "MayaLongCountCalendar.hpp"
+#include "MayaHaabCalendar.hpp"
+#include "MayaTzolkinCalendar.hpp"
 
 #include "CalendarsDialog.hpp"
 /*************************************************************************
@@ -143,6 +146,9 @@ void Calendars::init()
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	calendars.insert("Julian", new JulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
+	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
+	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
+	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
@@ -189,8 +195,11 @@ void Calendars::draw(StelCore* core)
 
 	// TODO: Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
-	if (flagShowJulian) painter.drawText(1300, 900, QString("Julian: ") + getCal("Julian")->getFormattedDateString());
-	if (flagShowGregorian) painter.drawText(1300, 915, QString("Gregorian: ") + getCal("Gregorian")->getFormattedDateString());
+	if (flagShowJulian) painter.drawText(1300, 870, QString("Julian: ") + getCal("Julian")->getFormattedDateString());
+	if (flagShowGregorian) painter.drawText(1300, 855, QString("Gregorian: ") + getCal("Gregorian")->getFormattedDateString());
+	if (flagShowMayaLongCount) painter.drawText(1300, 840, QString("Maya Long Count: ") + getCal("MayaLongCount")->getFormattedDateString());
+	if (flagShowMayaHaab) painter.drawText(1300, 825, QString("Maya Haab: ") + getCal("MayaHaab")->getFormattedDateString());
+	if (flagShowMayaTzolkin) painter.drawText(1300, 810, QString("Maya Tzolkin: ") + getCal("MayaTzolkin")->getFormattedDateString());
 }
 
 

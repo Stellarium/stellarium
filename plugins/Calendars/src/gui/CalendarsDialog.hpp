@@ -53,14 +53,20 @@ private:
 
 private slots:
 	// populate the respective GUI elements when calendars change. It is possible to even retrieve sender address (?) to possibly call particular other functions.
-	void populateGregorianParts(QVector<double> parts);
-	void populateJulianParts(QVector<double> parts);
-	void populateISOParts(QVector<double> parts);
+	void populateGregorianParts(QVector<int> parts);
+	void populateJulianParts(QVector<int> parts);
+	void populateISOParts(QVector<int> parts);
+	void populateMayaLongCountParts(QVector<int> parts);
+	void populateMayaHaabParts(QVector<int> parts);
+	void populateMayaTzolkinParts(QVector<int> parts);
 
 	// handle changes in the editable fields. One method per calendar.
 	void julianChanged();
 	void gregorianChanged();
 	void isoChanged();
+	void mayaLongCountChanged();
+	void mayaHaabChanged();
+	void mayaTzolkinChanged();
 
 	void resetCalendarsSettings();
 };

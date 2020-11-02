@@ -42,7 +42,7 @@ public:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]-Hour-Minute-Second
-	virtual void setParts(QVector<double> parts) Q_DECL_OVERRIDE;
+	virtual void setParts(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName, Hour, Minute, Second

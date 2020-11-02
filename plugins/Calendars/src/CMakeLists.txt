@@ -12,12 +12,12 @@ SET(Calendars_SRCS
     JulianCalendar.cpp
     GregorianCalendar.hpp
     GregorianCalendar.cpp
-        #MayaLongCountCalendar.hpp
-	#MayaLongCountCalendar.cpp
-	#MayaTzolkinCalendar.hpp
-	#MayaTzolkinCalendar.cpp
-	#MayaHaabCalendar.hpp
-	#MayaHaabCalendar.cpp
+    MayaLongCountCalendar.hpp
+    MayaLongCountCalendar.cpp
+    MayaHaabCalendar.hpp
+    MayaHaabCalendar.cpp
+    MayaTzolkinCalendar.hpp
+    MayaTzolkinCalendar.cpp
 )
 
 SET(Calendars_UIS

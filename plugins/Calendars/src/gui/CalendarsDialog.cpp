@@ -27,6 +27,11 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 
+// We only need to include calendars when we have to call special functions.
+#include "MayaHaabCalendar.hpp"
+#include "MayaTzolkinCalendar.hpp"
+
+
 CalendarsDialog::CalendarsDialog()
 	: StelDialog("Calendars")
 	, cal(Q_NULLPTR)
@@ -67,10 +72,13 @@ void CalendarsDialog::createDialogContent()
 	setAboutHtml();
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
-	connect(cal->getCal("Julian"), SIGNAL(partsChanged(QVector<double>)), this, SLOT(populateJulianParts(QVector<double>)));
-	connect(cal->getCal("Gregorian"), SIGNAL(partsChanged(QVector<double>)), this, SLOT(populateGregorianParts(QVector<double>)));
-	//connect(cal->getCal("ISO"), SIGNAL(partsChanged(QVector<double>)), this, SLOT(populateISOParts(QVector<double>)));
-	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<double>)), this, SLOT(populateChineseParts(QVector<double>)));
+	connect(cal->getCal("Julian"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
+	connect(cal->getCal("Gregorian"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateGregorianParts(QVector<int>)));
+	//connect(cal->getCal("ISO"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateISOParts(QVector<int>)));
+	connect(cal->getCal("MayaLongCount"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
+	connect(cal->getCal("MayaHaab"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaHaabParts(QVector<int>)));
+	connect(cal->getCal("MayaTzolkin"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaTzolkinParts(QVector<int>)));
+	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateChineseParts(QVector<int>)));
 
 	connectBoolProperty(ui->julianCheckBox,      "Calendars.flagShowJulian");
 	connectBoolProperty(ui->gregorianCheckBox,   "Calendars.flagShowGregorian");
@@ -82,24 +90,30 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->mayaTzolkinCheckBox, "Calendars.flagShowMayaTzolkin");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
-	connect(ui->julianYearSpinBox,   SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->julianMonthSpinBox,  SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->julianDaySpinBox,    SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->julianHourSpinBox,   SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->julianMinuteSpinBox, SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->julianSecondSpinBox, SIGNAL(valueChanged(double)), this, SLOT(julianChanged()));
-	connect(ui->gregorianYearSpinBox,   SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianMonthSpinBox,  SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianDaySpinBox,    SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianHourSpinBox,   SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianMinuteSpinBox, SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianSecondSpinBox, SIGNAL(valueChanged(double)), this, SLOT(gregorianChanged()));
-	connect(ui->isoWeekSpinBox,     SIGNAL(valueChanged(double)), this, SLOT(isoChanged()));
-	connect(ui->isoWeekdayComboBox, SIGNAL(valueChanged(double)), this, SLOT(isoChanged()));
+	connect(ui->julianYearSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianMonthSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianDaySpinBox,    SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianHourSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianMinuteSpinBox, SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianSecondSpinBox, SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->gregorianYearSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianMonthSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianDaySpinBox,    SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianHourSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianMinuteSpinBox, SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianSecondSpinBox, SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->isoWeekSpinBox,     SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->isoWeekdayComboBox, SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->baktunSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->katunSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->tunSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->uinalSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->kinSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	//connect(ui->haabMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
+	//connect(ui->haabDaySpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
+	//connect(ui->tzolkinNumberSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaTzolkinChanged()));
+	//connect(ui->tzolkinNameSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaTzolkinChanged()));
 
-	// Hide currently empty tabs
-	ui->tabs->removeTab(3); // mesoamerican
-	ui->tabs->removeTab(2); // chinese
 }
 
 void CalendarsDialog::setAboutHtml(void)
@@ -168,7 +182,7 @@ void CalendarsDialog::resetCalendarsSettings()
 		qDebug() << "[Calendars] restore defaults cancelled.";
 }
 
-void CalendarsDialog::populateJulianParts(QVector<double> parts)
+void CalendarsDialog::populateJulianParts(QVector<int> parts)
 {
 	ui->julianYearSpinBox->setValue(parts.at(0));
 	ui->julianMonthSpinBox->setValue(parts.at(1));
@@ -182,7 +196,7 @@ void CalendarsDialog::populateJulianParts(QVector<double> parts)
 	if (jul)
 		ui->julianWeekdayLineEdit->setText(jul->weekday(jul->getJD()));
 }
-void CalendarsDialog::populateGregorianParts(QVector<double> parts)
+void CalendarsDialog::populateGregorianParts(QVector<int> parts)
 {
 	ui->gregorianYearSpinBox->setValue(parts.at(0));
 	ui->gregorianMonthSpinBox->setValue(parts.at(1));
@@ -195,10 +209,38 @@ void CalendarsDialog::populateGregorianParts(QVector<double> parts)
 	if (greg)
 		ui->gregorianWeekdayLineEdit->setText(greg->weekday(greg->getJD()));
 }
-void CalendarsDialog::populateISOParts(QVector<double> parts)
+void CalendarsDialog::populateISOParts(QVector<int> parts)
 {
 
 }
+
+void CalendarsDialog::populateMayaLongCountParts(QVector<int> parts)
+{
+	ui->baktunSpinBox->setValue(parts.at(0));
+	ui->katunSpinBox->setValue(parts.at(1));
+	ui->tunSpinBox->setValue(parts.at(2));
+	ui->uinalSpinBox->setValue(parts.at(3));
+	ui->kinSpinBox->setValue(parts.at(4));
+}
+void CalendarsDialog::populateMayaHaabParts(QVector<int> parts)
+{
+	ui->haabMonthSpinBox->setValue(parts.at(0));
+	ui->haabDaySpinBox->setValue(parts.at(1));
+	MayaHaabCalendar *haab=dynamic_cast<MayaHaabCalendar*>(sender());
+	if (haab)
+		ui->haabLineEdit->setText(haab->getFormattedDateString());
+
+}
+void CalendarsDialog::populateMayaTzolkinParts(QVector<int> parts)
+{
+	ui->tzolkinNumberSpinBox->setValue(parts.at(0));
+	ui->tzolkinNameSpinBox->setValue(parts.at(1));
+	Calendar *tzolkin=dynamic_cast<Calendar*>(sender());
+	if (tzolkin)
+		ui->tzolkinLineEdit->setText(tzolkin->getFormattedDateString());
+
+}
+
 
 /*
  * These slots set the calendar from the associated GUI elements
@@ -228,4 +270,23 @@ void CalendarsDialog::isoChanged()
 //					ui->isoWeekSpinBox->value(),
 //					    ui->isoDaySpinBox->value()});
 
+}
+void CalendarsDialog::mayaLongCountChanged()
+{
+	cal->getCal("MayaLongCount")->setParts({ui->baktunSpinBox->value(),
+					       ui->katunSpinBox->value(),
+					       ui->tunSpinBox->value(),
+					       ui->uinalSpinBox->value(),
+					       ui->kinSpinBox->value()});
+}
+void CalendarsDialog::mayaHaabChanged()
+{
+	cal->getCal("MayaHaab")->setParts({ui->haabMonthSpinBox->value(),
+					   ui->haabDaySpinBox->value()});
+
+}
+void CalendarsDialog::mayaTzolkinChanged()
+{
+	cal->getCal("MayaTzolkin")->setParts({ui->tzolkinNumberSpinBox->value(),
+					      ui->tzolkinNameSpinBox->value()});
 }

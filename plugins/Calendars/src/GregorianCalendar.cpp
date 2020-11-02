@@ -97,25 +97,25 @@ void GregorianCalendar::setJD(double JD)
 	parts.clear();
 	parts << yy << mm << dd;
 
-	int hour, minute, second, millis;
-	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second, &millis);
-	parts << hour << minute << second+millis/1000.;
+	int hour, minute, second;
+	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second, nullptr);
+	parts << hour << minute << second;
 
 	emit partsChanged(parts);
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]-Hour-Minute-Second
-void GregorianCalendar::setParts(QVector<double> parts)
+void GregorianCalendar::setParts(QVector<int> parts)
 {
 	this->parts=parts;
 
-	const int y=std::lround(parts.at(0));
-	const int m=std::lround(parts.at(1));
-	const int d=std::lround(parts.at(2));
-	const int h=std::lround(parts.at(3));
-	const int min=std::lround(parts.at(4));
-	const double s=parts.at(5);
+	const int y=parts.at(0);
+	const int m=parts.at(1);
+	const int d=parts.at(2);
+	const int h=parts.at(3);
+	const int min=parts.at(4);
+	const int s=parts.at(5);
 
 	//static const long IGREG2 = 15+31L*(10+12L*1582);
 	const double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;
