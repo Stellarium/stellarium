@@ -312,7 +312,7 @@ void MpcImportWindow::addObjects()
 	// update name, MPC number, orbital elements
 	// if the user asked more to update, include type (asteroid, comet, plutino, cubewano, ...) and magnitude parameters
 	bool update = ui->radioButtonUpdate->isChecked();
-	// ASSERT(update != overwrite);
+	// ASSERT(update != overwrite); // because of radiobutton behaviour. TODO this UI is not very clear anyway.
 	if (update) 
 	{
 		SolarSystemEditor::UpdateFlags flags(SolarSystemEditor::UpdateNameAndNumber | SolarSystemEditor::UpdateOrbitalElements);
@@ -424,7 +424,7 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 //		}
 //		else
 
-		// identify existing (mark italic) and new objects
+		// identify existing (in italic) and new objects
 		if (loadedSsoIdentifiers.contains(name))
 		{
 			//Duplicate of another existing object
