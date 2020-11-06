@@ -399,6 +399,26 @@ void StelMainScriptAPI::setFlagGravityLabels(bool b)
 	StelApp::getInstance().getCore()->setFlagGravityLabels(b);
 }
 
+bool StelMainScriptAPI::getFlipHorz()
+{
+	return StelApp::getInstance().getCore()->getFlipHorz();
+}
+
+void StelMainScriptAPI::setFlipHorz(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipHorz(b);
+}
+
+bool StelMainScriptAPI::getFlipVert()
+{
+	return StelApp::getInstance().getCore()->getFlipVert();
+}
+
+void StelMainScriptAPI::setFlipVert(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipVert(b);
+}
+
 bool StelMainScriptAPI::getDiskViewport()
 {
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
