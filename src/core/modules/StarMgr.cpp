@@ -665,7 +665,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
-	closeBinaries.clear();
+	algolTypes.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -682,10 +682,18 @@ void StarMgr::populateHipparcosLists()
 				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
 				
-				if (QString("EA EB EP EW").contains (getGcvsVariabilityType(s->getHip())) )
-				//if (QString("EA").contains (getGcvsVariabilityType(s->getHip())) )
+				if (QString(
+				"EA "
+				//"EB EW "
+				//"EP " // not present in StarWrapper1::getInfoString()
+				"EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR "
+				"EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD "
+				"EA/AR/RS EA/GS/D EA/D/WR"
+				//"EB/GS EB/DM EB/KE EB/KE: "
+				//"EW/KE "
+				).contains (getGcvsVariabilityType(s->getHip())) )
 				{
-					closeBinaries.push_back(sa);
+					algolTypes.push_back(sa);
 				}
 			}
 			if (!getWdsName(s->getHip()).isEmpty())

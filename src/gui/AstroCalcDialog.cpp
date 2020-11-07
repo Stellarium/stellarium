@@ -5130,7 +5130,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Globular star clusters"),			ew_globular_star_clusters);
 	wutCategories.insert(q_("Regions of the sky"), 				ew_regions_of_the_sky);
 	wutCategories.insert(q_("Active galaxies"), 				ew_active_galaxies);
-	wutCategories.insert(q_("Eclipsing close binary systems"),		ew_eclipsing_close_binaries);
+	wutCategories.insert(q_("Algol (Beta Persei)-type eclipsing systems"),	ew_Algol_types);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
@@ -5317,7 +5317,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
-		QList<StelACStarData> algolTypes = starMgr->getHipparcosCloseBinaries();
+		QList<StelACStarData> algolTypes = starMgr->getHipparcosAlgolTypes();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
@@ -5667,7 +5667,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
-				case ew_eclipsing_close_binaries:
+				case ew_Algol_types:
 					enableAng = false;
 					for (const auto& varStar : algolTypes)
 					{
