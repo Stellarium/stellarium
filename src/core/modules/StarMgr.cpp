@@ -665,7 +665,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
-	algolType.clear();
+	closeBinaries.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -685,7 +685,7 @@ void StarMgr::populateHipparcosLists()
 				if (QString("EA EB EP EW").contains (getGcvsVariabilityType(s->getHip())) )
 				//if (QString("EA").contains (getGcvsVariabilityType(s->getHip())) )
 				{
-					algolType.push_back(sa);
+					closeBinaries.push_back(sa);
 				}
 			}
 			if (!getWdsName(s->getHip()).isEmpty())

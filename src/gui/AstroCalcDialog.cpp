@@ -5317,7 +5317,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
-		QList<StelACStarData> algolTypes = starMgr->getHipparcosAlgolStars();
+		QList<StelACStarData> algolTypes = starMgr->getHipparcosCloseBinaries();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
