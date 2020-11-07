@@ -433,6 +433,49 @@ private:
 
 	//! Remember to redraw active plot when dialog becomes visible
 	bool graphPlotNeedsRefresh;
+
+	enum WUTCategory {
+		ew_planets = 0,
+		ew_bright_stars = 1,
+		ew_bright_nebulae = 2,
+		ew_dark_nebulae = 3,
+		ew_galaxies = 4,
+		ew_open_star_clusters = 5,
+		ew_asteroids = 6,
+		ew_comets = 7,
+		ew_plutinos = 8,
+		ew_dwarf_planets = 9,
+		ew_cubewanos = 10,
+		ew_scattered_disc_objects = 11,
+		ew_Oort_cloud_objects = 12,
+		ew_sednoids = 13,
+		ew_planetary_nebulae = 14,
+		ew_bright_double_stars = 15,
+		ew_bright_variable_stars = 16,
+		ew_bright_stars_with_high_proper_motion = 17,
+		ew_symbiotic_stars = 18,
+		ew_emission_line_stars = 19,
+		ew_supernovae_candidates = 20,
+		ew_supernovae_remnant_candidates = 21,
+		ew_supernovae_remnants = 22,
+		ew_clusters_of_galaxies = 23,
+		ew_interstellar_objects = 24,
+		ew_globular_star_clusters = 25,
+		ew_regions_of_the_sky = 26,
+		ew_active_galaxies = 27,
+		ew_pulsars = 28,
+		ew_exoplanetary_systems = 29,
+		ew_bright_nova_stars = 30,
+		ew_bright_supernova_stars = 31,
+		ew_interacting_galaxies = 32,
+		ew_deep_sky_objects = 33,
+		ew_Messier_objects = 34,
+		ew_NGC_IC_objects = 35,
+		ew_Caldwell_objects = 36,
+		ew_Herschel_400_objects = 37,
+
+		ew_none	// stop gapper for sytactic reasons
+	};
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
