@@ -5102,34 +5102,34 @@ void AstroCalcDialog::populateWutGroups()
 	category->blockSignals(true);
 
 	wutCategories.clear();
-	wutCategories.insert(q_("Planets"), ew_planets);
-	wutCategories.insert(q_("Bright stars"), ew_bright_stars);
-	wutCategories.insert(q_("Bright nebulae"), ew_bright_nebulae);
-	wutCategories.insert(q_("Dark nebulae"), ew_dark_nebulae);
-	wutCategories.insert(q_("Galaxies"), ew_galaxies);
-	wutCategories.insert(q_("Open star clusters"), ew_open_star_clusters);
-	wutCategories.insert(q_("Asteroids"), ew_asteroids);
-	wutCategories.insert(q_("Comets"), ew_comets);
-	wutCategories.insert(q_("Plutinos"), ew_plutinos);
-	wutCategories.insert(q_("Dwarf planets"), ew_dwarf_planets);
-	wutCategories.insert(q_("Cubewanos"), ew_cubewanos);
-	wutCategories.insert(q_("Scattered disc objects"), ew_scattered_disc_objects);
-	wutCategories.insert(q_("Oort cloud objects"), ew_Oort_cloud_objects);
-	wutCategories.insert(q_("Sednoids"), ew_sednoids);
-	wutCategories.insert(q_("Planetary nebulae"), ew_planetary_nebulae);
-	wutCategories.insert(q_("Bright double stars"), ew_bright_double_stars);
-	wutCategories.insert(q_("Bright variable stars"), ew_bright_variable_stars);
-	wutCategories.insert(q_("Bright stars with high proper motion"), ew_bright_stars_with_high_proper_motion);
-	wutCategories.insert(q_("Symbiotic stars"), ew_symbiotic_stars);
-	wutCategories.insert(q_("Emission-line stars"), ew_emission_line_stars);
-	wutCategories.insert(q_("Supernova candidates"), ew_supernovae_candidates);
-	wutCategories.insert(q_("Supernova remnant candidates"), ew_supernovae_remnant_candidates);
-	wutCategories.insert(q_("Supernova remnants"), ew_supernovae_remnants);
-	wutCategories.insert(q_("Clusters of galaxies"), ew_clusters_of_galaxies);
-	wutCategories.insert(q_("Interstellar objects"), ew_interstellar_objects);
-	wutCategories.insert(q_("Globular star clusters"), ew_globular_star_clusters);
-	wutCategories.insert(q_("Regions of the sky"), ew_regions_of_the_sky);
-	wutCategories.insert(q_("Active galaxies"), ew_active_galaxies);
+	wutCategories.insert(q_("Planets"), 					ew_planets);
+	wutCategories.insert(q_("Bright stars"), 				ew_bright_stars);
+	wutCategories.insert(q_("Bright nebulae"), 				ew_bright_nebulae);
+	wutCategories.insert(q_("Dark nebulae"), 				ew_dark_nebulae);
+	wutCategories.insert(q_("Galaxies"), 					ew_galaxies);
+	wutCategories.insert(q_("Open star clusters"), 				ew_open_star_clusters);
+	wutCategories.insert(q_("Asteroids"), 					ew_asteroids);
+	wutCategories.insert(q_("Comets"), 					ew_comets);
+	wutCategories.insert(q_("Plutinos"), 					ew_plutinos);
+	wutCategories.insert(q_("Dwarf planets"), 				ew_dwarf_planets);
+	wutCategories.insert(q_("Cubewanos"), 					ew_cubewanos);
+	wutCategories.insert(q_("Scattered disc objects"), 			ew_scattered_disc_objects);
+	wutCategories.insert(q_("Oort cloud objects"), 				ew_Oort_cloud_objects);
+	wutCategories.insert(q_("Sednoids"), 					ew_sednoids);
+	wutCategories.insert(q_("Planetary nebulae"), 				ew_planetary_nebulae);
+	wutCategories.insert(q_("Bright double stars"), 			ew_bright_double_stars);
+	wutCategories.insert(q_("Bright variable stars"), 			ew_bright_variable_stars);
+	wutCategories.insert(q_("Bright stars with high proper motion"),	ew_bright_stars_with_high_proper_motion);
+	wutCategories.insert(q_("Symbiotic stars"), 				ew_symbiotic_stars);
+	wutCategories.insert(q_("Emission-line stars"), 			ew_emission_line_stars);
+	wutCategories.insert(q_("Supernova candidates"), 			ew_supernovae_candidates);
+	wutCategories.insert(q_("Supernova remnant candidates"), 		ew_supernovae_remnant_candidates);
+	wutCategories.insert(q_("Supernova remnants"), 				ew_supernovae_remnants);
+	wutCategories.insert(q_("Clusters of galaxies"), 			ew_clusters_of_galaxies);
+	wutCategories.insert(q_("Interstellar objects"),			ew_interstellar_objects);
+	wutCategories.insert(q_("Globular star clusters"),			ew_globular_star_clusters);
+	wutCategories.insert(q_("Regions of the sky"), 				ew_regions_of_the_sky);
+	wutCategories.insert(q_("Active galaxies"), 				ew_active_galaxies);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
@@ -5145,13 +5145,13 @@ void AstroCalcDialog::populateWutGroups()
 	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), ew_bright_nova_stars);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
-		wutCategories.insert(q_("Bright supernova stars"), ew_bright_supernova_stars);	
-	wutCategories.insert(q_("Interacting galaxies"), ew_interacting_galaxies);
-	wutCategories.insert(q_("Deep-sky objects"), ew_deep_sky_objects);
-	wutCategories.insert(q_("Messier objects"), ew_Messier_objects);
-	wutCategories.insert(q_("NGC/IC objects"), ew_NGC_IC_objects);
-	wutCategories.insert(q_("Caldwell objects"), ew_Caldwell_objects);
-	wutCategories.insert(q_("Herschel 400 objects"), ew_Herschel_400_objects);
+		wutCategories.insert(q_("Bright supernova stars"), 	ew_bright_supernova_stars);	
+	wutCategories.insert(q_("Interacting galaxies"), 		ew_interacting_galaxies);
+	wutCategories.insert(q_("Deep-sky objects"), 			ew_deep_sky_objects);
+	wutCategories.insert(q_("Messier objects"), 			ew_Messier_objects);
+	wutCategories.insert(q_("NGC/IC objects"), 			ew_NGC_IC_objects);
+	wutCategories.insert(q_("Caldwell objects"), 			ew_Caldwell_objects);
+	wutCategories.insert(q_("Herschel 400 objects"), 		ew_Herschel_400_objects);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5589,16 +5589,16 @@ void AstroCalcDialog::calculateWutObjects()
 				case ew_interstellar_objects:
 				{
 					static const QMap<int, Planet::PlanetType>map = {
-						{ew_planets, Planet::isPlanet},
-						{ew_asteroids, Planet::isAsteroid},
-						{ew_comets, Planet::isComet},
-						{ew_plutinos, Planet::isPlutino},
-						{ew_dwarf_planets, Planet::isDwarfPlanet},
-						{ew_cubewanos, Planet::isCubewano},
-						{ew_scattered_disc_objects, Planet::isSDO},
-						{ew_Oort_cloud_objects, Planet::isOCO},
-						{ew_sednoids, Planet::isSednoid},
-						{ew_interstellar_objects, Planet::isInterstellar}};
+						{ew_planets, 			Planet::isPlanet},
+						{ew_asteroids, 			Planet::isAsteroid},
+						{ew_comets, 			Planet::isComet},
+						{ew_plutinos, 			Planet::isPlutino},
+						{ew_dwarf_planets, 		Planet::isDwarfPlanet},
+						{ew_cubewanos, 			Planet::isCubewano},
+						{ew_scattered_disc_objects,	Planet::isSDO},
+						{ew_Oort_cloud_objects, 	Planet::isOCO},
+						{ew_sednoids, 			Planet::isSednoid},
+						{ew_interstellar_objects, 	Planet::isInterstellar}};
 					const Planet::PlanetType pType = map.value(categoryId, Planet::isInterstellar);
 
 					for (const auto& object : allObjects)
@@ -5935,7 +5935,7 @@ void AstroCalcDialog::calculateWutObjects()
 					break;
 				}
 
-				case ew_none: // juts one warning less...
+				case ew_none:
 					break;
 
 				default:
