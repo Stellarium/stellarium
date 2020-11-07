@@ -5120,7 +5120,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright double stars"), 			ew_bright_double_stars);
 	wutCategories.insert(q_("Bright variable stars"), 			ew_bright_variable_stars);
 	wutCategories.insert(q_("Bright stars with high proper motion"),	ew_bright_stars_with_high_proper_motion);
-	wutCategories.insert(q_("Algol type"),					ew_algol_type);
+	wutCategories.insert(q_("Eclipsing close binary systems"),		ew_algol_type);
 	wutCategories.insert(q_("Symbiotic stars"), 				ew_symbiotic_stars);
 	wutCategories.insert(q_("Emission-line stars"), 			ew_emission_line_stars);
 	wutCategories.insert(q_("Supernova candidates"), 			ew_supernovae_candidates);
