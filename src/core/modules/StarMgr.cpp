@@ -682,16 +682,21 @@ void StarMgr::populateHipparcosLists()
 				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
 				
+				auto typ = getGcvsVariabilityType(s->getHip());
+				if (typ.contains("EA"))
+				/* doesn't work, as eg 'ACYG' is also included - which is not EA
 				if (QString(
 				"EA "
 				//"EB EW "
 				//"EP " // not present in StarWrapper1::getInfoString()
-				"EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR "
-				"EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD "
-				"EA/AR/RS EA/GS/D EA/D/WR"
+				"EA/ EA+" 
+				//"EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR "
+				//"EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD "
+				//"EA/AR/RS EA/GS/D EA/D/WR"
 				//"EB/GS EB/DM EB/KE EB/KE: "
 				//"EW/KE "
 				).contains (getGcvsVariabilityType(s->getHip())) )
+				*/
 				{
 					algolTypes.push_back(sa);
 				}
