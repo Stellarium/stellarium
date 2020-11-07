@@ -39,8 +39,6 @@ struct HipIndexStruct;
 
 static const int RCMAG_TABLE_SIZE = 4096;
 
-extern const QString GCVS_eclipsing_binary;
-
 typedef struct
 {
 	QString designation;	//! GCVS designation

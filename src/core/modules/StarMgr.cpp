@@ -66,9 +66,6 @@ static QStringList component_array;
 // It should always matchs the version field of the defaultStarsConfig.json file
 static const int StarCatalogFormatVersion = 12;
 
-// FIXME remove
-extern const QString GCVS_eclipsing_binary = QString ("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR");
-
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 bool StarMgr::flagAdditionalStarNames = true;

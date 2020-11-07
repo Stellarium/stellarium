@@ -5120,7 +5120,6 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright double stars"), 			ew_bright_double_stars);
 	wutCategories.insert(q_("Bright variable stars"), 			ew_bright_variable_stars);
 	wutCategories.insert(q_("Bright stars with high proper motion"),	ew_bright_stars_with_high_proper_motion);
-	wutCategories.insert(q_("Eclipsing close binary systems"),		ew_algol_type);
 	wutCategories.insert(q_("Symbiotic stars"), 				ew_symbiotic_stars);
 	wutCategories.insert(q_("Emission-line stars"), 			ew_emission_line_stars);
 	wutCategories.insert(q_("Supernova candidates"), 			ew_supernovae_candidates);
@@ -5131,6 +5130,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Globular star clusters"),			ew_globular_star_clusters);
 	wutCategories.insert(q_("Regions of the sky"), 				ew_regions_of_the_sky);
 	wutCategories.insert(q_("Active galaxies"), 				ew_active_galaxies);
+	wutCategories.insert(q_("Eclipsing close binary systems"),		ew_eclipsing_close_binaries);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
@@ -5667,7 +5667,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
-				case ew_algol_type:
+				case ew_eclipsing_close_binaries:
 					enableAng = false;
 					for (const auto& varStar : algolTypes)
 					{
