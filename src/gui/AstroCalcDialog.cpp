@@ -5120,6 +5120,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright double stars"), 			ew_bright_double_stars);
 	wutCategories.insert(q_("Bright variable stars"), 			ew_bright_variable_stars);
 	wutCategories.insert(q_("Bright stars with high proper motion"),	ew_bright_stars_with_high_proper_motion);
+	wutCategories.insert(q_("Algol type"),					ew_algol_type);
 	wutCategories.insert(q_("Symbiotic stars"), 				ew_symbiotic_stars);
 	wutCategories.insert(q_("Emission-line stars"), 			ew_emission_line_stars);
 	wutCategories.insert(q_("Supernova candidates"), 			ew_supernovae_candidates);
@@ -5316,12 +5317,14 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
+		QList<StelACStarData> algolTypes = starMgr->getHipparcosAlgolStars();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
-		bool passByType, visible, state = true;
+		bool passByType, visible = true;
+		bool enableAng = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		const double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
@@ -5405,7 +5408,7 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case ew_bright_stars:
-					state = false;
+					enableAng = false;
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -5451,7 +5454,7 @@ void AstroCalcDialog::calculateWutObjects()
 					if (categoryId==ew_dark_nebulae)
 						initListWUT(false, false); // special case!
 					if (categoryId==ew_symbiotic_stars || categoryId==ew_emission_line_stars || categoryId==ew_supernovae_candidates)
-						state = false;
+						enableAng = false;
 
 					for (const auto& object : allDSO)
 					{
@@ -5664,8 +5667,36 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
+				case ew_algol_type:
+					enableAng = false;
+					for (const auto& varStar : algolTypes)
+					{
+						StelObjectP object = varStar.firstKey();
+						mag = object->getVMagnitude(core);
+						if (mag <= magLimit && object->isAboveRealHorizon(core))
+						{
+							designation = object->getEnglishName();
+							if (designation.isEmpty())
+								designation = object->getID();
+
+							if (!objectsList.contains(designation))
+							{
+								starName = object->getNameI18n();
+								if (starName.isEmpty())
+									starName = designation;
+
+								rts = object->getRTSTime(core);
+								alt = computeMaxElevation(object);
+
+								fillWUTTable(starName, designation, mag, rts, alt, 0.0, withDecimalDegree);
+								objectsList.insert(designation);
+							}
+						}
+					}
+					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					break;
 				case ew_bright_variable_stars:
-					state = false;
+					enableAng = false;
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
@@ -5693,7 +5724,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case ew_bright_stars_with_high_proper_motion:
-					state = false;
+					enableAng = false;
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -5721,7 +5752,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case ew_active_galaxies:
-					state = false;
+					enableAng = false;
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
@@ -5784,7 +5815,7 @@ void AstroCalcDialog::calculateWutObjects()
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
 				case ew_pulsars:
-					state = false;
+					enableAng = false;
 					#ifdef USE_STATIC_PLUGIN_PULSARS					
 					for (const auto& object : GETSTELMODULE(Pulsars)->getAllPulsars())
 					{
@@ -5812,7 +5843,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case ew_exoplanetary_systems:
-					state = false;
+					enableAng = false;
 					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
@@ -5833,7 +5864,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case ew_bright_nova_stars:
-					state = false;
+					enableAng = false;
 					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
@@ -5854,7 +5885,7 @@ void AstroCalcDialog::calculateWutObjects()
 					#endif
 					break;
 				case ew_bright_supernova_stars:
-					state = false;
+					enableAng = false;
 					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
@@ -5896,6 +5927,7 @@ void AstroCalcDialog::calculateWutObjects()
 							catDSO = dsoMgr->getDeepSkyObjectsByType("151");
 							break;
 						default:
+							qWarning() << "catDSO: should never come here";
 							break;
 					}
 
@@ -5945,7 +5977,7 @@ void AstroCalcDialog::calculateWutObjects()
 			}
 		}
 
-		enableAngularLimits(state);
+		enableAngularLimits(enableAng);
 		core->setJD(JD);
 		adjustWUTColumns();
 		objectsList.clear();		

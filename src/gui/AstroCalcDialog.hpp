@@ -453,6 +453,7 @@ private:
 		ew_bright_double_stars,
 		ew_bright_variable_stars,
 		ew_bright_stars_with_high_proper_motion,
+		ew_algol_type,
 		ew_symbiotic_stars,
 		ew_emission_line_stars,
 		ew_supernovae_candidates,

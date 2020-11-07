@@ -66,6 +66,8 @@ static QStringList component_array;
 // It should always matchs the version field of the defaultStarsConfig.json file
 static const int StarCatalogFormatVersion = 12;
 
+extern const QString GCVS_eclipsing_binary = QString ("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR");
+
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 bool StarMgr::flagAdditionalStarNames = true;
@@ -665,6 +667,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
+	algolType.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -680,6 +683,11 @@ void StarMgr::populateHipparcosLists()
 				QMap<StelObjectP, float> sa;
 				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
 				variableHipStars.push_back(sa);
+				
+				if (GCVS_eclipsing_binary.contains (getGcvsVariabilityType(s->getHip())) )
+				{
+					algolType.push_back(sa);
+				}
 			}
 			if (!getWdsName(s->getHip()).isEmpty())
 			{
