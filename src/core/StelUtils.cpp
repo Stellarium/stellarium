@@ -106,7 +106,7 @@ double hmsStrToHours(const QString& s)
 /*************************************************************************
  Convert a real duration in days to DHMS formatted string
 *************************************************************************/
-QString days_to_dhm(float days)
+QString daysFloatToDHMS(float days)
 {
 	float remain = days;
 

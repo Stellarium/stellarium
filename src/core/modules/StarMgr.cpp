@@ -665,7 +665,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
-	algolTypes.clear();
+	algolTypeStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -687,7 +687,7 @@ void StarMgr::populateHipparcosLists()
 				{
 					QMap<StelObjectP, float> sal;
 					sal[so] = sa[so];
-					algolTypes.push_back(sal);
+					algolTypeStars.push_back(sal);
 				}
 			}
 			if (!getWdsName(s->getHip()).isEmpty())

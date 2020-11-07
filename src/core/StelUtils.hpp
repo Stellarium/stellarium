@@ -465,7 +465,7 @@ namespace StelUtils
 	double hmsStrToHours(const QString& s);
 
 	//! Convert days (float) to a time string
-	QString days_to_dhm(float days);
+	QString daysFloatToDHMS(float days);
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
