@@ -55,7 +55,54 @@ class EphemerisMgr : public StelModule
 	Q_PROPERTY(Vec3f jupiterMarkerColor	READ getJupiterMarkerColor	WRITE setJupiterMarkerColor	NOTIFY jupiterMarkerColorChanged)
 	Q_PROPERTY(Vec3f saturnMarkerColor	READ getSaturnMarkerColor	WRITE setSaturnMarkerColor	NOTIFY saturnMarkerColorChanged)
 
+	Q_ENUMS(EphemerisTimeStep)
+
 public:
+
+	enum EphemerisTimeStep
+	{
+		EtsCustomInterval		= 0,
+		Ets10Minutes			= 1,
+		Ets30Minutes			= 2,
+		Ets1Hour				= 3,
+		Ets6Hours				= 4,
+		Ets12Hours			= 5,
+		Ets1SolarDay			= 6,
+		Ets5SolarDays			= 7,
+		Ets10SolarDays			= 8,
+		Ets15SolarDays			= 9,
+		Ets30SolarDays			= 10,
+		Ets60SolarDays			= 11,
+		Ets1JulianDay			= 12,
+		Ets5JulianDays			= 13,
+		Ets10JulianDays		= 14,
+		Ets15JulianDays		= 15,
+		Ets30JulianDays		= 16,
+		Ets60JulianDays		= 17,
+		Ets1SiderealDay		= 18,
+		Ets5SiderealDays		= 19,
+		Ets10SiderealDays		= 20,
+		Ets15SiderealDays		= 21,
+		Ets30SiderealDays		= 22,
+		Ets60SiderealDays		= 23,
+		Ets100SolarDays		= 24,
+		Ets100SiderealDays		= 25,
+		Ets100JulianDays		= 26,
+		Ets1SiderealYear		= 27,
+		Ets1JulianYear			= 28,
+		Ets1GaussianYear		= 29,
+		Ets1SynodicMonth		= 30,
+		Ets1DraconicMonth		= 31,
+		Ets1MeanTropicalMonth	= 32,
+		Ets1AnomalisticMonth	= 33,
+		Ets1AnomalisticYear		= 34,
+		Ets1Saros				= 35,
+		Ets500SiderealDays		= 36	,
+		Ets500SolarDays		= 37,
+		Ets1Minute			= 38
+	};
+
+
 	EphemerisMgr();
 	virtual ~EphemerisMgr();
 

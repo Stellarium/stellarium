@@ -1583,45 +1583,45 @@ void AstroCalcDialog::generateEphemeris()
 		siderealYear = cplanet->getSiderealPeriod();
 	}
 	const QMap<int, double>timeStepMap = {
-		{ 0, getCustomTimeStep() },		// custom time step
-		{ 1, 10. * StelCore::JD_MINUTE },
-		{ 2, 30. * StelCore::JD_MINUTE },
-		{ 3, StelCore::JD_HOUR },
-		{ 4, 6. * StelCore::JD_HOUR },
-		{ 5, 12. * StelCore::JD_HOUR },
-		{ 6, solarDay },
-		{ 7, 5. * solarDay },
-		{ 8, 10. * solarDay },
-		{ 9, 15. * solarDay },
-		{10, 30. * solarDay },
-		{11, 60. * solarDay },
-		{12, StelCore::JD_DAY },
-		{13, 5. * StelCore::JD_DAY },
-		{14, 10. * StelCore::JD_DAY },
-		{15, 15. * StelCore::JD_DAY },
-		{16, 30. * StelCore::JD_DAY },
-		{17, 60. * StelCore::JD_DAY },
-		{18, siderealDay },
-		{19, 5. * siderealDay },
-		{20, 10. * siderealDay },
-		{21, 15. * siderealDay },
-		{22, 30. * siderealDay },
-		{23, 60. * siderealDay },
-		{24, 100. * solarDay },
-		{25, 100. * siderealDay },
-		{26, 100. * StelCore::JD_DAY },
-		{27, siderealYear*solarDay },
-		{28, 365.25*solarDay },			// 1 Julian year
-		{29, 365.2568983*solarDay },		// 1 Gaussian year
-		{30, 29.530588853*solarDay },	// 1 synodic month
-		{31, 27.212220817*solarDay },	// 1 draconic month
-		{32, 27.321582241*solarDay },	// 1 mean tropical month
-		{33, 27.554549878*solarDay },	// 1 anomalistic month
-		{34, 365.259636*solarDay },		// 1 anomalistic year
-		{35, 6585.321314219*solarDay },	// 1 saros (223 synodic months)
-		{36, 500. * siderealDay },
-		{37, 500. * solarDay },
-		{38, StelCore::JD_MINUTE }
+		{ EphemerisMgr::EtsCustomInterval, getCustomTimeStep() },		// custom time step
+		{ EphemerisMgr::Ets10Minutes, 10. * StelCore::JD_MINUTE },
+		{ EphemerisMgr::Ets30Minutes, 30. * StelCore::JD_MINUTE },
+		{ EphemerisMgr::Ets1Hour, StelCore::JD_HOUR },
+		{ EphemerisMgr::Ets6Hours, 6. * StelCore::JD_HOUR },
+		{ EphemerisMgr::Ets12Hours, 12. * StelCore::JD_HOUR },
+		{ EphemerisMgr::Ets1SolarDay, solarDay },
+		{ EphemerisMgr::Ets5SolarDays, 5. * solarDay },
+		{ EphemerisMgr::Ets10SolarDays, 10. * solarDay },
+		{ EphemerisMgr::Ets15SolarDays, 15. * solarDay },
+		{ EphemerisMgr::Ets30SolarDays, 30. * solarDay },
+		{ EphemerisMgr::Ets60SolarDays, 60. * solarDay },
+		{ EphemerisMgr::Ets1JulianDay, StelCore::JD_DAY },
+		{ EphemerisMgr::Ets5JulianDays, 5. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets10JulianDays, 10. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets15JulianDays, 15. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets30JulianDays, 30. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets60JulianDays, 60. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets1SiderealDay, siderealDay },
+		{ EphemerisMgr::Ets5SiderealDays, 5. * siderealDay },
+		{ EphemerisMgr::Ets10SiderealDays, 10. * siderealDay },
+		{ EphemerisMgr::Ets15SiderealDays, 15. * siderealDay },
+		{ EphemerisMgr::Ets30SiderealDays, 30. * siderealDay },
+		{ EphemerisMgr::Ets60SiderealDays, 60. * siderealDay },
+		{ EphemerisMgr::Ets100SolarDays, 100. * solarDay },
+		{ EphemerisMgr::Ets100SiderealDays, 100. * siderealDay },
+		{ EphemerisMgr::Ets100JulianDays, 100. * StelCore::JD_DAY },
+		{ EphemerisMgr::Ets1SiderealYear, siderealYear*solarDay },			// 1 sidereal year
+		{ EphemerisMgr::Ets1JulianYear, 365.25*solarDay },					// 1 Julian year
+		{ EphemerisMgr::Ets1GaussianYear, 365.2568983*solarDay },			// 1 Gaussian year
+		{ EphemerisMgr::Ets1SynodicMonth, 29.530588853*solarDay },		// 1 synodic month
+		{ EphemerisMgr::Ets1DraconicMonth, 27.212220817*solarDay },		// 1 draconic month
+		{ EphemerisMgr::Ets1MeanTropicalMonth, 27.321582241*solarDay },	// 1 mean tropical month
+		{ EphemerisMgr::Ets1AnomalisticMonth, 27.554549878*solarDay },	// 1 anomalistic month
+		{ EphemerisMgr::Ets1AnomalisticYear, 365.259636*solarDay },		// 1 anomalistic year
+		{ EphemerisMgr::Ets1Saros, 6585.321314219*solarDay },			// 1 saros (223 synodic months)
+		{ EphemerisMgr::Ets500SiderealDays, 500. * siderealDay },
+		{ EphemerisMgr::Ets500SolarDays, 500. * solarDay },
+		{ EphemerisMgr::Ets1Minute, StelCore::JD_MINUTE }
 	};
 	double currentStep = timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
 
@@ -2305,16 +2305,27 @@ void AstroCalcDialog::updateGraphsDuration(int duration)
 
 void AstroCalcDialog::populateEphemerisTimeStepsList()
 {
-	typedef QPair<QString, QString> itemPairs;
-	const QList<itemPairs> items = {
-		{q_("1 minute"), "38"}, {q_("10 minutes"), "1"}, {q_("30 minutes"), "2"}, {q_("1 hour"), "3"}, {q_("6 hours"), "4"}, {q_("12 hours"), "5"},
-		{q_("1 solar day"), "6"}, {q_("5 solar days"), "7"}, {q_("10 solar days"), "8"}, {q_("15 solar days"), "9"}, {q_("30 solar days"), "10"},
-		{q_("60 solar days"), "11"}, {q_("100 solar days"), "24"},{q_("500 solar days"), "37"},{q_("1 sidereal day"), "18"},{q_("5 sidereal days"), "19"},
-		{q_("10 sidereal days"), "20"},{q_("15 sidereal days"), "21"},{q_("30 sidereal days"), "22"},{q_("60 sidereal days"), "23"},{q_("100 sidereal days"), "25"},
-		{q_("500 sidereal days"), "36"},{q_("1 sidereal year"), "27"},{q_("1 Julian day"), "12"},{q_("5 Julian days"), "13"},{q_("10 Julian days"), "14"},
-		{q_("15 Julian days"), "15"},{q_("30 Julian days"), "16"},{q_("60 Julian days"), "17"},{q_("100 Julian days"), "26"},{q_("1 Julian year"), "28"},
-		{q_("1 Gaussian year"), "29"},{q_("1 synodic month"), "30"},{q_("1 draconic month"), "31"},{q_("1 mean tropical month"), "32"},
-		{q_("1 anomalistic month"), "33"},{q_("1 anomalistic year"), "34"},{q_("1 saros"), "35"},{q_("custom interval"), "0"}
+	QList<EphemerisSIPair> items = {
+		{q_("1 minute"), EphemerisMgr::Ets1Minute}, {q_("10 minutes"), EphemerisMgr::Ets10Minutes},
+		{q_("30 minutes"), EphemerisMgr::Ets30Minutes}, {q_("1 hour"), EphemerisMgr::Ets1Hour},
+		{q_("6 hours"), EphemerisMgr::Ets6Hours}, {q_("12 hours"), EphemerisMgr::Ets12Hours},
+		{q_("1 solar day"), EphemerisMgr::Ets1SolarDay}, {q_("5 solar days"), EphemerisMgr::Ets5SolarDays},
+		{q_("10 solar days"), EphemerisMgr::Ets100SolarDays}, {q_("15 solar days"), EphemerisMgr::Ets15SolarDays},
+		{q_("30 solar days"), EphemerisMgr::Ets30SolarDays}, {q_("60 solar days"), EphemerisMgr::Ets60SolarDays},
+		{q_("100 solar days"), EphemerisMgr::Ets100SolarDays}, {q_("500 solar days"), EphemerisMgr::Ets500SolarDays},
+		{q_("1 sidereal day"), EphemerisMgr::Ets1SiderealDay}, {q_("5 sidereal days"), EphemerisMgr::Ets5SiderealDays},
+		{q_("10 sidereal days"), EphemerisMgr::Ets10SiderealDays}, {q_("15 sidereal days"), EphemerisMgr::Ets15SiderealDays},
+		{q_("30 sidereal days"), EphemerisMgr::Ets30SiderealDays}, {q_("60 sidereal days"), EphemerisMgr::Ets60SiderealDays},
+		{q_("100 sidereal days"), EphemerisMgr::Ets100SiderealDays}, {q_("500 sidereal days"), EphemerisMgr::Ets500SiderealDays},
+		{q_("1 sidereal year"), EphemerisMgr::Ets1SiderealYear}, {q_("1 Julian day"), EphemerisMgr::Ets1JulianDay},
+		{q_("5 Julian days"), EphemerisMgr::Ets5JulianDays}, {q_("10 Julian days"), EphemerisMgr::Ets10JulianDays},
+		{q_("15 Julian days"), EphemerisMgr::Ets15JulianDays}, {q_("30 Julian days"), EphemerisMgr::Ets30JulianDays},
+		{q_("60 Julian days"), EphemerisMgr::Ets60JulianDays}, {q_("100 Julian days"), EphemerisMgr::Ets100JulianDays},
+		{q_("1 Julian year"), EphemerisMgr::Ets1JulianYear}, {q_("1 Gaussian year"), EphemerisMgr::Ets1GaussianYear},
+		{q_("1 synodic month"), EphemerisMgr::Ets1SynodicMonth}, {q_("1 draconic month"), EphemerisMgr::Ets1DraconicMonth},
+		{q_("1 mean tropical month"), EphemerisMgr::Ets1MeanTropicalMonth}, {q_("1 anomalistic month"), EphemerisMgr::Ets1AnomalisticMonth},
+		{q_("1 anomalistic year"), EphemerisMgr::Ets1AnomalisticYear}, {q_("1 saros"), EphemerisMgr::Ets1Saros},
+		{q_("custom interval"), EphemerisMgr::EtsCustomInterval}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
@@ -2331,7 +2342,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	if (index < 0)
 	{
 		// default step: one day
-		index = steps->findData(conf->value("astrocalc/ephemeris_time_step", "6").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		index = steps->findData(conf->value("astrocalc/ephemeris_time_step", EphemerisMgr::Ets1SolarDay).toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	steps->setCurrentIndex(index);
 	steps->blockSignals(false);
