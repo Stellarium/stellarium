@@ -46,9 +46,8 @@ void MayaLongCountCalendar::setJD(double JD)
 	const int dayOfTun   =dayOfKatun % 360;
 	const int uinal      =dayOfTun / 20;
 	const int kin        =dayOfTun % 20;
-	parts.clear();
-	parts << baktun << katun << tun << uinal << kin;
 
+	parts={ baktun, katun, tun, uinal, kin };
 	emit partsChanged(parts);
 }
 

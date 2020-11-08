@@ -166,10 +166,8 @@ void CalendarsDialog::setAboutHtml(void)
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
-
 	ui->aboutTextBrowser->setHtml(html);
 }
-
 
 void CalendarsDialog::resetCalendarsSettings()
 {
@@ -196,6 +194,7 @@ void CalendarsDialog::populateJulianParts(QVector<int> parts)
 	if (jul)
 		ui->julianWeekdayLineEdit->setText(jul->weekday(jul->getJD()));
 }
+
 void CalendarsDialog::populateGregorianParts(QVector<int> parts)
 {
 	ui->gregorianYearSpinBox->setValue(parts.at(0));
@@ -209,6 +208,7 @@ void CalendarsDialog::populateGregorianParts(QVector<int> parts)
 	if (greg)
 		ui->gregorianWeekdayLineEdit->setText(greg->weekday(greg->getJD()));
 }
+
 void CalendarsDialog::populateISOParts(QVector<int> parts)
 {
 
@@ -222,6 +222,7 @@ void CalendarsDialog::populateMayaLongCountParts(QVector<int> parts)
 	ui->uinalSpinBox->setValue(parts.at(3));
 	ui->kinSpinBox->setValue(parts.at(4));
 }
+
 void CalendarsDialog::populateMayaHaabParts(QVector<int> parts)
 {
 	ui->haabMonthSpinBox->setValue(parts.at(0));
@@ -231,6 +232,7 @@ void CalendarsDialog::populateMayaHaabParts(QVector<int> parts)
 		ui->haabLineEdit->setText(haab->getFormattedDateString());
 
 }
+
 void CalendarsDialog::populateMayaTzolkinParts(QVector<int> parts)
 {
 	ui->tzolkinNumberSpinBox->setValue(parts.at(0));
@@ -241,10 +243,10 @@ void CalendarsDialog::populateMayaTzolkinParts(QVector<int> parts)
 
 }
 
-
 /*
  * These slots set the calendar from the associated GUI elements
  */
+
 void CalendarsDialog::julianChanged()
 {
 	cal->getCal("Julian")->setParts({ui->julianYearSpinBox->value(),
@@ -254,6 +256,7 @@ void CalendarsDialog::julianChanged()
 					 ui->julianMinuteSpinBox->value(),
 					 ui->julianSecondSpinBox->value()});
 }
+
 void CalendarsDialog::gregorianChanged()
 {
 	cal->getCal("Gregorian")->setParts({ui->gregorianYearSpinBox->value(),
@@ -263,6 +266,7 @@ void CalendarsDialog::gregorianChanged()
 					    ui->gregorianMinuteSpinBox->value(),
 					    ui->gregorianSecondSpinBox->value()});
 }
+
 void CalendarsDialog::isoChanged()
 {
 	// TODO proper handling of ISO weekday combo box.
@@ -271,6 +275,7 @@ void CalendarsDialog::isoChanged()
 //					    ui->isoDaySpinBox->value()});
 
 }
+
 void CalendarsDialog::mayaLongCountChanged()
 {
 	cal->getCal("MayaLongCount")->setParts({ui->baktunSpinBox->value(),
@@ -279,12 +284,14 @@ void CalendarsDialog::mayaLongCountChanged()
 					       ui->uinalSpinBox->value(),
 					       ui->kinSpinBox->value()});
 }
+
 void CalendarsDialog::mayaHaabChanged()
 {
 	cal->getCal("MayaHaab")->setParts({ui->haabMonthSpinBox->value(),
 					   ui->haabDaySpinBox->value()});
 
 }
+
 void CalendarsDialog::mayaTzolkinChanged()
 {
 	cal->getCal("MayaTzolkin")->setParts({ui->tzolkinNumberSpinBox->value(),
