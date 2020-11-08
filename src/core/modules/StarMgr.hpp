@@ -437,10 +437,7 @@ private:
 
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars;
-	QList<QMap<StelObjectP, float>> doubleHipStars;
-	QList<QMap<StelObjectP, float>> variableHipStars;
-	QList<QMap<StelObjectP, float>> algolTypeStars;
-	QList<QMap<StelObjectP, float>> hipStarsHighPM;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, algolTypeStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

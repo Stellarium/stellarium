@@ -5130,7 +5130,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Globular star clusters"),			wut_globular_star_clusters);
 	wutCategories.insert(q_("Regions of the sky"), 				wut_regions_of_the_sky);
 	wutCategories.insert(q_("Active galaxies"), 				wut_active_galaxies);
-	wutCategories.insert(q_("Algol (Beta Persei)-type eclipsing systems"),	wut_Algol_types);
+	wutCategories.insert(q_("Algol-type eclipsing systems"),		wut_Algol_types);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible

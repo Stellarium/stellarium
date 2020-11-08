@@ -110,11 +110,11 @@ QString daysFloatToDHMS(float days)
 {
 	float remain = days;
 
-	int d = remain; remain -= d;
+	int d = static_cast<int> (remain); remain -= d;
 	remain *= 24.0;
-	int h = remain; remain -= h;
+	int h = static_cast<int> (remain); remain -= h;
 	remain *= 60.0;
-	int m = remain; remain -= m; 
+	int m = static_cast<int> (remain); remain -= m; 
 	remain *= 60.0;
 
 	auto r = QString("%1%2 %3%4 %5%6 %7%8")

@@ -453,7 +453,7 @@ private:
 		wut_bright_double_stars,
 		wut_bright_variable_stars,
 		wut_bright_stars_with_high_proper_motion,
-		wut_Algol_types,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		wut_Algol_types,	//!< http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		wut_symbiotic_stars,
 		wut_emission_line_stars,
 		wut_supernovae_candidates,

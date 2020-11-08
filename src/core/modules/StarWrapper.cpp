@@ -337,7 +337,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 			}
 			else
+			{
 				oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
+			}
 		}
 
 		if (wdsObs>0)
