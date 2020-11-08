@@ -27,6 +27,8 @@
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 
+typedef QPair<QString, int> EphemerisSIPair;
+
 //! @class EphemerisMgr
 //! The EphemerisMgr controls the visualization of ephemeris
 class EphemerisMgr : public StelModule
