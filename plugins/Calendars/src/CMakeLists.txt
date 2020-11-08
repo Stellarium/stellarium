@@ -8,10 +8,13 @@ SET(Calendars_SRCS
     gui/CalendarsDialog.hpp
     gui/CalendarsDialog.cpp
     Calendar.hpp
+    Calendar.cpp
     JulianCalendar.hpp
     JulianCalendar.cpp
     GregorianCalendar.hpp
     GregorianCalendar.cpp
+    ISOCalendar.hpp
+    ISOCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp

@@ -173,3 +173,65 @@ bool GregorianCalendar::isLeap(int year)
 	else
 		return (year % 4 == 0);
 }
+
+/* ====================================================
+ * Functions from CC.UE ch2
+ */
+
+int GregorianCalendar::fixedFromGregorian(const int gYear, const int gMonth, const int gDay)
+{
+	int rd=gregorianEpoch-1+365*(gYear-1)+StelUtils::intFloorDiv((gYear-1), 4)-StelUtils::intFloorDiv((gYear-1), 100)
+			+StelUtils::intFloorDiv((gYear-1), 400)+(367*gMonth-362)/12+gDay;
+	if (gMonth>2)
+		rd+=(isLeap(gYear) ? -1 : -2);
+	return rd;
+}
+
+
+// @return RD date of the n-th k-day in a date on the Gregorian calendar
+int GregorianCalendar::nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay)
+{
+	if (n==0)
+	{
+		qWarning() << "GregorianCalendar::nthKday called with n==0";
+		return 0; // This is a meaningful result, but still nonsense.
+		Q_ASSERT(n!=0);
+	}
+	else if (n>0)
+		return 7*n+kdayBefore(k, fixedFromGregorian(gYear, gMonth, gDay));
+	else
+		return 7*n+kdayAfter(k, fixedFromGregorian(gYear, gMonth, gDay));
+}
+
+int GregorianCalendar::gregorianYearFromFixed(int rd)
+{
+	const int d0=rd-gregorianEpoch;
+	const int n400=StelUtils::intFloorDiv(d0, 146097);
+	const int d1=StelUtils::imod(d0, 146097);
+	const int n100=StelUtils::intFloorDiv(d1, 36524);
+	const int d2=StelUtils::imod(d1, 36524);
+	const int n4=StelUtils::intFloorDiv(d2, 1461);
+	const int d3=StelUtils::imod(d2, 1461);
+	const int n1=StelUtils::intFloorDiv(d3, 365);
+	const int year=400*n400+100*n100+4*n4+n1;
+	if ((n100==4) || (n1==4))
+		return year;
+	else
+		return year+1;
+}
+
+QVector<int> GregorianCalendar::gregorianFromFixed(int rd)
+{
+	QVector<int> greg;
+	int year=gregorianYearFromFixed(rd);
+	int priorDays=rd-gregorianNewYear(year);
+	int correction=2;
+	if (rd<fixedFromGregorian(year, march, 1))
+		correction=0;
+	else if (isLeap(year))
+		correction=1;
+	int month=StelUtils::intFloorDiv(12*(priorDays+correction)+373, 367);
+	int day = rd-fixedFromGregorian(year, month, 1)+1;
+	greg << year << month << day;
+	return greg;
+}

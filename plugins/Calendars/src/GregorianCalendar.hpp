@@ -43,6 +43,21 @@ public:
 
 	//! returns true for leap years
 	static bool isLeap(int year);
+
+	constexpr static const int gregorianEpoch=1;
+
+protected:
+	//! auxiliary functions from CC.UE ch2.5
+	//! Return R.D. of date in the Gregorian calendar.
+	int fixedFromGregorian(const int gYear, const int gMonth, const int gDay);
+
+	int gregorianNewYear(int year) {return fixedFromGregorian(year, january, 1);}
+	int gregorianYearFromFixed(int rd);
+	//! return year-month-day for RD date
+	QVector<int> gregorianFromFixed(int rd);
+
+	//! @return RD date of the n-th k-day
+	int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
 };
 
 #endif

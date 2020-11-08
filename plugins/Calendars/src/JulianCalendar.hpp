@@ -31,6 +31,8 @@ class JulianCalendar : public Calendar
 	Q_OBJECT
 
 public:
+	typedef enum {january=1, february, march, april, may, june, july, august, september, october, november, december } month;
+
 	JulianCalendar(double jd);
 
 	virtual ~JulianCalendar() Q_DECL_OVERRIDE {}
@@ -60,7 +62,6 @@ public:
 protected:
 	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
-
 };
 
 #endif

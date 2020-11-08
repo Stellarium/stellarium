@@ -350,6 +350,21 @@ namespace StelUtils
 		return ret;
 	}
 
+	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
+	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
+	//! @returns floor(num/den)
+	inline long intFloorDiv (long num, long den)
+	{
+	  if (0 < (num^den))
+	    return num/den;
+	  else
+	    {
+	      ldiv_t res = ldiv(num,den);
+	      return (res.rem)? res.quot-1
+			      : res.quot;
+	    }
+	}
+
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
