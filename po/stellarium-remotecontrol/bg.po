@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Alexander Shopov <ash@kambanaria.org>, 2019
-# Georgi Georgiev, 2020
+# Жоро, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-22 00:46+0700\n"
+"POT-Creation-Date: 2020-11-04 23:08+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Georgi Georgiev, 2020\n"
+"Last-Translator: Жоро, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +71,7 @@ msgstr "Списъкът със скриптове не е получен"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr "заявка"
+msgstr "запитване"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
@@ -79,12 +79,12 @@ msgstr "Грешка (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr "Грешка при заявка към Simbad"
+msgstr "Грешка при търсенето в Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
-msgstr "бездействие"
+msgstr "бездействане"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
@@ -115,7 +115,7 @@ msgstr "-няма-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr "(Зареждане: %1)"
+msgstr "(Зареждат се: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
@@ -133,11 +133,11 @@ msgstr "изключено"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr "Показване на всички"
+msgstr "Покажи всички"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr "Никой елемент не напасва"
+msgstr "Никой елемент не съответства"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
@@ -149,7 +149,7 @@ msgstr "Приставка на Stellarium за отдалечено управ�
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr "Изчакайте зареждането"
+msgstr "Моля изчакайте, зарежда се"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
@@ -177,7 +177,7 @@ msgstr "Пауза"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr "Интервали време"
+msgstr "Интервали от време"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
@@ -249,7 +249,7 @@ msgstr "Юлианска година"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
-msgstr "Юлиянски век"
+msgstr "Юлиански век"
 
 #: index.html:123 tablet7in.html:101
 msgid "View towards horizon at Azimuth"
@@ -269,11 +269,11 @@ msgstr "Зрително поле"
 
 #: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr "Въведете търсеното. С табулатора минавате през резултатите."
+msgstr "Въведи търсеното. Използвай TAB за навигация в резултатите."
 
 #: index.html:214 tablet7in.html:230
 msgid "Select and focus"
-msgstr "Избор и фокусиране"
+msgstr "Избери и фокусирай"
 
 #: index.html:240 tablet7in.html:259
 msgid "Selection mode"
@@ -281,15 +281,15 @@ msgstr "Режим на избор"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr "Центриране на обект"
+msgstr "Центрирай обекта"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr "Центриране и увеличение на обект"
+msgstr "Центрирай и увеличи обекта"
 
 #: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr "Само отбелязване на обект"
+msgstr "Само отбележи обекта"
 
 #: index.html:242 tablet7in.html:261
 msgid "Quick select"
@@ -317,7 +317,7 @@ msgstr "Цифровизиран обзор на небето"
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
-msgstr "Йерархия от обзори"
+msgstr "HiPS Обзор"
 
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
@@ -404,6 +404,10 @@ msgstr "Планетарни мъглявини"
 msgid "Labels and markers"
 msgstr "Етикети и маркери"
 
+#: index.html:563 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "Използвай асоциираната планета и позиция"
+
 #: index.html:572 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Осветление"
@@ -438,15 +442,15 @@ msgstr "Текуща небесна култура"
 
 #: index.html:628 tablet7in.html:733
 msgid "Active script:"
-msgstr "Изпълняван скрипт:"
+msgstr "Активен скрипт:"
 
 #: index.html:629 tablet7in.html:734
 msgid "Run selected script"
-msgstr "Изпълнение на избрания скрипт"
+msgstr "Изпълни избрания скрипт"
 
 #: index.html:629 tablet7in.html:734
 msgid "Stop current script"
-msgstr "Спиране на текущия скрипт"
+msgstr "Спри текущия скрипт"
 
 #: index.html:634 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
@@ -454,19 +458,19 @@ msgstr "Действия"
 
 #: index.html:638 tablet7in.html:722
 msgid "Run/toggle action"
-msgstr "Изпълнение/превключване на действия"
+msgstr "Изпълни/превключи действие"
 
 #: index.html:649 tablet7in.html:757
 msgid "Planet map"
-msgstr "Карта на планета"
+msgstr "Планетна карта"
 
 #: index.html:650 tablet7in.html:758
 msgid "Planet map pointer"
-msgstr "Маркер на карта на планета"
+msgstr "Указател на планетната карта"
 
 #: index.html:654 tablet7in.html:762
 msgid "Type to search location"
-msgstr "Започнете да изписвате местоположението и то ще бъде потърсено"
+msgstr "Въведи текст за търсене на местоположението"
 
 #: index.html:683 tablet7in.html:791
 msgid "Interaction"
@@ -494,7 +498,7 @@ msgstr "Избор на сцена"
 
 #: index.html:716 tablet7in.html:824
 msgid "Load selected scene"
-msgstr "Избор на избраната сцена"
+msgstr "Зареди избраната сцена"
 
 #: index.html:740 tablet7in.html:849
 msgid "No response from server"
@@ -510,7 +514,7 @@ msgstr "Времеви интервал"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr "Координатни системи"
+msgstr "Мрежи"
 
 #: tablet7in.html:97
 msgid "Up/Left"
@@ -530,11 +534,11 @@ msgstr "Наляво"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr "Центриране на избрания обект"
+msgstr "Фокусирай избрания обект"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr "Центриране на избраното"
+msgstr "Фокусирай избраното"
 
 #: tablet7in.html:97
 msgid "Right"
@@ -578,7 +582,7 @@ msgstr "Алтаир"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr "Галактиката Андромеда"
+msgstr "Галактика Андромеда"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
@@ -586,15 +590,15 @@ msgstr "Звезден куп Херкулес"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr "Мъглявината Орион"
+msgstr "Мъглявина Орион"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr "Мъглявината в Кил"
+msgstr "Мъглявина Ета Кил"
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr "Звезден куп 47 Тукан"
+msgstr "Звезден куп 47 от Тукан"
 
 #: tablet7in.html:277
 msgid "Aries"
@@ -650,7 +654,7 @@ msgstr "Любими"
 
 #: tablet7in.html:744
 msgid "Show 1"
-msgstr "Шоу 1"
+msgstr "Демонстрация 1"
 
 #: tablet7in.html:745
 msgid "Remove Labels and Images"
@@ -658,4 +662,4 @@ msgstr "Без етикети и изображения"
 
 #: tablet7in.html:745
 msgid "Cleanup Screen"
-msgstr "Изчистване на екрана"
+msgstr "Изчисти екрана"
