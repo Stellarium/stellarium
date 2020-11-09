@@ -204,7 +204,7 @@ public:
 
 	//! (new 0.16)
 	//! Loads all new objects from filePath (an .ini file), and updates existing objects
-	//! Default proposal is ssystem_1000comsts.ini in the installation dir.
+	//! Default proposal is ssystem_1000comets.ini in the installation dir.
 	bool addFromSolarSystemConfigurationFile(QString filePath);
 
 	//! returns the path

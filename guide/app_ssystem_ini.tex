@@ -26,7 +26,7 @@ Section~\ref{sec:plugins:SolarSystemEditor}). The private user file is automatic
 %Possible new parameters are marked by yellow background.
 %% GZ This is no longer true. Reactivate somehow? 
 
-Each object's data is described in its own section which is typically
+Each object's data are described in its own section which is typically
 named after the object name. Some section names (e.g.\ those using
 diacriticals, spaces or other problematic characters) appear a bit mangled.
 
@@ -335,10 +335,10 @@ subdirectory of the program directory, this can be configured with a \texttt{mod
 \subsubsection{Comet section}
 \label{sec:ssystem.ini:Comet}
 
-Comets are tiny, and their outgassing and close approaches to Sun and
+Comets are tiny, but their close approaches to the
 major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
-\file{ssystem\_minor.ini}. 
+\file{ssystem\_minor.ini}. Outgassing (a result of solar radiation and wind) also causes nongravitational perturbations to their trajectories.
 
 The coord\_func is always specified as \texttt{comet\_orbit}.  Note the
 specification of a time (JDE) at pericenter which is typical for
