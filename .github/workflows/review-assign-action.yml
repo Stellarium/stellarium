@@ -1,0 +1,14 @@
+name: Review Assign
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hkusu/review-assign-action@v0.1.1
+        with:
+          assignees: ${{ github.actor }} # assign pull request author
+          reviewers: alex-w, gzotti # if draft, assigned when draft is released
