@@ -18,9 +18,8 @@ System objects.
 The minor bodies can be modified by placing a privately modified 
 copy of \file{ssystem\_minor.ini} into your own
 \file{data/} directory (see Chapter~\ref{sec:FilesAndDirectories}). 
-You can edit the file either manually, or with the
-Solar System Editor plugin (see
-Section~\ref{sec:plugins:SolarSystemEditor}).
+You can edit the file either manually, or with the Solar System Editor plugin (see
+Section~\ref{sec:plugins:SolarSystemEditor}). The private user file is automatically created by the Solar System Editor plugin.
 
 
 %Deprecated parameters are marked by gray background. 
@@ -314,8 +313,7 @@ model=4vesta_21_MLfix.obj
 \texttt{type} can be \texttt{asteroid, dwarf planet, cubewano,
   plutino, scattered disc object, Oort cloud object}. With the
 exception of Pluto (which is included in \file{ssystem\_major.ini} and cannot be changed), 
-all positions for minor bodies are computed with
-the orbiting elements given in this way. 
+all positions for minor bodies are computed with the orbiting elements given in this way. 
 
 Note that although all minor planets orbit the sun in an
 elliptical orbit, the \texttt{coord\_func=comet\_orbit}. However, it
@@ -340,7 +338,7 @@ subdirectory of the program directory, this can be configured with a \texttt{mod
 Comets are tiny, and their outgassing and close approaches to the
 major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
-\file{ssystem\_minor.ini}. 
+\file{ssystem\_minor.ini}.
 
 The coord\_func is always specified as \texttt{comet\_orbit}.  Note the
 specification of a time (JDE) at pericenter which is typical for
@@ -405,7 +403,7 @@ model=1682q1halley_MLfix.obj [optional]
 You may want to e.g.\ change the name in this entry
 to \texttt{name=1P/Halley (1982i)}. Note a rather short
 duration of \texttt{orbit\_good}, which means the comet is only displayed 780
-days before and after perihel.
+days before and after perihelion.
 
 Some comets have been visited by spacecraft so that shape models of their cores 
 may be available and can be configured with a \texttt{model} entry.\newFeature{v0.16.0}
@@ -440,10 +438,10 @@ slope_parameter=4
 tex_map=nomap.png
 \end{configfile}
 
-This has basically the same format. Note eccentricity is larger 1,
-this means the comet is running on a slightly hyperbolic
+This has basically the same format. Note that eccentricity is larger than 1,
+this means the comet is following a slightly hyperbolic
 orbit. Stellarium shows data for this comet for almost 3 years
-(\texttt{orbit\_good=1000} days) from perihel.
+(\texttt{orbit\_good=1000} days) from perihelion.
 
 
 

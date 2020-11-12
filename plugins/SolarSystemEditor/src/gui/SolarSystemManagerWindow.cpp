@@ -81,7 +81,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
 
 	connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
-	connect(ui->pushButtonReset, SIGNAL(clicked()), ssEditor, SLOT(resetSolarSystemToDefault()));
+	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSSOdefaults()));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
@@ -156,6 +156,17 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 		//This window is in the background, bring it to the foreground
 		dialog->setVisible(true);
 	}
+}
+
+void SolarSystemManagerWindow::resetSSOdefaults()
+{
+	if (askConfirmation()) 
+	{
+		qDebug() << "permission to reset SSO to defaults...";
+		ssEditor->resetSolarSystemToDefault();
+	}
+	else
+		qDebug() << "SSO reset cancelled";
 }
 
 void SolarSystemManagerWindow::populateSolarSystemList()

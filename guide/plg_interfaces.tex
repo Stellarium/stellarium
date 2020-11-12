@@ -626,20 +626,21 @@ Stellarium stores its data (orbital elements and other details) about
 solar system objects (planets, their moons, minor bodies) in two files.  
 File \file{data/ssystem\_major.ini} in the installation directory contains data for the planets and their moons.
 File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
- The file will be taken from the user data
-directory if it also exists there, which means, users can add minor
-planets or comets as they become observable by editing this file.
+The file will be taken from the user data directory if it also exists there, which means that users can add minor planets or comets as they become observable by editing this file.
 
 
-This plugin provides a window to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) where the
-latest Solar System information can be found. When this plugin is
-loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you call the configuration dialog, the first tab
-allows to import, export or reset your \file{ssystem\_minor.ini}, 
+This plugin provides access to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) server where the latest Solar System information can be found. When this plugin is
+loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you open the configuration dialog, the first tab allows to import, export or reset your \file{ssystem\_minor.ini}, 
 and also to load extra data for minor bodies in Stellarium's \file{.ini} format. 
 For example, the installation directory contains a file \file{ssystem\_1000comets.ini} which contains 
 data for over 1000 historical comets. Currently it is not possible to select only a few from that, 
-so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when 
-you don't require them.
+so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when you don't require them.
+
+\begin{figure}[th]\centering
+	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
+	\caption{Interface of Solar System Editor plugin: Configuration file tab}
+	\label{fig:SolarSystemEditor:ConfigurationFile}
+\end{figure}
 
 The second tab lists all currently loaded minor bodies (see figure~\ref{fig:SolarSystemEditor:SolarSystem}).  It is recommended
 to remove old entries of yesteryear's comets if you don't need them any
@@ -647,26 +648,22 @@ longer. Just select one or more objects and press \button{Remove}.
 If you have a very weak computer, you may want to reduce the number of
 minor bodies to just a handful to improve performance.
 
+\begin{figure}[th]\centering
+	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
+	\caption{Interface of Solar System Editor plugin: Solar System tab}
+	\label{fig:SolarSystemEditor:SolarSystem}
+\end{figure}
+
 On this tab, you also find the option to connect to the MPC and download current orbital elements, 
 or load a text file in the format provided by MPC (see figures \ref{fig:SolarSystemEditor:ImportData:InitialView} and \ref{fig:SolarSystemEditor:ImportData:FinalView}). 
-
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
-\caption{Interface of Solar System Editor plugin: Configuration file tab}
-\label{fig:SolarSystemEditor:ConfigurationFile}
-\end{figure}
-
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
-\caption{Interface of Solar System Editor plugin: Solar System tab}
-\label{fig:SolarSystemEditor:SolarSystem}
-\end{figure}
 
 \begin{figure}[th]\centering
 \includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog}
 \label{fig:SolarSystemEditor:ImportData:InitialView}
 \end{figure}
+
+Once MPC data has been downloaded, the user can select objects for updating the user's \file{ssystem\_minor.ini}.
 
 \begin{figure}[th]\centering
 \includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2.png}

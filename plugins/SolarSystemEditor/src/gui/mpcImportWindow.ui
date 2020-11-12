@@ -577,7 +577,7 @@
           <item>
            <widget class="QLabel" name="labelInstructions">
             <property name="text">
-             <string>Mark the objects you wish to be imported. In &lt;i&gt;italic&lt;/i&gt; are listed names that match the names of already loaded objects. In &lt;b&gt;bold&lt;/b&gt; are listed names that match the names of objects inherited from Stellarium's default Solar System configuration.&lt;br/&gt;Note that adding a large number of objects may cause Stellarium to run slowly.</string>
+             <string>Mark the objects you wish to be imported. &lt;i&gt;italics&lt;/i&gt; indicate objects with names matching those of already loaded objects. &lt;br/&gt;&lt;br/&gt;Note that adding a large number of objects may cause Stellarium to run slowly.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -586,20 +586,29 @@
           </item>
           <item>
            <widget class="QRadioButton" name="radioButtonOverwrite">
+            <property name="toolTip">
+             <string>This will update existing objects only.</string>
+            </property>
             <property name="text">
-             <string>Overwrite existing objects</string>
+             <string>Overwrite existing objects only</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QRadioButton" name="radioButtonUpdate">
+            <property name="toolTip">
+             <string>This will add new objects AND update existing ones.</string>
+            </property>
             <property name="text">
-             <string>Update existing objects</string>
+             <string>Add new and update existing objects</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBoxOnlyOrbitalElements">
+            <property name="toolTip">
+             <string>If not checked, also update the type (comet, asteroid, ...) and magnitude data.</string>
+            </property>
             <property name="text">
              <string>Update only the orbital elements</string>
             </property>
