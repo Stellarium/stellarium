@@ -156,7 +156,7 @@ public slots:
 
 	//! For the currently select object add the extraString info
 	//! in a format that matches the Nautical Almanac.
-	void extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
+	void extraInfo(StelCore* core, const StelObjectP& selectedObject);
 
 	//! Used to display the extraInfoStrings in standard "paired" lines (for example gha/dev)
 	void displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
@@ -177,6 +177,7 @@ public slots:
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void 	saveSettings() { saveConfiguration(); }
+	void setUseDecimalDegrees();
 
 signals:
 	//! Emitted when display of markers have been changed.
@@ -190,13 +191,12 @@ private:
 	// The current set of navigational stars
 	NavigationalStarsSet currentNSSet;
 
-	bool withTables;
 	bool enableAtStartup;
 	bool starLabelsState;
 	bool upperLimb;
 	bool highlightWhenVisible;
 	bool limitInfoToNavStars;
-	bool tabulatedDisplay;
+	bool tabulatedDisplay;	
 
 	QVector<QString> permittedObjects;
 
