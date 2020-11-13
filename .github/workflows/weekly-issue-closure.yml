@@ -10,5 +10,5 @@ jobs:
     - name: weekly-issue-closure
       uses: bdougie/close-issues-based-on-label@master
       env:
-        LABEL: won't fix
+        LABEL: invalid
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
