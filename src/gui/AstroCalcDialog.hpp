@@ -474,6 +474,7 @@ private:
 		EWCaldwellObjects					= 36,
 		EWHerschel400Objects				= 37,
 		EWAlgolTypeVariableStars				= 38,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWClassicalCepheidsTypeVariableStars	= 39,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		EWNone	// stop gapper for syntax reasons
 	};
 };

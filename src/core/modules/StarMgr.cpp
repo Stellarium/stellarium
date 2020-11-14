@@ -666,6 +666,7 @@ void StarMgr::populateHipparcosLists()
 	doubleHipStars.clear();
 	variableHipStars.clear();
 	algolTypeStars.clear();
+	classicalCepheidsTypeStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -688,6 +689,12 @@ void StarMgr::populateHipparcosLists()
 					QMap<StelObjectP, float> sal;
 					sal[so] = sa[so];
 					algolTypeStars.push_back(sal);
+				}
+				if (vartype.contains("DCEP") && !vartype.contains("DCEPS"))
+				{
+					QMap<StelObjectP, float> sacc;
+					sacc[so] = sa[so];
+					classicalCepheidsTypeStars.push_back(sacc);
 				}
 			}
 			if (!getWdsName(s->getHip()).isEmpty())

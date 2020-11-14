@@ -5153,6 +5153,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Caldwell objects"), 			EWCaldwellObjects);
 	wutCategories.insert(q_("Herschel 400 objects"), 		EWHerschel400Objects);
 	wutCategories.insert(q_("Algol-type eclipsing systems"),	EWAlgolTypeVariableStars);
+	wutCategories.insert(q_("The classical cepheids"),		EWClassicalCepheidsTypeVariableStars);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5318,6 +5319,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
 		QList<StelACStarData> algolTypeStars = starMgr->getHipparcosAlgolTypeStars();
+		QList<StelACStarData> classicalCepheidsTypeStars = starMgr->getHipparcosClassicalCepheidsTypeStars();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
@@ -5668,36 +5670,14 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case EWAlgolTypeVariableStars:
-					enableAngular = false;
-					for (const auto& varStar : algolTypeStars)
-					{
-						StelObjectP object = varStar.firstKey();
-						mag = object->getVMagnitude(core);
-						if (mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							designation = object->getEnglishName();
-							if (designation.isEmpty())
-								designation = object->getID();
-
-							if (!objectsList.contains(designation))
-							{
-								starName = object->getNameI18n();
-								if (starName.isEmpty())
-									starName = designation;
-
-								rts = object->getRTSTime(core);
-								alt = computeMaxElevation(object);
-
-								fillWUTTable(starName, designation, mag, rts, alt, 0.0, withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
+				case EWClassicalCepheidsTypeVariableStars:
 				case EWBrightVariableStars:
-					enableAngular = false;
-					for (const auto& varStar : varHipStars)
+					enableAngular = false;					
+					static QMap<int, QList<StelACStarData>>map = {
+						{EWAlgolTypeVariableStars,			algolTypeStars},
+						{EWClassicalCepheidsTypeVariableStars,	classicalCepheidsTypeStars},
+						{EWBrightVariableStars,				varHipStars}};
+					for (const auto& varStar : map.value(categoryId, varHipStars))
 					{
 						StelObjectP object = varStar.firstKey();
 						mag = object->getVMagnitude(core);
@@ -5722,7 +5702,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
+					break;				
 				case EWBrightStarsWithHighProperMotion:
 					enableAngular = false;
 					for (const auto& hpmStar : hpmHipStars)
