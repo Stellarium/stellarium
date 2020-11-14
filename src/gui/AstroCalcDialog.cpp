@@ -5256,6 +5256,8 @@ void AstroCalcDialog::enableAngularLimits(bool enable)
 	ui->wutAngularSizeLimitCheckBox->setEnabled(enable);
 	ui->wutAngularSizeLimitMinSpinBox->setEnabled(enable);
 	ui->wutAngularSizeLimitMaxSpinBox->setEnabled(enable);
+	if (!enable)
+		ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 }
 
 void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees)
@@ -5434,8 +5436,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
 				case EWBrightNebulae:
 				case EWDarkNebulae:
@@ -5571,9 +5572,6 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (!enableAngular)
-						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-
 					if (categoryId==EWPulsars) // special case!
 					{
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize);
@@ -5701,8 +5699,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
 				}
 				case EWBrightStarsWithHighProperMotion:
@@ -5730,8 +5727,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
 				case EWActiveGalaxies:
 					enableAngular = false;
@@ -5793,8 +5789,7 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
-					#endif
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					#endif					
 					break;
 				case EWPulsars:
 					enableAngular = false;
@@ -5820,8 +5815,7 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude); // special case!
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude); // special case!					
 					#endif
 					break;
 				case EWExoplanetarySystems:
@@ -5841,8 +5835,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
 				case EWBrightNovaStars:
@@ -5862,8 +5855,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
 				case EWBrightSupernovaStars:
@@ -5883,8 +5875,7 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
 				case EWMessierObjects:
