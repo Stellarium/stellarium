@@ -5672,6 +5672,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case EWAlgolTypeVariableStars:
 				case EWClassicalCepheidsTypeVariableStars:
 				case EWBrightVariableStars:
+				{
 					enableAngular = false;					
 					static QMap<int, QList<StelACStarData>>map = {
 						{EWAlgolTypeVariableStars,			algolTypeStars},
@@ -5702,7 +5703,8 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;				
+					break;
+				}
 				case EWBrightStarsWithHighProperMotion:
 					enableAngular = false;
 					for (const auto& hpmStar : hpmHipStars)

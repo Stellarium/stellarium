@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-04 23:08+0700\n"
+"POT-Creation-Date: 2020-11-14 15:49+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Latein Lebt, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
@@ -38,7 +38,7 @@ msgstr "علامة مخصصة"
 #: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:226
 #: src/core/modules/Nebula.cpp:228 src/core/modules/Planet.cpp:468
 #: src/core/modules/Planet.cpp:471 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:221 src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:224 src/core/modules/StarWrapper.cpp:227
 #: src/gui/AstroCalcDialog.cpp:889 src/ui_configurationDialog.h:1704
 #: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -284,7 +284,7 @@ msgstr "نقطة الخلف"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1375 src/core/modules/Planet.cpp:652
-#: src/core/modules/Planet.cpp:934 src/gui/AstroCalcDialog.cpp:6156
+#: src/core/modules/Planet.cpp:934 src/gui/AstroCalcDialog.cpp:6175
 #: plugins/Satellites/src/Satellite.cpp:328
 #: plugins/Satellites/src/Satellite.cpp:390
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -493,7 +493,7 @@ msgstr "تغيير قيمة التلوث الضوئي بالمرور الدور�
 #: src/core/modules/LandscapeMgr.cpp:924 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:580
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
@@ -590,7 +590,7 @@ msgstr "‎القطر‎"
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:608
 #: src/core/modules/Planet.cpp:633 src/core/modules/Planet.cpp:731
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6085
+#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6104
 #: plugins/Satellites/src/Satellite.cpp:324
 #: plugins/Satellites/src/Satellite.cpp:383
 msgctxt "distance"
@@ -1296,7 +1296,7 @@ msgid "Additional catalog numbers: "
 msgstr "أرقام أدلة إضافية: "
 
 #: src/core/modules/Nebula.cpp:238 src/core/modules/MinorPlanet.cpp:186
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:240
 #: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "‎المؤشر اللوني (B-V)‎"
@@ -1340,7 +1340,7 @@ msgstr "‎زاوية الاتجاه‎"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:323 src/core/modules/Nebula.cpp:336
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:164 plugins/Novae/src/Nova.cpp:166
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:300
 msgctxt "distance"
@@ -1348,8 +1348,8 @@ msgid "ly"
 msgstr "‎سنة ضوئية‎"
 
 #: src/core/modules/Nebula.cpp:324 src/core/modules/Nebula.cpp:370
-#: src/core/modules/Planet.cpp:643 src/core/modules/StarWrapper.cpp:272
-#: src/core/modules/StarWrapper.cpp:274 src/gui/AstroCalcDialog.cpp:3111
+#: src/core/modules/Planet.cpp:643 src/core/modules/StarWrapper.cpp:275
+#: src/core/modules/StarWrapper.cpp:277 src/gui/AstroCalcDialog.cpp:3111
 #: src/gui/AstroCalcDialog.cpp:3169 src/ui_configurationDialog.h:1689
 #: plugins/Supernovae/src/Supernova.cpp:165 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:301
@@ -1378,12 +1378,12 @@ msgstr "‎مليون سنة ضوئية‎"
 msgid "Redshift"
 msgstr "‎الإنزياح للأحمر‎"
 
-#: src/core/modules/Nebula.cpp:395 src/core/modules/StarWrapper.cpp:296
+#: src/core/modules/Nebula.cpp:395 src/core/modules/StarWrapper.cpp:299
 msgid "Parallax"
 msgstr "‎اختلاف المنظر‎"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:395 src/core/modules/StarWrapper.cpp:301
+#: src/core/modules/Nebula.cpp:395 src/core/modules/StarWrapper.cpp:304
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
@@ -1788,7 +1788,7 @@ msgstr "‎سديم في مرحلة ماقبل الشكل الكوكبي‎"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1387 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:214 src/gui/AstroCalcDialog.cpp:1231
+#: src/core/modules/StarWrapper.cpp:217 src/gui/AstroCalcDialog.cpp:1231
 #: src/translations.h:54
 msgid "star"
 msgstr "نجم"
@@ -1857,7 +1857,7 @@ msgid "See Logfile for instructions."
 msgstr "انظر إلى ملف السجل للتعليمات."
 
 #: src/core/modules/Planet.cpp:423 src/core/modules/Comet.cpp:155
-#: src/core/modules/StarWrapper.cpp:231 plugins/Quasars/src/Quasar.cpp:140
+#: src/core/modules/StarWrapper.cpp:234 plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
 msgstr "‎القدر المطلق‎"
 
@@ -1885,7 +1885,7 @@ msgstr "الإحداثيات الكسوفية"
 msgid "Hourly motion"
 msgstr "‎الحركة الساعيّة‎"
 
-#: src/core/modules/Planet.cpp:528 src/core/modules/StarWrapper.cpp:288
+#: src/core/modules/Planet.cpp:528 src/core/modules/StarWrapper.cpp:291
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "towards"
@@ -1946,8 +1946,8 @@ msgstr "‎موقع زاوية القوس المضيء‎"
 #: src/core/modules/Planet.cpp:606 src/gui/AstroCalcDialog.cpp:870
 #: src/gui/AstroCalcDialog.cpp:1139 src/gui/AstroCalcDialog.cpp:1511
 #: src/gui/AstroCalcDialog.cpp:1559 src/gui/AstroCalcDialog.cpp:3079
-#: src/gui/AstroCalcDialog.cpp:6129 src/gui/AstroCalcDialog.cpp:6194
-#: src/gui/AstroCalcDialog.cpp:6336 plugins/Exoplanets/src/Exoplanet.cpp:330
+#: src/gui/AstroCalcDialog.cpp:6148 src/gui/AstroCalcDialog.cpp:6213
+#: src/gui/AstroCalcDialog.cpp:6355 plugins/Exoplanets/src/Exoplanet.cpp:330
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "‎وحدة فلكية‎"
@@ -1956,7 +1956,7 @@ msgstr "‎وحدة فلكية‎"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:622 src/core/modules/Planet.cpp:640
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6087
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6106
 msgctxt "distance"
 msgid "M km"
 msgstr "‎مليون كم‎"
@@ -2012,7 +2012,7 @@ msgstr "‎مضاء بنسبة‎"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:798 src/core/modules/Planet.cpp:942
-#: src/core/modules/StarWrapper.cpp:308 src/gui/AstroCalcDialog.cpp:6167
+#: src/core/modules/StarWrapper.cpp:311 src/gui/AstroCalcDialog.cpp:6186
 msgctxt "duration"
 msgid "days"
 msgstr "‎يوماً‎"
@@ -2163,86 +2163,86 @@ msgstr "كبر حجم أجرام النظام الشمسي الصغيرة"
 msgid "Native planet names (from starlore)"
 msgstr "أسماء الكواكب المحلية من التراث الفلكي"
 
-#: src/core/modules/StarWrapper.cpp:195
+#: src/core/modules/StarWrapper.cpp:196
 msgid "eruptive variable star"
 msgstr "نجم متغيِّر ثائر"
 
-#: src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:198
 msgid "pulsating variable star"
 msgstr "نجم متغيِّر نابض"
 
-#: src/core/modules/StarWrapper.cpp:199
+#: src/core/modules/StarWrapper.cpp:200
 msgid "rotating variable star"
 msgstr "نجم متغيِّر دوار"
 
-#: src/core/modules/StarWrapper.cpp:201
+#: src/core/modules/StarWrapper.cpp:202
 msgid "cataclysmic variable star"
 msgstr "نجم متغيِّر مدمِّر"
 
-#: src/core/modules/StarWrapper.cpp:204
+#: src/core/modules/StarWrapper.cpp:205
 msgid "eclipsing binary system"
 msgstr "نظام ثنائي كسوفي"
 
-#: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1245
+#: src/core/modules/StarWrapper.cpp:211 src/gui/AstroCalcDialog.cpp:1245
 msgid "variable star"
 msgstr "نجم متغيِّر"
 
-#: src/core/modules/StarWrapper.cpp:212 src/gui/AstroCalcDialog.cpp:1239
+#: src/core/modules/StarWrapper.cpp:215 src/gui/AstroCalcDialog.cpp:1239
 msgid "double star"
 msgstr "نجم ثنائي"
 
-#: src/core/modules/StarWrapper.cpp:255
+#: src/core/modules/StarWrapper.cpp:258
 msgid "Magnitude range"
 msgstr "‎مدى التغيّر في قدر السطوع‎"
 
-#: src/core/modules/StarWrapper.cpp:255
+#: src/core/modules/StarWrapper.cpp:258
 msgid "Photometric system"
 msgstr "‎النظام الفوتومتري‎"
 
-#: src/core/modules/StarWrapper.cpp:286
+#: src/core/modules/StarWrapper.cpp:289
 msgid "Proper motion"
 msgstr "‎الانتقال الحقيقي‎"
 
-#: src/core/modules/StarWrapper.cpp:287 src/core/modules/StarWrapper.cpp:289
+#: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "‎mas/yr"
 
-#: src/core/modules/StarWrapper.cpp:289
+#: src/core/modules/StarWrapper.cpp:292
 msgid "Proper motions by axes"
 msgstr "الانتقالات الحقيقية بالمحاور‎"
 
-#: src/core/modules/StarWrapper.cpp:305 plugins/Quasars/src/Quasar.cpp:151
+#: src/core/modules/StarWrapper.cpp:308 plugins/Quasars/src/Quasar.cpp:151
 #: plugins/Exoplanets/src/Exoplanet.cpp:295
 msgid "Spectral Type"
 msgstr "‎النوع الطيفي‎"
 
-#: src/core/modules/StarWrapper.cpp:308
+#: src/core/modules/StarWrapper.cpp:311
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 msgid "Period"
 msgstr "‎الفترة‎"
 
-#: src/core/modules/StarWrapper.cpp:316
+#: src/core/modules/StarWrapper.cpp:319
 msgid "Next maximum light"
 msgstr "‎السطوع الأقصى القادم‎"
 
-#: src/core/modules/StarWrapper.cpp:318
+#: src/core/modules/StarWrapper.cpp:321
 msgid "Next minimum light"
 msgstr "‎السطوع الأدنى القادم‎"
 
-#: src/core/modules/StarWrapper.cpp:325
+#: src/core/modules/StarWrapper.cpp:328
 msgid "Rising time"
 msgstr "‎نسبة فترة الظهور‎"
 
-#: src/core/modules/StarWrapper.cpp:327
+#: src/core/modules/StarWrapper.cpp:330
 msgid "Duration of eclipse"
 msgstr "‎مدة الكسوف‎"
 
-#: src/core/modules/StarWrapper.cpp:334
+#: src/core/modules/StarWrapper.cpp:339
 msgid "Position angle"
 msgstr "‎زاوية الموقع‎"
 
-#: src/core/modules/StarWrapper.cpp:338 src/core/modules/StarWrapper.cpp:340
+#: src/core/modules/StarWrapper.cpp:343 src/core/modules/StarWrapper.cpp:345
 #: src/gui/AstroCalcDialog.cpp:3580
 msgid "Separation"
 msgstr "‎البعد الزاوي‎"
@@ -3213,17 +3213,17 @@ msgstr "‎الوقت النجمي الظاهري‎"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:601 src/gui/AstroCalcDialog.cpp:883
-#: src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:5217
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "‎يتوسط‎"
 
-#: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:5214
+#: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:5216
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "‎يطلع‎"
 
-#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:5218
+#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:5220
 msgctxt "celestial event"
 msgid "Set"
 msgstr "‎يغيب‎"
@@ -3794,7 +3794,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:578
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:198
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
@@ -3816,7 +3816,7 @@ msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:579
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:199
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
@@ -4373,7 +4373,7 @@ msgstr "فاحص: %1"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:581
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:234
@@ -5133,7 +5133,7 @@ msgid "Local Time"
 msgstr "التوقيت المحلي"
 
 #: src/gui/AstroCalcDialog.cpp:752 src/gui/AstroCalcDialog.cpp:2674
-#: src/gui/AstroCalcDialog.cpp:3424 src/gui/AstroCalcDialog.cpp:6467
+#: src/gui/AstroCalcDialog.cpp:3424 src/gui/AstroCalcDialog.cpp:6486
 #: src/gui/BookmarksDialog.cpp:180
 msgid "Unnamed star"
 msgstr "نجم غير مسمّى"
@@ -5145,7 +5145,7 @@ msgstr ". الآن حوالي %1 ."
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:830 src/gui/AstroCalcDialog.cpp:1490
-#: src/gui/AstroCalcDialog.cpp:1879 src/gui/AstroCalcDialog.cpp:5203
+#: src/gui/AstroCalcDialog.cpp:1879 src/gui/AstroCalcDialog.cpp:5205
 #: src/ui_configurationDialog.h:1728
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
@@ -5165,13 +5165,13 @@ msgid "Dec (J2000)"
 msgstr "(J2000) الميل"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5212
+#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5214
 msgid "Opac."
 msgstr "العتامة"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:853 src/gui/AstroCalcDialog.cpp:1507
-#: src/gui/AstroCalcDialog.cpp:1884 src/gui/AstroCalcDialog.cpp:5207
+#: src/gui/AstroCalcDialog.cpp:1884 src/gui/AstroCalcDialog.cpp:5209
 msgid "Mag."
 msgstr "القدر"
 
@@ -5182,7 +5182,7 @@ msgstr "الحجم الزاوي"
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5222
+#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5224
 msgid "Sep."
 msgstr "الافتراق الزاوي"
 
@@ -5217,7 +5217,7 @@ msgid "S.B."
 msgstr "السطوع السطحي"
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5219
 msgid "Elev."
 msgstr "الارتفاع"
 
@@ -5277,14 +5277,14 @@ msgstr "نجم ذو انتقال حقيقي كبير"
 
 #: src/gui/AstroCalcDialog.cpp:1353 src/gui/AstroCalcDialog.cpp:1801
 #: src/gui/AstroCalcDialog.cpp:2067 src/gui/AstroCalcDialog.cpp:3887
-#: src/gui/AstroCalcDialog.cpp:5969
+#: src/gui/AstroCalcDialog.cpp:5988
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1432
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
 #: src/gui/AstroCalcDialog.cpp:1355 src/gui/AstroCalcDialog.cpp:1803
 #: src/gui/AstroCalcDialog.cpp:2069 src/gui/AstroCalcDialog.cpp:3889
-#: src/gui/AstroCalcDialog.cpp:5971
+#: src/gui/AstroCalcDialog.cpp:5990
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1434
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Comma delimited)"
@@ -5990,77 +5990,85 @@ msgstr "أجرام Caldwell"
 msgid "Herschel 400 objects"
 msgstr "دليل هرشل لـ 400 جرم"
 
+#: src/gui/AstroCalcDialog.cpp:5155
+msgid "Algol-type eclipsing systems"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:5156
+msgid "The classical cepheids"
+msgstr ""
+
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:5227
+#: src/gui/AstroCalcDialog.cpp:5229
 msgid "Ang. Size"
 msgstr "الحجم الزاوي"
 
-#: src/gui/AstroCalcDialog.cpp:5336 src/ui_astroCalcDialog.h:1817
+#: src/gui/AstroCalcDialog.cpp:5341 src/ui_astroCalcDialog.h:1817
 msgid "Limit angular size:"
 msgstr "حدّد الحجم الزاوي:"
 
-#: src/gui/AstroCalcDialog.cpp:5337 src/ui_astroCalcDialog.h:1815
+#: src/gui/AstroCalcDialog.cpp:5342 src/ui_astroCalcDialog.h:1815
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "ضع حدوداً للحجم الزاوي للأجرام السماوية المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5338 src/ui_astroCalcDialog.h:1819
+#: src/gui/AstroCalcDialog.cpp:5343 src/ui_astroCalcDialog.h:1819
 msgid "Minimal angular size for visible celestial objects"
 msgstr "الحد الأدنى للحجم الزاوي للأجرام السماوية المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5339 src/ui_astroCalcDialog.h:1822
+#: src/gui/AstroCalcDialog.cpp:5344 src/ui_astroCalcDialog.h:1822
 msgid "Maximum angular size for visible celestial objects"
 msgstr "الحد الأقصى للحجم الزاوي للأجرام السماوية المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5629
+#: src/gui/AstroCalcDialog.cpp:5636
 msgid "Limit angular separation:"
 msgstr "حدّد الافتراق الزاوي"
 
-#: src/gui/AstroCalcDialog.cpp:5630
+#: src/gui/AstroCalcDialog.cpp:5637
 msgid "Set limits for angular separation for visible double stars"
 msgstr "ضع حدوداً لقدر الافتراق الزاوي بين النجوم المزدوجة المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5631
+#: src/gui/AstroCalcDialog.cpp:5638
 msgid "Minimal angular separation for visible double stars"
 msgstr "الحد الأدنى للافتراق الزاوي بين النجوم المزدوجة المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5632
+#: src/gui/AstroCalcDialog.cpp:5639
 msgid "Maximum angular separation for visible double stars"
 msgstr "الحد الأقصى للافتراق الزاوي بين النجوم المزدوجة المرئية"
 
-#: src/gui/AstroCalcDialog.cpp:5973
+#: src/gui/AstroCalcDialog.cpp:5992
 msgid "JSON (Stellarium bookmarks)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5977
+#: src/gui/AstroCalcDialog.cpp:5996
 msgid "Save list of objects as..."
 msgstr "... احفظ قائمة الأجرام بصيغة"
 
-#: src/gui/AstroCalcDialog.cpp:5997 src/ui_astroCalcDialog.h:1634
+#: src/gui/AstroCalcDialog.cpp:6016 src/ui_astroCalcDialog.h:1634
 msgid "What's Up Tonight"
 msgstr "الأجرام التي تشاهد هذه الليلة"
 
-#: src/gui/AstroCalcDialog.cpp:6143
+#: src/gui/AstroCalcDialog.cpp:6162
 msgid "spin-orbit resonance"
 msgstr "‎الرنين المداري-الدوراني‎"
 
-#: src/gui/AstroCalcDialog.cpp:6193 src/gui/AstroCalcDialog.cpp:6355
+#: src/gui/AstroCalcDialog.cpp:6212 src/gui/AstroCalcDialog.cpp:6374
 msgid "Days from today"
 msgstr "عدد الأيام بداية من هذا اليوم"
 
-#: src/gui/AstroCalcDialog.cpp:6194 src/gui/AstroCalcDialog.cpp:6336
+#: src/gui/AstroCalcDialog.cpp:6213 src/gui/AstroCalcDialog.cpp:6355
 msgid "Linear distance"
 msgstr "المسافة الطولية"
 
-#: src/gui/AstroCalcDialog.cpp:6195 src/gui/AstroCalcDialog.cpp:6339
-#: src/gui/AstroCalcDialog.cpp:6356
+#: src/gui/AstroCalcDialog.cpp:6214 src/gui/AstroCalcDialog.cpp:6358
+#: src/gui/AstroCalcDialog.cpp:6375
 msgid "Angular distance"
 msgstr "البعد الزاوي"
 
-#: src/gui/AstroCalcDialog.cpp:6336 src/gui/AstroCalcDialog.cpp:6339
+#: src/gui/AstroCalcDialog.cpp:6355 src/gui/AstroCalcDialog.cpp:6358
 msgid "Day"
 msgstr "يوم"
 
-#: src/gui/AstroCalcDialog.cpp:6397
+#: src/gui/AstroCalcDialog.cpp:6416
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "التغير في البعد الزاوي بين القمر والجرم المختار"
 
@@ -7731,40 +7739,45 @@ msgstr "أناليما أورانوس"
 msgid "Messier Marathon"
 msgstr "ماراثون ميسييه"
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:694
+msgid "Random location"
+msgstr ""
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:698
+#: src/translations.h:700
 msgid "Look around each installed landscape."
 msgstr "<P DIR=RTL>استعرض كل مناظر الرصد المثبتة"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:700
+#: src/translations.h:702
 msgid "Look at each installed sky culture."
 msgstr "استعرض كل تراث فلكي تضمنه البرنامج"
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "<P DIR=RTL>مثال يعرض خسوف قمري جزئي"
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "<P DIR=RTL>مثال يعرض خسوف قمري كلّي"
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "<P DIR=RTL>جولة لانهائية بطيئة تستعرض أجراماً سماوية عشوائياً"
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "<P DIR=RTL>مثال يستعرض الكسوف الكلّي للشمس عام 2009 في رانغبور بنغلاديش"
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid "Script which runs automatically at startup"
 msgstr "<P DIR=RTL>سكريبت يُنفّذ تلقائياً عند بدء البرنامج"
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -7773,7 +7786,7 @@ msgstr ""
 "<P DIR=RTL>هذا السكريبت يعرض كوكبات البروج. ويعني ذلك الكوكبات التي تقع على "
 "المسار الذي تقطعه الشمس في الكرة السماوية خلال سنة."
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -7781,7 +7794,7 @@ msgstr ""
 "<P DIR=RTL>بسبب بعض الشذوذات في مدار عطارد ودورانه تشرق الشمس وتغيب في بع "
 "مناطقه 3 مرات مختلفة في اليوم الواحد."
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -7789,7 +7802,7 @@ msgstr ""
 "<P DIR=RTL>قبل أن يحدث الكسوف بسبب المريخ  بوقت قصير يأتي فوبوس من الخلف "
 "ويتسبب في كسوف أول للشمس. يحدث بين كوكبتي العقرب والقوس في 26 إبريل 2017"
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -7797,11 +7810,11 @@ msgstr ""
 "<P DIR=RTL>قبل أن يحدث الكسوف بسبب المريخ  بوقت قصير يأتي فوبوس من الخلف "
 "ويتسبب في كسوف أول للشمس. يحدث بين كوكبتي الثور والتوأمين في 23 يوليه 2031"
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "كسوف الشمس بواسطة فوبوس كما يرى من جبل أولمبس في 2 يناير 20121م"
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -7810,7 +7823,7 @@ msgstr ""
 "حجب فوبوس للأرض أمر شائع وكذلك حجبه للمشتري، ولكن حجب الإثنين في نفس اليوم "
 "أمر نادر. هذا أحد الأحداث في 1-23-2048، بالسرعة الحقيقية."
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -7824,34 +7837,34 @@ msgstr ""
 " كليا بينما يعبر فوبوس بالظلام بين المريخ وديموس. عندما يتجلى فوبوس عن "
 "المريخ يكون مكسوفا جزئيا ومعتم بظل المريخ ثم يتعيد ضياءه."
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr "حافظ شاشة لحوالي 300 حدث في النظام الشمسي"
 
-#: src/translations.h:714
+#: src/translations.h:716
 msgid "A tour of the western constellations."
 msgstr "جولة في كوكبات التراث الفلكي الغربي"
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "رحلة بين كوكبات التراث الفلكي المختار"
 
-#: src/translations.h:716
+#: src/translations.h:718
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "انظر إلى الشمس من الكواكب الكبرى وبلوتو"
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "افضل مناظر الأرض من أجرام النظام الشمسي الأخرى خلال القرن الواحد والعشرين"
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "عبور الزهرة كما شوهد في سيدني استراليا 6 يونيه 2012م."
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -7859,7 +7872,7 @@ msgstr ""
 "لمعان المستعر العظيم الذي رصده تايخو براهي في 1572. يجب تفعيل إضافة "
 "المستعرات العظيمة."
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -7867,7 +7880,7 @@ msgstr ""
 "الاستطالة العظمى والتقابل للأرض والكواكب الأخرى من المريخ من عام 2000 حتى "
 "3000 م"
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -7879,7 +7892,7 @@ msgstr ""
 "الوحيد الذي يقع خارج حزام  المشتري الإشعاعي. لذلك إذا كان هناك مستعمرة بشرية"
 " على أحد أقمار المشتري فستكون على سطح كاليستو."
 
-#: src/translations.h:722
+#: src/translations.h:724
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -7887,11 +7900,11 @@ msgstr ""
 "الاستطالات العظمى والتقابلات لكوكب الأرض والكواكب الأخرى المرئية من سيريس في"
 " الفترة 2000 - 2200 م"
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid "A tour of Messier Objects"
 msgstr "جولة مع أجرام ميسييه"
 
-#: src/translations.h:724
+#: src/translations.h:726
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -7900,7 +7913,7 @@ msgstr ""
 "جولة مع بعض الأجرام الممتعة التي يمكن رؤيتها بالمنظار الثنائي . البيانات "
 "مستقاة من كتاب جاري سيرونيك"
 
-#: src/translations.h:725
+#: src/translations.h:727
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -7910,15 +7923,15 @@ msgstr ""
 "بواسطة جيري لودريجس ونشرت في مجلة سكاي آند تلسكوب في 9/2014 البيانات هنا من "
 "موقعه http://www.astropix.com/doubles/"
 
-#: src/translations.h:726
+#: src/translations.h:728
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "هذا السكربت يساعدك للقيام بجولة حول أضخم النجوم المعروفة"
 
-#: src/translations.h:727
+#: src/translations.h:729
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "جولة حول أجرام دليل هرشل 400"
 
-#: src/translations.h:728
+#: src/translations.h:730
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -7927,7 +7940,7 @@ msgstr ""
 "قام بن كراول بجمع قائمة لأجرام الفضاء السحيق التي يمكن رصدها بالمنظار "
 "الثنائي. يوجد 31 جرم مرتبة حسب المطلع المستقيم"
 
-#: src/translations.h:729
+#: src/translations.h:731
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -7935,7 +7948,7 @@ msgstr ""
 "أجرام الفضاء السحيق في الجزء الجنوبي من الكرة السماوية حسب دليل جاك بينيت ، "
 "152 جرماً"
 
-#: src/translations.h:730
+#: src/translations.h:732
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -7944,7 +7957,7 @@ msgstr ""
 "قائمة تضم 111 جرماً جمعها أي جي كرايون وستيف كو وتستخدم من قبل أعضاء نادي "
 "ساجوارو الفلكي في فينيكس أريزونا لجائزة أفضل إنجاز للدليل العام الجديد"
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -7953,7 +7966,7 @@ msgstr ""
 "عرض لمنتصف الوقت لظواهر نادرة - الظلال الثلاثية لأقمار المشتري بين 1900 إلى "
 "2100. كل الأحداث معطاة خلال الوقت الديناميكي."
 
-#: src/translations.h:732
+#: src/translations.h:734
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -7966,14 +7979,14 @@ msgstr ""
 "(خسوفات). هذا البرنامج يعرض هذه الظواهر النادرة من عام 1900 حتى 2100 في "
 "الوقت الديناميكي."
 
-#: src/translations.h:733
+#: src/translations.h:735
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 "يعرض هذا البرنامج احتجاب النجوم اللامعة بالكواكب بين عامي 2000 و 2040م"
 
-#: src/translations.h:734
+#: src/translations.h:736
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
@@ -7981,35 +7994,35 @@ msgstr ""
 "هذا البرنامج يعرض ظاهرة نادرة جداً حينما يكون هناك احتجاب متبادل بين الكواكب"
 " من عام 0 حتى 2500م"
 
-#: src/translations.h:735
+#: src/translations.h:737
 msgid "A tour of the Solar System planets"
 msgstr "رحلة في كواكب النظام الشمسي"
 
-#: src/translations.h:736
+#: src/translations.h:738
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "عرض للأناليما - مسار الشمس السنوي عبر السماء فوق الأرض."
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "عرض للأناليما - مسار الشمس السنوي عبر السماء فوق المريخ."
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr "عرض للأناليما - مسار الشمس في السماء  خلال سنة زحل"
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "عرض للأناليما - مسار الشمس خلال السماء في سنة أورانوس."
 
-#: src/translations.h:740
+#: src/translations.h:742
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -8017,7 +8030,7 @@ msgstr ""
 "ماراثون ميسييه في مارس 20، 2020.  بيانات البرنامج النصي مأخوذة من سجل أرصاد "
 "جاوزنج:  http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8027,180 +8040,186 @@ msgid ""
 "to apply it to your projects."
 msgstr ""
 
-#: src/translations.h:745
+#: src/translations.h:744
+msgid ""
+"This script will help you make practical works for celestial navigation - he"
+" sets a random location and hides it from the GUI."
+msgstr ""
+
+#: src/translations.h:748
 msgid "&Undo"
 msgstr "&تراجع"
 
-#: src/translations.h:746
+#: src/translations.h:749
 msgid "&Redo"
 msgstr "&إعادة"
 
-#: src/translations.h:747
+#: src/translations.h:750
 msgid "Cu&t"
 msgstr "ق&ص"
 
-#: src/translations.h:748
+#: src/translations.h:751
 msgid "&Copy"
 msgstr "&نسخ"
 
-#: src/translations.h:749
+#: src/translations.h:752
 msgid "&Paste"
 msgstr "&لصق"
 
-#: src/translations.h:750 plugins/Oculars/src/ui_ocularDialog.h:1543
+#: src/translations.h:753 plugins/Oculars/src/ui_ocularDialog.h:1543
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
 #: plugins/Oculars/src/ui_ocularDialog.h:1558
 #: plugins/Oculars/src/ui_ocularDialog.h:1577
 msgid "Delete"
 msgstr "احذف"
 
-#: src/translations.h:751
+#: src/translations.h:754
 msgid "Select All"
 msgstr "حدّد الكل"
 
-#: src/translations.h:752
+#: src/translations.h:755
 msgid "Look in:"
 msgstr "ابحث في:"
 
-#: src/translations.h:753
+#: src/translations.h:756
 msgid "Directory:"
 msgstr "المسار:"
 
-#: src/translations.h:754
+#: src/translations.h:757
 msgid "Folder"
 msgstr "المجلد"
 
-#: src/translations.h:755
+#: src/translations.h:758
 msgid "&Choose"
 msgstr "&اختر"
 
-#: src/translations.h:756 src/ui_configurationDialog.h:1801
+#: src/translations.h:759 src/ui_configurationDialog.h:1801
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:647
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: src/translations.h:757
+#: src/translations.h:760
 msgid "&Cancel"
 msgstr "&إلغاء"
 
-#: src/translations.h:758
+#: src/translations.h:761
 msgid "Files of type:"
 msgstr "الملفات من نزع:"
 
-#: src/translations.h:759
+#: src/translations.h:762
 msgid "Date Modified"
 msgstr "تاريخ التعديل"
 
-#: src/translations.h:760
+#: src/translations.h:763
 msgid "Directories"
 msgstr "المسارات"
 
-#: src/translations.h:761
+#: src/translations.h:764
 msgid "Computer"
 msgstr "الحاسب"
 
-#: src/translations.h:762
+#: src/translations.h:765
 msgid "&Open"
 msgstr "&فتح"
 
-#: src/translations.h:763
+#: src/translations.h:766
 msgid "&Save"
 msgstr "احفظ"
 
-#: src/translations.h:764
+#: src/translations.h:767
 msgid "File &name:"
 msgstr "&اسم الملف:"
 
-#: src/translations.h:765
+#: src/translations.h:768
 msgid "Copy &Link Location"
 msgstr "انسخ موقع &الرابط"
 
-#: src/translations.h:766
+#: src/translations.h:769
 msgid "Abort"
 msgstr "أجهظ"
 
-#: src/translations.h:767
+#: src/translations.h:770
 msgid "Ignore"
 msgstr "تجاهل"
 
-#: src/translations.h:768
+#: src/translations.h:771
 msgid "&Basic colors"
 msgstr "الألوان الأساسية"
 
-#: src/translations.h:769
+#: src/translations.h:772
 msgid "&Pick Screen Color"
 msgstr "&اختر لون الشاشة"
 
-#: src/translations.h:770
+#: src/translations.h:773
 msgid "&Custom colors"
 msgstr "الألوان المخصصة"
 
-#: src/translations.h:771
+#: src/translations.h:774
 msgid "&Add to Custom Colors"
 msgstr "أضف إلى الألوان المخصصة"
 
-#: src/translations.h:772
+#: src/translations.h:775
 msgid "Hu&e:"
 msgstr "درجة اللون"
 
-#: src/translations.h:773
+#: src/translations.h:776
 msgid "&Sat:"
 msgstr "التشبع"
 
-#: src/translations.h:774
+#: src/translations.h:777
 msgid "&Val:"
 msgstr "القيمة"
 
-#: src/translations.h:775
+#: src/translations.h:778
 msgid "&Red:"
 msgstr "أحمر"
 
-#: src/translations.h:776
+#: src/translations.h:779
 msgid "&Green:"
 msgstr "أخضر"
 
-#: src/translations.h:777
+#: src/translations.h:780
 msgid "Bl&ue:"
 msgstr "أزرق"
 
-#: src/translations.h:778
+#: src/translations.h:781
 msgid "Select Color"
 msgstr "اختر اللون"
 
-#: src/translations.h:779
+#: src/translations.h:782
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "المؤشر على %1 ، %2 اضغط على مفتاح الهروب للإلغاء"
 
-#: src/translations.h:780
+#: src/translations.h:783
 msgid "Back"
 msgstr "رجوع"
 
-#: src/translations.h:781
+#: src/translations.h:784
 msgid "Forward"
 msgstr "تقدّم"
 
-#: src/translations.h:782
+#: src/translations.h:785
 msgid "Parent Directory"
 msgstr "الدليل الأب"
 
-#: src/translations.h:783
+#: src/translations.h:786
 msgid "Create New Folder"
 msgstr "أنشيء مجلدًا جديدًا"
 
-#: src/translations.h:784
+#: src/translations.h:787
 msgid "List View"
 msgstr "عرض قائمة"
 
-#: src/translations.h:785
+#: src/translations.h:788
 msgid "Detail View"
 msgstr "عرض تفاصيل"
 
-#: src/translations.h:786
+#: src/translations.h:789
 msgid "Recent Places"
 msgstr "آخر الملفات"
 
-#: src/translations.h:787
+#: src/translations.h:790
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8209,39 +8228,39 @@ msgstr ""
 "الملف %1 موجود مسبقاً.\n"
 "هل تريد استبداله؟"
 
-#: src/translations.h:788
+#: src/translations.h:791
 msgid "&Yes"
 msgstr "نعم"
 
-#: src/translations.h:789
+#: src/translations.h:792
 msgid "&No"
 msgstr "لا"
 
-#: src/translations.h:790
+#: src/translations.h:793
 msgid "&Select All"
 msgstr "&تحديد الكل"
 
-#: src/translations.h:791
+#: src/translations.h:794
 msgid "&Step up"
 msgstr "&زيد"
 
-#: src/translations.h:792
+#: src/translations.h:795
 msgid "Step &down"
 msgstr "&نقص"
 
-#: src/translations.h:793
+#: src/translations.h:796
 msgid "&Rename"
 msgstr "&تسمية"
 
-#: src/translations.h:794
+#: src/translations.h:797
 msgid "&Delete"
 msgstr "&حذف"
 
-#: src/translations.h:795
+#: src/translations.h:798
 msgid "&New Folder"
 msgstr "&مجلد جديد"
 
-#: src/translations.h:796
+#: src/translations.h:799
 msgid "Show &hidden files"
 msgstr "أظهر الملفات &المخفية"
 
@@ -12887,7 +12906,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:614
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:733
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
@@ -12907,7 +12926,7 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:615
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:248
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:257
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
@@ -12932,7 +12951,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:618
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:251
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:260
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
@@ -12953,7 +12972,7 @@ msgstr "إذا كان لديك سؤال، يمكنك {الحصول على إجا
 #: plugins/Oculars/src/gui/OcularDialog.cpp:620
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:739
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:253
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:262
 #: plugins/Novae/src/gui/NovaeDialog.cpp:145
@@ -12974,7 +12993,7 @@ msgstr "تقارير المشاكل وطلب الميزات يمكن أن تبع
 #: plugins/Oculars/src/gui/OcularDialog.cpp:622
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:741
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:264
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
@@ -15333,17 +15352,17 @@ msgid "New satellites"
 msgstr "الأقمار الصناعية الجديدة"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark all"
 msgstr "تحديد كل الأجرام"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:217
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Mark none"
 msgstr "ألغ تحديد كل الأجرام"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:218
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Discard"
 msgstr "أهمل هذه القائمة"
 
@@ -17071,12 +17090,12 @@ msgstr " [مفتاح الإدخال للتفعيل]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:58
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:139
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:226
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 msgid "Solar System Editor"
 msgstr "محرِّر النظام الشمسي"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:61
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:234
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:245
 msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
@@ -17126,15 +17145,15 @@ msgstr ""
 msgid "Select bookmark..."
 msgstr "اختر أحد الروابط ..."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:332
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:348
 msgid "Plain Text File"
 msgstr "ملف نصي مجرد"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:350
 msgid "All Files"
 msgstr "كل الملفات"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:336
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:352
 msgid "Select a file"
 msgstr "اختر ملفاً"
 
@@ -17157,20 +17176,20 @@ msgstr ""
 "تحتوي على قوائم الكويكبات، حمِّل هذه القوائم من الإنترنت أو ابحث مباشرة "
 "باستخدام خدمة Minor Planet and Comet Ephemeris service - MPES."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:210
 msgid "Save the minor Solar System bodies as..."
 msgstr "احفظ أجرام النظام الشمسي الثانوية بصيغة ..."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:206
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:214
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:217
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Configuration files"
 msgstr "ملفات الإعدادات"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:208
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:219
 msgid "Select a file to replace the Solar System minor bodies"
 msgstr "اختر ملفاً بديلاً لملف أجرام النظام الشمسي الثانوية"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:216
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
 msgid "Select a file to add the Solar System minor bodies"
 msgstr "اختر ملفاً لإضافة أجرام النظام الشمسي الثانوية"
 
@@ -17225,29 +17244,38 @@ msgstr "نتائج البحث"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid ""
-"Mark the objects you wish to be imported. In <i>italic</i> are listed names "
-"that match the names of already loaded objects. In <b>bold</b> are listed "
-"names that match the names of objects inherited from Stellarium's default "
-"Solar System configuration.<br/>Note that adding a large number of objects "
-"may cause Stellarium to run slowly."
+"Mark the objects you wish to be imported. <i>italics</i> indicate objects "
+"with names matching those of already loaded objects. <br/><br/>Note that "
+"adding a large number of objects may cause Stellarium to run slowly."
 msgstr ""
-"علِّم على الأجرام التي تريد استيرادها. الخط المائل يدل على الأسماء المحملة "
-"سابقاً. والخط الأسود يدل على الأسماء الموجودة ضمن إعدادات ستيللاريوم "
-"الأصلية. لاحظ أن إضافة عدد ضخم من الأجرام ربما يجعل ستيللاريوم بطيئاً."
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
-msgid "Overwrite existing objects"
-msgstr "استبدل الأجرام الموجودة سابقاً"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
-msgid "Update existing objects"
-msgstr "حدِّث الأجرام الموجودة سابقاً"
+msgid "This will update existing objects only."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+msgid "Overwrite existing objects only"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+msgid "This will add new objects AND update existing ones."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+msgid "Add new and update existing objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+msgid ""
+"If not checked, also update the type (comet, asteroid, ...) and magnitude "
+"data."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Update only the orbital elements"
 msgstr "حدِّث العناصر المدارية فقط"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Add objects"
 msgstr "أضف الأجرام"
 
@@ -17460,7 +17488,7 @@ msgid "Mark the navigational stars"
 msgstr "حدد نجوم الملاحة"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:315
+#: plugins/NavStars/src/NavStars.cpp:322
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -17475,7 +17503,7 @@ msgstr ""
 "<em>Identifier</em>.</p>"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:321
+#: plugins/NavStars/src/NavStars.cpp:328
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -17485,7 +17513,7 @@ msgstr ""
 "title is <em>%1</em>) التي ينشرها French Bureau des Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:327
+#: plugins/NavStars/src/NavStars.cpp:334
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -17495,7 +17523,7 @@ msgstr ""
 "الأصلي للتقويم هو: <p dir=rtl><em>%1</em></p>"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:333
+#: plugins/NavStars/src/NavStars.cpp:340
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -17506,89 +17534,89 @@ msgstr ""
 "title is <em>%1</em>) التي ينشرها Federal Maritime and Hydrographic Agency "
 "of Germany."
 
-#: plugins/NavStars/src/NavStars.cpp:519
+#: plugins/NavStars/src/NavStars.cpp:524
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "القوس الأعلى"
 
-#: plugins/NavStars/src/NavStars.cpp:520
+#: plugins/NavStars/src/NavStars.cpp:525
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "القوس الأسفل"
 
-#: plugins/NavStars/src/NavStars.cpp:536 plugins/NavStars/src/NavStars.cpp:564
-#: plugins/NavStars/src/NavStars.cpp:570
+#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:574
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:538 plugins/NavStars/src/NavStars.cpp:568
+#: plugins/NavStars/src/NavStars.cpp:542 plugins/NavStars/src/NavStars.cpp:572
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:540 plugins/NavStars/src/NavStars.cpp:574
+#: plugins/NavStars/src/NavStars.cpp:544 plugins/NavStars/src/NavStars.cpp:578
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:543
+#: plugins/NavStars/src/NavStars.cpp:547
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:546
+#: plugins/NavStars/src/NavStars.cpp:550
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:549
+#: plugins/NavStars/src/NavStars.cpp:553
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:552
+#: plugins/NavStars/src/NavStars.cpp:556
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:559
+#: plugins/NavStars/src/NavStars.cpp:563
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:562
+#: plugins/NavStars/src/NavStars.cpp:566
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:566
+#: plugins/NavStars/src/NavStars.cpp:570
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:572
+#: plugins/NavStars/src/NavStars.cpp:576
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:576
+#: plugins/NavStars/src/NavStars.cpp:580
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:578
+#: plugins/NavStars/src/NavStars.cpp:582
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:580
+#: plugins/NavStars/src/NavStars.cpp:584
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:582
+#: plugins/NavStars/src/NavStars.cpp:586
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
