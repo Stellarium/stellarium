@@ -327,16 +327,11 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			QString mmStr = q_("Rising time");
 			if (ebsFlag)
-			{
 				mmStr = q_("Duration of eclipse");
-				float durDays = vPeriod * vMm / 100.0;
-				auto dms = StelUtils::daysFloatToDHMS(durDays);
-				oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
-			}
-			else
-			{
-				oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
-			}
+
+			float daysFraction = vPeriod * vMm / 100.f;
+			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
+			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 		}
 
 		if (wdsObs>0)
