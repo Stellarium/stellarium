@@ -815,6 +815,7 @@ void AstroCalcDialog::initListCelestialPositions()
 	setCelestialPositionsHeaderNames();
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
 	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1223,7 +1224,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				fillCelestialPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, q_(planet->getPlanetTypeString()));
 			}
-		}
+		}		
 	}
 	else
 	{
@@ -1302,6 +1303,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				fillCelestialPositionTable(commonName, coordStrings.first, coordStrings.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, sType);
 			}
 		}
+		ui->celestialPositionsTreeWidget->hideColumn(CColumnAngularSize);
 	}
 
 	adjustCelestialPositionsColumns();
