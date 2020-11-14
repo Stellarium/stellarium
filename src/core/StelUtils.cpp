@@ -104,6 +104,30 @@ double hmsStrToHours(const QString& s)
 }
 
 /*************************************************************************
+ Convert a real duration in days to DHMS formatted string
+*************************************************************************/
+QString daysFloatToDHMS(float days)
+{
+	float remain = days;
+
+	int d = static_cast<int> (remain); remain -= d;
+	remain *= 24.0;
+	int h = static_cast<int> (remain); remain -= h;
+	remain *= 60.0;
+	int m = static_cast<int> (remain); remain -= m; 
+	remain *= 60.0;
+
+	auto r = QString("%1%2 %3%4 %5%6 %7%8")
+	.arg(d)		.arg(qc_("d", "duration"))
+	.arg(h)		.arg(qc_("h", "duration"))
+	.arg(m)		.arg(qc_("m", "duration"))
+	.arg(remain)	.arg(qc_("s", "duration"));
+
+	return r;
+}
+
+
+/*************************************************************************
  Convert an angle in radian to hms
 *************************************************************************/
 void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)

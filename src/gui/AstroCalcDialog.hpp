@@ -433,6 +433,50 @@ private:
 
 	//! Remember to redraw active plot when dialog becomes visible
 	bool graphPlotNeedsRefresh;
+
+	enum WUTCategory {
+		wut_planets,
+		wut_bright_stars,
+		wut_bright_nebulae,
+		wut_dark_nebulae,
+		wut_galaxies,
+		wut_open_star_clusters,
+		wut_asteroids,
+		wut_comets,
+		wut_plutinos,
+		wut_dwarf_planets,
+		wut_cubewanos,
+		wut_scattered_disc_objects,
+		wut_Oort_cloud_objects,
+		wut_sednoids,
+		wut_planetary_nebulae,
+		wut_bright_double_stars,
+		wut_bright_variable_stars,
+		wut_bright_stars_with_high_proper_motion,
+		wut_Algol_types,	//!< http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		wut_symbiotic_stars,
+		wut_emission_line_stars,
+		wut_supernovae_candidates,
+		wut_supernovae_remnant_candidates,
+		wut_supernovae_remnants,
+		wut_clusters_of_galaxies,
+		wut_interstellar_objects,
+		wut_globular_star_clusters,
+		wut_regions_of_the_sky,
+		wut_active_galaxies,
+		wut_pulsars,
+		wut_exoplanetary_systems,
+		wut_bright_nova_stars,
+		wut_bright_supernova_stars,
+		wut_interacting_galaxies,
+		wut_deep_sky_objects,
+		wut_Messier_objects,
+		wut_NGC_IC_objects,
+		wut_Caldwell_objects,
+		wut_Herschel_400_objects,
+
+		wut_none	// stop gapper for syntax reasons
+	};
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

@@ -191,20 +191,23 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		QString startype = "";
 		if(!varType.isEmpty())
 		{
-			if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+			// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+			if (QString("BE FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
 				varstartype = q_("eruptive variable star");
-			else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+			else if (QString("ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC LPB M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB ZZO").contains(varType))
 				varstartype = q_("pulsating variable star");
 			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
 				varstartype = q_("rotating variable star");
 			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
 				varstartype = q_("cataclysmic variable star");
-			else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+			else if (QString("E EA EB EP EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
 			{
 				varstartype = q_("eclipsing binary system");
 				ebsFlag = true;
 			}
 			else
+			// XXX intense variable X-ray sources "AM, X, XB, XF, XI, XJ, XND, XNG, XP, XPR, XPRM, XM)"
+			// XXX other symbols "BLLAC, CST, GAL, L:, QSO, S,"
 				varstartype = q_("variable star");
 		}
 
@@ -324,9 +327,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			QString mmStr = q_("Rising time");
 			if (ebsFlag)
+			{
 				mmStr = q_("Duration of eclipse");
-
-			oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
+				float durDays = vPeriod * vMm / 100.0;
+				auto dms = StelUtils::daysFloatToDHMS(durDays);
+				oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
+			}
+			else
+			{
+				oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
+			}
 		}
 
 		if (wdsObs>0)
