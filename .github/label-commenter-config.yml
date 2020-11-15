@@ -32,6 +32,10 @@ labels:
     labeled:
       issue:
         body: Thank you @{{ issue.user.login }} for suggesting this feature.
+  - name: wishlist
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this.
   - name: won't fix
     labeled:
       issue:
