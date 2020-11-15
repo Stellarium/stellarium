@@ -20,6 +20,8 @@
 #include "MayaTzolkinCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 const int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal(4,20);
 
@@ -61,13 +63,12 @@ void MayaTzolkinCalendar::setJD(double JD)
 {
 	this->JD=JD;
 
-	const int rd=fixedFromJD(JD);
+	const int rd=fixedFromJD(JD, true);
 	const int count=rd-mayanTzolkinEpoch+1;
 	const int number = StelUtils::amod(count, 13);
 	const int name = StelUtils::amod(count, 20);
 
-	parts.clear();
-	parts << number << name;
+	parts = { number, name};
 
 	emit partsChanged(parts);
 }
@@ -98,14 +99,13 @@ QString MayaTzolkinCalendar::getFormattedDateString()
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
 void MayaTzolkinCalendar::setDate(QVector<int> parts)
 {
-	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
-	const double dayFraction=JD-std::floor(JD-.5);
-
 	this->parts=parts;
 
-	const int rdOnOrBefore=mayanTzolkinOnOrBefore(parts, fixedFromJD(JD));
+	const int rdOnOrBefore=mayanTzolkinOnOrBefore(parts, fixedFromJD(JD));	
+	// restore time from JD!
+	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
+	JD=jdFromFixed(rdOnOrBefore+frac, true);
 
-	JD=jdFromFixed(rdOnOrBefore)+dayFraction;
 	emit jdChanged(JD);
 }
 

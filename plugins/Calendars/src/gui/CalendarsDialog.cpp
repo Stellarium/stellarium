@@ -75,7 +75,7 @@ void CalendarsDialog::createDialogContent()
 	connect(cal->getCal("Julian"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
 	connect(cal->getCal("Gregorian"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateGregorianParts(QVector<int>)));
 	//connect(cal->getCal("ISO"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateISOParts(QVector<int>)));
-	//connect(cal->getCal("MayaLongCount"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
+	connect(cal->getCal("MayaLongCount"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
 	connect(cal->getCal("MayaHaab"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaHaabParts(QVector<int>)));
 	connect(cal->getCal("MayaTzolkin"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaTzolkinParts(QVector<int>)));
 	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateChineseParts(QVector<int>)));
@@ -96,13 +96,14 @@ void CalendarsDialog::createDialogContent()
 	connect(ui->gregorianYearSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
 	connect(ui->gregorianMonthSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
 	connect(ui->gregorianDaySpinBox,    SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	//connect(ui->isoWeekSpinBox,     SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	//connect(ui->isoWeekdayComboBox, SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	//connect(ui->baktunSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	//connect(ui->katunSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	//connect(ui->tunSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	//connect(ui->uinalSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	//connect(ui->kinSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->isoWeekSpinBox,     SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->isoWeekdayComboBox, SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->baktunSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->katunSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->tunSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->uinalSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->kinSpinBox,    SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	// TODO: disconnect/reconnect when Haab/Tzolkin are changed to prevent avalanche effects.
 	//connect(ui->haabMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
 	//connect(ui->haabDaySpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
 	//connect(ui->tzolkinNumberSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaTzolkinChanged()));

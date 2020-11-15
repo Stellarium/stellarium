@@ -19,7 +19,8 @@
 #include "StelTranslator.hpp"
 #include "ISOCalendar.hpp"
 #include "StelUtils.hpp"
-
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 ISOCalendar::ISOCalendar(double jd): GregorianCalendar (jd)
 {
@@ -45,15 +46,39 @@ void ISOCalendar::setJD(double JD)
 // Year-Week[1...53]-Day[1...7]
 void ISOCalendar::setDate(QVector<int> parts)
 {
-	double dayfraction=StelUtils::fmodpos(JD+0.5, 1.);
 	this->parts=parts;
 
 	int rd=fixedFromISO(parts);
-
-	// back to JD
-	JD = jdFromFixed(rd) + dayfraction;
+	// restore time from JD!
+	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
+	JD=jdFromFixed(rd+frac, true);
 
 	emit jdChanged(JD);
+}
+
+//! get a stringlist of calendar date elements sorted from the largest to the smallest.
+//! The order depends on the actual calendar
+QStringList ISOCalendar::getDateStrings()
+{
+	// If we don't change this, just delete this inherited version
+	QStringList list;
+	list << QString::number(parts.at(0));
+	list << QString::number(parts.at(1));
+	list << QString::number(parts.at(2));
+	list << weekday(JD);
+
+	return list;
+}
+
+//! get a formatted complete string for a date
+QString ISOCalendar::getFormattedDateString()
+{
+	QStringList str=getDateStrings();
+	return QString("%1, %2 %3, %4")
+			.arg(str.at(3)) // weekday
+			.arg(q_("Week"))
+			.arg(str.at(1)) // week, numerical
+			.arg(str.at(0));// year
 }
 
 int ISOCalendar::fixedFromISO(QVector<int> iso)

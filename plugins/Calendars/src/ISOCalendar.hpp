@@ -39,6 +39,13 @@ public:
 	//! Year-Week[1...53]-Day[1...7]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
+	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
+	//! The order depends on the actual calendar
+	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+
+	//! get a formatted complete string for a date
+	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+
 	//constexpr static const int gregorianEpoch=1;
 
 private:

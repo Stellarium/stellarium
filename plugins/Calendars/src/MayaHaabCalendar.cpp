@@ -20,6 +20,8 @@
 #include "MayaHaabCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 const int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal(18,8);
 
@@ -60,13 +62,12 @@ void MayaHaabCalendar::setJD(double JD)
 {
 	this->JD=JD;
 
-	const int rd=fixedFromJD(JD);
+	const int rd=fixedFromJD(JD, true);
 	const int count=(rd-mayanHaabEpoch) % 365;
 	const int day = count % 20;
 	const int month=count/20 + 1;
 
-	parts.clear();
-	parts << month << day;
+	parts = { month, day };
 
 	emit partsChanged(parts);
 }
@@ -97,14 +98,14 @@ QString MayaHaabCalendar::getFormattedDateString()
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
 void MayaHaabCalendar::setDate(QVector<int> parts)
 {
-	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
-	const double dayFraction=JD-std::floor(JD-.5);
-
 	this->parts=parts;
 
 	const int rdOnOrBefore=mayanHaabOnOrBefore(parts, fixedFromJD(JD));
 
-	JD=jdFromFixed(rdOnOrBefore)+dayFraction;
+	// restore time from JD!
+	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
+	JD=jdFromFixed(rdOnOrBefore+frac, true);
+
 	emit jdChanged(JD);
 }
 

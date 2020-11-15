@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-const long int MayaLongCountCalendar::mayanEpoch=fixedFromJD(584283);
+const long int MayaLongCountCalendar::mayanEpoch=fixedFromJD(584283, false);
 
 MayaLongCountCalendar::MayaLongCountCalendar(double jd): Calendar(jd)
 {
