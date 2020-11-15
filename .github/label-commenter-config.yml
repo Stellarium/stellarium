@@ -41,3 +41,10 @@ labels:
       issue:
         body: This has become active again.
         action: open
+  - name: FAQ
+    labeled:
+      issue:
+        body: |
+          Please see FAQ in the wiki:
+          https://github.com/Stellarium/stellarium/wiki/FAQ
+        action: close
