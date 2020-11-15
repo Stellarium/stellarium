@@ -43,7 +43,7 @@ void ISOCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Week[1...53]-Day[1...7]
-void ISOCalendar::setParts(QVector<int> parts)
+void ISOCalendar::setDate(QVector<int> parts)
 {
 	double dayfraction=StelUtils::fmodpos(JD+0.5, 1.);
 	this->parts=parts;

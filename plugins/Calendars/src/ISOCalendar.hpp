@@ -37,7 +37,7 @@ public:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Week[1...53]-Day[1...7]
-	virtual void setParts(QVector<int> parts) Q_DECL_OVERRIDE;
+	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//constexpr static const int gregorianEpoch=1;
 

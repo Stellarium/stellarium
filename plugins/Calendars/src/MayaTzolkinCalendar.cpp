@@ -74,7 +74,7 @@ void MayaTzolkinCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList MayaTzolkinCalendar::getPartStrings()
+QStringList MayaTzolkinCalendar::getDateStrings()
 {
 	QStringList list;
 	list << QString::number(std::lround(parts.at(0)));
@@ -87,7 +87,7 @@ QStringList MayaTzolkinCalendar::getPartStrings()
 // get a formatted complete string for a date
 QString MayaTzolkinCalendar::getFormattedDateString()
 {
-	QStringList str=getPartStrings();
+	QStringList str=getDateStrings();
 	return QString("%1 %2")
 			.arg(str.at(0))
 			.arg(str.at(1));
@@ -96,7 +96,7 @@ QString MayaTzolkinCalendar::getFormattedDateString()
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
-void MayaTzolkinCalendar::setParts(QVector<int> parts)
+void MayaTzolkinCalendar::setDate(QVector<int> parts)
 {
 	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
 	const double dayFraction=JD-std::floor(JD-.5);

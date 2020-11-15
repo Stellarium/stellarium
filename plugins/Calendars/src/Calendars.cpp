@@ -29,6 +29,7 @@
 
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
+#include "ISOCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
@@ -146,9 +147,10 @@ void Calendars::init()
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	calendars.insert("Julian", new JulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
-	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
-	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
-	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
+	//calendars.insert("ISO", new ISOCalendar(jd));
+	//calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
+	//calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
+	//calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
@@ -197,10 +199,10 @@ void Calendars::draw(StelCore* core)
 	if (calendars.count()==0) return;
 	if (flagShowJulian) painter.drawText(1300, 870, QString("Julian: ") + getCal("Julian")->getFormattedDateString());
 	if (flagShowGregorian) painter.drawText(1300, 855, QString("Gregorian: ") + getCal("Gregorian")->getFormattedDateString());
-	if (flagShowISO) painter.drawText(1300, 840, QString("ISO week: ")); // + getCal("ISO")->getFormattedDateString());
-	if (flagShowMayaLongCount) painter.drawText(1300, 825, QString("Maya Long Count: ") + getCal("MayaLongCount")->getFormattedDateString());
-	if (flagShowMayaHaab) painter.drawText(1300, 810, QString("Maya Haab: ") + getCal("MayaHaab")->getFormattedDateString());
-	if (flagShowMayaTzolkin) painter.drawText(1300, 795, QString("Maya Tzolkin: ") + getCal("MayaTzolkin")->getFormattedDateString());
+	//if (flagShowISO) painter.drawText(1300, 840, QString("ISO week: ")); // + getCal("ISO")->getFormattedDateString());
+	//if (flagShowMayaLongCount) painter.drawText(1300, 825, QString("Maya Long Count: ") + getCal("MayaLongCount")->getFormattedDateString());
+	//if (flagShowMayaHaab) painter.drawText(1300, 810, QString("Maya Haab: ") + getCal("MayaHaab")->getFormattedDateString());
+	//if (flagShowMayaTzolkin) painter.drawText(1300, 795, QString("Maya Tzolkin: ") + getCal("MayaTzolkin")->getFormattedDateString());
 }
 
 

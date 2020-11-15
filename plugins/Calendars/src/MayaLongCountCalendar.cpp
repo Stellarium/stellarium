@@ -19,11 +19,14 @@
 #include "StelTranslator.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 const long int MayaLongCountCalendar::mayanEpoch=fixedFromJD(584283);
 
 MayaLongCountCalendar::MayaLongCountCalendar(double jd): Calendar(jd)
 {
+	parts={0, 0, 0, 0, 0};
 	retranslate();
 }
 
@@ -36,7 +39,7 @@ void MayaLongCountCalendar::setJD(double JD)
 {
 	this->JD=JD;
 
-	const int rd=fixedFromJD(JD);
+	const int rd=fixedFromJD(JD, true);
 	const int longCount=rd-mayanEpoch;
 	const int baktun     =longCount / 144000;
 	const int dayOfBaktun=longCount % 144000;
@@ -53,7 +56,7 @@ void MayaLongCountCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList MayaLongCountCalendar::getPartStrings()
+QStringList MayaLongCountCalendar::getDateStrings()
 {
 	QStringList list;
 	list << QString::number(std::lround(parts.at(0)));
@@ -69,7 +72,7 @@ QStringList MayaLongCountCalendar::getPartStrings()
 // get a formatted complete string for a date
 QString MayaLongCountCalendar::getFormattedDateString()
 {
-	QStringList str=getPartStrings();
+	QStringList str=getDateStrings();
 	return QString("%1.%2.%3.%4.%5")
 			.arg(str.at(0)) // baktun
 			.arg(str.at(1)) // katun
@@ -82,11 +85,11 @@ QString MayaLongCountCalendar::getFormattedDateString()
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-void MayaLongCountCalendar::setParts(QVector<int> parts)
+void MayaLongCountCalendar::setDate(QVector<int> parts)
 {
 	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
 	//const double dayFraction=JD-std::floor(JD-.5);
-	const double dayFraction=JD+0.5 -std::floor(JD);
+	//const double dayFraction=JD+0.5 -std::floor(JD);
 
 	this->parts=parts;
 
@@ -98,6 +101,11 @@ void MayaLongCountCalendar::setParts(QVector<int> parts)
 
 	const int fixedFromMayanLongCount=mayanEpoch+baktun*144000+katun*7200+tun*360+uinal*20+kin;
 
-	JD=jdFromFixed(fixedFromMayanLongCount)+dayFraction;
+	//JD=jdFromFixed(fixedFromMayanLongCount)+dayFraction;
+
+	// restore time from JD!
+	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
+	JD=jdFromFixed(fixedFromMayanLongCount+frac, true);
+
 	emit jdChanged(JD);
 }

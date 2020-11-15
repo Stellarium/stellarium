@@ -19,6 +19,8 @@
 #include <QDebug>
 
 #include "Calendar.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 double Calendar::modInterval(double x, double a, double b)
 {
@@ -27,3 +29,22 @@ double Calendar::modInterval(double x, double a, double b)
 }
 
 
+double Calendar::momentFromJD(double jd, bool respectUTCoffset)
+{
+	double ret=jd+jdEpoch;
+	if (respectUTCoffset)
+	{
+		ret+=StelApp::getInstance().getCore()->getUTCOffset(jd)/24.;
+	}
+	return ret;
+}
+
+double Calendar::jdFromMoment(double rd, bool respectUTCoffset)
+{
+	double ret=rd-jdEpoch;
+	if (respectUTCoffset)
+	{
+		ret-=StelApp::getInstance().getCore()->getUTCOffset(ret)/24.;
+	}
+	return ret;
+}

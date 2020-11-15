@@ -25,6 +25,8 @@
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
 //! @note The implementation does not correctly represent the Roman Julian calendar valid from introduction by Julius Caesar to the reform by Augustus.
+//! @note this implementation adheres to Calendrical Calculation's style of omitting a year zero. Negative years represent years B.C.E.
+//!       This is very much in contrast to Stellarium's usual behaviour, and also different from a year zero in CC's implementation of the Gregorian calendar.
 
 class JulianCalendar : public Calendar
 {
@@ -43,12 +45,12 @@ public:
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
-	//! Year-Month[1...12]-Day[1...31]-Hour-Minute-Second
-	virtual void setParts(QVector<int> parts) Q_DECL_OVERRIDE;
+	//! Year-Month[1...12]-Day[1...31]
+	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-	//! Year, Month, MonthName, Day, DayName, Hour, Minute, Second
-	virtual QStringList getPartStrings() Q_DECL_OVERRIDE;
+	//! Year, Month, MonthName, Day, DayName
+	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
@@ -59,9 +61,15 @@ public:
 	//! returns true for leap years
 	static bool isLeap(int year);
 
+	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1.
+
 protected:
 	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
+
+private:
+	static int fixedFromJulian(QVector<int> julian);
+	static QVector<int> julianFromFixed(int rd);
 };
 
 #endif

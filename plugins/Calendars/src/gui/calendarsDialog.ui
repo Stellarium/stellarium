@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>867</width>
+    <width>558</width>
     <height>393</height>
    </rect>
   </property>
@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -237,216 +237,6 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="2" column="4">
-          <widget class="QLineEdit" name="gregorianWeekdayLineEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="acceptDrops">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="3">
-          <widget class="QSpinBox" name="gregorianDaySpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>31</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QSpinBox" name="gregorianMonthSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="labelMonth">
-           <property name="text">
-            <string>Month</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QLabel" name="labelDay">
-           <property name="text">
-            <string>Day</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLabel" name="labelMinute">
-           <property name="text">
-            <string>Minute</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QSpinBox" name="gregorianYearSpinBox">
-           <property name="minimum">
-            <number>-100000</number>
-           </property>
-           <property name="maximum">
-            <number>100000</number>
-           </property>
-           <property name="value">
-            <number>2000</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="labelGregorian">
-           <property name="text">
-            <string>Gregorian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="labelDOW">
-           <property name="text">
-            <string>Weekday</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QLabel" name="labelHour">
-           <property name="text">
-            <string>Hour</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="7">
-          <widget class="QSpinBox" name="gregorianSecondSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="maximum">
-            <number>60</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="labelYear">
-           <property name="text">
-            <string>Year</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="6">
-          <widget class="QSpinBox" name="gregorianMinuteSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="maximum">
-            <number>59</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="7">
-          <widget class="QLabel" name="labelSecond">
-           <property name="text">
-            <string>Second</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QSpinBox" name="gregorianHourSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="maximum">
-            <number>23</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>ISO Week</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QSpinBox" name="isoWeekSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>53</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4">
-          <widget class="QComboBox" name="isoWeekdayComboBox"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Julian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="julianYearSpinBox">
-           <property name="minimum">
-            <number>-100000</number>
-           </property>
-           <property name="maximum">
-            <number>100000</number>
-           </property>
-           <property name="value">
-            <number>2000</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QSpinBox" name="julianMonthSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3">
-          <widget class="QSpinBox" name="julianDaySpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>31</number>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="4">
           <widget class="QLineEdit" name="julianWeekdayLineEdit">
            <property name="enabled">
@@ -463,33 +253,165 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="5">
-          <widget class="QSpinBox" name="julianHourSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="gregorianYearSpinBox">
+           <property name="minimum">
+            <number>-100000</number>
            </property>
            <property name="maximum">
-            <number>23</number>
+            <number>100000</number>
+           </property>
+           <property name="value">
+            <number>2000</number>
            </property>
           </widget>
          </item>
-         <item row="1" column="6">
-          <widget class="QSpinBox" name="julianMinuteSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="maximum">
-            <number>59</number>
+         <item row="0" column="2">
+          <widget class="QLabel" name="labelMonth">
+           <property name="text">
+            <string>Month</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="7">
-          <widget class="QSpinBox" name="julianSecondSpinBox">
+         <item row="1" column="2">
+          <widget class="QSpinBox" name="julianMonthSpinBox">
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
            <property name="maximum">
-            <number>60</number>
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLineEdit" name="gregorianWeekdayLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Julian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="labelDay">
+           <property name="text">
+            <string>Day</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QSpinBox" name="gregorianDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>31</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QSpinBox" name="julianDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>31</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QComboBox" name="isoWeekdayComboBox"/>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="labelDOW">
+           <property name="text">
+            <string>Weekday</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QSpinBox" name="isoWeekSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>53</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QSpinBox" name="gregorianMonthSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>ISO Week</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelGregorian">
+           <property name="text">
+            <string>Gregorian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="julianYearSpinBox">
+           <property name="toolTip">
+            <string>Negative years here mark years B.C.</string>
+           </property>
+           <property name="minimum">
+            <number>-100000</number>
+           </property>
+           <property name="maximum">
+            <number>100000</number>
+           </property>
+           <property name="value">
+            <number>2000</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="labelYear">
+           <property name="text">
+            <string>Year</string>
            </property>
           </widget>
          </item>

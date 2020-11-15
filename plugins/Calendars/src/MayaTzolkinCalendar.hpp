@@ -41,11 +41,11 @@ public:
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-nameIndex[1..20]
 	//! We face a problem as the date is not unique. We can only find the date before current JD which matches the parts.
-	virtual void setParts(QVector<int> parts) Q_DECL_OVERRIDE;
+	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-name
-	virtual QStringList getPartStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;

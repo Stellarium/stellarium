@@ -73,7 +73,7 @@ void MayaHaabCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList MayaHaabCalendar::getPartStrings()
+QStringList MayaHaabCalendar::getDateStrings()
 {
 	QStringList list;
 	list << monthNames.value(std::lround(parts.at(0)));
@@ -86,7 +86,7 @@ QStringList MayaHaabCalendar::getPartStrings()
 // get a formatted complete string for a date
 QString MayaHaabCalendar::getFormattedDateString()
 {
-	QStringList str=getPartStrings();
+	QStringList str=getDateStrings();
 	return QString("%1 %2")
 			.arg(str.at(1))
 			.arg(str.at(0));
@@ -95,7 +95,7 @@ QString MayaHaabCalendar::getFormattedDateString()
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
-void MayaHaabCalendar::setParts(QVector<int> parts)
+void MayaHaabCalendar::setDate(QVector<int> parts)
 {
 	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
 	const double dayFraction=JD-std::floor(JD-.5);

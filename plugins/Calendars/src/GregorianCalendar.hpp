@@ -24,6 +24,9 @@
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
+//! This implementation strictly follows CC. It provides the "Proleptic Gregorian Calendar" for dates before 1582-10-15.
+//! This may be helpful for a better estimate of seasons' beginnings in prehistory. However, also the Gregorian calendar is not perfect, and
+//! Neolithic and even earlier dates will still show deviations from the dates well-known from today.
 
 class GregorianCalendar : public JulianCalendar
 {
@@ -38,20 +41,27 @@ public:
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
-	//! Year-Month[1...12]-Day[1...31]-Hour-Minute-Second
-	virtual void setParts(QVector<int> parts) Q_DECL_OVERRIDE;
+	//! Year-Month[1...12]-Day[1...31]
+	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+
+	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
+	//! Year, Month, MonthName, Day, DayName
+	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+
+	//! get a formatted complete string for a date
+	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
 
 	//! returns true for leap years
 	static bool isLeap(int year);
 
-	constexpr static const int gregorianEpoch=1;
+	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1.
 
 protected:
 	//! auxiliary functions from CC.UE ch2.5
 	//! Return R.D. of date in the Gregorian calendar.
-	int fixedFromGregorian(const int gYear, const int gMonth, const int gDay);
+	int fixedFromGregorian(QVector<int> gregorian);
 
-	int gregorianNewYear(int year) {return fixedFromGregorian(year, january, 1);}
+	int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 	int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
 	QVector<int> gregorianFromFixed(int rd);
