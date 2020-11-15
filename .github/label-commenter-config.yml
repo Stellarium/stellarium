@@ -48,7 +48,9 @@ labels:
   - name: FAQ
     labeled:
       issue:
-        body: |
-          Please see FAQ in the wiki:
-          https://github.com/Stellarium/stellarium/wiki/FAQ
+        body: Please see FAQ in the wiki: https://github.com/Stellarium/stellarium/wiki/FAQ
         action: close
+  - name: fix committed
+    labeled:
+      issue:
+        body: Please check the fresh version (development snapshot) of Stellarium: https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
