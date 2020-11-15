@@ -54,21 +54,15 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
-	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-			    ccdModel,
-			    ccdModel->propertyMap());
+	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds), ccdModel, ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
-	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-			       ocularModel,
-			       ocularModel->propertyMap());
+	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars), ocularModel, ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
-	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-				  telescopeModel,
-				  telescopeModel->propertyMap());
+	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes), telescopeModel, telescopeModel->propertyMap());
 	
 	this->lenses = lenses;
 	lensTableModel = new PropertyBasedTableModel(this);
@@ -393,6 +387,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectCCD(QModelIndex)));
 	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
+	connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 

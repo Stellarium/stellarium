@@ -103,6 +103,7 @@ Oculars::Oculars()
 	, selectedTelescopeIndex(-1)
 	, selectedLensIndex(-1)
 	, selectedCCDRotationAngle(0.0)
+	, selectedCCDPrismPositionAngle(0.0)
 	, arrowButtonScale(150)
 	, flagShowCCD(false)
 	, flagShowOculars(false)
@@ -870,6 +871,19 @@ void Oculars::ccdRotationReset()
 	}
 }
 
+void Oculars::prismPositionAngleReset()
+{
+	if (selectedCCDIndex<0)
+		return;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd)
+	{
+		ccd->setPrismPosAngle(0.0);
+		emit(selectedCCDChanged(selectedCCDIndex));
+		emit selectedCCDPrismPositionAngleChanged(0.0);
+	}
+}
+
 void Oculars::setSelectedCCDRotationAngle(double angle)
 {
 	if (selectedCCDIndex<0)
@@ -889,6 +903,28 @@ double Oculars::getSelectedCCDRotationAngle() const
 		return 0.0;
 	CCD *ccd = ccds[selectedCCDIndex];
 	if (ccd) return ccd->chipRotAngle();
+	else return 0.0;
+}
+
+void Oculars::setSelectedCCDPrismPositionAngle(double angle)
+{
+	if (selectedCCDIndex<0)
+		return;
+
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd)
+	{
+		ccd->setPrismPosAngle(angle);
+		emit selectedCCDPrismPositionAngleChanged(angle);
+	}
+}
+
+double Oculars::getSelectedCCDPrismPositionAngle() const
+{
+	if (selectedCCDIndex<0)
+		return 0.0;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd) return ccd->prismPosAngle();
 	else return 0.0;
 }
 
@@ -1261,6 +1297,23 @@ void Oculars::rotateCCD(int amount)
 		angle += 360;
 	}
 	ccd->setChipRotAngle(angle);	
+}
+
+void Oculars::rotatePrism(int amount)
+{
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (!ccd) return;
+	double angle = ccd->prismPosAngle();
+	angle += amount;
+	if (angle >= 360)
+	{
+		angle -= 360;
+	}
+	else if (angle <= -360)
+	{
+		angle += 360;
+	}
+	ccd->setPrismPosAngle(angle);
 }
 
 void Oculars::selectCCDAtIndex(int index)
