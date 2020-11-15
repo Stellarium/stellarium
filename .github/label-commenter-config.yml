@@ -1,0 +1,14 @@
+labels:
+  - name: duplicate
+    labeled:
+      issue:
+        body: This issue already exists.
+        action: close
+  - name: good first issue
+    labeled:
+      issue:
+        body: This issue is easy for contributing. Everyone can work on this.
+  - name: incomplete
+    labeled:
+      issue:
+        body: Read the guidelines how to report properly, or we have new questions/suggestions to try...
