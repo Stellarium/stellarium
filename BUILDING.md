@@ -103,6 +103,27 @@ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 $ brew install cmake git gettext
 $ brew link gettext --force
 ```
+
+#### OSX 11 and above
+If 
+```
+$ brew link gettext --force
+```
+
+failed due to :
+```
+Linking /usr/local/Cellar/gettext/0.21...
+Error: Could not symlink include/autosprintf.h
+/usr/local/include is not writable.
+```
+Try the following:
+
+```
+$ sudo mkdir /usr/local/include
+$ sudo chown -R $(whoami) $(brew --prefix)/*
+
+```
+
 - Install latest Qt:
 ```
 $ brew install qt
