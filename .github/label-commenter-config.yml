@@ -39,7 +39,9 @@ labels:
   - name: won't fix
     labeled:
       issue:
-        body: We have a reason not to do it...
+        body: |
+          We have a reason not to do it at the moment, but maybe in future we will back to this proposal or someone can implement it and propose pull request with solution! Some reasons for it in the FAQ:
+          https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
         action: close
     unlabeled:
       issue:
