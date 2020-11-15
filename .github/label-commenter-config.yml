@@ -1,4 +1,16 @@
 labels:
+  - name: invalid
+    labeled:
+      issue:
+        body: Please follow the issue templates.
+        action: close
+      pr:
+        body: Thank you @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
+        action: close
+    unlabeled:
+      issue:
+        body: Thank you for following the template. The repository owner will reply.
+        action: open
   - name: duplicate
     labeled:
       issue:
@@ -12,3 +24,20 @@ labels:
     labeled:
       issue:
         body: Read the guidelines how to report properly, or we have new questions/suggestions to try...
+  - name: enhancement
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this enhancement.
+  - name: feature request
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this feature.
+  - name: won't fix
+    labeled:
+      issue:
+        body: We have a reason not to do it...
+        action: close
+    unlabeled:
+      issue:
+        body: This has become active again.
+        action: open
