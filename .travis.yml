@@ -43,7 +43,7 @@ matrix:
           project:
             name: "Stellarium/stellarium"
             description: "A realistic, real-time 3D simulation of the night sky."
-          build_command_prepend: cov-configure --comptype gcc --compiler gcc-7 --template && cmake -DENABLE_TESTING=1 ..
+          build_command_prepend: cov-configure --comptype ${CC} --compiler ${CXX} --template && cmake -DENABLE_TESTING=1 ..
           build_command: make -j5
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
