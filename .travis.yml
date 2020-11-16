@@ -2,7 +2,7 @@ env:
   global:
    - secure: "nDBuoowqSmcjCOsK4uXfkRRGuvcLt434lXeZIND/bfOEDgOv7h62w5h4i3ebSgItWkBStLzGB8Owfb2v/S0jC+wSIoP+SD2wRg12LA0/eeb3OBYw/TR5FlCVx21/GzvODTNi8NdWb92AcYGhbLNPqMDIFHGscARjHiP2EnONhTs="
 
-language: cpp
+#language: cpp
 
 git:
   depth: 10
@@ -13,6 +13,7 @@ matrix:
     - os: linux
       arch: amd64
       dist: bionic
+      compiler: gcc
       addons:
         apt:
           packages:
@@ -47,7 +48,6 @@ matrix:
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=true
         - COVERAGE=true
 
@@ -80,7 +80,6 @@ matrix:
             - xvfb
           update: true
       env:
-        #- MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
@@ -114,13 +113,13 @@ matrix:
             - lcov
           update: true
       env:
-        #- MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: amd64
       dist: focal
+      compiler: clang
       addons:
         apt:
           packages:
@@ -146,13 +145,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: arm64
       dist: bionic
+      compiler: gcc
       addons:
         apt:
           packages:
@@ -178,13 +177,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: arm64
       dist: bionic
+      compiler: clang
       addons:
         apt:
           packages:
@@ -210,7 +209,6 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
@@ -219,6 +217,7 @@ matrix:
       dist: focal
       group: edge
       virt: lxd
+      compiler: gcc
       addons:
         apt:
           packages:
@@ -244,7 +243,6 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
@@ -253,6 +251,7 @@ matrix:
       dist: focal
       group: edge
       virt: lxd
+      compiler: clang
       addons:
         apt:
           packages:
@@ -278,13 +277,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: ppc64le
       dist: bionic
+      compiler: gcc
       addons:
         apt:
           packages:
@@ -310,13 +309,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: ppc64le
       dist: bionic
+      compiler: clang
       addons:
         apt:
           packages:
@@ -342,13 +341,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: s390x
       dist: bionic
+      compiler: gcc
       addons:
         apt:
           packages:
@@ -374,13 +373,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - TRANSLATE=false
         - COVERAGE=false
 
     - os: linux
       arch: s390x
       dist: bionic
+      compiler: clang
       addons:
         apt:
           packages:
@@ -406,13 +405,13 @@ matrix:
             - xvfb
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     # macOS 10.13 
     - os: osx
       osx_image: xcode9.4
+      compiler: clang
       addons:
         homebrew:
           packages:
@@ -420,13 +419,13 @@ matrix:
           - gpsd
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     # macOS 10.14
     - os: osx
       osx_image: xcode10.3
+      compiler: clang
       addons:
         homebrew:
           packages:
@@ -434,13 +433,13 @@ matrix:
           - gpsd
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     # macOS 10.14
     - os: osx
       osx_image: xcode11.3
+      compiler: clang
       addons:
         homebrew:
           packages:
@@ -448,13 +447,13 @@ matrix:
           - gpsd
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
     # macOS 10.15
     - os: osx
       osx_image: xcode12.2
+      compiler: clang
       addons:
         homebrew:
           packages:
@@ -462,7 +461,6 @@ matrix:
           - gpsd
           update: true
       env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
         - COVERAGE=false
 
@@ -474,7 +472,6 @@ matrix:
 #        - COVERAGE=false
 
 before_install:
-  - eval "${MATRIX_EVAL}"
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
