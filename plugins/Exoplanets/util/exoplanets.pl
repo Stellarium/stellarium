@@ -296,6 +296,7 @@ while (@stars = $sth->fetchrow_array()) {
 	$sname =~ s/^epsilon/ε/gi;
 	$sname =~ s/^eps/ε/gi;
 	$sname =~ s/^zeta/ζ/gi;
+	$sname =~ s/^zet/ζ/gi;
 	$sname =~ s/^theta/θ/gi;
 	$sname =~ s/^eta/η/gi;
 	$sname =~ s/^iota/ι/gi;
