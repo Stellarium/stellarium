@@ -5574,7 +5574,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (categoryId==EWPulsars) // special case!
+					if (categoryId==EWRegionsOfTheSky) // special case!
 					{
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize);
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude);
