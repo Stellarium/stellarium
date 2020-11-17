@@ -814,8 +814,7 @@ void AstroCalcDialog::initListCelestialPositions()
 	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
 	setCelestialPositionsHeaderNames();
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
-	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
-	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
+	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);	
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1030,6 +1029,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	QPair<QString, QString> coordStrings;
 
 	initListCelestialPositions();
+	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
 
 	const float mag = static_cast<float>(ui->celestialMagnitudeDoubleSpinBox->value());
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
