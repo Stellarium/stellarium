@@ -51,8 +51,10 @@ public:
 		EPSExoplanetSemiAxes,
 		EPSExoplanetEccentricity,
 		EPSExoplanetInclination,
-		EPSExoplanetAngleDistance,
+		EPSExoplanetAngleDistance,		
 		EPSStarMagnitude,
+		EPSStarRadius,
+		EPSExoplanetDetectionMethod,
 		EPSCount            //! total number of columns
 	};
 
@@ -121,7 +123,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == ExoplanetsDialog::EPSExoplanetName)
+		if (column == ExoplanetsDialog::EPSExoplanetName || column == ExoplanetsDialog::EPSExoplanetDetectionMethod)
 			return text(column).toLower() < other.text(column).toLower();
 		else
 			return text(column).toFloat() < other.text(column).toFloat();

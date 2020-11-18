@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Exoplanets Configuration</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayoutEP">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -136,9 +136,6 @@
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
       <number>0</number>
-     </property>
-     <property name="documentMode">
-      <bool>false</bool>
      </property>
      <widget class="QWidget" name="settingsTab">
       <attribute name="title">

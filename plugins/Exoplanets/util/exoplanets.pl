@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of exoplanets
 #
-# Copyright (C) 2013, 2014, 2017, 2018 Alexander Wolf
+# Copyright (C) 2013, 2014, 2017, 2018, 2020 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -201,6 +201,13 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	# fixed designations of stars
 	$starname =~ s/Eridani/Eri/gi;
 	$starname =~ s/Cephei/Cep/gi;
+	$starname =~ s/BD\s\+/BD\+/gi;
+	$starname =~ s/TYC\+|TYC\-/TYC /gi;
+	$starname =~ s/Umi/UMi/gi;
+	$starname =~ s/Uma/UMa/gi;
+	# remove extra white spaces
+	$starname =~ s/^\s+|\s+$//g; # remove white space from both ends of a string
+	$starname =~ s/\s+/ /g;
 	
 	if (($sRA != 0.0) && ($sDec != 0.0) && ($starname ne '')) {
 		# check star
@@ -319,6 +326,7 @@ while (@stars = $sth->fetchrow_array()) {
 	$sname =~ s/^omega/ω/gi;
 	$sname =~ s/^ome/ω/gi;
 
+
 	
 	if ($sname eq "Kapteyn's") {
 		$sname .= " Star"; # cosmetic fix for translation support
@@ -358,6 +366,8 @@ while (@stars = $sth->fetchrow_array()) {
 		$esindex	= $planets[15];
 		$detectiontype	= $planets[16];
 		$conservative	= $planets[17];
+		# At the moment designation of the exoplanet cannot be more than 1 char
+		if (length($pname)>1) { $pname = ''; }
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {

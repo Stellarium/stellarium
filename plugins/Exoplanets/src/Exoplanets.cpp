@@ -1035,8 +1035,14 @@ void Exoplanets::translations()
 	N_("Other");
 	// TRANSLATORS: Exoplanet detection method
 	N_("Astrometry");
-	// TRANSLATORS: Detection method. TTV=Transit Timing Variation
+	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 	N_("TTV");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Timing");
+	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
+	N_("Primary Transit, TTV");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Default");
 
 	/* For copy/paste:
 	// TRANSLATORS:

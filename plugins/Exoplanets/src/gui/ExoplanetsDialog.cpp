@@ -76,7 +76,7 @@ void ExoplanetsDialog::retranslate()
 		setWebsitesHtml();
 		populateDiagramsList();
 		populateTemperatureScales();
-		setColumnNames();
+		fillExoplanetsTable();
 	}
 }
 
@@ -176,6 +176,9 @@ void ExoplanetsDialog::setColumnNames()
 	exoplanetsHeader << QString("%1, \"").arg(q_("Ang. dist."));
 	// TRANSLATORS: magnitude
 	exoplanetsHeader << q_("Mag.");
+	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2609));
+	// TRANSLATORS: detection method
+	exoplanetsHeader << q_("D. M.");
 	ui->exoplanetsTreeWidget->setHeaderLabels(exoplanetsHeader);
 
 	// adjust the column width
@@ -194,16 +197,22 @@ void ExoplanetsDialog::fillExoplanetsTable()
 	ui->exoplanetsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
 
 	const QString dash = QChar(0x2014);
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (auto epsystem : ep->getAllExoplanetarySystems())
 	{
 		QVariantMap map = epsystem->getMap();
 		float vmag = map["Vmag"].toFloat();
+		float sr = map["sradius"].toFloat();
+		QString sradius = sr>0.f ? QString::number(sr, 'f', 5) : dash;
 		for (auto eps : map["exoplanets"].toList())
 		{
 			auto epdata = eps.toMap();
 			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
-			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(map["designation"].toString()).arg(epdata["planetName"].toString()).trimmed());
+			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed())).arg(epdata["planetName"].toString()).trimmed());
 			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
+			if (epdata.contains("planetProperName")) {
+				treeItem->setToolTip(EPSExoplanetName, trans.qtranslate(epdata["planetProperName"].toString().trimmed()));
+			}
 			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toFloat(), 'f', 2) : dash);
 			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in jovian masses"));
 			treeItem->setTextAlignment(EPSExoplanetMass,  Qt::AlignRight);
@@ -227,6 +236,11 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			treeItem->setTextAlignment(EPSExoplanetAngleDistance,  Qt::AlignRight);
 			treeItem->setText(EPSStarMagnitude, vmag < 98.f ? QString::number(vmag, 'f', 2) : dash);
 			treeItem->setTextAlignment(EPSStarMagnitude,  Qt::AlignRight);
+			treeItem->setText(EPSStarRadius, sradius);
+			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radiuses"));
+			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetDetectionMethod, epdata.contains("detectionMethod") ? q_(epdata["detectionMethod"].toString().trimmed()) : dash);
+			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
 		}
 	}
 }
@@ -747,7 +761,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-	setAboutHtml();
+	setAboutHtml();	
 	fillExoplanetsTable();
 }
 
