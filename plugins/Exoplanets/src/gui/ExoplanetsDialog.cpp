@@ -207,6 +207,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 		for (auto eps : map["exoplanets"].toList())
 		{
 			auto epdata = eps.toMap();
+			QString dm = epdata.contains("detectionMethod") ? epdata["detectionMethod"].toString().trimmed() : dash;
 			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
 			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed())).arg(epdata["planetName"].toString()).trimmed());
 			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
@@ -239,7 +240,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			treeItem->setText(EPSStarRadius, sradius);
 			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radiuses"));
 			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetDetectionMethod, epdata.contains("detectionMethod") ? q_(epdata["detectionMethod"].toString().trimmed()) : dash);
+			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
 			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
 		}
 	}
