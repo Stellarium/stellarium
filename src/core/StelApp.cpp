@@ -1058,7 +1058,8 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 void StelApp::quit()
 {
 	emit aboutToQuit();
-	QCoreApplication::exit(0);
+	// Let's allow exit from Stellarium via startup script!
+	QMetaObject::invokeMethod(qApp, "quit", Qt::QueuedConnection);
 }
 
 void StelApp::setDevicePixelsPerPixel(qreal dppp)
