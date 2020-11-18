@@ -25,21 +25,33 @@
 
 class SpecialSkyMarker;
 
+//! @class SpecialMarkersMgr
+//! The SpecialMarkersMgr controls the drawing of the special markers, such a rectangular FOV marker
 class SpecialMarkersMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker		WRITE setFlagFOVCenterMarker		NOTIFY fovCenterMarkerDisplayedChanged)
-	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker	WRITE setColorFOVCenterMarker	NOTIFY fovCenterMarkerColorChanged)
+	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker
+		   WRITE setFlagFOVCenterMarker		NOTIFY fovCenterMarkerDisplayedChanged)
+	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker
+		   WRITE setColorFOVCenterMarker	NOTIFY fovCenterMarkerColorChanged)
 
-	Q_PROPERTY(bool fovCircularMarkerDisplayed	READ getFlagFOVCircularMarker	WRITE setFlagFOVCircularMarker	NOTIFY fovCircularMarkerDisplayedChanged)
-	Q_PROPERTY(double fovCircularMarkerSize	READ getFOVCircularMarkerSize	WRITE setFOVCircularMarkerSize	NOTIFY fovCircularMarkerSizeChanged)
-	Q_PROPERTY(Vec3f fovCircularMarkerColor		READ getColorFOVCircularMarker	WRITE setColorFOVCircularMarker	NOTIFY fovCircularMarkerColorChanged)
+	Q_PROPERTY(bool fovCircularMarkerDisplayed	READ getFlagFOVCircularMarker
+		   WRITE setFlagFOVCircularMarker	NOTIFY fovCircularMarkerDisplayedChanged)
+	Q_PROPERTY(double fovCircularMarkerSize		READ getFOVCircularMarkerSize
+		   WRITE setFOVCircularMarkerSize	NOTIFY fovCircularMarkerSizeChanged)
+	Q_PROPERTY(Vec3f fovCircularMarkerColor		READ getColorFOVCircularMarker
+		   WRITE setColorFOVCircularMarker	NOTIFY fovCircularMarkerColorChanged)
 
-	Q_PROPERTY(bool fovRectangularMarkerDisplayed	READ getFlagFOVRectangularMarker		WRITE setFlagFOVRectangularMarker		NOTIFY fovRectangularMarkerDisplayedChanged)
-	Q_PROPERTY(double fovRectangularMarkerWidth	READ getFOVRectangularMarkerWidth	WRITE setFOVRectangularMarkerWidth	NOTIFY fovRectangularMarkerWidthChanged)
-	Q_PROPERTY(double fovRectangularMarkerHeight	READ getFOVRectangularMarkerHeight	WRITE setFOVRectangularMarkerHeight	NOTIFY fovRectangularMarkerHeightChanged)
-	Q_PROPERTY(double fovRectangularMarkerRotationAngle	READ getFOVRectangularMarkerRotationAngle	WRITE setFOVRectangularMarkerRotationAngle	NOTIFY fovRectangularMarkerRotationAngleChanged)
-	Q_PROPERTY(Vec3f fovRectangularMarkerColor		READ getColorFOVRectangularMarker	WRITE setColorFOVRectangularMarker	NOTIFY fovRectangularMarkerColorChanged)
+	Q_PROPERTY(bool fovRectangularMarkerDisplayed	READ getFlagFOVRectangularMarker
+		   WRITE setFlagFOVRectangularMarker	NOTIFY fovRectangularMarkerDisplayedChanged)
+	Q_PROPERTY(double fovRectangularMarkerWidth	READ getFOVRectangularMarkerWidth
+		   WRITE setFOVRectangularMarkerWidth	NOTIFY fovRectangularMarkerWidthChanged)
+	Q_PROPERTY(double fovRectangularMarkerHeight	READ getFOVRectangularMarkerHeight
+		   WRITE setFOVRectangularMarkerHeight	NOTIFY fovRectangularMarkerHeightChanged)
+	Q_PROPERTY(double fovRectangularMarkerRotationAngle	READ getFOVRectangularMarkerRotationAngle
+		   WRITE setFOVRectangularMarkerRotationAngle	NOTIFY fovRectangularMarkerRotationAngleChanged)
+	Q_PROPERTY(Vec3f fovRectangularMarkerColor	READ getColorFOVRectangularMarker
+		   WRITE setColorFOVRectangularMarker	NOTIFY fovRectangularMarkerColorChanged)
 
 public:
 	SpecialMarkersMgr();
@@ -47,23 +59,19 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	//! Initialize the GridLinesMgr. This process checks the values in the
+	//! Initialize the SpecialMarkersMgr. This process checks the values in the
 	//! application settings, and according to the settings there
-	//! sets the visibility of the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line,
-	//! Equator Line and Ecliptic Lines.
+	//! sets the visibility of type of the special markers.
 	virtual void init();
 
 	//! Get the module ID, returns "SpecialMarkersMgr".
 	virtual QString getModuleID() const {return "SpecialMarkersMgr";}
 
-	//! Draw the grids and great circle lines.
-	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
-	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
-	//! various flags which control their visibility.
+	//! Draw the special markers.
 	virtual void draw(StelCore* core);
 
 	//! Update time-dependent features.
-	//! Used to control fading when turning on and off the grid lines and great circles.
+	//! Used to control fading when turning on and off the special markers.
 	virtual void update(double deltaTime);
 
 	//! Used to determine the order in which the various modules are drawn.
@@ -82,7 +90,7 @@ public slots:
 	//! @param newColor The color of FOV center marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVCenterMarker(const Vec3f& newColor);
 
@@ -100,7 +108,7 @@ public slots:
 	//! @param newColor The color of circular FOV marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVCircularMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVCircularMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVCircularMarker(const Vec3f& newColor);
 
@@ -126,7 +134,7 @@ public slots:
 	//! @param newColor The color of rectangular FOV marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVRectangularMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVRectangularMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVRectangularMarker(const Vec3f& newColor);
 
