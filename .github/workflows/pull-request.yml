@@ -12,3 +12,4 @@ jobs:
       - uses: delivery-much/actions-assigner@v1
         with:
           reviewers: alex-w, gzotti
+          token: ${{ secrets.GITHUB_TOKEN }}
