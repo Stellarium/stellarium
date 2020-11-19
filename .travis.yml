@@ -38,7 +38,6 @@ matrix:
             - libgl1-mesa-dev
             - xvfb
             - lcov
-            - python3
           update: true
         coverity_scan:
           project:
@@ -473,6 +472,10 @@ matrix:
 #        - COVERAGE=false
 
 before_install:
+  # Linux
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      export PATH=/opt/python/3.7.1/bin:$PATH;
+    fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
@@ -493,7 +496,7 @@ before_install:
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
-      pip3 install --user cpp-coveralls;
+      pip install --user cpp-coveralls;
       gem install coveralls-lcov;
     fi
 
@@ -524,7 +527,7 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      pip3 install --user urllib3 transifex-client;
+      pip install --user urllib3=1.23 transifex-client;
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
