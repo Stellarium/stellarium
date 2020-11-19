@@ -38,8 +38,6 @@ matrix:
             - libgl1-mesa-dev
             - xvfb
             - lcov
-            - python3
-            - python3-pip
           update: true
         coverity_scan:
           project:
@@ -474,6 +472,11 @@ matrix:
 #        - COVERAGE=false
 
 before_install:
+  # Linux
+  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$COVERAGE" == true ||  "$TRANSLATE" == true ]]; then
+      pyenv install 3.6;
+      pyenv global 3.6;
+    fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
