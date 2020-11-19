@@ -1,4 +1,4 @@
-﻿#
+#
 # See https://github.com/marketplace/actions/auto-assign-pr-and-request-review
 #
 name: pull-request
@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: delivery-much/actions-assigner@v1
         with:
-          reviewers: alex-w,gzotti
+          reviewers: alex-w, gzotti
