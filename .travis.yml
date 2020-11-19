@@ -14,6 +14,7 @@ matrix:
       arch: amd64
       dist: bionic
       compiler: gcc
+      python: 3.8
       addons:
         apt:
           packages:
@@ -492,7 +493,7 @@ before_install:
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
-      pip install --user cpp-coveralls;
+      pip3 install --user cpp-coveralls;
       gem install coveralls-lcov;
     fi
 
