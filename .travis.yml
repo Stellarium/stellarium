@@ -474,7 +474,7 @@ matrix:
 before_install:
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      export PATH=/opt/python/3.7.1/bin:$PATH;
+      pyenv global 3.6
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
