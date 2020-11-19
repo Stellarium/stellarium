@@ -473,8 +473,8 @@ matrix:
 
 before_install:
   # Linux
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$COVERAGE" == true ||  "$TRANSLATE" == true ]]; then
-      pyenv install -f 3.8;
+  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$COVERAGE" == true || "$TRANSLATE" == true ]]; then
+      pyenv install -f 3.8.3;
       pyenv global 3.8;
     fi
   # Mac OS X
