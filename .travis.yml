@@ -472,8 +472,8 @@ matrix:
 #        - COVERAGE=false
 
 before_install:
-  # Linux
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  # Linux (please use on amd64 only)
+  - if [[ "$COVERAGE" == true || "$TRANSLATE" == true ]]; then
       pyenv install -f 3.8;
       pyenv global 3.8;
     fi
