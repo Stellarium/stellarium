@@ -14,7 +14,6 @@ matrix:
       arch: amd64
       dist: bionic
       compiler: gcc
-      python: 3.8
       addons:
         apt:
           packages:
@@ -39,6 +38,7 @@ matrix:
             - libgl1-mesa-dev
             - xvfb
             - lcov
+            - python3
           update: true
         coverity_scan:
           project:
