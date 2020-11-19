@@ -417,7 +417,7 @@ matrix:
           packages:
           - qt
           - gpsd
-          update: true
+          #update: true
       env:
         - TRANSLATE=false
         - COVERAGE=false
@@ -523,7 +523,7 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      pip install --user urllib3==1.23 transifex-client;
+      pip3 install --user urllib3 transifex-client;
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
