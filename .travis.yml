@@ -48,8 +48,8 @@ matrix:
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
       env:
-        - TRANSLATE=true
-        - COVERAGE=true
+        - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       arch: amd64
@@ -113,8 +113,8 @@ matrix:
             - lcov
           update: true
       env:
-        - TRANSLATE=false
-        - COVERAGE=false
+        - TRANSLATE=true
+        - COVERAGE=true
 
     - os: linux
       arch: amd64
@@ -472,11 +472,6 @@ matrix:
 #        - COVERAGE=false
 
 before_install:
-  # Linux (please use on amd64 only)
-  - if [[ "$COVERAGE" == true || "$TRANSLATE" == true ]]; then
-      pyenv install -f 3.8;
-      pyenv global 3.8;
-    fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export PATH="/usr/local/opt/qt/bin:$PATH";
