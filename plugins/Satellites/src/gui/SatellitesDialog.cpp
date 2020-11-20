@@ -50,12 +50,12 @@
 #include "StelActionMgr.hpp"
 #include "StelUtils.hpp"
 
-#include "external/qxlsx/xlsxdocument.h"
-#include "external/qxlsx/xlsxchartsheet.h"
-#include "external/qxlsx/xlsxcellrange.h"
-#include "external/qxlsx/xlsxchart.h"
-#include "external/qxlsx/xlsxrichstring.h"
-#include "external/qxlsx/xlsxworkbook.h"
+#include "xlsxdocument.h"
+#include "xlsxchartsheet.h"
+#include "xlsxcellrange.h"
+#include "xlsxchart.h"
+#include "xlsxrichstring.h"
+#include "xlsxworkbook.h"
 using namespace QXlsx;
 
 const QString SatellitesDialog::dash = QChar(0x2014);

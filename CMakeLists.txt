@@ -1,5 +1,6 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
+INCLUDE(cmake/CPM.cmake)
 
 IF(POLICY CMP0054)
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
@@ -463,7 +464,8 @@ ELSE()
      MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
+# If QXlsx is bundled, it requires Qt5::GuiPrivate
+FIND_PACKAGE(Qt5Gui REQUIRED Private)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 # required for qcustomplot external dependency
@@ -630,6 +632,53 @@ IF(NOT USE_SYSTEM_ZLIB)
 ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
+
+# TODO: switch to something like vcpkg or conan, and plain find_package,
+# without the fallback of cmake downloading the dep itself.
+# But some libraries are not available there yet.
+CPMFindPackage(NAME QXlsx
+    URL https://github.com/QtExcel/QXlsx/archive/v1.3.55.2.zip
+    URL_HASH SHA256=8b08e5af85e4262a421ff1fd4b516d8479eed0562dda0e9812984d0cf67cb90b
+    DOWNLOAD_ONLY yes)
+if(QXlsx_ADDED)
+    # MSVC has issues with __declspec linkage, so add the library manually
+    # instead of using one defined in QXlsx's CMakeLists.txt
+    file(GLOB_RECURSE QXLSX_FILES
+        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
+        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
+    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
+    target_link_libraries(QXlsx PUBLIC Qt5::Core Qt5::Gui Qt5::GuiPrivate)
+    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+endif()
+
+CPMFindPackage(NAME Qt5Compress
+    # Version from 13 May 2018
+    URL https://github.com/nezticle/qtcompress/archive/23f8831826cd72aedf99fc3699148b6c994fd677.zip
+    URL_HASH SHA256=82d03b9bfed767e3a13d2be7346d55c24ce218b0f0f6247eaafd7689be18ef57
+    DOWNLOAD_ONLY yes)
+if(Qt5Compress_ADDED)
+    function(PatchQtCompress filename)
+        file(READ ${Qt5Compress_SOURCE_DIR}/src/compress/${filename} CONTENT)
+        string(REGEX REPLACE "#include <qtcompressglobal.h>" ""
+            CONTENT "${CONTENT}")
+        string(REGEX REPLACE "QTCOMPRESS_EXPORT" ""
+            CONTENT "${CONTENT}")
+        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/${filename}
+            CONTENT "${CONTENT}")
+    endfunction()
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
+    PatchQtCompress("qzipreader.h")
+    PatchQtCompress("qzipwriter.h")
+    PatchQtCompress("qzip.cpp")
+    add_library(Qt5Compress STATIC EXCLUDE_FROM_ALL
+        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/qzip.cpp)
+    target_include_directories(Qt5Compress PUBLIC
+        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
+    target_link_libraries(Qt5Compress Qt5::Core ${ZLIB_LIBRARIES})
+    #turn off automoc, not needed here
+    set_target_properties(Qt5Compress PROPERTIES AUTOMOC 0)
+    add_library(Qt5::Compress ALIAS Qt5Compress)
+endif()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)

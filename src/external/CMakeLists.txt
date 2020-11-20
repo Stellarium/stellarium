@@ -70,19 +70,6 @@ target_include_directories(zlib_stel PUBLIC zlib)
 set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
-set(qtcompress_SRCS
-    qtcompress/qzip.cpp
-    qtcompress/qzipreader.h
-    qtcompress/qzipwriter.h
-    )
-add_library(qtcompress_stel STATIC EXCLUDE_FROM_ALL ${qtcompress_SRCS})
-target_include_directories(qtcompress_stel PUBLIC qtcompress)
-#this can use the system zlib, or our zlib
-target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
-#turn off automoc, not needed here
-set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
-SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
-
 # QCustomPlot should not be unbundled, because upstream uses GPL 3, and
 # Stellarium uses GPL 2. Author of QCustomPlot has agreed for GPL 2+ for this.
 set(qcustomplot_SRCS
@@ -93,120 +80,77 @@ add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
 SET_TARGET_PROPERTIES(qcustomplot_stel PROPERTIES FOLDER "src/external")
 
-SET(qxlsx_SRCS
-    qxlsx/xlsxabstractooxmlfile.cpp
-    qxlsx/xlsxabstractsheet.cpp
-    qxlsx/xlsxcell.cpp
-    qxlsx/xlsxcellformula.cpp
-    qxlsx/xlsxcellrange.cpp
-    qxlsx/xlsxcellreference.cpp
-    qxlsx/xlsxchart.cpp
-    qxlsx/xlsxchartsheet.cpp
-    qxlsx/xlsxcolor.cpp
-    qxlsx/xlsxconditionalformatting.cpp
-    qxlsx/xlsxcontenttypes.cpp
-    qxlsx/xlsxdatavalidation.cpp
-    qxlsx/xlsxdocpropsapp.cpp
-    qxlsx/xlsxdocpropscore.cpp
-    qxlsx/xlsxdocument.cpp
-    qxlsx/xlsxdrawing.cpp
-    qxlsx/xlsxdrawinganchor.cpp
-    qxlsx/xlsxformat.cpp
-    qxlsx/xlsxmediafile.cpp
-    qxlsx/xlsxnumformatparser.cpp
-    qxlsx/xlsxrelationships.cpp
-    qxlsx/xlsxrichstring.cpp
-    qxlsx/xlsxsharedstrings.cpp
-    qxlsx/xlsxsimpleooxmlfile.cpp
-    qxlsx/xlsxstyles.cpp
-    qxlsx/xlsxtheme.cpp
-    qxlsx/xlsxutility.cpp
-    qxlsx/xlsxworkbook.cpp
-    qxlsx/xlsxworksheet.cpp
-    qxlsx/xlsxzipreader.cpp
-    qxlsx/xlsxzipwriter.cpp
-    qxlsx/xlsxcelllocation.cpp
-    qxlsx/xlsxabstractooxmlfile.h
-    qxlsx/xlsxabstractooxmlfile_p.h
-    qxlsx/xlsxabstractsheet.h
-    qxlsx/xlsxabstractsheet_p.h
-    qxlsx/xlsxcell.h
-    qxlsx/xlsxcellformula.h
-    qxlsx/xlsxcellformula_p.h
-    qxlsx/xlsxcellrange.h
-    qxlsx/xlsxcellreference.h
-    qxlsx/xlsxcell_p.h
-    qxlsx/xlsxchart.h
-    qxlsx/xlsxchartsheet.h
-    qxlsx/xlsxchartsheet_p.h
-    qxlsx/xlsxchart_p.h
-    qxlsx/xlsxcolor_p.h
-    qxlsx/xlsxconditionalformatting.h
-    qxlsx/xlsxconditionalformatting_p.h
-    qxlsx/xlsxcontenttypes_p.h
-    qxlsx/xlsxdatavalidation.h
-    qxlsx/xlsxdatavalidation_p.h
-    qxlsx/xlsxdocpropsapp_p.h
-    qxlsx/xlsxdocpropscore_p.h
-    qxlsx/xlsxdocument.h
-    qxlsx/xlsxdocument_p.h
-    qxlsx/xlsxdrawinganchor_p.h
-    qxlsx/xlsxdrawing_p.h
-    qxlsx/xlsxformat.h
-    qxlsx/xlsxformat_p.h
-    qxlsx/xlsxglobal.h
-    qxlsx/xlsxmediafile_p.h
-    qxlsx/xlsxnumformatparser_p.h
-    qxlsx/xlsxrelationships_p.h
-    qxlsx/xlsxrichstring.h
-    qxlsx/xlsxrichstring_p.h
-    qxlsx/xlsxsharedstrings_p.h
-    qxlsx/xlsxsimpleooxmlfile_p.h
-    qxlsx/xlsxstyles_p.h
-    qxlsx/xlsxtheme_p.h
-    qxlsx/xlsxutility_p.h
-    qxlsx/xlsxworkbook.h
-    qxlsx/xlsxworkbook_p.h
-    qxlsx/xlsxworksheet.h
-    qxlsx/xlsxworksheet_p.h
-    qxlsx/xlsxzipreader_p.h
-    qxlsx/xlsxzipwriter_p.h
-    qxlsx/xlsxcelllocation.h
-    )
-add_library(qxlsx_stel STATIC EXCLUDE_FROM_ALL ${qxlsx_SRCS})
-target_link_libraries(qxlsx_stel Qt5::Core Qt5::Gui qtcompress_stel)
-set_target_properties(qxlsx_stel PROPERTIES FOLDER "src/external")
-
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL)
-    set(INDI_SOVERSION "1")
-    set(CMAKE_INDI_VERSION_MAJOR 1)
-    set(CMAKE_INDI_VERSION_MINOR 6)
-    set(CMAKE_INDI_VERSION_RELEASE 0)
-    set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
-    set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
-    set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
-    configure_file(libindi/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
-    configure_file(libindi/indiversion.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/indiversion.h )
-    include_directories(${CMAKE_CURRENT_BINARY_DIR})
-    include_directories(libindi)
-    include_directories(libindi/libs)
-    include_directories(libindi/libs/indibase)
-    add_library(indiclient STATIC
-        libindi/libs/lilxml.c
-        libindi/base64.c
-        libindi/libs/indibase/basedevice.h
-        libindi/libs/indibase/basedevice.cpp
-        libindi/libs/indibase/baseclient.h
-        libindi/libs/indibase/baseclient.cpp
-        libindi/libs/indibase/indiproperty.cpp
-        libindi/libs/indibase/indistandardproperty.cpp
-        libindi/libs/indicom.c
-        )
-    target_link_libraries(indiclient ${ZLIB_LIBRARIES}) # Do not use 2 version of zlib! 
-    target_include_directories(indiclient INTERFACE libindi)
-    target_include_directories(indiclient INTERFACE libindi/libs)
+    SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL
+        "Use system-provided INDI instead of the bundled version")
+    find_library(INDICLIENT_LIB indiclient)
+    if(INDICLIENT_LIB AND PREFER_SYSTEM_INDILIB)
+        MESSAGE(STATUS "Using system-provided indiclient at ${INDICLIENT_LIB}")
+        add_library(indiclient UNKNOWN IMPORTED GLOBAL)
+        set_target_properties(indiclient PROPERTIES
+            IMPORTED_LOCATION "${INDICLIENT_LIB}")
+    else()
+        # Git repo is large, limit download to archive
+        # Included CMakeLists.txt contains unrelated targets and dependencies of
+        # them, therefore DOWNLOAD_ONLY and all the code below
+        CPMAddPackage(NAME indiclient
+            URL https://github.com/indilib/indi/archive/v1.6.0.zip
+            URL_HASH SHA256=6c89a515b916a833dfb6ffe53972143cbdd274099c9a0834b8a5440e780d9f4a
+            VERSION 1.6.0
+            DOWNLOAD_ONLY YES)
 
-    SET_TARGET_PROPERTIES(indiclient PROPERTIES FOLDER "src/external")
+        # Installed version has /usr/include/libindi, move these headers to
+        # such directory for a consistent #include
+        file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libindi/libs/indibase/*.h")
+        file(COPY ${INDI_HEADERS}
+            DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+
+        # Avoid bundling libnova too
+        file(READ
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/inditelescope.h
+            INDITELESCOPE_H)
+        string(REGEX REPLACE
+            "#include <libnova/julian_day.h>" "struct ln_date;"
+            INDITELESCOPE_H "${INDITELESCOPE_H}")
+        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h
+            CONTENT "${INDITELESCOPE_H}")
+
+        # Fix build in windows
+        file(READ
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indilogger.h
+            INDILOGGER_H)
+        string(REGEX REPLACE "#include <sys/time.h>"
+            "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif"
+            INDILOGGER_H "${INDILOGGER_H}")
+        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h
+            CONTENT "${INDILOGGER_H}")
+
+        set(INDI_SOVERSION "1")
+        set(CMAKE_INDI_VERSION_MAJOR 1)
+        set(CMAKE_INDI_VERSION_MINOR 6)
+        set(CMAKE_INDI_VERSION_RELEASE 0)
+        set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
+        set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
+        set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
+        configure_file(${indiclient_SOURCE_DIR}/libindi/config.h.cmake
+            ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
+        add_library(indiclient STATIC
+            ${indiclient_SOURCE_DIR}/libindi/libs/lilxml.c
+            ${indiclient_SOURCE_DIR}/libindi/base64.c
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/basedevice.cpp
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/baseclient.cpp
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indiproperty.cpp
+            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indistandardproperty.cpp
+            ${indiclient_SOURCE_DIR}/libindi/libs/indicom.c)
+        target_include_directories(indiclient PUBLIC
+            ${CMAKE_CURRENT_BINARY_DIR}
+            ${indiclient_SOURCE_DIR}/libindi
+            ${indiclient_SOURCE_DIR}/libindi/libs
+            PRIVATE
+            ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+        target_link_libraries(indiclient ${ZLIB_LIBRARIES})
+    endif()
 ENDIF()
 
