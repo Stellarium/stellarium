@@ -10,10 +10,9 @@ git:
 
 matrix:
   include:
-    # used for coverity_scan
     - os: linux
       arch: amd64
-      dist: bionic
+      dist: focal
       compiler: gcc
       addons:
         apt:
@@ -48,73 +47,6 @@ matrix:
           build_command: make -j5
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: amd64
-      dist: bionic
-      compiler: clang
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    # used for pushing templates of translations (transifex) and counting CLOC (coverage)
-    # both clients using python3 now
-    - os: linux
-      arch: amd64
-      dist: focal
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-            - lcov
-          update: true
       env:
         - TRANSLATE=true
         - COVERAGE=true
@@ -153,7 +85,7 @@ matrix:
 
     - os: linux
       arch: arm64
-      dist: bionic
+      dist: focal
       compiler: gcc
       addons:
         apt:
@@ -185,75 +117,7 @@ matrix:
 
     - os: linux
       arch: arm64
-      dist: bionic
-      compiler: clang
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: arm64-graviton2
       dist: focal
-      group: edge
-      virt: lxd
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: arm64-graviton2
-      dist: focal
-      group: edge
-      virt: lxd
       compiler: clang
       addons:
         apt:
@@ -278,194 +142,24 @@ matrix:
             - zlib1g-dev
             - libgl1-mesa-dev
             - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: ppc64le
-      dist: bionic
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: ppc64le
-      dist: bionic
-      compiler: clang
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: s390x
-      dist: bionic
-      compiler: gcc
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: linux
-      arch: s390x
-      dist: bionic
-      compiler: clang
-      addons:
-        apt:
-          packages:
-            - qt5-default
-            - qt5-qmake
-            - qtbase5-dev
-            - qtbase5-dev-tools
-            - qttools5-dev
-            - qttools5-dev-tools
-            - qtscript5-dev
-            - libqt5svg5-dev
-            - libqt5opengl5-dev
-            - qtmultimedia5-dev
-            - libqt5multimedia5-plugins
-            - libqt5serialport5
-            - libqt5serialport5-dev
-            - qtpositioning5-dev
-            - libqt5positioning5
-            - libqt5positioning5-plugins
-            - libgps-dev
-            - zlib1g-dev
-            - libgl1-mesa-dev
-            - xvfb
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    # macOS 10.13 / Xcode 9.4.1 (9F2000)
-    - os: osx
-      osx_image: xcode9.4
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          #update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    # macOS 10.14.4 / Xcode 10.3 (18E226)
-    - os: osx
-      osx_image: xcode10.3
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    # macOS 10.14.6 / Xcode 11.3.1 (11C505)
-    - os: osx
-      osx_image: xcode11.3
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
           update: true
       env:
         - TRANSLATE=false
         - COVERAGE=false
 
     # macOS 10.15.7 / Xcode 12.2 (12B5018i)
-    - os: osx
-      osx_image: xcode12.2
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-          - qt
-          - gpsd
-          update: true
-      env:
-        - TRANSLATE=false
-        - COVERAGE=false
+#    - os: osx
+#      osx_image: xcode12.2
+#      compiler: clang
+#      addons:
+#        homebrew:
+#          packages:
+#          - qt
+#          - gpsd
+#          update: true
+#      env:
+#        - TRANSLATE=false
+#        - COVERAGE=false
 
 #    - os: windows
 #      env:
