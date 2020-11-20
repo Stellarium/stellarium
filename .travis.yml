@@ -10,6 +10,7 @@ git:
 
 matrix:
   include:
+    # used for coverity_scan
     - os: linux
       arch: amd64
       dist: bionic
@@ -38,8 +39,6 @@ matrix:
             - libgl1-mesa-dev
             - xvfb
             - lcov
-            - python3
-            - python3-pip
           update: true
         coverity_scan:
           project:
@@ -50,8 +49,8 @@ matrix:
           branch_pattern: coverity_scan
           notification_email: stellarium@googlegroups.com
       env:
-        - TRANSLATE=true
-        - COVERAGE=true
+        - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       arch: amd64
@@ -85,6 +84,8 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
+    # used for pushing templates of translations (transifex) and counting CLOC (coverage)
+    # both clients using python3 now
     - os: linux
       arch: amd64
       dist: focal
@@ -115,8 +116,8 @@ matrix:
             - lcov
           update: true
       env:
-        - TRANSLATE=false
-        - COVERAGE=false
+        - TRANSLATE=true
+        - COVERAGE=true
 
     - os: linux
       arch: amd64
