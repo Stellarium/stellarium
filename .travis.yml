@@ -411,7 +411,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.13 
+    # macOS 10.13 / Xcode 9.4.1 (9F2000)
     - os: osx
       osx_image: xcode9.4
       compiler: clang
@@ -425,7 +425,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.14
+    # macOS 10.14.4 / Xcode 10.3 (18E226)
     - os: osx
       osx_image: xcode10.3
       compiler: clang
@@ -439,7 +439,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.14
+    # macOS 10.14.6 / Xcode 11.3.1 (11C505)
     - os: osx
       osx_image: xcode11.3
       compiler: clang
@@ -453,7 +453,7 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    # macOS 10.15
+    # macOS 10.15.7 / Xcode 12.2 (12B5018i)
     - os: osx
       osx_image: xcode12.2
       compiler: clang
