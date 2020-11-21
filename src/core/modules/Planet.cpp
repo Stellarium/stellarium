@@ -760,7 +760,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		else
 		{
 			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
-			elo = StelUtils::radToDmsStr(elongation, true);
+			elo = StelUtils::radToDmsStr(elongation, true);			
 		}
 
 		if (withTables)
@@ -769,7 +769,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Elongation")).arg(elo);
 			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Phase angle")).arg(pha);
 			if (withIllum)
-				oss << QString("<tr><td>%1:</td><td>%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("<tr><td>%1:</td><td>%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
 			oss << "</table>";
 		}
 		else
@@ -777,7 +777,19 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("%1: %2<br/>").arg(q_("Elongation"), elo);
 			oss << QString("%1: %2<br/>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
+		}
+
+		if (getPlanetType()==isMoon && this->parent!=core->getCurrentPlanet())
+		{
+			QString ad;
+			const double angularDistance = getJ2000EquatorialPos(core).angle(this->parent->getJ2000EquatorialPos(core));
+			if (withDecimalDegree)
+				ad = StelUtils::radToDecDegStr(angularDistance,4,false,true);
+			else
+				ad = StelUtils::radToDmsStr(angularDistance, true);
+
+			oss << QString("%1 %2 &mdash; %3: %4<br/>").arg(q_("Angular distance"), getNameI18n(), this->parent->getNameI18n(), ad);
 		}
 	}
 	return str;
