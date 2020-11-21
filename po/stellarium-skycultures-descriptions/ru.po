@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-11-14 16:25+0700\n"
+"POT-Creation-Date: 2020-11-21 18:12+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -94,6 +94,18 @@ msgid ""
 "updates to the epoch of the respective globemaker could be applied by a "
 "simple subtraction of the value for ecliptic longitude."
 msgstr ""
+"Для вычисления положения планет Птолемей использовал геоцентрическую модель "
+"(которая разрешена, потому что наблюдатель всегда находится на Земле) и, "
+"таким образом, способствовал научному убеждению, что гелиоцентрическая "
+"модель Аристарха не нужна. Однако для звездного каталога <i>Альмагест</i> "
+"это не имеет никакого значения, потому что звёздный каталог всегда "
+"представляет собой своего рода перечень фиксированных точек на небе, а "
+"заявленная Птолемеем цель каталога - предоставить список для создания "
+"небесного глобуса ( см. Alm., VIII, 3). Зная о прецессии, он хотел облегчить"
+" дело будущих создателей глобусов, используя эклиптические координаты: "
+"прецессия, известная Птолемею, сдвигает все звезды параллельно эклиптике, "
+"поэтому обновления эпохи соответствующего создателя глобуса могут быть "
+"применены простым вычитанием значения для эклиптической долготы."
 
 #. type: Content of: <h2>
 #: ../../skycultures/almagest/description.en.utf8:40
@@ -144,6 +156,12 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"С названиями звёзд и объектов глубокого космоса мы полагаемся только на "
+"Альмагест. Например, Птолемей использует название "
+"&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (Подобный "
+"факелу)&quot; для Альдебарана в своей другой работе - <i>Тетрабиблос "
+"(Четверокнижие)</i>, но это название не реализовано в этой небесной "
+"культуре, потому что оно не отражено в Альмагесте."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:66
@@ -309,6 +327,8 @@ msgid ""
 "three head stars are tiara; &beta; seen as part of the belt, although "
 "Almagest says beneath belt"
 msgstr ""
+"три главные звезды - тиара; &beta; рассматривается как часть пояса, хотя "
+"Альмагест говорит, что она под поясом"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:112
@@ -393,7 +413,7 @@ msgstr "Hercules"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:132
 msgid "one of the foot stars is top of staff of Bootes"
-msgstr ""
+msgstr "одна из звёздных ног - верхушка посоха Волопаса"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:133
@@ -660,6 +680,8 @@ msgid ""
 "&tau; Aql as head star, &beta; as neck, Altair is between shoulders, &gamma;"
 " and &mu; are shoulders"
 msgstr ""
+"&tau; Aql как звезда головы, &beta; как шея, Альтаир между плечами, &gamma; "
+"и &mu; - плечи"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:208
@@ -782,7 +804,7 @@ msgstr "Triangulum"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:244
 msgid "four given stars &#61664; middle star of one side"
-msgstr ""
+msgstr "четыре звезды &#61664; средняя звезда одной стороны"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:248
@@ -976,6 +998,7 @@ msgid ""
 "Ptolemy always uses the term &quot;claws&quot;, never &quot;the "
 "balance&quot;."
 msgstr ""
+"Птолемей всегда употребляет термин &quot;когти&quot;, а не &quot;весы&quot;."
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:304
@@ -1123,6 +1146,9 @@ msgid ""
 "took them as fin because mouth should be at g and &tau; Psc. Additional "
 "change on tail fin: extended to &rho;"
 msgstr ""
+"северная рыба: 68 (h), 67 (k) и 65 (i) описаны как голова в Альмагесте, но "
+"мы приняли их как плавник, потому что рот должен быть в g и &tau; Psc. "
+"Дополнительное изменение на хвостовом плавнике: продолжено до &rho;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:344
@@ -1175,10 +1201,16 @@ msgid ""
 "The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy "
 "interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together "
 "with fainter stars between them as a &quot;cluster&quot; (or association "
-"which is more extended than the modern &quot;lam Ori Assoc.&quot;). Head "
-"does not have direct connection to the shoulder stars anymore, but a "
+"which is more extended than the modern &quot;&lambda; Ori Assoc.&quot;). "
+"Head does not have direct connection to the shoulder stars anymore, but a "
 "connection to a star between the stars in the shoulders."
 msgstr ""
+"&quot;Голова&quot; помечена как &quot;туманность&quot;, что означает, что "
+"Птолемей интерпретировал &phi;<sub>1</sub>, &phi;<sub>2</sub> и &lambda; "
+"вместе с более тусклыми звездами между ними как &quot;скопление&quot; (или "
+"ассоциацию, которая более обширна, чем современная &quot;Ассоциация &lambda;"
+" Ori&quot;). Голова больше не связана напрямую со звездами на плечах, а "
+"связана со звездой между звездами на плечах."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:360
@@ -1228,7 +1260,7 @@ msgstr "Lepus"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:373
 msgid "took the \"4 stars over the ear\" as ear"
-msgstr ""
+msgstr "приняли за ухо \"4 звезды над ухом\""
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:376
@@ -1264,7 +1296,7 @@ msgstr "&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:386
 msgid "The One before the Dog"
-msgstr "Один перед Псом"
+msgstr "Тот, кто стоит перед псом"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:387
@@ -1281,6 +1313,12 @@ msgid ""
 "HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with "
 "&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634"
 msgstr ""
+"В Альмагесте созвездие называется &quot;Тот, кто стоит перед псом&quot; или "
+"&quot;Предвестник Сириуса&quot;, как выразился Тумер. Однако, &beta; CMi "
+"называется &quot;шейка&quot; (о которой неизвестно). Мы нарисовали пёсика с "
+"помощью &gamma; и &epsilon; в качестве головы; &alpha;, &beta;, &eta; и "
+"HIP36889 в качестве тела; передние лапы с HIP 35509 и HIP 35614; задние лапы"
+" с &delta;<sub>2</sub> и &delta;<sub>3</sub>; хвост с HIP 37634"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:392
@@ -1353,7 +1391,7 @@ msgstr "&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:410
 msgid "Krater (vessel)"
-msgstr "Воронка (сосуд)"
+msgstr "Кратер (сосуд)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:411
@@ -1369,6 +1407,11 @@ msgid ""
 " Ptolemy describes only one star in the foot (&alpha; Crt) and two handles "
 "(&eta;, &theta; Crt)"
 msgstr ""
+"кратер - особый греческий сосуд для смешивания вина, который выглядит как "
+"амфора или ваза: <a "
+"href=\"https://en.wikipedia.org/wiki/Krater\">https://en.wikipedia.org/wiki/Krater</a>"
+" Птолемей описывает только одну звезду на донышке (&alpha; Crt) и две ручки "
+"(&eta;, &theta; Crt)."
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:416
@@ -1421,6 +1464,9 @@ msgid ""
 " as star on the back. &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion), "
 "backward arm added."
 msgstr ""
+"отклонение от описания: на спине взята звезда HIP 65373 вместо &omega; Cen "
+"(скопление). &lsquo;Тирс&lsquo; не прорисован (во избежание путаницы), "
+"добавлена задняя рука."
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:432
@@ -1451,6 +1497,9 @@ msgid ""
 "belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because "
 "otherwise shapelessness arises; HIP 73493 taken as foreleg"
 msgstr ""
+"&beta; описана как &lsquo;конец задней лапы&lsquo; -> принята как звезда на "
+"животе; &tau;<sub>1</sub> как задняя лапа &Chi; удалена из головы, потому "
+"что иначе возникает бесформенность; HIP 73493 принята как передняя лапа"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:440
@@ -1541,6 +1590,8 @@ msgid ""
 "we added a few stars to mark the tail as such (&beta; should be the tip of "
 "the tail but we used it as its root)"
 msgstr ""
+"мы добавили несколько звезд, чтобы обозначить хвост как таковой (&beta; "
+"должна быть кончиком хвоста, но мы использовали её как его основание)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/almagest/description.en.utf8:465
@@ -1649,7 +1700,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:484
 msgid "Written in English: the authors"
-msgstr ""
+msgstr "Написано по-английски: авторы"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:1
@@ -1668,6 +1719,14 @@ msgid ""
 "navigational aids are called 'petuu vare' (foolish, common, or "
 "undistinguished)."
 msgstr ""
+"Анюта - это крошечный вулканический остров, который, хотя и находится на "
+"Соломоновых островах в Меланезии, населен полинезийцами. Звёзды - самый "
+"важный инструмент анутанов для навигации на большие расстояния. Основные "
+"путеводные звёзды и созвездия известны как «kaavenga». Звёздные тропы, по "
+"которым следуют от одного острова к другому (даже если они ещё не взошли или"
+" уже зашли), называются «kau panogna porau». Безымянные звёзды, которые не "
+"используются в качестве основных навигационных, называются «petuu vare» "
+"(глупые, обычные или незаметные)."
 
 #. type: Content of: <h3>
 #: ../../skycultures/anutan/description.en.utf8:9
@@ -1752,7 +1811,7 @@ msgstr "Птичья подмышка"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:15
-msgid "Group of four small starts just east of Manu's Body"
+msgid "Group of four small stars just east of Manu's Body"
 msgstr ""
 
 #. type: Content of: <table><tr><td>
@@ -1789,7 +1848,7 @@ msgstr "Пояс Ориона"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:18
 msgid "Te Angaanga"
-msgstr ""
+msgstr "Те ангаанга"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:18
@@ -1809,7 +1868,7 @@ msgstr "Матарики"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:19
 msgid "Small Face, or Small Eyes"
-msgstr ""
+msgstr "Личико или Глазки"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:19
@@ -1825,7 +1884,7 @@ msgstr "Плеяды"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
 msgid "Kaavei"
-msgstr ""
+msgstr "Каавей"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
@@ -1845,7 +1904,7 @@ msgstr "Средний предвестник"
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:21
 msgid "Corner of Great Square (one large star)"
-msgstr ""
+msgstr "Угол Большого квадрата (одна яркая звезда)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:22
@@ -1859,7 +1918,7 @@ msgstr "Передний предвестник"
 
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:22
-msgid "Pegasus's front legs and Shoulder"
+msgid "Pegasus's front legs and shoulder"
 msgstr ""
 
 #. type: Content of: <table><tr><td>
@@ -1875,7 +1934,7 @@ msgstr "Тесло"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:24
 msgid "Te Aamonga"
-msgstr ""
+msgstr "Те аамонга"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:24
@@ -1885,7 +1944,7 @@ msgstr "Палка для переноски"
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:24
 msgid "Three stars in Aquila in a straight line"
-msgstr ""
+msgstr "Три звезды в Орле на прямой"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:25
@@ -1900,7 +1959,7 @@ msgstr "Пятнистая рыба"
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:25
 msgid "Four large stars in Sagittarius"
-msgstr ""
+msgstr "Четыре яркие звезды в Стрельце"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:26
@@ -1928,7 +1987,7 @@ msgstr "Те ракау тапу"
 #: ../../skycultures/anutan/description.en.utf8:27
 #: ../../skycultures/anutan/description.en.utf8:29
 msgid "The Net, or The Sacred Timber"
-msgstr ""
+msgstr "Сеть или Священная древесина"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:27
@@ -1953,11 +2012,13 @@ msgid ""
 "Scorpius, Antares is Te Kau (the stem). Five star around Antares is Ona Rau "
 "(its leaves)"
 msgstr ""
+"Скорпион, Антарес - это «те кау» (стебель). Пять звезд вокруг Антареса - "
+"«она рау» (его листья)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:30
 msgid "Te Tukaniva"
-msgstr ""
+msgstr "Те туканива"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:30
@@ -2023,7 +2084,7 @@ msgstr "Венера"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:34
 msgid "Tiuriuri"
-msgstr ""
+msgstr "Тиуриури"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:34
@@ -2106,6 +2167,8 @@ msgid ""
 " had been influenced greatly by Greek astronomy, particularly Ptolemy's "
 "astronomy."
 msgstr ""
+"На эту арабскую культуру неба, которая используется уже более тысячи лет, "
+"сильно повлияла греческая астрономия, особенно астрономия Птолемея."
 
 #. type: Content of: <p><a>
 #: ../../skycultures/arabic/description.en.utf8:3
@@ -2134,6 +2197,12 @@ msgid ""
 "into 48 constellations, with estimates of their brightness, based largely on"
 " the observations of the Greek earlier astronomers, such as Hipparchus."
 msgstr ""
+"Птолемей, греческий астроном, который жил и работал около 100–178 гг. н.э. в"
+" Александрии (Египет), собрал древнегреческие описания 1022 звезд в своей "
+"знаменитой книге «Великая система астрономии», популярной под сокращенным "
+"арабским названием «Альмагест». Звёзды в каталоге Птолемея собраны в 48 "
+"созвездий, с оценками их яркостей, в значительной степени основанных на "
+"наблюдениях древнегреческих астрономов, таких как Гиппарх."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:5
@@ -2142,6 +2211,9 @@ msgid ""
 "became famous. Many of the Arabic-language star descriptions in the Almagest"
 " came to be used widely as names for stars."
 msgstr ""
+"Книга Птолемея была дважды переведена на арабский язык в IX веке и стала "
+"известной. Многие из описаний звёзд на арабском языке в Альмагесте стали "
+"широко использоваться в качестве названий для звезд."
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/arabic/description.en.utf8:6
@@ -2173,6 +2245,21 @@ msgid ""
 "surviving copy was produced by his son around 1010 CE and is preserved in "
 "the Bodleian Library, Oxford (MS Marsh 144)."
 msgstr ""
+"Эта арабская культура неба использует 48 классических греческих созвездия. "
+"Эти созвездия были описаны несколькими арабскими и исламскими авторами. "
+"Одним из тех, кто оказал неизгладимое влияние на арабские наблюдения и "
+"изучение звёзд, является астроном Абу аль-Хусейн Абд ар-Рахман ас-Суфи "
+"(903-986) известный также по его латинизированному имени Азофи, который "
+"систематически пересматривал каталог звёзд Птолемея. Ас-Суфи создал "
+"исправленную и обновленную версию Альмагеста Птолемея в крупной книге под "
+"названием Китаб сувар аль-кавакиб (Книга неподвижных звезд), завершенной "
+"около 964 г. Построенный на основе греческого астрономического наследия, "
+"работа ас-Суфи содержала список арабских названий звёзд, величины их "
+"яркости, определенные самим ас-Суфи, и два рисунка каждого созвездия, по "
+"одному в том виде, в каком оно видимо в небе. и один перевёрнут справа "
+"налево, как если бы он выглядел на небесном шаре. Самая старая сохранившаяся"
+" копия была создана его сыном около 1010 г. н.э. и хранится в Бодлианской "
+"библиотеке в Оксфорде (MS Marsh 144)."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:8
@@ -2182,6 +2269,9 @@ msgid ""
 "constellations and sample star tables in an old manuscript of Al-Sufi "
 "book.</a>"
 msgstr ""
+"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" "
+"target=\"_top\">По этой ссылке вы можете увидеть красивые иллюстрации "
+"созвездий и образцы звездных таблиц в старинной рукописи книги Ас-Суфи.</a>"
 
 #. type: Content of: <p><a>
 #: ../../skycultures/arabic/description.en.utf8:9
@@ -2191,7 +2281,7 @@ msgstr "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">"
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:9
 msgid "Cetus as seen in the sky</a>"
-msgstr ""
+msgstr "Кит, как он виден на небе</a>"
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:10
@@ -2204,6 +2294,9 @@ msgid ""
 "Regardless of origin, almost all star names belong to old traditions. They "
 "are a part of the collective cultural heritage of humanity."
 msgstr ""
+"Вне зависимости от происхождения почти все названия звёзд принадлежат "
+"старинным традициям. Они являются частью коллективного культурного наследия "
+"человечества."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:12
@@ -2213,6 +2306,10 @@ msgid ""
 "their constellation, e.g., the star Deneb means \"tail\" and labels that "
 "part of Cygnus (the Swan)."
 msgstr ""
+"Официальные названия звёзд по существу ограничиваются старыми именами и "
+"обычно названия имеют только яркие звёзды. Большинство названий звезд "
+"связано с их созвездиями, например, звезда Денеб означает «хвост» и "
+"обозначает эту часть Лебедя."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:13
@@ -2226,6 +2323,14 @@ msgid ""
 "Most other names of stars inherited from the past have Greek, Latin or "
 "Chinese labels."
 msgstr ""
+"Другие описывают саму звезду, например Сириус, что буквально переводится как"
+" «палящая», достаточно подходящая для самой яркой звезды на небе. Довольно "
+"много известных звезд носят арабские имена, в которых «al» соответствует "
+"артиклю «the» и часто появляется впереди, например, «Algol», «Упырь». Его "
+"включение со временем стало несколько произвольным. Следовательно, несколько"
+" названий звёзд арабского происхождения даются в другом месте с префиксом "
+"al- или без него. Большинство других унаследованных из прошлого названий "
+"звёзд имеют надписи на греческом, латинском или китайском языках."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:14
@@ -2238,6 +2343,13 @@ msgid ""
 "so that a name might even refer to a different constellation (Greek or "
 "Arabic) rather than to the one of the star's actual residence."
 msgstr ""
+"Когда с XII века арабские тексты были переведены на латынь, арабская "
+"традиция именования звёзд была передана латинскому миру. Однако это часто "
+"происходило в сильно искаженной форме, которая либо меняла значение, либо, в"
+" крайних случаях, порождала слова, не имеющие никакого значения. Другие "
+"названия были ошибочно перенесены с одной звезды на другую, так что имя "
+"могло даже относиться к другому созвездию (греческому или арабскому), а не к"
+" месту фактического местоположения звезды."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:15
@@ -2245,6 +2357,8 @@ msgid ""
 "Nevertheless, even with these shortcomings, the majority of star names "
 "adopted since the Renaissance are Arabic in origin."
 msgstr ""
+"Тем не менее, даже с этими недостатками, большинство названий звёзд, "
+"принятых со времен Возрождения, имеют арабское происхождение."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:16
@@ -2262,6 +2376,18 @@ msgid ""
 "meaning \"mouth of the southern fish\", which is where Ptolemy had described"
 " it in the Almagest."
 msgstr ""
+"Местные традиции народов исламских земель на Аравийском полуострове и на "
+"Ближнем Востоке имели свои собственные названия для различных ярких звёзд, "
+"таких как Альдебаран, и они обычно считали одиночные звезды символами "
+"животных или людей. Например, звёзды, известные нам как &alpha; и &beta; "
+"Змееносца они считали пастухом и его собакой, а соседние звёзды составляли "
+"очертания поля с овцами. Некоторым из арабских названий было уже столько "
+"веков, что их значения были утеряны во времена ас-Суфи и его современниками,"
+" и они остаются неизвестными и по сей день. Другие названия звёзд, "
+"используемые ас-Суфи и его соотечественниками, были прямым переводом "
+"описаний Птолемея. Например, звездное имя Фомальгаут происходит от "
+"арабского, означающего «пасть южной рыбы», и именно там Птолемей описал ее в"
+" Альмагесте."
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:17
@@ -2398,7 +2524,7 @@ msgstr ""
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:30
 msgid "Arabic Stellarium Translation team"
-msgstr ""
+msgstr "Команда арабских переводчиков Stellarium"
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:32
@@ -2424,6 +2550,8 @@ msgid ""
 "The Arabic star names were compiled and added to Stellarium by Khalid "
 "Alajaji"
 msgstr ""
+"Арабские названия звезд были собраны и добавлены в Stellarium Халидом "
+"Аладжаджи (Khalid Alajaji)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:38
@@ -2431,6 +2559,8 @@ msgid ""
 "The Arabic constellation lines and images prepared by Kutaibaa Akraa "
 "(kutaibaa@gmail.com)"
 msgstr ""
+"Линии арабских созвездий и их изображения подготовил Кутаибаа Акраа "
+"(Kutaibaa Akraa; kutaibaa@gmail.com)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:39
@@ -2531,7 +2661,7 @@ msgstr ""
 #. type: Content of: <h3>
 #: ../../skycultures/arabic_moon_stations/description.en.utf8:61
 msgid "Current Use of Moon Stations"
-msgstr ""
+msgstr "Текущее использование лунных стоянок"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_moon_stations/description.en.utf8:62
