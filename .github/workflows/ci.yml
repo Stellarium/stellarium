@@ -42,13 +42,7 @@ jobs:
 
     steps:
     - name: Install Dependencies
-      run: brew install qt gpsd cmake
-
-    - name: Set environment variables
-      shell: bash
-      run: |
-        export PATH="/usr/local/opt/qt/bin:$PATH"
-        export CPATH="/usr/local/include:$CPATH"
+      run: brew install qt gpsd
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -56,6 +50,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
+        export PATH="/usr/local/opt/qt/bin:$PATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
