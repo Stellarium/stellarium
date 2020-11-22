@@ -1,0 +1,70 @@
+#
+# Implementation of Continuous Integration process for linux and macOS by Github actions
+#
+name: "CI"
+
+on:
+  push:
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+
+jobs:
+  ci-linux:
+    name: "Linux"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Dependencies
+      run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j5
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  ci-macos:
+    name: "macOS"
+    runs-on: macos-latest
+
+    # @TODO Enable gpsd on macOS instance for CI testing
+    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
+    steps:
+    - name: Install Dependencies
+      run: brew install qt
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt/bin:$PATH"
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j5
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
