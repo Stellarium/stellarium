@@ -9,11 +9,11 @@ on:
 
 jobs:
   build:
-    name: "Coveralls CI"
+    name: "Build"
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install Dependencies
+    - name: Install dependencies
       run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
 
     - name: Checkout repository
@@ -39,7 +39,7 @@ jobs:
     # Remove unnecessery data from final report
     - name: Coverage data cleanup
       working-directory: build
-      run: lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
+      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
       uses: coverallsapp/github-action@master

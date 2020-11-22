@@ -49,7 +49,6 @@ matrix:
           notification_email: stellarium@googlegroups.com
       env:
         - TRANSLATE=true
-        - COVERAGE=true
 
     - os: linux
       arch: amd64
@@ -81,7 +80,6 @@ matrix:
           update: true
       env:
         - TRANSLATE=false
-        - COVERAGE=false
 
     - os: linux
       arch: arm64
@@ -113,7 +111,6 @@ matrix:
           update: true
       env:
         - TRANSLATE=false
-        - COVERAGE=false
 
     - os: linux
       arch: arm64
@@ -145,7 +142,6 @@ matrix:
           update: true
       env:
         - TRANSLATE=false
-        - COVERAGE=false
 
     # macOS 10.15.7 / Xcode 12.2 (12B5018i)
 #    - os: osx
@@ -159,14 +155,12 @@ matrix:
 #          update: true
 #      env:
 #        - TRANSLATE=false
-#        - COVERAGE=false
 
 #    - os: windows
 #      env:
 #        - MATRIX_EVAL="CC=cl.exe && CXX=cl.exe"
 #        - MSVCNAME="Visual Studio 15 2017 Win64"
 #        - TRANSLATE=false
-#        - COVERAGE=false
 
 before_install:
   # Mac OS X
@@ -186,11 +180,6 @@ before_install:
       cd;
       cd build/Stellarium/stellarium;
       dir;
-    fi
-  # ... + Coverage
-  - if [[ "$COVERAGE" == true ]]; then
-      pip install --user cpp-coveralls;
-      gem install coveralls-lcov;
     fi
 
 install:
@@ -213,20 +202,12 @@ script:
       cmake -DENABLE_TESTING=0 -G "$MSVCNAME" .. &&
       cmake --build . --target ALL_BUILD --config RelWithDebInfo --parallel ;
     fi
-  #- ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; then
-      make coverage;
-    fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
       pip install --user urllib3==1.23 transifex-client;
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
-    fi
-  - if [[ "$COVERAGE" == true ]]; then
-      lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info;
-      coveralls-lcov coverage.info;
     fi
 
 notifications:
