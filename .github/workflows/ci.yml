@@ -33,7 +33,6 @@ jobs:
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-#        run: make test
         run: ctest --output-on-failure
 
   ci-macos:
@@ -42,7 +41,7 @@ jobs:
 
     steps:
     - name: Install Dependencies
-      run: brew install qt gpsd
+      run: brew install qt #gpsd
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -64,5 +63,4 @@ jobs:
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-#        run: make test
         run: ctest --output-on-failure
