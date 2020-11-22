@@ -22,7 +22,7 @@ Please refer to the [User Guide, Getting Started section](https://github.com/Ste
 
 ## Get & build the code
 
-See instructionz to [building Stellarium from source code](BUILDING.md).
+See instructions to [building Stellarium from source code](BUILDING.md).
 
 ## Full References and Credits
 
