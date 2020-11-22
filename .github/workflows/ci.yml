@@ -18,16 +18,40 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-#    - name: Build & Test
-#      uses: ashutoshvarma/action-cmake-build@master
-#      with:
-#        build-dir: ${{ runner.workspace }}/build
-#        build-type: Debug
-#        configure-options: -DENABLE_TESTING=On
-#        run-test: true
-#        ctest-options: --output-on-failure
-#        install-build: false
-#        parallel: 10
+    - name: Configure CMake
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j5
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+#        run: make test
+        run: ctest --output-on-failure
+
+  ci-macos:
+    name: "macOS"
+    runs-on: macos-latest
+
+    steps:
+    - name: Install Dependencies
+      run: brew install -y qt gpsd cmake
+
+    - name: Set environment variables
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt/bin:$PATH"
+        export CPATH="/usr/local/include:$CPATH"
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Configure CMake
       shell: bash
@@ -44,5 +68,5 @@ jobs:
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-        run: make test
-#        ctest --output-on-failure;
+#        run: make test
+        run: ctest --output-on-failure
