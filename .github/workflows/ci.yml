@@ -18,14 +18,25 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Make building directory
-      run: mkdir ./build && cd ./build
+    - name: Build & Test
+      uses: ashutoshvarma/action-cmake-build@master
+      with:
+        build-dir: ${{ runner.workspace }}/build
+        build-type: Debug
+        configure-options: -DENABLE_TESTING=On
+        run-test: true
+        ctest-options: --output-on-failure
+        install-build: false
+        parallel: 10
 
-    - name: Configure the project
-      run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+#    - name: Preparation...
+#      run: mkdir ./build && cd ./build
 
-    - name: Build the project
-      run: make -j5
+#    - name: Configure the project
+#      run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
 
-    - name: Run unit tests
-      run: Xvfb :99 -ac -screen 0 1024x768x8 && sleep 3 && ctest --output-on-failure
+#    - name: Build the project
+#      run: make -j$(nproc + 1)
+
+#    - name: Run unit tests
+#      run: Xvfb :99 -ac -screen 0 1024x768x8 && sleep 3 && ctest --output-on-failure
