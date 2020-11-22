@@ -68,3 +68,13 @@ jobs:
       with:
         working-directory: build
         run: ctest --output-on-failure
+
+  ci-spellcheck:
+    name: "TypoCheck"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: TypoCheck
+      uses: typoci/spellcheck-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
