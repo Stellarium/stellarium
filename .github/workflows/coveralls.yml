@@ -34,10 +34,12 @@ jobs:
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-        run: make coverage
+        run: |
+          make coverage
+          lcov --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
-        working-directory: build
+        path-to-lcov: ${{ github.workspace }}/build/coverage.info
         github-token: ${{ secrets.GITHUB_TOKEN }}
