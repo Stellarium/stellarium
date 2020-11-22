@@ -1,3 +1,6 @@
+#
+# Implementation of Continuous Integration process for linux and macOS by Github actions
+#
 name: "CI"
 
 on:
@@ -41,7 +44,7 @@ jobs:
 
     steps:
     - name: Install Dependencies
-      run: brew install qt #gpsd
+      run: brew install qt gpsd
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -50,7 +53,8 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt/bin:$PATH"
-        export CPATH="/usr/local/include:$CPATH"
+        export CPATH="/usr/local/include:/opt/local/include:$CPATH"
+        export LIBRARY_PATH="/usr/local/lib:/opt/local/lib:$LIBRARY_PATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
