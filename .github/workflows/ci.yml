@@ -38,7 +38,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j$(nproc + 1)
+      run: make -j5
 
     - name: Run unit tests
       working-directory: build
