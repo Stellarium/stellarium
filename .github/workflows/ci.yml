@@ -18,11 +18,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Make building dircetory
-      run: mkdir ${{ github.workspace }}/build && cd ${{ github.workspace }}/build
+    - name: Make building directory
+      run: mkdir ./build && cd ./build
 
     - name: Configure the project
-      run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ..
+      run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Build the project
       run: make -j5
