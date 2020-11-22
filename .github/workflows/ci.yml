@@ -71,17 +71,6 @@ jobs:
         working-directory: build
         run: ctest --output-on-failure
 
-  # Typo CI
-  ci-spellcheck:
-    name: "TypoCheck"
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: TypoCheck
-      uses: typoci/spellcheck-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # Coveralls CI
   ci-coveralls:
     name: "Coveralls"
