@@ -42,7 +42,7 @@ jobs:
 
     steps:
     - name: Install Dependencies
-      run: brew install -y qt gpsd cmake
+      run: brew install qt gpsd cmake
 
     - name: Set environment variables
       shell: bash
