@@ -9,12 +9,12 @@ on:
 
 jobs:
   build:
-    name: "Build source code"
-    runs-on: ubuntu-latest
+    name: "Coveralls CI"
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Install Dependencies
-      run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
+      run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -30,17 +30,14 @@ jobs:
       working-directory: build
       run: make -j5
 
-    - name: Run unit tests
+    - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-        run: ctest --output-on-failure
-
-    - name: Make coverage
-      working-directory: build
-      run: make coverage
+        run: make coverage
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
+        working-directory: build
         github-token: ${{ secrets.GITHUB_TOKEN }}
