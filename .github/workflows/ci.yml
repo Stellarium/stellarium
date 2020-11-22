@@ -51,6 +51,7 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt/bin:$PATH"
+        export CPATH="/usr/local/include:$CPATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
