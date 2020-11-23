@@ -1,0 +1,23 @@
+#
+name: "Transifex"
+
+on:
+  push:
+    branches: [action/transifex]
+
+jobs:
+  ci-transifex:
+    name: "Check translations"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Transifex client
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+      run: pip install --user urllib3==1.23 transifex-client
+
+
