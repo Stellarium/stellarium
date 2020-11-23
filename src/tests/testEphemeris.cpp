@@ -1007,12 +1007,13 @@ void TestEphemeris::testMercuryHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(mercury.count() >= 3)
+	QVariantList mercuryVSOP = mercury;
+	while(mercuryVSOP.count() >= 3)
 	{
-		jd = mercury.takeFirst().toDouble();
-		x  = mercury.takeFirst().toDouble();
-		y  = mercury.takeFirst().toDouble();
-		z  = mercury.takeFirst().toDouble();
+		jd = mercuryVSOP.takeFirst().toDouble();
+		x  = mercuryVSOP.takeFirst().toDouble();
+		y  = mercuryVSOP.takeFirst().toDouble();
+		z  = mercuryVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1040,12 +1041,13 @@ void TestEphemeris::testVenusHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(venus.count() >= 3)
+	QVariantList venusVSOP = venus;
+	while(venusVSOP.count() >= 3)
 	{
-		jd = venus.takeFirst().toDouble();
-		x  = venus.takeFirst().toDouble();
-		y  = venus.takeFirst().toDouble();
-		z  = venus.takeFirst().toDouble();
+		jd = venusVSOP.takeFirst().toDouble();
+		x  = venusVSOP.takeFirst().toDouble();
+		y  = venusVSOP.takeFirst().toDouble();
+		z  = venusVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1073,12 +1075,13 @@ void TestEphemeris::testMarsHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(mars.count() >= 3)
+	QVariantList marsVSOP = mars;
+	while(marsVSOP.count() >= 3)
 	{
-		jd = mars.takeFirst().toDouble();
-		x  = mars.takeFirst().toDouble();
-		y  = mars.takeFirst().toDouble();
-		z  = mars.takeFirst().toDouble();
+		jd = marsVSOP.takeFirst().toDouble();
+		x  = marsVSOP.takeFirst().toDouble();
+		y  = marsVSOP.takeFirst().toDouble();
+		z  = marsVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1106,12 +1109,13 @@ void TestEphemeris::testJupiterHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(jupiter.count() >= 3)
+	QVariantList jupiterVSOP = jupiter;
+	while(jupiterVSOP.count() >= 3)
 	{
-		jd = jupiter.takeFirst().toDouble();
-		x  = jupiter.takeFirst().toDouble();
-		y  = jupiter.takeFirst().toDouble();
-		z  = jupiter.takeFirst().toDouble();
+		jd = jupiterVSOP.takeFirst().toDouble();
+		x  = jupiterVSOP.takeFirst().toDouble();
+		y  = jupiterVSOP.takeFirst().toDouble();
+		z  = jupiterVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1139,12 +1143,13 @@ void TestEphemeris::testSaturnHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(saturn.count() >= 3)
+	QVariantList saturnVSOP = saturn;
+	while(saturnVSOP.count() >= 3)
 	{
-		jd = saturn.takeFirst().toDouble();
-		x  = saturn.takeFirst().toDouble();
-		y  = saturn.takeFirst().toDouble();
-		z  = saturn.takeFirst().toDouble();
+		jd = saturnVSOP.takeFirst().toDouble();
+		x  = saturnVSOP.takeFirst().toDouble();
+		y  = saturnVSOP.takeFirst().toDouble();
+		z  = saturnVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1172,12 +1177,13 @@ void TestEphemeris::testUranusHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(uranus.count() >= 3)
+	QVariantList uranusVSOP = uranus;
+	while(uranusVSOP.count() >= 3)
 	{
-		jd = uranus.takeFirst().toDouble();
-		x  = uranus.takeFirst().toDouble();
-		y  = uranus.takeFirst().toDouble();
-		z  = uranus.takeFirst().toDouble();
+		jd = uranusVSOP.takeFirst().toDouble();
+		x  = uranusVSOP.takeFirst().toDouble();
+		y  = uranusVSOP.takeFirst().toDouble();
+		z  = uranusVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1205,12 +1211,13 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 	double jd, x, y, z;
 	double xyz[6];
 
-	while(neptune.count() >= 3)
+	QVariantList neptuneVSOP = neptune;
+	while(neptuneVSOP.count() >= 3)
 	{
-		jd = neptune.takeFirst().toDouble();
-		x  = neptune.takeFirst().toDouble();
-		y  = neptune.takeFirst().toDouble();
-		z  = neptune.takeFirst().toDouble();
+		jd = neptuneVSOP.takeFirst().toDouble();
+		x  = neptuneVSOP.takeFirst().toDouble();
+		y  = neptuneVSOP.takeFirst().toDouble();
+		z  = neptuneVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1242,12 +1249,13 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(mercury.count() >= 3)
+		QVariantList mercuryDEx = mercury;
+		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercury.takeFirst().toDouble();
-			x  = mercury.takeFirst().toDouble();
-			y  = mercury.takeFirst().toDouble();
-			z  = mercury.takeFirst().toDouble();
+			jd = mercuryDEx.takeFirst().toDouble();
+			x  = mercuryDEx.takeFirst().toDouble();
+			y  = mercuryDEx.takeFirst().toDouble();
+			z  = mercuryDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1280,12 +1288,13 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(venus.count() >= 3)
+		QVariantList venusDEx = venus;
+		while(venusDEx.count() >= 3)
 		{
-			jd = venus.takeFirst().toDouble();
-			x  = venus.takeFirst().toDouble();
-			y  = venus.takeFirst().toDouble();
-			z  = venus.takeFirst().toDouble();
+			jd = venusDEx.takeFirst().toDouble();
+			x  = venusDEx.takeFirst().toDouble();
+			y  = venusDEx.takeFirst().toDouble();
+			z  = venusDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1318,12 +1327,13 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(mars.count() >= 3)
+		QVariantList marsDEx = mars;
+		while(marsDEx.count() >= 3)
 		{
-			jd = mars.takeFirst().toDouble();
-			x  = mars.takeFirst().toDouble();
-			y  = mars.takeFirst().toDouble();
-			z  = mars.takeFirst().toDouble();
+			jd = marsDEx.takeFirst().toDouble();
+			x  = marsDEx.takeFirst().toDouble();
+			y  = marsDEx.takeFirst().toDouble();
+			z  = marsDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1356,12 +1366,13 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(jupiter.count() >= 3)
+		QVariantList jupiterDEx = jupiter;
+		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiter.takeFirst().toDouble();
-			x  = jupiter.takeFirst().toDouble();
-			y  = jupiter.takeFirst().toDouble();
-			z  = jupiter.takeFirst().toDouble();
+			jd = jupiterDEx.takeFirst().toDouble();
+			x  = jupiterDEx.takeFirst().toDouble();
+			y  = jupiterDEx.takeFirst().toDouble();
+			z  = jupiterDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1394,12 +1405,13 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(saturn.count() >= 3)
+		QVariantList saturnDEx = saturn;
+		while(saturnDEx.count() >= 3)
 		{
-			jd = saturn.takeFirst().toDouble();
-			x  = saturn.takeFirst().toDouble();
-			y  = saturn.takeFirst().toDouble();
-			z  = saturn.takeFirst().toDouble();
+			jd = saturnDEx.takeFirst().toDouble();
+			x  = saturnDEx.takeFirst().toDouble();
+			y  = saturnDEx.takeFirst().toDouble();
+			z  = saturnDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1432,12 +1444,13 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(uranus.count() >= 3)
+		QVariantList uranusDEx = uranus;
+		while(uranusDEx.count() >= 3)
 		{
-			jd = uranus.takeFirst().toDouble();
-			x  = uranus.takeFirst().toDouble();
-			y  = uranus.takeFirst().toDouble();
-			z  = uranus.takeFirst().toDouble();
+			jd = uranusDEx.takeFirst().toDouble();
+			x  = uranusDEx.takeFirst().toDouble();
+			y  = uranusDEx.takeFirst().toDouble();
+			z  = uranusDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1470,12 +1483,13 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe430()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(neptune.count() >= 3)
+		QVariantList neptuneDEx = neptune;
+		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptune.takeFirst().toDouble();
-			x  = neptune.takeFirst().toDouble();
-			y  = neptune.takeFirst().toDouble();
-			z  = neptune.takeFirst().toDouble();
+			jd = neptuneDEx.takeFirst().toDouble();
+			x  = neptuneDEx.takeFirst().toDouble();
+			y  = neptuneDEx.takeFirst().toDouble();
+			z  = neptuneDEx.takeFirst().toDouble();
 
 			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1508,12 +1522,13 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(mercury.count() >= 3)
+		QVariantList mercuryDEx = mercury;
+		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercury.takeFirst().toDouble();
-			x  = mercury.takeFirst().toDouble();
-			y  = mercury.takeFirst().toDouble();
-			z  = mercury.takeFirst().toDouble();
+			jd = mercuryDEx.takeFirst().toDouble();
+			x  = mercuryDEx.takeFirst().toDouble();
+			y  = mercuryDEx.takeFirst().toDouble();
+			z  = mercuryDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1546,12 +1561,13 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(venus.count() >= 3)
+		QVariantList venusDEx = venus;
+		while(venusDEx.count() >= 3)
 		{
-			jd = venus.takeFirst().toDouble();
-			x  = venus.takeFirst().toDouble();
-			y  = venus.takeFirst().toDouble();
-			z  = venus.takeFirst().toDouble();
+			jd = venusDEx.takeFirst().toDouble();
+			x  = venusDEx.takeFirst().toDouble();
+			y  = venusDEx.takeFirst().toDouble();
+			z  = venusDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1584,12 +1600,13 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(mars.count() >= 3)
+		QVariantList marsDEx = mars;
+		while(marsDEx.count() >= 3)
 		{
-			jd = mars.takeFirst().toDouble();
-			x  = mars.takeFirst().toDouble();
-			y  = mars.takeFirst().toDouble();
-			z  = mars.takeFirst().toDouble();
+			jd = marsDEx.takeFirst().toDouble();
+			x  = marsDEx.takeFirst().toDouble();
+			y  = marsDEx.takeFirst().toDouble();
+			z  = marsDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1622,12 +1639,13 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(jupiter.count() >= 3)
+		QVariantList jupiterDEx = jupiter;
+		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiter.takeFirst().toDouble();
-			x  = jupiter.takeFirst().toDouble();
-			y  = jupiter.takeFirst().toDouble();
-			z  = jupiter.takeFirst().toDouble();
+			jd = jupiterDEx.takeFirst().toDouble();
+			x  = jupiterDEx.takeFirst().toDouble();
+			y  = jupiterDEx.takeFirst().toDouble();
+			z  = jupiterDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1660,12 +1678,13 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(saturn.count() >= 3)
+		QVariantList saturnDEx = saturn;
+		while(saturnDEx.count() >= 3)
 		{
-			jd = saturn.takeFirst().toDouble();
-			x  = saturn.takeFirst().toDouble();
-			y  = saturn.takeFirst().toDouble();
-			z  = saturn.takeFirst().toDouble();
+			jd = saturnDEx.takeFirst().toDouble();
+			x  = saturnDEx.takeFirst().toDouble();
+			y  = saturnDEx.takeFirst().toDouble();
+			z  = saturnDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1698,12 +1717,13 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(uranus.count() >= 3)
+		QVariantList uranusDEx = uranus;
+		while(uranusDEx.count() >= 3)
 		{
-			jd = uranus.takeFirst().toDouble();
-			x  = uranus.takeFirst().toDouble();
-			y  = uranus.takeFirst().toDouble();
-			z  = uranus.takeFirst().toDouble();
+			jd = uranusDEx.takeFirst().toDouble();
+			x  = uranusDEx.takeFirst().toDouble();
+			y  = uranusDEx.takeFirst().toDouble();
+			z  = uranusDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
@@ -1736,12 +1756,13 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		double jd, x, y, z;
 		double xyz[6];
 
-		while(neptune.count() >= 3)
+		QVariantList neptuneDEx = neptune;
+		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptune.takeFirst().toDouble();
-			x  = neptune.takeFirst().toDouble();
-			y  = neptune.takeFirst().toDouble();
-			z  = neptune.takeFirst().toDouble();
+			jd = neptuneDEx.takeFirst().toDouble();
+			x  = neptuneDEx.takeFirst().toDouble();
+			y  = neptuneDEx.takeFirst().toDouble();
+			z  = neptuneDEx.takeFirst().toDouble();
 
 			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
