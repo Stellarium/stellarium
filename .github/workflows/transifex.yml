@@ -25,5 +25,6 @@ jobs:
     - name: Prepare and run Transifex client
       working-directory: ${{ github.workspace }}
       run: |
-        echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"$'\npassword = '"${{ secrets.TRANSIFEX_PASSWORD }}"$'\ntoken = '"${{ secrets.TRANSIFEX_API_TOKEN }}"$'\n' > ~/.transifexrc
+        echo "[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"'\npassword = '"${{ secrets.TRANSIFEX_PASSWORD }}"'\ntoken = '"${{ secrets.TRANSIFEX_API_TOKEN }}"'\n" > ~/.transifexrc
+        sleep 2
         ~/.local/bin/tx push -s
