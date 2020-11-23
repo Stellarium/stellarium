@@ -3,7 +3,8 @@ name: "Transifex"
 
 on:
   push:
-    branches: [action/transifex]
+    branches:
+    - master
     paths: 
     - '**.pot'
 
