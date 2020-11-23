@@ -4,7 +4,8 @@ name: "Transifex"
 on:
   push:
     branches: [action/transifex]
-    paths: [**.pot]
+    paths: 
+    - '**.pot'
 
 jobs:
   ci-transifex:
