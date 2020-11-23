@@ -14,35 +14,35 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-#    - name: Check changes in translations
-#      uses: tony84727/changed-file-filter@0.0.3       
-#      id: filter       
-#      with:
+    - name: Check changes in translations
+      uses: tony84727/changed-file-filter@0.0.3       
+      id: filter       
+      with:
          # head: optional head commit SHA, default to ${{ github.event.pull_request.head.sha || github.sha }}
          # base: optional base commit SHA, default to ${{ github.event.pull_request.base.sha }} or HEAD^ if not triggered by pull_request
          # filter rules in YAML format
          # <rule-name>:
          #  - <glob expression>
-#         filters: |
-#           pot:
-#            - '**/*.pot'
+         filters: |
+           pot:
+            - '**/*.pot'
 
     - name: Install Python 3
       uses: actions/setup-python@v2
       # get the variables by steps.<step id>.outputs.<rulename>
-#      if: steps.filter.outputs.pot == 'true'
+      if: steps.filter.outputs.pot == 'true'
       with:
         python-version: '3.x'
 
     - name: Install Transifex client
       # get the variables by steps.<step id>.outputs.<rulename>
-#      if: steps.filter.outputs.pot == 'true'
+      if: steps.filter.outputs.pot == 'true'
       run: pip install --user transifex-client
 
     - name: Prepare and run Transifex client
       working-directory: ${{ github.workspace }}
       # get the variables by steps.<step id>.outputs.<rulename>
-#      if: steps.filter.outputs.pot == 'true'
+      if: steps.filter.outputs.pot == 'true'
       run: |
         echo $'[https://www.transifex.com]\napi_hostname = https://api.transifex.com\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"$'\npassword = '"${{ secrets.TRANSIFEX_API_TOKEN }}"$'\n' > ~/.transifexrc
         ~/.local/bin/tx push -s
