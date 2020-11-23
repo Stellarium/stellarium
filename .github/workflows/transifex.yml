@@ -9,7 +9,7 @@ on:
 
 jobs:
   ci-transifex:
-    name: "Run"
+    name: "Export..."
     runs-on: ubuntu-latest
 
     steps:
