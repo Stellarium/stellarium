@@ -44,5 +44,5 @@ jobs:
       # get the variables by steps.<step id>.outputs.<rulename>
 #      if: steps.filter.outputs.pot == 'true'
       run: |
-        echo "[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = ${{ secrets.TRANSIFEX_USER }}\npassword = ${{ secrets.TRANSIFEX_PASSWORD }}\ntoken = ${{ secrets.TRANSIFEX_API_TOKEN }}\n" > ~/.transifexrc
+        echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"$'\npassword = '"${{ secrets.TRANSIFEX_PASSWORD }}"$'\ntoken = '"${{ secrets.TRANSIFEX_API_TOKEN }}"$'\n' > ~/.transifexrc
         ~/.local/bin/tx push -s
