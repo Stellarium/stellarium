@@ -20,6 +20,10 @@ jobs:
         python-version: '3.x'
 
     - name: Install Transifex client
-      run: pip install --user urllib3==1.23 transifex-client
+      run: pip install --user transifex-client
 
+    - name: Prepare and run Transifex client
+      run: |
+        sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
+        tx push -s;
 
