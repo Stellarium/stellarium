@@ -17,7 +17,7 @@ jobs:
     - name: Check changes in translations
       uses: tony84727/changed-file-filter@0.0.3       
       id: filter       
-        with:
+      with:
          # head: optional head commit SHA, default to ${{ github.event.pull_request.head.sha || github.sha }}
          # base: optional base commit SHA, default to ${{ github.event.pull_request.base.sha }} or HEAD^ if not triggered by pull_request
          # filter rules in YAML format
