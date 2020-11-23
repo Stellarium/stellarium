@@ -24,6 +24,6 @@ jobs:
 
     - name: Prepare and run Transifex client
       run: |
-        sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
-        tx push -s
+        echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"$'\npassword = '"${{ secrets.TRANSIFEX_PASSWORD }}"$'\ntoken = '"${{ secrets.TRANSIFEX_API_TOKEN }}"$'\n' > ~/.transifexrc
+        ~/.local/bin/tx push -s
 
