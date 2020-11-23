@@ -31,7 +31,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j5
+      run: make -j3
 
     - name: Run unit tests
       uses: GabrielBB/xvfb-action@v1
@@ -63,7 +63,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j5
+      run: make -j3
 
     - name: Run unit tests
       uses: GabrielBB/xvfb-action@v1
@@ -92,7 +92,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j5
+      run: make -j3
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
