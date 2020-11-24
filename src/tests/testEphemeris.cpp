@@ -1561,22 +1561,25 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe431()
 			y  = mercuryDEx.takeFirst().toDouble();
 			z  = mercuryDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1600,22 +1603,25 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe431()
 			y  = venusDEx.takeFirst().toDouble();
 			z  = venusDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1639,22 +1645,25 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe431()
 			y  = marsDEx.takeFirst().toDouble();
 			z  = marsDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1678,22 +1687,25 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe431()
 			y  = jupiterDEx.takeFirst().toDouble();
 			z  = jupiterDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1717,22 +1729,25 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe431()
 			y  = saturnDEx.takeFirst().toDouble();
 			z  = saturnDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1756,22 +1771,25 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe431()
 			y  = uranusDEx.takeFirst().toDouble();
 			z  = uranusDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1795,22 +1813,25 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 			y  = neptuneDEx.takeFirst().toDouble();
 			z  = neptuneDEx.takeFirst().toDouble();
 
-			GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
