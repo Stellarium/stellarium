@@ -44,7 +44,6 @@ AppDir:
       - usr/share/doc/*/README.*
       - usr/share/doc/*/changelog.*
       - usr/share/doc/*/NEWS.*
-      - usr/share/doc/*/TODO.*
   runtime:
     env:
       APPDIR_LIBRARY_PATH: $APPDIR/lib/arm-linux-gnueabihf:$APPDIR/usr/lib/arm-linux-gnueabihf:$APPDIR/usr/lib/arm-linux-gnueabihf/pulseaudio
