@@ -1,5 +1,5 @@
 The scripts in this folder may be useful for those who want to
-organize sustainable translation process of the landscape description translation.
+organize sustainable translation process of the 3D sceneries description translation.
 
 Prerequisites:
 
@@ -9,17 +9,17 @@ I extract.sh:
 
 Usage:
 
-1. Update po4a.config with the new landscape if needed.
+1. Update po4a.config with the new scenery if needed.
 2. Run from this folder
 
    sh extract.sh
 
-3. The landscapes POT file will be stored in
-   po/stellarium-landscapes-descriptions of the Stellarium code folder.
+3. The 3D sceneries POT file will be stored in
+   po/stellarium-scenery3d-descriptions of the Stellarium code folder.
 
 II translate.sh
 
-1. Put your translations into po/stellarium-landscapes-descriptions
+1. Put your translations into po/stellarium-scenery3d-descriptions
 2. Run from this folder
 
 sh translate.sh <your_locale>
@@ -31,7 +31,7 @@ Or run
 sh translate.sh
 
 if you need to translate the descriptions for all available locales.
-3. The translated descriptions will be created in the landscapes folder, ready
+3. The translated descriptions will be created in the scenery3d folder, ready
    for you to create a pull request.
 
   * Both of these files are free software. They come without any warranty, to
