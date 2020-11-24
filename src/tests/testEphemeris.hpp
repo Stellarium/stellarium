@@ -40,7 +40,6 @@ private slots:
 	void testNeptuneHeliocentricEphemerisVsop87();
 
 	// JPL DE430
-	/*
 	void testMercuryHeliocentricEphemerisDe430();
 	void testVenusHeliocentricEphemerisDe430();
 	void testMarsHeliocentricEphemerisDe430();
@@ -48,18 +47,15 @@ private slots:
 	void testSaturnHeliocentricEphemerisDe430();
 	void testUranusHeliocentricEphemerisDe430();
 	void testNeptuneHeliocentricEphemerisDe430();
-	*/
 
 	// JPL DE431
-	/*
-	void testMercuryHeliocentricEphemerisDe431();
+	void testMercuryHeliocentricEphemerisDe431();	
 	void testVenusHeliocentricEphemerisDe431();
 	void testMarsHeliocentricEphemerisDe431();
 	void testJupiterHeliocentricEphemerisDe431();
 	void testSaturnHeliocentricEphemerisDe431();
 	void testUranusHeliocentricEphemerisDe431();
 	void testNeptuneHeliocentricEphemerisDe431();
-	*/
 
 	void testL12Theory();
 

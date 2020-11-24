@@ -51,10 +51,16 @@ void TestEphemeris::initTestCase()
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);	
 
 	if (!de430FilePath.isEmpty())
+	{
 		qWarning() << "Use DE430 ephemeris file" << de430FilePath;
+		EphemWrapper::init_de430(de430FilePath.toLocal8Bit());
+	}
 
 	if (!de431FilePath.isEmpty())
+	{
 		qWarning() << "Use DE431 ephemeris file" << de431FilePath;
+		EphemWrapper::init_de431(de431FilePath.toLocal8Bit());
+	}
 
 	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi#results
 
@@ -1242,14 +1248,13 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 	}
 }
 
-/*
 void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 {
 	if (de430FilePath.isEmpty())
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 0; // Mercury
+		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1262,22 +1267,25 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 			y  = mercuryDEx.takeFirst().toDouble();
 			z  = mercuryDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1288,7 +1296,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 1; // Venus
+		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-05;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1301,22 +1309,25 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe430()
 			y  = venusDEx.takeFirst().toDouble();
 			z  = venusDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1327,7 +1338,7 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 3; // Mars
+		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1340,22 +1351,25 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe430()
 			y  = marsDEx.takeFirst().toDouble();
 			z  = marsDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1366,7 +1380,7 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 4; // Jupiter
+		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1379,22 +1393,25 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe430()
 			y  = jupiterDEx.takeFirst().toDouble();
 			z  = jupiterDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1405,7 +1422,7 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 5; // Saturn
+		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1418,22 +1435,25 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe430()
 			y  = saturnDEx.takeFirst().toDouble();
 			z  = saturnDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1444,7 +1464,7 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 6; // Uranus
+		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1457,22 +1477,25 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe430()
 			y  = uranusDEx.takeFirst().toDouble();
 			z  = uranusDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1483,7 +1506,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe430()
 		qWarning() << "Ephemeris JPL DE430 unit test has been marked as 'passed' (He cannot be passed, because DE430 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 7; // Neptune
+		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1496,22 +1519,25 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe430()
 			y  = neptuneDEx.takeFirst().toDouble();
 			z  = neptuneDEx.takeFirst().toDouble();
 
-			GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe430Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
-			double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
-			double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
-			double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
 
-			QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
-				 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
-				 .arg(QString::number(    jd, 'f', 2))
-				 .arg(QString::number(xyz[0], 'f', 10))
-				 .arg(QString::number(xyz[1], 'f', 10))
-				 .arg(QString::number(xyz[2], 'f', 10))
-				 .arg(QString::number(     x, 'f', 10))
-				 .arg(QString::number(     y, 'f', 10))
-				 .arg(QString::number(     z, 'f', 10))
-				 .toUtf8());
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
 		}
 	}
 }
@@ -1522,7 +1548,7 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 0; // Mercury
+		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1561,7 +1587,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 1; // Venus
+		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-05;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1600,7 +1626,7 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 3; // Mars
+		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1639,7 +1665,7 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 4; // Jupiter
+		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1678,7 +1704,7 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 5; // Saturn
+		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1717,7 +1743,7 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 6; // Uranus
+		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1756,7 +1782,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		qWarning() << "Ephemeris JPL DE431 unit test has been marked as 'passed' (He cannot be passed, because DE431 file ephemeris is not exists)!";
 	else
 	{
-		const int planet_id = 7; // Neptune
+		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
 		double xyz[6];
@@ -1788,7 +1814,6 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		}
 	}
 }
-*/
 
 void TestEphemeris::testL12Theory()
 {
