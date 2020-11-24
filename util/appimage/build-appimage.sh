@@ -27,6 +27,7 @@
 dir=$(pwd)
 result="${dir%"${dir##*[!/]}"}"
 result="${result##*/}"
+arch=$(uname -m)
 
 if [ $result = 'appimage' ]
 then
@@ -35,7 +36,7 @@ then
     if [ -z $ait ]
     then
 	# Install appimagetool AppImage
-	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
 	sudo chmod +x /usr/local/bin/appimagetool
     fi
 
@@ -68,7 +69,7 @@ then
 
     echo "\nLet's try build an AppImage for version ${version}\n"
 
-    appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage.yml --skip-test
+    appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
 else
     echo "Wrong directory! Please go to util/appimage directory and run again..."
 fi
