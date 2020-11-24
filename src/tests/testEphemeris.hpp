@@ -37,7 +37,7 @@ private slots:
 	void testJupiterHeliocentricEphemerisVsop87();
 	void testSaturnHeliocentricEphemerisVsop87();
 	void testUranusHeliocentricEphemerisVsop87();
-	void testNeptuneHeliocentricEphemerisVsop87();	
+	void testNeptuneHeliocentricEphemerisVsop87();
 
 	// JPL DE430
 	/*
@@ -60,6 +60,8 @@ private slots:
 	void testUranusHeliocentricEphemerisDe431();
 	void testNeptuneHeliocentricEphemerisDe431();
 	*/
+
+	void testL12Theory();
 
 private:
 	QString de430FilePath, de431FilePath;

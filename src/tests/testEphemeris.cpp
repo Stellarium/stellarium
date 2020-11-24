@@ -30,6 +30,10 @@
 #include "de430.hpp"
 #include "de431.hpp"
 
+#include "l12.h"
+
+#include <math.h>
+
 QTEST_GUILESS_MAIN(TestEphemeris)
 
 #define CENTRAL_BODY_ID 11  //ID of sun in JPL enumeration
@@ -1785,3 +1789,169 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 	}
 }
 */
+
+void TestEphemeris::testL12Theory()
+{
+	double pos[3], vel[3];
+	double acceptableError = 1E-2;
+	double JD, t1, t2, t3, ae1, ae2, ae3;
+
+	// test data: ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1/L1.2/TestL1.2.res
+	// Should we use differences on elements as source of acceptable errors?
+
+	// satellite 1
+	QVariantList sat1TestData;
+	// positions in AU:
+	sat1TestData << 2426855.000 <<   0.2271527767E-02 <<   0.1491984142E-02 <<   0.7501112163E-03;
+	sat1TestData << 2431793.000 <<  -0.6886222733E-03 <<   0.2480736131E-02 <<   0.1173372992E-02;
+	sat1TestData << 2436731.000 <<  -0.2785015103E-02 <<   0.3458814894E-03 <<   0.1216517377E-03;
+	sat1TestData << 2441669.000 <<  -0.1335285599E-02 <<  -0.2234056443E-02 <<  -0.1084018241E-02;
+	sat1TestData << 2446607.000 <<   0.1799461321E-02 <<  -0.1982382810E-02 <<  -0.9148159847E-03;
+	sat1TestData << 2451545.000 <<   0.2671998720E-02 <<   0.7644016540E-03 <<   0.4087343813E-03;
+	sat1TestData << 2456483.000 <<   0.1406341162E-03 <<   0.2540389886E-02 <<   0.1215521140E-02;
+	sat1TestData << 2461421.000 <<  -0.2561900148E-02 <<   0.1099271609E-02 <<   0.4839890563E-03;
+	sat1TestData << 2466359.000 <<  -0.2042814470E-02 <<  -0.1728323019E-02 <<  -0.8552022274E-03;
+	sat1TestData << 2471297.000 <<   0.1080489388E-02 <<  -0.2358409938E-02 <<  -0.1105240761E-02;
+	sat1TestData << 2476235.000 <<   0.2828846240E-02 <<  -0.4757698706E-05 <<   0.4397441080E-04;
+
+	while (sat1TestData.count() >= 4)
+	{
+		JD = sat1TestData.takeFirst().toDouble();
+		// position
+		t1  = sat1TestData.takeFirst().toDouble();
+		t2  = sat1TestData.takeFirst().toDouble();
+		t3  = sat1TestData.takeFirst().toDouble();
+
+		GetL12Coor(JD, 0, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Sat 1; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+
+	// satellite 2
+	QVariantList sat2TestData;
+	// positions in AU:
+	sat2TestData << 2426855.000 <<  0.4446764182E-02 << -0.7426573305E-03 <<  -0.2415755074E-03;
+	sat2TestData << 2431793.000 << -0.4496513177E-02 << -0.6633333248E-05 <<  -0.3660517967E-04;
+	sat2TestData << 2436731.000 <<  0.4408177665E-02 <<  0.4698550955E-03 <<    0.3281746178E-03;
+	sat2TestData << 2441669.000 << -0.4354707945E-02 << -0.1060105876E-02 <<  -0.5414009224E-03;
+	sat2TestData << 2446607.000 <<  0.4059620485E-02 <<   0.1710337078E-02 <<   0.9044101330E-03;
+	sat2TestData << 2451545.000 << -0.3751376363E-02 <<  -0.2136181405E-02 <<  -0.1056765926E-02;
+	sat2TestData << 2456483.000 <<  0.3438637708E-02 <<   0.2613676534E-02 <<    0.1313674687E-02;
+	sat2TestData << 2461421.000 << -0.2855282455E-02 <<  -0.3120456385E-02 <<  -0.1527349889E-02;
+	sat2TestData << 2466359.000 <<  0.2370930670E-02 <<   0.3377684150E-02 <<    0.1648131207E-02;
+	sat2TestData << 2471297.000 << -0.1871502788E-02 <<  -0.3694401783E-02 <<  -0.1800444526E-02;
+	sat2TestData << 2476235.000 <<  0.1109735691E-02 <<   0.3931669823E-02 <<    0.1875585648E-02;
+
+	while (sat2TestData.count() >= 4)
+	{
+		JD = sat2TestData.takeFirst().toDouble();
+		// position
+		t1  = sat2TestData.takeFirst().toDouble();
+		t2  = sat2TestData.takeFirst().toDouble();
+		t3  = sat2TestData.takeFirst().toDouble();
+
+		GetL12Coor(JD, 1, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Sat 2; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+
+	// satellite 3
+	QVariantList sat3TestData;
+	// positions in AU:
+	sat3TestData << 2426855.000 <<  -0.3776654636E-02 <<  -0.5473158070E-02 <<  -0.2659709046E-02;
+	sat3TestData << 2431793.000 <<   0.4272357221E-02 <<  -0.5219062766E-02 <<  -0.2395570278E-02;
+	sat3TestData << 2436731.000 <<   0.6918149398E-02 <<   0.1635662157E-02 <<   0.8680892225E-03;
+	sat3TestData << 2441669.000 <<   0.8471345317E-03 <<   0.6419261228E-02 <<   0.3051764921E-02;
+	sat3TestData << 2446607.000 <<  -0.6293575391E-02 <<   0.3098587614E-02 <<   0.1399091537E-02;
+	sat3TestData << 2451545.000 <<  -0.5490036250E-02 <<  -0.4112229248E-02 <<  -0.2033821278E-02;
+	sat3TestData << 2456483.000 <<   0.2236146010E-02 <<  -0.6130343184E-02 <<  -0.2903801706E-02;
+	sat3TestData << 2461421.000 <<   0.7125480536E-02 <<  -0.4013803568E-03 <<  -0.7795768824E-04;
+	sat3TestData << 2466359.000 <<   0.2991525641E-02 <<   0.5840149267E-02 <<   0.2845972149E-02;
+	sat3TestData << 2471297.000 <<  -0.4937423317E-02 <<   0.4712096165E-02 <<   0.2149646841E-02;
+	sat3TestData << 2476235.000 <<  -0.6642067401E-02 <<  -0.2374459282E-02 <<  -0.1250108202E-02;
+
+	while (sat3TestData.count() >= 4)
+	{
+		JD = sat3TestData.takeFirst().toDouble();
+		// position
+		t1  = sat3TestData.takeFirst().toDouble();
+		t2  = sat3TestData.takeFirst().toDouble();
+		t3  = sat3TestData.takeFirst().toDouble();
+
+		GetL12Coor(JD, 2, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Sat 3; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+
+	// satellite 4
+	QVariantList sat4TestData;
+	// positions in AU:
+	sat4TestData << 2426855.000 <<    0.4101924152E-02 <<   -0.1067516239E-01 <<   -0.5034929933E-02;
+	sat4TestData << 2431793.000 <<   -0.4986019528E-02 <<   -0.1037856813E-01 <<   -0.4994643406E-02;
+	sat4TestData << 2436731.000 <<   -0.1148138504E-01 <<   -0.4696092895E-02 <<   -0.2376111456E-02;
+	sat4TestData << 2441669.000 <<   -0.1213643407E-01 <<    0.3374929866E-02 <<    0.1437454080E-02;
+	sat4TestData << 2446607.000 <<   -0.6677623740E-02 <<    0.9751992150E-02 <<    0.4527540014E-02;
+	sat4TestData << 2451545.000 <<    0.2172082907E-02 <<    0.1118792302E-01 <<    0.5322275059E-02;
+	sat4TestData << 2456483.000 <<    0.9907908026E-02 <<    0.6850097528E-02 <<    0.3379920526E-02;
+	sat4TestData << 2461421.000 <<    0.1244810129E-01 <<   -0.1078968567E-02 <<   -0.3238350391E-03;
+	sat4TestData << 2466359.000 <<    0.8447454966E-02 <<   -0.8442957477E-02 <<   -0.3849802700E-02;
+	sat4TestData << 2471297.000 <<    0.7301099508E-04 <<   -0.1142729979E-01 <<   -0.5370459356E-02;
+	sat4TestData << 2476235.000 <<   -0.8338443776E-02 <<   -0.8592422281E-02 <<   -0.4158666703E-02;
+
+	while (sat4TestData.count() >= 4)
+	{
+		JD = sat4TestData.takeFirst().toDouble();
+		// position
+		t1  = sat4TestData.takeFirst().toDouble();
+		t2  = sat4TestData.takeFirst().toDouble();
+		t3  = sat4TestData.takeFirst().toDouble();
+
+		GetL12Coor(JD, 3, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Sat 4; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+}
