@@ -29,8 +29,8 @@
 #include "vsop87.h"
 #include "de430.hpp"
 #include "de431.hpp"
-
 #include "l12.h"
+#include "marssat.h"
 
 #include <math.h>
 
@@ -1839,7 +1839,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 void TestEphemeris::testL12Theory()
 {
 	double pos[3], vel[3];
-	double acceptableError = 1E-2;
+	double acceptableError = 1E-2; // need re-check
 	double JD, t1, t2, t3, ae1, ae2, ae3;
 
 	// test data: ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1/L1.2/TestL1.2.res
@@ -1991,6 +1991,83 @@ void TestEphemeris::testL12Theory()
 		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Sat 4; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+}
+
+void TestEphemeris::testMarsSatTheory()
+{
+	double pos[3], vel[3];
+	double acceptableError = 1E-4; // need re-check
+	double JD, t1, t2, t3, ae1, ae2, ae3;
+
+	// test data: ftp://ftp.imcce.fr/pub/ephem/satel/martian/README.txt
+
+	// Phobos
+	QVariantList phobosTestData;
+	phobosTestData << 2451545.00 <<  -0.000013308157 << -0.000058444725 << -0.000021266023;
+	phobosTestData << 2451555.00 <<   0.000050907508 <<  0.000033574979 << -0.000011296402;
+	phobosTestData << 2451565.00 <<  -0.000051052809 <<  0.000012426617 <<  0.000033811410;
+	phobosTestData << 2451575.00 <<   0.000011455883 << -0.000053566072 << -0.000032215644;
+	phobosTestData << 2451585.00 <<   0.000035899752 <<  0.000050192828 <<  0.000004641808;
+	phobosTestData << 2451595.00 <<  -0.000056181406 << -0.000012965245 <<  0.000024600096;
+	phobosTestData << 2451605.00 <<   0.000033910062 << -0.000038516526 << -0.000037325256;
+
+	while (phobosTestData.count() >= 4)
+	{
+		JD = phobosTestData.takeFirst().toDouble();
+		// position
+		t1  = phobosTestData.takeFirst().toDouble();
+		t2  = phobosTestData.takeFirst().toDouble();
+		t3  = phobosTestData.takeFirst().toDouble();
+
+		GetMarsSatCoor(JD, 0, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Phobos; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0], 'f', 10))
+			 .arg(QString::number(pos[1], 'f', 10))
+			 .arg(QString::number(pos[2], 'f', 10))
+			 .arg(QString::number(        t1, 'f', 10))
+			 .arg(QString::number(        t2, 'f', 10))
+			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+
+	// Deimos
+	QVariantList deimosTestData;
+	deimosTestData << 2451545.00 <<   0.000069313218 << -0.000105248430 << -0.000093221981;
+	deimosTestData << 2451555.00 <<   0.000003554238 << -0.000139120094 << -0.000072183842;
+	deimosTestData << 2451565.00 <<  -0.000063012999 << -0.000139517199 << -0.000033799655;
+	deimosTestData << 2451575.00 <<  -0.000114484040 << -0.000106353638 <<  0.000012773591;
+	deimosTestData << 2451585.00 <<  -0.000138399541 << -0.000047650734 <<  0.000056274718;
+	deimosTestData << 2451595.00 <<  -0.000129040645 <<  0.000022457606 <<  0.000086250692;
+	deimosTestData << 2451605.00 <<  -0.000088636495 <<  0.000087252940 <<  0.000095540292;
+
+	while (deimosTestData.count() >= 4)
+	{
+		JD = deimosTestData.takeFirst().toDouble();
+		// position
+		t1  = deimosTestData.takeFirst().toDouble();
+		t2  = deimosTestData.takeFirst().toDouble();
+		t3  = deimosTestData.takeFirst().toDouble();
+
+		GetMarsSatCoor(JD, 1, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("Deimos; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
 			 .arg(QString::number(pos[0], 'f', 10))
 			 .arg(QString::number(pos[1], 'f', 10))

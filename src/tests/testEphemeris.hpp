@@ -58,6 +58,7 @@ private slots:
 	void testNeptuneHeliocentricEphemerisDe431();
 
 	void testL12Theory();
+	void testMarsSatTheory();
 
 private:
 	QString de430FilePath, de431FilePath;
