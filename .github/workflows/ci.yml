@@ -16,8 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install Dependencies
-      run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+    - name: Update installed packages
+      run: sudo apt update && sudo apt upgrade -y
+
+    - name: Install dependencies
+      run: sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -47,7 +50,7 @@ jobs:
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
     steps:
-    - name: Install Dependencies
+    - name: Install dependencies
       run: brew install qt
 
     - name: Checkout repository
@@ -77,8 +80,11 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+    - name: Update installed packages
+      run: sudo apt update && sudo apt upgrade -y
+
     - name: Install dependencies
-      run: sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
+      run: sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -93,6 +99,13 @@ jobs:
     - name: Compile
       working-directory: build
       run: make -j3
+
+    - name: Downloads JPL DE430 ephemeris
+      uses: carlosperate/download-file-action@v1.0.3
+      with:
+        file-url: 'http://dss.stellarium.org/de/de430/linux_p1550p2650.430'
+        file-name: 'linux_p1550p2650.430'
+        location: '~/.stellarium/ephem'
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
