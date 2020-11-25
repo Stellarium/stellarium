@@ -100,12 +100,12 @@ jobs:
       working-directory: build
       run: make -j3
 
-    - name: Downloads JPL DE430 ephemeris
-      uses: carlosperate/download-file-action@v1.0.3
-      with:
-        file-url: 'http://dss.stellarium.org/de/de430/linux_p1550p2650.430'
-        file-name: 'linux_p1550p2650.430'
-        location: '~/.stellarium/ephem'
+#    - name: Downloads JPL DE430 ephemeris
+#      uses: carlosperate/download-file-action@v1.0.3
+#      with:
+#        file-url: 'http://dss.stellarium.org/de/de430/linux_p1550p2650.430'
+#        file-name: 'linux_p1550p2650.430'
+#        location: '~/.stellarium/ephem'
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
