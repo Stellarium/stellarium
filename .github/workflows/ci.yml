@@ -92,7 +92,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        mkdir -p ../.stellarium/ephem
+        mkdir -p ../../../.stellarium/ephem
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
@@ -106,7 +106,7 @@ jobs:
       with:
         file-url: 'http://dss.stellarium.org/de/de430/linux_p1550p2650.430'
         file-name: 'linux_p1550p2650.430'
-        location: '../.stellarium/ephem'
+        location: '../../../.stellarium/ephem'
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
