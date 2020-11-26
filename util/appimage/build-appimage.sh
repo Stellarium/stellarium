@@ -43,6 +43,8 @@ then
         AITool="/usr/local/bin/appimagetool"
         sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O ${AITool}
         sudo chmod +x ${AITool}
+        # check file
+        file ${AITool}
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
