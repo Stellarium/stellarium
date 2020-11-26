@@ -67,6 +67,7 @@ then
     fi
     # probably git fetched source code without history and tags
     if [ -z $version ]
+    then
         version="edge"
     fi
     export APP_VERSION=${version}
