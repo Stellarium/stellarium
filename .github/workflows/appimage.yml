@@ -40,10 +40,16 @@ jobs:
         name: 'Stellarium-edge-x86_64'
         path: ${{ github.workspace }}/artifact/*.AppImage
 
-  # AppImage aarch64
-  appimage-arm64:
-    name: "aarch64"
+  # AppImage ARM
+  appimage-arm:
+    name: "${{ matrix.arch }}"
     runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+          - arch: armv7
 
     steps:
     - name: Checkout repository
@@ -53,7 +59,7 @@ jobs:
       uses: uraimo/run-on-arch-action@v2.0.5
       id: appimage
       with:
-        arch: aarch64
+        arch: ${{ matrix.arch }}
         distro: ubuntu18.04
 
         # Not required, but speeds up builds by storing container images in
@@ -96,5 +102,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: success()
       with:
-        name: 'Stellarium-edge-aarch64'
+        name: 'Stellarium-edge-${{ matrix.arch }}'
         path: ${{ github.workspace }}/artifact/*.AppImage
