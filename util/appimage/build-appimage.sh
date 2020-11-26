@@ -44,7 +44,7 @@ then
     if [ -z "$builder" ]
     then
 	# Installing dependencies
-	sudo apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+	sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
 	# Installing latest tagged release
 	sudo pip3 install appimage-builder
     fi
@@ -59,7 +59,7 @@ then
     rtag=$(git describe --tags | sed 's/v//i')
     revision=$(git log -1 --pretty=format:%h)
 
-    if [[ $rtag = "fatal*" ]]
+    if [ $rtag = "fatal*" ]
     then
 	version="edge"
     else
