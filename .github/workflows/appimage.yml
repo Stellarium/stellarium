@@ -57,7 +57,7 @@ jobs:
       id: appimage
       with:
         arch: aarch64
-        distro: ubuntu-18.04
+        distro: ubuntu18.04
         githubToken: ${{ github.GITHUB_TOKEN }}
         # Create an artifacts directory
         setup: |
