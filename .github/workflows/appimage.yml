@@ -22,20 +22,15 @@ jobs:
         # Installing dependencies
         sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake wget
 
-    - name: "Install Python 3"
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
     - name: Install dependencies for appimagetool
       run: |
         # Install appimagetool AppImage
         sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
         sudo chmod +x /usr/local/bin/appimagetool
         # Installing dependencies
-        sudo apt install -y patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+        sudo apt install -y python3-pip python3-setuptools desktop-file-utils
         # Installing latest tagged release
-        sudo pip install appimage-builder
+        sudo pip3 install appimage-builder
 
     - name: Checkout repository
       uses: actions/checkout@v2
