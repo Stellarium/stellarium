@@ -92,7 +92,7 @@ jobs:
           mkdir -p ${{ github.workspace }}/build
           cd ${{ github.workspace }}/build
           cmake -DCMAKE_BUILD_TYPE=Release ..
-          make
+          make -j3
           #mkdir -p ${{ github.workspace }}/artifact
           #chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
           #cd ${{ github.workspace }}/util/appimage        
