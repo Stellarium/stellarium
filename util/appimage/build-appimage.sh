@@ -59,18 +59,18 @@ then
     rtag=$(git describe --tags | sed 's/v//i')
     revision=$(git log -1 --pretty=format:%h)
 
-    if [ "$rtag" = "${$rtag#fatal}" ]
+    if [[ $rtag = "fatal*" ]]
     then
-	if [ "$rtag" = "$dtag" ]
+	version="edge"
+    else
+	if [ $rtag = $dtag ]
 	then
-	    version="${dtag}"
+	    version=${dtag}
 	else
 	    version="${dtag}-${revision}"
 	fi
-    else
-        version="edge"
     fi
-    export APP_VERSION="${version}"
+    export APP_VERSION=${version}
 
     echo "\nLet's try build an AppImage for version '${version}'\n"
 
