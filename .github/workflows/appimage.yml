@@ -14,11 +14,28 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install dependencies
+    - name: Install dependencies for Stellarium
       run: |
+        # Update installed packages
         sudo apt update
         sudo apt upgrade -y
-        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        # Installing dependencies
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake wget
+
+    - name: "Install Python 3"
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies for appimagetool
+      run: |
+        # Install appimagetool AppImage
+	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+	sudo chmod +x /usr/local/bin/appimagetool
+        # Installing dependencies
+        sudo apt install -y patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+	# Installing latest tagged release
+	sudo pip install appimage-builder
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -27,8 +44,8 @@ jobs:
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
-        mkdir -p build/appimage
-        cd build/appimage
+        mkdir -p ${{ github.workspace }}/build/appimage
+        cd ${{ github.workspace }}/build/appimage
         dtag=$(git describe --abbrev=0 | sed 's/v//i')
         rtag=$(git describe --tags | sed 's/v//i')
         revision=$(git log -1 --pretty=format:%h)
@@ -41,6 +58,6 @@ jobs:
         export APP_VERSION=${version}
 
     - name: Build AppImage
-      uses: AppImageCrafters/build-appimage-action@master
-      with:   
-        recipe: '${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml'
+      working-directory: ${{ github.workspace }}/build/appimage
+      shell: bash
+      run: /usr/local/bin/appimagetool --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
