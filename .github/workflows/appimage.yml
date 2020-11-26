@@ -22,37 +22,13 @@ jobs:
         # Installing dependencies
         sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake sed
 
-    - name: Install dependencies for appimagetool
-      run: |
-        # Install appimagetool AppImage
-        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
-        sudo chmod +x /usr/local/bin/appimagetool
-        # Installing dependencies
-        sudo apt install -y python3-pip python3-setuptools desktop-file-utils
-        # Installing latest tagged release
-        sudo pip3 install appimage-builder
-
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Preparation
+    - name: Build AppImage
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
-        mkdir -p ${{ github.workspace }}/build/appimage
-        cd ${{ github.workspace }}/build/appimage
-        dtag=$(git describe --abbrev=0 | sed 's/v//i')
-        rtag=$(git describe --tags | sed 's/v//i')
-        revision=$(git log -1 --pretty=format:%h)
-        if [ $rtag = $dtag ]
-        then
-          version=${dtag}
-        else
-          version="${dtag}-${revision}"
-        fi
-        export APP_VERSION=${version}
-
-    - name: Build AppImage
-      working-directory: ${{ github.workspace }}/build/appimage
-      shell: bash
-      run: /usr/local/bin/appimagetool --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
+        sudo chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
+        cd ${{ github.workspace }}/util/appimage        
+        ./build-appimage.sh
