@@ -71,7 +71,6 @@ then
         version="edge"
     fi
     export APP_VERSION="${version}"
-    export AppImageName="Stellarium-${version}-${arch}.AppImage"
 
     echo "\nLet's try build an AppImage for version '${version}'\n"
 
