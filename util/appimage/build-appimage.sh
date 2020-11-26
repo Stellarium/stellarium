@@ -36,8 +36,15 @@ then
     if [ -z "$ait" ]
     then
         # Install appimagetool AppImage
-        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
-        sudo chmod +x /usr/local/bin/appimagetool
+        if [ $arch = "aarch64" ]
+        then
+            AITool="./appimagetool"
+        else
+            AITool="/usr/local/bin/appimagetool"
+        fi
+        
+        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O ${AITool}
+        sudo chmod +x ${AITool}
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
