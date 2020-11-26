@@ -35,18 +35,18 @@ then
     ait=$(whereis appimagetool | sed 's/appimagetool://i')
     if [ -z "$ait" ]
     then
-	# Install appimagetool AppImage
-	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
-	sudo chmod +x /usr/local/bin/appimagetool
+        # Install appimagetool AppImage
+        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
+        sudo chmod +x /usr/local/bin/appimagetool
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
     if [ -z "$builder" ]
     then
-	# Installing dependencies
-	sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
-	# Installing latest tagged release
-	sudo pip3 install appimage-builder
+        # Installing dependencies
+        sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+        # Installing latest tagged release
+        sudo pip3 install appimage-builder
     fi
 
     # Stage 2: Build an AppImage package
@@ -59,16 +59,15 @@ then
     rtag=$(git describe --tags | sed 's/v//i')
     revision=$(git log -1 --pretty=format:%h)
 
-    if [ $rtag = "fatal*" ]
+    if [ $rtag = $dtag ]
     then
-	version="edge"
+        version=${dtag}
     else
-	if [ $rtag = $dtag ]
-	then
-	    version=${dtag}
-	else
-	    version="${dtag}-${revision}"
-	fi
+        version="${dtag}-${revision}"
+    fi
+    # probably git fetched source code without history and tags
+    if [ -z $version ]
+        version="edge"
     fi
     export APP_VERSION=${version}
 
