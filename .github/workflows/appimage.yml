@@ -1,5 +1,5 @@
 #
-#
+# Build and upload AppImage packages
 #
 name: "AppImage"
 
@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install dependencies for Stellarium
+    - name: Install dependencies
+      shell: bash
       run: |
         # Update installed packages
         sudo apt update
@@ -32,3 +33,9 @@ jobs:
         sudo chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
         cd ${{ github.workspace }}/util/appimage        
         ./build-appimage.sh
+
+    - name: Upload AppImage
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+        path: ${{ github.workspace }}/build/appimage/Stellarium-*.AppImage
