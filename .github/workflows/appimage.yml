@@ -1,0 +1,46 @@
+#
+#
+#
+name: "AppImage"
+
+on:
+  push:
+    branches: [action/appimage]
+
+jobs:
+  # AppImage x86_64
+  appimage-amd64:
+    name: "x86_64"
+    runs-on: ubuntu-18.4
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Preparation
+      working-directory: ${{ github.workspace }}
+      shell: bash
+      run: |
+        mkdir -p build/appimage
+        cd build/appimage
+        dtag=$(git describe --abbrev=0 | sed 's/v//i')
+        rtag=$(git describe --tags | sed 's/v//i')
+        revision=$(git log -1 --pretty=format:%h)
+        if [ $rtag = $dtag ]
+        then
+          version=${dtag}
+        else
+          version="${dtag}-${revision}"
+        fi
+        export APP_VERSION=${version}
+
+    - name: Build AppImage
+      uses: AppImageCrafters/build-appimage-action@master
+      with:   
+        recipe: '${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml'
