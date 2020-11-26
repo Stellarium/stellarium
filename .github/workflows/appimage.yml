@@ -30,12 +30,12 @@ jobs:
     - name: Install dependencies for appimagetool
       run: |
         # Install appimagetool AppImage
-	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
-	sudo chmod +x /usr/local/bin/appimagetool
+        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+        sudo chmod +x /usr/local/bin/appimagetool
         # Installing dependencies
         sudo apt install -y patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
-	# Installing latest tagged release
-	sudo pip install appimage-builder
+        # Installing latest tagged release
+        sudo pip install appimage-builder
 
     - name: Checkout repository
       uses: actions/checkout@v2
