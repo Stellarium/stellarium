@@ -59,16 +59,21 @@ then
     rtag=$(git describe --tags | sed 's/v//i')
     revision=$(git log -1 --pretty=format:%h)
 
-    if [ "$rtag" = "$dtag" ]
+    if [ "$rtag" = "${$rtag#fatal}" ]
     then
-	version="${dtag}"
+	if [ "$rtag" = "$dtag" ]
+	then
+	    version="${dtag}"
+	else
+	    version="${dtag}-${revision}"
+	fi
     else
-	version="${dtag}-${revision}"
+        version="edge"
     fi
     export APP_VERSION="${version}"
     export AppImageName="Stellarium-${version}-${arch}.AppImage"
 
-    echo "\nLet's try build an AppImage for version ${version}\n"
+    echo "\nLet's try build an AppImage for version '${version}'\n"
 
     appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
 else
