@@ -59,7 +59,7 @@ then
     rtag=$(git describe --tags | sed 's/v//i')
     revision=$(git log -1 --pretty=format:%h)
 
-    if [ $rtag = $dtag ]
+    if [ "$rtag" = "$dtag" ]
     then
 	version=${dtag}
     else

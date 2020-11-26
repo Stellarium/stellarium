@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v2
       if: success()
       with:
-        path: ${{ github.workspace }}/build/appimage/Stellarium-*.AppImage
+        path: ${{ github.workspace }}/builds/appimage/Stellarium-*.AppImage
