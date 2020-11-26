@@ -89,11 +89,15 @@ jobs:
 
         # Produce a binary artifact and place it in the mounted volume
         run: |
-          mkdir -p ${{ github.workspace }}/artifact
-          chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
-          cd ${{ github.workspace }}/util/appimage        
-          ./build-appimage.sh
-          cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
+          mkdir -p ${{ github.workspace }}/build
+          cd ${{ github.workspace }}/build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          make
+          #mkdir -p ${{ github.workspace }}/artifact
+          #chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
+          #cd ${{ github.workspace }}/util/appimage        
+          #./build-appimage.sh
+          #cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
 
     - name: Upload AppImage
       uses: actions/upload-artifact@v2
