@@ -29,6 +29,10 @@ result="${dir%"${dir##*[!/]}"}"
 result="${result##*/}"
 arch=$(uname -m)
 
+if [ $arch = "armv7l" ]; then
+    arch="armhf"
+fi
+
 if [ "$result" = 'appimage' ]
 then
     # Stage 1: Check required packages
