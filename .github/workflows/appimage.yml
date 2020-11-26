@@ -88,6 +88,7 @@ jobs:
         run: |
           mkdir -p ${{ github.workspace }}/artifact
           chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
+          export PATH="/usr/local/bin:$PATH"
           cd ${{ github.workspace }}/util/appimage
           ./build-appimage.sh
           cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
