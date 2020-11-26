@@ -29,11 +29,11 @@ result="${dir%"${dir##*[!/]}"}"
 result="${result##*/}"
 arch=$(uname -m)
 
-if [ $result = 'appimage' ]
+if [ "$result" = 'appimage' ]
 then
     # Stage 1: Check required packages
     ait=$(whereis appimagetool | sed 's/appimagetool://i')
-    if [ -z $ait ]
+    if [ -z "$ait" ]
     then
 	# Install appimagetool AppImage
 	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
@@ -41,7 +41,7 @@ then
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
-    if [ -z $builder ]
+    if [ -z "$builder" ]
     then
 	# Installing dependencies
 	sudo apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
@@ -61,11 +61,12 @@ then
 
     if [ "$rtag" = "$dtag" ]
     then
-	version=${dtag}
+	version="${dtag}"
     else
 	version="${dtag}-${revision}"
     fi
-    export APP_VERSION=${version}
+    export APP_VERSION="${version}"
+    export AppImageName="Stellarium-${version}-${arch}.AppImage"
 
     echo "\nLet's try build an AppImage for version ${version}\n"
 
