@@ -41,23 +41,19 @@ then
     then
         baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
         AppImage_Tool="/usr/local/bin/appimagetool"
+        AppImage_Tool_Opt="/opt/appimagetool"
         # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
-        sudo wget ${baseURL} -O /opt/appimagetool
-        UNPK=appimagetool
-        mkdir -p /tmp/$UNPK
-        sudo mount -o loop /opt/$UNPK /tmp/$UNPK &>/dev/null
-        sudo mkdir -p /opt/$UNPK-m
-        sudo cp -R /tmp/$UNPK/* /opt/$UNPK-m &>/dev/null
-        sudo umount /tmp/$UNPK
-        #sudo chmod +x /opt/appimagetool
-        #cd /opt 
-        #sudo /opt/appimagetool --appimage-extract
+        sudo wget ${baseURL} -O ${AppImage_Tool_Opt}
+        sudo chmod +x ${AppImage_Tool_Opt}
+        file 
+        cd /opt
+        sudo ${AppImage_Tool_Opt} --appimage-extract
+        ls -al
         #sudo mv /opt/squashfs-root /opt/appimagetool.AppDir
-        sudo ln -s /opt/$UNPK-m/AppRun ${AppImage_Tool}
         #sudo ln -s /opt/squashfuse-root/usr/bin/appimagetool /usr/local/bin/appimagetool
-        rm /opt/appimagetool
+        #rm ${AppImage_Tool_Opt}
         cd ${dir}
-        sudo chmod +x ${AppImage_Tool}
+        #sudo chmod +x ${AppImage_Tool}
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
