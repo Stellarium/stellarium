@@ -42,14 +42,14 @@ then
         baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
         AppImage_Tool="/usr/local/bin/appimagetool"
         # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
-        cd /tmp 
-        wget ${baseURL} -O ./appimagetool-${arch}.AppImage
-        chmod +x *.AppImage
-        file *.AppImage
+        wget ${baseURL} -O /tmp/appimagetool-${arch}.AppImage
+        chmod a+x /tmp/appimagetool-${arch}.AppImage
+        file /tmp/appimagetool-${arch}.AppImage
+        cd /tmp
         ./appimagetool-${arch}.AppImage --appimage-extract
         sudo mv squashfs-root/ /opt/appimagetool.AppDir
         sudo ln -s /opt/appimagetool.AppDir/AppRun ${AppImage_Tool}
-        rm ./appimagetool-${arch}.AppImage
+        rm /tmp/appimagetool-${arch}.AppImage
         cd ${dir}
     fi
 
