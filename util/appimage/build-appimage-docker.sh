@@ -41,22 +41,16 @@ then
     then
         baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
         AppImage_Tool="/usr/local/bin/appimagetool"
-        if [ $arch = "x86_64" ]
-        then
-            # Install appimagetool AppImage
-            sudo wget ${baseURL} -O ${AppImage_Tool}
-            sudo chmod +x ${AppImage_Tool}
-        else
-            # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
-            cd /tmp 
-            wget ${baseURL} -O ./appimagetool-${arch}.AppImage
-            chmod +x *.AppImage
-            ./appimagetool-${arch}.AppImage --appimage-extract
-            sudo mv squashfs-root/ /opt/appimagetool.AppDir
-            sudo ln -s /opt/appimagetool.AppDir/AppRun ${AppImage_Tool}
-            rm ./appimagetool-${arch}.AppImage
-            cd ${dir}
-        fi
+        # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
+        cd /tmp 
+        wget ${baseURL} -O ./appimagetool-${arch}.AppImage
+        chmod +x *.AppImage
+        file *.AppImage
+        ./appimagetool-${arch}.AppImage --appimage-extract
+        sudo mv squashfs-root/ /opt/appimagetool.AppDir
+        sudo ln -s /opt/appimagetool.AppDir/AppRun ${AppImage_Tool}
+        rm ./appimagetool-${arch}.AppImage
+        cd ${dir}
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
