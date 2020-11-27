@@ -49,12 +49,12 @@ then
         else
             # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
             cd /tmp 
-            wget ${baseURL} -O appimagetool-${arch}.AppImage
-            chmod +x appimagetool-${arch}.AppImage
+            wget ${baseURL} -O ./appimagetool-${arch}.AppImage
+            chmod +x *.AppImage
             ./appimagetool-${arch}.AppImage --appimage-extract
-            mv squashfs-root/ /opt/appimagetool.AppDir
+            sudo mv squashfs-root/ /opt/appimagetool.AppDir
             sudo ln -s /opt/appimagetool.AppDir/AppRun ${AppImage_Tool}
-            rm appimagetool-${arch}.AppImage
+            rm ./appimagetool-${arch}.AppImage
             cd ${dir}
         fi
     fi
