@@ -7,6 +7,12 @@ language: cpp
 git:
   depth: 10
   quiet: true
+  
+# safelist
+branches:
+  only:
+  - master
+  - coverity_scan
 
 matrix:
   include:
