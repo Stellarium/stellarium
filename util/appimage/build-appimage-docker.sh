@@ -45,7 +45,7 @@ then
         # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
         mkdir -p opt
         wget ${baseURL} -O ${AppImage_Tool_Opt}
-        chmod +x ${AppImage_Tool_Opt}
+        chmod a+x ${AppImage_Tool_Opt}
         file ${AppImage_Tool_Opt}
         cd ./opt
         ./appimagetool --appimage-extract
