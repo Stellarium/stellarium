@@ -14,6 +14,7 @@ jobs:
   ci-linux:
     name: "Linux"
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
     - name: Update installed packages
@@ -46,6 +47,7 @@ jobs:
   ci-macos:
     name: "macOS"
     runs-on: macos-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -78,6 +80,7 @@ jobs:
   ci-coveralls:
     name: "Coveralls"
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
     - name: Update installed packages
