@@ -28,9 +28,9 @@ jobs:
         sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
         # Prepare to building
         mkdir -p ${{ github.workspace }}/artifact
-        sudo chmod +x ${{ github.workspace }}/util/appimage/build-appimage-host.sh
+        sudo chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
         cd ${{ github.workspace }}/util/appimage
-        ./build-appimage-host.sh
+        ./build-appimage.sh
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
