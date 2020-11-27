@@ -37,23 +37,35 @@ if [ "$result" = 'appimage' ]
 then
     # Stage 1: Check required packages
     ait=$(whereis appimagetool | sed 's/appimagetool://i')
-    if [ -z "$ait" ]
+    if [ -z $ait ]
     then
-        # Install appimagetool AppImage
-        AITool="/usr/local/bin/appimagetool"
-        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O ${AITool}
-        sudo chmod +x ${AITool}
-        # check file
-        file ${AITool}
+        baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
+        AppImage_Tool="/usr/local/bin/appimagetool"
+        if [ $arch = "x86_64" ]
+        then
+            # Install appimagetool AppImage
+            sudo wget ${baseURL} -O ${AppImage_Tool}
+            sudo chmod +x ${AppImage_Tool}
+        else
+            # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
+            cd /tmp 
+            wget ${baseURL} -O appimagetool-${arch}.AppImage
+            chmod +x appimagetool-${arch}.AppImage
+            ./appimagetool-${arch}.AppImage --appimage-extract
+            mv squashfs-root/ /opt/appimagetool.AppDir
+            sudo ln -s /opt/appimagetool.AppDir/AppRun ${AppImage_Tool}
+            rm appimagetool-${arch}.AppImage
+            cd ${dir}
+        fi
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
-    if [ -z "$builder" ]
+    if [ -z $builder ]
     then
         # Installing dependencies
         sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
         # Installing latest tagged release
-        sudo pip3 install appimage-builder pyfiglet
+        sudo pip3 install appimage-builder
     fi
 
     # Stage 2: Build an AppImage package
@@ -61,13 +73,6 @@ then
     rm -rf ${ROOT}/builds/appimage
     mkdir -p ${ROOT}/builds/appimage
     cd ${ROOT}/builds/appimage
-
-    if [ $arch != "x86_64" ]
-    then
-        # Hint: https://github.com/ShiftLeftSecurity/sast-scan/blob/master/.github/workflows/appimage.yml
-        mkdir -p appimage-builder-cache
-        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-${arch} -O appimage-builder-cache/runtime-${arch}
-    fi
 
     dtag=$(git describe --abbrev=0 | sed 's/v//i')
     rtag=$(git describe --tags | sed 's/v//i')
