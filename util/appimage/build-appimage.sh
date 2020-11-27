@@ -53,7 +53,7 @@ then
         # Installing dependencies
         sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
         # Installing latest tagged release
-        sudo pip3 install appimage-builder
+        sudo pip3 install appimage-builder pyfiglet
     fi
 
     # Stage 2: Build an AppImage package
@@ -61,6 +61,13 @@ then
     rm -rf ${ROOT}/builds/appimage
     mkdir -p ${ROOT}/builds/appimage
     cd ${ROOT}/builds/appimage
+
+    if [ $arch != "x86_64" ]
+    then
+        # Hint: https://github.com/ShiftLeftSecurity/sast-scan/blob/master/.github/workflows/appimage.yml
+        mkdir -p appimage-builder-cache
+        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-${arch} -O appimage-builder-cache/runtime-${arch}
+    fi
 
     dtag=$(git describe --abbrev=0 | sed 's/v//i')
     rtag=$(git describe --tags | sed 's/v//i')
@@ -82,6 +89,8 @@ then
     echo "\nLet's try build an AppImage for version '${version}'\n"
 
     appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
+
+    chmod +x *.AppImage
 else
     echo "Wrong directory! Please go to util/appimage directory and run again..."
 fi
