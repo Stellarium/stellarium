@@ -47,7 +47,7 @@ then
         sudo chmod +x ${AppImage_Tool_Opt}
         file ${AppImage_Tool_Opt}
         cd /opt
-        sudo ${AppImage_Tool_Opt} --appimage-extract
+        sudo /opt/appimagetool --appimage-extract
         ls -al
         #sudo mv /opt/squashfs-root /opt/appimagetool.AppDir
         #sudo ln -s /opt/squashfuse-root/usr/bin/appimagetool /usr/local/bin/appimagetool
