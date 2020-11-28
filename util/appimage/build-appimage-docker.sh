@@ -35,58 +35,17 @@ fi
 
 if [ "$result" = 'appimage' ]
 then
-    # Stage 1: Check required packages
-    ait=$(whereis appimagetool | sed 's/appimagetool://i')
-    if [ -z $ait ]
-    then
-        baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
-        AppImage_Tool="/usr/local/bin/appimagetool"
-        AppImage_Tool_Opt="./opt/appimagetool"
-        # Install appimagetool, it has to be extracted because FUSE doesn't work in containers without extra fiddling.
-        mkdir -p opt
-        wget ${baseURL} -O ${AppImage_Tool_Opt}
-        chmod a+x ${AppImage_Tool_Opt}
-        file ${AppImage_Tool_Opt}
-        cd ./opt
-        ./appimagetool --appimage-extract
-        ls -al
-        #sudo mv /opt/squashfs-root /opt/appimagetool.AppDir
-        #sudo ln -s /opt/squashfuse-root/usr/bin/appimagetool /usr/local/bin/appimagetool
-        #rm ${AppImage_Tool_Opt}
-        cd ${dir}
-        #sudo chmod +x ${AppImage_Tool}
-    fi
+    baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
+    AppImage_Tool="/usr/local/bin/appimagetool"
+    wget ${baseURL} -O ${AppImage_Tool}
+    chmod a+x ${AppImage_Tool}
 
-    builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
-    if [ -z $builder ]
-    then
-        # Installing dependencies
-        sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
-        # Installing latest tagged release
-        sudo pip3 install appimage-builder
-    fi
-
-    # Stage 2: Build an AppImage package
     ROOT=../..
     rm -rf ${ROOT}/builds/appimage
     mkdir -p ${ROOT}/builds/appimage
     cd ${ROOT}/builds/appimage
 
-    dtag=$(git describe --abbrev=0 | sed 's/v//i')
-    rtag=$(git describe --tags | sed 's/v//i')
-    revision=$(git log -1 --pretty=format:%h)
-
-    if [ $rtag = $dtag ]
-    then
-        version=${dtag}
-    else
-        version="${dtag}-${revision}"
-    fi
-    # probably git fetched source code without history and tags
-    if [ -z $version ]
-    then
-        version="edge"
-    fi
+    version="edge"
     export APP_VERSION=${version}
 
     echo "\nLet's try build an AppImage for version '${version}'\n"
