@@ -25,12 +25,16 @@ jobs:
         sudo apt-get update -y
         sudo apt-get upgrade -y
         # Installing dependencies
-        sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot wget
+        sudo pip3 install appimage-builder
+        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+        sudo chmod +x /usr/local/bin/appimagetool
         # Prepare to building
         mkdir -p ${{ github.workspace }}/artifact
-        sudo chmod +x ${{ github.workspace }}/util/appimage/build-appimage.sh
-        cd ${{ github.workspace }}/util/appimage
-        ./build-appimage.sh
+        mkdir -p ${{ github.workspace }}/builds/appimage
+        cd ${{ github.workspace }}/builds/appimage
+        export APP_VERSION="edge"
+        appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
@@ -88,15 +92,25 @@ jobs:
           apt-get update -y
           apt-get upgrade -y
           # Installing dependencies
-          apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake git sudo wget python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+          apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake wget python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
           pip3 install appimage-builder
 
         # Produce a binary artifact and place it in the mounted volume
         run: |
-          mkdir -p ${{ github.workspace }}/artifact
-          chmod +x ${{ github.workspace }}/util/appimage/build-appimage-docker.sh
-          cd ${{ github.workspace }}/util/appimage
-          ./build-appimage-docker.sh
+          march=${{ matrix.arch }}
+          if [ $march = "armv7" ]; then
+            march="armhf"
+          fi
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${march}.AppImage -O /opt/appimagetool
+          chmod +x /opt/appimagetool
+          cd /opt
+          qemu-${march}-static /opt/appimagetool --appimage-extract
+          mv /opt/squashfs-root /opt/appimagetool.AppDir
+          ln -s /opt/appimagetool.AppDir/AppRun /usr/local/bin/appimagetool
+          mkdir -p ${{ github.workspace }}/builds/appimage
+          cd ${{ github.workspace }}/builds/appimage
+          export APP_VERSION="edge"
+          appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-${march}.yml --skip-test
           cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
 
     - name: Upload AppImage
