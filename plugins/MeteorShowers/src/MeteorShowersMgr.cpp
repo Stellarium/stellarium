@@ -145,8 +145,8 @@ void MeteorShowersMgr::createActions()
 	QString msGroup = N_("Meteor Showers");
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show meteor showers settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
+    addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show meteor showers search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
 }
 
 void MeteorShowersMgr::loadConfig()
