@@ -254,6 +254,7 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
+      multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
 	  positionsCache(ORBIT_SEGMENTS * 2)
@@ -2620,6 +2621,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		transfo2->combine(Mat4d::zrotation(M_PI_180*static_cast<double>(axisRotation + 90.f)));
 		StelPainter sPainter(core->getProjection(transfo2));
 		gl = sPainter.glFuncs();
+
+        if(multisamplingEnabled_)
+            gl->glEnable(GL_MULTISAMPLE);
+        else
+            gl->glDisable(GL_MULTISAMPLE);
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
@@ -2688,6 +2694,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
+        if(multisamplingEnabled_)
+            gl->glDisable(GL_MULTISAMPLE);
 	}
 
 	bool allowDrawHalo = true;
