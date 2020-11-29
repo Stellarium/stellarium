@@ -53,19 +53,19 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-          #- arch: armv7
+            qarch: aarch64
+            march: aarch64
+          - arch: armv7
+            qarch: arm
+            march: armhf
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Download static QEMU (${{ matrix.arch }})
+    - name: Download static QEMU (${{ matrix.qarch }})
       run: |
-        march=${{ matrix.arch }}
-        if [ $march = "armv7" ]; then
-          march="arm"
-        fi
-        wget https://github.com/multiarch/qemu-user-static/releases/download/v5.1.0-7/qemu-${march}-static -O ${{ runner.temp }}/qemu-static
+        wget https://github.com/multiarch/qemu-user-static/releases/download/v5.1.0-7/qemu-${{ matrix.qarch }}-static -O ${{ runner.temp }}/qemu-static
         chmod +x ${{ runner.temp }}/qemu-static
 
     - name: Build AppImage
@@ -107,11 +107,7 @@ jobs:
 
         # Produce a binary artifact and place it in the mounted volume
         run: |
-          march=${{ matrix.arch }}
-          if [ $march = "armv7" ]; then
-            march="arm"
-          fi
-          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${march}.AppImage -O /opt/appimagetool
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${{ matrix.march }}.AppImage -O /opt/appimagetool
           chmod +x /opt/appimagetool
           cd /opt
           qemu-static /opt/appimagetool --appimage-extract
@@ -120,7 +116,7 @@ jobs:
           mkdir -p ${{ github.workspace }}/builds/appimage
           cd ${{ github.workspace }}/builds/appimage
           export APP_VERSION="edge"
-          appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-${march}.yml --skip-test
+          appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-${{ matrix.march }}.yml --skip-test
           cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
 
     - name: Upload AppImage
