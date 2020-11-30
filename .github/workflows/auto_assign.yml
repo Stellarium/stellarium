@@ -1,0 +1,11 @@
+﻿#
+# See https://github.com/marketplace/actions/auto-assign-action
+#
+name: 'Auto Assign'
+on: pull_request
+
+jobs:
+  add-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kentaro-m/auto-assign-action@v1.1.2
