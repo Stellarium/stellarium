@@ -78,11 +78,11 @@ then
     fi
     export APP_VERSION=${version}
 
-    echo "\nLet's try build an AppImage for version '${version}'\n"
+    echo "\nLet's try build an AppImage for version \"${version}\"\n"
 
     appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
 
-    chmod +x *.AppImage
+    chmod +x ./Stellarium*.AppImage
 else
     echo "Wrong directory! Please go to util/appimage directory and run again..."
 fi

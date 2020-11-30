@@ -5,7 +5,7 @@ name: "AppImage"
 
 on:
   push:
-    branches: [action/appimage]
+    branches: [release]
 
 jobs:
   # AppImage x86_64
