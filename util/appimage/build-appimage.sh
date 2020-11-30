@@ -78,7 +78,7 @@ then
     fi
     export APP_VERSION=${version}
 
-    echo "\nLet's try build an AppImage for version \"${version}\"\n"
+    printf "\nLet's try build an AppImage for version \"%s\"\n" "$version"
 
     appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
 
