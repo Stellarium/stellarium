@@ -793,7 +793,8 @@ screen\_x        & int    & Horizontal position of the top-left corner in window
 screen\_y        & int    & Vertical   position of the top-left corner in windowed mode. Value in pixels, e.g. \emph{0}\\%\midrule
 viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\%\midrule
 minimum\_fps     & int    & Sets the minimum number of frames per second to display at (hardware performance permitting)\\%\midrule
-maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\\bottomrule
+maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\%\midrule
+multisampling    & int    & Sets the number of samples to use for multisampling antialiasing. 0 disables antialiasing, higher values increase smoothness and degrade performance. Too high a value may result in excessive blurriness of the GUI.\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[viewing\big]}

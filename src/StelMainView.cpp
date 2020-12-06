@@ -744,6 +744,8 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	fmt.setDepthBufferSize(24);
 	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
+	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
+        fmt.setSamples(multisamplingLevel);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
@@ -1553,6 +1555,8 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
+	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
+        fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
