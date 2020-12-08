@@ -1,0 +1,4 @@
+
+include("navstars-common.inc");
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(true);

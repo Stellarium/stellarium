@@ -110,12 +110,12 @@ public:
 	void setUseFullCubemapShadows(bool val) { fullCubemapShadows = val; invalidateCubemap();}
 	bool getUseFullCubemapShadows() const { return fullCubemapShadows; }
 
-	uint getCubemapSize() const { return cubemapSize; }
+	int getCubemapSize() const { return cubemapSize; }
 	//! Note: This may not set the size to the desired one because of hardware limits, call getCubemapSize to receive the value set after this call.
-	void setCubemapSize(uint size) { cubemapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitCubemapping = true; }
-	uint getShadowmapSize() const { return shadowmapSize; }
+	void setCubemapSize(int size) { cubemapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitCubemapping = true; }
+	int getShadowmapSize() const { return shadowmapSize; }
 	//! Note: This may not set the size to the desired one because of hardware limits, call getShadowmapSize to receive the value set after this call.
-	void setShadowmapSize(uint size) { shadowmapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitShadowmapping = true; }
+	void setShadowmapSize(int size) { shadowmapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitShadowmapping = true; }
 	float getTorchBrightness() const { return torchBrightness; }
 	void setTorchBrightness(float brightness) { torchBrightness = brightness; invalidateCubemap(); }
 	float getTorchRange() const { return torchRange; }
@@ -133,7 +133,7 @@ public:
 	bool areShadowsSupported() const { return supportsShadows; }
 	bool isShadowFilteringSupported() const { return supportsShadowFiltering; }
 	bool isANGLEContext() const { return isANGLE; }
-	unsigned int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
+	int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
 signals:
 	void message(const QString& msg) const;
 
@@ -147,7 +147,7 @@ private:
 	bool supportsShadows; //if shadows are supported
 	bool supportsShadowFiltering; //if shadow filtering is supported
 	bool isANGLE; //true if running on ANGLE
-	unsigned int maximumFramebufferSize;
+	int maximumFramebufferSize;
 	GLuint defaultFBO; //the default background FBO handle
 
 	float torchBrightness; // toggle light brightness
@@ -161,8 +161,8 @@ private:
 	S3DEnum::CubemappingMode cubemappingMode;
 	bool reinitCubemapping,reinitShadowmapping;
 
-	unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
-	unsigned int shadowmapSize;
+	int cubemapSize;            // configurable values, typically 512/1024/2048/4096
+	int shadowmapSize;
 
 	bool wasMovedInLastDrawCall;
 	Vec3d lastDrawnPosition;

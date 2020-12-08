@@ -63,7 +63,7 @@ public:
 	QString getNameI18n(void) const {return nameI18n;}
 	Vec3f getInfoColor(void) const
 	{
-		return Vec3f(1, 1, 1);
+		return Vec3f(1.f, 1.f, 1.f);
 	}
 	//! TelescopeClient supports the following InfoStringGroup flags:
 	//! - Name
@@ -80,6 +80,8 @@ public:
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeAbortSlew() {};
 
 	//!
 	//! \brief move
@@ -95,7 +97,7 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
-	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { return nullptr; }
+	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = Q_NULLPTR) const { Q_UNUSED(telescope) Q_UNUSED(parent) return Q_NULLPTR; }
 
 protected:
 	TelescopeClient(const QString &name);
@@ -104,8 +106,8 @@ protected:
 
 	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
-		Q_UNUSED(core);
-		Q_UNUSED(flags);
+		Q_UNUSED(core)
+		Q_UNUSED(flags)
 		return QString();
 	}
 private:
@@ -147,8 +149,14 @@ public:
 	}
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 	{
+		Q_UNUSED(selectObject)
 		desired_pos = j2000Pos;
 		desired_pos.normalize();
+	}
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+	{
+		Q_UNUSED(selectObject)
+		Q_UNUSED(j2000Pos)
 	}
 	bool hasKnownPosition(void) const
 	{
@@ -189,6 +197,7 @@ private:
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject);
 	bool isInitialized(void) const
 	{
 		return (!address.isNull());
@@ -199,7 +208,7 @@ private:
 private:
 	void hangup(void);
 	QHostAddress address;
-	unsigned int port;
+	quint16 port;
 	QTcpSocket * tcpSocket;
 	bool wait_for_connection_establishment;
 	qint64 end_of_timeout;

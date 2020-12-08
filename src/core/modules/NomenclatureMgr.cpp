@@ -33,12 +33,14 @@
 #include <QSettings>
 #include <QFile>
 #include <QDir>
+#include <QBuffer>
 
-NomenclatureMgr::NomenclatureMgr()
+NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
 	setObjectName("NomenclatureMgr");
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
 }
 
@@ -59,9 +61,10 @@ void NomenclatureMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 	// Load the nomenclature
+	NomenclatureItem::createNameLists();
 	loadNomenclature();
 
-	setColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
+	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
 	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 
@@ -107,24 +110,28 @@ void NomenclatureMgr::loadNomenclature()
 	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 	QString record, ctxt;
 
-	QStringList nTypes; // codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
-	nTypes << "AL"	<< "AR"	<< "AS"	<< "CA"	<< "CB"	<< "CH"	<< "CM"	<< "CO"	<< "CR"	<< "AA"
-	       << "DO"	<< "ER"	<< "FA"	<< "FR"	<< "FE"	<< "FL"	<< "FM"	<< "FO"	<< "FT"	<< "IN"
-	       << "LA"	<< "LB"	<< "LU"	<< "LC"	<< "LF"	<< "LG"	<< "LE"	<< "LI"	<< "LN"	<< "MA"
-	       << "ME"	<< "MN"	<< "MO"	<< "OC"	<< "PA"	<< "PE"	<< "PL"	<< "PM"	<< "PU"	<< "PR"
-	       << "RE"	<< "RT"	<< "RI"	<< "RU"	<< "SF"	<< "SC"	<< "SE"	<< "SI"	<< "SU"	<< "TA"
-	       << "TE"	<< "TH"	<< "UN"	<< "VA"	<< "VS"	<< "VI";
 
-	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.fab");
+	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
 	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
 	{
 		// Open file
 		QFile planetSurfNamesFile(surfNamesFile);
-		if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		if (!planetSurfNamesFile.open(QIODevice::ReadOnly))
 		{
 			qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
 			return;
 		}
+		QByteArray data = StelUtils::uncompress(planetSurfNamesFile);
+		planetSurfNamesFile.close();
+		//check if decompressing was successful
+		if(data.isEmpty())
+		{
+			qDebug() << "Could not decompress file" << QDir::toNativeSeparators(surfNamesFile);
+			return;
+		}
+		//create and open a QBuffer for reading
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
 
 		// keep track of how many records we processed.
 		int totalRecords=0;
@@ -134,13 +141,14 @@ void NomenclatureMgr::loadNomenclature()
 		PlanetP p;
 
 		int featureId;
-		QString name, ntypecode, planet = "", planetName = "", context = "";
+		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		float latitude, longitude, size;
+		QStringList faultPlanets;
 
-		while (!planetSurfNamesFile.atEnd())
+		while (!buf.atEnd())
 		{
-			record = QString::fromUtf8(planetSurfNamesFile.readLine());
+			record = QString::fromUtf8(buf.readLine());
 			lineNumber++;
 
 			// Skip comments
@@ -153,15 +161,15 @@ void NomenclatureMgr::loadNomenclature()
 			else
 			{
 				// Read the planet name
-				planet		= recRx.capturedTexts().at(1).trimmed();
+				planet	= recRx.cap(1).trimmed();
 				// Read the ID of feature
-				featureId	= recRx.capturedTexts().at(2).toInt();
+				featureId	= recRx.cap(2).toInt();
 				// Read the name of feature and context
-				ctxt		= recRx.capturedTexts().at(3).trimmed();
+				ctxt		= recRx.cap(3).trimmed();
 				if (ctxRx.exactMatch(ctxt))
 				{
-					name = ctxRx.capturedTexts().at(1).trimmed();
-					context = ctxRx.capturedTexts().at(2).trimmed();
+					name = ctxRx.cap(1).trimmed();
+					context = ctxRx.cap(2).trimmed();
 				}
 				else
 				{
@@ -169,187 +177,14 @@ void NomenclatureMgr::loadNomenclature()
 					context = "";
 				}
 				// Read the type of feature
-				ntypecode	= recRx.capturedTexts().at(4).trimmed();
-				switch (nTypes.indexOf(ntypecode.toUpper()))
-				{
-					case 0:
-						ntype = NomenclatureItem::niAlbedoFeature;
-						break;
-					case 1:
-						ntype = NomenclatureItem::niArcus;
-						break;
-					case 2:
-						ntype = NomenclatureItem::niAstrum;
-						break;
-					case 3:
-						ntype = NomenclatureItem::niCatena;
-						break;
-					case 4:
-						ntype = NomenclatureItem::niCavus;
-						break;
-					case 5:
-						ntype = NomenclatureItem::niChaos;
-						break;
-					case 6:
-						ntype = NomenclatureItem::niChasma;
-						break;
-					case 7:
-						ntype = NomenclatureItem::niCollis;
-						break;
-					case 8:
-						ntype = NomenclatureItem::niCorona;
-						break;
-					case 9:
-						ntype = NomenclatureItem::niCrater;
-						break;
-					case 10:
-						ntype = NomenclatureItem::niDorsum;
-						break;
-					case 11:
-						ntype = NomenclatureItem::niEruptiveCenter;
-						break;
-					case 12:
-						ntype = NomenclatureItem::niFacula;
-						break;
-					case 13:
-						ntype = NomenclatureItem::niFarrum;
-						break;
-					case 14:
-						ntype = NomenclatureItem::niFlexus;
-						break;
-					case 15:
-						ntype = NomenclatureItem::niFluctus;
-						break;
-					case 16:
-						ntype = NomenclatureItem::niFlumen;
-						break;
-					case 17:
-						ntype = NomenclatureItem::niFossa;
-						break;
-					case 18:
-						ntype = NomenclatureItem::niFretum;
-						break;
-					case 19:
-						ntype = NomenclatureItem::niInsula;
-						break;
-					case 20:
-						ntype = NomenclatureItem::niLabes;
-						break;
-					case 21:
-						ntype = NomenclatureItem::niLabyrinthus;
-						break;
-					case 22:
-						ntype = NomenclatureItem::niLacuna;
-						break;
-					case 23:
-						ntype = NomenclatureItem::niLacus;
-						break;
-					case 24:
-						ntype = NomenclatureItem::niLandingSite;
-						break;
-					case 25:
-						ntype = NomenclatureItem::niLargeRingedFeature;
-						break;
-					case 26:
-						ntype = NomenclatureItem::niLenticula;
-						break;
-					case 27:
-						ntype = NomenclatureItem::niLinea;
-						break;
-					case 28:
-						ntype = NomenclatureItem::niLingula;
-						break;
-					case 29:
-						ntype = NomenclatureItem::niMacula;
-						break;
-					case 30:
-						ntype = NomenclatureItem::niMare;
-						break;
-					case 31:
-						ntype = NomenclatureItem::niMensa;
-						break;
-					case 32:
-						ntype = NomenclatureItem::niMons;
-						break;
-					case 33:
-						ntype = NomenclatureItem::niOceanus;
-						break;
-					case 34:
-						ntype = NomenclatureItem::niPalus;
-						break;
-					case 35:
-						ntype = NomenclatureItem::niPatera;
-						break;
-					case 36:
-						ntype = NomenclatureItem::niPlanitia;
-						break;
-					case 37:
-						ntype = NomenclatureItem::niPlanum;
-						break;
-					case 38:
-						ntype = NomenclatureItem::niPlume;
-						break;
-					case 39:
-						ntype = NomenclatureItem::niPromontorium;
-						break;
-					case 40:
-						ntype = NomenclatureItem::niRegio;
-						break;
-					case 41:
-						ntype = NomenclatureItem::niReticulum;
-						break;
-					case 42:
-						ntype = NomenclatureItem::niRima;
-						break;
-					case 43:
-						ntype = NomenclatureItem::niRupes;
-						break;
-					case 44:
-						ntype = NomenclatureItem::niSatelliteFeature;
-						break;
-					case 45:
-						ntype = NomenclatureItem::niScopulus;
-						break;
-					case 46:
-						ntype = NomenclatureItem::niSerpens;
-						break;
-					case 47:
-						ntype = NomenclatureItem::niSinus;
-						break;
-					case 48:
-						ntype = NomenclatureItem::niSulcus;
-						break;
-					case 49:
-						ntype = NomenclatureItem::niTerra;
-						break;
-					case 50:
-						ntype = NomenclatureItem::niTessera;
-						break;
-					case 51:
-						ntype = NomenclatureItem::niTholus;
-						break;
-					case 52:
-						ntype = NomenclatureItem::niUnda;
-						break;
-					case 53:
-						ntype = NomenclatureItem::niVallis;
-						break;
-					case 54:
-						ntype = NomenclatureItem::niVastitas;
-						break;
-					case 55:
-						ntype = NomenclatureItem::niVirga;
-						break;
-					default:
-						ntype = NomenclatureItem::niUNDEFINED;
-						break;
-				}
+				QString ntypecode	= recRx.cap(4).trimmed();
+				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
-				latitude	= recRx.capturedTexts().at(5).toFloat();
+				latitude	= recRx.cap(5).toFloat();
 				// Read the longitude of feature
-				longitude	= recRx.capturedTexts().at(6).toFloat();
+				longitude	= recRx.cap(6).toFloat();
 				// Read the size of feature
-				size		= recRx.capturedTexts().at(7).toFloat();
+				size		= recRx.cap(7).toFloat();
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{
@@ -359,7 +194,6 @@ void NomenclatureMgr::loadNomenclature()
 					planetName = planet;					
 				}
 
-
 				if (!p.isNull())
 				{
 					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
@@ -367,13 +201,19 @@ void NomenclatureMgr::loadNomenclature()
 						nomenclatureItems.insert(p, nom);
 
 					readOk++;
-				}				
+				}
+				else
+					faultPlanets << planet;
 			}
 		}
 
-		planetSurfNamesFile.close();
+		buf.close();
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
+		faultPlanets.removeDuplicates();
+		int err = faultPlanets.size();
+		if (err>0)
+			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
 	}
 }
 
@@ -395,16 +235,16 @@ void NomenclatureMgr::draw(StelCore* core)
 		// Early exit if the planet is not visible or too small to render the
 		// labels.
 		const Vec3d equPos = p->getJ2000EquatorialPos(core);
-		const double r = p->getRadius() * p->getSphereScale();
+		const double r = p->getEquatorialRadius() * static_cast<double>(p->getSphereScale());
 		double angularSize = atan2(r, equPos.length());
-		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
+		double screenSize = angularSize * static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter());
 		if (screenSize < 50)
 			continue;
 		Vec3d n = equPos; n.normalize();
 		SphericalCap boundingCap(n, cos(angularSize));
 		if (!viewportRegion.intersects(boundingCap))
 			continue;
-		if (p->getVMagnitude(core) >= 20.)
+		if (p->getVMagnitude(core) >= 20.f)
 			continue;
 
 		// Render all the items of this planet.
@@ -418,7 +258,6 @@ void NomenclatureMgr::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
@@ -434,11 +273,10 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
 
@@ -448,20 +286,18 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& nItem : nomenclatureItems)
 	{
 		equPos = nItem->getJ2000EquatorialPos(core);
 		equPos.normalize();
-		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+		if (equPos.dot(v) >= cosLimFov)
 		{
 			result.append(qSharedPointerCast<StelObject>(nItem));
 		}
 	}
-
-
 	return result;
 }
 
@@ -477,7 +313,6 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 			}
 		}
 	}
-
 	return Q_NULLPTR;
 }
 
@@ -493,13 +328,7 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 			}
 		}
 	}
-
 	return Q_NULLPTR;
-}
-
-QStringList NomenclatureMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	return StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 }
 
 QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
@@ -525,7 +354,6 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 			}
 		}
 	}
-
 	return result;
 }
 
@@ -632,6 +460,7 @@ bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 // Update i18 names from english names according to current sky culture translator
 void NomenclatureMgr::updateI18n()
 {
+	NomenclatureItem::createNameLists();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
 	for (const auto& i : nomenclatureItems)
 		i->translateName(trans);

@@ -29,6 +29,7 @@
 class TuiNodeDouble : public TuiNodeEditable
 {
 	Q_OBJECT
+
 public:
 	//! Create a TuiNodeDouble node.
 	//! @param text the text to be displayed for this node
@@ -65,7 +66,6 @@ private:
 	double increment;
 	bool typing;
 	bool typedDecimal;
-	
 };
 
 #endif /*TUINODEDOUBLE_HPP*/

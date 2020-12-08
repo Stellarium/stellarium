@@ -58,6 +58,8 @@ private slots:
 
 	void setConnectionLostBehavior(int idx);
 	void setQuitBehavior(int idx);
+	void restoreDefaults();
+
 private:
 	Ui_remoteSyncDialog* ui;
 	RemoteSync* rs;

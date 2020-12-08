@@ -19,15 +19,17 @@
 
 // Template vector and matrix library.
 // Use OpenGL compatible ordering ie. you can pass a matrix or vector to
-// openGL functions without changes in the ordering
+// OpenGL functions without changes in the ordering
 
 #ifndef VECMATH_HPP
 #define VECMATH_HPP
+
 
 #include <cmath>
 #include <limits>
 #include <QString>
 #include <QMatrix4x4>
+#include <QColor>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -40,56 +42,56 @@ typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
 
 //! @typedef Vec3d
-//! A 3d vector of doubles compatible with openGL.
+//! A 3d vector of doubles compatible with OpenGL.
 typedef Vector3<double>	Vec3d;
 
 //! @typedef Vec3f
-//! A 3d vector of floats compatible with openGL.
+//! A 3d vector of floats compatible with OpenGL.
 typedef Vector3<float>	Vec3f;
 
 //! @typedef Vec3i
-//! A 3d vector of ints compatible with openGL.
+//! A 3d vector of ints compatible with OpenGL.
 typedef Vector3<int>	Vec3i;
 
 //! @typedef Vec4d
-//! A 4d vector of doubles compatible with openGL.
+//! A 4d vector of doubles compatible with OpenGL.
 typedef Vector4<double>	Vec4d;
 
 //! @typedef Vec4f
-//! A 4d vector of floats compatible with openGL.
+//! A 4d vector of floats compatible with OpenGL.
 typedef Vector4<float>	Vec4f;
 
 //! @typedef Vec4i
-//! A 4d vector of ints compatible with openGL.
+//! A 4d vector of ints compatible with OpenGL.
 typedef Vector4<int>	Vec4i;
 
 //! @typedef Mat4d
-//! A 4x4 matrix of doubles compatible with openGL.
+//! A 4x4 matrix of doubles compatible with OpenGL.
 typedef Matrix4<double>	Mat4d;
 
 //! @typedef Mat4f
-//! A 4x4 matrix of floats compatible with openGL.
+//! A 4x4 matrix of floats compatible with OpenGL.
 typedef Matrix4<float>	Mat4f;
 
 //! @typedef Mat3d
-//! A 3x3 matrix of doubles compatible with openGL.
+//! A 3x3 matrix of doubles compatible with OpenGL.
 typedef Matrix3<double> Mat3d;
 
 //! @typedef Mat3f
-//! A 3x3 matrix of floats compatible with openGL.
+//! A 3x3 matrix of floats compatible with OpenGL.
 typedef Matrix3<float> Mat3f;
 
 
 //! @class Vector2
-//! A templatized 2d vector compatible with openGL.
-//! Use Vec2d or Vec2f typdef for vectors of double and float respectively.
+//! A templatized 2d vector compatible with OpenGL.
+//! Use Vec2i for integer and Vec2d or Vec2f typedef for vectors of double and float respectively.
 template<class T> class Vector2
 {
 public:
 	//! The vector is not initialized!
 	inline Vector2();
 	//! Sets all components of the vector to the same value
-	inline Vector2(T);
+	inline explicit Vector2(T);
 	//! Explicit conversion constructor from an array (copies values)
 	//! @warning Does not check array size, make sure it has at least 2 elements
 	inline explicit Vector2(const T*);
@@ -97,6 +99,10 @@ public:
 	//! Uses default primitive type conversion
 	template <class T2> inline explicit Vector2(const Vector2<T2>&);
 	inline Vector2(T, T);
+	//! Constructor from a comma-separated QString like "2,4" or "2.1,4.2"
+	explicit Vector2(QString s);
+	//! Constructor from a QStringList like { "2", "4" } or { "2.1", "4.2", "6.3" }
+	explicit Vector2(QStringList s);
 
 	//! Assignment from array
 	//! @warning Does not check array size, make sure it has at least 2 elements
@@ -150,26 +156,36 @@ public:
 	inline T lengthSquared() const;
 	inline void normalize();
 
-	T v[2];
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
+	QString toStr() const;
 
-	QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	T v[2];
 };
 
 
 //! @class Vector3
-//! A templatized 3d vector compatible with openGL.
-//! Use Vec3d or Vec3f typdef for vectors of double and float respectively.
+//! A templatized 3d vector compatible with OpenGL.
+//! Use Vec3i for integer and Vec3d or Vec3f typedef for vectors of double and float respectively.
 template<class T> class Vector3
 {
 public:
 	//! The vector is not initialized!
 	inline Vector3();
 	//! Sets all components of the vector to the same value
-	inline Vector3(T);
+	inline explicit Vector3(T);
 	//! Explicit conversion constructor from an array (copies values)
 	//! @warning Does not check array size, make sure it has at least 3 elements
 	inline explicit Vector3(const T*);
 	inline Vector3(T, T, T);
+	//! Constructor from a comma-separated QString like "2,4,6" or "2.1,4.2,6.3"
+	explicit Vector3(QString s);
+	//! Constructor from a QStringList like { "2", "4", "6" } or { "2.1", "4.2", "6.3" }
+	explicit Vector3(QStringList s);
+	//! Constructor from a QColor
+	explicit Vector3(QColor c);
 
 	//inline Vector3& operator=(const Vector3&);
 
@@ -178,6 +194,11 @@ public:
 	inline Vector3& operator=(const T*);
 	//template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
+
+	//! Assign from HTML color
+	//! The Vec3i type will have values 0...255
+	//! Vec3f and Vec3d will have [0...[1
+	Vector3 setFromHtmlColor(QString s);
 
 	inline bool operator==(const Vector3<T>&) const;
 	inline bool operator!=(const Vector3<T>&) const;
@@ -229,29 +250,50 @@ public:
 	inline Vec3f toVec3f() const;
 	inline Vec3d toVec3d() const;
 
-	T v[3];		// The 3 values
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
+	QString toStr() const;
+	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
+	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1
+	QString toHtmlColor() const;
+	//! Convert to a QColor.
+	QColor toQColor() const;
 
-	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
-	QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
+	T v[3];		// The 3 values
 };
 
 
 //! @class Vector4
-//! A templatized 4d vector compatible with openGL.
-//! Use Vec4d or Vec4f typdef for vectors of double and float respectively.
+//! A templatized 4d vector compatible with OpenGL.
+//! Use Vec4i for integer and Vec4d or Vec4f typedef for vectors of double and float respectively.
 template<class T> class Vector4
 {
 public:
 	//! The vector is not initialized!
 	inline Vector4();
+	//! Sets all components of the vector to the same value
+	inline explicit Vector4(T);
 	//! Explicit conversion constructor from an array
 	//! @warning Does not check array size, make sure it has at least 4 elements
 	inline explicit Vector4(const T*);
+	//! Explicit conversion constructor from another Vec4 of any type.
+	//! Uses default primitive type conversion
+	template <class T2> inline explicit Vector4(const Vector4<T2>&);
 	//! Creates an Vector4 with xyz set to the given Vector3, and w set to 1.0
 	inline Vector4(const Vector3<T>&);
 	//! Creates an Vector4 with xyz set to the given values, and w set to 1.0
 	inline Vector4(T, T, T);
+	//! Creates an Vector4 with xyz set to the given Vector3, and given last value as w
+	inline Vector4(const Vector3<T>&, T);
 	inline Vector4(T, T, T, T);
+	//! Constructor from a comma-separated QString like "2,4,6,8" or "2.1,4.2,6.3,8.4"
+	explicit Vector4(QString s);
+	//! Constructor from a QStringList like { "2", "4", "6", "8" } or { "2.1", "4.2", "6.3", "8.4" }
+	explicit Vector4(QStringList s);
+	//! Constructor from a QColor
+	explicit Vector4(QColor c);
 
 	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
@@ -287,13 +329,20 @@ public:
 	inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
-	QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+
+	//! Formatted string with brackets
+	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+	//! Compact comma-separated string without brackets and spaces.
+	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
+	QString toStr() const;
+	//! Convert to a QColor.
+	QColor toQColor() const;
 
 	T v[4];		// The 4 values
 };
 
 //! @class Matrix3
-//! A templatized column-major 3x3 matrix compatible with openGL (mostly for NormalMatrix calculation).
+//! A templatized column-major 3x3 matrix compatible with OpenGL (mostly for NormalMatrix calculation).
 //! Use Mat3d or Mat3f typedef for matrices of doubles and floats respectively.
 template<class T> class Matrix3
 {
@@ -341,7 +390,7 @@ public:
 };
 
 //! @class Matrix4
-//! A templatized column-major 4x4 matrix compatible with openGL.
+//! A templatized column-major 4x4 matrix compatible with OpenGL.
 //! Use Mat4d or Mat4f typdef for matrices of doubles and floats respectively.
 template<class T> class Matrix4
 {
@@ -459,7 +508,6 @@ template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
 }
-
 
 template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
 {
@@ -603,7 +651,7 @@ template<class T> T Vector2<T>::dot(const Vector2<T>& b) const
 
 template<class T> T Vector2<T>::length() const
 {
-	return (T) std::sqrt(v[0] * v[0] + v[1] * v[1]);
+	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1]));
 }
 
 template<class T> T Vector2<T>::lengthSquared() const
@@ -613,7 +661,7 @@ template<class T> T Vector2<T>::lengthSquared() const
 
 template<class T> void Vector2<T>::normalize()
 {
-	T s = (T) 1 / std::sqrt(v[0] * v[0] + v[1] * v[1]);
+	T s = static_cast<T>( 1 / std::sqrt(v[0] * v[0] + v[1] * v[1]));
 	v[0] *= s;
 	v[1] *= s;
 }
@@ -792,7 +840,7 @@ template<class T> T Vector3<T>::angleNormalized(const Vector3<T>& b) const
 
 template<class T> T Vector3<T>::length() const
 {
-	return (T) std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
 }
 
 template<class T> T Vector3<T>::lengthSquared() const
@@ -802,7 +850,7 @@ template<class T> T Vector3<T>::lengthSquared() const
 
 template<class T> void Vector3<T>::normalize()
 {
-	T s = (T) (1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
+	T s = static_cast<T>(1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
 	v[0] *= s;
 	v[1] *= s;
 	v[2] *= s;
@@ -853,14 +901,29 @@ template<class T> T Vector3<T>::longitude() const
 
 template<class T> Vector4<T>::Vector4() {}
 
+template<class T> Vector4<T>::Vector4(T x)
+{
+	v[0]=x; v[1]=x; v[2]=x; v[3]=x;
+}
+
 template<class T> Vector4<T>::Vector4(const T* x)
 {
 	v[0]=x[0]; v[1]=x[1]; v[2]=x[2]; v[3]=x[3];
 }
 
+template <class T> template <class T2> Vector4<T>::Vector4(const Vector4<T2>& other)
+{
+	v[0]=other[0]; v[1]=other[1]; v[2]=other[2]; v[3]=other[3];
+}
+
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
+}
+
+template<class T> Vector4<T>::Vector4(const Vector3<T>& a, const T w)
+{
+	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=w;
 }
 
 template<class T> Vector4<T>::Vector4(T x, T y, T z)
@@ -977,7 +1040,7 @@ template<class T> T Vector4<T>::dot(const Vector4<T>& b) const
 
 template<class T> T Vector4<T>::length() const
 {
-	return (T) std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
+	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
 }
 
 template<class T> T Vector4<T>::lengthSquared() const
@@ -987,7 +1050,7 @@ template<class T> T Vector4<T>::lengthSquared() const
 
 template<class T> void Vector4<T>::normalize()
 {
-	T s = (T) (1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
+	T s = static_cast<T>(1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
 	v[0] *= s;
 	v[1] *= s;
 	v[2] *= s;
@@ -1003,7 +1066,6 @@ template<class T>
 std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ',' << v[3] << ']';
 }*/
-
 
 ////////////////////////// Matrix3 class methods ///////////////////////////////
 
@@ -1300,8 +1362,8 @@ template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis, T angl
 {
 	Vector3<T> a(axis);
 	a.normalize();
-	const T c = (T) cos(angle);
-	const T s = (T) sin(angle);
+	const T c = static_cast<T>(cos(angle));
+	const T s = static_cast<T>(sin(angle));
 	const T d = 1-c;
 	return Matrix4<T>(a[0]*a[0]*d+c     , a[1]*a[0]*d+a[2]*s, a[0]*a[2]*d-a[1]*s, 0,
 			  a[0]*a[1]*d-a[2]*s, a[1]*a[1]*d+c     , a[1]*a[2]*d+a[0]*s, 0,
@@ -1311,8 +1373,8 @@ template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis, T angl
 
 template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
 {
-	T c = (T) cos(angle);
-	T s = (T) sin(angle);
+	T c = static_cast<T>(cos(angle));
+	T s = static_cast<T>(sin(angle));
 
 	return Matrix4<T>(1, 0, 0, 0,
 			  0, c, s, 0,
@@ -1323,8 +1385,8 @@ template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
 
 template<class T> Matrix4<T> Matrix4<T>::yrotation(T angle)
 {
-	T c = (T) cos(angle);
-	T s = (T) sin(angle);
+	T c = static_cast<T>(cos(angle));
+	T s = static_cast<T>(sin(angle));
 
 	return Matrix4<T>(c, 0,-s, 0,
 			  0, 1, 0, 0,
@@ -1335,8 +1397,8 @@ template<class T> Matrix4<T> Matrix4<T>::yrotation(T angle)
 
 template<class T> Matrix4<T> Matrix4<T>::zrotation(T angle)
 {
-	T c = (T) cos(angle);
-	T s = (T) sin(angle);
+	T c = static_cast<T>(cos(angle));
+	T s = static_cast<T>(sin(angle));
 
 	return Matrix4<T>(c , s, 0, 0,
 			  -s, c, 0, 0,

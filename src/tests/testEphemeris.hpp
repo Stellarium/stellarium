@@ -21,7 +21,7 @@
 #define TESTEPHEMERIS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestEphemeris : public QObject
 {
@@ -37,7 +37,7 @@ private slots:
 	void testJupiterHeliocentricEphemerisVsop87();
 	void testSaturnHeliocentricEphemerisVsop87();
 	void testUranusHeliocentricEphemerisVsop87();
-	void testNeptuneHeliocentricEphemerisVsop87();	
+	void testNeptuneHeliocentricEphemerisVsop87();
 
 	// JPL DE430
 	void testMercuryHeliocentricEphemerisDe430();
@@ -49,13 +49,16 @@ private slots:
 	void testNeptuneHeliocentricEphemerisDe430();
 
 	// JPL DE431
-	void testMercuryHeliocentricEphemerisDe431();
+	void testMercuryHeliocentricEphemerisDe431();	
 	void testVenusHeliocentricEphemerisDe431();
 	void testMarsHeliocentricEphemerisDe431();
 	void testJupiterHeliocentricEphemerisDe431();
 	void testSaturnHeliocentricEphemerisDe431();
 	void testUranusHeliocentricEphemerisDe431();
 	void testNeptuneHeliocentricEphemerisDe431();
+
+	void testL12Theory();
+	void testMarsSatTheory();
 
 private:
 	QString de430FilePath, de431FilePath;

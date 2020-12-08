@@ -47,11 +47,11 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "none")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
 		
 		conf->beginGroup("custom_selected_info");
 		if (conf->value("flag_show_name", false).toBool())
@@ -70,10 +70,14 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::HourAngle;
 		if (conf->value("flag_show_altaz", false).toBool())
 			infoTextFilters |= StelObject::AltAzi;
+		if (conf->value("flag_show_elongation", false).toBool())
+			infoTextFilters |= StelObject::Elongation;
 		if (conf->value("flag_show_distance", false).toBool())
 			infoTextFilters |= StelObject::Distance;
 		if (conf->value("flag_show_velocity", false).toBool())
 			infoTextFilters |= StelObject::Velocity;
+		if (conf->value("flag_show_propermotion", false).toBool())
+			infoTextFilters |= StelObject::ProperMotion;
 		if (conf->value("flag_show_size", false).toBool())
 			infoTextFilters |= StelObject::Size;
 		if (conf->value("flag_show_extra", false).toBool())
@@ -84,6 +88,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::GalacticCoord;
 		if (conf->value("flag_show_supergalcoord", false).toBool())
 			infoTextFilters |= StelObject::SupergalacticCoord;
+		if (conf->value("flag_show_othercoord", false).toBool())
+			infoTextFilters |= StelObject::OtherCoord;
 		if (conf->value("flag_show_eclcoordofdate", false).toBool())
 			infoTextFilters |= StelObject::EclipticCoordOfDate;
 		if (conf->value("flag_show_eclcoordj2000", false).toBool())
@@ -137,7 +143,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -176,6 +182,10 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
+		QFont font;
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+		setFont(font);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
@@ -205,7 +215,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
-const QString InfoPanel::getSelectedText(void)
+const QString InfoPanel::getSelectedText(void) const
 {
 	return toPlainText();
 }
@@ -226,10 +236,10 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
 	buttonBar = new BottomStelBar(this,
-				      QPixmap(":/graphicGui/btbg-left.png"),
-				      QPixmap(":/graphicGui/btbg-right.png"),
-				      QPixmap(":/graphicGui/btbg-middle.png"),
-				      QPixmap(":/graphicGui/btbg-single.png"));
+				      QPixmap(":/graphicGui/btbgLeft.png"),
+				      QPixmap(":/graphicGui/btbgRight.png"),
+				      QPixmap(":/graphicGui/btbgMiddle.png"),
+				      QPixmap(":/graphicGui/btbgSingle.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
@@ -255,25 +265,18 @@ void SkyGui::init(StelGui* astelGui)
 {
 	stelGui = astelGui;
 
-	winBar->setParentItem(this);
-	buttonBar->setParentItem(this);
-	buttonBarPath->setParentItem(this);
-	infoPanel->setParentItem(this);
-	progressBarMgr->setParentItem(this);
-
 	// Create the 2 auto hide buttons in the bottom left corner
-	autoHidebts = new CornerButtons();
-	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
-	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
+	autoHidebts = new CornerButtons(this);
+	QPixmap pxmapOn = QPixmap(":/graphicGui/miscHorAutoHide-on.png");
+	QPixmap pxmapOff = QPixmap(":/graphicGui/miscHorAutoHide-off.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
-	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
-	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
+	pxmapOn = QPixmap(":/graphicGui/miscVertAutoHide-on.png");
+	pxmapOff = QPixmap(":/graphicGui/miscVertAutoHide-off.png");
 	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideVerticalButtonBar", true);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
-	autoHidebts->setParentItem(this);
 
 	infoPanel->setPos(8,8);
 
@@ -293,7 +296,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -348,12 +351,12 @@ QVariant SkyGui::itemChange(GraphicsItemChange change, const QVariant & value)
 
 int SkyGui::getSkyGuiWidth() const
 {
-	return geometry().width();
+	return static_cast<int>(geometry().width());
 }
 
 int SkyGui::getSkyGuiHeight() const
 {
-	return geometry().height();
+	return static_cast<int>(geometry().height());
 }
 
 //! Update the position of the button bars in the main window
@@ -385,7 +388,7 @@ void SkyGui::updateBarsPos()
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
 		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)

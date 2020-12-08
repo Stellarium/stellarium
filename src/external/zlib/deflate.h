@@ -272,7 +272,6 @@ typedef struct internal_state {
      * longest match routines access bytes past the input.  This is then
      * updated to the new high water mark.
      */
-
 } FAR deflate_state;
 
 /* Output a byte on the stream.

@@ -92,7 +92,6 @@ public:
 	qint64 lastTimeSyncTime; //corresponds to StelCore::milliSecondsOfLastJDayUpdate
 	double jDay; //current jDay, without any time zone/deltaT adjustments
 	double timeRate; //current time rate
-
 };
 
 class Location : public SyncMessage

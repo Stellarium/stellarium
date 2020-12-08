@@ -30,7 +30,7 @@ ShortcutLineEdit::ShortcutLineEdit(QWidget *parent) :
 	clear();
 }
 
-QKeySequence ShortcutLineEdit::getKeySequence()
+QKeySequence ShortcutLineEdit::getKeySequence() const
 {
 	return QKeySequence(keys.value(0, 0), keys.value(1, 0),
 	                    keys.value(2, 0), keys.value(3, 0));
@@ -44,7 +44,7 @@ bool ShortcutLineEdit::isEmpty() const
 void ShortcutLineEdit::clear()
 {
 	keys.clear();
-	QLineEdit::clear();
+	QLineEdit::setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	emit contentsChanged();
 }
 
@@ -78,7 +78,7 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 {
 	int nextKey = e->key();
 	if ( keys.count() > 3 || // too long shortcut
-	     nextKey == Qt::Key_Control || // dont count modifier keys
+	     nextKey == Qt::Key_Control || // don't count modifier keys
 	     nextKey == Qt::Key_Shift ||
 	     nextKey == Qt::Key_Meta ||
 	     nextKey == Qt::Key_Alt )

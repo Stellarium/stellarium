@@ -24,10 +24,12 @@
 #include "StelObject.hpp"
 #include "Planet.hpp"
 
-TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
+TrailGroup::TrailGroup(float te, int maxPoints) : timeExtent(te), maxPoints(maxPoints), opacity(1.f)
 {
 	j2000ToTrailNative=Mat4d::identity();
 	j2000ToTrailNativeInverted=Mat4d::identity();
+	core=StelApp::getInstance().getCore();
+	Q_ASSERT(core);
 }
 
 static QVector<Vec3d> vertexArray;
@@ -35,7 +37,7 @@ static QVector<Vec4f> colorArray;
 void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	sPainter->setBlending(true);
-	float currentTime = core->getJDE();
+	float currentTime = static_cast<float>(core->getJDE());
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
@@ -46,7 +48,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		{
 			// Avoid drawing the trails if the object is the home planet
 			QString homePlanetName = hpl->getEnglishName();
-			if (homePlanetName==StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			if (homePlanetName==core->getCurrentLocation().planetName)
 				continue;
 		}
 		const QList<Vec3d>& posHistory = trail.posHistory;
@@ -54,7 +56,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		colorArray.resize(posHistory.size());
 		for (int i=0;i<posHistory.size();++i)
 		{
-			float colorRatio = 1.f-(currentTime-times.at(i))/timeExtent;
+			float colorRatio = 1.f-fabsf(currentTime-times.at(i))/timeExtent;
 			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
 			vertexArray[i]=posHistory.at(i);
 		}
@@ -62,29 +64,26 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	}
 }
 
-// Add 1 point to all the curves at current time and suppress too old points
+// Add 1 point to all the curves at current time and remove too old points
 void TrailGroup::update()
 {
-	times.append(StelApp::getInstance().getCore()->getJDE());
-	for (auto& trail : allTrails)
+	float newJDE=static_cast<float>(core->getJDE());
+	if (fabsf(times.last()-newJDE) > 0.000001f)
 	{
-		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
-	}
-	if (StelApp::getInstance().getCore()->getJDE()-times.at(0)>timeExtent)
-	{
-		times.pop_front();
+		times.append(newJDE);
 		for (auto& trail : allTrails)
 		{
-			trail.posHistory.pop_front();
+			trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
+		}
+		if (fabs(static_cast<float>(core->getJDE())-times.at(0))>timeExtent || times.length()>maxPoints)
+		{
+			times.pop_front();
+			for (auto& trail : allTrails)
+			{
+				trail.posHistory.pop_front();
+			}
 		}
 	}
-}
-
-// Set the matrix to use to post process J2000 positions before storing in the trail
-void TrailGroup::setJ2000ToTrailNative(const Mat4d& m)
-{
-	j2000ToTrailNative=m;
-	j2000ToTrailNativeInverted=m.inverse();
 }
 
 void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
@@ -92,8 +91,9 @@ void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
 	allTrails.append(TrailGroup::Trail(obj, col==Q_NULLPTR ? obj->getInfoColor() : *col));
 }
 
-void TrailGroup::reset()
+void TrailGroup::reset(int maxPoints)
 {
+	this->maxPoints=maxPoints;
 	times.clear();
 	for (auto& trail : allTrails)
 	{

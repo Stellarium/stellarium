@@ -28,7 +28,6 @@
 
 AngleMeasureDialog::AngleMeasureDialog()
 	: StelDialog("AngleMeasure")
-	, am(Q_NULLPTR)
 {
 	ui = new Ui_angleMeasureDialog();
 }
@@ -49,36 +48,44 @@ void AngleMeasureDialog::retranslate()
 
 void AngleMeasureDialog::createDialogContent()
 {
-	am = GETSTELMODULE(AngleMeasure);
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
+	enableKineticScrolling(gui->getFlagUseKineticScrolling());
+	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	ui->useDmsFormatCheckBox->setChecked(am->isDmsFormat());
-	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));
-	ui->showPositionAngleCheckBox->setChecked(am->isPaDisplayed());
-	connect(ui->showPositionAngleCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngle(bool)));
-	ui->showPositionAngleHorizontalCheckBox->setChecked(am->isHorPaDisplayed());
-	connect(ui->showPositionAngleHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngleHor(bool)));
-	ui->showEquatorial_GroupBox->setChecked(am->isEquatorial());
-	connect(ui->showEquatorial_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showEquatorial(bool)));
-	ui->showHorizontal_GroupBox->setChecked(am->isHorizontal());
-	connect(ui->showHorizontal_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontal(bool)));
-	ui->azAltStartOnSkyCheckBox->setChecked(am->isHorizontalStartSkylinked());
-	connect(ui->azAltStartOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalStartSkylinked(bool)));
-	ui->azAltEndOnSkyCheckBox->setChecked(am->isHorizontalEndSkylinked());
-	connect(ui->azAltEndOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalEndSkylinked(bool)));
+	connectBoolProperty(ui->useDmsFormatCheckBox, "AngleMeasure.dmsFormat");
+	connectBoolProperty(ui->showPositionAngleCheckBox, "AngleMeasure.flagShowEquatorialPA");
+	connectBoolProperty(ui->showPositionAngleHorizontalCheckBox, "AngleMeasure.flagShowHorizontalPA");
+	connectBoolProperty(ui->showEquatorial_GroupBox, "AngleMeasure.flagShowEquatorial");
+	connectBoolProperty(ui->showHorizontal_GroupBox, "AngleMeasure.flagShowHorizontal");
+	connectBoolProperty(ui->azAltStartOnSkyCheckBox, "AngleMeasure.flagShowHorizontalStartSkylinked");
+	connectBoolProperty(ui->azAltEndOnSkyCheckBox,   "AngleMeasure.flagShowHorizontalEndSkylinked");
+	connectColorButton(ui->equatorialLineColorToolButton, "AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
+	connectColorButton(ui->equatorialTextColorToolButton, "AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
+	connectColorButton(ui->horizontalLineColorToolButton, "AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
+	connectColorButton(ui->horizontalTextColorToolButton, "AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetAngleMeasureSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	setAboutHtml();
+}
+
+void AngleMeasureDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[AngleMeasure] restore defaults...";
+		GETSTELMODULE(AngleMeasure)->restoreDefaultSettings();
+	}
+	else
+		qDebug() << "[AngleMeasure] restore defaults is canceled...";
 }
 
 void AngleMeasureDialog::setAboutHtml(void)
@@ -118,9 +125,4 @@ void AngleMeasureDialog::setAboutHtml(void)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
-}
-
-void AngleMeasureDialog::resetAngleMeasureSettings()
-{
-	am->restoreDefaultSettings();
 }

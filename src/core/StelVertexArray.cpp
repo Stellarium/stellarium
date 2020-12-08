@@ -55,13 +55,15 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	else
 	{
 		ret.indices.clear();
+		unsigned short int limit;
 		// Create a 'Triangles' vertex array from this array.
 		// We have different algorithms for different original mode
 		switch (primitiveType)
 		{
 			case TriangleStrip:
 				ret.indices.reserve(vertex.size() * 3);
-				for (int i = 2; i < vertex.size(); ++i)
+				limit = static_cast<unsigned short int>(vertex.size());
+				for (unsigned short int i = 2; i < limit; ++i)
 				{
 					if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
 							prj->intersectViewportDiscontinuity(vertex[i-1], vertex[i-2]) ||
@@ -81,7 +83,8 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 
 			case Triangles:
 				ret.indices.reserve(vertex.size());
-				for (int i = 0; i < vertex.size(); i += 3)
+				limit = static_cast<unsigned short int>(vertex.size());
+				for (unsigned short int i = 0; i < limit; i += 3)
 				{
 					if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
 							prj->intersectViewportDiscontinuity(vertex.at(i+1), vertex.at(i+2)) ||
@@ -114,9 +117,9 @@ QDataStream& operator<<(QDataStream& out, const StelVertexArray& p)
 {
 	out << p.vertex;
 	out << p.texCoords;
-	out << p.colors; // GZ NEW
+	out << p.colors;
 	out << p.indices;
-	out << (unsigned int)p.primitiveType;
+	out << static_cast<unsigned int>(p.primitiveType);
 	return out;
 }
 
@@ -124,10 +127,10 @@ QDataStream& operator>>(QDataStream& in, StelVertexArray& p)
 {
 	in >> p.vertex;
 	in >> p.texCoords;
-	in >> p.colors; // GZ NEW
+	in >> p.colors;
 	in >> p.indices;
 	unsigned int t;
 	in >> t;
-	p.primitiveType=(StelVertexArray::StelPrimitiveType)t;
+	p.primitiveType=static_cast<StelVertexArray::StelPrimitiveType>(t);
 	return in;
 }

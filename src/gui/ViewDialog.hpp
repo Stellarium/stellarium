@@ -39,17 +39,17 @@ class ViewDialog : public StelDialog
 Q_OBJECT
 public:
 	ViewDialog(QObject* parent);
-	virtual ~ViewDialog();
+	virtual ~ViewDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 private slots:
 	void populateLists();
 	void populateToolTips();
@@ -64,11 +64,6 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void setFlagCustomGrsSettings(bool b);	
-	//! Update the widget to make sure it is synchrone if a value was changed programmatically
-	//! This function should be called repeatidly with e.g. a timer
-	// NO LONGER NEEDED!
-	//void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
@@ -76,10 +71,7 @@ private slots:
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	void setLightPollutionSpinBoxStatus();
-	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
-
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);
@@ -94,51 +86,10 @@ private slots:
 
 	void updateHips();
 	void hipsListItemChanged(QListWidgetItem* item);
+	void populateHipsGroups();
 
-	void askEclipticJ2000GridColor();
-	void askEclipticGridColor();
-	void askEquatorJ2000GridColor();
-	void askEquatorGridColor();
-	void askGalacticGridColor();
-	void askSupergalacticGridColor();
-	void askAzimuthalGridColor();
-	void askEclipticLineJ2000Color();
-	void askEclipticLineColor();
-	void askEquatorLineJ2000Color();
-	void askEquatorLineColor();
-	void askGalacticEquatorLineColor();
-	void askSupergalacticEquatorLineColor();
-	void askLongitudeLineColor();
-	void askHorizonLineColor();
-	void askColureLinesColor();
-	void askCircumpolarCirclesColor();
-	void askPrecessionCirclesColor();
-	void askPrimeVerticalLineColor();
-	void askMeridianLineColor();
-	void askCardinalPointsColor();
-	void askCelestialJ2000PolesColor();
-	void askCelestialPolesColor();
-	void askZenithNadirColor();
-	void askEclipticJ2000PolesColor();
-	void askEclipticPolesColor();
-	void askGalacticPolesColor();
-	void askSupergalacticPolesColor();
-	void askEquinoxJ2000PointsColor();
-	void askEquinoxPointsColor();
-	void askSolsticeJ2000PointsColor();
-	void askSolsticePointsColor();
-	// constellations colors
-	void askConstellationLabelsColor();
-	void askConstellationLinesColor();
-	void askConstellationBoundariesColor();
-	// asterisms colors
-	void askAsterismLabelsColor();
-	void askAsterismLinesColor();
-	void askRayHelpersColor();
-	// nomenclature color
-	void askPlanetNomenclatureColor();	
-	void askPlanetLabelsColor();
-	void askPlanetTrailsColor();
+	void populateOrbitsControls(bool flag);
+	void populateTrailsControls(bool flag);
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
@@ -146,8 +97,6 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
-
-	void colorButton(QToolButton *toolButton, QString propName);
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

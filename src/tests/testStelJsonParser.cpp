@@ -21,7 +21,6 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QTest>
 #include <QBuffer>
 #include <stdexcept>
 
@@ -115,4 +114,22 @@ void TestStelJsonParser::benchmarkParse()
 		buf.seek(0);
 		result = StelJsonParser::parse(&buf);
 	}
+}
+
+void TestStelJsonParser::testWriteParse()
+{
+	bool ok;
+	QVariantMap json;
+	json.insert("val", 280113);
+
+	QByteArray res;
+	QBuffer buf1(&res);
+	buf1.open(QIODevice::WriteOnly);
+	StelJsonParser::write(json, &buf1);
+	buf1.close();
+
+	QVariant result = StelJsonParser::parse(res);
+	QVERIFY(result.toMap().value("val").canConvert<int>());
+	QVERIFY(result.toMap().value("val").toInt(&ok)==280113);
+	QVERIFY(ok==true);
 }

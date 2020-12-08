@@ -28,6 +28,10 @@
 #include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 
+#ifdef Q_OS_WIN
+#include "../ASCOM/TelescopeClientASCOMWidget.hpp"
+#endif
+
 using namespace TelescopeControlGlobals;
 
 class Ui_telescopeConfigurationDialog;
@@ -66,6 +70,9 @@ private slots:
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
 	void toggleTypeINDI(bool enabled);
+	#ifdef Q_OS_WIN
+	void toggleTypeASCOM(bool enabled);
+	#endif
 	
 	void deviceModelSelected(const QString&);
 
@@ -81,6 +88,10 @@ private:
 	QRegExpValidator * hostNameValidator;
 	QRegExpValidator * circleListValidator;
 	QRegExpValidator * serialPortValidator;
+
+	#ifdef Q_OS_WIN
+	TelescopeClientASCOMWidget* ascomWidget;
+	#endif
 	
 	int configuredSlot;
 	

@@ -59,6 +59,8 @@ private slots:
 
 	//! reads the fields and slews a telescope
 	void slew();
+	//! reads the fields and sync a telescope
+	void sync();
 
 	void addTelescope(int slot, QString name);
 	void removeTelescope(int slot);
@@ -103,8 +105,8 @@ private:
 	void savePointsToFile();
 	void loadPointsFromFile();
 
-	TelescopeControl * telescopeManager =  nullptr;
-	StoredPointsDialog * storedPointsDialog = nullptr;
+	TelescopeControl * telescopeManager =  Q_NULLPTR;
+	StoredPointsDialog * storedPointsDialog = Q_NULLPTR;
 	QHash<QString, int> connectedSlotsByName;
 	QVariantMap storedPointsDescriptions;
 };

@@ -2,9 +2,11 @@
 // Name: Best objects in the New General Catalog
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.1
+// Version: 1.3
 // Description: This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC achievement award.
 //
+
+include("i18n.inc");
 
 // List of best objects
 var objlist = [891, 7662, 6781, 7009, 7293, 772, 1907, 1931, 1501, 2403, 2655, 
@@ -21,8 +23,8 @@ var objlist = [891, 7662, 6781, 7009, 7293, 772, 1907, 1931, 1501, 2403, 2655,
 
 core.clear("deepspace");
 NebulaMgr.setFlagHints(true);
-var id = LabelMgr.labelScreen("Best objects in the New General Catalog", 20, 20, false, 24, "#00AAFF");
-var cnt = LabelMgr.labelScreen(objlist.length + " objects in all", 20, 50, false, 20, "#00AAFF");
+var id = LabelMgr.labelScreen(tr("Best objects in the New General Catalog"), 20, 20, false, 24, "#00AAFF");
+var cnt = LabelMgr.labelScreen(objlist.length + " " + tr("objects in all"), 20, 50, false, 20, "#00AAFF");
 LabelMgr.setLabelShow(id, true);
 LabelMgr.setLabelShow(cnt, true);
 core.wait(5);
@@ -30,27 +32,27 @@ LabelMgr.setLabelShow(id, false);
 LabelMgr.setLabelShow(cnt, false);
 LabelMgr.deleteLabel(id);
 LabelMgr.deleteLabel(cnt);
-var dss = core.isDSSModeEnabled();
+var dss = ToastMgr.getFlagShow();
 
 for (i=0; i<objlist.length; i++)
 {
 	ngc = "NGC " + objlist[i];
 	core.selectObjectByName(ngc, true);
 	p = core.getScreenWidth()/2 - 40;
-	n = LabelMgr.labelScreen("Object #" + (i + 1), p, 40, false, 20, "#00AAFF");
+	n = LabelMgr.labelScreen(tr("Object #") + (i + 1), p, 40, false, 20, "#00AAFF");
 	LabelMgr.setLabelShow(n, true);
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.autoZoomIn(2);
 	core.wait(1);
-	core.setDSSMode(true);
+	ToastMgr.setFlagShow(true);
 	core.wait(9);
 	
 	LabelMgr.setLabelShow(n, false);
 	StelMovementMgr.zoomTo(30, 5);
 	core.wait(3);
-	core.setDSSMode(false);
+	ToastMgr.setFlagShow(false);
 	core.wait(5);
 }
 core.clear("natural");
-core.setDSSMode(dss);
+ToastMgr.setFlagShow(dss);
 core.goHome();

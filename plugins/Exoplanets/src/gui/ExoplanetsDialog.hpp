@@ -22,8 +22,13 @@
 #define EXOPLANETSDIALOG_HPP
 
 #include <QObject>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+
 #include "StelDialog.hpp"
 #include "Exoplanets.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 class Ui_exoplanetsDialog;
 class QTimer;
@@ -37,6 +42,22 @@ class ExoplanetsDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	//! @enum ExoplanetsColumns
+	enum ExoplanetsColumns {
+		EPSExoplanetName,
+		EPSExoplanetMass,
+		EPSExoplanetRadius,
+		EPSExoplanetPeriod,
+		EPSExoplanetSemiAxes,
+		EPSExoplanetEccentricity,
+		EPSExoplanetInclination,
+		EPSExoplanetAngleDistance,		
+		EPSStarMagnitude,
+		EPSStarRadius,
+		EPSExoplanetDetectionMethod,
+		EPSCount            //! total number of columns
+	};
+
 	ExoplanetsDialog();
 	~ExoplanetsDialog();
 
@@ -65,23 +86,48 @@ private slots:
 	void drawDiagram(void);
 	void populateDiagramsList();
 
-	void askExoplanetsMarkerColor();
-	void askHabitableExoplanetsMarkerColor();
-
 	void populateTemperatureScales();
 	void setTemperatureScale(int tScaleID);
+	void selectCurrentExoplanet(const QModelIndex &modelIndex);
 
 private:
         Ui_exoplanetsDialog* ui;
 	Exoplanets* ep;
+	class StelObjectMgr* objectMgr;
+	class StelMovementMgr* mvMgr;
 	void setAboutHtml(void);
 	void setInfoHtml(void);
 	void setWebsitesHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
 
+	//! Update names for table columns
+	void setColumnNames();
+	void fillExoplanetsTable();
+
+	QStringList exoplanetsHeader;
 	typedef QPair<QString, int> axisPair;
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class EPSTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	EPSTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == ExoplanetsDialog::EPSExoplanetName || column == ExoplanetsDialog::EPSExoplanetDetectionMethod)
+			return text(column).toLower() < other.text(column).toLower();
+		else
+			return text(column).toFloat() < other.text(column).toFloat();
+	}
 };
 
 #endif // EXOPLANETSDIALOG_HPP

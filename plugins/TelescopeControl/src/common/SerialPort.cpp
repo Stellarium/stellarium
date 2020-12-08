@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "SerialPort.hpp"
 #include "LogFile.hpp"
+#include "StelUtils.hpp"
 
 #ifndef Q_OS_WIN
 #include <unistd.h>
@@ -40,11 +41,11 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	#endif
 {
 #ifdef Q_OS_WIN
-	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
+	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-		                      "CreateFile() failed: " << GetLastError() << endl;
+				      "CreateFile() failed: " << GetLastError() << StelUtils::getEndLineChar();
 	}
 	else
 	{
@@ -57,14 +58,14 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 		if (!SetCommTimeouts(handle, &timeouts))
 		{
 			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-			                      "SetCommTimeouts() failed: " << GetLastError() << endl;
+					      "SetCommTimeouts() failed: " << GetLastError() << StelUtils::getEndLineChar();
 		}
 		else
 		{
 			if (!GetCommState(handle, &dcb_original))
 			{
 				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				                      "GetCommState() failed: " << GetLastError() << endl;
+						      "GetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
 			}
 			else
 			{
@@ -74,14 +75,14 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				if (!BuildCommDCB("9600,n,8,1", &dcb))
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-						              "BuildCommDCB() failed: " << GetLastError() << endl;
+							      "BuildCommDCB() failed: " << GetLastError() << StelUtils::getEndLineChar();
 				}
 				else
 				{
 					if (!SetCommState(handle,&dcb))
 					{
 						*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-							              "SetCommState() failed: " << GetLastError() << endl;
+								      "SetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
 					}
 					else
 					{
@@ -99,21 +100,21 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	if (fd < 0)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-		                      "open() failed: " << strerror(errno) << endl;
+				      "open() failed: " << strerror(errno) << StelUtils::getEndLineChar();
 	}
 	else
 	{
 		if (SETNONBLOCK(fd) < 0)
 		{
 			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-			                      "fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO) << endl;
+					      "fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO) << StelUtils::getEndLineChar();
 		}
 		else
 		{
 			if (tcgetattr(fd,&termios_original) < 0)
 			{
 				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				                      "tcgetattr failed: " << strerror(errno) << endl;
+						      "tcgetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
 			}
 			else
 			{
@@ -130,7 +131,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				if (tcsetattr(fd,TCSAFLUSH,&termios_new) < 0)
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-					                      "tcsetattr failed: " << strerror(errno) << endl;
+							      "tcsetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
 				}
 				else
 				{
@@ -171,8 +172,8 @@ SerialPort::~SerialPort(void)
 int SerialPort::readNonblocking(char *buf, int count)
 {
 	DWORD rval;
-	if (ReadFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+	if (ReadFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;
@@ -181,8 +182,8 @@ int SerialPort::readNonblocking(char *buf, int count)
 int SerialPort::writeNonblocking(const char *buf, int count)
 {
 	DWORD rval;
-	if (WriteFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+	if (WriteFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;
@@ -195,6 +196,9 @@ void SerialPort::prepareSelectFds(fd_set &read_fds,
                                   int &fd_max)
 {
 #ifdef Q_OS_WIN
+	Q_UNUSED(read_fds)
+	Q_UNUSED(write_fds)
+	Q_UNUSED(fd_max)
 	// handle all IO here
 	if (write_buff_end > write_buff)
 		performWriting();

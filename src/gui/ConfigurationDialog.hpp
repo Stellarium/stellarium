@@ -38,16 +38,14 @@ class ConfigurationDialog : public StelDialog
 	Q_OBJECT
 public:
 	ConfigurationDialog(StelGui* agui, QObject* parent);
-	virtual ~ConfigurationDialog();
-	//! Notify that the application style changed
-	void styleChanged();
+	virtual ~ConfigurationDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_configurationDialogForm* ui;
 
 private:
@@ -76,10 +74,12 @@ private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
+	void saveCustomSelectedInfo();
 
 	void updateCurrentLanguage();
 	void updateCurrentSkyLanguage();
@@ -158,6 +158,13 @@ private slots:
 
 	void de430ButtonClicked();
 	void de431ButtonClicked();
+
+	//! feed the combo with useful values. Call in createDialogContent().
+	void populateFontWritingSystemCombo();
+	void handleFontBoxWritingSystem(int index);
+	void populateScreenshotFileformatsCombo();
+
+	void setKeyNavigationState(bool state);
 
 private:
 	StelGui* gui;

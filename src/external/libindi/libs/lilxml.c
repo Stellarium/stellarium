@@ -505,7 +505,7 @@ XMLAtt *findXMLAtt(XMLEle *ep, const char *name)
  */
 XMLEle *findXMLEle(XMLEle *ep, const char *tag)
 {
-    int tl = strlen(tag);
+    int tl = (int)strlen(tag);
     int i;
 
     for (i = 0; i < ep->nel; i++)
@@ -781,7 +781,7 @@ int sprlXMLEle(XMLEle *ep, int level)
 
     l += indent + 1 + ep->tag.sl;
     for (i = 0; i < ep->nat; i++)
-        l += ep->at[i]->name.sl + 4 + strlen(entityXML(ep->at[i]->valu.s));
+	l += ep->at[i]->name.sl + 4 + (int)strlen(entityXML(ep->at[i]->valu.s));
 
     if (ep->nel > 0)
     {
@@ -794,7 +794,7 @@ int sprlXMLEle(XMLEle *ep, int level)
         if (ep->nel == 0)
             l += 2;
         if (ep->pcdata_hasent)
-            l += strlen(entityXML(ep->pcdata.s));
+	    l += (int)strlen(entityXML(ep->pcdata.s));
         else
             l += ep->pcdata.sl;
         if (ep->pcdata.s[ep->pcdata.sl - 1] != '\n')
@@ -863,7 +863,7 @@ char *entityXML(char *s)
     else
     {
         /* put remaining part of s into malbuf */
-        int nleft = strlen(s) + 1; /* include \0 */
+	int nleft = (int)strlen(s) + 1; /* include \0 */
         sret = malbuf = moremem(malbuf, nmalbuf + nleft);
         memcpy(malbuf + nmalbuf, s, nleft);
     }
@@ -1248,7 +1248,7 @@ static void appendString(String *sp, const char *str)
     if (!sp || !str)
         return;
 
-    int strl = strlen(str);
+    int strl = (int)strlen(str);
     int l    = sp->sl + strl + 1; /* need room for '\0' */
 
     if (l > sp->sm)

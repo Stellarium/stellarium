@@ -1,0 +1,62 @@
+labels:
+  - name: invalid
+    labeled:
+      issue:
+        body: Please follow the issue templates.
+        action: close
+      pr:
+        body: Thank you @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
+        action: close
+    unlabeled:
+      issue:
+        body: Thank you for following the template. The repository owner will reply.
+        action: open
+  - name: duplicate
+    labeled:
+      issue:
+        body: This issue already exists.
+        action: close
+  - name: good first issue
+    labeled:
+      issue:
+        body: This issue is easy for contributing. Everyone can work on this.
+  - name: incomplete
+    labeled:
+      issue:
+        body: Please follow the issue template - the hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
+  - name: enhancement
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this enhancement.
+  - name: feature request
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this feature.
+  - name: wishlist
+    labeled:
+      issue:
+        body: Thank you @{{ issue.user.login }} for suggesting this.
+  - name: won't fix
+    labeled:
+      issue:
+        body: |
+          We have a reason not to do it at the moment, but maybe in future we will back to this proposal or someone can implement it and propose pull request with solution! Some reasons for it in the FAQ:
+          https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
+        action: close
+    unlabeled:
+      issue:
+        body: This has become active again.
+        action: open
+  - name: FAQ
+    labeled:
+      issue:
+        body: |
+          Please see FAQ in the wiki:
+          https://github.com/Stellarium/stellarium/wiki/FAQ
+        action: close
+  - name: fix committed
+    labeled:
+      issue:
+        body: |
+          Please check the fresh version (development snapshot) of Stellarium: 
+          https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot

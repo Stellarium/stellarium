@@ -40,7 +40,7 @@ def lengthSquared(v):
     return v[0]*v[0]+v[1]*v[1]+v[2]*v[2]
 
 def angularDist(v1, v2):
-	return math.acos(dot(v1,v2)/math.sqrt(lengthSquared(v1)*lengthSquared(v2)));
+	return math.acos(dot(v1,v2)/math.sqrt(lengthSquared(v1)*lengthSquared(v2)))
 
 def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
 	if (currentLevel>maxLevel):

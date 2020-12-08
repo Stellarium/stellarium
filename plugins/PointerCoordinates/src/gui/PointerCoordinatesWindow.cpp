@@ -22,6 +22,7 @@
 #include "ui_pointerCoordinatesWindow.h"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
@@ -97,7 +98,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));
+	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
 
 	// About tab
@@ -161,8 +162,14 @@ void PointerCoordinatesWindow::saveCoordinatesSettings()
 
 void PointerCoordinatesWindow::resetCoordinatesSettings()
 {
-	coord->restoreDefaultConfiguration();
-	populateValues();
+	if (askConfirmation())
+	{
+		qDebug() << "[PointerCoordinates] restore defaults...";
+		coord->restoreDefaultConfiguration();
+		populateValues();
+	}
+	else
+		qDebug() << "[PointerCoordinates] restore defaults is canceled...";
 }
 
 void PointerCoordinatesWindow::populateCoordinatesPlacesList()

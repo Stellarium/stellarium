@@ -24,7 +24,6 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CompassMarks.hpp"
@@ -51,7 +50,7 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 	info.id = "CompassMarks";
 	info.displayedName = N_("Compass Marks");
 	info.authors = "Matthew Gates";
-	info.contact = "http://porpoisehead.net/";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("Displays compass bearing marks along the horizon");
 	info.version = COMPASSMARKS_PLUGIN_VERSION;
 	info.license = COMPASSMARKS_PLUGIN_LICENSE;
@@ -101,7 +100,7 @@ void CompassMarks::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/compassMarks/bt_compass_on.png"),
 						       QPixmap(":/compassMarks/bt_compass_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Compass_Marks");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");			
 		}
@@ -114,8 +113,6 @@ void CompassMarks::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
-
-
 }
 
 //! Draw any parts on the screen which are for our module
@@ -128,9 +125,7 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	int f = 0;
-	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
-		f = 180;
+	const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
 
 	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
 	painter.setBlending(true);
@@ -168,7 +163,7 @@ void CompassMarks::draw(StelCore* core)
 
 void CompassMarks::update(double deltaTime)
 {
-	markFader.update((int)(deltaTime*1000));
+	markFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void CompassMarks::setCompassMarks(bool b)
@@ -195,7 +190,7 @@ void CompassMarks::loadConfiguration()
 {
 	Q_ASSERT(conf);
 	conf->beginGroup("CompassMarks");
-	markColor = StelUtils::strToVec3f(conf->value("mark_color", "1,0,0").toString());
+	markColor = Vec3f(conf->value("mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("font_size", 10).toInt());
 	displayedAtStartup = conf->value("enable_at_startup", false).toBool();
 	conf->endGroup();

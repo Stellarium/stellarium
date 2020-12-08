@@ -3,18 +3,10 @@
 %% 2016-04-12 adapted from Scenery3D plugin documentation. Just reformatted.
 %% Doc should be edited in here from now on. 
 %% 2017-12-09 update about performance after playing with big models. Added section about temporally changing material.
+%% 2019-10-11 added current references
 %% !!!!!!!!!! Please ask GZ before editing this file. !!!!!!!!!!!!!!!
 
-% \documentclass[a4paper]{article}
-% \usepackage[latin1]{inputenc}
-% \usepackage[T1]{fontenc}
-% \usepackage{a4wide}
-% \usepackage{hyperref}
-
-%\newcommand{\filename}[1]{\texttt{#1}}
-%\newcommand{\cmd}[1]{\texttt{#1}}
-
-\chapter{Scenery3d -- 3D Landscapes}% in Stellarium} 
+\chapter{Scenery3d -- 3D Landscapes}
 \label{ch:scenery3d}
 \chapterauthor*{Georg Zotti and Florian Schaukowitsch}
 
@@ -340,8 +332,8 @@ better shadows for such objects. If required, alpha testing can be combined with
 
 Sometimes, exported objects only have a single side (``paper wall''), and are only visible
 from one side when looked at in Scenery3d. This is caused by an optimization
-called \href{https://en.wikipedia.org/wiki/Back-face_culling}{back-face
-culling}, which skips drawing the back sides of objects because they are usually
+called \emph{back-face culling}\footnote{\url{https://en.wikipedia.org/wiki/Back-face_culling}},
+which skips drawing the back sides of objects because they are usually
 not visible anyway. If possible, avoid such ``thin'' geometry, this will also
 produce better shadows on the object. As a workaround, you can also set
 \parameter{bBackface} to 1 to disable back-face culling for this material.
@@ -820,12 +812,32 @@ start_az_alt_fov=50,10,83
 \label{fig:scenery3d:UffingtonIni}
 \end{figure}
 
+\section{Limitations}
+\label{sec:scenery3d:Limitations}
+
+Models with up to 14 million triangles have been used successfully on
+a mid-range notebook PC from 2016. However, take some restrictions
+into account:
+
+\begin{itemize}
+\item The model is rendered in Cartesian coordinates. Earth's surface
+  is curved. If your model extends by tens of kilometres, the visible
+  horizon formed by faraway mountains may appear too high. You can
+  \newFeature{v0.20.2} display a landscape polygon defined in the
+  currently displayed Landscape on top of your 3D scene by activating
+  \menu{Draw horizon polyline in foreground} in the plugin's
+  settings dialog.
+\item
+  The OBJ format is static. Simulation of interaction with 3D objects
+  is not possible with this plugin.
+\end{itemize}
+
 \section*{Authors and Acknowledgements}
 \label{sec:scenery3d:Acknowledgments}
 
 
 Scenery3d was conceived by Georg Zotti for the
-ASTROSIM\footnote{\url{http://astrosim.univie.ac.at}} project. A first
+ASTROSIM\footnote{\url{https://astrosim.univie.ac.at}} project. A first
 prototype was implemented in 2010/2011 by Simon Parzer and
 Peter Neubauer as student work supervised by Michael Wimmer (TU Wien).
 Models for accuracy tests (Sterngarten, Testscene), and later
@@ -841,12 +853,15 @@ Florian Schaukowitsch adapted the code to work with Qt~5 and the
 Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer~\citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}. % TODO: add more (SEAC2017) when they are published.
+supervised by Michael Wimmer~\citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
-the Austrian Science Fund (FWF) under grant number P~21208-G19.
+the Austrian Science Fund (FWF) under grant number P~21208-G19. Further development is
+partially supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology in Vienna, Austria\footnote{%
+  \url{http://archpro.lbg.ac.at}}.
 
-%\end{document}
+If you are using this plugin in scientific work, please cite: \citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017,Zotti-etal:SIA2016,Zotti:TAG2016}.
+
 
 %%% Local Variables: 
 %%% mode: latex

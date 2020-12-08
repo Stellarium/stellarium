@@ -175,15 +175,72 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="showPositionAngleCheckBox">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>Display with position angle</string>
-            </property>
-           </widget>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="equatorialHorizontalLayout">
+            <item>
+             <widget class="QCheckBox" name="showPositionAngleCheckBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Display with position angle</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="equatorialLineHorizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="equatorialTextColorToolButton">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="equatorialTextColorLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Text</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="equatorialLineColorToolButton">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="equatorialLineColorLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Line</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -212,35 +269,92 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
-            <property name="toolTip">
-             <string>(e.g. for Dobson starhopping)</string>
-            </property>
-            <property name="text">
-             <string>Display with position angle </string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
+          <item row="5" column="0">
            <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
             <property name="text">
              <string>Attach start point to rotating sky</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="6" column="0">
            <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
             <property name="text">
              <string>Attach end point to rotating sky</string>
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
+              <property name="toolTip">
+               <string>(e.g. for Dobson starhopping)</string>
+              </property>
+              <property name="text">
+               <string>Display with position angle </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalLineHorizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="horizontalTextColorToolButton">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="horizontalTextColorLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Text</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="horizontalLineColorToolButton">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="horizontalLineColorLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Line</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="displayBox">
+        <widget class="QGroupBox" name="formatBox">
          <property name="title">
           <string>Format</string>
          </property>
@@ -292,7 +406,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Restore default settings</string>
+          <string>Restore defaults</string>
          </property>
         </widget>
        </item>

@@ -63,24 +63,29 @@ class SolarSystemEditor : public StelModule
 
 public:
 	SolarSystemEditor();
-	virtual ~SolarSystemEditor();
+	virtual ~SolarSystemEditor() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from the StelModule class
 	//! called when the plug-in is loaded.
 	//! All initializations should be done here.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
+
 	//! called before the plug-in is un-loaded.
 	//! Useful for stopping processes, unloading textures, etc.
-	virtual void deinit(){}
+	virtual void deinit() Q_DECL_OVERRIDE {}
+
 	//! Does nothing.
-	virtual void update(double deltaTime){Q_UNUSED(deltaTime)}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {Q_UNUSED(deltaTime)}
+
 	//! draws on the view port.
 	//! Dialog windows don't need explicit drawing, it's done automatically.
-	virtual void draw(StelCore * core){Q_UNUSED(core)}
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void draw(StelCore * core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
+
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+
 	//! called when the "configure" button in the "Plugins" tab is pressed
-	virtual bool configureGui(bool show);
+	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 	
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
@@ -105,19 +110,7 @@ public:
 	//! a valid line in MPC format.
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
 	SsoElements readMpcOneLineMinorPlanetElements(QString oneLineElements) const;
-/* DEAD CODE. MAYBE REACTIVATE as scripting function (public slot)?
-	//! Reads a single object's orbital elements from a string.
-	//! This function converts a line of orbital elements in XEphem format
-	//! to a hash in Stellarium's ssystem.ini format.
-	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
-	//! It recognises only the 'e', 'h' and 'p' types of orbits in XEphem's
-	//! format (comets and minor planets). It is used in handling on-line search
-	//! queries to the MPC's Minor Planet and Comet Ephemeris System, as
-	//! using the MPC format causes long object names to be truncated
-	//! due to the fixed width of the columns.
-	//! An object's type (comet or asteroid) is determined based on its name.
-	SsoElements readXEphemOneLineElements(QString oneLineElements);
-*/
+
 	//! Reads a list of comet orbital elements from a file.
 	//! This function reads a list of comet orbital elements in MPC's one-line
 	//! format from a file (one comet per line) and converts it to a list of
@@ -136,21 +129,6 @@ public:
 	//! readMpcOneLineMinorPlanetElements() is used internally to parse each line.
 	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const;
 
-	/*
-	 * GZ identified as DEAD CODE as of 0.16pre. Maybe reactivate as public slot for scripting use?
-	//! Reads a list of Solar System object orbital elements from a file.
-	//! This function reads a list of Solar System object orbital elements in
-	//! XEphem's one-line format (one object per line, comment lines starting
-	//! with # are skipped) and converts it to a list of hashes in Stellarium's
-	//! ssystem.ini format. XEphem's file format is described in its manual:
-	//! http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501
-	//! Example source file can be any of the lists of objects on the MPC site:
-	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft03Cmt.txt
-	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft03Bright.txt
-	//! readXEphemOneLineElements() is used internally to parse each line.
-	QList<SsoElements> readXEphemOneLineElementsFromFile(QString filePath);
-	*/
-
 	//! Adds a new entry at the end of the user solar system configuration file.
 	//! This function writes directly to the file. See the note on why QSettings
 	//! was not used in the description of
@@ -160,12 +138,13 @@ public:
 	bool appendToSolarSystemConfigurationFile(SsoElements object);
 
 	//! Adds new entries at the end of the user solar system configuration file.
+	//! XXX Also updates existing objects (by removing and then appending)
 	//! This function writes directly to the file. QSettings was not used, as:
 	//!  - Using QSettings with QSettings::IniFormat causes the list in the
 	//!    "color" field (e.g. "1.0, 1.0, 1.0") to be wrapped in double quotation
 	//!    marks (Stellarium requires no quotation marks).
 	//!    (Has been fixed by using StelIniFormat)
-	//!  - Using QSettings with StelIniFormat causes unaccepptable append times
+	//!  - Using QSettings with StelIniFormat causes unacceptable append times
 	//!    when the file grows (>~40 entries). This most probably happens because
 	//!    StelIniParser uses QMap internally for the entry list. QMap orders its
 	//!    keys (in the case of strings - alphabetically) and it has to find
@@ -186,17 +165,17 @@ public:
 
 	//! Flags to control the updateSolarSystemConfigurationFile() function.
 	enum UpdateFlag {
-		UpdateNameAndNumber = 0x01,//!< Update the name and minor planet number, if any.
-		UpdateType = 0x02, //!< Update objects that lack the "type" parameter
-		UpdateOrbitalElements = 0x04, //!< Update the orbital elements, including the orbit function.
-		UpdateMagnitudeParameters = 0x08 //!< Update the values in the two parameter system, or add them if they are missing and the type allows.
+		UpdateNameAndNumber 		= 0x01,	//!< Update the name and minor planet number, if any.
+		UpdateType 			= 0x02,	//!< Update objects that lack the "type" parameter.
+		UpdateOrbitalElements 		= 0x04,	//!< Update the orbital elements, including the orbit function.
+		UpdateMagnitudeParameters 	= 0x08 	//!< Update the values in the two parameter system, or add them if they are missing and the type allows.
 	};
 	Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 
 	//! Updates entries in the user solar system configuration file.
 	//! \param objects a list of data for already existing objects (non-existing ones are skipped);
 	//! \param flags flags controlling what is being updated. See UpdateFlag.
-	//! \returns false if the operation has failed completely for some reason.
+	//! \returns false if the operation has failed for some reason.
 	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
 
 	//! Returns the names of the objects listed in the default ssystem_major.ini.
@@ -218,12 +197,14 @@ public:
 
 	//! Export current minor bodies file from user data directory (if it exists) to filePath. Return true on success.
 	bool copySolarSystemConfigurationFileTo(QString filePath);
+
 	//! Replace current minor bodies file in the user data directory.
 	//! Writes warning to logfile and returns false in case of problems.
 	bool replaceSolarSystemConfigurationFileWith(QString filePath);
+
 	//! (new 0.16)
-	//! Loads all new objects from filePath (an .ini file).
-	//! Default proposal is ssystem_1000comsts.ini in the installation dir.
+	//! Loads all new objects from filePath (an .ini file), and updates existing objects
+	//! Default proposal is ssystem_1000comets.ini in the installation dir.
 	bool addFromSolarSystemConfigurationFile(QString filePath);
 
 	//! returns the path
@@ -262,10 +243,9 @@ private:
 	//! Initialized in init().
 	QHash<QString,QString> defaultSsoIdentifiers;
 
-	//! Gets the names of the objects listed in a ssystem.ini-formatted file.
+	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
 	//! defaultSsoNames.
-	//! Does not check if the file exists.
 	QHash<QString,QString> listAllLoadedObjectsInFile(QString filePath) const;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
@@ -285,11 +265,13 @@ private:
 	//! \returns -1 if the digit is invalid (0 is also an invalid ordinal number
 	//! for a day or month, so this is not a problem)
 	static int unpackDayOrMonthNumber (QChar digit);
+
 	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Also used in packed provisional designations, see
 	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	static int unpackYearNumber (QChar prefix, int lastTwoDigits);
+
 	//! Converts a two-character number used in MPC packed provisional designations.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! This function is used for both asteroid and comet designations.
@@ -307,6 +289,7 @@ private:
 
 	//! Converts an object name to a key (group) name in a configuration file.
 	static QString convertToGroupName(QString& name, int minorPlanetNumber = 0);
+	
 	//! replaces "%25" by "%", then replaces "%28" by "(" and "%29" by ")".
 	static QString fixGroupName(QString &name);
 };

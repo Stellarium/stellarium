@@ -5,6 +5,8 @@
 [Setup]
 @ISS_ARCHITECTURE_SPECIFIC@
 DisableStartupPrompt=yes
+DisableDirPage=no
+DisableProgramGroupPage=no
 WizardSmallImageFile=@CMAKE_SOURCE_DIR@\data\icon.bmp
 WizardImageFile=@CMAKE_SOURCE_DIR@\data\splash.bmp
 WizardImageStretch=no
@@ -14,11 +16,11 @@ AppVersion=@PACKAGE_VERSION@
 AppVerName=Stellarium @PACKAGE_VERSION@
 AppCopyright=Copyright (C) @COPYRIGHT_YEARS@ Stellarium team
 AppPublisher=Stellarium team
-AppPublisherURL=https://www.stellarium.org/
-AppSupportURL=https://www.stellarium.org/
-AppUpdatesURL=https://www.stellarium.org/
-VersionInfoVersion=@PACKAGE_VERSION@
-MinVersion=0,@MIN_VERSION@
+AppPublisherURL=@STELLARIUM_URL@
+AppSupportURL=@STELLARIUM_URL@
+AppUpdatesURL=@STELLARIUM_URL@
+VersionInfoVersion=@WINDOWS_PACKAGE_VERSION@
+MinVersion=0,@ISS_MIN_WIN_VERSION@
 SetupIconFile=@CMAKE_SOURCE_DIR@\data\@PACKAGE_ICON@.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=@CMAKE_SOURCE_DIR@\installers
@@ -54,12 +56,10 @@ Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: r
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 Name: desktopicon\common; Description: "{cm:ForAllUsers}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: exclusive
 Name: desktopicon\user; Description: "{cm:ForCurrentUserOnly}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: exclusive unchecked
-Name: removecache; Description: "{cm:RemoveCache}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
-Name: removeconfig; Description: "{cm:RemoveMainConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
-Name: removeplugins; Description: "{cm:RemovePluginsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
-Name: removesolar; Description: "{cm:RemoveSolarConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
-Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
-;Name: removeshortcuts; Description: "{cm:RemoveShortcutsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
+; Name: removecache; Description: "{cm:RemoveCache}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
+; Name: removeconfig; Description: "{cm:RemoveMainConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
+; Name: removeplugins; Description: "{cm:RemovePluginsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
+; Name: removesolar; Description: "{cm:RemoveSolarConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
 
 [Run]
 ; An option to start Stellarium after setup has finished
@@ -68,27 +68,29 @@ Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; 
 [InstallDelete]
 ;The old log file in all cases
 Type: files; Name: "{userappdata}\Stellarium\log.txt"
-Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
-Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
-Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
-Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
-Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
-;Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: removeshortcuts
+; Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
+; Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
+; Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
+; Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
 
 [UninstallDelete]
 
 [Icons]
 Name: "{group}\{cm:ProgramOnTheWeb,Stellarium}"; Filename: "{app}\stellarium.url"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\{cm:DevelopersDocsOnTheWeb}"; Filename: "{app}\stellarium-devdocs.url"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-; Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium {cm:DebugMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--dump-opengl-details"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-; Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-; Name: "{group}\Stellarium {cm:AngleD3D9Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-; Name: "{group}\Stellarium {cm:AngleD3D11Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d11"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-; Name: "{group}\Stellarium {cm:AngleWarpMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-warp"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--mesa-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; Parameters: "-platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:OpenGLScaleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--scale-gui 0.75 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:DebugMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--dump-opengl-details -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-mode -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleD3D9Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AngleD3D11Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d11 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AngleD3D11ScaleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--scale-gui 0.75 --angle-d3d11 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleWarpMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-warp -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AngleScaleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--scale-gui 0.75 --angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--mesa-mode -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:MesaScaleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--scale-gui 0.75 --mesa-mode -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 @ISS_SPOUT@
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
@@ -139,3 +141,19 @@ Name: "ko"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Korean.isl,@CMAKE_SOURCE_
 Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
 Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"
 
+[Code]
+procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
+var
+  mres : integer;
+begin
+  case CurUninstallStep of
+    usPostUninstall:
+      begin
+        mres := SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO, IDNO)
+        if mres = IDYES then
+          DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
+          DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);
+          DelTree(ExpandConstant('{localappdata}\stellarium'), True, True, True);
+      end;
+  end;
+end;

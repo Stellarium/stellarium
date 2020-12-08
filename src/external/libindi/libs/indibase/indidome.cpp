@@ -1039,7 +1039,6 @@ bool Dome::GetTargetAz(double &Az, double &Alt, double &minAz, double &maxAz)
         //  lets try get it back on
         if (CanAbsMove())
             triggerSnoop(ActiveDeviceT[0].text, "TELESCOPE_PIER_SIDE");
-
     }
 
     OpticalCenter(MountCenter, OTASide * DomeMeasurementsN[DM_OTA_OFFSET].value, observer.lat, hourAngle, OptCenter);

@@ -91,6 +91,9 @@ public slots:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
+	//! return a QStringList of valid timezone names in Stellarium's location database.
+	QStringList getAllTimezoneNames() const;
+
 #ifdef ENABLE_GPS
 	//! Try to get a location from GPS lookup.
 	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning with a NMEA serial device otherwise
@@ -105,7 +108,7 @@ public slots:
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
 	//! If timezone name starts with "UTC", always return unchanged.
-	//! This is required to store timezone names exactly as we know them, and not mix ours and corrent-IANA spelling flavour.
+	//! This is required to store timezone names exactly as we know them, and not mix ours and current-IANA spelling flavour.
 	static QString sanitizeTimezoneStringForLocationDB(QString tzString);
 	//! Attempt to translate a timezone name from those used in Stellarium's location database to a name which is known
 	//! to Qt at runtime as result of QTimeZone::availableTimeZoneIds(). That list may be updated by OS anytime and is known to differ

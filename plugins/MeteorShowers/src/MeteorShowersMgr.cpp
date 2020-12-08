@@ -64,7 +64,6 @@ MeteorShowersMgr::~MeteorShowersMgr()
 {
 	delete m_configDialog;
 	delete m_searchDialog;
-	delete m_networkManager;
 }
 
 void MeteorShowersMgr::init()
@@ -103,8 +102,8 @@ void MeteorShowersMgr::init()
 	// always check if we are on Earth
 	StelCore* core = StelApp::getInstance().getCore();
 	m_onEarth = core->getCurrentPlanet()->getEnglishName() == "Earth";
-	connect(core, SIGNAL(locationChanged(StelLocation)),
-		this, SLOT(locationChanged(StelLocation)));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(locationChanged(StelLocation)));
+	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	// enable at startup?
 	setEnablePlugin(getEnableAtStartup());
@@ -146,8 +145,8 @@ void MeteorShowersMgr::createActions()
 	QString msGroup = N_("Meteor Showers");
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show meteor showers settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
+    addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show meteor showers search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -155,10 +154,16 @@ void MeteorShowersMgr::loadConfig()
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setShowEnableButton(m_conf->value(MS_CONFIG_PREFIX + "/show_enable_button", true).toBool());
 	setShowSearchButton(m_conf->value(MS_CONFIG_PREFIX + "/show_search_button", true).toBool());
-	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
-	setColorARC(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "255,240,0").toString()));
-	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
-	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());
+	Vec3f color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString());
+	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
+	setColorARG(color);
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString());
+	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
+	setColorARC(color);
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
+	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
+	setColorIR(color);
+	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());	
 	setFontSize(m_conf->value(MS_CONFIG_PREFIX + "/font_size", 13).toInt());
 	setEnableLabels(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_labels", true).toBool());
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
@@ -166,7 +171,13 @@ void MeteorShowersMgr::loadConfig()
 	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
-	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());
+	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());	
+}
+
+void MeteorShowersMgr::saveSettings()
+{
+	// Let's interpret hided radiants as "disabled at startup" when main settings are saving
+	m_conf->setValue(MS_CONFIG_PREFIX + "/enable_at_startup", getEnablePlugin());
 }
 
 void MeteorShowersMgr::loadTextures()
@@ -284,12 +295,21 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
-	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
 	{
 		updateCatalog();
 	}
 }
 
+void MeteorShowersMgr::actionEnablePlugin(const bool &b)
+{
+	if (m_enablePlugin != b)
+	{
+		m_enablePlugin = b;
+		emit enablePluginChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
+	}
+}
 
 void MeteorShowersMgr::deleteDownloadProgressBar()
 {
@@ -320,9 +340,7 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -342,11 +360,11 @@ void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytes
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	m_progressBar->setValue(currentValue);
@@ -359,23 +377,6 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[MeteorShowersMgr] The query has been redirected to" << redirectUrl.toString();
-		m_url = redirectUrl.toString();
-		m_conf->setValue(MS_CONFIG_PREFIX + "/url", m_url);
-		reply->deleteLater();
-		m_downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -474,7 +475,7 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 			StelButton* enablePlugin = new StelButton(Q_NULLPTR,
 								  QPixmap(":/MeteorShowers/btMS-on.png"),
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
-								  QPixmap(":/graphicGui/glow32x32.png"),
+								  QPixmap(":/graphicGui/miscGlow32x32.png"),
 								  "actionShow_MeteorShowers");
 			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
 		}
@@ -507,7 +508,7 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 			StelButton* searchMS = new StelButton(Q_NULLPTR,
 							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
 							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
-							      QPixmap(":/graphicGui/glow32x32.png"),
+							      QPixmap(":/graphicGui/miscGlow32x32.png"),
 							      "actionShow_MeteorShowers_search_dialog");
 			gui->getButtonBar()->addButton(searchMS, "065-pluginsGroup");
 		}
@@ -528,19 +529,19 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 {
 	m_colorARG = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgb.toStr());
 }
 
 void MeteorShowersMgr::setColorARC(const Vec3f& rgb)
 {
 	m_colorARC = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", rgb.toStr());
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
 {
 	m_colorIR = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", rgb.toStr());
 }
 
 void MeteorShowersMgr::setEnableAtStartup(const bool& b)
@@ -598,7 +599,7 @@ void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 
 void MeteorShowersMgr::setStatusOfLastUpdate(const int &downloadStatus)
 {
-	m_statusOfLastUpdate = (DownloadStatus) downloadStatus;
+	m_statusOfLastUpdate = static_cast<DownloadStatus>(downloadStatus);
 	if (m_statusOfLastUpdate != UPDATING)
 	{
 		m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);
@@ -616,9 +617,9 @@ void MeteorShowersMgr::displayMessage(const QString& message, const QString hexC
 	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
-void MeteorShowersMgr::locationChanged(StelLocation location)
+void MeteorShowersMgr::locationChanged(const StelLocation &location)
 {
-	m_onEarth = location.planetName == "Earth";
+	m_onEarth = (location.planetName == "Earth");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -637,7 +638,8 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.id = "MeteorShowers";
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
-	info.contact = "mcardinot@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
+	info.acknowledgements = N_("This plugin was created in the 2013 campaign of the ESA Summer of Code in Space programme.");
 	info.description = N_(
 	"<p>"
 		"This plugin enables you to simulate periodic meteor showers and "

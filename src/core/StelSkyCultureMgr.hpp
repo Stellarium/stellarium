@@ -26,22 +26,76 @@
 #include <QStringList>
 
 //! @class StelSkyCulture
-//! Store basic info about a sky culture for stellarium.
+//! Store basic info about a sky culture for Stellarium.
+//! Different human cultures have used different names for stars, and visualised
+//! different constellations in the sky (and in different parts of the sky).
+//! This information will probably evolve considerably over the 0.19 and 0.20 series.
 class StelSkyCulture
 {
+	Q_GADGET
+	Q_ENUMS(BOUNDARIES)
+	Q_ENUMS(CLASSIFICATION)
 public:
+	//! Possible values for boundary lines between constellations.
+	//! Most traditional skies do not have boundaries.
+	//! Some atlases in the 18th and 19th centuries had curved boundaries that differed between authors.
+	//! Only IAU implemented "approved" boundaries, but a similar technique could be used for other skycultures.
+	enum BOUNDARIES
+	{
+		NONE = -1,
+		IAU,
+		OWN
+	};
+	//! Since V0.19. A rough classification scheme that may allow filtering and at least some rough idea of quality control.
+	//! In future versions, this scheme could be refined or changed, and external reviewers
+	//! can probably provide more quality control. For now, we can at least highlight and discern
+	//! "nice tries" from scientific work.
+	//! The classes are not "quality grades" in ascending order, but also allow estimates about particular content.
+	//! INCOMPLETE requires improvements, and PERSONAL usually means "nice, but not even Stellarium developers believe in it".
+	enum CLASSIFICATION
+	{
+		INCOMPLETE=0,	//! Looks like there is something interesting to it, but lacks references. Should evolve into one of the other kinds.
+				//! There are some examples in our repositories from previous times that should be improved,
+				//! else no new ones should be accepted.
+		PERSONAL,	//! Privately developed after ca. 1950, not based on published ethnographic or historical research, not supported by a noteworthy community.
+		TRADITIONAL,	//! Most "living" skycultures. May have evolved over centuries, with mixed influences from other cultures.
+				//! Also for self-presentations by members of respective cultures, indigenous peoples or tribes.
+				//! Description should provide a short description of the people and traditions, and the "cosmovision" of the people,
+				//! some celestial myths, background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for you?)
+				//! Star names with meaning should be translated to English.
+				//! Please provide "further reading" links for more information.
+		ETHNOGRAPHIC,	//! Created by foreigners doing ethnographic fieldwork in modern times.
+				//! This usually is an "outside view", e.g. from ethnographic fieldwork, missionary reports, travelers, "adventurers" of the 19th century etc.
+				//! Description should provide a short description of the way this skyculture has been recorded, about the
+				//! people and traditions, and the "cosmovision" of the people, some celestial myths,
+				//! background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for them?)
+				//! Star names with meaning should be translated to English.
+				//! This is often published in singular rare to find books, or found in university collections or museum archives.
+				//! These should come with links for published books, or how to find this information elsewhere.
+		HISTORICAL,	//! Skyculture from past time, recreated from textual transmission by historians.
+				//! Typically nobody alive today shares the world view of these past cultures.
+				//! The description should provide some insight over sources and how data were retrieved and interpreted,
+				//! and should provide references to (optimally: peer-reviewed) published work.
+		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
+				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
+				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
+	};
+
 	//! English name
 	QString englishName;
 	//! Name of the author
 	QString author;
-	//! Type of the boundaries (-1=none;0=generic;1=own)
-	int boundariesIdx;
+	//! The license
+	QString license;
+	//! Type of the boundaries (enum)
+	BOUNDARIES boundaries;
+	//! Classification of sky culture (enum)
+	CLASSIFICATION classification;
 };
 
 //! @class StelSkyCultureMgr
 //! Manage sky cultures for stellarium.
-//! Different human cultures have used different names for stars, and visualised
-//! different constellations in the sky (and in different parts of the sky).
 //! In the installation data directory and user data directory are the "skycultures"
 //! sub-directories containing one sub-directory per sky culture.
 //! This sub-directory name is that we refer to as sky culture ID here.
@@ -88,11 +142,26 @@ public slots:
 
 	//! Get the type of boundaries of the current sky culture
 	//! Config option: info/boundaries
-	//! Possible values:
-	//! none (-1; using by default)
-	//! generic (0)
-	//! own (1)
+	//! Keys:
+	//! - none (-1; using by default)
+	//! - generic (0)
+	//! - own (1)
 	int getCurrentSkyCultureBoundariesIdx() const;
+
+	//! Get the classification index for the current sky culture
+	//! Config option: info/classification
+	//! Possible values:
+	//! - scientific (1)
+	//! - traditional (2; using by default)
+	//! - personal (3)
+	//! - single (4)
+	int getCurrentSkyCultureClassificationIdx() const;
+
+	//! @return a localized HTML description of the classification for the current sky culture
+	QString getCurrentSkyCultureHtmlClassification() const;
+
+	//! @return a localized HTML description of the references for the current sky culture
+	QString getCurrentSkyCultureHtmlReferences() const;
 
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display
@@ -107,14 +176,14 @@ public slots:
 	
 	//! Get a list of sky culture names in English.
 	//! @return A new-line delimited list of English sky culture names.
-	QString getSkyCultureListEnglish(void);
+	QString getSkyCultureListEnglish(void) const;
 	
 	//! Get a list of sky culture names in the current language.
 	//! @return A list of translated sky culture names.
-	QStringList getSkyCultureListI18(void);
+	QStringList getSkyCultureListI18(void) const;
 
 	//! Get a list of sky culture IDs
-	QStringList getSkyCultureListIDs(void);
+	QStringList getSkyCultureListIDs(void) const;
 
 	//! Returns a map from sky culture IDs/folders to sky culture names.
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
@@ -131,7 +200,7 @@ private:
 	//! Get the culture name in English associated with a specified directory.
 	//! @param directory The directory name.
 	//! @return The English name for the culture associated with directory.
-	QString directoryToSkyCultureEnglish(const QString& directory);
+	QString directoryToSkyCultureEnglish(const QString& directory) const;
 	
 	//! Get the culture name translated to current language associated with 
 	//! a specified directory.

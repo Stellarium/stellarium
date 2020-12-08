@@ -56,7 +56,7 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 	info.id = "PointerCoordinates";
 	info.displayedName = N_("Pointer Coordinates");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("This plugin shows the coordinates of the mouse pointer.");
 	info.version = POINTERCOORDINATES_PLUGIN_VERSION;
 	info.license = POINTERCOORDINATES_PLUGIN_LICENSE;
@@ -92,7 +92,7 @@ void PointerCoordinates::init()
 {
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		qDebug() << "[PointerCoordinates] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
 
@@ -100,6 +100,8 @@ void PointerCoordinates::init()
 	loadConfiguration();
 
 	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
@@ -127,9 +129,12 @@ void PointerCoordinates::draw(StelCore *core)
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+	int x, y;
 	switch (getCurrentCoordinateSystem())
 	{
 		case RaDecJ2000:
@@ -167,9 +172,7 @@ void PointerCoordinates::draw(StelCore *core)
 		case AltAzi:
 		{
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
-			float direction = 3.; // N is zero, E is 90 degrees
-			if (useSouthAzimuth)
-				direction = 2.;
+			const double direction = (useSouthAzimuth ? 2. : 3.); // N is zero, E is 90 degrees
 			cy = direction*M_PI - cy;
 			if (cy > M_PI*2)
 				cy -= M_PI*2;
@@ -270,7 +273,6 @@ void PointerCoordinates::draw(StelCore *core)
 					ha_sidereal -= 24.;
 				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
 				cyt = StelUtils::radToDecDegStr(cy);
-
 			}
 			else
 			{
@@ -287,14 +289,20 @@ void PointerCoordinates::draw(StelCore *core)
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
-	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
+	x = getCoordinatesPlace(coordsText).first;
+	y = getCoordinatesPlace(coordsText).second;
+	if (getCurrentCoordinatesPlace()!=Custom)
+	{
+		x *= ppx;
+		y *= ppx;
+	}
+	sPainter.drawText(x, y, coordsText);
 
 	if (flagShowCrossedLines)
 	{
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		QPoint m = StelMainView::getInstance().getMousePos();
-		sPainter.drawLine2d(m.x(), 0, m.x(), params.viewportXywh[3]);
-		sPainter.drawLine2d(0, params.viewportXywh[3]-m.y(), params.viewportXywh[2], params.viewportXywh[3]-m.y());
+		sPainter.drawLine2d(m.x()*ppx, 0, m.x()*ppx, params.viewportXywh[3]*ppx);
+		sPainter.drawLine2d(0, (params.viewportXywh[3]-m.y())*ppx, params.viewportXywh[2]*ppx, (params.viewportXywh[3]-m.y())*ppx);
 	}
 }
 
@@ -310,7 +318,7 @@ void PointerCoordinates::enableCoordinates(bool b)
 double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LabelMgr")->getCallOrder(actionName)+110.;
 	return 0;
 }
 
@@ -343,7 +351,7 @@ void PointerCoordinates::loadConfiguration(void)
 	conf->beginGroup("PointerCoordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
+	textColor = Vec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();	
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
@@ -384,7 +392,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
 							       "actionShow_MousePointer_Coordinates");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -399,10 +407,10 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
-	CoordinatesPlace coordPlace = (CoordinatesPlace)en.keyToValue(key.toLatin1().data());
+	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
 	if (coordPlace<0)
 	{
-		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
 		coordPlace = TopRight;
 	}
 	setCurrentCoordinatesPlace(coordPlace);
@@ -417,10 +425,10 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
 		coordSystem = RaDecJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);
@@ -434,7 +442,7 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 {
 	int x = 0, y = 0;
-	float coeff = 1.5;
+	static const float coeff = 1.5;
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, text);
 	switch(getCurrentCoordinatesPlace())
@@ -442,18 +450,18 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 		case TopCenter:
 		{
 			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
+			y = gui->getSkyGui()->getSkyGuiHeight() - static_cast<int>(fs.height()*coeff);
 			break;
 		}
 		case TopRight:
 		{
 			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
+			y = gui->getSkyGui()->getSkyGuiHeight() - static_cast<int>(fs.height()*coeff);
 			break;
 		}
 		case RightBottomCorner:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 10*coeff;
+			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
 			y = fs.height();
 			break;
 		}

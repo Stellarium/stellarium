@@ -21,7 +21,7 @@ Ns 30
 map_Kd Sterngarten_Wien_innerArea/Metal_Corrogated_Shiny_90.jpg
 
 newmtl Metal_Brushed
-Kd 0.513725 0.549020 0.607843
+Kd 0.7513725 0.7549020 0.7607843
 Ks 0.330000 0.330000 0.330000
 map_Kd Sterngarten_Wien_innerArea/Metal_Brushed.jpg
 
@@ -34,7 +34,7 @@ map_Kd Sterngarten_Wien_innerArea/Concrete_White.jpg
 
 newmtl Metal_Seamed
 #Ka 0.000000 0.000000 0.000000
-Kd 0.462745 0.466667 0.450980
+Kd 0.7462745 0.7466667 0.7450980
 Ks 0.330000 0.330000 0.330000
 map_Kd Sterngarten_Wien_innerArea/Metal_Seamed.jpg
 
@@ -63,7 +63,7 @@ newmtl M_0128_White
 Kd 1.000000 1.000000 1.000000
 
 newmtl Fencing_Mesh
-Kd 0.317647 0.317647 0.309804
+Kd 0.7317647 0.7317647 0.7309804
 #Ks 0.330000 0.330000 0.330000
 bAlphatest 1
 bBackface 1
@@ -91,13 +91,14 @@ map_Kd Sterngarten_Wien_innerArea/Tafel_Wienplan.jpg
 
 newmtl Google_Earth_Snapshot_1
 #Ka 0.000000 0.000000 0.000000
-Kd 0.274510 0.270588 0.235294
+#Kd 0.274510 0.270588 0.235294
+Kd 0.75 0.75 0.75
 #Ks 0.330000 0.330000 0.330000
 map_Kd Sterngarten_Wien_innerArea/Google_Earth_Snapshot_1.jpg
 
 newmtl abedul
 #Ka 0.000000 0.000000 0.000000
-Kd 0.462745 0.564706 0.529412
+Kd 0.75 0.75 0.75
 #Ks 0.330000 0.330000 0.330000
 bAlphatest 1
 bBackface 1
@@ -110,7 +111,7 @@ bBackface 1
 map_Kd Sterngarten_Wien_innerArea/Vegetation_Bark_Birch1.jpg
 
 newmtl hawthorne
-Kd 0.082353 0.090196 0.062745
+Kd 0.75 0.75 0.75
 #Ks 0.330000 0.330000 0.330000
 bAlphatest 1
 bBackface 1
@@ -121,7 +122,7 @@ Kd 0.509804 0.419608 0.341176
 #Ks 0.330000 0.330000 0.330000
 
 newmtl Vegetation_Juniper2
-Kd 0.388235 0.501961 0.274510
+Kd 0.75 0.75 0.75
 #Ks 0.330000 0.330000 0.330000
 bBackface 1
 map_Kd Sterngarten_Wien_innerArea/Vegetation_Juniper2.jpg
