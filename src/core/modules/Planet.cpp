@@ -2622,7 +2622,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelPainter sPainter(core->getProjection(transfo2));
 		gl = sPainter.glFuncs();
 
-		#if not defined (__arm__) && not defined (__aarch64__)
+		#ifdef GL_MULTISAMPLE
 		if(multisamplingEnabled_)
 			gl->glEnable(GL_MULTISAMPLE);
 		else
@@ -2696,7 +2696,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
-		#if not defined (__arm__) && not defined (__aarch64__)
+		#ifdef GL_MULTISAMPLE
 		if(multisamplingEnabled_)
 			gl->glDisable(GL_MULTISAMPLE);
 		#endif
