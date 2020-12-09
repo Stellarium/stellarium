@@ -2622,10 +2622,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelPainter sPainter(core->getProjection(transfo2));
 		gl = sPainter.glFuncs();
 
-        if(multisamplingEnabled_)
-            gl->glEnable(GL_MULTISAMPLE);
-        else
-            gl->glDisable(GL_MULTISAMPLE);
+		#ifndef __arm__
+		if(multisamplingEnabled_)
+			gl->glEnable(GL_MULTISAMPLE);
+		else
+			gl->glDisable(GL_MULTISAMPLE);
+		#endif
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
@@ -2694,8 +2696,10 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
-        if(multisamplingEnabled_)
-            gl->glDisable(GL_MULTISAMPLE);
+		#ifndef __arm__
+		if(multisamplingEnabled_)
+			gl->glDisable(GL_MULTISAMPLE);
+		#endif
 	}
 
 	bool allowDrawHalo = true;
