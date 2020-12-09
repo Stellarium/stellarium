@@ -2,7 +2,7 @@
 # See https://github.com/marketplace/actions/auto-assign-action
 #
 name: 'Auto Assign'
-on: pull_request
+on: pull_request_target
 
 jobs:
   add-reviews:
