@@ -7,6 +7,8 @@ SET(Calendars_SRCS
     Calendars.cpp
     gui/CalendarsDialog.hpp
     gui/CalendarsDialog.cpp
+    gui/CalendarsInfoPanel.hpp
+    gui/CalendarsInfoPanel.cpp
     Calendar.hpp
     Calendar.cpp
     JulianCalendar.hpp

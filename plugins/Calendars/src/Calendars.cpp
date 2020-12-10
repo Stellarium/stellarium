@@ -19,11 +19,14 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "SkyGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "Calendars.hpp"
 
 #include <QDebug>
+#include <QStyleOptionGraphicsItem>
+#include <QPainter>
 //#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 
@@ -79,6 +82,8 @@ Calendars::Calendars():
 
 	configDialog = new CalendarsDialog();
 	conf = StelApp::getInstance().getSettings();
+
+	infoPanel=new CalendarsInfoPanel(this, static_cast<StelGui*>(StelApp::getInstance().getGui())->getSkyGui());
 }
 
 /*************************************************************************
@@ -92,6 +97,7 @@ Calendars::~Calendars()
 		Calendar *cal = calendars.take(key);
 		delete cal;
 	}
+	if (infoPanel) delete infoPanel;
 }
 
 bool Calendars::configureGui(bool show)
@@ -143,6 +149,8 @@ void Calendars::init()
 		qWarning() << "WARNING: unable to create toolbar button for Calendars plugin: " << e.what();
 	}
 
+	infoPanel->setFont(font);
+	infoPanel->setPos(600, 300);
 
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	calendars.insert("Julian", new JulianCalendar(jd));
@@ -158,7 +166,6 @@ void Calendars::init()
 		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
 	}
 }
-
 
 void Calendars::loadSettings()
 {
@@ -188,21 +195,41 @@ void Calendars::restoreDefaultSettings()
 *******************************************************************************/
 void Calendars::draw(StelCore* core)
 {
-	if (!enabled) return;
+	if (!enabled)
+	{
+		infoPanel->hide();
+		return;
+	}
 
-	// TODO: Replace this horrible text output by a nice HTML table on a QGraphicsTextItem. (See SkyGui/InfoPanel!)
-	StelPainter painter(core->getProjection2d());
-	painter.setColor(1,1,1,1);
-	painter.setFont(font);
-
+	QString str;
+	QTextStream oss(&str);
+	oss << "<table>";
 	// TODO: Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
-	if (flagShowJulian) painter.drawText(1300, 870, QString("Julian: ") + getCal("Julian")->getFormattedDateString());
-	if (flagShowGregorian) painter.drawText(1300, 855, QString("Gregorian: ") + getCal("Gregorian")->getFormattedDateString());
-	if (flagShowISO) painter.drawText(1300, 840, QString("ISO date: ") + getCal("ISO")->getFormattedDateString());
-	if (flagShowMayaLongCount) painter.drawText(1300, 825, QString("Maya Long Count: ") + getCal("MayaLongCount")->getFormattedDateString());
-	if (flagShowMayaHaab) painter.drawText(1300, 810, QString("Maya Haab: ") + getCal("MayaHaab")->getFormattedDateString());
-	if (flagShowMayaTzolkin) painter.drawText(1300, 795, QString("Maya Tzolkin: ") + getCal("MayaTzolkin")->getFormattedDateString());
+	if (flagShowJulian)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Julian",          "calendar")).arg(getCal("Julian")->getFormattedDateString());
+	if (flagShowGregorian)     oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Gregorian",       "calendar")).arg(getCal("Gregorian")->getFormattedDateString());
+	if (flagShowISO)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO date",        "calendar")).arg(getCal("ISO")->getFormattedDateString());
+	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
+	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
+	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
+	oss << "</table>";
+	Vec3f color(1);
+	if (StelApp::getInstance().getFlagOverwriteInfoColor())
+	{
+		// make info text more readable...
+		color = StelApp::getInstance().getOverwriteInfoColor();
+	}
+	if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+	{
+		// make info text more readable when atmosphere enabled at daylight.
+		color = StelApp::getInstance().getDaylightInfoColor();
+	}
+
+	infoPanel->setDefaultTextColor(color.toQColor());
+	infoPanel->setHtml(str);
+	infoPanel->adjustSize(); // TODO: Why does that wrap AD/BC into a new line???
+	infoPanel->updatePosition();
+	infoPanel->show();
 }
 
 

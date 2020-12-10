@@ -21,11 +21,13 @@
 
 #include <QFont>
 #include <QMap>
+//#include <QGraphicsTextItem>
 
 #include "StelModule.hpp"
 
 
 #include "Calendar.hpp"
+#include "CalendarsInfoPanel.hpp"
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
 
@@ -113,6 +115,7 @@ public slots:
 private:
 	// Font used for displaying text
 	QFont font;
+	CalendarsInfoPanel *infoPanel;
 	CalendarsDialog* configDialog;
 	StelButton* toolbarButton;
 	QSettings* conf;
