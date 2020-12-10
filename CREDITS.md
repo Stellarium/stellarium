@@ -695,9 +695,9 @@
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.105 Images of NGC6496
-	     from Mohamad Abbas
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	      from Mohamad Abbas
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.106 Images of PGC3589
 	      from ESA/Hubble, Digitized Sky Survey 2
 	      https://www.spacetelescope.org/
@@ -718,6 +718,9 @@
 	      from Tayson82
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.111 Images of Sh2-170
+	      from Wang Wei
+	      License: Creative Commons Attribution-Share Alike 3.0 Unported
 ```
 
 ## Appendix
