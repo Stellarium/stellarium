@@ -189,10 +189,9 @@ void Calendars::restoreDefaultSettings()
 	loadSettings();
 }
 
-/******************************************************************************
- Draw our module. This should print the activated calendars in the main window
- TODO: select activated only, better formatting (table?), screen target coordinates
-*******************************************************************************/
+/*********************************************************************************
+ Draw our module. This tabulates the activated calendars in the lower right corner
+**********************************************************************************/
 void Calendars::draw(StelCore* core)
 {
 	if (!enabled)
