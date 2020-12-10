@@ -80,6 +80,7 @@ public:
 		ECLIPTICPOLES_J2000,
 		ECLIPTICPOLES_OF_DATE,
 		GALACTICPOLES,
+		GALACTICCENTER,
 		SUPERGALACTICPOLES,
 		EQUINOXES_J2000,
 		EQUINOXES_OF_DATE,
@@ -201,10 +202,10 @@ static double getClosestResolutionDMS(double pixelPerRad)
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<12;++i)
+	{
 		if (STEP_SIZES_DMS[i]>minSizeArcsec)
-		{
 			return STEP_SIZES_DMS[i]/3600.;
-		}
+	}
 	return 10.;
 }
 
@@ -214,10 +215,10 @@ static double getClosestResolutionHMS(double pixelPerRad)
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<11;++i)
+	{
 		if (STEP_SIZES_HMS[i]>minSizeArcsec)
-		{
 			return STEP_SIZES_HMS[i]/3600.;
-		}
+	}
 	return 15.;
 }
 
@@ -1197,7 +1198,8 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.drawGreatCircleArc(p1, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 		sPainter.drawGreatCircleArc(p2, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
-	else {
+	else
+	{
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 		{
 			if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
@@ -1312,6 +1314,15 @@ void SkyPoint::updateLabel()
 			southernLabel = q_("SGP");
 			break;
 		}
+		case GALACTICCENTER:
+		{
+			frameType = StelCore::FrameGalactic;
+			// TRANSLATORS: Galactic Center point
+			northernLabel = q_("GC");
+			// TRANSLATORS: Galactic Anticenter point
+			southernLabel = q_("GA");
+			break;
+		}
 		case SUPERGALACTICPOLES:
 		{
 			frameType = StelCore::FrameSupergalactic;
@@ -1414,7 +1425,7 @@ void SkyPoint::draw(StelCore *core) const
 		case ZENITH_NADIR:
 		case ECLIPTICPOLES_J2000:
 		case ECLIPTICPOLES_OF_DATE:
-		case GALACTICPOLES:
+		case GALACTICPOLES:		
 		case SUPERGALACTICPOLES:
 		{
 			// North Pole
@@ -1448,6 +1459,17 @@ void SkyPoint::draw(StelCore *core) const
 			// Winter solstice
 			sPainter.drawSprite2dMode(Vec3d(0,-1,0), 5.f);
 			sPainter.drawText(Vec3d(0,-1,0), southernLabel, 0, shift, shift, false);
+			break;
+		}
+		case GALACTICCENTER:
+		{
+			// Galactic Center point
+			sPainter.drawSprite2dMode(Vec3d(1,0,0), 5.f);
+			sPainter.drawText(Vec3d(1,0,0), northernLabel, 0, shift, shift, false);
+
+			// Galactic Anticenter point
+			sPainter.drawSprite2dMode(Vec3d(-1,0,0), 5.f);
+			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
 		case ANTISOLAR:
@@ -1525,6 +1547,7 @@ GridLinesMgr::GridLinesMgr()
 	eclipticJ2000Poles = new SkyPoint(SkyPoint::ECLIPTICPOLES_J2000);
 	eclipticPoles = new SkyPoint(SkyPoint::ECLIPTICPOLES_OF_DATE);
 	galacticPoles = new SkyPoint(SkyPoint::GALACTICPOLES);
+	galacticCenter = new SkyPoint(SkyPoint::GALACTICCENTER);
 	supergalacticPoles = new SkyPoint(SkyPoint::SUPERGALACTICPOLES);
 	equinoxJ2000Points = new SkyPoint(SkyPoint::EQUINOXES_J2000);
 	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
@@ -1569,6 +1592,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete eclipticJ2000Poles;
 	delete eclipticPoles;
 	delete galacticPoles;
+	delete galacticCenter;
 	delete supergalacticPoles;
 	delete equinoxJ2000Points;
 	delete equinoxPoints;
@@ -1654,6 +1678,7 @@ void GridLinesMgr::init()
 	setFlagEclipticJ2000Poles(conf->value("viewing/flag_ecliptic_J2000_poles").toBool());
 	setFlagEclipticPoles(conf->value("viewing/flag_ecliptic_poles").toBool());
 	setFlagGalacticPoles(conf->value("viewing/flag_galactic_poles").toBool());
+	setFlagGalacticCenter(conf->value("viewing/flag_galactic_center").toBool());
 	setFlagSupergalacticPoles(conf->value("viewing/flag_supergalactic_poles").toBool());
 	setFlagEquinoxJ2000Points(conf->value("viewing/flag_equinox_J2000_points").toBool());
 	setFlagEquinoxPoints(conf->value("viewing/flag_equinox_points").toBool());
@@ -1695,6 +1720,7 @@ void GridLinesMgr::init()
 	setColorEclipticJ2000Poles(      Vec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
 	setColorEclipticPoles(           Vec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
 	setColorGalacticPoles(           Vec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
+	setColorGalacticCenter(           Vec3f(conf->value("color/galactic_center_color", defaultColor).toString()));
 	setColorSupergalacticPoles(      Vec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
 	setColorEquinoxJ2000Points(      Vec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
 	setColorEquinoxPoints(           Vec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
@@ -1736,6 +1762,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Ecliptic_J2000_Poles",       displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
 	addAction("actionShow_Ecliptic_Poles",             displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
 	addAction("actionShow_Galactic_Poles",             displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
+	addAction("actionShow_Galactic_Center",             displayGroup, N_("Galactic center and anticenter"), "galacticCenterDisplayed");
 	addAction("actionShow_Supergalactic_Poles",        displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
 	addAction("actionShow_Equinox_J2000_Points",       displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
 	addAction("actionShow_Equinox_Points",             displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
@@ -1783,6 +1810,7 @@ void GridLinesMgr::update(double deltaTime)
 	eclipticJ2000Poles->update(deltaTime);
 	eclipticPoles->update(deltaTime);
 	galacticPoles->update(deltaTime);
+	galacticCenter->update(deltaTime);
 	supergalacticPoles->update(deltaTime);
 	equinoxJ2000Points->update(deltaTime);
 	equinoxPoints->update(deltaTime);
@@ -1840,6 +1868,7 @@ void GridLinesMgr::draw(StelCore* core)
 	zenithNadir->draw(core);
 	eclipticJ2000Poles->draw(core);
 	galacticPoles->draw(core);
+	galacticCenter->draw(core);
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
@@ -1871,6 +1900,7 @@ void GridLinesMgr::updateLabels()
 	eclipticJ2000Poles->updateLabel();
 	eclipticPoles->updateLabel();
 	galacticPoles->updateLabel();
+	galacticCenter->updateLabel();
 	supergalacticPoles->updateLabel();
 	equinoxJ2000Points->updateLabel();
 	equinoxPoints->updateLabel();
@@ -1883,7 +1913,8 @@ void GridLinesMgr::updateLabels()
 //! Setter ("master switch") for displaying any grid/line.
 void GridLinesMgr::setFlagGridlines(const bool displayed)
 {
-	if(displayed != gridlinesDisplayed) {
+	if(displayed != gridlinesDisplayed)
+	{
 		gridlinesDisplayed=displayed;
 		emit gridlinesDisplayedChanged(displayed);
 	}
@@ -1932,6 +1963,7 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 	setFlagEclipticPoles(displayed);
 	setFlagEquinoxPoints(displayed);
 	setFlagGalacticPoles(displayed);
+	setFlagGalacticCenter(displayed);
 	setFlagAntisolarPoint(displayed);
 	setFlagCelestialPoles(displayed);
 	setFlagSolsticePoints(displayed);
@@ -1946,7 +1978,8 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 //! Set flag for displaying Azimuthal Grid
 void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
 {
-	if(displayed != aziGrid->isDisplayed()) {
+	if(displayed != aziGrid->isDisplayed())
+	{
 		aziGrid->setDisplayed(displayed);
 		emit azimuthalGridDisplayedChanged(displayed);
 	}
@@ -1962,7 +1995,8 @@ Vec3f GridLinesMgr::getColorAzimuthalGrid() const
 }
 void GridLinesMgr::setColorAzimuthalGrid(const Vec3f& newColor)
 {
-	if(newColor != aziGrid->getColor()) {
+	if(newColor != aziGrid->getColor())
+	{
 		aziGrid->setColor(newColor);
 		emit azimuthalGridColorChanged(newColor);
 	}
@@ -1971,7 +2005,8 @@ void GridLinesMgr::setColorAzimuthalGrid(const Vec3f& newColor)
 //! Set flag for displaying Equatorial Grid
 void GridLinesMgr::setFlagEquatorGrid(const bool displayed)
 {
-	if(displayed != equGrid->isDisplayed()) {
+	if(displayed != equGrid->isDisplayed())
+	{
 		equGrid->setDisplayed(displayed);
 		emit equatorGridDisplayedChanged(displayed);
 	}
@@ -1987,7 +2022,8 @@ Vec3f GridLinesMgr::getColorEquatorGrid() const
 }
 void GridLinesMgr::setColorEquatorGrid(const Vec3f& newColor)
 {
-	if(newColor != equGrid->getColor()) {
+	if(newColor != equGrid->getColor())
+	{
 		equGrid->setColor(newColor);
 		emit equatorGridColorChanged(newColor);
 	}
@@ -1996,7 +2032,8 @@ void GridLinesMgr::setColorEquatorGrid(const Vec3f& newColor)
 //! Set flag for displaying Equatorial J2000 Grid
 void GridLinesMgr::setFlagEquatorJ2000Grid(const bool displayed)
 {
-	if(displayed != equJ2000Grid->isDisplayed()) {
+	if(displayed != equJ2000Grid->isDisplayed())
+	{
 		equJ2000Grid->setDisplayed(displayed);
 		emit equatorJ2000GridDisplayedChanged(displayed);
 	}
@@ -2012,7 +2049,8 @@ Vec3f GridLinesMgr::getColorEquatorJ2000Grid() const
 }
 void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& newColor)
 {
-	if(newColor != equJ2000Grid->getColor()) {
+	if(newColor != equJ2000Grid->getColor())
+	{
 		equJ2000Grid->setColor(newColor);
 		emit equatorJ2000GridColorChanged(newColor);
 	}
@@ -2021,7 +2059,8 @@ void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& newColor)
 //! Set flag for displaying Ecliptic J2000 Grid
 void GridLinesMgr::setFlagEclipticJ2000Grid(const bool displayed)
 {
-	if(displayed != eclJ2000Grid->isDisplayed()) {
+	if(displayed != eclJ2000Grid->isDisplayed())
+	{
 		eclJ2000Grid->setDisplayed(displayed);
 		emit eclipticJ2000GridDisplayedChanged(displayed);
 	}
@@ -2037,7 +2076,8 @@ Vec3f GridLinesMgr::getColorEclipticJ2000Grid() const
 }
 void GridLinesMgr::setColorEclipticJ2000Grid(const Vec3f& newColor)
 {
-	if(newColor != eclJ2000Grid->getColor()) {
+	if(newColor != eclJ2000Grid->getColor())
+	{
 		eclJ2000Grid->setColor(newColor);
 		emit eclipticJ2000GridColorChanged(newColor);
 	}
@@ -2046,7 +2086,8 @@ void GridLinesMgr::setColorEclipticJ2000Grid(const Vec3f& newColor)
 //! Set flag for displaying Ecliptic of Date Grid
 void GridLinesMgr::setFlagEclipticGrid(const bool displayed)
 {
-	if(displayed != eclGrid->isDisplayed()) {
+	if(displayed != eclGrid->isDisplayed())
+	{
 		eclGrid->setDisplayed(displayed);
 		emit eclipticGridDisplayedChanged(displayed);
 	}
@@ -2062,7 +2103,8 @@ Vec3f GridLinesMgr::getColorEclipticGrid() const
 }
 void GridLinesMgr::setColorEclipticGrid(const Vec3f& newColor)
 {
-	if(newColor != eclGrid->getColor()) {
+	if(newColor != eclGrid->getColor())
+	{
 		eclGrid->setColor(newColor);
 		emit eclipticGridColorChanged(newColor);
 	}
@@ -2071,7 +2113,8 @@ void GridLinesMgr::setColorEclipticGrid(const Vec3f& newColor)
 //! Set flag for displaying Galactic Grid
 void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 {
-	if(displayed != galacticGrid->isDisplayed()) {
+	if(displayed != galacticGrid->isDisplayed())
+	{
 		galacticGrid->setDisplayed(displayed);
 		emit galacticGridDisplayedChanged(displayed);
 	}
@@ -2087,7 +2130,8 @@ Vec3f GridLinesMgr::getColorGalacticGrid() const
 }
 void GridLinesMgr::setColorGalacticGrid(const Vec3f& newColor)
 {
-	if(newColor != galacticGrid->getColor()) {
+	if(newColor != galacticGrid->getColor())
+	{
 		galacticGrid->setColor(newColor);
 		emit galacticGridColorChanged(newColor);
 	}
@@ -2096,7 +2140,8 @@ void GridLinesMgr::setColorGalacticGrid(const Vec3f& newColor)
 //! Set flag for displaying Supergalactic Grid
 void GridLinesMgr::setFlagSupergalacticGrid(const bool displayed)
 {
-	if(displayed != supergalacticGrid->isDisplayed()) {
+	if(displayed != supergalacticGrid->isDisplayed())
+	{
 		supergalacticGrid->setDisplayed(displayed);
 		emit supergalacticGridDisplayedChanged(displayed);
 	}
@@ -2112,7 +2157,8 @@ Vec3f GridLinesMgr::getColorSupergalacticGrid() const
 }
 void GridLinesMgr::setColorSupergalacticGrid(const Vec3f& newColor)
 {
-	if(newColor != supergalacticGrid->getColor()) {
+	if(newColor != supergalacticGrid->getColor())
+	{
 		supergalacticGrid->setColor(newColor);
 		emit supergalacticGridColorChanged(newColor);
 	}
@@ -2121,7 +2167,8 @@ void GridLinesMgr::setColorSupergalacticGrid(const Vec3f& newColor)
 //! Set flag for displaying Equatorial Line
 void GridLinesMgr::setFlagEquatorLine(const bool displayed)
 {
-	if(displayed != equatorLine->isDisplayed()) {
+	if(displayed != equatorLine->isDisplayed())
+	{
 		equatorLine->setDisplayed(displayed);
 		emit equatorLineDisplayedChanged(displayed);
 	}
@@ -2134,7 +2181,8 @@ bool GridLinesMgr::getFlagEquatorLine() const
 //! Set flag for displaying Equatorial Line partitions
 void GridLinesMgr::setFlagEquatorParts(const bool displayed)
 {
-	if(displayed != equatorLine->showsPartitions()) {
+	if(displayed != equatorLine->showsPartitions())
+	{
 		equatorLine->setPartitions(displayed);
 		emit equatorPartsDisplayedChanged(displayed);
 	}
@@ -2146,7 +2194,8 @@ bool GridLinesMgr::getFlagEquatorParts() const
 }
 void GridLinesMgr::setFlagEquatorLabeled(const bool displayed)
 {
-	if(displayed != equatorLine->isLabeled()) {
+	if(displayed != equatorLine->isLabeled())
+	{
 		equatorLine->setLabeled(displayed);
 		emit equatorPartsLabeledChanged(displayed);
 	}
@@ -2161,7 +2210,8 @@ Vec3f GridLinesMgr::getColorEquatorLine() const
 }
 void GridLinesMgr::setColorEquatorLine(const Vec3f& newColor)
 {
-	if(newColor != equatorLine->getColor()) {
+	if(newColor != equatorLine->getColor())
+	{
 		equatorLine->setColor(newColor);
 		emit equatorLineColorChanged(newColor);
 	}
@@ -2170,7 +2220,8 @@ void GridLinesMgr::setColorEquatorLine(const Vec3f& newColor)
 //! Set flag for displaying J2000 Equatorial Line
 void GridLinesMgr::setFlagEquatorJ2000Line(const bool displayed)
 {
-	if(displayed != equatorJ2000Line->isDisplayed()) {
+	if(displayed != equatorJ2000Line->isDisplayed())
+	{
 		equatorJ2000Line->setDisplayed(displayed);
 		emit equatorJ2000LineDisplayedChanged(displayed);
 	}
@@ -2183,7 +2234,8 @@ bool GridLinesMgr::getFlagEquatorJ2000Line() const
 //! Set flag for displaying J2000 Equatorial Line partitions
 void GridLinesMgr::setFlagEquatorJ2000Parts(const bool displayed)
 {
-	if(displayed != equatorJ2000Line->showsPartitions()) {
+	if(displayed != equatorJ2000Line->showsPartitions())
+	{
 		equatorJ2000Line->setPartitions(displayed);
 		emit equatorJ2000PartsDisplayedChanged(displayed);
 	}
@@ -2195,7 +2247,8 @@ bool GridLinesMgr::getFlagEquatorJ2000Parts() const
 }
 void GridLinesMgr::setFlagEquatorJ2000Labeled(const bool displayed)
 {
-	if(displayed != equatorJ2000Line->isLabeled()) {
+	if(displayed != equatorJ2000Line->isLabeled())
+	{
 		equatorJ2000Line->setLabeled(displayed);
 		emit equatorJ2000PartsLabeledChanged(displayed);
 	}
@@ -2210,7 +2263,8 @@ Vec3f GridLinesMgr::getColorEquatorJ2000Line() const
 }
 void GridLinesMgr::setColorEquatorJ2000Line(const Vec3f& newColor)
 {
-	if(newColor != equatorJ2000Line->getColor()) {
+	if(newColor != equatorJ2000Line->getColor())
+	{
 		equatorJ2000Line->setColor(newColor);
 		emit equatorJ2000LineColorChanged(newColor);
 	}
@@ -2219,7 +2273,8 @@ void GridLinesMgr::setColorEquatorJ2000Line(const Vec3f& newColor)
 //! Set flag for displaying Ecliptic Line
 void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 {
-	if(displayed != eclipticLine->isDisplayed()) {
+	if(displayed != eclipticLine->isDisplayed())
+	{
 		eclipticLine->setDisplayed(displayed);
 		emit eclipticLineDisplayedChanged(displayed);
 	}
@@ -2232,7 +2287,8 @@ bool GridLinesMgr::getFlagEclipticLine() const
 //! Set flag for displaying Ecliptic Line partitions
 void GridLinesMgr::setFlagEclipticParts(const bool displayed)
 {
-	if(displayed != eclipticLine->showsPartitions()) {
+	if(displayed != eclipticLine->showsPartitions())
+	{
 		eclipticLine->setPartitions(displayed);
 		emit eclipticPartsDisplayedChanged(displayed);
 	}
@@ -2245,7 +2301,8 @@ bool GridLinesMgr::getFlagEclipticParts() const
 //! Set flag for displaying Ecliptic Line partitions
 void GridLinesMgr::setFlagEclipticLabeled(const bool displayed)
 {
-	if(displayed != eclipticLine->isLabeled()) {
+	if(displayed != eclipticLine->isLabeled())
+	{
 		eclipticLine->setLabeled(displayed);
 		emit eclipticPartsLabeledChanged(displayed);
 	}
@@ -2261,7 +2318,8 @@ Vec3f GridLinesMgr::getColorEclipticLine() const
 }
 void GridLinesMgr::setColorEclipticLine(const Vec3f& newColor)
 {
-	if(newColor != eclipticLine->getColor()) {
+	if(newColor != eclipticLine->getColor())
+	{
 		eclipticLine->setColor(newColor);
 		emit eclipticLineColorChanged(newColor);
 	}
@@ -2270,7 +2328,8 @@ void GridLinesMgr::setColorEclipticLine(const Vec3f& newColor)
 //! Set flag for displaying Ecliptic J2000 Line
 void GridLinesMgr::setFlagEclipticJ2000Line(const bool displayed)
 {
-	if(displayed != eclipticJ2000Line->isDisplayed()) {
+	if(displayed != eclipticJ2000Line->isDisplayed())
+	{
 		eclipticJ2000Line->setDisplayed(displayed);
 		emit eclipticJ2000LineDisplayedChanged(displayed);
 	}
@@ -2283,7 +2342,8 @@ bool GridLinesMgr::getFlagEclipticJ2000Line() const
 //! Set flag for displaying Ecliptic J2000 Line partitions
 void GridLinesMgr::setFlagEclipticJ2000Parts(const bool displayed)
 {
-	if(displayed != eclipticJ2000Line->showsPartitions()) {
+	if(displayed != eclipticJ2000Line->showsPartitions())
+	{
 		eclipticJ2000Line->setPartitions(displayed);
 		emit eclipticJ2000PartsDisplayedChanged(displayed);
 	}
@@ -2296,7 +2356,8 @@ bool GridLinesMgr::getFlagEclipticJ2000Parts() const
 //! Set flag for displaying Ecliptic J2000 Line partitions
 void GridLinesMgr::setFlagEclipticJ2000Labeled(const bool displayed)
 {
-	if(displayed != eclipticJ2000Line->isLabeled()) {
+	if(displayed != eclipticJ2000Line->isLabeled())
+	{
 		eclipticJ2000Line->setLabeled(displayed);
 		emit eclipticJ2000PartsLabeledChanged(displayed);
 	}
@@ -2312,7 +2373,8 @@ Vec3f GridLinesMgr::getColorEclipticJ2000Line() const
 }
 void GridLinesMgr::setColorEclipticJ2000Line(const Vec3f& newColor)
 {
-	if(newColor != eclipticJ2000Line->getColor()) {
+	if(newColor != eclipticJ2000Line->getColor())
+	{
 		eclipticJ2000Line->setColor(newColor);
 		emit eclipticJ2000LineColorChanged(newColor);
 	}
@@ -2321,7 +2383,8 @@ void GridLinesMgr::setColorEclipticJ2000Line(const Vec3f& newColor)
 //! Set flag for displaying Precession Circles
 void GridLinesMgr::setFlagPrecessionCircles(const bool displayed)
 {
-	if(displayed != precessionCircleN->isDisplayed()) {
+	if(displayed != precessionCircleN->isDisplayed())
+	{
 		precessionCircleN->setDisplayed(displayed);
 		precessionCircleS->setDisplayed(displayed);
 		emit precessionCirclesDisplayedChanged(displayed);
@@ -2336,7 +2399,8 @@ bool GridLinesMgr::getFlagPrecessionCircles() const
 //! Set flag for displaying Precession Circle partitions
 void GridLinesMgr::setFlagPrecessionParts(const bool displayed)
 {
-	if(displayed != precessionCircleN->showsPartitions()) {
+	if(displayed != precessionCircleN->showsPartitions())
+	{
 		precessionCircleN->setPartitions(displayed);
 		precessionCircleS->setPartitions(displayed);
 		emit precessionPartsDisplayedChanged(displayed);
@@ -2351,7 +2415,8 @@ bool GridLinesMgr::getFlagPrecessionParts() const
 //! Set flag for displaying Precession Circle partitions
 void GridLinesMgr::setFlagPrecessionLabeled(const bool displayed)
 {
-	if(displayed != precessionCircleN->isLabeled()) {
+	if(displayed != precessionCircleN->isLabeled())
+	{
 		precessionCircleN->setLabeled(displayed);
 		precessionCircleS->setLabeled(displayed);
 		emit precessionPartsLabeledChanged(displayed);
@@ -2369,7 +2434,8 @@ Vec3f GridLinesMgr::getColorPrecessionCircles() const
 }
 void GridLinesMgr::setColorPrecessionCircles(const Vec3f& newColor)
 {
-	if(newColor != precessionCircleN->getColor()) {
+	if(newColor != precessionCircleN->getColor())
+	{
 		precessionCircleN->setColor(newColor);
 		precessionCircleS->setColor(newColor);
 		emit precessionCirclesColorChanged(newColor);
@@ -2379,7 +2445,8 @@ void GridLinesMgr::setColorPrecessionCircles(const Vec3f& newColor)
 //! Set flag for displaying Meridian Line
 void GridLinesMgr::setFlagMeridianLine(const bool displayed)
 {
-	if(displayed != meridianLine->isDisplayed()) {
+	if(displayed != meridianLine->isDisplayed())
+	{
 		meridianLine->setDisplayed(displayed);
 		emit meridianLineDisplayedChanged(displayed);
 	}
@@ -2392,7 +2459,8 @@ bool GridLinesMgr::getFlagMeridianLine() const
 //! Set flag for displaying Meridian Line partitions
 void GridLinesMgr::setFlagMeridianParts(const bool displayed)
 {
-	if(displayed != meridianLine->showsPartitions()) {
+	if(displayed != meridianLine->showsPartitions())
+	{
 		meridianLine->setPartitions(displayed);
 		emit meridianPartsDisplayedChanged(displayed);
 	}
@@ -2405,7 +2473,8 @@ bool GridLinesMgr::getFlagMeridianParts() const
 //! Set flag for displaying Meridian Line partitions
 void GridLinesMgr::setFlagMeridianLabeled(const bool displayed)
 {
-	if(displayed != meridianLine->isLabeled()) {
+	if(displayed != meridianLine->isLabeled())
+	{
 		meridianLine->setLabeled(displayed);
 		emit meridianPartsLabeledChanged(displayed);
 	}
@@ -2421,7 +2490,8 @@ Vec3f GridLinesMgr::getColorMeridianLine() const
 }
 void GridLinesMgr::setColorMeridianLine(const Vec3f& newColor)
 {
-	if(newColor != meridianLine->getColor()) {
+	if(newColor != meridianLine->getColor())
+	{
 		meridianLine->setColor(newColor);
 		emit meridianLineColorChanged(newColor);
 	}
@@ -2430,7 +2500,8 @@ void GridLinesMgr::setColorMeridianLine(const Vec3f& newColor)
 //! Set flag for displaying opposition/conjunction longitude line
 void GridLinesMgr::setFlagLongitudeLine(const bool displayed)
 {
-	if(displayed != longitudeLine->isDisplayed()) {
+	if(displayed != longitudeLine->isDisplayed())
+	{
 		longitudeLine->setDisplayed(displayed);
 		emit longitudeLineDisplayedChanged(displayed);
 	}
@@ -2443,7 +2514,8 @@ bool GridLinesMgr::getFlagLongitudeLine() const
 //! Set flag for displaying opposition/conjunction longitude line partitions
 void GridLinesMgr::setFlagLongitudeParts(const bool displayed)
 {
-	if(displayed != longitudeLine->showsPartitions()) {
+	if(displayed != longitudeLine->showsPartitions())
+	{
 		longitudeLine->setPartitions(displayed);
 		emit longitudePartsDisplayedChanged(displayed);
 	}
@@ -2456,7 +2528,8 @@ bool GridLinesMgr::getFlagLongitudeParts() const
 //! Set flag for displaying opposition/conjunction longitude line partitions
 void GridLinesMgr::setFlagLongitudeLabeled(const bool displayed)
 {
-	if(displayed != longitudeLine->isLabeled()) {
+	if(displayed != longitudeLine->isLabeled())
+	{
 		longitudeLine->setLabeled(displayed);
 		emit longitudePartsLabeledChanged(displayed);
 	}
@@ -2471,7 +2544,8 @@ Vec3f GridLinesMgr::getColorLongitudeLine() const
 }
 void GridLinesMgr::setColorLongitudeLine(const Vec3f& newColor)
 {
-	if(newColor != longitudeLine->getColor()) {
+	if(newColor != longitudeLine->getColor())
+	{
 		longitudeLine->setColor(newColor);
 		emit longitudeLineColorChanged(newColor);
 	}
@@ -2480,7 +2554,8 @@ void GridLinesMgr::setColorLongitudeLine(const Vec3f& newColor)
 //! Set flag for displaying Horizon Line
 void GridLinesMgr::setFlagHorizonLine(const bool displayed)
 {
-	if(displayed != horizonLine->isDisplayed()) {
+	if(displayed != horizonLine->isDisplayed())
+	{
 		horizonLine->setDisplayed(displayed);
 		emit horizonLineDisplayedChanged(displayed);
 	}
@@ -2493,7 +2568,8 @@ bool GridLinesMgr::getFlagHorizonLine() const
 //! Set flag for displaying Horizon Line partitions
 void GridLinesMgr::setFlagHorizonParts(const bool displayed)
 {
-	if(displayed != horizonLine->showsPartitions()) {
+	if(displayed != horizonLine->showsPartitions())
+	{
 		horizonLine->setPartitions(displayed);
 		emit horizonPartsDisplayedChanged(displayed);
 	}
@@ -2506,7 +2582,8 @@ bool GridLinesMgr::getFlagHorizonParts() const
 //! Set flag for displaying Horizon Line partitions
 void GridLinesMgr::setFlagHorizonLabeled(const bool displayed)
 {
-	if(displayed != horizonLine->isLabeled()) {
+	if(displayed != horizonLine->isLabeled())
+	{
 		horizonLine->setLabeled(displayed);
 		emit horizonPartsLabeledChanged(displayed);
 	}
@@ -2522,7 +2599,8 @@ Vec3f GridLinesMgr::getColorHorizonLine() const
 }
 void GridLinesMgr::setColorHorizonLine(const Vec3f& newColor)
 {
-	if(newColor != horizonLine->getColor()) {
+	if(newColor != horizonLine->getColor())
+	{
 		horizonLine->setColor(newColor);
 		emit horizonLineColorChanged(newColor);
 	}
@@ -2531,7 +2609,8 @@ void GridLinesMgr::setColorHorizonLine(const Vec3f& newColor)
 //! Set flag for displaying Galactic Equator Line
 void GridLinesMgr::setFlagGalacticEquatorLine(const bool displayed)
 {
-	if(displayed != galacticEquatorLine->isDisplayed()) {
+	if(displayed != galacticEquatorLine->isDisplayed())
+	{
 		galacticEquatorLine->setDisplayed(displayed);
 		emit galacticEquatorLineDisplayedChanged(displayed);
 	}
@@ -2544,7 +2623,8 @@ bool GridLinesMgr::getFlagGalacticEquatorLine() const
 //! Set flag for displaying Galactic Equator Line partitions
 void GridLinesMgr::setFlagGalacticEquatorParts(const bool displayed)
 {
-	if(displayed != galacticEquatorLine->showsPartitions()) {
+	if(displayed != galacticEquatorLine->showsPartitions())
+	{
 		galacticEquatorLine->setPartitions(displayed);
 		emit galacticEquatorPartsDisplayedChanged(displayed);
 	}
@@ -2557,7 +2637,8 @@ bool GridLinesMgr::getFlagGalacticEquatorParts() const
 //! Set flag for displaying Galactic Equator Line partitions
 void GridLinesMgr::setFlagGalacticEquatorLabeled(const bool displayed)
 {
-	if(displayed != galacticEquatorLine->isLabeled()) {
+	if(displayed != galacticEquatorLine->isLabeled())
+	{
 		galacticEquatorLine->setLabeled(displayed);
 		emit galacticEquatorPartsLabeledChanged(displayed);
 	}
@@ -2573,7 +2654,8 @@ Vec3f GridLinesMgr::getColorGalacticEquatorLine() const
 }
 void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 {
-	if(newColor != galacticEquatorLine->getColor()) {
+	if(newColor != galacticEquatorLine->getColor())
+	{
 		galacticEquatorLine->setColor(newColor);
 		emit galacticEquatorLineColorChanged(newColor);
 	}
@@ -2582,7 +2664,8 @@ void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 //! Set flag for displaying Supergalactic Equator Line
 void GridLinesMgr::setFlagSupergalacticEquatorLine(const bool displayed)
 {
-	if(displayed != supergalacticEquatorLine->isDisplayed()) {
+	if(displayed != supergalacticEquatorLine->isDisplayed())
+	{
 		supergalacticEquatorLine->setDisplayed(displayed);
 		emit supergalacticEquatorLineDisplayedChanged(displayed);
 	}
@@ -2595,7 +2678,8 @@ bool GridLinesMgr::getFlagSupergalacticEquatorLine() const
 //! Set flag for displaying Supergalactic Equator Line partitions
 void GridLinesMgr::setFlagSupergalacticEquatorParts(const bool displayed)
 {
-	if(displayed != supergalacticEquatorLine->showsPartitions()) {
+	if(displayed != supergalacticEquatorLine->showsPartitions())
+	{
 		supergalacticEquatorLine->setPartitions(displayed);
 		emit supergalacticEquatorPartsDisplayedChanged(displayed);
 	}
@@ -2608,7 +2692,8 @@ bool GridLinesMgr::getFlagSupergalacticEquatorParts() const
 //! Set flag for displaying Supergalactic Equator Line partitions
 void GridLinesMgr::setFlagSupergalacticEquatorLabeled(const bool displayed)
 {
-	if(displayed != supergalacticEquatorLine->isLabeled()) {
+	if(displayed != supergalacticEquatorLine->isLabeled())
+	{
 		supergalacticEquatorLine->setLabeled(displayed);
 		emit supergalacticEquatorPartsLabeledChanged(displayed);
 	}
@@ -2624,7 +2709,8 @@ Vec3f GridLinesMgr::getColorSupergalacticEquatorLine() const
 }
 void GridLinesMgr::setColorSupergalacticEquatorLine(const Vec3f& newColor)
 {
-	if(newColor != supergalacticEquatorLine->getColor()) {
+	if(newColor != supergalacticEquatorLine->getColor())
+	{
 		supergalacticEquatorLine->setColor(newColor);
 		emit supergalacticEquatorLineColorChanged(newColor);
 	}
@@ -2633,7 +2719,8 @@ void GridLinesMgr::setColorSupergalacticEquatorLine(const Vec3f& newColor)
 //! Set flag for displaying Prime Vertical Line
 void GridLinesMgr::setFlagPrimeVerticalLine(const bool displayed)
 {
-	if(displayed != primeVerticalLine->isDisplayed()) {
+	if(displayed != primeVerticalLine->isDisplayed())
+	{
 		primeVerticalLine->setDisplayed(displayed);
 		emit  primeVerticalLineDisplayedChanged(displayed);
 	}
@@ -2646,7 +2733,8 @@ bool GridLinesMgr::getFlagPrimeVerticalLine() const
 //! Set flag for displaying Prime Vertical Line partitions
 void GridLinesMgr::setFlagPrimeVerticalParts(const bool displayed)
 {
-	if(displayed != primeVerticalLine->showsPartitions()) {
+	if(displayed != primeVerticalLine->showsPartitions())
+	{
 		primeVerticalLine->setPartitions(displayed);
 		emit  primeVerticalPartsDisplayedChanged(displayed);
 	}
@@ -2659,7 +2747,8 @@ bool GridLinesMgr::getFlagPrimeVerticalParts() const
 //! Set flag for displaying Prime Vertical Line partitions
 void GridLinesMgr::setFlagPrimeVerticalLabeled(const bool displayed)
 {
-	if(displayed != primeVerticalLine->isLabeled()) {
+	if(displayed != primeVerticalLine->isLabeled())
+	{
 		primeVerticalLine->setLabeled(displayed);
 		emit  primeVerticalPartsLabeledChanged(displayed);
 	}
@@ -2675,7 +2764,8 @@ Vec3f GridLinesMgr::getColorPrimeVerticalLine() const
 }
 void GridLinesMgr::setColorPrimeVerticalLine(const Vec3f& newColor)
 {
-	if(newColor != primeVerticalLine->getColor()) {
+	if(newColor != primeVerticalLine->getColor())
+	{
 		primeVerticalLine->setColor(newColor);
 		emit primeVerticalLineColorChanged(newColor);
 	}
@@ -2684,7 +2774,8 @@ void GridLinesMgr::setColorPrimeVerticalLine(const Vec3f& newColor)
 //! Set flag for displaying Current Vertical Line
 void GridLinesMgr::setFlagCurrentVerticalLine(const bool displayed)
 {
-	if(displayed != currentVerticalLine->isDisplayed()) {
+	if(displayed != currentVerticalLine->isDisplayed())
+	{
 		currentVerticalLine->setDisplayed(displayed);
 		emit  currentVerticalLineDisplayedChanged(displayed);
 	}
@@ -2697,7 +2788,8 @@ bool GridLinesMgr::getFlagCurrentVerticalLine() const
 //! Set flag for displaying Current Vertical Line partitions
 void GridLinesMgr::setFlagCurrentVerticalParts(const bool displayed)
 {
-	if(displayed != currentVerticalLine->showsPartitions()) {
+	if(displayed != currentVerticalLine->showsPartitions())
+	{
 		currentVerticalLine->setPartitions(displayed);
 		emit  currentVerticalPartsDisplayedChanged(displayed);
 	}
@@ -2710,7 +2802,8 @@ bool GridLinesMgr::getFlagCurrentVerticalParts() const
 //! Set flag for displaying Current Vertical Line partitions
 void GridLinesMgr::setFlagCurrentVerticalLabeled(const bool displayed)
 {
-	if(displayed != currentVerticalLine->isLabeled()) {
+	if(displayed != currentVerticalLine->isLabeled())
+	{
 		currentVerticalLine->setLabeled(displayed);
 		emit  currentVerticalPartsLabeledChanged(displayed);
 	}
@@ -2726,7 +2819,8 @@ Vec3f GridLinesMgr::getColorCurrentVerticalLine() const
 }
 void GridLinesMgr::setColorCurrentVerticalLine(const Vec3f& newColor)
 {
-	if(newColor != currentVerticalLine->getColor()) {
+	if(newColor != currentVerticalLine->getColor())
+	{
 		currentVerticalLine->setColor(newColor);
 		emit currentVerticalLineColorChanged(newColor);
 	}
@@ -2735,7 +2829,8 @@ void GridLinesMgr::setColorCurrentVerticalLine(const Vec3f& newColor)
 //! Set flag for displaying Colure Lines
 void GridLinesMgr::setFlagColureLines(const bool displayed)
 {
-	if(displayed != colureLine_1->isDisplayed()) {
+	if(displayed != colureLine_1->isDisplayed())
+	{
 		colureLine_1->setDisplayed(displayed);
 		colureLine_2->setDisplayed(displayed);
 		emit  colureLinesDisplayedChanged(displayed);
@@ -2749,7 +2844,8 @@ bool GridLinesMgr::getFlagColureLines() const
 //! Set flag for displaying Colure Line partitions
 void GridLinesMgr::setFlagColureParts(const bool displayed)
 {
-	if(displayed != colureLine_1->showsPartitions()) {
+	if(displayed != colureLine_1->showsPartitions())
+	{
 		colureLine_1->setPartitions(displayed);
 		colureLine_2->setPartitions(displayed);
 		emit  colurePartsDisplayedChanged(displayed);
@@ -2762,7 +2858,8 @@ bool GridLinesMgr::getFlagColureParts() const
 }
 void GridLinesMgr::setFlagColureLabeled(const bool displayed)
 {
-	if(displayed != colureLine_1->isLabeled()) {
+	if(displayed != colureLine_1->isLabeled())
+	{
 		colureLine_1->setLabeled(displayed);
 		colureLine_2->setLabeled(displayed);
 		emit  colurePartsLabeledChanged(displayed);
@@ -2779,7 +2876,8 @@ Vec3f GridLinesMgr::getColorColureLines() const
 }
 void GridLinesMgr::setColorColureLines(const Vec3f& newColor)
 {
-	if(newColor != colureLine_1->getColor()) {
+	if(newColor != colureLine_1->getColor())
+	{
 		colureLine_1->setColor(newColor);
 		colureLine_2->setColor(newColor);
 		emit colureLinesColorChanged(newColor);
@@ -2789,7 +2887,8 @@ void GridLinesMgr::setColorColureLines(const Vec3f& newColor)
 //! Set flag for displaying Circumpolar Circles
 void GridLinesMgr::setFlagCircumpolarCircles(const bool displayed)
 {
-	if(displayed != circumpolarCircleN->isDisplayed()) {
+	if(displayed != circumpolarCircleN->isDisplayed())
+	{
 		circumpolarCircleN->setDisplayed(displayed);
 		circumpolarCircleS->setDisplayed(displayed);
 		emit circumpolarCirclesDisplayedChanged(displayed);
@@ -2807,7 +2906,8 @@ Vec3f GridLinesMgr::getColorCircumpolarCircles() const
 }
 void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
 {
-	if(newColor != circumpolarCircleN->getColor()) {
+	if(newColor != circumpolarCircleN->getColor())
+	{
 		circumpolarCircleN->setColor(newColor);
 		circumpolarCircleS->setColor(newColor);
 		emit circumpolarCirclesColorChanged(newColor);
@@ -2817,7 +2917,8 @@ void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
 //! Set flag for displaying celestial poles of J2000
 void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
 {
-	if(displayed != celestialJ2000Poles->isDisplayed()) {
+	if(displayed != celestialJ2000Poles->isDisplayed())
+	{
 		celestialJ2000Poles->setDisplayed(displayed);
 		emit celestialJ2000PolesDisplayedChanged(displayed);
 	}
@@ -2833,7 +2934,8 @@ Vec3f GridLinesMgr::getColorCelestialJ2000Poles() const
 }
 void GridLinesMgr::setColorCelestialJ2000Poles(const Vec3f& newColor)
 {
-	if(newColor != celestialJ2000Poles->getColor()) {
+	if(newColor != celestialJ2000Poles->getColor())
+	{
 		celestialJ2000Poles->setColor(newColor);
 		emit celestialJ2000PolesColorChanged(newColor);
 	}
@@ -2842,7 +2944,8 @@ void GridLinesMgr::setColorCelestialJ2000Poles(const Vec3f& newColor)
 //! Set flag for displaying celestial poles
 void GridLinesMgr::setFlagCelestialPoles(const bool displayed)
 {
-	if(displayed != celestialPoles->isDisplayed()) {
+	if(displayed != celestialPoles->isDisplayed())
+	{
 		celestialPoles->setDisplayed(displayed);
 		emit celestialPolesDisplayedChanged(displayed);
 	}
@@ -2858,7 +2961,8 @@ Vec3f GridLinesMgr::getColorCelestialPoles() const
 }
 void GridLinesMgr::setColorCelestialPoles(const Vec3f& newColor)
 {
-	if(newColor != celestialPoles->getColor()) {
+	if(newColor != celestialPoles->getColor())
+	{
 		celestialPoles->setColor(newColor);
 		emit celestialPolesColorChanged(newColor);
 	}
@@ -2867,7 +2971,8 @@ void GridLinesMgr::setColorCelestialPoles(const Vec3f& newColor)
 //! Set flag for displaying zenith and nadir
 void GridLinesMgr::setFlagZenithNadir(const bool displayed)
 {
-	if(displayed != zenithNadir->isDisplayed()) {
+	if(displayed != zenithNadir->isDisplayed())
+	{
 		zenithNadir->setDisplayed(displayed);
 		emit zenithNadirDisplayedChanged(displayed);
 	}
@@ -2883,7 +2988,8 @@ Vec3f GridLinesMgr::getColorZenithNadir() const
 }
 void GridLinesMgr::setColorZenithNadir(const Vec3f& newColor)
 {
-	if(newColor != zenithNadir->getColor()) {
+	if(newColor != zenithNadir->getColor())
+	{
 		zenithNadir->setColor(newColor);
 		emit zenithNadirColorChanged(newColor);
 	}
@@ -2892,7 +2998,8 @@ void GridLinesMgr::setColorZenithNadir(const Vec3f& newColor)
 //! Set flag for displaying ecliptic poles of J2000
 void GridLinesMgr::setFlagEclipticJ2000Poles(const bool displayed)
 {
-	if(displayed != eclipticJ2000Poles->isDisplayed()) {
+	if(displayed != eclipticJ2000Poles->isDisplayed())
+	{
 		eclipticJ2000Poles->setDisplayed(displayed);
 		emit eclipticJ2000PolesDisplayedChanged(displayed);
 	}
@@ -2908,7 +3015,8 @@ Vec3f GridLinesMgr::getColorEclipticJ2000Poles() const
 }
 void GridLinesMgr::setColorEclipticJ2000Poles(const Vec3f& newColor)
 {
-	if(newColor != eclipticJ2000Poles->getColor()) {
+	if(newColor != eclipticJ2000Poles->getColor())
+	{
 		eclipticJ2000Poles->setColor(newColor);
 		emit eclipticJ2000PolesColorChanged(newColor);
 	}
@@ -2917,7 +3025,8 @@ void GridLinesMgr::setColorEclipticJ2000Poles(const Vec3f& newColor)
 //! Set flag for displaying ecliptic poles
 void GridLinesMgr::setFlagEclipticPoles(const bool displayed)
 {
-	if(displayed != eclipticPoles->isDisplayed()) {
+	if(displayed != eclipticPoles->isDisplayed())
+	{
 		eclipticPoles->setDisplayed(displayed);
 		emit eclipticPolesDisplayedChanged(displayed);
 	}
@@ -2933,7 +3042,8 @@ Vec3f GridLinesMgr::getColorEclipticPoles() const
 }
 void GridLinesMgr::setColorEclipticPoles(const Vec3f& newColor)
 {
-	if(newColor != eclipticPoles->getColor()) {
+	if(newColor != eclipticPoles->getColor())
+	{
 		eclipticPoles->setColor(newColor);
 		emit eclipticPolesColorChanged(newColor);
 	}
@@ -2942,7 +3052,8 @@ void GridLinesMgr::setColorEclipticPoles(const Vec3f& newColor)
 //! Set flag for displaying galactic poles
 void GridLinesMgr::setFlagGalacticPoles(const bool displayed)
 {
-	if(displayed != galacticPoles->isDisplayed()) {
+	if(displayed != galacticPoles->isDisplayed())
+	{
 		galacticPoles->setDisplayed(displayed);
 		emit galacticPolesDisplayedChanged(displayed);
 	}
@@ -2958,16 +3069,45 @@ Vec3f GridLinesMgr::getColorGalacticPoles() const
 }
 void GridLinesMgr::setColorGalacticPoles(const Vec3f& newColor)
 {
-	if(newColor != galacticPoles->getColor()) {
+	if(newColor != galacticPoles->getColor())
+	{
 		galacticPoles->setColor(newColor);
 		emit galacticPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying galactic center and anticenter markers
+void GridLinesMgr::setFlagGalacticCenter(const bool displayed)
+{
+	if(displayed != galacticCenter->isDisplayed())
+	{
+		galacticCenter->setDisplayed(displayed);
+		emit galacticCenterDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying galactic center and anticenter markers
+bool GridLinesMgr::getFlagGalacticCenter() const
+{
+	return galacticCenter->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorGalacticCenter() const
+{
+	return galacticCenter->getColor();
+}
+void GridLinesMgr::setColorGalacticCenter(const Vec3f& newColor)
+{
+	if(newColor != galacticCenter->getColor())
+	{
+		galacticCenter->setColor(newColor);
+		emit galacticCenterColorChanged(newColor);
 	}
 }
 
 //! Set flag for displaying supergalactic poles
 void GridLinesMgr::setFlagSupergalacticPoles(const bool displayed)
 {
-	if(displayed != supergalacticPoles->isDisplayed()) {
+	if(displayed != supergalacticPoles->isDisplayed())
+	{
 		supergalacticPoles->setDisplayed(displayed);
 		emit supergalacticPolesDisplayedChanged(displayed);
 	}
@@ -2983,7 +3123,8 @@ Vec3f GridLinesMgr::getColorSupergalacticPoles() const
 }
 void GridLinesMgr::setColorSupergalacticPoles(const Vec3f& newColor)
 {
-	if(newColor != supergalacticPoles->getColor()) {
+	if(newColor != supergalacticPoles->getColor())
+	{
 		supergalacticPoles->setColor(newColor);
 		emit supergalacticPolesColorChanged(newColor);
 	}
@@ -2992,7 +3133,8 @@ void GridLinesMgr::setColorSupergalacticPoles(const Vec3f& newColor)
 //! Set flag for displaying equinox points of J2000
 void GridLinesMgr::setFlagEquinoxJ2000Points(const bool displayed)
 {
-	if(displayed != equinoxJ2000Points->isDisplayed()) {
+	if(displayed != equinoxJ2000Points->isDisplayed())
+	{
 		equinoxJ2000Points->setDisplayed(displayed);
 		emit equinoxJ2000PointsDisplayedChanged(displayed);
 	}
@@ -3008,7 +3150,8 @@ Vec3f GridLinesMgr::getColorEquinoxJ2000Points() const
 }
 void GridLinesMgr::setColorEquinoxJ2000Points(const Vec3f& newColor)
 {
-	if(newColor != equinoxJ2000Points->getColor()) {
+	if(newColor != equinoxJ2000Points->getColor())
+	{
 		equinoxJ2000Points->setColor(newColor);
 		emit equinoxJ2000PointsColorChanged(newColor);
 	}
@@ -3017,7 +3160,8 @@ void GridLinesMgr::setColorEquinoxJ2000Points(const Vec3f& newColor)
 //! Set flag for displaying equinox points
 void GridLinesMgr::setFlagEquinoxPoints(const bool displayed)
 {
-	if(displayed != equinoxPoints->isDisplayed()) {
+	if(displayed != equinoxPoints->isDisplayed())
+	{
 		equinoxPoints->setDisplayed(displayed);
 		emit equinoxPointsDisplayedChanged(displayed);
 	}
@@ -3033,7 +3177,8 @@ Vec3f GridLinesMgr::getColorEquinoxPoints() const
 }
 void GridLinesMgr::setColorEquinoxPoints(const Vec3f& newColor)
 {
-	if(newColor != equinoxPoints->getColor()) {
+	if(newColor != equinoxPoints->getColor())
+	{
 		equinoxPoints->setColor(newColor);
 		emit equinoxPointsColorChanged(newColor);
 	}
@@ -3042,7 +3187,8 @@ void GridLinesMgr::setColorEquinoxPoints(const Vec3f& newColor)
 //! Set flag for displaying solstice points of J2000
 void GridLinesMgr::setFlagSolsticeJ2000Points(const bool displayed)
 {
-	if(displayed != solsticeJ2000Points->isDisplayed()) {
+	if(displayed != solsticeJ2000Points->isDisplayed())
+	{
 		solsticeJ2000Points->setDisplayed(displayed);
 		emit solsticeJ2000PointsDisplayedChanged(displayed);
 	}
@@ -3058,7 +3204,8 @@ Vec3f GridLinesMgr::getColorSolsticeJ2000Points() const
 }
 void GridLinesMgr::setColorSolsticeJ2000Points(const Vec3f& newColor)
 {
-	if(newColor != solsticeJ2000Points->getColor()) {
+	if(newColor != solsticeJ2000Points->getColor())
+	{
 		solsticeJ2000Points->setColor(newColor);
 		emit solsticeJ2000PointsColorChanged(newColor);
 	}
@@ -3067,7 +3214,8 @@ void GridLinesMgr::setColorSolsticeJ2000Points(const Vec3f& newColor)
 //! Set flag for displaying solstice points
 void GridLinesMgr::setFlagSolsticePoints(const bool displayed)
 {
-	if(displayed != solsticePoints->isDisplayed()) {
+	if(displayed != solsticePoints->isDisplayed())
+	{
 		solsticePoints->setDisplayed(displayed);
 		emit solsticePointsDisplayedChanged(displayed);
 	}
@@ -3083,7 +3231,8 @@ Vec3f GridLinesMgr::getColorSolsticePoints() const
 }
 void GridLinesMgr::setColorSolsticePoints(const Vec3f& newColor)
 {
-	if(newColor != solsticePoints->getColor()) {
+	if(newColor != solsticePoints->getColor())
+	{
 		solsticePoints->setColor(newColor);
 		emit solsticePointsColorChanged(newColor);
 	}
@@ -3092,7 +3241,8 @@ void GridLinesMgr::setColorSolsticePoints(const Vec3f& newColor)
 //! Set flag for displaying antisolar point
 void GridLinesMgr::setFlagAntisolarPoint(const bool displayed)
 {
-	if(displayed != antisolarPoint->isDisplayed()) {
+	if(displayed != antisolarPoint->isDisplayed())
+	{
 		antisolarPoint->setDisplayed(displayed);
 		emit antisolarPointDisplayedChanged(displayed);
 	}
@@ -3108,7 +3258,8 @@ Vec3f GridLinesMgr::getColorAntisolarPoint() const
 }
 void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
 {
-	if(newColor != antisolarPoint->getColor()) {
+	if(newColor != antisolarPoint->getColor())
+	{
 		antisolarPoint->setColor(newColor);
 		emit antisolarPointColorChanged(newColor);
 	}
@@ -3117,7 +3268,8 @@ void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
 //! Set flag for displaying vector point
 void GridLinesMgr::setFlagApexPoints(const bool displayed)
 {
-	if(displayed != apexPoints->isDisplayed()) {
+	if(displayed != apexPoints->isDisplayed())
+	{
 		apexPoints->setDisplayed(displayed);
 		emit apexPointsDisplayedChanged(displayed);
 	}
@@ -3133,7 +3285,8 @@ Vec3f GridLinesMgr::getColorApexPoints() const
 }
 void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 {
-	if(newColor != apexPoints->getColor()) {
+	if(newColor != apexPoints->getColor())
+	{
 		apexPoints->setColor(newColor);
 		emit apexPointsColorChanged(newColor);
 	}
@@ -3251,6 +3404,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	eclipticJ2000Poles->setFontSize(pointFontSize);
 	eclipticPoles->setFontSize(pointFontSize);
 	galacticPoles->setFontSize(pointFontSize);
+	galacticCenter->setFontSize(pointFontSize);
 	supergalacticPoles->setFontSize(pointFontSize);
 	equinoxJ2000Points->setFontSize(pointFontSize);
 	equinoxPoints->setFontSize(pointFontSize);
