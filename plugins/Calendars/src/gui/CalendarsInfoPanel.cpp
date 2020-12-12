@@ -63,8 +63,6 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition()
 {
-	//updateGeometry(); TODO: Shrink size to minimum.
-//	static_cast<StelGui*>(StelApp::getInstance().getGui())->size();
 	qreal xPos = parentWidget->size().width() -  boundingRect().width();
 	qreal yPos = parentWidget->size().height() - boundingRect().height();
 	setPos(xPos, yPos);

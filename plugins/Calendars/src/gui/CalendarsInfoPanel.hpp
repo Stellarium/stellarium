@@ -32,7 +32,7 @@ class Calendars;
 //! @ingroup calendars
 class CalendarsInfoPanel : public QGraphicsTextItem
 {
-//	Q_OBJECT
+	Q_OBJECT
 
 public:
 	CalendarsInfoPanel(Calendars* plugin,
@@ -40,13 +40,6 @@ public:
 	~CalendarsInfoPanel(){}
 
 public slots:
-//	//! Show only the controls used with an ocular overlay.
-//	void showOcularGui();
-//	//! Show only the controls used with a CCD overlay.
-//	void showCcdGui();
-//	//! Hide the controls, leaving only the button bar.
-//	void foldGui();
-
 	//! Update the position of the widget within the parent.
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();

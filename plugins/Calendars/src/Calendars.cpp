@@ -55,7 +55,7 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Calendars";
 	info.displayedName = N_("Calendars");
-	info.authors = "Stellarium team";
+	info.authors = "Georg Zotti";
 	info.contact = "www.stellarium.org";
 	info.description = N_("Calendars of the world");
 	info.version = CALENDARS_PLUGIN_VERSION;
@@ -226,7 +226,6 @@ void Calendars::draw(StelCore* core)
 
 	infoPanel->setDefaultTextColor(color.toQColor());
 	infoPanel->setHtml(str);
-	infoPanel->adjustSize(); // TODO: Why does that wrap AD/BC into a new line???
 	infoPanel->updatePosition();
 	infoPanel->show();
 }
