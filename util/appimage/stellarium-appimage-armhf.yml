@@ -2,7 +2,7 @@ version: 1
 
 script:
     - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
-    - make
+    - make -j3
     - make install DESTDIR=AppDir
 
 AppDir:
@@ -18,10 +18,10 @@ AppDir:
   apt:
     arch: armhf
     sources:
-      - sourceline: 'deb [arch=armhf] http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse'
+      - sourceline: 'deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main restricted universe multiverse'
         key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'
-      - sourceline: 'deb [arch=armhf] http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted universe multiverse'
-      - sourceline: 'deb [arch=armhf] http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse'
+      - sourceline: 'deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic-updates main restricted universe multiverse'
+      - sourceline: 'deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic-backports main restricted universe multiverse'
 
     include:
       - libqt5core5a

@@ -29,24 +29,30 @@ result="${dir%"${dir##*[!/]}"}"
 result="${result##*/}"
 arch=$(uname -m)
 
-if [ $result = 'appimage' ]
+if [ $arch = "armv7l" ]; then
+    arch="armhf"
+fi
+
+if [ "$result" = 'appimage' ]
 then
     # Stage 1: Check required packages
     ait=$(whereis appimagetool | sed 's/appimagetool://i')
     if [ -z $ait ]
     then
-	# Install appimagetool AppImage
-	sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage -O /usr/local/bin/appimagetool
-	sudo chmod +x /usr/local/bin/appimagetool
+        baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${arch}.AppImage"
+        AppImage_Tool="/usr/local/bin/appimagetool"
+        # Install appimagetool AppImage
+        sudo wget ${baseURL} -O ${AppImage_Tool}
+        sudo chmod +x ${AppImage_Tool}
     fi
 
     builder=$(whereis appimage-builder | sed 's/appimage-builder://i')
     if [ -z $builder ]
     then
-	# Installing dependencies
-	sudo apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
-	# Installing latest tagged release
-	sudo pip3 install appimage-builder
+        # Installing dependencies
+        sudo apt-get install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+        # Installing latest tagged release
+        sudo pip3 install appimage-builder
     fi
 
     # Stage 2: Build an AppImage package
@@ -61,15 +67,22 @@ then
 
     if [ $rtag = $dtag ]
     then
-	version=${dtag}
+        version=${dtag}
     else
-	version="${dtag}-${revision}"
+        version="${dtag}-${revision}"
+    fi
+    # probably git fetched source code without history and tags
+    if [ -z $version ]
+    then
+        version="edge"
     fi
     export APP_VERSION=${version}
 
-    echo "\nLet's try build an AppImage for version ${version}\n"
+    printf "\nLet's try build an AppImage for version \"%s\"\n" "$version"
 
     appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-${arch}.yml --skip-test
+
+    chmod +x ./Stellarium*.AppImage
 else
     echo "Wrong directory! Please go to util/appimage directory and run again..."
 fi
