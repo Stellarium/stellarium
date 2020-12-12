@@ -17,11 +17,11 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
-    - name: Update installed packages
-      run: sudo apt update && sudo apt upgrade -y
-
     - name: Install dependencies
-      run: sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+      run: |
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -83,11 +83,11 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
-    - name: Update installed packages
-      run: sudo apt update && sudo apt upgrade -y
-
     - name: Install dependencies
-      run: sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
+      run: |
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -95,6 +95,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
+        mkdir -p ../../../.stellarium/ephem
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
@@ -103,12 +104,12 @@ jobs:
       working-directory: build
       run: make -j3
 
-#    - name: Downloads JPL DE430 ephemeris
-#      uses: carlosperate/download-file-action@v1.0.3
-#      with:
-#        file-url: 'http://dss.stellarium.org/de/de430/linux_p1550p2650.430'
-#        file-name: 'linux_p1550p2650.430'
-#        location: '~/.stellarium/ephem'
+    - name: Download JPL DE430 ephemeris
+      uses: carlosperate/download-file-action@v1.0.3
+      with:
+        file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.430'
+        file-name: 'linux_p1550p2650.430'
+        location: '../../../.stellarium/ephem'
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1
