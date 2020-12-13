@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-21 16:45+0700\n"
+"POT-Creation-Date: 2020-12-10 21:22+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -35,8 +35,8 @@ msgstr "uživatelská značka"
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
 #: src/core/modules/Constellation.cpp:277
 #: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:226
-#: src/core/modules/Nebula.cpp:228 src/core/modules/Planet.cpp:468
-#: src/core/modules/Planet.cpp:471 src/core/modules/StarWrapper.cpp:54
+#: src/core/modules/Nebula.cpp:228 src/core/modules/Planet.cpp:469
+#: src/core/modules/Planet.cpp:472 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:224 src/core/modules/StarWrapper.cpp:227
 #: src/gui/AstroCalcDialog.cpp:889 src/ui_configurationDialog.h:1704
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -58,7 +58,7 @@ msgstr "asterismus"
 
 #: src/core/modules/AsterismMgr.cpp:95
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
-#: src/core/modules/GridLinesMgr.cpp:1710
+#: src/core/modules/GridLinesMgr.cpp:1736
 #: src/core/modules/SpecialMarkersMgr.cpp:217
 #: src/core/modules/LandscapeMgr.cpp:507
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
@@ -67,7 +67,7 @@ msgstr "asterismus"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:624 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:54 src/core/StelSkyLayerMgr.cpp:85
-#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:819
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:821
 msgid "Display Options"
 msgstr "Nastavení zobrazení"
 
@@ -122,7 +122,7 @@ msgstr "Vybrat všechna souhvězdí"
 msgid "Reload the sky culture"
 msgstr "Znovu nahrát nebeskou mytologii"
 
-#: src/core/modules/StarMgr.cpp:468 src/ui_viewDialog.h:2989
+#: src/core/modules/StarMgr.cpp:468 src/ui_viewDialog.h:3026
 #: src/ui_dsoColorsDialog.h:706
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
@@ -140,150 +140,160 @@ msgstr "Zvýšit mezní magnitudu pro hvězdy"
 msgid "Reduce the magnitude limit for stars"
 msgstr "Snížit mezní magnitudu pro hvězdy"
 
-#: src/core/modules/GridLinesMgr.cpp:681 src/ui_viewDialog.h:3395
+#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:3296
 msgid "Meridian"
 msgstr "Poledník (meridián)"
 
-#: src/core/modules/GridLinesMgr.cpp:685
+#: src/core/modules/GridLinesMgr.cpp:686
 msgid "Ecliptic of J2000.0"
 msgstr "Ekliptika J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:689
+#: src/core/modules/GridLinesMgr.cpp:690
 msgid "Ecliptic of Date"
 msgstr "Ekliptika k datu"
 
-#: src/core/modules/GridLinesMgr.cpp:693
+#: src/core/modules/GridLinesMgr.cpp:694
 msgid "Equator of J2000.0"
 msgstr "Rovník J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:697
+#: src/core/modules/GridLinesMgr.cpp:698
 msgid "Equator"
 msgstr "Rovník"
 
-#: src/core/modules/GridLinesMgr.cpp:702
+#: src/core/modules/GridLinesMgr.cpp:703
 msgid "Precession Circle"
 msgstr "Precesní kružnice"
 
-#: src/core/modules/GridLinesMgr.cpp:706 src/ui_viewDialog.h:3221
+#: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:3404
 msgid "Horizon"
 msgstr "Obzor (horizont)"
 
-#: src/core/modules/GridLinesMgr.cpp:710
+#: src/core/modules/GridLinesMgr.cpp:711
 msgid "Galactic Equator"
 msgstr "Galaktický rovník"
 
-#: src/core/modules/GridLinesMgr.cpp:714
+#: src/core/modules/GridLinesMgr.cpp:715
 msgid "Supergalactic Equator"
 msgstr "Supergalaktický rovník"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:719 src/ui_viewDialog.h:3326
+#: src/core/modules/GridLinesMgr.cpp:720 src/ui_viewDialog.h:3331
 msgid "O./C. longitude"
 msgstr "Délka opozice/konjunkce"
 
-#: src/core/modules/GridLinesMgr.cpp:723
-#: src/core/modules/GridLinesMgr.cpp:1729 src/ui_viewDialog.h:3444
+#: src/core/modules/GridLinesMgr.cpp:724
+#: src/core/modules/GridLinesMgr.cpp:1755 src/ui_viewDialog.h:3269
 msgid "Prime Vertical"
 msgstr "První vertikál"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/core/modules/GridLinesMgr.cpp:727 src/gui/SearchDialog.cpp:309
+#: src/core/modules/GridLinesMgr.cpp:728 src/gui/SearchDialog.cpp:309
 #: src/gui/AstroCalcDialog.cpp:836 src/gui/AstroCalcDialog.cpp:1499
 #: src/gui/AstroCalcDialog.cpp:1884 src/gui/AstroCalcDialog.cpp:2771
 #: src/gui/AstroCalcDialog.cpp:3276 src/gui/AstroCalcDialog.cpp:3555
-#: src/gui/AstroCalcDialog.cpp:3557 src/ui_viewDialog.h:3305
+#: src/gui/AstroCalcDialog.cpp:3557 src/ui_viewDialog.h:3541
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1356
 msgid "Altitude"
 msgstr "Výška"
 
-#: src/core/modules/GridLinesMgr.cpp:731
+#: src/core/modules/GridLinesMgr.cpp:732
 msgid "Equinoctial Colure"
 msgstr "Kolur rovnodennosti"
 
-#: src/core/modules/GridLinesMgr.cpp:735
+#: src/core/modules/GridLinesMgr.cpp:736
 msgid "Solstitial Colure"
 msgstr "Kolur slunovratu"
 
-#: src/core/modules/GridLinesMgr.cpp:740
+#: src/core/modules/GridLinesMgr.cpp:741
 msgid "Circumpolar Circle"
 msgstr "Cirkumpolární kružnice"
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1265
-#: src/core/modules/GridLinesMgr.cpp:1274
+#: src/core/modules/GridLinesMgr.cpp:1267
+#: src/core/modules/GridLinesMgr.cpp:1276
 msgid "NCP"
 msgstr "SNP"
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1267
-#: src/core/modules/GridLinesMgr.cpp:1276
+#: src/core/modules/GridLinesMgr.cpp:1269
+#: src/core/modules/GridLinesMgr.cpp:1278
 msgid "SCP"
 msgstr "JNP"
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:1283
+#: src/core/modules/GridLinesMgr.cpp:1285
 msgctxt "zenith"
 msgid "Z"
 msgstr "Zenit"
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:1285
+#: src/core/modules/GridLinesMgr.cpp:1287
 msgctxt "nadir"
 msgid "Z'"
 msgstr "Nadir"
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1292
-#: src/core/modules/GridLinesMgr.cpp:1301
+#: src/core/modules/GridLinesMgr.cpp:1294
+#: src/core/modules/GridLinesMgr.cpp:1303
 msgid "NEP"
 msgstr "SPE"
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1294
-#: src/core/modules/GridLinesMgr.cpp:1303
+#: src/core/modules/GridLinesMgr.cpp:1296
+#: src/core/modules/GridLinesMgr.cpp:1305
 msgid "SEP"
 msgstr "JPE"
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1310
+#: src/core/modules/GridLinesMgr.cpp:1312
 msgid "NGP"
 msgstr "SGP"
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1312
+#: src/core/modules/GridLinesMgr.cpp:1314
 msgid "SGP"
 msgstr "JGP"
 
+#. TRANSLATORS: Galactic Center point
+#: src/core/modules/GridLinesMgr.cpp:1321
+msgid "GC"
+msgstr "GC"
+
+#. TRANSLATORS: Galactic Anticenter point
+#: src/core/modules/GridLinesMgr.cpp:1323
+msgid "GA"
+msgstr "GA"
+
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1319
+#: src/core/modules/GridLinesMgr.cpp:1330
 msgid "NSGP"
 msgstr "SSGP"
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1321
+#: src/core/modules/GridLinesMgr.cpp:1332
 msgid "SSGP"
 msgstr "JSGP"
 
 #. TRANSLATORS: Antisolar Point
-#: src/core/modules/GridLinesMgr.cpp:1356
+#: src/core/modules/GridLinesMgr.cpp:1367
 msgid "ASP"
 msgstr "PS"
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
-#: src/core/modules/GridLinesMgr.cpp:1363
+#: src/core/modules/GridLinesMgr.cpp:1374
 msgid "Apex"
 msgstr "Apex"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
-#: src/core/modules/GridLinesMgr.cpp:1365
+#: src/core/modules/GridLinesMgr.cpp:1376
 msgid "Antapex"
 msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1375 src/core/modules/Planet.cpp:652
-#: src/core/modules/Planet.cpp:946 src/gui/AstroCalcDialog.cpp:6169
+#: src/core/modules/GridLinesMgr.cpp:1386 src/core/modules/Planet.cpp:653
+#: src/core/modules/Planet.cpp:947 src/gui/AstroCalcDialog.cpp:6169
 #: plugins/Satellites/src/Satellite.cpp:328
 #: plugins/Satellites/src/Satellite.cpp:390
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -291,148 +301,152 @@ msgctxt "speed"
 msgid "km/s"
 msgstr "km/s"
 
-#: src/core/modules/GridLinesMgr.cpp:1711
+#: src/core/modules/GridLinesMgr.cpp:1737
 msgid "Grids and lines"
 msgstr "Sítě a čáry"
 
-#: src/core/modules/GridLinesMgr.cpp:1712
+#: src/core/modules/GridLinesMgr.cpp:1738
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Rovníková síť"
 
-#: src/core/modules/GridLinesMgr.cpp:1713 src/ui_viewDialog.h:3265
+#: src/core/modules/GridLinesMgr.cpp:1739 src/ui_viewDialog.h:3374
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Obzorníková síť"
 
-#: src/core/modules/GridLinesMgr.cpp:1714
+#: src/core/modules/GridLinesMgr.cpp:1740
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Ekliptika"
 
-#: src/core/modules/GridLinesMgr.cpp:1715
+#: src/core/modules/GridLinesMgr.cpp:1741
 msgid "Ecliptic J2000 line"
 msgstr "Ekliptika J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1716
+#: src/core/modules/GridLinesMgr.cpp:1742
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Rovník"
 
-#: src/core/modules/GridLinesMgr.cpp:1717
+#: src/core/modules/GridLinesMgr.cpp:1743
 msgid "Equator J2000 line"
 msgstr "Rovník J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1718
+#: src/core/modules/GridLinesMgr.cpp:1744
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Poledník"
 
-#: src/core/modules/GridLinesMgr.cpp:1719
+#: src/core/modules/GridLinesMgr.cpp:1745
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
 msgstr "Obzor"
 
-#: src/core/modules/GridLinesMgr.cpp:1720
+#: src/core/modules/GridLinesMgr.cpp:1746
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Rovníková síť J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1721
+#: src/core/modules/GridLinesMgr.cpp:1747
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikální síť J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1722
+#: src/core/modules/GridLinesMgr.cpp:1748
 msgid "Ecliptic grid"
 msgstr "Ekliptikální síť"
 
-#: src/core/modules/GridLinesMgr.cpp:1723 src/ui_viewDialog.h:3485
+#: src/core/modules/GridLinesMgr.cpp:1749 src/ui_viewDialog.h:3258
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "Galaktická síť"
 
-#: src/core/modules/GridLinesMgr.cpp:1724 src/ui_viewDialog.h:3290
+#: src/core/modules/GridLinesMgr.cpp:1750 src/ui_viewDialog.h:3564
 msgid "Galactic equator"
 msgstr "Galaktický rovník"
 
-#: src/core/modules/GridLinesMgr.cpp:1725 src/ui_viewDialog.h:3534
+#: src/core/modules/GridLinesMgr.cpp:1751 src/ui_viewDialog.h:3441
 msgid "Supergalactic grid"
 msgstr "Supergalaktická síť"
 
-#: src/core/modules/GridLinesMgr.cpp:1726 src/ui_viewDialog.h:3373
+#: src/core/modules/GridLinesMgr.cpp:1752 src/ui_viewDialog.h:3592
 msgid "Supergalactic equator"
 msgstr "Supergalaktický rovník"
 
-#: src/core/modules/GridLinesMgr.cpp:1727
+#: src/core/modules/GridLinesMgr.cpp:1753
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Opposition/conjunction longitude line"
 msgstr "Délka opozice/konjunkce"
 
-#: src/core/modules/GridLinesMgr.cpp:1728
+#: src/core/modules/GridLinesMgr.cpp:1754
 msgid "Precession Circles"
 msgstr "Precesní kružnice"
 
-#: src/core/modules/GridLinesMgr.cpp:1730
+#: src/core/modules/GridLinesMgr.cpp:1756
 msgid "Current Vertical"
 msgstr "Aktuální vertikál"
 
-#: src/core/modules/GridLinesMgr.cpp:1731
+#: src/core/modules/GridLinesMgr.cpp:1757
 msgid "Colure Lines"
 msgstr "Kolury"
 
-#: src/core/modules/GridLinesMgr.cpp:1732
+#: src/core/modules/GridLinesMgr.cpp:1758
 msgid "Circumpolar Circles"
 msgstr "Cirkumpolární kružnice"
 
-#: src/core/modules/GridLinesMgr.cpp:1733
+#: src/core/modules/GridLinesMgr.cpp:1759
 msgid "Celestial J2000 poles"
 msgstr "Nebeské póly J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1734
+#: src/core/modules/GridLinesMgr.cpp:1760
 msgid "Celestial poles"
 msgstr "Nebeské póly"
 
-#: src/core/modules/GridLinesMgr.cpp:1735
+#: src/core/modules/GridLinesMgr.cpp:1761
 msgid "Zenith and nadir"
 msgstr "Zenit a nadir"
 
-#: src/core/modules/GridLinesMgr.cpp:1736
+#: src/core/modules/GridLinesMgr.cpp:1762
 msgid "Ecliptic J2000 poles"
 msgstr "Póly ekliptiky J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1737
+#: src/core/modules/GridLinesMgr.cpp:1763
 msgid "Ecliptic poles"
 msgstr "Póly ekliptiky"
 
-#: src/core/modules/GridLinesMgr.cpp:1738 src/ui_viewDialog.h:3560
+#: src/core/modules/GridLinesMgr.cpp:1764 src/ui_viewDialog.h:3385
 msgid "Galactic poles"
 msgstr "Galaktické póly"
 
-#: src/core/modules/GridLinesMgr.cpp:1739 src/ui_viewDialog.h:3396
+#: src/core/modules/GridLinesMgr.cpp:1765 src/ui_viewDialog.h:3634
+msgid "Galactic center and anticenter"
+msgstr "Galaktické centrum a anticentrum"
+
+#: src/core/modules/GridLinesMgr.cpp:1766 src/ui_viewDialog.h:3364
 msgid "Supergalactic poles"
 msgstr "Supergalaktické póly"
 
-#: src/core/modules/GridLinesMgr.cpp:1740
+#: src/core/modules/GridLinesMgr.cpp:1767
 msgid "Equinox J2000 points"
 msgstr "Body rovnodennosti J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1741
+#: src/core/modules/GridLinesMgr.cpp:1768
 msgid "Equinox points"
 msgstr "Body rovnodennosti"
 
-#: src/core/modules/GridLinesMgr.cpp:1742
+#: src/core/modules/GridLinesMgr.cpp:1769
 msgid "Solstice J2000 points"
 msgstr "Body slunovratu J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1743
+#: src/core/modules/GridLinesMgr.cpp:1770
 msgid "Solstice points"
 msgstr "Body slunovratu"
 
-#: src/core/modules/GridLinesMgr.cpp:1744 src/ui_viewDialog.h:3369
+#: src/core/modules/GridLinesMgr.cpp:1771 src/ui_viewDialog.h:3270
 msgid "Antisolar point"
 msgstr "Protislunce"
 
-#: src/core/modules/GridLinesMgr.cpp:1745 src/ui_viewDialog.h:3477
+#: src/core/modules/GridLinesMgr.cpp:1772 src/ui_viewDialog.h:3556
 msgid "Apex points"
 msgstr "Body apexu"
 
@@ -456,7 +470,7 @@ msgstr "Atmosféra"
 msgid "Fog"
 msgstr "Opar"
 
-#: src/core/modules/LandscapeMgr.cpp:510 src/ui_viewDialog.h:3459
+#: src/core/modules/LandscapeMgr.cpp:510 src/ui_viewDialog.h:3588
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "Světové strany"
@@ -582,13 +596,13 @@ msgstr "geologický termín"
 msgid "Linear size"
 msgstr "Lineární velikost"
 
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:730
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:731
 msgid "Diameter"
 msgstr "Průměr"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:608
-#: src/core/modules/Planet.cpp:633 src/core/modules/Planet.cpp:731
+#: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:609
+#: src/core/modules/Planet.cpp:634 src/core/modules/Planet.cpp:732
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
 #: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6098
 #: plugins/Satellites/src/Satellite.cpp:324
@@ -1290,12 +1304,12 @@ msgstr "podél"
 msgid "Airmasses"
 msgstr "vzduchové hmoty"
 
-#: src/core/modules/Nebula.cpp:213 src/core/modules/Planet.cpp:448
+#: src/core/modules/Nebula.cpp:213 src/core/modules/Planet.cpp:449
 #: src/core/modules/StarWrapper.cpp:178
 msgid "Additional names: "
 msgstr "Další jména:"
 
-#: src/core/modules/Nebula.cpp:219 src/core/modules/Planet.cpp:455
+#: src/core/modules/Nebula.cpp:219 src/core/modules/Planet.cpp:456
 #: src/core/modules/StarWrapper.cpp:184
 msgid "Additional catalog numbers: "
 msgstr "Další katalogová čísla:"
@@ -1353,7 +1367,7 @@ msgid "ly"
 msgstr "ly"
 
 #: src/core/modules/Nebula.cpp:324 src/core/modules/Nebula.cpp:370
-#: src/core/modules/Planet.cpp:643 src/core/modules/StarWrapper.cpp:275
+#: src/core/modules/Planet.cpp:644 src/core/modules/StarWrapper.cpp:275
 #: src/core/modules/StarWrapper.cpp:277 src/gui/AstroCalcDialog.cpp:3113
 #: src/gui/AstroCalcDialog.cpp:3171 src/ui_configurationDialog.h:1689
 #: plugins/Supernovae/src/Supernova.cpp:165 plugins/Novae/src/Nova.cpp:167
@@ -1844,7 +1858,7 @@ msgid "Toggle DSO type filter"
 msgstr "Vypnout/zapnout mlhovinový filtr"
 
 #: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:306
-#: src/StelMainView.cpp:949
+#: src/StelMainView.cpp:951
 msgid "Attention!"
 msgstr "Pozor!"
 
@@ -1865,94 +1879,94 @@ msgstr "Očekáváno"
 msgid "See Logfile for instructions."
 msgstr "Pokyny naleznete v log souboru."
 
-#: src/core/modules/Planet.cpp:423 src/core/modules/Comet.cpp:155
+#: src/core/modules/Planet.cpp:424 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:234 plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
 msgstr "Absolutní magnituda"
 
-#: src/core/modules/Planet.cpp:426
+#: src/core/modules/Planet.cpp:427
 msgid "Mean Opposition Magnitude"
 msgstr "Střední zdánlivá magnituda v opozici"
 
-#: src/core/modules/Planet.cpp:462
+#: src/core/modules/Planet.cpp:463
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "neperiodická"
 
-#: src/core/modules/Planet.cpp:466
+#: src/core/modules/Planet.cpp:467
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periodická"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:506
+#: src/core/modules/Planet.cpp:507
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Ekliptikální"
 
-#: src/core/modules/Planet.cpp:528 src/core/modules/Planet.cpp:529
+#: src/core/modules/Planet.cpp:529 src/core/modules/Planet.cpp:530
 msgid "Hourly motion"
 msgstr "Hodinový pohyb"
 
-#: src/core/modules/Planet.cpp:528 src/core/modules/StarWrapper.cpp:291
+#: src/core/modules/Planet.cpp:529 src/core/modules/StarWrapper.cpp:291
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "směrem k"
 
-#: src/core/modules/Planet.cpp:563
+#: src/core/modules/Planet.cpp:564
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nov"
 
-#: src/core/modules/Planet.cpp:565
+#: src/core/modules/Planet.cpp:566
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Dorůstající srpek"
 
-#: src/core/modules/Planet.cpp:567
+#: src/core/modules/Planet.cpp:568
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "První čtvrť"
 
-#: src/core/modules/Planet.cpp:569
+#: src/core/modules/Planet.cpp:570
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Dorůstající Měsíc"
 
-#: src/core/modules/Planet.cpp:571
+#: src/core/modules/Planet.cpp:572
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Úplněk"
 
-#: src/core/modules/Planet.cpp:573
+#: src/core/modules/Planet.cpp:574
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Couvající Měsíc"
 
-#: src/core/modules/Planet.cpp:575
+#: src/core/modules/Planet.cpp:576
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Poslední čtvrť"
 
-#: src/core/modules/Planet.cpp:577
+#: src/core/modules/Planet.cpp:578
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Ubývající srpek"
 
-#: src/core/modules/Planet.cpp:585
+#: src/core/modules/Planet.cpp:586
 msgid "Moon age"
 msgstr "Stáří Měsíce"
 
-#: src/core/modules/Planet.cpp:585
+#: src/core/modules/Planet.cpp:586
 msgid "days old"
 msgstr "dní"
 
-#: src/core/modules/Planet.cpp:597
+#: src/core/modules/Planet.cpp:598
 msgid "Position angle of bright limb"
 msgstr "Poziční úhel jasného okraje disku"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:606 src/gui/AstroCalcDialog.cpp:870
+#: src/core/modules/Planet.cpp:607 src/gui/AstroCalcDialog.cpp:870
 #: src/gui/AstroCalcDialog.cpp:1140 src/gui/AstroCalcDialog.cpp:1513
 #: src/gui/AstroCalcDialog.cpp:1561 src/gui/AstroCalcDialog.cpp:3081
 #: src/gui/AstroCalcDialog.cpp:6142 src/gui/AstroCalcDialog.cpp:6207
@@ -1965,140 +1979,140 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:622 src/core/modules/Planet.cpp:640
+#: src/core/modules/Planet.cpp:623 src/core/modules/Planet.cpp:641
 #: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6100
 msgctxt "distance"
 msgid "M km"
 msgstr "mil. km"
 
-#: src/core/modules/Planet.cpp:625
+#: src/core/modules/Planet.cpp:626
 msgid "Distance from Sun"
 msgstr "Vzdálenost od Slunce"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:645
+#: src/core/modules/Planet.cpp:646
 msgid "Light time"
 msgstr "Světelný čas"
 
-#: src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:660
 msgid "Orbital velocity"
 msgstr "Orbitální rychlost"
 
-#: src/core/modules/Planet.cpp:662
+#: src/core/modules/Planet.cpp:663
 msgid "Heliocentric velocity"
 msgstr "Heliocentrická rychlost"
 
-#: src/core/modules/Planet.cpp:698
+#: src/core/modules/Planet.cpp:699
 msgid "with rings"
 msgstr "s prstenci"
 
-#: src/core/modules/Planet.cpp:715
+#: src/core/modules/Planet.cpp:716
 msgid "scaled up to"
 msgstr "zvětšeno na"
 
-#: src/core/modules/Planet.cpp:725
+#: src/core/modules/Planet.cpp:726
 msgid "Apparent diameter"
 msgstr "Zdánlivý průměr"
 
-#: src/core/modules/Planet.cpp:730
+#: src/core/modules/Planet.cpp:731
 msgid "Equatorial diameter"
 msgstr "Rovníkový průměr"
 
-#: src/core/modules/Planet.cpp:769 src/core/modules/Planet.cpp:777
+#: src/core/modules/Planet.cpp:770 src/core/modules/Planet.cpp:778
 #: src/gui/AstroCalcDialog.cpp:3118 src/gui/AstroCalcDialog.cpp:3176
 #: src/ui_configurationDialog.h:1732
 msgid "Elongation"
 msgstr "Elongace"
 
-#: src/core/modules/Planet.cpp:770 src/core/modules/Planet.cpp:778
+#: src/core/modules/Planet.cpp:771 src/core/modules/Planet.cpp:779
 #: src/gui/AstroCalcDialog.cpp:3128 src/gui/AstroCalcDialog.cpp:3186
 #: plugins/Satellites/src/Satellite.cpp:395
 msgid "Phase angle"
 msgstr "Fázový úhel"
 
-#: src/core/modules/Planet.cpp:772 src/core/modules/Planet.cpp:780
+#: src/core/modules/Planet.cpp:773 src/core/modules/Planet.cpp:781
 msgid "Illuminated"
 msgstr "Osvětleno"
 
-#: src/core/modules/Planet.cpp:792 src/gui/AstroCalcDialog.cpp:6208
+#: src/core/modules/Planet.cpp:793 src/gui/AstroCalcDialog.cpp:6208
 #: src/gui/AstroCalcDialog.cpp:6352 src/gui/AstroCalcDialog.cpp:6369
 msgid "Angular distance"
 msgstr "Úhlová vzdálenost"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:810 src/core/modules/Planet.cpp:954
+#: src/core/modules/Planet.cpp:811 src/core/modules/Planet.cpp:955
 #: src/core/modules/StarWrapper.cpp:311 src/gui/AstroCalcDialog.cpp:6180
 msgctxt "duration"
 msgid "days"
 msgstr "dnů"
 
-#: src/core/modules/Planet.cpp:819
+#: src/core/modules/Planet.cpp:820
 msgid "Sidereal period"
 msgstr "Siderická doba"
 
-#: src/core/modules/Planet.cpp:828
+#: src/core/modules/Planet.cpp:829
 msgid "Synodic period"
 msgstr "Synodická perioda"
 
-#: src/core/modules/Planet.cpp:963
+#: src/core/modules/Planet.cpp:964
 msgid "Sidereal day"
 msgstr "Hvězdný den"
 
-#: src/core/modules/Planet.cpp:965
+#: src/core/modules/Planet.cpp:966
 msgid "Mean solar day"
 msgstr "Střední sluneční den"
 
-#: src/core/modules/Planet.cpp:971
+#: src/core/modules/Planet.cpp:972
 msgid "The period of rotation is chaotic"
 msgstr "Perioda rotace je chaotická"
 
-#: src/core/modules/Planet.cpp:977
+#: src/core/modules/Planet.cpp:978
 msgid "Equatorial rotation velocity"
 msgstr "Rychlost rotace na rovníku"
 
-#: src/core/modules/Planet.cpp:982
+#: src/core/modules/Planet.cpp:983
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:991
+#: src/core/modules/Planet.cpp:992
 msgid "Eclipse obscuration"
 msgstr "Zatemnění"
 
-#: src/core/modules/Planet.cpp:1000
+#: src/core/modules/Planet.cpp:1001
 msgid "Eclipse magnitude"
 msgstr "Velikost zatmění"
 
-#: src/core/modules/Planet.cpp:1025
+#: src/core/modules/Planet.cpp:1026
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Střed slunečního zatmění (z. šířka/z. délka)"
 
-#: src/core/modules/Planet.cpp:1036
+#: src/core/modules/Planet.cpp:1037
 msgid "Shadow center point is"
 msgstr "Středový bod stínu je"
 
-#: src/core/modules/Planet.cpp:1038
+#: src/core/modules/Planet.cpp:1039
 msgid "km towards azimuth"
 msgstr "km na azimutu"
 
-#: src/core/modules/Planet.cpp:1042
+#: src/core/modules/Planet.cpp:1043
 msgid "Magnitude of central eclipse"
 msgstr "Velikost středového zatmění"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1046
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(prstencové)"
 
-#: src/core/modules/Planet.cpp:1047
+#: src/core/modules/Planet.cpp:1048
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(úplné)"
 
-#: src/core/modules/Planet.cpp:1130
+#: src/core/modules/Planet.cpp:1131
 msgid "Penumbral eclipse magnitude"
 msgstr "Velikost polostínového zatmění"
 
-#: src/core/modules/Planet.cpp:1133
+#: src/core/modules/Planet.cpp:1134
 msgid "Umbral eclipse magnitude"
 msgstr "Velikost stínového zatmění"
 
@@ -3436,7 +3450,7 @@ msgid "References"
 msgstr "Odkazy"
 
 #: src/core/StelMovementMgr.cpp:192 src/gui/StelGui.cpp:226
-#: src/StelMainView.cpp:817 src/StelMainView.cpp:818
+#: src/StelMainView.cpp:819 src/StelMainView.cpp:820
 msgid "Miscellaneous"
 msgstr "Různé"
 
@@ -3792,22 +3806,22 @@ msgstr "Listopad"
 msgid "Select screenshot directory"
 msgstr "Vybrat adresář pro snímky obrazovky"
 
-#: src/gui/ConfigurationDialog.cpp:1125
+#: src/gui/ConfigurationDialog.cpp:1126
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Velikost ZP při spuštění: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1133
+#: src/gui/ConfigurationDialog.cpp:1134
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Směr pohledu při spuštění (azimut/výška): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1203
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 msgid "Acknowledgments"
 msgstr "Poděkování"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1205
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:200
@@ -3816,11 +3830,11 @@ msgstr "Poděkování"
 msgid "Authors"
 msgstr "Autoři"
 
-#: src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1206
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:1207 src/scripting/StelScriptMgr.cpp:467
+#: src/gui/ConfigurationDialog.cpp:1208 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Oculars/src/gui/OcularDialog.cpp:573
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
@@ -3842,7 +3856,7 @@ msgstr "Kontakt"
 msgid "Version"
 msgstr "Verze"
 
-#: src/gui/ConfigurationDialog.cpp:1208 src/scripting/StelScriptMgr.cpp:462
+#: src/gui/ConfigurationDialog.cpp:1209 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
@@ -3864,20 +3878,20 @@ msgstr "Verze"
 msgid "License"
 msgstr "Licence"
 
-#: src/gui/ConfigurationDialog.cpp:1212
+#: src/gui/ConfigurationDialog.cpp:1213
 msgctxt "license"
 msgid "unknown"
 msgstr "neznámé"
 
-#: src/gui/ConfigurationDialog.cpp:1320
+#: src/gui/ConfigurationDialog.cpp:1321
 msgid "Running script: "
 msgstr "Běžící skript: "
 
-#: src/gui/ConfigurationDialog.cpp:1327
+#: src/gui/ConfigurationDialog.cpp:1328
 msgid "Running script: [none]"
 msgstr "Běžící skript: [žádný]"
 
-#: src/gui/ConfigurationDialog.cpp:1392
+#: src/gui/ConfigurationDialog.cpp:1393
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3885,16 +3899,16 @@ msgstr ""
 "Stahování nových katalogů vězd dokončeno!\n"
 "Aby se zobrazily, je nutno restartovat Stellarium."
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "All available star catalogs have been installed."
 msgstr "Všechny dostupné katalogy jsou nainstalovány."
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1402
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Získán katalog %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1409
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3903,7 +3917,7 @@ msgstr ""
 "Stahování %1...\n"
 "(Můžete zavřít toto okno.)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1416
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3914,7 +3928,7 @@ msgstr ""
 "Počet hvězd: %2 Milionů\n"
 "Rozsah magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1461 src/gui/ConfigurationDialog.cpp:1498
+#: src/gui/ConfigurationDialog.cpp:1462 src/gui/ConfigurationDialog.cpp:1499
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3923,11 +3937,11 @@ msgstr ""
 "Chyba při stahování %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1551
+#: src/gui/ConfigurationDialog.cpp:1552
 msgid "Verifying file integrity..."
 msgstr "Kotrolování integrity souboru..."
 
-#: src/gui/ConfigurationDialog.cpp:1555
+#: src/gui/ConfigurationDialog.cpp:1556
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3936,207 +3950,207 @@ msgstr ""
 "Chyba při stahování %1:\n"
 "Soubor je poškozen."
 
-#: src/gui/ConfigurationDialog.cpp:1604 src/gui/ConfigurationDialog.cpp:1613
+#: src/gui/ConfigurationDialog.cpp:1605 src/gui/ConfigurationDialog.cpp:1614
 msgid "Available"
 msgstr "K dispozici"
 
-#: src/gui/ConfigurationDialog.cpp:1606 src/gui/ConfigurationDialog.cpp:1615
+#: src/gui/ConfigurationDialog.cpp:1607 src/gui/ConfigurationDialog.cpp:1616
 msgid "Not Available"
 msgstr "Není k dispozici"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1687
+#: src/gui/ConfigurationDialog.cpp:1688
 msgid "Algorithm of"
 msgstr "Algoritmus"
 
-#: src/gui/ConfigurationDialog.cpp:1700
+#: src/gui/ConfigurationDialog.cpp:1701
 msgid "Without correction"
 msgstr "Bez opravy"
 
-#: src/gui/ConfigurationDialog.cpp:1701
+#: src/gui/ConfigurationDialog.cpp:1702
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1702
+#: src/gui/ConfigurationDialog.cpp:1703
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1703
+#: src/gui/ConfigurationDialog.cpp:1704
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1704
+#: src/gui/ConfigurationDialog.cpp:1705
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1705
+#: src/gui/ConfigurationDialog.cpp:1706
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) a Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1706
+#: src/gui/ConfigurationDialog.cpp:1707
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller a Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1707
+#: src/gui/ConfigurationDialog.cpp:1708
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1708
+#: src/gui/ConfigurationDialog.cpp:1709
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel a Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1709
+#: src/gui/ConfigurationDialog.cpp:1710
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel a Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1710
+#: src/gui/ConfigurationDialog.cpp:1711
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison a Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1711
+#: src/gui/ConfigurationDialog.cpp:1712
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson a Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1712
+#: src/gui/ConfigurationDialog.cpp:1713
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson a Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1713
+#: src/gui/ConfigurationDialog.cpp:1714
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1714
+#: src/gui/ConfigurationDialog.cpp:1715
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1715
+#: src/gui/ConfigurationDialog.cpp:1716
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze a Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1716
+#: src/gui/ConfigurationDialog.cpp:1717
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson a Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1717
+#: src/gui/ConfigurationDialog.cpp:1718
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1719
+#: src/gui/ConfigurationDialog.cpp:1720
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (spolu s Chaprontem, Chapront-Touzem & Francouem (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1720
+#: src/gui/ConfigurationDialog.cpp:1721
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1721
+#: src/gui/ConfigurationDialog.cpp:1722
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus a Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1722
+#: src/gui/ConfigurationDialog.cpp:1723
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison a Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1723
+#: src/gui/ConfigurationDialog.cpp:1724
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1725
+#: src/gui/ConfigurationDialog.cpp:1726
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak a Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1728
+#: src/gui/ConfigurationDialog.cpp:1729
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) bez sekulárního zrychlení Měsíce"
 
-#: src/gui/ConfigurationDialog.cpp:1730
+#: src/gui/ConfigurationDialog.cpp:1731
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1731
+#: src/gui/ConfigurationDialog.cpp:1732
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1732
+#: src/gui/ConfigurationDialog.cpp:1733
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck a Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1733
+#: src/gui/ConfigurationDialog.cpp:1734
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold a Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1734
+#: src/gui/ConfigurationDialog.cpp:1735
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq a Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1735
+#: src/gui/ConfigurationDialog.cpp:1736
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1736
+#: src/gui/ConfigurationDialog.cpp:1737
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1737
+#: src/gui/ConfigurationDialog.cpp:1738
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Uživatelská rovnice %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1785 src/gui/ConfigurationDialog.cpp:1822
+#: src/gui/ConfigurationDialog.cpp:1786 src/gui/ConfigurationDialog.cpp:1823
 #: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:477
 msgid "System default"
 msgstr "Výchozí systému"
 
-#: src/gui/ConfigurationDialog.cpp:1786
+#: src/gui/ConfigurationDialog.cpp:1787
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "rrrr-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1787
+#: src/gui/ConfigurationDialog.cpp:1788
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1788
+#: src/gui/ConfigurationDialog.cpp:1789
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1789
+#: src/gui/ConfigurationDialog.cpp:1790
 msgid "ww, yyyy-mm-dd"
 msgstr "tt, rrrr-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:1790
+#: src/gui/ConfigurationDialog.cpp:1791
 msgid "ww, dd-mm-yyyy"
 msgstr "tt, dd-mm-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1791
+#: src/gui/ConfigurationDialog.cpp:1792
 msgid "ww, mm-dd-yyyy"
 msgstr "tt, mm-dd-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1823
+#: src/gui/ConfigurationDialog.cpp:1824
 msgid "12-hour format"
 msgstr "12-hodinový formát"
 
-#: src/gui/ConfigurationDialog.cpp:1824
+#: src/gui/ConfigurationDialog.cpp:1825
 msgid "24-hour format"
 msgstr "24-hodinový formát"
 
-#: src/gui/ConfigurationDialog.cpp:1850
+#: src/gui/ConfigurationDialog.cpp:1851
 msgctxt "disabled"
 msgid "None"
 msgstr "Žádné"
 
-#: src/gui/ConfigurationDialog.cpp:1851
+#: src/gui/ConfigurationDialog.cpp:1852
 msgid "5/6/5 bits"
 msgstr "5/6/5 bitů"
 
-#: src/gui/ConfigurationDialog.cpp:1852
+#: src/gui/ConfigurationDialog.cpp:1853
 msgid "6/6/6 bits"
 msgstr "6/6/6 bitů"
 
-#: src/gui/ConfigurationDialog.cpp:1853
+#: src/gui/ConfigurationDialog.cpp:1854
 msgid "8/8/8 bits"
 msgstr "8/8/8 bitů"
 
-#: src/gui/ConfigurationDialog.cpp:1854
+#: src/gui/ConfigurationDialog.cpp:1855
 msgid "10/10/10 bits"
 msgstr "10/10/10 bitů"
 
@@ -4590,73 +4604,73 @@ msgstr "Snímky za sekundu"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Opravdu? Tímto odstraníte svá uživatelská data."
 
-#: src/gui/ViewDialog.cpp:523
+#: src/gui/ViewDialog.cpp:525
 msgid "Loading ..."
 msgstr "Načítání …"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:578
 msgid "properties"
 msgstr "vlastnosti"
 
-#: src/gui/ViewDialog.cpp:597
+#: src/gui/ViewDialog.cpp:599
 msgid "Deep Sky"
 msgstr "Vzdálený vesmír"
 
-#: src/gui/ViewDialog.cpp:598
+#: src/gui/ViewDialog.cpp:600
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "Sluneční soustava"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:832
+#: src/gui/ViewDialog.cpp:834
 msgid "Excellent dark-sky site"
 msgstr "Vynikající temné nebe"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:834
+#: src/gui/ViewDialog.cpp:836
 msgid "Typical truly dark site"
 msgstr "Typické temné nebe"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:836
+#: src/gui/ViewDialog.cpp:838
 msgid "Rural sky"
 msgstr "Nebe na venkově"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:838
+#: src/gui/ViewDialog.cpp:840
 msgid "Rural/suburban transition"
 msgstr "Nebe na venkově přecházející v nebe příměstské"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:840
+#: src/gui/ViewDialog.cpp:842
 msgid "Suburban sky"
 msgstr "Příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:842
+#: src/gui/ViewDialog.cpp:844
 msgid "Bright suburban sky"
 msgstr "Jasné příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:844
+#: src/gui/ViewDialog.cpp:846
 msgid "Suburban/urban transition"
 msgstr "Příměstské nebe přecházející v nebe měst"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:846
+#: src/gui/ViewDialog.cpp:848
 msgid "City sky"
 msgstr "Městské nebe"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:848
+#: src/gui/ViewDialog.cpp:850
 msgid "Inner-city sky"
 msgstr "Nebe v centru města"
 
-#: src/gui/ViewDialog.cpp:862
+#: src/gui/ViewDialog.cpp:864
 msgid "The naked-eye limiting magnitude is"
 msgstr "Mezní magnituda pro pozorování očima je"
 
-#: src/gui/ViewDialog.cpp:870
+#: src/gui/ViewDialog.cpp:872
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -4664,7 +4678,7 @@ msgstr ""
 "Používá polygonální 3D model pro některé vybrané podplanetární objekty (malé"
 " měsíce, asteroidy, komety) místo sférické aproximace"
 
-#: src/gui/ViewDialog.cpp:871
+#: src/gui/ViewDialog.cpp:873
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -4673,88 +4687,88 @@ msgstr ""
 "nekonvexních objektů ve sluneční soustavě. U některých objektů může být "
 "snížena kvalita simulace polostínu."
 
-#: src/gui/ViewDialog.cpp:901
+#: src/gui/ViewDialog.cpp:903
 msgid "Abbreviated"
 msgstr "Zkrácené"
 
-#: src/gui/ViewDialog.cpp:902
+#: src/gui/ViewDialog.cpp:904
 msgid "Native"
 msgstr "Nativní"
 
-#: src/gui/ViewDialog.cpp:903
+#: src/gui/ViewDialog.cpp:905
 msgid "Translated"
 msgstr "Přeložené"
 
-#: src/gui/ViewDialog.cpp:1074
+#: src/gui/ViewDialog.cpp:1076
 msgid "No shooting stars"
 msgstr "Žádné padající hvězdy"
 
-#: src/gui/ViewDialog.cpp:1076
+#: src/gui/ViewDialog.cpp:1078
 msgid "Normal rate"
 msgstr "Normální četnost"
 
-#: src/gui/ViewDialog.cpp:1078
+#: src/gui/ViewDialog.cpp:1080
 msgid "Standard Orionids rate"
 msgstr "Standardní četnost Orionid"
 
-#: src/gui/ViewDialog.cpp:1080
+#: src/gui/ViewDialog.cpp:1082
 msgid "Standard Perseids rate"
 msgstr "Standardní četnost Perseid"
 
-#: src/gui/ViewDialog.cpp:1082
+#: src/gui/ViewDialog.cpp:1084
 msgid "Standard Geminids rate"
 msgstr "Standardní četnost Geminid"
 
-#: src/gui/ViewDialog.cpp:1084
+#: src/gui/ViewDialog.cpp:1086
 msgid "Exceptional Perseid rate"
 msgstr "Výjimečná četnost Perseid"
 
-#: src/gui/ViewDialog.cpp:1086
+#: src/gui/ViewDialog.cpp:1088
 msgid "Meteor storm rate"
 msgstr "Četnost meteorického deště"
 
-#: src/gui/ViewDialog.cpp:1088
+#: src/gui/ViewDialog.cpp:1090
 msgid "Exceptional Draconid rate"
 msgstr "Výjimečná četnost Draconid"
 
-#: src/gui/ViewDialog.cpp:1090
+#: src/gui/ViewDialog.cpp:1092
 msgid "Exceptional Leonid rate"
 msgstr "Vyjímečná četnost Leonid"
 
-#: src/gui/ViewDialog.cpp:1092
+#: src/gui/ViewDialog.cpp:1094
 msgid "Very high rate (1966 Leonids)"
 msgstr "Velmi vysoká četnost (Leonidy 1966)"
 
-#: src/gui/ViewDialog.cpp:1094
+#: src/gui/ViewDialog.cpp:1096
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Nejvyšší zaznamenaná četnost (Leonidy 1833)"
 
-#: src/gui/ViewDialog.cpp:1157
+#: src/gui/ViewDialog.cpp:1159
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1158
+#: src/gui/ViewDialog.cpp:1160
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronomical Almanac (1984)"
 
-#: src/gui/ViewDialog.cpp:1159
+#: src/gui/ViewDialog.cpp:1161
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1160
+#: src/gui/ViewDialog.cpp:1162
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1161
+#: src/gui/ViewDialog.cpp:1163
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Obecný"
 
-#: src/gui/ViewDialog.cpp:1187
+#: src/gui/ViewDialog.cpp:1189
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4762,7 +4776,7 @@ msgstr ""
 "Algoritmus byl použit v <em>Astronomical Almanac</em> (1984 a později) a "
 "dává V (instrumentální) magnitudy (údajně od D.L. Harrise)."
 
-#: src/gui/ViewDialog.cpp:1190
+#: src/gui/ViewDialog.cpp:1192
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -4772,7 +4786,7 @@ msgstr ""
 "1877-1891 a byl publikován v <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1193
+#: src/gui/ViewDialog.cpp:1195
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -4780,7 +4794,7 @@ msgstr ""
 "Algoritmus byl publikován v <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:1196
+#: src/gui/ViewDialog.cpp:1198
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -4788,7 +4802,7 @@ msgstr ""
 "Algoritmus byl publikován ve 3. vydání <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1199
+#: src/gui/ViewDialog.cpp:1201
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizuální jasnost vypočítaná na základě fázového úhlu a albeda."
 
@@ -5258,7 +5272,7 @@ msgstr "Výška"
 msgid "Elong."
 msgstr "Elong."
 
-#: src/gui/AstroCalcDialog.cpp:953 src/ui_viewDialog.h:3686
+#: src/gui/AstroCalcDialog.cpp:953 src/ui_viewDialog.h:2977
 msgid "Solar system objects"
 msgstr "Objekty Sluneční soustavy"
 
@@ -5605,7 +5619,7 @@ msgstr "Jasné mlhoviny (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2459 src/gui/AstroCalcDialog.cpp:5109
-#: src/translations.h:337 src/ui_viewDialog.h:3176
+#: src/translations.h:337 src/ui_viewDialog.h:3213
 #: src/ui_dsoColorsDialog.h:662
 msgid "Dark nebulae"
 msgstr "Temné mlhoviny"
@@ -5905,24 +5919,24 @@ msgstr "Kdykoli v noci"
 msgid "Bright stars"
 msgstr "Jasné hvězdy"
 
-#: src/gui/AstroCalcDialog.cpp:5108 src/ui_viewDialog.h:3175
+#: src/gui/AstroCalcDialog.cpp:5108 src/ui_viewDialog.h:3212
 msgid "Bright nebulae"
 msgstr "Jasné mlhoviny"
 
-#: src/gui/AstroCalcDialog.cpp:5110 src/ui_viewDialog.h:3179
+#: src/gui/AstroCalcDialog.cpp:5110 src/ui_viewDialog.h:3216
 #: src/ui_dsoColorsDialog.h:598
 msgid "Galaxies"
 msgstr "Galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5111 src/translations.h:329
-#: src/ui_viewDialog.h:3182 src/ui_dsoColorsDialog.h:602
+#: src/ui_viewDialog.h:3219 src/ui_dsoColorsDialog.h:602
 msgid "Open star clusters"
 msgstr "Otevřené hvězdokupy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5120 src/translations.h:335
-#: src/ui_viewDialog.h:3174 src/ui_dsoColorsDialog.h:591
+#: src/ui_viewDialog.h:3211 src/ui_dsoColorsDialog.h:591
 msgid "Planetary nebulae"
 msgstr "Planetární mlhoviny"
 
@@ -5955,19 +5969,19 @@ msgstr "Kandidáti na zbytky supernovy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5128 src/translations.h:363
-#: src/ui_viewDialog.h:3181 src/ui_dsoColorsDialog.h:584
+#: src/ui_viewDialog.h:3218 src/ui_dsoColorsDialog.h:584
 msgid "Supernova remnants"
 msgstr "Zbytky supernov"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5129 src/translations.h:391
-#: src/ui_viewDialog.h:3178 src/ui_dsoColorsDialog.h:697
+#: src/ui_viewDialog.h:3215 src/ui_dsoColorsDialog.h:697
 msgid "Clusters of galaxies"
 msgstr "Kupy galaxií"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5131 src/translations.h:331
-#: src/ui_viewDialog.h:3184 src/ui_dsoColorsDialog.h:577
+#: src/ui_viewDialog.h:3221 src/ui_dsoColorsDialog.h:577
 msgid "Globular star clusters"
 msgstr "Kulové hvězdokupy"
 
@@ -5979,7 +5993,7 @@ msgstr "Oblasti oblohy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5133 src/translations.h:345
-#: src/ui_viewDialog.h:3173 src/ui_dsoColorsDialog.h:568
+#: src/ui_viewDialog.h:3210 src/ui_dsoColorsDialog.h:568
 msgid "Active galaxies"
 msgstr "Aktivní galaxie"
 
@@ -6002,7 +6016,7 @@ msgstr "Jasné supernovy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5150 src/translations.h:349
-#: src/ui_viewDialog.h:3180 src/ui_dsoColorsDialog.h:653
+#: src/ui_viewDialog.h:3217 src/ui_dsoColorsDialog.h:653
 msgid "Interacting galaxies"
 msgstr "Interagující galaxie"
 
@@ -6206,19 +6220,19 @@ msgstr "Skripty"
 msgid "Shortcut"
 msgstr "Zkratka"
 
-#: src/StelMainView.cpp:817
+#: src/StelMainView.cpp:819
 msgid "Save screenshot"
 msgstr "Uložit snímek obrazovky"
 
-#: src/StelMainView.cpp:818
+#: src/StelMainView.cpp:820
 msgid "Reload shaders (for development)"
 msgstr "Znovunačíst stínovače (pro vývoj)"
 
-#: src/StelMainView.cpp:819
+#: src/StelMainView.cpp:821
 msgid "Full-screen mode"
 msgstr "Režim celá obrazovka"
 
-#: src/StelMainView.cpp:949
+#: src/StelMainView.cpp:951
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -6226,7 +6240,7 @@ msgstr ""
 "Klávesové zkratky jsou v konfliktu! Po spuštění planetária stiskněte klávesu"
 " F7 a zkontrolujte následující vícenásobná přiřazení"
 
-#: src/StelMainView.cpp:1028
+#: src/StelMainView.cpp:1030
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -6234,14 +6248,14 @@ msgstr ""
 "Nedostatečná verze OpenGL. Prosím aktualizujte ovladače, grafický hardware, "
 "nebo použijte volbu --angle-mode (příp. --mesa-mode)."
 
-#: src/StelMainView.cpp:1031
+#: src/StelMainView.cpp:1033
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Nedostatečná verze OpenGL. Prosím aktualizujte ovladače nebo grafický "
 "hardware."
 
-#: src/StelMainView.cpp:1073
+#: src/StelMainView.cpp:1075
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6249,7 +6263,7 @@ msgstr ""
 "Váš DirectX/OpenGL ES subsystém má problémy. Podrobnosti naleznete ve výpisu.\n"
 "Chcete to ignorovat, nezobrazovat příště tuto hlášku a pokusit se pokračovat v degradovaném režimu?"
 
-#: src/StelMainView.cpp:1124
+#: src/StelMainView.cpp:1126
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6257,7 +6271,7 @@ msgstr ""
 "Váš OpenGL/Mesa subsystém má problémy. Podrobnosti naleznete ve výpisu.\n"
 "Chcete to ignorovat, nezobrazovat příště tuto hlášku a pokusit se pokračovat v degradovaném režimu?"
 
-#: src/StelMainView.cpp:1184
+#: src/StelMainView.cpp:1186
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6265,7 +6279,7 @@ msgstr ""
 "Váš OpenGL subsystém má problémy. Podrobnosti naleznete ve výpisu.\n"
 "Chcete to ignorovat, nezobrazovat příště tuto hlášku a pokusit se pokračovat v degradovaném režimu?"
 
-#: src/StelMainView.cpp:1225
+#: src/StelMainView.cpp:1227
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6273,7 +6287,7 @@ msgstr ""
 "Váš OpenGL ES subsystém má problémy. Podrobnosti naleznete ve výpisu.\n"
 "Chcete to ignorovat, nezobrazovat příště tuto hlášku a pokusit se pokračovat v degradovaném režimu?"
 
-#: src/StelMainView.cpp:1334
+#: src/StelMainView.cpp:1336
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -7067,12 +7081,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Protoplanetární mlhoviny"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:395 src/ui_viewDialog.h:3085
+#: src/translations.h:395 src/ui_viewDialog.h:3122
 msgid "Messier Catalogue"
 msgstr "Messierův katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:397 src/ui_viewDialog.h:3103
+#: src/translations.h:397 src/ui_viewDialog.h:3140
 msgid "Caldwell Catalogue"
 msgstr "Caldwellův katalog"
 
@@ -7202,17 +7216,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "Katalog Jamese Dunlopa pro objekty vzdáleného vesmíru na jižní obloze"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:449 src/ui_viewDialog.h:3097
+#: src/translations.h:449 src/ui_viewDialog.h:3134
 msgid "Trumpler Catalogue"
 msgstr "Trumplerův katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:451 src/ui_viewDialog.h:3167
+#: src/translations.h:451 src/ui_viewDialog.h:3204
 msgid "Stock Catalogue"
 msgstr "Stockův katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:453 src/ui_viewDialog.h:3163
+#: src/translations.h:453 src/ui_viewDialog.h:3200
 msgid "Ruprecht Catalogue"
 msgstr "Ruprechtův katalog"
 
@@ -9892,78 +9906,110 @@ msgstr "Předchozí vyhledávání"
 msgid "Max items to display:"
 msgstr "Max. počet položek k zobrazení:"
 
-#: src/ui_searchDialogGui.h:954 src/ui_viewDialog.h:3595
-#: src/ui_viewDialog.h:3626 src/ui_configurationDialog.h:1948
+#: src/ui_searchDialogGui.h:954 src/ui_viewDialog.h:3636
+#: src/ui_viewDialog.h:3667 src/ui_configurationDialog.h:1948
 #: src/ui_configurationDialog.h:1959
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:437
 msgid "Options"
 msgstr "Možnosti"
 
-#: src/ui_viewDialog.h:2955
+#: src/ui_viewDialog.h:2967
 msgid "View"
 msgstr "Zobrazení"
 
-#: src/ui_viewDialog.h:2957 src/ui_viewDialog.h:3682
+#: src/ui_viewDialog.h:2973 src/ui_viewDialog.h:2994
 msgid "Sky"
 msgstr "Obloha"
 
-#: src/ui_viewDialog.h:2958
+#: src/ui_viewDialog.h:2975
+msgctxt "Solar system objects"
+msgid "SSO"
+msgstr "Sl. soustava"
+
+#: src/ui_viewDialog.h:2980
+msgctxt "Deep-Sky Objects"
+msgid "DSO"
+msgstr "Vzdálený vesmír"
+
+#: src/ui_viewDialog.h:2982
+msgid "Deep-Sky Objects"
+msgstr "Objekty vzdáleného vesmíru"
+
+#: src/ui_viewDialog.h:2985
+msgid "Markings"
+msgstr "Označení"
+
+#: src/ui_viewDialog.h:2987
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
+msgid "Landscape"
+msgstr "Krajina"
+
+#: src/ui_viewDialog.h:2989
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
+msgid "Starlore"
+msgstr "Nebeská mytologie"
+
+#: src/ui_viewDialog.h:2991
+msgid "Surveys"
+msgstr "Přehlídky oblohy"
+
+#: src/ui_viewDialog.h:2995
 msgid "Zodiacal Light brightness:"
 msgstr "Jas zvířetníkového světla:"
 
-#: src/ui_viewDialog.h:2960
+#: src/ui_viewDialog.h:2997
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Zeslabit slabé hvězdy, když je na obloze velmi jasný objekt"
 
-#: src/ui_viewDialog.h:2962
+#: src/ui_viewDialog.h:2999
 msgid "Dynamic eye adaptation"
 msgstr "Dynamické přizpůsobení zraku"
 
-#: src/ui_viewDialog.h:2963
+#: src/ui_viewDialog.h:3000
 msgid "Atmosphere visualization"
 msgstr "Zobrazení atmosféry"
 
-#: src/ui_viewDialog.h:2965
+#: src/ui_viewDialog.h:3002
 msgid "pressure, temperature, extinction coefficient"
 msgstr "tlak, teplota, extinkční keoficient"
 
-#: src/ui_viewDialog.h:2967
+#: src/ui_viewDialog.h:3004
 msgid "Refraction/Extinction settings..."
 msgstr "Nastavení refrakce/extinkce..."
 
-#: src/ui_viewDialog.h:2969
+#: src/ui_viewDialog.h:3006
 msgid "Settings for sporadic meteors"
 msgstr "Nastavení pro sporadické meteory"
 
-#: src/ui_viewDialog.h:2971
+#: src/ui_viewDialog.h:3008
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Padající hvězdy:"
 
-#: src/ui_viewDialog.h:2974 src/ui_viewDialog.h:2977
+#: src/ui_viewDialog.h:3011 src/ui_viewDialog.h:3014
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "Zenitová hodinová frekvence pro sporadické meteory"
 
-#: src/ui_viewDialog.h:2979
+#: src/ui_viewDialog.h:3016
 msgid "Milky Way brightness/saturation:"
 msgstr "Jas/sytost Mléčné dráhy:"
 
-#: src/ui_viewDialog.h:2981
+#: src/ui_viewDialog.h:3018
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "Mění barevnou sytost od zcela bezbarvé (0.00) po výchozí úplně sytou (1.00)."
 
-#: src/ui_viewDialog.h:2983
+#: src/ui_viewDialog.h:3020
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
 msgstr "Světelné znečištění"
 
-#: src/ui_viewDialog.h:2984 src/ui_astroCalcDialog.h:1730
+#: src/ui_viewDialog.h:3021 src/ui_astroCalcDialog.h:1730
 msgid "or"
 msgstr "nebo"
 
-#: src/ui_viewDialog.h:2986
+#: src/ui_viewDialog.h:3023
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
@@ -9971,100 +10017,100 @@ msgstr ""
 "Použít údaje o světelném znečištění z databáze míst a ignorovat nastavení "
 "světelného znečištění v levém boxu."
 
-#: src/ui_viewDialog.h:2988
+#: src/ui_viewDialog.h:3025
 msgid "take from locations database"
 msgstr "převzít z databáze míst"
 
-#: src/ui_viewDialog.h:2990
+#: src/ui_viewDialog.h:3027
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "Absolutní stupnice:"
 
-#: src/ui_viewDialog.h:2992
+#: src/ui_viewDialog.h:3029
 msgid "Show stars with pointed rays"
 msgstr "Zobrazit hvězdy se špičatými cípy "
 
-#: src/ui_viewDialog.h:2994
+#: src/ui_viewDialog.h:3031
 msgid "Spiky stars"
 msgstr "Cípaté hvězdy"
 
-#: src/ui_viewDialog.h:2996
+#: src/ui_viewDialog.h:3033
 msgid "Limit the magnitude of stars"
 msgstr "Omezit magnitudu hvězd"
 
-#: src/ui_viewDialog.h:2998 src/ui_viewDialog.h:3025 src/ui_viewDialog.h:3197
+#: src/ui_viewDialog.h:3035 src/ui_viewDialog.h:3062 src/ui_viewDialog.h:3234
 msgid "Limit magnitude:"
 msgstr "Mezní magnituda:"
 
-#: src/ui_viewDialog.h:2999
+#: src/ui_viewDialog.h:3036
 msgid "Use additional names of stars"
 msgstr "Použít další jména hvězd"
 
-#: src/ui_viewDialog.h:3000 src/ui_viewDialog.h:3040 src/ui_viewDialog.h:3185
+#: src/ui_viewDialog.h:3037 src/ui_viewDialog.h:3077 src/ui_viewDialog.h:3222
 msgid "Labels and Markers"
 msgstr "Popisky a značky"
 
-#: src/ui_viewDialog.h:3001
+#: src/ui_viewDialog.h:3038
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "Mihotání:"
 
-#: src/ui_viewDialog.h:3002
+#: src/ui_viewDialog.h:3039
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "Relativní stupnice:"
 
-#: src/ui_viewDialog.h:3004
+#: src/ui_viewDialog.h:3041
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr ""
 "Použít označení hvězd místo jejich obvyklých jmen pro popisky na obrazovce"
 
-#: src/ui_viewDialog.h:3006 src/ui_viewDialog.h:3201
+#: src/ui_viewDialog.h:3043 src/ui_viewDialog.h:3238
 msgid "Use designations for screen labels"
 msgstr "Použít katalogové označení u popisků objektů"
 
-#: src/ui_viewDialog.h:3007
+#: src/ui_viewDialog.h:3044
 msgid "Projection"
 msgstr "Projekce"
 
-#: src/ui_viewDialog.h:3008
+#: src/ui_viewDialog.h:3045
 msgid "Vertical viewport offset"
 msgstr "Svislý posun pohledu"
 
-#: src/ui_viewDialog.h:3009
+#: src/ui_viewDialog.h:3046
 msgid "Solar System objects"
 msgstr "Objekty sluneční soustavy"
 
-#: src/ui_viewDialog.h:3011
+#: src/ui_viewDialog.h:3048
 msgid "Color of trails"
 msgstr "Barva stop"
 
-#: src/ui_viewDialog.h:3013
+#: src/ui_viewDialog.h:3050
 msgid "Show trails"
 msgstr "Zobrazit stopy"
 
-#: src/ui_viewDialog.h:3015
+#: src/ui_viewDialog.h:3052
 msgid "Trails thickness in pixels"
 msgstr "Tloušťka stop v bodech"
 
-#: src/ui_viewDialog.h:3017
+#: src/ui_viewDialog.h:3054
 msgid "Planets magnitude algorithm:"
 msgstr "Algoritmus pro výpočet magnitudy planet:"
 
-#: src/ui_viewDialog.h:3021
+#: src/ui_viewDialog.h:3058
 msgid "Use more accurate 3D models (where available)"
 msgstr "Použít přesnější 3D modely (pokud jsou dostupné)"
 
-#: src/ui_viewDialog.h:3023
+#: src/ui_viewDialog.h:3060
 msgid "Limit the magnitude of solar system objects"
 msgstr "Omezit magnitudu objektů sluneční soustavy"
 
-#: src/ui_viewDialog.h:3026
+#: src/ui_viewDialog.h:3063
 msgid "Scale minor bodies:"
 msgstr "Zvětšení malých těles:"
 
-#: src/ui_viewDialog.h:3028
+#: src/ui_viewDialog.h:3065
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -10072,117 +10118,117 @@ msgstr ""
 "Zaškrtněte tuto volbu pro simulaci efektu konečné rychlosti světla, tj. "
 "uvažovat vliv planetární aberace (doporučeno)."
 
-#: src/ui_viewDialog.h:3030
+#: src/ui_viewDialog.h:3067
 msgid "Simulate light speed"
 msgstr "Simulovat rychlost světla"
 
-#: src/ui_viewDialog.h:3032
+#: src/ui_viewDialog.h:3069
 msgid "Toggle drawing halo around the Moon"
 msgstr "Zapnout/vypnout kresbu hala okolo Měsíce"
 
-#: src/ui_viewDialog.h:3034
+#: src/ui_viewDialog.h:3071
 msgid "Show Moon's halo"
 msgstr "Zobrazit měsíční halo"
 
-#: src/ui_viewDialog.h:3035
+#: src/ui_viewDialog.h:3072
 msgid "Only orbits of major planets"
 msgstr "Pouze oběžné dráhy velkých planet"
 
-#: src/ui_viewDialog.h:3037
+#: src/ui_viewDialog.h:3074
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
 "Zrušte tuto volbu pokud chcete vidět dráhu vybrané planety a jejích měsíců.."
 
-#: src/ui_viewDialog.h:3039
+#: src/ui_viewDialog.h:3076
 msgid "Only orbit for selected object"
 msgstr "Pouze oběžná dráha vybraného objektu"
 
-#: src/ui_viewDialog.h:3042
+#: src/ui_viewDialog.h:3079
 msgid "Color of planet labels"
 msgstr "Barva popisků planet"
 
-#: src/ui_viewDialog.h:3045
+#: src/ui_viewDialog.h:3082
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 "Zrušte tuto volbu pokud chcete vidět stopy všech objektů sluneční soustavy."
 
-#: src/ui_viewDialog.h:3047
+#: src/ui_viewDialog.h:3084
 msgid "Only for N latest selected objects:"
 msgstr "Pouze pro N posledních vybraných objektů:"
 
-#: src/ui_viewDialog.h:3048
+#: src/ui_viewDialog.h:3085
 msgid "Show orbits"
 msgstr "Zobrazit oběžné dráhy"
 
-#: src/ui_viewDialog.h:3050
+#: src/ui_viewDialog.h:3087
 msgid "Show orbit even if planet is off screen"
 msgstr "Zobrazit oběžné drýhy, i když je planeta mimo obrazovku"
 
-#: src/ui_viewDialog.h:3052
+#: src/ui_viewDialog.h:3089
 msgid "permanently"
 msgstr "trvale"
 
-#: src/ui_viewDialog.h:3054
+#: src/ui_viewDialog.h:3091
 msgid "Configure colors of orbit lines"
 msgstr "Nastavit barvy oběžných drah"
 
-#: src/ui_viewDialog.h:3056
+#: src/ui_viewDialog.h:3093
 msgid "Colors..."
 msgstr "Barvy..."
 
-#: src/ui_viewDialog.h:3058
+#: src/ui_viewDialog.h:3095
 msgid "Orbits thickness in pixels"
 msgstr "Tloušťka oběžných drah v bodech"
 
-#: src/ui_viewDialog.h:3060
+#: src/ui_viewDialog.h:3097
 msgid "Scale Moon:"
 msgstr "Zvětšení Měsíce:"
 
-#: src/ui_viewDialog.h:3062
+#: src/ui_viewDialog.h:3099
 msgid "Scale factor"
 msgstr "Faktor zvětšení"
 
-#: src/ui_viewDialog.h:3064
+#: src/ui_viewDialog.h:3101
 msgid "Use custom settings of GRS:"
 msgstr "Použít uživatelské nastavení pro Rudou skvrnu:"
 
-#: src/ui_viewDialog.h:3066 src/ui_viewDialog.h:3068
+#: src/ui_viewDialog.h:3103 src/ui_viewDialog.h:3105
 msgid "GRS details..."
 msgstr "Rudá skvrna..."
 
-#: src/ui_viewDialog.h:3069
+#: src/ui_viewDialog.h:3106
 msgid "Show planet markers"
 msgstr "Zobrazit značky planet"
 
-#: src/ui_viewDialog.h:3073
+#: src/ui_viewDialog.h:3110
 msgid "Simulate self-shadowing"
 msgstr "Simulovat vlastní stíny"
 
-#: src/ui_viewDialog.h:3075
+#: src/ui_viewDialog.h:3112
 msgid "Color of nomenclature labels"
 msgstr "Barva popisků názvosloví"
 
-#: src/ui_viewDialog.h:3079
+#: src/ui_viewDialog.h:3116
 msgid "Show hints and labels for planetary features"
 msgstr "Zobrazí značky a popisky pro planetární útvary"
 
-#: src/ui_viewDialog.h:3081
+#: src/ui_viewDialog.h:3118
 msgid "Show planetary nomenclature"
 msgstr "Zobrazit planetární názvosloví"
 
-#: src/ui_viewDialog.h:3082
+#: src/ui_viewDialog.h:3119
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Skrýt názvosloví na tělese pozorovatele"
 
-#: src/ui_viewDialog.h:3083
+#: src/ui_viewDialog.h:3120
 msgid "Display objects from catalogs"
 msgstr "Zobrazit objekty z katalogů"
 
-#: src/ui_viewDialog.h:3088
+#: src/ui_viewDialog.h:3125
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
@@ -10190,31 +10236,31 @@ msgstr ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 
-#: src/ui_viewDialog.h:3091
+#: src/ui_viewDialog.h:3128
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "A catalogue of Galactic supernova remnants (Green, 2014)"
 
-#: src/ui_viewDialog.h:3094
+#: src/ui_viewDialog.h:3131
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:3100
+#: src/ui_viewDialog.h:3137
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:3106
+#: src/ui_viewDialog.h:3143
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "The Uppsala General Catalogue of Galaxies"
 
-#: src/ui_viewDialog.h:3109
+#: src/ui_viewDialog.h:3146
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hickson Compact Group (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:3112
+#: src/ui_viewDialog.h:3149
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr "Katalog reflexních mlhovin (van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:3115
+#: src/ui_viewDialog.h:3152
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -10222,55 +10268,55 @@ msgstr ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:3118
+#: src/ui_viewDialog.h:3155
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Index Catalogue of Nebulae and Clusters of Stars"
 
-#: src/ui_viewDialog.h:3121
+#: src/ui_viewDialog.h:3158
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:3124
+#: src/ui_viewDialog.h:3161
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Atlas of Peculiar Galaxies (Arp, 1966)"
 
-#: src/ui_viewDialog.h:3127
+#: src/ui_viewDialog.h:3164
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 
-#: src/ui_viewDialog.h:3130
+#: src/ui_viewDialog.h:3167
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Catalogue of HII Regions (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:3133
+#: src/ui_viewDialog.h:3170
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:3136
+#: src/ui_viewDialog.h:3173
 msgid "Principal Galaxy Catalog"
 msgstr "Principal Galaxy Catalog"
 
-#: src/ui_viewDialog.h:3139
+#: src/ui_viewDialog.h:3176
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:3142
+#: src/ui_viewDialog.h:3179
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Catalog of Open Galactic Clusters (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:3145
+#: src/ui_viewDialog.h:3182
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:3148
+#: src/ui_viewDialog.h:3185
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:3151
+#: src/ui_viewDialog.h:3188
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
@@ -10278,24 +10324,24 @@ msgstr ""
 "Katalog hvězd jižní oblohy vnořených do mlhoviny (van den Bergh and Herbst, "
 "1975)"
 
-#: src/ui_viewDialog.h:3154
+#: src/ui_viewDialog.h:3191
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:3157
+#: src/ui_viewDialog.h:3194
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:3160
+#: src/ui_viewDialog.h:3197
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "New General Catalogue of Nebulae and Clusters of Stars"
 
-#: src/ui_viewDialog.h:3165
+#: src/ui_viewDialog.h:3202
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "Jiný"
 
-#: src/ui_viewDialog.h:3170
+#: src/ui_viewDialog.h:3207
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
@@ -10303,28 +10349,28 @@ msgstr ""
 "van den Berghův-Hagenův katalog (Rovnoměrný průzkum hvězdokup v jižní Mléčné"
 " dráze; van den Bergh a Hagen, 1975)"
 
-#: src/ui_viewDialog.h:3172
+#: src/ui_viewDialog.h:3209
 msgid "Filter by type"
 msgstr "Filtrovat podle typu"
 
-#: src/ui_viewDialog.h:3177 src/ui_dsoColorsDialog.h:639
+#: src/ui_viewDialog.h:3214 src/ui_dsoColorsDialog.h:639
 msgid "Hydrogen regions"
 msgstr "HII oblasti"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3183 plugins/Exoplanets/src/Exoplanets.cpp:1035
+#: src/ui_viewDialog.h:3220 plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "Other"
 msgstr "Jiné"
 
-#: src/ui_viewDialog.h:3187
+#: src/ui_viewDialog.h:3224
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "Použije značky úměrné úhlové velikosti objektu vzdáleného vesmíru"
 
-#: src/ui_viewDialog.h:3189
+#: src/ui_viewDialog.h:3226
 msgid "Use proportional hints"
 msgstr "Použít proporcionální značky"
 
-#: src/ui_viewDialog.h:3191
+#: src/ui_viewDialog.h:3228
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -10332,17 +10378,17 @@ msgstr ""
 "Použít plošný jas objektů vzdáleného vesmíru pro škálování viditelnosti "
 "jejich značek a popisků."
 
-#: src/ui_viewDialog.h:3193
+#: src/ui_viewDialog.h:3230
 msgid "Use surface brightness"
 msgstr "Použít plošný jas"
 
-#: src/ui_viewDialog.h:3195
+#: src/ui_viewDialog.h:3232
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Mezní magnituda (pro pozorovatele prostýma očima/binokulárem) pro objekty "
 "vzdáleného vesmíru."
 
-#: src/ui_viewDialog.h:3199
+#: src/ui_viewDialog.h:3236
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -10350,243 +10396,51 @@ msgstr ""
 "Použít označení objektů vzdáleného vesmíru místo jejich obvyklých jmen pro "
 "popisky na obrazovce"
 
-#: src/ui_viewDialog.h:3202 plugins/Satellites/src/ui_satellitesDialog.h:957
+#: src/ui_viewDialog.h:3239 plugins/Satellites/src/ui_satellitesDialog.h:957
 msgid "Labels"
 msgstr "Popisky"
 
-#: src/ui_viewDialog.h:3203
+#: src/ui_viewDialog.h:3240
 msgid "Hints"
 msgstr "Značky"
 
-#: src/ui_viewDialog.h:3204
+#: src/ui_viewDialog.h:3241
 msgid "Configure colors of markers"
 msgstr "Nastavit barvy značek"
 
-#: src/ui_viewDialog.h:3205
+#: src/ui_viewDialog.h:3242
 msgid "Use outlines for big deep-sky objects"
 msgstr "Použít obrysy pro velké objekty vzdáleného vesmíru"
 
-#: src/ui_viewDialog.h:3209
+#: src/ui_viewDialog.h:3246
 msgid "Limit angular size (arcmin):"
 msgstr "Mezní úhlová velikost ('):"
 
-#: src/ui_viewDialog.h:3211
+#: src/ui_viewDialog.h:3248
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "Minimální úhlová velikost v minutách pro objekty vzdáleného vesmíru"
 
-#: src/ui_viewDialog.h:3214
+#: src/ui_viewDialog.h:3251
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Maximální úhlová velikost v minutách pro objekty vzdáleného vesmíru"
 
-#: src/ui_viewDialog.h:3216
+#: src/ui_viewDialog.h:3253
 msgid "Use additional names of DSO"
 msgstr "Použít další pojmenování pro objekty vzdáleného vesmíru"
 
-#: src/ui_viewDialog.h:3217
+#: src/ui_viewDialog.h:3254
 msgid "Celestial Sphere"
 msgstr "Nebeská sféra"
 
-#: src/ui_viewDialog.h:3219 src/ui_viewDialog.h:3223 src/ui_viewDialog.h:3288
-#: src/ui_viewDialog.h:3303 src/ui_viewDialog.h:3324 src/ui_viewDialog.h:3335
-#: src/ui_viewDialog.h:3371 src/ui_viewDialog.h:3393 src/ui_viewDialog.h:3426
-#: src/ui_viewDialog.h:3430 src/ui_viewDialog.h:3442 src/ui_viewDialog.h:3510
-#: src/ui_viewDialog.h:3550
-msgid "Label partitions"
-msgstr "Popsat oddíly"
-
-#: src/ui_viewDialog.h:3225
-msgid "Equator (of date)"
-msgstr "Rovník (k datu)"
-
-#: src/ui_viewDialog.h:3227
-msgid "The line thickness for grids and lines"
-msgstr "Tloušťka čáry pro sítě a čáry"
-
-#: src/ui_viewDialog.h:3229
-msgid "Thickness: lines"
-msgstr "Tloušťka: čáry"
-
-#: src/ui_viewDialog.h:3231 src/ui_viewDialog.h:3601 src/ui_viewDialog.h:3644
-#: src/ui_viewDialog.h:3654 src/ui_viewDialog.h:3661 src/ui_viewDialog.h:3669
-msgid "Thickness of line in pixels"
-msgstr "Tloušťka čáry v bodech"
-
-#: src/ui_viewDialog.h:3234
-msgid "The line thickness for circle partitions"
-msgstr "Tloušťka čáry pro kruhové oddíly"
-
-#: src/ui_viewDialog.h:3236
-msgid "partitions"
-msgstr "oddíly"
-
-#: src/ui_viewDialog.h:3238
-msgid "Thickness of partitions in pixels"
-msgstr "Tloušťka oddílů v bodech"
-
-#: src/ui_viewDialog.h:3241
-msgid "Color of cardinal points"
-msgstr "Barva pro světové strany"
-
-#: src/ui_viewDialog.h:3244
-msgid "Color of colures"
-msgstr "Barva kolurů"
-
-#: src/ui_viewDialog.h:3247 src/ui_viewDialog.h:3276 src/ui_viewDialog.h:3284
-#: src/ui_viewDialog.h:3295 src/ui_viewDialog.h:3307 src/ui_viewDialog.h:3346
-#: src/ui_viewDialog.h:3350 src/ui_viewDialog.h:3381 src/ui_viewDialog.h:3398
-#: src/ui_viewDialog.h:3418 src/ui_viewDialog.h:3449 src/ui_viewDialog.h:3471
-#: src/ui_viewDialog.h:3521
-msgid "Show partitions"
-msgstr "Zobrazit oddíly"
-
-#: src/ui_viewDialog.h:3251
-msgid "Color of ecliptic (J2000.0)"
-msgstr "Barva ekliptiky (J2000.0)"
-
-#: src/ui_viewDialog.h:3254
-msgid "Color of Apex and Antapex points"
-msgstr "Barva bodů apexu a antapexu"
-
-#: src/ui_viewDialog.h:3257
-msgid "Color of the equatorial grid (of date)"
-msgstr "Barva rovníkové sítě (k datu)"
+#: src/ui_viewDialog.h:3256
+msgid "Galactic Coordinates, System II (IAU 1958)."
+msgstr "Galactické souřadnice, nový systém II (IAU 1958)."
 
 #: src/ui_viewDialog.h:3260
-msgid "Color of the galactic grid"
-msgstr "Barva galaktické sítě"
+msgid "Color of circular marker of FOV"
+msgstr "Barva kruhové značky ZP"
 
 #: src/ui_viewDialog.h:3263
-msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr "Výška a azimut (počítaný od severu přes východ)."
-
-#: src/ui_viewDialog.h:3267
-msgid "Color of meridian"
-msgstr "Barva poledníku"
-
-#: src/ui_viewDialog.h:3270
-msgid "Color of the ecliptical grid (of date)"
-msgstr "Barva ekliptikální sítě (k datu)"
-
-#: src/ui_viewDialog.h:3273
-msgid "Color of the ecliptic poles (J2000.0)"
-msgstr "Barva pólů ekliptiky (J2000.0)"
-
-#: src/ui_viewDialog.h:3280
-msgid "Ecliptical coordinates for J2000.0."
-msgstr "Ekliptikální souřadnice J2000.0."
-
-#: src/ui_viewDialog.h:3282
-msgid "Ecliptic grid (J2000)"
-msgstr "Ekliptikální síť (J2000.0)"
-
-#: src/ui_viewDialog.h:3292
-msgid "Color of Prime Vertical"
-msgstr "Barva prvního vertikálu"
-
-#: src/ui_viewDialog.h:3299
-msgid ""
-"Show a vertical line (with optional altitude marks) in the screen center."
-msgstr ""
-"Zobrazit svislou čáru (s volitelnými výškovými značkami) ve středu "
-"obrazovky."
-
-#: src/ui_viewDialog.h:3311
-msgid "Color of ecliptic poles (of date)"
-msgstr "Barva pólů ekliptiky (k datu)"
-
-#: src/ui_viewDialog.h:3314
-msgid "Show Prime (East-West) Vertical."
-msgstr "Zobrazit první (východo-západní) vertikál"
-
-#: src/ui_viewDialog.h:3318
-msgid "Color of equator (of date)"
-msgstr "Barva rovníku (k datu)"
-
-#: src/ui_viewDialog.h:3321
-msgid "Color of Zenith and Nadir"
-msgstr "Barva zenitu a nadiru"
-
-#: src/ui_viewDialog.h:3328
-msgid ""
-"These circles delimit stars which stay always above (respectively below) the"
-" mathematical horizon."
-msgstr ""
-"Tyto kružnice vymezují hvězdy, které zůstávají stále nad (popřípadě pod) "
-"matematickým obzorem."
-
-#: src/ui_viewDialog.h:3330
-msgid "Circumpolar circles"
-msgstr "Cirkumpolární kružnice"
-
-#: src/ui_viewDialog.h:3332
-msgid "Color of the opposition/conjunction longitude line"
-msgstr "Barva spojnice délky opozice/konjunkce"
-
-#: src/ui_viewDialog.h:3337
-msgid "Precession circles"
-msgstr "Precesní kružnice"
-
-#: src/ui_viewDialog.h:3339
-msgid "Color of galactic equator"
-msgstr "Barva galaktického rovníku"
-
-#: src/ui_viewDialog.h:3342
-msgid "Show celestial equator of J2000.0."
-msgstr "Zobrazit nebeský rovník J2000.0."
-
-#: src/ui_viewDialog.h:3354
-msgid "Color of supergalactic equator"
-msgstr "Barva supergalaktického rovníku"
-
-#: src/ui_viewDialog.h:3357
-msgid "Color of the azimuthal grid"
-msgstr "Barva obzorníkové sítě"
-
-#: src/ui_viewDialog.h:3360
-msgid "Color of ecliptic (of date)"
-msgstr "Barva ekliptiky (k datu)"
-
-#: src/ui_viewDialog.h:3363
-msgid "Color of antisolar point"
-msgstr "Barva protislunce"
-
-#: src/ui_viewDialog.h:3367
-msgid "Color of the ecliptical grid (J2000.0)"
-msgstr "Barva ekliptikální sítě (J2000.0)"
-
-#: src/ui_viewDialog.h:3375
-msgid "Color of equator (J2000.0)"
-msgstr "Barva rovníku (J2000.0)"
-
-#: src/ui_viewDialog.h:3378
-msgid "Color of the equinox points (of date)"
-msgstr "Barva bodů rovnodennosti (k datu)"
-
-#: src/ui_viewDialog.h:3385
-msgid "Show celestial poles of J2000.0."
-msgstr "Zobrazit nebeské póly J2000.0."
-
-#: src/ui_viewDialog.h:3387
-msgid "Celestial poles (J2000)"
-msgstr "Nebeské póly (J2000.0)"
-
-#: src/ui_viewDialog.h:3389
-msgid "Color of the solstice points (of date)"
-msgstr "Barva bodů slunovratu (k datu)"
-
-#: src/ui_viewDialog.h:3401
-msgid "Zenith and Nadir"
-msgstr "Zenit a nadir"
-
-#: src/ui_viewDialog.h:3403
-msgid "Color of horizon"
-msgstr "Barva obzoru"
-
-#: src/ui_viewDialog.h:3406
-msgid "Color of the celestial poles (J2000.0)"
-msgstr "Barva nebeských pólů (J2000.0)"
-
-#: src/ui_viewDialog.h:3409
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -10594,79 +10448,71 @@ msgstr ""
 "Kružnice zobrazující pohyb zemské osy kolem pólu ekliptiky v daném okamžiku."
 " Zobrazuje se pouze pro Zemi."
 
-#: src/ui_viewDialog.h:3413
-msgid "Color of the solstice points (J2000.0)"
-msgstr "Barva bodů slunovratu (J2000.0)"
+#: src/ui_viewDialog.h:3267 src/ui_viewDialog.h:3294 src/ui_viewDialog.h:3310
+#: src/ui_viewDialog.h:3329 src/ui_viewDialog.h:3402 src/ui_viewDialog.h:3412
+#: src/ui_viewDialog.h:3531 src/ui_viewDialog.h:3539 src/ui_viewDialog.h:3562
+#: src/ui_viewDialog.h:3582 src/ui_viewDialog.h:3590 src/ui_viewDialog.h:3606
+#: src/ui_viewDialog.h:3624
+msgid "Label partitions"
+msgstr "Popsat oddíly"
 
-#: src/ui_viewDialog.h:3416
-msgid "Solstices (J2000)"
-msgstr "Body slunovratů (J2000.0)"
+#: src/ui_viewDialog.h:3272
+msgid "Color of the equinox points (J2000.0)"
+msgstr "Barva bodů rovnodennosti (J2000.0)"
 
-#: src/ui_viewDialog.h:3422
-msgid "Show celestial equator of current planet and date."
-msgstr "Zobrazit nebeský rovník současné planety k datu."
+#: src/ui_viewDialog.h:3275
+msgid "Color of equator (J2000.0)"
+msgstr "Barva rovníku (J2000.0)"
 
-#: src/ui_viewDialog.h:3428
-msgid "Ecliptic (of date)"
-msgstr "Ekliptika (k datu)"
+#: src/ui_viewDialog.h:3278
+msgid "Color of the ecliptic poles (J2000.0)"
+msgstr "Barva pólů ekliptiky (J2000.0)"
 
-#: src/ui_viewDialog.h:3432
-msgid "Ecliptic (J2000)"
-msgstr "Ekliptika (J2000.0)"
+#: src/ui_viewDialog.h:3281
+msgid "Show rectangular marker of field of view (FOV)"
+msgstr "Zobrazit obdélníkovou značku zorného pole (ZP)"
 
-#: src/ui_viewDialog.h:3434
-msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr "Zobrazit ekliptiku J2000.0 (základní rovina dle VSOP87A)."
+#: src/ui_viewDialog.h:3283
+msgid "Rectangular FOV"
+msgstr "Obdélníkové ZP"
 
-#: src/ui_viewDialog.h:3438
-msgid "Show ecliptic poles of J2000.0"
-msgstr "Zobrazit póly ekliptiky J2000.0"
+#: src/ui_viewDialog.h:3285
+msgid "Width of rectangle, in degrees"
+msgstr "Šířka obdélníku ve stupních"
 
-#: src/ui_viewDialog.h:3440
-msgid "Ecliptic poles (J2000)"
-msgstr "Póly ekliptiky (J2000.0)"
+#: src/ui_viewDialog.h:3288
+msgid "Height of rectangle, in degrees"
+msgstr "Výška obdélníku ve stupních"
 
-#: src/ui_viewDialog.h:3446
-msgid "Color of the supergalactic grid"
-msgstr "Barva supergalaktické sítě"
+#: src/ui_viewDialog.h:3291
+msgid "Rotation angle of rectangle, in degrees"
+msgstr "Úhel otočení obdélníku ve stupních"
 
-#: src/ui_viewDialog.h:3453
-msgid "Equatorial coordinates of current date and planet."
-msgstr "Rovníkové souřadnice dané planety k současnému datu."
+#: src/ui_viewDialog.h:3298
+msgid "Color of the azimuthal grid"
+msgstr "Barva obzorníkové sítě"
 
-#: src/ui_viewDialog.h:3455
-msgid "Equatorial grid (of date)"
-msgstr "Rovníková síť (k datu)"
+#: src/ui_viewDialog.h:3301
+msgid "Color of the equinox points (of date)"
+msgstr "Barva bodů rovnodennosti (k datu)"
 
-#: src/ui_viewDialog.h:3457
-msgid "Labels for the Cardinal and Ordinal directions."
-msgstr "Popisky pro světové strany."
+#: src/ui_viewDialog.h:3304
+msgid "Color of cardinal points"
+msgstr "Barva pro světové strany"
 
-#: src/ui_viewDialog.h:3461
-msgid "Color of celestial poles (of date)"
-msgstr "Barva nebeských pólů (k datu)"
+#: src/ui_viewDialog.h:3307
+msgid "Color of supergalactic equator"
+msgstr "Barva supergalaktického rovníku"
 
-#: src/ui_viewDialog.h:3464
-msgid "Color of galactic poles"
-msgstr "Barva galaktických pólů"
+#: src/ui_viewDialog.h:3312
+msgid "Colures"
+msgstr "Kolury"
 
-#: src/ui_viewDialog.h:3467
-msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr "Ekliptikální souřadnice k současnému datu. Zobrazované pouze na Zemi."
+#: src/ui_viewDialog.h:3314
+msgid "Color of galactic equator"
+msgstr "Barva galaktického rovníku"
 
-#: src/ui_viewDialog.h:3469
-msgid "Ecliptic grid (of date)"
-msgstr "Ekliptikální síť (k datu)"
-
-#: src/ui_viewDialog.h:3475
-msgid ""
-"Apex and Antapex indicate where the observer's planet is heading to or "
-"receding from, respectively."
-msgstr ""
-"Apex a antapex ukazují, kterým směrem se pohybuje planeta, na které se "
-"nachází pozorovatel, případně směr protilehlý."
-
-#: src/ui_viewDialog.h:3479
+#: src/ui_viewDialog.h:3317
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -10674,71 +10520,151 @@ msgstr ""
 "Spojnice délky opozice/konjunkce - spojnice ekliptikálních délek, která "
 "spojuje oba póly ekliptiky, Slunce a bod opozice."
 
-#: src/ui_viewDialog.h:3483
-msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Galactické souřadnice, nový systém II (IAU 1958)."
+#: src/ui_viewDialog.h:3320
+msgid "Zenith and Nadir"
+msgstr "Zenit a nadir"
 
-#: src/ui_viewDialog.h:3487
-msgid "Show celestial poles of current planet and date."
-msgstr "Zobrazit nebeské póly současné planety k datu."
+#: src/ui_viewDialog.h:3322 src/ui_viewDialog.h:3337 src/ui_viewDialog.h:3345
+#: src/ui_viewDialog.h:3387 src/ui_viewDialog.h:3488 src/ui_viewDialog.h:3492
+#: src/ui_viewDialog.h:3507 src/ui_viewDialog.h:3511 src/ui_viewDialog.h:3527
+#: src/ui_viewDialog.h:3535 src/ui_viewDialog.h:3594 src/ui_viewDialog.h:3598
+#: src/ui_viewDialog.h:3610
+msgid "Show partitions"
+msgstr "Zobrazit oddíly"
 
-#: src/ui_viewDialog.h:3489
-msgid "Celestial poles (of date)"
-msgstr "Nebeské póly (k datu)"
+#: src/ui_viewDialog.h:3326
+msgid "Color of rectangular marker of FOV"
+msgstr "Barva obdélníkové značky ZP"
 
-#: src/ui_viewDialog.h:3491
-msgid "Equatorial coordinates of J2000.0."
-msgstr "Rovníkové souřadnice J2000.0."
-
-#: src/ui_viewDialog.h:3493
-msgid "Equatorial grid (J2000)"
-msgstr "Rovníková síť (J2000.0)"
-
-#: src/ui_viewDialog.h:3495
-msgid "Show ecliptic poles of current date."
-msgstr "Zobrazit póly ekliptiky k současnému datu."
-
-#: src/ui_viewDialog.h:3497
-msgid "Ecliptic poles (of date)"
-msgstr "Póly ekliptiky (k datu)"
-
-#: src/ui_viewDialog.h:3498
-msgid "Equinoxes (J2000)"
-msgstr "Body rovnodennosti (J2000.0)"
-
-#: src/ui_viewDialog.h:3500
-msgid "Color of marker of center of FOV"
-msgstr "Barva značky středu ZP"
-
-#: src/ui_viewDialog.h:3503
-msgid "Color of circumpolar circles"
-msgstr "Barva cirkumpolárních kružnic"
-
-#: src/ui_viewDialog.h:3506
-msgid "Show Galactic equator line."
-msgstr "Zobrazit galaktický rovník."
-
-#: src/ui_viewDialog.h:3512
-msgid "Equator (J2000)"
-msgstr "Rovník (J2000.0)"
-
-#: src/ui_viewDialog.h:3514
+#: src/ui_viewDialog.h:3333
 msgid "Color of precession circles"
 msgstr "Barva precesních kružnic"
 
-#: src/ui_viewDialog.h:3517
+#: src/ui_viewDialog.h:3335
+msgid "Equinoxes (J2000)"
+msgstr "Body rovnodennosti (J2000.0)"
+
+#: src/ui_viewDialog.h:3341
+msgid "Color of altitude line"
+msgstr "Barva výškové čáry"
+
+#: src/ui_viewDialog.h:3349
+msgid "Color of the solstice points (of date)"
+msgstr "Barva bodů slunovratu (k datu)"
+
+#: src/ui_viewDialog.h:3353
 msgid "Show mathematical horizon line."
 msgstr "Zobrazit matematický obzor."
 
-#: src/ui_viewDialog.h:3525
+#: src/ui_viewDialog.h:3357
+msgid "Equatorial coordinates of current date and planet."
+msgstr "Rovníkové souřadnice dané planety k současnému datu."
+
+#: src/ui_viewDialog.h:3359
+msgid "Equatorial grid (of date)"
+msgstr "Rovníková síť (k datu)"
+
+#: src/ui_viewDialog.h:3361
+msgid ""
+"These circles delimit stars which stay always above (respectively below) the"
+" mathematical horizon."
+msgstr ""
+"Tyto kružnice vymezují hvězdy, které zůstávají stále nad (popřípadě pod) "
+"matematickým obzorem."
+
+#: src/ui_viewDialog.h:3363
+msgid "Circumpolar circles"
+msgstr "Cirkumpolární kružnice"
+
+#: src/ui_viewDialog.h:3366
+msgid "Color of Apex and Antapex points"
+msgstr "Barva bodů apexu a antapexu"
+
+#: src/ui_viewDialog.h:3369
+msgid "Color of Zenith and Nadir"
+msgstr "Barva zenitu a nadiru"
+
+#: src/ui_viewDialog.h:3372
+msgid "Altitudes and azimuth (counted from North towards East)."
+msgstr "Výška a azimut (počítaný od severu přes východ)."
+
+#: src/ui_viewDialog.h:3375
+msgid "Solstices (of date)"
+msgstr "Body slunovratů (k datu)"
+
+#: src/ui_viewDialog.h:3377
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Barva rovníkové sítě (J2000.0)"
 
-#: src/ui_viewDialog.h:3528
+#: src/ui_viewDialog.h:3380
+msgid "Color of supergalactic poles"
+msgstr "Barva supergalaktických pólů"
+
+#: src/ui_viewDialog.h:3383
+msgid "Color of the equatorial grid (of date)"
+msgstr "Barva rovníkové sítě (k datu)"
+
+#: src/ui_viewDialog.h:3391
 msgid "Show ecliptic line of current date."
 msgstr "Zobrazit ekliptiku k současnému datu."
 
-#: src/ui_viewDialog.h:3532
+#: src/ui_viewDialog.h:3395
+msgid "Show ecliptic poles of J2000.0"
+msgstr "Zobrazit póly ekliptiky J2000.0"
+
+#: src/ui_viewDialog.h:3397
+msgid "Ecliptic poles (J2000)"
+msgstr "Póly ekliptiky (J2000.0)"
+
+#: src/ui_viewDialog.h:3399
+msgid "Color of ecliptic poles (of date)"
+msgstr "Barva pólů ekliptiky (k datu)"
+
+#: src/ui_viewDialog.h:3406
+msgid "Color of ecliptic (J2000.0)"
+msgstr "Barva ekliptiky (J2000.0)"
+
+#: src/ui_viewDialog.h:3409
+msgid "Color of circumpolar circles"
+msgstr "Barva cirkumpolárních kružnic"
+
+#: src/ui_viewDialog.h:3414
+msgid "Equator (J2000)"
+msgstr "Rovník (J2000.0)"
+
+#: src/ui_viewDialog.h:3416
+msgid "Color of the ecliptical grid (J2000.0)"
+msgstr "Barva ekliptikální sítě (J2000.0)"
+
+#: src/ui_viewDialog.h:3419
+msgid "Show celestial equator of J2000.0."
+msgstr "Zobrazit nebeský rovník J2000.0."
+
+#: src/ui_viewDialog.h:3423
+msgid "Color of the galactic grid"
+msgstr "Barva galaktické sítě"
+
+#: src/ui_viewDialog.h:3426
+msgid "Color of marker of center of FOV"
+msgstr "Barva značky středu ZP"
+
+#: src/ui_viewDialog.h:3429
+msgid "Color of the ecliptical grid (of date)"
+msgstr "Barva ekliptikální sítě (k datu)"
+
+#: src/ui_viewDialog.h:3432
+msgid "Color of celestial poles (of date)"
+msgstr "Barva nebeských pólů (k datu)"
+
+#: src/ui_viewDialog.h:3435
+msgid "Ecliptical coordinates for current date. Displayed on Earth only."
+msgstr "Ekliptikální souřadnice k současnému datu. Zobrazované pouze na Zemi."
+
+#: src/ui_viewDialog.h:3437
+msgid "Ecliptic grid (of date)"
+msgstr "Ekliptikální síť (k datu)"
+
+#: src/ui_viewDialog.h:3439
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -10746,270 +10672,362 @@ msgstr ""
 "Zobrazit de Vaucouleursovy supergalaktické souřadnice (1976), definované "
 "rozdělením blízkých galaxií."
 
-#: src/ui_viewDialog.h:3535
-msgid "Solstices (of date)"
-msgstr "Body slunovratů (k datu)"
+#: src/ui_viewDialog.h:3443
+msgid "Color of the celestial poles (J2000.0)"
+msgstr "Barva nebeských pólů (J2000.0)"
 
-#: src/ui_viewDialog.h:3537
-msgid "Color of altitude line"
-msgstr "Barva výškové čáry"
+#: src/ui_viewDialog.h:3446
+msgid "Color of meridian"
+msgstr "Barva poledníku"
 
-#: src/ui_viewDialog.h:3540
-msgid "Equinoxes (of date)"
-msgstr "Body rovnodennosti (k datu)"
+#: src/ui_viewDialog.h:3449
+msgid "The line thickness for grids and lines"
+msgstr "Tloušťka čáry pro sítě a čáry"
 
-#: src/ui_viewDialog.h:3542
+#: src/ui_viewDialog.h:3451
+msgid "Thickness: lines"
+msgstr "Tloušťka: čáry"
+
+#: src/ui_viewDialog.h:3453 src/ui_viewDialog.h:3642 src/ui_viewDialog.h:3685
+#: src/ui_viewDialog.h:3695 src/ui_viewDialog.h:3702 src/ui_viewDialog.h:3710
+msgid "Thickness of line in pixels"
+msgstr "Tloušťka čáry v bodech"
+
+#: src/ui_viewDialog.h:3456
+msgid "The line thickness for circle partitions"
+msgstr "Tloušťka čáry pro kruhové oddíly"
+
+#: src/ui_viewDialog.h:3458
+msgid "partitions"
+msgstr "oddíly"
+
+#: src/ui_viewDialog.h:3460
+msgid "Thickness of partitions in pixels"
+msgstr "Tloušťka oddílů v bodech"
+
+#: src/ui_viewDialog.h:3463
+msgid "Show meridian line."
+msgstr "Zobrazit poledník."
+
+#: src/ui_viewDialog.h:3467
+msgid "Color of colures"
+msgstr "Barva kolurů"
+
+#: src/ui_viewDialog.h:3470
+msgid "Color of horizon"
+msgstr "Barva obzoru"
+
+#: src/ui_viewDialog.h:3473
+msgid "Show celestial poles of J2000.0."
+msgstr "Zobrazit nebeské póly J2000.0."
+
+#: src/ui_viewDialog.h:3475
+msgid "Celestial poles (J2000)"
+msgstr "Nebeské póly (J2000.0)"
+
+#: src/ui_viewDialog.h:3476
+msgid "Solstices (J2000)"
+msgstr "Body slunovratů (J2000.0)"
+
+#: src/ui_viewDialog.h:3478
+msgid "Color of the supergalactic grid"
+msgstr "Barva supergalaktické sítě"
+
+#: src/ui_viewDialog.h:3481
+msgid "Color of Prime Vertical"
+msgstr "Barva prvního vertikálu"
+
+#: src/ui_viewDialog.h:3484
+msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
+msgstr ""
+"Zobrazit rovník de Vaucouleursových supergalactických souřadnic (1976)."
+
+#: src/ui_viewDialog.h:3496
+msgid "Ecliptical coordinates for J2000.0."
+msgstr "Ekliptikální souřadnice J2000.0."
+
+#: src/ui_viewDialog.h:3498
+msgid "Ecliptic grid (J2000)"
+msgstr "Ekliptikální síť (J2000.0)"
+
+#: src/ui_viewDialog.h:3500
+msgid "Color of equator (of date)"
+msgstr "Barva rovníku (k datu)"
+
+#: src/ui_viewDialog.h:3503
+msgid "Show ecliptic poles of current date."
+msgstr "Zobrazit póly ekliptiky k současnému datu."
+
+#: src/ui_viewDialog.h:3505
+msgid "Ecliptic poles (of date)"
+msgstr "Póly ekliptiky (k datu)"
+
+#: src/ui_viewDialog.h:3515
+msgid "Show Galactic equator line."
+msgstr "Zobrazit galaktický rovník."
+
+#: src/ui_viewDialog.h:3519
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Zobrazit kolury (hlavní kružnice vedoucí póly a body "
 "slunovratu/rovnodennosti)."
 
-#: src/ui_viewDialog.h:3546
-msgid "Show meridian line."
-msgstr "Zobrazit poledník."
+#: src/ui_viewDialog.h:3523
+msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
+msgstr "Zobrazit ekliptiku J2000.0 (základní rovina dle VSOP87A)."
 
-#: src/ui_viewDialog.h:3552
-msgid "Colures"
-msgstr "Kolury"
+#: src/ui_viewDialog.h:3533
+msgid "Precession circles"
+msgstr "Precesní kružnice"
+
+#: src/ui_viewDialog.h:3543
+msgid "Color of the solstice points (J2000.0)"
+msgstr "Barva bodů slunovratu (J2000.0)"
+
+#: src/ui_viewDialog.h:3547
+msgid "Show Prime (East-West) Vertical."
+msgstr "Zobrazit první (východo-západní) vertikál"
+
+#: src/ui_viewDialog.h:3551
+msgid "Color of ecliptic (of date)"
+msgstr "Barva ekliptiky (k datu)"
 
 #: src/ui_viewDialog.h:3554
-msgid "Color of the equinox points (J2000.0)"
-msgstr "Barva bodů rovnodennosti (J2000.0)"
-
-#: src/ui_viewDialog.h:3557
-msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
+msgid ""
+"Apex and Antapex indicate where the observer's planet is heading to or "
+"receding from, respectively."
 msgstr ""
-"Zobrazit rovník de Vaucouleursových supergalactických souřadnic (1976)."
+"Apex a antapex ukazují, kterým směrem se pohybuje planeta, na které se "
+"nachází pozorovatel, případně směr protilehlý."
 
-#: src/ui_viewDialog.h:3562
-msgid "Color of supergalactic poles"
-msgstr "Barva supergalaktických pólů"
+#: src/ui_viewDialog.h:3558
+msgid "Color of antisolar point"
+msgstr "Barva protislunce"
 
 #: src/ui_viewDialog.h:3565
-msgid "Show marker of center for field of view (FOV)"
-msgstr "Zobrazit značku středu zorného pole (ZP)"
+msgid "Equinoxes (of date)"
+msgstr "Body rovnodennosti (k datu)"
 
 #: src/ui_viewDialog.h:3567
-msgid "Center of FOV"
-msgstr "Střed ZP"
+msgid "Show celestial poles of current planet and date."
+msgstr "Zobrazit nebeské póly současné planety k datu."
 
 #: src/ui_viewDialog.h:3569
-msgid "Color of circular marker of FOV"
-msgstr "Barva kruhové značky ZP"
+msgid "Celestial poles (of date)"
+msgstr "Nebeské póly (k datu)"
 
-#: src/ui_viewDialog.h:3572
+#: src/ui_viewDialog.h:3571
+msgid "Equatorial coordinates of J2000.0."
+msgstr "Rovníkové souřadnice J2000.0."
+
+#: src/ui_viewDialog.h:3573
+msgid "Equatorial grid (J2000)"
+msgstr "Rovníková síť (J2000.0)"
+
+#: src/ui_viewDialog.h:3575
 msgid "Show circular marker of field of view (FOV)"
 msgstr "Zobrazit kruhovou značku zorného pole (ZP)"
 
-#: src/ui_viewDialog.h:3574
+#: src/ui_viewDialog.h:3577
 msgid "Circular FOV"
 msgstr "Kruhové ZP"
 
-#: src/ui_viewDialog.h:3576
+#: src/ui_viewDialog.h:3579
 msgid "Field of view in degrees"
 msgstr "Zorné pole ve stupních"
 
-#: src/ui_viewDialog.h:3579
-msgid "Color of rectangular marker of FOV"
-msgstr "Barva obdélníkové značky ZP"
-
-#: src/ui_viewDialog.h:3582
-msgid "Show rectangular marker of field of view (FOV)"
-msgstr "Zobrazit obdélníkovou značku zorného pole (ZP)"
-
 #: src/ui_viewDialog.h:3584
-msgid "Rectangular FOV"
-msgstr "Obdélníkové ZP"
+msgid "Ecliptic (J2000)"
+msgstr "Ekliptika (J2000.0)"
 
 #: src/ui_viewDialog.h:3586
-msgid "Width of rectangle, in degrees"
-msgstr "Šířka obdélníku ve stupních"
+msgid "Labels for the Cardinal and Ordinal directions."
+msgstr "Popisky pro světové strany."
 
-#: src/ui_viewDialog.h:3589
-msgid "Height of rectangle, in degrees"
-msgstr "Výška obdélníku ve stupních"
+#: src/ui_viewDialog.h:3602
+msgid ""
+"Show a vertical line (with optional altitude marks) in the screen center."
+msgstr ""
+"Zobrazit svislou čáru (s volitelnými výškovými značkami) ve středu "
+"obrazovky."
 
-#: src/ui_viewDialog.h:3592
-msgid "Rotation angle of rectangle, in degrees"
-msgstr "Úhel otočení obdélníku ve stupních"
+#: src/ui_viewDialog.h:3608
+msgid "Equator (of date)"
+msgstr "Rovník (k datu)"
 
-#: src/ui_viewDialog.h:3594
+#: src/ui_viewDialog.h:3614
+msgid "Color of the opposition/conjunction longitude line"
+msgstr "Barva spojnice délky opozice/konjunkce"
+
+#: src/ui_viewDialog.h:3617
+msgid "Show celestial equator of current planet and date."
+msgstr "Zobrazit nebeský rovník současné planety k datu."
+
+#: src/ui_viewDialog.h:3621
+msgid "Color of galactic poles"
+msgstr "Barva galaktických pólů"
+
+#: src/ui_viewDialog.h:3626
+msgid "Ecliptic (of date)"
+msgstr "Ekliptika (k datu)"
+
+#: src/ui_viewDialog.h:3628
+msgid "Show marker of center for field of view (FOV)"
+msgstr "Zobrazit značku středu zorného pole (ZP)"
+
+#: src/ui_viewDialog.h:3630
+msgid "Center of FOV"
+msgstr "Střed ZP"
+
+#: src/ui_viewDialog.h:3632
+msgid "Color of galactic center and anticenter"
+msgstr "Barva galaktického centra a anticentra"
+
+#: src/ui_viewDialog.h:3635
 msgid "Add/remove landscapes..."
 msgstr "Přidat/odstranit krajiny..."
 
-#: src/ui_viewDialog.h:3597
+#: src/ui_viewDialog.h:3638
 msgid "Draw horizon polyline if one is defined."
 msgstr "Nakreslit lomenou čáru obzoru, pokud je definována."
 
-#: src/ui_viewDialog.h:3599
+#: src/ui_viewDialog.h:3640
 msgid "Draw only polygon"
 msgstr "Nakreslit pouze lomenou čáru"
 
-#: src/ui_viewDialog.h:3604
+#: src/ui_viewDialog.h:3645
 msgid "Set the planet and position as it specified in landscape.ini"
 msgstr "Nastavit planetu a polohu tak, jak je uvedeno v souboru landscape.ini"
 
-#: src/ui_viewDialog.h:3606
+#: src/ui_viewDialog.h:3647
 msgid "Position from landscape"
 msgstr "Poloha podle krajiny"
 
-#: src/ui_viewDialog.h:3607
+#: src/ui_viewDialog.h:3648
 msgid "Show landscape labels"
 msgstr "Zobrazit popisky krajiny"
 
-#: src/ui_viewDialog.h:3609
+#: src/ui_viewDialog.h:3650
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Zobrazit vrstvu osvětlení (jasná okna, světelné znečištění, atd.)"
 
-#: src/ui_viewDialog.h:3611
+#: src/ui_viewDialog.h:3652
 msgid "Show illumination "
 msgstr "Zobrazit osvětlení"
 
-#: src/ui_viewDialog.h:3613
+#: src/ui_viewDialog.h:3654
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Použít minimální jas, jak může být uveden v souboru landscape.ini"
 
-#: src/ui_viewDialog.h:3615
+#: src/ui_viewDialog.h:3656
 msgid "from landscape, if given"
 msgstr "z krajiny, pokud je uvedeno"
 
-#: src/ui_viewDialog.h:3617
+#: src/ui_viewDialog.h:3658
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Použít minimální jas, aby byla krajina viditelná i ve tmě"
 
-#: src/ui_viewDialog.h:3619
+#: src/ui_viewDialog.h:3660
 msgid "Minimal brightness:"
 msgstr "Minimální jas:"
 
-#: src/ui_viewDialog.h:3621
+#: src/ui_viewDialog.h:3662
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Rozsah hodnot 0 až 1 (krajina je v noci černá - krajina je úplně osvětlená)"
 
-#: src/ui_viewDialog.h:3623
+#: src/ui_viewDialog.h:3664
 msgid "Show fog"
 msgstr "Zobraz opar"
 
-#: src/ui_viewDialog.h:3624
+#: src/ui_viewDialog.h:3665
 msgid "Show ground"
 msgstr "Zobraz terén"
 
-#: src/ui_viewDialog.h:3625
+#: src/ui_viewDialog.h:3666
 msgid "Use this landscape as default"
 msgstr "Použít tuto krajinu jako výchozí"
 
-#: src/ui_viewDialog.h:3628
+#: src/ui_viewDialog.h:3669
 msgid "Use native names for planets from current culture"
 msgstr "Použít nativní jména pro planety z aktuálně vybrané mytologie"
 
-#: src/ui_viewDialog.h:3630
+#: src/ui_viewDialog.h:3671
 msgid "Use native names for planets"
 msgstr "Použít nativní jména pro planety"
 
-#: src/ui_viewDialog.h:3632
+#: src/ui_viewDialog.h:3673
 msgid "Color of constellation names"
 msgstr "Barva jmen souhvězdí"
 
-#: src/ui_viewDialog.h:3634
+#: src/ui_viewDialog.h:3675
 msgid "Show labels"
 msgstr "Zobrazit popisky"
 
-#: src/ui_viewDialog.h:3636
+#: src/ui_viewDialog.h:3677
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "Vybrerte zda chcete jména zkrácená, původní, nebo přeložená"
 
-#: src/ui_viewDialog.h:3640
+#: src/ui_viewDialog.h:3681
 msgid "Color of asterism lines"
 msgstr "Barvy spojnic asterismů"
 
-#: src/ui_viewDialog.h:3642
+#: src/ui_viewDialog.h:3683
 msgid "Show asterism lines"
 msgstr "Zobrazit spojnice asterismů"
 
-#: src/ui_viewDialog.h:3647
+#: src/ui_viewDialog.h:3688
 msgid "Color of constellation boundaries"
 msgstr "Barva hranic souhvězdí"
 
-#: src/ui_viewDialog.h:3650
+#: src/ui_viewDialog.h:3691
 msgid "Show boundaries of constellations"
 msgstr "Zobrazit hranice souhvězdí"
 
-#: src/ui_viewDialog.h:3652
+#: src/ui_viewDialog.h:3693
 msgid "Show boundaries"
 msgstr "Zobraz hranice"
 
-#: src/ui_viewDialog.h:3657
+#: src/ui_viewDialog.h:3698
 msgid "Color of ray helpers"
 msgstr "Barva pomocných paprsků"
 
-#: src/ui_viewDialog.h:3659
+#: src/ui_viewDialog.h:3700
 msgid "Show ray helpers"
 msgstr "Zobrazit pomocné paprsky"
 
-#: src/ui_viewDialog.h:3663
+#: src/ui_viewDialog.h:3704
 msgid "Show art in brightness"
 msgstr "Zobrazit obrazce v jasu"
 
-#: src/ui_viewDialog.h:3665
+#: src/ui_viewDialog.h:3706
 msgid "Color of constellation lines"
 msgstr "Barva spojnic souhvězdí"
 
-#: src/ui_viewDialog.h:3667
+#: src/ui_viewDialog.h:3708
 msgid "Show constellation lines"
 msgstr "Zobrazit spojnice souhvězdí"
 
-#: src/ui_viewDialog.h:3672
+#: src/ui_viewDialog.h:3713
 msgid "Color of asterism names"
 msgstr "Barva jmen asterismů"
 
-#: src/ui_viewDialog.h:3674
+#: src/ui_viewDialog.h:3715
 msgid "Show asterism labels"
 msgstr "Zobrazit popisky asterismů"
 
-#: src/ui_viewDialog.h:3675
+#: src/ui_viewDialog.h:3716
 msgid "Constellations font size"
 msgstr "Velikost písma pro souhvězdí"
 
-#: src/ui_viewDialog.h:3676
+#: src/ui_viewDialog.h:3717
 msgid "Asterisms font size"
 msgstr "Velikost písma pro asterismy"
 
-#: src/ui_viewDialog.h:3677
+#: src/ui_viewDialog.h:3718
 msgid "Use this sky culture as default"
 msgstr "Použít tuto nebeskou mytologii jako výchozí"
-
-#: src/ui_viewDialog.h:3684
-msgctxt "Solar system objects"
-msgid "SSO"
-msgstr "Sl. soustava"
-
-#: src/ui_viewDialog.h:3689
-msgctxt "Deep-Sky Objects"
-msgid "DSO"
-msgstr "Vzdálený vesmír"
-
-#: src/ui_viewDialog.h:3691
-msgid "Deep-Sky Objects"
-msgstr "Objekty vzdáleného vesmíru"
-
-#: src/ui_viewDialog.h:3694
-msgid "Markings"
-msgstr "Označení"
-
-#: src/ui_viewDialog.h:3696
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
-msgid "Landscape"
-msgstr "Krajina"
-
-#: src/ui_viewDialog.h:3698
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
-msgid "Starlore"
-msgstr "Nebeská mytologie"
-
-#: src/ui_viewDialog.h:3700
-msgid "Surveys"
-msgstr "Přehlídky oblohy"
 
 #: src/ui_configurationDialog.h:1588
 msgid "Configuration"
@@ -21840,14 +21858,12 @@ msgid "Toggle radiant labels"
 msgstr "Vypnout/zapnout popisky radiantů"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
-#: plugins/Scenery3d/src/Scenery3d.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
-msgid "Show settings dialog"
-msgstr "Zobrazit dialogové okno pro nastavení"
+msgid "Show meteor showers settings dialog"
+msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-msgid "Show search dialog"
-msgstr "Hledání meteorických rojů"
+msgid "Show meteor showers search dialog"
+msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:267
 msgid "Using the default Meteor Showers catalog."
@@ -22861,6 +22877,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:332
 msgid "Toggle 3D landscape"
 msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
+msgid "Show settings dialog"
+msgstr "Zobrazit dialogové okno pro nastavení"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 msgid "Show viewpoint dialog"
