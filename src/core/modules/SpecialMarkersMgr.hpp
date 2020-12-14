@@ -53,6 +53,11 @@ class SpecialMarkersMgr : public StelModule
 	Q_PROPERTY(Vec3f fovRectangularMarkerColor	READ getColorFOVRectangularMarker
 		   WRITE setColorFOVRectangularMarker	NOTIFY fovRectangularMarkerColorChanged)
 
+	Q_PROPERTY(bool compassMarksDisplayed	READ getFlagCompassMarks
+		   WRITE setFlagCompassMarks		NOTIFY compassMarksDisplayedChanged)
+	Q_PROPERTY(Vec3f compassMarksColor	READ getColorCompassMarks
+		   WRITE setColorCompassMarks	NOTIFY compassMarksColorChanged)
+
 public:
 	SpecialMarkersMgr();
 	virtual ~SpecialMarkersMgr();
@@ -138,6 +143,20 @@ public slots:
 	//! @endcode
 	void setColorFOVRectangularMarker(const Vec3f& newColor);
 
+	//! Setter for displaying the compass marks
+	void setFlagCompassMarks(const bool displayed);
+	//! Accessor for displaying compass marks.
+	bool getFlagCompassMarks() const;
+	//! Get the current color of the compass marks.
+	Vec3f getColorCompassMarks() const;
+	//! Set the color of the compass marks.
+	//! @param newColor The color of compass marks.
+	//! @code
+	//! // example of usage in scripts
+	//! SpecialMarkersMgr.setColorCompassMarks(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCompassMarks(const Vec3f& newColor);
+
 signals:
 	void fovCenterMarkerDisplayedChanged(const bool displayed) const;
 	void fovCenterMarkerColorChanged(const Vec3f & newColor) const;
@@ -149,11 +168,14 @@ signals:
 	void fovRectangularMarkerHeightChanged(const double size) const;
 	void fovRectangularMarkerRotationAngleChanged(const double size) const;
 	void fovRectangularMarkerColorChanged(const Vec3f & newColor) const;
+	void compassMarksDisplayedChanged(const bool displayed) const;
+	void compassMarksColorChanged(const Vec3f & newColor) const;
 
 private:
 	SpecialSkyMarker * fovCenterMarker;
 	SpecialSkyMarker * fovCircularMarker;
 	SpecialSkyMarker * fovRectangularMarker;
+	SpecialSkyMarker * compassMarks;
 };
 
 #endif // SPECIALMARKERSMGR_HPP

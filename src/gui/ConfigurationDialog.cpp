@@ -309,34 +309,36 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	connectBoolProperty(ui->showQuitButtonCheckBox,			"StelGui.flagShowQuitButton");
-	connectBoolProperty(ui->showFlipButtonsCheckbox,		"StelGui.flagShowFlipButtons");
-	connectBoolProperty(ui->showNebulaBgButtonCheckbox,		"StelGui.flagShowNebulaBackgroundButton");
+	connectBoolProperty(ui->showQuitButtonCheckBox,				"StelGui.flagShowQuitButton");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,				"StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showNebulaBgButtonCheckbox,			"StelGui.flagShowNebulaBackgroundButton");
 	connectBoolProperty(ui->showBookmarksButtonCheckBox,		"StelGui.flagShowBookmarksButton");
-	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
-	connectBoolProperty(ui->showHipsButtonCheckBox,			"StelGui.flagShowHiPSButton");
-	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
+	connectBoolProperty(ui->showHipsButtonCheckBox,				"StelGui.flagShowHiPSButton");
+	connectBoolProperty(ui->showDSSButtonCheckbox,				"StelGui.flagShowDSSButton");
 	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,		"StelGui.flagShowGotoSelectedObjectButton");
 	connectBoolProperty(ui->showNightmodeButtonCheckBox,		"StelGui.flagShowNightmodeButton");
-	connectBoolProperty(ui->showFullscreenButtonCheckBox,		"StelGui.flagShowFullscreenButton");
+	connectBoolProperty(ui->showFullscreenButtonCheckBox,			"StelGui.flagShowFullscreenButton");
+	connectBoolProperty(ui->showCardinalButtonCheckBox,			"StelGui.flagShowCardinalButton");
+	connectBoolProperty(ui->showCompassButtonCheckBox,			"StelGui.flagShowCompassButton");
 
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
-	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,	"StelGui.flagShowAsterismLinesButton");
+	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,		"StelGui.flagShowAsterismLinesButton");
 	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,	"StelGui.flagShowAsterismLabelsButton");
 
-	connectBoolProperty(ui->decimalDegreeCheckBox,			"StelApp.flagShowDecimalDegrees");
-	connectBoolProperty(ui->azimuthFromSouthcheckBox,		"StelApp.flagUseAzimuthFromSouth");
+	connectBoolProperty(ui->decimalDegreeCheckBox,				"StelApp.flagShowDecimalDegrees");
+	connectBoolProperty(ui->azimuthFromSouthcheckBox,			"StelApp.flagUseAzimuthFromSouth");
 
-	connectBoolProperty(ui->mouseTimeoutCheckbox,			"MainView.flagCursorTimeout");
-	connectDoubleProperty(ui->mouseTimeoutSpinBox,			"MainView.cursorTimeout");
+	connectBoolProperty(ui->mouseTimeoutCheckbox,				"MainView.flagCursorTimeout");
+	connectDoubleProperty(ui->mouseTimeoutSpinBox,				"MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox,		"StelGui.flagUseButtonsBackground");
-	connectBoolProperty(ui->indicationMountModeCheckBox,		"StelMovementMgr.flagIndicationMountMode");
-	connectBoolProperty(ui->kineticScrollingCheckBox,		"StelGui.flagUseKineticScrolling");
-	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,		"StelGui.flagEnableFocusOnDaySpinner");
-	connectColorButton(ui->overwriteTextColorButton,		"StelApp.overwriteInfoColor",	"color/info_text_color");
-	connectColorButton(ui->daylightTextColorButton,			"StelApp.daylightInfoColor",	"color/daylight_text_color");
+	connectBoolProperty(ui->indicationMountModeCheckBox,			"StelMovementMgr.flagIndicationMountMode");
+	connectBoolProperty(ui->kineticScrollingCheckBox,				"StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,			"StelGui.flagEnableFocusOnDaySpinner");
+	connectColorButton(ui->overwriteTextColorButton,				"StelApp.overwriteInfoColor",	"color/info_text_color");
+	connectColorButton(ui->daylightTextColorButton,				"StelApp.daylightInfoColor",	"color/daylight_text_color");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -674,29 +676,29 @@ void ConfigurationDialog::saveCustomSelectedInfo()
 	Q_ASSERT(conf);
 
 	conf->beginGroup("custom_selected_info");
-	conf->setValue("flag_show_name",			static_cast<bool>(flags & StelObject::Name));
-	conf->setValue("flag_show_catalognumber",	static_cast<bool>(flags & StelObject::CatalogNumber));
-	conf->setValue("flag_show_magnitude",		static_cast<bool>(flags & StelObject::Magnitude));
+	conf->setValue("flag_show_name",				static_cast<bool>(flags & StelObject::Name));
+	conf->setValue("flag_show_catalognumber",		static_cast<bool>(flags & StelObject::CatalogNumber));
+	conf->setValue("flag_show_magnitude",			static_cast<bool>(flags & StelObject::Magnitude));
 	conf->setValue("flag_show_absolutemagnitude",	static_cast<bool>(flags & StelObject::AbsoluteMagnitude));
 	conf->setValue("flag_show_radecj2000",		static_cast<bool>(flags & StelObject::RaDecJ2000));
 	conf->setValue("flag_show_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
-	conf->setValue("flag_show_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
-	conf->setValue("flag_show_altaz",			static_cast<bool>(flags & StelObject::AltAzi));
-	conf->setValue("flag_show_elongation",		static_cast<bool>(flags & StelObject::Elongation));
-	conf->setValue("flag_show_distance",		static_cast<bool>(flags & StelObject::Distance));
+	conf->setValue("flag_show_hourangle",			static_cast<bool>(flags & StelObject::HourAngle));
+	conf->setValue("flag_show_altaz",				static_cast<bool>(flags & StelObject::AltAzi));
+	conf->setValue("flag_show_elongation",			static_cast<bool>(flags & StelObject::Elongation));
+	conf->setValue("flag_show_distance",			static_cast<bool>(flags & StelObject::Distance));
 	conf->setValue("flag_show_velocity",			static_cast<bool>(flags & StelObject::Velocity));
-	conf->setValue("flag_show_propermotion",	static_cast<bool>(flags & StelObject::ProperMotion));
-	conf->setValue("flag_show_size",			static_cast<bool>(flags & StelObject::Size));
-	conf->setValue("flag_show_extra",			static_cast<bool>(flags & StelObject::Extra));
-	conf->setValue("flag_show_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
-	conf->setValue("flag_show_supergalcoord",	static_cast<bool>(flags & StelObject::SupergalacticCoord));
-	conf->setValue("flag_show_othercoord",		static_cast<bool>(flags & StelObject::OtherCoord));
-	conf->setValue("flag_show_type",			static_cast<bool>(flags & StelObject::ObjectType));
-	conf->setValue("flag_show_eclcoordofdate",	static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
-	conf->setValue("flag_show_eclcoordj2000",	static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
-	conf->setValue("flag_show_constellation",	static_cast<bool>(flags & StelObject::IAUConstellation));
-	conf->setValue("flag_show_sidereal_time",	static_cast<bool>(flags & StelObject::SiderealTime));
-	conf->setValue("flag_show_rts_time",		static_cast<bool>(flags & StelObject::RTSTime));
+	conf->setValue("flag_show_propermotion",		static_cast<bool>(flags & StelObject::ProperMotion));
+	conf->setValue("flag_show_size",				static_cast<bool>(flags & StelObject::Size));
+	conf->setValue("flag_show_extra",				static_cast<bool>(flags & StelObject::Extra));
+	conf->setValue("flag_show_galcoord",			static_cast<bool>(flags & StelObject::GalacticCoord));
+	conf->setValue("flag_show_supergalcoord",		static_cast<bool>(flags & StelObject::SupergalacticCoord));
+	conf->setValue("flag_show_othercoord",			static_cast<bool>(flags & StelObject::OtherCoord));
+	conf->setValue("flag_show_type",				static_cast<bool>(flags & StelObject::ObjectType));
+	conf->setValue("flag_show_eclcoordofdate",		static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
+	conf->setValue("flag_show_eclcoordj2000",		static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
+	conf->setValue("flag_show_constellation",		static_cast<bool>(flags & StelObject::IAUConstellation));
+	conf->setValue("flag_show_sidereal_time",		static_cast<bool>(flags & StelObject::SiderealTime));
+	conf->setValue("flag_show_rts_time",			static_cast<bool>(flags & StelObject::RTSTime));
 	conf->endGroup();
 }
 
@@ -846,6 +848,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_galactic_equator_parts",	propMgr->getStelPropertyValue("GridLinesMgr.galacticEquatorPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_galactic_equator_labels",	propMgr->getStelPropertyValue("GridLinesMgr.galacticEquatorPartsLabeled").toBool());
 	conf->setValue("viewing/flag_cardinal_points",			propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool());
+	conf->setValue("viewing/flag_compass_marks",			propMgr->getStelPropertyValue("SpecialMarkersMgr.compassMarksDisplayed").toBool());
 	conf->setValue("viewing/flag_prime_vertical_line",		propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalLineDisplayed").toBool());
 	conf->setValue("viewing/flag_prime_vertical_parts",		propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_prime_vertical_labels",		propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalPartsLabeled").toBool());

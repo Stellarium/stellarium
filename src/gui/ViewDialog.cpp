@@ -329,6 +329,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox,		"actionShow_Ecliptic_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox,		"actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox,			"actionShow_Cardinal_Points");
+	connectCheckBox(ui->showCompassMarksCheckBox,			"actionShow_Compass_Marks");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox,		"actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox,		"actionShow_Prime_Vertical_Line");
 	connectCheckBox(ui->showCurrentVerticalLineCheckBox,		"actionShow_Current_Vertical_Line");
@@ -424,6 +425,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorFOVCircularMarker,		"SpecialMarkersMgr.fovCircularMarkerColor","color/fov_circular_marker_color");
 	connectColorButton(ui->colorFOVRectangularMarker,		"SpecialMarkersMgr.fovRectangularMarkerColor", "color/fov_rectangular_marker_color");
 	connectColorButton(ui->colorCardinalPoints,				"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
+	connectColorButton(ui->colorCompassMarks,			"SpecialMarkersMgr.compassMarksColor",	"color/compass_marks_color");
 
 	// Projection
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
