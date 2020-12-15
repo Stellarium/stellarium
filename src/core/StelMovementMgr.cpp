@@ -60,7 +60,7 @@ void Smoother::setTarget(double start, double aim, double duration)
 	this->progress = 0;
 	// Compute best easing curve depending on the speed of animation.
 	if (duration >= 1.0)
-		easingCurve = QEasingCurve(QEasingCurve::InOutQuad);
+		easingCurve = QEasingCurve(QEasingCurve::InOutQuart);
 	else
 		easingCurve = QEasingCurve(QEasingCurve::OutQuad);
 }
