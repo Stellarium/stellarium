@@ -46,18 +46,17 @@ public:
 	};
 
 	HelpDialog(QObject* parent);
-	~HelpDialog();
+	~HelpDialog() Q_DECL_OVERRIDE;
 
 	//! Notify that the application style changed
-	void styleChanged();
-
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();	
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 	Ui_helpDialogForm* ui;
 
@@ -78,19 +77,19 @@ private slots:
 	void updateLog(int);
 
 	//! Updated text in Help tab.
-	void updateHelpText(void);
+	void updateHelpText(void) const;
 
 	//! Updated text in About tab.
-	void updateAboutText(void);
+	void updateAboutText(void) const;
 
 	//! Sync the displayed log.
-	void refreshLog();
+	void refreshLog() const;
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 	void checkUpdates(void);
 	void downloadComplete(QNetworkReply * reply);
-
+	void setKeyButtonState(bool state);
 };
 
 #endif /*_HELPDIALOG_HPP*/

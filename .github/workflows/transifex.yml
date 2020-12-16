@@ -1,0 +1,33 @@
+#
+name: "Transifex"
+
+on:
+  push:
+    branches:
+    - master
+    paths: 
+    - '**.pot'
+
+jobs:
+  ci-transifex:
+    name: "Export..."
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v2
+
+    - name: "Install Python 3"
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: "Install Transifex client"
+      run: pip install --user transifex-client
+
+    - name: "Prepare and run Transifex client"
+      working-directory: ${{ github.workspace }}
+      if: ${{ github.repository == 'Stellarium/stellarium' }}
+      run: |
+        echo $'[https://www.transifex.com]\napi_hostname = https://api.transifex.com\nhostname = https://www.transifex.com\nusername = '"${{ secrets.TRANSIFEX_USER }}"$'\npassword = '"${{ secrets.TRANSIFEX_API_TOKEN }}"$'\n' > ~/.transifexrc
+        ~/.local/bin/tx push -s

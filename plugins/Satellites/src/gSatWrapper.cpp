@@ -26,8 +26,6 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-
-
 #include "gsatellite/stdsat.h"
 #include "gsatellite/mathUtils.hpp"
 
@@ -42,7 +40,6 @@
 #include <QDebug>
 #include <QByteArray>
 
-
 gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 {
 	// The TLE library actually modifies the TLE strings, which is annoying (because
@@ -56,12 +53,9 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	t1.truncate(130);
 	t2.truncate(130);
 
-	pSatellite = new gSatTEME(designation.toLatin1().data(),
-	                          t1.data(),
-	                          t2.data());
+	pSatellite = new gSatTEME(designation.toLatin1().data(), t1.data(), t2.data());
 	setEpoch(StelApp::getInstance().getCore()->getJD());
 }
-
 
 gSatWrapper::~gSatWrapper()
 {
@@ -69,44 +63,33 @@ gSatWrapper::~gSatWrapper()
 		delete pSatellite;
 }
 
-
 Vec3d gSatWrapper::getTEMEPos() const
 {
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
-	{
 		returnedVector = pSatellite->getPos();
-	}
 	else
 		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
 
 	return returnedVector;
-
 }
-
 
 Vec3d gSatWrapper::getTEMEVel() const
 {
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
-	{
 		returnedVector = pSatellite->getVel();
-	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
-
 }
-
 
 Vec3d gSatWrapper::getSubPoint() const
 {
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
-	{
 		returnedVector = pSatellite->getSubPoint();
-	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
@@ -115,21 +98,19 @@ Vec3d gSatWrapper::getSubPoint() const
 
 void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 {
-    epoch = ai_julianDaysEpoch;
-    if (pSatellite)
+	epoch = ai_julianDaysEpoch;
+	if (pSatellite)
 		pSatellite->setEpoch(epoch);
 }
 
-
 void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
-
 	if (epoch != lastCalcObserverECIPosition)
 	{
 		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
-		double radLatitude = loc.latitude * KDEG2RAD;
-		double theta       = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+		double radLatitude	= loc.latitude * KDEG2RAD;
+		double theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 		double r;
 		double c,sq;
 
@@ -151,25 +132,23 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 	}
 }
 
-
-
 Vec3d gSatWrapper::getAltAz() const
 {
 	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 	Vec3d topoSatPos;
 
-	const double  radLatitude    = loc.latitude * KDEG2RAD;
-	const double  theta          = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
-	const double sinRadLatitude=sin(radLatitude);
-	const double cosRadLatitude=cos(radLatitude);
-	const double sinTheta=sin(theta);
-	const double cosTheta=cos(theta);
+	const double  radLatitude	= loc.latitude * KDEG2RAD;
+	const double  theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+	const double sinRadLatitude	= sin(radLatitude);
+	const double cosRadLatitude	= cos(radLatitude);
+	const double sinTheta	= sin(theta);
+	const double cosTheta	= cos(theta);
 
 	// This now only updates if required.
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-	Vec3d satECIPos  = getTEMEPos();
-	Vec3d slantRange = satECIPos - observerECIPos;
+	Vec3d satECIPos	= getTEMEPos();
+	Vec3d slantRange	= satECIPos - observerECIPos;
 
 	//top_s
 	topoSatPos[0] = (sinRadLatitude * cosTheta*slantRange[0]
@@ -189,37 +168,29 @@ Vec3d gSatWrapper::getAltAz() const
 
 void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate) const
 {
-	//Vec3d observerECIPos;
-	//Vec3d observerECIVel;
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-        Vec3d satECIPos            = getTEMEPos();
-        Vec3d satECIVel            = getTEMEVel();
-        Vec3d slantRange           = satECIPos - observerECIPos;
-        Vec3d slantRangeVelocity   = satECIVel - observerECIVel;
+	Vec3d satECIPos		= getTEMEPos();
+	Vec3d satECIVel		= getTEMEVel();
+	Vec3d slantRange		= satECIPos - observerECIPos;
+	Vec3d slantRangeVelocity = satECIVel - observerECIVel;
 
-	ao_slantRange     = slantRange.length();
-        ao_slantRangeRate = slantRange.dot(slantRangeVelocity)/ao_slantRange;
+	ao_slantRange		= slantRange.length();
+	ao_slantRangeRate	= slantRange.dot(slantRangeVelocity)/ao_slantRange;
 }
 
 // Does the actual computation only if necessary (0.1s apart) and caches the result in a static variable.
 void gSatWrapper::updateSunECIPos()
 {
 	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
-	//Vec3d observerECIPos;
-	//Vec3d observerECIVel;
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
 	static const SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	Vec3d sunEquinoxEqPos = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 
 	//sunEquinoxEqPos is measured in AU. we need measure it in Km
-	//Vec3d sunECIPos;
 	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
 	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
-
-
-
 }
 
 Vec3d gSatWrapper::getSunECIPos()
@@ -234,7 +205,7 @@ Vec3d gSatWrapper::getSunECIPos()
 
 // Operation getVisibilityPredict
 // @brief This operation predicts the satellite visibility conditions.
-gSatWrapper::Visibility gSatWrapper::getVisibilityPredict()
+gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
 	Vec3d satAltAzPos = getAltAz();
 
@@ -272,6 +243,21 @@ double gSatWrapper::getPhaseAngle() const
 {
 	Vec3d sunECIPos = getSunECIPos();
 	return sunECIPos.angle(getTEMEPos());
+}
+
+double gSatWrapper::getOrbitalPeriod() const
+{
+	return pSatellite->getPeriod();
+}
+
+double gSatWrapper::getOrbitalInclination() const
+{
+	return pSatellite->getInclination();
+}
+
+Vec2d gSatWrapper::getPerigeeApogeeAltitudes() const
+{
+	return pSatellite->getPerigeeApogee();
 }
 
 gTime gSatWrapper::epoch;

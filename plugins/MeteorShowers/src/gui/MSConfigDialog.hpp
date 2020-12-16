@@ -66,6 +66,8 @@ private slots:
 	//! Sets the color of the inactive radiant.
 	void setColorIR();
 
+	void restoreDefaults();
+
 private:
 	MeteorShowersMgr* m_mgr;
 	Ui_MSConfigDialog* m_ui;

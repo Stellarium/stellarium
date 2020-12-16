@@ -18,6 +18,7 @@
  */
 
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
 
 #include <QSettings>
 #include <QString>
@@ -33,7 +34,11 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 
 	// Split by a RE which should match any platform's line breaking rules
 	QRegExp matchLbr("[\\n\\r]+");
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	const QStringList& lines = data.split(matchLbr, Qt::SkipEmptyParts);
+	#else
 	const QStringList& lines = data.split(matchLbr, QString::SkipEmptyParts);
+	#endif
 
 	QString currentSection = "";
 	QRegExp sectionRe("^\\[(.+)\\]$");
@@ -78,6 +83,11 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 
 bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 {
+	// QSettings only gives us a binary file handle when writing the
+	// ini file, so we must handle alternative end of line marks
+	// ourselves.
+	const QString stelEndl = StelUtils::getEndLineChar();
+
 	int maxKeyWidth = 30;
 	QRegExp reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 

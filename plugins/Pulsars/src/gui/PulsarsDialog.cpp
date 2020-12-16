@@ -26,6 +26,7 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_pulsarsDialog.h"
 #include "PulsarsDialog.hpp"
 #include "Pulsars.hpp"
@@ -77,9 +78,13 @@ void PulsarsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(psr->getDisplayMode());
@@ -103,11 +108,8 @@ void PulsarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	colorButton(ui->pulsarMarkerColor,		psr->getMarkerColor(true));
-	colorButton(ui->pulsarGlitchesMarkerColor,	psr->getMarkerColor(false));
-
-	connect(ui->pulsarMarkerColor,		SIGNAL(released()), this, SLOT(askPulsarsMarkerColor()));
-	connect(ui->pulsarGlitchesMarkerColor,	SIGNAL(released()), this, SLOT(askPulsarGlitchesMarkerColor()));
+	connectColorButton(ui->pulsarMarkerColor,         "Pulsars.markerColor", "Pulsars/marker_color");
+	connectColorButton(ui->pulsarGlitchesMarkerColor, "Pulsars.glitchColor", "Pulsars/glitch_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -121,12 +123,10 @@ void PulsarsDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
-
 }
 
 void PulsarsDialog::setAboutHtml(void)
@@ -289,14 +289,20 @@ void PulsarsDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(psr->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	setAboutHtml();
 }
 
 void PulsarsDialog::restoreDefaults(void)
 {
-	qDebug() << "[Pulsars] Restore defaults...";
-	psr->restoreDefaults();
-	psr->readSettingsFromConfig();
-	updateGuiFromSettings();
+	if (askConfirmation())
+	{
+		qDebug() << "[Pulsars] restore defaults...";
+		psr->restoreDefaults();
+		psr->readSettingsFromConfig();
+		updateGuiFromSettings();
+	}
+	else
+		qDebug() << "[Pulsars] restore defaults is canceled...";
 }
 
 void PulsarsDialog::updateGuiFromSettings(void)
@@ -317,41 +323,3 @@ void PulsarsDialog::updateJSON(void)
 		psr->updateJSON();
 	}
 }
-
-void PulsarsDialog::askPulsarsMarkerColor()
-{
-	Vec3f vColor = psr->getMarkerColor(true);
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setMarkerColor(vColor, true);
-		ui->pulsarMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void PulsarsDialog::askPulsarGlitchesMarkerColor()
-{
-	Vec3f vColor = psr->getMarkerColor(false);
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarGlitchesMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setMarkerColor(vColor, false);
-		ui->pulsarGlitchesMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void PulsarsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
-{
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
-}
-

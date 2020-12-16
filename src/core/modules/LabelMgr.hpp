@@ -22,7 +22,7 @@
 #define LABELMGR_HPP
 
 #include "StelModule.hpp"
-
+#include "VecMath.hpp"
 #include <QMap>
 #include <QString>
 
@@ -64,7 +64,7 @@ public slots:
 	//! @param objectName the English name of the object to attach to
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
-	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
 	//! @param side where the label appears in relation to object:
 	//! - "N" = above object on screen
 	//! - "S" = below object on screen
@@ -76,24 +76,33 @@ public slots:
 	//! @param autoDelete the label will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
-	int labelObject(const QString& text, 
-	                const QString& objectName,
+	int labelObject(const QString& text,
+			const QString& objectName,
 	                bool visible=true,
 	                float fontSize=14,
 	                const QString& fontColor="#999999",
 	                const QString& side="E",
-	                double labelDistance=-1.0,
-					const QString& style="TextOnly",
-					bool autoDelete = false,
-					int autoDeleteTimeoutMs = 0);
-
+			double labelDistance=-1.0,
+			const QString& style="TextOnly",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
+	int labelObject(const QString& text,
+			const QString& objectName,
+			bool visible,
+			float fontSize,
+			const Vec3f& fontColor,
+			const QString& side="E",
+			double labelDistance=-1.0,
+			const QString& style="TextOnly",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
 	//! Create a label in azimuthal coordinate system. Can be used e.g. to show landscape features
 	//! @param text the text to display
 	//! @param az azimuth, degrees
 	//! @param alt altitude, degrees
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
-	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
 	//! @param autoDelete the label will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
@@ -105,6 +114,53 @@ public slots:
 			const QString& fontColor="#999999",
 			bool autoDelete = false,
 			int autoDeleteTimeoutMs = 0);
+	int labelHorizon(const QString& text,
+			float az,
+			float alt,
+			bool visible,
+			float fontSize,
+			const Vec3f& fontColor,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
+
+	//! Create a label in equatorial coordinate system
+	//! @param text the text to display
+	//! @param RA right ascension (e.g. 5h10m31s)
+	//! @param Dec declination (e.g. 25d30m30s)
+	//! @param visible if true, the label starts displayed, else it starts hidden
+	//! @param fontSize size of the font to use
+	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
+	//! @param side where the label appears in relation to coordinates:
+	//! - "N" = above object on screen
+	//! - "S" = below object on screen
+	//! - "E" = to the right of the object on screen
+	//! - "W" = to the left of the object on screen
+	//! - "NE", "NW", "SE", "SW" work too.
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after autoDeleteTimeoutMs ms
+	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
+	int labelEquatorial(const QString& text,
+			const QString& ra,
+			const QString& dec,
+			bool visible=true,
+			float fontSize=14,
+			const QString& fontColor="#999999",
+			const QString& side="",
+			double labelDistance=-1.0,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0,
+			bool j2000epoch = true);
+	int labelEquatorial(const QString& text,
+			const QString& ra,
+			const QString& dec,
+			bool visible,
+			float fontSize,
+			const Vec3f& fontColor,
+			const QString& side="",
+			double labelDistance=-1.0,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0,
+			bool j2000epoch = true);
 
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
@@ -112,7 +168,7 @@ public slots:
 	//! @param y the vertical position on the screen, in pixels, from the top of the screen
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
-	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
 	//! @param autoDelete the label will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
@@ -120,13 +176,21 @@ public slots:
 	                int x,
 	                int y,
 	                bool visible=true,
-	                float fontSize=14,
-					const QString& fontColor="#999999",
-					bool autoDelete = false,
-					int autoDeleteTimeoutMs = 0);
+			float fontSize=14,
+			const QString& fontColor="#999999",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
+	int labelScreen(const QString& text,
+			int x,
+			int y,
+			bool visible,
+			float fontSize,
+			const Vec3f& fontColor,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
 
 	//! find out if a label identified by id is presently shown
-	bool getLabelShow(int id); 
+	bool getLabelShow(int id) const;
 	//! set a label identified by id to be shown or not
 	void setLabelShow(int id, bool show); 
 	//! set text of label identified by id to be newText

@@ -37,33 +37,33 @@ StelAction::StelAction(const QString& actionId,
 		       const QString& text,
 		       const QString& primaryKey,
 		       const QString& altKey,
-		       bool global):
-	QObject(StelApp::getInstance().getStelActionManager()),
-	group(groupId),
-	text(text),
-	global(global),
-	keySequence(primaryKey),
-	altKeySequence(altKey),
-	defaultKeySequence(primaryKey),
-	defaultAltKeySequence(altKey),
-	target(Q_NULLPTR),
-	boolProperty(Q_NULLPTR)
-      #ifndef USE_QUICKVIEW
-      ,qAction(Q_NULLPTR)
-      #endif
+		       bool global)
+	: QObject(StelApp::getInstance().getStelActionManager())
+	, group(groupId)
+	, text(text)
+	, global(global)
+	, keySequence(primaryKey)
+	, altKeySequence(altKey)
+	, defaultKeySequence(primaryKey)
+	, defaultAltKeySequence(altKey)
+	, target(Q_NULLPTR)
+	, boolProperty(Q_NULLPTR)
+#ifndef USE_QUICKVIEW
+	, qAction(Q_NULLPTR)
+#endif
 {
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString confShortcut = conf->value("shortcuts/" + actionId).toString();
-	if (!confShortcut.isEmpty())
+	QString cfgOpt = "shortcuts/" + actionId;
+	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		QStringList shortcuts = confShortcut.split(" ");
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(QRegExp("\\s+")); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
 		if (shortcuts.size() > 2)
-			qWarning() << actionId << ": does not support more than two shortcuts per action";
+			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
 		if (shortcuts.size() > 1)
-			setAltShortcut(shortcuts[1]);
+			setAltShortcut(shortcuts[1]);		
 	}
 #ifndef USE_QUICKVIEW
 	QWidget* mainView = &StelMainView::getInstance();
@@ -103,7 +103,7 @@ QString StelAction::getText() const
 void StelAction::setChecked(bool value)
 {
 	Q_ASSERT(boolProperty);
-	if (value == isChecked()) //dont do anything if value would not change
+	if (value == isChecked()) //don't do anything if value would not change
 		return;
 
 	boolProperty->setValue(value);
@@ -128,7 +128,7 @@ void StelAction::trigger()
 		//This should still call the target slot first before all other registered slots
 		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
 		//This enables the slot to find out the StelAction that was triggered using sender(),
-		//and enables use of QSignalMapper or similar constructs
+		//and enables use of QSignalMapper (obsolete), Lambda functions or similar constructs
 		emit triggered();
 	}
 }
@@ -165,7 +165,7 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	if (slotIndex<0) qWarning()<<"[StelAction]"<<getId()<<"cannot connect to slot"<<slot<<"of object"<<obj << "- EXIT!";
 #endif
 	Q_ASSERT(slotIndex>=0);
-	// connect to a parameterless slot.
+	// connect to a parameter-less slot.
 	this->slot = obj->metaObject()->method(slotIndex);
 	Q_ASSERT(this->slot.parameterCount() == 0);
 	//let Qt handle invoking the slot when the StelAction is triggered
@@ -195,7 +195,6 @@ StelActionMgr::StelActionMgr() :
 
 StelActionMgr::~StelActionMgr()
 {
-	
 }
 
 StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
@@ -209,9 +208,31 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 	return action;
 }
 
+
+StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
+				      QObject* context, std::function<void()> lambda,
+				      const QString& shortcut, const QString& altShortcut,
+				      bool global)
+{
+	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
+	connect(action, &StelAction::triggered, context, lambda);
+	return action;
+}
+
 StelAction* StelActionMgr::findAction(const QString& id)
 {
 	return findChild<StelAction*>(id);
+}
+
+StelAction* StelActionMgr::findActionFromShortcut(const QString& shortcut)
+{
+	StelAction* ret=Q_NULLPTR;
+	for (auto* action : findChildren<StelAction*>())
+	{
+		if ((action->getShortcut().toString()==shortcut) || (action->getAltShortcut().toString()==shortcut))
+			ret=action;
+	}
+	return ret;
 }
 
 bool StelActionMgr::pushKey(int key, bool global)
@@ -268,6 +289,22 @@ QList<StelAction*> StelActionMgr::getActionList() const
 	return findChildren<StelAction*>();
 }
 
+QStringList StelActionMgr::getShortcutsList() const
+{
+	QStringList shortcuts;
+	QString shortcut;
+	for (const auto* action : getActionList())
+	{
+		shortcut = action->getShortcut().toString();
+		if (!shortcut.isEmpty())
+			shortcuts.append(shortcut);
+		shortcut = action->getAltShortcut().toString();
+		if (!shortcut.isEmpty())
+			shortcuts.append(shortcut);
+	}
+	return shortcuts;
+}
+
 void StelActionMgr::saveShortcuts()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -275,13 +312,17 @@ void StelActionMgr::saveShortcuts()
 	conf->remove("");
 	for (auto* action : findChildren<StelAction*>())
 	{
-		if (	action->keySequence == action->defaultKeySequence &&
-				action->altKeySequence == action->defaultAltKeySequence)
+		if (action->keySequence == action->defaultKeySequence &&
+		    action->altKeySequence == action->defaultAltKeySequence)
 			continue;
 		QString seq = action->keySequence.toString().replace(" ", "");
+		if (seq.isEmpty()) // Let's allow remove shortcuts
+			seq = "\"\"";
 		if (action->altKeySequence != action->defaultAltKeySequence)
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
-		conf->setValue(action->objectName(), seq);
+		if (action->altKeySequence.toString()=="")
+			seq += " \"\"";		
+		conf->setValue(action->objectName(), seq.replace(QRegExp("\\s+")," "));
 	}
 	conf->endGroup();
 	// Apparently shortcuts was changed
@@ -296,6 +337,14 @@ void StelActionMgr::restoreDefaultShortcuts()
 		action->altKeySequence = action->defaultAltKeySequence;
 		emit action->changed();
 	}
+	saveShortcuts();
+}
+
+void StelActionMgr::restoreDefaultShortcut(StelAction* action)
+{
+	action->keySequence = action->defaultKeySequence;
+	action->altKeySequence = action->defaultAltKeySequence;
+	emit action->changed();
 	saveShortcuts();
 }
 

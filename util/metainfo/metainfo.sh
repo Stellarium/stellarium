@@ -7,7 +7,7 @@
 ROOT=../..
 ASMETAINFOITS=./as-metainfo.its
 podir=${ROOT}/po/stellarium-metainfo
-metainfo_file=${ROOT}/data/stellarium.appdata.xml
+metainfo_file=${ROOT}/data/org.stellarium.Stellarium.appdata.xml
 
 # first, strip translation from project metadata file
 tmpxmlfile=$(mktemp)
@@ -45,3 +45,10 @@ fi
 # cleanup
 rm -rf $tmpdir
 rm $tmpxmlfile
+
+# update list of releases
+./update_releases_appdata.pl
+
+# format (pretty print)
+xmllint --format --output $metainfo_file $metainfo_file
+

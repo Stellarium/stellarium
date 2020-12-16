@@ -1,0 +1,11 @@
+
+core.setObserverLocation(-70, 35.166, 3);
+LandscapeMgr.setCurrentLandscapeName("Ocean");
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+GridLinesMgr.setFlagHorizonLine(true);
+LandscapeMgr.setFlagCardinalsPoints(true);
+core.setDate("1981-07-02T19:00:00");
+core.setTimeRate(0);
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(true);

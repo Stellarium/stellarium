@@ -67,7 +67,7 @@ public:
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	bool bind(int slot=0);
+	bool bind(uint slot=0);
 
 	//! Releases the currently bound texture without testing if it is currently bound,
 	//! i.e. it simply calls glBindTexture(GL_TEXTURE_2D, 0)

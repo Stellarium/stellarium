@@ -23,7 +23,7 @@
 #include <QDateTime>
 #include <QProcess>
 #ifdef Q_OS_WIN
- #include <windows.h>
+ #include <Windows.h>
 #endif
 
 // Init statics variables.
@@ -44,7 +44,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
 
 	// write compiler version
-#if defined __GNUC__ && !defined __clang__
+#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
 	#ifdef __MINGW32__
 		#define COMPILER "MinGW GCC"
 	#else
@@ -53,6 +53,10 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
 #elif defined __clang__
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
+#elif defined __INTEL_COMPILER
+	QString iccVer = QString::number(__INTEL_COMPILER);
+	int iccVL = iccVer.length();
+	writeLog(QString("Compiled using %1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE));
 #elif defined _MSC_VER
 	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
 #else
@@ -108,7 +112,11 @@ void StelLogger::init(const QString& logFilePath)
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList pciLines = pciData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<pciLines.size(); i++)
 	{
 		if(pciLines.at(i).contains("VGA compatible controller"))
@@ -148,7 +156,7 @@ void StelLogger::init(const QString& logFilePath)
 	else
 		writeLog("Windows version too old to get memory info.");
 
-	HKEY hKey = NULL;
+	HKEY hKey = Q_NULLPTR;
 	DWORD dwType = REG_DWORD;
 	DWORD numVal = 0;
 	DWORD dwSize = sizeof(numVal);
@@ -165,7 +173,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueExA(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -178,7 +186,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueExA(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -195,7 +203,11 @@ void StelLogger::init(const QString& logFilePath)
 	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList systemLines = systemData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
 		if(systemLines.at(i).contains("Model"))
@@ -217,7 +229,6 @@ void StelLogger::init(const QString& logFilePath)
 		{
 			writeLog(systemLines.at(i).trimmed());
 		}
-
 	}
 
 #elif defined Q_OS_BSD4
@@ -226,7 +237,11 @@ void StelLogger::init(const QString& logFilePath)
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	#else
+	QStringList dmesgLines = dmesgData.split('\n', Qt::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<dmesgLines.size(); i++)
 	{
 		if (dmesgLines.at(i).contains("memory"))
@@ -248,7 +263,7 @@ void StelLogger::init(const QString& logFilePath)
 
 void StelLogger::deinit()
 {
-	qInstallMessageHandler(0);
+	qInstallMessageHandler(Q_NULLPTR);
 	logFile.close();
 }
 
@@ -298,35 +313,26 @@ void StelLogger::writeLog(QString msg)
 
 QString StelLogger::getMsvcVersionString(int ver)
 {
-	QString version;
-	switch(ver)
-	{
-		case 1310:
-			version = "MSVC++ 7.1 (Visual Studio 2003)";
-			break;
-		case 1400:
-			version = "MSVC++ 8.0 (Visual Studio 2005)";
-			break;
-		case 1500:
-			version = "MSVC++ 9.0 (Visual Studio 2008)";
-			break;
-		case 1600:
-			version = "MSVC++ 10.0 (Visual Studio 2010)";
-			break;
-		case 1700:
-			version = "MSVC++ 11.0 (Visual Studio 2012)";
-			break;
-		case 1800:
-			version = "MSVC++ 12.0 (Visual Studio 2013)";
-			break;
-		case 1900:
-			version = "MSVC++ 14.0 (Visual Studio 2015)";
-			break;
-		case 1910:
-			version = "MSVC++ 14.1 (Visual Studio 2017)";
-			break;
-		default:
-			version = "unknown MSVC++ version";
-	}
-	return version;
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
+	const QMap<int, QString> map = {
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"     },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"     },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"     },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"    },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"    },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"    },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"    },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"},
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"    },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"    },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"    },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"    },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"    },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"    },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"},
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"    },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"    },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"    },
+	};
+	return map.value(ver, "unknown MSVC++ version");
 }

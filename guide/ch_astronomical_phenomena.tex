@@ -31,10 +31,13 @@ sphere in a great circle known as the \emph{ecliptic}. Stellarium can
 draw the ecliptic on the sky. To toggle drawing of the ecliptic, press
 the \key{,} key.
 
-\emph{WARNING: Looking at the Sun can permanently damage the eye. Never
-look at the Sun without using the proper filters! By far the safest way
-to observe the Sun it to look at it on a computer screen, courtesy of
-Stellarium!}
+\emph{WARNING: Looking at the Sun with even the smallest telescope or
+  binoculars can permanently damage the eye. Never look at the Sun
+  without using the proper filters attached to the front end
+  (objective lens) of your instrument! Never use screw-in ocular
+  filters, they may break in the heat and expose your eye to damaging
+  amounts of energy. By far the safest way to observe the Sun is to
+  look at it on a computer screen, courtesy of Stellarium!}
 
 \section{Stars}
 \label{sec:Phenomena:stars}
@@ -106,8 +109,8 @@ an amateur observer is \emph{learning the constellations} --- the
 process of becoming familiar with the relative positions of the
 constellations, at what time of year a constellation is visible, and
 in which constellations observationally interesting objects reside.
-The International Astronomical Union has adopted 88 ``Western''
-constellations as a common system for segmenting the sky. They are
+The International Astronomical Union\index{IAU} has adopted 88 ``Western''
+constellations as a common system for segmenting the sky (Table~\ref{tab:IAUConstellations}). They are
 based on Greek/Roman mythology, but with several additions from
 Renaissance and later centuries.  As such some formalisation has been
 adopted, each constellation having a \emph{proper name}, which is in
@@ -117,16 +120,82 @@ constellation have clearly defined boundaries \citep{Delporte:1930}, which you c
 Stellarium when you press the \key{B} key\footnote{These boundaries or
   borders have been drawn using star maps from 1875. Due to the effect
   of \emph{precession}, these borders are no longer parallel to
-  today's coordinates.}. The IAU\index{IAU} constellation a selected object is placed in 
+  today's coordinates.}. The IAU constellation a selected object is placed in 
 is also available in the object information data \citep{1987PASP...99..695R}, 
 regardless of the currently active skyculture.  On the other hand, the shapes 
 of mythological figures, and also stick figures, have not been canonized, so 
 you will find deviations between Stellarium and printed atlases.
 
+
+\begin{table}[p]
+    \footnotesize\centering
+  \begin{tabular}{lll||lll}
+    \toprule
+\emph{Abbr.} & \emph{Name} & \emph{Genitive} & \emph{Abbr.} & \emph{Name}   & \emph{Genitive}       \\\midrule
+And & Andromeda            & Andromedae            & Lac & Lacerta              & Lacertae              \\
+Ant & Antlia               & Antliae               & Leo & Leo                  & Leonis                \\
+Aps & Apus                 & Apodis                & LMi & Leo Minor            & Leonis Minoris        \\
+Aqr & Aquarius             & Aquarii               & Lep & Lepus                & Leporis               \\
+Aql & Aquila               & Aquilae               & Lib & Libra                & Librae                \\
+%                                                  & %                                                  \\
+Ara & Ara                  & Arae                  & Lup & Lupus                & Lupi                  \\
+Ari & Aries                & Arietis               & Lyn & Lynx                 & Lyncis                \\
+Aur & Auriga               & Aurigae               & Lyr & Lyra                 & Lyrae                 \\
+Boo & Bootes               & Bootis                & Men & Mensa                & Mensae                \\
+Cae & Caelum               & Caeli                 & Mic & Microscopium         & Microscopii           \\
+%                                                  & %                                                  \\
+Cam & Camelopardalis       & Camelopardalis        & Mon & Monoceros            & Monocerotis           \\
+Cnc & Cancer               & Cancri                & Mus & Musca                & Muscae                \\
+Cvn & Canes Venatici       & Canum Venaticorum     & Nor & Norma                & Normae                \\
+CMa & Canis Maior          & Canis Maioris         & Oct & Octans               & Octantis              \\
+CMi & Canis Minor          & Canis Minoris         & Oph & Ophiuchus            & Ophiuchi              \\
+%                                                  & %                                                  \\
+Cap & Capricornus          & Capricorni            & Ori & Orion                & Orionis               \\
+Car & Carina               & Carinae               & Pav & Pavo                 & Pavonis               \\
+Cas & Cassiopeia           & Cassiopeiae           & Peg & Pegasus              & Pegasi                \\
+Cen & Centaurus            & Centauri              & Per & Perseus              & Persei                \\
+Cep & Cepheus              & Cephei                & Phe & Phoenix              & Phoenicis             \\
+%                                                  & %                                                  \\
+Cet & Cetus                & Ceti                  & Pic & Pictor               & Pictoris              \\
+Cha & Chamaeleon           & Chamaeleonis          & Psc & Pisces               & Piscium               \\
+Cir & Circinus             & Circini               & PsA & Piscis Austrinus     & Piscis Austrini       \\
+Col & Columba              & Columbae              & Pup & Puppis               & Puppis                \\
+Com & Coma Berenices       & Comae Berenicis       & Pyx & Pyxis                & Pyxidis               \\
+%                                                  & %                                                  \\
+CrA & Corona Australis     & Coronae Australis     & Ret & Reticulum            & Reticuli              \\
+CrB & Corona Borealis      & Coronae Borealis      & Sge & Sagitta              & Sagittae              \\
+Crt & Crater               & Crateris              & Sgr & Sagittarius          & Sagittarii            \\
+Crv & Corvus               & Corvi                 & Sco & Scorpius             & Scorpii               \\
+Cru & Crux                 & Crucis                & Scl & Sculptor             & Sculptoris            \\
+%                                                  & %                                                  \\
+Cyg & Cygnus               & Cygni                 & Sct & Scutum               & Scuti                 \\
+Del & Delphinus            & Delphini              & Ser & Serpens              & Serpentis             \\
+Dor & Dorado               & Doradus               & Sex & Sextans              & Sextantis             \\
+Dra & Draco                & Draconis              & Tau & Taurus               & Tauri                 \\
+Equ & Equuleus             & Equulei               & Tel & Telescopium          & Telescopii            \\
+%                                                  & %                                                  \\
+Eri & Eridanus             & Eridani               & Tri & Triangulum           & Trianguli             \\
+For & Fornax               & Fornacis              & TrA & Triangulum Australe  & Trianguli Australis   \\
+Gem & Gemini               & Geminorum             & Tuc & Tucana               & Tucanae               \\
+Gru & Grus                 & Gruis                 & UMa & Ursa Major           & Ursae Majoris         \\
+Her & Hercules             & Herculis              & UMi & Ursa Minor           & Ursae Minoris         \\
+%                                                  & %                                                  \\
+Hor & Horologium           & Horologii             & Vel & Vela                 & Velae                 \\
+Hya & Hydra                & Hydrae                & Vir & Virgo                & Virginis              \\
+Hyi & Hydrus               & Hydri                 & Vol & Volans               & Volantis              \\
+Ind & Indus                & Indi                  & Vul & Vulpecula            & Vulpeculae            \\
+\bottomrule
+  \end{tabular}
+  \caption{The official 88 IAU constellation names and abbreviations}
+  \label{tab:IAUConstellations}
+\end{table}
+
+
+
 \subsection{Star Names}
 \label{sec:Phenomena:StarNames}
 
-Stars can have many names. The brighter stars often have \emph{common
+The brighter stars often have one or more \emph{common
 names} relating to mythical characters from the various traditions. For
 example the brightest star in the sky, Sirius is also known as The Dog
 Star (the name Canis Major --- the constellation Sirius is found in ---
@@ -156,18 +225,38 @@ There are several more formal naming conventions that are in common use.
 \subsubsection{Bayer Designation}
 \label{sec:Phenomena:StarNames:Bayer}
 
-German astronomer \name[Johann]{Bayer} (1572--1625) devised one such system for his
-atlas, the \emph{Uranographia}, first published in 1603. His scheme
-names the stars according to the constellation in which they lie
-prefixed by a lower case Greek letter, starting at $\alpha$ for
-(usually) the brightest star in the constellation and proceeding with
-$\beta, \gamma, \ldots$ in descending order of apparent magnitude. For
-example, such a \emph{Bayer Designation} for Sirius is ``$\alpha$
-Canis Majoris'' (note that the genitive form of the constellation name
-is used; today also the short form $\alpha$ CMa is in use). There are
-some exceptions to the descending magnitude ordering, and some
-multiple stars (both real and optical) are named with a numerical
-superscript after the Greek letter, e.g.\ $\pi^1$...  $\pi^6$ Orionis.
+The German astronomer \name[Johann]{Bayer} (1572--1625) devised one
+such system for his atlas, the \emph{Uranographia}, first published in
+1603. His scheme names the stars according to the constellation in
+which they lie prefixed by a lower case Greek letter (see
+Tab.~\ref{tab:Phenomena:StarNames:BayerLetters}), starting at $\alpha$
+for (usually) the brightest star in the constellation and proceeding
+with $\beta, \gamma, \ldots$ in descending order of apparent
+magnitude. For example, such a \emph{Bayer Designation} for Sirius is
+``$\alpha$ Canis Majoris'' (note that the genitive form of the
+constellation name is used, refer to Table~\ref{tab:IAUConstellations};
+today also the short form $\alpha$ CMa is in use).
+There are some exceptions to the descending magnitude
+ordering, and some multiple stars (both real and optical) are named
+with a numerical superscript after the Greek letter, e.g.\ $\pi^1$...
+$\pi^6$ Orionis.
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l}
+    \toprule
+    \alpha    & alpha   &  \eta      & eta     & \nu       & nu       & \tau     & tau     \\ 
+    \beta     & beta    &  \theta    & theta   & \xi       & xi       & \upsilon & upsilon \\ 
+    \gamma    & gamma   &  \iota     & iota    & \omicron  & omicron  & \varphi  & phi     \\ 
+    \delta    & delta   &  \kappa    & kappa   & \pi       & pi       & \chi     & chi     \\ 
+    \epsilon  & epsilon &  \lambda   & lambda  & \rho     & rho       & \psi     & psi     \\ 
+    \zeta     & zeta    &  \mu       & mu      & \sigma   & sigma     & \omega   & omega   \\
+    \bottomrule
+ \end{tabular}
+  \caption{The Greek alphabet used by Bayer}
+  \label{tab:Phenomena:StarNames:BayerLetters}
+\end{table}
 
 \subsubsection{Flamsteed Designation}
 \label{sec:Phenomena:StarNames:Flamsteed}
@@ -188,7 +277,7 @@ Ideas for such a mission dated from 1967, with the mission accepted by
 ESA in 1980. The satellite was launched by an Ariane 4 on 8 August 1989.
 The original goal was to place the satellite in a geostationary orbit
 above the earth, however a booster rocket failure resulted in a highly
-elliptical orbit from 315 to 22,300 miles altitude. Despite this
+elliptical orbit from 500 to 35,800~km (310 to 22,240 miles) altitude. Despite this
 difficulty, all of the scientific goals were accomplished.
 Communications were terminated on 15 August 1993.
 
@@ -207,6 +296,12 @@ June 1997. The Hipparcos and Tycho data have been used to create the
 Millennium Star Atlas: an all-sky atlas of one million stars to visual
 magnitude 11, from the Hipparcos and Tycho Catalogues and 10,000
 non-stellar objects included to complement the catalogue data.
+
+\begin{figure}[htb]
+\centering\includegraphics[width=0.75\textwidth]{names.png}
+\caption{Star Names and Data}
+\label{fig:starnames}
+\end{figure}
 
 There were questions over whether Hipparcos has a systematic error of
 about 1 milli arc-second in at least some parts of the sky. The value
@@ -237,12 +332,6 @@ Stellarium displays when a star is selected. At the top, the common
 name, Bayer/Flamsteed designations and Hipparcos number are shown,
 followed by the RA/Dec coordinates, apparent magnitude, distance and
 other data.
-
-\begin{figure}[h]
-\centering\includegraphics{names.png}
-\caption{Star Names and Data}
-\label{fig:starnames}
-\end{figure}
 
 \subsection{Spectral Type \& Luminosity Class}
 \label{sec:Phenomena:SpectralTypeLuminosityClass}
@@ -332,7 +421,6 @@ temperature gives a diagram called a Hertzsprung-Russell diagram
 (after the two astronomers \name[Ejnar]{Hertzsprung} (1873--1967) and 
 \name[Henry Norris]{Russell} (1877--1957) who devised it). A slight variation of this is shown
 in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
-in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
 plot).
 
 \begin{figure}[tp]
@@ -389,7 +477,7 @@ from being totally in shadow to being fully illuminated and back to
 being in shadow again. This process is divided up into various phases as
 described in table~\ref{tab:moonphases}.
 
-\begin{table}[b]
+\begin{table}[tb]
 \small
 \begin{tabularx}{\textwidth}{l|X}
 \toprule
@@ -407,7 +495,6 @@ Waning Crescent& Less than half the disc of the moon is illuminated, and this ge
 \label{tab:moonphases}
 \end{table}
 
-\newpage
 \section{The Major Planets}
 \label{sec:Planets}
 
@@ -666,6 +753,48 @@ over a single night.
 
 Stellarium includes images of many Messier objects.
 
+%
+% Source: https://en.wikipedia.org/wiki/Caldwell_catalogue
+%
+\subsection{The Caldwell catalogue}
+\label{sec:Phenomena:Caldwell}
+
+The \emph{Caldwell} catalogue is an astronomical catalogue of 109 star
+clusters, nebulae, and galaxies for observation by amateur
+astronomers. The list was compiled by \name[Patrick]{Moore}
+(1923--2012) as a complement to the Messier catalogue
+\citep{SJOMeara:2003}.
+
+While the Messier catalogue is used by amateur astronomers as a list
+of deep-sky objects for observation, Moore noted that Messier's list
+was not compiled for that purpose and excluded many of the sky's
+brightest deep-sky objects \citep{SJOMeara:2003}, such as the Hyades,
+the Double Cluster (NGC 869 and NGC 884), and the Sculptor Galaxy (NGC
+253). The Messier catalogue was actually compiled as a list of known
+objects that might be confused with comets. Moore also observed that
+since Messier compiled his list from observations in Paris, it did not
+include bright deep-sky objects visible in the Southern Hemisphere,
+such as Omega Centauri, Centaurus A, the Jewel Box, and 47 Tucanae
+\citep{SJOMeara:2003}. Moore compiled a list of 109 objects to match
+the commonly accepted number of Messier objects (he excluded M110
+\citep{Moore:1995}), and the list was published in \emph{Sky \&
+  Telescope} in December 1995 \citep{Moore:1995}.
+
+Moore used his other surname -- Caldwell -- to name the list, since
+the initial of ``Moore'' is already used for the Messier catalogue
+\citep{SJOMeara:2003}. Entries in the catalogue are designated with a
+``C'' and the catalogue number (1 to 109).
+
+Unlike objects in the Messier catalogue, which are listed roughly in
+the order of discovery by Messier and his peers, the Caldwell
+catalogue is ordered by declination, with C1 being the most northerly
+and C109 being the most southerly \citep{SJOMeara:2003}, although two
+objects (C~26=NGC~4244 and C~41, the Hyades) are listed out of
+sequence \citep{SJOMeara:2003}. Other errors in the original list have
+since been corrected: it incorrectly identified the S Norma Cluster
+(C~89=NGC~6087) as NGC 6067 and incorrectly labelled the Lambda
+Centauri Cluster (C~100=IC~2944) as the Gamma Centauri Cluster
+\citep{SJOMeara:2003}.
 
 \section{Galaxies}
 \label{sec:Phenomena:Galaxies}
@@ -715,19 +844,27 @@ etc.) moves between the observer (that's you!) and a more distant object
 
 Solar eclipses occur when our Moon moves between the Earth and the Sun.
 This happens when the inclined orbit of the Moon causes its path to
-cross our line of sight to the Sun. In essence it is the observer
-falling under the shadow of the moon.
+cross the ecliptic and our line of sight to the Sun. In essence it is the observer
+falling under the shadow of the Moon. 
 
-There are three types of solar eclipses:
+By a wonderful coincidence, Sun and Moon appear of almost identical
+size in Earth's sky, but the Moon's elliptical orbit sometimes causes
+it to appear just a bit smaller than the Sun.
 
-\textbf{Partial} The Moon only covers part of the Sun's surface.
-
-\textbf{Total} The Moon completely obscures the Sun's surface.
-
-\textbf{Annular} The Moon is at apogee (furthest from Earth in its
+There are therefore three types of solar eclipses:
+\begin{description}
+\item[Partial] The Moon only covers part of the Sun's surface.
+\item[Total] The Moon completely obscures the Sun's surface.
+\item[Annular] The Moon is at or close to apogee (furthest from Earth in its
 elliptic orbit) and its disc is too small to completely cover the Sun.
 In this case most of the Sun's disc is obscured -- all except a thin ring
 around the edge.
+\end{description}
+Sometimes the eclipse starts annular, but when the shadow reaches the
+part of the globe closest to the Moon, it becomes just large enough to
+cover the sun totally, and when receding, it may go back to the
+annular characteristic. This is called \emph{annular-total} in the
+classical literature, or \emph{hybrid} in more recent works.
 
 \subsection{Lunar Eclipses}
 \label{sec:Eclipses:lunar}

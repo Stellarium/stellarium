@@ -70,7 +70,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;
@@ -94,7 +94,8 @@ Novae::Novae()
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -140,7 +141,7 @@ void Novae::init()
 			return;
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible");
+		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 	}
 	catch (std::runtime_error &e)
 	{
@@ -176,6 +177,7 @@ void Novae::init()
 	updateTimer->start();
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -230,7 +232,7 @@ QList<StelObjectP> Novae::searchAround(const Vec3d& av, double limitFov, const S
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& n : nova)
@@ -239,7 +241,7 @@ QList<StelObjectP> Novae::searchAround(const Vec3d& av, double limitFov, const S
 		{
 			equPos = n->XYZ;
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(n));
 			}
@@ -455,7 +457,6 @@ void Novae::setNovaeMap(const QVariantMap& map)
 		NovaP n(new Nova(novaeData));
 		if (n->initialized)
 			nova.append(n);
-
 	}
 }
 
@@ -576,7 +577,7 @@ void Novae::saveSettingsToConfig(void)
 int Novae::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Novae::checkForUpdate(void)
@@ -593,12 +594,8 @@ void Novae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Novae] Updating novae catalog...";
 	startDownload(updateUrl);
-
 }
 
 void Novae::deleteDownloadProgressBar()
@@ -630,9 +627,7 @@ void Novae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -653,11 +648,11 @@ void Novae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
@@ -670,23 +665,6 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[Novae] The query has been redirected to" << redirectUrl.toString();
-		updateUrl = redirectUrl.toString();
-		conf->setValue("Novae/url", updateUrl);
-		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -716,6 +694,9 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Novae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -740,15 +721,14 @@ void Novae::displayMessage(const QString& message, const QString hexColor)
 
 QString Novae::getNovaeList()
 {
-	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = novalist.values();
-	qSort(vals);
+	std::sort(vals.begin(), vals.end());
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
-		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(smonth[month-1]).arg(year);
+		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month)).arg(year);
 	}
 
 	return out.join(", ");

@@ -18,8 +18,8 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 90)
-SET(STELLARIUM_PATCH 0)
+SET(STELLARIUM_MINOR 20)
+SET(STELLARIUM_PATCH 3)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -30,36 +30,100 @@ SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 
+SET(STELLARIUM_URL "https://stellarium.org/")
+ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
+
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
-# Write version of Stellarium to Stellarium User Guide
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
+ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# currently Qt 5.6/5.9 is recommended
-SET(MINIMAL_QT_VERSION "5.4.0")
+# currently Qt 5.9/5.12 is recommended
+SET(MINIMAL_QT_VERSION "5.7.0")
+# TODO: Check real minimal supported version of GPSD API
+SET(MINIMAL_GPS_API_VERSION "6.0")
+
+### Define minimal version for Windows
+# Use installer for checking minimum requirements
+# Stellarium/MSVC require Windows 7 (6.1) for work
+# Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+SET(ISS_MIN_WIN_VERSION "6.1")
+# Define required version for MSVC
+# Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
+SET(MIN_WIN_VERSION "0x0601")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Show platform info
-MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
+SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF()
+
+IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+     IF(CMAKE_COMPILER_IS_GNUCXX)
+          INCLUDE(CodeCoverage)
+          IF(LCOV_PATH AND ENABLE_TESTING)
+               APPEND_COVERAGE_COMPILER_FLAGS()
+               MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
+               SETUP_TARGET_FOR_COVERAGE_LCOV(
+                    NAME coverage 
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    DEPENDENCIES buildTests
+               )
+          ENDIF()
+     ENDIF()
 ENDIF()
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+     SET(SERIES "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
+ELSE()
+     SET(SERIES "head")
 ENDIF()
 
-# GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
-# Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
+########### Get revision number for non-release builds ###########
+IF(NOT STELLARIUM_RELEASE_BUILD)
+     # Hack until CMake detection for Git is finished
+     IF(WIN32)
+          FIND_FILE(GITCMD git.exe)
+     ELSE()
+          FIND_FILE(GITCMD git)
+     ENDIF()
+     STRING(TIMESTAMP CDNUMBER "%j")
+     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${CDNUMBER}")
+     IF(EXISTS ${GITCMD})
+          EXECUTE_PROCESS(COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND git log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND git rev-list --count ${GIT_BRANCH} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          IF(GIT_REVISION)
+               SET(PACKAGE_VERSION "${VERSION}-${GIT_REVISION}")
+               ADD_DEFINITIONS(-DGIT_REVISION="${GIT_REVISION}")
+               ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
+               # better way to numbering
+               SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
+          ENDIF()
+     ELSE()
+          STRING(TIMESTAMP TODAY "%j%H%M")
+          SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
+          ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
+          ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
+     ENDIF()
+     IF(STELLARIUM_VERSION)
+          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+          ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
+     ENDIF()
 ENDIF()
+MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
+
+# Write version and series of Stellarium to Stellarium User Guide
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
 SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
 IF(OPENGL_DEBUG_LOGGING)
@@ -88,9 +152,32 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 ENDIF()
 
+# Add ASan (AddressSanitizer) build options if necessary
+# Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
+IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+ENDIF()
+
+# Add UBSan (UndefinedBehaviorSanitizer) build options if necessary
+# Details: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+IF(${CMAKE_BUILD_TYPE} MATCHES "UBSan")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -g")
+ENDIF()
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      SET(APPLE 1)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+     # share data location:
+     SET(SDATALOC "Resources")
+     # home data location:
+     SET(HDATALOC "$ENV{HOME}/Library/Application\ Support/${PROJECT_NAME}")
+ELSE()     
+     # share data location:
+     SET(SDATALOC "share/${PACKAGE}")
+     # home data location:
+     SET(HDATALOC "$ENV{HOME}/.${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
@@ -109,8 +196,19 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
-SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
-SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+# Intel C/C++ compilers do not have an option -Wno-unused-results
+IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -Wno-unused-result")
+ELSE()
+     # Suppress some warning for Intel C/C++ compilers
+     # Diagnostic 1875: offsetof applied to non-POD (Plain Old Data) types is nonstandard
+     # Diagnostic 654: overloaded virtual function
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -diag-disable:remark -wd1875,654")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
+ENDIF()
 
 # Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
 IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
@@ -141,6 +239,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          # Set minimal version of Windows
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
                SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
 
@@ -274,7 +374,6 @@ ELSE()
      ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
-
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
@@ -288,16 +387,19 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
+    ADD_DEFINITIONS(-DENABLE_TESTING)
     FIND_PACKAGE(Qt5Test REQUIRED)
+    MESSAGE(STATUS "Unit tests support: enabled")
+ELSE(ENABLE_TESTING)
+    MESSAGE(STATUS "Unit tests support: disabled")
 ENDIF(ENABLE_TESTING)
 
 ########### User Guide ###############
 IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
      MESSAGE(STATUS "Found Stellarium User Guide")
-     INSTALL(FILES guide/guide.pdf DESTINATION share/${PACKAGE}/guide)
+     INSTALL(FILES guide/guide.pdf DESTINATION ${SDATALOC}/guide)
      SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
 ELSE()
      SET(ISS_GUIDE "; No link to Stellarium User Guide")
@@ -318,22 +420,21 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(ArchaeoLines 1)
-ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
-ADD_PLUGIN(FOV 1)
-# TODO: Logbook build is broken for quite some time
-ADD_PLUGIN(LogBook 0)
 ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
 ADD_PLUGIN(Oculars 1)
+ADD_PLUGIN(Oculus 0)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
+ELSE()
+     ADD_PLUGIN(RemoteControl 0)
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
@@ -342,10 +443,10 @@ ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
@@ -356,9 +457,9 @@ SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 FIND_PACKAGE(Qt5Core REQUIRED)
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
 IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION}\", required is \"${MINIMAL_QT_VERSION}\")")
+     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version ${Qt5Core_VERSION}, required is ${MINIMAL_QT_VERSION})")
 ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION}\")")
+     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
@@ -370,39 +471,55 @@ FIND_PACKAGE(Qt5PrintSupport REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()
-IF(USE_PLUGIN_LOGBOOK)
-     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
-     FIND_PACKAGE(Qt5Sql REQUIRED)
-ENDIF()
 IF(WIN32)
      FIND_PACKAGE(Qt5Svg REQUIRED)
      FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 
-     # Try found OpenSSL DLL's on Windows
-     FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
-     FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
-     FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
-     FIND_FILE(OPENSSL_LICENSE "OpenSSL License.txt")
-     SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-     IF(EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL})
-          MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
-          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-     ENDIF()
-     IF(EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL})
-          MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
-          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-     ENDIF()
-     IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
-          MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
-          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-     ENDIF()
-     IF(EXISTS ${OPENSSL_LICENSE})
-          MESSAGE(STATUS "Found OpenSSL license: ${OPENSSL_LICENSE}")
-          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LICENSE}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-     ENDIF()
-     IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
-          SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-     ENDIF()
+     # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
+     # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
+     IF(${Qt5Core_VERSION} VERSION_LESS "5.10")
+          # OK, it's Qt 5.9, let's try found OpenSSL 1.0.x DLL's on Windows
+          FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
+          FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
+          FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
+          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
+          IF(EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
+               SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
+          ENDIF()
+     ELSE()
+          # Try found OpenSSL 1.1.x DLL's on Windows (newest Qt)
+          IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+               FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1.dll)
+               FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1.dll)
+          ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+               FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1-x64.dll)
+               FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1-x64.dll)
+          ENDIF()
+          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
+          IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
+               MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
+               MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
+               SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
+          ENDIF()
+    ENDIF()
 ENDIF()
 
 # when using Qt 5.3, default to using the old QGLWidget, but warn
@@ -435,7 +552,10 @@ ENDIF()
 IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
      MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
      SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+ELSE()
+     MESSAGE(STATUS "Building an OpenGL build")
 ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
@@ -462,12 +582,18 @@ IF(ENABLE_GPS)
      ELSE(WIN32)
           FIND_PACKAGE(GPS QUIET)
           IF(GPS_FOUND)
-               SET(ENABLE_LIBGPS 1)
-               ADD_DEFINITIONS(-DENABLE_LIBGPS)
-               MESSAGE(STATUS "GPS: Using GPS library at ${GPS_LIBRARY}")
+               IF(${GPS_VERSION_STRING} VERSION_LESS MINIMAL_GPS_API_VERSION)
+                    SET(ENABLE_LIBGPS 0)
+                    MESSAGE(STATUS "GPS: found GPS library at ${GPS_LIBRARY} (found unsuitable GPSD API version ${GPS_VERSION_STRING}, required is ${MINIMAL_GPS_API_VERSION})")
+                    MESSAGE(STATUS "GPS: GPSD query disabled!")
+               ELSE()
+                    SET(ENABLE_LIBGPS 1)
+                    ADD_DEFINITIONS(-DENABLE_LIBGPS)
+                    MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: ${GPS_VERSION_STRING})")
+               ENDIF()
           ELSE(GPS_FOUND)
                SET(ENABLE_LIBGPS 0)
-               MESSAGE(STATUS "GPS: Could not find GPS library - GPSD query disabled!")
+               MESSAGE(STATUS "GPS: could not find GPS library - GPSD query disabled!")
           ENDIF(GPS_FOUND)
      ENDIF(WIN32)
 ELSE(ENABLE_GPS)
@@ -509,10 +635,9 @@ IF(UNIX AND NOT WIN32)
      IF(APPLE)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
-          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/${PACKAGE}")
-          ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")          
           # Used in generating the documentation (doc/stellarium.pod.cmake):
-          SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PACKAGE}")
+          SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
      ENDIF()
 ELSE()
      ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
@@ -524,27 +649,9 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
      ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
 ENDIF()
 
-########### Get revision number for non-release builds ###########
-IF(NOT STELLARIUM_RELEASE_BUILD)
-     # Hack until CMake detection for Git is finished
-     EXECUTE_PROCESS(COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-     EXECUTE_PROCESS(COMMAND git rev-list --count ${GIT_BRANCH} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-     IF(GIT_COMMITS)
-          SET(PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
-          ADD_DEFINITIONS(-DGIT_COMMITS="${GIT_COMMITS}")
-          ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
-     ENDIF()
-     # MESSAGE(STATUS "Branch: ${GIT_BRANCH}; Commits: ${GIT_COMMITS}; Error: ${GIT_ERROR}")
-     IF(STELLARIUM_VERSION)
-          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
-          ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
-     ENDIF()
-ENDIF()
-
-
 IF(WIN32)
      #######################################################
-     ### Generate icon file name                         ###
+     ### Generate icon file name
      #######################################################
 
      IF(STELLARIUM_RELEASE_BUILD)
@@ -554,19 +661,19 @@ IF(WIN32)
      ENDIF()
 
      #######################################################
-     ### Generate a VersionInfo file                     ###
+     ### Generate a VersionInfo file
      #######################################################
 
      IF(STELLARIUM_RELEASE_BUILD)
           SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
      ELSE()
-          SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
+          SET(PACKAGE_VERSION_RC "${WINDOWS_PACKAGE_VERSION}")
      ENDIF()
      STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
 
      #######################################################
-     ### [Optional] Embed icon in the Windows executable ###
+     ### [Optional] Embed icon in the Windows executable
      #######################################################
 
      SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
@@ -582,7 +689,7 @@ IF(WIN32)
      ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
 
      #######################################################
-     ### Generate an Inno Setup project file             ###
+     ### Generate an Inno Setup project file
      #######################################################
 
      IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
@@ -597,18 +704,6 @@ IF(WIN32)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
 
-     IF(MSVC)
-          # Use installer for checking minimum requirements
-          # Stellarium/MSVC require Windows Vista (6.0) for work
-          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-          SET(MIN_VERSION "6.0")
-     ELSE()
-          # Use installer for checking minimum requirements
-          # Stellarium/MinGW require Windows XP (5.1) for work
-          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-          SET(MIN_VERSION "5.1")
-     ENDIF()
-
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
      IF(ENABLE_SPOUT)
           IF(SPOUT_LIBRARY_DLL) # we know the dll
@@ -617,6 +712,9 @@ IF(WIN32)
                SET(ISS_STELLARIUM_STUFF "${ISS_STELLARIUM_STUFF}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\"; DestName: \"Spout_licence.txt\"; Flags: ignoreversion")
           ENDIF()
           SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode2K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=2048.2048\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode4K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=4096.4096\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode8K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=8192.8192\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
      ELSE()
           SET(ISS_SPOUT "; Spout support is disabled")
      ENDIF(ENABLE_SPOUT)
@@ -661,9 +759,9 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
      SET(CPACK_SOURCE_IGNORE_FILES "/.tx/" "/CVS/" "/.svn/" "/.git/" "/.github/" "/.bzr/" "builds/" "installers/" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
-     SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
+     SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
      SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
-     SET(CPACK_RPM_PACKAGE_URL "https://stellarium.org/")
+     SET(CPACK_RPM_PACKAGE_URL "${STELLARIUM_URL}")
      SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium@googlegroups.com>")
      SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
      SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
@@ -674,23 +772,16 @@ ENDIF()
 
 ########### OS X Bundling ###############
 IF(APPLE)
-     IF(CMAKE_OSX_DEPLOYMENT_TARGET)
-          SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
-     ELSE()
-          SET(PACKAGE_OSX_TARGET "10.11")
+     GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
+     FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
+
+     IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+          SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.12" CACHE STRING "Minimum OS X deployment version" FORCE)
      ENDIF()
+     MESSAGE(STATUS "Mac OS X deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET}")
+     SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
-
-     # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
-     ADD_CUSTOM_TARGET(
-          mac_app
-          python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
-          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-          COMMENT "making the macosx bundle."
-          VERBATIM
-     )
 ENDIF()
 
 ########### Windows packaging ###############

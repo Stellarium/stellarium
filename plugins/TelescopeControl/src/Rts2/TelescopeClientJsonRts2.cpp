@@ -40,10 +40,10 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, baseurl("http://localhost:8889/")
 	, telName("")
 	, telReadonly(false)
-	, telLatitude(NAN)
-	, telLongitude(NAN)
-	, telAltitude(NAN)
-	, telTargetDist(NAN)
+	, telLatitude(static_cast<double>(NAN))
+	, telLongitude(static_cast<double>(NAN))
+	, telAltitude(static_cast<double>(NAN))
+	, telTargetDist(static_cast<double>(NAN))
 	, time_delay(50)
 	, reconnectTimer(-1)
 	, refresh_delay(500)
@@ -58,8 +58,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	QString url;
 	if (paramRx.exactMatch(params))
 	{
-		refresh_delay = paramRx.capturedTexts().at(1).toInt() / 1000; // convert microseconds to milliseconds
-		url           = paramRx.capturedTexts().at(2).trimmed();
+		refresh_delay = paramRx.cap(1).toInt() / 1000; // convert microseconds to milliseconds
+		url           = paramRx.cap(2).trimmed();
 	}
 	else
 	{
@@ -250,6 +250,16 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 	networkManager.get(setR);
 }
 
+void TelescopeClientJsonRts2::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+{
+	Q_UNUSED(j2000Pos)
+	Q_UNUSED(selectObject)
+	if (!isConnected())
+		return;
+
+	return;
+}
+
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 {
 	return interpolatedPosition.isKnown();
@@ -310,11 +320,11 @@ void TelescopeClientJsonRts2::setReadOnly(bool readonly)
 	{
 		if (telReadonly)
 		{
-			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_readonly", "1,0,0").toString()));
+			telescopeManager->setReticleColor(Vec3f(settings->value("color_telescope_readonly", "1,0,0").toString()));
 		}
 		else
 		{
-			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+			telescopeManager->setReticleColor(Vec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
 		}
 	}
 }

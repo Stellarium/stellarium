@@ -45,8 +45,8 @@ public:
 	ShortcutsFilterModel(QObject* parent = Q_NULLPTR);
 	
 protected:
-	bool filterAcceptsRow(int source_row,
-	                      const QModelIndex &source_parent) const;
+	virtual bool filterAcceptsRow(int source_row,
+			      const QModelIndex &source_parent) const Q_DECL_OVERRIDE;
 };
 
 
@@ -56,17 +56,17 @@ class ShortcutsDialog : public StelDialog
 
 public:
 	ShortcutsDialog(QObject* parent);
-	~ShortcutsDialog();
+	~ShortcutsDialog() Q_DECL_OVERRIDE;
 
-	//! higlight items that have collisions with current lineEdits' state according to css.
+	//! highlight items that have collisions with current lineEdits' state according to CSS.
 	//! Note: previous collisions aren't redrawn.
 	void drawCollisions();
 
 public slots:
 	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
-	void retranslate();
-	//! ititialize editors state when current item changed.
+	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! initialize editors state when current item changed.
 	void initEditors();
 	//! checks whether one QKeySequence is prefix of another.
 	bool prefixMatchKeySequence(const QKeySequence &ks1, const QKeySequence &ks2);
@@ -77,25 +77,22 @@ public slots:
 	void handleChanges();
 	//! called when apply button clicked.
 	void applyChanges();
-	//! called by doubleclick; if click is on editable item, switch to editors
+	//! called by double-click; if click is on editable item, switch to editors
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
 	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = Q_NULLPTR);
 	void restoreDefaultShortcuts();
+	void restoreAllDefaultShortcuts();
 	void updateTreeData();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	//! checks whether given item can be changed by editors.
 	static bool itemIsEditable(QStandardItem *item);
-	//! Concatenate the header, key codes and footer to build
-	//! up the help text.
-	//! @todo FIXME: This does nothing? 
-	void updateText();
 
 	//! Apply style changes.
 	//! See http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
@@ -103,10 +100,10 @@ private:
 
 	QStandardItem* updateGroup(const QString& group);
 
-	//! search for first appearence of item with requested data.
-	QStandardItem* findItemByData(QVariant value, int role, int column = 0);
+	//! search for first appearance of item with requested data.
+	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
-	//! pointer to mgr, for not getting it from stelapp every time.
+	//! pointer to mgr, for not getting it from StelApp every time.
 	class StelActionMgr* actionMgr;
 
 	//! list for storing collisions items, so we can easy restore their colors.

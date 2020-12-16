@@ -90,7 +90,7 @@ public:
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
 	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
 	//! @param xshift shift in pixel in the rotated x direction.
@@ -126,7 +126,7 @@ public:
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
+	//! Each time the great circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=Q_NULLPTR, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=Q_NULLPTR, void* userData=Q_NULLPTR);
@@ -165,10 +165,10 @@ public:
 	void drawPoint2d(float x, float y);
 
 	//! Draw a line between the 2 points.
-	//! @param x1 x position of point 1 in the viewport in pixels.
-	//! @param y1 y position of point 1 in the viewport in pixels.
-	//! @param x2 x position of point 2 in the viewport in pixels.
-	//! @param y2 y position of point 2 in the viewport in pixels.
+	//! @param x1 x position of point 1 in the viewport in pixels. 0 is at left.
+	//! @param y1 y position of point 1 in the viewport in pixels. 0 is at bottom.
+	//! @param x2 x position of point 2 in the viewport in pixels. 0 is at left.
+	//! @param y2 y position of point 2 in the viewport in pixels. 0 is at bottom.
 	void drawLine2d(float x1, float y1, float x2, float y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.
@@ -195,8 +195,9 @@ public:
 	//!        region around the bottom pole, like for a spherical equirectangular horizon panorama (SphericalLandscape class).
 	//!        Example: your light pollution image (pano photo) goes down to just -5 degrees altitude (lowest street lamps below you):
 	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
-	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false,
-                 float topAngle=0.0f, float bottomAngle=M_PI);
+	void sSphere(const double radius, const double oneMinusOblateness, const unsigned int slices, const unsigned int stacks,
+		     const bool orientInside = false, const bool flipTexture = false,
+		     const float topAngle = 0.0f, const float bottomAngle = static_cast<float>(M_PI));
 
 	//! Generate a StelVertexArray for a sphere.
 	//! @param radius
@@ -209,12 +210,12 @@ public:
 	//!        region around the top pole, like North Galactic Pole.
 	//! @param bottomAngle: An opening angle [radians] at bottom of the sphere. Useful if there is an empty
 	//!        region around the bottom pole, like South Galactic Pole.
-	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks,
-                            int orientInside = 0, bool flipTexture = false,
-                            float topAngle=0.0f, float bottomAngle=M_PI);
+	static StelVertexArray computeSphereNoLight(double radius, double oneMinusOblateness, unsigned int slices, unsigned int stacks,
+			    int orientInside = 0, bool flipTexture = false,
+			    float topAngle=0.0f, float bottomAngle=static_cast<float>(M_PI));
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(float radius, float height, int slices, int orientInside = 0);
+	void sCylinder(double radius, double height, int slices, int orientInside = 0);
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
@@ -224,16 +225,22 @@ public:
 	//! @param level the number of concentric circles.
 	//! @param vertexArr the vertex array in which the resulting vertices are returned.
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
-	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
+	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr);
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(float radius, int slices, int stacks, float textureFov = 2.f*M_PI, int orientInside = 0);
+	void sSphereMap(double radius, unsigned int slices, unsigned int stacks, float textureFov = 2.f*static_cast<float>(M_PI), int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
 
 	//! Set the color to use for subsequent drawing.
 	void setColor(float r, float g, float b, float a=1.f);
+
+	//! Set the color to use for subsequent drawing.
+	void setColor(Vec3f rgb, float a=1.f);
+
+	//! Set the color to use for subsequent drawing.
+	void setColor(Vec4f rgba);
 
 	//! Get the color currently used for drawing.
 	Vec4f getColor() const;
@@ -259,6 +266,8 @@ public:
 
 	//! Sets the line width. Default is 1.0f.
 	void setLineWidth(float width);
+	//! Gets the line width.
+	float getLineWidth() const {return glState.lineWidth;}
 
 	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
 	void setSaturation(float v) { saturation = v; }
@@ -273,24 +282,24 @@ public:
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
-	void setVertexPointer(int size, int type, const void* pointer) {
+	void setVertexPointer(int size, GLenum type, const void* pointer) {
 		vertexArray.size = size; vertexArray.type = type; vertexArray.pointer = pointer;
 	}
 
 	//! use instead of glTexCoordPointer
-	void setTexCoordPointer(int size, int type, const void* pointer)
+	void setTexCoordPointer(int size, GLenum type, const void* pointer)
 	{
 		texCoordArray.size = size; texCoordArray.type = type; texCoordArray.pointer = pointer;
 	}
 
 	//! use instead of glColorPointer
-	void setColorPointer(int size, int type, const void* pointer)
+	void setColorPointer(int size, GLenum type, const void* pointer)
 	{
 		colorArray.size = size; colorArray.type = type; colorArray.pointer = pointer;
 	}
 
 	//! use instead of glNormalPointer
-	void setNormalPointer(int type, const void* pointer)
+	void setNormalPointer(GLenum type, const void* pointer)
 	{
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
 	}
@@ -308,6 +317,7 @@ public:
 	//! If @param indices is Q_NULLPTR, this operation will consume @param count values from the enabled arrays, starting at @param offset.
 	//! Else it will consume @param count elements of @param indices, starting at @param offset, which are used to index into the
 	//! enabled arrays.
+	//! NOTE: Prefer to use drawStelVertexArray, else there are wrap-around rendering artifacts in a few projections.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=Q_NULLPTR);
 
 	//! Draws the primitives defined in the StelVertexArray.
@@ -321,7 +331,6 @@ public:
 	DitheringMode getDitheringMode() const { return ditheringMode; }
 
 private:
-
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
@@ -349,14 +358,14 @@ private:
 
 	// From text-use-opengl-buffer
 	static QCache<QByteArray, struct StringTexture> texCache;
-	struct StringTexture* getTexTexture(const QString& str, int pixelSize);
+	struct StringTexture* getTexTexture(const QString& str, int pixelSize) const;
 
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc
 	{
 		ArrayDesc() : size(0), type(0), pointer(Q_NULLPTR), enabled(false) {}
 		int size;				// The number of coordinates per vertex.
-		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
+		GLenum type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
 		bool enabled;			// Define whether the array is enabled or not.
 	} ArrayDesc;
@@ -381,7 +390,7 @@ private:
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
 	// Used by the method below
-	static QVector<Vec2f> smallCircleVertexArray;
+	static QVector<Vec3f> smallCircleVertexArray;
 	static QVector<Vec4f> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
 

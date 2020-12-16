@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>533</height>
+    <height>542</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -94,7 +94,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -114,7 +114,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -134,7 +134,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </disabled>
          </palette>
         </property>
@@ -290,7 +290,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>../../data/gui/world.png</pixmap>
+            <pixmap>../../data/gui/miscWorldMap.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -352,6 +352,9 @@
               </property>
               <property name="horizontalScrollBarPolicy">
                <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="uniformItemSizes">
                <bool>true</bool>

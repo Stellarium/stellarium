@@ -71,7 +71,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.id = "Quasars";
 	info.displayedName = N_("Quasars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)");
 	info.version = QUASARS_PLUGIN_VERSION;
 	info.license = QUASARS_PLUGIN_LICENSE;
@@ -103,7 +103,8 @@ Quasars::Quasars()
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -138,7 +139,6 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-
 /*
  Init our module
 */
@@ -160,7 +160,7 @@ void Quasars::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
 		if (catalogJsonPath.isEmpty())
 			return;
 
@@ -169,9 +169,9 @@ void Quasars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
-		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible");
+		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 
-		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
 		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
 
@@ -212,6 +212,7 @@ void Quasars::init()
 	updateTimer->start();
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -236,7 +237,6 @@ void Quasars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Quasars::drawPointer(StelCore* core, StelPainter& painter)
@@ -271,7 +271,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& quasar : QSO)
@@ -280,7 +280,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 		{
 			equPos = quasar->XYZ;
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(quasar));
 			}
@@ -378,7 +378,6 @@ void Quasars::restoreDefaultJsonFile(void)
 		// manner
 		conf->remove("Quasars/last_update");
 		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -472,7 +471,6 @@ void Quasars::setQSOMap(const QVariantMap& map)
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
 			QSO.append(quasar);
-
 	}
 }
 
@@ -581,7 +579,7 @@ void Quasars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
 	setFlagUseQuasarMarkers(conf->value("flag_use_markers", false).toBool());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
+	setMarkerColor(Vec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
@@ -599,7 +597,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", getFlagShowQuasarsButton());
 	conf->setValue("flag_use_markers", getFlagUseQuasarMarkers());
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
+	conf->setValue("marker_color", getMarkerColor().toStr());
 
 	conf->endGroup();
 }
@@ -623,9 +621,6 @@ void Quasars::updateJSON(void)
 		qWarning() << "[Quasars] Already updating...  will not start again current update is complete.";
 		return;
 	}
-
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 
 	qDebug() << "[Quasars] Updating quasars catalog...";
 	startDownload(updateUrl);
@@ -660,9 +655,7 @@ void Quasars::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -700,23 +693,6 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[Quasars] The query has been redirected to" << redirectUrl.toString();
-		updateUrl = redirectUrl.toString();
-		conf->setValue("Quasars/url", updateUrl);
-		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -746,6 +722,9 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Quasars::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -826,6 +805,7 @@ Vec3f Quasars::getMarkerColor()
 void Quasars::setMarkerColor(const Vec3f &c)
 {
 	Quasar::markerColor = c;
+	emit quasarsColorChanged(c);
 }
 
 void Quasars::reloadCatalog(void)
@@ -856,5 +836,6 @@ void Quasars::setFlagShowQuasars(bool b)
 	{
 		flagShowQuasars=b;
 		emit flagQuasarsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }

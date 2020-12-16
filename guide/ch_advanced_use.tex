@@ -115,6 +115,17 @@ endings''.\footnote{This is a very confusing default setting and in fact
   home directory.
 \end{description}
 
+\subsection{Customized Location}
+\label{sec:FilesAndDirectories:Custom}
+
+Some users\newFeature{v.0.19.0} may prefer non-standard locations for
+their own data, for example when the Windows \file{C:} drive (which
+usually contains user data), or the Linux \file{/home} partition has
+become too small to hold tens of high-resolution landscapes or
+detailed 3D sceneries. You can move the entire directory elsewhere and
+use an environment variable \texttt{STEL\_USERDIR} that contains the
+pathname.
+
 \section{Directory Structure}
 \label{sec:FilesAndDirectories:DirectoryStructure}
 
@@ -131,11 +142,13 @@ following sub-directories.
 \item[\file{skycultures/}] contains constellations, common star names and
   constellation artwork for Stellarium's many sky cultures. Each culture
   has its own sub-directory in the skycultures directory.
+\item[\file{scripts/}] contains your own scripts. These can be used to create
+  complex demonstrations (see ch.~\ref{ch:scripting}). 
 \item[\file{nebulae/}] contains data and image files for nebula textures.
   In the future Stellarium may be able to support multiple sets of nebula
   images and switch between them at runtime. This feature is not
   implemented for version~\StelVersion, although the directory structure is in
-  place - each set of nebula textures has its own sub-directory in the
+  place -- each set of nebula textures has its own sub-directory in the
   nebulae directory.
   %% TODO: Update this if no longer valid.
 \item[\file{stars/}] contains Stellarium's star catalogues. In the
@@ -212,7 +225,7 @@ the Mac, or \program{nano}/\program{vi}/\program{gedit}/\program{emacs}/\program
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
 A complete list of configuration file options and values may be found
-in appendix~\ref{sec:config.ini} Configuration File.
+in appendix~\ref{sec:config.ini}.
 
 
 \section{Getting Extra Data}
@@ -232,12 +245,12 @@ in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{
 objects\footnote{Over 83 thousand deep-sky objects in version 0.16.0.} in the normal
 program download (the standard edition of Stellarium DSO catalog, see section \ref{sec:dso:catalog}), 
 but an extended DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.6}}:
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.10}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-3.6; extended edition & \file{catalog.dat} &\texttt{ba67e8526c68d980c384a0b8fe39521b}& 28.3\,MB\\\bottomrule
+3.11; extended edition & \file{catalog.dat} &\texttt{95ee3d538b393185563513d20899e7f3}& 27MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside either
@@ -284,7 +297,6 @@ the \emph{installation directory} or the \emph{user directory}
 (see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
 if you have them already stored elsewhere, you may add the path to
 \file{config.ini} like:
-\newpage
 \begin{configfile}
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
@@ -315,12 +327,11 @@ GPS location depends on your operating system.
 
 On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
 should not connect directly to a GPS USB device, serial device,
-bluetooth device, etc., but uses a connection to the \program{gpsd}
+bluetooth device, etc., but use a connection to the \program{gpsd}
 daemon running on a computer in your network which provides GPS
 services concurrently for any interested application. In most cases,
 this will be a \program{gpsd} running on your localhost, receiving
 data from some GPS device plugged in via USB.
-
 Please follow instructions by the \program{gpsd}
 authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
 configure this system daemon.  A few hints:
@@ -465,7 +476,8 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
--\/-fov              & angle      & The initial field of view in degrees. \\\midrule
+-\/-fov              & angle      & The initial vertical field of view in degrees. \\\midrule
+-\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\

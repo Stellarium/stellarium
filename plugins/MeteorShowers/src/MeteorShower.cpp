@@ -20,6 +20,7 @@
 #include <QtMath>
 
 #include "LandscapeMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -63,11 +64,11 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_pidx = map.value("pidx").toFloat();
 
 	// the catalog (IMO) will give us the drift for a five-day interval from peak
-	m_driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString()) / 5.f;
-	m_driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString()) / 5.f;
+	m_driftAlpha = static_cast<float>(StelUtils::getDecAngle(map.value("driftAlpha").toString())) *0.2f;
+	m_driftDelta = static_cast<float>(StelUtils::getDecAngle(map.value("driftDelta").toString())) *0.2f;
 
-	m_rAlphaPeak = m_radiantAlpha;
-	m_rDeltaPeak = m_radiantDelta;
+	m_rAlphaPeak = static_cast<float>(m_radiantAlpha);
+	m_rDeltaPeak = static_cast<float>(m_radiantDelta);
 
 	const int genericYear = 1000;
 
@@ -93,8 +94,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 			if (!ok)
 			{
-				qWarning() << "MeteorShower: INVALID data for " << m_showerID;
-				qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+				qWarning() << "[MeteorShower] INVALID data for " << m_showerID;
+				qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 				return;
 			}
 		}
@@ -157,9 +158,9 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		}
 		else
 		{
-			qWarning() << "MeteorShower: INVALID data for "
+			qWarning() << "[MeteorShower] INVALID data for "
 				   << m_showerID << "Unable to read some dates!";
-			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 			return;
 		}
 
@@ -180,9 +181,9 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 		// the total intensity must be 100
 		if (totalIntensity != 100) {
-			qWarning() << "MeteorShower: INVALID data for "
+			qWarning() << "[MeteorShower] INVALID data for "
 				   << m_showerID << "The total intensity must be equal to 100";
-			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 			m_colors.clear();
 		}
 	}
@@ -256,13 +257,13 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// fix the radiant position (considering drift)
-	m_radiantAlpha = m_rAlphaPeak;
-	m_radiantDelta = m_rDeltaPeak;
+	m_radiantAlpha = static_cast<double>(m_rAlphaPeak);
+	m_radiantDelta = static_cast<double>(m_rDeltaPeak);
 	if (m_status != INACTIVE)
 	{
 		double daysToPeak = currentJD - m_activity.peak.toJulianDay();
-		m_radiantAlpha += m_driftAlpha * daysToPeak;
-		m_radiantDelta += m_driftDelta * daysToPeak;
+		m_radiantAlpha += static_cast<double>(m_driftAlpha) * daysToPeak;
+		m_radiantDelta += static_cast<double>(m_driftDelta) * daysToPeak;
 	}
 
 	// step through and update all active meteors
@@ -291,19 +292,19 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// average meteors per frame
-	float mpf = currentZHR * deltaTime / 3600.f;
+	const float mpf = currentZHR * static_cast<float>(deltaTime) / 3600.f;
 
 	// maximum amount of meteors for the current frame
 	int maxMpf = qRound(mpf);
 	maxMpf = maxMpf < 1 ? 1 : maxMpf;
 
-	float rate = mpf / (float) maxMpf;
+	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-		float prob = (float) qrand() / (float) RAND_MAX;
+		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
 		if (prob < rate)
 		{
-			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
+			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
 						     m_pidx, m_colors, m_mgr->getBolideTexture());
 			if (m->isAlive())
 			{
@@ -338,7 +339,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
-	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;
+	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data
@@ -349,8 +350,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 			break;
 		default: //Inactive
 			rgb = m_mgr->getColorIR();
-	}
-	rgb /= 255.f;
+	}	
 	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
 
 	// Hide the radiant markers at during day light and make it visible
@@ -362,15 +362,15 @@ void MeteorShower::drawRadiant(StelCore *core)
 	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win) && mag<=mlimit)
 	{
 		m_mgr->getRadiantTexture()->bind();
-		painter.drawSprite2dMode(XY[0], XY[1], 45);
+		painter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45);
 
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setFont(m_mgr->getFont());
-			float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			float shift = 8.f + size/1.8f;
+			const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
+			const float shift = 8.f + size/1.8f;
 			if ((mag+1.f)<mlimit)
-				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
 }
@@ -427,16 +427,9 @@ MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) c
 		found = date.operator >=(g.start) && date.operator <=(g.finish);
 	}
 
-	if (found)
-	{
-		g.year = g.start.year();
-		g.peak.setDate(peakOnStart ? g.start.year() : g.finish.year(),
-			       g.peak.month(),
-			       g.peak.day());
-		return g;
-	}
-
-	return Activity();
+	g.year = g.start.year();
+	g.peak.setDate(peakOnStart ? g.start.year() : g.finish.year(), g.peak.month(), g.peak.day());
+	return g;
 }
 
 MeteorShower::Activity MeteorShower::hasConfirmedShower(QDate date, bool& found) const
@@ -456,24 +449,24 @@ MeteorShower::Activity MeteorShower::hasConfirmedShower(QDate date, bool& found)
 
 int MeteorShower::calculateZHR(const double& currentJD)
 {
-	double startJD = m_activity.start.toJulianDay();
-	double finishJD = m_activity.finish.toJulianDay();
-	double peakJD = m_activity.peak.toJulianDay();
+	const double startJD = m_activity.start.toJulianDay();
+	const double finishJD = m_activity.finish.toJulianDay();
+	const double peakJD = m_activity.peak.toJulianDay();
 
-	float sd; //standard deviation
+	double sd; //standard deviation
 	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
 	{
-		sd = (peakJD - startJD) / 2.f;
+		sd = (peakJD - startJD) *0.5;
 	}
 	else
 	{
-		sd = (finishJD - peakJD) / 2.f;
+		sd = (finishJD - peakJD) *0.5;
 	}
 
-	float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
-	float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
+	const float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
+	const float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
 
-	float gaussian = maxZHR * qExp( - qPow(currentJD - peakJD, 2) / (2 * sd * sd) ) + minZHR;
+	float gaussian = maxZHR * static_cast<float>(qExp( - qPow(currentJD - peakJD, 2) / (2 * sd * sd) )) + minZHR;
 
 	return qRound(gaussian);
 }
@@ -482,14 +475,14 @@ QString MeteorShower::getSolarLongitude(QDate date)
 {
 	//The number of days (positive or negative) since Greenwich noon,
 	//Terrestrial Time, on 1 January 2000 (J2000.0)
-	double n = date.toJulianDay() - 2451545.0;
+	const double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
-	float l = 280.460 + 0.9856474 * n;
+	double l = (280.460 + 0.9856474 * n);
 
 	// put it in the range 0 to 360 degrees
-	l /= 360.f;
-	l = (l - (int) l) * 360.f - 1.f;
+	l /= 360.;
+	l = (l - static_cast<int>(l)) * 360. - 1.;
 
 	return QString::number(l, 'f', 2);
 }
@@ -497,79 +490,52 @@ QString MeteorShower::getSolarLongitude(QDate date)
 QString MeteorShower::getDesignation() const
 {
 	if (m_showerID.toInt()) // if showerID is a number
-	{
-		return "";
-	}
+		return QString();
 	return m_showerID;
 }
 
 Vec3f MeteorShower::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6f, 0.0f, 0.0f) : Vec3f(1.0f, 1.0f, 1.0f);
 }
 
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	if (!enabled())
-	{
-		GETSTELMODULE(StelObjectMgr)->unSelect();
-		return "";
-	}
-
-	QString str;
+	QString str, designation = getDesignation();
 	QTextStream oss(&str);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-	QString mstdata;
-	if (m_status == ACTIVE_GENERIC)
-	{
-		mstdata = q_("generic data");
-	}
-	else if (m_status == ACTIVE_CONFIRMED)
-	{
-		mstdata = q_("confirmed data");
-	}
-	else if (m_status == INACTIVE)
-	{
-		mstdata = q_("inactive");
-	}
+	const QMap<MeteorShower::Status, QString>mstMap={
+		{ ACTIVE_GENERIC, q_("generic data")},
+		{ ACTIVE_CONFIRMED, q_("confirmed data")},
+		{ INACTIVE, q_("inactive")}};
+	QString mstdata = mstMap.value(m_status, "");
 
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
-		if (!m_showerID.toInt())
-		{
-			oss << " (" << m_showerID  <<")</h2>";
-		}
-		else
-		{
-			oss << "</h2>";
-		}
+		if (!designation.isEmpty())
+			oss << " (" << designation  <<")";
+		oss << "</h2>";
 	}
 
-	if (flags&Extra)
-	{
+	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("meteor shower"), mstdata) << "<br />";
-	}
+	
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
-		QString sDriftRA = StelUtils::radToHmsStr(m_driftAlpha);
-		QString sDriftDE = StelUtils::radToDmsStr(m_driftDelta);
+		QString sDriftRA = StelUtils::radToHmsStr(static_cast<double>(m_driftAlpha));
+		QString sDriftDE = StelUtils::radToDmsStr(static_cast<double>(m_driftDelta));
 		if (withDecimalDegree)
 		{
-			sDriftRA = StelUtils::radToDecDegStr(m_driftAlpha,4,false,true);
-			sDriftDE = StelUtils::radToDecDegStr(m_driftDelta,4,false,true);
+			sDriftRA = StelUtils::radToDecDegStr(static_cast<double>(m_driftAlpha),4,false,true);
+			sDriftDE = StelUtils::radToDecDegStr(static_cast<double>(m_driftDelta),4,false,true);
 		}
-
-		oss << QString("%1: %2/%3")
-			.arg(q_("Radiant drift (per day)"))
-			.arg(sDriftRA)
-			.arg(sDriftDE);
-		oss << "<br />";
+		oss << QString("%1: %2/%3").arg(q_("Radiant drift (per day)"), sDriftRA, sDriftDE) << "<br />";
 
 		if (m_speed > 0)
 		{
@@ -587,53 +553,41 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		if (!m_parentObj.isEmpty())
 			oss << QString("%1: %2").arg(q_("Parent body")).arg(q_(m_parentObj)) << "<br />";
 
-		// activity info
-		if (m_status != INACTIVE)
+		QString actStr = q_("Activity");
+		if(m_activity.start.month() == m_activity.finish.month())
 		{
-			QString actStr = q_("Activity");
-			if(m_activity.start.month() == m_activity.finish.month())
-			{
-				oss << QString("%1: %2 - %3 %4")
-				       .arg(actStr)
-				       .arg(m_activity.start.day())
-				       .arg(m_activity.finish.day())
-				       .arg(m_activity.start.toString("MMMM"));
-			}
-			else
-			{
-				oss << QString("%1: %2 - %3")
-				       .arg(actStr)
-				       .arg(m_activity.start.toString("d MMMM"))
-				       .arg(m_activity.finish.toString("d MMMM"));
-			}
-			oss << "<br />";
-			oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
+			oss << QString("%1: %2 - %3 %4")
+			       .arg(actStr)
+			       .arg(m_activity.start.day())
+			       .arg(m_activity.finish.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()));
+		}
+		else
+		{
+			oss << QString("%1: %2 %3 - %4 %5")
+			       .arg(actStr)
+			       .arg(m_activity.start.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.start.month()))
+			       .arg(m_activity.finish.day())
+			       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.finish.month()));
+		}
+		oss << "<br />";
+		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day())
+		       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(getSolarLongitude(m_activity.peak)) << "<br />";
 
-			oss << QString(" (%1 %2&deg;)")
-			       .arg(q_("Solar longitude"))
-			       .arg(getSolarLongitude(m_activity.peak));
+		if(m_activity.zhr > 0)
+			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
+		else
+		{
+			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
+			if(m_activity.variable.size() == 2)
+				oss << QString("; %1-%2").arg(m_activity.variable.at(0)).arg(m_activity.variable.at(1));
 			oss << "<br />";
-
-			if(m_activity.zhr > 0)
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
-			}
-			else
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
-				if(m_activity.variable.size() == 2)
-				{
-					oss << QString("; %1-%2")
-					       .arg(m_activity.variable.at(0))
-					       .arg(m_activity.variable.at(1));
-				}
-				oss << "<br />";
-			}
 		}
 	}
 
 	postProcessInfoString(str, flags);
-
 	return str;
 }
 
@@ -643,38 +597,20 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 
 	if (enabled())
 	{
-		QString mstdata;
-		if (m_status == ACTIVE_GENERIC)
-		{
-			mstdata = "generic-data";
-		}
-		else if (m_status == ACTIVE_CONFIRMED)
-		{
-			mstdata = "confirmed-data";
-		}
-		else if (m_status == INACTIVE)
-		{
-			mstdata = "inactive";
-		}
-		map.insert("status", mstdata);
+		const QMap<MeteorShower::Status, QString>mstMap={
+			{ ACTIVE_GENERIC, "generic-data"},
+			{ ACTIVE_CONFIRMED, "confirmed-data"},
+			{ INACTIVE, "inactive"}};
+		map.insert("status", mstMap.value(m_status, ""));
 
-		if (!m_showerID.toInt())
-		{
-			map.insert("id", m_showerID);
-		}
-		else
-		{
-			map.insert("id", "?");
-		}
-
+		QString designation = getDesignation();
+		map.insert("id", designation.isEmpty() ? "?" : designation);
 		map.insert("velocity", m_speed);
 		map.insert("population-index", m_pidx);
 		map.insert("parent", m_parentObj);
 
 		if(m_activity.zhr > 0)
-		{
 			map.insert("zhr-max", m_activity.zhr);
-		}
 		else
 		{
 			QString varStr="variable";

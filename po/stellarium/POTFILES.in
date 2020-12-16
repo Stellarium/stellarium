@@ -7,6 +7,7 @@ src/core/modules/Constellation.cpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
+src/core/modules/SpecialMarkersMgr.cpp
 src/core/modules/Landscape.cpp
 src/core/modules/LandscapeMgr.cpp
 src/core/modules/NomenclatureItem.cpp
@@ -28,7 +29,9 @@ src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/StelObjectMgr.cpp
 src/core/StelSkyLayerMgr.cpp
+src/core/StelSkyCultureMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/core/StelLocaleMgr.cpp
@@ -36,6 +39,7 @@ src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
 src/gui/StelGuiItems.cpp
+src/gui/StelDialog.cpp
 src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
@@ -44,9 +48,12 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
+src/gui/AstroCalcExtraEphemerisDialog.cpp
+src/gui/AstroCalcCustomStepsDialog.cpp
 src/gui/BookmarksDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
+src/gui/DateTimeDialog.cpp
 src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
@@ -68,6 +75,8 @@ src/ui_atmosphereDialog.h
 src/ui_greatRedSpotDialog.h
 src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
+src/ui_astroCalcExtraEphemerisDialog.h
+src/ui_astroCalcCustomStepsDialog.h
 src/ui_bookmarksDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
@@ -77,11 +86,11 @@ src/ui_orbitColorsDialog.h
 plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp
 plugins/AngleMeasure/src/ui_angleMeasureDialog.h
-plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
 plugins/Oculars/src/gui/OcularsGuiPanel.cpp
 plugins/Oculars/src/gui/OcularDialog.cpp
 plugins/Oculars/src/ui_ocularDialog.h
+plugins/Oculus/src/Oculus.cpp
 plugins/Satellites/src/Satellites.cpp
 plugins/Satellites/src/Satellite.cpp
 plugins/Satellites/src/gui/SatellitesDialog.cpp
@@ -92,6 +101,8 @@ plugins/TelescopeControl/src/TelescopeControl.cpp
 plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h
 plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h
+plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOM.cpp
+plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp
 plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp
 plugins/TelescopeControl/src/gui/TelescopeDialog.cpp
 plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp
@@ -143,9 +154,6 @@ plugins/Exoplanets/src/ui_exoplanetsDialog.h
 plugins/Observability/src/Observability.cpp
 plugins/Observability/src/gui/ObservabilityDialog.cpp
 plugins/Observability/src/ui_ObservabilityDialog.h
-plugins/FOV/src/FOV.cpp
-plugins/FOV/src/gui/FOVWindow.cpp
-plugins/FOV/src/ui_fovWindow.h
 plugins/NavStars/src/NavStars.cpp
 plugins/EquationOfTime/src/EquationOfTime.cpp
 plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp
@@ -172,3 +180,4 @@ plugins/Scenery3d/src/ui_storedViewDialog.h
 plugins/ArchaeoLines/src/ArchaeoLines.cpp
 plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp
 plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h
+plugins/Vts/src/Vts.cpp

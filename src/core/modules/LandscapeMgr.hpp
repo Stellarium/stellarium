@@ -80,7 +80,15 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
-	Q_PROPERTY(bool flagUseLightPollutionFromDatabase // was databaseUsage
+	Q_PROPERTY(bool flagPolyLineDisplayedOnly
+		   READ getFlagPolyLineDisplayed
+		   WRITE setFlagPolyLineDisplayed
+		   NOTIFY flagPolyLineDisplayedChanged)
+	Q_PROPERTY(int polyLineThickness
+		   READ getPolyLineThickness
+		   WRITE setPolyLineThickness
+		   NOTIFY polyLineThicknessChanged)
+	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
 		   NOTIFY flagUseLightPollutionFromDatabaseChanged)
@@ -138,8 +146,11 @@ public:
 	//! - Set up landscape-related display flags from ini parser object
 	virtual void init();
 
-	//! Draw the landscape graphics, cardinal points and atmosphere.
+	//! Draw the atmosphere, landscape graphics, and cardinal points.
 	virtual void draw(StelCore* core);
+	//! Draw landscape graphics and cardinal points. This only will redraw a polygonal line (if defined), the gazetteer and the Cardinal points.
+	//! This can be called outside the usual call order, if any foreground has to be overdrawn, e.g. 3D sceneries.
+	void drawPolylineOnly(StelCore* core);
 
 	//! Update time-dependent state.
 	//! Includes:
@@ -194,7 +205,7 @@ public slots:
 	void setAtmosphereAverageLuminance(const float overrideLuminance);
 
 	//! Return a map of landscape names to landscape IDs (directory names).
-	QMap<QString,QString> getNameToDirMap() const;
+	static QMap<QString,QString> getNameToDirMap();
 
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
@@ -230,7 +241,7 @@ public slots:
 
 	//! Get the current landscape or lightscape brightness (0..1)
 	//! @param light true to retrieve the light layer brightness value.
-	float getCurrentLandscapeBrightness(const bool light=false) const {return (light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
+	float getCurrentLandscapeBrightness(const bool light=false) const {return static_cast<float>(light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
 
 	//! Preload a landscape into cache.
 	//! @param id the ID of a landscape
@@ -247,7 +258,7 @@ public slots:
 	//! A big landscape may well take 150MB or more.
 	//! On a 32bit system, keep this rather small. On 64bit with 16GB RAM and no other tasks, 4GB is no problem.
 	//! Modern GPUs may have 4 or even 8GB of dedicated texture memory. Most of this may be filled with landscape textures.
-	//! Example: a museum installation with 20 large (16384x2048) old_stype landscapes can require up to 3.5GB. Allow 4GB cache,
+	//! Example: a museum installation with 20 large (16384x2048) old_style landscapes can require up to 3.5GB. Allow 4GB cache,
 	//! and the system will never have to load a landscape during the show when all have been preloaded.
 	void setCacheSize(int mb) { landscapeCache.setMaxCost(mb);}
 	//! Retrieve total size of cache (MB).
@@ -281,7 +292,7 @@ public slots:
 	//! Get whether the landscape is currently visible. If true, objects below landscape's limiting altitude limit can be omitted.
 	bool getIsLandscapeFullyVisible() const;
 	//! Get the sine of current landscape's minimal altitude. Useful to construct bounding caps.
-	float getLandscapeSinMinAltitudeLimit() const;
+	double getLandscapeSinMinAltitudeLimit() const;
 	
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
@@ -295,6 +306,15 @@ public slots:
 	bool getFlagLabels() const;
 	//! Set flag for displaying landscape labels
 	void setFlagLabels(const bool on);
+
+	//! Retrieve flag for rendering polygonal line (if one is defined)
+	bool getFlagPolyLineDisplayed() const {return flagPolyLineDisplayedOnly;}
+	//! Set flag for rendering polygonal line (if one is defined)
+	void setFlagPolyLineDisplayed(bool b) {if(b!=flagPolyLineDisplayedOnly){ flagPolyLineDisplayedOnly=b; emit flagPolyLineDisplayedChanged(b);}}
+	//! Retrieve thickness for rendering polygonal line (if one is defined)
+	int getPolyLineThickness() const {return polyLineThickness;}
+	//! Set thickness for rendering polygonal line (if one is defined)
+	void setPolyLineThickness(int thickness) {polyLineThickness=thickness; emit polyLineThicknessChanged(thickness);}
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -312,7 +332,7 @@ public slots:
 	//! Return the minimal brightness value of the landscape
 	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const double b) {if(b!=defaultMinimalBrightness){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
+	void setDefaultMinimalBrightness(const double b) {if(fabs(b-defaultMinimalBrightness)>0.0){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
@@ -334,7 +354,7 @@ public slots:
 	void setFlagAtmosphere(const bool displayed);
 
 	//! Get current display intensity of atmosphere ([0..1], for smoother transitions)
-	float getAtmosphereFadeIntensity();
+	float getAtmosphereFadeIntensity() const;
 
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
@@ -439,27 +459,17 @@ public slots:
 	//! Set flag for auto-enable atmosphere and landscape for planets with atmospheres in location window
 	void setFlagEnvironmentAutoEnable(bool b);
 
-	//! Get flag for auto-enable of atmospheres for planets.
-	//! @note this function is enabled for backward compatibility
-	//! @deprecated
-	bool getFlagAtmosphereAutoEnable() const { return getFlagEnvironmentAutoEnable(); }
-
-	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
-	//! @note this function is enabled for backward compatibility
-	//! @deprecated
-	void setFlagAtmosphereAutoEnable(bool b) { setFlagEnvironmentAutoEnable(b); }
-
 	//! Forward opacity query to current landscape.
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
 	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
 	// This variant is required for scripting!
-	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(Vec3d(azalt[0], azalt[1], azalt[2]));}
+	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(azalt.toVec3d());}
 	//! Forward opacity query to current landscape.
 	//! @param azimuth in degrees
 	//! @param altitude in degrees
 	float getLandscapeOpacity(float azimuth, float altitude) const {
 		Vec3d azalt;
-		StelUtils::spheToRect((180.0f-azimuth)*M_PI/180.0, altitude*M_PI/180.0, azalt);
+		StelUtils::spheToRect((180.0f-azimuth)*M_PI_180f, altitude*M_PI_180f, azalt);
 		return landscape->getOpacity(azalt);
 	}
 
@@ -471,6 +481,8 @@ signals:
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
+	void flagPolyLineDisplayedChanged(const bool enabled);
+	void polyLineThicknessChanged(const int thickness);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
@@ -519,8 +531,8 @@ private slots:
 	void setAtmosphereBortleLightPollution(const int bIndex);
 
 	//! Reacts to StelCore::locationChanged.
-	void onLocationChanged(StelLocation loc);
-	void onTargetLocationChanged(StelLocation loc);
+	void onLocationChanged(const StelLocation &loc);
+	void onTargetLocationChanged(const StelLocation &loc);
 
 	//! Translate labels to new language settings.
 	void updateI18n();
@@ -539,13 +551,13 @@ private:
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
-	QString nameToID(const QString& name) const;
+	static QString nameToID(const QString& name);
 
 	//! Returns the path to an installed landscape's directory.
 	//! It uses StelFileMgr to look for it in the possible directories.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @returns an empty string, if no such landscape was found.
-	QString getLandscapePath(const QString landscapeID) const;
+	static QString getLandscapePath(const QString landscapeID);
 
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
@@ -558,6 +570,11 @@ private:
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
+
+	//! control drawing of a Polygonal line, if one is defined.
+	bool flagPolyLineDisplayedOnly;
+	//! thickness of polygonal horizon line
+	int polyLineThickness;
 
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;

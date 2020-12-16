@@ -44,7 +44,7 @@ namespace TelescopeControlGlobals {
 	
 	const int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds
 	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
-	#define SECONDS_FROM_MICROSECONDS(X) ((double) X / 1000000)
+	#define SECONDS_FROM_MICROSECONDS(X) (static_cast<double>(X) / 1000000)
 	
 	enum ConnectionType {
 		ConnectionNA = 0,
@@ -54,6 +54,7 @@ namespace TelescopeControlGlobals {
 		ConnectionRemote,
 		ConnectionRTS2,
 		ConnectionINDI,
+		ConnectionASCOM,
 		ConnectionCount
 	};
 	
@@ -67,7 +68,11 @@ namespace TelescopeControlGlobals {
 	};
 
 	//! List of the telescope servers that don't need external executables
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	const QStringList EMBEDDED_TELESCOPE_SERVERS = QString("TelescopeServerDummy TelescopeServerLx200 TelescopeServerNexStar").split(' ', Qt::SkipEmptyParts);
+	#else
 	const QStringList EMBEDDED_TELESCOPE_SERVERS = QString("TelescopeServerDummy TelescopeServerLx200 TelescopeServerNexStar").split(' ', QString::SkipEmptyParts);
+	#endif
 };
 
 #endif // TELESCOPECONTROLGLOBALS_HPP

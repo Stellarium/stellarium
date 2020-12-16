@@ -202,12 +202,12 @@ QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
 	return (StepUpEnabled|StepDownEnabled);
 }
 
-double AngleSpinBox::valueRadians()
+double AngleSpinBox::valueRadians() const
 {
 	return radAngle;
 } 
 
-double AngleSpinBox::valueDegrees()
+double AngleSpinBox::valueDegrees() const
 {
 	return radAngle*(180./M_PI);
 } 
@@ -255,9 +255,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		
 	if (dmsRx.exactMatch(input))
 	{
-		double degree = dmsRx.capturedTexts().at(1).toDouble();
-		double minute = dmsRx.capturedTexts().at(3).toDouble();
-		double second = dmsRx.capturedTexts().at(6).toDouble();
+		double degree = dmsRx.cap(1).toDouble();
+		double minute = dmsRx.cap(3).toDouble();
+		double second = dmsRx.cap(6).toDouble();
 		if (degree > 360.0 || degree < -360.0)
 		{
 			*state = QValidator::Invalid;
@@ -281,9 +281,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (hmsRx.exactMatch(input))
 	{
-		double hour   = hmsRx.capturedTexts().at(1).toDouble();
-		double minute = hmsRx.capturedTexts().at(3).toDouble();
-		double second = hmsRx.capturedTexts().at(6).toDouble();
+		double hour   = hmsRx.cap(1).toDouble();
+		double minute = hmsRx.cap(3).toDouble();
+		double second = hmsRx.cap(6).toDouble();
 		if (hour >= 24.0 || hour < 0.0)
 		{
 			*state = QValidator::Invalid;
@@ -307,7 +307,7 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (decRx.exactMatch(input))
 	{
-		double dec = decRx.capturedTexts().at(1).toDouble();
+		double dec = decRx.cap(1).toDouble();
 		if (dec < 0.0 || dec > 360.0)
 		{
 			*state = QValidator::Invalid;
@@ -391,8 +391,8 @@ void AngleSpinBox::formatText(void)
 				sign=true;
 			}
 
-			d = (int)angle;
-			m = (int)((angle - d)*60);
+			d = static_cast<int>(angle);
+			m = static_cast<int>((angle - d)*60);
 			s = (angle-d)*3600-60*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -489,7 +489,7 @@ void AngleSpinBox::formatText(void)
 		default:
 		{
 			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" 
-                       << (int)(angleSpinBoxFormat);
+		       << static_cast<int>(angleSpinBoxFormat);
 			break;
 		}
 	}

@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "NexStarCommand.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
 #include "common/LogFile.hpp"
+#include "StelUtils.hpp"
 
 #include <cmath>
 
@@ -37,7 +38,7 @@ NexStarCommand::NexStarCommand(Server &server) : server(*static_cast<TelescopeCl
 NexStarCommandGotoPosition::NexStarCommandGotoPosition(Server &server, unsigned int ra_int, int dec_int) : NexStarCommand(server)
 {
 	dec = dec_int;
-	ra = ra_int;
+	ra = static_cast<int>(ra_int);
 }
 
 #define NIBTOASCII(x) (((x)<10)?('0'+(x)):('A'+(x)-10))
@@ -81,7 +82,7 @@ bool NexStarCommandGotoPosition::writeCommandToBuffer(char *&p,char *end)
 	has_been_written_to_buffer = true;
 	#ifdef DEBUG5
 	*log_file << Now() << "NexStarCommandGotoPosition::writeCommandToBuffer:"
-	          << b << endl;
+		  << b << StelUtils::getEndLineChar();
 	#endif
 	
 	return true;
@@ -96,13 +97,13 @@ int NexStarCommandGotoPosition::readAnswerFromBuffer(const char *&buff, const ch
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew ok"
-		          << endl;
+			  << StelUtils::getEndLineChar();
 		#endif
 	}
 	else
 	{
 		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed." << endl;
+		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed." << StelUtils::getEndLineChar();
 		#endif
 	}
 	buff++;
@@ -112,6 +113,84 @@ int NexStarCommandGotoPosition::readAnswerFromBuffer(const char *&buff, const ch
 void NexStarCommandGotoPosition::print(QTextStream &o) const
 {
 	o << "NexStarCommandGotoPosition("
+	  << ra << "," << dec <<')';
+}
+
+NexStarCommandSync::NexStarCommandSync(Server &server, unsigned int ra_int, int dec_int) : NexStarCommand(server)
+{
+	dec = dec_int;
+	ra = static_cast<int>(ra_int);
+}
+
+bool NexStarCommandSync::writeCommandToBuffer(char *&p,char *end)
+{
+	#ifdef DEBUG5
+	char *b = p;
+	#endif
+
+	if (end-p < 18)
+		return false;
+	// high-precision aiming:
+	*p++ = 's';
+
+	// set the RA
+	int x = ra;
+	*p++ = NIBTOASCII ((x>>28) & 0x0f);
+	*p++ = NIBTOASCII ((x>>24) & 0x0f);
+	*p++ = NIBTOASCII ((x>>20) & 0x0f);
+	*p++ = NIBTOASCII ((x>>16) & 0x0f);
+	*p++ = NIBTOASCII ((x>>12) & 0x0f);
+	*p++ = NIBTOASCII ((x>>8) & 0x0f);
+	*p++ = NIBTOASCII ((x>>4) & 0x0f);
+	*p++ = NIBTOASCII (x & 0x0f);
+	*p++ = ',';
+
+	// set dec:
+	x = dec;
+	*p++ = NIBTOASCII ((x>>28) & 0x0f);
+	*p++ = NIBTOASCII ((x>>24) & 0x0f);
+	*p++ = NIBTOASCII ((x>>20) & 0x0f);
+	*p++ = NIBTOASCII ((x>>16) & 0x0f);
+	*p++ = NIBTOASCII ((x>>12) & 0x0f);
+	*p++ = NIBTOASCII ((x>>8) & 0x0f);
+	*p++ = NIBTOASCII ((x>>4) & 0x0f);
+	*p++ = NIBTOASCII (x & 0x0f);
+	*p = 0;
+
+	has_been_written_to_buffer = true;
+	#ifdef DEBUG5
+	*log_file << Now() << "NexStarCommandSync::writeCommandToBuffer:"
+		  << b << StelUtils::getEndLineChar();
+	#endif
+
+	return true;
+}
+
+int NexStarCommandSync::readAnswerFromBuffer(const char *&buff, const char *end) const
+{
+	if (buff >= end)
+		return 0;
+
+	if (*buff=='#')
+	{
+		#ifdef DEBUG4
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync ok"
+			  << StelUtils::getEndLineChar();
+		#endif
+	}
+	else
+	{
+		#ifdef DEBUG4
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync failed." << StelUtils::getEndLineChar();
+		#endif
+	}
+	buff++;
+	return 1;
+}
+
+void NexStarCommandSync::print(QTextStream &o) const
+{
+	o << "NexStarCommandSync("
 	  << ra << "," << dec <<')';
 }
 
@@ -148,7 +227,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-		                      "error: ',' expected" << endl;
+				      "error: ',' expected" << StelUtils::getEndLineChar();
 		#endif
 		return -1;
 	}
@@ -168,7 +247,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-		                      "error: '#' expected" << endl;
+				      "error: '#' expected" << StelUtils::getEndLineChar();
 		#endif
 		return -1;
 	}
@@ -177,12 +256,12 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	#ifdef DEBUG4
 	*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
 	                      "ra = " << ra << ", dec = " << dec
-	          << endl;
+		  << StelUtils::getEndLineChar();
 	#endif
 	buff = p;
 
-	server.raReceived(ra);
-	server.decReceived(dec);
+	server.raReceived(static_cast<unsigned int>(ra));
+	server.decReceived(static_cast<unsigned int>(dec));
 	return 1;
 }
 

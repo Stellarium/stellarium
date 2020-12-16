@@ -45,7 +45,7 @@ class InfoPanel : public QGraphicsTextItem
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
-		const QString getSelectedText(void);
+		const QString getSelectedText(void) const;
 
 	private:
 		StelObject::InfoStringGroup infoTextFilters;
@@ -82,7 +82,9 @@ private slots:
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& style);
 	
+public slots:
 	//! Update the position of the button bars in the main window
+	//! GZ needed this public for interactive GUI scaling
 	void updateBarsPos();
 
 private:

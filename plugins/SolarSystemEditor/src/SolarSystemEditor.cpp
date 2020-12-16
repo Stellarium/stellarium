@@ -31,6 +31,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "SolarSystem.hpp"
+#include "Orbit.hpp"
 
 #include <QDate>
 #include <QDebug>
@@ -56,7 +57,7 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.id = "SolarSystemEditor";
 	info.displayedName = N_("Solar System Editor");
 	info.authors = "Bogdan Marinov";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database.");
 	info.version = SOLARSYSTEMEDITOR_PLUGIN_VERSION;
 	info.license = SOLARSYSTEMEDITOR_PLUGIN_LICENSE;
@@ -74,8 +75,8 @@ SolarSystemEditor::SolarSystemEditor():
 	//I really hope that the file manager is instantiated before this
 	// GZ new: Not sure whether this should be major or minor here.
 	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_minor.ini").absoluteFilePath();
-	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 	majorSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_major.ini").absoluteFilePath();
+	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 }
 
 SolarSystemEditor::~SolarSystemEditor()
@@ -106,7 +107,7 @@ void SolarSystemEditor::init()
 	if (QFile::exists(majorSolarSystemFilePath))
 	{
 		//defaultSsoIdentifiers.unite(listAllLoadedObjectsInFile(majorSolarSystemFilePath));
-		defaultSsoIdentifiers=listAllLoadedObjectsInFile(majorSolarSystemFilePath);
+		defaultSsoIdentifiers = listAllLoadedObjectsInFile(majorSolarSystemFilePath);
 	}
 	else
 	{
@@ -118,7 +119,10 @@ void SolarSystemEditor::init()
 	{
 		//Make sure that a user ssystem_minor.ini actually exists
 		if (!cloneSolarSystemConfigurationFile())
+		{
+			qWarning() << "SolarSystemEditor: Cannot copy ssystem_minor.ini to user data directory. Plugin will not work.";
 			return;
+		}
 
 		mainWindow = new SolarSystemManagerWindow();
 	}
@@ -133,7 +137,6 @@ void SolarSystemEditor::init()
 
 	// key bindings and other actions
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
-
 }
 
 double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
@@ -191,7 +194,7 @@ bool SolarSystemEditor::configureGui(bool show)
 void SolarSystemEditor::updateI18n()
 {
 	//The Solar System MUST be translated before updating the window
-	//TODO: Remove this if/when you merge this module in the Solar System module
+	//NOTE: Remove this if/when you merge this module in the Solar System module
 	solarSystem->updateI18n();
 }
 
@@ -235,7 +238,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile() const
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
 			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
-			         << endl << "Please remove the file manually.";
+				 << StelUtils::getEndLineChar() << "Please remove the file manually.";
 			return false;
 		}
 	}
@@ -343,18 +346,17 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	//Process the existing and new files:
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-
 		QSettings minorBodies(customSolarSystemFilePath, StelIniFormat);
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.
 		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
 		for (auto group : newData.childGroups())
 		{
-			QString fixedGroupName=fixGroupName(group);
+			QString fixedGroupName = fixGroupName(group);
 			newData.beginGroup(group);
 			qDebug() << "  Group: " << group << "for object " << newData.value("name");
 			qDebug() << "   ";
-			QStringList minorChildGroups=minorBodies.childGroups();
+			QStringList minorChildGroups = minorBodies.childGroups();
 			if (minorChildGroups.contains(fixedGroupName))
 			{
 				qDebug() << "This group " << fixedGroupName << "already exists. Updating values";
@@ -363,7 +365,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 				qDebug() << "This group " << fixedGroupName << "does not yet exist. Adding values";
 
 			minorBodies.beginGroup(fixedGroupName);
-			QStringList newKeys=newData.allKeys(); // limited to the group!
+			QStringList newKeys = newData.allKeys(); // limited to the group!
 			for (auto key : newKeys)
 			{
 				minorBodies.setValue(key, newData.value(key));
@@ -403,12 +405,12 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
+	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	for (auto group : groups)
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
-		if (planetNames.contains(name))
+		if (minorBodies.contains(name))
 		{
 			loadedObjects.insert(name, group);
 		}
@@ -545,9 +547,10 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
 	result.insert("type", "comet");
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func", "comet_orbit");
+	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -560,9 +563,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	int year	= mpcParser.cap(4).toInt();
 	int month	= mpcParser.cap(5).toInt();
 	double dayFraction	= mpcParser.cap(6).toDouble(&ok);
-	int day = (int) dayFraction;
+	int day = static_cast<int>(dayFraction);
 	QDate datePerihelionPassage(year, month, day);
-	int fraction = (int) ((dayFraction - day) * 24 * 60 * 60);
+	int fraction = static_cast<int>((dayFraction - day) * 24 * 60 * 60);
 	int seconds = fraction % 60; fraction /= 60;
 	int minutes = fraction % 60; fraction /= 60;
 	int hours = fraction % 24;
@@ -575,7 +578,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double perihelionDistance = mpcParser.cap(7).toDouble(&ok);//AU
 	result.insert("orbit_PericenterDistance", perihelionDistance);
 
-	double eccentricity = mpcParser.cap(8).toDouble(&ok);//degrees
+	double eccentricity = mpcParser.cap(8).toDouble(&ok);//NOT degrees, but without dimension.
 	result.insert("orbit_Eccentricity", eccentricity);
 
 	double argumentOfPerihelion = mpcParser.cap(9).toDouble(&ok);//J2000.0, degrees
@@ -591,11 +594,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	if (eccentricity < 1.0)
 	{
 		// Heafner, Fundamental Ephemeris Computations, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
-		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day (0.01720209895 is Gaussian gravitational constant (symbol k))
+		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
-		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
-		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
+		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.		
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
@@ -607,8 +610,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double slopeParameter = mpcParser.cap(16).toDouble(&ok);
 	result.insert("slope_parameter", slopeParameter);
 
-	double radius = 5; //Fictitious default assumption
-	result.insert("radius", radius);
+	result.insert("radius", 5); //Fictitious default assumption
 	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
 	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
@@ -728,9 +730,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun");	 // 0.16: omit obvious default.
-	//"comet_orbit" is used for all cases:
+	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func","comet_orbit");
+	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
@@ -830,10 +833,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
+		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
-	if ((int)semiMajorAxis == 39)
+	if (static_cast<int>(semiMajorAxis) == 39)
 		objectType = "plutino";
 
 	// Classical Kuiper belt objects [https://en.wikipedia.org/wiki/Classical_Kuiper_belt_object]
@@ -841,284 +844,27 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		objectType = "cubewano";
 
 	// Calculate perihelion
-	float r = (1 - eccentricity)*semiMajorAxis;
+	const double q = (1 - eccentricity)*semiMajorAxis;
 
 	// Scattered disc objects
-	if (r > 35)
+	if (q > 35)
 		objectType = "scattered disc object";
 
 	// Sednoids [https://en.wikipedia.org/wiki/Planet_Nine]
-	if (r > 30 && semiMajorAxis > 250)
+	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
 	//Radius and albedo
 	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
 	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 	double albedo = 0.15; //Assumed
-	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
+	double radius = std::ceil(0.5*(1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude)); // Original formula is for diameter!
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
 	result.insert("type", objectType);
 
 	return result;
 }
-/* DEAD CODE. MAYBE REACTIVATE FOR SCRIPTING ACCESS
-SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements)
-{
-	SsoElements result;
-
-	enum OrbitType {Elliptic, Hyperbolic, Parabolic} orbitType;
-
-	QStringList fields = oneLineElements.split(',');
-	if (fields.isEmpty() || fields.count() < 10 || fields.count() > 14)
-		return result;
-	//qDebug() << fields;
-
-	QString name = fields.at(0).trimmed();
-	if (name.isEmpty() || fields.at(1).isEmpty())
-		return result;
-
-	QChar orbitTypeFlag = fields.at(1).trimmed().at(0);
-	if (orbitTypeFlag == 'e')
-		orbitType = Elliptic;
-	else if(orbitTypeFlag == 'h')
-		orbitType = Hyperbolic;
-	else if (orbitTypeFlag == 'p')
-		orbitType = Parabolic;
-	else
-	{
-		qDebug() << "Unrecognised orbit type:" << orbitTypeFlag;
-		return result;
-	}
-
-	//"comet_orbit" is used for all cases:
-	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func", "comet_orbit");
-
-	//Type detection and name parsing
-	QString objectType;
-	int minorPlanetNumber = 0;
-	QRegExp cometProvisionalDesignationStart("^[PCDX]/");
-	QRegExp cometDesignationStart("^(\\d)+[PCDX]/");
-	if (cometDesignationStart.indexIn(name) == 0 ||
-		cometProvisionalDesignationStart.indexIn(name) == 0)
-	{
-		objectType = "comet";
-	}
-	else
-	{
-		objectType = "asteroid";
-		QRegExp asteroidProvisionalDesignation("(\\d{4}\\s[A-Z]{2})(\\d*)$");
-		int pdIndex = asteroidProvisionalDesignation.indexIn(name);
-		if (pdIndex != 0)
-		{
-			int spaceIndex = name.indexOf(' ');
-			if (spaceIndex > 0)
-			{
-				QString numberString = name.left(spaceIndex);
-				//qDebug() << numberString;
-				minorPlanetNumber = numberString.toInt();
-				if (minorPlanetNumber)
-					name = name.right(name.length() - spaceIndex - 1);
-				//qDebug() << name;
-			}
-		}
-	}
-	if (name.isEmpty())
-	{
-		return SsoElements();
-	}
-	result.insert("name", name);	
-	if (minorPlanetNumber)
-		result.insert("minor_planet_number", minorPlanetNumber);
-
-	//Section name
-	QString sectionName = convertToGroupName(name, minorPlanetNumber);
-	if (sectionName.isEmpty())
-	{
-		return SsoElements();
-	}
-	result.insert("section_name", sectionName);
-
-	//After a name has been determined, insert the essential keys
-	result.insert("parent", "Sun");
-
-	result.insert("lighting", false);
-	result.insert("color", "1.0, 1.0, 1.0");
-	result.insert("tex_map", "nomap.png");
-
-	//Orbital elements
-	bool ok;
-	QString field;
-
-	if (orbitType == Elliptic)
-		field = fields.at(2);//Field 3
-	else
-		field = fields.at(3);//Field 4
-	double inclination = field.trimmed().toDouble(&ok);
-	if (!ok)
-		return SsoElements();
-	result.insert("orbit_Inclination", inclination);
-
-	if (orbitType == Elliptic)
-		field = fields.at(3);//Field 4
-	else if (orbitType == Hyperbolic)
-		field = fields.at(4);//Field 5
-	else
-		field = fields.at(6);//Field 7
-	double longitudeOfTheAscendingNode = field.toDouble(&ok);//J2000.0, degrees
-	if (!ok)
-		return SsoElements();
-	result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
-
-	if (orbitType == Hyperbolic)
-		field = fields.at(5);//Field 6
-	else
-		field = fields.at(4);//Field 5
-	double argumentOfPerihelion = field.toDouble(&ok);//J2000.0, degrees
-	if (!ok)
-		return SsoElements();
-	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
-
-	double semiMajorAxis = -1.;
-	if (orbitType == Elliptic)
-	{
-		field = fields.at(5);//Field 6
-		semiMajorAxis = field.toDouble(&ok);
-		if (!ok)
-			return SsoElements();
-		result.insert("orbit_SemiMajorAxis", semiMajorAxis);
-
-		field = fields.at(6);//Field 7
-		double meanDailyMotion = field.toDouble(&ok);//degrees per day
-		if (!ok)
-			return SsoElements();
-		result.insert("orbit_MeanMotion", meanDailyMotion);
-	}
-
-	double eccentricity;
-	if (orbitType == Elliptic)
-		eccentricity = fields.at(7).toDouble(&ok);//Field 8
-	else if (orbitType == Hyperbolic)
-		eccentricity = fields.at(6).toDouble(&ok);//Field 7
-	else
-	{
-		//Parabolic orbit
-		eccentricity = 1.0;
-		ok = true;
-	}
-	if (!ok)
-		return SsoElements();
-	result.insert("orbit_Eccentricity", eccentricity);
-
-	if (orbitType == Elliptic)
-	{
-		double meanAnomalyAtEpoch = fields.at(8).toDouble(&ok);//degrees
-		if (!ok)
-			return SsoElements();
-		result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
-	}
-
-	if (orbitType == Elliptic)
-		field = fields.at(9);//Field 10
-	else
-		field = fields.at(2);//Field 3
-	QStringList dateStrings = field.trimmed().split('/');
-	//TODO: Validation
-	int year	= dateStrings.at(2).toInt();
-	int month	= dateStrings.at(0).toInt();
-	double dayFraction	= dateStrings.at(1).toDouble(&ok);
-	int day = (int) dayFraction;
-	QDate date(year, month, day);
-	int fraction = (int) ((dayFraction - day) * 24 * 60 * 60);
-	int seconds = fraction % 60; fraction /= 60;
-	int minutes = fraction % 60; fraction /= 60;
-	int hours = fraction % 24;
-	//qDebug() << hours << minutes << seconds << fraction;
-	QTime time(hours, minutes, seconds, 0);
-	QDateTime dt(date, time, Qt::UTC);
-	double jd = StelUtils::qDateTimeToJd(dt);
-	if (orbitType == Elliptic)
-		result.insert("orbit_Epoch", jd);
-	else
-		result.insert("orbit_TimeAtPericenter", jd);
-
-	if (orbitType != Elliptic)
-	{
-		if (orbitType == Hyperbolic)
-			field = fields.at(7);//Field 8
-		else
-			field = fields.at(5);//Field 6
-		double perihelionDistance = field.toDouble(&ok);//AU
-		if (!ok)
-			return SsoElements();
-		result.insert("orbit_PericenterDistance", perihelionDistance);
-	}
-
-	//Magnitude
-	if (orbitType == Elliptic)
-		field = fields.at(11);//Field 12
-	else if (orbitType == Hyperbolic)
-		field = fields.at(9);//Field 10
-	else
-		field = fields.at(8);//Field 9
-	QRegExp magnitudePrefix("^([Hg]\\s*)?(\\d.+)");
-	if (magnitudePrefix.indexIn(field) != 0)
-		return SsoElements();
-	field = magnitudePrefix.cap(2);
-	double absoluteMagnitude = field.toDouble(&ok);
-	if (!ok)
-		return SsoElements();
-	result.insert("absolute_magnitude", absoluteMagnitude);
-
-	if (orbitType == Elliptic)
-		field = fields.at(12);//Field 13
-	else if (orbitType == Hyperbolic)
-		field = fields.at(10);//Field 11
-	else
-		field = fields.at(9);//Field 10
-	double slopeParameter = field.toDouble(&ok);
-	if (!ok)
-		return SsoElements();
-	result.insert("slope_parameter", slopeParameter);
-
-	//Radius and albedo
-	double albedo = 0.04;
-	double radius = 5.0;
-	if (objectType == "asteroid")
-	{
-		//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
-		//http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
-		albedo = 0.15;
-		radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
-
-		// 2:3 resonanse to Neptune
-		if ((int)semiMajorAxis == 39)
-			objectType = "plutino";
-
-		// Classical Kuiper belt objects
-		if (semiMajorAxis>=40 && semiMajorAxis<=50)
-			objectType = "cubewano";
-
-		// Calculate perihelion
-		float r = (1 - eccentricity)*semiMajorAxis;
-
-		// Scattered disc objects
-		if (r > 35)
-			objectType = "scattered disc object";
-
-		// Sednoids
-		if (r > 50 && semiMajorAxis > 150)
-			objectType = "sednoid";
-
-	}
-	result.insert("albedo", albedo);
-	result.insert("radius", radius);
-	result.insert("type", objectType);
-
-	return result;
-}
-*/
 
 QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QString filePath) const
 {
@@ -1170,8 +916,6 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
 QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const
@@ -1224,71 +968,8 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
-
-	return objectList;
 }
 
-/*
- * // UNUSED FUNCTON as of 0.16pre. Maybe reactivate as public slot for scripting.
-QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString filePath)
-{
-	QList<SsoElements> objectList;
-
-	if (!QFile::exists(filePath))
-	{
-		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
-		return objectList;
-	}
-
-	QFile xEphemElementsFile(filePath);
-	if (xEphemElementsFile.open(QFile::ReadOnly | QFile::Text ))
-	{
-		int candidatesCount = 0;
-		int lineCount = 0;
-
-		while(!xEphemElementsFile.atEnd())
-		{
-			QString oneLineElements = QString(xEphemElementsFile.readLine());
-			if(oneLineElements.endsWith('\n'))
-			{
-				oneLineElements.chop(1);
-			}
-			if (oneLineElements.isEmpty())
-			{
-				qDebug() << "Empty line skipped.";
-				continue;
-			}
-			if (oneLineElements.startsWith('#'))
-			{
-				qDebug() << "Comment skipped.";
-				continue;
-			}
-			lineCount++;
-
-			SsoElements ssObject = readXEphemOneLineElements(oneLineElements);
-			if(!ssObject.isEmpty() && !ssObject.value("section_name").toString().isEmpty())
-			{
-				objectList << ssObject;
-				candidatesCount++;
-			}
-		}
-		xEphemElementsFile.close();
-		qDebug() << "Done reading minor planet orbital elements."
-				 << "Recognized" << candidatesCount << "candidate objects"
-				 << "out of" << lineCount << "lines.";
-
-		return objectList;
-	}
-	else
-	{
-		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
-		qDebug() << "File error:" << xEphemElementsFile.errorString();
-		return objectList;
-	}
-
-	return objectList;
-}
-*/
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
 	qDebug() << "appendToSolarSystemConfigurationFile begin ... ";
@@ -1304,15 +985,17 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		return false;
 	}
 
+	// load all existing minor bodies
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 
-	//Remove duplicates (identified by name, not by section name)
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, StelIniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
 		qDebug() << "Error opening ssystem_minor.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
+	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
 	for (auto object : objectList)
 	{
 		QString name = object.value("name").toString();
@@ -1361,10 +1044,10 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			if (name.isEmpty())
 				continue;
 
-			output << endl << QString("[%1]").arg(sectionName) << endl;
+			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (auto key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;
@@ -1418,32 +1101,33 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
 	QStringList existingSections = solarSystem.childGroups();
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 	//TODO: Move to constructor?
 	// This list of elements gets temporarily deleted.
 	// GZ: Note that the original implementation assumed that the coord_func could ever change. This is not possible at least in 0.13 and later:
-	// ell_orbit is used for moons (distances in km) while comet_orbit is used for minor bodies around the sun.
-	QStringList orbitalElementsKeys;
-	orbitalElementsKeys << "coord_func"
-			<< "orbit_ArgOfPericenter"
-			<< "orbit_AscendingNode"
-			<< "orbit_Eccentricity"
-			<< "orbit_Epoch"
+	// ell_orbit is used for moons (distances in km) while kepler_orbit (comet_orbit) is used for minor bodies around the sun.
+	static const QStringList orbitalElementsKeys = {
+		"coord_func",
+		"orbit_ArgOfPericenter",
+		"orbit_AscendingNode",
+		"orbit_Eccentricity",
+		"orbit_Epoch",
 // GZ It seems to have been an error to include these.  They might simply be updated without prior deletion.
-//			<< "orbit_good"
-//			<< "dust_lengthfactor"
-//			<< "dust_brightnessfactor"
-//			<< "dust_widthfactor"
-			<< "orbit_Inclination"
-			<< "orbit_LongOfPericenter"
-			<< "orbit_MeanAnomaly"
-			<< "orbit_MeanLongitude"
-			<< "orbit_MeanMotion"
-			<< "orbit_PericenterDistance"
-			<< "orbit_Period"
-			<< "orbit_SemiMajorAxis"
-			<< "orbit_TimeAtPericenter";
+//		"orbit_good",
+//		"dust_lengthfactor",
+//		"dust_brightnessfactor",
+//		"dust_widthfactor",
+		"orbit_Inclination",
+		"orbit_LongOfPericenter",
+		"orbit_MeanAnomaly",
+		"orbit_MeanLongitude",
+		"orbit_MeanMotion",
+		"orbit_PericenterDistance",
+		"orbit_Period",
+		"orbit_SemiMajorAxis",
+		"orbit_TimeAtPericenter"};
 
 	qDebug() << "Updating objects...";
 	for (auto object : objectList)
@@ -1509,7 +1193,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
-			// GZ This seems completely useless now. Type of orbit will not change as it is always comet_orbit.
+			// GZ This seems completely useless now. Type of orbit will not change as it is always kepler_orbit.
 			for (auto key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);
@@ -1533,7 +1217,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 				}
 				else
 				{
-					//TODO: Do what, log a message?
+					qWarning() << "cannot update magnitude for type " << type;
 				}
 			}
 		}

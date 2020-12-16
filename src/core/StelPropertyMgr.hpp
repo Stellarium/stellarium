@@ -85,6 +85,18 @@ signals:
 	void propertyChanged(double value);
 };
 
+//! A StelPropertyProxy for QString-based properties
+class StelPropertyStringProxy : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	StelPropertyStringProxy(StelProperty* prop,QObject* parent);
+protected slots:
+	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+signals:
+	//! Emitted when the property value changes
+	void propertyChanged(QString value);
+};
 
 //! Wrapper around a Q_PROPERTY (see the [Qt property system](https://doc.qt.io/qt-5/properties.html) for more information) of a specific object, which provides access to the property through a unique ID.
 //! A StelProperty basically is a tuple of `<QObject* target, QMetaProperty prop>` identified by a unique string ID
@@ -289,14 +301,20 @@ public:
 	//! Returns a map from property IDs to StelProperty objects
 	const StelPropertyMap& getPropertyMap() const { return propMap; }
 
-	//! Returns the StelProperty with the specified ID, or Q_NULLPTR if not registered
-	StelProperty* getProperty(const QString& id) const;
+	//! Returns the StelProperty with the specified ID, or Q_NULLPTR if not registered.
+	//! If not registered, a warning is written to logfile unless noWarning is true.
+	//! This may be useful to suppress warnings about plugin module properties
+	//! when these are not loaded, but should else be left true.
+	StelProperty* getProperty(const QString& id, const bool noWarning=false) const;
 
 	//! Retrieves the current value of the given StelProperty,
 	//! without requiring the retrieval of its object first.
 	//! @returns the current value of the StelProperty with the ID \p id,
 	//! or an invalid QVariant when no property with the given ID is found.
-	QVariant getStelPropertyValue(const QString& id) const;
+	//! If not found, a warning is written to logfile unless noWarning is true.
+	//! This may be useful to suppress warnings about plugin module properties
+	//! when these are not loaded, but should else be left true.
+	QVariant getStelPropertyValue(const QString& id, const bool noWarning=false) const;
 	//! Sets the value of the given StelProperty,
 	//! without requiring the retrieval of its object first.
 	//! @returns \c true when the value of the StelProperty with the ID \p id

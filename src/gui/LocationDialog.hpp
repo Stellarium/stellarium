@@ -34,17 +34,18 @@ class LocationDialog : public StelDialog
 	Q_OBJECT
 public:
 	LocationDialog(QObject* parent);
-	virtual ~LocationDialog();
+	virtual ~LocationDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
-	virtual void handleDialogSizeChanged(QSizeF size);
+	virtual void handleDialogSizeChanged(QSizeF size) Q_DECL_OVERRIDE;
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_locationDialogForm* ui;
 
 	//void resizePixmap();
@@ -95,6 +96,10 @@ private slots:
 	void reportEdit();
 
 	void saveTimeZone();
+
+	//! Set timezone (to be connected to a signal from StelCore)
+	//! This has to do some GUI element juggling.
+	void setTimezone(QString tz);
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
@@ -102,17 +107,17 @@ private slots:
 	
 	//! Called when the map is clicked.
 	//! create new list for places nearby and feed into location list box.
-	void setPositionFromMap(double longitude, double latitude);
+	void setLocationFromMap(double longitude, double latitude);
 	
 	//! Called when the user activates an item from the locations list.
-	void setPositionFromList(const QModelIndex& index);
+	void setLocationFromList(const QModelIndex& index);
 	
 	//! Called when the planet is manually changed.
 	void moveToAnotherPlanet(const QString& text);
 
 	//! Called when latitude/longitude/altitude is modified
 	//! The int argument is required by the Altitude spinbox signal connection, but unused.
-	void setPositionFromCoords(int i=0);
+	void setLocationFromCoords(int i=0);
 
 	//! Called when the user clicks on the add to list button
 	void addCurrentLocationToList();
@@ -124,7 +129,7 @@ private slots:
 	void filterSitesByCountry();
 
 	//! reset city list to complete list (may have been reduced to picked list)
-	void resetCompleteList();
+	void resetLocationList();
 
 	//! called when the user wants get location from network.
 	//! This is actually a toggle setting which will influence Stellarium's behaviour
@@ -133,13 +138,15 @@ private slots:
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
 
+	// Esp. for signals from StelSkyCultureMgr
+	void populatePlanetList(QString) { populatePlanetList(); }
+
 #ifdef ENABLE_GPS
 	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.
 	//! The easiest and cleanest way to get GPS coordinates from a Linux device is via GPSD.
 	//! On Windows (and Mac?), or where GPSD is not available, we must process the NMEA-183 messages and take care of the Serial port.
 	//! The GPS connection stays open (blocking serial GPS device for other programs if not on GPSD) even with the dialog closed, until disabled again.
 	//! @param enable true to start a repeating series of GPS queries, false to stop it.
-	//void gpsQueryLocation(); // ONCE: This was the original implementation.
 	void gpsEnableQueryLocation(bool enable); // Can be toggled by QToolButton
 	//! handle a few GUI elements when GPS query returns. Should be connected to LocationMgr's signal gpsResult().
 	//! @param success true if location was found
@@ -156,8 +163,8 @@ private slots:
 	void updateTimeZoneControls(bool useCustomTimeZone);
 
 private:
-	QString lastPlanet;
-	QString customTimeZone;
+	QString lastPlanet; // for caching when switching map
+	QString customTimeZone;  // for caching when switching around timezones.
 	QStringListModel* allModel;
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;
@@ -169,7 +176,6 @@ private:
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
-
 };
 
 #endif // _LOCATIONDIALOG_HPP

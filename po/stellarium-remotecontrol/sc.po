@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2017
+# Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-08-09 20:27+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2018\n"
+"POT-Creation-Date: 2020-11-04 23:08+0700\n"
+"PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2019\n"
 "Language-Team: Sardinian (https://www.transifex.com/stellarium/teams/80998/sc/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +81,7 @@ msgstr "Errore (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Errore cricande Simbad"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
 msgstr "Chena faere nudda"
@@ -104,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "No has a podere recuperare sa lista de sos panoramas"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:524
-#: index.html:581 tablet7in.html:701 tablet7in.html:761
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
+#: index.html:685 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "nudda"
 
@@ -247,67 +251,103 @@ msgstr "Annu Zulianu"
 msgid "Julian century"
 msgstr "Seculu Zulianu"
 
-#: index.html:123 tablet7in.html:138
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr "Vista cara a orizonte in su Azimut"
+
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr "Piega Verticale de sa vista"
+
+#: index.html:154 tablet7in.html:133
+msgid "Reset"
+msgstr "Reset"
+
+#: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "FOV"
 
-#: index.html:141 tablet7in.html:229
+#: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Pone su termine de cricare. Usa TAB po navigare in sos risurtaos."
 
-#: index.html:142 tablet7in.html:230
+#: index.html:214 tablet7in.html:230
 msgid "Select and focus"
 msgstr "Sebera e focus"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Selection mode"
 msgstr "Modalidade de seberu"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center on object"
 msgstr "Pone in mesu s'ogettu"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
 msgstr "Pone in mesu et fae su zoom in s'ogettu"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
 msgstr "Sinna ebbia s'ogettu"
 
-#: index.html:170 tablet7in.html:261
+#: index.html:242 tablet7in.html:261
 msgid "Quick select"
 msgstr "Sebera in presse"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Earth"
 msgstr "Sa Terra"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Pluto"
 msgstr "Plutone"
 
-#: index.html:180 tablet7in.html:294
+#: index.html:252 tablet7in.html:294
 msgid "Current selection"
 msgstr "Sebera currente"
 
-#: index.html:196 tablet7in.html:321
+#: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
 msgstr "Luminosidade de s'Andaina de Paza:"
 
-#: index.html:200 tablet7in.html:333
+#: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr "Survelliantzia Digitale de su Chelu"
 
-#: index.html:243 tablet7in.html:399
+#: index.html:273 tablet7in.html:334
+msgid "HiPS Survey"
+msgstr "HiPS Survey"
+
+#: index.html:287 tablet7in.html:351
+msgid "Show planet orbits"
+msgstr "Fae biere sas orbitas de sos pianetas"
+
+#: index.html:288 tablet7in.html:352
+msgid "Show planet orbits only"
+msgstr "Fae biere sas orbitas ebbia"
+
+#: index.html:289 tablet7in.html:353
+msgid "Show orbit for selected planet"
+msgstr "Fae biere s'orbita de su pianeta seberau"
+
+#: index.html:290 tablet7in.html:354
+msgid "Show planet trails"
+msgstr "Fae biere sos travigos de su pianeta"
+
+#: index.html:291 tablet7in.html:355
+msgid "Show trail only for selected planet"
+msgstr "Fae biere su travigu de su pianeta seberau ebbia"
+
+#: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "Isteddos Tramudantes"
 
-#: index.html:244 tablet7in.html:400
+#: index.html:323 tablet7in.html:410
 msgid "ZHR:"
 msgstr "ZHR"
 
-#: index.html:288 tablet7in.html:452
+#: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -315,123 +355,156 @@ msgstr ""
 "Cerchios istantaneos de s'asse de sa Terra zirande in tundu a su polu "
 "ecliticale. Si podet biere solu po sa Terra."
 
-#: index.html:297 tablet7in.html:461
+#: index.html:377 tablet7in.html:472
 msgid "Solstices"
 msgstr "Solstitziu"
 
-#: index.html:298 tablet7in.html:462
+#: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
 msgstr "Colare su cuartu"
 
-#: index.html:299 tablet7in.html:463
+#: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
 msgstr "Frimada manna"
 
-#: index.html:300 tablet7in.html:464
+#: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr "Frimada pitica"
 
-#: index.html:310 tablet7in.html:474
+#: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
 msgstr "Pianeta currente"
 
-#: index.html:438 tablet7in.html:596
+#: index.html:429 tablet7in.html:524
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr ""
+
+#: index.html:447 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr ""
+
+#: index.html:502
+msgid "Objects without identifier"
+msgstr ""
+
+#: index.html:527 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "Nebulosa Lughente"
 
-#: index.html:439 tablet7in.html:597
+#: index.html:528 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "Nebulosa Iscura"
 
-#: index.html:440 tablet7in.html:598
+#: index.html:529 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "Nebulosa Planetaria"
 
-#: index.html:449 tablet7in.html:607
+#: index.html:538 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Etichetta et marcadore"
 
-#: index.html:478 tablet7in.html:636
+#: index.html:563 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr ""
+
+#: index.html:572 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Mustra illuminatzione"
 
-#: index.html:483 tablet7in.html:642
+#: index.html:577 tablet7in.html:667
 msgid "Current landscape"
 msgstr "Panorama currente"
 
-#: index.html:495 tablet7in.html:655
+#: index.html:589 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "Fae biere sas lineas cun russesa"
 
-#: index.html:500 tablet7in.html:660
+#: index.html:594 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "Fae biere sos asterismos cun s'ispessore"
 
-#: index.html:511 tablet7in.html:676
+#: index.html:598 tablet7in.html:689
+msgid "Show ray helpers with thickness"
+msgstr "Show ray helpers with thickness"
+
+#: index.html:606 tablet7in.html:699
+msgid "Show boundaries with thickness"
+msgstr "Fae biere sas lacanas a russu"
+
+#: index.html:611 tablet7in.html:704
+msgid "Constellation selection isolated"
+msgstr "Costellazione isalada seberada"
+
+#: index.html:615 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "Sa cultura currente de su chelu"
 
-#: index.html:524 tablet7in.html:701
+#: index.html:628 tablet7in.html:733
 msgid "Active script:"
 msgstr "Attiva s'iscript"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:629 tablet7in.html:734
 msgid "Run selected script"
 msgstr "Alluma s'iscript seberau"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:629 tablet7in.html:734
 msgid "Stop current script"
 msgstr "Agabba s'isxcript seberau"
 
-#: index.html:530 tablet7in.html:41 tablet7in.html:686
+#: index.html:634 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Atzionese"
 
-#: index.html:534 tablet7in.html:690
+#: index.html:638 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "Alluma atzione"
 
-#: index.html:545 tablet7in.html:725
+#: index.html:649 tablet7in.html:757
 msgid "Planet map"
 msgstr "Mappa de su pianeta"
 
-#: index.html:546 tablet7in.html:726
+#: index.html:650 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Puntadore de sa mappa de su pianeta"
 
-#: index.html:550 tablet7in.html:730
+#: index.html:654 tablet7in.html:762
 msgid "Type to search location"
 msgstr "Tipu de localidade de cricare"
 
-#: index.html:579 tablet7in.html:759
+#: index.html:683 tablet7in.html:791
 msgid "Interaction"
 msgstr "Interatzione"
 
-#: index.html:580 tablet7in.html:760
+#: index.html:684 tablet7in.html:792
 msgid "Current scene:"
 msgstr "Iscena currente:"
 
-#: index.html:583 tablet7in.html:763
+#: index.html:687 tablet7in.html:795
 msgid "View controls"
 msgstr "Controllos de Vista"
 
-#: index.html:589 tablet7in.html:769
+#: index.html:693 tablet7in.html:801
 msgid "Movement controls"
 msgstr "Controllos de movimentu"
 
-#: index.html:605 tablet7in.html:785
+#: index.html:705 tablet7in.html:813
+msgid "Torchlight"
+msgstr "Pila"
+
+#: index.html:712 tablet7in.html:820
 msgid "Scene selection"
 msgstr "Seberu de s'iscena"
 
-#: index.html:609 tablet7in.html:789
+#: index.html:716 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "Carriga s'iscena seberada"
 
-#: index.html:633 tablet7in.html:814
+#: index.html:740 tablet7in.html:849
 msgid "No response from server"
 msgstr "Su server non rispondet"
 
-#: index.html:634 tablet7in.html:815
+#: index.html:741 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Su server non rispondet de %1 segundos. Stellarium est zirande?"
 
@@ -483,25 +556,13 @@ msgstr "A bassu"
 msgid "Down/Right"
 msgstr "A bassu/A destra"
 
-#: tablet7in.html:101
-msgid "View towards horizon at Azimuth"
-msgstr "Vista cara a orizonte in su Azimut"
-
-#: tablet7in.html:123
-msgid "Vertical View offset"
-msgstr "Piega Verticale de sa vista"
-
-#: tablet7in.html:133
-msgid "Reset"
-msgstr "Reset"
-
 #: tablet7in.html:266
 msgid "Sirius"
 msgstr "Isteddu de Atzarzu"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr "Arturu"
+msgstr "Su Trubadore se sos Sette Frades"
 
 #: tablet7in.html:268
 msgid "Capella"
@@ -587,22 +648,18 @@ msgstr "Sa broca"
 msgid "Pisces"
 msgstr "Sos pisches"
 
-#: tablet7in.html:672
-msgid "Constellation selection isolated"
-msgstr "Costellazione isalada seberada"
-
-#: tablet7in.html:710
+#: tablet7in.html:742
 msgid "Favorites"
 msgstr "Favorios"
 
-#: tablet7in.html:712
+#: tablet7in.html:744
 msgid "Show 1"
 msgstr "Mustra 1"
 
-#: tablet7in.html:713
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
 msgstr "Cantzella Etichetas e Imazines"
 
-#: tablet7in.html:713
+#: tablet7in.html:745
 msgid "Cleanup Screen"
 msgstr "Puli s'ischermu"

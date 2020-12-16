@@ -10,6 +10,7 @@
 % Vel (vel@latextemplates.com)
 % Alexander Wolf (alex.v.wolf@gmail.com)
 % Georg Zotti (georg.zotti@univie.ac.at)
+% Angelo Fraietta (a.fraietta@unsw.edu.au)
 %
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
@@ -100,7 +101,7 @@
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
                                               {\centering Stellarium \StelVersion\space User Guide\\[18pt] % Book title
                                               {\Large Georg Zotti, Alexander Wolf (editors)}\\[15pt]% Author names
-                                              {\Large 2018}% Year
+                                              {\Large \the\year{}}% Year
                                              }}; % 
 \end{tikzpicture}};
 \end{tikzpicture}
@@ -115,9 +116,9 @@
 ~\vfill
 \thispagestyle{empty}
 
-\noindent Copyright \copyright\ 2014-2018 Georg Zotti.\\ % Copyright notice
-\noindent Copyright \copyright\ 2011-2018 Alexander Wolf.\\ % Copyright notice
-\noindent Copyright \copyright\ 2006-2013 Matthew Gates.\\ % Copyright notice
+\noindent Copyright \copyright\ 2014-\the\year{} Georg Zotti.\\        % Permanent copyright notice
+\noindent Copyright \copyright\ 2011-\the\year{} Alexander Wolf.\\     % Permanent copyright notice
+\noindent Copyright \copyright\ 2006-2013 Matthew Gates.\\             % Copyright notice
 \noindent Copyright \copyright\ 2013-2014 Barry Gerdes (\dag\,2014).\\ % Copyright notice
 \ifthenelse{\equal{\StelVersion}{0.15.0}}{%
 \noindent \fbox{
@@ -129,7 +130,7 @@
 
 \noindent%
 \ifhtlatex
-\url{http://stellarium.org}
+\url{https://stellarium.org}
 \else
 \textsc{stellarium.org}\\ % URL
 \fi

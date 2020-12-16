@@ -150,58 +150,6 @@ text\_color                & R,G,B & Font color for the displayed solution of th
 font\_size                 & int   & Font size for the displayed solution of the equation of time \\\bottomrule
 \end{tabularx}
 
-
-
-\newpage
-
-\section{Field of View Plugin}
-\label{sec:plugins:FieldOfView}
-
-\begin{figure}[ht]\centering
-\includegraphics[trim=0 55 0 0,clip,width=.65\textwidth]{FOV-plugin.jpg}
-\caption{Configuration dialog of Field of View plugin}
-\label{fig:plugins:FieldOfView}
-\end{figure}
-
-\noindent By default Stellarium uses smooth zooming via mouse wheel or
-keyboard shortcuts. Some users may want stepwise zooming to fixed
-values for field of view like in the \program{Cartes du
-  Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
-  \url{http://www.ap-i.net/skychart/en/start}} planetarium program,
-and this plugin provides this feature. You can edit values and use the
-keyboard for quick-setting of FOV. All values in degrees.
-
-%\section{Using the Field of View plugin}
-%\label{sec:plugins:FieldOfView:using}
-
-\begin{enumerate}
-\item Enable the tool by configuring it to ``Load at startup''.
-\item Press shortkeys for quick changes of FOV.
-\end{enumerate}
-
-\subsection{Section \big[FOV\big] in config.ini file}
-%\label{sec:plugins:FieldOfView:configuration}
-
-You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}) or edit
-\file{config.ini} file by yourself for changes of the settings for the
-Field of View plugin -- just make it carefully!
-
-\begin{center}
-\begin{tabular}{l|l|r|l}\toprule
-\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\%\midrule
-fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\%\midrule
-fov\_quick\_2  & float & 90 & Value of FOV for the shortcut \key{\ctrl+\Alt+2} \\%\midrule
-fov\_quick\_3  & float & 60 & Value of FOV for the shortcut \key{\ctrl+\Alt+3} \\%\midrule
-fov\_quick\_4  & float & 45 & Value of FOV for the shortcut \key{\ctrl+\Alt+4} \\%\midrule
-fov\_quick\_5  & float & 20 & Value of FOV for the shortcut \key{\ctrl+\Alt+5} \\%\midrule
-fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \\%\midrule
-fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\%\midrule
-fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\%\midrule
-fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \\\bottomrule
-\end{tabular}
-\end{center}
-
 \newpage
 
 \section{Pointer Coordinates Plugin}
@@ -447,7 +395,8 @@ The plugin shows the locally detected address, but depending on your network or
 if you need external access you might need to use a different one 
 --- contact your network administrator if you need help with that.
 
-\noindent The access to the remote control may optionally be restricted with a simple 
+\subsubsection{Password}
+The access to the remote control may optionally be restricted with a simple 
 password.
 
 \textbf{Warning:} \emph{currently no network encryption is used, meaning that 
@@ -457,6 +406,16 @@ plugin should generally be restricted, except if countermeasures such as VPN
 usage are taken! If you are in a home network using NAT (network access 
 translation), this should be enough for basic security except if port 
 forwarding or a DMZ is configured.}
+
+\subsubsection{CORS}
+The Web API also supports Cross-Origin Resource Sharing (CORS). By enabling CORS,
+compatible websites and web apps can be used to control your Stellarium server.
+
+Enable CORS by checking the ``Enable CORS for the following origin'' option in the
+configuration dialog. Then, enter the URL of the website you'd like to use to control
+Stellarium -- e.g.\ \url{https://telescopius.com}. Specify ``*'' to let any website
+take control. Do this at your own risk.
+
 
 \subsection{Remote Control Web Interface}
 \label{sec:plugins:RemoteControl:webinterface}
@@ -527,16 +486,18 @@ Control API, customize the web interface or access the API through another
 program, further information can be found in the plugin's 
 developer documentation\footnote{\url{http://stellarium.org/doc/head/remoteControlDoc.html}}.
 
-This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
+\subsection{Acknowledgements}
 
+This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
+\emph{ESA Summer of Code in Space}\footnote{\url{http://sophia.estec.esa.int/socis/}} programme. 
+
+If you are using this plugin in your scientific publications, please cite \citet{Zotti-etal:SEAC2016}.
 
 \newpage
 \section{Remote Sync Plugin}
 \label{sec:plugin:RemoteSync}
 
-\newFeature{0.16.0}%
-The Remote Sync plugin enables setups which connect several instances of
+The Remote Sync plugin\newFeature{v0.16.0} enables setups which connect several instances of
 Stellarium running on a network. This may be useful in installations where one
 presenter wants to allow a larger audience to follow the actions on several
 dim screens (e.g., when you need to avoid a projector's bright light in a 
@@ -647,13 +608,13 @@ but the general structure of property names like
 \subsection*{Author and Acknowledgements}
 
 This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns of the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
+\emph{ESA Summer of Code in Space}\footnote{\url{http://sophia.estec.esa.int/socis/}} programme. 
 
 % \newpage
 % \section{D-Bus Interface}
 % \label{sec:plugin:DBus}
 % 
-% [This may come as user documentation from SoCiS2018/19 (?) work]
+% [This may come as user documentation from SoCiS2020 (?) work]
 
 
 \newpage
@@ -665,20 +626,21 @@ Stellarium stores its data (orbital elements and other details) about
 solar system objects (planets, their moons, minor bodies) in two files.  
 File \file{data/ssystem\_major.ini} in the installation directory contains data for the planets and their moons.
 File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
- The file will be taken from the user data
-directory if it also exists there, which means, users can add minor
-planets or comets as they become observable by editing this file.
+The file will be taken from the user data directory if it also exists there, which means that users can add minor planets or comets as they become observable by editing this file.
 
 
-This plugin provides a window to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) where the
-latest Solar System information can be found. When this plugin is
-loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you call the configuration dialog, the first tab
-allows to import, export or reset your \file{ssystem\_minor.ini}, 
+This plugin provides access to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) server where the latest Solar System information can be found. When this plugin is
+loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you open the configuration dialog, the first tab allows to import, export or reset your \file{ssystem\_minor.ini}, 
 and also to load extra data for minor bodies in Stellarium's \file{.ini} format. 
 For example, the installation directory contains a file \file{ssystem\_1000comets.ini} which contains 
 data for over 1000 historical comets. Currently it is not possible to select only a few from that, 
-so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when 
-you don't require them.
+so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when you don't require them.
+
+\begin{figure}[th]\centering
+	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
+	\caption{Interface of Solar System Editor plugin: Configuration file tab}
+	\label{fig:SolarSystemEditor:ConfigurationFile}
+\end{figure}
 
 The second tab lists all currently loaded minor bodies (see figure~\ref{fig:SolarSystemEditor:SolarSystem}).  It is recommended
 to remove old entries of yesteryear's comets if you don't need them any
@@ -686,26 +648,22 @@ longer. Just select one or more objects and press \button{Remove}.
 If you have a very weak computer, you may want to reduce the number of
 minor bodies to just a handful to improve performance.
 
+\begin{figure}[th]\centering
+	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
+	\caption{Interface of Solar System Editor plugin: Solar System tab}
+	\label{fig:SolarSystemEditor:SolarSystem}
+\end{figure}
+
 On this tab, you also find the option to connect to the MPC and download current orbital elements, 
 or load a text file in the format provided by MPC (see figures \ref{fig:SolarSystemEditor:ImportData:InitialView} and \ref{fig:SolarSystemEditor:ImportData:FinalView}). 
-
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
-\caption{Interface of Solar System Editor plugin: Configuration file tab}
-\label{fig:SolarSystemEditor:ConfigurationFile}
-\end{figure}
-
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
-\caption{Interface of Solar System Editor plugin: Solar System tab}
-\label{fig:SolarSystemEditor:SolarSystem}
-\end{figure}
 
 \begin{figure}[th]\centering
 \includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog}
 \label{fig:SolarSystemEditor:ImportData:InitialView}
 \end{figure}
+
+Once MPC data has been downloaded, the user can select objects for updating the user's \file{ssystem\_minor.ini}.
 
 \begin{figure}[th]\centering
 \includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2.png}

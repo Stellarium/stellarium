@@ -33,10 +33,10 @@ define({
 	for i in p.finditer(potfile.read()):
 		if i.group(1):
 			if not first:
-				jsfile.write(',\n\t');
+				jsfile.write(',\n\t')
 			jsfile.write('"'+i.group(1).replace('"','\\"')+'" : \'<?= tr("'+i.group(1).replace("'","\\'")+'")?>\'')
 			first = False
-	jsfile.write("\n});");
+	jsfile.write("\n});")
 
 if __name__ == '__main__':
 	main()

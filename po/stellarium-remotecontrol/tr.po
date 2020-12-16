@@ -3,19 +3,24 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2017
+# M Durmus, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-08-09 00:14+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"POT-Creation-Date: 2020-11-04 23:08+0700\n"
+"PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: M Durmus, 2020\n"
 "Language-Team: Turkish (https://www.transifex.com/stellarium/teams/80998/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -74,9 +79,9 @@ msgstr "Hata (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Simbad araması yapılırken hata oluştu"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
 msgstr "boşta"
@@ -95,7 +100,7 @@ msgstr "bekliyor"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "İzleme listesi alınamadı."
+msgstr "İzdüşüm listesi alınamadı."
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
@@ -103,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Manzara listesi alınamadı"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:524
-#: index.html:581 tablet7in.html:701 tablet7in.html:761
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
+#: index.html:685 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-Yok-"
 
@@ -156,11 +161,11 @@ msgstr "Ana kontroller"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "Derin Gökyüzü Cismi"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Eylemler ve komut dosyaları"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
@@ -208,7 +213,7 @@ msgstr "Drakonik yıl"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gauss yılı"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
@@ -224,15 +229,15 @@ msgstr "Ayrıksı yüzyıl"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr ""
+msgstr "Ortalama tropikal ay"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr ""
+msgstr "Ortalama tropikal yıl"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr ""
+msgstr "Ortalama tropik yüzyıl"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
@@ -246,189 +251,260 @@ msgstr "Jülyen yılı"
 msgid "Julian century"
 msgstr "Jülyen yüzyılı"
 
-#: index.html:123 tablet7in.html:138
-msgid "FOV"
-msgstr ""
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr "Azimut'ta ufka doğru bakış"
 
-#: index.html:141 tablet7in.html:229
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr "Dikey Görünüm dengesi"
+
+#: index.html:154 tablet7in.html:133
+msgid "Reset"
+msgstr "Sıfırla"
+
+#: index.html:160 tablet7in.html:138
+msgid "FOV"
+msgstr "Görüş Alanı"
+
+#: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Arama terimini girin. Sonuçlarda gezinmek için TAB tuşunu kullanın."
 
-#: index.html:142 tablet7in.html:230
+#: index.html:214 tablet7in.html:230
 msgid "Select and focus"
-msgstr "Seçin ve odaklayın"
+msgstr "Seç ve odakla"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Selection mode"
 msgstr "Seçim modu"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Nesne üzerinde ortala"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
 msgstr "Nesneye ortala ve yakınlaştır"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
 msgstr "Nesneyi işaretle"
 
-#: index.html:170 tablet7in.html:261
+#: index.html:242 tablet7in.html:261
 msgid "Quick select"
 msgstr "Hızlı seçim"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Earth"
 msgstr "Dünya"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Pluto"
 msgstr "Plüton"
 
-#: index.html:180 tablet7in.html:294
+#: index.html:252 tablet7in.html:294
 msgid "Current selection"
 msgstr "Geçerli seçim"
 
-#: index.html:196 tablet7in.html:321
+#: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Samanyolu parlaklığı:"
 
-#: index.html:200 tablet7in.html:333
+#: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr "Dijitalleştirilmiş Gökyüzü Araştırması"
 
-#: index.html:243 tablet7in.html:399
+#: index.html:273 tablet7in.html:334
+msgid "HiPS Survey"
+msgstr "HiPS incelemesi"
+
+#: index.html:287 tablet7in.html:351
+msgid "Show planet orbits"
+msgstr "Gezegen yörüngelerini göster"
+
+#: index.html:288 tablet7in.html:352
+msgid "Show planet orbits only"
+msgstr "Yalnızca gezegen yörüngelerini göster"
+
+#: index.html:289 tablet7in.html:353
+msgid "Show orbit for selected planet"
+msgstr "Seçilen gezegenin yörüngesini göster"
+
+#: index.html:290 tablet7in.html:354
+msgid "Show planet trails"
+msgstr "Gezegen yollarını göster"
+
+#: index.html:291 tablet7in.html:355
+msgid "Show trail only for selected planet"
+msgstr "İzi(yolu) yalnızca seçilen gezegen için göster"
+
+#: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "Yıldız Kayması"
 
-#: index.html:244 tablet7in.html:400
+#: index.html:323 tablet7in.html:410
 msgid "ZHR:"
-msgstr ""
+msgstr "Zenithal saatlik oran:"
 
-#: index.html:288 tablet7in.html:452
+#: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
+"Ekliptik kutuplar etrafındaki hareketinde dünya ekseninin anlık daireleri. "
+"Yalnızca Dünya'da görüntülenir."
 
-#: index.html:297 tablet7in.html:461
+#: index.html:377 tablet7in.html:472
 msgid "Solstices"
 msgstr "Gündönümleri"
 
-#: index.html:298 tablet7in.html:462
+#: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
-msgstr ""
+msgstr "Çeyreklikler"
 
-#: index.html:299 tablet7in.html:463
+#: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
-msgstr ""
+msgstr "Büyük Duruş"
 
-#: index.html:300 tablet7in.html:464
+#: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Küçük Duruş"
 
-#: index.html:310 tablet7in.html:474
+#: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
-msgstr "Şu Anki Gezegen"
+msgstr "Şu Anki Gezegen:"
 
-#: index.html:438 tablet7in.html:596
+#: index.html:429 tablet7in.html:524
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr "Yansıma Bulutsuları Kataloğu (Van den Bergh, 1966)"
+
+#: index.html:447 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr "Bulutsuya (van den Bergh+, 1975) gömülü güney yıldızlarının kataloğu"
+
+#: index.html:502
+msgid "Objects without identifier"
+msgstr "Tanımlayıcı olmayan nesneler"
+
+#: index.html:527 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "Parlak Bulutsular"
 
-#: index.html:439 tablet7in.html:597
+#: index.html:528 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "Karanlık Bulutsular"
 
-#: index.html:440 tablet7in.html:598
+#: index.html:529 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "Gezegenimsi Bulutsu"
 
-#: index.html:449 tablet7in.html:607
+#: index.html:538 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Etiketler ve işaretleyiciler"
 
-#: index.html:478 tablet7in.html:636
+#: index.html:563 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "İlişkili gezegen ve konumu kullan"
+
+#: index.html:572 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Işıklandırmayı aç"
 
-#: index.html:483 tablet7in.html:642
+#: index.html:577 tablet7in.html:667
 msgid "Current landscape"
-msgstr "Mevcut manzara"
+msgstr "Şu anki manzara"
 
-#: index.html:495 tablet7in.html:655
+#: index.html:589 tablet7in.html:680
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Satırları kalınlaştırarak göster"
 
-#: index.html:500 tablet7in.html:660
+#: index.html:594 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "Yıldız kümelerini kalınlaştır"
 
-#: index.html:511 tablet7in.html:676
+#: index.html:598 tablet7in.html:689
+msgid "Show ray helpers with thickness"
+msgstr "Işın yardımcılarını kalınlaştırarak göster"
+
+#: index.html:606 tablet7in.html:699
+msgid "Show boundaries with thickness"
+msgstr "Sınırları kalınlaştırarak göster"
+
+#: index.html:611 tablet7in.html:704
+msgid "Constellation selection isolated"
+msgstr "İzole takımyıldızı seçimi"
+
+#: index.html:615 tablet7in.html:708
 msgid "Current sky culture"
-msgstr ""
+msgstr "Şu anki gökyüzü kültürü"
 
-#: index.html:524 tablet7in.html:701
+#: index.html:628 tablet7in.html:733
 msgid "Active script:"
-msgstr ""
+msgstr "Aktif komut dosyası:"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:629 tablet7in.html:734
 msgid "Run selected script"
-msgstr ""
+msgstr "Seçili komut dosyasını çalıştır"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:629 tablet7in.html:734
 msgid "Stop current script"
-msgstr ""
+msgstr "Mevcut komut dosyasını durdur"
 
-#: index.html:530 tablet7in.html:41 tablet7in.html:686
+#: index.html:634 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Eylemler"
 
-#: index.html:534 tablet7in.html:690
+#: index.html:638 tablet7in.html:722
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Çalıştırma/geçiş eylemi"
 
-#: index.html:545 tablet7in.html:725
+#: index.html:649 tablet7in.html:757
 msgid "Planet map"
 msgstr "Gezegen haritası"
 
-#: index.html:546 tablet7in.html:726
+#: index.html:650 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Gezegen harita işaretçisi"
 
-#: index.html:550 tablet7in.html:730
+#: index.html:654 tablet7in.html:762
 msgid "Type to search location"
 msgstr "Aramak istediğiniz yeri yazın"
 
-#: index.html:579 tablet7in.html:759
+#: index.html:683 tablet7in.html:791
 msgid "Interaction"
 msgstr "Etkileşim"
 
-#: index.html:580 tablet7in.html:760
+#: index.html:684 tablet7in.html:792
 msgid "Current scene:"
-msgstr ""
+msgstr "Mevcut sahne:"
 
-#: index.html:583 tablet7in.html:763
+#: index.html:687 tablet7in.html:795
 msgid "View controls"
 msgstr "Görüntüleme kontrolleri"
 
-#: index.html:589 tablet7in.html:769
+#: index.html:693 tablet7in.html:801
 msgid "Movement controls"
 msgstr "Hareket kontrolleri"
 
-#: index.html:605 tablet7in.html:785
+#: index.html:705 tablet7in.html:813
+msgid "Torchlight"
+msgstr "Fener"
+
+#: index.html:712 tablet7in.html:820
 msgid "Scene selection"
 msgstr "Sahne seçimi"
 
-#: index.html:609 tablet7in.html:789
+#: index.html:716 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "Seçili sahneyi yükle"
 
-#: index.html:633 tablet7in.html:814
+#: index.html:740 tablet7in.html:849
 msgid "No response from server"
 msgstr "Sunucu yanıt vermiyor"
 
-#: index.html:634 tablet7in.html:815
+#: index.html:741 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 saniye boyunca sunucudan yanıt gelmedi. Stellarium hala çalışıyor mu?"
@@ -481,18 +557,6 @@ msgstr "Aşağı"
 msgid "Down/Right"
 msgstr "Aşağı/Sağ"
 
-#: tablet7in.html:101
-msgid "View towards horizon at Azimuth"
-msgstr ""
-
-#: tablet7in.html:123
-msgid "Vertical View offset"
-msgstr ""
-
-#: tablet7in.html:133
-msgid "Reset"
-msgstr "Sıfırla"
-
 #: tablet7in.html:266
 msgid "Sirius"
 msgstr "Sirius"
@@ -531,11 +595,11 @@ msgstr "Orion Nebulası"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Eta Carinae Bulutsusu"
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "47 Tukana Kümesi"
 
 #: tablet7in.html:277
 msgid "Aries"
@@ -585,22 +649,18 @@ msgstr "Kova"
 msgid "Pisces"
 msgstr "Balık"
 
-#: tablet7in.html:672
-msgid "Constellation selection isolated"
-msgstr ""
-
-#: tablet7in.html:710
+#: tablet7in.html:742
 msgid "Favorites"
 msgstr "Favoriler"
 
-#: tablet7in.html:712
+#: tablet7in.html:744
 msgid "Show 1"
-msgstr ""
+msgstr "Göster 1"
 
-#: tablet7in.html:713
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
-msgstr "Katmanları ve Resimleri Sil"
+msgstr "Etiketleri ve Resimleri Kaldır"
 
-#: tablet7in.html:713
+#: tablet7in.html:745
 msgid "Cleanup Screen"
 msgstr "Temizleme Ekranı"

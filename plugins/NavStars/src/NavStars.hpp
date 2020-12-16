@@ -27,6 +27,8 @@
 
 #include <QSettings>
 
+#include "NavStarsCalculator.hpp"
+
 class StelButton;
 class StelPainter;
 class StelPropertyMgr;
@@ -34,11 +36,13 @@ class NavStarsWindow;
 
 /*! @defgroup navigationalStars Navigational Stars Plug-in
 @{
-The Navigational Stars plugin marks the 58 navigational stars of the
-Nautical Almanach and the 2102-D Rude Star Finder on the sky.
+The Navigational Stars plugin marks the 58 navigational stars of The
+Nautical Almanac and the 2102-D Rude Star Finder on the sky. Alternatively,
+the French, German, and Russian selection of navigational stars are also
+available.
 
 The NavStars class is the main class of the plug-in. It manages the list of
-navigational stars and manipulate show/hide markers of them. All markers
+navigational stars and manipulate show/hide markers of them. Markers
 are not objects!
 
 The plugin is also an example of a custom plugin that just marks existing stars.
@@ -54,6 +58,7 @@ file (section [NavigationalStars]).
 //! @class NavStars
 //! Main class of the %Navigational Stars plugin.
 //! @author Alexander Wolf
+//! @author Andy Kirkham
 //! @ingroup navigationalStars
 class NavStars : public StelModule
 {
@@ -68,9 +73,10 @@ public:
 	//! Available sets of navigational stars
 	enum NavigationalStarsSet
 	{
-		AngloAmerican,	//!< Anglo-American set (The Nautical Almanach)
+		AngloAmerican,	//!< Anglo-American set (The Nautical Almanac)
 		French,		//!< French set (Ephémérides Nautiques)
-		Russian		//!< Russian set (Морской астрономический ежегодник)
+		Russian,		//!< Russian set (Морской астрономический ежегодник)
+		German		//!< German set (Nautisches Jahrbuch)
 	};
 
 	NavStars();
@@ -98,6 +104,8 @@ public:
 
 	void populateNavigationalStarsSet(void);
 
+	QList<int> getStarsNumbers(void) { return starNumbers; }
+
 public slots:
 	//! Set flag of displaying markers of the navigational stars
 	//! Emits navStarsMarksChanged() if the value changes.
@@ -107,6 +115,21 @@ public slots:
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) const { return enableAtStartup; }
+
+	void setHighlightWhenVisible(bool b) { highlightWhenVisible=b; }
+	bool getHighlightWhenVisible(void) const { return highlightWhenVisible; }
+
+	void setLimitInfoToNavStars(bool b) { limitInfoToNavStars=b; }
+	bool getLimitInfoToNavStars(void) const { return limitInfoToNavStars; }
+
+	void setUpperLimb(bool b) { upperLimb=b; }
+	bool getUpperLimb(void) const { return upperLimb; }
+
+	void setTabulatedDisplay(bool b) { tabulatedDisplay=b; }
+	bool getTabulatedDisplay(void) const { return tabulatedDisplay; }
+
+	void setShowExtraDecimals(bool b) { NavStarsCalculator::useExtraDecimals=b; }
+	bool getShowExtraDecimals(void) const { return NavStarsCalculator::useExtraDecimals; }
 
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
@@ -124,13 +147,41 @@ public slots:
 	//! Set the set of navigational stars from its key
 	void setCurrentNavigationalStarsSetKey(QString key);
 
+	//! For the currently select object add the extraString info
+	//! in a format that matches the Nautical Almanac.
+	//REMOVE!void extraInfoStrings(const QMap<QString, double>& data, QMap<QString, QString>& strings, QString extraText = "");
+
+	//! Adds StelObject::ExtraInfo for selected object.
+	void addExtraInfo(StelCore* core);
+
+	//! For the currently select object add the extraString info
+	//! in a format that matches the Nautical Almanac.
+	void extraInfo(StelCore* core, const StelObjectP& selectedObject);
+
+	//! Used to display the extraInfoStrings in standard "paired" lines (for example gha/dev)
+	void displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
+
+	//! Used to display the extraInfoStrings in tabulated form more suited to students of CN
+	//! as found when using Nautical Almanacs.
+	void displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
+
+	//! Given two QStrings return in a format consistent with the
+	//! property setting of "withTables".
+	//! @param QString a The cell left value
+	//! @param QString b The cell right value
+	//! @return QString The representation of the extraString info.
+	QString oneRowTwoCells(const QString& a, const QString& b, const QString& extra, bool tabulatedView);
+
+	bool isPermittedObject(const QString& s);
+
+private slots:
+	//! Call when button "Save settings" in main GUI are pressed
+	void 	saveSettings() { saveConfiguration(); }
+	void setUseDecimalDegrees();
+
 signals:
 	//! Emitted when display of markers have been changed.
 	void navStarsMarksChanged(bool b);
-
-private slots:
-	//! Called setNavStarsMarks() if the value changes.
-	void starNamesChanged(const bool b);
 
 private:
 	NavStarsWindow* mainWindow;
@@ -141,6 +192,13 @@ private:
 	NavigationalStarsSet currentNSSet;
 
 	bool enableAtStartup;
+	bool starLabelsState;
+	bool upperLimb;
+	bool highlightWhenVisible;
+	bool limitInfoToNavStars;
+	bool tabulatedDisplay;	
+
+	QVector<QString> permittedObjects;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
@@ -155,7 +213,6 @@ private:
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
 };
-
 
 
 #include <QObject>

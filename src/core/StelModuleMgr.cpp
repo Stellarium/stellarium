@@ -100,7 +100,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 /*************************************************************************
  Get the corresponding module or Q_NULLPTR if can't find it.
 *************************************************************************/
-StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
+StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning) const
 {
 	StelModule* module = modules.value(moduleID, Q_NULLPTR);
 	if (module == Q_NULLPTR)
@@ -175,7 +175,6 @@ void StelModuleMgr::unloadAllPlugins()
 			continue;
 		unloadModule(d.info.id, true);
 		qDebug() << "Unloaded plugin" << d.info.id;
-	
 	}
 	// Call update now to make sure that all references to the now deleted plugins modules
 	// are removed (fix crashes at application shutdown).
@@ -190,6 +189,14 @@ void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 	{
 		pluginDescriptorList[key].loadAtStartup=b;
 	}
+}
+
+bool StelModuleMgr::isPluginLoaded(const QString &moduleID)
+{
+	if (pluginDescriptorList.contains(moduleID))
+		return pluginDescriptorList[moduleID].loaded;
+	else
+		return false;
 }
 
 /*************************************************************************
@@ -208,7 +215,7 @@ void StelModuleMgr::generateCallingLists()
 		{
 			mc.value().push_back(m);
 		}
-		qSort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
+		std::sort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
 	}
 }
 
