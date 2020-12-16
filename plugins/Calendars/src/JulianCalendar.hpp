@@ -61,15 +61,17 @@ public:
 	//! returns true for leap years
 	static bool isLeap(int year);
 
+	//! find RD number for date in the Julian calendar (may be used in other calendars!)
+	static int fixedFromJulian(QVector<int> julian);
+	//! find date in the Julian calendar from RD number (may be used in other calendars!)
+	static QVector<int> julianFromFixed(int rd);
+
 	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1.
 
 protected:
 	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
 
-private:
-	static int fixedFromJulian(QVector<int> julian);
-	static QVector<int> julianFromFixed(int rd);
 };
 
 #endif

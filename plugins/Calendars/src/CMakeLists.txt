@@ -23,6 +23,10 @@ SET(Calendars_SRCS
     MayaHaabCalendar.cpp
     MayaTzolkinCalendar.hpp
     MayaTzolkinCalendar.cpp
+    AztecXihuitlCalendar.hpp
+    AztecXihuitlCalendar.cpp
+    AztecTonalpohualliCalendar.hpp
+    AztecTonalpohualliCalendar.cpp
 )
 
 SET(Calendars_UIS

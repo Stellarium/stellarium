@@ -59,6 +59,8 @@ private slots:
 	void populateMayaLongCountParts(QVector<int> parts);
 	void populateMayaHaabParts(QVector<int> parts);
 	void populateMayaTzolkinParts(QVector<int> parts);
+	void populateAztecXihuitlParts(QVector<int> parts);
+	void populateAztecTonalpohualliParts(QVector<int> parts);
 
 	// handle changes in the editable fields. One method per calendar.
 	void julianChanged();
@@ -67,6 +69,8 @@ private slots:
 	void mayaLongCountChanged();
 	void mayaHaabChanged();
 	void mayaTzolkinChanged();
+	void aztecXihuitlChanged();
+	void aztecTonalpohualliChanged();
 
 	void resetCalendarsSettings();
 };

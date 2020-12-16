@@ -46,6 +46,8 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
 	Q_PROPERTY(bool flagShowMayaTzolkin   READ isMayaTzolkinDisplayed   WRITE showMayaTzolkin   NOTIFY showMayaTzolkinChanged)
+	Q_PROPERTY(bool flagShowAztecXihuitl  READ isAztecXihuitlDisplayed  WRITE showAztecXihuitl  NOTIFY showAztecXihuitlChanged)
+	Q_PROPERTY(bool flagShowAztecTonalpohualli READ isAztecTonalpohualliDisplayed WRITE showAztecTonalpohualli NOTIFY showAztecTonalpohualliChanged)
 
 public:
 	Calendars();
@@ -90,6 +92,8 @@ signals:
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
 	void showMayaTzolkinChanged(bool b);
+	void showAztecXihuitlChanged(bool b);
+	void showAztecTonalpohualliChanged(bool b);
 
 public slots:
 	// Setters/getters
@@ -111,6 +115,10 @@ public slots:
 	void showMayaHaab(bool b);		//!< activate display of Maya Haab
 	bool isMayaTzolkinDisplayed() const;	//!< display Maya Tzolkin?
 	void showMayaTzolkin(bool b);		//!< activate display of Maya Tzolkin
+	bool isAztecXihuitlDisplayed() const;	//!< display Aztec Xihuitl?
+	void showAztecXihuitl(bool b);		//!< activate display of Aztec Xihuitl
+	bool isAztecTonalpohualliDisplayed() const; //!< display Aztec Tonalpohualli?
+	void showAztecTonalpohualli(bool b);	//!< activate display of Aztec Tonalpohualli
 
 private:
 	// Font used for displaying text
@@ -136,6 +144,8 @@ private:
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;
 	bool flagShowMayaTzolkin;
+	bool flagShowAztecXihuitl;
+	bool flagShowAztecTonalpohualli;
 };
 
 

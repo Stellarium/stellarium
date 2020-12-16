@@ -56,19 +56,19 @@ void ISOCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-//! The order depends on the actual calendar
-QStringList ISOCalendar::getDateStrings()
-{
-	// If we don't change this, just delete this inherited version
-	QStringList list;
-	list << QString::number(parts.at(0));
-	list << QString::number(parts.at(1));
-	list << QString::number(parts.at(2));
-	list << weekday(JD);
-
-	return list;
-}
+//// get a stringlist of calendar date elements sorted from the largest to the smallest.
+//// The order depends on the actual calendar
+//QStringList ISOCalendar::getDateStrings()
+//{
+//	// If we don't change this, just delete this inherited version
+//	QStringList list;
+//	list << QString::number(parts.at(0));
+//	list << QString::number(parts.at(1));
+//	list << QString::number(parts.at(2));
+//	list << weekday(JD);
+//
+//	return list;
+//}
 
 //! get a formatted complete string for a date
 QString ISOCalendar::getFormattedDateString()
@@ -95,6 +95,6 @@ QVector<int> ISOCalendar::isoFromFixed(int rd)
 	int approx = gregorianYearFromFixed(rd-3);
 	int year   = rd>=fixedFromISO({approx+1, 1, 1}) ? approx+1 : approx;
 	int week   = StelUtils::intFloorDiv(rd-fixedFromISO({year, 1, 1}), 7)+1;
-	int day    = StelUtils::imod(rd, 7);
+	int day    = StelUtils::amod(rd, 7);
 	return {year, week, day};
 }

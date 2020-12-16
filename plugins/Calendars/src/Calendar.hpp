@@ -75,8 +75,8 @@ public:
 	//! The order depends on the actual calendar
 	virtual QStringList getDateStrings() = 0;
 
-	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() = 0;
+	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
+	virtual QString getFormattedDateString();
 
 	constexpr static const double J2000=2451545.0;
 
@@ -88,6 +88,7 @@ signals:
 protected:
 	constexpr static const double jdEpoch=-1721424.5;
 	constexpr static const double mjdEpoch=678576.0;
+	constexpr static const int bogus=-1000000; // special value to indicate invalid result in some calendars.
 
 	//! Interfacing function from Reingold/Dershowitz: Calendrical Calculations
 	//! Returns a "moment" in RD that represents JD.
@@ -131,6 +132,7 @@ protected:
 	//! Interval modulus, CC.UE 1.24
 	//! @returns x shifted to lie inside [a...b)
 	static double modInterval(double x, double a, double b);
+	static int modInterval(int x, int a, int b);
 
 
 	double JD;		//! date expressed as JD(UT), including day fraction (ready to interact with the main application)

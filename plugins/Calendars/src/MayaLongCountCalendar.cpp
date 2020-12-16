@@ -40,9 +40,10 @@ void MayaLongCountCalendar::setJD(double JD)
 	this->JD=JD;
 
 	const int rd=fixedFromJD(JD, true);
-	const int longCount=rd-mayanEpoch;
+	int longCount=rd-mayanEpoch;
+	if (longCount<0) longCount-=144000; // trick to allow negative (but infinitely decreasing) baktun...
 	const int baktun     =longCount / 144000;
-	const int dayOfBaktun=longCount % 144000;
+	const int dayOfBaktun=StelUtils::imod(longCount, 144000); // ensure positive numbers from now...
 	const int katun      =dayOfBaktun / 7200;
 	const int dayOfKatun =dayOfBaktun % 7200;
 	const int tun        =dayOfKatun / 360;
@@ -99,7 +100,8 @@ void MayaLongCountCalendar::setDate(QVector<int> parts)
 	const int uinal =parts.at(3);
 	const int kin   =parts.at(4);
 
-	const int fixedFromMayanLongCount=mayanEpoch+baktun*144000+katun*7200+tun*360+uinal*20+kin;
+	int fixedFromMayanLongCount=mayanEpoch+baktun*144000+katun*7200+tun*360+uinal*20+kin;
+	//if (baktun<0) fixedFromMayanLongCount+=144000; // allow behaviour with negative baktun.
 
 	//JD=jdFromFixed(fixedFromMayanLongCount)+dayFraction;
 

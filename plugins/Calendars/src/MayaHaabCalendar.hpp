@@ -50,9 +50,17 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
 
+	//! get tzolkin name index of Haab year bearer (name of 0 Pop) from Haab date
+	//! This must be one of 2, 7, 12, 17. (TODO: write a test!)
+	static int mayanYearBearerFromFixed(int rd);
+
+	//! get RD of a given calendar round date on or before rd. They repeat every 18980 days.
+	static int mayanCalendarRoundOnOrBefore(QVector<int>haab, QVector<int>tzolkin, int rd);
+
 private:
-	inline static int mayanHaabOrdinal(int month, int day) {return (month-1)*20+day;}
+	inline static int mayanHaabOrdinal(QVector<int> haab) {return (haab.at(0)-1)*20+haab.at(1);}
 	static int mayanHaabOnOrBefore(QVector<int> haab, int rd);
+	static QVector<int> mayanHaabFromFixed(int rd);
 	static QMap<int, QString> monthNames;
 	static const int mayanHaabEpoch;
 };

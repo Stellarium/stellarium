@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-const int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal(4,20);
+const int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal({4,20});
 
 MayaTzolkinCalendar::MayaTzolkinCalendar(double jd): Calendar(jd)
 {
@@ -68,7 +68,7 @@ void MayaTzolkinCalendar::setJD(double JD)
 	const int number = StelUtils::amod(count, 13);
 	const int name = StelUtils::amod(count, 20);
 
-	parts = { number, name};
+	parts = { number, name };
 
 	emit partsChanged(parts);
 }
@@ -78,21 +78,12 @@ void MayaTzolkinCalendar::setJD(double JD)
 QStringList MayaTzolkinCalendar::getDateStrings()
 {
 	QStringList list;
-	list << QString::number(std::lround(parts.at(0)));
-	list << tzolkinNames.value(std::lround(parts.at(1)));
+	list << QString::number(parts.at(0));
+	list << tzolkinNames.value(parts.at(1));
 
 	return list;
 }
 
-
-// get a formatted complete string for a date
-QString MayaTzolkinCalendar::getFormattedDateString()
-{
-	QStringList str=getDateStrings();
-	return QString("%1 %2")
-			.arg(str.at(0))
-			.arg(str.at(1));
-}
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
@@ -111,5 +102,15 @@ void MayaTzolkinCalendar::setDate(QVector<int> parts)
 
 int MayaTzolkinCalendar::mayanTzolkinOnOrBefore(QVector<int> tzolkin, int rd)
 {
-	return rd-((rd-mayanTzolkinEpoch-mayanTzolkinOrdinal(std::lround(tzolkin.at(0)), std::lround(tzolkin.at(1))))  % 260 );
+	return modInterval(mayanTzolkinOrdinal(tzolkin)+mayanTzolkinEpoch, rd, rd-260);
+}
+
+//! usually internal, but used by MayaHaabCalendar.
+QVector<int> MayaTzolkinCalendar::mayanTzolkinFromFixed(int rd)
+{
+	const int count=rd-mayanTzolkinEpoch+1;
+	const int number = StelUtils::amod(count, 13);
+	const int name = StelUtils::amod(count, 20);
+
+	return { number, name };
 }

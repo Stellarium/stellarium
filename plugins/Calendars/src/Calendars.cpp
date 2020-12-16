@@ -36,6 +36,8 @@
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
+#include "AztecXihuitlCalendar.hpp"
+#include "AztecTonalpohualliCalendar.hpp"
 
 #include "CalendarsDialog.hpp"
 /*************************************************************************
@@ -75,7 +77,9 @@ Calendars::Calendars():
 	flagShowChinese(true),
 	flagShowMayaLongCount(true),
 	flagShowMayaHaab(true),
-	flagShowMayaTzolkin(true)
+	flagShowMayaTzolkin(true),
+	flagShowAztecXihuitl(true),
+	flagShowAztecTonalpohualli(true)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -122,6 +126,7 @@ double Calendars::getCallOrder(StelModuleActionName actionName) const
 *************************************************************************/
 void Calendars::init()
 {
+	loadSettings();
 	// Create action for enable/disable & hook up signals
 	QString section=N_("Calendars");
 	addAction("actionShow_Calendars",         section, N_("Calendars"), "enabled", "Alt+K");
@@ -159,6 +164,8 @@ void Calendars::init()
 	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
 	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
+	calendars.insert("AztecXihuitl", new AztecXihuitlCalendar(jd));
+	calendars.insert("AztecTonalpohualli", new AztecTonalpohualliCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
@@ -170,14 +177,16 @@ void Calendars::init()
 void Calendars::loadSettings()
 {
 	// Now activate calendar displays if needed.
-	enable(           conf->value("Calendars/show", true).toBool());
-	showJulian(       conf->value("Calendars/show_julian", true).toBool());
-	showGregorian(    conf->value("Calendars/show_gregorian", true).toBool());
-	showISO(          conf->value("Calendars/show_iso", true).toBool());
-	showChinese(      conf->value("Calendars/show_chinese", false).toBool());
-	showMayaLongCount(conf->value("Calendars/show_maya_long_count", false).toBool());
-	showMayaHaab(     conf->value("Calendars/show_maya_haab", false).toBool());
-	showMayaTzolkin(  conf->value("Calendars/show_maya_tzolkin", false).toBool());
+	enable(                conf->value("Calendars/show", true).toBool());
+	showJulian(            conf->value("Calendars/show_julian", true).toBool());
+	showGregorian(         conf->value("Calendars/show_gregorian", true).toBool());
+	showISO(               conf->value("Calendars/show_iso", true).toBool());
+	showChinese(           conf->value("Calendars/show_chinese", false).toBool());
+	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", false).toBool());
+	showMayaHaab(          conf->value("Calendars/show_maya_haab", false).toBool());
+	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", false).toBool());
+	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", false).toBool());
+	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", false).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -211,6 +220,8 @@ void Calendars::draw(StelCore* core)
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
+	if (flagShowAztecXihuitl)  oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",   "calendar")).arg(getCal("AztecXihuitl")->getFormattedDateString());
+	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli", "calendar")).arg(getCal("AztecTonalpohualli")->getFormattedDateString());
 	oss << "</table>";
 	Vec3f color(1);
 	if (StelApp::getInstance().getFlagOverwriteInfoColor())
@@ -333,5 +344,27 @@ void Calendars::showMayaTzolkin(bool b)
 		flagShowMayaTzolkin=b;
 		conf->setValue("Calendars/show_maya_tzolkin", b);
 		emit showMayaTzolkinChanged(b);
+	}
+}
+
+bool Calendars::isAztecXihuitlDisplayed() const { return flagShowAztecXihuitl;}
+void Calendars::showAztecXihuitl(bool b)
+{
+	if (b!=flagShowAztecXihuitl)
+	{
+		flagShowAztecXihuitl=b;
+		conf->setValue("Calendars/show_aztec_xihuitl", b);
+		emit showAztecXihuitlChanged(b);
+	}
+}
+
+bool Calendars::isAztecTonalpohualliDisplayed() const { return flagShowAztecTonalpohualli;}
+void Calendars::showAztecTonalpohualli(bool b)
+{
+	if (b!=flagShowAztecTonalpohualli)
+	{
+		flagShowAztecTonalpohualli=b;
+		conf->setValue("Calendars/show_aztec_tonalpohualli", b);
+		emit showAztecTonalpohualliChanged(b);
 	}
 }

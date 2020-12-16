@@ -47,13 +47,18 @@ public:
 	//! dayNumber[1..13]-name
 	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
 
-	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	//! usually internal, but used by MayaHaabCalendar.
+	static QVector<int> mayanTzolkinFromFixed(int rd);
+
+	//! return Tzolkin name for index [0...19]
+	static QString tzolkinName(int i) {return tzolkinNames.value(i);}
+
+	// ordinal of {number, name}
+	inline static int mayanTzolkinOrdinal(QVector<int> tzolkin) {return (tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))) % 260;}
+	static const int mayanTzolkinEpoch;
 
 private:
-	inline static int mayanTzolkinOrdinal(int number, int name) {return (number - 1 + 39*(number-name)) % 260;}
 	static int mayanTzolkinOnOrBefore(QVector<int> tzolkin, int rd);
-	static const int mayanTzolkinEpoch;
 	static QMap<int, QString> tzolkinNames;
 };
 

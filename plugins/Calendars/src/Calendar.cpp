@@ -22,12 +22,23 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+QString Calendar::getFormattedDateString()
+{
+	return getDateStrings().join(' ');
+}
+
+
 double Calendar::modInterval(double x, double a, double b)
 {
 	if (fuzzyEquals(a,b)) return x;
 	return x-(b-a)*StelUtils::fmodpos(x-a, b-a);
 }
 
+int Calendar::modInterval(int x, int a, int b)
+{
+	if (a==b) return x;
+	return x-(b-a)*StelUtils::imod(x-a, b-a);
+}
 
 double Calendar::momentFromJD(double jd, bool respectUTCoffset)
 {

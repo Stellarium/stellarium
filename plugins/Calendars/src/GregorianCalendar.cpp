@@ -40,7 +40,7 @@ void GregorianCalendar::setJD(double JD)
 // Year-Month[1...12]-Day[1...31]
 void GregorianCalendar::setDate(QVector<int> parts)
 {
-	qDebug() << "GregorianCalendar::setDate:" << parts;
+	//qDebug() << "GregorianCalendar::setDate:" << parts;
 	this->parts=parts;
 
 	double rd=fixedFromGregorian(parts);
@@ -108,13 +108,14 @@ int GregorianCalendar::fixedFromGregorian(QVector<int> gregorian)
 // @return RD date of the n-th k-day in a date on the Gregorian calendar
 int GregorianCalendar::nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay)
 {
-	if (n==0)
-	{
-		qWarning() << "GregorianCalendar::nthKday called with n==0";
-		return 0; // This is a meaningful result, but still nonsense.
-		Q_ASSERT(n!=0);
-	}
-	else if (n>0)
+//	if (n==0)
+//	{
+//		qWarning() << "GregorianCalendar::nthKday called with n==0";
+//		return bogus;
+//		Q_ASSERT(n!=0);
+//	}
+//	else
+		if (n>=0)
 		return 7*n+kdayBefore(k, fixedFromGregorian({gYear, gMonth, gDay}));
 	else
 		return 7*n+kdayAfter(k, fixedFromGregorian({gYear, gMonth, gDay}));

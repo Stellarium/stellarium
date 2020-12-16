@@ -19,11 +19,12 @@
 #include "StelTranslator.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
+#include "MayaTzolkinCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-const int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal(18,8);
+const int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal({18, 8});
 
 MayaHaabCalendar::MayaHaabCalendar(double jd): Calendar(jd)
 {
@@ -63,7 +64,7 @@ void MayaHaabCalendar::setJD(double JD)
 	this->JD=JD;
 
 	const int rd=fixedFromJD(JD, true);
-	const int count=(rd-mayanHaabEpoch) % 365;
+	const int count=StelUtils::imod(rd-mayanHaabEpoch, 365);
 	const int day = count % 20;
 	const int month=count/20 + 1;
 
@@ -73,12 +74,12 @@ void MayaHaabCalendar::setJD(double JD)
 }
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
-// baktun-katun-tun-uinal-kin
+// monthName-dayNumber
 QStringList MayaHaabCalendar::getDateStrings()
 {
 	QStringList list;
-	list << monthNames.value(std::lround(parts.at(0)));
-	list << QString::number(std::lround(parts.at(1)));
+	list << monthNames.value(parts.at(0));
+	list << QString::number(parts.at(1));
 
 	return list;
 }
@@ -111,5 +112,39 @@ void MayaHaabCalendar::setDate(QVector<int> parts)
 
 int MayaHaabCalendar::mayanHaabOnOrBefore(QVector<int> haab, int rd)
 {
-	return rd-((rd-mayanHaabEpoch-mayanHaabOrdinal(std::lround(haab.at(0)), std::lround(haab.at(1))))  % 365 );
+	return modInterval(mayanHaabOrdinal(haab)+mayanHaabEpoch, rd, rd-365);
 }
+
+QVector<int> MayaHaabCalendar::mayanHaabFromFixed(int rd)
+{
+	const int count=StelUtils::imod(rd-mayanHaabEpoch, 365);
+	const int day = count % 20;
+	const int month=count/20 + 1;
+	return {month, day};
+}
+
+// get tzolkin name index from Haab date
+int MayaHaabCalendar::mayanYearBearerFromFixed(int rd)
+{
+	QVector<int> haab=mayanHaabFromFixed(rd);
+	if (haab.at(0)==19)
+			return bogus;
+	const int x=mayanHaabOnOrBefore({1, 0}, rd);
+	QVector<int> tzolkin=MayaTzolkinCalendar::mayanTzolkinFromFixed(x);
+	QVector<int> check({2, 7, 12, 17});
+	Q_ASSERT(check.contains(tzolkin.at(1)));
+	return tzolkin.at(1);
+}
+
+// get RD of a calendar round date
+int MayaHaabCalendar::mayanCalendarRoundOnOrBefore(QVector<int>haab, QVector<int>tzolkin, int rd)
+{
+	const int haabCount=mayanHaabOrdinal(haab)+mayanHaabEpoch;
+	const int tzolkinCount=MayaTzolkinCalendar::mayanTzolkinOrdinal(tzolkin)+MayaTzolkinCalendar::mayanTzolkinEpoch;
+	const int diff=tzolkinCount-haabCount;
+	if (diff % 5 ==0)
+		return modInterval(haabCount+365*diff, rd, rd-18980);
+	else
+		return bogus;
+}
+

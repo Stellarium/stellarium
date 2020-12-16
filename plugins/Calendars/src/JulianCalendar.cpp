@@ -99,7 +99,7 @@ QString JulianCalendar::getFormattedDateString()
 // Time is not changed!
 void JulianCalendar::setDate(QVector<int> parts)
 {
-	qDebug() << "JulianCalendar::setDate:" << parts;
+	//qDebug() << "JulianCalendar::setDate:" << parts;
 	this->parts=parts;
 	// For the Julian calendar, we really have no year 0 in this plugin.
 	Q_ASSERT(parts.at(0) != 0);
