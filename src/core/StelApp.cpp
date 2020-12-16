@@ -113,10 +113,6 @@ Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
 Q_IMPORT_PLUGIN(CalendarsStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_COMPASSMARKS
-Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
 #endif
