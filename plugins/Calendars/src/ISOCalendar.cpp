@@ -71,7 +71,7 @@ void ISOCalendar::setDate(QVector<int> parts)
 //}
 
 //! get a formatted complete string for a date
-QString ISOCalendar::getFormattedDateString()
+QString ISOCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	return QString("%1, %2 %3, %4")

@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-QString Calendar::getFormattedDateString()
+QString Calendar::getFormattedDateString() const
 {
 	return getDateStrings().join(' ');
 }

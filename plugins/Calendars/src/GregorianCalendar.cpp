@@ -54,7 +54,7 @@ void GregorianCalendar::setDate(QVector<int> parts)
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // Year, Month, MonthName, Day, DayName
 // Gregorian with year zero, negative years and no AD/BC counting.
-QStringList GregorianCalendar::getDateStrings()
+QStringList GregorianCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << QString::number(parts.at(0));
@@ -66,7 +66,7 @@ QStringList GregorianCalendar::getDateStrings()
 }
 
 // get a formatted complete string for a date
-QString GregorianCalendar::getFormattedDateString()
+QString GregorianCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TODO: Maybe use QDate with user's localisation here? Weekday has to be taken from our results, though.

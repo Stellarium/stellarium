@@ -59,7 +59,7 @@ public:
 	virtual void setJD(double JD) = 0;
 
 	//! Get Julian day number from a calendar date
-	virtual double getJD() { return JD;}
+	virtual double getJD() const { return JD;}
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! This triggers the jdChanged() signal
@@ -68,15 +68,15 @@ public:
 
 	//! get a vector of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
-	virtual QVector<int> getDate() { return parts; }
+	virtual QVector<int> getDate() const { return parts; }
 
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
-	virtual QStringList getDateStrings() = 0;
+	virtual QStringList getDateStrings() const = 0;
 
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
-	virtual QString getFormattedDateString();
+	virtual QString getFormattedDateString() const;
 
 	constexpr static const double J2000=2451545.0;
 

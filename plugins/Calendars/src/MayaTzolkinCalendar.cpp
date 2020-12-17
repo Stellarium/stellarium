@@ -27,7 +27,7 @@ const int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpo
 
 MayaTzolkinCalendar::MayaTzolkinCalendar(double jd): Calendar(jd)
 {
-	retranslate();
+	MayaTzolkinCalendar::retranslate();
 }
 
 QMap<int, QString> MayaTzolkinCalendar::tzolkinNames;
@@ -75,7 +75,7 @@ void MayaTzolkinCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList MayaTzolkinCalendar::getDateStrings()
+QStringList MayaTzolkinCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << QString::number(parts.at(0));

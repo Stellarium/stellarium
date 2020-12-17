@@ -22,7 +22,7 @@
 #include "Calendar.hpp"
 
 //! The Maya Long Count is a 5-part integer day count number in base 20.
-//! The implementation follows CC.ME
+//! The implementation follows CC.UE
 class MayaLongCountCalendar : public Calendar
 {
 	Q_OBJECT
@@ -43,14 +43,12 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! baktun[0..19]-katun[0..19]-tun[0..19]-uinal[0..17]-kin[0..19]
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 	static const long int mayanEpoch;
-
-protected:
 };
 
 #endif

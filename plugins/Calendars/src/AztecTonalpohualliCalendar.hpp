@@ -45,7 +45,7 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-name
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	// ordinal of {number, name} (typo in book...)
 	inline static int aztecTonalpohualliOrdinal(QVector<int>tonalpohualli) {return (tonalpohualli.at(0) - 1 + 39*(tonalpohualli.at(0)-tonalpohualli.at(1))) % 260;}

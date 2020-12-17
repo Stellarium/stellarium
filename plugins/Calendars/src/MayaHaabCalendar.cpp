@@ -75,7 +75,7 @@ void MayaHaabCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // monthName-dayNumber
-QStringList MayaHaabCalendar::getDateStrings()
+QStringList MayaHaabCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << monthNames.value(parts.at(0));
@@ -86,7 +86,7 @@ QStringList MayaHaabCalendar::getDateStrings()
 
 
 // get a formatted complete string for a date
-QString MayaHaabCalendar::getFormattedDateString()
+QString MayaHaabCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	return QString("%1 %2")

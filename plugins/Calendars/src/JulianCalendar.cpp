@@ -70,7 +70,7 @@ void JulianCalendar::setJD(double JD)
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // Year, Month, MonthName, Day, DayName
 // Again, in this plugin only, note no year zero, and AD/BC counting.
-QStringList JulianCalendar::getDateStrings()
+QStringList JulianCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << QString("%1 %2").arg(abs(parts.at(0))).arg(parts.at(0)>0 ? q_("A.D.") : q_("B.C."));
@@ -82,7 +82,7 @@ QStringList JulianCalendar::getDateStrings()
 }
 
 // get a formatted complete string for a date
-QString JulianCalendar::getFormattedDateString()
+QString JulianCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TODO: Maybe use QDate with user's localisation here? Weekday has to be taken from our results, though.

@@ -57,32 +57,23 @@ void MayaLongCountCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList MayaLongCountCalendar::getDateStrings()
+QStringList MayaLongCountCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString::number(std::lround(parts.at(0)));
-	list << QString::number(std::lround(parts.at(1)));
-	list << QString::number(std::lround(parts.at(2)));
-	list << QString::number(std::lround(parts.at(3)));
-	list << QString::number(std::lround(parts.at(4)));
+	list << QString::number(parts.at(0));
+	list << QString::number(parts.at(1));
+	list << QString::number(parts.at(2));
+	list << QString::number(parts.at(3));
+	list << QString::number(parts.at(4));
 
 	return list;
 }
 
-
 // get a formatted complete string for a date
-QString MayaLongCountCalendar::getFormattedDateString()
+QString MayaLongCountCalendar::getFormattedDateString() const
 {
-	QStringList str=getDateStrings();
-	return QString("%1.%2.%3.%4.%5")
-			.arg(str.at(0)) // baktun
-			.arg(str.at(1)) // katun
-			.arg(str.at(2)) // tun
-			.arg(str.at(3)) // uinal
-			.arg(str.at(4)); // kin
+	return getDateStrings().join('.');
 }
-
-
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin

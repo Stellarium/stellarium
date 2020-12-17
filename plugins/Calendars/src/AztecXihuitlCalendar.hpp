@@ -47,10 +47,10 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! monthName-day[1..20]
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 	//! Aztec date of fall of Tenochtitlan
 	static const int aztecCorrelation;

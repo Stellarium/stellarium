@@ -50,10 +50,10 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 	//! return name of week day. This is actually independent from any calendar, just a modulo of JD.
 	static QString weekday(double jd);

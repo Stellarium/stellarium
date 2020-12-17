@@ -78,7 +78,7 @@ void AztecXihuitlCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // monthName-dayNumber
-QStringList AztecXihuitlCalendar::getDateStrings()
+QStringList AztecXihuitlCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << monthNames.value(parts.at(0));
@@ -89,7 +89,7 @@ QStringList AztecXihuitlCalendar::getDateStrings()
 
 
 // get a formatted complete string for a date
-QString AztecXihuitlCalendar::getFormattedDateString()
+QString AztecXihuitlCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	return QString("%1 %2")

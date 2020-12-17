@@ -288,7 +288,7 @@ void Calendars::showGregorian(bool b)
 	if (b!=flagShowGregorian)
 	{
 		flagShowGregorian=b;
-		conf->setValue("Calendars/show_julian", b);
+		conf->setValue("Calendars/show_gregorian", b);
 		emit showGregorianChanged(b);
 	}
 }

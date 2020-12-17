@@ -45,7 +45,7 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-name
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! usually internal, but used by MayaHaabCalendar.
 	static QVector<int> mayanTzolkinFromFixed(int rd);

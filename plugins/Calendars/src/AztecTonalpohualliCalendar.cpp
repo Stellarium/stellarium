@@ -27,7 +27,7 @@ const int AztecTonalpohualliCalendar::aztecTonalpohualliCorrelation=AztecXihuitl
 
 AztecTonalpohualliCalendar::AztecTonalpohualliCalendar(double jd) : MayaTzolkinCalendar(jd)
 {
-	retranslate();
+	AztecTonalpohualliCalendar::retranslate();
 }
 
 QMap<int, QString> AztecTonalpohualliCalendar::tonalpohualliNames;
@@ -75,7 +75,7 @@ void AztecTonalpohualliCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-QStringList AztecTonalpohualliCalendar::getDateStrings()
+QStringList AztecTonalpohualliCalendar::getDateStrings() const
 {
 	QStringList list;
 	list << QString::number(parts.at(0));

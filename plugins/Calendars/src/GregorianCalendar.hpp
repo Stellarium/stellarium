@@ -46,10 +46,10 @@ public:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
-	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 	//! returns true for leap years
 	static bool isLeap(int year);
@@ -59,15 +59,15 @@ public:
 protected:
 	//! auxiliary functions from CC.UE ch2.5
 	//! Return R.D. of date in the Gregorian calendar.
-	int fixedFromGregorian(QVector<int> gregorian);
+	static int fixedFromGregorian(QVector<int> gregorian);
 
-	int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
-	int gregorianYearFromFixed(int rd);
+	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
+	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
-	QVector<int> gregorianFromFixed(int rd);
+	static QVector<int> gregorianFromFixed(int rd);
 
 	//! @return RD date of the n-th k-day
-	int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
+	static int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
 };
 
 #endif

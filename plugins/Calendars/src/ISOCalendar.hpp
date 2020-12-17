@@ -44,11 +44,11 @@ public:
 //	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() Q_DECL_OVERRIDE;
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 private:
-	QVector<int> isoFromFixed(int rd);
-	int fixedFromISO(QVector<int> iso);
+	static QVector<int> isoFromFixed(int rd);
+	static int fixedFromISO(QVector<int> iso);
 };
 
 #endif
