@@ -27,6 +27,27 @@
 #include <QTimeLine>
 #include <QTimer>
 #include <QCursor>
+#include <QEasingCurve>
+
+//! @class Smoother
+//! Compute smooth animation for a given float value.
+//! Used to smooth out the fov animations.
+class Smoother
+{
+public:
+	double getValue() const;
+	double getAim() const { return aim; }
+	void setTarget(double start, double aim, double duration);
+	void update(double dt);
+	bool finished() const;
+
+private:
+	QEasingCurve easingCurve;
+	double start;
+	double aim;
+	double duration;
+	double progress;
+};
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -515,23 +536,9 @@ private:
 	// Time mouse control
 	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
 
-	//! @internal
-	//! Store data for auto-zoom.
-	// Components:
-	// startFov: field of view at start
-	// aimFov: intended field of view at end of zoom move
-	// speed: rate of change. UNITS?
-	// coef: set to 0 at begin of zoom, will increase to 1 during autozoom motion.
-	struct AutoZoom
-	{
-		double startFov;
-		double aimFov;
-		float speed;
-		float coef;
-	};
+	// Internal state for smooth zoom animation.
+	Smoother zoomMove;
 
-	// Automove
-	AutoZoom zoomMove; // Current auto movement
 	bool flagAutoZoom; // Define if autozoom is on or off
 	bool flagAutoZoomOutResetsDirection;
 

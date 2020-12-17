@@ -265,13 +265,6 @@ StelApp::StelApp(StelMainView *parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
-
-	wheelEventTimer = new QTimer(this);
-	wheelEventTimer->setInterval(25);
-	wheelEventTimer->setSingleShot(true);
-
-	// Reset delta accumulators
-	wheelEventDelta[0] = wheelEventDelta[1] = 0;
 }
 
 /*************************************************************************
@@ -855,31 +848,13 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 }
 
 // Handle mouse wheel.
-// This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
-
-	const int deltaIndex = event->orientation() == Qt::Horizontal ? 0 : 1;
-	wheelEventDelta[deltaIndex] += event->delta();
-	if (wheelEventTimer->isActive())
-	{
-		// Collect the values. If delta is small enough we wait for more values or the end
-		// of the timer period to process them.
-		if (qAbs(wheelEventDelta[deltaIndex]) < 120)
-			return;
-	}
-
-	wheelEventTimer->start();
-
-	// Create a new event with the accumulated delta
 	QWheelEvent deltaEvent(QPoint(qRound(event->pos().x()*devicePixelsPerPixel), qRound(event->pos().y()*devicePixelsPerPixel)),
 			       QPoint(qRound(event->globalPos().x()*devicePixelsPerPixel), qRound(event->globalPos().y()*devicePixelsPerPixel)),
-	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
+	                       event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
-	// Reset the collected values
-	wheelEventDelta[deltaIndex] = 0;
-
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
 		i->handleMouseWheel(&deltaEvent);
