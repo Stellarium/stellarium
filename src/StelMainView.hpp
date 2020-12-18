@@ -107,6 +107,15 @@ public:
 
 	//! Returns the information about the GL context, this does not require the context to be active.
 	GLInfo getGLInformation() const { return glInfo; }
+
+	//! make screenshot and retrieve it as QImage. This observes custom screenshot size, HiDPI etc.
+	//! @returns true on success (valid image), false if something went wrong.
+	//! @arg im pointer to QImage.
+	//! @arg useCustomSize obey properties for custom size
+	//! @arg invert make black stars on white background
+	//! @arg nightmode red-filtered view
+	bool getScreenshot(QImage &im, bool useCustomSize, bool invert, bool nightmode);
+
 public slots:
 
 	//! Set whether fullscreen is activated or not

@@ -145,18 +145,21 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec3f StelObject::getRTSTime(StelCore *core) const
+Vec3f StelObject::getRTSTime(StelCore *core, double overrideAltitude) const
 {
-	return computeRTSTime(core);
+	return computeRTSTime(core, overrideAltitude);
 }
 
-Vec3f StelObject::computeRTSTime(StelCore *core) const
+Vec3f StelObject::computeRTSTime(StelCore *core, double overrideAltitude) const
 {
 	double hz = 0.;
 	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
 		hz = +0.7275*0.95; // horizon parallax factor
 	else if (getEnglishName()=="Sun")
 		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
+
+	if (overrideAltitude != 0.)
+		hz=overrideAltitude;
 	hz *= M_PI_180;
 
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())

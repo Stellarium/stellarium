@@ -75,7 +75,7 @@ public:
 
 	virtual void init();
 	virtual void deinit();
-	virtual void update(double) {;}
+	virtual void update(double) {}
 	virtual void draw(StelCore *core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual bool configureGui(bool show);

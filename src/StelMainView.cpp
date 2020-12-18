@@ -1491,9 +1491,8 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 	emit(screenshotRequested());
 }
 
-void StelMainView::doScreenshot(void)
+bool StelMainView::getScreenshot(QImage &im, bool useCustomSize, bool invert, bool nightmode)
 {
-	QFileInfo shotDir;
 #ifdef USE_OLD_QGLWIDGET
 	QImage im = glWidget->grabFrameBuffer();
 #else
@@ -1503,12 +1502,12 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	const double pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	int imgWidth =stelScene->width();
 	int imgHeight=stelScene->height();
-	bool nightModeWasEnabled=nightModeEffect->isEnabled();
+	const bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
-	if (flagUseCustomScreenshotSize)
+	if (useCustomSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
 		QOpenGLContext *context = QOpenGLContext::currentContext();
@@ -1546,7 +1545,7 @@ void StelMainView::doScreenshot(void)
 		else
 		{
 			qCWarning(mainview) << "No GL context for screenshot! Aborting.";
-			return;
+			return false;
 		}
 	}
 	// The texture format depends on used GL version. RGB is fine on OpenGL. on GLES, we must use RGBA and circumvent problems with a few more steps.
@@ -1591,7 +1590,6 @@ void StelMainView::doScreenshot(void)
 	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
 	painter.end();
 
-	QImage im;
 	if (isGLES)
 	{
 		// We have RGBA texture with possibly empty spots when atmosphere was off.
@@ -1619,7 +1617,7 @@ void StelMainView::doScreenshot(void)
 	}
 #endif
 
-	if (nightModeWasEnabled)
+	if (nightmode)
 	{
 		for (int row=0; row<im.height(); ++row)
 			for (int col=0; col<im.width(); ++col)
@@ -1629,9 +1627,18 @@ void StelMainView::doScreenshot(void)
 				im.setPixel(col, row, qRgb(gray, 0, 0));
 			}
 	}
-	if (flagInvertScreenShotColors)
+	if (invert)
 		im.invertPixels();
+	return true;
+}
 
+void StelMainView::doScreenshot(void)
+{
+	QImage im;
+	if (!getScreenshot(im, flagUseCustomScreenshotSize, flagInvertScreenShotColors, nightModeEffect->isEnabled()))
+		return;
+
+	QFileInfo shotDir;
 	if (StelFileMgr::getScreenshotDir().isEmpty())
 	{
 		qWarning() << "Oops, the directory for screenshots is not set! Let's try create and set it...";

@@ -369,6 +369,10 @@ public:
 	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
+  //! Get relations between magnitude stars and draw radius
+	//! @param core the instance of stellarium's core
+	//! @return a list of pairs magnitude-radius
+	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
 
 private slots:
 	//! Translate text.
