@@ -52,18 +52,21 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-	//! Aztec date of fall of Tenochtitlan
-	static const int aztecCorrelation;
+	//! find number in sequence from a xihuitl date of {month[1...19], day[1...20]}
+	inline static int aztecXihuitlOrdinal(QVector<int> xihuitl) {return (xihuitl.at(0)-1)*20+xihuitl.at(1)-1;}
+
+	//! find RD number of a Xihuitl date on or before rd.
+	static int aztecXihuitlOnOrBefore(QVector<int> xihuitl, int rd);
 
 	//! get RD of a combined date on or before rd. They repeat every 18980 days.
 	static int aztecXihuitlTonalpohualliOnOrBefore(QVector<int>xihuitl, QVector<int>tonalpohualli, int rd);
 
+	//! Aztec date of fall of Tenochtitlan
+	static const int aztecCorrelation;
+	static const int aztecXihuitlCorrelation;
+
 
 private:
-	//! find number in sequence from a xihuitl date of {month[1...19], day[1...20]}
-	inline static int aztecXihuitlOrdinal(QVector<int> xihuitl) {return (xihuitl.at(0)-1)*20+xihuitl.at(1)-1;}
-	static const int aztecXihuitlCorrelation;
-	static int aztecXihuitlOnOrBefore(QVector<int> xihuitl, int rd);
 	static QMap<int, QString> monthNames;
 };
 

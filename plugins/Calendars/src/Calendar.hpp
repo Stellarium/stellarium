@@ -79,13 +79,6 @@ public:
 	virtual QString getFormattedDateString() const;
 
 	constexpr static const double J2000=2451545.0;
-
-
-signals:
-	void partsChanged(QVector<int> parts);
-	void jdChanged(double jd);
-
-protected:
 	constexpr static const double jdEpoch=-1721424.5;
 	constexpr static const double mjdEpoch=678576.0;
 	constexpr static const int bogus=-1000000; // special value to indicate invalid result in some calendars.
@@ -134,6 +127,11 @@ protected:
 	static double modInterval(double x, double a, double b);
 	static int modInterval(int x, int a, int b);
 
+signals:
+	void partsChanged(QVector<int> parts);
+	void jdChanged(double jd);
+
+protected:
 
 	double JD;		//! date expressed as JD(UT), including day fraction (ready to interact with the main application)
 	QVector<int> parts;	//! date expressed in the numerical parts of the calendar (usually the smallest part represents a day count)

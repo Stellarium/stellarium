@@ -49,7 +49,7 @@ public:
 
 	//! Return ordinal in Tonalpohualli cycle.
 	//! @arg tonalpohualli is a QVector<int> of {number, name} (typo in book...)
-	inline static int aztecTonalpohualliOrdinal(QVector<int> tonalpohualli) {return (tonalpohualli.at(0) - 1 + 39*(tonalpohualli.at(0)-tonalpohualli.at(1))) % 260;}
+	inline static int aztecTonalpohualliOrdinal(QVector<int> tonalpohualli) {return StelUtils::imod((tonalpohualli.at(0) - 1 + 39*(tonalpohualli.at(0)-tonalpohualli.at(1))), 260);}
 
 	//! A constant to correlate calendars
 	static const int aztecTonalpohualliCorrelation;

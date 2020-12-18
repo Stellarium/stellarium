@@ -57,10 +57,10 @@ public:
 	//! get RD of a given calendar round date on or before rd. They repeat every 18980 days.
 	static int mayanCalendarRoundOnOrBefore(QVector<int>haab, QVector<int>tzolkin, int rd);
 
-private:
 	inline static int mayanHaabOrdinal(QVector<int> haab) {return (haab.at(0)-1)*20+haab.at(1);}
 	static int mayanHaabOnOrBefore(QVector<int> haab, int rd);
 	static QVector<int> mayanHaabFromFixed(int rd);
+private:
 	static QMap<int, QString> monthNames;
 	static const int mayanHaabEpoch;
 };

@@ -54,7 +54,7 @@ public:
 	static QString tzolkinName(int i) {return tzolkinNames.value(i);}
 
 	// ordinal of {number, name}
-	inline static int mayanTzolkinOrdinal(QVector<int> tzolkin) {return (tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))) % 260;}
+	inline static int mayanTzolkinOrdinal(QVector<int> tzolkin) {return StelUtils::imod((tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))), 260);}
 	static const int mayanTzolkinEpoch;
 
 private:

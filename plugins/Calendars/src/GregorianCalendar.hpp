@@ -55,11 +55,11 @@ public:
 	static bool isLeap(int year);
 
 	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1.
-
-protected:
 	//! auxiliary functions from CC.UE ch2.5
 	//! Return R.D. of date in the Gregorian calendar.
 	static int fixedFromGregorian(QVector<int> gregorian);
+
+protected:
 
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 	static int gregorianYearFromFixed(int rd);
