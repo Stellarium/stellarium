@@ -39,19 +39,11 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 				 QGraphicsWidget *parent):
 	QGraphicsTextItem("", parent),
 	plugin(plugin),
-	parentWidget(parent)
+	parentWidget(parent),
+	xPos(static_cast<qreal>(FLT_MAX))
 {
 	StelApp& stelApp = StelApp::getInstance();
-
-
-	//Widgets with control and information fields
-
-
 	QFont newFont = font();
-	QFontMetrics fm(newFont);
-	int maxWidth = fm.boundingRect(QString("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")).width();
-	int lineHeight = fm.height();
-
 
 	updatePosition();
 	connect (parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
@@ -63,7 +55,10 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition()
 {
-	qreal xPos = parentWidget->size().width() -  boundingRect().width();
+	if (sender())
+		xPos=parentWidget->size().width(); // reset when window has been resized.
+	qreal xPosCand = parentWidget->size().width() -  boundingRect().width();
+	xPos=qMin(xPos, xPosCand);
 	qreal yPos = parentWidget->size().height() - boundingRect().height();
 	setPos(xPos, yPos);
 }
