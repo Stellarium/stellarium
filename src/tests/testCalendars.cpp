@@ -26,6 +26,11 @@
 #include <QMap>
 
 #include "StelUtils.hpp"
+// CI linker complains if those are missing
+#include "StelTranslator.hpp"
+#include "StelCore.hpp"
+#include "StelApp.hpp"
+
 #include "../plugins/Calendars/src/Calendar.hpp"
 #include "../plugins/Calendars/src/JulianCalendar.hpp"
 #include "../plugins/Calendars/src/GregorianCalendar.hpp"

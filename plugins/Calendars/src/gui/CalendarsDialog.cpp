@@ -28,10 +28,12 @@
 #include "StelMainView.hpp"
 
 // We only need to include calendars when we have to call special functions.
-#include "MayaHaabCalendar.hpp"
-#include "MayaTzolkinCalendar.hpp"
-#include "AztecXihuitlCalendar.hpp"
-#include "AztecTonalpohualliCalendar.hpp"
+#include "JulianCalendar.hpp"
+#include "GregorianCalendar.hpp"
+//#include "MayaHaabCalendar.hpp"
+//#include "MayaTzolkinCalendar.hpp"
+//#include "AztecXihuitlCalendar.hpp"
+//#include "AztecTonalpohualliCalendar.hpp"
 
 
 CalendarsDialog::CalendarsDialog()
@@ -247,7 +249,7 @@ void CalendarsDialog::populateMayaHaabParts(QVector<int> parts)
 {
 	ui->haabMonthSpinBox->setValue(parts.at(0));
 	ui->haabDaySpinBox->setValue(parts.at(1));
-	MayaHaabCalendar *haab=dynamic_cast<MayaHaabCalendar*>(sender());
+	Calendar *haab=dynamic_cast<Calendar*>(sender());
 	if (haab)
 		ui->haabLineEdit->setText(haab->getFormattedDateString());
 
@@ -267,7 +269,7 @@ void CalendarsDialog::populateAztecXihuitlParts(QVector<int> parts)
 {
 	ui->xihuitlMonthSpinBox->setValue(parts.at(0));
 	ui->xihuitlDaySpinBox->setValue(parts.at(1));
-	AztecXihuitlCalendar *xihuitl=dynamic_cast<AztecXihuitlCalendar*>(sender());
+	Calendar *xihuitl=dynamic_cast<Calendar*>(sender());
 	if (xihuitl)
 		ui->xihuitlLineEdit->setText(xihuitl->getFormattedDateString());
 

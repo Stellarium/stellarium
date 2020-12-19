@@ -28,8 +28,6 @@
 
 #include "Calendar.hpp"
 #include "CalendarsInfoPanel.hpp"
-#include "JulianCalendar.hpp"
-#include "GregorianCalendar.hpp"
 
 class CalendarsDialog;
 class StelButton;

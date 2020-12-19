@@ -22,12 +22,12 @@
 #include "SkyGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "Calendars.hpp"
 
 #include <QDebug>
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
-//#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 
 #include "JulianCalendar.hpp"
@@ -216,7 +216,7 @@ void Calendars::draw(StelCore* core)
 	if (calendars.count()==0) return;
 	if (flagShowJulian)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Julian",          "calendar")).arg(getCal("Julian")->getFormattedDateString());
 	if (flagShowGregorian)     oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Gregorian",       "calendar")).arg(getCal("Gregorian")->getFormattedDateString());
-	if (flagShowISO)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO date",        "calendar")).arg(getCal("ISO")->getFormattedDateString());
+	if (flagShowISO)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO week",        "calendar")).arg(getCal("ISO")->getFormattedDateString());
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
