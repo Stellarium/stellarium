@@ -18,10 +18,6 @@
  */
 
 
-// For reasons unknown these test fail on non-Windows CI systems
-
-#ifdef WIN32
-
 #ifndef TESTCALENDARS_HPP
 #define TESTCALENDARS_HPP
 
@@ -39,4 +35,3 @@ private slots:
 
 #endif // _TESTCALENDARS_HPP
 
-#endif // WIN32

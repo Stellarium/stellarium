@@ -777,16 +777,6 @@ IF(ENABLE_TESTING)
     ADD_TEST(testSiderealTime testSiderealTime)
     SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testCalendars_SRCS
-        tests/testCalendars.hpp
-        tests/testCalendars.cpp
-    )
-    ADD_EXECUTABLE(testCalendars ${tests_testCalendars_SRCS})
-    TARGET_LINK_LIBRARIES(testCalendars ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testCalendars)
-    ADD_TEST(testCalendars testCalendars)
-    SET_TARGET_PROPERTIES(testCalendars PROPERTIES FOLDER "src/tests")
-
     SET(tests_testEphemeris_SRCS
         tests/testEphemeris.hpp
         tests/testEphemeris.cpp

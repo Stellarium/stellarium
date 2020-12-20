@@ -17,8 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef WIN32
-#include "tests/testCalendars.hpp"
+#include "test/testCalendars.hpp"
 
 #include <QString>
 #include <QDebug>
@@ -32,18 +31,18 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 
-#include "../plugins/Calendars/src/Calendar.hpp"
-#include "../plugins/Calendars/src/JulianCalendar.hpp"
-#include "../plugins/Calendars/src/GregorianCalendar.hpp"
-#include "../plugins/Calendars/src/ISOCalendar.hpp"
-#include "../plugins/Calendars/src/EgyptianCalendar.hpp"
-#include "../plugins/Calendars/src/ArmenianCalendar.hpp"
-#include "../plugins/Calendars/src/ZoroastrianCalendar.hpp"
-#include "../plugins/Calendars/src/MayaLongCountCalendar.hpp"
-#include "../plugins/Calendars/src/MayaHaabCalendar.hpp"
-#include "../plugins/Calendars/src/MayaTzolkinCalendar.hpp"
-#include "../plugins/Calendars/src/AztecXihuitlCalendar.hpp"
-#include "../plugins/Calendars/src/AztecTonalpohualliCalendar.hpp"
+#include "../Calendar.hpp"
+#include "../JulianCalendar.hpp"
+#include "../GregorianCalendar.hpp"
+#include "../ISOCalendar.hpp"
+#include "../EgyptianCalendar.hpp"
+#include "../ArmenianCalendar.hpp"
+#include "../ZoroastrianCalendar.hpp"
+#include "../MayaLongCountCalendar.hpp"
+#include "../MayaHaabCalendar.hpp"
+#include "../MayaTzolkinCalendar.hpp"
+#include "../AztecXihuitlCalendar.hpp"
+#include "../AztecTonalpohualliCalendar.hpp"
 
 //#define ERROR_LIMIT 1e-6
 
@@ -110,5 +109,3 @@ void TestCalendars::testMesoamerican()
 			    .arg(555299)));
 }
 	
-	
-#endif // WIN32
