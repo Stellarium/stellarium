@@ -128,6 +128,11 @@ public:
 	static double modInterval(double x, double a, double b);
 	static int modInterval(int x, int a, int b);
 
+	//! Reingold-Dershowitz CC.UE 1.48.
+	static int rdCorrSum(QVector<int>parts, QVector<int>factors, int corr);
+	int rdCorrSum(QVector<int>factors, int corr){return rdCorrSum(parts, factors, corr);}
+
+
 signals:
 	void partsChanged(QVector<int> parts);
 	void jdChanged(double jd);

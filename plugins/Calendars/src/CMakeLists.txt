@@ -11,12 +11,24 @@ SET(Calendars_SRCS
     gui/CalendarsInfoPanel.cpp
     Calendar.hpp
     Calendar.cpp
+    EgyptianCalendar.hpp
+    EgyptianCalendar.cpp
+    ArmenianCalendar.hpp
+    ArmenianCalendar.cpp
+    ZoroastrianCalendar.hpp
+    ZoroastrianCalendar.cpp
     JulianCalendar.hpp
     JulianCalendar.cpp
+    RomanCalendar.hpp
+    RomanCalendar.cpp
+    OlympicCalendar.hpp
+    OlympicCalendar.cpp
     GregorianCalendar.hpp
     GregorianCalendar.cpp
     ISOCalendar.hpp
     ISOCalendar.cpp
+    #IcelandicCalendar.hpp
+    #IcelandicCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp

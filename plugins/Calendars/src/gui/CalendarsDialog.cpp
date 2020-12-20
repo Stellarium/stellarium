@@ -94,6 +94,11 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
 	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
+	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
+	connectBoolProperty(ui->olympicCheckBox,            "Calendars.flagShowOlympic");
+	connectBoolProperty(ui->egyptianCheckBox,           "Calendars.flagShowEgyptian");
+	connectBoolProperty(ui->armenianCheckBox,           "Calendars.flagShowArmenian");
+	connectBoolProperty(ui->zoroastrianCheckBox,        "Calendars.flagShowZoroastrian");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
 	connectBoolProperty(ui->mayaLCCheckBox,             "Calendars.flagShowMayaLongCount");
 	connectBoolProperty(ui->mayaHaabCheckBox,           "Calendars.flagShowMayaHaab");
@@ -150,6 +155,12 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<ul><li>" + q_("Julian Calendar") + "</li>";
 	html += "<li>" + q_("Gregorian Calendar") + "</li>";
 	html += "<li>" + q_("ISO Weeks") + "</li>";
+	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
+	html += "<li>" + q_("Olympiad calendar") + "</li>";
+	html += "<li>" + q_("Egyptian calendar") + "</li>";
+	html += "<li>" + q_("Armenian calendar") + "</li>";
+	html += "<li>" + q_("Zoroastrian calendar") + "</li>";
+
 //	html += "<li>" + q_("Hebrew Calendar") + "</li>";
 //	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
 //	html += "<li>" + q_("French Revolution calendars") + "</li>";

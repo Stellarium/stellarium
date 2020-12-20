@@ -49,7 +49,8 @@ of this kind and are our preferred source of algorithms. This plugin
 sample.
 
 In the configuration panel you can select which calendars you want to
-display in the lower right corner of the sceen.
+display in the lower right corner of the sceen, and can also directly
+interact with some of them.
 
 
 The calendars displayed in this plugin come with their own logic:
@@ -70,20 +71,43 @@ The calendars displayed in this plugin come with their own logic:
   7). Week 1 of each year contains the first Thursday of the
   year. Years may have a week 53, where the last days already belong
   to the next Gregorian year.
+\item[Roman calendar] This presents the Roman way of writing calendar
+  dates in the Julian calendar and provides dates \emph{ab urbe condita} (A.U.C.).
+\item[Olympic calendar] Another way to write the years in the Julian
+  calendar uses the Greek Olympiads, a 4-year cycle starting in 776
+  B.C.E. The Olympic games of antiquity were held in year 1 of each cycle.
+\end{description}
+
+\subsection{Near Eastern calendars}
+Several calendars with 12 months of 30 days plus 5 ``epagomenae''
+days, with different calendar eras.
+\begin{description}
+\item[Egyptian]
+\item[Armenian]
+\item[Zoroastrian]. This uses different names for each day of the month.
 \end{description}
 
 \subsection{Mesoamerican calendars}
 \begin{description}
 \item[Maya Long Count] is a 5-part sequence of numbers. Just like most
   modern people write numbers in the decimal system (base 10), the
-  Maya used base 20 as their unit. The lowest (rightmost) number runs
-  from 0 to 19, the second-lowest from 0 to 17, the others from 0 to
-  19 again. It is assumed the $20\times18=360$ days have been used to
-  approximate the solar year.
-\item[Maya Haab] is a calendar of 18 ``months'' of 20 days each, plus
-  5 days (Uayeb) at the end, providing ``years'' of 365 days.
+  Maya used base 20 as their unit. However, this count uses a
+  mixed-base system. The lowest (rightmost) number (\emph{kin}) runs
+  from 0 to 19, the second-lowest (\emph{uinal}) from 0 to 17, the
+  others from 0 to 19 again. It is assumed these lowest places of
+  $20\times18=360$ days have been used to approximate the solar year,
+  so that the third number from the right (\emph{tun}) increases about
+  once per year. The higher places are called \emph{katun} and
+  \emph{baktun}. In December of 2012 some people were afraid that the
+  switchover from \emph{baktun} 12 to 13 (something which accurs about
+  every 400 years) would cause armageddon, just as other people prefer
+  to be afraid of turns of centuries or millennia of the Christian
+  year count.
+\item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
+  (counted 1 to 20), plus 5 days (Uayeb) at the end, providing
+  ``years'' of 365 days.
 \item[Maya Tzolkin] is described as ritual calendar consisting of two
-  cycles with 13 day numbers 1 to 13) and 20 names. Each day both
+  cycles with 13 day numbers (1 to 13) and 20 names. Each day both
   counters are advanced. Date names repeat after 260 days. Usually
   both calendars were used to define a unique date which repeats only
   after a \emph{calendar round} of 52 years.
@@ -116,15 +140,20 @@ settings for the Calendars plugin -- just make it carefully!
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
-show                         &bool & false\\\midrule
-show\_julian                 &bool & false\\
-show\_gregorian              &bool & false\\
-show\_iso                    &bool & false\\\midrule
-show\_maya\_long\_count      &bool & false\\
-show\_maya\_haab             &bool & false\\
-show\_maya\_tzolkin          &bool & false\\
-show\_aztec\_tonalpohualli   &bool & false\\
-show\_aztec\_xihuitl         &bool & false\\\bottomrule
+show                         &bool & true\\\midrule
+show\_julian                 &bool & true\\
+show\_gregorian              &bool & true\\
+show\_iso                    &bool & true\\\midrule
+show\_roman                  &bool & true\\
+show\_olympic                &bool & true\\
+show\_egyptian               &bool & true\\
+show\_armenian               &bool & true\\
+show\_zoroastrian            &bool & true\\\midrule
+show\_maya\_long\_count      &bool & true\\
+show\_maya\_haab             &bool & true\\
+show\_maya\_tzolkin          &bool & true\\
+show\_aztec\_tonalpohualli   &bool & true\\
+show\_aztec\_xihuitl         &bool & true\\\bottomrule
 %show\_chinese                &bool & false\\
 \end{longtable}
 

@@ -40,6 +40,11 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowJulian        READ isJulianDisplayed        WRITE showJulian        NOTIFY showJulianChanged)
 	Q_PROPERTY(bool flagShowGregorian     READ isGregorianDisplayed     WRITE showGregorian     NOTIFY showGregorianChanged)
 	Q_PROPERTY(bool flagShowISO           READ isISODisplayed           WRITE showISO           NOTIFY showISOChanged)
+	Q_PROPERTY(bool flagShowRoman         READ isRomanDisplayed         WRITE showRoman         NOTIFY showRomanChanged)
+	Q_PROPERTY(bool flagShowOlympic       READ isOlympicDisplayed       WRITE showOlympic       NOTIFY showOlympicChanged)
+	Q_PROPERTY(bool flagShowEgyptian      READ isEgyptianDisplayed      WRITE showEgyptian      NOTIFY showEgyptianChanged)
+	Q_PROPERTY(bool flagShowArmenian      READ isArmenianDisplayed      WRITE showArmenian      NOTIFY showArmenianChanged)
+	Q_PROPERTY(bool flagShowZoroastrian   READ isZoroastrianDisplayed   WRITE showZoroastrian   NOTIFY showZoroastrianChanged)
 	Q_PROPERTY(bool flagShowChinese       READ isChineseDisplayed       WRITE showChinese       NOTIFY showChineseChanged)
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
@@ -86,6 +91,11 @@ signals:
 	void showJulianChanged(bool b);
 	void showGregorianChanged(bool b);
 	void showISOChanged(bool b);
+	void showRomanChanged(bool b);
+	void showOlympicChanged(bool b);
+	void showEgyptianChanged(bool b);
+	void showArmenianChanged(bool b);
+	void showZoroastrianChanged(bool b);
 	void showChineseChanged(bool b);
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
@@ -105,6 +115,16 @@ public slots:
 	void showGregorian(bool b);		//!< activate display of Gregorian Calendar
 	bool isISODisplayed() const;		//!< display ISO Calendar?
 	void showISO(bool b);			//!< activate display of ISO Calendar
+	bool isRomanDisplayed() const;		//!< display Roman Calendar?
+	void showRoman(bool b);			//!< activate display of Roman Calendar
+	bool isOlympicDisplayed() const;	//!< display Olympic Calendar?
+	void showOlympic(bool b);		//!< activate display of Olympic Calendar
+	bool isEgyptianDisplayed() const;	//!< display Egyptian Calendar?
+	void showEgyptian(bool b);		//!< activate display of Egyptian Calendar
+	bool isArmenianDisplayed() const;	//!< display Armenian Calendar?
+	void showArmenian(bool b);		//!< activate display of Armenian Calendar
+	bool isZoroastrianDisplayed() const;	//!< display Zoroastrian Calendar?
+	void showZoroastrian(bool b);		//!< activate display of Zoroastrian Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
 	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
@@ -138,6 +158,11 @@ private:
 	bool flagShowJulian;
 	bool flagShowGregorian;
 	bool flagShowISO;
+	bool flagShowRoman;
+	bool flagShowOlympic;
+	bool flagShowEgyptian;
+	bool flagShowArmenian;
+	bool flagShowZoroastrian;
 	bool flagShowChinese;
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;

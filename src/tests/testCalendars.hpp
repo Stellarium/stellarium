@@ -28,6 +28,7 @@ class TestCalendars : public QObject
 Q_OBJECT
 private slots:
 	void testEuropean();
+	void testNearEastern();
 	void testMesoamerican();
 };
 

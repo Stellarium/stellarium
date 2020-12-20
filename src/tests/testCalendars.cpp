@@ -35,6 +35,9 @@
 #include "../plugins/Calendars/src/JulianCalendar.hpp"
 #include "../plugins/Calendars/src/GregorianCalendar.hpp"
 #include "../plugins/Calendars/src/ISOCalendar.hpp"
+#include "../plugins/Calendars/src/EgyptianCalendar.hpp"
+#include "../plugins/Calendars/src/ArmenianCalendar.hpp"
+#include "../plugins/Calendars/src/ZoroastrianCalendar.hpp"
 #include "../plugins/Calendars/src/MayaLongCountCalendar.hpp"
 #include "../plugins/Calendars/src/MayaHaabCalendar.hpp"
 #include "../plugins/Calendars/src/MayaTzolkinCalendar.hpp"
@@ -51,7 +54,26 @@ void TestCalendars::testEuropean()
 	QVERIFY(GregorianCalendar::fixedFromGregorian({1582, 10, 15})==JulianCalendar::fixedFromJulian({1582, 10, 5}));
 	QVERIFY(GregorianCalendar::fixedFromGregorian({1, 1, 1})==GregorianCalendar::gregorianEpoch);
 	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==JulianCalendar::julianEpoch);
+	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==GregorianCalendar::fixedFromGregorian({0, JulianCalendar::december, 30}));
 }
+
+void TestCalendars::testNearEastern()
+{
+	QVERIFY2(EgyptianCalendar::egyptianEpoch==-272787,
+		 qPrintable(QString("egyptianEpoch %1 vs %2")
+			    .arg(EgyptianCalendar::egyptianEpoch)
+			    .arg(-272787)));
+	QVERIFY2(ArmenianCalendar::armenianEpoch==201443,
+		 qPrintable(QString("armenianEpoch %1 vs %2")
+			    .arg(ArmenianCalendar::armenianEpoch)
+			    .arg(201443)));
+	QVERIFY2(ZoroastrianCalendar::zoroastrianEpoch==230638,
+		 qPrintable(QString("zoroastrianEpoch %1 vs %2")
+			    .arg(ZoroastrianCalendar::zoroastrianEpoch)
+			    .arg(230638)));
+
+}
+
 void TestCalendars::testMesoamerican()
 {
 	QVERIFY2(GregorianCalendar::fixedFromGregorian({-3113, 8, 11}) == JulianCalendar::fixedFromJulian({-3114, 9, 6}),

@@ -33,6 +33,11 @@
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
 #include "ISOCalendar.hpp"
+#include "RomanCalendar.hpp"
+#include "OlympicCalendar.hpp"
+#include "EgyptianCalendar.hpp"
+#include "ArmenianCalendar.hpp"
+#include "ZoroastrianCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
@@ -74,6 +79,11 @@ Calendars::Calendars():
 	flagShowJulian(true),
 	flagShowGregorian(true),
 	flagShowISO(true),
+	flagShowRoman(true),
+	flagShowOlympic(true),
+	flagShowEgyptian(true),
+	flagShowArmenian(true),
+	flagShowZoroastrian(true),
 	flagShowChinese(true),
 	flagShowMayaLongCount(true),
 	flagShowMayaHaab(true),
@@ -161,6 +171,11 @@ void Calendars::init()
 	calendars.insert("Julian", new JulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
 	calendars.insert("ISO", new ISOCalendar(jd));
+	calendars.insert("Roman", new RomanCalendar(jd));
+	calendars.insert("Olympic", new OlympicCalendar(jd));
+	calendars.insert("Egyptian", new EgyptianCalendar(jd));
+	calendars.insert("Armenian", new ArmenianCalendar(jd));
+	calendars.insert("Zoroastrian", new ZoroastrianCalendar(jd));
 	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
 	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
@@ -181,12 +196,17 @@ void Calendars::loadSettings()
 	showJulian(            conf->value("Calendars/show_julian", true).toBool());
 	showGregorian(         conf->value("Calendars/show_gregorian", true).toBool());
 	showISO(               conf->value("Calendars/show_iso", true).toBool());
+	showRoman(             conf->value("Calendars/show_roman", true).toBool());
+	showOlympic(           conf->value("Calendars/show_olympic", true).toBool());
+	showEgyptian(          conf->value("Calendars/show_egyptian", true).toBool());
+	showArmenian(          conf->value("Calendars/show_armenian", true).toBool());
+	showZoroastrian(       conf->value("Calendars/show_zoroastrian", true).toBool());
 	showChinese(           conf->value("Calendars/show_chinese", false).toBool());
-	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", false).toBool());
-	showMayaHaab(          conf->value("Calendars/show_maya_haab", false).toBool());
-	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", false).toBool());
-	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", false).toBool());
-	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", false).toBool());
+	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", true).toBool());
+	showMayaHaab(          conf->value("Calendars/show_maya_haab", true).toBool());
+	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", true).toBool());
+	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", true).toBool());
+	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -212,11 +232,16 @@ void Calendars::draw(StelCore* core)
 	QString str;
 	QTextStream oss(&str);
 	oss << "<table>";
-	// TODO: Select the drawable calendars from GUI or settings.
+	// Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
 	if (flagShowJulian)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Julian",          "calendar")).arg(getCal("Julian")->getFormattedDateString());
 	if (flagShowGregorian)     oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Gregorian",       "calendar")).arg(getCal("Gregorian")->getFormattedDateString());
 	if (flagShowISO)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO week",        "calendar")).arg(getCal("ISO")->getFormattedDateString());
+	if (flagShowRoman)         oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Roman",           "calendar")).arg(getCal("Roman")->getFormattedDateString());
+	if (flagShowOlympic)       oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Olympic",         "calendar")).arg(getCal("Olympic")->getFormattedDateString());
+	if (flagShowEgyptian)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Egyptian",        "calendar")).arg(getCal("Egyptian")->getFormattedDateString());
+	if (flagShowArmenian)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Armenian",        "calendar")).arg(getCal("Armenian")->getFormattedDateString());
+	if (flagShowZoroastrian)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Zoroastrian",     "calendar")).arg(getCal("Zoroastrian")->getFormattedDateString());
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
@@ -300,6 +325,61 @@ void Calendars::showISO(bool b)
 		flagShowISO=b;
 		conf->setValue("Calendars/show_iso", b);
 		emit showISOChanged(b);
+	}
+}
+
+bool Calendars::isRomanDisplayed() const { return flagShowRoman;}
+void Calendars::showRoman(bool b)
+{
+	if (b!=flagShowRoman)
+	{
+		flagShowRoman=b;
+		conf->setValue("Calendars/show_roman", b);
+		emit showRomanChanged(b);
+	}
+}
+
+bool Calendars::isOlympicDisplayed() const { return flagShowOlympic;}
+void Calendars::showOlympic(bool b)
+{
+	if (b!=flagShowOlympic)
+	{
+		flagShowOlympic=b;
+		conf->setValue("Calendars/show_olympic", b);
+		emit showOlympicChanged(b);
+	}
+}
+
+bool Calendars::isEgyptianDisplayed() const { return flagShowEgyptian;}
+void Calendars::showEgyptian(bool b)
+{
+	if (b!=flagShowEgyptian)
+	{
+		flagShowEgyptian=b;
+		conf->setValue("Calendars/show_egyptian", b);
+		emit showEgyptianChanged(b);
+	}
+}
+
+bool Calendars::isArmenianDisplayed() const { return flagShowArmenian;}
+void Calendars::showArmenian(bool b)
+{
+	if (b!=flagShowArmenian)
+	{
+		flagShowArmenian=b;
+		conf->setValue("Calendars/show_armenian", b);
+		emit showArmenianChanged(b);
+	}
+}
+
+bool Calendars::isZoroastrianDisplayed() const { return flagShowZoroastrian;}
+void Calendars::showZoroastrian(bool b)
+{
+	if (b!=flagShowZoroastrian)
+	{
+		flagShowZoroastrian=b;
+		conf->setValue("Calendars/show_zoroastrian", b);
+		emit showZoroastrianChanged(b);
 	}
 }
 

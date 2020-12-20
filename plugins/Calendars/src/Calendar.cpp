@@ -59,3 +59,14 @@ double Calendar::jdFromMoment(double rd, bool respectUTCoffset)
 	}
 	return ret;
 }
+
+// Reingold-Dershowitz CC.UE 1.48
+int Calendar::rdCorrSum(QVector<int>parts, QVector<int>factors, int corr)
+{
+	Q_ASSERT(parts.length()==factors.length());
+
+	int sum=0;
+	for (int i=0; i<parts.length(); ++i)
+		sum+=(parts.at(i)+corr)*factors.at(i);
+	return sum;
+}

@@ -844,6 +844,12 @@ namespace StelUtils
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
 
+	//! Least Common Multiple
+	//! @param a first number
+	//! @param b second number
+	//! @return Least Common Multiple
+	int lcm(int a, int b);
+
 	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
 	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.
 	//! @param n Interpolation factor: steps from x2
