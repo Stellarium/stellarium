@@ -80,10 +80,10 @@ public:
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
 	virtual QString getFormattedDateString() const;
 
-	constexpr static const double J2000=2451545.0;
-	constexpr static const double jdEpoch=-1721424.5;
-	constexpr static const double mjdEpoch=678576.0;
-	constexpr static const int bogus=-1000000; // special value to indicate invalid result in some calendars.
+	constexpr static const double   J2000           = 2451545.0;
+	constexpr static const double   jdEpoch         = -1721424.5;
+	constexpr static const double   mjdEpoch        = 678576.0;
+	constexpr static const int      bogus           = -1000000; // special value to indicate invalid result in some calendars.
 
 	//! Interfacing function from Reingold/Dershowitz: Calendrical Calculations
 	//! Returns a "moment" in RD that represents JD.

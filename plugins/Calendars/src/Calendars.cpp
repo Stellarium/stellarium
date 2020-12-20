@@ -76,7 +76,7 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
 *************************************************************************/
 Calendars::Calendars():
 	toolbarButton(Q_NULLPTR),
-	enabled(true),
+
 	flagShowJulian(true),
 	flagShowGregorian(true),
 	flagShowISO(true),
@@ -86,12 +86,14 @@ Calendars::Calendars():
 	flagShowEgyptian(true),
 	flagShowArmenian(true),
 	flagShowZoroastrian(true),
-	flagShowChinese(true),
+	flagShowChinese(true), // ?
 	flagShowMayaLongCount(true),
 	flagShowMayaHaab(true),
 	flagShowMayaTzolkin(true),
 	flagShowAztecXihuitl(true),
-	flagShowAztecTonalpohualli(true)
+	flagShowAztecTonalpohualli(true),
+
+	enabled(true)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -238,6 +240,7 @@ void Calendars::draw(StelCore* core)
 	oss << "<table>";
 	// Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
+
 	if (flagShowJulian)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Julian",          "calendar")).arg(getCal("Julian")->getFormattedDateString());
 	if (flagShowGregorian)     oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Gregorian",       "calendar")).arg(getCal("Gregorian")->getFormattedDateString());
 	if (flagShowISO)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO week",        "calendar")).arg(getCal("ISO")->getFormattedDateString());
@@ -252,7 +255,9 @@ void Calendars::draw(StelCore* core)
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
 	if (flagShowAztecXihuitl)  oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",   "calendar")).arg(getCal("AztecXihuitl")->getFormattedDateString());
 	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli", "calendar")).arg(getCal("AztecTonalpohualli")->getFormattedDateString());
+
 	oss << "</table>";
+
 	Vec3f color(1);
 	if (StelApp::getInstance().getFlagOverwriteInfoColor())
 	{
