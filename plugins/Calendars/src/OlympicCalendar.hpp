@@ -28,7 +28,6 @@ class OlympicCalendar : public JulianCalendar
 	Q_OBJECT
 
 public:
-
 	OlympicCalendar(double jd);
 
 	virtual ~OlympicCalendar() Q_DECL_OVERRIDE {}

@@ -45,8 +45,7 @@ public:
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-	//! Year, Month, MonthName, offset, Day, "bis"|""
-	// TBD
+	//! AUCYear, Month, MonthName(genitive), event, DayName
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date. Years are AUC.
@@ -70,13 +69,10 @@ public:
 	//! return a Roman number
 	static QString romanNumber(const int num);
 
-//	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1.
 	constexpr static const int yearRomeFounded=-753;
 
 protected:
-//	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthGen;
-
 };
 
 #endif

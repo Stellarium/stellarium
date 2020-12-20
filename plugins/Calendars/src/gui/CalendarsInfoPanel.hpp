@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 //#include "Calendars.hpp"
 
 class Calendars;
-//class QGraphicsProxyWidget;
-//class QLabel;
-//class QWidget;
 
 //! A screen widget similar to InfoPanel. Contains output for selected calendars.
 //! @ingroup calendars
@@ -51,11 +48,10 @@ private slots:
 private:
 	Calendars* plugin;
 
-	//! This is actually SkyGui. Perhaps it should be more specific?
+	// This is actually SkyGui. Perhaps it should be more specific?
 	QGraphicsWidget* parentWidget;
 
 	qreal xPos; // cache screen position to avoid position jitter.
-
 };
 
 #endif // CALENDARSINFOPANEL_HPP

@@ -132,13 +132,11 @@ public:
 	static int rdCorrSum(QVector<int>parts, QVector<int>factors, int corr);
 	int rdCorrSum(QVector<int>factors, int corr){return rdCorrSum(parts, factors, corr);}
 
-
 signals:
 	void partsChanged(QVector<int> parts);
 	void jdChanged(double jd);
 
 protected:
-
 	double JD;		//! date expressed as JD(UT), including day fraction (ready to interact with the main application)
 	QVector<int> parts;	//! date expressed in the numerical parts of the calendar (usually the smallest part represents a day count)
 };

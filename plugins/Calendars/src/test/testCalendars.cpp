@@ -27,9 +27,9 @@
 
 #include "StelUtils.hpp"
 // CI linker complains if those are missing
-#include "StelTranslator.hpp"
-#include "StelCore.hpp"
-#include "StelApp.hpp"
+//#include "StelTranslator.hpp"
+//#include "StelCore.hpp"
+//#include "StelApp.hpp"
 
 #include "../Calendar.hpp"
 #include "../JulianCalendar.hpp"
@@ -71,7 +71,6 @@ void TestCalendars::testNearEastern()
 		 qPrintable(QString("zoroastrianEpoch %1 vs %2")
 			    .arg(ZoroastrianCalendar::zoroastrianEpoch)
 			    .arg(230638)));
-
 }
 
 void TestCalendars::testMesoamerican()

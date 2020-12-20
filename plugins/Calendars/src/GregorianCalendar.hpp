@@ -60,7 +60,6 @@ public:
 	static int fixedFromGregorian(QVector<int> gregorian);
 
 protected:
-
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date

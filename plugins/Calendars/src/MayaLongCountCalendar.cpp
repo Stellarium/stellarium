@@ -105,5 +105,4 @@ QVector<int> MayaLongCountCalendar::mayaLongCountFromFixed(int rd)
 	const int kin        =dayOfTun % 20;
 
 	return { baktun, katun, tun, uinal, kin };
-
 }

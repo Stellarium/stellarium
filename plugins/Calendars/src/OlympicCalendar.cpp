@@ -27,7 +27,6 @@ OlympicCalendar::OlympicCalendar(double jd): JulianCalendar(jd)
 	retranslate();
 }
 
-
 // Set a calendar date from the Julian day number
 void OlympicCalendar::setJD(double JD)
 {
@@ -73,7 +72,6 @@ QString OlympicCalendar::getFormattedDateString() const
 
 void OlympicCalendar::setDate(QVector<int> parts)
 {
-
 	if (parts.length()<4)
 	{
 		this->parts[0]=parts.at(0);

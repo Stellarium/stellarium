@@ -58,7 +58,6 @@ public:
 
 protected:
 	static QMap<int, QString> monthNames;
-
 };
 
 #endif

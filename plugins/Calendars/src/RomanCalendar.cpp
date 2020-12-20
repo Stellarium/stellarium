@@ -59,8 +59,7 @@ void RomanCalendar::setJD(double JD)
 }
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
-// TBD: It is almost impossible to bring any sense into this function.
-// AUCYear, Month, MonthName(genitive), event,  DayName
+// AUCYear, Month, MonthName(genitive), event, DayName
 QStringList RomanCalendar::getDateStrings() const
 {
 	QStringList events={"Kalendae", "Nones", "Ides"};
@@ -103,7 +102,7 @@ QString RomanCalendar::getFormattedDateString() const
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
-// Year-Month[1...12]-Day[1...31]
+// JulianYear-Month[1...12]-event-count-leap
 // Time is not changed!
 void RomanCalendar::setDate(QVector<int> parts)
 {
@@ -140,8 +139,6 @@ int RomanCalendar::julianYearFromAUC(int aucYear)
 		return aucYear + yearRomeFounded - 1;
 	else
 		return aucYear + yearRomeFounded;
-
-
 }
 
 int RomanCalendar::fixedFromRoman(QVector<int> roman)
@@ -202,7 +199,6 @@ int RomanCalendar::aucYearFromJulian(int julianYear)
 		return julianYear - yearRomeFounded + 1;
 	else
 		return julianYear - yearRomeFounded;
-
 }
 
 // return a Roman number (1...19)
@@ -214,5 +210,3 @@ QString RomanCalendar::romanNumber(const int num)
 	if (num<1) return QString::number(num); // "bogus";
 	return roman.at(num);
 }
-
-

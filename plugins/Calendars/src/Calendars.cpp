@@ -266,7 +266,6 @@ void Calendars::draw(StelCore* core)
 	infoPanel->show();
 }
 
-
 // Get a pointer to the respective calendar
 Calendar* Calendars::getCal(QString name)
 {
@@ -280,7 +279,6 @@ void Calendars::update(double)
 	{
 		cal->setJD(jd);
 	}
-
 }
 
 /*****************************************************************************

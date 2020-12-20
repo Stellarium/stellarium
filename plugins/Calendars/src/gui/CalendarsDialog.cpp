@@ -263,7 +263,6 @@ void CalendarsDialog::populateMayaHaabParts(QVector<int> parts)
 	Calendar *haab=dynamic_cast<Calendar*>(sender());
 	if (haab)
 		ui->haabLineEdit->setText(haab->getFormattedDateString());
-
 }
 
 void CalendarsDialog::populateMayaTzolkinParts(QVector<int> parts)
@@ -273,7 +272,6 @@ void CalendarsDialog::populateMayaTzolkinParts(QVector<int> parts)
 	Calendar *tzolkin=dynamic_cast<Calendar*>(sender());
 	if (tzolkin)
 		ui->tzolkinLineEdit->setText(tzolkin->getFormattedDateString());
-
 }
 
 void CalendarsDialog::populateAztecXihuitlParts(QVector<int> parts)
@@ -283,7 +281,6 @@ void CalendarsDialog::populateAztecXihuitlParts(QVector<int> parts)
 	Calendar *xihuitl=dynamic_cast<Calendar*>(sender());
 	if (xihuitl)
 		ui->xihuitlLineEdit->setText(xihuitl->getFormattedDateString());
-
 }
 
 void CalendarsDialog::populateAztecTonalpohualliParts(QVector<int> parts)
@@ -293,7 +290,6 @@ void CalendarsDialog::populateAztecTonalpohualliParts(QVector<int> parts)
 	Calendar *tonalpohualli=dynamic_cast<Calendar*>(sender());
 	if (tonalpohualli)
 		ui->tonalpohualliLineEdit->setText(tonalpohualli->getFormattedDateString());
-
 }
 
 /*
@@ -320,7 +316,6 @@ void CalendarsDialog::isoChanged()
 	cal->getCal("ISO")->setDate({ui->isoYearSpinBox->value(),
 					ui->isoWeekSpinBox->value(),
 					ui->isoDaySpinBox->value()});
-
 }
 
 void CalendarsDialog::mayaLongCountChanged()
@@ -336,7 +331,6 @@ void CalendarsDialog::mayaHaabChanged()
 {
 	cal->getCal("MayaHaab")->setDate({ui->haabMonthSpinBox->value(),
 					   ui->haabDaySpinBox->value()});
-
 }
 
 void CalendarsDialog::mayaTzolkinChanged()
@@ -349,7 +343,6 @@ void CalendarsDialog::aztecXihuitlChanged()
 {
 	cal->getCal("AztecXihuitl")->setDate({ui->xihuitlMonthSpinBox->value(),
 					   ui->xihuitlDaySpinBox->value()});
-
 }
 
 void CalendarsDialog::aztecTonalpohualliChanged()
