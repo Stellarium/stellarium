@@ -28,7 +28,7 @@ const int ArmenianCalendar::armenianEpoch=JulianCalendar::fixedFromJulian({552, 
 
 ArmenianCalendar::ArmenianCalendar(double jd): EgyptianCalendar(jd)
 {
-	retranslate();
+	ArmenianCalendar::retranslate();
 }
 
 QMap<int, QString> ArmenianCalendar::monthNames;

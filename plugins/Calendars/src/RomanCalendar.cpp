@@ -24,7 +24,7 @@
 
 RomanCalendar::RomanCalendar(double jd): JulianCalendar(jd)
 {
-	retranslate();
+	RomanCalendar::retranslate();
 }
 
 QMap<int, QString> RomanCalendar::monthGen;

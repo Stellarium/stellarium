@@ -24,7 +24,7 @@
 
 JulianCalendar::JulianCalendar(double jd): Calendar(jd)
 {
-	retranslate();
+	JulianCalendar::retranslate();
 }
 
 QMap<int, QString> JulianCalendar::weekDayNames;

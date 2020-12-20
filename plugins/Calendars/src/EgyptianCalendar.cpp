@@ -29,7 +29,7 @@ const int EgyptianCalendar::egyptianEpoch=fixedFromJD(1448638, false); //! RD of
 
 EgyptianCalendar::EgyptianCalendar(double jd): Calendar(jd)
 {
-	retranslate();
+	EgyptianCalendar::retranslate();
 }
 
 QMap<int, QString> EgyptianCalendar::monthNames;

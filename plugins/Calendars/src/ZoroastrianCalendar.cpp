@@ -28,7 +28,7 @@ const int ZoroastrianCalendar::zoroastrianEpoch=JulianCalendar::fixedFromJulian(
 
 ZoroastrianCalendar::ZoroastrianCalendar(double jd): EgyptianCalendar(jd)
 {
-	retranslate();
+	ZoroastrianCalendar::retranslate();
 }
 
 QMap<int, QString> ZoroastrianCalendar::monthNames;

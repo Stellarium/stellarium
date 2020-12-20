@@ -24,7 +24,7 @@
 
 OlympicCalendar::OlympicCalendar(double jd): JulianCalendar(jd)
 {
-	retranslate();
+	OlympicCalendar::retranslate();
 }
 
 // Set a calendar date from the Julian day number
