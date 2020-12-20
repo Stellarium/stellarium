@@ -103,7 +103,7 @@ int OlympicCalendar::julianYearFromOlympiad(QVector<int>odate)
 QVector<int> OlympicCalendar::olympiadFromJulianYear(int jYear)
 {
 	int years=jYear-olympiadStart-(jYear<0?0:1);
-	return {StelUtils::intFloorDiv(years, 4)+1, StelUtils::imod(years, 4)+1};
+	return {static_cast<int>(StelUtils::intFloorDiv(years, 4))+1, StelUtils::imod(years, 4)+1};
 }
 
 
