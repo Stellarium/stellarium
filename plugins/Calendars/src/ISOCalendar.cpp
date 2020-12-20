@@ -56,29 +56,31 @@ void ISOCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-//// get a stringlist of calendar date elements sorted from the largest to the smallest.
-//// The order depends on the actual calendar
-//QStringList ISOCalendar::getDateStrings()
-//{
-//	// If we don't change this, just delete this inherited version
-//	QStringList list;
-//	list << QString::number(parts.at(0));
-//	list << QString::number(parts.at(1));
-//	list << QString::number(parts.at(2));
-//	list << weekday(JD);
-//
-//	return list;
-//}
+// get a stringlist of calendar date elements sorted from the largest to the smallest.
+// The order depends on the actual calendar
+QStringList ISOCalendar::getDateStrings() const
+{
+	QStringList list;
+	list << QString::number(parts.at(0)); // year
+	list << QString::number(parts.at(1)); // month
+	list << QString::number(parts.at(2)); // day
+	list << weekday(JD); // name of day
+
+	// https://en.wikipedia.org/wiki/ISO_week_date
+	list << QString::number(dayOfWeekFromFixed(JD) + 1); // day of week (1-7), 1= monday // XXX hackish, to check/test!
+
+	return list;
+}
 
 //! get a formatted complete string for a date
 QString ISOCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1-W%2 (%4)")
+	return QString("%1-W%2-%3 (%4)")
 			.arg(str.at(0)) // year
-			//.arg(q_("Week"))
-			.arg(str.at(1)) // week, numerical
-
+			//.arg(q_("Week")) // NOTE: ISO does not need translations?
+			.arg(str.at(1),2,'0') // week, numerical
+			.arg(str.at(4)) // day of week
 			.arg(str.at(3)) // weekday
 			;
 }
@@ -95,8 +97,8 @@ int ISOCalendar::fixedFromISO(QVector<int> iso)
 QVector<int> ISOCalendar::isoFromFixed(int rd)
 {
 	int approx = gregorianYearFromFixed(rd-3);
-	int year   = rd>=fixedFromISO({approx+1, 1, 1}) ? approx+1 : approx;
-	int week   = StelUtils::intFloorDiv(rd-fixedFromISO({year, 1, 1}), 7)+1;
+	int year   = rd >= fixedFromISO({approx+1, 1, 1}) ? approx+1 : approx;
+	int week   = StelUtils::intFloorDiv(rd-fixedFromISO({year, 1, 1}), 7) + 1;
 	int day    = StelUtils::amod(rd, 7);
 	return {year, week, day};
 }
