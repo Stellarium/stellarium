@@ -283,7 +283,7 @@
       <attribute name="title">
        <string>Lunisolar</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="lunisolarVerticalLayout">
        <item>
         <layout class="QGridLayout" name="lunisolarGridLayout">
          <item row="1" column="4">
@@ -505,13 +505,13 @@
       <attribute name="title">
        <string>Chinese</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout"/>
+      <layout class="QVBoxLayout" name="chineseVerticalLayout"/>
      </widget>
      <widget class="QWidget" name="mesoamericaTab">
       <attribute name="title">
        <string>Mesoamerica</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="mesoamericaVerticalLayout">
        <item>
         <layout class="QGridLayout" name="mesoamericaGridLayout">
          <item row="0" column="2">
