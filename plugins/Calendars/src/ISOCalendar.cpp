@@ -74,11 +74,13 @@ void ISOCalendar::setDate(QVector<int> parts)
 QString ISOCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1, %2 %3, %4")
-			.arg(str.at(3)) // weekday
-			.arg(q_("Week"))
+	return QString("%1-W%2 (%4)")
+			.arg(str.at(0)) // year
+			//.arg(q_("Week"))
 			.arg(str.at(1)) // week, numerical
-			.arg(str.at(0));// year
+
+			.arg(str.at(3)) // weekday
+			;
 }
 
 int ISOCalendar::fixedFromISO(QVector<int> iso)

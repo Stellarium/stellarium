@@ -73,7 +73,10 @@ void JulianCalendar::setJD(double JD)
 QStringList JulianCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString("%1 %2").arg(abs(parts.at(0))).arg(parts.at(0)>0 ? q_("A.D.") : q_("B.C."));
+	list << QString("%1 %2")
+		.arg(abs(parts.at(0)))
+		.arg(parts.at(0)>0 ? q_("AD") : q_("BC"))
+		; // AD/BC: see also https://en.wikipedia.org/wiki/Anno_Domini
 	list << QString::number(parts.at(1));
 	list << QString::number(parts.at(2));
 	list << weekday(JD);
@@ -86,12 +89,13 @@ QString JulianCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TODO: Maybe use QDate with user's localisation here? Weekday has to be taken from our results, though.
-	return QString("%1, %2 - %3 (%4) - %5")
+	return QString("%1, %2 %5 %4 (%4-%3-%2)")
 			.arg(str.at(3)) // weekday
 			.arg(str.at(2)) // day
 			.arg(str.at(1)) // month, numerical
+			.arg(str.at(0)) // year + BC/AD
 			.arg(monthNames.value(parts.at(1))) // month, name
-			.arg(str.at(0));// year
+			;
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

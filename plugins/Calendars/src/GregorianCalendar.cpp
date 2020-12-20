@@ -70,12 +70,15 @@ QString GregorianCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TODO: Maybe use QDate with user's localisation here? Weekday has to be taken from our results, though.
-	return QString("%1, %2 - %3 (%4) - %5")
-			.arg(str.at(3)) // weekday
-			.arg(str.at(2)) // day
+	return QString("%1-%2-%3 (%4, %3 %5 %1)")
+			.arg(str.at(0)) // year
 			.arg(str.at(1)) // month, numerical
+			.arg(str.at(2)) // day
+
+			.arg(str.at(3)) // weekday
 			.arg(monthNames.value(parts.at(1))) // month, name
-			.arg(str.at(0));// year
+			; // put this on a separate line for flexible editing
+	// see also https://en.wikipedia.org/wiki/Calendar_date#Advantages_for_ordering_in_sequence
 }
 
 // returns true for leap years

@@ -58,7 +58,7 @@ QStringList OlympicCalendar::getDateStrings() const
 QString OlympicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString(q_("Day %1, month %2 in the year %3 of the %4th Olympiad"))
+	return QString(q_("Day %1, month %2, year %3 of the %4th Olympiad"))
 			.arg(str.at(3)) // day
 			.arg(str.at(2)) // month, numerical
 			.arg(str.at(1)) // year
