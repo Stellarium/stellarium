@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#ifdef WIN32
 #include "tests/testCalendars.hpp"
 
 #include <QString>
@@ -110,3 +111,4 @@ void TestCalendars::testMesoamerican()
 }
 	
 	
+#endif // WIN32
