@@ -27,8 +27,8 @@ SET(Calendars_SRCS
     GregorianCalendar.cpp
     ISOCalendar.hpp
     ISOCalendar.cpp
-    #IcelandicCalendar.hpp
-    #IcelandicCalendar.cpp
+    IcelandicCalendar.hpp
+    IcelandicCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp

@@ -48,6 +48,32 @@
 
 QTEST_GUILESS_MAIN(TestCalendars)
 
+
+QString printVec(QVector<int>vec)
+{
+	QString ret="{ ";
+	for (int i = 0; i < vec.size(); ++i) {
+		ret.append(QString::number(vec.at(i)));
+		if (i<(vec.size()-1)) ret.append(", ");
+	  }
+	ret.append(" }");
+	return ret;
+}
+void TestCalendars::testBasics()
+{
+	int h=100;
+	QVector<int>hsplit=Calendar::toRadix(h, {4});
+	QVERIFY2(hsplit==QVector<int>({25, 0}), qPrintable(QString("radix of %1 in {4} is %2")
+							   .arg(h)
+							   .arg(printVec(hsplit))));
+	QVector<int>hsplit2=Calendar::toRadix(h, {5, 4});
+	QVERIFY2(hsplit2==QVector<int>({5, 0, 0}), qPrintable(QString("radix of %1 in {5, 4} is %2")
+							   .arg(h)
+							   .arg(printVec(hsplit2))));
+
+
+}
+
 void TestCalendars::testEuropean()
 {
 	QVERIFY(GregorianCalendar::fixedFromGregorian({1582, 10, 14})==JulianCalendar::fixedFromJulian({1582, 10, 4}));

@@ -45,7 +45,8 @@ class Calendar : public QObject
 
 public:
 	//! enum from CC.UE-ch1.12.
-	typedef enum { sunday =0, monday, tuesday, wednesday, thursday, friday, saturday } Day;
+	typedef enum { sunday = 0, monday, tuesday, wednesday, thursday, friday, saturday } Day;
+	typedef enum { spring = 0, summer = 90, autumn = 180, winter = 270} Season; // CC.UE 3.5
 
 	Calendar(double jd):JD(jd) {}
 
@@ -132,6 +133,8 @@ public:
 	static int rdCorrSum(QVector<int>parts, QVector<int>factors, int corr);
 	int rdCorrSum(QVector<int>factors, int corr){return rdCorrSum(parts, factors, corr);}
 
+	//! Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
+	static QVector<int> toRadix(int num, QVector<int>radix);
 signals:
 	void partsChanged(QVector<int> parts);
 	void jdChanged(double jd);

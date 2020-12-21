@@ -40,6 +40,7 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowJulian        READ isJulianDisplayed        WRITE showJulian        NOTIFY showJulianChanged)
 	Q_PROPERTY(bool flagShowGregorian     READ isGregorianDisplayed     WRITE showGregorian     NOTIFY showGregorianChanged)
 	Q_PROPERTY(bool flagShowISO           READ isISODisplayed           WRITE showISO           NOTIFY showISOChanged)
+	Q_PROPERTY(bool flagShowIcelandic     READ isIcelandicDisplayed     WRITE showIcelandic     NOTIFY showIcelandicChanged)
 	Q_PROPERTY(bool flagShowRoman         READ isRomanDisplayed         WRITE showRoman         NOTIFY showRomanChanged)
 	Q_PROPERTY(bool flagShowOlympic       READ isOlympicDisplayed       WRITE showOlympic       NOTIFY showOlympicChanged)
 	Q_PROPERTY(bool flagShowEgyptian      READ isEgyptianDisplayed      WRITE showEgyptian      NOTIFY showEgyptianChanged)
@@ -91,6 +92,7 @@ signals:
 	void showJulianChanged(bool b);
 	void showGregorianChanged(bool b);
 	void showISOChanged(bool b);
+	void showIcelandicChanged(bool b);
 	void showRomanChanged(bool b);
 	void showOlympicChanged(bool b);
 	void showEgyptianChanged(bool b);
@@ -115,6 +117,8 @@ public slots:
 	void showGregorian(bool b);		//!< activate display of Gregorian Calendar
 	bool isISODisplayed() const;		//!< display ISO Calendar?
 	void showISO(bool b);			//!< activate display of ISO Calendar
+	bool isIcelandicDisplayed() const;	//!< display Icelandic Calendar?
+	void showIcelandic(bool b);		//!< activate display of Icelandic Calendar
 	bool isRomanDisplayed() const;		//!< display Roman Calendar?
 	void showRoman(bool b);			//!< activate display of Roman Calendar
 	bool isOlympicDisplayed() const;	//!< display Olympic Calendar?
@@ -158,6 +162,7 @@ private:
 	bool flagShowJulian;
 	bool flagShowGregorian;
 	bool flagShowISO;
+	bool flagShowIcelandic;
 	bool flagShowRoman;
 	bool flagShowOlympic;
 	bool flagShowEgyptian;

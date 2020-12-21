@@ -70,3 +70,23 @@ int Calendar::rdCorrSum(QVector<int>parts, QVector<int>factors, int corr)
 		sum+=(parts.at(i)+corr)*factors.at(i);
 	return sum;
 }
+
+// Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
+QVector<int> Calendar::toRadix(int num, QVector<int>radix)
+{
+	int div=1;
+	int rest=num;
+	QVector<int> res;
+	QVector<int>::const_reverse_iterator i;
+	for (i = radix.rbegin(); i != radix.rend(); ++i)
+	{
+		div = *i;
+
+		int lsb=StelUtils::imod(rest, div);
+		res.prepend(lsb);
+		rest -= lsb;
+		rest /= div;
+	}
+	res.prepend(rest);
+	return res;
+}
