@@ -22,7 +22,7 @@
 #include "CopticCalendar.hpp"
 
 //! Equal in structure to the Coptic calendar (with different month names!). CC.UE chapter 4.
-//! Epoch is the era of Diocletian (Era Martyrum)
+//! Epoch is the Ethiopian era of Mercy (8 AD, the year where Augustus re-introduced leap years)
 
 class EthiopicCalendar : public CopticCalendar
 {
@@ -64,7 +64,6 @@ protected:
 	static QMap<int, QString> dayNames;
 
 	static QString weekday(double jd);
-
 };
 
 #endif

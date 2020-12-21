@@ -83,7 +83,9 @@ public:
 	void loadSettings();
 
 	//! Get a pointer to the respective Calendar. Returns Q_NULLPTR if not found.
-	//! Valid names: Julian, Gregorian, ISO, MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
+	//! Valid names: Julian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
+	//! Armenian, Zoroastrian, Coptic, Ethiopic,
+	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
 	//! TODO: ADD HERE: Chinese, ...
 	Calendar* getCal(QString name);
 

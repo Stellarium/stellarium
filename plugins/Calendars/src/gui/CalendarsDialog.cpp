@@ -77,6 +77,8 @@ void CalendarsDialog::createDialogContent()
 
 	// DISABLE Chinese for now, TBD!
 	ui->chineseCheckBox->hide();
+	ui->islamicCheckBox->hide();
+	ui->hebrewCheckBox->hide();
 	ui->tabs->removeTab(2);
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
@@ -99,6 +101,9 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->egyptianCheckBox,           "Calendars.flagShowEgyptian");
 	connectBoolProperty(ui->armenianCheckBox,           "Calendars.flagShowArmenian");
 	connectBoolProperty(ui->zoroastrianCheckBox,        "Calendars.flagShowZoroastrian");
+	connectBoolProperty(ui->copticCheckBox,             "Calendars.flagShowCoptic");
+	connectBoolProperty(ui->ethiopicCheckBox,           "Calendars.flagShowEthiopic");
+	connectBoolProperty(ui->icelandicCheckBox,          "Calendars.flagShowIcelandic");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
 	connectBoolProperty(ui->mayaLCCheckBox,             "Calendars.flagShowMayaLongCount");
 	connectBoolProperty(ui->mayaHaabCheckBox,           "Calendars.flagShowMayaHaab");
@@ -155,17 +160,21 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<ul><li>" + q_("Julian Calendar") + "</li>";
 	html += "<li>" + q_("Gregorian Calendar") + "</li>";
 	html += "<li>" + q_("ISO Weeks") + "</li>";
+	html += "<li>" + q_("Icelandic calendar") + "</li>";
 	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
 	html += "<li>" + q_("Olympiad calendar") + "</li>";
 	html += "<li>" + q_("Egyptian calendar") + "</li>";
 	html += "<li>" + q_("Armenian calendar") + "</li>";
 	html += "<li>" + q_("Zoroastrian calendar") + "</li>";
+	html += "<li>" + q_("Coptic calendar") + "</li>";
+	html += "<li>" + q_("Ethiopic calendar") + "</li>";
 
 //	html += "<li>" + q_("Hebrew Calendar") + "</li>";
 //	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
 //	html += "<li>" + q_("French Revolution calendars") + "</li>";
 //	html += "<li>" + q_("Ethiopian calendar") + "</li>";
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
+//	html += "<li>" + q_("Tibetan calendars") + "</li>";
 //	html += "<li>" + q_("Indian calendars") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";

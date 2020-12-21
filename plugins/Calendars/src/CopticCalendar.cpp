@@ -91,7 +91,8 @@ QStringList CopticCalendar::getDateStrings() const
 QString CopticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1 - %2 (%3) - %4 %5")
+	return QString("%1, %2 - %3 (%4) - %5 %6")
+			.arg(str.at(4)) // dayname
 			.arg(str.at(3)) // day
 			.arg(str.at(1)) // month, numerical
 			.arg(str.at(2)) // month, name

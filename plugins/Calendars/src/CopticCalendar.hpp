@@ -64,7 +64,6 @@ protected:
 	static QMap<int, QString> dayNames;
 
 	static QString weekday(double jd);
-
 };
 
 #endif
