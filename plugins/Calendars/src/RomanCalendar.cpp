@@ -98,7 +98,7 @@ QString RomanCalendar::getFormattedDateString() const
 			.arg(str.at(3))
 			.arg(str.at(2))
 			.arg(str.at(0))
-			.arg(qc_("A.U.C.", "ab urbe condita"));// year AUC
+			.arg(qc_("AUC", "ab urbe condita"));// year AUC
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

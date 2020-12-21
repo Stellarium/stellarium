@@ -25,7 +25,7 @@
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
 //! @note The implementation does not correctly represent the Roman Julian calendar valid from introduction by Julius Caesar to the reform by Augustus.
-//! @note this implementation adheres to Calendrical Calculation's style of omitting a year zero. Negative years represent years B.C.E.
+//! @note this implementation adheres to Calendrical Calculation's style of omitting a year zero. Negative years represent years BC.
 //!       This is very much in contrast to Stellarium's usual behaviour, and also different from a year zero in CC's implementation of the Gregorian calendar.
 
 class JulianCalendar : public Calendar

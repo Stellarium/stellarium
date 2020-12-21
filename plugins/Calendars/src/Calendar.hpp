@@ -27,7 +27,7 @@
 //! Abstract superclass for all calendars.
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
-//! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 B.C., 1 A.D.
+//! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 BC, 1 AD
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
 //! Other cultures have various other calendar schemes.
 //! All calendars have a numerical vector of time elements and may have individual string lists for names of elements like "week days" and "months".
