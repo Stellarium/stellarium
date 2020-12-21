@@ -26,11 +26,6 @@
 #include <QMap>
 
 #include "StelUtils.hpp"
-// CI linker complains if those are missing
-//#include "StelTranslator.hpp"
-//#include "StelCore.hpp"
-//#include "StelApp.hpp"
-
 #include "../Calendar.hpp"
 #include "../JulianCalendar.hpp"
 #include "../GregorianCalendar.hpp"
@@ -38,16 +33,15 @@
 #include "../EgyptianCalendar.hpp"
 #include "../ArmenianCalendar.hpp"
 #include "../ZoroastrianCalendar.hpp"
+#include "../CopticCalendar.hpp"
+#include "../EthiopicCalendar.hpp"
 #include "../MayaLongCountCalendar.hpp"
 #include "../MayaHaabCalendar.hpp"
 #include "../MayaTzolkinCalendar.hpp"
 #include "../AztecXihuitlCalendar.hpp"
 #include "../AztecTonalpohualliCalendar.hpp"
 
-//#define ERROR_LIMIT 1e-6
-
 QTEST_GUILESS_MAIN(TestCalendars)
-
 
 QString printVec(QVector<int>vec)
 {
@@ -59,6 +53,7 @@ QString printVec(QVector<int>vec)
 	ret.append(" }");
 	return ret;
 }
+
 void TestCalendars::testBasics()
 {
 	int h=100;
@@ -70,8 +65,6 @@ void TestCalendars::testBasics()
 	QVERIFY2(hsplit2==QVector<int>({5, 0, 0}), qPrintable(QString("radix of %1 in {5, 4} is %2")
 							   .arg(h)
 							   .arg(printVec(hsplit2))));
-
-
 }
 
 void TestCalendars::testEuropean()
@@ -97,6 +90,14 @@ void TestCalendars::testNearEastern()
 		 qPrintable(QString("zoroastrianEpoch %1 vs %2")
 			    .arg(ZoroastrianCalendar::zoroastrianEpoch)
 			    .arg(230638)));
+	QVERIFY2(CopticCalendar::copticEpoch==103605,
+		 qPrintable(QString("copticEpoch %1 vs %2")
+			    .arg(CopticCalendar::copticEpoch)
+			    .arg(103605)));
+	QVERIFY2(EthiopicCalendar::ethiopicEpoch==2796,
+		 qPrintable(QString("ethiopicEpoch %1 vs %2")
+			    .arg(EthiopicCalendar::ethiopicEpoch)
+			    .arg(2796)));
 }
 
 void TestCalendars::testMesoamerican()

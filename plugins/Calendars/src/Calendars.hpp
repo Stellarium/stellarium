@@ -46,6 +46,8 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowEgyptian      READ isEgyptianDisplayed      WRITE showEgyptian      NOTIFY showEgyptianChanged)
 	Q_PROPERTY(bool flagShowArmenian      READ isArmenianDisplayed      WRITE showArmenian      NOTIFY showArmenianChanged)
 	Q_PROPERTY(bool flagShowZoroastrian   READ isZoroastrianDisplayed   WRITE showZoroastrian   NOTIFY showZoroastrianChanged)
+	Q_PROPERTY(bool flagShowCoptic        READ isCopticDisplayed        WRITE showCoptic        NOTIFY showCopticChanged)
+	Q_PROPERTY(bool flagShowEthiopic      READ isEthiopicDisplayed      WRITE showEthiopic      NOTIFY showEthiopicChanged)
 	Q_PROPERTY(bool flagShowChinese       READ isChineseDisplayed       WRITE showChinese       NOTIFY showChineseChanged)
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
@@ -98,6 +100,8 @@ signals:
 	void showEgyptianChanged(bool b);
 	void showArmenianChanged(bool b);
 	void showZoroastrianChanged(bool b);
+	void showCopticChanged(bool b);
+	void showEthiopicChanged(bool b);
 	void showChineseChanged(bool b);
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
@@ -129,6 +133,10 @@ public slots:
 	void showArmenian(bool b);		//!< activate display of Armenian Calendar
 	bool isZoroastrianDisplayed() const;	//!< display Zoroastrian Calendar?
 	void showZoroastrian(bool b);		//!< activate display of Zoroastrian Calendar
+	bool isCopticDisplayed() const;		//!< display Coptic Calendar?
+	void showCoptic(bool b);		//!< activate display of Coptic Calendar
+	bool isEthiopicDisplayed() const;	//!< display Ethiopic Calendar?
+	void showEthiopic(bool b);		//!< activate display of Ethiopic Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
 	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
@@ -168,6 +176,8 @@ private:
 	bool flagShowEgyptian;
 	bool flagShowArmenian;
 	bool flagShowZoroastrian;
+	bool flagShowCoptic;
+	bool flagShowEthiopic;
 	bool flagShowChinese;
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;

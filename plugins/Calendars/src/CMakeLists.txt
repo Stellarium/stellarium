@@ -27,6 +27,10 @@ SET(Calendars_SRCS
     GregorianCalendar.cpp
     ISOCalendar.hpp
     ISOCalendar.cpp
+    CopticCalendar.hpp
+    CopticCalendar.cpp
+    EthiopicCalendar.hpp
+    EthiopicCalendar.cpp
     IcelandicCalendar.hpp
     IcelandicCalendar.cpp
     MayaLongCountCalendar.hpp
