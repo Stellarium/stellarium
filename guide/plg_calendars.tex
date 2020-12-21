@@ -14,24 +14,24 @@
 \subsection{Introduction}
 \label{sec:plugin:Calendars:Introduction}
 
-The calendar dates in the main program behave like most other astronomical software titles:
+The calendar dates in the main program behave like most other astronomical software utilities:
 
 \begin{itemize}
 \item Dates are given in the Gregorian calendar for all dates
   beginning with October 15, 1582.
 \item All earlier dates are given in the Julian Calendar in its
   finalized form by Augustus. Historically, only dates beginning with
-  March 1st, 4 A.D. coincide with historically recorded dates: the
+  March 1st, 4 AD coincide with historically recorded dates: the
   Roman priesthood messed up the 4-year count introduced by Julius
   Caesar and counted leap years every third year. Augustus decreed to
-  omit leap days from 12 B.C. to 4~A.D to move the seasons to where
+  omit leap days from 12 BC to 4 AD to move the seasons to where
   Julius Caesar had placed them.
 \item Given the errors in the Julian calendar, simulation in early
   prehistory will provide non-intuitive calendar dates for the
   seasons' beginnings.
 \item Astronomical counting of years includes a year zero and negative
-  years. Historical calendars don't have a year zero. 1~A.D. is
-  preceded by 1~B.C. Therefore a negative year in Stellarium may look
+  years. Historical calendars don't have a year zero. 1 AD is
+  preceded by 1 BC Therefore a negative year in Stellarium may look
   uncommon to historians who may think Stellarium is one year off.
 \end{itemize}
 
@@ -43,13 +43,12 @@ presentation of calendars from the pre-computer era is still the
 monumental work by \citet{Ginzel:ChronologieI, Ginzel:ChronologieII,
   Ginzel:ChronologieIII}.  The next challenge was then to describe
 the systematic of these and make them available for computer programs.
-\citet{Reingold-Dershowitz:2018} have presented a modern masterpiece
-of this kind and are our preferred source of algorithms. This plugin
-\newFeature{v0.20.4} will evolve over the next time to bring a good
-sample.
+\citet{Reingold-Dershowitz:2018} presents a modern masterpiece
+of this kind and is our preferred source of algorithms. This plugin
+\newFeature{v0.20.4} will evolve over time to bring a good sample of these algorithms.
 
 In the configuration panel you can select which calendars you want to
-display in the lower right corner of the sceen, and can also directly
+display in the lower right corner of the screen, and also allows to directly
 interact with some of them.
 
 
@@ -58,7 +57,7 @@ The calendars displayed in this plugin come with their own logic:
 \subsection{Lunisolar European calendars}
 \begin{description}
 \item[Julian] This implementation utilizes historical year counting,
-  i.e., has no year zero. Years are marked A.D. or B.C., respectively.
+  i.e., has no year zero. Years are marked AD or BC, respectively.
 \item[Gregorian] This implementation acts like Stellarium with respect
   to year counting and counts negative and positive years, with a year
   zero between them. It shows dates in a \emph{Proleptic Gregorian}
@@ -66,21 +65,21 @@ The calendars displayed in this plugin come with their own logic:
   keep the seasons's beginnings closer to the commonly known dates, at
   least for many more centuries in the past than the Julian calendar
   commonly used by historians.
-\item[ISO Week] The International Standards Organisation describes
+\item[ISO week] The International Standards Organisation describes
   weeks in the Gregorian calendar from Monday (Day 1) to Sunday (Day
   7). Week 1 of each year contains the first Thursday of the
   year. Years may have a week 53, where the last days already belong
-  to the next Gregorian year.
+  to the next Gregorian year. See also WP\footnote{\url{https://en.wikipedia.org/wiki/ISO_week_date}}
 \item[Roman calendar] This presents the Roman way of writing calendar
-  dates in the Julian calendar and provides dates \emph{ab urbe condita} (A.U.C.).
+  dates in the Julian calendar and provides dates \emph{ab urbe condita} (AUC).
 \item[Olympic calendar] Another way to write the years in the Julian
   calendar uses the Greek Olympiads, a 4-year cycle starting in 776
-  B.C.E. The Olympic games of antiquity were held in year 1 of each cycle.
+  BC. The Olympic games of antiquity were held in year 1 of each cycle.
 \end{description}
 
 \subsection{Near Eastern calendars}
 Several calendars with 12 months of 30 days plus 5 ``epagomenae''
-days, with different calendar eras.
+days\footnote{\url{https://en.wikipedia.org/wiki/Intercalary_month_(Egypt)}}, with different calendar eras.
 \begin{description}
 \item[Egyptian]
 \item[Armenian]
@@ -99,19 +98,19 @@ days, with different calendar eras.
   so that the third number from the right (\emph{tun}) increases about
   once per year. The higher places are called \emph{katun} and
   \emph{baktun}. In December of 2012 some people were afraid that the
-  switchover from \emph{baktun} 12 to 13 (something which accurs about
-  every 400 years) would cause armageddon, just as other people prefer
+  switchover from \emph{baktun} 12 to 13 (something which occurs about
+  every 400 years) would cause Armageddon, just as other people prefer
   to be afraid of turns of centuries or millennia of the Christian
   year count.
-\item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
-  (counted 1 to 20), plus 5 days (Uayeb) at the end, providing
+\item[Maya Haab\'] is a calendar of 18 ``months'' of 20 days each
+  (counted 1 to 20), plus 5 days (Uayeb or Wayeb\') at the end, providing
   ``years'' of 365 days.
-\item[Maya Tzolkin] is described as ritual calendar consisting of two
+\item[Maya Tzolkin] is described as a ritual calendar consisting of two
   cycles with 13 day numbers (1 to 13) and 20 names. Each day both
   counters are advanced. Date names repeat after 260 days. Usually
   both calendars were used to define a unique date which repeats only
   after a \emph{calendar round} of 52 years.
-\item[Aztec Xihuitl] is similar to the Maya Haab, consisting of 18
+\item[Aztec Xihuitl] is similar to the Maya Haab\', consisting of 18
   ``months'' of 20 days, plus 5 \emph{nemontemi} (worthless
   days). Days are counted from 1 to 20. The Aztecs may have used
   intercalation, but details have been lost. The correlation in use
@@ -125,18 +124,18 @@ days, with different calendar eras.
 The plugin is in an early phase of development. More calendars will be added in later versions. 
 
 
-\subsection{Configuration Options}
+\subsection{Configuration options}
 \label{sec:plugin:Calendars:configuration}
 
 The configuration dialog allows the selection of the calendars which are
-of interest to you, and also provides direct interaction with the calendars.
+of interest to you, and also provides direct interaction with some calendars.
 The Mayan and Aztec calendars allow moving to the previous or next date of that respective name. 
 
 \subsection*{Section \big[Calendars\big] in config.ini file}
 
 Apart from changing settings using the plugin configuration dialog,
 you can also edit the \file{config.ini} file to change
-settings for the Calendars plugin -- just make it carefully!
+settings for the Calendars plugin -- just make it carefully! In later iterations these settings can be made available via the configuration panel.
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
