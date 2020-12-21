@@ -67,7 +67,7 @@ QStringList ISOCalendar::getDateStrings() const
 	list << weekday(JD); // name of day
 
 	// https://en.wikipedia.org/wiki/ISO_week_date
-	list << QString::number(dayOfWeekFromFixed(JD) + 1); // day of week (1-7), 1= monday // XXX hackish, to check/test!
+	list << QString::number(dayOfWeekFromFixed(JD) + 1); // day of week, numerical (1-7), 1= monday // XXX hackish, to check/test!
 
 	return list;
 }
@@ -81,7 +81,7 @@ QString ISOCalendar::getFormattedDateString() const
 			//.arg(q_("Week")) // NOTE: ISO does not need translations?
 			.arg(str.at(1),2,'0') // week, numerical
 			.arg(str.at(4)) // day of week
-			.arg(str.at(3)) // weekday
+			.arg(str.at(3)) // weekday, numerical
 			;
 }
 

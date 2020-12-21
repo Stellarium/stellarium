@@ -73,10 +73,11 @@ void JulianCalendar::setJD(double JD)
 QStringList JulianCalendar::getDateStrings() const
 {
 	QStringList list;
+	// AD/BC rather than A.D./B.C.: see also https://en.wikipedia.org/wiki/Anno_Domini
 	list << QString("%1 %2")
 		.arg(abs(parts.at(0)))
 		.arg(parts.at(0)>0 ? q_("AD") : q_("BC"))
-		; // AD/BC: see also https://en.wikipedia.org/wiki/Anno_Domini
+		; 
 	list << QString::number(parts.at(1));
 	list << QString::number(parts.at(2));
 	list << weekday(JD);
