@@ -38,9 +38,9 @@ void ArmenianCalendar::retranslate()
 	// fill the name lists with translated month and day names
 	monthNames={
 		{ 1, qc_("Nawasardi" , "Armenian month name")},
-		{ 2, qc_("Hori"      , "Armenian month name")},
+		{ 2, qc_("Hor̄i"      , "Armenian month name")},
 		{ 3, qc_("Sahmi"     , "Armenian month name")},
-		{ 4, qc_("Tre"       , "Armenian month name")},
+		{ 4, qc_("Trē"       , "Armenian month name")},
 		{ 5, qc_("K'aloch"   , "Armenian month name")},
 		{ 6, qc_("Arach"     , "Armenian month name")},
 		{ 7, qc_("Mehekani"  , "Armenian month name")},
