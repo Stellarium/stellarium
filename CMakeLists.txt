@@ -420,6 +420,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(ArchaeoLines 1)
+ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)

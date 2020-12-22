@@ -321,26 +321,48 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always nonnegative.
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always positive.
+	//! Integer modulo where the result is always positive.
+	inline int amod(const int a, const int b){
+		int ret = a % b;
+		if(ret <= 0)
+			ret+=b;
+		return ret;
+	}
+	//! Double modulo where the result is always nonnegative.
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always positive.
+	//! Float modulo where the result is always nonnegative.
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
+	}
+
+	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
+	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
+	//! @returns floor(num/den)
+	inline long intFloorDiv (long num, long den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return num/den;
+	  else
+	    {
+	      ldiv_t res = ldiv(num,den);
+	      return (res.rem)? res.quot-1
+			      : res.quot;
+	    }
 	}
 
 	///////////////////////////////////////////////////
@@ -378,7 +400,7 @@ namespace StelUtils
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
 	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
-		return static_cast<int>(floor(d));
+		return std::lround(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -821,6 +843,12 @@ namespace StelUtils
 	//! @param b second number
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
+
+	//! Least Common Multiple
+	//! @param a first number
+	//! @param b second number
+	//! @return Least Common Multiple
+	int lcm(int a, int b);
 
 	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
 	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.

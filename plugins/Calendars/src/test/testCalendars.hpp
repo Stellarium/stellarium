@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2019 Alexander Wolf
+ * Copyright (C) 2020 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,37 +17,22 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTCOMPUTATIONS_HPP
-#define TESTCOMPUTATIONS_HPP
+
+#ifndef TESTCALENDARS_HPP
+#define TESTCALENDARS_HPP
 
 #include <QObject>
 #include <QtTest>
 
-class TestComputations : public QObject
+class TestCalendars : public QObject
 {
-	Q_OBJECT
-
+Q_OBJECT
 private slots:
-	void testJDFromBesselianEpoch();
-	void testIsPowerOfTwo();
-	void testGetBiggerPowerOfTwo();
-	void testDayInYear();
-	void testYearFraction();
-	void testEquToEqlTransformations();
-	void testEclToEquTransformations();
-	void testSpheToRectTransformations();
-	void testRectToSpheTransformations();
-	void testVector2Operators();
-	void testVector3Operators();
-	void testIntMod();
-	void testIntDiv();
-	void testIntFloorDiv();
-	void testFloatMod();
-	void testDoubleMod();
-	void testExp();
-	void testACos();
-	void testSign();
+	void testBasics();
+	void testEuropean();
+	void testNearEastern();
+	void testMesoamerican();
 };
 
-#endif // _TESTCOMPUTATIONS_HPP
+#endif // _TESTCALENDARS_HPP
 

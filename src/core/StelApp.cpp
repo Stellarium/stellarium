@@ -109,6 +109,10 @@ Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
 Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_CALENDARS
+Q_IMPORT_PLUGIN(CalendarsStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
 #endif

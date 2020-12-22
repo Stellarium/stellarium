@@ -704,6 +704,61 @@ void TestComputations::testIntMod()
 	}
 }
 
+void TestComputations::testIntDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << 0;
+	data << -9 << 5 << -1; // unfortunately...
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = a/b;
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
+void TestComputations::testIntFloorDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << -1; // should be next lower integer
+	data << -9 << 5 << -2;
+	data << -9 << -5 << 1;
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = StelUtils::intFloorDiv(a, b);
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
 void TestComputations::testFloatMod()
 {
 	QVariantList data;
