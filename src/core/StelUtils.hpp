@@ -355,7 +355,7 @@ namespace StelUtils
 	//! @returns floor(num/den)
 	inline long intFloorDiv (long num, long den)
 	{
-	  if (0 < (num^den))
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
 	    return num/den;
 	  else
 	    {
