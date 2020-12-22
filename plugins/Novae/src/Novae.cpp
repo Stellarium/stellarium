@@ -50,6 +50,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QDir>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 

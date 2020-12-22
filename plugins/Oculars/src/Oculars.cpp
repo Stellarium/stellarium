@@ -56,6 +56,7 @@
 #include <QPixmap>
 
 #include <cmath>
+#include <stdexcept>
 
 extern void qt_set_sequence_auto_mnemonic(bool b);
 

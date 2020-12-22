@@ -16,6 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <stdexcept>
+#include <QDebug>
+#include <QStyleOptionGraphicsItem>
+#include <QPainter>
+#include "StelGuiItems.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -23,12 +28,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
-#include "Calendars.hpp"
 
-#include <QDebug>
-#include <QStyleOptionGraphicsItem>
-#include <QPainter>
-#include "StelGuiItems.hpp"
+#include "Calendars.hpp"
+#include "CalendarsDialog.hpp"
 
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
@@ -47,7 +49,6 @@
 #include "AztecXihuitlCalendar.hpp"
 #include "AztecTonalpohualliCalendar.hpp"
 
-#include "CalendarsDialog.hpp"
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library

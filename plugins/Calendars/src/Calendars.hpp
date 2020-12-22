@@ -21,7 +21,6 @@
 
 #include <QFont>
 #include <QMap>
-//#include <QGraphicsTextItem>
 
 #include "StelModule.hpp"
 

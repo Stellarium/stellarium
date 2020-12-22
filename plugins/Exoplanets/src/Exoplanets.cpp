@@ -54,6 +54,7 @@
 #include <QPixmap>
 #include <QDir>
 #include <QSettings>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
