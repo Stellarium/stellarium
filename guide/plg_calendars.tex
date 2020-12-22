@@ -20,12 +20,13 @@ The calendar dates in the main program behave like most other astronomical softw
 \item Dates are given in the Gregorian calendar for all dates
   beginning with October 15, 1582.
 \item All earlier dates are given in the Julian Calendar in its
-  finalized form by Augustus. Historically, only dates beginning with
-  March 1st, 4 A.D. coincide with historically recorded dates: the
-  Roman priesthood messed up the 4-year count introduced by Julius
-  Caesar and counted leap years every third year. Augustus decreed to
-  omit leap days from 12 B.C. to 4~A.D to move the seasons to where
-  Julius Caesar had placed them.
+  finalized form by \name{Augustus}. Historically, only dates
+  beginning with March 1st, 4 A.D. coincide with historically recorded
+  dates: the Roman priesthood messed up the 4-year count introduced by
+  \name[Julius]{Caesar} and counted leap years every third
+  year. \name{Augustus} decreed to omit leap days from 12~B.C. to
+  4~A.D. to move the seasons to where \name[Julius]{Caesar} had placed
+  them.
 \item Given the errors in the Julian calendar, simulation in early
   prehistory will provide non-intuitive calendar dates for the
   seasons' beginnings.
@@ -40,20 +41,29 @@ Since earliest times people all over the world have observed the sky
 and used its phenomena to record and measure time. Over millennia,
 various systematic calendars evolved. A classic and often-cited
 presentation of calendars from the pre-computer era is still the
-monumental work by \citet{Ginzel:ChronologieI, Ginzel:ChronologieII,
-  Ginzel:ChronologieIII}.  The next challenge was then to describe
-the systematic of these and make them available for computer programs.
-\citet{Reingold-Dershowitz:2018} have presented a modern masterpiece
-of this kind and are our preferred source of algorithms. This plugin
-\newFeature{v0.20.4} will evolve over the next time to bring a good
-sample.
+monumental work by Ginzel (\citeyear{Ginzel:ChronologieI, Ginzel:ChronologieII,
+  Ginzel:ChronologieIII}).  The next challenge was then to describe the
+systematic of these algorithmically and make them available for
+computer programs.  \citet{Reingold-Dershowitz:2018} have presented a
+modern masterpiece of this kind and are our preferred source of
+algorithms. This plugin \newFeature{v0.20.4} will evolve over the next
+time to bring a good sample of calendars into Stellarium.
 
 In the configuration panel you can select which calendars you want to
 display in the lower right corner of the sceen, and can also directly
 interact with some of them.
 
 
-The calendars displayed in this plugin come with their own logic:
+The calendars displayed in this plugin come with their own
+logic. Historically, when a calendar was introduced, dates which
+precede its starting point (era) were of little interest to its users,
+therefore if a date bears negative years (or negative units of its
+largest component) those dates may not be useful.
+
+Note that in some calendars the day did not begin at midnight, but for
+example at sunrise, sunset, or dawn. This cannot be reflected in this
+plugin. Dates should be correct at noon, and may be one day off
+dependent on these aspects.
 
 \subsection{Lunisolar European calendars}
 \begin{description}
@@ -62,10 +72,10 @@ The calendars displayed in this plugin come with their own logic:
 \item[Gregorian] This implementation acts like Stellarium with respect
   to year counting and counts negative and positive years, with a year
   zero between them. It shows dates in a \emph{Proleptic Gregorian}
-  calendar for dates before October 15, 1582. This may look simpler to
-  keep the seasons's beginnings closer to the commonly known dates, at
-  least for many more centuries in the past than the Julian calendar
-  commonly used by historians.
+  calendar for dates before October 15, 1582. Given its improved rules
+  for leap years, it keep the seasons's beginnings closer to the
+  commonly known dates, at least for many more centuries in the past
+  than the Julian calendar commonly used by historians.
 \item[ISO Week] The International Standards Organisation describes
   weeks in the Gregorian calendar from Monday (Day 1) to Sunday (Day
   7). Week 1 of each year contains the first Thursday of the
@@ -83,14 +93,21 @@ The calendars displayed in this plugin come with their own logic:
 \end{description}
 
 \subsection{Near Eastern calendars}
-Several calendars with 12 months of 30 days plus 5 ``epagomenae''
-days, with different calendar eras.
+Several calendars with 12 months of 30 days plus 5 (6 for leap years
+in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
 \begin{description}
-\item[Egyptian]
-\item[Armenian]
-\item[Zoroastrian]. This uses different names for each day of the month.
-\item[Coptic] Month names derived from the Egyptian calendar, but with leap year every 4th year. Its \emph{era martyrum} is also called \emph{Diocletian era}.
-\item[Ethiopian] Parallel to the Coptic calendar, just with different year count, the \emph{ethiopic era of mercy}.
+\item[Egyptian] A 365 day year without leap days. Following the
+  tradition of \name{Ptolemy}, we use the \emph{era of Nabonassar}.
+\item[Armenian] also has no leap days.
+\item[Zoroastrian] also has no leap days. This uses different names
+  for each day of the month and for each \emph{epagomenae} day. Month
+  names are from \citet[\S69]{Ginzel:ChronologieI} with
+  transliteration adapted to \citet{Reingold-Dershowitz:2018}.
+\item[Coptic] Month names derived from the Egyptian calendar, but with
+  leap year every 4th year. Its \emph{era martyrum} is also called
+  \emph{Diocletian era}.
+\item[Ethiopic] Parallel to the Coptic calendar, just with different
+  year number, the \emph{ethiopic era of mercy}.
 \end{description}
 
 \subsection{Mesoamerican calendars}
@@ -104,25 +121,31 @@ days, with different calendar eras.
   $20\times18=360$ days have been used to approximate the solar year,
   so that the third number from the right (\emph{tun}) increases about
   once per year. The higher places are called \emph{katun} and
-  \emph{baktun}. In December of 2012 some people were afraid that the
-  switchover from \emph{baktun} 12 to 13 (something which accurs about
-  every 400 years) would cause armageddon, just as other people prefer
-  to be afraid of turns of centuries or millennia of the Christian
-  year count.
+  \emph{baktun}. Most scientists agree that the zero point of the long
+  count corresponds to Monday, September 6, 3114 B.C. (Julian), but in
+  many sources dates in the proleptic Gregorian calendar are listed,
+  where this date is given as August 11, -3113. This plugin finally
+  allows the use of both systems.
+
+  In December of 2012 some people were afraid that the switchover from
+  \emph{baktun} 12 to 13 (something which accurs about every 400
+  years) would cause armageddon, just as other people prefer to be
+  afraid of turns of centuries or millennia of the Christian year
+  count.
 \item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
-  (counted 1 to 20), plus 5 days (Uayeb) at the end, providing
+  (counted 1 to 20), plus 5 days (\emph{Uayeb}) at the end, providing
   ``years'' of 365 days.
 \item[Maya Tzolkin] is described as ritual calendar consisting of two
   cycles with 13 day numbers (1 to 13) and 20 names. Each day both
   counters are advanced. Date names repeat after 260 days. Usually
-  both calendars were used to define a unique date which repeats only
-  after a \emph{calendar round} of 52 years.
+  Haab and Tzolkin calendars were both used to define a unique date
+  which repeats only after a \emph{calendar round} of 52 years.
 \item[Aztec Xihuitl] is similar to the Maya Haab, consisting of 18
   ``months'' of 20 days, plus 5 \emph{nemontemi} (worthless
   days). Days are counted from 1 to 20. The Aztecs may have used
   intercalation, but details have been lost. The correlation in use
   here is based on the recorded Aztec date of the fall of their empire
-  to Hern\'an Cort\'es in 1521 and should provide correct dates in the
+  to \name[Hern\'an]{Cort\'es} in 1521 and should provide correct dates in the
   early 16th century.
 \item[Aztec Tonalpohualli] is similar in structure to the Mayan Tzolkin.
 \end{description}
