@@ -2,6 +2,8 @@
 
 Hello, and thank you for your interest to Stellarium! 
 
+If you want to test a prebuilt beta version, take a look at https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
+
 ## Why build from source?
 
 Each time Stellarium is released, the source code is released in Github's 
