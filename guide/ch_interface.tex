@@ -287,7 +287,9 @@ know what you are doing.
 \label{fig:gui:configuration:tools}
 \end{figure}
 
-The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options (like enabling/disabling of keyboard shortcuts for panning and zooming the main view) and options for screenshots.
+The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options 
+(like enabling/disabling of keyboard shortcuts for panning and zooming the main view) 
+and options for screenshots.
 
 \begin{description}
 \item[Spheric mirror distortion] This option pre-warps the main view
@@ -314,9 +316,15 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
   addition to the field of view.
 \item[Enable keyboard navigation]
 \item[Enable mouse navigation]
-\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the color settings for each celestial object and enable one color for text on the info panel for all celestial objects. By default Stellarium uses white color for this option, but you may re-define it through color chooser\newFeature{v0.20.3}.
-\item[Set keyboard focus to day input] --- you may use this option to force set focus on the day input field in Date and Time dialog. Important note: the focus in the sky will be lost when you open Date and Time dialog with enabling of this option.
-
+\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the 
+  color settings for each celestial object and enable one color for text on the info panel 
+  for all celestial objects. By default Stellarium uses white color for this option, 
+  but you may re-define it through a color chooser\newFeature{v0.20.3}.
+\item[Set keyboard focus to day input] --- you may use this option to force setting the 
+  keyboaard focus on the day input field in the Date and Time dialog. 
+  
+  Important note: the focus in the sky will be lost when you open the 
+  Date and Time dialog after enabling this option.
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
@@ -330,7 +338,9 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
   mouse cursor should disappear from view when not moved.
-\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the color of text on the info panel at daylight to increase a contrast of the text. By default planetarium use black color.
+\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the 
+  text color for the info panel at daylight to increase the contrast of the text. 
+  By default Stellarium use black color.
 \item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
 dialogs can either be moved on sidebar handles (with this switch
 disabled) or by dragging the text itself (enabled), as it is known
@@ -464,7 +474,8 @@ for changing the general appearance of the main sky view and projections. Some h
   labels displayed for stars. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
-\item[Use designations for screen labels] --- when this option is enabled you will see in the sky only designations of the stars instead of their common names.
+\item[Use designations for screen labels] --- when this option is enabled you will see 
+  in the sky only scientific designations of the stars instead of their common names.
 \end{description}
 
 \noindent Projection field: Selecting items in this list changes the
@@ -992,7 +1003,10 @@ The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCa
 
 When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
-Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} To show a line between markers please tick checkbox \emph{Show line}. You may customize the format of displayed data near markers and their frequency in \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
+Dates and/or magnitudes will show up near position markers when \emph{Show dates} 
+and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} 
+To show a line between markers please tick checkbox \emph{Show line}. 
+You may customize the format of displayed data near markers and their frequency in the \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
 
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
@@ -1016,12 +1030,16 @@ You can export the calculated ephemeris into an XLSX or CSV file.
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
-For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma} and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
+For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}
+and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
-Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and enable display markers for all naked-eye visible planets.
+Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and 
+enable display markers for all naked-eye visible planets.
 
-Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of two objects in same time and define custom time step for ephemeris (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
+Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of 
+two objects at the same time and define custom time step for the ephemeris 
+(Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
 \subsection{The Transits Tab}
 \label{sec:gui:AstroCalc:Transits}
@@ -1032,19 +1050,23 @@ Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris o
 	\label{fig:gui:AstroCalc:Transits}
 \end{figure}
 
-This \newFeature{v0.19.3} tab allows you to compute transits of selected celestial object (except unnamed stars and artificial satellites) for specific date range. The tool is proposed for planning observations and he suggest the best time and conditions for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
+\noindent This \newFeature{v0.19.3} tab allows you to compute meridian transits of selected celestial object 
+(except unnamed stars and artificial satellites) for a specific date range. 
+The tool is proposed for planning observations, and it suggests the best time and conditions 
+for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
 
 You may also export the list of transits into an XLSX or CSV file.
 
-%\newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations for inner planets and stationary points for all planets in
-additional to exist phenomena. For all Solar system bodies, except the moons, we also propose compute perihelion and aphelion in addition to other phenomena.
+In version 0.19.3\newFeature{v0.19.3} we added computation of greatest 
+elongations for the inner planets and stationary points for all planets in
+addition to the exist phenomena. For all Solar system bodies, except the moons, 
+we also compute perihelia and aphelia in addition to the other phenomena.
 
 You can export the calculated phenomena into an XLSX or CSV file.
 
@@ -1182,7 +1204,7 @@ You may center an object from the right list in the sky map just by selecting it
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
 In version 0.18.3 \newFeature{v0.18.3} this tool has been refactored: the tool for searching items from list of \emph{Matching Objects} was removed,
-the filter for magnitudes was moved to the right and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
+the filter for magnitudes was moved to the right, and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
 In addition to the names we added 5 new sortable columns: magnitude, rising time, transit time, setting time and angular size of object.
 
 

@@ -50,7 +50,7 @@ algorithms. This plugin \newFeature{v0.20.4} will evolve over the next
 time to bring a good sample of calendars into Stellarium.
 
 In the configuration panel you can select which calendars you want to
-display in the lower right corner of the sceen, and can also directly
+display in the lower right corner of the sceen, and you can also directly
 interact with some of them.
 
 
@@ -73,7 +73,7 @@ dependent on these aspects.
   to year counting and counts negative and positive years, with a year
   zero between them. It shows dates in a \emph{Proleptic Gregorian}
   calendar for dates before October 15, 1582. Given its improved rules
-  for leap years, it keep the seasons's beginnings closer to the
+  for leap years, it keeps the seasons's beginnings closer to the
   commonly known dates, at least for many more centuries in the past
   than the Julian calendar commonly used by historians.
 \item[ISO Week] The International Standards Organisation describes
@@ -103,32 +103,34 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   for each day of the month and for each \emph{epagomenae} day. Month
   names are from \citet[\S69]{Ginzel:ChronologieI} with
   transliteration adapted to \citet{Reingold-Dershowitz:2018}.
-\item[Coptic] Month names derived from the Egyptian calendar, but with
-  leap year every 4th year. Its \emph{era martyrum} is also called
+\item[Coptic] uses Month names derived from the Egyptian calendar, but observes
+  leap years every 4th year. Its \emph{era martyrum} is also called
   \emph{Diocletian era}.
-\item[Ethiopic] Parallel to the Coptic calendar, just with different
-  year number, the \emph{ethiopic era of mercy}.
+\item[Ethiopic] is Parallel to the Coptic calendar, just with different
+  year numbers, counted from the \emph{ethiopic era of mercy}.
 \end{description}
 
 \subsection{Mesoamerican calendars}
 \begin{description}
 \item[Maya Long Count] is a 5-part sequence of numbers. Just like most
-  modern people write numbers in the decimal system (base 10), the
-  Maya used base 20 as their unit. However, this count uses a
-  mixed-base system. The lowest (rightmost) number (\emph{kin}) runs
-  from 0 to 19, the second-lowest (\emph{uinal}) from 0 to 17, the
-  others from 0 to 19 again. It is assumed these lowest places of
-  $20\times18=360$ days have been used to approximate the solar year,
-  so that the third number from the right (\emph{tun}) increases about
-  once per year. The higher places are called \emph{katun} and
-  \emph{baktun}. Most scientists agree that the zero point of the long
-  count corresponds to Monday, September 6, 3114 B.C. (Julian), but in
-  many sources dates in the proleptic Gregorian calendar are listed,
-  where this date is given as August 11, -3113. This plugin finally
-  allows the use of both systems.
+  modern people write numbers in the decimal system (base 10), and the
+  Mesopotamians developed a scheme with base 60 still used today for
+  angular and temporal minutes and seconds, the Maya used base 20 as their
+  unit. However, this count uses a mixed-base system. The lowest
+  (rightmost) number (\emph{kin}) runs from 0 to 19, the second-lowest
+  (\emph{uinal}) from 0 to 17, the others from 0 to 19 again. It is
+  assumed these lowest places of $18\times20=360$ days have been used
+  to approximate the solar year, so that the third number from the
+  right (\emph{tun}) increases about once per year. The higher places
+  are called \emph{katun} and \emph{baktun}. Most scientists agree
+  that the zero point of the long count corresponds to Monday,
+  September 6, 3114 B.C. (Julian), but in many sources dates in the
+  proleptic Gregorian calendar are listed, where this date is given as
+  August 11, -3113. This plugin finally allows the use of both
+  systems, and of Long Count dates directly.
 
   In December of 2012 some people were afraid that the switchover from
-  \emph{baktun} 12 to 13 (something which accurs about every 400
+  \emph{baktun} 12 to 13 (something which occurs about every 400
   years) would cause armageddon, just as other people prefer to be
   afraid of turns of centuries or millennia of the Christian year
   count.
@@ -172,12 +174,15 @@ settings for the Calendars plugin -- just make it carefully!
 show                         &bool & true\\\midrule
 show\_julian                 &bool & true\\
 show\_gregorian              &bool & true\\
-show\_iso                    &bool & true\\\midrule
+show\_iso                    &bool & true\\
+show\_icelandic              &bool & true\\\midrule
 show\_roman                  &bool & true\\
 show\_olympic                &bool & true\\
 show\_egyptian               &bool & true\\
 show\_armenian               &bool & true\\
-show\_zoroastrian            &bool & true\\\midrule
+show\_zoroastrian            &bool & true\\
+show\_coptic                 &bool & true\\
+show\_ethiopian              &bool & true\\\midrule
 show\_maya\_long\_count      &bool & true\\
 show\_maya\_haab             &bool & true\\
 show\_maya\_tzolkin          &bool & true\\

@@ -215,10 +215,10 @@ void ExoplanetsDialog::fillExoplanetsTable()
 				treeItem->setToolTip(EPSExoplanetName, trans.qtranslate(epdata["planetProperName"].toString().trimmed()));
 			}
 			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toFloat(), 'f', 2) : dash);
-			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in jovian masses"));
+			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in Jovian masses"));
 			treeItem->setTextAlignment(EPSExoplanetMass,  Qt::AlignRight);
 			treeItem->setText(EPSExoplanetRadius, epdata.contains("radius") ? QString::number(epdata["radius"].toFloat(), 'f', 2) : dash);
-			treeItem->setToolTip(EPSExoplanetRadius,  q_("Radius of exoplanet in jovian radiuses"));
+			treeItem->setToolTip(EPSExoplanetRadius,  q_("Radius of exoplanet in Jovian radii"));
 			treeItem->setTextAlignment(EPSExoplanetRadius,  Qt::AlignRight);
 			treeItem->setText(EPSExoplanetPeriod, epdata.contains("period") ? QString::number(epdata["period"].toFloat(), 'f', 2) : dash);
 			treeItem->setToolTip(EPSExoplanetPeriod,  q_("Orbital period of exoplanet in days"));
@@ -238,7 +238,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			treeItem->setText(EPSStarMagnitude, vmag < 98.f ? QString::number(vmag, 'f', 2) : dash);
 			treeItem->setTextAlignment(EPSStarMagnitude,  Qt::AlignRight);
 			treeItem->setText(EPSStarRadius, sradius);
-			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radiuses"));
+			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radii"));
 			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
 			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
 			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
