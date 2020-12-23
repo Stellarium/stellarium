@@ -150,133 +150,133 @@
          <item row="0" column="0">
           <widget class="QCheckBox" name="julianCheckBox">
            <property name="text">
-            <string>Julian</string>
+            <string comment="calendar">Julian</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="gregorianCheckBox">
            <property name="text">
-            <string>Gregorian</string>
+            <string comment="calendar">Gregorian</string>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
           <widget class="QCheckBox" name="isoCheckBox">
            <property name="text">
-            <string>ISO Week</string>
+            <string comment="calendar">ISO Week</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
           <widget class="QCheckBox" name="egyptianCheckBox">
            <property name="text">
-            <string>Egyptian</string>
+            <string comment="calendar">Egyptian</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QCheckBox" name="armenianCheckBox">
            <property name="text">
-            <string>Armenian</string>
+            <string comment="calendar">Armenian</string>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
           <widget class="QCheckBox" name="zoroastrianCheckBox">
            <property name="text">
-            <string>Zoroastrian</string>
+            <string comment="calendar">Zoroastrian</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
           <widget class="QCheckBox" name="romanCheckBox">
            <property name="text">
-            <string>Roman</string>
+            <string comment="calendar">Roman</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="olympicCheckBox">
            <property name="text">
-            <string>Olympic</string>
+            <string comment="calendar">Olympic</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
           <widget class="QCheckBox" name="chineseCheckBox">
            <property name="text">
-            <string>Chinese</string>
+            <string comment="calendar">Chinese</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QCheckBox" name="copticCheckBox">
            <property name="text">
-            <string>Coptic</string>
+            <string comment="calendar">Coptic</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
           <widget class="QCheckBox" name="icelandicCheckBox">
            <property name="text">
-            <string>Icelandic</string>
+            <string comment="calendar">Icelandic</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
           <widget class="QCheckBox" name="ethiopicCheckBox">
            <property name="text">
-            <string>Ethiopic</string>
+            <string comment="calendar">Ethiopic</string>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
           <widget class="QCheckBox" name="mayaLCCheckBox">
            <property name="text">
-            <string>Maya Long Count</string>
+            <string comment="calendar">Maya Long Count</string>
            </property>
           </widget>
          </item>
          <item row="6" column="1">
           <widget class="QCheckBox" name="aztecXihuitlCheckBox">
            <property name="text">
-            <string>Aztec Xihuitl</string>
+            <string comment="calendar">Aztec Xihuitl</string>
            </property>
           </widget>
          </item>
          <item row="5" column="1">
           <widget class="QCheckBox" name="mayaHaabCheckBox">
            <property name="text">
-            <string>Maya Haab</string>
+            <string comment="calendar">Maya Haab</string>
            </property>
           </widget>
          </item>
          <item row="6" column="2">
           <widget class="QCheckBox" name="aztecTonalpohualliCheckBox">
            <property name="text">
-            <string>Aztec Tonalpohualli</string>
+            <string comment="calendar">Aztec Tonalpohualli</string>
            </property>
           </widget>
          </item>
          <item row="5" column="2">
           <widget class="QCheckBox" name="mayaTzolkinCheckBox">
            <property name="text">
-            <string>Maya Tzolkin</string>
+            <string comment="calendar">Maya Tzolkin</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
           <widget class="QCheckBox" name="islamicCheckBox">
            <property name="text">
-            <string>Islamic</string>
+            <string comment="calendar">Islamic</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
           <widget class="QCheckBox" name="hebrewCheckBox">
            <property name="text">
-            <string>Hebrew</string>
+            <string comment="calendar">Hebrew</string>
            </property>
           </widget>
          </item>
@@ -717,8 +717,12 @@
          </item>
          <item row="3" column="5">
           <widget class="QPushButton" name="nextTzolkinButton">
-           <property name="text">
-            <string>--&gt;</string>
+           <property name="toolTip">
+            <string>Step forward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeForward-off.png</normaloff>:/graphicGui/btTimeForward-off.png</iconset>
            </property>
           </widget>
          </item>
@@ -763,15 +767,23 @@
          </item>
          <item row="2" column="5">
           <widget class="QPushButton" name="nextHaabButton">
-           <property name="text">
-            <string>--&gt;</string>
+           <property name="toolTip">
+            <string>Step forward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeForward-off.png</normaloff>:/graphicGui/btTimeForward-off.png</iconset>
            </property>
           </widget>
          </item>
          <item row="3" column="4">
           <widget class="QPushButton" name="previousTzolkinButton">
-           <property name="text">
-            <string>&lt;--</string>
+           <property name="toolTip">
+            <string>Step backward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeRewind-off.png</normaloff>:/graphicGui/btTimeRewind-off.png</iconset>
            </property>
           </widget>
          </item>
@@ -790,8 +802,12 @@
          </item>
          <item row="2" column="4">
           <widget class="QPushButton" name="previousHaabButton">
-           <property name="text">
-            <string>&lt;--</string>
+           <property name="toolTip">
+            <string>Step backward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeRewind-off.png</normaloff>:/graphicGui/btTimeRewind-off.png</iconset>
            </property>
           </widget>
          </item>
@@ -884,29 +900,45 @@
          </item>
          <item row="5" column="4">
           <widget class="QPushButton" name="previousXihuitlButton">
-           <property name="text">
-            <string>&lt;--</string>
+           <property name="toolTip">
+            <string>Step backward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeRewind-off.png</normaloff>:/graphicGui/btTimeRewind-off.png</iconset>
            </property>
           </widget>
          </item>
          <item row="5" column="5">
           <widget class="QPushButton" name="nextXihuitlButton">
-           <property name="text">
-            <string>--&gt;</string>
+           <property name="toolTip">
+            <string>Step forward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeForward-off.png</normaloff>:/graphicGui/btTimeForward-off.png</iconset>
            </property>
           </widget>
          </item>
          <item row="6" column="4">
           <widget class="QPushButton" name="previousTonalpohualliButton">
-           <property name="text">
-            <string>&lt;--</string>
+           <property name="toolTip">
+            <string>Step backward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeRewind-off.png</normaloff>:/graphicGui/btTimeRewind-off.png</iconset>
            </property>
           </widget>
          </item>
          <item row="6" column="5">
           <widget class="QPushButton" name="nextTonalpohualliButton">
-           <property name="text">
-            <string>--&gt;</string>
+           <property name="toolTip">
+            <string>Step forward</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/btTimeForward-off.png</normaloff>:/graphicGui/btTimeForward-off.png</iconset>
            </property>
           </widget>
          </item>
@@ -959,6 +991,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

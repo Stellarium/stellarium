@@ -140,7 +140,7 @@ StelMovementMgr::~StelMovementMgr()
 
 void StelMovementMgr::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
@@ -237,10 +237,6 @@ void StelMovementMgr::init()
 	// Field of view
 	// The feature was moved from FOV plugin	
 	bindingFOVActions();
-	// Remove all FOV settings
-	conf->beginGroup("FOV");
-	conf->remove("");
-	conf->endGroup();
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
@@ -251,14 +247,15 @@ void StelMovementMgr::init()
 void StelMovementMgr::bindingFOVActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	QString tfov, fovGroup = N_("Field of View"), fovText = q_("Set FOV to");
-	QList<float> fov = { 0.5f, 180.f, 90.f, 60.f, 45.f, 20.f, 10.f, 5.f, 2.f, 1.f };
-	for (int i = 0; i < fov.size(); ++i)
+	QString confval, tfov, fovGroup = N_("Field of View"), fovText = q_("Set predefined FOV");
+	QList<float> defaultFOV = { 0.5f, 180.f, 90.f, 60.f, 45.f, 20.f, 10.f, 5.f, 2.f, 1.f };
+	for (int i = 0; i < defaultFOV.size(); ++i)
 	{
-		float cfov = fov.at(i);
-		(cfov<1.f) ? tfov = QString::number(cfov, 'f', 1) : tfov = QString::number(cfov, 'f', 0);
-		QString actionName = QString("actionSet_FOV_%1deg").arg(tfov).replace(".","_");
-		QString actionDescription = QString("%1 %2%3").arg(fovText, tfov, QChar(0x00B0));		
+		confval = QString("fov/quick_fov_%1").arg(i);
+		float cfov = conf->value(confval, defaultFOV.at(i)).toFloat();
+		tfov = QString::number(cfov, 'f', 2);
+		QString actionName = QString("actionSet_FOV_%1").arg(i);
+		QString actionDescription = QString("%1 #%2 (%3%4)").arg(fovText, QString::number(i), tfov, QChar(0x00B0));
 		StelAction* action = actionMgr->findAction(actionName);
 		if (action!=Q_NULLPTR)
 			actionMgr->findAction(actionName)->setText(actionDescription);

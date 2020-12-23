@@ -284,7 +284,12 @@ script\_console\_keyword\_color         & \ccbox{1.0,0.0,1.0} & syntax highlight
 script\_console\_module\_color          & \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\%\midrule
 script\_console\_comment\_color         & \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\%\midrule
 script\_console\_function\_color        & \ccbox{0.0,1.0,0.0} & syntax highlight for functions in the script console. \\%\midrule
-script\_console\_constant\_color        & \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\
+script\_console\_constant\_color        & \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\\midrule
+% special markers colors
+fov\_center\_marker\_color              & \ccbox{0.5,0.5,0.7} & FOV Center marker. \\%\midrule
+fov\_circular\_marker\_color            & \ccbox{0.5,0.5,0.7} & circular marker of FOV. \\%\midrule
+fov\_rectangular\_marker\_color         & \ccbox{0.5,0.5,0.7} & rectangular marker of FOV. \\%\midrule
+compass\_marks\_color                   & \ccbox{0.5,0.5,0.7} & compass marks. \\
 \bottomrule
 \end{longtable}
 
@@ -404,6 +409,25 @@ flag\_show\_galaxy\_clusters      & bool & true & display clusters of galaxies. 
 flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
 \end{tabularx}
 
+\subsection{\big[fov\big]}
+In this section you can fine-tune 10 predefined values of field of view in degrees (all FOV may be set through keyboard hotkeys).
+
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+quick\_fov\_0 & float & 0.5  & predefined value for FOV \emph{0}.\\%\midrule
+quick\_fov\_1 & float & 180  & predefined value for FOV \emph{1}.\\%\midrule
+quick\_fov\_2 & float & 90   & predefined value for FOV \emph{2}.\\%\midrule
+quick\_fov\_3 & float & 60   & predefined value for FOV \emph{3}.\\%\midrule
+quick\_fov\_4 & float & 45   & predefined value for FOV \emph{4}.\\%\midrule
+quick\_fov\_5 & float & 20   & predefined value for FOV \emph{5}.\\%\midrule
+quick\_fov\_6 & float & 10   & predefined value for FOV \emph{6}.\\%\midrule
+quick\_fov\_7 & float & 5    & predefined value for FOV \emph{7}.\\%\midrule
+quick\_fov\_8 & float & 2    & predefined value for FOV \emph{8}.\\%\midrule
+quick\_fov\_9 & float & 1    & predefined value for FOV \emph{9}.  \\\bottomrule
+\end{tabularx}
+
+
 \subsection{\big[gui\big]}
 %\label{sec:config.ini:gui}
 
@@ -442,6 +466,8 @@ flag\_show\_hips\_button               & bool  & false & Show a button to toggle
 flag\_show\_bookmark\_button           & bool  & false & Show a button to show and edit bookmarks\\
 flag\_show\_fullscreen\_button         & bool  & true  & Show a button to toggle fullscreen view\\
 flag\_show\_quit\_button               & bool  & true  & Show a button to quit via button press\\
+flag\_show\_cardinal\_button           & bool  & true  & Show a button to toggle cardinals via button press\\
+flag\_show\_compass\_button            & bool  & false & Show a button to toggle compass marks via button press\\
 flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
 flag\_overwrite\_info\_color           & bool  & false & Set \emph{true} to use one color for test in info panel for all objects.\\\midrule
 %
@@ -848,6 +874,15 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 
 flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
 minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
+\midrule
+flag\_fov\_center\_marker        & bool  & Set to \emph{true} to enable drawing a center of field of view marker \\
+flag\_fov\_circular\_marker      & bool  & Set to \emph{true} to enable drawing the circular FOV marker \\
+size\_fov\_circular\_marker      & float & size of the circular FOV marker, degrees \\
+flag\_fov\_rectangular\_marker   & bool  & Set to \emph{true} to enable drawing the rectangular FOV marker \\
+width\_fov\_rectangular\_marker  & float & width of the rectangular FOV marker, degrees \\
+height\_fov\_rectangular\_marker & float & height of the rectangular FOV marker, degrees \\
+rot\_fov\_rectangular\_marker    & float & rotation angle of the rectangular FOV marker, degrees \\
+flag\_compass\_marks             & bool  & Set to \emph{true} to enable drawing a compass marks \\
 \midrule
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\%\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\%\midrule
