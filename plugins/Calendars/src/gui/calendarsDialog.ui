@@ -387,9 +387,9 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="labelJulianCalendar">
            <property name="text">
-            <string>Julian</string>
+            <string comment="calendar">Julian</string>
            </property>
           </widget>
          </item>
@@ -460,16 +460,16 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="labelISOWeekCalendar">
            <property name="text">
-            <string>ISO Week</string>
+            <string comment="calendar">ISO Week</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="labelGregorian">
+          <widget class="QLabel" name="labelGregorianCalendar">
            <property name="text">
-            <string>Gregorian</string>
+            <string comment="calendar">Gregorian</string>
            </property>
           </widget>
          </item>
@@ -595,7 +595,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="labelMaya">
            <property name="text">
-            <string>Maya</string>
+            <string comment="calendar">Maya</string>
            </property>
           </widget>
          </item>
@@ -814,7 +814,7 @@
          <item row="4" column="0">
           <widget class="QLabel" name="labelAztec">
            <property name="text">
-            <string>Aztec</string>
+            <string comment="calendar">Aztec</string>
            </property>
           </widget>
          </item>
