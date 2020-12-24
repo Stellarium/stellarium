@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-24 10:35+0700\n"
+"POT-Creation-Date: 2020-12-24 20:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5897,6 +5897,7 @@ msgid "Linear distance"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6352
+#: plugins/Calendars/src/ui_calendarsDialog.h:772
 msgid "Day"
 msgstr ""
 
@@ -7008,7 +7009,7 @@ msgid "Armintxe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:483 plugins/Calendars/src/ui_calendarsDialog.h:803
 msgid "Aztec"
 msgstr ""
 
@@ -7023,7 +7024,7 @@ msgid "Boorong"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:489 plugins/Calendars/src/ui_calendarsDialog.h:781
 msgid "Chinese"
 msgstr ""
 
@@ -7088,7 +7089,7 @@ msgid "Maori"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:515
+#: src/translations.h:515 plugins/Calendars/src/ui_calendarsDialog.h:784
 msgid "Maya"
 msgstr ""
 
@@ -10794,6 +10795,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
+#: plugins/Calendars/src/ui_calendarsDialog.h:768
 msgid "Restore defaults"
 msgstr ""
 
@@ -12715,6 +12717,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:480
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:324
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
+#: plugins/Calendars/src/ui_calendarsDialog.h:819
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -22391,11 +22394,13 @@ msgid "Calendars of the world"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:250
+#: plugins/Calendars/src/ui_calendarsDialog.h:749
 msgctxt "calendar"
 msgid "Julian"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:251
+#: plugins/Calendars/src/ui_calendarsDialog.h:750
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr ""
@@ -22406,66 +22411,79 @@ msgid "ISO week"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:253
+#: plugins/Calendars/src/ui_calendarsDialog.h:759
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:254
+#: plugins/Calendars/src/ui_calendarsDialog.h:755
 msgctxt "calendar"
 msgid "Roman"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:255
+#: plugins/Calendars/src/ui_calendarsDialog.h:756
 msgctxt "calendar"
 msgid "Olympic"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:256
+#: plugins/Calendars/src/ui_calendarsDialog.h:752
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:257
+#: plugins/Calendars/src/ui_calendarsDialog.h:753
 msgctxt "calendar"
 msgid "Armenian"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:258
+#: plugins/Calendars/src/ui_calendarsDialog.h:754
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:259
+#: plugins/Calendars/src/ui_calendarsDialog.h:758
 msgctxt "calendar"
 msgid "Coptic"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:260
+#: plugins/Calendars/src/ui_calendarsDialog.h:760
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:261
+#: plugins/Calendars/src/ui_calendarsDialog.h:761
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:262
+#: plugins/Calendars/src/ui_calendarsDialog.h:763
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:263
+#: plugins/Calendars/src/ui_calendarsDialog.h:765
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:264
+#: plugins/Calendars/src/ui_calendarsDialog.h:762
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:265
+#: plugins/Calendars/src/ui_calendarsDialog.h:764
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr ""
@@ -22546,7 +22564,129 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid ""
 "If you want to read full information about this plugin and its history, see "
-"the Stellarium User Guide\">\\1</a>"
+"the Stellarium User Guide"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:746
+msgid "Calendars Configuration"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:747
+msgid "Calendars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:751
+msgctxt "calendar"
+msgid "ISO Week"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:757
+msgctxt "calendar"
+msgid "Chinese"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:766
+msgctxt "calendar"
+msgid "Islamic"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:767
+msgctxt "calendar"
+msgid "Hebrew"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:769
+msgid "Display"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:770
+msgid "Month"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:771
+msgid "Julian"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:773
+msgid "Weekday"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:774
+msgid "ISO Week"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:775
+msgid "Gregorian"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:777
+msgid "Negative years here mark years B.C."
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:779
+msgid "Year"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:780
+msgid "Lunisolar"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:782
+msgid "Katun"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:783
+msgid "Xihuitl"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:785
+msgid "Haab"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:786
+msgid "Tun"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:787
+msgid "Kin"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:788
+msgid "Uinal"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:789
+msgid "Baktun"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:790
+msgid "Long Count"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:792
+#: plugins/Calendars/src/ui_calendarsDialog.h:795
+#: plugins/Calendars/src/ui_calendarsDialog.h:810
+#: plugins/Calendars/src/ui_calendarsDialog.h:816
+msgid "Step forward"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:798
+#: plugins/Calendars/src/ui_calendarsDialog.h:801
+#: plugins/Calendars/src/ui_calendarsDialog.h:807
+#: plugins/Calendars/src/ui_calendarsDialog.h:813
+msgid "Step backward"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:804
+msgid "Tzolkin"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:805
+msgid "Tonalpohualli"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:818
+msgid "Mesoamerica"
 msgstr ""
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76

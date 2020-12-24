@@ -189,21 +189,21 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "</ul></p>";
 
 	html += "<h3>" + q_("References") + "</h3>";
-	html += "<p>"  + q_("This plugin is based on:") + "</p>";
-	html += "<p><ul>";
+	html += "<p>"  + q_("This plugin is based on:");
+	html += "<ul>";
 	html += "<li>" + QString("{Edward M. Reingold, Nachum Dershowitz: Calendrical Calculations.} The Ultimate Edition. Cambridge University Press 2018.")
 			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1017/9781107057623\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Calendars plugin") + "</p>";
-	html += "<p><ul>";
+	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Calendars plugin");
+	html += "<ul>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, see the Stellarium User Guide\">\\1</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about this plugin and its history, see the Stellarium User Guide") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
