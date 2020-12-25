@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-24 21:37+0700\n"
+"POT-Creation-Date: 2020-12-25 13:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22490,16 +22490,665 @@ msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr ""
 
+#: plugins/Calendars/src/ArmenianCalendar.cpp:40
+msgctxt "Armenian month name"
+msgid "Nawasardi"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:41
+msgctxt "Armenian month name"
+msgid "Hor̄i"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:42
+msgctxt "Armenian month name"
+msgid "Sahmi"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:43
+msgctxt "Armenian month name"
+msgid "Trē"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:44
+msgctxt "Armenian month name"
+msgid "K'aloch"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:45
+msgctxt "Armenian month name"
+msgid "Arach"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:46
+msgctxt "Armenian month name"
+msgid "Mehekani"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:47
+msgctxt "Armenian month name"
+msgid "Areg"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:48
+msgctxt "Armenian month name"
+msgid "Ahekani"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:49
+msgctxt "Armenian month name"
+msgid "Mareri"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:50
+msgctxt "Armenian month name"
+msgid "Margach"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:51
+msgctxt "Armenian month name"
+msgid "Hrotich"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:52
+msgctxt "Armenian month name"
+msgid "(aweleach)"
+msgstr ""
+
+#: plugins/Calendars/src/ArmenianCalendar.cpp:88
+msgid "Armenian Era"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
+msgctxt "Aztec Tonalpohualli name"
+msgid "Cipactli (Alligator)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:40
+msgctxt "Aztec Tonalpohualli name"
+msgid "Ehecatl (Wind)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:41
+msgctxt "Aztec Tonalpohualli name"
+msgid "Calli (House)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:42
+msgctxt "Aztec Tonalpohualli name"
+msgid "Cuetzpallin (Iguana)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:43
+msgctxt "Aztec Tonalpohualli name"
+msgid "Coatl (Serpent)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:44
+msgctxt "Aztec Tonalpohualli name"
+msgid "Miquiztli (Death)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:45
+msgctxt "Aztec Tonalpohualli name"
+msgid "Mazatl (Deer)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:46
+msgctxt "Aztec Tonalpohualli name"
+msgid "Tochtli (Rabbit)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:47
+msgctxt "Aztec Tonalpohualli name"
+msgid "Atl (Water)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:48
+msgctxt "Aztec Tonalpohualli name"
+msgid "Itzcuintli (Dog)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:49
+msgctxt "Aztec Tonalpohualli name"
+msgid "Ozomatli (Monkey)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:50
+msgctxt "Aztec Tonalpohualli name"
+msgid "Malinalli (Grass)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:51
+msgctxt "Aztec Tonalpohualli name"
+msgid "Acatl (Cane)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:52
+msgctxt "Aztec Tonalpohualli name"
+msgid "Ocelotl (Jaguar)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:53
+msgctxt "Aztec Tonalpohualli name"
+msgid "Quauhtli (Eagle)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:54
+msgctxt "Aztec Tonalpohualli name"
+msgid "Cozcaquauhtli (Buzzard)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:55
+msgctxt "Aztec Tonalpohualli name"
+msgid "Ollin (Quake)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:56
+msgctxt "Aztec Tonalpohualli name"
+msgid "Tecpatl (Flint)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:57
+msgctxt "Aztec Tonalpohualli name"
+msgid "Quiahuitl (Rain)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:58
+msgctxt "Aztec Tonalpohualli name"
+msgid "Xochitl (Flower)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:43
+msgctxt "Aztec Xihuitl month name"
+msgid "Izcalli (Sprout)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:44
+msgctxt "Aztec Xihuitl month name"
+msgid "Atlcahualo (Water left)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:45
+msgctxt "Aztec Xihuitl month name"
+msgid "Tlacaxipehualiztli (Man flaying)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:46
+msgctxt "Aztec Xihuitl month name"
+msgid "Tozoztontli (1-Vigil)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:47
+msgctxt "Aztec Xihuitl month name"
+msgid "Huei Tozoztli (2-Vigil)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:48
+msgctxt "Aztec Xihuitl month name"
+msgid "Toxcatl (Drought)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:49
+msgctxt "Aztec Xihuitl month name"
+msgid "Etzalcualiztli (Eating bean soup)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:50
+msgctxt "Aztec Xihuitl month name"
+msgid "Tecuilhuitontli (1-Lord’s feast)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:51
+msgctxt "Aztec Xihuitl month name"
+msgid "Huei Tecuilhuitl (2-Lord’s feast)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:52
+msgctxt "Aztec Xihuitl month name"
+msgid "Tlaxochimaco (Give flowers)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:53
+msgctxt "Aztec Xihuitl month name"
+msgid "Xocotlhuetzi (Fruit falls)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:54
+msgctxt "Aztec Xihuitl month name"
+msgid "Ochpaniztli (Road sweeping)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:55
+msgctxt "Aztec Xihuitl month name"
+msgid "Teotleco (God arrives)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:56
+msgctxt "Aztec Xihuitl month name"
+msgid "Tepeilhuitl (Mountain feast)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:57
+msgctxt "Aztec Xihuitl month name"
+msgid "Quecholli (Macaw)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:58
+msgctxt "Aztec Xihuitl month name"
+msgid "Panquetzaliztli (Flag raising)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:59
+msgctxt "Aztec Xihuitl month name"
+msgid "Atemoztli (Falling water)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:60
+msgctxt "Aztec Xihuitl month name"
+msgid "Tititl (Storm)"
+msgstr ""
+
+#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:61
+msgctxt "Aztec Xihuitl month name"
+msgid "Nemontemi (Full in vain)"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:42
+msgctxt "Coptic month name"
+msgid "Thoouth"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:43
+msgctxt "Coptic month name"
+msgid "Paope"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:44
+msgctxt "Coptic month name"
+msgid "Athōr"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:45
+msgctxt "Coptic month name"
+msgid "Koiak"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:46
+msgctxt "Coptic month name"
+msgid "Tōbe"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:47
+msgctxt "Coptic month name"
+msgid "Meshir"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:48
+msgctxt "Coptic month name"
+msgid "Paremotep"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:49
+msgctxt "Coptic month name"
+msgid "Parmoute"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:50
+msgctxt "Coptic month name"
+msgid "Pashons"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:51
+msgctxt "Coptic month name"
+msgid "Paōne"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:52
+msgctxt "Coptic month name"
+msgid "Epēp"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:53
+msgctxt "Coptic month name"
+msgid "Mesorē"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:54
+msgctxt "Coptic month name"
+msgid "Epagomenē"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:56
+msgctxt "Coptic day name"
+msgid "Tkyriake"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:57
+msgctxt "Coptic day name"
+msgid "Pesnau"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:58
+msgctxt "Coptic day name"
+msgid "Pshoment"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:59
+msgctxt "Coptic day name"
+msgid "Peftoou"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:60
+msgctxt "Coptic day name"
+msgid "Ptiou"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:61
+msgctxt "Coptic day name"
+msgid "Psoou"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:62
+msgctxt "Coptic day name"
+msgid "Psabbaton"
+msgstr ""
+
+#: plugins/Calendars/src/CopticCalendar.cpp:100
+msgid "Era Martyrum"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:41
+msgctxt "Egyptian month name"
+msgid "Thoth"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:42
+msgctxt "Egyptian month name"
+msgid "Phaophi"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:43
+msgctxt "Egyptian month name"
+msgid "Athyr"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:44
+msgctxt "Egyptian month name"
+msgid "Choiak"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:45
+msgctxt "Egyptian month name"
+msgid "Tybi"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:46
+msgctxt "Egyptian month name"
+msgid "Mechir"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:47
+msgctxt "Egyptian month name"
+msgid "Phamenoth"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:48
+msgctxt "Egyptian month name"
+msgid "Pharmuthi"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:49
+msgctxt "Egyptian month name"
+msgid "Pachon"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:50
+msgctxt "Egyptian month name"
+msgid "Payni"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:51
+msgctxt "Egyptian month name"
+msgid "Epiphi"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:52
+msgctxt "Egyptian month name"
+msgid "Mesori"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:53
+msgctxt "Egyptian month name"
+msgid "(Epagomenae)"
+msgstr ""
+
+#: plugins/Calendars/src/EgyptianCalendar.cpp:89
+msgid "Nabonassar Era"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:42
+msgctxt "Ethiopic month name"
+msgid "Maskaram"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:43
+msgctxt "Ethiopic month name"
+msgid "Teqemt"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:44
+msgctxt "Ethiopic month name"
+msgid "Hedār"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:45
+msgctxt "Ethiopic month name"
+msgid "Takhśāś"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:46
+msgctxt "Ethiopic month name"
+msgid "Ṭer"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:47
+msgctxt "Ethiopic month name"
+msgid "Yakātit"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:48
+msgctxt "Ethiopic month name"
+msgid "Magābit"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:49
+msgctxt "Ethiopic month name"
+msgid "Miyāzyā"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:50
+msgctxt "Ethiopic month name"
+msgid "Genbot"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:51
+msgctxt "Ethiopic month name"
+msgid "Sanē"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:52
+msgctxt "Ethiopic month name"
+msgid "Ḥamlē"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:53
+msgctxt "Ethiopic month name"
+msgid "Naḥasē"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:54
+msgctxt "Ethiopic month name"
+msgid "Pāguemēn"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:56
+msgctxt "Ethiopic day name"
+msgid "Iḥud"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:57
+msgctxt "Ethiopic day name"
+msgid "Sanyo"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:58
+msgctxt "Ethiopic day name"
+msgid "Maksanyo"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:59
+msgctxt "Ethiopic day name"
+msgid "Rob/Rabu`e"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:60
+msgctxt "Ethiopic day name"
+msgid "H̱amus"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:61
+msgctxt "Ethiopic day name"
+msgid "Arb"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:62
+msgctxt "Ethiopic day name"
+msgid "Kidāmmē"
+msgstr ""
+
+#: plugins/Calendars/src/EthiopicCalendar.cpp:100
+msgid "Ethiopic Era of Mercy"
+msgstr ""
+
+#: plugins/Calendars/src/ISOCalendar.cpp:79
+msgid "Week"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgid "summer"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgid "winter"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:171
+msgctxt "Icelandic day name"
+msgid "Sunnudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:172
+msgctxt "Icelandic day name"
+msgid "Mánudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:173
+msgctxt "Icelandic day name"
+msgid "Þriðjudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:174
+msgctxt "Icelandic day name"
+msgid "Miðvikudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:175
+msgctxt "Icelandic day name"
+msgid "Fimmtudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:176
+msgctxt "Icelandic day name"
+msgid "Föstudagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:177
+msgctxt "Icelandic day name"
+msgid "Laugardagur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:179
+msgctxt "Icelandic month name"
+msgid "unnamed"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:180
+msgctxt "Icelandic month name"
+msgid "Harpa"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:181
+msgctxt "Icelandic month name"
+msgid "Skerpla"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:182
+msgctxt "Icelandic month name"
+msgid "Sólmánuður"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:183
+msgctxt "Icelandic month name"
+msgid "Heyannir"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:184
+msgctxt "Icelandic month name"
+msgid "Tvímánuður"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:185
+msgctxt "Icelandic month name"
+msgid "Haustmánuður"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:186
+msgctxt "Icelandic month name"
+msgid "Gormánuður"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:187
+msgctxt "Icelandic month name"
+msgid "Ýlir"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:188
+msgctxt "Icelandic month name"
+msgid "Mörsugur"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:189
+msgctxt "Icelandic month name"
+msgid "Þorri"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:190
+msgctxt "Icelandic month name"
+msgid "Góa"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:191
+msgctxt "Icelandic month name"
+msgid "Einmánuður"
+msgstr ""
+
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
 msgstr ""
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "B.C."
-msgstr ""
-
-#: plugins/Calendars/src/ISOCalendar.cpp:79
-msgid "Week"
 msgstr ""
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:40
@@ -22697,199 +23346,314 @@ msgctxt "Maya Tzolkin name"
 msgid "Ahau"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:43
-msgctxt "Aztec Xihuitl month name"
-msgid "Izcalli (Sprout)"
+#: plugins/Calendars/src/OlympicCalendar.cpp:61
+#, qt-format
+msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:44
-msgctxt "Aztec Xihuitl month name"
-msgid "Atlcahualo (Water left)"
+#: plugins/Calendars/src/RomanCalendar.cpp:36
+msgctxt "Roman month name (genitive)"
+msgid "Ianuarii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:45
-msgctxt "Aztec Xihuitl month name"
-msgid "Tlacaxipehualiztli (Man flaying)"
+#: plugins/Calendars/src/RomanCalendar.cpp:37
+msgctxt "Roman month name (genitive)"
+msgid "Februarii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:46
-msgctxt "Aztec Xihuitl month name"
-msgid "Tozoztontli (1-Vigil)"
+#: plugins/Calendars/src/RomanCalendar.cpp:38
+msgctxt "Roman month name (genitive)"
+msgid "Martii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:47
-msgctxt "Aztec Xihuitl month name"
-msgid "Huei Tozoztli (2-Vigil)"
+#: plugins/Calendars/src/RomanCalendar.cpp:39
+msgctxt "Roman month name (genitive)"
+msgid "Aprilis"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:48
-msgctxt "Aztec Xihuitl month name"
-msgid "Toxcatl (Drought)"
+#: plugins/Calendars/src/RomanCalendar.cpp:40
+msgctxt "Roman month name (genitive)"
+msgid "Maii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:49
-msgctxt "Aztec Xihuitl month name"
-msgid "Etzalcualiztli (Eating bean soup)"
+#: plugins/Calendars/src/RomanCalendar.cpp:41
+msgctxt "Roman month name (genitive)"
+msgid "Iunii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:50
-msgctxt "Aztec Xihuitl month name"
-msgid "Tecuilhuitontli (1-Lord’s feast)"
+#: plugins/Calendars/src/RomanCalendar.cpp:42
+msgctxt "Roman month name (genitive)"
+msgid "Iulii"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:51
-msgctxt "Aztec Xihuitl month name"
-msgid "Huei Tecuilhuitl (2-Lord’s feast)"
+#: plugins/Calendars/src/RomanCalendar.cpp:43
+msgctxt "Roman month name (genitive)"
+msgid "Augusti"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:52
-msgctxt "Aztec Xihuitl month name"
-msgid "Tlaxochimaco (Give flowers)"
+#: plugins/Calendars/src/RomanCalendar.cpp:44
+msgctxt "Roman month name (genitive)"
+msgid "Septembris"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:53
-msgctxt "Aztec Xihuitl month name"
-msgid "Xocotlhuetzi (Fruit falls)"
+#: plugins/Calendars/src/RomanCalendar.cpp:45
+msgctxt "Roman month name (genitive)"
+msgid "Octobris"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:54
-msgctxt "Aztec Xihuitl month name"
-msgid "Ochpaniztli (Road sweeping)"
+#: plugins/Calendars/src/RomanCalendar.cpp:46
+msgctxt "Roman month name (genitive)"
+msgid "Novembris"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:55
-msgctxt "Aztec Xihuitl month name"
-msgid "Teotleco (God arrives)"
+#: plugins/Calendars/src/RomanCalendar.cpp:47
+msgctxt "Roman month name (genitive)"
+msgid "Decembris"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:56
-msgctxt "Aztec Xihuitl month name"
-msgid "Tepeilhuitl (Mountain feast)"
+#: plugins/Calendars/src/RomanCalendar.cpp:101
+msgctxt "ab urbe condita"
+msgid "A.U.C."
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:57
-msgctxt "Aztec Xihuitl month name"
-msgid "Quecholli (Macaw)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
+msgctxt "Zoroastrian month name"
+msgid "Ferverdīn"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:58
-msgctxt "Aztec Xihuitl month name"
-msgid "Panquetzaliztli (Flag raising)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
+msgctxt "Zoroastrian month name"
+msgid "Ardebehesht"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:59
-msgctxt "Aztec Xihuitl month name"
-msgid "Atemoztli (Falling water)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
+msgctxt "Zoroastrian month name"
+msgid "Khordād"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:60
-msgctxt "Aztec Xihuitl month name"
-msgid "Tititl (Storm)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
+msgctxt "Zoroastrian month name"
+msgid "Tīr"
 msgstr ""
 
-#: plugins/Calendars/src/AztecXihuitlCalendar.cpp:61
-msgctxt "Aztec Xihuitl month name"
-msgid "Nemontemi (Full in vain)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
+msgctxt "Zoroastrian month name"
+msgid "Mordād"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
-msgctxt "Aztec Tonalpohualli name"
-msgid "Cipactli (Alligator)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
+msgctxt "Zoroastrian month name"
+msgid "Sharīr"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:40
-msgctxt "Aztec Tonalpohualli name"
-msgid "Ehecatl (Wind)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
+msgctxt "Zoroastrian month name"
+msgid "Mihr"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:41
-msgctxt "Aztec Tonalpohualli name"
-msgid "Calli (House)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
+msgctxt "Zoroastrian month name"
+msgid "Abān"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:42
-msgctxt "Aztec Tonalpohualli name"
-msgid "Cuetzpallin (Iguana)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
+msgctxt "Zoroastrian month name"
+msgid "Āder"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:43
-msgctxt "Aztec Tonalpohualli name"
-msgid "Coatl (Serpent)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
+msgctxt "Zoroastrian month name"
+msgid "Deï"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:44
-msgctxt "Aztec Tonalpohualli name"
-msgid "Miquiztli (Death)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
+msgctxt "Zoroastrian month name"
+msgid "Bahmen"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:45
-msgctxt "Aztec Tonalpohualli name"
-msgid "Mazatl (Deer)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
+msgctxt "Zoroastrian month name"
+msgid "Asfendārmed"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:46
-msgctxt "Aztec Tonalpohualli name"
-msgid "Tochtli (Rabbit)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
+msgctxt "Zoroastrian month name"
+msgid "(epagomenae)"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:47
-msgctxt "Aztec Tonalpohualli name"
-msgid "Atl (Water)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
+msgctxt "Zoroastrian day name"
+msgid "Hormuz"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:48
-msgctxt "Aztec Tonalpohualli name"
-msgid "Itzcuintli (Dog)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
+msgctxt "Zoroastrian day name"
+msgid "Bahman"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:49
-msgctxt "Aztec Tonalpohualli name"
-msgid "Ozomatli (Monkey)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
+msgctxt "Zoroastrian day name"
+msgid "Ordībehesht"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:50
-msgctxt "Aztec Tonalpohualli name"
-msgid "Malinalli (Grass)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
+msgctxt "Zoroastrian day name"
+msgid "Shahrīvar"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:51
-msgctxt "Aztec Tonalpohualli name"
-msgid "Acatl (Cane)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
+msgctxt "Zoroastrian day name"
+msgid "Esfandārmud"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:52
-msgctxt "Aztec Tonalpohualli name"
-msgid "Ocelotl (Jaguar)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
+msgctxt "Zoroastrian day name"
+msgid "Xordād"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:53
-msgctxt "Aztec Tonalpohualli name"
-msgid "Quauhtli (Eagle)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
+msgctxt "Zoroastrian day name"
+msgid "Mordād"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:54
-msgctxt "Aztec Tonalpohualli name"
-msgid "Cozcaquauhtli (Buzzard)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
+msgctxt "Zoroastrian day name"
+msgid "Diy be Āzar"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:55
-msgctxt "Aztec Tonalpohualli name"
-msgid "Ollin (Quake)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
+msgctxt "Zoroastrian day name"
+msgid "Āzar"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:56
-msgctxt "Aztec Tonalpohualli name"
-msgid "Tecpatl (Flint)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
+msgctxt "Zoroastrian day name"
+msgid "Ābān"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:57
-msgctxt "Aztec Tonalpohualli name"
-msgid "Quiahuitl (Rain)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
+msgctxt "Zoroastrian day name"
+msgid "Xor"
 msgstr ""
 
-#: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:58
-msgctxt "Aztec Tonalpohualli name"
-msgid "Xochitl (Flower)"
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
+msgctxt "Zoroastrian day name"
+msgid "Māh"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
+msgctxt "Zoroastrian day name"
+msgid "Tīr"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
+msgctxt "Zoroastrian day name"
+msgid "Goosh"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
+msgctxt "Zoroastrian day name"
+msgid "Diy be Mehr"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
+msgctxt "Zoroastrian day name"
+msgid "Mehr"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
+msgctxt "Zoroastrian day name"
+msgid "Sorūsh"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
+msgctxt "Zoroastrian day name"
+msgid "Rashn"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
+msgctxt "Zoroastrian day name"
+msgid "Farvardīn"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
+msgctxt "Zoroastrian day name"
+msgid "Bahrām"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
+msgctxt "Zoroastrian day name"
+msgid "Rām"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
+msgctxt "Zoroastrian day name"
+msgid "Bād"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
+msgctxt "Zoroastrian day name"
+msgid "Diy be Dīn"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
+msgctxt "Zoroastrian day name"
+msgid "Dīn"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
+msgctxt "Zoroastrian day name"
+msgid "Ard"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
+msgctxt "Zoroastrian day name"
+msgid "Ashtād"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
+msgctxt "Zoroastrian day name"
+msgid "Asmān"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
+msgctxt "Zoroastrian day name"
+msgid "Zāmyād"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
+msgctxt "Zoroastrian day name"
+msgid "Māresfand"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
+msgctxt "Zoroastrian day name"
+msgid "Anīrān"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
+msgctxt "Zoroastrian day name"
+msgid "Ahnad"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
+msgctxt "Zoroastrian day name"
+msgid "Ashnad"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
+msgctxt "Zoroastrian day name"
+msgid "Axshatar"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
+msgctxt "Zoroastrian day name"
+msgid "Behesht"
+msgstr ""
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
+msgid "Jezdegerd Era"
 msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:152
