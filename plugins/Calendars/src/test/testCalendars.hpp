@@ -32,6 +32,7 @@ private slots:
 	void testEuropean();
 	void testNearEastern();
 	void testMesoamerican();
+	void testBalinesePawukon();
 };
 
 #endif // _TESTCALENDARS_HPP

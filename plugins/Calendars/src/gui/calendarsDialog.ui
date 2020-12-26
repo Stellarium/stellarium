@@ -147,20 +147,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="julianCheckBox">
-           <property name="text">
-            <string comment="calendar">Julian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="gregorianCheckBox">
-           <property name="text">
-            <string comment="calendar">Gregorian</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="2">
           <widget class="QCheckBox" name="isoCheckBox">
            <property name="text">
@@ -168,87 +154,10 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="egyptianCheckBox">
-           <property name="text">
-            <string comment="calendar">Egyptian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QCheckBox" name="armenianCheckBox">
-           <property name="text">
-            <string comment="calendar">Armenian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QCheckBox" name="zoroastrianCheckBox">
-           <property name="text">
-            <string comment="calendar">Zoroastrian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="romanCheckBox">
-           <property name="text">
-            <string comment="calendar">Roman</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QCheckBox" name="olympicCheckBox">
-           <property name="text">
-            <string comment="calendar">Olympic</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
+         <item row="8" column="0">
           <widget class="QCheckBox" name="chineseCheckBox">
            <property name="text">
             <string comment="calendar">Chinese</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="copticCheckBox">
-           <property name="text">
-            <string comment="calendar">Coptic</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QCheckBox" name="icelandicCheckBox">
-           <property name="text">
-            <string comment="calendar">Icelandic</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QCheckBox" name="ethiopicCheckBox">
-           <property name="text">
-            <string comment="calendar">Ethiopic</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="mayaLCCheckBox">
-           <property name="text">
-            <string comment="calendar">Maya Long Count</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QCheckBox" name="aztecXihuitlCheckBox">
-           <property name="text">
-            <string comment="calendar">Aztec Xihuitl</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QCheckBox" name="mayaHaabCheckBox">
-           <property name="text">
-            <string comment="calendar">Maya Haab</string>
            </property>
           </widget>
          </item>
@@ -259,17 +168,38 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="2">
-          <widget class="QCheckBox" name="mayaTzolkinCheckBox">
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="mayaLCCheckBox">
            <property name="text">
-            <string comment="calendar">Maya Tzolkin</string>
+            <string comment="calendar">Maya Long Count</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="islamicCheckBox">
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="ethiopicCheckBox">
            <property name="text">
-            <string comment="calendar">Islamic</string>
+            <string comment="calendar">Ethiopic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="egyptianCheckBox">
+           <property name="text">
+            <string comment="calendar">Egyptian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="copticCheckBox">
+           <property name="text">
+            <string comment="calendar">Coptic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="julianCheckBox">
+           <property name="text">
+            <string comment="calendar">Julian</string>
            </property>
           </widget>
          </item>
@@ -277,6 +207,83 @@
           <widget class="QCheckBox" name="hebrewCheckBox">
            <property name="text">
             <string comment="calendar">Hebrew</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QCheckBox" name="mayaTzolkinCheckBox">
+           <property name="text">
+            <string comment="calendar">Maya Tzolkin</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="gregorianCheckBox">
+           <property name="text">
+            <string comment="calendar">Gregorian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QCheckBox" name="balineseCheckBox">
+           <property name="text">
+            <string>Balinese Pawukong</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QCheckBox" name="aztecXihuitlCheckBox">
+           <property name="text">
+            <string comment="calendar">Aztec Xihuitl</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QCheckBox" name="icelandicCheckBox">
+           <property name="text">
+            <string comment="calendar">Icelandic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QCheckBox" name="zoroastrianCheckBox">
+           <property name="text">
+            <string comment="calendar">Zoroastrian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="armenianCheckBox">
+           <property name="text">
+            <string comment="calendar">Armenian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QCheckBox" name="olympicCheckBox">
+           <property name="text">
+            <string comment="calendar">Olympic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QCheckBox" name="mayaHaabCheckBox">
+           <property name="text">
+            <string comment="calendar">Maya Haab</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="romanCheckBox">
+           <property name="text">
+            <string comment="calendar">Roman</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="islamicCheckBox">
+           <property name="text">
+            <string comment="calendar">Islamic</string>
            </property>
           </widget>
          </item>

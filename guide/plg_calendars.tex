@@ -36,8 +36,7 @@ The calendar dates in the main program behave like most other astronomical softw
   uncommon to historians who may think Stellarium is one year off.
 \end{itemize}
 
-
-Since earliest times people all over the world have observed the sky
+\noindent Since earliest times people all over the world have observed the sky
 and used its phenomena to record and measure time. Over millennia,
 various systematic calendars evolved. A classic and often-cited
 presentation of calendars from the pre-computer era is still the
@@ -65,7 +64,8 @@ example at sunrise, sunset, or dawn. This cannot be reflected in this
 plugin. Dates should be correct at noon, and may be one day off
 dependent on these aspects.
 
-\subsection{Lunisolar European calendars}
+\subsection{The Calendars}
+\subsubsection{Lunisolar European calendars}
 \begin{description}
 \item[Julian] This implementation utilizes historical year counting,
   i.e., has no year zero. Years are marked A.D. or B.C., respectively.
@@ -92,7 +92,7 @@ dependent on these aspects.
   B.C.E. The Olympic games of antiquity were held in year 1 of each cycle.
 \end{description}
 
-\subsection{Near Eastern calendars}
+\subsubsection{Near Eastern calendars}
 Several calendars with 12 months of 30 days plus 5 (6 for leap years
 in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
 \begin{description}
@@ -110,7 +110,17 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   year numbers, counted from the \emph{ethiopic era of mercy}.
 \end{description}
 
-\subsection{Mesoamerican calendars}
+\subsubsection{Asian calendars}
+\begin{description}
+\item[Balinese Pawukon] is a 10-part sequence of day names with cycle
+  lengths of 2 to 10, which can also be written as numbers or
+  symbols. Some numbers repeat in simple cycles, while others follow
+  more complicated rules. A full cycle takes 210 days.  Due to space
+  reasons this needs two lines on the display. Formatting may improve
+  in later versions.
+\end{description}
+
+\subsubsection{Mesoamerican calendars}
 \begin{description}
 \item[Maya Long Count] is a 5-part sequence of numbers. Just like most
   modern people write numbers in the decimal system (base 10), and the
@@ -136,12 +146,15 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   count.
 \item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
   (counted 1 to 20), plus 5 days (\emph{Uayeb}) at the end, providing
-  ``years'' of 365 days.
+  ``years'' of 365 days. Years are not counted, but you can use
+  buttons in the calendar interface to move forth and back to the
+  previous or next, respectively, day with the same Haab name.
 \item[Maya Tzolkin] is described as ritual calendar consisting of two
   cycles with 13 day numbers (1 to 13) and 20 names. Each day both
   counters are advanced. Date names repeat after 260 days. Usually
   Haab and Tzolkin calendars were both used to define a unique date
-  which repeats only after a \emph{calendar round} of 52 years.
+  which repeats only after a \emph{calendar round} of 52 Haab years,
+  corresponding to 73 Tzolkin cycles.
 \item[Aztec Xihuitl] is similar to the Maya Haab, consisting of 18
   ``months'' of 20 days, plus 5 \emph{nemontemi} (worthless
   days). Days are counted from 1 to 20. The Aztecs may have used
@@ -149,11 +162,14 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   here is based on the recorded Aztec date of the fall of their empire
   to \name[Hern\'an]{Cort\'es} in 1521 and should provide correct dates in the
   early 16th century.
-\item[Aztec Tonalpohualli] is similar in structure to the Mayan Tzolkin.
+\item[Aztec Tonalpohualli] is similar in structure to the Mayan
+  Tzolkin. Also an Aztec date is usually given by both systems.
 \end{description}
 
 \subsection{Further development}
-The plugin is in an early phase of development. More calendars will be added in later versions. 
+The plugin is in an early phase of development. More calendars will be
+added in later versions, and formatting and setting options may be
+improved.
 
 
 \subsection{Configuration Options}
@@ -183,6 +199,7 @@ show\_armenian               &bool & true\\
 show\_zoroastrian            &bool & true\\
 show\_coptic                 &bool & true\\
 show\_ethiopian              &bool & true\\\midrule
+show\_balinese\_pawukon      &bool & true\\\midrule
 show\_maya\_long\_count      &bool & true\\
 show\_maya\_haab             &bool & true\\
 show\_maya\_tzolkin          &bool & true\\

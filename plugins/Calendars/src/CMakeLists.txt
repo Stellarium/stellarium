@@ -43,6 +43,8 @@ SET(Calendars_SRCS
     AztecXihuitlCalendar.cpp
     AztecTonalpohualliCalendar.hpp
     AztecTonalpohualliCalendar.cpp
+    BalinesePawukonCalendar.hpp
+    BalinesePawukonCalendar.cpp
 )
 
 SET(Calendars_UIS

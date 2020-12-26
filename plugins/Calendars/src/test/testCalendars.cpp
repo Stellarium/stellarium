@@ -40,6 +40,7 @@
 #include "../MayaTzolkinCalendar.hpp"
 #include "../AztecXihuitlCalendar.hpp"
 #include "../AztecTonalpohualliCalendar.hpp"
+#include "../BalinesePawukonCalendar.hpp"
 
 QTEST_GUILESS_MAIN(TestCalendars)
 
@@ -65,6 +66,15 @@ void TestCalendars::testBasics()
 	QVERIFY2(hsplit2==QVector<int>({5, 0, 0}), qPrintable(QString("radix of %1 in {5, 4} is %2")
 							   .arg(h)
 							   .arg(printVec(hsplit2))));
+	QVERIFY2(Calendar::modInterval(5, 1, 5)==1, qPrintable(QString("modInterval(5, 1, 5)=%1").arg(QString::number(Calendar::modInterval(5, 1, 5)))));
+	QVERIFY2(Calendar::modInterval(5, 0, 4)==1, qPrintable(QString("modInterval(5, 0, 4)=%1").arg(QString::number(Calendar::modInterval(5, 0, 4)))));
+	QVERIFY2(Calendar::modInterval(5, 1, 3)==1, qPrintable(QString("modInterval(5, 1, 3)=%1").arg(QString::number(Calendar::modInterval(5, 1, 3)))));
+	QVERIFY2(Calendar::modInterval(5, 0, 3)==2, qPrintable(QString("modInterval(5, 0, 3)=%1").arg(QString::number(Calendar::modInterval(5, 0, 3)))));
+	QVERIFY2(Calendar::modInterval(5, 1, 2)==1, qPrintable(QString("modInterval(5, 1, 2)=%1").arg(QString::number(Calendar::modInterval(5, 1, 2)))));
+	QVERIFY2(Calendar::modInterval(6, 1, 2)==1, qPrintable(QString("modInterval(6, 1, 2)=%1").arg(QString::number(Calendar::modInterval(6, 1, 2)))));
+	// Critically important: modinterval(., 1, n)=amod(., n-1). n is NOT the maximum possible return value!
+	QVERIFY2(Calendar::modInterval(42, 1, 7)==StelUtils::amod(42, 6), qPrintable(QString("modInterval(42, 1, 6)=%1 vs amod(42, 6)=%2").arg(QString::number(Calendar::modInterval(5, 1, 2))).arg(QString::number(StelUtils::amod(42, 6)))));
+	QVERIFY2(Calendar::modInterval(43, 1, 7)==StelUtils::amod(43, 6), qPrintable(QString("modInterval(43, 1, 6)=%1 vs amod(43, 6)=%2").arg(QString::number(Calendar::modInterval(6, 1, 2))).arg(QString::number(StelUtils::amod(43, 6)))));
 }
 
 void TestCalendars::testEuropean()
@@ -135,3 +145,17 @@ void TestCalendars::testMesoamerican()
 			    .arg(555299)));
 }
 	
+void TestCalendars::testBalinesePawukon()
+{
+	QVERIFY2(BalinesePawukonCalendar::baliEpoch==Calendar::fixedFromJD(146, false),
+		 qPrintable(QString("BaliEpoch %1 vs %2")
+			    .arg(BalinesePawukonCalendar::baliEpoch)
+			    .arg(Calendar::fixedFromJD(146, false))));
+
+	const int sample2038 = GregorianCalendar::fixedFromGregorian({2038, 11, 10});
+	const QVector<int>expect2038({1, 2, 1, 3, 4, 1, 4, 7, 1, 2});
+
+	QVERIFY2(BalinesePawukonCalendar::baliPawukonFromFixed(sample2038) == expect2038,
+		 qPrintable(QString("Bali for %1 = %2").arg(QString::number(sample2038))
+			    .arg(printVec(BalinesePawukonCalendar::baliPawukonFromFixed(sample2038)))));
+}

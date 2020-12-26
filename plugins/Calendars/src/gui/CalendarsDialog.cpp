@@ -110,6 +110,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->mayaTzolkinCheckBox,        "Calendars.flagShowMayaTzolkin");
 	connectBoolProperty(ui->aztecXihuitlCheckBox,       "Calendars.flagShowAztecXihuitl");
 	connectBoolProperty(ui->aztecTonalpohualliCheckBox, "Calendars.flagShowAztecTonalpohualli");
+	connectBoolProperty(ui->balineseCheckBox,           "Calendars.flagShowBalinese");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,      SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -178,8 +179,10 @@ void CalendarsDialog::setAboutHtml(void)
 //	html += "<li>" + q_("Indian calendars") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
+	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
 	html += "</ul>";
 	html += "<p>" + q_("The plugin is in an early stage of development. Please cross-check results and report errors.") + "</p>";
+	html += "<p>" + q_("For some calendars, we welcome proper formatting suggestions by actual users.") + "</p>";
 
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";

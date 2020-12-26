@@ -53,6 +53,7 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowMayaTzolkin   READ isMayaTzolkinDisplayed   WRITE showMayaTzolkin   NOTIFY showMayaTzolkinChanged)
 	Q_PROPERTY(bool flagShowAztecXihuitl  READ isAztecXihuitlDisplayed  WRITE showAztecXihuitl  NOTIFY showAztecXihuitlChanged)
 	Q_PROPERTY(bool flagShowAztecTonalpohualli READ isAztecTonalpohualliDisplayed WRITE showAztecTonalpohualli NOTIFY showAztecTonalpohualliChanged)
+	Q_PROPERTY(bool flagShowBalinese      READ isBalineseDisplayed      WRITE showBalinese      NOTIFY showBalineseChanged)
 
 public:
 	Calendars();
@@ -109,6 +110,7 @@ signals:
 	void showMayaTzolkinChanged(bool b);
 	void showAztecXihuitlChanged(bool b);
 	void showAztecTonalpohualliChanged(bool b);
+	void showBalineseChanged(bool b);
 
 public slots:
 	// Setters/getters
@@ -150,6 +152,8 @@ public slots:
 	void showAztecXihuitl(bool b);		//!< activate display of Aztec Xihuitl
 	bool isAztecTonalpohualliDisplayed() const; //!< display Aztec Tonalpohualli?
 	void showAztecTonalpohualli(bool b);	//!< activate display of Aztec Tonalpohualli
+	bool isBalineseDisplayed() const;       //!< display Balinese Pawukon?
+	void showBalinese(bool b);	        //!< activate display of Balinese Pawukon
 
 private:
 	// Font used for displaying text
@@ -185,6 +189,7 @@ private:
 	bool flagShowMayaTzolkin;
 	bool flagShowAztecXihuitl;
 	bool flagShowAztecTonalpohualli;
+	bool flagShowBalinese;
 };
 
 

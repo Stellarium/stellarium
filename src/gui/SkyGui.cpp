@@ -359,6 +359,16 @@ int SkyGui::getSkyGuiHeight() const
 	return static_cast<int>(geometry().height());
 }
 
+qreal SkyGui::getBottomBarHeight() const
+{
+	return buttonBar->boundingRect().height();
+}
+
+qreal SkyGui::getLeftBarWidth() const
+{
+	return winBar->boundingRect().width();
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {

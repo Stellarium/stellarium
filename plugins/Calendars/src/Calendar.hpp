@@ -112,7 +112,7 @@ public:
 	inline static double mjdFromFixed(double rd) { return rd-mjdEpoch;}
 
 	//! weekday from RD date. CC.UE(1.60).
-	inline static int dayOfWeekFromFixed(int rd) { return rd % 7; }
+	inline static int dayOfWeekFromFixed(int rd) { return StelUtils::imod(rd, 7); }
 	//! @Returns the R.D. of the nearest weekday k on or before rd
 	inline static int kdayOnOrBefore(const Calendar::Day k, const int rd) { return rd-dayOfWeekFromFixed(rd-k);}
 	//! @Returns the R.D. of the nearest weekday k on or after rd
@@ -125,8 +125,9 @@ public:
 	inline static int kdayAfter(const Calendar::Day k, const int rd) { return kdayOnOrBefore(k, rd+7);}
 
 	//! Interval modulus, CC.UE 1.24
-	//! @returns x shifted to lie inside [a...b)
+	//! @returns x shifted to lie inside [a...b), EXCLUDING b.
 	static double modInterval(double x, double a, double b);
+	//! Interval modulus, CC.UE 1.24: This EXCLUDES the upper limit! Use StelUtils::amod(x, b) for CC's (x)mod[1..b]
 	static int modInterval(int x, int a, int b);
 
 	//! Reingold-Dershowitz CC.UE 1.48.

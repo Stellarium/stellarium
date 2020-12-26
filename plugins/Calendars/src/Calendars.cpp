@@ -48,6 +48,7 @@
 #include "MayaTzolkinCalendar.hpp"
 #include "AztecXihuitlCalendar.hpp"
 #include "AztecTonalpohualliCalendar.hpp"
+#include "BalinesePawukonCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -96,7 +97,8 @@ Calendars::Calendars():
 	flagShowMayaHaab(true),
 	flagShowMayaTzolkin(true),
 	flagShowAztecXihuitl(true),
-	flagShowAztecTonalpohualli(true)
+	flagShowAztecTonalpohualli(true),
+	flagShowBalinese(true)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -191,6 +193,7 @@ void Calendars::init()
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
 	calendars.insert("AztecXihuitl", new AztecXihuitlCalendar(jd));
 	calendars.insert("AztecTonalpohualli", new AztecTonalpohualliCalendar(jd));
+	calendars.insert("Balinese", new BalinesePawukonCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
@@ -220,6 +223,7 @@ void Calendars::loadSettings()
 	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", true).toBool());
 	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", true).toBool());
 	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
+	showBalinese(          conf->value("Calendars/show_balinese_pawukon", true).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -263,6 +267,10 @@ void Calendars::draw(StelCore* core)
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
 	if (flagShowAztecXihuitl)  oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",   "calendar")).arg(getCal("AztecXihuitl")->getFormattedDateString());
 	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli", "calendar")).arg(getCal("AztecTonalpohualli")->getFormattedDateString());
+	if (flagShowBalinese)      {
+		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon", "calendar")).arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString1to5());
+		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg("").arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString6to10());
+	}
 	oss << "</table>";
 	Vec3f color(1);
 	if (StelApp::getInstance().getFlagOverwriteInfoColor())
@@ -493,5 +501,16 @@ void Calendars::showAztecTonalpohualli(bool b)
 		flagShowAztecTonalpohualli=b;
 		conf->setValue("Calendars/show_aztec_tonalpohualli", b);
 		emit showAztecTonalpohualliChanged(b);
+	}
+}
+
+bool Calendars::isBalineseDisplayed() const { return flagShowBalinese;}
+void Calendars::showBalinese(bool b)
+{
+	if (b!=flagShowBalinese)
+	{
+		flagShowBalinese=b;
+		conf->setValue("Calendars/show_balinese_pawukon", b);
+		emit showBalineseChanged(b);
 	}
 }

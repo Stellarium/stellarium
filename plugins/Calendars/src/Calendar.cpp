@@ -27,17 +27,18 @@ QString Calendar::getFormattedDateString() const
 	return getDateStrings().join(' ');
 }
 
-
+// CC.UE 1.24: This EXCLUDES the upper limit!
 double Calendar::modInterval(double x, double a, double b)
 {
 	if (fuzzyEquals(a,b)) return x;
-	return x-(b-a)*StelUtils::fmodpos(x-a, b-a);
+	return a + StelUtils::fmodpos(x-a, b-a);
 }
 
+// CC.UE 1.24: This EXCLUDES the upper limit! Use StelUtils::amod(x, b) for CC's (x)mod[1..b]
 int Calendar::modInterval(int x, int a, int b)
 {
 	if (a==b) return x;
-	return x-(b-a)*StelUtils::imod(x-a, b-a);
+	return a + StelUtils::imod(x-a, b-a);
 }
 
 double Calendar::momentFromJD(double jd, bool respectUTCoffset)

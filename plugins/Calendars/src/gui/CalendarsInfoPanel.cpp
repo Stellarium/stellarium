@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "CalendarsInfoPanel.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "SkyGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
@@ -56,11 +57,13 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition()
 {
+	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight();
+
 	if (sender())
 		xPos=parentWidget->size().width(); // reset when window has been resized.
 	qreal xPosCand = parentWidget->size().width() -  boundingRect().width();
 	xPos=qMin(xPos, xPosCand);
-	qreal yPos = parentWidget->size().height() - boundingRect().height();
+	qreal yPos = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
 	setPos(xPos, yPos);
 }
 
