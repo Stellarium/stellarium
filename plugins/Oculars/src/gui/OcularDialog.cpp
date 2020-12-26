@@ -36,6 +36,7 @@
 #include <QModelIndex>
 #include <QSettings>
 #include <QStandardItemModel>
+#include <QMessageBox>
 #include <limits>
 
 OcularDialog::OcularDialog(Oculars* pluginPtr,
@@ -114,6 +115,13 @@ void OcularDialog::closeWindow()
 
 void OcularDialog::deleteSelectedCCD()
 {
+	if (ccdTableModel->rowCount() == 1)
+	{
+		qDebug() << "Cannot delete the last entry.";
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last CCD."), QMessageBox::Ok);
+		return;
+	}
+
 	if (askConfirmation())
 	{
 		ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
@@ -124,29 +132,35 @@ void OcularDialog::deleteSelectedCCD()
 
 void OcularDialog::deleteSelectedOcular()
 {
+	if (ocularTableModel->rowCount() == 1)
+	{
+		qDebug() << "Cannot delete the last entry.";
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last ocular."), QMessageBox::Ok);
+		return;
+	}
+
 	if (askConfirmation())
 	{
-		if (ocularTableModel->rowCount() == 1) {
-			qDebug() << "Cannot delete the last entry.";
-		} else {
-			ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
-			ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
-			plugin->updateLists();
-		}
+		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
+		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+		plugin->updateLists();
 	}
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
+	if (telescopeTableModel->rowCount() == 1)
+	{
+		qDebug() << "Cannot delete the last entry.";
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last telescope."), QMessageBox::Ok);
+		return;
+	}
+
 	if (askConfirmation())
 	{
-		if (telescopeTableModel->rowCount() == 1) {
-			qDebug() << "Cannot delete the last entry.";
-		} else {
-			telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
-			ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
-			plugin->updateLists();
-		}
+		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
+		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+		plugin->updateLists();
 	}
 }
 
@@ -167,26 +181,30 @@ void OcularDialog::deleteSelectedLens()
 
 void OcularDialog::insertNewCCD()
 {
-	ccdTableModel->insertRows(ccdTableModel->rowCount(), 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(ccdTableModel->rowCount() - 1, 1));
+	int count = ccdTableModel->rowCount();
+	ccdTableModel->insertRows(count, 1);
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewOcular()
 {
-	ocularTableModel->insertRows(ocularTableModel->rowCount(), 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(ocularTableModel->rowCount() - 1, 1));
+	int count = ocularTableModel->rowCount();
+	ocularTableModel->insertRows(count, 1);
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewTelescope()
 {
-	telescopeTableModel->insertRows(telescopeTableModel->rowCount(), 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
+	int count = telescopeTableModel->rowCount();
+	telescopeTableModel->insertRows(count, 1);
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewLens()
 {
-	lensTableModel->insertRows(lensTableModel->rowCount(), 1);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(lensTableModel->rowCount() - 1, 1));
+	int count = lensTableModel->rowCount();
+	lensTableModel->insertRows(count, 1);
+	ui->lensListView->setCurrentIndex(lensTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
