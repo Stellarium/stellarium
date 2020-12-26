@@ -170,11 +170,11 @@ panel. If they are missing, the parameters do not change to defaults.
 \subsection{Polygonal landscape}
 \label{sec:landscapes:Polygonal}
 
-This landscape type has been added only recently (since 0.13) to allow
+This landscape type has been added \newFeature{v.0.13} to allow
 the use of measured horizons. Users of \program{Cartes du
   Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
   \url{http://www.ap-i.net/skychart/en/start}} will be happy to hear
-that the format of the list of measurements is compatible.
+that the format of the list of measurements is mostly compatible.
 
 This is the technically simplest of the landscapes, but may be used to
 describe accurately measured horizon profiles. The file that encodes
@@ -183,12 +183,20 @@ present there, it will be used to define object visibility (instead of
 the opacity of the landscape photo textures) and, if
 \var{horizon\_line\_color} is defined, will be plotted.
 
-There is a small caveat: Sometimes, there may appear vertical lines
+There are two little caveats:
+\begin{itemize}
+\item Sometimes, there may appear vertical lines
 from some corners towards the zenith or the mathematical horizon,
 e.g.\ if there is a vertex including azimuth 0 or 180. If this
 irritates you, just offset this azimuth minimally (e.g., 180.00001).
+\item As technical requirement, the zenith is always assumed to remain
+  free and uncovered. It is not possible to define a ``dome cutout''
+  or similar restricted views out of a window. Such effect can be
+  achieved with a Spherical Landscape (see
+  section~\ref{sec:landscapes:Spherical}).
+\end{itemize}
 
-The \file{landscape.ini} file for a polygonal type landscape looks
+\noindent The \file{landscape.ini} file for a polygonal type landscape looks
 like this (this example is based on the \landscape{Geneve} landscape
 which was borrowed from \program{Cartes du Ciel} and comes with Stellarium):
 
