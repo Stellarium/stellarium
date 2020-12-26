@@ -582,7 +582,7 @@ In December 2015\footnote{%
 
 All names with asterix mark (*) are modified based on the original proposals, to be consistent with the IAU rules.
 
-\newpage
+%\newpage
 \subsection{Section \big[Exoplanets\big] in config.ini file}
 %\label{sec:plugins:Exoplanets:configuration}
 
@@ -590,29 +590,31 @@ You can edit \file{config.ini} file by yourself for changes of the
 settings for the Exoplanets plugin -- just make it carefully!
 
 \noindent%
-\begin{tabularx}{\textwidth}{l|l|X}\toprule
+%\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\begin{longtable}{l|l|p{75mm}}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
-last\_update                 & string & Date and time of last update \\%\midrule
-update\_frequency\_hours       & int  & Frequency of updates, in hours \\%\midrule
-updates\_enable                & bool & Enable updates of exoplanets catalog from Internet \\%\midrule
-url                          & string & URL of exoplanets catalog \\%\midrule
-flag\_show\_exoplanets\_button & bool & Enable showing button of exoplanets on bottom bar \\%\midrule
-distribution\_enabled          & bool & Enable distribution mode of display \\%\midrule
-timeline\_enabled              & bool & Enable timeline mode of display \\%\midrule
-habitable\_enabled             & bool & Enable habitable mode of display \\%\midrule
-enable\_at\_startup            & bool & Enable displaying exoplanets at startup of the plugin \\%\midrule
-exoplanet\_marker\_color      & R,G,B & Color for marker of star with planetary system \\%\midrule
-habitable\_exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets\\%\midrule
+last\_update                 & string & Date and time of last update \\
+update\_frequency\_hours       & int  & Frequency of updates, in hours \\
+updates\_enable                & bool & Enable updates of exoplanets catalog from Internet \\
+url                          & string & URL of exoplanets catalog \\
+flag\_show\_exoplanets\_button & bool & Enable showing button of exoplanets on bottom bar \\
+distribution\_enabled          & bool & Enable distribution mode of display \\
+timeline\_enabled              & bool & Enable timeline mode of display \\
+habitable\_enabled             & bool & Enable habitable mode of display \\
+enable\_at\_startup            & bool & Enable displaying exoplanets at startup of the plugin \\
+exoplanet\_marker\_color      & R,G,B & Color for marker of star with planetary system \\
+habitable\_exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets\\
 temperature\_scale           & string & Temperature scale for equilibrium temperature of exoplanets. 
                                         Possible values: \emph{Kelvin}, \emph{Celsius}, \emph{Fahrenheit}. Default value: \emph{Celsius}. \\\bottomrule
-\end{tabularx}
+%\end{tabularx}
+\end{longtable}
 
 \subsection{Format of exoplanets catalog}
 \label{sec:plugins:Exoplanets:format}
 
 To add a new exoplanet system, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
-\begin{configfile}
+\begin{configfile}[\footnotesize]
 "Star designation":
 {
 	"exoplanets":
@@ -631,7 +633,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-						habitability of the exoplanet,
+				habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -650,7 +652,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-						habitability of the exoplanet,
+				habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -964,7 +966,7 @@ colorARR               & R,G,B & Color for marker of active meteor showers with 
 colorIR                & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
 \end{tabularx}
 
-\newpage
+
 \subsection{Format of Meteor Showers catalog}
 \label{sec:plugins:MeteorShowers:format}
 
@@ -976,7 +978,7 @@ To add a new meteor shower, you just need to:
 \end{enumerate}
 Note commas and brackets, they are very important! For example, below is a record for \textit{Northern Taurids}:
 
-\begin{configfile}
+\begin{configfile}[\footnotesize]
 "NTA":
 	{
 		"designation": "Northern Taurids",

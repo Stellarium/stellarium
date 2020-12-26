@@ -1191,7 +1191,7 @@ There are some  things you might need to know:
 \item The command line is not your enemy, but a way to call expert tools.
 \item The Windows command line processor \program{cmd.exe} is far from user friendly.
 \item There are remedies and alternatives. See notes on \program{clink} (\ref{sec:landscapes:clink})
-  for a considerable improvement, and \program{Cygwin} (\ref{sec:landscapes:cygwin}) for experts.
+  for a considerable improvement, and \program{WSL} (\ref{sec:landscapes:WSL}) for experts.
 \end{itemize}
 
 
@@ -1620,7 +1620,7 @@ HorizonPosition=33.8
 \label{fig:FSPexample}
 \end{figure}
 
-\subsection{Clink}
+\subsection{Clink and GNUWin32}
 \label{sec:landscapes:clink}
 
 \program{Clink}\footnote{\url{http://mridgers.github.io/clink/}} is a command
@@ -1632,34 +1632,25 @@ command-line completion. It is not essential for our tasks, but a
 general improvement of usability of the Windows command line which
 else has not caused me any trouble.
 
-\subsection{Cygwin}
-\label{sec:landscapes:cygwin}
-
-Compared to Linux, the command line of Windows can be a humbling experience. None of
-the wonderful helpers taken for granted on Linux are
-available. \program{Cygwin}\footnote{\url{https://cygwin.com/index.html}}
-provides a command line console with \program{bash} shell and all the
-niceties like \program{make}, \program{awk}, \program{sed}, etc.\ which seem
-essential for routine work.  If you are used to Linux tools, use
-inline scripts in your \file{Makefile}s and need more than \program{Clink} can
-offer, you should install \program{Cygwin}.
-
-\subsection{GNUWin32}
-\label{sec:landscapes:GNUwin32}
-
-Alternative to \program{Cygwin}, several of those nice tools (\program{sed},
-\program{awk} etc.) have also been made available as standalone commands
-for Windows. If you don't need the inline scripting capabilities in
-\file{Makefile}s which you would get from \program{Cygwin} but just want to call
-\program{awk} or \program{sed} inside your \program{.BAT} scripts, maybe this is enough.
+Compared to Linux, the command line of Windows can still be a humbling
+experience. None of the wonderful helpers taken for granted on Linux
+are available.  Many of the nice tools known and taken for granted by
+Linux users (\program{make}, \program{sed}, \program{awk} etc.) have
+also been made available as standalone commands for Windows. If you
+don't need the inline scripting capabilities in \file{Makefile}s which
+you would get from a more complete Linux installation but just want to
+call \program{awk} or \program{sed} inside your \program{.BAT}
+scripts, maybe this is enough.
 
 \subsection{WSL -- Windows Subsystem for Linux}
 \label{sec:landscapes:WSL}
 
 Finally, the 64-bit editions of Windows~10 come with an optional
 feature that allows you to install a complete Linux distribution like
-Ubuntu inside your Windows system. While you cannot run graphic
-applications, all the command-line tools are available.
+Ubuntu inside your Windows system. Combined with an X11 server like
+XMing\footnote{\url{https://sourceforge.net/projects/xming/}}, you can
+even run graphic applications like Stellarium, and all the
+command-line tools are available.
 
 
 %%% Local Variables:

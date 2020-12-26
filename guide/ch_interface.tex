@@ -214,34 +214,36 @@ The information display can be tweaked a bit with the options found in the GUI s
 
 \subsubsection{Customization of button visibility on bottom toolbar}
 If your screen is too narrow to show all buttons
-or you simply don't need them because you prefer the keyboard
-shortcuts, you can choose your optimal setup. The selection of buttons is stored immediately. 
+or you simply don't need them because you prefer the keyboard shortcuts,
+you can choose your optimal setup. The selection of buttons is stored immediately. 
 \begin{description}
-\item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
-\item[Show asterism lines button] You can toggle display of asterism lines with this button.
-\item[Show asterism labels button] You can toggle display of asterism labels with this button.
-\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
-\item[Show ICRS grid button] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
-\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
-\item[Show centering button] You can toggle display of the ``center on selected object'' button.
-\item[Show nightmode button] You can toggle display of the nightmode button.
-\item[Show nebula background button] You can toggle display of DSO photographs with this button.
-\item[Show flip buttons] When enabled, two buttons will be added to
+\item[Constellation boundaries] You can toggle display of constellation boundaries with this button.
+\item[Asterism lines] You can toggle display of asterism lines with this button.
+\item[Asterism labels] You can toggle display of asterism labels with this button.
+\item[Ecliptic grid] You can toggle display of ecliptic coordinate grid with this button.
+\item[ICRS grid] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
+\item[galactic grid] You can toggle display of galactic coordinate grid with this button.
+\item[Cardinal points] You can toggle display of the ``Cardinal points'' button.
+\item[Compass marks] You can toggle display of the ``Compass marks'' button.
+\item[Night mode] You can toggle display of the nightmode button.
+\item[Centering button] You can toggle display of the ``Center on selected object'' button.
+\item[Fullscreen button] You can toggle display of the fullscreen button.
+\item[Quit button] You can toggle display of the button to quit Stellarium.
+\item[Nebula background] You can toggle display of DSO photographs with this button.
+\item[Flip buttons] When enabled, two buttons will be added to
   the main tool bar which allow the main view to be mirrored in the
   vertical and horizontal directions. This is useful when observing
   through telecopes which may cause the image to be mirrored.
-\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
-\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
-\item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
-\item[Show fullscreen button] You can toggle display of the fullscreen button.
-\item[Show Quit button] You can toggle display of the button to quit Stellarium.
+\item[DSS survey] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
+\item[HiPS Surveys] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
+\item[Bookmarks] You can enable display of Bookmarks dialog with this button.
 \item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
 \end{description}
 
 \subsubsection{Download more star catalogs}
 Stellarium comes with enough stars for casual stargazing with the
 unaided eye or binoculars. If you have a telescope and want to see
-more stars, here you can download more catalogs.
+more stars, here you can download more catalogs. (See Appendix~\ref{ch:Catalogues})
 
 \subsection{The Time Tab}
 \label{sec:gui:configuration:time}
@@ -848,8 +850,8 @@ of objects whose name contains \emph{m}:
 \end{tabular}
 \end{center}
 
-You may want at this point to have Stellarium rather propose object
-names with start with the string you enter. Do that in the Options tab
+\noindent You may want at this point to have Stellarium rather propose object
+names which start with the string you enter. Do that in the Options tab
 of this panel (see section~\ref{sec:gui:SearchWindow:Options}).
 The search result should update automatically\newFeature{v0.20.3}
 when you nagivate back to the Object tab.
@@ -864,7 +866,7 @@ with \emph{m}:
 \end{tabular}
 \end{center}
 
-The first item in this list, Mago, is
+\noindent The first item in this list, Mago, is
 highlighted. Pressing \key{\return} now would go to Mago, but we want
 Mimas (SI). We can either press \key{\tab} or \key{\arrowkeydown} a few times to highlight Mimas (SI)
 and then hit \key{\return}, or we can continue to type the name until
@@ -881,12 +883,12 @@ Mimas (SI) should already be populated and highlighted:
 \end{tabular}
 \end{center}
 
-The Object tab's search result will now prioritized your most recent searches
-(which will be bolded).\newFeature{v0.20.3}
+\noindent The Object tab's search result will now prioritize your most recent searches
+(which will be shown in \textbf{bold}).\newFeature{v0.20.3}
 To modify the search results, see section~\ref{sec:gui:SearchWindow:Options}.
 From our earlier example, re-enter \emph{m} into the Object tab.
 Doing so will generate a slightly different list than before.
-In this case, Mimas (SI) will appear first, depicted in Figure~\ref{fig:gui:search:recentSearches}:
+In this case, Mimas (SI) will appear first, as shown in Figure~\ref{fig:gui:search:recentSearches}:
 \begin{center}
 \begin{tabular}{l}
         \textbf{\emph{M}imas (SI)}\\
@@ -901,12 +903,12 @@ In this case, Mimas (SI) will appear first, depicted in Figure~\ref{fig:gui:sear
 \label{sec:gui:SearchWindow:SIMBAD}
 The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a
 convenient way to fetch and show a set of information for selected
-object from the astronomical database
+object from the astronomical online database
 SIMBAD~\citep{2000A&AS..143....9W}.  If some object is only visible in
 a survey or DSS background (see section~\ref{ch:surveys}) and not in
 Stellarium's catalogs, you can also set a custom marker (see
 section~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
-what's known about this''.
+what's known about objects at this location''.
 
 \subsection{The Position tab}
 \label{sec:gui:SearchWindow:Position}
@@ -1240,8 +1242,8 @@ current date) as graphs.
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
-\begin{figure}[h]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog.png}
+\begin{figure}[htp]
+\centering\includegraphics[width=0.65\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -1253,7 +1255,7 @@ a browse of the information in this window.
 \subsection{The About Tab}
 \label{sec:gui:help:about}
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_about.png}
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
@@ -1264,15 +1266,16 @@ Since version 0.18.3 \newFeature{0.18.3} this tab has tool to check for updates 
 \subsection{The Log Tab}
 \label{sec:gui:help:log}
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_log.png}
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_log.png}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
 \end{figure}
 
 The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
-stellarium runs. It is useful to locate the files that stellarium writes
+Stellarium runs. It is useful to locate the files that Stellarium writes
 to your computer. The same information is written to  the file \file{log.txt} that you will
-find in your user directory (see~\ref{sec:Directories}).
+find in your user data directory (see~\ref{sec:Directories}).
+
 
 \section{Editing Keyboard Shortcuts}
 \label{sec:gui:help:hotkeys}

@@ -633,25 +633,25 @@ which plugins to load, you must restart Stellarium.
 \begin{longtable}{l|l|p{80mm}}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-AngleMeasure          & bool & \ref{sec:plugins:AngleMeasure} Angle Measure plugin\\%\midrule
-ArchaeoLines          & bool & \ref{sec:plugin:ArchaeoLines} ArchaeoLines plugin\\%\midrule
-CompassMarks          & bool & \ref{sec:plugins:CompassMarks} Compass Marks plugin\\%\midrule
-MeteorShowers         & bool & \ref{sec:plugins:MeteorShowers} Meteor Showers plugin \\%\midrule
-Exoplanets            & bool & \ref{sec:plugins:Exoplanets} Exoplanets plugin \\%\midrule
-Observability         & bool & \ref{sec:plugins:Observability} Observability Analysis\\%\midrule
-Oculars               & bool & \ref{sec:plugins:Oculars} Oculars plugin \\%\midrule
-Pulsars               & bool & \ref{sec:plugins:Pulsars} Pulsars plugin \\%\midrule
-Quasars               & bool & \ref{sec:plugins:Quasars} Quasars plugin \\%\midrule
-RemoteControl         & bool & \ref{sec:plugin:RemoteControl} Remote Control plugin \\%\midrule
-RemoteSync            & bool & \ref{sec:plugin:RemoteSync} Remote Sync plugin \\%\midrule
-Satellites            & bool & \ref{sec:plugins:Satellites} Satellites plugin \\%\midrule
-SolarSystemEditor     & bool & \ref{sec:plugins:SolarSystemEditor} Solar System Editor plugin\\%\midrule
-Supernovae            & bool & \ref{sec:plugins:HistoricalSupernovae} Historical Supernovae plugin \\%\midrule
-TelescopeControl      & bool & \ref{sec:plugins:TelescopeControl} Telescope Control plugin \\%\midrule
-TextUserInterface     & bool & \ref{sec:plugins:TextUserInterface} Text User Interface plugin \\%\midrule
-%TimeZoneConfiguration & bool & \ref{sec:plugins:TimeZoneControl} Time Zone plugin \\\midrule
-Novae                 & bool & \ref{sec:plugins:BrightNovae} Bright Novae plugin \\%\midrule
-Scenery3dMgr          & bool & \ref{ch:scenery3d} Scenery 3D plugin \\\bottomrule
+AngleMeasure          & bool & \ref{sec:plugins:AngleMeasure} Angle Measure plugin\\
+ArchaeoLines          & bool & \ref{sec:plugin:ArchaeoLines} ArchaeoLines plugin\\
+Calendars             & bool & \ref{sec:plugin:Calendars} Calendars plugin\\
+EquationOfTime        & bool & \ref{sec:plugins:EquationOfTime} Equation of Time plugin\\
+Exoplanets            & bool & \ref{sec:plugins:Exoplanets} Exoplanets plugin \\
+MeteorShowers         & bool & \ref{sec:plugins:MeteorShowers} Meteor Showers plugin \\
+Novae                 & bool & \ref{sec:plugins:BrightNovae} Bright Novae plugin \\
+Observability         & bool & \ref{sec:plugins:Observability} Observability Analysis\\
+Oculars               & bool & \ref{sec:plugins:Oculars} Oculars plugin \\
+Pulsars               & bool & \ref{sec:plugins:Pulsars} Pulsars plugin \\
+Quasars               & bool & \ref{sec:plugins:Quasars} Quasars plugin \\
+RemoteControl         & bool & \ref{sec:plugin:RemoteControl} Remote Control plugin \\
+RemoteSync            & bool & \ref{sec:plugin:RemoteSync} Remote Sync plugin \\
+Satellites            & bool & \ref{sec:plugins:Satellites} Satellites plugin \\
+Scenery3d             & bool & \ref{ch:scenery3d} Scenery 3D plugin \\
+SolarSystemEditor     & bool & \ref{sec:plugins:SolarSystemEditor} Solar System Editor plugin\\
+Supernovae            & bool & \ref{sec:plugins:HistoricalSupernovae} Historical Supernovae plugin \\
+TelescopeControl      & bool & \ref{sec:plugins:TelescopeControl} Telescope Control plugin \\
+TextUserInterface     & bool & \ref{sec:plugins:TextUserInterface} Text User Interface plugin \\\bottomrule
 \end{longtable}
 
 \subsection{\big[projection\big]}
@@ -875,14 +875,14 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
 minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
 \midrule
-flag\_fov\_center\_marker        & bool  & Set to \emph{true} to enable drawing a center of field of view marker \\
-flag\_fov\_circular\_marker      & bool  & Set to \emph{true} to enable drawing the circular FOV marker \\
+flag\_fov\_center\_marker        & bool  & Set to \emph{true} to enable drawing a field of view center marker \\
+flag\_fov\_circular\_marker      & bool  & Set to \emph{true} to enable drawing a circular FOV marker \\
 size\_fov\_circular\_marker      & float & size of the circular FOV marker, degrees \\
-flag\_fov\_rectangular\_marker   & bool  & Set to \emph{true} to enable drawing the rectangular FOV marker \\
+flag\_fov\_rectangular\_marker   & bool  & Set to \emph{true} to enable drawing a rectangular FOV marker \\
 width\_fov\_rectangular\_marker  & float & width of the rectangular FOV marker, degrees \\
 height\_fov\_rectangular\_marker & float & height of the rectangular FOV marker, degrees \\
 rot\_fov\_rectangular\_marker    & float & rotation angle of the rectangular FOV marker, degrees \\
-flag\_compass\_marks             & bool  & Set to \emph{true} to enable drawing a compass marks \\
+flag\_compass\_marks             & bool  & Set to \emph{true} to enable drawing compass marks \\
 \midrule
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\%\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\%\midrule
