@@ -118,7 +118,7 @@ void OcularDialog::deleteSelectedCCD()
 	if (ccdTableModel->rowCount() == 1)
 	{
 		qDebug() << "Cannot delete the last entry.";
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last CCD."), QMessageBox::Ok);
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last sensor."), QMessageBox::Ok);
 		return;
 	}
 
