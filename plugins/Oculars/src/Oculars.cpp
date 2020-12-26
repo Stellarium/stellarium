@@ -725,7 +725,7 @@ void Oculars::setScreenFOVForCCD()
 		double factor = 1.75;
 		if (ccds[selectedCCDIndex]->hasOAG()) factor *= 2;
 		movementManager->setFlagTracking(true);
-		movementManager->zoomTo(actualFOVx * factor, 0.0);
+		movementManager->zoomTo(actualFOVx * factor, 0.f);
 	}
 }
 
@@ -2441,7 +2441,7 @@ void Oculars::zoomOcular()
 	{
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->apparentFOV();
 	}
-	movementManager->zoomTo(actualFOV, 0.0);
+	movementManager->zoomTo(actualFOV, 0.f);
 }
 
 void Oculars::hideUsageMessageIfDisplayed()

@@ -364,13 +364,13 @@ void BookmarksDialog::goToBookmark(QString uuid)
 				if (bm.fov > 0.0)
 					fov = bm.fov;
 
-				mvmgr->zoomTo(fov, 0.0);
+				mvmgr->zoomTo(fov, 0.f);
 				mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), 0.0);
 
 				QList<StelObjectP> candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
 				if (candidates.empty()) // The FOV is too big, let's reduce it
 				{
-					mvmgr->zoomTo(0.5*fov, 0.0);
+					mvmgr->zoomTo(0.5*fov, 0.f);
 					candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
 				}
 
