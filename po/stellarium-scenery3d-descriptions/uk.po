@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-11-25 01:24+0700\n"
+"POT-Creation-Date: 2020-12-26 18:32+0700\n"
 "PO-Revision-Date: 2020-11-24 18:28+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2020\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -91,14 +91,23 @@ msgstr ""
 " ефектів, зокрема напівпрозорих сфер або блокових сфер, які світяться у "
 "темряві."
 
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr ""
+"Для тестування часових можливостей, колони і сфери видимі лише у проміжку "
+"років від 2000 до 2020. Внесіть зміни до файла матеріалів, щоб змінити це!"
+
 #. type: Content of: <h4>
-#: ../../scenery3d/Testscene/description.en.utf8:30
+#: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
 msgstr "Модель"
 
 #. type: Content of: <p>
-#: ../../scenery3d/Testscene/description.en.utf8:31
+#: ../../scenery3d/Testscene/description.en.utf8:33
 msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."

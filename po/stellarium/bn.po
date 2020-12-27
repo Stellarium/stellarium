@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-26 17:51+0700\n"
+"POT-Creation-Date: 2020-12-27 00:54+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -525,7 +525,7 @@ msgstr "আলোক দূষনের মান পরিবর্তন ক�
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:148
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:155
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:156
 msgid "Author"
 msgstr "প্রস্তুতকারক"
 
@@ -2439,7 +2439,7 @@ msgid "Date and Time"
 msgstr "তারিখ ও সময়"
 
 #: src/core/StelCore.cpp:256 src/core/StelObjectMgr.cpp:53
-#: src/core/StelMovementMgr.cpp:220
+#: src/core/StelMovementMgr.cpp:223
 msgid "Movement and Selection"
 msgstr "পরিচালনা এবং নির্বাচন"
 
@@ -3441,81 +3441,81 @@ msgid "No description"
 msgstr "খালি"
 
 #: src/core/StelSkyCultureMgr.cpp:301
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
 msgid "References"
 msgstr "তথ্যসূত্র"
 
-#: src/core/StelMovementMgr.cpp:221 src/gui/StelGui.cpp:230
+#: src/core/StelMovementMgr.cpp:224 src/gui/StelGui.cpp:230
 #: src/StelMainView.cpp:819 src/StelMainView.cpp:820
 msgid "Miscellaneous"
 msgstr "অন্যান্য"
 
-#: src/core/StelMovementMgr.cpp:221
+#: src/core/StelMovementMgr.cpp:224
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "নিরক্ষীয় এবং দিগংশিক বিচলন বা আলম্বের মধ্যে অদলবদল"
 
-#: src/core/StelMovementMgr.cpp:222
+#: src/core/StelMovementMgr.cpp:225
 msgid "Center on selected object"
 msgstr "জ্যোতিষ্কটিকে দৃশ্যপটের মাঝে আনুন"
 
-#: src/core/StelMovementMgr.cpp:223
+#: src/core/StelMovementMgr.cpp:226
 msgid "Deselect the selected object"
 msgstr "পুনরায় নতুন করে বেছে নিন"
 
-#: src/core/StelMovementMgr.cpp:224
+#: src/core/StelMovementMgr.cpp:227
 msgid "Zoom in on selected object"
 msgstr "আরও কাছে থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:225
+#: src/core/StelMovementMgr.cpp:228
 msgid "Zoom out"
 msgstr "আরও দূর থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:227
+#: src/core/StelMovementMgr.cpp:230
 msgid "Track object"
 msgstr "নির্বাচিত জ্যোতিষ্কটিকে অনুসরণ করুন"
 
-#: src/core/StelMovementMgr.cpp:229
+#: src/core/StelMovementMgr.cpp:232
 msgid "Look towards East"
 msgstr "পূর্ব দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:230
+#: src/core/StelMovementMgr.cpp:233
 msgid "Look towards West"
 msgstr "পশ্চিম দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:231
+#: src/core/StelMovementMgr.cpp:234
 msgid "Look towards North"
 msgstr "উত্তর দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:232
+#: src/core/StelMovementMgr.cpp:235
 msgid "Look towards South"
 msgstr "দক্ষিণ দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:233
+#: src/core/StelMovementMgr.cpp:236
 msgid "Look towards Zenith"
 msgstr "উপরের দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:235
+#: src/core/StelMovementMgr.cpp:238
 msgid "Look towards North Celestial pole"
 msgstr "উত্তর মেরুর দিকে তাক করুন"
 
-#: src/core/StelMovementMgr.cpp:236
+#: src/core/StelMovementMgr.cpp:239
 msgid "Look towards South Celestial pole"
 msgstr "দক্ষিণ মেরুর দিকে তাক করুন"
 
-#: src/core/StelMovementMgr.cpp:250
+#: src/core/StelMovementMgr.cpp:253
 msgid "Field of View"
 msgstr "পছন্দসই দৃষ্টিক্ষেত্র"
 
-#: src/core/StelMovementMgr.cpp:250
+#: src/core/StelMovementMgr.cpp:253
 msgid "Set predefined FOV"
 msgstr "পূর্বনির্ধারিত দৃষ্টিক্ষেত্র নির্ধারণ করুন"
 
-#: src/core/StelMovementMgr.cpp:273
+#: src/core/StelMovementMgr.cpp:276
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "নিরক্ষীয় বিচলন"
 
-#: src/core/StelMovementMgr.cpp:275
+#: src/core/StelMovementMgr.cpp:278
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "দিগংশিক বিচলন"
@@ -3849,7 +3849,7 @@ msgstr "যোগাযোগ"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:222
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:153
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:154
 msgid "Version"
 msgstr "সংস্করণ"
 
@@ -3872,7 +3872,7 @@ msgstr "সংস্করণ"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:226
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:147
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:154
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:155
 msgid "License"
 msgstr "অনুমতিপত্র"
 
@@ -6104,7 +6104,7 @@ msgid "Linear distance"
 msgstr "দূরত্ব"
 
 #: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6352
-#: plugins/Calendars/src/ui_calendarsDialog.h:772
+#: plugins/Calendars/src/ui_calendarsDialog.h:779
 msgid "Day"
 msgstr "দিন"
 
@@ -7285,7 +7285,7 @@ msgid "Boorong"
 msgstr "বোরং"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489 plugins/Calendars/src/ui_calendarsDialog.h:781
+#: src/translations.h:489 plugins/Calendars/src/ui_calendarsDialog.h:788
 msgid "Chinese"
 msgstr "চৈনিক"
 
@@ -11165,7 +11165,7 @@ msgstr "স্টেলারিয়াম প্রদত্ত স্বাভ�
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
-#: plugins/Calendars/src/ui_calendarsDialog.h:768
+#: plugins/Calendars/src/ui_calendarsDialog.h:775
 msgid "Restore defaults"
 msgstr "স্বাভাবিক বৈশিষ্ট্যাবলী ফিরিয়ে আনুন"
 
@@ -12960,7 +12960,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:328
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
 msgid "Links"
 msgstr "বিবিধ"
 
@@ -12980,7 +12980,7 @@ msgstr "বিবিধ"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 #, qt-format
 msgid ""
 "Support is provided via the Github website.  Be sure to put \"%1\" in the "
@@ -13007,7 +13007,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:332
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "If you have a question, you can {get an answer here}."
 msgstr "যে কোনো রকমের জিজ্ঞাসার জন্য {এখানে দেখুন} ।"
 
@@ -13029,7 +13029,7 @@ msgstr "যে কোনো রকমের জিজ্ঞাসার জন�
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:334
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:187
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
 msgid "Bug reports and feature requests can be made {here}."
 msgstr "সমস্যা কিংবা নতুন বৈশিষ্ট্য সংক্রান্ত বিষয় {এখানে} জানান ।"
 
@@ -13129,7 +13129,7 @@ msgstr "কোণ পরিমাপে দশমিক যুক্ত ডি�
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:480
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:324
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
-#: plugins/Calendars/src/ui_calendarsDialog.h:819
+#: plugins/Calendars/src/ui_calendarsDialog.h:826
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "পরিচিতি"
@@ -13215,6 +13215,8 @@ msgstr "সতর্কতা"
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
+"সেন্সরের পরিসীমা দেখাতে ব্যর্থ : তালিকায় কোনো সেন্সর কিংবা দূরবীন যোগ করা "
+"নেই ।"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
 #: plugins/Oculars/src/ui_ocularDialog.h:1465
@@ -13657,16 +13659,16 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "দৃষ্টিগোচর স্পষ্টতা দৃষ্টিশক্তি ও দূরবীনের বিবর্ধনের উপর নির্ভরশীল"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
-msgid "Cannot delete the last CCD."
-msgstr ""
+msgid "Cannot delete the last sensor."
+msgstr "সেন্সরটিকে মুছে ফেলা যাচ্ছে না"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 msgid "Cannot delete the last ocular."
-msgstr ""
+msgstr "অভিনেত্রটিকে মুছে ফেলা যাচ্ছে না"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
 msgid "Cannot delete the last telescope."
-msgstr ""
+msgstr "দূরবীনটিকে মুছে ফেলা যাচ্ছে না"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:569
@@ -18390,13 +18392,13 @@ msgstr "এই সরঞ্জামটি স্টিফান নির্ম
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 msgid "Publications"
 msgstr "প্রকাশনা"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 "যে কোনো জায়গায় এই সরঞ্জামটি ব্যবহার করা হয়ে থাকলে সেখানে অবশ্যই উল্লেখ করুন "
@@ -19299,7 +19301,7 @@ msgstr "টোনাটিহ্ হলেন অ্যাজটেকদের 
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:358
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr "মেশচি হলেন অ্যাজটেকদের চাঁদের দেবতা ।"
+msgstr "মেশলি হলেন অ্যাজটেকদের চাঁদের দেবতা ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
 msgid ""
@@ -20473,16 +20475,16 @@ msgid ""
 " and culturally significant endemic amphibious species from the basin of "
 "Mexico."
 msgstr ""
-"অ্যাশোলোল এর অর্থ দেশীয় নাওয়াল ভাষায় জলের প্রাণী, যা আসলে মেক্সিকো "
-"অববাহিকার এক অনন্য এবং সাংস্কৃতিকভাবে উল্লেখযোগ্য স্থানীয় উভচর প্রজাতি।"
+"অ্যাশোলোঠ্ল এর অর্থ দেশীয় নাওয়াঠ্ল ভাষায় জলের প্রাণী, যা আসলে মেক্সিকো "
+"অববাহিকার অনন্য এবং সাংস্কৃতিকভাবে উল্লেখযোগ্য একটি স্থানীয় উভচর প্রজাতি ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid ""
 "Xólotl means animal in the native Nahuatl language and was an Aztec deity "
 "associated with the evening star (Venus)."
 msgstr ""
-"শোলোল এর অর্থ দেশীয় নাওয়াত ভাষায় প্রাণী এবং এটি সন্ধ্যা তারার (শুক্র) "
-"অ্যাজটেক দেবতা ।"
+"শোলোঠ্ল এর অর্থ দেশীয় নাওয়াঠ্ল ভাষায় প্রাণী এবং এটি সন্ধ্যা তারার (শুক্র)"
+" অ্যাজটেক দেবতা ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid ""
@@ -20588,7 +20590,7 @@ msgid ""
 " from the Nahualt language of the indigenous tribe that settled in "
 "Nicaragua, which symbolises a native god and a refuge for animals."
 msgstr ""
-"শোলোলান হল নিকারাগুয়ার দ্বিতীয় বৃহত্তম হ্রদের নাম এবং এটি নিকারাগুয়ায় "
+"শোলোঠান হল নিকারাগুয়ার দ্বিতীয় বৃহত্তম হ্রদের নাম এবং এটি নিকারাগুয়ায় "
 "বসতি স্থাপনকারী আদিবাসী উপজাতির নাওয়াল ভাষা থেকে এসেছে, যা আদি দেবতা এবং "
 "পশুর আশ্রয়ের প্রতীক।"
 
@@ -23032,7 +23034,7 @@ msgstr "ত্রিমাতৃক ভূমিরূপ চালু বা �
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:333
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
-#: plugins/Calendars/src/Calendars.cpp:150
+#: plugins/Calendars/src/Calendars.cpp:152
 msgid "Show settings dialog"
 msgstr "তথ্য বিন্যাস বিভাগ"
 
@@ -23937,112 +23939,118 @@ msgstr ""
 "জাতীয় মহাকাশ গবেষণা কেন্দ্র, ফ্রান্সের মহাকাশ তথ্য পরিদর্শন সরঞ্জামটি "
 "ব্যবহার করা যায়"
 
-#: plugins/Calendars/src/Calendars.cpp:68
-#: plugins/Calendars/src/Calendars.cpp:148
-#: plugins/Calendars/src/Calendars.cpp:149
+#: plugins/Calendars/src/Calendars.cpp:69
+#: plugins/Calendars/src/Calendars.cpp:150
+#: plugins/Calendars/src/Calendars.cpp:151
 msgid "Calendars"
 msgstr "পঞ্জিকা"
 
-#: plugins/Calendars/src/Calendars.cpp:71
+#: plugins/Calendars/src/Calendars.cpp:72
 msgid "Calendars of the world"
 msgstr "বিশ্বের নানা পঞ্জিকা"
 
-#: plugins/Calendars/src/Calendars.cpp:250
-#: plugins/Calendars/src/ui_calendarsDialog.h:749
-#: plugins/Calendars/src/ui_calendarsDialog.h:771
+#: plugins/Calendars/src/Calendars.cpp:254
+#: plugins/Calendars/src/ui_calendarsDialog.h:762
+#: plugins/Calendars/src/ui_calendarsDialog.h:778
 msgctxt "calendar"
 msgid "Julian"
 msgstr "জুলিয়ান"
 
-#: plugins/Calendars/src/Calendars.cpp:251
-#: plugins/Calendars/src/ui_calendarsDialog.h:750
-#: plugins/Calendars/src/ui_calendarsDialog.h:775
+#: plugins/Calendars/src/Calendars.cpp:255
+#: plugins/Calendars/src/ui_calendarsDialog.h:765
+#: plugins/Calendars/src/ui_calendarsDialog.h:782
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "গ্রেগরিয়ান"
 
-#: plugins/Calendars/src/Calendars.cpp:252
+#: plugins/Calendars/src/Calendars.cpp:256
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "আন্তর্জাতিক প্রামাণ্য সপ্তাহ"
 
-#: plugins/Calendars/src/Calendars.cpp:253
-#: plugins/Calendars/src/ui_calendarsDialog.h:759
+#: plugins/Calendars/src/Calendars.cpp:257
+#: plugins/Calendars/src/ui_calendarsDialog.h:768
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "আইসল্যান্ড"
 
-#: plugins/Calendars/src/Calendars.cpp:254
-#: plugins/Calendars/src/ui_calendarsDialog.h:755
+#: plugins/Calendars/src/Calendars.cpp:258
+#: plugins/Calendars/src/ui_calendarsDialog.h:773
 msgctxt "calendar"
 msgid "Roman"
 msgstr "রোমান"
 
-#: plugins/Calendars/src/Calendars.cpp:255
-#: plugins/Calendars/src/ui_calendarsDialog.h:756
+#: plugins/Calendars/src/Calendars.cpp:259
+#: plugins/Calendars/src/ui_calendarsDialog.h:771
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "অলিম্পিক"
 
-#: plugins/Calendars/src/Calendars.cpp:256
-#: plugins/Calendars/src/ui_calendarsDialog.h:752
+#: plugins/Calendars/src/Calendars.cpp:260
+#: plugins/Calendars/src/ui_calendarsDialog.h:760
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "মিশরীয়"
 
-#: plugins/Calendars/src/Calendars.cpp:257
-#: plugins/Calendars/src/ui_calendarsDialog.h:753
+#: plugins/Calendars/src/Calendars.cpp:261
+#: plugins/Calendars/src/ui_calendarsDialog.h:770
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "আর্মেনীয়"
 
-#: plugins/Calendars/src/Calendars.cpp:258
-#: plugins/Calendars/src/ui_calendarsDialog.h:754
+#: plugins/Calendars/src/Calendars.cpp:262
+#: plugins/Calendars/src/ui_calendarsDialog.h:769
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "জোরোস্তানিও"
 
-#: plugins/Calendars/src/Calendars.cpp:259
-#: plugins/Calendars/src/ui_calendarsDialog.h:758
+#: plugins/Calendars/src/Calendars.cpp:263
+#: plugins/Calendars/src/ui_calendarsDialog.h:761
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "কিবতী"
 
-#: plugins/Calendars/src/Calendars.cpp:260
-#: plugins/Calendars/src/ui_calendarsDialog.h:760
+#: plugins/Calendars/src/Calendars.cpp:264
+#: plugins/Calendars/src/ui_calendarsDialog.h:759
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "ইথিওপিয়া"
 
-#: plugins/Calendars/src/Calendars.cpp:261
-#: plugins/Calendars/src/ui_calendarsDialog.h:761
+#: plugins/Calendars/src/Calendars.cpp:265
+#: plugins/Calendars/src/ui_calendarsDialog.h:758
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "মায়া দীর্ঘ"
 
-#: plugins/Calendars/src/Calendars.cpp:262
-#: plugins/Calendars/src/ui_calendarsDialog.h:763
+#: plugins/Calendars/src/Calendars.cpp:266
+#: plugins/Calendars/src/ui_calendarsDialog.h:772
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "মায়া হাব"
 
-#: plugins/Calendars/src/Calendars.cpp:263
-#: plugins/Calendars/src/ui_calendarsDialog.h:765
+#: plugins/Calendars/src/Calendars.cpp:267
+#: plugins/Calendars/src/ui_calendarsDialog.h:764
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "মায়া যোলকিন"
 
-#: plugins/Calendars/src/Calendars.cpp:264
-#: plugins/Calendars/src/ui_calendarsDialog.h:762
+#: plugins/Calendars/src/Calendars.cpp:268
+#: plugins/Calendars/src/ui_calendarsDialog.h:767
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
-msgstr "অ্যাজটেক শিউইল"
+msgstr "অ্যাজটেক শিউইঠ্ল"
 
-#: plugins/Calendars/src/Calendars.cpp:265
-#: plugins/Calendars/src/ui_calendarsDialog.h:764
+#: plugins/Calendars/src/Calendars.cpp:269
+#: plugins/Calendars/src/ui_calendarsDialog.h:757
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "অ্যাজটেক তোনালপৌয়াল্লি"
+
+#: plugins/Calendars/src/Calendars.cpp:271
+#: plugins/Calendars/src/ui_calendarsDialog.h:766
+msgctxt "calendar"
+msgid "Balinese Pawukon"
+msgstr "বালি পাযুকোন"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
 msgctxt "Armenian month name"
@@ -24116,12 +24124,12 @@ msgstr "আর্মেনীয় যুগ"
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
 msgctxt "Aztec Tonalpohualli name"
 msgid "Cipactli (Alligator)"
-msgstr "কিপাকিলি (কুমীর)"
+msgstr "সিপাক্লি (কুমীর)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:40
 msgctxt "Aztec Tonalpohualli name"
 msgid "Ehecatl (Wind)"
-msgstr "এওয়েকাল (বাতাস)"
+msgstr "এয়েকাঠ্ল (বাতাস)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:41
 msgctxt "Aztec Tonalpohualli name"
@@ -24136,37 +24144,37 @@ msgstr "কুয়েশপল্লিন (ইগুয়ানা গির
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:43
 msgctxt "Aztec Tonalpohualli name"
 msgid "Coatl (Serpent)"
-msgstr "কোয়াল (সাপ)"
+msgstr "কোয়াঠ্ল (সাপ)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:44
 msgctxt "Aztec Tonalpohualli name"
 msgid "Miquiztli (Death)"
-msgstr "মিকুইজলি (মৃত্যু)"
+msgstr "মিকুইস্লি (মৃত্যু)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:45
 msgctxt "Aztec Tonalpohualli name"
 msgid "Mazatl (Deer)"
-msgstr "মাজাল (হরিণ)"
+msgstr "মাশাঠ্ল (হরিণ)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:46
 msgctxt "Aztec Tonalpohualli name"
 msgid "Tochtli (Rabbit)"
-msgstr "তোচিলি (খরগোশ)"
+msgstr "তোচলি (খরগোশ)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:47
 msgctxt "Aztec Tonalpohualli name"
 msgid "Atl (Water)"
-msgstr "আল (জল)"
+msgstr "আঠ্ল (জল)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:48
 msgctxt "Aztec Tonalpohualli name"
 msgid "Itzcuintli (Dog)"
-msgstr "ঈশকুইনলি (কুকুর)"
+msgstr "ঈসকুইনঠ্লি (কুকুর)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:49
 msgctxt "Aztec Tonalpohualli name"
 msgid "Ozomatli (Monkey)"
-msgstr "ওযোমাল্লি (বাঁদর)"
+msgstr "ওসোমাঠ্লি (বাঁদর)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:50
 msgctxt "Aztec Tonalpohualli name"
@@ -24176,22 +24184,22 @@ msgstr "মালিনাল্লি (ঘাস)"
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:51
 msgctxt "Aztec Tonalpohualli name"
 msgid "Acatl (Cane)"
-msgstr "আকাল (সারস)"
+msgstr "আকাঠ্ল (সারস)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:52
 msgctxt "Aztec Tonalpohualli name"
 msgid "Ocelotl (Jaguar)"
-msgstr "ওকেলোল (জাগুয়ার)"
+msgstr "ওসেলোঠ্ল (জাগুয়ার)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:53
 msgctxt "Aztec Tonalpohualli name"
 msgid "Quauhtli (Eagle)"
-msgstr "কুয়ায়ুলি (ঈগল)"
+msgstr "কুয়ায়ুঠ্লি (ঈগল)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:54
 msgctxt "Aztec Tonalpohualli name"
 msgid "Cozcaquauhtli (Buzzard)"
-msgstr "কজেকাকুয়াইলি (গুঞ্জন)"
+msgstr "কোসকাকুয়াউঠ্লি (গুঞ্জন)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:55
 msgctxt "Aztec Tonalpohualli name"
@@ -24201,17 +24209,17 @@ msgstr "ওল্লিন (কাঁপুনি)"
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:56
 msgctxt "Aztec Tonalpohualli name"
 msgid "Tecpatl (Flint)"
-msgstr "তেকপাল (চকমকি)"
+msgstr "তেকপাঠ্ল (চকমকি)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:57
 msgctxt "Aztec Tonalpohualli name"
 msgid "Quiahuitl (Rain)"
-msgstr "কুইয়াউইল (বৃষ্টি)"
+msgstr "কুইয়াউঠ্ল (বৃষ্টি)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:58
 msgctxt "Aztec Tonalpohualli name"
 msgid "Xochitl (Flower)"
-msgstr "শোচিল (ফুল)"
+msgstr "শোচিঠ্ল (ফুল)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:43
 msgctxt "Aztec Xihuitl month name"
@@ -24221,67 +24229,67 @@ msgstr "ইজাকাল্লী (চারা গাছ)"
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:44
 msgctxt "Aztec Xihuitl month name"
 msgid "Atlcahualo (Water left)"
-msgstr "আলকাউয়ালো (জল)"
+msgstr "আঠ্লকাউয়ালো (জল)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:45
 msgctxt "Aztec Xihuitl month name"
 msgid "Tlacaxipehualiztli (Man flaying)"
-msgstr "লাকাশিপেউয়ালিজলি (উড়ন্ত মানব)"
+msgstr "ঠ্লাকাশিপেউয়ালিসঠ্লি (উড়ন্ত মানব)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:46
 msgctxt "Aztec Xihuitl month name"
 msgid "Tozoztontli (1-Vigil)"
-msgstr "তোজোজতোনলি (১-জাগ্রত)"
+msgstr "তোসোসতোনঠ্লি (১-জাগ্রত)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:47
 msgctxt "Aztec Xihuitl month name"
 msgid "Huei Tozoztli (2-Vigil)"
-msgstr "হুয়েই তোজোজলি (২-জাগ্রত)"
+msgstr "হুয়েই তোসোসঠ্লি (২-জাগ্রত)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:48
 msgctxt "Aztec Xihuitl month name"
 msgid "Toxcatl (Drought)"
-msgstr "তোশকাল (খরা)"
+msgstr "তোশকাঠ্ল (খরা)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:49
 msgctxt "Aztec Xihuitl month name"
 msgid "Etzalcualiztli (Eating bean soup)"
-msgstr "এজালকুয়ালিজলি (কড়াই এর ঝোল খাওয়া)"
+msgstr "এসালকুয়ালিসঠ্লি (কড়াই এর ঝোল খাওয়া)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:50
 msgctxt "Aztec Xihuitl month name"
 msgid "Tecuilhuitontli (1-Lord’s feast)"
-msgstr "তেকুইলউইতনলি (১-ভগবানের বনভোজন)"
+msgstr "তেকুইলউইতোনঠ্লি (১-ভগবানের বনভোজন)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:51
 msgctxt "Aztec Xihuitl month name"
 msgid "Huei Tecuilhuitl (2-Lord’s feast)"
-msgstr "হুয়েইতেকুইলউইল (২-ভগবানের বনভোজন)"
+msgstr "হুয়েই তেকুইলউঠ্ল (২-ভগবানের বনভোজন)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:52
 msgctxt "Aztec Xihuitl month name"
 msgid "Tlaxochimaco (Give flowers)"
-msgstr "লাশোচিমাকো (ফুল দেওয়া)"
+msgstr "ঠ্লাশোচিমাকো (ফুল দেওয়া)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:53
 msgctxt "Aztec Xihuitl month name"
 msgid "Xocotlhuetzi (Fruit falls)"
-msgstr "শোকোলুয়েতজি (ঝরা ফল)"
+msgstr "শোকোঠ্লুয়েতসি (ঝরা ফল)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:54
 msgctxt "Aztec Xihuitl month name"
 msgid "Ochpaniztli (Road sweeping)"
-msgstr "ওচপানিজলি (রাস্তা ঝাঁটানো)"
+msgstr "ওচপানিসঠ্লি (রাস্তা ঝাঁটানো)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:55
 msgctxt "Aztec Xihuitl month name"
 msgid "Teotleco (God arrives)"
-msgstr "তেওলেকো (ভগবানের আবির্ভাব)"
+msgstr "তেওঠ্লেকো (ভগবানের আবির্ভাব)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:56
 msgctxt "Aztec Xihuitl month name"
 msgid "Tepeilhuitl (Mountain feast)"
-msgstr "তেপেইউইল (পাহাড়ে বনভোজন)"
+msgstr "তেপেইউইঠ্ল (পাহাড়ে বনভোজন)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:57
 msgctxt "Aztec Xihuitl month name"
@@ -24291,22 +24299,439 @@ msgstr "কোয়েচললি (মাক্যাও)"
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:58
 msgctxt "Aztec Xihuitl month name"
 msgid "Panquetzaliztli (Flag raising)"
-msgstr "পানকোয়েশালিজলি (পতাকা উত্তোলন)"
+msgstr "পানকোয়েসালিসঠ্লি (পতাকা উত্তোলন)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:59
 msgctxt "Aztec Xihuitl month name"
 msgid "Atemoztli (Falling water)"
-msgstr "আতেমজলি (ঝর্না)"
+msgstr "আতেমোসঠ্লি (ঝর্না)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:60
 msgctxt "Aztec Xihuitl month name"
 msgid "Tititl (Storm)"
-msgstr "তিলিলি (ঝড়)"
+msgstr "তিঠিঠ্ল (ঝড়)"
 
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:61
 msgctxt "Aztec Xihuitl month name"
 msgid "Nemontemi (Full in vain)"
 msgstr "নেমন্তেমি (ব্যর্থতা)"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:215
+msgctxt "Balinese Pawukon date name"
+msgid "Luang"
+msgstr "লুয়াং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:216
+msgctxt "Balinese Pawukon date name"
+msgid "Menga"
+msgstr "মেংয়া"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:217
+msgctxt "Balinese Pawukon date name"
+msgid "Pepet"
+msgstr "পেপেট"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:218
+msgctxt "Balinese Pawukon date name"
+msgid "Pasah"
+msgstr "পাসাহ্"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:219
+msgctxt "Balinese Pawukon date name"
+msgid "Beteng"
+msgstr "বেত্যাং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:220
+msgctxt "Balinese Pawukon date name"
+msgid "Kajeng"
+msgstr "কাজ্যাং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:221
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:243
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:264
+msgctxt "Balinese Pawukon date name"
+msgid "Sri"
+msgstr "শ্রী"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:222
+msgctxt "Balinese Pawukon date name"
+msgid "Laba"
+msgstr "লাভ"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:223
+msgctxt "Balinese Pawukon date name"
+msgid "Jaya"
+msgstr "জয়"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:224
+msgctxt "Balinese Pawukon date name"
+msgid "Menala"
+msgstr "মেনালা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:225
+msgctxt "Balinese Pawukon date name"
+msgid "Umanis"
+msgstr "উমানিস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:226
+msgctxt "Balinese Pawukon date name"
+msgid "Paing"
+msgstr "পাইং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:227
+msgctxt "Balinese Pawukon date name"
+msgid "Pon"
+msgstr "পন"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:228
+msgctxt "Balinese Pawukon date name"
+msgid "Wage"
+msgstr "ওয়েগে"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:229
+msgctxt "Balinese Pawukon date name"
+msgid "Keliwon"
+msgstr "ক্যালিওন"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:230
+msgctxt "Balinese Pawukon date name"
+msgid "Tungleh"
+msgstr "টুংগ্লেহ্"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:231
+msgctxt "Balinese Pawukon date name"
+msgid "Aryang"
+msgstr "আর্য়াং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:232
+msgctxt "Balinese Pawukon date name"
+msgid "Urukung"
+msgstr "উরুকুং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:233
+msgctxt "Balinese Pawukon date name"
+msgid "Paniron"
+msgstr "পানিরন"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:234
+msgctxt "Balinese Pawukon date name"
+msgid "Was"
+msgstr "ওয়াস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:235
+msgctxt "Balinese Pawukon date name"
+msgid "Maulu"
+msgstr "মাউলু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:236
+msgctxt "Balinese Pawukon date name"
+msgid "Redite"
+msgstr "রেদিতে"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:237
+msgctxt "Balinese Pawukon date name"
+msgid "Coma"
+msgstr "সোমা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:238
+msgctxt "Balinese Pawukon date name"
+msgid "Anggara"
+msgstr "আঙ্গারা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:239
+msgctxt "Balinese Pawukon date name"
+msgid "Buda"
+msgstr "বুদ"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:240
+msgctxt "Balinese Pawukon date name"
+msgid "Wraspati"
+msgstr "ওয়ারসপতি"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:241
+msgctxt "Balinese Pawukon date name"
+msgid "Sukra"
+msgstr "সুক্র"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:242
+msgctxt "Balinese Pawukon date name"
+msgid "Saniscara"
+msgstr "শনিস্কারা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:244
+msgctxt "Balinese Pawukon date name"
+msgid "Indra"
+msgstr "ইন্দ্র"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:245
+msgctxt "Balinese Pawukon date name"
+msgid "Guru"
+msgstr "গুরু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:246
+msgctxt "Balinese Pawukon date name"
+msgid "Yama"
+msgstr "যম"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:247
+msgctxt "Balinese Pawukon date name"
+msgid "Ludra"
+msgstr "লুদ্রা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:248
+msgctxt "Balinese Pawukon date name"
+msgid "Brahma"
+msgstr "ব্রহ্ম"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:249
+msgctxt "Balinese Pawukon date name"
+msgid "Kala"
+msgstr "কাল"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:250
+msgctxt "Balinese Pawukon date name"
+msgid "Uma"
+msgstr "উমা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:251
+msgctxt "Balinese Pawukon date name"
+msgid "Dangu"
+msgstr "ডাংয়ু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:252
+msgctxt "Balinese Pawukon date name"
+msgid "Jangur"
+msgstr "জাংয়ুর"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:253
+msgctxt "Balinese Pawukon date name"
+msgid "Gigis"
+msgstr "গিগিস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:254
+msgctxt "Balinese Pawukon date name"
+msgid "Nohan"
+msgstr "নোহান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:255
+msgctxt "Balinese Pawukon date name"
+msgid "Ogan"
+msgstr "ওগান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:256
+msgctxt "Balinese Pawukon date name"
+msgid "Erangan"
+msgstr "এরাংয়ান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:257
+msgctxt "Balinese Pawukon date name"
+msgid "Urungan"
+msgstr "উরুংয়ান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:258
+msgctxt "Balinese Pawukon date name"
+msgid "Tulus"
+msgstr "তুলুস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:259
+msgctxt "Balinese Pawukon date name"
+msgid "Dadi"
+msgstr "দাদি"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:260
+msgctxt "Balinese Pawukon date name"
+msgid "Pandita"
+msgstr "পন্ডিত"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:261
+msgctxt "Balinese Pawukon date name"
+msgid "Pati"
+msgstr "পতি"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:262
+msgctxt "Balinese Pawukon date name"
+msgid "Suka"
+msgstr "শুক"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:263
+msgctxt "Balinese Pawukon date name"
+msgid "Duka"
+msgstr "দুখ"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:265
+msgctxt "Balinese Pawukon date name"
+msgid "Manuh"
+msgstr "মনু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:266
+msgctxt "Balinese Pawukon date name"
+msgid "Manusa"
+msgstr "মানুস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:267
+msgctxt "Balinese Pawukon date name"
+msgid "Raja"
+msgstr "রাজা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:268
+msgctxt "Balinese Pawukon date name"
+msgid "Dewa"
+msgstr "দেব"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:269
+msgctxt "Balinese Pawukon date name"
+msgid "Raksasa"
+msgstr "রাক্ষস"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:270
+msgctxt "Balinese Pawukon date name"
+msgid "Sinta"
+msgstr "সিন্তা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:271
+msgctxt "Balinese Pawukon date name"
+msgid "Landep"
+msgstr "লান্দীপ"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:272
+msgctxt "Balinese Pawukon date name"
+msgid "Ukir"
+msgstr "উকির"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:273
+msgctxt "Balinese Pawukon date name"
+msgid "Kulantir"
+msgstr "কুলান্তির"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:274
+msgctxt "Balinese Pawukon date name"
+msgid "Taulu"
+msgstr "টাউলু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:275
+msgctxt "Balinese Pawukon date name"
+msgid "Gumbreg"
+msgstr "গুমব্রাগ"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:276
+msgctxt "Balinese Pawukon date name"
+msgid "Wariga"
+msgstr "ওয়ারিগা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:277
+msgctxt "Balinese Pawukon date name"
+msgid "Warigadian"
+msgstr "ওয়ারিগাদিয়ান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:278
+msgctxt "Balinese Pawukon date name"
+msgid "Jukungwangi"
+msgstr "জুকুংওয়াংয়ি"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:279
+msgctxt "Balinese Pawukon date name"
+msgid "Sungsang"
+msgstr "সুংসাং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:280
+msgctxt "Balinese Pawukon date name"
+msgid "Dunggulan"
+msgstr "দুংগুলান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:281
+msgctxt "Balinese Pawukon date name"
+msgid "Kuningan"
+msgstr "কুনিংয়ান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:282
+msgctxt "Balinese Pawukon date name"
+msgid "Langkir"
+msgstr "লাংকির"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:283
+msgctxt "Balinese Pawukon date name"
+msgid "Medangsia"
+msgstr "মেডাংসিয়া"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:284
+msgctxt "Balinese Pawukon date name"
+msgid "Pujut"
+msgstr "পুজুত"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:285
+msgctxt "Balinese Pawukon date name"
+msgid "Pahang"
+msgstr "পাহাং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:286
+msgctxt "Balinese Pawukon date name"
+msgid "Krulut"
+msgstr "ক্রুলুত"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:287
+msgctxt "Balinese Pawukon date name"
+msgid "Merakih"
+msgstr "মেরাকিহ্"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:288
+msgctxt "Balinese Pawukon date name"
+msgid "Tambir"
+msgstr "তাম্বির"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:289
+msgctxt "Balinese Pawukon date name"
+msgid "Medangkungan"
+msgstr "মেদাংকুংয়ান"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:290
+msgctxt "Balinese Pawukon date name"
+msgid "Matal"
+msgstr "মাতাল"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:291
+msgctxt "Balinese Pawukon date name"
+msgid "Uye"
+msgstr "উয়ায়ে"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:292
+msgctxt "Balinese Pawukon date name"
+msgid "Menail"
+msgstr "মেনাইল"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:293
+msgctxt "Balinese Pawukon date name"
+msgid "Parangbakat"
+msgstr "পারাংবাকাত"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:294
+msgctxt "Balinese Pawukon date name"
+msgid "Bala"
+msgstr "বালা"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:295
+msgctxt "Balinese Pawukon date name"
+msgid "Ugu"
+msgstr "উগু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:296
+msgctxt "Balinese Pawukon date name"
+msgid "Wayang"
+msgstr "ওয়েয়াং"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:297
+msgctxt "Balinese Pawukon date name"
+msgid "Kelawu"
+msgstr "কেলাওয়ু"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:298
+msgctxt "Balinese Pawukon date name"
+msgid "Dukut"
+msgstr "দুকুত"
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:299
+msgctxt "Balinese Pawukon date name"
+msgid "Watugunung"
+msgstr "ওয়াতুংয়ুং"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:42
 msgctxt "Coptic month name"
@@ -24610,92 +25035,92 @@ msgstr "মানুডাগুর"
 #: plugins/Calendars/src/IcelandicCalendar.cpp:173
 msgctxt "Icelandic day name"
 msgid "Þriðjudagur"
-msgstr ""
+msgstr "থ্রীদয়ুডাগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:174
 msgctxt "Icelandic day name"
 msgid "Miðvikudagur"
-msgstr ""
+msgstr "মিদভিকুডাগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:175
 msgctxt "Icelandic day name"
 msgid "Fimmtudagur"
-msgstr ""
+msgstr "ফিম্মাটুডাগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:176
 msgctxt "Icelandic day name"
 msgid "Föstudagur"
-msgstr ""
+msgstr "ফোসটুডাগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:177
 msgctxt "Icelandic day name"
 msgid "Laugardagur"
-msgstr ""
+msgstr "লাউগারডাগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:179
 msgctxt "Icelandic month name"
 msgid "unnamed"
-msgstr ""
+msgstr "নামহীন"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
 msgid "Harpa"
-msgstr ""
+msgstr "হারপা"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
 msgid "Skerpla"
-msgstr ""
+msgstr "স্কেরপ্লা"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:182
 msgctxt "Icelandic month name"
 msgid "Sólmánuður"
-msgstr ""
+msgstr "সোলমানুদুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:183
 msgctxt "Icelandic month name"
 msgid "Heyannir"
-msgstr ""
+msgstr "হেইয়ান্নির"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:184
 msgctxt "Icelandic month name"
 msgid "Tvímánuður"
-msgstr ""
+msgstr "ত্ব্যিমানুদুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:185
 msgctxt "Icelandic month name"
 msgid "Haustmánuður"
-msgstr ""
+msgstr "হাউস্টমানুদুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:186
 msgctxt "Icelandic month name"
 msgid "Gormánuður"
-msgstr ""
+msgstr "গোরমানুদুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:187
 msgctxt "Icelandic month name"
 msgid "Ýlir"
-msgstr ""
+msgstr "ইয়লির"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:188
 msgctxt "Icelandic month name"
 msgid "Mörsugur"
-msgstr ""
+msgstr "মোরসুগুর"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:189
 msgctxt "Icelandic month name"
 msgid "Þorri"
-msgstr ""
+msgstr "থোর্রি"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:190
 msgctxt "Icelandic month name"
 msgid "Góa"
-msgstr ""
+msgstr "গোয়া"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:191
 msgctxt "Icelandic month name"
 msgid "Einmánuður"
-msgstr ""
+msgstr "এইনমানুদুর"
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
@@ -24903,377 +25328,381 @@ msgstr "আহাউ"
 #: plugins/Calendars/src/OlympicCalendar.cpp:61
 #, qt-format
 msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
-msgstr ""
+msgstr "দিন %1,  %2মাস, %4 তম অলিম্পিয়াডের %3 তম বছর"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr ""
+msgstr "ইয়ানুয়ারী"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
 msgid "Februarii"
-msgstr ""
+msgstr "ফেব্রুয়ারী"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
 msgid "Martii"
-msgstr ""
+msgstr "মার্তি"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
 msgid "Aprilis"
-msgstr ""
+msgstr "এপ্রিলিস"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:40
 msgctxt "Roman month name (genitive)"
 msgid "Maii"
-msgstr ""
+msgstr "মাই"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:41
 msgctxt "Roman month name (genitive)"
 msgid "Iunii"
-msgstr ""
+msgstr "য়ুনি"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:42
 msgctxt "Roman month name (genitive)"
 msgid "Iulii"
-msgstr ""
+msgstr "ইয়ুলাই"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:43
 msgctxt "Roman month name (genitive)"
 msgid "Augusti"
-msgstr ""
+msgstr "আগস্টি"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:44
 msgctxt "Roman month name (genitive)"
 msgid "Septembris"
-msgstr ""
+msgstr "সেপ্টেম্ব্রিস"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:45
 msgctxt "Roman month name (genitive)"
 msgid "Octobris"
-msgstr ""
+msgstr "ওক্টোব্রিস"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:46
 msgctxt "Roman month name (genitive)"
 msgid "Novembris"
-msgstr ""
+msgstr "নভেম্ব্রিস"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:47
 msgctxt "Roman month name (genitive)"
 msgid "Decembris"
-msgstr ""
+msgstr "ডিসেম্ব্রিস"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:101
 msgctxt "ab urbe condita"
 msgid "A.U.C."
-msgstr ""
+msgstr "বছর রোমের সূচনা থেকে"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
 msgctxt "Zoroastrian month name"
 msgid "Ferverdīn"
-msgstr ""
+msgstr "ফেরভেরডিন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
 msgctxt "Zoroastrian month name"
 msgid "Ardebehesht"
-msgstr ""
+msgstr "আরডেবেহেষ্ট"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
 msgctxt "Zoroastrian month name"
 msgid "Khordād"
-msgstr ""
+msgstr "খোরডাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
 msgctxt "Zoroastrian month name"
 msgid "Tīr"
-msgstr ""
+msgstr "ট্যির"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
 msgctxt "Zoroastrian month name"
 msgid "Mordād"
-msgstr ""
+msgstr "মোরডাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
 msgctxt "Zoroastrian month name"
 msgid "Sharīr"
-msgstr ""
+msgstr "শার‍্যির"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
 msgctxt "Zoroastrian month name"
 msgid "Mihr"
-msgstr ""
+msgstr "মিহির"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
 msgctxt "Zoroastrian month name"
 msgid "Abān"
-msgstr ""
+msgstr "আবান"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
 msgctxt "Zoroastrian month name"
 msgid "Āder"
-msgstr ""
+msgstr "আডের"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
 msgctxt "Zoroastrian month name"
 msgid "Deï"
-msgstr ""
+msgstr "ডেই"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
 msgctxt "Zoroastrian month name"
 msgid "Bahmen"
-msgstr ""
+msgstr "বাহ্মেন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
 msgctxt "Zoroastrian month name"
 msgid "Asfendārmed"
-msgstr ""
+msgstr "আসফেনডার্মেড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
 msgctxt "Zoroastrian month name"
 msgid "(epagomenae)"
-msgstr ""
+msgstr "(অধিক মাস)"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
 msgctxt "Zoroastrian day name"
 msgid "Hormuz"
-msgstr ""
+msgstr "হোর্মুজ"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
 msgctxt "Zoroastrian day name"
 msgid "Bahman"
-msgstr ""
+msgstr "বাহ্মান"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
 msgctxt "Zoroastrian day name"
 msgid "Ordībehesht"
-msgstr ""
+msgstr "অর্ডিবেহেষ্ট"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
 msgctxt "Zoroastrian day name"
 msgid "Shahrīvar"
-msgstr ""
+msgstr "শাহ্ রিভার"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
 msgctxt "Zoroastrian day name"
 msgid "Esfandārmud"
-msgstr ""
+msgstr "এসফানডারমুড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
 msgctxt "Zoroastrian day name"
 msgid "Xordād"
-msgstr ""
+msgstr "শোরডাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
 msgctxt "Zoroastrian day name"
 msgid "Mordād"
-msgstr ""
+msgstr "মোরডাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
 msgctxt "Zoroastrian day name"
 msgid "Diy be Āzar"
-msgstr ""
+msgstr "ডাই বে আজার"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
 msgctxt "Zoroastrian day name"
 msgid "Āzar"
-msgstr ""
+msgstr "আজার"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
 msgctxt "Zoroastrian day name"
 msgid "Ābān"
-msgstr ""
+msgstr "আবান"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
 msgctxt "Zoroastrian day name"
 msgid "Xor"
-msgstr ""
+msgstr "শোর"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
 msgctxt "Zoroastrian day name"
 msgid "Māh"
-msgstr ""
+msgstr "মাহ্"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
 msgctxt "Zoroastrian day name"
 msgid "Tīr"
-msgstr ""
+msgstr "ট্যির"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
 msgctxt "Zoroastrian day name"
 msgid "Goosh"
-msgstr ""
+msgstr "গোশ"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
 msgctxt "Zoroastrian day name"
 msgid "Diy be Mehr"
-msgstr ""
+msgstr "ডাই বে মেহের"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
 msgctxt "Zoroastrian day name"
 msgid "Mehr"
-msgstr ""
+msgstr "মেহের"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
 msgctxt "Zoroastrian day name"
 msgid "Sorūsh"
-msgstr ""
+msgstr "সোরুশ"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
 msgctxt "Zoroastrian day name"
 msgid "Rashn"
-msgstr ""
+msgstr "রাশন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
 msgctxt "Zoroastrian day name"
 msgid "Farvardīn"
-msgstr ""
+msgstr "ফার্ভাডিন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
 msgctxt "Zoroastrian day name"
 msgid "Bahrām"
-msgstr ""
+msgstr "বাহ্‍রাম"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
 msgctxt "Zoroastrian day name"
 msgid "Rām"
-msgstr ""
+msgstr "রাম"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
 msgctxt "Zoroastrian day name"
 msgid "Bād"
-msgstr ""
+msgstr "বাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
 msgctxt "Zoroastrian day name"
 msgid "Diy be Dīn"
-msgstr ""
+msgstr "ডাই বে ডিন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
 msgctxt "Zoroastrian day name"
 msgid "Dīn"
-msgstr ""
+msgstr "ডিন"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
 msgctxt "Zoroastrian day name"
 msgid "Ard"
-msgstr ""
+msgstr "আর্ড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
 msgctxt "Zoroastrian day name"
 msgid "Ashtād"
-msgstr ""
+msgstr "আশটাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
 msgctxt "Zoroastrian day name"
 msgid "Asmān"
-msgstr ""
+msgstr "আশমান"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
 msgctxt "Zoroastrian day name"
 msgid "Zāmyād"
-msgstr ""
+msgstr "জামিয়াড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
 msgctxt "Zoroastrian day name"
 msgid "Māresfand"
-msgstr ""
+msgstr "মারেসফান্ড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
 msgctxt "Zoroastrian day name"
 msgid "Anīrān"
-msgstr ""
+msgstr "আনিরান"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
 msgctxt "Zoroastrian day name"
 msgid "Ahnad"
-msgstr ""
+msgstr "আহনাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
 msgctxt "Zoroastrian day name"
 msgid "Ashnad"
-msgstr ""
+msgstr "আশনাড"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
 msgctxt "Zoroastrian day name"
 msgid "Axshatar"
-msgstr ""
+msgstr "আক্সাটার"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
 msgctxt "Zoroastrian day name"
 msgid "Behesht"
-msgstr ""
+msgstr "বেহেষ্ট"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
 msgid "Jezdegerd Era"
-msgstr ""
+msgstr "জেজডেগের্ড যুগ"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:152
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:153
 msgid "Calendars Plug-in"
 msgstr "পঞ্জিকা সরঞ্জাম"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:159
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
 msgstr ""
 "এটির মাধ্যমে আপনি বিশ্বে ব্যাবহৃত বিভিন্ন পঞ্জিকা মতে দিনকাল দেখতে পারবেন ।"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
 msgid "Julian Calendar"
 msgstr "জুলিয়ান পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
 msgid "Gregorian Calendar"
 msgstr "গ্রেগরিয়ান পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:163
 msgid "ISO Weeks"
 msgstr "আন্তর্জাতিক প্রামাণ্য পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:163
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:164
 msgid "Icelandic calendar"
 msgstr "আইসল্যান্ডিক পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:164
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:165
 msgid "Roman (Julian) calendar"
 msgstr "রোমান (জুলিয়ান) পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:165
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:166
 msgid "Olympiad calendar"
 msgstr "অলিম্পিয়াড পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:166
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:167
 msgid "Egyptian calendar"
 msgstr "মিশরীয় পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:167
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:168
 msgid "Armenian calendar"
 msgstr "আর্মেনীয় পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:168
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:169
 msgid "Zoroastrian calendar"
 msgstr "জোরোস্তানিয় পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:169
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:170
 msgid "Coptic calendar"
 msgstr "কিবতি পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:170
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:171
 msgid "Ethiopic calendar"
 msgstr "ইথিওপিয় পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:179
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Maya calendars"
 msgstr "মায়া পঞ্জিকা"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 msgid "Aztec calendars"
 msgstr "অ্যাজটেক পঞ্জিকা"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
+msgid "Balinese Pawukon calendar"
+msgstr "বালি পায়ুকোন পঞ্জিকা"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid ""
 "The plugin is in an early stage of development. Please cross-check results "
 "and report errors."
@@ -25281,134 +25710,142 @@ msgstr ""
 "এটি খুবই প্রাথমিক স্তরে রয়েছে । তথ্যগুলি তাই অন্যত্র যাচাই করার পরামর্শ "
 "দেওয়া হচ্ছে । কোনো ত্রুটি থাকলে তা আমাদের নির্দ্বিধায় জানান ।"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+msgid ""
+"For some calendars, we welcome proper formatting suggestions by actual "
+"users."
+msgstr ""
+"কিছু পঞ্জিকার ক্ষেত্রে, যথোপোযুক্ত সজ্জার ব্যাপারে আমরা ব্যবহারকারীদের "
+"পরামর্শ অবশ্যই গ্রহণের চেষ্টা করব ।"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "This plugin is based on:"
 msgstr "তথ্যসূত্রঃ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid ""
 "If you want to read full information about this plugin and its history, see "
 "the Stellarium User Guide"
 msgstr "আরো বিশদে জানার জন্য স্টীলারিয়াম ব্যবহার সহায়িকা দেখুন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:746
+#: plugins/Calendars/src/ui_calendarsDialog.h:752
 msgid "Calendars Configuration"
 msgstr "পঞ্জিকা বিন্যাস"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:747
+#: plugins/Calendars/src/ui_calendarsDialog.h:753
 msgid "Calendars Plug-in Configuration"
 msgstr "পঞ্জিকা সরঞ্জামটির রূপরেখা"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:751
-#: plugins/Calendars/src/ui_calendarsDialog.h:774
+#: plugins/Calendars/src/ui_calendarsDialog.h:755
+#: plugins/Calendars/src/ui_calendarsDialog.h:781
 msgctxt "calendar"
 msgid "ISO Week"
 msgstr "আন্তর্জাতিক প্রামান্য সপ্তাহ"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:757
+#: plugins/Calendars/src/ui_calendarsDialog.h:756
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "চীনা"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:766
-msgctxt "calendar"
-msgid "Islamic"
-msgstr "ইসলামিক"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:767
+#: plugins/Calendars/src/ui_calendarsDialog.h:763
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "হিব্রু"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:769
+#: plugins/Calendars/src/ui_calendarsDialog.h:774
+msgctxt "calendar"
+msgid "Islamic"
+msgstr "ইসলামিক"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:776
 msgid "Display"
 msgstr "প্রদর্শণ"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:770
+#: plugins/Calendars/src/ui_calendarsDialog.h:777
 msgid "Month"
 msgstr "মাস"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:773
+#: plugins/Calendars/src/ui_calendarsDialog.h:780
 msgid "Weekday"
 msgstr "সাপ্তাহিক দিন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:777
+#: plugins/Calendars/src/ui_calendarsDialog.h:784
 msgid "Negative years here mark years B.C."
 msgstr "বিয়োগ চিহ্ণ আসলে খ্রীষ্টপূর্বাব্দ বোঝায়"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:779
+#: plugins/Calendars/src/ui_calendarsDialog.h:786
 msgid "Year"
 msgstr "বছর"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:780
+#: plugins/Calendars/src/ui_calendarsDialog.h:787
 msgid "Lunisolar"
 msgstr "চন্দ্র-সৌর পঞ্জিকা"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:782
+#: plugins/Calendars/src/ui_calendarsDialog.h:789
 msgid "Katun"
 msgstr "কাতুন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:783
+#: plugins/Calendars/src/ui_calendarsDialog.h:790
 msgid "Xihuitl"
-msgstr "শিউইল"
+msgstr "শিউইঠ্ল"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:784
+#: plugins/Calendars/src/ui_calendarsDialog.h:791
 msgctxt "calendar"
 msgid "Maya"
 msgstr "মায়া"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:785
+#: plugins/Calendars/src/ui_calendarsDialog.h:792
 msgid "Haab"
 msgstr "হাব"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:786
+#: plugins/Calendars/src/ui_calendarsDialog.h:793
 msgid "Tun"
 msgstr "তুন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:787
+#: plugins/Calendars/src/ui_calendarsDialog.h:794
 msgid "Kin"
 msgstr "কিন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:788
+#: plugins/Calendars/src/ui_calendarsDialog.h:795
 msgid "Uinal"
 msgstr "উইনাল"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:789
+#: plugins/Calendars/src/ui_calendarsDialog.h:796
 msgid "Baktun"
 msgstr "বাকতুন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:790
+#: plugins/Calendars/src/ui_calendarsDialog.h:797
 msgid "Long Count"
 msgstr "দীর্ঘ"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:792
-#: plugins/Calendars/src/ui_calendarsDialog.h:795
-#: plugins/Calendars/src/ui_calendarsDialog.h:810
-#: plugins/Calendars/src/ui_calendarsDialog.h:816
+#: plugins/Calendars/src/ui_calendarsDialog.h:799
+#: plugins/Calendars/src/ui_calendarsDialog.h:802
+#: plugins/Calendars/src/ui_calendarsDialog.h:817
+#: plugins/Calendars/src/ui_calendarsDialog.h:823
 msgid "Step forward"
 msgstr "এগোন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:798
-#: plugins/Calendars/src/ui_calendarsDialog.h:801
-#: plugins/Calendars/src/ui_calendarsDialog.h:807
-#: plugins/Calendars/src/ui_calendarsDialog.h:813
+#: plugins/Calendars/src/ui_calendarsDialog.h:805
+#: plugins/Calendars/src/ui_calendarsDialog.h:808
+#: plugins/Calendars/src/ui_calendarsDialog.h:814
+#: plugins/Calendars/src/ui_calendarsDialog.h:820
 msgid "Step backward"
 msgstr "পিছোন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:803
+#: plugins/Calendars/src/ui_calendarsDialog.h:810
 msgctxt "calendar"
 msgid "Aztec"
 msgstr "অ্যাজটেক"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:804
+#: plugins/Calendars/src/ui_calendarsDialog.h:811
 msgid "Tzolkin"
 msgstr "যোলকিন"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:805
+#: plugins/Calendars/src/ui_calendarsDialog.h:812
 msgid "Tonalpohualli"
 msgstr "তোনালপোউয়াল্লি"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:818
+#: plugins/Calendars/src/ui_calendarsDialog.h:825
 msgid "Mesoamerica"
 msgstr "মেসো আমেরিকান"

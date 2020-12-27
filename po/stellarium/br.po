@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-26 17:51+0700\n"
+"POT-Creation-Date: 2020-12-27 00:54+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Kannad Ar Stered <kannad.ar.stered@gmail.com>, 2019\n"
 "Language-Team: Breton (https://www.transifex.com/stellarium/teams/80998/br/)\n"
@@ -525,7 +525,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:148
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:155
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:156
 msgid "Author"
 msgstr "Aozer"
 
@@ -2438,7 +2438,7 @@ msgid "Date and Time"
 msgstr "Deiziad & eur"
 
 #: src/core/StelCore.cpp:256 src/core/StelObjectMgr.cpp:53
-#: src/core/StelMovementMgr.cpp:220
+#: src/core/StelMovementMgr.cpp:223
 msgid "Movement and Selection"
 msgstr "Luskad ha diuzad"
 
@@ -3309,81 +3309,81 @@ msgid "No description"
 msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:301
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
 msgid "References"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:221 src/gui/StelGui.cpp:230
+#: src/core/StelMovementMgr.cpp:224 src/gui/StelGui.cpp:230
 #: src/StelMainView.cpp:819 src/StelMainView.cpp:820
 msgid "Miscellaneous"
 msgstr "Liesseurt"
 
-#: src/core/StelMovementMgr.cpp:221
+#: src/core/StelMovementMgr.cpp:224
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Kemmañ ar plaen kehederel/azimutel"
 
-#: src/core/StelMovementMgr.cpp:222
+#: src/core/StelMovementMgr.cpp:225
 msgid "Center on selected object"
 msgstr "Kreizañ war an elfenn diuzet"
 
-#: src/core/StelMovementMgr.cpp:223
+#: src/core/StelMovementMgr.cpp:226
 msgid "Deselect the selected object"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:224
+#: src/core/StelMovementMgr.cpp:227
 msgid "Zoom in on selected object"
 msgstr "Zoomañ war an elfenn diuzet"
 
-#: src/core/StelMovementMgr.cpp:225
+#: src/core/StelMovementMgr.cpp:228
 msgid "Zoom out"
 msgstr "Dizoumañ"
 
-#: src/core/StelMovementMgr.cpp:227
+#: src/core/StelMovementMgr.cpp:230
 msgid "Track object"
 msgstr "Heuliañ an elfenn"
 
-#: src/core/StelMovementMgr.cpp:229
+#: src/core/StelMovementMgr.cpp:232
 msgid "Look towards East"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:230
+#: src/core/StelMovementMgr.cpp:233
 msgid "Look towards West"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:231
+#: src/core/StelMovementMgr.cpp:234
 msgid "Look towards North"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:232
+#: src/core/StelMovementMgr.cpp:235
 msgid "Look towards South"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:233
+#: src/core/StelMovementMgr.cpp:236
 msgid "Look towards Zenith"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:235
+#: src/core/StelMovementMgr.cpp:238
 msgid "Look towards North Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:236
+#: src/core/StelMovementMgr.cpp:239
 msgid "Look towards South Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:250
+#: src/core/StelMovementMgr.cpp:253
 msgid "Field of View"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:250
+#: src/core/StelMovementMgr.cpp:253
 msgid "Set predefined FOV"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:273
+#: src/core/StelMovementMgr.cpp:276
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:275
+#: src/core/StelMovementMgr.cpp:278
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr ""
@@ -3717,7 +3717,7 @@ msgstr "Darempred"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:222
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:153
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:154
 msgid "Version"
 msgstr "Stumm"
 
@@ -3740,7 +3740,7 @@ msgstr "Stumm"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:226
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:147
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:154
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:155
 msgid "License"
 msgstr "Aotre-implijout "
 
@@ -5946,7 +5946,7 @@ msgid "Linear distance"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6352
-#: plugins/Calendars/src/ui_calendarsDialog.h:772
+#: plugins/Calendars/src/ui_calendarsDialog.h:779
 msgid "Day"
 msgstr "Deiz"
 
@@ -7113,7 +7113,7 @@ msgid "Boorong"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489 plugins/Calendars/src/ui_calendarsDialog.h:781
+#: src/translations.h:489 plugins/Calendars/src/ui_calendarsDialog.h:788
 msgid "Chinese"
 msgstr ""
 
@@ -10888,7 +10888,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
-#: plugins/Calendars/src/ui_calendarsDialog.h:768
+#: plugins/Calendars/src/ui_calendarsDialog.h:775
 msgid "Restore defaults"
 msgstr ""
 
@@ -12644,7 +12644,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:328
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
 msgid "Links"
 msgstr ""
 
@@ -12664,7 +12664,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 #, qt-format
 msgid ""
 "Support is provided via the Github website.  Be sure to put \"%1\" in the "
@@ -12689,7 +12689,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:332
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "If you have a question, you can {get an answer here}."
 msgstr ""
 
@@ -12711,7 +12711,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:334
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:187
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
 msgid "Bug reports and feature requests can be made {here}."
 msgstr ""
 
@@ -12811,7 +12811,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:480
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:324
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
-#: plugins/Calendars/src/ui_calendarsDialog.h:819
+#: plugins/Calendars/src/ui_calendarsDialog.h:826
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -13336,7 +13336,7 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
-msgid "Cannot delete the last CCD."
+msgid "Cannot delete the last sensor."
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
@@ -17702,13 +17702,13 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 msgid "Publications"
 msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 
@@ -21715,7 +21715,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:333
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
-#: plugins/Calendars/src/Calendars.cpp:150
+#: plugins/Calendars/src/Calendars.cpp:152
 msgid "Show settings dialog"
 msgstr ""
 
@@ -22558,111 +22558,117 @@ msgstr ""
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:68
-#: plugins/Calendars/src/Calendars.cpp:148
-#: plugins/Calendars/src/Calendars.cpp:149
+#: plugins/Calendars/src/Calendars.cpp:69
+#: plugins/Calendars/src/Calendars.cpp:150
+#: plugins/Calendars/src/Calendars.cpp:151
 msgid "Calendars"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:71
+#: plugins/Calendars/src/Calendars.cpp:72
 msgid "Calendars of the world"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:250
-#: plugins/Calendars/src/ui_calendarsDialog.h:749
-#: plugins/Calendars/src/ui_calendarsDialog.h:771
+#: plugins/Calendars/src/Calendars.cpp:254
+#: plugins/Calendars/src/ui_calendarsDialog.h:762
+#: plugins/Calendars/src/ui_calendarsDialog.h:778
 msgctxt "calendar"
 msgid "Julian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:251
-#: plugins/Calendars/src/ui_calendarsDialog.h:750
-#: plugins/Calendars/src/ui_calendarsDialog.h:775
+#: plugins/Calendars/src/Calendars.cpp:255
+#: plugins/Calendars/src/ui_calendarsDialog.h:765
+#: plugins/Calendars/src/ui_calendarsDialog.h:782
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:252
+#: plugins/Calendars/src/Calendars.cpp:256
 msgctxt "calendar"
 msgid "ISO week"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:253
-#: plugins/Calendars/src/ui_calendarsDialog.h:759
+#: plugins/Calendars/src/Calendars.cpp:257
+#: plugins/Calendars/src/ui_calendarsDialog.h:768
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:254
-#: plugins/Calendars/src/ui_calendarsDialog.h:755
+#: plugins/Calendars/src/Calendars.cpp:258
+#: plugins/Calendars/src/ui_calendarsDialog.h:773
 msgctxt "calendar"
 msgid "Roman"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:255
-#: plugins/Calendars/src/ui_calendarsDialog.h:756
+#: plugins/Calendars/src/Calendars.cpp:259
+#: plugins/Calendars/src/ui_calendarsDialog.h:771
 msgctxt "calendar"
 msgid "Olympic"
-msgstr ""
-
-#: plugins/Calendars/src/Calendars.cpp:256
-#: plugins/Calendars/src/ui_calendarsDialog.h:752
-msgctxt "calendar"
-msgid "Egyptian"
-msgstr ""
-
-#: plugins/Calendars/src/Calendars.cpp:257
-#: plugins/Calendars/src/ui_calendarsDialog.h:753
-msgctxt "calendar"
-msgid "Armenian"
-msgstr ""
-
-#: plugins/Calendars/src/Calendars.cpp:258
-#: plugins/Calendars/src/ui_calendarsDialog.h:754
-msgctxt "calendar"
-msgid "Zoroastrian"
-msgstr ""
-
-#: plugins/Calendars/src/Calendars.cpp:259
-#: plugins/Calendars/src/ui_calendarsDialog.h:758
-msgctxt "calendar"
-msgid "Coptic"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:260
 #: plugins/Calendars/src/ui_calendarsDialog.h:760
 msgctxt "calendar"
-msgid "Ethiopic"
+msgid "Egyptian"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:261
+#: plugins/Calendars/src/ui_calendarsDialog.h:770
+msgctxt "calendar"
+msgid "Armenian"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:262
+#: plugins/Calendars/src/ui_calendarsDialog.h:769
+msgctxt "calendar"
+msgid "Zoroastrian"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:263
 #: plugins/Calendars/src/ui_calendarsDialog.h:761
+msgctxt "calendar"
+msgid "Coptic"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:264
+#: plugins/Calendars/src/ui_calendarsDialog.h:759
+msgctxt "calendar"
+msgid "Ethiopic"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:265
+#: plugins/Calendars/src/ui_calendarsDialog.h:758
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:262
-#: plugins/Calendars/src/ui_calendarsDialog.h:763
+#: plugins/Calendars/src/Calendars.cpp:266
+#: plugins/Calendars/src/ui_calendarsDialog.h:772
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:263
-#: plugins/Calendars/src/ui_calendarsDialog.h:765
+#: plugins/Calendars/src/Calendars.cpp:267
+#: plugins/Calendars/src/ui_calendarsDialog.h:764
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:264
-#: plugins/Calendars/src/ui_calendarsDialog.h:762
+#: plugins/Calendars/src/Calendars.cpp:268
+#: plugins/Calendars/src/ui_calendarsDialog.h:767
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:265
-#: plugins/Calendars/src/ui_calendarsDialog.h:764
+#: plugins/Calendars/src/Calendars.cpp:269
+#: plugins/Calendars/src/ui_calendarsDialog.h:757
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:271
+#: plugins/Calendars/src/ui_calendarsDialog.h:766
+msgctxt "calendar"
+msgid "Balinese Pawukon"
 msgstr ""
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
@@ -22927,6 +22933,423 @@ msgstr ""
 #: plugins/Calendars/src/AztecXihuitlCalendar.cpp:61
 msgctxt "Aztec Xihuitl month name"
 msgid "Nemontemi (Full in vain)"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:215
+msgctxt "Balinese Pawukon date name"
+msgid "Luang"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:216
+msgctxt "Balinese Pawukon date name"
+msgid "Menga"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:217
+msgctxt "Balinese Pawukon date name"
+msgid "Pepet"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:218
+msgctxt "Balinese Pawukon date name"
+msgid "Pasah"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:219
+msgctxt "Balinese Pawukon date name"
+msgid "Beteng"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:220
+msgctxt "Balinese Pawukon date name"
+msgid "Kajeng"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:221
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:243
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:264
+msgctxt "Balinese Pawukon date name"
+msgid "Sri"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:222
+msgctxt "Balinese Pawukon date name"
+msgid "Laba"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:223
+msgctxt "Balinese Pawukon date name"
+msgid "Jaya"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:224
+msgctxt "Balinese Pawukon date name"
+msgid "Menala"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:225
+msgctxt "Balinese Pawukon date name"
+msgid "Umanis"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:226
+msgctxt "Balinese Pawukon date name"
+msgid "Paing"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:227
+msgctxt "Balinese Pawukon date name"
+msgid "Pon"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:228
+msgctxt "Balinese Pawukon date name"
+msgid "Wage"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:229
+msgctxt "Balinese Pawukon date name"
+msgid "Keliwon"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:230
+msgctxt "Balinese Pawukon date name"
+msgid "Tungleh"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:231
+msgctxt "Balinese Pawukon date name"
+msgid "Aryang"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:232
+msgctxt "Balinese Pawukon date name"
+msgid "Urukung"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:233
+msgctxt "Balinese Pawukon date name"
+msgid "Paniron"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:234
+msgctxt "Balinese Pawukon date name"
+msgid "Was"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:235
+msgctxt "Balinese Pawukon date name"
+msgid "Maulu"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:236
+msgctxt "Balinese Pawukon date name"
+msgid "Redite"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:237
+msgctxt "Balinese Pawukon date name"
+msgid "Coma"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:238
+msgctxt "Balinese Pawukon date name"
+msgid "Anggara"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:239
+msgctxt "Balinese Pawukon date name"
+msgid "Buda"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:240
+msgctxt "Balinese Pawukon date name"
+msgid "Wraspati"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:241
+msgctxt "Balinese Pawukon date name"
+msgid "Sukra"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:242
+msgctxt "Balinese Pawukon date name"
+msgid "Saniscara"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:244
+msgctxt "Balinese Pawukon date name"
+msgid "Indra"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:245
+msgctxt "Balinese Pawukon date name"
+msgid "Guru"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:246
+msgctxt "Balinese Pawukon date name"
+msgid "Yama"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:247
+msgctxt "Balinese Pawukon date name"
+msgid "Ludra"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:248
+msgctxt "Balinese Pawukon date name"
+msgid "Brahma"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:249
+msgctxt "Balinese Pawukon date name"
+msgid "Kala"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:250
+msgctxt "Balinese Pawukon date name"
+msgid "Uma"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:251
+msgctxt "Balinese Pawukon date name"
+msgid "Dangu"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:252
+msgctxt "Balinese Pawukon date name"
+msgid "Jangur"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:253
+msgctxt "Balinese Pawukon date name"
+msgid "Gigis"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:254
+msgctxt "Balinese Pawukon date name"
+msgid "Nohan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:255
+msgctxt "Balinese Pawukon date name"
+msgid "Ogan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:256
+msgctxt "Balinese Pawukon date name"
+msgid "Erangan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:257
+msgctxt "Balinese Pawukon date name"
+msgid "Urungan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:258
+msgctxt "Balinese Pawukon date name"
+msgid "Tulus"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:259
+msgctxt "Balinese Pawukon date name"
+msgid "Dadi"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:260
+msgctxt "Balinese Pawukon date name"
+msgid "Pandita"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:261
+msgctxt "Balinese Pawukon date name"
+msgid "Pati"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:262
+msgctxt "Balinese Pawukon date name"
+msgid "Suka"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:263
+msgctxt "Balinese Pawukon date name"
+msgid "Duka"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:265
+msgctxt "Balinese Pawukon date name"
+msgid "Manuh"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:266
+msgctxt "Balinese Pawukon date name"
+msgid "Manusa"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:267
+msgctxt "Balinese Pawukon date name"
+msgid "Raja"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:268
+msgctxt "Balinese Pawukon date name"
+msgid "Dewa"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:269
+msgctxt "Balinese Pawukon date name"
+msgid "Raksasa"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:270
+msgctxt "Balinese Pawukon date name"
+msgid "Sinta"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:271
+msgctxt "Balinese Pawukon date name"
+msgid "Landep"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:272
+msgctxt "Balinese Pawukon date name"
+msgid "Ukir"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:273
+msgctxt "Balinese Pawukon date name"
+msgid "Kulantir"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:274
+msgctxt "Balinese Pawukon date name"
+msgid "Taulu"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:275
+msgctxt "Balinese Pawukon date name"
+msgid "Gumbreg"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:276
+msgctxt "Balinese Pawukon date name"
+msgid "Wariga"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:277
+msgctxt "Balinese Pawukon date name"
+msgid "Warigadian"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:278
+msgctxt "Balinese Pawukon date name"
+msgid "Jukungwangi"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:279
+msgctxt "Balinese Pawukon date name"
+msgid "Sungsang"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:280
+msgctxt "Balinese Pawukon date name"
+msgid "Dunggulan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:281
+msgctxt "Balinese Pawukon date name"
+msgid "Kuningan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:282
+msgctxt "Balinese Pawukon date name"
+msgid "Langkir"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:283
+msgctxt "Balinese Pawukon date name"
+msgid "Medangsia"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:284
+msgctxt "Balinese Pawukon date name"
+msgid "Pujut"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:285
+msgctxt "Balinese Pawukon date name"
+msgid "Pahang"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:286
+msgctxt "Balinese Pawukon date name"
+msgid "Krulut"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:287
+msgctxt "Balinese Pawukon date name"
+msgid "Merakih"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:288
+msgctxt "Balinese Pawukon date name"
+msgid "Tambir"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:289
+msgctxt "Balinese Pawukon date name"
+msgid "Medangkungan"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:290
+msgctxt "Balinese Pawukon date name"
+msgid "Matal"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:291
+msgctxt "Balinese Pawukon date name"
+msgid "Uye"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:292
+msgctxt "Balinese Pawukon date name"
+msgid "Menail"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:293
+msgctxt "Balinese Pawukon date name"
+msgid "Parangbakat"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:294
+msgctxt "Balinese Pawukon date name"
+msgid "Bala"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:295
+msgctxt "Balinese Pawukon date name"
+msgid "Ugu"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:296
+msgctxt "Balinese Pawukon date name"
+msgid "Wayang"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:297
+msgctxt "Balinese Pawukon date name"
+msgid "Kelawu"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:298
+msgctxt "Balinese Pawukon date name"
+msgid "Dukut"
+msgstr ""
+
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:299
+msgctxt "Balinese Pawukon date name"
+msgid "Watugunung"
 msgstr ""
 
 #: plugins/Calendars/src/CopticCalendar.cpp:42
@@ -23831,202 +24254,212 @@ msgstr ""
 msgid "Jezdegerd Era"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:152
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:153
 msgid "Calendars Plug-in"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:159
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
 msgid "Julian Calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
 msgid "Gregorian Calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:163
 msgid "ISO Weeks"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:163
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:164
 msgid "Icelandic calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:164
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:165
 msgid "Roman (Julian) calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:165
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:166
 msgid "Olympiad calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:166
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:167
 msgid "Egyptian calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:167
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:168
 msgid "Armenian calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:168
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:169
 msgid "Zoroastrian calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:169
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:170
 msgid "Coptic calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:170
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:171
 msgid "Ethiopic calendar"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:179
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Maya calendars"
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 msgid "Aztec calendars"
 msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
+msgid "Balinese Pawukon calendar"
+msgstr ""
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid ""
 "The plugin is in an early stage of development. Please cross-check results "
 "and report errors."
 msgstr ""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+msgid ""
+"For some calendars, we welcome proper formatting suggestions by actual "
+"users."
+msgstr ""
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "This plugin is based on:"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid ""
 "If you want to read full information about this plugin and its history, see "
 "the Stellarium User Guide"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:746
+#: plugins/Calendars/src/ui_calendarsDialog.h:752
 msgid "Calendars Configuration"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:747
+#: plugins/Calendars/src/ui_calendarsDialog.h:753
 msgid "Calendars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:751
-#: plugins/Calendars/src/ui_calendarsDialog.h:774
+#: plugins/Calendars/src/ui_calendarsDialog.h:755
+#: plugins/Calendars/src/ui_calendarsDialog.h:781
 msgctxt "calendar"
 msgid "ISO Week"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:757
+#: plugins/Calendars/src/ui_calendarsDialog.h:756
 msgctxt "calendar"
 msgid "Chinese"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:766
-msgctxt "calendar"
-msgid "Islamic"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:767
+#: plugins/Calendars/src/ui_calendarsDialog.h:763
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:769
+#: plugins/Calendars/src/ui_calendarsDialog.h:774
+msgctxt "calendar"
+msgid "Islamic"
+msgstr ""
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:776
 msgid "Display"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:770
+#: plugins/Calendars/src/ui_calendarsDialog.h:777
 msgid "Month"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:773
+#: plugins/Calendars/src/ui_calendarsDialog.h:780
 msgid "Weekday"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:777
+#: plugins/Calendars/src/ui_calendarsDialog.h:784
 msgid "Negative years here mark years B.C."
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:779
+#: plugins/Calendars/src/ui_calendarsDialog.h:786
 msgid "Year"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:780
+#: plugins/Calendars/src/ui_calendarsDialog.h:787
 msgid "Lunisolar"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:782
+#: plugins/Calendars/src/ui_calendarsDialog.h:789
 msgid "Katun"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:783
+#: plugins/Calendars/src/ui_calendarsDialog.h:790
 msgid "Xihuitl"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:784
+#: plugins/Calendars/src/ui_calendarsDialog.h:791
 msgctxt "calendar"
 msgid "Maya"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:785
+#: plugins/Calendars/src/ui_calendarsDialog.h:792
 msgid "Haab"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:786
+#: plugins/Calendars/src/ui_calendarsDialog.h:793
 msgid "Tun"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:787
+#: plugins/Calendars/src/ui_calendarsDialog.h:794
 msgid "Kin"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:788
+#: plugins/Calendars/src/ui_calendarsDialog.h:795
 msgid "Uinal"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:789
+#: plugins/Calendars/src/ui_calendarsDialog.h:796
 msgid "Baktun"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:790
+#: plugins/Calendars/src/ui_calendarsDialog.h:797
 msgid "Long Count"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:792
-#: plugins/Calendars/src/ui_calendarsDialog.h:795
-#: plugins/Calendars/src/ui_calendarsDialog.h:810
-#: plugins/Calendars/src/ui_calendarsDialog.h:816
+#: plugins/Calendars/src/ui_calendarsDialog.h:799
+#: plugins/Calendars/src/ui_calendarsDialog.h:802
+#: plugins/Calendars/src/ui_calendarsDialog.h:817
+#: plugins/Calendars/src/ui_calendarsDialog.h:823
 msgid "Step forward"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:798
-#: plugins/Calendars/src/ui_calendarsDialog.h:801
-#: plugins/Calendars/src/ui_calendarsDialog.h:807
-#: plugins/Calendars/src/ui_calendarsDialog.h:813
+#: plugins/Calendars/src/ui_calendarsDialog.h:805
+#: plugins/Calendars/src/ui_calendarsDialog.h:808
+#: plugins/Calendars/src/ui_calendarsDialog.h:814
+#: plugins/Calendars/src/ui_calendarsDialog.h:820
 msgid "Step backward"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:803
+#: plugins/Calendars/src/ui_calendarsDialog.h:810
 msgctxt "calendar"
 msgid "Aztec"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:804
+#: plugins/Calendars/src/ui_calendarsDialog.h:811
 msgid "Tzolkin"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:805
+#: plugins/Calendars/src/ui_calendarsDialog.h:812
 msgid "Tonalpohualli"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:818
+#: plugins/Calendars/src/ui_calendarsDialog.h:825
 msgid "Mesoamerica"
 msgstr ""

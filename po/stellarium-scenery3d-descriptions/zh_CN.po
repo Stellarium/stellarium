@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-11-25 01:24+0700\n"
+"POT-Creation-Date: 2020-12-26 18:32+0700\n"
 "PO-Revision-Date: 2020-11-24 18:28+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -76,14 +76,21 @@ msgid ""
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr "该模型还用于测试插件的图形功能。 您可以使用材质参数来创建有趣的效果，例如半透明或黑暗中发光的砖"
 
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr "为了测试时间特征，柱子和球体只能从2000年到2020年可见。可以通过编辑材质文件来改变这一点。"
+
 #. type: Content of: <h4>
-#: ../../scenery3d/Testscene/description.en.utf8:30
+#: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
 msgstr "模型"
 
 #. type: Content of: <p>
-#: ../../scenery3d/Testscene/description.en.utf8:31
+#: ../../scenery3d/Testscene/description.en.utf8:33
 msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
