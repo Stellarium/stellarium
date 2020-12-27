@@ -45,7 +45,7 @@ class InfoPanel : public QGraphicsTextItem
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
-		const QString getSelectedText(void);
+		const QString getSelectedText(void) const;
 
 	private:
 		StelObject::InfoStringGroup infoTextFilters;
@@ -72,6 +72,8 @@ public:
 
 	int getSkyGuiWidth() const;
 	int getSkyGuiHeight() const;
+	qreal getBottomBarHeight() const; //!< return height of bottom Bar when fully shown
+	qreal getLeftBarWidth() const;    //!< return width of left Bar when fully shown
 	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE;
@@ -82,7 +84,9 @@ private slots:
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& style);
 	
+public slots:
 	//! Update the position of the button bars in the main window
+	//! GZ needed this public for interactive GUI scaling
 	void updateBarsPos();
 
 private:

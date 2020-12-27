@@ -63,6 +63,11 @@ class EquationOfTime : public StelModule
 		   READ isEnabled
 		   WRITE enableEquationOfTime
 		   NOTIFY equationOfTimeStateChanged)
+	Q_PROPERTY(Vec3f textColor
+		   READ getTextColor
+		   WRITE setTextColor
+		   NOTIFY textColorChanged
+		   )
 
 public:
 	EquationOfTime();
@@ -130,11 +135,17 @@ public slots:
 	//! Display plugin button on toolbar
 	void setFlagShowEOTButton(bool b);
 
+	Vec3f getTextColor() const { return textColor; }
+	void setTextColor(const Vec3f& c) { textColor=c; }
+
 private slots:
 	void updateMessageText();
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 
 signals:
 	void equationOfTimeStateChanged(bool b);
+	void textColorChanged(Vec3f);
 
 private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values

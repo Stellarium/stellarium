@@ -64,11 +64,7 @@ double StelSkyLayerMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void StelSkyLayerMgr::init()
 {
-	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
-	if (path.isEmpty())
-		qWarning() << "ERROR while loading nebula texture set default";
-	else
-		insertSkyImage(path);
+	loadCollection();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");
@@ -87,6 +83,19 @@ void StelSkyLayerMgr::init()
 
 	setFlagShow(!conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 	addAction("actionShow_DSO_Textures", N_("Display Options"), N_("Deep-sky objects background images"), "flagShow", "I");
+	addAction("actionShow_DSO_Textures_Reload", N_("Display Options"), N_("Reload the deep-sky objects background images"), "loadCollection()", "Ctrl+I");
+}
+
+void StelSkyLayerMgr::loadCollection()
+{
+	if (!allSkyLayers.isEmpty())
+		allSkyLayers.clear();
+
+	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
+	if (path.isEmpty())
+		qWarning() << "ERROR while loading nebula texture set default";
+	else
+		insertSkyImage(path);
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
@@ -202,7 +211,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 {
 	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
-	Q_ASSERT(tile!=0);
+	Q_ASSERT(tile!=Q_NULLPTR);
 	SkyLayerElem* elem = skyLayerElemForLayer(tile);
 	Q_ASSERT(elem!=Q_NULLPTR);
 	Q_ASSERT(elem->progressBar!=Q_NULLPTR);
@@ -286,7 +295,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 
 	vm["alphaBlend"] = true; // new 2017-3: Make black correctly see-through.
 
-	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, Q_NULLPTR));
 	tile->setFrameType(frameType);
 	
 	try
@@ -302,81 +311,6 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		qWarning() << e.what();
 		return false;
 	}
-}
-
-// DEPRECATED, REMOVE FOR 0.16.
-bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filename,
-								   double alt0, double azi0,
-								   double alt1, double azi1,
-								   double alt2, double azi2,
-								   double alt3, double azi3,
-								   double minRes, double maxBright, bool visible)
-{
-	qDebug() << "StelSkyLayerMgr::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage() with AzAlt frame argument.";
-	return loadSkyImage( id, filename, azi0, alt0, azi1, alt1, azi2, alt2, azi3, alt3, minRes, maxBright, visible, StelCore::FrameAltAz);
-
-	// NOTE: This old version may have inverted series of coordinates. Else, the only difference against the original loadSkyImage (setting J2000 coords) is the frame.
-/*
-	if (allSkyLayers.contains(id))
-	{
-		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
-		removeSkyLayer(id);
-	}
-
-	QString path = StelFileMgr::findFile(filename);
-	if (path.isEmpty())
-	{
-		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename);
-		return false;
-	}
-
-	QVariantMap vm;
-	//QVariantList l;
-	QVariantList cl; // coordinates list for adding worldCoords and textureCoords
-	QVariantList c;  // a list for a pair of coordinates
-	QVariantList ol; // outer list - we want a structure 3 levels deep...
-	vm["imageUrl"] = QVariant(path);
-	vm["maxBrightness"] = QVariant(maxBright);
-	vm["minResolution"] = QVariant(minRes);
-	vm["shortName"] = QVariant(id);
-
-	// textureCoords (define the ordering of worldCoords)
-	cl.clear();
-	ol.clear();
-	c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
-	c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
-	c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
-	c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
-	ol.append(QVariant(cl));
-	vm["textureCoords"] = ol;
-
-	// world coordinates
-	cl.clear();
-	ol.clear();
-	c.clear(); c.append(alt0); c.append(azi0); cl.append(QVariant(c));
-	c.clear(); c.append(alt1); c.append(azi1); cl.append(QVariant(c));
-	c.clear(); c.append(alt2); c.append(azi2); cl.append(QVariant(c));
-	c.clear(); c.append(alt3); c.append(azi3); cl.append(QVariant(c)); 
-	ol.append(QVariant(cl));
-	vm["worldCoords"] = ol;
-
-	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
-	tile->setFrameType(StelCore::FrameAltAz);
-	
-	try
-	{
-		QString key = insertSkyLayer(tile, filename, visible);
-		if (key == id)
-			return true;
-		else
-			return false;
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << e.what();
-		return false;
-	}
-	*/
 }
 
 void StelSkyLayerMgr::showLayer(const QString& id, bool b)

@@ -36,7 +36,7 @@ int SphericalRegionP::initialize()
 
 QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region)
 {
-	out << (quint8)region->getType();
+	out << static_cast<quint8>(region->getType());
 	region->serialize(out);
 	return out;
 }
@@ -406,7 +406,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d vv;
 			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
 				return false;
-			const float cosDist = v1*v2;
+			const double cosDist = v1*v2;
 			v2 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;
 		}
@@ -421,7 +421,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d vv;
 			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
 				return false;
-			const float cosDist = v1*v2;
+			const double cosDist = v1*v2;
 			v1 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;
 		}
@@ -433,7 +433,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d vv;
 			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
 				return false;
-			const float cosDist = v1*v2;
+			const double cosDist = v1*v2;
 			if (v1*v >= cosDist && v2*v >= cosDist && v1*vv >= cosDist && v2*vv >= cosDist)
 			{
 				v1 = v;
@@ -546,11 +546,11 @@ double SphericalCap::relativeAreaOverlap(const SphericalCap& c1, const Spherical
 	Vec3d p1, p2;
 	double area1=c1.getArea();
 	double area2=c2.getArea();
-#ifndef NDEBUG
 	bool ok = SphericalCap::intersectionPoints(c1, c2, p1, p2);
+#ifndef NDEBUG
 	Q_ASSERT(ok);
 #else
-	SphericalCap::intersectionPoints(c1, c2, p1, p2);
+	Q_UNUSED(ok)
 #endif
 	Vec3d c(c1.n);
 	c*=c1.d;
@@ -617,9 +617,9 @@ QVariantList SphericalCap::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
+	l << ra*M_180_PI << dec*M_180_PI;
 	res << QVariant(l);
-	res << std::acos(d)*180./M_PI;
+	res << std::acos(d)*M_180_PI;
 	return res;
 }
 
@@ -658,7 +658,7 @@ QVariantList SphericalPoint::toQVariant() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, n);
 	QVariantList l;
-	l << ra*180./M_PI << dec*180./M_PI;
+	l << ra*M_180_PI << dec*M_180_PI;
 	res << l;
 	return res;
 }
@@ -710,24 +710,25 @@ struct TriangleSerializer
 	TriangleSerializer(const TriangleSerializer& ts) : triangleList(ts.triangleList) {}
 
 	TriangleSerializer() {}
+	inline void operator=(const TriangleSerializer &other){triangleList=other.triangleList;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
-			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
+			       const Vec3f* , const Vec3f* , const Vec3f* ,
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVariantList triangle;
 		double ra, dec;
 		QVariantList l;
 		StelUtils::rectToSphe(&ra, &dec, *v1);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		l.clear();
 		StelUtils::rectToSphe(&ra, &dec, *v2);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		l.clear();
 		StelUtils::rectToSphe(&ra, &dec, *v3);
-		l << ra*180./M_PI << dec*180./M_PI;
+		l << ra*M_180_PI << dec*M_180_PI;
 		triangle << QVariant(l);
 		Q_ASSERT(triangle.size()==3);
 		triangleList << QVariant(triangle);
@@ -1026,8 +1027,8 @@ QVariantList SphericalConvexPolygon::toQVariant() const
 	{
 		StelUtils::rectToSphe(&ra, &dec, v);
 		QVariantList vv;
-		vv << ra*180./M_PI << dec*180./M_PI;
-		cv.append((QVariant)vv);
+		vv << ra*M_180_PI << dec*M_180_PI;
+		cv.append(static_cast<QVariant>(vv));
 	}
 	res << cv;
 	return res;
@@ -1051,7 +1052,7 @@ QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 	{
 		QVariantList vv;
 		vv << v[0] << v[1];
-		cv.append((QVariant)vv);
+		cv.append(static_cast<QVariant>(vv));
 	}
 	res << cv;
 	return res;
@@ -1152,6 +1153,7 @@ struct TriangleDumper
 	TriangleDumper(const TriangleDumper& ts) : triangleList(ts.triangleList) {}
 
 	TriangleDumper() {}
+	inline void operator=(const TriangleDumper &other){triangleList=other.triangleList;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
 			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
@@ -1214,7 +1216,7 @@ QVector<Vec3d> pathFromQVariantList(const QVariantList& l)
 			double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
 			if (!ok || std::fabs(angle)>2.*M_PI)
 				throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
-			int nbStep = 1+(int)(std::fabs(angle)/(2.*M_PI)*75);
+			int nbStep = 1+static_cast<int>(std::fabs(angle)/(2.*M_PI)*75);
 			Q_ASSERT(nbStep>0);
 			v = vertices.last();
 			const Mat4d& rotMat = Mat4d::rotation(axis, angle/nbStep);
@@ -1372,7 +1374,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 				const QVariantList& vl = polyXYToList.at(n).toList();
 				if (vl.size()!=2)
 					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
-				vertices[n].texCoord.set(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok));
+				vertices[n].texCoord.set(vl.at(0).toFloat(&ok), vl.at(1).toFloat(&ok));
 				if (!ok)
 					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
 			}

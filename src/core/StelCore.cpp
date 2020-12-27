@@ -22,7 +22,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelToneReproducer.hpp"
-#include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
@@ -37,7 +36,6 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
-#include "StelPropertyMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
@@ -56,7 +54,7 @@
 
 // Init static transfo matrices
 // See vsop87.doc:
-const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
+const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*M_PI_180) * Mat4d::zrotation(0.0000275*M_PI_180));
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
@@ -74,6 +72,7 @@ const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
 StelCore::StelCore()
 	: skyDrawer(Q_NULLPTR)
 	, movementMgr(Q_NULLPTR)
+	, propMgr(Q_NULLPTR)
 	, geodesicGrid(Q_NULLPTR)
 	, currentProjectionType(ProjectionStereographic)
 	, currentDeltaTAlgorithm(EspenakMeeus)
@@ -115,14 +114,14 @@ StelCore::StelCore()
 	const int viewport_y = conf->value("projection/viewport_y", 0).toInt();
 	currentProjectorParams.viewportXywh.set(viewport_x,viewport_y,viewport_width,viewport_height);
 
-	const float viewportCenterX = conf->value("projection/viewport_center_x",0.5f*viewport_width).toFloat();
-	const float viewportCenterY = conf->value("projection/viewport_center_y",0.5f*viewport_height).toFloat();
+	const qreal viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
+	const qreal viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
-	const float viewportCenterOffsetX = conf->value("projection/viewport_center_offset_x",0.f).toFloat();
-	const float viewportCenterOffsetY = conf->value("projection/viewport_center_offset_y",0.f).toFloat();
+	const qreal viewportCenterOffsetX = conf->value("projection/viewport_center_offset_x",0.).toDouble();
+	const qreal viewportCenterOffsetY = conf->value("projection/viewport_center_offset_y",0.).toDouble();
 	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX, viewportCenterOffsetY);
 
-	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toFloat();
+	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 
@@ -136,7 +135,7 @@ StelCore::StelCore()
 
 	// Initialize matJ2000ToJ1875 matrix
 	double eps1875, chi1875, omega1875, psi1875;
-	double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
+	const double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
 	getPrecessionAnglesVondrak(jdB1875, &eps1875, &chi1875, &omega1875, &psi1875);
 	matJ2000ToJ1875 = Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
 	matJ2000ToJ1875 = matJ2000ToJ1875.transpose();
@@ -204,9 +203,9 @@ void StelCore::init()
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toDouble());
+	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toDouble());
+	setDeltaTCustomEquationCoefficients(Vec3d(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -227,7 +226,7 @@ void StelCore::init()
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")	
-		setJD(presetSkyTime - getUTCOffset(presetSkyTime) * JD_HOUR);
+		setJD(presetSkyTime - static_cast<double>(getUTCOffset(presetSkyTime)) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
@@ -236,17 +235,15 @@ void StelCore::init()
 
 	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
-	currentProjectorParams.fov = movementMgr->getInitFov();
+	currentProjectorParams.fov = static_cast<float>(movementMgr->getInitFov());
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
-
-	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 	propMgr->registerObject(skyDrawer);
 	propMgr->registerObject(this);
-
 
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();
@@ -389,7 +386,7 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 			prj = StelProjectorP(new StelProjectorMiller(modelViewTransform));
 			break;
 		default:
-			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
+			qWarning() << "Unknown projection type: " << static_cast<int>(projType) << "using ProjectionStereographic instead";
 			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
 			Q_ASSERT(0);
 	}
@@ -419,40 +416,10 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 		case FrameSupergalactic:
 			return getProjection(getSupergalacticModelViewTransform(refractionMode));
 		default:
-			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
+			qDebug() << "Unknown reference frame type: " << static_cast<int>(frameType) << ".";
 	}
 	Q_ASSERT(0);
 	return getProjection2d();
-}
-
-StelToneReproducer* StelCore::getToneReproducer()
-{
-	return toneReproducer;
-}
-
-const StelToneReproducer* StelCore::getToneReproducer() const
-{
-	return toneReproducer;
-}
-
-StelSkyDrawer* StelCore::getSkyDrawer()
-{
-	return skyDrawer;
-}
-
-const StelSkyDrawer* StelCore::getSkyDrawer() const
-{
-	return skyDrawer;
-}
-
-StelMovementMgr* StelCore::getMovementMgr()
-{
-	return movementMgr;
-}
-
-const StelMovementMgr* StelCore::getMovementMgr() const
-{
-	return movementMgr;
 }
 
 SphericalCap StelCore::getVisibleSkyArea() const
@@ -466,25 +433,14 @@ SphericalCap StelCore::getVisibleSkyArea() const
 	{
 		return SphericalCap(up, landscapeMgr->getLandscapeSinMinAltitudeLimit());
 	}
-	return SphericalCap(up, -1.f);
-}
-
-void StelCore::setClippingPlanes(double znear, double zfar)
-{
-	currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
-}
-
-void StelCore::getClippingPlanes(double* zn, double* zf) const
-{
-	*zn = currentProjectorParams.zNear;
-	*zf = currentProjectorParams.zFar;
+	return SphericalCap(up, -1.);
 }
 
 // Handle the resizing of the window
-void StelCore::windowHasBeenResized(float x, float y, float width, float height)
+void StelCore::windowHasBeenResized(qreal x, qreal y, qreal width, qreal height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
-	currentProjectorParams.viewportXywh.set(x, y, width, height);
+	currentProjectorParams.viewportXywh.set(qRound(x), qRound(y), qRound(width), qRound(height));
 	currentProjectorParams.viewportCenter.set(x+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*width, y+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
 }
@@ -503,7 +459,7 @@ void StelCore::update(double deltaTime)
 	// Update direction of vision/Zoom level
 	movementMgr->updateMotion(deltaTime);
 
-	currentProjectorParams.fov = movementMgr->getCurrentFov();
+	currentProjectorParams.fov = static_cast<float>(movementMgr->getCurrentFov());
 
 	skyDrawer->update(deltaTime);
 }
@@ -541,10 +497,10 @@ void StelCore::postDraw()
 
 void StelCore::updateMaximumFov()
 {
-	const double savedFov = currentProjectorParams.fov;
-	currentProjectorParams.fov = 0.0001;	// Avoid crash
-	double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
-	movementMgr->setMaxFov(newMaxFov);
+	const float savedFov = currentProjectorParams.fov;
+	currentProjectorParams.fov = 0.0001f;	// Avoid crash
+	const float newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+	movementMgr->setMaxFov(static_cast<double>(newMaxFov));
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
 
@@ -570,7 +526,7 @@ StelCore::ProjectionType StelCore::getCurrentProjectionType() const
 void StelCore::setCurrentProjectionTypeKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	ProjectionType newType = (ProjectionType)en.keyToValue(key.toLatin1().data());
+	ProjectionType newType = static_cast<ProjectionType>(en.keyToValue(key.toLatin1().data()));
 	if (newType<0)
 	{
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
@@ -611,7 +567,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 	emit flagGravityLabelsChanged(gravity);
 }
 
-bool StelCore::getFlagGravityLabels()
+bool StelCore::getFlagGravityLabels() const
 {
 	return currentProjectorParams.gravityLabels;
 }
@@ -652,41 +608,41 @@ bool StelCore::getFlipVert(void) const
 // Get current value for horizontal viewport offset [-50...50]
 double StelCore::getViewportHorizontalOffset(void) const
 {
-	return (currentProjectorParams.viewportCenterOffset[0] * 100.0f);
+	return (currentProjectorParams.viewportCenterOffset[0] * 100.0);
 }
 // Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
 void StelCore::setViewportHorizontalOffset(double newOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[0]=0.01f* qBound(-50., newOffsetPct, 50.);
-	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
-						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+	currentProjectorParams.viewportCenterOffset[0]=0.01* qBound(-50., newOffsetPct, 50.);
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
 
 // Get current value for vertical viewport offset [-50...50]
 double StelCore::getViewportVerticalOffset(void) const
 {
-	return (currentProjectorParams.viewportCenterOffset[1] * 100.0f);
+	return (currentProjectorParams.viewportCenterOffset[1] * 100.0);
 }
 // Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
 void StelCore::setViewportVerticalOffset(double newOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[1]=0.01f* qBound(-50., newOffsetPct, 50.);
-	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
-						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+	currentProjectorParams.viewportCenterOffset[1]=0.01* qBound(-50., newOffsetPct, 50.);
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
 
 // Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
 void StelCore::setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[0]=0.01f* qBound(-50., newHorizontalOffsetPct, 50.);
-	currentProjectorParams.viewportCenterOffset[1]=0.01f* qBound(-50., newVerticalOffsetPct,   50.);
-	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
-						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+	currentProjectorParams.viewportCenterOffset[0]=0.01* qBound(-50., newHorizontalOffsetPct, 50.);
+	currentProjectorParams.viewportCenterOffset[1]=0.01* qBound(-50., newVerticalOffsetPct,   50.);
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
 
 void StelCore::setViewportStretch(float stretch)
 {
-	currentProjectorParams.widthStretch=qMax(0.001f, stretch);
+	currentProjectorParams.widthStretch=static_cast<qreal>(qMax(0.001f, stretch));
 }
 
 QString StelCore::getDefaultLocationID() const
@@ -697,7 +653,7 @@ QString StelCore::getDefaultLocationID() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toLatin1()))->getNameI18());
+	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), static_cast<ProjectionType>(en.keyToValue(key.toLatin1())))->getNameI18());
 	return s;
 }
 
@@ -706,7 +662,7 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
 	for (int i=0;i<en.keyCount();++i)
 	{
-		if (getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)i)->getNameI18()==nameI18n)
+		if (getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), static_cast<ProjectionType>(i))->getNameI18()==nameI18n)
 			return en.valueToKey(i);
 	}
 	// Unknown translated name
@@ -743,6 +699,12 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+void StelCore::setMatAltAzModelView(const Mat4d& mat)
+{
+	matAltAzModelView = mat;
+	invertMatAltAzModelView = matAltAzModelView.inverse();
+}
+
 Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
@@ -766,10 +728,10 @@ Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
 Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+		return matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu*v;
 	Vec3d r(v);
 	skyDrawer->getRefraction().backward(r);
-	r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+	r.transfo4d(matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu);
 	return r;
 }
 
@@ -796,7 +758,7 @@ Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
 Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*v;
+		return matEquinoxEquDateToJ2000*v;
 	Vec3d r(v);
 	r.transfo4d(matEquinoxEquToAltAz);
 	skyDrawer->getRefraction().backward(r);
@@ -965,19 +927,17 @@ void StelCore::updateTransformMatrices()
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
-	// For earth, matJ2000ToEquinoxEqu is the precession matrix.
-	// TODO: rename matEquinoxEquToJ2000 to matEquinoxEquDateToJ2000
-	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
-	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
+	// For earth, matJ2000ToEquinoxEqu is the precession matrix.	
+	matEquinoxEquDateToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
+	matJ2000ToEquinoxEqu = matEquinoxEquDateToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
 
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// These two next have to take into account the position of the observer on the earth/planet of observation.
-	// GZ tmp could be called matAltAzToVsop87
-	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
-	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquToJ2000;
+	// These two next have to take into account the position of the observer on the earth/planet of observation.	
+	Mat4d matAltAzToVsop87 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000 * matAltAzToEquinoxEqu;
+	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000;
 
 	// Before 0.14 getDistanceFromCenter assumed spherical planets. Now uses rectangular coordinates for observer!
 	// In series 0.14 and 0.15, this was erroneous: offset by distance rho, but in the wrong direction.
@@ -985,15 +945,15 @@ void StelCore::updateTransformMatrices()
 	// Please keep the commented stuff until situation is really solved.
 	if (flagUseTopocentricCoordinates)
 	{
-		Vec3d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad]
-		const double sigma=position->getCurrentLocation().latitude*M_PI/180.0 - offset.v[2];
-		const double rho=position->getDistanceFromCenter();
+		const Vec4d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad, rho]
+		const double sigma=static_cast<double>(position->getCurrentLocation().latitude)*M_PI/180.0 - offset.v[2];
+		const double rho=offset.v[3];
 
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87 *
 				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) ));
 
 		matHeliocentricEclipticJ2000ToAltAz =
-				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * tmp.transpose() *
+				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * matAltAzToVsop87.transpose() *
 				Mat4d::translation(-position->getCenterVsop87Pos());
 
 		// Here I tried to split tmp matrix. This does not work:
@@ -1011,13 +971,11 @@ void StelCore::updateTransformMatrices()
 
 //		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 //				Mat4d::translation(-position->getCenterVsop87Pos());
-
-
 	}
 	else
 	{
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp;
-		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87;
+		matHeliocentricEclipticJ2000ToAltAz =  matAltAzToVsop87.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
 	}
 }
 
@@ -1174,8 +1132,8 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-				loc.planetName = pl->getEnglishName();
-				loc.name = "-";
+				loc.planetName = pl->getEnglishName();				
+				loc.name = "landing site";
 				loc.state = "";
 
 				// Let's try guess name of location...
@@ -1230,6 +1188,8 @@ void StelCore::setObserver(StelObserver *obs)
 {
 	delete position;
 	position = obs;
+	if (!getUseCustomTimeZone() && obs->getCurrentLocation().ianaTimeZone.length()>0)
+		setCurrentTimeZone(obs->getCurrentLocation().ianaTimeZone);
 }
 
 // Smoothly move the observer to the given location
@@ -1244,7 +1204,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			// Avoid using a temporary location name to create another temporary one (otherwise it looks like loc1 -> loc2 -> loc3 etc..)
 			curLoc.name = ".";
 		}
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);		
 		setObserver(newObs);
 		newObs->update(0);
 	}
@@ -1256,7 +1216,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	emit locationChanged(getCurrentLocation());
 }
 
-float StelCore::getUTCOffset(const double JD) const
+double StelCore::getUTCOffset(const double JD) const
 {
 	int year, month, day, hour, minute, second;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
@@ -1272,14 +1232,31 @@ float StelCore::getUTCOffset(const double JD) const
 	{
 		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
+		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
+		// Under which circumstances do we get invalid universal?
 		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
 	}
 
+#if defined(Q_OS_WIN)
+	if (abs(year)<3)
+	{
+		// Mitigate a QTBUG on Windows (GH #594).
+		// This bug causes offset to be MIN_INT in January to March, 1AD.
+		// We assume a constant offset in this remote history,
+		// so we construct yet another date to get a valid offset.
+		// Application of the named time zones is inappropriate in any case.
+		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), Qt::UTC);
+	}
+#endif
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
+	if (!tz.isValid() && !QString("LMST LTST system_default").contains(tzName))
+	{
+		qWarning() << "Invalid timezone: " << tzName;
+	}
 
-	int shiftInSeconds = 0;
+	qint64 shiftInSeconds = 0;
 	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz.isValid() && !QString("LMST LTST").contains(tzName)))
 	{
 		QDateTime local = universal.toLocalTime();
@@ -1287,6 +1264,10 @@ float StelCore::getUTCOffset(const double JD) const
 		//times to UTC if their zones have different daylight saving time rules.
 		local.setTimeSpec(Qt::UTC);
 		shiftInSeconds = universal.secsTo(local);
+		if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+		{
+			qDebug() << "TZ system_default or invalid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+		}
 	}
 	else
 	{
@@ -1297,17 +1278,61 @@ float StelCore::getUTCOffset(const double JD) const
 				shiftInSeconds = tz.offsetFromUtc(universal);
 			else
 				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (abs(shiftInSeconds)>500000 || shiftInSeconds==INT_MIN)
+			{
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+				// Trigger this with a named custom TZ like Europe/Stockholm.
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
+			}
 		}
 		else
-			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
-
+		{
+			shiftInSeconds = qRound((loc.longitude/15.f)*3600.f); // Local Mean Solar Time
+		}
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
+	}
+	#ifdef Q_OS_WIN
+	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
+	// TODO: switch to IANA TZ on all operating systems
+	if (tzName=="Europe/Volgograd")
+		shiftInSeconds = 4*3600; // UTC+04:00
+	#endif
 
+	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
+	if (loc.planetName!="Earth")
+	{
+		if (tz.isValid() && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		{
+			if (getUseDST())
+				shiftInSeconds = tz.offsetFromUtc(universal);
+			else
+				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (shiftInSeconds==INT_MIN) // triggered error
+			{
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+				// Trigger this with a named custom TZ like Europe/Stockholm.
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
+			}
+		}
+		else
+		{
+			// TODO: This should give "mean solar time" for any planet.
+			// Combine rotation and orbit, or (for moons) rotation and orbit of parent planet.
+			// LTST is even worse, needs equation of time for other planets.
+			shiftInSeconds = 0; // For now, give UT
+		}
 	}
 
-	float shiftInHours = shiftInSeconds / 3600.0f;
-	return shiftInHours;
+	return shiftInSeconds / 3600.0;
 }
 
 QString StelCore::getCurrentTimeZone() const
@@ -1317,7 +1342,15 @@ QString StelCore::getCurrentTimeZone() const
 
 void StelCore::setCurrentTimeZone(const QString& tz)
 {
-	currentTimeZone = tz;
+	if (StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tz))
+	{
+		currentTimeZone = tz;
+		emit(currentTimeZoneChanged(tz));
+	}
+	else
+	{
+		qWarning() << "StelCore: Invalid timezone name:" << tz << " -- not setting timezone.";
+	}
 }
 
 bool StelCore::getUseDST() const
@@ -1329,6 +1362,7 @@ void StelCore::setUseDST(const bool b)
 {
 	flagUseDST = b;
 	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+	emit flagUseDSTChanged(b);
 }
 
 bool StelCore::getUseCustomTimeZone() const
@@ -1339,6 +1373,7 @@ bool StelCore::getUseCustomTimeZone() const
 void StelCore::setUseCustomTimeZone(const bool b)
 {
 	flagUseCTZ = b;
+	emit useCustomTimeZoneChanged(b);
 }
 
 double StelCore::getSolutionEquationOfTime(const double JDE) const
@@ -1356,14 +1391,14 @@ double StelCore::getSolutionEquationOfTime(const double JDE) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 
 	// covert radians to degrees and reduce the angle
-	double alpha = std::fmod(ra*180./M_PI, 360.);
+	double alpha = std::fmod(ra*M_180_PI, 360.);
 	// force it to be the positive remainder, so that 0 <= angle < 360
 	alpha = std::fmod(alpha + 360., 360.);
 
 	double deltaPsi, deltaEps;
 	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
 	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*M_180_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
 	// The equation of time is always smaller 20 minutes in absolute value
 	if (qAbs(equation)>20)
 	{
@@ -1392,7 +1427,7 @@ void StelCore::setTodayTime(const QTime& target)
 	{
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
-		double JD = StelUtils::qDateTimeToJd(dt)-(getUTCOffset(StelUtils::getJDFromSystem()) * JD_HOUR);
+		double JD = StelUtils::qDateTimeToJd(dt)-(static_cast<double>(getUTCOffset(StelUtils::getJDFromSystem())) * JD_HOUR);
 		setJD(JD);
 	}
 	else
@@ -1416,7 +1451,7 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
-QTime StelCore::getInitTodayTime(void)
+QTime StelCore::getInitTodayTime(void) const
 {
 	return initTodayTime;
 }
@@ -1463,15 +1498,10 @@ void StelCore::addSiderealWeek()
 
 void StelCore::addSiderealYear()
 {
-	double days = 365.256363004;
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
-		days = home->getSiderealPeriod();
-
-	addSolarDays(days);
+	addSiderealYears(1.);
 }
 
-void StelCore::addSiderealYears(float n)
+void StelCore::addSiderealYears(double n)
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
@@ -1489,7 +1519,7 @@ void StelCore::addSynodicMonth()
 void StelCore::addSaros()
 {
 	// 223 synodic months
-	addSolarDays(6585.321314219);
+	addSolarDays(223*29.530588853);
 }
 
 void StelCore::addDraconicMonth()
@@ -1525,10 +1555,10 @@ void StelCore::addAnomalisticMonth()
 
 void StelCore::addAnomalisticYear()
 {
-	addSolarDays(365.259636);
+	addAnomalisticYears(1.);
 }
 
-void StelCore::addAnomalisticYears(float n)
+void StelCore::addAnomalisticYears(double n)
 {
 	addSolarDays(365.259636*n);
 }
@@ -1540,24 +1570,27 @@ void StelCore::addDraconicYear()
 
 void StelCore::addMeanTropicalYear()
 {
-	addSolarDays(365.242190419);
+	addMeanTropicalYears(1.0);
 }
 
 void StelCore::addTropicalYear()
 {
 	// Source: J. Meeus. More Mathematical Astronomy Morsels. 2002, p. 358.
-	float T = (getJD()-2451545.0)/365250.0;
+	// Meeus, J. & Savoie, D. The history of the tropical year. Journal of the British Astronomical Association, vol.102, no.1, p.40-42
+	// http://articles.adsabs.harvard.edu//full/1992JBAA..102...40M
+	const double T = (getJD()-2451545.0)/365250.0;
 	addSolarDays(365.242189623 - T*(0.000061522 - T*(0.0000000609 + T*0.00000026525)));
 }
 
-void StelCore::addMeanTropicalYears(float n)
-{
-	addSolarDays(365.2421897*n);
+void StelCore::addMeanTropicalYears(double n)
+{	
+	// Source: https://en.wikipedia.org/wiki/Tropical_year#Mean_tropical_year_current_value
+	addSolarDays(365.2421897*n); // The mean tropical year on January 1, 2000
 }
 
 void StelCore::addJulianYear()
 {
-	addSolarDays(365.25);
+	addJulianYears(1.);
 }
 
 void StelCore::addGaussianYear()
@@ -1565,7 +1598,7 @@ void StelCore::addGaussianYear()
 	addSolarDays(365.2568983);
 }
 
-void StelCore::addJulianYears(float n)
+void StelCore::addJulianYears(double n)
 {
 	addSolarDays(365.25*n);
 }
@@ -1602,22 +1635,12 @@ void StelCore::subtractSiderealWeek()
 
 void StelCore::subtractSiderealYear()
 {
-	double days = 365.256363004;
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
-		days = home->getSiderealPeriod();
-
-	addSolarDays(-days);
+	addSiderealYears(-1.);
 }
 
-void StelCore::subtractSiderealYears(float n)
+void StelCore::subtractSiderealYears(double n)
 {
-	double days = 365.256363004;
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
-		days = home->getSiderealPeriod();
-
-	addSolarDays(-days*n);
+	addSiderealYears(-n);
 }
 
 void StelCore::subtractSynodicMonth()
@@ -1628,7 +1651,7 @@ void StelCore::subtractSynodicMonth()
 void StelCore::subtractSaros()
 {
 	// 223 synodic months
-	addSolarDays(-6585.321314219);
+	addSolarDays(-223*29.530588853);
 }
 
 void StelCore::subtractDraconicMonth()
@@ -1664,10 +1687,10 @@ void StelCore::subtractAnomalisticMonth()
 
 void StelCore::subtractAnomalisticYear()
 {
-	addSolarDays(-365.259636);
+	subtractAnomalisticYears(1.);
 }
 
-void StelCore::subtractAnomalisticYears(float n)
+void StelCore::subtractAnomalisticYears(double n)
 {
 	addSolarDays(-365.259636*n);
 }
@@ -1680,18 +1703,18 @@ void StelCore::subtractDraconicYear()
 void StelCore::subtractTropicalYear()
 {
 	// Source: J. Meeus. More Mathematical Astronomy Morsels. 2002, p. 358.
-	float T = (getJD()-2451545.0)/365250.0;
+	double T = (getJD()-2451545.0)/365250.0;
 	addSolarDays(-(365.242189623 - T*(0.000061522 - T*(0.0000000609 + T*0.00000026525))));
 }
 
 void StelCore::subtractMeanTropicalYear()
 {
-	addSolarDays(-365.242190419);
+	addMeanTropicalYears(-1.0);
 }
 
-void StelCore::subtractMeanTropicalYears(float n)
+void StelCore::subtractMeanTropicalYears(double n)
 {
-	addSolarDays(-365.2421897*n);
+	addMeanTropicalYears(-1.0*n);
 }
 
 void StelCore::subtractJulianYear()
@@ -1704,7 +1727,7 @@ void StelCore::subtractGaussianYear()
 	addSolarDays(-365.2568983);
 }
 
-void StelCore::subtractJulianYears(float n)
+void StelCore::subtractJulianYears(double n)
 {
 	addSolarDays(-365.25*n);
 }
@@ -1730,11 +1753,11 @@ void StelCore::addSiderealDays(double d)
 	setJD(getJD() + d);
 }
 
-// Get the sidereal time shifted by the observer longitude
+// Get the sidereal time of the prime meridian (i.e. Rotation Angle) shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
-	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+position->getCurrentLocation().longitude)*M_PI/180.;
+	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().longitude))*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
@@ -1749,7 +1772,7 @@ double StelCore::getLocalSiderealYearLength() const
 	return position->getHomePlanet()->getSiderealPeriod();
 }
 
-QString StelCore::getStartupTimeMode()
+QString StelCore::getStartupTimeMode() const
 {
 	return startupTimeMode;
 }
@@ -1760,8 +1783,8 @@ void StelCore::increaseTimeSpeed()
 	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
-	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=0.) s=JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1771,8 +1794,8 @@ void StelCore::decreaseTimeSpeed()
 	double s = getTimeRate();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
-	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s<=0.) s=-JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1781,8 +1804,8 @@ void StelCore::increaseTimeSpeedLess()
 	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=2.;
 	else if (s<-JD_SECOND) s/=2.;
-	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=0.) s=JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1791,8 +1814,8 @@ void StelCore::decreaseTimeSpeedLess()
 	double s = getTimeRate();
 	if (s>JD_SECOND) s/=2.;
 	else if (s<=-JD_SECOND) s*=2.;
-	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s<=0.) s=-JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1852,7 +1875,7 @@ void StelCore::updateTime(double deltaTime)
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
-	static SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	static SolarSystem* solsystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
 	// Likely the most important location where we need JDE:
 	solsystem->computePositions(getJDE(), position->getHomePlanet());
 }
@@ -1933,7 +1956,7 @@ double StelCore::computeDeltaT(const double JD)
 		deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 		int year, month, day;
 		StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-		double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100;
+		double u = (StelUtils::yearFraction(year,month,day)-getDeltaTCustomYear())/100.;
 		DeltaT = deltaTCustomEquationCoeff[0] + u*(deltaTCustomEquationCoeff[1] + u*deltaTCustomEquationCoeff[2]);
 	}
 
@@ -1959,35 +1982,35 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case WithoutCorrection:
 			// Without correction, DeltaT is disabled
 			deltaTfunc = StelUtils::getDeltaTwithoutCorrection;
-			deltaTnDot = -26.f; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
+			deltaTnDot = -26.; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
 			deltaTdontUseMoon = true;
 			deltaTstart	= INT_MIN;
 			deltaTfinish	= INT_MAX;
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
-			deltaTnDot = -29.68f; // n.dot = -29.68"/cy/cy
+			deltaTnDot = -29.68; // n.dot = -29.68"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
 			deltaTstart	= -300;
 			deltaTfinish	= 1980;
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
-			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByClemence;
 			deltaTstart	= 1681;
 			deltaTfinish	= 1900;
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
-			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIAU;
 			deltaTstart	= 1681;
 			deltaTfinish	= 1936; // Details in http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
-			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByAstronomicalEphemeris;
 			// GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"
 			// I changed to what I estimate.
@@ -1997,35 +2020,35 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy ???
+			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByTuckermanGoldstine;
 			deltaTstart	= -600;
 			deltaTfinish	= 1649;
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
-			deltaTnDot = -37.5f; // n.dot = -37.5 "/cy/cy
+			deltaTnDot = -37.5; // n.dot = -37.5 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMullerStephenson;
 			deltaTstart	= -1375;
 			deltaTfinish	= 1975;
 			break;
 		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT
-			deltaTnDot = -30.0f; // n.dot = -30.0 "/cy/cy
+			deltaTnDot = -30.0; // n.dot = -30.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1978;
 			deltaTstart	= INT_MIN; // Range unknown!
 			deltaTfinish	= INT_MAX;
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
-			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy
+			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1979;
 			deltaTstart	= 1800;
 			deltaTfinish	= 1975;
 			break;
 		case MorrisonStephenson1982:
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
 			// FIXME: This is correct valid range?
 			deltaTstart	= -4000;
@@ -2033,14 +2056,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1984;
 			deltaTstart	= -391;
 			deltaTfinish	= 1600;
 			break;
 		case StephensonHoulden:
 			// Stephenson & Houlden (1986) algorithm for DeltaT. The limits are implicitly given by the tabulated values.
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonHoulden;
 			deltaTstart	= -600;
 			deltaTfinish	= 1650;
@@ -2048,14 +2071,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy ???
+			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByEspenak;
 			deltaTstart	= 1950;
 			deltaTfinish	= 2100;
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
-			deltaTnDot = -23.895f; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
+			deltaTnDot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBorkowski;
 			deltaTstart	= -2136;
 			deltaTfinish	= 1715;
@@ -2063,14 +2086,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1988;
 			deltaTstart	= 1800;
 			deltaTfinish	= 1988;
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
-			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy
+			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontTouze;
 			// FIXME: Is it valid range?
 			deltaTstart	= -4000;
@@ -2078,74 +2101,75 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case StephensonMorrison1995:
 			// Stephenson & Morrison (1995) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1995;
 			deltaTstart	= -700;
 			deltaTfinish	= 1600;
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1997;
 			deltaTstart	= -500;
 			deltaTfinish	= 1600;
 			break;
 		case ChaprontMeeus:
 			// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontMeeus;
 			deltaTstart	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
 			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
-			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
 			deltaTstart	= -2999;
 			deltaTfinish	= 1620;
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
-			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMeeusSimons;
 			deltaTstart	= 1620;
 			deltaTfinish	= 2000;
 			break;
 		case ReingoldDershowitz:
-			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+			// Reingold & Dershowitz (2002, 2007, 2018) algorithm for DeltaT
 			// FIXME: n.dot
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
 			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
-			deltaTstart	= -400; //1620;
-			deltaTfinish	= 2100; //2019;
+			// AW: limits from 4th edition:
+			deltaTstart	= -500; //1620;
+			deltaTfinish	= 2150; //2019;
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
 			// NOTE: book does not contain n.dot value
 			// FIXME: n.dot
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByMontenbruckPfleger;
 			deltaTstart	= 1825;
 			deltaTfinish	= 2005;
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson2004;
 			deltaTstart	= -1000;
 			deltaTfinish	= 2000;
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByReijs;
 			deltaTstart	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
 			deltaTfinish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
-			deltaTnDot = -25.858f; // n.dot = -25.858 "/cy/cy
+			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
 			deltaTstart	= -1999;
 			deltaTfinish	= 3000;
@@ -2153,7 +2177,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case EspenakMeeusZeroMoonAccel:
 			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
 			// Espenak & Meeus (2006) algorithm for DeltaT
-			deltaTnDot = -25.858f; // n.dot = -25.858 "/cy/cy
+			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
 			deltaTdontUseMoon = true;
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
 			deltaTstart	= -1999;
@@ -2161,14 +2185,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case Banjevic:
 			// Banjevic (2006) algorithm for DeltaT
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBanjevic;
 			deltaTstart	= -2020;
 			deltaTfinish	= 1620;
 			break;
 		case IslamSadiqQureshi:
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIslamSadiqQureshi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			deltaTstart	= 1620;
@@ -2176,14 +2200,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case KhalidSultanaZaidi:
 			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByKhalidSultanaZaidi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			deltaTstart	= 1620;
 			deltaTfinish	= 2013;
 			break;
 		case StephensonMorrisonHohenkerk2016:
-			deltaTnDot = -25.82f; // n.dot = -25.82 "/cy/cy
+			deltaTnDot = -25.82; // n.dot = -25.82 "/cy/cy
 			deltaTfunc=StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016;
 			deltaTstart	= -720;
 			deltaTfinish	= 2015;
@@ -2194,7 +2218,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Henriksson, G.
 			// Advances in Astrophysics, Vol. 2, No. 3, August 2017
 			// https://doi.org/10.22606/adap.2017.23004
-			deltaTnDot = -30.128f; // n.dot = -30.128"/cy/cy
+			deltaTnDot = -30.128; // n.dot = -30.128"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
 			deltaTstart	= -4000;
 			deltaTfinish	= 2000;
@@ -2207,7 +2231,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	= INT_MAX;
 			break;
 		default:
-			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc=Q_NULLPTR;
 			deltaTstart	= INT_MIN; // Range unknown!
 			deltaTfinish	= INT_MAX;
@@ -2220,7 +2244,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm"));
-	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toLatin1().data());
+	DeltaTAlgorithm algo = static_cast<DeltaTAlgorithm>(en.keyToValue(key.toLatin1().data()));
 	if (algo<0)
 	{
 		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";
@@ -2314,7 +2338,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ReingoldDershowitz: //
-			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (4th ed. 2018) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson2004: // PRIMARY SOURCE
 			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
@@ -2438,23 +2462,18 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
+	if (propMgr->getStelPropertyValue("Oculars.enableOcular", true).toBool())
+		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
 		return false;
 	if (!getSkyDrawer()->getFlagHasAtmosphere())
 		return false;
-	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
+	if (ssys->getEclipseFactor(this).first<=0.01) // Total solar eclipse
 		return false;
 
 	// immediately decide upon sky background brightness...
-	return (GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance() > getSkyDrawer()->getDaylightLabelThreshold());
-
-	// Old solution: based on solar altitude
-//	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
-//	if (sunPos[2] > -0.10452846326) // Nautical twilight (sin (6 deg))
-//		return true;
-//	else
-//		return false;
+	return (GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance() > static_cast<float>(getSkyDrawer()->getDaylightLabelThreshold()));
 }
 
 double StelCore::getCurrentEpoch() const
@@ -2463,7 +2482,8 @@ double StelCore::getCurrentEpoch() const
 }
 
 // DE430/DE431 handling.
-// FIXME: GZ observes: When DE431 is not available, DE430 installed, but date outside, de430IsActive() should return false because computations go back to VSOP!.
+// NOTE: When DE431 is not available, DE430 installed, but date outside, de430IsActive() may be true but computations still go back to VSOP!
+// To test whether DE43x is really currently in use, test (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd))
 
 bool StelCore::de430IsAvailable()
 {
@@ -2550,13 +2570,13 @@ static bool iau_constlineVecInitialized=false;
 QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 {
 	// Precess positionJ2000 to 1875.0
-	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
+	const Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
 	double RA1875;
 	double dec1875;
 	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);
 	RA1875 *= 12./M_PI; // hours
 	if (RA1875 <0.) RA1875+=24.;
-	dec1875 *= 180./M_PI; // degrees
+	dec1875 *= M_180_PI; // degrees
 	Q_ASSERT(RA1875>=0.0);
 	Q_ASSERT(RA1875<=24.0);
 	Q_ASSERT(dec1875<=90.0);
@@ -2612,8 +2632,8 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size()){
-
+	while (entry<iau_constlineVec.size())
+	{
 		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
 			entry++;
 		while (iau_constlineVec.at(entry).RAlow >= RA1875)
@@ -2630,24 +2650,24 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 Vec3d StelCore::getMouseJ2000Pos() const
 {
 	const StelProjectorP prj = getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
-	float ppx = getCurrentStelProjectorParams().devicePixelsPerPixel;
+	float ppx = static_cast<float>(getCurrentStelProjectorParams().devicePixelsPerPixel);
 
 	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
-	float wh = prj->getViewportWidth()/2.; // get half of width of the screen
-	float hh = prj->getViewportHeight()/2.; // get half of height of the screen
-	float mx = p.x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
-	float my = p.y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
+	const float wh = prj->getViewportWidth()*0.5f; // get half of width of the screen
+	const float hh = prj->getViewportHeight()*0.5f; // get half of height of the screen
+	const float mx = p.x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
+	const float my = p.y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	// If coordinates are invalid, don't draw them.
-	bool coordsValid = prj->unProject((prj->getViewportPosX()+wh+mx), (prj->getViewportPosY()+hh+1-my), mousePosition);
+	bool coordsValid = prj->unProject(static_cast<double>(prj->getViewportPosX()+wh+mx), static_cast<double>(prj->getViewportPosY()+hh+1-my), mousePosition);
 	if (coordsValid)
 	{ // Nick Fedoseev patch
 		Vec3d win;
 		prj->project(mousePosition,win);
-		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
-		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		prj->unProject((prj->getViewportPosX()+wh+mx+dx), (prj->getViewportPosY()+hh+1-my+dy), mousePosition);
+		float dx = prj->getViewportPosX()+wh+mx - static_cast<float>(win.v[0]);
+		float dy = prj->getViewportPosY()+hh+1-my - static_cast<float>(win.v[1]);
+		prj->unProject(static_cast<double>(prj->getViewportPosX()+wh+mx+dx), static_cast<double>(prj->getViewportPosY()+hh+1-my+dy), mousePosition);
 	}
 
 	return mousePosition;

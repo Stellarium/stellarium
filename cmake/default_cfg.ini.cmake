@@ -27,7 +27,6 @@ viewport_effect                     = none
 [projection]
 type                                = ProjectionStereographic
 viewportMask                        = none
-flag_use_gl_point_sprite            = false
 flip_horz                           = false
 flip_vert                           = false
 
@@ -105,11 +104,13 @@ flag_show_size                      = false
 [gui]
 flag_show_flip_buttons              = false
 flag_show_nebulae_background_button = false
-base_font_size                      = 13
+screen_font_size                    = 13
+gui_font_size                       = 13
 #Name of custom font file for some languages, like Thai.
 #This file should be stored into data/ folder.
 #base_font_file                      = DejaVuSans.ttf
 #base_font_name                      = DejaVu Sans
+flag_font_selection                 = false
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
 selected_object_info                = all
@@ -165,7 +166,9 @@ zenith_nadir_color                  = 0.2,0.6,0.2
 cardinal_color                      = 0.8,0.2,0.1
 # A mix of equatorial (blueish) and ecliptical (reddish)...
 colures_color                       = 0.5,0.0,0.5
-oc_longitude_color                  = 0.2,0.4,0.4
+oc_longitude_color                  = 0.6,0.2,0.4
+antisolar_point_color               = 0.9,0.3,0.5
+apex_points_color                   = 0.8,0.2,0.3
 
 # Constellations
 const_lines_color                   = 0.2,0.2,0.6
@@ -179,7 +182,6 @@ dso_nebula_color                    = 0.1,1.0,0.1
 dso_dark_nebula_color               = 0.3,0.3,0.3
 dso_cluster_color                   = 1.0,1.0,0.1
 
-star_label_color                    = 0.4,0.3,0.5
 planet_names_color                  = 0.5,0.5,0.7
 planet_orbits_color                 = 0.7,0.2,0.2
 planet_pointers_color               = 1.0,0.3,0.3

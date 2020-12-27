@@ -19,6 +19,7 @@
  */
 
 #include "StelMainView.hpp"
+#include "StelSplashScreen.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
@@ -45,7 +46,6 @@
 #include <QFontDatabase>
 #include <QGuiApplication>
 #include <QSettings>
-#include <QSplashScreen>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -56,10 +56,29 @@
 #include <clocale>
 
 #ifdef Q_OS_WIN
-	#include <windows.h>
+	#include <Windows.h>
 	//we use WIN32_LEAN_AND_MEAN so this needs to be included
 	//to use timeBeginPeriod/timeEndPeriod
 	#include <mmsystem.h>
+
+	// Default to High Performance Mode on machines with hybrid graphics
+	// Details: https://stackoverflow.com/questions/44174859/how-to-give-an-option-to-select-graphics-adapter-in-a-directx-11-application
+	extern "C"
+	{
+	#ifdef _MSC_VER
+		__declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+		__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 0x00000001;
+	#else
+		__attribute__((dllexport)) DWORD NvOptimusEnablement = 0x00000001;
+		__attribute__((dllexport)) int AmdPowerXpressRequestHighPerformance = 0x00000001;
+	#endif
+	}
+#else
+	extern "C"
+	{
+		int NvOptimusEnablement = 1;
+		int AmdPowerXpressRequestHighPerformance = 1;
+	}
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
@@ -75,7 +94,7 @@ public:
 	//! @param context Qt context string - IGNORED.
 	//! @param sourceText the source message.
 	//! @param comment optional parameter
-	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = 0, int n = -1) const
+	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const
 	{
 		Q_UNUSED(context);
 		Q_UNUSED(n);
@@ -109,33 +128,20 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
-class SplashScreen : public QSplashScreen
-{
-    bool painted=false;
-    void paintEvent(QPaintEvent* e) override
-    {
-        QSplashScreen::paintEvent(e);
-        painted=true;
-    }
-public:
-    SplashScreen(QPixmap const& pixmap)
-        : QSplashScreen(pixmap)
-    {}
-    void ensureFirstPaint() const
-    {
-        while(!painted)
-        {
-            QThread::usleep(1000);
-            qApp->processEvents();
-        }
-    }
-};
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-    Q_INIT_RESOURCE(mainRes);
-    Q_INIT_RESOURCE(guiRes);
+	Q_INIT_RESOURCE(mainRes);
+	Q_INIT_RESOURCE(guiRes);
+
+	// Log command line arguments.
+	QString argStr;
+	QStringList argList;
+	for (int i=0; i<argc; ++i)
+	{
+		argList << argv[i];
+		argStr += QString("%1 ").arg(argv[i]);
+	}
 
 #ifdef Q_OS_WIN
 	// Fix for the speeding system clock bug on systems that use ACPI
@@ -158,11 +164,17 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
+	// Support high DPI pixmaps and fonts
+	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
+		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
+
 	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
-	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("plugins"));
+	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("PlugIns"));
 	#elif defined(Q_OS_WIN)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
@@ -190,20 +202,8 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
-	SplashScreen splash(pixmap);
-	splash.show();
-	splash.showMessage(StelUtils::getApplicationVersion() , Qt::AlignLeft, Qt::white);
-	splash.ensureFirstPaint();
+	SplashScreen::present();
 
-	// Log command line arguments.
-	QString argStr;
-	QStringList argList;
-	for (int i=0; i<argc; ++i)
-	{
-		argList << argv[i];
-		argStr += QString("%1 ").arg(argv[i]);
-	}
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
 	if (envStelOpts.length()>0)
@@ -235,7 +235,7 @@ int main(int argc, char **argv)
 
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
-	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
+	QString versionLine = QString("This is %1 - %2").arg(StelUtils::getApplicationName()).arg(STELLARIUM_URL);
 	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
@@ -274,17 +274,14 @@ int main(int argc, char **argv)
 	QSettings* confSettings = Q_NULLPTR;
 	if (StelFileMgr::exists(configFileFullPath))
 	{
+		confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 		// Implement "restore default settings" feature.
 		bool restoreDefaultConfigFile = false;
 		if (CLIProcessor::argsGetOption(argList, "", "--restore-defaults"))
-		{
 			restoreDefaultConfigFile=true;
-		}
 		else
-		{
-			confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 			restoreDefaultConfigFile = confSettings->value("main/restore_defaults", false).toBool();
-		}
+
 		if (!restoreDefaultConfigFile)
 		{
 			QString version = confSettings->value("main/version", "0.0.0").toString();
@@ -313,13 +310,16 @@ int main(int argc, char **argv)
 				}
 			}
 		}
+
 		if (restoreDefaultConfigFile)
 		{
 			if (confSettings)
 				delete confSettings;
+
 			QString backupFile(configFileFullPath.left(configFileFullPath.length()-3) + QString("old"));
 			if (QFileInfo(backupFile).exists())
 				QFile(backupFile).remove();
+
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);
@@ -344,12 +344,8 @@ int main(int argc, char **argv)
 	StelScriptOutput::init(outputFile);
 	#endif
 
-
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
-
-	// Support hi-dpi pixmaps
-	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
@@ -378,7 +374,7 @@ int main(int argc, char **argv)
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 	QFont tmpFont(baseFont);
 #endif
-	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
+	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
@@ -390,7 +386,7 @@ int main(int argc, char **argv)
 
 	StelMainView mainWin(confSettings);
 	mainWin.show();
-	splash.finish(&mainWin);
+	SplashScreen::finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 

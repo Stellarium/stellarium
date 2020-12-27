@@ -60,7 +60,7 @@ these declinations are still important in everyday astronomy.
 
 \begin{itemize}
 \item Declinations of equinoxes (i.e., the equator, $\delta=0$) and the solstices ($\delta=\pm\varepsilon$)
-\item Declinations of the crossquarter days (days between solstices and equinoxes, $\delta=\pm\varepsilon/\sqrt2$)
+\item Declinations of the crossquarter days (days between solstices and equinoxes, $\delta(\lambda=\pm 45^\circ)$)
 \item Declinations of the Major Lunar Standstills ($\delta=\pm(\varepsilon+i)$)
 \item Declinations of the Minor Lunar Standstills ($\delta=\pm(\varepsilon-i)$)
 \item Declination of the Zenith passage ($\delta=\varphi$)
@@ -141,11 +141,13 @@ based on spherical trigonometry on a spherical
 Earth~\citep{Abdali:1997} as
 \begin{equation}
   \label{eq:qibla}
-  q=\arctan \frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - sin \varphi_O \cos(\lambda_{T} - \lambda_O) }
+  q=\arctan \frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - \sin\varphi_O \cos(\lambda_{T} - \lambda_O) }
 \end{equation}
 
-In addition, up to two vertical lines with arbitrary azimuth and
-custom label can be shown.
+\noindent In addition, up to two vertical lines with arbitrary azimuth and
+custom label can be shown. Note that these azimuths are always counted
+from north, regardless of the azimuth setting described in section
+\ref{sec:gui:configuration:tools}.
 
 
 \subsection{Arbitrary Declination Lines}
@@ -171,12 +173,13 @@ editing line colors, please leave fullscreen mode!}
 \subsection*{Section \big[ArchaeoLines\big] in config.ini file}
 
 Apart from changing settings using the plugin configuration dialog,
-you can also edit \file{config.ini} file by yourself for changes of the
+you can also edit the \file{config.ini} file to change
 settings for the ArchaeoLines plugin -- just make it carefully!
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
-enable\_at\_startup            &bool        & false           \\\midrule
+enable\_at\_startup            &bool        & false           \\
+line\_thickness                &int         & 1               \\\midrule
 color\_equinox                 &float R,G,B & \ccbox{1.00,1.00,0.50}  \\
 color\_solstices               &float R,G,B & \ccbox{1.00,1.00,0.25}  \\
 color\_crossquarters           &float R,G,B & \ccbox{1.00,0.75,0.25}  \\
@@ -231,6 +234,9 @@ custom\_declination\_2\_angle  &double      & 0.0      \\
 custom\_declination\_2\_label  &string      & custDec2 \\\bottomrule
 \end{longtable}
 
+\subsection{Acknowledgements}
+
+If you are using this plugin in scientific publications, please cite \citet{Zotti:SEAC2015}.
 
 
 %%% Local Variables: 

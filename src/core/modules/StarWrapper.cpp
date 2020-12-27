@@ -33,7 +33,7 @@
 
 template<typename T> inline bool isNan(T value)
 {
-	return value != value;
+	return value != value; // lgtm [cpp/comparison-of-identical-expressions]
 }
 
 template<typename T> inline bool isInf(T value)
@@ -73,13 +73,27 @@ QString StarWrapper1::getEnglishName(void) const
 	return StarWrapperBase::getEnglishName();
 }
 
+QString StarWrapper1::getID(void) const
+{
+	QString hip;
+	if (s->getHip())
+	{
+		if (s->hasComponentID())
+			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+		else
+			hip = QString("HIP %1").arg(s->getHip());
+	}
+
+	return hip;
+}
+
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
+	Q_UNUSED(az_app)
 
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
@@ -93,6 +107,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
+	const float plxErr = StarMgr::getPlxError(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -102,6 +117,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
+		const QString dblSciName = StarMgr::getSciAdditionalDblName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
 		QStringList designations;
@@ -109,7 +125,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			designations.append(sciName);
 		if (!addSciName.isEmpty())
 			designations.append(addSciName);
-		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
+		if (!dblSciName.isEmpty())
+			designations.append(dblSciName);
+		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=dblSciName && varSciName!=sciName)
 			designations.append(varSciName);
 
 		QString hip, hipq;
@@ -153,6 +171,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
+	if (flags&Name)
+	{
+		QStringList extraNames=getExtraInfoStrings(Name);
+		if (extraNames.length()>0)
+			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
+	}
+	if (flags&CatalogNumber)
+	{
+		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+		if (extraCat.length()>0)
+			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
+	}
 
 	bool ebsFlag = false;
 	if (flags&ObjectType)
@@ -161,20 +191,23 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		QString startype = "";
 		if(!varType.isEmpty())
 		{
-			if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+			// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+			if (QString("BE FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
 				varstartype = q_("eruptive variable star");
-			else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+			else if (QString("ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC LPB M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB ZZO").contains(varType))
 				varstartype = q_("pulsating variable star");
 			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
 				varstartype = q_("rotating variable star");
 			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
 				varstartype = q_("cataclysmic variable star");
-			else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+			else if (QString("E EA EB EP EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
 			{
 				varstartype = q_("eclipsing binary system");
 				ebsFlag = true;
 			}
 			else
+			// XXX intense variable X-ray sources "AM, X, XB, XF, XI, XJ, XND, XNG, XP, XPR, XPRM, XM)"
+			// XXX other symbols "BLLAC, CST, GAL, L:, QSO, S,"
 				varstartype = q_("variable star");
 		}
 
@@ -192,13 +225,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		}
 		else
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), startype) << "<br />";
-
+		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
 	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
+	if (flags&AbsoluteMagnitude)
+		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
 	if (flags&Extra)
 	{
@@ -208,7 +243,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			float minimumM1 = minVMag;
 			float minimumM2 = min2VMag;
-			if (magFlag==1) // Amplitude
+			if (magFlag==1.f) // Amplitude
 			{
 				minimumM1 += maxVMag;
 				minimumM2 += maxVMag;
@@ -221,27 +256,56 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 					minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2));
 
 				oss << QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys) << "<br />";
-
 			}
 		}
 	}
 
 	oss << getCommonInfoString(core, flags);
 
-	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if (flags&Distance)
 	{
-		//TRANSLATORS: Unit of measure for distance - Light Years
-		QString ly = qc_("ly", "distance");
-		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
+		if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("ly", "distance");
+			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
+			double d = ((0.00001/3600.)*(M_PI/180));
+			double distance = k/(s->getPlx()*d);
+			if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
+			else
+				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+		}
+		oss << getExtraInfoStrings(Distance).join("");
+	}
+
+	if (flags&ProperMotion)
+	{
+		float dx = 0.1f*s->getDx0();
+		float dy = 0.1f*s->getDx1();
+		float pa = std::atan2(dx, dy)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
+		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
+		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	if (flags&Extra)
 	{
+		if (s->getPlx())
+		{
+			QString plx = q_("Parallax");
+			if (plxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(plxErr, 'f', 3));
+			else
+				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
+		}
+
 		if (s->getSpInt())
 			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
-
-		if (s->getPlx())
-			oss << QString("%1: %2\"").arg(q_("Parallax"), QString::number(0.00001*s->getPlx(), 'f', 5)) << "<br />";
 
 		if (vPeriod>0)
 			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
@@ -265,7 +329,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			if (ebsFlag)
 				mmStr = q_("Duration of eclipse");
 
-			oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
+			float daysFraction = vPeriod * vMm / 100.f;
+			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
+			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 		}
 
 		if (wdsObs>0)
@@ -279,16 +345,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
 			}
 		}
-
-		float dx = 0.1*s->getDx0();
-		float dy = 0.1*s->getDx1();
-		float pa = 90.f - std::atan2(dy, dx)*180.f/M_PI;
-		if (pa<0)
-			pa += 360.f;
-
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
-		oss << QString("%1: %2%3").arg(q_("Position angle of the proper motion")).arg(QString::number(pa,'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 (%3)").arg(q_("Angular speed of the proper motion")).arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	StelObject::postProcessInfoString(str, flags);
@@ -337,7 +393,7 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		map.insert("parallax", 0.00001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())));
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(1.f+std::log10(0.00001f*s->getPlx())));
 		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
 	}
 
@@ -357,18 +413,17 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,
-									const SpecialZoneData<Star1> *z) const {
-  return StelObjectP(new StarWrapper1(a,z,this), true);
+StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const
+{
+	return StelObjectP(new StarWrapper1(a,z,this), true);
 }
 
-StelObjectP Star2::createStelObject(const SpecialZoneArray<Star2> *a,
-									const SpecialZoneData<Star2> *z) const {
-  return StelObjectP(new StarWrapper2(a,z,this), true);
+StelObjectP Star2::createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const
+{
+	return StelObjectP(new StarWrapper2(a,z,this), true);
 }
 
-StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a,
-									const SpecialZoneData<Star3> *z) const {
-  return StelObjectP(new StarWrapper3(a,z,this), true);
+StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const
+{
+	return StelObjectP(new StarWrapper3(a,z,this), true);
 }
-

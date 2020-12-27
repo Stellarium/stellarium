@@ -44,6 +44,7 @@ Describe or maybe attach a screenshot?
 * Stellarium version: <Name of downloaded installable file?>
 * Operating system: <Name, version number>
 * Graphics Card: <Manufacturer (likely Intel, NVidia, AMD?), Model (HD, Geforce, Radeon..., with model number), driver version?>
+* Screen type (if applicable): Resolution, HighDPI, scaling
 
 ### Logfile 
 If possible, attach the logfile `log.txt` from your user data directory. Look into the Guide for its location.

@@ -40,7 +40,7 @@ public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
-	virtual void computePosition(const double dateJDE);
+	virtual void computePosition(const double dateJDE) Q_DECL_OVERRIDE;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -50,7 +50,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, true, "artificial"),
+		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, false, "artificial"),
 		dest(Q_NULLPTR), orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
@@ -79,7 +79,7 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 	const RotationElements &r(dest->getRotationElements());
 	lastJDE = StelApp::getInstance().getCore()->getJDE();
 
-	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJDE-re.epoch)/re.period - (lastJDE-r.epoch)/r.period), 360.0);
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0f*( static_cast<float>(lastJDE-re.epoch)/re.period - static_cast<float>(lastJDE-r.epoch)/r.period), 360.0f);
 
 	re.epoch = r.epoch;
 	re.period = r.period;
@@ -166,11 +166,8 @@ void ArtificialPlanet::computeAverage(double f1)
 	setRot(a1*f1 + a2*f2);
 
 	// rotation offset
-	re.offset = f1*re.offset + f2*dest->getRotationElements().offset;
+	re.offset = static_cast<float>(f1*static_cast<double>(re.offset) + f2*static_cast<double>(dest->getRotationElements().offset));
 }
-
-
-
 
 StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
@@ -202,73 +199,51 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 // Since V0.14, we follow Meeus, Astr. Alg. 2nd ed, Ch.11., but used offset rho in a wrong way. (offset angle phi in distance rho.)
 double StelObserver::getDistanceFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
-		return currentLocation.altitude/(1000*AU);
-
-	const double a=getHomePlanet()->getRadius();
-	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
-
-	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-		return a * bByA;
-
-	const double latRad=currentLocation.latitude*(M_PI/180.0);
-	const double u = atan( bByA * tan(latRad));
-	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	//Q_ASSERT(fabs(u)<= fabs(latRad));
-	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
-	const double altFix = currentLocation.altitude/(1000.0*AU*a);
-
-	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
-	//double rhoCosPhiPrime= bByA * cos(u) + altFix*cos(latRad); // WARNING! bByA is not in the book!!! THIS IS A TEST!
-	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
-
-	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
-	return rho*a;
+	Vec4d tmp=getTopographicOffsetFromCenter();
+	return tmp.v[3];
 }
 
 // Used to approximate solution with assuming a spherical planet.
 // Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
 // Since V0.16, we can produce the usual offset values plus geocentric latitude phi'.
-Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
+// Since V0.19.1 we give rho*a as fourth return value, simplifying the previous method.
+Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
-		return currentLocation.altitude/(1000*AU);
+	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver have this
+		return Vec4d(0.,0.,static_cast<double>(currentLocation.latitude)*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
 
-	const double a=getHomePlanet()->getRadius();
+	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
-	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-		return a * bByA;
+	// Details: https://github.com/Stellarium/stellarium/issues/391
+	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues?
+	//	return Vec4d(0.0,
+	//                   StelUtils::sign(currentLocation.latitude)*getHomePlanet()->getPolarRadius(),
+	//                   StelUtils::sign(currentLocation.latitude)*M_PI/2.0,
+	//                   getHomePlanet()->getPolarRadius()); // Do we need this?
 
-	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double latRad=static_cast<double>(currentLocation.latitude)*(M_PI_180);
 	const double u = atan( bByA * tan(latRad));
-	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	//Q_ASSERT(fabs(u)<= fabs(latRad));
-	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
+	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
 	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
 
 	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
-	//return rho*a;
 	double phiPrime=asin(rhoSinPhiPrime/rho);
-	return Vec3d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime);
+	return Vec4d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
 Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 {
-	double lat = currentLocation.latitude;
+	double lat = qBound(-90.0, static_cast<double>(currentLocation.latitude), 90.0);
 	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests to track down problems in other locations.
-	Q_ASSERT(lat <=  90.0);
-	Q_ASSERT(lat >= -90.0);
-	if( lat > 90.0 )  lat = 90.0;
-	if( lat < -90.0 ) lat = -90.0;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+currentLocation.longitude)*M_PI/180.)
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+static_cast<double>(currentLocation.longitude))*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
@@ -317,6 +292,7 @@ bool SpaceShipObserver::update(double deltaTime)
 {
 	if (timeToGo <= 0.) return false; // Already over.
 	timeToGo -= deltaTime;
+	SolarSystem* ss = GETSTELMODULE(SolarSystem);
 
 	// If move is over
 	if (timeToGo <= 0.)
@@ -324,7 +300,6 @@ bool SpaceShipObserver::update(double deltaTime)
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
 		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-		SolarSystem* ss = GETSTELMODULE(SolarSystem);
 
 		// we have to avoid auto-select landscape in case the selected new landscape is on our target planet (true if landscape sets location). (LP:#1700199)
 		if ( (lmgr->getFlagLandscapeAutoSelection()) && !(lmgr->getFlagLandscapeSetsLocation()) )
@@ -342,22 +317,19 @@ bool SpaceShipObserver::update(double deltaTime)
 	}
 	else
 	{
+		currentLocation.name = ss->searchByEnglishName(moveStartLocation.planetName)->getNameI18n() + " -> " +
+						      ss->searchByEnglishName(moveTargetLocation.planetName)->getNameI18n();
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
 			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));			
-			currentLocation.planetName = "SpaceShip";
-			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-			currentLocation.name = trans.qtranslate(moveStartLocation.planetName) + " -> " + trans.qtranslate(moveTargetLocation.planetName);
+			currentLocation.planetName = "SpaceShip";			
 		}
 		else
-		{
-			currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
 			currentLocation.planetName = moveTargetLocation.planetName;
-		}
 
 		// Move the lon/lat/alt on the planet
-		const double moveToMult = 1.-(timeToGo/transitSeconds);
+		const float moveToMult = 1.f-static_cast<float>(timeToGo/transitSeconds);
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		

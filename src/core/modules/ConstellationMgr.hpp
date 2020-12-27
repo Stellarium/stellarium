@@ -95,7 +95,10 @@ class ConstellationMgr : public StelObjectModule
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
-
+	Q_PROPERTY(int constellationBoundariesThickness
+		   READ getConstellationBoundariesThickness
+		   WRITE setConstellationBoundariesThickness
+		   NOTIFY constellationBoundariesThicknessChanged)
 	Q_ENUMS(ConstellationDisplayStyle)
 
 public:
@@ -123,14 +126,14 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching constellation object's pointer if exists or Q_NULLPTR
-	//! @param nameI18n The case in-sensistive constellation name
+	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
+	//! @param nameI18n The case in-sensitive constellation name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching constellation if exists or Q_NULLPTR
+	//! @return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -150,10 +153,10 @@ public:
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{
-		constellationsAbbreviated = 0,
-		constellationsNative      = 1,
-		constellationsTranslated  = 2,
-		constellationsEnglish     = 3 // Maybe this is not useful?
+		constellationsAbbreviated	= 0,
+		constellationsNative		= 1,
+		constellationsTranslated	= 2,
+		constellationsEnglish		= 3 // Maybe this is not useful?
 	};	
 
 	///////////////////////////////////////////////////////////////////////////
@@ -269,11 +272,20 @@ public slots:
 	//! Get the thickness of lines of the constellations
 	int getConstellationLineThickness() const { return constellationLineThickness; }
 
+	//! Set the thickness of boundaries of the constellations
+	//! @param thickness of line in pixels
+	void setConstellationBoundariesThickness(const int thickness);
+	//! Get the thickness of boundaries of the constellations
+	int getConstellationBoundariesThickness() const { return constellationBoundariesThickness; }
+
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
 
 	//! Select all constellations
 	void selectAllConstellations(void);
+
+	//! Get the list of English names of all constellations for loaded sky culture
+	QStringList getConstellationsEnglishNames();
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
@@ -289,6 +301,7 @@ signals:
 	void namesDisplayedChanged(const bool displayed) const;
 	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
 	void constellationLineThicknessChanged(int thickness) const;
+	void constellationBoundariesThicknessChanged(int thickness) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -306,6 +319,11 @@ private slots:
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	void updateI18n();
+
+	void reloadSkyCulture(void);
+
+	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
+	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
 
 private:
 	//! Read constellation names from the given file.
@@ -380,6 +398,8 @@ private:
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 
+	QStringList constellationsEnglishNames;
+
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
 	ConstellationDisplayStyle constellationDisplayStyle;
 
@@ -392,9 +412,13 @@ private:
 	bool boundariesDisplayed;
 	bool linesDisplayed;
 	bool namesDisplayed;
+	bool checkLoadingData;
 
 	// Store the thickness of lines of the constellations
 	int constellationLineThickness;
+
+	// Store the thickness of boundaries of the constellations
+	int constellationBoundariesThickness;
 };
 
 #endif // CONSTELLATIONMGR_HPP

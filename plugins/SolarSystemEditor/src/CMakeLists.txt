@@ -7,7 +7,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/SolarSystemEditor/src/gui
 )
 
-LINK_DIRECTORIES(/src)
+LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(SolarSystemEditor_SRCS
      SolarSystemEditor.hpp

@@ -2,7 +2,7 @@
 ########### install files ###############
 
 # install models and descriptions
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/scenery3d/Sterngarten 
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/scenery3d/Sterngarten
 		  FILES_MATCHING
 		  PATTERN "*.ini"
 		  PATTERN "*.mtl"

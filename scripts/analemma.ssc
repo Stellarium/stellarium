@@ -1,0 +1,67 @@
+//
+// Author: Alexander Wolf
+// Version: 2.1
+// License: Public Domain
+// Name: Analemma
+// Description: A demonstration of the analemma - the path of the Sun across the sky during the year on Earth.
+//
+
+include("i18n.inc");
+
+core.goHome();
+var JD = core.getJDay();
+var color = "#aa0000";
+core.setGuiVisible(false);
+core.setTimeRate(1);
+label = LabelMgr.labelScreen(tr("Analemma"), 20, 20, false, 30, color);
+LabelMgr.setLabelShow(label, true);
+core.wait(1);
+core.clear("natural");
+core.setObserverLocation(0, 40, 1, 1, "", "Earth");
+core.setDate("2019-12-22T12:00:00", "UTC");
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(false);
+StelMovementMgr.autoZoomIn(3);
+core.wait(5);
+StelMovementMgr.zoomTo(80, 1);
+core.wait(2);
+GridLinesMgr.setFlagAzimuthalGrid(true);
+GridLinesMgr.setFlagMeridianLine(true);
+StelMovementMgr.zoomTo(100, 3);
+core.wait(5);
+
+for (i=0; i<53; i++)
+{
+    var week = i + 1;
+    core.setDate("+1 week");
+    var info = core.getObjectInfo("Sun");
+    var az = info.azimuth;
+    var alt = info.altitude;
+    MarkerMgr.markerHorizon(az, alt, true, "gear", color, 5);    
+    labelWeek = LabelMgr.labelScreen(tr("Week") + " " + week, 20, 60, false, 20, color);
+    LabelMgr.setLabelShow(labelWeek, true);
+    core.wait(.25);    
+    LabelMgr.setLabelShow(labelWeek, false);
+    if (week==1)
+    {
+        labelWinter = LabelMgr.labelHorizon(tr("Near winter solstice"), 180, 25, true, 14, color);        
+    }
+    if (week==26)
+    {
+        labelSummer = LabelMgr.labelHorizon(tr("Near summer solstice"), 180, 74, true, 14, color);        
+    }
+}
+
+labelFinal = LabelMgr.labelScreen(tr("Yearly path of the Sun"), 20, 60, false, 20, color);
+LabelMgr.setLabelShow(labelFinal, true);
+SolarSystem.setFlagPlanets(false);
+core.wait(5);
+SolarSystem.setFlagPlanets(true);
+LabelMgr.setLabelShow(labelFinal, false);
+core.clear("natural");
+LabelMgr.deleteAllLabels();
+MarkerMgr.deleteAllMarkers();
+core.setJDay(JD);
+core.goHome();
+core.setGuiVisible(true);
+

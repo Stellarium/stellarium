@@ -410,7 +410,7 @@ int tty_write(int fd, const char *buf, int nbytes, int *nbytes_written)
 int tty_write_string(int fd, const char *buf, int *nbytes_written)
 {
     unsigned int nbytes;
-    nbytes = strlen(buf);
+    nbytes = (unsigned int)strlen(buf);
 
     return tty_write(fd, buf, nbytes, nbytes_written);
 }

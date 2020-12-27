@@ -104,10 +104,7 @@ public:
 	//! Get the english name of pulsar
 	virtual QString getEnglishName(void) const;
 	//! Get the designation of pulsar
-	QString getDesignation(void) const
-	{
-		return designation;
-	}
+	QString getDesignation(void) const { return designation; }
 
 	void update(double deltaTime);
 
@@ -130,8 +127,8 @@ private:
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
 	QString pulsarName;	//! The proper name of the pulsar
-	float RA;		//! J2000 right ascension
-	float DE;		//! J2000 declination
+	double RA;		//! J2000 right ascension
+	double DE;		//! J2000 declination
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)
@@ -163,7 +160,6 @@ private:
 	//! Get type of pulsar
 	//! @param pcode - code of pulsar type
 	QString getPulsarTypeInfoString(QString pcode) const;
-
 };
 
 #endif // PULSAR_HPP

@@ -1,0 +1,61 @@
+//
+// Author: Alexander Wolf
+// Version: 1.1
+// License: Public Domain
+// Name: Martian analemma
+// Description: A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.
+//
+
+include("i18n.inc");
+
+core.goHome();
+var JD = core.getJDay();
+var landscapeID = LandscapeMgr.getCurrentLandscapeID();
+var color = "#aa0000";
+core.setGuiVisible(false);
+label = LabelMgr.labelScreen(tr("Martian analemma"), 20, 20, false, 30, color);
+LabelMgr.setLabelShow(label, true);
+core.wait(1);
+core.setTimeRate(1);
+core.clear("natural");
+core.setObserverLocation(0, 40, 1, 1, "", "Mars");
+core.setDate("2019-12-01T23:55:00", "UTC");
+LandscapeMgr.setCurrentLandscapeID("mars");
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(false);
+StelMovementMgr.autoZoomIn(3);
+core.wait(5);
+StelMovementMgr.zoomTo(80, 1);
+core.wait(2);
+GridLinesMgr.setFlagAzimuthalGrid(true);
+GridLinesMgr.setFlagMeridianLine(true);
+StelMovementMgr.zoomTo(100, 3);
+core.wait(5);
+
+for (i=0; i<69; i++)
+{
+    core.setDate("+10 sols");
+    var info = core.getObjectInfo("Sun");
+    var az = info.azimuth;
+    var alt = info.altitude;
+    MarkerMgr.markerHorizon(az, alt, true, "gear", color, 5);    
+    labelSol = LabelMgr.labelScreen(tr("Sol") + " " + i*10, 20, 60, false, 20, color);
+    LabelMgr.setLabelShow(labelSol, true);
+    core.wait(.25);
+    LabelMgr.setLabelShow(labelSol, false);
+}
+
+labelFinal = LabelMgr.labelScreen(tr("Yearly path of the Sun"), 20, 60, false, 20, color);
+LabelMgr.setLabelShow(labelFinal, true);
+SolarSystem.setFlagPlanets(false);
+core.wait(8);
+SolarSystem.setFlagPlanets(true);
+LabelMgr.setLabelShow(labelFinal, false);
+core.clear("natural");
+LabelMgr.deleteAllLabels();
+MarkerMgr.deleteAllMarkers();
+LandscapeMgr.setCurrentLandscapeID(landscapeID);
+core.setJDay(JD);
+core.goHome();
+core.setGuiVisible(true);
+

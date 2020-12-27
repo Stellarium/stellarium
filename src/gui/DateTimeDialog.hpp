@@ -32,23 +32,19 @@ class DateTimeDialog : public StelDialog
 	Q_OBJECT
 public:
 	DateTimeDialog(QObject* parent);
-	~DateTimeDialog();
+	~DateTimeDialog() Q_DECL_OVERRIDE;
 	double newJd();
 	bool valid(int y, int m, int d, int h, int min, int s);
 	bool validJd(double jday);	
-	//! Notify that the application style changed
-	void styleChanged();
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void close() Q_DECL_OVERRIDE;
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 
-	void close();
-
-
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	void connectSpinnerEvents() const;
 	void disconnectSpinnerEvents()const;
 
@@ -71,6 +67,7 @@ private slots:
 	void mjdChanged(double nmjd);
 	//! handle timer-triggered update
 	void onTimerTimeout(void);
+	void setFlagEnableFocus(bool b);
 
 private:
 	StelCore* core;
@@ -85,7 +82,13 @@ private:
 	double jd;
 	void pushToWidgets();
 	void setMjd(double mjd) { jd = 2400000.5 + mjd; }
-	double getMjd() { return jd - 2400000.5 ; }
+	double getMjd() const { return jd - 2400000.5 ; }
+
+	int oldyear;
+	int oldmonth;
+	int oldday;
+
+	bool enableFocus;
 };
 
 #endif // DATETIMEDIALOG_HPP

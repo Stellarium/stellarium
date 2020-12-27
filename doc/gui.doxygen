@@ -1,0 +1,104 @@
+/*
+ * Stellarium
+ * Copyright (C) 2020 Martin Bernardi
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+@page gui GUI
+
+@tableofcontents
+
+@section introduction Introduction
+
+The GUI is based on Qt Widgets.
+
+Relevant files:
+
+- Icons: <tt>data/gui/*.png</tt>
+- List of icons: <tt>data/gui/guiRes.qrc</tt>
+- Interface CSS: <tt>data/gui/normalStyle.css</tt>
+- SVG file with vector icons: <tt>data/gui/icons.svg</tt>
+- Qt UI files: <tt>src/gui/*.ui</tt>
+- SVG files with vector icons for plugins: <tt>plugins/.../icons.svg</tt>
+- Qt UI files for plugins: <tt>plugins/.../*.ui</tt>
+
+The structure of widgets inside every window should be defined in @c *.ui files.
+But the style should be defined in @c normalStyle.css. The icon used for each
+icon is usually defined in @c *.ui files too.
+
+When making mistakes in the stylesheet (/data/normalStyle.css), errors may be
+silent. Enable debug logging by adding a `~/.config/QtProject/qtlogging.ini`:
+
+@code
+[Rules]
+*.debug=true
+qt.*.debug=false
+@endcode
+
+@section svg SVG vector icon designs
+
+Every icon was drawn with Inkscape in SVG, and then exported to PNG.
+
+There is a lot of documentation inside the <tt>data/gui/icons.svg</tt> SVG file
+itself, in the @c documentation layer.
+
+Notes:
+
+- When designing small icons it is very important to align the elements to a
+  1px by 1px grid. Otherwise exported icons will look a little blurry because of
+  antialiasing. This is not an Inkscape limitation, icons should be
+  pixel-perfect.
+
+- For blurs and shadows we use the *Filters -> Shadows and Glows -> Drop shadow*
+  tool. Blurs in Inkscape are quite strange, each blur element has a bounding
+  box. It is important to make the bounding box big enough so a cut is not
+  visible. Also important to make the bounding box small enough so the blur does
+  not extend outside the icon (icons are located one next to the other, blur can
+  get into other icons!). To adjust the bounding box use *Filters -> Filter
+  Editor -> Filter General Settings*.
+
+- Blurs in Inkscape have some kind of bug. Let's say that we want a blur with
+  amount equal to 0.5 units, the result is different depending on the kind of
+  object, each one of these will look different:
+
+  - Objects like rectangles
+
+  - Paths (even if the path has a rectangular shape)
+
+  - Groups of objects (even if you just did a group of a single element)
+
+  This is the reason why you should *always create a group before applying a
+  blur*, even if you have only one element. This way, a blur of 0.5 units will
+  have a consistent look across icons.
+
+@section filenames Icon filenames:
+
+Every kind of icon has a different prefix on the filename. E.g.
+@c bbtHelp-off.png and @c bbtSearch-on.png
+
+- bbt: Left bar buttons, also named actions. Each one has an on and off state.
+- bt: Bottom bar buttons. Each one has an on and off state.
+- btbg: Backgrounds of bottom bar buttons.
+- tab: Buttons on window tabs. A version for the selected and the unselected
+  tabs.
+- uibt: Images for classic UI buttons. Each one has a normal and a disabled
+  state used when the button is greyed out.
+- uie: UI elements, things that go inside of UI windows like checkboxes.
+- misc: Some more misc images.
+
+*/

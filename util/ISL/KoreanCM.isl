@@ -7,32 +7,30 @@
 ; Translated SangJun Park (psj8252@naver.com)
 
 [LangOptions]
-LanguageName=ÇÑ±¹¾î
+LanguageName=í•œêµ­ì–´
 LanguageID=$0412
 LanguageCodePage=949
 
 [CustomMessages]
-ForAllUsers=¸ğµç »ç¿ëÀÚ¿¡°Ô Ãß°¡
-ForCurrentUserOnly=ÇöÀç »ç¿ëÀÚ¸¸ Ãß°¡
-RemoveFromPreviousInstallation=ÀÌÀü¿¡ ¼³Ä¡µÈ ÆÄÀÏµéÀ» Á¦°ÅÇÕ´Ï´Ù:
-RemoveMainConfig=¸ŞÀÎ ¼³Á¤ ÆÄÀÏÀ» Á¦°ÅÇÕ´Ï´Ù
-RemovePluginsConfig=ÇÃ·¯±×ÀÎ ¼³Á¤ ÆÄÀÏÀ» Á¦°ÅÇÕ´Ï´Ù
-RemoveSolarConfig=ÅÂ¾ç°è ½Ã½ºÅÛ ÆÄÀÏ Á¦°ÅÇÕ´Ï´Ù
-RemoveUILandscapes=ÁÖÀÇ! »ç¿ëÀÚ°¡ ¼³Ä¡ÇÑ Ç³°æµéÀ» Á¦°ÅÇÕ´Ï´Ù
-RemoveShortcutsConfig=¹Ù·Î°¡±â ±¸¼º ÆÄÀÏ Á¦°ÅÇÕ´Ï´Ù
-RemoveCache=Ä³½Ã ÆÄÀÏÀ» Á¦°ÅÇÕ´Ï´Ù
-UserGuide=Stellarium ÀÌ¿ë °¡ÀÌµå
-DevelopersDocsOnTheWeb=½ºÅÚ¶ó¸®¿ò °³¹ßÀÚ ¹®¼­ (À¥)
-LastRunLog=¸¶Áö¸· ½ÇÇà ·Î±×
-OutputDataFile=Ãâ·Â Á¤º¸
-ChangeLog=º¯°æ ·Î±×
-FallbackMode=(fallback mode)
-AngleMode=(ANGLE mode)
-AngleD3D9Mode=(ANGLE Direct3D 9 mode)
-AngleD3D11Mode=(ANGLE Direct3D 11 mode)
-AngleWarpMode=(ANGLE WARP mode)
-MesaMode=(MESA mode)
-DebugMode=(with OpenGL diagnostics)
-SpoutMode=(with Spout sender)
-RedistRun=Microsoft's C/C++ runtimeÀ» ¼³Ä¡ÇÏ´Â Áß...
-DeleteUserData=ÁÖÀÇ: »ç¿ëÀÚ Á¤º¸¸¦ »èÁ¦ÇÏ½Ã°Ú½À´Ï±î? (Stellarium ¼³Á¤, Ç³°æ, 3D¹è°æ µî) »ç¿ëÀÚ Á¤º¸¸¦ À¯ÁöÇÏ·Á¸é ¾Æ´Ï¿À¸¦ ´©¸£¼¼¿ä
+ForAllUsers=ëª¨ë“  ì‚¬ìš©ìì—ê²Œ ì¶”ê°€
+ForCurrentUserOnly=í˜„ì¬ ì‚¬ìš©ìë§Œ ì¶”ê°€
+RemoveFromPreviousInstallation=ì´ì „ì— ì„¤ì¹˜ëœ íŒŒì¼ ì œê±°:
+RemoveMainConfig=ë©”ì¸ ì„¤ì • íŒŒì¼ ì œê±°
+RemovePluginsConfig=í”ŒëŸ¬ê·¸ì¸ ì„¤ì • íŒŒì¼ ì œê±°
+RemoveSolarConfig=íƒœì–‘ê³„ ì‹œìŠ¤í…œ íŒŒì¼ ì œê±°
+RemoveCache=ìºì‹œ íŒŒì¼ ì œê±°
+UserGuide=Stellarium ì´ìš© ê°€ì´ë“œ
+DevelopersDocsOnTheWeb=ìŠ¤í…”ë¼ë¦¬ì›€ ê°œë°œì ë¬¸ì„œ (ì›¹)
+LastRunLog=ë§ˆì§€ë§‰ ì‹¤í–‰ ë¡œê·¸
+OutputDataFile=ì¶œë ¥ ì •ë³´
+ChangeLog=ë³€ê²½ ë¡œê·¸
+FallbackMode=(fallback ëª¨ë“œ)
+AngleMode=(ANGLE ëª¨ë“œ)
+AngleD3D9Mode=(ANGLE Direct3D 9 ëª¨ë“œ)
+AngleD3D11Mode=(ANGLE Direct3D 11 ëª¨ë“œ)
+AngleWarpMode=(ANGLE WARP ëª¨ë“œ)
+MesaMode=(MESA ëª¨ë“œ)
+DebugMode=(OpenGL ì§„ë‹¨ í¬í•¨)
+SpoutMode=(Spout sender í¬í•¨)
+RedistRun=Microsoft's C/C++ runtimeì„ ì„¤ì¹˜í•˜ëŠ” ì¤‘...
+DeleteUserData=ì£¼ì˜: ì‚¬ìš©ì ì •ë³´ë¥¼ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (ìŠ¤í…”ë¼ë¦¬ì›€ ì„¤ì •, í’ê²½, 3Dë°°ê²½ ë“±) ì‚¬ìš©ì ì •ë³´ë¥¼ ìœ ì§€í•˜ë ¤ë©´ ì•„ë‹ˆì˜¤ë¥¼ ëˆ„ë¥´ì„¸ìš”.

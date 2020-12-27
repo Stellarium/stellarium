@@ -1,7 +1,7 @@
 // Author: Qam1
 // Name: Earth and other planet's Greatest Elongations and Oppositions from Mars
 // License: Public Domain
-// Version: 10.0
+// Version: 10.1
 // Description: Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000
 
 // Made on Stellarium 0.16.1
@@ -23118,7 +23118,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 //core.wait(0.1);
 
-SunData = core.getObjectPosition("Sun");
+SunData = core.getObjectInfo("Sun");
 
 sunx = SunData["altitude"];
 

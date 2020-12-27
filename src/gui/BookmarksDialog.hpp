@@ -50,17 +50,14 @@ class BookmarksDialog : public StelDialog
 
 public:
 	BookmarksDialog(QObject* parent);
-	virtual ~BookmarksDialog();
-
-	//! Notify that the application style changed
-	void styleChanged();
+	virtual ~BookmarksDialog() Q_DECL_OVERRIDE;
 
 public slots:
-        void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_bookmarksDialogForm *ui;
 
 private slots:
@@ -79,20 +76,22 @@ private slots:
 
 private:
 	enum BookmarksColumns {
-		ColumnUUID,		//! UUID of bookmark
-		ColumnName,		//! name or designation of object
+		ColumnUUID,	//! UUID of bookmark
+		ColumnName,	//! name or designation of object
 		ColumnNameI18n,	//! Localized name of object
-		ColumnDate,		//! date and time (optional)
+		ColumnDate,	//! date and time (optional)
 		ColumnLocation,	//! location (optional)
-		ColumnCount		//! total number of columns
+		ColumnCount	//! total number of columns
 	};
 	QStandardItemModel * bookmarksListModel;
 
 	class StelCore* core;
 	class StelObjectMgr* objectMgr;
+	class LabelMgr* labelMgr;
 
 	QString bookmarksJsonPath;
 	QHash<QString, bookmark> bookmarksCollection;
+	QList<int> highlightLabelIDs;
 
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
@@ -100,7 +99,7 @@ private:
 	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
 	void loadBookmarks();
-	void saveBookmarks();
+	void saveBookmarks() const;
 	void goToBookmark(QString uuid);
 };
 

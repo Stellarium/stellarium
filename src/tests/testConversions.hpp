@@ -21,7 +21,7 @@
 #define TESTCONVERSIONS_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 class TestConversions : public QObject
 {
@@ -29,9 +29,40 @@ Q_OBJECT
 private slots:
 	void testHMSToRad();
 	void testDMSToRad();
+	void testDMSStrToRad();
 	void testRadToHMS();
-	void testRadToDMS();
+	void testRadToHMSStrAdapt();
+	void testRadToDMS();	
+	void testRadToDMSStrAdapt();
+	void testRadToDMSStr();
+	void testRadToDMSPStr();
 	void testDDToDMS();
+	void testDDToDMSStr();
+	void testRadToDD();
+	void testStringCoordinateToRad();
+	void testHMSToHours();
+	void testHMSStringToHours();
+	void testHoursToHMSStr();
+	void testHoursToHMSStrLowPrecision();
+	void testRadToHMSStr();
+	void testRadToDecDegStr();
+	void testVec3iToHtmlColor();
+	void testVec3fToHtmlColor();
+	void testVec3dToHtmlColor();
+	void testVec3iSetFromHtmlColor();
+	void testVec3fSetFromHtmlColor();
+	void testVec3dSetFromHtmlColor();
+	void testVec3iQColor();
+	void testVec3fQColor();
+	void testVec3dQColor();
+	void testStrToVec2f();
+	void testVec2fToStr();
+	void testStrToVec3f();
+	void testVec3fToStr();
+	void testStrToVec4d();
+	void testVec4dToStr();
+	void testQDateTimeToJD();
+	void testTrunc();
 };
 
 #endif // _TESTCONVERSIONS_HPP

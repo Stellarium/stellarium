@@ -34,8 +34,8 @@
 
 class DECLSPEC HttpResponse {
     Q_DISABLE_COPY(HttpResponse)
-public:
 
+public:
     /**
       Constructor.
       @param socket used to write the response
@@ -123,7 +123,6 @@ public:
     bool isConnected() const;
 
 private:
-
     /** Request headers */
     QMap<QByteArray,QByteArray> headers;
 
@@ -157,7 +156,6 @@ private:
       it automatically when required.
     */
     void writeHeaders();
-
 };
 
 #endif // HTTPRESPONSE_H

@@ -48,7 +48,6 @@
 #include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -87,7 +86,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.id = "TextUserInterface";
 	info.displayedName = N_("Text User Interface");
 	info.authors = "Matthew Gates";
-	info.contact = "http://porpoisehead.net/";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	info.version = TUI_PLUGIN_VERSION;
 	info.license = TUI_PLUGIN_LICENSE;
@@ -304,7 +303,7 @@ void TextUserInterface::init()
 					  constellationMgr,
 					  SLOT(setArtIntensity(float)),
 					  constellationMgr->getArtIntensity(),
-					  0.0, 1.0, 0.05,
+					  0.0, 1.0, 0.05f,
 					  m5, m5_2);
 	TuiNode* m5_4 = new TuiNodeColor(N_("Constellation boundaries"),
 	                                 constellationMgr,
@@ -379,44 +378,40 @@ void TextUserInterface::init()
 					  nebulaMgr, SLOT(setGalaxyColor(Vec3f)),
 					  nebulaMgr->getGalaxyColor(),
 					  m5, m5_17);
-	TuiNode* m5_19 = new TuiNodeColor(N_("Bright nebulae hints"),
-					  nebulaMgr, SLOT(setBrightNebulaColor(Vec3f)),
-					  nebulaMgr->getBrightNebulaColor(),
-					  m5, m5_18);
-	TuiNode* m5_20 = new TuiNodeColor(N_("Dark nebulae hints"),
+	TuiNode* m5_19 = new TuiNodeColor(N_("Dark nebulae hints"),
 					  nebulaMgr, SLOT(setDarkNebulaColor(Vec3f)),
 					  nebulaMgr->getDarkNebulaColor(),
-					  m5, m5_19);
-	TuiNode* m5_21 = new TuiNodeColor(N_("Clusters hints"),
+					  m5, m5_18);
+	TuiNode* m5_20 = new TuiNodeColor(N_("Clusters hints"),
 					  nebulaMgr, SLOT(setClusterColor(Vec3f)),
 					  nebulaMgr->getClusterColor(),
-					  m5, m5_20);
-	TuiNode* m5_22 = new TuiNodeColor(N_("Horizon line"),
+					  m5, m5_19);
+	TuiNode* m5_21 = new TuiNodeColor(N_("Horizon line"),
 					 gridLinesMgr,
 					 SLOT(setColorHorizonLine(Vec3f)),
 					 gridLinesMgr->getColorHorizonLine(),
-					 m5, m5_21);
-	TuiNode* m5_23 = new TuiNodeColor(N_("Galactic grid"),
+					 m5, m5_20);
+	TuiNode* m5_22 = new TuiNodeColor(N_("Galactic grid"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticGrid(Vec3f)),
 					 gridLinesMgr->getColorGalacticGrid(),
-					 m5, m5_22);
-	TuiNode* m5_24 = new TuiNodeColor(N_("Galactic equator line"),
+					 m5, m5_21);
+	TuiNode* m5_23 = new TuiNodeColor(N_("Galactic equator line"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticEquatorLine(Vec3f)),
 					 gridLinesMgr->getColorGalacticEquatorLine(),
-					 m5, m5_23);
-	TuiNode* m5_25 = new TuiNodeColor(N_("Opposition/conjunction longitude line"),
+					 m5, m5_22);
+	TuiNode* m5_24 = new TuiNodeColor(N_("Opposition/conjunction longitude line"),
 					 gridLinesMgr,
 					 SLOT(setColorLongitudeLine(Vec3f)),
 					 gridLinesMgr->getColorLongitudeLine(),
-					 m5, m5_24);
+					 m5, m5_23);
 	StelMainView *mainView=&StelMainView::getInstance();
-	TuiNode* m5_26 = new TuiNodeColor(N_("Sky Background (default: black)"),
+	TuiNode* m5_25 = new TuiNodeColor(N_("Sky Background (default: black)"),
 					 mainView,
 					 SLOT(setSkyBackgroundColor(Vec3f)),
 					 mainView->getSkyBackgroundColor(),
-					 m5, m5_25);
+					 m5, m5_24);
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
 	m5_3->setNextNode(m5_4);
@@ -440,9 +435,8 @@ void TextUserInterface::init()
 	m5_21->setNextNode(m5_22);
 	m5_22->setNextNode(m5_23);
 	m5_23->setNextNode(m5_24);
-	m5_24->setNextNode(m5_25);
-	m5_25->setNextNode(m5_26);
-	m5_26->setNextNode(m5_1);
+	m5_24->setNextNode(m5_25);	
+	m5_25->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 
@@ -475,7 +469,7 @@ void TextUserInterface::init()
 					 movementMgr,
 					 SLOT(setAutoMoveDuration(float)),
 					 movementMgr->getAutoMoveDuration(),
-					 0, 20.0, 0.1,
+					 0, 20.0, 0.1f,
 					 m6, m6_4);
 	TuiNode* m6_6 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
@@ -559,7 +553,7 @@ void TextUserInterface::loadConfiguration(void)
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
 	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
-	color = StelUtils::strToVec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 }
 
 /*************************************************************************
@@ -583,8 +577,8 @@ void TextUserInterface::draw(StelCore* core)
 		{
 			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
 			LeftStelBar* sideBar = gui->getWindowsButtonBar();
-			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
-			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+			x = (sideBar) ? qRound(sideBar->boundingRectNoHelpLabel().right()) : 50;
+			y = (bottomBar) ? qRound(bottomBar->boundingRect().height()) : 50;
 		}
 	}
 
@@ -593,10 +587,10 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		fovMaskDisk = true;
 		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
-		xVc = projParams.viewportCenter[0];
-		yVc = projParams.viewportCenter[1];
-		fovOffsetX = projParams.viewportFovDiameter*std::sin(20.f)/2;
-		fovOffsetY = projParams.viewportFovDiameter*std::cos(20.f)/2;
+		xVc = qRound(projParams.viewportCenter[0]);
+		yVc = qRound(projParams.viewportCenter[1]);
+		fovOffsetX = qRound(projParams.viewportFovDiameter*std::sin(20.))/2;
+		fovOffsetY = qRound(projParams.viewportFovDiameter*std::cos(20.))/2;
 	}
 	else 
 	{
@@ -737,7 +731,7 @@ void TextUserInterface::setLatitude(double latitude)
 	if (core->getCurrentLocation().latitude != latitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.latitude = latitude;
+		newLocation.latitude = static_cast<float>(latitude);
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
@@ -748,19 +742,19 @@ void TextUserInterface::setLongitude(double longitude)
 	if (core->getCurrentLocation().longitude != longitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.longitude = longitude;
+		newLocation.longitude = static_cast<float>(longitude);
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 double TextUserInterface::getLatitude(void)
 {
-	return StelApp::getInstance().getCore()->getCurrentLocation().latitude;
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 double TextUserInterface::getLongitude(void)
 {
-	return StelApp::getInstance().getCore()->getCurrentLocation().longitude;
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().longitude);
 }
 
 void TextUserInterface::setStartupDateMode(QString mode)

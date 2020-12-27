@@ -60,9 +60,13 @@ void SolarSystemManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->listWidgetObjects;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->listWidgetObjects;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
@@ -77,7 +81,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
 
 	connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
-	connect(ui->pushButtonReset, SIGNAL(clicked()), ssEditor, SLOT(resetSolarSystemToDefault()));
+	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSSOdefaults()));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
@@ -154,6 +158,17 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 	}
 }
 
+void SolarSystemManagerWindow::resetSSOdefaults()
+{
+	if (askConfirmation()) 
+	{
+		qDebug() << "permission to reset SSO to defaults...";
+		ssEditor->resetSolarSystemToDefault();
+	}
+	else
+		qDebug() << "SSO reset cancelled";
+}
+
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
 	unlocalizedNames.clear();
@@ -191,7 +206,9 @@ void SolarSystemManagerWindow::removeObjects()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the minor Solar System bodies as..."), QDir::homePath() + "/ssystem_minor.ini");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save the minor Solar System bodies as..."),
+							QDir::homePath() + "/ssystem_minor.ini");
 	ssEditor->copySolarSystemConfigurationFileTo(filePath);
 }
 
@@ -199,7 +216,7 @@ void SolarSystemManagerWindow::replaceConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
 	ssEditor->replaceSolarSystemConfigurationFileWith(filePath);
 }
 
@@ -207,7 +224,7 @@ void SolarSystemManagerWindow::addConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
 	ssEditor->addFromSolarSystemConfigurationFile(filePath);
 }
 

@@ -53,17 +53,80 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 		return;
 	}
 
-	INumberVectorProperty *property = nullptr;
+	// Make sure the TRACK member of switch ON_COORD_SET is set
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("ON_COORD_SET");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		return;
+	}
+	// Note that confusingly there is a SLEW switch member as well that will move but not track.
+	// TODO: Figure out if there is to be support for it
+	ISwitch *track = IUFindSwitch(switchVector, "TRACK");
+	if (track->s == ISS_OFF)
+	{
+		track->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+
+	INumberVectorProperty *property = Q_NULLPTR;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
 	{
-		qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
+		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
 		return;
 	}
 
 	property->np[0].value = coords.RA;
 	property->np[1].value = coords.DEC;
 	sendNewNumber(property);
+}
+
+void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope)
+		return;
+
+	if (!mTelescope->isConnected())
+	{
+		qDebug() << "Error: Telescope not connected";
+		return;
+	}
+
+	// Make sure the SYNC member of switch ON_COORD_SET is set
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("ON_COORD_SET");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		return;
+	}
+
+	ISwitch *track = IUFindSwitch(switchVector, "TRACK");
+	ISwitch *slew = IUFindSwitch(switchVector, "SLEW");
+	ISwitch *sync = IUFindSwitch(switchVector, "SYNC");
+	track->s = ISS_OFF;
+	slew->s = ISS_OFF;
+	sync->s = ISS_ON;
+	sendNewSwitch(switchVector);
+
+	INumberVectorProperty *property = Q_NULLPTR;
+	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+	if (!property)
+	{
+		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
+		return;
+	}
+
+	property->np[0].value = coords.RA;
+	property->np[1].value = coords.DEC;
+	sendNewNumber(property);
+
+	// And now unset SYNC switch member to revert to default state/behavior
+	track->s = ISS_ON;
+	slew->s = ISS_OFF;
+	sync->s = ISS_OFF;
+	sendNewSwitch(switchVector);
 }
 
 bool INDIConnection::isDeviceConnected() const
@@ -81,6 +144,67 @@ const QStringList INDIConnection::devices() const
 	return mDevices;
 }
 
+void INDIConnection::unParkTelescope()
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
+
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_PARK");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		return;
+	}
+
+	ISwitch *park = IUFindSwitch(switchVector, "PARK");
+	if (park->s == ISS_ON)
+	{
+		park->s = ISS_OFF;
+		sendNewSwitch(switchVector);
+	}
+
+	// The telescope will work without running command below, but I use it to avoid undefined state for parking property.
+	ISwitch *unpark = IUFindSwitch(switchVector, "UNPARK");
+	if (unpark->s == ISS_OFF)
+	{
+		unpark->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+}
+
+/*
+ * Unused at the moment
+ * TODO: Enable method after changes in the GUI
+void INDIConnection::parkTelescope()
+{
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
+
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_PARK");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		return;
+	}
+
+	ISwitch *park = IUFindSwitch(switchVector, "PARK");
+	if (park->s == ISS_OFF)
+	{
+		park->s = ISS_ON;
+		sendNewSwitch(switchVector);
+	}
+
+	ISwitch *unpark = IUFindSwitch(switchVector, "UNPARK");
+	if (unpark->s == ISS_ON)
+	{
+		unpark->s = ISS_OFF;
+		sendNewSwitch(switchVector);
+	}
+}
+*/
+
 void INDIConnection::moveNorth(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
@@ -90,7 +214,7 @@ void INDIConnection::moveNorth(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -116,7 +240,7 @@ void INDIConnection::moveEast(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -142,7 +266,7 @@ void INDIConnection::moveSouth(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -168,7 +292,7 @@ void INDIConnection::moveWest(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -225,7 +349,7 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 		mDevices.removeAt(index);
 
 	if (mTelescope == dp)
-		mTelescope = nullptr;
+		mTelescope = Q_NULLPTR;
 
 	emit removeDeviceReceived(name);
 }
@@ -256,10 +380,12 @@ void INDIConnection::newProperty(INDI::Property *property)
 
 void INDIConnection::removeProperty(INDI::Property *property)
 {
+	Q_UNUSED(property)
 }
 
 void INDIConnection::newBLOB(IBLOB *bp)
 {
+	Q_UNUSED(bp)
 }
 
 void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
@@ -287,14 +413,18 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
 
 void INDIConnection::newText(ITextVectorProperty *tvp)
 {
+	Q_UNUSED(tvp)
 }
 
 void INDIConnection::newLight(ILightVectorProperty *lvp)
 {
+	Q_UNUSED(lvp)
 }
 
 void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 {
+	Q_UNUSED(dp)
+	Q_UNUSED(messageID)
 }
 
 void INDIConnection::serverConnected()

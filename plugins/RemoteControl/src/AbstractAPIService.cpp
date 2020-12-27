@@ -22,7 +22,7 @@
 
 void AbstractAPIService::update(double deltaTime)
 {
-	Q_UNUSED(deltaTime);
+	Q_UNUSED(deltaTime)
 }
 
 bool AbstractAPIService::isThreadSafe() const
@@ -32,8 +32,8 @@ bool AbstractAPIService::isThreadSafe() const
 
 void AbstractAPIService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse& response)
 {
-	Q_UNUSED(operation);
-	Q_UNUSED(parameters);
+	Q_UNUSED(operation)
+	Q_UNUSED(parameters)
 
 	response.setStatus(405,"Method Not allowed");
 	QString str(QStringLiteral("Method GET not allowed for service %2"));
@@ -43,9 +43,9 @@ void AbstractAPIService::get(const QByteArray &operation, const APIParameters &p
 
 void AbstractAPIService::post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse& response)
 {
-	Q_UNUSED(operation);
-	Q_UNUSED(parameters);
-	Q_UNUSED(data);
+	Q_UNUSED(operation)
+	Q_UNUSED(parameters)
+	Q_UNUSED(data)
 
 	response.setStatus(405,"Method Not allowed");
 	QString str(QStringLiteral("Method POST not allowed for service %2"));

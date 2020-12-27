@@ -1,53 +1,86 @@
 version: '{branch}-{build}'
+# build Configuration
 configuration: Release
-clone_depth: 5
+# clone directory
 clone_folder: c:\stellarium
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true
+# environment variables
 environment:
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: x64
-    qtver: 5.9
-    qtbin: msvc2015_64
-    msvcname: Visual Studio 14 2015 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: Win32
-    qtver: 5.9
-    qtbin: msvc2015
-    msvcname: Visual Studio 14 2015
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: x64
-    qtver: 5.11
-    qtbin: msvc2015_64
-    msvcname: Visual Studio 14 2015 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    platform: Win32
-    qtver: 5.11
-    qtbin: msvc2015
-    msvcname: Visual Studio 14 2015
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     platform: x64
-    qtver: 5.9
+    qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
+    packaging: true
+    suffix: Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: Win32
+    qtver: 5.12
+    qtbin: msvc2017
+    msvcname: Visual Studio 15 2017
+    packaging: true
+    suffix: Win32
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+#    platform: x64
+#    qtver: 5.15
+#    qtbin: msvc2019_64
+#    msvcname: Visual Studio 16 2019
+#    packaging: false
+#    suffix: Win64
+#    cmake_args: -A x64
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+#    platform: Win32
+#    qtver: 5.15
+#    qtbin: msvc2019
+#    msvcname: Visual Studio 16 2019
+#    packaging: false
+#    suffix: Win32 
+#    cmake_args: -A Win32
+
 before_build:
-- cmd: >-
-    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
+  - set PUBLISH_BINARY=false
+  - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
+  - set OPENSSLPATH=C:\OpenSSL-%suffix%\bin;C:\OpenSSL-v111-%suffix%\bin
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%OPENSSLPATH%;%PATH%
+  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - mkdir stellarium-%qtver%-%qtbin%
+  - cd c:\stellarium
+  - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
+  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
-    cd c:\stellarium
-
-    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-
-    cmake -DENABLE_TESTING=1 -G "%msvcname%" ..
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
+  
 test_script:
-- cmd: ctest --output-on-failure
+  - ctest --output-on-failure
+
+after_test:
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
+  - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
+  - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%suffix%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
+  - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
+  - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
+  - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
+
+# deployment
+deploy:
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/a6a9173a-feb5-41ae-8973-8ca75af5e233/Integrations/AppVeyor?ProjectKey=stellarium&SigningPolicyKey=release-signing
+  authorization:
+    secure: k9Hka8MA6UONiSbKZeAv5koMEljPXgEZ7o1FbvEHRlPFFHMGzQcS6MQsvy53VxeTpG4Kw98FU0VXusbXoKLzug==
+  on:
+    branch: release
+    packaging: true
+
 notifications:
 - provider: Email
   to:
-  - mcardinot@gmail.com
   - alex.v.wolf@gmail.com
   on_build_success: false
   on_build_failure: true

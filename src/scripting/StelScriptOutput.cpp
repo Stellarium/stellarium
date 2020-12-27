@@ -48,6 +48,7 @@ void StelScriptOutput::writeLog(QString msg)
 
 void StelScriptOutput::reset(void)
 {
+	outputFile.resize(0);
 	outputFile.reset();
 	outputText.clear();
 }

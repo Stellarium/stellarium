@@ -21,7 +21,7 @@
 #define TESTSTELVERTEXARRAY_HPP
 
 #include <QObject>
-#include <QTest>
+#include <QtTest>
 
 #include "StelVertexArray.hpp"
 
@@ -34,7 +34,7 @@ private slots:
 	void benchmarkForeachTriangle();
 	void benchmarkForeachTriangleDirect();
 private:
-	StelVertexArray array;
+	StelVertexArray arrayTriangleStrip, arrayTriangleFan, arrayTriangles;
 };
 
 #endif // _TESTSTELVERTEXARRAY_HPP

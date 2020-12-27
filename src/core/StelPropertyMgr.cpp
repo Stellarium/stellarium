@@ -57,12 +57,10 @@ void StelProperty::propertyChanged()
 
 StelPropertyMgr::StelPropertyMgr()
 {
-
 }
 
 StelPropertyMgr::~StelPropertyMgr()
 {
-
 }
 
 StelProperty* StelPropertyMgr::registerProperty(const QString& id, QObject* target, const char* propertyName)
@@ -108,10 +106,10 @@ QList<StelProperty*> StelPropertyMgr::getAllProperties() const
 	return propMap.values();
 }
 
-StelProperty* StelPropertyMgr::getProperty(const QString &id) const
+StelProperty* StelPropertyMgr::getProperty(const QString &id, const bool noWarning) const
 {
 	StelProperty* prop = propMap.value(id);
-	if(!prop)
+	if((!prop) && (!noWarning))
 		qWarning()<<"StelProperty"<<id<<"not found";
 	return prop;
 }
@@ -160,9 +158,9 @@ void StelPropertyMgr::registerObject(QObject *obj)
 	}
 }
 
-QVariant StelPropertyMgr::getStelPropertyValue(const QString &id) const
+QVariant StelPropertyMgr::getStelPropertyValue(const QString &id, const bool noWarning) const
 {
-	StelProperty* prop = getProperty(id);
+	StelProperty* prop = getProperty(id, noWarning);
 	if(prop)
 	{
 		return prop->getValue();
@@ -201,7 +199,6 @@ StelPropertyProxy::StelPropertyProxy(StelProperty *prop, QObject *parent)
 StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
@@ -212,7 +209,6 @@ void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
 StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
@@ -223,10 +219,19 @@ void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
 StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyDoubleProxy::onPropertyChanged(const QVariant &value)
 {
 	emit propertyChanged(value.toDouble());
+}
+
+StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *prop, QObject *parent)
+	: StelPropertyProxy(prop,parent)
+{
+}
+
+void StelPropertyStringProxy::onPropertyChanged(const QVariant &value)
+{
+	emit propertyChanged(value.toString());
 }

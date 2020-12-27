@@ -1,3 +1,60 @@
+0.20.3 [2020-09-27]
+The major changes of this version:
+- Fixed nutation and, with it, season beginning times
+- Many changes in AstroCalc tool and core of Stellarium
+- Many changes in Oculars and Satellites plugins
+- Updated DSO catalog
+
+0.20.2 [2020-06-22]
+The major changes of this version:
+- Many changes in AstroCalc tool and core of Stellarium
+- Many changes in scripting engine and Script Console
+- Many changes in Oculars and Satellites plugins
+- Updated DSO catalog
+
+0.20.1 [2020-04-20]
+The major changes of this version:
+- Restore working Stellarium in ANGLE mode on Window
+- Many changes in scripting engline and Script Console
+- Fixes in GUI and plugins
+- Updated DSO catalog
+
+0.20.0 [2020-03-29]
+The major changes of this version:
+- Refactoring and updating the GUI
+- Deep refactoring code, related to Solar system
+- Many improvements in the code of plugins
+
+0.19.3 [2019-12-22]
+The major changes of this version:
+- Direct ASCOM support for Telescope Control plugin on Windows
+- Refactoring the GUI
+- Many improvements in the code
+- Added many DSO textures
+- Improvements in DSO catalog
+- Many improvements in AstroCalc tool
+
+0.19.2 [2019-09-29]
+The second bugfix release for series 0.19
+
+0.19.1 [2019-06-22]
+The first bugfix release for series 0.19
+
+0.19.0 [2019-03-24]
+The major changes of this version:
+- 5 new sky cultures
+- Refactoring the code: many improvements and fixes
+- Added many DSO textures
+- Many improvements for Scripting Engine
+
+0.18.3 [2018-12-22]
+The major changes of this version:
+- Improvements and fixes for AstroCalc tool
+- Added new sky cultures
+- Added many DSO textures
+- Refactoring the GUI
+- Many improvements in the code
+
 0.18.2 [2018-08-15]
 The major changes of this version:
 - Improvements and fixes for AstroCalc tool and plugins
@@ -751,7 +808,7 @@ Fixed some date display bugs in config window.
 Added new translations for th ml he fil tl eo lt mk
 Added new sky culture, Tupi-Guarani from Brazil (thanks to pmarcelopontes)
 
-0.9.0 [2007-06-6]
+0.9.0 [2007-06-06]
 Larger star catalog including stars from Hipparcos, Tycho2 and NOMAD
 Can select multiple constellations at one time
 Local script directory is reread when enter TUI
@@ -782,7 +839,7 @@ More nebula textures and better placement of most existing textures
 Build is now managed by cmake instead of autoconf/automake. These old tools are still supported for this version.
 
 
-0.8.2 [2006-10-5]
+0.8.2 [2006-10-05]
 Re-enabled some script recording features (select, pan/tilt, zoom)
 Fixed win95/98 missing .dll bug.
 Applied patch for sun C/C++ compiler to work.
@@ -919,7 +976,7 @@ Added deep space object image credits
 Added manual (really semi-auto) zoom option (centers for you when you start zooming, zooms in increments with key presses)
 Brightened star labels for readability
 
-0.6.0 [31-05-2004]
+0.6.0 [2004-05-31]
 Fixed atmosphere flash bug.
 Fixed disk viewport windows version bug.
 Improved portability for timezone management.

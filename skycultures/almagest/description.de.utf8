@@ -1,0 +1,520 @@
+<h1>Almagest </h1>
+<p>Diese antike griechische
+Himmelskultur basiert auf dem Almagest, eine Sammlung von
+Himmelsbeobachtungen von verschiedenen antiken Astronomen. Sie
+enth&auml;lt mathematische sowie astronomische Ergebnisse.
+Zusammengef&uuml;gt wurden diese im 2. Jahrhundert von Claudius
+Ptolem&auml;us, der &auml;ltere und eigene Beobachtungen in den
+Sternkatalog  einbrachte. Sein Werk hie&szlig; auf Griechisch &quot;Gro&szlig;e
+Zusammenschrift&quot; (<i>Mathematike Syntaxis</i>), ist aber
+heute unter dem arabisierten Namen Almagest bekannter, denn dieses
+Buch sollte f&uuml;r die n&auml;chsten ca. 1500 Jahre das Hauptwerk der
+Astronomie bilden. </p>
+<p >
+Der Almagest setzt sich aus 13 Teilen zusammen, die B&uuml;cher
+genannt werden. Im siebten und achten Buch wurden von Ptolem&auml;us insgesamt
+1022 Sterne, die zu 48 Sternbildern geh&ouml;ren, aufgelistet. In
+Form einer Tabelle sind jedem Stern eine Helligkeit, ekliptikale
+Koordinaten sowie Beschreibungen ihrer Lage im Sternbild zugeordnet.
+Als einer der ersten in seiner Zeit nutzte Ptolem&auml;us auch
+Magnituden (Gr&ouml;&szlig;enklassen), um die Helligkeit der Sterne nicht nur mit Worten, 
+sondern mit Zahlen zu beschreiben. M&ouml;glicherweise hat er dies von Hipparch &uuml;bernommen, aber
+das l&auml;sst sich nicht mit Sicherheit sagen, da dessen Sternkatalog nicht erhalten
+ist. Die Skala beginnt mit 1 f&uuml;r sehr helle Sterne  und geht weiter bis 6 f&uuml;r die schw&auml;chsten, gerade
+noch sichtbaren Sterne.
+ </p>
+ <p>
+  Dass der Almagest für die Berechnung von Planetenpositionen mit einem geozentrischen Weltbild arbeitet, ist hier unerheblich. 
+Erstens ist das erlaubt, weil man für Berechnungen sein Koordinatensystem frei w&auml;hlen darf und der Sternbeobachter stets auf 
+der Erde steht, so dass es sinnvoll ist, den Koordinatenursprung in die Erde zu legen (machen wir heute auch für Sternkataloge). 
+Zweitens ist ein Sternkatalog eine "Bestandsaufnahme" und für Ptolem&auml;us ist das erkl&auml;rte Ziel dieser "Inventur der Fixsterne" 
+die Erstellung eines Himmelsglobus (siehe Alm. VIII, 3). Er w&auml;hlt ekliptikale Koordinaten, weil er es k&uuml;nftigen Globenherstellern
+(und Astronomen) einfacher machen m&ouml;chte: Im ekliptikalen System bleibt bei der Präzessionsbewegung der Breitengrad stets gleich,
+und die &Auml;nderung des L&auml;ngengrades (ekliptikale L&auml;nge) l&auml;sst sich durch Subtraktion einer Konstante (wie er annimmt: 1° pro Jahrhundert) 
+leicht berechnen. Für die Genauigkeit von Himmelsgloben ist diese Absch&auml;tzung legitim und hinreichend; heute brauchen wir es 
+freilich für viele Anwendungen genauer.  
+</p>
+
+<h2>Wie wurde diese Sky Culture erstellt?</h2></p>
+
+<p> Das Format der Angaben im <i>Almagest</i> folgt einem simplen Schema: "Beschreibung des Sterns in der Figur, L&auml;ngengrad, 
+Breitengrad, Helligkeit (Bsp.: Ellbogen von X, L&auml;nge, Breite, Magnitude). Daher können wir diesen Sternkatalog zur Rekonstruktion 
+der Figurbilder nutzen. Das ist wie "Malen nach Zahlen", da Teile der Figur mit Koordinaten angegeben sind. Ein einfaches Beispiel
+f&uuml;hren wir anhand des Sternbildes Rabe vor und listen in der Tabelle darunter auf, wo wir bei anderen Sternbildern ggf. interpolieren
+mussten oder eine Linie durch nicht gelistete Sterne legen, um die Figur in der Weise erkennbar zu machen, wie Ptolem&auml;us es sich 
+laut seinen Beschreibungen vorgestellt (bzw. auf seinem Himmelsglobus gezeichnet) hatte.  
+</p>
+<p>Bsp.: Im Sternbild Corvus (Rabe) ist  &alpha; Crv der &bdquo;Kopfstern&rdquo;,
+	verbunden ist dieser mit dem &bdquo;Stern im Nacken&rdquo;,  &epsilon; 
+	Crv. Dieser wiederum ist verbunden mit dem &bdquo;Bruststern&rdquo;  &zeta; 
+	Crv. Von hier aus gehen zwei Sternbildlinien als &bdquo;Fl&uuml;gellinien&rdquo;
+	zu den Sternen an den Fl&uuml;gelspitzen des Raben.  &gamma; 
+	Crv ist der Stern im vorderen Fl&uuml;gel,  &delta; 
+	Crv der Stern im hinteren Fl&uuml;gel. Vom Bruststern geht noch eine
+	weitere Sternbildlinie ab, n&auml;mlich zu &beta; 
+	Crv, dem Stern im Fu&szlig; des Raben.</p>
+<p > <img width="800" src="corvus_drawExample_s.png"/></p>
+<p >Nach dem Identifizieren der Sterne durch ihre Koordinaten und Namen
+	verbanden wir die Sterne nach den Beschreibungen <i>Almagest</i>.</p>
+<p ><br/>
+
+</p>
+<p>Die Namen der Einzelsterne f&uuml;gten wir ausschlie&szlig;lich aus dem Almagest ein. Falls Ptolemaios Namen in anderen seiner 
+Werke nutzt, werden sie hier nicht wiedergegeben, z.B. nutzt er &quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;
+(der Fackelartige)&quot; für Aldebaran in seinem astrologischen Hauptwerk "Tetrabiblos", aber wir haben das hier nicht eingef&uuml;gt: 
+Im Almagest nennt er ihn nur "der helle in den Hyaden, das rote s&uuml;dliche Auge". 
+</p>
+<p><br/>
+
+</p>
+<p >Die
+	folgende Tabelle  listet in Spalte 2 und 3 die Originalnamen der
+	Sternbilder auf, in Spalte 4 und 5 moderne Abweichungen und in Spalte
+	6 beschreiben wir, welche Unsicherheiten die Identifizierung hat bzw.
+	welche k&uuml;nstlerischen Freiheiten die Zeichnung der Skelettlinie
+	der Figur ist.
+</p>
+<p ><br/>
+
+</p>
+<table >
+	
+	<tr valign="top">
+		<td>	<b>Abkürzung</b>		</td>
+		<td><b>	Originalname</b>		</td>
+		<td><b>	Übersetzung</b>			(wörtlich)		</td>
+		<td><b>	IAU (Latein) Name</b>		</td>
+		<td><b>Hinweise zum Sternbild</font></b>		</td>
+		<td><b>unsere Darstellung</b> (ggf. künstlerische Freiheiten) 		</td>
+	</tr>
+	<tr valign="top">
+		<td> 
+			UMi 		</td>
+		<td>			 &Mu;&iota;&kappa;&rho;&#942;
+			&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf; 		</td>
+		<td>Kleine Bärin 		</td>
+		<td>Ursa Minor 		</td>
+		<td>wie IAU Sternbild 		</td>
+		<td>		</td>
+	</tr>
+	<tr valign="top">
+		<td>	UMa </td>
+		<td>
+			 &Mu;&epsilon;&gamma;&alpha;&lambda;&#942;
+			&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;
+		</td>
+		<td>Große Bärin 		</td>
+		<td>Ursa Major 	</td>
+		<td>wie IAU Sternbild </td>
+		<td>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>Dra	</td>
+		<td>&Delta;&rho;&#940;&kappa;&omega;&nu; 	</td>
+		<td>Drache </td>
+		<td>Draco </td>
+		<td>alle Dreiecke und Vierecke sind Wirbel oder Teile des Körpers; 
+		 die Linie am Kopf ist die Zunge 
+		</td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Cep</td>
+		<td>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf; </td>
+		<td> Kepheus</td>
+		<td> Cepheus</td>
+		<td>König (kopfüber) </td>
+		<td> 3 Kopfsterne = Tiara; &beta; in Gürtel eingefügt, obwohl "unter Gürtel" gelistet,
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>Boo	</td>
+		<td> &Beta;&omicron;&#974;&tau;&eta;&sigmaf; </td>
+		<td>Pflüger </td>
+		<td>Bo&ouml;tes </td>
+		<td> hat Hirtenstab in Hand (&omega;) 		</td>
+		<td> HIP 72582 im Nacken ergänzt</td>
+	</tr>
+	<tr valign="top">
+		<td>CrB 	</td>
+		<td>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; </td>
+		<td>Kranz </td>
+		<td>Corona Borealis </td>
+		<td> wie IAU Sternbild; keine Beschreibung der Linien im Text </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td>Her</td>
+		<td>&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</td>
+		<td>Kniender </td>
+		<td>Hercules </td>
+		<td>einer der Fußsterne ist gleichzeitig Spitze des Hirtenstabs von Bootes </td>
+		<td>star HIP 82764 added as neck star </td>
+	</tr>
+	<tr valign="top">
+		<td>Lyr</td>
+		<td>&Lambda;&#973;&rho;&alpha; </td>
+		<td>Lyre</td>
+		<td>Lyra</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td>Cyg </td>
+		<td>&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf; 	</td>
+		<td>Vogel [nicht spezifiziert] </td>
+		<td>Cygnus </td>
+		<td>fliegender Vogel mit angeklappten Füßen </td>
+		<td>Flügel breiter gemacht, jetzt mit Schwanz verbunden</td>
+	</tr>
+	<tr valign="top">
+		<td>Cas</td>
+		<td>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;;&alpha; </td>
+		<td>Königin Kassiepeia </td>
+		<td>Cassiopeia </td>
+		<td>Königin sitzt auf Thron	</td>
+		<td>den Thron nicht gezeichnet, weil sonst Bild verwirrend
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>Per	</td>
+		<td>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</td>
+		<td>Perseus</td>
+		<td>Perseus </td>
+		<td>Doppelhaufen NGC 869 und NGC 884 als Deep Sky Objekt -&gt; eine der Sterne für Zeichnung genutzt</td>
+		<td>ein Stern im Gorgonenhaupt ergänzt, um runde Form abzubilden;</td>
+	</tr>
+	<tr valign="top">
+		<td>Aur		</td>
+		<td>&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf; </td>
+		<td>Wagenlenker	</td>
+		<td>Auriga 	</td>
+		<td> trägt ein langes Gewand, Ziege auf der Schulter, Zicklein in der Hand </td>
+		<td>o Aur als Nackenstern ergänzt; 1 Aur ergänzt </td>
+	</tr>
+	<tr valign="top">
+		<td> Oph  </td>
+		<td>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</td>
+		<td>Schlangenträger </td>
+		<td> Ophiuchus </td>
+		<td> hat Schlange in der Hand</td>
+		<td> Nackenstern ergänzt; </td>
+	</tr>
+	<tr valign="top">
+		<td>Ser </td>
+		<td>&#700;&#714;&Omicron;&phi;&iota;&sigmaf; </td>
+		<td>Schlange </td>
+		<td>Serpens</td>
+		<td> zwei Teile (Kopf und Schwanz); Viereck ist Kopf </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td>Sge </td>
+		<td>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf; </td>
+		<td> Pfeil </td>
+		<td> Sagitta </td>
+		<td>wie IAU Sternbild, &eta; Sge fehlt </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Aql</td>
+		<td> &#702;&Alpha;&epsilon;&tau;&#972;&sigmaf; </td>
+		<td> Adler (mit Antinoos) </td>
+		<td> Aquila	</td>
+		<td> &tau; Aql ist Kopf, &beta; Nacken, Altair zwischen den Schultern, &gamma; und &mu; Schultern; unter dem Adler ist der Leichnam des Antinous </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Del </td>
+		<td> &Delta;&epsilon;&lambda;&phi;&#943;&sigmaf; </td>
+		<td> Delphin 	</td>
+		<td> Delphinus 	</td>
+		<td> </td>
+		<td>  </td>
+	</tr>
+	<tr valign="top">
+		<td> Equ 		</td>
+		<td> &Pi;&rho;&omicron;&tau;&omicron;&mu;&#942; </td>
+		<td> Büste [eines Pferdes] 	</td>
+		<td> Equuleus </td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Peg</td>
+		<td> &#699;&#714;&Iota;&pi;&pi;&omicron;&sigmaf; </td>
+		<td> Pferd [namenlos] </td>
+		<td> Pegasus </td>
+		<td> halbes Pferd, Mähne und Flügel </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td>And </td>
+		<td> &#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;	</td>
+		<td> Andromeda 	</td>
+		<td> Andromeda 	</td>
+		<td> Kleid und Gürtel beschrieben</td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Tri </td>
+		<td> &Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf; </td>
+		<td> Triangel (Dreieck) </td>
+		<td> Triangulum </td>
+		<td> vier Sterne gegeben &#61664; "Mittelstern" der kurzen Seite </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Ari </td>
+		<td> &Kappa;&rho;&iota;&#972;&sigmaf; </td>
+		<td> Widder </td>
+		<td> Aries 	</td>
+		<td>Kopf gedreht (Laufrichtung der Sonne), dadurch seitlich & nur ein Horn sichtbar  </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Tau </td>
+		<td> &Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf; </td>
+		<td> Stier 	</td>
+		<td> Taurus</td>
+		<td> halber Körper, nur Vorderbeine sichtbar; blickt zum Beobachter	</td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Gem </td>
+		<td> &Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota; </td>
+		<td> Zwillinge </td>
+		<td> Gemini </td>
+		<td> haben einen Stern gemeinsam, d.h. berühren sich an den Händen</td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td> Cnc 		</td>
+		<td> &Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf; </td>
+		<td> Krebs </td>
+		<td> Cancer </td>
+		<td> Viereck = Körper </td>
+		<td></td>
+	</tr>
+	<tr valign="top">
+		<td>Leo<</td>
+		<td> &Lambda;&#941;&omega;&nu; </td>
+		<td> Löwe </td>
+		<td> Leo </td>
+		<td> offenes Maul </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Vir 		</td>
+		<td> &Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf; </td>
+		<td> Junge Frau </td>
+		<td> Virgo 		</td>
+		<td>kein Kopfstern 		</td>
+		<td>schwache Sterne ergänzt für Flügel</td>
+	</tr>
+	<tr valign="top">
+		<td> Lib </td>
+		<td> &Chi;&eta;&lambda;&alpha;&#943; </td>
+		<td> Scheren [des Skorpion] </td>
+		<td> Libra 	</td>
+		<td> Ptolemäus benutzt stets den Namen &quot;Scheren&quot;, niemals &quot;Waage&quot;. </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Sco </td>
+		<td> &Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf; </td>
+		<td> Skorpion </td>
+		<td> Scorpius </td>
+		<td> </td>
+		<td>Arme am Kopf ergänzt, die auf die Scheren weisen: &nu; and &rho;</td>
+	</tr>
+	<tr valign="top">
+		<td> Sgr 	</td>
+		<td> &Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf; 	</td>
+		<td> Schütze 	</td>
+		<td> Sagittarius </td>
+		<td>ein Zentaur mit vorgestrecktem Bogen und wehendem &bdquo;Mantel&ldquo; (hinter ihm) </td>
+		<td>wir haben weitere schwache Sterne ergänzt, um die Figur klarer zu machen. </td>
+	</tr>
+	<tr valign="top">
+		<td> Cap 		</td>
+		<td> &Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf; </td>
+		<td> der Ziegengehörnte 		</td>
+		<td> Capricornus 		</td>
+		<td> Fisch-Schwanz, Ziegenhörner und -vorderbeine 		</td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Aqr 	</td>
+		<td> &#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf; </td>
+		<td> Wasserträger </td>
+		<td> Aquarius </td>
+		<td>Wasser aus Krug	</td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Psc 		</td>
+		<td> &#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf; </td>
+		<td> [2] Fische </td>
+		<td> Pisces </td>
+		<td> </td>
+		<td> nördlicher Fisch: 68(h), 67(k), und 65(i) sollten im Kopf sein, aber sehr weit entfernt vom Maul (g and &tau; Psc), darum als Rückenfinne interpretiert.
+		 Schwanzfinne bis &rho; erweitert, an dem das Band endet.  
+		</td>
+	</tr>
+	<tr valign="top">
+		<td> Cet </td>
+		<td>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf; </td>
+		<td> Meeresungeheuer </td>
+		<td> Cetus 	</td>
+		<td> </td>
+		<td> Körper geht nicht durch &tau;,
+			sondern &upsilon;   </td>
+	</tr>
+	<tr valign="top">
+		<td>Ori </td>
+		<td> &#702;&Omega;&rho;&#943;&omega;&nu; </td>
+		<td> Orion 	</td>
+		<td> Orion 	</td>
+		<td> </td>
+		<td> Der &quot;Kopf&quot; wird beschrieben als &quot;neblig&quot; was bedeutet, dass Ptolemäus &phi;<sub>1</sub>,
+			&phi;<sub>2</sub>, und  &lambda; zusammen mit schwachen Sternen dazwischen als &quot;Haufen&quot; interpretierte, 
+			also als <i>ein</i> Gestirn interpretierte (als Assoziation, die aber ausgedehnter ist als die &quot;&lambda; Ori Assoc.&quot;). 
+			Kopf- Schulterstern-Verbindung etwas verändert (damit klarer).
+		</td>
+	</tr>
+	<tr valign="top">
+		<td> Eri 		</td>
+		<td>&Pi;&omicron;&tau;&alpha;&mu;&972;&sigmaf; 	</td>
+		<td> Fluss [namenlos] 	</td>
+		<td> Eridanus 		</td>
+		<td> wie IAU Sternbild, aber kürzer </td>
+		<td> </td>
+	</tr>
+	<tr>
+		<td> Lep 		</td>
+		<td> &Lambda;&alpha;&gamma;&omega;&#771;&sigmaf; </td>
+		<td> Hase	</td>
+		<td> Lepus 	</td>
+		<td> </td>
+		<td> die "4 Sterne über dem Ohr" als Ohren skizziert </td>
+	</tr>
+	<tr valign="top">
+		<td> CMa </td>
+		<td>&Kappa;&#973;&omega;&nu; </td>
+		<td> Hund 	</td>
+		<td> Canis Major </td>
+		<td> </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> CMi 	</td>
+		<td>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu; </td>
+		<td> Das Gestirn vor dem Hund. </td>
+		<td> Canis Minor (Prokyon)	</td>
+		<td> </td>
+		<td> Im griechischen Text heißt das Sternbild &quot;Der vor dem Hund&quot; oder &quot;Vorbote von Sirius&quot; wie es Toomer frei übersetzt. Trotzdem ist &beta; CMi gelistet als &quot;der Nacken&quot; (von wem auch immer). Auf dem Atlas Farnese fehlt das Sternbild, daher zeichnen wir hier keine Figur, sondern verbinden nur die zwei Sterne &alpha; und &beta;	</td>
+	</tr>
+	<tr valign="top">
+		<td> Arg </td>
+		<td>&#702;&Alpha;&rho;&gamma;&omega; 	</td>
+		<td> Schiff &quot;Argo&quot; </td>
+		<td> Argo 	</td>
+		<td> kleiner als die Summe der IAU-Sternbilder Pup+Pyx+Car+Vel 	</td>
+		<td>Viele Sterne nicht zur Figur genutzt, um Schiffsform klarzustellen: es wird normalerweise nur ein halbes Schiff gezeichnet (auch auf Atlas Farnese aus der Epoche von Ptolemäus). </td>
+	</tr>
+	<tr valign="top">
+		<td> Hya 	</td>
+		<td>&#701;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;  </td>
+		<td> Wasserschlange</td>
+		<td> Hydra 	</td>
+		<td> wie IAU Sternbild </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Crt 		</td>
+		<td>&Kappa;&rho;&alpha;&tau;&#942;&rho; 		</td>
+		<td> Krater (Gefäß)	</td>
+		<td> Crater 		</td>
+		<td> 		</td>
+		<td> ein "Krater" ist ein spezielles, großes Gefäß zum Weinmischen, sieht aus wie eine Amphore oder Schale: <a href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a>. Ptolemäus
+			nennt nur einen Stern im Fuß (&alpha; Crt) und zwei Handgriffe (&eta;, &theta; Crt) </td>
+	</tr>
+	<tr valign="top">
+		<td> Crv </td>
+		<td> &Kappa;&oacute;&rho;&alpha;&xi; </td>
+		<td> Rabe 	</td>
+		<td> Corvus 	</td>
+		<td> wie IAU Sternbild 	</td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> Cen </td>
+		<td>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf; </td>
+		<td> Kentauros 	</td>
+		<td> Centaurus 	</td>
+		<td> </td>
+		<td> Abweichend von Beschreibung:  HIP 65373 anstelle von &omega; Cen als Rückenstern; &lsquo;Thyrsus&lsquo;-Stab nicht gezeichnet.</td>
+	</tr>
+	<tr valign="top">
+		<td> Lup </td>
+		<td> &Theta;&eta;&rho;&#943;&omicron;&nu; </td>
+		<td> Untier </td>
+		<td> Lupus 	</td>
+		<td> </td>
+		<td> &beta; sei &lsquo;Ende des Hinterbeins&lsquo; -> als Stern im Bauch genutzt; &tau;<sub>1</sub> als Hinterbein, 
+			 &Chi; aus Kopf weggelassen, damit nicht unförmig; 
+			HIP73493 als Vorderbein 
+		</td>
+	</tr>
+	<tr valign="top">
+		<td> Ara </td>
+		<td>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu; </td>
+		<td> Altar 	</td>
+		<td> Ara </td>
+		<td> wie IAU Sternbild </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td> CrA </td>
+		<td>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;
+			&Nu;&#972;&tau;&iota;&omicron;&sigmaf; 
+		</td>
+		<td> Südlicher Kranz </td>
+		<td> Corona Australis </td>
+		<td> wie IAU Sternbild </td>
+		<td> </td>
+	</tr>
+	<tr valign="top">
+		<td>PsA </td>
+		<td>&Nu;&#972;&tau;&iota;&omicron;&sigmaf;
+			&#700;&Iota;&chi;&theta;&#973;&sigmaf;	</td>
+		<td> Südlicher Fisch </td>
+		<td> Piscis Austrinus </td>
+		<td> schwimmt auf dem Rücken</td>
+		<td> zum Schwanz einige Sterne ergänzt (&beta; sollte Schwanzspitze sein, aber wir nehmen ihn als Wurzel) </td>
+	</tr>
+</table>
+<h2>Literatur</h2> 
+<p> 
+ <ul> 
+  <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, 1990 </li>
+  <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, Leipzig, 1898 </li>
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017 </li>
+  <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984 </li>
+ </ul>
+</p>
+<h2>Fair Use</h2>
+<p>
+	Diese Sternbilderkultur wurde in einem einjährigen Schülerforschungsprojekt entwickelt. 
+	Wir stellen sie kostenlos zur Verfügung, aber die Autorinnen verdienen es, nach den üblichen Regeln zitiert zu werden. Diese sky culture wird unter CC BY-ND 4.0 International Public Licence bereitgestellt (zitieren, teilen unter gleichen Bedingungen, nicht verändern ohne die Autorinnen zu konsultieren). Danke!
+</p>		
+<h2>Danke</h2>
+<p>
+ Die Autorinnen danken Patrick Gleason und Georg Zotti für interessante Diskussionen.
+</p>		
+<h2>Autorinnen</h2>
+Diese sky culture wurde von Alina Schmidt, Lea Jabschinski, Marie von Seggern und Susanne M. Hoffmann (service@uhura-uraniae.com) zu Stellarium hinzugefügt.
+
+<h5 align="center">written in German: <br/>the authors </h5>

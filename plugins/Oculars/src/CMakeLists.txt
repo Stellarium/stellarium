@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/Oculars/src
 )
 
-LINK_DIRECTORIES(/src)
+LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Oculars_SRCS
      CCD.hpp

@@ -70,8 +70,8 @@ struct HttpConnectionHandlerPoolSettings : public HttpConnectionHandlerSettings
 class DECLSPEC HttpConnectionHandlerPool : public QObject {
     Q_OBJECT
     Q_DISABLE_COPY(HttpConnectionHandlerPool)
-public:
 
+public:
     /**
       Constructor.
       @param settings Configuration settings for the HTTP server. Must not be 0.
@@ -87,7 +87,6 @@ public:
     HttpConnectionHandler* getConnectionHandler();
 
 private:
-
     /** Settings for this pool */
     HttpConnectionHandlerPoolSettings settings;
 
@@ -110,10 +109,8 @@ private:
     void loadSslConfig();
 
 private slots:
-
     /** Received from the clean-up timer.  */
     void cleanup();
-
 };
 
 #endif // HTTPCONNECTIONHANDLERPOOL_H

@@ -2,46 +2,48 @@
 // Name: Jupiter and triple shadow phenomena
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 1.1
 // Shortcut: Ctrl+D,M,1
 // Description: Demonstration of the mid-time of rare events - triple shadow phenomena of the satellites of Jupiter from 1900 to 2100. All events are given in Dynamical Time.
 //
 
-// Made on Stellarium 0.18.2
+// Made on Stellarium 0.18.2; Translatable with 0.19.0
 
-// List of phenomena (date, time, satellites)
-var phenomenalist = [["1901-12-30", "06:12", "Io, Ganymede"],
-                     ["1908-05-16", "11:02", "Io, Ganymede"],
-                     ["1909-07-25", "20:29", "Io, Europe"],
-                     ["1915-07-29", "10:23", "Io, Ganymede"],
-                     ["1919-03-14", "08:40", "Io, Europe"],
-                     ["1938-06-01", "14:06", "Io, Europe"],
-                     ["1949-02-23", "19:38", "Io, Europe"],
-                     ["1949-12-05", "17:37", "Io, Ganymede"],
-                     ["1956-04-21", "22:00", "Io, Ganymede"],
-                     ["1966-06-28", "07:16", "Europe, Ganymede"],
-                     ["1967-02-17", "19:39", "Io, Europe"],
-                     ["1974-05-01", "18:10", "Io, Europe"],
-                     ["1985-01-23", "23:03", "Io, Europe"],
-                     ["1997-01-30", "06:16", "Io, Europe"],
-                     ["1997-11-11", "04:42", "Io, Ganymede"],
-                     ["2004-03-28", "08:10", "Io, Ganymede"],
-                     ["2013-10-12", "05:05", "Io, Europe"],
-                     ["2014-06-03", "18:57", "Europe, Ganymede"],
-                     ["2015-01-24", "06:41", "Io, Europe"],
-                     ["2032-03-20", "12:00", "Io, Ganymede"],
-                     ["2032-12-30", "10:29", "Io, Europe"],
-                     ["2038-08-05", "17:46", "Io, Ganymede"],
-                     ["2045-01-05", "17:29", "Io, Europe"],
-                     ["2045-10-17", "15:57", "Io, Ganymede"],
-                     ["2061-09-17", "16:32", "Io, Europe"],
-                     ["2062-05-10", "05:53", "Europe, Ganymede"],
-                     ["2062-12-30", "17:42", "Io, Europe"],
-                     ["2073-09-23", "23:45", "Io, Europe"],
-                     ["2080-02-24", "23:14", "Io, Ganymede"],
-                     ["2080-12-05", "21:49", "Io, Europe"],
-                     ["2091-08-31", "02:29", "Io, Europe"],
-                     ["2092-12-12", "05:09", "Io, Europe"]
+include("i18n.inc");
+
+// List of phenomena (date, time, comment for satellites)
+var phenomenalist = [["1901-12-30", "06:12", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["1908-05-16", "11:02", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["1909-07-25", "20:29", tr("Shadows from Io, Europe and Callisto")],
+                     ["1915-07-29", "10:23", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["1919-03-14", "08:40", tr("Shadows from Io, Europe and Callisto")],
+                     ["1938-06-01", "14:06", tr("Shadows from Io, Europe and Callisto")],
+                     ["1949-02-23", "19:38", tr("Shadows from Io, Europe and Callisto")],
+                     ["1949-12-05", "17:37", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["1956-04-21", "22:00", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["1966-06-28", "07:16", tr("Shadows from Europe, Ganymede and Callisto")],
+                     ["1967-02-17", "19:39", tr("Shadows from Io, Europe and Callisto")],
+                     ["1974-05-01", "18:10", tr("Shadows from Io, Europe and Callisto")],
+                     ["1985-01-23", "23:03", tr("Shadows from Io, Europe and Callisto")],
+                     ["1997-01-30", "06:16", tr("Shadows from Io, Europe and Callisto")],
+                     ["1997-11-11", "04:42", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2004-03-28", "08:10", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2013-10-12", "05:05", tr("Shadows from Io, Europe and Callisto")],
+                     ["2014-06-03", "18:57", tr("Shadows from Europe, Ganymede and Callisto")],
+                     ["2015-01-24", "06:41", tr("Shadows from Io, Europe and Callisto")],
+                     ["2032-03-20", "12:00", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2032-12-30", "10:29", tr("Shadows from Io, Europe and Callisto")],
+                     ["2038-08-05", "17:46", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2045-01-05", "17:29", tr("Shadows from Io, Europe and Callisto")],
+                     ["2045-10-17", "15:57", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2061-09-17", "16:32", tr("Shadows from Io, Europe and Callisto")],
+                     ["2062-05-10", "05:53", tr("Shadows from Europe, Ganymede and Callisto")],
+                     ["2062-12-30", "17:42", tr("Shadows from Io, Europe and Callisto")],
+                     ["2073-09-23", "23:45", tr("Shadows from Io, Europe and Callisto")],
+                     ["2080-02-24", "23:14", tr("Shadows from Io, Ganymede and Callisto")],
+                     ["2080-12-05", "21:49", tr("Shadows from Io, Europe and Callisto")],
+                     ["2091-08-31", "02:29", tr("Shadows from Io, Europe and Callisto")],
+                     ["2092-12-12", "05:09", tr("Shadows from Io, Europe and Callisto")]
                     ];
 
 var timestep = 10;
@@ -55,9 +57,9 @@ GridLinesMgr.setFlagGridlines(false);
 NebulaMgr.setFlagHints(false);
 StelMovementMgr.setEquatorialMount(true);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Triple shadow phenomena of the satellites of Jupiter", 20, 20, false, 36, color);
+var id = LabelMgr.labelScreen(tr("Triple shadow phenomena of the satellites of Jupiter"), 20, 20, false, 36, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length + " " + tr("phenomena in all"), 20, 65, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 core.selectObjectByName("Jupiter", false);
@@ -72,10 +74,10 @@ for (i=0; i<phenomenalist.length; i++)
 	var d = phenomenalist[i][0];
 	var t = phenomenalist[i][1];
 	var event = d + "T" + t + ":00";
-	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
-	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
-	var et = LabelMgr.labelScreen("Time: " + t, 20, 180, false, 20, color);
-	var es = LabelMgr.labelScreen("Shadows from " + phenomenalist[i][2] + " and Callisto", 20, 205, false, 20, color);
+	var en = LabelMgr.labelScreen(tr("Event #")+ (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen(tr("Date:") + " " + d, 20, 155, false, 20, color);
+	var et = LabelMgr.labelScreen(tr("Time:") + " " + t, 20, 180, false, 20, color);
+	var es = LabelMgr.labelScreen(phenomenalist[i][2], 20, 205, false, 20, color);
 	
 	core.setDate(event, "utc", true);
 	LabelMgr.setLabelShow(en, true);

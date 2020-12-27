@@ -23,7 +23,7 @@
 
 AABBox::AABBox()
 {
-	*this = AABBox(std::numeric_limits<float>::infinity(),-std::numeric_limits<float>::infinity());
+	*this = AABBox(Vec3f(std::numeric_limits<float>::infinity()),Vec3f(-std::numeric_limits<float>::infinity()));
 }
 
 AABBox::AABBox(const Vec3f& min, const Vec3f& max)
@@ -56,7 +56,7 @@ void AABBox::reset()
 
 bool AABBox::isValid() const
 {
-	return (	min[0] < max[0]	&&
+	return (	min[0] < max[0] &&
 			min[1] < max[1] &&
 			min[2] < max[2]);
 }
@@ -152,7 +152,7 @@ Line::Line(const Vec3f &p, const Vec3f &dir)
 	endPoint = startPoint + direction;
 }
 
-Vec3f Line::getPoint(float val)
+Vec3f Line::getPoint(float val) const
 {
 	return startPoint + (val*direction);
 }

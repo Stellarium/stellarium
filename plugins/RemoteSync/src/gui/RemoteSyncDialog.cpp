@@ -23,21 +23,22 @@
 #include "ui_remoteSyncDialog.h"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPropertyMgr.hpp"
 
 RemoteSyncDialog::RemoteSyncDialog()
-	: rs(Q_NULLPTR)
+	: StelDialog("RemoteSync")
+	, rs(Q_NULLPTR)
 {
 	ui = new Ui_remoteSyncDialog();
-	dialogName="RemoteSync";
 }
 
 RemoteSyncDialog::~RemoteSyncDialog()
 {
-	delete ui;
+	delete ui; ui=Q_NULLPTR;
 }
 
 void RemoteSyncDialog::retranslate()
@@ -55,9 +56,13 @@ void RemoteSyncDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	ui->pushButtonSelectProperties->setText(QChar(0x2192));
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));
@@ -98,14 +103,25 @@ void RemoteSyncDialog::createDialogContent()
 	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	populateExclusionLists();
 	connect(ui->pushButtonSelectProperties, SIGNAL(clicked()), this, SLOT(addPropertiesForExclusion()));
 	connect(ui->pushButtonDeselectProperties, SIGNAL(clicked()), this, SLOT(removePropertiesForExclusion()));
 
 	setAboutHtml();
+}
+
+void RemoteSyncDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qCDebug(remoteSync) << "restore defaults...";
+		rs->restoreDefaultSettings();
+	}
+	else
+		qCDebug(remoteSync) << "restore defaults is canceled...";
 }
 
 void RemoteSyncDialog::printErrorMessage(const QString error)

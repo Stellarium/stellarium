@@ -26,7 +26,8 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelUtils.hpp"
+#include "StelLocationMgr.hpp"
+#include "VecMath.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -160,13 +161,14 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		}
 
 		if(ini.contains("latitude"))
-			info.location->latitude = StelUtils::getDecAngle(ini.value("latitude").toString())*180./M_PI;
+			info.location->latitude = StelUtils::getDecAngle(ini.value("latitude").toString())*M_180_PI;
 		if (ini.contains("longitude"))
-			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*180./M_PI;
+			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
 		if (ini.contains("country"))
 			info.location->country = ini.value("country").toString();
 		if (ini.contains("state"))
 			info.location->state = ini.value("state").toString();
+		info.location->ianaTimeZone = StelLocationMgr::sanitizeTimezoneStringFromLocationDB(ini.value("timezone", "LMST").toString());
 
 		info.location->landscapeKey = info.landscapeName;
 		ini.endGroup();
@@ -189,18 +191,18 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	{ // compute rot_z from grid_meridian and location. Check their existence!
 		if (ini.contains("grid_meridian"))
 		{
-			double gridCentralMeridian=StelUtils::getDecAngle(ini.value("grid_meridian").toString())*180./M_PI;
+			double gridCentralMeridian=StelUtils::getDecAngle(ini.value("grid_meridian").toString())*M_180_PI;
 			if (!info.location.isNull())
 			{
 				// Formula from: http://en.wikipedia.org/wiki/Transverse_Mercator_projection, Convergence
 				//rot_z=std::atan(std::tan((lng-gridCentralMeridian)*M_PI/180.)*std::sin(lat*M_PI/180.));
 				// or from http://de.wikipedia.org/wiki/Meridiankonvergenz
-				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI/180.*std::sin(info.location->latitude*M_PI/180.);
+				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI_180*std::sin(info.location->latitude*M_PI_180);
 
 				qCDebug(sceneInfo) << "With Longitude " << info.location->longitude
 					 << ", Latitude " << info.location->latitude << " and CM="
 					 << gridCentralMeridian << ", ";
-				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*180./M_PI << "degrees";
+				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
 			}
 			else
 			{
@@ -214,14 +216,14 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	}
 	else
 	{
-		rot_z = convAngle.toDouble() * M_PI / 180.0;
+		rot_z = convAngle.toDouble() * M_PI_180;
 	}
 	// We must apply also a 90 degree rotation, plus convergence(rot_z)
 
 	// Meridian Convergence is negative in north-west quadrant.
 	// positive MC means True north is "left" of grid north, and model must be rotated clockwise. E.g. Sterngarten (east of UTM CM +15deg) has +0.93, we must rotate clockwise!
 	// A zRotate rotates counterclockwise, so we must reverse rot_z.
-	info.zRotateMatrix = Mat4d::zrotation(M_PI/2.0 - rot_z);
+	info.zRotateMatrix = Mat4d::zrotation(M_PI_2 - rot_z);
 
 	// At last, find start points.
 	if(ini.contains("start_E") && ini.contains("start_N"))
@@ -259,7 +261,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	if (ini.contains("start_az_alt_fov"))
 	{
 		qCDebug(sceneInfo) << "scenery3d.ini: setting initial dir/fov.";
-		info.lookAt_fov=StelUtils::strToVec3f(ini.value("start_az_alt_fov").toString());
+		info.lookAt_fov=Vec3f(ini.value("start_az_alt_fov").toString());
 		info.lookAt_fov[0]=180.0f-info.lookAt_fov[0]; // fix azimuth
 	}
 	else
@@ -465,8 +467,8 @@ void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool 
 		sv.isGlobal = isGlobal;
 		sv.label = ini.value("label").toString();
 		sv.description = ini.value("description").toString();
-		sv.position = StelUtils::strToVec4d(ini.value("position").toString());
-		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
+		sv.position = Vec4d(ini.value("position").toString());
+		sv.view_fov = Vec3f(ini.value("view_fov").toString());
 		if (ini.contains("JD"))
 		{
 			sv.jdIsRelevant=true;
@@ -488,8 +490,8 @@ void StoredView::writeArray(QSettings &ini, const StoredViewList &list)
 
 		ini.setValue("label", view.label);
 		ini.setValue("description", view.description);
-		ini.setValue("position", StelUtils::vec4dToStr(view.position));
-		ini.setValue("view_fov", StelUtils::vec3fToStr(view.view_fov));
+		ini.setValue("position", view.position.toStr());
+		ini.setValue("view_fov", view.view_fov.toStr());
 		if (view.jdIsRelevant)
 			ini.setValue("JD", (view.jd));
 	}
