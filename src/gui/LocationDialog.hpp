@@ -141,7 +141,7 @@ private slots:
 	// Esp. for signals from StelSkyCultureMgr
 	void populatePlanetList(QString) { populatePlanetList(); }
 
-	void setDisplayFormatForSpins();
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 #ifdef ENABLE_GPS
 	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.

@@ -91,7 +91,7 @@ void LocationDialog::createDialogContent()
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins()));
+	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
 	// Init the SpinBox entries	
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
@@ -102,7 +102,7 @@ void LocationDialog::createDialogContent()
 	ui->latitudeSpinBox->setMinimum(-90.0, true);
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
 	ui->latitudeSpinBox->setWrapping(false);
-	setDisplayFormatForSpins();
+	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
 
 	//initialize list model
 	allModel = new QStringListModel(this);
@@ -194,11 +194,11 @@ void LocationDialog::createDialogContent()
 	ui->citySearchLineEdit->setFocus();
 }
 
-void LocationDialog::setDisplayFormatForSpins()
+void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 {
 	int places = 2;
 	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
-	if (StelApp::getInstance().getFlagShowDecimalDegrees())
+	if (flagDecimalDegrees)
 	{
 		places = 6;
 		format = AngleSpinBox::DecimalDeg;
