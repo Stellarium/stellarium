@@ -73,8 +73,8 @@ QStringList IcelandicCalendar::getDateStrings() const
 	// 0: year
 	list << QString::number(parts.at(0));
 	// 1: season
-	if (parts.at(1)==Calendar::summer) list << q_("summer");
-	else if (parts.at(1)==Calendar::winter) list << q_("winter");
+	if (parts.at(1)==Calendar::summer) list << qc_("summer", "Icelandic calendar");
+	else if (parts.at(1)==Calendar::winter) list << qc_("winter", "Icelandic calendar");
 	else list << "errorSeason";
 
 	// 2: month number in season
@@ -96,7 +96,8 @@ QStringList IcelandicCalendar::getDateStrings() const
 QString IcelandicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1 of week %2 of %3 (Month %4: %5) - %6")
+	// TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of [summer|winter] (Month [number]: [name]) - [year]"
+	return QString(q_("%1 of week %2 of %3 (Month %4: %5) - %6"))
 			.arg(str.at(6)) // weekday
 			.arg(str.at(4)) // week
 			.arg(str.at(1)) // season
