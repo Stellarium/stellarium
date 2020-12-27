@@ -1168,7 +1168,7 @@ symbols that need to be explained will be found in the Type data field:
 \section{Double Stars}
 \label{sec:StarCatalogues:DoubleStars}
 
-Since version 0.15.0 Stellarium supports the subset of double stars
+Since version 0.15.0\newFeature{v0.15.0} Stellarium supports the subset of double stars
 from WDS\footnote{\url{http://ad.usno.navy.mil/wds/}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
 of Double Stars is based on the \citetp{2001AJ....122.3466M}. %\emph{Washington Double Star Catalog} 
@@ -1207,13 +1207,83 @@ Separation 		& float  & Separation at date of last satisfactory observation (in 
 \label{tab:StarCatalogues:DoubleStars:file}
 \end{table}
 
+\subsection{Designations}
+\label{sec:StarCatalogues:DoubleStars:Designations}
+
+In version 0.20.4\newFeature{v0.20.4} we incorporated support an additional designations for \indexterm{double stars} which have HIP identification also. All these designations was added especially for double stars observers and people, who using Stellarium as some reference software. The cross-identification data for double stars was obtained from \empth{The Cambridge Double Star Atlas}~\citep{2015cdsa.book.....M}.
+
+\begin{longtable}{l|l|p{105mm}}\toprule
+\emph{Designation} & \emph{WDS code} & \emph{Discoverer/catalog/observatory}\\\midrule
+$\beta$   		& BU  & S.W. Burnham \\
+$\beta$ pm 		& BUP & Burnham's 1913 proper motion catalog \\
+$\Delta$		& DUN & J. Dunlop \\
+$\Sigma$        & STF & F.G. Wilhelm Struve's 1827 Dorpat catalog \\
+$\Sigma$ I 		& --- & Wilhelm Struve's first supplement to Dorpat catalog \\
+$\Sigma$ II		& --- & Wilhelm Struve's second supplement to Dorpat catalog \\
+$\phi$		    & FIN & W.S. Finsen \\
+A		        & A   & R.G. Aitken \\
+AC		        & AC  & Alvan Clark \\
+AG		        & AG  & \emph{Astronomishe Gesellshaft Katalog}\\
+AGC		        & AGC & Alvan G. Clark \\
+Arg		        & ARG & F.W.A. Argelander \\
+B		        & B   & Willem H. van den Bos \\
+BrsO	        & BSO & Brisbane Observatory (Australia) \\
+CapO	        & CPO & Cape Observatory (South Africa) \\
+CorO	        & COO & Cordoba Observatory (Argentina) \\
+Cou 	        & COU & Paul Couteau \\
+Dawes 	        & DA  & W.R. Dawes \\
+Dju  	        & DJU & P. Djurkovic \\
+Don  	        & DON & H.F. Donner \\
+Doo  	        & DOO & Eric Doolittle \\
+Es  	        & ES  & T.E.H. Espin \\
+Erk  	        & FRK & W.S. Franks \\
+Gale  	        & GLE & W.F. Gale \\
+Gli  	        & GLI & J.M. Gilliss \\
+H N  	        & H   & William Herschel's 1821 catalog \\
+h   	        & HJ  & John Herschel \\
+HdO   	        & HDO & Harvard Observatory (USA and elsewhere) \\
+Hld   	        & HLD & E.S. Holden \\
+Ho   	        & HO  & G.W. Hough \\
+Howe   	        & HWE & H.A. Howe \\
+Hrg   	        & HRG & L. Hargrave \\
+Hu   	        & HU  & W.J. Hussey \\
+I   	        & I   & R.T.A. Innes \\
+J   	        & J   & Robert Jonckheere \\
+Jc   	        & JC  & W.S. Jacob \\
+Knott  	        & KNT & G. Knott \\
+Ku  	        & KU  & F. Kustner \\
+Kui  	        & KUI & Gerard P. Kuiper \\
+Lal  	        & LAL & F. de Lalande \\
+MlbO  	        & MLO & Melbourne Observatory (Australia) \\
+O$\Sigma$       & STT & Otto Struve's 1843 Pulkovo catalog \\
+O$\Sigma\Sigma$ & STT & Otto Struve's 1843 Pulkovo catalog supplement \\
+Pz  	        & PZ  & G. Piazzi \\
+R   	        & R   & H.C. Russell \\
+Rmk   	        & RMK & C.L.C. Rumker \\
+Roe   	        & ROE & E.D. Roe \\
+Rst   	        & RST & R.A. Rossiter \\
+S   	        & S   & James South \\
+Sh   	        & SHJ & James South and John Herschel joint 1824 catalog \\
+Se   	        & SE  & A. Secchi \\
+See   	        & SEE & T.J.J. See \\
+Sei   	        & SEI & J. Scheiner \\
+Slr   	        & SLR & R.P. Sellors \\
+Smyth  	        & SMY & W.H. Smyth \\
+Stone  	        & STN & Ormond Stone \\
+Vou  	        & VOU & J.G.E.G. Voute \\
+Webb  	        & WEB & T.W. Webb \\
+Wnc  	        & WNC & F.A. Winnecke \\
+WNO  	        & WNO & US Naval Observatory (USA) \\\bottomrule
+\caption{Additional designations to double stars}
+\label{tab:StarCatalogues:DoubleStars:Designations}
+\end{longtable}
+
 \section{Cross-Identification Data}
 \label{sec:StarCatalogues:CrossIdentificationData}
 
-Since version 0.14.0 Stellarium supports cross-identification between stars from 
+Since version 0.14.0\newFeature{v0.14.0} Stellarium supports cross-identification between stars from 
 Hipparcos (HIP)~\citep{2012AstL...38..331A}, 
-Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0, %% TODO: ADD CITATION! (SAO), 
-Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
+Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0~\citep{1995yCat.1131....0S}, Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
 \citetp{1964cbs..book.....H}  (BSC5 or HR) % $5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)
 catalogues.
 
