@@ -148,7 +148,7 @@ export PATH=~/Qt/5.12/clang_64/bin:$PATH
 
 After installing all required libraries and tools you should configure the build environment.
 
-Add `C:\Qt\Qt5.9.9` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.2\msvc2019;C:\Qt\Qt5.15.2\msvc2019\bin` for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
+Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.2\msvc2019;C:\Qt\Qt5.15.2\msvc2019\bin` for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt with the version that you have installed)
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
