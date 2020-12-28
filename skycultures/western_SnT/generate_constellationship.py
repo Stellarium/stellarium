@@ -116,6 +116,12 @@ if __name__ == '__main__':
             # so we skip get_hip and assign it manually.
             if vertex['constellation'] == 'Cyg' and vertex['bayer'] == '31-':
                 current_hip = 99848
+            elif vertex['constellation'] == 'Pup' and vertex['bayer'] == 'alf':
+                # Issue #1438: Ensure line from nu Pup to Canopus ends at Canopus
+                current_hip = 30438
+            elif vertex['constellation'] == 'UMa' and vertex['bayer'] == 'xi':
+                # Issue #1414: Ensure line from nu UMa to xi UMa actually ends at xi UMa
+                current_hip = 55203
             else:
                 current_hip = get_hip(ra=vertex['ra'], dec=vertex['dec'], mag=vertex['mag'])
             if not current_hip:
