@@ -142,21 +142,22 @@ export PATH=~/Qt/5.12/clang_64/bin:$PATH
 
 #### Windows
 
-- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) (or "better" - e.g. Professional) from Microsoft Website. Qt5.15 requires MSVC2019.
+- Install the [Microsoft Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) (or "better" - e.g. Professional) from Microsoft Website. Qt5.15 requires MSVC2019.
 - To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
 - Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.9 or later.  You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
-Add `C:\Qt\Qt5.9.9` to your `PATH` variable - you should add string `C:\Qt\Qt5.9.9\msvc2017;C:\Qt\Qt5.9.9\msvc2017\bin` for 32-bit or `C:\Qt\Qt5.9.9\msvc2017_64;C:\Qt\Qt5.9.9\msvc2017_64\bin` for 64-bit to `PATH` variable.
+Add `C:\Qt\Qt5.9.9` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.2\msvc2019;C:\Qt\Qt5.15.2\msvc2019\bin` for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
+(Replace the version numbers of Qt with the version that you have installed)
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
 
 #### Windows (static)
 
-You can build a static version using MSVC-static kit (for example we installed Qt 5.15.1 with MSVC2019):
+You can build a static version using MSVC-static kit (for example we installed Qt 5.15.2 with MSVC2019):
 
-To prepare a static kit,  prepare src package of Qt 5.15.1, and configure compilation tool (Python, Ruby, Perl and Visual Studio 2019). Enter src folder:
+To prepare a static kit,  prepare src package of Qt 5.15.2, and configure compilation tool (Python, Ruby, Perl and Visual Studio 2019). Enter src folder:
 
 ```
 configure.bat -static -prefix "D:\Qt\msvc2019_static" -confirm-license -opensource  -debug-and-release -platform win32-msvc  -nomake examples -nomake tests  -plugin-sql-sqlite -plugin-sql-odbc -qt-zlib -qt-libpng -qt-libjpeg -opengl desktop -mp
@@ -164,7 +165,7 @@ nmake
 nmake install
 ```
 
-When finishing compilation, configure kit in Qt Creator. Clone Kit "Desktop Qt5.15.1 MSVC" to "Desktop Qt5.15.1 MSVC(static)". Then configure CMake Generator with NMake Makefiles JOM + Extra generator: CodeBlocks.
+When finishing compilation, configure kit in Qt Creator. Clone Kit "Desktop Qt5.15.2 MSVC" to "Desktop Qt5.15.2 MSVC(static)". Then configure CMake Generator with NMake Makefiles JOM + Extra generator: CodeBlocks.
 
 Finally, just open CMakeLists.txt in Qt Creator and build it with MSVC-static kit.
 
@@ -236,7 +237,7 @@ $ md build
 $ cd build
 $ md msvc
 $ cd msvc
-$ cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-bin -G "Visual Studio 15 2017 Win64" ../..
+$ cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-bin -G "Visual Studio 16 2019" ../..
 $ cmake --build . --  /maxcpucount:N /nologo
 ```
 
