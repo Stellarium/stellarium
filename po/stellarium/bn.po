@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-27 00:54+0700\n"
+"POT-Creation-Date: 2020-12-28 14:14+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -4095,7 +4095,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
 #: src/gui/ConfigurationDialog.cpp:1789 src/gui/ConfigurationDialog.cpp:1826
-#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:477
+#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:492
 msgid "System default"
 msgstr "সিস্টেমে ব্যবহৃত"
 
@@ -4528,11 +4528,11 @@ msgstr "Space"
 msgid "Time zone"
 msgstr "প্রাদেশিক সময় অঞ্চল"
 
-#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:475
+#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:490
 msgid "Local Mean Solar Time"
 msgstr "স্থানীয় সময় (ঘড়ি)"
 
-#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:476
+#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:491
 msgid "Local True Solar Time"
 msgstr "স্থানীয় সময় (প্রকৃত)"
 
@@ -4804,11 +4804,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "প্রতিফলনানুপাত ও দশা অনুযায়ী  উজ্জ্ব্যলতা পরিমাপ"
 
-#: src/gui/LocationDialog.cpp:212
+#: src/gui/LocationDialog.cpp:227
 msgid "Reset location list to show all known locations"
 msgstr "তালিকায় থাকা সব নাম দেখাবে"
 
-#: src/gui/LocationDialog.cpp:213
+#: src/gui/LocationDialog.cpp:228
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -4816,23 +4816,23 @@ msgstr ""
 "জি পি এস এর মাধ্যমে ঠিকানা নির্দিষ্ট করা হয়ে গেলে জি পি এস বন্ধ করে দিন । "
 "যদিও সময় অঞ্চল আলাদা করে পরিবর্তন করতে হবে ।"
 
-#: src/gui/LocationDialog.cpp:800
+#: src/gui/LocationDialog.cpp:815
 msgid "GPS listening..."
 msgstr "জিপিএস সন্ধান চলছে ....."
 
-#: src/gui/LocationDialog.cpp:807
+#: src/gui/LocationDialog.cpp:822
 msgid "GPS disconnecting..."
 msgstr "জিপিএস সংযোগ বিচ্ছিন্ন করা হচ্ছে ...."
 
-#: src/gui/LocationDialog.cpp:819
+#: src/gui/LocationDialog.cpp:834
 msgid "GPS location fix"
 msgstr "জি পি এস ঠিকানা সংশোধন"
 
-#: src/gui/LocationDialog.cpp:842
+#: src/gui/LocationDialog.cpp:857
 msgid "GPS:FAILED"
 msgstr "জিপিএস: পাওয়া যায় নি"
 
-#: src/gui/LocationDialog.cpp:854 src/ui_locationDialogGui.h:514
+#: src/gui/LocationDialog.cpp:869 src/ui_locationDialogGui.h:514
 msgid "Get location from GPS"
 msgstr "জিপিএস এর মাধ্যমে ঠিকানা ঠিক করা হবে"
 
@@ -25015,109 +25015,118 @@ msgid "Week"
 msgstr "সপ্তাহ"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgctxt "Icelandic calendar"
 msgid "summer"
 msgstr "গ্রীষ্ম"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgctxt "Icelandic calendar"
 msgid "winter"
 msgstr "শীত"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:171
+#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
+#. [summer|winter] (Month [number]: [name]) - [year]"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:100
+#, qt-format
+msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
+msgstr "%1, %2 নম্বর সপ্তাহ, %3 টির মধ্যে (মাস : %4: %5) - %6"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:172
 msgctxt "Icelandic day name"
 msgid "Sunnudagur"
 msgstr "সুন্নুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:172
+#: plugins/Calendars/src/IcelandicCalendar.cpp:173
 msgctxt "Icelandic day name"
 msgid "Mánudagur"
 msgstr "মানুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:173
+#: plugins/Calendars/src/IcelandicCalendar.cpp:174
 msgctxt "Icelandic day name"
 msgid "Þriðjudagur"
 msgstr "থ্রীদয়ুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:174
+#: plugins/Calendars/src/IcelandicCalendar.cpp:175
 msgctxt "Icelandic day name"
 msgid "Miðvikudagur"
 msgstr "মিদভিকুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:175
+#: plugins/Calendars/src/IcelandicCalendar.cpp:176
 msgctxt "Icelandic day name"
 msgid "Fimmtudagur"
 msgstr "ফিম্মাটুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:176
+#: plugins/Calendars/src/IcelandicCalendar.cpp:177
 msgctxt "Icelandic day name"
 msgid "Föstudagur"
 msgstr "ফোসটুডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:177
+#: plugins/Calendars/src/IcelandicCalendar.cpp:178
 msgctxt "Icelandic day name"
 msgid "Laugardagur"
 msgstr "লাউগারডাগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:179
+#: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
 msgid "unnamed"
 msgstr "নামহীন"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:180
+#: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
 msgid "Harpa"
 msgstr "হারপা"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:181
+#: plugins/Calendars/src/IcelandicCalendar.cpp:182
 msgctxt "Icelandic month name"
 msgid "Skerpla"
 msgstr "স্কেরপ্লা"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:182
+#: plugins/Calendars/src/IcelandicCalendar.cpp:183
 msgctxt "Icelandic month name"
 msgid "Sólmánuður"
 msgstr "সোলমানুদুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:183
+#: plugins/Calendars/src/IcelandicCalendar.cpp:184
 msgctxt "Icelandic month name"
 msgid "Heyannir"
 msgstr "হেইয়ান্নির"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:184
+#: plugins/Calendars/src/IcelandicCalendar.cpp:185
 msgctxt "Icelandic month name"
 msgid "Tvímánuður"
 msgstr "ত্ব্যিমানুদুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:185
+#: plugins/Calendars/src/IcelandicCalendar.cpp:186
 msgctxt "Icelandic month name"
 msgid "Haustmánuður"
 msgstr "হাউস্টমানুদুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:186
+#: plugins/Calendars/src/IcelandicCalendar.cpp:187
 msgctxt "Icelandic month name"
 msgid "Gormánuður"
 msgstr "গোরমানুদুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:187
+#: plugins/Calendars/src/IcelandicCalendar.cpp:188
 msgctxt "Icelandic month name"
 msgid "Ýlir"
 msgstr "ইয়লির"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:188
+#: plugins/Calendars/src/IcelandicCalendar.cpp:189
 msgctxt "Icelandic month name"
 msgid "Mörsugur"
 msgstr "মোরসুগুর"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:189
+#: plugins/Calendars/src/IcelandicCalendar.cpp:190
 msgctxt "Icelandic month name"
 msgid "Þorri"
 msgstr "থোর্রি"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:190
+#: plugins/Calendars/src/IcelandicCalendar.cpp:191
 msgctxt "Icelandic month name"
 msgid "Góa"
 msgstr "গোয়া"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:191
+#: plugins/Calendars/src/IcelandicCalendar.cpp:192
 msgctxt "Icelandic month name"
 msgid "Einmánuður"
 msgstr "এইনমানুদুর"

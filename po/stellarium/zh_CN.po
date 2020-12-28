@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-27 00:54+0700\n"
+"POT-Creation-Date: 2020-12-28 14:14+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -426,7 +426,7 @@ msgstr "银极"
 
 #: src/core/modules/GridLinesMgr.cpp:1765 src/ui_viewDialog.h:3470
 msgid "Galactic center and anticenter"
-msgstr "银心和反银心"
+msgstr "银心/反银心"
 
 #: src/core/modules/GridLinesMgr.cpp:1766 src/ui_viewDialog.h:3378
 msgid "Supergalactic poles"
@@ -2044,7 +2044,7 @@ msgstr "角距离"
 #: src/core/modules/StarWrapper.cpp:311 src/gui/AstroCalcDialog.cpp:6180
 msgctxt "duration"
 msgid "days"
-msgstr "天"
+msgstr "日"
 
 #: src/core/modules/Planet.cpp:820
 msgid "Sidereal period"
@@ -4034,7 +4034,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #: src/gui/ConfigurationDialog.cpp:1789 src/gui/ConfigurationDialog.cpp:1826
-#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:477
+#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:492
 msgid "System default"
 msgstr "系统默认"
 
@@ -4169,7 +4169,7 @@ msgstr "Ctrl + Shift和鼠标滚轮"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: days"
-msgstr "时间滚动：天"
+msgstr "时间滚动：日"
 
 #: src/gui/HelpDialog.cpp:272
 msgid "Ctrl+Alt & mouse wheel"
@@ -4458,11 +4458,11 @@ msgstr "空格键"
 msgid "Time zone"
 msgstr "时区"
 
-#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:475
+#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:490
 msgid "Local Mean Solar Time"
 msgstr "本地平太阳时"
 
-#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:476
+#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:491
 msgid "Local True Solar Time"
 msgstr "本地真太阳时"
 
@@ -4482,7 +4482,7 @@ msgstr "时/秒"
 #: src/gui/StelGuiItems.cpp:716
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr "天/秒"
+msgstr "日/秒"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:722
@@ -4727,33 +4727,33 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "基于相位角和反照率的目视星等。"
 
-#: src/gui/LocationDialog.cpp:212
+#: src/gui/LocationDialog.cpp:227
 msgid "Reset location list to show all known locations"
 msgstr "重置地点列表以显示所有已知地点"
 
-#: src/gui/LocationDialog.cpp:213
+#: src/gui/LocationDialog.cpp:228
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr "切换GPS位置。 （不会更改时区！）满意后切换到其他程序访问GPS设备。"
 
-#: src/gui/LocationDialog.cpp:800
+#: src/gui/LocationDialog.cpp:815
 msgid "GPS listening..."
 msgstr "GPS接收中"
 
-#: src/gui/LocationDialog.cpp:807
+#: src/gui/LocationDialog.cpp:822
 msgid "GPS disconnecting..."
 msgstr "GPS断开"
 
-#: src/gui/LocationDialog.cpp:819
+#: src/gui/LocationDialog.cpp:834
 msgid "GPS location fix"
 msgstr "GPS定位"
 
-#: src/gui/LocationDialog.cpp:842
+#: src/gui/LocationDialog.cpp:857
 msgid "GPS:FAILED"
 msgstr "GPS:失败"
 
-#: src/gui/LocationDialog.cpp:854 src/ui_locationDialogGui.h:514
+#: src/gui/LocationDialog.cpp:869 src/ui_locationDialogGui.h:514
 msgid "Get location from GPS"
 msgstr "从GPS获取位置"
 
@@ -5156,7 +5156,7 @@ msgstr "周期"
 #: src/gui/AstroCalcDialog.cpp:865
 msgctxt "days"
 msgid "d"
-msgstr "天"
+msgstr "日"
 
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:870 src/gui/AstroCalcDialog.cpp:1513
@@ -6015,7 +6015,7 @@ msgstr "轨旋共振"
 
 #: src/gui/AstroCalcDialog.cpp:6206 src/gui/AstroCalcDialog.cpp:6368
 msgid "Days from today"
-msgstr "从今日开始的天数"
+msgstr "从今日开始的日数"
 
 #: src/gui/AstroCalcDialog.cpp:6207 src/gui/AstroCalcDialog.cpp:6349
 msgid "Linear distance"
@@ -6024,7 +6024,7 @@ msgstr "线距离"
 #: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6352
 #: plugins/Calendars/src/ui_calendarsDialog.h:779
 msgid "Day"
-msgstr "天数"
+msgstr "日"
 
 #: src/gui/AstroCalcDialog.cpp:6410
 msgid "Change of angular distance between the Moon and selected object"
@@ -18341,7 +18341,7 @@ msgstr "地球的平衡温度"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgctxt "time period"
 msgid "day"
-msgstr "天"
+msgstr "日"
 
 #. TRANSLATORS: angular distance
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
@@ -22838,7 +22838,7 @@ msgstr "历法"
 
 #: plugins/Calendars/src/Calendars.cpp:72
 msgid "Calendars of the world"
-msgstr "世界历法"
+msgstr "世界各地的历法"
 
 #: plugins/Calendars/src/Calendars.cpp:254
 #: plugins/Calendars/src/ui_calendarsDialog.h:762
@@ -22946,67 +22946,67 @@ msgstr "巴厘岛巴乌干历"
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
 msgctxt "Armenian month name"
 msgid "Nawasardi"
-msgstr ""
+msgstr "Nawasardi"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:41
 msgctxt "Armenian month name"
 msgid "Hor̄i"
-msgstr ""
+msgstr "Hor̄i"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:42
 msgctxt "Armenian month name"
 msgid "Sahmi"
-msgstr ""
+msgstr "Sahmi"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:43
 msgctxt "Armenian month name"
 msgid "Trē"
-msgstr ""
+msgstr "Trē"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:44
 msgctxt "Armenian month name"
 msgid "K'aloch"
-msgstr ""
+msgstr "K'aloch"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:45
 msgctxt "Armenian month name"
 msgid "Arach"
-msgstr ""
+msgstr "Arach"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:46
 msgctxt "Armenian month name"
 msgid "Mehekani"
-msgstr ""
+msgstr "Mehekani"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:47
 msgctxt "Armenian month name"
 msgid "Areg"
-msgstr ""
+msgstr "Areg"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:48
 msgctxt "Armenian month name"
 msgid "Ahekani"
-msgstr ""
+msgstr "Ahekani"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:49
 msgctxt "Armenian month name"
 msgid "Mareri"
-msgstr ""
+msgstr "Mareri"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:50
 msgctxt "Armenian month name"
 msgid "Margach"
-msgstr ""
+msgstr "Margach"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:51
 msgctxt "Armenian month name"
 msgid "Hrotich"
-msgstr ""
+msgstr "Hrotich"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:52
 msgctxt "Armenian month name"
 msgid "(aweleach)"
-msgstr ""
+msgstr "(aweleach)"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:88
 msgid "Armenian Era"
@@ -23210,519 +23210,519 @@ msgstr "Nemontemi (无用之日)"
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:215
 msgctxt "Balinese Pawukon date name"
 msgid "Luang"
-msgstr ""
+msgstr "Luang"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:216
 msgctxt "Balinese Pawukon date name"
 msgid "Menga"
-msgstr ""
+msgstr "Menga"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:217
 msgctxt "Balinese Pawukon date name"
 msgid "Pepet"
-msgstr ""
+msgstr "Pepet"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:218
 msgctxt "Balinese Pawukon date name"
 msgid "Pasah"
-msgstr ""
+msgstr "Pasah"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:219
 msgctxt "Balinese Pawukon date name"
 msgid "Beteng"
-msgstr ""
+msgstr "Beteng"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:220
 msgctxt "Balinese Pawukon date name"
 msgid "Kajeng"
-msgstr ""
+msgstr "Kajeng"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:221
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:243
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:264
 msgctxt "Balinese Pawukon date name"
 msgid "Sri"
-msgstr ""
+msgstr "Sri"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:222
 msgctxt "Balinese Pawukon date name"
 msgid "Laba"
-msgstr ""
+msgstr "Laba"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:223
 msgctxt "Balinese Pawukon date name"
 msgid "Jaya"
-msgstr ""
+msgstr "Jaya"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:224
 msgctxt "Balinese Pawukon date name"
 msgid "Menala"
-msgstr ""
+msgstr "Menala"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:225
 msgctxt "Balinese Pawukon date name"
 msgid "Umanis"
-msgstr ""
+msgstr "Umanis"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:226
 msgctxt "Balinese Pawukon date name"
 msgid "Paing"
-msgstr ""
+msgstr "Paing"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:227
 msgctxt "Balinese Pawukon date name"
 msgid "Pon"
-msgstr ""
+msgstr "Pon"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:228
 msgctxt "Balinese Pawukon date name"
 msgid "Wage"
-msgstr ""
+msgstr "Wage"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:229
 msgctxt "Balinese Pawukon date name"
 msgid "Keliwon"
-msgstr ""
+msgstr "Keliwon"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:230
 msgctxt "Balinese Pawukon date name"
 msgid "Tungleh"
-msgstr ""
+msgstr "Tungleh"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:231
 msgctxt "Balinese Pawukon date name"
 msgid "Aryang"
-msgstr ""
+msgstr "Aryang"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:232
 msgctxt "Balinese Pawukon date name"
 msgid "Urukung"
-msgstr ""
+msgstr "Urukung"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:233
 msgctxt "Balinese Pawukon date name"
 msgid "Paniron"
-msgstr ""
+msgstr "Paniron"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:234
 msgctxt "Balinese Pawukon date name"
 msgid "Was"
-msgstr ""
+msgstr "Was"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:235
 msgctxt "Balinese Pawukon date name"
 msgid "Maulu"
-msgstr ""
+msgstr "Maulu"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:236
 msgctxt "Balinese Pawukon date name"
 msgid "Redite"
-msgstr ""
+msgstr "Redite"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:237
 msgctxt "Balinese Pawukon date name"
 msgid "Coma"
-msgstr ""
+msgstr "Coma"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:238
 msgctxt "Balinese Pawukon date name"
 msgid "Anggara"
-msgstr ""
+msgstr "Anggara"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:239
 msgctxt "Balinese Pawukon date name"
 msgid "Buda"
-msgstr ""
+msgstr "Buda"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:240
 msgctxt "Balinese Pawukon date name"
 msgid "Wraspati"
-msgstr ""
+msgstr "Wraspati"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:241
 msgctxt "Balinese Pawukon date name"
 msgid "Sukra"
-msgstr ""
+msgstr "Sukra"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:242
 msgctxt "Balinese Pawukon date name"
 msgid "Saniscara"
-msgstr ""
+msgstr "Saniscara"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:244
 msgctxt "Balinese Pawukon date name"
 msgid "Indra"
-msgstr ""
+msgstr "Indra"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:245
 msgctxt "Balinese Pawukon date name"
 msgid "Guru"
-msgstr ""
+msgstr "Guru"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:246
 msgctxt "Balinese Pawukon date name"
 msgid "Yama"
-msgstr ""
+msgstr "Yama"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:247
 msgctxt "Balinese Pawukon date name"
 msgid "Ludra"
-msgstr ""
+msgstr "Ludra"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:248
 msgctxt "Balinese Pawukon date name"
 msgid "Brahma"
-msgstr ""
+msgstr "Brahma"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:249
 msgctxt "Balinese Pawukon date name"
 msgid "Kala"
-msgstr ""
+msgstr "Kala"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:250
 msgctxt "Balinese Pawukon date name"
 msgid "Uma"
-msgstr ""
+msgstr "Uma"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:251
 msgctxt "Balinese Pawukon date name"
 msgid "Dangu"
-msgstr ""
+msgstr "Dangu"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:252
 msgctxt "Balinese Pawukon date name"
 msgid "Jangur"
-msgstr ""
+msgstr "Jangur"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:253
 msgctxt "Balinese Pawukon date name"
 msgid "Gigis"
-msgstr ""
+msgstr "Gigis"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:254
 msgctxt "Balinese Pawukon date name"
 msgid "Nohan"
-msgstr ""
+msgstr "Nohan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:255
 msgctxt "Balinese Pawukon date name"
 msgid "Ogan"
-msgstr ""
+msgstr "Ogan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:256
 msgctxt "Balinese Pawukon date name"
 msgid "Erangan"
-msgstr ""
+msgstr "Erangan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:257
 msgctxt "Balinese Pawukon date name"
 msgid "Urungan"
-msgstr ""
+msgstr "Urungan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:258
 msgctxt "Balinese Pawukon date name"
 msgid "Tulus"
-msgstr ""
+msgstr "Tulus"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:259
 msgctxt "Balinese Pawukon date name"
 msgid "Dadi"
-msgstr ""
+msgstr "Dadi"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:260
 msgctxt "Balinese Pawukon date name"
 msgid "Pandita"
-msgstr ""
+msgstr "Pandita"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:261
 msgctxt "Balinese Pawukon date name"
 msgid "Pati"
-msgstr ""
+msgstr "Pati"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:262
 msgctxt "Balinese Pawukon date name"
 msgid "Suka"
-msgstr ""
+msgstr "Suka"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:263
 msgctxt "Balinese Pawukon date name"
 msgid "Duka"
-msgstr ""
+msgstr "Duka"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:265
 msgctxt "Balinese Pawukon date name"
 msgid "Manuh"
-msgstr ""
+msgstr "Manuh"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:266
 msgctxt "Balinese Pawukon date name"
 msgid "Manusa"
-msgstr ""
+msgstr "Manusa"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:267
 msgctxt "Balinese Pawukon date name"
 msgid "Raja"
-msgstr ""
+msgstr "Raja"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:268
 msgctxt "Balinese Pawukon date name"
 msgid "Dewa"
-msgstr ""
+msgstr "Dewa"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:269
 msgctxt "Balinese Pawukon date name"
 msgid "Raksasa"
-msgstr ""
+msgstr "Raksasa"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:270
 msgctxt "Balinese Pawukon date name"
 msgid "Sinta"
-msgstr ""
+msgstr "Sinta"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:271
 msgctxt "Balinese Pawukon date name"
 msgid "Landep"
-msgstr ""
+msgstr "Landep"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:272
 msgctxt "Balinese Pawukon date name"
 msgid "Ukir"
-msgstr ""
+msgstr "Ukir"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:273
 msgctxt "Balinese Pawukon date name"
 msgid "Kulantir"
-msgstr ""
+msgstr "Kulantir"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:274
 msgctxt "Balinese Pawukon date name"
 msgid "Taulu"
-msgstr ""
+msgstr "Taulu"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:275
 msgctxt "Balinese Pawukon date name"
 msgid "Gumbreg"
-msgstr ""
+msgstr "Gumbreg"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:276
 msgctxt "Balinese Pawukon date name"
 msgid "Wariga"
-msgstr ""
+msgstr "Wariga"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:277
 msgctxt "Balinese Pawukon date name"
 msgid "Warigadian"
-msgstr ""
+msgstr "Warigadian"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:278
 msgctxt "Balinese Pawukon date name"
 msgid "Jukungwangi"
-msgstr ""
+msgstr "Jukungwangi"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:279
 msgctxt "Balinese Pawukon date name"
 msgid "Sungsang"
-msgstr ""
+msgstr "Sungsang"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:280
 msgctxt "Balinese Pawukon date name"
 msgid "Dunggulan"
-msgstr ""
+msgstr "Dunggulan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:281
 msgctxt "Balinese Pawukon date name"
 msgid "Kuningan"
-msgstr ""
+msgstr "Kuningan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:282
 msgctxt "Balinese Pawukon date name"
 msgid "Langkir"
-msgstr ""
+msgstr "Langkir"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:283
 msgctxt "Balinese Pawukon date name"
 msgid "Medangsia"
-msgstr ""
+msgstr "Medangsia"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:284
 msgctxt "Balinese Pawukon date name"
 msgid "Pujut"
-msgstr ""
+msgstr "Pujut"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:285
 msgctxt "Balinese Pawukon date name"
 msgid "Pahang"
-msgstr ""
+msgstr "Pahang"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:286
 msgctxt "Balinese Pawukon date name"
 msgid "Krulut"
-msgstr ""
+msgstr "Krulut"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:287
 msgctxt "Balinese Pawukon date name"
 msgid "Merakih"
-msgstr ""
+msgstr "Merakih"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:288
 msgctxt "Balinese Pawukon date name"
 msgid "Tambir"
-msgstr ""
+msgstr "Tambir"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:289
 msgctxt "Balinese Pawukon date name"
 msgid "Medangkungan"
-msgstr ""
+msgstr "Medangkungan"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:290
 msgctxt "Balinese Pawukon date name"
 msgid "Matal"
-msgstr ""
+msgstr "Matal"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:291
 msgctxt "Balinese Pawukon date name"
 msgid "Uye"
-msgstr ""
+msgstr "Uye"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:292
 msgctxt "Balinese Pawukon date name"
 msgid "Menail"
-msgstr ""
+msgstr "Menail"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:293
 msgctxt "Balinese Pawukon date name"
 msgid "Parangbakat"
-msgstr ""
+msgstr "Parangbakat"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:294
 msgctxt "Balinese Pawukon date name"
 msgid "Bala"
-msgstr ""
+msgstr "Bala"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:295
 msgctxt "Balinese Pawukon date name"
 msgid "Ugu"
-msgstr ""
+msgstr "Ugu"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:296
 msgctxt "Balinese Pawukon date name"
 msgid "Wayang"
-msgstr ""
+msgstr "Wayang"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:297
 msgctxt "Balinese Pawukon date name"
 msgid "Kelawu"
-msgstr ""
+msgstr "Kelawu"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:298
 msgctxt "Balinese Pawukon date name"
 msgid "Dukut"
-msgstr ""
+msgstr "Dukut"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:299
 msgctxt "Balinese Pawukon date name"
 msgid "Watugunung"
-msgstr ""
+msgstr "Watugunung"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:42
 msgctxt "Coptic month name"
 msgid "Thoouth"
-msgstr ""
+msgstr "Thoouth"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:43
 msgctxt "Coptic month name"
 msgid "Paope"
-msgstr ""
+msgstr "Paope"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:44
 msgctxt "Coptic month name"
 msgid "Athōr"
-msgstr ""
+msgstr "Athōr"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:45
 msgctxt "Coptic month name"
 msgid "Koiak"
-msgstr ""
+msgstr "Koiak"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:46
 msgctxt "Coptic month name"
 msgid "Tōbe"
-msgstr ""
+msgstr "Tōbe"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:47
 msgctxt "Coptic month name"
 msgid "Meshir"
-msgstr ""
+msgstr "Meshir"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:48
 msgctxt "Coptic month name"
 msgid "Paremotep"
-msgstr ""
+msgstr "Paremotep"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:49
 msgctxt "Coptic month name"
 msgid "Parmoute"
-msgstr ""
+msgstr "Parmoute"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:50
 msgctxt "Coptic month name"
 msgid "Pashons"
-msgstr ""
+msgstr "Pashons"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:51
 msgctxt "Coptic month name"
 msgid "Paōne"
-msgstr ""
+msgstr "Paōne"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:52
 msgctxt "Coptic month name"
 msgid "Epēp"
-msgstr ""
+msgstr "Epēp"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:53
 msgctxt "Coptic month name"
 msgid "Mesorē"
-msgstr ""
+msgstr "Mesorē"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:54
 msgctxt "Coptic month name"
 msgid "Epagomenē"
-msgstr ""
+msgstr "Epagomenē"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:56
 msgctxt "Coptic day name"
 msgid "Tkyriake"
-msgstr ""
+msgstr "Tkyriake"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:57
 msgctxt "Coptic day name"
 msgid "Pesnau"
-msgstr ""
+msgstr "Pesnau"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:58
 msgctxt "Coptic day name"
 msgid "Pshoment"
-msgstr ""
+msgstr "Pshoment"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:59
 msgctxt "Coptic day name"
 msgid "Peftoou"
-msgstr ""
+msgstr "Peftoou"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:60
 msgctxt "Coptic day name"
 msgid "Ptiou"
-msgstr ""
+msgstr "Ptiou"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:61
 msgctxt "Coptic day name"
 msgid "Psoou"
-msgstr ""
+msgstr "Psoou"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:62
 msgctxt "Coptic day name"
 msgid "Psabbaton"
-msgstr ""
+msgstr "Psabbaton"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:100
 msgid "Era Martyrum"
@@ -23731,67 +23731,67 @@ msgstr "殉教纪元"
 #: plugins/Calendars/src/EgyptianCalendar.cpp:41
 msgctxt "Egyptian month name"
 msgid "Thoth"
-msgstr ""
+msgstr "Thoth"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:42
 msgctxt "Egyptian month name"
 msgid "Phaophi"
-msgstr ""
+msgstr "Phaophi"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:43
 msgctxt "Egyptian month name"
 msgid "Athyr"
-msgstr ""
+msgstr "Athyr"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:44
 msgctxt "Egyptian month name"
 msgid "Choiak"
-msgstr ""
+msgstr "Choiak"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:45
 msgctxt "Egyptian month name"
 msgid "Tybi"
-msgstr ""
+msgstr "Tybi"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:46
 msgctxt "Egyptian month name"
 msgid "Mechir"
-msgstr ""
+msgstr "Mechir"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:47
 msgctxt "Egyptian month name"
 msgid "Phamenoth"
-msgstr ""
+msgstr "Phamenoth"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:48
 msgctxt "Egyptian month name"
 msgid "Pharmuthi"
-msgstr ""
+msgstr "Pharmuthi"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:49
 msgctxt "Egyptian month name"
 msgid "Pachon"
-msgstr ""
+msgstr "Pachon"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:50
 msgctxt "Egyptian month name"
 msgid "Payni"
-msgstr ""
+msgstr "Payni"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:51
 msgctxt "Egyptian month name"
 msgid "Epiphi"
-msgstr ""
+msgstr "Epiphi"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:52
 msgctxt "Egyptian month name"
 msgid "Mesori"
-msgstr ""
+msgstr "Mesori"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:53
 msgctxt "Egyptian month name"
 msgid "(Epagomenae)"
-msgstr ""
+msgstr "(Epagomenae)"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:89
 msgid "Nabonassar Era"
@@ -23800,102 +23800,102 @@ msgstr "纳波纳萨尔纪元"
 #: plugins/Calendars/src/EthiopicCalendar.cpp:42
 msgctxt "Ethiopic month name"
 msgid "Maskaram"
-msgstr ""
+msgstr "Maskaram"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:43
 msgctxt "Ethiopic month name"
 msgid "Teqemt"
-msgstr ""
+msgstr "Teqemt"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:44
 msgctxt "Ethiopic month name"
 msgid "Hedār"
-msgstr ""
+msgstr "Hedār"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:45
 msgctxt "Ethiopic month name"
 msgid "Takhśāś"
-msgstr ""
+msgstr "Takhśāś"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:46
 msgctxt "Ethiopic month name"
 msgid "Ṭer"
-msgstr ""
+msgstr "Ṭer"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:47
 msgctxt "Ethiopic month name"
 msgid "Yakātit"
-msgstr ""
+msgstr "Yakātit"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:48
 msgctxt "Ethiopic month name"
 msgid "Magābit"
-msgstr ""
+msgstr "Magābit"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:49
 msgctxt "Ethiopic month name"
 msgid "Miyāzyā"
-msgstr ""
+msgstr "Miyāzyā"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:50
 msgctxt "Ethiopic month name"
 msgid "Genbot"
-msgstr ""
+msgstr "Genbot"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:51
 msgctxt "Ethiopic month name"
 msgid "Sanē"
-msgstr ""
+msgstr "Sanē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:52
 msgctxt "Ethiopic month name"
 msgid "Ḥamlē"
-msgstr ""
+msgstr "Ḥamlē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:53
 msgctxt "Ethiopic month name"
 msgid "Naḥasē"
-msgstr ""
+msgstr "Naḥasē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:54
 msgctxt "Ethiopic month name"
 msgid "Pāguemēn"
-msgstr ""
+msgstr "Pāguemēn"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:56
 msgctxt "Ethiopic day name"
 msgid "Iḥud"
-msgstr ""
+msgstr "Iḥud"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:57
 msgctxt "Ethiopic day name"
 msgid "Sanyo"
-msgstr ""
+msgstr "Sanyo"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:58
 msgctxt "Ethiopic day name"
 msgid "Maksanyo"
-msgstr ""
+msgstr "Maksanyo"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:59
 msgctxt "Ethiopic day name"
 msgid "Rob/Rabu`e"
-msgstr ""
+msgstr "Rob/Rabu`e"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:60
 msgctxt "Ethiopic day name"
 msgid "H̱amus"
-msgstr ""
+msgstr "H̱amus"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:61
 msgctxt "Ethiopic day name"
 msgid "Arb"
-msgstr ""
+msgstr "Arb"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:62
 msgctxt "Ethiopic day name"
 msgid "Kidāmmē"
-msgstr ""
+msgstr "Kidāmmē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:100
 msgid "Ethiopic Era of Mercy"
@@ -23903,123 +23903,132 @@ msgstr "埃塞俄比亚仁慈纪元"
 
 #: plugins/Calendars/src/ISOCalendar.cpp:79
 msgid "Week"
-msgstr "周"
+msgstr "Week"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgctxt "Icelandic calendar"
 msgid "summer"
-msgstr ""
+msgstr "夏半年"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgctxt "Icelandic calendar"
 msgid "winter"
-msgstr ""
+msgstr "冬半年"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:171
-msgctxt "Icelandic day name"
-msgid "Sunnudagur"
-msgstr ""
+#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
+#. [summer|winter] (Month [number]: [name]) - [year]"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:100
+#, qt-format
+msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
+msgstr " %3 (第%4月: %5) 第%2周%1  - %6"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:172
 msgctxt "Icelandic day name"
-msgid "Mánudagur"
-msgstr ""
+msgid "Sunnudagur"
+msgstr "Sunnudagur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:173
 msgctxt "Icelandic day name"
-msgid "Þriðjudagur"
-msgstr ""
+msgid "Mánudagur"
+msgstr "Mánudagur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:174
 msgctxt "Icelandic day name"
-msgid "Miðvikudagur"
-msgstr ""
+msgid "Þriðjudagur"
+msgstr "Þriðjudagur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:175
 msgctxt "Icelandic day name"
-msgid "Fimmtudagur"
-msgstr ""
+msgid "Miðvikudagur"
+msgstr "Miðvikudagur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:176
 msgctxt "Icelandic day name"
-msgid "Föstudagur"
-msgstr ""
+msgid "Fimmtudagur"
+msgstr "Fimmtudagur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:177
 msgctxt "Icelandic day name"
-msgid "Laugardagur"
-msgstr ""
+msgid "Föstudagur"
+msgstr "Föstudagur"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:179
+#: plugins/Calendars/src/IcelandicCalendar.cpp:178
+msgctxt "Icelandic day name"
+msgid "Laugardagur"
+msgstr "Laugardagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
 msgid "unnamed"
 msgstr "未命名"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:180
-msgctxt "Icelandic month name"
-msgid "Harpa"
-msgstr ""
-
 #: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
-msgid "Skerpla"
-msgstr ""
+msgid "Harpa"
+msgstr "Harpa"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:182
 msgctxt "Icelandic month name"
-msgid "Sólmánuður"
-msgstr ""
+msgid "Skerpla"
+msgstr "Skerpla"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:183
 msgctxt "Icelandic month name"
-msgid "Heyannir"
-msgstr ""
+msgid "Sólmánuður"
+msgstr "Sólmánuður"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:184
 msgctxt "Icelandic month name"
-msgid "Tvímánuður"
-msgstr ""
+msgid "Heyannir"
+msgstr "Heyannir"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:185
 msgctxt "Icelandic month name"
-msgid "Haustmánuður"
-msgstr ""
+msgid "Tvímánuður"
+msgstr "Tvímánuður"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:186
 msgctxt "Icelandic month name"
-msgid "Gormánuður"
-msgstr ""
+msgid "Haustmánuður"
+msgstr "Haustmánuður"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:187
 msgctxt "Icelandic month name"
-msgid "Ýlir"
-msgstr ""
+msgid "Gormánuður"
+msgstr "Gormánuður"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:188
 msgctxt "Icelandic month name"
-msgid "Mörsugur"
-msgstr ""
+msgid "Ýlir"
+msgstr "Ýlir"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:189
 msgctxt "Icelandic month name"
-msgid "Þorri"
-msgstr ""
+msgid "Mörsugur"
+msgstr "Mörsugur"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:190
 msgctxt "Icelandic month name"
-msgid "Góa"
-msgstr ""
+msgid "Þorri"
+msgstr "Þorri"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:191
 msgctxt "Icelandic month name"
+msgid "Góa"
+msgstr "Góa"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:192
+msgctxt "Icelandic month name"
 msgid "Einmánuður"
-msgstr ""
+msgstr "Einmánuður"
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
-msgstr "公元"
+msgstr "A.D."
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "B.C."
-msgstr "公元前"
+msgstr "B.C."
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:40
 msgctxt "Maya Haab month name"
@@ -24219,308 +24228,308 @@ msgstr "Ahau"
 #: plugins/Calendars/src/OlympicCalendar.cpp:61
 #, qt-format
 msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
-msgstr "第%4届奥林匹克运动会于%3年%2月%1日"
+msgstr "第%4次奥林匹克运动会在%3年%2月%1日前"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr ""
+msgstr "Ianuarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
 msgid "Februarii"
-msgstr ""
+msgstr "Februarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
 msgid "Martii"
-msgstr ""
+msgstr "Martii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
 msgid "Aprilis"
-msgstr ""
+msgstr "Aprilis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:40
 msgctxt "Roman month name (genitive)"
 msgid "Maii"
-msgstr ""
+msgstr "Maii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:41
 msgctxt "Roman month name (genitive)"
 msgid "Iunii"
-msgstr ""
+msgstr "Iunii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:42
 msgctxt "Roman month name (genitive)"
 msgid "Iulii"
-msgstr ""
+msgstr "Iulii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:43
 msgctxt "Roman month name (genitive)"
 msgid "Augusti"
-msgstr ""
+msgstr "Augusti"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:44
 msgctxt "Roman month name (genitive)"
 msgid "Septembris"
-msgstr ""
+msgstr "Septembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:45
 msgctxt "Roman month name (genitive)"
 msgid "Octobris"
-msgstr ""
+msgstr "Octobris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:46
 msgctxt "Roman month name (genitive)"
 msgid "Novembris"
-msgstr ""
+msgstr "Novembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:47
 msgctxt "Roman month name (genitive)"
 msgid "Decembris"
-msgstr ""
+msgstr "Decembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:101
 msgctxt "ab urbe condita"
 msgid "A.U.C."
-msgstr ""
+msgstr "A.U.C."
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
 msgctxt "Zoroastrian month name"
 msgid "Ferverdīn"
-msgstr ""
+msgstr "Ferverdīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
 msgctxt "Zoroastrian month name"
 msgid "Ardebehesht"
-msgstr ""
+msgstr "Ardebehesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
 msgctxt "Zoroastrian month name"
 msgid "Khordād"
-msgstr ""
+msgstr "Khordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
 msgctxt "Zoroastrian month name"
 msgid "Tīr"
-msgstr ""
+msgstr "Tīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
 msgctxt "Zoroastrian month name"
 msgid "Mordād"
-msgstr ""
+msgstr "Mordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
 msgctxt "Zoroastrian month name"
 msgid "Sharīr"
-msgstr ""
+msgstr "Sharīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
 msgctxt "Zoroastrian month name"
 msgid "Mihr"
-msgstr ""
+msgstr "Mihr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
 msgctxt "Zoroastrian month name"
 msgid "Abān"
-msgstr ""
+msgstr "Abān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
 msgctxt "Zoroastrian month name"
 msgid "Āder"
-msgstr ""
+msgstr "Āder"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
 msgctxt "Zoroastrian month name"
 msgid "Deï"
-msgstr ""
+msgstr "Deï"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
 msgctxt "Zoroastrian month name"
 msgid "Bahmen"
-msgstr ""
+msgstr "Bahmen"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
 msgctxt "Zoroastrian month name"
 msgid "Asfendārmed"
-msgstr ""
+msgstr "Asfendārmed"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
 msgctxt "Zoroastrian month name"
 msgid "(epagomenae)"
-msgstr ""
+msgstr "(epagomenae)"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
 msgctxt "Zoroastrian day name"
 msgid "Hormuz"
-msgstr ""
+msgstr "Hormuz"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
 msgctxt "Zoroastrian day name"
 msgid "Bahman"
-msgstr ""
+msgstr "Bahman"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
 msgctxt "Zoroastrian day name"
 msgid "Ordībehesht"
-msgstr ""
+msgstr "Ordībehesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
 msgctxt "Zoroastrian day name"
 msgid "Shahrīvar"
-msgstr ""
+msgstr "Shahrīvar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
 msgctxt "Zoroastrian day name"
 msgid "Esfandārmud"
-msgstr ""
+msgstr "Esfandārmud"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
 msgctxt "Zoroastrian day name"
 msgid "Xordād"
-msgstr ""
+msgstr "Xordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
 msgctxt "Zoroastrian day name"
 msgid "Mordād"
-msgstr ""
+msgstr "Mordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
 msgctxt "Zoroastrian day name"
 msgid "Diy be Āzar"
-msgstr ""
+msgstr "Diy be Āzar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
 msgctxt "Zoroastrian day name"
 msgid "Āzar"
-msgstr ""
+msgstr "Āzar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
 msgctxt "Zoroastrian day name"
 msgid "Ābān"
-msgstr ""
+msgstr "Ābān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
 msgctxt "Zoroastrian day name"
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
 msgctxt "Zoroastrian day name"
 msgid "Māh"
-msgstr ""
+msgstr "Māh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
 msgctxt "Zoroastrian day name"
 msgid "Tīr"
-msgstr ""
+msgstr "Tīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
 msgctxt "Zoroastrian day name"
 msgid "Goosh"
-msgstr ""
+msgstr "Goosh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
 msgctxt "Zoroastrian day name"
 msgid "Diy be Mehr"
-msgstr ""
+msgstr "Diy be Mehr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
 msgctxt "Zoroastrian day name"
 msgid "Mehr"
-msgstr ""
+msgstr "Mehr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
 msgctxt "Zoroastrian day name"
 msgid "Sorūsh"
-msgstr ""
+msgstr "Sorūsh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
 msgctxt "Zoroastrian day name"
 msgid "Rashn"
-msgstr ""
+msgstr "Rashn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
 msgctxt "Zoroastrian day name"
 msgid "Farvardīn"
-msgstr ""
+msgstr "Farvardīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
 msgctxt "Zoroastrian day name"
 msgid "Bahrām"
-msgstr ""
+msgstr "Bahrām"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
 msgctxt "Zoroastrian day name"
 msgid "Rām"
-msgstr ""
+msgstr "Rām"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
 msgctxt "Zoroastrian day name"
 msgid "Bād"
-msgstr ""
+msgstr "Bād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
 msgctxt "Zoroastrian day name"
 msgid "Diy be Dīn"
-msgstr ""
+msgstr "Diy be Dīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
 msgctxt "Zoroastrian day name"
 msgid "Dīn"
-msgstr ""
+msgstr "Dīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
 msgctxt "Zoroastrian day name"
 msgid "Ard"
-msgstr ""
+msgstr "Ard"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
 msgctxt "Zoroastrian day name"
 msgid "Ashtād"
-msgstr ""
+msgstr "Ashtād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
 msgctxt "Zoroastrian day name"
 msgid "Asmān"
-msgstr ""
+msgstr "Asmān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
 msgctxt "Zoroastrian day name"
 msgid "Zāmyād"
-msgstr ""
+msgstr "Zāmyād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
 msgctxt "Zoroastrian day name"
 msgid "Māresfand"
-msgstr ""
+msgstr "Māresfand"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
 msgctxt "Zoroastrian day name"
 msgid "Anīrān"
-msgstr ""
+msgstr "Anīrān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
 msgctxt "Zoroastrian day name"
 msgid "Ahnad"
-msgstr ""
+msgstr "Ahnad"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
 msgctxt "Zoroastrian day name"
 msgid "Ashnad"
-msgstr ""
+msgstr "Ashnad"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
 msgctxt "Zoroastrian day name"
 msgid "Axshatar"
-msgstr ""
+msgstr "Axshatar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
 msgctxt "Zoroastrian day name"
 msgid "Behesht"
-msgstr ""
+msgstr "Behesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
 msgid "Jezdegerd Era"
@@ -24666,11 +24675,11 @@ msgstr "年"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:787
 msgid "Lunisolar"
-msgstr "阴阳历"
+msgstr "日与月"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:789
 msgid "Katun"
-msgstr ""
+msgstr "Katun"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:790
 msgid "Xihuitl"
@@ -24687,19 +24696,19 @@ msgstr "哈布历"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:793
 msgid "Tun"
-msgstr ""
+msgstr "Tun"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:794
 msgid "Kin"
-msgstr ""
+msgstr "Kin"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:795
 msgid "Uinal"
-msgstr ""
+msgstr "Uinal"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:796
 msgid "Baktun"
-msgstr ""
+msgstr "Baktun"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:797
 msgid "Long Count"

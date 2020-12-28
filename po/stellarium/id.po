@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-27 00:54+0700\n"
+"POT-Creation-Date: 2020-12-28 14:14+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/stellarium/teams/80998/id/)\n"
@@ -4027,7 +4027,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1789 src/gui/ConfigurationDialog.cpp:1826
-#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:477
+#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:492
 msgid "System default"
 msgstr ""
 
@@ -4459,11 +4459,11 @@ msgstr ""
 msgid "Time zone"
 msgstr "Zona waktu"
 
-#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:475
+#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:490
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:476
+#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:491
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -4720,33 +4720,33 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:212
+#: src/gui/LocationDialog.cpp:227
 msgid "Reset location list to show all known locations"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:213
+#: src/gui/LocationDialog.cpp:228
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:800
+#: src/gui/LocationDialog.cpp:815
 msgid "GPS listening..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:807
+#: src/gui/LocationDialog.cpp:822
 msgid "GPS disconnecting..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:819
+#: src/gui/LocationDialog.cpp:834
 msgid "GPS location fix"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:842
+#: src/gui/LocationDialog.cpp:857
 msgid "GPS:FAILED"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:854 src/ui_locationDialogGui.h:514
+#: src/gui/LocationDialog.cpp:869 src/ui_locationDialogGui.h:514
 msgid "Get location from GPS"
 msgstr ""
 
@@ -13428,15 +13428,15 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
 msgid "Visual resolution"
-msgstr ""
+msgstr "Resolusi visual"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
 msgid "Visual resolution is based on eye properties and magnification"
-msgstr ""
+msgstr "Resolusi visual didasarkan pada properti mata dan perbesaran"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
 msgid "Cannot delete the last sensor."
-msgstr ""
+msgstr "Tidak bisa menghapus sensor terakhir."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 msgid "Cannot delete the last ocular."
@@ -13444,17 +13444,17 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
 msgid "Cannot delete the last telescope."
-msgstr ""
+msgstr "Tidak bisa menghapus teleskop terakhir."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:569
 msgid "tFOV:"
-msgstr ""
+msgstr "tFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:571
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Faktor perbesaran:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
@@ -13570,7 +13570,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
-msgstr ""
+msgstr "Catatan"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid ""
@@ -13611,11 +13611,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Show resolution criteria"
-msgstr ""
+msgstr "Tunjukkan kriteria resolusi"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Panel kontrol pada layar"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1444
 #: plugins/Oculars/src/ui_ocularDialog.h:1448
@@ -13624,7 +13624,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "...font size"
-msgstr ""
+msgstr "...ukuran fonta"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid ""
@@ -13642,15 +13642,15 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Line Color"
-msgstr ""
+msgstr "Warna Garis"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Color for text which is shown only when GUI is switched off."
-msgstr ""
+msgstr "Warna untuk teks yang hanya ditampilkan ketika GUI dimatikan"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "Text Color"
-msgstr ""
+msgstr "Warna Teks"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Show oculars button on toolbar"
@@ -13667,7 +13667,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "Sembunyikan kisi dan garis ketika difungsikan"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Enable only if an object is selected"
@@ -13675,7 +13675,7 @@ msgstr "Hanya aktifkan jika sebuah objek dipilih"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid "Show border circle"
-msgstr ""
+msgstr "Tunjukkan lingkaran batas"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Show FOV outline"
@@ -13719,7 +13719,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "Sensor view"
-msgstr ""
+msgstr "Tampilan sensor"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1496
 msgid "Use degrees and minutes for FOV of CCD"
@@ -13767,11 +13767,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1513
 msgid "Horizontal size (width)"
-msgstr ""
+msgstr "Ukuran horizontal (lebar)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1516
 msgid "Vertical size (height)"
-msgstr ""
+msgstr "Ukuran vertikal (tinggi)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1519
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
@@ -13779,32 +13779,32 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1521
 msgid "Show pixel grid"
-msgstr ""
+msgstr "Tunjukkan kisi piksel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1522
 msgid "Telrad view"
-msgstr ""
+msgstr "Tampilan telrad"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgctxt "abbreviation"
 msgid "FOV:"
-msgstr ""
+msgstr "FOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1528
 msgid "FOV for circle 1"
-msgstr ""
+msgstr "FOV untuk lingkaran 1"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "FOV for circle 2"
-msgstr ""
+msgstr "FOV untuk lingkaran 2"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "FOV for circle 3"
-msgstr ""
+msgstr "FOV untuk lingkaran 3"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1537
 msgid "FOV for circle 4"
-msgstr ""
+msgstr "FOV untuk lingkaran 4"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 msgid "Restore original Telrad FOV"
@@ -13858,7 +13858,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Multiplier:"
-msgstr ""
+msgstr "Pengali:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Lenses"
@@ -13882,7 +13882,7 @@ msgstr "Resolusi x (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Prism/CCD height (mm):"
-msgstr ""
+msgstr "Tinggi prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid ""
@@ -13892,11 +13892,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Prism/CCD distance (mm):"
-msgstr ""
+msgstr "Jarak prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1569
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Sudut Rotasi (derajat):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1570
 msgid "Binning y:"
@@ -13904,7 +13904,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1571
 msgid "Prism/CCD width (mm):"
-msgstr ""
+msgstr "Lebar prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1572
 msgid "Chip height (mm):"
@@ -13991,7 +13991,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:2298
 msgid "visual"
-msgstr ""
+msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:2300
@@ -14001,101 +14001,101 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:2302
 msgid "communications"
-msgstr ""
+msgstr "komunikasi"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:2304
 msgid "navigation"
-msgstr ""
+msgstr "navigasi"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:2306
 msgid "amateur"
-msgstr ""
+msgstr "amatir"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:2308
 msgid "weather"
-msgstr ""
+msgstr "cuaca"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #: plugins/Satellites/src/Satellites.cpp:2310
 msgid "earth resources"
-msgstr ""
+msgstr "sumber daya bumi"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:2312
 msgid "geostationary"
-msgstr ""
+msgstr "geostasioner"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:2314
 msgid "non-operational"
-msgstr ""
+msgstr "non operasional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:2316
 msgid "gps"
-msgstr ""
+msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:2318
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:2320
 msgid "beidou"
-msgstr ""
+msgstr "beidou"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:2322
 msgid "galileo"
-msgstr ""
+msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2324
 msgid "iridium"
-msgstr ""
+msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2326
 msgid "iridium next"
-msgstr ""
+msgstr "iridium next"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2328
 msgid "starlink"
-msgstr ""
+msgstr "starlink"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
 #: plugins/Satellites/src/Satellites.cpp:2330
 msgid "spire"
-msgstr ""
+msgstr "spire"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:2332
 msgid "oneweb"
-msgstr ""
+msgstr "oneweb"
 
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:2334
 msgid "stations"
-msgstr ""
+msgstr "stasiun"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:2336
 msgid "education"
-msgstr ""
+msgstr "edukasi"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
@@ -14107,41 +14107,41 @@ msgstr ""
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2340
 msgid "intelsat"
-msgstr ""
+msgstr "intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2342
 msgid "globalstar"
-msgstr ""
+msgstr "globalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2344
 msgid "orbcomm"
-msgstr ""
+msgstr "orbcomm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2346
 msgid "gorizont"
-msgstr ""
+msgstr "gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
 #: plugins/Satellites/src/Satellites.cpp:2348
 msgid "raduga"
-msgstr ""
+msgstr "raduga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
 #: plugins/Satellites/src/Satellites.cpp:2350
 msgid "molniya"
-msgstr ""
+msgstr "molniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
 #: plugins/Satellites/src/Satellites.cpp:2352
 msgid "cosmos"
-msgstr ""
+msgstr "cosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
 #: plugins/Satellites/src/Satellites.cpp:2354
@@ -14161,12 +14161,12 @@ msgstr ""
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
 #: plugins/Satellites/src/Satellites.cpp:2360
 msgid "tv"
-msgstr ""
+msgstr "tv"
 
 #. TRANSLATORS: Satellite group: military satellites
 #: plugins/Satellites/src/Satellites.cpp:2362
 msgid "military"
-msgstr ""
+msgstr "militer"
 
 #. TRANSLATORS: Satellite group: geodetic satellites
 #: plugins/Satellites/src/Satellites.cpp:2364
@@ -14176,32 +14176,32 @@ msgstr ""
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:2369
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Teleskop Angkasa Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2371
 msgid "The International Space Station"
-msgstr ""
+msgstr "International Space Station"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2373
 msgid "China's first space station"
-msgstr ""
+msgstr "Stasiun angkasa pertama Cina"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2375
 msgid "The russian space radio telescope RadioAstron"
-msgstr ""
+msgstr "Teleskop radio angkasa Rusia RadioAstron"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2377
 msgid "International Gamma-Ray Astrophysics Laboratory"
-msgstr ""
+msgstr "Laboratorium Astrofisika Sinar Gamma Internasional"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2379
 msgid "The Gamma-Ray Observatory"
-msgstr ""
+msgstr "Observatorium Sinar Gamma"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2381
@@ -14243,41 +14243,41 @@ msgstr ""
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2399
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2401
 msgid "ISS"
-msgstr ""
+msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:2403
 msgid "HST"
-msgstr ""
+msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:2405
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:2407
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:2409
 msgid "TIANGONG 1"
-msgstr ""
+msgstr "TIANGONG 1"
 
 #: plugins/Satellites/src/Satellites.cpp:2412
 msgid "The satellite and the observer are in sunlight"
-msgstr ""
+msgstr "Satelit dan pengamat dalam cahaya matahari"
 
 #: plugins/Satellites/src/Satellites.cpp:2413
 msgid "The satellite is visible"
-msgstr ""
+msgstr "Satelit tampak"
 
 #: plugins/Satellites/src/Satellites.cpp:2414
 msgid "The satellite is eclipsed"
@@ -14293,7 +14293,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:308
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelit artifisial"
 
 #: plugins/Satellites/src/Satellite.cpp:313
 msgid "Approx. magnitude"
@@ -14306,12 +14306,12 @@ msgstr ""
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:326
 msgid "Range"
-msgstr ""
+msgstr "Rentang"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:328
 msgid "Range rate"
-msgstr ""
+msgstr "Laju rentang"
 
 #: plugins/Satellites/src/Satellite.cpp:332
 msgid "Perigee/apogee altitudes"
@@ -14336,12 +14336,12 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:359
 msgid "Orbital period"
-msgstr ""
+msgstr "Periode orbit"
 
 #: plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Exoplanets/src/Exoplanet.cpp:332
 msgid "Inclination"
-msgstr ""
+msgstr "Inklinasi"
 
 #: plugins/Satellites/src/Satellite.cpp:369
 msgid "SubPoint (Lat./Long.)"
@@ -14357,22 +14357,22 @@ msgstr "Koordinat TEME"
 #. inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:390
 msgid "TEME velocity"
-msgstr ""
+msgstr "Kecepatan TEME"
 
 #: plugins/Satellites/src/Satellite.cpp:400
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "Sudut pantul matahari"
 
 #: plugins/Satellites/src/Satellite.cpp:408
 #: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "unknown date"
 msgid "unknown"
-msgstr ""
+msgstr "tak diketahui"
 
 #: plugins/Satellites/src/Satellite.cpp:415
 msgctxt "at time"
 msgid "at"
-msgstr ""
+msgstr "pada"
 
 #: plugins/Satellites/src/Satellite.cpp:417
 msgid "Last updated TLE"
@@ -14388,45 +14388,45 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:429
 msgid "Group"
-msgstr ""
+msgstr "Grup"
 
 #: plugins/Satellites/src/Satellite.cpp:429
 msgid "Groups"
-msgstr ""
+msgstr "Grup"
 
 #: plugins/Satellites/src/Satellite.cpp:434
 msgid "Operational status"
-msgstr ""
+msgstr "Status operasional"
 
 #: plugins/Satellites/src/Satellite.cpp:440
 msgid "Radio communication"
-msgstr ""
+msgstr "Komunikasi radio"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:459 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: plugins/Satellites/src/Satellite.cpp:462
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:743
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "operasional"
 
 #: plugins/Satellites/src/Satellite.cpp:744
 msgctxt "operational status"
 msgid "non-operational"
-msgstr ""
+msgstr "non operasional"
 
 #: plugins/Satellites/src/Satellite.cpp:745
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "operasional sebagian"
 
 #: plugins/Satellites/src/Satellite.cpp:746
 msgctxt "operational status"
@@ -14436,12 +14436,12 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:747
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "cadangan"
 
 #: plugins/Satellites/src/Satellite.cpp:748
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "misi diperpanjang"
 
 #: plugins/Satellites/src/Satellite.cpp:749
 msgctxt "operational status"
@@ -14451,7 +14451,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:751
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "tidak diketahui"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
 msgid "Stellarium Satellites Plugin"
@@ -14667,7 +14667,7 @@ msgstr "Pemutakhiran melalui internet tidak aktif"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:674
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:749
 msgid "Updating now..."
-msgstr ""
+msgstr "Memperbarui sekarang..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:770
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
@@ -14676,7 +14676,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:676
 msgid "< 1 minute"
-msgstr ""
+msgstr "< 1 menit"
 
 #. TRANSLATORS: minutes.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:775
@@ -14688,7 +14688,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:221
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
@@ -14697,25 +14697,25 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:279
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:752
 msgid "Update error"
-msgstr ""
+msgstr "Kesalahan pembaruan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Diperbarui %1/%2 satelit; %3 ditambahkan; %4 dihapus"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:807
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Diperbarui %1/%2 satelit; %3 ditambahkan; %4 hilang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Empty string - not saving"
-msgstr ""
+msgstr "String kosong - tidak menyimpan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Invalid URL - not saving"
-msgstr ""
+msgstr "URL tidak valid - tidak menyimpan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:898
 msgid "[new source]"
@@ -14752,7 +14752,7 @@ msgstr "[kesalahan perhitungan orbit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
 msgid "[all newly added]"
-msgstr ""
+msgstr "[semua baru saja ditambahkan]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
 msgid "[all not displayed]"
@@ -14829,7 +14829,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1035
 #: plugins/Satellites/src/ui_satellitesDialog.h:983
 msgid "Segment length:"
-msgstr ""
+msgstr "Panjang segmen:"
 
 #. TRANSLATORS: duration
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1037
@@ -14842,7 +14842,7 @@ msgstr ""
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1068
 msgid "New group..."
-msgstr ""
+msgstr "Grup baru..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1333
 msgid "Select TLE Update File"
@@ -14850,11 +14850,11 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1355
 msgid "Brightness"
-msgstr ""
+msgstr "Kecerahan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1358
 msgid "Satellite"
-msgstr ""
+msgstr "Satelit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1438
 msgid "Save predicted Iridium flares as..."
@@ -14892,16 +14892,16 @@ msgstr "Tak ada data yang dapat diunduh. Coba lagi nanti."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:266
 msgid "Download aborted."
-msgstr ""
+msgstr "Pengunduhan digugurkan."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:311
 msgid "Get data"
-msgstr ""
+msgstr "Ambil data"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:377
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Nomor Katalog: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:947
 #: plugins/Satellites/src/ui_satellitesDialog.h:948
@@ -14910,13 +14910,13 @@ msgstr "Konfigurasi Satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:950
 msgid "Updates"
-msgstr ""
+msgstr "Pembaruan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:951
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:472
 msgid "Update frequency:"
-msgstr ""
+msgstr "Frekuensi pembaruan:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:952
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -14925,21 +14925,23 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:335
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
 msgid "Last update:"
-msgstr ""
+msgstr "Pembaruan terakhir:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:954
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "Saat pembaruan, tambahkan semua satelit baru dari sumber yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:955
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Perbarui data satelit dari sumber-sumber Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:956
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Saat pembaruan, hapus satelit yang tidak lagi terdaftar dalam sumber "
+"pembaruan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:959
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:258
@@ -14950,11 +14952,11 @@ msgstr "Ukuran huruf:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:960
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Colors"
-msgstr ""
+msgstr "Warna"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:962
 msgid "Color of markers, labels and orbits for invisible satellites"
-msgstr ""
+msgstr "Warna penanda, label, dan orbit bagi satelit yang tidak tampak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:966
 msgid "Color of markers for satellites in transit through the Sun or the Moon"
@@ -14962,33 +14964,33 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:968
 msgid "Show satellites as markers"
-msgstr ""
+msgstr "Tunjukkan satelit sebagai penanda"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:969
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "Sembunyikan satelit artifisial yang tidak tampak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:970
 msgid "Orbit lines"
-msgstr ""
+msgstr "Garis orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:972
 #: plugins/Satellites/src/ui_satellitesDialog.h:989
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Banyaknya segmen yang dipakai untuk menggambar setiap akhir garis"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:975
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Durasi dari segmen tunggal dalam detik"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:978
 #: plugins/Satellites/src/ui_satellitesDialog.h:985
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Banyaknya segmen yang dipakai untuk menggambar garis"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:981
 msgid "Duration of a single segment"
-msgstr ""
+msgstr "Durasi dari segmen tunggal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:987
 msgid "Number of  segments:"
@@ -15000,7 +15002,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:997
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Klik ganda sebuah satelit untuk mulai melacaknya."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1000
 msgid "Add more satellites"
@@ -15012,15 +15014,15 @@ msgstr "Hilangkan satelit-satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1006
 msgid "Change markers color for selected satellites"
-msgstr ""
+msgstr "Ubah warna penanda bagi satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1009
 msgid "Change orbits color for selected satellites"
-msgstr ""
+msgstr "Ubah warna orbit untuk satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1012
 msgid "Change info color for selected satellites"
-msgstr ""
+msgstr "Ubah warna info untuk satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1016
 #: plugins/Satellites/src/ui_satellitesDialog.h:1020
@@ -15028,10 +15030,12 @@ msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
 msgstr ""
+"Nomor Katalog Satelit (juga dikenal sebagai Nomor Katalog NORAD (North "
+"American Aerospace Defense), NORAD ID)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1018
 msgid "Catalog number:"
-msgstr ""
+msgstr "Nomor katalog:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1023
 #: plugins/Satellites/src/ui_satellitesDialog.h:1027
@@ -23744,109 +23748,118 @@ msgid "Week"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgctxt "Icelandic calendar"
 msgid "summer"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgctxt "Icelandic calendar"
 msgid "winter"
 msgstr ""
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:171
-msgctxt "Icelandic day name"
-msgid "Sunnudagur"
+#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
+#. [summer|winter] (Month [number]: [name]) - [year]"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:100
+#, qt-format
+msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:172
 msgctxt "Icelandic day name"
-msgid "Mánudagur"
+msgid "Sunnudagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:173
 msgctxt "Icelandic day name"
-msgid "Þriðjudagur"
+msgid "Mánudagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:174
 msgctxt "Icelandic day name"
-msgid "Miðvikudagur"
+msgid "Þriðjudagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:175
 msgctxt "Icelandic day name"
-msgid "Fimmtudagur"
+msgid "Miðvikudagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:176
 msgctxt "Icelandic day name"
-msgid "Föstudagur"
+msgid "Fimmtudagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:177
 msgctxt "Icelandic day name"
-msgid "Laugardagur"
+msgid "Föstudagur"
 msgstr ""
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:179
-msgctxt "Icelandic month name"
-msgid "unnamed"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:178
+msgctxt "Icelandic day name"
+msgid "Laugardagur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
-msgid "Harpa"
+msgid "unnamed"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
-msgid "Skerpla"
+msgid "Harpa"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:182
 msgctxt "Icelandic month name"
-msgid "Sólmánuður"
+msgid "Skerpla"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:183
 msgctxt "Icelandic month name"
-msgid "Heyannir"
+msgid "Sólmánuður"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:184
 msgctxt "Icelandic month name"
-msgid "Tvímánuður"
+msgid "Heyannir"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:185
 msgctxt "Icelandic month name"
-msgid "Haustmánuður"
+msgid "Tvímánuður"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:186
 msgctxt "Icelandic month name"
-msgid "Gormánuður"
+msgid "Haustmánuður"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:187
 msgctxt "Icelandic month name"
-msgid "Ýlir"
+msgid "Gormánuður"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:188
 msgctxt "Icelandic month name"
-msgid "Mörsugur"
+msgid "Ýlir"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:189
 msgctxt "Icelandic month name"
-msgid "Þorri"
+msgid "Mörsugur"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:190
 msgctxt "Icelandic month name"
-msgid "Góa"
+msgid "Þorri"
 msgstr ""
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:191
+msgctxt "Icelandic month name"
+msgid "Góa"
+msgstr ""
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:192
 msgctxt "Icelandic month name"
 msgid "Einmánuður"
 msgstr ""

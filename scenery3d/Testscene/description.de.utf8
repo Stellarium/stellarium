@@ -1,0 +1,33 @@
+<h2>Testszene</h2>
+
+<p>Diese Szene dient zum Testen eigener Entwicklungen. Kopieren Sie den Ordner
+in Ihr privates Stellarium-Datenverzeichnis, benennen Sie die Szene um und
+experimentieren Sie, wie das Plugin funktioniert. Danach bauen und zeigen
+Sie ihre eignene Szenen, und teilen Sie diese mit anderen Anwendern!</p>
+
+<h4>Koordinaten- und Orientierungstests</h4>
+
+<p>Von der Mitte betrachtet bieten die Säulen eine ungefähre Orientierung
+(nicht genau!) zu Sonnwend- und Equinox-Sonnenauf- und -untergangsrichtungen
+für mittlere geographische Breiten. Die mittleren sollten in
+Ost-West-Richtung ausgerichtet sein. Das exemplarische Vermessungsgradnetz
+(inspiriert von Gauss-Krüger-Koordinaten) ist, wie im Normalfall üblich,
+nicht genau zu den Himmelsrichtungen ausgerichtet (wegen der
+Meridiankonvergenz). Das Modell muß -4.2° rotiert werden, um die Säulen in
+die Ost-West-Richtung zu bringen. Das Gradnetz muß also 4.2 Grad links vom
+Nordpunkt fluchten.</p>
+
+<p>Beobachterkoordinaten im Vermessungskoordinatensystem (Strg-R, T) sollten
+den in der Textur am West- und Südrand sichtbaren Koordinaten entsprechen.</p>
+
+<h4>Materialtest</h4>
+
+<p>Das Modell kann auch zum Test der Materialparameter verwendet werden. So
+lassen sich halbtransparente oder noctilumineszente Objekte erzeugen.</p>
+
+<p>To test temporal features, the pillars and spheres are visible only from the
+years 2000 until 2020.  Edit the material file to change that!</p>
+
+<h4>Model</h4>
+<p>Testszene für Stellarium/scenery3d-Entwicklungen. Export aus
+SU8-Kerkythea-KT2OBJ.</p>

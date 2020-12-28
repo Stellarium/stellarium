@@ -1,0 +1,38 @@
+<h2>Escena de prueba</h2>
+
+<p>Esta escena es principalmente útil como banco de pruebas para tus propios
+desarrollos. Debe hacer una copia de la carpeta de escenas y modificarla a
+voluntad, probar la configuración del material o algunos otros detalles para
+averiguar cómo se comporta este complemento. ¡Entonces construye y presenta
+tu propio trabajo!</p>
+
+<h4>Pruebas de coordinación y orientación</h4>
+
+<p>Los pilares que se muestran aquí, como se ven desde el centro de la
+estructura, proporcionan una vista aproximada (¡no de alta precisión!) de
+las posiciones del solsticio/equinoccio de salida y puesta del sol en
+latitudes de Europa central. Los pilares centrales proporcionan una línea
+este-oeste. La cuadrícula de coordenadas del levantamiento visible en el
+piso no se alinea con el norte geográfico. Se debe compensar una rotación de
+-4,2 grados (prueba de convergencia de meridianos), es decir, mientras que
+los pilares centrales deben apuntar absoluta y siempre de oeste a este, las
+líneas de la cuadrícula golpean el horizonte norte ligeramente (4,2 grados)
+a la izquierda del norte.</p>
+
+<p>Las coordenadas del terreno al caminar (Ctrl-R, T) deben mostrar las
+coordenadas visibles a lo largo del borde sur y oeste del terreno.</p>
+
+<h4>Prueba de material</h4>
+
+<p>Este modelo también se utiliza para probar las capacidades gráficas del
+complemento. Puedes jugar con los parámetros del material para crear efectos
+divertidos como esferas de ladrillos semitransparentes o que brillan en la
+oscuridad.</p>
+
+<p>Para probar funciones temporales, los pilares y las esferas son visibles
+solo entre los años 2000 y 2020. ¡Edita el archivo material para cambiar
+eso!</p>
+
+<h4>Modelo</h4>
+<p>Escena de prueba para el desarrollo de Stellarium/scenery3d. Exportar desde
+SU8-Kerkythea-KT2OBJ.</p>

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-27 00:54+0700\n"
+"POT-Creation-Date: 2020-12-28 14:14+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -4115,7 +4115,7 @@ msgid "Custom equation of %1T"
 msgstr "Пользовательское уравнение %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1789 src/gui/ConfigurationDialog.cpp:1826
-#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:477
+#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:492
 msgid "System default"
 msgstr "Используемый системой"
 
@@ -4549,11 +4549,11 @@ msgstr "Пробел"
 msgid "Time zone"
 msgstr "Часовой пояс"
 
-#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:475
+#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:490
 msgid "Local Mean Solar Time"
 msgstr "Местное среднее солнечное время"
 
-#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:476
+#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:491
 msgid "Local True Solar Time"
 msgstr "Местное истинное солнечное время"
 
@@ -4826,12 +4826,12 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Визуальная звёзд. величина, основанная на фазовом угле и альбедо."
 
-#: src/gui/LocationDialog.cpp:212
+#: src/gui/LocationDialog.cpp:227
 msgid "Reset location list to show all known locations"
 msgstr ""
 "Сброс списка местоположений, чтобы показать все известные местоположения"
 
-#: src/gui/LocationDialog.cpp:213
+#: src/gui/LocationDialog.cpp:228
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -4840,23 +4840,23 @@ msgstr ""
 " будет выполнено, выключить выбор, чтобы другие программы могли получить "
 "доступ к устройству GPS."
 
-#: src/gui/LocationDialog.cpp:800
+#: src/gui/LocationDialog.cpp:815
 msgid "GPS listening..."
 msgstr "Прослушивание GPS..."
 
-#: src/gui/LocationDialog.cpp:807
+#: src/gui/LocationDialog.cpp:822
 msgid "GPS disconnecting..."
 msgstr "Отключение GPS..."
 
-#: src/gui/LocationDialog.cpp:819
+#: src/gui/LocationDialog.cpp:834
 msgid "GPS location fix"
 msgstr "Исправление местоположения GPS"
 
-#: src/gui/LocationDialog.cpp:842
+#: src/gui/LocationDialog.cpp:857
 msgid "GPS:FAILED"
 msgstr "GPS:НЕУДАЧНО"
 
-#: src/gui/LocationDialog.cpp:854 src/ui_locationDialogGui.h:514
+#: src/gui/LocationDialog.cpp:869 src/ui_locationDialogGui.h:514
 msgid "Get location from GPS"
 msgstr "Получить местоположение из GPS"
 
@@ -24370,7 +24370,7 @@ msgstr "Тональпоуалли ацтеков"
 #: plugins/Calendars/src/ui_calendarsDialog.h:766
 msgctxt "calendar"
 msgid "Balinese Pawukon"
-msgstr ""
+msgstr "Балийский павукон"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
 msgctxt "Armenian month name"
@@ -25121,37 +25121,37 @@ msgstr "Пикучи-Набот"
 #: plugins/Calendars/src/CopticCalendar.cpp:56
 msgctxt "Coptic day name"
 msgid "Tkyriake"
-msgstr ""
+msgstr "Тириак"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:57
 msgctxt "Coptic day name"
 msgid "Pesnau"
-msgstr ""
+msgstr "Песну"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:58
 msgctxt "Coptic day name"
 msgid "Pshoment"
-msgstr ""
+msgstr "Пшомен"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:59
 msgctxt "Coptic day name"
 msgid "Peftoou"
-msgstr ""
+msgstr "Пефту"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:60
 msgctxt "Coptic day name"
 msgid "Ptiou"
-msgstr ""
+msgstr "Птиу"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:61
 msgctxt "Coptic day name"
 msgid "Psoou"
-msgstr ""
+msgstr "Псу"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:62
 msgctxt "Coptic day name"
 msgid "Psabbaton"
-msgstr ""
+msgstr "Сабаттон"
 
 #: plugins/Calendars/src/CopticCalendar.cpp:100
 msgid "Era Martyrum"
@@ -25229,102 +25229,102 @@ msgstr "Эра Набонасара"
 #: plugins/Calendars/src/EthiopicCalendar.cpp:42
 msgctxt "Ethiopic month name"
 msgid "Maskaram"
-msgstr ""
+msgstr "Maskaram"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:43
 msgctxt "Ethiopic month name"
 msgid "Teqemt"
-msgstr ""
+msgstr "Teqemt"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:44
 msgctxt "Ethiopic month name"
 msgid "Hedār"
-msgstr ""
+msgstr "Hedār"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:45
 msgctxt "Ethiopic month name"
 msgid "Takhśāś"
-msgstr ""
+msgstr "Takhśāś"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:46
 msgctxt "Ethiopic month name"
 msgid "Ṭer"
-msgstr ""
+msgstr "Ṭer"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:47
 msgctxt "Ethiopic month name"
 msgid "Yakātit"
-msgstr ""
+msgstr "Yakātit"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:48
 msgctxt "Ethiopic month name"
 msgid "Magābit"
-msgstr ""
+msgstr "Magābit"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:49
 msgctxt "Ethiopic month name"
 msgid "Miyāzyā"
-msgstr ""
+msgstr "Miyāzyā"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:50
 msgctxt "Ethiopic month name"
 msgid "Genbot"
-msgstr ""
+msgstr "Genbot"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:51
 msgctxt "Ethiopic month name"
 msgid "Sanē"
-msgstr ""
+msgstr "Sanē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:52
 msgctxt "Ethiopic month name"
 msgid "Ḥamlē"
-msgstr ""
+msgstr "Ḥamlē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:53
 msgctxt "Ethiopic month name"
 msgid "Naḥasē"
-msgstr ""
+msgstr "Naḥasē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:54
 msgctxt "Ethiopic month name"
 msgid "Pāguemēn"
-msgstr ""
+msgstr "Pāguemēn"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:56
 msgctxt "Ethiopic day name"
 msgid "Iḥud"
-msgstr ""
+msgstr "Iḥud"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:57
 msgctxt "Ethiopic day name"
 msgid "Sanyo"
-msgstr ""
+msgstr "Sanyo"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:58
 msgctxt "Ethiopic day name"
 msgid "Maksanyo"
-msgstr ""
+msgstr "Maksanyo"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:59
 msgctxt "Ethiopic day name"
 msgid "Rob/Rabu`e"
-msgstr ""
+msgstr "Rob/Rabu`e"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:60
 msgctxt "Ethiopic day name"
 msgid "H̱amus"
-msgstr ""
+msgstr "H̱amus"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:61
 msgctxt "Ethiopic day name"
 msgid "Arb"
-msgstr ""
+msgstr "Arb"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:62
 msgctxt "Ethiopic day name"
 msgid "Kidāmmē"
-msgstr ""
+msgstr "Kidāmmē"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:100
 msgid "Ethiopic Era of Mercy"
@@ -25335,112 +25335,121 @@ msgid "Week"
 msgstr "Неделя"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgctxt "Icelandic calendar"
 msgid "summer"
-msgstr "лето"
+msgstr "лета"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgctxt "Icelandic calendar"
 msgid "winter"
-msgstr "зима"
+msgstr "зимы"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:171
-msgctxt "Icelandic day name"
-msgid "Sunnudagur"
-msgstr ""
+#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
+#. [summer|winter] (Month [number]: [name]) - [year]"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:100
+#, qt-format
+msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
+msgstr "%1 недели %2 %3 (месяц %4: %5) - %6"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:172
 msgctxt "Icelandic day name"
-msgid "Mánudagur"
-msgstr ""
+msgid "Sunnudagur"
+msgstr "воскресенье"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:173
 msgctxt "Icelandic day name"
-msgid "Þriðjudagur"
-msgstr ""
+msgid "Mánudagur"
+msgstr "понедельник"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:174
 msgctxt "Icelandic day name"
-msgid "Miðvikudagur"
-msgstr ""
+msgid "Þriðjudagur"
+msgstr "вторник"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:175
 msgctxt "Icelandic day name"
-msgid "Fimmtudagur"
-msgstr ""
+msgid "Miðvikudagur"
+msgstr "среда"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:176
 msgctxt "Icelandic day name"
-msgid "Föstudagur"
-msgstr ""
+msgid "Fimmtudagur"
+msgstr "четверг"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:177
 msgctxt "Icelandic day name"
-msgid "Laugardagur"
-msgstr ""
+msgid "Föstudagur"
+msgstr "пятница"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:179
+#: plugins/Calendars/src/IcelandicCalendar.cpp:178
+msgctxt "Icelandic day name"
+msgid "Laugardagur"
+msgstr "суббота"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
 msgid "unnamed"
 msgstr "безымянный"
 
-#: plugins/Calendars/src/IcelandicCalendar.cpp:180
-msgctxt "Icelandic month name"
-msgid "Harpa"
-msgstr ""
-
 #: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
-msgid "Skerpla"
-msgstr ""
+msgid "Harpa"
+msgstr "кукушачий месяц"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:182
 msgctxt "Icelandic month name"
-msgid "Sólmánuður"
-msgstr ""
+msgid "Skerpla"
+msgstr "яйцеклад"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:183
 msgctxt "Icelandic month name"
-msgid "Heyannir"
-msgstr ""
+msgid "Sólmánuður"
+msgstr "солнечный месяц"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:184
 msgctxt "Icelandic month name"
-msgid "Tvímánuður"
-msgstr ""
+msgid "Heyannir"
+msgstr "сенокос"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:185
 msgctxt "Icelandic month name"
-msgid "Haustmánuður"
-msgstr ""
+msgid "Tvímánuður"
+msgstr "двойной месяц"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:186
 msgctxt "Icelandic month name"
-msgid "Gormánuður"
-msgstr ""
+msgid "Haustmánuður"
+msgstr "осенний месяц"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:187
 msgctxt "Icelandic month name"
-msgid "Ýlir"
-msgstr ""
+msgid "Gormánuður"
+msgstr "кровавый месяц"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:188
 msgctxt "Icelandic month name"
-msgid "Mörsugur"
-msgstr ""
+msgid "Ýlir"
+msgstr "месяц йоля"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:189
 msgctxt "Icelandic month name"
-msgid "Þorri"
-msgstr ""
+msgid "Mörsugur"
+msgstr "мозгосос"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:190
 msgctxt "Icelandic month name"
-msgid "Góa"
-msgstr ""
+msgid "Þorri"
+msgstr "торри"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:191
 msgctxt "Icelandic month name"
+msgid "Góa"
+msgstr "гои"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:192
+msgctxt "Icelandic month name"
 msgid "Einmánuður"
-msgstr ""
+msgstr "одиночный месяц"
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
@@ -25653,62 +25662,62 @@ msgstr "День %1, месяц %2 в году %3 %4 олимпиады"
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr "января"
+msgstr "Ianuarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
 msgid "Februarii"
-msgstr "февраля"
+msgstr "Februarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
 msgid "Martii"
-msgstr "марта"
+msgstr "Martii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
 msgid "Aprilis"
-msgstr "апреля"
+msgstr "Aprilis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:40
 msgctxt "Roman month name (genitive)"
 msgid "Maii"
-msgstr "мая"
+msgstr "Maii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:41
 msgctxt "Roman month name (genitive)"
 msgid "Iunii"
-msgstr "июня"
+msgstr "Iunii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:42
 msgctxt "Roman month name (genitive)"
 msgid "Iulii"
-msgstr "июля"
+msgstr "Iulii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:43
 msgctxt "Roman month name (genitive)"
 msgid "Augusti"
-msgstr "августа"
+msgstr "Augusti"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:44
 msgctxt "Roman month name (genitive)"
 msgid "Septembris"
-msgstr "сентября"
+msgstr "Septembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:45
 msgctxt "Roman month name (genitive)"
 msgid "Octobris"
-msgstr "октября"
+msgstr "Octobris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:46
 msgctxt "Roman month name (genitive)"
 msgid "Novembris"
-msgstr "ноября"
+msgstr "Novembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:47
 msgctxt "Roman month name (genitive)"
 msgid "Decembris"
-msgstr "декабря"
+msgstr "Decembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:101
 msgctxt "ab urbe condita"
@@ -26021,7 +26030,7 @@ msgstr "Ацтекские календари"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
 msgid "Balinese Pawukon calendar"
-msgstr ""
+msgstr "Календарь балийский павукон"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid ""
@@ -26036,6 +26045,8 @@ msgid ""
 "For some calendars, we welcome proper formatting suggestions by actual "
 "users."
 msgstr ""
+"Для некоторых календарей мы приветствуем предложения по правильному "
+"форматированию от реальных пользователей."
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "This plugin is based on:"

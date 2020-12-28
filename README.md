@@ -18,11 +18,11 @@ If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.20.3/stellarium_user_guide-0.20.3-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.20.4/stellarium_user_guide-0.20.4-1.pdf).
 
 ## Get & build the code
 
-See instructions to [building Stellarium from source code](BUILDING.md).
+See instructions to [building Stellarium from source code](https://github.com/Stellarium/stellarium/blob/master/BUILDING.md).
 
 ## Full References and Credits
 
