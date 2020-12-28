@@ -139,9 +139,10 @@ if __name__ == '__main__':
         exitval = 1
         print("Caught KeyboardInterrupt", file=sys.stderr)
 
-    # Special case for Mensa and Microscopium constellations (without lines!)
-    constellationship['Men'].append( (26264, 26264,) )
-    constellationship['Mic'].append( (103882, 103882,) )
+    # Special case for Mensa and Microscopium constellations
+    # Use alpha and beta of each constellation to generate the lines
+    constellationship['Men'].append( (29271, 23467,) )
+    constellationship['Mic'].append( (102831, 102989,) )
 
     print("Generating constellationship data...", file=sys.stderr)
     for constellation in sorted(constellationship.keys()):
