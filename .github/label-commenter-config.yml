@@ -54,6 +54,13 @@ labels:
           Please see FAQ in the wiki:
           https://github.com/Stellarium/stellarium/wiki/FAQ
         action: close
+  - name: mobile
+    labeled:
+      issue:
+        body: |
+          This site actually does not discuss the Mobile version. Please use its own feedback system:
+          https://www.stellarium-labs.com/support/
+        action: close
   - name: fix committed
     labeled:
       issue:
