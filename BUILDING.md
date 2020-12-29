@@ -152,7 +152,7 @@ Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you have installed)
 
 **Known limitations with Qt 5.15.x:**
-- The ANGLE library should be taken from Qt 5.6, all later versions don't work. (Don't ask us why. Find a solution!)
+- The ANGLE library should be taken from Qt 5.6, all later versions don't work and can be downloaded for [x64](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-x64.zip) and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). (Don't ask us why. Find a solution!)
 - Qt 5.15.0 and 5.15.1 have a buggy `lconvert` and should not be used. Also `lconvert` on Qt 5.15.2 still allocates GBs of memory for translation of a few MBs of strings, if it can get it.
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
