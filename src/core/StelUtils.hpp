@@ -321,28 +321,28 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always nonnegative.
+	//! Integer modulo where the result is always nonnegative. [0..b-1]
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always positive. [1..b]
 	inline int amod(const int a, const int b){
 		int ret = a % b;
 		if(ret <= 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always nonnegative.
+	//! Double modulo where the result is always nonnegative. [0..(b
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always nonnegative.
+	//! Float modulo where the result is always nonnegative. [0..(b
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)

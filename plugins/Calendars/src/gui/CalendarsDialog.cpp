@@ -77,8 +77,6 @@ void CalendarsDialog::createDialogContent()
 
 	// DISABLE Chinese for now, TBD!
 	ui->chineseCheckBox->hide();
-	ui->islamicCheckBox->hide();
-	ui->hebrewCheckBox->hide();
 	ui->tabs->removeTab(2);
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
@@ -105,6 +103,10 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->ethiopicCheckBox,           "Calendars.flagShowEthiopic");
 	connectBoolProperty(ui->icelandicCheckBox,          "Calendars.flagShowIcelandic");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
+	connectBoolProperty(ui->islamicCheckBox,            "Calendars.flagShowIslamic");
+	connectBoolProperty(ui->hebrewCheckBox,             "Calendars.flagShowHebrew");
+	connectBoolProperty(ui->oldHinduSolarCheckBox,      "Calendars.flagShowOldHinduSolar");
+	connectBoolProperty(ui->oldHinduLunarCheckBox,      "Calendars.flagShowOldHinduLunar");
 	connectBoolProperty(ui->mayaLCCheckBox,             "Calendars.flagShowMayaLongCount");
 	connectBoolProperty(ui->mayaHaabCheckBox,           "Calendars.flagShowMayaHaab");
 	connectBoolProperty(ui->mayaTzolkinCheckBox,        "Calendars.flagShowMayaTzolkin");
@@ -170,13 +172,13 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("Coptic calendar") + "</li>";
 	html += "<li>" + q_("Ethiopic calendar") + "</li>";
 
-//	html += "<li>" + q_("Hebrew Calendar") + "</li>";
-//	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
+	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
+	html += "<li>" + q_("Hebrew Calendar") + "</li>";
 //	html += "<li>" + q_("French Revolution calendars") + "</li>";
-//	html += "<li>" + q_("Ethiopian calendar") + "</li>";
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
 //	html += "<li>" + q_("Tibetan calendars") + "</li>";
-//	html += "<li>" + q_("Indian calendars") + "</li>";
+	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";
+//	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
 	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";

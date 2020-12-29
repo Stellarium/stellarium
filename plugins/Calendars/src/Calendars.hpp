@@ -48,6 +48,10 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowCoptic        READ isCopticDisplayed        WRITE showCoptic        NOTIFY showCopticChanged)
 	Q_PROPERTY(bool flagShowEthiopic      READ isEthiopicDisplayed      WRITE showEthiopic      NOTIFY showEthiopicChanged)
 	Q_PROPERTY(bool flagShowChinese       READ isChineseDisplayed       WRITE showChinese       NOTIFY showChineseChanged)
+	Q_PROPERTY(bool flagShowIslamic       READ isIslamicDisplayed       WRITE showIslamic       NOTIFY showIslamicChanged)
+	Q_PROPERTY(bool flagShowHebrew        READ isHebrewDisplayed        WRITE showHebrew        NOTIFY showHebrewChanged)
+	Q_PROPERTY(bool flagShowOldHinduSolar READ isOldHinduSolarDisplayed WRITE showOldHinduSolar NOTIFY showOldHinduSolarChanged)
+	Q_PROPERTY(bool flagShowOldHinduLunar READ isOldHinduLunarDisplayed WRITE showOldHinduLunar NOTIFY showOldHinduLunarChanged)
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
 	Q_PROPERTY(bool flagShowMayaTzolkin   READ isMayaTzolkinDisplayed   WRITE showMayaTzolkin   NOTIFY showMayaTzolkinChanged)
@@ -84,9 +88,10 @@ public:
 
 	//! Get a pointer to the respective Calendar. Returns Q_NULLPTR if not found.
 	//! Valid names: Julian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
-	//! Armenian, Zoroastrian, Coptic, Ethiopic,
+	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
+	//! OldHinduSolar, OldHinduLunar, Balinese
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese, ...
+	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, Tibetan, ...
 	Calendar* getCal(QString name);
 
 signals:
@@ -105,6 +110,10 @@ signals:
 	void showCopticChanged(bool b);
 	void showEthiopicChanged(bool b);
 	void showChineseChanged(bool b);
+	void showIslamicChanged(bool b);
+	void showHebrewChanged(bool b);
+	void showOldHinduSolarChanged(bool b);
+	void showOldHinduLunarChanged(bool b);
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
 	void showMayaTzolkinChanged(bool b);
@@ -142,6 +151,14 @@ public slots:
 	void showEthiopic(bool b);		//!< activate display of Ethiopic Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
+	bool isIslamicDisplayed() const;	//!< display Islamic Calendar?
+	void showIslamic(bool b);		//!< activate display of Islamic Calendar
+	bool isHebrewDisplayed() const;		//!< display Hebrew Calendar?
+	void showHebrew(bool b);		//!< activate display of Hebrew Calendar
+	bool isOldHinduSolarDisplayed() const;	//!< display Old Hindu Solar?
+	void showOldHinduSolar(bool b);		//!< activate display of Old Hindu Solar
+	bool isOldHinduLunarDisplayed() const;	//!< display Old Hindu Lunar?
+	void showOldHinduLunar(bool b);		//!< activate display of Old Hindu Lunar
 	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
 	void showMayaLongCount(bool b);		//!< activate display of Maya Long Count
 	bool isMayaHaabDisplayed() const;	//!< display Maya Haab?
@@ -184,6 +201,10 @@ private:
 	bool flagShowCoptic;
 	bool flagShowEthiopic;
 	bool flagShowChinese;
+	bool flagShowIslamic;
+	bool flagShowHebrew;
+	bool flagShowOldHinduSolar;
+	bool flagShowOldHinduLunar;
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;
 	bool flagShowMayaTzolkin;

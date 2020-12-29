@@ -43,6 +43,10 @@
 #include "ZoroastrianCalendar.hpp"
 #include "CopticCalendar.hpp"
 #include "EthiopicCalendar.hpp"
+#include "IslamicCalendar.hpp"
+#include "HebrewCalendar.hpp"
+#include "OldHinduSolarCalendar.hpp"
+#include "OldHinduLuniSolarCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
@@ -93,6 +97,10 @@ Calendars::Calendars():
 	flagShowCoptic(true),
 	flagShowEthiopic(true),
 	flagShowChinese(true),
+	flagShowIslamic(true),
+	flagShowHebrew(true),
+	flagShowOldHinduSolar(true),
+	flagShowOldHinduLunar(true),
 	flagShowMayaLongCount(true),
 	flagShowMayaHaab(true),
 	flagShowMayaTzolkin(true),
@@ -188,6 +196,10 @@ void Calendars::init()
 	calendars.insert("Zoroastrian", new ZoroastrianCalendar(jd));
 	calendars.insert("Coptic", new CopticCalendar(jd));
 	calendars.insert("Ethiopic", new EthiopicCalendar(jd));
+	calendars.insert("Islamic", new IslamicCalendar(jd));
+	calendars.insert("Hebrew", new HebrewCalendar(jd));
+	calendars.insert("OldHinduSolar", new OldHinduSolarCalendar(jd));
+	calendars.insert("OldHinduLunar", new OldHinduLuniSolarCalendar(jd));
 	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
 	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
@@ -218,6 +230,10 @@ void Calendars::loadSettings()
 	showCoptic(	       conf->value("Calendars/show_coptic", true).toBool());
 	showEthiopic(	       conf->value("Calendars/show_ethiopic", true).toBool());
 	showChinese(           conf->value("Calendars/show_chinese", false).toBool());
+	showIslamic(           conf->value("Calendars/show_islamic", true).toBool());
+	showHebrew(            conf->value("Calendars/show_hebrew", true).toBool());
+	showOldHinduSolar(     conf->value("Calendars/show_old_hindu_solar", true).toBool());
+	showOldHinduLunar(     conf->value("Calendars/show_old_hindu_lunar", true).toBool());
 	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", true).toBool());
 	showMayaHaab(          conf->value("Calendars/show_maya_haab", true).toBool());
 	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", true).toBool());
@@ -262,6 +278,10 @@ void Calendars::draw(StelCore* core)
 	if (flagShowZoroastrian)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Zoroastrian",     "calendar")).arg(getCal("Zoroastrian")->getFormattedDateString());
 	if (flagShowCoptic)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Coptic",          "calendar")).arg(getCal("Coptic")->getFormattedDateString());
 	if (flagShowEthiopic)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Ethiopic",        "calendar")).arg(getCal("Ethiopic")->getFormattedDateString());
+	if (flagShowIslamic)       oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Islamic",         "calendar")).arg(getCal("Islamic")->getFormattedDateString());
+	if (flagShowHebrew)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Hebrew",          "calendar")).arg(getCal("Hebrew")->getFormattedDateString());
+	if (flagShowOldHinduSolar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar", "calendar")).arg(getCal("OldHinduSolar")->getFormattedDateString());
+	if (flagShowOldHinduLunar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunar", "calendar")).arg(getCal("OldHinduLunar")->getFormattedDateString());
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
@@ -446,6 +466,50 @@ void Calendars::showChinese(bool b)
 		flagShowChinese=b;
 		conf->setValue("Calendars/show_chinese", b);
 		emit showChineseChanged(b);
+	}
+}
+
+bool Calendars::isIslamicDisplayed() const { return flagShowIslamic;}
+void Calendars::showIslamic(bool b)
+{
+	if (b!=flagShowIslamic)
+	{
+		flagShowIslamic=b;
+		conf->setValue("Calendars/show_islamic", b);
+		emit showIslamicChanged(b);
+	}
+}
+
+bool Calendars::isHebrewDisplayed() const { return flagShowHebrew;}
+void Calendars::showHebrew(bool b)
+{
+	if (b!=flagShowHebrew)
+	{
+		flagShowHebrew=b;
+		conf->setValue("Calendars/show_hebrew", b);
+		emit showHebrewChanged(b);
+	}
+}
+
+bool Calendars::isOldHinduSolarDisplayed() const { return flagShowOldHinduSolar;}
+void Calendars::showOldHinduSolar(bool b)
+{
+	if (b!=flagShowOldHinduSolar)
+	{
+		flagShowOldHinduSolar=b;
+		conf->setValue("Calendars/show_old_hindu_solar", b);
+		emit showOldHinduSolarChanged(b);
+	}
+}
+
+bool Calendars::isOldHinduLunarDisplayed() const { return flagShowOldHinduLunar;}
+void Calendars::showOldHinduLunar(bool b)
+{
+	if (b!=flagShowOldHinduLunar)
+	{
+		flagShowOldHinduLunar=b;
+		conf->setValue("Calendars/show_old_hindu_lunar", b);
+		emit showOldHinduLunarChanged(b);
 	}
 }
 
