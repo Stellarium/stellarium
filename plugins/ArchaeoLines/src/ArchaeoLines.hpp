@@ -91,6 +91,8 @@ class ArchaeoLine : public QObject
 	Q_ENUMS(Line)
 public:
 	enum Line { // we must start with the planet lines to allow proper handling in the combobox.
+
+		// declination lines
 		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
 		CurrentPlanetMercury,
 		CurrentPlanetVenus,
@@ -109,6 +111,8 @@ public:
 		CurrentMoon,
 		CustomDeclination1,
 		CustomDeclination2,
+
+		// azimuth lines
 		SelectedObjectHourAngle, // also still RA_of_date frame!
 		SelectedObjectAzimuth, // This and the following types are in altaz frame!
 		GeographicLocation1,

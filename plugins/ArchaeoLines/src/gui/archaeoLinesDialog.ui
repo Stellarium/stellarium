@@ -471,6 +471,9 @@
          </item>
          <item row="1" column="2">
           <widget class="QDoubleSpinBox" name="geographicLocation1LongitudeDoubleSpinBox">
+           <property name="decimals">
+            <number>6</number>
+           </property>
            <property name="minimum">
             <double>-180.000000000000000</double>
            </property>
@@ -494,6 +497,9 @@
          </item>
          <item row="1" column="4">
           <widget class="QDoubleSpinBox" name="geographicLocation1LatitudeDoubleSpinBox">
+           <property name="decimals">
+            <number>6</number>
+           </property>
            <property name="minimum">
             <double>-90.000000000000000</double>
            </property>
@@ -538,6 +544,9 @@
          </item>
          <item row="3" column="2">
           <widget class="QDoubleSpinBox" name="geographicLocation2LongitudeDoubleSpinBox">
+           <property name="decimals">
+            <number>6</number>
+           </property>
            <property name="minimum">
             <double>-180.000000000000000</double>
            </property>
@@ -561,6 +570,9 @@
          </item>
          <item row="3" column="4">
           <widget class="QDoubleSpinBox" name="geographicLocation2LatitudeDoubleSpinBox">
+           <property name="decimals">
+            <number>6</number>
+           </property>
            <property name="minimum">
             <double>-90.000000000000000</double>
            </property>
