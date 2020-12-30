@@ -91,7 +91,6 @@ class ArchaeoLine : public QObject
 	Q_ENUMS(Line)
 public:
 	enum Line { // we must start with the planet lines to allow proper handling in the combobox.
-
 		// declination lines
 		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
 		CurrentPlanetMercury,
