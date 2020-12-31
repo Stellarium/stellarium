@@ -49,6 +49,7 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 
 #include "external/qxlsx/xlsxdocument.h"
 #include "external/qxlsx/xlsxchartsheet.h"
@@ -281,7 +282,7 @@ void SatellitesDialog::askSatMarkerColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-	QColor c = QColorDialog::getColor(buttonMarkerColor, Q_NULLPTR, "");
+    QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -309,7 +310,7 @@ void SatellitesDialog::askSatOrbitColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-	QColor c = QColorDialog::getColor(buttonOrbitColor, Q_NULLPTR, "");
+    QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -337,7 +338,7 @@ void SatellitesDialog::askSatInfoColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-	QColor c = QColorDialog::getColor(buttonInfoColor, Q_NULLPTR, "");
+    QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
