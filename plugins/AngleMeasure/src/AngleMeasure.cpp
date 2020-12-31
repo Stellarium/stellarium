@@ -38,6 +38,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <cmath>
+#include <stdexcept>
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library

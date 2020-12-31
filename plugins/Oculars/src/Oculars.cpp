@@ -54,8 +54,10 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QPixmap>
+#include <QMessageBox>
 
 #include <cmath>
+#include <stdexcept>
 
 extern void qt_set_sequence_auto_mnemonic(bool b);
 
@@ -723,7 +725,7 @@ void Oculars::setScreenFOVForCCD()
 		double factor = 1.75;
 		if (ccds[selectedCCDIndex]->hasOAG()) factor *= 2;
 		movementManager->setFlagTracking(true);
-		movementManager->zoomTo(actualFOVx * factor, 0.0);
+		movementManager->zoomTo(actualFOVx * factor, 0.f);
 	}
 }
 
@@ -1318,7 +1320,7 @@ void Oculars::rotatePrism(int amount)
 
 void Oculars::selectCCDAtIndex(int index)
 {
-	if (index > -2 && index < ccds.count())
+	if (index > -1 && index < ccds.count())
 	{
 		selectedCCDIndex = index;
 		emit(selectedCCDChanged(index));
@@ -1330,7 +1332,7 @@ void Oculars::selectOcularAtIndex(int index)
 	if (selectedTelescopeIndex == -1)
 		selectTelescopeAtIndex(0);
 
-	if (telescopes.count() != 0 || oculars[index]->isBinoculars())
+	if (index > -1 && index < oculars.count() && (telescopes.count() >= 0 || oculars[index]->isBinoculars()))
 	{
 		selectedOcularIndex = index;
 		emit(selectedOcularChanged(index));
@@ -1339,7 +1341,7 @@ void Oculars::selectOcularAtIndex(int index)
 
 void Oculars::selectTelescopeAtIndex(int index)
 {
-	if (index > -2 && index < telescopes.count())
+	if (index > -1 && index < telescopes.count())
 	{
 		selectedTelescopeIndex = index;
 		emit(selectedTelescopeChanged(index));
@@ -1363,7 +1365,10 @@ void Oculars::toggleCCD(bool show)
 		//TODO: BM: Make this an on-screen message and/or disable the button
 		//if there are no sensors.
 		if (show)
+		{
 			qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
+			QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Unable to display a sensor boundary: No sensors or telescopes are defined."), QMessageBox::Ok);
+		}
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
@@ -1551,7 +1556,7 @@ void Oculars::paintCCDBounds()
 			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
 
 	// draw sensor rectangle
-	if(selectedCCDIndex != -1)
+	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 	{
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd)
@@ -2436,7 +2441,7 @@ void Oculars::zoomOcular()
 	{
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->apparentFOV();
 	}
-	movementManager->zoomTo(actualFOV, 0.0);
+	movementManager->zoomTo(actualFOV, 0.f);
 }
 
 void Oculars::hideUsageMessageIfDisplayed()

@@ -325,10 +325,11 @@ class StelBarsPath : public QGraphicsPathItem
 	public:
 		StelBarsPath(QGraphicsItem* parent);
 		void updatePath(BottomStelBar* bot, LeftStelBar* lef);
+		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);
 	private:
-		double roundSize;
+		double roundSize; // radius of corner arc
 };
 
 #endif // STELGUIITEMS_HPP

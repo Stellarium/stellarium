@@ -612,9 +612,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		// FIXME: Modifying this cast to modern style breaks a test.
-		//tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
-		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		tc = static_cast<long>((static_cast<unsigned long long>(tb)*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
@@ -849,7 +847,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	// added hook for Julian calendar, because it has been removed from Qt5 --AW
 	if ( test.isValid() && y>1582)
 	{
 		double qdjd = static_cast<double>(test.toJulianDay());
@@ -2326,6 +2324,11 @@ int compareVersions(const QString v1, const QString v2)
 int gcd(int a, int b)
 {
 	return b ? gcd(b, a % b) : a;
+}
+
+int lcm(int a, int b)
+{
+	return (a*b/gcd(a, b));
 }
 
 //! Uncompress gzip or zlib compressed data.

@@ -16,6 +16,7 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
+    name: Comment
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

@@ -419,12 +419,6 @@ private:
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
 	
-	// Used to collect wheel events
-	QTimer * wheelEventTimer;
-
-	// Accumulated horizontal and vertical wheel event deltas
-	int wheelEventDelta[2];
-
 	float fps;
 	int frame;
 	double frameTimeAccum;		// Used for fps counter

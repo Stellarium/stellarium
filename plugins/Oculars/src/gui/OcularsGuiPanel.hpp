@@ -39,7 +39,7 @@ class OcularsGuiPanel : public QGraphicsWidget
 public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
 			QGraphicsWidget * parent = Q_NULLPTR,
-	                Qt::WindowFlags wFlags = 0);
+			Qt::WindowFlags wFlags = Q_NULLPTR);
 	~OcularsGuiPanel();
 
 public slots:

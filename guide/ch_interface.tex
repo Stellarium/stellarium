@@ -214,34 +214,36 @@ The information display can be tweaked a bit with the options found in the GUI s
 
 \subsubsection{Customization of button visibility on bottom toolbar}
 If your screen is too narrow to show all buttons
-or you simply don't need them because you prefer the keyboard
-shortcuts, you can choose your optimal setup. The selection of buttons is stored immediately. 
+or you simply don't need them because you prefer the keyboard shortcuts,
+you can choose your optimal setup. The selection of buttons is stored immediately. 
 \begin{description}
-\item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
-\item[Show asterism lines button] You can toggle display of asterism lines with this button.
-\item[Show asterism labels button] You can toggle display of asterism labels with this button.
-\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
-\item[Show ICRS grid button] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
-\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
-\item[Show centering button] You can toggle display of the ``center on selected object'' button.
-\item[Show nightmode button] You can toggle display of the nightmode button.
-\item[Show nebula background button] You can toggle display of DSO photographs with this button.
-\item[Show flip buttons] When enabled, two buttons will be added to
+\item[Constellation boundaries] You can toggle display of constellation boundaries with this button.
+\item[Asterism lines] You can toggle display of asterism lines with this button.
+\item[Asterism labels] You can toggle display of asterism labels with this button.
+\item[Ecliptic grid] You can toggle display of ecliptic coordinate grid with this button.
+\item[ICRS grid] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
+\item[galactic grid] You can toggle display of galactic coordinate grid with this button.
+\item[Cardinal points] You can toggle display of the ``Cardinal points'' button.
+\item[Compass marks] You can toggle display of the ``Compass marks'' button.
+\item[Night mode] You can toggle display of the nightmode button.
+\item[Centering button] You can toggle display of the ``Center on selected object'' button.
+\item[Fullscreen button] You can toggle display of the fullscreen button.
+\item[Quit button] You can toggle display of the button to quit Stellarium.
+\item[Nebula background] You can toggle display of DSO photographs with this button.
+\item[Flip buttons] When enabled, two buttons will be added to
   the main tool bar which allow the main view to be mirrored in the
   vertical and horizontal directions. This is useful when observing
   through telecopes which may cause the image to be mirrored.
-\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
-\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
-\item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
-\item[Show fullscreen button] You can toggle display of the fullscreen button.
-\item[Show Quit button] You can toggle display of the button to quit Stellarium.
+\item[DSS survey] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
+\item[HiPS Surveys] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
+\item[Bookmarks] You can enable display of Bookmarks dialog with this button.
 \item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
 \end{description}
 
 \subsubsection{Download more star catalogs}
 Stellarium comes with enough stars for casual stargazing with the
 unaided eye or binoculars. If you have a telescope and want to see
-more stars, here you can download more catalogs.
+more stars, here you can download more catalogs. (See Appendix~\ref{ch:Catalogues})
 
 \subsection{The Time Tab}
 \label{sec:gui:configuration:time}
@@ -287,7 +289,9 @@ know what you are doing.
 \label{fig:gui:configuration:tools}
 \end{figure}
 
-The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options (like enabling/disabling of keyboard shortcuts for panning and zooming the main view) and options for screenshots.
+The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options 
+(like enabling/disabling of keyboard shortcuts for panning and zooming the main view) 
+and options for screenshots.
 
 \begin{description}
 \item[Spheric mirror distortion] This option pre-warps the main view
@@ -314,9 +318,15 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
   addition to the field of view.
 \item[Enable keyboard navigation]
 \item[Enable mouse navigation]
-\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the color settings for each celestial object and enable one color for text on the info panel for all celestial objects. By default Stellarium uses white color for this option, but you may re-define it through color chooser\newFeature{v0.20.3}.
-\item[Set keyboard focus to day input] --- you may use this option to force set focus on the day input field in Date and Time dialog. Important note: the focus in the sky will be lost when you open Date and Time dialog with enabling of this option.
-
+\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the 
+  color settings for each celestial object and enable one color for text on the info panel 
+  for all celestial objects. By default Stellarium uses white color for this option, 
+  but you may re-define it through a color chooser\newFeature{v0.20.3}.
+\item[Set keyboard focus to day input] --- you may use this option to force setting the 
+  keyboard focus on the day input field in the Date and Time dialog. 
+  
+  Important note: the focus in the sky will be lost when you open the 
+  Date and Time dialog after enabling this option.
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
@@ -330,7 +340,9 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
   mouse cursor should disappear from view when not moved.
-\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the color of text on the info panel at daylight to increase a contrast of the text. By default planetarium use black color.
+\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the 
+  text color for the info panel at daylight to increase the contrast of the text. 
+  By default Stellarium use black color.
 \item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
 dialogs can either be moved on sidebar handles (with this switch
 disabled) or by dragging the text itself (enabled), as it is known
@@ -464,7 +476,8 @@ for changing the general appearance of the main sky view and projections. Some h
   labels displayed for stars. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
-\item[Use designations for screen labels] --- when this option is enabled you will see in the sky only designations of the stars instead of their common names.
+\item[Use designations for screen labels] --- when this option is enabled you will see 
+  in the sky only scientific designations of the stars instead of their common names.
 \end{description}
 
 \noindent Projection field: Selecting items in this list changes the
@@ -837,8 +850,8 @@ of objects whose name contains \emph{m}:
 \end{tabular}
 \end{center}
 
-You may want at this point to have Stellarium rather propose object
-names with start with the string you enter. Do that in the Options tab
+\noindent You may want at this point to have Stellarium rather propose object
+names which start with the string you enter. Do that in the Options tab
 of this panel (see section~\ref{sec:gui:SearchWindow:Options}).
 The search result should update automatically\newFeature{v0.20.3}
 when you nagivate back to the Object tab.
@@ -853,7 +866,7 @@ with \emph{m}:
 \end{tabular}
 \end{center}
 
-The first item in this list, Mago, is
+\noindent The first item in this list, Mago, is
 highlighted. Pressing \key{\return} now would go to Mago, but we want
 Mimas (SI). We can either press \key{\tab} or \key{\arrowkeydown} a few times to highlight Mimas (SI)
 and then hit \key{\return}, or we can continue to type the name until
@@ -870,12 +883,12 @@ Mimas (SI) should already be populated and highlighted:
 \end{tabular}
 \end{center}
 
-The Object tab's search result will now prioritized your most recent searches
-(which will be bolded).\newFeature{v0.20.3}
+\noindent The Object tab's search result will now prioritize your most recent searches
+(which will be shown in \textbf{bold}).\newFeature{v0.20.3}
 To modify the search results, see section~\ref{sec:gui:SearchWindow:Options}.
 From our earlier example, re-enter \emph{m} into the Object tab.
 Doing so will generate a slightly different list than before.
-In this case, Mimas (SI) will appear first, depicted in Figure~\ref{fig:gui:search:recentSearches}:
+In this case, Mimas (SI) will appear first, as shown in Figure~\ref{fig:gui:search:recentSearches}:
 \begin{center}
 \begin{tabular}{l}
         \textbf{\emph{M}imas (SI)}\\
@@ -890,12 +903,12 @@ In this case, Mimas (SI) will appear first, depicted in Figure~\ref{fig:gui:sear
 \label{sec:gui:SearchWindow:SIMBAD}
 The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a
 convenient way to fetch and show a set of information for selected
-object from the astronomical database
+object from the astronomical online database
 SIMBAD~\citep{2000A&AS..143....9W}.  If some object is only visible in
 a survey or DSS background (see section~\ref{ch:surveys}) and not in
 Stellarium's catalogs, you can also set a custom marker (see
 section~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
-what's known about this''.
+what's known about objects at this location''.
 
 \subsection{The Position tab}
 \label{sec:gui:SearchWindow:Position}
@@ -992,7 +1005,10 @@ The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCa
 
 When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
-Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} To show a line between markers please tick checkbox \emph{Show line}. You may customize the format of displayed data near markers and their frequency in \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
+Dates and/or magnitudes will show up near position markers when \emph{Show dates} 
+and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} 
+To show a line between markers please tick checkbox \emph{Show line}. 
+You may customize the format of displayed data near markers and their frequency in the \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
 
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
@@ -1016,12 +1032,16 @@ You can export the calculated ephemeris into an XLSX or CSV file.
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
-For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma} and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
+For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}
+and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
-Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and enable display markers for all naked-eye visible planets.
+Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and 
+enable display markers for all naked-eye visible planets.
 
-Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of two objects in same time and define custom time step for ephemeris (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
+Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of 
+two objects at the same time and define custom time step for the ephemeris 
+(Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
 \subsection{The Transits Tab}
 \label{sec:gui:AstroCalc:Transits}
@@ -1032,19 +1052,23 @@ Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris o
 	\label{fig:gui:AstroCalc:Transits}
 \end{figure}
 
-This \newFeature{v0.19.3} tab allows you to compute transits of selected celestial object (except unnamed stars and artificial satellites) for specific date range. The tool is proposed for planning observations and he suggest the best time and conditions for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
+\noindent This \newFeature{v0.19.3} tab allows you to compute meridian transits of selected celestial object 
+(except unnamed stars and artificial satellites) for a specific date range. 
+The tool is proposed for planning observations, and it suggests the best time and conditions 
+for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
 
 You may also export the list of transits into an XLSX or CSV file.
 
-%\newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations for inner planets and stationary points for all planets in
-additional to exist phenomena. For all Solar system bodies, except the moons, we also propose compute perihelion and aphelion in addition to other phenomena.
+In version 0.19.3\newFeature{v0.19.3} we added computation of greatest 
+elongations for the inner planets and stationary points for all planets in
+addition to the exist phenomena. For all Solar system bodies, except the moons, 
+we also compute perihelia and aphelia in addition to the other phenomena.
 
 You can export the calculated phenomena into an XLSX or CSV file.
 
@@ -1182,7 +1206,7 @@ You may center an object from the right list in the sky map just by selecting it
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
 In version 0.18.3 \newFeature{v0.18.3} this tool has been refactored: the tool for searching items from list of \emph{Matching Objects} was removed,
-the filter for magnitudes was moved to the right and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
+the filter for magnitudes was moved to the right, and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
 In addition to the names we added 5 new sortable columns: magnitude, rising time, transit time, setting time and angular size of object.
 
 
@@ -1211,15 +1235,14 @@ current date) as graphs.
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
-\newpage
 
 \section{The Help Window}
 \label{sec:gui:help}
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
-\begin{figure}[h]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog.png}
+\begin{figure}[htp]
+\centering\includegraphics[width=0.65\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -1231,7 +1254,7 @@ a browse of the information in this window.
 \subsection{The About Tab}
 \label{sec:gui:help:about}
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_about.png}
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
@@ -1242,15 +1265,16 @@ Since version 0.18.3 \newFeature{0.18.3} this tab has tool to check for updates 
 \subsection{The Log Tab}
 \label{sec:gui:help:log}
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_log.png}
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_log.png}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
 \end{figure}
 
 The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
-stellarium runs. It is useful to locate the files that stellarium writes
+Stellarium runs. It is useful to locate the files that Stellarium writes
 to your computer. The same information is written to  the file \file{log.txt} that you will
-find in your user directory (see~\ref{sec:Directories}).
+find in your user data directory (see~\ref{sec:Directories}).
+
 
 \section{Editing Keyboard Shortcuts}
 \label{sec:gui:help:hotkeys}

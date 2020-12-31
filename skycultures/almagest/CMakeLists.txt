@@ -8,5 +8,6 @@ INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/almagest )
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/almagest
 	FILES_MATCHING PATTERN "constellation*" 
 	PATTERN "*_names.fab"
-	PATTERN "description.*.utf8" 
+	PATTERN "description.*.utf8"
+	PATTERN "*.png"
 	PATTERN "CMakeFiles" EXCLUDE )

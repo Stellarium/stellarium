@@ -50,6 +50,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QSettings>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 

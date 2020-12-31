@@ -610,6 +610,8 @@ protected:
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
 
+    bool multisamplingEnabled_;
+
 	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	QOpenGLFunctions* gl;

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-11-14 16:25+0700\n"
+"POT-Creation-Date: 2020-12-15 10:55+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2020\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -1193,15 +1193,16 @@ msgid ""
 "The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy "
 "interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together "
 "with fainter stars between them as a &quot;cluster&quot; (or association "
-"which is more extended than the modern &quot;lam Ori Assoc.&quot;). Head "
-"does not have direct connection to the shoulder stars anymore, but a "
+"which is more extended than the modern &quot;&lambda; Ori Assoc.&quot;). "
+"Head does not have direct connection to the shoulder stars anymore, but a "
 "connection to a star between the stars in the shoulders."
 msgstr ""
-"&quot;Hlava&quot; je pomenovaná ako &quot;hmlistá&quot;, čo znamená, že "
+"&quot;Hlava&quot; je označneá ako &quot;hmlistá&quot;, čo znamená, že "
 "Ptolemaios interpretoval &phi;<sub>1</sub>, &phi;<sub>2</sub> a &lambda; "
-"spolu so slabšími hviezdami ako &quot;hviezdokopu&quot; (alebo asociáciu, čo"
-" je väčšia ako moderná &quot;asociácia lam Ori&quot;). Hlava už viac nemá "
-"priame spojenie k hviezd ramien, ale spája sa s hviezdou medzi nimi."
+"spolu so slabšími hviezdami medzi nimi, ako &quot;hviezdokopu&quot; (alebo "
+"asociáciu, ktorá je väčšia ako moderná &quot;asociácia lam Ori&quot;). Hlava"
+" už viac nemá priame spojenie k hviezdam ramien, ale k hviezde medzi "
+"hviezdami ramien."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:360
@@ -1907,7 +1908,7 @@ msgstr "Predný predchodca"
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:22
 msgid "Pegasus's front legs and Shoulder"
-msgstr "Predné nohy a rameno Pegasa"
+msgstr "Predné nohy a plece Pegasa"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:23
@@ -2170,13 +2171,13 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:3
 msgid ""
-"The depiction of Orion, as seen from Earth (left) and a mirror-image, from a"
-" 13th-century copy of al-Sufi's Book of the Fixed Stars. In this version, "
-"Orion's shield has become a long sleeve, typical of Islamic dress.</a>"
+"</a> The depiction of Orion, as seen from Earth (left) and a mirror-image, "
+"from a 13th-century copy of al-Sufi's Book of the Fixed Stars. In this "
+"version, Orion's shield has become a long sleeve, typical of Islamic dress."
 msgstr ""
-"Zobrazenie Orióna, pozorovaného zo Zeme (vľavo) a zrkadlový obraz, z kópie "
-"al-Súfího Knihy stálic z 13. storočia. V tejto verzii sa Oriónov štít stal "
-"dlhým rukávom, typickým pre islamské oblečenie.</a>"
+"</a> Zobrazenie Orióna, ako je vidieť zo Zeme (vľavo) a zrkadlový obraz z "
+"kópie al-Súfiho Knihy stálic z 13. storočia. V tejto verzii sa Oriónov štít "
+"stal dlhým rukávom, typickým pre islamské oblečenie."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:4
@@ -2253,24 +2254,18 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:8
 msgid ""
-"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" "
-"target=\"_top\">In this link you can see the beautiful illustrations of "
-"constellations and sample star tables in an old manuscript of Al-Sufi "
-"book.</a>"
+"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">In this link "
+"you can see the beautiful illustrations of constellations and sample star "
+"tables in an old manuscript of Al-Sufi book.</a>"
 msgstr ""
-"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" "
-"target=\"_top\">Na tejto stránke môžete vidieť nádherné ilustrácie súhvezdí "
-"a ukážku hviezdnych tabuliek v starom rukopise z al-Súfího knihy.</a>"
-
-#. type: Content of: <p><a>
-#: ../../skycultures/arabic/description.en.utf8:9
-msgid "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">"
-msgstr "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">"
+"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">Na tejto "
+"stránke môžete vidieť nádherné ilustrácie súhvezdí a ukážku hviezdnych "
+"tabuliek v starom rukopise z al-Súfího knihy.</a>"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:9
-msgid "Cetus as seen in the sky</a>"
-msgstr "Veľryba, ako ju vidieť na oblohe</a>"
+msgid "Cetus as seen in the sky"
+msgstr "Veľryba, ako je vidieť na oblohe"
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:10
@@ -4840,22 +4835,23 @@ msgid ""
 "star names. A project conducted by community member G.S.K.Lee is now "
 "underway to construct a complete Chinese sky culture set for Stellarium "
 "based on the information inside <i>Complete Studies of Astronomical "
-"Instruments</i> (Chinese: 仪象考成; pinyin: Yíxiàngkǎochéng), an imperial record"
-" of astronomy finished in 1756.It was revised in 1844, published.<i>The "
-"Continuation of Complete Studies of Astronomical Instruments</i> (Chinese: "
-"仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān), which is the major reference to the"
-" traditional Chinese Xingguans and star names used today."
+"Instruments</i> (Chinese: 仪象考成; pinyin: Yíxiàng kǎochéng), an imperial "
+"record of astronomy finished in 1756.It was revised in 1844, "
+"published.<i>The Continuation of Complete Studies of Astronomical "
+"Instruments</i> (Chinese: 仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān), which is "
+"the major reference to the traditional Chinese Xingguans and star names used"
+" today."
 msgstr ""
 "Stellarium v súčasnosti poskytuje okolo 300 čínskych Singkuanov (čínsky: 星官;"
 " pchin-jin: sīngkuān, znamená: hviezdny úradník) a neobsahuje žiadne čínske "
-"mená hviezd. Projekt vedený členom komunity G.S.K.Leem má za cieľ zostrojiť "
-"kompletnú sústavu čínskej kultúry oblohy pre Stellarium, založenú na "
+"mená hviezd. Projekt vedený členom komunity G.S.K.Leem, má za cieľ zostrojiť"
+" kompletnú sústavu čínskej kultúry oblohy pre Stellarium, založenú na "
 "informáciách v <i>Kompletnom výskume astronomických prístrojov</i> (čínsky: "
-"仪象考成; pchin-jin: Jísjàngkchǎočchéng), cisárskom zázname o astronómii "
+"仪象考成; pchin-jin: Jísjàng kchǎočchéng), cisárskom zázname o astronómii "
 "dokončenom v roku 1756. Bol prepracovaný v r. 1844 a vydaný ako "
 "<i>Pokračovanie kompletného výskumu astronomických prístrojov</i> (čínsky: "
-"仪象考成续编; pchin-jin: Jísjàngkchǎočchéng sùpiēn), čo je dnes hlavným zdrojom "
-"pre tradičné čínske Singkuany a mená hviezd."
+"仪象考成续编; pchin-jin: Jísjàng kchǎočchéng sùpiēn), čo je hlavným zdrojom pre "
+"tradičné čínske Singkuany a súčasné mená hviezd."
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:5
@@ -4984,15 +4980,19 @@ msgid ""
 "Astronomical Map shows a total of 283 Xingguans, comprising a total of 1,565"
 " individual stars. The Xingguan are divided into 31 regions, the Twenty-"
 "Eight Mansions along the ecliptic, and the Three Enclosures of the northern "
-"sky. Due to the precession, six Xingguans near the southern horizon became "
-"difficult to see and were lost."
+"sky. Due to the influence of precession, six Xingguans near the southern "
+"horizon are getting more and more south. They were no longer easy to be "
+"observed by astronomers in the Ming and Qing Dynasties, so they were no "
+"longer recorded in <i>Complete Studies of Astronomical Instruments</i>."
 msgstr ""
-"Singkuany sú všeobecne menšie ako súhvezdia z helénskej tradície. Nebeské "
-"mapy z Sučou vyryté do kameňa z obdobia dynastie Sung (13. storočie) ukazujú"
-" 283 Singkuanov zložených dovedna z 1565 jednotlivých hviezd. Singkuany sú "
-"rozdelené do 31 oblastí, 28 dómov pozdĺž ekliptiky a tri ohrady na severnej "
-"oblohe. Kvôli precesii sa šesť Singkuanov pri južnom horizonte stalo ťažko "
-"pozorovateľnými a stratili sa."
+"Singkuany sú všeobecne menšie ako súhvezdia z helénskej tradície. Do kameňa "
+"vyrytá Nebeská mapa z Sučou z obdobia dynastie Sung (13. storočie) ukazuje "
+"celkovo 283 Singkuanov zložených dovedna z 1565 jednotlivých hviezd. "
+"Singkuany sú rozdelené do 31 oblastí, 28 dómov pozdĺž ekliptiky a tri ohrady"
+" na severnej oblohe. Kvôli vplyvu precesie sa šesť Singkuanov pri južnom "
+"horizonte presúva viac a viac na juh. Pre astronómov z dynastií Ming a "
+"Čching sa stali ťažko pozorovateľnými, takže ich viac nezaznamenali v "
+"<i>Kompletnom výskume astronomických prístrojov</i>."
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:22
@@ -5010,10 +5010,10 @@ msgstr ""
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:23
 msgid ""
-"<i>Complete Studies of Astronomical Instruments</i> has 300 Xingguans in "
-"total."
+"In this way, <i>Complete Studies of Astronomical Instruments</i> has 300 "
+"Xingguans in total."
 msgstr ""
-"<i>Kompletné štúdium astronomických prístrojov</i> obsahuje spolu 300 "
+"<i>Kompletné štúdium astronomických prístrojov</i> takto obsahuje spolu 300 "
 "Singkuanov."
 
 #. type: Content of: <p><p><p>
@@ -5050,7 +5050,7 @@ msgstr ""
 #. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:29
 msgid ""
-"In the Chinese catalogue, some of the stars are \"principle\" "
+"In the Chinese catalogue, some of the stars are \"Principal\" "
 "(Chinese:正星pinyin:zhèngxīng). These stars were first discovered and well-"
 "known. On the contrary, some of the stars are \"added\" "
 "(Chinese:增星,pinyin:zēngxīng). They were recorded and named in later "
@@ -12214,9 +12214,9 @@ msgstr ""
 #. type: Content of: <p><p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:2986
 msgid ""
-"This sky culture was contributed by <i>Karrie Berglund</i> of Digitalis "
-"Education Solutions, Inc. based on Hong Kong Space Museum star maps (no "
-"longer available online)."
+"This sky culture was originally contributed by <i>Karrie Berglund</i> of "
+"Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star "
+"maps (no longer available online)."
 msgstr ""
 "Túto kultúru oblohy pridala <i>Karrie Berglundová</i> z Digitalis Education "
 "Solutions, Inc. založenú na mapách hviezd Hongkongského múzea vesmíru (už "

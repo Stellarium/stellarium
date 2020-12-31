@@ -702,7 +702,6 @@ void StelMainScriptAPI::exit()
 
 void StelMainScriptAPI::quitStellarium()
 {
-	emit(requestExit()); // exit from script
 	StelApp::getInstance().quit(); // quit from planetarium
 }
 

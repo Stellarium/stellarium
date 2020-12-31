@@ -254,6 +254,7 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
+      multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
 	  positionsCache(ORBIT_SEGMENTS * 2)
@@ -760,7 +761,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		else
 		{
 			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
-			elo = StelUtils::radToDmsStr(elongation, true);
+			elo = StelUtils::radToDmsStr(elongation, true);			
 		}
 
 		if (withTables)
@@ -769,7 +770,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Elongation")).arg(elo);
 			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Phase angle")).arg(pha);
 			if (withIllum)
-				oss << QString("<tr><td>%1:</td><td>%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("<tr><td>%1:</td><td>%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
 			oss << "</table>";
 		}
 		else
@@ -777,7 +778,19 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("%1: %2<br/>").arg(q_("Elongation"), elo);
 			oss << QString("%1: %2<br/>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
+		}
+
+		if (getPlanetType()==isMoon && this->parent!=core->getCurrentPlanet())
+		{
+			QString ad;
+			const double angularDistance = getJ2000EquatorialPos(core).angle(this->parent->getJ2000EquatorialPos(core));
+			if (withDecimalDegree)
+				ad = StelUtils::radToDecDegStr(angularDistance,4,false,true);
+			else
+				ad = StelUtils::radToDmsStr(angularDistance, true);
+
+			oss << QString("%1 %2 &mdash; %3: %4<br/>").arg(q_("Angular distance"), getNameI18n(), this->parent->getNameI18n(), ad);
 		}
 	}
 	return str;
@@ -2608,6 +2621,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		transfo2->combine(Mat4d::zrotation(M_PI_180*static_cast<double>(axisRotation + 90.f)));
 		StelPainter sPainter(core->getProjection(transfo2));
 		gl = sPainter.glFuncs();
+
+		#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled_)
+			gl->glEnable(GL_MULTISAMPLE);
+		else
+			gl->glDisable(GL_MULTISAMPLE);
+		#endif
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
@@ -2676,6 +2696,10 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
+		#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled_)
+			gl->glDisable(GL_MULTISAMPLE);
+		#endif
 	}
 
 	bool allowDrawHalo = true;

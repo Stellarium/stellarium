@@ -50,6 +50,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDir>
+#include <stdexcept>
 
 MpcImportWindow::MpcImportWindow()
 	: StelDialog("SolarSystemEditorMPCimport")

@@ -59,6 +59,7 @@
 #include <QDir>
 
 #include <QDebug>
+#include <stdexcept>
 
 #define DEFAULT_RTS2_REFRESH    500000
 

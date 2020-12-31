@@ -814,8 +814,7 @@ void AstroCalcDialog::initListCelestialPositions()
 	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
 	setCelestialPositionsHeaderNames();
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
-	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
-	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
+	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);	
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1030,6 +1029,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	QPair<QString, QString> coordStrings;
 
 	initListCelestialPositions();
+	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
 
 	const float mag = static_cast<float>(ui->celestialMagnitudeDoubleSpinBox->value());
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
@@ -4375,12 +4375,11 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	else if (objects.contains("Mars",Qt::CaseInsensitive))
 		limit = 5.;
 	else if (objects.indexOf(mp)>=0)
-		limit = 10.;
-	// TODO: Consider using 30 days as max stepwidth? Else planet loops cannot be followed.
+		limit = 10.;	
 	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
-		limit = 90.5625;
+		limit = 15.;
 	else if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive) || objects.contains("Pluto",Qt::CaseInsensitive))
-		limit = 181.125;
+		limit = 20.;
 
 	if (step > limit)
 		step = limit;
@@ -5574,7 +5573,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (categoryId==EWPulsars) // special case!
+					if (categoryId==EWRegionsOfTheSky) // special case!
 					{
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize);
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude);

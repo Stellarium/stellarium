@@ -47,6 +47,7 @@
   <name xml:lang="jv">Stéllarium</name>
   <name xml:lang="ka">Stellarium</name>
   <name xml:lang="kk">Stellarium</name>
+  <name xml:lang="kn">ಸ್ಟೆಲ್ಲೇರಿಯಂ</name>
   <name xml:lang="ko">스텔라리움</name>
   <name xml:lang="ky">Stellarium</name>
   <name xml:lang="la">Stellarium</name>
@@ -130,6 +131,7 @@
   <summary xml:lang="jv">Planetarium Desktop</summary>
   <summary xml:lang="ka">სამაგიდო პლანეტარიუმი</summary>
   <summary xml:lang="kk">Экрандағы планетарий</summary>
+  <summary xml:lang="kn">ಗಣಕ ತಾರಾಲಯ</summary>
   <summary xml:lang="ko">데스크톱 플라네타리움</summary>
   <summary xml:lang="ky">Үстөлдүк планетарий</summary>
   <summary xml:lang="la">Planetarium mensae illuminatae</summary>
@@ -189,9 +191,9 @@
     <p xml:lang="fa">استلاریوم عکس واقعی سه‌بعدی آسمان را در زمان واقعی با OpenGL ارایه می‌دهد. ستاره‌ها، صورت‌های فلکی، سیاره‌ها، سحابی ها را نمایش می‌دهد، و امکانات بسیار دیگر از جمله منظره‌های پانورامای متعدد، مِهْ، شبیه‌سازی آلودگی نوری، یک موتور اسکریپت نویسی تعبیه‌شده دارد.</p>
     <p xml:lang="fi">Stellarium mallintaa todentuntuisen 3D-taivaan reaaliajassa OpenGL-rajapinnalla. Ohjelma sisältää tähdet, tähdistöt, planeetat ja sumut, sekä monia muita ominaisuuksia kuten useita panoraamamaisemia, valosaastesimulaation ja sisäänrakennetun komentosarjamoottorin.</p>
     <p xml:lang="fr">Stellarium présente le ciel en temps réel et en 3D de manière photoréaliste au moyen de OpenGL. Il permet d'afficher les étoiles, les constellations, les planètes et les nébuleuses. De nombreuses autres fonctionnalités sont disponibles, parmi lesquels l'utilisation de nombreux paysages panoramiques, la simulation du brouillard et de la pollution lumineuse. Un moteur de scripts est également proposé.</p>
-    <p xml:lang="gd">Reandaraidh Stellarium na speuran ann an 3D le coltas dealbh-camara air 's ann am fìor-ùine le OpenGL. Seallaidh e reultan, reul-bhadan, planaidean is dearganan-doininn agus tha iomadh gleus eile aige, a' gabhail a-steach iomadh cuairt-shealladh tìre, ceò, truailleadh solais mas-fhìor agus einnsean-sgriobtaidh na bhroinn.</p>
+    <p xml:lang="gd">Reandaraidh Stellarium na speuran ann an 3D le coltas dealbh-camara air ’s ann am fìor-ama le OpenGL. Seallaidh e reultan, reul-bhadan, planaidean is dearganan-doininn agus tha iomadh gleus eile aige, a’ gabhail a-steach iomadh cuairt-shealladh tìre, ceò, truailleadh solais mas-fhìor agus einnsean-sgriobtaidh na bhroinn.</p>
     <p xml:lang="gl">Stellarium ofrece ceos foto-realistas 3D en tempo real con OpenGL. Amosa estrelas, constelacións, planetas e nebulosas e ten moitos outros recursos, incluíndo múltiples paisaxes panorámicas, néboa, simulación de contaminación lumínica e un mecanismo de script incorporado.</p>
-    <p xml:lang="he">סטאלריום מעניק שמיים פוטו-ריאליסטיים תלת מימד בזמן אמת עם OpenGL. הוא מציג כוכבים, קבוצות כוכבים, כוכבי לכת וערפיליות, ויש לו תכונות רבות אחרות כולל נופים פנורמיים מרובים, ערפל,פליטת אור הדמיה ומנוע סקריפט מובנה.</p>
+    <p xml:lang="he">סטאלריום מעניק שמיים פוטו-ריאליסטיים תלת מימדיים בזמן אמת עם OpenGL. הוא מציג כוכבים, קבוצות כוכבים, כוכבי לכת וערפיליות, ויש לו תכונות רבות אחרות כולל נופים פנורמיים מרובים, ערפל,פליטת אור הדמיה ומנוע סקריפט מובנה.</p>
     <p xml:lang="hr">Stellarium prikazuje 3D foto-realistično nebo u stvarnom vremenu putem OpenGL-a. Stvara prikaz zvijezda, zviježđa, planeta i maglica, a ima i mnoge druge značajke, uključujući razne panoramske pejzaže, maglu, simulaciju svjetlosnog onečišćenja i ugrađeni skriptni engine.</p>
     <p xml:lang="hu">A Stellarium fotorealisztikus 3D-s égboltot állít elő valós időben, OpenGL technikával. Kirajzolja a csillagokat, csillagképeket, bolygókat és ködöket. Sok más tulajdonsága között van a panoráma-látkép, köd, fényszennyezés szimulálása és egy beépített szkript-motor.</p>
     <p xml:lang="hy">Stellarium֊ը OpenGL֊ով իրական ժամանակում նկարում է եռաչափ ֆոտոիրատեսական երկինք։ Այն արտացոլում է աստղերը, համաստեղությունները, մոլորակները և միգամածությունները, և ունի բազում այլ հնարավորություններ, ներառյալ բազմաթիվ համայնապատկերային բնատեսարաններ, մառախուղ, լույսի աղտոտվածության նմանակում և սցենարների ներկառուցված շարժիչ։</p>
@@ -245,7 +247,7 @@
     <p xml:lang="fa">فهرست ستاره‌ای استلاریوم شامل حدود 600 هزار ستاره است. هم‌چنین امکان دریافت فهرست‌هایی شامل اطّلاعات بیش از 210 میلیون ستاره وجود دارد.</p>
     <p xml:lang="fi">Stellarium sisältää oletuksena 600 000 tähden tähtiluettelon, ja lisäluetteloita on mahdollista ladata aina 210 miljoonaan tähteen asti.</p>
     <p xml:lang="fr">Stellarium est livré avec un catalogue d'environ 600 000 étoiles. Des catalogues supplémentaires comportant jusqu'à 210 millions d'étoiles peuvent être téléchargés gratuitement.</p>
-    <p xml:lang="gd">Thig catalog de corr is 600 reul an cois Stellarium agus 's urrainn dhut barrachd chatalogan a luchdadh a-nuas le suas ri 210 millean reul.</p>
+    <p xml:lang="gd">Thig catalog de chòrr is 600 reul an cois Stellarium agus ’s urrainn dhut barrachd chatalogan a luchdadh a-nuas le suas ri 210 millean reul.</p>
     <p xml:lang="gl">Stellarium vén cun catálogo de estrelas de preto de 600 mil estrelas e é posible facer a descarga de catálogos extra con ata 210 millóns de estrelas.</p>
     <p xml:lang="he">סטלריום מגיע עם א כוכב קטלוג של כ 600,000 כוכבים וזהו אפשרי להוריד קטלוגים נוספים עם עד 210 מיליון כוכבים.</p>
     <p xml:lang="hr">Stellarium nudi katalog sa oko 600 tisuća zvijezda a moguće je preuzeti dodatne kataloge sa do 210 milijuna zvijezda.</p>
@@ -302,7 +304,7 @@
     <p xml:lang="fa">استلاریوم شامل فرهنگ‌های آسمانی مختلفی است. شما می‌توانید علاوه بر نمایش  صورت‌های فلکی غربی قدیم، آن‌ها را از دید تمدّن‌های پلینزی، اینویتی، ناواهی، کره‌ای، لاکوتا، مصری و چینی مشاهده کنید.</p>
     <p xml:lang="fi">Stellarium sisältää useita taivaskulttuureja – voit nähdä polynesialaisten, inuiittien, navajojen, korealaisten, lakotojen, egyptiläisten ja kiinalaisten perinteiset tähtikuviot, sekä lisäksi tavalliset länsimaalaiset tähtikuviot.</p>
     <p xml:lang="fr">Stellarium propose l'affichage de constellations de plusieurs cultures, issues des traditions d'astronomes de Polynésie, Inuit, Navajo, de Corée, Lakota, d'Égypte et de Chine, ainsi que les constellations traditionnelle de la culture occidentale.</p>
-    <p xml:lang="gd">Tha iomadh dualchas speura aig Stellarium - seall na reul-bhadan o dhualchas nan reul-eòlaichean Poilinèiseach, Inuit, Navajo, Coirèanach, Lakota, Èipheiteach agus Sìneach cho math ris na reul-bhadan Siarach tradaiseanta.</p>
+    <p xml:lang="gd">Tha iomadh dualchas speura aig Stellarium – seall na reul-bhadan o dhualchas nan reul-eòlaichean Poilinèiseach, Inuit, Navajo, Coirèanach, Lakota, Èipheiteach agus Sìneach cho math ris na reul-bhadan Siarach tradaiseanta.</p>
     <p xml:lang="gl">Stellarium ten ceos de múltiples culturas - amosa as constelacións das tradicións dos astrónomos polinesios, Inuit, Navajos, coreanos, Lakotas, exipcios e chineses, así como as constelacións occidentais tradicionais.</p>
     <p xml:lang="he">לסטלריום יש ריבוי שמיים תרבויות - ראו את קבוצות הכוכבים ממסורותיהם של אסטרונומים פולינזיים, אינuitיים, נאוואחו, קוריאנים, לקוטות, מצרים וסינים, וכן את קבוצות הכוכבים המערביות המסורתיות.</p>
     <p xml:lang="hr">Stellarium ima više kultura zvijezđa - pogledajte zviježđa iz tradicija polinezijskih, inuitskih, navajo, korejskih, lakotskih, egipatskih i kineskih astronoma, kao i tradicionalna zapadna zviježđa.</p>
@@ -359,7 +361,7 @@
     <p xml:lang="fa">هم‌چنین امکان بازدید از سایر سیّارات منظومه‌ی شمسی وجود دارد. آسمان را از دید فضانوردان آپولو ببینید یا حلقه‌های زحل را از دید تیتان نظاره کنید.</p>
     <p xml:lang="fi">Myös muilla aurinkokunnan planeetoilla on mahdollista käydä – näe millainen taivas oli Apollo-astronauttien silmin, tai miltä Saturnuksen renkaat näyttävät Titanin pinnalta.</p>
     <p xml:lang="fr">Il est également possible de visiter d'autres corps célestes du système solaire, par exemple pour voir le ciel comme les astronautes du programme Apollo ou observer les anneaux de Saturne depuis Titan.</p>
-    <p xml:lang="gd">'S urrainn dhut tadhal air planaidean eile sa rian-grèine cuideachd - seall an coltas a bha air na speuran dha na speuradairean Apollo no an coltas a cha air cearcallan Satairn o Thitan.</p>
+    <p xml:lang="gd">’S urrainn dhut tadhal air planaidean eile sa rian-grèine cuideachd – seall an coltas a bha air na speuran dha na speuradairean Apollo no an coltas a cha air cearcallan Satairn o Thitan.</p>
     <p xml:lang="gl">Tamén é posible visitar outros planetas no sistema solar - ver o ceo coma os astronautas do Apollo, ou os aneis de Saturno dende Titan.</p>
     <p xml:lang="he">אפשר גם לבקר בכוכבי לכת אחרים במערכת השמש - ראו איך נראו השמיים לאסטרונאוטים של אפולו, או איך נראות הטבעות של סטורן מטיטאן.</p>
     <p xml:lang="hr">Moguće je posjetiti i druge planete Sunčevog sustava - pogledajte kako je nebo izgledalo astronautima Apollo programa ili kako prstenovi Saturna izgledaju s Titana.</p>
@@ -409,6 +411,7 @@
     <category>Science</category>
   </categories>
   <releases>
+    <release date="2020-12-28" version="0.20.4"/>
     <release date="2020-09-27" version="0.20.3"/>
     <release date="2020-06-22" version="0.20.2"/>
     <release date="2020-04-20" version="0.20.1"/>
@@ -501,6 +504,7 @@
   <developer_name xml:lang="en-GB">Stellarium team</developer_name>
   <developer_name xml:lang="es">Equipo de Stellarium</developer_name>
   <developer_name xml:lang="et">Stellariumi töörühm</developer_name>
+  <developer_name xml:lang="fa">تیم استلاریوم</developer_name>
   <developer_name xml:lang="fi">Stellarium-tiimi</developer_name>
   <developer_name xml:lang="fr">Équipe Stellarium</developer_name>
   <developer_name xml:lang="gd">Sgioba Stellarium</developer_name>
@@ -514,6 +518,7 @@
   <developer_name xml:lang="it">team di Stellarium</developer_name>
   <developer_name xml:lang="ja">ステラリウム・チーム</developer_name>
   <developer_name xml:lang="jv">Pantha Stellarium</developer_name>
+  <developer_name xml:lang="kn">ಸ್ಟೆಲ್ಲೇರಿಯಂ ತಂಡ</developer_name>
   <developer_name xml:lang="ko">스텔라리움 팀</developer_name>
   <developer_name xml:lang="la">Manus Stellarii</developer_name>
   <developer_name xml:lang="lb">Stellarium Team</developer_name>

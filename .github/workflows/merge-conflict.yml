@@ -13,6 +13,7 @@ on:
 
 jobs:
   main:
+    name: "Check conflicts"
     runs-on: ubuntu-latest
     steps:
       - name: check if prs are dirty

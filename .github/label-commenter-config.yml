@@ -23,7 +23,7 @@ labels:
   - name: incomplete
     labeled:
       issue:
-        body: Read the guidelines how to report properly, or we have new questions/suggestions to try...
+        body: Please follow the issue template - the hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
   - name: enhancement
     labeled:
       issue:
@@ -39,7 +39,9 @@ labels:
   - name: won't fix
     labeled:
       issue:
-        body: We have a reason not to do it...
+        body: |
+          We have a reason not to do it at the moment, but maybe in future we will back to this proposal or someone can implement it and propose pull request with solution! Some reasons for it in the FAQ:
+          https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
         action: close
     unlabeled:
       issue:
@@ -51,6 +53,13 @@ labels:
         body: |
           Please see FAQ in the wiki:
           https://github.com/Stellarium/stellarium/wiki/FAQ
+        action: close
+  - name: mobile
+    labeled:
+      issue:
+        body: |
+          This site actually does not discuss the Mobile version. Please use its own feedback system:
+          https://www.stellarium-labs.com/support/
         action: close
   - name: fix committed
     labeled:
