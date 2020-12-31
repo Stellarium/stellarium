@@ -1009,3 +1009,12 @@ QPushButton#pushButtonMoveLensDown {
 QLabel#lensNote {
 	margin-left: 5px;
 }
+
+QMessageBox{
+        font-weight: bold;
+        background-color: rgb(150,150,150);
+}
+
+QColorDialog{
+        background-color: rgb(150,150,150);
+}

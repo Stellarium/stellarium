@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "ui_MSConfigDialog.h"
-
+#include "StelMainView.hpp"
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 	: StelDialog("MeteorShowers")
 	, m_mgr(mgr)
@@ -178,7 +178,7 @@ void MSConfigDialog::setColorARG()
 {
 	Vec3f c = m_mgr->getColorARG();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
@@ -190,7 +190,7 @@ void MSConfigDialog::setColorARC()
 {
 	Vec3f c = m_mgr->getColorARC();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
@@ -202,7 +202,7 @@ void MSConfigDialog::setColorIR()
 {
 	Vec3f c = m_mgr->getColorIR();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");

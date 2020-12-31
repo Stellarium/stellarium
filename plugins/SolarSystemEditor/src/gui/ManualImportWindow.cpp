@@ -31,6 +31,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMainView.hpp"
 //#include "StelTranslator.hpp"
 
 
@@ -79,7 +80,7 @@ void ManualImportWindow::retranslate()
 
 void ManualImportWindow::selectColor()
 {
-	QColor color = QColorDialog::getColor(objectColor);
+    QColor color = QColorDialog::getColor(objectColor,&StelMainView::getInstance());
 	objectColor =  color;
 	ui->lineEditColor->setText(QString("%1, %2, %3").arg(color.redF()).arg(color.greenF()).arg(color.blueF()));
 	setColorButtonColor(color);
