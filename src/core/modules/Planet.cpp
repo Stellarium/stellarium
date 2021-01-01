@@ -2008,6 +2008,8 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		else
 			return get_mean_sidereal_time(JD, JDE); // degrees
 	}
+	// TEST: no rotation for all non-Earths
+	return 0.;
 
 	// V0.20: new rotational values from ExplSup2013 or WGCCRE2009.
 	if (re.method==RotationElements::WGCCRE)
