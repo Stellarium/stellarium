@@ -363,11 +363,13 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 	float rad[64];
 	uint i,j;
 	rad[level] = radius;
+#pragma warning(disable:4146)
 	for (i=level-1u;i!=-1u;--i)
 	{
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
 	uint slices = innerFanSlices<<level;
+#pragma warning(default:4146)
 
 	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(static_cast<uint>(slices));
 	float* cos_sin_theta_p;

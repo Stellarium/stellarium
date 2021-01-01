@@ -82,7 +82,7 @@ void computeMoonAngles(const double JDE, double *Lp, double *D, double *M, doubl
 		*r = sumR*0.001 + 385000.56;
 	}
 }
-#pragma warning(enable:4146)
+#pragma warning(default:4146)
 
 void computeLibrations(const double T, const double M, const double Mp, const double D, const double E, const double F, const double Omega,
 		       const double lambda, const double dPsi, const double beta, const double alpha, const double epsilon,

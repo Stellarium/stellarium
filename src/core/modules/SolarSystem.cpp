@@ -509,7 +509,7 @@ void SolarSystem::loadPlanets()
 		return;
 	}
 
-	for (const auto& solarSystemFile : solarSystemFiles)
+	for (const auto& solarSystemFile : qAsConst(solarSystemFiles))
 	{
 		if (loadPlanets(solarSystemFile))
 		{
@@ -554,7 +554,7 @@ void SolarSystem::loadPlanets()
 
 	shadowPlanetCount = 0;
 
-	for (const auto& planet : systemPlanets)
+	for (const auto& planet : qAsConst(systemPlanets))
 		if(planet->parent != sun || !planet->satellites.isEmpty())
 			shadowPlanetCount++;
 }
@@ -674,7 +674,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (p->getEnglishName()==strParent)
 				{
@@ -1040,7 +1040,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// There are two ways of defining the axis orientation: obliquity and ascending node, which was used by Stellarium based on Celestia.
 		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
 		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
-		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
+		//double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
+		// Disable rotation for now.
+		double rotPeriod=pd.value(secname+"/rot_periode", 0.).toDouble()/24.;
 		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
 		// 0.20: Use WGCCRE planet North pole data if available
@@ -1149,7 +1151,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	if (flagLightTravelTime)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->computePosition(dateJDE);
 		}
@@ -1167,7 +1169,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// We must reset observerPlanet for the next step!
 		observerPlanet->computePosition(dateJDE);
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
@@ -1181,7 +1183,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	}
 	else
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE);
@@ -1204,7 +1206,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 
 	if (flagLightTravelTime)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
@@ -1212,7 +1214,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 	}
 	else
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->computeTransMatrix(dateJD, dateJDE);
 		}
@@ -1238,7 +1240,7 @@ void SolarSystem::draw(StelCore* core)
 	// Compute each Planet distance to the observer
 	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->computeDistance(obsHelioPos);
 	}
@@ -1263,7 +1265,7 @@ void SolarSystem::draw(StelCore* core)
 			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
 
 	// Draw the elements
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
@@ -1282,7 +1284,7 @@ void SolarSystem::draw(StelCore* core)
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 {
 	// Sync index with AstroCalcDialog::generateEphemeris(). If required, switch to using a QMap.
-	const QList<Vec3f> colors={
+	const QVector<Vec3f> colors={
 		ephemerisGenericMarkerColor,
 		ephemerisSecondaryMarkerColor,
 		ephemerisMercuryMarkerColor,
@@ -1686,7 +1688,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 void SolarSystem::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 		p->translateName(trans);
 }
 
@@ -1733,7 +1735,7 @@ void SolarSystem::setFlagHints(bool b)
 {
 	if (getFlagHints() != b)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagHints(b);
 		emit flagHintsChanged(b);
 	}
@@ -1753,7 +1755,7 @@ void SolarSystem::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagLabels(b);
 		emit labelsDisplayedChanged(b);
 	}
@@ -1778,7 +1780,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1788,7 +1790,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 				p->setFlagOrbits(b);
 		}
 	}
@@ -1796,7 +1798,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (selected == p && p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1806,7 +1808,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (selected == p)
 					p->setFlagOrbits(b);
@@ -1818,7 +1820,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	else
 	{
 		// A planet is selected and orbits are on - draw orbits for the planet and their moons
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
@@ -1873,7 +1875,7 @@ void SolarSystem::update(double deltaTime)
 		allTrails->update();
 	}
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->update(static_cast<int>(deltaTime*1000));
 	}
@@ -2263,7 +2265,7 @@ void SolarSystem::setFlagNativePlanetNames(bool b)
 	if (b!=flagNativePlanetNames)
 	{
 		flagNativePlanetNames=b;
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagNativeName(flagNativePlanetNames);
@@ -2283,7 +2285,7 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 	if (b!=flagTranslatedNames)
 	{
 		flagTranslatedNames=b;
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagTranslatedName(flagTranslatedNames);
@@ -2690,7 +2692,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 
 		double newScale = b ? minorBodyScale : 1.0;
 		//update the bodies with the new scale
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if(p == moon) continue;
 			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2708,7 +2710,7 @@ void SolarSystem::setMinorBodyScale(double f)
 		minorBodyScale = f;
 		if(flagMinorBodyScale) //update the bodies with the new scale
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if(p == moon) continue;
 				if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2785,7 +2787,7 @@ void SolarSystem::reloadPlanets()
 	selected.clear();//Release the selected one
 
 	// GZ TODO in case this methods gets converted to only reload minor bodies: Only delete Orbits which are not referenced by some Planet.
-	for (auto* orb : orbits)
+	for (auto* orb : qAsConst(orbits))
 	{
 		delete orb;
 	}
@@ -2799,7 +2801,7 @@ void SolarSystem::reloadPlanets()
 	delete allTrails;
 	allTrails = Q_NULLPTR;
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->satellites.clear();
 	}
