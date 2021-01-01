@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>archaeoLinesDialog</class>
+ <comment>
+	(this comment section acts as a search catch for anyone looking for e.g. constant; unfortunately, comments can be inserted as UI top level items only. this could be improved via Designer code.)
+ 	- for decimal precision of spinboxes, see also AngleSpinBox::LOCATION_DEGREE_PRECISION_DIGITS 
+ </comment>
  <widget class="QWidget" name="archaeoLinesDialog">
   <property name="geometry">
    <rect>

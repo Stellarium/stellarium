@@ -32,6 +32,7 @@
 #include "ArchaeoLinesDialog.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "StelLocation.hpp"
 
 #include <QDebug>
 #include <QTimer>
@@ -41,6 +42,11 @@
 #include <QMouseEvent>
 #include <cmath>
 #include <stdexcept>
+
+const StelLocation 
+	l1 ("Mecca, Kaaba", 		39.826178305220296, 	21.42248787339453),
+	l2 ("Jerusalem, Temple Mount",	35.235886433339125,	31.778129877782472)
+	;
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
@@ -82,11 +88,11 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
 	, flagShowGeographicLocation1(false)
-	, geographicLocation1Longitude(39.826178305220296) // Mecca, Kaaba
-	, geographicLocation1Latitude(21.42248787339453)
+	, geographicLocation1Longitude(l1.longitude)
+	, geographicLocation1Latitude(l1.latitude)
 	, flagShowGeographicLocation2(false)
-	, geographicLocation2Longitude(35.235886433339125) // Jerusalem, Temple Mount
-	, geographicLocation2Latitude(31.778129877782472)
+	, geographicLocation2Longitude(l2.longitude)
+	, geographicLocation2Latitude(l2.latitude)
 	, flagShowCustomAzimuth1(false)
 	, flagShowCustomAzimuth2(false)
 	//, customAzimuth1(0.0)
@@ -530,10 +536,10 @@ void ArchaeoLines::loadSettings()
 	setCustomDeclination1Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_1",       "0.45,1.00,0.15").toString()));
 	setCustomDeclination2Color(     Vec3f(conf->value("ArchaeoLines/color_custom_declination_2",       "0.45,0.50,0.65").toString()));
 
-	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  39.826175).toDouble());
-	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   21.422476).toDouble());
-	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  35.235774).toDouble());
-	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   31.778087).toDouble());
+	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  l1.longitude).toDouble());
+	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   l1.latitude).toDouble());
+	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  l2.longitude).toDouble());
+	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   l2.latitude).toDouble());
 	StelLocation loc=core->getCurrentLocation();
 	double azi=loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude);
 	if (azFromSouth) azi+=180.0;
@@ -541,8 +547,8 @@ void ArchaeoLines::loadSettings()
 	azi = loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
 	if (azFromSouth) azi+=180.0;
 	geographicLocation2Line->setDefiningAngle(azi);
-	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
-	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
+	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", l1.name).toString());
+	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", l2.name).toString());
 
 	customAzimuth1Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_1_angle", 0.0).toDouble());
 	customAzimuth2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_2_angle", 0.0).toDouble());

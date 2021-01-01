@@ -30,6 +30,7 @@ class StelLocation
 {
 public:
 	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2), population(0.f), role('X'), isUserLocation(true) {;}
+	StelLocation(QString name, float lon, float lat): name (name), longitude(lon), latitude(lat) {}
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;

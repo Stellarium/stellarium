@@ -59,6 +59,9 @@ public:
 		Latitude,		//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
+
+	static const int LOCATION_DEGREE_PRECISION_DIGITS;
+	static const int LOCATION_RAD_PRECISION_DIGITS;
 	
 	AngleSpinBox(QWidget* parent=Q_NULLPTR, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
 	~AngleSpinBox() Q_DECL_OVERRIDE;

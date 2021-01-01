@@ -30,7 +30,6 @@
 #include "HighlightMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
 #include "StarMgr.hpp"
 #include "LabelMgr.hpp"

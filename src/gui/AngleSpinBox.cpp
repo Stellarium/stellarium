@@ -27,6 +27,9 @@
 #include <QLocale>
 #include <limits>
 
+const int AngleSpinBox::LOCATION_DEGREE_PRECISION_DIGITS = 6;
+const int AngleSpinBox::LOCATION_RAD_PRECISION_DIGITS = 2;
+
 AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType prefix)
 	: QAbstractSpinBox(parent),
 	  angleSpinBoxFormat(format),

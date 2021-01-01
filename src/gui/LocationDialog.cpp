@@ -196,11 +196,11 @@ void LocationDialog::createDialogContent()
 
 void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 {
-	int places = 2;
+	int places = AngleSpinBox::LOCATION_RAD_PRECISION_DIGITS;
 	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
 	if (flagDecimalDegrees)
 	{
-		places = 6;
+		places = AngleSpinBox::LOCATION_DEGREE_PRECISION_DIGITS;
 		format = AngleSpinBox::DecimalDeg;
 	}
 	ui->longitudeSpinBox->setDecimals(places);
