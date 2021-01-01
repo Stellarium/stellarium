@@ -1367,7 +1367,7 @@ void Oculars::toggleCCD(bool show)
 		if (show)
 		{
 			qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
-			QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Unable to display a sensor boundary: No sensors or telescopes are defined."), QMessageBox::Ok);
+			QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Unable to display a sensor boundary: No sensors or telescopes are defined."), QMessageBox::Ok);
 		}
 		flagShowCCD = false;
 		selectedCCDIndex = -1;

@@ -822,14 +822,14 @@ void SatellitesDialog::saveEditedSource()
 	if (u.isEmpty() || u=="")
 	{
 		qDebug() << "SatellitesDialog::saveEditedSource empty string - not saving";
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Empty string - not saving"), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Empty string - not saving"), QMessageBox::Ok);
 		return;
 	}
 
 	if (!QUrl(u).isValid() || !u.contains("://"))
 	{
 		qDebug() << "SatellitesDialog::saveEditedSource invalid URL - not saving : " << u;
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Invalid URL - not saving"), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Invalid URL - not saving"), QMessageBox::Ok);
 		return;
 	}
 

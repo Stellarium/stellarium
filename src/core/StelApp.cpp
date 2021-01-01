@@ -651,7 +651,7 @@ void StelApp::init(QSettings* conf)
 
 			if (!spoutSender->isValid())
 			{
-				QMessageBox::warning(Q_NULLPTR, "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
+				QMessageBox::warning(&StelMainView::getInstance(), "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
 				delete spoutSender;
 				spoutSender = Q_NULLPTR;
 				qApp->setProperty("spout", "");

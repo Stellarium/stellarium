@@ -40,6 +40,7 @@
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMainView.hpp"
 
 #include <algorithm>
 #include <vector>
@@ -1374,7 +1375,7 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				++totalRecords;
 				qDebug() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
 				qDebug() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
-				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),  q_("Found"), version, q_("Expected"), StellariumDSOCatalogVersion, q_("See Logfile for instructions.")), QMessageBox::Ok);
+				QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),  q_("Found"), version, q_("Expected"), StellariumDSOCatalogVersion, q_("See Logfile for instructions.")), QMessageBox::Ok);
 				break;
 			}
 		}

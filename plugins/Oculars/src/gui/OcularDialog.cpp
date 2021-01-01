@@ -118,7 +118,7 @@ void OcularDialog::deleteSelectedCCD()
 	if (ccdTableModel->rowCount() == 1)
 	{
 		qDebug() << "Cannot delete the last entry.";
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last sensor."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last sensor."), QMessageBox::Ok);
 		return;
 	}
 
@@ -135,7 +135,7 @@ void OcularDialog::deleteSelectedOcular()
 	if (ocularTableModel->rowCount() == 1)
 	{
 		qDebug() << "Cannot delete the last entry.";
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last ocular."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last ocular."), QMessageBox::Ok);
 		return;
 	}
 
@@ -152,7 +152,7 @@ void OcularDialog::deleteSelectedTelescope()
 	if (telescopeTableModel->rowCount() == 1)
 	{
 		qDebug() << "Cannot delete the last entry.";
-		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Cannot delete the last telescope."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last telescope."), QMessageBox::Ok);
 		return;
 	}
 
