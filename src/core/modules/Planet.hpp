@@ -70,13 +70,13 @@ typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
 // Data are read from ssystem.ini in SolarSystem.cpp::loadPlanets().
 //
 // GZ2016-01: This seems to be an outdated model.
-// TODO: For historical reasons, some of the values are given in hours, others in earth days, making life harder. Most moons have coupled rotation, they should be auto-converted from
-//       Finding a consistent scheme would be helpful. Also, IAU has planet axes in ICRF, while Stellarium has them coded in VSOP87.
+// TODO: For historical reasons, some of the values are given in hours, others in earth days, making life harder. Most moons have coupled rotation, they should be auto-converted from revolution period
+//       Finding a consistent scheme would be helpful. Also, IAU has planet axes in ICRF, while Stellarium has them coded in VSOP87 (ecliptical).
 //       Except if rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
 //
 // IAU standards like the Report of the IAU Working Group on Cartographic Coordinates and Rotational elements 2009 (DOI:10.1007/s10569-010-9320-4)
 // has axes given w.r.t. J2000 ICRF.
-// Before 0.15, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
+// Originally, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
 // ecliptically-based directions (VSOP87) obliquity/ascendingNode. But these were only ra/de_J2000 poles. Some axes have precession, which need to be modelled/updated.
 // The new way (0.15): We still use the previous elements obliquity and ascendingNode in Planet::computeTransMatrix(.,.)
 // and Planet::getSiderealTime(), but can update them periodically from:
@@ -97,22 +97,21 @@ class RotationElements
 {
 public:
 	enum ComputationMethod {
-		Traditional, // Stellarium prior to 0.20, This is unfortunately not documented. Orbits and axes given w.r.t. parent axes.
+		Traditional, // Stellarium prior to 0.21, This is unfortunately not documented. Orbits and axes given w.r.t. parent axes.
 		WGCCRE       // Orientation as described by the IAU Working Group on Cartographic Coordinates and Rotational Elements
-			     // There may be others added, like elements w.r.t. Laplacian Plane, w.r.t. Ecliptic B1950 or J2000, ...
 	};
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), //precessionRate(0.),
 		siderealPeriod(0.),
 		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
-	double period;          // (sidereal) rotation period [earth days]   CURRENTLY NOT:  If useICRF, this is from the time term of W.
-	double offset;          // rotation at epoch  [degrees]              CURRENTLY NOT:  If useICRF, this is the constant term of W
+	double period;          // (sidereal) rotation period [earth days] ///??  CURRENTLY NOT:  If useICRF, this is from the time term of W.
+	double offset;          // rotation at epoch  [degrees]            ///??  CURRENTLY NOT:  If useICRF, this is the constant term of W
 	double epoch;          // JDE (JD TT) of epoch for these elements
 	double obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
 	double ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
 	// Field rot_precession_rate in ssystem.ini is no longer used. We still keep Earth's value as it is evaluated in older versions (until 0.13.*).
 //	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)] [ NO LONGER USED WITH 0.14 (was used for Earth only, and that was too simple.) ]
 	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days] [FIXME: This is NOT a rotational element and should be stored elsewhere!]
-	// GZ for 0.20: I propose changes here: The 6/9 new entries after the switch are enough for many objects. Else, design special_functions.
+	// GZ for 0.21: I propose changes here: The 6/9 new entries after the switch are enough for many objects. Else, design special_functions.
 	ComputationMethod method; // The reference system in use for the respective object. WGCCRE is preferred, but we don't have all data.
 	double ra0;            // [rad] RA_0 right ascension of north pole. ssystem.ini: rot_pole_ra    /180*M_PI
 	double ra1;            // [rad/century] rate of change in axis ra   ssystem.ini: rot_pole_ra1   /180*M_PI
@@ -657,8 +656,11 @@ protected:
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	Mat4d rotLocalToParent;          // GZ2015: undocumented.
-					 // Apparently this is the axis orientation with respect to the parent body.
-					 // For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+					 // Apparently this is meant to be the axis orientation with respect to the rotation axes of the parent body.
+					 // For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+					 // For planets' satellites, this used to be a rotation into the planet's equatorial system.
+					 // Both of these aspects are however not compatible with the IAU WGCCRE definition of planet axes, which are linked to the ICRF frame (~Equatorial_J2000).
+					 //
 	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
 					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 					 // For V0.20+, and for planets computed after the IAU2009/WGCCRE papers this is related to angle W (rotDeg),

@@ -511,7 +511,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
 		if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
 		// TRANSLATORS: Ecliptical rectangular coordinates
-		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates")).arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
+		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 
 		if (re.method==RotationElements::WGCCRE)
 			oss << q_("DEBUG: Value related to Sidereal Time of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
@@ -519,79 +519,79 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << q_("DEBUG: Sidereal Time of Prime Meridian (NOT angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
 		oss << q_("DEBUG: Axis (RA/Dec): %1°/%2°").arg(QString::number(getCurrentAxisRA()*M_180_PI, 'f', 6), QString::number(getCurrentAxisDE()*M_180_PI, 'f', 6)) << "<br>";
 		oss << q_("DEBUG: RotObliquity: %1°").arg(QString::number(re.obliquity*M_180_PI, 'f', 6)) << "<br>";
-
-		oss << QString("DEBUG:  E1: %1  E2: %2  E3: %3  E4: %4  E5: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E3))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E5)) << "<br>";
-		oss << QString("DEBUG:  E6: %1  E7: %2  E8: %3  E9: %4 E10: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E6))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E7))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E8))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E9))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E10)) << "<br>";
-		oss << QString("DEBUG: E11: %1 E12: %2 E13: %3\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E11))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E12))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E13)) << "<br>";
-		oss << QString("DEBUG: Ja1: %1 Ja2: %2 Ja3: %3 Ja4: %4 Ja5: %5 Na: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja3))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja5))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Na)) << "<br>";
-		oss << QString("DEBUG: J1: %1 J2: %2 J3: %3 J4: %4 J5: %5 J6: %6 J7: %7 J8: %8\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J3))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J5))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J6))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J7))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J8)) << "<br>";
-		oss << QString("DEBUG: S1: %1 S2: %2 S3: %3 S4: %4 S5: %5 S6: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S3))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S5))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S6)) << "<br>";
-		oss << QString("DEBUG: U1: %1 U2: %2 U4: %3 U5: %4 U6: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U5))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U6)) << "<br>";
-		oss << QString("DEBUG: U11: %1 U12: %2 U13: %3 U14: %4 U15: %5 U16: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U11))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U12))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U13))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U14))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U15))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U16)) << "<br>";
-		oss << QString("DEBUG: N1: %1 N2: %2 N3: %3 N4: %4 N5: %5 N6 %6 N7: %7\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N1))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N2))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N3))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N4))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N5))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N6))
-		       .arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N7)) << "<br>";
-
-		oss << QString("DEBUG: rotLocalToParent= <table><tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>")
-			.arg(QString::number(rotLocalToParent[0], 'f', 7))
-			.arg(QString::number(rotLocalToParent[1], 'f', 7))
-			.arg(QString::number(rotLocalToParent[2], 'f', 7))
-			.arg(QString::number(rotLocalToParent[3], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>")
-			.arg(QString::number(rotLocalToParent[4], 'f', 7))
-			.arg(QString::number(rotLocalToParent[5], 'f', 7))
-			.arg(QString::number(rotLocalToParent[6], 'f', 7))
-			.arg(QString::number(rotLocalToParent[7], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>")
-			.arg(QString::number(rotLocalToParent[8], 'f', 7))
-			.arg(QString::number(rotLocalToParent[9], 'f', 7))
-			.arg(QString::number(rotLocalToParent[10], 'f', 7))
-			.arg(QString::number(rotLocalToParent[11], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr></table>")
-			.arg(QString::number(rotLocalToParent[12], 'f', 7))
-			.arg(QString::number(rotLocalToParent[13], 'f', 7))
-			.arg(QString::number(rotLocalToParent[14], 'f', 7))
-			.arg(QString::number(rotLocalToParent[15], 'f', 7)) << "<br>";
+/*
+		oss << QString("DEBUG:  E1: %1  E2: %2  E3: %3  E4: %4  E5: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E3),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E5)) << "<br>";
+		oss << QString("DEBUG:  E6: %1  E7: %2  E8: %3  E9: %4 E10: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E6),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E7),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E8),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E9),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E10)) << "<br>";
+		oss << QString("DEBUG: E11: %1 E12: %2 E13: %3\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E11),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E12),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.E13)) << "<br>";
+		oss << QString("DEBUG: Ja1: %1 Ja2: %2 Ja3: %3 Ja4: %4 Ja5: %5 Na: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja3),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja5),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.Na)) << "<br>";
+		oss << QString("DEBUG: J1: %1 J2: %2 J3: %3 J4: %4 J5: %5 J6: %6 J7: %7 J8: %8\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J3),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J5),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J6),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J7),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.J8)) << "<br>";
+		oss << QString("DEBUG: S1: %1 S2: %2 S3: %3 S4: %4 S5: %5 S6: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.S2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.S3),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.S4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.S5),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.S6)) << "<br>";
+		oss << QString("DEBUG: U1: %1 U2: %2 U4: %3 U5: %4 U6: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U5),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U6)) << "<br>";
+		oss << QString("DEBUG: U11: %1 U12: %2 U13: %3 U14: %4 U15: %5 U16: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U11),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U12),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U13),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U14),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U15),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.U16)) << "<br>";
+		oss << QString("DEBUG: N1: %1 N2: %2 N3: %3 N4: %4 N5: %5 N6 %6 N7: %7\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N1),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N2),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N3),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N4),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N5),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N6),
+		       StelUtils::radToDecDegStr(Planet::planetCorrections.N7)) << "<br>";
+*/
+		oss << QString("DEBUG: rotLocalToParent= <table><tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
+			QString::number(rotLocalToParent[0], 'f', 7),
+			QString::number(rotLocalToParent[1], 'f', 7),
+			QString::number(rotLocalToParent[2], 'f', 7),
+			QString::number(rotLocalToParent[3], 'f', 7));
+		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
+			QString::number(rotLocalToParent[4], 'f', 7),
+			QString::number(rotLocalToParent[5], 'f', 7),
+			QString::number(rotLocalToParent[6], 'f', 7),
+			QString::number(rotLocalToParent[7], 'f', 7));
+		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
+			QString::number(rotLocalToParent[8], 'f', 7),
+			QString::number(rotLocalToParent[9], 'f', 7),
+			QString::number(rotLocalToParent[10], 'f', 7),
+			QString::number(rotLocalToParent[11], 'f', 7));
+		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr></table>").arg(
+			QString::number(rotLocalToParent[12], 'f', 7),
+			QString::number(rotLocalToParent[13], 'f', 7),
+			QString::number(rotLocalToParent[14], 'f', 7),
+			QString::number(rotLocalToParent[15], 'f', 7)) << "<br>";
 		oss << QString("DEBUG: Planet using <strong>%1</strong> axis computation<br>").arg(re.method==RotationElements::WGCCRE?"WGCCRE":"traditional");
 	}
 //#endif
@@ -690,41 +690,41 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			const double T=(jde-2451545.0)/36525.0;
 			double Lp, D, M, Mp, E, F, Omega, lBogus, bBogus, rBogus;
 			computeMoonAngles(core->getJDE(), &Lp, &D, &M, &Mp, &E, &F, &Omega, &lBogus, &bBogus, &rBogus, true);
-			oss << QString("DEBUG: L'=%1, D=%2, M=%3, M'=%4, E=%5, F=%6, &Omega;=%7, &lambda;=%8, &beta;=%9, &Delta;=%10<br/>")
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(Lp, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(D, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(M, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(Mp, M_PI*2.0)))
-			       .arg(QString::number(E))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(F, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(Omega, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(lambdaMoon, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(betaMoon))
-			       .arg(QString::number(rBogus));
+			oss << QString("DEBUG: L'=%1, D=%2, M=%3, M'=%4, E=%5, F=%6, &Omega;=%7, &lambda;=%8, &beta;=%9, &Delta;=%10<br/>").arg(
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Lp, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(D, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(M, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Mp, M_PI*2.0)),
+			       QString::number(E),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(F, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Omega, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(lambdaMoon, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(betaMoon),
+			       QString::number(rBogus));
 			double dPsi, dEps;
 			getNutationAngles(jde, &dPsi, &dEps);
 			double W, lp, bp, lpp, bpp, PA;
 			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaMoon, dPsi, betaMoon, ra_equ, eclJDE, &W, &lp, &bp, &lpp, &bpp, &PA);
-			oss << QString("DEBUG: &Delta;&psi;=%1, &Delta;&epsilon;=%2, W=%3, l'=%4, b'=%5, l''=%6, b''=%7, P=%8<br/>")
-			       .arg(StelUtils::radToDecDegStr(dPsi))
-			       .arg(StelUtils::radToDecDegStr(dEps))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(W, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(fmod(lp, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(bp))
-			       .arg(StelUtils::radToDecDegStr(fmod(lpp, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(bpp))
-			       .arg(StelUtils::radToDecDegStr(StelUtils::fmodpos(PA, M_PI*2.0)));
+			oss << QString("DEBUG: &Delta;&psi;=%1, &Delta;&epsilon;=%2, W=%3, l'=%4, b'=%5, l''=%6, b''=%7, P=%8<br/>").arg(
+			       StelUtils::radToDecDegStr(dPsi),
+			       StelUtils::radToDecDegStr(dEps),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(W, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(fmod(lp, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(bp),
+			       StelUtils::radToDecDegStr(fmod(lpp, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(bpp),
+			       StelUtils::radToDecDegStr(StelUtils::fmodpos(PA, M_PI*2.0)));
 
 			// Repeat for selenographic position of the sun:
 			double wBogus, lop, bop, lopp, bopp, paBogus, lambdaH, betaH;
 			const Vec3d hcMoon=getHeliocentricEclipticPos();
 			StelUtils::rectToSphe(&lambdaH, &betaH, hcMoon);
 			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaH, dPsi, betaH, raSun, eclJDE, &wBogus, &lop, &bop, &lopp, &bopp, &paBogus);
-			oss << QString("DEBUG: l<sub>0</sub>'=%1, b<sub>0</sub>'=%2, l<sub>0</sub>''=%3, b<sub>0</sub>''=%4<br/>")
-			       .arg(StelUtils::radToDecDegStr(fmod(lop, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(bop))
-			       .arg(StelUtils::radToDecDegStr(fmod(lopp, M_PI*2.0)))
-			       .arg(StelUtils::radToDecDegStr(bopp));
+			oss << QString("DEBUG: l<sub>0</sub>'=%1, b<sub>0</sub>'=%2, l<sub>0</sub>''=%3, b<sub>0</sub>''=%4<br/>").arg(
+			       StelUtils::radToDecDegStr(fmod(lop, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(bop),
+			       StelUtils::radToDecDegStr(fmod(lopp, M_PI*2.0)),
+			       StelUtils::radToDecDegStr(bopp));
 
 			double l =fmod(lp+lpp, M_PI*2.0);   if (l>M_PI_2)  l -=2.0*M_PI;
 			double lo=fmod(lop+lopp, M_PI*2.0); if (lo>M_PI_2) lo-=2.0*M_PI;
@@ -1570,6 +1570,9 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	QString debugAid; // We have to collect all debug strings to keep some order in the output.
 
 	// We have to call with both to correct this for earth with the new model.
+	// For Earth, this is sidereal time for Greenwich, i.e. hour angle between meridian and First Point of Aries.
+	// NEW: For the planets, this should return angle W between ascending node of the planet's equator with ICRF equator.
+	// OLD: Return angle between ascending node of planet's equator and (J2000) ecliptic
 	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
 
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane), not solar equator...
@@ -1886,7 +1889,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			}
 		}
 		}
-		debugAid = QString("cTM1: J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE));
+		debugAid = QString("cTM1: J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE));
 
 		if (retransform)
 		{
@@ -1902,8 +1905,8 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
 			if (englishName=="Moon")
 			{
-				debugAid.append( QString("CTMxR: Moon: J2000NPoleRA: %1 J2000NPoleDE: %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA)).arg(StelUtils::radToDecDegStr(J2000NPoleDE)));
-				debugAid.append( QString("CTMxR:           &lambda;: %1 &beta; %2<br/>").arg(StelUtils::radToDecDegStr(lon)).arg(StelUtils::radToDecDegStr(lat)));
+				debugAid.append( QString("CTMxR: Moon: J2000NPoleRA: %1 J2000NPoleDE: %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE)));
+				debugAid.append( QString("CTMxR:           &lambda;: %1 &beta; %2<br/>").arg(StelUtils::radToDecDegStr(lon), StelUtils::radToDecDegStr(lat)));
 			}
 
 			re_obliquity = (M_PI_2 - lat);
@@ -1913,11 +1916,11 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			debugAid.append( QString("CTMxR: Calculated rotational ascending node: %1<br/>").arg(StelUtils::radToDecDegStr(re_ascendingNode)));
 			re.obliquity=re_obliquity; // WE NEED THIS AGAIN IN getRotObliquity()
 			re.ascendingNode=re_ascendingNode;
-			debugAid.append( QString("CTMxR: Retransform: Pole in VSOP87 coords: &lambda;=%1, &beta;=%2<br/>").arg(StelUtils::radToDecDegStr(lon)).arg(StelUtils::radToDecDegStr(lat)));
-			debugAid.append( QString("CTMxR: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
+			debugAid.append( QString("CTMxR: Retransform: Pole in VSOP87 coords: &lambda;=%1, &beta;=%2<br/>").arg(StelUtils::radToDecDegStr(lon), StelUtils::radToDecDegStr(lat)));
+			debugAid.append( QString("CTMxR: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
 		}
 		else {
-			debugAid.append( QString("CTMxNR: No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity)).arg(StelUtils::radToDecDegStr(re.ascendingNode)));
+			debugAid.append( QString("CTMxNR: No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
 		}
 		switch (re.method) {
 			case RotationElements::WGCCRE:
@@ -1926,7 +1929,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 							 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
 							 //*StelCore::matJ2000ToVsop87
 							 );
-				debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+				debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity), StelUtils::radToDecDegStr(re_ascendingNode)));
 				break;
 			case RotationElements::Traditional:
 				// 0.20+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
@@ -1935,7 +1938,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
 				rotLocalToParent = Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity);
 				//qDebug() << "Planet" << englishName << ": computeTransMatrix() setting old-style rotLocalToParent.";
-				debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity)).arg(StelUtils::radToDecDegStr(re_ascendingNode)));
+				debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity), StelUtils::radToDecDegStr(re_ascendingNode)));
 				break;
 		}
 	}
@@ -2050,7 +2053,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			const double M3=(53.47*M_PI_180) - (0.0181510*M_PI_180)*t;
 			w+=  (-0.520)*T*T - (2.58)*sin(M3) + (0.19)*sin(M3);
 		}
-		else if (parent->englishName=="Jupiter")
+		else if ((parent) &&(parent->englishName=="Jupiter"))
 		{
 			if (englishName=="Io")
 			{
@@ -2077,7 +2080,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 				w+= (1.91)*sin(planetCorrections.J2) - (0.04)*sin(2.*planetCorrections.J2);
 			}
 		}
-		else if (parent->englishName=="Saturn")
+		else if ((parent) && (parent->englishName=="Saturn"))
 		{
 			if (englishName=="Mimas")
 			{
@@ -2100,7 +2103,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 				w+= (3.133)*sin(planetCorrections.S1) - (0.086)*sin(2.*planetCorrections.S1);
 			}*/
 		}
-		else if (parent->englishName=="Uranus")
+		else if ((parent) && (parent->englishName=="Uranus"))
 		{
 			if (englishName=="Cordelia")
 			{
@@ -2164,7 +2167,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 				w+= (-1.27)*sin(planetCorrections.U12) + (0.15)*sin(2.*planetCorrections.U12) + (1.15)*sin(planetCorrections.U11) - (0.09)*sin(2.*planetCorrections.U11);
 			}
 		}
-		else if (parent->englishName=="Neptune")
+		else if ((parent) && (parent->englishName=="Neptune"))
 		{
 			if (englishName=="Triton")
 			{
