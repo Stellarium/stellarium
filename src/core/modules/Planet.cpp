@@ -699,7 +699,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(F, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Omega, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(lambdaMoon, M_PI*2.0)),
-			       StelUtils::radToDecDegStr(betaMoon),
+			       StelUtils::radToDecDegStr(betaMoon)).arg(
 			       QString::number(rBogus));
 			double dPsi, dEps;
 			getNutationAngles(jde, &dPsi, &dEps);
@@ -1112,7 +1112,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			{
 				oss << q_("The period of rotation is chaotic") << "<br />";
 			}
-			if (qAbs(re.period)>0.f)
+			if (qAbs(re.W1)>0.)
+			{
+				const double eqRotVel = (360.*AU)*getEquatorialRadius()/re.W1;
+				oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
+			}
+			else if (qAbs(re.period)>0.)
 			{
 				const double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
 				if (eqRotVel>0.1) // it seems that objects with unspecified re.period have re.period=orbitPeriod, with useless eqRotVel ~0.
@@ -1571,8 +1576,8 @@ void Planet::computeTransMatrix(double JD, double JDE)
 
 	// We have to call with both to correct this for earth with the new model.
 	// For Earth, this is sidereal time for Greenwich, i.e. hour angle between meridian and First Point of Aries.
-	// NEW: For the planets, this should return angle W between ascending node of the planet's equator with ICRF equator.
 	// OLD: Return angle between ascending node of planet's equator and (J2000) ecliptic
+	// NEW: For the planets, this should return angle W between ascending node of the planet's equator with ICRF equator and the planet's zero meridian.
 	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
 
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane), not solar equator...
@@ -1624,11 +1629,20 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		bool retransform=false; // this must be set true on each of these special cases now:
 		double J2000NPoleRA=re.ra0;
 		double J2000NPoleDE=re.de0;
+		if((re.ra0!=0.0) || (re.de0!=0.0)) // PRELIM: We use retransform as masrker for "NEW MODEL". TODO: Fix that!
+		{
+			retransform=true;
+		}
 		if((re.ra1!=0.0) || (re.de1!=0.0))
 		{
 			retransform=true;
 			J2000NPoleRA+=re.ra1*T; // these values in radians
 			J2000NPoleDE+=re.de1*T;
+
+			// 0.21.pre: RESET these axes to zero for a test. Do these point to ICRS 90° now? Then 10/80?
+			//J2000NPoleRA=10.*M_PI_180; // these values in radians
+			//J2000NPoleDE=80.*M_PI_180;
+
 
 		// Apply detailed corrections from ExplSup2013 and WGCCRE2009. The nesting increases lookup speed.
 		if (englishName=="Moon")
@@ -1925,14 +1939,23 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		switch (re.method) {
 			case RotationElements::WGCCRE:
 				// The new model directly gives a matrix into ICRF, which is practically identical and called VSOP87 for us.
-				setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
-							 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
-							 //*StelCore::matJ2000ToVsop87
+				// BAAAH! It is NOT! ICRF is Equatorial J2000. VSOP87 is Ecliptical J2000! TRY: Add 3rd line.
+				// The next call ONLY sets rotLocalToParent
+				//setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
+				//			 //StelCore::matJ2000ToVsop87*
+				//			 Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity)
+				//			 //*StelCore::matJ2000ToVsop87
+				//			 //*StelCore::matVsop87ToJ2000
+				//			 );
+				//setRotEquatorialToVsop87(Mat4d::identity()* Mat4d::xrotation(-re_obliquity)); // RESET ALL
+				setRotEquatorialToVsop87(StelCore::matJ2000ToVsop87 // RESET ALL TO ICRS
+							 * Mat4d::zrotation(re.currentAxisRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
+							 * Mat4d::xrotation(M_PI_2-re.currentAxisDE) // node angle
 							 );
 				debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity), StelUtils::radToDecDegStr(re_ascendingNode)));
 				break;
 			case RotationElements::Traditional:
-				// 0.20+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
+				// 0.21+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
 				// Also here, the preliminary version for Earth's precession was modelled, before the Vondrak2011 model which came in V0.14.
 				// No other Planet had precessionRate defined, so it's safe to remove it here.
 				//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
@@ -2008,10 +2031,8 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		else
 			return get_mean_sidereal_time(JD, JDE); // degrees
 	}
-	// TEST: no rotation for all non-Earths
-	return 0.;
 
-	// V0.20: new rotational values from ExplSup2013 or WGCCRE2009.
+	// V0.21: new rotational values from ExplSup2013 or WGCCRE2009.
 	if (re.method==RotationElements::WGCCRE)
 	{
 		// This returns angle W, but this is NOT the desired angle!
