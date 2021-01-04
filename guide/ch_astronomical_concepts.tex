@@ -187,7 +187,15 @@ catalogues such as the Hipparcos catalogue.
 However, the story is complicated a little by \indexterm{precession}
 (section~\ref{sec:Concepts:Precession}) and \indexterm{parallax}
 (section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift of the coordinates almost parallel to the \indexterm{ecliptic}, and therefore star catalogues always have to specify their \indexterm{equinox} of
-validity. Current catalogs and atlases use coordinates for J2000.0.
+validity.
+
+Current catalogs and atlases use coordinates for the
+\indexterm{standard epoch} J2000.0. The currently best defined
+coordinate system, the International Celestial Reference Frame
+(\indexterm{ICRF}), is one particular version described in detail in
+the astronomical literature \citep{ESAA:2013}. Other catalogs with data
+referring to ``J2000.0'' may have to be slightly adjusted (usually in
+sub-arcsecond rotations) to match the ICRF coordinate system (short ICRS).
 
 
 Stellarium can draw grid lines for equatorial coordinates. Use the

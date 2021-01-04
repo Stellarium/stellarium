@@ -98,7 +98,7 @@ class RotationElements
 public:
 	enum ComputationMethod {
 		Traditional, // Stellarium prior to 0.21, This is unfortunately not documented. Orbits and axes given w.r.t. parent axes.
-		WGCCRE       // Orientation as described by the IAU Working Group on Cartographic Coordinates and Rotational Elements
+		WGCCRE       // Orientation as described by the IAU Working Group on Cartographic Coordinates and Rotational Elements reports of 2009 or later
 	};
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), //precessionRate(0.),
 		siderealPeriod(0.),
@@ -193,7 +193,7 @@ public:
 	enum PlanetCorrection		// To be used as named argument for correction calculations regarding orientations of planetary axes.
 	{				// See updatePlanetCorrections()
 		EarthMoon=3,
-		//Mars=4,
+		Mars=4,
 		Jupiter=5,
 		Saturn=6,
 		Uranus=7,
@@ -721,12 +721,14 @@ protected:
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
 	static int orbitsThickness;
-	// 0.20: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14.
+	// 0.21+: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14,
+	// updated in WGCCRE report 2015.
 	// Others require frequent updates, depending on jde-J2000. (Moon etc.)
 	// These should be updated as frequently as needed, optimally with the planet. Light time correction should be applied when needed.
 	// best place to call update is the SolarSystem::computePlanets()
 	struct PlanetCorrections {
 		double JDE_E; // keep record of when these values are valid: Earth
+		double JDE_M; // keep record of when these values are valid: Mars
 		double JDE_J; // keep record of when these values are valid: Jupiter
 		double JDE_S; // keep record of when these values are valid: Saturn
 		double JDE_U; // keep record of when these values are valid: Uranus
@@ -745,11 +747,21 @@ protected:
 		double E11;
 		double E12;
 		double E13;
-		double Ja1; // Jupiter axis terms, Table 10.1
-		double Ja2;
-		double Ja3;
-		double Ja4;
-		double Ja5;
+		double M1;  // Mars corrections. These are from WGCCRE2015.
+		double M2;
+		double M3;
+		double M4;
+		double M5;
+		double M6;
+		double M7;
+		double M8;
+		double M9;
+		double M10;
+		double Ja; // Jupiter axis terms, Table 10.1
+		double Jb;
+		double Jc;
+		double Jd;
+		double Je;
 		double Na; // Neptune axix term
 		double J1; // corrective terms for Jupiter' moons, Table 10.10
 		double J2;
@@ -774,7 +786,7 @@ protected:
 		//double U7; // for Portia   (not in 0.20)
 		//double U8; // for Rosalind (not in 0.20)
 		//double U9; // for Belinda  (not in 0.20)
-		//double U10; // for Puck    (not in 0.20)
+		double U10; // for Puck
 		double U11;
 		double U12;
 		double U13;
