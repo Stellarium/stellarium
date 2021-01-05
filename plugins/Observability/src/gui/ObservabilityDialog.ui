@@ -145,7 +145,7 @@
        <string>Settings</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
+       <!-- <item>
         <widget class="QGroupBox" name="fontSettingsBox">
          <property name="title">
           <string>Font color and size</string>
@@ -254,8 +254,8 @@
           </item>
          </layout>
         </widget>
-       </item>
-       <item>
+       </item> -->
+       <!-- <item>
         <widget class="QGroupBox" name="observingConditionsBox">
          <property name="title">
           <string>Observing conditions</string>
@@ -306,7 +306,7 @@
           </item>
          </layout>
         </widget>
-       </item>
+       </item> -->
        <item>
         <widget class="QGroupBox" name="displayedFieldsBox">
          <property name="title">
