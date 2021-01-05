@@ -133,7 +133,7 @@ void ObservabilityDialog::restoreDefaults()
 	if (askConfirmation())
 	{
 		qDebug() << "[Observability] restore defaults...";
-		GETSTELMODULE(Observability)->resetConfiguration();
+		GETSTELMODULE(Observability)->restoreDefaultSettings();
 	}
 	else
 		qDebug() << "[Observability] restore defaults is canceled...";
