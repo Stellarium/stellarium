@@ -774,7 +774,7 @@ void SkyLine::draw(StelCore *core) const
 	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
 	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 	{
-		// TODO: partitions, at least for precession. (mark millennia!)
+		// partitions for precession. (mark millennia!)
 		double lat;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
