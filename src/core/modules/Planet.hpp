@@ -67,31 +67,39 @@ class QOpenGLFramebufferObject;
 typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
-// Data are read from ssystem.ini in SolarSystem.cpp::loadPlanets().
+// Data are read from ssystem_(major|minor).ini in SolarSystem.cpp::loadPlanets().
 //
-// GZ2016-01: This seems to be an outdated model.
-// TODO: For historical reasons, some of the values are given in hours, others in earth days, making life harder. Most moons have coupled rotation, they should be auto-converted from revolution period
-//       Finding a consistent scheme would be helpful. Also, IAU has planet axes in ICRF, while Stellarium has them coded in VSOP87 (ecliptical).
-//       Except if rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
+// Notes of early 2021: The original planet axis model in Stellarium seems to be an outdated model untraceable in the literature.
+// Stellarium used to have elements w.r.t. VSOP87 (ecliptical) frame for planets, and elements w.r.t. the host planet's equator for planet moons:
+// ascendingNode
+// obliquity
+// offset
+// period
+// The problem is that without a reference we have no idea whether any of these elements and algorithms are correct.
 //
 // IAU standards like the Report of the IAU Working Group on Cartographic Coordinates and Rotational elements 2009 (DOI:10.1007/s10569-010-9320-4)
 // has axes given w.r.t. J2000 ICRF.
-// Originally, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
+//
+// Between V0.15 and 0.20.*, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
 // ecliptically-based directions (VSOP87) obliquity/ascendingNode. But these were only ra/de_J2000 poles. Some axes have precession, which need to be modelled/updated.
-// The new way (0.15): We still use the previous elements obliquity and ascendingNode in Planet::computeTransMatrix(.,.)
-// and Planet::getSiderealTime(), but can update them periodically from:
+// The new way (0.21+): We still allow using the previous 4 elements in Planet::computeTransMatrix(.,.) and Planet::getSiderealTime(), but only if WGCCRE elements are not available.
+
 // ra=ra0+T*ra1
 // de=de0+T*de1         ( --> obliquity, ascendingNode)
 // rot_rotation_offset [degrees]     =W0
 // rot_periode  [hours] =  computed from rot_pole_W1[deg/day] if that exists.  360 [deg] / _rot_ [hours] --> 360 * _rot_ / 24 [deg/hours]
+
+// If rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
+
+// Since 0.21 we use the WGCCRE elements and orientations directly, so that axes behave properly.
 // In addition, the objects with more complicated element behaviour must be updated with special functions in those two functions.
-// New keys in ssystem.ini, their storage in RotationElements, and their equivalents in the IAU report:
+// New keys in ssystem_*.ini, their storage in RotationElements, and their equivalents in the IAU report:
 // rot_pole_ra  [degrees]     re.ra0      constant term for alpha_0
 // rot_pole_de  [degrees]     re.ra1      constant term for delta_0
 // rot_pole_ra1 [degrees/cy]  re.de0      T factor for alpha_0
 // rot_pole_de1 [degrees/cy]  re.de1      T factor for  delta_0
-// rot_pole_W0  [degrees]     re.offset   constant term fo W. Will be stored in re.offset, and is signal for using the IAU model (causes setting re.useICRF=true)
-// rot_pole_W1  [degrees/day] re.period   d factor for W      Will be converted to rot_periode=360*24/W1.
+// rot_pole_W0  [degrees]     re.offset   constant term fo W.
+// rot_pole_W1  [degrees/day] re.period   d factor for W
 
 class RotationElements
 {
@@ -100,29 +108,27 @@ public:
 		Traditional, // Stellarium prior to 0.21, This is unfortunately not documented. Orbits and axes given w.r.t. parent axes.
 		WGCCRE       // Orientation as described by the IAU Working Group on Cartographic Coordinates and Rotational Elements reports of 2009 or later
 	};
-	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), //precessionRate(0.),
-		siderealPeriod(0.),
+	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), siderealPeriod(0.),
 		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
-	double period;          // (sidereal) rotation period [earth days] ///??  CURRENTLY NOT:  If useICRF, this is from the time term of W.
-	double offset;          // rotation at epoch  [degrees]            ///??  CURRENTLY NOT:  If useICRF, this is the constant term of W
+	double period;          // [deprecated] (sidereal) rotation period [earth days]
+	double offset;          // [deprecated] rotation at epoch  [degrees]
 	double epoch;          // JDE (JD TT) of epoch for these elements
-	double obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
-	double ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
-	// Field rot_precession_rate in ssystem.ini is no longer used. We still keep Earth's value as it is evaluated in older versions (until 0.13.*).
-//	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)] [ NO LONGER USED WITH 0.14 (was used for Earth only, and that was too simple.) ]
+	double obliquity;       // [deprecated] tilt of rotation axis w.r.t. ecliptic [radians]
+	double ascendingNode;   // [deprecated] long. of ascending node of equator on the ecliptic [radians]
 	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days] [FIXME: This is NOT a rotational element and should be stored elsewhere!]
-	// GZ for 0.21: I propose changes here: The 6/9 new entries after the switch are enough for many objects. Else, design special_functions.
+	// new elements for 0.21+: The 6/9 new entries after the switch are enough for many objects. More corrections can be applied where required.
 	ComputationMethod method; // The reference system in use for the respective object. WGCCRE is preferred, but we don't have all data.
 	double ra0;            // [rad] RA_0 right ascension of north pole. ssystem.ini: rot_pole_ra    /180*M_PI
 	double ra1;            // [rad/century] rate of change in axis ra   ssystem.ini: rot_pole_ra1   /180*M_PI
 	double de0;            // [rad] DE_0 declination of north pole      ssystem.ini: rot_pole_de    /180*M_PI
 	double de1;            // [rad/century] rate of change in axis de   ssystem.ini: rot_pole_de1   /180*M_PI
-	// These values are only in the modern algorithms. invalid if W0=0.
+	// These values are only in the modern algorithms. invalid if ra0=0.
 	double W0;             // [deg] mean longitude of prime meridian along equator measured from intersection with ICRS plane at epoch.
 	double W1;             // [deg/d] mean longitude motion. W=W0+d*W1.
-	double currentAxisRA;  // [rad] Mostly debug aid (infostring during development). Usual model RA=RA0+d*RA1(+corrections)
-	double currentAxisDE;  // [rad] Mostly debug aid (infostring during development). Usual model DE=DE0+d*DE1(+corrections)
-	double currentAxisW;   // [deg] Mostly debug aid (infostring during development). Usual model W =W0+d*W1(+corrections)
+	// The last 3 elements can be activated to store the computed values and e.g. show them in the InfoString.
+	//double currentAxisRA;  // [rad] Mostly debug aid (infostring during development). Usual model RA=RA0+d*RA1(+corrections)
+	//double currentAxisDE;  // [rad] Mostly debug aid (infostring during development). Usual model DE=DE0+d*DE1(+corrections)
+	//double currentAxisW;   // [deg] Mostly debug aid (infostring during development). Usual model W =W0+d*W1(+corrections)
 };
 
 // Class to manage rings for planets like Saturn
@@ -189,7 +195,7 @@ public:
 		UndefinedAlgorithm,
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
-
+private:
 	enum PlanetCorrection		// To be used as named argument for correction calculations regarding orientations of planetary axes.
 	{				// See updatePlanetCorrections()
 		EarthMoon=3,
@@ -200,7 +206,7 @@ public:
 		Neptune=8
 	};
 
-
+public:
 	Planet(const QString& englishName,
 	       double equatorialRadius,
 	       double oblateness,
@@ -337,37 +343,37 @@ public:
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
-// OLD HEAD VERSION.
-	// Set the orbital elements
-//	void setRotationElements(float _period, float _offset, double _epoch,
-//				 float _obliquity, float _ascendingNode,
-//				 float _precessionRate, double _siderealPeriod);
-	// Set the -o-r-b-i-t-a-l- ROTATIONAL elements
-	// _period: duration of sidereal rotation [Julian days]
-	// _offset: [angle at _epoch. ]
-	// _epoch: [JDE]
-	// _obliquity [rad]
-	// _ascendingNode of equator on ecliptic[rad]
-	// ra_pole=_ra0 + T*_ra1. ra_pole and de_pole must be computed more than for initialisation for J2000
-	// de_pole=_de0 + T*_de1. ra and de values to be stored in [rad]
-	// _w0, _w1 to be given in degrees!
-	// _precessionRate [rad/JulCt] (was only given for earth, and is no longer used!)
-	// _siderealPeriod [earth days] orbital duration. THIS DOES NOT BELONG HERE!
+
+	//! Set the rotational elements.
+	//! Given two data models, we must support both: the traditional elements relative to the parent object:
+	//! _period: duration of sidereal rotation [Julian days]
+	//! _offset: [angle at _epoch. ]
+	//! _epoch: [JDE]
+	//! _obliquity [rad]
+	//! _ascendingNode of equator on ecliptic[rad]
+	//! The more modern way to specify these elements are relative to the ICRF:
+	//! ra_pole=_ra0 + T*_ra1. ra_pole and de_pole must be computed more than for initialisation for J2000
+	//! de_pole=_de0 + T*_de1. ra and de values to be stored in [rad]
+	//! _w0, _w1 to be given in degrees!
+	//! If _ra0 is not zero, we understand WGCCRE data ra0, ra1, de0, de1, w0, w1 are used.
+	//! _siderealPeriod [earth days] orbital duration. THIS DOES NOT BELONG HERE!
 	void setRotationElements(const double _period, const double _offset, const double _epoch,
 				 const double _obliquity, const double _ascendingNode,
 				 const double _ra0, const double _ra1,
 				 const double _de0, const double _de1,
 				 const double _w0,  const double _w1,
 				 const double _siderealPeriod);
+
+	// TODO: Find out if we still need this
 	double getRotAscendingNode(void) const {return re.ascendingNode; }
-	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
-	// For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
-	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
+	//! return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
+	//! For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
+	//  TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
 
-	// (mostly) Debug aids for Axis Orientation
-	double getCurrentAxisRA(void) const {return re.currentAxisRA; }
-	double getCurrentAxisDE(void) const {return re.currentAxisDE; }
+	// (mostly) Debug aids for Axis Orientation.
+	//double getCurrentAxisRA(void) const {return re.currentAxisRA; }
+	//double getCurrentAxisDE(void) const {return re.currentAxisDE; }
 
 
 	//! Compute the position in the parent Planet coordinate system
@@ -721,11 +727,20 @@ protected:
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
 	static int orbitsThickness;
-	// 0.21+: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14,
-	// updated in WGCCRE report 2015.
-	// Others require frequent updates, depending on jde-J2000. (Moon etc.)
-	// These should be updated as frequently as needed, optimally with the planet. Light time correction should be applied when needed.
-	// best place to call update is the SolarSystem::computePlanets()
+	//! Update the planet corrections. planet=3(Moon), 4 (Mars), 5(Jupiter), 6(Saturn), 7(Uranus), 8(Neptune).
+	//! The values are immediately converted to radians.
+	static void updatePlanetCorrections(const double JDE, const PlanetCorrection planet);
+
+private:
+	QString iauMoonNumber;
+
+	const QString getContextString() const;
+
+	//! 0.21+: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14,
+	//! updated in WGCCRE report 2015.
+	//! Others require frequent updates, depending on jde-J2000. (Moon etc.)
+	//! These should be updated as frequently as needed, optimally with the planet. Light time correction should be applied when needed.
+	//! best place to call update is the SolarSystem::computePlanets()
 	struct PlanetCorrections {
 		double JDE_E; // keep record of when these values are valid: Earth
 		double JDE_M; // keep record of when these values are valid: Mars
@@ -802,14 +817,6 @@ protected:
 		double N7;
 	};
 	static PlanetCorrections planetCorrections;
-	// Update the planet corrections. planet=3(Moon), 5(Jupiter), 6(Saturn), 7(Uranus), 8(Neptune).
-	// The values are immediately converted to radians.
-	static void updatePlanetCorrections(const double JDE, const PlanetCorrection planet);
-
-private:
-	QString iauMoonNumber;
-
-	const QString getContextString() const;
 
 
 	// Shader-related variables

@@ -513,86 +513,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		// TRANSLATORS: Ecliptical rectangular coordinates
 		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 
-		if (re.method==RotationElements::WGCCRE)
-			oss << q_("DEBUG: Value related to Sidereal Time of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
-		else
-			oss << q_("DEBUG: Sidereal Time of Prime Meridian (NOT angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
-		oss << q_("DEBUG: Axis (RA/Dec): %1°/%2°").arg(QString::number(getCurrentAxisRA()*M_180_PI, 'f', 6), QString::number(getCurrentAxisDE()*M_180_PI, 'f', 6)) << "<br>";
-		oss << q_("DEBUG: RotObliquity: %1°").arg(QString::number(re.obliquity*M_180_PI, 'f', 6)) << "<br>";
-/*
-		oss << QString("DEBUG:  E1: %1  E2: %2  E3: %3  E4: %4  E5: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E3),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E5)) << "<br>";
-		oss << QString("DEBUG:  E6: %1  E7: %2  E8: %3  E9: %4 E10: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E6),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E7),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E8),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E9),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E10)) << "<br>";
-		oss << QString("DEBUG: E11: %1 E12: %2 E13: %3\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.E11),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E12),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.E13)) << "<br>";
-		oss << QString("DEBUG: Ja1: %1 Ja2: %2 Ja3: %3 Ja4: %4 Ja5: %5 Na: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.Ja1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja3),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.Ja5),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.Na)) << "<br>";
-		oss << QString("DEBUG: J1: %1 J2: %2 J3: %3 J4: %4 J5: %5 J6: %6 J7: %7 J8: %8\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.J1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J3),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J5),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J6),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J7),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.J8)) << "<br>";
-		oss << QString("DEBUG: S1: %1 S2: %2 S3: %3 S4: %4 S5: %5 S6: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.S1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.S2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.S3),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.S4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.S5),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.S6)) << "<br>";
-		oss << QString("DEBUG: U1: %1 U2: %2 U4: %3 U5: %4 U6: %5\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U5),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U6)) << "<br>";
-		oss << QString("DEBUG: U11: %1 U12: %2 U13: %3 U14: %4 U15: %5 U16: %6\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.U11),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U12),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U13),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U14),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U15),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.U16)) << "<br>";
-		oss << QString("DEBUG: N1: %1 N2: %2 N3: %3 N4: %4 N5: %5 N6 %6 N7: %7\n").arg(StelUtils::radToDecDegStr(Planet::planetCorrections.N1),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N2),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N3),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N4),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N5),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N6),
-		       StelUtils::radToDecDegStr(Planet::planetCorrections.N7)) << "<br>";
-*/
-		oss << QString("DEBUG: rotLocalToParent= <table><tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
-			QString::number(rotLocalToParent[0], 'f', 7),
-			QString::number(rotLocalToParent[1], 'f', 7),
-			QString::number(rotLocalToParent[2], 'f', 7),
-			QString::number(rotLocalToParent[3], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
-			QString::number(rotLocalToParent[4], 'f', 7),
-			QString::number(rotLocalToParent[5], 'f', 7),
-			QString::number(rotLocalToParent[6], 'f', 7),
-			QString::number(rotLocalToParent[7], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr>").arg(
-			QString::number(rotLocalToParent[8], 'f', 7),
-			QString::number(rotLocalToParent[9], 'f', 7),
-			QString::number(rotLocalToParent[10], 'f', 7),
-			QString::number(rotLocalToParent[11], 'f', 7));
-		oss << QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td></tr></table>").arg(
-			QString::number(rotLocalToParent[12], 'f', 7),
-			QString::number(rotLocalToParent[13], 'f', 7),
-			QString::number(rotLocalToParent[14], 'f', 7),
-			QString::number(rotLocalToParent[15], 'f', 7)) << "<br>";
-		oss << QString("DEBUG: Planet using <strong>%1</strong> axis computation<br>").arg(re.method==RotationElements::WGCCRE?"WGCCRE":"traditional");
+		//if (re.method==RotationElements::WGCCRE)
+		//	oss << q_("DEBUG: Rotation angle of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
+		//else
+		//	oss << q_("DEBUG: Sidereal Time of Prime Meridian (NOT angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
+		//oss << q_("DEBUG: Axis (RA/Dec): %1°/%2°").arg(QString::number(getCurrentAxisRA()*M_180_PI, 'f', 6), QString::number(getCurrentAxisDE()*M_180_PI, 'f', 6)) << "<br>";
+		//oss << q_("DEBUG: RotObliquity: %1°").arg(QString::number(re.obliquity*M_180_PI, 'f', 6)) << "<br>";
+
+
+		//oss << QString("DEBUG: Planet using <strong>%1</strong> axis computation<br>").arg(re.method==RotationElements::WGCCRE?"WGCCRE":"traditional");
 	}
 //#endif
 
@@ -1440,6 +1369,9 @@ void Planet::setRotationElements(const double _period, const double _offset, con
 	re.obliquity = _obliquity;
 	re.ascendingNode = _ascendingNode;
 
+	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
+
+	re.method=(_ra0==0. ? RotationElements::Traditional : RotationElements::WGCCRE);
 	re.ra0=_ra0;
 	re.ra1=_ra1;
 	re.de0=_de0;
@@ -1447,13 +1379,9 @@ void Planet::setRotationElements(const double _period, const double _offset, con
 	re.W0=_w0;
 	re.W1=_w1;
 
-	re.currentAxisRA=0.; // Set some primitive defaults.
-	re.currentAxisDE=0.;
-	re.currentAxisW=0.;
-
-	re.method=(_w0==0. ? RotationElements::Traditional : RotationElements::WGCCRE);
-
-	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
+	//re.currentAxisRA=0.; // Set some primitive defaults.
+	//re.currentAxisDE=0.;
+	//re.currentAxisW=0.;
 
 	if (orbitPtr && pType!=isObserver)
 	{
@@ -1487,11 +1415,11 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 // return value in radians!
 // For Earth, this is epsilon_A, the angle between earth's rotational axis and pole of mean ecliptic of date.
 // Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
-// GZ notes  2017:
 // For the other planets, it must be the angle between axis and Normal to the VSOP_J2000 coordinate frame.
 // For moons, it may be the obliquity against its planet's equatorial plane.
-// GZ: Note that such a scheme is highly confusing, and should be avoided. IAU models use the J2000 frame.
-//     In any case, re.obliquity can now be updated during computeTransMatrix()
+// GZ: Note that such a scheme is highly confusing, and should be avoided. IAU models use the J2000 ICRF frame.
+// TODO: It is unclear what other planets should deliver here.
+//     In any case, re.obliquity could now be updated during computeTransMatrix()
 double Planet::getRotObliquity(double JDE) const
 {
 	// JDay=2451545.0 for J2000.0
@@ -1580,6 +1508,35 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	// NEW: For the planets, this should return angle W between ascending node of the planet's equator with ICRF equator and the planet's zero meridian.
 	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
 
+
+	// We can inject a proper precession plus even nutation matrix in this stage, if available.
+	if (englishName=="Earth")
+	{
+		// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
+		// We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
+		// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
+		// See also Hilton et al., Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006), eqn (6) and (21).
+		double eps_A, chi_A, omega_A, psi_A;
+		getPrecessionAnglesVondrak(JDE, &eps_A, &chi_A, &omega_A, &psi_A);
+		// Canonical precession rotations: Nodal rotation psi_A,
+		// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate.
+		// The final rotation by chi_A rotates the equinox (zero degree).
+		// To achieve ecliptical coords of date, you just have now to add a rotX by epsilon_A (obliquity of date).
+
+		rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
+		// Plus nutation IAU-2000B:
+		if (StelApp::getInstance().getCore()->getUseNutation())
+		{
+			double deltaEps, deltaPsi;
+			getNutationAngles(JDE, &deltaPsi, &deltaEps);
+			//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
+			// Note: The sign for zrotation(-deltaPsi) was suggested by email by German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This is then also ExplanSup3rd, 6.41.
+			Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(-deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps); // eq.21 in Hilton et al. wrongly had a positive deltaPsi rotation.
+			rotLocalToParent=rotLocalToParent*nut2000B;
+		}
+		return;
+	}
+
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane), not solar equator...
 	// 0.21:  We are building this matrix, but we must exclude its use for the other planets.
 	if (englishName=="Sun")
@@ -1589,54 +1546,20 @@ void Planet::computeTransMatrix(double JD, double JDE)
 
 		// MAYBE rotLocalToParent=StelCore::matJ2000ToVsop87 * Mat4d::zrotation(re.ra0) * Mat4d::xrotation(M_PI_2-re.de0);
 	} else
-	if (parent)
+	if (parent) // This basically means: if not sun
 	{
-		// We can inject a proper precession plus even nutation matrix in this stage, if available.
-		if (englishName=="Earth")
-		{
-			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
-			// We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
-			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
-			// See also Hilton et al., Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006), eqn (6) and (21).
-			double eps_A, chi_A, omega_A, psi_A;
-			getPrecessionAnglesVondrak(JDE, &eps_A, &chi_A, &omega_A, &psi_A);
-			// Canonical precession rotations: Nodal rotation psi_A,
-			// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate.
-			// The final rotation by chi_A rotates the equinox (zero degree).
-			// To achieve ecliptical coords of date, you just have now to add a rotX by epsilon_A (obliquity of date).
+		// Pre-0.21 there was a model with fixed axes in J2000 coordinates given with node and obliquity relative to the parent planet for all moons.
 
-			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
-			// Plus nutation IAU-2000B:
-			if (StelApp::getInstance().getCore()->getUseNutation())
-			{
-				double deltaEps, deltaPsi;
-				getNutationAngles(JDE, &deltaPsi, &deltaEps);
-				//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
-				// Note: The sign for zrotation(-deltaPsi) was suggested by email by German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This is then also ExplanSup3rd, 6.41.
-				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(-deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps); // eq.21 in Hilton et al. wrongly had a positive deltaPsi rotation.
-				rotLocalToParent=rotLocalToParent*nut2000B;
-			}
-			return;
-		}
-		// Pre-0.21 there was a model with fixed axes in J2000 coordinates given with node and obliquity for all other planets and moons.
-		//
-		// IAU prefers axes with RA, DE. These were transformed (if available) to the old system at time of reading ssystem.ini.
-		// Temporally changing axes were not possible. Now we allow it, and re-formulate nodes and obliquity on the fly.
-		double re_ascendingNode=re.ascendingNode;
-		double re_obliquity=re.obliquity;
+		if (re.method==RotationElements::WGCCRE)
+		{
 		const double t=(JDE-J2000);
 		const double T=t/36525.0;
-		bool retransform=false; // this must be set true on each of these special cases now:
-		double J2000NPoleRA=re.ra0;
-		double J2000NPoleDE=re.de0;
-		if((re.ra0!=0.0) || (re.de0!=0.0)) // PRELIM: We use retransform as marker for "NEW MODEL". TODO: Fix that!
-		{
-			retransform=true;
-		}
-		if((re.ra1!=0.0) || (re.de1!=0.0))
-		{
-			J2000NPoleRA+=re.ra1*T; // these values in radians
-			J2000NPoleDE+=re.de1*T;
+		double J2000NPoleRA=re.ra0+re.ra1*T;
+		double J2000NPoleDE=re.de0+re.de1*T;
+//		if((re.ra0!=0.0) || (re.de0!=0.0)) // PRELIM: We use retransform as marker for "NEW MODEL". TODO: Fix that!
+//		{
+//			retransform=true;
+//		}
 
 		// Apply detailed corrections from ExplSup2013 and WGCCRE2009/WGCCRE2015. The nesting increases lookup speed.
 		if (englishName=="Moon")
@@ -1896,9 +1819,11 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.04)*cos(planetCorrections.N6);
 			}
 		}
-		}
+
 		debugAid = QString("cTM1: J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE));
 
+		/*
+		// N.B. The idea was: reformulate VSOP87-frame-based elements for display. Do we need this?
 		if (retransform)
 		{
 			re.currentAxisRA=J2000NPoleRA;
@@ -1930,8 +1855,14 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		else {
 			debugAid.append( QString("CTMxNR: No retransform. re.obliquity=%1, re.ascendingNode=%2 <br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
 		}
-		switch (re.method) {
-			case RotationElements::WGCCRE:
+*/
+		// TODO: Decide whether we have to keep and want to show these data at all.
+		//re.currentAxisRA=J2000NPoleRA;
+		//re.currentAxisDE=J2000NPoleDE;
+
+//		switch (re.method) {
+//			case RotationElements::WGCCRE:
+
 				// The new model directly gives a matrix into ICRF, NOT VSOP87.
 				// The next call ONLY sets rotLocalToParent
 				//setRotEquatorialToVsop87(//StelCore::matVsop87ToJ2000*
@@ -1942,21 +1873,29 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				//			 );
 				//setRotEquatorialToVsop87(Mat4d::identity()* Mat4d::xrotation(-re_obliquity)); // RESET ALL
 				setRotEquatorialToVsop87(StelCore::matJ2000ToVsop87 // RESET ALL TO ICRS
-							 * Mat4d::zrotation(re.currentAxisRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
-							 * Mat4d::xrotation(M_PI_2-re.currentAxisDE) // node angle
+							 * Mat4d::zrotation(J2000NPoleRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
+							 * Mat4d::xrotation(M_PI_2-J2000NPoleDE) // node angle
 							 );
-				debugAid.append( QString("CTMx: use WGCCRE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity), StelUtils::radToDecDegStr(re_ascendingNode)));
-				break;
-			case RotationElements::Traditional:
+				debugAid.append( QString("CTMx: use WGCCRE: new re.&alpha;=%1, re.&delta;=%2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE)));
+//				break;
+
+		}
+		else
+		{
+			//	case RotationElements::Traditional:
 				// 0.21+: This used to be the old solution. Those axes were defined w.r.t. J2000 Ecliptic (VSOP87)
 				// Also here, the preliminary version for Earth's precession was modelled, before the Vondrak2011 model which came in V0.14.
 				// No other Planet had precessionRate defined, so it's safe to remove it here.
 				//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
-				rotLocalToParent = Mat4d::zrotation(re_ascendingNode) * Mat4d::xrotation(re_obliquity);
+				rotLocalToParent = Mat4d::zrotation(re.ascendingNode) * Mat4d::xrotation(re.obliquity);
 				//qDebug() << "Planet" << englishName << ": computeTransMatrix() setting old-style rotLocalToParent.";
-				debugAid.append( QString("CTMx: OLDSTYLE: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re_obliquity), StelUtils::radToDecDegStr(re_ascendingNode)));
-				break;
+				debugAid.append( QString("CTMx: OLDSTYLE: re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
+//				break;
 		}
+	}
+	else {
+		// Sun handled above, parented objects later. Any non-sun non-parented?
+		Q_ASSERT(0);
 	}
 	addToExtraInfoString(DebugAid, debugAid);
 }
@@ -2012,8 +1951,8 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 // W in this context is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
 // On Earth, sidereal time on the other hand is the angle along the planet equator from RA0 to the meridian, i.e. hour angle of the first point of Aries.
 // For Earth (of course) it is sidereal time at Greenwich.
-// The usual WGCCRE model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these should be handled separately in here.
-// TODO: Make sure this is compatible with the old model!
+// The usual WGCCRE model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these are also handled in here.
+// The planet objects with old-style data are computed like in earlier versions of Stellarium. Their computational model is however questionable.
 // We need both JD and JDE here for Earth. (For other planets only JDE.)
 double Planet::getSiderealTime(double JD, double JDE) const
 {
@@ -2025,7 +1964,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			return get_mean_sidereal_time(JD, JDE); // degrees
 	}
 
-	// V0.21+: new rotational values from ExplSup2013 or WGCCRE2009.
+	// V0.21+: new rotational values from ExplSup2013 or WGCCRE2009/2015.
 	if (re.method==RotationElements::WGCCRE)
 	{
 		// This returns angle W, the longitude of the prime meridian measured along the planet equator
@@ -2274,15 +2213,12 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			}
 		}
 		// re.currentAxisW=w; // TODO Maybe allow this later, and separate "computeSiderealTime()" from "getSiderealTime()"
-		// FIXME: Do "WHATEVER" to convert this into sidereal time!
-		//return w-re.currentAxisRA*M_180_PI;  // NOT working
 		return w;
 	}
 
 	// OLD MODEL, BEFORE V0.21
 	// This is still used for a few solar system objects where we don't have modern elements from the WGCCRE.
 
-	qDebug() << "Using old rotation model for object " << englishName;
 	const double t = JDE - re.epoch;
 	// avoid division by zero (typical case for moons with chaotic period of rotation)
 	double rotations = (re.period==0. ? 1.  // moon with chaotic period of rotation
