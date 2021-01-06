@@ -692,7 +692,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		Q_ASSERT(parent || englishName=="Sun");
 
 		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
-		const QString axisFuncName = pd.value(secname+"/axis_func").toString(); // TODO: Make sense out of it!
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
 		posFuncType posfunc=Q_NULLPTR;
 		Orbit* orbitPtr=Q_NULLPTR;
@@ -1095,6 +1094,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		// The last parameter is only used to derive how long the orbit should be plotted. It is NOT a rotational element.
 		newP->setRotationElements(
+			englishName,
 			rotPeriod,
 			rotOffset,
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
@@ -1174,11 +1174,11 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
-			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::EarthMoon);
-			else if (p->englishName=="Jupiter") Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Jupiter);
-			else if (p->englishName=="Saturn")  Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Saturn);
-			else if (p->englishName=="Uranus")  Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Uranus);
-			else if (p->englishName=="Neptune") Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Neptune);
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::EarthMoon);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Neptune);
 		}
 	}
 	else
@@ -1187,11 +1187,11 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE);
-			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE, Planet::EarthMoon);
-			else if (p->englishName=="Jupiter") Planet::updatePlanetCorrections(dateJDE, Planet::Jupiter);
-			else if (p->englishName=="Saturn")  Planet::updatePlanetCorrections(dateJDE, Planet::Saturn);
-			else if (p->englishName=="Uranus")  Planet::updatePlanetCorrections(dateJDE, Planet::Uranus);
-			else if (p->englishName=="Neptune") Planet::updatePlanetCorrections(dateJDE, Planet::Neptune);
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
 		}
 		lightTimeSunPosition.set(0.,0.,0.);
 	}
@@ -2896,7 +2896,7 @@ int SolarSystem::getOrbitsThickness() const
 
 void SolarSystem::setFlagCustomGrsSettings(bool b)
 {
-	Planet::flagCustomGrsSettings=b;
+	RotationElements::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
 	emit flagCustomGrsSettingsChanged(b);
@@ -2904,12 +2904,12 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 
 bool SolarSystem::getFlagCustomGrsSettings() const
 {
-	return Planet::flagCustomGrsSettings;
+	return RotationElements::flagCustomGrsSettings;
 }
 
 void SolarSystem::setCustomGrsLongitude(int longitude)
 {
-	Planet::customGrsLongitude = longitude;
+	RotationElements::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
 	emit customGrsLongitudeChanged(longitude);
@@ -2917,12 +2917,12 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 
 int SolarSystem::getCustomGrsLongitude() const
 {
-	return Planet::customGrsLongitude;
+	return RotationElements::customGrsLongitude;
 }
 
 void SolarSystem::setCustomGrsDrift(double drift)
 {
-	Planet::customGrsDrift = drift;
+	RotationElements::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
 	emit customGrsDriftChanged(drift);
@@ -2930,12 +2930,12 @@ void SolarSystem::setCustomGrsDrift(double drift)
 
 double SolarSystem::getCustomGrsDrift() const
 {
-	return Planet::customGrsDrift;
+	return RotationElements::customGrsDrift;
 }
 
 void SolarSystem::setCustomGrsJD(double JD)
 {
-	Planet::customGrsJD = JD;
+	RotationElements::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
 	emit customGrsJDChanged(JD);
@@ -2943,7 +2943,7 @@ void SolarSystem::setCustomGrsJD(double JD)
 
 double SolarSystem::getCustomGrsJD()
 {
-	return Planet::customGrsJD;
+	return RotationElements::customGrsJD;
 }
 
 void SolarSystem::setOrbitColorStyle(QString style)

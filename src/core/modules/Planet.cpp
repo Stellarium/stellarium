@@ -93,13 +93,6 @@ bool Planet::drawMoonHalo = true;
 bool Planet::permanentDrawingOrbits = false;
 Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
-// TODO: Maybe include the GRS corrections to the planetCorrections?
-bool Planet::flagCustomGrsSettings = false;
-double Planet::customGrsJD = 2456901.5;
-double Planet::customGrsDrift = 15.;
-int Planet::customGrsLongitude = 216;
-Planet::PlanetCorrections Planet::planetCorrections;
-
 int Planet::orbitsThickness = 1;
 
 QOpenGLShaderProgram* Planet::planetShaderProgram=Q_NULLPTR;
@@ -257,7 +250,7 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
-      multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
+	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
 	  positionsCache(ORBIT_SEGMENTS * 2)
@@ -310,11 +303,11 @@ Planet::Planet(const QString& englishName,
 // called in SolarSystem::init() before first planet is created. May initialize static variables.
 void Planet::init()
 {
-	updatePlanetCorrections(J2000, EarthMoon);
-	updatePlanetCorrections(J2000, Jupiter);
-	updatePlanetCorrections(J2000, Saturn);
-	updatePlanetCorrections(J2000, Uranus);
-	updatePlanetCorrections(J2000, Neptune);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::EarthMoon);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::Jupiter);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::Saturn);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::Uranus);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::Neptune);
 }
 
 Planet::~Planet()
@@ -1359,7 +1352,8 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 }
 
 // Set the rotational elements of the planet body.
-void Planet::setRotationElements(const double _period, const double _offset, const double _epoch, const double _obliquity, const double _ascendingNode,
+void Planet::setRotationElements(const QString name,
+				 const double _period, const double _offset, const double _epoch, const double _obliquity, const double _ascendingNode,
 				 const double _ra0, const double _ra1, const double _de0, const double _de1, const double _w0, const double _w1,
 				 const double _siderealPeriod)
 {
@@ -1382,6 +1376,12 @@ void Planet::setRotationElements(const double _period, const double _offset, con
 	//re.currentAxisRA=0.; // Set some primitive defaults.
 	//re.currentAxisDE=0.;
 	//re.currentAxisW=0.;
+
+	re.corrW  =RotationElements::axisRotCorrFuncMap.value(name, &RotationElements::corrWnil);
+	re.corrOri=RotationElements::axisOriCorrFuncMap.value(name, &RotationElements::corrOriNil);
+	// Deactivate the functions for a tiny (?) speed gain?
+	//re.corrW  =&RotationElements::corrWnil;
+	//re.corrOri=&RotationElements::corrOriNil;
 
 	if (orbitPtr && pType!=isObserver)
 	{
@@ -1556,269 +1556,12 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		const double T=t/36525.0;
 		double J2000NPoleRA=re.ra0+re.ra1*T;
 		double J2000NPoleDE=re.de0+re.de1*T;
-//		if((re.ra0!=0.0) || (re.de0!=0.0)) // PRELIM: We use retransform as marker for "NEW MODEL". TODO: Fix that!
-//		{
-//			retransform=true;
-//		}
 
-		// Apply detailed corrections from ExplSup2013 and WGCCRE2009/WGCCRE2015. The nesting increases lookup speed.
-		if (englishName=="Moon")
-		{
-			// This is from WGCCRE2009.
-			J2000NPoleRA += - (3.8787*M_PI_180)*sin(planetCorrections.E1)  - (0.1204*M_PI_180)*sin(planetCorrections.E2) + (0.0700*M_PI_180)*sin(planetCorrections.E3)
-					- (0.0172*M_PI_180)*sin(planetCorrections.E4)  + (0.0072*M_PI_180)*sin(planetCorrections.E6) - (0.0052*M_PI_180)*sin(planetCorrections.E10)
-					+ (0.0043*M_PI_180)*sin(planetCorrections.E13);
-			J2000NPoleDE += + (1.5419*M_PI_180)*cos(planetCorrections.E1)  + (0.0239*M_PI_180)*cos(planetCorrections.E2) - (0.0278*M_PI_180)*cos(planetCorrections.E3)
-					+ (0.0068*M_PI_180)*cos(planetCorrections.E4)  - (0.0029*M_PI_180)*cos(planetCorrections.E6) + (0.0009*M_PI_180)*cos(planetCorrections.E7)
-					+ (0.0008*M_PI_180)*cos(planetCorrections.E10) - (0.0009*M_PI_180)*cos(planetCorrections.E13);
-			// TODO: With DE43x, get orientation from ephemeris lookup.
-		}
-		else if (englishName=="Mars")
-		{
-			J2000NPoleRA+=	 (0.000068*M_PI_180)*sin(M_PI_180*(198.991226+remainder(19139.4819985*T, 360.)))
-					+(0.000238*M_PI_180)*sin(M_PI_180*(226.292679+remainder(38280.8511281*T, 360.)))
-					+(0.000052*M_PI_180)*sin(M_PI_180*(249.663391+remainder(57420.7251593*T, 360.)))
-					+(0.000009*M_PI_180)*sin(M_PI_180*(266.183510+remainder(76560.6367950*T, 360.)))
-					+(0.419057*M_PI_180)*sin(M_PI_180*( 79.398797+remainder(    0.5042615*T, 360.)));
-			J2000NPoleDE+=	 (0.000051*M_PI_180)*cos(M_PI_180*(122.433576+remainder(19139.9407476*T, 360.)))
-					+(0.000141*M_PI_180)*cos(M_PI_180*( 43.058401+remainder(38280.8753272*T, 360.)))
-					+(0.000031*M_PI_180)*cos(M_PI_180*( 57.663379+remainder(57420.7517205*T, 360.)))
-					-(0.000005*M_PI_180)*cos(M_PI_180*( 79.476401+remainder(76560.6495004*T, 360.)))
-					+(1.591274*M_PI_180)*cos(M_PI_180*(166.325722+remainder(    0.5042615*T, 360.)));
-		}
-		else if (englishName=="Jupiter")
-		{
-			J2000NPoleRA+=	 (0.000117*M_PI_180)*sin(planetCorrections.Ja)
-					+(0.000938*M_PI_180)*sin(planetCorrections.Jb)
-					+(0.001432*M_PI_180)*sin(planetCorrections.Jc)
-					+(0.000030*M_PI_180)*sin(planetCorrections.Jd)
-					+(0.002150*M_PI_180)*sin(planetCorrections.Je);
-			J2000NPoleDE+=	 (0.000050*M_PI_180)*cos(planetCorrections.Ja)
-					+(0.000404*M_PI_180)*cos(planetCorrections.Jb)
-					+(0.000617*M_PI_180)*cos(planetCorrections.Jc)
-					-(0.000013*M_PI_180)*cos(planetCorrections.Jd)
-					+(0.000926*M_PI_180)*cos(planetCorrections.Je);
-		}
-		else if (englishName=="Neptune")
-		{
-			J2000NPoleRA+= (0.7 *M_PI_180)*sin(planetCorrections.Na);
-			J2000NPoleDE-= (0.51*M_PI_180)*cos(planetCorrections.Na);
-		}
-		else if (englishName=="Phobos")
-		{
-			J2000NPoleRA+=
-					+(-1.78428399*M_PI_180)*sin(planetCorrections.M1)
-					+(+0.02212824*M_PI_180)*sin(planetCorrections.M2)
-					+(-0.01028251*M_PI_180)*sin(planetCorrections.M3)
-					+(-0.00475595*M_PI_180)*sin(planetCorrections.M4);
-			J2000NPoleDE+=
-					+(-1.07516537*M_PI_180)*cos(planetCorrections.M1)
-					+(+0.00668626*M_PI_180)*cos(planetCorrections.M2)
-					+(-0.00648740*M_PI_180)*cos(planetCorrections.M3)
-					+(+0.00281576*M_PI_180)*cos(planetCorrections.M4);
-		}
-		else if (englishName=="Deimos")
-		{
-			J2000NPoleRA+=   (3.09217726*M_PI_180)*sin(planetCorrections.M6)
-					+(0.22980637*M_PI_180)*sin(planetCorrections.M7)
-					+(0.06418655*M_PI_180)*sin(planetCorrections.M8)
-					+(0.02533537*M_PI_180)*sin(planetCorrections.M9)
-					+(0.00778695*M_PI_180)*sin(planetCorrections.M10);
+		// Apply detailed corrections from ExplSup2013 and WGCCRE2009/WGCCRE2015.
+		// TODO: With DE43x, get orientation from ephemeris lookup.
+		re.corrOri(t, T, &J2000NPoleRA, &J2000NPoleDE);
 
-			J2000NPoleDE-=   (1.83936004*M_PI_180)*cos(planetCorrections.M6)
-					+(0.14325320*M_PI_180)*cos(planetCorrections.M7)
-					+(0.01911409*M_PI_180)*cos(planetCorrections.M8)
-					-(0.01482590*M_PI_180)*cos(planetCorrections.M9)
-					+(0.00192430*M_PI_180)*cos(planetCorrections.M10);
-		}
-		else if (parent->englishName=="Jupiter")
-		{
-			// Jupiter' moons
-			if (englishName=="Io")
-			{
-				J2000NPoleRA+=(M_PI_180*0.094)*sin(planetCorrections.J3) + (M_PI_180*0.024)*sin(planetCorrections.J4);
-				J2000NPoleDE+=(M_PI_180*0.040)*cos(planetCorrections.J3) + (M_PI_180*0.011)*cos(planetCorrections.J4);
-			}
-			else if (englishName=="Europa")
-			{
-				J2000NPoleRA+=(M_PI_180*1.086)*sin(planetCorrections.J4) + (M_PI_180*0.060)*sin(planetCorrections.J5) + (M_PI_180*0.015)*sin(planetCorrections.J6) + (M_PI_180*0.009)*sin(planetCorrections.J7);
-				J2000NPoleDE+=(M_PI_180*0.468)*cos(planetCorrections.J4) + (M_PI_180*0.026)*cos(planetCorrections.J5) + (M_PI_180*0.007)*cos(planetCorrections.J6) + (M_PI_180*0.002)*cos(planetCorrections.J7);
-			}
-			else if (englishName=="Ganymede")
-			{
-				J2000NPoleRA+=(M_PI_180*-.037)*sin(planetCorrections.J4) + (M_PI_180*0.431)*sin(planetCorrections.J5) + (M_PI_180*0.091)*sin(planetCorrections.J6);
-				J2000NPoleDE+=(M_PI_180*-.016)*cos(planetCorrections.J4) + (M_PI_180*0.186)*cos(planetCorrections.J5) + (M_PI_180*0.039)*cos(planetCorrections.J6);
-			}
-			else if (englishName=="Callisto")
-			{
-				J2000NPoleRA+=(M_PI_180*-.068)*sin(planetCorrections.J5) + (M_PI_180*0.590)*sin(planetCorrections.J6) + (M_PI_180*0.010)*sin(planetCorrections.J8);
-				J2000NPoleDE+=(M_PI_180*-.029)*cos(planetCorrections.J5) + (M_PI_180*0.254)*cos(planetCorrections.J6) - (M_PI_180*0.004)*cos(planetCorrections.J8);
-			}
-			else if (englishName=="Amalthea")
-			{
-				J2000NPoleRA+=(M_PI_180*0.01)*sin(2.*planetCorrections.J1) - (M_PI_180*0.84)*sin(planetCorrections.J1);
-				J2000NPoleDE-=(M_PI_180*0.36)*cos(planetCorrections.J1);
-			}
-			else if (englishName=="Thebe")
-			{
-				J2000NPoleRA+=(M_PI_180*-2.11)*sin(planetCorrections.J2) + (M_PI_180*0.04)*sin(2.*planetCorrections.J2);
-				J2000NPoleDE+=(M_PI_180*-0.91)*cos(planetCorrections.J2) + (M_PI_180*0.01)*cos(2.*planetCorrections.J2);
-			}
-		}
-		else if (parent->englishName=="Saturn")
-		{
-			// Saturn's moons
-			if (englishName=="Mimas")
-			{
-				J2000NPoleRA+=(M_PI_180*13.56)*sin(planetCorrections.S3);
-				J2000NPoleDE+=(M_PI_180*-1.53)*cos(planetCorrections.S3);
-			}
-			else if (englishName=="Tethys")
-			{
-				J2000NPoleRA+=(M_PI_180* 9.66)*sin(planetCorrections.S4);
-				J2000NPoleDE+=(M_PI_180*-1.09)*cos(planetCorrections.S4);
-			}
-			else if (englishName=="Rhea")
-			{
-				J2000NPoleRA+=(M_PI/180.* 3.10)*sin(planetCorrections.S6);
-				J2000NPoleDE+=(M_PI/180.*-0.35)*cos(planetCorrections.S6);
-			}
-			else if (englishName=="Janus")
-			{
-				J2000NPoleRA+=(M_PI_180*0.023)*sin(2.*planetCorrections.S2)-(M_PI_180*1.623)*sin(planetCorrections.S2);
-				J2000NPoleDE+=(M_PI_180*0.001)*cos(2.*planetCorrections.S2)-(M_PI_180*0.183)*cos(planetCorrections.S2);
-			}
-			else if (englishName=="Epimetheus")
-			{
-				J2000NPoleRA+=(M_PI_180*0.086)*sin(2.*planetCorrections.S1)-(M_PI_180*3.153)*sin(planetCorrections.S1);
-				J2000NPoleDE+=(M_PI_180*0.005)*cos(2.*planetCorrections.S1)-(M_PI_180*0.356)*cos(planetCorrections.S1);
-			}
-		}
-		else if (parent->englishName=="Uranus")
-		{		// Uranus's moons
-			if (englishName=="Ariel")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.29)*sin(planetCorrections.U13);
-				J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U13);
-			}
-			else if (englishName=="Umbriel")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.21)*sin(planetCorrections.U14);
-				J2000NPoleDE+=(M_PI_180* 0.2 )*cos(planetCorrections.U14);
-			}
-			else if (englishName=="Titania")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.29)*sin(planetCorrections.U15);
-				J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U15);
-			}
-			else if (englishName=="Oberon")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.16)*sin(planetCorrections.U16);
-				J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U16);
-			}
-			else if (englishName=="Miranda")
-			{
-				J2000NPoleRA+=(M_PI_180* 4.41)*sin(planetCorrections.U11) - (M_PI_180* 0.04)*sin(2.*planetCorrections.U11);
-				J2000NPoleDE+=(M_PI_180* 4.25)*cos(planetCorrections.U11) - (M_PI_180* 0.02)*cos(2.*planetCorrections.U11);
-			}
-			else if (englishName=="Cordelia")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.15)*sin(planetCorrections.U1);
-				J2000NPoleDE+=(M_PI_180* 0.14)*cos(planetCorrections.U1);
-			}
-			else if (englishName=="Ophelia")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.09)*sin(planetCorrections.U2);
-				J2000NPoleDE+=(M_PI_180* 0.09)*cos(planetCorrections.U2);
-			}
-			/*// Bianca not yet included. Keep code here and activate as needed.
-			else if (englishName=="Bianca")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.16)*sin(planetCorrections.U3);
-				J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U3);
-			}*/
-			else if (englishName=="Cressida")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.04)*sin(planetCorrections.U4);
-				J2000NPoleDE+=(M_PI_180* 0.04)*cos(planetCorrections.U4);
-			}
-			else if (englishName=="Desdemona")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.17)*sin(planetCorrections.U5);
-				J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U5);
-			}
-			else if (englishName=="Juliet")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.06)*sin(planetCorrections.U6);
-				J2000NPoleDE+=(M_PI_180* 0.06)*cos(planetCorrections.U6);
-			}
-			/*// Moons not yet included. Keep code here and activate as needed.
-			else if (englishName=="Portia")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.09)*sin(planetCorrections.U7);
-				J2000NPoleDE+=(M_PI_180* 0.09)*cos(planetCorrections.U7);
-			}
-			else if (englishName=="Rosalind")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.29)*sin(planetCorrections.U8);
-				J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U8);
-			}
-			else if (englishName=="Belinda")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.03)*sin(planetCorrections.U9);
-				J2000NPoleDE+=(M_PI_180* 0.03)*cos(planetCorrections.U9);
-			}*/
-			else if (englishName=="Puck")
-			{
-				J2000NPoleRA+=(M_PI_180*-0.33)*sin(planetCorrections.U10);
-				J2000NPoleDE+=(M_PI_180* 0.31)*cos(planetCorrections.U10);
-			}
-		}
-		else if (parent->englishName=="Neptune")
-		{		// Neptune's moons
-			if (englishName=="Triton")
-			{
-				J2000NPoleRA+=    (M_PI_180*-32.35)*sin(planetCorrections.N7)  - (M_PI_180*6.28)*sin(2.*planetCorrections.N7)
-						- (M_PI_180*2.08)*sin(3.*planetCorrections.N7) - (M_PI_180*0.74)*sin(4.*planetCorrections.N7)
-						- (M_PI_180*0.28)*sin(5.*planetCorrections.N7) - (M_PI_180*0.11)*sin(6.*planetCorrections.N7)
-						- (M_PI_180*0.07)*sin(7.*planetCorrections.N7) - (M_PI_180*0.02)*sin(8.*planetCorrections.N7)
-						- (M_PI_180*0.01)*sin(9.*planetCorrections.N7);
-				J2000NPoleDE+=    (M_PI_180* 22.55)*cos(planetCorrections.N7)  + (M_PI_180*2.10)*cos(2.*planetCorrections.N7)
-						+ (M_PI_180*0.55)*cos(3.*planetCorrections.N7) + (M_PI_180*0.16)*cos(4.*planetCorrections.N7)
-						+ (M_PI_180*0.05)*cos(5.*planetCorrections.N7) + (M_PI_180*0.02)*cos(6.*planetCorrections.N7)
-						+ (M_PI_180*0.01)*cos(7.*planetCorrections.N7);
-			}
-			else if (englishName=="Naiad")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 6.49)*sin(planetCorrections.N1) + (M_PI_180* 0.25)*sin(2.*planetCorrections.N1);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 4.75)*cos(planetCorrections.N1) + (M_PI_180* 0.09)*cos(2.*planetCorrections.N1);
-			}
-			else if (englishName=="Thalassa")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.28)*sin(planetCorrections.N2);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.21)*cos(planetCorrections.N2);
-			}
-			else if (englishName=="Despina")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.09)*sin(planetCorrections.N3);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.07)*cos(planetCorrections.N3);
-			}
-			else if (englishName=="Galatea")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.07)*sin(planetCorrections.N4);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.05)*cos(planetCorrections.N4);
-			}
-			else if (englishName=="Larissa")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.27)*sin(planetCorrections.N5);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.20)*cos(planetCorrections.N5);
-			}
-			else if (englishName=="Proteus")
-			{
-				J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.05)*sin(planetCorrections.N6);
-				J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.04)*cos(planetCorrections.N6);
-			}
-		}
+
 
 		debugAid = QString("cTM1: J2000PoleRA: %1 DE %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE));
 
@@ -1946,11 +1689,11 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 }
 
 
-// Compute the z rotation [degrees] to use from equatorial to geographic coordinates.
-// V0.21+
-// W in this context is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
+// Compute the axial z rotation (daily rotation around the polar axis) [degrees] to use from equatorial to hour angle based coordinates.
 // On Earth, sidereal time on the other hand is the angle along the planet equator from RA0 to the meridian, i.e. hour angle of the first point of Aries.
 // For Earth (of course) it is sidereal time at Greenwich.
+// V0.21+ update:
+// For planets and Moons, in this context this is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
 // The usual WGCCRE model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these are also handled in here.
 // The planet objects with old-style data are computed like in earlier versions of Stellarium. Their computational model is however questionable.
 // We need both JD and JDE here for Earth. (For other planets only JDE.)
@@ -1972,26 +1715,12 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		const double t=JDE-J2000;
 		const double T=t/36525.0;
 		double w=re.W0+remainder(t*re.W1, 360.); // W is given and also returned in degrees, clamped to small angles so that adding small corrections makes sense.
-		// Corrections from Explanatory Supplement 2013. Moon from WGCCRE2009.
-		if (englishName=="Moon")
-		{
-			w += -(1.4e-12) *t*t                      + (3.5610)*sin(planetCorrections.E1)
-			     +(0.1208)*sin(planetCorrections.E2)  - (0.0642)*sin(planetCorrections.E3)  + (0.0158)*sin(planetCorrections.E4)
-			     +(0.0252)*sin(planetCorrections.E5)  - (0.0066)*sin(planetCorrections.E6)  - (0.0047)*sin(planetCorrections.E7)
-			     -(0.0046)*sin(planetCorrections.E8)  + (0.0028)*sin(planetCorrections.E9)  + (0.0052)*sin(planetCorrections.E10)
-			     +(0.0040)*sin(planetCorrections.E11) + (0.0019)*sin(planetCorrections.E12) - (0.0044)*sin(planetCorrections.E13);
-		}
-		else if (englishName=="Mercury")
-		{
-			const double M1=(174.7910857*M_PI_180) + remainder(( 4.092335*M_PI_180)*t, 2.0*M_PI);
-			const double M2=(349.5821714*M_PI_180) + remainder(( 8.184670*M_PI_180)*t, 2.0*M_PI);
-			const double M3=(164.3732571*M_PI_180) + remainder((12.277005*M_PI_180)*t, 2.0*M_PI);
-			const double M4=(339.1643429*M_PI_180) + remainder((16.369340*M_PI_180)*t, 2.0*M_PI);
-			const double M5=(153.9554286*M_PI_180) + remainder((20.461675*M_PI_180)*t, 2.0*M_PI);
+		// Apply the bespoke corrections from Explanatory Supplement 2013/WGCCRE2009/WGCCRE2015.
+		w+=re.corrW(t, T);
 
-			w += (-0.00000571)*sin(M5) - (0.00002539)*sin(M4) - (0.00011040)*sin(M3) - (0.00112309)*sin(M2) + (0.01067257)*sin(M1);
-		}
-		else if (englishName=="Jupiter")
+		/*
+		// Jupiter corrections should also be moved to the RotationElements.
+		if (englishName=="Jupiter")
 		{
 			// N.B. This is not siderealTime but some SystemII longitude shifted by GRS position and texture position. For the time being, nobody should complain, though.
 			//
@@ -2031,188 +1760,9 @@ double Planet::getSiderealTime(double JD, double JDE) const
 			// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
 
 		}
-		else if (englishName=="Neptune")
-		{
-			w -= (0.48)*sin(planetCorrections.Na);
-		}
-		else if (englishName=="Mars")
-		{
-			w+=
-			+0.000145*sin(M_PI_180*(129.071773 + remainder(19140.0328244*T, 360.)))
-			+0.000157*sin(M_PI_180*( 36.352167 + remainder(38281.0473591*T, 360.)))
-			+0.000040*sin(M_PI_180*( 56.668646 + remainder(57420.9295360*T, 360.)))
-			+0.000001*sin(M_PI_180*( 67.364003 + remainder(76560.2552215*T, 360.)))
-			+0.000001*sin(M_PI_180*(104.792680 + remainder(95700.4387578*T, 360.)))
-			+0.584542*sin(M_PI_180*( 95.391654 + remainder(    0.5042615*T, 360.)));
-		}
-		else if (englishName=="Phobos")
-		{
-			w+=12.72192797*T*T
-			 +1.42421769*sin(planetCorrections.M1)
-			 -0.02273783*sin(planetCorrections.M2)
-			 +0.00410711*sin(planetCorrections.M3)
-			 +0.00631964*sin(planetCorrections.M4)
-			 -1.143     *sin(planetCorrections.M5);
-		}
-		else if (englishName=="Deimos")
-		{
-			w+=
-			 -2.73954829*sin(planetCorrections.M6)
-			 -0.39968606*sin(planetCorrections.M7)
-			 -0.06563259*sin(planetCorrections.M8)
-			 -0.02912940*sin(planetCorrections.M9)
-			 +0.01699160*sin(planetCorrections.M10);
-		}
-		else if ((parent) &&(parent->englishName=="Jupiter"))
-		{
-			if (englishName=="Io")
-			{
-				w+= (-0.085)*sin(planetCorrections.J3) - (0.022)*sin(planetCorrections.J4);
-			}
-			else if (englishName=="Europa")
-			{
-				w+= (-0.980)*sin(planetCorrections.J4) - (0.054)*sin(planetCorrections.J5) - (0.014)*sin(planetCorrections.J6) - (0.008)*sin(planetCorrections.J7);
-			}
-			else if (englishName=="Ganymede")
-			{
-				w+= (0.033)*sin(planetCorrections.J4) - (0.389)*sin(planetCorrections.J5) - (0.082)*sin(planetCorrections.J6);
-			}
-			else if (englishName=="Callisto")
-			{
-				w+= (0.061)*sin(planetCorrections.J5) - (0.533)*sin(planetCorrections.J6) - (0.009)*sin(planetCorrections.J8);
-			}
-			else if (englishName=="Amalthea")
-			{
-				w+= (0.76)*sin(planetCorrections.J1) - (0.01)*sin(2.*planetCorrections.J1);
-			}
-			else if (englishName=="Thebe")
-			{
-				w+= (1.91)*sin(planetCorrections.J2) - (0.04)*sin(2.*planetCorrections.J2);
-			}
-		}
-		else if ((parent) && (parent->englishName=="Saturn"))
-		{
-			if (englishName=="Mimas")
-			{
-				w+= (-13.48)*sin(planetCorrections.S3) - (44.85)*sin(planetCorrections.S5);
-			}
-			else if (englishName=="Tethys")
-			{
-				w+= (-9.60)*sin(planetCorrections.S4) + (2.23)*sin(planetCorrections.S5);
-			}
-			else if (englishName=="Rhea")
-			{
-				w+= (-3.08)*sin(planetCorrections.S6);
-			}
-			/*else if (englishName=="Janus")
-			{
-				w+= (1.613)*sin(planetCorrections.S2) - (0.023)*sin(2.*planetCorrections.S2);
-			}*/
-			else if (englishName=="Epimetheus")
-			{
-				w+= (3.133)*sin(planetCorrections.S1) - (0.086)*sin(2.*planetCorrections.S1);
-			}
-		}
-		else if ((parent) && (parent->englishName=="Uranus"))
-		{
-			if (englishName=="Cordelia")
-			{
-				w-= (0.04)*sin(planetCorrections.U1);
-			}
-			else if (englishName=="Ophelia")
-			{
-				w-= (0.03)*sin(planetCorrections.U2);
-			}
-//			else if (englishName=="Bianca")
-//			{
-//				w-= (0.04)*sin(planetCorrections.U3);
-//			}
-			else if (englishName=="Cressida")
-			{
-				w-= (0.01)*sin(planetCorrections.U4);
-			}
-			else if (englishName=="Desdemona")
-			{
-				w-= (0.04)*sin(planetCorrections.U5);
-			}
-			else if (englishName=="Juliet")
-			{
-				w-= (0.02)*sin(planetCorrections.U6);
-			}
-			/* Moons not yet included. Keep here and activate if required.
-			else if (englishName=="Portia")
-			{
-				w-= (0.02)*sin(planetCorrections.U7);
-			}
-			else if (englishName=="Rosalind")
-			{
-				w-= (0.08)*sin(planetCorrections.U8);
-			}
-			else if (englishName=="Belinda")
-			{
-				w-= (0.01)*sin(planetCorrections.U9);
-			}*/
-			else if (englishName=="Puck")
-			{
-				w-= (0.09)*sin(planetCorrections.U10);
-			}
-			else if (englishName=="Ariel")
-			{
-				w+= (0.05)*sin(planetCorrections.U12) + (0.08)*sin(planetCorrections.U13);
-			}
-			else if (englishName=="Umbriel")
-			{
-				w+= (-0.09)*sin(planetCorrections.U12) + (0.06)*sin(planetCorrections.U14);
-			}
-			else if (englishName=="Titania")
-			{
-				w+= (0.08)*sin(planetCorrections.U15);
-			}
-			else if (englishName=="Oberon")
-			{
-				w+= (0.04)*sin(planetCorrections.U16);
-			}
-			else if (englishName=="Miranda")
-			{
-				w+= (-1.27)*sin(planetCorrections.U12) + (0.15)*sin(2.*planetCorrections.U12) + (1.15)*sin(planetCorrections.U11) - (0.09)*sin(2.*planetCorrections.U11);
-			}
-		}
-		else if ((parent) && (parent->englishName=="Neptune"))
-		{
-			if (englishName=="Triton")
-			{
-				w+= (22.25)*sin(   planetCorrections.N7) + (6.73)*sin(2.*planetCorrections.N7)
-				 +  ( 2.05)*sin(3.*planetCorrections.N7) + (0.74)*sin(4.*planetCorrections.N7)
-				 +  ( 0.28)*sin(5.*planetCorrections.N7) + (0.11)*sin(6.*planetCorrections.N7)
-				 +  ( 0.05)*sin(7.*planetCorrections.N7) + (0.02)*sin(8.*planetCorrections.N7)
-				 +  ( 0.01)*sin(9.*planetCorrections.N7);
-			}
-			else if (englishName=="Naiad")
-			{
-				w+= (-0.48)*sin(planetCorrections.Na) + (4.40)*sin(planetCorrections.N1) - (0.27)*sin(2.*planetCorrections.N1);
-			}
-			else if (englishName=="Thalassa")
-			{
-				w+= (-0.48)*sin(planetCorrections.Na) + (0.19)*sin(planetCorrections.N2);
-			}
-			else if (englishName=="Despina")
-			{
-				w+= (-0.49)*sin(planetCorrections.Na) + (0.06)*sin(planetCorrections.N3);
-			}
-			else if (englishName=="Galatea")
-			{
-				w+= (-0.48)*sin(planetCorrections.Na) + (0.05)*sin(planetCorrections.N4);
-			}
-			else if (englishName=="Larissa")
-			{
-				w+= (-0.48)*sin(planetCorrections.Na) + (0.19)*sin(planetCorrections.N5);
-			}
-			else if (englishName=="Proteus")
-			{
-				w+= (-0.48)*sin(planetCorrections.Na) + (0.04)*sin(planetCorrections.N6);
-			}
-		}
+		*/
 		// re.currentAxisW=w; // TODO Maybe allow this later, and separate "computeSiderealTime()" from "getSiderealTime()"
+
 		return w;
 	}
 
@@ -4512,114 +4062,3 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::ExplanatorySupplement_2013);
 }
 
-void Planet::updatePlanetCorrections(const double JDE, const PlanetCorrection planet)
-{
-	// The angles are always given in degrees. We let the compiler do the conversion. Leave it for readability!
-	const double d=(JDE-J2000);
-	const double T=d/36525.0;
-
-	switch (planet){
-		case EarthMoon:
-			if (fabs(JDE-planetCorrections.JDE_E)>StelCore::JD_MINUTE)
-			{ // Moon/Earth correction terms. This is from WGCCRE2009. We must fmod them, else we have sin(LARGE)>>1
-				planetCorrections.JDE_E=JDE; // keep record of when these values are valid.
-				planetCorrections.E1= M_PI_180* (125.045 - remainder( 0.0529921*d, 360.0));
-				planetCorrections.E2= M_PI_180* (250.089 - remainder( 0.1059842*d, 360.0));
-				planetCorrections.E3= M_PI_180* (260.008 + remainder(13.0120009*d, 360.0));
-				planetCorrections.E4= M_PI_180* (176.625 + remainder(13.3407154*d, 360.0));
-				planetCorrections.E5= M_PI_180* (357.529 + remainder( 0.9856003*d, 360.0));
-				planetCorrections.E6= M_PI_180* (311.589 + remainder(26.4057084*d, 360.0));
-				planetCorrections.E7= M_PI_180* (134.963 + remainder(13.0649930*d, 360.0));
-				planetCorrections.E8= M_PI_180* (276.617 + remainder( 0.3287146*d, 360.0));
-				planetCorrections.E9= M_PI_180* ( 34.226 + remainder( 1.7484877*d, 360.0));
-				planetCorrections.E10=M_PI_180* ( 15.134 - remainder( 0.1589763*d, 360.0));
-				planetCorrections.E11=M_PI_180* (119.743 + remainder( 0.0036096*d, 360.0));
-				planetCorrections.E12=M_PI_180* (239.961 + remainder( 0.1643573*d, 360.0));
-				planetCorrections.E13=M_PI_180* ( 25.053 + remainder(12.9590088*d, 360.0));
-			}
-			break;
-		case Mars:
-			if (fabs(JDE-planetCorrections.JDE_E)>5*StelCore::JD_MINUTE)
-			{ // Mars correction terms. This is from WGCCRE2015. We must fmod them, else we have sin(LARGE)>>1
-				planetCorrections.JDE_M=JDE; // keep record of when these values are valid.
-				planetCorrections.M1= M_PI_180* (190.72646643 + remainder(   15917.10818695*T, 360.0));
-				planetCorrections.M2= M_PI_180* ( 21.46892470 + remainder(   31834.27934054*T, 360.0));
-				planetCorrections.M3= M_PI_180* (332.86082793 + remainder(   19139.89694742*T, 360.0));
-				planetCorrections.M4= M_PI_180* (394.93256437 + remainder(   38280.79631835*T, 360.0));
-				planetCorrections.M5= M_PI_180* (189.63271560 + remainder(41215158.18420050*T, 360.0) + remainder(12.71192322*T*T, 360.0));
-				planetCorrections.M6= M_PI_180* (121.46893664 + remainder(     660.22803474*T, 360.0));
-				planetCorrections.M7= M_PI_180* (231.05028581 + remainder(     660.99123540*T, 360.0));
-				planetCorrections.M8= M_PI_180* (251.37314025 + remainder(    1320.50145245*T, 360.0));
-				planetCorrections.M9= M_PI_180* (217.98635955 + remainder(   38279.96125550*T, 360.0));
-				planetCorrections.M10=M_PI_180* (196.19729402 + remainder(   19139.83628608*T, 360.0));
-			}
-			break;
-		case Jupiter:
-			if (fabs(JDE-planetCorrections.JDE_J)>0.025) // large changes in the values below :-(
-			{
-				planetCorrections.JDE_J=JDE; // keep record of when these values are valid.
-				planetCorrections.Ja =M_PI_180* ( 99.360714+remainder( 4850.4046*T, 360.0)); // Jupiter axis terms, Table 10.1
-				planetCorrections.Jb =M_PI_180* (175.895369+remainder( 1191.9605*T, 360.0));
-				planetCorrections.Jc =M_PI_180* (300.323162+remainder(  262.5475*T, 360.0));
-				planetCorrections.Jd =M_PI_180* (114.012305+remainder( 6070.2476*T, 360.0));
-				planetCorrections.Je =M_PI_180* ( 49.511251+remainder(   64.3000*T, 360.0));
-				planetCorrections.J1 =M_PI_180* ( 73.32    +remainder(91472.9   *T, 360.0)); // corrective terms for Jupiter' moons, Table 10.10
-				planetCorrections.J2 =M_PI_180* ( 24.62    +remainder(45137.2   *T, 360.0));
-				planetCorrections.J3 =M_PI_180* (283.90    +remainder( 4850.7   *T, 360.0));
-				planetCorrections.J4 =M_PI_180* (355.80    +remainder( 1191.3   *T, 360.0));
-				planetCorrections.J5 =M_PI_180* (119.90    +remainder(  262.1   *T, 360.0));
-				planetCorrections.J6 =M_PI_180* (229.80    +remainder(   64.3   *T, 360.0));
-				planetCorrections.J7 =M_PI_180* (352.25    +remainder( 2382.6   *T, 360.0));
-				planetCorrections.J8 =M_PI_180* (113.35    +remainder( 6070.0   *T, 360.0));
-			}
-			break;
-		case Saturn:
-			if (fabs(JDE-planetCorrections.JDE_S)>0.025) // large changes in the values below :-(
-			{
-				planetCorrections.JDE_S=JDE; // keep record of when these values are valid.
-				planetCorrections.S1=M_PI_180* (353.32+remainder( 75706.7*T, 360.0)); // corrective terms for Saturn's moons, Table 10.12
-				planetCorrections.S2=M_PI_180* ( 28.72+remainder( 75706.7*T, 360.0));
-				planetCorrections.S3=M_PI_180* (177.40+remainder(-36505.5*T, 360.0));
-				planetCorrections.S4=M_PI_180* (300.00+remainder( -7225.9*T, 360.0));
-				planetCorrections.S5=M_PI_180* (316.45+remainder(   506.2*T, 360.0));
-				planetCorrections.S6=M_PI_180* (345.20+remainder( -1016.3*T, 360.0));
-			}
-			break;
-		case Uranus:
-			if (fabs(JDE-planetCorrections.JDE_U)>0.025) // large changes in the values below :-(
-			{
-				planetCorrections.JDE_U=JDE; // keep record of when these values are valid.
-				planetCorrections.U1 =M_PI_180* (115.75+remainder(54991.87*T, 360.0)); // corrective terms for Uranus's moons, Table 10.14.
-				planetCorrections.U2 =M_PI_180* (141.69+remainder(41887.66*T, 360.0));
-				//planetCorrections.U3 =M_PI_180* (135.03+remainder(29927.35*T, 360.0)); // not in 0.20
-				planetCorrections.U4 =M_PI_180* ( 61.77+remainder(25733.59*T, 360.0));
-				planetCorrections.U5 =M_PI_180* (249.32+remainder(24471.46*T, 360.0));
-				planetCorrections.U6 =M_PI_180* ( 43.86+remainder(22278.41*T, 360.0));
-				//planetCorrections.U7 =M_PI_180* ( 77.66+remainder(20289.42*T, 360.0)); // not in 0.20
-				//planetCorrections.U8 =M_PI_180* (157.36+remainder(16652.76*T, 360.0)); // not in 0.20
-				//planetCorrections.U9 =M_PI_180* (101.81+remainder(12872.63*T, 360.0)); // not in 0.20
-				planetCorrections.U10=M_PI_180* (138.64+remainder( 8061.81*T, 360.0));
-				planetCorrections.U11=M_PI_180* (102.23+remainder(-2024.22*T, 360.0));
-				planetCorrections.U12=M_PI_180* (316.41+remainder( 2863.96*T, 360.0));
-				planetCorrections.U13=M_PI_180* (304.01+remainder(  -51.94*T, 360.0));
-				planetCorrections.U14=M_PI_180* (308.71+remainder(  -93.17*T, 360.0));
-				planetCorrections.U15=M_PI_180* (340.82+remainder(  -75.32*T, 360.0));
-				planetCorrections.U16=M_PI_180* (259.14+remainder( -504.81*T, 360.0));
-			}
-			break;
-		case Neptune:
-			if (fabs(JDE-planetCorrections.JDE_N)>0.025) // large changes in the values below :-(
-			{
-				planetCorrections.JDE_N=JDE; // keep record of when these values are valid.
-				planetCorrections.Na=M_PI_180* (357.85+remainder(   52.316*T, 360.0)); // Neptune axis term
-				planetCorrections.N1=M_PI_180* (323.92+remainder(62606.6*T, 360.0)); // corrective terms for Neptune's moons, Table 10.15 (N=Na!)
-				planetCorrections.N2=M_PI_180* (220.51+remainder(55064.2*T, 360.0));
-				planetCorrections.N3=M_PI_180* (354.27+remainder(46564.5*T, 360.0));
-				planetCorrections.N4=M_PI_180* ( 75.31+remainder(26109.4*T, 360.0));
-				planetCorrections.N5=M_PI_180* ( 35.36+remainder(14325.4*T, 360.0));
-				planetCorrections.N6=M_PI_180* (142.61+remainder( 2824.6*T, 360.0));
-				planetCorrections.N7=M_PI_180* (177.85+remainder(   52.316*T, 360.0));
-			}
-			break;
-	}
-}
