@@ -283,7 +283,9 @@ double RotationElements::corrWJupiter(const double d, const double T)
 {
 	Q_UNUSED(T)
 	const double JDE=d+2451545.;
-	// N.B. This is not siderealTime but some SystemII longitude shifted by GRS position and texture position. For the time being, nobody should complain, though.
+	// The default W delivers SystemII longitude.
+	// We have to shift by GRS position and texture position.
+	// The final value will no longer be W but the rotation value required to show the GRS.
 	//
 	// CM2 considerations from http://www.projectpluto.com/grs_form.htm
 	// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
@@ -296,6 +298,8 @@ double RotationElements::corrWJupiter(const double d, const double T)
 
 	// GZ These corrections above are actually the phase angle of Jupiter (11 degree term, shown by our 3D geometry),
 	// all other terms of above are approximate and light-time corrections.
+	// The notion of CMII also indicates "as seen from earth", and presumably
+	// therefore the given rotation value of 870.186 differs from the official 870.270 to include one less Jupiter rotation per revolution.
 	// These correction terms are required for earth-based observations, but we do the math and 3d-based view geometry anyway!
 	// --> None of these correction terms need to be applied!
 	// But the CM2 formula includes an average light time correction for Jupiter, which we have to take off here.

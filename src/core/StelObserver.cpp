@@ -225,7 +225,7 @@ Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 	const double latRad=static_cast<double>(currentLocation.latitude)*(M_PI_180);
 	const double u = atan( bByA * tan(latRad));
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	// TODO: This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
+	// This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
 	Q_ASSERT((bByA==1.) || (fabs(u)<= fabs(latRad)));
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 

@@ -1377,11 +1377,9 @@ void Planet::setRotationElements(const QString name,
 	//re.currentAxisDE=0.;
 	//re.currentAxisW=0.;
 
+	// Assign fine-tuning corrective functions for axis rotation angle W and orientation.
 	re.corrW  =RotationElements::axisRotCorrFuncMap.value(name, &RotationElements::corrWnil);
 	re.corrOri=RotationElements::axisOriCorrFuncMap.value(name, &RotationElements::corrOriNil);
-	// Deactivate the functions for a tiny (?) speed gain?
-	//re.corrW  =&RotationElements::corrWnil;
-	//re.corrOri=&RotationElements::corrOriNil;
 
 	if (orbitPtr && pType!=isObserver)
 	{
