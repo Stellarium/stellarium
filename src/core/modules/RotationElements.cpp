@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2021 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,25 +23,13 @@
 #include "StelUtils.hpp"
 
 #include <limits>
-//#include <QByteArray>
-//#include <QTextStream>
 #include <QString>
 #include <QDebug>
-//#include <QVarLengthArray>
-//#include <QOpenGLBuffer>
-//#include <QOpenGLContext>
-//#ifdef DEBUG_SHADOWMAP
-//#include <QOpenGLFramebufferObject>
-//#endif
-//#include <QOpenGLShader>
-//#include <QtConcurrent>
-//#include <QElapsedTimer>
-
 
 // Also include the GRS corrections here
 bool RotationElements::flagCustomGrsSettings = false;
 double RotationElements::customGrsJD = 2456901.5;
-int RotationElements::customGrsLongitude = 216;
+double RotationElements::customGrsLongitude = 216.;
 double RotationElements::customGrsDrift = 15.;
 
 RotationElements::PlanetCorrections RotationElements::planetCorrections;

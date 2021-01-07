@@ -21,52 +21,46 @@
 #ifndef ROTATIONELEMENTS_HPP
 #define ROTATIONELEMENTS_HPP
 
+//! Class used to store rotational elements, i.e. axis orientation for the planetary body.
+//! Data are read from ssystem_(major|minor).ini in SolarSystem.cpp::loadPlanets().
+//!
+//! Notes of early 2021: The original planet axis model in Stellarium seems to be an outdated model untraceable in the literature.
+//! Stellarium used to have elements w.r.t. VSOP87 (ecliptical) frame for planets, and elements w.r.t. the host planet's equator for planet moons:
+//! ascendingNode
+//! obliquity
+//! offset
+//! period
+//! We cannot remove these old data as long as some Moon orbits for the outer planets depend on them.
+//! The problem is that without a reference we have no idea whether any of these elements and algorithms are correct.
+//!
+//! IAU standards like the Report of the IAU Working Group on Cartographic Coordinates and Rotational elements 2009 (DOI:10.1007/s10569-010-9320-4)
+//! has axes given w.r.t. J2000 ICRF.
+//!
+//! Between V0.15 and 0.20.*, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
+//! ecliptically-based directions (VSOP87) obliquity/ascendingNode. But these were only ra/de_J2000 poles. Some axes have precession, which need to be modelled/updated.
+//! The new way (0.21+): We still allow using the previous 4 elements in Planet::computeTransMatrix(.,.) and Planet::getSiderealTime(), but only if WGCCRE elements are not available.
+//!
+//! ra=ra0+T*ra1
+//! de=de0+T*de1         ( --> obliquity, ascendingNode)
+//! rot_rotation_offset [degrees]     =W0
+//! rot_periode  [hours] =  computed from rot_pole_W1[deg/day] if that exists.  360 [deg] / _rot_ [hours] --> 360 * _rot_ / 24 [deg/hours]
+//!
+//! If rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
+//!
+//! Since 0.21 we use the WGCCRE elements and orientations directly, so that axes behave properly.
+//! In addition, the objects with more complicated element behaviour are updated with special functions in those two functions.
+//! New keys in ssystem_*.ini, their storage in RotationElements, and their equivalents in the IAU report:
+//! rot_pole_ra  [degrees]     re.ra0 [rad]         constant term for alpha_0
+//! rot_pole_de  [degrees]     re.ra1 [rad/ct]      constant term for delta_0
+//! rot_pole_ra1 [degrees/cy]  re.de0 [rad]         T factor for alpha_0
+//! rot_pole_de1 [degrees/cy]  re.de1 [rad/ct]      T factor for delta_0
+//! rot_pole_W0  [degrees]     re.W0  [degrees]     constant term fo W.
+//! rot_pole_W1  [degrees/day] re.W1  [degrees/day] d factor for W
+
 #include <QString>
 
-// The callback type for the external position computation function
-// arguments are JDE, position[3], velocity[3].
-// The last variable is the userData pointer, which is Q_NULLPTR for Planets, but used in derived classes. E.g. points to the KeplerOrbit for Comets.
-//typedef void (*posFuncType)(double, double*, double*, void*);
-
-//typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double xyzdot[3]);
-
-//// epoch J2000: 12 UT on 1 Jan 2000
+// epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-
-// Class used to store rotational elements, i.e. axis orientation for the planetary body.
-// Data are read from ssystem_(major|minor).ini in SolarSystem.cpp::loadPlanets().
-//
-// Notes of early 2021: The original planet axis model in Stellarium seems to be an outdated model untraceable in the literature.
-// Stellarium used to have elements w.r.t. VSOP87 (ecliptical) frame for planets, and elements w.r.t. the host planet's equator for planet moons:
-// ascendingNode
-// obliquity
-// offset
-// period
-// The problem is that without a reference we have no idea whether any of these elements and algorithms are correct.
-//
-// IAU standards like the Report of the IAU Working Group on Cartographic Coordinates and Rotational elements 2009 (DOI:10.1007/s10569-010-9320-4)
-// has axes given w.r.t. J2000 ICRF.
-//
-// Between V0.15 and 0.20.*, if the planet elements in ssystem.ini had elements "rot_pole_ra" and "rot_pole_de" given, the poles were transformed to
-// ecliptically-based directions (VSOP87) obliquity/ascendingNode. But these were only ra/de_J2000 poles. Some axes have precession, which need to be modelled/updated.
-// The new way (0.21+): We still allow using the previous 4 elements in Planet::computeTransMatrix(.,.) and Planet::getSiderealTime(), but only if WGCCRE elements are not available.
-
-// ra=ra0+T*ra1
-// de=de0+T*de1         ( --> obliquity, ascendingNode)
-// rot_rotation_offset [degrees]     =W0
-// rot_periode  [hours] =  computed from rot_pole_W1[deg/day] if that exists.  360 [deg] / _rot_ [hours] --> 360 * _rot_ / 24 [deg/hours]
-
-// If rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
-
-// Since 0.21 we use the WGCCRE elements and orientations directly, so that axes behave properly.
-// In addition, the objects with more complicated element behaviour must be updated with special functions in those two functions.
-// New keys in ssystem_*.ini, their storage in RotationElements, and their equivalents in the IAU report:
-// rot_pole_ra  [degrees]     re.ra0      constant term for alpha_0
-// rot_pole_de  [degrees]     re.ra1      constant term for delta_0
-// rot_pole_ra1 [degrees/cy]  re.de0      T factor for alpha_0
-// rot_pole_de1 [degrees/cy]  re.de1      T factor for  delta_0
-// rot_pole_W0  [degrees]     re.offset   constant term fo W.
-// rot_pole_W1  [degrees/day] re.period   d factor for W
 
 class RotationElements
 {
@@ -85,14 +79,13 @@ public:
 		Neptune=8
 	};
 
-	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), siderealPeriod(0.),
+	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.),
 		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
 	double period;          // [deprecated] (sidereal) rotation period [earth days]
 	double offset;          // [deprecated] rotation at epoch  [degrees]
 	double epoch;          // JDE (JD TT) of epoch for these elements
 	double obliquity;       // [deprecated] tilt of rotation axis w.r.t. ecliptic [radians]
 	double ascendingNode;   // [deprecated] long. of ascending node of equator on the ecliptic [radians]
-	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days] [FIXME: This is NOT a rotational element and should be stored elsewhere!]
 	// new elements for 0.21+: The 6/9 new entries after the switch are enough for many objects. More corrections can be applied where required.
 	ComputationMethod method; // The reference system in use for the respective object. WGCCRE is preferred, but we don't have all data.
 	double ra0;            // [rad] RA_0 right ascension of north pole. ssystem.ini: rot_pole_ra    /180*M_PI
@@ -202,7 +195,7 @@ public:
 	axisOriFuncType corrOri;
 	static const QMap<QString, axisRotFuncType>axisRotCorrFuncMap;
 	static const QMap<QString, axisOriFuncType>axisOriCorrFuncMap;
-	// These functions can be used as corrW or corrOri, respectively.
+	// These functions can be used as corrW.
 	static double corrWnil(const double d, const double T){Q_UNUSED(d) Q_UNUSED(T) return 0;}
 	static double corrWMoon(const double d, const double T);
 	static double corrWMercury(const double d, const double T);
@@ -246,6 +239,7 @@ public:
 	static double corrWLarissa(const double d, const double T);
 	static double corrWProteus(const double d, const double T);
 
+	// These functions can be used as corrOri.
 	static void corrOriNil(const double, const double, double*, double*){} // Do nothing.
 	static void corrOriMoon(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 	static void corrOriMars(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
@@ -287,9 +281,9 @@ public:
 	static void corrOriLarissa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 	static void corrOriProteus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 
-	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
+	static bool flagCustomGrsSettings;	// Use custom settings for calculation of position of Great Red Spot?
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
-	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
+	static double customGrsLongitude;	// Longitude of Great Red Spot (System II, degrees)
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 };
 

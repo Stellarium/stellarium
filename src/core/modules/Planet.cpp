@@ -223,6 +223,7 @@ Planet::Planet(const QString& englishName,
 	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
+	  siderealPeriod(0.),
 	  equatorialRadius(radius),
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
@@ -720,11 +721,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (!fuzzyEquals(helioVel, orbVel))
 				oss << QString("%1: %2 %3<br/>").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms);
 		}
-		if (qAbs(re.period)>0.)
-		{
-			double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
-			oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
-		}
 		oss << getExtraInfoStrings(Velocity).join("");
 	}
 	oss << getInfoStringPeriods(core, flags);
@@ -1036,7 +1032,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			if (qAbs(re.W1)>0.)
 			{
-				const double eqRotVel = (360.*AU)*getEquatorialRadius()/re.W1;
+				const double eqRotVel = (2.0*M_PI*AU/(360.*86400.0))*getEquatorialRadius()*re.W1;
 				oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
 			}
 			else if (qAbs(re.period)>0.)
@@ -1362,9 +1358,6 @@ void Planet::setRotationElements(const QString name,
 	re.epoch = _epoch;
 	re.obliquity = _obliquity;
 	re.ascendingNode = _ascendingNode;
-
-	re.siderealPeriod = _siderealPeriod;  // THIS ENTRY SHOULD BE REMOVED FROM THE ROTATION ELEMENTS! Is has nothing to do with rotation. AND: Minor planets and Comets don't use it.
-
 	re.method=(_ra0==0. ? RotationElements::Traditional : RotationElements::WGCCRE);
 	re.ra0=_ra0;
 	re.ra1=_ra1;
@@ -1381,6 +1374,7 @@ void Planet::setRotationElements(const QString name,
 	re.corrW  =RotationElements::axisRotCorrFuncMap.value(name, &RotationElements::corrWnil);
 	re.corrOri=RotationElements::axisOriCorrFuncMap.value(name, &RotationElements::corrOriNil);
 
+	siderealPeriod = _siderealPeriod;
 	if (orbitPtr && pType!=isObserver)
 	{
 		const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
@@ -1388,7 +1382,7 @@ void Planet::setRotationElements(const QString name,
 		if (semiMajorAxis>0 && eccentricity<0.9)
 		{
 			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
-			re.siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
+			siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
 			//qDebug() << re.siderealPeriod;
 			closeOrbit=true;
 		}
@@ -1396,7 +1390,7 @@ void Planet::setRotationElements(const QString name,
 			closeOrbit=false;
 		}
 	}
-	deltaOrbitJDE = re.siderealPeriod/ORBIT_SEGMENTS;                              // TODO: Remove siderealPeriod from RotationalElements!
+	deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
 }
 
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
@@ -1657,7 +1651,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		double w=re.W0+remainder(t*re.W1, 360.); // W is given and also returned in degrees, clamped to small angles so that adding small corrections makes sense.
 		w+=re.corrW(t, T); // Apply the bespoke corrections from Explanatory Supplement 2013/WGCCRE2009/WGCCRE2015.
 
-		// re.currentAxisW=w; // Maybe allow this later, and separate "computeSiderealTime()" from "getSiderealTime()"
+		// re.currentAxisW=w; // Maybe allow this later?
 		return w;
 	}
 
@@ -1824,6 +1818,23 @@ float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
 	dra=ra0-ra;
 	return atan2f(cos(de0)*sin(dra), sin(de0)*cos(de) - cos(de0)*sin(de)*cos(dra));
 }
+
+
+//// Get planetographic coordinates of subsolar and sub-observer points.
+//// Source: Explanatory Supplement 2013, 10.4.1
+//QPair<Vec3d, Vec3d> Planet::getSubSolarObserverPoints(StelCore *core) const
+//{
+//	// When using the last computed elements, light time should be accounted for.
+//	const Vec3d r=  StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
+//	const Vec3d re= StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
+//	const Vec3d dr= r-re;
+//	// TODO: These should be transformed from J2000 to equinox of date by application of frame bias, precession and nutation. For now, we keep J2000
+//	Vec3d s=-r;  s.normalize();
+//	Vec3d e=-dr; e.normalize();
+//
+//
+//}
+//
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
 double Planet::getElongation(const Vec3d& obsPos) const
@@ -3050,10 +3061,6 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 // Used in drawSphere() to compute shadows.
 void Planet::computeModelMatrix(Mat4d &result) const
 {
-	// if (englishName=="Earth")
-	// {
-	// 	qDebug() << "computeModelMatrix for Earth: " << (re.method==RotationElements::Traditional ? "Traditional" : "WGCCRE"); // ==> WGCCRE
-	// }
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
 	switch (re.method)
@@ -3064,7 +3071,6 @@ void Planet::computeModelMatrix(Mat4d &result) const
 				result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
 				p = p->parent;
 			}
-			result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 			break;
 		case RotationElements::WGCCRE:
 			while (p && p->parent)
@@ -3072,10 +3078,9 @@ void Planet::computeModelMatrix(Mat4d &result) const
 				result = Mat4d::translation(p->eclipticPos) * result;
 				p = p->parent;
 			}
-			result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation +	90.f)); // FIXME: Probably something else!
 			break;
 	}
-//	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
 Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
@@ -3886,7 +3891,7 @@ void Planet::drawOrbit(const StelCore* core)
 {
 	if (!static_cast<bool>(orbitFader.getInterstate()))
 		return;
-	if (!static_cast<bool>(re.siderealPeriod))
+	if (!static_cast<bool>(siderealPeriod))
 		return;
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)

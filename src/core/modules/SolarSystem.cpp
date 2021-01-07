@@ -1012,7 +1012,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       closeOrbit,
 					       pd.value(secname+"/hidden", false).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
-					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
+					       pd.value(secname+"/halo", true).toBool(),
 					       type));
 			newP->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
 
@@ -1036,63 +1036,65 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// At this point the orbit and object type (class Planet and subclasses) have been fixed.
 		// For many objects we have oriented spheroids with rotational parameters.
 
-		// There are two ways of defining the axis orientation: obliquity and ascending node, which was used by Stellarium based on Celestia.
+		// There are two ways of defining the axis orientation:
+		// obliquity and ascending node, which was used by Stellarium already before 2010 (based on Celestia?).
 		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
 		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
-		//double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
-		// Disable rotation for now.
-		double rotPeriod=pd.value(secname+"/rot_periode", 0.).toDouble()/24.;
+		// rot_periode given in hours (from which rotPeriod in days),
+		// The default is useful for many moons in bound rotation
+		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
 		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
-		// 0.20: Use WGCCRE planet North pole data if available
+		// 0.21+: Use WGCCRE planet North pole data if available
 		// NB: N pole for J2000 epoch as defined by IAU (NOT right hand rotation rule)
-		// GZ TODO for 0.20: Make this more flexible with changing axes. and have special functions for more complicated axes.
+		// 0.21+: Only basic motion. Use special functions for more complicated axes.
 		const double J2000NPoleRA  = pd.value(secname+"/rot_pole_ra",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE1 = pd.value(secname+"/rot_pole_de1", 0.).toDouble()*M_PI_180;
-		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees! Basically the same idea as rot_rotation_offset, but W!=rotAngle
-		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // stays in degrees! Basically the same idea as 360/rot_periode
-
-		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
+		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // [degrees]   Basically the same idea as rot_rotation_offset, but W!=rotAngle
+		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // [degrees/d] Basically the same idea as 360/rot_periode
+		if (fabs(J2000NPoleW1) > 0.0) // Patch possibly old period value with a more modern value.
 		{
-			// If available, recompute obliquity and AscNode from the new data.
-			// Old solution: Make this once for J2000.
-			// New in 0.20: Repeat this block in Planet::computeTransMatrix() if required.
-			Vec3d J2000NPole;
-			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
-
-			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
-
-			double lon, lat;
-			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
-
-			rotObliquity = (M_PI_2 - lat);
-			rotAscNode = (lon + M_PI_2);
-
-			qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
-			qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
-			qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
-
-			if (J2000NPoleW0 >0)
-			{
-				// this is NOT just another name for offset!
-				// W0 is counted from the ascending node, but rotOffset from Aries1.
-				// Try this assumption by just counting Offset=W0+90+RA0.
-				rotOffset=J2000NPoleW0 + lon*M_180_PI;
-				qDebug() << "\tRotational offset (degrees): " << rotOffset;
-			}
-			if (J2000NPoleW1 >0)
-			{
-				// this is just another expression for rotational speed.
-				rotPeriod=360.0/J2000NPoleW1;
-				qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
-			}
+			// this is just another expression for rotational speed.
+			rotPeriod=360.0/J2000NPoleW1;
+			qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
 		}
 
-		// rot_periode given in hours (from which rotPeriod in days),
-		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
+//		// Commenting this away has lead to Painter issues and black screen. Now it works without these lines.
+//              FIXME: DELETE THIS BLOCK
+//		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
+//		{
+//			// If available, recompute obliquity and AscNode from the new data.
+//			// Old solution: Make this once for J2000.
+//			// New in 0.20: Repeat this block in Planet::computeTransMatrix() if required.
+//			Vec3d J2000NPole;
+//			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
+//
+//			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
+//
+//			double lon, lat;
+//			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
+//
+//			rotObliquity = (M_PI_2 - lat);
+//			rotAscNode = (lon + M_PI_2);
+//
+//			qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
+//			qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
+//			qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
+//
+//			if (J2000NPoleW0 >0)
+//			{
+//				// this is NOT just another name for offset!
+//				// W0 is counted from the ascending node with ICRF, but rotOffset from orbital plane.
+//				// Try this assumption by just counting Offset=W0+90+RA0.
+//				rotOffset=J2000NPoleW0 + lon*M_180_PI;
+//				qDebug() << "\tRotational offset (degrees): " << rotOffset;
+//			}
+//		}
+
 		// The last parameter is only used to derive how long the orbit should be plotted. It is NOT a rotational element.
+		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		newP->setRotationElements(
 			englishName,
 			rotPeriod,

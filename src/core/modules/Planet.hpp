@@ -229,7 +229,7 @@ public:
 	double getSiderealDay(void) const { if (re.W1!=0.) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
-	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
+	virtual double getSiderealPeriod(void) const { return siderealPeriod; }
 	//! Get duration of mean solar day, in earth days.
 	double getMeanSolarDay(void) const;
 	//! Get albedo
@@ -333,6 +333,10 @@ public:
 	//! An angle of 90° indicates a bright limb on the eastern limb, like an old moon.
 	//! Source: Meeus, Astr.Algorithms (2nd ed.), 48.5.
 	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
+
+	//! Get planetographic coordinates of subsolar and sub-observer points.
+	//! Source: Explanatory Supplement 2013, 10.4.1
+	//QPair<Vec3d, Vec3d> getSubSolarObserverPoints(StelCore *core) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
@@ -577,7 +581,8 @@ protected:
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
 	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
-	RotationElements re;             // Rotation param
+	RotationElements re;             // Rotation and axis orientation parameters
+	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
 	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
