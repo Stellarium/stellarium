@@ -92,13 +92,13 @@ public slots:
 	void setHorizonAltitudeDeg(int alt);
 
 private:
-	bool flagShowReport;
-	bool flagShowGoodNights;
-	bool flagShowBestNight;
-	bool flagShowToday;
-	bool flagShowFullMoon;
-	int twilightAltitudeDeg;
-	int horizonAltitudeDeg;
+	bool flagShowReport = false;
+	bool flagShowGoodNights = false;
+	bool flagShowBestNight = false;
+	bool flagShowToday = false;
+	bool flagShowFullMoon = false;
+	int twilightAltitudeDeg = 0;
+	int horizonAltitudeDeg = 0;
 
 	QSettings* config;
 	ObservabilityDialog* configDialog;
