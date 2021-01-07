@@ -100,14 +100,14 @@ void ObservabilityDialog::createDialogContent()
 	// signlas when settting the slider values.
 	/* connect(ui->fontSize, SIGNAL(sliderMoved(int)),
 	        plugin, SLOT(setFontSize(int))); */
-	/* connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setTwilightAltitude(int)));
+	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setTwilightAltitudeDeg(int)));
 	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
 	        this, SLOT(updateAltitudeLabel(int)));
 	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setHorizonAltitude(int)));
+	        plugin, SLOT(setHorizonAltitudeDeg(int)));
 	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(updateHorizonLabel(int))); */
+	        this, SLOT(updateHorizonLabel(int)));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -187,12 +187,12 @@ void ObservabilityDialog::updateControls()
 	ui->blueSlider->setValue(blue);
 
 	ui->fontSize->setValue(plugin->getFontSize()); */
-	/* int sunAltitude = plugin->getTwilightAltitude();
+	int sunAltitude = plugin->getTwilightAltitude();
 	ui->sunAltitudeSlider->setValue(sunAltitude);
 	updateAltitudeLabel(sunAltitude);
 	int horizonAltitude = plugin->getHorizonAltitude();
 	ui->horizonAltitudeSlider->setValue(horizonAltitude);
-	updateHorizonLabel(horizonAltitude); */
+	updateHorizonLabel(horizonAltitude);
 }
 
 /* void ObservabilityDialog::setColor()
@@ -208,7 +208,7 @@ void ObservabilityDialog::updateControls()
 	Vec3f color(fRed, fGreen, fBlue);
 	GETSTELMODULE(Observability)->setFontColor(color);
 } */
-/* 
+
 void ObservabilityDialog::updateAltitudeLabel(int altitude)
 {
 	// This allows translators to use their own conventions for degree signs.
@@ -220,5 +220,3 @@ void ObservabilityDialog::updateHorizonLabel(int horizon)
 	// This allows translators to use their own conventions for degree signs.
 	ui->horizonAltitudeLabel->setText(q_("Horizon altitude: %1 deg.").arg(horizon));
 }
- */
-

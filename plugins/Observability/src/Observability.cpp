@@ -81,7 +81,8 @@ Observability::Observability()
 
 Observability::~Observability()
 {
-
+	if (configDialog != nullptr)
+		delete configDialog;
 }
 
 void Observability::init()
@@ -107,14 +108,6 @@ double Observability::getCallOrder(StelModuleActionName actionName) const
 	if (actionName == StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10.;
 	return 0.;
-}
-
-void Observability::deinit()
-{
-	if (configDialog != nullptr)
-	{
-		delete configDialog;
-	}
 }
 
 bool Observability::configureGui(bool show)
@@ -156,6 +149,22 @@ void Observability::showFullMoon(bool b)
 	emit flagShowFullMoonChanged(b);
 }
 
+void Observability::setTwilightAltitudeDeg(int alt)
+{
+	twilightAltitudeDeg = alt;
+	// save setting
+	config->setValue("Observability/twilight_altitude", twilightAltitudeDeg);
+	emit twilightAltitudeDegChanged(alt);
+}
+
+void Observability::setHorizonAltitudeDeg(int alt)
+{
+	horizonAltitudeDeg = alt;
+	// save setting
+	config->setValue("Observability/horizon_altitude", horizonAltitudeDeg);
+	emit horizonAltitudeDegChanged(alt);
+}
+
 void Observability::enableReport(bool b)
 {
 	if (b != flagShowReport)
@@ -184,4 +193,6 @@ void Observability::loadSettings()
 	showBestNight(config->value("Observability/show_best_night", true).toBool());
 	showToday(config->value("Observability/show_today", true).toBool());
 	showFullMoon(config->value("Observability/show_full_moon", true).toBool());
+	setTwilightAltitudeDeg(config->value("Observability/twilight_altitude", 0).toInt());
+	setHorizonAltitudeDeg(config->value("Observability/horizon_altitude", 0).toInt());
 }

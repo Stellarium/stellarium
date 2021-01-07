@@ -46,7 +46,6 @@ public:
 	virtual void update(double);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void deinit();
 	virtual bool configureGui(bool show = true);
 
 	//! Restore the plug-in's settings to the default state.
@@ -63,12 +62,21 @@ public:
 	bool getShowToday() { return flagShowToday; }
 	bool getShowFullMoon() { return flagShowFullMoon; }
 
+	//! Get the user-defined Sun altitude at twilight.
+	//! @returns A value in degrees.
+	int getTwilightAltitude() { return twilightAltitudeDeg; }
+
+	//! Get the user-defined altitude of the visual horizon.
+	int getHorizonAltitude() { return horizonAltitudeDeg; }
+
 signals:
 	void flagReportVisibilityChanged(bool visible);
 	void flagShowGoodNightsChanged(bool b);
 	void flagShowBestNightChanged(bool b);
 	void flagShowTodayChanged(bool b);
 	void flagShowFullMoonChanged(bool b);
+	void twilightAltitudeDegChanged(int alt);
+	void horizonAltitudeDegChanged(int alt);
 
 
 public slots:
@@ -80,6 +88,8 @@ public slots:
 	void showBestNight(bool b);
 	void showToday(bool b);
 	void showFullMoon(bool b);
+	void setTwilightAltitudeDeg(int alt);
+	void setHorizonAltitudeDeg(int alt);
 
 private:
 	bool flagShowReport;
@@ -87,6 +97,8 @@ private:
 	bool flagShowBestNight;
 	bool flagShowToday;
 	bool flagShowFullMoon;
+	int twilightAltitudeDeg;
+	int horizonAltitudeDeg;
 
 	QSettings* config;
 	ObservabilityDialog* configDialog;

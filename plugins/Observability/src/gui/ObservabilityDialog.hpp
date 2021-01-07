@@ -47,10 +47,10 @@ public slots:
 
 private slots:
 	//! Read the color values from the sliders and set the font color.
-/* 	void setColor();
+	//void setColor();
 	
 	void updateAltitudeLabel(int altitude);
-	void updateHorizonLabel(int horizon); */
+	void updateHorizonLabel(int horizon);
 	//! Updates the displayed values of controls from the plug-in.
 	//! Called when the configuration is changed.
 	void updateControls();
