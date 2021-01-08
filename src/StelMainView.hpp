@@ -71,6 +71,7 @@ public:
 		QString renderer;
 		QOpenGLContext* mainContext;
 		QOpenGLFunctions* functions;
+		bool supportsLuminanceTextures = false;
 	};
 
 	StelMainView(QSettings* settings);
