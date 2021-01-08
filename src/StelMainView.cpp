@@ -802,6 +802,10 @@ void StelMainView::init()
 	glInfo.functions = glInfo.mainContext->functions();
 	glInfo.vendor = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_VENDOR)));
 	glInfo.renderer = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_RENDERER)));
+	const auto format = glInfo.mainContext->format();
+	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
+									   format.majorVersion() < 3;
+	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 
 	gui = new StelGui();
 
