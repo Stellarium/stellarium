@@ -336,7 +336,7 @@ public:
 
 	//! Get planetographic coordinates of subsolar and sub-observer points.
 	//! Source: Explanatory Supplement 2013, 10.4.1
-	//QPair<Vec3d, Vec3d> getSubSolarObserverPoints(StelCore *core) const;
+	QPair<Vec3d, Vec3d> getSubSolarObserverPoints(StelCore *core) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
@@ -580,11 +580,10 @@ protected:
 	QString nativeName;              // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
-	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation and axis orientation parameters
 	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
 	double equatorialRadius;         // Planet's equatorial radius in AU
-	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
+	double oneMinusOblateness;       // Geometric flattening f=1-(polar radius)/(equatorial radius) (ExplanSup2013 10.1)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.

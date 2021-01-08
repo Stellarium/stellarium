@@ -1498,7 +1498,8 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	// For Earth, this is sidereal time for Greenwich, i.e. hour angle between meridian and First Point of Aries.
 	// OLD: Return angle between ascending node of planet's equator and (J2000) ecliptic (?)
 	// NEW: For the planets, this should return angle W between ascending node of the planet's equator with ICRF equator and the planet's zero meridian.
-	axisRotation = static_cast<float>(getSiderealTime(JD, JDE));
+	re.currentAxisW=getSiderealTime(JD, JDE); // Store to later compute central meridian data etc.
+	axisRotation = static_cast<float>(re.currentAxisW);
 
 	// We can inject a proper precession plus even nutation matrix in this stage, if available.
 	if (englishName=="Earth")
@@ -1539,9 +1540,10 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		// Maybe later: With DE43x, get orientation from ephemeris lookup.
 		re.corrOri(t, T, &J2000NPoleRA, &J2000NPoleDE);
 
-		debugAid = QString("Axis in ICRF J2000: &alpha;: %1 &delta;: %2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE));
+		debugAid = QString("Axis in ICRF J2000: &alpha;: %1 &delta;: %2, W: %3<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE), QString::number(re.currentAxisW, 'f', 3));
 
 		// Update the elements for planets where Moon orbits are given relative to planet orbits!
+		// TODO: Double check correctness, or even delete as unnecessary?
 		Vec3d J2000NPole;
 		StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 		Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
@@ -1553,9 +1555,9 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		debugAid.append( QString("CTMxR: Retransform: Pole in VSOP87 coords: &lambda;=%1, &beta;=%2<br/>").arg(StelUtils::radToDecDegStr(lon), StelUtils::radToDecDegStr(lat)));
 		debugAid.append( QString("CTMxR: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
 
-		// Decide whether we have to keep and want to show these data at all.
-		//re.currentAxisRA=J2000NPoleRA;
-		//re.currentAxisDE=J2000NPoleDE;
+		// keep for computation of central meridian etc.
+		re.currentAxisRA=J2000NPoleRA;
+		re.currentAxisDE=J2000NPoleDE;
 
 		// The next call ONLY sets rotLocalToParent
 		setRotEquatorialToVsop87(StelCore::matJ2000ToVsop87              // From VSOP87 into ICRS
@@ -1650,8 +1652,6 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		const double T=t/36525.0;
 		double w=re.W0+remainder(t*re.W1, 360.); // W is given and also returned in degrees, clamped to small angles so that adding small corrections makes sense.
 		w+=re.corrW(t, T); // Apply the bespoke corrections from Explanatory Supplement 2013/WGCCRE2009/WGCCRE2015.
-
-		// re.currentAxisW=w; // Maybe allow this later?
 		return w;
 	}
 
@@ -1820,21 +1820,58 @@ float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
 }
 
 
-//// Get planetographic coordinates of subsolar and sub-observer points.
-//// Source: Explanatory Supplement 2013, 10.4.1
-//QPair<Vec3d, Vec3d> Planet::getSubSolarObserverPoints(StelCore *core) const
-//{
-//	// When using the last computed elements, light time should be accounted for.
-//	const Vec3d r=  StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
-//	const Vec3d re= StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
-//	const Vec3d dr= r-re;
-//	// TODO: These should be transformed from J2000 to equinox of date by application of frame bias, precession and nutation. For now, we keep J2000
-//	Vec3d s=-r;  s.normalize();
-//	Vec3d e=-dr; e.normalize();
-//
-//
-//}
-//
+// Get planetographic coordinates of subsolar and sub-observer points.
+// Source: Explanatory Supplement 2013, 10.4.1
+QPair<Vec3d, Vec3d> Planet::getSubSolarObserverPoints(StelCore *core) const
+{
+	QPair<Vec3d, Vec3d>ret;
+	// When using the last computed elements, light time should be accounted for.
+	const Vec3d r=  StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
+	const Vec3d r_e= StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
+	const Vec3d dr= r-r_e;
+	// TODO: These should be transformed from J2000 to equinox of date by application of frame bias, precession and nutation. For now, we keep J2000
+	Vec3d s=-r;  s.normalize();
+	Vec3d e=-dr; e.normalize();
+	const double sina0=sin(re.currentAxisRA);
+	const double cosa0=cos(re.currentAxisRA);
+	const double sind0=sin(re.currentAxisDE);
+	const double cosd0=cos(re.currentAxisDE);
+	// sub-earth (actually sub-observer) point
+	Vec3d n(cosd0*cosa0, cosd0*sina0, sind0);
+	const double sinW=sin(re.currentAxisW*M_PI_180);
+	const double sindw=sinW*cos(re.currentAxisDE);
+	const double cosdw=cos(asin(sindw));
+	const double sinpsi=sinW*sind0/cosdw;
+	const double cospsi=cos(re.currentAxisW*M_PI_180)/cosdw;
+	const double psi=atan2(sinpsi, cospsi);
+	const double aw=re.currentAxisRA+M_PI_2+psi;
+	const Vec3d w(cosdw*cos(aw), cosdw*sin(aw), sindw);
+	const Vec3d y=w^n;
+	const Vec3d subEarth(e.dot(w), e.dot(y), e.dot(n));
+	const double phi_e=asin(subEarth[2]);
+	const double phiP_e=atan2(tan(phi_e), 1-oneMinusOblateness*oneMinusOblateness);
+	ret.first.set(phi_e*M_180_PI, phiP_e*M_180_PI, atan2(subEarth[1], subEarth[0])*M_180_PI );
+
+//	// Subsolar point:
+//	Vec3d n(cosd0*cosa0, cosd0*sina0, sind0);
+//	const double sinW=sin(re.currentAxisW*M_PI_180);
+//	const double sindw=sinW*cos(re.currentAxisDE);
+//	const double cosdw=cos(asin(sindw));
+//	const double sinpsi=sinW*sind0/cosdw;
+//	const double cospsi=cos(re.currentAxisW*M_PI_180)/cosdw;
+//	const double psi=atan2(sinpsi, cospsi);
+//	const double aw=re.currentAxisRA+M_PI_2+psi;
+//	const Vec3d w(cosdw*cos(aw), cosdw*sin(aw), sindw);
+//	const Vec3d y=w^n;
+//	const Vec3d subEarth(e.dot(w), e.dot(y), e.dot(n));
+//	const double phi_e=asin(subEarth[2]);
+//	const double phiP_e=atan2(tan(phi_e), 1-oneMinusOblateness*oneMinusOblateness);
+//	ret.first.set(phi_e*M_180_PI, phiP_e*M_180_PI, atan2(subEarth[1], subEarth[0])*M_180_PI );
+
+	ret.second.set(0, 0, 0);
+	return ret;
+}
+
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
 double Planet::getElongation(const Vec3d& obsPos) const
