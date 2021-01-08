@@ -268,50 +268,32 @@ double RotationElements::corrWMars(const double d, const double T)
 	+0.584542*sin(M_PI_180*( 95.391654 + remainder(    0.5042615*T, 360.)));
 }
 
+// The default W delivers SystemII longitude.
+// We have to shift by GRS position and texture position.
+// The final value will no longer be W but the rotation value required to show the GRS.
 double RotationElements::corrWJupiter(const double d, const double T)
 {
 	Q_UNUSED(T)
-	const double JDE=d+2451545.;
-	// The default W delivers SystemII longitude.
-	// We have to shift by GRS position and texture position.
-	// The final value will no longer be W but the rotation value required to show the GRS.
-	//
-	// CM2 considerations from http://www.projectpluto.com/grs_form.htm
-	// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
-	//const double rad  = M_PI/180.;
-	//double jup_mean = (JDE - 2455636.938) * 360. / 4332.89709;
-	//double eqn_center = 5.55 * sin( rad*jup_mean);
-	//double angle = (JDE - 2451870.628) * 360. / 398.884 - eqn_center;
-	////double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
-	//double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
-
-	// GZ These corrections above are actually the phase angle of Jupiter (11 degree term, shown by our 3D geometry),
-	// all other terms of above are approximate and light-time corrections.
-	// The notion of CMII also indicates "as seen from earth", and presumably
-	// therefore the given rotation value of 870.186 differs from the official 870.270 to include one less Jupiter rotation per revolution.
-	// These correction terms are required for earth-based observations, but we do the math and 3d-based view geometry anyway!
-	// --> None of these correction terms need to be applied!
-	// But the CM2 formula includes an average light time correction for Jupiter, which we have to take off here.
-	// This assumes a start value which includes average light time.
-	static const double correction= 870.1869147 * 5.202561*AU / SPEED_OF_LIGHT / 86400.0;
-	double cm2=181.62 + 870.1869147 * JDE + correction; // Central Meridian II
-	cm2=std::fmod(cm2, 360.0);
-	// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
-	// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
+	const double JDE=d+J2000;
+	// Note that earth-bound computations of "Central Meridian, System II" do not apply here.
+	// For comparison, see http://www.projectpluto.com/grs_form.htm
+	// Instead we patch W_II.
+	// https://skyandtelescope.org/observing/interactive-sky-watching-tools/transit-times-of-jupiters-great-red-spot/ writes:
+	// These predictions assume the Red Spot was at Jovian System II longitude 349° in January 2021 and continues to drift 1.75° per month,
+	// based on historical trends noted by JUPOS. If the GRS moves elsewhere, it will transit 1 2/3 minutes late for every 1° of longitude greater
+	// than that used in this tool or 1 2/3 minutes early for every 1° less than the longitude in this tool.
 	// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
-	// Updated 2018-08, note as checkpoint that GRS longitude was given as 292d in S&T August 2018.
+	// Updated 01/2021 noting LII=349 and drift 1.75 degrees/month.
 	double longitudeGRS = (flagCustomGrsSettings ?
 		customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25 :
-		216+1.25*( JDE - 2456908)/30);
-	// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
-	return cm2 - longitudeGRS  +  (187./512.)*360.; // Last term is pixel position of GRS in texture.
+		349+1.75*(JDE - 2459216.)/30.);
+	return - longitudeGRS  +  ((187./512.)*360.-90.); // Last term is pixel position of GRS in texture, and a spherical coordinate offset for the texture.
 	// To verify:
 	// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
 	//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
 	//	  2013-05-01 10:29 UT    http://astro.christone.net/jupiter/jupiter2012/jupiter20130501.jpg
 	//        2012-10-26 00:12 UT at http://www.lunar-captures.com//jupiter2012_files/121026_JupiterGRS_Tar.jpg
 	//	  2011-08-28 02:29 UT at http://www.damianpeach.com/jup1112/2011_08_28rgb.jpg
-	// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
 }
 
 double RotationElements::corrWNeptune(const double d, const double T)

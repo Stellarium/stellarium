@@ -48,7 +48,7 @@
 //! If rot_pole... values are given, then they are ICRF and transformed on the fly to VSOP87, stored in here.
 //!
 //! Since 0.21 we use the WGCCRE elements and orientations directly, so that axes behave properly.
-//! In addition, the objects with more complicated element behaviour are updated with special functions in those two functions.
+//! In addition, the objects with more complicated element behaviour are updated with two special functions.
 //! New keys in ssystem_*.ini, their storage in RotationElements, and their equivalents in the IAU report:
 //! rot_pole_ra  [degrees]     re.ra0 [rad]         constant term for alpha_0
 //! rot_pole_de  [degrees]     re.ra1 [rad/ct]      constant term for delta_0
@@ -95,17 +95,10 @@ public:
 	// These values are only in the modern algorithms. invalid if ra0=0.
 	double W0;             // [deg] mean longitude of prime meridian along equator measured from intersection with ICRS plane at epoch.
 	double W1;             // [deg/d] mean longitude motion. W=W0+d*W1.
-	// The last 3 elements can be activated to store the computed values and e.g. show them in the InfoString.
-	//double currentAxisRA;  // [rad] Mostly debug aid (infostring during development). Usual model RA=RA0+d*RA1(+corrections)
-	//double currentAxisDE;  // [rad] Mostly debug aid (infostring during development). Usual model DE=DE0+d*DE1(+corrections)
-	//double currentAxisW;   // [deg] Mostly debug aid (infostring during development). Usual model W =W0+d*W1(+corrections)
+	double currentAxisRA;  // [rad] Mostly for infostring: RA=RA0+d*RA1(+corrections)
+	double currentAxisDE;  // [rad] Mostly for infostring: DE=DE0+d*DE1(+corrections)
+	double currentAxisW;   // [deg] Mostly for infostring: W =W0+d*W1(+corrections)
 
-	//! Finetuning correction functions. These functions are attached to the planets in Planet::setRotationElements()
-	//! and called at the right places. This avoids ugly sequences of name query ifelses.
-
-	// arguments are d=JDE-J2000, T=d/36525, J2000NPoleRA, J2000NPoleDE
-	typedef double (*axisRotFuncType)(const double, const double);
-	typedef void   (*axisOriFuncType)(const double, const double, double*, double*);
 	//! 0.21+: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14,
 	//! updated in WGCCRE reports 2009 and 2015.
 	//! Others require frequent updates, depending on jde-J2000. (Moon etc.)
@@ -191,16 +184,24 @@ public:
 	//! The values are immediately converted to radians.
 	static void updatePlanetCorrections(const double JDE, const PlanetCorrection planet);
 
+	//! Finetuning correction functions. These functions are attached to the planets in Planet::setRotationElements()
+	//! and called at the right places. This avoids ugly sequences of name query ifelses.
+	//! arguments are d=JDE-J2000, T=d/36525, J2000NPoleRA, J2000NPoleDE
+	typedef double (*axisRotFuncType)(const double, const double);
+	typedef void   (*axisOriFuncType)(const double, const double, double*, double*);
 	axisRotFuncType corrW;
 	axisOriFuncType corrOri;
 	static const QMap<QString, axisRotFuncType>axisRotCorrFuncMap;
 	static const QMap<QString, axisOriFuncType>axisOriCorrFuncMap;
-	// These functions can be used as corrW.
+
+	//! These corr* functions can be used as corrW.
 	static double corrWnil(const double d, const double T){Q_UNUSED(d) Q_UNUSED(T) return 0;}
 	static double corrWMoon(const double d, const double T);
 	static double corrWMercury(const double d, const double T);
 	static double corrWMars(const double d, const double T);
-	// This should also provide the rotation correction to show the GRS
+	//! The default W delivers SystemII longitude.
+	//! We have to shift by GRS position and texture position.
+	//! The final value will no longer be W but the rotation value required to show the GRS.
 	static double corrWJupiter(const double d, const double T);
 	static double corrWNeptune(const double d, const double T);
 	static double corrWPhobos(const double d, const double T);
@@ -239,7 +240,7 @@ public:
 	static double corrWLarissa(const double d, const double T);
 	static double corrWProteus(const double d, const double T);
 
-	// These functions can be used as corrOri.
+	//! These functions can be used as corrOri.
 	static void corrOriNil(const double, const double, double*, double*){} // Do nothing.
 	static void corrOriMoon(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 	static void corrOriMars(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
@@ -281,10 +282,10 @@ public:
 	static void corrOriLarissa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 	static void corrOriProteus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 
-	static bool flagCustomGrsSettings;	// Use custom settings for calculation of position of Great Red Spot?
-	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
-	static double customGrsLongitude;	// Longitude of Great Red Spot (System II, degrees)
-	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
+	static bool flagCustomGrsSettings;	//!< Use custom settings for calculation of position of Great Red Spot?
+	static double customGrsJD;		//!< Initial JD (epoch) for calculation of position of Great Red Spot
+	static double customGrsLongitude;	//!< Longitude of Great Red Spot at customGrsJD (System II, degrees)
+	static double customGrsDrift;		//!< Annual drift of Great Red Spot position (degrees)
 };
 
 #endif // ROTATIONELEMENTS_HPP
