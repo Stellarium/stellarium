@@ -1366,10 +1366,6 @@ void Planet::setRotationElements(const QString name,
 	re.W0=_w0;
 	re.W1=_w1;
 
-	//re.currentAxisRA=0.; // Set some primitive defaults.
-	//re.currentAxisDE=0.;
-	//re.currentAxisW=0.;
-
 	// Assign fine-tuning corrective functions for axis rotation angle W and orientation.
 	re.corrW  =RotationElements::axisRotCorrFuncMap.value(name, &RotationElements::corrWnil);
 	re.corrOri=RotationElements::axisOriCorrFuncMap.value(name, &RotationElements::corrOriNil);
@@ -1489,7 +1485,7 @@ void Planet::computePosition(const double dateJDE)
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
 // In case of the planets, this makes the axis point to their respective celestial poles.
-// TODO: Verify for the other planets if their axes are relative to J2000 ecliptic (VSOP87A XY plane) or relative to (precessed) ecliptic of date?
+// If only old-style rotational elements exist, we use the original algorithm (as of ~2010).
 void Planet::computeTransMatrix(double JD, double JDE)
 {
 	QString debugAid; // We have to collect all debug strings to keep some order in the output.
@@ -1540,21 +1536,6 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		// Maybe later: With DE43x, get orientation from ephemeris lookup.
 		re.corrOri(t, T, &J2000NPoleRA, &J2000NPoleDE);
 
-		debugAid = QString("Axis in ICRF J2000: &alpha;: %1 &delta;: %2, W: %3<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE), QString::number(re.currentAxisW, 'f', 3));
-
-		// Update the elements for planets where Moon orbits are given relative to planet orbits!
-		// TODO: Double check correctness, or even delete as unnecessary?
-		Vec3d J2000NPole;
-		StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
-		Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
-		double lon, lat;
-		StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
-		re.obliquity = (M_PI_2 - lat);
-		re.ascendingNode = (lon + M_PI_2);
-
-		debugAid.append( QString("CTMxR: Retransform: Pole in VSOP87 coords: &lambda;=%1, &beta;=%2<br/>").arg(StelUtils::radToDecDegStr(lon), StelUtils::radToDecDegStr(lat)));
-		debugAid.append( QString("CTMxR: new re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
-
 		// keep for computation of central meridian etc.
 		re.currentAxisRA=J2000NPoleRA;
 		re.currentAxisDE=J2000NPoleDE;
@@ -1564,8 +1545,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 					 * Mat4d::zrotation(J2000NPoleRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
 					 * Mat4d::xrotation(M_PI_2-J2000NPoleDE) // node angle
 					 );
-		debugAid.append( QString("CTMx: use WGCCRE: new re.&alpha;=%1, re.&delta;=%2<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE)));
-
+		debugAid=QString("Axis in ICRF: &alpha;: %1 &delta;: %2, W: %3<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE), QString::number(re.currentAxisW, 'f', 3));
 	}
 	else //	RotationElements::Traditional
 	{
@@ -1574,7 +1554,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 		// No other Planet had precessionRate defined, so it's safe to remove it here.
 		//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
 		rotLocalToParent = Mat4d::zrotation(re.ascendingNode) * Mat4d::xrotation(re.obliquity);
-		debugAid.append( QString("CTMx: OLDSTYLE: re.obliquity=%1, re.ascendingNode=%2<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode)));
+		debugAid=QString("Axis (OLDSTYLE): re.obliquity=%1, re.ascendingNode=%2, axisrotation=%3<br/>").arg(StelUtils::radToDecDegStr(re.obliquity), StelUtils::radToDecDegStr(re.ascendingNode), QString::number(axisRotation, 'f', 3));
 	}
 	addToExtraInfoString(DebugAid, debugAid);
 }

@@ -80,10 +80,11 @@ public:
 	};
 
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.),
-		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.) {}
+		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.),
+		currentAxisRA(0.), currentAxisDE(0.), currentAxisW(0.) {}
 	double period;          // [deprecated] (sidereal) rotation period [earth days]
 	double offset;          // [deprecated] rotation at epoch  [degrees]
-	double epoch;          // JDE (JD TT) of epoch for these elements
+	double epoch;           // JDE (JD TT) of epoch for these elements
 	double obliquity;       // [deprecated] tilt of rotation axis w.r.t. ecliptic [radians]
 	double ascendingNode;   // [deprecated] long. of ascending node of equator on the ecliptic [radians]
 	// new elements for 0.21+: The 6/9 new entries after the switch are enough for many objects. More corrections can be applied where required.
@@ -97,7 +98,7 @@ public:
 	double W1;             // [deg/d] mean longitude motion. W=W0+d*W1.
 	double currentAxisRA;  // [rad] Mostly for infostring: RA=RA0+d*RA1(+corrections)
 	double currentAxisDE;  // [rad] Mostly for infostring: DE=DE0+d*DE1(+corrections)
-	double currentAxisW;   // [deg] Mostly for infostring: W =W0+d*W1(+corrections)
+	double currentAxisW;   // [deg] Mostly for infostring: W =W0 +d*W1 (+corrections)
 
 	//! 0.21+: Axes of planets and moons require terms depending on T=(jde-J2000)/36525, described in Explanatory Supplement 2013, Tables 10.1 and 10.10-14,
 	//! updated in WGCCRE reports 2009 and 2015.

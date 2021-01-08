@@ -803,7 +803,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				{ "Neptune",    19412.259776},
 				{ "Pluto",  135836683.768617}};
 
-			// when the parent is the sun use ecliptic rather than sun equator:
+			// Construct orbital elements relative to the parent body. This will construct orbits for J2000 only.
+			// Some planet axes move very slowly, this effect could be modelled by replicating these lines
+			// after recomputing obliquity and node (below) in Planet::computeTransMatrix().
+			// The effect is negligible for several millennia, though.
+			// When the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
@@ -837,7 +841,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							   parentRotObliquity,     // [radians]
 							   parent_rot_asc_node,    // [radians]
 							   parent_rot_j2000_longitude, // [radians]
-							   1./massMap.value(parent->englishName, 1.));
+							   1./massMap.value(parent->englishName, 1.)); // central mass [solar masses]
 			orbits.push_back(orb);
 
 			orbitPtr = orb;
@@ -1047,7 +1051,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		// 0.21+: Use WGCCRE planet North pole data if available
 		// NB: N pole for J2000 epoch as defined by IAU (NOT right hand rotation rule)
-		// 0.21+: Only basic motion. Use special functions for more complicated axes.
+		// Define only basic motion. Use special functions for more complicated axes.
 		const double J2000NPoleRA  = pd.value(secname+"/rot_pole_ra",  0.).toDouble()*M_PI_180;
 		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
 		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
@@ -1058,40 +1062,40 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		{
 			// this is just another expression for rotational speed.
 			rotPeriod=360.0/J2000NPoleW1;
-			qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
 		}
 
-//		// Commenting this away has lead to Painter issues and black screen. Now it works without these lines.
-//              FIXME: DELETE THIS BLOCK
-//		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
-//		{
-//			// If available, recompute obliquity and AscNode from the new data.
-//			// Old solution: Make this once for J2000.
-//			// New in 0.20: Repeat this block in Planet::computeTransMatrix() if required.
-//			Vec3d J2000NPole;
-//			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
-//
-//			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
-//
-//			double lon, lat;
-//			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
-//
-//			rotObliquity = (M_PI_2 - lat);
-//			rotAscNode = (lon + M_PI_2);
-//
-//			qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
-//			qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
-//			qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
-//
-//			if (J2000NPoleW0 >0)
-//			{
-//				// this is NOT just another name for offset!
-//				// W0 is counted from the ascending node with ICRF, but rotOffset from orbital plane.
-//				// Try this assumption by just counting Offset=W0+90+RA0.
-//				rotOffset=J2000NPoleW0 + lon*M_180_PI;
-//				qDebug() << "\tRotational offset (degrees): " << rotOffset;
-//			}
-//		}
+		// IMPORTANT: For the planet moons with orbits relative to planets' equator plane,
+		// re-compute the important bits from the updated axis elements.
+		// Reactivated to re-establish Pluto/Charon lock #153
+		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
+		{
+			// If available, recompute obliquity and AscNode from the new data.
+			// Solution since 0.16: Make this once for J2000.
+			// Optional (future?): Repeat this block in Planet::computeTransMatrix() for planets with moving axes and update all Moons' KeplerOrbit if required.
+			Vec3d J2000NPole;
+			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
+
+			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
+
+			double lon, lat;
+			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
+
+			rotObliquity = (M_PI_2 - lat);
+			rotAscNode = (lon + M_PI_2);
+
+			//qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
+			//qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
+			//qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
+
+			if (J2000NPoleW0 >0)
+			{
+				// W0 is counted from the ascending node with ICRF, but rotOffset from orbital plane.
+				// Try this assumption by just counting Offset=W0+90+RA0.
+				rotOffset=J2000NPoleW0 + lon*M_180_PI;
+				//qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
+				//qDebug() << "\tRotational offset (degrees): " << rotOffset;
+			}
+		}
 
 		// The last parameter is only used to derive how long the orbit should be plotted. It is NOT a rotational element.
 		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
