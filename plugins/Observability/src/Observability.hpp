@@ -61,6 +61,7 @@ public:
 	bool getShowGoodNights() { return flagShowGoodNights; }
 	bool getShowToday() { return flagShowToday; }
 	bool getShowFullMoon() { return flagShowFullMoon; }
+	bool getShowAcroCos() { return flagShowAcroCos; }
 
 	//! Get the user-defined Sun altitude at twilight.
 	//! @returns A value in degrees.
@@ -75,6 +76,7 @@ signals:
 	void flagShowBestNightChanged(bool b);
 	void flagShowTodayChanged(bool b);
 	void flagShowFullMoonChanged(bool b);
+	void flagShowAcroCosChanged(bool b);
 	void twilightAltitudeDegChanged(int alt);
 	void horizonAltitudeDegChanged(int alt);
 
@@ -88,6 +90,7 @@ public slots:
 	void showBestNight(bool b);
 	void showToday(bool b);
 	void showFullMoon(bool b);
+	void showAcroCos(bool b);
 	void setTwilightAltitudeDeg(int alt);
 	void setHorizonAltitudeDeg(int alt);
 
@@ -97,6 +100,7 @@ private:
 	bool flagShowBestNight = false;
 	bool flagShowToday = false;
 	bool flagShowFullMoon = false;
+	bool flagShowAcroCos = false;
 	int twilightAltitudeDeg = 0;
 	int horizonAltitudeDeg = 0;
 

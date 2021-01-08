@@ -149,6 +149,14 @@ void Observability::showFullMoon(bool b)
 	emit flagShowFullMoonChanged(b);
 }
 
+void Observability::showAcroCos(bool b)
+{
+	flagShowAcroCos = b;
+	// save setting
+	config->setValue("Observability/show_acro_cos", flagShowAcroCos);
+	emit flagShowAcroCosChanged(b);
+}
+
 void Observability::setTwilightAltitudeDeg(int alt)
 {
 	twilightAltitudeDeg = alt;
@@ -193,6 +201,7 @@ void Observability::loadSettings()
 	showBestNight(config->value("Observability/show_best_night", true).toBool());
 	showToday(config->value("Observability/show_today", true).toBool());
 	showFullMoon(config->value("Observability/show_full_moon", true).toBool());
+	showAcroCos(config->value("Observability/show_acro_cos", true).toBool());
 	setTwilightAltitudeDeg(config->value("Observability/twilight_altitude", 0).toInt());
 	setHorizonAltitudeDeg(config->value("Observability/horizon_altitude", 0).toInt());
 }

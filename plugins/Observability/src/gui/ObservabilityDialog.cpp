@@ -80,8 +80,8 @@ void ObservabilityDialog::createDialogContent()
 	// so we avoid an endless loop when setting the value in updateControls().
 	connect(ui->todayCheckBox, SIGNAL(clicked(bool)),
 	        plugin, SLOT(showToday(bool)));
-	/* connect(ui->acroCosCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableAcroCosField(bool))); */
+	connect(ui->acroCosCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(showAcroCos(bool)));
 	connect(ui->oppositionCheckBox, SIGNAL(clicked(bool)),
 	        plugin, SLOT(showBestNight(bool)));
 	connect(ui->goodNightsCheckBox, SIGNAL(clicked(bool)),
@@ -171,7 +171,7 @@ void ObservabilityDialog::updateControls()
 	Observability* plugin = GETSTELMODULE(Observability);
 	
 	ui->todayCheckBox->setChecked(plugin->getShowToday());
-	//ui->acroCosCheckBox->setChecked(plugin->getShowFlags(2));
+	ui->acroCosCheckBox->setChecked(plugin->getShowAcroCos());
 	ui->goodNightsCheckBox->setChecked(plugin->getShowGoodNights());
 	ui->oppositionCheckBox->setChecked(plugin->getShowBestNight());
 	ui->fullMoonCheckBox->setChecked(plugin->getShowFullMoon());
