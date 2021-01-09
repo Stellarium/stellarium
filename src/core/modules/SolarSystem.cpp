@@ -1111,10 +1111,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			J2000NPoleDE,
 			J2000NPoleDE1,
 			J2000NPoleW0,
-			J2000NPoleW1,
+			J2000NPoleW1);
+		newP->setSiderealPeriod(
 			pd.value(secname+"/orbit_visualization_period",
 				 fabs(pd.value(secname+"/orbit_Period",
-					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble()); // TODO: Get rid of the last parameter!
+					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble());
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;

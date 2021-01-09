@@ -1350,8 +1350,7 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 // Set the rotational elements of the planet body.
 void Planet::setRotationElements(const QString name,
 				 const double _period, const double _offset, const double _epoch, const double _obliquity, const double _ascendingNode,
-				 const double _ra0, const double _ra1, const double _de0, const double _de1, const double _w0, const double _w1,
-				 const double _siderealPeriod)
+				 const double _ra0, const double _ra1, const double _de0, const double _de1, const double _w0, const double _w1)
 {
 	re.period = _period;
 	re.offset = _offset;
@@ -1369,8 +1368,11 @@ void Planet::setRotationElements(const QString name,
 	// Assign fine-tuning corrective functions for axis rotation angle W and orientation.
 	re.corrW  =RotationElements::axisRotCorrFuncMap.value(name, &RotationElements::corrWnil);
 	re.corrOri=RotationElements::axisOriCorrFuncMap.value(name, &RotationElements::corrOriNil);
+}
 
-	siderealPeriod = _siderealPeriod;
+void Planet::setSiderealPeriod(const double siderealPeriod)
+{
+	this->siderealPeriod = siderealPeriod;
 	if (orbitPtr && pType!=isObserver)
 	{
 		const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
@@ -1378,7 +1380,7 @@ void Planet::setRotationElements(const QString name,
 		if (semiMajorAxis>0 && eccentricity<0.9)
 		{
 			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
-			siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
+			this->siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
 			//qDebug() << re.siderealPeriod;
 			closeOrbit=true;
 		}

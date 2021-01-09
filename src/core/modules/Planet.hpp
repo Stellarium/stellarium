@@ -219,17 +219,19 @@ public:
 	//! Get the equator radius of the planet in AU.
 	//! @return the equator radius of the planet in astronomical units.
 	double getEquatorialRadius(void) const {return equatorialRadius;}
-	//! Get the value (1-f) for oblateness f.
+	//! Get the value (1-f) for oblateness f=polarRadius/equatorialRadius.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
 	//! Get the polar radius of the planet in AU.
 	//! @return the polar radius of the planet in astronomical units.
 	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
-	//! Get duration of sidereal day
-	//! Get duration of sidereal day (earth days, may come from rot_periode or orbit_period (for moons) from ssystem.ini)
+	//! Get duration of sidereal day (earth days, may come from rot_periode or orbit_period (for moons) from ssystem_*.ini)
 	double getSiderealDay(void) const { if (re.W1!=0.) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return siderealPeriod; }
+	//! set duration of sidereal year. Also sets deltaOrbitJDE and may set closeOrbit for Planet objects which have KeplerOrbits.
+	//! siderealPeriod [earth days] orbital duration.
+	void setSiderealPeriod(const double siderealPeriod);
 	//! Get duration of mean solar day, in earth days.
 	double getMeanSolarDay(void) const;
 	//! Get albedo
@@ -292,13 +294,11 @@ public:
 	//! de_pole=_de0 + T*_de1. ra and de values to be stored in [rad]
 	//! _w0, _w1 to be given in degrees!
 	//! If _ra0 is not zero, we understand WGCCRE data ra0, ra1, de0, de1, w0, w1 are used.
-	//! _siderealPeriod [earth days] orbital duration. THIS DOES NOT BELONG HERE!
 	void setRotationElements(const QString name, const double _period, const double _offset, const double _epoch,
 				 const double _obliquity, const double _ascendingNode,
 				 const double _ra0, const double _ra1,
 				 const double _de0, const double _de1,
-				 const double _w0,  const double _w1,
-				 const double _siderealPeriod);
+				 const double _w0,  const double _w1);
 
 	//! Note: The only place where this is used is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotAscendingNode(void) const {return re.ascendingNode; }
