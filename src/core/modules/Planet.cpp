@@ -436,6 +436,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
+	const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	const double distanceAu = getJ2000EquatorialPos(core).length();
@@ -492,9 +494,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Debug help.
 	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
 
-//#ifndef NDEBUG
-	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
-	// TODO: maybe separate this out into:
+#ifndef NDEBUG
+	// This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
+	// maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
 	// For now: add to EclipticCoordJ2000 group
 	if (flags&EclipticCoordJ2000)
@@ -506,18 +508,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
 		// TRANSLATORS: Ecliptical rectangular coordinates
 		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
-
-		//if (re.method==RotationElements::WGCCRE)
-		//	oss << q_("DEBUG: Rotation angle of Prime Meridian (angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
-		//else
-		//	oss << q_("DEBUG: Sidereal Time of Prime Meridian (NOT angle W): %1°").arg(QString::number(getSiderealTime(core->getJD(), core->getJDE()), 'f', 3)) << "<br>";
-		//oss << q_("DEBUG: Axis (RA/Dec): %1°/%2°").arg(QString::number(getCurrentAxisRA()*M_180_PI, 'f', 6), QString::number(getCurrentAxisDE()*M_180_PI, 'f', 6)) << "<br>";
-		//oss << q_("DEBUG: RotObliquity: %1°").arg(QString::number(re.obliquity*M_180_PI, 'f', 6)) << "<br>";
-
-
-		//oss << QString("DEBUG: Planet using <strong>%1</strong> axis computation<br>").arg(re.method==RotationElements::WGCCRE?"WGCCRE":"traditional");
 	}
-//#endif
+#endif
 
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
@@ -606,13 +598,104 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
 			}
 			const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
-			oss << QString("%1: %2<br/>").arg(q_("Position angle of bright limb"), StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0)));
+			QString chiStr;
+			if (withDecimalDegree)
+				chiStr=StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0), 1);
+			else
+				chiStr=StelUtils::radToDmsStr(chi, false);
+			if (withTables)
+			{
+				oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position angle of bright limb"), chiStr);
+			}
+			else
+				oss << QString("%1: %2<br/>").arg(q_("Position angle of bright limb"), chiStr);
 
-			// Everything around libration:
+			// Everything around libration: This currently computes those values separately, not from our geometry.
+			// Later, we should get the relevant values directly from our model!
 			const double jde=core->getJDE();
 			const double T=(jde-2451545.0)/36525.0;
 			double Lp, D, M, Mp, E, F, Omega, lBogus, bBogus, rBogus;
-			computeMoonAngles(core->getJDE(), &Lp, &D, &M, &Mp, &E, &F, &Omega, &lBogus, &bBogus, &rBogus, true);
+			computeMoonAngles(jde, &Lp, &D, &M, &Mp, &E, &F, &Omega, &lBogus, &bBogus, &rBogus, true);
+			double dPsi, dEps;
+			getNutationAngles(jde, &dPsi, &dEps);
+			double W, lp, bp, lpp, bpp, PA;
+			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaMoon, dPsi, betaMoon, ra_equ, eclJDE, &W, &lp, &bp, &lpp, &bpp, &PA);
+			// Repeat for selenographic position of the sun:
+			double wBogus, lop, bop, lopp, bopp, paBogus, lambdaH, betaH;
+			const Vec3d hcMoon=getHeliocentricEclipticPos();
+			StelUtils::rectToSphe(&lambdaH, &betaH, hcMoon);
+			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaH, dPsi, betaH, raSun, eclJDE, &wBogus, &lop, &bop, &lopp, &bopp, &paBogus);
+			const double b=bp+bpp;
+			double l =StelUtils::fmodpos(lp+lpp, M_PI*2.0);   if (l>M_PI)  l -=2.0*M_PI;
+			double lo=StelUtils::fmodpos(lop+lopp, M_PI*2.0); if (lo>M_PI) lo-=2.0*M_PI;
+			const double totalLibration=sqrt(l*l+b*b);
+			double librationAngle=StelUtils::fmodpos(atan2(l, b), 2.0*M_PI);
+			// find out which limb is optimally visible
+			const QStringList compassDirs={
+				qc_("N",   "compass direction"),
+				qc_("NNW", "compass direction"),
+				qc_("NW",  "compass direction"),
+				qc_("WNW", "compass direction"),
+				qc_("W",   "compass direction"),
+				qc_("WSW", "compass direction"),
+				qc_("SW",  "compass direction"),
+				qc_("SSW", "compass direction"),
+				qc_("S",   "compass direction"),
+				qc_("SSE", "compass direction"),
+				qc_("SE",  "compass direction"),
+				qc_("ESE", "compass direction"),
+				qc_("E",   "compass direction"),
+				qc_("ENE", "compass direction"),
+				qc_("NE",  "compass direction"),
+				qc_("NNE", "compass direction")};
+			const int limbsector= std::lround(floor(StelUtils::fmodpos(librationAngle*M_180_PI+11.25, 360.)/22.5));
+			QString limbStr=compassDirs.at(limbsector);
+			if (totalLibration>2.*M_PI_180)
+				limbStr.append("!");
+			if (totalLibration>5.*M_PI_180)
+				limbStr.append("!");
+			QString paAxisStr, libLStr, libBStr, subsolarLStr, subsolarBStr, colongitudeStr, totalLibrationStr, librationAngleStr;
+			if (withDecimalDegree)
+			{
+				paAxisStr=StelUtils::radToDecDegStr(PA, 1);
+				libLStr=StelUtils::radToDecDegStr(l, 1);
+				libBStr=StelUtils::radToDecDegStr(bp+bpp, 1);
+				subsolarLStr=StelUtils::radToDecDegStr(lo, 1);
+				subsolarBStr=StelUtils::radToDecDegStr(bop+bopp, 1);
+				colongitudeStr=StelUtils::radToDecDegStr(StelUtils::fmodpos(450.0*M_PI_180-lop-lopp, M_PI*2.0), 1);
+				totalLibrationStr=StelUtils::radToDecDegStr(totalLibration, 1);
+				librationAngleStr=StelUtils::radToDecDegStr(librationAngle, 1);
+			}
+			else
+			{
+				paAxisStr=StelUtils::radToDmsStr(PA);
+				libLStr=StelUtils::radToDmsStr(l);
+				libBStr=StelUtils::radToDmsStr(bp+bpp);
+				subsolarLStr=StelUtils::radToDmsStr(lo);
+				subsolarBStr=StelUtils::radToDmsStr(bop+bopp);
+				colongitudeStr=StelUtils::radToDmsStr(StelUtils::fmodpos(450.0*M_PI_180-lop-lopp, M_PI*2.0));
+				totalLibrationStr=StelUtils::radToDmsStr(totalLibration);
+				librationAngleStr=StelUtils::radToDmsStr(librationAngle);
+			}
+			if (withTables)
+			{
+				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position Angle of axis"), paAxisStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">%2 %3</td><td align=\"right\"> %4</td><td>(%5)</td></tr>").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Libration"), libLStr, libBStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td></tr>").arg(q_("Colongitude"), colongitudeStr);
+				oss << "</table>";
+			}
+			else
+			{
+				oss << QString("%1: %2").arg(q_("Position Angle of axis"), paAxisStr) << "<br/>";
+				oss << QString("%1: %2 %3 %4 (%5)").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Libration"), libLStr, libBStr) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr) << "<br/>";
+				oss << QString("%1: %2").arg(q_("Colongitude"), colongitudeStr) << "<br/>";
+			}
+#ifndef NDEBUG
 			oss << QString("DEBUG: L'=%1, D=%2, M=%3, M'=%4, E=%5, F=%6, &Omega;=%7, &lambda;=%8, &beta;=%9, &Delta;=%10<br/>").arg(
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Lp, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(D, M_PI*2.0)),
@@ -624,10 +707,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(lambdaMoon, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(betaMoon)).arg(
 			       QString::number(rBogus));
-			double dPsi, dEps;
-			getNutationAngles(jde, &dPsi, &dEps);
-			double W, lp, bp, lpp, bpp, PA;
-			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaMoon, dPsi, betaMoon, ra_equ, eclJDE, &W, &lp, &bp, &lpp, &bpp, &PA);
 			oss << QString("DEBUG: &Delta;&psi;=%1, &Delta;&epsilon;=%2, W=%3, l'=%4, b'=%5, l''=%6, b''=%7, P=%8<br/>").arg(
 			       StelUtils::radToDecDegStr(dPsi),
 			       StelUtils::radToDecDegStr(dEps),
@@ -637,24 +716,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       StelUtils::radToDecDegStr(fmod(lpp, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(bpp),
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(PA, M_PI*2.0)));
-
-			// Repeat for selenographic position of the sun:
-			double wBogus, lop, bop, lopp, bopp, paBogus, lambdaH, betaH;
-			const Vec3d hcMoon=getHeliocentricEclipticPos();
-			StelUtils::rectToSphe(&lambdaH, &betaH, hcMoon);
-			computeLibrations(T, M, Mp, D, E, F, Omega, lambdaH, dPsi, betaH, raSun, eclJDE, &wBogus, &lop, &bop, &lopp, &bopp, &paBogus);
 			oss << QString("DEBUG: l<sub>0</sub>'=%1, b<sub>0</sub>'=%2, l<sub>0</sub>''=%3, b<sub>0</sub>''=%4<br/>").arg(
 			       StelUtils::radToDecDegStr(fmod(lop, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(bop),
 			       StelUtils::radToDecDegStr(fmod(lopp, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(bopp));
-
-			double l =fmod(lp+lpp, M_PI*2.0);   if (l>M_PI_2)  l -=2.0*M_PI;
-			double lo=fmod(lop+lopp, M_PI*2.0); if (lo>M_PI_2) lo-=2.0*M_PI;
-			oss << QString("%1: %2/%3").arg(q_("Libration"), StelUtils::radToDecDegStr(l), StelUtils::radToDecDegStr(bp+bpp)) << "<br/>";
-			oss << QString("%1: %2").arg(q_("PA of axis"), StelUtils::radToDmsStr(PA)) << "<br/>";
-			oss << QString("%1: %2/%3").arg(q_("Subsolar point"), StelUtils::radToDecDegStr(lo), StelUtils::radToDecDegStr(bop+bopp)) << "<br/>";
-			oss << QString("%1: %2").arg(q_("Colongitude"), StelUtils::radToDecDegStr(StelUtils::fmodpos(450.0*M_PI_180-lop-lopp, M_PI*2.0))) << "<br/>";
+#endif
 		}
 	}
 
@@ -826,10 +893,10 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		if (withTables)
 		{
 			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
-			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Elongation")).arg(elo);
-			oss << QString("<tr><td>%1:</td><td>%2</td></tr>").arg(q_("Phase angle")).arg(pha);
+			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), elo);
+			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("<tr><td>%1:</td><td>%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
+				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
 			oss << "</table>";
 		}
 		else
@@ -837,7 +904,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("%1: %2<br/>").arg(q_("Elongation"), elo);
 			oss << QString("%1: %2<br/>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));			
+				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
 		}
 
 		if (getPlanetType()==isMoon && this->parent!=core->getCurrentPlanet())
