@@ -1096,9 +1096,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				//qDebug() << "\tRotational offset (degrees): " << rotOffset;
 			}
 		}
-
-		// The last parameter is only used to derive how long the orbit should be plotted. It is NOT a rotational element.
-		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		newP->setRotationElements(
 			englishName,
 			rotPeriod,
@@ -1112,6 +1109,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			J2000NPoleDE1,
 			J2000NPoleW0,
 			J2000NPoleW1);
+		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		newP->setSiderealPeriod(
 			pd.value(secname+"/orbit_visualization_period",
 				 fabs(pd.value(secname+"/orbit_Period",
