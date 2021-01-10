@@ -45,6 +45,7 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -613,6 +614,26 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 			// Everything around libration: This currently computes those values separately, not from our geometry.
 			// Later, we should get the relevant values directly from our model!
+			const QStringList compassDirs={
+				qc_("S",   "compass direction"),
+				qc_("SSW", "compass direction"),
+				qc_("SW",  "compass direction"),
+				qc_("WSW", "compass direction"),
+				qc_("W",   "compass direction"),
+				qc_("WNW", "compass direction"),
+				qc_("NW",  "compass direction"),
+				qc_("NNW", "compass direction"),
+				qc_("N",   "compass direction"),
+				qc_("NNE", "compass direction"),
+				qc_("NE",  "compass direction"),
+				qc_("ENE", "compass direction"),
+				qc_("E",   "compass direction"),
+				qc_("ESE", "compass direction"),
+				qc_("SE",  "compass direction"),
+				qc_("SSE", "compass direction")};
+
+			// Method from Meeus, Astronomical Algorithms.
+			// We compute angles which do not relate directly from our geometry
 			const double jde=core->getJDE();
 			const double T=(jde-2451545.0)/36525.0;
 			double Lp, D, M, Mp, E, F, Omega, lBogus, bBogus, rBogus;
@@ -630,28 +651,11 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			double l =StelUtils::fmodpos(lp+lpp, M_PI*2.0);   if (l>M_PI)  l -=2.0*M_PI;
 			double lo=StelUtils::fmodpos(lop+lopp, M_PI*2.0); if (lo>M_PI) lo-=2.0*M_PI;
 			const double totalLibration=sqrt(l*l+b*b);
-			double librationAngle=StelUtils::fmodpos(atan2(l, b), 2.0*M_PI);
+			double librationAngle=StelUtils::fmodpos(atan2(l, -b), 2.0*M_PI);
 			// find out which limb is optimally visible
-			const QStringList compassDirs={
-				qc_("N",   "compass direction"),
-				qc_("NNW", "compass direction"),
-				qc_("NW",  "compass direction"),
-				qc_("WNW", "compass direction"),
-				qc_("W",   "compass direction"),
-				qc_("WSW", "compass direction"),
-				qc_("SW",  "compass direction"),
-				qc_("SSW", "compass direction"),
-				qc_("S",   "compass direction"),
-				qc_("SSE", "compass direction"),
-				qc_("SE",  "compass direction"),
-				qc_("ESE", "compass direction"),
-				qc_("E",   "compass direction"),
-				qc_("ENE", "compass direction"),
-				qc_("NE",  "compass direction"),
-				qc_("NNE", "compass direction")};
 			const int limbsector= std::lround(floor(StelUtils::fmodpos(librationAngle*M_180_PI+11.25, 360.)/22.5));
 			QString limbStr=compassDirs.at(limbsector);
-			if (totalLibration>2.*M_PI_180)
+			if (totalLibration>3.*M_PI_180)
 				limbStr.append("!");
 			if (totalLibration>5.*M_PI_180)
 				limbStr.append("!");
@@ -696,6 +700,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << QString("%1: %2").arg(q_("Colongitude"), colongitudeStr) << "<br/>";
 			}
 #ifndef NDEBUG
+			// Intermediate values from computing after Meeus, AStronomical Algorithms
 			oss << QString("DEBUG: L'=%1, D=%2, M=%3, M'=%4, E=%5, F=%6, &Omega;=%7, &lambda;=%8, &beta;=%9, &Delta;=%10<br/>").arg(
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(Lp, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(StelUtils::fmodpos(D, M_PI*2.0)),
@@ -722,6 +727,131 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       StelUtils::radToDecDegStr(fmod(lopp, M_PI*2.0)),
 			       StelUtils::radToDecDegStr(bopp));
 #endif
+//#ifndef NDEBUG
+			oss << QString("New Solution after Explanatory Supplement 2013: <br/>");
+			// There are still some problems. Sub-Earth point looks good, but subsolar point of way off.
+			StelCore* core2 = StelApp::getInstance().getCore(); // we need non-const reference here.
+			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core2);
+			oss << QString("&phi;<sub>e</sub>: %1, &phi;'<sub>e</sub>: %2, &lambda;<sub>e</sub>: %3, PAn: %4<br/>").arg(
+					StelUtils::radToDecDegStr(ssop.first[0]),
+					StelUtils::radToDecDegStr(ssop.first[1]),
+					StelUtils::radToDecDegStr(StelUtils::fmodpos(-ssop.first[2], 2.*M_PI)),
+					StelUtils::radToDecDegStr(StelUtils::fmodpos(ssop.first[3], 2.*M_PI))
+				       );
+			oss << QString("&phi;<sub>s</sub>: %1, &phi;'<sub>s</sub>: %2, &lambda;<sub>s</sub>: %3<br/>").arg(
+					StelUtils::radToDecDegStr(ssop.second[0]),
+					StelUtils::radToDecDegStr(ssop.second[1]),
+					StelUtils::radToDecDegStr(StelUtils::fmodpos(-ssop.second[2], 2.*M_PI))
+				       );
+
+
+			const double Be=ssop.first[1];
+			double Le   =StelUtils::fmodpos(-ssop.first[2],  M_PI*2.0); if (Le   >M_PI) Le   -=2.0*M_PI;
+			const double Bs=ssop.second[1];
+			double Ls=StelUtils::fmodpos(-ssop.second[2], M_PI*2.0); if (Ls>M_PI) Ls-=2.0*M_PI;
+			const double totalLibr=sqrt(Le*Le+Be*Be);
+			double librAngle=StelUtils::fmodpos(atan2(Le, -Be), 2.0*M_PI);
+			// find out which limb is optimally visible
+			const int limbSector= std::lround(floor(StelUtils::fmodpos(librAngle*M_180_PI+11.25, 360.)/22.5));
+			QString limbStr2=compassDirs.at(limbSector);
+			if (totalLibr>3.*M_PI_180)
+				limbStr2.append("!");
+			if (totalLibr>5.*M_PI_180)
+				limbStr2.append("!");
+			//QString paAxisStr, libLStr, libBStr, subsolarLStr, subsolarBStr, colongitudeStr, totalLibrationStr, librationAngleStr;
+			if (withDecimalDegree)
+			{
+				paAxisStr=StelUtils::radToDecDegStr(ssop.first[3], 1);
+				libLStr=StelUtils::radToDecDegStr(Le, 1);
+				libBStr=StelUtils::radToDecDegStr(Be, 1);
+				subsolarLStr=StelUtils::radToDecDegStr(Ls, 1);
+				subsolarBStr=StelUtils::radToDecDegStr(Bs, 1);
+				colongitudeStr=StelUtils::radToDecDegStr(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0), 1);
+				totalLibrationStr=StelUtils::radToDecDegStr(totalLibr, 1);
+				librationAngleStr=StelUtils::radToDecDegStr(librAngle, 1);
+			}
+			else
+			{
+				paAxisStr=StelUtils::radToDmsStr(ssop.first[3]);
+				libLStr=StelUtils::radToDmsStr(Le);
+				libBStr=StelUtils::radToDmsStr(Be);
+				subsolarLStr=StelUtils::radToDmsStr(Ls);
+				subsolarBStr=StelUtils::radToDmsStr(Bs);
+				colongitudeStr=StelUtils::radToDmsStr(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0));
+				totalLibrationStr=StelUtils::radToDmsStr(totalLibr);
+				librationAngleStr=StelUtils::radToDmsStr(librAngle);
+			}
+			if (withTables)
+			{
+				oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position Angle of axis"), paAxisStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">%2 %3</td><td align=\"right\"> %4</td><td>(%5)</td></tr>").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr2);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Libration"), libLStr, libBStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td></tr>").arg(q_("Colongitude"), colongitudeStr);
+				oss << "</table>";
+			}
+			else
+			{
+				oss << QString("%1: %2").arg(q_("Position Angle of axis"), paAxisStr) << "<br/>";
+				oss << QString("%1: %2 %3 %4 (%5)").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr2) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Libration"), libLStr, libBStr) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr) << "<br/>";
+				oss << QString("%1: %2").arg(q_("Colongitude"), colongitudeStr) << "<br/>";
+			}
+
+		}
+		else if (englishName!="Sun" && onEarth)
+		{ // not moon or sun, but valid only if on earth
+			// The planetary longitudes (central meridian etc) are counted in the other direction than on Moon.
+			StelCore* core2 = StelApp::getInstance().getCore(); // we need non-const reference here.
+			QPair<Vec3d, Vec3d> ssop=getSubSolarObserverPoints(core2);
+			oss << QString("&phi;<sub>e</sub>: %1, &phi;'<sub>e</sub>: %2, &lambda;<sub>e</sub>: %3 = CM<br/>").arg(
+					StelUtils::radToDecDegStr(ssop.first[0]),
+					StelUtils::radToDecDegStr(ssop.first[1]),
+					StelUtils::radToDecDegStr(StelUtils::fmodpos(ssop.first[2], 2.*M_PI))
+				       );
+			oss << QString("&phi;<sub>s</sub>: %1, &phi;'<sub>s</sub>: %2, &lambda;<sub>s</sub>: %3<br/>").arg(
+					StelUtils::radToDecDegStr(ssop.second[0]),
+					StelUtils::radToDecDegStr(ssop.second[1]),
+					StelUtils::radToDecDegStr(StelUtils::fmodpos(ssop.second[2], 2.*M_PI))
+				       );
+
+			const double Le=StelUtils::fmodpos(ssop.first[2],  M_PI*2.0);
+			const double Ls=StelUtils::fmodpos(ssop.second[2], M_PI*2.0);
+
+			QString paAxisStr, subearthLStr, subearthBStr, subsolarLStr, subsolarBStr;
+			if (withDecimalDegree)
+			{
+				paAxisStr=StelUtils::radToDecDegStr(ssop.first[3], 1);
+				subearthLStr=StelUtils::radToDecDegStr(Le, 1);
+				subearthBStr=StelUtils::radToDecDegStr(ssop.first[1], 1);
+				subsolarLStr=StelUtils::radToDecDegStr(Ls, 1);
+				subsolarBStr=StelUtils::radToDecDegStr(ssop.second[1], 1);
+			}
+			else
+			{
+				paAxisStr=StelUtils::radToDmsStr(ssop.first[3]);
+				subearthLStr=StelUtils::radToDmsStr(Le);
+				subearthBStr=StelUtils::radToDmsStr(ssop.first[1]);
+				subsolarLStr=StelUtils::radToDmsStr(Ls);
+				subsolarBStr=StelUtils::radToDmsStr(ssop.second[1]);
+			}
+			if (withTables)
+			{
+				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position Angle of axis"), paAxisStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Center point"), subearthLStr, subearthBStr);
+				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr);
+				oss << "</table>";
+			}
+			else
+			{
+				oss << QString("%1: %2").arg(q_("Position Angle of axis"), paAxisStr) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Center point"), subearthLStr, subearthBStr) << "<br/>";
+				oss << QString("%1: %2/%3").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr) << "<br/>";
+			}
+//#endif
+
 		}
 	}
 
@@ -1570,7 +1700,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	if (englishName=="Earth")
 	{
 		// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
-		// We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
+		// We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o). (Explan.Suppl. 2013, 6.28)
 		// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
 		// See also Hilton et al., Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006), eqn (6) and (21).
 		double eps_A, chi_A, omega_A, psi_A;
@@ -1871,53 +2001,86 @@ float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
 
 // Get planetographic coordinates of subsolar and sub-observer points.
 // Source: Explanatory Supplement 2013, 10.4.1
-QPair<Vec3d, Vec3d> Planet::getSubSolarObserverPoints(StelCore *core) const
+// FIXME: Find out which of the vectors need to be precessed and which not. Something is wrong.
+QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(StelCore *core) const
 {
-	QPair<Vec3d, Vec3d>ret;
-	// When using the last computed elements, light time should be accounted for.
-	const Vec3d r=  StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
-	const Vec3d r_e= StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
-	const Vec3d dr= r-r_e;
-	// TODO: These should be transformed from J2000 to equinox of date by application of frame bias, precession and nutation. For now, we keep J2000
+	QString debugAid;
+	QPair<Vec4d, Vec3d>ret;
+	//const Mat4d PrecNut= Mat4d::xrotation(EPS_0*M_PI_180)*core->getCurrentPlanet()->getRotEquatorialToVsop87();
+	// Maybe the Precession/Nutation matrix has to be built as written in the books, not as made in other places in the program?
+
+	double eps_A, chi_A, omega_A, psi_A;
+	getPrecessionAnglesVondrak(core->getJDE(), &eps_A, &chi_A, &omega_A, &psi_A);
+	Mat4d PrecNut= Mat4d::xrotation(EPS_0*M_PI_180)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(omega_A)*Mat4d::zrotation(-psi_A);
+	// Plus nutation IAU-2000B:
+	if (core->getUseNutation())
+	{
+		double deltaEps, deltaPsi;
+		getNutationAngles(core->getJDE(), &deltaPsi, &deltaEps);
+		//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
+		// Note: The sign for zrotation(-deltaPsi) was suggested by email by German Marques 2020-05-28 who referred to the SOFA library also used in Stellarium Web. This is then also ExplanSup3rd, 6.41.
+		Mat4d nut2000B=Mat4d::xrotation(-eps_A-deltaEps) * Mat4d::zrotation(-deltaPsi) * Mat4d::xrotation(eps_A) ; // eq.21 in Hilton et al. wrongly had a positive deltaPsi rotation.
+		PrecNut = nut2000B*PrecNut;
+	}
+
+
+	const double f=1.-oneMinusOblateness; // flattening term
+	const double fTerm=1-f*f;
+	// When using the last computed elements, light time should already be accounted for.
+	const Vec3d r  = PrecNut*StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
+	const Vec3d r_e= PrecNut*StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
+//	const Vec3d r  = StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
+//	const Vec3d r_e= StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
+	const Vec3d Dr= r-r_e; // should be regular vector resembling RA/DE of object in rectangular (J2000) coords.
+	double ra, de;
+	StelUtils::rectToSphe(&ra, &de, r);
+	//debugAid.append(QString("r: &alpha;=%1, &delta;=%2 <br/>").arg(StelUtils::radToHmsStr(ra), StelUtils::radToDmsStr(de)));
+	StelUtils::rectToSphe(&ra, &de, r_e);
+	//debugAid.append(QString("r<sub>e</sub>: &alpha;=%1, &delta;=%2 <br/>").arg(StelUtils::radToHmsStr(ra), StelUtils::radToDmsStr(de)));
+	StelUtils::rectToSphe(&ra, &de, Dr);
+	//debugAid.append(QString("&Delta;r: &alpha;=%1, &delta;=%2 <br/>").arg(StelUtils::radToHmsStr(ra), StelUtils::radToDmsStr(de)));
 	Vec3d s=-r;  s.normalize();
-	Vec3d e=-dr; e.normalize();
+	Vec3d e=-Dr; e.normalize();
 	const double sina0=sin(re.currentAxisRA);
 	const double cosa0=cos(re.currentAxisRA);
 	const double sind0=sin(re.currentAxisDE);
 	const double cosd0=cos(re.currentAxisDE);
-	// sub-earth (actually sub-observer) point
-	Vec3d n(cosd0*cosa0, cosd0*sina0, sind0);
-	const double sinW=sin(re.currentAxisW*M_PI_180);
+	// sub-earth point (10.19)
+	Vec3d n=PrecNut*Vec3d(cosd0*cosa0, cosd0*sina0, sind0);
+	// Rotation W is OK for all planets except Jupiter: remove GRS shift.
+	const double W= (englishName=="Jupiter" ?
+			re.W0+ remainder( (core->getJDE()-J2000 - e.length()*(AU/(SPEED_OF_LIGHT*86400.)))*re.W1, 360.) :
+			re.currentAxisW);
+	const double sinW=sin(W*M_PI_180);
 	const double sindw=sinW*cos(re.currentAxisDE);
 	const double cosdw=cos(asin(sindw));
 	const double sinpsi=sinW*sind0/cosdw;
-	const double cospsi=cos(re.currentAxisW*M_PI_180)/cosdw;
+	const double cospsi=cos(W*M_PI_180)/cosdw;
 	const double psi=atan2(sinpsi, cospsi);
 	const double aw=re.currentAxisRA+M_PI_2+psi;
-	const Vec3d w(cosdw*cos(aw), cosdw*sin(aw), sindw);
+	const Vec3d w=PrecNut*Vec3d(cosdw*cos(aw), cosdw*sin(aw), sindw);
 	const Vec3d y=w^n;
-	const Vec3d subEarth(e.dot(w), e.dot(y), e.dot(n));
-	const double phi_e=asin(subEarth[2]);
-	const double phiP_e=atan2(tan(phi_e), 1-oneMinusOblateness*oneMinusOblateness);
-	ret.first.set(phi_e*M_180_PI, phiP_e*M_180_PI, atan2(subEarth[1], subEarth[0])*M_180_PI );
+	const Vec3d subEarth(e.dot(w), e.dot(y), e.dot(n)); // 10.25
+	const double phi_e=asin(subEarth[2]);          // 10.26
+	const double phiP_e=atan2(tan(phi_e), fTerm);
+	double lambdaP_e=atan2(subEarth[1], subEarth[0]);
+	if (re.W1<0) lambdaP_e=2.*M_PI-lambdaP_e;
+	// PA of bright limb: 10.29 with elements of P from 10.28!
+	const Vec3d P(n.dot(e), n.dot(e^Vec3d(0., 0., 1.)), n.dot(Vec3d(0., 0., 1.)));
+	ret.first.set(phi_e, phiP_e, lambdaP_e, atan2(P[1], P[2]));
+	// Subsolar point:
+	const Vec3d subSol(s.dot(w), s.dot(y), s.dot(n));
+	const double phi_s=asin(subSol[2]);
+	const double phiP_s=atan2(tan(phi_s), fTerm);
+	double lambdaP_s=atan2(subSol[1], subSol[0]);
+	if (re.W1<0) lambdaP_s=2.*M_PI-lambdaP_s;
+	ret.second.set(phi_s, phiP_s, lambdaP_s);
 
-//	// Subsolar point:
-//	Vec3d n(cosd0*cosa0, cosd0*sina0, sind0);
-//	const double sinW=sin(re.currentAxisW*M_PI_180);
-//	const double sindw=sinW*cos(re.currentAxisDE);
-//	const double cosdw=cos(asin(sindw));
-//	const double sinpsi=sinW*sind0/cosdw;
-//	const double cospsi=cos(re.currentAxisW*M_PI_180)/cosdw;
-//	const double psi=atan2(sinpsi, cospsi);
-//	const double aw=re.currentAxisRA+M_PI_2+psi;
-//	const Vec3d w(cosdw*cos(aw), cosdw*sin(aw), sindw);
-//	const Vec3d y=w^n;
-//	const Vec3d subEarth(e.dot(w), e.dot(y), e.dot(n));
-//	const double phi_e=asin(subEarth[2]);
-//	const double phiP_e=atan2(tan(phi_e), 1-oneMinusOblateness*oneMinusOblateness);
-//	ret.first.set(phi_e*M_180_PI, phiP_e*M_180_PI, atan2(subEarth[1], subEarth[0])*M_180_PI );
 
-	ret.second.set(0, 0, 0);
+	// Why does this not work?
+	StelObjectMgr& objMgr = StelApp::getInstance().getStelObjectMgr();
+		if (objMgr.getSelectedObject().length()>0)
+			objMgr.getSelectedObject()[0]->addToExtraInfoString(StelObject::DebugAid, debugAid);
 	return ret;
 }
 
@@ -4047,4 +4210,3 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::ExplanatorySupplement_2013);
 }
-

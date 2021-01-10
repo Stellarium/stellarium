@@ -307,11 +307,6 @@ public:
 	//! Note: The only place where this is not used for Earth is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotObliquity(double JDE) const;
 
-	// (mostly) Debug aids for Axis Orientation.
-	//double getCurrentAxisRA(void) const {return re.currentAxisRA; }
-	//double getCurrentAxisDE(void) const {return re.currentAxisDE; }
-
-
 	//! Compute the position in the parent Planet coordinate system
 	virtual void computePosition(const double dateJDE);
 
@@ -335,8 +330,17 @@ public:
 	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
 
 	//! Get planetographic coordinates of subsolar and sub-observer points.
+	//! Only meaningful for earth-bound observers.
 	//! Source: Explanatory Supplement 2013, 10.4.1
-	QPair<Vec3d, Vec3d> getSubSolarObserverPoints(StelCore *core) const;
+	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
+	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude
+	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude
+	//! first[3]  = 10.29 P_n	[rad] Position angle of axis north pole
+	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
+	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude
+	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude
+	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
+	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(StelCore *core) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
@@ -583,7 +587,7 @@ protected:
 	RotationElements re;             // Rotation and axis orientation parameters
 	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
 	double equatorialRadius;         // Planet's equatorial radius in AU
-	double oneMinusOblateness;       // Geometric flattening f=1-(polar radius)/(equatorial radius) (ExplanSup2013 10.1)
+	double oneMinusOblateness;       // OneMinusOblateness=(polar radius)/(equatorial radius). Geometric flattening f=1-oneMinusOblateness (ExplanSup2013 10.1)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
