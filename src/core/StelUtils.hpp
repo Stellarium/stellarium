@@ -36,6 +36,8 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+// Ecliptic obliquity of J2000.0, degrees
+#define EPS_0 23.4392803055555555555556
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
