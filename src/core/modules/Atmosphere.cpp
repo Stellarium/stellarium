@@ -89,7 +89,7 @@ Atmosphere::Atmosphere(void)
 	shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue");
 	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");
 	shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma");
-	shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
+	shaderAttribLocations.term2TimesOneOverMaxdL = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdL");
 	shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale");
 	shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos");
 	shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x");
@@ -344,7 +344,7 @@ void Atmosphere::draw(StelCore* core)
 	eye->getShadersParams(a, b, c);
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a);
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c);
+	atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, c);
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity);
 	Vec3f sunPos;
 	float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;

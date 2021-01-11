@@ -22,7 +22,7 @@ const highp float ln10 = 2.3025850929940459;
 
 uniform highp float alphaWaOverAlphaDa;
 uniform highp float oneOverGamma;
-uniform highp float term2TimesOneOverMaxdLpOneOverGamma;
+uniform highp float term2TimesOneOverMaxdL;
 uniform highp float brightnessScale;
 
 vec3 xyYToRGB(highp float x, highp float y, highp float Y)
@@ -38,8 +38,8 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
 		Y *= 0.5121445;
-		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-		return vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
+		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
+		return pow(vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale, vec3(oneOverGamma));
 	}
 	else
 	{
@@ -58,8 +58,8 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		}
 
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-		// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
-		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		// Y = adaptLuminanceScaled(Y);
+		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
 
 		// Convert from xyY to XYZ
 		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
@@ -68,6 +68,6 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		const highp mat3 XYZ2sRGBl=mat3(vec3(3.2404542,-0.9692660,0.0556434),
 										vec3(-1.5371385,1.8760108,-0.2040259),
 										vec3(-0.4985314,0.0415560,1.0572252));
-		return XYZ2sRGBl * XYZ * brightnessScale;
+		return pow(XYZ2sRGBl * XYZ * brightnessScale, vec3(oneOverGamma));
 	}
 }

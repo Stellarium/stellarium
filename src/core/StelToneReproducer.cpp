@@ -70,7 +70,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 }
 
 /*********************************************************************
@@ -89,5 +89,5 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 }

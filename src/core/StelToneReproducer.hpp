@@ -90,7 +90,7 @@ public:
 	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 120 cd/m^2
 	void setMaxDisplayLuminance(float maxdL)
 	{
-		oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+		oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 	}
 
 	//! Get the display gamma
@@ -104,7 +104,7 @@ public:
 	//! @param gamma the gamma. Initial default value is 2.2222
 	void setDisplayGamma(float gamma)
 	{
-		oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+		oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 	}
 
 	//! Return adapted luminance from world to display
@@ -158,7 +158,7 @@ public:
 	{
 		a=alphaWaOverAlphaDa;
 		b=oneOverGamma;
-		c=term2TimesOneOverMaxdLpOneOverGamma;
+		c=term2TimesOneOverMaxdL;
 	}
 private:
 	// The global luminance scaling
@@ -180,7 +180,7 @@ private:
 	float term2;
 	float lnTerm2;	// log(term2)
 	
-	float term2TimesOneOverMaxdLpOneOverGamma;
+	float term2TimesOneOverMaxdL;
 };
 
 #endif // STELTONEREPRODUCER_HPP
