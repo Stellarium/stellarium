@@ -243,6 +243,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	d->sPainter->setColor(d->textColor);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
 	QString text;
 	if (d->text.isEmpty())
@@ -369,13 +370,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();	
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
 	float xshift=6.f;
+	float yshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
 	{
 		angleDeg+=180.f;
-		xshift=-d->sPainter->getFontMetrics().boundingRect(text).width()-6.f;
+		xshift=-(d->sPainter->getFontMetrics().boundingRect(text).width() + xshift*ppx);
 	}
 
-	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
+	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
 	d->sPainter->setColor(tmpColor);
 	d->sPainter->setBlending(true);
 }
