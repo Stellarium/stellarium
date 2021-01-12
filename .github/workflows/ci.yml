@@ -56,7 +56,7 @@ jobs:
       run: brew install qt gpsd
 
     - name: Checkout repository
-      uses: actions/checkout@v
+      uses: actions/checkout@v2
 
     - name: Prepare development environment
       shell: bash
