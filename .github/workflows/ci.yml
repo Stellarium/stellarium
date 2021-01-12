@@ -53,7 +53,7 @@ jobs:
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
     steps:
     - name: Install dependencies
-      run: brew install qt gpsd
+      run: brew install qt
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
       run: |
         sudo xcode-select -s /Applications/Xcode_12.2.app
         export PATH="/usr/local/opt/qt/bin:$PATH"
-        export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include:/usr/local/opt/include
+        export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
