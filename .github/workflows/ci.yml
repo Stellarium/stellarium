@@ -62,7 +62,7 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt/bin:$PATH"
-        export CPATH=`xcrun --show-sdk-path`/usr/include:/opt/homebrew/include
+        export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
