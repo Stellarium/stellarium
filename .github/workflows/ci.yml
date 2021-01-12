@@ -61,7 +61,7 @@ jobs:
     - name: Prepare development environment
       shell: bash
       run: |
-        xcode-select -s /Applications/Xcode_12.2.app
+        sudo xcode-select -s /Applications/Xcode_12.2.app
         export PATH="/usr/local/opt/qt/bin:$PATH"
         export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include:/usr/local/opt/include
 
