@@ -56,13 +56,19 @@ jobs:
       run: brew install qt gpsd
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v
+
+    - name: Prepare development environment
+      shell: bash
+      run: |
+        xcode-select --install
+        xcode-select -s /Applications/Xcode_12.2.app
+        export PATH="/usr/local/opt/qt/bin:$PATH"
+        export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include:/usr/local/opt/include
 
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt/bin:$PATH"
-        export CPATH=`xcrun --show-sdk-path`/usr/include:/usr/local/include
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
