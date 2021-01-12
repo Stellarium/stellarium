@@ -64,7 +64,7 @@ jobs:
         sudo xcode-select -s /Applications/Xcode_12.2.app
         export SDK=`xcrun --show-sdk-path`
         export PATH=/usr/local/opt/qt/bin:$PATH
-        export CPLUS_INCLUDE_PATH=/usr/local/opt/llvm/include/c++/v1:$SDK/usr/include:/usr/local/include
+        export CPATH=/usr/local/include:$SDK/usr/include
         export LIBRARY_PATH=$LIBRARY_PATH:$SDK/usr/lib:/usr/local/lib
         mkdir -p build
         cd build
