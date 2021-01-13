@@ -61,15 +61,9 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        sudo xcode-select -s /Applications/Xcode_12.3.app
-        export SDKROOT=`xcrun --show-sdk-path`
-        export PATH=/usr/local/opt/qt/bin:$PATH
-        export CPATH=/usr/local/include:$SDKROOT/usr/include
-        export LIBRARY_PATH=$LIBRARY_PATH:$SDKROOT/usr/lib:/usr/local/lib
-        sudo find / -name 'libgpsmm.h'
-        echo $PATH
-        echo $CPATH
-        echo $LIBRARY_PATH
+        export SDKROOT=$(xcrun --show-sdk-path)
+        export PATH="/usr/local/opt/qt/bin:$PATH"
+        export CPATH="/usr/local/include:$SDKROOT/usr/include:$CPATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
