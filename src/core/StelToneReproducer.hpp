@@ -152,7 +152,7 @@ public:
 	//! Convert from xyY color system to RGB.
 	//! The first two components x and y indicate the "color", the Y is luminance in cd/m^2.
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
-	void xyYToRGB(float* xyY) const;
+	//void xyYToRGB(float* xyY) const; — see actual implementation in the GLSL shader
 	
 	void getShadersParams(float& a, float& b, float & c) const
 	{
