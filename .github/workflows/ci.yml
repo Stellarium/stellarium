@@ -64,6 +64,8 @@ jobs:
         export SDKROOT=$(xcrun --show-sdk-path)
         export PATH="/usr/local/opt/qt/bin:$PATH"
         export CPATH="/usr/local/include:$SDKROOT/usr/include:$CPATH"
+        export LDFLAGS+="-L/usr/local/lib"
+        export CPPFLAGS+="-I/usr/local/include"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
