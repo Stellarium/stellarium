@@ -452,6 +452,11 @@ for changing the general appearance of the main sky view and projections. Some h
   \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
   a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
   for more information.
+\item[Shooting stars] Stellarium has a simple meteor simulation
+  option. This setting controls how many shooting stars will be shown.
+  Note that shooting stars are only visible when the time rate is 1, and
+  might not be visible at some times of the day. Meteor showers can be
+  simulated using a dedicated plugin (see section~\ref{sec:plugins:MeteorShowers}).
 \end{description}
 
 \noindent Some highlights of the stars field:
@@ -533,7 +538,7 @@ for changing the general appearance of the main sky view and projections. Some h
 \label{sec:gui:view:sso}
 
 The Solar System Objects tab of the View window (Fig.~\ref{fig:gui:view:sso}) contains settings
-for changing the general appearance of the view of Solar system objects. Some hightlights:
+for changing the general appearance of the view of Solar system objects. Some highlights:
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.75\textwidth]{view_dialog_sso_tab.png}
@@ -543,21 +548,31 @@ for changing the general appearance of the view of Solar system objects. Some hi
 
 
 \begin{description}
-\item[Solar System objects] this group of options lets you turn on
-  and off various features related to the planets. Simulation of light
-  speed will give more precise positions for planetary bodies which move
-  rapidly against backround stars (e.g. the moons of Jupiter). The
-  \emph{Scale Moon} option will increase the apparent size of the moon
+\item[Simulate light speed] will give more precise positions for planetary bodies which move
+  rapidly against backround stars (e.g. the moons of Jupiter). 
+\item[Scale Moon]  will increase the apparent size of the moon
   in the sky, which can be nice for wide field of view shots.
+\item[Scale minor bodies] will increase the apparent size of minor
+  bodies: planet satellites, all kinds of asteroids, and comets.  For
+  some of these 3D models are available, which will be better
+  discernible if enlarged.
+\item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
+\item[Show trails] plots the apparent path of SSO among the stars as
+  seen from the current planet.
+\item[Show planetary nomenclature] displays positions and names of
+  surface features officially named by the IAU (See
+  Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
+  at the location of the feature, the label is attenuated.
+\item[Use custom settings for GRS]: The Great Red Spot (GRS) is slowly
+  drifting along Jupiter's System~II coordinate system. When the
+  default solution seems to misplace the GRS, you can activate and
+  configure a custom location. The central meridian data given
+  \newFeature{0.21.0} in the object information on screen still shows
+  System~II longitude.
 \item[Labels and markers] you can independently change the amount of
   labels displayed for Solar system objects. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
-\item[Shooting stars] Stellarium has a simple meteor simulation
-  option. This setting controls how many shooting stars will be shown.
-  Note that shooting stars are only visible when the time rate is 1, and
-  might not be visiable at some times of day. Meteor showers are not
-  currently simulated.
 \end{description}
 
 \subsubsection{Atmosphere settings}
