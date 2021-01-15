@@ -337,8 +337,8 @@ public:
 	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
 	//! first[3]  = 10.29 P_n	[rad] Position angle of axis north pole in equatorial coordinates of date
 	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
-	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-earth point
-	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-earth point (0..2pi)
+	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-solar point
+	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-solar point (0..2pi)
 	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
 	//! Note: For Jupiter, this returns central meridian in L_II.
 	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).

@@ -29,7 +29,6 @@
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
 #include "planetsephems/EphemWrapper.hpp"
-#include "planetsephems/moonphys.h"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
@@ -1268,8 +1267,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 		// Not sure if albedo is at all interesting?
 		if (englishName != "Sun")
-			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3));
-
+			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
 	}
 	return str;
 }
