@@ -227,6 +227,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
 			oss << QString("%1: %2").arg(q_("Landform description"), description) << "<br />";
+		oss << QString("%1: %2").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1)) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
@@ -306,13 +307,21 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
-		painter->setColor(color, 1.0);
+		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
+		painter->setColor(color*brightness, 1.0f);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }
 
-
+double NomenclatureItem::getSolarAltitude(const StelCore *core) const
+{
+	QPair<Vec4d, Vec3d> ssop=planet->getSubSolarObserverPoints(core);
+	double colongitude=450.*M_PI_180-ssop.second[2];
+	double h=asin(sin(ssop.second[0])*sin(static_cast<double>(latitude)*M_PI_180) +
+		      cos(ssop.second[0])*cos(static_cast<double>(latitude)*M_PI_180)*sin(colongitude-static_cast<double>(longitude)*M_PI_180));
+	return h*M_180_PI;
+}
 
 NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString abbrev)
 {
