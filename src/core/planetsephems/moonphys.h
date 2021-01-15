@@ -24,6 +24,9 @@
 extern "C" {
 #endif
 
+// NOTE: These functions are currently unused. They serve as reference solution providers.
+
+
 /*
  * Compute angles related to Lunar position.
  * J. Meeus, Astronomical Algorithms (2nd. ed) 1998, chapter 47.
