@@ -227,7 +227,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
 			oss << QString("%1: %2").arg(q_("Landform description"), description) << "<br />";
-		oss << QString("%1: %2").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1)) << "<br />";
+		oss << QString("%1: %2°").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1)) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
