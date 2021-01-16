@@ -1006,8 +1006,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				qc_("SE",  "compass direction"),
 				qc_("SSE", "compass direction")};
 
-			StelCore* core2 = StelApp::getInstance().getCore(); // we need non-const reference here.
-			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core2);
+			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core);
 
 			const double Be=ssop.first[1];
 			double Le   =StelUtils::fmodpos(-ssop.first[2],  M_PI*2.0); if (Le>M_PI) Le-=2.0*M_PI;
@@ -1059,18 +1058,17 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			else
 			{
-				oss << QString("%1: %2").arg(q_("Position Angle of axis"), paAxisStr) << "<br/>";
-				oss << QString("%1: %2 %3 %4 (%5)").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr) << "<br/>";
+				oss << QString("%1: %2<br/>").arg(q_("Position Angle of axis"), paAxisStr);
+				oss << QString("%1: %2 %3 %4 (%5)<br/>").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr);
 				oss << QString("%1: %2/%3").arg(q_("Libration"), libLStr, libBStr) << "<br/>";
-				oss << QString("%1: %2/%3").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr) << "<br/>";
-				oss << QString("%1: %2").arg(q_("Colongitude"), colongitudeStr) << "<br/>";
+				oss << QString("%1: %2/%3<br/>").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr);
+				oss << QString("%1: %2<br/>").arg(q_("Colongitude"), colongitudeStr);
 			}
 		}
 		else if (englishName!="Sun" && onEarth)
 		{
 			// The planetographic longitudes (central meridian etc) are counted in the other direction than on Moon.
-			StelCore* core2 = StelApp::getInstance().getCore(); // we need non-const reference here.
-			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core2);
+			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core);
 
 			const double Le=StelUtils::fmodpos(ssop.first[2],  M_PI*2.0);
 			const double Ls=StelUtils::fmodpos(ssop.second[2], M_PI*2.0);
@@ -1103,9 +1101,9 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			else
 			{
-				oss << QString("%1: %2").arg(q_("Position Angle of axis"), paAxisStr) << "<br/>";
-				oss << QString("%1: L<sub>%2e</sub>=%3 &phi;<sub>e</sub>: %4").arg(q_("Center point"),   lngSystem, subearthLStr, subearthBStr) << "<br/>";
-				oss << QString("%1: L<sub>%2s</sub>=%3 &phi;<sub>s</sub>: %4").arg(q_("Subsolar point"), lngSystem, subsolarLStr, subsolarBStr) << "<br/>";
+				oss << QString("%1: %2<br/>").arg(q_("Position Angle of axis"), paAxisStr);
+				oss << QString("%1: L<sub>%2e</sub>=%3 &phi;<sub>e</sub>: %4<br/>").arg(q_("Center point"),   lngSystem, subearthLStr, subearthBStr);
+				oss << QString("%1: L<sub>%2s</sub>=%3 &phi;<sub>s</sub>: %4<br/>").arg(q_("Subsolar point"), lngSystem, subsolarLStr, subsolarBStr);
 			}
 		}
 
@@ -1330,34 +1328,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 
 	if (onEarth && (getEnglishName()=="Moon"))
 	{
-//		// Everything around libration:
-//		const double jde=core->getJDE();
-//		const double T=(jde-2451545.0)/36525.0;
-//		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-//		const double eclJDE = ssystem->getEarth()->getRotObliquity(jde);
-//		double raMoon, decMoon, lambdaMoon, betaMoon;
-//		StelUtils::rectToSphe(&raMoon,&decMoon, getEquinoxEquatorialPos(core));
-//		StelUtils::equToEcl(raMoon, decMoon, eclJDE, &lambdaMoon, &betaMoon);
-//		double Lp, D, M, Mp, E, F, Omega, lBogus, bBogus, rBogus;
-//		computeMoonAngles(core->getJDE(), &Lp, &D, &M, &Mp, &E, &F, &Omega, &lBogus, &bBogus, &rBogus, false);
-//		double dPsi, dEps;
-//		getNutationAngles(jde, &dPsi, &dEps);
-//		double W, lp, bp, lpp, bpp, PA;
-//		computeLibrations(T, M, Mp, D, E, F, Omega, lambdaMoon, dPsi, betaMoon, raMoon, eclJDE, &W, &lp, &bp, &lpp, &bpp, &PA);
-//		// Repeat for selenographic position of the sun:
-//		double Wbogus, lop, bop, lopp, bopp, PAbogus, lambdaH, betaH;
-//		const Vec3d hcMoon=getHeliocentricEclipticPos();
-//		StelUtils::rectToSphe(&lambdaH, &betaH, hcMoon);
-//		computeLibrations(T, M, Mp, D, E, F, Omega, lambdaH, dPsi, betaH, raMoon, eclJDE, &Wbogus, &lop, &bop, &lopp, &bopp, &PAbogus);
-//		double l =fmod(lp+lpp, M_PI*2.0);   if (l>M_PI_2)  l -=2.0*M_PI;
-//		double lo=fmod(lop+lopp, M_PI*2.0); if (lo>M_PI_2) lo-=2.0*M_PI;
-//		map.insert("libration_l", l*M_180_PI);
-//		map.insert("libration_b", (bp+bpp)*M_180_PI);
-//		map.insert("pa_axis", PA*M_180_PI);
-//		map.insert("subsolar_point_l", lo*M_180_PI);
-//		map.insert("subsolar_point_b", (bop+bopp)*M_180_PI);
-//		map.insert("colongitude", StelUtils::fmodpos(450.0*M_PI_180-lop-lopp, M_PI*2.0)*M_180_PI);
-
+		// Everything around libration:
 		QPair<Vec4d, Vec3d>phys=getSubSolarObserverPoints(core);
 		map.insert("libration_l", -phys.first[2]*M_180_PI); // longitude counted the other way!
 		map.insert("libration_b", phys.first[1]*M_180_PI);
@@ -1471,9 +1442,8 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 			//qDebug() << re.siderealPeriod;
 			closeOrbit=true;
 		}
-		else {
+		else
 			closeOrbit=false;
-		}
 	}
 	deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
 }
@@ -1906,7 +1876,7 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) cons
 	{
 		double deltaEps, deltaPsi;
 		getNutationAngles(core->getJDE(), &deltaPsi, &deltaEps);
-		Mat4d nut2000B=Mat4d::xrotation(-eps_A-deltaEps) * Mat4d::zrotation(-deltaPsi) * Mat4d::xrotation(eps_A) ; // eq.21 in Hilton et al. wrongly had a positive deltaPsi rotation.
+		Mat4d nut2000B=Mat4d::xrotation(-eps_A-deltaEps) * Mat4d::zrotation(-deltaPsi) * Mat4d::xrotation(eps_A);
 		PrecNut = nut2000B*PrecNut;
 	}
 
@@ -1930,7 +1900,6 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) cons
 //	debugAid.append(QString("&Delta;r: &alpha;=%1=%2, &delta;=%3=%4 <br/>").arg(
 //				StelUtils::radToDecDegStr(ra), StelUtils::radToHmsStr(ra),
 //				StelUtils::radToDecDegStr(de), StelUtils::radToDmsStr(de)));
-
 
 	Vec3d s=-r;  s.normalize();
 	Vec3d e=-Dr; e.normalize();
@@ -1970,7 +1939,6 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) cons
 	const double phiP_s=atan2(tan(phi_s), fTerm);
 	double lambdaP_s=StelUtils::fmodpos(atan2(subSol[1], subSol[0]), 2.0*M_PI);
 	if (re.W1<0) lambdaP_s=2.*M_PI-lambdaP_s;
-
 
 	ret.second.set(phi_s, phiP_s, lambdaP_s);
 
