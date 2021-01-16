@@ -317,7 +317,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 double NomenclatureItem::getSolarAltitude(const StelCore *core) const
 {
 	QPair<Vec4d, Vec3d> ssop=planet->getSubSolarObserverPoints(core);
-	double colongitude=450.*M_PI_180-ssop.second[2];
+	double sign=planet->isRotatingRetrograde() ? -1. : 1.;
+	double colongitude=450.*M_PI_180-sign*ssop.second[2];
 	double h=asin(sin(ssop.second[0])*sin(static_cast<double>(latitude)*M_PI_180) +
 		      cos(ssop.second[0])*cos(static_cast<double>(latitude)*M_PI_180)*sin(colongitude-static_cast<double>(longitude)*M_PI_180));
 	return h*M_180_PI;

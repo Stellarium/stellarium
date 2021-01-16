@@ -305,6 +305,7 @@ Planet::Planet(const QString& englishName,
 void Planet::init()
 {
 	RotationElements::updatePlanetCorrections(J2000, RotationElements::EarthMoon);
+	RotationElements::updatePlanetCorrections(J2000, RotationElements::Mars);
 	RotationElements::updatePlanetCorrections(J2000, RotationElements::Jupiter);
 	RotationElements::updatePlanetCorrections(J2000, RotationElements::Saturn);
 	RotationElements::updatePlanetCorrections(J2000, RotationElements::Uranus);

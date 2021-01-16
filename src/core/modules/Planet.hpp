@@ -344,6 +344,9 @@ public:
 	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
 	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core) const;
 
+	//! returns if planet has retrograde rotation
+	bool isRotatingRetrograde() const { return re.W1<0.; }
+
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
 	Vec3d getEclipticPos() const {return getEclipticPos(lastJDE);}
