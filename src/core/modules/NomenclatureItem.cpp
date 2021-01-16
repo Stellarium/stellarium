@@ -203,9 +203,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString latin = getNomenclatureTypeLatinString(nType); // not always latin!
 		QString ts    = q_("Type");
 		if (tstr!=latin && !latin.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)<br/>").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin);
 		else
-			oss << QString("%1: <b>%2</b>").arg(ts).arg(tstr) << "<br />";
+			oss << QString("%1: <b>%2</b><br/>").arg(ts).arg(tstr);
 	}
 
 	// Ra/Dec etc.
@@ -217,17 +217,17 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
 		if ((getNomenclatureType()==NomenclatureItem::niCrater) || (getNomenclatureType()==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
-		oss << QString("%1: %2 %3").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
+		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
 	}
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2/%3").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude)) << "<br />";
-		oss << QString("%1: %2").arg(q_("Celestial body")).arg(planet->getNameI18n()) << "<br />";
+		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
+		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
-			oss << QString("%1: %2").arg(q_("Landform description"), description) << "<br />";
-		oss << QString("%1: %2°").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1)) << "<br />";
+			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
+		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
 	}
 
 	postProcessInfoString(str, flags);
